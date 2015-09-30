@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- any).
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsApprove@.
-module Androidenterprise.Products.Approve
+module Network.Google.Resource.Androidenterprise.Products.Approve
     (
     -- * REST Resource
-      ProductsApproveAPI
+      ProductsApproveResource
 
     -- * Creating a Request
-    , productsApprove
-    , ProductsApprove
+    , productsApprove'
+    , ProductsApprove'
 
     -- * Request Lenses
     , paQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsApprove@ which the
--- 'ProductsApprove' request conforms to.
-type ProductsApproveAPI =
+-- 'ProductsApprove'' request conforms to.
+type ProductsApproveResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
-             "approve" :> Post '[JSON] ()
+             "approve" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Approves the specified product (and the relevant app permissions, if
 -- any).
 --
--- /See:/ 'productsApprove' smart constructor.
-data ProductsApprove = ProductsApprove
+-- /See:/ 'productsApprove'' smart constructor.
+data ProductsApprove' = ProductsApprove'
     { _paQuotaUser    :: !(Maybe Text)
     , _paPrettyPrint  :: !Bool
     , _paEnterpriseId :: !Text
@@ -66,7 +74,7 @@ data ProductsApprove = ProductsApprove
     , _paOauthToken   :: !(Maybe Text)
     , _paProductId    :: !Text
     , _paFields       :: !(Maybe Text)
-    , _paAlt          :: !Text
+    , _paAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsApprove'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data ProductsApprove = ProductsApprove
 -- * 'paFields'
 --
 -- * 'paAlt'
-productsApprove
+productsApprove'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsApprove
-productsApprove pPaEnterpriseId_ pPaProductId_ =
-    ProductsApprove
+    -> ProductsApprove'
+productsApprove' pPaEnterpriseId_ pPaProductId_ =
+    ProductsApprove'
     { _paQuotaUser = Nothing
     , _paPrettyPrint = True
     , _paEnterpriseId = pPaEnterpriseId_
@@ -104,7 +112,7 @@ productsApprove pPaEnterpriseId_ pPaProductId_ =
     , _paOauthToken = Nothing
     , _paProductId = pPaProductId_
     , _paFields = Nothing
-    , _paAlt = "json"
+    , _paAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,21 +160,23 @@ paFields :: Lens' ProductsApprove' (Maybe Text)
 paFields = lens _paFields (\ s a -> s{_paFields = a})
 
 -- | Data format for the response.
-paAlt :: Lens' ProductsApprove' Text
+paAlt :: Lens' ProductsApprove' Alt
 paAlt = lens _paAlt (\ s a -> s{_paAlt = a})
 
 instance GoogleRequest ProductsApprove' where
         type Rs ProductsApprove' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u ProductsApprove{..}
-          = go _paQuotaUser _paPrettyPrint _paEnterpriseId
+        requestWithRoute r u ProductsApprove'{..}
+          = go _paQuotaUser (Just _paPrettyPrint)
+              _paEnterpriseId
               _paUserIp
               _paKey
               _paOauthToken
               _paProductId
               _paFields
-              _paAlt
+              (Just _paAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProductsApproveAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ProductsApproveResource)
                       r
                       u

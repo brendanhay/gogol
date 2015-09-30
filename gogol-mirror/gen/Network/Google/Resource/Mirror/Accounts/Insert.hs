@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new account for a user
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorAccountsInsert@.
-module Mirror.Accounts.Insert
+module Network.Google.Resource.Mirror.Accounts.Insert
     (
     -- * REST Resource
-      AccountsInsertAPI
+      AccountsInsertResource
 
     -- * Creating a Request
-    , accountsInsert
-    , AccountsInsert
+    , accountsInsert'
+    , AccountsInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorAccountsInsert@ which the
--- 'AccountsInsert' request conforms to.
-type AccountsInsertAPI =
+-- 'AccountsInsert'' request conforms to.
+type AccountsInsertResource =
      "accounts" :>
        Capture "userToken" Text :>
          Capture "accountType" Text :>
-           Capture "accountName" Text :> Post '[JSON] Account
+           Capture "accountName" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Account
 
 -- | Inserts a new account for a user
 --
--- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert
+-- /See:/ 'accountsInsert'' smart constructor.
+data AccountsInsert' = AccountsInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data AccountsInsert = AccountsInsert
     , _aiOauthToken  :: !(Maybe Text)
     , _aiAccountType :: !Text
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsInsert'' with the minimum fields required to make a request.
@@ -91,13 +99,13 @@ data AccountsInsert = AccountsInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-accountsInsert
+accountsInsert'
     :: Text -- ^ 'accountName'
     -> Text -- ^ 'userToken'
     -> Text -- ^ 'accountType'
-    -> AccountsInsert
-accountsInsert pAiAccountName_ pAiUserToken_ pAiAccountType_ =
-    AccountsInsert
+    -> AccountsInsert'
+accountsInsert' pAiAccountName_ pAiUserToken_ pAiAccountType_ =
+    AccountsInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiUserIp = Nothing
@@ -107,7 +115,7 @@ accountsInsert pAiAccountName_ pAiUserToken_ pAiAccountType_ =
     , _aiOauthToken = Nothing
     , _aiAccountType = pAiAccountType_
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +169,23 @@ aiFields :: Lens' AccountsInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' AccountsInsert' Text
+aiAlt :: Lens' AccountsInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest AccountsInsert' where
         type Rs AccountsInsert' = Account
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u AccountsInsert{..}
-          = go _aiQuotaUser _aiPrettyPrint _aiUserIp
+        requestWithRoute r u AccountsInsert'{..}
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIp
               _aiAccountName
               _aiKey
               _aiUserToken
               _aiOauthToken
               _aiAccountType
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsInsertResource)
                       r
                       u

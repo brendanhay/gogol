@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesQuerySqlGet@.
-module FusionTables.Query.SqlGet
+module Network.Google.Resource.FusionTables.Query.SqlGet
     (
     -- * REST Resource
-      QuerySqlGetAPI
+      QuerySqlGetResource
 
     -- * Creating a Request
-    , querySqlGet
-    , QuerySqlGet
+    , querySqlGet'
+    , QuerySqlGet'
 
     -- * Request Lenses
     , qsgTyped
@@ -45,17 +46,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesQuerySqlGet@ which the
--- 'QuerySqlGet' request conforms to.
-type QuerySqlGetAPI =
+-- 'QuerySqlGet'' request conforms to.
+type QuerySqlGetResource =
      "query" :>
        QueryParam "typed" Bool :>
-         QueryParam "hdrs" Bool :>
-           QueryParam "sql" Text :> Get '[JSON] Sqlresponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "hdrs" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "sql" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Sqlresponse
 
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
--- /See:/ 'querySqlGet' smart constructor.
-data QuerySqlGet = QuerySqlGet
+-- /See:/ 'querySqlGet'' smart constructor.
+data QuerySqlGet' = QuerySqlGet'
     { _qsgTyped       :: !(Maybe Bool)
     , _qsgQuotaUser   :: !(Maybe Text)
     , _qsgPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data QuerySqlGet = QuerySqlGet
     , _qsgOauthToken  :: !(Maybe Text)
     , _qsgSql         :: !Text
     , _qsgFields      :: !(Maybe Text)
-    , _qsgAlt         :: !Text
+    , _qsgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySqlGet'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data QuerySqlGet = QuerySqlGet
 -- * 'qsgFields'
 --
 -- * 'qsgAlt'
-querySqlGet
+querySqlGet'
     :: Text -- ^ 'sql'
-    -> QuerySqlGet
-querySqlGet pQsgSql_ =
-    QuerySqlGet
+    -> QuerySqlGet'
+querySqlGet' pQsgSql_ =
+    QuerySqlGet'
     { _qsgTyped = Nothing
     , _qsgQuotaUser = Nothing
     , _qsgPrettyPrint = True
@@ -105,7 +113,7 @@ querySqlGet pQsgSql_ =
     , _qsgOauthToken = Nothing
     , _qsgSql = pQsgSql_
     , _qsgFields = Nothing
-    , _qsgAlt = "json"
+    , _qsgAlt = JSON
     }
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
@@ -158,19 +166,23 @@ qsgFields
   = lens _qsgFields (\ s a -> s{_qsgFields = a})
 
 -- | Data format for the response.
-qsgAlt :: Lens' QuerySqlGet' Text
+qsgAlt :: Lens' QuerySqlGet' Alt
 qsgAlt = lens _qsgAlt (\ s a -> s{_qsgAlt = a})
 
 instance GoogleRequest QuerySqlGet' where
         type Rs QuerySqlGet' = Sqlresponse
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySqlGet{..}
-          = go _qsgTyped _qsgQuotaUser _qsgPrettyPrint _qsgHdrs
+        requestWithRoute r u QuerySqlGet'{..}
+          = go _qsgTyped _qsgQuotaUser (Just _qsgPrettyPrint)
+              _qsgHdrs
               _qsgUserIp
               _qsgKey
               _qsgOauthToken
               (Just _qsgSql)
               _qsgFields
-              _qsgAlt
+              (Just _qsgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuerySqlGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy QuerySqlGetResource)
+                      r
+                      u

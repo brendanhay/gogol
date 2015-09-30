@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- reseller. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersPatch@.
-module Reseller.Customers.Patch
+module Network.Google.Resource.Reseller.Customers.Patch
     (
     -- * REST Resource
-      CustomersPatchAPI
+      CustomersPatchResource
 
     -- * Creating a Request
-    , customersPatch
-    , CustomersPatch
+    , customersPatch'
+    , CustomersPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerCustomersPatch@ which the
--- 'CustomersPatch' request conforms to.
-type CustomersPatchAPI =
+-- 'CustomersPatch'' request conforms to.
+type CustomersPatchResource =
      "customers" :>
-       Capture "customerId" Text :> Patch '[JSON] Customer
+       Capture "customerId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.
 --
--- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch
+-- /See:/ 'customersPatch'' smart constructor.
+data CustomersPatch' = CustomersPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data CustomersPatch = CustomersPatch
     , _cpKey         :: !(Maybe Text)
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersPatch'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CustomersPatch = CustomersPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-customersPatch
+customersPatch'
     :: Text -- ^ 'customerId'
-    -> CustomersPatch
-customersPatch pCpCustomerId_ =
-    CustomersPatch
+    -> CustomersPatch'
+customersPatch' pCpCustomerId_ =
+    CustomersPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -95,7 +103,7 @@ customersPatch pCpCustomerId_ =
     , _cpKey = Nothing
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ cpFields :: Lens' CustomersPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CustomersPatch' Text
+cpAlt :: Lens' CustomersPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CustomersPatch' where
         type Rs CustomersPatch' = Customer
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp
+        requestWithRoute r u CustomersPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
               _cpCustomerId
               _cpKey
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CustomersPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CustomersPatchResource)
                       r
                       u

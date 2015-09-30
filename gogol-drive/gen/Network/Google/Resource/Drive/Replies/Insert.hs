@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new reply to the given comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesInsert@.
-module Drive.Replies.Insert
+module Network.Google.Resource.Drive.Replies.Insert
     (
     -- * REST Resource
-      RepliesInsertAPI
+      RepliesInsertResource
 
     -- * Creating a Request
-    , repliesInsert
-    , RepliesInsert
+    , repliesInsert'
+    , RepliesInsert'
 
     -- * Request Lenses
     , riQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRepliesInsert@ which the
--- 'RepliesInsert' request conforms to.
-type RepliesInsertAPI =
+-- 'RepliesInsert'' request conforms to.
+type RepliesInsertResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
-             "replies" :> Post '[JSON] CommentReply
+             "replies" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] CommentReply
 
 -- | Creates a new reply to the given comment.
 --
--- /See:/ 'repliesInsert' smart constructor.
-data RepliesInsert = RepliesInsert
+-- /See:/ 'repliesInsert'' smart constructor.
+data RepliesInsert' = RepliesInsert'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data RepliesInsert = RepliesInsert
     , _riOauthToken  :: !(Maybe Text)
     , _riCommentId   :: !Text
     , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Text
+    , _riAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesInsert'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data RepliesInsert = RepliesInsert
 -- * 'riFields'
 --
 -- * 'riAlt'
-repliesInsert
+repliesInsert'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> RepliesInsert
-repliesInsert pRiFileId_ pRiCommentId_ =
-    RepliesInsert
+    -> RepliesInsert'
+repliesInsert' pRiFileId_ pRiCommentId_ =
+    RepliesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIp = Nothing
@@ -102,7 +110,7 @@ repliesInsert pRiFileId_ pRiCommentId_ =
     , _riOauthToken = Nothing
     , _riCommentId = pRiCommentId_
     , _riFields = Nothing
-    , _riAlt = "json"
+    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,22 @@ riFields :: Lens' RepliesInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 -- | Data format for the response.
-riAlt :: Lens' RepliesInsert' Text
+riAlt :: Lens' RepliesInsert' Alt
 riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
 
 instance GoogleRequest RepliesInsert' where
         type Rs RepliesInsert' = CommentReply
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesInsert{..}
-          = go _riQuotaUser _riPrettyPrint _riUserIp _riKey
+        requestWithRoute r u RepliesInsert'{..}
+          = go _riQuotaUser (Just _riPrettyPrint) _riUserIp
+              _riKey
               _riFileId
               _riOauthToken
               _riCommentId
               _riFields
-              _riAlt
+              (Just _riAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RepliesInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RepliesInsertResource)
+                      r
                       u

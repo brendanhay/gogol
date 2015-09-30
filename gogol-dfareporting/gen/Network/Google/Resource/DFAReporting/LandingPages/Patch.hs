@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesPatch@.
-module DFAReporting.LandingPages.Patch
+module Network.Google.Resource.DFAReporting.LandingPages.Patch
     (
     -- * REST Resource
-      LandingPagesPatchAPI
+      LandingPagesPatchResource
 
     -- * Creating a Request
-    , landingPagesPatch
-    , LandingPagesPatch
+    , landingPagesPatch'
+    , LandingPagesPatch'
 
     -- * Request Lenses
     , lppQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingLandingPagesPatch@ which the
--- 'LandingPagesPatch' request conforms to.
-type LandingPagesPatchAPI =
+-- 'LandingPagesPatch'' request conforms to.
+type LandingPagesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               QueryParam "id" Int64 :> Patch '[JSON] LandingPage
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page. This method supports patch
 -- semantics.
 --
--- /See:/ 'landingPagesPatch' smart constructor.
-data LandingPagesPatch = LandingPagesPatch
+-- /See:/ 'landingPagesPatch'' smart constructor.
+data LandingPagesPatch' = LandingPagesPatch'
     { _lppQuotaUser   :: !(Maybe Text)
     , _lppPrettyPrint :: !Bool
     , _lppUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data LandingPagesPatch = LandingPagesPatch
     , _lppId          :: !Int64
     , _lppOauthToken  :: !(Maybe Text)
     , _lppFields      :: !(Maybe Text)
-    , _lppAlt         :: !Text
+    , _lppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesPatch'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data LandingPagesPatch = LandingPagesPatch
 -- * 'lppFields'
 --
 -- * 'lppAlt'
-landingPagesPatch
+landingPagesPatch'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> LandingPagesPatch
-landingPagesPatch pLppCampaignId_ pLppProfileId_ pLppId_ =
-    LandingPagesPatch
+    -> LandingPagesPatch'
+landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppId_ =
+    LandingPagesPatch'
     { _lppQuotaUser = Nothing
     , _lppPrettyPrint = True
     , _lppUserIp = Nothing
@@ -111,7 +119,7 @@ landingPagesPatch pLppCampaignId_ pLppProfileId_ pLppId_ =
     , _lppId = pLppId_
     , _lppOauthToken = Nothing
     , _lppFields = Nothing
-    , _lppAlt = "json"
+    , _lppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +174,23 @@ lppFields
   = lens _lppFields (\ s a -> s{_lppFields = a})
 
 -- | Data format for the response.
-lppAlt :: Lens' LandingPagesPatch' Text
+lppAlt :: Lens' LandingPagesPatch' Alt
 lppAlt = lens _lppAlt (\ s a -> s{_lppAlt = a})
 
 instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesPatch{..}
-          = go _lppQuotaUser _lppPrettyPrint _lppUserIp
+        requestWithRoute r u LandingPagesPatch'{..}
+          = go _lppQuotaUser (Just _lppPrettyPrint) _lppUserIp
               _lppCampaignId
               _lppProfileId
               _lppKey
               (Just _lppId)
               _lppOauthToken
               _lppFields
-              _lppAlt
+              (Just _lppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LandingPagesPatchAPI)
+                      (Proxy :: Proxy LandingPagesPatchResource)
                       r
                       u

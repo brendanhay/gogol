@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new remarketing list.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsInsert@.
-module DFAReporting.RemarketingLists.Insert
+module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     (
     -- * REST Resource
-      RemarketingListsInsertAPI
+      RemarketingListsInsertResource
 
     -- * Creating a Request
-    , remarketingListsInsert
-    , RemarketingListsInsert
+    , remarketingListsInsert'
+    , RemarketingListsInsert'
 
     -- * Request Lenses
     , rliQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListsInsert@ which the
--- 'RemarketingListsInsert' request conforms to.
-type RemarketingListsInsertAPI =
+-- 'RemarketingListsInsert'' request conforms to.
+type RemarketingListsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "remarketingLists" :> Post '[JSON] RemarketingList
+         "remarketingLists" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] RemarketingList
 
 -- | Inserts a new remarketing list.
 --
--- /See:/ 'remarketingListsInsert' smart constructor.
-data RemarketingListsInsert = RemarketingListsInsert
+-- /See:/ 'remarketingListsInsert'' smart constructor.
+data RemarketingListsInsert' = RemarketingListsInsert'
     { _rliQuotaUser   :: !(Maybe Text)
     , _rliPrettyPrint :: !Bool
     , _rliUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data RemarketingListsInsert = RemarketingListsInsert
     , _rliKey         :: !(Maybe Text)
     , _rliOauthToken  :: !(Maybe Text)
     , _rliFields      :: !(Maybe Text)
-    , _rliAlt         :: !Text
+    , _rliAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data RemarketingListsInsert = RemarketingListsInsert
 -- * 'rliFields'
 --
 -- * 'rliAlt'
-remarketingListsInsert
+remarketingListsInsert'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingListsInsert
-remarketingListsInsert pRliProfileId_ =
-    RemarketingListsInsert
+    -> RemarketingListsInsert'
+remarketingListsInsert' pRliProfileId_ =
+    RemarketingListsInsert'
     { _rliQuotaUser = Nothing
     , _rliPrettyPrint = True
     , _rliUserIp = Nothing
@@ -94,7 +102,7 @@ remarketingListsInsert pRliProfileId_ =
     , _rliKey = Nothing
     , _rliOauthToken = Nothing
     , _rliFields = Nothing
-    , _rliAlt = "json"
+    , _rliAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ rliFields
   = lens _rliFields (\ s a -> s{_rliFields = a})
 
 -- | Data format for the response.
-rliAlt :: Lens' RemarketingListsInsert' Text
+rliAlt :: Lens' RemarketingListsInsert' Alt
 rliAlt = lens _rliAlt (\ s a -> s{_rliAlt = a})
 
 instance GoogleRequest RemarketingListsInsert' where
         type Rs RemarketingListsInsert' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsInsert{..}
-          = go _rliQuotaUser _rliPrettyPrint _rliUserIp
+        requestWithRoute r u RemarketingListsInsert'{..}
+          = go _rliQuotaUser (Just _rliPrettyPrint) _rliUserIp
               _rliProfileId
               _rliKey
               _rliOauthToken
               _rliFields
-              _rliAlt
+              (Just _rliAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListsInsertAPI)
+                      (Proxy :: Proxy RemarketingListsInsertResource)
                       r
                       u

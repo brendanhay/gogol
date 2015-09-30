@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudbillingBillingAccountsGet@.
-module Cloudbilling.BillingAccounts.Get
+module Network.Google.Resource.Cloudbilling.BillingAccounts.Get
     (
     -- * REST Resource
-      BillingAccountsGetAPI
+      BillingAccountsGetResource
 
     -- * Creating a Request
-    , billingAccountsGet
-    , BillingAccountsGet
+    , billingAccountsGet'
+    , BillingAccountsGet'
 
     -- * Request Lenses
     , bagXgafv
@@ -51,16 +52,31 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudbillingBillingAccountsGet@ which the
--- 'BillingAccountsGet' request conforms to.
-type BillingAccountsGetAPI =
-     "v1" :> "{+name}" :> Get '[JSON] BillingAccount
+-- 'BillingAccountsGet'' request conforms to.
+type BillingAccountsGetResource =
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] BillingAccount
 
 -- | Gets information about a billing account. The current authenticated user
 -- must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ 'billingAccountsGet' smart constructor.
-data BillingAccountsGet = BillingAccountsGet
+-- /See:/ 'billingAccountsGet'' smart constructor.
+data BillingAccountsGet' = BillingAccountsGet'
     { _bagXgafv          :: !(Maybe Text)
     , _bagQuotaUser      :: !(Maybe Text)
     , _bagPrettyPrint    :: !Bool
@@ -108,11 +124,11 @@ data BillingAccountsGet = BillingAccountsGet
 -- * 'bagCallback'
 --
 -- * 'bagAlt'
-billingAccountsGet
+billingAccountsGet'
     :: Text -- ^ 'name'
-    -> BillingAccountsGet
-billingAccountsGet pBagName_ =
-    BillingAccountsGet
+    -> BillingAccountsGet'
+billingAccountsGet' pBagName_ =
+    BillingAccountsGet'
     { _bagXgafv = Nothing
     , _bagQuotaUser = Nothing
     , _bagPrettyPrint = True
@@ -208,10 +224,10 @@ bagAlt = lens _bagAlt (\ s a -> s{_bagAlt = a})
 instance GoogleRequest BillingAccountsGet' where
         type Rs BillingAccountsGet' = BillingAccount
         request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsGet{..}
-          = go _bagXgafv _bagQuotaUser _bagPrettyPrint
+        requestWithRoute r u BillingAccountsGet'{..}
+          = go _bagXgafv _bagQuotaUser (Just _bagPrettyPrint)
               _bagUploadProtocol
-              _bagPp
+              (Just _bagPp)
               _bagAccessToken
               _bagUploadType
               _bagBearerToken
@@ -220,9 +236,9 @@ instance GoogleRequest BillingAccountsGet' where
               _bagOauthToken
               _bagFields
               _bagCallback
-              _bagAlt
+              (Just _bagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BillingAccountsGetAPI)
+                      (Proxy :: Proxy BillingAccountsGetResource)
                       r
                       u

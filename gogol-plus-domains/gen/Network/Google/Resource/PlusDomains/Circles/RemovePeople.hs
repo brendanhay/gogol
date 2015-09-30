@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove a person from a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesRemovePeople@.
-module PlusDomains.Circles.RemovePeople
+module Network.Google.Resource.PlusDomains.Circles.RemovePeople
     (
     -- * REST Resource
-      CirclesRemovePeopleAPI
+      CirclesRemovePeopleResource
 
     -- * Creating a Request
-    , circlesRemovePeople
-    , CirclesRemovePeople
+    , circlesRemovePeople'
+    , CirclesRemovePeople'
 
     -- * Request Lenses
     , crpEmail
@@ -45,18 +46,25 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesRemovePeople@ which the
--- 'CirclesRemovePeople' request conforms to.
-type CirclesRemovePeopleAPI =
+-- 'CirclesRemovePeople'' request conforms to.
+type CirclesRemovePeopleResource =
      "circles" :>
        Capture "circleId" Text :>
          "people" :>
            QueryParams "email" Text :>
-             QueryParams "userId" Text :> Delete '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParams "userId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove a person from a circle.
 --
--- /See:/ 'circlesRemovePeople' smart constructor.
-data CirclesRemovePeople = CirclesRemovePeople
+-- /See:/ 'circlesRemovePeople'' smart constructor.
+data CirclesRemovePeople' = CirclesRemovePeople'
     { _crpEmail       :: !(Maybe Text)
     , _crpQuotaUser   :: !(Maybe Text)
     , _crpPrettyPrint :: !Bool
@@ -66,7 +74,7 @@ data CirclesRemovePeople = CirclesRemovePeople
     , _crpCircleId    :: !Text
     , _crpOauthToken  :: !(Maybe Text)
     , _crpFields      :: !(Maybe Text)
-    , _crpAlt         :: !Text
+    , _crpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemovePeople'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data CirclesRemovePeople = CirclesRemovePeople
 -- * 'crpFields'
 --
 -- * 'crpAlt'
-circlesRemovePeople
+circlesRemovePeople'
     :: Text -- ^ 'circleId'
-    -> CirclesRemovePeople
-circlesRemovePeople pCrpCircleId_ =
-    CirclesRemovePeople
+    -> CirclesRemovePeople'
+circlesRemovePeople' pCrpCircleId_ =
+    CirclesRemovePeople'
     { _crpEmail = Nothing
     , _crpQuotaUser = Nothing
     , _crpPrettyPrint = True
@@ -106,7 +114,7 @@ circlesRemovePeople pCrpCircleId_ =
     , _crpCircleId = pCrpCircleId_
     , _crpOauthToken = Nothing
     , _crpFields = Nothing
-    , _crpAlt = "json"
+    , _crpAlt = JSON
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
@@ -160,23 +168,23 @@ crpFields
   = lens _crpFields (\ s a -> s{_crpFields = a})
 
 -- | Data format for the response.
-crpAlt :: Lens' CirclesRemovePeople' Text
+crpAlt :: Lens' CirclesRemovePeople' Alt
 crpAlt = lens _crpAlt (\ s a -> s{_crpAlt = a})
 
 instance GoogleRequest CirclesRemovePeople' where
         type Rs CirclesRemovePeople' = ()
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesRemovePeople{..}
-          = go _crpEmail _crpQuotaUser _crpPrettyPrint
+        requestWithRoute r u CirclesRemovePeople'{..}
+          = go _crpEmail _crpQuotaUser (Just _crpPrettyPrint)
               _crpUserIp
               _crpUserId
               _crpKey
               _crpCircleId
               _crpOauthToken
               _crpFields
-              _crpAlt
+              (Just _crpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CirclesRemovePeopleAPI)
+                      (Proxy :: Proxy CirclesRemovePeopleResource)
                       r
                       u

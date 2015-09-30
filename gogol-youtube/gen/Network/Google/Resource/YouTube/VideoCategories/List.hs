@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideoCategoriesList@.
-module YouTube.VideoCategories.List
+module Network.Google.Resource.YouTube.VideoCategories.List
     (
     -- * REST Resource
-      VideoCategoriesListAPI
+      VideoCategoriesListResource
 
     -- * Creating a Request
-    , videoCategoriesList
-    , VideoCategoriesList
+    , videoCategoriesList'
+    , VideoCategoriesList'
 
     -- * Request Lenses
     , vclQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideoCategoriesList@ which the
--- 'VideoCategoriesList' request conforms to.
-type VideoCategoriesListAPI =
+-- 'VideoCategoriesList'' request conforms to.
+type VideoCategoriesListResource =
      "videoCategories" :>
-       QueryParam "part" Text :>
-         QueryParam "regionCode" Text :>
-           QueryParam "hl" Text :>
-             QueryParam "id" Text :>
-               Get '[JSON] VideoCategoryListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "regionCode" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "hl" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] VideoCategoryListResponse
 
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
--- /See:/ 'videoCategoriesList' smart constructor.
-data VideoCategoriesList = VideoCategoriesList
+-- /See:/ 'videoCategoriesList'' smart constructor.
+data VideoCategoriesList' = VideoCategoriesList'
     { _vclQuotaUser   :: !(Maybe Text)
     , _vclPart        :: !Text
     , _vclPrettyPrint :: !Bool
@@ -69,7 +77,7 @@ data VideoCategoriesList = VideoCategoriesList
     , _vclId          :: !(Maybe Text)
     , _vclOauthToken  :: !(Maybe Text)
     , _vclFields      :: !(Maybe Text)
-    , _vclAlt         :: !Text
+    , _vclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoCategoriesList'' with the minimum fields required to make a request.
@@ -97,11 +105,11 @@ data VideoCategoriesList = VideoCategoriesList
 -- * 'vclFields'
 --
 -- * 'vclAlt'
-videoCategoriesList
+videoCategoriesList'
     :: Text -- ^ 'part'
-    -> VideoCategoriesList
-videoCategoriesList pVclPart_ =
-    VideoCategoriesList
+    -> VideoCategoriesList'
+videoCategoriesList' pVclPart_ =
+    VideoCategoriesList'
     { _vclQuotaUser = Nothing
     , _vclPart = pVclPart_
     , _vclPrettyPrint = True
@@ -112,7 +120,7 @@ videoCategoriesList pVclPart_ =
     , _vclId = Nothing
     , _vclOauthToken = Nothing
     , _vclFields = Nothing
-    , _vclAlt = "json"
+    , _vclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,15 +183,16 @@ vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
 -- | Data format for the response.
-vclAlt :: Lens' VideoCategoriesList' Text
+vclAlt :: Lens' VideoCategoriesList' Alt
 vclAlt = lens _vclAlt (\ s a -> s{_vclAlt = a})
 
 instance GoogleRequest VideoCategoriesList' where
         type Rs VideoCategoriesList' =
              VideoCategoryListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideoCategoriesList{..}
-          = go _vclQuotaUser (Just _vclPart) _vclPrettyPrint
+        requestWithRoute r u VideoCategoriesList'{..}
+          = go _vclQuotaUser (Just _vclPart)
+              (Just _vclPrettyPrint)
               _vclRegionCode
               _vclUserIp
               (Just _vclHl)
@@ -191,9 +200,9 @@ instance GoogleRequest VideoCategoriesList' where
               _vclId
               _vclOauthToken
               _vclFields
-              _vclAlt
+              (Just _vclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VideoCategoriesListAPI)
+                      (Proxy :: Proxy VideoCategoriesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,163 @@
 -- | Retrieves a specific template by its id
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateGet@.
-module FusionTables.Template.Get
+module Network.Google.Resource.FusionTables.Template.Get
     (
     -- * REST Resource
-      TemplateGetAPI
+      TemplateGetResource
 
     -- * Creating a Request
-    , templateGet
-    , TemplateGet
+    , templateGet'
+    , TemplateGet'
 
     -- * Request Lenses
-    , temQuotaUser
-    , temPrettyPrint
-    , temTemplateId
-    , temUserIp
-    , temKey
-    , temOauthToken
-    , temTableId
-    , temFields
-    , temAlt
+    , tggQuotaUser
+    , tggPrettyPrint
+    , tggTemplateId
+    , tggUserIp
+    , tggKey
+    , tggOauthToken
+    , tggTableId
+    , tggFields
+    , tggAlt
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateGet@ which the
--- 'TemplateGet' request conforms to.
-type TemplateGetAPI =
+-- 'TemplateGet'' request conforms to.
+type TemplateGetResource =
      "tables" :>
        Capture "tableId" Text :>
          "templates" :>
-           Capture "templateId" Int32 :> Get '[JSON] Template
+           Capture "templateId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
 --
--- /See:/ 'templateGet' smart constructor.
-data TemplateGet = TemplateGet
-    { _temQuotaUser   :: !(Maybe Text)
-    , _temPrettyPrint :: !Bool
-    , _temTemplateId  :: !Int32
-    , _temUserIp      :: !(Maybe Text)
-    , _temKey         :: !(Maybe Text)
-    , _temOauthToken  :: !(Maybe Text)
-    , _temTableId     :: !Text
-    , _temFields      :: !(Maybe Text)
-    , _temAlt         :: !Text
+-- /See:/ 'templateGet'' smart constructor.
+data TemplateGet' = TemplateGet'
+    { _tggQuotaUser   :: !(Maybe Text)
+    , _tggPrettyPrint :: !Bool
+    , _tggTemplateId  :: !Int32
+    , _tggUserIp      :: !(Maybe Text)
+    , _tggKey         :: !(Maybe Text)
+    , _tggOauthToken  :: !(Maybe Text)
+    , _tggTableId     :: !Text
+    , _tggFields      :: !(Maybe Text)
+    , _tggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'temQuotaUser'
+-- * 'tggQuotaUser'
 --
--- * 'temPrettyPrint'
+-- * 'tggPrettyPrint'
 --
--- * 'temTemplateId'
+-- * 'tggTemplateId'
 --
--- * 'temUserIp'
+-- * 'tggUserIp'
 --
--- * 'temKey'
+-- * 'tggKey'
 --
--- * 'temOauthToken'
+-- * 'tggOauthToken'
 --
--- * 'temTableId'
+-- * 'tggTableId'
 --
--- * 'temFields'
+-- * 'tggFields'
 --
--- * 'temAlt'
-templateGet
+-- * 'tggAlt'
+templateGet'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
-    -> TemplateGet
-templateGet pTemTemplateId_ pTemTableId_ =
-    TemplateGet
-    { _temQuotaUser = Nothing
-    , _temPrettyPrint = True
-    , _temTemplateId = pTemTemplateId_
-    , _temUserIp = Nothing
-    , _temKey = Nothing
-    , _temOauthToken = Nothing
-    , _temTableId = pTemTableId_
-    , _temFields = Nothing
-    , _temAlt = "json"
+    -> TemplateGet'
+templateGet' pTggTemplateId_ pTggTableId_ =
+    TemplateGet'
+    { _tggQuotaUser = Nothing
+    , _tggPrettyPrint = True
+    , _tggTemplateId = pTggTemplateId_
+    , _tggUserIp = Nothing
+    , _tggKey = Nothing
+    , _tggOauthToken = Nothing
+    , _tggTableId = pTggTableId_
+    , _tggFields = Nothing
+    , _tggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-temQuotaUser :: Lens' TemplateGet' (Maybe Text)
-temQuotaUser
-  = lens _temQuotaUser (\ s a -> s{_temQuotaUser = a})
+tggQuotaUser :: Lens' TemplateGet' (Maybe Text)
+tggQuotaUser
+  = lens _tggQuotaUser (\ s a -> s{_tggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-temPrettyPrint :: Lens' TemplateGet' Bool
-temPrettyPrint
-  = lens _temPrettyPrint
-      (\ s a -> s{_temPrettyPrint = a})
+tggPrettyPrint :: Lens' TemplateGet' Bool
+tggPrettyPrint
+  = lens _tggPrettyPrint
+      (\ s a -> s{_tggPrettyPrint = a})
 
 -- | Identifier for the template that is being requested
-temTemplateId :: Lens' TemplateGet' Int32
-temTemplateId
-  = lens _temTemplateId
-      (\ s a -> s{_temTemplateId = a})
+tggTemplateId :: Lens' TemplateGet' Int32
+tggTemplateId
+  = lens _tggTemplateId
+      (\ s a -> s{_tggTemplateId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-temUserIp :: Lens' TemplateGet' (Maybe Text)
-temUserIp
-  = lens _temUserIp (\ s a -> s{_temUserIp = a})
+tggUserIp :: Lens' TemplateGet' (Maybe Text)
+tggUserIp
+  = lens _tggUserIp (\ s a -> s{_tggUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-temKey :: Lens' TemplateGet' (Maybe Text)
-temKey = lens _temKey (\ s a -> s{_temKey = a})
+tggKey :: Lens' TemplateGet' (Maybe Text)
+tggKey = lens _tggKey (\ s a -> s{_tggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-temOauthToken :: Lens' TemplateGet' (Maybe Text)
-temOauthToken
-  = lens _temOauthToken
-      (\ s a -> s{_temOauthToken = a})
+tggOauthToken :: Lens' TemplateGet' (Maybe Text)
+tggOauthToken
+  = lens _tggOauthToken
+      (\ s a -> s{_tggOauthToken = a})
 
 -- | Table to which the template belongs
-temTableId :: Lens' TemplateGet' Text
-temTableId
-  = lens _temTableId (\ s a -> s{_temTableId = a})
+tggTableId :: Lens' TemplateGet' Text
+tggTableId
+  = lens _tggTableId (\ s a -> s{_tggTableId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-temFields :: Lens' TemplateGet' (Maybe Text)
-temFields
-  = lens _temFields (\ s a -> s{_temFields = a})
+tggFields :: Lens' TemplateGet' (Maybe Text)
+tggFields
+  = lens _tggFields (\ s a -> s{_tggFields = a})
 
 -- | Data format for the response.
-temAlt :: Lens' TemplateGet' Text
-temAlt = lens _temAlt (\ s a -> s{_temAlt = a})
+tggAlt :: Lens' TemplateGet' Alt
+tggAlt = lens _tggAlt (\ s a -> s{_tggAlt = a})
 
 instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateGet{..}
-          = go _temQuotaUser _temPrettyPrint _temTemplateId
-              _temUserIp
-              _temKey
-              _temOauthToken
-              _temTableId
-              _temFields
-              _temAlt
+        requestWithRoute r u TemplateGet'{..}
+          = go _tggQuotaUser (Just _tggPrettyPrint)
+              _tggTemplateId
+              _tggUserIp
+              _tggKey
+              _tggOauthToken
+              _tggTableId
+              _tggFields
+              (Just _tggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TemplateGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TemplateGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes to Settings resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsWatch@.
-module Calendar.Settings.Watch
+module Network.Google.Resource.Calendar.Settings.Watch
     (
     -- * REST Resource
-      SettingsWatchAPI
+      SettingsWatchResource
 
     -- * Creating a Request
-    , settingsWatch
-    , SettingsWatch
+    , settingsWatch'
+    , SettingsWatch'
 
     -- * Request Lenses
     , swSyncToken
@@ -45,20 +46,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarSettingsWatch@ which the
--- 'SettingsWatch' request conforms to.
-type SettingsWatchAPI =
+-- 'SettingsWatch'' request conforms to.
+type SettingsWatchResource =
      "users" :>
        "me" :>
          "settings" :>
            "watch" :>
              QueryParam "syncToken" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :> Post '[JSON] Channel
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Channel
 
 -- | Watch for changes to Settings resources.
 --
--- /See:/ 'settingsWatch' smart constructor.
-data SettingsWatch = SettingsWatch
+-- /See:/ 'settingsWatch'' smart constructor.
+data SettingsWatch' = SettingsWatch'
     { _swSyncToken   :: !(Maybe Text)
     , _swQuotaUser   :: !(Maybe Text)
     , _swPrettyPrint :: !Bool
@@ -68,7 +76,7 @@ data SettingsWatch = SettingsWatch
     , _swOauthToken  :: !(Maybe Text)
     , _swMaxResults  :: !(Maybe Int32)
     , _swFields      :: !(Maybe Text)
-    , _swAlt         :: !Text
+    , _swAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsWatch'' with the minimum fields required to make a request.
@@ -94,10 +102,10 @@ data SettingsWatch = SettingsWatch
 -- * 'swFields'
 --
 -- * 'swAlt'
-settingsWatch
-    :: SettingsWatch
-settingsWatch =
-    SettingsWatch
+settingsWatch'
+    :: SettingsWatch'
+settingsWatch' =
+    SettingsWatch'
     { _swSyncToken = Nothing
     , _swQuotaUser = Nothing
     , _swPrettyPrint = True
@@ -107,7 +115,7 @@ settingsWatch =
     , _swOauthToken = Nothing
     , _swMaxResults = Nothing
     , _swFields = Nothing
-    , _swAlt = "json"
+    , _swAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -167,21 +175,23 @@ swFields :: Lens' SettingsWatch' (Maybe Text)
 swFields = lens _swFields (\ s a -> s{_swFields = a})
 
 -- | Data format for the response.
-swAlt :: Lens' SettingsWatch' Text
+swAlt :: Lens' SettingsWatch' Alt
 swAlt = lens _swAlt (\ s a -> s{_swAlt = a})
 
 instance GoogleRequest SettingsWatch' where
         type Rs SettingsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsWatch{..}
-          = go _swSyncToken _swQuotaUser _swPrettyPrint
+        requestWithRoute r u SettingsWatch'{..}
+          = go _swSyncToken _swQuotaUser (Just _swPrettyPrint)
               _swUserIp
               _swKey
               _swPageToken
               _swOauthToken
               _swMaxResults
               _swFields
-              _swAlt
+              (Just _swAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SettingsWatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SettingsWatchResource)
+                      r
                       u

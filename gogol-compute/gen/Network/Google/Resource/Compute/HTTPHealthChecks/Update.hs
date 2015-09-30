@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksUpdate@.
-module Compute.HTTPHealthChecks.Update
+module Network.Google.Resource.Compute.HTTPHealthChecks.Update
     (
     -- * REST Resource
-      HttpHealthChecksUpdateAPI
+      HttpHealthChecksUpdateResource
 
     -- * Creating a Request
-    , hTTPHealthChecksUpdate
-    , HTTPHealthChecksUpdate
+    , hTTPHealthChecksUpdate'
+    , HTTPHealthChecksUpdate'
 
     -- * Request Lenses
     , httphcuQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksUpdate@ which the
--- 'HTTPHealthChecksUpdate' request conforms to.
-type HttpHealthChecksUpdateAPI =
+-- 'HTTPHealthChecksUpdate'' request conforms to.
+type HttpHealthChecksUpdateResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
            Capture "httpHealthCheck" Text :>
-             Put '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'hTTPHealthChecksUpdate' smart constructor.
-data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate
+-- /See:/ 'hTTPHealthChecksUpdate'' smart constructor.
+data HTTPHealthChecksUpdate' = HTTPHealthChecksUpdate'
     { _httphcuQuotaUser       :: !(Maybe Text)
     , _httphcuPrettyPrint     :: !Bool
     , _httphcuProject         :: !Text
@@ -66,7 +73,7 @@ data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate
     , _httphcuHttpHealthCheck :: !Text
     , _httphcuOauthToken      :: !(Maybe Text)
     , _httphcuFields          :: !(Maybe Text)
-    , _httphcuAlt             :: !Text
+    , _httphcuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksUpdate'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data HTTPHealthChecksUpdate = HTTPHealthChecksUpdate
 -- * 'httphcuFields'
 --
 -- * 'httphcuAlt'
-hTTPHealthChecksUpdate
+hTTPHealthChecksUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'httpHealthCheck'
-    -> HTTPHealthChecksUpdate
-hTTPHealthChecksUpdate pHttphcuProject_ pHttphcuHttpHealthCheck_ =
-    HTTPHealthChecksUpdate
+    -> HTTPHealthChecksUpdate'
+hTTPHealthChecksUpdate' pHttphcuProject_ pHttphcuHttpHealthCheck_ =
+    HTTPHealthChecksUpdate'
     { _httphcuQuotaUser = Nothing
     , _httphcuPrettyPrint = True
     , _httphcuProject = pHttphcuProject_
@@ -104,7 +111,7 @@ hTTPHealthChecksUpdate pHttphcuProject_ pHttphcuHttpHealthCheck_ =
     , _httphcuHttpHealthCheck = pHttphcuHttpHealthCheck_
     , _httphcuOauthToken = Nothing
     , _httphcuFields = Nothing
-    , _httphcuAlt = "json"
+    , _httphcuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,24 +167,24 @@ httphcuFields
       (\ s a -> s{_httphcuFields = a})
 
 -- | Data format for the response.
-httphcuAlt :: Lens' HTTPHealthChecksUpdate' Text
+httphcuAlt :: Lens' HTTPHealthChecksUpdate' Alt
 httphcuAlt
   = lens _httphcuAlt (\ s a -> s{_httphcuAlt = a})
 
 instance GoogleRequest HTTPHealthChecksUpdate' where
         type Rs HTTPHealthChecksUpdate' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksUpdate{..}
-          = go _httphcuQuotaUser _httphcuPrettyPrint
+        requestWithRoute r u HTTPHealthChecksUpdate'{..}
+          = go _httphcuQuotaUser (Just _httphcuPrettyPrint)
               _httphcuProject
               _httphcuUserIp
               _httphcuKey
               _httphcuHttpHealthCheck
               _httphcuOauthToken
               _httphcuFields
-              _httphcuAlt
+              (Just _httphcuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksUpdateAPI)
+                      (Proxy :: Proxy HttpHealthChecksUpdateResource)
                       r
                       u

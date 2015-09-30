@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an ACL entry on the specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsUpdate@.
-module Storage.ObjectAccessControls.Update
+module Network.Google.Resource.Storage.ObjectAccessControls.Update
     (
     -- * REST Resource
-      ObjectAccessControlsUpdateAPI
+      ObjectAccessControlsUpdateResource
 
     -- * Creating a Request
-    , objectAccessControlsUpdate
-    , ObjectAccessControlsUpdate
+    , objectAccessControlsUpdate'
+    , ObjectAccessControlsUpdate'
 
     -- * Request Lenses
     , oacuQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectAccessControlsUpdate@ which the
--- 'ObjectAccessControlsUpdate' request conforms to.
-type ObjectAccessControlsUpdateAPI =
+-- 'ObjectAccessControlsUpdate'' request conforms to.
+type ObjectAccessControlsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
-                   Put '[JSON] ObjectAccessControl
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "generation" Word64 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Put '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object.
 --
--- /See:/ 'objectAccessControlsUpdate' smart constructor.
-data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate
+-- /See:/ 'objectAccessControlsUpdate'' smart constructor.
+data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
     { _oacuQuotaUser   :: !(Maybe Text)
     , _oacuPrettyPrint :: !Bool
     , _oacuUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate
     , _oacuEntity      :: !Text
     , _oacuGeneration  :: !(Maybe Word64)
     , _oacuFields      :: !(Maybe Text)
-    , _oacuAlt         :: !Text
+    , _oacuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsUpdate'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data ObjectAccessControlsUpdate = ObjectAccessControlsUpdate
 -- * 'oacuFields'
 --
 -- * 'oacuAlt'
-objectAccessControlsUpdate
+objectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControlsUpdate
-objectAccessControlsUpdate pOacuBucket_ pOacuObject_ pOacuEntity_ =
-    ObjectAccessControlsUpdate
+    -> ObjectAccessControlsUpdate'
+objectAccessControlsUpdate' pOacuBucket_ pOacuObject_ pOacuEntity_ =
+    ObjectAccessControlsUpdate'
     { _oacuQuotaUser = Nothing
     , _oacuPrettyPrint = True
     , _oacuUserIp = Nothing
@@ -116,7 +124,7 @@ objectAccessControlsUpdate pOacuBucket_ pOacuObject_ pOacuEntity_ =
     , _oacuEntity = pOacuEntity_
     , _oacuGeneration = Nothing
     , _oacuFields = Nothing
-    , _oacuAlt = "json"
+    , _oacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,7 +189,7 @@ oacuFields
   = lens _oacuFields (\ s a -> s{_oacuFields = a})
 
 -- | Data format for the response.
-oacuAlt :: Lens' ObjectAccessControlsUpdate' Text
+oacuAlt :: Lens' ObjectAccessControlsUpdate' Alt
 oacuAlt = lens _oacuAlt (\ s a -> s{_oacuAlt = a})
 
 instance GoogleRequest ObjectAccessControlsUpdate'
@@ -189,8 +197,9 @@ instance GoogleRequest ObjectAccessControlsUpdate'
         type Rs ObjectAccessControlsUpdate' =
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsUpdate{..}
-          = go _oacuQuotaUser _oacuPrettyPrint _oacuUserIp
+        requestWithRoute r u ObjectAccessControlsUpdate'{..}
+          = go _oacuQuotaUser (Just _oacuPrettyPrint)
+              _oacuUserIp
               _oacuBucket
               _oacuKey
               _oacuObject
@@ -198,9 +207,9 @@ instance GoogleRequest ObjectAccessControlsUpdate'
               _oacuEntity
               _oacuGeneration
               _oacuFields
-              _oacuAlt
+              (Just _oacuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ObjectAccessControlsUpdateAPI)
+                      (Proxy :: Proxy ObjectAccessControlsUpdateResource)
                       r
                       u

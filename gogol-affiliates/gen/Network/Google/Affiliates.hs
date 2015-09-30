@@ -27,36 +27,46 @@ module Network.Google.Affiliates
     -- * REST Resources
 
     -- ** GanAdvertisersGet
-    , module Gan.Advertisers.Get
+    , module Network.Google.Resource.Gan.Advertisers.Get
 
     -- ** GanAdvertisersList
-    , module Gan.Advertisers.List
+    , module Network.Google.Resource.Gan.Advertisers.List
 
     -- ** GanCcOffersList
-    , module Gan.CcOffers.List
+    , module Network.Google.Resource.Gan.CcOffers.List
 
     -- ** GanEventsList
-    , module Gan.Events.List
+    , module Network.Google.Resource.Gan.Events.List
 
     -- ** GanLinksGet
-    , module Gan.Links.Get
+    , module Network.Google.Resource.Gan.Links.Get
 
     -- ** GanLinksInsert
-    , module Gan.Links.Insert
+    , module Network.Google.Resource.Gan.Links.Insert
 
     -- ** GanLinksList
-    , module Gan.Links.List
+    , module Network.Google.Resource.Gan.Links.List
 
     -- ** GanPublishersGet
-    , module Gan.Publishers.Get
+    , module Network.Google.Resource.Gan.Publishers.Get
 
     -- ** GanPublishersList
-    , module Gan.Publishers.List
+    , module Network.Google.Resource.Gan.Publishers.List
 
     -- ** GanReportsGet
-    , module Gan.Reports.Get
+    , module Network.Google.Resource.Gan.Reports.Get
 
     -- * Types
+
+    -- ** CcOfferRewards
+    , CcOfferRewards
+    , ccOfferRewards
+    , corAmount
+    , corExpirationMonths
+    , corCategory
+    , corAdditionalDetails
+    , corMaxRewardTier
+    , corMinRewardTier
 
     -- ** Event
     , Event
@@ -79,6 +89,27 @@ module Network.Google.Affiliates
     , ePublisherId
     , eEarnings
     , ePublisherName
+
+    -- ** GanPublishersGetRole
+    , GanPublishersGetRole (..)
+
+    -- ** GanReportsGetEventType
+    , GanReportsGetEventType (..)
+
+    -- ** GanReportsGetStatus
+    , GanReportsGetStatus (..)
+
+    -- ** GanLinksListPromotionType
+    , GanLinksListPromotionType (..)
+
+    -- ** GanLinksListRole
+    , GanLinksListRole (..)
+
+    -- ** GanEventsListType
+    , GanEventsListType (..)
+
+    -- ** GanReportsGetReportType
+    , GanReportsGetReportType (..)
 
     -- ** Link
     , Link
@@ -111,11 +142,20 @@ module Network.Google.Affiliates
     , mAmount
     , mCurrencyCode
 
+    -- ** GanLinksInsertRole
+    , GanLinksInsertRole (..)
+
+    -- ** GanAdvertisersListRole
+    , GanAdvertisersListRole (..)
+
     -- ** CcOffers
     , CcOffers
     , ccOffers
     , coKind
     , coItems
+
+    -- ** GanPublishersListRole
+    , GanPublishersListRole (..)
 
     -- ** Advertisers
     , Advertisers
@@ -123,6 +163,14 @@ module Network.Google.Affiliates
     , aNextPageToken
     , aKind
     , aItems
+
+    -- ** CcOfferDefaultFees
+    , CcOfferDefaultFees
+    , ccOfferDefaultFees
+    , codfRateType
+    , codfMinRate
+    , codfCategory
+    , codfMaxRate
 
     -- ** Report
     , Report
@@ -136,12 +184,73 @@ module Network.Google.Affiliates
     , rColumnNames
     , rType
 
+    -- ** GanLinksListAuthorship
+    , GanLinksListAuthorship (..)
+
+    -- ** GanLinksGetRole
+    , GanLinksGetRole (..)
+
+    -- ** CcOfferBonusRewards
+    , CcOfferBonusRewards
+    , ccOfferBonusRewards
+    , cobrAmount
+    , cobrDetails
+
+    -- ** GanEventsListRole
+    , GanEventsListRole (..)
+
+    -- ** GanLinksListLinkType
+    , GanLinksListLinkType (..)
+
+    -- ** GanAdvertisersGetRole
+    , GanAdvertisersGetRole (..)
+
+    -- ** EventProducts
+    , EventProducts
+    , eventProducts
+    , epSkuName
+    , epNetworkFee
+    , epQuantity
+    , epCategoryName
+    , epCategoryId
+    , epSku
+    , epPublisherFee
+    , epUnitPrice
+    , epEarnings
+
+    -- ** GanAdvertisersListRelationshipStatus
+    , GanAdvertisersListRelationshipStatus (..)
+
+    -- ** GanCcOffersListProjection
+    , GanCcOffersListProjection (..)
+
+    -- ** GanReportsGetRole
+    , GanReportsGetRole (..)
+
     -- ** Events
     , Events
     , events
     , eveNextPageToken
     , eveKind
     , eveItems
+
+    -- ** GanEventsListChargeType
+    , GanEventsListChargeType (..)
+
+    -- ** GanPublishersListRelationshipStatus
+    , GanPublishersListRelationshipStatus (..)
+
+    -- ** LinkSpecialOffers
+    , LinkSpecialOffers
+    , linkSpecialOffers
+    , lsoFreeShippingMin
+    , lsoPercentOff
+    , lsoPriceCut
+    , lsoPriceCutMin
+    , lsoPercentOffMin
+    , lsoFreeShipping
+    , lsoPromotionCodes
+    , lsoFreeGift
 
     -- ** Publishers
     , Publishers
@@ -263,6 +372,15 @@ module Network.Google.Affiliates
     , pubId
     , pubEpcNinetyDayAverage
     , pubSites
+
+    -- ** GanLinksListRelationshipStatus
+    , GanLinksListRelationshipStatus (..)
+
+    -- ** GanEventsListStatus
+    , GanEventsListStatus (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -283,9 +401,15 @@ TODO
 -}
 
 type AffiliatesAPI =
-     Reports :<|> CcOffers :<|> Advertisers :<|> Events
-       :<|> Publishers
-       :<|> Links
+     ReportsGetResource :<|> CcOffersListResource :<|>
+       AdvertisersListResource
+       :<|> AdvertisersGetResource
+       :<|> EventsListResource
+       :<|> PublishersListResource
+       :<|> PublishersGetResource
+       :<|> LinksInsertResource
+       :<|> LinksListResource
+       :<|> LinksGetResource
 
 affiliatesAPI :: Proxy AffiliatesAPI
 affiliatesAPI = Proxy

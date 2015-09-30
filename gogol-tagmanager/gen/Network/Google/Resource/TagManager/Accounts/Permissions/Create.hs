@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a user\'s Account & Container Permissions.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsCreate@.
-module TagManager.Accounts.Permissions.Create
+module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     (
     -- * REST Resource
-      AccountsPermissionsCreateAPI
+      AccountsPermissionsCreateResource
 
     -- * Creating a Request
-    , accountsPermissionsCreate
-    , AccountsPermissionsCreate
+    , accountsPermissionsCreate'
+    , AccountsPermissionsCreate'
 
     -- * Request Lenses
     , apcQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsPermissionsCreate@ which the
--- 'AccountsPermissionsCreate' request conforms to.
-type AccountsPermissionsCreateAPI =
+-- 'AccountsPermissionsCreate'' request conforms to.
+type AccountsPermissionsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "permissions" :> Post '[JSON] UserAccess
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] UserAccess
 
 -- | Creates a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsCreate' smart constructor.
-data AccountsPermissionsCreate = AccountsPermissionsCreate
+-- /See:/ 'accountsPermissionsCreate'' smart constructor.
+data AccountsPermissionsCreate' = AccountsPermissionsCreate'
     { _apcQuotaUser   :: !(Maybe Text)
     , _apcPrettyPrint :: !Bool
     , _apcUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data AccountsPermissionsCreate = AccountsPermissionsCreate
     , _apcKey         :: !(Maybe Text)
     , _apcOauthToken  :: !(Maybe Text)
     , _apcFields      :: !(Maybe Text)
-    , _apcAlt         :: !Text
+    , _apcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsCreate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data AccountsPermissionsCreate = AccountsPermissionsCreate
 -- * 'apcFields'
 --
 -- * 'apcAlt'
-accountsPermissionsCreate
+accountsPermissionsCreate'
     :: Text -- ^ 'accountId'
-    -> AccountsPermissionsCreate
-accountsPermissionsCreate pApcAccountId_ =
-    AccountsPermissionsCreate
+    -> AccountsPermissionsCreate'
+accountsPermissionsCreate' pApcAccountId_ =
+    AccountsPermissionsCreate'
     { _apcQuotaUser = Nothing
     , _apcPrettyPrint = True
     , _apcUserIp = Nothing
@@ -94,7 +102,7 @@ accountsPermissionsCreate pApcAccountId_ =
     , _apcKey = Nothing
     , _apcOauthToken = Nothing
     , _apcFields = Nothing
-    , _apcAlt = "json"
+    , _apcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +147,22 @@ apcFields
   = lens _apcFields (\ s a -> s{_apcFields = a})
 
 -- | Data format for the response.
-apcAlt :: Lens' AccountsPermissionsCreate' Text
+apcAlt :: Lens' AccountsPermissionsCreate' Alt
 apcAlt = lens _apcAlt (\ s a -> s{_apcAlt = a})
 
 instance GoogleRequest AccountsPermissionsCreate'
          where
         type Rs AccountsPermissionsCreate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsCreate{..}
-          = go _apcQuotaUser _apcPrettyPrint _apcUserIp
+        requestWithRoute r u AccountsPermissionsCreate'{..}
+          = go _apcQuotaUser (Just _apcPrettyPrint) _apcUserIp
               _apcAccountId
               _apcKey
               _apcOauthToken
               _apcFields
-              _apcAlt
+              (Just _apcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPermissionsCreateAPI)
+                      (Proxy :: Proxy AccountsPermissionsCreateResource)
                       r
                       u

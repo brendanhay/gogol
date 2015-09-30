@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- a job is not allowed.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsPatch@.
-module StorageTransfer.TransferJobs.Patch
+module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     (
     -- * REST Resource
-      TransferJobsPatchAPI
+      TransferJobsPatchResource
 
     -- * Creating a Request
-    , transferJobsPatch
-    , TransferJobsPatch
+    , transferJobsPatch'
+    , TransferJobsPatch'
 
     -- * Request Lenses
     , tjpXgafv
@@ -51,16 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferJobsPatch@ which the
--- 'TransferJobsPatch' request conforms to.
-type TransferJobsPatchAPI =
-     "v1" :> "{+jobName}" :> Patch '[JSON] TransferJob
+-- 'TransferJobsPatch'' request conforms to.
+type TransferJobsPatchResource =
+     "v1" :>
+       "{+jobName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Patch '[JSON] TransferJob
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 --
--- /See:/ 'transferJobsPatch' smart constructor.
-data TransferJobsPatch = TransferJobsPatch
+-- /See:/ 'transferJobsPatch'' smart constructor.
+data TransferJobsPatch' = TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Text)
     , _tjpQuotaUser      :: !(Maybe Text)
     , _tjpPrettyPrint    :: !Bool
@@ -108,11 +124,11 @@ data TransferJobsPatch = TransferJobsPatch
 -- * 'tjpCallback'
 --
 -- * 'tjpAlt'
-transferJobsPatch
+transferJobsPatch'
     :: Text -- ^ 'jobName'
-    -> TransferJobsPatch
-transferJobsPatch pTjpJobName_ =
-    TransferJobsPatch
+    -> TransferJobsPatch'
+transferJobsPatch' pTjpJobName_ =
+    TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpQuotaUser = Nothing
     , _tjpPrettyPrint = True
@@ -208,10 +224,10 @@ tjpAlt = lens _tjpAlt (\ s a -> s{_tjpAlt = a})
 instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferJobsPatch{..}
-          = go _tjpXgafv _tjpQuotaUser _tjpPrettyPrint
+        requestWithRoute r u TransferJobsPatch'{..}
+          = go _tjpXgafv _tjpQuotaUser (Just _tjpPrettyPrint)
               _tjpUploadProtocol
-              _tjpPp
+              (Just _tjpPp)
               _tjpAccessToken
               _tjpJobName
               _tjpUploadType
@@ -220,9 +236,9 @@ instance GoogleRequest TransferJobsPatch' where
               _tjpOauthToken
               _tjpFields
               _tjpCallback
-              _tjpAlt
+              (Just _tjpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferJobsPatchAPI)
+                      (Proxy :: Proxy TransferJobsPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerManifestsList@.
-module DeploymentManager.Manifests.List
+module Network.Google.Resource.DeploymentManager.Manifests.List
     (
     -- * REST Resource
-      ManifestsListAPI
+      ManifestsListResource
 
     -- * Creating a Request
-    , manifestsList
-    , ManifestsList
+    , manifestsList'
+    , ManifestsList'
 
     -- * Request Lenses
     , mlQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerManifestsList@ which the
--- 'ManifestsList' request conforms to.
-type ManifestsListAPI =
+-- 'ManifestsList'' request conforms to.
+type ManifestsListResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
              "manifests" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] ManifestsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] ManifestsListResponse
 
 -- | Lists all manifests for a given deployment.
 --
--- /See:/ 'manifestsList' smart constructor.
-data ManifestsList = ManifestsList
+-- /See:/ 'manifestsList'' smart constructor.
+data ManifestsList' = ManifestsList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlProject     :: !Text
@@ -73,7 +81,7 @@ data ManifestsList = ManifestsList
     , _mlOauthToken  :: !(Maybe Text)
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Text
+    , _mlAlt         :: !Alt
     , _mlDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -104,12 +112,12 @@ data ManifestsList = ManifestsList
 -- * 'mlAlt'
 --
 -- * 'mlDeployment'
-manifestsList
+manifestsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'deployment'
-    -> ManifestsList
-manifestsList pMlProject_ pMlDeployment_ =
-    ManifestsList
+    -> ManifestsList'
+manifestsList' pMlProject_ pMlDeployment_ =
+    ManifestsList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlProject = pMlProject_
@@ -120,7 +128,7 @@ manifestsList pMlProject_ pMlDeployment_ =
     , _mlOauthToken = Nothing
     , _mlMaxResults = 500
     , _mlFields = Nothing
-    , _mlAlt = "json"
+    , _mlAlt = JSON
     , _mlDeployment = pMlDeployment_
     }
 
@@ -189,7 +197,7 @@ mlFields :: Lens' ManifestsList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | Data format for the response.
-mlAlt :: Lens' ManifestsList' Text
+mlAlt :: Lens' ManifestsList' Alt
 mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
 
 -- | The name of the deployment for this request.
@@ -201,16 +209,19 @@ instance GoogleRequest ManifestsList' where
         type Rs ManifestsList' = ManifestsListResponse
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ManifestsList{..}
-          = go _mlQuotaUser _mlPrettyPrint _mlProject _mlUserIp
+        requestWithRoute r u ManifestsList'{..}
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlProject
+              _mlUserIp
               _mlKey
               _mlFilter
               _mlPageToken
               _mlOauthToken
               (Just _mlMaxResults)
               _mlFields
-              _mlAlt
+              (Just _mlAlt)
               _mlDeployment
           where go
-                  = clientWithRoute (Proxy :: Proxy ManifestsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ManifestsListResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an attachment from a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsDelete@.
-module Mirror.Timeline.Attachments.Delete
+module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
     (
     -- * REST Resource
-      TimelineAttachmentsDeleteAPI
+      TimelineAttachmentsDeleteResource
 
     -- * Creating a Request
-    , timelineAttachmentsDelete
-    , TimelineAttachmentsDelete
+    , timelineAttachmentsDelete'
+    , TimelineAttachmentsDelete'
 
     -- * Request Lenses
     , tadQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineAttachmentsDelete@ which the
--- 'TimelineAttachmentsDelete' request conforms to.
-type TimelineAttachmentsDeleteAPI =
+-- 'TimelineAttachmentsDelete'' request conforms to.
+type TimelineAttachmentsDeleteResource =
      "timeline" :>
        Capture "itemId" Text :>
          "attachments" :>
-           Capture "attachmentId" Text :> Delete '[JSON] ()
+           Capture "attachmentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an attachment from a timeline item.
 --
--- /See:/ 'timelineAttachmentsDelete' smart constructor.
-data TimelineAttachmentsDelete = TimelineAttachmentsDelete
+-- /See:/ 'timelineAttachmentsDelete'' smart constructor.
+data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
     { _tadQuotaUser    :: !(Maybe Text)
     , _tadPrettyPrint  :: !Bool
     , _tadUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data TimelineAttachmentsDelete = TimelineAttachmentsDelete
     , _tadKey          :: !(Maybe Text)
     , _tadOauthToken   :: !(Maybe Text)
     , _tadFields       :: !(Maybe Text)
-    , _tadAlt          :: !Text
+    , _tadAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TimelineAttachmentsDelete = TimelineAttachmentsDelete
 -- * 'tadFields'
 --
 -- * 'tadAlt'
-timelineAttachmentsDelete
+timelineAttachmentsDelete'
     :: Text -- ^ 'itemId'
     -> Text -- ^ 'attachmentId'
-    -> TimelineAttachmentsDelete
-timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
-    TimelineAttachmentsDelete
+    -> TimelineAttachmentsDelete'
+timelineAttachmentsDelete' pTadItemId_ pTadAttachmentId_ =
+    TimelineAttachmentsDelete'
     { _tadQuotaUser = Nothing
     , _tadPrettyPrint = True
     , _tadUserIp = Nothing
@@ -101,7 +109,7 @@ timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
     , _tadKey = Nothing
     , _tadOauthToken = Nothing
     , _tadFields = Nothing
-    , _tadAlt = "json"
+    , _tadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +160,23 @@ tadFields
   = lens _tadFields (\ s a -> s{_tadFields = a})
 
 -- | Data format for the response.
-tadAlt :: Lens' TimelineAttachmentsDelete' Text
+tadAlt :: Lens' TimelineAttachmentsDelete' Alt
 tadAlt = lens _tadAlt (\ s a -> s{_tadAlt = a})
 
 instance GoogleRequest TimelineAttachmentsDelete'
          where
         type Rs TimelineAttachmentsDelete' = ()
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsDelete{..}
-          = go _tadQuotaUser _tadPrettyPrint _tadUserIp
+        requestWithRoute r u TimelineAttachmentsDelete'{..}
+          = go _tadQuotaUser (Just _tadPrettyPrint) _tadUserIp
               _tadItemId
               _tadAttachmentId
               _tadKey
               _tadOauthToken
               _tadFields
-              _tadAlt
+              (Just _tadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TimelineAttachmentsDeleteAPI)
+                      (Proxy :: Proxy TimelineAttachmentsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all GTM Triggers of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersList@.
-module TagManager.Accounts.Containers.Triggers.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
     (
     -- * REST Resource
-      AccountsContainersTriggersListAPI
+      AccountsContainersTriggersListResource
 
     -- * Creating a Request
-    , accountsContainersTriggersList
-    , AccountsContainersTriggersList
+    , accountsContainersTriggersList'
+    , AccountsContainersTriggersList'
 
     -- * Request Lenses
     , actlQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTriggersList@ which the
--- 'AccountsContainersTriggersList' request conforms to.
-type AccountsContainersTriggersListAPI =
+-- 'AccountsContainersTriggersList'' request conforms to.
+type AccountsContainersTriggersListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "triggers" :> Get '[JSON] ListTriggersResponse
+             "triggers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ListTriggersResponse
 
 -- | Lists all GTM Triggers of a Container.
 --
--- /See:/ 'accountsContainersTriggersList' smart constructor.
-data AccountsContainersTriggersList = AccountsContainersTriggersList
+-- /See:/ 'accountsContainersTriggersList'' smart constructor.
+data AccountsContainersTriggersList' = AccountsContainersTriggersList'
     { _actlQuotaUser   :: !(Maybe Text)
     , _actlPrettyPrint :: !Bool
     , _actlContainerId :: !Text
@@ -64,7 +73,7 @@ data AccountsContainersTriggersList = AccountsContainersTriggersList
     , _actlKey         :: !(Maybe Text)
     , _actlOauthToken  :: !(Maybe Text)
     , _actlFields      :: !(Maybe Text)
-    , _actlAlt         :: !Text
+    , _actlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersList'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data AccountsContainersTriggersList = AccountsContainersTriggersList
 -- * 'actlFields'
 --
 -- * 'actlAlt'
-accountsContainersTriggersList
+accountsContainersTriggersList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTriggersList
-accountsContainersTriggersList pActlContainerId_ pActlAccountId_ =
-    AccountsContainersTriggersList
+    -> AccountsContainersTriggersList'
+accountsContainersTriggersList' pActlContainerId_ pActlAccountId_ =
+    AccountsContainersTriggersList'
     { _actlQuotaUser = Nothing
     , _actlPrettyPrint = True
     , _actlContainerId = pActlContainerId_
@@ -102,7 +111,7 @@ accountsContainersTriggersList pActlContainerId_ pActlAccountId_ =
     , _actlKey = Nothing
     , _actlOauthToken = Nothing
     , _actlFields = Nothing
-    , _actlAlt = "json"
+    , _actlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +164,7 @@ actlFields
   = lens _actlFields (\ s a -> s{_actlFields = a})
 
 -- | Data format for the response.
-actlAlt :: Lens' AccountsContainersTriggersList' Text
+actlAlt :: Lens' AccountsContainersTriggersList' Alt
 actlAlt = lens _actlAlt (\ s a -> s{_actlAlt = a})
 
 instance GoogleRequest
@@ -164,16 +173,18 @@ instance GoogleRequest
              ListTriggersResponse
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersTriggersList{..}
-          = go _actlQuotaUser _actlPrettyPrint _actlContainerId
+          AccountsContainersTriggersList'{..}
+          = go _actlQuotaUser (Just _actlPrettyPrint)
+              _actlContainerId
               _actlUserIp
               _actlAccountId
               _actlKey
               _actlOauthToken
               _actlFields
-              _actlAlt
+              (Just _actlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTriggersListAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersTriggersListResource)
                       r
                       u

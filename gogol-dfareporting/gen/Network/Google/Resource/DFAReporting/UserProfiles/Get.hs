@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one user profile by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserProfilesGet@.
-module DFAReporting.UserProfiles.Get
+module Network.Google.Resource.DFAReporting.UserProfiles.Get
     (
     -- * REST Resource
-      UserProfilesGetAPI
+      UserProfilesGetResource
 
     -- * Creating a Request
-    , userProfilesGet
-    , UserProfilesGet
+    , userProfilesGet'
+    , UserProfilesGet'
 
     -- * Request Lenses
     , upgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserProfilesGet@ which the
--- 'UserProfilesGet' request conforms to.
-type UserProfilesGetAPI =
+-- 'UserProfilesGet'' request conforms to.
+type UserProfilesGetResource =
      "userprofiles" :>
-       Capture "profileId" Int64 :> Get '[JSON] UserProfile
+       Capture "profileId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] UserProfile
 
 -- | Gets one user profile by ID.
 --
--- /See:/ 'userProfilesGet' smart constructor.
-data UserProfilesGet = UserProfilesGet
+-- /See:/ 'userProfilesGet'' smart constructor.
+data UserProfilesGet' = UserProfilesGet'
     { _upgQuotaUser   :: !(Maybe Text)
     , _upgPrettyPrint :: !Bool
     , _upgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UserProfilesGet = UserProfilesGet
     , _upgKey         :: !(Maybe Text)
     , _upgOauthToken  :: !(Maybe Text)
     , _upgFields      :: !(Maybe Text)
-    , _upgAlt         :: !Text
+    , _upgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UserProfilesGet = UserProfilesGet
 -- * 'upgFields'
 --
 -- * 'upgAlt'
-userProfilesGet
+userProfilesGet'
     :: Int64 -- ^ 'profileId'
-    -> UserProfilesGet
-userProfilesGet pUpgProfileId_ =
-    UserProfilesGet
+    -> UserProfilesGet'
+userProfilesGet' pUpgProfileId_ =
+    UserProfilesGet'
     { _upgQuotaUser = Nothing
     , _upgPrettyPrint = True
     , _upgUserIp = Nothing
@@ -93,7 +101,7 @@ userProfilesGet pUpgProfileId_ =
     , _upgKey = Nothing
     , _upgOauthToken = Nothing
     , _upgFields = Nothing
-    , _upgAlt = "json"
+    , _upgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ upgFields
   = lens _upgFields (\ s a -> s{_upgFields = a})
 
 -- | Data format for the response.
-upgAlt :: Lens' UserProfilesGet' Text
+upgAlt :: Lens' UserProfilesGet' Alt
 upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
 
 instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserProfilesGet{..}
-          = go _upgQuotaUser _upgPrettyPrint _upgUserIp
+        requestWithRoute r u UserProfilesGet'{..}
+          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIp
               _upgProfileId
               _upgKey
               _upgOauthToken
               _upgFields
-              _upgAlt
+              (Just _upgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserProfilesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserProfilesGetResource)
                       r
                       u

@@ -25,6 +25,12 @@ module Network.Google.Games.Types
     , rjrClientAddress
     , rjrCapabilities
 
+    -- * PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
     -- * Snapshot
     , Snapshot
     , snapshot
@@ -39,6 +45,9 @@ module Network.Google.Games.Types
     , sType
     , sDescription
     , sDriveId
+
+    -- * GamesAchievementsListState
+    , GamesAchievementsListState (..)
 
     -- * TurnBasedMatchData
     , TurnBasedMatchData
@@ -136,6 +145,9 @@ module Network.Google.Games.Types
     , acSecondary
     , acKind
     , acPrimary
+
+    -- * GamesScoresListCollection
+    , GamesScoresListCollection (..)
 
     -- * PlayerScoreListResponse
     , PlayerScoreListResponse
@@ -476,6 +488,9 @@ module Network.Google.Games.Types
     , edChildEvents
     , edDescription
 
+    -- * GamesScoresGetTimeSpan
+    , GamesScoresGetTimeSpan (..)
+
     -- * RoomModification
     , RoomModification
     , roomModification
@@ -506,6 +521,9 @@ module Network.Google.Games.Types
     , paId
     , paCurrentSteps
     , paLastUpdatedTimestamp
+
+    -- * GamesMetagameListCategoriesByPlayerCollection
+    , GamesMetagameListCategoriesByPlayerCollection (..)
 
     -- * RoomP2PStatuses
     , RoomP2PStatuses
@@ -581,6 +599,9 @@ module Network.Google.Games.Types
     , plrKind
     , plrItems
 
+    -- * GamesScoresGetIncludeRankType
+    , GamesScoresGetIncludeRankType (..)
+
     -- * TurnBasedMatchCreateRequest
     , TurnBasedMatchCreateRequest
     , turnBasedMatchCreateRequest
@@ -606,6 +627,12 @@ module Network.Google.Games.Types
     , adDescription
     , adIsRevealedIconUrlDefault
     , adUnlockedIconUrl
+
+    -- * PushTokenIdIos
+    , PushTokenIdIos
+    , pushTokenIdIos
+    , ptiiApnsDeviceToken
+    , ptiiApnsEnvironment
 
     -- * PlayerAchievementListResponse
     , PlayerAchievementListResponse
@@ -643,6 +670,9 @@ module Network.Google.Games.Types
     , rlrReason
     , rlrLeaveDiagnostics
 
+    -- * GamesApplicationsGetPlatformType
+    , GamesApplicationsGetPlatformType (..)
+
     -- * AchievementIncrementResponse
     , AchievementIncrementResponse
     , achievementIncrementResponse
@@ -662,6 +692,9 @@ module Network.Google.Games.Types
     , pKind
     , pAutoMatched
     , pTimeMillis
+
+    -- * GamesScoresListTimeSpan
+    , GamesScoresListTimeSpan (..)
 
     -- * RoomAutoMatchingCriteria
     , RoomAutoMatchingCriteria
@@ -796,6 +829,9 @@ module Network.Google.Games.Types
     , iwdKind
     , iwdLaunchUrl
 
+    -- * GamesScoresListWindowCollection
+    , GamesScoresListWindowCollection (..)
+
     -- * EventChild
     , EventChild
     , eventChild
@@ -862,11 +898,20 @@ module Network.Google.Games.Types
     , iTurnBasedPlay
     , iRealtimePlay
 
+    -- * GamesPlayersListCollection
+    , GamesPlayersListCollection (..)
+
     -- * PlayerScoreSubmissionList
     , PlayerScoreSubmissionList
     , playerScoreSubmissionList
     , psslKind
     , psslScores
+
+    -- * GamesScoresListWindowTimeSpan
+    , GamesScoresListWindowTimeSpan (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Games.Types.Product
@@ -874,7 +919,7 @@ import           Network.Google.Games.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Play Game Services API.
-gamesURL :: BaseURL
+gamesURL :: BaseUrl
 gamesURL
   = BaseUrl Https
       "https://www.googleapis.com/games/v1/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,188 +20,204 @@
 -- | Retrieves a list of advertisers, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersList@.
-module DFAReporting.Advertisers.List
+module Network.Google.Resource.DFAReporting.Advertisers.List
     (
     -- * REST Resource
-      AdvertisersListAPI
+      AdvertisersListResource
 
     -- * Creating a Request
-    , advertisersList
-    , AdvertisersList
+    , advertisersList'
+    , AdvertisersList'
 
     -- * Request Lenses
-    , advStatus
-    , advQuotaUser
-    , advPrettyPrint
-    , advUserIp
-    , advOnlyParent
-    , advSearchString
-    , advIds
-    , advIncludeAdvertisersWithoutGroupsOnly
-    , advProfileId
-    , advSortOrder
-    , advAdvertiserGroupIds
-    , advKey
-    , advPageToken
-    , advSortField
-    , advSubaccountId
-    , advOauthToken
-    , advFloodlightConfigurationIds
-    , advMaxResults
-    , advFields
-    , advAlt
+    , allStatus
+    , allQuotaUser
+    , allPrettyPrint
+    , allUserIp
+    , allOnlyParent
+    , allSearchString
+    , allIds
+    , allIncludeAdvertisersWithoutGroupsOnly
+    , allProfileId
+    , allSortOrder
+    , allAdvertiserGroupIds
+    , allKey
+    , allPageToken
+    , allSortField
+    , allSubaccountId
+    , allOauthToken
+    , allFloodlightConfigurationIds
+    , allMaxResults
+    , allFields
+    , allAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertisersList@ which the
--- 'AdvertisersList' request conforms to.
-type AdvertisersListAPI =
+-- 'AdvertisersList'' request conforms to.
+type AdvertisersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParam "status" Text :>
-             QueryParam "onlyParent" Bool :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
-                     :>
-                     QueryParam "sortOrder" Text :>
-                       QueryParams "advertiserGroupIds" Int64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" Text :>
-                             QueryParam "subaccountId" Int64 :>
-                               QueryParams "floodlightConfigurationIds" Int64 :>
-                                 QueryParam "maxResults" Int32 :>
-                                   Get '[JSON] AdvertisersListResponse
+           QueryParam "status" DfareportingAdvertisersListStatus
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "onlyParent" Bool :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "includeAdvertisersWithoutGroupsOnly" Bool
+                           :>
+                           QueryParam "sortOrder"
+                             DfareportingAdvertisersListSortOrder
+                             :>
+                             QueryParams "advertiserGroupIds" Int64 :>
+                               QueryParam "key" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     DfareportingAdvertisersListSortField
+                                     :>
+                                     QueryParam "subaccountId" Int64 :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParams
+                                           "floodlightConfigurationIds"
+                                           Int64
+                                           :>
+                                           QueryParam "maxResults" Int32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Alt :>
+                                                 Get '[JSON]
+                                                   AdvertisersListResponse
 
 -- | Retrieves a list of advertisers, possibly filtered.
 --
--- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList
-    { _advStatus                              :: !(Maybe Text)
-    , _advQuotaUser                           :: !(Maybe Text)
-    , _advPrettyPrint                         :: !Bool
-    , _advUserIp                              :: !(Maybe Text)
-    , _advOnlyParent                          :: !(Maybe Bool)
-    , _advSearchString                        :: !(Maybe Text)
-    , _advIds                                 :: !(Maybe Int64)
-    , _advIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
-    , _advProfileId                           :: !Int64
-    , _advSortOrder                           :: !(Maybe Text)
-    , _advAdvertiserGroupIds                  :: !(Maybe Int64)
-    , _advKey                                 :: !(Maybe Text)
-    , _advPageToken                           :: !(Maybe Text)
-    , _advSortField                           :: !(Maybe Text)
-    , _advSubaccountId                        :: !(Maybe Int64)
-    , _advOauthToken                          :: !(Maybe Text)
-    , _advFloodlightConfigurationIds          :: !(Maybe Int64)
-    , _advMaxResults                          :: !(Maybe Int32)
-    , _advFields                              :: !(Maybe Text)
-    , _advAlt                                 :: !Text
+-- /See:/ 'advertisersList'' smart constructor.
+data AdvertisersList' = AdvertisersList'
+    { _allStatus                              :: !(Maybe DfareportingAdvertisersListStatus)
+    , _allQuotaUser                           :: !(Maybe Text)
+    , _allPrettyPrint                         :: !Bool
+    , _allUserIp                              :: !(Maybe Text)
+    , _allOnlyParent                          :: !(Maybe Bool)
+    , _allSearchString                        :: !(Maybe Text)
+    , _allIds                                 :: !(Maybe Int64)
+    , _allIncludeAdvertisersWithoutGroupsOnly :: !(Maybe Bool)
+    , _allProfileId                           :: !Int64
+    , _allSortOrder                           :: !(Maybe DfareportingAdvertisersListSortOrder)
+    , _allAdvertiserGroupIds                  :: !(Maybe Int64)
+    , _allKey                                 :: !(Maybe Text)
+    , _allPageToken                           :: !(Maybe Text)
+    , _allSortField                           :: !(Maybe DfareportingAdvertisersListSortField)
+    , _allSubaccountId                        :: !(Maybe Int64)
+    , _allOauthToken                          :: !(Maybe Text)
+    , _allFloodlightConfigurationIds          :: !(Maybe Int64)
+    , _allMaxResults                          :: !(Maybe Int32)
+    , _allFields                              :: !(Maybe Text)
+    , _allAlt                                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'advStatus'
+-- * 'allStatus'
 --
--- * 'advQuotaUser'
+-- * 'allQuotaUser'
 --
--- * 'advPrettyPrint'
+-- * 'allPrettyPrint'
 --
--- * 'advUserIp'
+-- * 'allUserIp'
 --
--- * 'advOnlyParent'
+-- * 'allOnlyParent'
 --
--- * 'advSearchString'
+-- * 'allSearchString'
 --
--- * 'advIds'
+-- * 'allIds'
 --
--- * 'advIncludeAdvertisersWithoutGroupsOnly'
+-- * 'allIncludeAdvertisersWithoutGroupsOnly'
 --
--- * 'advProfileId'
+-- * 'allProfileId'
 --
--- * 'advSortOrder'
+-- * 'allSortOrder'
 --
--- * 'advAdvertiserGroupIds'
+-- * 'allAdvertiserGroupIds'
 --
--- * 'advKey'
+-- * 'allKey'
 --
--- * 'advPageToken'
+-- * 'allPageToken'
 --
--- * 'advSortField'
+-- * 'allSortField'
 --
--- * 'advSubaccountId'
+-- * 'allSubaccountId'
 --
--- * 'advOauthToken'
+-- * 'allOauthToken'
 --
--- * 'advFloodlightConfigurationIds'
+-- * 'allFloodlightConfigurationIds'
 --
--- * 'advMaxResults'
+-- * 'allMaxResults'
 --
--- * 'advFields'
+-- * 'allFields'
 --
--- * 'advAlt'
-advertisersList
+-- * 'allAlt'
+advertisersList'
     :: Int64 -- ^ 'profileId'
-    -> AdvertisersList
-advertisersList pAdvProfileId_ =
-    AdvertisersList
-    { _advStatus = Nothing
-    , _advQuotaUser = Nothing
-    , _advPrettyPrint = True
-    , _advUserIp = Nothing
-    , _advOnlyParent = Nothing
-    , _advSearchString = Nothing
-    , _advIds = Nothing
-    , _advIncludeAdvertisersWithoutGroupsOnly = Nothing
-    , _advProfileId = pAdvProfileId_
-    , _advSortOrder = Nothing
-    , _advAdvertiserGroupIds = Nothing
-    , _advKey = Nothing
-    , _advPageToken = Nothing
-    , _advSortField = Nothing
-    , _advSubaccountId = Nothing
-    , _advOauthToken = Nothing
-    , _advFloodlightConfigurationIds = Nothing
-    , _advMaxResults = Nothing
-    , _advFields = Nothing
-    , _advAlt = "json"
+    -> AdvertisersList'
+advertisersList' pAllProfileId_ =
+    AdvertisersList'
+    { _allStatus = Nothing
+    , _allQuotaUser = Nothing
+    , _allPrettyPrint = True
+    , _allUserIp = Nothing
+    , _allOnlyParent = Nothing
+    , _allSearchString = Nothing
+    , _allIds = Nothing
+    , _allIncludeAdvertisersWithoutGroupsOnly = Nothing
+    , _allProfileId = pAllProfileId_
+    , _allSortOrder = Nothing
+    , _allAdvertiserGroupIds = Nothing
+    , _allKey = Nothing
+    , _allPageToken = Nothing
+    , _allSortField = Nothing
+    , _allSubaccountId = Nothing
+    , _allOauthToken = Nothing
+    , _allFloodlightConfigurationIds = Nothing
+    , _allMaxResults = Nothing
+    , _allFields = Nothing
+    , _allAlt = JSON
     }
 
 -- | Select only advertisers with the specified status.
-advStatus :: Lens' AdvertisersList' (Maybe Text)
-advStatus
-  = lens _advStatus (\ s a -> s{_advStatus = a})
+allStatus :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListStatus)
+allStatus
+  = lens _allStatus (\ s a -> s{_allStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-advQuotaUser :: Lens' AdvertisersList' (Maybe Text)
-advQuotaUser
-  = lens _advQuotaUser (\ s a -> s{_advQuotaUser = a})
+allQuotaUser :: Lens' AdvertisersList' (Maybe Text)
+allQuotaUser
+  = lens _allQuotaUser (\ s a -> s{_allQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-advPrettyPrint :: Lens' AdvertisersList' Bool
-advPrettyPrint
-  = lens _advPrettyPrint
-      (\ s a -> s{_advPrettyPrint = a})
+allPrettyPrint :: Lens' AdvertisersList' Bool
+allPrettyPrint
+  = lens _allPrettyPrint
+      (\ s a -> s{_allPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-advUserIp :: Lens' AdvertisersList' (Maybe Text)
-advUserIp
-  = lens _advUserIp (\ s a -> s{_advUserIp = a})
+allUserIp :: Lens' AdvertisersList' (Maybe Text)
+allUserIp
+  = lens _allUserIp (\ s a -> s{_allUserIp = a})
 
 -- | Select only advertisers which use another advertiser\'s floodlight
 -- configuration.
-advOnlyParent :: Lens' AdvertisersList' (Maybe Bool)
-advOnlyParent
-  = lens _advOnlyParent
-      (\ s a -> s{_advOnlyParent = a})
+allOnlyParent :: Lens' AdvertisersList' (Maybe Bool)
+allOnlyParent
+  = lens _allOnlyParent
+      (\ s a -> s{_allOnlyParent = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"advertiser*2015\" will return objects with names like
@@ -209,110 +226,111 @@ advOnlyParent
 -- at the start and the end of the search string. For example, a search
 -- string of \"advertiser\" will match objects with name \"my advertiser\",
 -- \"advertiser 2015\", or simply \"advertiser\".
-advSearchString :: Lens' AdvertisersList' (Maybe Text)
-advSearchString
-  = lens _advSearchString
-      (\ s a -> s{_advSearchString = a})
+allSearchString :: Lens' AdvertisersList' (Maybe Text)
+allSearchString
+  = lens _allSearchString
+      (\ s a -> s{_allSearchString = a})
 
 -- | Select only advertisers with these IDs.
-advIds :: Lens' AdvertisersList' (Maybe Int64)
-advIds = lens _advIds (\ s a -> s{_advIds = a})
+allIds :: Lens' AdvertisersList' (Maybe Int64)
+allIds = lens _allIds (\ s a -> s{_allIds = a})
 
 -- | Select only advertisers which do not belong to any advertiser group.
-advIncludeAdvertisersWithoutGroupsOnly :: Lens' AdvertisersList' (Maybe Bool)
-advIncludeAdvertisersWithoutGroupsOnly
-  = lens _advIncludeAdvertisersWithoutGroupsOnly
+allIncludeAdvertisersWithoutGroupsOnly :: Lens' AdvertisersList' (Maybe Bool)
+allIncludeAdvertisersWithoutGroupsOnly
+  = lens _allIncludeAdvertisersWithoutGroupsOnly
       (\ s a ->
-         s{_advIncludeAdvertisersWithoutGroupsOnly = a})
+         s{_allIncludeAdvertisersWithoutGroupsOnly = a})
 
 -- | User profile ID associated with this request.
-advProfileId :: Lens' AdvertisersList' Int64
-advProfileId
-  = lens _advProfileId (\ s a -> s{_advProfileId = a})
+allProfileId :: Lens' AdvertisersList' Int64
+allProfileId
+  = lens _allProfileId (\ s a -> s{_allProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-advSortOrder :: Lens' AdvertisersList' (Maybe Text)
-advSortOrder
-  = lens _advSortOrder (\ s a -> s{_advSortOrder = a})
+allSortOrder :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListSortOrder)
+allSortOrder
+  = lens _allSortOrder (\ s a -> s{_allSortOrder = a})
 
 -- | Select only advertisers with these advertiser group IDs.
-advAdvertiserGroupIds :: Lens' AdvertisersList' (Maybe Int64)
-advAdvertiserGroupIds
-  = lens _advAdvertiserGroupIds
-      (\ s a -> s{_advAdvertiserGroupIds = a})
+allAdvertiserGroupIds :: Lens' AdvertisersList' (Maybe Int64)
+allAdvertiserGroupIds
+  = lens _allAdvertiserGroupIds
+      (\ s a -> s{_allAdvertiserGroupIds = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-advKey :: Lens' AdvertisersList' (Maybe Text)
-advKey = lens _advKey (\ s a -> s{_advKey = a})
+allKey :: Lens' AdvertisersList' (Maybe Text)
+allKey = lens _allKey (\ s a -> s{_allKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
-advPageToken :: Lens' AdvertisersList' (Maybe Text)
-advPageToken
-  = lens _advPageToken (\ s a -> s{_advPageToken = a})
+allPageToken :: Lens' AdvertisersList' (Maybe Text)
+allPageToken
+  = lens _allPageToken (\ s a -> s{_allPageToken = a})
 
 -- | Field by which to sort the list.
-advSortField :: Lens' AdvertisersList' (Maybe Text)
-advSortField
-  = lens _advSortField (\ s a -> s{_advSortField = a})
+allSortField :: Lens' AdvertisersList' (Maybe DfareportingAdvertisersListSortField)
+allSortField
+  = lens _allSortField (\ s a -> s{_allSortField = a})
 
 -- | Select only advertisers with these subaccount IDs.
-advSubaccountId :: Lens' AdvertisersList' (Maybe Int64)
-advSubaccountId
-  = lens _advSubaccountId
-      (\ s a -> s{_advSubaccountId = a})
+allSubaccountId :: Lens' AdvertisersList' (Maybe Int64)
+allSubaccountId
+  = lens _allSubaccountId
+      (\ s a -> s{_allSubaccountId = a})
 
 -- | OAuth 2.0 token for the current user.
-advOauthToken :: Lens' AdvertisersList' (Maybe Text)
-advOauthToken
-  = lens _advOauthToken
-      (\ s a -> s{_advOauthToken = a})
+allOauthToken :: Lens' AdvertisersList' (Maybe Text)
+allOauthToken
+  = lens _allOauthToken
+      (\ s a -> s{_allOauthToken = a})
 
 -- | Select only advertisers with these floodlight configuration IDs.
-advFloodlightConfigurationIds :: Lens' AdvertisersList' (Maybe Int64)
-advFloodlightConfigurationIds
-  = lens _advFloodlightConfigurationIds
-      (\ s a -> s{_advFloodlightConfigurationIds = a})
+allFloodlightConfigurationIds :: Lens' AdvertisersList' (Maybe Int64)
+allFloodlightConfigurationIds
+  = lens _allFloodlightConfigurationIds
+      (\ s a -> s{_allFloodlightConfigurationIds = a})
 
 -- | Maximum number of results to return.
-advMaxResults :: Lens' AdvertisersList' (Maybe Int32)
-advMaxResults
-  = lens _advMaxResults
-      (\ s a -> s{_advMaxResults = a})
+allMaxResults :: Lens' AdvertisersList' (Maybe Int32)
+allMaxResults
+  = lens _allMaxResults
+      (\ s a -> s{_allMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-advFields :: Lens' AdvertisersList' (Maybe Text)
-advFields
-  = lens _advFields (\ s a -> s{_advFields = a})
+allFields :: Lens' AdvertisersList' (Maybe Text)
+allFields
+  = lens _allFields (\ s a -> s{_allFields = a})
 
 -- | Data format for the response.
-advAlt :: Lens' AdvertisersList' Text
-advAlt = lens _advAlt (\ s a -> s{_advAlt = a})
+allAlt :: Lens' AdvertisersList' Alt
+allAlt = lens _allAlt (\ s a -> s{_allAlt = a})
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersList{..}
-          = go _advStatus _advQuotaUser _advPrettyPrint
-              _advUserIp
-              _advOnlyParent
-              _advSearchString
-              _advIds
-              _advIncludeAdvertisersWithoutGroupsOnly
-              _advProfileId
-              _advSortOrder
-              _advAdvertiserGroupIds
-              _advKey
-              _advPageToken
-              _advSortField
-              _advSubaccountId
-              _advOauthToken
-              _advFloodlightConfigurationIds
-              _advMaxResults
-              _advFields
-              _advAlt
+        requestWithRoute r u AdvertisersList'{..}
+          = go _allStatus _allQuotaUser (Just _allPrettyPrint)
+              _allUserIp
+              _allOnlyParent
+              _allSearchString
+              _allIds
+              _allIncludeAdvertisersWithoutGroupsOnly
+              _allProfileId
+              _allSortOrder
+              _allAdvertiserGroupIds
+              _allKey
+              _allPageToken
+              _allSortField
+              _allSubaccountId
+              _allOauthToken
+              _allFloodlightConfigurationIds
+              _allMaxResults
+              _allFields
+              (Just _allAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdvertisersListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AdvertisersListResource)
                       r
                       u

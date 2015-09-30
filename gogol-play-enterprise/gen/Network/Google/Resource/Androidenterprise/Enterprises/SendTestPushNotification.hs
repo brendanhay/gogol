@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesSendTestPushNotification@.
-module Androidenterprise.Enterprises.SendTestPushNotification
+module Network.Google.Resource.Androidenterprise.Enterprises.SendTestPushNotification
     (
     -- * REST Resource
-      EnterprisesSendTestPushNotificationAPI
+      EnterprisesSendTestPushNotificationResource
 
     -- * Creating a Request
-    , enterprisesSendTestPushNotification
-    , EnterprisesSendTestPushNotification
+    , enterprisesSendTestPushNotification'
+    , EnterprisesSendTestPushNotification'
 
     -- * Request Lenses
     , estpnQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesSendTestPushNotification@ which the
--- 'EnterprisesSendTestPushNotification' request conforms to.
-type EnterprisesSendTestPushNotificationAPI =
+-- 'EnterprisesSendTestPushNotification'' request conforms to.
+type EnterprisesSendTestPushNotificationResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "sendTestPushNotification" :>
-           Post '[JSON]
-             EnterprisesSendTestPushNotificationResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON]
+                           EnterprisesSendTestPushNotificationResponse
 
 -- | Sends a test push notification to validate the MDM integration with the
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
--- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
-data EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
+-- /See:/ 'enterprisesSendTestPushNotification'' smart constructor.
+data EnterprisesSendTestPushNotification' = EnterprisesSendTestPushNotification'
     { _estpnQuotaUser    :: !(Maybe Text)
     , _estpnPrettyPrint  :: !Bool
     , _estpnEnterpriseId :: !Text
@@ -64,7 +72,7 @@ data EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
     , _estpnKey          :: !(Maybe Text)
     , _estpnOauthToken   :: !(Maybe Text)
     , _estpnFields       :: !(Maybe Text)
-    , _estpnAlt          :: !Text
+    , _estpnAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesSendTestPushNotification'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
 -- * 'estpnFields'
 --
 -- * 'estpnAlt'
-enterprisesSendTestPushNotification
+enterprisesSendTestPushNotification'
     :: Text -- ^ 'enterpriseId'
-    -> EnterprisesSendTestPushNotification
-enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
-    EnterprisesSendTestPushNotification
+    -> EnterprisesSendTestPushNotification'
+enterprisesSendTestPushNotification' pEstpnEnterpriseId_ =
+    EnterprisesSendTestPushNotification'
     { _estpnQuotaUser = Nothing
     , _estpnPrettyPrint = True
     , _estpnEnterpriseId = pEstpnEnterpriseId_
@@ -98,7 +106,7 @@ enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
     , _estpnKey = Nothing
     , _estpnOauthToken = Nothing
     , _estpnFields = Nothing
-    , _estpnAlt = "json"
+    , _estpnAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ estpnFields
   = lens _estpnFields (\ s a -> s{_estpnFields = a})
 
 -- | Data format for the response.
-estpnAlt :: Lens' EnterprisesSendTestPushNotification' Text
+estpnAlt :: Lens' EnterprisesSendTestPushNotification' Alt
 estpnAlt = lens _estpnAlt (\ s a -> s{_estpnAlt = a})
 
 instance GoogleRequest
@@ -154,17 +162,17 @@ instance GoogleRequest
              EnterprisesSendTestPushNotificationResponse
         request = requestWithRoute defReq playEnterpriseURL
         requestWithRoute r u
-          EnterprisesSendTestPushNotification{..}
-          = go _estpnQuotaUser _estpnPrettyPrint
+          EnterprisesSendTestPushNotification'{..}
+          = go _estpnQuotaUser (Just _estpnPrettyPrint)
               _estpnEnterpriseId
               _estpnUserIp
               _estpnKey
               _estpnOauthToken
               _estpnFields
-              _estpnAlt
+              (Just _estpnAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy EnterprisesSendTestPushNotificationAPI)
+                         Proxy EnterprisesSendTestPushNotificationResource)
                       r
                       u

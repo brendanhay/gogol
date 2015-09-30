@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- name prefix.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsList@.
-module Reseller.Subscriptions.List
+module Network.Google.Resource.Reseller.Subscriptions.List
     (
     -- * REST Resource
-      SubscriptionsListAPI
+      SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList
-    , SubscriptionsList
+    , subscriptionsList'
+    , SubscriptionsList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -48,21 +49,27 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsList@ which the
--- 'SubscriptionsList' request conforms to.
-type SubscriptionsListAPI =
+-- 'SubscriptionsList'' request conforms to.
+type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "customerNamePrefix" Text :>
-         QueryParam "customerId" Text :>
-           QueryParam "customerAuthToken" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] Subscriptions
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "customerNamePrefix" Text :>
+               QueryParam "customerId" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "customerAuthToken" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Subscriptions
 
 -- | Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.
 --
--- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
+-- /See:/ 'subscriptionsList'' smart constructor.
+data SubscriptionsList' = SubscriptionsList'
     { _slQuotaUser          :: !(Maybe Text)
     , _slPrettyPrint        :: !Bool
     , _slUserIp             :: !(Maybe Text)
@@ -74,7 +81,7 @@ data SubscriptionsList = SubscriptionsList
     , _slOauthToken         :: !(Maybe Text)
     , _slMaxResults         :: !(Maybe Word32)
     , _slFields             :: !(Maybe Text)
-    , _slAlt                :: !Text
+    , _slAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
@@ -104,10 +111,10 @@ data SubscriptionsList = SubscriptionsList
 -- * 'slFields'
 --
 -- * 'slAlt'
-subscriptionsList
-    :: SubscriptionsList
-subscriptionsList =
-    SubscriptionsList
+subscriptionsList'
+    :: SubscriptionsList'
+subscriptionsList' =
+    SubscriptionsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
@@ -119,7 +126,7 @@ subscriptionsList =
     , _slOauthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,14 +193,14 @@ slFields :: Lens' SubscriptionsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SubscriptionsList' Text
+slAlt :: Lens' SubscriptionsList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = Subscriptions
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp
+        requestWithRoute r u SubscriptionsList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
               _slCustomerNamePrefix
               _slCustomerId
               _slKey
@@ -202,9 +209,9 @@ instance GoogleRequest SubscriptionsList' where
               _slOauthToken
               _slMaxResults
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsListAPI)
+                      (Proxy :: Proxy SubscriptionsListResource)
                       r
                       u

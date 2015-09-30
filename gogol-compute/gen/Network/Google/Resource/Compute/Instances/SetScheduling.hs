@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Sets an instance\'s scheduling options.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetScheduling@.
-module Compute.Instances.SetScheduling
+module Network.Google.Resource.Compute.Instances.SetScheduling
     (
     -- * REST Resource
-      InstancesSetSchedulingAPI
+      InstancesSetSchedulingResource
 
     -- * Creating a Request
-    , instancesSetScheduling
-    , InstancesSetScheduling
+    , instancesSetScheduling'
+    , InstancesSetScheduling'
 
     -- * Request Lenses
     , issQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesSetScheduling@ which the
--- 'InstancesSetScheduling' request conforms to.
-type InstancesSetSchedulingAPI =
+-- 'InstancesSetScheduling'' request conforms to.
+type InstancesSetSchedulingResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "setScheduling" :> Post '[JSON] Operation
+               "setScheduling" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets an instance\'s scheduling options.
 --
--- /See:/ 'instancesSetScheduling' smart constructor.
-data InstancesSetScheduling = InstancesSetScheduling
+-- /See:/ 'instancesSetScheduling'' smart constructor.
+data InstancesSetScheduling' = InstancesSetScheduling'
     { _issQuotaUser   :: !(Maybe Text)
     , _issPrettyPrint :: !Bool
     , _issProject     :: !Text
@@ -66,7 +74,7 @@ data InstancesSetScheduling = InstancesSetScheduling
     , _issKey         :: !(Maybe Text)
     , _issOauthToken  :: !(Maybe Text)
     , _issFields      :: !(Maybe Text)
-    , _issAlt         :: !Text
+    , _issAlt         :: !Alt
     , _issInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data InstancesSetScheduling = InstancesSetScheduling
 -- * 'issAlt'
 --
 -- * 'issInstance'
-instancesSetScheduling
+instancesSetScheduling'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesSetScheduling
-instancesSetScheduling pIssProject_ pIssZone_ pIssInstance_ =
-    InstancesSetScheduling
+    -> InstancesSetScheduling'
+instancesSetScheduling' pIssProject_ pIssZone_ pIssInstance_ =
+    InstancesSetScheduling'
     { _issQuotaUser = Nothing
     , _issPrettyPrint = True
     , _issProject = pIssProject_
@@ -108,7 +116,7 @@ instancesSetScheduling pIssProject_ pIssZone_ pIssInstance_ =
     , _issKey = Nothing
     , _issOauthToken = Nothing
     , _issFields = Nothing
-    , _issAlt = "json"
+    , _issAlt = JSON
     , _issInstance = pIssInstance_
     }
 
@@ -158,7 +166,7 @@ issFields
   = lens _issFields (\ s a -> s{_issFields = a})
 
 -- | Data format for the response.
-issAlt :: Lens' InstancesSetScheduling' Text
+issAlt :: Lens' InstancesSetScheduling' Alt
 issAlt = lens _issAlt (\ s a -> s{_issAlt = a})
 
 -- | Instance name.
@@ -169,17 +177,17 @@ issInstance
 instance GoogleRequest InstancesSetScheduling' where
         type Rs InstancesSetScheduling' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetScheduling{..}
-          = go _issQuotaUser _issPrettyPrint _issProject
+        requestWithRoute r u InstancesSetScheduling'{..}
+          = go _issQuotaUser (Just _issPrettyPrint) _issProject
               _issUserIp
               _issZone
               _issKey
               _issOauthToken
               _issFields
-              _issAlt
+              (Just _issAlt)
               _issInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesSetSchedulingAPI)
+                      (Proxy :: Proxy InstancesSetSchedulingResource)
                       r
                       u

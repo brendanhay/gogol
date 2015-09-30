@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves an instance operation that has been performed on an instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlOperationsGet@.
-module Sql.Operations.Get
+module Network.Google.Resource.Sql.Operations.Get
     (
     -- * REST Resource
-      OperationsGetAPI
+      OperationsGetResource
 
     -- * Creating a Request
-    , operationsGet
-    , OperationsGet
+    , operationsGet'
+    , OperationsGet'
 
     -- * Request Lenses
     , ogQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlOperationsGet@ which the
--- 'OperationsGet' request conforms to.
-type OperationsGetAPI =
+-- 'OperationsGet'' request conforms to.
+type OperationsGetResource =
      "projects" :>
        Capture "project" Text :>
          "operations" :>
-           Capture "operation" Text :> Get '[JSON] Operation
+           Capture "operation" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Retrieves an instance operation that has been performed on an instance.
 --
--- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet
+-- /See:/ 'operationsGet'' smart constructor.
+data OperationsGet' = OperationsGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
     , _ogProject     :: !Text
@@ -63,7 +71,7 @@ data OperationsGet = OperationsGet
     , _ogKey         :: !(Maybe Text)
     , _ogOauthToken  :: !(Maybe Text)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Text
+    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data OperationsGet = OperationsGet
 -- * 'ogFields'
 --
 -- * 'ogAlt'
-operationsGet
+operationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
-    -> OperationsGet
-operationsGet pOgProject_ pOgOperation_ =
-    OperationsGet
+    -> OperationsGet'
+operationsGet' pOgProject_ pOgOperation_ =
+    OperationsGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
     , _ogProject = pOgProject_
@@ -101,7 +109,7 @@ operationsGet pOgProject_ pOgOperation_ =
     , _ogKey = Nothing
     , _ogOauthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = "json"
+    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ ogFields :: Lens' OperationsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' OperationsGet' Text
+ogAlt :: Lens' OperationsGet' Alt
 ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 
 instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u OperationsGet{..}
-          = go _ogQuotaUser _ogPrettyPrint _ogProject
+        requestWithRoute r u OperationsGet'{..}
+          = go _ogQuotaUser (Just _ogPrettyPrint) _ogProject
               _ogOperation
               _ogUserIp
               _ogKey
               _ogOauthToken
               _ogFields
-              _ogAlt
+              (Just _ogAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OperationsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy OperationsGetResource)
+                      r
                       u

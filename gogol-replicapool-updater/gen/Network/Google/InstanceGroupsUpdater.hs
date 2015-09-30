@@ -28,36 +28,48 @@ module Network.Google.InstanceGroupsUpdater
     -- * REST Resources
 
     -- ** ReplicapoolupdaterRollingUpdatesCancel
-    , module Replicapoolupdater.RollingUpdates.Cancel
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Cancel
 
     -- ** ReplicapoolupdaterRollingUpdatesGet
-    , module Replicapoolupdater.RollingUpdates.Get
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Get
 
     -- ** ReplicapoolupdaterRollingUpdatesInsert
-    , module Replicapoolupdater.RollingUpdates.Insert
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Insert
 
     -- ** ReplicapoolupdaterRollingUpdatesList
-    , module Replicapoolupdater.RollingUpdates.List
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.List
 
     -- ** ReplicapoolupdaterRollingUpdatesListInstanceUpdates
-    , module Replicapoolupdater.RollingUpdates.ListInstanceUpdates
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.ListInstanceUpdates
 
     -- ** ReplicapoolupdaterRollingUpdatesPause
-    , module Replicapoolupdater.RollingUpdates.Pause
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Pause
 
     -- ** ReplicapoolupdaterRollingUpdatesResume
-    , module Replicapoolupdater.RollingUpdates.Resume
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Resume
 
     -- ** ReplicapoolupdaterRollingUpdatesRollback
-    , module Replicapoolupdater.RollingUpdates.Rollback
+    , module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Rollback
 
     -- ** ReplicapoolupdaterZoneOperationsGet
-    , module Replicapoolupdater.ZoneOperations.Get
+    , module Network.Google.Resource.Replicapoolupdater.ZoneOperations.Get
 
     -- ** ReplicapoolupdaterZoneOperationsList
-    , module Replicapoolupdater.ZoneOperations.List
+    , module Network.Google.Resource.Replicapoolupdater.ZoneOperations.List
 
     -- * Types
+
+    -- ** RollingUpdateError
+    , RollingUpdateError
+    , rollingUpdateError
+    , rueErrors
+
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
 
     -- ** RollingUpdate
     , RollingUpdate
@@ -78,6 +90,12 @@ module Network.Google.InstanceGroupsUpdater
     , ruOldInstanceTemplate
     , ruDescription
     , ruInstanceGroup
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- ** OperationList
     , OperationList
@@ -122,12 +140,45 @@ module Network.Google.InstanceGroupsUpdater
     , oTargetLink
     , oClientOperationId
 
+    -- ** InstanceUpdateError
+    , InstanceUpdateError
+    , instanceUpdateError
+    , iueErrors
+
     -- ** InstanceUpdate
     , InstanceUpdate
     , instanceUpdate
     , iuStatus
     , iuError
     , iuInstance
+
+    -- ** RollingUpdatePolicy
+    , RollingUpdatePolicy
+    , rollingUpdatePolicy
+    , rupMinInstanceUpdateTimeSec
+    , rupInstanceStartupTimeoutSec
+    , rupMaxNumFailedInstances
+    , rupAutoPauseAfterInstances
+    , rupMaxNumConcurrentInstances
+
+    -- ** RollingUpdateErrorErrors
+    , RollingUpdateErrorErrors
+    , rollingUpdateErrorErrors
+    , rueeLocation
+    , rueeCode
+    , rueeMessage
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- ** InstanceUpdateErrorErrors
+    , InstanceUpdateErrorErrors
+    , instanceUpdateErrorErrors
+    , iueeLocation
+    , iueeCode
+    , iueeMessage
 
     -- ** RollingUpdateList
     , RollingUpdateList
@@ -136,6 +187,16 @@ module Network.Google.InstanceGroupsUpdater
     , rulKind
     , rulItems
     , rulSelfLink
+
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.InstanceGroupsUpdater.Types
@@ -156,7 +217,16 @@ TODO
 -}
 
 type InstanceGroupsUpdaterAPI =
-     RollingUpdates :<|> ZoneOperations
+     RollingUpdatesInsertResource :<|>
+       RollingUpdatesListResource
+       :<|> RollingUpdatesGetResource
+       :<|> RollingUpdatesRollbackResource
+       :<|> RollingUpdatesPauseResource
+       :<|> RollingUpdatesCancelResource
+       :<|> RollingUpdatesListInstanceUpdatesResource
+       :<|> RollingUpdatesResumeResource
+       :<|> ZoneOperationsListResource
+       :<|> ZoneOperationsGetResource
 
 instanceGroupsUpdaterAPI :: Proxy InstanceGroupsUpdaterAPI
 instanceGroupsUpdaterAPI = Proxy

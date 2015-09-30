@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- each user.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeActivitiesList@.
-module YouTube.Activities.List
+module Network.Google.Resource.YouTube.Activities.List
     (
     -- * REST Resource
-      ActivitiesListAPI
+      ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList
-    , ActivitiesList
+    , activitiesList'
+    , ActivitiesList'
 
     -- * Request Lenses
     , alPublishedAfter
@@ -55,19 +56,26 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeActivitiesList@ which the
--- 'ActivitiesList' request conforms to.
-type ActivitiesListAPI =
+-- 'ActivitiesList'' request conforms to.
+type ActivitiesListResource =
      "activities" :>
        QueryParam "publishedAfter" UTCTime :>
-         QueryParam "part" Text :>
-           QueryParam "home" Bool :>
-             QueryParam "mine" Bool :>
-               QueryParam "regionCode" Text :>
-                 QueryParam "channelId" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       QueryParam "publishedBefore" UTCTime :>
-                         Get '[JSON] ActivityListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "home" Bool :>
+                 QueryParam "mine" Bool :>
+                   QueryParam "regionCode" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "channelId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "publishedBefore" UTCTime :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] ActivityListResponse
 
 -- | Returns a list of channel activity events that match the request
 -- criteria. For example, you can retrieve events associated with a
@@ -75,8 +83,8 @@ type ActivitiesListAPI =
 -- Google+ friends, or the YouTube home page feed, which is customized for
 -- each user.
 --
--- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+-- /See:/ 'activitiesList'' smart constructor.
+data ActivitiesList' = ActivitiesList'
     { _alPublishedAfter  :: !(Maybe UTCTime)
     , _alQuotaUser       :: !(Maybe Text)
     , _alPart            :: !Text
@@ -92,7 +100,7 @@ data ActivitiesList = ActivitiesList
     , _alMaxResults      :: !Word32
     , _alPublishedBefore :: !(Maybe UTCTime)
     , _alFields          :: !(Maybe Text)
-    , _alAlt             :: !Text
+    , _alAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -130,11 +138,11 @@ data ActivitiesList = ActivitiesList
 -- * 'alFields'
 --
 -- * 'alAlt'
-activitiesList
+activitiesList'
     :: Text -- ^ 'part'
-    -> ActivitiesList
-activitiesList pAlPart_ =
-    ActivitiesList
+    -> ActivitiesList'
+activitiesList' pAlPart_ =
+    ActivitiesList'
     { _alPublishedAfter = Nothing
     , _alQuotaUser = Nothing
     , _alPart = pAlPart_
@@ -150,7 +158,7 @@ activitiesList pAlPart_ =
     , _alMaxResults = 5
     , _alPublishedBefore = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | The publishedAfter parameter specifies the earliest date and time that
@@ -258,15 +266,15 @@ alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Text
+alAlt :: Lens' ActivitiesList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ActivitiesList{..}
+        requestWithRoute r u ActivitiesList'{..}
           = go _alPublishedAfter _alQuotaUser (Just _alPart)
-              _alPrettyPrint
+              (Just _alPrettyPrint)
               _alHome
               _alMine
               _alRegionCode
@@ -278,8 +286,9 @@ instance GoogleRequest ActivitiesList' where
               (Just _alMaxResults)
               _alPublishedBefore
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesListResource)
                       r
                       u

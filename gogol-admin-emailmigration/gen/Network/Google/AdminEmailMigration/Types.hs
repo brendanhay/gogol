@@ -29,6 +29,9 @@ module Network.Google.AdminEmailMigration.Types
     , miIsInbox
     , miIsTrash
     , miIsSent
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdminEmailMigration.Types.Product
@@ -36,7 +39,7 @@ import           Network.Google.AdminEmailMigration.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'email_migration_v2' of the Email Migration API v2.
-adminEmailMigrationURL :: BaseURL
+adminEmailMigrationURL :: BaseUrl
 adminEmailMigrationURL
   = BaseUrl Https
       "https://www.googleapis.com/email/v2/users/"

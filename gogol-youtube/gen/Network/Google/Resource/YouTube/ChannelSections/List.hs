@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns channelSection resources that match the API request criteria.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsList@.
-module YouTube.ChannelSections.List
+module Network.Google.Resource.YouTube.ChannelSections.List
     (
     -- * REST Resource
-      ChannelSectionsListAPI
+      ChannelSectionsListResource
 
     -- * Creating a Request
-    , channelSectionsList
-    , ChannelSectionsList
+    , channelSectionsList'
+    , ChannelSectionsList'
 
     -- * Request Lenses
     , cslQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelSectionsList@ which the
--- 'ChannelSectionsList' request conforms to.
-type ChannelSectionsListAPI =
+-- 'ChannelSectionsList'' request conforms to.
+type ChannelSectionsListResource =
      "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "id" Text :>
-                   Get '[JSON] ChannelSectionListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "channelId" Text :>
+                   QueryParam "hl" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "id" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] ChannelSectionListResponse
 
 -- | Returns channelSection resources that match the API request criteria.
 --
--- /See:/ 'channelSectionsList' smart constructor.
-data ChannelSectionsList = ChannelSectionsList
+-- /See:/ 'channelSectionsList'' smart constructor.
+data ChannelSectionsList' = ChannelSectionsList'
     { _cslQuotaUser              :: !(Maybe Text)
     , _cslPart                   :: !Text
     , _cslPrettyPrint            :: !Bool
@@ -75,7 +83,7 @@ data ChannelSectionsList = ChannelSectionsList
     , _cslId                     :: !(Maybe Text)
     , _cslOauthToken             :: !(Maybe Text)
     , _cslFields                 :: !(Maybe Text)
-    , _cslAlt                    :: !Text
+    , _cslAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsList'' with the minimum fields required to make a request.
@@ -107,11 +115,11 @@ data ChannelSectionsList = ChannelSectionsList
 -- * 'cslFields'
 --
 -- * 'cslAlt'
-channelSectionsList
+channelSectionsList'
     :: Text -- ^ 'part'
-    -> ChannelSectionsList
-channelSectionsList pCslPart_ =
-    ChannelSectionsList
+    -> ChannelSectionsList'
+channelSectionsList' pCslPart_ =
+    ChannelSectionsList'
     { _cslQuotaUser = Nothing
     , _cslPart = pCslPart_
     , _cslPrettyPrint = True
@@ -124,7 +132,7 @@ channelSectionsList pCslPart_ =
     , _cslId = Nothing
     , _cslOauthToken = Nothing
     , _cslFields = Nothing
-    , _cslAlt = "json"
+    , _cslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -220,15 +228,16 @@ cslFields
   = lens _cslFields (\ s a -> s{_cslFields = a})
 
 -- | Data format for the response.
-cslAlt :: Lens' ChannelSectionsList' Text
+cslAlt :: Lens' ChannelSectionsList' Alt
 cslAlt = lens _cslAlt (\ s a -> s{_cslAlt = a})
 
 instance GoogleRequest ChannelSectionsList' where
         type Rs ChannelSectionsList' =
              ChannelSectionListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsList{..}
-          = go _cslQuotaUser (Just _cslPart) _cslPrettyPrint
+        requestWithRoute r u ChannelSectionsList'{..}
+          = go _cslQuotaUser (Just _cslPart)
+              (Just _cslPrettyPrint)
               _cslMine
               _cslUserIp
               _cslChannelId
@@ -238,9 +247,9 @@ instance GoogleRequest ChannelSectionsList' where
               _cslId
               _cslOauthToken
               _cslFields
-              _cslAlt
+              (Just _cslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChannelSectionsListAPI)
+                      (Proxy :: Proxy ChannelSectionsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Verifies the assertion returned by the IdP.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyVerifyAssertion@.
-module IdentityToolkit.Relyingparty.VerifyAssertion
+module Network.Google.Resource.IdentityToolkit.Relyingparty.VerifyAssertion
     (
     -- * REST Resource
-      RelyingpartyVerifyAssertionAPI
+      RelyingpartyVerifyAssertionResource
 
     -- * Creating a Request
-    , relyingpartyVerifyAssertion
-    , RelyingpartyVerifyAssertion
+    , relyingpartyVerifyAssertion'
+    , RelyingpartyVerifyAssertion'
 
     -- * Request Lenses
     , rvaQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyVerifyAssertion@ which the
--- 'RelyingpartyVerifyAssertion' request conforms to.
-type RelyingpartyVerifyAssertionAPI =
+-- 'RelyingpartyVerifyAssertion'' request conforms to.
+type RelyingpartyVerifyAssertionResource =
      "verifyAssertion" :>
-       Post '[JSON] VerifyAssertionResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] VerifyAssertionResponse
 
 -- | Verifies the assertion returned by the IdP.
 --
--- /See:/ 'relyingpartyVerifyAssertion' smart constructor.
-data RelyingpartyVerifyAssertion = RelyingpartyVerifyAssertion
+-- /See:/ 'relyingpartyVerifyAssertion'' smart constructor.
+data RelyingpartyVerifyAssertion' = RelyingpartyVerifyAssertion'
     { _rvaQuotaUser   :: !(Maybe Text)
     , _rvaPrettyPrint :: !Bool
     , _rvaUserIp      :: !(Maybe Text)
     , _rvaKey         :: !(Maybe Text)
     , _rvaOauthToken  :: !(Maybe Text)
     , _rvaFields      :: !(Maybe Text)
-    , _rvaAlt         :: !Text
+    , _rvaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyVerifyAssertion'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data RelyingpartyVerifyAssertion = RelyingpartyVerifyAssertion
 -- * 'rvaFields'
 --
 -- * 'rvaAlt'
-relyingpartyVerifyAssertion
-    :: RelyingpartyVerifyAssertion
-relyingpartyVerifyAssertion =
-    RelyingpartyVerifyAssertion
+relyingpartyVerifyAssertion'
+    :: RelyingpartyVerifyAssertion'
+relyingpartyVerifyAssertion' =
+    RelyingpartyVerifyAssertion'
     { _rvaQuotaUser = Nothing
     , _rvaPrettyPrint = True
     , _rvaUserIp = Nothing
     , _rvaKey = Nothing
     , _rvaOauthToken = Nothing
     , _rvaFields = Nothing
-    , _rvaAlt = "json"
+    , _rvaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,7 +135,7 @@ rvaFields
   = lens _rvaFields (\ s a -> s{_rvaFields = a})
 
 -- | Data format for the response.
-rvaAlt :: Lens' RelyingpartyVerifyAssertion' Text
+rvaAlt :: Lens' RelyingpartyVerifyAssertion' Alt
 rvaAlt = lens _rvaAlt (\ s a -> s{_rvaAlt = a})
 
 instance GoogleRequest RelyingpartyVerifyAssertion'
@@ -135,13 +143,14 @@ instance GoogleRequest RelyingpartyVerifyAssertion'
         type Rs RelyingpartyVerifyAssertion' =
              VerifyAssertionResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyVerifyAssertion{..}
-          = go _rvaQuotaUser _rvaPrettyPrint _rvaUserIp _rvaKey
+        requestWithRoute r u RelyingpartyVerifyAssertion'{..}
+          = go _rvaQuotaUser (Just _rvaPrettyPrint) _rvaUserIp
+              _rvaKey
               _rvaOauthToken
               _rvaFields
-              _rvaAlt
+              (Just _rvaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyVerifyAssertionAPI)
+                      (Proxy :: Proxy RelyingpartyVerifyAssertionResource)
                       r
                       u

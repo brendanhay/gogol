@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- category and platform.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLcrawlerrorscountsQuery@.
-module Webmasters.URLcrawlerrorscounts.Query
+module Network.Google.Resource.Webmasters.URLcrawlerrorscounts.Query
     (
     -- * REST Resource
-      UrlcrawlerrorscountsQueryAPI
+      UrlcrawlerrorscountsQueryResource
 
     -- * Creating a Request
-    , uRLcrawlerrorscountsQuery
-    , URLcrawlerrorscountsQuery
+    , uRLcrawlerrorscountsQuery'
+    , URLcrawlerrorscountsQuery'
 
     -- * Request Lenses
     , uqQuotaUser
@@ -47,33 +48,44 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersURLcrawlerrorscountsQuery@ which the
--- 'URLcrawlerrorscountsQuery' request conforms to.
-type UrlcrawlerrorscountsQueryAPI =
+-- 'URLcrawlerrorscountsQuery'' request conforms to.
+type UrlcrawlerrorscountsQueryResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "urlCrawlErrorsCounts" :>
            "query" :>
-             QueryParam "platform" Text :>
-               QueryParam "category" Text :>
-                 QueryParam "latestCountsOnly" Bool :>
-                   Get '[JSON] URLCrawlErrorsCountsQueryResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "platform"
+                   WebmastersURLcrawlerrorscountsQueryPlatform
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "category"
+                       WebmastersURLcrawlerrorscountsQueryCategory
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "latestCountsOnly" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] URLCrawlErrorsCountsQueryResponse
 
 -- | Retrieves a time series of the number of URL crawl errors per error
 -- category and platform.
 --
--- /See:/ 'uRLcrawlerrorscountsQuery' smart constructor.
-data URLcrawlerrorscountsQuery = URLcrawlerrorscountsQuery
+-- /See:/ 'uRLcrawlerrorscountsQuery'' smart constructor.
+data URLcrawlerrorscountsQuery' = URLcrawlerrorscountsQuery'
     { _uqQuotaUser        :: !(Maybe Text)
     , _uqPrettyPrint      :: !Bool
-    , _uqPlatform         :: !(Maybe Text)
+    , _uqPlatform         :: !(Maybe WebmastersURLcrawlerrorscountsQueryPlatform)
     , _uqUserIp           :: !(Maybe Text)
-    , _uqCategory         :: !(Maybe Text)
+    , _uqCategory         :: !(Maybe WebmastersURLcrawlerrorscountsQueryCategory)
     , _uqSiteUrl          :: !Text
     , _uqKey              :: !(Maybe Text)
     , _uqLatestCountsOnly :: !Bool
     , _uqOauthToken       :: !(Maybe Text)
     , _uqFields           :: !(Maybe Text)
-    , _uqAlt              :: !Text
+    , _uqAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorscountsQuery'' with the minimum fields required to make a request.
@@ -101,11 +113,11 @@ data URLcrawlerrorscountsQuery = URLcrawlerrorscountsQuery
 -- * 'uqFields'
 --
 -- * 'uqAlt'
-uRLcrawlerrorscountsQuery
+uRLcrawlerrorscountsQuery'
     :: Text -- ^ 'siteUrl'
-    -> URLcrawlerrorscountsQuery
-uRLcrawlerrorscountsQuery pUqSiteUrl_ =
-    URLcrawlerrorscountsQuery
+    -> URLcrawlerrorscountsQuery'
+uRLcrawlerrorscountsQuery' pUqSiteUrl_ =
+    URLcrawlerrorscountsQuery'
     { _uqQuotaUser = Nothing
     , _uqPrettyPrint = True
     , _uqPlatform = Nothing
@@ -116,7 +128,7 @@ uRLcrawlerrorscountsQuery pUqSiteUrl_ =
     , _uqLatestCountsOnly = True
     , _uqOauthToken = Nothing
     , _uqFields = Nothing
-    , _uqAlt = "json"
+    , _uqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,7 +146,7 @@ uqPrettyPrint
 
 -- | The user agent type (platform) that made the request. For example: web.
 -- If not specified, returns results for all platforms.
-uqPlatform :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
+uqPlatform :: Lens' URLcrawlerrorscountsQuery' (Maybe WebmastersURLcrawlerrorscountsQueryPlatform)
 uqPlatform
   = lens _uqPlatform (\ s a -> s{_uqPlatform = a})
 
@@ -145,7 +157,7 @@ uqUserIp = lens _uqUserIp (\ s a -> s{_uqUserIp = a})
 
 -- | The crawl error category. For example: serverError. If not specified,
 -- returns results for all categories.
-uqCategory :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
+uqCategory :: Lens' URLcrawlerrorscountsQuery' (Maybe WebmastersURLcrawlerrorscountsQueryCategory)
 uqCategory
   = lens _uqCategory (\ s a -> s{_uqCategory = a})
 
@@ -177,7 +189,7 @@ uqFields :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
 uqFields = lens _uqFields (\ s a -> s{_uqFields = a})
 
 -- | Data format for the response.
-uqAlt :: Lens' URLcrawlerrorscountsQuery' Text
+uqAlt :: Lens' URLcrawlerrorscountsQuery' Alt
 uqAlt = lens _uqAlt (\ s a -> s{_uqAlt = a})
 
 instance GoogleRequest URLcrawlerrorscountsQuery'
@@ -185,8 +197,8 @@ instance GoogleRequest URLcrawlerrorscountsQuery'
         type Rs URLcrawlerrorscountsQuery' =
              URLCrawlErrorsCountsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u URLcrawlerrorscountsQuery{..}
-          = go _uqQuotaUser _uqPrettyPrint _uqPlatform
+        requestWithRoute r u URLcrawlerrorscountsQuery'{..}
+          = go _uqQuotaUser (Just _uqPrettyPrint) _uqPlatform
               _uqUserIp
               _uqCategory
               _uqSiteUrl
@@ -194,9 +206,9 @@ instance GoogleRequest URLcrawlerrorscountsQuery'
               (Just _uqLatestCountsOnly)
               _uqOauthToken
               _uqFields
-              _uqAlt
+              (Just _uqAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlcrawlerrorscountsQueryAPI)
+                      (Proxy :: Proxy UrlcrawlerrorscountsQueryResource)
                       r
                       u

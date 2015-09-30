@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new short URL.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLInsert@.
-module URLShortener.URL.Insert
+module Network.Google.Resource.URLShortener.URL.Insert
     (
     -- * REST Resource
-      UrlInsertAPI
+      UrlInsertResource
 
     -- * Creating a Request
-    , uRLInsert
-    , URLInsert
+    , uRLInsert'
+    , URLInsert'
 
     -- * Request Lenses
     , uiQuotaUser
@@ -42,20 +43,28 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLInsert@ which the
--- 'URLInsert' request conforms to.
-type UrlInsertAPI = "url" :> Post '[JSON] URL
+-- 'URLInsert'' request conforms to.
+type UrlInsertResource =
+     "url" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] URL
 
 -- | Creates a new short URL.
 --
--- /See:/ 'uRLInsert' smart constructor.
-data URLInsert = URLInsert
+-- /See:/ 'uRLInsert'' smart constructor.
+data URLInsert' = URLInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiUserIp      :: !(Maybe Text)
     , _uiKey         :: !(Maybe Text)
     , _uiOauthToken  :: !(Maybe Text)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Text
+    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLInsert'' with the minimum fields required to make a request.
@@ -75,17 +84,17 @@ data URLInsert = URLInsert
 -- * 'uiFields'
 --
 -- * 'uiAlt'
-uRLInsert
-    :: URLInsert
-uRLInsert =
-    URLInsert
+uRLInsert'
+    :: URLInsert'
+uRLInsert' =
+    URLInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiUserIp = Nothing
     , _uiKey = Nothing
     , _uiOauthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = "json"
+    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,16 +131,19 @@ uiFields :: Lens' URLInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 -- | Data format for the response.
-uiAlt :: Lens' URLInsert' Text
+uiAlt :: Lens' URLInsert' Alt
 uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
 
 instance GoogleRequest URLInsert' where
         type Rs URLInsert' = URL
         request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLInsert{..}
-          = go _uiQuotaUser _uiPrettyPrint _uiUserIp _uiKey
+        requestWithRoute r u URLInsert'{..}
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIp
+              _uiKey
               _uiOauthToken
               _uiFields
-              _uiAlt
+              (Just _uiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlInsertAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UrlInsertResource)
+                      r
+                      u

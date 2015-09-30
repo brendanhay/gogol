@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsPatch@.
-module GamesConfiguration.LeaderboardConfigurations.Patch
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
     (
     -- * REST Resource
-      LeaderboardConfigurationsPatchAPI
+      LeaderboardConfigurationsPatchResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsPatch
-    , LeaderboardConfigurationsPatch
+    , leaderboardConfigurationsPatch'
+    , LeaderboardConfigurationsPatch'
 
     -- * Request Lenses
     , lcpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsPatch@ which the
--- 'LeaderboardConfigurationsPatch' request conforms to.
-type LeaderboardConfigurationsPatchAPI =
+-- 'LeaderboardConfigurationsPatch'' request conforms to.
+type LeaderboardConfigurationsPatchResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
-         Patch '[JSON] LeaderboardConfiguration
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Patch '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ 'leaderboardConfigurationsPatch' smart constructor.
-data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
+-- /See:/ 'leaderboardConfigurationsPatch'' smart constructor.
+data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
     { _lcpQuotaUser     :: !(Maybe Text)
     , _lcpPrettyPrint   :: !Bool
     , _lcpUserIp        :: !(Maybe Text)
@@ -62,7 +70,7 @@ data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
     , _lcpKey           :: !(Maybe Text)
     , _lcpOauthToken    :: !(Maybe Text)
     , _lcpFields        :: !(Maybe Text)
-    , _lcpAlt           :: !Text
+    , _lcpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsPatch'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
 -- * 'lcpFields'
 --
 -- * 'lcpAlt'
-leaderboardConfigurationsPatch
+leaderboardConfigurationsPatch'
     :: Text -- ^ 'leaderboardId'
-    -> LeaderboardConfigurationsPatch
-leaderboardConfigurationsPatch pLcpLeaderboardId_ =
-    LeaderboardConfigurationsPatch
+    -> LeaderboardConfigurationsPatch'
+leaderboardConfigurationsPatch' pLcpLeaderboardId_ =
+    LeaderboardConfigurationsPatch'
     { _lcpQuotaUser = Nothing
     , _lcpPrettyPrint = True
     , _lcpUserIp = Nothing
@@ -96,7 +104,7 @@ leaderboardConfigurationsPatch pLcpLeaderboardId_ =
     , _lcpKey = Nothing
     , _lcpOauthToken = Nothing
     , _lcpFields = Nothing
-    , _lcpAlt = "json"
+    , _lcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ lcpFields
   = lens _lcpFields (\ s a -> s{_lcpFields = a})
 
 -- | Data format for the response.
-lcpAlt :: Lens' LeaderboardConfigurationsPatch' Text
+lcpAlt :: Lens' LeaderboardConfigurationsPatch' Alt
 lcpAlt = lens _lcpAlt (\ s a -> s{_lcpAlt = a})
 
 instance GoogleRequest
@@ -152,15 +160,16 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          LeaderboardConfigurationsPatch{..}
-          = go _lcpQuotaUser _lcpPrettyPrint _lcpUserIp
+          LeaderboardConfigurationsPatch'{..}
+          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIp
               _lcpLeaderboardId
               _lcpKey
               _lcpOauthToken
               _lcpFields
-              _lcpAlt
+              (Just _lcpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsPatchAPI)
+                      (Proxy ::
+                         Proxy LeaderboardConfigurationsPatchResource)
                       r
                       u

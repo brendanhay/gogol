@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing user in a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlUsersUpdate@.
-module Sql.Users.Update
+module Network.Google.Resource.Sql.Users.Update
     (
     -- * REST Resource
-      UsersUpdateAPI
+      UsersUpdateResource
 
     -- * Creating a Request
-    , usersUpdate
-    , UsersUpdate
+    , usersUpdate'
+    , UsersUpdate'
 
     -- * Request Lenses
     , uuQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlUsersUpdate@ which the
--- 'UsersUpdate' request conforms to.
-type UsersUpdateAPI =
+-- 'UsersUpdate'' request conforms to.
+type UsersUpdateResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "users" :>
-               QueryParam "name" Text :>
-                 QueryParam "host" Text :> Put '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "name" Text :>
+                         QueryParam "host" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates an existing user in a Cloud SQL instance.
 --
--- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate
+-- /See:/ 'usersUpdate'' smart constructor.
+data UsersUpdate' = UsersUpdate'
     { _uuQuotaUser   :: !(Maybe Text)
     , _uuPrettyPrint :: !Bool
     , _uuProject     :: !Text
@@ -69,7 +77,7 @@ data UsersUpdate = UsersUpdate
     , _uuHost        :: !Text
     , _uuOauthToken  :: !(Maybe Text)
     , _uuFields      :: !(Maybe Text)
-    , _uuAlt         :: !Text
+    , _uuAlt         :: !Alt
     , _uuInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -98,14 +106,14 @@ data UsersUpdate = UsersUpdate
 -- * 'uuAlt'
 --
 -- * 'uuInstance'
-usersUpdate
+usersUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'name'
     -> Text -- ^ 'host'
     -> Text -- ^ 'instance'
-    -> UsersUpdate
-usersUpdate pUuProject_ pUuName_ pUuHost_ pUuInstance_ =
-    UsersUpdate
+    -> UsersUpdate'
+usersUpdate' pUuProject_ pUuName_ pUuHost_ pUuInstance_ =
+    UsersUpdate'
     { _uuQuotaUser = Nothing
     , _uuPrettyPrint = True
     , _uuProject = pUuProject_
@@ -115,7 +123,7 @@ usersUpdate pUuProject_ pUuName_ pUuHost_ pUuInstance_ =
     , _uuHost = pUuHost_
     , _uuOauthToken = Nothing
     , _uuFields = Nothing
-    , _uuAlt = "json"
+    , _uuAlt = JSON
     , _uuInstance = pUuInstance_
     }
 
@@ -166,7 +174,7 @@ uuFields :: Lens' UsersUpdate' (Maybe Text)
 uuFields = lens _uuFields (\ s a -> s{_uuFields = a})
 
 -- | Data format for the response.
-uuAlt :: Lens' UsersUpdate' Text
+uuAlt :: Lens' UsersUpdate' Alt
 uuAlt = lens _uuAlt (\ s a -> s{_uuAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -177,14 +185,18 @@ uuInstance
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersUpdate{..}
-          = go _uuQuotaUser _uuPrettyPrint _uuProject _uuUserIp
+        requestWithRoute r u UsersUpdate'{..}
+          = go _uuQuotaUser (Just _uuPrettyPrint) _uuProject
+              _uuUserIp
               _uuKey
               (Just _uuName)
               (Just _uuHost)
               _uuOauthToken
               _uuFields
-              _uuAlt
+              (Just _uuAlt)
               _uuInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersUpdateResource)
+                      r
+                      u

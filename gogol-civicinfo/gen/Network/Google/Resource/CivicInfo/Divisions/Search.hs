@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoDivisionsSearch@.
-module CivicInfo.Divisions.Search
+module Network.Google.Resource.CivicInfo.Divisions.Search
     (
     -- * REST Resource
-      DivisionsSearchAPI
+      DivisionsSearchResource
 
     -- * Creating a Request
-    , divisionsSearch
-    , DivisionsSearch
+    , divisionsSearch'
+    , DivisionsSearch'
 
     -- * Request Lenses
     , dsQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CivicinfoDivisionsSearch@ which the
--- 'DivisionsSearch' request conforms to.
-type DivisionsSearchAPI =
+-- 'DivisionsSearch'' request conforms to.
+type DivisionsSearchResource =
      "divisions" :>
-       QueryParam "query" Text :>
-         Get '[JSON] DivisionSearchResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "query" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] DivisionSearchResponse
 
 -- | Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ 'divisionsSearch' smart constructor.
-data DivisionsSearch = DivisionsSearch
+-- /See:/ 'divisionsSearch'' smart constructor.
+data DivisionsSearch' = DivisionsSearch'
     { _dsQuotaUser   :: !(Maybe Text)
     , _dsPrettyPrint :: !Bool
     , _dsUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data DivisionsSearch = DivisionsSearch
     , _dsQuery       :: !(Maybe Text)
     , _dsOauthToken  :: !(Maybe Text)
     , _dsFields      :: !(Maybe Text)
-    , _dsAlt         :: !Text
+    , _dsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionsSearch'' with the minimum fields required to make a request.
@@ -82,10 +90,10 @@ data DivisionsSearch = DivisionsSearch
 -- * 'dsFields'
 --
 -- * 'dsAlt'
-divisionsSearch
-    :: DivisionsSearch
-divisionsSearch =
-    DivisionsSearch
+divisionsSearch'
+    :: DivisionsSearch'
+divisionsSearch' =
+    DivisionsSearch'
     { _dsQuotaUser = Nothing
     , _dsPrettyPrint = True
     , _dsUserIp = Nothing
@@ -93,7 +101,7 @@ divisionsSearch =
     , _dsQuery = Nothing
     , _dsOauthToken = Nothing
     , _dsFields = Nothing
-    , _dsAlt = "json"
+    , _dsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,19 +146,21 @@ dsFields :: Lens' DivisionsSearch' (Maybe Text)
 dsFields = lens _dsFields (\ s a -> s{_dsFields = a})
 
 -- | Data format for the response.
-dsAlt :: Lens' DivisionsSearch' Text
+dsAlt :: Lens' DivisionsSearch' Alt
 dsAlt = lens _dsAlt (\ s a -> s{_dsAlt = a})
 
 instance GoogleRequest DivisionsSearch' where
         type Rs DivisionsSearch' = DivisionSearchResponse
         request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u DivisionsSearch{..}
-          = go _dsQuotaUser _dsPrettyPrint _dsUserIp _dsKey
+        requestWithRoute r u DivisionsSearch'{..}
+          = go _dsQuotaUser (Just _dsPrettyPrint) _dsUserIp
+              _dsKey
               _dsQuery
               _dsOauthToken
               _dsFields
-              _dsAlt
+              (Just _dsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DivisionsSearchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DivisionsSearchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsDelete@.
-module Classroom.Invitations.Delete
+module Network.Google.Resource.Classroom.Invitations.Delete
     (
     -- * REST Resource
-      InvitationsDeleteAPI
+      InvitationsDeleteResource
 
     -- * Creating a Request
-    , invitationsDelete
-    , InvitationsDelete
+    , invitationsDelete'
+    , InvitationsDelete'
 
     -- * Request Lenses
     , idXgafv
@@ -53,11 +54,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomInvitationsDelete@ which the
--- 'InvitationsDelete' request conforms to.
-type InvitationsDeleteAPI =
+-- 'InvitationsDelete'' request conforms to.
+type InvitationsDeleteResource =
      "v1" :>
        "invitations" :>
-         Capture "id" Text :> Delete '[JSON] Empty
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -65,8 +79,8 @@ type InvitationsDeleteAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
 -- requested ID.
 --
--- /See:/ 'invitationsDelete' smart constructor.
-data InvitationsDelete = InvitationsDelete
+-- /See:/ 'invitationsDelete'' smart constructor.
+data InvitationsDelete' = InvitationsDelete'
     { _idXgafv          :: !(Maybe Text)
     , _idQuotaUser      :: !(Maybe Text)
     , _idPrettyPrint    :: !Bool
@@ -114,11 +128,11 @@ data InvitationsDelete = InvitationsDelete
 -- * 'idCallback'
 --
 -- * 'idAlt'
-invitationsDelete
+invitationsDelete'
     :: Text -- ^ 'id'
-    -> InvitationsDelete
-invitationsDelete pIdId_ =
-    InvitationsDelete
+    -> InvitationsDelete'
+invitationsDelete' pIdId_ =
+    InvitationsDelete'
     { _idXgafv = Nothing
     , _idQuotaUser = Nothing
     , _idPrettyPrint = True
@@ -210,10 +224,10 @@ idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
 instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsDelete{..}
-          = go _idXgafv _idQuotaUser _idPrettyPrint
+        requestWithRoute r u InvitationsDelete'{..}
+          = go _idXgafv _idQuotaUser (Just _idPrettyPrint)
               _idUploadProtocol
-              _idPp
+              (Just _idPp)
               _idAccessToken
               _idUploadType
               _idBearerToken
@@ -222,9 +236,9 @@ instance GoogleRequest InvitationsDelete' where
               _idOauthToken
               _idFields
               _idCallback
-              _idAlt
+              (Just _idAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InvitationsDeleteAPI)
+                      (Proxy :: Proxy InvitationsDeleteResource)
                       r
                       u

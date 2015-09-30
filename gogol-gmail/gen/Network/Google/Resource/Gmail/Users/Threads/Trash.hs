@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves the specified thread to the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsTrash@.
-module Gmail.Users.Threads.Trash
+module Network.Google.Resource.Gmail.Users.Threads.Trash
     (
     -- * REST Resource
-      UsersThreadsTrashAPI
+      UsersThreadsTrashResource
 
     -- * Creating a Request
-    , usersThreadsTrash
-    , UsersThreadsTrash
+    , usersThreadsTrash'
+    , UsersThreadsTrash'
 
     -- * Request Lenses
     , uttQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsTrash@ which the
--- 'UsersThreadsTrash' request conforms to.
-type UsersThreadsTrashAPI =
+-- 'UsersThreadsTrash'' request conforms to.
+type UsersThreadsTrashResource =
      Capture "userId" Text :>
        "threads" :>
-         Capture "id" Text :> "trash" :> Post '[JSON] Thread
+         Capture "id" Text :>
+           "trash" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Thread
 
 -- | Moves the specified thread to the trash.
 --
--- /See:/ 'usersThreadsTrash' smart constructor.
-data UsersThreadsTrash = UsersThreadsTrash
+-- /See:/ 'usersThreadsTrash'' smart constructor.
+data UsersThreadsTrash' = UsersThreadsTrash'
     { _uttQuotaUser   :: !(Maybe Text)
     , _uttPrettyPrint :: !Bool
     , _uttUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data UsersThreadsTrash = UsersThreadsTrash
     , _uttId          :: !Text
     , _uttOauthToken  :: !(Maybe Text)
     , _uttFields      :: !(Maybe Text)
-    , _uttAlt         :: !Text
+    , _uttAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsTrash'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data UsersThreadsTrash = UsersThreadsTrash
 -- * 'uttFields'
 --
 -- * 'uttAlt'
-usersThreadsTrash
+usersThreadsTrash'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersThreadsTrash
-usersThreadsTrash pUttUserId_ pUttId_ =
-    UsersThreadsTrash
+    -> UsersThreadsTrash'
+usersThreadsTrash' pUttUserId_ pUttId_ =
+    UsersThreadsTrash'
     { _uttQuotaUser = Nothing
     , _uttPrettyPrint = True
     , _uttUserIp = Nothing
@@ -100,7 +109,7 @@ usersThreadsTrash pUttUserId_ pUttId_ =
     , _uttId = pUttId_
     , _uttOauthToken = Nothing
     , _uttFields = Nothing
-    , _uttAlt = "json"
+    , _uttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +159,22 @@ uttFields
   = lens _uttFields (\ s a -> s{_uttFields = a})
 
 -- | Data format for the response.
-uttAlt :: Lens' UsersThreadsTrash' Text
+uttAlt :: Lens' UsersThreadsTrash' Alt
 uttAlt = lens _uttAlt (\ s a -> s{_uttAlt = a})
 
 instance GoogleRequest UsersThreadsTrash' where
         type Rs UsersThreadsTrash' = Thread
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsTrash{..}
-          = go _uttQuotaUser _uttPrettyPrint _uttUserIp
+        requestWithRoute r u UsersThreadsTrash'{..}
+          = go _uttQuotaUser (Just _uttPrettyPrint) _uttUserIp
               _uttUserId
               _uttKey
               _uttId
               _uttOauthToken
               _uttFields
-              _uttAlt
+              (Just _uttAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersThreadsTrashAPI)
+                      (Proxy :: Proxy UsersThreadsTrashResource)
                       r
                       u

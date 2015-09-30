@@ -22,10 +22,23 @@ module Network.Google.InstanceGroupsManager.Types
     , instanceGroupManagersSetInstanceTemplateRequest
     , igmsitrInstanceTemplate
 
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
     -- * InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- * OperationList
     , OperationList
@@ -44,6 +57,9 @@ module Network.Google.InstanceGroupsManager.Types
     , igmlItems
     , igmlSelfLink
     , igmlId
+
+    -- * ReplicaPoolAutoHealingPolicyActionType
+    , ReplicaPoolAutoHealingPolicyActionType (..)
 
     -- * InstanceGroupManager
     , InstanceGroupManager
@@ -100,16 +116,37 @@ module Network.Google.InstanceGroupsManager.Types
     , instanceGroupManagersRecreateInstancesRequest
     , igmrirInstances
 
+    -- * OperationStatus
+    , OperationStatus (..)
+
     -- * InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
     , instanceGroupManagersDeleteInstancesRequest
     , igmdirInstances
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * InstanceGroupManagersSetTargetPoolsRequest
     , InstanceGroupManagersSetTargetPoolsRequest
     , instanceGroupManagersSetTargetPoolsRequest
     , igmstprFingerprint
     , igmstprTargetPools
+
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- * Alt
+    , Alt (..)
+
+    -- * OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.InstanceGroupsManager.Types.Product
@@ -117,7 +154,7 @@ import           Network.Google.InstanceGroupsManager.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the Google Compute Engine Instance Group Manager API.
-instanceGroupsManagerURL :: BaseURL
+instanceGroupsManagerURL :: BaseUrl
 instanceGroupsManagerURL
   = BaseUrl Https
       "https://www.googleapis.com/replicapool/v1beta2/projects/"

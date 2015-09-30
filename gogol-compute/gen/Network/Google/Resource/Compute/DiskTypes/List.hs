@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDiskTypesList@.
-module Compute.DiskTypes.List
+module Network.Google.Resource.Compute.DiskTypes.List
     (
     -- * REST Resource
-      DiskTypesListAPI
+      DiskTypesListResource
 
     -- * Creating a Request
-    , diskTypesList
-    , DiskTypesList
+    , diskTypesList'
+    , DiskTypesList'
 
     -- * Request Lenses
     , dtlQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDiskTypesList@ which the
--- 'DiskTypesList' request conforms to.
-type DiskTypesListAPI =
+-- 'DiskTypesList'' request conforms to.
+type DiskTypesListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "diskTypes" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] DiskTypeList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] DiskTypeList
 
 -- | Retrieves the list of disk type resources available to the specified
 -- project.
 --
--- /See:/ 'diskTypesList' smart constructor.
-data DiskTypesList = DiskTypesList
+-- /See:/ 'diskTypesList'' smart constructor.
+data DiskTypesList' = DiskTypesList'
     { _dtlQuotaUser   :: !(Maybe Text)
     , _dtlPrettyPrint :: !Bool
     , _dtlProject     :: !Text
@@ -75,7 +82,7 @@ data DiskTypesList = DiskTypesList
     , _dtlOauthToken  :: !(Maybe Text)
     , _dtlMaxResults  :: !Word32
     , _dtlFields      :: !(Maybe Text)
-    , _dtlAlt         :: !Text
+    , _dtlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data DiskTypesList = DiskTypesList
 -- * 'dtlFields'
 --
 -- * 'dtlAlt'
-diskTypesList
+diskTypesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> DiskTypesList
-diskTypesList pDtlProject_ pDtlZone_ =
-    DiskTypesList
+    -> DiskTypesList'
+diskTypesList' pDtlProject_ pDtlZone_ =
+    DiskTypesList'
     { _dtlQuotaUser = Nothing
     , _dtlPrettyPrint = True
     , _dtlProject = pDtlProject_
@@ -122,7 +129,7 @@ diskTypesList pDtlProject_ pDtlZone_ =
     , _dtlOauthToken = Nothing
     , _dtlMaxResults = 500
     , _dtlFields = Nothing
-    , _dtlAlt = "json"
+    , _dtlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +206,14 @@ dtlFields
   = lens _dtlFields (\ s a -> s{_dtlFields = a})
 
 -- | Data format for the response.
-dtlAlt :: Lens' DiskTypesList' Text
+dtlAlt :: Lens' DiskTypesList' Alt
 dtlAlt = lens _dtlAlt (\ s a -> s{_dtlAlt = a})
 
 instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesList{..}
-          = go _dtlQuotaUser _dtlPrettyPrint _dtlProject
+        requestWithRoute r u DiskTypesList'{..}
+          = go _dtlQuotaUser (Just _dtlPrettyPrint) _dtlProject
               _dtlUserIp
               _dtlZone
               _dtlKey
@@ -215,7 +222,9 @@ instance GoogleRequest DiskTypesList' where
               _dtlOauthToken
               (Just _dtlMaxResults)
               _dtlFields
-              _dtlAlt
+              (Just _dtlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DiskTypesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DiskTypesListResource)
+                      r
                       u

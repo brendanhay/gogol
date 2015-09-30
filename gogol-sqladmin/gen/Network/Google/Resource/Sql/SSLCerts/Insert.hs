@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- until the instance is restarted.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlSSLCertsInsert@.
-module Sql.SSLCerts.Insert
+module Network.Google.Resource.Sql.SSLCerts.Insert
     (
     -- * REST Resource
-      SslCertsInsertAPI
+      SslCertsInsertResource
 
     -- * Creating a Request
-    , sSLCertsInsert
-    , SSLCertsInsert
+    , sSLCertsInsert'
+    , SSLCertsInsert'
 
     -- * Request Lenses
     , sciQuotaUser
@@ -46,20 +47,28 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlSSLCertsInsert@ which the
--- 'SSLCertsInsert' request conforms to.
-type SslCertsInsertAPI =
+-- 'SSLCertsInsert'' request conforms to.
+type SslCertsInsertResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "sslCerts" :> Post '[JSON] SSLCertsInsertResponse
+             "sslCerts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] SSLCertsInsertResponse
 
 -- | Creates an SSL certificate and returns it along with the private key and
 -- server certificate authority. The new certificate will not be usable
 -- until the instance is restarted.
 --
--- /See:/ 'sSLCertsInsert' smart constructor.
-data SSLCertsInsert = SSLCertsInsert
+-- /See:/ 'sSLCertsInsert'' smart constructor.
+data SSLCertsInsert' = SSLCertsInsert'
     { _sciQuotaUser   :: !(Maybe Text)
     , _sciPrettyPrint :: !Bool
     , _sciProject     :: !Text
@@ -67,7 +76,7 @@ data SSLCertsInsert = SSLCertsInsert
     , _sciKey         :: !(Maybe Text)
     , _sciOauthToken  :: !(Maybe Text)
     , _sciFields      :: !(Maybe Text)
-    , _sciAlt         :: !Text
+    , _sciAlt         :: !Alt
     , _sciInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -92,12 +101,12 @@ data SSLCertsInsert = SSLCertsInsert
 -- * 'sciAlt'
 --
 -- * 'sciInstance'
-sSLCertsInsert
+sSLCertsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> SSLCertsInsert
-sSLCertsInsert pSciProject_ pSciInstance_ =
-    SSLCertsInsert
+    -> SSLCertsInsert'
+sSLCertsInsert' pSciProject_ pSciInstance_ =
+    SSLCertsInsert'
     { _sciQuotaUser = Nothing
     , _sciPrettyPrint = True
     , _sciProject = pSciProject_
@@ -105,7 +114,7 @@ sSLCertsInsert pSciProject_ pSciInstance_ =
     , _sciKey = Nothing
     , _sciOauthToken = Nothing
     , _sciFields = Nothing
-    , _sciAlt = "json"
+    , _sciAlt = JSON
     , _sciInstance = pSciInstance_
     }
 
@@ -152,7 +161,7 @@ sciFields
   = lens _sciFields (\ s a -> s{_sciFields = a})
 
 -- | Data format for the response.
-sciAlt :: Lens' SSLCertsInsert' Text
+sciAlt :: Lens' SSLCertsInsert' Alt
 sciAlt = lens _sciAlt (\ s a -> s{_sciAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -163,15 +172,16 @@ sciInstance
 instance GoogleRequest SSLCertsInsert' where
         type Rs SSLCertsInsert' = SSLCertsInsertResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsInsert{..}
-          = go _sciQuotaUser _sciPrettyPrint _sciProject
+        requestWithRoute r u SSLCertsInsert'{..}
+          = go _sciQuotaUser (Just _sciPrettyPrint) _sciProject
               _sciUserIp
               _sciKey
               _sciOauthToken
               _sciFields
-              _sciAlt
+              (Just _sciAlt)
               _sciInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy SslCertsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SslCertsInsertResource)
                       r
                       u

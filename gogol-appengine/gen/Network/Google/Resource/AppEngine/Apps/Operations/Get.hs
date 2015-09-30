@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- API service.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsOperationsGet@.
-module AppEngine.Apps.Operations.Get
+module Network.Google.Resource.AppEngine.Apps.Operations.Get
     (
     -- * REST Resource
-      AppsOperationsGetAPI
+      AppsOperationsGetResource
 
     -- * Creating a Request
-    , appsOperationsGet
-    , AppsOperationsGet
+    , appsOperationsGet'
+    , AppsOperationsGet'
 
     -- * Request Lenses
     , aogXgafv
@@ -52,20 +53,34 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsOperationsGet@ which the
--- 'AppsOperationsGet' request conforms to.
-type AppsOperationsGetAPI =
+-- 'AppsOperationsGet'' request conforms to.
+type AppsOperationsGetResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>
-             Capture "operationsId" Text :> Get '[JSON] Operation
+             Capture "operationsId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ 'appsOperationsGet' smart constructor.
-data AppsOperationsGet = AppsOperationsGet
+-- /See:/ 'appsOperationsGet'' smart constructor.
+data AppsOperationsGet' = AppsOperationsGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogQuotaUser      :: !(Maybe Text)
     , _aogPrettyPrint    :: !Bool
@@ -116,12 +131,12 @@ data AppsOperationsGet = AppsOperationsGet
 -- * 'aogCallback'
 --
 -- * 'aogAlt'
-appsOperationsGet
+appsOperationsGet'
     :: Text -- ^ 'appsId'
     -> Text -- ^ 'operationsId'
-    -> AppsOperationsGet
-appsOperationsGet pAogAppsId_ pAogOperationsId_ =
-    AppsOperationsGet
+    -> AppsOperationsGet'
+appsOperationsGet' pAogAppsId_ pAogOperationsId_ =
+    AppsOperationsGet'
     { _aogXgafv = Nothing
     , _aogQuotaUser = Nothing
     , _aogPrettyPrint = True
@@ -224,10 +239,10 @@ aogAlt = lens _aogAlt (\ s a -> s{_aogAlt = a})
 instance GoogleRequest AppsOperationsGet' where
         type Rs AppsOperationsGet' = Operation
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsOperationsGet{..}
-          = go _aogXgafv _aogQuotaUser _aogPrettyPrint
+        requestWithRoute r u AppsOperationsGet'{..}
+          = go _aogXgafv _aogQuotaUser (Just _aogPrettyPrint)
               _aogUploadProtocol
-              _aogPp
+              (Just _aogPp)
               _aogAccessToken
               _aogUploadType
               _aogBearerToken
@@ -237,9 +252,9 @@ instance GoogleRequest AppsOperationsGet' where
               _aogOperationsId
               _aogFields
               _aogCallback
-              _aogAlt
+              (Just _aogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsOperationsGetAPI)
+                      (Proxy :: Proxy AppsOperationsGetResource)
                       r
                       u

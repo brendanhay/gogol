@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Roll back a transaction.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsRollback@.
-module Datastore.Datasets.Rollback
+module Network.Google.Resource.Datastore.Datasets.Rollback
     (
     -- * REST Resource
-      DatasetsRollbackAPI
+      DatasetsRollbackResource
 
     -- * Creating a Request
-    , datasetsRollback
-    , DatasetsRollback
+    , datasetsRollback'
+    , DatasetsRollback'
 
     -- * Request Lenses
     , drQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsRollback@ which the
--- 'DatasetsRollback' request conforms to.
-type DatasetsRollbackAPI =
+-- 'DatasetsRollback'' request conforms to.
+type DatasetsRollbackResource =
      Capture "datasetId" Text :>
-       "rollback" :> Post '[JSON] RollbackResponse
+       "rollback" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] RollbackResponse
 
 -- | Roll back a transaction.
 --
--- /See:/ 'datasetsRollback' smart constructor.
-data DatasetsRollback = DatasetsRollback
+-- /See:/ 'datasetsRollback'' smart constructor.
+data DatasetsRollback' = DatasetsRollback'
     { _drQuotaUser   :: !(Maybe Text)
     , _drPrettyPrint :: !Bool
     , _drUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsRollback = DatasetsRollback
     , _drDatasetId   :: !Text
     , _drOauthToken  :: !(Maybe Text)
     , _drFields      :: !(Maybe Text)
-    , _drAlt         :: !Text
+    , _drAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsRollback'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsRollback = DatasetsRollback
 -- * 'drFields'
 --
 -- * 'drAlt'
-datasetsRollback
+datasetsRollback'
     :: Text -- ^ 'datasetId'
-    -> DatasetsRollback
-datasetsRollback pDrDatasetId_ =
-    DatasetsRollback
+    -> DatasetsRollback'
+datasetsRollback' pDrDatasetId_ =
+    DatasetsRollback'
     { _drQuotaUser = Nothing
     , _drPrettyPrint = True
     , _drUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsRollback pDrDatasetId_ =
     , _drDatasetId = pDrDatasetId_
     , _drOauthToken = Nothing
     , _drFields = Nothing
-    , _drAlt = "proto"
+    , _drAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,20 +143,21 @@ drFields :: Lens' DatasetsRollback' (Maybe Text)
 drFields = lens _drFields (\ s a -> s{_drFields = a})
 
 -- | Data format for the response.
-drAlt :: Lens' DatasetsRollback' Text
+drAlt :: Lens' DatasetsRollback' Alt
 drAlt = lens _drAlt (\ s a -> s{_drAlt = a})
 
 instance GoogleRequest DatasetsRollback' where
         type Rs DatasetsRollback' = RollbackResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsRollback{..}
-          = go _drQuotaUser _drPrettyPrint _drUserIp _drKey
+        requestWithRoute r u DatasetsRollback'{..}
+          = go _drQuotaUser (Just _drPrettyPrint) _drUserIp
+              _drKey
               _drDatasetId
               _drOauthToken
               _drFields
-              _drAlt
+              (Just _drAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DatasetsRollbackAPI)
+                      (Proxy :: Proxy DatasetsRollbackResource)
                       r
                       u

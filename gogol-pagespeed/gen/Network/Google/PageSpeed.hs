@@ -28,7 +28,7 @@ module Network.Google.PageSpeed
     -- * REST Resources
 
     -- ** PagespeedonlinePagespeedapiRunpagespeed
-    , module Pagespeedonline.Pagespeedapi.Runpagespeed
+    , module Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
 
     -- * Types
 
@@ -41,6 +41,49 @@ module Network.Google.PageSpeed
     , paivWidth
     , paivPageRect
     , paivKey
+
+    -- ** ResultVersion
+    , ResultVersion
+    , resultVersion
+    , rvMinor
+    , rvMajor
+
+    -- ** ResultPageStats
+    , ResultPageStats
+    , resultPageStats
+    , rpsHtmlResponseBytes
+    , rpsTotalRequestBytes
+    , rpsNumberResources
+    , rpsNumberStaticResources
+    , rpsNumberHosts
+    , rpsNumberJsResources
+    , rpsNumberCssResources
+    , rpsTextResponseBytes
+    , rpsFlashResponseBytes
+    , rpsImageResponseBytes
+    , rpsOtherResponseBytes
+    , rpsJavascriptResponseBytes
+    , rpsCssResponseBytes
+
+    -- ** PagespeedAPIImageV2Page_rect
+    , PagespeedAPIImageV2Page_rect
+    , pagespeedAPIImageV2Page_rect
+    , paivpHeight
+    , paivpLeft
+    , paivpWidth
+    , paivpTop
+
+    -- ** PagespeedonlinePagespeedapiRunpagespeedStrategy
+    , PagespeedonlinePagespeedapiRunpagespeedStrategy (..)
+
+    -- ** PagespeedAPIFormatStringV2Args
+    , PagespeedAPIFormatStringV2Args
+    , pagespeedAPIFormatStringV2Args
+    , pafsvaValue
+    , pafsvaRects
+    , pafsvaKey
+    , pafsvaType
+    , pafsvaSecondaryRects
 
     -- ** Result
     , Result
@@ -56,11 +99,44 @@ module Network.Google.PageSpeed
     , rId
     , rTitle
 
+    -- ** PagespeedAPIFormatStringV2ArgsSecondary_rects
+    , PagespeedAPIFormatStringV2ArgsSecondary_rects
+    , pagespeedAPIFormatStringV2ArgsSecondary_rects
+    , pafsvasHeight
+    , pafsvasLeft
+    , pafsvasWidth
+    , pafsvasTop
+
+    -- ** PagespeedAPIFormatStringV2ArgsRects
+    , PagespeedAPIFormatStringV2ArgsRects
+    , pagespeedAPIFormatStringV2ArgsRects
+    , pafsvarHeight
+    , pafsvarLeft
+    , pafsvarWidth
+    , pafsvarTop
+
+    -- ** ResultFormattedResults
+    , ResultFormattedResults
+    , resultFormattedResults
+    , rfrLocale
+    , rfrRuleResults
+
+    -- ** ResultRuleGroups
+    , ResultRuleGroups
+    , resultRuleGroups
+
     -- ** PagespeedAPIFormatStringV2
     , PagespeedAPIFormatStringV2
     , pagespeedAPIFormatStringV2
     , pafsvArgs
     , pafsvFormat
+
+    -- ** ResultFormattedResultsRuleResults
+    , ResultFormattedResultsRuleResults
+    , resultFormattedResultsRuleResults
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.PageSpeed.Types
@@ -71,7 +147,7 @@ import           Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespe
 TODO
 -}
 
-type PageSpeedAPI = Pagespeedapi
+type PageSpeedAPI = PagespeedapiRunpagespeedResource
 
 pageSpeedAPI :: Proxy PageSpeedAPI
 pageSpeedAPI = Proxy

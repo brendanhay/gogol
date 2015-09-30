@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a layer.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersDelete@.
-module Mapsengine.Layers.Delete
+module Network.Google.Resource.Mapsengine.Layers.Delete
     (
     -- * REST Resource
-      LayersDeleteAPI
+      LayersDeleteResource
 
     -- * Creating a Request
-    , layersDelete
-    , LayersDelete
+    , layersDelete'
+    , LayersDelete'
 
     -- * Request Lenses
     , ldQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersDelete@ which the
--- 'LayersDelete' request conforms to.
-type LayersDeleteAPI =
-     "layers" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'LayersDelete'' request conforms to.
+type LayersDeleteResource =
+     "layers" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a layer.
 --
--- /See:/ 'layersDelete' smart constructor.
-data LayersDelete = LayersDelete
+-- /See:/ 'layersDelete'' smart constructor.
+data LayersDelete' = LayersDelete'
     { _ldQuotaUser   :: !(Maybe Text)
     , _ldPrettyPrint :: !Bool
     , _ldUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data LayersDelete = LayersDelete
     , _ldId          :: !Text
     , _ldOauthToken  :: !(Maybe Text)
     , _ldFields      :: !(Maybe Text)
-    , _ldAlt         :: !Text
+    , _ldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data LayersDelete = LayersDelete
 -- * 'ldFields'
 --
 -- * 'ldAlt'
-layersDelete
+layersDelete'
     :: Text -- ^ 'id'
-    -> LayersDelete
-layersDelete pLdId_ =
-    LayersDelete
+    -> LayersDelete'
+layersDelete' pLdId_ =
+    LayersDelete'
     { _ldQuotaUser = Nothing
     , _ldPrettyPrint = True
     , _ldUserIp = Nothing
@@ -92,7 +101,7 @@ layersDelete pLdId_ =
     , _ldId = pLdId_
     , _ldOauthToken = Nothing
     , _ldFields = Nothing
-    , _ldAlt = "json"
+    , _ldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +145,21 @@ ldFields :: Lens' LayersDelete' (Maybe Text)
 ldFields = lens _ldFields (\ s a -> s{_ldFields = a})
 
 -- | Data format for the response.
-ldAlt :: Lens' LayersDelete' Text
+ldAlt :: Lens' LayersDelete' Alt
 ldAlt = lens _ldAlt (\ s a -> s{_ldAlt = a})
 
 instance GoogleRequest LayersDelete' where
         type Rs LayersDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersDelete{..}
-          = go _ldQuotaUser _ldPrettyPrint _ldUserIp _ldKey
+        requestWithRoute r u LayersDelete'{..}
+          = go _ldQuotaUser (Just _ldPrettyPrint) _ldUserIp
+              _ldKey
               _ldId
               _ldOauthToken
               _ldFields
-              _ldAlt
+              (Just _ldAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersDeleteResource)
+                      r
                       u

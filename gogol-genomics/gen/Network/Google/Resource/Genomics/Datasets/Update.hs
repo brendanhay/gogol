@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsUpdate@.
-module Genomics.Datasets.Update
+module Network.Google.Resource.Genomics.Datasets.Update
     (
     -- * REST Resource
-      DatasetsUpdateAPI
+      DatasetsUpdateResource
 
     -- * Creating a Request
-    , datasetsUpdate
-    , DatasetsUpdate
+    , datasetsUpdate'
+    , DatasetsUpdate'
 
     -- * Request Lenses
     , dQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsUpdate@ which the
--- 'DatasetsUpdate' request conforms to.
-type DatasetsUpdateAPI =
+-- 'DatasetsUpdate'' request conforms to.
+type DatasetsUpdateResource =
      "datasets" :>
-       Capture "datasetId" Text :> Put '[JSON] Dataset
+       Capture "datasetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Dataset
 
 -- | Updates a dataset.
 --
--- /See:/ 'datasetsUpdate' smart constructor.
-data DatasetsUpdate = DatasetsUpdate
+-- /See:/ 'datasetsUpdate'' smart constructor.
+data DatasetsUpdate' = DatasetsUpdate'
     { _dQuotaUser   :: !(Maybe Text)
     , _dPrettyPrint :: !Bool
     , _dUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsUpdate = DatasetsUpdate
     , _dDatasetId   :: !Text
     , _dOauthToken  :: !(Maybe Text)
     , _dFields      :: !(Maybe Text)
-    , _dAlt         :: !Text
+    , _dAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsUpdate = DatasetsUpdate
 -- * 'dFields'
 --
 -- * 'dAlt'
-datasetsUpdate
+datasetsUpdate'
     :: Text -- ^ 'datasetId'
-    -> DatasetsUpdate
-datasetsUpdate pDDatasetId_ =
-    DatasetsUpdate
+    -> DatasetsUpdate'
+datasetsUpdate' pDDatasetId_ =
+    DatasetsUpdate'
     { _dQuotaUser = Nothing
     , _dPrettyPrint = True
     , _dUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsUpdate pDDatasetId_ =
     , _dDatasetId = pDDatasetId_
     , _dOauthToken = Nothing
     , _dFields = Nothing
-    , _dAlt = "json"
+    , _dAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,19 +142,20 @@ dFields :: Lens' DatasetsUpdate' (Maybe Text)
 dFields = lens _dFields (\ s a -> s{_dFields = a})
 
 -- | Data format for the response.
-dAlt :: Lens' DatasetsUpdate' Text
+dAlt :: Lens' DatasetsUpdate' Alt
 dAlt = lens _dAlt (\ s a -> s{_dAlt = a})
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsUpdate{..}
-          = go _dQuotaUser _dPrettyPrint _dUserIp _dKey
+        requestWithRoute r u DatasetsUpdate'{..}
+          = go _dQuotaUser (Just _dPrettyPrint) _dUserIp _dKey
               _dDatasetId
               _dOauthToken
               _dFields
-              _dAlt
+              (Just _dAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsUpdateResource)
                       r
                       u

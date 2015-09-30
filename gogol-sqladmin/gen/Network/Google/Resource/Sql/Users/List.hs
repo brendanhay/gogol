@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists users in the specified Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlUsersList@.
-module Sql.Users.List
+module Network.Google.Resource.Sql.Users.List
     (
     -- * REST Resource
-      UsersListAPI
+      UsersListResource
 
     -- * Creating a Request
-    , usersList
-    , UsersList
+    , usersList'
+    , UsersList'
 
     -- * Request Lenses
     , ulQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlUsersList@ which the
--- 'UsersList' request conforms to.
-type UsersListAPI =
+-- 'UsersList'' request conforms to.
+type UsersListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "users" :> Get '[JSON] UsersListResponse
+             "users" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] UsersListResponse
 
 -- | Lists users in the specified Cloud SQL instance.
 --
--- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+-- /See:/ 'usersList'' smart constructor.
+data UsersList' = UsersList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
     , _ulProject     :: !Text
@@ -63,7 +71,7 @@ data UsersList = UsersList
     , _ulKey         :: !(Maybe Text)
     , _ulOauthToken  :: !(Maybe Text)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Text
+    , _ulAlt         :: !Alt
     , _ulInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +96,12 @@ data UsersList = UsersList
 -- * 'ulAlt'
 --
 -- * 'ulInstance'
-usersList
+usersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> UsersList
-usersList pUlProject_ pUlInstance_ =
-    UsersList
+    -> UsersList'
+usersList' pUlProject_ pUlInstance_ =
+    UsersList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulProject = pUlProject_
@@ -101,7 +109,7 @@ usersList pUlProject_ pUlInstance_ =
     , _ulKey = Nothing
     , _ulOauthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     , _ulInstance = pUlInstance_
     }
 
@@ -144,7 +152,7 @@ ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' UsersList' Text
+ulAlt :: Lens' UsersList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -155,12 +163,15 @@ ulInstance
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersList{..}
-          = go _ulQuotaUser _ulPrettyPrint _ulProject _ulUserIp
+        requestWithRoute r u UsersList'{..}
+          = go _ulQuotaUser (Just _ulPrettyPrint) _ulProject
+              _ulUserIp
               _ulKey
               _ulOauthToken
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
               _ulInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersListResource)
+                      r
+                      u

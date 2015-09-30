@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a read group set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsDelete@.
-module Genomics.Readgroupsets.Delete
+module Network.Google.Resource.Genomics.Readgroupsets.Delete
     (
     -- * REST Resource
-      ReadgroupsetsDeleteAPI
+      ReadgroupsetsDeleteResource
 
     -- * Creating a Request
-    , readgroupsetsDelete
-    , ReadgroupsetsDelete
+    , readgroupsetsDelete'
+    , ReadgroupsetsDelete'
 
     -- * Request Lenses
     , rdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsDelete@ which the
--- 'ReadgroupsetsDelete' request conforms to.
-type ReadgroupsetsDeleteAPI =
+-- 'ReadgroupsetsDelete'' request conforms to.
+type ReadgroupsetsDeleteResource =
      "readgroupsets" :>
-       Capture "readGroupSetId" Text :> Delete '[JSON] ()
+       Capture "readGroupSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a read group set.
 --
--- /See:/ 'readgroupsetsDelete' smart constructor.
-data ReadgroupsetsDelete = ReadgroupsetsDelete
+-- /See:/ 'readgroupsetsDelete'' smart constructor.
+data ReadgroupsetsDelete' = ReadgroupsetsDelete'
     { _rdQuotaUser      :: !(Maybe Text)
     , _rdPrettyPrint    :: !Bool
     , _rdReadGroupSetId :: !Text
@@ -59,7 +67,7 @@ data ReadgroupsetsDelete = ReadgroupsetsDelete
     , _rdKey            :: !(Maybe Text)
     , _rdOauthToken     :: !(Maybe Text)
     , _rdFields         :: !(Maybe Text)
-    , _rdAlt            :: !Text
+    , _rdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ReadgroupsetsDelete = ReadgroupsetsDelete
 -- * 'rdFields'
 --
 -- * 'rdAlt'
-readgroupsetsDelete
+readgroupsetsDelete'
     :: Text -- ^ 'readGroupSetId'
-    -> ReadgroupsetsDelete
-readgroupsetsDelete pRdReadGroupSetId_ =
-    ReadgroupsetsDelete
+    -> ReadgroupsetsDelete'
+readgroupsetsDelete' pRdReadGroupSetId_ =
+    ReadgroupsetsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdReadGroupSetId = pRdReadGroupSetId_
@@ -93,7 +101,7 @@ readgroupsetsDelete pRdReadGroupSetId_ =
     , _rdKey = Nothing
     , _rdOauthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = "json"
+    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +145,22 @@ rdFields :: Lens' ReadgroupsetsDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 -- | Data format for the response.
-rdAlt :: Lens' ReadgroupsetsDelete' Text
+rdAlt :: Lens' ReadgroupsetsDelete' Alt
 rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
 
 instance GoogleRequest ReadgroupsetsDelete' where
         type Rs ReadgroupsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsDelete{..}
-          = go _rdQuotaUser _rdPrettyPrint _rdReadGroupSetId
+        requestWithRoute r u ReadgroupsetsDelete'{..}
+          = go _rdQuotaUser (Just _rdPrettyPrint)
+              _rdReadGroupSetId
               _rdUserIp
               _rdKey
               _rdOauthToken
               _rdFields
-              _rdAlt
+              (Just _rdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsDeleteAPI)
+                      (Proxy :: Proxy ReadgroupsetsDeleteResource)
                       r
                       u

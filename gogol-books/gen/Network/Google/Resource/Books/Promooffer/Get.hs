@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of promo offers available to the user
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPromoofferGet@.
-module Books.Promooffer.Get
+module Network.Google.Resource.Books.Promooffer.Get
     (
     -- * REST Resource
-      PromoofferGetAPI
+      PromoofferGetResource
 
     -- * Creating a Request
-    , promoofferGet
-    , PromoofferGet
+    , promoofferGet'
+    , PromoofferGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksPromoofferGet@ which the
--- 'PromoofferGet' request conforms to.
-type PromoofferGetAPI =
+-- 'PromoofferGet'' request conforms to.
+type PromoofferGetResource =
      "promooffer" :>
        "get" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "product" Text :>
-                   QueryParam "androidId" Text :> Get '[JSON] Offers
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "serial" Text :>
+                   QueryParam "device" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "model" Text :>
+                         QueryParam "product" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "androidId" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] Offers
 
 -- | Returns a list of promo offers available to the user
 --
--- /See:/ 'promoofferGet' smart constructor.
-data PromoofferGet = PromoofferGet
+-- /See:/ 'promoofferGet'' smart constructor.
+data PromoofferGet' = PromoofferGet'
     { _pgQuotaUser    :: !(Maybe Text)
     , _pgPrettyPrint  :: !Bool
     , _pgManufacturer :: !(Maybe Text)
@@ -75,7 +83,7 @@ data PromoofferGet = PromoofferGet
     , _pgOauthToken   :: !(Maybe Text)
     , _pgAndroidId    :: !(Maybe Text)
     , _pgFields       :: !(Maybe Text)
-    , _pgAlt          :: !Text
+    , _pgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoofferGet'' with the minimum fields required to make a request.
@@ -107,10 +115,10 @@ data PromoofferGet = PromoofferGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-promoofferGet
-    :: PromoofferGet
-promoofferGet =
-    PromoofferGet
+promoofferGet'
+    :: PromoofferGet'
+promoofferGet' =
+    PromoofferGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgManufacturer = Nothing
@@ -123,7 +131,7 @@ promoofferGet =
     , _pgOauthToken = Nothing
     , _pgAndroidId = Nothing
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +196,15 @@ pgFields :: Lens' PromoofferGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PromoofferGet' Text
+pgAlt :: Lens' PromoofferGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest PromoofferGet' where
         type Rs PromoofferGet' = Offers
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoofferGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgManufacturer
+        requestWithRoute r u PromoofferGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint)
+              _pgManufacturer
               _pgUserIp
               _pgSerial
               _pgDevice
@@ -205,7 +214,9 @@ instance GoogleRequest PromoofferGet' where
               _pgOauthToken
               _pgAndroidId
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PromoofferGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PromoofferGetResource)
+                      r
                       u

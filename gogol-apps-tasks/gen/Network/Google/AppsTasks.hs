@@ -27,46 +27,46 @@ module Network.Google.AppsTasks
     -- * REST Resources
 
     -- ** TasksTasklistsDelete
-    , module Tasks.Tasklists.Delete
+    , module Network.Google.Resource.Tasks.Tasklists.Delete
 
     -- ** TasksTasklistsGet
-    , module Tasks.Tasklists.Get
+    , module Network.Google.Resource.Tasks.Tasklists.Get
 
     -- ** TasksTasklistsInsert
-    , module Tasks.Tasklists.Insert
+    , module Network.Google.Resource.Tasks.Tasklists.Insert
 
     -- ** TasksTasklistsList
-    , module Tasks.Tasklists.List
+    , module Network.Google.Resource.Tasks.Tasklists.List
 
     -- ** TasksTasklistsPatch
-    , module Tasks.Tasklists.Patch
+    , module Network.Google.Resource.Tasks.Tasklists.Patch
 
     -- ** TasksTasklistsUpdate
-    , module Tasks.Tasklists.Update
+    , module Network.Google.Resource.Tasks.Tasklists.Update
 
     -- ** TasksTasksClear
-    , module Tasks.Tasks.Clear
+    , module Network.Google.Resource.Tasks.Tasks.Clear
 
     -- ** TasksTasksDelete
-    , module Tasks.Tasks.Delete
+    , module Network.Google.Resource.Tasks.Tasks.Delete
 
     -- ** TasksTasksGet
-    , module Tasks.Tasks.Get
+    , module Network.Google.Resource.Tasks.Tasks.Get
 
     -- ** TasksTasksInsert
-    , module Tasks.Tasks.Insert
+    , module Network.Google.Resource.Tasks.Tasks.Insert
 
     -- ** TasksTasksList
-    , module Tasks.Tasks.List
+    , module Network.Google.Resource.Tasks.Tasks.List
 
     -- ** TasksTasksMove
-    , module Tasks.Tasks.Move
+    , module Network.Google.Resource.Tasks.Tasks.Move
 
     -- ** TasksTasksPatch
-    , module Tasks.Tasks.Patch
+    , module Network.Google.Resource.Tasks.Tasks.Patch
 
     -- ** TasksTasksUpdate
-    , module Tasks.Tasks.Update
+    , module Network.Google.Resource.Tasks.Tasks.Update
 
     -- * Types
 
@@ -77,6 +77,13 @@ module Network.Google.AppsTasks
     , tNextPageToken
     , tKind
     , tItems
+
+    -- ** TaskLinks
+    , TaskLinks
+    , taskLinks
+    , tlLink
+    , tlType
+    , tlDescription
 
     -- ** TaskLists
     , TaskLists
@@ -114,6 +121,9 @@ module Network.Google.AppsTasks
     , ttLinks
     , ttNotes
     , ttPosition
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -137,7 +147,20 @@ import           Network.Google.Resource.Tasks.Tasks.Update
 TODO
 -}
 
-type AppsTasksAPI = Tasks :<|> Tasklists
+type AppsTasksAPI =
+     TasksInsertResource :<|> TasksListResource :<|>
+       TasksPatchResource
+       :<|> TasksGetResource
+       :<|> TasksClearResource
+       :<|> TasksDeleteResource
+       :<|> TasksUpdateResource
+       :<|> TasksMoveResource
+       :<|> TasklistsInsertResource
+       :<|> TasklistsListResource
+       :<|> TasklistsPatchResource
+       :<|> TasklistsGetResource
+       :<|> TasklistsDeleteResource
+       :<|> TasklistsUpdateResource
 
 appsTasksAPI :: Proxy AppsTasksAPI
 appsTasksAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesList@.
-module Games.TurnBasedMatches.List
+module Network.Google.Resource.Games.TurnBasedMatches.List
     (
     -- * REST Resource
-      TurnBasedMatchesListAPI
+      TurnBasedMatchesListResource
 
     -- * Creating a Request
-    , turnBasedMatchesList
-    , TurnBasedMatchesList
+    , turnBasedMatchesList'
+    , TurnBasedMatchesList'
 
     -- * Request Lenses
     , tbmlMaxCompletedMatches
@@ -47,20 +48,27 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesList@ which the
--- 'TurnBasedMatchesList' request conforms to.
-type TurnBasedMatchesListAPI =
+-- 'TurnBasedMatchesList'' request conforms to.
+type TurnBasedMatchesListResource =
      "turnbasedmatches" :>
        QueryParam "maxCompletedMatches" Int32 :>
-         QueryParam "includeMatchData" Bool :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 Get '[JSON] TurnBasedMatchList
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "includeMatchData" Bool :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TurnBasedMatchList
 
 -- | Returns turn-based matches the player is or was involved in.
 --
--- /See:/ 'turnBasedMatchesList' smart constructor.
-data TurnBasedMatchesList = TurnBasedMatchesList
+-- /See:/ 'turnBasedMatchesList'' smart constructor.
+data TurnBasedMatchesList' = TurnBasedMatchesList'
     { _tbmlMaxCompletedMatches :: !(Maybe Int32)
     , _tbmlQuotaUser           :: !(Maybe Text)
     , _tbmlPrettyPrint         :: !Bool
@@ -72,7 +80,7 @@ data TurnBasedMatchesList = TurnBasedMatchesList
     , _tbmlOauthToken          :: !(Maybe Text)
     , _tbmlMaxResults          :: !(Maybe Int32)
     , _tbmlFields              :: !(Maybe Text)
-    , _tbmlAlt                 :: !Text
+    , _tbmlAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesList'' with the minimum fields required to make a request.
@@ -102,10 +110,10 @@ data TurnBasedMatchesList = TurnBasedMatchesList
 -- * 'tbmlFields'
 --
 -- * 'tbmlAlt'
-turnBasedMatchesList
-    :: TurnBasedMatchesList
-turnBasedMatchesList =
-    TurnBasedMatchesList
+turnBasedMatchesList'
+    :: TurnBasedMatchesList'
+turnBasedMatchesList' =
+    TurnBasedMatchesList'
     { _tbmlMaxCompletedMatches = Nothing
     , _tbmlQuotaUser = Nothing
     , _tbmlPrettyPrint = True
@@ -117,7 +125,7 @@ turnBasedMatchesList =
     , _tbmlOauthToken = Nothing
     , _tbmlMaxResults = Nothing
     , _tbmlFields = Nothing
-    , _tbmlAlt = "json"
+    , _tbmlAlt = JSON
     }
 
 -- | The maximum number of completed or canceled matches to return in the
@@ -195,15 +203,15 @@ tbmlFields
   = lens _tbmlFields (\ s a -> s{_tbmlFields = a})
 
 -- | Data format for the response.
-tbmlAlt :: Lens' TurnBasedMatchesList' Text
+tbmlAlt :: Lens' TurnBasedMatchesList' Alt
 tbmlAlt = lens _tbmlAlt (\ s a -> s{_tbmlAlt = a})
 
 instance GoogleRequest TurnBasedMatchesList' where
         type Rs TurnBasedMatchesList' = TurnBasedMatchList
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesList{..}
+        requestWithRoute r u TurnBasedMatchesList'{..}
           = go _tbmlMaxCompletedMatches _tbmlQuotaUser
-              _tbmlPrettyPrint
+              (Just _tbmlPrettyPrint)
               _tbmlUserIp
               _tbmlKey
               _tbmlIncludeMatchData
@@ -212,9 +220,9 @@ instance GoogleRequest TurnBasedMatchesList' where
               _tbmlOauthToken
               _tbmlMaxResults
               _tbmlFields
-              _tbmlAlt
+              (Just _tbmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesListAPI)
+                      (Proxy :: Proxy TurnBasedMatchesListResource)
                       r
                       u

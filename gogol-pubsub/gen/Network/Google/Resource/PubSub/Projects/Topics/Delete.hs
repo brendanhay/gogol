@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- not deleted, but their \`topic\` field is set to \`_deleted-topic_\`.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsDelete@.
-module PubSub.Projects.Topics.Delete
+module Network.Google.Resource.PubSub.Projects.Topics.Delete
     (
     -- * REST Resource
-      ProjectsTopicsDeleteAPI
+      ProjectsTopicsDeleteResource
 
     -- * Creating a Request
-    , projectsTopicsDelete
-    , ProjectsTopicsDelete
+    , projectsTopicsDelete'
+    , ProjectsTopicsDelete'
 
     -- * Request Lenses
     , ptdXgafv
@@ -53,9 +54,23 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsDelete@ which the
--- 'ProjectsTopicsDelete' request conforms to.
-type ProjectsTopicsDeleteAPI =
-     "v1beta2" :> "{+topic}" :> Delete '[JSON] Empty
+-- 'ProjectsTopicsDelete'' request conforms to.
+type ProjectsTopicsDeleteResource =
+     "v1beta2" :>
+       "{+topic}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Deletes the topic with the given name. Returns NOT_FOUND if the topic
 -- does not exist. After a topic is deleted, a new topic may be created
@@ -63,8 +78,8 @@ type ProjectsTopicsDeleteAPI =
 -- configuration or subscriptions. Existing subscriptions to this topic are
 -- not deleted, but their \`topic\` field is set to \`_deleted-topic_\`.
 --
--- /See:/ 'projectsTopicsDelete' smart constructor.
-data ProjectsTopicsDelete = ProjectsTopicsDelete
+-- /See:/ 'projectsTopicsDelete'' smart constructor.
+data ProjectsTopicsDelete' = ProjectsTopicsDelete'
     { _ptdXgafv          :: !(Maybe Text)
     , _ptdQuotaUser      :: !(Maybe Text)
     , _ptdPrettyPrint    :: !Bool
@@ -112,11 +127,11 @@ data ProjectsTopicsDelete = ProjectsTopicsDelete
 -- * 'ptdCallback'
 --
 -- * 'ptdAlt'
-projectsTopicsDelete
+projectsTopicsDelete'
     :: Text -- ^ 'topic'
-    -> ProjectsTopicsDelete
-projectsTopicsDelete pPtdTopic_ =
-    ProjectsTopicsDelete
+    -> ProjectsTopicsDelete'
+projectsTopicsDelete' pPtdTopic_ =
+    ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
     , _ptdQuotaUser = Nothing
     , _ptdPrettyPrint = True
@@ -211,10 +226,10 @@ ptdAlt = lens _ptdAlt (\ s a -> s{_ptdAlt = a})
 instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsDelete{..}
-          = go _ptdXgafv _ptdQuotaUser _ptdPrettyPrint
+        requestWithRoute r u ProjectsTopicsDelete'{..}
+          = go _ptdXgafv _ptdQuotaUser (Just _ptdPrettyPrint)
               _ptdUploadProtocol
-              _ptdPp
+              (Just _ptdPp)
               _ptdAccessToken
               _ptdUploadType
               _ptdTopic
@@ -223,9 +238,9 @@ instance GoogleRequest ProjectsTopicsDelete' where
               _ptdOauthToken
               _ptdFields
               _ptdCallback
-              _ptdAlt
+              (Just _ptdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsDeleteAPI)
+                      (Proxy :: Proxy ProjectsTopicsDeleteResource)
                       r
                       u

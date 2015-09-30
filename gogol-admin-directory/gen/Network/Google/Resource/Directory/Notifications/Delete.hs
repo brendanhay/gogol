@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a notification
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsDelete@.
-module Directory.Notifications.Delete
+module Network.Google.Resource.Directory.Notifications.Delete
     (
     -- * REST Resource
-      NotificationsDeleteAPI
+      NotificationsDeleteResource
 
     -- * Creating a Request
-    , notificationsDelete
-    , NotificationsDelete
+    , notificationsDelete'
+    , NotificationsDelete'
 
     -- * Request Lenses
     , ndQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsDelete@ which the
--- 'NotificationsDelete' request conforms to.
-type NotificationsDeleteAPI =
+-- 'NotificationsDelete'' request conforms to.
+type NotificationsDeleteResource =
      "customer" :>
        Capture "customer" Text :>
          "notifications" :>
-           Capture "notificationId" Text :> Delete '[JSON] ()
+           Capture "notificationId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a notification
 --
--- /See:/ 'notificationsDelete' smart constructor.
-data NotificationsDelete = NotificationsDelete
+-- /See:/ 'notificationsDelete'' smart constructor.
+data NotificationsDelete' = NotificationsDelete'
     { _ndQuotaUser      :: !(Maybe Text)
     , _ndPrettyPrint    :: !Bool
     , _ndUserIp         :: !(Maybe Text)
@@ -63,7 +71,7 @@ data NotificationsDelete = NotificationsDelete
     , _ndNotificationId :: !Text
     , _ndOauthToken     :: !(Maybe Text)
     , _ndFields         :: !(Maybe Text)
-    , _ndAlt            :: !Text
+    , _ndAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data NotificationsDelete = NotificationsDelete
 -- * 'ndFields'
 --
 -- * 'ndAlt'
-notificationsDelete
+notificationsDelete'
     :: Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
-    -> NotificationsDelete
-notificationsDelete pNdCustomer_ pNdNotificationId_ =
-    NotificationsDelete
+    -> NotificationsDelete'
+notificationsDelete' pNdCustomer_ pNdNotificationId_ =
+    NotificationsDelete'
     { _ndQuotaUser = Nothing
     , _ndPrettyPrint = True
     , _ndUserIp = Nothing
@@ -101,7 +109,7 @@ notificationsDelete pNdCustomer_ pNdNotificationId_ =
     , _ndNotificationId = pNdNotificationId_
     , _ndOauthToken = Nothing
     , _ndFields = Nothing
-    , _ndAlt = "json"
+    , _ndAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ ndFields :: Lens' NotificationsDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
 -- | Data format for the response.
-ndAlt :: Lens' NotificationsDelete' Text
+ndAlt :: Lens' NotificationsDelete' Alt
 ndAlt = lens _ndAlt (\ s a -> s{_ndAlt = a})
 
 instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u NotificationsDelete{..}
-          = go _ndQuotaUser _ndPrettyPrint _ndUserIp
+        requestWithRoute r u NotificationsDelete'{..}
+          = go _ndQuotaUser (Just _ndPrettyPrint) _ndUserIp
               _ndCustomer
               _ndKey
               _ndNotificationId
               _ndOauthToken
               _ndFields
-              _ndAlt
+              (Just _ndAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy NotificationsDeleteAPI)
+                      (Proxy :: Proxy NotificationsDeleteResource)
                       r
                       u

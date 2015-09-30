@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersStop@.
-module Gmail.Users.Stop
+module Network.Google.Resource.Gmail.Users.Stop
     (
     -- * REST Resource
-      UsersStopAPI
+      UsersStopResource
 
     -- * Creating a Request
-    , usersStop
-    , UsersStop
+    , usersStop'
+    , UsersStop'
 
     -- * Request Lenses
     , usQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersStop@ which the
--- 'UsersStop' request conforms to.
-type UsersStopAPI =
-     Capture "userId" Text :> "stop" :> Post '[JSON] ()
+-- 'UsersStop'' request conforms to.
+type UsersStopResource =
+     Capture "userId" Text :>
+       "stop" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --
--- /See:/ 'usersStop' smart constructor.
-data UsersStop = UsersStop
+-- /See:/ 'usersStop'' smart constructor.
+data UsersStop' = UsersStop'
     { _usQuotaUser   :: !(Maybe Text)
     , _usPrettyPrint :: !Bool
     , _usUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data UsersStop = UsersStop
     , _usKey         :: !(Maybe Text)
     , _usOauthToken  :: !(Maybe Text)
     , _usFields      :: !(Maybe Text)
-    , _usAlt         :: !Text
+    , _usAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersStop'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data UsersStop = UsersStop
 -- * 'usFields'
 --
 -- * 'usAlt'
-usersStop
+usersStop'
     :: Text
-    -> UsersStop
-usersStop pUsUserId_ =
-    UsersStop
+    -> UsersStop'
+usersStop' pUsUserId_ =
+    UsersStop'
     { _usQuotaUser = Nothing
     , _usPrettyPrint = True
     , _usUserIp = Nothing
@@ -92,7 +101,7 @@ usersStop pUsUserId_ =
     , _usKey = Nothing
     , _usOauthToken = Nothing
     , _usFields = Nothing
-    , _usAlt = "json"
+    , _usAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +143,20 @@ usFields :: Lens' UsersStop' (Maybe Text)
 usFields = lens _usFields (\ s a -> s{_usFields = a})
 
 -- | Data format for the response.
-usAlt :: Lens' UsersStop' Text
+usAlt :: Lens' UsersStop' Alt
 usAlt = lens _usAlt (\ s a -> s{_usAlt = a})
 
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersStop{..}
-          = go _usQuotaUser _usPrettyPrint _usUserIp _usUserId
+        requestWithRoute r u UsersStop'{..}
+          = go _usQuotaUser (Just _usPrettyPrint) _usUserIp
+              _usUserId
               _usKey
               _usOauthToken
               _usFields
-              _usAlt
+              (Just _usAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersStopAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersStopResource)
+                      r
+                      u

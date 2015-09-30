@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- playlistItems.insert() method to mark a video as a favorite.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeActivitiesInsert@.
-module YouTube.Activities.Insert
+module Network.Google.Resource.YouTube.Activities.Insert
     (
     -- * REST Resource
-      ActivitiesInsertAPI
+      ActivitiesInsertResource
 
     -- * Creating a Request
-    , activitiesInsert
-    , ActivitiesInsert
+    , activitiesInsert'
+    , ActivitiesInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -49,10 +50,17 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeActivitiesInsert@ which the
--- 'ActivitiesInsert' request conforms to.
-type ActivitiesInsertAPI =
+-- 'ActivitiesInsert'' request conforms to.
+type ActivitiesInsertResource =
      "activities" :>
-       QueryParam "part" Text :> Post '[JSON] Activity
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Activity
 
 -- | Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even
@@ -62,8 +70,8 @@ type ActivitiesInsertAPI =
 -- would use the API\'s videos.rate() method to rate a video and the
 -- playlistItems.insert() method to mark a video as a favorite.
 --
--- /See:/ 'activitiesInsert' smart constructor.
-data ActivitiesInsert = ActivitiesInsert
+-- /See:/ 'activitiesInsert'' smart constructor.
+data ActivitiesInsert' = ActivitiesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPart        :: !Text
     , _aiPrettyPrint :: !Bool
@@ -71,7 +79,7 @@ data ActivitiesInsert = ActivitiesInsert
     , _aiKey         :: !(Maybe Text)
     , _aiOauthToken  :: !(Maybe Text)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data ActivitiesInsert = ActivitiesInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-activitiesInsert
+activitiesInsert'
     :: Text -- ^ 'part'
-    -> ActivitiesInsert
-activitiesInsert pAiPart_ =
-    ActivitiesInsert
+    -> ActivitiesInsert'
+activitiesInsert' pAiPart_ =
+    ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPart = pAiPart_
     , _aiPrettyPrint = True
@@ -105,7 +113,7 @@ activitiesInsert pAiPart_ =
     , _aiKey = Nothing
     , _aiOauthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,21 +156,22 @@ aiFields :: Lens' ActivitiesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' ActivitiesInsert' Text
+aiAlt :: Lens' ActivitiesInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ActivitiesInsert{..}
-          = go _aiQuotaUser (Just _aiPart) _aiPrettyPrint
+        requestWithRoute r u ActivitiesInsert'{..}
+          = go _aiQuotaUser (Just _aiPart)
+              (Just _aiPrettyPrint)
               _aiUserIp
               _aiKey
               _aiOauthToken
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ActivitiesInsertAPI)
+                      (Proxy :: Proxy ActivitiesInsertResource)
                       r
                       u

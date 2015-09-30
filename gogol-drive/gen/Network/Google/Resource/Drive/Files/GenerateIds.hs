@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Generates a set of file IDs which can be provided in insert requests.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesGenerateIds@.
-module Drive.Files.GenerateIds
+module Network.Google.Resource.Drive.Files.GenerateIds
     (
     -- * REST Resource
-      FilesGenerateIdsAPI
+      FilesGenerateIdsResource
 
     -- * Creating a Request
-    , filesGenerateIds
-    , FilesGenerateIds
+    , filesGenerateIds'
+    , FilesGenerateIds'
 
     -- * Request Lenses
     , fgiSpace
@@ -44,18 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesGenerateIds@ which the
--- 'FilesGenerateIds' request conforms to.
-type FilesGenerateIdsAPI =
+-- 'FilesGenerateIds'' request conforms to.
+type FilesGenerateIdsResource =
      "files" :>
        "generateIds" :>
          QueryParam "space" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] GeneratedIds
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] GeneratedIds
 
 -- | Generates a set of file IDs which can be provided in insert requests.
 --
--- /See:/ 'filesGenerateIds' smart constructor.
-data FilesGenerateIds = FilesGenerateIds
+-- /See:/ 'filesGenerateIds'' smart constructor.
+data FilesGenerateIds' = FilesGenerateIds'
     { _fgiSpace       :: !Text
     , _fgiQuotaUser   :: !(Maybe Text)
     , _fgiPrettyPrint :: !Bool
@@ -64,7 +71,7 @@ data FilesGenerateIds = FilesGenerateIds
     , _fgiOauthToken  :: !(Maybe Text)
     , _fgiMaxResults  :: !Int32
     , _fgiFields      :: !(Maybe Text)
-    , _fgiAlt         :: !Text
+    , _fgiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGenerateIds'' with the minimum fields required to make a request.
@@ -88,10 +95,10 @@ data FilesGenerateIds = FilesGenerateIds
 -- * 'fgiFields'
 --
 -- * 'fgiAlt'
-filesGenerateIds
-    :: FilesGenerateIds
-filesGenerateIds =
-    FilesGenerateIds
+filesGenerateIds'
+    :: FilesGenerateIds'
+filesGenerateIds' =
+    FilesGenerateIds'
     { _fgiSpace = "drive"
     , _fgiQuotaUser = Nothing
     , _fgiPrettyPrint = True
@@ -100,7 +107,7 @@ filesGenerateIds =
     , _fgiOauthToken = Nothing
     , _fgiMaxResults = 10
     , _fgiFields = Nothing
-    , _fgiAlt = "json"
+    , _fgiAlt = JSON
     }
 
 -- | The space in which the IDs can be used to create new files. Supported
@@ -151,22 +158,23 @@ fgiFields
   = lens _fgiFields (\ s a -> s{_fgiFields = a})
 
 -- | Data format for the response.
-fgiAlt :: Lens' FilesGenerateIds' Text
+fgiAlt :: Lens' FilesGenerateIds' Alt
 fgiAlt = lens _fgiAlt (\ s a -> s{_fgiAlt = a})
 
 instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesGenerateIds{..}
-          = go (Just _fgiSpace) _fgiQuotaUser _fgiPrettyPrint
+        requestWithRoute r u FilesGenerateIds'{..}
+          = go (Just _fgiSpace) _fgiQuotaUser
+              (Just _fgiPrettyPrint)
               _fgiUserIp
               _fgiKey
               _fgiOauthToken
               (Just _fgiMaxResults)
               _fgiFields
-              _fgiAlt
+              (Just _fgiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FilesGenerateIdsAPI)
+                      (Proxy :: Proxy FilesGenerateIdsResource)
                       r
                       u

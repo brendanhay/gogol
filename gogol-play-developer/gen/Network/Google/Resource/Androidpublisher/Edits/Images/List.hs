@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all images for the specified language and image type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsImagesList@.
-module Androidpublisher.Edits.Images.List
+module Network.Google.Resource.Androidpublisher.Edits.Images.List
     (
     -- * REST Resource
-      EditsImagesListAPI
+      EditsImagesListResource
 
     -- * Creating a Request
-    , editsImagesList
-    , EditsImagesList
+    , editsImagesList'
+    , EditsImagesList'
 
     -- * Request Lenses
     , eilQuotaUser
@@ -46,31 +47,40 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsImagesList@ which the
--- 'EditsImagesList' request conforms to.
-type EditsImagesListAPI =
+-- 'EditsImagesList'' request conforms to.
+type EditsImagesListResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType" Text :>
-                 Get '[JSON] ImagesListResponse
+               Capture "imageType"
+                 AndroidpublisherEditsImagesListImageType
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ImagesListResponse
 
 -- | Lists all images for the specified language and image type.
 --
--- /See:/ 'editsImagesList' smart constructor.
-data EditsImagesList = EditsImagesList
+-- /See:/ 'editsImagesList'' smart constructor.
+data EditsImagesList' = EditsImagesList'
     { _eilQuotaUser   :: !(Maybe Text)
     , _eilPrettyPrint :: !Bool
     , _eilPackageName :: !Text
     , _eilUserIp      :: !(Maybe Text)
-    , _eilImageType   :: !Text
+    , _eilImageType   :: !AndroidpublisherEditsImagesListImageType
     , _eilKey         :: !(Maybe Text)
     , _eilLanguage    :: !Text
     , _eilOauthToken  :: !(Maybe Text)
     , _eilEditId      :: !Text
     , _eilFields      :: !(Maybe Text)
-    , _eilAlt         :: !Text
+    , _eilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesList'' with the minimum fields required to make a request.
@@ -98,14 +108,14 @@ data EditsImagesList = EditsImagesList
 -- * 'eilFields'
 --
 -- * 'eilAlt'
-editsImagesList
+editsImagesList'
     :: Text -- ^ 'packageName'
-    -> Text -- ^ 'imageType'
+    -> AndroidpublisherEditsImagesListImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsImagesList
-editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
-    EditsImagesList
+    -> EditsImagesList'
+editsImagesList' pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
+    EditsImagesList'
     { _eilQuotaUser = Nothing
     , _eilPrettyPrint = True
     , _eilPackageName = pEilPackageName_
@@ -116,7 +126,7 @@ editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
     , _eilOauthToken = Nothing
     , _eilEditId = pEilEditId_
     , _eilFields = Nothing
-    , _eilAlt = "json"
+    , _eilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +155,7 @@ eilUserIp :: Lens' EditsImagesList' (Maybe Text)
 eilUserIp
   = lens _eilUserIp (\ s a -> s{_eilUserIp = a})
 
-eilImageType :: Lens' EditsImagesList' Text
+eilImageType :: Lens' EditsImagesList' AndroidpublisherEditsImagesListImageType
 eilImageType
   = lens _eilImageType (\ s a -> s{_eilImageType = a})
 
@@ -179,14 +189,15 @@ eilFields
   = lens _eilFields (\ s a -> s{_eilFields = a})
 
 -- | Data format for the response.
-eilAlt :: Lens' EditsImagesList' Text
+eilAlt :: Lens' EditsImagesList' Alt
 eilAlt = lens _eilAlt (\ s a -> s{_eilAlt = a})
 
 instance GoogleRequest EditsImagesList' where
         type Rs EditsImagesList' = ImagesListResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsImagesList{..}
-          = go _eilQuotaUser _eilPrettyPrint _eilPackageName
+        requestWithRoute r u EditsImagesList'{..}
+          = go _eilQuotaUser (Just _eilPrettyPrint)
+              _eilPackageName
               _eilUserIp
               _eilImageType
               _eilKey
@@ -194,8 +205,9 @@ instance GoogleRequest EditsImagesList' where
               _eilOauthToken
               _eilEditId
               _eilFields
-              _eilAlt
+              (Just _eilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsImagesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsImagesListResource)
                       r
                       u

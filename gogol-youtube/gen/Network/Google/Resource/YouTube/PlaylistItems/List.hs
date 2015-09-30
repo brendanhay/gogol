@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistItemsList@.
-module YouTube.PlaylistItems.List
+module Network.Google.Resource.YouTube.PlaylistItems.List
     (
     -- * REST Resource
-      PlaylistItemsListAPI
+      PlaylistItemsListResource
 
     -- * Creating a Request
-    , playlistItemsList
-    , PlaylistItemsList
+    , playlistItemsList'
+    , PlaylistItemsList'
 
     -- * Request Lenses
     , pilQuotaUser
@@ -51,24 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistItemsList@ which the
--- 'PlaylistItemsList' request conforms to.
-type PlaylistItemsListAPI =
+-- 'PlaylistItemsList'' request conforms to.
+type PlaylistItemsListResource =
      "playlistItems" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "videoId" Text :>
-             QueryParam "id" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "playlistId" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] PlaylistItemListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "videoId" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "playlistId" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] PlaylistItemListResponse
 
 -- | Returns a collection of playlist items that match the API request
 -- parameters. You can retrieve all of the playlist items in a specified
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
--- /See:/ 'playlistItemsList' smart constructor.
-data PlaylistItemsList = PlaylistItemsList
+-- /See:/ 'playlistItemsList'' smart constructor.
+data PlaylistItemsList' = PlaylistItemsList'
     { _pilQuotaUser              :: !(Maybe Text)
     , _pilPart                   :: !Text
     , _pilPrettyPrint            :: !Bool
@@ -82,7 +90,7 @@ data PlaylistItemsList = PlaylistItemsList
     , _pilPlaylistId             :: !(Maybe Text)
     , _pilMaxResults             :: !Word32
     , _pilFields                 :: !(Maybe Text)
-    , _pilAlt                    :: !Text
+    , _pilAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistItemsList'' with the minimum fields required to make a request.
@@ -116,11 +124,11 @@ data PlaylistItemsList = PlaylistItemsList
 -- * 'pilFields'
 --
 -- * 'pilAlt'
-playlistItemsList
+playlistItemsList'
     :: Text -- ^ 'part'
-    -> PlaylistItemsList
-playlistItemsList pPilPart_ =
-    PlaylistItemsList
+    -> PlaylistItemsList'
+playlistItemsList' pPilPart_ =
+    PlaylistItemsList'
     { _pilQuotaUser = Nothing
     , _pilPart = pPilPart_
     , _pilPrettyPrint = True
@@ -134,7 +142,7 @@ playlistItemsList pPilPart_ =
     , _pilPlaylistId = Nothing
     , _pilMaxResults = 5
     , _pilFields = Nothing
-    , _pilAlt = "json"
+    , _pilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -234,14 +242,15 @@ pilFields
   = lens _pilFields (\ s a -> s{_pilFields = a})
 
 -- | Data format for the response.
-pilAlt :: Lens' PlaylistItemsList' Text
+pilAlt :: Lens' PlaylistItemsList' Alt
 pilAlt = lens _pilAlt (\ s a -> s{_pilAlt = a})
 
 instance GoogleRequest PlaylistItemsList' where
         type Rs PlaylistItemsList' = PlaylistItemListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistItemsList{..}
-          = go _pilQuotaUser (Just _pilPart) _pilPrettyPrint
+        requestWithRoute r u PlaylistItemsList'{..}
+          = go _pilQuotaUser (Just _pilPart)
+              (Just _pilPrettyPrint)
               _pilUserIp
               _pilOnBehalfOfContentOwner
               _pilVideoId
@@ -252,9 +261,9 @@ instance GoogleRequest PlaylistItemsList' where
               _pilPlaylistId
               (Just _pilMaxResults)
               _pilFields
-              _pilAlt
+              (Just _pilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlaylistItemsListAPI)
+                      (Proxy :: Proxy PlaylistItemsListResource)
                       r
                       u

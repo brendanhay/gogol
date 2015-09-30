@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a new URL channel to the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLchannelsInsert@.
-module AdSenseHost.URLchannels.Insert
+module Network.Google.Resource.AdSenseHost.URLchannels.Insert
     (
     -- * REST Resource
-      UrlchannelsInsertAPI
+      UrlchannelsInsertResource
 
     -- * Creating a Request
-    , uRLchannelsInsert
-    , URLchannelsInsert
+    , uRLchannelsInsert'
+    , URLchannelsInsert'
 
     -- * Request Lenses
     , uiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostURLchannelsInsert@ which the
--- 'URLchannelsInsert' request conforms to.
-type UrlchannelsInsertAPI =
+-- 'URLchannelsInsert'' request conforms to.
+type UrlchannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
-         "urlchannels" :> Post '[JSON] URLChannel
+         "urlchannels" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] URLChannel
 
 -- | Add a new URL channel to the host AdSense account.
 --
--- /See:/ 'uRLchannelsInsert' smart constructor.
-data URLchannelsInsert = URLchannelsInsert
+-- /See:/ 'uRLchannelsInsert'' smart constructor.
+data URLchannelsInsert' = URLchannelsInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data URLchannelsInsert = URLchannelsInsert
     , _uiKey         :: !(Maybe Text)
     , _uiOauthToken  :: !(Maybe Text)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Text
+    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLchannelsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data URLchannelsInsert = URLchannelsInsert
 -- * 'uiFields'
 --
 -- * 'uiAlt'
-uRLchannelsInsert
+uRLchannelsInsert'
     :: Text -- ^ 'adClientId'
-    -> URLchannelsInsert
-uRLchannelsInsert pUiAdClientId_ =
-    URLchannelsInsert
+    -> URLchannelsInsert'
+uRLchannelsInsert' pUiAdClientId_ =
+    URLchannelsInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiUserIp = Nothing
@@ -94,7 +102,7 @@ uRLchannelsInsert pUiAdClientId_ =
     , _uiKey = Nothing
     , _uiOauthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = "json"
+    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,21 @@ uiFields :: Lens' URLchannelsInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 -- | Data format for the response.
-uiAlt :: Lens' URLchannelsInsert' Text
+uiAlt :: Lens' URLchannelsInsert' Alt
 uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
 
 instance GoogleRequest URLchannelsInsert' where
         type Rs URLchannelsInsert' = URLChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u URLchannelsInsert{..}
-          = go _uiQuotaUser _uiPrettyPrint _uiUserIp
+        requestWithRoute r u URLchannelsInsert'{..}
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIp
               _uiAdClientId
               _uiKey
               _uiOauthToken
               _uiFields
-              _uiAlt
+              (Just _uiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlchannelsInsertAPI)
+                      (Proxy :: Proxy UrlchannelsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- authenticated user must own the file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesDelete@.
-module Drive.Files.Delete
+module Network.Google.Resource.Drive.Files.Delete
     (
     -- * REST Resource
-      FilesDeleteAPI
+      FilesDeleteResource
 
     -- * Creating a Request
-    , filesDelete
-    , FilesDelete
+    , filesDelete'
+    , FilesDelete'
 
     -- * Request Lenses
     , fdQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesDelete@ which the
--- 'FilesDelete' request conforms to.
-type FilesDeleteAPI =
-     "files" :> Capture "fileId" Text :> Delete '[JSON] ()
+-- 'FilesDelete'' request conforms to.
+type FilesDeleteResource =
+     "files" :>
+       Capture "fileId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
 --
--- /See:/ 'filesDelete' smart constructor.
-data FilesDelete = FilesDelete
+-- /See:/ 'filesDelete'' smart constructor.
+data FilesDelete' = FilesDelete'
     { _fdQuotaUser   :: !(Maybe Text)
     , _fdPrettyPrint :: !Bool
     , _fdUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data FilesDelete = FilesDelete
     , _fdFileId      :: !Text
     , _fdOauthToken  :: !(Maybe Text)
     , _fdFields      :: !(Maybe Text)
-    , _fdAlt         :: !Text
+    , _fdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesDelete'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data FilesDelete = FilesDelete
 -- * 'fdFields'
 --
 -- * 'fdAlt'
-filesDelete
+filesDelete'
     :: Text -- ^ 'fileId'
-    -> FilesDelete
-filesDelete pFdFileId_ =
-    FilesDelete
+    -> FilesDelete'
+filesDelete' pFdFileId_ =
+    FilesDelete'
     { _fdQuotaUser = Nothing
     , _fdPrettyPrint = True
     , _fdUserIp = Nothing
@@ -94,7 +103,7 @@ filesDelete pFdFileId_ =
     , _fdFileId = pFdFileId_
     , _fdOauthToken = Nothing
     , _fdFields = Nothing
-    , _fdAlt = "json"
+    , _fdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +144,21 @@ fdFields :: Lens' FilesDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
 -- | Data format for the response.
-fdAlt :: Lens' FilesDelete' Text
+fdAlt :: Lens' FilesDelete' Alt
 fdAlt = lens _fdAlt (\ s a -> s{_fdAlt = a})
 
 instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesDelete{..}
-          = go _fdQuotaUser _fdPrettyPrint _fdUserIp _fdKey
+        requestWithRoute r u FilesDelete'{..}
+          = go _fdQuotaUser (Just _fdPrettyPrint) _fdUserIp
+              _fdKey
               _fdFileId
               _fdOauthToken
               _fdFields
-              _fdAlt
+              (Just _fdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy FilesDeleteResource)
+                      r
+                      u

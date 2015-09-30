@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- expiration time.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherPurchasesSubscriptionsDefer@.
-module Androidpublisher.Purchases.Subscriptions.Defer
+module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Defer
     (
     -- * REST Resource
-      PurchasesSubscriptionsDeferAPI
+      PurchasesSubscriptionsDeferResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsDefer
-    , PurchasesSubscriptionsDefer
+    , purchasesSubscriptionsDefer'
+    , PurchasesSubscriptionsDefer'
 
     -- * Request Lenses
     , psdQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherPurchasesSubscriptionsDefer@ which the
--- 'PurchasesSubscriptionsDefer' request conforms to.
-type PurchasesSubscriptionsDeferAPI =
+-- 'PurchasesSubscriptionsDefer'' request conforms to.
+type PurchasesSubscriptionsDeferResource =
      Capture "packageName" Text :>
        "purchases" :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
              "tokens" :>
                "{token}:defer" :>
-                 Post '[JSON] SubscriptionPurchasesDeferResponse
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] SubscriptionPurchasesDeferResponse
 
 -- | Defers a user\'s subscription purchase until a specified future
 -- expiration time.
 --
--- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
-data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
+-- /See:/ 'purchasesSubscriptionsDefer'' smart constructor.
+data PurchasesSubscriptionsDefer' = PurchasesSubscriptionsDefer'
     { _psdQuotaUser      :: !(Maybe Text)
     , _psdPrettyPrint    :: !Bool
     , _psdPackageName    :: !Text
@@ -70,7 +78,7 @@ data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
     , _psdOauthToken     :: !(Maybe Text)
     , _psdSubscriptionId :: !Text
     , _psdFields         :: !(Maybe Text)
-    , _psdAlt            :: !Text
+    , _psdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsDefer'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
 -- * 'psdFields'
 --
 -- * 'psdAlt'
-purchasesSubscriptionsDefer
+purchasesSubscriptionsDefer'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
     -> Text -- ^ 'subscriptionId'
-    -> PurchasesSubscriptionsDefer
-purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdSubscriptionId_ =
-    PurchasesSubscriptionsDefer
+    -> PurchasesSubscriptionsDefer'
+purchasesSubscriptionsDefer' pPsdPackageName_ pPsdToken_ pPsdSubscriptionId_ =
+    PurchasesSubscriptionsDefer'
     { _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
     , _psdPackageName = pPsdPackageName_
@@ -112,7 +120,7 @@ purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdSubscriptionId_ =
     , _psdOauthToken = Nothing
     , _psdSubscriptionId = pPsdSubscriptionId_
     , _psdFields = Nothing
-    , _psdAlt = "json"
+    , _psdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +178,7 @@ psdFields
   = lens _psdFields (\ s a -> s{_psdFields = a})
 
 -- | Data format for the response.
-psdAlt :: Lens' PurchasesSubscriptionsDefer' Text
+psdAlt :: Lens' PurchasesSubscriptionsDefer' Alt
 psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
 
 instance GoogleRequest PurchasesSubscriptionsDefer'
@@ -178,17 +186,18 @@ instance GoogleRequest PurchasesSubscriptionsDefer'
         type Rs PurchasesSubscriptionsDefer' =
              SubscriptionPurchasesDeferResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u PurchasesSubscriptionsDefer{..}
-          = go _psdQuotaUser _psdPrettyPrint _psdPackageName
+        requestWithRoute r u PurchasesSubscriptionsDefer'{..}
+          = go _psdQuotaUser (Just _psdPrettyPrint)
+              _psdPackageName
               _psdUserIp
               _psdToken
               _psdKey
               _psdOauthToken
               _psdSubscriptionId
               _psdFields
-              _psdAlt
+              (Just _psdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PurchasesSubscriptionsDeferAPI)
+                      (Proxy :: Proxy PurchasesSubscriptionsDeferResource)
                       r
                       u

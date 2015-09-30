@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosInsert@.
-module YouTube.Videos.Insert
+module Network.Google.Resource.YouTube.Videos.Insert
     (
     -- * REST Resource
-      VideosInsertAPI
+      VideosInsertResource
 
     -- * Creating a Request
-    , videosInsert
-    , VideosInsert
+    , videosInsert'
+    , VideosInsert'
 
     -- * Request Lenses
     , viQuotaUser
@@ -48,20 +49,27 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosInsert@ which the
--- 'VideosInsert' request conforms to.
-type VideosInsertAPI =
+-- 'VideosInsert'' request conforms to.
+type VideosInsertResource =
      "videos" :>
-       QueryParam "part" Text :>
-         QueryParam "stabilize" Bool :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "notifySubscribers" Bool :>
-                 QueryParam "autoLevels" Bool :> Post '[JSON] Video
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "stabilize" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "notifySubscribers" Bool :>
+                         QueryParam "autoLevels" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
--- /See:/ 'videosInsert' smart constructor.
-data VideosInsert = VideosInsert
+-- /See:/ 'videosInsert'' smart constructor.
+data VideosInsert' = VideosInsert'
     { _viQuotaUser                     :: !(Maybe Text)
     , _viPart                          :: !Text
     , _viPrettyPrint                   :: !Bool
@@ -74,7 +82,7 @@ data VideosInsert = VideosInsert
     , _viAutoLevels                    :: !(Maybe Bool)
     , _viOauthToken                    :: !(Maybe Text)
     , _viFields                        :: !(Maybe Text)
-    , _viAlt                           :: !Text
+    , _viAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosInsert'' with the minimum fields required to make a request.
@@ -106,11 +114,11 @@ data VideosInsert = VideosInsert
 -- * 'viFields'
 --
 -- * 'viAlt'
-videosInsert
+videosInsert'
     :: Text -- ^ 'part'
-    -> VideosInsert
-videosInsert pViPart_ =
-    VideosInsert
+    -> VideosInsert'
+videosInsert' pViPart_ =
+    VideosInsert'
     { _viQuotaUser = Nothing
     , _viPart = pViPart_
     , _viPrettyPrint = True
@@ -123,7 +131,7 @@ videosInsert pViPart_ =
     , _viAutoLevels = Nothing
     , _viOauthToken = Nothing
     , _viFields = Nothing
-    , _viAlt = "json"
+    , _viAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -231,14 +239,15 @@ viFields :: Lens' VideosInsert' (Maybe Text)
 viFields = lens _viFields (\ s a -> s{_viFields = a})
 
 -- | Data format for the response.
-viAlt :: Lens' VideosInsert' Text
+viAlt :: Lens' VideosInsert' Alt
 viAlt = lens _viAlt (\ s a -> s{_viAlt = a})
 
 instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosInsert{..}
-          = go _viQuotaUser (Just _viPart) _viPrettyPrint
+        requestWithRoute r u VideosInsert'{..}
+          = go _viQuotaUser (Just _viPart)
+              (Just _viPrettyPrint)
               _viStabilize
               _viUserIp
               _viOnBehalfOfContentOwner
@@ -248,7 +257,9 @@ instance GoogleRequest VideosInsert' where
               _viAutoLevels
               _viOauthToken
               _viFields
-              _viAlt
+              (Just _viAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy VideosInsertResource)
+                      r
                       u

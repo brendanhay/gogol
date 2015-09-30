@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- existing policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsSetIAMPolicy@.
-module PubSub.Projects.Topics.SetIAMPolicy
+module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
     (
     -- * REST Resource
-      ProjectsTopicsSetIAMPolicyAPI
+      ProjectsTopicsSetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsTopicsSetIAMPolicy
-    , ProjectsTopicsSetIAMPolicy
+    , projectsTopicsSetIAMPolicy'
+    , ProjectsTopicsSetIAMPolicy'
 
     -- * Request Lenses
     , ptsipXgafv
@@ -50,16 +51,29 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsSetIAMPolicy@ which the
--- 'ProjectsTopicsSetIAMPolicy' request conforms to.
-type ProjectsTopicsSetIAMPolicyAPI =
+-- 'ProjectsTopicsSetIAMPolicy'' request conforms to.
+type ProjectsTopicsSetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:setIamPolicy" :> Post '[JSON] Policy
+       "{+resource}:setIamPolicy" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ 'projectsTopicsSetIAMPolicy' smart constructor.
-data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy
+-- /See:/ 'projectsTopicsSetIAMPolicy'' smart constructor.
+data ProjectsTopicsSetIAMPolicy' = ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv          :: !(Maybe Text)
     , _ptsipQuotaUser      :: !(Maybe Text)
     , _ptsipPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data ProjectsTopicsSetIAMPolicy = ProjectsTopicsSetIAMPolicy
 -- * 'ptsipCallback'
 --
 -- * 'ptsipAlt'
-projectsTopicsSetIAMPolicy
+projectsTopicsSetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsTopicsSetIAMPolicy
-projectsTopicsSetIAMPolicy pPtsipResource_ =
-    ProjectsTopicsSetIAMPolicy
+    -> ProjectsTopicsSetIAMPolicy'
+projectsTopicsSetIAMPolicy' pPtsipResource_ =
+    ProjectsTopicsSetIAMPolicy'
     { _ptsipXgafv = Nothing
     , _ptsipQuotaUser = Nothing
     , _ptsipPrettyPrint = True
@@ -214,10 +228,11 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
          where
         type Rs ProjectsTopicsSetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsSetIAMPolicy{..}
-          = go _ptsipXgafv _ptsipQuotaUser _ptsipPrettyPrint
+        requestWithRoute r u ProjectsTopicsSetIAMPolicy'{..}
+          = go _ptsipXgafv _ptsipQuotaUser
+              (Just _ptsipPrettyPrint)
               _ptsipUploadProtocol
-              _ptsipPp
+              (Just _ptsipPp)
               _ptsipAccessToken
               _ptsipUploadType
               _ptsipBearerToken
@@ -226,9 +241,9 @@ instance GoogleRequest ProjectsTopicsSetIAMPolicy'
               _ptsipOauthToken
               _ptsipFields
               _ptsipCallback
-              _ptsipAlt
+              (Just _ptsipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsSetIAMPolicyAPI)
+                      (Proxy :: Proxy ProjectsTopicsSetIAMPolicyResource)
                       r
                       u

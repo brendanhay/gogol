@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Sets the named ports in an instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsSetNamedPorts@.
-module Compute.InstanceGroups.SetNamedPorts
+module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
     (
     -- * REST Resource
-      InstanceGroupsSetNamedPortsAPI
+      InstanceGroupsSetNamedPortsResource
 
     -- * Creating a Request
-    , instanceGroupsSetNamedPorts
-    , InstanceGroupsSetNamedPorts
+    , instanceGroupsSetNamedPorts'
+    , InstanceGroupsSetNamedPorts'
 
     -- * Request Lenses
     , igsnpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsSetNamedPorts@ which the
--- 'InstanceGroupsSetNamedPorts' request conforms to.
-type InstanceGroupsSetNamedPortsAPI =
+-- 'InstanceGroupsSetNamedPorts'' request conforms to.
+type InstanceGroupsSetNamedPortsResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
-               "setNamedPorts" :> Post '[JSON] Operation
+               "setNamedPorts" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets the named ports in an instance group.
 --
--- /See:/ 'instanceGroupsSetNamedPorts' smart constructor.
-data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts
+-- /See:/ 'instanceGroupsSetNamedPorts'' smart constructor.
+data InstanceGroupsSetNamedPorts' = InstanceGroupsSetNamedPorts'
     { _igsnpQuotaUser     :: !(Maybe Text)
     , _igsnpPrettyPrint   :: !Bool
     , _igsnpProject       :: !Text
@@ -67,7 +75,7 @@ data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts
     , _igsnpOauthToken    :: !(Maybe Text)
     , _igsnpInstanceGroup :: !Text
     , _igsnpFields        :: !(Maybe Text)
-    , _igsnpAlt           :: !Text
+    , _igsnpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsSetNamedPorts'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data InstanceGroupsSetNamedPorts = InstanceGroupsSetNamedPorts
 -- * 'igsnpFields'
 --
 -- * 'igsnpAlt'
-instanceGroupsSetNamedPorts
+instanceGroupsSetNamedPorts'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
-    -> InstanceGroupsSetNamedPorts
-instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpInstanceGroup_ =
-    InstanceGroupsSetNamedPorts
+    -> InstanceGroupsSetNamedPorts'
+instanceGroupsSetNamedPorts' pIgsnpProject_ pIgsnpZone_ pIgsnpInstanceGroup_ =
+    InstanceGroupsSetNamedPorts'
     { _igsnpQuotaUser = Nothing
     , _igsnpPrettyPrint = True
     , _igsnpProject = pIgsnpProject_
@@ -109,7 +117,7 @@ instanceGroupsSetNamedPorts pIgsnpProject_ pIgsnpZone_ pIgsnpInstanceGroup_ =
     , _igsnpOauthToken = Nothing
     , _igsnpInstanceGroup = pIgsnpInstanceGroup_
     , _igsnpFields = Nothing
-    , _igsnpAlt = "json"
+    , _igsnpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ igsnpFields
   = lens _igsnpFields (\ s a -> s{_igsnpFields = a})
 
 -- | Data format for the response.
-igsnpAlt :: Lens' InstanceGroupsSetNamedPorts' Text
+igsnpAlt :: Lens' InstanceGroupsSetNamedPorts' Alt
 igsnpAlt = lens _igsnpAlt (\ s a -> s{_igsnpAlt = a})
 
 instance GoogleRequest InstanceGroupsSetNamedPorts'
          where
         type Rs InstanceGroupsSetNamedPorts' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsSetNamedPorts{..}
-          = go _igsnpQuotaUser _igsnpPrettyPrint _igsnpProject
+        requestWithRoute r u InstanceGroupsSetNamedPorts'{..}
+          = go _igsnpQuotaUser (Just _igsnpPrettyPrint)
+              _igsnpProject
               _igsnpUserIp
               _igsnpZone
               _igsnpKey
               _igsnpOauthToken
               _igsnpInstanceGroup
               _igsnpFields
-              _igsnpAlt
+              (Just _igsnpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsSetNamedPortsAPI)
+                      (Proxy :: Proxy InstanceGroupsSetNamedPortsResource)
                       r
                       u

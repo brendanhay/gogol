@@ -17,6 +17,9 @@ module Network.Google.Datastore.Types
     -- * Service URL
       datastoreURL
 
+    -- * PropertyOrderDirection
+    , PropertyOrderDirection (..)
+
     -- * RollbackRequest
     , RollbackRequest
     , rollbackRequest
@@ -58,6 +61,10 @@ module Network.Google.Datastore.Types
     , allocateIdsRequest
     , airKeys
 
+    -- * EntityProperties
+    , EntityProperties
+    , entityProperties
+
     -- * BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
@@ -71,17 +78,26 @@ module Network.Google.Datastore.Types
     , rqrQuery
     , rqrReadOptions
 
+    -- * CompositeFilterOperator
+    , CompositeFilterOperator (..)
+
     -- * CompositeFilter
     , CompositeFilter
     , compositeFilter
     , cfOperator
     , cfFilters
 
+    -- * QueryResultBatchEntityResultType
+    , QueryResultBatchEntityResultType (..)
+
     -- * BeginTransactionResponse
     , BeginTransactionResponse
     , beginTransactionResponse
     , btrTransaction
     , btrHeader
+
+    -- * QueryResultBatchMoreResults
+    , QueryResultBatchMoreResults (..)
 
     -- * RunQueryResponse
     , RunQueryResponse
@@ -131,6 +147,9 @@ module Network.Google.Datastore.Types
     , lrKeys
     , lrReadOptions
 
+    -- * ReadOptionsReadConsistency
+    , ReadOptionsReadConsistency (..)
+
     -- * Mutation
     , Mutation
     , mutation
@@ -170,6 +189,9 @@ module Network.Google.Datastore.Types
     , key
     , keyPartitionId
     , keyPath
+
+    -- * PropertyFilterOperator
+    , PropertyFilterOperator (..)
 
     -- * PropertyFilter
     , PropertyFilter
@@ -224,6 +246,9 @@ module Network.Google.Datastore.Types
     , peProperty
     , peAggregationFunction
 
+    -- * BeginTransactionRequestIsolationLevel
+    , BeginTransactionRequestIsolationLevel (..)
+
     -- * Filter
     , Filter
     , filter'
@@ -237,6 +262,12 @@ module Network.Google.Datastore.Types
     , crMutation
     , crTransaction
     , crIgnoreReadOnly
+
+    -- * CommitRequestMode
+    , CommitRequestMode (..)
+
+    -- * PropertyExpressionAggregationFunction
+    , PropertyExpressionAggregationFunction (..)
 
     -- * Entity
     , Entity
@@ -257,6 +288,9 @@ module Network.Google.Datastore.Types
     , propertyOrder
     , poProperty
     , poDirection
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Datastore.Types.Product
@@ -264,7 +298,7 @@ import           Network.Google.Datastore.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the Google Cloud Datastore API.
-datastoreURL :: BaseURL
+datastoreURL :: BaseUrl
 datastoreURL
   = BaseUrl Https
       "https://www.googleapis.com/datastore/v1beta2/datasets/"

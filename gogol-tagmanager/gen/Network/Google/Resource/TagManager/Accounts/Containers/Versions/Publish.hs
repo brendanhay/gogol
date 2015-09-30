@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Publishes a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsPublish@.
-module TagManager.Accounts.Containers.Versions.Publish
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     (
     -- * REST Resource
-      AccountsContainersVersionsPublishAPI
+      AccountsContainersVersionsPublishResource
 
     -- * Creating a Request
-    , accountsContainersVersionsPublish
-    , AccountsContainersVersionsPublish
+    , accountsContainersVersionsPublish'
+    , AccountsContainersVersionsPublish'
 
     -- * Request Lenses
     , acvpQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsPublish@ which the
--- 'AccountsContainersVersionsPublish' request conforms to.
-type AccountsContainersVersionsPublishAPI =
+-- 'AccountsContainersVersionsPublish'' request conforms to.
+type AccountsContainersVersionsPublishResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
@@ -55,13 +56,20 @@ type AccountsContainersVersionsPublishAPI =
              "versions" :>
                Capture "containerVersionId" Text :>
                  "publish" :>
-                   QueryParam "fingerprint" Text :>
-                     Post '[JSON] PublishContainerVersionResponse
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "fingerprint" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Post '[JSON] PublishContainerVersionResponse
 
 -- | Publishes a Container Version.
 --
--- /See:/ 'accountsContainersVersionsPublish' smart constructor.
-data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
+-- /See:/ 'accountsContainersVersionsPublish'' smart constructor.
+data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
     { _acvpQuotaUser          :: !(Maybe Text)
     , _acvpPrettyPrint        :: !Bool
     , _acvpContainerId        :: !Text
@@ -72,7 +80,7 @@ data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
     , _acvpKey                :: !(Maybe Text)
     , _acvpOauthToken         :: !(Maybe Text)
     , _acvpFields             :: !(Maybe Text)
-    , _acvpAlt                :: !Text
+    , _acvpAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsPublish'' with the minimum fields required to make a request.
@@ -100,13 +108,13 @@ data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
 -- * 'acvpFields'
 --
 -- * 'acvpAlt'
-accountsContainersVersionsPublish
+accountsContainersVersionsPublish'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsPublish
-accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
-    AccountsContainersVersionsPublish
+    -> AccountsContainersVersionsPublish'
+accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
+    AccountsContainersVersionsPublish'
     { _acvpQuotaUser = Nothing
     , _acvpPrettyPrint = True
     , _acvpContainerId = pAcvpContainerId_
@@ -117,7 +125,7 @@ accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAc
     , _acvpKey = Nothing
     , _acvpOauthToken = Nothing
     , _acvpFields = Nothing
-    , _acvpAlt = "json"
+    , _acvpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ acvpFields
   = lens _acvpFields (\ s a -> s{_acvpFields = a})
 
 -- | Data format for the response.
-acvpAlt :: Lens' AccountsContainersVersionsPublish' Text
+acvpAlt :: Lens' AccountsContainersVersionsPublish' Alt
 acvpAlt = lens _acvpAlt (\ s a -> s{_acvpAlt = a})
 
 instance GoogleRequest
@@ -192,8 +200,9 @@ instance GoogleRequest
              PublishContainerVersionResponse
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsPublish{..}
-          = go _acvpQuotaUser _acvpPrettyPrint _acvpContainerId
+          AccountsContainersVersionsPublish'{..}
+          = go _acvpQuotaUser (Just _acvpPrettyPrint)
+              _acvpContainerId
               _acvpUserIp
               _acvpFingerprint
               _acvpContainerVersionId
@@ -201,9 +210,10 @@ instance GoogleRequest
               _acvpKey
               _acvpOauthToken
               _acvpFields
-              _acvpAlt
+              (Just _acvpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsPublishAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsPublishResource)
                       r
                       u

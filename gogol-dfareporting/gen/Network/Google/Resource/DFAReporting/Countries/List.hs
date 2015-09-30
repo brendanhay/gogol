@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of countries.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCountriesList@.
-module DFAReporting.Countries.List
+module Network.Google.Resource.DFAReporting.Countries.List
     (
     -- * REST Resource
-      CountriesListAPI
+      CountriesListResource
 
     -- * Creating a Request
-    , countriesList
-    , CountriesList
+    , countriesList'
+    , CountriesList'
 
     -- * Request Lenses
     , couQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCountriesList@ which the
--- 'CountriesList' request conforms to.
-type CountriesListAPI =
+-- 'CountriesList'' request conforms to.
+type CountriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "countries" :> Get '[JSON] CountriesListResponse
+         "countries" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] CountriesListResponse
 
 -- | Retrieves a list of countries.
 --
--- /See:/ 'countriesList' smart constructor.
-data CountriesList = CountriesList
+-- /See:/ 'countriesList'' smart constructor.
+data CountriesList' = CountriesList'
     { _couQuotaUser   :: !(Maybe Text)
     , _couPrettyPrint :: !Bool
     , _couUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data CountriesList = CountriesList
     , _couKey         :: !(Maybe Text)
     , _couOauthToken  :: !(Maybe Text)
     , _couFields      :: !(Maybe Text)
-    , _couAlt         :: !Text
+    , _couAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data CountriesList = CountriesList
 -- * 'couFields'
 --
 -- * 'couAlt'
-countriesList
+countriesList'
     :: Int64 -- ^ 'profileId'
-    -> CountriesList
-countriesList pCouProfileId_ =
-    CountriesList
+    -> CountriesList'
+countriesList' pCouProfileId_ =
+    CountriesList'
     { _couQuotaUser = Nothing
     , _couPrettyPrint = True
     , _couUserIp = Nothing
@@ -94,7 +103,7 @@ countriesList pCouProfileId_ =
     , _couKey = Nothing
     , _couOauthToken = Nothing
     , _couFields = Nothing
-    , _couAlt = "json"
+    , _couAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,19 +148,21 @@ couFields
   = lens _couFields (\ s a -> s{_couFields = a})
 
 -- | Data format for the response.
-couAlt :: Lens' CountriesList' Text
+couAlt :: Lens' CountriesList' Alt
 couAlt = lens _couAlt (\ s a -> s{_couAlt = a})
 
 instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CountriesList{..}
-          = go _couQuotaUser _couPrettyPrint _couUserIp
+        requestWithRoute r u CountriesList'{..}
+          = go _couQuotaUser (Just _couPrettyPrint) _couUserIp
               _couProfileId
               _couKey
               _couOauthToken
               _couFields
-              _couAlt
+              (Just _couAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CountriesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CountriesListResource)
+                      r
                       u

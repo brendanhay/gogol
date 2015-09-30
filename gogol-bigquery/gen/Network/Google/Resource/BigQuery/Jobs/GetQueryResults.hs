@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the results of a query job.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsGetQueryResults@.
-module BigQuery.Jobs.GetQueryResults
+module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
     (
     -- * REST Resource
-      JobsGetQueryResultsAPI
+      JobsGetQueryResultsResource
 
     -- * Creating a Request
-    , jobsGetQueryResults
-    , JobsGetQueryResults
+    , jobsGetQueryResults'
+    , JobsGetQueryResults'
 
     -- * Request Lenses
     , jgqrQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryJobsGetQueryResults@ which the
--- 'JobsGetQueryResults' request conforms to.
-type JobsGetQueryResultsAPI =
+-- 'JobsGetQueryResults'' request conforms to.
+type JobsGetQueryResultsResource =
      "projects" :>
        Capture "projectId" Text :>
          "queries" :>
            Capture "jobId" Text :>
-             QueryParam "timeoutMs" Word32 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "startIndex" Word64 :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] GetQueryResultsResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "timeoutMs" Word32 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "startIndex" Word64 :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] GetQueryResultsResponse
 
 -- | Retrieves the results of a query job.
 --
--- /See:/ 'jobsGetQueryResults' smart constructor.
-data JobsGetQueryResults = JobsGetQueryResults
+-- /See:/ 'jobsGetQueryResults'' smart constructor.
+data JobsGetQueryResults' = JobsGetQueryResults'
     { _jgqrQuotaUser   :: !(Maybe Text)
     , _jgqrPrettyPrint :: !Bool
     , _jgqrJobId       :: !Text
@@ -76,7 +84,7 @@ data JobsGetQueryResults = JobsGetQueryResults
     , _jgqrStartIndex  :: !(Maybe Word64)
     , _jgqrMaxResults  :: !(Maybe Word32)
     , _jgqrFields      :: !(Maybe Text)
-    , _jgqrAlt         :: !Text
+    , _jgqrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data JobsGetQueryResults = JobsGetQueryResults
 -- * 'jgqrFields'
 --
 -- * 'jgqrAlt'
-jobsGetQueryResults
+jobsGetQueryResults'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> JobsGetQueryResults
-jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
-    JobsGetQueryResults
+    -> JobsGetQueryResults'
+jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
+    JobsGetQueryResults'
     { _jgqrQuotaUser = Nothing
     , _jgqrPrettyPrint = True
     , _jgqrJobId = pJgqrJobId_
@@ -126,7 +134,7 @@ jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
     , _jgqrStartIndex = Nothing
     , _jgqrMaxResults = Nothing
     , _jgqrFields = Nothing
-    , _jgqrAlt = "json"
+    , _jgqrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -205,15 +213,16 @@ jgqrFields
   = lens _jgqrFields (\ s a -> s{_jgqrFields = a})
 
 -- | Data format for the response.
-jgqrAlt :: Lens' JobsGetQueryResults' Text
+jgqrAlt :: Lens' JobsGetQueryResults' Alt
 jgqrAlt = lens _jgqrAlt (\ s a -> s{_jgqrAlt = a})
 
 instance GoogleRequest JobsGetQueryResults' where
         type Rs JobsGetQueryResults' =
              GetQueryResultsResponse
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsGetQueryResults{..}
-          = go _jgqrQuotaUser _jgqrPrettyPrint _jgqrJobId
+        requestWithRoute r u JobsGetQueryResults'{..}
+          = go _jgqrQuotaUser (Just _jgqrPrettyPrint)
+              _jgqrJobId
               _jgqrUserIp
               _jgqrKey
               _jgqrTimeoutMs
@@ -223,9 +232,9 @@ instance GoogleRequest JobsGetQueryResults' where
               _jgqrStartIndex
               _jgqrMaxResults
               _jgqrFields
-              _jgqrAlt
+              (Just _jgqrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy JobsGetQueryResultsAPI)
+                      (Proxy :: Proxy JobsGetQueryResultsResource)
                       r
                       u

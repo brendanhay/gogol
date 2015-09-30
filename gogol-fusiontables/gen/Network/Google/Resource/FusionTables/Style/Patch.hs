@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing style. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStylePatch@.
-module FusionTables.Style.Patch
+module Network.Google.Resource.FusionTables.Style.Patch
     (
     -- * REST Resource
-      StylePatchAPI
+      StylePatchResource
 
     -- * Creating a Request
-    , stylePatch
-    , StylePatch
+    , stylePatch'
+    , StylePatch'
 
     -- * Request Lenses
     , spQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStylePatch@ which the
--- 'StylePatch' request conforms to.
-type StylePatchAPI =
+-- 'StylePatch'' request conforms to.
+type StylePatchResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           Capture "styleId" Int32 :> Patch '[JSON] StyleSetting
+           Capture "styleId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] StyleSetting
 
 -- | Updates an existing style. This method supports patch semantics.
 --
--- /See:/ 'stylePatch' smart constructor.
-data StylePatch = StylePatch
+-- /See:/ 'stylePatch'' smart constructor.
+data StylePatch' = StylePatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data StylePatch = StylePatch
     , _spOauthToken  :: !(Maybe Text)
     , _spTableId     :: !Text
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Text
+    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StylePatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data StylePatch = StylePatch
 -- * 'spFields'
 --
 -- * 'spAlt'
-stylePatch
+stylePatch'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
-    -> StylePatch
-stylePatch pSpStyleId_ pSpTableId_ =
-    StylePatch
+    -> StylePatch'
+stylePatch' pSpStyleId_ pSpTableId_ =
+    StylePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIp = Nothing
@@ -101,7 +109,7 @@ stylePatch pSpStyleId_ pSpTableId_ =
     , _spOauthToken = Nothing
     , _spTableId = pSpTableId_
     , _spFields = Nothing
-    , _spAlt = "json"
+    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,21 @@ spFields :: Lens' StylePatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
 -- | Data format for the response.
-spAlt :: Lens' StylePatch' Text
+spAlt :: Lens' StylePatch' Alt
 spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
 
 instance GoogleRequest StylePatch' where
         type Rs StylePatch' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StylePatch{..}
-          = go _spQuotaUser _spPrettyPrint _spUserIp _spKey
+        requestWithRoute r u StylePatch'{..}
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
+              _spKey
               _spStyleId
               _spOauthToken
               _spTableId
               _spFields
-              _spAlt
+              (Just _spAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StylePatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy StylePatchResource)
+                      r
+                      u

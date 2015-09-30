@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Replaces the schedule of a job with the provided schedule.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleUpdate@.
-module Coordinate.Schedule.Update
+module Network.Google.Resource.Coordinate.Schedule.Update
     (
     -- * REST Resource
-      ScheduleUpdateAPI
+      ScheduleUpdateResource
 
     -- * Creating a Request
-    , scheduleUpdate
-    , ScheduleUpdate
+    , scheduleUpdate'
+    , ScheduleUpdate'
 
     -- * Request Lenses
     , suQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateScheduleUpdate@ which the
--- 'ScheduleUpdate' request conforms to.
-type ScheduleUpdateAPI =
+-- 'ScheduleUpdate'' request conforms to.
+type ScheduleUpdateResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
              "schedule" :>
-               QueryParam "allDay" Bool :>
-                 QueryParam "startTime" Word64 :>
-                   QueryParam "endTime" Word64 :>
-                     QueryParam "duration" Word64 :> Put '[JSON] Schedule
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "allDay" Bool :>
+                     QueryParam "startTime" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "endTime" Word64 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "duration" Word64 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Put '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule.
 --
--- /See:/ 'scheduleUpdate' smart constructor.
-data ScheduleUpdate = ScheduleUpdate
+-- /See:/ 'scheduleUpdate'' smart constructor.
+data ScheduleUpdate' = ScheduleUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suJobId       :: !Word64
@@ -76,7 +84,7 @@ data ScheduleUpdate = ScheduleUpdate
     , _suOauthToken  :: !(Maybe Text)
     , _suDuration    :: !(Maybe Word64)
     , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Text
+    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleUpdate'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data ScheduleUpdate = ScheduleUpdate
 -- * 'suFields'
 --
 -- * 'suAlt'
-scheduleUpdate
+scheduleUpdate'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> ScheduleUpdate
-scheduleUpdate pSuJobId_ pSuTeamId_ =
-    ScheduleUpdate
+    -> ScheduleUpdate'
+scheduleUpdate' pSuJobId_ pSuTeamId_ =
+    ScheduleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suJobId = pSuJobId_
@@ -126,7 +134,7 @@ scheduleUpdate pSuJobId_ pSuTeamId_ =
     , _suOauthToken = Nothing
     , _suDuration = Nothing
     , _suFields = Nothing
-    , _suAlt = "json"
+    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -191,14 +199,15 @@ suFields :: Lens' ScheduleUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' ScheduleUpdate' Text
+suAlt :: Lens' ScheduleUpdate' Alt
 suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest ScheduleUpdate' where
         type Rs ScheduleUpdate' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u ScheduleUpdate{..}
-          = go _suQuotaUser _suPrettyPrint _suJobId _suAllDay
+        requestWithRoute r u ScheduleUpdate'{..}
+          = go _suQuotaUser (Just _suPrettyPrint) _suJobId
+              _suAllDay
               _suStartTime
               _suUserIp
               _suTeamId
@@ -207,8 +216,9 @@ instance GoogleRequest ScheduleUpdate' where
               _suOauthToken
               _suDuration
               _suFields
-              _suAlt
+              (Just _suAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScheduleUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ScheduleUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Detect the language of text.
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageDetectionsList@.
-module Language.Detections.List
+module Network.Google.Resource.Language.Detections.List
     (
     -- * REST Resource
-      DetectionsListAPI
+      DetectionsListResource
 
     -- * Creating a Request
-    , detectionsList
-    , DetectionsList
+    , detectionsList'
+    , DetectionsList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @LanguageDetectionsList@ which the
--- 'DetectionsList' request conforms to.
-type DetectionsListAPI =
+-- 'DetectionsList'' request conforms to.
+type DetectionsListResource =
      "v2" :>
        "detect" :>
-         QueryParams "q" Text :>
-           Get '[JSON] DetectionsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParams "q" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] DetectionsListResponse
 
 -- | Detect the language of text.
 --
--- /See:/ 'detectionsList' smart constructor.
-data DetectionsList = DetectionsList
+-- /See:/ 'detectionsList'' smart constructor.
+data DetectionsList' = DetectionsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data DetectionsList = DetectionsList
     , _dlKey         :: !(Maybe Text)
     , _dlOauthToken  :: !(Maybe Text)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data DetectionsList = DetectionsList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-detectionsList
+detectionsList'
     :: Text -- ^ 'q'
-    -> DetectionsList
-detectionsList pDlQ_ =
-    DetectionsList
+    -> DetectionsList'
+detectionsList' pDlQ_ =
+    DetectionsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlUserIp = Nothing
@@ -95,7 +103,7 @@ detectionsList pDlQ_ =
     , _dlKey = Nothing
     , _dlOauthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +144,21 @@ dlFields :: Lens' DetectionsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DetectionsList' Text
+dlAlt :: Lens' DetectionsList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         request = requestWithRoute defReq translateURL
-        requestWithRoute r u DetectionsList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlUserIp
+        requestWithRoute r u DetectionsList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
               (Just _dlQ)
               _dlKey
               _dlOauthToken
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DetectionsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DetectionsListResource)
                       r
                       u

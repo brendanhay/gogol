@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the requested deal.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerDealsGet@.
-module AdExchangeBuyer.Deals.Get
+module Network.Google.Resource.AdExchangeBuyer.Deals.Get
     (
     -- * REST Resource
-      DealsGetAPI
+      DealsGetResource
 
     -- * Creating a Request
-    , dealsGet
-    , DealsGet
+    , dealsGet'
+    , DealsGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerDealsGet@ which the
--- 'DealsGet' request conforms to.
-type DealsGetAPI =
+-- 'DealsGet'' request conforms to.
+type DealsGetResource =
      "deals" :>
-       Capture "dealId" Int64 :> Get '[JSON] NegotiationDto
+       Capture "dealId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] NegotiationDto
 
 -- | Gets the requested deal.
 --
--- /See:/ 'dealsGet' smart constructor.
-data DealsGet = DealsGet
+-- /See:/ 'dealsGet'' smart constructor.
+data DealsGet' = DealsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DealsGet = DealsGet
     , _dgKey         :: !(Maybe Text)
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DealsGet = DealsGet
 -- * 'dgFields'
 --
 -- * 'dgAlt'
-dealsGet
+dealsGet'
     :: Int64 -- ^ 'dealId'
-    -> DealsGet
-dealsGet pDgDealId_ =
-    DealsGet
+    -> DealsGet'
+dealsGet' pDgDealId_ =
+    DealsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgUserIp = Nothing
@@ -93,7 +101,7 @@ dealsGet pDgDealId_ =
     , _dgKey = Nothing
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +141,19 @@ dgFields :: Lens' DealsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DealsGet' Text
+dgAlt :: Lens' DealsGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u DealsGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgUserIp _dgDealId
+        requestWithRoute r u DealsGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIp
+              _dgDealId
               _dgKey
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DealsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy DealsGetResource) r
+                      u

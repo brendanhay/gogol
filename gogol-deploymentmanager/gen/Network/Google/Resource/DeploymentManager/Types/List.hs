@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all resource types for Deployment Manager.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerTypesList@.
-module DeploymentManager.Types.List
+module Network.Google.Resource.DeploymentManager.Types.List
     (
     -- * REST Resource
-      TypesListAPI
+      TypesListResource
 
     -- * Creating a Request
-    , typesList
-    , TypesList
+    , typesList'
+    , TypesList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerTypesList@ which the
--- 'TypesList' request conforms to.
-type TypesListAPI =
+-- 'TypesList'' request conforms to.
+type TypesListResource =
      Capture "project" Text :>
        "global" :>
          "types" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TypesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TypesListResponse
 
 -- | Lists all resource types for Deployment Manager.
 --
--- /See:/ 'typesList' smart constructor.
-data TypesList = TypesList
+-- /See:/ 'typesList'' smart constructor.
+data TypesList' = TypesList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
@@ -70,7 +78,7 @@ data TypesList = TypesList
     , _tlOauthToken  :: !(Maybe Text)
     , _tlMaxResults  :: !Word32
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data TypesList = TypesList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-typesList
+typesList'
     :: Text -- ^ 'project'
-    -> TypesList
-typesList pTlProject_ =
-    TypesList
+    -> TypesList'
+typesList' pTlProject_ =
+    TypesList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlProject = pTlProject_
@@ -113,7 +121,7 @@ typesList pTlProject_ =
     , _tlOauthToken = Nothing
     , _tlMaxResults = 500
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,21 +189,24 @@ tlFields :: Lens' TypesList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TypesList' Text
+tlAlt :: Lens' TypesList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TypesList' where
         type Rs TypesList' = TypesListResponse
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u TypesList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlProject _tlUserIp
+        requestWithRoute r u TypesList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlProject
+              _tlUserIp
               _tlKey
               _tlFilter
               _tlPageToken
               _tlOauthToken
               (Just _tlMaxResults)
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TypesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TypesListResource)
+                      r
+                      u

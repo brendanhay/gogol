@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientaccessDelete@.
-module AdExchangeBuyer.Clientaccess.Delete
+module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Delete
     (
     -- * REST Resource
-      ClientaccessDeleteAPI
+      ClientaccessDeleteResource
 
     -- * Creating a Request
-    , clientaccessDelete
-    , ClientaccessDelete
+    , clientaccessDelete'
+    , ClientaccessDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -44,16 +45,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientaccessDelete@ which the
--- 'ClientaccessDelete' request conforms to.
-type ClientaccessDeleteAPI =
+-- 'ClientaccessDelete'' request conforms to.
+type ClientaccessDeleteResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           Delete '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "sponsorAccountId" Int32 :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 --
--- /See:/ 'clientaccessDelete' smart constructor.
-data ClientaccessDelete = ClientaccessDelete
+-- /See:/ 'clientaccessDelete'' smart constructor.
+data ClientaccessDelete' = ClientaccessDelete'
     { _cdQuotaUser        :: !(Maybe Text)
     , _cdPrettyPrint      :: !Bool
     , _cdUserIp           :: !(Maybe Text)
@@ -62,7 +69,7 @@ data ClientaccessDelete = ClientaccessDelete
     , _cdClientAccountId  :: !Int64
     , _cdOauthToken       :: !(Maybe Text)
     , _cdFields           :: !(Maybe Text)
-    , _cdAlt              :: !Text
+    , _cdAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientaccessDelete'' with the minimum fields required to make a request.
@@ -86,12 +93,12 @@ data ClientaccessDelete = ClientaccessDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-clientaccessDelete
+clientaccessDelete'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientaccessDelete
-clientaccessDelete pCdSponsorAccountId_ pCdClientAccountId_ =
-    ClientaccessDelete
+    -> ClientaccessDelete'
+clientaccessDelete' pCdSponsorAccountId_ pCdClientAccountId_ =
+    ClientaccessDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdUserIp = Nothing
@@ -100,7 +107,7 @@ clientaccessDelete pCdSponsorAccountId_ pCdClientAccountId_ =
     , _cdClientAccountId = pCdClientAccountId_
     , _cdOauthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,22 +154,22 @@ cdFields :: Lens' ClientaccessDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' ClientaccessDelete' Text
+cdAlt :: Lens' ClientaccessDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest ClientaccessDelete' where
         type Rs ClientaccessDelete' = ()
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientaccessDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdUserIp
+        requestWithRoute r u ClientaccessDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
               (Just _cdSponsorAccountId)
               _cdKey
               _cdClientAccountId
               _cdOauthToken
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ClientaccessDeleteAPI)
+                      (Proxy :: Proxy ClientaccessDeleteResource)
                       r
                       u

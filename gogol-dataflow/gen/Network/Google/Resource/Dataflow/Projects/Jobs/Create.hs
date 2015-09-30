@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsCreate@.
-module Dataflow.Projects.Jobs.Create
+module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     (
     -- * REST Resource
-      ProjectsJobsCreateAPI
+      ProjectsJobsCreateResource
 
     -- * Creating a Request
-    , projectsJobsCreate
-    , ProjectsJobsCreate
+    , projectsJobsCreate'
+    , ProjectsJobsCreate'
 
     -- * Request Lenses
     , pjcXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsCreate@ which the
--- 'ProjectsJobsCreate' request conforms to.
-type ProjectsJobsCreateAPI =
+-- 'ProjectsJobsCreate'' request conforms to.
+type ProjectsJobsCreateResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
-             QueryParam "view" Text :>
-               QueryParam "replaceJobId" Text :> Post '[JSON] Job
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "view" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "replaceJobId" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] Job
 
 -- | Creates a dataflow job.
 --
--- /See:/ 'projectsJobsCreate' smart constructor.
-data ProjectsJobsCreate = ProjectsJobsCreate
+-- /See:/ 'projectsJobsCreate'' smart constructor.
+data ProjectsJobsCreate' = ProjectsJobsCreate'
     { _pjcXgafv          :: !(Maybe Text)
     , _pjcQuotaUser      :: !(Maybe Text)
     , _pjcPrettyPrint    :: !Bool
@@ -117,11 +132,11 @@ data ProjectsJobsCreate = ProjectsJobsCreate
 -- * 'pjcCallback'
 --
 -- * 'pjcAlt'
-projectsJobsCreate
+projectsJobsCreate'
     :: Text -- ^ 'projectId'
-    -> ProjectsJobsCreate
-projectsJobsCreate pPjcProjectId_ =
-    ProjectsJobsCreate
+    -> ProjectsJobsCreate'
+projectsJobsCreate' pPjcProjectId_ =
+    ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcQuotaUser = Nothing
     , _pjcPrettyPrint = True
@@ -229,10 +244,10 @@ pjcAlt = lens _pjcAlt (\ s a -> s{_pjcAlt = a})
 instance GoogleRequest ProjectsJobsCreate' where
         type Rs ProjectsJobsCreate' = Job
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsCreate{..}
-          = go _pjcXgafv _pjcQuotaUser _pjcPrettyPrint
+        requestWithRoute r u ProjectsJobsCreate'{..}
+          = go _pjcXgafv _pjcQuotaUser (Just _pjcPrettyPrint)
               _pjcUploadProtocol
-              _pjcPp
+              (Just _pjcPp)
               _pjcAccessToken
               _pjcUploadType
               _pjcBearerToken
@@ -243,9 +258,9 @@ instance GoogleRequest ProjectsJobsCreate' where
               _pjcReplaceJobId
               _pjcFields
               _pjcCallback
-              _pjcAlt
+              (Just _pjcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsCreateAPI)
+                      (Proxy :: Proxy ProjectsJobsCreateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsDelete@.
-module DeploymentManager.Deployments.Delete
+module Network.Google.Resource.DeploymentManager.Deployments.Delete
     (
     -- * REST Resource
-      DeploymentsDeleteAPI
+      DeploymentsDeleteResource
 
     -- * Creating a Request
-    , deploymentsDelete
-    , DeploymentsDelete
+    , deploymentsDelete'
+    , DeploymentsDelete'
 
     -- * Request Lenses
     , ddQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerDeploymentsDelete@ which the
--- 'DeploymentsDelete' request conforms to.
-type DeploymentsDeleteAPI =
+-- 'DeploymentsDelete'' request conforms to.
+type DeploymentsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
-           Capture "deployment" Text :> Delete '[JSON] Operation
+           Capture "deployment" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ 'deploymentsDelete' smart constructor.
-data DeploymentsDelete = DeploymentsDelete
+-- /See:/ 'deploymentsDelete'' smart constructor.
+data DeploymentsDelete' = DeploymentsDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
     , _ddProject     :: !Text
@@ -62,7 +70,7 @@ data DeploymentsDelete = DeploymentsDelete
     , _ddKey         :: !(Maybe Text)
     , _ddOauthToken  :: !(Maybe Text)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Text
+    , _ddAlt         :: !Alt
     , _ddDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -87,12 +95,12 @@ data DeploymentsDelete = DeploymentsDelete
 -- * 'ddAlt'
 --
 -- * 'ddDeployment'
-deploymentsDelete
+deploymentsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'deployment'
-    -> DeploymentsDelete
-deploymentsDelete pDdProject_ pDdDeployment_ =
-    DeploymentsDelete
+    -> DeploymentsDelete'
+deploymentsDelete' pDdProject_ pDdDeployment_ =
+    DeploymentsDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
     , _ddProject = pDdProject_
@@ -100,7 +108,7 @@ deploymentsDelete pDdProject_ pDdDeployment_ =
     , _ddKey = Nothing
     , _ddOauthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = "json"
+    , _ddAlt = JSON
     , _ddDeployment = pDdDeployment_
     }
 
@@ -143,7 +151,7 @@ ddFields :: Lens' DeploymentsDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 -- | Data format for the response.
-ddAlt :: Lens' DeploymentsDelete' Text
+ddAlt :: Lens' DeploymentsDelete' Alt
 ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
 
 -- | The name of the deployment for this request.
@@ -155,15 +163,16 @@ instance GoogleRequest DeploymentsDelete' where
         type Rs DeploymentsDelete' = Operation
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsDelete{..}
-          = go _ddQuotaUser _ddPrettyPrint _ddProject _ddUserIp
+        requestWithRoute r u DeploymentsDelete'{..}
+          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
+              _ddUserIp
               _ddKey
               _ddOauthToken
               _ddFields
-              _ddAlt
+              (Just _ddAlt)
               _ddDeployment
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DeploymentsDeleteAPI)
+                      (Proxy :: Proxy DeploymentsDeleteResource)
                       r
                       u

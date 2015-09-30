@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a URL channel from the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLchannelsDelete@.
-module AdSenseHost.URLchannels.Delete
+module Network.Google.Resource.AdSenseHost.URLchannels.Delete
     (
     -- * REST Resource
-      UrlchannelsDeleteAPI
+      UrlchannelsDeleteResource
 
     -- * Creating a Request
-    , uRLchannelsDelete
-    , URLchannelsDelete
+    , uRLchannelsDelete'
+    , URLchannelsDelete'
 
     -- * Request Lenses
     , udQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostURLchannelsDelete@ which the
--- 'URLchannelsDelete' request conforms to.
-type UrlchannelsDeleteAPI =
+-- 'URLchannelsDelete'' request conforms to.
+type UrlchannelsDeleteResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "urlchannels" :>
            Capture "urlChannelId" Text :>
-             Delete '[JSON] URLChannel
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] URLChannel
 
 -- | Delete a URL channel from the host AdSense account.
 --
--- /See:/ 'uRLchannelsDelete' smart constructor.
-data URLchannelsDelete = URLchannelsDelete
+-- /See:/ 'uRLchannelsDelete'' smart constructor.
+data URLchannelsDelete' = URLchannelsDelete'
     { _udQuotaUser    :: !(Maybe Text)
     , _udPrettyPrint  :: !Bool
     , _udUrlChannelId :: !Text
@@ -64,7 +71,7 @@ data URLchannelsDelete = URLchannelsDelete
     , _udKey          :: !(Maybe Text)
     , _udOauthToken   :: !(Maybe Text)
     , _udFields       :: !(Maybe Text)
-    , _udAlt          :: !Text
+    , _udAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLchannelsDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data URLchannelsDelete = URLchannelsDelete
 -- * 'udFields'
 --
 -- * 'udAlt'
-uRLchannelsDelete
+uRLchannelsDelete'
     :: Text -- ^ 'urlChannelId'
     -> Text -- ^ 'adClientId'
-    -> URLchannelsDelete
-uRLchannelsDelete pUdUrlChannelId_ pUdAdClientId_ =
-    URLchannelsDelete
+    -> URLchannelsDelete'
+uRLchannelsDelete' pUdUrlChannelId_ pUdAdClientId_ =
+    URLchannelsDelete'
     { _udQuotaUser = Nothing
     , _udPrettyPrint = True
     , _udUrlChannelId = pUdUrlChannelId_
@@ -102,7 +109,7 @@ uRLchannelsDelete pUdUrlChannelId_ pUdAdClientId_ =
     , _udKey = Nothing
     , _udOauthToken = Nothing
     , _udFields = Nothing
-    , _udAlt = "json"
+    , _udAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +157,23 @@ udFields :: Lens' URLchannelsDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
 -- | Data format for the response.
-udAlt :: Lens' URLchannelsDelete' Text
+udAlt :: Lens' URLchannelsDelete' Alt
 udAlt = lens _udAlt (\ s a -> s{_udAlt = a})
 
 instance GoogleRequest URLchannelsDelete' where
         type Rs URLchannelsDelete' = URLChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u URLchannelsDelete{..}
-          = go _udQuotaUser _udPrettyPrint _udUrlChannelId
+        requestWithRoute r u URLchannelsDelete'{..}
+          = go _udQuotaUser (Just _udPrettyPrint)
+              _udUrlChannelId
               _udUserIp
               _udAdClientId
               _udKey
               _udOauthToken
               _udFields
-              _udAlt
+              (Just _udAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlchannelsDeleteAPI)
+                      (Proxy :: Proxy UrlchannelsDeleteResource)
                       r
                       u

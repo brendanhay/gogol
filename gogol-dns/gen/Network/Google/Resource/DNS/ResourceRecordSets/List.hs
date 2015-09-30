@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSResourceRecordSetsList@.
-module DNS.ResourceRecordSets.List
+module Network.Google.Resource.DNS.ResourceRecordSets.List
     (
     -- * REST Resource
-      ResourceRecordSetsListAPI
+      ResourceRecordSetsListResource
 
     -- * Creating a Request
-    , resourceRecordSetsList
-    , ResourceRecordSetsList
+    , resourceRecordSetsList'
+    , ResourceRecordSetsList'
 
     -- * Request Lenses
     , rrslQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSResourceRecordSetsList@ which the
--- 'ResourceRecordSetsList' request conforms to.
-type ResourceRecordSetsListAPI =
+-- 'ResourceRecordSetsList'' request conforms to.
+type ResourceRecordSetsListResource =
      Capture "project" Text :>
        "managedZones" :>
          Capture "managedZone" Text :>
            "rrsets" :>
-             QueryParam "name" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "type" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     Get '[JSON] ResourceRecordSetsListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "type" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] ResourceRecordSetsListResponse
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
--- /See:/ 'resourceRecordSetsList' smart constructor.
-data ResourceRecordSetsList = ResourceRecordSetsList
+-- /See:/ 'resourceRecordSetsList'' smart constructor.
+data ResourceRecordSetsList' = ResourceRecordSetsList'
     { _rrslQuotaUser   :: !(Maybe Text)
     , _rrslPrettyPrint :: !Bool
     , _rrslProject     :: !Text
@@ -76,7 +84,7 @@ data ResourceRecordSetsList = ResourceRecordSetsList
     , _rrslManagedZone :: !Text
     , _rrslMaxResults  :: !(Maybe Int32)
     , _rrslFields      :: !(Maybe Text)
-    , _rrslAlt         :: !Text
+    , _rrslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsList'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data ResourceRecordSetsList = ResourceRecordSetsList
 -- * 'rrslFields'
 --
 -- * 'rrslAlt'
-resourceRecordSetsList
+resourceRecordSetsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
-    -> ResourceRecordSetsList
-resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
-    ResourceRecordSetsList
+    -> ResourceRecordSetsList'
+resourceRecordSetsList' pRrslProject_ pRrslManagedZone_ =
+    ResourceRecordSetsList'
     { _rrslQuotaUser = Nothing
     , _rrslPrettyPrint = True
     , _rrslProject = pRrslProject_
@@ -126,7 +134,7 @@ resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
     , _rrslManagedZone = pRrslManagedZone_
     , _rrslMaxResults = Nothing
     , _rrslFields = Nothing
-    , _rrslAlt = "json"
+    , _rrslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -203,15 +211,16 @@ rrslFields
   = lens _rrslFields (\ s a -> s{_rrslFields = a})
 
 -- | Data format for the response.
-rrslAlt :: Lens' ResourceRecordSetsList' Text
+rrslAlt :: Lens' ResourceRecordSetsList' Alt
 rrslAlt = lens _rrslAlt (\ s a -> s{_rrslAlt = a})
 
 instance GoogleRequest ResourceRecordSetsList' where
         type Rs ResourceRecordSetsList' =
              ResourceRecordSetsListResponse
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ResourceRecordSetsList{..}
-          = go _rrslQuotaUser _rrslPrettyPrint _rrslProject
+        requestWithRoute r u ResourceRecordSetsList'{..}
+          = go _rrslQuotaUser (Just _rrslPrettyPrint)
+              _rrslProject
               _rrslUserIp
               _rrslKey
               _rrslName
@@ -221,9 +230,9 @@ instance GoogleRequest ResourceRecordSetsList' where
               _rrslManagedZone
               _rrslMaxResults
               _rrslFields
-              _rrslAlt
+              (Just _rrslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ResourceRecordSetsListAPI)
+                      (Proxy :: Proxy ResourceRecordSetsListResource)
                       r
                       u

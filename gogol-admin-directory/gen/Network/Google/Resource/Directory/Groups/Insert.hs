@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create Group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsInsert@.
-module Directory.Groups.Insert
+module Network.Google.Resource.Directory.Groups.Insert
     (
     -- * REST Resource
-      GroupsInsertAPI
+      GroupsInsertResource
 
     -- * Creating a Request
-    , groupsInsert
-    , GroupsInsert
+    , groupsInsert'
+    , GroupsInsert'
 
     -- * Request Lenses
     , giQuotaUser
@@ -42,20 +43,28 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsInsert@ which the
--- 'GroupsInsert' request conforms to.
-type GroupsInsertAPI = "groups" :> Post '[JSON] Group
+-- 'GroupsInsert'' request conforms to.
+type GroupsInsertResource =
+     "groups" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Group
 
 -- | Create Group
 --
--- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+-- /See:/ 'groupsInsert'' smart constructor.
+data GroupsInsert' = GroupsInsert'
     { _giQuotaUser   :: !(Maybe Text)
     , _giPrettyPrint :: !Bool
     , _giUserIp      :: !(Maybe Text)
     , _giKey         :: !(Maybe Text)
     , _giOauthToken  :: !(Maybe Text)
     , _giFields      :: !(Maybe Text)
-    , _giAlt         :: !Text
+    , _giAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsInsert'' with the minimum fields required to make a request.
@@ -75,17 +84,17 @@ data GroupsInsert = GroupsInsert
 -- * 'giFields'
 --
 -- * 'giAlt'
-groupsInsert
-    :: GroupsInsert
-groupsInsert =
-    GroupsInsert
+groupsInsert'
+    :: GroupsInsert'
+groupsInsert' =
+    GroupsInsert'
     { _giQuotaUser = Nothing
     , _giPrettyPrint = True
     , _giUserIp = Nothing
     , _giKey = Nothing
     , _giOauthToken = Nothing
     , _giFields = Nothing
-    , _giAlt = "json"
+    , _giAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,17 +131,20 @@ giFields :: Lens' GroupsInsert' (Maybe Text)
 giFields = lens _giFields (\ s a -> s{_giFields = a})
 
 -- | Data format for the response.
-giAlt :: Lens' GroupsInsert' Text
+giAlt :: Lens' GroupsInsert' Alt
 giAlt = lens _giAlt (\ s a -> s{_giAlt = a})
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsInsert{..}
-          = go _giQuotaUser _giPrettyPrint _giUserIp _giKey
+        requestWithRoute r u GroupsInsert'{..}
+          = go _giQuotaUser (Just _giPrettyPrint) _giUserIp
+              _giKey
               _giOauthToken
               _giFields
-              _giAlt
+              (Just _giAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsInsertResource)
+                      r
                       u

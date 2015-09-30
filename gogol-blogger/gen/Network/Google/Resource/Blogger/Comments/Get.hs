@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one comment by ID.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsGet@.
-module Blogger.Comments.Get
+module Network.Google.Resource.Blogger.Comments.Get
     (
     -- * REST Resource
-      CommentsGetAPI
+      CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet
-    , CommentsGet
+    , commentsGet'
+    , CommentsGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -46,31 +47,38 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsGet@ which the
--- 'CommentsGet' request conforms to.
-type CommentsGetAPI =
+-- 'CommentsGet'' request conforms to.
+type CommentsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 QueryParam "view" Text :> Get '[JSON] Comment
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "view" BloggerCommentsGetView :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Comment
 
 -- | Gets one comment by ID.
 --
--- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+-- /See:/ 'commentsGet'' smart constructor.
+data CommentsGet' = CommentsGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
     , _cgBlogId      :: !Text
     , _cgKey         :: !(Maybe Text)
-    , _cgView        :: !(Maybe Text)
+    , _cgView        :: !(Maybe BloggerCommentsGetView)
     , _cgPostId      :: !Text
     , _cgOauthToken  :: !(Maybe Text)
     , _cgCommentId   :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data CommentsGet = CommentsGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-commentsGet
+commentsGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
-    -> CommentsGet
-commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
-    CommentsGet
+    -> CommentsGet'
+commentsGet' pCgBlogId_ pCgPostId_ pCgCommentId_ =
+    CommentsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -115,7 +123,7 @@ commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
     , _cgOauthToken = Nothing
     , _cgCommentId = pCgCommentId_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,7 +158,7 @@ cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 -- comments will require elevated permissions, for example comments where
 -- the parent posts which is in a draft state, or comments that are pending
 -- moderation.
-cgView :: Lens' CommentsGet' (Maybe Text)
+cgView :: Lens' CommentsGet' (Maybe BloggerCommentsGetView)
 cgView = lens _cgView (\ s a -> s{_cgView = a})
 
 -- | ID of the post to fetch posts from.
@@ -172,20 +180,24 @@ cgFields :: Lens' CommentsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CommentsGet' Text
+cgAlt :: Lens' CommentsGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgBlogId
+        requestWithRoute r u CommentsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgBlogId
               _cgKey
               _cgView
               _cgPostId
               _cgOauthToken
               _cgCommentId
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsGetResource)
+                      r
+                      u

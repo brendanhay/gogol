@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsInsert@.
-module BigQuery.Jobs.Insert
+module Network.Google.Resource.BigQuery.Jobs.Insert
     (
     -- * REST Resource
-      JobsInsertAPI
+      JobsInsertResource
 
     -- * Creating a Request
-    , jobsInsert
-    , JobsInsert
+    , jobsInsert'
+    , JobsInsert'
 
     -- * Request Lenses
     , jiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryJobsInsert@ which the
--- 'JobsInsert' request conforms to.
-type JobsInsertAPI =
+-- 'JobsInsert'' request conforms to.
+type JobsInsertResource =
      "projects" :>
        Capture "projectId" Text :>
-         "jobs" :> Post '[JSON] Job
+         "jobs" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
--- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+-- /See:/ 'jobsInsert'' smart constructor.
+data JobsInsert' = JobsInsert'
     { _jiQuotaUser   :: !(Maybe Text)
     , _jiPrettyPrint :: !Bool
     , _jiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data JobsInsert = JobsInsert
     , _jiProjectId   :: !Text
     , _jiOauthToken  :: !(Maybe Text)
     , _jiFields      :: !(Maybe Text)
-    , _jiAlt         :: !Text
+    , _jiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data JobsInsert = JobsInsert
 -- * 'jiFields'
 --
 -- * 'jiAlt'
-jobsInsert
+jobsInsert'
     :: Text -- ^ 'projectId'
-    -> JobsInsert
-jobsInsert pJiProjectId_ =
-    JobsInsert
+    -> JobsInsert'
+jobsInsert' pJiProjectId_ =
+    JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
     , _jiUserIp = Nothing
@@ -94,7 +102,7 @@ jobsInsert pJiProjectId_ =
     , _jiProjectId = pJiProjectId_
     , _jiOauthToken = Nothing
     , _jiFields = Nothing
-    , _jiAlt = "json"
+    , _jiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,17 +144,20 @@ jiFields :: Lens' JobsInsert' (Maybe Text)
 jiFields = lens _jiFields (\ s a -> s{_jiFields = a})
 
 -- | Data format for the response.
-jiAlt :: Lens' JobsInsert' Text
+jiAlt :: Lens' JobsInsert' Alt
 jiAlt = lens _jiAlt (\ s a -> s{_jiAlt = a})
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsInsert{..}
-          = go _jiQuotaUser _jiPrettyPrint _jiUserIp _jiKey
+        requestWithRoute r u JobsInsert'{..}
+          = go _jiQuotaUser (Just _jiPrettyPrint) _jiUserIp
+              _jiKey
               _jiProjectId
               _jiOauthToken
               _jiFields
-              _jiAlt
+              (Just _jiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsInsertAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsInsertResource)
+                      r
+                      u

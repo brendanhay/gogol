@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- adding new APKs will cause it to resume.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTracksUpdate@.
-module Androidpublisher.Edits.Tracks.Update
+module Network.Google.Resource.Androidpublisher.Edits.Tracks.Update
     (
     -- * REST Resource
-      EditsTracksUpdateAPI
+      EditsTracksUpdateResource
 
     -- * Creating a Request
-    , editsTracksUpdate
-    , EditsTracksUpdate
+    , editsTracksUpdate'
+    , EditsTracksUpdate'
 
     -- * Request Lenses
     , etuQuotaUser
@@ -47,21 +48,31 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTracksUpdate@ which the
--- 'EditsTracksUpdate' request conforms to.
-type EditsTracksUpdateAPI =
+-- 'EditsTracksUpdate'' request conforms to.
+type EditsTracksUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "tracks" :> Capture "track" Text :> Put '[JSON] Track
+           "tracks" :>
+             Capture "track"
+               AndroidpublisherEditsTracksUpdateTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and
 -- adding new APKs will cause it to resume.
 --
--- /See:/ 'editsTracksUpdate' smart constructor.
-data EditsTracksUpdate = EditsTracksUpdate
+-- /See:/ 'editsTracksUpdate'' smart constructor.
+data EditsTracksUpdate' = EditsTracksUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
-    , _etuTrack       :: !Text
+    , _etuTrack       :: !AndroidpublisherEditsTracksUpdateTrack
     , _etuPrettyPrint :: !Bool
     , _etuPackageName :: !Text
     , _etuUserIp      :: !(Maybe Text)
@@ -69,7 +80,7 @@ data EditsTracksUpdate = EditsTracksUpdate
     , _etuOauthToken  :: !(Maybe Text)
     , _etuEditId      :: !Text
     , _etuFields      :: !(Maybe Text)
-    , _etuAlt         :: !Text
+    , _etuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksUpdate'' with the minimum fields required to make a request.
@@ -95,13 +106,13 @@ data EditsTracksUpdate = EditsTracksUpdate
 -- * 'etuFields'
 --
 -- * 'etuAlt'
-editsTracksUpdate
-    :: Text -- ^ 'track'
+editsTracksUpdate'
+    :: AndroidpublisherEditsTracksUpdateTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTracksUpdate
-editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuEditId_ =
-    EditsTracksUpdate
+    -> EditsTracksUpdate'
+editsTracksUpdate' pEtuTrack_ pEtuPackageName_ pEtuEditId_ =
+    EditsTracksUpdate'
     { _etuQuotaUser = Nothing
     , _etuTrack = pEtuTrack_
     , _etuPrettyPrint = True
@@ -111,7 +122,7 @@ editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuEditId_ =
     , _etuOauthToken = Nothing
     , _etuEditId = pEtuEditId_
     , _etuFields = Nothing
-    , _etuAlt = "json"
+    , _etuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,7 +133,7 @@ etuQuotaUser
   = lens _etuQuotaUser (\ s a -> s{_etuQuotaUser = a})
 
 -- | The track type to read or modify.
-etuTrack :: Lens' EditsTracksUpdate' Text
+etuTrack :: Lens' EditsTracksUpdate' AndroidpublisherEditsTracksUpdateTrack
 etuTrack = lens _etuTrack (\ s a -> s{_etuTrack = a})
 
 -- | Returns response with indentations and line breaks.
@@ -167,23 +178,23 @@ etuFields
   = lens _etuFields (\ s a -> s{_etuFields = a})
 
 -- | Data format for the response.
-etuAlt :: Lens' EditsTracksUpdate' Text
+etuAlt :: Lens' EditsTracksUpdate' Alt
 etuAlt = lens _etuAlt (\ s a -> s{_etuAlt = a})
 
 instance GoogleRequest EditsTracksUpdate' where
         type Rs EditsTracksUpdate' = Track
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTracksUpdate{..}
-          = go _etuQuotaUser _etuTrack _etuPrettyPrint
+        requestWithRoute r u EditsTracksUpdate'{..}
+          = go _etuQuotaUser _etuTrack (Just _etuPrettyPrint)
               _etuPackageName
               _etuUserIp
               _etuKey
               _etuOauthToken
               _etuEditId
               _etuFields
-              _etuAlt
+              (Just _etuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsTracksUpdateAPI)
+                      (Proxy :: Proxy EditsTracksUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a report.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsUpdate@.
-module DFAReporting.Reports.Update
+module Network.Google.Resource.DFAReporting.Reports.Update
     (
     -- * REST Resource
-      ReportsUpdateAPI
+      ReportsUpdateResource
 
     -- * Creating a Request
-    , reportsUpdate
-    , ReportsUpdate
+    , reportsUpdate'
+    , ReportsUpdate'
 
     -- * Request Lenses
     , ruQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsUpdate@ which the
--- 'ReportsUpdate' request conforms to.
-type ReportsUpdateAPI =
+-- 'ReportsUpdate'' request conforms to.
+type ReportsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           Capture "reportId" Int64 :> Put '[JSON] Report
+           Capture "reportId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Report
 
 -- | Updates a report.
 --
--- /See:/ 'reportsUpdate' smart constructor.
-data ReportsUpdate = ReportsUpdate
+-- /See:/ 'reportsUpdate'' smart constructor.
+data ReportsUpdate' = ReportsUpdate'
     { _ruQuotaUser   :: !(Maybe Text)
     , _ruPrettyPrint :: !Bool
     , _ruUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ReportsUpdate = ReportsUpdate
     , _ruKey         :: !(Maybe Text)
     , _ruOauthToken  :: !(Maybe Text)
     , _ruFields      :: !(Maybe Text)
-    , _ruAlt         :: !Text
+    , _ruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ReportsUpdate = ReportsUpdate
 -- * 'ruFields'
 --
 -- * 'ruAlt'
-reportsUpdate
+reportsUpdate'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> ReportsUpdate
-reportsUpdate pRuReportId_ pRuProfileId_ =
-    ReportsUpdate
+    -> ReportsUpdate'
+reportsUpdate' pRuReportId_ pRuProfileId_ =
+    ReportsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIp = Nothing
@@ -101,7 +109,7 @@ reportsUpdate pRuReportId_ pRuProfileId_ =
     , _ruKey = Nothing
     , _ruOauthToken = Nothing
     , _ruFields = Nothing
-    , _ruAlt = "json"
+    , _ruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ ruFields :: Lens' ReportsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
 -- | Data format for the response.
-ruAlt :: Lens' ReportsUpdate' Text
+ruAlt :: Lens' ReportsUpdate' Alt
 ruAlt = lens _ruAlt (\ s a -> s{_ruAlt = a})
 
 instance GoogleRequest ReportsUpdate' where
         type Rs ReportsUpdate' = Report
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsUpdate{..}
-          = go _ruQuotaUser _ruPrettyPrint _ruUserIp
+        requestWithRoute r u ReportsUpdate'{..}
+          = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIp
               _ruReportId
               _ruProfileId
               _ruKey
               _ruOauthToken
               _ruFields
-              _ruAlt
+              (Just _ruAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsUpdateResource)
+                      r
                       u

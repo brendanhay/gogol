@@ -598,6 +598,27 @@ instance ToJSON PullRequest where
                  [("maxMessages" .=) <$> _prMaxMessages,
                   ("returnImmediately" .=) <$> _prReturnImmediately])
 
+-- | Optional attributes for this message.
+--
+-- /See:/ 'pubsubMessageAttributes' smart constructor.
+data PubsubMessageAttributes =
+    PubsubMessageAttributes
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PubsubMessageAttributes' with the minimum fields required to make a request.
+--
+pubsubMessageAttributes
+    :: PubsubMessageAttributes
+pubsubMessageAttributes = PubsubMessageAttributes
+
+instance FromJSON PubsubMessageAttributes where
+        parseJSON
+          = withObject "PubsubMessageAttributes"
+              (\ o -> pure PubsubMessageAttributes)
+
+instance ToJSON PubsubMessageAttributes where
+        toJSON = const (Object mempty)
+
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
@@ -917,6 +938,41 @@ instance ToJSON Subscription where
                  [("pushConfig" .=) <$> _sPushConfig,
                   ("topic" .=) <$> _sTopic, ("name" .=) <$> _sName,
                   ("ackDeadlineSeconds" .=) <$> _sAckDeadlineSeconds])
+
+-- | Endpoint configuration attributes. Every endpoint has a set of API
+-- supported attributes that can be used to control different aspects of
+-- the message delivery. The currently supported attribute is
+-- \`x-goog-version\`, which you can use to change the format of the push
+-- message. This attribute indicates the version of the data expected by
+-- the endpoint. This controls the shape of the envelope (i.e. its fields
+-- and metadata). The endpoint version is based on the version of the
+-- Pub\/Sub API. If not present during the CreateSubscription call, it will
+-- default to the version of the API used to make such call. If not present
+-- during a ModifyPushConfig call, its value will not be changed.
+-- GetSubscription calls will always return a valid version, even if the
+-- subscription was created without this attribute. The possible values for
+-- this attribute are: * \`v1beta1\`: uses the push format defined in the
+-- v1beta1 Pub\/Sub API. * \`v1\` or \`v1beta2\`: uses the push format
+-- defined in the v1 Pub\/Sub API.
+--
+-- /See:/ 'pushConfigAttributes' smart constructor.
+data PushConfigAttributes =
+    PushConfigAttributes
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushConfigAttributes' with the minimum fields required to make a request.
+--
+pushConfigAttributes
+    :: PushConfigAttributes
+pushConfigAttributes = PushConfigAttributes
+
+instance FromJSON PushConfigAttributes where
+        parseJSON
+          = withObject "PushConfigAttributes"
+              (\ o -> pure PushConfigAttributes)
+
+instance ToJSON PushConfigAttributes where
+        toJSON = const (Object mempty)
 
 -- | Associates members with roles. See below for allowed formats of members.
 --

@@ -19,6 +19,81 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'jwkKeys' smart constructor.
+data JwkKeys = JwkKeys
+    { _jkAlg :: !Text
+    , _jkUse :: !Text
+    , _jkKid :: !(Maybe Text)
+    , _jkN   :: !(Maybe Text)
+    , _jkE   :: !(Maybe Text)
+    , _jkKty :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JwkKeys' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jkAlg'
+--
+-- * 'jkUse'
+--
+-- * 'jkKid'
+--
+-- * 'jkN'
+--
+-- * 'jkE'
+--
+-- * 'jkKty'
+jwkKeys
+    :: JwkKeys
+jwkKeys =
+    JwkKeys
+    { _jkAlg = "RS256"
+    , _jkUse = "sig"
+    , _jkKid = Nothing
+    , _jkN = Nothing
+    , _jkE = Nothing
+    , _jkKty = "RSA"
+    }
+
+jkAlg :: Lens' JwkKeys Text
+jkAlg = lens _jkAlg (\ s a -> s{_jkAlg = a})
+
+jkUse :: Lens' JwkKeys Text
+jkUse = lens _jkUse (\ s a -> s{_jkUse = a})
+
+jkKid :: Lens' JwkKeys (Maybe Text)
+jkKid = lens _jkKid (\ s a -> s{_jkKid = a})
+
+jkN :: Lens' JwkKeys (Maybe Text)
+jkN = lens _jkN (\ s a -> s{_jkN = a})
+
+jkE :: Lens' JwkKeys (Maybe Text)
+jkE = lens _jkE (\ s a -> s{_jkE = a})
+
+jkKty :: Lens' JwkKeys Text
+jkKty = lens _jkKty (\ s a -> s{_jkKty = a})
+
+instance FromJSON JwkKeys where
+        parseJSON
+          = withObject "JwkKeys"
+              (\ o ->
+                 JwkKeys <$>
+                   (o .:? "alg" .!= "RS256") <*> (o .:? "use" .!= "sig")
+                     <*> (o .:? "kid")
+                     <*> (o .:? "n")
+                     <*> (o .:? "e")
+                     <*> (o .:? "kty" .!= "RSA"))
+
+instance ToJSON JwkKeys where
+        toJSON JwkKeys{..}
+          = object
+              (catMaybes
+                 [Just ("alg" .= _jkAlg), Just ("use" .= _jkUse),
+                  ("kid" .=) <$> _jkKid, ("n" .=) <$> _jkN,
+                  ("e" .=) <$> _jkE, Just ("kty" .= _jkKty)])
+
+--
 -- /See:/ 'tokeninfo' smart constructor.
 data Tokeninfo = Tokeninfo
     { _tAudience      :: !(Maybe Text)
@@ -145,7 +220,7 @@ instance ToJSON Tokeninfo where
 --
 -- /See:/ 'jwk' smart constructor.
 newtype Jwk = Jwk
-    { _jwkKeys :: Maybe [JwkKeysItem]
+    { _jwkKeys :: Maybe [JwkKeys]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Jwk' with the minimum fields required to make a request.
@@ -160,7 +235,7 @@ jwk =
     { _jwkKeys = Nothing
     }
 
-jwkKeys :: Lens' Jwk [JwkKeysItem]
+jwkKeys :: Lens' Jwk [JwkKeys]
 jwkKeys
   = lens _jwkKeys (\ s a -> s{_jwkKeys = a}) . _Default
       . _Coerce

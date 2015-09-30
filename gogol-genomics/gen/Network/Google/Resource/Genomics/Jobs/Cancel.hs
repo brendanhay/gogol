@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- generated and stored for cancelled jobs.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsJobsCancel@.
-module Genomics.Jobs.Cancel
+module Network.Google.Resource.Genomics.Jobs.Cancel
     (
     -- * REST Resource
-      JobsCancelAPI
+      JobsCancelResource
 
     -- * Creating a Request
-    , jobsCancel
-    , JobsCancel
+    , jobsCancel'
+    , JobsCancel'
 
     -- * Request Lenses
     , jcQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsCancel@ which the
--- 'JobsCancel' request conforms to.
-type JobsCancelAPI =
+-- 'JobsCancel'' request conforms to.
+type JobsCancelResource =
      "jobs" :>
-       Capture "jobId" Text :> "cancel" :> Post '[JSON] ()
+       Capture "jobId" Text :>
+         "cancel" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Cancels a job by ID. Note that it is possible for partial results to be
 -- generated and stored for cancelled jobs.
 --
--- /See:/ 'jobsCancel' smart constructor.
-data JobsCancel = JobsCancel
+-- /See:/ 'jobsCancel'' smart constructor.
+data JobsCancel' = JobsCancel'
     { _jcQuotaUser   :: !(Maybe Text)
     , _jcPrettyPrint :: !Bool
     , _jcJobId       :: !Text
@@ -61,7 +70,7 @@ data JobsCancel = JobsCancel
     , _jcKey         :: !(Maybe Text)
     , _jcOauthToken  :: !(Maybe Text)
     , _jcFields      :: !(Maybe Text)
-    , _jcAlt         :: !Text
+    , _jcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsCancel'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data JobsCancel = JobsCancel
 -- * 'jcFields'
 --
 -- * 'jcAlt'
-jobsCancel
+jobsCancel'
     :: Text -- ^ 'jobId'
-    -> JobsCancel
-jobsCancel pJcJobId_ =
-    JobsCancel
+    -> JobsCancel'
+jobsCancel' pJcJobId_ =
+    JobsCancel'
     { _jcQuotaUser = Nothing
     , _jcPrettyPrint = True
     , _jcJobId = pJcJobId_
@@ -95,7 +104,7 @@ jobsCancel pJcJobId_ =
     , _jcKey = Nothing
     , _jcOauthToken = Nothing
     , _jcFields = Nothing
-    , _jcAlt = "json"
+    , _jcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,17 +145,20 @@ jcFields :: Lens' JobsCancel' (Maybe Text)
 jcFields = lens _jcFields (\ s a -> s{_jcFields = a})
 
 -- | Data format for the response.
-jcAlt :: Lens' JobsCancel' Text
+jcAlt :: Lens' JobsCancel' Alt
 jcAlt = lens _jcAlt (\ s a -> s{_jcAlt = a})
 
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u JobsCancel{..}
-          = go _jcQuotaUser _jcPrettyPrint _jcJobId _jcUserIp
+        requestWithRoute r u JobsCancel'{..}
+          = go _jcQuotaUser (Just _jcPrettyPrint) _jcJobId
+              _jcUserIp
               _jcKey
               _jcOauthToken
               _jcFields
-              _jcAlt
+              (Just _jcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsCancelAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsCancelResource)
+                      r
+                      u

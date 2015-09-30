@@ -23,6 +23,9 @@ module Network.Google.DoubleClickBids.Types
     , lrrReports
     , lrrKind
 
+    -- * QueryMetadataFormat
+    , QueryMetadataFormat (..)
+
     -- * QueryMetadata
     , QueryMetadata
     , queryMetadata
@@ -37,6 +40,9 @@ module Network.Google.DoubleClickBids.Types
     , qmReportCount
     , qmTitle
     , qmSendNotification
+
+    -- * ParametersType
+    , ParametersType (..)
 
     -- * UploadLineItemsRequest
     , UploadLineItemsRequest
@@ -59,6 +65,9 @@ module Network.Google.DoubleClickBids.Types
     , rqrReportDataStartTimeMs
     , rqrTimezoneCode
 
+    -- * ParametersGroupBys
+    , ParametersGroupBys (..)
+
     -- * ListQueriesResponse
     , ListQueriesResponse
     , listQueriesResponse
@@ -72,10 +81,16 @@ module Network.Google.DoubleClickBids.Types
     , dlirFormat
     , dlirFilterIds
 
+    -- * DownloadLineItemsRequestFilterType
+    , DownloadLineItemsRequestFilterType (..)
+
     -- * UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
+
+    -- * QueryMetadataDataRange
+    , QueryMetadataDataRange (..)
 
     -- * ReportMetadata
     , ReportMetadata
@@ -84,6 +99,9 @@ module Network.Google.DoubleClickBids.Types
     , rmReportDataEndTimeMs
     , rmGoogleCloudStoragePath
     , rmReportDataStartTimeMs
+
+    -- * QueryScheduleFrequency
+    , QueryScheduleFrequency (..)
 
     -- * Report
     , Report
@@ -107,6 +125,9 @@ module Network.Google.DoubleClickBids.Types
     , reportKey
     , rkQueryId
     , rkReportId
+
+    -- * UploadLineItemsRequestFormat
+    , UploadLineItemsRequestFormat (..)
 
     -- * UploadStatus
     , UploadStatus
@@ -135,6 +156,9 @@ module Network.Google.DoubleClickBids.Types
     , rsFormat
     , rsFailure
 
+    -- * FilterPairType
+    , FilterPairType (..)
+
     -- * Query
     , Query
     , query
@@ -156,10 +180,31 @@ module Network.Google.DoubleClickBids.Types
     , pGroupBys
     , pType
 
+    -- * RunQueryRequestDataRange
+    , RunQueryRequestDataRange (..)
+
+    -- * ReportStatusState
+    , ReportStatusState (..)
+
+    -- * ParametersMetrics
+    , ParametersMetrics (..)
+
+    -- * ReportFailureErrorCode
+    , ReportFailureErrorCode (..)
+
     -- * ReportFailure
     , ReportFailure
     , reportFailure
     , rfErrorCode
+
+    -- * DownloadLineItemsRequestFormat
+    , DownloadLineItemsRequestFormat (..)
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ReportStatusFormat
+    , ReportStatusFormat (..)
     ) where
 
 import           Network.Google.DoubleClickBids.Types.Product
@@ -167,7 +212,7 @@ import           Network.Google.DoubleClickBids.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the DoubleClick Bid Manager API.
-doubleClickBidsURL :: BaseURL
+doubleClickBidsURL :: BaseUrl
 doubleClickBidsURL
   = BaseUrl Https
       "https://www.googleapis.com/doubleclickbidmanager/v1/"

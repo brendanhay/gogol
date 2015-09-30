@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- length. Attachment data can be up to 1024 bytes long.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsCreate@.
-module ProximityBeacon.Beacons.Attachments.Create
+module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
     (
     -- * REST Resource
-      BeaconsAttachmentsCreateAPI
+      BeaconsAttachmentsCreateResource
 
     -- * Creating a Request
-    , beaconsAttachmentsCreate
-    , BeaconsAttachmentsCreate
+    , beaconsAttachmentsCreate'
+    , BeaconsAttachmentsCreate'
 
     -- * Request Lenses
     , bacXgafv
@@ -55,11 +56,25 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsCreate@ which the
--- 'BeaconsAttachmentsCreate' request conforms to.
-type BeaconsAttachmentsCreateAPI =
+-- 'BeaconsAttachmentsCreate'' request conforms to.
+type BeaconsAttachmentsCreateResource =
      "v1beta1" :>
        "{+beaconName}" :>
-         "attachments" :> Post '[JSON] BeaconAttachment
+         "attachments" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] BeaconAttachment
 
 -- | Associates the given data with the specified beacon. Attachment data
 -- must contain two parts: - A namespaced type. - The actual attachment
@@ -69,8 +84,8 @@ type BeaconsAttachmentsCreateAPI =
 -- characters except for the forward slash (\`\/\`) up to 100 characters in
 -- length. Attachment data can be up to 1024 bytes long.
 --
--- /See:/ 'beaconsAttachmentsCreate' smart constructor.
-data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate
+-- /See:/ 'beaconsAttachmentsCreate'' smart constructor.
+data BeaconsAttachmentsCreate' = BeaconsAttachmentsCreate'
     { _bacXgafv          :: !(Maybe Text)
     , _bacQuotaUser      :: !(Maybe Text)
     , _bacPrettyPrint    :: !Bool
@@ -118,11 +133,11 @@ data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate
 -- * 'bacCallback'
 --
 -- * 'bacAlt'
-beaconsAttachmentsCreate
+beaconsAttachmentsCreate'
     :: Text -- ^ 'beaconName'
-    -> BeaconsAttachmentsCreate
-beaconsAttachmentsCreate pBacBeaconName_ =
-    BeaconsAttachmentsCreate
+    -> BeaconsAttachmentsCreate'
+beaconsAttachmentsCreate' pBacBeaconName_ =
+    BeaconsAttachmentsCreate'
     { _bacXgafv = Nothing
     , _bacQuotaUser = Nothing
     , _bacPrettyPrint = True
@@ -220,10 +235,10 @@ instance GoogleRequest BeaconsAttachmentsCreate'
          where
         type Rs BeaconsAttachmentsCreate' = BeaconAttachment
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsAttachmentsCreate{..}
-          = go _bacXgafv _bacQuotaUser _bacPrettyPrint
+        requestWithRoute r u BeaconsAttachmentsCreate'{..}
+          = go _bacXgafv _bacQuotaUser (Just _bacPrettyPrint)
               _bacUploadProtocol
-              _bacPp
+              (Just _bacPp)
               _bacAccessToken
               _bacBeaconName
               _bacUploadType
@@ -232,9 +247,9 @@ instance GoogleRequest BeaconsAttachmentsCreate'
               _bacOauthToken
               _bacFields
               _bacCallback
-              _bacAlt
+              (Just _bacAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconsAttachmentsCreateAPI)
+                      (Proxy :: Proxy BeaconsAttachmentsCreateResource)
                       r
                       u

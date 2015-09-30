@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one user by ID.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerUsersGet@.
-module Blogger.Users.Get
+module Network.Google.Resource.Blogger.Users.Get
     (
     -- * REST Resource
-      UsersGetAPI
+      UsersGetResource
 
     -- * Creating a Request
-    , usersGet
-    , UsersGet
+    , usersGet'
+    , UsersGet'
 
     -- * Request Lenses
     , ugQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerUsersGet@ which the
--- 'UsersGet' request conforms to.
-type UsersGetAPI =
-     "users" :> Capture "userId" Text :> Get '[JSON] User
+-- 'UsersGet'' request conforms to.
+type UsersGetResource =
+     "users" :>
+       Capture "userId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] User
 
 -- | Gets one user by ID.
 --
--- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+-- /See:/ 'usersGet'' smart constructor.
+data UsersGet' = UsersGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data UsersGet = UsersGet
     , _ugKey         :: !(Maybe Text)
     , _ugOauthToken  :: !(Maybe Text)
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Text
+    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data UsersGet = UsersGet
 -- * 'ugFields'
 --
 -- * 'ugAlt'
-usersGet
+usersGet'
     :: Text -- ^ 'userId'
-    -> UsersGet
-usersGet pUgUserId_ =
-    UsersGet
+    -> UsersGet'
+usersGet' pUgUserId_ =
+    UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
     , _ugUserIp = Nothing
@@ -92,7 +101,7 @@ usersGet pUgUserId_ =
     , _ugKey = Nothing
     , _ugOauthToken = Nothing
     , _ugFields = Nothing
-    , _ugAlt = "json"
+    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +142,19 @@ ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 -- | Data format for the response.
-ugAlt :: Lens' UsersGet' Text
+ugAlt :: Lens' UsersGet' Alt
 ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u UsersGet{..}
-          = go _ugQuotaUser _ugPrettyPrint _ugUserIp _ugUserId
+        requestWithRoute r u UsersGet'{..}
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIp
+              _ugUserId
               _ugKey
               _ugOauthToken
               _ugFields
-              _ugAlt
+              (Just _ugAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
+                      u

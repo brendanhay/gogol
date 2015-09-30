@@ -16,3 +16,56 @@
 module Network.Google.PageSpeed.Types.Sum where
 
 import           Network.Google.Prelude
+
+-- | The analysis strategy to use
+data PagespeedonlinePagespeedapiRunpagespeedStrategy
+    = Desktop
+      -- ^ @desktop@
+      -- Fetch and analyze the URL for desktop browsers
+    | Mobile
+      -- ^ @mobile@
+      -- Fetch and analyze the URL for mobile devices
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable PagespeedonlinePagespeedapiRunpagespeedStrategy
+
+instance FromText PagespeedonlinePagespeedapiRunpagespeedStrategy where
+    fromText = \case
+        "desktop" -> Just Desktop
+        "mobile" -> Just Mobile
+        _ -> Nothing
+
+instance ToText PagespeedonlinePagespeedapiRunpagespeedStrategy where
+    toText = \case
+        Desktop -> "desktop"
+        Mobile -> "mobile"
+
+instance FromJSON PagespeedonlinePagespeedapiRunpagespeedStrategy where
+    parseJSON = parseJSONText "PagespeedonlinePagespeedapiRunpagespeedStrategy"
+
+instance ToJSON PagespeedonlinePagespeedapiRunpagespeedStrategy where
+    toJSON = toJSONText
+
+-- | Data format for the response.
+data Alt
+    = JSON
+      -- ^ @json@
+      -- Responses with Content-Type of application\/json
+      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+
+instance Hashable Alt
+
+instance FromText Alt where
+    fromText = \case
+        "json" -> Just JSON
+        _ -> Nothing
+
+instance ToText Alt where
+    toText = \case
+        JSON -> "json"
+
+instance FromJSON Alt where
+    parseJSON = parseJSONText "Alt"
+
+instance ToJSON Alt where
+    toJSON = toJSONText

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of mobile carriers.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingMobileCarriersList@.
-module DFAReporting.MobileCarriers.List
+module Network.Google.Resource.DFAReporting.MobileCarriers.List
     (
     -- * REST Resource
-      MobileCarriersListAPI
+      MobileCarriersListResource
 
     -- * Creating a Request
-    , mobileCarriersList
-    , MobileCarriersList
+    , mobileCarriersList'
+    , MobileCarriersList'
 
     -- * Request Lenses
     , mclQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingMobileCarriersList@ which the
--- 'MobileCarriersList' request conforms to.
-type MobileCarriersListAPI =
+-- 'MobileCarriersList'' request conforms to.
+type MobileCarriersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "mobileCarriers" :>
-           Get '[JSON] MobileCarriersListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] MobileCarriersListResponse
 
 -- | Retrieves a list of mobile carriers.
 --
--- /See:/ 'mobileCarriersList' smart constructor.
-data MobileCarriersList = MobileCarriersList
+-- /See:/ 'mobileCarriersList'' smart constructor.
+data MobileCarriersList' = MobileCarriersList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
     , _mclUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data MobileCarriersList = MobileCarriersList
     , _mclKey         :: !(Maybe Text)
     , _mclOauthToken  :: !(Maybe Text)
     , _mclFields      :: !(Maybe Text)
-    , _mclAlt         :: !Text
+    , _mclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarriersList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data MobileCarriersList = MobileCarriersList
 -- * 'mclFields'
 --
 -- * 'mclAlt'
-mobileCarriersList
+mobileCarriersList'
     :: Int64 -- ^ 'profileId'
-    -> MobileCarriersList
-mobileCarriersList pMclProfileId_ =
-    MobileCarriersList
+    -> MobileCarriersList'
+mobileCarriersList' pMclProfileId_ =
+    MobileCarriersList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = True
     , _mclUserIp = Nothing
@@ -95,7 +103,7 @@ mobileCarriersList pMclProfileId_ =
     , _mclKey = Nothing
     , _mclOauthToken = Nothing
     , _mclFields = Nothing
-    , _mclAlt = "json"
+    , _mclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,22 +148,22 @@ mclFields
   = lens _mclFields (\ s a -> s{_mclFields = a})
 
 -- | Data format for the response.
-mclAlt :: Lens' MobileCarriersList' Text
+mclAlt :: Lens' MobileCarriersList' Alt
 mclAlt = lens _mclAlt (\ s a -> s{_mclAlt = a})
 
 instance GoogleRequest MobileCarriersList' where
         type Rs MobileCarriersList' =
              MobileCarriersListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u MobileCarriersList{..}
-          = go _mclQuotaUser _mclPrettyPrint _mclUserIp
+        requestWithRoute r u MobileCarriersList'{..}
+          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIp
               _mclProfileId
               _mclKey
               _mclOauthToken
               _mclFields
-              _mclAlt
+              (Just _mclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MobileCarriersListAPI)
+                      (Proxy :: Proxy MobileCarriersListResource)
                       r
                       u

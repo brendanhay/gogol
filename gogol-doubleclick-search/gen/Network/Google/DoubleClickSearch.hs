@@ -28,34 +28,34 @@ module Network.Google.DoubleClickSearch
     -- * REST Resources
 
     -- ** DoubleclicksearchConversionGet
-    , module DoubleClickSearch.Conversion.Get
+    , module Network.Google.Resource.DoubleClickSearch.Conversion.Get
 
     -- ** DoubleclicksearchConversionInsert
-    , module DoubleClickSearch.Conversion.Insert
+    , module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
 
     -- ** DoubleclicksearchConversionPatch
-    , module DoubleClickSearch.Conversion.Patch
+    , module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
 
     -- ** DoubleclicksearchConversionUpdate
-    , module DoubleClickSearch.Conversion.Update
+    , module Network.Google.Resource.DoubleClickSearch.Conversion.Update
 
     -- ** DoubleclicksearchConversionUpdateAvailability
-    , module DoubleClickSearch.Conversion.UpdateAvailability
+    , module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
 
     -- ** DoubleclicksearchReportsGenerate
-    , module DoubleClickSearch.Reports.Generate
+    , module Network.Google.Resource.DoubleClickSearch.Reports.Generate
 
     -- ** DoubleclicksearchReportsGet
-    , module DoubleClickSearch.Reports.Get
+    , module Network.Google.Resource.DoubleClickSearch.Reports.Get
 
     -- ** DoubleclicksearchReportsGetFile
-    , module DoubleClickSearch.Reports.GetFile
+    , module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
 
     -- ** DoubleclicksearchReportsRequest
-    , module DoubleClickSearch.Reports.Request
+    , module Network.Google.Resource.DoubleClickSearch.Reports.Request
 
     -- ** DoubleclicksearchSavedColumnsList
-    , module DoubleClickSearch.SavedColumns.List
+    , module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 
     -- * Types
 
@@ -80,6 +80,12 @@ module Network.Google.DoubleClickSearch
     , rrReportType
     , rrVerifySingleTimeZone
     , rrRowCount
+
+    -- ** ReportFiles
+    , ReportFiles
+    , reportFiles
+    , rfUrl
+    , rfByteCount
 
     -- ** Report
     , Report
@@ -109,11 +115,24 @@ module Network.Google.DoubleClickSearch
     , aAvailabilityTimestamp
     , aSegmentationType
 
+    -- ** ReportRequestFilters
+    , ReportRequestFilters
+    , reportRequestFilters
+    , rrfOperator
+    , rrfValues
+    , rrfColumn
+
     -- ** CustomMetric
     , CustomMetric
     , customMetric
     , cmValue
     , cmName
+
+    -- ** ReportRequestOrderBy
+    , ReportRequestOrderBy
+    , reportRequestOrderBy
+    , rrobSortOrder
+    , rrobColumn
 
     -- ** ConversionList
     , ConversionList
@@ -133,6 +152,14 @@ module Network.Google.DoubleClickSearch
     , racsHeaderText
     , racsPlatformSource
     , racsColumnName
+
+    -- ** ReportRequestTimeRange
+    , ReportRequestTimeRange
+    , reportRequestTimeRange
+    , rrtrEndDate
+    , rrtrChangedAttributesSinceTimestamp
+    , rrtrStartDate
+    , rrtrChangedMetricsSinceTimestamp
 
     -- ** Conversion
     , Conversion
@@ -183,6 +210,17 @@ module Network.Google.DoubleClickSearch
     , updateAvailabilityResponse
     , uAvailabilities
 
+    -- ** ReportRequestReportScope
+    , ReportRequestReportScope
+    , reportRequestReportScope
+    , rrrsKeywordId
+    , rrrsAdGroupId
+    , rrrsEngineAccountId
+    , rrrsAgencyId
+    , rrrsAdvertiserId
+    , rrrsCampaignId
+    , rrrsAdId
+
     -- ** CustomDimension
     , CustomDimension
     , customDimension
@@ -194,6 +232,9 @@ module Network.Google.DoubleClickSearch
     , savedColumnList
     , sclKind
     , sclItems
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
@@ -214,7 +255,15 @@ TODO
 -}
 
 type DoubleClickSearchAPI =
-     Reports :<|> SavedColumns :<|> Conversion
+     ReportsGetResource :<|> ReportsGetFileResource :<|>
+       ReportsGenerateResource
+       :<|> ReportsRequestResource
+       :<|> SavedColumnsListResource
+       :<|> ConversionInsertResource
+       :<|> ConversionPatchResource
+       :<|> ConversionGetResource
+       :<|> ConversionUpdateAvailabilityResource
+       :<|> ConversionUpdateResource
 
 doubleClickSearchAPI :: Proxy DoubleClickSearchAPI
 doubleClickSearchAPI = Proxy

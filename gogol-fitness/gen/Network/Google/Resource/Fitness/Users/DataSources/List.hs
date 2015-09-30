@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- using other scopes.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesList@.
-module Fitness.Users.DataSources.List
+module Network.Google.Resource.Fitness.Users.DataSources.List
     (
     -- * REST Resource
-      UsersDataSourcesListAPI
+      UsersDataSourcesListResource
 
     -- * Creating a Request
-    , usersDataSourcesList
-    , UsersDataSourcesList
+    , usersDataSourcesList'
+    , UsersDataSourcesList'
 
     -- * Request Lenses
     , udslQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesList@ which the
--- 'UsersDataSourcesList' request conforms to.
-type UsersDataSourcesListAPI =
+-- 'UsersDataSourcesList'' request conforms to.
+type UsersDataSourcesListResource =
      Capture "userId" Text :>
        "dataSources" :>
-         QueryParams "dataTypeName" Text :>
-           Get '[JSON] ListDataSourcesResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParams "dataTypeName" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ListDataSourcesResponse
 
 -- | Lists all data sources that are visible to the developer, using the
 -- OAuth scopes provided. The list is not exhaustive: the user may have
 -- private data sources that are only visible to other developers or calls
 -- using other scopes.
 --
--- /See:/ 'usersDataSourcesList' smart constructor.
-data UsersDataSourcesList = UsersDataSourcesList
+-- /See:/ 'usersDataSourcesList'' smart constructor.
+data UsersDataSourcesList' = UsersDataSourcesList'
     { _udslQuotaUser    :: !(Maybe Text)
     , _udslPrettyPrint  :: !Bool
     , _udslDataTypeName :: !(Maybe Text)
@@ -69,7 +77,7 @@ data UsersDataSourcesList = UsersDataSourcesList
     , _udslKey          :: !(Maybe Text)
     , _udslOauthToken   :: !(Maybe Text)
     , _udslFields       :: !(Maybe Text)
-    , _udslAlt          :: !Text
+    , _udslAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data UsersDataSourcesList = UsersDataSourcesList
 -- * 'udslFields'
 --
 -- * 'udslAlt'
-usersDataSourcesList
+usersDataSourcesList'
     :: Text -- ^ 'userId'
-    -> UsersDataSourcesList
-usersDataSourcesList pUdslUserId_ =
-    UsersDataSourcesList
+    -> UsersDataSourcesList'
+usersDataSourcesList' pUdslUserId_ =
+    UsersDataSourcesList'
     { _udslQuotaUser = Nothing
     , _udslPrettyPrint = True
     , _udslDataTypeName = Nothing
@@ -106,7 +114,7 @@ usersDataSourcesList pUdslUserId_ =
     , _udslKey = Nothing
     , _udslOauthToken = Nothing
     , _udslFields = Nothing
-    , _udslAlt = "json"
+    , _udslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,24 +168,24 @@ udslFields
   = lens _udslFields (\ s a -> s{_udslFields = a})
 
 -- | Data format for the response.
-udslAlt :: Lens' UsersDataSourcesList' Text
+udslAlt :: Lens' UsersDataSourcesList' Alt
 udslAlt = lens _udslAlt (\ s a -> s{_udslAlt = a})
 
 instance GoogleRequest UsersDataSourcesList' where
         type Rs UsersDataSourcesList' =
              ListDataSourcesResponse
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesList{..}
-          = go _udslQuotaUser _udslPrettyPrint
+        requestWithRoute r u UsersDataSourcesList'{..}
+          = go _udslQuotaUser (Just _udslPrettyPrint)
               _udslDataTypeName
               _udslUserIp
               _udslUserId
               _udslKey
               _udslOauthToken
               _udslFields
-              _udslAlt
+              (Just _udslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesListAPI)
+                      (Proxy :: Proxy UsersDataSourcesListResource)
                       r
                       u

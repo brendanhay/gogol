@@ -28,7 +28,7 @@ module Network.Google.QPXExpress
     -- * REST Resources
 
     -- ** QpxExpressTripsSearch
-    , module QPXExpress.Trips.Search
+    , module Network.Google.Resource.QPXExpress.Trips.Search
 
     -- * Types
 
@@ -262,6 +262,9 @@ module Network.Google.QPXExpress
     , torSolutions
     , torSlice
     , torMaxPrice
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -272,7 +275,7 @@ import           Network.Google.Resource.QPXExpress.Trips.Search
 TODO
 -}
 
-type QPXExpressAPI = Trips
+type QPXExpressAPI = TripsSearchResource
 
 qPXExpressAPI :: Proxy QPXExpressAPI
 qPXExpressAPI = Proxy

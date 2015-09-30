@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesPermissionsBatchDelete@.
-module Mapsengine.Tables.Permissions.BatchDelete
+module Network.Google.Resource.Mapsengine.Tables.Permissions.BatchDelete
     (
     -- * REST Resource
-      TablesPermissionsBatchDeleteAPI
+      TablesPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , tablesPermissionsBatchDelete
-    , TablesPermissionsBatchDelete
+    , tablesPermissionsBatchDelete'
+    , TablesPermissionsBatchDelete'
 
     -- * Request Lenses
     , tpbdQuotaUser
@@ -43,18 +44,25 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesPermissionsBatchDelete@ which the
--- 'TablesPermissionsBatchDelete' request conforms to.
-type TablesPermissionsBatchDeleteAPI =
+-- 'TablesPermissionsBatchDelete'' request conforms to.
+type TablesPermissionsBatchDeleteResource =
      "tables" :>
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'tablesPermissionsBatchDelete' smart constructor.
-data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
+-- /See:/ 'tablesPermissionsBatchDelete'' smart constructor.
+data TablesPermissionsBatchDelete' = TablesPermissionsBatchDelete'
     { _tpbdQuotaUser   :: !(Maybe Text)
     , _tpbdPrettyPrint :: !Bool
     , _tpbdUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
     , _tpbdId          :: !Text
     , _tpbdOauthToken  :: !(Maybe Text)
     , _tpbdFields      :: !(Maybe Text)
-    , _tpbdAlt         :: !Text
+    , _tpbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPermissionsBatchDelete'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
 -- * 'tpbdFields'
 --
 -- * 'tpbdAlt'
-tablesPermissionsBatchDelete
+tablesPermissionsBatchDelete'
     :: Text -- ^ 'id'
-    -> TablesPermissionsBatchDelete
-tablesPermissionsBatchDelete pTpbdId_ =
-    TablesPermissionsBatchDelete
+    -> TablesPermissionsBatchDelete'
+tablesPermissionsBatchDelete' pTpbdId_ =
+    TablesPermissionsBatchDelete'
     { _tpbdQuotaUser = Nothing
     , _tpbdPrettyPrint = True
     , _tpbdUserIp = Nothing
@@ -96,7 +104,7 @@ tablesPermissionsBatchDelete pTpbdId_ =
     , _tpbdId = pTpbdId_
     , _tpbdOauthToken = Nothing
     , _tpbdFields = Nothing
-    , _tpbdAlt = "json"
+    , _tpbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ tpbdFields
   = lens _tpbdFields (\ s a -> s{_tpbdFields = a})
 
 -- | Data format for the response.
-tpbdAlt :: Lens' TablesPermissionsBatchDelete' Text
+tpbdAlt :: Lens' TablesPermissionsBatchDelete' Alt
 tpbdAlt = lens _tpbdAlt (\ s a -> s{_tpbdAlt = a})
 
 instance GoogleRequest TablesPermissionsBatchDelete'
@@ -149,15 +157,17 @@ instance GoogleRequest TablesPermissionsBatchDelete'
         type Rs TablesPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesPermissionsBatchDelete{..}
-          = go _tpbdQuotaUser _tpbdPrettyPrint _tpbdUserIp
+        requestWithRoute r u
+          TablesPermissionsBatchDelete'{..}
+          = go _tpbdQuotaUser (Just _tpbdPrettyPrint)
+              _tpbdUserIp
               _tpbdKey
               _tpbdId
               _tpbdOauthToken
               _tpbdFields
-              _tpbdAlt
+              (Just _tpbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesPermissionsBatchDeleteAPI)
+                      (Proxy :: Proxy TablesPermissionsBatchDeleteResource)
                       r
                       u

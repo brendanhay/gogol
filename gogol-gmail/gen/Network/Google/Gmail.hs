@@ -27,102 +27,105 @@ module Network.Google.Gmail
     -- * REST Resources
 
     -- ** GmailUsersDraftsCreate
-    , module Gmail.Users.Drafts.Create
+    , module Network.Google.Resource.Gmail.Users.Drafts.Create
 
     -- ** GmailUsersDraftsDelete
-    , module Gmail.Users.Drafts.Delete
+    , module Network.Google.Resource.Gmail.Users.Drafts.Delete
 
     -- ** GmailUsersDraftsGet
-    , module Gmail.Users.Drafts.Get
+    , module Network.Google.Resource.Gmail.Users.Drafts.Get
 
     -- ** GmailUsersDraftsList
-    , module Gmail.Users.Drafts.List
+    , module Network.Google.Resource.Gmail.Users.Drafts.List
 
     -- ** GmailUsersDraftsSend
-    , module Gmail.Users.Drafts.Send
+    , module Network.Google.Resource.Gmail.Users.Drafts.Send
 
     -- ** GmailUsersDraftsUpdate
-    , module Gmail.Users.Drafts.Update
+    , module Network.Google.Resource.Gmail.Users.Drafts.Update
 
     -- ** GmailUsersGetProfile
-    , module Gmail.Users.GetProfile
+    , module Network.Google.Resource.Gmail.Users.GetProfile
 
     -- ** GmailUsersHistoryList
-    , module Gmail.Users.History.List
+    , module Network.Google.Resource.Gmail.Users.History.List
 
     -- ** GmailUsersLabelsCreate
-    , module Gmail.Users.Labels.Create
+    , module Network.Google.Resource.Gmail.Users.Labels.Create
 
     -- ** GmailUsersLabelsDelete
-    , module Gmail.Users.Labels.Delete
+    , module Network.Google.Resource.Gmail.Users.Labels.Delete
 
     -- ** GmailUsersLabelsGet
-    , module Gmail.Users.Labels.Get
+    , module Network.Google.Resource.Gmail.Users.Labels.Get
 
     -- ** GmailUsersLabelsList
-    , module Gmail.Users.Labels.List
+    , module Network.Google.Resource.Gmail.Users.Labels.List
 
     -- ** GmailUsersLabelsPatch
-    , module Gmail.Users.Labels.Patch
+    , module Network.Google.Resource.Gmail.Users.Labels.Patch
 
     -- ** GmailUsersLabelsUpdate
-    , module Gmail.Users.Labels.Update
+    , module Network.Google.Resource.Gmail.Users.Labels.Update
 
     -- ** GmailUsersMessagesAttachmentsGet
-    , module Gmail.Users.Messages.Attachments.Get
+    , module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
 
     -- ** GmailUsersMessagesDelete
-    , module Gmail.Users.Messages.Delete
+    , module Network.Google.Resource.Gmail.Users.Messages.Delete
 
     -- ** GmailUsersMessagesGet
-    , module Gmail.Users.Messages.Get
+    , module Network.Google.Resource.Gmail.Users.Messages.Get
 
     -- ** GmailUsersMessagesImport
-    , module Gmail.Users.Messages.Import
+    , module Network.Google.Resource.Gmail.Users.Messages.Import
 
     -- ** GmailUsersMessagesInsert
-    , module Gmail.Users.Messages.Insert
+    , module Network.Google.Resource.Gmail.Users.Messages.Insert
 
     -- ** GmailUsersMessagesList
-    , module Gmail.Users.Messages.List
+    , module Network.Google.Resource.Gmail.Users.Messages.List
 
     -- ** GmailUsersMessagesModify
-    , module Gmail.Users.Messages.Modify
+    , module Network.Google.Resource.Gmail.Users.Messages.Modify
 
     -- ** GmailUsersMessagesSend
-    , module Gmail.Users.Messages.Send
+    , module Network.Google.Resource.Gmail.Users.Messages.Send
 
     -- ** GmailUsersMessagesTrash
-    , module Gmail.Users.Messages.Trash
+    , module Network.Google.Resource.Gmail.Users.Messages.Trash
 
     -- ** GmailUsersMessagesUntrash
-    , module Gmail.Users.Messages.Untrash
+    , module Network.Google.Resource.Gmail.Users.Messages.Untrash
 
     -- ** GmailUsersStop
-    , module Gmail.Users.Stop
+    , module Network.Google.Resource.Gmail.Users.Stop
 
     -- ** GmailUsersThreadsDelete
-    , module Gmail.Users.Threads.Delete
+    , module Network.Google.Resource.Gmail.Users.Threads.Delete
 
     -- ** GmailUsersThreadsGet
-    , module Gmail.Users.Threads.Get
+    , module Network.Google.Resource.Gmail.Users.Threads.Get
 
     -- ** GmailUsersThreadsList
-    , module Gmail.Users.Threads.List
+    , module Network.Google.Resource.Gmail.Users.Threads.List
 
     -- ** GmailUsersThreadsModify
-    , module Gmail.Users.Threads.Modify
+    , module Network.Google.Resource.Gmail.Users.Threads.Modify
 
     -- ** GmailUsersThreadsTrash
-    , module Gmail.Users.Threads.Trash
+    , module Network.Google.Resource.Gmail.Users.Threads.Trash
 
     -- ** GmailUsersThreadsUntrash
-    , module Gmail.Users.Threads.Untrash
+    , module Network.Google.Resource.Gmail.Users.Threads.Untrash
 
     -- ** GmailUsersWatch
-    , module Gmail.Users.Watch
+    , module Network.Google.Resource.Gmail.Users.Watch
 
     -- * Types
+
+    -- ** GmailUsersThreadsGetFormat
+    , GmailUsersThreadsGetFormat (..)
 
     -- ** ModifyThreadRequest
     , ModifyThreadRequest
@@ -146,6 +149,9 @@ module Network.Google.Gmail
     , mmrRemoveLabelIds
     , mmrAddLabelIds
 
+    -- ** GmailUsersMessagesInsertInternalDateSource
+    , GmailUsersMessagesInsertInternalDateSource (..)
+
     -- ** ListHistoryResponse
     , ListHistoryResponse
     , listHistoryResponse
@@ -166,6 +172,15 @@ module Network.Google.Gmail
     , pThreadsTotal
     , pHistoryId
     , pEmailAddress
+
+    -- ** LabelType
+    , LabelType (..)
+
+    -- ** LabelMessageListVisibility
+    , LabelMessageListVisibility (..)
+
+    -- ** LabelLabelListVisibility
+    , LabelLabelListVisibility (..)
 
     -- ** HistoryMessageDeleted
     , HistoryMessageDeleted
@@ -207,12 +222,18 @@ module Network.Google.Gmail
     , mpbData
     , mpbAttachmentId
 
+    -- ** GmailUsersDraftsGetFormat
+    , GmailUsersDraftsGetFormat (..)
+
     -- ** ListDraftsResponse
     , ListDraftsResponse
     , listDraftsResponse
     , ldrNextPageToken
     , ldrResultSizeEstimate
     , ldrDrafts
+
+    -- ** GmailUsersMessagesImportInternalDateSource
+    , GmailUsersMessagesImportInternalDateSource (..)
 
     -- ** WatchResponse
     , WatchResponse
@@ -225,6 +246,9 @@ module Network.Google.Gmail
     , draft
     , dId
     , dMessage
+
+    -- ** WatchRequestLabelFilterAction
+    , WatchRequestLabelFilterAction (..)
 
     -- ** WatchRequest
     , WatchRequest
@@ -284,6 +308,12 @@ module Network.Google.Gmail
     , lmrNextPageToken
     , lmrResultSizeEstimate
     , lmrMessages
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** GmailUsersMessagesGetFormat
+    , GmailUsersMessagesGetFormat (..)
     ) where
 
 import           Network.Google.Gmail.Types
@@ -325,7 +355,38 @@ import           Network.Google.Resource.Gmail.Users.Watch
 TODO
 -}
 
-type GmailAPI = Users
+type GmailAPI =
+     UsersHistoryListResource :<|> UsersDraftsListResource
+       :<|> UsersDraftsGetResource
+       :<|> UsersDraftsCreateResource
+       :<|> UsersDraftsSendResource
+       :<|> UsersDraftsDeleteResource
+       :<|> UsersDraftsUpdateResource
+       :<|> UsersLabelsListResource
+       :<|> UsersLabelsPatchResource
+       :<|> UsersLabelsGetResource
+       :<|> UsersLabelsCreateResource
+       :<|> UsersLabelsDeleteResource
+       :<|> UsersLabelsUpdateResource
+       :<|> UsersThreadsListResource
+       :<|> UsersThreadsGetResource
+       :<|> UsersThreadsTrashResource
+       :<|> UsersThreadsUntrashResource
+       :<|> UsersThreadsModifyResource
+       :<|> UsersThreadsDeleteResource
+       :<|> UsersMessagesAttachmentsGetResource
+       :<|> UsersMessagesInsertResource
+       :<|> UsersMessagesListResource
+       :<|> UsersMessagesGetResource
+       :<|> UsersMessagesTrashResource
+       :<|> UsersMessagesSendResource
+       :<|> UsersMessagesUntrashResource
+       :<|> UsersMessagesImportResource
+       :<|> UsersMessagesModifyResource
+       :<|> UsersMessagesDeleteResource
+       :<|> UsersGetProfileResource
+       :<|> UsersStopResource
+       :<|> UsersWatchResource
 
 gmailAPI :: Proxy GmailAPI
 gmailAPI = Proxy

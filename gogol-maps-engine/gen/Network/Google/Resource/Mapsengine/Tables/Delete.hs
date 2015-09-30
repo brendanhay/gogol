@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a table.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesDelete@.
-module Mapsengine.Tables.Delete
+module Network.Google.Resource.Mapsengine.Tables.Delete
     (
     -- * REST Resource
-      TablesDeleteAPI
+      TablesDeleteResource
 
     -- * Creating a Request
-    , tablesDelete
-    , TablesDelete
+    , tablesDelete'
+    , TablesDelete'
 
     -- * Request Lenses
     , tdQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesDelete@ which the
--- 'TablesDelete' request conforms to.
-type TablesDeleteAPI =
-     "tables" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'TablesDelete'' request conforms to.
+type TablesDeleteResource =
+     "tables" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a table.
 --
--- /See:/ 'tablesDelete' smart constructor.
-data TablesDelete = TablesDelete
+-- /See:/ 'tablesDelete'' smart constructor.
+data TablesDelete' = TablesDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data TablesDelete = TablesDelete
     , _tdId          :: !Text
     , _tdOauthToken  :: !(Maybe Text)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data TablesDelete = TablesDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-tablesDelete
+tablesDelete'
     :: Text -- ^ 'id'
-    -> TablesDelete
-tablesDelete pTdId_ =
-    TablesDelete
+    -> TablesDelete'
+tablesDelete' pTdId_ =
+    TablesDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
     , _tdUserIp = Nothing
@@ -92,7 +101,7 @@ tablesDelete pTdId_ =
     , _tdId = pTdId_
     , _tdOauthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +144,21 @@ tdFields :: Lens' TablesDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TablesDelete' Text
+tdAlt :: Lens' TablesDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesDelete{..}
-          = go _tdQuotaUser _tdPrettyPrint _tdUserIp _tdKey
+        requestWithRoute r u TablesDelete'{..}
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+              _tdKey
               _tdId
               _tdOauthToken
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesDeleteResource)
+                      r
                       u

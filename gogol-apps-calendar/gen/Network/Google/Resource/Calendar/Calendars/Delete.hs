@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- events on primary calendars.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsDelete@.
-module Calendar.Calendars.Delete
+module Network.Google.Resource.Calendar.Calendars.Delete
     (
     -- * REST Resource
-      CalendarsDeleteAPI
+      CalendarsDeleteResource
 
     -- * Creating a Request
-    , calendarsDelete
-    , CalendarsDelete
+    , calendarsDelete'
+    , CalendarsDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsDelete@ which the
--- 'CalendarsDelete' request conforms to.
-type CalendarsDeleteAPI =
+-- 'CalendarsDelete'' request conforms to.
+type CalendarsDeleteResource =
      "calendars" :>
-       Capture "calendarId" Text :> Delete '[JSON] ()
+       Capture "calendarId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a secondary calendar. Use calendars.clear for clearing all
 -- events on primary calendars.
 --
--- /See:/ 'calendarsDelete' smart constructor.
-data CalendarsDelete = CalendarsDelete
+-- /See:/ 'calendarsDelete'' smart constructor.
+data CalendarsDelete' = CalendarsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdCalendarId  :: !Text
     , _cdPrettyPrint :: !Bool
@@ -61,7 +69,7 @@ data CalendarsDelete = CalendarsDelete
     , _cdKey         :: !(Maybe Text)
     , _cdOauthToken  :: !(Maybe Text)
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Text
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CalendarsDelete = CalendarsDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-calendarsDelete
+calendarsDelete'
     :: Text -- ^ 'calendarId'
-    -> CalendarsDelete
-calendarsDelete pCdCalendarId_ =
-    CalendarsDelete
+    -> CalendarsDelete'
+calendarsDelete' pCdCalendarId_ =
+    CalendarsDelete'
     { _cdQuotaUser = Nothing
     , _cdCalendarId = pCdCalendarId_
     , _cdPrettyPrint = True
@@ -95,7 +103,7 @@ calendarsDelete pCdCalendarId_ =
     , _cdKey = Nothing
     , _cdOauthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ cdFields :: Lens' CalendarsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CalendarsDelete' Text
+cdAlt :: Lens' CalendarsDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CalendarsDelete' where
         type Rs CalendarsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsDelete{..}
-          = go _cdQuotaUser _cdCalendarId _cdPrettyPrint
+        requestWithRoute r u CalendarsDelete'{..}
+          = go _cdQuotaUser _cdCalendarId (Just _cdPrettyPrint)
               _cdUserIp
               _cdKey
               _cdOauthToken
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of change logs.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingChangeLogsList@.
-module DFAReporting.ChangeLogs.List
+module Network.Google.Resource.DFAReporting.ChangeLogs.List
     (
     -- * REST Resource
-      ChangeLogsListAPI
+      ChangeLogsListResource
 
     -- * Creating a Request
-    , changeLogsList
-    , ChangeLogsList
+    , changeLogsList'
+    , ChangeLogsList'
 
     -- * Request Lenses
     , cllUserProfileIds
@@ -53,36 +54,46 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingChangeLogsList@ which the
--- 'ChangeLogsList' request conforms to.
-type ChangeLogsListAPI =
+-- 'ChangeLogsList'' request conforms to.
+type ChangeLogsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "changeLogs" :>
            QueryParams "userProfileIds" Int64 :>
-             QueryParam "objectType" Text :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "action" Text :>
-                     QueryParam "minChangeTime" Text :>
-                       QueryParam "maxChangeTime" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParams "objectIds" Int64 :>
-                             QueryParam "maxResults" Int32 :>
-                               Get '[JSON] ChangeLogsListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "objectType"
+                   DfareportingChangeLogsListObjectType
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "action" DfareportingChangeLogsListAction
+                           :>
+                           QueryParam "minChangeTime" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "maxChangeTime" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParams "objectIds" Int64 :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] ChangeLogsListResponse
 
 -- | Retrieves a list of change logs.
 --
--- /See:/ 'changeLogsList' smart constructor.
-data ChangeLogsList = ChangeLogsList
+-- /See:/ 'changeLogsList'' smart constructor.
+data ChangeLogsList' = ChangeLogsList'
     { _cllUserProfileIds :: !(Maybe Int64)
     , _cllQuotaUser      :: !(Maybe Text)
     , _cllPrettyPrint    :: !Bool
-    , _cllObjectType     :: !(Maybe Text)
+    , _cllObjectType     :: !(Maybe DfareportingChangeLogsListObjectType)
     , _cllUserIp         :: !(Maybe Text)
     , _cllSearchString   :: !(Maybe Text)
     , _cllIds            :: !(Maybe Int64)
     , _cllProfileId      :: !Int64
-    , _cllAction         :: !(Maybe Text)
+    , _cllAction         :: !(Maybe DfareportingChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
     , _cllKey            :: !(Maybe Text)
     , _cllMaxChangeTime  :: !(Maybe Text)
@@ -91,7 +102,7 @@ data ChangeLogsList = ChangeLogsList
     , _cllObjectIds      :: !(Maybe Int64)
     , _cllMaxResults     :: !(Maybe Int32)
     , _cllFields         :: !(Maybe Text)
-    , _cllAlt            :: !Text
+    , _cllAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList'' with the minimum fields required to make a request.
@@ -133,11 +144,11 @@ data ChangeLogsList = ChangeLogsList
 -- * 'cllFields'
 --
 -- * 'cllAlt'
-changeLogsList
+changeLogsList'
     :: Int64 -- ^ 'profileId'
-    -> ChangeLogsList
-changeLogsList pCllProfileId_ =
-    ChangeLogsList
+    -> ChangeLogsList'
+changeLogsList' pCllProfileId_ =
+    ChangeLogsList'
     { _cllUserProfileIds = Nothing
     , _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
@@ -155,7 +166,7 @@ changeLogsList pCllProfileId_ =
     , _cllObjectIds = Nothing
     , _cllMaxResults = Nothing
     , _cllFields = Nothing
-    , _cllAlt = "json"
+    , _cllAlt = JSON
     }
 
 -- | Select only change logs with these user profile IDs.
@@ -178,7 +189,7 @@ cllPrettyPrint
       (\ s a -> s{_cllPrettyPrint = a})
 
 -- | Select only change logs with the specified object type.
-cllObjectType :: Lens' ChangeLogsList' (Maybe Text)
+cllObjectType :: Lens' ChangeLogsList' (Maybe DfareportingChangeLogsListObjectType)
 cllObjectType
   = lens _cllObjectType
       (\ s a -> s{_cllObjectType = a})
@@ -206,7 +217,7 @@ cllProfileId
   = lens _cllProfileId (\ s a -> s{_cllProfileId = a})
 
 -- | Select only change logs with the specified action.
-cllAction :: Lens' ChangeLogsList' (Maybe Text)
+cllAction :: Lens' ChangeLogsList' (Maybe DfareportingChangeLogsListAction)
 cllAction
   = lens _cllAction (\ s a -> s{_cllAction = a})
 
@@ -268,14 +279,15 @@ cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
 -- | Data format for the response.
-cllAlt :: Lens' ChangeLogsList' Text
+cllAlt :: Lens' ChangeLogsList' Alt
 cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
 
 instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ChangeLogsList{..}
-          = go _cllUserProfileIds _cllQuotaUser _cllPrettyPrint
+        requestWithRoute r u ChangeLogsList'{..}
+          = go _cllUserProfileIds _cllQuotaUser
+              (Just _cllPrettyPrint)
               _cllObjectType
               _cllUserIp
               _cllSearchString
@@ -290,8 +302,9 @@ instance GoogleRequest ChangeLogsList' where
               _cllObjectIds
               _cllMaxResults
               _cllFields
-              _cllAlt
+              (Just _cllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangeLogsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ChangeLogsListResource)
                       r
                       u

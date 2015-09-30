@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,167 +20,170 @@
 -- | Deletes the specified autoscaler resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersDelete@.
-module Compute.Autoscalers.Delete
+module Network.Google.Resource.Compute.Autoscalers.Delete
     (
     -- * REST Resource
-      AutoscalersDeleteAPI
+      AutoscalersDeleteResource
 
     -- * Creating a Request
-    , autoscalersDelete
-    , AutoscalersDelete
+    , autoscalersDelete'
+    , AutoscalersDelete'
 
     -- * Request Lenses
-    , addQuotaUser
-    , addPrettyPrint
-    , addProject
-    , addUserIp
-    , addZone
-    , addKey
-    , addAutoscaler
-    , addOauthToken
-    , addFields
-    , addAlt
+    , adQuotaUser
+    , adPrettyPrint
+    , adProject
+    , adUserIp
+    , adZone
+    , adKey
+    , adAutoscaler
+    , adOauthToken
+    , adFields
+    , adAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAutoscalersDelete@ which the
--- 'AutoscalersDelete' request conforms to.
-type AutoscalersDeleteAPI =
+-- 'AutoscalersDelete'' request conforms to.
+type AutoscalersDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             Capture "autoscaler" Text :> Delete '[JSON] Operation
+             Capture "autoscaler" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified autoscaler resource.
 --
--- /See:/ 'autoscalersDelete' smart constructor.
-data AutoscalersDelete = AutoscalersDelete
-    { _addQuotaUser   :: !(Maybe Text)
-    , _addPrettyPrint :: !Bool
-    , _addProject     :: !Text
-    , _addUserIp      :: !(Maybe Text)
-    , _addZone        :: !Text
-    , _addKey         :: !(Maybe Text)
-    , _addAutoscaler  :: !Text
-    , _addOauthToken  :: !(Maybe Text)
-    , _addFields      :: !(Maybe Text)
-    , _addAlt         :: !Text
+-- /See:/ 'autoscalersDelete'' smart constructor.
+data AutoscalersDelete' = AutoscalersDelete'
+    { _adQuotaUser   :: !(Maybe Text)
+    , _adPrettyPrint :: !Bool
+    , _adProject     :: !Text
+    , _adUserIp      :: !(Maybe Text)
+    , _adZone        :: !Text
+    , _adKey         :: !(Maybe Text)
+    , _adAutoscaler  :: !Text
+    , _adOauthToken  :: !(Maybe Text)
+    , _adFields      :: !(Maybe Text)
+    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'addQuotaUser'
+-- * 'adQuotaUser'
 --
--- * 'addPrettyPrint'
+-- * 'adPrettyPrint'
 --
--- * 'addProject'
+-- * 'adProject'
 --
--- * 'addUserIp'
+-- * 'adUserIp'
 --
--- * 'addZone'
+-- * 'adZone'
 --
--- * 'addKey'
+-- * 'adKey'
 --
--- * 'addAutoscaler'
+-- * 'adAutoscaler'
 --
--- * 'addOauthToken'
+-- * 'adOauthToken'
 --
--- * 'addFields'
+-- * 'adFields'
 --
--- * 'addAlt'
-autoscalersDelete
+-- * 'adAlt'
+autoscalersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'autoscaler'
-    -> AutoscalersDelete
-autoscalersDelete pAddProject_ pAddZone_ pAddAutoscaler_ =
-    AutoscalersDelete
-    { _addQuotaUser = Nothing
-    , _addPrettyPrint = True
-    , _addProject = pAddProject_
-    , _addUserIp = Nothing
-    , _addZone = pAddZone_
-    , _addKey = Nothing
-    , _addAutoscaler = pAddAutoscaler_
-    , _addOauthToken = Nothing
-    , _addFields = Nothing
-    , _addAlt = "json"
+    -> AutoscalersDelete'
+autoscalersDelete' pAdProject_ pAdZone_ pAdAutoscaler_ =
+    AutoscalersDelete'
+    { _adQuotaUser = Nothing
+    , _adPrettyPrint = True
+    , _adProject = pAdProject_
+    , _adUserIp = Nothing
+    , _adZone = pAdZone_
+    , _adKey = Nothing
+    , _adAutoscaler = pAdAutoscaler_
+    , _adOauthToken = Nothing
+    , _adFields = Nothing
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-addQuotaUser :: Lens' AutoscalersDelete' (Maybe Text)
-addQuotaUser
-  = lens _addQuotaUser (\ s a -> s{_addQuotaUser = a})
+adQuotaUser :: Lens' AutoscalersDelete' (Maybe Text)
+adQuotaUser
+  = lens _adQuotaUser (\ s a -> s{_adQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-addPrettyPrint :: Lens' AutoscalersDelete' Bool
-addPrettyPrint
-  = lens _addPrettyPrint
-      (\ s a -> s{_addPrettyPrint = a})
+adPrettyPrint :: Lens' AutoscalersDelete' Bool
+adPrettyPrint
+  = lens _adPrettyPrint
+      (\ s a -> s{_adPrettyPrint = a})
 
 -- | Name of the project scoping this request.
-addProject :: Lens' AutoscalersDelete' Text
-addProject
-  = lens _addProject (\ s a -> s{_addProject = a})
+adProject :: Lens' AutoscalersDelete' Text
+adProject
+  = lens _adProject (\ s a -> s{_adProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-addUserIp :: Lens' AutoscalersDelete' (Maybe Text)
-addUserIp
-  = lens _addUserIp (\ s a -> s{_addUserIp = a})
+adUserIp :: Lens' AutoscalersDelete' (Maybe Text)
+adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
 
 -- | Name of the zone scoping this request.
-addZone :: Lens' AutoscalersDelete' Text
-addZone = lens _addZone (\ s a -> s{_addZone = a})
+adZone :: Lens' AutoscalersDelete' Text
+adZone = lens _adZone (\ s a -> s{_adZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-addKey :: Lens' AutoscalersDelete' (Maybe Text)
-addKey = lens _addKey (\ s a -> s{_addKey = a})
+adKey :: Lens' AutoscalersDelete' (Maybe Text)
+adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | Name of the persistent autoscaler resource to delete.
-addAutoscaler :: Lens' AutoscalersDelete' Text
-addAutoscaler
-  = lens _addAutoscaler
-      (\ s a -> s{_addAutoscaler = a})
+adAutoscaler :: Lens' AutoscalersDelete' Text
+adAutoscaler
+  = lens _adAutoscaler (\ s a -> s{_adAutoscaler = a})
 
 -- | OAuth 2.0 token for the current user.
-addOauthToken :: Lens' AutoscalersDelete' (Maybe Text)
-addOauthToken
-  = lens _addOauthToken
-      (\ s a -> s{_addOauthToken = a})
+adOauthToken :: Lens' AutoscalersDelete' (Maybe Text)
+adOauthToken
+  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-addFields :: Lens' AutoscalersDelete' (Maybe Text)
-addFields
-  = lens _addFields (\ s a -> s{_addFields = a})
+adFields :: Lens' AutoscalersDelete' (Maybe Text)
+adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-addAlt :: Lens' AutoscalersDelete' Text
-addAlt = lens _addAlt (\ s a -> s{_addAlt = a})
+adAlt :: Lens' AutoscalersDelete' Alt
+adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersDelete{..}
-          = go _addQuotaUser _addPrettyPrint _addProject
-              _addUserIp
-              _addZone
-              _addKey
-              _addAutoscaler
-              _addOauthToken
-              _addFields
-              _addAlt
+        requestWithRoute r u AutoscalersDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adProject
+              _adUserIp
+              _adZone
+              _adKey
+              _adAutoscaler
+              _adOauthToken
+              _adFields
+              (Just _adAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersDeleteAPI)
+                      (Proxy :: Proxy AutoscalersDeleteResource)
                       r
                       u

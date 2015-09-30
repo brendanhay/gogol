@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- are returned in chronological order (increasing historyId).
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersHistoryList@.
-module Gmail.Users.History.List
+module Network.Google.Resource.Gmail.Users.History.List
     (
     -- * REST Resource
-      UsersHistoryListAPI
+      UsersHistoryListResource
 
     -- * Creating a Request
-    , usersHistoryList
-    , UsersHistoryList
+    , usersHistoryList'
+    , UsersHistoryList'
 
     -- * Request Lenses
     , uhlQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersHistoryList@ which the
--- 'UsersHistoryList' request conforms to.
-type UsersHistoryListAPI =
+-- 'UsersHistoryList'' request conforms to.
+type UsersHistoryListResource =
      Capture "userId" Text :>
        "history" :>
-         QueryParam "startHistoryId" Word64 :>
-           QueryParam "pageToken" Text :>
-             QueryParam "labelId" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ListHistoryResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "startHistoryId" Word64 :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "labelId" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ListHistoryResponse
 
 -- | Lists the history of all changes to the given mailbox. History results
 -- are returned in chronological order (increasing historyId).
 --
--- /See:/ 'usersHistoryList' smart constructor.
-data UsersHistoryList = UsersHistoryList
+-- /See:/ 'usersHistoryList'' smart constructor.
+data UsersHistoryList' = UsersHistoryList'
     { _uhlQuotaUser      :: !(Maybe Text)
     , _uhlPrettyPrint    :: !Bool
     , _uhlUserIp         :: !(Maybe Text)
@@ -74,7 +82,7 @@ data UsersHistoryList = UsersHistoryList
     , _uhlLabelId        :: !(Maybe Text)
     , _uhlMaxResults     :: !Word32
     , _uhlFields         :: !(Maybe Text)
-    , _uhlAlt            :: !Text
+    , _uhlAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersHistoryList'' with the minimum fields required to make a request.
@@ -104,11 +112,11 @@ data UsersHistoryList = UsersHistoryList
 -- * 'uhlFields'
 --
 -- * 'uhlAlt'
-usersHistoryList
+usersHistoryList'
     :: Text
-    -> UsersHistoryList
-usersHistoryList pUhlUserId_ =
-    UsersHistoryList
+    -> UsersHistoryList'
+usersHistoryList' pUhlUserId_ =
+    UsersHistoryList'
     { _uhlQuotaUser = Nothing
     , _uhlPrettyPrint = True
     , _uhlUserIp = Nothing
@@ -120,7 +128,7 @@ usersHistoryList pUhlUserId_ =
     , _uhlLabelId = Nothing
     , _uhlMaxResults = 100
     , _uhlFields = Nothing
-    , _uhlAlt = "json"
+    , _uhlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -198,14 +206,14 @@ uhlFields
   = lens _uhlFields (\ s a -> s{_uhlFields = a})
 
 -- | Data format for the response.
-uhlAlt :: Lens' UsersHistoryList' Text
+uhlAlt :: Lens' UsersHistoryList' Alt
 uhlAlt = lens _uhlAlt (\ s a -> s{_uhlAlt = a})
 
 instance GoogleRequest UsersHistoryList' where
         type Rs UsersHistoryList' = ListHistoryResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersHistoryList{..}
-          = go _uhlQuotaUser _uhlPrettyPrint _uhlUserIp
+        requestWithRoute r u UsersHistoryList'{..}
+          = go _uhlQuotaUser (Just _uhlPrettyPrint) _uhlUserIp
               _uhlUserId
               _uhlKey
               _uhlStartHistoryId
@@ -214,9 +222,9 @@ instance GoogleRequest UsersHistoryList' where
               _uhlLabelId
               (Just _uhlMaxResults)
               _uhlFields
-              _uhlAlt
+              (Just _uhlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersHistoryListAPI)
+                      (Proxy :: Proxy UsersHistoryListResource)
                       r
                       u

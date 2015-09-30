@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get analysis of the model and the data the model was trained on.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsAnalyze@.
-module Prediction.Trainedmodels.Analyze
+module Network.Google.Resource.Prediction.Trainedmodels.Analyze
     (
     -- * REST Resource
-      TrainedmodelsAnalyzeAPI
+      TrainedmodelsAnalyzeResource
 
     -- * Creating a Request
-    , trainedmodelsAnalyze
-    , TrainedmodelsAnalyze
+    , trainedmodelsAnalyze'
+    , TrainedmodelsAnalyze'
 
     -- * Request Lenses
     , taQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsAnalyze@ which the
--- 'TrainedmodelsAnalyze' request conforms to.
-type TrainedmodelsAnalyzeAPI =
+-- 'TrainedmodelsAnalyze'' request conforms to.
+type TrainedmodelsAnalyzeResource =
      Capture "project" Text :>
        "trainedmodels" :>
-         Capture "id" Text :> "analyze" :> Get '[JSON] Analyze
+         Capture "id" Text :>
+           "analyze" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Analyze
 
 -- | Get analysis of the model and the data the model was trained on.
 --
--- /See:/ 'trainedmodelsAnalyze' smart constructor.
-data TrainedmodelsAnalyze = TrainedmodelsAnalyze
+-- /See:/ 'trainedmodelsAnalyze'' smart constructor.
+data TrainedmodelsAnalyze' = TrainedmodelsAnalyze'
     { _taQuotaUser   :: !(Maybe Text)
     , _taPrettyPrint :: !Bool
     , _taProject     :: !Text
@@ -62,7 +71,7 @@ data TrainedmodelsAnalyze = TrainedmodelsAnalyze
     , _taId          :: !Text
     , _taOauthToken  :: !(Maybe Text)
     , _taFields      :: !(Maybe Text)
-    , _taAlt         :: !Text
+    , _taAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsAnalyze'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data TrainedmodelsAnalyze = TrainedmodelsAnalyze
 -- * 'taFields'
 --
 -- * 'taAlt'
-trainedmodelsAnalyze
+trainedmodelsAnalyze'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
-    -> TrainedmodelsAnalyze
-trainedmodelsAnalyze pTaProject_ pTaId_ =
-    TrainedmodelsAnalyze
+    -> TrainedmodelsAnalyze'
+trainedmodelsAnalyze' pTaProject_ pTaId_ =
+    TrainedmodelsAnalyze'
     { _taQuotaUser = Nothing
     , _taPrettyPrint = True
     , _taProject = pTaProject_
@@ -100,7 +109,7 @@ trainedmodelsAnalyze pTaProject_ pTaId_ =
     , _taId = pTaId_
     , _taOauthToken = Nothing
     , _taFields = Nothing
-    , _taAlt = "json"
+    , _taAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,21 +155,22 @@ taFields :: Lens' TrainedmodelsAnalyze' (Maybe Text)
 taFields = lens _taFields (\ s a -> s{_taFields = a})
 
 -- | Data format for the response.
-taAlt :: Lens' TrainedmodelsAnalyze' Text
+taAlt :: Lens' TrainedmodelsAnalyze' Alt
 taAlt = lens _taAlt (\ s a -> s{_taAlt = a})
 
 instance GoogleRequest TrainedmodelsAnalyze' where
         type Rs TrainedmodelsAnalyze' = Analyze
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsAnalyze{..}
-          = go _taQuotaUser _taPrettyPrint _taProject _taUserIp
+        requestWithRoute r u TrainedmodelsAnalyze'{..}
+          = go _taQuotaUser (Just _taPrettyPrint) _taProject
+              _taUserIp
               _taKey
               _taId
               _taOauthToken
               _taFields
-              _taAlt
+              (Just _taAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsAnalyzeAPI)
+                      (Proxy :: Proxy TrainedmodelsAnalyzeResource)
                       r
                       u

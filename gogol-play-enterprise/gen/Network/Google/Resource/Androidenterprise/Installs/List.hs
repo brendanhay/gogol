@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the details of all apps installed on the specified device.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseInstallsList@.
-module Androidenterprise.Installs.List
+module Network.Google.Resource.Androidenterprise.Installs.List
     (
     -- * REST Resource
-      InstallsListAPI
+      InstallsListResource
 
     -- * Creating a Request
-    , installsList
-    , InstallsList
+    , installsList'
+    , InstallsList'
 
     -- * Request Lenses
     , ilQuotaUser
@@ -45,20 +46,28 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseInstallsList@ which the
--- 'InstallsList' request conforms to.
-type InstallsListAPI =
+-- 'InstallsList'' request conforms to.
+type InstallsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "devices" :>
                Capture "deviceId" Text :>
-                 "installs" :> Get '[JSON] InstallsListResponse
+                 "installs" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] InstallsListResponse
 
 -- | Retrieves the details of all apps installed on the specified device.
 --
--- /See:/ 'installsList' smart constructor.
-data InstallsList = InstallsList
+-- /See:/ 'installsList'' smart constructor.
+data InstallsList' = InstallsList'
     { _ilQuotaUser    :: !(Maybe Text)
     , _ilPrettyPrint  :: !Bool
     , _ilEnterpriseId :: !Text
@@ -68,7 +77,7 @@ data InstallsList = InstallsList
     , _ilDeviceId     :: !Text
     , _ilOauthToken   :: !(Maybe Text)
     , _ilFields       :: !(Maybe Text)
-    , _ilAlt          :: !Text
+    , _ilAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsList'' with the minimum fields required to make a request.
@@ -94,13 +103,13 @@ data InstallsList = InstallsList
 -- * 'ilFields'
 --
 -- * 'ilAlt'
-installsList
+installsList'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'deviceId'
-    -> InstallsList
-installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
-    InstallsList
+    -> InstallsList'
+installsList' pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
+    InstallsList'
     { _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
     , _ilEnterpriseId = pIlEnterpriseId_
@@ -110,7 +119,7 @@ installsList pIlEnterpriseId_ pIlUserId_ pIlDeviceId_ =
     , _ilDeviceId = pIlDeviceId_
     , _ilOauthToken = Nothing
     , _ilFields = Nothing
-    , _ilAlt = "json"
+    , _ilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,21 +171,24 @@ ilFields :: Lens' InstallsList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 -- | Data format for the response.
-ilAlt :: Lens' InstallsList' Text
+ilAlt :: Lens' InstallsList' Alt
 ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
 
 instance GoogleRequest InstallsList' where
         type Rs InstallsList' = InstallsListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u InstallsList{..}
-          = go _ilQuotaUser _ilPrettyPrint _ilEnterpriseId
+        requestWithRoute r u InstallsList'{..}
+          = go _ilQuotaUser (Just _ilPrettyPrint)
+              _ilEnterpriseId
               _ilUserIp
               _ilUserId
               _ilKey
               _ilDeviceId
               _ilOauthToken
               _ilFields
-              _ilAlt
+              (Just _ilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstallsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy InstallsListResource)
+                      r
                       u

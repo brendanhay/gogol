@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetAllForAllPlayers@.
-module GamesManagement.Achievements.ResetAllForAllPlayers
+module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayers
     (
     -- * REST Resource
-      AchievementsResetAllForAllPlayersAPI
+      AchievementsResetAllForAllPlayersResource
 
     -- * Creating a Request
-    , achievementsResetAllForAllPlayers
-    , AchievementsResetAllForAllPlayers
+    , achievementsResetAllForAllPlayers'
+    , AchievementsResetAllForAllPlayers'
 
     -- * Request Lenses
     , arafapQuotaUser
@@ -43,23 +44,30 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementAchievementsResetAllForAllPlayers@ which the
--- 'AchievementsResetAllForAllPlayers' request conforms to.
-type AchievementsResetAllForAllPlayersAPI =
+-- 'AchievementsResetAllForAllPlayers'' request conforms to.
+type AchievementsResetAllForAllPlayersResource =
      "achievements" :>
-       "resetAllForAllPlayers" :> Post '[JSON] ()
+       "resetAllForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all draft achievements for all players. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ 'achievementsResetAllForAllPlayers' smart constructor.
-data AchievementsResetAllForAllPlayers = AchievementsResetAllForAllPlayers
+-- /See:/ 'achievementsResetAllForAllPlayers'' smart constructor.
+data AchievementsResetAllForAllPlayers' = AchievementsResetAllForAllPlayers'
     { _arafapQuotaUser   :: !(Maybe Text)
     , _arafapPrettyPrint :: !Bool
     , _arafapUserIp      :: !(Maybe Text)
     , _arafapKey         :: !(Maybe Text)
     , _arafapOauthToken  :: !(Maybe Text)
     , _arafapFields      :: !(Maybe Text)
-    , _arafapAlt         :: !Text
+    , _arafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -79,17 +87,17 @@ data AchievementsResetAllForAllPlayers = AchievementsResetAllForAllPlayers
 -- * 'arafapFields'
 --
 -- * 'arafapAlt'
-achievementsResetAllForAllPlayers
-    :: AchievementsResetAllForAllPlayers
-achievementsResetAllForAllPlayers =
-    AchievementsResetAllForAllPlayers
+achievementsResetAllForAllPlayers'
+    :: AchievementsResetAllForAllPlayers'
+achievementsResetAllForAllPlayers' =
+    AchievementsResetAllForAllPlayers'
     { _arafapQuotaUser = Nothing
     , _arafapPrettyPrint = True
     , _arafapUserIp = Nothing
     , _arafapKey = Nothing
     , _arafapOauthToken = Nothing
     , _arafapFields = Nothing
-    , _arafapAlt = "json"
+    , _arafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +139,7 @@ arafapFields
   = lens _arafapFields (\ s a -> s{_arafapFields = a})
 
 -- | Data format for the response.
-arafapAlt :: Lens' AchievementsResetAllForAllPlayers' Text
+arafapAlt :: Lens' AchievementsResetAllForAllPlayers' Alt
 arafapAlt
   = lens _arafapAlt (\ s a -> s{_arafapAlt = a})
 
@@ -140,15 +148,16 @@ instance GoogleRequest
         type Rs AchievementsResetAllForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
-          AchievementsResetAllForAllPlayers{..}
-          = go _arafapQuotaUser _arafapPrettyPrint
+          AchievementsResetAllForAllPlayers'{..}
+          = go _arafapQuotaUser (Just _arafapPrettyPrint)
               _arafapUserIp
               _arafapKey
               _arafapOauthToken
               _arafapFields
-              _arafapAlt
+              (Just _arafapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsResetAllForAllPlayersAPI)
+                      (Proxy ::
+                         Proxy AchievementsResetAllForAllPlayersResource)
                       r
                       u

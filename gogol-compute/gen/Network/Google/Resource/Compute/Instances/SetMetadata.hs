@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetMetadata@.
-module Compute.Instances.SetMetadata
+module Network.Google.Resource.Compute.Instances.SetMetadata
     (
     -- * REST Resource
-      InstancesSetMetadataAPI
+      InstancesSetMetadataResource
 
     -- * Creating a Request
-    , instancesSetMetadata
-    , InstancesSetMetadata
+    , instancesSetMetadata'
+    , InstancesSetMetadata'
 
     -- * Request Lenses
     , ismQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesSetMetadata@ which the
--- 'InstancesSetMetadata' request conforms to.
-type InstancesSetMetadataAPI =
+-- 'InstancesSetMetadata'' request conforms to.
+type InstancesSetMetadataResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "setMetadata" :> Post '[JSON] Operation
+               "setMetadata" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets metadata for the specified instance to the data included in the
 -- request.
 --
--- /See:/ 'instancesSetMetadata' smart constructor.
-data InstancesSetMetadata = InstancesSetMetadata
+-- /See:/ 'instancesSetMetadata'' smart constructor.
+data InstancesSetMetadata' = InstancesSetMetadata'
     { _ismQuotaUser   :: !(Maybe Text)
     , _ismPrettyPrint :: !Bool
     , _ismProject     :: !Text
@@ -68,7 +76,7 @@ data InstancesSetMetadata = InstancesSetMetadata
     , _ismKey         :: !(Maybe Text)
     , _ismOauthToken  :: !(Maybe Text)
     , _ismFields      :: !(Maybe Text)
-    , _ismAlt         :: !Text
+    , _ismAlt         :: !Alt
     , _ismInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data InstancesSetMetadata = InstancesSetMetadata
 -- * 'ismAlt'
 --
 -- * 'ismInstance'
-instancesSetMetadata
+instancesSetMetadata'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesSetMetadata
-instancesSetMetadata pIsmProject_ pIsmZone_ pIsmInstance_ =
-    InstancesSetMetadata
+    -> InstancesSetMetadata'
+instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmInstance_ =
+    InstancesSetMetadata'
     { _ismQuotaUser = Nothing
     , _ismPrettyPrint = True
     , _ismProject = pIsmProject_
@@ -110,7 +118,7 @@ instancesSetMetadata pIsmProject_ pIsmZone_ pIsmInstance_ =
     , _ismKey = Nothing
     , _ismOauthToken = Nothing
     , _ismFields = Nothing
-    , _ismAlt = "json"
+    , _ismAlt = JSON
     , _ismInstance = pIsmInstance_
     }
 
@@ -160,7 +168,7 @@ ismFields
   = lens _ismFields (\ s a -> s{_ismFields = a})
 
 -- | Data format for the response.
-ismAlt :: Lens' InstancesSetMetadata' Text
+ismAlt :: Lens' InstancesSetMetadata' Alt
 ismAlt = lens _ismAlt (\ s a -> s{_ismAlt = a})
 
 -- | Name of the instance scoping this request.
@@ -171,17 +179,17 @@ ismInstance
 instance GoogleRequest InstancesSetMetadata' where
         type Rs InstancesSetMetadata' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetMetadata{..}
-          = go _ismQuotaUser _ismPrettyPrint _ismProject
+        requestWithRoute r u InstancesSetMetadata'{..}
+          = go _ismQuotaUser (Just _ismPrettyPrint) _ismProject
               _ismUserIp
               _ismZone
               _ismKey
               _ismOauthToken
               _ismFields
-              _ismAlt
+              (Just _ismAlt)
               _ismInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesSetMetadataAPI)
+                      (Proxy :: Proxy InstancesSetMetadataResource)
                       r
                       u

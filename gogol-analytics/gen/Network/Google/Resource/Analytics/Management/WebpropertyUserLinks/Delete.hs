@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes a user from the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertyUserLinksDelete@.
-module Analytics.Management.WebpropertyUserLinks.Delete
+module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Delete
     (
     -- * REST Resource
-      ManagementWebpropertyUserLinksDeleteAPI
+      ManagementWebpropertyUserLinksDeleteResource
 
     -- * Creating a Request
-    , managementWebpropertyUserLinksDelete
-    , ManagementWebpropertyUserLinksDelete
+    , managementWebpropertyUserLinksDelete'
+    , ManagementWebpropertyUserLinksDelete'
 
     -- * Request Lenses
     , mwuldQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertyUserLinksDelete@ which the
--- 'ManagementWebpropertyUserLinksDelete' request conforms to.
-type ManagementWebpropertyUserLinksDeleteAPI =
+-- 'ManagementWebpropertyUserLinksDelete'' request conforms to.
+type ManagementWebpropertyUserLinksDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityUserLinks" :>
-                 Capture "linkId" Text :> Delete '[JSON] ()
+                 Capture "linkId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes a user from the given web property.
 --
--- /See:/ 'managementWebpropertyUserLinksDelete' smart constructor.
-data ManagementWebpropertyUserLinksDelete = ManagementWebpropertyUserLinksDelete
+-- /See:/ 'managementWebpropertyUserLinksDelete'' smart constructor.
+data ManagementWebpropertyUserLinksDelete' = ManagementWebpropertyUserLinksDelete'
     { _mwuldQuotaUser     :: !(Maybe Text)
     , _mwuldPrettyPrint   :: !Bool
     , _mwuldWebPropertyId :: !Text
@@ -68,7 +76,7 @@ data ManagementWebpropertyUserLinksDelete = ManagementWebpropertyUserLinksDelete
     , _mwuldLinkId        :: !Text
     , _mwuldOauthToken    :: !(Maybe Text)
     , _mwuldFields        :: !(Maybe Text)
-    , _mwuldAlt           :: !Text
+    , _mwuldAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertyUserLinksDelete'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data ManagementWebpropertyUserLinksDelete = ManagementWebpropertyUserLinksDelete
 -- * 'mwuldFields'
 --
 -- * 'mwuldAlt'
-managementWebpropertyUserLinksDelete
+managementWebpropertyUserLinksDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementWebpropertyUserLinksDelete
-managementWebpropertyUserLinksDelete pMwuldWebPropertyId_ pMwuldAccountId_ pMwuldLinkId_ =
-    ManagementWebpropertyUserLinksDelete
+    -> ManagementWebpropertyUserLinksDelete'
+managementWebpropertyUserLinksDelete' pMwuldWebPropertyId_ pMwuldAccountId_ pMwuldLinkId_ =
+    ManagementWebpropertyUserLinksDelete'
     { _mwuldQuotaUser = Nothing
     , _mwuldPrettyPrint = False
     , _mwuldWebPropertyId = pMwuldWebPropertyId_
@@ -110,7 +118,7 @@ managementWebpropertyUserLinksDelete pMwuldWebPropertyId_ pMwuldAccountId_ pMwul
     , _mwuldLinkId = pMwuldLinkId_
     , _mwuldOauthToken = Nothing
     , _mwuldFields = Nothing
-    , _mwuldAlt = "json"
+    , _mwuldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ mwuldFields
   = lens _mwuldFields (\ s a -> s{_mwuldFields = a})
 
 -- | Data format for the response.
-mwuldAlt :: Lens' ManagementWebpropertyUserLinksDelete' Text
+mwuldAlt :: Lens' ManagementWebpropertyUserLinksDelete' Alt
 mwuldAlt = lens _mwuldAlt (\ s a -> s{_mwuldAlt = a})
 
 instance GoogleRequest
@@ -176,8 +184,8 @@ instance GoogleRequest
         type Rs ManagementWebpropertyUserLinksDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertyUserLinksDelete{..}
-          = go _mwuldQuotaUser _mwuldPrettyPrint
+          ManagementWebpropertyUserLinksDelete'{..}
+          = go _mwuldQuotaUser (Just _mwuldPrettyPrint)
               _mwuldWebPropertyId
               _mwuldUserIp
               _mwuldAccountId
@@ -185,10 +193,10 @@ instance GoogleRequest
               _mwuldLinkId
               _mwuldOauthToken
               _mwuldFields
-              _mwuldAlt
+              (Just _mwuldAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebpropertyUserLinksDeleteAPI)
+                         Proxy ManagementWebpropertyUserLinksDeleteResource)
                       r
                       u

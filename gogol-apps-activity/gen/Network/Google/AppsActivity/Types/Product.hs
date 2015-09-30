@@ -108,12 +108,12 @@ instance ToJSON Photo where
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
-    { _ePrimaryEventType     :: !(Maybe Text)
+    { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
     , _eUser                 :: !(Maybe (Maybe User))
     , _eEventTimeMillis      :: !(Maybe Word64)
     , _eRename               :: !(Maybe (Maybe Rename))
     , _eFromUserDeletion     :: !(Maybe Bool)
-    , _eAdditionalEventTypes :: !(Maybe [Text])
+    , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypes])
     , _ePermissionChanges    :: !(Maybe [Maybe PermissionChange])
     , _eTarget               :: !(Maybe (Maybe Target))
     , _eMove                 :: !(Maybe (Maybe Move))
@@ -156,7 +156,7 @@ event =
     }
 
 -- | The main type of event that occurred.
-ePrimaryEventType :: Lens' Event (Maybe Text)
+ePrimaryEventType :: Lens' Event (Maybe EventPrimaryEventType)
 ePrimaryEventType
   = lens _ePrimaryEventType
       (\ s a -> s{_ePrimaryEventType = a})
@@ -186,7 +186,7 @@ eFromUserDeletion
 -- multiple actions are part of a single event. For example, creating a
 -- document, renaming it, and sharing it may be part of a single
 -- file-creation event.
-eAdditionalEventTypes :: Lens' Event [Text]
+eAdditionalEventTypes :: Lens' Event [EventAdditionalEventTypes]
 eAdditionalEventTypes
   = lens _eAdditionalEventTypes
       (\ s a -> s{_eAdditionalEventTypes = a})
@@ -497,9 +497,9 @@ instance ToJSON Rename where
 data Permission = Permission
     { _pWithLink     :: !(Maybe Bool)
     , _pUser         :: !(Maybe (Maybe User))
-    , _pRole         :: !(Maybe Text)
+    , _pRole         :: !(Maybe PermissionRole)
     , _pName         :: !(Maybe Text)
-    , _pType         :: !(Maybe Text)
+    , _pType         :: !(Maybe PermissionType)
     , _pPermissionId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -541,7 +541,7 @@ pUser = lens _pUser (\ s a -> s{_pUser = a})
 
 -- | Indicates the Google Drive permissions role. The role determines a
 -- user\'s ability to read, write, or comment on the file.
-pRole :: Lens' Permission (Maybe Text)
+pRole :: Lens' Permission (Maybe PermissionRole)
 pRole = lens _pRole (\ s a -> s{_pRole = a})
 
 -- | The name of the user or group the permission applies to.
@@ -549,7 +549,7 @@ pName :: Lens' Permission (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | Indicates how widely permissions are granted.
-pType :: Lens' Permission (Maybe Text)
+pType :: Lens' Permission (Maybe PermissionType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
 -- | The ID for this permission. Corresponds to the Drive API\'s permission

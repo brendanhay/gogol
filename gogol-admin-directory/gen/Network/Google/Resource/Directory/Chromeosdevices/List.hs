@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosdevicesList@.
-module Directory.Chromeosdevices.List
+module Network.Google.Resource.Directory.Chromeosdevices.List
     (
     -- * REST Resource
-      ChromeosdevicesListAPI
+      ChromeosdevicesListResource
 
     -- * Creating a Request
-    , chromeosdevicesList
-    , ChromeosdevicesList
+    , chromeosdevicesList'
+    , ChromeosdevicesList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -49,38 +50,51 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosdevicesList@ which the
--- 'ChromeosdevicesList' request conforms to.
-type ChromeosdevicesListAPI =
+-- 'ChromeosdevicesList'' request conforms to.
+type ChromeosdevicesListResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
-             QueryParam "orderBy" Text :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "query" Text :>
-                   QueryParam "projection" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] ChromeOsDevices
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy"
+                   DirectoryChromeosdevicesListOrderBy
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder"
+                       DirectoryChromeosdevicesListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "query" Text :>
+                           QueryParam "projection"
+                             DirectoryChromeosdevicesListProjection
+                             :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] ChromeOsDevices
 
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --
--- /See:/ 'chromeosdevicesList' smart constructor.
-data ChromeosdevicesList = ChromeosdevicesList
+-- /See:/ 'chromeosdevicesList'' smart constructor.
+data ChromeosdevicesList' = ChromeosdevicesList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clOrderBy     :: !(Maybe Text)
+    , _clOrderBy     :: !(Maybe DirectoryChromeosdevicesListOrderBy)
     , _clUserIp      :: !(Maybe Text)
     , _clCustomerId  :: !Text
-    , _clSortOrder   :: !(Maybe Text)
+    , _clSortOrder   :: !(Maybe DirectoryChromeosdevicesListSortOrder)
     , _clKey         :: !(Maybe Text)
     , _clQuery       :: !(Maybe Text)
-    , _clProjection  :: !(Maybe Text)
+    , _clProjection  :: !(Maybe DirectoryChromeosdevicesListProjection)
     , _clPageToken   :: !(Maybe Text)
     , _clOauthToken  :: !(Maybe Text)
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosdevicesList'' with the minimum fields required to make a request.
@@ -114,11 +128,11 @@ data ChromeosdevicesList = ChromeosdevicesList
 -- * 'clFields'
 --
 -- * 'clAlt'
-chromeosdevicesList
+chromeosdevicesList'
     :: Text -- ^ 'customerId'
-    -> ChromeosdevicesList
-chromeosdevicesList pClCustomerId_ =
-    ChromeosdevicesList
+    -> ChromeosdevicesList'
+chromeosdevicesList' pClCustomerId_ =
+    ChromeosdevicesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clOrderBy = Nothing
@@ -132,7 +146,7 @@ chromeosdevicesList pClCustomerId_ =
     , _clOauthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,7 +163,7 @@ clPrettyPrint
       (\ s a -> s{_clPrettyPrint = a})
 
 -- | Column to use for sorting results
-clOrderBy :: Lens' ChromeosdevicesList' (Maybe Text)
+clOrderBy :: Lens' ChromeosdevicesList' (Maybe DirectoryChromeosdevicesListOrderBy)
 clOrderBy
   = lens _clOrderBy (\ s a -> s{_clOrderBy = a})
 
@@ -165,7 +179,7 @@ clCustomerId
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-clSortOrder :: Lens' ChromeosdevicesList' (Maybe Text)
+clSortOrder :: Lens' ChromeosdevicesList' (Maybe DirectoryChromeosdevicesListSortOrder)
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
@@ -181,7 +195,7 @@ clQuery :: Lens' ChromeosdevicesList' (Maybe Text)
 clQuery = lens _clQuery (\ s a -> s{_clQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-clProjection :: Lens' ChromeosdevicesList' (Maybe Text)
+clProjection :: Lens' ChromeosdevicesList' (Maybe DirectoryChromeosdevicesListProjection)
 clProjection
   = lens _clProjection (\ s a -> s{_clProjection = a})
 
@@ -205,14 +219,15 @@ clFields :: Lens' ChromeosdevicesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' ChromeosdevicesList' Text
+clAlt :: Lens' ChromeosdevicesList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest ChromeosdevicesList' where
         type Rs ChromeosdevicesList' = ChromeOsDevices
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u ChromeosdevicesList{..}
-          = go _clQuotaUser _clPrettyPrint _clOrderBy _clUserIp
+        requestWithRoute r u ChromeosdevicesList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clOrderBy
+              _clUserIp
               _clCustomerId
               _clSortOrder
               _clKey
@@ -222,9 +237,9 @@ instance GoogleRequest ChromeosdevicesList' where
               _clOauthToken
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChromeosdevicesListAPI)
+                      (Proxy :: Proxy ChromeosdevicesListResource)
                       r
                       u

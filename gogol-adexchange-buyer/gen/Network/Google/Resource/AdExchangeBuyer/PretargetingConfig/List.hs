@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- configurations.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigList@.
-module AdExchangeBuyer.PretargetingConfig.List
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
     (
     -- * REST Resource
-      PretargetingConfigListAPI
+      PretargetingConfigListResource
 
     -- * Creating a Request
-    , pretargetingConfigList
-    , PretargetingConfigList
+    , pretargetingConfigList'
+    , PretargetingConfigList'
 
     -- * Request Lenses
     , pclQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigList@ which the
--- 'PretargetingConfigList' request conforms to.
-type PretargetingConfigListAPI =
+-- 'PretargetingConfigList'' request conforms to.
+type PretargetingConfigListResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
-         Get '[JSON] PretargetingConfigList
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] PretargetingConfigList
 
 -- | Retrieves a list of the authenticated user\'s pretargeting
 -- configurations.
 --
--- /See:/ 'pretargetingConfigList' smart constructor.
-data PretargetingConfigList = PretargetingConfigList
+-- /See:/ 'pretargetingConfigList'' smart constructor.
+data PretargetingConfigList' = PretargetingConfigList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
     , _pclUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data PretargetingConfigList = PretargetingConfigList
     , _pclKey         :: !(Maybe Text)
     , _pclOauthToken  :: !(Maybe Text)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Text
+    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigList'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data PretargetingConfigList = PretargetingConfigList
 -- * 'pclFields'
 --
 -- * 'pclAlt'
-pretargetingConfigList
+pretargetingConfigList'
     :: Int64 -- ^ 'accountId'
-    -> PretargetingConfigList
-pretargetingConfigList pPclAccountId_ =
-    PretargetingConfigList
+    -> PretargetingConfigList'
+pretargetingConfigList' pPclAccountId_ =
+    PretargetingConfigList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
     , _pclUserIp = Nothing
@@ -96,7 +104,7 @@ pretargetingConfigList pPclAccountId_ =
     , _pclKey = Nothing
     , _pclOauthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = "json"
+    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,22 +149,22 @@ pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
 -- | Data format for the response.
-pclAlt :: Lens' PretargetingConfigList' Text
+pclAlt :: Lens' PretargetingConfigList' Alt
 pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
 
 instance GoogleRequest PretargetingConfigList' where
         type Rs PretargetingConfigList' =
              PretargetingConfigList
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigList{..}
-          = go _pclQuotaUser _pclPrettyPrint _pclUserIp
+        requestWithRoute r u PretargetingConfigList'{..}
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
               _pclAccountId
               _pclKey
               _pclOauthToken
               _pclFields
-              _pclAlt
+              (Just _pclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigListAPI)
+                      (Proxy :: Proxy PretargetingConfigListResource)
                       r
                       u

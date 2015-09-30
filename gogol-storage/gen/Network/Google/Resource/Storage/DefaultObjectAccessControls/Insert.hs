@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsInsert@.
-module Storage.DefaultObjectAccessControls.Insert
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
     (
     -- * REST Resource
-      DefaultObjectAccessControlsInsertAPI
+      DefaultObjectAccessControlsInsertResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsInsert
-    , DefaultObjectAccessControlsInsert
+    , defaultObjectAccessControlsInsert'
+    , DefaultObjectAccessControlsInsert'
 
     -- * Request Lenses
     , doaciQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsInsert@ which the
--- 'DefaultObjectAccessControlsInsert' request conforms to.
-type DefaultObjectAccessControlsInsertAPI =
+-- 'DefaultObjectAccessControlsInsert'' request conforms to.
+type DefaultObjectAccessControlsInsertResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
-           Post '[JSON] ObjectAccessControl
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ObjectAccessControl
 
 -- | Creates a new default object ACL entry on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsInsert' smart constructor.
-data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert
+-- /See:/ 'defaultObjectAccessControlsInsert'' smart constructor.
+data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
     { _doaciQuotaUser   :: !(Maybe Text)
     , _doaciPrettyPrint :: !Bool
     , _doaciUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert
     , _doaciKey         :: !(Maybe Text)
     , _doaciOauthToken  :: !(Maybe Text)
     , _doaciFields      :: !(Maybe Text)
-    , _doaciAlt         :: !Text
+    , _doaciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data DefaultObjectAccessControlsInsert = DefaultObjectAccessControlsInsert
 -- * 'doaciFields'
 --
 -- * 'doaciAlt'
-defaultObjectAccessControlsInsert
+defaultObjectAccessControlsInsert'
     :: Text -- ^ 'bucket'
-    -> DefaultObjectAccessControlsInsert
-defaultObjectAccessControlsInsert pDoaciBucket_ =
-    DefaultObjectAccessControlsInsert
+    -> DefaultObjectAccessControlsInsert'
+defaultObjectAccessControlsInsert' pDoaciBucket_ =
+    DefaultObjectAccessControlsInsert'
     { _doaciQuotaUser = Nothing
     , _doaciPrettyPrint = True
     , _doaciUserIp = Nothing
@@ -95,7 +103,7 @@ defaultObjectAccessControlsInsert pDoaciBucket_ =
     , _doaciKey = Nothing
     , _doaciOauthToken = Nothing
     , _doaciFields = Nothing
-    , _doaciAlt = "json"
+    , _doaciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ doaciFields
   = lens _doaciFields (\ s a -> s{_doaciFields = a})
 
 -- | Data format for the response.
-doaciAlt :: Lens' DefaultObjectAccessControlsInsert' Text
+doaciAlt :: Lens' DefaultObjectAccessControlsInsert' Alt
 doaciAlt = lens _doaciAlt (\ s a -> s{_doaciAlt = a})
 
 instance GoogleRequest
@@ -150,15 +158,17 @@ instance GoogleRequest
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsInsert{..}
-          = go _doaciQuotaUser _doaciPrettyPrint _doaciUserIp
+          DefaultObjectAccessControlsInsert'{..}
+          = go _doaciQuotaUser (Just _doaciPrettyPrint)
+              _doaciUserIp
               _doaciBucket
               _doaciKey
               _doaciOauthToken
               _doaciFields
-              _doaciAlt
+              (Just _doaciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsInsertAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsInsertResource)
                       r
                       u

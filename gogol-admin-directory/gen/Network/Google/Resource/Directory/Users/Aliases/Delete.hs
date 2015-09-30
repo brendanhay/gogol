@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove a alias for the user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesDelete@.
-module Directory.Users.Aliases.Delete
+module Network.Google.Resource.Directory.Users.Aliases.Delete
     (
     -- * REST Resource
-      UsersAliasesDeleteAPI
+      UsersAliasesDeleteResource
 
     -- * Creating a Request
-    , usersAliasesDelete
-    , UsersAliasesDelete
+    , usersAliasesDelete'
+    , UsersAliasesDelete'
 
     -- * Request Lenses
     , uadQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersAliasesDelete@ which the
--- 'UsersAliasesDelete' request conforms to.
-type UsersAliasesDeleteAPI =
+-- 'UsersAliasesDelete'' request conforms to.
+type UsersAliasesDeleteResource =
      "users" :>
        Capture "userKey" Text :>
          "aliases" :>
-           Capture "alias" Text :> Delete '[JSON] ()
+           Capture "alias" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove a alias for the user
 --
--- /See:/ 'usersAliasesDelete' smart constructor.
-data UsersAliasesDelete = UsersAliasesDelete
+-- /See:/ 'usersAliasesDelete'' smart constructor.
+data UsersAliasesDelete' = UsersAliasesDelete'
     { _uadQuotaUser   :: !(Maybe Text)
     , _uadPrettyPrint :: !Bool
     , _uadUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data UsersAliasesDelete = UsersAliasesDelete
     , _uadOauthToken  :: !(Maybe Text)
     , _uadUserKey     :: !Text
     , _uadFields      :: !(Maybe Text)
-    , _uadAlt         :: !Text
+    , _uadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data UsersAliasesDelete = UsersAliasesDelete
 -- * 'uadFields'
 --
 -- * 'uadAlt'
-usersAliasesDelete
+usersAliasesDelete'
     :: Text -- ^ 'alias'
     -> Text -- ^ 'userKey'
-    -> UsersAliasesDelete
-usersAliasesDelete pUadAlias_ pUadUserKey_ =
-    UsersAliasesDelete
+    -> UsersAliasesDelete'
+usersAliasesDelete' pUadAlias_ pUadUserKey_ =
+    UsersAliasesDelete'
     { _uadQuotaUser = Nothing
     , _uadPrettyPrint = True
     , _uadUserIp = Nothing
@@ -101,7 +109,7 @@ usersAliasesDelete pUadAlias_ pUadUserKey_ =
     , _uadOauthToken = Nothing
     , _uadUserKey = pUadUserKey_
     , _uadFields = Nothing
-    , _uadAlt = "json"
+    , _uadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ uadFields
   = lens _uadFields (\ s a -> s{_uadFields = a})
 
 -- | Data format for the response.
-uadAlt :: Lens' UsersAliasesDelete' Text
+uadAlt :: Lens' UsersAliasesDelete' Alt
 uadAlt = lens _uadAlt (\ s a -> s{_uadAlt = a})
 
 instance GoogleRequest UsersAliasesDelete' where
         type Rs UsersAliasesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersAliasesDelete{..}
-          = go _uadQuotaUser _uadPrettyPrint _uadUserIp
+        requestWithRoute r u UsersAliasesDelete'{..}
+          = go _uadQuotaUser (Just _uadPrettyPrint) _uadUserIp
               _uadAlias
               _uadKey
               _uadOauthToken
               _uadUserKey
               _uadFields
-              _uadAlt
+              (Just _uadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersAliasesDeleteAPI)
+                      (Proxy :: Proxy UsersAliasesDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- which CIDR range is being used by the cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersCreate@.
-module Container.Projects.Zones.Clusters.Create
+module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
     (
     -- * REST Resource
-      ProjectsZonesClustersCreateAPI
+      ProjectsZonesClustersCreateResource
 
     -- * Creating a Request
-    , projectsZonesClustersCreate
-    , ProjectsZonesClustersCreate
+    , projectsZonesClustersCreate'
+    , ProjectsZonesClustersCreate'
 
     -- * Request Lenses
     , pzccQuotaUser
@@ -51,12 +52,19 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersCreate@ which the
--- 'ProjectsZonesClustersCreate' request conforms to.
-type ProjectsZonesClustersCreateAPI =
+-- 'ProjectsZonesClustersCreate'' request conforms to.
+type ProjectsZonesClustersCreateResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
-           "clusters" :> Post '[JSON] Operation
+           "clusters" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a cluster, consisting of the specified number and type of Google
 -- Compute Engine instances, plus a Kubernetes master instance. The cluster
@@ -67,8 +75,8 @@ type ProjectsZonesClustersCreateAPI =
 -- Finally, an entry is added to the project\'s global metadata indicating
 -- which CIDR range is being used by the cluster.
 --
--- /See:/ 'projectsZonesClustersCreate' smart constructor.
-data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate
+-- /See:/ 'projectsZonesClustersCreate'' smart constructor.
+data ProjectsZonesClustersCreate' = ProjectsZonesClustersCreate'
     { _pzccQuotaUser   :: !(Maybe Text)
     , _pzccPrettyPrint :: !Bool
     , _pzccUserIp      :: !(Maybe Text)
@@ -77,7 +85,7 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate
     , _pzccProjectId   :: !Text
     , _pzccOauthToken  :: !(Maybe Text)
     , _pzccFields      :: !(Maybe Text)
-    , _pzccAlt         :: !Text
+    , _pzccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersCreate'' with the minimum fields required to make a request.
@@ -101,12 +109,12 @@ data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate
 -- * 'pzccFields'
 --
 -- * 'pzccAlt'
-projectsZonesClustersCreate
+projectsZonesClustersCreate'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
-    -> ProjectsZonesClustersCreate
-projectsZonesClustersCreate pPzccZoneId_ pPzccProjectId_ =
-    ProjectsZonesClustersCreate
+    -> ProjectsZonesClustersCreate'
+projectsZonesClustersCreate' pPzccZoneId_ pPzccProjectId_ =
+    ProjectsZonesClustersCreate'
     { _pzccQuotaUser = Nothing
     , _pzccPrettyPrint = True
     , _pzccUserIp = Nothing
@@ -115,7 +123,7 @@ projectsZonesClustersCreate pPzccZoneId_ pPzccProjectId_ =
     , _pzccProjectId = pPzccProjectId_
     , _pzccOauthToken = Nothing
     , _pzccFields = Nothing
-    , _pzccAlt = "json"
+    , _pzccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,24 @@ pzccFields
   = lens _pzccFields (\ s a -> s{_pzccFields = a})
 
 -- | Data format for the response.
-pzccAlt :: Lens' ProjectsZonesClustersCreate' Text
+pzccAlt :: Lens' ProjectsZonesClustersCreate' Alt
 pzccAlt = lens _pzccAlt (\ s a -> s{_pzccAlt = a})
 
 instance GoogleRequest ProjectsZonesClustersCreate'
          where
         type Rs ProjectsZonesClustersCreate' = Operation
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersCreate{..}
-          = go _pzccQuotaUser _pzccPrettyPrint _pzccUserIp
+        requestWithRoute r u ProjectsZonesClustersCreate'{..}
+          = go _pzccQuotaUser (Just _pzccPrettyPrint)
+              _pzccUserIp
               _pzccZoneId
               _pzccKey
               _pzccProjectId
               _pzccOauthToken
               _pzccFields
-              _pzccAlt
+              (Just _pzccAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesClustersCreateAPI)
+                      (Proxy :: Proxy ProjectsZonesClustersCreateResource)
                       r
                       u

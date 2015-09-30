@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- succeeded or whether the operation completed despite cancellation.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsCancel@.
-module StorageTransfer.TransferOperations.Cancel
+module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     (
     -- * REST Resource
-      TransferOperationsCancelAPI
+      TransferOperationsCancelResource
 
     -- * Creating a Request
-    , transferOperationsCancel
-    , TransferOperationsCancel
+    , transferOperationsCancel'
+    , TransferOperationsCancel'
 
     -- * Request Lenses
     , tocXgafv
@@ -50,15 +51,29 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsCancel@ which the
--- 'TransferOperationsCancel' request conforms to.
-type TransferOperationsCancelAPI =
-     "v1" :> "{+name}:cancel" :> Post '[JSON] Empty
+-- 'TransferOperationsCancel'' request conforms to.
+type TransferOperationsCancelResource =
+     "v1" :>
+       "{+name}:cancel" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
--- /See:/ 'transferOperationsCancel' smart constructor.
-data TransferOperationsCancel = TransferOperationsCancel
+-- /See:/ 'transferOperationsCancel'' smart constructor.
+data TransferOperationsCancel' = TransferOperationsCancel'
     { _tocXgafv          :: !(Maybe Text)
     , _tocQuotaUser      :: !(Maybe Text)
     , _tocPrettyPrint    :: !Bool
@@ -106,11 +121,11 @@ data TransferOperationsCancel = TransferOperationsCancel
 -- * 'tocCallback'
 --
 -- * 'tocAlt'
-transferOperationsCancel
+transferOperationsCancel'
     :: Text -- ^ 'name'
-    -> TransferOperationsCancel
-transferOperationsCancel pTocName_ =
-    TransferOperationsCancel
+    -> TransferOperationsCancel'
+transferOperationsCancel' pTocName_ =
+    TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocQuotaUser = Nothing
     , _tocPrettyPrint = True
@@ -206,10 +221,10 @@ instance GoogleRequest TransferOperationsCancel'
          where
         type Rs TransferOperationsCancel' = Empty
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsCancel{..}
-          = go _tocXgafv _tocQuotaUser _tocPrettyPrint
+        requestWithRoute r u TransferOperationsCancel'{..}
+          = go _tocXgafv _tocQuotaUser (Just _tocPrettyPrint)
               _tocUploadProtocol
-              _tocPp
+              (Just _tocPp)
               _tocAccessToken
               _tocUploadType
               _tocBearerToken
@@ -218,9 +233,9 @@ instance GoogleRequest TransferOperationsCancel'
               _tocOauthToken
               _tocFields
               _tocCallback
-              _tocAlt
+              (Just _tocAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsCancelAPI)
+                      (Proxy :: Proxy TransferOperationsCancelResource)
                       r
                       u

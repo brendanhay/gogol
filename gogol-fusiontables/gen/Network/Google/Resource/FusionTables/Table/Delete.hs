@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,138 +20,144 @@
 -- | Deletes a table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableDelete@.
-module FusionTables.Table.Delete
+module Network.Google.Resource.FusionTables.Table.Delete
     (
     -- * REST Resource
-      TableDeleteAPI
+      TableDeleteResource
 
     -- * Creating a Request
-    , tableDelete
-    , TableDelete
+    , tableDelete'
+    , TableDelete'
 
     -- * Request Lenses
-    , tabaQuotaUser
-    , tabaPrettyPrint
-    , tabaUserIp
-    , tabaKey
-    , tabaOauthToken
-    , tabaTableId
-    , tabaFields
-    , tabaAlt
+    , tdQuotaUser
+    , tdPrettyPrint
+    , tdUserIp
+    , tdKey
+    , tdOauthToken
+    , tdTableId
+    , tdFields
+    , tdAlt
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableDelete@ which the
--- 'TableDelete' request conforms to.
-type TableDeleteAPI =
+-- 'TableDelete'' request conforms to.
+type TableDeleteResource =
      "tables" :>
-       Capture "tableId" Text :> Delete '[JSON] ()
+       Capture "tableId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a table.
 --
--- /See:/ 'tableDelete' smart constructor.
-data TableDelete = TableDelete
-    { _tabaQuotaUser   :: !(Maybe Text)
-    , _tabaPrettyPrint :: !Bool
-    , _tabaUserIp      :: !(Maybe Text)
-    , _tabaKey         :: !(Maybe Text)
-    , _tabaOauthToken  :: !(Maybe Text)
-    , _tabaTableId     :: !Text
-    , _tabaFields      :: !(Maybe Text)
-    , _tabaAlt         :: !Text
+-- /See:/ 'tableDelete'' smart constructor.
+data TableDelete' = TableDelete'
+    { _tdQuotaUser   :: !(Maybe Text)
+    , _tdPrettyPrint :: !Bool
+    , _tdUserIp      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Text)
+    , _tdOauthToken  :: !(Maybe Text)
+    , _tdTableId     :: !Text
+    , _tdFields      :: !(Maybe Text)
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tabaQuotaUser'
+-- * 'tdQuotaUser'
 --
--- * 'tabaPrettyPrint'
+-- * 'tdPrettyPrint'
 --
--- * 'tabaUserIp'
+-- * 'tdUserIp'
 --
--- * 'tabaKey'
+-- * 'tdKey'
 --
--- * 'tabaOauthToken'
+-- * 'tdOauthToken'
 --
--- * 'tabaTableId'
+-- * 'tdTableId'
 --
--- * 'tabaFields'
+-- * 'tdFields'
 --
--- * 'tabaAlt'
-tableDelete
+-- * 'tdAlt'
+tableDelete'
     :: Text -- ^ 'tableId'
-    -> TableDelete
-tableDelete pTabaTableId_ =
-    TableDelete
-    { _tabaQuotaUser = Nothing
-    , _tabaPrettyPrint = True
-    , _tabaUserIp = Nothing
-    , _tabaKey = Nothing
-    , _tabaOauthToken = Nothing
-    , _tabaTableId = pTabaTableId_
-    , _tabaFields = Nothing
-    , _tabaAlt = "json"
+    -> TableDelete'
+tableDelete' pTdTableId_ =
+    TableDelete'
+    { _tdQuotaUser = Nothing
+    , _tdPrettyPrint = True
+    , _tdUserIp = Nothing
+    , _tdKey = Nothing
+    , _tdOauthToken = Nothing
+    , _tdTableId = pTdTableId_
+    , _tdFields = Nothing
+    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tabaQuotaUser :: Lens' TableDelete' (Maybe Text)
-tabaQuotaUser
-  = lens _tabaQuotaUser
-      (\ s a -> s{_tabaQuotaUser = a})
+tdQuotaUser :: Lens' TableDelete' (Maybe Text)
+tdQuotaUser
+  = lens _tdQuotaUser (\ s a -> s{_tdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tabaPrettyPrint :: Lens' TableDelete' Bool
-tabaPrettyPrint
-  = lens _tabaPrettyPrint
-      (\ s a -> s{_tabaPrettyPrint = a})
+tdPrettyPrint :: Lens' TableDelete' Bool
+tdPrettyPrint
+  = lens _tdPrettyPrint
+      (\ s a -> s{_tdPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tabaUserIp :: Lens' TableDelete' (Maybe Text)
-tabaUserIp
-  = lens _tabaUserIp (\ s a -> s{_tabaUserIp = a})
+tdUserIp :: Lens' TableDelete' (Maybe Text)
+tdUserIp = lens _tdUserIp (\ s a -> s{_tdUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tabaKey :: Lens' TableDelete' (Maybe Text)
-tabaKey = lens _tabaKey (\ s a -> s{_tabaKey = a})
+tdKey :: Lens' TableDelete' (Maybe Text)
+tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tabaOauthToken :: Lens' TableDelete' (Maybe Text)
-tabaOauthToken
-  = lens _tabaOauthToken
-      (\ s a -> s{_tabaOauthToken = a})
+tdOauthToken :: Lens' TableDelete' (Maybe Text)
+tdOauthToken
+  = lens _tdOauthToken (\ s a -> s{_tdOauthToken = a})
 
 -- | ID of the table to be deleted.
-tabaTableId :: Lens' TableDelete' Text
-tabaTableId
-  = lens _tabaTableId (\ s a -> s{_tabaTableId = a})
+tdTableId :: Lens' TableDelete' Text
+tdTableId
+  = lens _tdTableId (\ s a -> s{_tdTableId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tabaFields :: Lens' TableDelete' (Maybe Text)
-tabaFields
-  = lens _tabaFields (\ s a -> s{_tabaFields = a})
+tdFields :: Lens' TableDelete' (Maybe Text)
+tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tabaAlt :: Lens' TableDelete' Text
-tabaAlt = lens _tabaAlt (\ s a -> s{_tabaAlt = a})
+tdAlt :: Lens' TableDelete' Alt
+tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableDelete{..}
-          = go _tabaQuotaUser _tabaPrettyPrint _tabaUserIp
-              _tabaKey
-              _tabaOauthToken
-              _tabaTableId
-              _tabaFields
-              _tabaAlt
+        requestWithRoute r u TableDelete'{..}
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+              _tdKey
+              _tdOauthToken
+              _tdTableId
+              _tdFields
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TableDeleteResource)
+                      r
+                      u

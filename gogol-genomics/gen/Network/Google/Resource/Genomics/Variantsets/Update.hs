@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- ignored.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsUpdate@.
-module Genomics.Variantsets.Update
+module Network.Google.Resource.Genomics.Variantsets.Update
     (
     -- * REST Resource
-      VariantsetsUpdateAPI
+      VariantsetsUpdateResource
 
     -- * Creating a Request
-    , variantsetsUpdate
-    , VariantsetsUpdate
+    , variantsetsUpdate'
+    , VariantsetsUpdate'
 
     -- * Request Lenses
     , vuuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsUpdate@ which the
--- 'VariantsetsUpdate' request conforms to.
-type VariantsetsUpdateAPI =
+-- 'VariantsetsUpdate'' request conforms to.
+type VariantsetsUpdateResource =
      "variantsets" :>
-       Capture "variantSetId" Text :> Put '[JSON] VariantSet
+       Capture "variantSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] VariantSet
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored.
 --
--- /See:/ 'variantsetsUpdate' smart constructor.
-data VariantsetsUpdate = VariantsetsUpdate
+-- /See:/ 'variantsetsUpdate'' smart constructor.
+data VariantsetsUpdate' = VariantsetsUpdate'
     { _vuuQuotaUser    :: !(Maybe Text)
     , _vuuPrettyPrint  :: !Bool
     , _vuuVariantSetId :: !Text
@@ -61,7 +69,7 @@ data VariantsetsUpdate = VariantsetsUpdate
     , _vuuKey          :: !(Maybe Text)
     , _vuuOauthToken   :: !(Maybe Text)
     , _vuuFields       :: !(Maybe Text)
-    , _vuuAlt          :: !Text
+    , _vuuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data VariantsetsUpdate = VariantsetsUpdate
 -- * 'vuuFields'
 --
 -- * 'vuuAlt'
-variantsetsUpdate
+variantsetsUpdate'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsUpdate
-variantsetsUpdate pVuuVariantSetId_ =
-    VariantsetsUpdate
+    -> VariantsetsUpdate'
+variantsetsUpdate' pVuuVariantSetId_ =
+    VariantsetsUpdate'
     { _vuuQuotaUser = Nothing
     , _vuuPrettyPrint = True
     , _vuuVariantSetId = pVuuVariantSetId_
@@ -95,7 +103,7 @@ variantsetsUpdate pVuuVariantSetId_ =
     , _vuuKey = Nothing
     , _vuuOauthToken = Nothing
     , _vuuFields = Nothing
-    , _vuuAlt = "json"
+    , _vuuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +149,22 @@ vuuFields
   = lens _vuuFields (\ s a -> s{_vuuFields = a})
 
 -- | Data format for the response.
-vuuAlt :: Lens' VariantsetsUpdate' Text
+vuuAlt :: Lens' VariantsetsUpdate' Alt
 vuuAlt = lens _vuuAlt (\ s a -> s{_vuuAlt = a})
 
 instance GoogleRequest VariantsetsUpdate' where
         type Rs VariantsetsUpdate' = VariantSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsUpdate{..}
-          = go _vuuQuotaUser _vuuPrettyPrint _vuuVariantSetId
+        requestWithRoute r u VariantsetsUpdate'{..}
+          = go _vuuQuotaUser (Just _vuuPrettyPrint)
+              _vuuVariantSetId
               _vuuUserIp
               _vuuKey
               _vuuOauthToken
               _vuuFields
-              _vuuAlt
+              (Just _vuuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsUpdateAPI)
+                      (Proxy :: Proxy VariantsetsUpdateResource)
                       r
                       u

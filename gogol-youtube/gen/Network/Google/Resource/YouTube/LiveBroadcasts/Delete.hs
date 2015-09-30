@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a broadcast.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsDelete@.
-module YouTube.LiveBroadcasts.Delete
+module Network.Google.Resource.YouTube.LiveBroadcasts.Delete
     (
     -- * REST Resource
-      LiveBroadcastsDeleteAPI
+      LiveBroadcastsDeleteResource
 
     -- * Creating a Request
-    , liveBroadcastsDelete
-    , LiveBroadcastsDelete
+    , liveBroadcastsDelete'
+    , LiveBroadcastsDelete'
 
     -- * Request Lenses
     , lbdQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsDelete@ which the
--- 'LiveBroadcastsDelete' request conforms to.
-type LiveBroadcastsDeleteAPI =
+-- 'LiveBroadcastsDelete'' request conforms to.
+type LiveBroadcastsDeleteResource =
      "liveBroadcasts" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a broadcast.
 --
--- /See:/ 'liveBroadcastsDelete' smart constructor.
-data LiveBroadcastsDelete = LiveBroadcastsDelete
+-- /See:/ 'liveBroadcastsDelete'' smart constructor.
+data LiveBroadcastsDelete' = LiveBroadcastsDelete'
     { _lbdQuotaUser                     :: !(Maybe Text)
     , _lbdPrettyPrint                   :: !Bool
     , _lbdUserIp                        :: !(Maybe Text)
@@ -65,7 +73,7 @@ data LiveBroadcastsDelete = LiveBroadcastsDelete
     , _lbdId                            :: !Text
     , _lbdOauthToken                    :: !(Maybe Text)
     , _lbdFields                        :: !(Maybe Text)
-    , _lbdAlt                           :: !Text
+    , _lbdAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsDelete'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data LiveBroadcastsDelete = LiveBroadcastsDelete
 -- * 'lbdFields'
 --
 -- * 'lbdAlt'
-liveBroadcastsDelete
+liveBroadcastsDelete'
     :: Text -- ^ 'id'
-    -> LiveBroadcastsDelete
-liveBroadcastsDelete pLbdId_ =
-    LiveBroadcastsDelete
+    -> LiveBroadcastsDelete'
+liveBroadcastsDelete' pLbdId_ =
+    LiveBroadcastsDelete'
     { _lbdQuotaUser = Nothing
     , _lbdPrettyPrint = True
     , _lbdUserIp = Nothing
@@ -105,7 +113,7 @@ liveBroadcastsDelete pLbdId_ =
     , _lbdId = pLbdId_
     , _lbdOauthToken = Nothing
     , _lbdFields = Nothing
-    , _lbdAlt = "json"
+    , _lbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,23 +194,23 @@ lbdFields
   = lens _lbdFields (\ s a -> s{_lbdFields = a})
 
 -- | Data format for the response.
-lbdAlt :: Lens' LiveBroadcastsDelete' Text
+lbdAlt :: Lens' LiveBroadcastsDelete' Alt
 lbdAlt = lens _lbdAlt (\ s a -> s{_lbdAlt = a})
 
 instance GoogleRequest LiveBroadcastsDelete' where
         type Rs LiveBroadcastsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsDelete{..}
-          = go _lbdQuotaUser _lbdPrettyPrint _lbdUserIp
+        requestWithRoute r u LiveBroadcastsDelete'{..}
+          = go _lbdQuotaUser (Just _lbdPrettyPrint) _lbdUserIp
               _lbdOnBehalfOfContentOwner
               _lbdKey
               _lbdOnBehalfOfContentOwnerChannel
               (Just _lbdId)
               _lbdOauthToken
               _lbdFields
-              _lbdAlt
+              (Just _lbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsDeleteAPI)
+                      (Proxy :: Proxy LiveBroadcastsDeleteResource)
                       r
                       u

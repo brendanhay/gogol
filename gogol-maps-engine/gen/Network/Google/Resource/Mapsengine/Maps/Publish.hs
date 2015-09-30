@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,151 +20,156 @@
 -- | Publish a map asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsPublish@.
-module Mapsengine.Maps.Publish
+module Network.Google.Resource.Mapsengine.Maps.Publish
     (
     -- * REST Resource
-      MapsPublishAPI
+      MapsPublishResource
 
     -- * Creating a Request
-    , mapsPublish
-    , MapsPublish
+    , mapsPublish'
+    , MapsPublish'
 
     -- * Request Lenses
-    , mppQuotaUser
-    , mppPrettyPrint
-    , mppForce
-    , mppUserIp
-    , mppKey
-    , mppId
-    , mppOauthToken
-    , mppFields
-    , mppAlt
+    , mQuotaUser
+    , mPrettyPrint
+    , mForce
+    , mUserIp
+    , mKey
+    , mId
+    , mOauthToken
+    , mFields
+    , mAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsPublish@ which the
--- 'MapsPublish' request conforms to.
-type MapsPublishAPI =
+-- 'MapsPublish'' request conforms to.
+type MapsPublishResource =
      "maps" :>
        Capture "id" Text :>
          "publish" :>
-           QueryParam "force" Bool :>
-             Post '[JSON] PublishResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "force" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] PublishResponse
 
 -- | Publish a map asset.
 --
--- /See:/ 'mapsPublish' smart constructor.
-data MapsPublish = MapsPublish
-    { _mppQuotaUser   :: !(Maybe Text)
-    , _mppPrettyPrint :: !Bool
-    , _mppForce       :: !(Maybe Bool)
-    , _mppUserIp      :: !(Maybe Text)
-    , _mppKey         :: !(Maybe Text)
-    , _mppId          :: !Text
-    , _mppOauthToken  :: !(Maybe Text)
-    , _mppFields      :: !(Maybe Text)
-    , _mppAlt         :: !Text
+-- /See:/ 'mapsPublish'' smart constructor.
+data MapsPublish' = MapsPublish'
+    { _mQuotaUser   :: !(Maybe Text)
+    , _mPrettyPrint :: !Bool
+    , _mForce       :: !(Maybe Bool)
+    , _mUserIp      :: !(Maybe Text)
+    , _mKey         :: !(Maybe Text)
+    , _mId          :: !Text
+    , _mOauthToken  :: !(Maybe Text)
+    , _mFields      :: !(Maybe Text)
+    , _mAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPublish'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mppQuotaUser'
+-- * 'mQuotaUser'
 --
--- * 'mppPrettyPrint'
+-- * 'mPrettyPrint'
 --
--- * 'mppForce'
+-- * 'mForce'
 --
--- * 'mppUserIp'
+-- * 'mUserIp'
 --
--- * 'mppKey'
+-- * 'mKey'
 --
--- * 'mppId'
+-- * 'mId'
 --
--- * 'mppOauthToken'
+-- * 'mOauthToken'
 --
--- * 'mppFields'
+-- * 'mFields'
 --
--- * 'mppAlt'
-mapsPublish
+-- * 'mAlt'
+mapsPublish'
     :: Text -- ^ 'id'
-    -> MapsPublish
-mapsPublish pMppId_ =
-    MapsPublish
-    { _mppQuotaUser = Nothing
-    , _mppPrettyPrint = True
-    , _mppForce = Nothing
-    , _mppUserIp = Nothing
-    , _mppKey = Nothing
-    , _mppId = pMppId_
-    , _mppOauthToken = Nothing
-    , _mppFields = Nothing
-    , _mppAlt = "json"
+    -> MapsPublish'
+mapsPublish' pMId_ =
+    MapsPublish'
+    { _mQuotaUser = Nothing
+    , _mPrettyPrint = True
+    , _mForce = Nothing
+    , _mUserIp = Nothing
+    , _mKey = Nothing
+    , _mId = pMId_
+    , _mOauthToken = Nothing
+    , _mFields = Nothing
+    , _mAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-mppQuotaUser :: Lens' MapsPublish' (Maybe Text)
-mppQuotaUser
-  = lens _mppQuotaUser (\ s a -> s{_mppQuotaUser = a})
+mQuotaUser :: Lens' MapsPublish' (Maybe Text)
+mQuotaUser
+  = lens _mQuotaUser (\ s a -> s{_mQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-mppPrettyPrint :: Lens' MapsPublish' Bool
-mppPrettyPrint
-  = lens _mppPrettyPrint
-      (\ s a -> s{_mppPrettyPrint = a})
+mPrettyPrint :: Lens' MapsPublish' Bool
+mPrettyPrint
+  = lens _mPrettyPrint (\ s a -> s{_mPrettyPrint = a})
 
 -- | If set to true, the API will allow publication of the map even if it\'s
 -- out of date. If false, the map must have a processingStatus of complete
 -- before publishing.
-mppForce :: Lens' MapsPublish' (Maybe Bool)
-mppForce = lens _mppForce (\ s a -> s{_mppForce = a})
+mForce :: Lens' MapsPublish' (Maybe Bool)
+mForce = lens _mForce (\ s a -> s{_mForce = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mppUserIp :: Lens' MapsPublish' (Maybe Text)
-mppUserIp
-  = lens _mppUserIp (\ s a -> s{_mppUserIp = a})
+mUserIp :: Lens' MapsPublish' (Maybe Text)
+mUserIp = lens _mUserIp (\ s a -> s{_mUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mppKey :: Lens' MapsPublish' (Maybe Text)
-mppKey = lens _mppKey (\ s a -> s{_mppKey = a})
+mKey :: Lens' MapsPublish' (Maybe Text)
+mKey = lens _mKey (\ s a -> s{_mKey = a})
 
 -- | The ID of the map.
-mppId :: Lens' MapsPublish' Text
-mppId = lens _mppId (\ s a -> s{_mppId = a})
+mId :: Lens' MapsPublish' Text
+mId = lens _mId (\ s a -> s{_mId = a})
 
 -- | OAuth 2.0 token for the current user.
-mppOauthToken :: Lens' MapsPublish' (Maybe Text)
-mppOauthToken
-  = lens _mppOauthToken
-      (\ s a -> s{_mppOauthToken = a})
+mOauthToken :: Lens' MapsPublish' (Maybe Text)
+mOauthToken
+  = lens _mOauthToken (\ s a -> s{_mOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-mppFields :: Lens' MapsPublish' (Maybe Text)
-mppFields
-  = lens _mppFields (\ s a -> s{_mppFields = a})
+mFields :: Lens' MapsPublish' (Maybe Text)
+mFields = lens _mFields (\ s a -> s{_mFields = a})
 
 -- | Data format for the response.
-mppAlt :: Lens' MapsPublish' Text
-mppAlt = lens _mppAlt (\ s a -> s{_mppAlt = a})
+mAlt :: Lens' MapsPublish' Alt
+mAlt = lens _mAlt (\ s a -> s{_mAlt = a})
 
 instance GoogleRequest MapsPublish' where
         type Rs MapsPublish' = PublishResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsPublish{..}
-          = go _mppQuotaUser _mppPrettyPrint _mppForce
-              _mppUserIp
-              _mppKey
-              _mppId
-              _mppOauthToken
-              _mppFields
-              _mppAlt
+        requestWithRoute r u MapsPublish'{..}
+          = go _mQuotaUser (Just _mPrettyPrint) _mForce
+              _mUserIp
+              _mKey
+              _mId
+              _mOauthToken
+              _mFields
+              (Just _mAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsPublishAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy MapsPublishResource)
+                      r
+                      u

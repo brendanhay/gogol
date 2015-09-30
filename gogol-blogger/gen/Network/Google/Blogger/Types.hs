@@ -17,12 +17,37 @@ module Network.Google.Blogger.Types
     -- * Service URL
       bloggerURL
 
+    -- * PostImages
+    , PostImages
+    , postImages
+    , piUrl
+
+    -- * BloggerPostUserInfosListStatus
+    , BloggerPostUserInfosListStatus (..)
+
     -- * PostUserInfo
     , PostUserInfo
     , postUserInfo
     , puiPostUserInfo
     , puiPost
     , puiKind
+
+    -- * BloggerBlogsListByUserStatus
+    , BloggerBlogsListByUserStatus (..)
+
+    -- * BloggerPostsListView
+    , BloggerPostsListView (..)
+
+    -- * PostAuthorImage
+    , PostAuthorImage
+    , postAuthorImage
+    , paiUrl
+
+    -- * BloggerPageViewsGetRange
+    , BloggerPageViewsGetRange (..)
+
+    -- * BloggerPostsListOrderBy
+    , BloggerPostsListOrderBy (..)
 
     -- * PostList
     , PostList
@@ -32,12 +57,58 @@ module Network.Google.Blogger.Types
     , plKind
     , plItems
 
+    -- * BloggerCommentsListByBlogStatus
+    , BloggerCommentsListByBlogStatus (..)
+
+    -- * BloggerPagesGetView
+    , BloggerPagesGetView (..)
+
+    -- * BlogPosts
+    , BlogPosts
+    , blogPosts
+    , bpTotalItems
+    , bpItems
+    , bpSelfLink
+
+    -- * PostLocation
+    , PostLocation
+    , postLocation
+    , plSpan
+    , plLat
+    , plName
+    , plLng
+
+    -- * CommentBlog
+    , CommentBlog
+    , commentBlog
+    , cbId
+
+    -- * PageviewsCounts
+    , PageviewsCounts
+    , pageviewsCounts
+    , pcTimeRange
+    , pcCount
+
+    -- * BloggerPostUserInfosListOrderBy
+    , BloggerPostUserInfosListOrderBy (..)
+
+    -- * CommentInReplyTo
+    , CommentInReplyTo
+    , commentInReplyTo
+    , cirtId
+
     -- * Pageviews
     , Pageviews
     , pageviews
     , pKind
     , pCounts
     , pBlogId
+
+    -- * BloggerPagesListStatus
+    , BloggerPagesListStatus (..)
+
+    -- * BloggerPostsGetByPathView
+    , BloggerPostsGetByPathView (..)
 
     -- * Post
     , Post
@@ -78,6 +149,29 @@ module Network.Google.Blogger.Types
     , pagUpdated
     , pagTitle
 
+    -- * PostBlog
+    , PostBlog
+    , postBlog
+    , pbId
+
+    -- * BloggerBlogsListByUserView
+    , BloggerBlogsListByUserView (..)
+
+    -- * BlogLocale
+    , BlogLocale
+    , blogLocale
+    , blVariant
+    , blCountry
+    , blLanguage
+
+    -- * PageAuthor
+    , PageAuthor
+    , pageAuthor
+    , paImage
+    , paUrl
+    , paDisplayName
+    , paId
+
     -- * Blog
     , Blog
     , blog
@@ -94,6 +188,20 @@ module Network.Google.Blogger.Types
     , bUpdated
     , bPosts
     , bDescription
+
+    -- * BlogPages
+    , BlogPages
+    , blogPages
+    , bpsTotalItems
+    , bpsSelfLink
+
+    -- * CommentAuthorImage
+    , CommentAuthorImage
+    , commentAuthorImage
+    , caiUrl
+
+    -- * BloggerCommentsListView
+    , BloggerCommentsListView (..)
 
     -- * PageList
     , PageList
@@ -116,12 +224,56 @@ module Network.Google.Blogger.Types
     , uDisplayName
     , uId
 
+    -- * UserLocale
+    , UserLocale
+    , userLocale
+    , ulVariant
+    , ulCountry
+    , ulLanguage
+
+    -- * PostReplies
+    , PostReplies
+    , postReplies
+    , prTotalItems
+    , prItems
+    , prSelfLink
+
+    -- * UserBlogs
+    , UserBlogs
+    , userBlogs
+    , ubSelfLink
+
     -- * BlogList
     , BlogList
     , blogList
     , blKind
     , blItems
     , blBlogUserInfos
+
+    -- * BloggerBlogsListByUserRole
+    , BloggerBlogsListByUserRole (..)
+
+    -- * BloggerPostUserInfosListView
+    , BloggerPostUserInfosListView (..)
+
+    -- * PostAuthor
+    , PostAuthor
+    , postAuthor
+    , pImage
+    , pUrl
+    , pDisplayName
+    , pId
+
+    -- * BloggerCommentsGetView
+    , BloggerCommentsGetView (..)
+
+    -- * PageBlog
+    , PageBlog
+    , pageBlog
+    , pbbId
+
+    -- * BloggerBlogsGetByURLView
+    , BloggerBlogsGetByURLView (..)
 
     -- * PostPerUserInfo
     , PostPerUserInfo
@@ -131,6 +283,20 @@ module Network.Google.Blogger.Types
     , ppuiUserId
     , ppuiHasEditAccess
     , ppuiPostId
+
+    -- * BloggerCommentsListStatus
+    , BloggerCommentsListStatus (..)
+
+    -- * BloggerBlogsGetView
+    , BloggerBlogsGetView (..)
+
+    -- * CommentPost
+    , CommentPost
+    , commentPost
+    , cpId
+
+    -- * BloggerPostsListStatus
+    , BloggerPostsListStatus (..)
 
     -- * Comment
     , Comment
@@ -147,12 +313,26 @@ module Network.Google.Blogger.Types
     , cUpdated
     , cInReplyTo
 
+    -- * CommentAuthor
+    , CommentAuthor
+    , commentAuthor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+
+    -- * BloggerPostsGetView
+    , BloggerPostsGetView (..)
+
     -- * PostUserInfosList
     , PostUserInfosList
     , postUserInfosList
     , puilNextPageToken
     , puilKind
     , puilItems
+
+    -- * BloggerPostsSearchOrderBy
+    , BloggerPostsSearchOrderBy (..)
 
     -- * BlogPerUserInfo
     , BlogPerUserInfo
@@ -173,6 +353,17 @@ module Network.Google.Blogger.Types
     , clItems
     , clPrevPageToken
 
+    -- * PageAuthorImage
+    , PageAuthorImage
+    , pageAuthorImage
+    , paiaUrl
+
+    -- * Alt
+    , Alt (..)
+
+    -- * BloggerPagesListView
+    , BloggerPagesListView (..)
+
     -- * BlogUserInfo
     , BlogUserInfo
     , blogUserInfo
@@ -186,7 +377,7 @@ import           Network.Google.Blogger.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Blogger API.
-bloggerURL :: BaseURL
+bloggerURL :: BaseUrl
 bloggerURL
   = BaseUrl Https
       "https://www.googleapis.com/blogger/v3/"

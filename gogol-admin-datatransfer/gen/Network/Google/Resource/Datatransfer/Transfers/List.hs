@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- status.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DatatransferTransfersList@.
-module Datatransfer.Transfers.List
+module Network.Google.Resource.Datatransfer.Transfers.List
     (
     -- * REST Resource
-      TransfersListAPI
+      TransfersListResource
 
     -- * Creating a Request
-    , transfersList
-    , TransfersList
+    , transfersList'
+    , TransfersList'
 
     -- * Request Lenses
     , tlStatus
@@ -49,22 +50,29 @@ import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatatransferTransfersList@ which the
--- 'TransfersList' request conforms to.
-type TransfersListAPI =
+-- 'TransfersList'' request conforms to.
+type TransfersListResource =
      "transfers" :>
        QueryParam "status" Text :>
-         QueryParam "oldOwnerUserId" Text :>
-           QueryParam "newOwnerUserId" Text :>
-             QueryParam "customerId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] DataTransfersListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "oldOwnerUserId" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "newOwnerUserId" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] DataTransfersListResponse
 
 -- | Lists the transfers for a customer by source user, destination user, or
 -- status.
 --
--- /See:/ 'transfersList' smart constructor.
-data TransfersList = TransfersList
+-- /See:/ 'transfersList'' smart constructor.
+data TransfersList' = TransfersList'
     { _tlStatus         :: !(Maybe Text)
     , _tlQuotaUser      :: !(Maybe Text)
     , _tlPrettyPrint    :: !Bool
@@ -77,7 +85,7 @@ data TransfersList = TransfersList
     , _tlOauthToken     :: !(Maybe Text)
     , _tlMaxResults     :: !(Maybe Int32)
     , _tlFields         :: !(Maybe Text)
-    , _tlAlt            :: !Text
+    , _tlAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersList'' with the minimum fields required to make a request.
@@ -109,10 +117,10 @@ data TransfersList = TransfersList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-transfersList
-    :: TransfersList
-transfersList =
-    TransfersList
+transfersList'
+    :: TransfersList'
+transfersList' =
+    TransfersList'
     { _tlStatus = Nothing
     , _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
@@ -125,7 +133,7 @@ transfersList =
     , _tlOauthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Status of the transfer.
@@ -193,15 +201,15 @@ tlFields :: Lens' TransfersList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TransfersList' Text
+tlAlt :: Lens' TransfersList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TransfersList' where
         type Rs TransfersList' = DataTransfersListResponse
         request
           = requestWithRoute defReq adminDataTransferURL
-        requestWithRoute r u TransfersList{..}
-          = go _tlStatus _tlQuotaUser _tlPrettyPrint
+        requestWithRoute r u TransfersList'{..}
+          = go _tlStatus _tlQuotaUser (Just _tlPrettyPrint)
               _tlOldOwnerUserId
               _tlUserIp
               _tlNewOwnerUserId
@@ -211,7 +219,9 @@ instance GoogleRequest TransfersList' where
               _tlOauthToken
               _tlMaxResults
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TransfersListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TransfersListResource)
+                      r
                       u

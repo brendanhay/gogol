@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlOperationsList@.
-module Sql.Operations.List
+module Network.Google.Resource.Sql.Operations.List
     (
     -- * REST Resource
-      OperationsListAPI
+      OperationsListResource
 
     -- * Creating a Request
-    , operationsList
-    , OperationsList
+    , operationsList'
+    , OperationsList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlOperationsList@ which the
--- 'OperationsList' request conforms to.
-type OperationsListAPI =
+-- 'OperationsList'' request conforms to.
+type OperationsListResource =
      "projects" :>
        Capture "project" Text :>
          "operations" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "instance" Text :>
-                 Get '[JSON] OperationsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             QueryParam "instance" Text :>
+                               Get '[JSON] OperationsListResponse
 
 -- | Lists all instance operations that have been performed on the given
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
--- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+-- /See:/ 'operationsList'' smart constructor.
+data OperationsList' = OperationsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olProject     :: !Text
@@ -71,7 +79,7 @@ data OperationsList = OperationsList
     , _olOauthToken  :: !(Maybe Text)
     , _olMaxResults  :: !(Maybe Word32)
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Text
+    , _olAlt         :: !Alt
     , _olInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -100,12 +108,12 @@ data OperationsList = OperationsList
 -- * 'olAlt'
 --
 -- * 'olInstance'
-operationsList
+operationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> OperationsList
-operationsList pOlProject_ pOlInstance_ =
-    OperationsList
+    -> OperationsList'
+operationsList' pOlProject_ pOlInstance_ =
+    OperationsList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olProject = pOlProject_
@@ -115,7 +123,7 @@ operationsList pOlProject_ pOlInstance_ =
     , _olOauthToken = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     , _olInstance = pOlInstance_
     }
 
@@ -169,7 +177,7 @@ olFields :: Lens' OperationsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OperationsList' Text
+olAlt :: Lens' OperationsList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -180,16 +188,18 @@ olInstance
 instance GoogleRequest OperationsList' where
         type Rs OperationsList' = OperationsListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u OperationsList{..}
-          = go _olQuotaUser _olPrettyPrint _olProject _olUserIp
+        requestWithRoute r u OperationsList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olProject
+              _olUserIp
               _olKey
               _olPageToken
               _olOauthToken
               _olMaxResults
               _olFields
-              _olAlt
+              (Just _olAlt)
               (Just _olInstance)
           where go
-                  = clientWithRoute (Proxy :: Proxy OperationsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy OperationsListResource)
                       r
                       u

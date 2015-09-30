@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Permanently deletes an empty bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsDelete@.
-module Storage.Buckets.Delete
+module Network.Google.Resource.Storage.Buckets.Delete
     (
     -- * REST Resource
-      BucketsDeleteAPI
+      BucketsDeleteResource
 
     -- * Creating a Request
-    , bucketsDelete
-    , BucketsDelete
+    , bucketsDelete'
+    , BucketsDelete'
 
     -- * Request Lenses
     , bdQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketsDelete@ which the
--- 'BucketsDelete' request conforms to.
-type BucketsDeleteAPI =
+-- 'BucketsDelete'' request conforms to.
+type BucketsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
-             Delete '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
--- /See:/ 'bucketsDelete' smart constructor.
-data BucketsDelete = BucketsDelete
+-- /See:/ 'bucketsDelete'' smart constructor.
+data BucketsDelete' = BucketsDelete'
     { _bdQuotaUser                :: !(Maybe Text)
     , _bdIfMetagenerationMatch    :: !(Maybe Word64)
     , _bdPrettyPrint              :: !Bool
@@ -66,7 +73,7 @@ data BucketsDelete = BucketsDelete
     , _bdIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bdOauthToken               :: !(Maybe Text)
     , _bdFields                   :: !(Maybe Text)
-    , _bdAlt                      :: !Text
+    , _bdAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsDelete'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data BucketsDelete = BucketsDelete
 -- * 'bdFields'
 --
 -- * 'bdAlt'
-bucketsDelete
+bucketsDelete'
     :: Text -- ^ 'bucket'
-    -> BucketsDelete
-bucketsDelete pBdBucket_ =
-    BucketsDelete
+    -> BucketsDelete'
+bucketsDelete' pBdBucket_ =
+    BucketsDelete'
     { _bdQuotaUser = Nothing
     , _bdIfMetagenerationMatch = Nothing
     , _bdPrettyPrint = True
@@ -106,7 +113,7 @@ bucketsDelete pBdBucket_ =
     , _bdIfMetagenerationNotMatch = Nothing
     , _bdOauthToken = Nothing
     , _bdFields = Nothing
-    , _bdAlt = "json"
+    , _bdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +168,24 @@ bdFields :: Lens' BucketsDelete' (Maybe Text)
 bdFields = lens _bdFields (\ s a -> s{_bdFields = a})
 
 -- | Data format for the response.
-bdAlt :: Lens' BucketsDelete' Text
+bdAlt :: Lens' BucketsDelete' Alt
 bdAlt = lens _bdAlt (\ s a -> s{_bdAlt = a})
 
 instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsDelete{..}
+        requestWithRoute r u BucketsDelete'{..}
           = go _bdQuotaUser _bdIfMetagenerationMatch
-              _bdPrettyPrint
+              (Just _bdPrettyPrint)
               _bdUserIp
               _bdBucket
               _bdKey
               _bdIfMetagenerationNotMatch
               _bdOauthToken
               _bdFields
-              _bdAlt
+              (Just _bdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BucketsDeleteResource)
+                      r
                       u

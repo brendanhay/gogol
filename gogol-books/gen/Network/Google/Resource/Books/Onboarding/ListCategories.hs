@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List categories for onboarding experience.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksOnboardingListCategories@.
-module Books.Onboarding.ListCategories
+module Network.Google.Resource.Books.Onboarding.ListCategories
     (
     -- * REST Resource
-      OnboardingListCategoriesAPI
+      OnboardingListCategoriesResource
 
     -- * Creating a Request
-    , onboardingListCategories
-    , OnboardingListCategories
+    , onboardingListCategories'
+    , OnboardingListCategories'
 
     -- * Request Lenses
     , olcQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksOnboardingListCategories@ which the
--- 'OnboardingListCategories' request conforms to.
-type OnboardingListCategoriesAPI =
+-- 'OnboardingListCategories'' request conforms to.
+type OnboardingListCategoriesResource =
      "onboarding" :>
        "listCategories" :>
-         QueryParam "locale" Text :> Get '[JSON] Category
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Category
 
 -- | List categories for onboarding experience.
 --
--- /See:/ 'onboardingListCategories' smart constructor.
-data OnboardingListCategories = OnboardingListCategories
+-- /See:/ 'onboardingListCategories'' smart constructor.
+data OnboardingListCategories' = OnboardingListCategories'
     { _olcQuotaUser   :: !(Maybe Text)
     , _olcPrettyPrint :: !Bool
     , _olcUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data OnboardingListCategories = OnboardingListCategories
     , _olcKey         :: !(Maybe Text)
     , _olcOauthToken  :: !(Maybe Text)
     , _olcFields      :: !(Maybe Text)
-    , _olcAlt         :: !Text
+    , _olcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategories'' with the minimum fields required to make a request.
@@ -82,10 +90,10 @@ data OnboardingListCategories = OnboardingListCategories
 -- * 'olcFields'
 --
 -- * 'olcAlt'
-onboardingListCategories
-    :: OnboardingListCategories
-onboardingListCategories =
-    OnboardingListCategories
+onboardingListCategories'
+    :: OnboardingListCategories'
+onboardingListCategories' =
+    OnboardingListCategories'
     { _olcQuotaUser = Nothing
     , _olcPrettyPrint = True
     , _olcUserIp = Nothing
@@ -93,7 +101,7 @@ onboardingListCategories =
     , _olcKey = Nothing
     , _olcOauthToken = Nothing
     , _olcFields = Nothing
-    , _olcAlt = "json"
+    , _olcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +147,22 @@ olcFields
   = lens _olcFields (\ s a -> s{_olcFields = a})
 
 -- | Data format for the response.
-olcAlt :: Lens' OnboardingListCategories' Text
+olcAlt :: Lens' OnboardingListCategories' Alt
 olcAlt = lens _olcAlt (\ s a -> s{_olcAlt = a})
 
 instance GoogleRequest OnboardingListCategories'
          where
         type Rs OnboardingListCategories' = Category
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u OnboardingListCategories{..}
-          = go _olcQuotaUser _olcPrettyPrint _olcUserIp
+        requestWithRoute r u OnboardingListCategories'{..}
+          = go _olcQuotaUser (Just _olcPrettyPrint) _olcUserIp
               _olcLocale
               _olcKey
               _olcOauthToken
               _olcFields
-              _olcAlt
+              (Just _olcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OnboardingListCategoriesAPI)
+                      (Proxy :: Proxy OnboardingListCategoriesResource)
                       r
                       u

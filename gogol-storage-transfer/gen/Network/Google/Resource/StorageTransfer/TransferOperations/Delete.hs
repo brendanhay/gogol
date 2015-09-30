@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsDelete@.
-module StorageTransfer.TransferOperations.Delete
+module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource
-      TransferOperationsDeleteAPI
+      TransferOperationsDeleteResource
 
     -- * Creating a Request
-    , transferOperationsDelete
-    , TransferOperationsDelete
+    , transferOperationsDelete'
+    , TransferOperationsDelete'
 
     -- * Request Lenses
     , todXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsDelete@ which the
--- 'TransferOperationsDelete' request conforms to.
-type TransferOperationsDeleteAPI =
-     "v1" :> "{+name}" :> Delete '[JSON] Empty
+-- 'TransferOperationsDelete'' request conforms to.
+type TransferOperationsDeleteResource =
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ 'transferOperationsDelete' smart constructor.
-data TransferOperationsDelete = TransferOperationsDelete
+-- /See:/ 'transferOperationsDelete'' smart constructor.
+data TransferOperationsDelete' = TransferOperationsDelete'
     { _todXgafv          :: !(Maybe Text)
     , _todQuotaUser      :: !(Maybe Text)
     , _todPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data TransferOperationsDelete = TransferOperationsDelete
 -- * 'todCallback'
 --
 -- * 'todAlt'
-transferOperationsDelete
+transferOperationsDelete'
     :: Text -- ^ 'name'
-    -> TransferOperationsDelete
-transferOperationsDelete pTodName_ =
-    TransferOperationsDelete
+    -> TransferOperationsDelete'
+transferOperationsDelete' pTodName_ =
+    TransferOperationsDelete'
     { _todXgafv = Nothing
     , _todQuotaUser = Nothing
     , _todPrettyPrint = True
@@ -204,10 +219,10 @@ instance GoogleRequest TransferOperationsDelete'
          where
         type Rs TransferOperationsDelete' = Empty
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsDelete{..}
-          = go _todXgafv _todQuotaUser _todPrettyPrint
+        requestWithRoute r u TransferOperationsDelete'{..}
+          = go _todXgafv _todQuotaUser (Just _todPrettyPrint)
               _todUploadProtocol
-              _todPp
+              (Just _todPp)
               _todAccessToken
               _todUploadType
               _todBearerToken
@@ -216,9 +231,9 @@ instance GoogleRequest TransferOperationsDelete'
               _todOauthToken
               _todFields
               _todCallback
-              _todAlt
+              (Just _todAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsDeleteAPI)
+                      (Proxy :: Proxy TransferOperationsDeleteResource)
                       r
                       u

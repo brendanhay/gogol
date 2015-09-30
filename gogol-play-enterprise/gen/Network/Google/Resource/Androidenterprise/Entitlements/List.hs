@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,161 @@
 -- | List of all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEntitlementsList@.
-module Androidenterprise.Entitlements.List
+module Network.Google.Resource.Androidenterprise.Entitlements.List
     (
     -- * REST Resource
-      EntitlementsListAPI
+      EntitlementsListResource
 
     -- * Creating a Request
-    , entitlementsList
-    , EntitlementsList
+    , entitlementsList'
+    , EntitlementsList'
 
     -- * Request Lenses
-    , eQuotaUser
-    , ePrettyPrint
-    , eEnterpriseId
-    , eUserIp
-    , eUserId
-    , eKey
-    , eOauthToken
-    , eFields
-    , eAlt
+    , elQuotaUser
+    , elPrettyPrint
+    , elEnterpriseId
+    , elUserIp
+    , elUserId
+    , elKey
+    , elOauthToken
+    , elFields
+    , elAlt
     ) where
 
 import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEntitlementsList@ which the
--- 'EntitlementsList' request conforms to.
-type EntitlementsListAPI =
+-- 'EntitlementsList'' request conforms to.
+type EntitlementsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "entitlements" :>
-               Get '[JSON] EntitlementsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] EntitlementsListResponse
 
 -- | List of all entitlements for the specified user. Only the ID is set.
 --
--- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
-    { _eQuotaUser    :: !(Maybe Text)
-    , _ePrettyPrint  :: !Bool
-    , _eEnterpriseId :: !Text
-    , _eUserIp       :: !(Maybe Text)
-    , _eUserId       :: !Text
-    , _eKey          :: !(Maybe Text)
-    , _eOauthToken   :: !(Maybe Text)
-    , _eFields       :: !(Maybe Text)
-    , _eAlt          :: !Text
+-- /See:/ 'entitlementsList'' smart constructor.
+data EntitlementsList' = EntitlementsList'
+    { _elQuotaUser    :: !(Maybe Text)
+    , _elPrettyPrint  :: !Bool
+    , _elEnterpriseId :: !Text
+    , _elUserIp       :: !(Maybe Text)
+    , _elUserId       :: !Text
+    , _elKey          :: !(Maybe Text)
+    , _elOauthToken   :: !(Maybe Text)
+    , _elFields       :: !(Maybe Text)
+    , _elAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eQuotaUser'
+-- * 'elQuotaUser'
 --
--- * 'ePrettyPrint'
+-- * 'elPrettyPrint'
 --
--- * 'eEnterpriseId'
+-- * 'elEnterpriseId'
 --
--- * 'eUserIp'
+-- * 'elUserIp'
 --
--- * 'eUserId'
+-- * 'elUserId'
 --
--- * 'eKey'
+-- * 'elKey'
 --
--- * 'eOauthToken'
+-- * 'elOauthToken'
 --
--- * 'eFields'
+-- * 'elFields'
 --
--- * 'eAlt'
-entitlementsList
+-- * 'elAlt'
+entitlementsList'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> EntitlementsList
-entitlementsList pEEnterpriseId_ pEUserId_ =
-    EntitlementsList
-    { _eQuotaUser = Nothing
-    , _ePrettyPrint = True
-    , _eEnterpriseId = pEEnterpriseId_
-    , _eUserIp = Nothing
-    , _eUserId = pEUserId_
-    , _eKey = Nothing
-    , _eOauthToken = Nothing
-    , _eFields = Nothing
-    , _eAlt = "json"
+    -> EntitlementsList'
+entitlementsList' pElEnterpriseId_ pElUserId_ =
+    EntitlementsList'
+    { _elQuotaUser = Nothing
+    , _elPrettyPrint = True
+    , _elEnterpriseId = pElEnterpriseId_
+    , _elUserIp = Nothing
+    , _elUserId = pElUserId_
+    , _elKey = Nothing
+    , _elOauthToken = Nothing
+    , _elFields = Nothing
+    , _elAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eQuotaUser :: Lens' EntitlementsList' (Maybe Text)
-eQuotaUser
-  = lens _eQuotaUser (\ s a -> s{_eQuotaUser = a})
+elQuotaUser :: Lens' EntitlementsList' (Maybe Text)
+elQuotaUser
+  = lens _elQuotaUser (\ s a -> s{_elQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ePrettyPrint :: Lens' EntitlementsList' Bool
-ePrettyPrint
-  = lens _ePrettyPrint (\ s a -> s{_ePrettyPrint = a})
+elPrettyPrint :: Lens' EntitlementsList' Bool
+elPrettyPrint
+  = lens _elPrettyPrint
+      (\ s a -> s{_elPrettyPrint = a})
 
 -- | The ID of the enterprise.
-eEnterpriseId :: Lens' EntitlementsList' Text
-eEnterpriseId
-  = lens _eEnterpriseId
-      (\ s a -> s{_eEnterpriseId = a})
+elEnterpriseId :: Lens' EntitlementsList' Text
+elEnterpriseId
+  = lens _elEnterpriseId
+      (\ s a -> s{_elEnterpriseId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eUserIp :: Lens' EntitlementsList' (Maybe Text)
-eUserIp = lens _eUserIp (\ s a -> s{_eUserIp = a})
+elUserIp :: Lens' EntitlementsList' (Maybe Text)
+elUserIp = lens _elUserIp (\ s a -> s{_elUserIp = a})
 
 -- | The ID of the user.
-eUserId :: Lens' EntitlementsList' Text
-eUserId = lens _eUserId (\ s a -> s{_eUserId = a})
+elUserId :: Lens' EntitlementsList' Text
+elUserId = lens _elUserId (\ s a -> s{_elUserId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eKey :: Lens' EntitlementsList' (Maybe Text)
-eKey = lens _eKey (\ s a -> s{_eKey = a})
+elKey :: Lens' EntitlementsList' (Maybe Text)
+elKey = lens _elKey (\ s a -> s{_elKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eOauthToken :: Lens' EntitlementsList' (Maybe Text)
-eOauthToken
-  = lens _eOauthToken (\ s a -> s{_eOauthToken = a})
+elOauthToken :: Lens' EntitlementsList' (Maybe Text)
+elOauthToken
+  = lens _elOauthToken (\ s a -> s{_elOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eFields :: Lens' EntitlementsList' (Maybe Text)
-eFields = lens _eFields (\ s a -> s{_eFields = a})
+elFields :: Lens' EntitlementsList' (Maybe Text)
+elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 -- | Data format for the response.
-eAlt :: Lens' EntitlementsList' Text
-eAlt = lens _eAlt (\ s a -> s{_eAlt = a})
+elAlt :: Lens' EntitlementsList' Alt
+elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
 
 instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EntitlementsList{..}
-          = go _eQuotaUser _ePrettyPrint _eEnterpriseId
-              _eUserIp
-              _eUserId
-              _eKey
-              _eOauthToken
-              _eFields
-              _eAlt
+        requestWithRoute r u EntitlementsList'{..}
+          = go _elQuotaUser (Just _elPrettyPrint)
+              _elEnterpriseId
+              _elUserIp
+              _elUserId
+              _elKey
+              _elOauthToken
+              _elFields
+              (Just _elAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EntitlementsListAPI)
+                      (Proxy :: Proxy EntitlementsListResource)
                       r
                       u

@@ -27,13 +27,13 @@ module Network.Google.Translate
     -- * REST Resources
 
     -- ** LanguageDetectionsList
-    , module Language.Detections.List
+    , module Network.Google.Resource.Language.Detections.List
 
     -- ** LanguageLanguagesList
-    , module Language.Languages.List
+    , module Network.Google.Resource.Language.Languages.List
 
     -- ** LanguageTranslationsList
-    , module Language.Translations.List
+    , module Network.Google.Resource.Language.Translations.List
 
     -- * Types
 
@@ -53,6 +53,16 @@ module Network.Google.Translate
     , languagesListResponse
     , llrLanguages
 
+    -- ** LanguageTranslationsListFormat
+    , LanguageTranslationsListFormat (..)
+
+    -- ** DetectionsResource
+    , DetectionsResource
+    , detectionsResource
+    , drConfidence
+    , drIsReliable
+    , drLanguage
+
     -- ** LanguagesResource
     , LanguagesResource
     , languagesResource
@@ -63,6 +73,9 @@ module Network.Google.Translate
     , TranslationsListResponse
     , translationsListResponse
     , tlrTranslations
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -76,7 +89,8 @@ TODO
 -}
 
 type TranslateAPI =
-     Detections :<|> Languages :<|> Translations
+     DetectionsListResource :<|> LanguagesListResource
+       :<|> TranslationsListResource
 
 translateAPI :: Proxy TranslateAPI
 translateAPI = Proxy

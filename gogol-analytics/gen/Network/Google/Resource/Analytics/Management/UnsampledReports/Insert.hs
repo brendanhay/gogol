@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new unsampled report.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnsampledReportsInsert@.
-module Analytics.Management.UnsampledReports.Insert
+module Network.Google.Resource.Analytics.Management.UnsampledReports.Insert
     (
     -- * REST Resource
-      ManagementUnsampledReportsInsertAPI
+      ManagementUnsampledReportsInsertResource
 
     -- * Creating a Request
-    , managementUnsampledReportsInsert
-    , ManagementUnsampledReportsInsert
+    , managementUnsampledReportsInsert'
+    , ManagementUnsampledReportsInsert'
 
     -- * Request Lenses
     , muriQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUnsampledReportsInsert@ which the
--- 'ManagementUnsampledReportsInsert' request conforms to.
-type ManagementUnsampledReportsInsertAPI =
+-- 'ManagementUnsampledReportsInsert'' request conforms to.
+type ManagementUnsampledReportsInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,20 @@ type ManagementUnsampledReportsInsertAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "unsampledReports" :> Post '[JSON] UnsampledReport
+                   "unsampledReports" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Post '[JSON] UnsampledReport
 
 -- | Create a new unsampled report.
 --
--- /See:/ 'managementUnsampledReportsInsert' smart constructor.
-data ManagementUnsampledReportsInsert = ManagementUnsampledReportsInsert
+-- /See:/ 'managementUnsampledReportsInsert'' smart constructor.
+data ManagementUnsampledReportsInsert' = ManagementUnsampledReportsInsert'
     { _muriQuotaUser     :: !(Maybe Text)
     , _muriPrettyPrint   :: !Bool
     , _muriWebPropertyId :: !Text
@@ -69,7 +78,7 @@ data ManagementUnsampledReportsInsert = ManagementUnsampledReportsInsert
     , _muriKey           :: !(Maybe Text)
     , _muriOauthToken    :: !(Maybe Text)
     , _muriFields        :: !(Maybe Text)
-    , _muriAlt           :: !Text
+    , _muriAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnsampledReportsInsert'' with the minimum fields required to make a request.
@@ -95,13 +104,13 @@ data ManagementUnsampledReportsInsert = ManagementUnsampledReportsInsert
 -- * 'muriFields'
 --
 -- * 'muriAlt'
-managementUnsampledReportsInsert
+managementUnsampledReportsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementUnsampledReportsInsert
-managementUnsampledReportsInsert pMuriWebPropertyId_ pMuriProfileId_ pMuriAccountId_ =
-    ManagementUnsampledReportsInsert
+    -> ManagementUnsampledReportsInsert'
+managementUnsampledReportsInsert' pMuriWebPropertyId_ pMuriProfileId_ pMuriAccountId_ =
+    ManagementUnsampledReportsInsert'
     { _muriQuotaUser = Nothing
     , _muriPrettyPrint = False
     , _muriWebPropertyId = pMuriWebPropertyId_
@@ -111,7 +120,7 @@ managementUnsampledReportsInsert pMuriWebPropertyId_ pMuriProfileId_ pMuriAccoun
     , _muriKey = Nothing
     , _muriOauthToken = Nothing
     , _muriFields = Nothing
-    , _muriAlt = "json"
+    , _muriAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +179,7 @@ muriFields
   = lens _muriFields (\ s a -> s{_muriFields = a})
 
 -- | Data format for the response.
-muriAlt :: Lens' ManagementUnsampledReportsInsert' Text
+muriAlt :: Lens' ManagementUnsampledReportsInsert' Alt
 muriAlt = lens _muriAlt (\ s a -> s{_muriAlt = a})
 
 instance GoogleRequest
@@ -179,8 +188,8 @@ instance GoogleRequest
              UnsampledReport
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementUnsampledReportsInsert{..}
-          = go _muriQuotaUser _muriPrettyPrint
+          ManagementUnsampledReportsInsert'{..}
+          = go _muriQuotaUser (Just _muriPrettyPrint)
               _muriWebPropertyId
               _muriUserIp
               _muriProfileId
@@ -188,9 +197,10 @@ instance GoogleRequest
               _muriKey
               _muriOauthToken
               _muriFields
-              _muriAlt
+              (Just _muriAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUnsampledReportsInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementUnsampledReportsInsertResource)
                       r
                       u

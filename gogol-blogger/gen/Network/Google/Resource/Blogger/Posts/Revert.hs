@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,157 @@
 -- | Revert a published or scheduled post to draft state.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsRevert@.
-module Blogger.Posts.Revert
+module Network.Google.Resource.Blogger.Posts.Revert
     (
     -- * REST Resource
-      PostsRevertAPI
+      PostsRevertResource
 
     -- * Creating a Request
-    , postsRevert
-    , PostsRevert
+    , postsRevert'
+    , PostsRevert'
 
     -- * Request Lenses
-    , prrQuotaUser
-    , prrPrettyPrint
-    , prrUserIp
-    , prrBlogId
-    , prrKey
-    , prrPostId
-    , prrOauthToken
-    , prrFields
-    , prrAlt
+    , prQuotaUser
+    , prPrettyPrint
+    , prUserIp
+    , prBlogId
+    , prKey
+    , prPostId
+    , prOauthToken
+    , prFields
+    , prAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsRevert@ which the
--- 'PostsRevert' request conforms to.
-type PostsRevertAPI =
+-- 'PostsRevert'' request conforms to.
+type PostsRevertResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
-             "revert" :> Post '[JSON] Post
+             "revert" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Post
 
 -- | Revert a published or scheduled post to draft state.
 --
--- /See:/ 'postsRevert' smart constructor.
-data PostsRevert = PostsRevert
-    { _prrQuotaUser   :: !(Maybe Text)
-    , _prrPrettyPrint :: !Bool
-    , _prrUserIp      :: !(Maybe Text)
-    , _prrBlogId      :: !Text
-    , _prrKey         :: !(Maybe Text)
-    , _prrPostId      :: !Text
-    , _prrOauthToken  :: !(Maybe Text)
-    , _prrFields      :: !(Maybe Text)
-    , _prrAlt         :: !Text
+-- /See:/ 'postsRevert'' smart constructor.
+data PostsRevert' = PostsRevert'
+    { _prQuotaUser   :: !(Maybe Text)
+    , _prPrettyPrint :: !Bool
+    , _prUserIp      :: !(Maybe Text)
+    , _prBlogId      :: !Text
+    , _prKey         :: !(Maybe Text)
+    , _prPostId      :: !Text
+    , _prOauthToken  :: !(Maybe Text)
+    , _prFields      :: !(Maybe Text)
+    , _prAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsRevert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'prrQuotaUser'
+-- * 'prQuotaUser'
 --
--- * 'prrPrettyPrint'
+-- * 'prPrettyPrint'
 --
--- * 'prrUserIp'
+-- * 'prUserIp'
 --
--- * 'prrBlogId'
+-- * 'prBlogId'
 --
--- * 'prrKey'
+-- * 'prKey'
 --
--- * 'prrPostId'
+-- * 'prPostId'
 --
--- * 'prrOauthToken'
+-- * 'prOauthToken'
 --
--- * 'prrFields'
+-- * 'prFields'
 --
--- * 'prrAlt'
-postsRevert
+-- * 'prAlt'
+postsRevert'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
-    -> PostsRevert
-postsRevert pPrrBlogId_ pPrrPostId_ =
-    PostsRevert
-    { _prrQuotaUser = Nothing
-    , _prrPrettyPrint = True
-    , _prrUserIp = Nothing
-    , _prrBlogId = pPrrBlogId_
-    , _prrKey = Nothing
-    , _prrPostId = pPrrPostId_
-    , _prrOauthToken = Nothing
-    , _prrFields = Nothing
-    , _prrAlt = "json"
+    -> PostsRevert'
+postsRevert' pPrBlogId_ pPrPostId_ =
+    PostsRevert'
+    { _prQuotaUser = Nothing
+    , _prPrettyPrint = True
+    , _prUserIp = Nothing
+    , _prBlogId = pPrBlogId_
+    , _prKey = Nothing
+    , _prPostId = pPrPostId_
+    , _prOauthToken = Nothing
+    , _prFields = Nothing
+    , _prAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-prrQuotaUser :: Lens' PostsRevert' (Maybe Text)
-prrQuotaUser
-  = lens _prrQuotaUser (\ s a -> s{_prrQuotaUser = a})
+prQuotaUser :: Lens' PostsRevert' (Maybe Text)
+prQuotaUser
+  = lens _prQuotaUser (\ s a -> s{_prQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-prrPrettyPrint :: Lens' PostsRevert' Bool
-prrPrettyPrint
-  = lens _prrPrettyPrint
-      (\ s a -> s{_prrPrettyPrint = a})
+prPrettyPrint :: Lens' PostsRevert' Bool
+prPrettyPrint
+  = lens _prPrettyPrint
+      (\ s a -> s{_prPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-prrUserIp :: Lens' PostsRevert' (Maybe Text)
-prrUserIp
-  = lens _prrUserIp (\ s a -> s{_prrUserIp = a})
+prUserIp :: Lens' PostsRevert' (Maybe Text)
+prUserIp = lens _prUserIp (\ s a -> s{_prUserIp = a})
 
 -- | The ID of the Blog.
-prrBlogId :: Lens' PostsRevert' Text
-prrBlogId
-  = lens _prrBlogId (\ s a -> s{_prrBlogId = a})
+prBlogId :: Lens' PostsRevert' Text
+prBlogId = lens _prBlogId (\ s a -> s{_prBlogId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prrKey :: Lens' PostsRevert' (Maybe Text)
-prrKey = lens _prrKey (\ s a -> s{_prrKey = a})
+prKey :: Lens' PostsRevert' (Maybe Text)
+prKey = lens _prKey (\ s a -> s{_prKey = a})
 
 -- | The ID of the Post.
-prrPostId :: Lens' PostsRevert' Text
-prrPostId
-  = lens _prrPostId (\ s a -> s{_prrPostId = a})
+prPostId :: Lens' PostsRevert' Text
+prPostId = lens _prPostId (\ s a -> s{_prPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-prrOauthToken :: Lens' PostsRevert' (Maybe Text)
-prrOauthToken
-  = lens _prrOauthToken
-      (\ s a -> s{_prrOauthToken = a})
+prOauthToken :: Lens' PostsRevert' (Maybe Text)
+prOauthToken
+  = lens _prOauthToken (\ s a -> s{_prOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-prrFields :: Lens' PostsRevert' (Maybe Text)
-prrFields
-  = lens _prrFields (\ s a -> s{_prrFields = a})
+prFields :: Lens' PostsRevert' (Maybe Text)
+prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 -- | Data format for the response.
-prrAlt :: Lens' PostsRevert' Text
-prrAlt = lens _prrAlt (\ s a -> s{_prrAlt = a})
+prAlt :: Lens' PostsRevert' Alt
+prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
 
 instance GoogleRequest PostsRevert' where
         type Rs PostsRevert' = Post
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsRevert{..}
-          = go _prrQuotaUser _prrPrettyPrint _prrUserIp
-              _prrBlogId
-              _prrKey
-              _prrPostId
-              _prrOauthToken
-              _prrFields
-              _prrAlt
+        requestWithRoute r u PostsRevert'{..}
+          = go _prQuotaUser (Just _prPrettyPrint) _prUserIp
+              _prBlogId
+              _prKey
+              _prPostId
+              _prOauthToken
+              _prFields
+              (Just _prAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsRevertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PostsRevertResource)
+                      r
+                      u

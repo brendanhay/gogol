@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Permanently deletes all of the user\'s trashed files.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesEmptyTrash@.
-module Drive.Files.EmptyTrash
+module Network.Google.Resource.Drive.Files.EmptyTrash
     (
     -- * REST Resource
-      FilesEmptyTrashAPI
+      FilesEmptyTrashResource
 
     -- * Creating a Request
-    , filesEmptyTrash
-    , FilesEmptyTrash
+    , filesEmptyTrash'
+    , FilesEmptyTrash'
 
     -- * Request Lenses
     , fetQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesEmptyTrash@ which the
--- 'FilesEmptyTrash' request conforms to.
-type FilesEmptyTrashAPI =
-     "files" :> "trash" :> Delete '[JSON] ()
+-- 'FilesEmptyTrash'' request conforms to.
+type FilesEmptyTrashResource =
+     "files" :>
+       "trash" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes all of the user\'s trashed files.
 --
--- /See:/ 'filesEmptyTrash' smart constructor.
-data FilesEmptyTrash = FilesEmptyTrash
+-- /See:/ 'filesEmptyTrash'' smart constructor.
+data FilesEmptyTrash' = FilesEmptyTrash'
     { _fetQuotaUser   :: !(Maybe Text)
     , _fetPrettyPrint :: !Bool
     , _fetUserIp      :: !(Maybe Text)
     , _fetKey         :: !(Maybe Text)
     , _fetOauthToken  :: !(Maybe Text)
     , _fetFields      :: !(Maybe Text)
-    , _fetAlt         :: !Text
+    , _fetAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesEmptyTrash'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data FilesEmptyTrash = FilesEmptyTrash
 -- * 'fetFields'
 --
 -- * 'fetAlt'
-filesEmptyTrash
-    :: FilesEmptyTrash
-filesEmptyTrash =
-    FilesEmptyTrash
+filesEmptyTrash'
+    :: FilesEmptyTrash'
+filesEmptyTrash' =
+    FilesEmptyTrash'
     { _fetQuotaUser = Nothing
     , _fetPrettyPrint = True
     , _fetUserIp = Nothing
     , _fetKey = Nothing
     , _fetOauthToken = Nothing
     , _fetFields = Nothing
-    , _fetAlt = "json"
+    , _fetAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,18 +135,20 @@ fetFields
   = lens _fetFields (\ s a -> s{_fetFields = a})
 
 -- | Data format for the response.
-fetAlt :: Lens' FilesEmptyTrash' Text
+fetAlt :: Lens' FilesEmptyTrash' Alt
 fetAlt = lens _fetAlt (\ s a -> s{_fetAlt = a})
 
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesEmptyTrash{..}
-          = go _fetQuotaUser _fetPrettyPrint _fetUserIp _fetKey
+        requestWithRoute r u FilesEmptyTrash'{..}
+          = go _fetQuotaUser (Just _fetPrettyPrint) _fetUserIp
+              _fetKey
               _fetOauthToken
               _fetFields
-              _fetAlt
+              (Just _fetAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesEmptyTrashAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy FilesEmptyTrashResource)
                       r
                       u

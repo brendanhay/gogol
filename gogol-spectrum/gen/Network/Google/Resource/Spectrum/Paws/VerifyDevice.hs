@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsVerifyDevice@.
-module Spectrum.Paws.VerifyDevice
+module Network.Google.Resource.Spectrum.Paws.VerifyDevice
     (
     -- * REST Resource
-      PawsVerifyDeviceAPI
+      PawsVerifyDeviceResource
 
     -- * Creating a Request
-    , pawsVerifyDevice
-    , PawsVerifyDevice
+    , pawsVerifyDevice'
+    , PawsVerifyDevice'
 
     -- * Request Lenses
     , pvdQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsVerifyDevice@ which the
--- 'PawsVerifyDevice' request conforms to.
-type PawsVerifyDeviceAPI =
+-- 'PawsVerifyDevice'' request conforms to.
+type PawsVerifyDeviceResource =
      "verifyDevice" :>
-       Post '[JSON] PawsVerifyDeviceResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] PawsVerifyDeviceResponse
 
 -- | Validates a device for white space use in accordance with regulatory
 -- rules. The Google Spectrum Database does not support master\/slave
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsVerifyDevice' smart constructor.
-data PawsVerifyDevice = PawsVerifyDevice
+-- /See:/ 'pawsVerifyDevice'' smart constructor.
+data PawsVerifyDevice' = PawsVerifyDevice'
     { _pvdQuotaUser   :: !(Maybe Text)
     , _pvdPrettyPrint :: !Bool
     , _pvdUserIp      :: !(Maybe Text)
     , _pvdKey         :: !(Maybe Text)
     , _pvdOauthToken  :: !(Maybe Text)
     , _pvdFields      :: !(Maybe Text)
-    , _pvdAlt         :: !Text
+    , _pvdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDevice'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data PawsVerifyDevice = PawsVerifyDevice
 -- * 'pvdFields'
 --
 -- * 'pvdAlt'
-pawsVerifyDevice
-    :: PawsVerifyDevice
-pawsVerifyDevice =
-    PawsVerifyDevice
+pawsVerifyDevice'
+    :: PawsVerifyDevice'
+pawsVerifyDevice' =
+    PawsVerifyDevice'
     { _pvdQuotaUser = Nothing
     , _pvdPrettyPrint = True
     , _pvdUserIp = Nothing
     , _pvdKey = Nothing
     , _pvdOauthToken = Nothing
     , _pvdFields = Nothing
-    , _pvdAlt = "json"
+    , _pvdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,19 +139,20 @@ pvdFields
   = lens _pvdFields (\ s a -> s{_pvdFields = a})
 
 -- | Data format for the response.
-pvdAlt :: Lens' PawsVerifyDevice' Text
+pvdAlt :: Lens' PawsVerifyDevice' Alt
 pvdAlt = lens _pvdAlt (\ s a -> s{_pvdAlt = a})
 
 instance GoogleRequest PawsVerifyDevice' where
         type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsVerifyDevice{..}
-          = go _pvdQuotaUser _pvdPrettyPrint _pvdUserIp _pvdKey
+        requestWithRoute r u PawsVerifyDevice'{..}
+          = go _pvdQuotaUser (Just _pvdPrettyPrint) _pvdUserIp
+              _pvdKey
               _pvdOauthToken
               _pvdFields
-              _pvdAlt
+              (Just _pvdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PawsVerifyDeviceAPI)
+                      (Proxy :: Proxy PawsVerifyDeviceResource)
                       r
                       u

@@ -18,6 +18,99 @@ module Network.Google.InstanceGroupsUpdater.Types.Product where
 import           Network.Google.InstanceGroupsUpdater.Types.Sum
 import           Network.Google.Prelude
 
+-- | [Output Only] Errors that occurred during the rolling update.
+--
+-- /See:/ 'rollingUpdateError' smart constructor.
+newtype RollingUpdateError = RollingUpdateError
+    { _rueErrors :: Maybe [RollingUpdateErrorErrors]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RollingUpdateError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rueErrors'
+rollingUpdateError
+    :: RollingUpdateError
+rollingUpdateError =
+    RollingUpdateError
+    { _rueErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+rueErrors :: Lens' RollingUpdateError [RollingUpdateErrorErrors]
+rueErrors
+  = lens _rueErrors (\ s a -> s{_rueErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON RollingUpdateError where
+        parseJSON
+          = withObject "RollingUpdateError"
+              (\ o ->
+                 RollingUpdateError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON RollingUpdateError where
+        toJSON RollingUpdateError{..}
+          = object (catMaybes [("errors" .=) <$> _rueErrors])
+
+--
+-- /See:/ 'operationWarnings' smart constructor.
+data OperationWarnings = OperationWarnings
+    { _owData    :: !(Maybe [OperationWarningsData])
+    , _owCode    :: !(Maybe Text)
+    , _owMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owData'
+--
+-- * 'owCode'
+--
+-- * 'owMessage'
+operationWarnings
+    :: OperationWarnings
+operationWarnings =
+    OperationWarnings
+    { _owData = Nothing
+    , _owCode = Nothing
+    , _owMessage = Nothing
+    }
+
+-- | [Output only] Metadata for this warning in key:value format.
+owData :: Lens' OperationWarnings [OperationWarningsData]
+owData
+  = lens _owData (\ s a -> s{_owData = a}) . _Default .
+      _Coerce
+
+-- | [Output only] The warning type identifier for this warning.
+owCode :: Lens' OperationWarnings (Maybe Text)
+owCode = lens _owCode (\ s a -> s{_owCode = a})
+
+-- | [Output only] Optional human-readable details for this warning.
+owMessage :: Lens' OperationWarnings (Maybe Text)
+owMessage
+  = lens _owMessage (\ s a -> s{_owMessage = a})
+
+instance FromJSON OperationWarnings where
+        parseJSON
+          = withObject "OperationWarnings"
+              (\ o ->
+                 OperationWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationWarnings where
+        toJSON OperationWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _owData, ("code" .=) <$> _owCode,
+                  ("message" .=) <$> _owMessage])
+
 -- | The following represents a resource describing a single update (rollout)
 -- of a group of instances to the given template.
 --
@@ -243,6 +336,49 @@ instance ToJSON RollingUpdate where
                   ("description" .=) <$> _ruDescription,
                   ("instanceGroup" .=) <$> _ruInstanceGroup])
 
+--
+-- /See:/ 'operationWarningsData' smart constructor.
+data OperationWarningsData = OperationWarningsData
+    { _owdValue :: !(Maybe Text)
+    , _owdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owdValue'
+--
+-- * 'owdKey'
+operationWarningsData
+    :: OperationWarningsData
+operationWarningsData =
+    OperationWarningsData
+    { _owdValue = Nothing
+    , _owdKey = Nothing
+    }
+
+-- | [Output Only] Metadata value for this warning.
+owdValue :: Lens' OperationWarningsData (Maybe Text)
+owdValue = lens _owdValue (\ s a -> s{_owdValue = a})
+
+-- | [Output Only] Metadata key for this warning.
+owdKey :: Lens' OperationWarningsData (Maybe Text)
+owdKey = lens _owdKey (\ s a -> s{_owdKey = a})
+
+instance FromJSON OperationWarningsData where
+        parseJSON
+          = withObject "OperationWarningsData"
+              (\ o ->
+                 OperationWarningsData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationWarningsData where
+        toJSON OperationWarningsData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _owdValue, ("key" .=) <$> _owdKey])
+
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
@@ -410,7 +546,7 @@ data Operation = Operation
     , _oError               :: !(Maybe OperationError)
     , _oHttpErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarningsItem])
+    , _oWarnings            :: !(Maybe [OperationWarnings])
     , _oHttpErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -546,7 +682,7 @@ oHttpErrorMessage
 oZone :: Lens' Operation (Maybe Text)
 oZone = lens _oZone (\ s a -> s{_oZone = a})
 
-oWarnings :: Lens' Operation [OperationWarningsItem]
+oWarnings :: Lens' Operation [OperationWarnings]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -660,6 +796,43 @@ instance ToJSON Operation where
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
+-- | Errors that occurred during the instance update.
+--
+-- /See:/ 'instanceUpdateError' smart constructor.
+newtype InstanceUpdateError = InstanceUpdateError
+    { _iueErrors :: Maybe [InstanceUpdateErrorErrors]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceUpdateError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iueErrors'
+instanceUpdateError
+    :: InstanceUpdateError
+instanceUpdateError =
+    InstanceUpdateError
+    { _iueErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+iueErrors :: Lens' InstanceUpdateError [InstanceUpdateErrorErrors]
+iueErrors
+  = lens _iueErrors (\ s a -> s{_iueErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON InstanceUpdateError where
+        parseJSON
+          = withObject "InstanceUpdateError"
+              (\ o ->
+                 InstanceUpdateError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON InstanceUpdateError where
+        toJSON InstanceUpdateError{..}
+          = object (catMaybes [("errors" .=) <$> _iueErrors])
+
 -- | Update of a single instance.
 --
 -- /See:/ 'instanceUpdate' smart constructor.
@@ -724,6 +897,264 @@ instance ToJSON InstanceUpdate where
                  [("status" .=) <$> _iuStatus,
                   ("error" .=) <$> _iuError,
                   ("instance" .=) <$> _iuInstance])
+
+-- | Parameters of the update process.
+--
+-- /See:/ 'rollingUpdatePolicy' smart constructor.
+data RollingUpdatePolicy = RollingUpdatePolicy
+    { _rupMinInstanceUpdateTimeSec  :: !(Maybe Int32)
+    , _rupInstanceStartupTimeoutSec :: !(Maybe Int32)
+    , _rupMaxNumFailedInstances     :: !(Maybe Int32)
+    , _rupAutoPauseAfterInstances   :: !(Maybe Int32)
+    , _rupMaxNumConcurrentInstances :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RollingUpdatePolicy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rupMinInstanceUpdateTimeSec'
+--
+-- * 'rupInstanceStartupTimeoutSec'
+--
+-- * 'rupMaxNumFailedInstances'
+--
+-- * 'rupAutoPauseAfterInstances'
+--
+-- * 'rupMaxNumConcurrentInstances'
+rollingUpdatePolicy
+    :: RollingUpdatePolicy
+rollingUpdatePolicy =
+    RollingUpdatePolicy
+    { _rupMinInstanceUpdateTimeSec = Nothing
+    , _rupInstanceStartupTimeoutSec = Nothing
+    , _rupMaxNumFailedInstances = Nothing
+    , _rupAutoPauseAfterInstances = Nothing
+    , _rupMaxNumConcurrentInstances = Nothing
+    }
+
+-- | The minimum amount of time that the updater spends to update each
+-- instance. Update time is the time it takes to complete all update
+-- actions (e.g. Stop call on Instance resource in Rolling Reboot), reboot,
+-- and initialize. If the instance update finishes early, the updater
+-- pauses for the remainder of the time before it starts the next instance
+-- update.
+rupMinInstanceUpdateTimeSec :: Lens' RollingUpdatePolicy (Maybe Int32)
+rupMinInstanceUpdateTimeSec
+  = lens _rupMinInstanceUpdateTimeSec
+      (\ s a -> s{_rupMinInstanceUpdateTimeSec = a})
+
+-- | The maximum amount of time that the updater waits for a HEALTHY state
+-- after all of the update steps are complete. If the HEALTHY state is not
+-- received before the deadline, the instance update is considered a
+-- failure.
+rupInstanceStartupTimeoutSec :: Lens' RollingUpdatePolicy (Maybe Int32)
+rupInstanceStartupTimeoutSec
+  = lens _rupInstanceStartupTimeoutSec
+      (\ s a -> s{_rupInstanceStartupTimeoutSec = a})
+
+-- | The maximum number of instance updates that can fail before the group
+-- update is considered a failure. An instance update is considered failed
+-- if any of its update actions (e.g. Stop call on Instance resource in
+-- Rolling Reboot) failed with permanent failure, or if the instance is in
+-- an UNHEALTHY state after it finishes all of the update actions.
+rupMaxNumFailedInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
+rupMaxNumFailedInstances
+  = lens _rupMaxNumFailedInstances
+      (\ s a -> s{_rupMaxNumFailedInstances = a})
+
+-- | Number of instances to update before the updater pauses the rolling
+-- update.
+rupAutoPauseAfterInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
+rupAutoPauseAfterInstances
+  = lens _rupAutoPauseAfterInstances
+      (\ s a -> s{_rupAutoPauseAfterInstances = a})
+
+-- | The maximum number of instances that can be updated simultaneously. An
+-- instance update is considered complete only after the instance is
+-- restarted and initialized.
+rupMaxNumConcurrentInstances :: Lens' RollingUpdatePolicy (Maybe Int32)
+rupMaxNumConcurrentInstances
+  = lens _rupMaxNumConcurrentInstances
+      (\ s a -> s{_rupMaxNumConcurrentInstances = a})
+
+instance FromJSON RollingUpdatePolicy where
+        parseJSON
+          = withObject "RollingUpdatePolicy"
+              (\ o ->
+                 RollingUpdatePolicy <$>
+                   (o .:? "minInstanceUpdateTimeSec") <*>
+                     (o .:? "instanceStartupTimeoutSec")
+                     <*> (o .:? "maxNumFailedInstances")
+                     <*> (o .:? "autoPauseAfterInstances")
+                     <*> (o .:? "maxNumConcurrentInstances"))
+
+instance ToJSON RollingUpdatePolicy where
+        toJSON RollingUpdatePolicy{..}
+          = object
+              (catMaybes
+                 [("minInstanceUpdateTimeSec" .=) <$>
+                    _rupMinInstanceUpdateTimeSec,
+                  ("instanceStartupTimeoutSec" .=) <$>
+                    _rupInstanceStartupTimeoutSec,
+                  ("maxNumFailedInstances" .=) <$>
+                    _rupMaxNumFailedInstances,
+                  ("autoPauseAfterInstances" .=) <$>
+                    _rupAutoPauseAfterInstances,
+                  ("maxNumConcurrentInstances" .=) <$>
+                    _rupMaxNumConcurrentInstances])
+
+--
+-- /See:/ 'rollingUpdateErrorErrors' smart constructor.
+data RollingUpdateErrorErrors = RollingUpdateErrorErrors
+    { _rueeLocation :: !(Maybe Text)
+    , _rueeCode     :: !(Maybe Text)
+    , _rueeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RollingUpdateErrorErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rueeLocation'
+--
+-- * 'rueeCode'
+--
+-- * 'rueeMessage'
+rollingUpdateErrorErrors
+    :: RollingUpdateErrorErrors
+rollingUpdateErrorErrors =
+    RollingUpdateErrorErrors
+    { _rueeLocation = Nothing
+    , _rueeCode = Nothing
+    , _rueeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request that caused the error.
+-- This property is optional.
+rueeLocation :: Lens' RollingUpdateErrorErrors (Maybe Text)
+rueeLocation
+  = lens _rueeLocation (\ s a -> s{_rueeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+rueeCode :: Lens' RollingUpdateErrorErrors (Maybe Text)
+rueeCode = lens _rueeCode (\ s a -> s{_rueeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+rueeMessage :: Lens' RollingUpdateErrorErrors (Maybe Text)
+rueeMessage
+  = lens _rueeMessage (\ s a -> s{_rueeMessage = a})
+
+instance FromJSON RollingUpdateErrorErrors where
+        parseJSON
+          = withObject "RollingUpdateErrorErrors"
+              (\ o ->
+                 RollingUpdateErrorErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON RollingUpdateErrorErrors where
+        toJSON RollingUpdateErrorErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _rueeLocation,
+                  ("code" .=) <$> _rueeCode,
+                  ("message" .=) <$> _rueeMessage])
+
+-- | [Output Only] If errors occurred during processing of this operation,
+-- this field will be populated.
+--
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationErrorErrors]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+oeErrors :: Lens' OperationError [OperationErrorErrors]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
+
+--
+-- /See:/ 'instanceUpdateErrorErrors' smart constructor.
+data InstanceUpdateErrorErrors = InstanceUpdateErrorErrors
+    { _iueeLocation :: !(Maybe Text)
+    , _iueeCode     :: !(Maybe Text)
+    , _iueeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceUpdateErrorErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iueeLocation'
+--
+-- * 'iueeCode'
+--
+-- * 'iueeMessage'
+instanceUpdateErrorErrors
+    :: InstanceUpdateErrorErrors
+instanceUpdateErrorErrors =
+    InstanceUpdateErrorErrors
+    { _iueeLocation = Nothing
+    , _iueeCode = Nothing
+    , _iueeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request that caused the error.
+-- This property is optional.
+iueeLocation :: Lens' InstanceUpdateErrorErrors (Maybe Text)
+iueeLocation
+  = lens _iueeLocation (\ s a -> s{_iueeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+iueeCode :: Lens' InstanceUpdateErrorErrors (Maybe Text)
+iueeCode = lens _iueeCode (\ s a -> s{_iueeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+iueeMessage :: Lens' InstanceUpdateErrorErrors (Maybe Text)
+iueeMessage
+  = lens _iueeMessage (\ s a -> s{_iueeMessage = a})
+
+instance FromJSON InstanceUpdateErrorErrors where
+        parseJSON
+          = withObject "InstanceUpdateErrorErrors"
+              (\ o ->
+                 InstanceUpdateErrorErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstanceUpdateErrorErrors where
+        toJSON InstanceUpdateErrorErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _iueeLocation,
+                  ("code" .=) <$> _iueeCode,
+                  ("message" .=) <$> _iueeMessage])
 
 -- | Response returned by List method.
 --
@@ -797,3 +1228,60 @@ instance ToJSON RollingUpdateList where
                   Just ("kind" .= _rulKind),
                   ("items" .=) <$> _rulItems,
                   ("selfLink" .=) <$> _rulSelfLink])
+
+--
+-- /See:/ 'operationErrorErrors' smart constructor.
+data OperationErrorErrors = OperationErrorErrors
+    { _oeeLocation :: !(Maybe Text)
+    , _oeeCode     :: !(Maybe Text)
+    , _oeeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationErrorErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeeLocation'
+--
+-- * 'oeeCode'
+--
+-- * 'oeeMessage'
+operationErrorErrors
+    :: OperationErrorErrors
+operationErrorErrors =
+    OperationErrorErrors
+    { _oeeLocation = Nothing
+    , _oeeCode = Nothing
+    , _oeeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request that caused the error.
+-- This property is optional.
+oeeLocation :: Lens' OperationErrorErrors (Maybe Text)
+oeeLocation
+  = lens _oeeLocation (\ s a -> s{_oeeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+oeeCode :: Lens' OperationErrorErrors (Maybe Text)
+oeeCode = lens _oeeCode (\ s a -> s{_oeeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+oeeMessage :: Lens' OperationErrorErrors (Maybe Text)
+oeeMessage
+  = lens _oeeMessage (\ s a -> s{_oeeMessage = a})
+
+instance FromJSON OperationErrorErrors where
+        parseJSON
+          = withObject "OperationErrorErrors"
+              (\ o ->
+                 OperationErrorErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationErrorErrors where
+        toJSON OperationErrorErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oeeLocation,
+                  ("code" .=) <$> _oeeCode,
+                  ("message" .=) <$> _oeeMessage])

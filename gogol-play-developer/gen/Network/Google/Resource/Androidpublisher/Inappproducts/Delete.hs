@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete an in-app product for an app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsDelete@.
-module Androidpublisher.Inappproducts.Delete
+module Network.Google.Resource.Androidpublisher.Inappproducts.Delete
     (
     -- * REST Resource
-      InappproductsDeleteAPI
+      InappproductsDeleteResource
 
     -- * Creating a Request
-    , inappproductsDelete
-    , InappproductsDelete
+    , inappproductsDelete'
+    , InappproductsDelete'
 
     -- * Request Lenses
     , idQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsDelete@ which the
--- 'InappproductsDelete' request conforms to.
-type InappproductsDeleteAPI =
+-- 'InappproductsDelete'' request conforms to.
+type InappproductsDeleteResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         Capture "sku" Text :> Delete '[JSON] ()
+         Capture "sku" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete an in-app product for an app.
 --
--- /See:/ 'inappproductsDelete' smart constructor.
-data InappproductsDelete = InappproductsDelete
+-- /See:/ 'inappproductsDelete'' smart constructor.
+data InappproductsDelete' = InappproductsDelete'
     { _idQuotaUser   :: !(Maybe Text)
     , _idPrettyPrint :: !Bool
     , _idPackageName :: !Text
@@ -62,7 +70,7 @@ data InappproductsDelete = InappproductsDelete
     , _idSku         :: !Text
     , _idOauthToken  :: !(Maybe Text)
     , _idFields      :: !(Maybe Text)
-    , _idAlt         :: !Text
+    , _idAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsDelete'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data InappproductsDelete = InappproductsDelete
 -- * 'idFields'
 --
 -- * 'idAlt'
-inappproductsDelete
+inappproductsDelete'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
-    -> InappproductsDelete
-inappproductsDelete pIdPackageName_ pIdSku_ =
-    InappproductsDelete
+    -> InappproductsDelete'
+inappproductsDelete' pIdPackageName_ pIdSku_ =
+    InappproductsDelete'
     { _idQuotaUser = Nothing
     , _idPrettyPrint = True
     , _idPackageName = pIdPackageName_
@@ -100,7 +108,7 @@ inappproductsDelete pIdPackageName_ pIdSku_ =
     , _idSku = pIdSku_
     , _idOauthToken = Nothing
     , _idFields = Nothing
-    , _idAlt = "json"
+    , _idAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,22 +156,23 @@ idFields :: Lens' InappproductsDelete' (Maybe Text)
 idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 -- | Data format for the response.
-idAlt :: Lens' InappproductsDelete' Text
+idAlt :: Lens' InappproductsDelete' Alt
 idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
 
 instance GoogleRequest InappproductsDelete' where
         type Rs InappproductsDelete' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsDelete{..}
-          = go _idQuotaUser _idPrettyPrint _idPackageName
+        requestWithRoute r u InappproductsDelete'{..}
+          = go _idQuotaUser (Just _idPrettyPrint)
+              _idPackageName
               _idUserIp
               _idKey
               _idSku
               _idOauthToken
               _idFields
-              _idAlt
+              (Just _idAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsDeleteAPI)
+                      (Proxy :: Proxy InappproductsDeleteResource)
                       r
                       u

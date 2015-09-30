@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- This has no effect if the update is already CANCELLED.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesCancel@.
-module Replicapoolupdater.RollingUpdates.Cancel
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Cancel
     (
     -- * REST Resource
-      RollingUpdatesCancelAPI
+      RollingUpdatesCancelResource
 
     -- * Creating a Request
-    , rollingUpdatesCancel
-    , RollingUpdatesCancel
+    , rollingUpdatesCancel'
+    , RollingUpdatesCancel'
 
     -- * Request Lenses
     , rucRollingUpdate
@@ -46,20 +47,27 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesCancel@ which the
--- 'RollingUpdatesCancel' request conforms to.
-type RollingUpdatesCancelAPI =
+-- 'RollingUpdatesCancel'' request conforms to.
+type RollingUpdatesCancelResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
-               "cancel" :> Post '[JSON] Operation
+               "cancel" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Cancels an update. The update must be PAUSED before it can be cancelled.
 -- This has no effect if the update is already CANCELLED.
 --
--- /See:/ 'rollingUpdatesCancel' smart constructor.
-data RollingUpdatesCancel = RollingUpdatesCancel
+-- /See:/ 'rollingUpdatesCancel'' smart constructor.
+data RollingUpdatesCancel' = RollingUpdatesCancel'
     { _rucRollingUpdate :: !Text
     , _rucQuotaUser     :: !(Maybe Text)
     , _rucPrettyPrint   :: !Bool
@@ -69,7 +77,7 @@ data RollingUpdatesCancel = RollingUpdatesCancel
     , _rucKey           :: !(Maybe Text)
     , _rucOauthToken    :: !(Maybe Text)
     , _rucFields        :: !(Maybe Text)
-    , _rucAlt           :: !Text
+    , _rucAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesCancel'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data RollingUpdatesCancel = RollingUpdatesCancel
 -- * 'rucFields'
 --
 -- * 'rucAlt'
-rollingUpdatesCancel
+rollingUpdatesCancel'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesCancel
-rollingUpdatesCancel pRucRollingUpdate_ pRucProject_ pRucZone_ =
-    RollingUpdatesCancel
+    -> RollingUpdatesCancel'
+rollingUpdatesCancel' pRucRollingUpdate_ pRucProject_ pRucZone_ =
+    RollingUpdatesCancel'
     { _rucRollingUpdate = pRucRollingUpdate_
     , _rucQuotaUser = Nothing
     , _rucPrettyPrint = True
@@ -111,7 +119,7 @@ rollingUpdatesCancel pRucRollingUpdate_ pRucProject_ pRucZone_ =
     , _rucKey = Nothing
     , _rucOauthToken = Nothing
     , _rucFields = Nothing
-    , _rucAlt = "json"
+    , _rucAlt = JSON
     }
 
 -- | The name of the update.
@@ -166,24 +174,25 @@ rucFields
   = lens _rucFields (\ s a -> s{_rucFields = a})
 
 -- | Data format for the response.
-rucAlt :: Lens' RollingUpdatesCancel' Text
+rucAlt :: Lens' RollingUpdatesCancel' Alt
 rucAlt = lens _rucAlt (\ s a -> s{_rucAlt = a})
 
 instance GoogleRequest RollingUpdatesCancel' where
         type Rs RollingUpdatesCancel' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesCancel{..}
-          = go _rucRollingUpdate _rucQuotaUser _rucPrettyPrint
+        requestWithRoute r u RollingUpdatesCancel'{..}
+          = go _rucRollingUpdate _rucQuotaUser
+              (Just _rucPrettyPrint)
               _rucProject
               _rucUserIp
               _rucZone
               _rucKey
               _rucOauthToken
               _rucFields
-              _rucAlt
+              (Just _rucAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesCancelAPI)
+                      (Proxy :: Proxy RollingUpdatesCancelResource)
                       r
                       u

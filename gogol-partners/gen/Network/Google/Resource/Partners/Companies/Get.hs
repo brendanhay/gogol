@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a company.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesGet@.
-module Partners.Companies.Get
+module Network.Google.Resource.Partners.Companies.Get
     (
     -- * REST Resource
-      CompaniesGetAPI
+      CompaniesGetResource
 
     -- * Creating a Request
-    , companiesGet
-    , CompaniesGet
+    , companiesGet'
+    , CompaniesGet'
 
     -- * Request Lenses
     , cgXgafv
@@ -60,38 +61,62 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PartnersCompaniesGet@ which the
--- 'CompaniesGet' request conforms to.
-type CompaniesGetAPI =
+-- 'CompaniesGet'' request conforms to.
+type CompaniesGetResource =
      "v2" :>
        "companies" :>
          Capture "companyId" Text :>
-           QueryParam "currencyCode" Text :>
-             QueryParam "orderBy" Text :>
-               QueryParam "address" Text :>
-                 QueryParam "requestMetadata.partnersSessionId" Text
-                   :>
-                   QueryParam "requestMetadata.locale" Text :>
-                     QueryParam "view" Text :>
-                       QueryParams "requestMetadata.experimentIds" Text :>
-                         QueryParam "requestMetadata.userOverrides.ipAddress"
-                           Text
-                           :>
-                           QueryParam
-                             "requestMetadata.trafficSource.trafficSubId"
-                             Text
-                             :>
-                             QueryParam "requestMetadata.userOverrides.userId"
-                               Text
-                               :>
-                               QueryParam
-                                 "requestMetadata.trafficSource.trafficSourceId"
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "currencyCode" Text :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "orderBy" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "address" Text :>
+                               QueryParam "requestMetadata.partnersSessionId"
                                  Text
-                                 :> Get '[JSON] GetCompanyResponse
+                                 :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "requestMetadata.locale" Text :>
+                                       QueryParam "view" Text :>
+                                         QueryParams
+                                           "requestMetadata.experimentIds"
+                                           Text
+                                           :>
+                                           QueryParam
+                                             "requestMetadata.userOverrides.ipAddress"
+                                             Text
+                                             :>
+                                             QueryParam
+                                               "requestMetadata.trafficSource.trafficSubId"
+                                               Text
+                                               :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam
+                                                   "requestMetadata.userOverrides.userId"
+                                                   Text
+                                                   :>
+                                                   QueryParam
+                                                     "requestMetadata.trafficSource.trafficSourceId"
+                                                     Text
+                                                     :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "callback"
+                                                         Text
+                                                         :>
+                                                         QueryParam "alt" Text
+                                                           :>
+                                                           Get '[JSON]
+                                                             GetCompanyResponse
 
 -- | Gets a company.
 --
--- /See:/ 'companiesGet' smart constructor.
-data CompaniesGet = CompaniesGet
+-- /See:/ 'companiesGet'' smart constructor.
+data CompaniesGet' = CompaniesGet'
     { _cgXgafv                                       :: !(Maybe Text)
     , _cgQuotaUser                                   :: !(Maybe Text)
     , _cgPrettyPrint                                 :: !Bool
@@ -172,11 +197,11 @@ data CompaniesGet = CompaniesGet
 -- * 'cgCallback'
 --
 -- * 'cgAlt'
-companiesGet
+companiesGet'
     :: Text -- ^ 'companyId'
-    -> CompaniesGet
-companiesGet pCgCompanyId_ =
-    CompaniesGet
+    -> CompaniesGet'
+companiesGet' pCgCompanyId_ =
+    CompaniesGet'
     { _cgXgafv = Nothing
     , _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
@@ -357,13 +382,13 @@ cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
         request = requestWithRoute defReq partnersURL
-        requestWithRoute r u CompaniesGet{..}
-          = go _cgXgafv _cgQuotaUser _cgPrettyPrint
+        requestWithRoute r u CompaniesGet'{..}
+          = go _cgXgafv _cgQuotaUser (Just _cgPrettyPrint)
               _cgCurrencyCode
               _cgUploadProtocol
               _cgCompanyId
               _cgOrderBy
-              _cgPp
+              (Just _cgPp)
               _cgAccessToken
               _cgUploadType
               _cgAddress
@@ -380,7 +405,9 @@ instance GoogleRequest CompaniesGet' where
               _cgRequestMetadataTrafficSourceTrafficSourceId
               _cgFields
               _cgCallback
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CompaniesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CompaniesGetResource)
+                      r
                       u

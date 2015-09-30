@@ -1115,6 +1115,28 @@ instance ToJSON UserOverrides where
                  [("ipAddress" .=) <$> _uoIpAddress,
                   ("userId" .=) <$> _uoUserId])
 
+-- | Map of client info, such as URL, browser navigator, browser platform,
+-- etc.
+--
+-- /See:/ 'logMessageRequestClientInfo' smart constructor.
+data LogMessageRequestClientInfo =
+    LogMessageRequestClientInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LogMessageRequestClientInfo' with the minimum fields required to make a request.
+--
+logMessageRequestClientInfo
+    :: LogMessageRequestClientInfo
+logMessageRequestClientInfo = LogMessageRequestClientInfo
+
+instance FromJSON LogMessageRequestClientInfo where
+        parseJSON
+          = withObject "LogMessageRequestClientInfo"
+              (\ o -> pure LogMessageRequestClientInfo)
+
+instance ToJSON LogMessageRequestClientInfo where
+        toJSON = const (Object mempty)
+
 -- | Response message for LogClientMessage.
 --
 -- /See:/ 'logMessageResponse' smart constructor.

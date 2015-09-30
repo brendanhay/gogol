@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified license resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeLicensesGet@.
-module Compute.Licenses.Get
+module Network.Google.Resource.Compute.Licenses.Get
     (
     -- * REST Resource
-      LicensesGetAPI
+      LicensesGetResource
 
     -- * Creating a Request
-    , licensesGet
-    , LicensesGet
+    , licensesGet'
+    , LicensesGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeLicensesGet@ which the
--- 'LicensesGet' request conforms to.
-type LicensesGetAPI =
+-- 'LicensesGet'' request conforms to.
+type LicensesGetResource =
      Capture "project" Text :>
        "global" :>
          "licenses" :>
-           Capture "license" Text :> Get '[JSON] License
+           Capture "license" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] License
 
 -- | Returns the specified license resource.
 --
--- /See:/ 'licensesGet' smart constructor.
-data LicensesGet = LicensesGet
+-- /See:/ 'licensesGet'' smart constructor.
+data LicensesGet' = LicensesGet'
     { _lgQuotaUser   :: !(Maybe Text)
     , _lgPrettyPrint :: !Bool
     , _lgProject     :: !Text
@@ -63,7 +71,7 @@ data LicensesGet = LicensesGet
     , _lgLicense     :: !Text
     , _lgOauthToken  :: !(Maybe Text)
     , _lgFields      :: !(Maybe Text)
-    , _lgAlt         :: !Text
+    , _lgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicensesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data LicensesGet = LicensesGet
 -- * 'lgFields'
 --
 -- * 'lgAlt'
-licensesGet
+licensesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'license'
-    -> LicensesGet
-licensesGet pLgProject_ pLgLicense_ =
-    LicensesGet
+    -> LicensesGet'
+licensesGet' pLgProject_ pLgLicense_ =
+    LicensesGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgProject = pLgProject_
@@ -101,7 +109,7 @@ licensesGet pLgProject_ pLgLicense_ =
     , _lgLicense = pLgLicense_
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,22 @@ lgFields :: Lens' LicensesGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LicensesGet' Text
+lgAlt :: Lens' LicensesGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u LicensesGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgProject _lgUserIp
+        requestWithRoute r u LicensesGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgProject
+              _lgUserIp
               _lgKey
               _lgLicense
               _lgOauthToken
               _lgFields
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LicensesGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy LicensesGetResource)
+                      r
+                      u

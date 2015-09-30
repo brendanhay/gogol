@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new user to the given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksInsert@.
-module Analytics.Management.AccountUserLinks.Insert
+module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     (
     -- * REST Resource
-      ManagementAccountUserLinksInsertAPI
+      ManagementAccountUserLinksInsertResource
 
     -- * Creating a Request
-    , managementAccountUserLinksInsert
-    , ManagementAccountUserLinksInsert
+    , managementAccountUserLinksInsert'
+    , ManagementAccountUserLinksInsert'
 
     -- * Request Lenses
     , mauliQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksInsert@ which the
--- 'ManagementAccountUserLinksInsert' request conforms to.
-type ManagementAccountUserLinksInsertAPI =
+-- 'ManagementAccountUserLinksInsert'' request conforms to.
+type ManagementAccountUserLinksInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
-           "entityUserLinks" :> Post '[JSON] EntityUserLink
+           "entityUserLinks" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given account.
 --
--- /See:/ 'managementAccountUserLinksInsert' smart constructor.
-data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
+-- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
+data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
     { _mauliQuotaUser   :: !(Maybe Text)
     , _mauliPrettyPrint :: !Bool
     , _mauliUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
     , _mauliKey         :: !(Maybe Text)
     , _mauliOauthToken  :: !(Maybe Text)
     , _mauliFields      :: !(Maybe Text)
-    , _mauliAlt         :: !Text
+    , _mauliAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
 -- * 'mauliFields'
 --
 -- * 'mauliAlt'
-managementAccountUserLinksInsert
+managementAccountUserLinksInsert'
     :: Text -- ^ 'accountId'
-    -> ManagementAccountUserLinksInsert
-managementAccountUserLinksInsert pMauliAccountId_ =
-    ManagementAccountUserLinksInsert
+    -> ManagementAccountUserLinksInsert'
+managementAccountUserLinksInsert' pMauliAccountId_ =
+    ManagementAccountUserLinksInsert'
     { _mauliQuotaUser = Nothing
     , _mauliPrettyPrint = False
     , _mauliUserIp = Nothing
@@ -95,7 +103,7 @@ managementAccountUserLinksInsert pMauliAccountId_ =
     , _mauliKey = Nothing
     , _mauliOauthToken = Nothing
     , _mauliFields = Nothing
-    , _mauliAlt = "json"
+    , _mauliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ mauliFields
   = lens _mauliFields (\ s a -> s{_mauliFields = a})
 
 -- | Data format for the response.
-mauliAlt :: Lens' ManagementAccountUserLinksInsert' Text
+mauliAlt :: Lens' ManagementAccountUserLinksInsert' Alt
 mauliAlt = lens _mauliAlt (\ s a -> s{_mauliAlt = a})
 
 instance GoogleRequest
@@ -151,15 +159,17 @@ instance GoogleRequest
              EntityUserLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementAccountUserLinksInsert{..}
-          = go _mauliQuotaUser _mauliPrettyPrint _mauliUserIp
+          ManagementAccountUserLinksInsert'{..}
+          = go _mauliQuotaUser (Just _mauliPrettyPrint)
+              _mauliUserIp
               _mauliAccountId
               _mauliKey
               _mauliOauthToken
               _mauliFields
-              _mauliAlt
+              (Just _mauliAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementAccountUserLinksInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementAccountUserLinksInsertResource)
                       r
                       u

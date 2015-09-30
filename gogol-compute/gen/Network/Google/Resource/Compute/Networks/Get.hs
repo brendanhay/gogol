@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified network resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksGet@.
-module Compute.Networks.Get
+module Network.Google.Resource.Compute.Networks.Get
     (
     -- * REST Resource
-      NetworksGetAPI
+      NetworksGetResource
 
     -- * Creating a Request
-    , networksGet
-    , NetworksGet
+    , networksGet'
+    , NetworksGet'
 
     -- * Request Lenses
     , ngQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeNetworksGet@ which the
--- 'NetworksGet' request conforms to.
-type NetworksGetAPI =
+-- 'NetworksGet'' request conforms to.
+type NetworksGetResource =
      Capture "project" Text :>
        "global" :>
          "networks" :>
-           Capture "network" Text :> Get '[JSON] Network
+           Capture "network" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Network
 
 -- | Returns the specified network resource.
 --
--- /See:/ 'networksGet' smart constructor.
-data NetworksGet = NetworksGet
+-- /See:/ 'networksGet'' smart constructor.
+data NetworksGet' = NetworksGet'
     { _ngQuotaUser   :: !(Maybe Text)
     , _ngPrettyPrint :: !Bool
     , _ngProject     :: !Text
@@ -63,7 +71,7 @@ data NetworksGet = NetworksGet
     , _ngKey         :: !(Maybe Text)
     , _ngOauthToken  :: !(Maybe Text)
     , _ngFields      :: !(Maybe Text)
-    , _ngAlt         :: !Text
+    , _ngAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data NetworksGet = NetworksGet
 -- * 'ngFields'
 --
 -- * 'ngAlt'
-networksGet
+networksGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'network'
-    -> NetworksGet
-networksGet pNgProject_ pNgNetwork_ =
-    NetworksGet
+    -> NetworksGet'
+networksGet' pNgProject_ pNgNetwork_ =
+    NetworksGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
     , _ngProject = pNgProject_
@@ -101,7 +109,7 @@ networksGet pNgProject_ pNgNetwork_ =
     , _ngKey = Nothing
     , _ngOauthToken = Nothing
     , _ngFields = Nothing
-    , _ngAlt = "json"
+    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,22 @@ ngFields :: Lens' NetworksGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 -- | Data format for the response.
-ngAlt :: Lens' NetworksGet' Text
+ngAlt :: Lens' NetworksGet' Alt
 ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
 
 instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksGet{..}
-          = go _ngQuotaUser _ngPrettyPrint _ngProject _ngUserIp
+        requestWithRoute r u NetworksGet'{..}
+          = go _ngQuotaUser (Just _ngPrettyPrint) _ngProject
+              _ngUserIp
               _ngNetwork
               _ngKey
               _ngOauthToken
               _ngFields
-              _ngAlt
+              (Just _ngAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NetworksGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy NetworksGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update membership of a user in the specified group.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersUpdate@.
-module Directory.Members.Update
+module Network.Google.Resource.Directory.Members.Update
     (
     -- * REST Resource
-      MembersUpdateAPI
+      MembersUpdateResource
 
     -- * Creating a Request
-    , membersUpdate
-    , MembersUpdate
+    , membersUpdate'
+    , MembersUpdate'
 
     -- * Request Lenses
     , muQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersUpdate@ which the
--- 'MembersUpdate' request conforms to.
-type MembersUpdateAPI =
+-- 'MembersUpdate'' request conforms to.
+type MembersUpdateResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           Capture "memberKey" Text :> Put '[JSON] Member
+           Capture "memberKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Member
 
 -- | Update membership of a user in the specified group.
 --
--- /See:/ 'membersUpdate' smart constructor.
-data MembersUpdate = MembersUpdate
+-- /See:/ 'membersUpdate'' smart constructor.
+data MembersUpdate' = MembersUpdate'
     { _muQuotaUser   :: !(Maybe Text)
     , _muMemberKey   :: !Text
     , _muPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data MembersUpdate = MembersUpdate
     , _muKey         :: !(Maybe Text)
     , _muOauthToken  :: !(Maybe Text)
     , _muFields      :: !(Maybe Text)
-    , _muAlt         :: !Text
+    , _muAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data MembersUpdate = MembersUpdate
 -- * 'muFields'
 --
 -- * 'muAlt'
-membersUpdate
+membersUpdate'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> MembersUpdate
-membersUpdate pMuMemberKey_ pMuGroupKey_ =
-    MembersUpdate
+    -> MembersUpdate'
+membersUpdate' pMuMemberKey_ pMuGroupKey_ =
+    MembersUpdate'
     { _muQuotaUser = Nothing
     , _muMemberKey = pMuMemberKey_
     , _muPrettyPrint = True
@@ -101,7 +109,7 @@ membersUpdate pMuMemberKey_ pMuGroupKey_ =
     , _muKey = Nothing
     , _muOauthToken = Nothing
     , _muFields = Nothing
-    , _muAlt = "json"
+    , _muAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ muFields :: Lens' MembersUpdate' (Maybe Text)
 muFields = lens _muFields (\ s a -> s{_muFields = a})
 
 -- | Data format for the response.
-muAlt :: Lens' MembersUpdate' Text
+muAlt :: Lens' MembersUpdate' Alt
 muAlt = lens _muAlt (\ s a -> s{_muAlt = a})
 
 instance GoogleRequest MembersUpdate' where
         type Rs MembersUpdate' = Member
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersUpdate{..}
-          = go _muQuotaUser _muMemberKey _muPrettyPrint
+        requestWithRoute r u MembersUpdate'{..}
+          = go _muQuotaUser _muMemberKey (Just _muPrettyPrint)
               _muUserIp
               _muGroupKey
               _muKey
               _muOauthToken
               _muFields
-              _muAlt
+              (Just _muAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MembersUpdateResource)
+                      r
                       u

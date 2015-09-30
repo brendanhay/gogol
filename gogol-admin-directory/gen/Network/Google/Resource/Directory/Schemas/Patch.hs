@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update schema. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasPatch@.
-module Directory.Schemas.Patch
+module Network.Google.Resource.Directory.Schemas.Patch
     (
     -- * REST Resource
-      SchemasPatchAPI
+      SchemasPatchResource
 
     -- * Creating a Request
-    , schemasPatch
-    , SchemasPatch
+    , schemasPatch'
+    , SchemasPatch'
 
     -- * Request Lenses
     , spQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasPatch@ which the
--- 'SchemasPatch' request conforms to.
-type SchemasPatchAPI =
+-- 'SchemasPatch'' request conforms to.
+type SchemasPatchResource =
      "customer" :>
        Capture "customerId" Text :>
          "schemas" :>
-           Capture "schemaKey" Text :> Patch '[JSON] Schema
+           Capture "schemaKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Schema
 
 -- | Update schema. This method supports patch semantics.
 --
--- /See:/ 'schemasPatch' smart constructor.
-data SchemasPatch = SchemasPatch
+-- /See:/ 'schemasPatch'' smart constructor.
+data SchemasPatch' = SchemasPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SchemasPatch = SchemasPatch
     , _spOauthToken  :: !(Maybe Text)
     , _spSchemaKey   :: !Text
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Text
+    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SchemasPatch = SchemasPatch
 -- * 'spFields'
 --
 -- * 'spAlt'
-schemasPatch
+schemasPatch'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
-    -> SchemasPatch
-schemasPatch pSpCustomerId_ pSpSchemaKey_ =
-    SchemasPatch
+    -> SchemasPatch'
+schemasPatch' pSpCustomerId_ pSpSchemaKey_ =
+    SchemasPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIp = Nothing
@@ -101,7 +109,7 @@ schemasPatch pSpCustomerId_ pSpSchemaKey_ =
     , _spOauthToken = Nothing
     , _spSchemaKey = pSpSchemaKey_
     , _spFields = Nothing
-    , _spAlt = "json"
+    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ spFields :: Lens' SchemasPatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
 -- | Data format for the response.
-spAlt :: Lens' SchemasPatch' Text
+spAlt :: Lens' SchemasPatch' Alt
 spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
 
 instance GoogleRequest SchemasPatch' where
         type Rs SchemasPatch' = Schema
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasPatch{..}
-          = go _spQuotaUser _spPrettyPrint _spUserIp
+        requestWithRoute r u SchemasPatch'{..}
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
               _spCustomerId
               _spKey
               _spOauthToken
               _spSchemaKey
               _spFields
-              _spAlt
+              (Just _spAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SchemasPatchResource)
+                      r
                       u

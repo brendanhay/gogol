@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionPatch@.
-module DoubleClickSearch.Conversion.Patch
+module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
     (
     -- * REST Resource
-      ConversionPatchAPI
+      ConversionPatchResource
 
     -- * Creating a Request
-    , conversionPatch
-    , ConversionPatch
+    , conversionPatch'
+    , ConversionPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -50,23 +51,30 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchConversionPatch@ which the
--- 'ConversionPatch' request conforms to.
-type ConversionPatchAPI =
+-- 'ConversionPatch'' request conforms to.
+type ConversionPatchResource =
      "conversion" :>
-       QueryParam "engineAccountId" Int64 :>
-         QueryParam "agencyId" Int64 :>
-           QueryParam "advertiserId" Int64 :>
-             QueryParam "endDate" Int32 :>
-               QueryParam "startDate" Int32 :>
-                 QueryParam "startRow" Word32 :>
-                   QueryParam "rowCount" Int32 :>
-                     Patch '[JSON] ConversionList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "engineAccountId" Int64 :>
+             QueryParam "agencyId" Int64 :>
+               QueryParam "userIp" Text :>
+                 QueryParam "advertiserId" Int64 :>
+                   QueryParam "endDate" Int32 :>
+                     QueryParam "startDate" Int32 :>
+                       QueryParam "key" Text :>
+                         QueryParam "startRow" Word32 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "rowCount" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Patch '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
 --
--- /See:/ 'conversionPatch' smart constructor.
-data ConversionPatch = ConversionPatch
+-- /See:/ 'conversionPatch'' smart constructor.
+data ConversionPatch' = ConversionPatch'
     { _cpQuotaUser       :: !(Maybe Text)
     , _cpPrettyPrint     :: !Bool
     , _cpEngineAccountId :: !Int64
@@ -80,7 +88,7 @@ data ConversionPatch = ConversionPatch
     , _cpOauthToken      :: !(Maybe Text)
     , _cpRowCount        :: !Int32
     , _cpFields          :: !(Maybe Text)
-    , _cpAlt             :: !Text
+    , _cpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionPatch'' with the minimum fields required to make a request.
@@ -114,7 +122,7 @@ data ConversionPatch = ConversionPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-conversionPatch
+conversionPatch'
     :: Int64 -- ^ 'engineAccountId'
     -> Int64 -- ^ 'agencyId'
     -> Int64 -- ^ 'advertiserId'
@@ -122,9 +130,9 @@ conversionPatch
     -> Int32 -- ^ 'startDate'
     -> Word32 -- ^ 'startRow'
     -> Int32 -- ^ 'rowCount'
-    -> ConversionPatch
-conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
-    ConversionPatch
+    -> ConversionPatch'
+conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
+    ConversionPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpEngineAccountId = pCpEngineAccountId_
@@ -138,7 +146,7 @@ conversionPatch pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pC
     , _cpOauthToken = Nothing
     , _cpRowCount = pCpRowCount_
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -214,15 +222,15 @@ cpFields :: Lens' ConversionPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' ConversionPatch' Text
+cpAlt :: Lens' ConversionPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest ConversionPatch' where
         type Rs ConversionPatch' = ConversionList
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint
+        requestWithRoute r u ConversionPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint)
               (Just _cpEngineAccountId)
               (Just _cpAgencyId)
               _cpUserIp
@@ -234,8 +242,9 @@ instance GoogleRequest ConversionPatch' where
               _cpOauthToken
               (Just _cpRowCount)
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ConversionPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ConversionPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesModify@.
-module Gmail.Users.Messages.Modify
+module Network.Google.Resource.Gmail.Users.Messages.Modify
     (
     -- * REST Resource
-      UsersMessagesModifyAPI
+      UsersMessagesModifyResource
 
     -- * Creating a Request
-    , usersMessagesModify
-    , UsersMessagesModify
+    , usersMessagesModify'
+    , UsersMessagesModify'
 
     -- * Request Lenses
     , ummQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesModify@ which the
--- 'UsersMessagesModify' request conforms to.
-type UsersMessagesModifyAPI =
+-- 'UsersMessagesModify'' request conforms to.
+type UsersMessagesModifyResource =
      Capture "userId" Text :>
        "messages" :>
-         Capture "id" Text :> "modify" :> Post '[JSON] Message
+         Capture "id" Text :>
+           "modify" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Modifies the labels on the specified message.
 --
--- /See:/ 'usersMessagesModify' smart constructor.
-data UsersMessagesModify = UsersMessagesModify
+-- /See:/ 'usersMessagesModify'' smart constructor.
+data UsersMessagesModify' = UsersMessagesModify'
     { _ummQuotaUser   :: !(Maybe Text)
     , _ummPrettyPrint :: !Bool
     , _ummUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data UsersMessagesModify = UsersMessagesModify
     , _ummId          :: !Text
     , _ummOauthToken  :: !(Maybe Text)
     , _ummFields      :: !(Maybe Text)
-    , _ummAlt         :: !Text
+    , _ummAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesModify'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data UsersMessagesModify = UsersMessagesModify
 -- * 'ummFields'
 --
 -- * 'ummAlt'
-usersMessagesModify
+usersMessagesModify'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersMessagesModify
-usersMessagesModify pUmmUserId_ pUmmId_ =
-    UsersMessagesModify
+    -> UsersMessagesModify'
+usersMessagesModify' pUmmUserId_ pUmmId_ =
+    UsersMessagesModify'
     { _ummQuotaUser = Nothing
     , _ummPrettyPrint = True
     , _ummUserIp = Nothing
@@ -100,7 +109,7 @@ usersMessagesModify pUmmUserId_ pUmmId_ =
     , _ummId = pUmmId_
     , _ummOauthToken = Nothing
     , _ummFields = Nothing
-    , _ummAlt = "json"
+    , _ummAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +159,22 @@ ummFields
   = lens _ummFields (\ s a -> s{_ummFields = a})
 
 -- | Data format for the response.
-ummAlt :: Lens' UsersMessagesModify' Text
+ummAlt :: Lens' UsersMessagesModify' Alt
 ummAlt = lens _ummAlt (\ s a -> s{_ummAlt = a})
 
 instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesModify{..}
-          = go _ummQuotaUser _ummPrettyPrint _ummUserIp
+        requestWithRoute r u UsersMessagesModify'{..}
+          = go _ummQuotaUser (Just _ummPrettyPrint) _ummUserIp
               _ummUserId
               _ummKey
               _ummId
               _ummOauthToken
               _ummFields
-              _ummAlt
+              (Just _ummAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesModifyAPI)
+                      (Proxy :: Proxy UsersMessagesModifyResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlDatabasesDelete@.
-module Sql.Databases.Delete
+module Network.Google.Resource.Sql.Databases.Delete
     (
     -- * REST Resource
-      DatabasesDeleteAPI
+      DatabasesDeleteResource
 
     -- * Creating a Request
-    , databasesDelete
-    , DatabasesDelete
+    , databasesDelete'
+    , DatabasesDelete'
 
     -- * Request Lenses
     , ddQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlDatabasesDelete@ which the
--- 'DatabasesDelete' request conforms to.
-type DatabasesDeleteAPI =
+-- 'DatabasesDelete'' request conforms to.
+type DatabasesDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "databases" :>
-               Capture "database" Text :> Delete '[JSON] Operation
+               Capture "database" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ 'databasesDelete' smart constructor.
-data DatabasesDelete = DatabasesDelete
+-- /See:/ 'databasesDelete'' smart constructor.
+data DatabasesDelete' = DatabasesDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
     , _ddProject     :: !Text
@@ -68,7 +76,7 @@ data DatabasesDelete = DatabasesDelete
     , _ddKey         :: !(Maybe Text)
     , _ddOauthToken  :: !(Maybe Text)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Text
+    , _ddAlt         :: !Alt
     , _ddInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data DatabasesDelete = DatabasesDelete
 -- * 'ddAlt'
 --
 -- * 'ddInstance'
-databasesDelete
+databasesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'database'
     -> Text -- ^ 'instance'
-    -> DatabasesDelete
-databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
-    DatabasesDelete
+    -> DatabasesDelete'
+databasesDelete' pDdProject_ pDdDatabase_ pDdInstance_ =
+    DatabasesDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
     , _ddProject = pDdProject_
@@ -110,7 +118,7 @@ databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
     , _ddKey = Nothing
     , _ddOauthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = "json"
+    , _ddAlt = JSON
     , _ddInstance = pDdInstance_
     }
 
@@ -158,7 +166,7 @@ ddFields :: Lens' DatabasesDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 -- | Data format for the response.
-ddAlt :: Lens' DatabasesDelete' Text
+ddAlt :: Lens' DatabasesDelete' Alt
 ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -169,16 +177,17 @@ ddInstance
 instance GoogleRequest DatabasesDelete' where
         type Rs DatabasesDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesDelete{..}
-          = go _ddQuotaUser _ddPrettyPrint _ddProject
+        requestWithRoute r u DatabasesDelete'{..}
+          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
               _ddDatabase
               _ddUserIp
               _ddKey
               _ddOauthToken
               _ddFields
-              _ddAlt
+              (Just _ddAlt)
               _ddInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy DatabasesDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatabasesDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- |
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudloadingAddBook@.
-module Books.Cloudloading.AddBook
+module Network.Google.Resource.Books.Cloudloading.AddBook
     (
     -- * REST Resource
-      CloudloadingAddBookAPI
+      CloudloadingAddBookResource
 
     -- * Creating a Request
-    , cloudloadingAddBook
-    , CloudloadingAddBook
+    , cloudloadingAddBook'
+    , CloudloadingAddBook'
 
     -- * Request Lenses
     , cabQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksCloudloadingAddBook@ which the
--- 'CloudloadingAddBook' request conforms to.
-type CloudloadingAddBookAPI =
+-- 'CloudloadingAddBook'' request conforms to.
+type CloudloadingAddBookResource =
      "cloudloading" :>
        "addBook" :>
-         QueryParam "mime_type" Text :>
-           QueryParam "upload_client_token" Text :>
-             QueryParam "name" Text :>
-               QueryParam "drive_document_id" Text :>
-                 Post '[JSON] BooksCloudloadingResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "mime_type" Text :>
+                 QueryParam "upload_client_token" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "drive_document_id" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] BooksCloudloadingResource
 
 -- |
 --
--- /See:/ 'cloudloadingAddBook' smart constructor.
-data CloudloadingAddBook = CloudloadingAddBook
+-- /See:/ 'cloudloadingAddBook'' smart constructor.
+data CloudloadingAddBook' = CloudloadingAddBook'
     { _cabQuotaUser         :: !(Maybe Text)
     , _cabPrettyPrint       :: !Bool
     , _cabUserIp            :: !(Maybe Text)
@@ -70,7 +78,7 @@ data CloudloadingAddBook = CloudloadingAddBook
     , _cabOauthToken        :: !(Maybe Text)
     , _cabDriveDocumentId   :: !(Maybe Text)
     , _cabFields            :: !(Maybe Text)
-    , _cabAlt               :: !Text
+    , _cabAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudloadingAddBook'' with the minimum fields required to make a request.
@@ -98,10 +106,10 @@ data CloudloadingAddBook = CloudloadingAddBook
 -- * 'cabFields'
 --
 -- * 'cabAlt'
-cloudloadingAddBook
-    :: CloudloadingAddBook
-cloudloadingAddBook =
-    CloudloadingAddBook
+cloudloadingAddBook'
+    :: CloudloadingAddBook'
+cloudloadingAddBook' =
+    CloudloadingAddBook'
     { _cabQuotaUser = Nothing
     , _cabPrettyPrint = True
     , _cabUserIp = Nothing
@@ -112,7 +120,7 @@ cloudloadingAddBook =
     , _cabOauthToken = Nothing
     , _cabDriveDocumentId = Nothing
     , _cabFields = Nothing
-    , _cabAlt = "json"
+    , _cabAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,15 +181,15 @@ cabFields
   = lens _cabFields (\ s a -> s{_cabFields = a})
 
 -- | Data format for the response.
-cabAlt :: Lens' CloudloadingAddBook' Text
+cabAlt :: Lens' CloudloadingAddBook' Alt
 cabAlt = lens _cabAlt (\ s a -> s{_cabAlt = a})
 
 instance GoogleRequest CloudloadingAddBook' where
         type Rs CloudloadingAddBook' =
              BooksCloudloadingResource
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudloadingAddBook{..}
-          = go _cabQuotaUser _cabPrettyPrint _cabUserIp
+        requestWithRoute r u CloudloadingAddBook'{..}
+          = go _cabQuotaUser (Just _cabPrettyPrint) _cabUserIp
               _cabMimeType
               _cabUploadClientToken
               _cabKey
@@ -189,9 +197,9 @@ instance GoogleRequest CloudloadingAddBook' where
               _cabOauthToken
               _cabDriveDocumentId
               _cabFields
-              _cabAlt
+              (Just _cabAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CloudloadingAddBookAPI)
+                      (Proxy :: Proxy CloudloadingAddBookResource)
                       r
                       u

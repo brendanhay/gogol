@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing filter.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersUpdate@.
-module Analytics.Management.Filters.Update
+module Network.Google.Resource.Analytics.Management.Filters.Update
     (
     -- * REST Resource
-      ManagementFiltersUpdateAPI
+      ManagementFiltersUpdateResource
 
     -- * Creating a Request
-    , managementFiltersUpdate
-    , ManagementFiltersUpdate
+    , managementFiltersUpdate'
+    , ManagementFiltersUpdate'
 
     -- * Request Lenses
     , mfuQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersUpdate@ which the
--- 'ManagementFiltersUpdate' request conforms to.
-type ManagementFiltersUpdateAPI =
+-- 'ManagementFiltersUpdate'' request conforms to.
+type ManagementFiltersUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             Capture "filterId" Text :> Put '[JSON] Filter
+             Capture "filterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Filter
 
 -- | Updates an existing filter.
 --
--- /See:/ 'managementFiltersUpdate' smart constructor.
-data ManagementFiltersUpdate = ManagementFiltersUpdate
+-- /See:/ 'managementFiltersUpdate'' smart constructor.
+data ManagementFiltersUpdate' = ManagementFiltersUpdate'
     { _mfuQuotaUser   :: !(Maybe Text)
     , _mfuPrettyPrint :: !Bool
     , _mfuFilterId    :: !Text
@@ -64,7 +72,7 @@ data ManagementFiltersUpdate = ManagementFiltersUpdate
     , _mfuKey         :: !(Maybe Text)
     , _mfuOauthToken  :: !(Maybe Text)
     , _mfuFields      :: !(Maybe Text)
-    , _mfuAlt         :: !Text
+    , _mfuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersUpdate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ManagementFiltersUpdate = ManagementFiltersUpdate
 -- * 'mfuFields'
 --
 -- * 'mfuAlt'
-managementFiltersUpdate
+managementFiltersUpdate'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
-    -> ManagementFiltersUpdate
-managementFiltersUpdate pMfuFilterId_ pMfuAccountId_ =
-    ManagementFiltersUpdate
+    -> ManagementFiltersUpdate'
+managementFiltersUpdate' pMfuFilterId_ pMfuAccountId_ =
+    ManagementFiltersUpdate'
     { _mfuQuotaUser = Nothing
     , _mfuPrettyPrint = False
     , _mfuFilterId = pMfuFilterId_
@@ -102,7 +110,7 @@ managementFiltersUpdate pMfuFilterId_ pMfuAccountId_ =
     , _mfuKey = Nothing
     , _mfuOauthToken = Nothing
     , _mfuFields = Nothing
-    , _mfuAlt = "json"
+    , _mfuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ mfuFields
   = lens _mfuFields (\ s a -> s{_mfuFields = a})
 
 -- | Data format for the response.
-mfuAlt :: Lens' ManagementFiltersUpdate' Text
+mfuAlt :: Lens' ManagementFiltersUpdate' Alt
 mfuAlt = lens _mfuAlt (\ s a -> s{_mfuAlt = a})
 
 instance GoogleRequest ManagementFiltersUpdate' where
         type Rs ManagementFiltersUpdate' = Filter
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersUpdate{..}
-          = go _mfuQuotaUser _mfuPrettyPrint _mfuFilterId
+        requestWithRoute r u ManagementFiltersUpdate'{..}
+          = go _mfuQuotaUser (Just _mfuPrettyPrint)
+              _mfuFilterId
               _mfuUserIp
               _mfuAccountId
               _mfuKey
               _mfuOauthToken
               _mfuFields
-              _mfuAlt
+              (Just _mfuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersUpdateAPI)
+                      (Proxy :: Proxy ManagementFiltersUpdateResource)
                       r
                       u

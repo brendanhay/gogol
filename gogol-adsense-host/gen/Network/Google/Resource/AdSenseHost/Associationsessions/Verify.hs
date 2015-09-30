@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- from AdSense signup.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAssociationsessionsVerify@.
-module AdSenseHost.Associationsessions.Verify
+module Network.Google.Resource.AdSenseHost.Associationsessions.Verify
     (
     -- * REST Resource
-      AssociationsessionsVerifyAPI
+      AssociationsessionsVerifyResource
 
     -- * Creating a Request
-    , associationsessionsVerify
-    , AssociationsessionsVerify
+    , associationsessionsVerify'
+    , AssociationsessionsVerify'
 
     -- * Request Lenses
     , avQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAssociationsessionsVerify@ which the
--- 'AssociationsessionsVerify' request conforms to.
-type AssociationsessionsVerifyAPI =
+-- 'AssociationsessionsVerify'' request conforms to.
+type AssociationsessionsVerifyResource =
      "associationsessions" :>
        "verify" :>
-         QueryParam "token" Text :>
-           Get '[JSON] AssociationSession
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "token" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] AssociationSession
 
 -- | Verify an association session after the association callback returns
 -- from AdSense signup.
 --
--- /See:/ 'associationsessionsVerify' smart constructor.
-data AssociationsessionsVerify = AssociationsessionsVerify
+-- /See:/ 'associationsessionsVerify'' smart constructor.
+data AssociationsessionsVerify' = AssociationsessionsVerify'
     { _avQuotaUser   :: !(Maybe Text)
     , _avPrettyPrint :: !Bool
     , _avUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AssociationsessionsVerify = AssociationsessionsVerify
     , _avKey         :: !(Maybe Text)
     , _avOauthToken  :: !(Maybe Text)
     , _avFields      :: !(Maybe Text)
-    , _avAlt         :: !Text
+    , _avAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationsessionsVerify'' with the minimum fields required to make a request.
@@ -85,11 +93,11 @@ data AssociationsessionsVerify = AssociationsessionsVerify
 -- * 'avFields'
 --
 -- * 'avAlt'
-associationsessionsVerify
+associationsessionsVerify'
     :: Text -- ^ 'token'
-    -> AssociationsessionsVerify
-associationsessionsVerify pAvToken_ =
-    AssociationsessionsVerify
+    -> AssociationsessionsVerify'
+associationsessionsVerify' pAvToken_ =
+    AssociationsessionsVerify'
     { _avQuotaUser = Nothing
     , _avPrettyPrint = True
     , _avUserIp = Nothing
@@ -97,7 +105,7 @@ associationsessionsVerify pAvToken_ =
     , _avKey = Nothing
     , _avOauthToken = Nothing
     , _avFields = Nothing
-    , _avAlt = "json"
+    , _avAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,7 +146,7 @@ avFields :: Lens' AssociationsessionsVerify' (Maybe Text)
 avFields = lens _avFields (\ s a -> s{_avFields = a})
 
 -- | Data format for the response.
-avAlt :: Lens' AssociationsessionsVerify' Text
+avAlt :: Lens' AssociationsessionsVerify' Alt
 avAlt = lens _avAlt (\ s a -> s{_avAlt = a})
 
 instance GoogleRequest AssociationsessionsVerify'
@@ -146,15 +154,15 @@ instance GoogleRequest AssociationsessionsVerify'
         type Rs AssociationsessionsVerify' =
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AssociationsessionsVerify{..}
-          = go _avQuotaUser _avPrettyPrint _avUserIp
+        requestWithRoute r u AssociationsessionsVerify'{..}
+          = go _avQuotaUser (Just _avPrettyPrint) _avUserIp
               (Just _avToken)
               _avKey
               _avOauthToken
               _avFields
-              _avAlt
+              (Just _avAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AssociationsessionsVerifyAPI)
+                      (Proxy :: Proxy AssociationsessionsVerifyResource)
                       r
                       u

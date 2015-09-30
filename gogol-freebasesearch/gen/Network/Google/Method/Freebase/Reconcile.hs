@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Reconcile entities to Freebase open data.
 --
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseReconcile@.
-module Freebase.Reconcile
+module Network.Google.Method.Freebase.Reconcile
     (
     -- * REST Resource
-      ReconcileAPI
+      ReconcileMethod
 
     -- * Creating a Request
-    , reconcile
-    , Reconcile
+    , reconcile'
+    , Reconcile'
 
     -- * Request Lenses
     , rQuotaUser
@@ -48,20 +49,27 @@ import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FreebaseReconcile@ which the
--- 'Reconcile' request conforms to.
-type ReconcileAPI =
+-- 'Reconcile'' request conforms to.
+type ReconcileMethod =
      "reconcile" :>
-       QueryParams "kind" Text :>
-         QueryParams "lang" Text :>
-           QueryParam "confidence" Float :>
-             QueryParam "name" Text :>
-               QueryParam "limit" Int32 :>
-                 QueryParams "prop" Text :> Get '[JSON] ReconcileGet
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParams "kind" Text :>
+             QueryParam "userIp" Text :>
+               QueryParams "lang" Text :>
+                 QueryParam "confidence" Float :>
+                   QueryParam "key" Text :>
+                     QueryParam "name" Text :>
+                       QueryParam "limit" Int32 :>
+                         QueryParams "prop" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] ReconcileGet
 
 -- | Reconcile entities to Freebase open data.
 --
--- /See:/ 'reconcile' smart constructor.
-data Reconcile = Reconcile
+-- /See:/ 'reconcile'' smart constructor.
+data Reconcile' = Reconcile'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rKind        :: !(Maybe Text)
@@ -74,7 +82,7 @@ data Reconcile = Reconcile
     , _rProp        :: !(Maybe Text)
     , _rOauthToken  :: !(Maybe Text)
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Text
+    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Reconcile'' with the minimum fields required to make a request.
@@ -106,10 +114,10 @@ data Reconcile = Reconcile
 -- * 'rFields'
 --
 -- * 'rAlt'
-reconcile
-    :: Reconcile
-reconcile =
-    Reconcile
+reconcile'
+    :: Reconcile'
+reconcile' =
+    Reconcile'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rKind = Nothing
@@ -122,7 +130,7 @@ reconcile =
     , _rProp = Nothing
     , _rOauthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = "json"
+    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,14 +192,15 @@ rFields :: Lens' Reconcile' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-rAlt :: Lens' Reconcile' Text
+rAlt :: Lens' Reconcile' Alt
 rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet
         request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u Reconcile{..}
-          = go _rQuotaUser _rPrettyPrint _rKind _rUserIp _rLang
+        requestWithRoute r u Reconcile'{..}
+          = go _rQuotaUser (Just _rPrettyPrint) _rKind _rUserIp
+              _rLang
               (Just _rConfidence)
               _rKey
               _rName
@@ -199,6 +208,7 @@ instance GoogleRequest Reconcile' where
               _rProp
               _rOauthToken
               _rFields
-              _rAlt
+              (Just _rAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReconcileAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ReconcileMethod) r
+                      u

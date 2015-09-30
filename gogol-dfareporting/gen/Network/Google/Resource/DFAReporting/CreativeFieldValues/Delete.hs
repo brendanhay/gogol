@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing creative field value.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesDelete@.
-module DFAReporting.CreativeFieldValues.Delete
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
     (
     -- * REST Resource
-      CreativeFieldValuesDeleteAPI
+      CreativeFieldValuesDeleteResource
 
     -- * Creating a Request
-    , creativeFieldValuesDelete
-    , CreativeFieldValuesDelete
+    , creativeFieldValuesDelete'
+    , CreativeFieldValuesDelete'
 
     -- * Request Lenses
     , cfvdCreativeFieldId
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesDelete@ which the
--- 'CreativeFieldValuesDelete' request conforms to.
-type CreativeFieldValuesDeleteAPI =
+-- 'CreativeFieldValuesDelete'' request conforms to.
+type CreativeFieldValuesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               Capture "id" Int64 :> Delete '[JSON] ()
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field value.
 --
--- /See:/ 'creativeFieldValuesDelete' smart constructor.
-data CreativeFieldValuesDelete = CreativeFieldValuesDelete
+-- /See:/ 'creativeFieldValuesDelete'' smart constructor.
+data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId :: !Int64
     , _cfvdQuotaUser       :: !(Maybe Text)
     , _cfvdPrettyPrint     :: !Bool
@@ -67,7 +75,7 @@ data CreativeFieldValuesDelete = CreativeFieldValuesDelete
     , _cfvdId              :: !Int64
     , _cfvdOauthToken      :: !(Maybe Text)
     , _cfvdFields          :: !(Maybe Text)
-    , _cfvdAlt             :: !Text
+    , _cfvdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data CreativeFieldValuesDelete = CreativeFieldValuesDelete
 -- * 'cfvdFields'
 --
 -- * 'cfvdAlt'
-creativeFieldValuesDelete
+creativeFieldValuesDelete'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldValuesDelete
-creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProfileId_ pCfvdId_ =
-    CreativeFieldValuesDelete
+    -> CreativeFieldValuesDelete'
+creativeFieldValuesDelete' pCfvdCreativeFieldId_ pCfvdProfileId_ pCfvdId_ =
+    CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId = pCfvdCreativeFieldId_
     , _cfvdQuotaUser = Nothing
     , _cfvdPrettyPrint = True
@@ -109,7 +117,7 @@ creativeFieldValuesDelete pCfvdCreativeFieldId_ pCfvdProfileId_ pCfvdId_ =
     , _cfvdId = pCfvdId_
     , _cfvdOauthToken = Nothing
     , _cfvdFields = Nothing
-    , _cfvdAlt = "json"
+    , _cfvdAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -166,25 +174,25 @@ cfvdFields
   = lens _cfvdFields (\ s a -> s{_cfvdFields = a})
 
 -- | Data format for the response.
-cfvdAlt :: Lens' CreativeFieldValuesDelete' Text
+cfvdAlt :: Lens' CreativeFieldValuesDelete' Alt
 cfvdAlt = lens _cfvdAlt (\ s a -> s{_cfvdAlt = a})
 
 instance GoogleRequest CreativeFieldValuesDelete'
          where
         type Rs CreativeFieldValuesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesDelete{..}
+        requestWithRoute r u CreativeFieldValuesDelete'{..}
           = go _cfvdCreativeFieldId _cfvdQuotaUser
-              _cfvdPrettyPrint
+              (Just _cfvdPrettyPrint)
               _cfvdUserIp
               _cfvdProfileId
               _cfvdKey
               _cfvdId
               _cfvdOauthToken
               _cfvdFields
-              _cfvdAlt
+              (Just _cfvdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesDeleteAPI)
+                      (Proxy :: Proxy CreativeFieldValuesDeleteResource)
                       r
                       u

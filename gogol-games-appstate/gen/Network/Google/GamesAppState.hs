@@ -27,19 +27,19 @@ module Network.Google.GamesAppState
     -- * REST Resources
 
     -- ** AppstateStatesClear
-    , module Appstate.States.Clear
+    , module Network.Google.Resource.Appstate.States.Clear
 
     -- ** AppstateStatesDelete
-    , module Appstate.States.Delete
+    , module Network.Google.Resource.Appstate.States.Delete
 
     -- ** AppstateStatesGet
-    , module Appstate.States.Get
+    , module Network.Google.Resource.Appstate.States.Get
 
     -- ** AppstateStatesList
-    , module Appstate.States.List
+    , module Network.Google.Resource.Appstate.States.List
 
     -- ** AppstateStatesUpdate
-    , module Appstate.States.Update
+    , module Network.Google.Resource.Appstate.States.Update
 
     -- * Types
 
@@ -70,6 +70,9 @@ module Network.Google.GamesAppState
     , updateRequest
     , urKind
     , urData
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GamesAppState.Types
@@ -84,7 +87,11 @@ import           Network.Google.Resource.Appstate.States.Update
 TODO
 -}
 
-type GamesAppStateAPI = States
+type GamesAppStateAPI =
+     StatesListResource :<|> StatesGetResource :<|>
+       StatesClearResource
+       :<|> StatesDeleteResource
+       :<|> StatesUpdateResource
 
 gamesAppStateAPI :: Proxy GamesAppStateAPI
 gamesAppStateAPI = Proxy

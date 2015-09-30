@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- settings.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsUpdate@.
-module YouTube.LiveStreams.Update
+module Network.Google.Resource.YouTube.LiveStreams.Update
     (
     -- * REST Resource
-      LiveStreamsUpdateAPI
+      LiveStreamsUpdateResource
 
     -- * Creating a Request
-    , liveStreamsUpdate
-    , LiveStreamsUpdate
+    , liveStreamsUpdate'
+    , LiveStreamsUpdate'
 
     -- * Request Lenses
     , lsuQuotaUser
@@ -47,20 +48,26 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveStreamsUpdate@ which the
--- 'LiveStreamsUpdate' request conforms to.
-type LiveStreamsUpdateAPI =
+-- 'LiveStreamsUpdate'' request conforms to.
+type LiveStreamsUpdateResource =
      "liveStreams" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             Put '[JSON] LiveStream
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] LiveStream
 
 -- | Updates a video stream. If the properties that you want to change cannot
 -- be updated, then you need to create a new stream with the proper
 -- settings.
 --
--- /See:/ 'liveStreamsUpdate' smart constructor.
-data LiveStreamsUpdate = LiveStreamsUpdate
+-- /See:/ 'liveStreamsUpdate'' smart constructor.
+data LiveStreamsUpdate' = LiveStreamsUpdate'
     { _lsuQuotaUser                     :: !(Maybe Text)
     , _lsuPart                          :: !Text
     , _lsuPrettyPrint                   :: !Bool
@@ -70,7 +77,7 @@ data LiveStreamsUpdate = LiveStreamsUpdate
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsuOauthToken                    :: !(Maybe Text)
     , _lsuFields                        :: !(Maybe Text)
-    , _lsuAlt                           :: !Text
+    , _lsuAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsUpdate'' with the minimum fields required to make a request.
@@ -96,11 +103,11 @@ data LiveStreamsUpdate = LiveStreamsUpdate
 -- * 'lsuFields'
 --
 -- * 'lsuAlt'
-liveStreamsUpdate
+liveStreamsUpdate'
     :: Text -- ^ 'part'
-    -> LiveStreamsUpdate
-liveStreamsUpdate pLsuPart_ =
-    LiveStreamsUpdate
+    -> LiveStreamsUpdate'
+liveStreamsUpdate' pLsuPart_ =
+    LiveStreamsUpdate'
     { _lsuQuotaUser = Nothing
     , _lsuPart = pLsuPart_
     , _lsuPrettyPrint = True
@@ -110,7 +117,7 @@ liveStreamsUpdate pLsuPart_ =
     , _lsuOnBehalfOfContentOwnerChannel = Nothing
     , _lsuOauthToken = Nothing
     , _lsuFields = Nothing
-    , _lsuAlt = "json"
+    , _lsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,23 +204,24 @@ lsuFields
   = lens _lsuFields (\ s a -> s{_lsuFields = a})
 
 -- | Data format for the response.
-lsuAlt :: Lens' LiveStreamsUpdate' Text
+lsuAlt :: Lens' LiveStreamsUpdate' Alt
 lsuAlt = lens _lsuAlt (\ s a -> s{_lsuAlt = a})
 
 instance GoogleRequest LiveStreamsUpdate' where
         type Rs LiveStreamsUpdate' = LiveStream
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveStreamsUpdate{..}
-          = go _lsuQuotaUser (Just _lsuPart) _lsuPrettyPrint
+        requestWithRoute r u LiveStreamsUpdate'{..}
+          = go _lsuQuotaUser (Just _lsuPart)
+              (Just _lsuPrettyPrint)
               _lsuUserIp
               _lsuOnBehalfOfContentOwner
               _lsuKey
               _lsuOnBehalfOfContentOwnerChannel
               _lsuOauthToken
               _lsuFields
-              _lsuAlt
+              (Just _lsuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveStreamsUpdateAPI)
+                      (Proxy :: Proxy LiveStreamsUpdateResource)
                       r
                       u

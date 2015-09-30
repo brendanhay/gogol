@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,149 +20,162 @@
 -- | List all ad clients in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdclientsList@.
-module AdSense.Adclients.List
+module Network.Google.Resource.AdSense.Adclients.List
     (
     -- * REST Resource
-      AdclientsListAPI
+      AdclientsListResource
 
     -- * Creating a Request
-    , adclientsList
-    , AdclientsList
+    , adclientsList'
+    , AdclientsList'
 
     -- * Request Lenses
-    , alQuotaUser
-    , alPrettyPrint
-    , alUserIp
-    , alKey
-    , alPageToken
-    , alOauthToken
-    , alMaxResults
-    , alFields
-    , alAlt
+    , adcQuotaUser
+    , adcPrettyPrint
+    , adcUserIp
+    , adcKey
+    , adcPageToken
+    , adcOauthToken
+    , adcMaxResults
+    , adcFields
+    , adcAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdclientsList@ which the
--- 'AdclientsList' request conforms to.
-type AdclientsListAPI =
+-- 'AdclientsList'' request conforms to.
+type AdclientsListResource =
      "adclients" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :>
-           Get '[JSON] AdClients
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] AdClients
 
 -- | List all ad clients in this AdSense account.
 --
--- /See:/ 'adclientsList' smart constructor.
-data AdclientsList = AdclientsList
-    { _alQuotaUser   :: !(Maybe Text)
-    , _alPrettyPrint :: !Bool
-    , _alUserIp      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Text)
-    , _alPageToken   :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
-    , _alMaxResults  :: !(Maybe Int32)
-    , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+-- /See:/ 'adclientsList'' smart constructor.
+data AdclientsList' = AdclientsList'
+    { _adcQuotaUser   :: !(Maybe Text)
+    , _adcPrettyPrint :: !Bool
+    , _adcUserIp      :: !(Maybe Text)
+    , _adcKey         :: !(Maybe Text)
+    , _adcPageToken   :: !(Maybe Text)
+    , _adcOauthToken  :: !(Maybe Text)
+    , _adcMaxResults  :: !(Maybe Int32)
+    , _adcFields      :: !(Maybe Text)
+    , _adcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdclientsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'alQuotaUser'
+-- * 'adcQuotaUser'
 --
--- * 'alPrettyPrint'
+-- * 'adcPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'adcUserIp'
 --
--- * 'alKey'
+-- * 'adcKey'
 --
--- * 'alPageToken'
+-- * 'adcPageToken'
 --
--- * 'alOauthToken'
+-- * 'adcOauthToken'
 --
--- * 'alMaxResults'
+-- * 'adcMaxResults'
 --
--- * 'alFields'
+-- * 'adcFields'
 --
--- * 'alAlt'
-adclientsList
-    :: AdclientsList
-adclientsList =
-    AdclientsList
-    { _alQuotaUser = Nothing
-    , _alPrettyPrint = True
-    , _alUserIp = Nothing
-    , _alKey = Nothing
-    , _alPageToken = Nothing
-    , _alOauthToken = Nothing
-    , _alMaxResults = Nothing
-    , _alFields = Nothing
-    , _alAlt = "json"
+-- * 'adcAlt'
+adclientsList'
+    :: AdclientsList'
+adclientsList' =
+    AdclientsList'
+    { _adcQuotaUser = Nothing
+    , _adcPrettyPrint = True
+    , _adcUserIp = Nothing
+    , _adcKey = Nothing
+    , _adcPageToken = Nothing
+    , _adcOauthToken = Nothing
+    , _adcMaxResults = Nothing
+    , _adcFields = Nothing
+    , _adcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-alQuotaUser :: Lens' AdclientsList' (Maybe Text)
-alQuotaUser
-  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
+adcQuotaUser :: Lens' AdclientsList' (Maybe Text)
+adcQuotaUser
+  = lens _adcQuotaUser (\ s a -> s{_adcQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-alPrettyPrint :: Lens' AdclientsList' Bool
-alPrettyPrint
-  = lens _alPrettyPrint
-      (\ s a -> s{_alPrettyPrint = a})
+adcPrettyPrint :: Lens' AdclientsList' Bool
+adcPrettyPrint
+  = lens _adcPrettyPrint
+      (\ s a -> s{_adcPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AdclientsList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+adcUserIp :: Lens' AdclientsList' (Maybe Text)
+adcUserIp
+  = lens _adcUserIp (\ s a -> s{_adcUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AdclientsList' (Maybe Text)
-alKey = lens _alKey (\ s a -> s{_alKey = a})
+adcKey :: Lens' AdclientsList' (Maybe Text)
+adcKey = lens _adcKey (\ s a -> s{_adcKey = a})
 
 -- | A continuation token, used to page through ad clients. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-alPageToken :: Lens' AdclientsList' (Maybe Text)
-alPageToken
-  = lens _alPageToken (\ s a -> s{_alPageToken = a})
+adcPageToken :: Lens' AdclientsList' (Maybe Text)
+adcPageToken
+  = lens _adcPageToken (\ s a -> s{_adcPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AdclientsList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+adcOauthToken :: Lens' AdclientsList' (Maybe Text)
+adcOauthToken
+  = lens _adcOauthToken
+      (\ s a -> s{_adcOauthToken = a})
 
 -- | The maximum number of ad clients to include in the response, used for
 -- paging.
-alMaxResults :: Lens' AdclientsList' (Maybe Int32)
-alMaxResults
-  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
+adcMaxResults :: Lens' AdclientsList' (Maybe Int32)
+adcMaxResults
+  = lens _adcMaxResults
+      (\ s a -> s{_adcMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-alFields :: Lens' AdclientsList' (Maybe Text)
-alFields = lens _alFields (\ s a -> s{_alFields = a})
+adcFields :: Lens' AdclientsList' (Maybe Text)
+adcFields
+  = lens _adcFields (\ s a -> s{_adcFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AdclientsList' Text
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+adcAlt :: Lens' AdclientsList' Alt
+adcAlt = lens _adcAlt (\ s a -> s{_adcAlt = a})
 
 instance GoogleRequest AdclientsList' where
         type Rs AdclientsList' = AdClients
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AdclientsList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp _alKey
-              _alPageToken
-              _alOauthToken
-              _alMaxResults
-              _alFields
-              _alAlt
+        requestWithRoute r u AdclientsList'{..}
+          = go _adcQuotaUser (Just _adcPrettyPrint) _adcUserIp
+              _adcKey
+              _adcPageToken
+              _adcOauthToken
+              _adcMaxResults
+              _adcFields
+              (Just _adcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdclientsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AdclientsListResource)
+                      r
                       u

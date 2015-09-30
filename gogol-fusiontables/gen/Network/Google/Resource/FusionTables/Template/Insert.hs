@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new template for the table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateInsert@.
-module FusionTables.Template.Insert
+module Network.Google.Resource.FusionTables.Template.Insert
     (
     -- * REST Resource
-      TemplateInsertAPI
+      TemplateInsertResource
 
     -- * Creating a Request
-    , templateInsert
-    , TemplateInsert
+    , templateInsert'
+    , TemplateInsert'
 
     -- * Request Lenses
     , tiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateInsert@ which the
--- 'TemplateInsert' request conforms to.
-type TemplateInsertAPI =
+-- 'TemplateInsert'' request conforms to.
+type TemplateInsertResource =
      "tables" :>
        Capture "tableId" Text :>
-         "templates" :> Post '[JSON] Template
+         "templates" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Template
 
 -- | Creates a new template for the table.
 --
--- /See:/ 'templateInsert' smart constructor.
-data TemplateInsert = TemplateInsert
+-- /See:/ 'templateInsert'' smart constructor.
+data TemplateInsert' = TemplateInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data TemplateInsert = TemplateInsert
     , _tiOauthToken  :: !(Maybe Text)
     , _tiTableId     :: !Text
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data TemplateInsert = TemplateInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-templateInsert
+templateInsert'
     :: Text -- ^ 'tableId'
-    -> TemplateInsert
-templateInsert pTiTableId_ =
-    TemplateInsert
+    -> TemplateInsert'
+templateInsert' pTiTableId_ =
+    TemplateInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIp = Nothing
@@ -94,7 +102,7 @@ templateInsert pTiTableId_ =
     , _tiOauthToken = Nothing
     , _tiTableId = pTiTableId_
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ tiFields :: Lens' TemplateInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TemplateInsert' Text
+tiAlt :: Lens' TemplateInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateInsert{..}
-          = go _tiQuotaUser _tiPrettyPrint _tiUserIp _tiKey
+        requestWithRoute r u TemplateInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+              _tiKey
               _tiOauthToken
               _tiTableId
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TemplateInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TemplateInsertResource)
                       r
                       u

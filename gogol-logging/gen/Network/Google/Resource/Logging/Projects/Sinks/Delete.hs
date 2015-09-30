@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- to the destination.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsSinksDelete@.
-module Logging.Projects.Sinks.Delete
+module Network.Google.Resource.Logging.Projects.Sinks.Delete
     (
     -- * REST Resource
-      ProjectsSinksDeleteAPI
+      ProjectsSinksDeleteResource
 
     -- * Creating a Request
-    , projectsSinksDelete
-    , ProjectsSinksDelete
+    , projectsSinksDelete'
+    , ProjectsSinksDelete'
 
     -- * Request Lenses
     , psdXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksDelete@ which the
--- 'ProjectsSinksDelete' request conforms to.
-type ProjectsSinksDeleteAPI =
+-- 'ProjectsSinksDelete'' request conforms to.
+type ProjectsSinksDeleteResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "sinks" :>
-             Capture "sinksId" Text :> Delete '[JSON] Empty
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 -- | Deletes a project sink. After deletion, no new log entries are written
 -- to the destination.
 --
--- /See:/ 'projectsSinksDelete' smart constructor.
-data ProjectsSinksDelete = ProjectsSinksDelete
+-- /See:/ 'projectsSinksDelete'' smart constructor.
+data ProjectsSinksDelete' = ProjectsSinksDelete'
     { _psdXgafv          :: !(Maybe Text)
     , _psdQuotaUser      :: !(Maybe Text)
     , _psdPrettyPrint    :: !Bool
@@ -114,12 +129,12 @@ data ProjectsSinksDelete = ProjectsSinksDelete
 -- * 'psdCallback'
 --
 -- * 'psdAlt'
-projectsSinksDelete
+projectsSinksDelete'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsSinksDelete
-projectsSinksDelete pPsdProjectsId_ pPsdSinksId_ =
-    ProjectsSinksDelete
+    -> ProjectsSinksDelete'
+projectsSinksDelete' pPsdProjectsId_ pPsdSinksId_ =
+    ProjectsSinksDelete'
     { _psdXgafv = Nothing
     , _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
@@ -222,10 +237,10 @@ psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
 instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksDelete{..}
-          = go _psdXgafv _psdQuotaUser _psdPrettyPrint
+        requestWithRoute r u ProjectsSinksDelete'{..}
+          = go _psdXgafv _psdQuotaUser (Just _psdPrettyPrint)
               _psdUploadProtocol
-              _psdPp
+              (Just _psdPp)
               _psdAccessToken
               _psdUploadType
               _psdBearerToken
@@ -235,9 +250,9 @@ instance GoogleRequest ProjectsSinksDelete' where
               _psdSinksId
               _psdFields
               _psdCallback
-              _psdAlt
+              (Just _psdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSinksDeleteAPI)
+                      (Proxy :: Proxy ProjectsSinksDeleteResource)
                       r
                       u

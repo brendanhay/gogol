@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of flights.
 --
 -- /See:/ <http://developers.google.com/qpx-express QPX Express API Reference> for @QpxExpressTripsSearch@.
-module QPXExpress.Trips.Search
+module Network.Google.Resource.QPXExpress.Trips.Search
     (
     -- * REST Resource
-      TripsSearchAPI
+      TripsSearchResource
 
     -- * Creating a Request
-    , tripsSearch
-    , TripsSearch
+    , tripsSearch'
+    , TripsSearch'
 
     -- * Request Lenses
     , tsQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.Prelude
 import           Network.Google.QPXExpress.Types
 
 -- | A resource alias for @QpxExpressTripsSearch@ which the
--- 'TripsSearch' request conforms to.
-type TripsSearchAPI =
-     "search" :> Post '[JSON] TripsSearchResponse
+-- 'TripsSearch'' request conforms to.
+type TripsSearchResource =
+     "search" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] TripsSearchResponse
 
 -- | Returns a list of flights.
 --
--- /See:/ 'tripsSearch' smart constructor.
-data TripsSearch = TripsSearch
+-- /See:/ 'tripsSearch'' smart constructor.
+data TripsSearch' = TripsSearch'
     { _tsQuotaUser   :: !(Maybe Text)
     , _tsPrettyPrint :: !Bool
     , _tsUserIp      :: !(Maybe Text)
     , _tsKey         :: !(Maybe Text)
     , _tsOauthToken  :: !(Maybe Text)
     , _tsFields      :: !(Maybe Text)
-    , _tsAlt         :: !Text
+    , _tsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearch'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data TripsSearch = TripsSearch
 -- * 'tsFields'
 --
 -- * 'tsAlt'
-tripsSearch
-    :: TripsSearch
-tripsSearch =
-    TripsSearch
+tripsSearch'
+    :: TripsSearch'
+tripsSearch' =
+    TripsSearch'
     { _tsQuotaUser = Nothing
     , _tsPrettyPrint = True
     , _tsUserIp = Nothing
     , _tsKey = Nothing
     , _tsOauthToken = Nothing
     , _tsFields = Nothing
-    , _tsAlt = "json"
+    , _tsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,16 +132,20 @@ tsFields :: Lens' TripsSearch' (Maybe Text)
 tsFields = lens _tsFields (\ s a -> s{_tsFields = a})
 
 -- | Data format for the response.
-tsAlt :: Lens' TripsSearch' Text
+tsAlt :: Lens' TripsSearch' Alt
 tsAlt = lens _tsAlt (\ s a -> s{_tsAlt = a})
 
 instance GoogleRequest TripsSearch' where
         type Rs TripsSearch' = TripsSearchResponse
         request = requestWithRoute defReq qPXExpressURL
-        requestWithRoute r u TripsSearch{..}
-          = go _tsQuotaUser _tsPrettyPrint _tsUserIp _tsKey
+        requestWithRoute r u TripsSearch'{..}
+          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIp
+              _tsKey
               _tsOauthToken
               _tsFields
-              _tsAlt
+              (Just _tsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TripsSearchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TripsSearchResource)
+                      r
+                      u

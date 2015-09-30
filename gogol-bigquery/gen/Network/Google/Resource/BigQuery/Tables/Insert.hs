@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new, empty table in the dataset.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesInsert@.
-module BigQuery.Tables.Insert
+module Network.Google.Resource.BigQuery.Tables.Insert
     (
     -- * REST Resource
-      TablesInsertAPI
+      TablesInsertResource
 
     -- * Creating a Request
-    , tablesInsert
-    , TablesInsert
+    , tablesInsert'
+    , TablesInsert'
 
     -- * Request Lenses
     , tiQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesInsert@ which the
--- 'TablesInsert' request conforms to.
-type TablesInsertAPI =
+-- 'TablesInsert'' request conforms to.
+type TablesInsertResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
-             "tables" :> Post '[JSON] Table
+             "tables" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Table
 
 -- | Creates a new, empty table in the dataset.
 --
--- /See:/ 'tablesInsert' smart constructor.
-data TablesInsert = TablesInsert
+-- /See:/ 'tablesInsert'' smart constructor.
+data TablesInsert' = TablesInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data TablesInsert = TablesInsert
     , _tiProjectId   :: !Text
     , _tiOauthToken  :: !(Maybe Text)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesInsert'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data TablesInsert = TablesInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-tablesInsert
+tablesInsert'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> TablesInsert
-tablesInsert pTiDatasetId_ pTiProjectId_ =
-    TablesInsert
+    -> TablesInsert'
+tablesInsert' pTiDatasetId_ pTiProjectId_ =
+    TablesInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIp = Nothing
@@ -102,7 +110,7 @@ tablesInsert pTiDatasetId_ pTiProjectId_ =
     , _tiProjectId = pTiProjectId_
     , _tiOauthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +157,22 @@ tiFields :: Lens' TablesInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TablesInsert' Text
+tiAlt :: Lens' TablesInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TablesInsert' where
         type Rs TablesInsert' = Table
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesInsert{..}
-          = go _tiQuotaUser _tiPrettyPrint _tiUserIp _tiKey
+        requestWithRoute r u TablesInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+              _tiKey
               _tiDatasetId
               _tiProjectId
               _tiOauthToken
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesInsertResource)
+                      r
                       u

@@ -17,6 +17,10 @@ module Network.Google.CivicInfo.Types
     -- * Service URL
       civicInfoURL
 
+    -- * RepresentativeInfoResponseDivisions
+    , RepresentativeInfoResponseDivisions
+    , representativeInfoResponseDivisions
+
     -- * VoterInfoResponse
     , VoterInfoResponse
     , voterInfoResponse
@@ -52,6 +56,12 @@ module Network.Google.CivicInfo.Types
     , gdOfficeIndices
     , gdAlsoKnownAs
 
+    -- * CivicinfoRepresentativesRepresentativeInfoByDivisionLevels
+    , CivicinfoRepresentativesRepresentativeInfoByDivisionLevels (..)
+
+    -- * CivicinfoRepresentativesRepresentativeInfoByAddressLevels
+    , CivicinfoRepresentativesRepresentativeInfoByAddressLevels (..)
+
     -- * Candidate
     , Candidate
     , candidate
@@ -73,6 +83,9 @@ module Network.Google.CivicInfo.Types
     , oSources
     , oName
     , oLevels
+
+    -- * CivicinfoRepresentativesRepresentativeInfoByDivisionRoles
+    , CivicinfoRepresentativesRepresentativeInfoByDivisionRoles (..)
 
     -- * Election
     , Election
@@ -155,6 +168,13 @@ module Network.Google.CivicInfo.Types
     , dsrResults
     , dsrKind
 
+    -- * RepresentativeInfoDataDivisions
+    , RepresentativeInfoDataDivisions
+    , representativeInfoDataDivisions
+
+    -- * CivicinfoRepresentativesRepresentativeInfoByAddressRoles
+    , CivicinfoRepresentativesRepresentativeInfoByAddressRoles (..)
+
     -- * ElectionOfficial
     , ElectionOfficial
     , electionOfficial
@@ -221,6 +241,9 @@ module Network.Google.CivicInfo.Types
     , offName
     , offEmails
     , offParty
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.CivicInfo.Types.Product
@@ -228,7 +251,7 @@ import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google Civic Information API.
-civicInfoURL :: BaseURL
+civicInfoURL :: BaseUrl
 civicInfoURL
   = BaseUrl Https
       "https://www.googleapis.com/civicinfo/v2/"

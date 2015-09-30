@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsGenerate@.
-module AdSense.Reports.Generate
+module Network.Google.Resource.AdSense.Reports.Generate
     (
     -- * REST Resource
-      ReportsGenerateAPI
+      ReportsGenerateResource
 
     -- * Creating a Request
-    , reportsGenerate
-    , ReportsGenerate
+    , reportsGenerate'
+    , ReportsGenerate'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -56,29 +57,37 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsGenerate@ which the
--- 'ReportsGenerate' request conforms to.
-type ReportsGenerateAPI =
+-- 'ReportsGenerate'' request conforms to.
+type ReportsGenerateResource =
      "reports" :>
-       QueryParams "dimension" Text :>
-         QueryParam "locale" Text :>
-           QueryParam "endDate" Text :>
-             QueryParam "startDate" Text :>
-               QueryParams "accountId" Text :>
-                 QueryParams "metric" Text :>
-                   QueryParam "currency" Text :>
-                     QueryParams "sort" Text :>
-                       QueryParams "filter" Text :>
-                         QueryParam "startIndex" Int32 :>
-                           QueryParam "useTimezoneReporting" Bool :>
-                             QueryParam "maxResults" Int32 :>
-                               Get '[JSON] AdsenseReportsGenerateResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParams "dimension" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "endDate" Text :>
+                   QueryParam "startDate" Text :>
+                     QueryParams "accountId" Text :>
+                       QueryParams "metric" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "currency" Text :>
+                             QueryParams "sort" Text :>
+                               QueryParams "filter" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "startIndex" Int32 :>
+                                     QueryParam "useTimezoneReporting" Bool :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON]
+                                               AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate
+-- /See:/ 'reportsGenerate'' smart constructor.
+data ReportsGenerate' = ReportsGenerate'
     { _rgQuotaUser            :: !(Maybe Text)
     , _rgPrettyPrint          :: !Bool
     , _rgUserIp               :: !(Maybe Text)
@@ -97,7 +106,7 @@ data ReportsGenerate = ReportsGenerate
     , _rgUseTimezoneReporting :: !(Maybe Bool)
     , _rgMaxResults           :: !(Maybe Int32)
     , _rgFields               :: !(Maybe Text)
-    , _rgAlt                  :: !Text
+    , _rgAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
@@ -141,12 +150,12 @@ data ReportsGenerate = ReportsGenerate
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-reportsGenerate
+reportsGenerate'
     :: Text -- ^ 'endDate'
     -> Text -- ^ 'startDate'
-    -> ReportsGenerate
-reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate
+    -> ReportsGenerate'
+reportsGenerate' pRgEndDate_ pRgStartDate_ =
+    ReportsGenerate'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIp = Nothing
@@ -165,7 +174,7 @@ reportsGenerate pRgEndDate_ pRgStartDate_ =
     , _rgUseTimezoneReporting = Nothing
     , _rgMaxResults = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -265,15 +274,15 @@ rgFields :: Lens' ReportsGenerate' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' ReportsGenerate' Text
+rgAlt :: Lens' ReportsGenerate' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' =
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsGenerate{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp
+        requestWithRoute r u ReportsGenerate'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
               _rgDimension
               _rgLocale
               (Just _rgEndDate)
@@ -289,8 +298,9 @@ instance GoogleRequest ReportsGenerate' where
               _rgUseTimezoneReporting
               _rgMaxResults
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGenerateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsGenerateResource)
                       r
                       u

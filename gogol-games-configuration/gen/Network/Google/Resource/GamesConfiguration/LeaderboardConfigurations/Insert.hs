@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsInsert@.
-module GamesConfiguration.LeaderboardConfigurations.Insert
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
     (
     -- * REST Resource
-      LeaderboardConfigurationsInsertAPI
+      LeaderboardConfigurationsInsertResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsInsert
-    , LeaderboardConfigurationsInsert
+    , leaderboardConfigurationsInsert'
+    , LeaderboardConfigurationsInsert'
 
     -- * Request Lenses
     , lciQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsInsert@ which the
--- 'LeaderboardConfigurationsInsert' request conforms to.
-type LeaderboardConfigurationsInsertAPI =
+-- 'LeaderboardConfigurationsInsert'' request conforms to.
+type LeaderboardConfigurationsInsertResource =
      "applications" :>
        Capture "applicationId" Text :>
          "leaderboards" :>
-           Post '[JSON] LeaderboardConfiguration
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] LeaderboardConfiguration
 
 -- | Insert a new leaderboard configuration in this application.
 --
--- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
-data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
+-- /See:/ 'leaderboardConfigurationsInsert'' smart constructor.
+data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
     { _lciQuotaUser     :: !(Maybe Text)
     , _lciPrettyPrint   :: !Bool
     , _lciUserIp        :: !(Maybe Text)
@@ -61,7 +69,7 @@ data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
     , _lciKey           :: !(Maybe Text)
     , _lciOauthToken    :: !(Maybe Text)
     , _lciFields        :: !(Maybe Text)
-    , _lciAlt           :: !Text
+    , _lciAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
 -- * 'lciFields'
 --
 -- * 'lciAlt'
-leaderboardConfigurationsInsert
+leaderboardConfigurationsInsert'
     :: Text -- ^ 'applicationId'
-    -> LeaderboardConfigurationsInsert
-leaderboardConfigurationsInsert pLciApplicationId_ =
-    LeaderboardConfigurationsInsert
+    -> LeaderboardConfigurationsInsert'
+leaderboardConfigurationsInsert' pLciApplicationId_ =
+    LeaderboardConfigurationsInsert'
     { _lciQuotaUser = Nothing
     , _lciPrettyPrint = True
     , _lciUserIp = Nothing
@@ -95,7 +103,7 @@ leaderboardConfigurationsInsert pLciApplicationId_ =
     , _lciKey = Nothing
     , _lciOauthToken = Nothing
     , _lciFields = Nothing
-    , _lciAlt = "json"
+    , _lciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ lciFields
   = lens _lciFields (\ s a -> s{_lciFields = a})
 
 -- | Data format for the response.
-lciAlt :: Lens' LeaderboardConfigurationsInsert' Text
+lciAlt :: Lens' LeaderboardConfigurationsInsert' Alt
 lciAlt = lens _lciAlt (\ s a -> s{_lciAlt = a})
 
 instance GoogleRequest
@@ -151,15 +159,16 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          LeaderboardConfigurationsInsert{..}
-          = go _lciQuotaUser _lciPrettyPrint _lciUserIp
+          LeaderboardConfigurationsInsert'{..}
+          = go _lciQuotaUser (Just _lciPrettyPrint) _lciUserIp
               _lciApplicationId
               _lciKey
               _lciOauthToken
               _lciFields
-              _lciAlt
+              (Just _lciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsInsertAPI)
+                      (Proxy ::
+                         Proxy LeaderboardConfigurationsInsertResource)
                       r
                       u

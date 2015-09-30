@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersList@.
-module TagManager.Accounts.Containers.List
+module Network.Google.Resource.TagManager.Accounts.Containers.List
     (
     -- * REST Resource
-      AccountsContainersListAPI
+      AccountsContainersListResource
 
     -- * Creating a Request
-    , accountsContainersList
-    , AccountsContainersList
+    , accountsContainersList'
+    , AccountsContainersList'
 
     -- * Request Lenses
     , aclQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersList@ which the
--- 'AccountsContainersList' request conforms to.
-type AccountsContainersListAPI =
+-- 'AccountsContainersList'' request conforms to.
+type AccountsContainersListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "containers" :> Get '[JSON] ListContainersResponse
+         "containers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ListContainersResponse
 
 -- | Lists all Containers that belongs to a GTM Account.
 --
--- /See:/ 'accountsContainersList' smart constructor.
-data AccountsContainersList = AccountsContainersList
+-- /See:/ 'accountsContainersList'' smart constructor.
+data AccountsContainersList' = AccountsContainersList'
     { _aclQuotaUser   :: !(Maybe Text)
     , _aclPrettyPrint :: !Bool
     , _aclUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data AccountsContainersList = AccountsContainersList
     , _aclKey         :: !(Maybe Text)
     , _aclOauthToken  :: !(Maybe Text)
     , _aclFields      :: !(Maybe Text)
-    , _aclAlt         :: !Text
+    , _aclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data AccountsContainersList = AccountsContainersList
 -- * 'aclFields'
 --
 -- * 'aclAlt'
-accountsContainersList
+accountsContainersList'
     :: Text -- ^ 'accountId'
-    -> AccountsContainersList
-accountsContainersList pAclAccountId_ =
-    AccountsContainersList
+    -> AccountsContainersList'
+accountsContainersList' pAclAccountId_ =
+    AccountsContainersList'
     { _aclQuotaUser = Nothing
     , _aclPrettyPrint = True
     , _aclUserIp = Nothing
@@ -94,7 +103,7 @@ accountsContainersList pAclAccountId_ =
     , _aclKey = Nothing
     , _aclOauthToken = Nothing
     , _aclFields = Nothing
-    , _aclAlt = "json"
+    , _aclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +148,22 @@ aclFields
   = lens _aclFields (\ s a -> s{_aclFields = a})
 
 -- | Data format for the response.
-aclAlt :: Lens' AccountsContainersList' Text
+aclAlt :: Lens' AccountsContainersList' Alt
 aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
 
 instance GoogleRequest AccountsContainersList' where
         type Rs AccountsContainersList' =
              ListContainersResponse
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersList{..}
-          = go _aclQuotaUser _aclPrettyPrint _aclUserIp
+        requestWithRoute r u AccountsContainersList'{..}
+          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIp
               _aclAccountId
               _aclKey
               _aclOauthToken
               _aclFields
-              _aclAlt
+              (Just _aclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersListAPI)
+                      (Proxy :: Proxy AccountsContainersListResource)
                       r
                       u

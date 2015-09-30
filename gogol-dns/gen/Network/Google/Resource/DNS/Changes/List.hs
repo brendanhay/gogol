@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesList@.
-module DNS.Changes.List
+module Network.Google.Resource.DNS.Changes.List
     (
     -- * REST Resource
-      ChangesListAPI
+      ChangesListResource
 
     -- * Creating a Request
-    , changesList
-    , ChangesList
+    , changesList'
+    , ChangesList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSChangesList@ which the
--- 'ChangesList' request conforms to.
-type ChangesListAPI =
+-- 'ChangesList'' request conforms to.
+type ChangesListResource =
      Capture "project" Text :>
        "managedZones" :>
          Capture "managedZone" Text :>
            "changes" :>
-             QueryParam "sortOrder" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "sortBy" Text :>
-                     Get '[JSON] ChangesListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "sortOrder" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 QueryParam "sortBy" DNSChangesListSortBy :>
+                                   Get '[JSON] ChangesListResponse
 
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
--- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList
+-- /See:/ 'changesList'' smart constructor.
+data ChangesList' = ChangesList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clProject     :: !Text
@@ -75,8 +83,8 @@ data ChangesList = ChangesList
     , _clManagedZone :: !Text
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
-    , _clSortBy      :: !Text
+    , _clAlt         :: !Alt
+    , _clSortBy      :: !DNSChangesListSortBy
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data ChangesList = ChangesList
 -- * 'clAlt'
 --
 -- * 'clSortBy'
-changesList
+changesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
-    -> ChangesList
-changesList pClProject_ pClManagedZone_ =
-    ChangesList
+    -> ChangesList'
+changesList' pClProject_ pClManagedZone_ =
+    ChangesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clProject = pClProject_
@@ -125,8 +133,8 @@ changesList pClProject_ pClManagedZone_ =
     , _clManagedZone = pClManagedZone_
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
-    , _clSortBy = "changeSequence"
+    , _clAlt = JSON
+    , _clSortBy = ChangeSequence
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -192,18 +200,19 @@ clFields :: Lens' ChangesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' ChangesList' Text
+clAlt :: Lens' ChangesList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 -- | Sorting criterion. The only supported value is change sequence.
-clSortBy :: Lens' ChangesList' Text
+clSortBy :: Lens' ChangesList' DNSChangesListSortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesList{..}
-          = go _clQuotaUser _clPrettyPrint _clProject _clUserIp
+        requestWithRoute r u ChangesList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clProject
+              _clUserIp
               _clSortOrder
               _clKey
               _clPageToken
@@ -211,7 +220,10 @@ instance GoogleRequest ChangesList' where
               _clManagedZone
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
               (Just _clSortBy)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ChangesListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsPatch@.
-module DFAReporting.CreativeGroups.Patch
+module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
     (
     -- * REST Resource
-      CreativeGroupsPatchAPI
+      CreativeGroupsPatchResource
 
     -- * Creating a Request
-    , creativeGroupsPatch
-    , CreativeGroupsPatch
+    , creativeGroupsPatch'
+    , CreativeGroupsPatch'
 
     -- * Request Lenses
     , cgpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeGroupsPatch@ which the
--- 'CreativeGroupsPatch' request conforms to.
-type CreativeGroupsPatchAPI =
+-- 'CreativeGroupsPatch'' request conforms to.
+type CreativeGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           QueryParam "id" Int64 :> Patch '[JSON] CreativeGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] CreativeGroup
 
 -- | Updates an existing creative group. This method supports patch
 -- semantics.
 --
--- /See:/ 'creativeGroupsPatch' smart constructor.
-data CreativeGroupsPatch = CreativeGroupsPatch
+-- /See:/ 'creativeGroupsPatch'' smart constructor.
+data CreativeGroupsPatch' = CreativeGroupsPatch'
     { _cgpQuotaUser   :: !(Maybe Text)
     , _cgpPrettyPrint :: !Bool
     , _cgpUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data CreativeGroupsPatch = CreativeGroupsPatch
     , _cgpId          :: !Int64
     , _cgpOauthToken  :: !(Maybe Text)
     , _cgpFields      :: !(Maybe Text)
-    , _cgpAlt         :: !Text
+    , _cgpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data CreativeGroupsPatch = CreativeGroupsPatch
 -- * 'cgpFields'
 --
 -- * 'cgpAlt'
-creativeGroupsPatch
+creativeGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeGroupsPatch
-creativeGroupsPatch pCgpProfileId_ pCgpId_ =
-    CreativeGroupsPatch
+    -> CreativeGroupsPatch'
+creativeGroupsPatch' pCgpProfileId_ pCgpId_ =
+    CreativeGroupsPatch'
     { _cgpQuotaUser = Nothing
     , _cgpPrettyPrint = True
     , _cgpUserIp = Nothing
@@ -103,7 +111,7 @@ creativeGroupsPatch pCgpProfileId_ pCgpId_ =
     , _cgpId = pCgpId_
     , _cgpOauthToken = Nothing
     , _cgpFields = Nothing
-    , _cgpAlt = "json"
+    , _cgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ cgpFields
   = lens _cgpFields (\ s a -> s{_cgpFields = a})
 
 -- | Data format for the response.
-cgpAlt :: Lens' CreativeGroupsPatch' Text
+cgpAlt :: Lens' CreativeGroupsPatch' Alt
 cgpAlt = lens _cgpAlt (\ s a -> s{_cgpAlt = a})
 
 instance GoogleRequest CreativeGroupsPatch' where
         type Rs CreativeGroupsPatch' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsPatch{..}
-          = go _cgpQuotaUser _cgpPrettyPrint _cgpUserIp
+        requestWithRoute r u CreativeGroupsPatch'{..}
+          = go _cgpQuotaUser (Just _cgpPrettyPrint) _cgpUserIp
               _cgpProfileId
               _cgpKey
               (Just _cgpId)
               _cgpOauthToken
               _cgpFields
-              _cgpAlt
+              (Just _cgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeGroupsPatchAPI)
+                      (Proxy :: Proxy CreativeGroupsPatchResource)
                       r
                       u

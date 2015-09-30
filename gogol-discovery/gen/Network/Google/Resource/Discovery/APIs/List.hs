@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve the list of APIs supported at this endpoint.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsList@.
-module Discovery.APIs.List
+module Network.Google.Resource.Discovery.APIs.List
     (
     -- * REST Resource
-      ApisListAPI
+      ApisListResource
 
     -- * Creating a Request
-    , aPIsList
-    , APIsList
+    , aPIsList'
+    , APIsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DiscoveryAPIsList@ which the
--- 'APIsList' request conforms to.
-type ApisListAPI =
+-- 'APIsList'' request conforms to.
+type ApisListResource =
      "apis" :>
-       QueryParam "preferred" Bool :>
-         QueryParam "name" Text :> Get '[JSON] DirectoryList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "preferred" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "name" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] DirectoryList
 
 -- | Retrieve the list of APIs supported at this endpoint.
 --
--- /See:/ 'aPIsList' smart constructor.
-data APIsList = APIsList
+-- /See:/ 'aPIsList'' smart constructor.
+data APIsList' = APIsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alPreferred   :: !Bool
@@ -62,7 +70,7 @@ data APIsList = APIsList
     , _alName        :: !(Maybe Text)
     , _alOauthToken  :: !(Maybe Text)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIsList'' with the minimum fields required to make a request.
@@ -86,10 +94,10 @@ data APIsList = APIsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-aPIsList
-    :: APIsList
-aPIsList =
-    APIsList
+aPIsList'
+    :: APIsList'
+aPIsList' =
+    APIsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alPreferred = False
@@ -98,7 +106,7 @@ aPIsList =
     , _alName = Nothing
     , _alOauthToken = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,19 +152,21 @@ alFields :: Lens' APIsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' APIsList' Text
+alAlt :: Lens' APIsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
         request = requestWithRoute defReq discoveryURL
-        requestWithRoute r u APIsList{..}
-          = go _alQuotaUser _alPrettyPrint (Just _alPreferred)
+        requestWithRoute r u APIsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint)
+              (Just _alPreferred)
               _alUserIp
               _alKey
               _alName
               _alOauthToken
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ApisListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ApisListResource) r
+                      u

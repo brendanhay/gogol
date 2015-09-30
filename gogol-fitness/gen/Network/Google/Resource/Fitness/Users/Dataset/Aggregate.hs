@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- request.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDatasetAggregate@.
-module Fitness.Users.Dataset.Aggregate
+module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
     (
     -- * REST Resource
-      UsersDatasetAggregateAPI
+      UsersDatasetAggregateResource
 
     -- * Creating a Request
-    , usersDatasetAggregate
-    , UsersDatasetAggregate
+    , usersDatasetAggregate'
+    , UsersDatasetAggregate'
 
     -- * Request Lenses
     , udaQuotaUser
@@ -46,18 +47,26 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDatasetAggregate@ which the
--- 'UsersDatasetAggregate' request conforms to.
-type UsersDatasetAggregateAPI =
+-- 'UsersDatasetAggregate'' request conforms to.
+type UsersDatasetAggregateResource =
      Capture "userId" Text :>
-       "dataset:aggregate" :> Post '[JSON] AggregateResponse
+       "dataset:aggregate" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] AggregateResponse
 
 -- | Aggregates data of a certain type or stream into buckets divided by a
 -- given type of boundary. Multiple data sets of multiple types and from
 -- multiple sources can be aggreated into exactly one bucket type per
 -- request.
 --
--- /See:/ 'usersDatasetAggregate' smart constructor.
-data UsersDatasetAggregate = UsersDatasetAggregate
+-- /See:/ 'usersDatasetAggregate'' smart constructor.
+data UsersDatasetAggregate' = UsersDatasetAggregate'
     { _udaQuotaUser   :: !(Maybe Text)
     , _udaPrettyPrint :: !Bool
     , _udaUserIp      :: !(Maybe Text)
@@ -65,7 +74,7 @@ data UsersDatasetAggregate = UsersDatasetAggregate
     , _udaKey         :: !(Maybe Text)
     , _udaOauthToken  :: !(Maybe Text)
     , _udaFields      :: !(Maybe Text)
-    , _udaAlt         :: !Text
+    , _udaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDatasetAggregate'' with the minimum fields required to make a request.
@@ -87,11 +96,11 @@ data UsersDatasetAggregate = UsersDatasetAggregate
 -- * 'udaFields'
 --
 -- * 'udaAlt'
-usersDatasetAggregate
+usersDatasetAggregate'
     :: Text -- ^ 'userId'
-    -> UsersDatasetAggregate
-usersDatasetAggregate pUdaUserId_ =
-    UsersDatasetAggregate
+    -> UsersDatasetAggregate'
+usersDatasetAggregate' pUdaUserId_ =
+    UsersDatasetAggregate'
     { _udaQuotaUser = Nothing
     , _udaPrettyPrint = True
     , _udaUserIp = Nothing
@@ -99,7 +108,7 @@ usersDatasetAggregate pUdaUserId_ =
     , _udaKey = Nothing
     , _udaOauthToken = Nothing
     , _udaFields = Nothing
-    , _udaAlt = "json"
+    , _udaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,21 +154,21 @@ udaFields
   = lens _udaFields (\ s a -> s{_udaFields = a})
 
 -- | Data format for the response.
-udaAlt :: Lens' UsersDatasetAggregate' Text
+udaAlt :: Lens' UsersDatasetAggregate' Alt
 udaAlt = lens _udaAlt (\ s a -> s{_udaAlt = a})
 
 instance GoogleRequest UsersDatasetAggregate' where
         type Rs UsersDatasetAggregate' = AggregateResponse
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDatasetAggregate{..}
-          = go _udaQuotaUser _udaPrettyPrint _udaUserIp
+        requestWithRoute r u UsersDatasetAggregate'{..}
+          = go _udaQuotaUser (Just _udaPrettyPrint) _udaUserIp
               _udaUserId
               _udaKey
               _udaOauthToken
               _udaFields
-              _udaAlt
+              (Just _udaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDatasetAggregateAPI)
+                      (Proxy :: Proxy UsersDatasetAggregateResource)
                       r
                       u

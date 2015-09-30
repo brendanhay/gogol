@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,160 +20,169 @@
 -- | Creates a GTM Variable.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesCreate@.
-module TagManager.Accounts.Containers.Variables.Create
+module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
     (
     -- * REST Resource
-      AccountsContainersVariablesCreateAPI
+      AccountsContainersVariablesCreateResource
 
     -- * Creating a Request
-    , accountsContainersVariablesCreate
-    , AccountsContainersVariablesCreate
+    , accountsContainersVariablesCreate'
+    , AccountsContainersVariablesCreate'
 
     -- * Request Lenses
-    , acvcQuotaUser
-    , acvcPrettyPrint
-    , acvcContainerId
-    , acvcUserIp
-    , acvcAccountId
-    , acvcKey
-    , acvcOauthToken
-    , acvcFields
-    , acvcAlt
+    , acvccQuotaUser
+    , acvccPrettyPrint
+    , acvccContainerId
+    , acvccUserIp
+    , acvccAccountId
+    , acvccKey
+    , acvccOauthToken
+    , acvccFields
+    , acvccAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVariablesCreate@ which the
--- 'AccountsContainersVariablesCreate' request conforms to.
-type AccountsContainersVariablesCreateAPI =
+-- 'AccountsContainersVariablesCreate'' request conforms to.
+type AccountsContainersVariablesCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "variables" :> Post '[JSON] Variable
+             "variables" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Variable
 
 -- | Creates a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesCreate' smart constructor.
-data AccountsContainersVariablesCreate = AccountsContainersVariablesCreate
-    { _acvcQuotaUser   :: !(Maybe Text)
-    , _acvcPrettyPrint :: !Bool
-    , _acvcContainerId :: !Text
-    , _acvcUserIp      :: !(Maybe Text)
-    , _acvcAccountId   :: !Text
-    , _acvcKey         :: !(Maybe Text)
-    , _acvcOauthToken  :: !(Maybe Text)
-    , _acvcFields      :: !(Maybe Text)
-    , _acvcAlt         :: !Text
+-- /See:/ 'accountsContainersVariablesCreate'' smart constructor.
+data AccountsContainersVariablesCreate' = AccountsContainersVariablesCreate'
+    { _acvccQuotaUser   :: !(Maybe Text)
+    , _acvccPrettyPrint :: !Bool
+    , _acvccContainerId :: !Text
+    , _acvccUserIp      :: !(Maybe Text)
+    , _acvccAccountId   :: !Text
+    , _acvccKey         :: !(Maybe Text)
+    , _acvccOauthToken  :: !(Maybe Text)
+    , _acvccFields      :: !(Maybe Text)
+    , _acvccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvcQuotaUser'
+-- * 'acvccQuotaUser'
 --
--- * 'acvcPrettyPrint'
+-- * 'acvccPrettyPrint'
 --
--- * 'acvcContainerId'
+-- * 'acvccContainerId'
 --
--- * 'acvcUserIp'
+-- * 'acvccUserIp'
 --
--- * 'acvcAccountId'
+-- * 'acvccAccountId'
 --
--- * 'acvcKey'
+-- * 'acvccKey'
 --
--- * 'acvcOauthToken'
+-- * 'acvccOauthToken'
 --
--- * 'acvcFields'
+-- * 'acvccFields'
 --
--- * 'acvcAlt'
-accountsContainersVariablesCreate
+-- * 'acvccAlt'
+accountsContainersVariablesCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVariablesCreate
-accountsContainersVariablesCreate pAcvcContainerId_ pAcvcAccountId_ =
-    AccountsContainersVariablesCreate
-    { _acvcQuotaUser = Nothing
-    , _acvcPrettyPrint = True
-    , _acvcContainerId = pAcvcContainerId_
-    , _acvcUserIp = Nothing
-    , _acvcAccountId = pAcvcAccountId_
-    , _acvcKey = Nothing
-    , _acvcOauthToken = Nothing
-    , _acvcFields = Nothing
-    , _acvcAlt = "json"
+    -> AccountsContainersVariablesCreate'
+accountsContainersVariablesCreate' pAcvccContainerId_ pAcvccAccountId_ =
+    AccountsContainersVariablesCreate'
+    { _acvccQuotaUser = Nothing
+    , _acvccPrettyPrint = True
+    , _acvccContainerId = pAcvccContainerId_
+    , _acvccUserIp = Nothing
+    , _acvccAccountId = pAcvccAccountId_
+    , _acvccKey = Nothing
+    , _acvccOauthToken = Nothing
+    , _acvccFields = Nothing
+    , _acvccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-acvcQuotaUser :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
-acvcQuotaUser
-  = lens _acvcQuotaUser
-      (\ s a -> s{_acvcQuotaUser = a})
+acvccQuotaUser :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
+acvccQuotaUser
+  = lens _acvccQuotaUser
+      (\ s a -> s{_acvccQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-acvcPrettyPrint :: Lens' AccountsContainersVariablesCreate' Bool
-acvcPrettyPrint
-  = lens _acvcPrettyPrint
-      (\ s a -> s{_acvcPrettyPrint = a})
+acvccPrettyPrint :: Lens' AccountsContainersVariablesCreate' Bool
+acvccPrettyPrint
+  = lens _acvccPrettyPrint
+      (\ s a -> s{_acvccPrettyPrint = a})
 
 -- | The GTM Container ID.
-acvcContainerId :: Lens' AccountsContainersVariablesCreate' Text
-acvcContainerId
-  = lens _acvcContainerId
-      (\ s a -> s{_acvcContainerId = a})
+acvccContainerId :: Lens' AccountsContainersVariablesCreate' Text
+acvccContainerId
+  = lens _acvccContainerId
+      (\ s a -> s{_acvccContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvcUserIp :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
-acvcUserIp
-  = lens _acvcUserIp (\ s a -> s{_acvcUserIp = a})
+acvccUserIp :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
+acvccUserIp
+  = lens _acvccUserIp (\ s a -> s{_acvccUserIp = a})
 
 -- | The GTM Account ID.
-acvcAccountId :: Lens' AccountsContainersVariablesCreate' Text
-acvcAccountId
-  = lens _acvcAccountId
-      (\ s a -> s{_acvcAccountId = a})
+acvccAccountId :: Lens' AccountsContainersVariablesCreate' Text
+acvccAccountId
+  = lens _acvccAccountId
+      (\ s a -> s{_acvccAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvcKey :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
-acvcKey = lens _acvcKey (\ s a -> s{_acvcKey = a})
+acvccKey :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
+acvccKey = lens _acvccKey (\ s a -> s{_acvccKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvcOauthToken :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
-acvcOauthToken
-  = lens _acvcOauthToken
-      (\ s a -> s{_acvcOauthToken = a})
+acvccOauthToken :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
+acvccOauthToken
+  = lens _acvccOauthToken
+      (\ s a -> s{_acvccOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-acvcFields :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
-acvcFields
-  = lens _acvcFields (\ s a -> s{_acvcFields = a})
+acvccFields :: Lens' AccountsContainersVariablesCreate' (Maybe Text)
+acvccFields
+  = lens _acvccFields (\ s a -> s{_acvccFields = a})
 
 -- | Data format for the response.
-acvcAlt :: Lens' AccountsContainersVariablesCreate' Text
-acvcAlt = lens _acvcAlt (\ s a -> s{_acvcAlt = a})
+acvccAlt :: Lens' AccountsContainersVariablesCreate' Alt
+acvccAlt = lens _acvccAlt (\ s a -> s{_acvccAlt = a})
 
 instance GoogleRequest
          AccountsContainersVariablesCreate' where
         type Rs AccountsContainersVariablesCreate' = Variable
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVariablesCreate{..}
-          = go _acvcQuotaUser _acvcPrettyPrint _acvcContainerId
-              _acvcUserIp
-              _acvcAccountId
-              _acvcKey
-              _acvcOauthToken
-              _acvcFields
-              _acvcAlt
+          AccountsContainersVariablesCreate'{..}
+          = go _acvccQuotaUser (Just _acvccPrettyPrint)
+              _acvccContainerId
+              _acvccUserIp
+              _acvccAccountId
+              _acvccKey
+              _acvccOauthToken
+              _acvccFields
+              (Just _acvccAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVariablesCreateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVariablesCreateResource)
                       r
                       u

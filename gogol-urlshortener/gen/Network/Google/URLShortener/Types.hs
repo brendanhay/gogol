@@ -33,6 +33,9 @@ module Network.Google.URLShortener.Types
     , scCount
     , scId
 
+    -- * URLshortenerURLListProjection
+    , URLshortenerURLListProjection (..)
+
     -- * AnalyticsSnapshot
     , AnalyticsSnapshot
     , analyticsSnapshot
@@ -52,6 +55,9 @@ module Network.Google.URLShortener.Types
     , asTwoHours
     , asMonth
 
+    -- * URLshortenerURLGetProjection
+    , URLshortenerURLGetProjection (..)
+
     -- * URLHistory
     , URLHistory
     , uRLHistory
@@ -60,6 +66,9 @@ module Network.Google.URLShortener.Types
     , uhItemsPerPage
     , uhKind
     , uhItems
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -67,7 +76,7 @@ import           Network.Google.URLShortener.Types.Product
 import           Network.Google.URLShortener.Types.Sum
 
 -- | URL referring to version 'v1' of the URL Shortener API.
-uRLShortenerURL :: BaseURL
+uRLShortenerURL :: BaseUrl
 uRLShortenerURL
   = BaseUrl Https
       "https://www.googleapis.com/urlshortener/v1/"

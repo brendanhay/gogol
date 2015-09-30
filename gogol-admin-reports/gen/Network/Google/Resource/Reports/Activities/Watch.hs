@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Push changes to activities
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsActivitiesWatch@.
-module Reports.Activities.Watch
+module Network.Google.Resource.Reports.Activities.Watch
     (
     -- * REST Resource
-      ActivitiesWatchAPI
+      ActivitiesWatchResource
 
     -- * Creating a Request
-    , activitiesWatch
-    , ActivitiesWatch
+    , activitiesWatch'
+    , ActivitiesWatch'
 
     -- * Request Lenses
     , awQuotaUser
@@ -52,28 +53,35 @@ import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReportsActivitiesWatch@ which the
--- 'ActivitiesWatch' request conforms to.
-type ActivitiesWatchAPI =
+-- 'ActivitiesWatch'' request conforms to.
+type ActivitiesWatchResource =
      "activity" :>
        "users" :>
          Capture "userKey" Text :>
            "applications" :>
              Capture "applicationName" Text :>
                "watch" :>
-                 QueryParam "startTime" Text :>
-                   QueryParam "filters" Text :>
-                     QueryParam "customerId" Text :>
-                       QueryParam "actorIpAddress" Text :>
-                         QueryParam "endTime" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "eventName" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 Post '[JSON] Channel
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "startTime" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "filters" Text :>
+                           QueryParam "customerId" Text :>
+                             QueryParam "actorIpAddress" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "endTime" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "eventName" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Post '[JSON] Channel
 
 -- | Push changes to activities
 --
--- /See:/ 'activitiesWatch' smart constructor.
-data ActivitiesWatch = ActivitiesWatch
+-- /See:/ 'activitiesWatch'' smart constructor.
+data ActivitiesWatch' = ActivitiesWatch'
     { _awQuotaUser       :: !(Maybe Text)
     , _awPrettyPrint     :: !Bool
     , _awStartTime       :: !(Maybe Text)
@@ -90,7 +98,7 @@ data ActivitiesWatch = ActivitiesWatch
     , _awUserKey         :: !Text
     , _awMaxResults      :: !(Maybe Int32)
     , _awFields          :: !(Maybe Text)
-    , _awAlt             :: !Text
+    , _awAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch'' with the minimum fields required to make a request.
@@ -130,12 +138,12 @@ data ActivitiesWatch = ActivitiesWatch
 -- * 'awFields'
 --
 -- * 'awAlt'
-activitiesWatch
+activitiesWatch'
     :: Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
-    -> ActivitiesWatch
-activitiesWatch pAwApplicationName_ pAwUserKey_ =
-    ActivitiesWatch
+    -> ActivitiesWatch'
+activitiesWatch' pAwApplicationName_ pAwUserKey_ =
+    ActivitiesWatch'
     { _awQuotaUser = Nothing
     , _awPrettyPrint = True
     , _awStartTime = Nothing
@@ -152,7 +160,7 @@ activitiesWatch pAwApplicationName_ pAwUserKey_ =
     , _awUserKey = pAwUserKey_
     , _awMaxResults = Nothing
     , _awFields = Nothing
-    , _awAlt = "json"
+    , _awAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -245,14 +253,14 @@ awFields :: Lens' ActivitiesWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
 -- | Data format for the response.
-awAlt :: Lens' ActivitiesWatch' Text
+awAlt :: Lens' ActivitiesWatch' Alt
 awAlt = lens _awAlt (\ s a -> s{_awAlt = a})
 
 instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
         request = requestWithRoute defReq adminReportsURL
-        requestWithRoute r u ActivitiesWatch{..}
-          = go _awQuotaUser _awPrettyPrint _awStartTime
+        requestWithRoute r u ActivitiesWatch'{..}
+          = go _awQuotaUser (Just _awPrettyPrint) _awStartTime
               _awUserIp
               _awFilters
               _awCustomerId
@@ -266,8 +274,9 @@ instance GoogleRequest ActivitiesWatch' where
               _awUserKey
               _awMaxResults
               _awFields
-              _awAlt
+              (Just _awAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesWatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesWatchResource)
                       r
                       u

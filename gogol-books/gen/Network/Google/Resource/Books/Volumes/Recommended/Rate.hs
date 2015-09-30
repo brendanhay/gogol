@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Rate a recommended book for the current user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesRecommendedRate@.
-module Books.Volumes.Recommended.Rate
+module Network.Google.Resource.Books.Volumes.Recommended.Rate
     (
     -- * REST Resource
-      VolumesRecommendedRateAPI
+      VolumesRecommendedRateResource
 
     -- * Creating a Request
-    , volumesRecommendedRate
-    , VolumesRecommendedRate
+    , volumesRecommendedRate'
+    , VolumesRecommendedRate'
 
     -- * Request Lenses
     , vrrQuotaUser
@@ -46,23 +47,32 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesRecommendedRate@ which the
--- 'VolumesRecommendedRate' request conforms to.
-type VolumesRecommendedRateAPI =
+-- 'VolumesRecommendedRate'' request conforms to.
+type VolumesRecommendedRateResource =
      "volumes" :>
        "recommended" :>
          "rate" :>
-           QueryParam "rating" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "volumeId" Text :>
-                 QueryParam "source" Text :>
-                   Post '[JSON] BooksVolumesRecommendedRateResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "rating" BooksVolumesRecommendedRateRating
+               :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "volumeId" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON]
+                                   BooksVolumesRecommendedRateResponse
 
 -- | Rate a recommended book for the current user.
 --
--- /See:/ 'volumesRecommendedRate' smart constructor.
-data VolumesRecommendedRate = VolumesRecommendedRate
+-- /See:/ 'volumesRecommendedRate'' smart constructor.
+data VolumesRecommendedRate' = VolumesRecommendedRate'
     { _vrrQuotaUser   :: !(Maybe Text)
-    , _vrrRating      :: !Text
+    , _vrrRating      :: !BooksVolumesRecommendedRateRating
     , _vrrPrettyPrint :: !Bool
     , _vrrUserIp      :: !(Maybe Text)
     , _vrrLocale      :: !(Maybe Text)
@@ -71,7 +81,7 @@ data VolumesRecommendedRate = VolumesRecommendedRate
     , _vrrSource      :: !(Maybe Text)
     , _vrrOauthToken  :: !(Maybe Text)
     , _vrrFields      :: !(Maybe Text)
-    , _vrrAlt         :: !Text
+    , _vrrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesRecommendedRate'' with the minimum fields required to make a request.
@@ -99,12 +109,12 @@ data VolumesRecommendedRate = VolumesRecommendedRate
 -- * 'vrrFields'
 --
 -- * 'vrrAlt'
-volumesRecommendedRate
-    :: Text -- ^ 'rating'
+volumesRecommendedRate'
+    :: BooksVolumesRecommendedRateRating -- ^ 'rating'
     -> Text -- ^ 'volumeId'
-    -> VolumesRecommendedRate
-volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
-    VolumesRecommendedRate
+    -> VolumesRecommendedRate'
+volumesRecommendedRate' pVrrRating_ pVrrVolumeId_ =
+    VolumesRecommendedRate'
     { _vrrQuotaUser = Nothing
     , _vrrRating = pVrrRating_
     , _vrrPrettyPrint = True
@@ -115,7 +125,7 @@ volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
     , _vrrSource = Nothing
     , _vrrOauthToken = Nothing
     , _vrrFields = Nothing
-    , _vrrAlt = "json"
+    , _vrrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,7 +136,7 @@ vrrQuotaUser
   = lens _vrrQuotaUser (\ s a -> s{_vrrQuotaUser = a})
 
 -- | Rating to be given to the volume.
-vrrRating :: Lens' VolumesRecommendedRate' Text
+vrrRating :: Lens' VolumesRecommendedRate' BooksVolumesRecommendedRateRating
 vrrRating
   = lens _vrrRating (\ s a -> s{_vrrRating = a})
 
@@ -176,15 +186,16 @@ vrrFields
   = lens _vrrFields (\ s a -> s{_vrrFields = a})
 
 -- | Data format for the response.
-vrrAlt :: Lens' VolumesRecommendedRate' Text
+vrrAlt :: Lens' VolumesRecommendedRate' Alt
 vrrAlt = lens _vrrAlt (\ s a -> s{_vrrAlt = a})
 
 instance GoogleRequest VolumesRecommendedRate' where
         type Rs VolumesRecommendedRate' =
              BooksVolumesRecommendedRateResponse
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesRecommendedRate{..}
-          = go _vrrQuotaUser (Just _vrrRating) _vrrPrettyPrint
+        requestWithRoute r u VolumesRecommendedRate'{..}
+          = go _vrrQuotaUser (Just _vrrRating)
+              (Just _vrrPrettyPrint)
               _vrrUserIp
               _vrrLocale
               _vrrKey
@@ -192,9 +203,9 @@ instance GoogleRequest VolumesRecommendedRate' where
               _vrrSource
               _vrrOauthToken
               _vrrFields
-              _vrrAlt
+              (Just _vrrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VolumesRecommendedRateAPI)
+                      (Proxy :: Proxy VolumesRecommendedRateResource)
                       r
                       u

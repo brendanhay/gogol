@@ -22,6 +22,10 @@ module Network.Google.PlayDeveloper.Types
     , inappproductsUpdateResponse
     , iurInappproduct
 
+    -- * InAppProductListings
+    , InAppProductListings
+    , inAppProductListings
+
     -- * MonthDay
     , MonthDay
     , monthDay
@@ -35,6 +39,9 @@ module Network.Google.PlayDeveloper.Types
     , ibreInappproductsinsertrequest
     , ibreInappproductsupdaterequest
     , ibreBatchId
+
+    -- * AndroidpublisherEditsExpansionfilesPatchExpansionFileType
+    , AndroidpublisherEditsExpansionfilesPatchExpansionFileType (..)
 
     -- * InAppProductListing
     , InAppProductListing
@@ -60,6 +67,9 @@ module Network.Google.PlayDeveloper.Types
     , expansionFile
     , efFileSize
     , efReferencesVersion
+
+    -- * AndroidpublisherEditsExpansionfilesGetExpansionFileType
+    , AndroidpublisherEditsExpansionfilesGetExpansionFileType (..)
 
     -- * Image
     , Image
@@ -135,6 +145,9 @@ module Network.Google.PlayDeveloper.Types
     , alLanguage
     , alRecentChanges
 
+    -- * AndroidpublisherEditsTracksUpdateTrack
+    , AndroidpublisherEditsTracksUpdateTrack (..)
+
     -- * SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
     , subscriptionPurchasesDeferResponse
@@ -189,6 +202,10 @@ module Network.Google.PlayDeveloper.Types
     , ehaUsesPermissions
     , ehaCertificateBase64s
 
+    -- * InAppProductPrices
+    , InAppProductPrices
+    , inAppProductPrices
+
     -- * ImagesUploadResponse
     , ImagesUploadResponse
     , imagesUploadResponse
@@ -199,6 +216,9 @@ module Network.Google.PlayDeveloper.Types
     , expansionFilesUploadResponse
     , efurExpansionFile
 
+    -- * AndroidpublisherEditsTracksGetTrack
+    , AndroidpublisherEditsTracksGetTrack (..)
+
     -- * InappproductsListResponse
     , InappproductsListResponse
     , inappproductsListResponse
@@ -207,11 +227,17 @@ module Network.Google.PlayDeveloper.Types
     , ilrKind
     , ilrInappproduct
 
+    -- * AndroidpublisherEditsTracksPatchTrack
+    , AndroidpublisherEditsTracksPatchTrack (..)
+
     -- * SubscriptionDeferralInfo
     , SubscriptionDeferralInfo
     , subscriptionDeferralInfo
     , sdiDesiredExpiryTimeMillis
     , sdiExpectedExpiryTimeMillis
+
+    -- * AndroidpublisherEditsExpansionfilesUploadExpansionFileType
+    , AndroidpublisherEditsExpansionfilesUploadExpansionFileType (..)
 
     -- * ApksAddExternallyHostedResponse
     , ApksAddExternallyHostedResponse
@@ -228,6 +254,9 @@ module Network.Google.PlayDeveloper.Types
     , InappproductsInsertResponse
     , inappproductsInsertResponse
     , iirInappproduct
+
+    -- * AndroidpublisherEditsImagesUploadImageType
+    , AndroidpublisherEditsImagesUploadImageType (..)
 
     -- * Price
     , Price
@@ -262,6 +291,9 @@ module Network.Google.PlayDeveloper.Types
     , apkBinary
     , abSha1
 
+    -- * AndroidpublisherEditsImagesDeleteImageType
+    , AndroidpublisherEditsImagesDeleteImageType (..)
+
     -- * ExternallyHostedApkUsesPermission
     , ExternallyHostedApkUsesPermission
     , externallyHostedApkUsesPermission
@@ -273,6 +305,9 @@ module Network.Google.PlayDeveloper.Types
     , listingsListResponse
     , llrKind
     , llrListings
+
+    -- * AndroidpublisherEditsExpansionfilesUpdateExpansionFileType
+    , AndroidpublisherEditsExpansionfilesUpdateExpansionFileType (..)
 
     -- * InappproductsInsertRequest
     , InappproductsInsertRequest
@@ -297,10 +332,25 @@ module Network.Google.PlayDeveloper.Types
     , elrPageInfo
     , elrResources
 
+    -- * AndroidpublisherEditsImagesListImageType
+    , AndroidpublisherEditsImagesListImageType (..)
+
+    -- * AndroidpublisherEditsTestersUpdateTrack
+    , AndroidpublisherEditsTestersUpdateTrack (..)
+
     -- * InappproductsUpdateRequest
     , InappproductsUpdateRequest
     , inappproductsUpdateRequest
     , inaInappproduct
+
+    -- * AndroidpublisherEditsImagesDeleteallImageType
+    , AndroidpublisherEditsImagesDeleteallImageType (..)
+
+    -- * AndroidpublisherEditsTestersGetTrack
+    , AndroidpublisherEditsTestersGetTrack (..)
+
+    -- * AndroidpublisherEditsTestersPatchTrack
+    , AndroidpublisherEditsTestersPatchTrack (..)
 
     -- * InappproductsBatchResponse
     , InappproductsBatchResponse
@@ -315,6 +365,9 @@ module Network.Google.PlayDeveloper.Types
     , eProductType
     , eToken
     , eProductId
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.PlayDeveloper.Types.Product
@@ -322,7 +375,7 @@ import           Network.Google.PlayDeveloper.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google Play Developer API.
-playDeveloperURL :: BaseURL
+playDeveloperURL :: BaseUrl
 playDeveloperURL
   = BaseUrl Https
       "https://www.googleapis.com/androidpublisher/v2/applications/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,168 +20,176 @@
 -- | Return all parent ids of the specified table.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesParentsList@.
-module Mapsengine.Tables.Parents.List
+module Network.Google.Resource.Mapsengine.Tables.Parents.List
     (
     -- * REST Resource
-      TablesParentsListAPI
+      TablesParentsListResource
 
     -- * Creating a Request
-    , tablesParentsList
-    , TablesParentsList
+    , tablesParentsList'
+    , TablesParentsList'
 
     -- * Request Lenses
-    , tplQuotaUser
-    , tplPrettyPrint
-    , tplUserIp
-    , tplKey
-    , tplId
-    , tplPageToken
-    , tplOauthToken
-    , tplMaxResults
-    , tplFields
-    , tplAlt
+    , tabQuotaUser
+    , tabPrettyPrint
+    , tabUserIp
+    , tabKey
+    , tabId
+    , tabPageToken
+    , tabOauthToken
+    , tabMaxResults
+    , tabFields
+    , tabAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesParentsList@ which the
--- 'TablesParentsList' request conforms to.
-type TablesParentsListAPI =
+-- 'TablesParentsList'' request conforms to.
+type TablesParentsListResource =
      "tables" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ParentsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified table.
 --
--- /See:/ 'tablesParentsList' smart constructor.
-data TablesParentsList = TablesParentsList
-    { _tplQuotaUser   :: !(Maybe Text)
-    , _tplPrettyPrint :: !Bool
-    , _tplUserIp      :: !(Maybe Text)
-    , _tplKey         :: !(Maybe Text)
-    , _tplId          :: !Text
-    , _tplPageToken   :: !(Maybe Text)
-    , _tplOauthToken  :: !(Maybe Text)
-    , _tplMaxResults  :: !(Maybe Word32)
-    , _tplFields      :: !(Maybe Text)
-    , _tplAlt         :: !Text
+-- /See:/ 'tablesParentsList'' smart constructor.
+data TablesParentsList' = TablesParentsList'
+    { _tabQuotaUser   :: !(Maybe Text)
+    , _tabPrettyPrint :: !Bool
+    , _tabUserIp      :: !(Maybe Text)
+    , _tabKey         :: !(Maybe Text)
+    , _tabId          :: !Text
+    , _tabPageToken   :: !(Maybe Text)
+    , _tabOauthToken  :: !(Maybe Text)
+    , _tabMaxResults  :: !(Maybe Word32)
+    , _tabFields      :: !(Maybe Text)
+    , _tabAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesParentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tplQuotaUser'
+-- * 'tabQuotaUser'
 --
--- * 'tplPrettyPrint'
+-- * 'tabPrettyPrint'
 --
--- * 'tplUserIp'
+-- * 'tabUserIp'
 --
--- * 'tplKey'
+-- * 'tabKey'
 --
--- * 'tplId'
+-- * 'tabId'
 --
--- * 'tplPageToken'
+-- * 'tabPageToken'
 --
--- * 'tplOauthToken'
+-- * 'tabOauthToken'
 --
--- * 'tplMaxResults'
+-- * 'tabMaxResults'
 --
--- * 'tplFields'
+-- * 'tabFields'
 --
--- * 'tplAlt'
-tablesParentsList
+-- * 'tabAlt'
+tablesParentsList'
     :: Text -- ^ 'id'
-    -> TablesParentsList
-tablesParentsList pTplId_ =
-    TablesParentsList
-    { _tplQuotaUser = Nothing
-    , _tplPrettyPrint = True
-    , _tplUserIp = Nothing
-    , _tplKey = Nothing
-    , _tplId = pTplId_
-    , _tplPageToken = Nothing
-    , _tplOauthToken = Nothing
-    , _tplMaxResults = Nothing
-    , _tplFields = Nothing
-    , _tplAlt = "json"
+    -> TablesParentsList'
+tablesParentsList' pTabId_ =
+    TablesParentsList'
+    { _tabQuotaUser = Nothing
+    , _tabPrettyPrint = True
+    , _tabUserIp = Nothing
+    , _tabKey = Nothing
+    , _tabId = pTabId_
+    , _tabPageToken = Nothing
+    , _tabOauthToken = Nothing
+    , _tabMaxResults = Nothing
+    , _tabFields = Nothing
+    , _tabAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tplQuotaUser :: Lens' TablesParentsList' (Maybe Text)
-tplQuotaUser
-  = lens _tplQuotaUser (\ s a -> s{_tplQuotaUser = a})
+tabQuotaUser :: Lens' TablesParentsList' (Maybe Text)
+tabQuotaUser
+  = lens _tabQuotaUser (\ s a -> s{_tabQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tplPrettyPrint :: Lens' TablesParentsList' Bool
-tplPrettyPrint
-  = lens _tplPrettyPrint
-      (\ s a -> s{_tplPrettyPrint = a})
+tabPrettyPrint :: Lens' TablesParentsList' Bool
+tabPrettyPrint
+  = lens _tabPrettyPrint
+      (\ s a -> s{_tabPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tplUserIp :: Lens' TablesParentsList' (Maybe Text)
-tplUserIp
-  = lens _tplUserIp (\ s a -> s{_tplUserIp = a})
+tabUserIp :: Lens' TablesParentsList' (Maybe Text)
+tabUserIp
+  = lens _tabUserIp (\ s a -> s{_tabUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tplKey :: Lens' TablesParentsList' (Maybe Text)
-tplKey = lens _tplKey (\ s a -> s{_tplKey = a})
+tabKey :: Lens' TablesParentsList' (Maybe Text)
+tabKey = lens _tabKey (\ s a -> s{_tabKey = a})
 
 -- | The ID of the table whose parents will be listed.
-tplId :: Lens' TablesParentsList' Text
-tplId = lens _tplId (\ s a -> s{_tplId = a})
+tabId :: Lens' TablesParentsList' Text
+tabId = lens _tabId (\ s a -> s{_tabId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-tplPageToken :: Lens' TablesParentsList' (Maybe Text)
-tplPageToken
-  = lens _tplPageToken (\ s a -> s{_tplPageToken = a})
+tabPageToken :: Lens' TablesParentsList' (Maybe Text)
+tabPageToken
+  = lens _tabPageToken (\ s a -> s{_tabPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tplOauthToken :: Lens' TablesParentsList' (Maybe Text)
-tplOauthToken
-  = lens _tplOauthToken
-      (\ s a -> s{_tplOauthToken = a})
+tabOauthToken :: Lens' TablesParentsList' (Maybe Text)
+tabOauthToken
+  = lens _tabOauthToken
+      (\ s a -> s{_tabOauthToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-tplMaxResults :: Lens' TablesParentsList' (Maybe Word32)
-tplMaxResults
-  = lens _tplMaxResults
-      (\ s a -> s{_tplMaxResults = a})
+tabMaxResults :: Lens' TablesParentsList' (Maybe Word32)
+tabMaxResults
+  = lens _tabMaxResults
+      (\ s a -> s{_tabMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tplFields :: Lens' TablesParentsList' (Maybe Text)
-tplFields
-  = lens _tplFields (\ s a -> s{_tplFields = a})
+tabFields :: Lens' TablesParentsList' (Maybe Text)
+tabFields
+  = lens _tabFields (\ s a -> s{_tabFields = a})
 
 -- | Data format for the response.
-tplAlt :: Lens' TablesParentsList' Text
-tplAlt = lens _tplAlt (\ s a -> s{_tplAlt = a})
+tabAlt :: Lens' TablesParentsList' Alt
+tabAlt = lens _tabAlt (\ s a -> s{_tabAlt = a})
 
 instance GoogleRequest TablesParentsList' where
         type Rs TablesParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesParentsList{..}
-          = go _tplQuotaUser _tplPrettyPrint _tplUserIp _tplKey
-              _tplId
-              _tplPageToken
-              _tplOauthToken
-              _tplMaxResults
-              _tplFields
-              _tplAlt
+        requestWithRoute r u TablesParentsList'{..}
+          = go _tabQuotaUser (Just _tabPrettyPrint) _tabUserIp
+              _tabKey
+              _tabId
+              _tabPageToken
+              _tabOauthToken
+              _tabMaxResults
+              _tabFields
+              (Just _tabAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesParentsListAPI)
+                      (Proxy :: Proxy TablesParentsListResource)
                       r
                       u

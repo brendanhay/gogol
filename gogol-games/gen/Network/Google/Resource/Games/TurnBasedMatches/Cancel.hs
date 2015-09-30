@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,141 +20,150 @@
 -- | Cancel a turn-based match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesCancel@.
-module Games.TurnBasedMatches.Cancel
+module Network.Google.Resource.Games.TurnBasedMatches.Cancel
     (
     -- * REST Resource
-      TurnBasedMatchesCancelAPI
+      TurnBasedMatchesCancelResource
 
     -- * Creating a Request
-    , turnBasedMatchesCancel
-    , TurnBasedMatchesCancel
+    , turnBasedMatchesCancel'
+    , TurnBasedMatchesCancel'
 
     -- * Request Lenses
-    , tbmcbQuotaUser
-    , tbmcbPrettyPrint
-    , tbmcbUserIp
-    , tbmcbKey
-    , tbmcbOauthToken
-    , tbmcbMatchId
-    , tbmcbFields
-    , tbmcbAlt
+    , tbmcQuotaUser
+    , tbmcPrettyPrint
+    , tbmcUserIp
+    , tbmcKey
+    , tbmcOauthToken
+    , tbmcMatchId
+    , tbmcFields
+    , tbmcAlt
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesCancel@ which the
--- 'TurnBasedMatchesCancel' request conforms to.
-type TurnBasedMatchesCancelAPI =
+-- 'TurnBasedMatchesCancel'' request conforms to.
+type TurnBasedMatchesCancelResource =
      "turnbasedmatches" :>
-       Capture "matchId" Text :> "cancel" :> Put '[JSON] ()
+       Capture "matchId" Text :>
+         "cancel" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Cancel a turn-based match.
 --
--- /See:/ 'turnBasedMatchesCancel' smart constructor.
-data TurnBasedMatchesCancel = TurnBasedMatchesCancel
-    { _tbmcbQuotaUser   :: !(Maybe Text)
-    , _tbmcbPrettyPrint :: !Bool
-    , _tbmcbUserIp      :: !(Maybe Text)
-    , _tbmcbKey         :: !(Maybe Text)
-    , _tbmcbOauthToken  :: !(Maybe Text)
-    , _tbmcbMatchId     :: !Text
-    , _tbmcbFields      :: !(Maybe Text)
-    , _tbmcbAlt         :: !Text
+-- /See:/ 'turnBasedMatchesCancel'' smart constructor.
+data TurnBasedMatchesCancel' = TurnBasedMatchesCancel'
+    { _tbmcQuotaUser   :: !(Maybe Text)
+    , _tbmcPrettyPrint :: !Bool
+    , _tbmcUserIp      :: !(Maybe Text)
+    , _tbmcKey         :: !(Maybe Text)
+    , _tbmcOauthToken  :: !(Maybe Text)
+    , _tbmcMatchId     :: !Text
+    , _tbmcFields      :: !(Maybe Text)
+    , _tbmcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesCancel'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tbmcbQuotaUser'
+-- * 'tbmcQuotaUser'
 --
--- * 'tbmcbPrettyPrint'
+-- * 'tbmcPrettyPrint'
 --
--- * 'tbmcbUserIp'
+-- * 'tbmcUserIp'
 --
--- * 'tbmcbKey'
+-- * 'tbmcKey'
 --
--- * 'tbmcbOauthToken'
+-- * 'tbmcOauthToken'
 --
--- * 'tbmcbMatchId'
+-- * 'tbmcMatchId'
 --
--- * 'tbmcbFields'
+-- * 'tbmcFields'
 --
--- * 'tbmcbAlt'
-turnBasedMatchesCancel
+-- * 'tbmcAlt'
+turnBasedMatchesCancel'
     :: Text -- ^ 'matchId'
-    -> TurnBasedMatchesCancel
-turnBasedMatchesCancel pTbmcbMatchId_ =
-    TurnBasedMatchesCancel
-    { _tbmcbQuotaUser = Nothing
-    , _tbmcbPrettyPrint = True
-    , _tbmcbUserIp = Nothing
-    , _tbmcbKey = Nothing
-    , _tbmcbOauthToken = Nothing
-    , _tbmcbMatchId = pTbmcbMatchId_
-    , _tbmcbFields = Nothing
-    , _tbmcbAlt = "json"
+    -> TurnBasedMatchesCancel'
+turnBasedMatchesCancel' pTbmcMatchId_ =
+    TurnBasedMatchesCancel'
+    { _tbmcQuotaUser = Nothing
+    , _tbmcPrettyPrint = True
+    , _tbmcUserIp = Nothing
+    , _tbmcKey = Nothing
+    , _tbmcOauthToken = Nothing
+    , _tbmcMatchId = pTbmcMatchId_
+    , _tbmcFields = Nothing
+    , _tbmcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tbmcbQuotaUser :: Lens' TurnBasedMatchesCancel' (Maybe Text)
-tbmcbQuotaUser
-  = lens _tbmcbQuotaUser
-      (\ s a -> s{_tbmcbQuotaUser = a})
+tbmcQuotaUser :: Lens' TurnBasedMatchesCancel' (Maybe Text)
+tbmcQuotaUser
+  = lens _tbmcQuotaUser
+      (\ s a -> s{_tbmcQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tbmcbPrettyPrint :: Lens' TurnBasedMatchesCancel' Bool
-tbmcbPrettyPrint
-  = lens _tbmcbPrettyPrint
-      (\ s a -> s{_tbmcbPrettyPrint = a})
+tbmcPrettyPrint :: Lens' TurnBasedMatchesCancel' Bool
+tbmcPrettyPrint
+  = lens _tbmcPrettyPrint
+      (\ s a -> s{_tbmcPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmcbUserIp :: Lens' TurnBasedMatchesCancel' (Maybe Text)
-tbmcbUserIp
-  = lens _tbmcbUserIp (\ s a -> s{_tbmcbUserIp = a})
+tbmcUserIp :: Lens' TurnBasedMatchesCancel' (Maybe Text)
+tbmcUserIp
+  = lens _tbmcUserIp (\ s a -> s{_tbmcUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmcbKey :: Lens' TurnBasedMatchesCancel' (Maybe Text)
-tbmcbKey = lens _tbmcbKey (\ s a -> s{_tbmcbKey = a})
+tbmcKey :: Lens' TurnBasedMatchesCancel' (Maybe Text)
+tbmcKey = lens _tbmcKey (\ s a -> s{_tbmcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmcbOauthToken :: Lens' TurnBasedMatchesCancel' (Maybe Text)
-tbmcbOauthToken
-  = lens _tbmcbOauthToken
-      (\ s a -> s{_tbmcbOauthToken = a})
+tbmcOauthToken :: Lens' TurnBasedMatchesCancel' (Maybe Text)
+tbmcOauthToken
+  = lens _tbmcOauthToken
+      (\ s a -> s{_tbmcOauthToken = a})
 
 -- | The ID of the match.
-tbmcbMatchId :: Lens' TurnBasedMatchesCancel' Text
-tbmcbMatchId
-  = lens _tbmcbMatchId (\ s a -> s{_tbmcbMatchId = a})
+tbmcMatchId :: Lens' TurnBasedMatchesCancel' Text
+tbmcMatchId
+  = lens _tbmcMatchId (\ s a -> s{_tbmcMatchId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tbmcbFields :: Lens' TurnBasedMatchesCancel' (Maybe Text)
-tbmcbFields
-  = lens _tbmcbFields (\ s a -> s{_tbmcbFields = a})
+tbmcFields :: Lens' TurnBasedMatchesCancel' (Maybe Text)
+tbmcFields
+  = lens _tbmcFields (\ s a -> s{_tbmcFields = a})
 
 -- | Data format for the response.
-tbmcbAlt :: Lens' TurnBasedMatchesCancel' Text
-tbmcbAlt = lens _tbmcbAlt (\ s a -> s{_tbmcbAlt = a})
+tbmcAlt :: Lens' TurnBasedMatchesCancel' Alt
+tbmcAlt = lens _tbmcAlt (\ s a -> s{_tbmcAlt = a})
 
 instance GoogleRequest TurnBasedMatchesCancel' where
         type Rs TurnBasedMatchesCancel' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesCancel{..}
-          = go _tbmcbQuotaUser _tbmcbPrettyPrint _tbmcbUserIp
-              _tbmcbKey
-              _tbmcbOauthToken
-              _tbmcbMatchId
-              _tbmcbFields
-              _tbmcbAlt
+        requestWithRoute r u TurnBasedMatchesCancel'{..}
+          = go _tbmcQuotaUser (Just _tbmcPrettyPrint)
+              _tbmcUserIp
+              _tbmcKey
+              _tbmcOauthToken
+              _tbmcMatchId
+              _tbmcFields
+              (Just _tbmcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesCancelAPI)
+                      (Proxy :: Proxy TurnBasedMatchesCancelResource)
                       r
                       u

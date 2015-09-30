@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- cannot be undone. Prefer threads.trash instead.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsDelete@.
-module Gmail.Users.Threads.Delete
+module Network.Google.Resource.Gmail.Users.Threads.Delete
     (
     -- * REST Resource
-      UsersThreadsDeleteAPI
+      UsersThreadsDeleteResource
 
     -- * Creating a Request
-    , usersThreadsDelete
-    , UsersThreadsDelete
+    , usersThreadsDelete'
+    , UsersThreadsDelete'
 
     -- * Request Lenses
     , utdQuotaUser
@@ -45,16 +46,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsDelete@ which the
--- 'UsersThreadsDelete' request conforms to.
-type UsersThreadsDeleteAPI =
+-- 'UsersThreadsDelete'' request conforms to.
+type UsersThreadsDeleteResource =
      Capture "userId" Text :>
-       "threads" :> Capture "id" Text :> Delete '[JSON] ()
+       "threads" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
 --
--- /See:/ 'usersThreadsDelete' smart constructor.
-data UsersThreadsDelete = UsersThreadsDelete
+-- /See:/ 'usersThreadsDelete'' smart constructor.
+data UsersThreadsDelete' = UsersThreadsDelete'
     { _utdQuotaUser   :: !(Maybe Text)
     , _utdPrettyPrint :: !Bool
     , _utdUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data UsersThreadsDelete = UsersThreadsDelete
     , _utdId          :: !Text
     , _utdOauthToken  :: !(Maybe Text)
     , _utdFields      :: !(Maybe Text)
-    , _utdAlt         :: !Text
+    , _utdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsDelete'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data UsersThreadsDelete = UsersThreadsDelete
 -- * 'utdFields'
 --
 -- * 'utdAlt'
-usersThreadsDelete
+usersThreadsDelete'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersThreadsDelete
-usersThreadsDelete pUtdUserId_ pUtdId_ =
-    UsersThreadsDelete
+    -> UsersThreadsDelete'
+usersThreadsDelete' pUtdUserId_ pUtdId_ =
+    UsersThreadsDelete'
     { _utdQuotaUser = Nothing
     , _utdPrettyPrint = True
     , _utdUserIp = Nothing
@@ -101,7 +110,7 @@ usersThreadsDelete pUtdUserId_ pUtdId_ =
     , _utdId = pUtdId_
     , _utdOauthToken = Nothing
     , _utdFields = Nothing
-    , _utdAlt = "json"
+    , _utdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +160,22 @@ utdFields
   = lens _utdFields (\ s a -> s{_utdFields = a})
 
 -- | Data format for the response.
-utdAlt :: Lens' UsersThreadsDelete' Text
+utdAlt :: Lens' UsersThreadsDelete' Alt
 utdAlt = lens _utdAlt (\ s a -> s{_utdAlt = a})
 
 instance GoogleRequest UsersThreadsDelete' where
         type Rs UsersThreadsDelete' = ()
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsDelete{..}
-          = go _utdQuotaUser _utdPrettyPrint _utdUserIp
+        requestWithRoute r u UsersThreadsDelete'{..}
+          = go _utdQuotaUser (Just _utdPrettyPrint) _utdUserIp
               _utdUserId
               _utdKey
               _utdId
               _utdOauthToken
               _utdFields
-              _utdAlt
+              (Just _utdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersThreadsDeleteAPI)
+                      (Proxy :: Proxy UsersThreadsDeleteResource)
                       r
                       u

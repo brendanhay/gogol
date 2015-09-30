@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Stop watching resources through this channel
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarChannelsStop@.
-module Calendar.Channels.Stop
+module Network.Google.Resource.Calendar.Channels.Stop
     (
     -- * REST Resource
-      ChannelsStopAPI
+      ChannelsStopResource
 
     -- * Creating a Request
-    , channelsStop
-    , ChannelsStop
+    , channelsStop'
+    , ChannelsStop'
 
     -- * Request Lenses
     , csQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarChannelsStop@ which the
--- 'ChannelsStop' request conforms to.
-type ChannelsStopAPI =
-     "channels" :> "stop" :> Post '[JSON] ()
+-- 'ChannelsStop'' request conforms to.
+type ChannelsStopResource =
+     "channels" :>
+       "stop" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --
--- /See:/ 'channelsStop' smart constructor.
-data ChannelsStop = ChannelsStop
+-- /See:/ 'channelsStop'' smart constructor.
+data ChannelsStop' = ChannelsStop'
     { _csQuotaUser   :: !(Maybe Text)
     , _csPrettyPrint :: !Bool
     , _csUserIp      :: !(Maybe Text)
     , _csKey         :: !(Maybe Text)
     , _csOauthToken  :: !(Maybe Text)
     , _csFields      :: !(Maybe Text)
-    , _csAlt         :: !Text
+    , _csAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsStop'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data ChannelsStop = ChannelsStop
 -- * 'csFields'
 --
 -- * 'csAlt'
-channelsStop
-    :: ChannelsStop
-channelsStop =
-    ChannelsStop
+channelsStop'
+    :: ChannelsStop'
+channelsStop' =
+    ChannelsStop'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
     , _csUserIp = Nothing
     , _csKey = Nothing
     , _csOauthToken = Nothing
     , _csFields = Nothing
-    , _csAlt = "json"
+    , _csAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +132,20 @@ csFields :: Lens' ChannelsStop' (Maybe Text)
 csFields = lens _csFields (\ s a -> s{_csFields = a})
 
 -- | Data format for the response.
-csAlt :: Lens' ChannelsStop' Text
+csAlt :: Lens' ChannelsStop' Alt
 csAlt = lens _csAlt (\ s a -> s{_csAlt = a})
 
 instance GoogleRequest ChannelsStop' where
         type Rs ChannelsStop' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ChannelsStop{..}
-          = go _csQuotaUser _csPrettyPrint _csUserIp _csKey
+        requestWithRoute r u ChannelsStop'{..}
+          = go _csQuotaUser (Just _csPrettyPrint) _csUserIp
+              _csKey
               _csOauthToken
               _csFields
-              _csAlt
+              (Just _csAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChannelsStopAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChannelsStopResource)
+                      r
                       u

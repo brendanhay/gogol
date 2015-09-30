@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- invitation exists with the requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsAccept@.
-module Classroom.Invitations.Accept
+module Network.Google.Resource.Classroom.Invitations.Accept
     (
     -- * REST Resource
-      InvitationsAcceptAPI
+      InvitationsAcceptResource
 
     -- * Creating a Request
-    , invitationsAccept
-    , InvitationsAccept
+    , invitationsAccept'
+    , InvitationsAccept'
 
     -- * Request Lenses
     , iaXgafv
@@ -55,10 +56,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomInvitationsAccept@ which the
--- 'InvitationsAccept' request conforms to.
-type InvitationsAcceptAPI =
+-- 'InvitationsAccept'' request conforms to.
+type InvitationsAcceptResource =
      "v1" :>
-       "invitations" :> "{id}:accept" :> Post '[JSON] Empty
+       "invitations" :>
+         "{id}:accept" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
@@ -68,8 +83,8 @@ type InvitationsAcceptAPI =
 -- permission errors][User Permission Errors]. * \`NOT_FOUND\` if no
 -- invitation exists with the requested ID.
 --
--- /See:/ 'invitationsAccept' smart constructor.
-data InvitationsAccept = InvitationsAccept
+-- /See:/ 'invitationsAccept'' smart constructor.
+data InvitationsAccept' = InvitationsAccept'
     { _iaXgafv          :: !(Maybe Text)
     , _iaQuotaUser      :: !(Maybe Text)
     , _iaPrettyPrint    :: !Bool
@@ -117,11 +132,11 @@ data InvitationsAccept = InvitationsAccept
 -- * 'iaCallback'
 --
 -- * 'iaAlt'
-invitationsAccept
+invitationsAccept'
     :: Text -- ^ 'id'
-    -> InvitationsAccept
-invitationsAccept pIaId_ =
-    InvitationsAccept
+    -> InvitationsAccept'
+invitationsAccept' pIaId_ =
+    InvitationsAccept'
     { _iaXgafv = Nothing
     , _iaQuotaUser = Nothing
     , _iaPrettyPrint = True
@@ -213,10 +228,10 @@ iaAlt = lens _iaAlt (\ s a -> s{_iaAlt = a})
 instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsAccept{..}
-          = go _iaXgafv _iaQuotaUser _iaPrettyPrint
+        requestWithRoute r u InvitationsAccept'{..}
+          = go _iaXgafv _iaQuotaUser (Just _iaPrettyPrint)
               _iaUploadProtocol
-              _iaPp
+              (Just _iaPp)
               _iaAccessToken
               _iaUploadType
               _iaBearerToken
@@ -225,9 +240,9 @@ instance GoogleRequest InvitationsAccept' where
               _iaOauthToken
               _iaFields
               _iaCallback
-              _iaAlt
+              (Just _iaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InvitationsAcceptAPI)
+                      (Proxy :: Proxy InvitationsAcceptResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes the specified message from the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesUntrash@.
-module Gmail.Users.Messages.Untrash
+module Network.Google.Resource.Gmail.Users.Messages.Untrash
     (
     -- * REST Resource
-      UsersMessagesUntrashAPI
+      UsersMessagesUntrashResource
 
     -- * Creating a Request
-    , usersMessagesUntrash
-    , UsersMessagesUntrash
+    , usersMessagesUntrash'
+    , UsersMessagesUntrash'
 
     -- * Request Lenses
     , umuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesUntrash@ which the
--- 'UsersMessagesUntrash' request conforms to.
-type UsersMessagesUntrashAPI =
+-- 'UsersMessagesUntrash'' request conforms to.
+type UsersMessagesUntrashResource =
      Capture "userId" Text :>
        "messages" :>
          Capture "id" Text :>
-           "untrash" :> Post '[JSON] Message
+           "untrash" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Removes the specified message from the trash.
 --
--- /See:/ 'usersMessagesUntrash' smart constructor.
-data UsersMessagesUntrash = UsersMessagesUntrash
+-- /See:/ 'usersMessagesUntrash'' smart constructor.
+data UsersMessagesUntrash' = UsersMessagesUntrash'
     { _umuQuotaUser   :: !(Maybe Text)
     , _umuPrettyPrint :: !Bool
     , _umuUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data UsersMessagesUntrash = UsersMessagesUntrash
     , _umuId          :: !Text
     , _umuOauthToken  :: !(Maybe Text)
     , _umuFields      :: !(Maybe Text)
-    , _umuAlt         :: !Text
+    , _umuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesUntrash'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data UsersMessagesUntrash = UsersMessagesUntrash
 -- * 'umuFields'
 --
 -- * 'umuAlt'
-usersMessagesUntrash
+usersMessagesUntrash'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersMessagesUntrash
-usersMessagesUntrash pUmuUserId_ pUmuId_ =
-    UsersMessagesUntrash
+    -> UsersMessagesUntrash'
+usersMessagesUntrash' pUmuUserId_ pUmuId_ =
+    UsersMessagesUntrash'
     { _umuQuotaUser = Nothing
     , _umuPrettyPrint = True
     , _umuUserIp = Nothing
@@ -101,7 +109,7 @@ usersMessagesUntrash pUmuUserId_ pUmuId_ =
     , _umuId = pUmuId_
     , _umuOauthToken = Nothing
     , _umuFields = Nothing
-    , _umuAlt = "json"
+    , _umuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
 -- | Data format for the response.
-umuAlt :: Lens' UsersMessagesUntrash' Text
+umuAlt :: Lens' UsersMessagesUntrash' Alt
 umuAlt = lens _umuAlt (\ s a -> s{_umuAlt = a})
 
 instance GoogleRequest UsersMessagesUntrash' where
         type Rs UsersMessagesUntrash' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesUntrash{..}
-          = go _umuQuotaUser _umuPrettyPrint _umuUserIp
+        requestWithRoute r u UsersMessagesUntrash'{..}
+          = go _umuQuotaUser (Just _umuPrettyPrint) _umuUserIp
               _umuUserId
               _umuKey
               _umuId
               _umuOauthToken
               _umuFields
-              _umuAlt
+              (Just _umuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesUntrashAPI)
+                      (Proxy :: Proxy UsersMessagesUntrashResource)
                       r
                       u

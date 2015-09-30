@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesQuerySql@.
-module FusionTables.Query.Sql
+module Network.Google.Resource.FusionTables.Query.Sql
     (
     -- * REST Resource
-      QuerySqlAPI
+      QuerySqlResource
 
     -- * Creating a Request
-    , querySql
-    , QuerySql
+    , querySql'
+    , QuerySql'
 
     -- * Request Lenses
     , qsTyped
@@ -46,18 +47,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesQuerySql@ which the
--- 'QuerySql' request conforms to.
-type QuerySqlAPI =
+-- 'QuerySql'' request conforms to.
+type QuerySqlResource =
      "query" :>
        QueryParam "typed" Bool :>
-         QueryParam "hdrs" Bool :>
-           QueryParam "sql" Text :> Post '[JSON] Sqlresponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "hdrs" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "sql" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Sqlresponse
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT -
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
--- /See:/ 'querySql' smart constructor.
-data QuerySql = QuerySql
+-- /See:/ 'querySql'' smart constructor.
+data QuerySql' = QuerySql'
     { _qsTyped       :: !(Maybe Bool)
     , _qsQuotaUser   :: !(Maybe Text)
     , _qsPrettyPrint :: !Bool
@@ -67,7 +75,7 @@ data QuerySql = QuerySql
     , _qsOauthToken  :: !(Maybe Text)
     , _qsSql         :: !Text
     , _qsFields      :: !(Maybe Text)
-    , _qsAlt         :: !Text
+    , _qsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuerySql'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data QuerySql = QuerySql
 -- * 'qsFields'
 --
 -- * 'qsAlt'
-querySql
+querySql'
     :: Text -- ^ 'sql'
-    -> QuerySql
-querySql pQsSql_ =
-    QuerySql
+    -> QuerySql'
+querySql' pQsSql_ =
+    QuerySql'
     { _qsTyped = Nothing
     , _qsQuotaUser = Nothing
     , _qsPrettyPrint = True
@@ -107,7 +115,7 @@ querySql pQsSql_ =
     , _qsOauthToken = Nothing
     , _qsSql = pQsSql_
     , _qsFields = Nothing
-    , _qsAlt = "json"
+    , _qsAlt = JSON
     }
 
 -- | Whether typed values are returned in the (JSON) response: numbers for
@@ -158,19 +166,21 @@ qsFields :: Lens' QuerySql' (Maybe Text)
 qsFields = lens _qsFields (\ s a -> s{_qsFields = a})
 
 -- | Data format for the response.
-qsAlt :: Lens' QuerySql' Text
+qsAlt :: Lens' QuerySql' Alt
 qsAlt = lens _qsAlt (\ s a -> s{_qsAlt = a})
 
 instance GoogleRequest QuerySql' where
         type Rs QuerySql' = Sqlresponse
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u QuerySql{..}
-          = go _qsTyped _qsQuotaUser _qsPrettyPrint _qsHdrs
+        requestWithRoute r u QuerySql'{..}
+          = go _qsTyped _qsQuotaUser (Just _qsPrettyPrint)
+              _qsHdrs
               _qsUserIp
               _qsKey
               _qsOauthToken
               (Just _qsSql)
               _qsFields
-              _qsAlt
+              (Just _qsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuerySqlAPI) r u
+                  = clientWithRoute (Proxy :: Proxy QuerySqlResource) r
+                      u

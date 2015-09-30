@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlDatabasesUpdate@.
-module Sql.Databases.Update
+module Network.Google.Resource.Sql.Databases.Update
     (
     -- * REST Resource
-      DatabasesUpdateAPI
+      DatabasesUpdateResource
 
     -- * Creating a Request
-    , databasesUpdate
-    , DatabasesUpdate
+    , databasesUpdate'
+    , DatabasesUpdate'
 
     -- * Request Lenses
     , duQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlDatabasesUpdate@ which the
--- 'DatabasesUpdate' request conforms to.
-type DatabasesUpdateAPI =
+-- 'DatabasesUpdate'' request conforms to.
+type DatabasesUpdateResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "databases" :>
-               Capture "database" Text :> Put '[JSON] Operation
+               Capture "database" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ 'databasesUpdate' smart constructor.
-data DatabasesUpdate = DatabasesUpdate
+-- /See:/ 'databasesUpdate'' smart constructor.
+data DatabasesUpdate' = DatabasesUpdate'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
     , _duProject     :: !Text
@@ -68,7 +76,7 @@ data DatabasesUpdate = DatabasesUpdate
     , _duKey         :: !(Maybe Text)
     , _duOauthToken  :: !(Maybe Text)
     , _duFields      :: !(Maybe Text)
-    , _duAlt         :: !Text
+    , _duAlt         :: !Alt
     , _duInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data DatabasesUpdate = DatabasesUpdate
 -- * 'duAlt'
 --
 -- * 'duInstance'
-databasesUpdate
+databasesUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'database'
     -> Text -- ^ 'instance'
-    -> DatabasesUpdate
-databasesUpdate pDuProject_ pDuDatabase_ pDuInstance_ =
-    DatabasesUpdate
+    -> DatabasesUpdate'
+databasesUpdate' pDuProject_ pDuDatabase_ pDuInstance_ =
+    DatabasesUpdate'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duProject = pDuProject_
@@ -110,7 +118,7 @@ databasesUpdate pDuProject_ pDuDatabase_ pDuInstance_ =
     , _duKey = Nothing
     , _duOauthToken = Nothing
     , _duFields = Nothing
-    , _duAlt = "json"
+    , _duAlt = JSON
     , _duInstance = pDuInstance_
     }
 
@@ -158,7 +166,7 @@ duFields :: Lens' DatabasesUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
 -- | Data format for the response.
-duAlt :: Lens' DatabasesUpdate' Text
+duAlt :: Lens' DatabasesUpdate' Alt
 duAlt = lens _duAlt (\ s a -> s{_duAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -169,16 +177,17 @@ duInstance
 instance GoogleRequest DatabasesUpdate' where
         type Rs DatabasesUpdate' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesUpdate{..}
-          = go _duQuotaUser _duPrettyPrint _duProject
+        requestWithRoute r u DatabasesUpdate'{..}
+          = go _duQuotaUser (Just _duPrettyPrint) _duProject
               _duDatabase
               _duUserIp
               _duKey
               _duOauthToken
               _duFields
-              _duAlt
+              (Just _duAlt)
               _duInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy DatabasesUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatabasesUpdateResource)
                       r
                       u

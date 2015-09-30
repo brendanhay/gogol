@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetAll@.
-module GamesManagement.Quests.ResetAll
+module Network.Google.Resource.GamesManagement.Quests.ResetAll
     (
     -- * REST Resource
-      QuestsResetAllAPI
+      QuestsResetAllResource
 
     -- * Creating a Request
-    , questsResetAll
-    , QuestsResetAll
+    , questsResetAll'
+    , QuestsResetAll'
 
     -- * Request Lenses
     , qraQuotaUser
@@ -44,23 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementQuestsResetAll@ which the
--- 'QuestsResetAll' request conforms to.
-type QuestsResetAllAPI =
-     "quests" :> "reset" :> Post '[JSON] ()
+-- 'QuestsResetAll'' request conforms to.
+type QuestsResetAllResource =
+     "quests" :>
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all player progress on all quests for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'questsResetAll' smart constructor.
-data QuestsResetAll = QuestsResetAll
+-- /See:/ 'questsResetAll'' smart constructor.
+data QuestsResetAll' = QuestsResetAll'
     { _qraQuotaUser   :: !(Maybe Text)
     , _qraPrettyPrint :: !Bool
     , _qraUserIp      :: !(Maybe Text)
     , _qraKey         :: !(Maybe Text)
     , _qraOauthToken  :: !(Maybe Text)
     , _qraFields      :: !(Maybe Text)
-    , _qraAlt         :: !Text
+    , _qraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAll'' with the minimum fields required to make a request.
@@ -80,17 +89,17 @@ data QuestsResetAll = QuestsResetAll
 -- * 'qraFields'
 --
 -- * 'qraAlt'
-questsResetAll
-    :: QuestsResetAll
-questsResetAll =
-    QuestsResetAll
+questsResetAll'
+    :: QuestsResetAll'
+questsResetAll' =
+    QuestsResetAll'
     { _qraQuotaUser = Nothing
     , _qraPrettyPrint = True
     , _qraUserIp = Nothing
     , _qraKey = Nothing
     , _qraOauthToken = Nothing
     , _qraFields = Nothing
-    , _qraAlt = "json"
+    , _qraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,18 +139,20 @@ qraFields
   = lens _qraFields (\ s a -> s{_qraFields = a})
 
 -- | Data format for the response.
-qraAlt :: Lens' QuestsResetAll' Text
+qraAlt :: Lens' QuestsResetAll' Alt
 qraAlt = lens _qraAlt (\ s a -> s{_qraAlt = a})
 
 instance GoogleRequest QuestsResetAll' where
         type Rs QuestsResetAll' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u QuestsResetAll{..}
-          = go _qraQuotaUser _qraPrettyPrint _qraUserIp _qraKey
+        requestWithRoute r u QuestsResetAll'{..}
+          = go _qraQuotaUser (Just _qraPrettyPrint) _qraUserIp
+              _qraKey
               _qraOauthToken
               _qraFields
-              _qraAlt
+              (Just _qraAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuestsResetAllAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy QuestsResetAllResource)
                       r
                       u

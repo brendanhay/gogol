@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- number of instances deleted.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersDeleteInstances@.
-module Replicapool.InstanceGroupManagers.DeleteInstances
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.DeleteInstances
     (
     -- * REST Resource
-      InstanceGroupManagersDeleteInstancesAPI
+      InstanceGroupManagersDeleteInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersDeleteInstances
-    , InstanceGroupManagersDeleteInstances
+    , instanceGroupManagersDeleteInstances'
+    , InstanceGroupManagersDeleteInstances'
 
     -- * Request Lenses
     , igmdiQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersDeleteInstances@ which the
--- 'InstanceGroupManagersDeleteInstances' request conforms to.
-type InstanceGroupManagersDeleteInstancesAPI =
+-- 'InstanceGroupManagersDeleteInstances'' request conforms to.
+type InstanceGroupManagersDeleteInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               "deleteInstances" :> Post '[JSON] Operation
+               "deleteInstances" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Deletes the specified instances. The instances are deleted, then removed
 -- from the instance group and any target pools of which they were a
 -- member. The targetSize of the instance group manager is reduced by the
 -- number of instances deleted.
 --
--- /See:/ 'instanceGroupManagersDeleteInstances' smart constructor.
-data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances
+-- /See:/ 'instanceGroupManagersDeleteInstances'' smart constructor.
+data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstances'
     { _igmdiQuotaUser            :: !(Maybe Text)
     , _igmdiPrettyPrint          :: !Bool
     , _igmdiProject              :: !Text
@@ -73,7 +81,7 @@ data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances
     , _igmdiKey                  :: !(Maybe Text)
     , _igmdiOauthToken           :: !(Maybe Text)
     , _igmdiFields               :: !(Maybe Text)
-    , _igmdiAlt                  :: !Text
+    , _igmdiAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstances'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances
 -- * 'igmdiFields'
 --
 -- * 'igmdiAlt'
-instanceGroupManagersDeleteInstances
+instanceGroupManagersDeleteInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersDeleteInstances
-instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ =
-    InstanceGroupManagersDeleteInstances
+    -> InstanceGroupManagersDeleteInstances'
+instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ =
+    InstanceGroupManagersDeleteInstances'
     { _igmdiQuotaUser = Nothing
     , _igmdiPrettyPrint = True
     , _igmdiProject = pIgmdiProject_
@@ -115,7 +123,7 @@ instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ 
     , _igmdiKey = Nothing
     , _igmdiOauthToken = Nothing
     , _igmdiFields = Nothing
-    , _igmdiAlt = "json"
+    , _igmdiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,7 +180,7 @@ igmdiFields
   = lens _igmdiFields (\ s a -> s{_igmdiFields = a})
 
 -- | Data format for the response.
-igmdiAlt :: Lens' InstanceGroupManagersDeleteInstances' Text
+igmdiAlt :: Lens' InstanceGroupManagersDeleteInstances' Alt
 igmdiAlt = lens _igmdiAlt (\ s a -> s{_igmdiAlt = a})
 
 instance GoogleRequest
@@ -182,18 +190,19 @@ instance GoogleRequest
         request
           = requestWithRoute defReq instanceGroupsManagerURL
         requestWithRoute r u
-          InstanceGroupManagersDeleteInstances{..}
-          = go _igmdiQuotaUser _igmdiPrettyPrint _igmdiProject
+          InstanceGroupManagersDeleteInstances'{..}
+          = go _igmdiQuotaUser (Just _igmdiPrettyPrint)
+              _igmdiProject
               _igmdiInstanceGroupManager
               _igmdiUserIp
               _igmdiZone
               _igmdiKey
               _igmdiOauthToken
               _igmdiFields
-              _igmdiAlt
+              (Just _igmdiAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersDeleteInstancesAPI)
+                         Proxy InstanceGroupManagersDeleteInstancesResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists transfer jobs.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsList@.
-module StorageTransfer.TransferJobs.List
+module Network.Google.Resource.StorageTransfer.TransferJobs.List
     (
     -- * REST Resource
-      TransferJobsListAPI
+      TransferJobsListResource
 
     -- * Creating a Request
-    , transferJobsList
-    , TransferJobsList
+    , transferJobsList'
+    , TransferJobsList'
 
     -- * Request Lenses
     , tjlXgafv
@@ -51,19 +52,32 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferJobsList@ which the
--- 'TransferJobsList' request conforms to.
-type TransferJobsListAPI =
+-- 'TransferJobsList'' request conforms to.
+type TransferJobsListResource =
      "v1" :>
        "transferJobs" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListTransferJobsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListTransferJobsResponse
 
 -- | Lists transfer jobs.
 --
--- /See:/ 'transferJobsList' smart constructor.
-data TransferJobsList = TransferJobsList
+-- /See:/ 'transferJobsList'' smart constructor.
+data TransferJobsList' = TransferJobsList'
     { _tjlXgafv          :: !(Maybe Text)
     , _tjlQuotaUser      :: !(Maybe Text)
     , _tjlPrettyPrint    :: !Bool
@@ -117,10 +131,10 @@ data TransferJobsList = TransferJobsList
 -- * 'tjlCallback'
 --
 -- * 'tjlAlt'
-transferJobsList
-    :: TransferJobsList
-transferJobsList =
-    TransferJobsList
+transferJobsList'
+    :: TransferJobsList'
+transferJobsList' =
+    TransferJobsList'
     { _tjlXgafv = Nothing
     , _tjlQuotaUser = Nothing
     , _tjlPrettyPrint = True
@@ -235,10 +249,10 @@ tjlAlt = lens _tjlAlt (\ s a -> s{_tjlAlt = a})
 instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferJobsList{..}
-          = go _tjlXgafv _tjlQuotaUser _tjlPrettyPrint
+        requestWithRoute r u TransferJobsList'{..}
+          = go _tjlXgafv _tjlQuotaUser (Just _tjlPrettyPrint)
               _tjlUploadProtocol
-              _tjlPp
+              (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType
               _tjlBearerToken
@@ -249,9 +263,9 @@ instance GoogleRequest TransferJobsList' where
               _tjlPageSize
               _tjlFields
               _tjlCallback
-              _tjlAlt
+              (Just _tjlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferJobsListAPI)
+                      (Proxy :: Proxy TransferJobsListResource)
                       r
                       u

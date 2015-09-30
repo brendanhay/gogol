@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- (i.e. the published version).
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsRestore@.
-module TagManager.Accounts.Containers.Versions.Restore
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
     (
     -- * REST Resource
-      AccountsContainersVersionsRestoreAPI
+      AccountsContainersVersionsRestoreResource
 
     -- * Creating a Request
-    , accountsContainersVersionsRestore
-    , AccountsContainersVersionsRestore
+    , accountsContainersVersionsRestore'
+    , AccountsContainersVersionsRestore'
 
     -- * Request Lenses
     , acvrQuotaUser
@@ -48,23 +49,31 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsRestore@ which the
--- 'AccountsContainersVersionsRestore' request conforms to.
-type AccountsContainersVersionsRestoreAPI =
+-- 'AccountsContainersVersionsRestore'' request conforms to.
+type AccountsContainersVersionsRestoreResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 "restore" :> Post '[JSON] ContainerVersion
+                 "restore" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] ContainerVersion
 
 -- | Restores a Container Version. This will overwrite the container\'s
 -- current configuration (including its macros, rules and tags). The
 -- operation will not have any effect on the version that is being served
 -- (i.e. the published version).
 --
--- /See:/ 'accountsContainersVersionsRestore' smart constructor.
-data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
+-- /See:/ 'accountsContainersVersionsRestore'' smart constructor.
+data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
     { _acvrQuotaUser          :: !(Maybe Text)
     , _acvrPrettyPrint        :: !Bool
     , _acvrContainerId        :: !Text
@@ -74,7 +83,7 @@ data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
     , _acvrKey                :: !(Maybe Text)
     , _acvrOauthToken         :: !(Maybe Text)
     , _acvrFields             :: !(Maybe Text)
-    , _acvrAlt                :: !Text
+    , _acvrAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsRestore'' with the minimum fields required to make a request.
@@ -100,13 +109,13 @@ data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
 -- * 'acvrFields'
 --
 -- * 'acvrAlt'
-accountsContainersVersionsRestore
+accountsContainersVersionsRestore'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsRestore
-accountsContainersVersionsRestore pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
-    AccountsContainersVersionsRestore
+    -> AccountsContainersVersionsRestore'
+accountsContainersVersionsRestore' pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
+    AccountsContainersVersionsRestore'
     { _acvrQuotaUser = Nothing
     , _acvrPrettyPrint = True
     , _acvrContainerId = pAcvrContainerId_
@@ -116,7 +125,7 @@ accountsContainersVersionsRestore pAcvrContainerId_ pAcvrContainerVersionId_ pAc
     , _acvrKey = Nothing
     , _acvrOauthToken = Nothing
     , _acvrFields = Nothing
-    , _acvrAlt = "json"
+    , _acvrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,7 +184,7 @@ acvrFields
   = lens _acvrFields (\ s a -> s{_acvrFields = a})
 
 -- | Data format for the response.
-acvrAlt :: Lens' AccountsContainersVersionsRestore' Text
+acvrAlt :: Lens' AccountsContainersVersionsRestore' Alt
 acvrAlt = lens _acvrAlt (\ s a -> s{_acvrAlt = a})
 
 instance GoogleRequest
@@ -184,17 +193,19 @@ instance GoogleRequest
              ContainerVersion
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsRestore{..}
-          = go _acvrQuotaUser _acvrPrettyPrint _acvrContainerId
+          AccountsContainersVersionsRestore'{..}
+          = go _acvrQuotaUser (Just _acvrPrettyPrint)
+              _acvrContainerId
               _acvrUserIp
               _acvrContainerVersionId
               _acvrAccountId
               _acvrKey
               _acvrOauthToken
               _acvrFields
-              _acvrAlt
+              (Just _acvrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsRestoreAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsRestoreResource)
                       r
                       u

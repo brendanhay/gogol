@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve photo of a user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosGet@.
-module Directory.Users.Photos.Get
+module Network.Google.Resource.Directory.Users.Photos.Get
     (
     -- * REST Resource
-      UsersPhotosGetAPI
+      UsersPhotosGetResource
 
     -- * Creating a Request
-    , usersPhotosGet
-    , UsersPhotosGet
+    , usersPhotosGet'
+    , UsersPhotosGet'
 
     -- * Request Lenses
     , upgQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosGet@ which the
--- 'UsersPhotosGet' request conforms to.
-type UsersPhotosGetAPI =
+-- 'UsersPhotosGet'' request conforms to.
+type UsersPhotosGetResource =
      "users" :>
        Capture "userKey" Text :>
-         "photos" :> "thumbnail" :> Get '[JSON] UserPhoto
+         "photos" :>
+           "thumbnail" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] UserPhoto
 
 -- | Retrieve photo of a user
 --
--- /See:/ 'usersPhotosGet' smart constructor.
-data UsersPhotosGet = UsersPhotosGet
+-- /See:/ 'usersPhotosGet'' smart constructor.
+data UsersPhotosGet' = UsersPhotosGet'
     { _upgQuotaUser   :: !(Maybe Text)
     , _upgPrettyPrint :: !Bool
     , _upgUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data UsersPhotosGet = UsersPhotosGet
     , _upgOauthToken  :: !(Maybe Text)
     , _upgUserKey     :: !Text
     , _upgFields      :: !(Maybe Text)
-    , _upgAlt         :: !Text
+    , _upgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosGet'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data UsersPhotosGet = UsersPhotosGet
 -- * 'upgFields'
 --
 -- * 'upgAlt'
-usersPhotosGet
+usersPhotosGet'
     :: Text -- ^ 'userKey'
-    -> UsersPhotosGet
-usersPhotosGet pUpgUserKey_ =
-    UsersPhotosGet
+    -> UsersPhotosGet'
+usersPhotosGet' pUpgUserKey_ =
+    UsersPhotosGet'
     { _upgQuotaUser = Nothing
     , _upgPrettyPrint = True
     , _upgUserIp = Nothing
@@ -94,7 +103,7 @@ usersPhotosGet pUpgUserKey_ =
     , _upgOauthToken = Nothing
     , _upgUserKey = pUpgUserKey_
     , _upgFields = Nothing
-    , _upgAlt = "json"
+    , _upgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,19 +148,21 @@ upgFields
   = lens _upgFields (\ s a -> s{_upgFields = a})
 
 -- | Data format for the response.
-upgAlt :: Lens' UsersPhotosGet' Text
+upgAlt :: Lens' UsersPhotosGet' Alt
 upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
 
 instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersPhotosGet{..}
-          = go _upgQuotaUser _upgPrettyPrint _upgUserIp _upgKey
+        requestWithRoute r u UsersPhotosGet'{..}
+          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIp
+              _upgKey
               _upgOauthToken
               _upgUserKey
               _upgFields
-              _upgAlt
+              (Just _upgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersPhotosGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersPhotosGetResource)
                       r
                       u

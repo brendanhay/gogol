@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,138 +20,145 @@
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesDelete@.
-module Webmasters.Sites.Delete
+module Network.Google.Resource.Webmasters.Sites.Delete
     (
     -- * REST Resource
-      SitesDeleteAPI
+      SitesDeleteResource
 
     -- * Creating a Request
-    , sitesDelete
-    , SitesDelete
+    , sitesDelete'
+    , SitesDelete'
 
     -- * Request Lenses
-    , sddQuotaUser
-    , sddPrettyPrint
-    , sddUserIp
-    , sddSiteUrl
-    , sddKey
-    , sddOauthToken
-    , sddFields
-    , sddAlt
+    , sdQuotaUser
+    , sdPrettyPrint
+    , sdUserIp
+    , sdSiteUrl
+    , sdKey
+    , sdOauthToken
+    , sdFields
+    , sdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSitesDelete@ which the
--- 'SitesDelete' request conforms to.
-type SitesDeleteAPI =
+-- 'SitesDelete'' request conforms to.
+type SitesDeleteResource =
      "sites" :>
-       Capture "siteUrl" Text :> Delete '[JSON] ()
+       Capture "siteUrl" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 --
--- /See:/ 'sitesDelete' smart constructor.
-data SitesDelete = SitesDelete
-    { _sddQuotaUser   :: !(Maybe Text)
-    , _sddPrettyPrint :: !Bool
-    , _sddUserIp      :: !(Maybe Text)
-    , _sddSiteUrl     :: !Text
-    , _sddKey         :: !(Maybe Text)
-    , _sddOauthToken  :: !(Maybe Text)
-    , _sddFields      :: !(Maybe Text)
-    , _sddAlt         :: !Text
+-- /See:/ 'sitesDelete'' smart constructor.
+data SitesDelete' = SitesDelete'
+    { _sdQuotaUser   :: !(Maybe Text)
+    , _sdPrettyPrint :: !Bool
+    , _sdUserIp      :: !(Maybe Text)
+    , _sdSiteUrl     :: !Text
+    , _sdKey         :: !(Maybe Text)
+    , _sdOauthToken  :: !(Maybe Text)
+    , _sdFields      :: !(Maybe Text)
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sddQuotaUser'
+-- * 'sdQuotaUser'
 --
--- * 'sddPrettyPrint'
+-- * 'sdPrettyPrint'
 --
--- * 'sddUserIp'
+-- * 'sdUserIp'
 --
--- * 'sddSiteUrl'
+-- * 'sdSiteUrl'
 --
--- * 'sddKey'
+-- * 'sdKey'
 --
--- * 'sddOauthToken'
+-- * 'sdOauthToken'
 --
--- * 'sddFields'
+-- * 'sdFields'
 --
--- * 'sddAlt'
-sitesDelete
+-- * 'sdAlt'
+sitesDelete'
     :: Text -- ^ 'siteUrl'
-    -> SitesDelete
-sitesDelete pSddSiteUrl_ =
-    SitesDelete
-    { _sddQuotaUser = Nothing
-    , _sddPrettyPrint = True
-    , _sddUserIp = Nothing
-    , _sddSiteUrl = pSddSiteUrl_
-    , _sddKey = Nothing
-    , _sddOauthToken = Nothing
-    , _sddFields = Nothing
-    , _sddAlt = "json"
+    -> SitesDelete'
+sitesDelete' pSdSiteUrl_ =
+    SitesDelete'
+    { _sdQuotaUser = Nothing
+    , _sdPrettyPrint = True
+    , _sdUserIp = Nothing
+    , _sdSiteUrl = pSdSiteUrl_
+    , _sdKey = Nothing
+    , _sdOauthToken = Nothing
+    , _sdFields = Nothing
+    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-sddQuotaUser :: Lens' SitesDelete' (Maybe Text)
-sddQuotaUser
-  = lens _sddQuotaUser (\ s a -> s{_sddQuotaUser = a})
+sdQuotaUser :: Lens' SitesDelete' (Maybe Text)
+sdQuotaUser
+  = lens _sdQuotaUser (\ s a -> s{_sdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-sddPrettyPrint :: Lens' SitesDelete' Bool
-sddPrettyPrint
-  = lens _sddPrettyPrint
-      (\ s a -> s{_sddPrettyPrint = a})
+sdPrettyPrint :: Lens' SitesDelete' Bool
+sdPrettyPrint
+  = lens _sdPrettyPrint
+      (\ s a -> s{_sdPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sddUserIp :: Lens' SitesDelete' (Maybe Text)
-sddUserIp
-  = lens _sddUserIp (\ s a -> s{_sddUserIp = a})
+sdUserIp :: Lens' SitesDelete' (Maybe Text)
+sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
-sddSiteUrl :: Lens' SitesDelete' Text
-sddSiteUrl
-  = lens _sddSiteUrl (\ s a -> s{_sddSiteUrl = a})
+sdSiteUrl :: Lens' SitesDelete' Text
+sdSiteUrl
+  = lens _sdSiteUrl (\ s a -> s{_sdSiteUrl = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sddKey :: Lens' SitesDelete' (Maybe Text)
-sddKey = lens _sddKey (\ s a -> s{_sddKey = a})
+sdKey :: Lens' SitesDelete' (Maybe Text)
+sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sddOauthToken :: Lens' SitesDelete' (Maybe Text)
-sddOauthToken
-  = lens _sddOauthToken
-      (\ s a -> s{_sddOauthToken = a})
+sdOauthToken :: Lens' SitesDelete' (Maybe Text)
+sdOauthToken
+  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-sddFields :: Lens' SitesDelete' (Maybe Text)
-sddFields
-  = lens _sddFields (\ s a -> s{_sddFields = a})
+sdFields :: Lens' SitesDelete' (Maybe Text)
+sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sddAlt :: Lens' SitesDelete' Text
-sddAlt = lens _sddAlt (\ s a -> s{_sddAlt = a})
+sdAlt :: Lens' SitesDelete' Alt
+sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest SitesDelete' where
         type Rs SitesDelete' = ()
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesDelete{..}
-          = go _sddQuotaUser _sddPrettyPrint _sddUserIp
-              _sddSiteUrl
-              _sddKey
-              _sddOauthToken
-              _sddFields
-              _sddAlt
+        requestWithRoute r u SitesDelete'{..}
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+              _sdSiteUrl
+              _sdKey
+              _sdOauthToken
+              _sdFields
+              (Just _sdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SitesDeleteResource)
+                      r
+                      u

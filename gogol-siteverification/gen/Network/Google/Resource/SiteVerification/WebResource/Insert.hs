@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Attempt verification of a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceInsert@.
-module SiteVerification.WebResource.Insert
+module Network.Google.Resource.SiteVerification.WebResource.Insert
     (
     -- * REST Resource
-      WebResourceInsertAPI
+      WebResourceInsertResource
 
     -- * Creating a Request
-    , webResourceInsert
-    , WebResourceInsert
+    , webResourceInsert'
+    , WebResourceInsert'
 
     -- * Request Lenses
     , wriQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourceInsert@ which the
--- 'WebResourceInsert' request conforms to.
-type WebResourceInsertAPI =
+-- 'WebResourceInsert'' request conforms to.
+type WebResourceInsertResource =
      "webResource" :>
-       QueryParam "verificationMethod" Text :>
-         Post '[JSON] SiteVerificationWebResourceResource
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "verificationMethod" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SiteVerificationWebResourceResource
 
 -- | Attempt verification of a website or domain.
 --
--- /See:/ 'webResourceInsert' smart constructor.
-data WebResourceInsert = WebResourceInsert
+-- /See:/ 'webResourceInsert'' smart constructor.
+data WebResourceInsert' = WebResourceInsert'
     { _wriQuotaUser          :: !(Maybe Text)
     , _wriPrettyPrint        :: !Bool
     , _wriUserIp             :: !(Maybe Text)
@@ -60,7 +68,7 @@ data WebResourceInsert = WebResourceInsert
     , _wriOauthToken         :: !(Maybe Text)
     , _wriVerificationMethod :: !Text
     , _wriFields             :: !(Maybe Text)
-    , _wriAlt                :: !Text
+    , _wriAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data WebResourceInsert = WebResourceInsert
 -- * 'wriFields'
 --
 -- * 'wriAlt'
-webResourceInsert
+webResourceInsert'
     :: Text -- ^ 'verificationMethod'
-    -> WebResourceInsert
-webResourceInsert pWriVerificationMethod_ =
-    WebResourceInsert
+    -> WebResourceInsert'
+webResourceInsert' pWriVerificationMethod_ =
+    WebResourceInsert'
     { _wriQuotaUser = Nothing
     , _wriPrettyPrint = False
     , _wriUserIp = Nothing
@@ -94,7 +102,7 @@ webResourceInsert pWriVerificationMethod_ =
     , _wriOauthToken = Nothing
     , _wriVerificationMethod = pWriVerificationMethod_
     , _wriFields = Nothing
-    , _wriAlt = "json"
+    , _wriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,22 @@ wriFields
   = lens _wriFields (\ s a -> s{_wriFields = a})
 
 -- | Data format for the response.
-wriAlt :: Lens' WebResourceInsert' Text
+wriAlt :: Lens' WebResourceInsert' Alt
 wriAlt = lens _wriAlt (\ s a -> s{_wriAlt = a})
 
 instance GoogleRequest WebResourceInsert' where
         type Rs WebResourceInsert' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceInsert{..}
-          = go _wriQuotaUser _wriPrettyPrint _wriUserIp _wriKey
+        requestWithRoute r u WebResourceInsert'{..}
+          = go _wriQuotaUser (Just _wriPrettyPrint) _wriUserIp
+              _wriKey
               _wriOauthToken
               (Just _wriVerificationMethod)
               _wriFields
-              _wriAlt
+              (Just _wriAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy WebResourceInsertAPI)
+                      (Proxy :: Proxy WebResourceInsertResource)
                       r
                       u

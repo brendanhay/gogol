@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- activity.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleListByActivity@.
-module Plus.People.ListByActivity
+module Network.Google.Resource.Plus.People.ListByActivity
     (
     -- * REST Resource
-      PeopleListByActivityAPI
+      PeopleListByActivityResource
 
     -- * Creating a Request
-    , peopleListByActivity
-    , PeopleListByActivity
+    , peopleListByActivity'
+    , PeopleListByActivity'
 
     -- * Request Lenses
     , plbaQuotaUser
@@ -47,32 +48,40 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusPeopleListByActivity@ which the
--- 'PeopleListByActivity' request conforms to.
-type PeopleListByActivityAPI =
+-- 'PeopleListByActivity'' request conforms to.
+type PeopleListByActivityResource =
      "activities" :>
        Capture "activityId" Text :>
          "people" :>
-           Capture "collection" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] PeopleFeed
+           Capture "collection"
+             PlusPeopleListByActivityCollection
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection for a particular
 -- activity.
 --
--- /See:/ 'peopleListByActivity' smart constructor.
-data PeopleListByActivity = PeopleListByActivity
+-- /See:/ 'peopleListByActivity'' smart constructor.
+data PeopleListByActivity' = PeopleListByActivity'
     { _plbaQuotaUser   :: !(Maybe Text)
     , _plbaPrettyPrint :: !Bool
     , _plbaUserIp      :: !(Maybe Text)
     , _plbaActivityId  :: !Text
-    , _plbaCollection  :: !Text
+    , _plbaCollection  :: !PlusPeopleListByActivityCollection
     , _plbaKey         :: !(Maybe Text)
     , _plbaPageToken   :: !(Maybe Text)
     , _plbaOauthToken  :: !(Maybe Text)
     , _plbaMaxResults  :: !Word32
     , _plbaFields      :: !(Maybe Text)
-    , _plbaAlt         :: !Text
+    , _plbaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByActivity'' with the minimum fields required to make a request.
@@ -100,12 +109,12 @@ data PeopleListByActivity = PeopleListByActivity
 -- * 'plbaFields'
 --
 -- * 'plbaAlt'
-peopleListByActivity
+peopleListByActivity'
     :: Text -- ^ 'activityId'
-    -> Text -- ^ 'collection'
-    -> PeopleListByActivity
-peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
-    PeopleListByActivity
+    -> PlusPeopleListByActivityCollection -- ^ 'collection'
+    -> PeopleListByActivity'
+peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ =
+    PeopleListByActivity'
     { _plbaQuotaUser = Nothing
     , _plbaPrettyPrint = True
     , _plbaUserIp = Nothing
@@ -116,7 +125,7 @@ peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
     , _plbaOauthToken = Nothing
     , _plbaMaxResults = 20
     , _plbaFields = Nothing
-    , _plbaAlt = "json"
+    , _plbaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,7 +155,7 @@ plbaActivityId
       (\ s a -> s{_plbaActivityId = a})
 
 -- | The collection of people to list.
-plbaCollection :: Lens' PeopleListByActivity' Text
+plbaCollection :: Lens' PeopleListByActivity' PlusPeopleListByActivityCollection
 plbaCollection
   = lens _plbaCollection
       (\ s a -> s{_plbaCollection = a})
@@ -185,14 +194,15 @@ plbaFields
   = lens _plbaFields (\ s a -> s{_plbaFields = a})
 
 -- | Data format for the response.
-plbaAlt :: Lens' PeopleListByActivity' Text
+plbaAlt :: Lens' PeopleListByActivity' Alt
 plbaAlt = lens _plbaAlt (\ s a -> s{_plbaAlt = a})
 
 instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleListByActivity{..}
-          = go _plbaQuotaUser _plbaPrettyPrint _plbaUserIp
+        requestWithRoute r u PeopleListByActivity'{..}
+          = go _plbaQuotaUser (Just _plbaPrettyPrint)
+              _plbaUserIp
               _plbaActivityId
               _plbaCollection
               _plbaKey
@@ -200,9 +210,9 @@ instance GoogleRequest PeopleListByActivity' where
               _plbaOauthToken
               (Just _plbaMaxResults)
               _plbaFields
-              _plbaAlt
+              (Just _plbaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PeopleListByActivityAPI)
+                      (Proxy :: Proxy PeopleListByActivityResource)
                       r
                       u

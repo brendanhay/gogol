@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferGetGoogleServiceAccount@.
-module StorageTransfer.GetGoogleServiceAccount
+module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
     (
     -- * REST Resource
-      GetGoogleServiceAccountAPI
+      GetGoogleServiceAccountResource
 
     -- * Creating a Request
-    , getGoogleServiceAccount
-    , GetGoogleServiceAccount
+    , getGoogleServiceAccount'
+    , GetGoogleServiceAccount'
 
     -- * Request Lenses
     , ggsaXgafv
@@ -55,11 +56,24 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferGetGoogleServiceAccount@ which the
--- 'GetGoogleServiceAccount' request conforms to.
-type GetGoogleServiceAccountAPI =
+-- 'GetGoogleServiceAccount'' request conforms to.
+type GetGoogleServiceAccountResource =
      "v1:getGoogleServiceAccount" :>
-       QueryParam "projectId" Text :>
-         Get '[JSON] GoogleServiceAccount
+       QueryParam "$.xgafv" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "upload_protocol" Text :>
+               QueryParam "pp" Bool :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "uploadType" Text :>
+                     QueryParam "bearer_token" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "projectId" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] GoogleServiceAccount
 
 -- | Returns the Google service account that is used by Storage Transfer
 -- Service to access buckets in the project where transfers run or in other
@@ -69,8 +83,8 @@ type GetGoogleServiceAccountAPI =
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 --
--- /See:/ 'getGoogleServiceAccount' smart constructor.
-data GetGoogleServiceAccount = GetGoogleServiceAccount
+-- /See:/ 'getGoogleServiceAccount'' smart constructor.
+data GetGoogleServiceAccount' = GetGoogleServiceAccount'
     { _ggsaXgafv          :: !(Maybe Text)
     , _ggsaQuotaUser      :: !(Maybe Text)
     , _ggsaPrettyPrint    :: !Bool
@@ -118,10 +132,10 @@ data GetGoogleServiceAccount = GetGoogleServiceAccount
 -- * 'ggsaCallback'
 --
 -- * 'ggsaAlt'
-getGoogleServiceAccount
-    :: GetGoogleServiceAccount
-getGoogleServiceAccount =
-    GetGoogleServiceAccount
+getGoogleServiceAccount'
+    :: GetGoogleServiceAccount'
+getGoogleServiceAccount' =
+    GetGoogleServiceAccount'
     { _ggsaXgafv = Nothing
     , _ggsaQuotaUser = Nothing
     , _ggsaPrettyPrint = True
@@ -222,10 +236,11 @@ instance GoogleRequest GetGoogleServiceAccount' where
         type Rs GetGoogleServiceAccount' =
              GoogleServiceAccount
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u GetGoogleServiceAccount{..}
-          = go _ggsaXgafv _ggsaQuotaUser _ggsaPrettyPrint
+        requestWithRoute r u GetGoogleServiceAccount'{..}
+          = go _ggsaXgafv _ggsaQuotaUser
+              (Just _ggsaPrettyPrint)
               _ggsaUploadProtocol
-              _ggsaPp
+              (Just _ggsaPp)
               _ggsaAccessToken
               _ggsaUploadType
               _ggsaBearerToken
@@ -234,9 +249,9 @@ instance GoogleRequest GetGoogleServiceAccount' where
               _ggsaOauthToken
               _ggsaFields
               _ggsaCallback
-              _ggsaAlt
+              (Just _ggsaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GetGoogleServiceAccountAPI)
+                      (Proxy :: Proxy GetGoogleServiceAccountResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,136 +20,143 @@
 -- | Get a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesGet@.
-module PlusDomains.Circles.Get
+module Network.Google.Resource.PlusDomains.Circles.Get
     (
     -- * REST Resource
-      CirclesGetAPI
+      CirclesGetResource
 
     -- * Creating a Request
-    , circlesGet
-    , CirclesGet
+    , circlesGet'
+    , CirclesGet'
 
     -- * Request Lenses
-    , cggQuotaUser
-    , cggPrettyPrint
-    , cggUserIp
-    , cggKey
-    , cggCircleId
-    , cggOauthToken
-    , cggFields
-    , cggAlt
+    , cgQuotaUser
+    , cgPrettyPrint
+    , cgUserIp
+    , cgKey
+    , cgCircleId
+    , cgOauthToken
+    , cgFields
+    , cgAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesGet@ which the
--- 'CirclesGet' request conforms to.
-type CirclesGetAPI =
+-- 'CirclesGet'' request conforms to.
+type CirclesGetResource =
      "circles" :>
-       Capture "circleId" Text :> Get '[JSON] Circle
+       Capture "circleId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Circle
 
 -- | Get a circle.
 --
--- /See:/ 'circlesGet' smart constructor.
-data CirclesGet = CirclesGet
-    { _cggQuotaUser   :: !(Maybe Text)
-    , _cggPrettyPrint :: !Bool
-    , _cggUserIp      :: !(Maybe Text)
-    , _cggKey         :: !(Maybe Text)
-    , _cggCircleId    :: !Text
-    , _cggOauthToken  :: !(Maybe Text)
-    , _cggFields      :: !(Maybe Text)
-    , _cggAlt         :: !Text
+-- /See:/ 'circlesGet'' smart constructor.
+data CirclesGet' = CirclesGet'
+    { _cgQuotaUser   :: !(Maybe Text)
+    , _cgPrettyPrint :: !Bool
+    , _cgUserIp      :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Text)
+    , _cgCircleId    :: !Text
+    , _cgOauthToken  :: !(Maybe Text)
+    , _cgFields      :: !(Maybe Text)
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cggQuotaUser'
+-- * 'cgQuotaUser'
 --
--- * 'cggPrettyPrint'
+-- * 'cgPrettyPrint'
 --
--- * 'cggUserIp'
+-- * 'cgUserIp'
 --
--- * 'cggKey'
+-- * 'cgKey'
 --
--- * 'cggCircleId'
+-- * 'cgCircleId'
 --
--- * 'cggOauthToken'
+-- * 'cgOauthToken'
 --
--- * 'cggFields'
+-- * 'cgFields'
 --
--- * 'cggAlt'
-circlesGet
+-- * 'cgAlt'
+circlesGet'
     :: Text -- ^ 'circleId'
-    -> CirclesGet
-circlesGet pCggCircleId_ =
-    CirclesGet
-    { _cggQuotaUser = Nothing
-    , _cggPrettyPrint = True
-    , _cggUserIp = Nothing
-    , _cggKey = Nothing
-    , _cggCircleId = pCggCircleId_
-    , _cggOauthToken = Nothing
-    , _cggFields = Nothing
-    , _cggAlt = "json"
+    -> CirclesGet'
+circlesGet' pCgCircleId_ =
+    CirclesGet'
+    { _cgQuotaUser = Nothing
+    , _cgPrettyPrint = True
+    , _cgUserIp = Nothing
+    , _cgKey = Nothing
+    , _cgCircleId = pCgCircleId_
+    , _cgOauthToken = Nothing
+    , _cgFields = Nothing
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cggQuotaUser :: Lens' CirclesGet' (Maybe Text)
-cggQuotaUser
-  = lens _cggQuotaUser (\ s a -> s{_cggQuotaUser = a})
+cgQuotaUser :: Lens' CirclesGet' (Maybe Text)
+cgQuotaUser
+  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cggPrettyPrint :: Lens' CirclesGet' Bool
-cggPrettyPrint
-  = lens _cggPrettyPrint
-      (\ s a -> s{_cggPrettyPrint = a})
+cgPrettyPrint :: Lens' CirclesGet' Bool
+cgPrettyPrint
+  = lens _cgPrettyPrint
+      (\ s a -> s{_cgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cggUserIp :: Lens' CirclesGet' (Maybe Text)
-cggUserIp
-  = lens _cggUserIp (\ s a -> s{_cggUserIp = a})
+cgUserIp :: Lens' CirclesGet' (Maybe Text)
+cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' CirclesGet' (Maybe Text)
-cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
+cgKey :: Lens' CirclesGet' (Maybe Text)
+cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | The ID of the circle to get.
-cggCircleId :: Lens' CirclesGet' Text
-cggCircleId
-  = lens _cggCircleId (\ s a -> s{_cggCircleId = a})
+cgCircleId :: Lens' CirclesGet' Text
+cgCircleId
+  = lens _cgCircleId (\ s a -> s{_cgCircleId = a})
 
 -- | OAuth 2.0 token for the current user.
-cggOauthToken :: Lens' CirclesGet' (Maybe Text)
-cggOauthToken
-  = lens _cggOauthToken
-      (\ s a -> s{_cggOauthToken = a})
+cgOauthToken :: Lens' CirclesGet' (Maybe Text)
+cgOauthToken
+  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cggFields :: Lens' CirclesGet' (Maybe Text)
-cggFields
-  = lens _cggFields (\ s a -> s{_cggFields = a})
+cgFields :: Lens' CirclesGet' (Maybe Text)
+cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cggAlt :: Lens' CirclesGet' Text
-cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
+cgAlt :: Lens' CirclesGet' Alt
+cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CirclesGet' where
         type Rs CirclesGet' = Circle
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesGet{..}
-          = go _cggQuotaUser _cggPrettyPrint _cggUserIp _cggKey
-              _cggCircleId
-              _cggOauthToken
-              _cggFields
-              _cggAlt
+        requestWithRoute r u CirclesGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
+              _cgCircleId
+              _cgOauthToken
+              _cgFields
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CirclesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy CirclesGetResource)
+                      r
+                      u

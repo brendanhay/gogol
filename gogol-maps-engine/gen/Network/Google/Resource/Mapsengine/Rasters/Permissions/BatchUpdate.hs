@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- is atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersPermissionsBatchUpdate@.
-module Mapsengine.Rasters.Permissions.BatchUpdate
+module Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchUpdate
     (
     -- * REST Resource
-      RastersPermissionsBatchUpdateAPI
+      RastersPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , rastersPermissionsBatchUpdate
-    , RastersPermissionsBatchUpdate
+    , rastersPermissionsBatchUpdate'
+    , RastersPermissionsBatchUpdate'
 
     -- * Request Lenses
     , rpbuQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersPermissionsBatchUpdate@ which the
--- 'RastersPermissionsBatchUpdate' request conforms to.
-type RastersPermissionsBatchUpdateAPI =
+-- 'RastersPermissionsBatchUpdate'' request conforms to.
+type RastersPermissionsBatchUpdateResource =
      "rasters" :>
        Capture "id" Text :>
          "permissions" :>
            "batchUpdate" :>
-             Post '[JSON] PermissionsBatchUpdateResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'rastersPermissionsBatchUpdate' smart constructor.
-data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate
+-- /See:/ 'rastersPermissionsBatchUpdate'' smart constructor.
+data RastersPermissionsBatchUpdate' = RastersPermissionsBatchUpdate'
     { _rpbuQuotaUser   :: !(Maybe Text)
     , _rpbuPrettyPrint :: !Bool
     , _rpbuUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate
     , _rpbuId          :: !Text
     , _rpbuOauthToken  :: !(Maybe Text)
     , _rpbuFields      :: !(Maybe Text)
-    , _rpbuAlt         :: !Text
+    , _rpbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPermissionsBatchUpdate'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data RastersPermissionsBatchUpdate = RastersPermissionsBatchUpdate
 -- * 'rpbuFields'
 --
 -- * 'rpbuAlt'
-rastersPermissionsBatchUpdate
+rastersPermissionsBatchUpdate'
     :: Text -- ^ 'id'
-    -> RastersPermissionsBatchUpdate
-rastersPermissionsBatchUpdate pRpbuId_ =
-    RastersPermissionsBatchUpdate
+    -> RastersPermissionsBatchUpdate'
+rastersPermissionsBatchUpdate' pRpbuId_ =
+    RastersPermissionsBatchUpdate'
     { _rpbuQuotaUser = Nothing
     , _rpbuPrettyPrint = True
     , _rpbuUserIp = Nothing
@@ -100,7 +108,7 @@ rastersPermissionsBatchUpdate pRpbuId_ =
     , _rpbuId = pRpbuId_
     , _rpbuOauthToken = Nothing
     , _rpbuFields = Nothing
-    , _rpbuAlt = "json"
+    , _rpbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ rpbuFields
   = lens _rpbuFields (\ s a -> s{_rpbuFields = a})
 
 -- | Data format for the response.
-rpbuAlt :: Lens' RastersPermissionsBatchUpdate' Text
+rpbuAlt :: Lens' RastersPermissionsBatchUpdate' Alt
 rpbuAlt = lens _rpbuAlt (\ s a -> s{_rpbuAlt = a})
 
 instance GoogleRequest RastersPermissionsBatchUpdate'
@@ -154,15 +162,17 @@ instance GoogleRequest RastersPermissionsBatchUpdate'
              PermissionsBatchUpdateResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RastersPermissionsBatchUpdate{..}
-          = go _rpbuQuotaUser _rpbuPrettyPrint _rpbuUserIp
+          RastersPermissionsBatchUpdate'{..}
+          = go _rpbuQuotaUser (Just _rpbuPrettyPrint)
+              _rpbuUserIp
               _rpbuKey
               _rpbuId
               _rpbuOauthToken
               _rpbuFields
-              _rpbuAlt
+              (Just _rpbuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RastersPermissionsBatchUpdateAPI)
+                      (Proxy ::
+                         Proxy RastersPermissionsBatchUpdateResource)
                       r
                       u

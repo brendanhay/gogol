@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists profile-user links for a given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileUserLinksList@.
-module Analytics.Management.ProfileUserLinks.List
+module Network.Google.Resource.Analytics.Management.ProfileUserLinks.List
     (
     -- * REST Resource
-      ManagementProfileUserLinksListAPI
+      ManagementProfileUserLinksListResource
 
     -- * Creating a Request
-    , managementProfileUserLinksList
-    , ManagementProfileUserLinksList
+    , managementProfileUserLinksList'
+    , ManagementProfileUserLinksList'
 
     -- * Request Lenses
     , mpullQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileUserLinksList@ which the
--- 'ManagementProfileUserLinksList' request conforms to.
-type ManagementProfileUserLinksListAPI =
+-- 'ManagementProfileUserLinksList'' request conforms to.
+type ManagementProfileUserLinksListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,14 +58,21 @@ type ManagementProfileUserLinksListAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "entityUserLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         Get '[JSON] EntityUserLinks
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] EntityUserLinks
 
 -- | Lists profile-user links for a given view (profile).
 --
--- /See:/ 'managementProfileUserLinksList' smart constructor.
-data ManagementProfileUserLinksList = ManagementProfileUserLinksList
+-- /See:/ 'managementProfileUserLinksList'' smart constructor.
+data ManagementProfileUserLinksList' = ManagementProfileUserLinksList'
     { _mpullQuotaUser     :: !(Maybe Text)
     , _mpullPrettyPrint   :: !Bool
     , _mpullWebPropertyId :: !Text
@@ -76,7 +84,7 @@ data ManagementProfileUserLinksList = ManagementProfileUserLinksList
     , _mpullStartIndex    :: !(Maybe Int32)
     , _mpullMaxResults    :: !(Maybe Int32)
     , _mpullFields        :: !(Maybe Text)
-    , _mpullAlt           :: !Text
+    , _mpullAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksList'' with the minimum fields required to make a request.
@@ -106,13 +114,13 @@ data ManagementProfileUserLinksList = ManagementProfileUserLinksList
 -- * 'mpullFields'
 --
 -- * 'mpullAlt'
-managementProfileUserLinksList
+managementProfileUserLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfileUserLinksList
-managementProfileUserLinksList pMpullWebPropertyId_ pMpullProfileId_ pMpullAccountId_ =
-    ManagementProfileUserLinksList
+    -> ManagementProfileUserLinksList'
+managementProfileUserLinksList' pMpullWebPropertyId_ pMpullProfileId_ pMpullAccountId_ =
+    ManagementProfileUserLinksList'
     { _mpullQuotaUser = Nothing
     , _mpullPrettyPrint = False
     , _mpullWebPropertyId = pMpullWebPropertyId_
@@ -124,7 +132,7 @@ managementProfileUserLinksList pMpullWebPropertyId_ pMpullProfileId_ pMpullAccou
     , _mpullStartIndex = Nothing
     , _mpullMaxResults = Nothing
     , _mpullFields = Nothing
-    , _mpullAlt = "json"
+    , _mpullAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,7 +208,7 @@ mpullFields
   = lens _mpullFields (\ s a -> s{_mpullFields = a})
 
 -- | Data format for the response.
-mpullAlt :: Lens' ManagementProfileUserLinksList' Text
+mpullAlt :: Lens' ManagementProfileUserLinksList' Alt
 mpullAlt = lens _mpullAlt (\ s a -> s{_mpullAlt = a})
 
 instance GoogleRequest
@@ -209,8 +217,8 @@ instance GoogleRequest
              EntityUserLinks
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileUserLinksList{..}
-          = go _mpullQuotaUser _mpullPrettyPrint
+          ManagementProfileUserLinksList'{..}
+          = go _mpullQuotaUser (Just _mpullPrettyPrint)
               _mpullWebPropertyId
               _mpullUserIp
               _mpullProfileId
@@ -220,9 +228,10 @@ instance GoogleRequest
               _mpullStartIndex
               _mpullMaxResults
               _mpullFields
-              _mpullAlt
+              (Just _mpullAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileUserLinksListAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileUserLinksListResource)
                       r
                       u

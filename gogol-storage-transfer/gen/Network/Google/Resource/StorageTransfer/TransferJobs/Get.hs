@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a transfer job.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsGet@.
-module StorageTransfer.TransferJobs.Get
+module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     (
     -- * REST Resource
-      TransferJobsGetAPI
+      TransferJobsGetResource
 
     -- * Creating a Request
-    , transferJobsGet
-    , TransferJobsGet
+    , transferJobsGet'
+    , TransferJobsGet'
 
     -- * Request Lenses
     , tjgXgafv
@@ -50,17 +51,30 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferJobsGet@ which the
--- 'TransferJobsGet' request conforms to.
-type TransferJobsGetAPI =
+-- 'TransferJobsGet'' request conforms to.
+type TransferJobsGetResource =
      "v1" :>
        "{+jobName}" :>
-         QueryParam "projectId" Text :>
-           Get '[JSON] TransferJob
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "projectId" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] TransferJob
 
 -- | Gets a transfer job.
 --
--- /See:/ 'transferJobsGet' smart constructor.
-data TransferJobsGet = TransferJobsGet
+-- /See:/ 'transferJobsGet'' smart constructor.
+data TransferJobsGet' = TransferJobsGet'
     { _tjgXgafv          :: !(Maybe Text)
     , _tjgQuotaUser      :: !(Maybe Text)
     , _tjgPrettyPrint    :: !Bool
@@ -111,11 +125,11 @@ data TransferJobsGet = TransferJobsGet
 -- * 'tjgCallback'
 --
 -- * 'tjgAlt'
-transferJobsGet
+transferJobsGet'
     :: Text -- ^ 'jobName'
-    -> TransferJobsGet
-transferJobsGet pTjgJobName_ =
-    TransferJobsGet
+    -> TransferJobsGet'
+transferJobsGet' pTjgJobName_ =
+    TransferJobsGet'
     { _tjgXgafv = Nothing
     , _tjgQuotaUser = Nothing
     , _tjgPrettyPrint = True
@@ -218,10 +232,10 @@ tjgAlt = lens _tjgAlt (\ s a -> s{_tjgAlt = a})
 instance GoogleRequest TransferJobsGet' where
         type Rs TransferJobsGet' = TransferJob
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferJobsGet{..}
-          = go _tjgXgafv _tjgQuotaUser _tjgPrettyPrint
+        requestWithRoute r u TransferJobsGet'{..}
+          = go _tjgXgafv _tjgQuotaUser (Just _tjgPrettyPrint)
               _tjgUploadProtocol
-              _tjgPp
+              (Just _tjgPp)
               _tjgAccessToken
               _tjgJobName
               _tjgUploadType
@@ -231,8 +245,9 @@ instance GoogleRequest TransferJobsGet' where
               _tjgOauthToken
               _tjgFields
               _tjgCallback
-              _tjgAlt
+              (Just _tjgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TransferJobsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TransferJobsGetResource)
                       r
                       u

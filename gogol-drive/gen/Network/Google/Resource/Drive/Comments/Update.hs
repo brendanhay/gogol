@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsUpdate@.
-module Drive.Comments.Update
+module Network.Google.Resource.Drive.Comments.Update
     (
     -- * REST Resource
-      CommentsUpdateAPI
+      CommentsUpdateResource
 
     -- * Creating a Request
-    , commentsUpdate
-    , CommentsUpdate
+    , commentsUpdate'
+    , CommentsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveCommentsUpdate@ which the
--- 'CommentsUpdate' request conforms to.
-type CommentsUpdateAPI =
+-- 'CommentsUpdate'' request conforms to.
+type CommentsUpdateResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
-           Capture "commentId" Text :> Put '[JSON] Comment
+           Capture "commentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Comment
 
 -- | Updates an existing comment.
 --
--- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate
+-- /See:/ 'commentsUpdate'' smart constructor.
+data CommentsUpdate' = CommentsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CommentsUpdate = CommentsUpdate
     , _cuOauthToken  :: !(Maybe Text)
     , _cuCommentId   :: !Text
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CommentsUpdate = CommentsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-commentsUpdate
+commentsUpdate'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> CommentsUpdate
-commentsUpdate pCuFileId_ pCuCommentId_ =
-    CommentsUpdate
+    -> CommentsUpdate'
+commentsUpdate' pCuFileId_ pCuCommentId_ =
+    CommentsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -101,7 +109,7 @@ commentsUpdate pCuFileId_ pCuCommentId_ =
     , _cuOauthToken = Nothing
     , _cuCommentId = pCuCommentId_
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,20 +155,22 @@ cuFields :: Lens' CommentsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CommentsUpdate' Text
+cuAlt :: Lens' CommentsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp _cuKey
+        requestWithRoute r u CommentsUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+              _cuKey
               _cuFileId
               _cuOauthToken
               _cuCommentId
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementTurnBasedMatchesResetForAllPlayers@.
-module GamesManagement.TurnBasedMatches.ResetForAllPlayers
+module Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlayers
     (
     -- * REST Resource
-      TurnBasedMatchesResetForAllPlayersAPI
+      TurnBasedMatchesResetForAllPlayersResource
 
     -- * Creating a Request
-    , turnBasedMatchesResetForAllPlayers
-    , TurnBasedMatchesResetForAllPlayers
+    , turnBasedMatchesResetForAllPlayers'
+    , TurnBasedMatchesResetForAllPlayers'
 
     -- * Request Lenses
     , tbmrfapQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementTurnBasedMatchesResetForAllPlayers@ which the
--- 'TurnBasedMatchesResetForAllPlayers' request conforms to.
-type TurnBasedMatchesResetForAllPlayersAPI =
+-- 'TurnBasedMatchesResetForAllPlayers'' request conforms to.
+type TurnBasedMatchesResetForAllPlayersResource =
      "turnbasedmatches" :>
-       "resetForAllPlayers" :> Post '[JSON] ()
+       "resetForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Deletes turn-based matches where the only match participants are from
 -- whitelisted tester accounts for your application. This method is only
 -- available to user accounts for your developer console.
 --
--- /See:/ 'turnBasedMatchesResetForAllPlayers' smart constructor.
-data TurnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers
+-- /See:/ 'turnBasedMatchesResetForAllPlayers'' smart constructor.
+data TurnBasedMatchesResetForAllPlayers' = TurnBasedMatchesResetForAllPlayers'
     { _tbmrfapQuotaUser   :: !(Maybe Text)
     , _tbmrfapPrettyPrint :: !Bool
     , _tbmrfapUserIp      :: !(Maybe Text)
     , _tbmrfapKey         :: !(Maybe Text)
     , _tbmrfapOauthToken  :: !(Maybe Text)
     , _tbmrfapFields      :: !(Maybe Text)
-    , _tbmrfapAlt         :: !Text
+    , _tbmrfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesResetForAllPlayers'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data TurnBasedMatchesResetForAllPlayers = TurnBasedMatchesResetForAllPlayers
 -- * 'tbmrfapFields'
 --
 -- * 'tbmrfapAlt'
-turnBasedMatchesResetForAllPlayers
-    :: TurnBasedMatchesResetForAllPlayers
-turnBasedMatchesResetForAllPlayers =
-    TurnBasedMatchesResetForAllPlayers
+turnBasedMatchesResetForAllPlayers'
+    :: TurnBasedMatchesResetForAllPlayers'
+turnBasedMatchesResetForAllPlayers' =
+    TurnBasedMatchesResetForAllPlayers'
     { _tbmrfapQuotaUser = Nothing
     , _tbmrfapPrettyPrint = True
     , _tbmrfapUserIp = Nothing
     , _tbmrfapKey = Nothing
     , _tbmrfapOauthToken = Nothing
     , _tbmrfapFields = Nothing
-    , _tbmrfapAlt = "json"
+    , _tbmrfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,7 +143,7 @@ tbmrfapFields
       (\ s a -> s{_tbmrfapFields = a})
 
 -- | Data format for the response.
-tbmrfapAlt :: Lens' TurnBasedMatchesResetForAllPlayers' Text
+tbmrfapAlt :: Lens' TurnBasedMatchesResetForAllPlayers' Alt
 tbmrfapAlt
   = lens _tbmrfapAlt (\ s a -> s{_tbmrfapAlt = a})
 
@@ -144,16 +152,16 @@ instance GoogleRequest
         type Rs TurnBasedMatchesResetForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
-          TurnBasedMatchesResetForAllPlayers{..}
-          = go _tbmrfapQuotaUser _tbmrfapPrettyPrint
+          TurnBasedMatchesResetForAllPlayers'{..}
+          = go _tbmrfapQuotaUser (Just _tbmrfapPrettyPrint)
               _tbmrfapUserIp
               _tbmrfapKey
               _tbmrfapOauthToken
               _tbmrfapFields
-              _tbmrfapAlt
+              (Just _tbmrfapAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy TurnBasedMatchesResetForAllPlayersAPI)
+                         Proxy TurnBasedMatchesResetForAllPlayersResource)
                       r
                       u

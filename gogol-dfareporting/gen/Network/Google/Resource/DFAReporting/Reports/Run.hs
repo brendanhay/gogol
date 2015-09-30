@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Runs a report.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsRun@.
-module DFAReporting.Reports.Run
+module Network.Google.Resource.DFAReporting.Reports.Run
     (
     -- * REST Resource
-      ReportsRunAPI
+      ReportsRunResource
 
     -- * Creating a Request
-    , reportsRun
-    , ReportsRun
+    , reportsRun'
+    , ReportsRun'
 
     -- * Request Lenses
     , rrQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsRun@ which the
--- 'ReportsRun' request conforms to.
-type ReportsRunAPI =
+-- 'ReportsRun'' request conforms to.
+type ReportsRunResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
            Capture "reportId" Int64 :>
              "run" :>
-               QueryParam "synchronous" Bool :> Post '[JSON] File
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "synchronous" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] File
 
 -- | Runs a report.
 --
--- /See:/ 'reportsRun' smart constructor.
-data ReportsRun = ReportsRun
+-- /See:/ 'reportsRun'' smart constructor.
+data ReportsRun' = ReportsRun'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
     , _rrSynchronous :: !(Maybe Bool)
@@ -67,7 +75,7 @@ data ReportsRun = ReportsRun
     , _rrKey         :: !(Maybe Text)
     , _rrOauthToken  :: !(Maybe Text)
     , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Text
+    , _rrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRun'' with the minimum fields required to make a request.
@@ -93,12 +101,12 @@ data ReportsRun = ReportsRun
 -- * 'rrFields'
 --
 -- * 'rrAlt'
-reportsRun
+reportsRun'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> ReportsRun
-reportsRun pRrReportId_ pRrProfileId_ =
-    ReportsRun
+    -> ReportsRun'
+reportsRun' pRrReportId_ pRrProfileId_ =
+    ReportsRun'
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
     , _rrSynchronous = Nothing
@@ -108,7 +116,7 @@ reportsRun pRrReportId_ pRrProfileId_ =
     , _rrKey = Nothing
     , _rrOauthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = "json"
+    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,20 +169,23 @@ rrFields :: Lens' ReportsRun' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
 -- | Data format for the response.
-rrAlt :: Lens' ReportsRun' Text
+rrAlt :: Lens' ReportsRun' Alt
 rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
 
 instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsRun{..}
-          = go _rrQuotaUser _rrPrettyPrint _rrSynchronous
+        requestWithRoute r u ReportsRun'{..}
+          = go _rrQuotaUser (Just _rrPrettyPrint)
+              _rrSynchronous
               _rrUserIp
               _rrReportId
               _rrProfileId
               _rrKey
               _rrOauthToken
               _rrFields
-              _rrAlt
+              (Just _rrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsRunAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ReportsRunResource)
+                      r
+                      u

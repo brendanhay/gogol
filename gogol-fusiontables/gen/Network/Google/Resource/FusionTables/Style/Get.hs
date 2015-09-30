@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a specific style.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleGet@.
-module FusionTables.Style.Get
+module Network.Google.Resource.FusionTables.Style.Get
     (
     -- * REST Resource
-      StyleGetAPI
+      StyleGetResource
 
     -- * Creating a Request
-    , styleGet
-    , StyleGet
+    , styleGet'
+    , StyleGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleGet@ which the
--- 'StyleGet' request conforms to.
-type StyleGetAPI =
+-- 'StyleGet'' request conforms to.
+type StyleGetResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           Capture "styleId" Int32 :> Get '[JSON] StyleSetting
+           Capture "styleId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
 --
--- /See:/ 'styleGet' smart constructor.
-data StyleGet = StyleGet
+-- /See:/ 'styleGet'' smart constructor.
+data StyleGet' = StyleGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data StyleGet = StyleGet
     , _sgOauthToken  :: !(Maybe Text)
     , _sgTableId     :: !Text
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data StyleGet = StyleGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-styleGet
+styleGet'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
-    -> StyleGet
-styleGet pSgStyleId_ pSgTableId_ =
-    StyleGet
+    -> StyleGet'
+styleGet' pSgStyleId_ pSgTableId_ =
+    StyleGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -101,7 +109,7 @@ styleGet pSgStyleId_ pSgTableId_ =
     , _sgOauthToken = Nothing
     , _sgTableId = pSgTableId_
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,20 @@ sgFields :: Lens' StyleGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' StyleGet' Text
+sgAlt :: Lens' StyleGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest StyleGet' where
         type Rs StyleGet' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp _sgKey
+        requestWithRoute r u StyleGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
+              _sgKey
               _sgStyleId
               _sgOauthToken
               _sgTableId
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy StyleGetResource) r
+                      u

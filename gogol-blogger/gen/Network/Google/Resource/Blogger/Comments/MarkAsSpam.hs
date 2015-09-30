@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Marks a comment as spam.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsMarkAsSpam@.
-module Blogger.Comments.MarkAsSpam
+module Network.Google.Resource.Blogger.Comments.MarkAsSpam
     (
     -- * REST Resource
-      CommentsMarkAsSpamAPI
+      CommentsMarkAsSpamResource
 
     -- * Creating a Request
-    , commentsMarkAsSpam
-    , CommentsMarkAsSpam
+    , commentsMarkAsSpam'
+    , CommentsMarkAsSpam'
 
     -- * Request Lenses
     , cmasQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsMarkAsSpam@ which the
--- 'CommentsMarkAsSpam' request conforms to.
-type CommentsMarkAsSpamAPI =
+-- 'CommentsMarkAsSpam'' request conforms to.
+type CommentsMarkAsSpamResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 "spam" :> Post '[JSON] Comment
+                 "spam" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Comment
 
 -- | Marks a comment as spam.
 --
--- /See:/ 'commentsMarkAsSpam' smart constructor.
-data CommentsMarkAsSpam = CommentsMarkAsSpam
+-- /See:/ 'commentsMarkAsSpam'' smart constructor.
+data CommentsMarkAsSpam' = CommentsMarkAsSpam'
     { _cmasQuotaUser   :: !(Maybe Text)
     , _cmasPrettyPrint :: !Bool
     , _cmasUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data CommentsMarkAsSpam = CommentsMarkAsSpam
     , _cmasOauthToken  :: !(Maybe Text)
     , _cmasCommentId   :: !Text
     , _cmasFields      :: !(Maybe Text)
-    , _cmasAlt         :: !Text
+    , _cmasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data CommentsMarkAsSpam = CommentsMarkAsSpam
 -- * 'cmasFields'
 --
 -- * 'cmasAlt'
-commentsMarkAsSpam
+commentsMarkAsSpam'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
-    -> CommentsMarkAsSpam
-commentsMarkAsSpam pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
-    CommentsMarkAsSpam
+    -> CommentsMarkAsSpam'
+commentsMarkAsSpam' pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
+    CommentsMarkAsSpam'
     { _cmasQuotaUser = Nothing
     , _cmasPrettyPrint = True
     , _cmasUserIp = Nothing
@@ -110,7 +118,7 @@ commentsMarkAsSpam pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
     , _cmasOauthToken = Nothing
     , _cmasCommentId = pCmasCommentId_
     , _cmasFields = Nothing
-    , _cmasAlt = "json"
+    , _cmasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,24 @@ cmasFields
   = lens _cmasFields (\ s a -> s{_cmasFields = a})
 
 -- | Data format for the response.
-cmasAlt :: Lens' CommentsMarkAsSpam' Text
+cmasAlt :: Lens' CommentsMarkAsSpam' Alt
 cmasAlt = lens _cmasAlt (\ s a -> s{_cmasAlt = a})
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = Comment
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsMarkAsSpam{..}
-          = go _cmasQuotaUser _cmasPrettyPrint _cmasUserIp
+        requestWithRoute r u CommentsMarkAsSpam'{..}
+          = go _cmasQuotaUser (Just _cmasPrettyPrint)
+              _cmasUserIp
               _cmasBlogId
               _cmasKey
               _cmasPostId
               _cmasOauthToken
               _cmasCommentId
               _cmasFields
-              _cmasAlt
+              (Just _cmasAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentsMarkAsSpamAPI)
+                      (Proxy :: Proxy CommentsMarkAsSpamResource)
                       r
                       u

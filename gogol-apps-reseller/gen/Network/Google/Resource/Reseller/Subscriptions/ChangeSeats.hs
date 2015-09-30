@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes the seats configuration of a subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeSeats@.
-module Reseller.Subscriptions.ChangeSeats
+module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     (
     -- * REST Resource
-      SubscriptionsChangeSeatsAPI
+      SubscriptionsChangeSeatsResource
 
     -- * Creating a Request
-    , subscriptionsChangeSeats
-    , SubscriptionsChangeSeats
+    , subscriptionsChangeSeats'
+    , SubscriptionsChangeSeats'
 
     -- * Request Lenses
     , scsQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsChangeSeats@ which the
--- 'SubscriptionsChangeSeats' request conforms to.
-type SubscriptionsChangeSeatsAPI =
+-- 'SubscriptionsChangeSeats'' request conforms to.
+type SubscriptionsChangeSeatsResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "changeSeats" :> Post '[JSON] Subscription
+             "changeSeats" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Changes the seats configuration of a subscription
 --
--- /See:/ 'subscriptionsChangeSeats' smart constructor.
-data SubscriptionsChangeSeats = SubscriptionsChangeSeats
+-- /See:/ 'subscriptionsChangeSeats'' smart constructor.
+data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
     { _scsQuotaUser      :: !(Maybe Text)
     , _scsPrettyPrint    :: !Bool
     , _scsUserIp         :: !(Maybe Text)
@@ -64,7 +72,7 @@ data SubscriptionsChangeSeats = SubscriptionsChangeSeats
     , _scsOauthToken     :: !(Maybe Text)
     , _scsSubscriptionId :: !Text
     , _scsFields         :: !(Maybe Text)
-    , _scsAlt            :: !Text
+    , _scsAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeSeats'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SubscriptionsChangeSeats = SubscriptionsChangeSeats
 -- * 'scsFields'
 --
 -- * 'scsAlt'
-subscriptionsChangeSeats
+subscriptionsChangeSeats'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsChangeSeats
-subscriptionsChangeSeats pScsCustomerId_ pScsSubscriptionId_ =
-    SubscriptionsChangeSeats
+    -> SubscriptionsChangeSeats'
+subscriptionsChangeSeats' pScsCustomerId_ pScsSubscriptionId_ =
+    SubscriptionsChangeSeats'
     { _scsQuotaUser = Nothing
     , _scsPrettyPrint = True
     , _scsUserIp = Nothing
@@ -102,7 +110,7 @@ subscriptionsChangeSeats pScsCustomerId_ pScsSubscriptionId_ =
     , _scsOauthToken = Nothing
     , _scsSubscriptionId = pScsSubscriptionId_
     , _scsFields = Nothing
-    , _scsAlt = "json"
+    , _scsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +162,23 @@ scsFields
   = lens _scsFields (\ s a -> s{_scsFields = a})
 
 -- | Data format for the response.
-scsAlt :: Lens' SubscriptionsChangeSeats' Text
+scsAlt :: Lens' SubscriptionsChangeSeats' Alt
 scsAlt = lens _scsAlt (\ s a -> s{_scsAlt = a})
 
 instance GoogleRequest SubscriptionsChangeSeats'
          where
         type Rs SubscriptionsChangeSeats' = Subscription
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsChangeSeats{..}
-          = go _scsQuotaUser _scsPrettyPrint _scsUserIp
+        requestWithRoute r u SubscriptionsChangeSeats'{..}
+          = go _scsQuotaUser (Just _scsPrettyPrint) _scsUserIp
               _scsCustomerId
               _scsKey
               _scsOauthToken
               _scsSubscriptionId
               _scsFields
-              _scsAlt
+              (Just _scsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsChangeSeatsAPI)
+                      (Proxy :: Proxy SubscriptionsChangeSeatsResource)
                       r
                       u

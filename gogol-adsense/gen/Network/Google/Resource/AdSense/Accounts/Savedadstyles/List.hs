@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all saved ad styles in the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsSavedadstylesList@.
-module AdSense.Accounts.Savedadstyles.List
+module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
     (
     -- * REST Resource
-      AccountsSavedadstylesListAPI
+      AccountsSavedadstylesListResource
 
     -- * Creating a Request
-    , accountsSavedadstylesList
-    , AccountsSavedadstylesList
+    , accountsSavedadstylesList'
+    , AccountsSavedadstylesList'
 
     -- * Request Lenses
     , aslQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsSavedadstylesList@ which the
--- 'AccountsSavedadstylesList' request conforms to.
-type AccountsSavedadstylesListAPI =
+-- 'AccountsSavedadstylesList'' request conforms to.
+type AccountsSavedadstylesListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "savedadstyles" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] SavedAdStyles
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the specified account.
 --
--- /See:/ 'accountsSavedadstylesList' smart constructor.
-data AccountsSavedadstylesList = AccountsSavedadstylesList
+-- /See:/ 'accountsSavedadstylesList'' smart constructor.
+data AccountsSavedadstylesList' = AccountsSavedadstylesList'
     { _aslQuotaUser   :: !(Maybe Text)
     , _aslPrettyPrint :: !Bool
     , _aslUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data AccountsSavedadstylesList = AccountsSavedadstylesList
     , _aslOauthToken  :: !(Maybe Text)
     , _aslMaxResults  :: !(Maybe Int32)
     , _aslFields      :: !(Maybe Text)
-    , _aslAlt         :: !Text
+    , _aslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data AccountsSavedadstylesList = AccountsSavedadstylesList
 -- * 'aslFields'
 --
 -- * 'aslAlt'
-accountsSavedadstylesList
+accountsSavedadstylesList'
     :: Text -- ^ 'accountId'
-    -> AccountsSavedadstylesList
-accountsSavedadstylesList pAslAccountId_ =
-    AccountsSavedadstylesList
+    -> AccountsSavedadstylesList'
+accountsSavedadstylesList' pAslAccountId_ =
+    AccountsSavedadstylesList'
     { _aslQuotaUser = Nothing
     , _aslPrettyPrint = True
     , _aslUserIp = Nothing
@@ -107,7 +114,7 @@ accountsSavedadstylesList pAslAccountId_ =
     , _aslOauthToken = Nothing
     , _aslMaxResults = Nothing
     , _aslFields = Nothing
-    , _aslAlt = "json"
+    , _aslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +173,24 @@ aslFields
   = lens _aslFields (\ s a -> s{_aslFields = a})
 
 -- | Data format for the response.
-aslAlt :: Lens' AccountsSavedadstylesList' Text
+aslAlt :: Lens' AccountsSavedadstylesList' Alt
 aslAlt = lens _aslAlt (\ s a -> s{_aslAlt = a})
 
 instance GoogleRequest AccountsSavedadstylesList'
          where
         type Rs AccountsSavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsSavedadstylesList{..}
-          = go _aslQuotaUser _aslPrettyPrint _aslUserIp
+        requestWithRoute r u AccountsSavedadstylesList'{..}
+          = go _aslQuotaUser (Just _aslPrettyPrint) _aslUserIp
               _aslAccountId
               _aslKey
               _aslPageToken
               _aslOauthToken
               _aslMaxResults
               _aslFields
-              _aslAlt
+              (Just _aslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsSavedadstylesListAPI)
+                      (Proxy :: Proxy AccountsSavedadstylesListResource)
                       r
                       u

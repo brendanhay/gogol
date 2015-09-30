@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the configuration of a topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsGet@.
-module PubSub.Projects.Topics.Get
+module Network.Google.Resource.PubSub.Projects.Topics.Get
     (
     -- * REST Resource
-      ProjectsTopicsGetAPI
+      ProjectsTopicsGetResource
 
     -- * Creating a Request
-    , projectsTopicsGet
-    , ProjectsTopicsGet
+    , projectsTopicsGet'
+    , ProjectsTopicsGet'
 
     -- * Request Lenses
     , ptgXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsGet@ which the
--- 'ProjectsTopicsGet' request conforms to.
-type ProjectsTopicsGetAPI =
-     "v1beta2" :> "{+topic}" :> Get '[JSON] Topic
+-- 'ProjectsTopicsGet'' request conforms to.
+type ProjectsTopicsGetResource =
+     "v1beta2" :>
+       "{+topic}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Topic
 
 -- | Gets the configuration of a topic.
 --
--- /See:/ 'projectsTopicsGet' smart constructor.
-data ProjectsTopicsGet = ProjectsTopicsGet
+-- /See:/ 'projectsTopicsGet'' smart constructor.
+data ProjectsTopicsGet' = ProjectsTopicsGet'
     { _ptgXgafv          :: !(Maybe Text)
     , _ptgQuotaUser      :: !(Maybe Text)
     , _ptgPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data ProjectsTopicsGet = ProjectsTopicsGet
 -- * 'ptgCallback'
 --
 -- * 'ptgAlt'
-projectsTopicsGet
+projectsTopicsGet'
     :: Text -- ^ 'topic'
-    -> ProjectsTopicsGet
-projectsTopicsGet pPtgTopic_ =
-    ProjectsTopicsGet
+    -> ProjectsTopicsGet'
+projectsTopicsGet' pPtgTopic_ =
+    ProjectsTopicsGet'
     { _ptgXgafv = Nothing
     , _ptgQuotaUser = Nothing
     , _ptgPrettyPrint = True
@@ -203,10 +218,10 @@ ptgAlt = lens _ptgAlt (\ s a -> s{_ptgAlt = a})
 instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsGet{..}
-          = go _ptgXgafv _ptgQuotaUser _ptgPrettyPrint
+        requestWithRoute r u ProjectsTopicsGet'{..}
+          = go _ptgXgafv _ptgQuotaUser (Just _ptgPrettyPrint)
               _ptgUploadProtocol
-              _ptgPp
+              (Just _ptgPp)
               _ptgAccessToken
               _ptgUploadType
               _ptgTopic
@@ -215,9 +230,9 @@ instance GoogleRequest ProjectsTopicsGet' where
               _ptgOauthToken
               _ptgFields
               _ptgCallback
-              _ptgAlt
+              (Just _ptgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsGetAPI)
+                      (Proxy :: Proxy ProjectsTopicsGetResource)
                       r
                       u

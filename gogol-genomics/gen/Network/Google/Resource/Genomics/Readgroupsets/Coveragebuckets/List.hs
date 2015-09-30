@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- group set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsCoveragebucketsList@.
-module Genomics.Readgroupsets.Coveragebuckets.List
+module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
     (
     -- * REST Resource
-      ReadgroupsetsCoveragebucketsListAPI
+      ReadgroupsetsCoveragebucketsListResource
 
     -- * Creating a Request
-    , readgroupsetsCoveragebucketsList
-    , ReadgroupsetsCoveragebucketsList
+    , readgroupsetsCoveragebucketsList'
+    , ReadgroupsetsCoveragebucketsList'
 
     -- * Request Lenses
     , rclQuotaUser
@@ -56,18 +57,25 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsCoveragebucketsList@ which the
--- 'ReadgroupsetsCoveragebucketsList' request conforms to.
-type ReadgroupsetsCoveragebucketsListAPI =
+-- 'ReadgroupsetsCoveragebucketsList'' request conforms to.
+type ReadgroupsetsCoveragebucketsListResource =
      "readgroupsets" :>
        Capture "readGroupSetId" Text :>
          "coveragebuckets" :>
-           QueryParam "range.end" Int64 :>
-             QueryParam "range.start" Int64 :>
-               QueryParam "targetBucketWidth" Int64 :>
-                 QueryParam "range.referenceName" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       Get '[JSON] ListCoverageBucketsResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "range.end" Int64 :>
+                   QueryParam "range.start" Int64 :>
+                     QueryParam "targetBucketWidth" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "range.referenceName" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] ListCoverageBucketsResponse
 
 -- | Lists fixed width coverage buckets for a read group set, each of which
 -- correspond to a range of a reference sequence. Each bucket summarizes
@@ -78,8 +86,8 @@ type ReadgroupsetsCoveragebucketsListAPI =
 -- levels\'. The caller must have READ permissions for the target read
 -- group set.
 --
--- /See:/ 'readgroupsetsCoveragebucketsList' smart constructor.
-data ReadgroupsetsCoveragebucketsList = ReadgroupsetsCoveragebucketsList
+-- /See:/ 'readgroupsetsCoveragebucketsList'' smart constructor.
+data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     { _rclQuotaUser          :: !(Maybe Text)
     , _rclPrettyPrint        :: !Bool
     , _rclReadGroupSetId     :: !Text
@@ -93,7 +101,7 @@ data ReadgroupsetsCoveragebucketsList = ReadgroupsetsCoveragebucketsList
     , _rclOauthToken         :: !(Maybe Text)
     , _rclPageSize           :: !(Maybe Int32)
     , _rclFields             :: !(Maybe Text)
-    , _rclAlt                :: !Text
+    , _rclAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCoveragebucketsList'' with the minimum fields required to make a request.
@@ -127,11 +135,11 @@ data ReadgroupsetsCoveragebucketsList = ReadgroupsetsCoveragebucketsList
 -- * 'rclFields'
 --
 -- * 'rclAlt'
-readgroupsetsCoveragebucketsList
+readgroupsetsCoveragebucketsList'
     :: Text -- ^ 'readGroupSetId'
-    -> ReadgroupsetsCoveragebucketsList
-readgroupsetsCoveragebucketsList pRclReadGroupSetId_ =
-    ReadgroupsetsCoveragebucketsList
+    -> ReadgroupsetsCoveragebucketsList'
+readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
+    ReadgroupsetsCoveragebucketsList'
     { _rclQuotaUser = Nothing
     , _rclPrettyPrint = True
     , _rclReadGroupSetId = pRclReadGroupSetId_
@@ -145,7 +153,7 @@ readgroupsetsCoveragebucketsList pRclReadGroupSetId_ =
     , _rclOauthToken = Nothing
     , _rclPageSize = Nothing
     , _rclFields = Nothing
-    , _rclAlt = "json"
+    , _rclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -234,7 +242,7 @@ rclFields
   = lens _rclFields (\ s a -> s{_rclFields = a})
 
 -- | Data format for the response.
-rclAlt :: Lens' ReadgroupsetsCoveragebucketsList' Text
+rclAlt :: Lens' ReadgroupsetsCoveragebucketsList' Alt
 rclAlt = lens _rclAlt (\ s a -> s{_rclAlt = a})
 
 instance GoogleRequest
@@ -243,8 +251,9 @@ instance GoogleRequest
              ListCoverageBucketsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u
-          ReadgroupsetsCoveragebucketsList{..}
-          = go _rclQuotaUser _rclPrettyPrint _rclReadGroupSetId
+          ReadgroupsetsCoveragebucketsList'{..}
+          = go _rclQuotaUser (Just _rclPrettyPrint)
+              _rclReadGroupSetId
               _rclUserIp
               _rclRangeEnd
               _rclRangeStart
@@ -255,9 +264,10 @@ instance GoogleRequest
               _rclOauthToken
               _rclPageSize
               _rclFields
-              _rclAlt
+              (Just _rclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsCoveragebucketsListAPI)
+                      (Proxy ::
+                         Proxy ReadgroupsetsCoveragebucketsListResource)
                       r
                       u

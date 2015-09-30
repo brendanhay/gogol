@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes the renewal settings of a subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangeRenewalSettings@.
-module Reseller.Subscriptions.ChangeRenewalSettings
+module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     (
     -- * REST Resource
-      SubscriptionsChangeRenewalSettingsAPI
+      SubscriptionsChangeRenewalSettingsResource
 
     -- * Creating a Request
-    , subscriptionsChangeRenewalSettings
-    , SubscriptionsChangeRenewalSettings
+    , subscriptionsChangeRenewalSettings'
+    , SubscriptionsChangeRenewalSettings'
 
     -- * Request Lenses
     , scrsQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsChangeRenewalSettings@ which the
--- 'SubscriptionsChangeRenewalSettings' request conforms to.
-type SubscriptionsChangeRenewalSettingsAPI =
+-- 'SubscriptionsChangeRenewalSettings'' request conforms to.
+type SubscriptionsChangeRenewalSettingsResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "changeRenewalSettings" :> Post '[JSON] Subscription
+             "changeRenewalSettings" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Changes the renewal settings of a subscription
 --
--- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
-data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings
+-- /See:/ 'subscriptionsChangeRenewalSettings'' smart constructor.
+data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
     { _scrsQuotaUser      :: !(Maybe Text)
     , _scrsPrettyPrint    :: !Bool
     , _scrsUserIp         :: !(Maybe Text)
@@ -64,7 +72,7 @@ data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings
     , _scrsOauthToken     :: !(Maybe Text)
     , _scrsSubscriptionId :: !Text
     , _scrsFields         :: !(Maybe Text)
-    , _scrsAlt            :: !Text
+    , _scrsAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeRenewalSettings'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings
 -- * 'scrsFields'
 --
 -- * 'scrsAlt'
-subscriptionsChangeRenewalSettings
+subscriptionsChangeRenewalSettings'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsChangeRenewalSettings
-subscriptionsChangeRenewalSettings pScrsCustomerId_ pScrsSubscriptionId_ =
-    SubscriptionsChangeRenewalSettings
+    -> SubscriptionsChangeRenewalSettings'
+subscriptionsChangeRenewalSettings' pScrsCustomerId_ pScrsSubscriptionId_ =
+    SubscriptionsChangeRenewalSettings'
     { _scrsQuotaUser = Nothing
     , _scrsPrettyPrint = True
     , _scrsUserIp = Nothing
@@ -102,7 +110,7 @@ subscriptionsChangeRenewalSettings pScrsCustomerId_ pScrsSubscriptionId_ =
     , _scrsOauthToken = Nothing
     , _scrsSubscriptionId = pScrsSubscriptionId_
     , _scrsFields = Nothing
-    , _scrsAlt = "json"
+    , _scrsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ scrsFields
   = lens _scrsFields (\ s a -> s{_scrsFields = a})
 
 -- | Data format for the response.
-scrsAlt :: Lens' SubscriptionsChangeRenewalSettings' Text
+scrsAlt :: Lens' SubscriptionsChangeRenewalSettings' Alt
 scrsAlt = lens _scrsAlt (\ s a -> s{_scrsAlt = a})
 
 instance GoogleRequest
@@ -164,17 +172,18 @@ instance GoogleRequest
              Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u
-          SubscriptionsChangeRenewalSettings{..}
-          = go _scrsQuotaUser _scrsPrettyPrint _scrsUserIp
+          SubscriptionsChangeRenewalSettings'{..}
+          = go _scrsQuotaUser (Just _scrsPrettyPrint)
+              _scrsUserIp
               _scrsCustomerId
               _scrsKey
               _scrsOauthToken
               _scrsSubscriptionId
               _scrsFields
-              _scrsAlt
+              (Just _scrsAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy SubscriptionsChangeRenewalSettingsAPI)
+                         Proxy SubscriptionsChangeRenewalSettingsResource)
                       r
                       u

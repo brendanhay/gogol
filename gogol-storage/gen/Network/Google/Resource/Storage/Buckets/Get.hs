@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns metadata for the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsGet@.
-module Storage.Buckets.Get
+module Network.Google.Resource.Storage.Buckets.Get
     (
     -- * REST Resource
-      BucketsGetAPI
+      BucketsGetResource
 
     -- * Creating a Request
-    , bucketsGet
-    , BucketsGet
+    , bucketsGet'
+    , BucketsGet'
 
     -- * Request Lenses
     , bgQuotaUser
@@ -46,18 +47,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketsGet@ which the
--- 'BucketsGet' request conforms to.
-type BucketsGetAPI =
+-- 'BucketsGet'' request conforms to.
+type BucketsGetResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection" Text :> Get '[JSON] Bucket
+         QueryParam "quotaUser" Text :>
+           QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection" StorageBucketsGetProjection
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Bucket
 
 -- | Returns metadata for the specified bucket.
 --
--- /See:/ 'bucketsGet' smart constructor.
-data BucketsGet = BucketsGet
+-- /See:/ 'bucketsGet'' smart constructor.
+data BucketsGet' = BucketsGet'
     { _bgQuotaUser                :: !(Maybe Text)
     , _bgIfMetagenerationMatch    :: !(Maybe Word64)
     , _bgPrettyPrint              :: !Bool
@@ -65,10 +74,10 @@ data BucketsGet = BucketsGet
     , _bgBucket                   :: !Text
     , _bgKey                      :: !(Maybe Text)
     , _bgIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _bgProjection               :: !(Maybe Text)
+    , _bgProjection               :: !(Maybe StorageBucketsGetProjection)
     , _bgOauthToken               :: !(Maybe Text)
     , _bgFields                   :: !(Maybe Text)
-    , _bgAlt                      :: !Text
+    , _bgAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsGet'' with the minimum fields required to make a request.
@@ -96,11 +105,11 @@ data BucketsGet = BucketsGet
 -- * 'bgFields'
 --
 -- * 'bgAlt'
-bucketsGet
+bucketsGet'
     :: Text -- ^ 'bucket'
-    -> BucketsGet
-bucketsGet pBgBucket_ =
-    BucketsGet
+    -> BucketsGet'
+bucketsGet' pBgBucket_ =
+    BucketsGet'
     { _bgQuotaUser = Nothing
     , _bgIfMetagenerationMatch = Nothing
     , _bgPrettyPrint = True
@@ -111,7 +120,7 @@ bucketsGet pBgBucket_ =
     , _bgProjection = Nothing
     , _bgOauthToken = Nothing
     , _bgFields = Nothing
-    , _bgAlt = "json"
+    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +166,7 @@ bgIfMetagenerationNotMatch
       (\ s a -> s{_bgIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-bgProjection :: Lens' BucketsGet' (Maybe Text)
+bgProjection :: Lens' BucketsGet' (Maybe StorageBucketsGetProjection)
 bgProjection
   = lens _bgProjection (\ s a -> s{_bgProjection = a})
 
@@ -171,15 +180,15 @@ bgFields :: Lens' BucketsGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 -- | Data format for the response.
-bgAlt :: Lens' BucketsGet' Text
+bgAlt :: Lens' BucketsGet' Alt
 bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
 
 instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsGet{..}
+        requestWithRoute r u BucketsGet'{..}
           = go _bgQuotaUser _bgIfMetagenerationMatch
-              _bgPrettyPrint
+              (Just _bgPrettyPrint)
               _bgUserIp
               _bgBucket
               _bgKey
@@ -187,6 +196,8 @@ instance GoogleRequest BucketsGet' where
               _bgProjection
               _bgOauthToken
               _bgFields
-              _bgAlt
+              (Just _bgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy BucketsGetResource)
+                      r
+                      u

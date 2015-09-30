@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the list of your verified websites and domains.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceList@.
-module SiteVerification.WebResource.List
+module Network.Google.Resource.SiteVerification.WebResource.List
     (
     -- * REST Resource
-      WebResourceListAPI
+      WebResourceListResource
 
     -- * Creating a Request
-    , webResourceList
-    , WebResourceList
+    , webResourceList'
+    , WebResourceList'
 
     -- * Request Lenses
     , wrlQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourceList@ which the
--- 'WebResourceList' request conforms to.
-type WebResourceListAPI =
+-- 'WebResourceList'' request conforms to.
+type WebResourceListResource =
      "webResource" :>
-       Get '[JSON] SiteVerificationWebResourceListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] SiteVerificationWebResourceListResponse
 
 -- | Get the list of your verified websites and domains.
 --
--- /See:/ 'webResourceList' smart constructor.
-data WebResourceList = WebResourceList
+-- /See:/ 'webResourceList'' smart constructor.
+data WebResourceList' = WebResourceList'
     { _wrlQuotaUser   :: !(Maybe Text)
     , _wrlPrettyPrint :: !Bool
     , _wrlUserIp      :: !(Maybe Text)
     , _wrlKey         :: !(Maybe Text)
     , _wrlOauthToken  :: !(Maybe Text)
     , _wrlFields      :: !(Maybe Text)
-    , _wrlAlt         :: !Text
+    , _wrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceList'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data WebResourceList = WebResourceList
 -- * 'wrlFields'
 --
 -- * 'wrlAlt'
-webResourceList
-    :: WebResourceList
-webResourceList =
-    WebResourceList
+webResourceList'
+    :: WebResourceList'
+webResourceList' =
+    WebResourceList'
     { _wrlQuotaUser = Nothing
     , _wrlPrettyPrint = False
     , _wrlUserIp = Nothing
     , _wrlKey = Nothing
     , _wrlOauthToken = Nothing
     , _wrlFields = Nothing
-    , _wrlAlt = "json"
+    , _wrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +135,21 @@ wrlFields
   = lens _wrlFields (\ s a -> s{_wrlFields = a})
 
 -- | Data format for the response.
-wrlAlt :: Lens' WebResourceList' Text
+wrlAlt :: Lens' WebResourceList' Alt
 wrlAlt = lens _wrlAlt (\ s a -> s{_wrlAlt = a})
 
 instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =
              SiteVerificationWebResourceListResponse
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceList{..}
-          = go _wrlQuotaUser _wrlPrettyPrint _wrlUserIp _wrlKey
+        requestWithRoute r u WebResourceList'{..}
+          = go _wrlQuotaUser (Just _wrlPrettyPrint) _wrlUserIp
+              _wrlKey
               _wrlOauthToken
               _wrlFields
-              _wrlAlt
+              (Just _wrlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy WebResourceListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy WebResourceListResource)
                       r
                       u

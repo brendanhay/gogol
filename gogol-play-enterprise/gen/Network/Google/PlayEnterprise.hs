@@ -28,151 +28,151 @@ module Network.Google.PlayEnterprise
     -- * REST Resources
 
     -- ** AndroidenterpriseCollectionsDelete
-    , module Androidenterprise.Collections.Delete
+    , module Network.Google.Resource.Androidenterprise.Collections.Delete
 
     -- ** AndroidenterpriseCollectionsGet
-    , module Androidenterprise.Collections.Get
+    , module Network.Google.Resource.Androidenterprise.Collections.Get
 
     -- ** AndroidenterpriseCollectionsInsert
-    , module Androidenterprise.Collections.Insert
+    , module Network.Google.Resource.Androidenterprise.Collections.Insert
 
     -- ** AndroidenterpriseCollectionsList
-    , module Androidenterprise.Collections.List
+    , module Network.Google.Resource.Androidenterprise.Collections.List
 
     -- ** AndroidenterpriseCollectionsPatch
-    , module Androidenterprise.Collections.Patch
+    , module Network.Google.Resource.Androidenterprise.Collections.Patch
 
     -- ** AndroidenterpriseCollectionsUpdate
-    , module Androidenterprise.Collections.Update
+    , module Network.Google.Resource.Androidenterprise.Collections.Update
 
     -- ** AndroidenterpriseCollectionviewersDelete
-    , module Androidenterprise.Collectionviewers.Delete
+    , module Network.Google.Resource.Androidenterprise.Collectionviewers.Delete
 
     -- ** AndroidenterpriseCollectionviewersGet
-    , module Androidenterprise.Collectionviewers.Get
+    , module Network.Google.Resource.Androidenterprise.Collectionviewers.Get
 
     -- ** AndroidenterpriseCollectionviewersList
-    , module Androidenterprise.Collectionviewers.List
+    , module Network.Google.Resource.Androidenterprise.Collectionviewers.List
 
     -- ** AndroidenterpriseCollectionviewersPatch
-    , module Androidenterprise.Collectionviewers.Patch
+    , module Network.Google.Resource.Androidenterprise.Collectionviewers.Patch
 
     -- ** AndroidenterpriseCollectionviewersUpdate
-    , module Androidenterprise.Collectionviewers.Update
+    , module Network.Google.Resource.Androidenterprise.Collectionviewers.Update
 
     -- ** AndroidenterpriseDevicesGet
-    , module Androidenterprise.Devices.Get
+    , module Network.Google.Resource.Androidenterprise.Devices.Get
 
     -- ** AndroidenterpriseDevicesGetState
-    , module Androidenterprise.Devices.GetState
+    , module Network.Google.Resource.Androidenterprise.Devices.GetState
 
     -- ** AndroidenterpriseDevicesList
-    , module Androidenterprise.Devices.List
+    , module Network.Google.Resource.Androidenterprise.Devices.List
 
     -- ** AndroidenterpriseDevicesSetState
-    , module Androidenterprise.Devices.SetState
+    , module Network.Google.Resource.Androidenterprise.Devices.SetState
 
     -- ** AndroidenterpriseEnterprisesDelete
-    , module Androidenterprise.Enterprises.Delete
+    , module Network.Google.Resource.Androidenterprise.Enterprises.Delete
 
     -- ** AndroidenterpriseEnterprisesEnroll
-    , module Androidenterprise.Enterprises.Enroll
+    , module Network.Google.Resource.Androidenterprise.Enterprises.Enroll
 
     -- ** AndroidenterpriseEnterprisesGet
-    , module Androidenterprise.Enterprises.Get
+    , module Network.Google.Resource.Androidenterprise.Enterprises.Get
 
     -- ** AndroidenterpriseEnterprisesInsert
-    , module Androidenterprise.Enterprises.Insert
+    , module Network.Google.Resource.Androidenterprise.Enterprises.Insert
 
     -- ** AndroidenterpriseEnterprisesList
-    , module Androidenterprise.Enterprises.List
+    , module Network.Google.Resource.Androidenterprise.Enterprises.List
 
     -- ** AndroidenterpriseEnterprisesSendTestPushNotification
-    , module Androidenterprise.Enterprises.SendTestPushNotification
+    , module Network.Google.Resource.Androidenterprise.Enterprises.SendTestPushNotification
 
     -- ** AndroidenterpriseEnterprisesSetAccount
-    , module Androidenterprise.Enterprises.SetAccount
+    , module Network.Google.Resource.Androidenterprise.Enterprises.SetAccount
 
     -- ** AndroidenterpriseEnterprisesUnenroll
-    , module Androidenterprise.Enterprises.Unenroll
+    , module Network.Google.Resource.Androidenterprise.Enterprises.Unenroll
 
     -- ** AndroidenterpriseEntitlementsDelete
-    , module Androidenterprise.Entitlements.Delete
+    , module Network.Google.Resource.Androidenterprise.Entitlements.Delete
 
     -- ** AndroidenterpriseEntitlementsGet
-    , module Androidenterprise.Entitlements.Get
+    , module Network.Google.Resource.Androidenterprise.Entitlements.Get
 
     -- ** AndroidenterpriseEntitlementsList
-    , module Androidenterprise.Entitlements.List
+    , module Network.Google.Resource.Androidenterprise.Entitlements.List
 
     -- ** AndroidenterpriseEntitlementsPatch
-    , module Androidenterprise.Entitlements.Patch
+    , module Network.Google.Resource.Androidenterprise.Entitlements.Patch
 
     -- ** AndroidenterpriseEntitlementsUpdate
-    , module Androidenterprise.Entitlements.Update
+    , module Network.Google.Resource.Androidenterprise.Entitlements.Update
 
     -- ** AndroidenterpriseGrouplicensesGet
-    , module Androidenterprise.Grouplicenses.Get
+    , module Network.Google.Resource.Androidenterprise.Grouplicenses.Get
 
     -- ** AndroidenterpriseGrouplicensesList
-    , module Androidenterprise.Grouplicenses.List
+    , module Network.Google.Resource.Androidenterprise.Grouplicenses.List
 
     -- ** AndroidenterpriseGrouplicenseusersList
-    , module Androidenterprise.Grouplicenseusers.List
+    , module Network.Google.Resource.Androidenterprise.Grouplicenseusers.List
 
     -- ** AndroidenterpriseInstallsDelete
-    , module Androidenterprise.Installs.Delete
+    , module Network.Google.Resource.Androidenterprise.Installs.Delete
 
     -- ** AndroidenterpriseInstallsGet
-    , module Androidenterprise.Installs.Get
+    , module Network.Google.Resource.Androidenterprise.Installs.Get
 
     -- ** AndroidenterpriseInstallsList
-    , module Androidenterprise.Installs.List
+    , module Network.Google.Resource.Androidenterprise.Installs.List
 
     -- ** AndroidenterpriseInstallsPatch
-    , module Androidenterprise.Installs.Patch
+    , module Network.Google.Resource.Androidenterprise.Installs.Patch
 
     -- ** AndroidenterpriseInstallsUpdate
-    , module Androidenterprise.Installs.Update
+    , module Network.Google.Resource.Androidenterprise.Installs.Update
 
     -- ** AndroidenterprisePermissionsGet
-    , module Androidenterprise.Permissions.Get
+    , module Network.Google.Resource.Androidenterprise.Permissions.Get
 
     -- ** AndroidenterpriseProductsApprove
-    , module Androidenterprise.Products.Approve
+    , module Network.Google.Resource.Androidenterprise.Products.Approve
 
     -- ** AndroidenterpriseProductsGenerateApprovalURL
-    , module Androidenterprise.Products.GenerateApprovalURL
+    , module Network.Google.Resource.Androidenterprise.Products.GenerateApprovalURL
 
     -- ** AndroidenterpriseProductsGet
-    , module Androidenterprise.Products.Get
+    , module Network.Google.Resource.Androidenterprise.Products.Get
 
     -- ** AndroidenterpriseProductsGetAppRestrictionsSchema
-    , module Androidenterprise.Products.GetAppRestrictionsSchema
+    , module Network.Google.Resource.Androidenterprise.Products.GetAppRestrictionsSchema
 
     -- ** AndroidenterpriseProductsGetPermissions
-    , module Androidenterprise.Products.GetPermissions
+    , module Network.Google.Resource.Androidenterprise.Products.GetPermissions
 
     -- ** AndroidenterpriseProductsUpdatePermissions
-    , module Androidenterprise.Products.UpdatePermissions
+    , module Network.Google.Resource.Androidenterprise.Products.UpdatePermissions
 
     -- ** AndroidenterpriseUsersGenerateToken
-    , module Androidenterprise.Users.GenerateToken
+    , module Network.Google.Resource.Androidenterprise.Users.GenerateToken
 
     -- ** AndroidenterpriseUsersGet
-    , module Androidenterprise.Users.Get
+    , module Network.Google.Resource.Androidenterprise.Users.Get
 
     -- ** AndroidenterpriseUsersGetAvailableProductSet
-    , module Androidenterprise.Users.GetAvailableProductSet
+    , module Network.Google.Resource.Androidenterprise.Users.GetAvailableProductSet
 
     -- ** AndroidenterpriseUsersList
-    , module Androidenterprise.Users.List
+    , module Network.Google.Resource.Androidenterprise.Users.List
 
     -- ** AndroidenterpriseUsersRevokeToken
-    , module Androidenterprise.Users.RevokeToken
+    , module Network.Google.Resource.Androidenterprise.Users.RevokeToken
 
     -- ** AndroidenterpriseUsersSetAvailableProductSet
-    , module Androidenterprise.Users.SetAvailableProductSet
+    , module Network.Google.Resource.Androidenterprise.Users.SetAvailableProductSet
 
     -- * Types
 
@@ -399,6 +399,9 @@ module Network.Google.PlayEnterprise
     , eeKind
     , eeReason
     , eeProductId
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.PlayEnterprise.Types
@@ -458,15 +461,55 @@ TODO
 -}
 
 type PlayEnterpriseAPI =
-     Collectionviewers :<|> Users :<|> Installs :<|>
-       Collections
-       :<|> Enterprises
-       :<|> Grouplicenses
-       :<|> Entitlements
-       :<|> Permissions
-       :<|> Products
-       :<|> Devices
-       :<|> Grouplicenseusers
+     CollectionviewersListResource :<|>
+       CollectionviewersPatchResource
+       :<|> CollectionviewersGetResource
+       :<|> CollectionviewersDeleteResource
+       :<|> CollectionviewersUpdateResource
+       :<|> UsersListResource
+       :<|> UsersGenerateTokenResource
+       :<|> UsersGetResource
+       :<|> UsersSetAvailableProductSetResource
+       :<|> UsersRevokeTokenResource
+       :<|> UsersGetAvailableProductSetResource
+       :<|> InstallsListResource
+       :<|> InstallsPatchResource
+       :<|> InstallsGetResource
+       :<|> InstallsDeleteResource
+       :<|> InstallsUpdateResource
+       :<|> CollectionsInsertResource
+       :<|> CollectionsListResource
+       :<|> CollectionsPatchResource
+       :<|> CollectionsGetResource
+       :<|> CollectionsDeleteResource
+       :<|> CollectionsUpdateResource
+       :<|> EnterprisesInsertResource
+       :<|> EnterprisesListResource
+       :<|> EnterprisesUnenrollResource
+       :<|> EnterprisesSetAccountResource
+       :<|> EnterprisesEnrollResource
+       :<|> EnterprisesGetResource
+       :<|> EnterprisesSendTestPushNotificationResource
+       :<|> EnterprisesDeleteResource
+       :<|> GrouplicensesListResource
+       :<|> GrouplicensesGetResource
+       :<|> EntitlementsListResource
+       :<|> EntitlementsPatchResource
+       :<|> EntitlementsGetResource
+       :<|> EntitlementsDeleteResource
+       :<|> EntitlementsUpdateResource
+       :<|> PermissionsGetResource
+       :<|> ProductsGenerateApprovalURLResource
+       :<|> ProductsGetResource
+       :<|> ProductsGetAppRestrictionsSchemaResource
+       :<|> ProductsApproveResource
+       :<|> ProductsGetPermissionsResource
+       :<|> ProductsUpdatePermissionsResource
+       :<|> DevicesListResource
+       :<|> DevicesSetStateResource
+       :<|> DevicesGetResource
+       :<|> DevicesGetStateResource
+       :<|> GrouplicenseusersListResource
 
 playEnterpriseAPI :: Proxy PlayEnterpriseAPI
 playEnterpriseAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new goal.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsInsert@.
-module Analytics.Management.Goals.Insert
+module Network.Google.Resource.Analytics.Management.Goals.Insert
     (
     -- * REST Resource
-      ManagementGoalsInsertAPI
+      ManagementGoalsInsertResource
 
     -- * Creating a Request
-    , managementGoalsInsert
-    , ManagementGoalsInsert
+    , managementGoalsInsert'
+    , ManagementGoalsInsert'
 
     -- * Request Lenses
     , mgiQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsInsert@ which the
--- 'ManagementGoalsInsert' request conforms to.
-type ManagementGoalsInsertAPI =
+-- 'ManagementGoalsInsert'' request conforms to.
+type ManagementGoalsInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementGoalsInsertAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "goals" :> Post '[JSON] Goal
+                   "goals" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Goal
 
 -- | Create a new goal.
 --
--- /See:/ 'managementGoalsInsert' smart constructor.
-data ManagementGoalsInsert = ManagementGoalsInsert
+-- /See:/ 'managementGoalsInsert'' smart constructor.
+data ManagementGoalsInsert' = ManagementGoalsInsert'
     { _mgiQuotaUser     :: !(Maybe Text)
     , _mgiPrettyPrint   :: !Bool
     , _mgiWebPropertyId :: !Text
@@ -69,7 +77,7 @@ data ManagementGoalsInsert = ManagementGoalsInsert
     , _mgiKey           :: !(Maybe Text)
     , _mgiOauthToken    :: !(Maybe Text)
     , _mgiFields        :: !(Maybe Text)
-    , _mgiAlt           :: !Text
+    , _mgiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsInsert'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementGoalsInsert = ManagementGoalsInsert
 -- * 'mgiFields'
 --
 -- * 'mgiAlt'
-managementGoalsInsert
+managementGoalsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementGoalsInsert
-managementGoalsInsert pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ =
-    ManagementGoalsInsert
+    -> ManagementGoalsInsert'
+managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ =
+    ManagementGoalsInsert'
     { _mgiQuotaUser = Nothing
     , _mgiPrettyPrint = False
     , _mgiWebPropertyId = pMgiWebPropertyId_
@@ -111,7 +119,7 @@ managementGoalsInsert pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ =
     , _mgiKey = Nothing
     , _mgiOauthToken = Nothing
     , _mgiFields = Nothing
-    , _mgiAlt = "json"
+    , _mgiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,24 @@ mgiFields
   = lens _mgiFields (\ s a -> s{_mgiFields = a})
 
 -- | Data format for the response.
-mgiAlt :: Lens' ManagementGoalsInsert' Text
+mgiAlt :: Lens' ManagementGoalsInsert' Alt
 mgiAlt = lens _mgiAlt (\ s a -> s{_mgiAlt = a})
 
 instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsInsert{..}
-          = go _mgiQuotaUser _mgiPrettyPrint _mgiWebPropertyId
+        requestWithRoute r u ManagementGoalsInsert'{..}
+          = go _mgiQuotaUser (Just _mgiPrettyPrint)
+              _mgiWebPropertyId
               _mgiUserIp
               _mgiProfileId
               _mgiAccountId
               _mgiKey
               _mgiOauthToken
               _mgiFields
-              _mgiAlt
+              (Just _mgiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementGoalsInsertAPI)
+                      (Proxy :: Proxy ManagementGoalsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists unsampled reports to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnsampledReportsList@.
-module Analytics.Management.UnsampledReports.List
+module Network.Google.Resource.Analytics.Management.UnsampledReports.List
     (
     -- * REST Resource
-      ManagementUnsampledReportsListAPI
+      ManagementUnsampledReportsListResource
 
     -- * Creating a Request
-    , managementUnsampledReportsList
-    , ManagementUnsampledReportsList
+    , managementUnsampledReportsList'
+    , ManagementUnsampledReportsList'
 
     -- * Request Lenses
     , murlQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUnsampledReportsList@ which the
--- 'ManagementUnsampledReportsList' request conforms to.
-type ManagementUnsampledReportsListAPI =
+-- 'ManagementUnsampledReportsList'' request conforms to.
+type ManagementUnsampledReportsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,14 +58,21 @@ type ManagementUnsampledReportsListAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "unsampledReports" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         Get '[JSON] UnsampledReports
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] UnsampledReports
 
 -- | Lists unsampled reports to which the user has access.
 --
--- /See:/ 'managementUnsampledReportsList' smart constructor.
-data ManagementUnsampledReportsList = ManagementUnsampledReportsList
+-- /See:/ 'managementUnsampledReportsList'' smart constructor.
+data ManagementUnsampledReportsList' = ManagementUnsampledReportsList'
     { _murlQuotaUser     :: !(Maybe Text)
     , _murlPrettyPrint   :: !Bool
     , _murlWebPropertyId :: !Text
@@ -76,7 +84,7 @@ data ManagementUnsampledReportsList = ManagementUnsampledReportsList
     , _murlStartIndex    :: !(Maybe Int32)
     , _murlMaxResults    :: !(Maybe Int32)
     , _murlFields        :: !(Maybe Text)
-    , _murlAlt           :: !Text
+    , _murlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnsampledReportsList'' with the minimum fields required to make a request.
@@ -106,13 +114,13 @@ data ManagementUnsampledReportsList = ManagementUnsampledReportsList
 -- * 'murlFields'
 --
 -- * 'murlAlt'
-managementUnsampledReportsList
+managementUnsampledReportsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementUnsampledReportsList
-managementUnsampledReportsList pMurlWebPropertyId_ pMurlProfileId_ pMurlAccountId_ =
-    ManagementUnsampledReportsList
+    -> ManagementUnsampledReportsList'
+managementUnsampledReportsList' pMurlWebPropertyId_ pMurlProfileId_ pMurlAccountId_ =
+    ManagementUnsampledReportsList'
     { _murlQuotaUser = Nothing
     , _murlPrettyPrint = False
     , _murlWebPropertyId = pMurlWebPropertyId_
@@ -124,7 +132,7 @@ managementUnsampledReportsList pMurlWebPropertyId_ pMurlProfileId_ pMurlAccountI
     , _murlStartIndex = Nothing
     , _murlMaxResults = Nothing
     , _murlFields = Nothing
-    , _murlAlt = "json"
+    , _murlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,7 +207,7 @@ murlFields
   = lens _murlFields (\ s a -> s{_murlFields = a})
 
 -- | Data format for the response.
-murlAlt :: Lens' ManagementUnsampledReportsList' Text
+murlAlt :: Lens' ManagementUnsampledReportsList' Alt
 murlAlt = lens _murlAlt (\ s a -> s{_murlAlt = a})
 
 instance GoogleRequest
@@ -208,8 +216,8 @@ instance GoogleRequest
              UnsampledReports
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementUnsampledReportsList{..}
-          = go _murlQuotaUser _murlPrettyPrint
+          ManagementUnsampledReportsList'{..}
+          = go _murlQuotaUser (Just _murlPrettyPrint)
               _murlWebPropertyId
               _murlUserIp
               _murlProfileId
@@ -219,9 +227,10 @@ instance GoogleRequest
               _murlStartIndex
               _murlMaxResults
               _murlFields
-              _murlAlt
+              (Just _murlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUnsampledReportsListAPI)
+                      (Proxy ::
+                         Proxy ManagementUnsampledReportsListResource)
                       r
                       u

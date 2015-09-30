@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deploys new code and resource files to a version.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsCreate@.
-module AppEngine.Apps.Modules.Versions.Create
+module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     (
     -- * REST Resource
-      AppsModulesVersionsCreateAPI
+      AppsModulesVersionsCreateResource
 
     -- * Creating a Request
-    , appsModulesVersionsCreate
-    , AppsModulesVersionsCreate
+    , appsModulesVersionsCreate'
+    , AppsModulesVersionsCreate'
 
     -- * Request Lenses
     , amvcXgafv
@@ -50,19 +51,33 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesVersionsCreate@ which the
--- 'AppsModulesVersionsCreate' request conforms to.
-type AppsModulesVersionsCreateAPI =
+-- 'AppsModulesVersionsCreate'' request conforms to.
+type AppsModulesVersionsCreateResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
              Capture "modulesId" Text :>
-               "versions" :> Post '[JSON] Operation
+               "versions" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] Operation
 
 -- | Deploys new code and resource files to a version.
 --
--- /See:/ 'appsModulesVersionsCreate' smart constructor.
-data AppsModulesVersionsCreate = AppsModulesVersionsCreate
+-- /See:/ 'appsModulesVersionsCreate'' smart constructor.
+data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     { _amvcXgafv          :: !(Maybe Text)
     , _amvcQuotaUser      :: !(Maybe Text)
     , _amvcPrettyPrint    :: !Bool
@@ -113,12 +128,12 @@ data AppsModulesVersionsCreate = AppsModulesVersionsCreate
 -- * 'amvcCallback'
 --
 -- * 'amvcAlt'
-appsModulesVersionsCreate
+appsModulesVersionsCreate'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesVersionsCreate
-appsModulesVersionsCreate pAmvcModulesId_ pAmvcAppsId_ =
-    AppsModulesVersionsCreate
+    -> AppsModulesVersionsCreate'
+appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ =
+    AppsModulesVersionsCreate'
     { _amvcXgafv = Nothing
     , _amvcQuotaUser = Nothing
     , _amvcPrettyPrint = True
@@ -225,10 +240,11 @@ instance GoogleRequest AppsModulesVersionsCreate'
          where
         type Rs AppsModulesVersionsCreate' = Operation
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsCreate{..}
-          = go _amvcXgafv _amvcQuotaUser _amvcPrettyPrint
+        requestWithRoute r u AppsModulesVersionsCreate'{..}
+          = go _amvcXgafv _amvcQuotaUser
+              (Just _amvcPrettyPrint)
               _amvcUploadProtocol
-              _amvcPp
+              (Just _amvcPp)
               _amvcAccessToken
               _amvcUploadType
               _amvcModulesId
@@ -238,9 +254,9 @@ instance GoogleRequest AppsModulesVersionsCreate'
               _amvcOauthToken
               _amvcFields
               _amvcCallback
-              _amvcAlt
+              (Just _amvcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesVersionsCreateAPI)
+                      (Proxy :: Proxy AppsModulesVersionsCreateResource)
                       r
                       u

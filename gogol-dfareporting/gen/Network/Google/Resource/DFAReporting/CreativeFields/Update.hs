@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing creative field.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsUpdate@.
-module DFAReporting.CreativeFields.Update
+module Network.Google.Resource.DFAReporting.CreativeFields.Update
     (
     -- * REST Resource
-      CreativeFieldsUpdateAPI
+      CreativeFieldsUpdateResource
 
     -- * Creating a Request
-    , creativeFieldsUpdate
-    , CreativeFieldsUpdate
+    , creativeFieldsUpdate'
+    , CreativeFieldsUpdate'
 
     -- * Request Lenses
     , cfuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsUpdate@ which the
--- 'CreativeFieldsUpdate' request conforms to.
-type CreativeFieldsUpdateAPI =
+-- 'CreativeFieldsUpdate'' request conforms to.
+type CreativeFieldsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creativeFields" :> Put '[JSON] CreativeField
+         "creativeFields" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] CreativeField
 
 -- | Updates an existing creative field.
 --
--- /See:/ 'creativeFieldsUpdate' smart constructor.
-data CreativeFieldsUpdate = CreativeFieldsUpdate
+-- /See:/ 'creativeFieldsUpdate'' smart constructor.
+data CreativeFieldsUpdate' = CreativeFieldsUpdate'
     { _cfuQuotaUser   :: !(Maybe Text)
     , _cfuPrettyPrint :: !Bool
     , _cfuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativeFieldsUpdate = CreativeFieldsUpdate
     , _cfuKey         :: !(Maybe Text)
     , _cfuOauthToken  :: !(Maybe Text)
     , _cfuFields      :: !(Maybe Text)
-    , _cfuAlt         :: !Text
+    , _cfuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativeFieldsUpdate = CreativeFieldsUpdate
 -- * 'cfuFields'
 --
 -- * 'cfuAlt'
-creativeFieldsUpdate
+creativeFieldsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CreativeFieldsUpdate
-creativeFieldsUpdate pCfuProfileId_ =
-    CreativeFieldsUpdate
+    -> CreativeFieldsUpdate'
+creativeFieldsUpdate' pCfuProfileId_ =
+    CreativeFieldsUpdate'
     { _cfuQuotaUser = Nothing
     , _cfuPrettyPrint = True
     , _cfuUserIp = Nothing
@@ -94,7 +102,7 @@ creativeFieldsUpdate pCfuProfileId_ =
     , _cfuKey = Nothing
     , _cfuOauthToken = Nothing
     , _cfuFields = Nothing
-    , _cfuAlt = "json"
+    , _cfuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ cfuFields
   = lens _cfuFields (\ s a -> s{_cfuFields = a})
 
 -- | Data format for the response.
-cfuAlt :: Lens' CreativeFieldsUpdate' Text
+cfuAlt :: Lens' CreativeFieldsUpdate' Alt
 cfuAlt = lens _cfuAlt (\ s a -> s{_cfuAlt = a})
 
 instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsUpdate{..}
-          = go _cfuQuotaUser _cfuPrettyPrint _cfuUserIp
+        requestWithRoute r u CreativeFieldsUpdate'{..}
+          = go _cfuQuotaUser (Just _cfuPrettyPrint) _cfuUserIp
               _cfuProfileId
               _cfuKey
               _cfuOauthToken
               _cfuFields
-              _cfuAlt
+              (Just _cfuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsUpdateAPI)
+                      (Proxy :: Proxy CreativeFieldsUpdateResource)
                       r
                       u

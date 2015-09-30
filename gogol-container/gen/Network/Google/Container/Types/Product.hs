@@ -91,7 +91,7 @@ instance ToJSON CreateClusterRequest where
 --
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
-    { _cStatus                :: !(Maybe Text)
+    { _cStatus                :: !(Maybe ClusterStatus)
     , _cNodeConfig            :: !(Maybe (Maybe NodeConfig))
     , _cNumNodes              :: !(Maybe Int32)
     , _cClusterApiVersion     :: !(Maybe Text)
@@ -179,7 +179,7 @@ cluster =
     }
 
 -- | [Output only] The current status of this cluster.
-cStatus :: Lens' Cluster (Maybe Text)
+cStatus :: Lens' Cluster (Maybe ClusterStatus)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
 -- | The machine type and image to use for all nodes in this cluster. See the
@@ -476,11 +476,11 @@ instance ToJSON NodeConfig where
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
-    { _oStatus        :: !(Maybe Text)
+    { _oStatus        :: !(Maybe OperationStatus)
     , _oZone          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
     , _oName          :: !(Maybe Text)
-    , _oOperationType :: !(Maybe Text)
+    , _oOperationType :: !(Maybe OperationOperationType)
     , _oErrorMessage  :: !(Maybe Text)
     , _oTargetLink    :: !(Maybe Text)
     , _oTarget        :: !(Maybe Text)
@@ -520,7 +520,7 @@ operation =
     }
 
 -- | The current status of the operation.
-oStatus :: Lens' Operation (Maybe Text)
+oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
 -- | The name of the Google Compute Engine zone in which the operation is
@@ -538,7 +538,7 @@ oName :: Lens' Operation (Maybe Text)
 oName = lens _oName (\ s a -> s{_oName = a})
 
 -- | The operation type.
-oOperationType :: Lens' Operation (Maybe Text)
+oOperationType :: Lens' Operation (Maybe OperationOperationType)
 oOperationType
   = lens _oOperationType
       (\ s a -> s{_oOperationType = a})

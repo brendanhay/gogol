@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- a specific customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsCustomerUsageReportsGet@.
-module Reports.CustomerUsageReports.Get
+module Network.Google.Resource.Reports.CustomerUsageReports.Get
     (
     -- * REST Resource
-      CustomerUsageReportsGetAPI
+      CustomerUsageReportsGetResource
 
     -- * Creating a Request
-    , customerUsageReportsGet
-    , CustomerUsageReportsGet
+    , customerUsageReportsGet'
+    , CustomerUsageReportsGet'
 
     -- * Request Lenses
     , curgQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReportsCustomerUsageReportsGet@ which the
--- 'CustomerUsageReportsGet' request conforms to.
-type CustomerUsageReportsGetAPI =
+-- 'CustomerUsageReportsGet'' request conforms to.
+type CustomerUsageReportsGetResource =
      "usage" :>
        "dates" :>
          Capture "date" Text :>
-           QueryParam "customerId" Text :>
-             QueryParam "parameters" Text :>
-               QueryParam "pageToken" Text :>
-                 Get '[JSON] UsageReports
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "customerId" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "parameters" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.
 --
--- /See:/ 'customerUsageReportsGet' smart constructor.
-data CustomerUsageReportsGet = CustomerUsageReportsGet
+-- /See:/ 'customerUsageReportsGet'' smart constructor.
+data CustomerUsageReportsGet' = CustomerUsageReportsGet'
     { _curgQuotaUser   :: !(Maybe Text)
     , _curgPrettyPrint :: !Bool
     , _curgUserIp      :: !(Maybe Text)
@@ -72,7 +79,7 @@ data CustomerUsageReportsGet = CustomerUsageReportsGet
     , _curgPageToken   :: !(Maybe Text)
     , _curgOauthToken  :: !(Maybe Text)
     , _curgFields      :: !(Maybe Text)
-    , _curgAlt         :: !Text
+    , _curgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomerUsageReportsGet'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data CustomerUsageReportsGet = CustomerUsageReportsGet
 -- * 'curgFields'
 --
 -- * 'curgAlt'
-customerUsageReportsGet
+customerUsageReportsGet'
     :: Text -- ^ 'date'
-    -> CustomerUsageReportsGet
-customerUsageReportsGet pCurgDate_ =
-    CustomerUsageReportsGet
+    -> CustomerUsageReportsGet'
+customerUsageReportsGet' pCurgDate_ =
+    CustomerUsageReportsGet'
     { _curgQuotaUser = Nothing
     , _curgPrettyPrint = True
     , _curgUserIp = Nothing
@@ -115,7 +122,7 @@ customerUsageReportsGet pCurgDate_ =
     , _curgPageToken = Nothing
     , _curgOauthToken = Nothing
     , _curgFields = Nothing
-    , _curgAlt = "json"
+    , _curgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,14 +187,15 @@ curgFields
   = lens _curgFields (\ s a -> s{_curgFields = a})
 
 -- | Data format for the response.
-curgAlt :: Lens' CustomerUsageReportsGet' Text
+curgAlt :: Lens' CustomerUsageReportsGet' Alt
 curgAlt = lens _curgAlt (\ s a -> s{_curgAlt = a})
 
 instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
-        requestWithRoute r u CustomerUsageReportsGet{..}
-          = go _curgQuotaUser _curgPrettyPrint _curgUserIp
+        requestWithRoute r u CustomerUsageReportsGet'{..}
+          = go _curgQuotaUser (Just _curgPrettyPrint)
+              _curgUserIp
               _curgCustomerId
               _curgDate
               _curgKey
@@ -195,9 +203,9 @@ instance GoogleRequest CustomerUsageReportsGet' where
               _curgPageToken
               _curgOauthToken
               _curgFields
-              _curgAlt
+              (Just _curgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomerUsageReportsGetAPI)
+                      (Proxy :: Proxy CustomerUsageReportsGetResource)
                       r
                       u

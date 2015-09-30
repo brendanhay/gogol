@@ -17,6 +17,15 @@ module Network.Google.Discovery.Types
     -- * Service URL
       discoveryURL
 
+    -- * RestMethodResponse
+    , RestMethodResponse
+    , restMethodResponse
+    , rmrRef
+
+    -- * RestDescriptionParameters
+    , RestDescriptionParameters
+    , restDescriptionParameters
+
     -- * RestMethod
     , RestMethod
     , restMethod
@@ -36,11 +45,67 @@ module Network.Google.Discovery.Types
     , rmDescription
     , rmRequest
 
+    -- * RestDescriptionMethods
+    , RestDescriptionMethods
+    , restDescriptionMethods
+
+    -- * JSONSchemaVariantMap
+    , JSONSchemaVariantMap
+    , jSONSchemaVariantMap
+    , jsvmRef
+    , jsvmTypeValue
+
     -- * RestResource
     , RestResource
     , restResource
     , rrResources
     , rrMethods
+
+    -- * RestDescriptionAuthOauth2Scopes
+    , RestDescriptionAuthOauth2Scopes
+    , restDescriptionAuthOauth2Scopes
+
+    -- * DirectoryListItemsIcons
+    , DirectoryListItemsIcons
+    , directoryListItemsIcons
+    , dliiX16
+    , dliiX32
+
+    -- * RestResourceResources
+    , RestResourceResources
+    , restResourceResources
+
+    -- * RestMethodMediaUploadProtocolsSimple
+    , RestMethodMediaUploadProtocolsSimple
+    , restMethodMediaUploadProtocolsSimple
+    , rmmupsPath
+    , rmmupsMultipart
+
+    -- * RestDescriptionAuthOauth2
+    , RestDescriptionAuthOauth2
+    , restDescriptionAuthOauth2
+    , rdaoScopes
+
+    -- * RestResourceMethods
+    , RestResourceMethods
+    , restResourceMethods
+
+    -- * JSONSchemaVariant
+    , JSONSchemaVariant
+    , jSONSchemaVariant
+    , jsvDiscriminant
+    , jsvMap
+
+    -- * RestDescriptionAuth
+    , RestDescriptionAuth
+    , restDescriptionAuth
+    , rdaOauth2
+
+    -- * RestDescriptionIcons
+    , RestDescriptionIcons
+    , restDescriptionIcons
+    , rdiX16
+    , rdiX32
 
     -- * RestDescription
     , RestDescription
@@ -99,12 +164,77 @@ module Network.Google.Discovery.Types
     , jsDescription
     , jsProperties
 
+    -- * RestDescriptionSchemas
+    , RestDescriptionSchemas
+    , restDescriptionSchemas
+
+    -- * RestDescriptionResources
+    , RestDescriptionResources
+    , restDescriptionResources
+
+    -- * RestMethodMediaUploadProtocols
+    , RestMethodMediaUploadProtocols
+    , restMethodMediaUploadProtocols
+    , rmmupSimple
+    , rmmupResumable
+
+    -- * RestMethodParameters
+    , RestMethodParameters
+    , restMethodParameters
+
+    -- * DirectoryListItems
+    , DirectoryListItems
+    , directoryListItems
+    , dliDiscoveryLink
+    , dliPreferred
+    , dliKind
+    , dliIcons
+    , dliName
+    , dliVersion
+    , dliDocumentationLink
+    , dliId
+    , dliLabels
+    , dliTitle
+    , dliDescription
+    , dliDiscoveryRestUrl
+
+    -- * JSONSchemaAnnotations
+    , JSONSchemaAnnotations
+    , jSONSchemaAnnotations
+    , jsaRequired
+
+    -- * JSONSchemaProperties
+    , JSONSchemaProperties
+    , jSONSchemaProperties
+
+    -- * RestMethodMediaUpload
+    , RestMethodMediaUpload
+    , restMethodMediaUpload
+    , rmmuProtocols
+    , rmmuAccept
+    , rmmuMaxSize
+
     -- * DirectoryList
     , DirectoryList
     , directoryList
     , dlKind
     , dlItems
     , dlDiscoveryVersion
+
+    -- * RestMethodMediaUploadProtocolsResumable
+    , RestMethodMediaUploadProtocolsResumable
+    , restMethodMediaUploadProtocolsResumable
+    , rmmuprPath
+    , rmmuprMultipart
+
+    -- * RestMethodRequest
+    , RestMethodRequest
+    , restMethodRequest
+    , rRef
+    , rParameterName
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Discovery.Types.Product
@@ -112,7 +242,7 @@ import           Network.Google.Discovery.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the APIs Discovery Service.
-discoveryURL :: BaseURL
+discoveryURL :: BaseUrl
 discoveryURL
   = BaseUrl Https
       "https://www.googleapis.com/discovery/v1/"

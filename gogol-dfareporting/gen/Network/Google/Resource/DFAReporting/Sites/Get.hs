@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one site by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesGet@.
-module DFAReporting.Sites.Get
+module Network.Google.Resource.DFAReporting.Sites.Get
     (
     -- * REST Resource
-      SitesGetAPI
+      SitesGetResource
 
     -- * Creating a Request
-    , sitesGet
-    , SitesGet
+    , sitesGet'
+    , SitesGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSitesGet@ which the
--- 'SitesGet' request conforms to.
-type SitesGetAPI =
+-- 'SitesGet'' request conforms to.
+type SitesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "sites" :> Capture "id" Int64 :> Get '[JSON] Site
+         "sites" :>
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Site
 
 -- | Gets one site by ID.
 --
--- /See:/ 'sitesGet' smart constructor.
-data SitesGet = SitesGet
+-- /See:/ 'sitesGet'' smart constructor.
+data SitesGet' = SitesGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data SitesGet = SitesGet
     , _sgId          :: !Int64
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data SitesGet = SitesGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-sitesGet
+sitesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> SitesGet
-sitesGet pSgProfileId_ pSgId_ =
-    SitesGet
+    -> SitesGet'
+sitesGet' pSgProfileId_ pSgId_ =
+    SitesGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -100,7 +109,7 @@ sitesGet pSgProfileId_ pSgId_ =
     , _sgId = pSgId_
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,19 +155,20 @@ sgFields :: Lens' SitesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SitesGet' Text
+sgAlt :: Lens' SitesGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = Site
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp
+        requestWithRoute r u SitesGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
               _sgProfileId
               _sgKey
               _sgId
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SitesGetResource) r
+                      u

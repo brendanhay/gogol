@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- have at least one profile.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertiesInsert@.
-module Analytics.Management.Webproperties.Insert
+module Network.Google.Resource.Analytics.Management.Webproperties.Insert
     (
     -- * REST Resource
-      ManagementWebpropertiesInsertAPI
+      ManagementWebpropertiesInsertResource
 
     -- * Creating a Request
-    , managementWebpropertiesInsert
-    , ManagementWebpropertiesInsert
+    , managementWebpropertiesInsert'
+    , ManagementWebpropertiesInsert'
 
     -- * Request Lenses
     , mwiQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertiesInsert@ which the
--- 'ManagementWebpropertiesInsert' request conforms to.
-type ManagementWebpropertiesInsertAPI =
+-- 'ManagementWebpropertiesInsert'' request conforms to.
+type ManagementWebpropertiesInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
-           "webproperties" :> Post '[JSON] Webproperty
+           "webproperties" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Webproperty
 
 -- | Create a new property if the account has fewer than 20 properties. Web
 -- properties are visible in the Google Analytics interface only if they
 -- have at least one profile.
 --
--- /See:/ 'managementWebpropertiesInsert' smart constructor.
-data ManagementWebpropertiesInsert = ManagementWebpropertiesInsert
+-- /See:/ 'managementWebpropertiesInsert'' smart constructor.
+data ManagementWebpropertiesInsert' = ManagementWebpropertiesInsert'
     { _mwiQuotaUser   :: !(Maybe Text)
     , _mwiPrettyPrint :: !Bool
     , _mwiUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data ManagementWebpropertiesInsert = ManagementWebpropertiesInsert
     , _mwiKey         :: !(Maybe Text)
     , _mwiOauthToken  :: !(Maybe Text)
     , _mwiFields      :: !(Maybe Text)
-    , _mwiAlt         :: !Text
+    , _mwiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertiesInsert'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data ManagementWebpropertiesInsert = ManagementWebpropertiesInsert
 -- * 'mwiFields'
 --
 -- * 'mwiAlt'
-managementWebpropertiesInsert
+managementWebpropertiesInsert'
     :: Text -- ^ 'accountId'
-    -> ManagementWebpropertiesInsert
-managementWebpropertiesInsert pMwiAccountId_ =
-    ManagementWebpropertiesInsert
+    -> ManagementWebpropertiesInsert'
+managementWebpropertiesInsert' pMwiAccountId_ =
+    ManagementWebpropertiesInsert'
     { _mwiQuotaUser = Nothing
     , _mwiPrettyPrint = False
     , _mwiUserIp = Nothing
@@ -99,7 +107,7 @@ managementWebpropertiesInsert pMwiAccountId_ =
     , _mwiKey = Nothing
     , _mwiOauthToken = Nothing
     , _mwiFields = Nothing
-    , _mwiAlt = "json"
+    , _mwiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,7 +152,7 @@ mwiFields
   = lens _mwiFields (\ s a -> s{_mwiFields = a})
 
 -- | Data format for the response.
-mwiAlt :: Lens' ManagementWebpropertiesInsert' Text
+mwiAlt :: Lens' ManagementWebpropertiesInsert' Alt
 mwiAlt = lens _mwiAlt (\ s a -> s{_mwiAlt = a})
 
 instance GoogleRequest ManagementWebpropertiesInsert'
@@ -152,15 +160,16 @@ instance GoogleRequest ManagementWebpropertiesInsert'
         type Rs ManagementWebpropertiesInsert' = Webproperty
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertiesInsert{..}
-          = go _mwiQuotaUser _mwiPrettyPrint _mwiUserIp
+          ManagementWebpropertiesInsert'{..}
+          = go _mwiQuotaUser (Just _mwiPrettyPrint) _mwiUserIp
               _mwiAccountId
               _mwiKey
               _mwiOauthToken
               _mwiFields
-              _mwiAlt
+              (Just _mwiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementWebpropertiesInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementWebpropertiesInsertResource)
                       r
                       u

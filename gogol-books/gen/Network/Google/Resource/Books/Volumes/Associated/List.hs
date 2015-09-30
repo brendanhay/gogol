@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return a list of associated books.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesAssociatedList@.
-module Books.Volumes.Associated.List
+module Network.Google.Resource.Books.Volumes.Associated.List
     (
     -- * REST Resource
-      VolumesAssociatedListAPI
+      VolumesAssociatedListResource
 
     -- * Creating a Request
-    , volumesAssociatedList
-    , VolumesAssociatedList
+    , volumesAssociatedList'
+    , VolumesAssociatedList'
 
     -- * Request Lenses
     , valQuotaUser
@@ -47,32 +48,43 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesAssociatedList@ which the
--- 'VolumesAssociatedList' request conforms to.
-type VolumesAssociatedListAPI =
+-- 'VolumesAssociatedList'' request conforms to.
+type VolumesAssociatedListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "associated" :>
-           QueryParam "locale" Text :>
-             QueryParam "maxAllowedMaturityRating" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "association" Text :> Get '[JSON] Volumes
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "maxAllowedMaturityRating"
+                     BooksVolumesAssociatedListMaxAllowedMaturityRating
+                     :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               QueryParam "association"
+                                 BooksVolumesAssociatedListAssociation
+                                 :> Get '[JSON] Volumes
 
 -- | Return a list of associated books.
 --
--- /See:/ 'volumesAssociatedList' smart constructor.
-data VolumesAssociatedList = VolumesAssociatedList
+-- /See:/ 'volumesAssociatedList'' smart constructor.
+data VolumesAssociatedList' = VolumesAssociatedList'
     { _valQuotaUser                :: !(Maybe Text)
     , _valPrettyPrint              :: !Bool
     , _valUserIp                   :: !(Maybe Text)
     , _valLocale                   :: !(Maybe Text)
-    , _valMaxAllowedMaturityRating :: !(Maybe Text)
+    , _valMaxAllowedMaturityRating :: !(Maybe BooksVolumesAssociatedListMaxAllowedMaturityRating)
     , _valKey                      :: !(Maybe Text)
     , _valVolumeId                 :: !Text
     , _valSource                   :: !(Maybe Text)
     , _valOauthToken               :: !(Maybe Text)
     , _valFields                   :: !(Maybe Text)
-    , _valAlt                      :: !Text
-    , _valAssociation              :: !(Maybe Text)
+    , _valAlt                      :: !Alt
+    , _valAssociation              :: !(Maybe BooksVolumesAssociatedListAssociation)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesAssociatedList'' with the minimum fields required to make a request.
@@ -102,11 +114,11 @@ data VolumesAssociatedList = VolumesAssociatedList
 -- * 'valAlt'
 --
 -- * 'valAssociation'
-volumesAssociatedList
+volumesAssociatedList'
     :: Text -- ^ 'volumeId'
-    -> VolumesAssociatedList
-volumesAssociatedList pValVolumeId_ =
-    VolumesAssociatedList
+    -> VolumesAssociatedList'
+volumesAssociatedList' pValVolumeId_ =
+    VolumesAssociatedList'
     { _valQuotaUser = Nothing
     , _valPrettyPrint = True
     , _valUserIp = Nothing
@@ -117,7 +129,7 @@ volumesAssociatedList pValVolumeId_ =
     , _valSource = Nothing
     , _valOauthToken = Nothing
     , _valFields = Nothing
-    , _valAlt = "json"
+    , _valAlt = JSON
     , _valAssociation = Nothing
     }
 
@@ -148,7 +160,7 @@ valLocale
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList' (Maybe Text)
+valMaxAllowedMaturityRating :: Lens' VolumesAssociatedList' (Maybe BooksVolumesAssociatedListMaxAllowedMaturityRating)
 valMaxAllowedMaturityRating
   = lens _valMaxAllowedMaturityRating
       (\ s a -> s{_valMaxAllowedMaturityRating = a})
@@ -181,11 +193,11 @@ valFields
   = lens _valFields (\ s a -> s{_valFields = a})
 
 -- | Data format for the response.
-valAlt :: Lens' VolumesAssociatedList' Text
+valAlt :: Lens' VolumesAssociatedList' Alt
 valAlt = lens _valAlt (\ s a -> s{_valAlt = a})
 
 -- | Association type.
-valAssociation :: Lens' VolumesAssociatedList' (Maybe Text)
+valAssociation :: Lens' VolumesAssociatedList' (Maybe BooksVolumesAssociatedListAssociation)
 valAssociation
   = lens _valAssociation
       (\ s a -> s{_valAssociation = a})
@@ -193,8 +205,8 @@ valAssociation
 instance GoogleRequest VolumesAssociatedList' where
         type Rs VolumesAssociatedList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesAssociatedList{..}
-          = go _valQuotaUser _valPrettyPrint _valUserIp
+        requestWithRoute r u VolumesAssociatedList'{..}
+          = go _valQuotaUser (Just _valPrettyPrint) _valUserIp
               _valLocale
               _valMaxAllowedMaturityRating
               _valKey
@@ -202,10 +214,10 @@ instance GoogleRequest VolumesAssociatedList' where
               _valSource
               _valOauthToken
               _valFields
-              _valAlt
+              (Just _valAlt)
               _valAssociation
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VolumesAssociatedListAPI)
+                      (Proxy :: Proxy VolumesAssociatedListResource)
                       r
                       u

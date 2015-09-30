@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesGet@.
-module Books.Bookshelves.Get
+module Network.Google.Resource.Books.Bookshelves.Get
     (
     -- * REST Resource
-      BookshelvesGetAPI
+      BookshelvesGetResource
 
     -- * Creating a Request
-    , bookshelvesGet
-    , BookshelvesGet
+    , bookshelvesGet'
+    , BookshelvesGet'
 
     -- * Request Lenses
     , bgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksBookshelvesGet@ which the
--- 'BookshelvesGet' request conforms to.
-type BookshelvesGetAPI =
+-- 'BookshelvesGet'' request conforms to.
+type BookshelvesGetResource =
      "users" :>
        Capture "userId" Text :>
          "bookshelves" :>
            Capture "shelf" Text :>
-             QueryParam "source" Text :> Get '[JSON] Bookshelf
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Bookshelf
 
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
--- /See:/ 'bookshelvesGet' smart constructor.
-data BookshelvesGet = BookshelvesGet
+-- /See:/ 'bookshelvesGet'' smart constructor.
+data BookshelvesGet' = BookshelvesGet'
     { _bgQuotaUser   :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
     , _bgUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data BookshelvesGet = BookshelvesGet
     , _bgSource      :: !(Maybe Text)
     , _bgOauthToken  :: !(Maybe Text)
     , _bgFields      :: !(Maybe Text)
-    , _bgAlt         :: !Text
+    , _bgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesGet'' with the minimum fields required to make a request.
@@ -92,12 +100,12 @@ data BookshelvesGet = BookshelvesGet
 -- * 'bgFields'
 --
 -- * 'bgAlt'
-bookshelvesGet
+bookshelvesGet'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'shelf'
-    -> BookshelvesGet
-bookshelvesGet pBgUserId_ pBgShelf_ =
-    BookshelvesGet
+    -> BookshelvesGet'
+bookshelvesGet' pBgUserId_ pBgShelf_ =
+    BookshelvesGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True
     , _bgUserIp = Nothing
@@ -107,7 +115,7 @@ bookshelvesGet pBgUserId_ pBgShelf_ =
     , _bgSource = Nothing
     , _bgOauthToken = Nothing
     , _bgFields = Nothing
-    , _bgAlt = "json"
+    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,21 +164,23 @@ bgFields :: Lens' BookshelvesGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 -- | Data format for the response.
-bgAlt :: Lens' BookshelvesGet' Text
+bgAlt :: Lens' BookshelvesGet' Alt
 bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
 
 instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u BookshelvesGet{..}
-          = go _bgQuotaUser _bgPrettyPrint _bgUserIp _bgUserId
+        requestWithRoute r u BookshelvesGet'{..}
+          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIp
+              _bgUserId
               _bgShelf
               _bgKey
               _bgSource
               _bgOauthToken
               _bgFields
-              _bgAlt
+              (Just _bgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BookshelvesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BookshelvesGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesDelete@.
-module DFAReporting.FloodlightActivities.Delete
+module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
     (
     -- * REST Resource
-      FloodlightActivitiesDeleteAPI
+      FloodlightActivitiesDeleteResource
 
     -- * Creating a Request
-    , floodlightActivitiesDelete
-    , FloodlightActivitiesDelete
+    , floodlightActivitiesDelete'
+    , FloodlightActivitiesDelete'
 
     -- * Request Lenses
     , fadQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesDelete@ which the
--- 'FloodlightActivitiesDelete' request conforms to.
-type FloodlightActivitiesDeleteAPI =
+-- 'FloodlightActivitiesDelete'' request conforms to.
+type FloodlightActivitiesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity.
 --
--- /See:/ 'floodlightActivitiesDelete' smart constructor.
-data FloodlightActivitiesDelete = FloodlightActivitiesDelete
+-- /See:/ 'floodlightActivitiesDelete'' smart constructor.
+data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
     { _fadQuotaUser   :: !(Maybe Text)
     , _fadPrettyPrint :: !Bool
     , _fadUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data FloodlightActivitiesDelete = FloodlightActivitiesDelete
     , _fadId          :: !Int64
     , _fadOauthToken  :: !(Maybe Text)
     , _fadFields      :: !(Maybe Text)
-    , _fadAlt         :: !Text
+    , _fadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data FloodlightActivitiesDelete = FloodlightActivitiesDelete
 -- * 'fadFields'
 --
 -- * 'fadAlt'
-floodlightActivitiesDelete
+floodlightActivitiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightActivitiesDelete
-floodlightActivitiesDelete pFadProfileId_ pFadId_ =
-    FloodlightActivitiesDelete
+    -> FloodlightActivitiesDelete'
+floodlightActivitiesDelete' pFadProfileId_ pFadId_ =
+    FloodlightActivitiesDelete'
     { _fadQuotaUser = Nothing
     , _fadPrettyPrint = True
     , _fadUserIp = Nothing
@@ -101,7 +109,7 @@ floodlightActivitiesDelete pFadProfileId_ pFadId_ =
     , _fadId = pFadId_
     , _fadOauthToken = Nothing
     , _fadFields = Nothing
-    , _fadAlt = "json"
+    , _fadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,23 +158,23 @@ fadFields
   = lens _fadFields (\ s a -> s{_fadFields = a})
 
 -- | Data format for the response.
-fadAlt :: Lens' FloodlightActivitiesDelete' Text
+fadAlt :: Lens' FloodlightActivitiesDelete' Alt
 fadAlt = lens _fadAlt (\ s a -> s{_fadAlt = a})
 
 instance GoogleRequest FloodlightActivitiesDelete'
          where
         type Rs FloodlightActivitiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesDelete{..}
-          = go _fadQuotaUser _fadPrettyPrint _fadUserIp
+        requestWithRoute r u FloodlightActivitiesDelete'{..}
+          = go _fadQuotaUser (Just _fadPrettyPrint) _fadUserIp
               _fadProfileId
               _fadKey
               _fadId
               _fadOauthToken
               _fadFields
-              _fadAlt
+              (Just _fadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesDeleteAPI)
+                      (Proxy :: Proxy FloodlightActivitiesDeleteResource)
                       r
                       u

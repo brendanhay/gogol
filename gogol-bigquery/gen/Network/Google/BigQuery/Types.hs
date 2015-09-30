@@ -55,6 +55,12 @@ module Network.Google.BigQuery.Types
     , tableSchema
     , tsFields
 
+    -- * TableDataInsertAllResponseInsertErrors
+    , TableDataInsertAllResponseInsertErrors
+    , tableDataInsertAllResponseInsertErrors
+    , tdiarieErrors
+    , tdiarieIndex
+
     -- * ProjectList
     , ProjectList
     , projectList
@@ -63,6 +69,9 @@ module Network.Google.BigQuery.Types
     , plNextPageToken
     , plKind
     , plProjects
+
+    -- * BigqueryJobsListStateFilter
+    , BigqueryJobsListStateFilter (..)
 
     -- * JobStatistics
     , JobStatistics
@@ -97,6 +106,9 @@ module Network.Google.BigQuery.Types
     , trDatasetId
     , trProjectId
     , trTableId
+
+    -- * BigqueryJobsListProjection
+    , BigqueryJobsListProjection (..)
 
     -- * TableFieldSchema
     , TableFieldSchema
@@ -141,6 +153,12 @@ module Network.Google.BigQuery.Types
     , dlKind
     , dlDatasets
 
+    -- * TableDataInsertAllRequestRows
+    , TableDataInsertAllRequestRows
+    , tableDataInsertAllRequestRows
+    , tdiarrJson
+    , tdiarrInsertId
+
     -- * QueryRequest
     , QueryRequest
     , queryRequest
@@ -171,6 +189,15 @@ module Network.Google.BigQuery.Types
     , tdiarRows
     , tdiarSkipInvalidRows
 
+    -- * ProjectListProjects
+    , ProjectListProjects
+    , projectListProjects
+    , plpFriendlyName
+    , plpKind
+    , plpProjectReference
+    , plpId
+    , plpNumericId
+
     -- * JobConfigurationLoad
     , JobConfigurationLoad
     , jobConfigurationLoad
@@ -197,6 +224,19 @@ module Network.Google.BigQuery.Types
     , datasetReference
     , drDatasetId
     , drProjectId
+
+    -- * JobListJobs
+    , JobListJobs
+    , jobListJobs
+    , jljJobReference
+    , jljStatus
+    , jljState
+    , jljUserEmail
+    , jljKind
+    , jljErrorResult
+    , jljId
+    , jljStatistics
+    , jljConfiguration
 
     -- * TableRow
     , TableRow
@@ -262,6 +302,10 @@ module Network.Google.BigQuery.Types
     , JSONObject
     , jSONObject
 
+    -- * JobConfigurationQueryTableDefinitions
+    , JobConfigurationQueryTableDefinitions
+    , jobConfigurationQueryTableDefinitions
+
     -- * JobConfigurationQuery
     , JobConfigurationQuery
     , jobConfigurationQuery
@@ -323,6 +367,16 @@ module Network.Google.BigQuery.Types
     , tKind
     , tInsertErrors
 
+    -- * DatasetAccess
+    , DatasetAccess
+    , datasetAccess
+    , daGroupByEmail
+    , daDomain
+    , daSpecialGroup
+    , daRole
+    , daView
+    , daUserByEmail
+
     -- * Table
     , Table
     , table
@@ -371,6 +425,14 @@ module Network.Google.BigQuery.Types
     , jsOutputBytes
     , jsInputFileBytes
 
+    -- * DatasetListDatasets
+    , DatasetListDatasets
+    , datasetListDatasets
+    , dldFriendlyName
+    , dldKind
+    , dldDatasetReference
+    , dldId
+
     -- * QueryResponse
     , QueryResponse
     , queryResponse
@@ -384,6 +446,18 @@ module Network.Google.BigQuery.Types
     , qErrors
     , qJobComplete
     , qCacheHit
+
+    -- * Alt
+    , Alt (..)
+
+    -- * TableListTables
+    , TableListTables
+    , tableListTables
+    , tltTableReference
+    , tltFriendlyName
+    , tltKind
+    , tltId
+    , tltType
     ) where
 
 import           Network.Google.BigQuery.Types.Product
@@ -391,7 +465,7 @@ import           Network.Google.BigQuery.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the BigQuery API.
-bigQueryURL :: BaseURL
+bigQueryURL :: BaseUrl
 bigQueryURL
   = BaseUrl Https
       "https://www.googleapis.com/bigquery/v2/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsMove@.
-module Calendar.Events.Move
+module Network.Google.Resource.Calendar.Events.Move
     (
     -- * REST Resource
-      EventsMoveAPI
+      EventsMoveResource
 
     -- * Creating a Request
-    , eventsMove
-    , EventsMove
+    , eventsMove'
+    , EventsMove'
 
     -- * Request Lenses
     , emDestination
@@ -46,21 +47,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsMove@ which the
--- 'EventsMove' request conforms to.
-type EventsMoveAPI =
+-- 'EventsMove'' request conforms to.
+type EventsMoveResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
              "move" :>
                QueryParam "destination" Text :>
-                 QueryParam "sendNotifications" Bool :>
-                   Post '[JSON] Event
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "sendNotifications" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
--- /See:/ 'eventsMove' smart constructor.
-data EventsMove = EventsMove
+-- /See:/ 'eventsMove'' smart constructor.
+data EventsMove' = EventsMove'
     { _emDestination       :: !Text
     , _emQuotaUser         :: !(Maybe Text)
     , _emCalendarId        :: !Text
@@ -71,7 +78,7 @@ data EventsMove = EventsMove
     , _emOauthToken        :: !(Maybe Text)
     , _emEventId           :: !Text
     , _emFields            :: !(Maybe Text)
-    , _emAlt               :: !Text
+    , _emAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsMove'' with the minimum fields required to make a request.
@@ -99,13 +106,13 @@ data EventsMove = EventsMove
 -- * 'emFields'
 --
 -- * 'emAlt'
-eventsMove
+eventsMove'
     :: Text -- ^ 'destination'
     -> Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
-    -> EventsMove
-eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
-    EventsMove
+    -> EventsMove'
+eventsMove' pEmDestination_ pEmCalendarId_ pEmEventId_ =
+    EventsMove'
     { _emDestination = pEmDestination_
     , _emQuotaUser = Nothing
     , _emCalendarId = pEmCalendarId_
@@ -116,7 +123,7 @@ eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
     , _emOauthToken = Nothing
     , _emEventId = pEmEventId_
     , _emFields = Nothing
-    , _emAlt = "json"
+    , _emAlt = JSON
     }
 
 -- | Calendar identifier of the target calendar where the event is to be
@@ -178,21 +185,23 @@ emFields :: Lens' EventsMove' (Maybe Text)
 emFields = lens _emFields (\ s a -> s{_emFields = a})
 
 -- | Data format for the response.
-emAlt :: Lens' EventsMove' Text
+emAlt :: Lens' EventsMove' Alt
 emAlt = lens _emAlt (\ s a -> s{_emAlt = a})
 
 instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsMove{..}
+        requestWithRoute r u EventsMove'{..}
           = go (Just _emDestination) _emQuotaUser _emCalendarId
-              _emPrettyPrint
+              (Just _emPrettyPrint)
               _emUserIp
               _emKey
               _emSendNotifications
               _emOauthToken
               _emEventId
               _emFields
-              _emAlt
+              (Just _emAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsMoveAPI) r u
+                  = clientWithRoute (Proxy :: Proxy EventsMoveResource)
+                      r
+                      u

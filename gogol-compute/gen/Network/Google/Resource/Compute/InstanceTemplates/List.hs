@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project and zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesList@.
-module Compute.InstanceTemplates.List
+module Network.Google.Resource.Compute.InstanceTemplates.List
     (
     -- * REST Resource
-      InstanceTemplatesListAPI
+      InstanceTemplatesListResource
 
     -- * Creating a Request
-    , instanceTemplatesList
-    , InstanceTemplatesList
+    , instanceTemplatesList'
+    , InstanceTemplatesList'
 
     -- * Request Lenses
     , itlQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceTemplatesList@ which the
--- 'InstanceTemplatesList' request conforms to.
-type InstanceTemplatesListAPI =
+-- 'InstanceTemplatesList'' request conforms to.
+type InstanceTemplatesListResource =
      Capture "project" Text :>
        "global" :>
          "instanceTemplates" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] InstanceTemplateList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
 -- specified project and zone.
 --
--- /See:/ 'instanceTemplatesList' smart constructor.
-data InstanceTemplatesList = InstanceTemplatesList
+-- /See:/ 'instanceTemplatesList'' smart constructor.
+data InstanceTemplatesList' = InstanceTemplatesList'
     { _itlQuotaUser   :: !(Maybe Text)
     , _itlPrettyPrint :: !Bool
     , _itlProject     :: !Text
@@ -72,7 +80,7 @@ data InstanceTemplatesList = InstanceTemplatesList
     , _itlOauthToken  :: !(Maybe Text)
     , _itlMaxResults  :: !Word32
     , _itlFields      :: !(Maybe Text)
-    , _itlAlt         :: !Text
+    , _itlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data InstanceTemplatesList = InstanceTemplatesList
 -- * 'itlFields'
 --
 -- * 'itlAlt'
-instanceTemplatesList
+instanceTemplatesList'
     :: Text -- ^ 'project'
-    -> InstanceTemplatesList
-instanceTemplatesList pItlProject_ =
-    InstanceTemplatesList
+    -> InstanceTemplatesList'
+instanceTemplatesList' pItlProject_ =
+    InstanceTemplatesList'
     { _itlQuotaUser = Nothing
     , _itlPrettyPrint = True
     , _itlProject = pItlProject_
@@ -115,7 +123,7 @@ instanceTemplatesList pItlProject_ =
     , _itlOauthToken = Nothing
     , _itlMaxResults = 500
     , _itlFields = Nothing
-    , _itlAlt = "json"
+    , _itlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +196,14 @@ itlFields
   = lens _itlFields (\ s a -> s{_itlFields = a})
 
 -- | Data format for the response.
-itlAlt :: Lens' InstanceTemplatesList' Text
+itlAlt :: Lens' InstanceTemplatesList' Alt
 itlAlt = lens _itlAlt (\ s a -> s{_itlAlt = a})
 
 instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesList{..}
-          = go _itlQuotaUser _itlPrettyPrint _itlProject
+        requestWithRoute r u InstanceTemplatesList'{..}
+          = go _itlQuotaUser (Just _itlPrettyPrint) _itlProject
               _itlUserIp
               _itlKey
               _itlFilter
@@ -203,9 +211,9 @@ instance GoogleRequest InstanceTemplatesList' where
               _itlOauthToken
               (Just _itlMaxResults)
               _itlFields
-              _itlAlt
+              (Just _itlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceTemplatesListAPI)
+                      (Proxy :: Proxy InstanceTemplatesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- description, or privacy status.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistsUpdate@.
-module YouTube.Playlists.Update
+module Network.Google.Resource.YouTube.Playlists.Update
     (
     -- * REST Resource
-      PlaylistsUpdateAPI
+      PlaylistsUpdateResource
 
     -- * Creating a Request
-    , playlistsUpdate
-    , PlaylistsUpdate
+    , playlistsUpdate'
+    , PlaylistsUpdate'
 
     -- * Request Lenses
     , puQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistsUpdate@ which the
--- 'PlaylistsUpdate' request conforms to.
-type PlaylistsUpdateAPI =
+-- 'PlaylistsUpdate'' request conforms to.
+type PlaylistsUpdateResource =
      "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Put '[JSON] Playlist
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Playlist
 
 -- | Modifies a playlist. For example, you could change a playlist\'s title,
 -- description, or privacy status.
 --
--- /See:/ 'playlistsUpdate' smart constructor.
-data PlaylistsUpdate = PlaylistsUpdate
+-- /See:/ 'playlistsUpdate'' smart constructor.
+data PlaylistsUpdate' = PlaylistsUpdate'
     { _puQuotaUser              :: !(Maybe Text)
     , _puPart                   :: !Text
     , _puPrettyPrint            :: !Bool
@@ -65,7 +72,7 @@ data PlaylistsUpdate = PlaylistsUpdate
     , _puKey                    :: !(Maybe Text)
     , _puOauthToken             :: !(Maybe Text)
     , _puFields                 :: !(Maybe Text)
-    , _puAlt                    :: !Text
+    , _puAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistsUpdate'' with the minimum fields required to make a request.
@@ -89,11 +96,11 @@ data PlaylistsUpdate = PlaylistsUpdate
 -- * 'puFields'
 --
 -- * 'puAlt'
-playlistsUpdate
+playlistsUpdate'
     :: Text -- ^ 'part'
-    -> PlaylistsUpdate
-playlistsUpdate pPuPart_ =
-    PlaylistsUpdate
+    -> PlaylistsUpdate'
+playlistsUpdate' pPuPart_ =
+    PlaylistsUpdate'
     { _puQuotaUser = Nothing
     , _puPart = pPuPart_
     , _puPrettyPrint = True
@@ -102,7 +109,7 @@ playlistsUpdate pPuPart_ =
     , _puKey = Nothing
     , _puOauthToken = Nothing
     , _puFields = Nothing
-    , _puAlt = "json"
+    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,21 +173,23 @@ puFields :: Lens' PlaylistsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PlaylistsUpdate' Text
+puAlt :: Lens' PlaylistsUpdate' Alt
 puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
 
 instance GoogleRequest PlaylistsUpdate' where
         type Rs PlaylistsUpdate' = Playlist
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistsUpdate{..}
-          = go _puQuotaUser (Just _puPart) _puPrettyPrint
+        requestWithRoute r u PlaylistsUpdate'{..}
+          = go _puQuotaUser (Just _puPart)
+              (Just _puPrettyPrint)
               _puUserIp
               _puOnBehalfOfContentOwner
               _puKey
               _puOauthToken
               _puFields
-              _puAlt
+              (Just _puAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlaylistsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PlaylistsUpdateResource)
                       r
                       u

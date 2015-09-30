@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new creative asset.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeAssetsInsert@.
-module DFAReporting.CreativeAssets.Insert
+module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     (
     -- * REST Resource
-      CreativeAssetsInsertAPI
+      CreativeAssetsInsertResource
 
     -- * Creating a Request
-    , creativeAssetsInsert
-    , CreativeAssetsInsert
+    , creativeAssetsInsert'
+    , CreativeAssetsInsert'
 
     -- * Request Lenses
     , caiQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeAssetsInsert@ which the
--- 'CreativeAssetsInsert' request conforms to.
-type CreativeAssetsInsertAPI =
+-- 'CreativeAssetsInsert'' request conforms to.
+type CreativeAssetsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeAssets" :>
            Capture "advertiserId" Int64 :>
              "creativeAssets" :>
-               Post '[JSON] CreativeAssetMetadata
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
--- /See:/ 'creativeAssetsInsert' smart constructor.
-data CreativeAssetsInsert = CreativeAssetsInsert
+-- /See:/ 'creativeAssetsInsert'' smart constructor.
+data CreativeAssetsInsert' = CreativeAssetsInsert'
     { _caiQuotaUser    :: !(Maybe Text)
     , _caiPrettyPrint  :: !Bool
     , _caiUserIp       :: !(Maybe Text)
@@ -65,7 +73,7 @@ data CreativeAssetsInsert = CreativeAssetsInsert
     , _caiKey          :: !(Maybe Text)
     , _caiOauthToken   :: !(Maybe Text)
     , _caiFields       :: !(Maybe Text)
-    , _caiAlt          :: !Text
+    , _caiAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data CreativeAssetsInsert = CreativeAssetsInsert
 -- * 'caiFields'
 --
 -- * 'caiAlt'
-creativeAssetsInsert
+creativeAssetsInsert'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
-    -> CreativeAssetsInsert
-creativeAssetsInsert pCaiAdvertiserId_ pCaiProfileId_ =
-    CreativeAssetsInsert
+    -> CreativeAssetsInsert'
+creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ =
+    CreativeAssetsInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True
     , _caiUserIp = Nothing
@@ -103,7 +111,7 @@ creativeAssetsInsert pCaiAdvertiserId_ pCaiProfileId_ =
     , _caiKey = Nothing
     , _caiOauthToken = Nothing
     , _caiFields = Nothing
-    , _caiAlt = "json"
+    , _caiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +162,22 @@ caiFields
   = lens _caiFields (\ s a -> s{_caiFields = a})
 
 -- | Data format for the response.
-caiAlt :: Lens' CreativeAssetsInsert' Text
+caiAlt :: Lens' CreativeAssetsInsert' Alt
 caiAlt = lens _caiAlt (\ s a -> s{_caiAlt = a})
 
 instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeAssetsInsert{..}
-          = go _caiQuotaUser _caiPrettyPrint _caiUserIp
+        requestWithRoute r u CreativeAssetsInsert'{..}
+          = go _caiQuotaUser (Just _caiPrettyPrint) _caiUserIp
               _caiAdvertiserId
               _caiProfileId
               _caiKey
               _caiOauthToken
               _caiFields
-              _caiAlt
+              (Just _caiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeAssetsInsertAPI)
+                      (Proxy :: Proxy CreativeAssetsInsertResource)
                       r
                       u

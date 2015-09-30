@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersCreate@.
-module Mapsengine.Layers.Create
+module Network.Google.Resource.Mapsengine.Layers.Create
     (
     -- * REST Resource
-      LayersCreateAPI
+      LayersCreateResource
 
     -- * Creating a Request
-    , layersCreate
-    , LayersCreate
+    , layersCreate'
+    , LayersCreate'
 
     -- * Request Lenses
     , lcQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersCreate@ which the
--- 'LayersCreate' request conforms to.
-type LayersCreateAPI =
+-- 'LayersCreate'' request conforms to.
+type LayersCreateResource =
      "layers" :>
-       QueryParam "process" Bool :> Post '[JSON] Layer
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "process" Bool :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Layer
 
 -- | Create a layer asset.
 --
--- /See:/ 'layersCreate' smart constructor.
-data LayersCreate = LayersCreate
+-- /See:/ 'layersCreate'' smart constructor.
+data LayersCreate' = LayersCreate'
     { _lcQuotaUser   :: !(Maybe Text)
     , _lcPrettyPrint :: !Bool
     , _lcUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data LayersCreate = LayersCreate
     , _lcKey         :: !(Maybe Text)
     , _lcOauthToken  :: !(Maybe Text)
     , _lcFields      :: !(Maybe Text)
-    , _lcAlt         :: !Text
+    , _lcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersCreate'' with the minimum fields required to make a request.
@@ -81,10 +89,10 @@ data LayersCreate = LayersCreate
 -- * 'lcFields'
 --
 -- * 'lcAlt'
-layersCreate
-    :: LayersCreate
-layersCreate =
-    LayersCreate
+layersCreate'
+    :: LayersCreate'
+layersCreate' =
+    LayersCreate'
     { _lcQuotaUser = Nothing
     , _lcPrettyPrint = True
     , _lcUserIp = Nothing
@@ -92,7 +100,7 @@ layersCreate =
     , _lcKey = Nothing
     , _lcOauthToken = Nothing
     , _lcFields = Nothing
-    , _lcAlt = "json"
+    , _lcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +142,21 @@ lcFields :: Lens' LayersCreate' (Maybe Text)
 lcFields = lens _lcFields (\ s a -> s{_lcFields = a})
 
 -- | Data format for the response.
-lcAlt :: Lens' LayersCreate' Text
+lcAlt :: Lens' LayersCreate' Alt
 lcAlt = lens _lcAlt (\ s a -> s{_lcAlt = a})
 
 instance GoogleRequest LayersCreate' where
         type Rs LayersCreate' = Layer
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersCreate{..}
-          = go _lcQuotaUser _lcPrettyPrint _lcUserIp _lcProcess
+        requestWithRoute r u LayersCreate'{..}
+          = go _lcQuotaUser (Just _lcPrettyPrint) _lcUserIp
+              _lcProcess
               _lcKey
               _lcOauthToken
               _lcFields
-              _lcAlt
+              (Just _lcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersCreateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersCreateResource)
+                      r
                       u

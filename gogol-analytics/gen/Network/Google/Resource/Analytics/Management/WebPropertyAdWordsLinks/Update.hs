@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing webProperty-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@.
-module Analytics.Management.WebPropertyAdWordsLinks.Update
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksUpdateAPI
+      ManagementWebPropertyAdWordsLinksUpdateResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksUpdate
-    , ManagementWebPropertyAdWordsLinksUpdate
+    , managementWebPropertyAdWordsLinksUpdate'
+    , ManagementWebPropertyAdWordsLinksUpdate'
 
     -- * Request Lenses
     , mwpawluQuotaUser
@@ -45,8 +46,9 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksUpdate@ which the
--- 'ManagementWebPropertyAdWordsLinksUpdate' request conforms to.
-type ManagementWebPropertyAdWordsLinksUpdateAPI =
+-- 'ManagementWebPropertyAdWordsLinksUpdate'' request conforms to.
+type ManagementWebPropertyAdWordsLinksUpdateResource
+     =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +56,19 @@ type ManagementWebPropertyAdWordsLinksUpdateAPI =
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
                  Capture "webPropertyAdWordsLinkId" Text :>
-                   Put '[JSON] EntityAdWordsLink
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Put '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
-data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate
+-- /See:/ 'managementWebPropertyAdWordsLinksUpdate'' smart constructor.
+data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluQuotaUser                :: !(Maybe Text)
     , _mwpawluPrettyPrint              :: !Bool
     , _mwpawluWebPropertyId            :: !Text
@@ -69,7 +78,7 @@ data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinks
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
     , _mwpawluOauthToken               :: !(Maybe Text)
     , _mwpawluFields                   :: !(Maybe Text)
-    , _mwpawluAlt                      :: !Text
+    , _mwpawluAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate'' with the minimum fields required to make a request.
@@ -95,13 +104,13 @@ data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinks
 -- * 'mwpawluFields'
 --
 -- * 'mwpawluAlt'
-managementWebPropertyAdWordsLinksUpdate
+managementWebPropertyAdWordsLinksUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksUpdate
-managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksUpdate
+    -> ManagementWebPropertyAdWordsLinksUpdate'
+managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluQuotaUser = Nothing
     , _mwpawluPrettyPrint = False
     , _mwpawluWebPropertyId = pMwpawluWebPropertyId_
@@ -111,7 +120,7 @@ managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluAccountId
     , _mwpawluWebPropertyAdWordsLinkId = pMwpawluWebPropertyAdWordsLinkId_
     , _mwpawluOauthToken = Nothing
     , _mwpawluFields = Nothing
-    , _mwpawluAlt = "json"
+    , _mwpawluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,7 +182,7 @@ mwpawluFields
       (\ s a -> s{_mwpawluFields = a})
 
 -- | Data format for the response.
-mwpawluAlt :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
+mwpawluAlt :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Alt
 mwpawluAlt
   = lens _mwpawluAlt (\ s a -> s{_mwpawluAlt = a})
 
@@ -183,8 +192,8 @@ instance GoogleRequest
              EntityAdWordsLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksUpdate{..}
-          = go _mwpawluQuotaUser _mwpawluPrettyPrint
+          ManagementWebPropertyAdWordsLinksUpdate'{..}
+          = go _mwpawluQuotaUser (Just _mwpawluPrettyPrint)
               _mwpawluWebPropertyId
               _mwpawluUserIp
               _mwpawluAccountId
@@ -192,10 +201,11 @@ instance GoogleRequest
               _mwpawluWebPropertyAdWordsLinkId
               _mwpawluOauthToken
               _mwpawluFields
-              _mwpawluAlt
+              (Just _mwpawluAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksUpdateAPI)
+                         Proxy
+                           ManagementWebPropertyAdWordsLinksUpdateResource)
                       r
                       u

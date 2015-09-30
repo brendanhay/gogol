@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- headers.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesSend@.
-module Gmail.Users.Messages.Send
+module Network.Google.Resource.Gmail.Users.Messages.Send
     (
     -- * REST Resource
-      UsersMessagesSendAPI
+      UsersMessagesSendResource
 
     -- * Creating a Request
-    , usersMessagesSend
-    , UsersMessagesSend
+    , usersMessagesSend'
+    , UsersMessagesSend'
 
     -- * Request Lenses
     , umsQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesSend@ which the
--- 'UsersMessagesSend' request conforms to.
-type UsersMessagesSendAPI =
+-- 'UsersMessagesSend'' request conforms to.
+type UsersMessagesSendResource =
      Capture "userId" Text :>
-       "messages" :> "send" :> Post '[JSON] Message
+       "messages" :>
+         "send" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
 --
--- /See:/ 'usersMessagesSend' smart constructor.
-data UsersMessagesSend = UsersMessagesSend
+-- /See:/ 'usersMessagesSend'' smart constructor.
+data UsersMessagesSend' = UsersMessagesSend'
     { _umsQuotaUser   :: !(Maybe Text)
     , _umsPrettyPrint :: !Bool
     , _umsUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersMessagesSend = UsersMessagesSend
     , _umsKey         :: !(Maybe Text)
     , _umsOauthToken  :: !(Maybe Text)
     , _umsFields      :: !(Maybe Text)
-    , _umsAlt         :: !Text
+    , _umsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data UsersMessagesSend = UsersMessagesSend
 -- * 'umsFields'
 --
 -- * 'umsAlt'
-usersMessagesSend
+usersMessagesSend'
     :: Text
-    -> UsersMessagesSend
-usersMessagesSend pUmsUserId_ =
-    UsersMessagesSend
+    -> UsersMessagesSend'
+usersMessagesSend' pUmsUserId_ =
+    UsersMessagesSend'
     { _umsQuotaUser = Nothing
     , _umsPrettyPrint = True
     , _umsUserIp = Nothing
@@ -95,7 +104,7 @@ usersMessagesSend pUmsUserId_ =
     , _umsKey = Nothing
     , _umsOauthToken = Nothing
     , _umsFields = Nothing
-    , _umsAlt = "json"
+    , _umsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +150,21 @@ umsFields
   = lens _umsFields (\ s a -> s{_umsFields = a})
 
 -- | Data format for the response.
-umsAlt :: Lens' UsersMessagesSend' Text
+umsAlt :: Lens' UsersMessagesSend' Alt
 umsAlt = lens _umsAlt (\ s a -> s{_umsAlt = a})
 
 instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesSend{..}
-          = go _umsQuotaUser _umsPrettyPrint _umsUserIp
+        requestWithRoute r u UsersMessagesSend'{..}
+          = go _umsQuotaUser (Just _umsPrettyPrint) _umsUserIp
               _umsUserId
               _umsKey
               _umsOauthToken
               _umsFields
-              _umsAlt
+              (Just _umsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesSendAPI)
+                      (Proxy :: Proxy UsersMessagesSendResource)
                       r
                       u

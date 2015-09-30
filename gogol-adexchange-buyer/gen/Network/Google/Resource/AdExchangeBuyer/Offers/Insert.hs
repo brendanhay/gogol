@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates or updates the requested offer.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersInsert@.
-module AdExchangeBuyer.Offers.Insert
+module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     (
     -- * REST Resource
-      OffersInsertAPI
+      OffersInsertResource
 
     -- * Creating a Request
-    , offersInsert
-    , OffersInsert
+    , offersInsert'
+    , OffersInsert'
 
     -- * Request Lenses
     , oiQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersInsert@ which the
--- 'OffersInsert' request conforms to.
-type OffersInsertAPI =
-     "offers" :> Post '[JSON] OfferDto
+-- 'OffersInsert'' request conforms to.
+type OffersInsertResource =
+     "offers" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] OfferDto
 
 -- | Creates or updates the requested offer.
 --
--- /See:/ 'offersInsert' smart constructor.
-data OffersInsert = OffersInsert
+-- /See:/ 'offersInsert'' smart constructor.
+data OffersInsert' = OffersInsert'
     { _oiQuotaUser   :: !(Maybe Text)
     , _oiPrettyPrint :: !Bool
     , _oiUserIp      :: !(Maybe Text)
     , _oiKey         :: !(Maybe Text)
     , _oiOauthToken  :: !(Maybe Text)
     , _oiFields      :: !(Maybe Text)
-    , _oiAlt         :: !Text
+    , _oiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data OffersInsert = OffersInsert
 -- * 'oiFields'
 --
 -- * 'oiAlt'
-offersInsert
-    :: OffersInsert
-offersInsert =
-    OffersInsert
+offersInsert'
+    :: OffersInsert'
+offersInsert' =
+    OffersInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True
     , _oiUserIp = Nothing
     , _oiKey = Nothing
     , _oiOauthToken = Nothing
     , _oiFields = Nothing
-    , _oiAlt = "json"
+    , _oiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +131,20 @@ oiFields :: Lens' OffersInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
 -- | Data format for the response.
-oiAlt :: Lens' OffersInsert' Text
+oiAlt :: Lens' OffersInsert' Alt
 oiAlt = lens _oiAlt (\ s a -> s{_oiAlt = a})
 
 instance GoogleRequest OffersInsert' where
         type Rs OffersInsert' = OfferDto
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersInsert{..}
-          = go _oiQuotaUser _oiPrettyPrint _oiUserIp _oiKey
+        requestWithRoute r u OffersInsert'{..}
+          = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIp
+              _oiKey
               _oiOauthToken
               _oiFields
-              _oiAlt
+              (Just _oiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OffersInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy OffersInsertResource)
+                      r
                       u

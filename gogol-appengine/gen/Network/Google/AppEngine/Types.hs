@@ -78,6 +78,10 @@ module Network.Google.AppEngine.Types
     , aDispatchRules
     , aId
 
+    -- * VersionEnvVariables
+    , VersionEnvVariables
+    , versionEnvVariables
+
     -- * HealthCheck
     , HealthCheck
     , healthCheck
@@ -104,6 +108,14 @@ module Network.Google.AppEngine.Types
     , oResponse
     , oName
     , oMetadata
+
+    -- * VersionBetaSettings
+    , VersionBetaSettings
+    , versionBetaSettings
+
+    -- * StaticDirectoryHandlerHTTPHeaders
+    , StaticDirectoryHandlerHTTPHeaders
+    , staticDirectoryHandlerHTTPHeaders
 
     -- * ListVersionsResponse
     , ListVersionsResponse
@@ -142,6 +154,10 @@ module Network.Google.AppEngine.Types
     , aPIEndpointHandler
     , aehScriptPath
 
+    -- * StatusDetails
+    , StatusDetails
+    , statusDetails
+
     -- * Network
     , Network
     , network
@@ -156,11 +172,23 @@ module Network.Google.AppEngine.Types
     , rDiskGb
     , rCpu
 
+    -- * StaticFilesHandlerHTTPHeaders
+    , StaticFilesHandlerHTTPHeaders
+    , staticFilesHandlerHTTPHeaders
+
     -- * CPUUtilization
     , CPUUtilization
     , cPUUtilization
     , cuAggregationWindowLength
     , cuTargetUtilization
+
+    -- * DeploymentFiles
+    , DeploymentFiles
+    , deploymentFiles
+
+    -- * TrafficSplitAllocations
+    , TrafficSplitAllocations
+    , trafficSplitAllocations
 
     -- * ManualScaling
     , ManualScaling
@@ -231,6 +259,10 @@ module Network.Google.AppEngine.Types
     -- * OperationMetadata
     , OperationMetadata
     , operationMetadata
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
     , omInsertTime
     , omUser
     , omMethod
@@ -243,6 +275,10 @@ module Network.Google.AppEngine.Types
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
 
     -- * ContainerInfo
     , ContainerInfo
@@ -272,7 +308,7 @@ import           Network.Google.AppEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta4' of the Google App Engine Admin API.
-appEngineURL :: BaseURL
+appEngineURL :: BaseUrl
 appEngineURL
   = BaseUrl Https "https://appengine.googleapis.com/"
       443

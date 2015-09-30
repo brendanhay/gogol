@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a secondary calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsInsert@.
-module Calendar.Calendars.Insert
+module Network.Google.Resource.Calendar.Calendars.Insert
     (
     -- * REST Resource
-      CalendarsInsertAPI
+      CalendarsInsertResource
 
     -- * Creating a Request
-    , calendarsInsert
-    , CalendarsInsert
+    , calendarsInsert'
+    , CalendarsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsInsert@ which the
--- 'CalendarsInsert' request conforms to.
-type CalendarsInsertAPI =
-     "calendars" :> Post '[JSON] Calendar
+-- 'CalendarsInsert'' request conforms to.
+type CalendarsInsertResource =
+     "calendars" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Calendar
 
 -- | Creates a secondary calendar.
 --
--- /See:/ 'calendarsInsert' smart constructor.
-data CalendarsInsert = CalendarsInsert
+-- /See:/ 'calendarsInsert'' smart constructor.
+data CalendarsInsert' = CalendarsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
     , _ciKey         :: !(Maybe Text)
     , _ciOauthToken  :: !(Maybe Text)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data CalendarsInsert = CalendarsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-calendarsInsert
-    :: CalendarsInsert
-calendarsInsert =
-    CalendarsInsert
+calendarsInsert'
+    :: CalendarsInsert'
+calendarsInsert' =
+    CalendarsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,18 +131,20 @@ ciFields :: Lens' CalendarsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CalendarsInsert' Text
+ciAlt :: Lens' CalendarsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CalendarsInsert' where
         type Rs CalendarsInsert' = Calendar
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp _ciKey
+        requestWithRoute r u CalendarsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsInsertResource)
                       r
                       u

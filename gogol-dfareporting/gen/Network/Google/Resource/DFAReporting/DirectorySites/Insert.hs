@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new directory site.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesInsert@.
-module DFAReporting.DirectorySites.Insert
+module Network.Google.Resource.DFAReporting.DirectorySites.Insert
     (
     -- * REST Resource
-      DirectorySitesInsertAPI
+      DirectorySitesInsertResource
 
     -- * Creating a Request
-    , directorySitesInsert
-    , DirectorySitesInsert
+    , directorySitesInsert'
+    , DirectorySitesInsert'
 
     -- * Request Lenses
     , dsiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingDirectorySitesInsert@ which the
--- 'DirectorySitesInsert' request conforms to.
-type DirectorySitesInsertAPI =
+-- 'DirectorySitesInsert'' request conforms to.
+type DirectorySitesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "directorySites" :> Post '[JSON] DirectorySite
+         "directorySites" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] DirectorySite
 
 -- | Inserts a new directory site.
 --
--- /See:/ 'directorySitesInsert' smart constructor.
-data DirectorySitesInsert = DirectorySitesInsert
+-- /See:/ 'directorySitesInsert'' smart constructor.
+data DirectorySitesInsert' = DirectorySitesInsert'
     { _dsiQuotaUser   :: !(Maybe Text)
     , _dsiPrettyPrint :: !Bool
     , _dsiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data DirectorySitesInsert = DirectorySitesInsert
     , _dsiKey         :: !(Maybe Text)
     , _dsiOauthToken  :: !(Maybe Text)
     , _dsiFields      :: !(Maybe Text)
-    , _dsiAlt         :: !Text
+    , _dsiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data DirectorySitesInsert = DirectorySitesInsert
 -- * 'dsiFields'
 --
 -- * 'dsiAlt'
-directorySitesInsert
+directorySitesInsert'
     :: Int64 -- ^ 'profileId'
-    -> DirectorySitesInsert
-directorySitesInsert pDsiProfileId_ =
-    DirectorySitesInsert
+    -> DirectorySitesInsert'
+directorySitesInsert' pDsiProfileId_ =
+    DirectorySitesInsert'
     { _dsiQuotaUser = Nothing
     , _dsiPrettyPrint = True
     , _dsiUserIp = Nothing
@@ -94,7 +102,7 @@ directorySitesInsert pDsiProfileId_ =
     , _dsiKey = Nothing
     , _dsiOauthToken = Nothing
     , _dsiFields = Nothing
-    , _dsiAlt = "json"
+    , _dsiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ dsiFields
   = lens _dsiFields (\ s a -> s{_dsiFields = a})
 
 -- | Data format for the response.
-dsiAlt :: Lens' DirectorySitesInsert' Text
+dsiAlt :: Lens' DirectorySitesInsert' Alt
 dsiAlt = lens _dsiAlt (\ s a -> s{_dsiAlt = a})
 
 instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesInsert{..}
-          = go _dsiQuotaUser _dsiPrettyPrint _dsiUserIp
+        requestWithRoute r u DirectorySitesInsert'{..}
+          = go _dsiQuotaUser (Just _dsiPrettyPrint) _dsiUserIp
               _dsiProfileId
               _dsiKey
               _dsiOauthToken
               _dsiFields
-              _dsiAlt
+              (Just _dsiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DirectorySitesInsertAPI)
+                      (Proxy :: Proxy DirectorySitesInsertResource)
                       r
                       u

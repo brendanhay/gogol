@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersCreate@.
-module TagManager.Accounts.Containers.Folders.Create
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
     (
     -- * REST Resource
-      AccountsContainersFoldersCreateAPI
+      AccountsContainersFoldersCreateResource
 
     -- * Creating a Request
-    , accountsContainersFoldersCreate
-    , AccountsContainersFoldersCreate
+    , accountsContainersFoldersCreate'
+    , AccountsContainersFoldersCreate'
 
     -- * Request Lenses
     , acfcQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersCreate@ which the
--- 'AccountsContainersFoldersCreate' request conforms to.
-type AccountsContainersFoldersCreateAPI =
+-- 'AccountsContainersFoldersCreate'' request conforms to.
+type AccountsContainersFoldersCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "folders" :> Post '[JSON] Folder
+             "folders" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Folder
 
 -- | Creates a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersCreate' smart constructor.
-data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate
+-- /See:/ 'accountsContainersFoldersCreate'' smart constructor.
+data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
     { _acfcQuotaUser   :: !(Maybe Text)
     , _acfcPrettyPrint :: !Bool
     , _acfcContainerId :: !Text
@@ -64,7 +72,7 @@ data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate
     , _acfcKey         :: !(Maybe Text)
     , _acfcOauthToken  :: !(Maybe Text)
     , _acfcFields      :: !(Maybe Text)
-    , _acfcAlt         :: !Text
+    , _acfcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersCreate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsContainersFoldersCreate = AccountsContainersFoldersCreate
 -- * 'acfcFields'
 --
 -- * 'acfcAlt'
-accountsContainersFoldersCreate
+accountsContainersFoldersCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersCreate
-accountsContainersFoldersCreate pAcfcContainerId_ pAcfcAccountId_ =
-    AccountsContainersFoldersCreate
+    -> AccountsContainersFoldersCreate'
+accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcAccountId_ =
+    AccountsContainersFoldersCreate'
     { _acfcQuotaUser = Nothing
     , _acfcPrettyPrint = True
     , _acfcContainerId = pAcfcContainerId_
@@ -102,7 +110,7 @@ accountsContainersFoldersCreate pAcfcContainerId_ pAcfcAccountId_ =
     , _acfcKey = Nothing
     , _acfcOauthToken = Nothing
     , _acfcFields = Nothing
-    , _acfcAlt = "json"
+    , _acfcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ acfcFields
   = lens _acfcFields (\ s a -> s{_acfcFields = a})
 
 -- | Data format for the response.
-acfcAlt :: Lens' AccountsContainersFoldersCreate' Text
+acfcAlt :: Lens' AccountsContainersFoldersCreate' Alt
 acfcAlt = lens _acfcAlt (\ s a -> s{_acfcAlt = a})
 
 instance GoogleRequest
@@ -163,16 +171,18 @@ instance GoogleRequest
         type Rs AccountsContainersFoldersCreate' = Folder
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersFoldersCreate{..}
-          = go _acfcQuotaUser _acfcPrettyPrint _acfcContainerId
+          AccountsContainersFoldersCreate'{..}
+          = go _acfcQuotaUser (Just _acfcPrettyPrint)
+              _acfcContainerId
               _acfcUserIp
               _acfcAccountId
               _acfcKey
               _acfcOauthToken
               _acfcFields
-              _acfcAlt
+              (Just _acfcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersFoldersCreateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersFoldersCreateResource)
                       r
                       u

@@ -25,6 +25,13 @@ module Network.Google.AppsTasks.Types
     , tKind
     , tItems
 
+    -- * TaskLinks
+    , TaskLinks
+    , taskLinks
+    , tlLink
+    , tlType
+    , tlDescription
+
     -- * TaskLists
     , TaskLists
     , taskLists
@@ -61,6 +68,9 @@ module Network.Google.AppsTasks.Types
     , ttLinks
     , ttNotes
     , ttPosition
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsTasks.Types.Product
@@ -68,7 +78,7 @@ import           Network.Google.AppsTasks.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Tasks API.
-appsTasksURL :: BaseURL
+appsTasksURL :: BaseUrl
 appsTasksURL
   = BaseUrl Https
       "https://www.googleapis.com/tasks/v1/"

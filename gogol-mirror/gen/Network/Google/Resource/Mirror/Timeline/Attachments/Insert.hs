@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new attachment to a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsInsert@.
-module Mirror.Timeline.Attachments.Insert
+module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
     (
     -- * REST Resource
-      TimelineAttachmentsInsertAPI
+      TimelineAttachmentsInsertResource
 
     -- * Creating a Request
-    , timelineAttachmentsInsert
-    , TimelineAttachmentsInsert
+    , timelineAttachmentsInsert'
+    , TimelineAttachmentsInsert'
 
     -- * Request Lenses
     , taiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineAttachmentsInsert@ which the
--- 'TimelineAttachmentsInsert' request conforms to.
-type TimelineAttachmentsInsertAPI =
+-- 'TimelineAttachmentsInsert'' request conforms to.
+type TimelineAttachmentsInsertResource =
      "timeline" :>
        Capture "itemId" Text :>
-         "attachments" :> Post '[JSON] Attachment
+         "attachments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
 --
--- /See:/ 'timelineAttachmentsInsert' smart constructor.
-data TimelineAttachmentsInsert = TimelineAttachmentsInsert
+-- /See:/ 'timelineAttachmentsInsert'' smart constructor.
+data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     { _taiQuotaUser   :: !(Maybe Text)
     , _taiPrettyPrint :: !Bool
     , _taiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data TimelineAttachmentsInsert = TimelineAttachmentsInsert
     , _taiKey         :: !(Maybe Text)
     , _taiOauthToken  :: !(Maybe Text)
     , _taiFields      :: !(Maybe Text)
-    , _taiAlt         :: !Text
+    , _taiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data TimelineAttachmentsInsert = TimelineAttachmentsInsert
 -- * 'taiFields'
 --
 -- * 'taiAlt'
-timelineAttachmentsInsert
+timelineAttachmentsInsert'
     :: Text -- ^ 'itemId'
-    -> TimelineAttachmentsInsert
-timelineAttachmentsInsert pTaiItemId_ =
-    TimelineAttachmentsInsert
+    -> TimelineAttachmentsInsert'
+timelineAttachmentsInsert' pTaiItemId_ =
+    TimelineAttachmentsInsert'
     { _taiQuotaUser = Nothing
     , _taiPrettyPrint = True
     , _taiUserIp = Nothing
@@ -94,7 +102,7 @@ timelineAttachmentsInsert pTaiItemId_ =
     , _taiKey = Nothing
     , _taiOauthToken = Nothing
     , _taiFields = Nothing
-    , _taiAlt = "json"
+    , _taiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +147,22 @@ taiFields
   = lens _taiFields (\ s a -> s{_taiFields = a})
 
 -- | Data format for the response.
-taiAlt :: Lens' TimelineAttachmentsInsert' Text
+taiAlt :: Lens' TimelineAttachmentsInsert' Alt
 taiAlt = lens _taiAlt (\ s a -> s{_taiAlt = a})
 
 instance GoogleRequest TimelineAttachmentsInsert'
          where
         type Rs TimelineAttachmentsInsert' = Attachment
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsInsert{..}
-          = go _taiQuotaUser _taiPrettyPrint _taiUserIp
+        requestWithRoute r u TimelineAttachmentsInsert'{..}
+          = go _taiQuotaUser (Just _taiPrettyPrint) _taiUserIp
               _taiItemId
               _taiKey
               _taiOauthToken
               _taiFields
-              _taiAlt
+              (Just _taiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TimelineAttachmentsInsertAPI)
+                      (Proxy :: Proxy TimelineAttachmentsInsertResource)
                       r
                       u

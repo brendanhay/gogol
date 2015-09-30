@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsList@.
-module DFAReporting.FloodlightActivityGroups.List
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.List
     (
     -- * REST Resource
-      FloodlightActivityGroupsListAPI
+      FloodlightActivityGroupsListResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsList
-    , FloodlightActivityGroupsList
+    , floodlightActivityGroupsList'
+    , FloodlightActivityGroupsList'
 
     -- * Request Lenses
     , faglQuotaUser
@@ -52,26 +53,40 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsList@ which the
--- 'FloodlightActivityGroupsList' request conforms to.
-type FloodlightActivityGroupsListAPI =
+-- 'FloodlightActivityGroupsList'' request conforms to.
+type FloodlightActivityGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           QueryParam "floodlightConfigurationId" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParam "type" Text :>
-                           QueryParam "maxResults" Int32 :>
-                             Get '[JSON] FloodlightActivityGroupsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "floodlightConfigurationId" Int64 :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "advertiserId" Int64 :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingFloodlightActivityGroupsListSortOrder
+                           :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingFloodlightActivityGroupsListSortField
+                                 :>
+                                 QueryParam "type"
+                                   DfareportingFloodlightActivityGroupsListType
+                                   :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON]
+                                             FloodlightActivityGroupsListResponse
 
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
--- /See:/ 'floodlightActivityGroupsList' smart constructor.
-data FloodlightActivityGroupsList = FloodlightActivityGroupsList
+-- /See:/ 'floodlightActivityGroupsList'' smart constructor.
+data FloodlightActivityGroupsList' = FloodlightActivityGroupsList'
     { _faglQuotaUser                 :: !(Maybe Text)
     , _faglPrettyPrint               :: !Bool
     , _faglFloodlightConfigurationId :: !(Maybe Int64)
@@ -80,15 +95,15 @@ data FloodlightActivityGroupsList = FloodlightActivityGroupsList
     , _faglSearchString              :: !(Maybe Text)
     , _faglIds                       :: !(Maybe Int64)
     , _faglProfileId                 :: !Int64
-    , _faglSortOrder                 :: !(Maybe Text)
+    , _faglSortOrder                 :: !(Maybe DfareportingFloodlightActivityGroupsListSortOrder)
     , _faglKey                       :: !(Maybe Text)
     , _faglPageToken                 :: !(Maybe Text)
-    , _faglSortField                 :: !(Maybe Text)
-    , _faglType                      :: !(Maybe Text)
+    , _faglSortField                 :: !(Maybe DfareportingFloodlightActivityGroupsListSortField)
+    , _faglType                      :: !(Maybe DfareportingFloodlightActivityGroupsListType)
     , _faglOauthToken                :: !(Maybe Text)
     , _faglMaxResults                :: !(Maybe Int32)
     , _faglFields                    :: !(Maybe Text)
-    , _faglAlt                       :: !Text
+    , _faglAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsList'' with the minimum fields required to make a request.
@@ -128,11 +143,11 @@ data FloodlightActivityGroupsList = FloodlightActivityGroupsList
 -- * 'faglFields'
 --
 -- * 'faglAlt'
-floodlightActivityGroupsList
+floodlightActivityGroupsList'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivityGroupsList
-floodlightActivityGroupsList pFaglProfileId_ =
-    FloodlightActivityGroupsList
+    -> FloodlightActivityGroupsList'
+floodlightActivityGroupsList' pFaglProfileId_ =
+    FloodlightActivityGroupsList'
     { _faglQuotaUser = Nothing
     , _faglPrettyPrint = True
     , _faglFloodlightConfigurationId = Nothing
@@ -149,7 +164,7 @@ floodlightActivityGroupsList pFaglProfileId_ =
     , _faglOauthToken = Nothing
     , _faglMaxResults = Nothing
     , _faglFields = Nothing
-    , _faglAlt = "json"
+    , _faglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -215,7 +230,7 @@ faglProfileId
       (\ s a -> s{_faglProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-faglSortOrder :: Lens' FloodlightActivityGroupsList' (Maybe Text)
+faglSortOrder :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListSortOrder)
 faglSortOrder
   = lens _faglSortOrder
       (\ s a -> s{_faglSortOrder = a})
@@ -233,14 +248,14 @@ faglPageToken
       (\ s a -> s{_faglPageToken = a})
 
 -- | Field by which to sort the list.
-faglSortField :: Lens' FloodlightActivityGroupsList' (Maybe Text)
+faglSortField :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListSortField)
 faglSortField
   = lens _faglSortField
       (\ s a -> s{_faglSortField = a})
 
 -- | Select only floodlight activity groups with the specified floodlight
 -- activity group type.
-faglType :: Lens' FloodlightActivityGroupsList' (Maybe Text)
+faglType :: Lens' FloodlightActivityGroupsList' (Maybe DfareportingFloodlightActivityGroupsListType)
 faglType = lens _faglType (\ s a -> s{_faglType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -261,7 +276,7 @@ faglFields
   = lens _faglFields (\ s a -> s{_faglFields = a})
 
 -- | Data format for the response.
-faglAlt :: Lens' FloodlightActivityGroupsList' Text
+faglAlt :: Lens' FloodlightActivityGroupsList' Alt
 faglAlt = lens _faglAlt (\ s a -> s{_faglAlt = a})
 
 instance GoogleRequest FloodlightActivityGroupsList'
@@ -269,8 +284,9 @@ instance GoogleRequest FloodlightActivityGroupsList'
         type Rs FloodlightActivityGroupsList' =
              FloodlightActivityGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivityGroupsList{..}
-          = go _faglQuotaUser _faglPrettyPrint
+        requestWithRoute r u
+          FloodlightActivityGroupsList'{..}
+          = go _faglQuotaUser (Just _faglPrettyPrint)
               _faglFloodlightConfigurationId
               _faglUserIp
               _faglAdvertiserId
@@ -285,9 +301,9 @@ instance GoogleRequest FloodlightActivityGroupsList'
               _faglOauthToken
               _faglMaxResults
               _faglFields
-              _faglAlt
+              (Just _faglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsListAPI)
+                      (Proxy :: Proxy FloodlightActivityGroupsListResource)
                       r
                       u

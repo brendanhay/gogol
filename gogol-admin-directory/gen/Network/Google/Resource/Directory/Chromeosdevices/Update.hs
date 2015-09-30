@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update Chrome OS Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosdevicesUpdate@.
-module Directory.Chromeosdevices.Update
+module Network.Google.Resource.Directory.Chromeosdevices.Update
     (
     -- * REST Resource
-      ChromeosdevicesUpdateAPI
+      ChromeosdevicesUpdateResource
 
     -- * Creating a Request
-    , chromeosdevicesUpdate
-    , ChromeosdevicesUpdate
+    , chromeosdevicesUpdate'
+    , ChromeosdevicesUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -45,30 +46,38 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosdevicesUpdate@ which the
--- 'ChromeosdevicesUpdate' request conforms to.
-type ChromeosdevicesUpdateAPI =
+-- 'ChromeosdevicesUpdate'' request conforms to.
+type ChromeosdevicesUpdateResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "projection" Text :>
-                 Put '[JSON] ChromeOsDevice
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection"
+                         DirectoryChromeosdevicesUpdateProjection
+                         :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] ChromeOsDevice
 
 -- | Update Chrome OS Device
 --
--- /See:/ 'chromeosdevicesUpdate' smart constructor.
-data ChromeosdevicesUpdate = ChromeosdevicesUpdate
+-- /See:/ 'chromeosdevicesUpdate'' smart constructor.
+data ChromeosdevicesUpdate' = ChromeosdevicesUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
     , _cuCustomerId  :: !Text
     , _cuKey         :: !(Maybe Text)
     , _cuDeviceId    :: !Text
-    , _cuProjection  :: !(Maybe Text)
+    , _cuProjection  :: !(Maybe DirectoryChromeosdevicesUpdateProjection)
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosdevicesUpdate'' with the minimum fields required to make a request.
@@ -94,12 +103,12 @@ data ChromeosdevicesUpdate = ChromeosdevicesUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-chromeosdevicesUpdate
+chromeosdevicesUpdate'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'deviceId'
-    -> ChromeosdevicesUpdate
-chromeosdevicesUpdate pCuCustomerId_ pCuDeviceId_ =
-    ChromeosdevicesUpdate
+    -> ChromeosdevicesUpdate'
+chromeosdevicesUpdate' pCuCustomerId_ pCuDeviceId_ =
+    ChromeosdevicesUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -109,7 +118,7 @@ chromeosdevicesUpdate pCuCustomerId_ pCuDeviceId_ =
     , _cuProjection = Nothing
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,7 +156,7 @@ cuDeviceId
   = lens _cuDeviceId (\ s a -> s{_cuDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cuProjection :: Lens' ChromeosdevicesUpdate' (Maybe Text)
+cuProjection :: Lens' ChromeosdevicesUpdate' (Maybe DirectoryChromeosdevicesUpdateProjection)
 cuProjection
   = lens _cuProjection (\ s a -> s{_cuProjection = a})
 
@@ -161,23 +170,23 @@ cuFields :: Lens' ChromeosdevicesUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' ChromeosdevicesUpdate' Text
+cuAlt :: Lens' ChromeosdevicesUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest ChromeosdevicesUpdate' where
         type Rs ChromeosdevicesUpdate' = ChromeOsDevice
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u ChromeosdevicesUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp
+        requestWithRoute r u ChromeosdevicesUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
               _cuCustomerId
               _cuKey
               _cuDeviceId
               _cuProjection
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChromeosdevicesUpdateAPI)
+                      (Proxy :: Proxy ChromeosdevicesUpdateResource)
                       r
                       u

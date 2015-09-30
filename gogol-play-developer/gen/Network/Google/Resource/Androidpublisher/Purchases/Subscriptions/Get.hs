@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- expiry time.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherPurchasesSubscriptionsGet@.
-module Androidpublisher.Purchases.Subscriptions.Get
+module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Get
     (
     -- * REST Resource
-      PurchasesSubscriptionsGetAPI
+      PurchasesSubscriptionsGetResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsGet
-    , PurchasesSubscriptionsGet
+    , purchasesSubscriptionsGet'
+    , PurchasesSubscriptionsGet'
 
     -- * Request Lenses
     , psgQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherPurchasesSubscriptionsGet@ which the
--- 'PurchasesSubscriptionsGet' request conforms to.
-type PurchasesSubscriptionsGetAPI =
+-- 'PurchasesSubscriptionsGet'' request conforms to.
+type PurchasesSubscriptionsGetResource =
      Capture "packageName" Text :>
        "purchases" :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
              "tokens" :>
                Capture "token" Text :>
-                 Get '[JSON] SubscriptionPurchase
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] SubscriptionPurchase
 
 -- | Checks whether a user\'s subscription purchase is valid and returns its
 -- expiry time.
 --
--- /See:/ 'purchasesSubscriptionsGet' smart constructor.
-data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
+-- /See:/ 'purchasesSubscriptionsGet'' smart constructor.
+data PurchasesSubscriptionsGet' = PurchasesSubscriptionsGet'
     { _psgQuotaUser      :: !(Maybe Text)
     , _psgPrettyPrint    :: !Bool
     , _psgPackageName    :: !Text
@@ -70,7 +78,7 @@ data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
     , _psgOauthToken     :: !(Maybe Text)
     , _psgSubscriptionId :: !Text
     , _psgFields         :: !(Maybe Text)
-    , _psgAlt            :: !Text
+    , _psgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsGet'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
 -- * 'psgFields'
 --
 -- * 'psgAlt'
-purchasesSubscriptionsGet
+purchasesSubscriptionsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
     -> Text -- ^ 'subscriptionId'
-    -> PurchasesSubscriptionsGet
-purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
-    PurchasesSubscriptionsGet
+    -> PurchasesSubscriptionsGet'
+purchasesSubscriptionsGet' pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
+    PurchasesSubscriptionsGet'
     { _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
     , _psgPackageName = pPsgPackageName_
@@ -112,7 +120,7 @@ purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
     , _psgOauthToken = Nothing
     , _psgSubscriptionId = pPsgSubscriptionId_
     , _psgFields = Nothing
-    , _psgAlt = "json"
+    , _psgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +178,7 @@ psgFields
   = lens _psgFields (\ s a -> s{_psgFields = a})
 
 -- | Data format for the response.
-psgAlt :: Lens' PurchasesSubscriptionsGet' Text
+psgAlt :: Lens' PurchasesSubscriptionsGet' Alt
 psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
 
 instance GoogleRequest PurchasesSubscriptionsGet'
@@ -178,17 +186,18 @@ instance GoogleRequest PurchasesSubscriptionsGet'
         type Rs PurchasesSubscriptionsGet' =
              SubscriptionPurchase
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u PurchasesSubscriptionsGet{..}
-          = go _psgQuotaUser _psgPrettyPrint _psgPackageName
+        requestWithRoute r u PurchasesSubscriptionsGet'{..}
+          = go _psgQuotaUser (Just _psgPrettyPrint)
+              _psgPackageName
               _psgUserIp
               _psgToken
               _psgKey
               _psgOauthToken
               _psgSubscriptionId
               _psgFields
-              _psgAlt
+              (Just _psgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PurchasesSubscriptionsGetAPI)
+                      (Proxy :: Proxy PurchasesSubscriptionsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the specified task. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksPatch@.
-module Tasks.Tasks.Patch
+module Network.Google.Resource.Tasks.Tasks.Patch
     (
     -- * REST Resource
-      TasksPatchAPI
+      TasksPatchResource
 
     -- * Creating a Request
-    , tasksPatch
-    , TasksPatch
+    , tasksPatch'
+    , TasksPatch'
 
     -- * Request Lenses
     , tpQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TasksTasksPatch@ which the
--- 'TasksPatch' request conforms to.
-type TasksPatchAPI =
+-- 'TasksPatch'' request conforms to.
+type TasksPatchResource =
      "lists" :>
        Capture "tasklist" Text :>
-         "tasks" :> Capture "task" Text :> Patch '[JSON] Task
+         "tasks" :>
+           Capture "task" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Task
 
 -- | Updates the specified task. This method supports patch semantics.
 --
--- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch
+-- /See:/ 'tasksPatch'' smart constructor.
+data TasksPatch' = TasksPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data TasksPatch = TasksPatch
     , _tpTask        :: !Text
     , _tpOauthToken  :: !(Maybe Text)
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksPatch'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data TasksPatch = TasksPatch
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-tasksPatch
+tasksPatch'
     :: Text -- ^ 'tasklist'
     -> Text -- ^ 'task'
-    -> TasksPatch
-tasksPatch pTpTasklist_ pTpTask_ =
-    TasksPatch
+    -> TasksPatch'
+tasksPatch' pTpTasklist_ pTpTask_ =
+    TasksPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIp = Nothing
@@ -100,7 +109,7 @@ tasksPatch pTpTasklist_ pTpTask_ =
     , _tpTask = pTpTask_
     , _tpOauthToken = Nothing
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,18 +155,21 @@ tpFields :: Lens' TasksPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TasksPatch' Text
+tpAlt :: Lens' TasksPatch' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TasksPatch' where
         type Rs TasksPatch' = Task
         request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksPatch{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpUserIp _tpKey
+        requestWithRoute r u TasksPatch'{..}
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+              _tpKey
               _tpTasklist
               _tpTask
               _tpOauthToken
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksPatchResource)
+                      r
+                      u

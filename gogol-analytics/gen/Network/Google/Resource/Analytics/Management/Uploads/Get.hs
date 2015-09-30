@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List uploads to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsGet@.
-module Analytics.Management.Uploads.Get
+module Network.Google.Resource.Analytics.Management.Uploads.Get
     (
     -- * REST Resource
-      ManagementUploadsGetAPI
+      ManagementUploadsGetResource
 
     -- * Creating a Request
-    , managementUploadsGet
-    , ManagementUploadsGet
+    , managementUploadsGet'
+    , ManagementUploadsGet'
 
     -- * Request Lenses
     , mugQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsGet@ which the
--- 'ManagementUploadsGet' request conforms to.
-type ManagementUploadsGetAPI =
+-- 'ManagementUploadsGet'' request conforms to.
+type ManagementUploadsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,19 @@ type ManagementUploadsGetAPI =
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
                    "uploads" :>
-                     Capture "uploadId" Text :> Get '[JSON] Upload
+                     Capture "uploadId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Get '[JSON] Upload
 
 -- | List uploads to which the user has access.
 --
--- /See:/ 'managementUploadsGet' smart constructor.
-data ManagementUploadsGet = ManagementUploadsGet
+-- /See:/ 'managementUploadsGet'' smart constructor.
+data ManagementUploadsGet' = ManagementUploadsGet'
     { _mugQuotaUser          :: !(Maybe Text)
     , _mugPrettyPrint        :: !Bool
     , _mugWebPropertyId      :: !Text
@@ -72,7 +80,7 @@ data ManagementUploadsGet = ManagementUploadsGet
     , _mugOauthToken         :: !(Maybe Text)
     , _mugUploadId           :: !Text
     , _mugFields             :: !(Maybe Text)
-    , _mugAlt                :: !Text
+    , _mugAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsGet'' with the minimum fields required to make a request.
@@ -100,14 +108,14 @@ data ManagementUploadsGet = ManagementUploadsGet
 -- * 'mugFields'
 --
 -- * 'mugAlt'
-managementUploadsGet
+managementUploadsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'uploadId'
-    -> ManagementUploadsGet
-managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
-    ManagementUploadsGet
+    -> ManagementUploadsGet'
+managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
+    ManagementUploadsGet'
     { _mugQuotaUser = Nothing
     , _mugPrettyPrint = False
     , _mugWebPropertyId = pMugWebPropertyId_
@@ -118,7 +126,7 @@ managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ p
     , _mugOauthToken = Nothing
     , _mugUploadId = pMugUploadId_
     , _mugFields = Nothing
-    , _mugAlt = "json"
+    , _mugAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,14 +188,15 @@ mugFields
   = lens _mugFields (\ s a -> s{_mugFields = a})
 
 -- | Data format for the response.
-mugAlt :: Lens' ManagementUploadsGet' Text
+mugAlt :: Lens' ManagementUploadsGet' Alt
 mugAlt = lens _mugAlt (\ s a -> s{_mugAlt = a})
 
 instance GoogleRequest ManagementUploadsGet' where
         type Rs ManagementUploadsGet' = Upload
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsGet{..}
-          = go _mugQuotaUser _mugPrettyPrint _mugWebPropertyId
+        requestWithRoute r u ManagementUploadsGet'{..}
+          = go _mugQuotaUser (Just _mugPrettyPrint)
+              _mugWebPropertyId
               _mugUserIp
               _mugCustomDataSourceId
               _mugAccountId
@@ -195,9 +204,9 @@ instance GoogleRequest ManagementUploadsGet' where
               _mugOauthToken
               _mugUploadId
               _mugFields
-              _mugAlt
+              (Just _mugAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUploadsGetAPI)
+                      (Proxy :: Proxy ManagementUploadsGetResource)
                       r
                       u

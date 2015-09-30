@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified zone resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZonesGet@.
-module Compute.Zones.Get
+module Network.Google.Resource.Compute.Zones.Get
     (
     -- * REST Resource
-      ZonesGetAPI
+      ZonesGetResource
 
     -- * Creating a Request
-    , zonesGet
-    , ZonesGet
+    , zonesGet'
+    , ZonesGet'
 
     -- * Request Lenses
     , zgQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeZonesGet@ which the
--- 'ZonesGet' request conforms to.
-type ZonesGetAPI =
+-- 'ZonesGet'' request conforms to.
+type ZonesGetResource =
      Capture "project" Text :>
-       "zones" :> Capture "zone" Text :> Get '[JSON] Zone
+       "zones" :>
+         Capture "zone" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Zone
 
 -- | Returns the specified zone resource.
 --
--- /See:/ 'zonesGet' smart constructor.
-data ZonesGet = ZonesGet
+-- /See:/ 'zonesGet'' smart constructor.
+data ZonesGet' = ZonesGet'
     { _zgQuotaUser   :: !(Maybe Text)
     , _zgPrettyPrint :: !Bool
     , _zgProject     :: !Text
@@ -61,7 +70,7 @@ data ZonesGet = ZonesGet
     , _zgKey         :: !(Maybe Text)
     , _zgOauthToken  :: !(Maybe Text)
     , _zgFields      :: !(Maybe Text)
-    , _zgAlt         :: !Text
+    , _zgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesGet'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data ZonesGet = ZonesGet
 -- * 'zgFields'
 --
 -- * 'zgAlt'
-zonesGet
+zonesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZonesGet
-zonesGet pZgProject_ pZgZone_ =
-    ZonesGet
+    -> ZonesGet'
+zonesGet' pZgProject_ pZgZone_ =
+    ZonesGet'
     { _zgQuotaUser = Nothing
     , _zgPrettyPrint = True
     , _zgProject = pZgProject_
@@ -99,7 +108,7 @@ zonesGet pZgProject_ pZgZone_ =
     , _zgKey = Nothing
     , _zgOauthToken = Nothing
     , _zgFields = Nothing
-    , _zgAlt = "json"
+    , _zgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,18 +154,20 @@ zgFields :: Lens' ZonesGet' (Maybe Text)
 zgFields = lens _zgFields (\ s a -> s{_zgFields = a})
 
 -- | Data format for the response.
-zgAlt :: Lens' ZonesGet' Text
+zgAlt :: Lens' ZonesGet' Alt
 zgAlt = lens _zgAlt (\ s a -> s{_zgAlt = a})
 
 instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ZonesGet{..}
-          = go _zgQuotaUser _zgPrettyPrint _zgProject _zgUserIp
+        requestWithRoute r u ZonesGet'{..}
+          = go _zgQuotaUser (Just _zgPrettyPrint) _zgProject
+              _zgUserIp
               _zgZone
               _zgKey
               _zgOauthToken
               _zgFields
-              _zgAlt
+              (Just _zgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZonesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ZonesGetResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a customer resource if one exists and is owned by the reseller.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersGet@.
-module Reseller.Customers.Get
+module Network.Google.Resource.Reseller.Customers.Get
     (
     -- * REST Resource
-      CustomersGetAPI
+      CustomersGetResource
 
     -- * Creating a Request
-    , customersGet
-    , CustomersGet
+    , customersGet'
+    , CustomersGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerCustomersGet@ which the
--- 'CustomersGet' request conforms to.
-type CustomersGetAPI =
+-- 'CustomersGet'' request conforms to.
+type CustomersGetResource =
      "customers" :>
-       Capture "customerId" Text :> Get '[JSON] Customer
+       Capture "customerId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Customer
 
 -- | Gets a customer resource if one exists and is owned by the reseller.
 --
--- /See:/ 'customersGet' smart constructor.
-data CustomersGet = CustomersGet
+-- /See:/ 'customersGet'' smart constructor.
+data CustomersGet' = CustomersGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CustomersGet = CustomersGet
     , _cgKey         :: !(Maybe Text)
     , _cgOauthToken  :: !(Maybe Text)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CustomersGet = CustomersGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-customersGet
+customersGet'
     :: Text -- ^ 'customerId'
-    -> CustomersGet
-customersGet pCgCustomerId_ =
-    CustomersGet
+    -> CustomersGet'
+customersGet' pCgCustomerId_ =
+    CustomersGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -93,7 +101,7 @@ customersGet pCgCustomerId_ =
     , _cgKey = Nothing
     , _cgOauthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ cgFields :: Lens' CustomersGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CustomersGet' Text
+cgAlt :: Lens' CustomersGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CustomersGet' where
         type Rs CustomersGet' = Customer
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp
+        requestWithRoute r u CustomersGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
               _cgCustomerId
               _cgKey
               _cgOauthToken
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CustomersGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CustomersGetResource)
+                      r
                       u

@@ -17,6 +17,8 @@ import           Data.Aeson
 import           Data.Aeson.Types
 import           Servant.API
 
+type JSONValue = Value
+
 parseJSONText :: FromText a => String -> Value -> Parser a
 parseJSONText n = withText n (maybe (fail n) pure . fromText)
 

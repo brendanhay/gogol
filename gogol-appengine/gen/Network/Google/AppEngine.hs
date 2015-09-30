@@ -28,37 +28,37 @@ module Network.Google.AppEngine
     -- * REST Resources
 
     -- ** AppengineAppsGet
-    , module AppEngine.Apps.Get
+    , module Network.Google.Resource.AppEngine.Apps.Get
 
     -- ** AppengineAppsModulesDelete
-    , module AppEngine.Apps.Modules.Delete
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Delete
 
     -- ** AppengineAppsModulesGet
-    , module AppEngine.Apps.Modules.Get
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Get
 
     -- ** AppengineAppsModulesList
-    , module AppEngine.Apps.Modules.List
+    , module Network.Google.Resource.AppEngine.Apps.Modules.List
 
     -- ** AppengineAppsModulesPatch
-    , module AppEngine.Apps.Modules.Patch
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Patch
 
     -- ** AppengineAppsModulesVersionsCreate
-    , module AppEngine.Apps.Modules.Versions.Create
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 
     -- ** AppengineAppsModulesVersionsDelete
-    , module AppEngine.Apps.Modules.Versions.Delete
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
 
     -- ** AppengineAppsModulesVersionsGet
-    , module AppEngine.Apps.Modules.Versions.Get
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
 
     -- ** AppengineAppsModulesVersionsList
-    , module AppEngine.Apps.Modules.Versions.List
+    , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
 
     -- ** AppengineAppsOperationsGet
-    , module AppEngine.Apps.Operations.Get
+    , module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
     -- ** AppengineAppsOperationsList
-    , module AppEngine.Apps.Operations.List
+    , module Network.Google.Resource.AppEngine.Apps.Operations.List
 
     -- * Types
 
@@ -123,6 +123,10 @@ module Network.Google.AppEngine
     , aDispatchRules
     , aId
 
+    -- ** VersionEnvVariables
+    , VersionEnvVariables
+    , versionEnvVariables
+
     -- ** HealthCheck
     , HealthCheck
     , healthCheck
@@ -149,6 +153,14 @@ module Network.Google.AppEngine
     , oResponse
     , oName
     , oMetadata
+
+    -- ** VersionBetaSettings
+    , VersionBetaSettings
+    , versionBetaSettings
+
+    -- ** StaticDirectoryHandlerHTTPHeaders
+    , StaticDirectoryHandlerHTTPHeaders
+    , staticDirectoryHandlerHTTPHeaders
 
     -- ** ListVersionsResponse
     , ListVersionsResponse
@@ -187,6 +199,10 @@ module Network.Google.AppEngine
     , aPIEndpointHandler
     , aehScriptPath
 
+    -- ** StatusDetails
+    , StatusDetails
+    , statusDetails
+
     -- ** Network
     , Network
     , network
@@ -201,11 +217,23 @@ module Network.Google.AppEngine
     , rDiskGb
     , rCpu
 
+    -- ** StaticFilesHandlerHTTPHeaders
+    , StaticFilesHandlerHTTPHeaders
+    , staticFilesHandlerHTTPHeaders
+
     -- ** CPUUtilization
     , CPUUtilization
     , cPUUtilization
     , cuAggregationWindowLength
     , cuTargetUtilization
+
+    -- ** DeploymentFiles
+    , DeploymentFiles
+    , deploymentFiles
+
+    -- ** TrafficSplitAllocations
+    , TrafficSplitAllocations
+    , trafficSplitAllocations
 
     -- ** ManualScaling
     , ManualScaling
@@ -276,6 +304,10 @@ module Network.Google.AppEngine
     -- ** OperationMetadata
     , OperationMetadata
     , operationMetadata
+
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
     , omInsertTime
     , omUser
     , omMethod
@@ -288,6 +320,10 @@ module Network.Google.AppEngine
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
 
     -- ** ContainerInfo
     , ContainerInfo
@@ -330,7 +366,18 @@ import           Network.Google.Resource.AppEngine.Apps.Operations.List
 TODO
 -}
 
-type AppEngineAPI = Apps
+type AppEngineAPI =
+     AppsModulesVersionsListResource :<|>
+       AppsModulesVersionsGetResource
+       :<|> AppsModulesVersionsCreateResource
+       :<|> AppsModulesVersionsDeleteResource
+       :<|> AppsModulesListResource
+       :<|> AppsModulesPatchResource
+       :<|> AppsModulesGetResource
+       :<|> AppsModulesDeleteResource
+       :<|> AppsOperationsListResource
+       :<|> AppsOperationsGetResource
+       :<|> AppsGetResource
 
 appEngineAPI :: Proxy AppEngineAPI
 appEngineAPI = Proxy

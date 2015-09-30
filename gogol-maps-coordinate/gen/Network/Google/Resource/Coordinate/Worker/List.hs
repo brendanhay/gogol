@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of workers in a team.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateWorkerList@.
-module Coordinate.Worker.List
+module Network.Google.Resource.Coordinate.Worker.List
     (
     -- * REST Resource
-      WorkerListAPI
+      WorkerListResource
 
     -- * Creating a Request
-    , workerList
-    , WorkerList
+    , workerList'
+    , WorkerList'
 
     -- * Request Lenses
     , wlQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateWorkerList@ which the
--- 'WorkerList' request conforms to.
-type WorkerListAPI =
+-- 'WorkerList'' request conforms to.
+type WorkerListResource =
      "teams" :>
        Capture "teamId" Text :>
-         "workers" :> Get '[JSON] WorkerListResponse
+         "workers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] WorkerListResponse
 
 -- | Retrieves a list of workers in a team.
 --
--- /See:/ 'workerList' smart constructor.
-data WorkerList = WorkerList
+-- /See:/ 'workerList'' smart constructor.
+data WorkerList' = WorkerList'
     { _wlQuotaUser   :: !(Maybe Text)
     , _wlPrettyPrint :: !Bool
     , _wlUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data WorkerList = WorkerList
     , _wlKey         :: !(Maybe Text)
     , _wlOauthToken  :: !(Maybe Text)
     , _wlFields      :: !(Maybe Text)
-    , _wlAlt         :: !Text
+    , _wlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data WorkerList = WorkerList
 -- * 'wlFields'
 --
 -- * 'wlAlt'
-workerList
+workerList'
     :: Text -- ^ 'teamId'
-    -> WorkerList
-workerList pWlTeamId_ =
-    WorkerList
+    -> WorkerList'
+workerList' pWlTeamId_ =
+    WorkerList'
     { _wlQuotaUser = Nothing
     , _wlPrettyPrint = True
     , _wlUserIp = Nothing
@@ -94,7 +103,7 @@ workerList pWlTeamId_ =
     , _wlKey = Nothing
     , _wlOauthToken = Nothing
     , _wlFields = Nothing
-    , _wlAlt = "json"
+    , _wlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +144,20 @@ wlFields :: Lens' WorkerList' (Maybe Text)
 wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
 
 -- | Data format for the response.
-wlAlt :: Lens' WorkerList' Text
+wlAlt :: Lens' WorkerList' Alt
 wlAlt = lens _wlAlt (\ s a -> s{_wlAlt = a})
 
 instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u WorkerList{..}
-          = go _wlQuotaUser _wlPrettyPrint _wlUserIp _wlTeamId
+        requestWithRoute r u WorkerList'{..}
+          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIp
+              _wlTeamId
               _wlKey
               _wlOauthToken
               _wlFields
-              _wlAlt
+              (Just _wlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy WorkerListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy WorkerListResource)
+                      r
+                      u

@@ -17,6 +17,20 @@ module Network.Google.Prediction.Types
     -- * Service URL
       predictionURL
 
+    -- * Insert2ModelInfo
+    , Insert2ModelInfo
+    , insert2ModelInfo
+    , imiModelType
+    , imiClassWeightedAccuracy
+    , imiClassificationAccuracy
+    , imiMeanSquaredError
+    , imiNumberLabels
+    , imiNumberInstances
+
+    -- * AnalyzeModelDescriptionConfusionMatrixRowTotals
+    , AnalyzeModelDescriptionConfusionMatrixRowTotals
+    , analyzeModelDescriptionConfusionMatrixRowTotals
+
     -- * Insert
     , Insert
     , insert
@@ -28,6 +42,10 @@ module Network.Google.Prediction.Types
     , iSourceModel
     , iId
     , iStoragePMMLLocation
+
+    -- * AnalyzeErrors
+    , AnalyzeErrors
+    , analyzeErrors
 
     -- * List
     , List
@@ -52,10 +70,44 @@ module Network.Google.Prediction.Types
     , insStoragePMMLLocation
     , insModelInfo
 
+    -- * AnalyzeDataDescriptionFeatures
+    , AnalyzeDataDescriptionFeatures
+    , analyzeDataDescriptionFeatures
+    , addfText
+    , addfNumeric
+    , addfIndex
+    , addfCategorical
+
+    -- * AnalyzeDataDescriptionFeaturesText
+    , AnalyzeDataDescriptionFeaturesText
+    , analyzeDataDescriptionFeaturesText
+    , addftCount
+
+    -- * InputInput
+    , InputInput
+    , inputInput
+    , iiCsvInstance
+
     -- * Input
     , Input
     , input
     , iInput
+
+    -- * OutputOutputMulti
+    , OutputOutputMulti
+    , outputOutputMulti
+    , oomScore
+    , oomLabel
+
+    -- * AnalyzeModelDescriptionConfusionMatrix
+    , AnalyzeModelDescriptionConfusionMatrix
+    , analyzeModelDescriptionConfusionMatrix
+
+    -- * AnalyzeDataDescriptionOutputFeatureText
+    , AnalyzeDataDescriptionOutputFeatureText
+    , analyzeDataDescriptionOutputFeatureText
+    , addoftValue
+    , addoftCount
 
     -- * Analyze
     , Analyze
@@ -77,11 +129,69 @@ module Network.Google.Prediction.Types
     , oId
     , oOutputMulti
 
+    -- * InsertUtility
+    , InsertUtility
+    , insertUtility
+
+    -- * AnalyzeDataDescription
+    , AnalyzeDataDescription
+    , analyzeDataDescription
+    , addOutputFeature
+    , addFeatures
+
+    -- * AnalyzeDataDescriptionOutputFeatureNumeric
+    , AnalyzeDataDescriptionOutputFeatureNumeric
+    , analyzeDataDescriptionOutputFeatureNumeric
+    , addofnMean
+    , addofnCount
+    , addofnVariance
+
+    -- * AnalyzeModelDescription
+    , AnalyzeModelDescription
+    , analyzeModelDescription
+    , amdConfusionMatrixRowTotals
+    , amdConfusionMatrix
+    , amdModelinfo
+
+    -- * InsertTrainingInstances
+    , InsertTrainingInstances
+    , insertTrainingInstances
+    , itiCsvInstance
+    , itiOutput
+
+    -- * AnalyzeDataDescriptionFeaturesCategoricalValues
+    , AnalyzeDataDescriptionFeaturesCategoricalValues
+    , analyzeDataDescriptionFeaturesCategoricalValues
+    , addfcvValue
+    , addfcvCount
+
+    -- * AnalyzeDataDescriptionFeaturesCategorical
+    , AnalyzeDataDescriptionFeaturesCategorical
+    , analyzeDataDescriptionFeaturesCategorical
+    , addfcValues
+    , addfcCount
+
+    -- * AnalyzeDataDescriptionFeaturesNumeric
+    , AnalyzeDataDescriptionFeaturesNumeric
+    , analyzeDataDescriptionFeaturesNumeric
+    , addfnMean
+    , addfnCount
+    , addfnVariance
+
     -- * Update
     , Update
     , update
     , uCsvInstance
     , uOutput
+
+    -- * Alt
+    , Alt (..)
+
+    -- * AnalyzeDataDescriptionOutputFeature
+    , AnalyzeDataDescriptionOutputFeature
+    , analyzeDataDescriptionOutputFeature
+    , addofText
+    , addofNumeric
     ) where
 
 import           Network.Google.Prediction.Types.Product
@@ -89,7 +199,7 @@ import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1.6' of the Prediction API.
-predictionURL :: BaseURL
+predictionURL :: BaseUrl
 predictionURL
   = BaseUrl Https
       "https://www.googleapis.com/prediction/v1.6/projects/"

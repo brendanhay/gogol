@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySiteContactsList@.
-module DFAReporting.DirectorySiteContacts.List
+module Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
     (
     -- * REST Resource
-      DirectorySiteContactsListAPI
+      DirectorySiteContactsListResource
 
     -- * Creating a Request
-    , directorySiteContactsList
-    , DirectorySiteContactsList
+    , directorySiteContactsList'
+    , DirectorySiteContactsList'
 
     -- * Request Lenses
     , dsclQuotaUser
@@ -50,24 +51,36 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingDirectorySiteContactsList@ which the
--- 'DirectorySiteContactsList' request conforms to.
-type DirectorySiteContactsListAPI =
+-- 'DirectorySiteContactsList'' request conforms to.
+type DirectorySiteContactsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySiteContacts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParams "directorySiteIds" Int64 :>
-                 QueryParam "sortOrder" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] DirectorySiteContactsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParams "directorySiteIds" Int64 :>
+                       QueryParam "sortOrder"
+                         DfareportingDirectorySiteContactsListSortOrder
+                         :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField"
+                               DfareportingDirectorySiteContactsListSortField
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON]
+                                         DirectorySiteContactsListResponse
 
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --
--- /See:/ 'directorySiteContactsList' smart constructor.
-data DirectorySiteContactsList = DirectorySiteContactsList
+-- /See:/ 'directorySiteContactsList'' smart constructor.
+data DirectorySiteContactsList' = DirectorySiteContactsList'
     { _dsclQuotaUser        :: !(Maybe Text)
     , _dsclPrettyPrint      :: !Bool
     , _dsclUserIp           :: !(Maybe Text)
@@ -75,14 +88,14 @@ data DirectorySiteContactsList = DirectorySiteContactsList
     , _dsclIds              :: !(Maybe Int64)
     , _dsclProfileId        :: !Int64
     , _dsclDirectorySiteIds :: !(Maybe Int64)
-    , _dsclSortOrder        :: !(Maybe Text)
+    , _dsclSortOrder        :: !(Maybe DfareportingDirectorySiteContactsListSortOrder)
     , _dsclKey              :: !(Maybe Text)
     , _dsclPageToken        :: !(Maybe Text)
-    , _dsclSortField        :: !(Maybe Text)
+    , _dsclSortField        :: !(Maybe DfareportingDirectorySiteContactsListSortField)
     , _dsclOauthToken       :: !(Maybe Text)
     , _dsclMaxResults       :: !(Maybe Int32)
     , _dsclFields           :: !(Maybe Text)
-    , _dsclAlt              :: !Text
+    , _dsclAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsList'' with the minimum fields required to make a request.
@@ -118,11 +131,11 @@ data DirectorySiteContactsList = DirectorySiteContactsList
 -- * 'dsclFields'
 --
 -- * 'dsclAlt'
-directorySiteContactsList
+directorySiteContactsList'
     :: Int64 -- ^ 'profileId'
-    -> DirectorySiteContactsList
-directorySiteContactsList pDsclProfileId_ =
-    DirectorySiteContactsList
+    -> DirectorySiteContactsList'
+directorySiteContactsList' pDsclProfileId_ =
+    DirectorySiteContactsList'
     { _dsclQuotaUser = Nothing
     , _dsclPrettyPrint = True
     , _dsclUserIp = Nothing
@@ -137,7 +150,7 @@ directorySiteContactsList pDsclProfileId_ =
     , _dsclOauthToken = Nothing
     , _dsclMaxResults = Nothing
     , _dsclFields = Nothing
-    , _dsclAlt = "json"
+    , _dsclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -192,7 +205,7 @@ dsclDirectorySiteIds
       (\ s a -> s{_dsclDirectorySiteIds = a})
 
 -- | Order of sorted results, default is ASCENDING.
-dsclSortOrder :: Lens' DirectorySiteContactsList' (Maybe Text)
+dsclSortOrder :: Lens' DirectorySiteContactsList' (Maybe DfareportingDirectorySiteContactsListSortOrder)
 dsclSortOrder
   = lens _dsclSortOrder
       (\ s a -> s{_dsclSortOrder = a})
@@ -210,7 +223,7 @@ dsclPageToken
       (\ s a -> s{_dsclPageToken = a})
 
 -- | Field by which to sort the list.
-dsclSortField :: Lens' DirectorySiteContactsList' (Maybe Text)
+dsclSortField :: Lens' DirectorySiteContactsList' (Maybe DfareportingDirectorySiteContactsListSortField)
 dsclSortField
   = lens _dsclSortField
       (\ s a -> s{_dsclSortField = a})
@@ -233,7 +246,7 @@ dsclFields
   = lens _dsclFields (\ s a -> s{_dsclFields = a})
 
 -- | Data format for the response.
-dsclAlt :: Lens' DirectorySiteContactsList' Text
+dsclAlt :: Lens' DirectorySiteContactsList' Alt
 dsclAlt = lens _dsclAlt (\ s a -> s{_dsclAlt = a})
 
 instance GoogleRequest DirectorySiteContactsList'
@@ -241,8 +254,9 @@ instance GoogleRequest DirectorySiteContactsList'
         type Rs DirectorySiteContactsList' =
              DirectorySiteContactsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySiteContactsList{..}
-          = go _dsclQuotaUser _dsclPrettyPrint _dsclUserIp
+        requestWithRoute r u DirectorySiteContactsList'{..}
+          = go _dsclQuotaUser (Just _dsclPrettyPrint)
+              _dsclUserIp
               _dsclSearchString
               _dsclIds
               _dsclProfileId
@@ -254,9 +268,9 @@ instance GoogleRequest DirectorySiteContactsList'
               _dsclOauthToken
               _dsclMaxResults
               _dsclFields
-              _dsclAlt
+              (Just _dsclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DirectorySiteContactsListAPI)
+                      (Proxy :: Proxy DirectorySiteContactsListResource)
                       r
                       u

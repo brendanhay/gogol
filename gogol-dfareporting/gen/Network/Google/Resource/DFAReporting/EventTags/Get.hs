@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one event tag by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsGet@.
-module DFAReporting.EventTags.Get
+module Network.Google.Resource.DFAReporting.EventTags.Get
     (
     -- * REST Resource
-      EventTagsGetAPI
+      EventTagsGetResource
 
     -- * Creating a Request
-    , eventTagsGet
-    , EventTagsGet
+    , eventTagsGet'
+    , EventTagsGet'
 
     -- * Request Lenses
     , etgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsGet@ which the
--- 'EventTagsGet' request conforms to.
-type EventTagsGetAPI =
+-- 'EventTagsGet'' request conforms to.
+type EventTagsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           Capture "id" Int64 :> Get '[JSON] EventTag
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] EventTag
 
 -- | Gets one event tag by ID.
 --
--- /See:/ 'eventTagsGet' smart constructor.
-data EventTagsGet = EventTagsGet
+-- /See:/ 'eventTagsGet'' smart constructor.
+data EventTagsGet' = EventTagsGet'
     { _etgQuotaUser   :: !(Maybe Text)
     , _etgPrettyPrint :: !Bool
     , _etgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data EventTagsGet = EventTagsGet
     , _etgId          :: !Int64
     , _etgOauthToken  :: !(Maybe Text)
     , _etgFields      :: !(Maybe Text)
-    , _etgAlt         :: !Text
+    , _etgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data EventTagsGet = EventTagsGet
 -- * 'etgFields'
 --
 -- * 'etgAlt'
-eventTagsGet
+eventTagsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> EventTagsGet
-eventTagsGet pEtgProfileId_ pEtgId_ =
-    EventTagsGet
+    -> EventTagsGet'
+eventTagsGet' pEtgProfileId_ pEtgId_ =
+    EventTagsGet'
     { _etgQuotaUser = Nothing
     , _etgPrettyPrint = True
     , _etgUserIp = Nothing
@@ -101,7 +109,7 @@ eventTagsGet pEtgProfileId_ pEtgId_ =
     , _etgId = pEtgId_
     , _etgOauthToken = Nothing
     , _etgFields = Nothing
-    , _etgAlt = "json"
+    , _etgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ etgFields
   = lens _etgFields (\ s a -> s{_etgFields = a})
 
 -- | Data format for the response.
-etgAlt :: Lens' EventTagsGet' Text
+etgAlt :: Lens' EventTagsGet' Alt
 etgAlt = lens _etgAlt (\ s a -> s{_etgAlt = a})
 
 instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsGet{..}
-          = go _etgQuotaUser _etgPrettyPrint _etgUserIp
+        requestWithRoute r u EventTagsGet'{..}
+          = go _etgQuotaUser (Just _etgPrettyPrint) _etgUserIp
               _etgProfileId
               _etgKey
               _etgId
               _etgOauthToken
               _etgFields
-              _etgAlt
+              (Just _etgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsGetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,136 +20,142 @@
 -- | Retrieves a specific table by its ID.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableGet@.
-module FusionTables.Table.Get
+module Network.Google.Resource.FusionTables.Table.Get
     (
     -- * REST Resource
-      TableGetAPI
+      TableGetResource
 
     -- * Creating a Request
-    , tableGet
-    , TableGet
+    , tableGet'
+    , TableGet'
 
     -- * Request Lenses
-    , tggQuotaUser
-    , tggPrettyPrint
-    , tggUserIp
-    , tggKey
-    , tggOauthToken
-    , tggTableId
-    , tggFields
-    , tggAlt
+    , ttQuotaUser
+    , ttPrettyPrint
+    , ttUserIp
+    , ttKey
+    , ttOauthToken
+    , ttTableId
+    , ttFields
+    , ttAlt
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableGet@ which the
--- 'TableGet' request conforms to.
-type TableGetAPI =
+-- 'TableGet'' request conforms to.
+type TableGetResource =
      "tables" :>
-       Capture "tableId" Text :> Get '[JSON] Table
+       Capture "tableId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Table
 
 -- | Retrieves a specific table by its ID.
 --
--- /See:/ 'tableGet' smart constructor.
-data TableGet = TableGet
-    { _tggQuotaUser   :: !(Maybe Text)
-    , _tggPrettyPrint :: !Bool
-    , _tggUserIp      :: !(Maybe Text)
-    , _tggKey         :: !(Maybe Text)
-    , _tggOauthToken  :: !(Maybe Text)
-    , _tggTableId     :: !Text
-    , _tggFields      :: !(Maybe Text)
-    , _tggAlt         :: !Text
+-- /See:/ 'tableGet'' smart constructor.
+data TableGet' = TableGet'
+    { _ttQuotaUser   :: !(Maybe Text)
+    , _ttPrettyPrint :: !Bool
+    , _ttUserIp      :: !(Maybe Text)
+    , _ttKey         :: !(Maybe Text)
+    , _ttOauthToken  :: !(Maybe Text)
+    , _ttTableId     :: !Text
+    , _ttFields      :: !(Maybe Text)
+    , _ttAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tggQuotaUser'
+-- * 'ttQuotaUser'
 --
--- * 'tggPrettyPrint'
+-- * 'ttPrettyPrint'
 --
--- * 'tggUserIp'
+-- * 'ttUserIp'
 --
--- * 'tggKey'
+-- * 'ttKey'
 --
--- * 'tggOauthToken'
+-- * 'ttOauthToken'
 --
--- * 'tggTableId'
+-- * 'ttTableId'
 --
--- * 'tggFields'
+-- * 'ttFields'
 --
--- * 'tggAlt'
-tableGet
+-- * 'ttAlt'
+tableGet'
     :: Text -- ^ 'tableId'
-    -> TableGet
-tableGet pTggTableId_ =
-    TableGet
-    { _tggQuotaUser = Nothing
-    , _tggPrettyPrint = True
-    , _tggUserIp = Nothing
-    , _tggKey = Nothing
-    , _tggOauthToken = Nothing
-    , _tggTableId = pTggTableId_
-    , _tggFields = Nothing
-    , _tggAlt = "json"
+    -> TableGet'
+tableGet' pTtTableId_ =
+    TableGet'
+    { _ttQuotaUser = Nothing
+    , _ttPrettyPrint = True
+    , _ttUserIp = Nothing
+    , _ttKey = Nothing
+    , _ttOauthToken = Nothing
+    , _ttTableId = pTtTableId_
+    , _ttFields = Nothing
+    , _ttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tggQuotaUser :: Lens' TableGet' (Maybe Text)
-tggQuotaUser
-  = lens _tggQuotaUser (\ s a -> s{_tggQuotaUser = a})
+ttQuotaUser :: Lens' TableGet' (Maybe Text)
+ttQuotaUser
+  = lens _ttQuotaUser (\ s a -> s{_ttQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tggPrettyPrint :: Lens' TableGet' Bool
-tggPrettyPrint
-  = lens _tggPrettyPrint
-      (\ s a -> s{_tggPrettyPrint = a})
+ttPrettyPrint :: Lens' TableGet' Bool
+ttPrettyPrint
+  = lens _ttPrettyPrint
+      (\ s a -> s{_ttPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tggUserIp :: Lens' TableGet' (Maybe Text)
-tggUserIp
-  = lens _tggUserIp (\ s a -> s{_tggUserIp = a})
+ttUserIp :: Lens' TableGet' (Maybe Text)
+ttUserIp = lens _ttUserIp (\ s a -> s{_ttUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tggKey :: Lens' TableGet' (Maybe Text)
-tggKey = lens _tggKey (\ s a -> s{_tggKey = a})
+ttKey :: Lens' TableGet' (Maybe Text)
+ttKey = lens _ttKey (\ s a -> s{_ttKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tggOauthToken :: Lens' TableGet' (Maybe Text)
-tggOauthToken
-  = lens _tggOauthToken
-      (\ s a -> s{_tggOauthToken = a})
+ttOauthToken :: Lens' TableGet' (Maybe Text)
+ttOauthToken
+  = lens _ttOauthToken (\ s a -> s{_ttOauthToken = a})
 
 -- | Identifier for the table being requested.
-tggTableId :: Lens' TableGet' Text
-tggTableId
-  = lens _tggTableId (\ s a -> s{_tggTableId = a})
+ttTableId :: Lens' TableGet' Text
+ttTableId
+  = lens _ttTableId (\ s a -> s{_ttTableId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tggFields :: Lens' TableGet' (Maybe Text)
-tggFields
-  = lens _tggFields (\ s a -> s{_tggFields = a})
+ttFields :: Lens' TableGet' (Maybe Text)
+ttFields = lens _ttFields (\ s a -> s{_ttFields = a})
 
 -- | Data format for the response.
-tggAlt :: Lens' TableGet' Text
-tggAlt = lens _tggAlt (\ s a -> s{_tggAlt = a})
+ttAlt :: Lens' TableGet' Alt
+ttAlt = lens _ttAlt (\ s a -> s{_ttAlt = a})
 
 instance GoogleRequest TableGet' where
         type Rs TableGet' = Table
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableGet{..}
-          = go _tggQuotaUser _tggPrettyPrint _tggUserIp _tggKey
-              _tggOauthToken
-              _tggTableId
-              _tggFields
-              _tggAlt
+        requestWithRoute r u TableGet'{..}
+          = go _ttQuotaUser (Just _ttPrettyPrint) _ttUserIp
+              _ttKey
+              _ttOauthToken
+              _ttTableId
+              _ttFields
+              (Just _ttAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TableGetResource) r
+                      u

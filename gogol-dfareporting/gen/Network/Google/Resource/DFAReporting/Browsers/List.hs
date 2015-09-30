@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of browsers.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingBrowsersList@.
-module DFAReporting.Browsers.List
+module Network.Google.Resource.DFAReporting.Browsers.List
     (
     -- * REST Resource
-      BrowsersListAPI
+      BrowsersListResource
 
     -- * Creating a Request
-    , browsersList
-    , BrowsersList
+    , browsersList'
+    , BrowsersList'
 
     -- * Request Lenses
     , blQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingBrowsersList@ which the
--- 'BrowsersList' request conforms to.
-type BrowsersListAPI =
+-- 'BrowsersList'' request conforms to.
+type BrowsersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "browsers" :> Get '[JSON] BrowsersListResponse
+         "browsers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] BrowsersListResponse
 
 -- | Retrieves a list of browsers.
 --
--- /See:/ 'browsersList' smart constructor.
-data BrowsersList = BrowsersList
+-- /See:/ 'browsersList'' smart constructor.
+data BrowsersList' = BrowsersList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
     , _blUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data BrowsersList = BrowsersList
     , _blKey         :: !(Maybe Text)
     , _blOauthToken  :: !(Maybe Text)
     , _blFields      :: !(Maybe Text)
-    , _blAlt         :: !Text
+    , _blAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrowsersList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data BrowsersList = BrowsersList
 -- * 'blFields'
 --
 -- * 'blAlt'
-browsersList
+browsersList'
     :: Int64 -- ^ 'profileId'
-    -> BrowsersList
-browsersList pBlProfileId_ =
-    BrowsersList
+    -> BrowsersList'
+browsersList' pBlProfileId_ =
+    BrowsersList'
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
     , _blUserIp = Nothing
@@ -94,7 +103,7 @@ browsersList pBlProfileId_ =
     , _blKey = Nothing
     , _blOauthToken = Nothing
     , _blFields = Nothing
-    , _blAlt = "json"
+    , _blAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +145,21 @@ blFields :: Lens' BrowsersList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
 -- | Data format for the response.
-blAlt :: Lens' BrowsersList' Text
+blAlt :: Lens' BrowsersList' Alt
 blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
 
 instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u BrowsersList{..}
-          = go _blQuotaUser _blPrettyPrint _blUserIp
+        requestWithRoute r u BrowsersList'{..}
+          = go _blQuotaUser (Just _blPrettyPrint) _blUserIp
               _blProfileId
               _blKey
               _blOauthToken
               _blFields
-              _blAlt
+              (Just _blAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BrowsersListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BrowsersListResource)
+                      r
                       u

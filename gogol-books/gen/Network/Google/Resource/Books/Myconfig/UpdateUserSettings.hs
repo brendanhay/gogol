@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- sub-objects will retain the existing value.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyconfigUpdateUserSettings@.
-module Books.Myconfig.UpdateUserSettings
+module Network.Google.Resource.Books.Myconfig.UpdateUserSettings
     (
     -- * REST Resource
-      MyconfigUpdateUserSettingsAPI
+      MyconfigUpdateUserSettingsResource
 
     -- * Creating a Request
-    , myconfigUpdateUserSettings
-    , MyconfigUpdateUserSettings
+    , myconfigUpdateUserSettings'
+    , MyconfigUpdateUserSettings'
 
     -- * Request Lenses
     , muusQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMyconfigUpdateUserSettings@ which the
--- 'MyconfigUpdateUserSettings' request conforms to.
-type MyconfigUpdateUserSettingsAPI =
+-- 'MyconfigUpdateUserSettings'' request conforms to.
+type MyconfigUpdateUserSettingsResource =
      "myconfig" :>
-       "updateUserSettings" :> Post '[JSON] Usersettings
+       "updateUserSettings" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Usersettings
 
 -- | Sets the settings for the user. If a sub-object is specified, it will
 -- overwrite the existing sub-object stored in the server. Unspecified
 -- sub-objects will retain the existing value.
 --
--- /See:/ 'myconfigUpdateUserSettings' smart constructor.
-data MyconfigUpdateUserSettings = MyconfigUpdateUserSettings
+-- /See:/ 'myconfigUpdateUserSettings'' smart constructor.
+data MyconfigUpdateUserSettings' = MyconfigUpdateUserSettings'
     { _muusQuotaUser   :: !(Maybe Text)
     , _muusPrettyPrint :: !Bool
     , _muusUserIp      :: !(Maybe Text)
     , _muusKey         :: !(Maybe Text)
     , _muusOauthToken  :: !(Maybe Text)
     , _muusFields      :: !(Maybe Text)
-    , _muusAlt         :: !Text
+    , _muusAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyconfigUpdateUserSettings'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data MyconfigUpdateUserSettings = MyconfigUpdateUserSettings
 -- * 'muusFields'
 --
 -- * 'muusAlt'
-myconfigUpdateUserSettings
-    :: MyconfigUpdateUserSettings
-myconfigUpdateUserSettings =
-    MyconfigUpdateUserSettings
+myconfigUpdateUserSettings'
+    :: MyconfigUpdateUserSettings'
+myconfigUpdateUserSettings' =
+    MyconfigUpdateUserSettings'
     { _muusQuotaUser = Nothing
     , _muusPrettyPrint = True
     , _muusUserIp = Nothing
     , _muusKey = Nothing
     , _muusOauthToken = Nothing
     , _muusFields = Nothing
-    , _muusAlt = "json"
+    , _muusAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,21 +140,22 @@ muusFields
   = lens _muusFields (\ s a -> s{_muusFields = a})
 
 -- | Data format for the response.
-muusAlt :: Lens' MyconfigUpdateUserSettings' Text
+muusAlt :: Lens' MyconfigUpdateUserSettings' Alt
 muusAlt = lens _muusAlt (\ s a -> s{_muusAlt = a})
 
 instance GoogleRequest MyconfigUpdateUserSettings'
          where
         type Rs MyconfigUpdateUserSettings' = Usersettings
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyconfigUpdateUserSettings{..}
-          = go _muusQuotaUser _muusPrettyPrint _muusUserIp
+        requestWithRoute r u MyconfigUpdateUserSettings'{..}
+          = go _muusQuotaUser (Just _muusPrettyPrint)
+              _muusUserIp
               _muusKey
               _muusOauthToken
               _muusFields
-              _muusAlt
+              (Just _muusAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MyconfigUpdateUserSettingsAPI)
+                      (Proxy :: Proxy MyconfigUpdateUserSettingsResource)
                       r
                       u

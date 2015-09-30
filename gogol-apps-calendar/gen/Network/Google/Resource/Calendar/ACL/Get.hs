@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns an access control rule.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLGet@.
-module Calendar.ACL.Get
+module Network.Google.Resource.Calendar.ACL.Get
     (
     -- * REST Resource
-      AclGetAPI
+      AclGetResource
 
     -- * Creating a Request
-    , aCLGet
-    , ACLGet
+    , aCLGet'
+    , ACLGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLGet@ which the
--- 'ACLGet' request conforms to.
-type AclGetAPI =
+-- 'ACLGet'' request conforms to.
+type AclGetResource =
      "calendars" :>
        Capture "calendarId" Text :>
-         "acl" :> Capture "ruleId" Text :> Get '[JSON] ACLRule
+         "acl" :>
+           Capture "ruleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ACLRule
 
 -- | Returns an access control rule.
 --
--- /See:/ 'aCLGet' smart constructor.
-data ACLGet = ACLGet
+-- /See:/ 'aCLGet'' smart constructor.
+data ACLGet' = ACLGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agCalendarId  :: !Text
     , _agPrettyPrint :: !Bool
@@ -62,7 +71,7 @@ data ACLGet = ACLGet
     , _agKey         :: !(Maybe Text)
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data ACLGet = ACLGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-aCLGet
+aCLGet'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLGet
-aCLGet pAgCalendarId_ pAgRuleId_ =
-    ACLGet
+    -> ACLGet'
+aCLGet' pAgCalendarId_ pAgRuleId_ =
+    ACLGet'
     { _agQuotaUser = Nothing
     , _agCalendarId = pAgCalendarId_
     , _agPrettyPrint = True
@@ -100,7 +109,7 @@ aCLGet pAgCalendarId_ pAgRuleId_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +157,19 @@ agFields :: Lens' ACLGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' ACLGet' Text
+agAlt :: Lens' ACLGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest ACLGet' where
         type Rs ACLGet' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLGet{..}
-          = go _agQuotaUser _agCalendarId _agPrettyPrint
+        requestWithRoute r u ACLGet'{..}
+          = go _agQuotaUser _agCalendarId (Just _agPrettyPrint)
               _agUserIp
               _agRuleId
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclGetResource) r u

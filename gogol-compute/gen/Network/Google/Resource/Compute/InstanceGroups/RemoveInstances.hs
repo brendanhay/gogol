@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes a list of instances from an instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsRemoveInstances@.
-module Compute.InstanceGroups.RemoveInstances
+module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
     (
     -- * REST Resource
-      InstanceGroupsRemoveInstancesAPI
+      InstanceGroupsRemoveInstancesResource
 
     -- * Creating a Request
-    , instanceGroupsRemoveInstances
-    , InstanceGroupsRemoveInstances
+    , instanceGroupsRemoveInstances'
+    , InstanceGroupsRemoveInstances'
 
     -- * Request Lenses
     , igriQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsRemoveInstances@ which the
--- 'InstanceGroupsRemoveInstances' request conforms to.
-type InstanceGroupsRemoveInstancesAPI =
+-- 'InstanceGroupsRemoveInstances'' request conforms to.
+type InstanceGroupsRemoveInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
-               "removeInstances" :> Post '[JSON] Operation
+               "removeInstances" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes a list of instances from an instance group.
 --
--- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
-data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
+-- /See:/ 'instanceGroupsRemoveInstances'' smart constructor.
+data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
     { _igriQuotaUser     :: !(Maybe Text)
     , _igriPrettyPrint   :: !Bool
     , _igriProject       :: !Text
@@ -67,7 +75,7 @@ data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
     , _igriOauthToken    :: !(Maybe Text)
     , _igriInstanceGroup :: !Text
     , _igriFields        :: !(Maybe Text)
-    , _igriAlt           :: !Text
+    , _igriAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsRemoveInstances'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
 -- * 'igriFields'
 --
 -- * 'igriAlt'
-instanceGroupsRemoveInstances
+instanceGroupsRemoveInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
-    -> InstanceGroupsRemoveInstances
-instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriInstanceGroup_ =
-    InstanceGroupsRemoveInstances
+    -> InstanceGroupsRemoveInstances'
+instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriInstanceGroup_ =
+    InstanceGroupsRemoveInstances'
     { _igriQuotaUser = Nothing
     , _igriPrettyPrint = True
     , _igriProject = pIgriProject_
@@ -109,7 +117,7 @@ instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriInstanceGroup_ =
     , _igriOauthToken = Nothing
     , _igriInstanceGroup = pIgriInstanceGroup_
     , _igriFields = Nothing
-    , _igriAlt = "json"
+    , _igriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,7 +174,7 @@ igriFields
   = lens _igriFields (\ s a -> s{_igriFields = a})
 
 -- | Data format for the response.
-igriAlt :: Lens' InstanceGroupsRemoveInstances' Text
+igriAlt :: Lens' InstanceGroupsRemoveInstances' Alt
 igriAlt = lens _igriAlt (\ s a -> s{_igriAlt = a})
 
 instance GoogleRequest InstanceGroupsRemoveInstances'
@@ -174,17 +182,19 @@ instance GoogleRequest InstanceGroupsRemoveInstances'
         type Rs InstanceGroupsRemoveInstances' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupsRemoveInstances{..}
-          = go _igriQuotaUser _igriPrettyPrint _igriProject
+          InstanceGroupsRemoveInstances'{..}
+          = go _igriQuotaUser (Just _igriPrettyPrint)
+              _igriProject
               _igriUserIp
               _igriZone
               _igriKey
               _igriOauthToken
               _igriInstanceGroup
               _igriFields
-              _igriAlt
+              (Just _igriAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsRemoveInstancesAPI)
+                      (Proxy ::
+                         Proxy InstanceGroupsRemoveInstancesResource)
                       r
                       u

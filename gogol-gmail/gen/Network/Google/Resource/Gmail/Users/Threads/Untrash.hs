@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes the specified thread from the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsUntrash@.
-module Gmail.Users.Threads.Untrash
+module Network.Google.Resource.Gmail.Users.Threads.Untrash
     (
     -- * REST Resource
-      UsersThreadsUntrashAPI
+      UsersThreadsUntrashResource
 
     -- * Creating a Request
-    , usersThreadsUntrash
-    , UsersThreadsUntrash
+    , usersThreadsUntrash'
+    , UsersThreadsUntrash'
 
     -- * Request Lenses
     , utuQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsUntrash@ which the
--- 'UsersThreadsUntrash' request conforms to.
-type UsersThreadsUntrashAPI =
+-- 'UsersThreadsUntrash'' request conforms to.
+type UsersThreadsUntrashResource =
      Capture "userId" Text :>
        "threads" :>
-         Capture "id" Text :> "untrash" :> Post '[JSON] Thread
+         Capture "id" Text :>
+           "untrash" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Thread
 
 -- | Removes the specified thread from the trash.
 --
--- /See:/ 'usersThreadsUntrash' smart constructor.
-data UsersThreadsUntrash = UsersThreadsUntrash
+-- /See:/ 'usersThreadsUntrash'' smart constructor.
+data UsersThreadsUntrash' = UsersThreadsUntrash'
     { _utuQuotaUser   :: !(Maybe Text)
     , _utuPrettyPrint :: !Bool
     , _utuUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data UsersThreadsUntrash = UsersThreadsUntrash
     , _utuId          :: !Text
     , _utuOauthToken  :: !(Maybe Text)
     , _utuFields      :: !(Maybe Text)
-    , _utuAlt         :: !Text
+    , _utuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsUntrash'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data UsersThreadsUntrash = UsersThreadsUntrash
 -- * 'utuFields'
 --
 -- * 'utuAlt'
-usersThreadsUntrash
+usersThreadsUntrash'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersThreadsUntrash
-usersThreadsUntrash pUtuUserId_ pUtuId_ =
-    UsersThreadsUntrash
+    -> UsersThreadsUntrash'
+usersThreadsUntrash' pUtuUserId_ pUtuId_ =
+    UsersThreadsUntrash'
     { _utuQuotaUser = Nothing
     , _utuPrettyPrint = True
     , _utuUserIp = Nothing
@@ -100,7 +109,7 @@ usersThreadsUntrash pUtuUserId_ pUtuId_ =
     , _utuId = pUtuId_
     , _utuOauthToken = Nothing
     , _utuFields = Nothing
-    , _utuAlt = "json"
+    , _utuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +159,22 @@ utuFields
   = lens _utuFields (\ s a -> s{_utuFields = a})
 
 -- | Data format for the response.
-utuAlt :: Lens' UsersThreadsUntrash' Text
+utuAlt :: Lens' UsersThreadsUntrash' Alt
 utuAlt = lens _utuAlt (\ s a -> s{_utuAlt = a})
 
 instance GoogleRequest UsersThreadsUntrash' where
         type Rs UsersThreadsUntrash' = Thread
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsUntrash{..}
-          = go _utuQuotaUser _utuPrettyPrint _utuUserIp
+        requestWithRoute r u UsersThreadsUntrash'{..}
+          = go _utuQuotaUser (Just _utuPrettyPrint) _utuUserIp
               _utuUserId
               _utuKey
               _utuId
               _utuOauthToken
               _utuFields
-              _utuAlt
+              (Just _utuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersThreadsUntrashAPI)
+                      (Proxy :: Proxy UsersThreadsUntrashResource)
                       r
                       u

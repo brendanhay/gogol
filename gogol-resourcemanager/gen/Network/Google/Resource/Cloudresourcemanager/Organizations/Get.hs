@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Fetches an Organization resource by id.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsGet@.
-module Cloudresourcemanager.Organizations.Get
+module Network.Google.Resource.Cloudresourcemanager.Organizations.Get
     (
     -- * REST Resource
-      OrganizationsGetAPI
+      OrganizationsGetResource
 
     -- * Creating a Request
-    , organizationsGet
-    , OrganizationsGet
+    , organizationsGet'
+    , OrganizationsGet'
 
     -- * Request Lenses
     , ogXgafv
@@ -49,17 +50,30 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsGet@ which the
--- 'OrganizationsGet' request conforms to.
-type OrganizationsGetAPI =
+-- 'OrganizationsGet'' request conforms to.
+type OrganizationsGetResource =
      "v1beta1" :>
        "organizations" :>
          Capture "organizationId" Text :>
-           Get '[JSON] Organization
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] Organization
 
 -- | Fetches an Organization resource by id.
 --
--- /See:/ 'organizationsGet' smart constructor.
-data OrganizationsGet = OrganizationsGet
+-- /See:/ 'organizationsGet'' smart constructor.
+data OrganizationsGet' = OrganizationsGet'
     { _ogXgafv          :: !(Maybe Text)
     , _ogQuotaUser      :: !(Maybe Text)
     , _ogPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data OrganizationsGet = OrganizationsGet
 -- * 'ogCallback'
 --
 -- * 'ogAlt'
-organizationsGet
+organizationsGet'
     :: Text -- ^ 'organizationId'
-    -> OrganizationsGet
-organizationsGet pOgOrganizationId_ =
-    OrganizationsGet
+    -> OrganizationsGet'
+organizationsGet' pOgOrganizationId_ =
+    OrganizationsGet'
     { _ogXgafv = Nothing
     , _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
@@ -205,10 +219,10 @@ ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 instance GoogleRequest OrganizationsGet' where
         type Rs OrganizationsGet' = Organization
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsGet{..}
-          = go _ogXgafv _ogQuotaUser _ogPrettyPrint
+        requestWithRoute r u OrganizationsGet'{..}
+          = go _ogXgafv _ogQuotaUser (Just _ogPrettyPrint)
               _ogUploadProtocol
-              _ogPp
+              (Just _ogPp)
               _ogAccessToken
               _ogUploadType
               _ogBearerToken
@@ -217,9 +231,9 @@ instance GoogleRequest OrganizationsGet' where
               _ogOrganizationId
               _ogFields
               _ogCallback
-              _ogAlt
+              (Just _ogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsGetAPI)
+                      (Proxy :: Proxy OrganizationsGetResource)
                       r
                       u

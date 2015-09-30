@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- query completes within a specified timeout.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsQuery@.
-module BigQuery.Jobs.Query
+module Network.Google.Resource.BigQuery.Jobs.Query
     (
     -- * REST Resource
-      JobsQueryAPI
+      JobsQueryResource
 
     -- * Creating a Request
-    , jobsQuery
-    , JobsQuery
+    , jobsQuery'
+    , JobsQuery'
 
     -- * Request Lenses
     , jqQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryJobsQuery@ which the
--- 'JobsQuery' request conforms to.
-type JobsQueryAPI =
+-- 'JobsQuery'' request conforms to.
+type JobsQueryResource =
      "projects" :>
        Capture "projectId" Text :>
-         "queries" :> Post '[JSON] QueryResponse
+         "queries" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] QueryResponse
 
 -- | Runs a BigQuery SQL query synchronously and returns query results if the
 -- query completes within a specified timeout.
 --
--- /See:/ 'jobsQuery' smart constructor.
-data JobsQuery = JobsQuery
+-- /See:/ 'jobsQuery'' smart constructor.
+data JobsQuery' = JobsQuery'
     { _jqQuotaUser   :: !(Maybe Text)
     , _jqPrettyPrint :: !Bool
     , _jqUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data JobsQuery = JobsQuery
     , _jqProjectId   :: !Text
     , _jqOauthToken  :: !(Maybe Text)
     , _jqFields      :: !(Maybe Text)
-    , _jqAlt         :: !Text
+    , _jqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsQuery'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data JobsQuery = JobsQuery
 -- * 'jqFields'
 --
 -- * 'jqAlt'
-jobsQuery
+jobsQuery'
     :: Text -- ^ 'projectId'
-    -> JobsQuery
-jobsQuery pJqProjectId_ =
-    JobsQuery
+    -> JobsQuery'
+jobsQuery' pJqProjectId_ =
+    JobsQuery'
     { _jqQuotaUser = Nothing
     , _jqPrettyPrint = True
     , _jqUserIp = Nothing
@@ -96,7 +104,7 @@ jobsQuery pJqProjectId_ =
     , _jqProjectId = pJqProjectId_
     , _jqOauthToken = Nothing
     , _jqFields = Nothing
-    , _jqAlt = "json"
+    , _jqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,17 +146,20 @@ jqFields :: Lens' JobsQuery' (Maybe Text)
 jqFields = lens _jqFields (\ s a -> s{_jqFields = a})
 
 -- | Data format for the response.
-jqAlt :: Lens' JobsQuery' Text
+jqAlt :: Lens' JobsQuery' Alt
 jqAlt = lens _jqAlt (\ s a -> s{_jqAlt = a})
 
 instance GoogleRequest JobsQuery' where
         type Rs JobsQuery' = QueryResponse
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsQuery{..}
-          = go _jqQuotaUser _jqPrettyPrint _jqUserIp _jqKey
+        requestWithRoute r u JobsQuery'{..}
+          = go _jqQuotaUser (Just _jqPrettyPrint) _jqUserIp
+              _jqKey
               _jqProjectId
               _jqOauthToken
               _jqFields
-              _jqAlt
+              (Just _jqAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsQueryAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsQueryResource)
+                      r
+                      u

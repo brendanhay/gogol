@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesPatch@.
-module Fitness.Users.DataSources.Patch
+module Network.Google.Resource.Fitness.Users.DataSources.Patch
     (
     -- * REST Resource
-      UsersDataSourcesPatchAPI
+      UsersDataSourcesPatchResource
 
     -- * Creating a Request
-    , usersDataSourcesPatch
-    , UsersDataSourcesPatch
+    , usersDataSourcesPatch'
+    , UsersDataSourcesPatch'
 
     -- * Request Lenses
     , udspQuotaUser
@@ -49,12 +50,18 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesPatch@ which the
--- 'UsersDataSourcesPatch' request conforms to.
-type UsersDataSourcesPatchAPI =
+-- 'UsersDataSourcesPatch'' request conforms to.
+type UsersDataSourcesPatchResource =
      Capture "userId" Text :>
        "dataSources" :>
          Capture "dataSourceId" Text :>
-           Patch '[JSON] DataSource
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Patch '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart
@@ -63,8 +70,8 @@ type UsersDataSourcesPatchAPI =
 -- identified by their data stream ID. This method supports patch
 -- semantics.
 --
--- /See:/ 'usersDataSourcesPatch' smart constructor.
-data UsersDataSourcesPatch = UsersDataSourcesPatch
+-- /See:/ 'usersDataSourcesPatch'' smart constructor.
+data UsersDataSourcesPatch' = UsersDataSourcesPatch'
     { _udspQuotaUser    :: !(Maybe Text)
     , _udspPrettyPrint  :: !Bool
     , _udspUserIp       :: !(Maybe Text)
@@ -73,7 +80,7 @@ data UsersDataSourcesPatch = UsersDataSourcesPatch
     , _udspKey          :: !(Maybe Text)
     , _udspOauthToken   :: !(Maybe Text)
     , _udspFields       :: !(Maybe Text)
-    , _udspAlt          :: !Text
+    , _udspAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesPatch'' with the minimum fields required to make a request.
@@ -97,12 +104,12 @@ data UsersDataSourcesPatch = UsersDataSourcesPatch
 -- * 'udspFields'
 --
 -- * 'udspAlt'
-usersDataSourcesPatch
+usersDataSourcesPatch'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
-    -> UsersDataSourcesPatch
-usersDataSourcesPatch pUdspDataSourceId_ pUdspUserId_ =
-    UsersDataSourcesPatch
+    -> UsersDataSourcesPatch'
+usersDataSourcesPatch' pUdspDataSourceId_ pUdspUserId_ =
+    UsersDataSourcesPatch'
     { _udspQuotaUser = Nothing
     , _udspPrettyPrint = True
     , _udspUserIp = Nothing
@@ -111,7 +118,7 @@ usersDataSourcesPatch pUdspDataSourceId_ pUdspUserId_ =
     , _udspKey = Nothing
     , _udspOauthToken = Nothing
     , _udspFields = Nothing
-    , _udspAlt = "json"
+    , _udspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,22 +171,23 @@ udspFields
   = lens _udspFields (\ s a -> s{_udspFields = a})
 
 -- | Data format for the response.
-udspAlt :: Lens' UsersDataSourcesPatch' Text
+udspAlt :: Lens' UsersDataSourcesPatch' Alt
 udspAlt = lens _udspAlt (\ s a -> s{_udspAlt = a})
 
 instance GoogleRequest UsersDataSourcesPatch' where
         type Rs UsersDataSourcesPatch' = DataSource
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesPatch{..}
-          = go _udspQuotaUser _udspPrettyPrint _udspUserIp
+        requestWithRoute r u UsersDataSourcesPatch'{..}
+          = go _udspQuotaUser (Just _udspPrettyPrint)
+              _udspUserIp
               _udspDataSourceId
               _udspUserId
               _udspKey
               _udspOauthToken
               _udspFields
-              _udspAlt
+              (Just _udspAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesPatchAPI)
+                      (Proxy :: Proxy UsersDataSourcesPatchResource)
                       r
                       u

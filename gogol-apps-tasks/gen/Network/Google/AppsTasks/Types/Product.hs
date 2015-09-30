@@ -86,6 +86,61 @@ instance ToJSON Tasks where
                   Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
 
 --
+-- /See:/ 'taskLinks' smart constructor.
+data TaskLinks = TaskLinks
+    { _tlLink        :: !(Maybe Text)
+    , _tlType        :: !(Maybe Text)
+    , _tlDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskLinks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tlLink'
+--
+-- * 'tlType'
+--
+-- * 'tlDescription'
+taskLinks
+    :: TaskLinks
+taskLinks =
+    TaskLinks
+    { _tlLink = Nothing
+    , _tlType = Nothing
+    , _tlDescription = Nothing
+    }
+
+-- | The URL.
+tlLink :: Lens' TaskLinks (Maybe Text)
+tlLink = lens _tlLink (\ s a -> s{_tlLink = a})
+
+-- | Type of the link, e.g. \"email\".
+tlType :: Lens' TaskLinks (Maybe Text)
+tlType = lens _tlType (\ s a -> s{_tlType = a})
+
+-- | The description. In HTML speak: Everything between and .
+tlDescription :: Lens' TaskLinks (Maybe Text)
+tlDescription
+  = lens _tlDescription
+      (\ s a -> s{_tlDescription = a})
+
+instance FromJSON TaskLinks where
+        parseJSON
+          = withObject "TaskLinks"
+              (\ o ->
+                 TaskLinks <$>
+                   (o .:? "link") <*> (o .:? "type") <*>
+                     (o .:? "description"))
+
+instance ToJSON TaskLinks where
+        toJSON TaskLinks{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _tlLink, ("type" .=) <$> _tlType,
+                  ("description" .=) <$> _tlDescription])
+
+--
 -- /See:/ 'taskLists' smart constructor.
 data TaskLists = TaskLists
     { _tlEtag          :: !(Maybe Text)
@@ -253,7 +308,7 @@ data Task = Task
     , _ttDeleted   :: !(Maybe Bool)
     , _ttUpdated   :: !(Maybe UTCTime)
     , _ttTitle     :: !(Maybe Text)
-    , _ttLinks     :: !(Maybe [TaskLinksItem])
+    , _ttLinks     :: !(Maybe [TaskLinks])
     , _ttNotes     :: !(Maybe Text)
     , _ttPosition  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -371,7 +426,7 @@ ttTitle :: Lens' Task (Maybe Text)
 ttTitle = lens _ttTitle (\ s a -> s{_ttTitle = a})
 
 -- | Collection of links. This collection is read-only.
-ttLinks :: Lens' Task [TaskLinksItem]
+ttLinks :: Lens' Task [TaskLinks]
 ttLinks
   = lens _ttLinks (\ s a -> s{_ttLinks = a}) . _Default
       . _Coerce

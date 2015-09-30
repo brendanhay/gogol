@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- \`ALREADY_EXISTS\` if the alias already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesCreate@.
-module Classroom.Courses.Aliases.Create
+module Network.Google.Resource.Classroom.Courses.Aliases.Create
     (
     -- * REST Resource
-      CoursesAliasesCreateAPI
+      CoursesAliasesCreateResource
 
     -- * Creating a Request
-    , coursesAliasesCreate
-    , CoursesAliasesCreate
+    , coursesAliasesCreate'
+    , CoursesAliasesCreate'
 
     -- * Request Lenses
     , cacXgafv
@@ -53,12 +54,26 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesAliasesCreate@ which the
--- 'CoursesAliasesCreate' request conforms to.
-type CoursesAliasesCreateAPI =
+-- 'CoursesAliasesCreate'' request conforms to.
+type CoursesAliasesCreateResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
-           "aliases" :> Post '[JSON] CourseAlias
+           "aliases" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] CourseAlias
 
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -66,8 +81,8 @@ type CoursesAliasesCreateAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if the course does not exist. *
 -- \`ALREADY_EXISTS\` if the alias already exists.
 --
--- /See:/ 'coursesAliasesCreate' smart constructor.
-data CoursesAliasesCreate = CoursesAliasesCreate
+-- /See:/ 'coursesAliasesCreate'' smart constructor.
+data CoursesAliasesCreate' = CoursesAliasesCreate'
     { _cacXgafv          :: !(Maybe Text)
     , _cacQuotaUser      :: !(Maybe Text)
     , _cacPrettyPrint    :: !Bool
@@ -115,11 +130,11 @@ data CoursesAliasesCreate = CoursesAliasesCreate
 -- * 'cacCallback'
 --
 -- * 'cacAlt'
-coursesAliasesCreate
+coursesAliasesCreate'
     :: Text -- ^ 'courseId'
-    -> CoursesAliasesCreate
-coursesAliasesCreate pCacCourseId_ =
-    CoursesAliasesCreate
+    -> CoursesAliasesCreate'
+coursesAliasesCreate' pCacCourseId_ =
+    CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacQuotaUser = Nothing
     , _cacPrettyPrint = True
@@ -217,10 +232,10 @@ cacAlt = lens _cacAlt (\ s a -> s{_cacAlt = a})
 instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesAliasesCreate{..}
-          = go _cacXgafv _cacQuotaUser _cacPrettyPrint
+        requestWithRoute r u CoursesAliasesCreate'{..}
+          = go _cacXgafv _cacQuotaUser (Just _cacPrettyPrint)
               _cacUploadProtocol
-              _cacPp
+              (Just _cacPp)
               _cacCourseId
               _cacAccessToken
               _cacUploadType
@@ -229,9 +244,9 @@ instance GoogleRequest CoursesAliasesCreate' where
               _cacOauthToken
               _cacFields
               _cacCallback
-              _cacAlt
+              (Just _cacAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesAliasesCreateAPI)
+                      (Proxy :: Proxy CoursesAliasesCreateResource)
                       r
                       u

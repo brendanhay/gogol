@@ -28,40 +28,40 @@ module Network.Google.StorageTransfer
     -- * REST Resources
 
     -- ** StoragetransferGetGoogleServiceAccount
-    , module StorageTransfer.GetGoogleServiceAccount
+    , module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 
     -- ** StoragetransferGoogleServiceAccountsGet
-    , module StorageTransfer.GoogleServiceAccounts.Get
+    , module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 
     -- ** StoragetransferTransferJobsCreate
-    , module StorageTransfer.TransferJobs.Create
+    , module Network.Google.Resource.StorageTransfer.TransferJobs.Create
 
     -- ** StoragetransferTransferJobsGet
-    , module StorageTransfer.TransferJobs.Get
+    , module Network.Google.Resource.StorageTransfer.TransferJobs.Get
 
     -- ** StoragetransferTransferJobsList
-    , module StorageTransfer.TransferJobs.List
+    , module Network.Google.Resource.StorageTransfer.TransferJobs.List
 
     -- ** StoragetransferTransferJobsPatch
-    , module StorageTransfer.TransferJobs.Patch
+    , module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 
     -- ** StoragetransferTransferOperationsCancel
-    , module StorageTransfer.TransferOperations.Cancel
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
 
     -- ** StoragetransferTransferOperationsDelete
-    , module StorageTransfer.TransferOperations.Delete
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 
     -- ** StoragetransferTransferOperationsGet
-    , module StorageTransfer.TransferOperations.Get
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 
     -- ** StoragetransferTransferOperationsList
-    , module StorageTransfer.TransferOperations.List
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.List
 
     -- ** StoragetransferTransferOperationsPause
-    , module StorageTransfer.TransferOperations.Pause
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
 
     -- ** StoragetransferTransferOperationsResume
-    , module StorageTransfer.TransferOperations.Resume
+    , module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
 
     -- * Types
 
@@ -122,6 +122,10 @@ module Network.Google.StorageTransfer
     , Empty
     , empty
 
+    -- ** StatusDetails
+    , StatusDetails
+    , statusDetails
+
     -- ** Date
     , Date
     , date
@@ -179,6 +183,10 @@ module Network.Google.StorageTransfer
     , awsS3Data
     , asdBucketName
     , asdAwsAccessKey
+
+    -- ** OperationMetadata
+    , OperationMetadata
+    , operationMetadata
 
     -- ** HTTPData
     , HTTPData
@@ -244,6 +252,10 @@ module Network.Google.StorageTransfer
     -- ** ResumeTransferOperationRequest
     , ResumeTransferOperationRequest
     , resumeTransferOperationRequest
+
+    -- ** OperationResponse
+    , OperationResponse
+    , operationResponse
     ) where
 
 import           Network.Google.Prelude
@@ -266,8 +278,18 @@ TODO
 -}
 
 type StorageTransferAPI =
-     TransferJobs :<|> V1 :<|> TransferOperations :<|>
-       GoogleServiceAccounts
+     TransferJobsListResource :<|>
+       TransferJobsPatchResource
+       :<|> TransferJobsGetResource
+       :<|> TransferJobsCreateResource
+       :<|> GetGoogleServiceAccountResource
+       :<|> TransferOperationsListResource
+       :<|> TransferOperationsGetResource
+       :<|> TransferOperationsPauseResource
+       :<|> TransferOperationsCancelResource
+       :<|> TransferOperationsDeleteResource
+       :<|> TransferOperationsResumeResource
+       :<|> GoogleServiceAccountsGetResource
 
 storageTransferAPI :: Proxy StorageTransferAPI
 storageTransferAPI = Proxy

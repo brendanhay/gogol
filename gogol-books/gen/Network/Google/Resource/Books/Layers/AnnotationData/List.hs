@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the annotation data for a volume and layer.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersAnnotationDataList@.
-module Books.Layers.AnnotationData.List
+module Network.Google.Resource.Books.Layers.AnnotationData.List
     (
     -- * REST Resource
-      LayersAnnotationDataListAPI
+      LayersAnnotationDataListResource
 
     -- * Creating a Request
-    , layersAnnotationDataList
-    , LayersAnnotationDataList
+    , layersAnnotationDataList'
+    , LayersAnnotationDataList'
 
     -- * Request Lenses
     , ladlQuotaUser
@@ -55,30 +56,37 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersAnnotationDataList@ which the
--- 'LayersAnnotationDataList' request conforms to.
-type LayersAnnotationDataListAPI =
+-- 'LayersAnnotationDataList'' request conforms to.
+type LayersAnnotationDataListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
              "data" :>
-               QueryParam "w" Int32 :>
-                 QueryParam "scale" Int32 :>
-                   QueryParam "locale" Text :>
-                     QueryParam "contentVersion" Text :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "updatedMin" Text :>
-                           QueryParams "annotationDataId" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "h" Int32 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     Get '[JSON] Annotationsdata
+               QueryParam "quotaUser" Text :>
+                 QueryParam "w" Int32 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "scale" Int32 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "locale" Text :>
+                           QueryParam "contentVersion" Text :>
+                             QueryParam "updatedMax" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "updatedMin" Text :>
+                                   QueryParams "annotationDataId" Text :>
+                                     QueryParam "source" Text :>
+                                       QueryParam "h" Int32 :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "maxResults" Word32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Alt :>
+                                                   Get '[JSON] Annotationsdata
 
 -- | Gets the annotation data for a volume and layer.
 --
--- /See:/ 'layersAnnotationDataList' smart constructor.
-data LayersAnnotationDataList = LayersAnnotationDataList
+-- /See:/ 'layersAnnotationDataList'' smart constructor.
+data LayersAnnotationDataList' = LayersAnnotationDataList'
     { _ladlQuotaUser        :: !(Maybe Text)
     , _ladlW                :: !(Maybe Int32)
     , _ladlPrettyPrint      :: !Bool
@@ -98,7 +106,7 @@ data LayersAnnotationDataList = LayersAnnotationDataList
     , _ladlLayerId          :: !Text
     , _ladlMaxResults       :: !(Maybe Word32)
     , _ladlFields           :: !(Maybe Text)
-    , _ladlAlt              :: !Text
+    , _ladlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataList'' with the minimum fields required to make a request.
@@ -144,13 +152,13 @@ data LayersAnnotationDataList = LayersAnnotationDataList
 -- * 'ladlFields'
 --
 -- * 'ladlAlt'
-layersAnnotationDataList
+layersAnnotationDataList'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'volumeId'
     -> Text -- ^ 'layerId'
-    -> LayersAnnotationDataList
-layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
-    LayersAnnotationDataList
+    -> LayersAnnotationDataList'
+layersAnnotationDataList' pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
+    LayersAnnotationDataList'
     { _ladlQuotaUser = Nothing
     , _ladlW = Nothing
     , _ladlPrettyPrint = True
@@ -170,7 +178,7 @@ layersAnnotationDataList pLadlContentVersion_ pLadlVolumeId_ pLadlLayerId_ =
     , _ladlLayerId = pLadlLayerId_
     , _ladlMaxResults = Nothing
     , _ladlFields = Nothing
-    , _ladlAlt = "json"
+    , _ladlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -286,15 +294,15 @@ ladlFields
   = lens _ladlFields (\ s a -> s{_ladlFields = a})
 
 -- | Data format for the response.
-ladlAlt :: Lens' LayersAnnotationDataList' Text
+ladlAlt :: Lens' LayersAnnotationDataList' Alt
 ladlAlt = lens _ladlAlt (\ s a -> s{_ladlAlt = a})
 
 instance GoogleRequest LayersAnnotationDataList'
          where
         type Rs LayersAnnotationDataList' = Annotationsdata
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersAnnotationDataList{..}
-          = go _ladlQuotaUser _ladlW _ladlPrettyPrint
+        requestWithRoute r u LayersAnnotationDataList'{..}
+          = go _ladlQuotaUser _ladlW (Just _ladlPrettyPrint)
               _ladlScale
               _ladlUserIp
               _ladlLocale
@@ -311,9 +319,9 @@ instance GoogleRequest LayersAnnotationDataList'
               _ladlLayerId
               _ladlMaxResults
               _ladlFields
-              _ladlAlt
+              (Just _ladlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersAnnotationDataListAPI)
+                      (Proxy :: Proxy LayersAnnotationDataListResource)
                       r
                       u

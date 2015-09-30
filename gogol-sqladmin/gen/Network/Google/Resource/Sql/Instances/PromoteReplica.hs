@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesPromoteReplica@.
-module Sql.Instances.PromoteReplica
+module Network.Google.Resource.Sql.Instances.PromoteReplica
     (
     -- * REST Resource
-      InstancesPromoteReplicaAPI
+      InstancesPromoteReplicaResource
 
     -- * Creating a Request
-    , instancesPromoteReplica
-    , InstancesPromoteReplica
+    , instancesPromoteReplica'
+    , InstancesPromoteReplica'
 
     -- * Request Lenses
     , iprQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesPromoteReplica@ which the
--- 'InstancesPromoteReplica' request conforms to.
-type InstancesPromoteReplicaAPI =
+-- 'InstancesPromoteReplica'' request conforms to.
+type InstancesPromoteReplicaResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "promoteReplica" :> Post '[JSON] Operation
+             "promoteReplica" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Promotes the read replica instance to be a stand-alone Cloud SQL
 -- instance.
 --
--- /See:/ 'instancesPromoteReplica' smart constructor.
-data InstancesPromoteReplica = InstancesPromoteReplica
+-- /See:/ 'instancesPromoteReplica'' smart constructor.
+data InstancesPromoteReplica' = InstancesPromoteReplica'
     { _iprQuotaUser   :: !(Maybe Text)
     , _iprPrettyPrint :: !Bool
     , _iprProject     :: !Text
@@ -65,7 +73,7 @@ data InstancesPromoteReplica = InstancesPromoteReplica
     , _iprKey         :: !(Maybe Text)
     , _iprOauthToken  :: !(Maybe Text)
     , _iprFields      :: !(Maybe Text)
-    , _iprAlt         :: !Text
+    , _iprAlt         :: !Alt
     , _iprInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,12 +98,12 @@ data InstancesPromoteReplica = InstancesPromoteReplica
 -- * 'iprAlt'
 --
 -- * 'iprInstance'
-instancesPromoteReplica
+instancesPromoteReplica'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesPromoteReplica
-instancesPromoteReplica pIprProject_ pIprInstance_ =
-    InstancesPromoteReplica
+    -> InstancesPromoteReplica'
+instancesPromoteReplica' pIprProject_ pIprInstance_ =
+    InstancesPromoteReplica'
     { _iprQuotaUser = Nothing
     , _iprPrettyPrint = True
     , _iprProject = pIprProject_
@@ -103,7 +111,7 @@ instancesPromoteReplica pIprProject_ pIprInstance_ =
     , _iprKey = Nothing
     , _iprOauthToken = Nothing
     , _iprFields = Nothing
-    , _iprAlt = "json"
+    , _iprAlt = JSON
     , _iprInstance = pIprInstance_
     }
 
@@ -149,7 +157,7 @@ iprFields
   = lens _iprFields (\ s a -> s{_iprFields = a})
 
 -- | Data format for the response.
-iprAlt :: Lens' InstancesPromoteReplica' Text
+iprAlt :: Lens' InstancesPromoteReplica' Alt
 iprAlt = lens _iprAlt (\ s a -> s{_iprAlt = a})
 
 -- | Cloud SQL read replica instance name.
@@ -160,16 +168,16 @@ iprInstance
 instance GoogleRequest InstancesPromoteReplica' where
         type Rs InstancesPromoteReplica' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesPromoteReplica{..}
-          = go _iprQuotaUser _iprPrettyPrint _iprProject
+        requestWithRoute r u InstancesPromoteReplica'{..}
+          = go _iprQuotaUser (Just _iprPrettyPrint) _iprProject
               _iprUserIp
               _iprKey
               _iprOauthToken
               _iprFields
-              _iprAlt
+              (Just _iprAlt)
               _iprInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesPromoteReplicaAPI)
+                      (Proxy :: Proxy InstancesPromoteReplicaResource)
                       r
                       u

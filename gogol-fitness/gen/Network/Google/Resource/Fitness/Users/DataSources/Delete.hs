@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete the data source if there are no datapoints associated with it
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDelete@.
-module Fitness.Users.DataSources.Delete
+module Network.Google.Resource.Fitness.Users.DataSources.Delete
     (
     -- * REST Resource
-      UsersDataSourcesDeleteAPI
+      UsersDataSourcesDeleteResource
 
     -- * Creating a Request
-    , usersDataSourcesDelete
-    , UsersDataSourcesDelete
+    , usersDataSourcesDelete'
+    , UsersDataSourcesDelete'
 
     -- * Request Lenses
     , udsdQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesDelete@ which the
--- 'UsersDataSourcesDelete' request conforms to.
-type UsersDataSourcesDeleteAPI =
+-- 'UsersDataSourcesDelete'' request conforms to.
+type UsersDataSourcesDeleteResource =
      Capture "userId" Text :>
        "dataSources" :>
          Capture "dataSourceId" Text :>
-           Delete '[JSON] DataSource
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] DataSource
 
 -- | Delete the data source if there are no datapoints associated with it
 --
--- /See:/ 'usersDataSourcesDelete' smart constructor.
-data UsersDataSourcesDelete = UsersDataSourcesDelete
+-- /See:/ 'usersDataSourcesDelete'' smart constructor.
+data UsersDataSourcesDelete' = UsersDataSourcesDelete'
     { _udsdQuotaUser    :: !(Maybe Text)
     , _udsdPrettyPrint  :: !Bool
     , _udsdUserIp       :: !(Maybe Text)
@@ -63,7 +70,7 @@ data UsersDataSourcesDelete = UsersDataSourcesDelete
     , _udsdKey          :: !(Maybe Text)
     , _udsdOauthToken   :: !(Maybe Text)
     , _udsdFields       :: !(Maybe Text)
-    , _udsdAlt          :: !Text
+    , _udsdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDelete'' with the minimum fields required to make a request.
@@ -87,12 +94,12 @@ data UsersDataSourcesDelete = UsersDataSourcesDelete
 -- * 'udsdFields'
 --
 -- * 'udsdAlt'
-usersDataSourcesDelete
+usersDataSourcesDelete'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
-    -> UsersDataSourcesDelete
-usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
-    UsersDataSourcesDelete
+    -> UsersDataSourcesDelete'
+usersDataSourcesDelete' pUdsdDataSourceId_ pUdsdUserId_ =
+    UsersDataSourcesDelete'
     { _udsdQuotaUser = Nothing
     , _udsdPrettyPrint = True
     , _udsdUserIp = Nothing
@@ -101,7 +108,7 @@ usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
     , _udsdKey = Nothing
     , _udsdOauthToken = Nothing
     , _udsdFields = Nothing
-    , _udsdAlt = "json"
+    , _udsdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +161,23 @@ udsdFields
   = lens _udsdFields (\ s a -> s{_udsdFields = a})
 
 -- | Data format for the response.
-udsdAlt :: Lens' UsersDataSourcesDelete' Text
+udsdAlt :: Lens' UsersDataSourcesDelete' Alt
 udsdAlt = lens _udsdAlt (\ s a -> s{_udsdAlt = a})
 
 instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesDelete{..}
-          = go _udsdQuotaUser _udsdPrettyPrint _udsdUserIp
+        requestWithRoute r u UsersDataSourcesDelete'{..}
+          = go _udsdQuotaUser (Just _udsdPrettyPrint)
+              _udsdUserIp
               _udsdDataSourceId
               _udsdUserId
               _udsdKey
               _udsdOauthToken
               _udsdFields
-              _udsdAlt
+              (Just _udsdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesDeleteAPI)
+                      (Proxy :: Proxy UsersDataSourcesDeleteResource)
                       r
                       u

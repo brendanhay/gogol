@@ -106,9 +106,9 @@ instance ToJSON PartitionId where
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch
     { _qrbSkippedResults   :: !(Maybe Int32)
-    , _qrbEntityResultType :: !(Maybe Text)
+    , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbEntityResults    :: !(Maybe [Maybe EntityResult])
-    , _qrbMoreResults      :: !(Maybe Text)
+    , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
     , _qrbEndCursor        :: !(Maybe Word8)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -145,7 +145,7 @@ qrbSkippedResults
 -- | The result type for every entity in entityResults. full for full
 -- entities, projection for entities with only projected properties,
 -- keyOnly for entities with only a key.
-qrbEntityResultType :: Lens' QueryResultBatch (Maybe Text)
+qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
 qrbEntityResultType
   = lens _qrbEntityResultType
       (\ s a -> s{_qrbEntityResultType = a})
@@ -160,7 +160,7 @@ qrbEntityResults
 
 -- | The state of the query after the current batch. One of notFinished,
 -- moreResultsAfterLimit, noMoreResults.
-qrbMoreResults :: Lens' QueryResultBatch (Maybe Text)
+qrbMoreResults :: Lens' QueryResultBatch (Maybe QueryResultBatchMoreResults)
 qrbMoreResults
   = lens _qrbMoreResults
       (\ s a -> s{_qrbMoreResults = a})
@@ -399,10 +399,31 @@ instance ToJSON AllocateIdsRequest where
         toJSON AllocateIdsRequest{..}
           = object (catMaybes [("keys" .=) <$> _airKeys])
 
+-- | The entity\'s properties.
+--
+-- /See:/ 'entityProperties' smart constructor.
+data EntityProperties =
+    EntityProperties
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityProperties' with the minimum fields required to make a request.
+--
+entityProperties
+    :: EntityProperties
+entityProperties = EntityProperties
+
+instance FromJSON EntityProperties where
+        parseJSON
+          = withObject "EntityProperties"
+              (\ o -> pure EntityProperties)
+
+instance ToJSON EntityProperties where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
 newtype BeginTransactionRequest = BeginTransactionRequest
-    { _btrIsolationLevel :: Maybe Text
+    { _btrIsolationLevel :: Maybe BeginTransactionRequestIsolationLevel
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionRequest' with the minimum fields required to make a request.
@@ -423,7 +444,7 @@ beginTransactionRequest =
 -- this transaction. Optionally, a transaction can request to be made
 -- serializable which means that another transaction cannot concurrently
 -- modify the data that is read or modified by this transaction.
-btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe Text)
+btrIsolationLevel :: Lens' BeginTransactionRequest (Maybe BeginTransactionRequestIsolationLevel)
 btrIsolationLevel
   = lens _btrIsolationLevel
       (\ s a -> s{_btrIsolationLevel = a})
@@ -521,7 +542,7 @@ instance ToJSON RunQueryRequest where
 --
 -- /See:/ 'compositeFilter' smart constructor.
 data CompositeFilter = CompositeFilter
-    { _cfOperator :: !(Maybe Text)
+    { _cfOperator :: !(Maybe CompositeFilterOperator)
     , _cfFilters  :: !(Maybe [Maybe Filter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -542,7 +563,7 @@ compositeFilter =
 
 -- | The operator for combining multiple filters. Only \"and\" is currently
 -- supported.
-cfOperator :: Lens' CompositeFilter (Maybe Text)
+cfOperator :: Lens' CompositeFilter (Maybe CompositeFilterOperator)
 cfOperator
   = lens _cfOperator (\ s a -> s{_cfOperator = a})
 
@@ -1407,7 +1428,7 @@ instance ToJSON Key where
 -- /See:/ 'propertyFilter' smart constructor.
 data PropertyFilter = PropertyFilter
     { _pfProperty :: !(Maybe (Maybe PropertyReference))
-    , _pfOperator :: !(Maybe Text)
+    , _pfOperator :: !(Maybe PropertyFilterOperator)
     , _pfValue    :: !(Maybe (Maybe Value))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1436,7 +1457,7 @@ pfProperty
 
 -- | The operator to filter by. One of lessThan, lessThanOrEqual,
 -- greaterThan, greaterThanOrEqual, equal, or hasAncestor.
-pfOperator :: Lens' PropertyFilter (Maybe Text)
+pfOperator :: Lens' PropertyFilter (Maybe PropertyFilterOperator)
 pfOperator
   = lens _pfOperator (\ s a -> s{_pfOperator = a})
 
@@ -1705,7 +1726,7 @@ instance ToJSON KindExpression where
 --
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions
-    { _roReadConsistency :: !(Maybe Text)
+    { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
     , _roTransaction     :: !(Maybe Word8)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1728,7 +1749,7 @@ readOptions =
 -- be set when transaction is set. Lookup and ancestor queries default to
 -- strong, global queries default to eventual and cannot be set to strong.
 -- Optional. Default is default.
-roReadConsistency :: Lens' ReadOptions (Maybe Text)
+roReadConsistency :: Lens' ReadOptions (Maybe ReadOptionsReadConsistency)
 roReadConsistency
   = lens _roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
@@ -1788,7 +1809,7 @@ instance ToJSON RollbackResponse where
 -- /See:/ 'propertyExpression' smart constructor.
 data PropertyExpression = PropertyExpression
     { _peProperty            :: !(Maybe (Maybe PropertyReference))
-    , _peAggregationFunction :: !(Maybe Text)
+    , _peAggregationFunction :: !(Maybe PropertyExpressionAggregationFunction)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyExpression' with the minimum fields required to make a request.
@@ -1816,7 +1837,7 @@ peProperty
 -- properties in the projection that are not being grouped by. Aggregation
 -- functions: first selects the first result as determined by the query\'s
 -- order.
-peAggregationFunction :: Lens' PropertyExpression (Maybe Text)
+peAggregationFunction :: Lens' PropertyExpression (Maybe PropertyExpressionAggregationFunction)
 peAggregationFunction
   = lens _peAggregationFunction
       (\ s a -> s{_peAggregationFunction = a})
@@ -1889,7 +1910,7 @@ instance ToJSON Filter where
 --
 -- /See:/ 'commitRequest' smart constructor.
 data CommitRequest = CommitRequest
-    { _crMode           :: !(Maybe Text)
+    { _crMode           :: !(Maybe CommitRequestMode)
     , _crMutation       :: !(Maybe (Maybe Mutation))
     , _crTransaction    :: !(Maybe Word8)
     , _crIgnoreReadOnly :: !(Maybe Bool)
@@ -1918,7 +1939,7 @@ commitRequest =
 
 -- | The type of commit to perform. Either TRANSACTIONAL or
 -- NON_TRANSACTIONAL.
-crMode :: Lens' CommitRequest (Maybe Text)
+crMode :: Lens' CommitRequest (Maybe CommitRequestMode)
 crMode = lens _crMode (\ s a -> s{_crMode = a})
 
 -- | The mutation to perform. Optional.
@@ -2081,7 +2102,7 @@ instance ToJSON LookupResponse where
 -- /See:/ 'propertyOrder' smart constructor.
 data PropertyOrder = PropertyOrder
     { _poProperty  :: !(Maybe (Maybe PropertyReference))
-    , _poDirection :: !(Maybe Text)
+    , _poDirection :: !(Maybe PropertyOrderDirection)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertyOrder' with the minimum fields required to make a request.
@@ -2106,7 +2127,7 @@ poProperty
 
 -- | The direction to order by. One of ascending or descending. Optional,
 -- defaults to ascending.
-poDirection :: Lens' PropertyOrder (Maybe Text)
+poDirection :: Lens' PropertyOrder (Maybe PropertyOrderDirection)
 poDirection
   = lens _poDirection (\ s a -> s{_poDirection = a})
 

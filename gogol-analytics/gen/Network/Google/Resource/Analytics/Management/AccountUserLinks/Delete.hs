@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes a user from the given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksDelete@.
-module Analytics.Management.AccountUserLinks.Delete
+module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
     (
     -- * REST Resource
-      ManagementAccountUserLinksDeleteAPI
+      ManagementAccountUserLinksDeleteResource
 
     -- * Creating a Request
-    , managementAccountUserLinksDelete
-    , ManagementAccountUserLinksDelete
+    , managementAccountUserLinksDelete'
+    , ManagementAccountUserLinksDelete'
 
     -- * Request Lenses
     , mauldQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksDelete@ which the
--- 'ManagementAccountUserLinksDelete' request conforms to.
-type ManagementAccountUserLinksDeleteAPI =
+-- 'ManagementAccountUserLinksDelete'' request conforms to.
+type ManagementAccountUserLinksDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "entityUserLinks" :>
-             Capture "linkId" Text :> Delete '[JSON] ()
+             Capture "linkId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes a user from the given account.
 --
--- /See:/ 'managementAccountUserLinksDelete' smart constructor.
-data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete
+-- /See:/ 'managementAccountUserLinksDelete'' smart constructor.
+data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
     { _mauldQuotaUser   :: !(Maybe Text)
     , _mauldPrettyPrint :: !Bool
     , _mauldUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete
     , _mauldLinkId      :: !Text
     , _mauldOauthToken  :: !(Maybe Text)
     , _mauldFields      :: !(Maybe Text)
-    , _mauldAlt         :: !Text
+    , _mauldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksDelete'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ManagementAccountUserLinksDelete = ManagementAccountUserLinksDelete
 -- * 'mauldFields'
 --
 -- * 'mauldAlt'
-managementAccountUserLinksDelete
+managementAccountUserLinksDelete'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementAccountUserLinksDelete
-managementAccountUserLinksDelete pMauldAccountId_ pMauldLinkId_ =
-    ManagementAccountUserLinksDelete
+    -> ManagementAccountUserLinksDelete'
+managementAccountUserLinksDelete' pMauldAccountId_ pMauldLinkId_ =
+    ManagementAccountUserLinksDelete'
     { _mauldQuotaUser = Nothing
     , _mauldPrettyPrint = False
     , _mauldUserIp = Nothing
@@ -102,7 +110,7 @@ managementAccountUserLinksDelete pMauldAccountId_ pMauldLinkId_ =
     , _mauldLinkId = pMauldLinkId_
     , _mauldOauthToken = Nothing
     , _mauldFields = Nothing
-    , _mauldAlt = "json"
+    , _mauldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,7 +162,7 @@ mauldFields
   = lens _mauldFields (\ s a -> s{_mauldFields = a})
 
 -- | Data format for the response.
-mauldAlt :: Lens' ManagementAccountUserLinksDelete' Text
+mauldAlt :: Lens' ManagementAccountUserLinksDelete' Alt
 mauldAlt = lens _mauldAlt (\ s a -> s{_mauldAlt = a})
 
 instance GoogleRequest
@@ -162,16 +170,18 @@ instance GoogleRequest
         type Rs ManagementAccountUserLinksDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementAccountUserLinksDelete{..}
-          = go _mauldQuotaUser _mauldPrettyPrint _mauldUserIp
+          ManagementAccountUserLinksDelete'{..}
+          = go _mauldQuotaUser (Just _mauldPrettyPrint)
+              _mauldUserIp
               _mauldAccountId
               _mauldKey
               _mauldLinkId
               _mauldOauthToken
               _mauldFields
-              _mauldAlt
+              (Just _mauldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementAccountUserLinksDeleteAPI)
+                      (Proxy ::
+                         Proxy ManagementAccountUserLinksDeleteResource)
                       r
                       u

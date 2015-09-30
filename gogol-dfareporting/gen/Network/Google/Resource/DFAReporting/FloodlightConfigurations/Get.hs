@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one floodlight configuration by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsGet@.
-module DFAReporting.FloodlightConfigurations.Get
+module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
     (
     -- * REST Resource
-      FloodlightConfigurationsGetAPI
+      FloodlightConfigurationsGetResource
 
     -- * Creating a Request
-    , floodlightConfigurationsGet
-    , FloodlightConfigurationsGet
+    , floodlightConfigurationsGet'
+    , FloodlightConfigurationsGet'
 
     -- * Request Lenses
     , fcgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightConfigurationsGet@ which the
--- 'FloodlightConfigurationsGet' request conforms to.
-type FloodlightConfigurationsGetAPI =
+-- 'FloodlightConfigurationsGet'' request conforms to.
+type FloodlightConfigurationsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
            Capture "id" Int64 :>
-             Get '[JSON] FloodlightConfiguration
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] FloodlightConfiguration
 
 -- | Gets one floodlight configuration by ID.
 --
--- /See:/ 'floodlightConfigurationsGet' smart constructor.
-data FloodlightConfigurationsGet = FloodlightConfigurationsGet
+-- /See:/ 'floodlightConfigurationsGet'' smart constructor.
+data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
     { _fcgQuotaUser   :: !(Maybe Text)
     , _fcgPrettyPrint :: !Bool
     , _fcgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data FloodlightConfigurationsGet = FloodlightConfigurationsGet
     , _fcgId          :: !Int64
     , _fcgOauthToken  :: !(Maybe Text)
     , _fcgFields      :: !(Maybe Text)
-    , _fcgAlt         :: !Text
+    , _fcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data FloodlightConfigurationsGet = FloodlightConfigurationsGet
 -- * 'fcgFields'
 --
 -- * 'fcgAlt'
-floodlightConfigurationsGet
+floodlightConfigurationsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightConfigurationsGet
-floodlightConfigurationsGet pFcgProfileId_ pFcgId_ =
-    FloodlightConfigurationsGet
+    -> FloodlightConfigurationsGet'
+floodlightConfigurationsGet' pFcgProfileId_ pFcgId_ =
+    FloodlightConfigurationsGet'
     { _fcgQuotaUser = Nothing
     , _fcgPrettyPrint = True
     , _fcgUserIp = Nothing
@@ -102,7 +110,7 @@ floodlightConfigurationsGet pFcgProfileId_ pFcgId_ =
     , _fcgId = pFcgId_
     , _fcgOauthToken = Nothing
     , _fcgFields = Nothing
-    , _fcgAlt = "json"
+    , _fcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,7 +159,7 @@ fcgFields
   = lens _fcgFields (\ s a -> s{_fcgFields = a})
 
 -- | Data format for the response.
-fcgAlt :: Lens' FloodlightConfigurationsGet' Text
+fcgAlt :: Lens' FloodlightConfigurationsGet' Alt
 fcgAlt = lens _fcgAlt (\ s a -> s{_fcgAlt = a})
 
 instance GoogleRequest FloodlightConfigurationsGet'
@@ -159,16 +167,16 @@ instance GoogleRequest FloodlightConfigurationsGet'
         type Rs FloodlightConfigurationsGet' =
              FloodlightConfiguration
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightConfigurationsGet{..}
-          = go _fcgQuotaUser _fcgPrettyPrint _fcgUserIp
+        requestWithRoute r u FloodlightConfigurationsGet'{..}
+          = go _fcgQuotaUser (Just _fcgPrettyPrint) _fcgUserIp
               _fcgProfileId
               _fcgKey
               _fcgId
               _fcgOauthToken
               _fcgFields
-              _fcgAlt
+              (Just _fcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightConfigurationsGetAPI)
+                      (Proxy :: Proxy FloodlightConfigurationsGetResource)
                       r
                       u

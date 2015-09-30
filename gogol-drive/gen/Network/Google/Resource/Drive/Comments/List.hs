@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,195 +20,204 @@
 -- | Lists a file\'s comments.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsList@.
-module Drive.Comments.List
+module Network.Google.Resource.Drive.Comments.List
     (
     -- * REST Resource
-      CommentsListAPI
+      CommentsListResource
 
     -- * Creating a Request
-    , commentsList
-    , CommentsList
+    , commentsList'
+    , CommentsList'
 
     -- * Request Lenses
-    , cllQuotaUser
-    , cllPrettyPrint
-    , cllUserIp
-    , cllKey
-    , cllUpdatedMin
-    , cllPageToken
-    , cllFileId
-    , cllOauthToken
-    , cllMaxResults
-    , cllIncludeDeleted
-    , cllFields
-    , cllAlt
+    , comQuotaUser
+    , comPrettyPrint
+    , comUserIp
+    , comKey
+    , comUpdatedMin
+    , comPageToken
+    , comFileId
+    , comOauthToken
+    , comMaxResults
+    , comIncludeDeleted
+    , comFields
+    , comAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveCommentsList@ which the
--- 'CommentsList' request conforms to.
-type CommentsListAPI =
+-- 'CommentsList'' request conforms to.
+type CommentsListResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
-           QueryParam "updatedMin" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 QueryParam "includeDeleted" Bool :>
-                   Get '[JSON] CommentList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "updatedMin" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "includeDeleted" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] CommentList
 
 -- | Lists a file\'s comments.
 --
--- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
-    { _cllQuotaUser      :: !(Maybe Text)
-    , _cllPrettyPrint    :: !Bool
-    , _cllUserIp         :: !(Maybe Text)
-    , _cllKey            :: !(Maybe Text)
-    , _cllUpdatedMin     :: !(Maybe Text)
-    , _cllPageToken      :: !(Maybe Text)
-    , _cllFileId         :: !Text
-    , _cllOauthToken     :: !(Maybe Text)
-    , _cllMaxResults     :: !Int32
-    , _cllIncludeDeleted :: !Bool
-    , _cllFields         :: !(Maybe Text)
-    , _cllAlt            :: !Text
+-- /See:/ 'commentsList'' smart constructor.
+data CommentsList' = CommentsList'
+    { _comQuotaUser      :: !(Maybe Text)
+    , _comPrettyPrint    :: !Bool
+    , _comUserIp         :: !(Maybe Text)
+    , _comKey            :: !(Maybe Text)
+    , _comUpdatedMin     :: !(Maybe Text)
+    , _comPageToken      :: !(Maybe Text)
+    , _comFileId         :: !Text
+    , _comOauthToken     :: !(Maybe Text)
+    , _comMaxResults     :: !Int32
+    , _comIncludeDeleted :: !Bool
+    , _comFields         :: !(Maybe Text)
+    , _comAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cllQuotaUser'
+-- * 'comQuotaUser'
 --
--- * 'cllPrettyPrint'
+-- * 'comPrettyPrint'
 --
--- * 'cllUserIp'
+-- * 'comUserIp'
 --
--- * 'cllKey'
+-- * 'comKey'
 --
--- * 'cllUpdatedMin'
+-- * 'comUpdatedMin'
 --
--- * 'cllPageToken'
+-- * 'comPageToken'
 --
--- * 'cllFileId'
+-- * 'comFileId'
 --
--- * 'cllOauthToken'
+-- * 'comOauthToken'
 --
--- * 'cllMaxResults'
+-- * 'comMaxResults'
 --
--- * 'cllIncludeDeleted'
+-- * 'comIncludeDeleted'
 --
--- * 'cllFields'
+-- * 'comFields'
 --
--- * 'cllAlt'
-commentsList
+-- * 'comAlt'
+commentsList'
     :: Text -- ^ 'fileId'
-    -> CommentsList
-commentsList pCllFileId_ =
-    CommentsList
-    { _cllQuotaUser = Nothing
-    , _cllPrettyPrint = True
-    , _cllUserIp = Nothing
-    , _cllKey = Nothing
-    , _cllUpdatedMin = Nothing
-    , _cllPageToken = Nothing
-    , _cllFileId = pCllFileId_
-    , _cllOauthToken = Nothing
-    , _cllMaxResults = 20
-    , _cllIncludeDeleted = False
-    , _cllFields = Nothing
-    , _cllAlt = "json"
+    -> CommentsList'
+commentsList' pComFileId_ =
+    CommentsList'
+    { _comQuotaUser = Nothing
+    , _comPrettyPrint = True
+    , _comUserIp = Nothing
+    , _comKey = Nothing
+    , _comUpdatedMin = Nothing
+    , _comPageToken = Nothing
+    , _comFileId = pComFileId_
+    , _comOauthToken = Nothing
+    , _comMaxResults = 20
+    , _comIncludeDeleted = False
+    , _comFields = Nothing
+    , _comAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cllQuotaUser :: Lens' CommentsList' (Maybe Text)
-cllQuotaUser
-  = lens _cllQuotaUser (\ s a -> s{_cllQuotaUser = a})
+comQuotaUser :: Lens' CommentsList' (Maybe Text)
+comQuotaUser
+  = lens _comQuotaUser (\ s a -> s{_comQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cllPrettyPrint :: Lens' CommentsList' Bool
-cllPrettyPrint
-  = lens _cllPrettyPrint
-      (\ s a -> s{_cllPrettyPrint = a})
+comPrettyPrint :: Lens' CommentsList' Bool
+comPrettyPrint
+  = lens _comPrettyPrint
+      (\ s a -> s{_comPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cllUserIp :: Lens' CommentsList' (Maybe Text)
-cllUserIp
-  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
+comUserIp :: Lens' CommentsList' (Maybe Text)
+comUserIp
+  = lens _comUserIp (\ s a -> s{_comUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' CommentsList' (Maybe Text)
-cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
+comKey :: Lens' CommentsList' (Maybe Text)
+comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | Only discussions that were updated after this timestamp will be
 -- returned. Formatted as an RFC 3339 timestamp.
-cllUpdatedMin :: Lens' CommentsList' (Maybe Text)
-cllUpdatedMin
-  = lens _cllUpdatedMin
-      (\ s a -> s{_cllUpdatedMin = a})
+comUpdatedMin :: Lens' CommentsList' (Maybe Text)
+comUpdatedMin
+  = lens _comUpdatedMin
+      (\ s a -> s{_comUpdatedMin = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-cllPageToken :: Lens' CommentsList' (Maybe Text)
-cllPageToken
-  = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
+comPageToken :: Lens' CommentsList' (Maybe Text)
+comPageToken
+  = lens _comPageToken (\ s a -> s{_comPageToken = a})
 
 -- | The ID of the file.
-cllFileId :: Lens' CommentsList' Text
-cllFileId
-  = lens _cllFileId (\ s a -> s{_cllFileId = a})
+comFileId :: Lens' CommentsList' Text
+comFileId
+  = lens _comFileId (\ s a -> s{_comFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-cllOauthToken :: Lens' CommentsList' (Maybe Text)
-cllOauthToken
-  = lens _cllOauthToken
-      (\ s a -> s{_cllOauthToken = a})
+comOauthToken :: Lens' CommentsList' (Maybe Text)
+comOauthToken
+  = lens _comOauthToken
+      (\ s a -> s{_comOauthToken = a})
 
 -- | The maximum number of discussions to include in the response, used for
 -- paging.
-cllMaxResults :: Lens' CommentsList' Int32
-cllMaxResults
-  = lens _cllMaxResults
-      (\ s a -> s{_cllMaxResults = a})
+comMaxResults :: Lens' CommentsList' Int32
+comMaxResults
+  = lens _comMaxResults
+      (\ s a -> s{_comMaxResults = a})
 
 -- | If set, all comments and replies, including deleted comments and replies
 -- (with content stripped) will be returned.
-cllIncludeDeleted :: Lens' CommentsList' Bool
-cllIncludeDeleted
-  = lens _cllIncludeDeleted
-      (\ s a -> s{_cllIncludeDeleted = a})
+comIncludeDeleted :: Lens' CommentsList' Bool
+comIncludeDeleted
+  = lens _comIncludeDeleted
+      (\ s a -> s{_comIncludeDeleted = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cllFields :: Lens' CommentsList' (Maybe Text)
-cllFields
-  = lens _cllFields (\ s a -> s{_cllFields = a})
+comFields :: Lens' CommentsList' (Maybe Text)
+comFields
+  = lens _comFields (\ s a -> s{_comFields = a})
 
 -- | Data format for the response.
-cllAlt :: Lens' CommentsList' Text
-cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
+comAlt :: Lens' CommentsList' Alt
+comAlt = lens _comAlt (\ s a -> s{_comAlt = a})
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsList{..}
-          = go _cllQuotaUser _cllPrettyPrint _cllUserIp _cllKey
-              _cllUpdatedMin
-              _cllPageToken
-              _cllFileId
-              _cllOauthToken
-              (Just _cllMaxResults)
-              (Just _cllIncludeDeleted)
-              _cllFields
-              _cllAlt
+        requestWithRoute r u CommentsList'{..}
+          = go _comQuotaUser (Just _comPrettyPrint) _comUserIp
+              _comKey
+              _comUpdatedMin
+              _comPageToken
+              _comFileId
+              _comOauthToken
+              (Just _comMaxResults)
+              (Just _comIncludeDeleted)
+              _comFields
+              (Just _comAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsListResource)
+                      r
                       u

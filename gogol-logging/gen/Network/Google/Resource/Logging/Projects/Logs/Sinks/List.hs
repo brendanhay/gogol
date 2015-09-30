@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists log sinks associated with a log.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsSinksList@.
-module Logging.Projects.Logs.Sinks.List
+module Network.Google.Resource.Logging.Projects.Logs.Sinks.List
     (
     -- * REST Resource
-      ProjectsLogsSinksListAPI
+      ProjectsLogsSinksListResource
 
     -- * Creating a Request
-    , projectsLogsSinksList
-    , ProjectsLogsSinksList
+    , projectsLogsSinksList'
+    , ProjectsLogsSinksList'
 
     -- * Request Lenses
     , pXgafv
@@ -50,19 +51,33 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksList@ which the
--- 'ProjectsLogsSinksList' request conforms to.
-type ProjectsLogsSinksListAPI =
+-- 'ProjectsLogsSinksList'' request conforms to.
+type ProjectsLogsSinksListResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
              Capture "logsId" Text :>
-               "sinks" :> Get '[JSON] ListLogSinksResponse
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListLogSinksResponse
 
 -- | Lists log sinks associated with a log.
 --
--- /See:/ 'projectsLogsSinksList' smart constructor.
-data ProjectsLogsSinksList = ProjectsLogsSinksList
+-- /See:/ 'projectsLogsSinksList'' smart constructor.
+data ProjectsLogsSinksList' = ProjectsLogsSinksList'
     { _pXgafv          :: !(Maybe Text)
     , _pQuotaUser      :: !(Maybe Text)
     , _pPrettyPrint    :: !Bool
@@ -113,12 +128,12 @@ data ProjectsLogsSinksList = ProjectsLogsSinksList
 -- * 'pCallback'
 --
 -- * 'pAlt'
-projectsLogsSinksList
+projectsLogsSinksList'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogsSinksList
-projectsLogsSinksList pPLogsId_ pPProjectsId_ =
-    ProjectsLogsSinksList
+    -> ProjectsLogsSinksList'
+projectsLogsSinksList' pPLogsId_ pPProjectsId_ =
+    ProjectsLogsSinksList'
     { _pXgafv = Nothing
     , _pQuotaUser = Nothing
     , _pPrettyPrint = True
@@ -214,11 +229,11 @@ pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
 instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsSinksList{..}
-          = go _pXgafv _pQuotaUser _pPrettyPrint
+        requestWithRoute r u ProjectsLogsSinksList'{..}
+          = go _pXgafv _pQuotaUser (Just _pPrettyPrint)
               _pUploadProtocol
               _pLogsId
-              _pPp
+              (Just _pPp)
               _pAccessToken
               _pUploadType
               _pBearerToken
@@ -227,9 +242,9 @@ instance GoogleRequest ProjectsLogsSinksList' where
               _pProjectsId
               _pFields
               _pCallback
-              _pAlt
+              (Just _pAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsSinksListAPI)
+                      (Proxy :: Proxy ProjectsLogsSinksListResource)
                       r
                       u

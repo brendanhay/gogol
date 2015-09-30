@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a filters to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersGet@.
-module Analytics.Management.Filters.Get
+module Network.Google.Resource.Analytics.Management.Filters.Get
     (
     -- * REST Resource
-      ManagementFiltersGetAPI
+      ManagementFiltersGetResource
 
     -- * Creating a Request
-    , managementFiltersGet
-    , ManagementFiltersGet
+    , managementFiltersGet'
+    , ManagementFiltersGet'
 
     -- * Request Lenses
     , mfgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersGet@ which the
--- 'ManagementFiltersGet' request conforms to.
-type ManagementFiltersGetAPI =
+-- 'ManagementFiltersGet'' request conforms to.
+type ManagementFiltersGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             Capture "filterId" Text :> Get '[JSON] Filter
+             Capture "filterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Filter
 
 -- | Returns a filters to which the user has access.
 --
--- /See:/ 'managementFiltersGet' smart constructor.
-data ManagementFiltersGet = ManagementFiltersGet
+-- /See:/ 'managementFiltersGet'' smart constructor.
+data ManagementFiltersGet' = ManagementFiltersGet'
     { _mfgQuotaUser   :: !(Maybe Text)
     , _mfgPrettyPrint :: !Bool
     , _mfgFilterId    :: !Text
@@ -64,7 +72,7 @@ data ManagementFiltersGet = ManagementFiltersGet
     , _mfgKey         :: !(Maybe Text)
     , _mfgOauthToken  :: !(Maybe Text)
     , _mfgFields      :: !(Maybe Text)
-    , _mfgAlt         :: !Text
+    , _mfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ManagementFiltersGet = ManagementFiltersGet
 -- * 'mfgFields'
 --
 -- * 'mfgAlt'
-managementFiltersGet
+managementFiltersGet'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
-    -> ManagementFiltersGet
-managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
-    ManagementFiltersGet
+    -> ManagementFiltersGet'
+managementFiltersGet' pMfgFilterId_ pMfgAccountId_ =
+    ManagementFiltersGet'
     { _mfgQuotaUser = Nothing
     , _mfgPrettyPrint = False
     , _mfgFilterId = pMfgFilterId_
@@ -102,7 +110,7 @@ managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
     , _mfgKey = Nothing
     , _mfgOauthToken = Nothing
     , _mfgFields = Nothing
-    , _mfgAlt = "json"
+    , _mfgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ mfgFields
   = lens _mfgFields (\ s a -> s{_mfgFields = a})
 
 -- | Data format for the response.
-mfgAlt :: Lens' ManagementFiltersGet' Text
+mfgAlt :: Lens' ManagementFiltersGet' Alt
 mfgAlt = lens _mfgAlt (\ s a -> s{_mfgAlt = a})
 
 instance GoogleRequest ManagementFiltersGet' where
         type Rs ManagementFiltersGet' = Filter
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersGet{..}
-          = go _mfgQuotaUser _mfgPrettyPrint _mfgFilterId
+        requestWithRoute r u ManagementFiltersGet'{..}
+          = go _mfgQuotaUser (Just _mfgPrettyPrint)
+              _mfgFilterId
               _mfgUserIp
               _mfgAccountId
               _mfgKey
               _mfgOauthToken
               _mfgFields
-              _mfgAlt
+              (Just _mfgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersGetAPI)
+                      (Proxy :: Proxy ManagementFiltersGetResource)
                       r
                       u

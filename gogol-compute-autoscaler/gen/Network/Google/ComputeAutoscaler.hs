@@ -28,36 +28,43 @@ module Network.Google.ComputeAutoscaler
     -- * REST Resources
 
     -- ** AutoscalerAutoscalersDelete
-    , module Autoscaler.Autoscalers.Delete
+    , module Network.Google.Resource.Autoscaler.Autoscalers.Delete
 
     -- ** AutoscalerAutoscalersGet
-    , module Autoscaler.Autoscalers.Get
+    , module Network.Google.Resource.Autoscaler.Autoscalers.Get
 
     -- ** AutoscalerAutoscalersInsert
-    , module Autoscaler.Autoscalers.Insert
+    , module Network.Google.Resource.Autoscaler.Autoscalers.Insert
 
     -- ** AutoscalerAutoscalersList
-    , module Autoscaler.Autoscalers.List
+    , module Network.Google.Resource.Autoscaler.Autoscalers.List
 
     -- ** AutoscalerAutoscalersPatch
-    , module Autoscaler.Autoscalers.Patch
+    , module Network.Google.Resource.Autoscaler.Autoscalers.Patch
 
     -- ** AutoscalerAutoscalersUpdate
-    , module Autoscaler.Autoscalers.Update
+    , module Network.Google.Resource.Autoscaler.Autoscalers.Update
 
     -- ** AutoscalerZoneOperationsDelete
-    , module Autoscaler.ZoneOperations.Delete
+    , module Network.Google.Resource.Autoscaler.ZoneOperations.Delete
 
     -- ** AutoscalerZoneOperationsGet
-    , module Autoscaler.ZoneOperations.Get
+    , module Network.Google.Resource.Autoscaler.ZoneOperations.Get
 
     -- ** AutoscalerZoneOperationsList
-    , module Autoscaler.ZoneOperations.List
+    , module Network.Google.Resource.Autoscaler.ZoneOperations.List
 
     -- ** AutoscalerZonesList
-    , module Autoscaler.Zones.List
+    , module Network.Google.Resource.Autoscaler.Zones.List
 
     -- * Types
+
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
 
     -- ** DeprecationStatus
     , DeprecationStatus
@@ -67,6 +74,12 @@ module Network.Google.ComputeAutoscaler
     , dsReplacement
     , dsObsolete
     , dsDeprecated
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- ** OperationList
     , OperationList
@@ -145,6 +158,14 @@ module Network.Google.ComputeAutoscaler
     , zlSelfLink
     , zlId
 
+    -- ** ZoneMaintenanceWindows
+    , ZoneMaintenanceWindows
+    , zoneMaintenanceWindows
+    , zmwBeginTime
+    , zmwName
+    , zmwEndTime
+    , zmwDescription
+
     -- ** AutoscalingPolicy
     , AutoscalingPolicy
     , autoscalingPolicy
@@ -154,6 +175,11 @@ module Network.Google.ComputeAutoscaler
     , apLoadBalancingUtilization
     , apMinNumReplicas
     , apCoolDownPeriodSec
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** Autoscaler
     , Autoscaler
@@ -167,10 +193,20 @@ module Network.Google.ComputeAutoscaler
     , aDescription
     , aTarget
 
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- ** AutoscalingPolicyCPUUtilization
     , AutoscalingPolicyCPUUtilization
     , autoscalingPolicyCPUUtilization
     , apcuUtilizationTarget
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.ComputeAutoscaler.Types
@@ -191,7 +227,15 @@ TODO
 -}
 
 type ComputeAutoscalerAPI =
-     Zones :<|> Autoscalers :<|> ZoneOperations
+     ZonesListResource :<|> AutoscalersInsertResource :<|>
+       AutoscalersListResource
+       :<|> AutoscalersPatchResource
+       :<|> AutoscalersGetResource
+       :<|> AutoscalersDeleteResource
+       :<|> AutoscalersUpdateResource
+       :<|> ZoneOperationsListResource
+       :<|> ZoneOperationsGetResource
+       :<|> ZoneOperationsDeleteResource
 
 computeAutoscalerAPI :: Proxy ComputeAutoscalerAPI
 computeAutoscalerAPI = Proxy

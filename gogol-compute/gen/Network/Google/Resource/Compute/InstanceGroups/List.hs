@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project and zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsList@.
-module Compute.InstanceGroups.List
+module Network.Google.Resource.Compute.InstanceGroups.List
     (
     -- * REST Resource
-      InstanceGroupsListAPI
+      InstanceGroupsListResource
 
     -- * Creating a Request
-    , instanceGroupsList
-    , InstanceGroupsList
+    , instanceGroupsList'
+    , InstanceGroupsList'
 
     -- * Request Lenses
     , iglQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsList@ which the
--- 'InstanceGroupsList' request conforms to.
-type InstanceGroupsListAPI =
+-- 'InstanceGroupsList'' request conforms to.
+type InstanceGroupsListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] InstanceGroupList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] InstanceGroupList
 
 -- | Retrieves the list of instance groups that are located in the specified
 -- project and zone.
 --
--- /See:/ 'instanceGroupsList' smart constructor.
-data InstanceGroupsList = InstanceGroupsList
+-- /See:/ 'instanceGroupsList'' smart constructor.
+data InstanceGroupsList' = InstanceGroupsList'
     { _iglQuotaUser   :: !(Maybe Text)
     , _iglPrettyPrint :: !Bool
     , _iglProject     :: !Text
@@ -75,7 +83,7 @@ data InstanceGroupsList = InstanceGroupsList
     , _iglOauthToken  :: !(Maybe Text)
     , _iglMaxResults  :: !Word32
     , _iglFields      :: !(Maybe Text)
-    , _iglAlt         :: !Text
+    , _iglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data InstanceGroupsList = InstanceGroupsList
 -- * 'iglFields'
 --
 -- * 'iglAlt'
-instanceGroupsList
+instanceGroupsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> InstanceGroupsList
-instanceGroupsList pIglProject_ pIglZone_ =
-    InstanceGroupsList
+    -> InstanceGroupsList'
+instanceGroupsList' pIglProject_ pIglZone_ =
+    InstanceGroupsList'
     { _iglQuotaUser = Nothing
     , _iglPrettyPrint = True
     , _iglProject = pIglProject_
@@ -122,7 +130,7 @@ instanceGroupsList pIglProject_ pIglZone_ =
     , _iglOauthToken = Nothing
     , _iglMaxResults = 500
     , _iglFields = Nothing
-    , _iglAlt = "json"
+    , _iglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,14 @@ iglFields
   = lens _iglFields (\ s a -> s{_iglFields = a})
 
 -- | Data format for the response.
-iglAlt :: Lens' InstanceGroupsList' Text
+iglAlt :: Lens' InstanceGroupsList' Alt
 iglAlt = lens _iglAlt (\ s a -> s{_iglAlt = a})
 
 instance GoogleRequest InstanceGroupsList' where
         type Rs InstanceGroupsList' = InstanceGroupList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsList{..}
-          = go _iglQuotaUser _iglPrettyPrint _iglProject
+        requestWithRoute r u InstanceGroupsList'{..}
+          = go _iglQuotaUser (Just _iglPrettyPrint) _iglProject
               _iglUserIp
               _iglZone
               _iglKey
@@ -215,9 +223,9 @@ instance GoogleRequest InstanceGroupsList' where
               _iglOauthToken
               (Just _iglMaxResults)
               _iglFields
-              _iglAlt
+              (Just _iglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsListAPI)
+                      (Proxy :: Proxy InstanceGroupsListResource)
                       r
                       u

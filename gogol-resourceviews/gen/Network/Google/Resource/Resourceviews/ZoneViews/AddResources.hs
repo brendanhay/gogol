@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add resources to the view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsAddResources@.
-module Resourceviews.ZoneViews.AddResources
+module Network.Google.Resource.Resourceviews.ZoneViews.AddResources
     (
     -- * REST Resource
-      ZoneViewsAddResourcesAPI
+      ZoneViewsAddResourcesResource
 
     -- * Creating a Request
-    , zoneViewsAddResources
-    , ZoneViewsAddResources
+    , zoneViewsAddResources'
+    , ZoneViewsAddResources'
 
     -- * Request Lenses
     , zvarQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsAddResources@ which the
--- 'ZoneViewsAddResources' request conforms to.
-type ZoneViewsAddResourcesAPI =
+-- 'ZoneViewsAddResources'' request conforms to.
+type ZoneViewsAddResourcesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               "addResources" :> Post '[JSON] Operation
+               "addResources" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Add resources to the view.
 --
--- /See:/ 'zoneViewsAddResources' smart constructor.
-data ZoneViewsAddResources = ZoneViewsAddResources
+-- /See:/ 'zoneViewsAddResources'' smart constructor.
+data ZoneViewsAddResources' = ZoneViewsAddResources'
     { _zvarQuotaUser    :: !(Maybe Text)
     , _zvarPrettyPrint  :: !Bool
     , _zvarResourceView :: !Text
@@ -67,7 +75,7 @@ data ZoneViewsAddResources = ZoneViewsAddResources
     , _zvarKey          :: !(Maybe Text)
     , _zvarOauthToken   :: !(Maybe Text)
     , _zvarFields       :: !(Maybe Text)
-    , _zvarAlt          :: !Text
+    , _zvarAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsAddResources'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data ZoneViewsAddResources = ZoneViewsAddResources
 -- * 'zvarFields'
 --
 -- * 'zvarAlt'
-zoneViewsAddResources
+zoneViewsAddResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsAddResources
-zoneViewsAddResources pZvarResourceView_ pZvarProject_ pZvarZone_ =
-    ZoneViewsAddResources
+    -> ZoneViewsAddResources'
+zoneViewsAddResources' pZvarResourceView_ pZvarProject_ pZvarZone_ =
+    ZoneViewsAddResources'
     { _zvarQuotaUser = Nothing
     , _zvarPrettyPrint = True
     , _zvarResourceView = pZvarResourceView_
@@ -109,7 +117,7 @@ zoneViewsAddResources pZvarResourceView_ pZvarProject_ pZvarZone_ =
     , _zvarKey = Nothing
     , _zvarOauthToken = Nothing
     , _zvarFields = Nothing
-    , _zvarAlt = "json"
+    , _zvarAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,14 +173,14 @@ zvarFields
   = lens _zvarFields (\ s a -> s{_zvarFields = a})
 
 -- | Data format for the response.
-zvarAlt :: Lens' ZoneViewsAddResources' Text
+zvarAlt :: Lens' ZoneViewsAddResources' Alt
 zvarAlt = lens _zvarAlt (\ s a -> s{_zvarAlt = a})
 
 instance GoogleRequest ZoneViewsAddResources' where
         type Rs ZoneViewsAddResources' = Operation
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsAddResources{..}
-          = go _zvarQuotaUser _zvarPrettyPrint
+        requestWithRoute r u ZoneViewsAddResources'{..}
+          = go _zvarQuotaUser (Just _zvarPrettyPrint)
               _zvarResourceView
               _zvarProject
               _zvarUserIp
@@ -180,9 +188,9 @@ instance GoogleRequest ZoneViewsAddResources' where
               _zvarKey
               _zvarOauthToken
               _zvarFields
-              _zvarAlt
+              (Just _zvarAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneViewsAddResourcesAPI)
+                      (Proxy :: Proxy ZoneViewsAddResourcesResource)
                       r
                       u

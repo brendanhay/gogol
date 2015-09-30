@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsReportsGenerate@.
-module AdSense.Accounts.Reports.Generate
+module Network.Google.Resource.AdSense.Accounts.Reports.Generate
     (
     -- * REST Resource
-      AccountsReportsGenerateAPI
+      AccountsReportsGenerateResource
 
     -- * Creating a Request
-    , accountsReportsGenerate
-    , AccountsReportsGenerate
+    , accountsReportsGenerate'
+    , AccountsReportsGenerate'
 
     -- * Request Lenses
     , argQuotaUser
@@ -56,30 +57,38 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsReportsGenerate@ which the
--- 'AccountsReportsGenerate' request conforms to.
-type AccountsReportsGenerateAPI =
+-- 'AccountsReportsGenerate'' request conforms to.
+type AccountsReportsGenerateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "reports" :>
-           QueryParams "dimension" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "endDate" Text :>
-                 QueryParam "startDate" Text :>
-                   QueryParams "metric" Text :>
-                     QueryParam "currency" Text :>
-                       QueryParams "sort" Text :>
-                         QueryParams "filter" Text :>
-                           QueryParam "startIndex" Int32 :>
-                             QueryParam "useTimezoneReporting" Bool :>
-                               QueryParam "maxResults" Int32 :>
-                                 Get '[JSON] AdsenseReportsGenerateResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParams "dimension" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "endDate" Text :>
+                       QueryParam "startDate" Text :>
+                         QueryParams "metric" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "currency" Text :>
+                               QueryParams "sort" Text :>
+                                 QueryParams "filter" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "startIndex" Int32 :>
+                                       QueryParam "useTimezoneReporting" Bool :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON]
+                                                 AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
 -- specify \"alt=csv\" as a query parameter.
 --
--- /See:/ 'accountsReportsGenerate' smart constructor.
-data AccountsReportsGenerate = AccountsReportsGenerate
+-- /See:/ 'accountsReportsGenerate'' smart constructor.
+data AccountsReportsGenerate' = AccountsReportsGenerate'
     { _argQuotaUser            :: !(Maybe Text)
     , _argPrettyPrint          :: !Bool
     , _argUserIp               :: !(Maybe Text)
@@ -98,7 +107,7 @@ data AccountsReportsGenerate = AccountsReportsGenerate
     , _argUseTimezoneReporting :: !(Maybe Bool)
     , _argMaxResults           :: !(Maybe Int32)
     , _argFields               :: !(Maybe Text)
-    , _argAlt                  :: !Text
+    , _argAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsGenerate'' with the minimum fields required to make a request.
@@ -142,13 +151,13 @@ data AccountsReportsGenerate = AccountsReportsGenerate
 -- * 'argFields'
 --
 -- * 'argAlt'
-accountsReportsGenerate
+accountsReportsGenerate'
     :: Text -- ^ 'endDate'
     -> Text -- ^ 'startDate'
     -> Text -- ^ 'accountId'
-    -> AccountsReportsGenerate
-accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
-    AccountsReportsGenerate
+    -> AccountsReportsGenerate'
+accountsReportsGenerate' pArgEndDate_ pArgStartDate_ pArgAccountId_ =
+    AccountsReportsGenerate'
     { _argQuotaUser = Nothing
     , _argPrettyPrint = True
     , _argUserIp = Nothing
@@ -167,7 +176,7 @@ accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
     , _argUseTimezoneReporting = Nothing
     , _argMaxResults = Nothing
     , _argFields = Nothing
-    , _argAlt = "json"
+    , _argAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -275,15 +284,15 @@ argFields
   = lens _argFields (\ s a -> s{_argFields = a})
 
 -- | Data format for the response.
-argAlt :: Lens' AccountsReportsGenerate' Text
+argAlt :: Lens' AccountsReportsGenerate' Alt
 argAlt = lens _argAlt (\ s a -> s{_argAlt = a})
 
 instance GoogleRequest AccountsReportsGenerate' where
         type Rs AccountsReportsGenerate' =
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsReportsGenerate{..}
-          = go _argQuotaUser _argPrettyPrint _argUserIp
+        requestWithRoute r u AccountsReportsGenerate'{..}
+          = go _argQuotaUser (Just _argPrettyPrint) _argUserIp
               _argDimension
               _argLocale
               (Just _argEndDate)
@@ -299,9 +308,9 @@ instance GoogleRequest AccountsReportsGenerate' where
               _argUseTimezoneReporting
               _argMaxResults
               _argFields
-              _argAlt
+              (Just _argAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsReportsGenerateAPI)
+                      (Proxy :: Proxy AccountsReportsGenerateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- instance that is referenced by given TargetPool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsGetHealth@.
-module Compute.TargetPools.GetHealth
+module Network.Google.Resource.Compute.TargetPools.GetHealth
     (
     -- * REST Resource
-      TargetPoolsGetHealthAPI
+      TargetPoolsGetHealthResource
 
     -- * Creating a Request
-    , targetPoolsGetHealth
-    , TargetPoolsGetHealth
+    , targetPoolsGetHealth'
+    , TargetPoolsGetHealth'
 
     -- * Request Lenses
     , tpghQuotaUser
@@ -46,20 +47,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsGetHealth@ which the
--- 'TargetPoolsGetHealth' request conforms to.
-type TargetPoolsGetHealthAPI =
+-- 'TargetPoolsGetHealth'' request conforms to.
+type TargetPoolsGetHealthResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
-               "getHealth" :> Post '[JSON] TargetPoolInstanceHealth
+               "getHealth" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] TargetPoolInstanceHealth
 
 -- | Gets the most recent health check results for each IP for the given
 -- instance that is referenced by given TargetPool.
 --
--- /See:/ 'targetPoolsGetHealth' smart constructor.
-data TargetPoolsGetHealth = TargetPoolsGetHealth
+-- /See:/ 'targetPoolsGetHealth'' smart constructor.
+data TargetPoolsGetHealth' = TargetPoolsGetHealth'
     { _tpghQuotaUser   :: !(Maybe Text)
     , _tpghPrettyPrint :: !Bool
     , _tpghProject     :: !Text
@@ -69,7 +78,7 @@ data TargetPoolsGetHealth = TargetPoolsGetHealth
     , _tpghRegion      :: !Text
     , _tpghOauthToken  :: !(Maybe Text)
     , _tpghFields      :: !(Maybe Text)
-    , _tpghAlt         :: !Text
+    , _tpghAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsGetHealth'' with the minimum fields required to make a request.
@@ -95,13 +104,13 @@ data TargetPoolsGetHealth = TargetPoolsGetHealth
 -- * 'tpghFields'
 --
 -- * 'tpghAlt'
-targetPoolsGetHealth
+targetPoolsGetHealth'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsGetHealth
-targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
-    TargetPoolsGetHealth
+    -> TargetPoolsGetHealth'
+targetPoolsGetHealth' pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
+    TargetPoolsGetHealth'
     { _tpghQuotaUser = Nothing
     , _tpghPrettyPrint = True
     , _tpghProject = pTpghProject_
@@ -111,7 +120,7 @@ targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
     , _tpghRegion = pTpghRegion_
     , _tpghOauthToken = Nothing
     , _tpghFields = Nothing
-    , _tpghAlt = "json"
+    , _tpghAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,24 +176,25 @@ tpghFields
   = lens _tpghFields (\ s a -> s{_tpghFields = a})
 
 -- | Data format for the response.
-tpghAlt :: Lens' TargetPoolsGetHealth' Text
+tpghAlt :: Lens' TargetPoolsGetHealth' Alt
 tpghAlt = lens _tpghAlt (\ s a -> s{_tpghAlt = a})
 
 instance GoogleRequest TargetPoolsGetHealth' where
         type Rs TargetPoolsGetHealth' =
              TargetPoolInstanceHealth
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsGetHealth{..}
-          = go _tpghQuotaUser _tpghPrettyPrint _tpghProject
+        requestWithRoute r u TargetPoolsGetHealth'{..}
+          = go _tpghQuotaUser (Just _tpghPrettyPrint)
+              _tpghProject
               _tpghTargetPool
               _tpghUserIp
               _tpghKey
               _tpghRegion
               _tpghOauthToken
               _tpghFields
-              _tpghAlt
+              (Just _tpghAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsGetHealthAPI)
+                      (Proxy :: Proxy TargetPoolsGetHealthResource)
                       r
                       u

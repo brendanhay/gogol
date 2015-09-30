@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListSharesUpdate@.
-module DFAReporting.RemarketingListShares.Update
+module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     (
     -- * REST Resource
-      RemarketingListSharesUpdateAPI
+      RemarketingListSharesUpdateResource
 
     -- * Creating a Request
-    , remarketingListSharesUpdate
-    , RemarketingListSharesUpdate
+    , remarketingListSharesUpdate'
+    , RemarketingListSharesUpdate'
 
     -- * Request Lenses
     , rlsuQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListSharesUpdate@ which the
--- 'RemarketingListSharesUpdate' request conforms to.
-type RemarketingListSharesUpdateAPI =
+-- 'RemarketingListSharesUpdate'' request conforms to.
+type RemarketingListSharesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingListShares" :>
-           Put '[JSON] RemarketingListShare
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.
 --
--- /See:/ 'remarketingListSharesUpdate' smart constructor.
-data RemarketingListSharesUpdate = RemarketingListSharesUpdate
+-- /See:/ 'remarketingListSharesUpdate'' smart constructor.
+data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
     { _rlsuQuotaUser   :: !(Maybe Text)
     , _rlsuPrettyPrint :: !Bool
     , _rlsuUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data RemarketingListSharesUpdate = RemarketingListSharesUpdate
     , _rlsuKey         :: !(Maybe Text)
     , _rlsuOauthToken  :: !(Maybe Text)
     , _rlsuFields      :: !(Maybe Text)
-    , _rlsuAlt         :: !Text
+    , _rlsuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data RemarketingListSharesUpdate = RemarketingListSharesUpdate
 -- * 'rlsuFields'
 --
 -- * 'rlsuAlt'
-remarketingListSharesUpdate
+remarketingListSharesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingListSharesUpdate
-remarketingListSharesUpdate pRlsuProfileId_ =
-    RemarketingListSharesUpdate
+    -> RemarketingListSharesUpdate'
+remarketingListSharesUpdate' pRlsuProfileId_ =
+    RemarketingListSharesUpdate'
     { _rlsuQuotaUser = Nothing
     , _rlsuPrettyPrint = True
     , _rlsuUserIp = Nothing
@@ -95,7 +103,7 @@ remarketingListSharesUpdate pRlsuProfileId_ =
     , _rlsuKey = Nothing
     , _rlsuOauthToken = Nothing
     , _rlsuFields = Nothing
-    , _rlsuAlt = "json"
+    , _rlsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ rlsuFields
   = lens _rlsuFields (\ s a -> s{_rlsuFields = a})
 
 -- | Data format for the response.
-rlsuAlt :: Lens' RemarketingListSharesUpdate' Text
+rlsuAlt :: Lens' RemarketingListSharesUpdate' Alt
 rlsuAlt = lens _rlsuAlt (\ s a -> s{_rlsuAlt = a})
 
 instance GoogleRequest RemarketingListSharesUpdate'
@@ -150,15 +158,16 @@ instance GoogleRequest RemarketingListSharesUpdate'
         type Rs RemarketingListSharesUpdate' =
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesUpdate{..}
-          = go _rlsuQuotaUser _rlsuPrettyPrint _rlsuUserIp
+        requestWithRoute r u RemarketingListSharesUpdate'{..}
+          = go _rlsuQuotaUser (Just _rlsuPrettyPrint)
+              _rlsuUserIp
               _rlsuProfileId
               _rlsuKey
               _rlsuOauthToken
               _rlsuFields
-              _rlsuAlt
+              (Just _rlsuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListSharesUpdateAPI)
+                      (Proxy :: Proxy RemarketingListSharesUpdateResource)
                       r
                       u

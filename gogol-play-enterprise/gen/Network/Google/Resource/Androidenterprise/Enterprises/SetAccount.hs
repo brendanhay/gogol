@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesSetAccount@.
-module Androidenterprise.Enterprises.SetAccount
+module Network.Google.Resource.Androidenterprise.Enterprises.SetAccount
     (
     -- * REST Resource
-      EnterprisesSetAccountAPI
+      EnterprisesSetAccountResource
 
     -- * Creating a Request
-    , enterprisesSetAccount
-    , EnterprisesSetAccount
+    , enterprisesSetAccount'
+    , EnterprisesSetAccount'
 
     -- * Request Lenses
     , esaQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesSetAccount@ which the
--- 'EnterprisesSetAccount' request conforms to.
-type EnterprisesSetAccountAPI =
+-- 'EnterprisesSetAccount'' request conforms to.
+type EnterprisesSetAccountResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
-         "account" :> Put '[JSON] EnterpriseAccount
+         "account" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] EnterpriseAccount
 
 -- | Set the account that will be used to authenticate to the API as the
 -- enterprise.
 --
--- /See:/ 'enterprisesSetAccount' smart constructor.
-data EnterprisesSetAccount = EnterprisesSetAccount
+-- /See:/ 'enterprisesSetAccount'' smart constructor.
+data EnterprisesSetAccount' = EnterprisesSetAccount'
     { _esaQuotaUser    :: !(Maybe Text)
     , _esaPrettyPrint  :: !Bool
     , _esaEnterpriseId :: !Text
@@ -62,7 +70,7 @@ data EnterprisesSetAccount = EnterprisesSetAccount
     , _esaKey          :: !(Maybe Text)
     , _esaOauthToken   :: !(Maybe Text)
     , _esaFields       :: !(Maybe Text)
-    , _esaAlt          :: !Text
+    , _esaAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesSetAccount'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data EnterprisesSetAccount = EnterprisesSetAccount
 -- * 'esaFields'
 --
 -- * 'esaAlt'
-enterprisesSetAccount
+enterprisesSetAccount'
     :: Text -- ^ 'enterpriseId'
-    -> EnterprisesSetAccount
-enterprisesSetAccount pEsaEnterpriseId_ =
-    EnterprisesSetAccount
+    -> EnterprisesSetAccount'
+enterprisesSetAccount' pEsaEnterpriseId_ =
+    EnterprisesSetAccount'
     { _esaQuotaUser = Nothing
     , _esaPrettyPrint = True
     , _esaEnterpriseId = pEsaEnterpriseId_
@@ -96,7 +104,7 @@ enterprisesSetAccount pEsaEnterpriseId_ =
     , _esaKey = Nothing
     , _esaOauthToken = Nothing
     , _esaFields = Nothing
-    , _esaAlt = "json"
+    , _esaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,21 +150,22 @@ esaFields
   = lens _esaFields (\ s a -> s{_esaFields = a})
 
 -- | Data format for the response.
-esaAlt :: Lens' EnterprisesSetAccount' Text
+esaAlt :: Lens' EnterprisesSetAccount' Alt
 esaAlt = lens _esaAlt (\ s a -> s{_esaAlt = a})
 
 instance GoogleRequest EnterprisesSetAccount' where
         type Rs EnterprisesSetAccount' = EnterpriseAccount
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesSetAccount{..}
-          = go _esaQuotaUser _esaPrettyPrint _esaEnterpriseId
+        requestWithRoute r u EnterprisesSetAccount'{..}
+          = go _esaQuotaUser (Just _esaPrettyPrint)
+              _esaEnterpriseId
               _esaUserIp
               _esaKey
               _esaOauthToken
               _esaFields
-              _esaAlt
+              (Just _esaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EnterprisesSetAccountAPI)
+                      (Proxy :: Proxy EnterprisesSetAccountResource)
                       r
                       u

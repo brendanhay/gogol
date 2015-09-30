@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,154 +21,161 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersInsert@.
-module Compute.Autoscalers.Insert
+module Network.Google.Resource.Compute.Autoscalers.Insert
     (
     -- * REST Resource
-      AutoscalersInsertAPI
+      AutoscalersInsertResource
 
     -- * Creating a Request
-    , autoscalersInsert
-    , AutoscalersInsert
+    , autoscalersInsert'
+    , AutoscalersInsert'
 
     -- * Request Lenses
-    , autQuotaUser
-    , autPrettyPrint
-    , autProject
-    , autUserIp
-    , autZone
-    , autKey
-    , autOauthToken
-    , autFields
-    , autAlt
+    , aiiQuotaUser
+    , aiiPrettyPrint
+    , aiiProject
+    , aiiUserIp
+    , aiiZone
+    , aiiKey
+    , aiiOauthToken
+    , aiiFields
+    , aiiAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAutoscalersInsert@ which the
--- 'AutoscalersInsert' request conforms to.
-type AutoscalersInsertAPI =
+-- 'AutoscalersInsert'' request conforms to.
+type AutoscalersInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "autoscalers" :> Post '[JSON] Operation
+           "autoscalers" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'autoscalersInsert' smart constructor.
-data AutoscalersInsert = AutoscalersInsert
-    { _autQuotaUser   :: !(Maybe Text)
-    , _autPrettyPrint :: !Bool
-    , _autProject     :: !Text
-    , _autUserIp      :: !(Maybe Text)
-    , _autZone        :: !Text
-    , _autKey         :: !(Maybe Text)
-    , _autOauthToken  :: !(Maybe Text)
-    , _autFields      :: !(Maybe Text)
-    , _autAlt         :: !Text
+-- /See:/ 'autoscalersInsert'' smart constructor.
+data AutoscalersInsert' = AutoscalersInsert'
+    { _aiiQuotaUser   :: !(Maybe Text)
+    , _aiiPrettyPrint :: !Bool
+    , _aiiProject     :: !Text
+    , _aiiUserIp      :: !(Maybe Text)
+    , _aiiZone        :: !Text
+    , _aiiKey         :: !(Maybe Text)
+    , _aiiOauthToken  :: !(Maybe Text)
+    , _aiiFields      :: !(Maybe Text)
+    , _aiiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'autQuotaUser'
+-- * 'aiiQuotaUser'
 --
--- * 'autPrettyPrint'
+-- * 'aiiPrettyPrint'
 --
--- * 'autProject'
+-- * 'aiiProject'
 --
--- * 'autUserIp'
+-- * 'aiiUserIp'
 --
--- * 'autZone'
+-- * 'aiiZone'
 --
--- * 'autKey'
+-- * 'aiiKey'
 --
--- * 'autOauthToken'
+-- * 'aiiOauthToken'
 --
--- * 'autFields'
+-- * 'aiiFields'
 --
--- * 'autAlt'
-autoscalersInsert
+-- * 'aiiAlt'
+autoscalersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> AutoscalersInsert
-autoscalersInsert pAutProject_ pAutZone_ =
-    AutoscalersInsert
-    { _autQuotaUser = Nothing
-    , _autPrettyPrint = True
-    , _autProject = pAutProject_
-    , _autUserIp = Nothing
-    , _autZone = pAutZone_
-    , _autKey = Nothing
-    , _autOauthToken = Nothing
-    , _autFields = Nothing
-    , _autAlt = "json"
+    -> AutoscalersInsert'
+autoscalersInsert' pAiiProject_ pAiiZone_ =
+    AutoscalersInsert'
+    { _aiiQuotaUser = Nothing
+    , _aiiPrettyPrint = True
+    , _aiiProject = pAiiProject_
+    , _aiiUserIp = Nothing
+    , _aiiZone = pAiiZone_
+    , _aiiKey = Nothing
+    , _aiiOauthToken = Nothing
+    , _aiiFields = Nothing
+    , _aiiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-autQuotaUser :: Lens' AutoscalersInsert' (Maybe Text)
-autQuotaUser
-  = lens _autQuotaUser (\ s a -> s{_autQuotaUser = a})
+aiiQuotaUser :: Lens' AutoscalersInsert' (Maybe Text)
+aiiQuotaUser
+  = lens _aiiQuotaUser (\ s a -> s{_aiiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-autPrettyPrint :: Lens' AutoscalersInsert' Bool
-autPrettyPrint
-  = lens _autPrettyPrint
-      (\ s a -> s{_autPrettyPrint = a})
+aiiPrettyPrint :: Lens' AutoscalersInsert' Bool
+aiiPrettyPrint
+  = lens _aiiPrettyPrint
+      (\ s a -> s{_aiiPrettyPrint = a})
 
 -- | Name of the project scoping this request.
-autProject :: Lens' AutoscalersInsert' Text
-autProject
-  = lens _autProject (\ s a -> s{_autProject = a})
+aiiProject :: Lens' AutoscalersInsert' Text
+aiiProject
+  = lens _aiiProject (\ s a -> s{_aiiProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-autUserIp :: Lens' AutoscalersInsert' (Maybe Text)
-autUserIp
-  = lens _autUserIp (\ s a -> s{_autUserIp = a})
+aiiUserIp :: Lens' AutoscalersInsert' (Maybe Text)
+aiiUserIp
+  = lens _aiiUserIp (\ s a -> s{_aiiUserIp = a})
 
 -- | Name of the zone scoping this request.
-autZone :: Lens' AutoscalersInsert' Text
-autZone = lens _autZone (\ s a -> s{_autZone = a})
+aiiZone :: Lens' AutoscalersInsert' Text
+aiiZone = lens _aiiZone (\ s a -> s{_aiiZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-autKey :: Lens' AutoscalersInsert' (Maybe Text)
-autKey = lens _autKey (\ s a -> s{_autKey = a})
+aiiKey :: Lens' AutoscalersInsert' (Maybe Text)
+aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-autOauthToken :: Lens' AutoscalersInsert' (Maybe Text)
-autOauthToken
-  = lens _autOauthToken
-      (\ s a -> s{_autOauthToken = a})
+aiiOauthToken :: Lens' AutoscalersInsert' (Maybe Text)
+aiiOauthToken
+  = lens _aiiOauthToken
+      (\ s a -> s{_aiiOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-autFields :: Lens' AutoscalersInsert' (Maybe Text)
-autFields
-  = lens _autFields (\ s a -> s{_autFields = a})
+aiiFields :: Lens' AutoscalersInsert' (Maybe Text)
+aiiFields
+  = lens _aiiFields (\ s a -> s{_aiiFields = a})
 
 -- | Data format for the response.
-autAlt :: Lens' AutoscalersInsert' Text
-autAlt = lens _autAlt (\ s a -> s{_autAlt = a})
+aiiAlt :: Lens' AutoscalersInsert' Alt
+aiiAlt = lens _aiiAlt (\ s a -> s{_aiiAlt = a})
 
 instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersInsert{..}
-          = go _autQuotaUser _autPrettyPrint _autProject
-              _autUserIp
-              _autZone
-              _autKey
-              _autOauthToken
-              _autFields
-              _autAlt
+        requestWithRoute r u AutoscalersInsert'{..}
+          = go _aiiQuotaUser (Just _aiiPrettyPrint) _aiiProject
+              _aiiUserIp
+              _aiiZone
+              _aiiKey
+              _aiiOauthToken
+              _aiiFields
+              (Just _aiiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersInsertAPI)
+                      (Proxy :: Proxy AutoscalersInsertResource)
                       r
                       u

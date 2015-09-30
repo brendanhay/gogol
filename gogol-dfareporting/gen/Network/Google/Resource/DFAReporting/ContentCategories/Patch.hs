@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesPatch@.
-module DFAReporting.ContentCategories.Patch
+module Network.Google.Resource.DFAReporting.ContentCategories.Patch
     (
     -- * REST Resource
-      ContentCategoriesPatchAPI
+      ContentCategoriesPatchResource
 
     -- * Creating a Request
-    , contentCategoriesPatch
-    , ContentCategoriesPatch
+    , contentCategoriesPatch'
+    , ContentCategoriesPatch'
 
     -- * Request Lenses
     , ccpQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesPatch@ which the
--- 'ContentCategoriesPatch' request conforms to.
-type ContentCategoriesPatchAPI =
+-- 'ContentCategoriesPatch'' request conforms to.
+type ContentCategoriesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] ContentCategory
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] ContentCategory
 
 -- | Updates an existing content category. This method supports patch
 -- semantics.
 --
--- /See:/ 'contentCategoriesPatch' smart constructor.
-data ContentCategoriesPatch = ContentCategoriesPatch
+-- /See:/ 'contentCategoriesPatch'' smart constructor.
+data ContentCategoriesPatch' = ContentCategoriesPatch'
     { _ccpQuotaUser   :: !(Maybe Text)
     , _ccpPrettyPrint :: !Bool
     , _ccpUserIp      :: !(Maybe Text)
@@ -66,7 +73,7 @@ data ContentCategoriesPatch = ContentCategoriesPatch
     , _ccpId          :: !Int64
     , _ccpOauthToken  :: !(Maybe Text)
     , _ccpFields      :: !(Maybe Text)
-    , _ccpAlt         :: !Text
+    , _ccpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesPatch'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data ContentCategoriesPatch = ContentCategoriesPatch
 -- * 'ccpFields'
 --
 -- * 'ccpAlt'
-contentCategoriesPatch
+contentCategoriesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> ContentCategoriesPatch
-contentCategoriesPatch pCcpProfileId_ pCcpId_ =
-    ContentCategoriesPatch
+    -> ContentCategoriesPatch'
+contentCategoriesPatch' pCcpProfileId_ pCcpId_ =
+    ContentCategoriesPatch'
     { _ccpQuotaUser = Nothing
     , _ccpPrettyPrint = True
     , _ccpUserIp = Nothing
@@ -104,7 +111,7 @@ contentCategoriesPatch pCcpProfileId_ pCcpId_ =
     , _ccpId = pCcpId_
     , _ccpOauthToken = Nothing
     , _ccpFields = Nothing
-    , _ccpAlt = "json"
+    , _ccpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +160,22 @@ ccpFields
   = lens _ccpFields (\ s a -> s{_ccpFields = a})
 
 -- | Data format for the response.
-ccpAlt :: Lens' ContentCategoriesPatch' Text
+ccpAlt :: Lens' ContentCategoriesPatch' Alt
 ccpAlt = lens _ccpAlt (\ s a -> s{_ccpAlt = a})
 
 instance GoogleRequest ContentCategoriesPatch' where
         type Rs ContentCategoriesPatch' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesPatch{..}
-          = go _ccpQuotaUser _ccpPrettyPrint _ccpUserIp
+        requestWithRoute r u ContentCategoriesPatch'{..}
+          = go _ccpQuotaUser (Just _ccpPrettyPrint) _ccpUserIp
               _ccpProfileId
               _ccpKey
               (Just _ccpId)
               _ccpOauthToken
               _ccpFields
-              _ccpAlt
+              (Just _ccpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesPatchAPI)
+                      (Proxy :: Proxy ContentCategoriesPatchResource)
                       r
                       u

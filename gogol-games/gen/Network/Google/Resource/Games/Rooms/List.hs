@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,158 +20,166 @@
 -- | Returns invitations to join rooms.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsList@.
-module Games.Rooms.List
+module Network.Google.Resource.Games.Rooms.List
     (
     -- * REST Resource
-      RoomsListAPI
+      RoomsListResource
 
     -- * Creating a Request
-    , roomsList
-    , RoomsList
+    , roomsList'
+    , RoomsList'
 
     -- * Request Lenses
-    , rlQuotaUser
-    , rlPrettyPrint
-    , rlUserIp
-    , rlKey
-    , rlLanguage
-    , rlPageToken
-    , rlOauthToken
-    , rlMaxResults
-    , rlFields
-    , rlAlt
+    , rQuotaUser
+    , rPrettyPrint
+    , rUserIp
+    , rKey
+    , rLanguage
+    , rPageToken
+    , rOauthToken
+    , rMaxResults
+    , rFields
+    , rAlt
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsList@ which the
--- 'RoomsList' request conforms to.
-type RoomsListAPI =
+-- 'RoomsList'' request conforms to.
+type RoomsListResource =
      "rooms" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :> Get '[JSON] RoomList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
 --
--- /See:/ 'roomsList' smart constructor.
-data RoomsList = RoomsList
-    { _rlQuotaUser   :: !(Maybe Text)
-    , _rlPrettyPrint :: !Bool
-    , _rlUserIp      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe Text)
-    , _rlLanguage    :: !(Maybe Text)
-    , _rlPageToken   :: !(Maybe Text)
-    , _rlOauthToken  :: !(Maybe Text)
-    , _rlMaxResults  :: !(Maybe Int32)
-    , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Text
+-- /See:/ 'roomsList'' smart constructor.
+data RoomsList' = RoomsList'
+    { _rQuotaUser   :: !(Maybe Text)
+    , _rPrettyPrint :: !Bool
+    , _rUserIp      :: !(Maybe Text)
+    , _rKey         :: !(Maybe Text)
+    , _rLanguage    :: !(Maybe Text)
+    , _rPageToken   :: !(Maybe Text)
+    , _rOauthToken  :: !(Maybe Text)
+    , _rMaxResults  :: !(Maybe Int32)
+    , _rFields      :: !(Maybe Text)
+    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlQuotaUser'
+-- * 'rQuotaUser'
 --
--- * 'rlPrettyPrint'
+-- * 'rPrettyPrint'
 --
--- * 'rlUserIp'
+-- * 'rUserIp'
 --
--- * 'rlKey'
+-- * 'rKey'
 --
--- * 'rlLanguage'
+-- * 'rLanguage'
 --
--- * 'rlPageToken'
+-- * 'rPageToken'
 --
--- * 'rlOauthToken'
+-- * 'rOauthToken'
 --
--- * 'rlMaxResults'
+-- * 'rMaxResults'
 --
--- * 'rlFields'
+-- * 'rFields'
 --
--- * 'rlAlt'
-roomsList
-    :: RoomsList
-roomsList =
-    RoomsList
-    { _rlQuotaUser = Nothing
-    , _rlPrettyPrint = True
-    , _rlUserIp = Nothing
-    , _rlKey = Nothing
-    , _rlLanguage = Nothing
-    , _rlPageToken = Nothing
-    , _rlOauthToken = Nothing
-    , _rlMaxResults = Nothing
-    , _rlFields = Nothing
-    , _rlAlt = "json"
+-- * 'rAlt'
+roomsList'
+    :: RoomsList'
+roomsList' =
+    RoomsList'
+    { _rQuotaUser = Nothing
+    , _rPrettyPrint = True
+    , _rUserIp = Nothing
+    , _rKey = Nothing
+    , _rLanguage = Nothing
+    , _rPageToken = Nothing
+    , _rOauthToken = Nothing
+    , _rMaxResults = Nothing
+    , _rFields = Nothing
+    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rlQuotaUser :: Lens' RoomsList' (Maybe Text)
-rlQuotaUser
-  = lens _rlQuotaUser (\ s a -> s{_rlQuotaUser = a})
+rQuotaUser :: Lens' RoomsList' (Maybe Text)
+rQuotaUser
+  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rlPrettyPrint :: Lens' RoomsList' Bool
-rlPrettyPrint
-  = lens _rlPrettyPrint
-      (\ s a -> s{_rlPrettyPrint = a})
+rPrettyPrint :: Lens' RoomsList' Bool
+rPrettyPrint
+  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlUserIp :: Lens' RoomsList' (Maybe Text)
-rlUserIp = lens _rlUserIp (\ s a -> s{_rlUserIp = a})
+rUserIp :: Lens' RoomsList' (Maybe Text)
+rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RoomsList' (Maybe Text)
-rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
+rKey :: Lens' RoomsList' (Maybe Text)
+rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The preferred language to use for strings returned by this method.
-rlLanguage :: Lens' RoomsList' (Maybe Text)
-rlLanguage
-  = lens _rlLanguage (\ s a -> s{_rlLanguage = a})
+rLanguage :: Lens' RoomsList' (Maybe Text)
+rLanguage
+  = lens _rLanguage (\ s a -> s{_rLanguage = a})
 
 -- | The token returned by the previous request.
-rlPageToken :: Lens' RoomsList' (Maybe Text)
-rlPageToken
-  = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
+rPageToken :: Lens' RoomsList' (Maybe Text)
+rPageToken
+  = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rlOauthToken :: Lens' RoomsList' (Maybe Text)
-rlOauthToken
-  = lens _rlOauthToken (\ s a -> s{_rlOauthToken = a})
+rOauthToken :: Lens' RoomsList' (Maybe Text)
+rOauthToken
+  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
 
 -- | The maximum number of rooms to return in the response, used for paging.
 -- For any response, the actual number of rooms to return may be less than
 -- the specified maxResults.
-rlMaxResults :: Lens' RoomsList' (Maybe Int32)
-rlMaxResults
-  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+rMaxResults :: Lens' RoomsList' (Maybe Int32)
+rMaxResults
+  = lens _rMaxResults (\ s a -> s{_rMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rlFields :: Lens' RoomsList' (Maybe Text)
-rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
+rFields :: Lens' RoomsList' (Maybe Text)
+rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-rlAlt :: Lens' RoomsList' Text
-rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
+rAlt :: Lens' RoomsList' Alt
+rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest RoomsList' where
         type Rs RoomsList' = RoomList
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsList{..}
-          = go _rlQuotaUser _rlPrettyPrint _rlUserIp _rlKey
-              _rlLanguage
-              _rlPageToken
-              _rlOauthToken
-              _rlMaxResults
-              _rlFields
-              _rlAlt
+        requestWithRoute r u RoomsList'{..}
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIp _rKey
+              _rLanguage
+              _rPageToken
+              _rOauthToken
+              _rMaxResults
+              _rFields
+              (Just _rAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoomsListResource)
+                      r
+                      u

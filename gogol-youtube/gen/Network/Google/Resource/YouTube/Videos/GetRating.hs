@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified videos.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosGetRating@.
-module YouTube.Videos.GetRating
+module Network.Google.Resource.YouTube.Videos.GetRating
     (
     -- * REST Resource
-      VideosGetRatingAPI
+      VideosGetRatingResource
 
     -- * Creating a Request
-    , videosGetRating
-    , VideosGetRating
+    , videosGetRating'
+    , VideosGetRating'
 
     -- * Request Lenses
     , vgrQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosGetRating@ which the
--- 'VideosGetRating' request conforms to.
-type VideosGetRatingAPI =
+-- 'VideosGetRating'' request conforms to.
+type VideosGetRatingResource =
      "videos" :>
        "getRating" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :>
-             Get '[JSON] VideoGetRatingResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] VideoGetRatingResponse
 
 -- | Retrieves the ratings that the authorized user gave to a list of
 -- specified videos.
 --
--- /See:/ 'videosGetRating' smart constructor.
-data VideosGetRating = VideosGetRating
+-- /See:/ 'videosGetRating'' smart constructor.
+data VideosGetRating' = VideosGetRating'
     { _vgrQuotaUser              :: !(Maybe Text)
     , _vgrPrettyPrint            :: !Bool
     , _vgrUserIp                 :: !(Maybe Text)
@@ -66,7 +74,7 @@ data VideosGetRating = VideosGetRating
     , _vgrId                     :: !Text
     , _vgrOauthToken             :: !(Maybe Text)
     , _vgrFields                 :: !(Maybe Text)
-    , _vgrAlt                    :: !Text
+    , _vgrAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosGetRating'' with the minimum fields required to make a request.
@@ -90,11 +98,11 @@ data VideosGetRating = VideosGetRating
 -- * 'vgrFields'
 --
 -- * 'vgrAlt'
-videosGetRating
+videosGetRating'
     :: Text -- ^ 'id'
-    -> VideosGetRating
-videosGetRating pVgrId_ =
-    VideosGetRating
+    -> VideosGetRating'
+videosGetRating' pVgrId_ =
+    VideosGetRating'
     { _vgrQuotaUser = Nothing
     , _vgrPrettyPrint = True
     , _vgrUserIp = Nothing
@@ -103,7 +111,7 @@ videosGetRating pVgrId_ =
     , _vgrId = pVgrId_
     , _vgrOauthToken = Nothing
     , _vgrFields = Nothing
-    , _vgrAlt = "json"
+    , _vgrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,21 +172,22 @@ vgrFields
   = lens _vgrFields (\ s a -> s{_vgrFields = a})
 
 -- | Data format for the response.
-vgrAlt :: Lens' VideosGetRating' Text
+vgrAlt :: Lens' VideosGetRating' Alt
 vgrAlt = lens _vgrAlt (\ s a -> s{_vgrAlt = a})
 
 instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosGetRating{..}
-          = go _vgrQuotaUser _vgrPrettyPrint _vgrUserIp
+        requestWithRoute r u VideosGetRating'{..}
+          = go _vgrQuotaUser (Just _vgrPrettyPrint) _vgrUserIp
               _vgrOnBehalfOfContentOwner
               _vgrKey
               (Just _vgrId)
               _vgrOauthToken
               _vgrFields
-              _vgrAlt
+              (Just _vgrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosGetRatingAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy VideosGetRatingResource)
                       r
                       u

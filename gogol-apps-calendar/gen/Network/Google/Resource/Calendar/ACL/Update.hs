@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an access control rule.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLUpdate@.
-module Calendar.ACL.Update
+module Network.Google.Resource.Calendar.ACL.Update
     (
     -- * REST Resource
-      AclUpdateAPI
+      AclUpdateResource
 
     -- * Creating a Request
-    , aCLUpdate
-    , ACLUpdate
+    , aCLUpdate'
+    , ACLUpdate'
 
     -- * Request Lenses
     , auQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLUpdate@ which the
--- 'ACLUpdate' request conforms to.
-type AclUpdateAPI =
+-- 'ACLUpdate'' request conforms to.
+type AclUpdateResource =
      "calendars" :>
        Capture "calendarId" Text :>
-         "acl" :> Capture "ruleId" Text :> Put '[JSON] ACLRule
+         "acl" :>
+           Capture "ruleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] ACLRule
 
 -- | Updates an access control rule.
 --
--- /See:/ 'aCLUpdate' smart constructor.
-data ACLUpdate = ACLUpdate
+-- /See:/ 'aCLUpdate'' smart constructor.
+data ACLUpdate' = ACLUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auCalendarId  :: !Text
     , _auPrettyPrint :: !Bool
@@ -62,7 +71,7 @@ data ACLUpdate = ACLUpdate
     , _auKey         :: !(Maybe Text)
     , _auOauthToken  :: !(Maybe Text)
     , _auFields      :: !(Maybe Text)
-    , _auAlt         :: !Text
+    , _auAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLUpdate'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data ACLUpdate = ACLUpdate
 -- * 'auFields'
 --
 -- * 'auAlt'
-aCLUpdate
+aCLUpdate'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLUpdate
-aCLUpdate pAuCalendarId_ pAuRuleId_ =
-    ACLUpdate
+    -> ACLUpdate'
+aCLUpdate' pAuCalendarId_ pAuRuleId_ =
+    ACLUpdate'
     { _auQuotaUser = Nothing
     , _auCalendarId = pAuCalendarId_
     , _auPrettyPrint = True
@@ -100,7 +109,7 @@ aCLUpdate pAuCalendarId_ pAuRuleId_ =
     , _auKey = Nothing
     , _auOauthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = "json"
+    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +157,21 @@ auFields :: Lens' ACLUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 -- | Data format for the response.
-auAlt :: Lens' ACLUpdate' Text
+auAlt :: Lens' ACLUpdate' Alt
 auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
 
 instance GoogleRequest ACLUpdate' where
         type Rs ACLUpdate' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLUpdate{..}
-          = go _auQuotaUser _auCalendarId _auPrettyPrint
+        requestWithRoute r u ACLUpdate'{..}
+          = go _auQuotaUser _auCalendarId (Just _auPrettyPrint)
               _auUserIp
               _auRuleId
               _auKey
               _auOauthToken
               _auFields
-              _auAlt
+              (Just _auAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclUpdateAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclUpdateResource)
+                      r
+                      u

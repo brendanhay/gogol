@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one content category by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesGet@.
-module DFAReporting.ContentCategories.Get
+module Network.Google.Resource.DFAReporting.ContentCategories.Get
     (
     -- * REST Resource
-      ContentCategoriesGetAPI
+      ContentCategoriesGetResource
 
     -- * Creating a Request
-    , contentCategoriesGet
-    , ContentCategoriesGet
+    , contentCategoriesGet'
+    , ContentCategoriesGet'
 
     -- * Request Lenses
     , ccgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesGet@ which the
--- 'ContentCategoriesGet' request conforms to.
-type ContentCategoriesGetAPI =
+-- 'ContentCategoriesGet'' request conforms to.
+type ContentCategoriesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           Capture "id" Int64 :> Get '[JSON] ContentCategory
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ContentCategory
 
 -- | Gets one content category by ID.
 --
--- /See:/ 'contentCategoriesGet' smart constructor.
-data ContentCategoriesGet = ContentCategoriesGet
+-- /See:/ 'contentCategoriesGet'' smart constructor.
+data ContentCategoriesGet' = ContentCategoriesGet'
     { _ccgQuotaUser   :: !(Maybe Text)
     , _ccgPrettyPrint :: !Bool
     , _ccgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ContentCategoriesGet = ContentCategoriesGet
     , _ccgId          :: !Int64
     , _ccgOauthToken  :: !(Maybe Text)
     , _ccgFields      :: !(Maybe Text)
-    , _ccgAlt         :: !Text
+    , _ccgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ContentCategoriesGet = ContentCategoriesGet
 -- * 'ccgFields'
 --
 -- * 'ccgAlt'
-contentCategoriesGet
+contentCategoriesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> ContentCategoriesGet
-contentCategoriesGet pCcgProfileId_ pCcgId_ =
-    ContentCategoriesGet
+    -> ContentCategoriesGet'
+contentCategoriesGet' pCcgProfileId_ pCcgId_ =
+    ContentCategoriesGet'
     { _ccgQuotaUser = Nothing
     , _ccgPrettyPrint = True
     , _ccgUserIp = Nothing
@@ -101,7 +109,7 @@ contentCategoriesGet pCcgProfileId_ pCcgId_ =
     , _ccgId = pCcgId_
     , _ccgOauthToken = Nothing
     , _ccgFields = Nothing
-    , _ccgAlt = "json"
+    , _ccgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ ccgFields
   = lens _ccgFields (\ s a -> s{_ccgFields = a})
 
 -- | Data format for the response.
-ccgAlt :: Lens' ContentCategoriesGet' Text
+ccgAlt :: Lens' ContentCategoriesGet' Alt
 ccgAlt = lens _ccgAlt (\ s a -> s{_ccgAlt = a})
 
 instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesGet{..}
-          = go _ccgQuotaUser _ccgPrettyPrint _ccgUserIp
+        requestWithRoute r u ContentCategoriesGet'{..}
+          = go _ccgQuotaUser (Just _ccgPrettyPrint) _ccgUserIp
               _ccgProfileId
               _ccgKey
               _ccgId
               _ccgOauthToken
               _ccgFields
-              _ccgAlt
+              (Just _ccgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesGetAPI)
+                      (Proxy :: Proxy ContentCategoriesGetResource)
                       r
                       u

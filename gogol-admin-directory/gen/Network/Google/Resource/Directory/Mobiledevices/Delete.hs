@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,157 +20,165 @@
 -- | Delete Mobile Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobiledevicesDelete@.
-module Directory.Mobiledevices.Delete
+module Network.Google.Resource.Directory.Mobiledevices.Delete
     (
     -- * REST Resource
-      MobiledevicesDeleteAPI
+      MobiledevicesDeleteResource
 
     -- * Creating a Request
-    , mobiledevicesDelete
-    , MobiledevicesDelete
+    , mobiledevicesDelete'
+    , MobiledevicesDelete'
 
     -- * Request Lenses
-    , mddQuotaUser
-    , mddResourceId
-    , mddPrettyPrint
-    , mddUserIp
-    , mddCustomerId
-    , mddKey
-    , mddOauthToken
-    , mddFields
-    , mddAlt
+    , mobQuotaUser
+    , mobResourceId
+    , mobPrettyPrint
+    , mobUserIp
+    , mobCustomerId
+    , mobKey
+    , mobOauthToken
+    , mobFields
+    , mobAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMobiledevicesDelete@ which the
--- 'MobiledevicesDelete' request conforms to.
-type MobiledevicesDeleteAPI =
+-- 'MobiledevicesDelete'' request conforms to.
+type MobiledevicesDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
-             Capture "resourceId" Text :> Delete '[JSON] ()
+             Capture "resourceId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete Mobile Device
 --
--- /See:/ 'mobiledevicesDelete' smart constructor.
-data MobiledevicesDelete = MobiledevicesDelete
-    { _mddQuotaUser   :: !(Maybe Text)
-    , _mddResourceId  :: !Text
-    , _mddPrettyPrint :: !Bool
-    , _mddUserIp      :: !(Maybe Text)
-    , _mddCustomerId  :: !Text
-    , _mddKey         :: !(Maybe Text)
-    , _mddOauthToken  :: !(Maybe Text)
-    , _mddFields      :: !(Maybe Text)
-    , _mddAlt         :: !Text
+-- /See:/ 'mobiledevicesDelete'' smart constructor.
+data MobiledevicesDelete' = MobiledevicesDelete'
+    { _mobQuotaUser   :: !(Maybe Text)
+    , _mobResourceId  :: !Text
+    , _mobPrettyPrint :: !Bool
+    , _mobUserIp      :: !(Maybe Text)
+    , _mobCustomerId  :: !Text
+    , _mobKey         :: !(Maybe Text)
+    , _mobOauthToken  :: !(Maybe Text)
+    , _mobFields      :: !(Maybe Text)
+    , _mobAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobiledevicesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mddQuotaUser'
+-- * 'mobQuotaUser'
 --
--- * 'mddResourceId'
+-- * 'mobResourceId'
 --
--- * 'mddPrettyPrint'
+-- * 'mobPrettyPrint'
 --
--- * 'mddUserIp'
+-- * 'mobUserIp'
 --
--- * 'mddCustomerId'
+-- * 'mobCustomerId'
 --
--- * 'mddKey'
+-- * 'mobKey'
 --
--- * 'mddOauthToken'
+-- * 'mobOauthToken'
 --
--- * 'mddFields'
+-- * 'mobFields'
 --
--- * 'mddAlt'
-mobiledevicesDelete
+-- * 'mobAlt'
+mobiledevicesDelete'
     :: Text -- ^ 'resourceId'
     -> Text -- ^ 'customerId'
-    -> MobiledevicesDelete
-mobiledevicesDelete pMddResourceId_ pMddCustomerId_ =
-    MobiledevicesDelete
-    { _mddQuotaUser = Nothing
-    , _mddResourceId = pMddResourceId_
-    , _mddPrettyPrint = True
-    , _mddUserIp = Nothing
-    , _mddCustomerId = pMddCustomerId_
-    , _mddKey = Nothing
-    , _mddOauthToken = Nothing
-    , _mddFields = Nothing
-    , _mddAlt = "json"
+    -> MobiledevicesDelete'
+mobiledevicesDelete' pMobResourceId_ pMobCustomerId_ =
+    MobiledevicesDelete'
+    { _mobQuotaUser = Nothing
+    , _mobResourceId = pMobResourceId_
+    , _mobPrettyPrint = True
+    , _mobUserIp = Nothing
+    , _mobCustomerId = pMobCustomerId_
+    , _mobKey = Nothing
+    , _mobOauthToken = Nothing
+    , _mobFields = Nothing
+    , _mobAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-mddQuotaUser :: Lens' MobiledevicesDelete' (Maybe Text)
-mddQuotaUser
-  = lens _mddQuotaUser (\ s a -> s{_mddQuotaUser = a})
+mobQuotaUser :: Lens' MobiledevicesDelete' (Maybe Text)
+mobQuotaUser
+  = lens _mobQuotaUser (\ s a -> s{_mobQuotaUser = a})
 
 -- | Immutable id of Mobile Device
-mddResourceId :: Lens' MobiledevicesDelete' Text
-mddResourceId
-  = lens _mddResourceId
-      (\ s a -> s{_mddResourceId = a})
+mobResourceId :: Lens' MobiledevicesDelete' Text
+mobResourceId
+  = lens _mobResourceId
+      (\ s a -> s{_mobResourceId = a})
 
 -- | Returns response with indentations and line breaks.
-mddPrettyPrint :: Lens' MobiledevicesDelete' Bool
-mddPrettyPrint
-  = lens _mddPrettyPrint
-      (\ s a -> s{_mddPrettyPrint = a})
+mobPrettyPrint :: Lens' MobiledevicesDelete' Bool
+mobPrettyPrint
+  = lens _mobPrettyPrint
+      (\ s a -> s{_mobPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mddUserIp :: Lens' MobiledevicesDelete' (Maybe Text)
-mddUserIp
-  = lens _mddUserIp (\ s a -> s{_mddUserIp = a})
+mobUserIp :: Lens' MobiledevicesDelete' (Maybe Text)
+mobUserIp
+  = lens _mobUserIp (\ s a -> s{_mobUserIp = a})
 
 -- | Immutable id of the Google Apps account
-mddCustomerId :: Lens' MobiledevicesDelete' Text
-mddCustomerId
-  = lens _mddCustomerId
-      (\ s a -> s{_mddCustomerId = a})
+mobCustomerId :: Lens' MobiledevicesDelete' Text
+mobCustomerId
+  = lens _mobCustomerId
+      (\ s a -> s{_mobCustomerId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mddKey :: Lens' MobiledevicesDelete' (Maybe Text)
-mddKey = lens _mddKey (\ s a -> s{_mddKey = a})
+mobKey :: Lens' MobiledevicesDelete' (Maybe Text)
+mobKey = lens _mobKey (\ s a -> s{_mobKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mddOauthToken :: Lens' MobiledevicesDelete' (Maybe Text)
-mddOauthToken
-  = lens _mddOauthToken
-      (\ s a -> s{_mddOauthToken = a})
+mobOauthToken :: Lens' MobiledevicesDelete' (Maybe Text)
+mobOauthToken
+  = lens _mobOauthToken
+      (\ s a -> s{_mobOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-mddFields :: Lens' MobiledevicesDelete' (Maybe Text)
-mddFields
-  = lens _mddFields (\ s a -> s{_mddFields = a})
+mobFields :: Lens' MobiledevicesDelete' (Maybe Text)
+mobFields
+  = lens _mobFields (\ s a -> s{_mobFields = a})
 
 -- | Data format for the response.
-mddAlt :: Lens' MobiledevicesDelete' Text
-mddAlt = lens _mddAlt (\ s a -> s{_mddAlt = a})
+mobAlt :: Lens' MobiledevicesDelete' Alt
+mobAlt = lens _mobAlt (\ s a -> s{_mobAlt = a})
 
 instance GoogleRequest MobiledevicesDelete' where
         type Rs MobiledevicesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MobiledevicesDelete{..}
-          = go _mddQuotaUser _mddResourceId _mddPrettyPrint
-              _mddUserIp
-              _mddCustomerId
-              _mddKey
-              _mddOauthToken
-              _mddFields
-              _mddAlt
+        requestWithRoute r u MobiledevicesDelete'{..}
+          = go _mobQuotaUser _mobResourceId
+              (Just _mobPrettyPrint)
+              _mobUserIp
+              _mobCustomerId
+              _mobKey
+              _mobOauthToken
+              _mobFields
+              (Just _mobAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MobiledevicesDeleteAPI)
+                      (Proxy :: Proxy MobiledevicesDeleteResource)
                       r
                       u

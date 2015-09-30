@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- processing was interrupted.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsModifyAckDeadline@.
-module PubSub.Projects.Subscriptions.ModifyAckDeadline
+module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     (
     -- * REST Resource
-      ProjectsSubscriptionsModifyAckDeadlineAPI
+      ProjectsSubscriptionsModifyAckDeadlineResource
 
     -- * Creating a Request
-    , projectsSubscriptionsModifyAckDeadline
-    , ProjectsSubscriptionsModifyAckDeadline
+    , projectsSubscriptionsModifyAckDeadline'
+    , ProjectsSubscriptionsModifyAckDeadline'
 
     -- * Request Lenses
     , psmadXgafv
@@ -52,19 +53,31 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsModifyAckDeadline@ which the
--- 'ProjectsSubscriptionsModifyAckDeadline' request conforms to.
-type ProjectsSubscriptionsModifyAckDeadlineAPI =
+-- 'ProjectsSubscriptionsModifyAckDeadline'' request conforms to.
+type ProjectsSubscriptionsModifyAckDeadlineResource =
      "v1beta2" :>
        "{+subscription}:modifyAckDeadline" :>
-         Post '[JSON] Empty
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
 -- subscriber, or to make the message available for redelivery if the
 -- processing was interrupted.
 --
--- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
-data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline
+-- /See:/ 'projectsSubscriptionsModifyAckDeadline'' smart constructor.
+data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv          :: !(Maybe Text)
     , _psmadQuotaUser      :: !(Maybe Text)
     , _psmadPrettyPrint    :: !Bool
@@ -112,11 +125,11 @@ data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDead
 -- * 'psmadCallback'
 --
 -- * 'psmadAlt'
-projectsSubscriptionsModifyAckDeadline
+projectsSubscriptionsModifyAckDeadline'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsModifyAckDeadline
-projectsSubscriptionsModifyAckDeadline pPsmadSubscription_ =
-    ProjectsSubscriptionsModifyAckDeadline
+    -> ProjectsSubscriptionsModifyAckDeadline'
+projectsSubscriptionsModifyAckDeadline' pPsmadSubscription_ =
+    ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadQuotaUser = Nothing
     , _psmadPrettyPrint = True
@@ -219,10 +232,11 @@ instance GoogleRequest
              Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsModifyAckDeadline{..}
-          = go _psmadXgafv _psmadQuotaUser _psmadPrettyPrint
+          ProjectsSubscriptionsModifyAckDeadline'{..}
+          = go _psmadXgafv _psmadQuotaUser
+              (Just _psmadPrettyPrint)
               _psmadUploadProtocol
-              _psmadPp
+              (Just _psmadPp)
               _psmadAccessToken
               _psmadUploadType
               _psmadBearerToken
@@ -231,10 +245,10 @@ instance GoogleRequest
               _psmadSubscription
               _psmadFields
               _psmadCallback
-              _psmadAlt
+              (Just _psmadAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ProjectsSubscriptionsModifyAckDeadlineAPI)
+                         Proxy ProjectsSubscriptionsModifyAckDeadlineResource)
                       r
                       u

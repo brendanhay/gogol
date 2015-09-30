@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Macro.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMACrosGet@.
-module TagManager.Accounts.Containers.MACros.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Get
     (
     -- * REST Resource
-      AccountsContainersMacrosGetAPI
+      AccountsContainersMacrosGetResource
 
     -- * Creating a Request
-    , accountsContainersMACrosGet
-    , AccountsContainersMACrosGet
+    , accountsContainersMACrosGet'
+    , AccountsContainersMACrosGet'
 
     -- * Request Lenses
     , acmacgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMACrosGet@ which the
--- 'AccountsContainersMACrosGet' request conforms to.
-type AccountsContainersMacrosGetAPI =
+-- 'AccountsContainersMACrosGet'' request conforms to.
+type AccountsContainersMacrosGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "macros" :>
-               Capture "macroId" Text :> Get '[JSON] MACro
+               Capture "macroId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] MACro
 
 -- | Gets a GTM Macro.
 --
--- /See:/ 'accountsContainersMACrosGet' smart constructor.
-data AccountsContainersMACrosGet = AccountsContainersMACrosGet
+-- /See:/ 'accountsContainersMACrosGet'' smart constructor.
+data AccountsContainersMACrosGet' = AccountsContainersMACrosGet'
     { _acmacgQuotaUser   :: !(Maybe Text)
     , _acmacgPrettyPrint :: !Bool
     , _acmacgContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersMACrosGet = AccountsContainersMACrosGet
     , _acmacgMacroId     :: !Text
     , _acmacgOauthToken  :: !(Maybe Text)
     , _acmacgFields      :: !(Maybe Text)
-    , _acmacgAlt         :: !Text
+    , _acmacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMACrosGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersMACrosGet = AccountsContainersMACrosGet
 -- * 'acmacgFields'
 --
 -- * 'acmacgAlt'
-accountsContainersMACrosGet
+accountsContainersMACrosGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'macroId'
-    -> AccountsContainersMACrosGet
-accountsContainersMACrosGet pAcmacgContainerId_ pAcmacgAccountId_ pAcmacgMacroId_ =
-    AccountsContainersMACrosGet
+    -> AccountsContainersMACrosGet'
+accountsContainersMACrosGet' pAcmacgContainerId_ pAcmacgAccountId_ pAcmacgMacroId_ =
+    AccountsContainersMACrosGet'
     { _acmacgQuotaUser = Nothing
     , _acmacgPrettyPrint = True
     , _acmacgContainerId = pAcmacgContainerId_
@@ -109,7 +117,7 @@ accountsContainersMACrosGet pAcmacgContainerId_ pAcmacgAccountId_ pAcmacgMacroId
     , _acmacgMacroId = pAcmacgMacroId_
     , _acmacgOauthToken = Nothing
     , _acmacgFields = Nothing
-    , _acmacgAlt = "json"
+    , _acmacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,7 +177,7 @@ acmacgFields
   = lens _acmacgFields (\ s a -> s{_acmacgFields = a})
 
 -- | Data format for the response.
-acmacgAlt :: Lens' AccountsContainersMACrosGet' Text
+acmacgAlt :: Lens' AccountsContainersMACrosGet' Alt
 acmacgAlt
   = lens _acmacgAlt (\ s a -> s{_acmacgAlt = a})
 
@@ -177,8 +185,8 @@ instance GoogleRequest AccountsContainersMACrosGet'
          where
         type Rs AccountsContainersMACrosGet' = MACro
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersMACrosGet{..}
-          = go _acmacgQuotaUser _acmacgPrettyPrint
+        requestWithRoute r u AccountsContainersMACrosGet'{..}
+          = go _acmacgQuotaUser (Just _acmacgPrettyPrint)
               _acmacgContainerId
               _acmacgUserIp
               _acmacgAccountId
@@ -186,9 +194,9 @@ instance GoogleRequest AccountsContainersMACrosGet'
               _acmacgMacroId
               _acmacgOauthToken
               _acmacgFields
-              _acmacgAlt
+              (Just _acmacgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersMacrosGetAPI)
+                      (Proxy :: Proxy AccountsContainersMacrosGetResource)
                       r
                       u

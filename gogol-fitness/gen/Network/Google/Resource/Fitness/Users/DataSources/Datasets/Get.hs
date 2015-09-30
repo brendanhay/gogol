@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- or equal to the dataset start time.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsGet@.
-module Fitness.Users.DataSources.Datasets.Get
+module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
     (
     -- * REST Resource
-      UsersDataSourcesDatasetsGetAPI
+      UsersDataSourcesDatasetsGetResource
 
     -- * Creating a Request
-    , usersDataSourcesDatasetsGet
-    , UsersDataSourcesDatasetsGet
+    , usersDataSourcesDatasetsGet'
+    , UsersDataSourcesDatasetsGet'
 
     -- * Request Lenses
     , udsdgQuotaUser
@@ -51,15 +52,22 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesDatasetsGet@ which the
--- 'UsersDataSourcesDatasetsGet' request conforms to.
-type UsersDataSourcesDatasetsGetAPI =
+-- 'UsersDataSourcesDatasetsGet'' request conforms to.
+type UsersDataSourcesDatasetsGetResource =
      Capture "userId" Text :>
        "dataSources" :>
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "limit" Int32 :>
-                 QueryParam "pageToken" Text :> Get '[JSON] Dataset
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "limit" Int32 :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Dataset
 
 -- | Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and
@@ -67,8 +75,8 @@ type UsersDataSourcesDatasetsGetAPI =
 -- than or equal to the dataset end time and whose end time is greater than
 -- or equal to the dataset start time.
 --
--- /See:/ 'usersDataSourcesDatasetsGet' smart constructor.
-data UsersDataSourcesDatasetsGet = UsersDataSourcesDatasetsGet
+-- /See:/ 'usersDataSourcesDatasetsGet'' smart constructor.
+data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
     { _udsdgQuotaUser    :: !(Maybe Text)
     , _udsdgPrettyPrint  :: !Bool
     , _udsdgUserIp       :: !(Maybe Text)
@@ -80,7 +88,7 @@ data UsersDataSourcesDatasetsGet = UsersDataSourcesDatasetsGet
     , _udsdgPageToken    :: !(Maybe Text)
     , _udsdgOauthToken   :: !(Maybe Text)
     , _udsdgFields       :: !(Maybe Text)
-    , _udsdgAlt          :: !Text
+    , _udsdgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsGet'' with the minimum fields required to make a request.
@@ -110,13 +118,13 @@ data UsersDataSourcesDatasetsGet = UsersDataSourcesDatasetsGet
 -- * 'udsdgFields'
 --
 -- * 'udsdgAlt'
-usersDataSourcesDatasetsGet
+usersDataSourcesDatasetsGet'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'datasetId'
-    -> UsersDataSourcesDatasetsGet
-usersDataSourcesDatasetsGet pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
-    UsersDataSourcesDatasetsGet
+    -> UsersDataSourcesDatasetsGet'
+usersDataSourcesDatasetsGet' pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
+    UsersDataSourcesDatasetsGet'
     { _udsdgQuotaUser = Nothing
     , _udsdgPrettyPrint = True
     , _udsdgUserIp = Nothing
@@ -128,7 +136,7 @@ usersDataSourcesDatasetsGet pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ =
     , _udsdgPageToken = Nothing
     , _udsdgOauthToken = Nothing
     , _udsdgFields = Nothing
-    , _udsdgAlt = "json"
+    , _udsdgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -207,15 +215,16 @@ udsdgFields
   = lens _udsdgFields (\ s a -> s{_udsdgFields = a})
 
 -- | Data format for the response.
-udsdgAlt :: Lens' UsersDataSourcesDatasetsGet' Text
+udsdgAlt :: Lens' UsersDataSourcesDatasetsGet' Alt
 udsdgAlt = lens _udsdgAlt (\ s a -> s{_udsdgAlt = a})
 
 instance GoogleRequest UsersDataSourcesDatasetsGet'
          where
         type Rs UsersDataSourcesDatasetsGet' = Dataset
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesDatasetsGet{..}
-          = go _udsdgQuotaUser _udsdgPrettyPrint _udsdgUserIp
+        requestWithRoute r u UsersDataSourcesDatasetsGet'{..}
+          = go _udsdgQuotaUser (Just _udsdgPrettyPrint)
+              _udsdgUserIp
               _udsdgDataSourceId
               _udsdgUserId
               _udsdgKey
@@ -224,9 +233,9 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
               _udsdgPageToken
               _udsdgOauthToken
               _udsdgFields
-              _udsdgAlt
+              (Just _udsdgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesDatasetsGetAPI)
+                      (Proxy :: Proxy UsersDataSourcesDatasetsGetResource)
                       r
                       u

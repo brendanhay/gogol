@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds users to the specified group.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGroupsAddMember@.
-module Clouduseraccounts.Groups.AddMember
+module Network.Google.Resource.Clouduseraccounts.Groups.AddMember
     (
     -- * REST Resource
-      GroupsAddMemberAPI
+      GroupsAddMemberResource
 
     -- * Creating a Request
-    , groupsAddMember
-    , GroupsAddMember
+    , groupsAddMember'
+    , GroupsAddMember'
 
     -- * Request Lenses
     , gamQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGroupsAddMember@ which the
--- 'GroupsAddMember' request conforms to.
-type GroupsAddMemberAPI =
+-- 'GroupsAddMember'' request conforms to.
+type GroupsAddMemberResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
            Capture "groupName" Text :>
-             "addMember" :> Post '[JSON] Operation
+             "addMember" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds users to the specified group.
 --
--- /See:/ 'groupsAddMember' smart constructor.
-data GroupsAddMember = GroupsAddMember
+-- /See:/ 'groupsAddMember'' smart constructor.
+data GroupsAddMember' = GroupsAddMember'
     { _gamQuotaUser   :: !(Maybe Text)
     , _gamPrettyPrint :: !Bool
     , _gamProject     :: !Text
@@ -64,7 +72,7 @@ data GroupsAddMember = GroupsAddMember
     , _gamGroupName   :: !Text
     , _gamOauthToken  :: !(Maybe Text)
     , _gamFields      :: !(Maybe Text)
-    , _gamAlt         :: !Text
+    , _gamAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAddMember'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data GroupsAddMember = GroupsAddMember
 -- * 'gamFields'
 --
 -- * 'gamAlt'
-groupsAddMember
+groupsAddMember'
     :: Text -- ^ 'project'
     -> Text -- ^ 'groupName'
-    -> GroupsAddMember
-groupsAddMember pGamProject_ pGamGroupName_ =
-    GroupsAddMember
+    -> GroupsAddMember'
+groupsAddMember' pGamProject_ pGamGroupName_ =
+    GroupsAddMember'
     { _gamQuotaUser = Nothing
     , _gamPrettyPrint = True
     , _gamProject = pGamProject_
@@ -102,7 +110,7 @@ groupsAddMember pGamProject_ pGamGroupName_ =
     , _gamGroupName = pGamGroupName_
     , _gamOauthToken = Nothing
     , _gamFields = Nothing
-    , _gamAlt = "json"
+    , _gamAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ gamFields
   = lens _gamFields (\ s a -> s{_gamFields = a})
 
 -- | Data format for the response.
-gamAlt :: Lens' GroupsAddMember' Text
+gamAlt :: Lens' GroupsAddMember' Alt
 gamAlt = lens _gamAlt (\ s a -> s{_gamAlt = a})
 
 instance GoogleRequest GroupsAddMember' where
         type Rs GroupsAddMember' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GroupsAddMember{..}
-          = go _gamQuotaUser _gamPrettyPrint _gamProject
+        requestWithRoute r u GroupsAddMember'{..}
+          = go _gamQuotaUser (Just _gamPrettyPrint) _gamProject
               _gamUserIp
               _gamKey
               _gamGroupName
               _gamOauthToken
               _gamFields
-              _gamAlt
+              (Just _gamAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsAddMemberAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsAddMemberResource)
                       r
                       u

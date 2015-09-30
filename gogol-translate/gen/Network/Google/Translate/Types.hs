@@ -33,6 +33,16 @@ module Network.Google.Translate.Types
     , languagesListResponse
     , llrLanguages
 
+    -- * LanguageTranslationsListFormat
+    , LanguageTranslationsListFormat (..)
+
+    -- * DetectionsResource
+    , DetectionsResource
+    , detectionsResource
+    , drConfidence
+    , drIsReliable
+    , drLanguage
+
     -- * LanguagesResource
     , LanguagesResource
     , languagesResource
@@ -43,6 +53,9 @@ module Network.Google.Translate.Types
     , TranslationsListResponse
     , translationsListResponse
     , tlrTranslations
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -50,7 +63,7 @@ import           Network.Google.Translate.Types.Product
 import           Network.Google.Translate.Types.Sum
 
 -- | URL referring to version 'v2' of the Translate API.
-translateURL :: BaseURL
+translateURL :: BaseUrl
 translateURL
   = BaseUrl Https
       "https://www.googleapis.com/language/translate/"

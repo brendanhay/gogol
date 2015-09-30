@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- service.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsList@.
-module Mirror.Subscriptions.List
+module Network.Google.Resource.Mirror.Subscriptions.List
     (
     -- * REST Resource
-      SubscriptionsListAPI
+      SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList
-    , SubscriptionsList
+    , subscriptionsList'
+    , SubscriptionsList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -43,23 +44,30 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorSubscriptionsList@ which the
--- 'SubscriptionsList' request conforms to.
-type SubscriptionsListAPI =
+-- 'SubscriptionsList'' request conforms to.
+type SubscriptionsListResource =
      "subscriptions" :>
-       Get '[JSON] SubscriptionsListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] SubscriptionsListResponse
 
 -- | Retrieves a list of subscriptions for the authenticated user and
 -- service.
 --
--- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
+-- /See:/ 'subscriptionsList'' smart constructor.
+data SubscriptionsList' = SubscriptionsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIp      :: !(Maybe Text)
     , _slKey         :: !(Maybe Text)
     , _slOauthToken  :: !(Maybe Text)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
@@ -79,17 +87,17 @@ data SubscriptionsList = SubscriptionsList
 -- * 'slFields'
 --
 -- * 'slAlt'
-subscriptionsList
-    :: SubscriptionsList
-subscriptionsList =
-    SubscriptionsList
+subscriptionsList'
+    :: SubscriptionsList'
+subscriptionsList' =
+    SubscriptionsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
     , _slKey = Nothing
     , _slOauthToken = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,20 +134,21 @@ slFields :: Lens' SubscriptionsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SubscriptionsList' Text
+slAlt :: Lens' SubscriptionsList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' =
              SubscriptionsListResponse
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp _slKey
+        requestWithRoute r u SubscriptionsList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+              _slKey
               _slOauthToken
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsListAPI)
+                      (Proxy :: Proxy SubscriptionsListResource)
                       r
                       u

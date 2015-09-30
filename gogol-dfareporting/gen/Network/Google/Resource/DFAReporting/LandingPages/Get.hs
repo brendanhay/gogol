@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one campaign landing page by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesGet@.
-module DFAReporting.LandingPages.Get
+module Network.Google.Resource.DFAReporting.LandingPages.Get
     (
     -- * REST Resource
-      LandingPagesGetAPI
+      LandingPagesGetResource
 
     -- * Creating a Request
-    , landingPagesGet
-    , LandingPagesGet
+    , landingPagesGet'
+    , LandingPagesGet'
 
     -- * Request Lenses
     , lpgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingLandingPagesGet@ which the
--- 'LandingPagesGet' request conforms to.
-type LandingPagesGetAPI =
+-- 'LandingPagesGet'' request conforms to.
+type LandingPagesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               Capture "id" Int64 :> Get '[JSON] LandingPage
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] LandingPage
 
 -- | Gets one campaign landing page by ID.
 --
--- /See:/ 'landingPagesGet' smart constructor.
-data LandingPagesGet = LandingPagesGet
+-- /See:/ 'landingPagesGet'' smart constructor.
+data LandingPagesGet' = LandingPagesGet'
     { _lpgQuotaUser   :: !(Maybe Text)
     , _lpgPrettyPrint :: !Bool
     , _lpgUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data LandingPagesGet = LandingPagesGet
     , _lpgId          :: !Int64
     , _lpgOauthToken  :: !(Maybe Text)
     , _lpgFields      :: !(Maybe Text)
-    , _lpgAlt         :: !Text
+    , _lpgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data LandingPagesGet = LandingPagesGet
 -- * 'lpgFields'
 --
 -- * 'lpgAlt'
-landingPagesGet
+landingPagesGet'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> LandingPagesGet
-landingPagesGet pLpgCampaignId_ pLpgProfileId_ pLpgId_ =
-    LandingPagesGet
+    -> LandingPagesGet'
+landingPagesGet' pLpgCampaignId_ pLpgProfileId_ pLpgId_ =
+    LandingPagesGet'
     { _lpgQuotaUser = Nothing
     , _lpgPrettyPrint = True
     , _lpgUserIp = Nothing
@@ -109,7 +117,7 @@ landingPagesGet pLpgCampaignId_ pLpgProfileId_ pLpgId_ =
     , _lpgId = pLpgId_
     , _lpgOauthToken = Nothing
     , _lpgFields = Nothing
-    , _lpgAlt = "json"
+    , _lpgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,22 +172,23 @@ lpgFields
   = lens _lpgFields (\ s a -> s{_lpgFields = a})
 
 -- | Data format for the response.
-lpgAlt :: Lens' LandingPagesGet' Text
+lpgAlt :: Lens' LandingPagesGet' Alt
 lpgAlt = lens _lpgAlt (\ s a -> s{_lpgAlt = a})
 
 instance GoogleRequest LandingPagesGet' where
         type Rs LandingPagesGet' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesGet{..}
-          = go _lpgQuotaUser _lpgPrettyPrint _lpgUserIp
+        requestWithRoute r u LandingPagesGet'{..}
+          = go _lpgQuotaUser (Just _lpgPrettyPrint) _lpgUserIp
               _lpgCampaignId
               _lpgProfileId
               _lpgKey
               _lpgId
               _lpgOauthToken
               _lpgFields
-              _lpgAlt
+              (Just _lpgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LandingPagesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy LandingPagesGetResource)
                       r
                       u

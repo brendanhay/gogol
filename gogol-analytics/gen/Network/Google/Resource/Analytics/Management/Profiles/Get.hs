@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a view (profile) to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesGet@.
-module Analytics.Management.Profiles.Get
+module Network.Google.Resource.Analytics.Management.Profiles.Get
     (
     -- * REST Resource
-      ManagementProfilesGetAPI
+      ManagementProfilesGetResource
 
     -- * Creating a Request
-    , managementProfilesGet
-    , ManagementProfilesGet
+    , managementProfilesGet'
+    , ManagementProfilesGet'
 
     -- * Request Lenses
     , mpgQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesGet@ which the
--- 'ManagementProfilesGet' request conforms to.
-type ManagementProfilesGetAPI =
+-- 'ManagementProfilesGet'' request conforms to.
+type ManagementProfilesGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 Capture "profileId" Text :> Get '[JSON] Profile
+                 Capture "profileId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Profile
 
 -- | Gets a view (profile) to which the user has access.
 --
--- /See:/ 'managementProfilesGet' smart constructor.
-data ManagementProfilesGet = ManagementProfilesGet
+-- /See:/ 'managementProfilesGet'' smart constructor.
+data ManagementProfilesGet' = ManagementProfilesGet'
     { _mpgQuotaUser     :: !(Maybe Text)
     , _mpgPrettyPrint   :: !Bool
     , _mpgWebPropertyId :: !Text
@@ -68,7 +76,7 @@ data ManagementProfilesGet = ManagementProfilesGet
     , _mpgKey           :: !(Maybe Text)
     , _mpgOauthToken    :: !(Maybe Text)
     , _mpgFields        :: !(Maybe Text)
-    , _mpgAlt           :: !Text
+    , _mpgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesGet'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data ManagementProfilesGet = ManagementProfilesGet
 -- * 'mpgFields'
 --
 -- * 'mpgAlt'
-managementProfilesGet
+managementProfilesGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesGet
-managementProfilesGet pMpgWebPropertyId_ pMpgProfileId_ pMpgAccountId_ =
-    ManagementProfilesGet
+    -> ManagementProfilesGet'
+managementProfilesGet' pMpgWebPropertyId_ pMpgProfileId_ pMpgAccountId_ =
+    ManagementProfilesGet'
     { _mpgQuotaUser = Nothing
     , _mpgPrettyPrint = False
     , _mpgWebPropertyId = pMpgWebPropertyId_
@@ -110,7 +118,7 @@ managementProfilesGet pMpgWebPropertyId_ pMpgProfileId_ pMpgAccountId_ =
     , _mpgKey = Nothing
     , _mpgOauthToken = Nothing
     , _mpgFields = Nothing
-    , _mpgAlt = "json"
+    , _mpgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +174,24 @@ mpgFields
   = lens _mpgFields (\ s a -> s{_mpgFields = a})
 
 -- | Data format for the response.
-mpgAlt :: Lens' ManagementProfilesGet' Text
+mpgAlt :: Lens' ManagementProfilesGet' Alt
 mpgAlt = lens _mpgAlt (\ s a -> s{_mpgAlt = a})
 
 instance GoogleRequest ManagementProfilesGet' where
         type Rs ManagementProfilesGet' = Profile
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesGet{..}
-          = go _mpgQuotaUser _mpgPrettyPrint _mpgWebPropertyId
+        requestWithRoute r u ManagementProfilesGet'{..}
+          = go _mpgQuotaUser (Just _mpgPrettyPrint)
+              _mpgWebPropertyId
               _mpgUserIp
               _mpgProfileId
               _mpgAccountId
               _mpgKey
               _mpgOauthToken
               _mpgFields
-              _mpgAlt
+              (Just _mpgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesGetAPI)
+                      (Proxy :: Proxy ManagementProfilesGetResource)
                       r
                       u

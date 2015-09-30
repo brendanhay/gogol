@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesList@.
-module Compute.Routes.List
+module Network.Google.Resource.Compute.Routes.List
     (
     -- * REST Resource
-      RoutesListAPI
+      RoutesListResource
 
     -- * Creating a Request
-    , routesList
-    , RoutesList
+    , routesList'
+    , RoutesList'
 
     -- * Request Lenses
     , rlQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRoutesList@ which the
--- 'RoutesList' request conforms to.
-type RoutesListAPI =
+-- 'RoutesList'' request conforms to.
+type RoutesListResource =
      Capture "project" Text :>
        "global" :>
          "routes" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] RouteList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] RouteList
 
 -- | Retrieves the list of route resources available to the specified
 -- project.
 --
--- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList
+-- /See:/ 'routesList'' smart constructor.
+data RoutesList' = RoutesList'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlPrettyPrint :: !Bool
     , _rlProject     :: !Text
@@ -72,7 +79,7 @@ data RoutesList = RoutesList
     , _rlOauthToken  :: !(Maybe Text)
     , _rlMaxResults  :: !Word32
     , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Text
+    , _rlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data RoutesList = RoutesList
 -- * 'rlFields'
 --
 -- * 'rlAlt'
-routesList
+routesList'
     :: Text -- ^ 'project'
-    -> RoutesList
-routesList pRlProject_ =
-    RoutesList
+    -> RoutesList'
+routesList' pRlProject_ =
+    RoutesList'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
     , _rlProject = pRlProject_
@@ -115,7 +122,7 @@ routesList pRlProject_ =
     , _rlOauthToken = Nothing
     , _rlMaxResults = 500
     , _rlFields = Nothing
-    , _rlAlt = "json"
+    , _rlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,20 +190,23 @@ rlFields :: Lens' RoutesList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 -- | Data format for the response.
-rlAlt :: Lens' RoutesList' Text
+rlAlt :: Lens' RoutesList' Alt
 rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
 
 instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesList{..}
-          = go _rlQuotaUser _rlPrettyPrint _rlProject _rlUserIp
+        requestWithRoute r u RoutesList'{..}
+          = go _rlQuotaUser (Just _rlPrettyPrint) _rlProject
+              _rlUserIp
               _rlKey
               _rlFilter
               _rlPageToken
               _rlOauthToken
               (Just _rlMaxResults)
               _rlFields
-              _rlAlt
+              (Just _rlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoutesListResource)
+                      r
+                      u

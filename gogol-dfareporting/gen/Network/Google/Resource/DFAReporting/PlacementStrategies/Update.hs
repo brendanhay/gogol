@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing placement strategy.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesUpdate@.
-module DFAReporting.PlacementStrategies.Update
+module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
     (
     -- * REST Resource
-      PlacementStrategiesUpdateAPI
+      PlacementStrategiesUpdateResource
 
     -- * Creating a Request
-    , placementStrategiesUpdate
-    , PlacementStrategiesUpdate
+    , placementStrategiesUpdate'
+    , PlacementStrategiesUpdate'
 
     -- * Request Lenses
     , psuQuotaUser
@@ -43,17 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementStrategiesUpdate@ which the
--- 'PlacementStrategiesUpdate' request conforms to.
-type PlacementStrategiesUpdateAPI =
+-- 'PlacementStrategiesUpdate'' request conforms to.
+type PlacementStrategiesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           Put '[JSON] PlacementStrategy
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy.
 --
--- /See:/ 'placementStrategiesUpdate' smart constructor.
-data PlacementStrategiesUpdate = PlacementStrategiesUpdate
+-- /See:/ 'placementStrategiesUpdate'' smart constructor.
+data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
     { _psuQuotaUser   :: !(Maybe Text)
     , _psuPrettyPrint :: !Bool
     , _psuUserIp      :: !(Maybe Text)
@@ -61,7 +68,7 @@ data PlacementStrategiesUpdate = PlacementStrategiesUpdate
     , _psuKey         :: !(Maybe Text)
     , _psuOauthToken  :: !(Maybe Text)
     , _psuFields      :: !(Maybe Text)
-    , _psuAlt         :: !Text
+    , _psuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesUpdate'' with the minimum fields required to make a request.
@@ -83,11 +90,11 @@ data PlacementStrategiesUpdate = PlacementStrategiesUpdate
 -- * 'psuFields'
 --
 -- * 'psuAlt'
-placementStrategiesUpdate
+placementStrategiesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> PlacementStrategiesUpdate
-placementStrategiesUpdate pPsuProfileId_ =
-    PlacementStrategiesUpdate
+    -> PlacementStrategiesUpdate'
+placementStrategiesUpdate' pPsuProfileId_ =
+    PlacementStrategiesUpdate'
     { _psuQuotaUser = Nothing
     , _psuPrettyPrint = True
     , _psuUserIp = Nothing
@@ -95,7 +102,7 @@ placementStrategiesUpdate pPsuProfileId_ =
     , _psuKey = Nothing
     , _psuOauthToken = Nothing
     , _psuFields = Nothing
-    , _psuAlt = "json"
+    , _psuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +147,7 @@ psuFields
   = lens _psuFields (\ s a -> s{_psuFields = a})
 
 -- | Data format for the response.
-psuAlt :: Lens' PlacementStrategiesUpdate' Text
+psuAlt :: Lens' PlacementStrategiesUpdate' Alt
 psuAlt = lens _psuAlt (\ s a -> s{_psuAlt = a})
 
 instance GoogleRequest PlacementStrategiesUpdate'
@@ -148,15 +155,15 @@ instance GoogleRequest PlacementStrategiesUpdate'
         type Rs PlacementStrategiesUpdate' =
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesUpdate{..}
-          = go _psuQuotaUser _psuPrettyPrint _psuUserIp
+        requestWithRoute r u PlacementStrategiesUpdate'{..}
+          = go _psuQuotaUser (Just _psuPrettyPrint) _psuUserIp
               _psuProfileId
               _psuKey
               _psuOauthToken
               _psuFields
-              _psuAlt
+              (Just _psuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementStrategiesUpdateAPI)
+                      (Proxy :: Proxy PlacementStrategiesUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete an ASP issued by a user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsDelete@.
-module Directory.Asps.Delete
+module Network.Google.Resource.Directory.Asps.Delete
     (
     -- * REST Resource
-      AspsDeleteAPI
+      AspsDeleteResource
 
     -- * Creating a Request
-    , aspsDelete
-    , AspsDelete
+    , aspsDelete'
+    , AspsDelete'
 
     -- * Request Lenses
     , adQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryAspsDelete@ which the
--- 'AspsDelete' request conforms to.
-type AspsDeleteAPI =
+-- 'AspsDelete'' request conforms to.
+type AspsDeleteResource =
      "users" :>
        Capture "userKey" Text :>
-         "asps" :> Capture "codeId" Int32 :> Delete '[JSON] ()
+         "asps" :>
+           Capture "codeId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
 --
--- /See:/ 'aspsDelete' smart constructor.
-data AspsDelete = AspsDelete
+-- /See:/ 'aspsDelete'' smart constructor.
+data AspsDelete' = AspsDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
     , _adCodeId      :: !Int32
@@ -62,7 +71,7 @@ data AspsDelete = AspsDelete
     , _adOauthToken  :: !(Maybe Text)
     , _adUserKey     :: !Text
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Text
+    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsDelete'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data AspsDelete = AspsDelete
 -- * 'adFields'
 --
 -- * 'adAlt'
-aspsDelete
+aspsDelete'
     :: Int32 -- ^ 'codeId'
     -> Text -- ^ 'userKey'
-    -> AspsDelete
-aspsDelete pAdCodeId_ pAdUserKey_ =
-    AspsDelete
+    -> AspsDelete'
+aspsDelete' pAdCodeId_ pAdUserKey_ =
+    AspsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
     , _adCodeId = pAdCodeId_
@@ -100,7 +109,7 @@ aspsDelete pAdCodeId_ pAdUserKey_ =
     , _adOauthToken = Nothing
     , _adUserKey = pAdUserKey_
     , _adFields = Nothing
-    , _adAlt = "json"
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,18 +156,21 @@ adFields :: Lens' AspsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' AspsDelete' Text
+adAlt :: Lens' AspsDelete' Alt
 adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest AspsDelete' where
         type Rs AspsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u AspsDelete{..}
-          = go _adQuotaUser _adPrettyPrint _adCodeId _adUserIp
+        requestWithRoute r u AspsDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adCodeId
+              _adUserIp
               _adKey
               _adOauthToken
               _adUserKey
               _adFields
-              _adAlt
+              (Just _adAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsDeleteAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AspsDeleteResource)
+                      r
+                      u

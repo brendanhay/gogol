@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a stored query.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerQueriesGetquery@.
-module Doubleclickbidmanager.Queries.Getquery
+module Network.Google.Resource.Doubleclickbidmanager.Queries.Getquery
     (
     -- * REST Resource
-      QueriesGetqueryAPI
+      QueriesGetqueryResource
 
     -- * Creating a Request
-    , queriesGetquery
-    , QueriesGetquery
+    , queriesGetquery'
+    , QueriesGetquery'
 
     -- * Request Lenses
     , qgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerQueriesGetquery@ which the
--- 'QueriesGetquery' request conforms to.
-type QueriesGetqueryAPI =
+-- 'QueriesGetquery'' request conforms to.
+type QueriesGetqueryResource =
      "query" :>
-       Capture "queryId" Int64 :> Get '[JSON] Query
+       Capture "queryId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Query
 
 -- | Retrieves a stored query.
 --
--- /See:/ 'queriesGetquery' smart constructor.
-data QueriesGetquery = QueriesGetquery
+-- /See:/ 'queriesGetquery'' smart constructor.
+data QueriesGetquery' = QueriesGetquery'
     { _qgQuotaUser   :: !(Maybe Text)
     , _qgQueryId     :: !Int64
     , _qgPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data QueriesGetquery = QueriesGetquery
     , _qgKey         :: !(Maybe Text)
     , _qgOauthToken  :: !(Maybe Text)
     , _qgFields      :: !(Maybe Text)
-    , _qgAlt         :: !Text
+    , _qgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesGetquery'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data QueriesGetquery = QueriesGetquery
 -- * 'qgFields'
 --
 -- * 'qgAlt'
-queriesGetquery
+queriesGetquery'
     :: Int64 -- ^ 'queryId'
-    -> QueriesGetquery
-queriesGetquery pQgQueryId_ =
-    QueriesGetquery
+    -> QueriesGetquery'
+queriesGetquery' pQgQueryId_ =
+    QueriesGetquery'
     { _qgQuotaUser = Nothing
     , _qgQueryId = pQgQueryId_
     , _qgPrettyPrint = True
@@ -93,7 +101,7 @@ queriesGetquery pQgQueryId_ =
     , _qgKey = Nothing
     , _qgOauthToken = Nothing
     , _qgFields = Nothing
-    , _qgAlt = "json"
+    , _qgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ qgFields :: Lens' QueriesGetquery' (Maybe Text)
 qgFields = lens _qgFields (\ s a -> s{_qgFields = a})
 
 -- | Data format for the response.
-qgAlt :: Lens' QueriesGetquery' Text
+qgAlt :: Lens' QueriesGetquery' Alt
 qgAlt = lens _qgAlt (\ s a -> s{_qgAlt = a})
 
 instance GoogleRequest QueriesGetquery' where
         type Rs QueriesGetquery' = Query
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesGetquery{..}
-          = go _qgQuotaUser _qgQueryId _qgPrettyPrint _qgUserIp
+        requestWithRoute r u QueriesGetquery'{..}
+          = go _qgQuotaUser _qgQueryId (Just _qgPrettyPrint)
+              _qgUserIp
               _qgKey
               _qgOauthToken
               _qgFields
-              _qgAlt
+              (Just _qgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QueriesGetqueryAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy QueriesGetqueryResource)
                       r
                       u

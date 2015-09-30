@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve pageview stats for a Blog.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPageViewsGet@.
-module Blogger.PageViews.Get
+module Network.Google.Resource.Blogger.PageViews.Get
     (
     -- * REST Resource
-      PageViewsGetAPI
+      PageViewsGetResource
 
     -- * Creating a Request
-    , pageViewsGet
-    , PageViewsGet
+    , pageViewsGet'
+    , PageViewsGet'
 
     -- * Request Lenses
     , pvgQuotaUser
@@ -44,26 +45,33 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPageViewsGet@ which the
--- 'PageViewsGet' request conforms to.
-type PageViewsGetAPI =
+-- 'PageViewsGet'' request conforms to.
+type PageViewsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pageviews" :>
-           QueryParams "range" Text :> Get '[JSON] Pageviews
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParams "range" BloggerPageViewsGetRange :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Pageviews
 
 -- | Retrieve pageview stats for a Blog.
 --
--- /See:/ 'pageViewsGet' smart constructor.
-data PageViewsGet = PageViewsGet
+-- /See:/ 'pageViewsGet'' smart constructor.
+data PageViewsGet' = PageViewsGet'
     { _pvgQuotaUser   :: !(Maybe Text)
     , _pvgPrettyPrint :: !Bool
     , _pvgUserIp      :: !(Maybe Text)
     , _pvgBlogId      :: !Text
     , _pvgKey         :: !(Maybe Text)
-    , _pvgRange       :: !(Maybe Text)
+    , _pvgRange       :: !(Maybe BloggerPageViewsGetRange)
     , _pvgOauthToken  :: !(Maybe Text)
     , _pvgFields      :: !(Maybe Text)
-    , _pvgAlt         :: !Text
+    , _pvgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PageViewsGet'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data PageViewsGet = PageViewsGet
 -- * 'pvgFields'
 --
 -- * 'pvgAlt'
-pageViewsGet
+pageViewsGet'
     :: Text -- ^ 'blogId'
-    -> PageViewsGet
-pageViewsGet pPvgBlogId_ =
-    PageViewsGet
+    -> PageViewsGet'
+pageViewsGet' pPvgBlogId_ =
+    PageViewsGet'
     { _pvgQuotaUser = Nothing
     , _pvgPrettyPrint = True
     , _pvgUserIp = Nothing
@@ -100,7 +108,7 @@ pageViewsGet pPvgBlogId_ =
     , _pvgRange = Nothing
     , _pvgOauthToken = Nothing
     , _pvgFields = Nothing
-    , _pvgAlt = "json"
+    , _pvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ pvgBlogId
 pvgKey :: Lens' PageViewsGet' (Maybe Text)
 pvgKey = lens _pvgKey (\ s a -> s{_pvgKey = a})
 
-pvgRange :: Lens' PageViewsGet' (Maybe Text)
+pvgRange :: Lens' PageViewsGet' (Maybe BloggerPageViewsGetRange)
 pvgRange = lens _pvgRange (\ s a -> s{_pvgRange = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -148,20 +156,22 @@ pvgFields
   = lens _pvgFields (\ s a -> s{_pvgFields = a})
 
 -- | Data format for the response.
-pvgAlt :: Lens' PageViewsGet' Text
+pvgAlt :: Lens' PageViewsGet' Alt
 pvgAlt = lens _pvgAlt (\ s a -> s{_pvgAlt = a})
 
 instance GoogleRequest PageViewsGet' where
         type Rs PageViewsGet' = Pageviews
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PageViewsGet{..}
-          = go _pvgQuotaUser _pvgPrettyPrint _pvgUserIp
+        requestWithRoute r u PageViewsGet'{..}
+          = go _pvgQuotaUser (Just _pvgPrettyPrint) _pvgUserIp
               _pvgBlogId
               _pvgKey
               _pvgRange
               _pvgOauthToken
               _pvgFields
-              _pvgAlt
+              (Just _pvgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PageViewsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PageViewsGetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- grouped by date for any metric, and see which day rows are returned.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSearchanalyticsQuery@.
-module Webmasters.Searchanalytics.Query
+module Network.Google.Resource.Webmasters.Searchanalytics.Query
     (
     -- * REST Resource
-      SearchanalyticsQueryAPI
+      SearchanalyticsQueryResource
 
     -- * Creating a Request
-    , searchanalyticsQuery
-    , SearchanalyticsQuery
+    , searchanalyticsQuery'
+    , SearchanalyticsQuery'
 
     -- * Request Lenses
     , sqQuotaUser
@@ -48,12 +49,20 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSearchanalyticsQuery@ which the
--- 'SearchanalyticsQuery' request conforms to.
-type SearchanalyticsQueryAPI =
+-- 'SearchanalyticsQuery'' request conforms to.
+type SearchanalyticsQueryResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "searchAnalytics" :>
-           "query" :> Post '[JSON] SearchAnalyticsQueryResponse
+           "query" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] SearchAnalyticsQueryResponse
 
 -- | Query your data with filters and parameters that you define. Returns
 -- zero or more rows grouped by the row keys that you define. You must
@@ -62,8 +71,8 @@ type SearchanalyticsQueryAPI =
 -- you need to know which days have data, issue a broad date range query
 -- grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ 'searchanalyticsQuery' smart constructor.
-data SearchanalyticsQuery = SearchanalyticsQuery
+-- /See:/ 'searchanalyticsQuery'' smart constructor.
+data SearchanalyticsQuery' = SearchanalyticsQuery'
     { _sqQuotaUser   :: !(Maybe Text)
     , _sqPrettyPrint :: !Bool
     , _sqUserIp      :: !(Maybe Text)
@@ -71,7 +80,7 @@ data SearchanalyticsQuery = SearchanalyticsQuery
     , _sqKey         :: !(Maybe Text)
     , _sqOauthToken  :: !(Maybe Text)
     , _sqFields      :: !(Maybe Text)
-    , _sqAlt         :: !Text
+    , _sqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchanalyticsQuery'' with the minimum fields required to make a request.
@@ -93,11 +102,11 @@ data SearchanalyticsQuery = SearchanalyticsQuery
 -- * 'sqFields'
 --
 -- * 'sqAlt'
-searchanalyticsQuery
+searchanalyticsQuery'
     :: Text -- ^ 'siteUrl'
-    -> SearchanalyticsQuery
-searchanalyticsQuery pSqSiteUrl_ =
-    SearchanalyticsQuery
+    -> SearchanalyticsQuery'
+searchanalyticsQuery' pSqSiteUrl_ =
+    SearchanalyticsQuery'
     { _sqQuotaUser = Nothing
     , _sqPrettyPrint = True
     , _sqUserIp = Nothing
@@ -105,7 +114,7 @@ searchanalyticsQuery pSqSiteUrl_ =
     , _sqKey = Nothing
     , _sqOauthToken = Nothing
     , _sqFields = Nothing
-    , _sqAlt = "json"
+    , _sqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,21 +157,22 @@ sqFields :: Lens' SearchanalyticsQuery' (Maybe Text)
 sqFields = lens _sqFields (\ s a -> s{_sqFields = a})
 
 -- | Data format for the response.
-sqAlt :: Lens' SearchanalyticsQuery' Text
+sqAlt :: Lens' SearchanalyticsQuery' Alt
 sqAlt = lens _sqAlt (\ s a -> s{_sqAlt = a})
 
 instance GoogleRequest SearchanalyticsQuery' where
         type Rs SearchanalyticsQuery' =
              SearchAnalyticsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SearchanalyticsQuery{..}
-          = go _sqQuotaUser _sqPrettyPrint _sqUserIp _sqSiteUrl
+        requestWithRoute r u SearchanalyticsQuery'{..}
+          = go _sqQuotaUser (Just _sqPrettyPrint) _sqUserIp
+              _sqSiteUrl
               _sqKey
               _sqOauthToken
               _sqFields
-              _sqAlt
+              (Just _sqAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SearchanalyticsQueryAPI)
+                      (Proxy :: Proxy SearchanalyticsQueryResource)
                       r
                       u

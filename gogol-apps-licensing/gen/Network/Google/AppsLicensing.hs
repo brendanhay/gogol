@@ -27,25 +27,25 @@ module Network.Google.AppsLicensing
     -- * REST Resources
 
     -- ** LicensingLicenseAssignmentsDelete
-    , module Licensing.LicenseAssignments.Delete
+    , module Network.Google.Resource.Licensing.LicenseAssignments.Delete
 
     -- ** LicensingLicenseAssignmentsGet
-    , module Licensing.LicenseAssignments.Get
+    , module Network.Google.Resource.Licensing.LicenseAssignments.Get
 
     -- ** LicensingLicenseAssignmentsInsert
-    , module Licensing.LicenseAssignments.Insert
+    , module Network.Google.Resource.Licensing.LicenseAssignments.Insert
 
     -- ** LicensingLicenseAssignmentsListForProduct
-    , module Licensing.LicenseAssignments.ListForProduct
+    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
 
     -- ** LicensingLicenseAssignmentsListForProductAndSku
-    , module Licensing.LicenseAssignments.ListForProductAndSku
+    , module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
 
     -- ** LicensingLicenseAssignmentsPatch
-    , module Licensing.LicenseAssignments.Patch
+    , module Network.Google.Resource.Licensing.LicenseAssignments.Patch
 
     -- ** LicensingLicenseAssignmentsUpdate
-    , module Licensing.LicenseAssignments.Update
+    , module Network.Google.Resource.Licensing.LicenseAssignments.Update
 
     -- * Types
 
@@ -71,6 +71,9 @@ module Network.Google.AppsLicensing
     , laUserId
     , laSelfLink
     , laProductId
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -87,7 +90,14 @@ import           Network.Google.Resource.Licensing.LicenseAssignments.Update
 TODO
 -}
 
-type AppsLicensingAPI = LicenseAssignments
+type AppsLicensingAPI =
+     LicenseAssignmentsInsertResource :<|>
+       LicenseAssignmentsPatchResource
+       :<|> LicenseAssignmentsGetResource
+       :<|> LicenseAssignmentsListForProductAndSkuResource
+       :<|> LicenseAssignmentsListForProductResource
+       :<|> LicenseAssignmentsDeleteResource
+       :<|> LicenseAssignmentsUpdateResource
 
 appsLicensingAPI :: Proxy AppsLicensingAPI
 appsLicensingAPI = Proxy

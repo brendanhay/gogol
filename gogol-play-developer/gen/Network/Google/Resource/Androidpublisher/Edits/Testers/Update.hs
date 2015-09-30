@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTestersUpdate@.
-module Androidpublisher.Edits.Testers.Update
+module Network.Google.Resource.Androidpublisher.Edits.Testers.Update
     (
     -- * REST Resource
-      EditsTestersUpdateAPI
+      EditsTestersUpdateResource
 
     -- * Creating a Request
-    , editsTestersUpdate
-    , EditsTestersUpdate
+    , editsTestersUpdate'
+    , EditsTestersUpdate'
 
     -- * Request Lenses
     , etutQuotaUser
@@ -45,19 +46,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTestersUpdate@ which the
--- 'EditsTestersUpdate' request conforms to.
-type EditsTestersUpdateAPI =
+-- 'EditsTestersUpdate'' request conforms to.
+type EditsTestersUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track" Text :> Put '[JSON] Testers
+             Capture "track"
+               AndroidpublisherEditsTestersUpdateTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Testers
 
 --
--- /See:/ 'editsTestersUpdate' smart constructor.
-data EditsTestersUpdate = EditsTestersUpdate
+-- /See:/ 'editsTestersUpdate'' smart constructor.
+data EditsTestersUpdate' = EditsTestersUpdate'
     { _etutQuotaUser   :: !(Maybe Text)
-    , _etutTrack       :: !Text
+    , _etutTrack       :: !AndroidpublisherEditsTestersUpdateTrack
     , _etutPrettyPrint :: !Bool
     , _etutPackageName :: !Text
     , _etutUserIp      :: !(Maybe Text)
@@ -65,7 +75,7 @@ data EditsTestersUpdate = EditsTestersUpdate
     , _etutOauthToken  :: !(Maybe Text)
     , _etutEditId      :: !Text
     , _etutFields      :: !(Maybe Text)
-    , _etutAlt         :: !Text
+    , _etutAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersUpdate'' with the minimum fields required to make a request.
@@ -91,13 +101,13 @@ data EditsTestersUpdate = EditsTestersUpdate
 -- * 'etutFields'
 --
 -- * 'etutAlt'
-editsTestersUpdate
-    :: Text -- ^ 'track'
+editsTestersUpdate'
+    :: AndroidpublisherEditsTestersUpdateTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTestersUpdate
-editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutEditId_ =
-    EditsTestersUpdate
+    -> EditsTestersUpdate'
+editsTestersUpdate' pEtutTrack_ pEtutPackageName_ pEtutEditId_ =
+    EditsTestersUpdate'
     { _etutQuotaUser = Nothing
     , _etutTrack = pEtutTrack_
     , _etutPrettyPrint = True
@@ -107,7 +117,7 @@ editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutEditId_ =
     , _etutOauthToken = Nothing
     , _etutEditId = pEtutEditId_
     , _etutFields = Nothing
-    , _etutAlt = "json"
+    , _etutAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,7 +128,7 @@ etutQuotaUser
   = lens _etutQuotaUser
       (\ s a -> s{_etutQuotaUser = a})
 
-etutTrack :: Lens' EditsTestersUpdate' Text
+etutTrack :: Lens' EditsTestersUpdate' AndroidpublisherEditsTestersUpdateTrack
 etutTrack
   = lens _etutTrack (\ s a -> s{_etutTrack = a})
 
@@ -164,23 +174,24 @@ etutFields
   = lens _etutFields (\ s a -> s{_etutFields = a})
 
 -- | Data format for the response.
-etutAlt :: Lens' EditsTestersUpdate' Text
+etutAlt :: Lens' EditsTestersUpdate' Alt
 etutAlt = lens _etutAlt (\ s a -> s{_etutAlt = a})
 
 instance GoogleRequest EditsTestersUpdate' where
         type Rs EditsTestersUpdate' = Testers
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTestersUpdate{..}
-          = go _etutQuotaUser _etutTrack _etutPrettyPrint
+        requestWithRoute r u EditsTestersUpdate'{..}
+          = go _etutQuotaUser _etutTrack
+              (Just _etutPrettyPrint)
               _etutPackageName
               _etutUserIp
               _etutKey
               _etutOauthToken
               _etutEditId
               _etutFields
-              _etutAlt
+              (Just _etutAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsTestersUpdateAPI)
+                      (Proxy :: Proxy EditsTestersUpdateResource)
                       r
                       u

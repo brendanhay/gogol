@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,142 +20,148 @@
 -- | Delete the specified deals from the order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplacedealsDelete@.
-module AdExchangeBuyer.Marketplacedeals.Delete
+module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Delete
     (
     -- * REST Resource
-      MarketplacedealsDeleteAPI
+      MarketplacedealsDeleteResource
 
     -- * Creating a Request
-    , marketplacedealsDelete
-    , MarketplacedealsDelete
+    , marketplacedealsDelete'
+    , MarketplacedealsDelete'
 
     -- * Request Lenses
-    , mddQuotaUser
-    , mddPrettyPrint
-    , mddUserIp
-    , mddKey
-    , mddOauthToken
-    , mddOrderId
-    , mddFields
-    , mddAlt
+    , mdQuotaUser
+    , mdPrettyPrint
+    , mdUserIp
+    , mdKey
+    , mdOauthToken
+    , mdOrderId
+    , mdFields
+    , mdAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplacedealsDelete@ which the
--- 'MarketplacedealsDelete' request conforms to.
-type MarketplacedealsDeleteAPI =
+-- 'MarketplacedealsDelete'' request conforms to.
+type MarketplacedealsDeleteResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          "deals" :>
-           "delete" :> Post '[JSON] DeleteOrderDealsResponse
+           "delete" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] DeleteOrderDealsResponse
 
 -- | Delete the specified deals from the order
 --
--- /See:/ 'marketplacedealsDelete' smart constructor.
-data MarketplacedealsDelete = MarketplacedealsDelete
-    { _mddQuotaUser   :: !(Maybe Text)
-    , _mddPrettyPrint :: !Bool
-    , _mddUserIp      :: !(Maybe Text)
-    , _mddKey         :: !(Maybe Text)
-    , _mddOauthToken  :: !(Maybe Text)
-    , _mddOrderId     :: !Text
-    , _mddFields      :: !(Maybe Text)
-    , _mddAlt         :: !Text
+-- /See:/ 'marketplacedealsDelete'' smart constructor.
+data MarketplacedealsDelete' = MarketplacedealsDelete'
+    { _mdQuotaUser   :: !(Maybe Text)
+    , _mdPrettyPrint :: !Bool
+    , _mdUserIp      :: !(Maybe Text)
+    , _mdKey         :: !(Maybe Text)
+    , _mdOauthToken  :: !(Maybe Text)
+    , _mdOrderId     :: !Text
+    , _mdFields      :: !(Maybe Text)
+    , _mdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplacedealsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mddQuotaUser'
+-- * 'mdQuotaUser'
 --
--- * 'mddPrettyPrint'
+-- * 'mdPrettyPrint'
 --
--- * 'mddUserIp'
+-- * 'mdUserIp'
 --
--- * 'mddKey'
+-- * 'mdKey'
 --
--- * 'mddOauthToken'
+-- * 'mdOauthToken'
 --
--- * 'mddOrderId'
+-- * 'mdOrderId'
 --
--- * 'mddFields'
+-- * 'mdFields'
 --
--- * 'mddAlt'
-marketplacedealsDelete
+-- * 'mdAlt'
+marketplacedealsDelete'
     :: Text -- ^ 'orderId'
-    -> MarketplacedealsDelete
-marketplacedealsDelete pMddOrderId_ =
-    MarketplacedealsDelete
-    { _mddQuotaUser = Nothing
-    , _mddPrettyPrint = True
-    , _mddUserIp = Nothing
-    , _mddKey = Nothing
-    , _mddOauthToken = Nothing
-    , _mddOrderId = pMddOrderId_
-    , _mddFields = Nothing
-    , _mddAlt = "json"
+    -> MarketplacedealsDelete'
+marketplacedealsDelete' pMdOrderId_ =
+    MarketplacedealsDelete'
+    { _mdQuotaUser = Nothing
+    , _mdPrettyPrint = True
+    , _mdUserIp = Nothing
+    , _mdKey = Nothing
+    , _mdOauthToken = Nothing
+    , _mdOrderId = pMdOrderId_
+    , _mdFields = Nothing
+    , _mdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-mddQuotaUser :: Lens' MarketplacedealsDelete' (Maybe Text)
-mddQuotaUser
-  = lens _mddQuotaUser (\ s a -> s{_mddQuotaUser = a})
+mdQuotaUser :: Lens' MarketplacedealsDelete' (Maybe Text)
+mdQuotaUser
+  = lens _mdQuotaUser (\ s a -> s{_mdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-mddPrettyPrint :: Lens' MarketplacedealsDelete' Bool
-mddPrettyPrint
-  = lens _mddPrettyPrint
-      (\ s a -> s{_mddPrettyPrint = a})
+mdPrettyPrint :: Lens' MarketplacedealsDelete' Bool
+mdPrettyPrint
+  = lens _mdPrettyPrint
+      (\ s a -> s{_mdPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mddUserIp :: Lens' MarketplacedealsDelete' (Maybe Text)
-mddUserIp
-  = lens _mddUserIp (\ s a -> s{_mddUserIp = a})
+mdUserIp :: Lens' MarketplacedealsDelete' (Maybe Text)
+mdUserIp = lens _mdUserIp (\ s a -> s{_mdUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mddKey :: Lens' MarketplacedealsDelete' (Maybe Text)
-mddKey = lens _mddKey (\ s a -> s{_mddKey = a})
+mdKey :: Lens' MarketplacedealsDelete' (Maybe Text)
+mdKey = lens _mdKey (\ s a -> s{_mdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mddOauthToken :: Lens' MarketplacedealsDelete' (Maybe Text)
-mddOauthToken
-  = lens _mddOauthToken
-      (\ s a -> s{_mddOauthToken = a})
+mdOauthToken :: Lens' MarketplacedealsDelete' (Maybe Text)
+mdOauthToken
+  = lens _mdOauthToken (\ s a -> s{_mdOauthToken = a})
 
 -- | The orderId to delete deals from.
-mddOrderId :: Lens' MarketplacedealsDelete' Text
-mddOrderId
-  = lens _mddOrderId (\ s a -> s{_mddOrderId = a})
+mdOrderId :: Lens' MarketplacedealsDelete' Text
+mdOrderId
+  = lens _mdOrderId (\ s a -> s{_mdOrderId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-mddFields :: Lens' MarketplacedealsDelete' (Maybe Text)
-mddFields
-  = lens _mddFields (\ s a -> s{_mddFields = a})
+mdFields :: Lens' MarketplacedealsDelete' (Maybe Text)
+mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
 -- | Data format for the response.
-mddAlt :: Lens' MarketplacedealsDelete' Text
-mddAlt = lens _mddAlt (\ s a -> s{_mddAlt = a})
+mdAlt :: Lens' MarketplacedealsDelete' Alt
+mdAlt = lens _mdAlt (\ s a -> s{_mdAlt = a})
 
 instance GoogleRequest MarketplacedealsDelete' where
         type Rs MarketplacedealsDelete' =
              DeleteOrderDealsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplacedealsDelete{..}
-          = go _mddQuotaUser _mddPrettyPrint _mddUserIp _mddKey
-              _mddOauthToken
-              _mddOrderId
-              _mddFields
-              _mddAlt
+        requestWithRoute r u MarketplacedealsDelete'{..}
+          = go _mdQuotaUser (Just _mdPrettyPrint) _mdUserIp
+              _mdKey
+              _mdOauthToken
+              _mdOrderId
+              _mdFields
+              (Just _mdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplacedealsDeleteAPI)
+                      (Proxy :: Proxy MarketplacedealsDeleteResource)
                       r
                       u

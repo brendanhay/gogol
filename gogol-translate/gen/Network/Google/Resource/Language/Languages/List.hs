@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the source\/target languages supported by the API
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageLanguagesList@.
-module Language.Languages.List
+module Network.Google.Resource.Language.Languages.List
     (
     -- * REST Resource
-      LanguagesListAPI
+      LanguagesListResource
 
     -- * Creating a Request
-    , languagesList
-    , LanguagesList
+    , languagesList'
+    , LanguagesList'
 
     -- * Request Lenses
     , llQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @LanguageLanguagesList@ which the
--- 'LanguagesList' request conforms to.
-type LanguagesListAPI =
+-- 'LanguagesList'' request conforms to.
+type LanguagesListResource =
      "v2" :>
        "languages" :>
-         QueryParam "target" Text :>
-           Get '[JSON] LanguagesListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "target" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] LanguagesListResponse
 
 -- | List the source\/target languages supported by the API
 --
--- /See:/ 'languagesList' smart constructor.
-data LanguagesList = LanguagesList
+-- /See:/ 'languagesList'' smart constructor.
+data LanguagesList' = LanguagesList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
     , _llUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data LanguagesList = LanguagesList
     , _llOauthToken  :: !(Maybe Text)
     , _llTarget      :: !(Maybe Text)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Text
+    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesList'' with the minimum fields required to make a request.
@@ -83,10 +91,10 @@ data LanguagesList = LanguagesList
 -- * 'llFields'
 --
 -- * 'llAlt'
-languagesList
-    :: LanguagesList
-languagesList =
-    LanguagesList
+languagesList'
+    :: LanguagesList'
+languagesList' =
+    LanguagesList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llUserIp = Nothing
@@ -94,7 +102,7 @@ languagesList =
     , _llOauthToken = Nothing
     , _llTarget = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +144,21 @@ llFields :: Lens' LanguagesList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LanguagesList' Text
+llAlt :: Lens' LanguagesList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
         request = requestWithRoute defReq translateURL
-        requestWithRoute r u LanguagesList{..}
-          = go _llQuotaUser _llPrettyPrint _llUserIp _llKey
+        requestWithRoute r u LanguagesList'{..}
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+              _llKey
               _llOauthToken
               _llTarget
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LanguagesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LanguagesListResource)
+                      r
                       u

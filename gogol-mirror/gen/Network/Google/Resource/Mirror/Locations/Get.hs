@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a single location by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsGet@.
-module Mirror.Locations.Get
+module Network.Google.Resource.Mirror.Locations.Get
     (
     -- * REST Resource
-      LocationsGetAPI
+      LocationsGetResource
 
     -- * Creating a Request
-    , locationsGet
-    , LocationsGet
+    , locationsGet'
+    , LocationsGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorLocationsGet@ which the
--- 'LocationsGet' request conforms to.
-type LocationsGetAPI =
+-- 'LocationsGet'' request conforms to.
+type LocationsGetResource =
      "locations" :>
-       Capture "id" Text :> Get '[JSON] Location
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Location
 
 -- | Gets a single location by ID.
 --
--- /See:/ 'locationsGet' smart constructor.
-data LocationsGet = LocationsGet
+-- /See:/ 'locationsGet'' smart constructor.
+data LocationsGet' = LocationsGet'
     { _lgQuotaUser   :: !(Maybe Text)
     , _lgPrettyPrint :: !Bool
     , _lgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data LocationsGet = LocationsGet
     , _lgId          :: !Text
     , _lgOauthToken  :: !(Maybe Text)
     , _lgFields      :: !(Maybe Text)
-    , _lgAlt         :: !Text
+    , _lgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data LocationsGet = LocationsGet
 -- * 'lgFields'
 --
 -- * 'lgAlt'
-locationsGet
+locationsGet'
     :: Text -- ^ 'id'
-    -> LocationsGet
-locationsGet pLgId_ =
-    LocationsGet
+    -> LocationsGet'
+locationsGet' pLgId_ =
+    LocationsGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgUserIp = Nothing
@@ -93,7 +101,7 @@ locationsGet pLgId_ =
     , _lgId = pLgId_
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +142,21 @@ lgFields :: Lens' LocationsGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LocationsGet' Text
+lgAlt :: Lens' LocationsGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LocationsGet' where
         type Rs LocationsGet' = Location
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u LocationsGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgUserIp _lgKey
+        requestWithRoute r u LocationsGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
+              _lgKey
               _lgId
               _lgOauthToken
               _lgFields
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LocationsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LocationsGetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesPatch@.
-module DFAReporting.PlacementStrategies.Patch
+module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
     (
     -- * REST Resource
-      PlacementStrategiesPatchAPI
+      PlacementStrategiesPatchResource
 
     -- * Creating a Request
-    , placementStrategiesPatch
-    , PlacementStrategiesPatch
+    , placementStrategiesPatch'
+    , PlacementStrategiesPatch'
 
     -- * Request Lenses
     , pspQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementStrategiesPatch@ which the
--- 'PlacementStrategiesPatch' request conforms to.
-type PlacementStrategiesPatchAPI =
+-- 'PlacementStrategiesPatch'' request conforms to.
+type PlacementStrategiesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] PlacementStrategy
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy. This method supports patch
 -- semantics.
 --
--- /See:/ 'placementStrategiesPatch' smart constructor.
-data PlacementStrategiesPatch = PlacementStrategiesPatch
+-- /See:/ 'placementStrategiesPatch'' smart constructor.
+data PlacementStrategiesPatch' = PlacementStrategiesPatch'
     { _pspQuotaUser   :: !(Maybe Text)
     , _pspPrettyPrint :: !Bool
     , _pspUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data PlacementStrategiesPatch = PlacementStrategiesPatch
     , _pspId          :: !Int64
     , _pspOauthToken  :: !(Maybe Text)
     , _pspFields      :: !(Maybe Text)
-    , _pspAlt         :: !Text
+    , _pspAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data PlacementStrategiesPatch = PlacementStrategiesPatch
 -- * 'pspFields'
 --
 -- * 'pspAlt'
-placementStrategiesPatch
+placementStrategiesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> PlacementStrategiesPatch
-placementStrategiesPatch pPspProfileId_ pPspId_ =
-    PlacementStrategiesPatch
+    -> PlacementStrategiesPatch'
+placementStrategiesPatch' pPspProfileId_ pPspId_ =
+    PlacementStrategiesPatch'
     { _pspQuotaUser = Nothing
     , _pspPrettyPrint = True
     , _pspUserIp = Nothing
@@ -104,7 +112,7 @@ placementStrategiesPatch pPspProfileId_ pPspId_ =
     , _pspId = pPspId_
     , _pspOauthToken = Nothing
     , _pspFields = Nothing
-    , _pspAlt = "json"
+    , _pspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +161,23 @@ pspFields
   = lens _pspFields (\ s a -> s{_pspFields = a})
 
 -- | Data format for the response.
-pspAlt :: Lens' PlacementStrategiesPatch' Text
+pspAlt :: Lens' PlacementStrategiesPatch' Alt
 pspAlt = lens _pspAlt (\ s a -> s{_pspAlt = a})
 
 instance GoogleRequest PlacementStrategiesPatch'
          where
         type Rs PlacementStrategiesPatch' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesPatch{..}
-          = go _pspQuotaUser _pspPrettyPrint _pspUserIp
+        requestWithRoute r u PlacementStrategiesPatch'{..}
+          = go _pspQuotaUser (Just _pspPrettyPrint) _pspUserIp
               _pspProfileId
               _pspKey
               (Just _pspId)
               _pspOauthToken
               _pspFields
-              _pspAlt
+              (Just _pspAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementStrategiesPatchAPI)
+                      (Proxy :: Proxy PlacementStrategiesPatchResource)
                       r
                       u

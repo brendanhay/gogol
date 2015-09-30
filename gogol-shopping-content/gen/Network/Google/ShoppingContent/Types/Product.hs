@@ -3717,194 +3717,191 @@ instance ToJSON OrdersAcknowledgeResponse where
 --
 -- /See:/ 'order' smart constructor.
 data Order = Order
-    { _ordStatus          :: !(Maybe Text)
-    , _ordMerchantId      :: !(Maybe Word64)
-    , _ordRefunds         :: !(Maybe [Maybe OrderRefund])
-    , _ordKind            :: !Text
-    , _ordLineItems       :: !(Maybe [Maybe OrderLineItem])
-    , _ordShipments       :: !(Maybe [Maybe OrderShipment])
-    , _ordNetAmount       :: !(Maybe (Maybe Price))
-    , _ordPlacedDate      :: !(Maybe Text)
-    , _ordDeliveryDetails :: !(Maybe (Maybe OrderDeliveryDetails))
-    , _ordShippingOption  :: !(Maybe Text)
-    , _ordMerchantOrderId :: !(Maybe Text)
-    , _ordAcknowledged    :: !(Maybe Bool)
-    , _ordShippingCostTax :: !(Maybe (Maybe Price))
-    , _ordCustomer        :: !(Maybe (Maybe OrderCustomer))
-    , _ordId              :: !(Maybe Text)
-    , _ordPaymentMethod   :: !(Maybe (Maybe OrderPaymentMethod))
-    , _ordPaymentStatus   :: !(Maybe Text)
-    , _ordShippingCost    :: !(Maybe (Maybe Price))
+    { _ooStatus          :: !(Maybe Text)
+    , _ooMerchantId      :: !(Maybe Word64)
+    , _ooRefunds         :: !(Maybe [Maybe OrderRefund])
+    , _ooKind            :: !Text
+    , _ooLineItems       :: !(Maybe [Maybe OrderLineItem])
+    , _ooShipments       :: !(Maybe [Maybe OrderShipment])
+    , _ooNetAmount       :: !(Maybe (Maybe Price))
+    , _ooPlacedDate      :: !(Maybe Text)
+    , _ooDeliveryDetails :: !(Maybe (Maybe OrderDeliveryDetails))
+    , _ooShippingOption  :: !(Maybe Text)
+    , _ooMerchantOrderId :: !(Maybe Text)
+    , _ooAcknowledged    :: !(Maybe Bool)
+    , _ooShippingCostTax :: !(Maybe (Maybe Price))
+    , _ooCustomer        :: !(Maybe (Maybe OrderCustomer))
+    , _ooId              :: !(Maybe Text)
+    , _ooPaymentMethod   :: !(Maybe (Maybe OrderPaymentMethod))
+    , _ooPaymentStatus   :: !(Maybe Text)
+    , _ooShippingCost    :: !(Maybe (Maybe Price))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordStatus'
+-- * 'ooStatus'
 --
--- * 'ordMerchantId'
+-- * 'ooMerchantId'
 --
--- * 'ordRefunds'
+-- * 'ooRefunds'
 --
--- * 'ordKind'
+-- * 'ooKind'
 --
--- * 'ordLineItems'
+-- * 'ooLineItems'
 --
--- * 'ordShipments'
+-- * 'ooShipments'
 --
--- * 'ordNetAmount'
+-- * 'ooNetAmount'
 --
--- * 'ordPlacedDate'
+-- * 'ooPlacedDate'
 --
--- * 'ordDeliveryDetails'
+-- * 'ooDeliveryDetails'
 --
--- * 'ordShippingOption'
+-- * 'ooShippingOption'
 --
--- * 'ordMerchantOrderId'
+-- * 'ooMerchantOrderId'
 --
--- * 'ordAcknowledged'
+-- * 'ooAcknowledged'
 --
--- * 'ordShippingCostTax'
+-- * 'ooShippingCostTax'
 --
--- * 'ordCustomer'
+-- * 'ooCustomer'
 --
--- * 'ordId'
+-- * 'ooId'
 --
--- * 'ordPaymentMethod'
+-- * 'ooPaymentMethod'
 --
--- * 'ordPaymentStatus'
+-- * 'ooPaymentStatus'
 --
--- * 'ordShippingCost'
+-- * 'ooShippingCost'
 order
     :: Order
 order =
     Order
-    { _ordStatus = Nothing
-    , _ordMerchantId = Nothing
-    , _ordRefunds = Nothing
-    , _ordKind = "content#order"
-    , _ordLineItems = Nothing
-    , _ordShipments = Nothing
-    , _ordNetAmount = Nothing
-    , _ordPlacedDate = Nothing
-    , _ordDeliveryDetails = Nothing
-    , _ordShippingOption = Nothing
-    , _ordMerchantOrderId = Nothing
-    , _ordAcknowledged = Nothing
-    , _ordShippingCostTax = Nothing
-    , _ordCustomer = Nothing
-    , _ordId = Nothing
-    , _ordPaymentMethod = Nothing
-    , _ordPaymentStatus = Nothing
-    , _ordShippingCost = Nothing
+    { _ooStatus = Nothing
+    , _ooMerchantId = Nothing
+    , _ooRefunds = Nothing
+    , _ooKind = "content#order"
+    , _ooLineItems = Nothing
+    , _ooShipments = Nothing
+    , _ooNetAmount = Nothing
+    , _ooPlacedDate = Nothing
+    , _ooDeliveryDetails = Nothing
+    , _ooShippingOption = Nothing
+    , _ooMerchantOrderId = Nothing
+    , _ooAcknowledged = Nothing
+    , _ooShippingCostTax = Nothing
+    , _ooCustomer = Nothing
+    , _ooId = Nothing
+    , _ooPaymentMethod = Nothing
+    , _ooPaymentStatus = Nothing
+    , _ooShippingCost = Nothing
     }
 
 -- | The status of the order.
-ordStatus :: Lens' Order (Maybe Text)
-ordStatus
-  = lens _ordStatus (\ s a -> s{_ordStatus = a})
+ooStatus :: Lens' Order (Maybe Text)
+ooStatus = lens _ooStatus (\ s a -> s{_ooStatus = a})
 
-ordMerchantId :: Lens' Order (Maybe Word64)
-ordMerchantId
-  = lens _ordMerchantId
-      (\ s a -> s{_ordMerchantId = a})
+ooMerchantId :: Lens' Order (Maybe Word64)
+ooMerchantId
+  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
 
 -- | Refunds for the order.
-ordRefunds :: Lens' Order [Maybe OrderRefund]
-ordRefunds
-  = lens _ordRefunds (\ s a -> s{_ordRefunds = a}) .
+ooRefunds :: Lens' Order [Maybe OrderRefund]
+ooRefunds
+  = lens _ooRefunds (\ s a -> s{_ooRefunds = a}) .
       _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#order\".
-ordKind :: Lens' Order Text
-ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
+ooKind :: Lens' Order Text
+ooKind = lens _ooKind (\ s a -> s{_ooKind = a})
 
 -- | Line items that are ordered.
-ordLineItems :: Lens' Order [Maybe OrderLineItem]
-ordLineItems
-  = lens _ordLineItems (\ s a -> s{_ordLineItems = a})
-      . _Default
+ooLineItems :: Lens' Order [Maybe OrderLineItem]
+ooLineItems
+  = lens _ooLineItems (\ s a -> s{_ooLineItems = a}) .
+      _Default
       . _Coerce
 
 -- | Shipments of the order.
-ordShipments :: Lens' Order [Maybe OrderShipment]
-ordShipments
-  = lens _ordShipments (\ s a -> s{_ordShipments = a})
-      . _Default
+ooShipments :: Lens' Order [Maybe OrderShipment]
+ooShipments
+  = lens _ooShipments (\ s a -> s{_ooShipments = a}) .
+      _Default
       . _Coerce
 
 -- | The net amount for the order. For example, if an order was originally
 -- for a grand total of $100 and a refund was issued for $20, the net
 -- amount will be $80.
-ordNetAmount :: Lens' Order (Maybe (Maybe Price))
-ordNetAmount
-  = lens _ordNetAmount (\ s a -> s{_ordNetAmount = a})
+ooNetAmount :: Lens' Order (Maybe (Maybe Price))
+ooNetAmount
+  = lens _ooNetAmount (\ s a -> s{_ooNetAmount = a})
 
 -- | The date when the order was placed, in ISO 8601 format.
-ordPlacedDate :: Lens' Order (Maybe Text)
-ordPlacedDate
-  = lens _ordPlacedDate
-      (\ s a -> s{_ordPlacedDate = a})
+ooPlacedDate :: Lens' Order (Maybe Text)
+ooPlacedDate
+  = lens _ooPlacedDate (\ s a -> s{_ooPlacedDate = a})
 
 -- | The details for the delivery.
-ordDeliveryDetails :: Lens' Order (Maybe (Maybe OrderDeliveryDetails))
-ordDeliveryDetails
-  = lens _ordDeliveryDetails
-      (\ s a -> s{_ordDeliveryDetails = a})
+ooDeliveryDetails :: Lens' Order (Maybe (Maybe OrderDeliveryDetails))
+ooDeliveryDetails
+  = lens _ooDeliveryDetails
+      (\ s a -> s{_ooDeliveryDetails = a})
 
 -- | The requested shipping option.
-ordShippingOption :: Lens' Order (Maybe Text)
-ordShippingOption
-  = lens _ordShippingOption
-      (\ s a -> s{_ordShippingOption = a})
+ooShippingOption :: Lens' Order (Maybe Text)
+ooShippingOption
+  = lens _ooShippingOption
+      (\ s a -> s{_ooShippingOption = a})
 
 -- | Merchant-provided id of the order.
-ordMerchantOrderId :: Lens' Order (Maybe Text)
-ordMerchantOrderId
-  = lens _ordMerchantOrderId
-      (\ s a -> s{_ordMerchantOrderId = a})
+ooMerchantOrderId :: Lens' Order (Maybe Text)
+ooMerchantOrderId
+  = lens _ooMerchantOrderId
+      (\ s a -> s{_ooMerchantOrderId = a})
 
 -- | Whether the order was acknowledged.
-ordAcknowledged :: Lens' Order (Maybe Bool)
-ordAcknowledged
-  = lens _ordAcknowledged
-      (\ s a -> s{_ordAcknowledged = a})
+ooAcknowledged :: Lens' Order (Maybe Bool)
+ooAcknowledged
+  = lens _ooAcknowledged
+      (\ s a -> s{_ooAcknowledged = a})
 
 -- | The tax for the total shipping cost.
-ordShippingCostTax :: Lens' Order (Maybe (Maybe Price))
-ordShippingCostTax
-  = lens _ordShippingCostTax
-      (\ s a -> s{_ordShippingCostTax = a})
+ooShippingCostTax :: Lens' Order (Maybe (Maybe Price))
+ooShippingCostTax
+  = lens _ooShippingCostTax
+      (\ s a -> s{_ooShippingCostTax = a})
 
 -- | The details of the customer who placed the order.
-ordCustomer :: Lens' Order (Maybe (Maybe OrderCustomer))
-ordCustomer
-  = lens _ordCustomer (\ s a -> s{_ordCustomer = a})
+ooCustomer :: Lens' Order (Maybe (Maybe OrderCustomer))
+ooCustomer
+  = lens _ooCustomer (\ s a -> s{_ooCustomer = a})
 
 -- | The REST id of the order. Globally unique.
-ordId :: Lens' Order (Maybe Text)
-ordId = lens _ordId (\ s a -> s{_ordId = a})
+ooId :: Lens' Order (Maybe Text)
+ooId = lens _ooId (\ s a -> s{_ooId = a})
 
 -- | The details of the payment method.
-ordPaymentMethod :: Lens' Order (Maybe (Maybe OrderPaymentMethod))
-ordPaymentMethod
-  = lens _ordPaymentMethod
-      (\ s a -> s{_ordPaymentMethod = a})
+ooPaymentMethod :: Lens' Order (Maybe (Maybe OrderPaymentMethod))
+ooPaymentMethod
+  = lens _ooPaymentMethod
+      (\ s a -> s{_ooPaymentMethod = a})
 
 -- | The status of the payment.
-ordPaymentStatus :: Lens' Order (Maybe Text)
-ordPaymentStatus
-  = lens _ordPaymentStatus
-      (\ s a -> s{_ordPaymentStatus = a})
+ooPaymentStatus :: Lens' Order (Maybe Text)
+ooPaymentStatus
+  = lens _ooPaymentStatus
+      (\ s a -> s{_ooPaymentStatus = a})
 
 -- | The total cost of shipping for all items.
-ordShippingCost :: Lens' Order (Maybe (Maybe Price))
-ordShippingCost
-  = lens _ordShippingCost
-      (\ s a -> s{_ordShippingCost = a})
+ooShippingCost :: Lens' Order (Maybe (Maybe Price))
+ooShippingCost
+  = lens _ooShippingCost
+      (\ s a -> s{_ooShippingCost = a})
 
 instance FromJSON Order where
         parseJSON
@@ -3933,24 +3930,23 @@ instance ToJSON Order where
         toJSON Order{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _ordStatus,
-                  ("merchantId" .=) <$> _ordMerchantId,
-                  ("refunds" .=) <$> _ordRefunds,
-                  Just ("kind" .= _ordKind),
-                  ("lineItems" .=) <$> _ordLineItems,
-                  ("shipments" .=) <$> _ordShipments,
-                  ("netAmount" .=) <$> _ordNetAmount,
-                  ("placedDate" .=) <$> _ordPlacedDate,
-                  ("deliveryDetails" .=) <$> _ordDeliveryDetails,
-                  ("shippingOption" .=) <$> _ordShippingOption,
-                  ("merchantOrderId" .=) <$> _ordMerchantOrderId,
-                  ("acknowledged" .=) <$> _ordAcknowledged,
-                  ("shippingCostTax" .=) <$> _ordShippingCostTax,
-                  ("customer" .=) <$> _ordCustomer,
-                  ("id" .=) <$> _ordId,
-                  ("paymentMethod" .=) <$> _ordPaymentMethod,
-                  ("paymentStatus" .=) <$> _ordPaymentStatus,
-                  ("shippingCost" .=) <$> _ordShippingCost])
+                 [("status" .=) <$> _ooStatus,
+                  ("merchantId" .=) <$> _ooMerchantId,
+                  ("refunds" .=) <$> _ooRefunds,
+                  Just ("kind" .= _ooKind),
+                  ("lineItems" .=) <$> _ooLineItems,
+                  ("shipments" .=) <$> _ooShipments,
+                  ("netAmount" .=) <$> _ooNetAmount,
+                  ("placedDate" .=) <$> _ooPlacedDate,
+                  ("deliveryDetails" .=) <$> _ooDeliveryDetails,
+                  ("shippingOption" .=) <$> _ooShippingOption,
+                  ("merchantOrderId" .=) <$> _ooMerchantOrderId,
+                  ("acknowledged" .=) <$> _ooAcknowledged,
+                  ("shippingCostTax" .=) <$> _ooShippingCostTax,
+                  ("customer" .=) <$> _ooCustomer, ("id" .=) <$> _ooId,
+                  ("paymentMethod" .=) <$> _ooPaymentMethod,
+                  ("paymentStatus" .=) <$> _ooPaymentStatus,
+                  ("shippingCost" .=) <$> _ooShippingCost])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
@@ -4221,37 +4217,36 @@ instance ToJSON OrderCancellation where
 --
 -- /See:/ 'ordersCustomBatchResponse' smart constructor.
 data OrdersCustomBatchResponse = OrdersCustomBatchResponse
-    { _ocbrcEntries :: !(Maybe [Maybe OrdersCustomBatchResponseEntry])
-    , _ocbrcKind    :: !Text
+    { _ordEntries :: !(Maybe [Maybe OrdersCustomBatchResponseEntry])
+    , _ordKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocbrcEntries'
+-- * 'ordEntries'
 --
--- * 'ocbrcKind'
+-- * 'ordKind'
 ordersCustomBatchResponse
     :: OrdersCustomBatchResponse
 ordersCustomBatchResponse =
     OrdersCustomBatchResponse
-    { _ocbrcEntries = Nothing
-    , _ocbrcKind = "content#ordersCustomBatchResponse"
+    { _ordEntries = Nothing
+    , _ordKind = "content#ordersCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-ocbrcEntries :: Lens' OrdersCustomBatchResponse [Maybe OrdersCustomBatchResponseEntry]
-ocbrcEntries
-  = lens _ocbrcEntries (\ s a -> s{_ocbrcEntries = a})
-      . _Default
+ordEntries :: Lens' OrdersCustomBatchResponse [Maybe OrdersCustomBatchResponseEntry]
+ordEntries
+  = lens _ordEntries (\ s a -> s{_ordEntries = a}) .
+      _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCustomBatchResponse\".
-ocbrcKind :: Lens' OrdersCustomBatchResponse Text
-ocbrcKind
-  = lens _ocbrcKind (\ s a -> s{_ocbrcKind = a})
+ordKind :: Lens' OrdersCustomBatchResponse Text
+ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
 
 instance FromJSON OrdersCustomBatchResponse where
         parseJSON
@@ -4266,5 +4261,5 @@ instance ToJSON OrdersCustomBatchResponse where
         toJSON OrdersCustomBatchResponse{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _ocbrcEntries,
-                  Just ("kind" .= _ocbrcKind)])
+                 [("entries" .=) <$> _ordEntries,
+                  Just ("kind" .= _ordKind)])

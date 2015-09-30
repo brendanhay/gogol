@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesList@.
-module Blogger.Pages.List
+module Network.Google.Resource.Blogger.Pages.List
     (
     -- * REST Resource
-      PagesListAPI
+      PagesListResource
 
     -- * Creating a Request
-    , pagesList
-    , PagesList
+    , pagesList'
+    , PagesList'
 
     -- * Request Lenses
     , plStatus
@@ -48,35 +49,41 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesList@ which the
--- 'PagesList' request conforms to.
-type PagesListAPI =
+-- 'PagesList'' request conforms to.
+type PagesListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParams "status" Text :>
-             QueryParam "fetchBodies" Bool :>
-               QueryParam "view" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] PageList
+           QueryParams "status" BloggerPagesListStatus :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "fetchBodies" Bool :>
+                       QueryParam "view" BloggerPagesListView :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] PageList
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
--- /See:/ 'pagesList' smart constructor.
-data PagesList = PagesList
-    { _plStatus      :: !(Maybe Text)
+-- /See:/ 'pagesList'' smart constructor.
+data PagesList' = PagesList'
+    { _plStatus      :: !(Maybe BloggerPagesListStatus)
     , _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIp      :: !(Maybe Text)
     , _plBlogId      :: !Text
     , _plKey         :: !(Maybe Text)
     , _plFetchBodies :: !(Maybe Bool)
-    , _plView        :: !(Maybe Text)
+    , _plView        :: !(Maybe BloggerPagesListView)
     , _plPageToken   :: !(Maybe Text)
     , _plOauthToken  :: !(Maybe Text)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Text
+    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList'' with the minimum fields required to make a request.
@@ -108,11 +115,11 @@ data PagesList = PagesList
 -- * 'plFields'
 --
 -- * 'plAlt'
-pagesList
+pagesList'
     :: Text -- ^ 'blogId'
-    -> PagesList
-pagesList pPlBlogId_ =
-    PagesList
+    -> PagesList'
+pagesList' pPlBlogId_ =
+    PagesList'
     { _plStatus = Nothing
     , _plQuotaUser = Nothing
     , _plPrettyPrint = True
@@ -125,10 +132,10 @@ pagesList pPlBlogId_ =
     , _plOauthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
-plStatus :: Lens' PagesList' (Maybe Text)
+plStatus :: Lens' PagesList' (Maybe BloggerPagesListStatus)
 plStatus = lens _plStatus (\ s a -> s{_plStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,7 +174,7 @@ plFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-plView :: Lens' PagesList' (Maybe Text)
+plView :: Lens' PagesList' (Maybe BloggerPagesListView)
 plView = lens _plView (\ s a -> s{_plView = a})
 
 -- | Continuation token if the request is paged.
@@ -190,14 +197,15 @@ plFields :: Lens' PagesList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PagesList' Text
+plAlt :: Lens' PagesList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PagesList' where
         type Rs PagesList' = PageList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesList{..}
-          = go _plStatus _plQuotaUser _plPrettyPrint _plUserIp
+        requestWithRoute r u PagesList'{..}
+          = go _plStatus _plQuotaUser (Just _plPrettyPrint)
+              _plUserIp
               _plBlogId
               _plKey
               _plFetchBodies
@@ -206,6 +214,8 @@ instance GoogleRequest PagesList' where
               _plOauthToken
               _plMaxResults
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PagesListResource)
+                      r
+                      u

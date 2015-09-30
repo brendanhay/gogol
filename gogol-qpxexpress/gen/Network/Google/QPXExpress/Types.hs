@@ -247,6 +247,9 @@ module Network.Google.QPXExpress.Types
     , torSolutions
     , torSlice
     , torMaxPrice
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -254,7 +257,7 @@ import           Network.Google.QPXExpress.Types.Product
 import           Network.Google.QPXExpress.Types.Sum
 
 -- | URL referring to version 'v1' of the QPX Express API.
-qPXExpressURL :: BaseURL
+qPXExpressURL :: BaseUrl
 qPXExpressURL
   = BaseUrl Https
       "https://www.googleapis.com/qpxExpress/v1/trips/"

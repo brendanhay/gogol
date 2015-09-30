@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all members in a group (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersList@.
-module Directory.Members.List
+module Network.Google.Resource.Directory.Members.List
     (
     -- * REST Resource
-      MembersListAPI
+      MembersListResource
 
     -- * Creating a Request
-    , membersList
-    , MembersList
+    , membersList'
+    , MembersList'
 
     -- * Request Lenses
     , mlQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersList@ which the
--- 'MembersList' request conforms to.
-type MembersListAPI =
+-- 'MembersList'' request conforms to.
+type MembersListResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           QueryParam "roles" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :> Get '[JSON] Members
+           QueryParam "quotaUser" Text :>
+             QueryParam "roles" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Members
 
 -- | Retrieve all members in a group (paginated)
 --
--- /See:/ 'membersList' smart constructor.
-data MembersList = MembersList
+-- /See:/ 'membersList'' smart constructor.
+data MembersList' = MembersList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlRoles       :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
@@ -69,7 +77,7 @@ data MembersList = MembersList
     , _mlOauthToken  :: !(Maybe Text)
     , _mlMaxResults  :: !(Maybe Int32)
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Text
+    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersList'' with the minimum fields required to make a request.
@@ -97,11 +105,11 @@ data MembersList = MembersList
 -- * 'mlFields'
 --
 -- * 'mlAlt'
-membersList
+membersList'
     :: Text -- ^ 'groupKey'
-    -> MembersList
-membersList pMlGroupKey_ =
-    MembersList
+    -> MembersList'
+membersList' pMlGroupKey_ =
+    MembersList'
     { _mlQuotaUser = Nothing
     , _mlRoles = Nothing
     , _mlPrettyPrint = True
@@ -112,7 +120,7 @@ membersList pMlGroupKey_ =
     , _mlOauthToken = Nothing
     , _mlMaxResults = Nothing
     , _mlFields = Nothing
-    , _mlAlt = "json"
+    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,20 +176,24 @@ mlFields :: Lens' MembersList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | Data format for the response.
-mlAlt :: Lens' MembersList' Text
+mlAlt :: Lens' MembersList' Alt
 mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
 
 instance GoogleRequest MembersList' where
         type Rs MembersList' = Members
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersList{..}
-          = go _mlQuotaUser _mlRoles _mlPrettyPrint _mlUserIp
+        requestWithRoute r u MembersList'{..}
+          = go _mlQuotaUser _mlRoles (Just _mlPrettyPrint)
+              _mlUserIp
               _mlGroupKey
               _mlKey
               _mlPageToken
               _mlOauthToken
               _mlMaxResults
               _mlFields
-              _mlAlt
+              (Just _mlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy MembersListResource)
+                      r
+                      u

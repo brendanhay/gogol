@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified TargetPool resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsGet@.
-module Compute.TargetPools.Get
+module Network.Google.Resource.Compute.TargetPools.Get
     (
     -- * REST Resource
-      TargetPoolsGetAPI
+      TargetPoolsGetResource
 
     -- * Creating a Request
-    , targetPoolsGet
-    , TargetPoolsGet
+    , targetPoolsGet'
+    , TargetPoolsGet'
 
     -- * Request Lenses
     , tpgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsGet@ which the
--- 'TargetPoolsGet' request conforms to.
-type TargetPoolsGetAPI =
+-- 'TargetPoolsGet'' request conforms to.
+type TargetPoolsGetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
-             Capture "targetPool" Text :> Get '[JSON] TargetPool
+             Capture "targetPool" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] TargetPool
 
 -- | Returns the specified TargetPool resource.
 --
--- /See:/ 'targetPoolsGet' smart constructor.
-data TargetPoolsGet = TargetPoolsGet
+-- /See:/ 'targetPoolsGet'' smart constructor.
+data TargetPoolsGet' = TargetPoolsGet'
     { _tpgQuotaUser   :: !(Maybe Text)
     , _tpgPrettyPrint :: !Bool
     , _tpgProject     :: !Text
@@ -66,7 +74,7 @@ data TargetPoolsGet = TargetPoolsGet
     , _tpgRegion      :: !Text
     , _tpgOauthToken  :: !(Maybe Text)
     , _tpgFields      :: !(Maybe Text)
-    , _tpgAlt         :: !Text
+    , _tpgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data TargetPoolsGet = TargetPoolsGet
 -- * 'tpgFields'
 --
 -- * 'tpgAlt'
-targetPoolsGet
+targetPoolsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsGet
-targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
-    TargetPoolsGet
+    -> TargetPoolsGet'
+targetPoolsGet' pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
+    TargetPoolsGet'
     { _tpgQuotaUser = Nothing
     , _tpgPrettyPrint = True
     , _tpgProject = pTpgProject_
@@ -108,7 +116,7 @@ targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
     , _tpgRegion = pTpgRegion_
     , _tpgOauthToken = Nothing
     , _tpgFields = Nothing
-    , _tpgAlt = "json"
+    , _tpgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,22 +172,23 @@ tpgFields
   = lens _tpgFields (\ s a -> s{_tpgFields = a})
 
 -- | Data format for the response.
-tpgAlt :: Lens' TargetPoolsGet' Text
+tpgAlt :: Lens' TargetPoolsGet' Alt
 tpgAlt = lens _tpgAlt (\ s a -> s{_tpgAlt = a})
 
 instance GoogleRequest TargetPoolsGet' where
         type Rs TargetPoolsGet' = TargetPool
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsGet{..}
-          = go _tpgQuotaUser _tpgPrettyPrint _tpgProject
+        requestWithRoute r u TargetPoolsGet'{..}
+          = go _tpgQuotaUser (Just _tpgPrettyPrint) _tpgProject
               _tpgTargetPool
               _tpgUserIp
               _tpgKey
               _tpgRegion
               _tpgOauthToken
               _tpgFields
-              _tpgAlt
+              (Just _tpgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TargetPoolsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TargetPoolsGetResource)
                       r
                       u

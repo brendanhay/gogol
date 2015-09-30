@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- until its expiration time.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherPurchasesSubscriptionsCancel@.
-module Androidpublisher.Purchases.Subscriptions.Cancel
+module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Cancel
     (
     -- * REST Resource
-      PurchasesSubscriptionsCancelAPI
+      PurchasesSubscriptionsCancelResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsCancel
-    , PurchasesSubscriptionsCancel
+    , purchasesSubscriptionsCancel'
+    , PurchasesSubscriptionsCancel'
 
     -- * Request Lenses
     , pscQuotaUser
@@ -46,19 +47,27 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherPurchasesSubscriptionsCancel@ which the
--- 'PurchasesSubscriptionsCancel' request conforms to.
-type PurchasesSubscriptionsCancelAPI =
+-- 'PurchasesSubscriptionsCancel'' request conforms to.
+type PurchasesSubscriptionsCancelResource =
      Capture "packageName" Text :>
        "purchases" :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "tokens" :> "{token}:cancel" :> Post '[JSON] ()
+             "tokens" :>
+               "{token}:cancel" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Cancels a user\'s subscription purchase. The subscription remains valid
 -- until its expiration time.
 --
--- /See:/ 'purchasesSubscriptionsCancel' smart constructor.
-data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel
+-- /See:/ 'purchasesSubscriptionsCancel'' smart constructor.
+data PurchasesSubscriptionsCancel' = PurchasesSubscriptionsCancel'
     { _pscQuotaUser      :: !(Maybe Text)
     , _pscPrettyPrint    :: !Bool
     , _pscPackageName    :: !Text
@@ -68,7 +77,7 @@ data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel
     , _pscOauthToken     :: !(Maybe Text)
     , _pscSubscriptionId :: !Text
     , _pscFields         :: !(Maybe Text)
-    , _pscAlt            :: !Text
+    , _pscAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsCancel'' with the minimum fields required to make a request.
@@ -94,13 +103,13 @@ data PurchasesSubscriptionsCancel = PurchasesSubscriptionsCancel
 -- * 'pscFields'
 --
 -- * 'pscAlt'
-purchasesSubscriptionsCancel
+purchasesSubscriptionsCancel'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
     -> Text -- ^ 'subscriptionId'
-    -> PurchasesSubscriptionsCancel
-purchasesSubscriptionsCancel pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
-    PurchasesSubscriptionsCancel
+    -> PurchasesSubscriptionsCancel'
+purchasesSubscriptionsCancel' pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
+    PurchasesSubscriptionsCancel'
     { _pscQuotaUser = Nothing
     , _pscPrettyPrint = True
     , _pscPackageName = pPscPackageName_
@@ -110,7 +119,7 @@ purchasesSubscriptionsCancel pPscPackageName_ pPscToken_ pPscSubscriptionId_ =
     , _pscOauthToken = Nothing
     , _pscSubscriptionId = pPscSubscriptionId_
     , _pscFields = Nothing
-    , _pscAlt = "json"
+    , _pscAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,24 +177,26 @@ pscFields
   = lens _pscFields (\ s a -> s{_pscFields = a})
 
 -- | Data format for the response.
-pscAlt :: Lens' PurchasesSubscriptionsCancel' Text
+pscAlt :: Lens' PurchasesSubscriptionsCancel' Alt
 pscAlt = lens _pscAlt (\ s a -> s{_pscAlt = a})
 
 instance GoogleRequest PurchasesSubscriptionsCancel'
          where
         type Rs PurchasesSubscriptionsCancel' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u PurchasesSubscriptionsCancel{..}
-          = go _pscQuotaUser _pscPrettyPrint _pscPackageName
+        requestWithRoute r u
+          PurchasesSubscriptionsCancel'{..}
+          = go _pscQuotaUser (Just _pscPrettyPrint)
+              _pscPackageName
               _pscUserIp
               _pscToken
               _pscKey
               _pscOauthToken
               _pscSubscriptionId
               _pscFields
-              _pscAlt
+              (Just _pscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PurchasesSubscriptionsCancelAPI)
+                      (Proxy :: Proxy PurchasesSubscriptionsCancelResource)
                       r
                       u

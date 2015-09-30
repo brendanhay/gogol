@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,145 +20,159 @@
 -- | Returns the specified route resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesGet@.
-module Compute.Routes.Get
+module Network.Google.Resource.Compute.Routes.Get
     (
     -- * REST Resource
-      RoutesGetAPI
+      RoutesGetResource
 
     -- * Creating a Request
-    , routesGet
-    , RoutesGet
+    , routesGet'
+    , RoutesGet'
 
     -- * Request Lenses
-    , rgQuotaUser
-    , rgPrettyPrint
-    , rgProject
-    , rgUserIp
-    , rgRoute
-    , rgKey
-    , rgOauthToken
-    , rgFields
-    , rgAlt
+    , rouQuotaUser
+    , rouPrettyPrint
+    , rouProject
+    , rouUserIp
+    , rouRoute
+    , rouKey
+    , rouOauthToken
+    , rouFields
+    , rouAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRoutesGet@ which the
--- 'RoutesGet' request conforms to.
-type RoutesGetAPI =
+-- 'RoutesGet'' request conforms to.
+type RoutesGetResource =
      Capture "project" Text :>
        "global" :>
-         "routes" :> Capture "route" Text :> Get '[JSON] Route
+         "routes" :>
+           Capture "route" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Route
 
 -- | Returns the specified route resource.
 --
--- /See:/ 'routesGet' smart constructor.
-data RoutesGet = RoutesGet
-    { _rgQuotaUser   :: !(Maybe Text)
-    , _rgPrettyPrint :: !Bool
-    , _rgProject     :: !Text
-    , _rgUserIp      :: !(Maybe Text)
-    , _rgRoute       :: !Text
-    , _rgKey         :: !(Maybe Text)
-    , _rgOauthToken  :: !(Maybe Text)
-    , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+-- /See:/ 'routesGet'' smart constructor.
+data RoutesGet' = RoutesGet'
+    { _rouQuotaUser   :: !(Maybe Text)
+    , _rouPrettyPrint :: !Bool
+    , _rouProject     :: !Text
+    , _rouUserIp      :: !(Maybe Text)
+    , _rouRoute       :: !Text
+    , _rouKey         :: !(Maybe Text)
+    , _rouOauthToken  :: !(Maybe Text)
+    , _rouFields      :: !(Maybe Text)
+    , _rouAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgQuotaUser'
+-- * 'rouQuotaUser'
 --
--- * 'rgPrettyPrint'
+-- * 'rouPrettyPrint'
 --
--- * 'rgProject'
+-- * 'rouProject'
 --
--- * 'rgUserIp'
+-- * 'rouUserIp'
 --
--- * 'rgRoute'
+-- * 'rouRoute'
 --
--- * 'rgKey'
+-- * 'rouKey'
 --
--- * 'rgOauthToken'
+-- * 'rouOauthToken'
 --
--- * 'rgFields'
+-- * 'rouFields'
 --
--- * 'rgAlt'
-routesGet
+-- * 'rouAlt'
+routesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'route'
-    -> RoutesGet
-routesGet pRgProject_ pRgRoute_ =
-    RoutesGet
-    { _rgQuotaUser = Nothing
-    , _rgPrettyPrint = True
-    , _rgProject = pRgProject_
-    , _rgUserIp = Nothing
-    , _rgRoute = pRgRoute_
-    , _rgKey = Nothing
-    , _rgOauthToken = Nothing
-    , _rgFields = Nothing
-    , _rgAlt = "json"
+    -> RoutesGet'
+routesGet' pRouProject_ pRouRoute_ =
+    RoutesGet'
+    { _rouQuotaUser = Nothing
+    , _rouPrettyPrint = True
+    , _rouProject = pRouProject_
+    , _rouUserIp = Nothing
+    , _rouRoute = pRouRoute_
+    , _rouKey = Nothing
+    , _rouOauthToken = Nothing
+    , _rouFields = Nothing
+    , _rouAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rgQuotaUser :: Lens' RoutesGet' (Maybe Text)
-rgQuotaUser
-  = lens _rgQuotaUser (\ s a -> s{_rgQuotaUser = a})
+rouQuotaUser :: Lens' RoutesGet' (Maybe Text)
+rouQuotaUser
+  = lens _rouQuotaUser (\ s a -> s{_rouQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rgPrettyPrint :: Lens' RoutesGet' Bool
-rgPrettyPrint
-  = lens _rgPrettyPrint
-      (\ s a -> s{_rgPrettyPrint = a})
+rouPrettyPrint :: Lens' RoutesGet' Bool
+rouPrettyPrint
+  = lens _rouPrettyPrint
+      (\ s a -> s{_rouPrettyPrint = a})
 
 -- | Name of the project scoping this request.
-rgProject :: Lens' RoutesGet' Text
-rgProject
-  = lens _rgProject (\ s a -> s{_rgProject = a})
+rouProject :: Lens' RoutesGet' Text
+rouProject
+  = lens _rouProject (\ s a -> s{_rouProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' RoutesGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rouUserIp :: Lens' RoutesGet' (Maybe Text)
+rouUserIp
+  = lens _rouUserIp (\ s a -> s{_rouUserIp = a})
 
 -- | Name of the route resource to return.
-rgRoute :: Lens' RoutesGet' Text
-rgRoute = lens _rgRoute (\ s a -> s{_rgRoute = a})
+rouRoute :: Lens' RoutesGet' Text
+rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' RoutesGet' (Maybe Text)
-rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
+rouKey :: Lens' RoutesGet' (Maybe Text)
+rouKey = lens _rouKey (\ s a -> s{_rouKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' RoutesGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rouOauthToken :: Lens' RoutesGet' (Maybe Text)
+rouOauthToken
+  = lens _rouOauthToken
+      (\ s a -> s{_rouOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rgFields :: Lens' RoutesGet' (Maybe Text)
-rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
+rouFields :: Lens' RoutesGet' (Maybe Text)
+rouFields
+  = lens _rouFields (\ s a -> s{_rouFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' RoutesGet' Text
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+rouAlt :: Lens' RoutesGet' Alt
+rouAlt = lens _rouAlt (\ s a -> s{_rouAlt = a})
 
 instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgProject _rgUserIp
-              _rgRoute
-              _rgKey
-              _rgOauthToken
-              _rgFields
-              _rgAlt
+        requestWithRoute r u RoutesGet'{..}
+          = go _rouQuotaUser (Just _rouPrettyPrint) _rouProject
+              _rouUserIp
+              _rouRoute
+              _rouKey
+              _rouOauthToken
+              _rouFields
+              (Just _rouAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoutesGetResource)
+                      r
+                      u

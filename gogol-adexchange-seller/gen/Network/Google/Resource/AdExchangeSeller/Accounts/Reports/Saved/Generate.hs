@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- query parameters.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsReportsSavedGenerate@.
-module AdExchangeSeller.Accounts.Reports.Saved.Generate
+module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
     (
     -- * REST Resource
-      AccountsReportsSavedGenerateAPI
+      AccountsReportsSavedGenerateResource
 
     -- * Creating a Request
-    , accountsReportsSavedGenerate
-    , AccountsReportsSavedGenerate
+    , accountsReportsSavedGenerate'
+    , AccountsReportsSavedGenerate'
 
     -- * Request Lenses
     , arsgQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsReportsSavedGenerate@ which the
--- 'AccountsReportsSavedGenerate' request conforms to.
-type AccountsReportsSavedGenerateAPI =
+-- 'AccountsReportsSavedGenerate'' request conforms to.
+type AccountsReportsSavedGenerateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "reports" :>
            Capture "savedReportId" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "startIndex" Int32 :>
-                 QueryParam "maxResults" Int32 :> Get '[JSON] Report
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "startIndex" Int32 :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Report
 
 -- | Generate an Ad Exchange report based on the saved report ID sent in the
 -- query parameters.
 --
--- /See:/ 'accountsReportsSavedGenerate' smart constructor.
-data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
+-- /See:/ 'accountsReportsSavedGenerate'' smart constructor.
+data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
     { _arsgQuotaUser     :: !(Maybe Text)
     , _arsgPrettyPrint   :: !Bool
     , _arsgUserIp        :: !(Maybe Text)
@@ -74,7 +82,7 @@ data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
     , _arsgStartIndex    :: !(Maybe Int32)
     , _arsgMaxResults    :: !(Maybe Int32)
     , _arsgFields        :: !(Maybe Text)
-    , _arsgAlt           :: !Text
+    , _arsgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedGenerate'' with the minimum fields required to make a request.
@@ -104,12 +112,12 @@ data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
 -- * 'arsgFields'
 --
 -- * 'arsgAlt'
-accountsReportsSavedGenerate
+accountsReportsSavedGenerate'
     :: Text -- ^ 'savedReportId'
     -> Text -- ^ 'accountId'
-    -> AccountsReportsSavedGenerate
-accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
-    AccountsReportsSavedGenerate
+    -> AccountsReportsSavedGenerate'
+accountsReportsSavedGenerate' pArsgSavedReportId_ pArsgAccountId_ =
+    AccountsReportsSavedGenerate'
     { _arsgQuotaUser = Nothing
     , _arsgPrettyPrint = True
     , _arsgUserIp = Nothing
@@ -121,7 +129,7 @@ accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
     , _arsgStartIndex = Nothing
     , _arsgMaxResults = Nothing
     , _arsgFields = Nothing
-    , _arsgAlt = "json"
+    , _arsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -192,15 +200,17 @@ arsgFields
   = lens _arsgFields (\ s a -> s{_arsgFields = a})
 
 -- | Data format for the response.
-arsgAlt :: Lens' AccountsReportsSavedGenerate' Text
+arsgAlt :: Lens' AccountsReportsSavedGenerate' Alt
 arsgAlt = lens _arsgAlt (\ s a -> s{_arsgAlt = a})
 
 instance GoogleRequest AccountsReportsSavedGenerate'
          where
         type Rs AccountsReportsSavedGenerate' = Report
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsReportsSavedGenerate{..}
-          = go _arsgQuotaUser _arsgPrettyPrint _arsgUserIp
+        requestWithRoute r u
+          AccountsReportsSavedGenerate'{..}
+          = go _arsgQuotaUser (Just _arsgPrettyPrint)
+              _arsgUserIp
               _arsgLocale
               _arsgSavedReportId
               _arsgAccountId
@@ -209,9 +219,9 @@ instance GoogleRequest AccountsReportsSavedGenerate'
               _arsgStartIndex
               _arsgMaxResults
               _arsgFields
-              _arsgAlt
+              (Just _arsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsReportsSavedGenerateAPI)
+                      (Proxy :: Proxy AccountsReportsSavedGenerateResource)
                       r
                       u

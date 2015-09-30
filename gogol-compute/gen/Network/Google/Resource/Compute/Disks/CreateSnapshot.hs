@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a snapshot of this disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksCreateSnapshot@.
-module Compute.Disks.CreateSnapshot
+module Network.Google.Resource.Compute.Disks.CreateSnapshot
     (
     -- * REST Resource
-      DisksCreateSnapshotAPI
+      DisksCreateSnapshotResource
 
     -- * Creating a Request
-    , disksCreateSnapshot
-    , DisksCreateSnapshot
+    , disksCreateSnapshot'
+    , DisksCreateSnapshot'
 
     -- * Request Lenses
     , dcsQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksCreateSnapshot@ which the
--- 'DisksCreateSnapshot' request conforms to.
-type DisksCreateSnapshotAPI =
+-- 'DisksCreateSnapshot'' request conforms to.
+type DisksCreateSnapshotResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
              Capture "disk" Text :>
-               "createSnapshot" :> Post '[JSON] Operation
+               "createSnapshot" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a snapshot of this disk.
 --
--- /See:/ 'disksCreateSnapshot' smart constructor.
-data DisksCreateSnapshot = DisksCreateSnapshot
+-- /See:/ 'disksCreateSnapshot'' smart constructor.
+data DisksCreateSnapshot' = DisksCreateSnapshot'
     { _dcsQuotaUser   :: !(Maybe Text)
     , _dcsPrettyPrint :: !Bool
     , _dcsProject     :: !Text
@@ -67,7 +75,7 @@ data DisksCreateSnapshot = DisksCreateSnapshot
     , _dcsKey         :: !(Maybe Text)
     , _dcsOauthToken  :: !(Maybe Text)
     , _dcsFields      :: !(Maybe Text)
-    , _dcsAlt         :: !Text
+    , _dcsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksCreateSnapshot'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data DisksCreateSnapshot = DisksCreateSnapshot
 -- * 'dcsFields'
 --
 -- * 'dcsAlt'
-disksCreateSnapshot
+disksCreateSnapshot'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
     -> Text -- ^ 'zone'
-    -> DisksCreateSnapshot
-disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ =
-    DisksCreateSnapshot
+    -> DisksCreateSnapshot'
+disksCreateSnapshot' pDcsProject_ pDcsDisk_ pDcsZone_ =
+    DisksCreateSnapshot'
     { _dcsQuotaUser = Nothing
     , _dcsPrettyPrint = True
     , _dcsProject = pDcsProject_
@@ -109,7 +117,7 @@ disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ =
     , _dcsKey = Nothing
     , _dcsOauthToken = Nothing
     , _dcsFields = Nothing
-    , _dcsAlt = "json"
+    , _dcsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,23 +170,23 @@ dcsFields
   = lens _dcsFields (\ s a -> s{_dcsFields = a})
 
 -- | Data format for the response.
-dcsAlt :: Lens' DisksCreateSnapshot' Text
+dcsAlt :: Lens' DisksCreateSnapshot' Alt
 dcsAlt = lens _dcsAlt (\ s a -> s{_dcsAlt = a})
 
 instance GoogleRequest DisksCreateSnapshot' where
         type Rs DisksCreateSnapshot' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksCreateSnapshot{..}
-          = go _dcsQuotaUser _dcsPrettyPrint _dcsProject
+        requestWithRoute r u DisksCreateSnapshot'{..}
+          = go _dcsQuotaUser (Just _dcsPrettyPrint) _dcsProject
               _dcsDisk
               _dcsUserIp
               _dcsZone
               _dcsKey
               _dcsOauthToken
               _dcsFields
-              _dcsAlt
+              (Just _dcsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DisksCreateSnapshotAPI)
+                      (Proxy :: Proxy DisksCreateSnapshotResource)
                       r
                       u

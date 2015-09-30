@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a call set. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsPatch@.
-module Genomics.Callsets.Patch
+module Network.Google.Resource.Genomics.Callsets.Patch
     (
     -- * REST Resource
-      CallsetsPatchAPI
+      CallsetsPatchResource
 
     -- * Creating a Request
-    , callsetsPatch
-    , CallsetsPatch
+    , callsetsPatch'
+    , CallsetsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsPatch@ which the
--- 'CallsetsPatch' request conforms to.
-type CallsetsPatchAPI =
+-- 'CallsetsPatch'' request conforms to.
+type CallsetsPatchResource =
      "callsets" :>
-       Capture "callSetId" Text :> Patch '[JSON] CallSet
+       Capture "callSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] CallSet
 
 -- | Updates a call set. This method supports patch semantics.
 --
--- /See:/ 'callsetsPatch' smart constructor.
-data CallsetsPatch = CallsetsPatch
+-- /See:/ 'callsetsPatch'' smart constructor.
+data CallsetsPatch' = CallsetsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CallsetsPatch = CallsetsPatch
     , _cpCallSetId   :: !Text
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CallsetsPatch = CallsetsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-callsetsPatch
+callsetsPatch'
     :: Text -- ^ 'callSetId'
-    -> CallsetsPatch
-callsetsPatch pCpCallSetId_ =
-    CallsetsPatch
+    -> CallsetsPatch'
+callsetsPatch' pCpCallSetId_ =
+    CallsetsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -93,7 +101,7 @@ callsetsPatch pCpCallSetId_ =
     , _cpCallSetId = pCpCallSetId_
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ cpFields :: Lens' CallsetsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CallsetsPatch' Text
+cpAlt :: Lens' CallsetsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CallsetsPatch' where
         type Rs CallsetsPatch' = CallSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp _cpKey
+        requestWithRoute r u CallsetsPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+              _cpKey
               _cpCallSetId
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsPatchResource)
+                      r
                       u

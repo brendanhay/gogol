@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the metadata for the metrics available to this AdExchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsMetadataMetricsList@.
-module AdExchangeSeller.Accounts.Metadata.Metrics.List
+module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
     (
     -- * REST Resource
-      AccountsMetadataMetricsListAPI
+      AccountsMetadataMetricsListResource
 
     -- * Creating a Request
-    , accountsMetadataMetricsList
-    , AccountsMetadataMetricsList
+    , accountsMetadataMetricsList'
+    , AccountsMetadataMetricsList'
 
     -- * Request Lenses
     , ammlQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsMetadataMetricsList@ which the
--- 'AccountsMetadataMetricsList' request conforms to.
-type AccountsMetadataMetricsListAPI =
+-- 'AccountsMetadataMetricsList'' request conforms to.
+type AccountsMetadataMetricsListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "metadata" :> "metrics" :> Get '[JSON] Metadata
+         "metadata" :>
+           "metrics" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdExchange account.
 --
--- /See:/ 'accountsMetadataMetricsList' smart constructor.
-data AccountsMetadataMetricsList = AccountsMetadataMetricsList
+-- /See:/ 'accountsMetadataMetricsList'' smart constructor.
+data AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
     { _ammlQuotaUser   :: !(Maybe Text)
     , _ammlPrettyPrint :: !Bool
     , _ammlUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data AccountsMetadataMetricsList = AccountsMetadataMetricsList
     , _ammlKey         :: !(Maybe Text)
     , _ammlOauthToken  :: !(Maybe Text)
     , _ammlFields      :: !(Maybe Text)
-    , _ammlAlt         :: !Text
+    , _ammlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsMetadataMetricsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data AccountsMetadataMetricsList = AccountsMetadataMetricsList
 -- * 'ammlFields'
 --
 -- * 'ammlAlt'
-accountsMetadataMetricsList
+accountsMetadataMetricsList'
     :: Text -- ^ 'accountId'
-    -> AccountsMetadataMetricsList
-accountsMetadataMetricsList pAmmlAccountId_ =
-    AccountsMetadataMetricsList
+    -> AccountsMetadataMetricsList'
+accountsMetadataMetricsList' pAmmlAccountId_ =
+    AccountsMetadataMetricsList'
     { _ammlQuotaUser = Nothing
     , _ammlPrettyPrint = True
     , _ammlUserIp = Nothing
@@ -94,7 +103,7 @@ accountsMetadataMetricsList pAmmlAccountId_ =
     , _ammlKey = Nothing
     , _ammlOauthToken = Nothing
     , _ammlFields = Nothing
-    , _ammlAlt = "json"
+    , _ammlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,22 +150,23 @@ ammlFields
   = lens _ammlFields (\ s a -> s{_ammlFields = a})
 
 -- | Data format for the response.
-ammlAlt :: Lens' AccountsMetadataMetricsList' Text
+ammlAlt :: Lens' AccountsMetadataMetricsList' Alt
 ammlAlt = lens _ammlAlt (\ s a -> s{_ammlAlt = a})
 
 instance GoogleRequest AccountsMetadataMetricsList'
          where
         type Rs AccountsMetadataMetricsList' = Metadata
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsMetadataMetricsList{..}
-          = go _ammlQuotaUser _ammlPrettyPrint _ammlUserIp
+        requestWithRoute r u AccountsMetadataMetricsList'{..}
+          = go _ammlQuotaUser (Just _ammlPrettyPrint)
+              _ammlUserIp
               _ammlAccountId
               _ammlKey
               _ammlOauthToken
               _ammlFields
-              _ammlAlt
+              (Just _ammlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsMetadataMetricsListAPI)
+                      (Proxy :: Proxy AccountsMetadataMetricsListResource)
                       r
                       u

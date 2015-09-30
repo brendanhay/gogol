@@ -28,46 +28,46 @@ module Network.Google.ProximityBeacon
     -- * REST Resources
 
     -- ** ProximitybeaconBeaconinfoGetforobserved
-    , module ProximityBeacon.Beaconinfo.Getforobserved
+    , module Network.Google.Resource.ProximityBeacon.Beaconinfo.Getforobserved
 
     -- ** ProximitybeaconBeaconsActivate
-    , module ProximityBeacon.Beacons.Activate
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Activate
 
     -- ** ProximitybeaconBeaconsAttachmentsBatchDelete
-    , module ProximityBeacon.Beacons.Attachments.BatchDelete
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
 
     -- ** ProximitybeaconBeaconsAttachmentsCreate
-    , module ProximityBeacon.Beacons.Attachments.Create
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
 
     -- ** ProximitybeaconBeaconsAttachmentsDelete
-    , module ProximityBeacon.Beacons.Attachments.Delete
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
 
     -- ** ProximitybeaconBeaconsAttachmentsList
-    , module ProximityBeacon.Beacons.Attachments.List
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
 
     -- ** ProximitybeaconBeaconsDeactivate
-    , module ProximityBeacon.Beacons.Deactivate
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
 
     -- ** ProximitybeaconBeaconsDecommission
-    , module ProximityBeacon.Beacons.Decommission
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
 
     -- ** ProximitybeaconBeaconsDiagnosticsList
-    , module ProximityBeacon.Beacons.Diagnostics.List
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
 
     -- ** ProximitybeaconBeaconsGet
-    , module ProximityBeacon.Beacons.Get
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Get
 
     -- ** ProximitybeaconBeaconsList
-    , module ProximityBeacon.Beacons.List
+    , module Network.Google.Resource.ProximityBeacon.Beacons.List
 
     -- ** ProximitybeaconBeaconsRegister
-    , module ProximityBeacon.Beacons.Register
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Register
 
     -- ** ProximitybeaconBeaconsUpdate
-    , module ProximityBeacon.Beacons.Update
+    , module Network.Google.Resource.ProximityBeacon.Beacons.Update
 
     -- ** ProximitybeaconNamespacesList
-    , module ProximityBeacon.Namespaces.List
+    , module Network.Google.Resource.ProximityBeacon.Namespaces.List
 
     -- * Types
 
@@ -86,6 +86,10 @@ module Network.Google.ProximityBeacon
     -- ** Empty
     , Empty
     , empty
+
+    -- ** BeaconProperties
+    , BeaconProperties
+    , beaconProperties
 
     -- ** DeleteAttachmentsResponse
     , DeleteAttachmentsResponse
@@ -215,7 +219,20 @@ TODO
 -}
 
 type ProximityBeaconAPI =
-     Beacons :<|> Namespaces :<|> Beaconinfo
+     BeaconsAttachmentsListResource :<|>
+       BeaconsAttachmentsCreateResource
+       :<|> BeaconsAttachmentsBatchDeleteResource
+       :<|> BeaconsAttachmentsDeleteResource
+       :<|> BeaconsDiagnosticsListResource
+       :<|> BeaconsListResource
+       :<|> BeaconsDeactivateResource
+       :<|> BeaconsGetResource
+       :<|> BeaconsActivateResource
+       :<|> BeaconsRegisterResource
+       :<|> BeaconsDecommissionResource
+       :<|> BeaconsUpdateResource
+       :<|> NamespacesListResource
+       :<|> BeaconinfoGetforobservedResource
 
 proximityBeaconAPI :: Proxy ProximityBeaconAPI
 proximityBeaconAPI = Proxy

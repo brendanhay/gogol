@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the account info.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyGetAccountInfo@.
-module IdentityToolkit.Relyingparty.GetAccountInfo
+module Network.Google.Resource.IdentityToolkit.Relyingparty.GetAccountInfo
     (
     -- * REST Resource
-      RelyingpartyGetAccountInfoAPI
+      RelyingpartyGetAccountInfoResource
 
     -- * Creating a Request
-    , relyingpartyGetAccountInfo
-    , RelyingpartyGetAccountInfo
+    , relyingpartyGetAccountInfo'
+    , RelyingpartyGetAccountInfo'
 
     -- * Request Lenses
     , rgaiQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyGetAccountInfo@ which the
--- 'RelyingpartyGetAccountInfo' request conforms to.
-type RelyingpartyGetAccountInfoAPI =
+-- 'RelyingpartyGetAccountInfo'' request conforms to.
+type RelyingpartyGetAccountInfoResource =
      "getAccountInfo" :>
-       Post '[JSON] GetAccountInfoResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] GetAccountInfoResponse
 
 -- | Returns the account info.
 --
--- /See:/ 'relyingpartyGetAccountInfo' smart constructor.
-data RelyingpartyGetAccountInfo = RelyingpartyGetAccountInfo
+-- /See:/ 'relyingpartyGetAccountInfo'' smart constructor.
+data RelyingpartyGetAccountInfo' = RelyingpartyGetAccountInfo'
     { _rgaiQuotaUser   :: !(Maybe Text)
     , _rgaiPrettyPrint :: !Bool
     , _rgaiUserIp      :: !(Maybe Text)
     , _rgaiKey         :: !(Maybe Text)
     , _rgaiOauthToken  :: !(Maybe Text)
     , _rgaiFields      :: !(Maybe Text)
-    , _rgaiAlt         :: !Text
+    , _rgaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyGetAccountInfo'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data RelyingpartyGetAccountInfo = RelyingpartyGetAccountInfo
 -- * 'rgaiFields'
 --
 -- * 'rgaiAlt'
-relyingpartyGetAccountInfo
-    :: RelyingpartyGetAccountInfo
-relyingpartyGetAccountInfo =
-    RelyingpartyGetAccountInfo
+relyingpartyGetAccountInfo'
+    :: RelyingpartyGetAccountInfo'
+relyingpartyGetAccountInfo' =
+    RelyingpartyGetAccountInfo'
     { _rgaiQuotaUser = Nothing
     , _rgaiPrettyPrint = True
     , _rgaiUserIp = Nothing
     , _rgaiKey = Nothing
     , _rgaiOauthToken = Nothing
     , _rgaiFields = Nothing
-    , _rgaiAlt = "json"
+    , _rgaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +136,7 @@ rgaiFields
   = lens _rgaiFields (\ s a -> s{_rgaiFields = a})
 
 -- | Data format for the response.
-rgaiAlt :: Lens' RelyingpartyGetAccountInfo' Text
+rgaiAlt :: Lens' RelyingpartyGetAccountInfo' Alt
 rgaiAlt = lens _rgaiAlt (\ s a -> s{_rgaiAlt = a})
 
 instance GoogleRequest RelyingpartyGetAccountInfo'
@@ -136,14 +144,15 @@ instance GoogleRequest RelyingpartyGetAccountInfo'
         type Rs RelyingpartyGetAccountInfo' =
              GetAccountInfoResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyGetAccountInfo{..}
-          = go _rgaiQuotaUser _rgaiPrettyPrint _rgaiUserIp
+        requestWithRoute r u RelyingpartyGetAccountInfo'{..}
+          = go _rgaiQuotaUser (Just _rgaiPrettyPrint)
+              _rgaiUserIp
               _rgaiKey
               _rgaiOauthToken
               _rgaiFields
-              _rgaiAlt
+              (Just _rgaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyGetAccountInfoAPI)
+                      (Proxy :: Proxy RelyingpartyGetAccountInfoResource)
                       r
                       u

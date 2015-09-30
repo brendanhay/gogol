@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientaccessPatch@.
-module AdExchangeBuyer.Clientaccess.Patch
+module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Patch
     (
     -- * REST Resource
-      ClientaccessPatchAPI
+      ClientaccessPatchResource
 
     -- * Creating a Request
-    , clientaccessPatch
-    , ClientaccessPatch
+    , clientaccessPatch'
+    , ClientaccessPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientaccessPatch@ which the
--- 'ClientaccessPatch' request conforms to.
-type ClientaccessPatchAPI =
+-- 'ClientaccessPatch'' request conforms to.
+type ClientaccessPatchResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           Patch '[JSON] ClientAccessCapabilities
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "sponsorAccountId" Int32 :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Patch '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientaccessPatch' smart constructor.
-data ClientaccessPatch = ClientaccessPatch
+-- /See:/ 'clientaccessPatch'' smart constructor.
+data ClientaccessPatch' = ClientaccessPatch'
     { _cpQuotaUser        :: !(Maybe Text)
     , _cpPrettyPrint      :: !Bool
     , _cpUserIp           :: !(Maybe Text)
@@ -62,7 +70,7 @@ data ClientaccessPatch = ClientaccessPatch
     , _cpClientAccountId  :: !Int64
     , _cpOauthToken       :: !(Maybe Text)
     , _cpFields           :: !(Maybe Text)
-    , _cpAlt              :: !Text
+    , _cpAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientaccessPatch'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data ClientaccessPatch = ClientaccessPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-clientaccessPatch
+clientaccessPatch'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientaccessPatch
-clientaccessPatch pCpSponsorAccountId_ pCpClientAccountId_ =
-    ClientaccessPatch
+    -> ClientaccessPatch'
+clientaccessPatch' pCpSponsorAccountId_ pCpClientAccountId_ =
+    ClientaccessPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -100,7 +108,7 @@ clientaccessPatch pCpSponsorAccountId_ pCpClientAccountId_ =
     , _cpClientAccountId = pCpClientAccountId_
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,22 +155,22 @@ cpFields :: Lens' ClientaccessPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' ClientaccessPatch' Text
+cpAlt :: Lens' ClientaccessPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest ClientaccessPatch' where
         type Rs ClientaccessPatch' = ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientaccessPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp
+        requestWithRoute r u ClientaccessPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
               (Just _cpSponsorAccountId)
               _cpKey
               _cpClientAccountId
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ClientaccessPatchAPI)
+                      (Proxy :: Proxy ClientaccessPatchResource)
                       r
                       u

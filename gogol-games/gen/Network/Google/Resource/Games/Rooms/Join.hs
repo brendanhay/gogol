@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- directly is unsupported.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsJoin@.
-module Games.Rooms.Join
+module Network.Google.Resource.Games.Rooms.Join
     (
     -- * REST Resource
-      RoomsJoinAPI
+      RoomsJoinResource
 
     -- * Creating a Request
-    , roomsJoin
-    , RoomsJoin
+    , roomsJoin'
+    , RoomsJoin'
 
     -- * Request Lenses
     , rjQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsJoin@ which the
--- 'RoomsJoin' request conforms to.
-type RoomsJoinAPI =
+-- 'RoomsJoin'' request conforms to.
+type RoomsJoinResource =
      "rooms" :>
        Capture "roomId" Text :>
          "join" :>
-           QueryParam "language" Text :> Post '[JSON] Room
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Room
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.
 --
--- /See:/ 'roomsJoin' smart constructor.
-data RoomsJoin = RoomsJoin
+-- /See:/ 'roomsJoin'' smart constructor.
+data RoomsJoin' = RoomsJoin'
     { _rjQuotaUser   :: !(Maybe Text)
     , _rjPrettyPrint :: !Bool
     , _rjUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data RoomsJoin = RoomsJoin
     , _rjLanguage    :: !(Maybe Text)
     , _rjOauthToken  :: !(Maybe Text)
     , _rjFields      :: !(Maybe Text)
-    , _rjAlt         :: !Text
+    , _rjAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsJoin'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data RoomsJoin = RoomsJoin
 -- * 'rjFields'
 --
 -- * 'rjAlt'
-roomsJoin
+roomsJoin'
     :: Text -- ^ 'roomId'
-    -> RoomsJoin
-roomsJoin pRjRoomId_ =
-    RoomsJoin
+    -> RoomsJoin'
+roomsJoin' pRjRoomId_ =
+    RoomsJoin'
     { _rjQuotaUser = Nothing
     , _rjPrettyPrint = True
     , _rjUserIp = Nothing
@@ -102,7 +110,7 @@ roomsJoin pRjRoomId_ =
     , _rjLanguage = Nothing
     , _rjOauthToken = Nothing
     , _rjFields = Nothing
-    , _rjAlt = "json"
+    , _rjAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,21 @@ rjFields :: Lens' RoomsJoin' (Maybe Text)
 rjFields = lens _rjFields (\ s a -> s{_rjFields = a})
 
 -- | Data format for the response.
-rjAlt :: Lens' RoomsJoin' Text
+rjAlt :: Lens' RoomsJoin' Alt
 rjAlt = lens _rjAlt (\ s a -> s{_rjAlt = a})
 
 instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsJoin{..}
-          = go _rjQuotaUser _rjPrettyPrint _rjUserIp _rjKey
+        requestWithRoute r u RoomsJoin'{..}
+          = go _rjQuotaUser (Just _rjPrettyPrint) _rjUserIp
+              _rjKey
               _rjRoomId
               _rjLanguage
               _rjOauthToken
               _rjFields
-              _rjAlt
+              (Just _rjAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsJoinAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoomsJoinResource)
+                      r
+                      u

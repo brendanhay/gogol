@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update Organization Unit. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsPatch@.
-module Directory.Orgunits.Patch
+module Network.Google.Resource.Directory.Orgunits.Patch
     (
     -- * REST Resource
-      OrgunitsPatchAPI
+      OrgunitsPatchResource
 
     -- * Creating a Request
-    , orgunitsPatch
-    , OrgunitsPatch
+    , orgunitsPatch'
+    , OrgunitsPatch'
 
     -- * Request Lenses
     , opQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsPatch@ which the
--- 'OrgunitsPatch' request conforms to.
-type OrgunitsPatchAPI =
+-- 'OrgunitsPatch'' request conforms to.
+type OrgunitsPatchResource =
      "customer" :>
        Capture "customerId" Text :>
          "orgunits{" :>
-           "orgUnitPath*}" :> Patch '[JSON] OrgUnit
+           "orgUnitPath*}" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] OrgUnit
 
 -- | Update Organization Unit. This method supports patch semantics.
 --
--- /See:/ 'orgunitsPatch' smart constructor.
-data OrgunitsPatch = OrgunitsPatch
+-- /See:/ 'orgunitsPatch'' smart constructor.
+data OrgunitsPatch' = OrgunitsPatch'
     { _opQuotaUser   :: !(Maybe Text)
     , _opPrettyPrint :: !Bool
     , _opUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data OrgunitsPatch = OrgunitsPatch
     , _opKey         :: !(Maybe Text)
     , _opOauthToken  :: !(Maybe Text)
     , _opFields      :: !(Maybe Text)
-    , _opAlt         :: !Text
+    , _opAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data OrgunitsPatch = OrgunitsPatch
 -- * 'opFields'
 --
 -- * 'opAlt'
-orgunitsPatch
+orgunitsPatch'
     :: Text -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
-    -> OrgunitsPatch
-orgunitsPatch pOpOrgUnitPath_ pOpCustomerId_ =
-    OrgunitsPatch
+    -> OrgunitsPatch'
+orgunitsPatch' pOpOrgUnitPath_ pOpCustomerId_ =
+    OrgunitsPatch'
     { _opQuotaUser = Nothing
     , _opPrettyPrint = True
     , _opUserIp = Nothing
@@ -101,7 +109,7 @@ orgunitsPatch pOpOrgUnitPath_ pOpCustomerId_ =
     , _opKey = Nothing
     , _opOauthToken = Nothing
     , _opFields = Nothing
-    , _opAlt = "json"
+    , _opAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,20 +157,22 @@ opFields :: Lens' OrgunitsPatch' (Maybe Text)
 opFields = lens _opFields (\ s a -> s{_opFields = a})
 
 -- | Data format for the response.
-opAlt :: Lens' OrgunitsPatch' Text
+opAlt :: Lens' OrgunitsPatch' Alt
 opAlt = lens _opAlt (\ s a -> s{_opAlt = a})
 
 instance GoogleRequest OrgunitsPatch' where
         type Rs OrgunitsPatch' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsPatch{..}
-          = go _opQuotaUser _opPrettyPrint _opUserIp
+        requestWithRoute r u OrgunitsPatch'{..}
+          = go _opQuotaUser (Just _opPrettyPrint) _opUserIp
               _opOrgUnitPath
               _opCustomerId
               _opKey
               _opOauthToken
               _opFields
-              _opAlt
+              (Just _opAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsPatchResource)
+                      r
                       u

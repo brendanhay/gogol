@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomchannelsAdunitsList@.
-module AdSense.Customchannels.Adunits.List
+module Network.Google.Resource.AdSense.Customchannels.Adunits.List
     (
     -- * REST Resource
-      CustomchannelsAdunitsListAPI
+      CustomchannelsAdunitsListResource
 
     -- * Creating a Request
-    , customchannelsAdunitsList
-    , CustomchannelsAdunitsList
+    , customchannelsAdunitsList'
+    , CustomchannelsAdunitsList'
 
     -- * Request Lenses
     , calQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseCustomchannelsAdunitsList@ which the
--- 'CustomchannelsAdunitsList' request conforms to.
-type CustomchannelsAdunitsListAPI =
+-- 'CustomchannelsAdunitsList'' request conforms to.
+type CustomchannelsAdunitsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
            Capture "customChannelId" Text :>
              "adunits" :>
-               QueryParam "includeInactive" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :> Get '[JSON] AdUnits
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "includeInactive" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified custom channel.
 --
--- /See:/ 'customchannelsAdunitsList' smart constructor.
-data CustomchannelsAdunitsList = CustomchannelsAdunitsList
+-- /See:/ 'customchannelsAdunitsList'' smart constructor.
+data CustomchannelsAdunitsList' = CustomchannelsAdunitsList'
     { _calQuotaUser       :: !(Maybe Text)
     , _calPrettyPrint     :: !Bool
     , _calIncludeInactive :: !(Maybe Bool)
@@ -73,7 +81,7 @@ data CustomchannelsAdunitsList = CustomchannelsAdunitsList
     , _calOauthToken      :: !(Maybe Text)
     , _calMaxResults      :: !(Maybe Int32)
     , _calFields          :: !(Maybe Text)
-    , _calAlt             :: !Text
+    , _calAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsAdunitsList'' with the minimum fields required to make a request.
@@ -103,12 +111,12 @@ data CustomchannelsAdunitsList = CustomchannelsAdunitsList
 -- * 'calFields'
 --
 -- * 'calAlt'
-customchannelsAdunitsList
+customchannelsAdunitsList'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
-    -> CustomchannelsAdunitsList
-customchannelsAdunitsList pCalCustomChannelId_ pCalAdClientId_ =
-    CustomchannelsAdunitsList
+    -> CustomchannelsAdunitsList'
+customchannelsAdunitsList' pCalCustomChannelId_ pCalAdClientId_ =
+    CustomchannelsAdunitsList'
     { _calQuotaUser = Nothing
     , _calPrettyPrint = True
     , _calIncludeInactive = Nothing
@@ -120,7 +128,7 @@ customchannelsAdunitsList pCalCustomChannelId_ pCalAdClientId_ =
     , _calOauthToken = Nothing
     , _calMaxResults = Nothing
     , _calFields = Nothing
-    , _calAlt = "json"
+    , _calAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -192,15 +200,15 @@ calFields
   = lens _calFields (\ s a -> s{_calFields = a})
 
 -- | Data format for the response.
-calAlt :: Lens' CustomchannelsAdunitsList' Text
+calAlt :: Lens' CustomchannelsAdunitsList' Alt
 calAlt = lens _calAlt (\ s a -> s{_calAlt = a})
 
 instance GoogleRequest CustomchannelsAdunitsList'
          where
         type Rs CustomchannelsAdunitsList' = AdUnits
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u CustomchannelsAdunitsList{..}
-          = go _calQuotaUser _calPrettyPrint
+        requestWithRoute r u CustomchannelsAdunitsList'{..}
+          = go _calQuotaUser (Just _calPrettyPrint)
               _calIncludeInactive
               _calCustomChannelId
               _calUserIp
@@ -210,9 +218,9 @@ instance GoogleRequest CustomchannelsAdunitsList'
               _calOauthToken
               _calMaxResults
               _calFields
-              _calAlt
+              (Just _calAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsAdunitsListAPI)
+                      (Proxy :: Proxy CustomchannelsAdunitsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,134 +20,146 @@
 -- | Mutate a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersPatch@.
-module Mapsengine.Layers.Patch
+module Network.Google.Resource.Mapsengine.Layers.Patch
     (
     -- * REST Resource
-      LayersPatchAPI
+      LayersPatchResource
 
     -- * Creating a Request
-    , layersPatch
-    , LayersPatch
+    , layersPatch'
+    , LayersPatch'
 
     -- * Request Lenses
-    , lppQuotaUser
-    , lppPrettyPrint
-    , lppUserIp
-    , lppKey
-    , lppId
-    , lppOauthToken
-    , lppFields
-    , lppAlt
+    , layQuotaUser
+    , layPrettyPrint
+    , layUserIp
+    , layKey
+    , layId
+    , layOauthToken
+    , layFields
+    , layAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersPatch@ which the
--- 'LayersPatch' request conforms to.
-type LayersPatchAPI =
-     "layers" :> Capture "id" Text :> Patch '[JSON] ()
+-- 'LayersPatch'' request conforms to.
+type LayersPatchResource =
+     "layers" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] ()
 
 -- | Mutate a layer asset.
 --
--- /See:/ 'layersPatch' smart constructor.
-data LayersPatch = LayersPatch
-    { _lppQuotaUser   :: !(Maybe Text)
-    , _lppPrettyPrint :: !Bool
-    , _lppUserIp      :: !(Maybe Text)
-    , _lppKey         :: !(Maybe Text)
-    , _lppId          :: !Text
-    , _lppOauthToken  :: !(Maybe Text)
-    , _lppFields      :: !(Maybe Text)
-    , _lppAlt         :: !Text
+-- /See:/ 'layersPatch'' smart constructor.
+data LayersPatch' = LayersPatch'
+    { _layQuotaUser   :: !(Maybe Text)
+    , _layPrettyPrint :: !Bool
+    , _layUserIp      :: !(Maybe Text)
+    , _layKey         :: !(Maybe Text)
+    , _layId          :: !Text
+    , _layOauthToken  :: !(Maybe Text)
+    , _layFields      :: !(Maybe Text)
+    , _layAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lppQuotaUser'
+-- * 'layQuotaUser'
 --
--- * 'lppPrettyPrint'
+-- * 'layPrettyPrint'
 --
--- * 'lppUserIp'
+-- * 'layUserIp'
 --
--- * 'lppKey'
+-- * 'layKey'
 --
--- * 'lppId'
+-- * 'layId'
 --
--- * 'lppOauthToken'
+-- * 'layOauthToken'
 --
--- * 'lppFields'
+-- * 'layFields'
 --
--- * 'lppAlt'
-layersPatch
+-- * 'layAlt'
+layersPatch'
     :: Text -- ^ 'id'
-    -> LayersPatch
-layersPatch pLppId_ =
-    LayersPatch
-    { _lppQuotaUser = Nothing
-    , _lppPrettyPrint = True
-    , _lppUserIp = Nothing
-    , _lppKey = Nothing
-    , _lppId = pLppId_
-    , _lppOauthToken = Nothing
-    , _lppFields = Nothing
-    , _lppAlt = "json"
+    -> LayersPatch'
+layersPatch' pLayId_ =
+    LayersPatch'
+    { _layQuotaUser = Nothing
+    , _layPrettyPrint = True
+    , _layUserIp = Nothing
+    , _layKey = Nothing
+    , _layId = pLayId_
+    , _layOauthToken = Nothing
+    , _layFields = Nothing
+    , _layAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-lppQuotaUser :: Lens' LayersPatch' (Maybe Text)
-lppQuotaUser
-  = lens _lppQuotaUser (\ s a -> s{_lppQuotaUser = a})
+layQuotaUser :: Lens' LayersPatch' (Maybe Text)
+layQuotaUser
+  = lens _layQuotaUser (\ s a -> s{_layQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-lppPrettyPrint :: Lens' LayersPatch' Bool
-lppPrettyPrint
-  = lens _lppPrettyPrint
-      (\ s a -> s{_lppPrettyPrint = a})
+layPrettyPrint :: Lens' LayersPatch' Bool
+layPrettyPrint
+  = lens _layPrettyPrint
+      (\ s a -> s{_layPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lppUserIp :: Lens' LayersPatch' (Maybe Text)
-lppUserIp
-  = lens _lppUserIp (\ s a -> s{_lppUserIp = a})
+layUserIp :: Lens' LayersPatch' (Maybe Text)
+layUserIp
+  = lens _layUserIp (\ s a -> s{_layUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lppKey :: Lens' LayersPatch' (Maybe Text)
-lppKey = lens _lppKey (\ s a -> s{_lppKey = a})
+layKey :: Lens' LayersPatch' (Maybe Text)
+layKey = lens _layKey (\ s a -> s{_layKey = a})
 
 -- | The ID of the layer.
-lppId :: Lens' LayersPatch' Text
-lppId = lens _lppId (\ s a -> s{_lppId = a})
+layId :: Lens' LayersPatch' Text
+layId = lens _layId (\ s a -> s{_layId = a})
 
 -- | OAuth 2.0 token for the current user.
-lppOauthToken :: Lens' LayersPatch' (Maybe Text)
-lppOauthToken
-  = lens _lppOauthToken
-      (\ s a -> s{_lppOauthToken = a})
+layOauthToken :: Lens' LayersPatch' (Maybe Text)
+layOauthToken
+  = lens _layOauthToken
+      (\ s a -> s{_layOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-lppFields :: Lens' LayersPatch' (Maybe Text)
-lppFields
-  = lens _lppFields (\ s a -> s{_lppFields = a})
+layFields :: Lens' LayersPatch' (Maybe Text)
+layFields
+  = lens _layFields (\ s a -> s{_layFields = a})
 
 -- | Data format for the response.
-lppAlt :: Lens' LayersPatch' Text
-lppAlt = lens _lppAlt (\ s a -> s{_lppAlt = a})
+layAlt :: Lens' LayersPatch' Alt
+layAlt = lens _layAlt (\ s a -> s{_layAlt = a})
 
 instance GoogleRequest LayersPatch' where
         type Rs LayersPatch' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersPatch{..}
-          = go _lppQuotaUser _lppPrettyPrint _lppUserIp _lppKey
-              _lppId
-              _lppOauthToken
-              _lppFields
-              _lppAlt
+        requestWithRoute r u LayersPatch'{..}
+          = go _layQuotaUser (Just _layPrettyPrint) _layUserIp
+              _layKey
+              _layId
+              _layOauthToken
+              _layFields
+              (Just _layAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersPatchResource)
+                      r
+                      u

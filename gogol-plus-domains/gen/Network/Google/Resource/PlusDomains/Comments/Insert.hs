@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new comment in reply to an activity.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCommentsInsert@.
-module PlusDomains.Comments.Insert
+module Network.Google.Resource.PlusDomains.Comments.Insert
     (
     -- * REST Resource
-      CommentsInsertAPI
+      CommentsInsertResource
 
     -- * Creating a Request
-    , commentsInsert
-    , CommentsInsert
+    , commentsInsert'
+    , CommentsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCommentsInsert@ which the
--- 'CommentsInsert' request conforms to.
-type CommentsInsertAPI =
+-- 'CommentsInsert'' request conforms to.
+type CommentsInsertResource =
      "activities" :>
        Capture "activityId" Text :>
-         "comments" :> Post '[JSON] Comment
+         "comments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Comment
 
 -- | Create a new comment in reply to an activity.
 --
--- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
+-- /See:/ 'commentsInsert'' smart constructor.
+data CommentsInsert' = CommentsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CommentsInsert = CommentsInsert
     , _ciKey         :: !(Maybe Text)
     , _ciOauthToken  :: !(Maybe Text)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CommentsInsert = CommentsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-commentsInsert
+commentsInsert'
     :: Text -- ^ 'activityId'
-    -> CommentsInsert
-commentsInsert pCiActivityId_ =
-    CommentsInsert
+    -> CommentsInsert'
+commentsInsert' pCiActivityId_ =
+    CommentsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
@@ -94,7 +102,7 @@ commentsInsert pCiActivityId_ =
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +144,21 @@ ciFields :: Lens' CommentsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CommentsInsert' Text
+ciAlt :: Lens' CommentsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CommentsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp
+        requestWithRoute r u CommentsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
               _ciActivityId
               _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsInsertResource)
                       r
                       u

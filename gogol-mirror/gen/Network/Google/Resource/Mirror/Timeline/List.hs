@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of timeline items for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineList@.
-module Mirror.Timeline.List
+module Network.Google.Resource.Mirror.Timeline.List
     (
     -- * REST Resource
-      TimelineListAPI
+      TimelineListResource
 
     -- * Creating a Request
-    , timelineList
-    , TimelineList
+    , timelineList'
+    , TimelineList'
 
     -- * Request Lenses
     , tlPinnedOnly
@@ -49,26 +50,33 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineList@ which the
--- 'TimelineList' request conforms to.
-type TimelineListAPI =
+-- 'TimelineList'' request conforms to.
+type TimelineListResource =
      "timeline" :>
        QueryParam "pinnedOnly" Bool :>
-         QueryParam "orderBy" Text :>
-           QueryParam "bundleId" Text :>
-             QueryParam "sourceItemId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     Get '[JSON] TimelineListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "orderBy" MirrorTimelineListOrderBy :>
+               QueryParam "userIp" Text :>
+                 QueryParam "bundleId" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "sourceItemId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "includeDeleted" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] TimelineListResponse
 
 -- | Retrieves a list of timeline items for the authenticated user.
 --
--- /See:/ 'timelineList' smart constructor.
-data TimelineList = TimelineList
+-- /See:/ 'timelineList'' smart constructor.
+data TimelineList' = TimelineList'
     { _tlPinnedOnly     :: !(Maybe Bool)
     , _tlQuotaUser      :: !(Maybe Text)
     , _tlPrettyPrint    :: !Bool
-    , _tlOrderBy        :: !(Maybe Text)
+    , _tlOrderBy        :: !(Maybe MirrorTimelineListOrderBy)
     , _tlUserIp         :: !(Maybe Text)
     , _tlBundleId       :: !(Maybe Text)
     , _tlKey            :: !(Maybe Text)
@@ -78,7 +86,7 @@ data TimelineList = TimelineList
     , _tlMaxResults     :: !(Maybe Word32)
     , _tlIncludeDeleted :: !(Maybe Bool)
     , _tlFields         :: !(Maybe Text)
-    , _tlAlt            :: !Text
+    , _tlAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineList'' with the minimum fields required to make a request.
@@ -112,10 +120,10 @@ data TimelineList = TimelineList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-timelineList
-    :: TimelineList
-timelineList =
-    TimelineList
+timelineList'
+    :: TimelineList'
+timelineList' =
+    TimelineList'
     { _tlPinnedOnly = Nothing
     , _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
@@ -129,7 +137,7 @@ timelineList =
     , _tlMaxResults = Nothing
     , _tlIncludeDeleted = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | If true, only pinned items will be returned.
@@ -151,7 +159,7 @@ tlPrettyPrint
       (\ s a -> s{_tlPrettyPrint = a})
 
 -- | Controls the order in which timeline items are returned.
-tlOrderBy :: Lens' TimelineList' (Maybe Text)
+tlOrderBy :: Lens' TimelineList' (Maybe MirrorTimelineListOrderBy)
 tlOrderBy
   = lens _tlOrderBy (\ s a -> s{_tlOrderBy = a})
 
@@ -203,14 +211,14 @@ tlFields :: Lens' TimelineList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TimelineList' Text
+tlAlt :: Lens' TimelineList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TimelineList' where
         type Rs TimelineList' = TimelineListResponse
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineList{..}
-          = go _tlPinnedOnly _tlQuotaUser _tlPrettyPrint
+        requestWithRoute r u TimelineList'{..}
+          = go _tlPinnedOnly _tlQuotaUser (Just _tlPrettyPrint)
               _tlOrderBy
               _tlUserIp
               _tlBundleId
@@ -221,7 +229,9 @@ instance GoogleRequest TimelineList' where
               _tlMaxResults
               _tlIncludeDeleted
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelineListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelineListResource)
+                      r
                       u

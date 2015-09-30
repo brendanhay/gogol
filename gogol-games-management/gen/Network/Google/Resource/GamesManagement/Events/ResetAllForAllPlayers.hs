@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- these events will also be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsResetAllForAllPlayers@.
-module GamesManagement.Events.ResetAllForAllPlayers
+module Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
     (
     -- * REST Resource
-      EventsResetAllForAllPlayersAPI
+      EventsResetAllForAllPlayersResource
 
     -- * Creating a Request
-    , eventsResetAllForAllPlayers
-    , EventsResetAllForAllPlayers
+    , eventsResetAllForAllPlayers'
+    , EventsResetAllForAllPlayers'
 
     -- * Request Lenses
     , erafapQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementEventsResetAllForAllPlayers@ which the
--- 'EventsResetAllForAllPlayers' request conforms to.
-type EventsResetAllForAllPlayersAPI =
+-- 'EventsResetAllForAllPlayers'' request conforms to.
+type EventsResetAllForAllPlayersResource =
      "events" :>
-       "resetAllForAllPlayers" :> Post '[JSON] ()
+       "resetAllForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all draft events for all players. This method is only available
 -- to user accounts for your developer console. All quests that use any of
 -- these events will also be reset.
 --
--- /See:/ 'eventsResetAllForAllPlayers' smart constructor.
-data EventsResetAllForAllPlayers = EventsResetAllForAllPlayers
+-- /See:/ 'eventsResetAllForAllPlayers'' smart constructor.
+data EventsResetAllForAllPlayers' = EventsResetAllForAllPlayers'
     { _erafapQuotaUser   :: !(Maybe Text)
     , _erafapPrettyPrint :: !Bool
     , _erafapUserIp      :: !(Maybe Text)
     , _erafapKey         :: !(Maybe Text)
     , _erafapOauthToken  :: !(Maybe Text)
     , _erafapFields      :: !(Maybe Text)
-    , _erafapAlt         :: !Text
+    , _erafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data EventsResetAllForAllPlayers = EventsResetAllForAllPlayers
 -- * 'erafapFields'
 --
 -- * 'erafapAlt'
-eventsResetAllForAllPlayers
-    :: EventsResetAllForAllPlayers
-eventsResetAllForAllPlayers =
-    EventsResetAllForAllPlayers
+eventsResetAllForAllPlayers'
+    :: EventsResetAllForAllPlayers'
+eventsResetAllForAllPlayers' =
+    EventsResetAllForAllPlayers'
     { _erafapQuotaUser = Nothing
     , _erafapPrettyPrint = True
     , _erafapUserIp = Nothing
     , _erafapKey = Nothing
     , _erafapOauthToken = Nothing
     , _erafapFields = Nothing
-    , _erafapAlt = "json"
+    , _erafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ erafapFields
   = lens _erafapFields (\ s a -> s{_erafapFields = a})
 
 -- | Data format for the response.
-erafapAlt :: Lens' EventsResetAllForAllPlayers' Text
+erafapAlt :: Lens' EventsResetAllForAllPlayers' Alt
 erafapAlt
   = lens _erafapAlt (\ s a -> s{_erafapAlt = a})
 
@@ -141,15 +149,15 @@ instance GoogleRequest EventsResetAllForAllPlayers'
          where
         type Rs EventsResetAllForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsResetAllForAllPlayers{..}
-          = go _erafapQuotaUser _erafapPrettyPrint
+        requestWithRoute r u EventsResetAllForAllPlayers'{..}
+          = go _erafapQuotaUser (Just _erafapPrettyPrint)
               _erafapUserIp
               _erafapKey
               _erafapOauthToken
               _erafapFields
-              _erafapAlt
+              (Just _erafapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EventsResetAllForAllPlayersAPI)
+                      (Proxy :: Proxy EventsResetAllForAllPlayersResource)
                       r
                       u

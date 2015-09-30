@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Generates a tag for a floodlight activity.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesGeneratetag@.
-module DFAReporting.FloodlightActivities.Generatetag
+module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
     (
     -- * REST Resource
-      FloodlightActivitiesGeneratetagAPI
+      FloodlightActivitiesGeneratetagResource
 
     -- * Creating a Request
-    , floodlightActivitiesGeneratetag
-    , FloodlightActivitiesGeneratetag
+    , floodlightActivitiesGeneratetag'
+    , FloodlightActivitiesGeneratetag'
 
     -- * Request Lenses
     , fagQuotaUser
@@ -44,19 +45,27 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesGeneratetag@ which the
--- 'FloodlightActivitiesGeneratetag' request conforms to.
-type FloodlightActivitiesGeneratetagAPI =
+-- 'FloodlightActivitiesGeneratetag'' request conforms to.
+type FloodlightActivitiesGeneratetagResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
            "generatetag" :>
-             QueryParam "floodlightActivityId" Int64 :>
-               Post '[JSON] FloodlightActivitiesGenerateTagResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "floodlightActivityId" Int64 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON]
+                               FloodlightActivitiesGenerateTagResponse
 
 -- | Generates a tag for a floodlight activity.
 --
--- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
-data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
+-- /See:/ 'floodlightActivitiesGeneratetag'' smart constructor.
+data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
     { _fagQuotaUser            :: !(Maybe Text)
     , _fagPrettyPrint          :: !Bool
     , _fagUserIp               :: !(Maybe Text)
@@ -65,7 +74,7 @@ data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
     , _fagKey                  :: !(Maybe Text)
     , _fagOauthToken           :: !(Maybe Text)
     , _fagFields               :: !(Maybe Text)
-    , _fagAlt                  :: !Text
+    , _fagAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGeneratetag'' with the minimum fields required to make a request.
@@ -89,11 +98,11 @@ data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
 -- * 'fagFields'
 --
 -- * 'fagAlt'
-floodlightActivitiesGeneratetag
+floodlightActivitiesGeneratetag'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivitiesGeneratetag
-floodlightActivitiesGeneratetag pFagProfileId_ =
-    FloodlightActivitiesGeneratetag
+    -> FloodlightActivitiesGeneratetag'
+floodlightActivitiesGeneratetag' pFagProfileId_ =
+    FloodlightActivitiesGeneratetag'
     { _fagQuotaUser = Nothing
     , _fagPrettyPrint = True
     , _fagUserIp = Nothing
@@ -102,7 +111,7 @@ floodlightActivitiesGeneratetag pFagProfileId_ =
     , _fagKey = Nothing
     , _fagOauthToken = Nothing
     , _fagFields = Nothing
-    , _fagAlt = "json"
+    , _fagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +162,7 @@ fagFields
   = lens _fagFields (\ s a -> s{_fagFields = a})
 
 -- | Data format for the response.
-fagAlt :: Lens' FloodlightActivitiesGeneratetag' Text
+fagAlt :: Lens' FloodlightActivitiesGeneratetag' Alt
 fagAlt = lens _fagAlt (\ s a -> s{_fagAlt = a})
 
 instance GoogleRequest
@@ -162,16 +171,17 @@ instance GoogleRequest
              FloodlightActivitiesGenerateTagResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightActivitiesGeneratetag{..}
-          = go _fagQuotaUser _fagPrettyPrint _fagUserIp
+          FloodlightActivitiesGeneratetag'{..}
+          = go _fagQuotaUser (Just _fagPrettyPrint) _fagUserIp
               _fagFloodlightActivityId
               _fagProfileId
               _fagKey
               _fagOauthToken
               _fagFields
-              _fagAlt
+              (Just _fagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesGeneratetagAPI)
+                      (Proxy ::
+                         Proxy FloodlightActivitiesGeneratetagResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of accounts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountsList@.
-module DFAReporting.Accounts.List
+module Network.Google.Resource.DFAReporting.Accounts.List
     (
     -- * REST Resource
-      AccountsListAPI
+      AccountsListResource
 
     -- * Creating a Request
-    , accountsList
-    , AccountsList
+    , accountsList'
+    , AccountsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -50,39 +51,50 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountsList@ which the
--- 'AccountsList' request conforms to.
-type AccountsListAPI =
+-- 'AccountsList'' request conforms to.
+type AccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accounts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "active" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] AccountsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingAccountsListSortOrder
+                       :>
+                       QueryParam "active" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField"
+                               DfareportingAccountsListSortField
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] AccountsListResponse
 
 -- | Retrieves the list of accounts, possibly filtered.
 --
--- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+-- /See:/ 'accountsList'' smart constructor.
+data AccountsList' = AccountsList'
     { _alQuotaUser    :: !(Maybe Text)
     , _alPrettyPrint  :: !Bool
     , _alUserIp       :: !(Maybe Text)
     , _alSearchString :: !(Maybe Text)
     , _alIds          :: !(Maybe Int64)
     , _alProfileId    :: !Int64
-    , _alSortOrder    :: !(Maybe Text)
+    , _alSortOrder    :: !(Maybe DfareportingAccountsListSortOrder)
     , _alActive       :: !(Maybe Bool)
     , _alKey          :: !(Maybe Text)
     , _alPageToken    :: !(Maybe Text)
-    , _alSortField    :: !(Maybe Text)
+    , _alSortField    :: !(Maybe DfareportingAccountsListSortField)
     , _alOauthToken   :: !(Maybe Text)
     , _alMaxResults   :: !(Maybe Int32)
     , _alFields       :: !(Maybe Text)
-    , _alAlt          :: !Text
+    , _alAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
@@ -118,11 +130,11 @@ data AccountsList = AccountsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-accountsList
+accountsList'
     :: Int64 -- ^ 'profileId'
-    -> AccountsList
-accountsList pAlProfileId_ =
-    AccountsList
+    -> AccountsList'
+accountsList' pAlProfileId_ =
+    AccountsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
@@ -137,7 +149,7 @@ accountsList pAlProfileId_ =
     , _alOauthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,7 +192,7 @@ alProfileId
   = lens _alProfileId (\ s a -> s{_alProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-alSortOrder :: Lens' AccountsList' (Maybe Text)
+alSortOrder :: Lens' AccountsList' (Maybe DfareportingAccountsListSortOrder)
 alSortOrder
   = lens _alSortOrder (\ s a -> s{_alSortOrder = a})
 
@@ -201,7 +213,7 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | Field by which to sort the list.
-alSortField :: Lens' AccountsList' (Maybe Text)
+alSortField :: Lens' AccountsList' (Maybe DfareportingAccountsListSortField)
 alSortField
   = lens _alSortField (\ s a -> s{_alSortField = a})
 
@@ -220,14 +232,14 @@ alFields :: Lens' AccountsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AccountsList' Text
+alAlt :: Lens' AccountsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountsList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp
+        requestWithRoute r u AccountsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
               _alSearchString
               _alIds
               _alProfileId
@@ -239,7 +251,9 @@ instance GoogleRequest AccountsList' where
               _alOauthToken
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsListResource)
+                      r
                       u

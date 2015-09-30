@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- for the currently authenticated user, set playerId to me.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPlayersGet@.
-module Games.Players.Get
+module Network.Google.Resource.Games.Players.Get
     (
     -- * REST Resource
-      PlayersGetAPI
+      PlayersGetResource
 
     -- * Creating a Request
-    , playersGet
-    , PlayersGet
+    , playersGet'
+    , PlayersGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesPlayersGet@ which the
--- 'PlayersGet' request conforms to.
-type PlayersGetAPI =
+-- 'PlayersGet'' request conforms to.
+type PlayersGetResource =
      "players" :>
        Capture "playerId" Text :>
-         QueryParam "language" Text :> Get '[JSON] Player
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Player
 
 -- | Retrieves the Player resource with the given ID. To retrieve the player
 -- for the currently authenticated user, set playerId to me.
 --
--- /See:/ 'playersGet' smart constructor.
-data PlayersGet = PlayersGet
+-- /See:/ 'playersGet'' smart constructor.
+data PlayersGet' = PlayersGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data PlayersGet = PlayersGet
     , _pgOauthToken  :: !(Maybe Text)
     , _pgPlayerId    :: !Text
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersGet'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data PlayersGet = PlayersGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-playersGet
+playersGet'
     :: Text -- ^ 'playerId'
-    -> PlayersGet
-playersGet pPgPlayerId_ =
-    PlayersGet
+    -> PlayersGet'
+playersGet' pPgPlayerId_ =
+    PlayersGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgUserIp = Nothing
@@ -101,7 +109,7 @@ playersGet pPgPlayerId_ =
     , _pgOauthToken = Nothing
     , _pgPlayerId = pPgPlayerId_
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,18 +157,21 @@ pgFields :: Lens' PlayersGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PlayersGet' Text
+pgAlt :: Lens' PlayersGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest PlayersGet' where
         type Rs PlayersGet' = Player
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PlayersGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgKey
+        requestWithRoute r u PlayersGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+              _pgKey
               _pgLanguage
               _pgOauthToken
               _pgPlayerId
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlayersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PlayersGetResource)
+                      r
+                      u

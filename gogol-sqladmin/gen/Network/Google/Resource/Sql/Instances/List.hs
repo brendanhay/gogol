@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- instance name.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesList@.
-module Sql.Instances.List
+module Network.Google.Resource.Sql.Instances.List
     (
     -- * REST Resource
-      InstancesListAPI
+      InstancesListResource
 
     -- * Creating a Request
-    , instancesList
-    , InstancesList
+    , instancesList'
+    , InstancesList'
 
     -- * Request Lenses
     , ilQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesList@ which the
--- 'InstancesList' request conforms to.
-type InstancesListAPI =
+-- 'InstancesList'' request conforms to.
+type InstancesListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] InstancesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] InstancesListResponse
 
 -- | Lists instances under a given project in the alphabetical order of the
 -- instance name.
 --
--- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList
+-- /See:/ 'instancesList'' smart constructor.
+data InstancesList' = InstancesList'
     { _ilQuotaUser   :: !(Maybe Text)
     , _ilPrettyPrint :: !Bool
     , _ilProject     :: !Text
@@ -69,7 +77,7 @@ data InstancesList = InstancesList
     , _ilOauthToken  :: !(Maybe Text)
     , _ilMaxResults  :: !(Maybe Word32)
     , _ilFields      :: !(Maybe Text)
-    , _ilAlt         :: !Text
+    , _ilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
@@ -95,11 +103,11 @@ data InstancesList = InstancesList
 -- * 'ilFields'
 --
 -- * 'ilAlt'
-instancesList
+instancesList'
     :: Text -- ^ 'project'
-    -> InstancesList
-instancesList pIlProject_ =
-    InstancesList
+    -> InstancesList'
+instancesList' pIlProject_ =
+    InstancesList'
     { _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
     , _ilProject = pIlProject_
@@ -109,7 +117,7 @@ instancesList pIlProject_ =
     , _ilOauthToken = Nothing
     , _ilMaxResults = Nothing
     , _ilFields = Nothing
-    , _ilAlt = "json"
+    , _ilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,20 +170,23 @@ ilFields :: Lens' InstancesList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 -- | Data format for the response.
-ilAlt :: Lens' InstancesList' Text
+ilAlt :: Lens' InstancesList' Alt
 ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstancesListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesList{..}
-          = go _ilQuotaUser _ilPrettyPrint _ilProject _ilUserIp
+        requestWithRoute r u InstancesList'{..}
+          = go _ilQuotaUser (Just _ilPrettyPrint) _ilProject
+              _ilUserIp
               _ilKey
               _ilPageToken
               _ilOauthToken
               _ilMaxResults
               _ilFields
-              _ilAlt
+              (Just _ilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesListResource)
+                      r
                       u

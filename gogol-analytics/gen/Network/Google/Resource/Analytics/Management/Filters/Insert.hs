@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new filter.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersInsert@.
-module Analytics.Management.Filters.Insert
+module Network.Google.Resource.Analytics.Management.Filters.Insert
     (
     -- * REST Resource
-      ManagementFiltersInsertAPI
+      ManagementFiltersInsertResource
 
     -- * Creating a Request
-    , managementFiltersInsert
-    , ManagementFiltersInsert
+    , managementFiltersInsert'
+    , ManagementFiltersInsert'
 
     -- * Request Lenses
     , mfiQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersInsert@ which the
--- 'ManagementFiltersInsert' request conforms to.
-type ManagementFiltersInsertAPI =
+-- 'ManagementFiltersInsert'' request conforms to.
+type ManagementFiltersInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
-           "filters" :> Post '[JSON] Filter
+           "filters" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Filter
 
 -- | Create a new filter.
 --
--- /See:/ 'managementFiltersInsert' smart constructor.
-data ManagementFiltersInsert = ManagementFiltersInsert
+-- /See:/ 'managementFiltersInsert'' smart constructor.
+data ManagementFiltersInsert' = ManagementFiltersInsert'
     { _mfiQuotaUser   :: !(Maybe Text)
     , _mfiPrettyPrint :: !Bool
     , _mfiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data ManagementFiltersInsert = ManagementFiltersInsert
     , _mfiKey         :: !(Maybe Text)
     , _mfiOauthToken  :: !(Maybe Text)
     , _mfiFields      :: !(Maybe Text)
-    , _mfiAlt         :: !Text
+    , _mfiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data ManagementFiltersInsert = ManagementFiltersInsert
 -- * 'mfiFields'
 --
 -- * 'mfiAlt'
-managementFiltersInsert
+managementFiltersInsert'
     :: Text -- ^ 'accountId'
-    -> ManagementFiltersInsert
-managementFiltersInsert pMfiAccountId_ =
-    ManagementFiltersInsert
+    -> ManagementFiltersInsert'
+managementFiltersInsert' pMfiAccountId_ =
+    ManagementFiltersInsert'
     { _mfiQuotaUser = Nothing
     , _mfiPrettyPrint = False
     , _mfiUserIp = Nothing
@@ -95,7 +103,7 @@ managementFiltersInsert pMfiAccountId_ =
     , _mfiKey = Nothing
     , _mfiOauthToken = Nothing
     , _mfiFields = Nothing
-    , _mfiAlt = "json"
+    , _mfiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,21 @@ mfiFields
   = lens _mfiFields (\ s a -> s{_mfiFields = a})
 
 -- | Data format for the response.
-mfiAlt :: Lens' ManagementFiltersInsert' Text
+mfiAlt :: Lens' ManagementFiltersInsert' Alt
 mfiAlt = lens _mfiAlt (\ s a -> s{_mfiAlt = a})
 
 instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersInsert{..}
-          = go _mfiQuotaUser _mfiPrettyPrint _mfiUserIp
+        requestWithRoute r u ManagementFiltersInsert'{..}
+          = go _mfiQuotaUser (Just _mfiPrettyPrint) _mfiUserIp
               _mfiAccountId
               _mfiKey
               _mfiOauthToken
               _mfiFields
-              _mfiAlt
+              (Just _mfiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersInsertAPI)
+                      (Proxy :: Proxy ManagementFiltersInsertResource)
                       r
                       u

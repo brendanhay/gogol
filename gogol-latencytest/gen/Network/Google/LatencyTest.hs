@@ -27,10 +27,10 @@ module Network.Google.LatencyTest
     -- * REST Resources
 
     -- ** CloudlatencytestStatscollectionUpdateaggregatedstats
-    , module Cloudlatencytest.Statscollection.Updateaggregatedstats
+    , module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregatedstats
 
     -- ** CloudlatencytestStatscollectionUpdatestats
-    , module Cloudlatencytest.Statscollection.Updatestats
+    , module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
 
     -- * Types
 
@@ -74,6 +74,9 @@ module Network.Google.LatencyTest
     , StatsReply
     , statsReply
     , srTestValue
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.LatencyTest.Types
@@ -85,7 +88,9 @@ import           Network.Google.Resource.Cloudlatencytest.Statscollection.Update
 TODO
 -}
 
-type LatencyTestAPI = Statscollection
+type LatencyTestAPI =
+     StatscollectionUpdatestatsResource :<|>
+       StatscollectionUpdateaggregatedstatsResource
 
 latencyTestAPI :: Proxy LatencyTestAPI
 latencyTestAPI = Proxy

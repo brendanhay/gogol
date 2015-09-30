@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- using the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysInsert@.
-module Compute.TargetVPNGateways.Insert
+module Network.Google.Resource.Compute.TargetVPNGateways.Insert
     (
     -- * REST Resource
-      TargetVPNGatewaysInsertAPI
+      TargetVPNGatewaysInsertResource
 
     -- * Creating a Request
-    , targetVPNGatewaysInsert
-    , TargetVPNGatewaysInsert
+    , targetVPNGatewaysInsert'
+    , TargetVPNGatewaysInsert'
 
     -- * Request Lenses
     , tvgiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetVPNGatewaysInsert@ which the
--- 'TargetVPNGatewaysInsert' request conforms to.
-type TargetVPNGatewaysInsertAPI =
+-- 'TargetVPNGatewaysInsert'' request conforms to.
+type TargetVPNGatewaysInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
-           "targetVpnGateways" :> Post '[JSON] Operation
+           "targetVpnGateways" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a TargetVpnGateway resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ 'targetVPNGatewaysInsert' smart constructor.
-data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
+-- /See:/ 'targetVPNGatewaysInsert'' smart constructor.
+data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
     { _tvgiQuotaUser   :: !(Maybe Text)
     , _tvgiPrettyPrint :: !Bool
     , _tvgiProject     :: !Text
@@ -65,7 +73,7 @@ data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
     , _tvgiRegion      :: !Text
     , _tvgiOauthToken  :: !(Maybe Text)
     , _tvgiFields      :: !(Maybe Text)
-    , _tvgiAlt         :: !Text
+    , _tvgiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
 -- * 'tvgiFields'
 --
 -- * 'tvgiAlt'
-targetVPNGatewaysInsert
+targetVPNGatewaysInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> TargetVPNGatewaysInsert
-targetVPNGatewaysInsert pTvgiProject_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert
+    -> TargetVPNGatewaysInsert'
+targetVPNGatewaysInsert' pTvgiProject_ pTvgiRegion_ =
+    TargetVPNGatewaysInsert'
     { _tvgiQuotaUser = Nothing
     , _tvgiPrettyPrint = True
     , _tvgiProject = pTvgiProject_
@@ -103,7 +111,7 @@ targetVPNGatewaysInsert pTvgiProject_ pTvgiRegion_ =
     , _tvgiRegion = pTvgiRegion_
     , _tvgiOauthToken = Nothing
     , _tvgiFields = Nothing
-    , _tvgiAlt = "json"
+    , _tvgiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +162,23 @@ tvgiFields
   = lens _tvgiFields (\ s a -> s{_tvgiFields = a})
 
 -- | Data format for the response.
-tvgiAlt :: Lens' TargetVPNGatewaysInsert' Text
+tvgiAlt :: Lens' TargetVPNGatewaysInsert' Alt
 tvgiAlt = lens _tvgiAlt (\ s a -> s{_tvgiAlt = a})
 
 instance GoogleRequest TargetVPNGatewaysInsert' where
         type Rs TargetVPNGatewaysInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysInsert{..}
-          = go _tvgiQuotaUser _tvgiPrettyPrint _tvgiProject
+        requestWithRoute r u TargetVPNGatewaysInsert'{..}
+          = go _tvgiQuotaUser (Just _tvgiPrettyPrint)
+              _tvgiProject
               _tvgiUserIp
               _tvgiKey
               _tvgiRegion
               _tvgiOauthToken
               _tvgiFields
-              _tvgiAlt
+              (Just _tvgiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetVPNGatewaysInsertAPI)
+                      (Proxy :: Proxy TargetVPNGatewaysInsertResource)
                       r
                       u

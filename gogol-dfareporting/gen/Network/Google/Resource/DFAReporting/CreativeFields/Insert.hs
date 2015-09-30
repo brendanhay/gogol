@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new creative field.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsInsert@.
-module DFAReporting.CreativeFields.Insert
+module Network.Google.Resource.DFAReporting.CreativeFields.Insert
     (
     -- * REST Resource
-      CreativeFieldsInsertAPI
+      CreativeFieldsInsertResource
 
     -- * Creating a Request
-    , creativeFieldsInsert
-    , CreativeFieldsInsert
+    , creativeFieldsInsert'
+    , CreativeFieldsInsert'
 
     -- * Request Lenses
     , cfiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsInsert@ which the
--- 'CreativeFieldsInsert' request conforms to.
-type CreativeFieldsInsertAPI =
+-- 'CreativeFieldsInsert'' request conforms to.
+type CreativeFieldsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creativeFields" :> Post '[JSON] CreativeField
+         "creativeFields" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] CreativeField
 
 -- | Inserts a new creative field.
 --
--- /See:/ 'creativeFieldsInsert' smart constructor.
-data CreativeFieldsInsert = CreativeFieldsInsert
+-- /See:/ 'creativeFieldsInsert'' smart constructor.
+data CreativeFieldsInsert' = CreativeFieldsInsert'
     { _cfiQuotaUser   :: !(Maybe Text)
     , _cfiPrettyPrint :: !Bool
     , _cfiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativeFieldsInsert = CreativeFieldsInsert
     , _cfiKey         :: !(Maybe Text)
     , _cfiOauthToken  :: !(Maybe Text)
     , _cfiFields      :: !(Maybe Text)
-    , _cfiAlt         :: !Text
+    , _cfiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativeFieldsInsert = CreativeFieldsInsert
 -- * 'cfiFields'
 --
 -- * 'cfiAlt'
-creativeFieldsInsert
+creativeFieldsInsert'
     :: Int64 -- ^ 'profileId'
-    -> CreativeFieldsInsert
-creativeFieldsInsert pCfiProfileId_ =
-    CreativeFieldsInsert
+    -> CreativeFieldsInsert'
+creativeFieldsInsert' pCfiProfileId_ =
+    CreativeFieldsInsert'
     { _cfiQuotaUser = Nothing
     , _cfiPrettyPrint = True
     , _cfiUserIp = Nothing
@@ -94,7 +102,7 @@ creativeFieldsInsert pCfiProfileId_ =
     , _cfiKey = Nothing
     , _cfiOauthToken = Nothing
     , _cfiFields = Nothing
-    , _cfiAlt = "json"
+    , _cfiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ cfiFields
   = lens _cfiFields (\ s a -> s{_cfiFields = a})
 
 -- | Data format for the response.
-cfiAlt :: Lens' CreativeFieldsInsert' Text
+cfiAlt :: Lens' CreativeFieldsInsert' Alt
 cfiAlt = lens _cfiAlt (\ s a -> s{_cfiAlt = a})
 
 instance GoogleRequest CreativeFieldsInsert' where
         type Rs CreativeFieldsInsert' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsInsert{..}
-          = go _cfiQuotaUser _cfiPrettyPrint _cfiUserIp
+        requestWithRoute r u CreativeFieldsInsert'{..}
+          = go _cfiQuotaUser (Just _cfiPrettyPrint) _cfiUserIp
               _cfiProfileId
               _cfiKey
               _cfiOauthToken
               _cfiFields
-              _cfiAlt
+              (Just _cfiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsInsertAPI)
+                      (Proxy :: Proxy CreativeFieldsInsertResource)
                       r
                       u

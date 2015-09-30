@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Insert a new file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesInsert@.
-module Drive.Files.Insert
+module Network.Google.Resource.Drive.Files.Insert
     (
     -- * REST Resource
-      FilesInsertAPI
+      FilesInsertResource
 
     -- * Creating a Request
-    , filesInsert
-    , FilesInsert
+    , filesInsert'
+    , FilesInsert'
 
     -- * Request Lenses
     , fiQuotaUser
@@ -50,27 +51,34 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesInsert@ which the
--- 'FilesInsert' request conforms to.
-type FilesInsertAPI =
+-- 'FilesInsert'' request conforms to.
+type FilesInsertResource =
      "files" :>
-       QueryParam "pinned" Bool :>
-         QueryParam "visibility" Text :>
-           QueryParam "timedTextLanguage" Text :>
-             QueryParam "useContentAsIndexableText" Bool :>
-               QueryParam "timedTextTrackName" Text :>
-                 QueryParam "ocrLanguage" Text :>
-                   QueryParam "convert" Bool :>
-                     QueryParam "ocr" Bool :> Post '[JSON] File
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "pinned" Bool :>
+               QueryParam "visibility" DriveFilesInsertVisibility :>
+                 QueryParam "timedTextLanguage" Text :>
+                   QueryParam "useContentAsIndexableText" Bool :>
+                     QueryParam "timedTextTrackName" Text :>
+                       QueryParam "ocrLanguage" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "convert" Bool :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "ocr" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Post '[JSON] File
 
 -- | Insert a new file.
 --
--- /See:/ 'filesInsert' smart constructor.
-data FilesInsert = FilesInsert
+-- /See:/ 'filesInsert'' smart constructor.
+data FilesInsert' = FilesInsert'
     { _fiQuotaUser                 :: !(Maybe Text)
     , _fiPrettyPrint               :: !Bool
     , _fiUserIp                    :: !(Maybe Text)
     , _fiPinned                    :: !Bool
-    , _fiVisibility                :: !Text
+    , _fiVisibility                :: !DriveFilesInsertVisibility
     , _fiTimedTextLanguage         :: !(Maybe Text)
     , _fiUseContentAsIndexableText :: !Bool
     , _fiTimedTextTrackName        :: !(Maybe Text)
@@ -80,7 +88,7 @@ data FilesInsert = FilesInsert
     , _fiOauthToken                :: !(Maybe Text)
     , _fiOcr                       :: !Bool
     , _fiFields                    :: !(Maybe Text)
-    , _fiAlt                       :: !Text
+    , _fiAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesInsert'' with the minimum fields required to make a request.
@@ -116,15 +124,15 @@ data FilesInsert = FilesInsert
 -- * 'fiFields'
 --
 -- * 'fiAlt'
-filesInsert
-    :: FilesInsert
-filesInsert =
-    FilesInsert
+filesInsert'
+    :: FilesInsert'
+filesInsert' =
+    FilesInsert'
     { _fiQuotaUser = Nothing
     , _fiPrettyPrint = True
     , _fiUserIp = Nothing
     , _fiPinned = False
-    , _fiVisibility = "DEFAULT"
+    , _fiVisibility = DFIVDefault
     , _fiTimedTextLanguage = Nothing
     , _fiUseContentAsIndexableText = False
     , _fiTimedTextTrackName = Nothing
@@ -134,7 +142,7 @@ filesInsert =
     , _fiOauthToken = Nothing
     , _fiOcr = False
     , _fiFields = Nothing
-    , _fiAlt = "json"
+    , _fiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,7 +170,7 @@ fiPinned = lens _fiPinned (\ s a -> s{_fiPinned = a})
 
 -- | The visibility of the new file. This parameter is only relevant when
 -- convert=false.
-fiVisibility :: Lens' FilesInsert' Text
+fiVisibility :: Lens' FilesInsert' DriveFilesInsertVisibility
 fiVisibility
   = lens _fiVisibility (\ s a -> s{_fiVisibility = a})
 
@@ -216,14 +224,14 @@ fiFields :: Lens' FilesInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
 
 -- | Data format for the response.
-fiAlt :: Lens' FilesInsert' Text
+fiAlt :: Lens' FilesInsert' Alt
 fiAlt = lens _fiAlt (\ s a -> s{_fiAlt = a})
 
 instance GoogleRequest FilesInsert' where
         type Rs FilesInsert' = File
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesInsert{..}
-          = go _fiQuotaUser _fiPrettyPrint _fiUserIp
+        requestWithRoute r u FilesInsert'{..}
+          = go _fiQuotaUser (Just _fiPrettyPrint) _fiUserIp
               (Just _fiPinned)
               (Just _fiVisibility)
               _fiTimedTextLanguage
@@ -235,6 +243,9 @@ instance GoogleRequest FilesInsert' where
               _fiOauthToken
               (Just _fiOcr)
               _fiFields
-              _fiAlt
+              (Just _fiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy FilesInsertResource)
+                      r
+                      u

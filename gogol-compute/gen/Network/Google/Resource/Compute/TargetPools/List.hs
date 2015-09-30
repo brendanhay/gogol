@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project and region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsList@.
-module Compute.TargetPools.List
+module Network.Google.Resource.Compute.TargetPools.List
     (
     -- * REST Resource
-      TargetPoolsListAPI
+      TargetPoolsListResource
 
     -- * Creating a Request
-    , targetPoolsList
-    , TargetPoolsList
+    , targetPoolsList'
+    , TargetPoolsList'
 
     -- * Request Lenses
     , tplQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsList@ which the
--- 'TargetPoolsList' request conforms to.
-type TargetPoolsListAPI =
+-- 'TargetPoolsList'' request conforms to.
+type TargetPoolsListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] TargetPoolList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] TargetPoolList
 
 -- | Retrieves the list of TargetPool resources available to the specified
 -- project and region.
 --
--- /See:/ 'targetPoolsList' smart constructor.
-data TargetPoolsList = TargetPoolsList
+-- /See:/ 'targetPoolsList'' smart constructor.
+data TargetPoolsList' = TargetPoolsList'
     { _tplQuotaUser   :: !(Maybe Text)
     , _tplPrettyPrint :: !Bool
     , _tplProject     :: !Text
@@ -75,7 +83,7 @@ data TargetPoolsList = TargetPoolsList
     , _tplOauthToken  :: !(Maybe Text)
     , _tplMaxResults  :: !Word32
     , _tplFields      :: !(Maybe Text)
-    , _tplAlt         :: !Text
+    , _tplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data TargetPoolsList = TargetPoolsList
 -- * 'tplFields'
 --
 -- * 'tplAlt'
-targetPoolsList
+targetPoolsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> TargetPoolsList
-targetPoolsList pTplProject_ pTplRegion_ =
-    TargetPoolsList
+    -> TargetPoolsList'
+targetPoolsList' pTplProject_ pTplRegion_ =
+    TargetPoolsList'
     { _tplQuotaUser = Nothing
     , _tplPrettyPrint = True
     , _tplProject = pTplProject_
@@ -122,7 +130,7 @@ targetPoolsList pTplProject_ pTplRegion_ =
     , _tplOauthToken = Nothing
     , _tplMaxResults = 500
     , _tplFields = Nothing
-    , _tplAlt = "json"
+    , _tplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,14 +208,14 @@ tplFields
   = lens _tplFields (\ s a -> s{_tplFields = a})
 
 -- | Data format for the response.
-tplAlt :: Lens' TargetPoolsList' Text
+tplAlt :: Lens' TargetPoolsList' Alt
 tplAlt = lens _tplAlt (\ s a -> s{_tplAlt = a})
 
 instance GoogleRequest TargetPoolsList' where
         type Rs TargetPoolsList' = TargetPoolList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsList{..}
-          = go _tplQuotaUser _tplPrettyPrint _tplProject
+        requestWithRoute r u TargetPoolsList'{..}
+          = go _tplQuotaUser (Just _tplPrettyPrint) _tplProject
               _tplUserIp
               _tplKey
               _tplFilter
@@ -216,8 +224,9 @@ instance GoogleRequest TargetPoolsList' where
               _tplOauthToken
               (Just _tplMaxResults)
               _tplFields
-              _tplAlt
+              (Just _tplAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TargetPoolsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TargetPoolsListResource)
                       r
                       u

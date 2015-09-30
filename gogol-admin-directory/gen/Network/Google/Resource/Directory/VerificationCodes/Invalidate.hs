@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Invalidate the current backup verification codes for the user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesInvalidate@.
-module Directory.VerificationCodes.Invalidate
+module Network.Google.Resource.Directory.VerificationCodes.Invalidate
     (
     -- * REST Resource
-      VerificationCodesInvalidateAPI
+      VerificationCodesInvalidateResource
 
     -- * Creating a Request
-    , verificationCodesInvalidate
-    , VerificationCodesInvalidate
+    , verificationCodesInvalidate'
+    , VerificationCodesInvalidate'
 
     -- * Request Lenses
     , vciQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryVerificationCodesInvalidate@ which the
--- 'VerificationCodesInvalidate' request conforms to.
-type VerificationCodesInvalidateAPI =
+-- 'VerificationCodesInvalidate'' request conforms to.
+type VerificationCodesInvalidateResource =
      "users" :>
        Capture "userKey" Text :>
          "verificationCodes" :>
-           "invalidate" :> Post '[JSON] ()
+           "invalidate" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Invalidate the current backup verification codes for the user.
 --
--- /See:/ 'verificationCodesInvalidate' smart constructor.
-data VerificationCodesInvalidate = VerificationCodesInvalidate
+-- /See:/ 'verificationCodesInvalidate'' smart constructor.
+data VerificationCodesInvalidate' = VerificationCodesInvalidate'
     { _vciQuotaUser   :: !(Maybe Text)
     , _vciPrettyPrint :: !Bool
     , _vciUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data VerificationCodesInvalidate = VerificationCodesInvalidate
     , _vciOauthToken  :: !(Maybe Text)
     , _vciUserKey     :: !Text
     , _vciFields      :: !(Maybe Text)
-    , _vciAlt         :: !Text
+    , _vciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesInvalidate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data VerificationCodesInvalidate = VerificationCodesInvalidate
 -- * 'vciFields'
 --
 -- * 'vciAlt'
-verificationCodesInvalidate
+verificationCodesInvalidate'
     :: Text -- ^ 'userKey'
-    -> VerificationCodesInvalidate
-verificationCodesInvalidate pVciUserKey_ =
-    VerificationCodesInvalidate
+    -> VerificationCodesInvalidate'
+verificationCodesInvalidate' pVciUserKey_ =
+    VerificationCodesInvalidate'
     { _vciQuotaUser = Nothing
     , _vciPrettyPrint = True
     , _vciUserIp = Nothing
@@ -95,7 +103,7 @@ verificationCodesInvalidate pVciUserKey_ =
     , _vciOauthToken = Nothing
     , _vciUserKey = pVciUserKey_
     , _vciFields = Nothing
-    , _vciAlt = "json"
+    , _vciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,22 @@ vciFields
   = lens _vciFields (\ s a -> s{_vciFields = a})
 
 -- | Data format for the response.
-vciAlt :: Lens' VerificationCodesInvalidate' Text
+vciAlt :: Lens' VerificationCodesInvalidate' Alt
 vciAlt = lens _vciAlt (\ s a -> s{_vciAlt = a})
 
 instance GoogleRequest VerificationCodesInvalidate'
          where
         type Rs VerificationCodesInvalidate' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u VerificationCodesInvalidate{..}
-          = go _vciQuotaUser _vciPrettyPrint _vciUserIp _vciKey
+        requestWithRoute r u VerificationCodesInvalidate'{..}
+          = go _vciQuotaUser (Just _vciPrettyPrint) _vciUserIp
+              _vciKey
               _vciOauthToken
               _vciUserKey
               _vciFields
-              _vciAlt
+              (Just _vciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VerificationCodesInvalidateAPI)
+                      (Proxy :: Proxy VerificationCodesInvalidateResource)
                       r
                       u

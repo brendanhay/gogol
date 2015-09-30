@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsList@.
-module Compute.Snapshots.List
+module Network.Google.Resource.Compute.Snapshots.List
     (
     -- * REST Resource
-      SnapshotsListAPI
+      SnapshotsListResource
 
     -- * Creating a Request
-    , snapshotsList
-    , SnapshotsList
+    , snapshotsList'
+    , SnapshotsList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeSnapshotsList@ which the
--- 'SnapshotsList' request conforms to.
-type SnapshotsListAPI =
+-- 'SnapshotsList'' request conforms to.
+type SnapshotsListResource =
      Capture "project" Text :>
        "global" :>
          "snapshots" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] SnapshotList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] SnapshotList
 
 -- | Retrieves the list of Snapshot resources contained within the specified
 -- project.
 --
--- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList
+-- /See:/ 'snapshotsList'' smart constructor.
+data SnapshotsList' = SnapshotsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slProject     :: !Text
@@ -72,7 +79,7 @@ data SnapshotsList = SnapshotsList
     , _slOauthToken  :: !(Maybe Text)
     , _slMaxResults  :: !Word32
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data SnapshotsList = SnapshotsList
 -- * 'slFields'
 --
 -- * 'slAlt'
-snapshotsList
+snapshotsList'
     :: Text -- ^ 'project'
-    -> SnapshotsList
-snapshotsList pSlProject_ =
-    SnapshotsList
+    -> SnapshotsList'
+snapshotsList' pSlProject_ =
+    SnapshotsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slProject = pSlProject_
@@ -115,7 +122,7 @@ snapshotsList pSlProject_ =
     , _slOauthToken = Nothing
     , _slMaxResults = 500
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,21 +190,24 @@ slFields :: Lens' SnapshotsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SnapshotsList' Text
+slAlt :: Lens' SnapshotsList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u SnapshotsList{..}
-          = go _slQuotaUser _slPrettyPrint _slProject _slUserIp
+        requestWithRoute r u SnapshotsList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slProject
+              _slUserIp
               _slKey
               _slFilter
               _slPageToken
               _slOauthToken
               (Just _slMaxResults)
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SnapshotsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SnapshotsListResource)
+                      r
                       u

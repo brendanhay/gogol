@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsList@.
-module DFAReporting.AdvertiserGroups.List
+module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
     (
     -- * REST Resource
-      AdvertiserGroupsListAPI
+      AdvertiserGroupsListResource
 
     -- * Creating a Request
-    , advertiserGroupsList
-    , AdvertiserGroupsList
+    , advertiserGroupsList'
+    , AdvertiserGroupsList'
 
     -- * Request Lenses
     , aglQuotaUser
@@ -49,37 +50,48 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertiserGroupsList@ which the
--- 'AdvertiserGroupsList' request conforms to.
-type AdvertiserGroupsListAPI =
+-- 'AdvertiserGroupsList'' request conforms to.
+type AdvertiserGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       Get '[JSON] AdvertiserGroupsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingAdvertiserGroupsListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingAdvertiserGroupsListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] AdvertiserGroupsListResponse
 
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --
--- /See:/ 'advertiserGroupsList' smart constructor.
-data AdvertiserGroupsList = AdvertiserGroupsList
+-- /See:/ 'advertiserGroupsList'' smart constructor.
+data AdvertiserGroupsList' = AdvertiserGroupsList'
     { _aglQuotaUser    :: !(Maybe Text)
     , _aglPrettyPrint  :: !Bool
     , _aglUserIp       :: !(Maybe Text)
     , _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe Int64)
     , _aglProfileId    :: !Int64
-    , _aglSortOrder    :: !(Maybe Text)
+    , _aglSortOrder    :: !(Maybe DfareportingAdvertiserGroupsListSortOrder)
     , _aglKey          :: !(Maybe Text)
     , _aglPageToken    :: !(Maybe Text)
-    , _aglSortField    :: !(Maybe Text)
+    , _aglSortField    :: !(Maybe DfareportingAdvertiserGroupsListSortField)
     , _aglOauthToken   :: !(Maybe Text)
     , _aglMaxResults   :: !(Maybe Int32)
     , _aglFields       :: !(Maybe Text)
-    , _aglAlt          :: !Text
+    , _aglAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsList'' with the minimum fields required to make a request.
@@ -113,11 +125,11 @@ data AdvertiserGroupsList = AdvertiserGroupsList
 -- * 'aglFields'
 --
 -- * 'aglAlt'
-advertiserGroupsList
+advertiserGroupsList'
     :: Int64 -- ^ 'profileId'
-    -> AdvertiserGroupsList
-advertiserGroupsList pAglProfileId_ =
-    AdvertiserGroupsList
+    -> AdvertiserGroupsList'
+advertiserGroupsList' pAglProfileId_ =
+    AdvertiserGroupsList'
     { _aglQuotaUser = Nothing
     , _aglPrettyPrint = True
     , _aglUserIp = Nothing
@@ -131,7 +143,7 @@ advertiserGroupsList pAglProfileId_ =
     , _aglOauthToken = Nothing
     , _aglMaxResults = Nothing
     , _aglFields = Nothing
-    , _aglAlt = "json"
+    , _aglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -176,7 +188,7 @@ aglProfileId
   = lens _aglProfileId (\ s a -> s{_aglProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-aglSortOrder :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglSortOrder :: Lens' AdvertiserGroupsList' (Maybe DfareportingAdvertiserGroupsListSortOrder)
 aglSortOrder
   = lens _aglSortOrder (\ s a -> s{_aglSortOrder = a})
 
@@ -192,7 +204,7 @@ aglPageToken
   = lens _aglPageToken (\ s a -> s{_aglPageToken = a})
 
 -- | Field by which to sort the list.
-aglSortField :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglSortField :: Lens' AdvertiserGroupsList' (Maybe DfareportingAdvertiserGroupsListSortField)
 aglSortField
   = lens _aglSortField (\ s a -> s{_aglSortField = a})
 
@@ -214,15 +226,15 @@ aglFields
   = lens _aglFields (\ s a -> s{_aglFields = a})
 
 -- | Data format for the response.
-aglAlt :: Lens' AdvertiserGroupsList' Text
+aglAlt :: Lens' AdvertiserGroupsList' Alt
 aglAlt = lens _aglAlt (\ s a -> s{_aglAlt = a})
 
 instance GoogleRequest AdvertiserGroupsList' where
         type Rs AdvertiserGroupsList' =
              AdvertiserGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsList{..}
-          = go _aglQuotaUser _aglPrettyPrint _aglUserIp
+        requestWithRoute r u AdvertiserGroupsList'{..}
+          = go _aglQuotaUser (Just _aglPrettyPrint) _aglUserIp
               _aglSearchString
               _aglIds
               _aglProfileId
@@ -233,9 +245,9 @@ instance GoogleRequest AdvertiserGroupsList' where
               _aglOauthToken
               _aglMaxResults
               _aglFields
-              _aglAlt
+              (Just _aglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertiserGroupsListAPI)
+                      (Proxy :: Proxy AdvertiserGroupsListResource)
                       r
                       u

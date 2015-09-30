@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelinePatch@.
-module Mirror.Timeline.Patch
+module Network.Google.Resource.Mirror.Timeline.Patch
     (
     -- * REST Resource
-      TimelinePatchAPI
+      TimelinePatchResource
 
     -- * Creating a Request
-    , timelinePatch
-    , TimelinePatch
+    , timelinePatch'
+    , TimelinePatch'
 
     -- * Request Lenses
     , tpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelinePatch@ which the
--- 'TimelinePatch' request conforms to.
-type TimelinePatchAPI =
+-- 'TimelinePatch'' request conforms to.
+type TimelinePatchResource =
      "timeline" :>
-       Capture "id" Text :> Patch '[JSON] TimelineItem
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] TimelineItem
 
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
--- /See:/ 'timelinePatch' smart constructor.
-data TimelinePatch = TimelinePatch
+-- /See:/ 'timelinePatch'' smart constructor.
+data TimelinePatch' = TimelinePatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data TimelinePatch = TimelinePatch
     , _tpId          :: !Text
     , _tpOauthToken  :: !(Maybe Text)
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelinePatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data TimelinePatch = TimelinePatch
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-timelinePatch
+timelinePatch'
     :: Text -- ^ 'id'
-    -> TimelinePatch
-timelinePatch pTpId_ =
-    TimelinePatch
+    -> TimelinePatch'
+timelinePatch' pTpId_ =
+    TimelinePatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIp = Nothing
@@ -93,7 +101,7 @@ timelinePatch pTpId_ =
     , _tpId = pTpId_
     , _tpOauthToken = Nothing
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +142,21 @@ tpFields :: Lens' TimelinePatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TimelinePatch' Text
+tpAlt :: Lens' TimelinePatch' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelinePatch{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpUserIp _tpKey
+        requestWithRoute r u TimelinePatch'{..}
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+              _tpKey
               _tpId
               _tpOauthToken
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelinePatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelinePatchResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- a different position among its sibling tasks.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksMove@.
-module Tasks.Tasks.Move
+module Network.Google.Resource.Tasks.Tasks.Move
     (
     -- * REST Resource
-      TasksMoveAPI
+      TasksMoveResource
 
     -- * Creating a Request
-    , tasksMove
-    , TasksMove
+    , tasksMove'
+    , TasksMove'
 
     -- * Request Lenses
     , tmParent
@@ -48,22 +49,29 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TasksTasksMove@ which the
--- 'TasksMove' request conforms to.
-type TasksMoveAPI =
+-- 'TasksMove'' request conforms to.
+type TasksMoveResource =
      "lists" :>
        Capture "tasklist" Text :>
          "tasks" :>
            Capture "task" Text :>
              "move" :>
                QueryParam "parent" Text :>
-                 QueryParam "previous" Text :> Post '[JSON] Task
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "previous" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to
 -- a different position among its sibling tasks.
 --
--- /See:/ 'tasksMove' smart constructor.
-data TasksMove = TasksMove
+-- /See:/ 'tasksMove'' smart constructor.
+data TasksMove' = TasksMove'
     { _tmParent      :: !(Maybe Text)
     , _tmQuotaUser   :: !(Maybe Text)
     , _tmPrettyPrint :: !Bool
@@ -74,7 +82,7 @@ data TasksMove = TasksMove
     , _tmOauthToken  :: !(Maybe Text)
     , _tmFields      :: !(Maybe Text)
     , _tmPrevious    :: !(Maybe Text)
-    , _tmAlt         :: !Text
+    , _tmAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksMove'' with the minimum fields required to make a request.
@@ -102,12 +110,12 @@ data TasksMove = TasksMove
 -- * 'tmPrevious'
 --
 -- * 'tmAlt'
-tasksMove
+tasksMove'
     :: Text -- ^ 'tasklist'
     -> Text -- ^ 'task'
-    -> TasksMove
-tasksMove pTmTasklist_ pTmTask_ =
-    TasksMove
+    -> TasksMove'
+tasksMove' pTmTasklist_ pTmTask_ =
+    TasksMove'
     { _tmParent = Nothing
     , _tmQuotaUser = Nothing
     , _tmPrettyPrint = True
@@ -118,7 +126,7 @@ tasksMove pTmTasklist_ pTmTask_ =
     , _tmOauthToken = Nothing
     , _tmFields = Nothing
     , _tmPrevious = Nothing
-    , _tmAlt = "json"
+    , _tmAlt = JSON
     }
 
 -- | New parent task identifier. If the task is moved to the top level, this
@@ -175,20 +183,23 @@ tmPrevious
   = lens _tmPrevious (\ s a -> s{_tmPrevious = a})
 
 -- | Data format for the response.
-tmAlt :: Lens' TasksMove' Text
+tmAlt :: Lens' TasksMove' Alt
 tmAlt = lens _tmAlt (\ s a -> s{_tmAlt = a})
 
 instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task
         request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksMove{..}
-          = go _tmParent _tmQuotaUser _tmPrettyPrint _tmUserIp
+        requestWithRoute r u TasksMove'{..}
+          = go _tmParent _tmQuotaUser (Just _tmPrettyPrint)
+              _tmUserIp
               _tmKey
               _tmTasklist
               _tmTask
               _tmOauthToken
               _tmFields
               _tmPrevious
-              _tmAlt
+              (Just _tmAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksMoveAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksMoveResource)
+                      r
+                      u

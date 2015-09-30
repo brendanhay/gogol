@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Search all public profiles.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleSearch@.
-module Plus.People.Search
+module Network.Google.Resource.Plus.People.Search
     (
     -- * REST Resource
-      PeopleSearchAPI
+      PeopleSearchResource
 
     -- * Creating a Request
-    , peopleSearch
-    , PeopleSearch
+    , peopleSearch'
+    , PeopleSearch'
 
     -- * Request Lenses
     , psQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusPeopleSearch@ which the
--- 'PeopleSearch' request conforms to.
-type PeopleSearchAPI =
+-- 'PeopleSearch'' request conforms to.
+type PeopleSearchResource =
      "people" :>
-       QueryParam "query" Text :>
-         QueryParam "language" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] PeopleFeed
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "query" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
 --
--- /See:/ 'peopleSearch' smart constructor.
-data PeopleSearch = PeopleSearch
+-- /See:/ 'peopleSearch'' smart constructor.
+data PeopleSearch' = PeopleSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
     , _psUserIp      :: !(Maybe Text)
@@ -69,7 +76,7 @@ data PeopleSearch = PeopleSearch
     , _psOauthToken  :: !(Maybe Text)
     , _psMaxResults  :: !Word32
     , _psFields      :: !(Maybe Text)
-    , _psAlt         :: !Text
+    , _psAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleSearch'' with the minimum fields required to make a request.
@@ -97,11 +104,11 @@ data PeopleSearch = PeopleSearch
 -- * 'psFields'
 --
 -- * 'psAlt'
-peopleSearch
+peopleSearch'
     :: Text -- ^ 'query'
-    -> PeopleSearch
-peopleSearch pPsQuery_ =
-    PeopleSearch
+    -> PeopleSearch'
+peopleSearch' pPsQuery_ =
+    PeopleSearch'
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True
     , _psUserIp = Nothing
@@ -112,7 +119,7 @@ peopleSearch pPsQuery_ =
     , _psOauthToken = Nothing
     , _psMaxResults = 25
     , _psFields = Nothing
-    , _psAlt = "json"
+    , _psAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,21 +182,24 @@ psFields :: Lens' PeopleSearch' (Maybe Text)
 psFields = lens _psFields (\ s a -> s{_psFields = a})
 
 -- | Data format for the response.
-psAlt :: Lens' PeopleSearch' Text
+psAlt :: Lens' PeopleSearch' Alt
 psAlt = lens _psAlt (\ s a -> s{_psAlt = a})
 
 instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleSearch{..}
-          = go _psQuotaUser _psPrettyPrint _psUserIp _psKey
+        requestWithRoute r u PeopleSearch'{..}
+          = go _psQuotaUser (Just _psPrettyPrint) _psUserIp
+              _psKey
               (Just _psQuery)
               (Just _psLanguage)
               _psPageToken
               _psOauthToken
               (Just _psMaxResults)
               _psFields
-              _psAlt
+              (Just _psAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PeopleSearchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PeopleSearchResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of postal codes.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPostalCodesList@.
-module DFAReporting.PostalCodes.List
+module Network.Google.Resource.DFAReporting.PostalCodes.List
     (
     -- * REST Resource
-      PostalCodesListAPI
+      PostalCodesListResource
 
     -- * Creating a Request
-    , postalCodesList
-    , PostalCodesList
+    , postalCodesList'
+    , PostalCodesList'
 
     -- * Request Lenses
     , pclQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPostalCodesList@ which the
--- 'PostalCodesList' request conforms to.
-type PostalCodesListAPI =
+-- 'PostalCodesList'' request conforms to.
+type PostalCodesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "postalCodes" :> Get '[JSON] PostalCodesListResponse
+         "postalCodes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] PostalCodesListResponse
 
 -- | Retrieves a list of postal codes.
 --
--- /See:/ 'postalCodesList' smart constructor.
-data PostalCodesList = PostalCodesList
+-- /See:/ 'postalCodesList'' smart constructor.
+data PostalCodesList' = PostalCodesList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
     , _pclUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data PostalCodesList = PostalCodesList
     , _pclKey         :: !(Maybe Text)
     , _pclOauthToken  :: !(Maybe Text)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Text
+    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCodesList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data PostalCodesList = PostalCodesList
 -- * 'pclFields'
 --
 -- * 'pclAlt'
-postalCodesList
+postalCodesList'
     :: Int64 -- ^ 'profileId'
-    -> PostalCodesList
-postalCodesList pPclProfileId_ =
-    PostalCodesList
+    -> PostalCodesList'
+postalCodesList' pPclProfileId_ =
+    PostalCodesList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
     , _pclUserIp = Nothing
@@ -94,7 +103,7 @@ postalCodesList pPclProfileId_ =
     , _pclKey = Nothing
     , _pclOauthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = "json"
+    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
 -- | Data format for the response.
-pclAlt :: Lens' PostalCodesList' Text
+pclAlt :: Lens' PostalCodesList' Alt
 pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
 
 instance GoogleRequest PostalCodesList' where
         type Rs PostalCodesList' = PostalCodesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PostalCodesList{..}
-          = go _pclQuotaUser _pclPrettyPrint _pclUserIp
+        requestWithRoute r u PostalCodesList'{..}
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
               _pclProfileId
               _pclKey
               _pclOauthToken
               _pclFields
-              _pclAlt
+              (Just _pclAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostalCodesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PostalCodesListResource)
                       r
                       u

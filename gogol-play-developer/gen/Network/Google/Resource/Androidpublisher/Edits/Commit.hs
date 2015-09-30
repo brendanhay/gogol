@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Commits\/applies the changes made in this edit back to the app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsCommit@.
-module Androidpublisher.Edits.Commit
+module Network.Google.Resource.Androidpublisher.Edits.Commit
     (
     -- * REST Resource
-      EditsCommitAPI
+      EditsCommitResource
 
     -- * Creating a Request
-    , editsCommit
-    , EditsCommit
+    , editsCommit'
+    , EditsCommit'
 
     -- * Request Lenses
     , ecQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsCommit@ which the
--- 'EditsCommit' request conforms to.
-type EditsCommitAPI =
+-- 'EditsCommit'' request conforms to.
+type EditsCommitResource =
      Capture "packageName" Text :>
-       "edits" :> "{editId}:commit" :> Post '[JSON] AppEdit
+       "edits" :>
+         "{editId}:commit" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] AppEdit
 
 -- | Commits\/applies the changes made in this edit back to the app.
 --
--- /See:/ 'editsCommit' smart constructor.
-data EditsCommit = EditsCommit
+-- /See:/ 'editsCommit'' smart constructor.
+data EditsCommit' = EditsCommit'
     { _ecQuotaUser   :: !(Maybe Text)
     , _ecPrettyPrint :: !Bool
     , _ecPackageName :: !Text
@@ -61,7 +70,7 @@ data EditsCommit = EditsCommit
     , _ecOauthToken  :: !(Maybe Text)
     , _ecEditId      :: !Text
     , _ecFields      :: !(Maybe Text)
-    , _ecAlt         :: !Text
+    , _ecAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsCommit'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data EditsCommit = EditsCommit
 -- * 'ecFields'
 --
 -- * 'ecAlt'
-editsCommit
+editsCommit'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsCommit
-editsCommit pEcPackageName_ pEcEditId_ =
-    EditsCommit
+    -> EditsCommit'
+editsCommit' pEcPackageName_ pEcEditId_ =
+    EditsCommit'
     { _ecQuotaUser = Nothing
     , _ecPrettyPrint = True
     , _ecPackageName = pEcPackageName_
@@ -99,7 +108,7 @@ editsCommit pEcPackageName_ pEcEditId_ =
     , _ecOauthToken = Nothing
     , _ecEditId = pEcEditId_
     , _ecFields = Nothing
-    , _ecAlt = "json"
+    , _ecAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +156,23 @@ ecFields :: Lens' EditsCommit' (Maybe Text)
 ecFields = lens _ecFields (\ s a -> s{_ecFields = a})
 
 -- | Data format for the response.
-ecAlt :: Lens' EditsCommit' Text
+ecAlt :: Lens' EditsCommit' Alt
 ecAlt = lens _ecAlt (\ s a -> s{_ecAlt = a})
 
 instance GoogleRequest EditsCommit' where
         type Rs EditsCommit' = AppEdit
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsCommit{..}
-          = go _ecQuotaUser _ecPrettyPrint _ecPackageName
+        requestWithRoute r u EditsCommit'{..}
+          = go _ecQuotaUser (Just _ecPrettyPrint)
+              _ecPackageName
               _ecUserIp
               _ecKey
               _ecOauthToken
               _ecEditId
               _ecFields
-              _ecAlt
+              (Just _ecAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsCommitAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsCommitResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of custom field definitions for a team.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateCustomFieldDefList@.
-module Coordinate.CustomFieldDef.List
+module Network.Google.Resource.Coordinate.CustomFieldDef.List
     (
     -- * REST Resource
-      CustomFieldDefListAPI
+      CustomFieldDefListResource
 
     -- * Creating a Request
-    , customFieldDefList
-    , CustomFieldDefList
+    , customFieldDefList'
+    , CustomFieldDefList'
 
     -- * Request Lenses
     , cfdlQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateCustomFieldDefList@ which the
--- 'CustomFieldDefList' request conforms to.
-type CustomFieldDefListAPI =
+-- 'CustomFieldDefList'' request conforms to.
+type CustomFieldDefListResource =
      "teams" :>
        Capture "teamId" Text :>
          "custom_fields" :>
-           Get '[JSON] CustomFieldDefListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] CustomFieldDefListResponse
 
 -- | Retrieves a list of custom field definitions for a team.
 --
--- /See:/ 'customFieldDefList' smart constructor.
-data CustomFieldDefList = CustomFieldDefList
+-- /See:/ 'customFieldDefList'' smart constructor.
+data CustomFieldDefList' = CustomFieldDefList'
     { _cfdlQuotaUser   :: !(Maybe Text)
     , _cfdlPrettyPrint :: !Bool
     , _cfdlUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data CustomFieldDefList = CustomFieldDefList
     , _cfdlKey         :: !(Maybe Text)
     , _cfdlOauthToken  :: !(Maybe Text)
     , _cfdlFields      :: !(Maybe Text)
-    , _cfdlAlt         :: !Text
+    , _cfdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFieldDefList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CustomFieldDefList = CustomFieldDefList
 -- * 'cfdlFields'
 --
 -- * 'cfdlAlt'
-customFieldDefList
+customFieldDefList'
     :: Text -- ^ 'teamId'
-    -> CustomFieldDefList
-customFieldDefList pCfdlTeamId_ =
-    CustomFieldDefList
+    -> CustomFieldDefList'
+customFieldDefList' pCfdlTeamId_ =
+    CustomFieldDefList'
     { _cfdlQuotaUser = Nothing
     , _cfdlPrettyPrint = True
     , _cfdlUserIp = Nothing
@@ -95,7 +103,7 @@ customFieldDefList pCfdlTeamId_ =
     , _cfdlKey = Nothing
     , _cfdlOauthToken = Nothing
     , _cfdlFields = Nothing
-    , _cfdlAlt = "json"
+    , _cfdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,22 +149,23 @@ cfdlFields
   = lens _cfdlFields (\ s a -> s{_cfdlFields = a})
 
 -- | Data format for the response.
-cfdlAlt :: Lens' CustomFieldDefList' Text
+cfdlAlt :: Lens' CustomFieldDefList' Alt
 cfdlAlt = lens _cfdlAlt (\ s a -> s{_cfdlAlt = a})
 
 instance GoogleRequest CustomFieldDefList' where
         type Rs CustomFieldDefList' =
              CustomFieldDefListResponse
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u CustomFieldDefList{..}
-          = go _cfdlQuotaUser _cfdlPrettyPrint _cfdlUserIp
+        requestWithRoute r u CustomFieldDefList'{..}
+          = go _cfdlQuotaUser (Just _cfdlPrettyPrint)
+              _cfdlUserIp
               _cfdlTeamId
               _cfdlKey
               _cfdlOauthToken
               _cfdlFields
-              _cfdlAlt
+              (Just _cfdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomFieldDefListAPI)
+                      (Proxy :: Proxy CustomFieldDefListResource)
                       r
                       u

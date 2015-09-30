@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataMcfGet@.
-module Analytics.Data.Mcf.Get
+module Network.Google.Resource.Analytics.Data.Mcf.Get
     (
     -- * REST Resource
-      DataMcfGetAPI
+      DataMcfGetResource
 
     -- * Creating a Request
-    , dataMcfGet
-    , DataMcfGet
+    , dataMcfGet'
+    , DataMcfGet'
 
     -- * Request Lenses
     , dmgQuotaUser
@@ -52,29 +53,39 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsDataMcfGet@ which the
--- 'DataMcfGet' request conforms to.
-type DataMcfGetAPI =
+-- 'DataMcfGet'' request conforms to.
+type DataMcfGetResource =
      "data" :>
        "mcf" :>
-         QueryParam "metrics" Text :>
-           QueryParam "samplingLevel" Text :>
-             QueryParam "filters" Text :>
-               QueryParam "ids" Text :>
-                 QueryParam "end-date" Text :>
-                   QueryParam "sort" Text :>
-                     QueryParam "dimensions" Text :>
-                       QueryParam "start-index" Int32 :>
-                         QueryParam "max-results" Int32 :>
-                           QueryParam "start-date" Text :> Get '[JSON] McfData
+         QueryParam "quotaUser" Text :>
+           QueryParam "metrics" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "samplingLevel"
+                 AnalyticsDataMcfGetSamplingLevel
+                 :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "filters" Text :>
+                     QueryParam "ids" Text :>
+                       QueryParam "end-date" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "sort" Text :>
+                             QueryParam "dimensions" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "start-index" Int32 :>
+                                   QueryParam "max-results" Int32 :>
+                                     QueryParam "start-date" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] McfData
 
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
--- /See:/ 'dataMcfGet' smart constructor.
-data DataMcfGet = DataMcfGet
+-- /See:/ 'dataMcfGet'' smart constructor.
+data DataMcfGet' = DataMcfGet'
     { _dmgQuotaUser     :: !(Maybe Text)
     , _dmgMetrics       :: !Text
     , _dmgPrettyPrint   :: !Bool
-    , _dmgSamplingLevel :: !(Maybe Text)
+    , _dmgSamplingLevel :: !(Maybe AnalyticsDataMcfGetSamplingLevel)
     , _dmgUserIp        :: !(Maybe Text)
     , _dmgFilters       :: !(Maybe Text)
     , _dmgIds           :: !Text
@@ -87,7 +98,7 @@ data DataMcfGet = DataMcfGet
     , _dmgMaxResults    :: !(Maybe Int32)
     , _dmgStartDate     :: !Text
     , _dmgFields        :: !(Maybe Text)
-    , _dmgAlt           :: !Text
+    , _dmgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataMcfGet'' with the minimum fields required to make a request.
@@ -127,14 +138,14 @@ data DataMcfGet = DataMcfGet
 -- * 'dmgFields'
 --
 -- * 'dmgAlt'
-dataMcfGet
+dataMcfGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
     -> Text -- ^ 'end-date'
     -> Text -- ^ 'start-date'
-    -> DataMcfGet
-dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
-    DataMcfGet
+    -> DataMcfGet'
+dataMcfGet' pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
+    DataMcfGet'
     { _dmgQuotaUser = Nothing
     , _dmgMetrics = pDmgMetrics_
     , _dmgPrettyPrint = False
@@ -151,7 +162,7 @@ dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
     , _dmgMaxResults = Nothing
     , _dmgStartDate = pDmgStartDate_
     , _dmgFields = Nothing
-    , _dmgAlt = "json"
+    , _dmgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,7 +186,7 @@ dmgPrettyPrint
       (\ s a -> s{_dmgPrettyPrint = a})
 
 -- | The desired sampling level.
-dmgSamplingLevel :: Lens' DataMcfGet' (Maybe Text)
+dmgSamplingLevel :: Lens' DataMcfGet' (Maybe AnalyticsDataMcfGetSamplingLevel)
 dmgSamplingLevel
   = lens _dmgSamplingLevel
       (\ s a -> s{_dmgSamplingLevel = a})
@@ -254,14 +265,15 @@ dmgFields
   = lens _dmgFields (\ s a -> s{_dmgFields = a})
 
 -- | Data format for the response.
-dmgAlt :: Lens' DataMcfGet' Text
+dmgAlt :: Lens' DataMcfGet' Alt
 dmgAlt = lens _dmgAlt (\ s a -> s{_dmgAlt = a})
 
 instance GoogleRequest DataMcfGet' where
         type Rs DataMcfGet' = McfData
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u DataMcfGet{..}
-          = go _dmgQuotaUser (Just _dmgMetrics) _dmgPrettyPrint
+        requestWithRoute r u DataMcfGet'{..}
+          = go _dmgQuotaUser (Just _dmgMetrics)
+              (Just _dmgPrettyPrint)
               _dmgSamplingLevel
               _dmgUserIp
               _dmgFilters
@@ -275,6 +287,8 @@ instance GoogleRequest DataMcfGet' where
               _dmgMaxResults
               (Just _dmgStartDate)
               _dmgFields
-              _dmgAlt
+              (Just _dmgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DataMcfGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy DataMcfGetResource)
+                      r
+                      u

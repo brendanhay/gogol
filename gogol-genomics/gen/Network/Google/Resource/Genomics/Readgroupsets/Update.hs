@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a read group set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsUpdate@.
-module Genomics.Readgroupsets.Update
+module Network.Google.Resource.Genomics.Readgroupsets.Update
     (
     -- * REST Resource
-      ReadgroupsetsUpdateAPI
+      ReadgroupsetsUpdateResource
 
     -- * Creating a Request
-    , readgroupsetsUpdate
-    , ReadgroupsetsUpdate
+    , readgroupsetsUpdate'
+    , ReadgroupsetsUpdate'
 
     -- * Request Lenses
     , ruQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsUpdate@ which the
--- 'ReadgroupsetsUpdate' request conforms to.
-type ReadgroupsetsUpdateAPI =
+-- 'ReadgroupsetsUpdate'' request conforms to.
+type ReadgroupsetsUpdateResource =
      "readgroupsets" :>
        Capture "readGroupSetId" Text :>
-         Put '[JSON] ReadGroupSet
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] ReadGroupSet
 
 -- | Updates a read group set.
 --
--- /See:/ 'readgroupsetsUpdate' smart constructor.
-data ReadgroupsetsUpdate = ReadgroupsetsUpdate
+-- /See:/ 'readgroupsetsUpdate'' smart constructor.
+data ReadgroupsetsUpdate' = ReadgroupsetsUpdate'
     { _ruQuotaUser      :: !(Maybe Text)
     , _ruPrettyPrint    :: !Bool
     , _ruReadGroupSetId :: !Text
@@ -60,7 +67,7 @@ data ReadgroupsetsUpdate = ReadgroupsetsUpdate
     , _ruKey            :: !(Maybe Text)
     , _ruOauthToken     :: !(Maybe Text)
     , _ruFields         :: !(Maybe Text)
-    , _ruAlt            :: !Text
+    , _ruAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data ReadgroupsetsUpdate = ReadgroupsetsUpdate
 -- * 'ruFields'
 --
 -- * 'ruAlt'
-readgroupsetsUpdate
+readgroupsetsUpdate'
     :: Text -- ^ 'readGroupSetId'
-    -> ReadgroupsetsUpdate
-readgroupsetsUpdate pRuReadGroupSetId_ =
-    ReadgroupsetsUpdate
+    -> ReadgroupsetsUpdate'
+readgroupsetsUpdate' pRuReadGroupSetId_ =
+    ReadgroupsetsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruReadGroupSetId = pRuReadGroupSetId_
@@ -94,7 +101,7 @@ readgroupsetsUpdate pRuReadGroupSetId_ =
     , _ruKey = Nothing
     , _ruOauthToken = Nothing
     , _ruFields = Nothing
-    , _ruAlt = "json"
+    , _ruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +145,22 @@ ruFields :: Lens' ReadgroupsetsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
 -- | Data format for the response.
-ruAlt :: Lens' ReadgroupsetsUpdate' Text
+ruAlt :: Lens' ReadgroupsetsUpdate' Alt
 ruAlt = lens _ruAlt (\ s a -> s{_ruAlt = a})
 
 instance GoogleRequest ReadgroupsetsUpdate' where
         type Rs ReadgroupsetsUpdate' = ReadGroupSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsUpdate{..}
-          = go _ruQuotaUser _ruPrettyPrint _ruReadGroupSetId
+        requestWithRoute r u ReadgroupsetsUpdate'{..}
+          = go _ruQuotaUser (Just _ruPrettyPrint)
+              _ruReadGroupSetId
               _ruUserIp
               _ruKey
               _ruOauthToken
               _ruFields
-              _ruAlt
+              (Just _ruAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsUpdateAPI)
+                      (Proxy :: Proxy ReadgroupsetsUpdateResource)
                       r
                       u

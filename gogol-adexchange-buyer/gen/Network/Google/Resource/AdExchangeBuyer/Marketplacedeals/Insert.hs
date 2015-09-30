@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,142 +20,145 @@
 -- | Add new deals for the specified order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplacedealsInsert@.
-module AdExchangeBuyer.Marketplacedeals.Insert
+module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Insert
     (
     -- * REST Resource
-      MarketplacedealsInsertAPI
+      MarketplacedealsInsertResource
 
     -- * Creating a Request
-    , marketplacedealsInsert
-    , MarketplacedealsInsert
+    , marketplacedealsInsert'
+    , MarketplacedealsInsert'
 
     -- * Request Lenses
-    , miiQuotaUser
-    , miiPrettyPrint
-    , miiUserIp
-    , miiKey
-    , miiOauthToken
-    , miiOrderId
-    , miiFields
-    , miiAlt
+    , mQuotaUser
+    , mPrettyPrint
+    , mUserIp
+    , mKey
+    , mOauthToken
+    , mOrderId
+    , mFields
+    , mAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplacedealsInsert@ which the
--- 'MarketplacedealsInsert' request conforms to.
-type MarketplacedealsInsertAPI =
+-- 'MarketplacedealsInsert'' request conforms to.
+type MarketplacedealsInsertResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          "deals" :>
-           "insert" :> Post '[JSON] AddOrderDealsResponse
+           "insert" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] AddOrderDealsResponse
 
 -- | Add new deals for the specified order
 --
--- /See:/ 'marketplacedealsInsert' smart constructor.
-data MarketplacedealsInsert = MarketplacedealsInsert
-    { _miiQuotaUser   :: !(Maybe Text)
-    , _miiPrettyPrint :: !Bool
-    , _miiUserIp      :: !(Maybe Text)
-    , _miiKey         :: !(Maybe Text)
-    , _miiOauthToken  :: !(Maybe Text)
-    , _miiOrderId     :: !Text
-    , _miiFields      :: !(Maybe Text)
-    , _miiAlt         :: !Text
+-- /See:/ 'marketplacedealsInsert'' smart constructor.
+data MarketplacedealsInsert' = MarketplacedealsInsert'
+    { _mQuotaUser   :: !(Maybe Text)
+    , _mPrettyPrint :: !Bool
+    , _mUserIp      :: !(Maybe Text)
+    , _mKey         :: !(Maybe Text)
+    , _mOauthToken  :: !(Maybe Text)
+    , _mOrderId     :: !Text
+    , _mFields      :: !(Maybe Text)
+    , _mAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplacedealsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'miiQuotaUser'
+-- * 'mQuotaUser'
 --
--- * 'miiPrettyPrint'
+-- * 'mPrettyPrint'
 --
--- * 'miiUserIp'
+-- * 'mUserIp'
 --
--- * 'miiKey'
+-- * 'mKey'
 --
--- * 'miiOauthToken'
+-- * 'mOauthToken'
 --
--- * 'miiOrderId'
+-- * 'mOrderId'
 --
--- * 'miiFields'
+-- * 'mFields'
 --
--- * 'miiAlt'
-marketplacedealsInsert
+-- * 'mAlt'
+marketplacedealsInsert'
     :: Text -- ^ 'orderId'
-    -> MarketplacedealsInsert
-marketplacedealsInsert pMiiOrderId_ =
-    MarketplacedealsInsert
-    { _miiQuotaUser = Nothing
-    , _miiPrettyPrint = True
-    , _miiUserIp = Nothing
-    , _miiKey = Nothing
-    , _miiOauthToken = Nothing
-    , _miiOrderId = pMiiOrderId_
-    , _miiFields = Nothing
-    , _miiAlt = "json"
+    -> MarketplacedealsInsert'
+marketplacedealsInsert' pMOrderId_ =
+    MarketplacedealsInsert'
+    { _mQuotaUser = Nothing
+    , _mPrettyPrint = True
+    , _mUserIp = Nothing
+    , _mKey = Nothing
+    , _mOauthToken = Nothing
+    , _mOrderId = pMOrderId_
+    , _mFields = Nothing
+    , _mAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-miiQuotaUser :: Lens' MarketplacedealsInsert' (Maybe Text)
-miiQuotaUser
-  = lens _miiQuotaUser (\ s a -> s{_miiQuotaUser = a})
+mQuotaUser :: Lens' MarketplacedealsInsert' (Maybe Text)
+mQuotaUser
+  = lens _mQuotaUser (\ s a -> s{_mQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-miiPrettyPrint :: Lens' MarketplacedealsInsert' Bool
-miiPrettyPrint
-  = lens _miiPrettyPrint
-      (\ s a -> s{_miiPrettyPrint = a})
+mPrettyPrint :: Lens' MarketplacedealsInsert' Bool
+mPrettyPrint
+  = lens _mPrettyPrint (\ s a -> s{_mPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-miiUserIp :: Lens' MarketplacedealsInsert' (Maybe Text)
-miiUserIp
-  = lens _miiUserIp (\ s a -> s{_miiUserIp = a})
+mUserIp :: Lens' MarketplacedealsInsert' (Maybe Text)
+mUserIp = lens _mUserIp (\ s a -> s{_mUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miiKey :: Lens' MarketplacedealsInsert' (Maybe Text)
-miiKey = lens _miiKey (\ s a -> s{_miiKey = a})
+mKey :: Lens' MarketplacedealsInsert' (Maybe Text)
+mKey = lens _mKey (\ s a -> s{_mKey = a})
 
 -- | OAuth 2.0 token for the current user.
-miiOauthToken :: Lens' MarketplacedealsInsert' (Maybe Text)
-miiOauthToken
-  = lens _miiOauthToken
-      (\ s a -> s{_miiOauthToken = a})
+mOauthToken :: Lens' MarketplacedealsInsert' (Maybe Text)
+mOauthToken
+  = lens _mOauthToken (\ s a -> s{_mOauthToken = a})
 
 -- | OrderId for which deals need to be added.
-miiOrderId :: Lens' MarketplacedealsInsert' Text
-miiOrderId
-  = lens _miiOrderId (\ s a -> s{_miiOrderId = a})
+mOrderId :: Lens' MarketplacedealsInsert' Text
+mOrderId = lens _mOrderId (\ s a -> s{_mOrderId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-miiFields :: Lens' MarketplacedealsInsert' (Maybe Text)
-miiFields
-  = lens _miiFields (\ s a -> s{_miiFields = a})
+mFields :: Lens' MarketplacedealsInsert' (Maybe Text)
+mFields = lens _mFields (\ s a -> s{_mFields = a})
 
 -- | Data format for the response.
-miiAlt :: Lens' MarketplacedealsInsert' Text
-miiAlt = lens _miiAlt (\ s a -> s{_miiAlt = a})
+mAlt :: Lens' MarketplacedealsInsert' Alt
+mAlt = lens _mAlt (\ s a -> s{_mAlt = a})
 
 instance GoogleRequest MarketplacedealsInsert' where
         type Rs MarketplacedealsInsert' =
              AddOrderDealsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplacedealsInsert{..}
-          = go _miiQuotaUser _miiPrettyPrint _miiUserIp _miiKey
-              _miiOauthToken
-              _miiOrderId
-              _miiFields
-              _miiAlt
+        requestWithRoute r u MarketplacedealsInsert'{..}
+          = go _mQuotaUser (Just _mPrettyPrint) _mUserIp _mKey
+              _mOauthToken
+              _mOrderId
+              _mFields
+              (Just _mAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplacedealsInsertAPI)
+                      (Proxy :: Proxy MarketplacedealsInsertResource)
                       r
                       u

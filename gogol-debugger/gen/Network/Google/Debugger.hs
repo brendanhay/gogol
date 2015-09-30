@@ -28,28 +28,28 @@ module Network.Google.Debugger
     -- * REST Resources
 
     -- ** ClouddebuggerControllerDebuggeesBreakpointsList
-    , module Clouddebugger.Controller.Debuggees.Breakpoints.List
+    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.List
 
     -- ** ClouddebuggerControllerDebuggeesBreakpointsUpdate
-    , module Clouddebugger.Controller.Debuggees.Breakpoints.Update
+    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.Update
 
     -- ** ClouddebuggerControllerDebuggeesRegister
-    , module Clouddebugger.Controller.Debuggees.Register
+    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Register
 
     -- ** ClouddebuggerDebuggerDebuggeesBreakpointsDelete
-    , module Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
 
     -- ** ClouddebuggerDebuggerDebuggeesBreakpointsGet
-    , module Clouddebugger.Debugger.Debuggees.Breakpoints.Get
+    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
 
     -- ** ClouddebuggerDebuggerDebuggeesBreakpointsList
-    , module Clouddebugger.Debugger.Debuggees.Breakpoints.List
+    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.List
 
     -- ** ClouddebuggerDebuggerDebuggeesBreakpointsSet
-    , module Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
 
     -- ** ClouddebuggerDebuggerDebuggeesList
-    , module Clouddebugger.Debugger.Debuggees.List
+    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
 
     -- * Types
 
@@ -187,6 +187,10 @@ module Network.Google.Debugger
     , sfArguments
     , sfLocals
 
+    -- ** DebuggeeLabels
+    , DebuggeeLabels
+    , debuggeeLabels
+
     -- ** CloudRepoSourceContext
     , CloudRepoSourceContext
     , cloudRepoSourceContext
@@ -241,7 +245,15 @@ import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
 TODO
 -}
 
-type DebuggerAPI = Controller :<|> Debugger
+type DebuggerAPI =
+     ControllerDebuggeesBreakpointsListResource :<|>
+       ControllerDebuggeesBreakpointsUpdateResource
+       :<|> ControllerDebuggeesRegisterResource
+       :<|> DebuggerDebuggeesBreakpointsSetResource
+       :<|> DebuggerDebuggeesBreakpointsListResource
+       :<|> DebuggerDebuggeesBreakpointsGetResource
+       :<|> DebuggerDebuggeesBreakpointsDeleteResource
+       :<|> DebuggerDebuggeesListResource
 
 debuggerAPI :: Proxy DebuggerAPI
 debuggerAPI = Proxy

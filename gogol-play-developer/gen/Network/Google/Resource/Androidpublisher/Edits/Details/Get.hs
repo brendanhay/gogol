@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- and developer support contact information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsDetailsGet@.
-module Androidpublisher.Edits.Details.Get
+module Network.Google.Resource.Androidpublisher.Edits.Details.Get
     (
     -- * REST Resource
-      EditsDetailsGetAPI
+      EditsDetailsGetResource
 
     -- * Creating a Request
-    , editsDetailsGet
-    , EditsDetailsGet
+    , editsDetailsGet'
+    , EditsDetailsGet'
 
     -- * Request Lenses
     , edgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsDetailsGet@ which the
--- 'EditsDetailsGet' request conforms to.
-type EditsDetailsGetAPI =
+-- 'EditsDetailsGet'' request conforms to.
+type EditsDetailsGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "details" :> Get '[JSON] AppDetails
+           "details" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] AppDetails
 
 -- | Fetches app details for this edit. This includes the default language
 -- and developer support contact information.
 --
--- /See:/ 'editsDetailsGet' smart constructor.
-data EditsDetailsGet = EditsDetailsGet
+-- /See:/ 'editsDetailsGet'' smart constructor.
+data EditsDetailsGet' = EditsDetailsGet'
     { _edgQuotaUser   :: !(Maybe Text)
     , _edgPrettyPrint :: !Bool
     , _edgPackageName :: !Text
@@ -65,7 +73,7 @@ data EditsDetailsGet = EditsDetailsGet
     , _edgOauthToken  :: !(Maybe Text)
     , _edgEditId      :: !Text
     , _edgFields      :: !(Maybe Text)
-    , _edgAlt         :: !Text
+    , _edgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDetailsGet'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data EditsDetailsGet = EditsDetailsGet
 -- * 'edgFields'
 --
 -- * 'edgAlt'
-editsDetailsGet
+editsDetailsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsDetailsGet
-editsDetailsGet pEdgPackageName_ pEdgEditId_ =
-    EditsDetailsGet
+    -> EditsDetailsGet'
+editsDetailsGet' pEdgPackageName_ pEdgEditId_ =
+    EditsDetailsGet'
     { _edgQuotaUser = Nothing
     , _edgPrettyPrint = True
     , _edgPackageName = pEdgPackageName_
@@ -103,7 +111,7 @@ editsDetailsGet pEdgPackageName_ pEdgEditId_ =
     , _edgOauthToken = Nothing
     , _edgEditId = pEdgEditId_
     , _edgFields = Nothing
-    , _edgAlt = "json"
+    , _edgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,21 +163,23 @@ edgFields
   = lens _edgFields (\ s a -> s{_edgFields = a})
 
 -- | Data format for the response.
-edgAlt :: Lens' EditsDetailsGet' Text
+edgAlt :: Lens' EditsDetailsGet' Alt
 edgAlt = lens _edgAlt (\ s a -> s{_edgAlt = a})
 
 instance GoogleRequest EditsDetailsGet' where
         type Rs EditsDetailsGet' = AppDetails
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsDetailsGet{..}
-          = go _edgQuotaUser _edgPrettyPrint _edgPackageName
+        requestWithRoute r u EditsDetailsGet'{..}
+          = go _edgQuotaUser (Just _edgPrettyPrint)
+              _edgPackageName
               _edgUserIp
               _edgKey
               _edgOauthToken
               _edgEditId
               _edgFields
-              _edgAlt
+              (Just _edgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsDetailsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsDetailsGetResource)
                       r
                       u

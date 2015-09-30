@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one remarketing list by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingTargetableRemarketingListsGet@.
-module DFAReporting.TargetableRemarketingLists.Get
+module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
     (
     -- * REST Resource
-      TargetableRemarketingListsGetAPI
+      TargetableRemarketingListsGetResource
 
     -- * Creating a Request
-    , targetableRemarketingListsGet
-    , TargetableRemarketingListsGet
+    , targetableRemarketingListsGet'
+    , TargetableRemarketingListsGet'
 
     -- * Request Lenses
     , trlgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingTargetableRemarketingListsGet@ which the
--- 'TargetableRemarketingListsGet' request conforms to.
-type TargetableRemarketingListsGetAPI =
+-- 'TargetableRemarketingListsGet'' request conforms to.
+type TargetableRemarketingListsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "targetableRemarketingLists" :>
            Capture "id" Int64 :>
-             Get '[JSON] TargetableRemarketingList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] TargetableRemarketingList
 
 -- | Gets one remarketing list by ID.
 --
--- /See:/ 'targetableRemarketingListsGet' smart constructor.
-data TargetableRemarketingListsGet = TargetableRemarketingListsGet
+-- /See:/ 'targetableRemarketingListsGet'' smart constructor.
+data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
     { _trlgQuotaUser   :: !(Maybe Text)
     , _trlgPrettyPrint :: !Bool
     , _trlgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data TargetableRemarketingListsGet = TargetableRemarketingListsGet
     , _trlgId          :: !Int64
     , _trlgOauthToken  :: !(Maybe Text)
     , _trlgFields      :: !(Maybe Text)
-    , _trlgAlt         :: !Text
+    , _trlgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data TargetableRemarketingListsGet = TargetableRemarketingListsGet
 -- * 'trlgFields'
 --
 -- * 'trlgAlt'
-targetableRemarketingListsGet
+targetableRemarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> TargetableRemarketingListsGet
-targetableRemarketingListsGet pTrlgProfileId_ pTrlgId_ =
-    TargetableRemarketingListsGet
+    -> TargetableRemarketingListsGet'
+targetableRemarketingListsGet' pTrlgProfileId_ pTrlgId_ =
+    TargetableRemarketingListsGet'
     { _trlgQuotaUser = Nothing
     , _trlgPrettyPrint = True
     , _trlgUserIp = Nothing
@@ -102,7 +110,7 @@ targetableRemarketingListsGet pTrlgProfileId_ pTrlgId_ =
     , _trlgId = pTrlgId_
     , _trlgOauthToken = Nothing
     , _trlgFields = Nothing
-    , _trlgAlt = "json"
+    , _trlgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ trlgFields
   = lens _trlgFields (\ s a -> s{_trlgFields = a})
 
 -- | Data format for the response.
-trlgAlt :: Lens' TargetableRemarketingListsGet' Text
+trlgAlt :: Lens' TargetableRemarketingListsGet' Alt
 trlgAlt = lens _trlgAlt (\ s a -> s{_trlgAlt = a})
 
 instance GoogleRequest TargetableRemarketingListsGet'
@@ -162,16 +170,18 @@ instance GoogleRequest TargetableRemarketingListsGet'
              TargetableRemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          TargetableRemarketingListsGet{..}
-          = go _trlgQuotaUser _trlgPrettyPrint _trlgUserIp
+          TargetableRemarketingListsGet'{..}
+          = go _trlgQuotaUser (Just _trlgPrettyPrint)
+              _trlgUserIp
               _trlgProfileId
               _trlgKey
               _trlgId
               _trlgOauthToken
               _trlgFields
-              _trlgAlt
+              (Just _trlgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetableRemarketingListsGetAPI)
+                      (Proxy ::
+                         Proxy TargetableRemarketingListsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- receives new entries.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsDelete@.
-module Logging.Projects.Logs.Delete
+module Network.Google.Resource.Logging.Projects.Logs.Delete
     (
     -- * REST Resource
-      ProjectsLogsDeleteAPI
+      ProjectsLogsDeleteResource
 
     -- * Creating a Request
-    , projectsLogsDelete
-    , ProjectsLogsDelete
+    , projectsLogsDelete'
+    , ProjectsLogsDelete'
 
     -- * Request Lenses
     , pldXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsDelete@ which the
--- 'ProjectsLogsDelete' request conforms to.
-type ProjectsLogsDeleteAPI =
+-- 'ProjectsLogsDelete'' request conforms to.
+type ProjectsLogsDeleteResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
-             Capture "logsId" Text :> Delete '[JSON] Empty
+             Capture "logsId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 -- | Deletes a log and all its log entries. The log will reappear if it
 -- receives new entries.
 --
--- /See:/ 'projectsLogsDelete' smart constructor.
-data ProjectsLogsDelete = ProjectsLogsDelete
+-- /See:/ 'projectsLogsDelete'' smart constructor.
+data ProjectsLogsDelete' = ProjectsLogsDelete'
     { _pldXgafv          :: !(Maybe Text)
     , _pldQuotaUser      :: !(Maybe Text)
     , _pldPrettyPrint    :: !Bool
@@ -114,12 +129,12 @@ data ProjectsLogsDelete = ProjectsLogsDelete
 -- * 'pldCallback'
 --
 -- * 'pldAlt'
-projectsLogsDelete
+projectsLogsDelete'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogsDelete
-projectsLogsDelete pPldLogsId_ pPldProjectsId_ =
-    ProjectsLogsDelete
+    -> ProjectsLogsDelete'
+projectsLogsDelete' pPldLogsId_ pPldProjectsId_ =
+    ProjectsLogsDelete'
     { _pldXgafv = Nothing
     , _pldQuotaUser = Nothing
     , _pldPrettyPrint = True
@@ -222,11 +237,11 @@ pldAlt = lens _pldAlt (\ s a -> s{_pldAlt = a})
 instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsDelete{..}
-          = go _pldXgafv _pldQuotaUser _pldPrettyPrint
+        requestWithRoute r u ProjectsLogsDelete'{..}
+          = go _pldXgafv _pldQuotaUser (Just _pldPrettyPrint)
               _pldUploadProtocol
               _pldLogsId
-              _pldPp
+              (Just _pldPp)
               _pldAccessToken
               _pldUploadType
               _pldBearerToken
@@ -235,9 +250,9 @@ instance GoogleRequest ProjectsLogsDelete' where
               _pldProjectsId
               _pldFields
               _pldCallback
-              _pldAlt
+              (Just _pldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsDeleteAPI)
+                      (Proxy :: Proxy ProjectsLogsDeleteResource)
                       r
                       u

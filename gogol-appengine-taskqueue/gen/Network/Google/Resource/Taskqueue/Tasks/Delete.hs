@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a task from a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksDelete@.
-module Taskqueue.Tasks.Delete
+module Network.Google.Resource.Taskqueue.Tasks.Delete
     (
     -- * REST Resource
-      TasksDeleteAPI
+      TasksDeleteResource
 
     -- * Creating a Request
-    , tasksDelete
-    , TasksDelete
+    , tasksDelete'
+    , TasksDelete'
 
     -- * Request Lenses
     , tdTaskqueue
@@ -45,17 +46,25 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksDelete@ which the
--- 'TasksDelete' request conforms to.
-type TasksDeleteAPI =
+-- 'TasksDelete'' request conforms to.
+type TasksDeleteResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
-           "tasks" :> Capture "task" Text :> Delete '[JSON] ()
+           "tasks" :>
+             Capture "task" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a task from a TaskQueue.
 --
--- /See:/ 'tasksDelete' smart constructor.
-data TasksDelete = TasksDelete
+-- /See:/ 'tasksDelete'' smart constructor.
+data TasksDelete' = TasksDelete'
     { _tdTaskqueue   :: !Text
     , _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
@@ -65,7 +74,7 @@ data TasksDelete = TasksDelete
     , _tdTask        :: !Text
     , _tdOauthToken  :: !(Maybe Text)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksDelete'' with the minimum fields required to make a request.
@@ -91,13 +100,13 @@ data TasksDelete = TasksDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-tasksDelete
+tasksDelete'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
     -> Text -- ^ 'task'
-    -> TasksDelete
-tasksDelete pTdTaskqueue_ pTdProject_ pTdTask_ =
-    TasksDelete
+    -> TasksDelete'
+tasksDelete' pTdTaskqueue_ pTdProject_ pTdTask_ =
+    TasksDelete'
     { _tdTaskqueue = pTdTaskqueue_
     , _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
@@ -107,7 +116,7 @@ tasksDelete pTdTaskqueue_ pTdProject_ pTdTask_ =
     , _tdTask = pTdTask_
     , _tdOauthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | The taskqueue to delete a task from.
@@ -158,21 +167,24 @@ tdFields :: Lens' TasksDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TasksDelete' Text
+tdAlt :: Lens' TasksDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksDelete{..}
-          = go _tdTaskqueue _tdQuotaUser _tdPrettyPrint
+        requestWithRoute r u TasksDelete'{..}
+          = go _tdTaskqueue _tdQuotaUser (Just _tdPrettyPrint)
               _tdProject
               _tdUserIp
               _tdKey
               _tdTask
               _tdOauthToken
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TasksDeleteResource)
+                      r
+                      u

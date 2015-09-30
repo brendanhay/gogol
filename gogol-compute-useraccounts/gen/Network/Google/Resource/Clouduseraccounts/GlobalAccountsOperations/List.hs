@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGlobalAccountsOperationsList@.
-module Clouduseraccounts.GlobalAccountsOperations.List
+module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.List
     (
     -- * REST Resource
-      GlobalAccountsOperationsListAPI
+      GlobalAccountsOperationsListResource
 
     -- * Creating a Request
-    , globalAccountsOperationsList
-    , GlobalAccountsOperationsList
+    , globalAccountsOperationsList'
+    , GlobalAccountsOperationsList'
 
     -- * Request Lenses
     , gaolQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGlobalAccountsOperationsList@ which the
--- 'GlobalAccountsOperationsList' request conforms to.
-type GlobalAccountsOperationsListAPI =
+-- 'GlobalAccountsOperationsList'' request conforms to.
+type GlobalAccountsOperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] OperationList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
 -- project.
 --
--- /See:/ 'globalAccountsOperationsList' smart constructor.
-data GlobalAccountsOperationsList = GlobalAccountsOperationsList
+-- /See:/ 'globalAccountsOperationsList'' smart constructor.
+data GlobalAccountsOperationsList' = GlobalAccountsOperationsList'
     { _gaolQuotaUser   :: !(Maybe Text)
     , _gaolPrettyPrint :: !Bool
     , _gaolOrderBy     :: !(Maybe Text)
@@ -75,7 +82,7 @@ data GlobalAccountsOperationsList = GlobalAccountsOperationsList
     , _gaolOauthToken  :: !(Maybe Text)
     , _gaolMaxResults  :: !Word32
     , _gaolFields      :: !(Maybe Text)
-    , _gaolAlt         :: !Text
+    , _gaolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsList'' with the minimum fields required to make a request.
@@ -105,11 +112,11 @@ data GlobalAccountsOperationsList = GlobalAccountsOperationsList
 -- * 'gaolFields'
 --
 -- * 'gaolAlt'
-globalAccountsOperationsList
+globalAccountsOperationsList'
     :: Text -- ^ 'project'
-    -> GlobalAccountsOperationsList
-globalAccountsOperationsList pGaolProject_ =
-    GlobalAccountsOperationsList
+    -> GlobalAccountsOperationsList'
+globalAccountsOperationsList' pGaolProject_ =
+    GlobalAccountsOperationsList'
     { _gaolQuotaUser = Nothing
     , _gaolPrettyPrint = True
     , _gaolOrderBy = Nothing
@@ -121,7 +128,7 @@ globalAccountsOperationsList pGaolProject_ =
     , _gaolOauthToken = Nothing
     , _gaolMaxResults = 500
     , _gaolFields = Nothing
-    , _gaolAlt = "json"
+    , _gaolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -208,7 +215,7 @@ gaolFields
   = lens _gaolFields (\ s a -> s{_gaolFields = a})
 
 -- | Data format for the response.
-gaolAlt :: Lens' GlobalAccountsOperationsList' Text
+gaolAlt :: Lens' GlobalAccountsOperationsList' Alt
 gaolAlt = lens _gaolAlt (\ s a -> s{_gaolAlt = a})
 
 instance GoogleRequest GlobalAccountsOperationsList'
@@ -216,8 +223,10 @@ instance GoogleRequest GlobalAccountsOperationsList'
         type Rs GlobalAccountsOperationsList' = OperationList
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GlobalAccountsOperationsList{..}
-          = go _gaolQuotaUser _gaolPrettyPrint _gaolOrderBy
+        requestWithRoute r u
+          GlobalAccountsOperationsList'{..}
+          = go _gaolQuotaUser (Just _gaolPrettyPrint)
+              _gaolOrderBy
               _gaolProject
               _gaolUserIp
               _gaolKey
@@ -226,9 +235,9 @@ instance GoogleRequest GlobalAccountsOperationsList'
               _gaolOauthToken
               (Just _gaolMaxResults)
               _gaolFields
-              _gaolAlt
+              (Just _gaolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAccountsOperationsListAPI)
+                      (Proxy :: Proxy GlobalAccountsOperationsListResource)
                       r
                       u

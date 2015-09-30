@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsList@.
-module DFAReporting.FloodlightConfigurations.List
+module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     (
     -- * REST Resource
-      FloodlightConfigurationsListAPI
+      FloodlightConfigurationsListResource
 
     -- * Creating a Request
-    , floodlightConfigurationsList
-    , FloodlightConfigurationsList
+    , floodlightConfigurationsList'
+    , FloodlightConfigurationsList'
 
     -- * Request Lenses
     , fclQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightConfigurationsList@ which the
--- 'FloodlightConfigurationsList' request conforms to.
-type FloodlightConfigurationsListAPI =
+-- 'FloodlightConfigurationsList'' request conforms to.
+type FloodlightConfigurationsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
-           QueryParams "ids" Int64 :>
-             Get '[JSON] FloodlightConfigurationsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] FloodlightConfigurationsListResponse
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --
--- /See:/ 'floodlightConfigurationsList' smart constructor.
-data FloodlightConfigurationsList = FloodlightConfigurationsList
+-- /See:/ 'floodlightConfigurationsList'' smart constructor.
+data FloodlightConfigurationsList' = FloodlightConfigurationsList'
     { _fclQuotaUser   :: !(Maybe Text)
     , _fclPrettyPrint :: !Bool
     , _fclUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data FloodlightConfigurationsList = FloodlightConfigurationsList
     , _fclKey         :: !(Maybe Text)
     , _fclOauthToken  :: !(Maybe Text)
     , _fclFields      :: !(Maybe Text)
-    , _fclAlt         :: !Text
+    , _fclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsList'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data FloodlightConfigurationsList = FloodlightConfigurationsList
 -- * 'fclFields'
 --
 -- * 'fclAlt'
-floodlightConfigurationsList
+floodlightConfigurationsList'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightConfigurationsList
-floodlightConfigurationsList pFclProfileId_ =
-    FloodlightConfigurationsList
+    -> FloodlightConfigurationsList'
+floodlightConfigurationsList' pFclProfileId_ =
+    FloodlightConfigurationsList'
     { _fclQuotaUser = Nothing
     , _fclPrettyPrint = True
     , _fclUserIp = Nothing
@@ -101,7 +109,7 @@ floodlightConfigurationsList pFclProfileId_ =
     , _fclKey = Nothing
     , _fclOauthToken = Nothing
     , _fclFields = Nothing
-    , _fclAlt = "json"
+    , _fclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,7 +159,7 @@ fclFields
   = lens _fclFields (\ s a -> s{_fclFields = a})
 
 -- | Data format for the response.
-fclAlt :: Lens' FloodlightConfigurationsList' Text
+fclAlt :: Lens' FloodlightConfigurationsList' Alt
 fclAlt = lens _fclAlt (\ s a -> s{_fclAlt = a})
 
 instance GoogleRequest FloodlightConfigurationsList'
@@ -159,15 +167,17 @@ instance GoogleRequest FloodlightConfigurationsList'
         type Rs FloodlightConfigurationsList' =
              FloodlightConfigurationsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightConfigurationsList{..}
-          = go _fclQuotaUser _fclPrettyPrint _fclUserIp _fclIds
+        requestWithRoute r u
+          FloodlightConfigurationsList'{..}
+          = go _fclQuotaUser (Just _fclPrettyPrint) _fclUserIp
+              _fclIds
               _fclProfileId
               _fclKey
               _fclOauthToken
               _fclFields
-              _fclAlt
+              (Just _fclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightConfigurationsListAPI)
+                      (Proxy :: Proxy FloodlightConfigurationsListResource)
                       r
                       u

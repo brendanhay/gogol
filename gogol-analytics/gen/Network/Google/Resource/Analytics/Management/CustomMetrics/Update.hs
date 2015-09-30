@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing custom metric.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsUpdate@.
-module Analytics.Management.CustomMetrics.Update
+module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
     (
     -- * REST Resource
-      ManagementCustomMetricsUpdateAPI
+      ManagementCustomMetricsUpdateResource
 
     -- * Creating a Request
-    , managementCustomMetricsUpdate
-    , ManagementCustomMetricsUpdate
+    , managementCustomMetricsUpdate'
+    , ManagementCustomMetricsUpdate'
 
     -- * Request Lenses
     , mcmuQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsUpdate@ which the
--- 'ManagementCustomMetricsUpdate' request conforms to.
-type ManagementCustomMetricsUpdateAPI =
+-- 'ManagementCustomMetricsUpdate'' request conforms to.
+type ManagementCustomMetricsUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,13 +56,20 @@ type ManagementCustomMetricsUpdateAPI =
              Capture "webPropertyId" Text :>
                "customMetrics" :>
                  Capture "customMetricId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     Put '[JSON] CustomMetric
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Put '[JSON] CustomMetric
 
 -- | Updates an existing custom metric.
 --
--- /See:/ 'managementCustomMetricsUpdate' smart constructor.
-data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate
+-- /See:/ 'managementCustomMetricsUpdate'' smart constructor.
+data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
     { _mcmuQuotaUser                   :: !(Maybe Text)
     , _mcmuPrettyPrint                 :: !Bool
     , _mcmuCustomMetricId              :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate
     , _mcmuKey                         :: !(Maybe Text)
     , _mcmuOauthToken                  :: !(Maybe Text)
     , _mcmuFields                      :: !(Maybe Text)
-    , _mcmuAlt                         :: !Text
+    , _mcmuAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsUpdate'' with the minimum fields required to make a request.
@@ -100,13 +108,13 @@ data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate
 -- * 'mcmuFields'
 --
 -- * 'mcmuAlt'
-managementCustomMetricsUpdate
+managementCustomMetricsUpdate'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomMetricsUpdate
-managementCustomMetricsUpdate pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuAccountId_ =
-    ManagementCustomMetricsUpdate
+    -> ManagementCustomMetricsUpdate'
+managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuAccountId_ =
+    ManagementCustomMetricsUpdate'
     { _mcmuQuotaUser = Nothing
     , _mcmuPrettyPrint = False
     , _mcmuCustomMetricId = pMcmuCustomMetricId_
@@ -117,7 +125,7 @@ managementCustomMetricsUpdate pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuAcco
     , _mcmuKey = Nothing
     , _mcmuOauthToken = Nothing
     , _mcmuFields = Nothing
-    , _mcmuAlt = "json"
+    , _mcmuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ mcmuFields
   = lens _mcmuFields (\ s a -> s{_mcmuFields = a})
 
 -- | Data format for the response.
-mcmuAlt :: Lens' ManagementCustomMetricsUpdate' Text
+mcmuAlt :: Lens' ManagementCustomMetricsUpdate' Alt
 mcmuAlt = lens _mcmuAlt (\ s a -> s{_mcmuAlt = a})
 
 instance GoogleRequest ManagementCustomMetricsUpdate'
@@ -191,8 +199,8 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
         type Rs ManagementCustomMetricsUpdate' = CustomMetric
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomMetricsUpdate{..}
-          = go _mcmuQuotaUser _mcmuPrettyPrint
+          ManagementCustomMetricsUpdate'{..}
+          = go _mcmuQuotaUser (Just _mcmuPrettyPrint)
               _mcmuCustomMetricId
               _mcmuWebPropertyId
               (Just _mcmuIgnoreCustomDataSourceLinks)
@@ -201,9 +209,10 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
               _mcmuKey
               _mcmuOauthToken
               _mcmuFields
-              _mcmuAlt
+              (Just _mcmuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomMetricsUpdateAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomMetricsUpdateResource)
                       r
                       u

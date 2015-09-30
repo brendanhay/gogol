@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- whitelisted tester accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsReset@.
-module GamesManagement.Quests.Reset
+module Network.Google.Resource.GamesManagement.Quests.Reset
     (
     -- * REST Resource
-      QuestsResetAPI
+      QuestsResetResource
 
     -- * Creating a Request
-    , questsReset
-    , QuestsReset
+    , questsReset'
+    , QuestsReset'
 
     -- * Request Lenses
     , qrQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementQuestsReset@ which the
--- 'QuestsReset' request conforms to.
-type QuestsResetAPI =
+-- 'QuestsReset'' request conforms to.
+type QuestsResetResource =
      "quests" :>
-       Capture "questId" Text :> "reset" :> Post '[JSON] ()
+       Capture "questId" Text :>
+         "reset" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for the
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application.
 --
--- /See:/ 'questsReset' smart constructor.
-data QuestsReset = QuestsReset
+-- /See:/ 'questsReset'' smart constructor.
+data QuestsReset' = QuestsReset'
     { _qrQuotaUser   :: !(Maybe Text)
     , _qrPrettyPrint :: !Bool
     , _qrUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data QuestsReset = QuestsReset
     , _qrOauthToken  :: !(Maybe Text)
     , _qrQuestId     :: !Text
     , _qrFields      :: !(Maybe Text)
-    , _qrAlt         :: !Text
+    , _qrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsReset'' with the minimum fields required to make a request.
@@ -85,11 +94,11 @@ data QuestsReset = QuestsReset
 -- * 'qrFields'
 --
 -- * 'qrAlt'
-questsReset
+questsReset'
     :: Text -- ^ 'questId'
-    -> QuestsReset
-questsReset pQrQuestId_ =
-    QuestsReset
+    -> QuestsReset'
+questsReset' pQrQuestId_ =
+    QuestsReset'
     { _qrQuotaUser = Nothing
     , _qrPrettyPrint = True
     , _qrUserIp = Nothing
@@ -97,7 +106,7 @@ questsReset pQrQuestId_ =
     , _qrOauthToken = Nothing
     , _qrQuestId = pQrQuestId_
     , _qrFields = Nothing
-    , _qrAlt = "json"
+    , _qrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,17 +148,21 @@ qrFields :: Lens' QuestsReset' (Maybe Text)
 qrFields = lens _qrFields (\ s a -> s{_qrFields = a})
 
 -- | Data format for the response.
-qrAlt :: Lens' QuestsReset' Text
+qrAlt :: Lens' QuestsReset' Alt
 qrAlt = lens _qrAlt (\ s a -> s{_qrAlt = a})
 
 instance GoogleRequest QuestsReset' where
         type Rs QuestsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u QuestsReset{..}
-          = go _qrQuotaUser _qrPrettyPrint _qrUserIp _qrKey
+        requestWithRoute r u QuestsReset'{..}
+          = go _qrQuotaUser (Just _qrPrettyPrint) _qrUserIp
+              _qrKey
               _qrOauthToken
               _qrQuestId
               _qrFields
-              _qrAlt
+              (Just _qrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuestsResetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy QuestsResetResource)
+                      r
+                      u

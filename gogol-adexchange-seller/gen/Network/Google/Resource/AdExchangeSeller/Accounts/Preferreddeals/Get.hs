@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get information about the selected Ad Exchange Preferred Deal.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsPreferreddealsGet@.
-module AdExchangeSeller.Accounts.Preferreddeals.Get
+module Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.Get
     (
     -- * REST Resource
-      AccountsPreferreddealsGetAPI
+      AccountsPreferreddealsGetResource
 
     -- * Creating a Request
-    , accountsPreferreddealsGet
-    , AccountsPreferreddealsGet
+    , accountsPreferreddealsGet'
+    , AccountsPreferreddealsGet'
 
     -- * Request Lenses
     , apgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsPreferreddealsGet@ which the
--- 'AccountsPreferreddealsGet' request conforms to.
-type AccountsPreferreddealsGetAPI =
+-- 'AccountsPreferreddealsGet'' request conforms to.
+type AccountsPreferreddealsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "preferreddeals" :>
-           Capture "dealId" Text :> Get '[JSON] PreferredDeal
+           Capture "dealId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] PreferredDeal
 
 -- | Get information about the selected Ad Exchange Preferred Deal.
 --
--- /See:/ 'accountsPreferreddealsGet' smart constructor.
-data AccountsPreferreddealsGet = AccountsPreferreddealsGet
+-- /See:/ 'accountsPreferreddealsGet'' smart constructor.
+data AccountsPreferreddealsGet' = AccountsPreferreddealsGet'
     { _apgQuotaUser   :: !(Maybe Text)
     , _apgPrettyPrint :: !Bool
     , _apgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AccountsPreferreddealsGet = AccountsPreferreddealsGet
     , _apgKey         :: !(Maybe Text)
     , _apgOauthToken  :: !(Maybe Text)
     , _apgFields      :: !(Maybe Text)
-    , _apgAlt         :: !Text
+    , _apgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPreferreddealsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AccountsPreferreddealsGet = AccountsPreferreddealsGet
 -- * 'apgFields'
 --
 -- * 'apgAlt'
-accountsPreferreddealsGet
+accountsPreferreddealsGet'
     :: Text -- ^ 'dealId'
     -> Text -- ^ 'accountId'
-    -> AccountsPreferreddealsGet
-accountsPreferreddealsGet pApgDealId_ pApgAccountId_ =
-    AccountsPreferreddealsGet
+    -> AccountsPreferreddealsGet'
+accountsPreferreddealsGet' pApgDealId_ pApgAccountId_ =
+    AccountsPreferreddealsGet'
     { _apgQuotaUser = Nothing
     , _apgPrettyPrint = True
     , _apgUserIp = Nothing
@@ -101,7 +109,7 @@ accountsPreferreddealsGet pApgDealId_ pApgAccountId_ =
     , _apgKey = Nothing
     , _apgOauthToken = Nothing
     , _apgFields = Nothing
-    , _apgAlt = "json"
+    , _apgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,23 +159,23 @@ apgFields
   = lens _apgFields (\ s a -> s{_apgFields = a})
 
 -- | Data format for the response.
-apgAlt :: Lens' AccountsPreferreddealsGet' Text
+apgAlt :: Lens' AccountsPreferreddealsGet' Alt
 apgAlt = lens _apgAlt (\ s a -> s{_apgAlt = a})
 
 instance GoogleRequest AccountsPreferreddealsGet'
          where
         type Rs AccountsPreferreddealsGet' = PreferredDeal
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsPreferreddealsGet{..}
-          = go _apgQuotaUser _apgPrettyPrint _apgUserIp
+        requestWithRoute r u AccountsPreferreddealsGet'{..}
+          = go _apgQuotaUser (Just _apgPrettyPrint) _apgUserIp
               _apgDealId
               _apgAccountId
               _apgKey
               _apgOauthToken
               _apgFields
-              _apgAlt
+              (Just _apgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPreferreddealsGetAPI)
+                      (Proxy :: Proxy AccountsPreferreddealsGetResource)
                       r
                       u

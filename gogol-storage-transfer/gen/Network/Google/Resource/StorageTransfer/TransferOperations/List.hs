@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- \`users\/*\/operations\`.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsList@.
-module StorageTransfer.TransferOperations.List
+module Network.Google.Resource.StorageTransfer.TransferOperations.List
     (
     -- * REST Resource
-      TransferOperationsListAPI
+      TransferOperationsListResource
 
     -- * Creating a Request
-    , transferOperationsList
-    , TransferOperationsList
+    , transferOperationsList'
+    , TransferOperationsList'
 
     -- * Request Lenses
     , tolXgafv
@@ -56,14 +57,27 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsList@ which the
--- 'TransferOperationsList' request conforms to.
-type TransferOperationsListAPI =
+-- 'TransferOperationsList'' request conforms to.
+type TransferOperationsListResource =
      "v1" :>
        "{+name}" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListOperationsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
@@ -71,8 +85,8 @@ type TransferOperationsListAPI =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ 'transferOperationsList' smart constructor.
-data TransferOperationsList = TransferOperationsList
+-- /See:/ 'transferOperationsList'' smart constructor.
+data TransferOperationsList' = TransferOperationsList'
     { _tolXgafv          :: !(Maybe Text)
     , _tolQuotaUser      :: !(Maybe Text)
     , _tolPrettyPrint    :: !Bool
@@ -129,11 +143,11 @@ data TransferOperationsList = TransferOperationsList
 -- * 'tolCallback'
 --
 -- * 'tolAlt'
-transferOperationsList
+transferOperationsList'
     :: Text -- ^ 'name'
-    -> TransferOperationsList
-transferOperationsList pTolName_ =
-    TransferOperationsList
+    -> TransferOperationsList'
+transferOperationsList' pTolName_ =
+    TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolQuotaUser = Nothing
     , _tolPrettyPrint = True
@@ -247,10 +261,10 @@ instance GoogleRequest TransferOperationsList' where
         type Rs TransferOperationsList' =
              ListOperationsResponse
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsList{..}
-          = go _tolXgafv _tolQuotaUser _tolPrettyPrint
+        requestWithRoute r u TransferOperationsList'{..}
+          = go _tolXgafv _tolQuotaUser (Just _tolPrettyPrint)
               _tolUploadProtocol
-              _tolPp
+              (Just _tolPp)
               _tolAccessToken
               _tolUploadType
               _tolBearerToken
@@ -262,9 +276,9 @@ instance GoogleRequest TransferOperationsList' where
               _tolPageSize
               _tolFields
               _tolCallback
-              _tolAlt
+              (Just _tolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsListAPI)
+                      (Proxy :: Proxy TransferOperationsListResource)
                       r
                       u

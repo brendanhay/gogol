@@ -28,19 +28,19 @@ module Network.Google.AdminDataTransfer
     -- * REST Resources
 
     -- ** DatatransferApplicationsGet
-    , module Datatransfer.Applications.Get
+    , module Network.Google.Resource.Datatransfer.Applications.Get
 
     -- ** DatatransferApplicationsList
-    , module Datatransfer.Applications.List
+    , module Network.Google.Resource.Datatransfer.Applications.List
 
     -- ** DatatransferTransfersGet
-    , module Datatransfer.Transfers.Get
+    , module Network.Google.Resource.Datatransfer.Transfers.Get
 
     -- ** DatatransferTransfersInsert
-    , module Datatransfer.Transfers.Insert
+    , module Network.Google.Resource.Datatransfer.Transfers.Insert
 
     -- ** DatatransferTransfersList
-    , module Datatransfer.Transfers.List
+    , module Network.Google.Resource.Datatransfer.Transfers.List
 
     -- * Types
 
@@ -87,6 +87,9 @@ module Network.Google.AdminDataTransfer
     , dtlrKind
     , dtlrDataTransfers
 
+    -- ** Alt
+    , Alt (..)
+
     -- ** ApplicationDataTransfer
     , ApplicationDataTransfer
     , applicationDataTransfer
@@ -108,7 +111,10 @@ TODO
 -}
 
 type AdminDataTransferAPI =
-     Transfers :<|> Applications
+     TransfersInsertResource :<|> TransfersListResource
+       :<|> TransfersGetResource
+       :<|> ApplicationsListResource
+       :<|> ApplicationsGetResource
 
 adminDataTransferAPI :: Proxy AdminDataTransferAPI
 adminDataTransferAPI = Proxy

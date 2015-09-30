@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- in the query arguments do not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesList@.
-module Classroom.Courses.List
+module Network.Google.Resource.Classroom.Courses.List
     (
     -- * REST Resource
-      CoursesListAPI
+      CoursesListResource
 
     -- * Creating a Request
-    , coursesList
-    , CoursesList
+    , coursesList'
+    , CoursesList'
 
     -- * Request Lenses
     , clStudentId
@@ -57,15 +58,28 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesList@ which the
--- 'CoursesList' request conforms to.
-type CoursesListAPI =
+-- 'CoursesList'' request conforms to.
+type CoursesListResource =
      "v1" :>
        "courses" :>
          QueryParam "studentId" Text :>
-           QueryParam "teacherId" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "pageSize" Int32 :>
-                 Get '[JSON] ListCoursesResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "teacherId" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListCoursesResponse
 
 -- | Returns a list of courses that the requesting user is permitted to view,
 -- restricted to those that match the request. This method returns the
@@ -74,8 +88,8 @@ type CoursesListAPI =
 -- the query argument is malformed. * \`NOT_FOUND\` if any users specified
 -- in the query arguments do not exist.
 --
--- /See:/ 'coursesList' smart constructor.
-data CoursesList = CoursesList
+-- /See:/ 'coursesList'' smart constructor.
+data CoursesList' = CoursesList'
     { _clStudentId      :: !(Maybe Text)
     , _clXgafv          :: !(Maybe Text)
     , _clQuotaUser      :: !(Maybe Text)
@@ -132,10 +146,10 @@ data CoursesList = CoursesList
 -- * 'clCallback'
 --
 -- * 'clAlt'
-coursesList
-    :: CoursesList
-coursesList =
-    CoursesList
+coursesList'
+    :: CoursesList'
+coursesList' =
+    CoursesList'
     { _clStudentId = Nothing
     , _clXgafv = Nothing
     , _clQuotaUser = Nothing
@@ -259,11 +273,11 @@ clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesList{..}
+        requestWithRoute r u CoursesList'{..}
           = go _clStudentId _clXgafv _clQuotaUser
-              _clPrettyPrint
+              (Just _clPrettyPrint)
               _clUploadProtocol
-              _clPp
+              (Just _clPp)
               _clAccessToken
               _clUploadType
               _clTeacherId
@@ -274,6 +288,9 @@ instance GoogleRequest CoursesList' where
               _clPageSize
               _clFields
               _clCallback
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesListResource)
+                      r
+                      u

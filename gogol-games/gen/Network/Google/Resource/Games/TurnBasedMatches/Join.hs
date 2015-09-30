@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Join a turn-based match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesJoin@.
-module Games.TurnBasedMatches.Join
+module Network.Google.Resource.Games.TurnBasedMatches.Join
     (
     -- * REST Resource
-      TurnBasedMatchesJoinAPI
+      TurnBasedMatchesJoinResource
 
     -- * Creating a Request
-    , turnBasedMatchesJoin
-    , TurnBasedMatchesJoin
+    , turnBasedMatchesJoin'
+    , TurnBasedMatchesJoin'
 
     -- * Request Lenses
     , tbmjQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesJoin@ which the
--- 'TurnBasedMatchesJoin' request conforms to.
-type TurnBasedMatchesJoinAPI =
+-- 'TurnBasedMatchesJoin'' request conforms to.
+type TurnBasedMatchesJoinResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "join" :>
-           QueryParam "language" Text :>
-             Put '[JSON] TurnBasedMatch
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
 
 -- | Join a turn-based match.
 --
--- /See:/ 'turnBasedMatchesJoin' smart constructor.
-data TurnBasedMatchesJoin = TurnBasedMatchesJoin
+-- /See:/ 'turnBasedMatchesJoin'' smart constructor.
+data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
     { _tbmjQuotaUser   :: !(Maybe Text)
     , _tbmjPrettyPrint :: !Bool
     , _tbmjUserIp      :: !(Maybe Text)
@@ -64,7 +71,7 @@ data TurnBasedMatchesJoin = TurnBasedMatchesJoin
     , _tbmjOauthToken  :: !(Maybe Text)
     , _tbmjMatchId     :: !Text
     , _tbmjFields      :: !(Maybe Text)
-    , _tbmjAlt         :: !Text
+    , _tbmjAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesJoin'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data TurnBasedMatchesJoin = TurnBasedMatchesJoin
 -- * 'tbmjFields'
 --
 -- * 'tbmjAlt'
-turnBasedMatchesJoin
+turnBasedMatchesJoin'
     :: Text -- ^ 'matchId'
-    -> TurnBasedMatchesJoin
-turnBasedMatchesJoin pTbmjMatchId_ =
-    TurnBasedMatchesJoin
+    -> TurnBasedMatchesJoin'
+turnBasedMatchesJoin' pTbmjMatchId_ =
+    TurnBasedMatchesJoin'
     { _tbmjQuotaUser = Nothing
     , _tbmjPrettyPrint = True
     , _tbmjUserIp = Nothing
@@ -101,7 +108,7 @@ turnBasedMatchesJoin pTbmjMatchId_ =
     , _tbmjOauthToken = Nothing
     , _tbmjMatchId = pTbmjMatchId_
     , _tbmjFields = Nothing
-    , _tbmjAlt = "json"
+    , _tbmjAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +159,23 @@ tbmjFields
   = lens _tbmjFields (\ s a -> s{_tbmjFields = a})
 
 -- | Data format for the response.
-tbmjAlt :: Lens' TurnBasedMatchesJoin' Text
+tbmjAlt :: Lens' TurnBasedMatchesJoin' Alt
 tbmjAlt = lens _tbmjAlt (\ s a -> s{_tbmjAlt = a})
 
 instance GoogleRequest TurnBasedMatchesJoin' where
         type Rs TurnBasedMatchesJoin' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesJoin{..}
-          = go _tbmjQuotaUser _tbmjPrettyPrint _tbmjUserIp
+        requestWithRoute r u TurnBasedMatchesJoin'{..}
+          = go _tbmjQuotaUser (Just _tbmjPrettyPrint)
+              _tbmjUserIp
               _tbmjKey
               _tbmjLanguage
               _tbmjOauthToken
               _tbmjMatchId
               _tbmjFields
-              _tbmjAlt
+              (Just _tbmjAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesJoinAPI)
+                      (Proxy :: Proxy TurnBasedMatchesJoinResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAggregatedList@.
-module Compute.Instances.AggregatedList
+module Network.Google.Resource.Compute.Instances.AggregatedList
     (
     -- * REST Resource
-      InstancesAggregatedListAPI
+      InstancesAggregatedListResource
 
     -- * Creating a Request
-    , instancesAggregatedList
-    , InstancesAggregatedList
+    , instancesAggregatedList'
+    , InstancesAggregatedList'
 
     -- * Request Lenses
     , ialQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesAggregatedList@ which the
--- 'InstancesAggregatedList' request conforms to.
-type InstancesAggregatedListAPI =
+-- 'InstancesAggregatedList'' request conforms to.
+type InstancesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "instances" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] InstanceAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] InstanceAggregatedList
 
 --
--- /See:/ 'instancesAggregatedList' smart constructor.
-data InstancesAggregatedList = InstancesAggregatedList
+-- /See:/ 'instancesAggregatedList'' smart constructor.
+data InstancesAggregatedList' = InstancesAggregatedList'
     { _ialQuotaUser   :: !(Maybe Text)
     , _ialPrettyPrint :: !Bool
     , _ialProject     :: !Text
@@ -69,7 +77,7 @@ data InstancesAggregatedList = InstancesAggregatedList
     , _ialOauthToken  :: !(Maybe Text)
     , _ialMaxResults  :: !Word32
     , _ialFields      :: !(Maybe Text)
-    , _ialAlt         :: !Text
+    , _ialAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAggregatedList'' with the minimum fields required to make a request.
@@ -97,11 +105,11 @@ data InstancesAggregatedList = InstancesAggregatedList
 -- * 'ialFields'
 --
 -- * 'ialAlt'
-instancesAggregatedList
+instancesAggregatedList'
     :: Text -- ^ 'project'
-    -> InstancesAggregatedList
-instancesAggregatedList pIalProject_ =
-    InstancesAggregatedList
+    -> InstancesAggregatedList'
+instancesAggregatedList' pIalProject_ =
+    InstancesAggregatedList'
     { _ialQuotaUser = Nothing
     , _ialPrettyPrint = True
     , _ialProject = pIalProject_
@@ -112,7 +120,7 @@ instancesAggregatedList pIalProject_ =
     , _ialOauthToken = Nothing
     , _ialMaxResults = 500
     , _ialFields = Nothing
-    , _ialAlt = "json"
+    , _ialAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,15 +193,15 @@ ialFields
   = lens _ialFields (\ s a -> s{_ialFields = a})
 
 -- | Data format for the response.
-ialAlt :: Lens' InstancesAggregatedList' Text
+ialAlt :: Lens' InstancesAggregatedList' Alt
 ialAlt = lens _ialAlt (\ s a -> s{_ialAlt = a})
 
 instance GoogleRequest InstancesAggregatedList' where
         type Rs InstancesAggregatedList' =
              InstanceAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesAggregatedList{..}
-          = go _ialQuotaUser _ialPrettyPrint _ialProject
+        requestWithRoute r u InstancesAggregatedList'{..}
+          = go _ialQuotaUser (Just _ialPrettyPrint) _ialProject
               _ialUserIp
               _ialKey
               _ialFilter
@@ -201,9 +209,9 @@ instance GoogleRequest InstancesAggregatedList' where
               _ialOauthToken
               (Just _ialMaxResults)
               _ialFields
-              _ialAlt
+              (Just _ialAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesAggregatedListAPI)
+                      (Proxy :: Proxy InstancesAggregatedListResource)
                       r
                       u

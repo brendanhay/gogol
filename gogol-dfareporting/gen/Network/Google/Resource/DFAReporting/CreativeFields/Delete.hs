@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing creative field.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsDelete@.
-module DFAReporting.CreativeFields.Delete
+module Network.Google.Resource.DFAReporting.CreativeFields.Delete
     (
     -- * REST Resource
-      CreativeFieldsDeleteAPI
+      CreativeFieldsDeleteResource
 
     -- * Creating a Request
-    , creativeFieldsDelete
-    , CreativeFieldsDelete
+    , creativeFieldsDelete'
+    , CreativeFieldsDelete'
 
     -- * Request Lenses
     , cfdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsDelete@ which the
--- 'CreativeFieldsDelete' request conforms to.
-type CreativeFieldsDeleteAPI =
+-- 'CreativeFieldsDelete'' request conforms to.
+type CreativeFieldsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field.
 --
--- /See:/ 'creativeFieldsDelete' smart constructor.
-data CreativeFieldsDelete = CreativeFieldsDelete
+-- /See:/ 'creativeFieldsDelete'' smart constructor.
+data CreativeFieldsDelete' = CreativeFieldsDelete'
     { _cfdQuotaUser   :: !(Maybe Text)
     , _cfdPrettyPrint :: !Bool
     , _cfdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CreativeFieldsDelete = CreativeFieldsDelete
     , _cfdId          :: !Int64
     , _cfdOauthToken  :: !(Maybe Text)
     , _cfdFields      :: !(Maybe Text)
-    , _cfdAlt         :: !Text
+    , _cfdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CreativeFieldsDelete = CreativeFieldsDelete
 -- * 'cfdFields'
 --
 -- * 'cfdAlt'
-creativeFieldsDelete
+creativeFieldsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldsDelete
-creativeFieldsDelete pCfdProfileId_ pCfdId_ =
-    CreativeFieldsDelete
+    -> CreativeFieldsDelete'
+creativeFieldsDelete' pCfdProfileId_ pCfdId_ =
+    CreativeFieldsDelete'
     { _cfdQuotaUser = Nothing
     , _cfdPrettyPrint = True
     , _cfdUserIp = Nothing
@@ -101,7 +109,7 @@ creativeFieldsDelete pCfdProfileId_ pCfdId_ =
     , _cfdId = pCfdId_
     , _cfdOauthToken = Nothing
     , _cfdFields = Nothing
-    , _cfdAlt = "json"
+    , _cfdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ cfdFields
   = lens _cfdFields (\ s a -> s{_cfdFields = a})
 
 -- | Data format for the response.
-cfdAlt :: Lens' CreativeFieldsDelete' Text
+cfdAlt :: Lens' CreativeFieldsDelete' Alt
 cfdAlt = lens _cfdAlt (\ s a -> s{_cfdAlt = a})
 
 instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsDelete{..}
-          = go _cfdQuotaUser _cfdPrettyPrint _cfdUserIp
+        requestWithRoute r u CreativeFieldsDelete'{..}
+          = go _cfdQuotaUser (Just _cfdPrettyPrint) _cfdUserIp
               _cfdProfileId
               _cfdKey
               _cfdId
               _cfdOauthToken
               _cfdFields
-              _cfdAlt
+              (Just _cfdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsDeleteAPI)
+                      (Proxy :: Proxy CreativeFieldsDeleteResource)
                       r
                       u

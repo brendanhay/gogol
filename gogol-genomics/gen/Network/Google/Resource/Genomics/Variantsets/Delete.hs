@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- deleted.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsDelete@.
-module Genomics.Variantsets.Delete
+module Network.Google.Resource.Genomics.Variantsets.Delete
     (
     -- * REST Resource
-      VariantsetsDeleteAPI
+      VariantsetsDeleteResource
 
     -- * Creating a Request
-    , variantsetsDelete
-    , VariantsetsDelete
+    , variantsetsDelete'
+    , VariantsetsDelete'
 
     -- * Request Lenses
     , vddQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsDelete@ which the
--- 'VariantsetsDelete' request conforms to.
-type VariantsetsDeleteAPI =
+-- 'VariantsetsDelete'' request conforms to.
+type VariantsetsDeleteResource =
      "variantsets" :>
-       Capture "variantSetId" Text :> Delete '[JSON] ()
+       Capture "variantSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the contents of a variant set. The variant set object is not
 -- deleted.
 --
--- /See:/ 'variantsetsDelete' smart constructor.
-data VariantsetsDelete = VariantsetsDelete
+-- /See:/ 'variantsetsDelete'' smart constructor.
+data VariantsetsDelete' = VariantsetsDelete'
     { _vddQuotaUser    :: !(Maybe Text)
     , _vddPrettyPrint  :: !Bool
     , _vddVariantSetId :: !Text
@@ -61,7 +69,7 @@ data VariantsetsDelete = VariantsetsDelete
     , _vddKey          :: !(Maybe Text)
     , _vddOauthToken   :: !(Maybe Text)
     , _vddFields       :: !(Maybe Text)
-    , _vddAlt          :: !Text
+    , _vddAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data VariantsetsDelete = VariantsetsDelete
 -- * 'vddFields'
 --
 -- * 'vddAlt'
-variantsetsDelete
+variantsetsDelete'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsDelete
-variantsetsDelete pVddVariantSetId_ =
-    VariantsetsDelete
+    -> VariantsetsDelete'
+variantsetsDelete' pVddVariantSetId_ =
+    VariantsetsDelete'
     { _vddQuotaUser = Nothing
     , _vddPrettyPrint = True
     , _vddVariantSetId = pVddVariantSetId_
@@ -95,7 +103,7 @@ variantsetsDelete pVddVariantSetId_ =
     , _vddKey = Nothing
     , _vddOauthToken = Nothing
     , _vddFields = Nothing
-    , _vddAlt = "json"
+    , _vddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +149,22 @@ vddFields
   = lens _vddFields (\ s a -> s{_vddFields = a})
 
 -- | Data format for the response.
-vddAlt :: Lens' VariantsetsDelete' Text
+vddAlt :: Lens' VariantsetsDelete' Alt
 vddAlt = lens _vddAlt (\ s a -> s{_vddAlt = a})
 
 instance GoogleRequest VariantsetsDelete' where
         type Rs VariantsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsDelete{..}
-          = go _vddQuotaUser _vddPrettyPrint _vddVariantSetId
+        requestWithRoute r u VariantsetsDelete'{..}
+          = go _vddQuotaUser (Just _vddPrettyPrint)
+              _vddVariantSetId
               _vddUserIp
               _vddKey
               _vddOauthToken
               _vddFields
-              _vddAlt
+              (Just _vddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsDeleteAPI)
+                      (Proxy :: Proxy VariantsetsDeleteResource)
                       r
                       u

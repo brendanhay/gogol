@@ -27,45 +27,48 @@ module Network.Google.Fitness
     -- * REST Resources
 
     -- ** FitnessUsersDataSourcesCreate
-    , module Fitness.Users.DataSources.Create
+    , module Network.Google.Resource.Fitness.Users.DataSources.Create
 
     -- ** FitnessUsersDataSourcesDatasetsDelete
-    , module Fitness.Users.DataSources.Datasets.Delete
+    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
 
     -- ** FitnessUsersDataSourcesDatasetsGet
-    , module Fitness.Users.DataSources.Datasets.Get
+    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
 
     -- ** FitnessUsersDataSourcesDatasetsPatch
-    , module Fitness.Users.DataSources.Datasets.Patch
+    , module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
 
     -- ** FitnessUsersDataSourcesDelete
-    , module Fitness.Users.DataSources.Delete
+    , module Network.Google.Resource.Fitness.Users.DataSources.Delete
 
     -- ** FitnessUsersDataSourcesGet
-    , module Fitness.Users.DataSources.Get
+    , module Network.Google.Resource.Fitness.Users.DataSources.Get
 
     -- ** FitnessUsersDataSourcesList
-    , module Fitness.Users.DataSources.List
+    , module Network.Google.Resource.Fitness.Users.DataSources.List
 
     -- ** FitnessUsersDataSourcesPatch
-    , module Fitness.Users.DataSources.Patch
+    , module Network.Google.Resource.Fitness.Users.DataSources.Patch
 
     -- ** FitnessUsersDataSourcesUpdate
-    , module Fitness.Users.DataSources.Update
+    , module Network.Google.Resource.Fitness.Users.DataSources.Update
 
     -- ** FitnessUsersDatasetAggregate
-    , module Fitness.Users.Dataset.Aggregate
+    , module Network.Google.Resource.Fitness.Users.Dataset.Aggregate
 
     -- ** FitnessUsersSessionsDelete
-    , module Fitness.Users.Sessions.Delete
+    , module Network.Google.Resource.Fitness.Users.Sessions.Delete
 
     -- ** FitnessUsersSessionsList
-    , module Fitness.Users.Sessions.List
+    , module Network.Google.Resource.Fitness.Users.Sessions.List
 
     -- ** FitnessUsersSessionsUpdate
-    , module Fitness.Users.Sessions.Update
+    , module Network.Google.Resource.Fitness.Users.Sessions.Update
 
     -- * Types
+
+    -- ** AggregateBucketType
+    , AggregateBucketType (..)
 
     -- ** Application
     , Application
@@ -94,6 +97,9 @@ module Network.Google.Fitness
     , dPoint
     , dMinStartTimeNs
     , dMaxEndTimeNs
+
+    -- ** DataSourceType
+    , DataSourceType (..)
 
     -- ** AggregateRequest
     , AggregateRequest
@@ -203,6 +209,9 @@ module Network.Google.Fitness
     , dtField
     , dtName
 
+    -- ** DeviceType
+    , DeviceType (..)
+
     -- ** BucketByTime
     , BucketByTime
     , bucketByTime
@@ -220,6 +229,12 @@ module Network.Google.Fitness
     , sId
     , sStartTimeMillis
     , sDescription
+
+    -- ** DataTypeFieldFormat
+    , DataTypeFieldFormat (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Fitness.Types
@@ -242,7 +257,20 @@ import           Network.Google.Resource.Fitness.Users.Sessions.Update
 TODO
 -}
 
-type FitnessAPI = Users
+type FitnessAPI =
+     UsersDatasetAggregateResource :<|>
+       UsersDataSourcesDatasetsPatchResource
+       :<|> UsersDataSourcesDatasetsGetResource
+       :<|> UsersDataSourcesDatasetsDeleteResource
+       :<|> UsersDataSourcesListResource
+       :<|> UsersDataSourcesPatchResource
+       :<|> UsersDataSourcesGetResource
+       :<|> UsersDataSourcesCreateResource
+       :<|> UsersDataSourcesDeleteResource
+       :<|> UsersDataSourcesUpdateResource
+       :<|> UsersSessionsListResource
+       :<|> UsersSessionsDeleteResource
+       :<|> UsersSessionsUpdateResource
 
 fitnessAPI :: Proxy FitnessAPI
 fitnessAPI = Proxy

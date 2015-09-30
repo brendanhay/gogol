@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of creatives, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesList@.
-module DFAReporting.Creatives.List
+module Network.Google.Resource.DFAReporting.Creatives.List
     (
     -- * REST Resource
-      CreativesListAPI
+      CreativesListResource
 
     -- * Creating a Request
-    , creativesList
-    , CreativesList
+    , creativesList'
+    , CreativesList'
 
     -- * Request Lenses
     , clRenderingIds
@@ -59,33 +60,49 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativesList@ which the
--- 'CreativesList' request conforms to.
-type CreativesListAPI =
+-- 'CreativesList'' request conforms to.
+type CreativesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
            QueryParams "renderingIds" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParams "sizeIds" Int64 :>
-                   QueryParams "companionCreativeIds" Int64 :>
-                     QueryParam "campaignId" Int64 :>
-                       QueryParams "types" Text :>
-                         QueryParams "ids" Int64 :>
-                           QueryParam "sortOrder" Text :>
-                             QueryParam "active" Bool :>
-                               QueryParams "creativeFieldIds" Int64 :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "sortField" Text :>
-                                     QueryParam "studioCreativeId" Int64 :>
-                                       QueryParam "archived" Bool :>
-                                         QueryParam "maxResults" Int32 :>
-                                           Get '[JSON] CreativesListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "advertiserId" Int64 :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "sizeIds" Int64 :>
+                         QueryParams "companionCreativeIds" Int64 :>
+                           QueryParam "campaignId" Int64 :>
+                             QueryParams "types" DfareportingCreativesListTypes
+                               :>
+                               QueryParams "ids" Int64 :>
+                                 QueryParam "sortOrder"
+                                   DfareportingCreativesListSortOrder
+                                   :>
+                                   QueryParam "active" Bool :>
+                                     QueryParam "key" Text :>
+                                       QueryParams "creativeFieldIds" Int64 :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "sortField"
+                                             DfareportingCreativesListSortField
+                                             :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "studioCreativeId"
+                                                 Int64
+                                                 :>
+                                                 QueryParam "archived" Bool :>
+                                                   QueryParam "maxResults" Int32
+                                                     :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "alt" Alt :>
+                                                         Get '[JSON]
+                                                           CreativesListResponse
 
 -- | Retrieves a list of creatives, possibly filtered.
 --
--- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList
+-- /See:/ 'creativesList'' smart constructor.
+data CreativesList' = CreativesList'
     { _clRenderingIds         :: !(Maybe Int64)
     , _clQuotaUser            :: !(Maybe Text)
     , _clPrettyPrint          :: !Bool
@@ -95,21 +112,21 @@ data CreativesList = CreativesList
     , _clSizeIds              :: !(Maybe Int64)
     , _clCompanionCreativeIds :: !(Maybe Int64)
     , _clCampaignId           :: !(Maybe Int64)
-    , _clTypes                :: !(Maybe Text)
+    , _clTypes                :: !(Maybe DfareportingCreativesListTypes)
     , _clIds                  :: !(Maybe Int64)
     , _clProfileId            :: !Int64
-    , _clSortOrder            :: !(Maybe Text)
+    , _clSortOrder            :: !(Maybe DfareportingCreativesListSortOrder)
     , _clActive               :: !(Maybe Bool)
     , _clKey                  :: !(Maybe Text)
     , _clCreativeFieldIds     :: !(Maybe Int64)
     , _clPageToken            :: !(Maybe Text)
-    , _clSortField            :: !(Maybe Text)
+    , _clSortField            :: !(Maybe DfareportingCreativesListSortField)
     , _clOauthToken           :: !(Maybe Text)
     , _clStudioCreativeId     :: !(Maybe Int64)
     , _clArchived             :: !(Maybe Bool)
     , _clMaxResults           :: !(Maybe Int32)
     , _clFields               :: !(Maybe Text)
-    , _clAlt                  :: !Text
+    , _clAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
@@ -163,11 +180,11 @@ data CreativesList = CreativesList
 -- * 'clFields'
 --
 -- * 'clAlt'
-creativesList
+creativesList'
     :: Int64 -- ^ 'profileId'
-    -> CreativesList
-creativesList pClProfileId_ =
-    CreativesList
+    -> CreativesList'
+creativesList' pClProfileId_ =
+    CreativesList'
     { _clRenderingIds = Nothing
     , _clQuotaUser = Nothing
     , _clPrettyPrint = True
@@ -191,7 +208,7 @@ creativesList pClProfileId_ =
     , _clArchived = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Select only creatives with these rendering IDs.
@@ -253,7 +270,7 @@ clCampaignId
   = lens _clCampaignId (\ s a -> s{_clCampaignId = a})
 
 -- | Select only creatives with these creative types.
-clTypes :: Lens' CreativesList' (Maybe Text)
+clTypes :: Lens' CreativesList' (Maybe DfareportingCreativesListTypes)
 clTypes = lens _clTypes (\ s a -> s{_clTypes = a})
 
 -- | Select only creatives with these IDs.
@@ -266,7 +283,7 @@ clProfileId
   = lens _clProfileId (\ s a -> s{_clProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-clSortOrder :: Lens' CreativesList' (Maybe Text)
+clSortOrder :: Lens' CreativesList' (Maybe DfareportingCreativesListSortOrder)
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
@@ -293,7 +310,7 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | Field by which to sort the list.
-clSortField :: Lens' CreativesList' (Maybe Text)
+clSortField :: Lens' CreativesList' (Maybe DfareportingCreativesListSortField)
 clSortField
   = lens _clSortField (\ s a -> s{_clSortField = a})
 
@@ -324,14 +341,15 @@ clFields :: Lens' CreativesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CreativesList' Text
+clAlt :: Lens' CreativesList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesList{..}
-          = go _clRenderingIds _clQuotaUser _clPrettyPrint
+        requestWithRoute r u CreativesList'{..}
+          = go _clRenderingIds _clQuotaUser
+              (Just _clPrettyPrint)
               _clUserIp
               _clAdvertiserId
               _clSearchString
@@ -352,7 +370,9 @@ instance GoogleRequest CreativesList' where
               _clArchived
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesListResource)
+                      r
                       u

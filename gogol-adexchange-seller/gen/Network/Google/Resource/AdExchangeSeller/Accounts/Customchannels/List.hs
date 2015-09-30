@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsCustomchannelsList@.
-module AdExchangeSeller.Accounts.Customchannels.List
+module Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.List
     (
     -- * REST Resource
-      AccountsCustomchannelsListAPI
+      AccountsCustomchannelsListResource
 
     -- * Creating a Request
-    , accountsCustomchannelsList
-    , AccountsCustomchannelsList
+    , accountsCustomchannelsList'
+    , AccountsCustomchannelsList'
 
     -- * Request Lenses
     , aclQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsCustomchannelsList@ which the
--- 'AccountsCustomchannelsList' request conforms to.
-type AccountsCustomchannelsListAPI =
+-- 'AccountsCustomchannelsList'' request conforms to.
+type AccountsCustomchannelsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "customchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] CustomChannels
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] CustomChannels
 
 -- | List all custom channels in the specified ad client for this Ad Exchange
 -- account.
 --
--- /See:/ 'accountsCustomchannelsList' smart constructor.
-data AccountsCustomchannelsList = AccountsCustomchannelsList
+-- /See:/ 'accountsCustomchannelsList'' smart constructor.
+data AccountsCustomchannelsList' = AccountsCustomchannelsList'
     { _aclQuotaUser   :: !(Maybe Text)
     , _aclPrettyPrint :: !Bool
     , _aclUserIp      :: !(Maybe Text)
@@ -73,7 +81,7 @@ data AccountsCustomchannelsList = AccountsCustomchannelsList
     , _aclOauthToken  :: !(Maybe Text)
     , _aclMaxResults  :: !(Maybe Word32)
     , _aclFields      :: !(Maybe Text)
-    , _aclAlt         :: !Text
+    , _aclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomchannelsList'' with the minimum fields required to make a request.
@@ -101,12 +109,12 @@ data AccountsCustomchannelsList = AccountsCustomchannelsList
 -- * 'aclFields'
 --
 -- * 'aclAlt'
-accountsCustomchannelsList
+accountsCustomchannelsList'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsCustomchannelsList
-accountsCustomchannelsList pAclAdClientId_ pAclAccountId_ =
-    AccountsCustomchannelsList
+    -> AccountsCustomchannelsList'
+accountsCustomchannelsList' pAclAdClientId_ pAclAccountId_ =
+    AccountsCustomchannelsList'
     { _aclQuotaUser = Nothing
     , _aclPrettyPrint = True
     , _aclUserIp = Nothing
@@ -117,7 +125,7 @@ accountsCustomchannelsList pAclAdClientId_ pAclAccountId_ =
     , _aclOauthToken = Nothing
     , _aclMaxResults = Nothing
     , _aclFields = Nothing
-    , _aclAlt = "json"
+    , _aclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,15 +190,15 @@ aclFields
   = lens _aclFields (\ s a -> s{_aclFields = a})
 
 -- | Data format for the response.
-aclAlt :: Lens' AccountsCustomchannelsList' Text
+aclAlt :: Lens' AccountsCustomchannelsList' Alt
 aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
 
 instance GoogleRequest AccountsCustomchannelsList'
          where
         type Rs AccountsCustomchannelsList' = CustomChannels
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsCustomchannelsList{..}
-          = go _aclQuotaUser _aclPrettyPrint _aclUserIp
+        requestWithRoute r u AccountsCustomchannelsList'{..}
+          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIp
               _aclAdClientId
               _aclAccountId
               _aclKey
@@ -198,9 +206,9 @@ instance GoogleRequest AccountsCustomchannelsList'
               _aclOauthToken
               _aclMaxResults
               _aclFields
-              _aclAlt
+              (Just _aclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsCustomchannelsListAPI)
+                      (Proxy :: Proxy AccountsCustomchannelsListResource)
                       r
                       u

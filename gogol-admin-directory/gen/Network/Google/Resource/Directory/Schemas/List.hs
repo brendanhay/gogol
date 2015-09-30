@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all schemas for a customer
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasList@.
-module Directory.Schemas.List
+module Network.Google.Resource.Directory.Schemas.List
     (
     -- * REST Resource
-      SchemasListAPI
+      SchemasListResource
 
     -- * Creating a Request
-    , schemasList
-    , SchemasList
+    , schemasList'
+    , SchemasList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasList@ which the
--- 'SchemasList' request conforms to.
-type SchemasListAPI =
+-- 'SchemasList'' request conforms to.
+type SchemasListResource =
      "customer" :>
        Capture "customerId" Text :>
-         "schemas" :> Get '[JSON] Schemas
+         "schemas" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Schemas
 
 -- | Retrieve all schemas for a customer
 --
--- /See:/ 'schemasList' smart constructor.
-data SchemasList = SchemasList
+-- /See:/ 'schemasList'' smart constructor.
+data SchemasList' = SchemasList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data SchemasList = SchemasList
     , _slKey         :: !(Maybe Text)
     , _slOauthToken  :: !(Maybe Text)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data SchemasList = SchemasList
 -- * 'slFields'
 --
 -- * 'slAlt'
-schemasList
+schemasList'
     :: Text -- ^ 'customerId'
-    -> SchemasList
-schemasList pSlCustomerId_ =
-    SchemasList
+    -> SchemasList'
+schemasList' pSlCustomerId_ =
+    SchemasList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
@@ -94,7 +102,7 @@ schemasList pSlCustomerId_ =
     , _slKey = Nothing
     , _slOauthToken = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +144,21 @@ slFields :: Lens' SchemasList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SchemasList' Text
+slAlt :: Lens' SchemasList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp
+        requestWithRoute r u SchemasList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
               _slCustomerId
               _slKey
               _slOauthToken
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SchemasListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsInsert@.
-module Compute.VPNTunnels.Insert
+module Network.Google.Resource.Compute.VPNTunnels.Insert
     (
     -- * REST Resource
-      VpnTunnelsInsertAPI
+      VpnTunnelsInsertResource
 
     -- * Creating a Request
-    , vPNTunnelsInsert
-    , VPNTunnelsInsert
+    , vPNTunnelsInsert'
+    , VPNTunnelsInsert'
 
     -- * Request Lenses
     , vtiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsInsert@ which the
--- 'VPNTunnelsInsert' request conforms to.
-type VpnTunnelsInsertAPI =
+-- 'VPNTunnelsInsert'' request conforms to.
+type VpnTunnelsInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
-           "vpnTunnels" :> Post '[JSON] Operation
+           "vpnTunnels" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ 'vPNTunnelsInsert' smart constructor.
-data VPNTunnelsInsert = VPNTunnelsInsert
+-- /See:/ 'vPNTunnelsInsert'' smart constructor.
+data VPNTunnelsInsert' = VPNTunnelsInsert'
     { _vtiQuotaUser   :: !(Maybe Text)
     , _vtiPrettyPrint :: !Bool
     , _vtiProject     :: !Text
@@ -65,7 +73,7 @@ data VPNTunnelsInsert = VPNTunnelsInsert
     , _vtiRegion      :: !Text
     , _vtiOauthToken  :: !(Maybe Text)
     , _vtiFields      :: !(Maybe Text)
-    , _vtiAlt         :: !Text
+    , _vtiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data VPNTunnelsInsert = VPNTunnelsInsert
 -- * 'vtiFields'
 --
 -- * 'vtiAlt'
-vPNTunnelsInsert
+vPNTunnelsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> VPNTunnelsInsert
-vPNTunnelsInsert pVtiProject_ pVtiRegion_ =
-    VPNTunnelsInsert
+    -> VPNTunnelsInsert'
+vPNTunnelsInsert' pVtiProject_ pVtiRegion_ =
+    VPNTunnelsInsert'
     { _vtiQuotaUser = Nothing
     , _vtiPrettyPrint = True
     , _vtiProject = pVtiProject_
@@ -103,7 +111,7 @@ vPNTunnelsInsert pVtiProject_ pVtiRegion_ =
     , _vtiRegion = pVtiRegion_
     , _vtiOauthToken = Nothing
     , _vtiFields = Nothing
-    , _vtiAlt = "json"
+    , _vtiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ vtiFields
   = lens _vtiFields (\ s a -> s{_vtiFields = a})
 
 -- | Data format for the response.
-vtiAlt :: Lens' VPNTunnelsInsert' Text
+vtiAlt :: Lens' VPNTunnelsInsert' Alt
 vtiAlt = lens _vtiAlt (\ s a -> s{_vtiAlt = a})
 
 instance GoogleRequest VPNTunnelsInsert' where
         type Rs VPNTunnelsInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsInsert{..}
-          = go _vtiQuotaUser _vtiPrettyPrint _vtiProject
+        requestWithRoute r u VPNTunnelsInsert'{..}
+          = go _vtiQuotaUser (Just _vtiPrettyPrint) _vtiProject
               _vtiUserIp
               _vtiKey
               _vtiRegion
               _vtiOauthToken
               _vtiFields
-              _vtiAlt
+              (Just _vtiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsInsertAPI)
+                      (Proxy :: Proxy VpnTunnelsInsertResource)
                       r
                       u

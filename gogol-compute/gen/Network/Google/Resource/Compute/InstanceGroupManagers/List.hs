@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the specified project and zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersList@.
-module Compute.InstanceGroupManagers.List
+module Network.Google.Resource.Compute.InstanceGroupManagers.List
     (
     -- * REST Resource
-      InstanceGroupManagersListAPI
+      InstanceGroupManagersListResource
 
     -- * Creating a Request
-    , instanceGroupManagersList
-    , InstanceGroupManagersList
+    , instanceGroupManagersList'
+    , InstanceGroupManagersList'
 
     -- * Request Lenses
     , igmlQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersList@ which the
--- 'InstanceGroupManagersList' request conforms to.
-type InstanceGroupManagersListAPI =
+-- 'InstanceGroupManagersList'' request conforms to.
+type InstanceGroupManagersListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] InstanceGroupManagerList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] InstanceGroupManagerList
 
 -- | Retrieves a list of managed instance groups that are contained within
 -- the specified project and zone.
 --
--- /See:/ 'instanceGroupManagersList' smart constructor.
-data InstanceGroupManagersList = InstanceGroupManagersList
+-- /See:/ 'instanceGroupManagersList'' smart constructor.
+data InstanceGroupManagersList' = InstanceGroupManagersList'
     { _igmlQuotaUser   :: !(Maybe Text)
     , _igmlPrettyPrint :: !Bool
     , _igmlProject     :: !Text
@@ -75,7 +83,7 @@ data InstanceGroupManagersList = InstanceGroupManagersList
     , _igmlOauthToken  :: !(Maybe Text)
     , _igmlMaxResults  :: !Word32
     , _igmlFields      :: !(Maybe Text)
-    , _igmlAlt         :: !Text
+    , _igmlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data InstanceGroupManagersList = InstanceGroupManagersList
 -- * 'igmlFields'
 --
 -- * 'igmlAlt'
-instanceGroupManagersList
+instanceGroupManagersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersList
-instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
-    InstanceGroupManagersList
+    -> InstanceGroupManagersList'
+instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
+    InstanceGroupManagersList'
     { _igmlQuotaUser = Nothing
     , _igmlPrettyPrint = True
     , _igmlProject = pIgmlProject_
@@ -122,7 +130,7 @@ instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
     , _igmlOauthToken = Nothing
     , _igmlMaxResults = 500
     , _igmlFields = Nothing
-    , _igmlAlt = "json"
+    , _igmlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,7 +209,7 @@ igmlFields
   = lens _igmlFields (\ s a -> s{_igmlFields = a})
 
 -- | Data format for the response.
-igmlAlt :: Lens' InstanceGroupManagersList' Text
+igmlAlt :: Lens' InstanceGroupManagersList' Alt
 igmlAlt = lens _igmlAlt (\ s a -> s{_igmlAlt = a})
 
 instance GoogleRequest InstanceGroupManagersList'
@@ -209,8 +217,9 @@ instance GoogleRequest InstanceGroupManagersList'
         type Rs InstanceGroupManagersList' =
              InstanceGroupManagerList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupManagersList{..}
-          = go _igmlQuotaUser _igmlPrettyPrint _igmlProject
+        requestWithRoute r u InstanceGroupManagersList'{..}
+          = go _igmlQuotaUser (Just _igmlPrettyPrint)
+              _igmlProject
               _igmlUserIp
               _igmlZone
               _igmlKey
@@ -219,9 +228,9 @@ instance GoogleRequest InstanceGroupManagersList'
               _igmlOauthToken
               (Just _igmlMaxResults)
               _igmlFields
-              _igmlAlt
+              (Just _igmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupManagersListAPI)
+                      (Proxy :: Proxy InstanceGroupManagersListResource)
                       r
                       u

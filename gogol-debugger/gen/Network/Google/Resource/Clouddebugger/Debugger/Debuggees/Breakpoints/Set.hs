@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Sets the breakpoint to the debuggee.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerDebuggerDebuggeesBreakpointsSet@.
-module Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
     (
     -- * REST Resource
-      DebuggerDebuggeesBreakpointsSetAPI
+      DebuggerDebuggeesBreakpointsSetResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsSet
-    , DebuggerDebuggeesBreakpointsSet
+    , debuggerDebuggeesBreakpointsSet'
+    , DebuggerDebuggeesBreakpointsSet'
 
     -- * Request Lenses
     , ddbsXgafv
@@ -49,19 +50,33 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerDebuggerDebuggeesBreakpointsSet@ which the
--- 'DebuggerDebuggeesBreakpointsSet' request conforms to.
-type DebuggerDebuggeesBreakpointsSetAPI =
+-- 'DebuggerDebuggeesBreakpointsSet'' request conforms to.
+type DebuggerDebuggeesBreakpointsSetResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               "set" :> Post '[JSON] SetBreakpointResponse
+               "set" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] SetBreakpointResponse
 
 -- | Sets the breakpoint to the debuggee.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
-data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
+-- /See:/ 'debuggerDebuggeesBreakpointsSet'' smart constructor.
+data DebuggerDebuggeesBreakpointsSet' = DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv          :: !(Maybe Text)
     , _ddbsQuotaUser      :: !(Maybe Text)
     , _ddbsPrettyPrint    :: !Bool
@@ -109,11 +124,11 @@ data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
 -- * 'ddbsCallback'
 --
 -- * 'ddbsAlt'
-debuggerDebuggeesBreakpointsSet
+debuggerDebuggeesBreakpointsSet'
     :: Text -- ^ 'debuggeeId'
-    -> DebuggerDebuggeesBreakpointsSet
-debuggerDebuggeesBreakpointsSet pDdbsDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsSet
+    -> DebuggerDebuggeesBreakpointsSet'
+debuggerDebuggeesBreakpointsSet' pDdbsDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsQuotaUser = Nothing
     , _ddbsPrettyPrint = True
@@ -215,10 +230,11 @@ instance GoogleRequest
              SetBreakpointResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
-          DebuggerDebuggeesBreakpointsSet{..}
-          = go _ddbsXgafv _ddbsQuotaUser _ddbsPrettyPrint
+          DebuggerDebuggeesBreakpointsSet'{..}
+          = go _ddbsXgafv _ddbsQuotaUser
+              (Just _ddbsPrettyPrint)
               _ddbsUploadProtocol
-              _ddbsPp
+              (Just _ddbsPp)
               _ddbsAccessToken
               _ddbsUploadType
               _ddbsBearerToken
@@ -227,9 +243,10 @@ instance GoogleRequest
               _ddbsOauthToken
               _ddbsFields
               _ddbsCallback
-              _ddbsAlt
+              (Just _ddbsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DebuggerDebuggeesBreakpointsSetAPI)
+                      (Proxy ::
+                         Proxy DebuggerDebuggeesBreakpointsSetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one blog by ID.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsGet@.
-module Blogger.Blogs.Get
+module Network.Google.Resource.Blogger.Blogs.Get
     (
     -- * REST Resource
-      BlogsGetAPI
+      BlogsGetResource
 
     -- * Creating a Request
-    , blogsGet
-    , BlogsGet
+    , blogsGet'
+    , BlogsGet'
 
     -- * Request Lenses
     , bgQuotaUser
@@ -45,27 +46,34 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsGet@ which the
--- 'BlogsGet' request conforms to.
-type BlogsGetAPI =
+-- 'BlogsGet'' request conforms to.
+type BlogsGetResource =
      "blogs" :>
        Capture "blogId" Text :>
-         QueryParam "maxPosts" Word32 :>
-           QueryParam "view" Text :> Get '[JSON] Blog
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "maxPosts" Word32 :>
+                   QueryParam "view" BloggerBlogsGetView :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Blog
 
 -- | Gets one blog by ID.
 --
--- /See:/ 'blogsGet' smart constructor.
-data BlogsGet = BlogsGet
+-- /See:/ 'blogsGet'' smart constructor.
+data BlogsGet' = BlogsGet'
     { _bgQuotaUser   :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
     , _bgUserIp      :: !(Maybe Text)
     , _bgBlogId      :: !Text
     , _bgKey         :: !(Maybe Text)
     , _bgMaxPosts    :: !(Maybe Word32)
-    , _bgView        :: !(Maybe Text)
+    , _bgView        :: !(Maybe BloggerBlogsGetView)
     , _bgOauthToken  :: !(Maybe Text)
     , _bgFields      :: !(Maybe Text)
-    , _bgAlt         :: !Text
+    , _bgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGet'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data BlogsGet = BlogsGet
 -- * 'bgFields'
 --
 -- * 'bgAlt'
-blogsGet
+blogsGet'
     :: Text -- ^ 'blogId'
-    -> BlogsGet
-blogsGet pBgBlogId_ =
-    BlogsGet
+    -> BlogsGet'
+blogsGet' pBgBlogId_ =
+    BlogsGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True
     , _bgUserIp = Nothing
@@ -105,7 +113,7 @@ blogsGet pBgBlogId_ =
     , _bgView = Nothing
     , _bgOauthToken = Nothing
     , _bgFields = Nothing
-    , _bgAlt = "json"
+    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,7 +151,7 @@ bgMaxPosts
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgView :: Lens' BlogsGet' (Maybe Text)
+bgView :: Lens' BlogsGet' (Maybe BloggerBlogsGetView)
 bgView = lens _bgView (\ s a -> s{_bgView = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -156,19 +164,21 @@ bgFields :: Lens' BlogsGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 -- | Data format for the response.
-bgAlt :: Lens' BlogsGet' Text
+bgAlt :: Lens' BlogsGet' Alt
 bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
 
 instance GoogleRequest BlogsGet' where
         type Rs BlogsGet' = Blog
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogsGet{..}
-          = go _bgQuotaUser _bgPrettyPrint _bgUserIp _bgBlogId
+        requestWithRoute r u BlogsGet'{..}
+          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIp
+              _bgBlogId
               _bgKey
               _bgMaxPosts
               _bgView
               _bgOauthToken
               _bgFields
-              _bgAlt
+              (Just _bgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BlogsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy BlogsGetResource) r
+                      u

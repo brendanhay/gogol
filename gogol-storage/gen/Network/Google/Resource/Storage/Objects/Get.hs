@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves objects or their associated metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsGet@.
-module Storage.Objects.Get
+module Network.Google.Resource.Storage.Objects.Get
     (
     -- * REST Resource
-      ObjectsGetAPI
+      ObjectsGetResource
 
     -- * Creating a Request
-    , objectsGet
-    , ObjectsGet
+    , objectsGet'
+    , ObjectsGet'
 
     -- * Request Lenses
     , ogQuotaUser
@@ -50,23 +51,31 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsGet@ which the
--- 'ObjectsGet' request conforms to.
-type ObjectsGetAPI =
+-- 'ObjectsGet'' request conforms to.
+type ObjectsGetResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" Text :>
-                       QueryParam "generation" Word64 :> Get '[JSON] Object
+             QueryParam "quotaUser" Text :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "ifGenerationMatch" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Word64 :>
+                             QueryParam "projection" StorageObjectsGetProjection
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "generation" Word64 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Get '[JSON] Object
 
 -- | Retrieves objects or their associated metadata.
 --
--- /See:/ 'objectsGet' smart constructor.
-data ObjectsGet = ObjectsGet
+-- /See:/ 'objectsGet'' smart constructor.
+data ObjectsGet' = ObjectsGet'
     { _ogQuotaUser                :: !(Maybe Text)
     , _ogIfMetagenerationMatch    :: !(Maybe Word64)
     , _ogIfGenerationNotMatch     :: !(Maybe Word64)
@@ -77,11 +86,11 @@ data ObjectsGet = ObjectsGet
     , _ogKey                      :: !(Maybe Text)
     , _ogIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ogObject                   :: !Text
-    , _ogProjection               :: !(Maybe Text)
+    , _ogProjection               :: !(Maybe StorageObjectsGetProjection)
     , _ogOauthToken               :: !(Maybe Text)
     , _ogGeneration               :: !(Maybe Word64)
     , _ogFields                   :: !(Maybe Text)
-    , _ogAlt                      :: !Text
+    , _ogAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsGet'' with the minimum fields required to make a request.
@@ -117,12 +126,12 @@ data ObjectsGet = ObjectsGet
 -- * 'ogFields'
 --
 -- * 'ogAlt'
-objectsGet
+objectsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
-    -> ObjectsGet
-objectsGet pOgBucket_ pOgObject_ =
-    ObjectsGet
+    -> ObjectsGet'
+objectsGet' pOgBucket_ pOgObject_ =
+    ObjectsGet'
     { _ogQuotaUser = Nothing
     , _ogIfMetagenerationMatch = Nothing
     , _ogIfGenerationNotMatch = Nothing
@@ -137,7 +146,7 @@ objectsGet pOgBucket_ pOgObject_ =
     , _ogOauthToken = Nothing
     , _ogGeneration = Nothing
     , _ogFields = Nothing
-    , _ogAlt = "json"
+    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,7 +210,7 @@ ogObject :: Lens' ObjectsGet' Text
 ogObject = lens _ogObject (\ s a -> s{_ogObject = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-ogProjection :: Lens' ObjectsGet' (Maybe Text)
+ogProjection :: Lens' ObjectsGet' (Maybe StorageObjectsGetProjection)
 ogProjection
   = lens _ogProjection (\ s a -> s{_ogProjection = a})
 
@@ -221,16 +230,16 @@ ogFields :: Lens' ObjectsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' ObjectsGet' Text
+ogAlt :: Lens' ObjectsGet' Alt
 ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 
 instance GoogleRequest ObjectsGet' where
         type Rs ObjectsGet' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsGet{..}
+        requestWithRoute r u ObjectsGet'{..}
           = go _ogQuotaUser _ogIfMetagenerationMatch
               _ogIfGenerationNotMatch
-              _ogPrettyPrint
+              (Just _ogPrettyPrint)
               _ogIfGenerationMatch
               _ogUserIp
               _ogBucket
@@ -241,6 +250,8 @@ instance GoogleRequest ObjectsGet' where
               _ogOauthToken
               _ogGeneration
               _ogFields
-              _ogAlt
+              (Just _ogAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
+                      r
+                      u

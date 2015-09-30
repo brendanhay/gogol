@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosdevicesPatch@.
-module Directory.Chromeosdevices.Patch
+module Network.Google.Resource.Directory.Chromeosdevices.Patch
     (
     -- * REST Resource
-      ChromeosdevicesPatchAPI
+      ChromeosdevicesPatchResource
 
     -- * Creating a Request
-    , chromeosdevicesPatch
-    , ChromeosdevicesPatch
+    , chromeosdevicesPatch'
+    , ChromeosdevicesPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -45,30 +46,39 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosdevicesPatch@ which the
--- 'ChromeosdevicesPatch' request conforms to.
-type ChromeosdevicesPatchAPI =
+-- 'ChromeosdevicesPatch'' request conforms to.
+type ChromeosdevicesPatchResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "projection" Text :>
-                 Patch '[JSON] ChromeOsDevice
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection"
+                         DirectoryChromeosdevicesPatchProjection
+                         :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Patch '[JSON] ChromeOsDevice
 
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
--- /See:/ 'chromeosdevicesPatch' smart constructor.
-data ChromeosdevicesPatch = ChromeosdevicesPatch
+-- /See:/ 'chromeosdevicesPatch'' smart constructor.
+data ChromeosdevicesPatch' = ChromeosdevicesPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
     , _cpCustomerId  :: !Text
     , _cpKey         :: !(Maybe Text)
     , _cpDeviceId    :: !Text
-    , _cpProjection  :: !(Maybe Text)
+    , _cpProjection  :: !(Maybe DirectoryChromeosdevicesPatchProjection)
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosdevicesPatch'' with the minimum fields required to make a request.
@@ -94,12 +104,12 @@ data ChromeosdevicesPatch = ChromeosdevicesPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-chromeosdevicesPatch
+chromeosdevicesPatch'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'deviceId'
-    -> ChromeosdevicesPatch
-chromeosdevicesPatch pCpCustomerId_ pCpDeviceId_ =
-    ChromeosdevicesPatch
+    -> ChromeosdevicesPatch'
+chromeosdevicesPatch' pCpCustomerId_ pCpDeviceId_ =
+    ChromeosdevicesPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -109,7 +119,7 @@ chromeosdevicesPatch pCpCustomerId_ pCpDeviceId_ =
     , _cpProjection = Nothing
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,7 +157,7 @@ cpDeviceId
   = lens _cpDeviceId (\ s a -> s{_cpDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cpProjection :: Lens' ChromeosdevicesPatch' (Maybe Text)
+cpProjection :: Lens' ChromeosdevicesPatch' (Maybe DirectoryChromeosdevicesPatchProjection)
 cpProjection
   = lens _cpProjection (\ s a -> s{_cpProjection = a})
 
@@ -161,23 +171,23 @@ cpFields :: Lens' ChromeosdevicesPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' ChromeosdevicesPatch' Text
+cpAlt :: Lens' ChromeosdevicesPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest ChromeosdevicesPatch' where
         type Rs ChromeosdevicesPatch' = ChromeOsDevice
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u ChromeosdevicesPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp
+        requestWithRoute r u ChromeosdevicesPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
               _cpCustomerId
               _cpKey
               _cpDeviceId
               _cpProjection
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChromeosdevicesPatchAPI)
+                      (Proxy :: Proxy ChromeosdevicesPatchResource)
                       r
                       u

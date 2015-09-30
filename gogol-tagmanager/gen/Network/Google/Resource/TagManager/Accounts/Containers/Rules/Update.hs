@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a GTM Rule.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesUpdate@.
-module TagManager.Accounts.Containers.Rules.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
     (
     -- * REST Resource
-      AccountsContainersRulesUpdateAPI
+      AccountsContainersRulesUpdateResource
 
     -- * Creating a Request
-    , accountsContainersRulesUpdate
-    , AccountsContainersRulesUpdate
+    , accountsContainersRulesUpdate'
+    , AccountsContainersRulesUpdate'
 
     -- * Request Lenses
     , acruQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersRulesUpdate@ which the
--- 'AccountsContainersRulesUpdate' request conforms to.
-type AccountsContainersRulesUpdateAPI =
+-- 'AccountsContainersRulesUpdate'' request conforms to.
+type AccountsContainersRulesUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "rules" :>
                Capture "ruleId" Text :>
-                 QueryParam "fingerprint" Text :> Put '[JSON] Rule
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] Rule
 
 -- | Updates a GTM Rule.
 --
--- /See:/ 'accountsContainersRulesUpdate' smart constructor.
-data AccountsContainersRulesUpdate = AccountsContainersRulesUpdate
+-- /See:/ 'accountsContainersRulesUpdate'' smart constructor.
+data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
     { _acruQuotaUser   :: !(Maybe Text)
     , _acruPrettyPrint :: !Bool
     , _acruContainerId :: !Text
@@ -70,7 +78,7 @@ data AccountsContainersRulesUpdate = AccountsContainersRulesUpdate
     , _acruKey         :: !(Maybe Text)
     , _acruOauthToken  :: !(Maybe Text)
     , _acruFields      :: !(Maybe Text)
-    , _acruAlt         :: !Text
+    , _acruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesUpdate'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data AccountsContainersRulesUpdate = AccountsContainersRulesUpdate
 -- * 'acruFields'
 --
 -- * 'acruAlt'
-accountsContainersRulesUpdate
+accountsContainersRulesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersRulesUpdate
-accountsContainersRulesUpdate pAcruContainerId_ pAcruRuleId_ pAcruAccountId_ =
-    AccountsContainersRulesUpdate
+    -> AccountsContainersRulesUpdate'
+accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruAccountId_ =
+    AccountsContainersRulesUpdate'
     { _acruQuotaUser = Nothing
     , _acruPrettyPrint = True
     , _acruContainerId = pAcruContainerId_
@@ -115,7 +123,7 @@ accountsContainersRulesUpdate pAcruContainerId_ pAcruRuleId_ pAcruAccountId_ =
     , _acruKey = Nothing
     , _acruOauthToken = Nothing
     , _acruFields = Nothing
-    , _acruAlt = "json"
+    , _acruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,7 +188,7 @@ acruFields
   = lens _acruFields (\ s a -> s{_acruFields = a})
 
 -- | Data format for the response.
-acruAlt :: Lens' AccountsContainersRulesUpdate' Text
+acruAlt :: Lens' AccountsContainersRulesUpdate' Alt
 acruAlt = lens _acruAlt (\ s a -> s{_acruAlt = a})
 
 instance GoogleRequest AccountsContainersRulesUpdate'
@@ -188,8 +196,9 @@ instance GoogleRequest AccountsContainersRulesUpdate'
         type Rs AccountsContainersRulesUpdate' = Rule
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersRulesUpdate{..}
-          = go _acruQuotaUser _acruPrettyPrint _acruContainerId
+          AccountsContainersRulesUpdate'{..}
+          = go _acruQuotaUser (Just _acruPrettyPrint)
+              _acruContainerId
               _acruUserIp
               _acruFingerprint
               _acruRuleId
@@ -197,9 +206,10 @@ instance GoogleRequest AccountsContainersRulesUpdate'
               _acruKey
               _acruOauthToken
               _acruFields
-              _acruAlt
+              (Just _acruAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersRulesUpdateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersRulesUpdateResource)
                       r
                       u

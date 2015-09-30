@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates metadata for a calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsUpdate@.
-module Calendar.Calendars.Update
+module Network.Google.Resource.Calendar.Calendars.Update
     (
     -- * REST Resource
-      CalendarsUpdateAPI
+      CalendarsUpdateResource
 
     -- * Creating a Request
-    , calendarsUpdate
-    , CalendarsUpdate
+    , calendarsUpdate'
+    , CalendarsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsUpdate@ which the
--- 'CalendarsUpdate' request conforms to.
-type CalendarsUpdateAPI =
+-- 'CalendarsUpdate'' request conforms to.
+type CalendarsUpdateResource =
      "calendars" :>
-       Capture "calendarId" Text :> Put '[JSON] Calendar
+       Capture "calendarId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Calendar
 
 -- | Updates metadata for a calendar.
 --
--- /See:/ 'calendarsUpdate' smart constructor.
-data CalendarsUpdate = CalendarsUpdate
+-- /See:/ 'calendarsUpdate'' smart constructor.
+data CalendarsUpdate' = CalendarsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuCalendarId  :: !Text
     , _cuPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data CalendarsUpdate = CalendarsUpdate
     , _cuKey         :: !(Maybe Text)
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CalendarsUpdate = CalendarsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-calendarsUpdate
+calendarsUpdate'
     :: Text -- ^ 'calendarId'
-    -> CalendarsUpdate
-calendarsUpdate pCuCalendarId_ =
-    CalendarsUpdate
+    -> CalendarsUpdate'
+calendarsUpdate' pCuCalendarId_ =
+    CalendarsUpdate'
     { _cuQuotaUser = Nothing
     , _cuCalendarId = pCuCalendarId_
     , _cuPrettyPrint = True
@@ -93,7 +101,7 @@ calendarsUpdate pCuCalendarId_ =
     , _cuKey = Nothing
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ cuFields :: Lens' CalendarsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CalendarsUpdate' Text
+cuAlt :: Lens' CalendarsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CalendarsUpdate' where
         type Rs CalendarsUpdate' = Calendar
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsUpdate{..}
-          = go _cuQuotaUser _cuCalendarId _cuPrettyPrint
+        requestWithRoute r u CalendarsUpdate'{..}
+          = go _cuQuotaUser _cuCalendarId (Just _cuPrettyPrint)
               _cuUserIp
               _cuKey
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- may be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetMultipleForAllPlayers@.
-module GamesManagement.Quests.ResetMultipleForAllPlayers
+module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
     (
     -- * REST Resource
-      QuestsResetMultipleForAllPlayersAPI
+      QuestsResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , questsResetMultipleForAllPlayers
-    , QuestsResetMultipleForAllPlayers
+    , questsResetMultipleForAllPlayers'
+    , QuestsResetMultipleForAllPlayers'
 
     -- * Request Lenses
     , qrmfapQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementQuestsResetMultipleForAllPlayers@ which the
--- 'QuestsResetMultipleForAllPlayers' request conforms to.
-type QuestsResetMultipleForAllPlayersAPI =
+-- 'QuestsResetMultipleForAllPlayers'' request conforms to.
+type QuestsResetMultipleForAllPlayersResource =
      "quests" :>
-       "resetMultipleForAllPlayers" :> Post '[JSON] ()
+       "resetMultipleForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests
 -- may be reset.
 --
--- /See:/ 'questsResetMultipleForAllPlayers' smart constructor.
-data QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers
+-- /See:/ 'questsResetMultipleForAllPlayers'' smart constructor.
+data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
     { _qrmfapQuotaUser   :: !(Maybe Text)
     , _qrmfapPrettyPrint :: !Bool
     , _qrmfapUserIp      :: !(Maybe Text)
     , _qrmfapKey         :: !(Maybe Text)
     , _qrmfapOauthToken  :: !(Maybe Text)
     , _qrmfapFields      :: !(Maybe Text)
-    , _qrmfapAlt         :: !Text
+    , _qrmfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers
 -- * 'qrmfapFields'
 --
 -- * 'qrmfapAlt'
-questsResetMultipleForAllPlayers
-    :: QuestsResetMultipleForAllPlayers
-questsResetMultipleForAllPlayers =
-    QuestsResetMultipleForAllPlayers
+questsResetMultipleForAllPlayers'
+    :: QuestsResetMultipleForAllPlayers'
+questsResetMultipleForAllPlayers' =
+    QuestsResetMultipleForAllPlayers'
     { _qrmfapQuotaUser = Nothing
     , _qrmfapPrettyPrint = True
     , _qrmfapUserIp = Nothing
     , _qrmfapKey = Nothing
     , _qrmfapOauthToken = Nothing
     , _qrmfapFields = Nothing
-    , _qrmfapAlt = "json"
+    , _qrmfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ qrmfapFields
   = lens _qrmfapFields (\ s a -> s{_qrmfapFields = a})
 
 -- | Data format for the response.
-qrmfapAlt :: Lens' QuestsResetMultipleForAllPlayers' Text
+qrmfapAlt :: Lens' QuestsResetMultipleForAllPlayers' Alt
 qrmfapAlt
   = lens _qrmfapAlt (\ s a -> s{_qrmfapAlt = a})
 
@@ -142,15 +150,16 @@ instance GoogleRequest
         type Rs QuestsResetMultipleForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
-          QuestsResetMultipleForAllPlayers{..}
-          = go _qrmfapQuotaUser _qrmfapPrettyPrint
+          QuestsResetMultipleForAllPlayers'{..}
+          = go _qrmfapQuotaUser (Just _qrmfapPrettyPrint)
               _qrmfapUserIp
               _qrmfapKey
               _qrmfapOauthToken
               _qrmfapFields
-              _qrmfapAlt
+              (Just _qrmfapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QuestsResetMultipleForAllPlayersAPI)
+                      (Proxy ::
+                         Proxy QuestsResetMultipleForAllPlayersResource)
                       r
                       u

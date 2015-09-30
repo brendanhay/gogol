@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- delete all.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsBatchDelete@.
-module ProximityBeacon.Beacons.Attachments.BatchDelete
+module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     (
     -- * REST Resource
-      BeaconsAttachmentsBatchDeleteAPI
+      BeaconsAttachmentsBatchDeleteResource
 
     -- * Creating a Request
-    , beaconsAttachmentsBatchDelete
-    , BeaconsAttachmentsBatchDelete
+    , beaconsAttachmentsBatchDelete'
+    , BeaconsAttachmentsBatchDelete'
 
     -- * Request Lenses
     , babdXgafv
@@ -55,13 +56,26 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsBatchDelete@ which the
--- 'BeaconsAttachmentsBatchDelete' request conforms to.
-type BeaconsAttachmentsBatchDeleteAPI =
+-- 'BeaconsAttachmentsBatchDelete'' request conforms to.
+type BeaconsAttachmentsBatchDeleteResource =
      "v1beta1" :>
        "{+beaconName}" :>
          "attachments:batchDelete" :>
-           QueryParam "namespacedType" Text :>
-             Post '[JSON] DeleteAttachmentsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "namespacedType" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] DeleteAttachmentsResponse
 
 -- | Deletes multiple attachments on a given beacon. This operation is
 -- permanent and cannot be undone. You can optionally specify
@@ -70,8 +84,8 @@ type BeaconsAttachmentsBatchDeleteAPI =
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
 -- delete all.
 --
--- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
-data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete
+-- /See:/ 'beaconsAttachmentsBatchDelete'' smart constructor.
+data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     { _babdXgafv          :: !(Maybe Text)
     , _babdQuotaUser      :: !(Maybe Text)
     , _babdPrettyPrint    :: !Bool
@@ -122,11 +136,11 @@ data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete
 -- * 'babdCallback'
 --
 -- * 'babdAlt'
-beaconsAttachmentsBatchDelete
+beaconsAttachmentsBatchDelete'
     :: Text -- ^ 'beaconName'
-    -> BeaconsAttachmentsBatchDelete
-beaconsAttachmentsBatchDelete pBabdBeaconName_ =
-    BeaconsAttachmentsBatchDelete
+    -> BeaconsAttachmentsBatchDelete'
+beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
+    BeaconsAttachmentsBatchDelete'
     { _babdXgafv = Nothing
     , _babdQuotaUser = Nothing
     , _babdPrettyPrint = True
@@ -237,10 +251,11 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
              DeleteAttachmentsResponse
         request = requestWithRoute defReq proximityBeaconURL
         requestWithRoute r u
-          BeaconsAttachmentsBatchDelete{..}
-          = go _babdXgafv _babdQuotaUser _babdPrettyPrint
+          BeaconsAttachmentsBatchDelete'{..}
+          = go _babdXgafv _babdQuotaUser
+              (Just _babdPrettyPrint)
               _babdUploadProtocol
-              _babdPp
+              (Just _babdPp)
               _babdAccessToken
               _babdBeaconName
               _babdUploadType
@@ -250,9 +265,10 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
               _babdOauthToken
               _babdFields
               _babdCallback
-              _babdAlt
+              (Just _babdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconsAttachmentsBatchDeleteAPI)
+                      (Proxy ::
+                         Proxy BeaconsAttachmentsBatchDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsInsert@.
-module Storage.Buckets.Insert
+module Network.Google.Resource.Storage.Buckets.Insert
     (
     -- * REST Resource
-      BucketsInsertAPI
+      BucketsInsertResource
 
     -- * Creating a Request
-    , bucketsInsert
-    , BucketsInsert
+    , bucketsInsert'
+    , BucketsInsert'
 
     -- * Request Lenses
     , biQuotaUser
@@ -44,25 +45,34 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketsInsert@ which the
--- 'BucketsInsert' request conforms to.
-type BucketsInsertAPI =
+-- 'BucketsInsert'' request conforms to.
+type BucketsInsertResource =
      "b" :>
-       QueryParam "project" Text :>
-         QueryParam "projection" Text :> Post '[JSON] Bucket
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "project" Text :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "projection"
+                   StorageBucketsInsertProjection
+                   :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --
--- /See:/ 'bucketsInsert' smart constructor.
-data BucketsInsert = BucketsInsert
+-- /See:/ 'bucketsInsert'' smart constructor.
+data BucketsInsert' = BucketsInsert'
     { _biQuotaUser   :: !(Maybe Text)
     , _biPrettyPrint :: !Bool
     , _biProject     :: !Text
     , _biUserIp      :: !(Maybe Text)
     , _biKey         :: !(Maybe Text)
-    , _biProjection  :: !(Maybe Text)
+    , _biProjection  :: !(Maybe StorageBucketsInsertProjection)
     , _biOauthToken  :: !(Maybe Text)
     , _biFields      :: !(Maybe Text)
-    , _biAlt         :: !Text
+    , _biAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsInsert'' with the minimum fields required to make a request.
@@ -86,11 +96,11 @@ data BucketsInsert = BucketsInsert
 -- * 'biFields'
 --
 -- * 'biAlt'
-bucketsInsert
+bucketsInsert'
     :: Text -- ^ 'project'
-    -> BucketsInsert
-bucketsInsert pBiProject_ =
-    BucketsInsert
+    -> BucketsInsert'
+bucketsInsert' pBiProject_ =
+    BucketsInsert'
     { _biQuotaUser = Nothing
     , _biPrettyPrint = True
     , _biProject = pBiProject_
@@ -99,7 +109,7 @@ bucketsInsert pBiProject_ =
     , _biProjection = Nothing
     , _biOauthToken = Nothing
     , _biFields = Nothing
-    , _biAlt = "json"
+    , _biAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,7 +144,7 @@ biKey = lens _biKey (\ s a -> s{_biKey = a})
 -- | Set of properties to return. Defaults to noAcl, unless the bucket
 -- resource specifies acl or defaultObjectAcl properties, when it defaults
 -- to full.
-biProjection :: Lens' BucketsInsert' (Maybe Text)
+biProjection :: Lens' BucketsInsert' (Maybe StorageBucketsInsertProjection)
 biProjection
   = lens _biProjection (\ s a -> s{_biProjection = a})
 
@@ -148,20 +158,23 @@ biFields :: Lens' BucketsInsert' (Maybe Text)
 biFields = lens _biFields (\ s a -> s{_biFields = a})
 
 -- | Data format for the response.
-biAlt :: Lens' BucketsInsert' Text
+biAlt :: Lens' BucketsInsert' Alt
 biAlt = lens _biAlt (\ s a -> s{_biAlt = a})
 
 instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsInsert{..}
-          = go _biQuotaUser _biPrettyPrint (Just _biProject)
+        requestWithRoute r u BucketsInsert'{..}
+          = go _biQuotaUser (Just _biPrettyPrint)
+              (Just _biProject)
               _biUserIp
               _biKey
               _biProjection
               _biOauthToken
               _biFields
-              _biAlt
+              (Just _biAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BucketsInsertResource)
+                      r
                       u

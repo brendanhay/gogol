@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds instance url to targetPool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsAddInstance@.
-module Compute.TargetPools.AddInstance
+module Network.Google.Resource.Compute.TargetPools.AddInstance
     (
     -- * REST Resource
-      TargetPoolsAddInstanceAPI
+      TargetPoolsAddInstanceResource
 
     -- * Creating a Request
-    , targetPoolsAddInstance
-    , TargetPoolsAddInstance
+    , targetPoolsAddInstance'
+    , TargetPoolsAddInstance'
 
     -- * Request Lenses
     , tpaiQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsAddInstance@ which the
--- 'TargetPoolsAddInstance' request conforms to.
-type TargetPoolsAddInstanceAPI =
+-- 'TargetPoolsAddInstance'' request conforms to.
+type TargetPoolsAddInstanceResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
-               "addInstance" :> Post '[JSON] Operation
+               "addInstance" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds instance url to targetPool.
 --
--- /See:/ 'targetPoolsAddInstance' smart constructor.
-data TargetPoolsAddInstance = TargetPoolsAddInstance
+-- /See:/ 'targetPoolsAddInstance'' smart constructor.
+data TargetPoolsAddInstance' = TargetPoolsAddInstance'
     { _tpaiQuotaUser   :: !(Maybe Text)
     , _tpaiPrettyPrint :: !Bool
     , _tpaiProject     :: !Text
@@ -67,7 +75,7 @@ data TargetPoolsAddInstance = TargetPoolsAddInstance
     , _tpaiRegion      :: !Text
     , _tpaiOauthToken  :: !(Maybe Text)
     , _tpaiFields      :: !(Maybe Text)
-    , _tpaiAlt         :: !Text
+    , _tpaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddInstance'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data TargetPoolsAddInstance = TargetPoolsAddInstance
 -- * 'tpaiFields'
 --
 -- * 'tpaiAlt'
-targetPoolsAddInstance
+targetPoolsAddInstance'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsAddInstance
-targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiRegion_ =
-    TargetPoolsAddInstance
+    -> TargetPoolsAddInstance'
+targetPoolsAddInstance' pTpaiProject_ pTpaiTargetPool_ pTpaiRegion_ =
+    TargetPoolsAddInstance'
     { _tpaiQuotaUser = Nothing
     , _tpaiPrettyPrint = True
     , _tpaiProject = pTpaiProject_
@@ -109,7 +117,7 @@ targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiRegion_ =
     , _tpaiRegion = pTpaiRegion_
     , _tpaiOauthToken = Nothing
     , _tpaiFields = Nothing
-    , _tpaiAlt = "json"
+    , _tpaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +173,24 @@ tpaiFields
   = lens _tpaiFields (\ s a -> s{_tpaiFields = a})
 
 -- | Data format for the response.
-tpaiAlt :: Lens' TargetPoolsAddInstance' Text
+tpaiAlt :: Lens' TargetPoolsAddInstance' Alt
 tpaiAlt = lens _tpaiAlt (\ s a -> s{_tpaiAlt = a})
 
 instance GoogleRequest TargetPoolsAddInstance' where
         type Rs TargetPoolsAddInstance' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsAddInstance{..}
-          = go _tpaiQuotaUser _tpaiPrettyPrint _tpaiProject
+        requestWithRoute r u TargetPoolsAddInstance'{..}
+          = go _tpaiQuotaUser (Just _tpaiPrettyPrint)
+              _tpaiProject
               _tpaiTargetPool
               _tpaiUserIp
               _tpaiKey
               _tpaiRegion
               _tpaiOauthToken
               _tpaiFields
-              _tpaiAlt
+              (Just _tpaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsAddInstanceAPI)
+                      (Proxy :: Proxy TargetPoolsAddInstanceResource)
                       r
                       u

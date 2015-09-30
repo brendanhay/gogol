@@ -39,6 +39,11 @@ module Network.Google.AppsCalendar.Types
     , cleTimeZone
     , cleDescription
 
+    -- * CalendarListEntryNotificationSettings
+    , CalendarListEntryNotificationSettings
+    , calendarListEntryNotificationSettings
+    , clensNotifications
+
     -- * Event
     , Event
     , event
@@ -80,6 +85,19 @@ module Network.Google.AppsCalendar.Types
     , eDescription
     , eOrganizer
 
+    -- * CalendarCalendarListListMinAccessRole
+    , CalendarCalendarListListMinAccessRole (..)
+
+    -- * ACLRuleScope
+    , ACLRuleScope
+    , aCLRuleScope
+    , arsValue
+    , arsType
+
+    -- * ColorsEvent
+    , ColorsEvent
+    , colorsEvent
+
     -- * FreeBusyRequestItem
     , FreeBusyRequestItem
     , freeBusyRequestItem
@@ -102,6 +120,14 @@ module Network.Google.AppsCalendar.Types
     , eaMimeType
     , eaTitle
     , eaFileId
+
+    -- * EventCreator
+    , EventCreator
+    , eventCreator
+    , ecEmail
+    , ecSelf
+    , ecDisplayName
+    , ecId
 
     -- * TimePeriod
     , TimePeriod
@@ -141,6 +167,10 @@ module Network.Google.AppsCalendar.Types
     , cId
     , cType
 
+    -- * FreeBusyResponseGroups
+    , FreeBusyResponseGroups
+    , freeBusyResponseGroups
+
     -- * Setting
     , Setting
     , setting
@@ -149,11 +179,35 @@ module Network.Google.AppsCalendar.Types
     , setValue
     , setId
 
+    -- * CalendarCalendarListWatchMinAccessRole
+    , CalendarCalendarListWatchMinAccessRole (..)
+
+    -- * EventReminders
+    , EventReminders
+    , eventReminders
+    , erOverrides
+    , erUseDefault
+
+    -- * CalendarEventsWatchOrderBy
+    , CalendarEventsWatchOrderBy (..)
+
+    -- * ColorsCalendar
+    , ColorsCalendar
+    , colorsCalendar
+
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
+
     -- * CalendarNotification
     , CalendarNotification
     , calendarNotification
     , cnMethod
     , cnType
+
+    -- * EventExtendedPropertiesPrivate
+    , EventExtendedPropertiesPrivate
+    , eventExtendedPropertiesPrivate
 
     -- * Events
     , Events
@@ -170,6 +224,9 @@ module Network.Google.AppsCalendar.Types
     , eveNextSyncToken
     , eveDescription
 
+    -- * CalendarEventsListOrderBy
+    , CalendarEventsListOrderBy (..)
+
     -- * EventReminder
     , EventReminder
     , eventReminder
@@ -184,6 +241,12 @@ module Network.Google.AppsCalendar.Types
     , fbrKind
     , fbrCalendars
     , fbrTimeMax
+
+    -- * EventExtendedProperties
+    , EventExtendedProperties
+    , eventExtendedProperties
+    , eepPrivate
+    , eepShared
 
     -- * Calendar
     , Calendar
@@ -210,12 +273,24 @@ module Network.Google.AppsCalendar.Types
     , eaOptional
     , eaOrganizer
 
+    -- * EventOrganizer
+    , EventOrganizer
+    , eventOrganizer
+    , eoEmail
+    , eoSelf
+    , eoDisplayName
+    , eoId
+
     -- * EventDateTime
     , EventDateTime
     , eventDateTime
     , edtDate
     , edtTimeZone
     , edtDateTime
+
+    -- * EventGadgetPreferences
+    , EventGadgetPreferences
+    , eventGadgetPreferences
 
     -- * CalendarList
     , CalendarList
@@ -236,6 +311,18 @@ module Network.Google.AppsCalendar.Types
     , fTimeZone
     , fTimeMax
 
+    -- * EventGadget
+    , EventGadget
+    , eventGadget
+    , egHeight
+    , egDisplay
+    , egPreferences
+    , egLink
+    , egIconLink
+    , egWidth
+    , egTitle
+    , egType
+
     -- * ACLRule
     , ACLRule
     , aCLRule
@@ -244,6 +331,14 @@ module Network.Google.AppsCalendar.Types
     , arRole
     , arScope
     , arId
+
+    -- * FreeBusyResponseCalendars
+    , FreeBusyResponseCalendars
+    , freeBusyResponseCalendars
+
+    -- * EventExtendedPropertiesShared
+    , EventExtendedPropertiesShared
+    , eventExtendedPropertiesShared
 
     -- * Colors
     , Colors
@@ -267,6 +362,15 @@ module Network.Google.AppsCalendar.Types
     , aclKind
     , aclItems
     , aclNextSyncToken
+
+    -- * EventSource
+    , EventSource
+    , eventSource
+    , esUrl
+    , esTitle
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsCalendar.Types.Product
@@ -274,7 +378,7 @@ import           Network.Google.AppsCalendar.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Calendar API.
-appsCalendarURL :: BaseURL
+appsCalendarURL :: BaseUrl
 appsCalendarURL
   = BaseUrl Https
       "https://www.googleapis.com/calendar/v3/"

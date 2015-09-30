@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all the deals for a given order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplacedealsList@.
-module AdExchangeBuyer.Marketplacedeals.List
+module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.List
     (
     -- * REST Resource
-      MarketplacedealsListAPI
+      MarketplacedealsListResource
 
     -- * Creating a Request
-    , marketplacedealsList
-    , MarketplacedealsList
+    , marketplacedealsList'
+    , MarketplacedealsList'
 
     -- * Request Lenses
     , mllQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplacedealsList@ which the
--- 'MarketplacedealsList' request conforms to.
-type MarketplacedealsListAPI =
+-- 'MarketplacedealsList'' request conforms to.
+type MarketplacedealsListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
-         "deals" :> Get '[JSON] GetOrderDealsResponse
+         "deals" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] GetOrderDealsResponse
 
 -- | List all the deals for a given order
 --
--- /See:/ 'marketplacedealsList' smart constructor.
-data MarketplacedealsList = MarketplacedealsList
+-- /See:/ 'marketplacedealsList'' smart constructor.
+data MarketplacedealsList' = MarketplacedealsList'
     { _mllQuotaUser   :: !(Maybe Text)
     , _mllPrettyPrint :: !Bool
     , _mllUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data MarketplacedealsList = MarketplacedealsList
     , _mllOauthToken  :: !(Maybe Text)
     , _mllOrderId     :: !Text
     , _mllFields      :: !(Maybe Text)
-    , _mllAlt         :: !Text
+    , _mllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplacedealsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data MarketplacedealsList = MarketplacedealsList
 -- * 'mllFields'
 --
 -- * 'mllAlt'
-marketplacedealsList
+marketplacedealsList'
     :: Text -- ^ 'orderId'
-    -> MarketplacedealsList
-marketplacedealsList pMllOrderId_ =
-    MarketplacedealsList
+    -> MarketplacedealsList'
+marketplacedealsList' pMllOrderId_ =
+    MarketplacedealsList'
     { _mllQuotaUser = Nothing
     , _mllPrettyPrint = True
     , _mllUserIp = Nothing
@@ -94,7 +103,7 @@ marketplacedealsList pMllOrderId_ =
     , _mllOauthToken = Nothing
     , _mllOrderId = pMllOrderId_
     , _mllFields = Nothing
-    , _mllAlt = "json"
+    , _mllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ mllFields
   = lens _mllFields (\ s a -> s{_mllFields = a})
 
 -- | Data format for the response.
-mllAlt :: Lens' MarketplacedealsList' Text
+mllAlt :: Lens' MarketplacedealsList' Alt
 mllAlt = lens _mllAlt (\ s a -> s{_mllAlt = a})
 
 instance GoogleRequest MarketplacedealsList' where
         type Rs MarketplacedealsList' = GetOrderDealsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplacedealsList{..}
-          = go _mllQuotaUser _mllPrettyPrint _mllUserIp _mllKey
+        requestWithRoute r u MarketplacedealsList'{..}
+          = go _mllQuotaUser (Just _mllPrettyPrint) _mllUserIp
+              _mllKey
               _mllOauthToken
               _mllOrderId
               _mllFields
-              _mllAlt
+              (Just _mllAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplacedealsListAPI)
+                      (Proxy :: Proxy MarketplacedealsListResource)
                       r
                       u

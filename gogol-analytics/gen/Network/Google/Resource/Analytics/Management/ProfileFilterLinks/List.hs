@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all profile filter links for a profile.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileFilterLinksList@.
-module Analytics.Management.ProfileFilterLinks.List
+module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.List
     (
     -- * REST Resource
-      ManagementProfileFilterLinksListAPI
+      ManagementProfileFilterLinksListResource
 
     -- * Creating a Request
-    , managementProfileFilterLinksList
-    , ManagementProfileFilterLinksList
+    , managementProfileFilterLinksList'
+    , ManagementProfileFilterLinksList'
 
     -- * Request Lenses
     , mpfllQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileFilterLinksList@ which the
--- 'ManagementProfileFilterLinksList' request conforms to.
-type ManagementProfileFilterLinksListAPI =
+-- 'ManagementProfileFilterLinksList'' request conforms to.
+type ManagementProfileFilterLinksListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,14 +58,21 @@ type ManagementProfileFilterLinksListAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         Get '[JSON] ProfileFilterLinks
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] ProfileFilterLinks
 
 -- | Lists all profile filter links for a profile.
 --
--- /See:/ 'managementProfileFilterLinksList' smart constructor.
-data ManagementProfileFilterLinksList = ManagementProfileFilterLinksList
+-- /See:/ 'managementProfileFilterLinksList'' smart constructor.
+data ManagementProfileFilterLinksList' = ManagementProfileFilterLinksList'
     { _mpfllQuotaUser     :: !(Maybe Text)
     , _mpfllPrettyPrint   :: !Bool
     , _mpfllWebPropertyId :: !Text
@@ -76,7 +84,7 @@ data ManagementProfileFilterLinksList = ManagementProfileFilterLinksList
     , _mpfllStartIndex    :: !(Maybe Int32)
     , _mpfllMaxResults    :: !(Maybe Int32)
     , _mpfllFields        :: !(Maybe Text)
-    , _mpfllAlt           :: !Text
+    , _mpfllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksList'' with the minimum fields required to make a request.
@@ -106,13 +114,13 @@ data ManagementProfileFilterLinksList = ManagementProfileFilterLinksList
 -- * 'mpfllFields'
 --
 -- * 'mpfllAlt'
-managementProfileFilterLinksList
+managementProfileFilterLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfileFilterLinksList
-managementProfileFilterLinksList pMpfllWebPropertyId_ pMpfllProfileId_ pMpfllAccountId_ =
-    ManagementProfileFilterLinksList
+    -> ManagementProfileFilterLinksList'
+managementProfileFilterLinksList' pMpfllWebPropertyId_ pMpfllProfileId_ pMpfllAccountId_ =
+    ManagementProfileFilterLinksList'
     { _mpfllQuotaUser = Nothing
     , _mpfllPrettyPrint = False
     , _mpfllWebPropertyId = pMpfllWebPropertyId_
@@ -124,7 +132,7 @@ managementProfileFilterLinksList pMpfllWebPropertyId_ pMpfllProfileId_ pMpfllAcc
     , _mpfllStartIndex = Nothing
     , _mpfllMaxResults = Nothing
     , _mpfllFields = Nothing
-    , _mpfllAlt = "json"
+    , _mpfllAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,7 +208,7 @@ mpfllFields
   = lens _mpfllFields (\ s a -> s{_mpfllFields = a})
 
 -- | Data format for the response.
-mpfllAlt :: Lens' ManagementProfileFilterLinksList' Text
+mpfllAlt :: Lens' ManagementProfileFilterLinksList' Alt
 mpfllAlt = lens _mpfllAlt (\ s a -> s{_mpfllAlt = a})
 
 instance GoogleRequest
@@ -209,8 +217,8 @@ instance GoogleRequest
              ProfileFilterLinks
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileFilterLinksList{..}
-          = go _mpfllQuotaUser _mpfllPrettyPrint
+          ManagementProfileFilterLinksList'{..}
+          = go _mpfllQuotaUser (Just _mpfllPrettyPrint)
               _mpfllWebPropertyId
               _mpfllUserIp
               _mpfllProfileId
@@ -220,9 +228,10 @@ instance GoogleRequest
               _mpfllStartIndex
               _mpfllMaxResults
               _mpfllFields
-              _mpfllAlt
+              (Just _mpfllAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileFilterLinksListAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileFilterLinksListResource)
                       r
                       u

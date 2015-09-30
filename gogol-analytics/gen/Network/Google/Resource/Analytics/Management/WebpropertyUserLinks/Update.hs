@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates permissions for an existing user on the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertyUserLinksUpdate@.
-module Analytics.Management.WebpropertyUserLinks.Update
+module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Update
     (
     -- * REST Resource
-      ManagementWebpropertyUserLinksUpdateAPI
+      ManagementWebpropertyUserLinksUpdateResource
 
     -- * Creating a Request
-    , managementWebpropertyUserLinksUpdate
-    , ManagementWebpropertyUserLinksUpdate
+    , managementWebpropertyUserLinksUpdate'
+    , ManagementWebpropertyUserLinksUpdate'
 
     -- * Request Lenses
     , mwuluQuotaUser
@@ -45,20 +46,28 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertyUserLinksUpdate@ which the
--- 'ManagementWebpropertyUserLinksUpdate' request conforms to.
-type ManagementWebpropertyUserLinksUpdateAPI =
+-- 'ManagementWebpropertyUserLinksUpdate'' request conforms to.
+type ManagementWebpropertyUserLinksUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityUserLinks" :>
-                 Capture "linkId" Text :> Put '[JSON] EntityUserLink
+                 Capture "linkId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given web property.
 --
--- /See:/ 'managementWebpropertyUserLinksUpdate' smart constructor.
-data ManagementWebpropertyUserLinksUpdate = ManagementWebpropertyUserLinksUpdate
+-- /See:/ 'managementWebpropertyUserLinksUpdate'' smart constructor.
+data ManagementWebpropertyUserLinksUpdate' = ManagementWebpropertyUserLinksUpdate'
     { _mwuluQuotaUser     :: !(Maybe Text)
     , _mwuluPrettyPrint   :: !Bool
     , _mwuluWebPropertyId :: !Text
@@ -68,7 +77,7 @@ data ManagementWebpropertyUserLinksUpdate = ManagementWebpropertyUserLinksUpdate
     , _mwuluLinkId        :: !Text
     , _mwuluOauthToken    :: !(Maybe Text)
     , _mwuluFields        :: !(Maybe Text)
-    , _mwuluAlt           :: !Text
+    , _mwuluAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertyUserLinksUpdate'' with the minimum fields required to make a request.
@@ -94,13 +103,13 @@ data ManagementWebpropertyUserLinksUpdate = ManagementWebpropertyUserLinksUpdate
 -- * 'mwuluFields'
 --
 -- * 'mwuluAlt'
-managementWebpropertyUserLinksUpdate
+managementWebpropertyUserLinksUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementWebpropertyUserLinksUpdate
-managementWebpropertyUserLinksUpdate pMwuluWebPropertyId_ pMwuluAccountId_ pMwuluLinkId_ =
-    ManagementWebpropertyUserLinksUpdate
+    -> ManagementWebpropertyUserLinksUpdate'
+managementWebpropertyUserLinksUpdate' pMwuluWebPropertyId_ pMwuluAccountId_ pMwuluLinkId_ =
+    ManagementWebpropertyUserLinksUpdate'
     { _mwuluQuotaUser = Nothing
     , _mwuluPrettyPrint = False
     , _mwuluWebPropertyId = pMwuluWebPropertyId_
@@ -110,7 +119,7 @@ managementWebpropertyUserLinksUpdate pMwuluWebPropertyId_ pMwuluAccountId_ pMwul
     , _mwuluLinkId = pMwuluLinkId_
     , _mwuluOauthToken = Nothing
     , _mwuluFields = Nothing
-    , _mwuluAlt = "json"
+    , _mwuluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +177,7 @@ mwuluFields
   = lens _mwuluFields (\ s a -> s{_mwuluFields = a})
 
 -- | Data format for the response.
-mwuluAlt :: Lens' ManagementWebpropertyUserLinksUpdate' Text
+mwuluAlt :: Lens' ManagementWebpropertyUserLinksUpdate' Alt
 mwuluAlt = lens _mwuluAlt (\ s a -> s{_mwuluAlt = a})
 
 instance GoogleRequest
@@ -177,8 +186,8 @@ instance GoogleRequest
              EntityUserLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertyUserLinksUpdate{..}
-          = go _mwuluQuotaUser _mwuluPrettyPrint
+          ManagementWebpropertyUserLinksUpdate'{..}
+          = go _mwuluQuotaUser (Just _mwuluPrettyPrint)
               _mwuluWebPropertyId
               _mwuluUserIp
               _mwuluAccountId
@@ -186,10 +195,10 @@ instance GoogleRequest
               _mwuluLinkId
               _mwuluOauthToken
               _mwuluFields
-              _mwuluAlt
+              (Just _mwuluAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebpropertyUserLinksUpdateAPI)
+                         Proxy ManagementWebpropertyUserLinksUpdateResource)
                       r
                       u

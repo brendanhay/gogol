@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomchannelsPatch@.
-module AdSenseHost.Customchannels.Patch
+module Network.Google.Resource.AdSenseHost.Customchannels.Patch
     (
     -- * REST Resource
-      CustomchannelsPatchAPI
+      CustomchannelsPatchResource
 
     -- * Creating a Request
-    , customchannelsPatch
-    , CustomchannelsPatch
+    , customchannelsPatch'
+    , CustomchannelsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostCustomchannelsPatch@ which the
--- 'CustomchannelsPatch' request conforms to.
-type CustomchannelsPatchAPI =
+-- 'CustomchannelsPatch'' request conforms to.
+type CustomchannelsPatchResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "customChannelId" Text :>
-             Patch '[JSON] CustomChannel
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "customChannelId" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account. This method
 -- supports patch semantics.
 --
--- /See:/ 'customchannelsPatch' smart constructor.
-data CustomchannelsPatch = CustomchannelsPatch
+-- /See:/ 'customchannelsPatch'' smart constructor.
+data CustomchannelsPatch' = CustomchannelsPatch'
     { _cpQuotaUser       :: !(Maybe Text)
     , _cpPrettyPrint     :: !Bool
     , _cpCustomChannelId :: !Text
@@ -66,7 +73,7 @@ data CustomchannelsPatch = CustomchannelsPatch
     , _cpKey             :: !(Maybe Text)
     , _cpOauthToken      :: !(Maybe Text)
     , _cpFields          :: !(Maybe Text)
-    , _cpAlt             :: !Text
+    , _cpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsPatch'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data CustomchannelsPatch = CustomchannelsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-customchannelsPatch
+customchannelsPatch'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
-    -> CustomchannelsPatch
-customchannelsPatch pCpCustomChannelId_ pCpAdClientId_ =
-    CustomchannelsPatch
+    -> CustomchannelsPatch'
+customchannelsPatch' pCpCustomChannelId_ pCpAdClientId_ =
+    CustomchannelsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpCustomChannelId = pCpCustomChannelId_
@@ -104,7 +111,7 @@ customchannelsPatch pCpCustomChannelId_ pCpAdClientId_ =
     , _cpKey = Nothing
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +159,23 @@ cpFields :: Lens' CustomchannelsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CustomchannelsPatch' Text
+cpAlt :: Lens' CustomchannelsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CustomchannelsPatch' where
         type Rs CustomchannelsPatch' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomchannelsPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint
+        requestWithRoute r u CustomchannelsPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint)
               (Just _cpCustomChannelId)
               _cpUserIp
               _cpAdClientId
               _cpKey
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsPatchAPI)
+                      (Proxy :: Proxy CustomchannelsPatchResource)
                       r
                       u

@@ -27,6 +27,12 @@ module Network.Google.Drive.Types
     , flItems
     , flSelfLink
 
+    -- * CommentContext
+    , CommentContext
+    , commentContext
+    , ccValue
+    , ccType
+
     -- * ParentReference
     , ParentReference
     , parentReference
@@ -46,6 +52,32 @@ module Network.Google.Drive.Types
     , pSelfLink
     , pKey
 
+    -- * DriveFilesCopyVisibility
+    , DriveFilesCopyVisibility (..)
+
+    -- * DriveFilesGetProjection
+    , DriveFilesGetProjection (..)
+
+    -- * AboutFeatures
+    , AboutFeatures
+    , aboutFeatures
+    , afFeatureRate
+    , afFeatureName
+
+    -- * FileThumbnail
+    , FileThumbnail
+    , fileThumbnail
+    , ftImage
+    , ftMimeType
+
+    -- * DriveFilesWatchProjection
+    , DriveFilesWatchProjection (..)
+
+    -- * UserPicture
+    , UserPicture
+    , userPicture
+    , upUrl
+
     -- * PropertyList
     , PropertyList
     , propertyList
@@ -53,6 +85,15 @@ module Network.Google.Drive.Types
     , plKind
     , plItems
     , plSelfLink
+
+    -- * AboutImportFormats
+    , AboutImportFormats
+    , aboutImportFormats
+    , aifTargets
+    , aifSource
+
+    -- * DriveFilesInsertVisibility
+    , DriveFilesInsertVisibility (..)
 
     -- * ChildList
     , ChildList
@@ -64,6 +105,12 @@ module Network.Google.Drive.Types
     , clItems
     , clSelfLink
 
+    -- * AboutAdditionalRoleInfoRoleSets
+    , AboutAdditionalRoleInfoRoleSets
+    , aboutAdditionalRoleInfoRoleSets
+    , aarirsPrimaryRole
+    , aarirsAdditionalRoles
+
     -- * CommentReplyList
     , CommentReplyList
     , commentReplyList
@@ -72,6 +119,13 @@ module Network.Google.Drive.Types
     , crlKind
     , crlItems
     , crlSelfLink
+
+    -- * FileOpenWithLinks
+    , FileOpenWithLinks
+    , fileOpenWithLinks
+
+    -- * DriveFilesListCorpus
+    , DriveFilesListCorpus (..)
 
     -- * Channel
     , Channel
@@ -96,6 +150,16 @@ module Network.Google.Drive.Types
     , alItems
     , alSelfLink
 
+    -- * FileVideoMediaMetadata
+    , FileVideoMediaMetadata
+    , fileVideoMediaMetadata
+    , fvmmHeight
+    , fvmmWidth
+    , fvmmDurationMillis
+
+    -- * DriveFilesPatchModifiedDateBehavior
+    , DriveFilesPatchModifiedDateBehavior (..)
+
     -- * Change
     , Change
     , change
@@ -106,6 +170,9 @@ module Network.Google.Drive.Types
     , chaDeleted
     , chaFileId
     , chaFile
+
+    -- * DriveFilesUpdateModifiedDateBehavior
+    , DriveFilesUpdateModifiedDateBehavior (..)
 
     -- * ChildReference
     , ChildReference
@@ -153,6 +220,12 @@ module Network.Google.Drive.Types
     , uDisplayName
     , uPermissionId
 
+    -- * AboutExportFormats
+    , AboutExportFormats
+    , aboutExportFormats
+    , aefTargets
+    , aefSource
+
     -- * CommentReply
     , CommentReply
     , commentReply
@@ -166,6 +239,18 @@ module Network.Google.Drive.Types
     , comDeleted
     , comVerb
 
+    -- * AboutMaxUploadSizes
+    , AboutMaxUploadSizes
+    , aboutMaxUploadSizes
+    , amusSize
+    , amusType
+
+    -- * AboutQuotaBytesByService
+    , AboutQuotaBytesByService
+    , aboutQuotaBytesByService
+    , aqbbsBytesUsed
+    , aqbbsServiceName
+
     -- * ChangeList
     , ChangeList
     , changeList
@@ -176,6 +261,19 @@ module Network.Google.Drive.Types
     , cllItems
     , cllSelfLink
     , cllLargestChangeId
+
+    -- * RevisionExportLinks
+    , RevisionExportLinks
+    , revisionExportLinks
+
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- * FileIndexableText
+    , FileIndexableText
+    , fileIndexableText
+    , fitText
 
     -- * About
     , About
@@ -204,6 +302,47 @@ module Network.Google.Drive.Types
     , aQuotaBytesUsedAggregate
     , aQuotaBytesByService
     , aLargestChangeId
+
+    -- * FileImageMediaMetadataLocation
+    , FileImageMediaMetadataLocation
+    , fileImageMediaMetadataLocation
+    , fimmlLatitude
+    , fimmlAltitude
+    , fimmlLongitude
+
+    -- * FileImageMediaMetadata
+    , FileImageMediaMetadata
+    , fileImageMediaMetadata
+    , fimmRotation
+    , fimmHeight
+    , fimmSubjectDistance
+    , fimmMaxApertureValue
+    , fimmIsoSpeed
+    , fimmLocation
+    , fimmAperture
+    , fimmFocalLength
+    , fimmCameraMake
+    , fimmWidth
+    , fimmExposureTime
+    , fimmCameraModel
+    , fimmWhiteBalance
+    , fimmDate
+    , fimmLens
+    , fimmFlashUsed
+    , fimmExposureBias
+    , fimmMeteringMode
+    , fimmExposureMode
+    , fimmSensor
+    , fimmColorSpace
+
+    -- * FileLabels
+    , FileLabels
+    , fileLabels
+    , flViewed
+    , flTrashed
+    , flStarred
+    , flHidden
+    , flRestricted
 
     -- * Revision
     , Revision
@@ -263,6 +402,9 @@ module Network.Google.Drive.Types
     , ccDeleted
     , ccFileId
     , ccCommentId
+
+    -- * DriveFilesListProjection
+    , DriveFilesListProjection (..)
 
     -- * PermissionId
     , PermissionId
@@ -338,6 +480,12 @@ module Network.Google.Drive.Types
     , parItems
     , parSelfLink
 
+    -- * AboutAdditionalRoleInfo
+    , AboutAdditionalRoleInfo
+    , aboutAdditionalRoleInfo
+    , aariRoleSets
+    , aariType
+
     -- * RevisionList
     , RevisionList
     , revisionList
@@ -354,12 +502,23 @@ module Network.Google.Drive.Types
     , pllItems
     , pllSelfLink
 
+    -- * FileExportLinks
+    , FileExportLinks
+    , fileExportLinks
+
     -- * GeneratedIds
     , GeneratedIds
     , generatedIds
     , giSpace
     , giKind
     , giIds
+
+    -- * AppIcons
+    , AppIcons
+    , appIcons
+    , aiSize
+    , aiCategory
+    , aiIconUrl
 
     -- * CommentList
     , CommentList
@@ -369,6 +528,9 @@ module Network.Google.Drive.Types
     , comoKind
     , comoItems
     , comoSelfLink
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Drive.Types.Product
@@ -376,7 +538,7 @@ import           Network.Google.Drive.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Drive API.
-driveURL :: BaseURL
+driveURL :: BaseUrl
 driveURL
   = BaseUrl Https
       "https://www.googleapis.com/drive/v2/"

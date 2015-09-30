@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified TargetInstance resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesDelete@.
-module Compute.TargetInstances.Delete
+module Network.Google.Resource.Compute.TargetInstances.Delete
     (
     -- * REST Resource
-      TargetInstancesDeleteAPI
+      TargetInstancesDeleteResource
 
     -- * Creating a Request
-    , targetInstancesDelete
-    , TargetInstancesDelete
+    , targetInstancesDelete'
+    , TargetInstancesDelete'
 
     -- * Request Lenses
     , tidQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetInstancesDelete@ which the
--- 'TargetInstancesDelete' request conforms to.
-type TargetInstancesDeleteAPI =
+-- 'TargetInstancesDelete'' request conforms to.
+type TargetInstancesDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "targetInstances" :>
              Capture "targetInstance" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetInstance resource.
 --
--- /See:/ 'targetInstancesDelete' smart constructor.
-data TargetInstancesDelete = TargetInstancesDelete
+-- /See:/ 'targetInstancesDelete'' smart constructor.
+data TargetInstancesDelete' = TargetInstancesDelete'
     { _tidQuotaUser      :: !(Maybe Text)
     , _tidPrettyPrint    :: !Bool
     , _tidProject        :: !Text
@@ -67,7 +74,7 @@ data TargetInstancesDelete = TargetInstancesDelete
     , _tidKey            :: !(Maybe Text)
     , _tidOauthToken     :: !(Maybe Text)
     , _tidFields         :: !(Maybe Text)
-    , _tidAlt            :: !Text
+    , _tidAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesDelete'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data TargetInstancesDelete = TargetInstancesDelete
 -- * 'tidFields'
 --
 -- * 'tidAlt'
-targetInstancesDelete
+targetInstancesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetInstance'
     -> Text -- ^ 'zone'
-    -> TargetInstancesDelete
-targetInstancesDelete pTidProject_ pTidTargetInstance_ pTidZone_ =
-    TargetInstancesDelete
+    -> TargetInstancesDelete'
+targetInstancesDelete' pTidProject_ pTidTargetInstance_ pTidZone_ =
+    TargetInstancesDelete'
     { _tidQuotaUser = Nothing
     , _tidPrettyPrint = True
     , _tidProject = pTidProject_
@@ -109,7 +116,7 @@ targetInstancesDelete pTidProject_ pTidTargetInstance_ pTidZone_ =
     , _tidKey = Nothing
     , _tidOauthToken = Nothing
     , _tidFields = Nothing
-    , _tidAlt = "json"
+    , _tidAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ tidFields
   = lens _tidFields (\ s a -> s{_tidFields = a})
 
 -- | Data format for the response.
-tidAlt :: Lens' TargetInstancesDelete' Text
+tidAlt :: Lens' TargetInstancesDelete' Alt
 tidAlt = lens _tidAlt (\ s a -> s{_tidAlt = a})
 
 instance GoogleRequest TargetInstancesDelete' where
         type Rs TargetInstancesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesDelete{..}
-          = go _tidQuotaUser _tidPrettyPrint _tidProject
+        requestWithRoute r u TargetInstancesDelete'{..}
+          = go _tidQuotaUser (Just _tidPrettyPrint) _tidProject
               _tidTargetInstance
               _tidUserIp
               _tidZone
               _tidKey
               _tidOauthToken
               _tidFields
-              _tidAlt
+              (Just _tidAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetInstancesDeleteAPI)
+                      (Proxy :: Proxy TargetInstancesDeleteResource)
                       r
                       u

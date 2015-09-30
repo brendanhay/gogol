@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProfilesList@.
-module DFAReporting.AccountUserProfiles.List
+module Network.Google.Resource.DFAReporting.AccountUserProfiles.List
     (
     -- * REST Resource
-      AccountUserProfilesListAPI
+      AccountUserProfilesListResource
 
     -- * Creating a Request
-    , accountUserProfilesList
-    , AccountUserProfilesList
+    , accountUserProfilesList'
+    , AccountUserProfilesList'
 
     -- * Request Lenses
     , auplQuotaUser
@@ -52,26 +53,38 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountUserProfilesList@ which the
--- 'AccountUserProfilesList' request conforms to.
-type AccountUserProfilesListAPI =
+-- 'AccountUserProfilesList'' request conforms to.
+type AccountUserProfilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           QueryParam "userRoleId" Int64 :>
-             QueryParam "searchString" Text :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder" Text :>
-                   QueryParam "active" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParam "subaccountId" Int64 :>
-                           QueryParam "maxResults" Int32 :>
-                             Get '[JSON] AccountUserProfilesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userRoleId" Int64 :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "searchString" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder"
+                         DfareportingAccountUserProfilesListSortOrder
+                         :>
+                         QueryParam "active" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingAccountUserProfilesListSortField
+                                 :>
+                                 QueryParam "subaccountId" Int64 :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON]
+                                             AccountUserProfilesListResponse
 
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
--- /See:/ 'accountUserProfilesList' smart constructor.
-data AccountUserProfilesList = AccountUserProfilesList
+-- /See:/ 'accountUserProfilesList'' smart constructor.
+data AccountUserProfilesList' = AccountUserProfilesList'
     { _auplQuotaUser    :: !(Maybe Text)
     , _auplPrettyPrint  :: !Bool
     , _auplUserRoleId   :: !(Maybe Int64)
@@ -79,16 +92,16 @@ data AccountUserProfilesList = AccountUserProfilesList
     , _auplSearchString :: !(Maybe Text)
     , _auplIds          :: !(Maybe Int64)
     , _auplProfileId    :: !Int64
-    , _auplSortOrder    :: !(Maybe Text)
+    , _auplSortOrder    :: !(Maybe DfareportingAccountUserProfilesListSortOrder)
     , _auplActive       :: !(Maybe Bool)
     , _auplKey          :: !(Maybe Text)
     , _auplPageToken    :: !(Maybe Text)
-    , _auplSortField    :: !(Maybe Text)
+    , _auplSortField    :: !(Maybe DfareportingAccountUserProfilesListSortField)
     , _auplSubaccountId :: !(Maybe Int64)
     , _auplOauthToken   :: !(Maybe Text)
     , _auplMaxResults   :: !(Maybe Int32)
     , _auplFields       :: !(Maybe Text)
-    , _auplAlt          :: !Text
+    , _auplAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesList'' with the minimum fields required to make a request.
@@ -128,11 +141,11 @@ data AccountUserProfilesList = AccountUserProfilesList
 -- * 'auplFields'
 --
 -- * 'auplAlt'
-accountUserProfilesList
+accountUserProfilesList'
     :: Int64 -- ^ 'profileId'
-    -> AccountUserProfilesList
-accountUserProfilesList pAuplProfileId_ =
-    AccountUserProfilesList
+    -> AccountUserProfilesList'
+accountUserProfilesList' pAuplProfileId_ =
+    AccountUserProfilesList'
     { _auplQuotaUser = Nothing
     , _auplPrettyPrint = True
     , _auplUserRoleId = Nothing
@@ -149,7 +162,7 @@ accountUserProfilesList pAuplProfileId_ =
     , _auplOauthToken = Nothing
     , _auplMaxResults = Nothing
     , _auplFields = Nothing
-    , _auplAlt = "json"
+    , _auplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,7 +214,7 @@ auplProfileId
       (\ s a -> s{_auplProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-auplSortOrder :: Lens' AccountUserProfilesList' (Maybe Text)
+auplSortOrder :: Lens' AccountUserProfilesList' (Maybe DfareportingAccountUserProfilesListSortOrder)
 auplSortOrder
   = lens _auplSortOrder
       (\ s a -> s{_auplSortOrder = a})
@@ -224,7 +237,7 @@ auplPageToken
       (\ s a -> s{_auplPageToken = a})
 
 -- | Field by which to sort the list.
-auplSortField :: Lens' AccountUserProfilesList' (Maybe Text)
+auplSortField :: Lens' AccountUserProfilesList' (Maybe DfareportingAccountUserProfilesListSortField)
 auplSortField
   = lens _auplSortField
       (\ s a -> s{_auplSortField = a})
@@ -253,15 +266,16 @@ auplFields
   = lens _auplFields (\ s a -> s{_auplFields = a})
 
 -- | Data format for the response.
-auplAlt :: Lens' AccountUserProfilesList' Text
+auplAlt :: Lens' AccountUserProfilesList' Alt
 auplAlt = lens _auplAlt (\ s a -> s{_auplAlt = a})
 
 instance GoogleRequest AccountUserProfilesList' where
         type Rs AccountUserProfilesList' =
              AccountUserProfilesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProfilesList{..}
-          = go _auplQuotaUser _auplPrettyPrint _auplUserRoleId
+        requestWithRoute r u AccountUserProfilesList'{..}
+          = go _auplQuotaUser (Just _auplPrettyPrint)
+              _auplUserRoleId
               _auplUserIp
               _auplSearchString
               _auplIds
@@ -275,9 +289,9 @@ instance GoogleRequest AccountUserProfilesList' where
               _auplOauthToken
               _auplMaxResults
               _auplFields
-              _auplAlt
+              (Just _auplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountUserProfilesListAPI)
+                      (Proxy :: Proxy AccountUserProfilesListResource)
                       r
                       u

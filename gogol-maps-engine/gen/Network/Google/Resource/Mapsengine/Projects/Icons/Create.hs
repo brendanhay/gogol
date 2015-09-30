@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create an icon.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineProjectsIconsCreate@.
-module Mapsengine.Projects.Icons.Create
+module Network.Google.Resource.Mapsengine.Projects.Icons.Create
     (
     -- * REST Resource
-      ProjectsIconsCreateAPI
+      ProjectsIconsCreateResource
 
     -- * Creating a Request
-    , projectsIconsCreate
-    , ProjectsIconsCreate
+    , projectsIconsCreate'
+    , ProjectsIconsCreate'
 
     -- * Request Lenses
     , picQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineProjectsIconsCreate@ which the
--- 'ProjectsIconsCreate' request conforms to.
-type ProjectsIconsCreateAPI =
+-- 'ProjectsIconsCreate'' request conforms to.
+type ProjectsIconsCreateResource =
      "projects" :>
        Capture "projectId" Text :>
-         "icons" :> Post '[JSON] Icon
+         "icons" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Icon
 
 -- | Create an icon.
 --
--- /See:/ 'projectsIconsCreate' smart constructor.
-data ProjectsIconsCreate = ProjectsIconsCreate
+-- /See:/ 'projectsIconsCreate'' smart constructor.
+data ProjectsIconsCreate' = ProjectsIconsCreate'
     { _picQuotaUser   :: !(Maybe Text)
     , _picPrettyPrint :: !Bool
     , _picUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ProjectsIconsCreate = ProjectsIconsCreate
     , _picProjectId   :: !Text
     , _picOauthToken  :: !(Maybe Text)
     , _picFields      :: !(Maybe Text)
-    , _picAlt         :: !Text
+    , _picAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsCreate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ProjectsIconsCreate = ProjectsIconsCreate
 -- * 'picFields'
 --
 -- * 'picAlt'
-projectsIconsCreate
+projectsIconsCreate'
     :: Text -- ^ 'projectId'
-    -> ProjectsIconsCreate
-projectsIconsCreate pPicProjectId_ =
-    ProjectsIconsCreate
+    -> ProjectsIconsCreate'
+projectsIconsCreate' pPicProjectId_ =
+    ProjectsIconsCreate'
     { _picQuotaUser = Nothing
     , _picPrettyPrint = True
     , _picUserIp = Nothing
@@ -94,7 +102,7 @@ projectsIconsCreate pPicProjectId_ =
     , _picProjectId = pPicProjectId_
     , _picOauthToken = Nothing
     , _picFields = Nothing
-    , _picAlt = "json"
+    , _picAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ picFields
   = lens _picFields (\ s a -> s{_picFields = a})
 
 -- | Data format for the response.
-picAlt :: Lens' ProjectsIconsCreate' Text
+picAlt :: Lens' ProjectsIconsCreate' Alt
 picAlt = lens _picAlt (\ s a -> s{_picAlt = a})
 
 instance GoogleRequest ProjectsIconsCreate' where
         type Rs ProjectsIconsCreate' = Icon
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u ProjectsIconsCreate{..}
-          = go _picQuotaUser _picPrettyPrint _picUserIp _picKey
+        requestWithRoute r u ProjectsIconsCreate'{..}
+          = go _picQuotaUser (Just _picPrettyPrint) _picUserIp
+              _picKey
               _picProjectId
               _picOauthToken
               _picFields
-              _picAlt
+              (Just _picAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsIconsCreateAPI)
+                      (Proxy :: Proxy ProjectsIconsCreateResource)
                       r
                       u

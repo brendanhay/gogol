@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of global address resources.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesList@.
-module Compute.GlobalAddresses.List
+module Network.Google.Resource.Compute.GlobalAddresses.List
     (
     -- * REST Resource
-      GlobalAddressesListAPI
+      GlobalAddressesListResource
 
     -- * Creating a Request
-    , globalAddressesList
-    , GlobalAddressesList
+    , globalAddressesList'
+    , GlobalAddressesList'
 
     -- * Request Lenses
     , galQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalAddressesList@ which the
--- 'GlobalAddressesList' request conforms to.
-type GlobalAddressesListAPI =
+-- 'GlobalAddressesList'' request conforms to.
+type GlobalAddressesListResource =
      Capture "project" Text :>
        "global" :>
          "addresses" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] AddressList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] AddressList
 
 -- | Retrieves the list of global address resources.
 --
--- /See:/ 'globalAddressesList' smart constructor.
-data GlobalAddressesList = GlobalAddressesList
+-- /See:/ 'globalAddressesList'' smart constructor.
+data GlobalAddressesList' = GlobalAddressesList'
     { _galQuotaUser   :: !(Maybe Text)
     , _galPrettyPrint :: !Bool
     , _galProject     :: !Text
@@ -70,7 +77,7 @@ data GlobalAddressesList = GlobalAddressesList
     , _galOauthToken  :: !(Maybe Text)
     , _galMaxResults  :: !Word32
     , _galFields      :: !(Maybe Text)
-    , _galAlt         :: !Text
+    , _galAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesList'' with the minimum fields required to make a request.
@@ -98,11 +105,11 @@ data GlobalAddressesList = GlobalAddressesList
 -- * 'galFields'
 --
 -- * 'galAlt'
-globalAddressesList
+globalAddressesList'
     :: Text -- ^ 'project'
-    -> GlobalAddressesList
-globalAddressesList pGalProject_ =
-    GlobalAddressesList
+    -> GlobalAddressesList'
+globalAddressesList' pGalProject_ =
+    GlobalAddressesList'
     { _galQuotaUser = Nothing
     , _galPrettyPrint = True
     , _galProject = pGalProject_
@@ -113,7 +120,7 @@ globalAddressesList pGalProject_ =
     , _galOauthToken = Nothing
     , _galMaxResults = 500
     , _galFields = Nothing
-    , _galAlt = "json"
+    , _galAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,14 +193,14 @@ galFields
   = lens _galFields (\ s a -> s{_galFields = a})
 
 -- | Data format for the response.
-galAlt :: Lens' GlobalAddressesList' Text
+galAlt :: Lens' GlobalAddressesList' Alt
 galAlt = lens _galAlt (\ s a -> s{_galAlt = a})
 
 instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesList{..}
-          = go _galQuotaUser _galPrettyPrint _galProject
+        requestWithRoute r u GlobalAddressesList'{..}
+          = go _galQuotaUser (Just _galPrettyPrint) _galProject
               _galUserIp
               _galKey
               _galFilter
@@ -201,9 +208,9 @@ instance GoogleRequest GlobalAddressesList' where
               _galOauthToken
               (Just _galMaxResults)
               _galFields
-              _galAlt
+              (Just _galAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAddressesListAPI)
+                      (Proxy :: Proxy GlobalAddressesListResource)
                       r
                       u

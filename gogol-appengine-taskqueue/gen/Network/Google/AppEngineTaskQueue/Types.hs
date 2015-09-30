@@ -32,6 +32,21 @@ module Network.Google.AppEngineTaskQueue.Types
     , tKind
     , tItems
 
+    -- * TaskQueueACL
+    , TaskQueueACL
+    , taskQueueACL
+    , tqaProducerEmails
+    , tqaAdminEmails
+    , tqaConsumerEmails
+
+    -- * TaskQueueStats
+    , TaskQueueStats
+    , taskQueueStats
+    , tqsTotalTasks
+    , tqsOldestTask
+    , tqsLeasedLastHour
+    , tqsLeasedLastMinute
+
     -- * Tasks
     , Tasks
     , tasks
@@ -49,6 +64,9 @@ module Network.Google.AppEngineTaskQueue.Types
     , ttPayloadBase64
     , ttId
     , ttLeaseTimestamp
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types.Product
@@ -56,7 +74,7 @@ import           Network.Google.AppEngineTaskQueue.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the TaskQueue API.
-appEngineTaskQueueURL :: BaseURL
+appEngineTaskQueueURL :: BaseUrl
 appEngineTaskQueueURL
   = BaseUrl Https
       "https://www.googleapis.com/taskqueue/v1beta2/projects/"

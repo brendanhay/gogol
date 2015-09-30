@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes the URL map for TargetHttpProxy.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesSetURLMap@.
-module Compute.TargetHTTPProxies.SetURLMap
+module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
     (
     -- * REST Resource
-      TargetHTTPProxiesSetURLMapAPI
+      TargetHTTPProxiesSetURLMapResource
 
     -- * Creating a Request
-    , targetHTTPProxiesSetURLMap
-    , TargetHTTPProxiesSetURLMap
+    , targetHTTPProxiesSetURLMap'
+    , TargetHTTPProxiesSetURLMap'
 
     -- * Request Lenses
     , thttppsumQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetHTTPProxiesSetURLMap@ which the
--- 'TargetHTTPProxiesSetURLMap' request conforms to.
-type TargetHTTPProxiesSetURLMapAPI =
+-- 'TargetHTTPProxiesSetURLMap'' request conforms to.
+type TargetHTTPProxiesSetURLMapResource =
      Capture "project" Text :>
        "targetHttpProxies" :>
          Capture "targetHttpProxy" Text :>
-           "setUrlMap" :> Post '[JSON] Operation
+           "setUrlMap" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Changes the URL map for TargetHttpProxy.
 --
--- /See:/ 'targetHTTPProxiesSetURLMap' smart constructor.
-data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap
+-- /See:/ 'targetHTTPProxiesSetURLMap'' smart constructor.
+data TargetHTTPProxiesSetURLMap' = TargetHTTPProxiesSetURLMap'
     { _thttppsumQuotaUser       :: !(Maybe Text)
     , _thttppsumPrettyPrint     :: !Bool
     , _thttppsumProject         :: !Text
@@ -63,7 +71,7 @@ data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap
     , _thttppsumTargetHttpProxy :: !Text
     , _thttppsumOauthToken      :: !(Maybe Text)
     , _thttppsumFields          :: !(Maybe Text)
-    , _thttppsumAlt             :: !Text
+    , _thttppsumAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesSetURLMap'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap
 -- * 'thttppsumFields'
 --
 -- * 'thttppsumAlt'
-targetHTTPProxiesSetURLMap
+targetHTTPProxiesSetURLMap'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetHttpProxy'
-    -> TargetHTTPProxiesSetURLMap
-targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumTargetHttpProxy_ =
-    TargetHTTPProxiesSetURLMap
+    -> TargetHTTPProxiesSetURLMap'
+targetHTTPProxiesSetURLMap' pThttppsumProject_ pThttppsumTargetHttpProxy_ =
+    TargetHTTPProxiesSetURLMap'
     { _thttppsumQuotaUser = Nothing
     , _thttppsumPrettyPrint = True
     , _thttppsumProject = pThttppsumProject_
@@ -101,7 +109,7 @@ targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumTargetHttpProxy_ =
     , _thttppsumTargetHttpProxy = pThttppsumTargetHttpProxy_
     , _thttppsumOauthToken = Nothing
     , _thttppsumFields = Nothing
-    , _thttppsumAlt = "json"
+    , _thttppsumAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ thttppsumFields
       (\ s a -> s{_thttppsumFields = a})
 
 -- | Data format for the response.
-thttppsumAlt :: Lens' TargetHTTPProxiesSetURLMap' Text
+thttppsumAlt :: Lens' TargetHTTPProxiesSetURLMap' Alt
 thttppsumAlt
   = lens _thttppsumAlt (\ s a -> s{_thttppsumAlt = a})
 
@@ -165,17 +173,17 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap'
          where
         type Rs TargetHTTPProxiesSetURLMap' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesSetURLMap{..}
-          = go _thttppsumQuotaUser _thttppsumPrettyPrint
+        requestWithRoute r u TargetHTTPProxiesSetURLMap'{..}
+          = go _thttppsumQuotaUser (Just _thttppsumPrettyPrint)
               _thttppsumProject
               _thttppsumUserIp
               _thttppsumKey
               _thttppsumTargetHttpProxy
               _thttppsumOauthToken
               _thttppsumFields
-              _thttppsumAlt
+              (Just _thttppsumAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetHTTPProxiesSetURLMapAPI)
+                      (Proxy :: Proxy TargetHTTPProxiesSetURLMapResource)
                       r
                       u

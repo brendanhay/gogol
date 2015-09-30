@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- videos are less than 15 minutes in length.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsMediaInsert@.
-module PlusDomains.Media.Insert
+module Network.Google.Resource.PlusDomains.Media.Insert
     (
     -- * REST Resource
-      MediaInsertAPI
+      MediaInsertResource
 
     -- * Creating a Request
-    , mediaInsert
-    , MediaInsert
+    , mediaInsert'
+    , MediaInsert'
 
     -- * Request Lenses
     , miQuotaUser
@@ -47,29 +48,37 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsMediaInsert@ which the
--- 'MediaInsert' request conforms to.
-type MediaInsertAPI =
+-- 'MediaInsert'' request conforms to.
+type MediaInsertResource =
      "people" :>
        Capture "userId" Text :>
          "media" :>
-           Capture "collection" Text :> Post '[JSON] Media
+           Capture "collection" PlusDomainsMediaInsertCollection
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
 -- quota if photos are less than 2048 pixels on their longest side or
 -- videos are less than 15 minutes in length.
 --
--- /See:/ 'mediaInsert' smart constructor.
-data MediaInsert = MediaInsert
+-- /See:/ 'mediaInsert'' smart constructor.
+data MediaInsert' = MediaInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIp      :: !(Maybe Text)
-    , _miCollection  :: !Text
+    , _miCollection  :: !PlusDomainsMediaInsertCollection
     , _miUserId      :: !Text
     , _miKey         :: !(Maybe Text)
     , _miOauthToken  :: !(Maybe Text)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Text
+    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
@@ -93,12 +102,12 @@ data MediaInsert = MediaInsert
 -- * 'miFields'
 --
 -- * 'miAlt'
-mediaInsert
-    :: Text -- ^ 'collection'
+mediaInsert'
+    :: PlusDomainsMediaInsertCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
-    -> MediaInsert
-mediaInsert pMiCollection_ pMiUserId_ =
-    MediaInsert
+    -> MediaInsert'
+mediaInsert' pMiCollection_ pMiUserId_ =
+    MediaInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIp = Nothing
@@ -107,7 +116,7 @@ mediaInsert pMiCollection_ pMiUserId_ =
     , _miKey = Nothing
     , _miOauthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = "json"
+    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +137,7 @@ miPrettyPrint
 miUserIp :: Lens' MediaInsert' (Maybe Text)
 miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
 
-miCollection :: Lens' MediaInsert' Text
+miCollection :: Lens' MediaInsert' PlusDomainsMediaInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 
@@ -152,19 +161,22 @@ miFields :: Lens' MediaInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 -- | Data format for the response.
-miAlt :: Lens' MediaInsert' Text
+miAlt :: Lens' MediaInsert' Alt
 miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
 
 instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u MediaInsert{..}
-          = go _miQuotaUser _miPrettyPrint _miUserIp
+        requestWithRoute r u MediaInsert'{..}
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
               _miCollection
               _miUserId
               _miKey
               _miOauthToken
               _miFields
-              _miAlt
+              (Just _miAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MediaInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy MediaInsertResource)
+                      r
+                      u

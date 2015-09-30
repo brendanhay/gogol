@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- retain. For partial updates, use patch.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesUpdate@.
-module Sql.Instances.Update
+module Network.Google.Resource.Sql.Instances.Update
     (
     -- * REST Resource
-      InstancesUpdateAPI
+      InstancesUpdateResource
 
     -- * Creating a Request
-    , instancesUpdate
-    , InstancesUpdate
+    , instancesUpdate'
+    , InstancesUpdate'
 
     -- * Request Lenses
     , iuQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesUpdate@ which the
--- 'InstancesUpdate' request conforms to.
-type InstancesUpdateAPI =
+-- 'InstancesUpdate'' request conforms to.
+type InstancesUpdateResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           Capture "instance" Text :> Put '[JSON] Operation
+           Capture "instance" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.
 --
--- /See:/ 'instancesUpdate' smart constructor.
-data InstancesUpdate = InstancesUpdate
+-- /See:/ 'instancesUpdate'' smart constructor.
+data InstancesUpdate' = InstancesUpdate'
     { _iuQuotaUser   :: !(Maybe Text)
     , _iuPrettyPrint :: !Bool
     , _iuProject     :: !Text
@@ -66,7 +74,7 @@ data InstancesUpdate = InstancesUpdate
     , _iuKey         :: !(Maybe Text)
     , _iuOauthToken  :: !(Maybe Text)
     , _iuFields      :: !(Maybe Text)
-    , _iuAlt         :: !Text
+    , _iuAlt         :: !Alt
     , _iuInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -91,12 +99,12 @@ data InstancesUpdate = InstancesUpdate
 -- * 'iuAlt'
 --
 -- * 'iuInstance'
-instancesUpdate
+instancesUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesUpdate
-instancesUpdate pIuProject_ pIuInstance_ =
-    InstancesUpdate
+    -> InstancesUpdate'
+instancesUpdate' pIuProject_ pIuInstance_ =
+    InstancesUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuProject = pIuProject_
@@ -104,7 +112,7 @@ instancesUpdate pIuProject_ pIuInstance_ =
     , _iuKey = Nothing
     , _iuOauthToken = Nothing
     , _iuFields = Nothing
-    , _iuAlt = "json"
+    , _iuAlt = JSON
     , _iuInstance = pIuInstance_
     }
 
@@ -147,7 +155,7 @@ iuFields :: Lens' InstancesUpdate' (Maybe Text)
 iuFields = lens _iuFields (\ s a -> s{_iuFields = a})
 
 -- | Data format for the response.
-iuAlt :: Lens' InstancesUpdate' Text
+iuAlt :: Lens' InstancesUpdate' Alt
 iuAlt = lens _iuAlt (\ s a -> s{_iuAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -158,14 +166,16 @@ iuInstance
 instance GoogleRequest InstancesUpdate' where
         type Rs InstancesUpdate' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesUpdate{..}
-          = go _iuQuotaUser _iuPrettyPrint _iuProject _iuUserIp
+        requestWithRoute r u InstancesUpdate'{..}
+          = go _iuQuotaUser (Just _iuPrettyPrint) _iuProject
+              _iuUserIp
               _iuKey
               _iuOauthToken
               _iuFields
-              _iuAlt
+              (Just _iuAlt)
               _iuInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesUpdateResource)
                       r
                       u

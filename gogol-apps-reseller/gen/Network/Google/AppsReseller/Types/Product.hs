@@ -18,6 +18,54 @@ module Network.Google.AppsReseller.Types.Product where
 import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
+-- | Trial Settings of the subscription.
+--
+-- /See:/ 'subscriptionTrialSettings' smart constructor.
+data SubscriptionTrialSettings = SubscriptionTrialSettings
+    { _stsIsInTrial    :: !(Maybe Bool)
+    , _stsTrialEndTime :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionTrialSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'stsIsInTrial'
+--
+-- * 'stsTrialEndTime'
+subscriptionTrialSettings
+    :: SubscriptionTrialSettings
+subscriptionTrialSettings =
+    SubscriptionTrialSettings
+    { _stsIsInTrial = Nothing
+    , _stsTrialEndTime = Nothing
+    }
+
+-- | Whether the subscription is in trial.
+stsIsInTrial :: Lens' SubscriptionTrialSettings (Maybe Bool)
+stsIsInTrial
+  = lens _stsIsInTrial (\ s a -> s{_stsIsInTrial = a})
+
+-- | End time of the trial in milliseconds since Unix epoch.
+stsTrialEndTime :: Lens' SubscriptionTrialSettings (Maybe Int64)
+stsTrialEndTime
+  = lens _stsTrialEndTime
+      (\ s a -> s{_stsTrialEndTime = a})
+
+instance FromJSON SubscriptionTrialSettings where
+        parseJSON
+          = withObject "SubscriptionTrialSettings"
+              (\ o ->
+                 SubscriptionTrialSettings <$>
+                   (o .:? "isInTrial") <*> (o .:? "trialEndTime"))
+
+instance ToJSON SubscriptionTrialSettings where
+        toJSON SubscriptionTrialSettings{..}
+          = object
+              (catMaybes
+                 [("isInTrial" .=) <$> _stsIsInTrial,
+                  ("trialEndTime" .=) <$> _stsTrialEndTime])
+
 -- | JSON template for address of a customer.
 --
 -- /See:/ 'address' smart constructor.
@@ -265,6 +313,56 @@ instance ToJSON Customer where
                   ("phoneNumber" .=) <$> _cPhoneNumber,
                   ("postalAddress" .=) <$> _cPostalAddress])
 
+-- | Interval of the commitment if it is a commitment plan.
+--
+-- /See:/ 'subscriptionPlanCommitmentInterval' smart constructor.
+data SubscriptionPlanCommitmentInterval = SubscriptionPlanCommitmentInterval
+    { _spciStartTime :: !(Maybe Int64)
+    , _spciEndTime   :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionPlanCommitmentInterval' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spciStartTime'
+--
+-- * 'spciEndTime'
+subscriptionPlanCommitmentInterval
+    :: SubscriptionPlanCommitmentInterval
+subscriptionPlanCommitmentInterval =
+    SubscriptionPlanCommitmentInterval
+    { _spciStartTime = Nothing
+    , _spciEndTime = Nothing
+    }
+
+-- | Start time of the commitment interval in milliseconds since Unix epoch.
+spciStartTime :: Lens' SubscriptionPlanCommitmentInterval (Maybe Int64)
+spciStartTime
+  = lens _spciStartTime
+      (\ s a -> s{_spciStartTime = a})
+
+-- | End time of the commitment interval in milliseconds since Unix epoch.
+spciEndTime :: Lens' SubscriptionPlanCommitmentInterval (Maybe Int64)
+spciEndTime
+  = lens _spciEndTime (\ s a -> s{_spciEndTime = a})
+
+instance FromJSON SubscriptionPlanCommitmentInterval
+         where
+        parseJSON
+          = withObject "SubscriptionPlanCommitmentInterval"
+              (\ o ->
+                 SubscriptionPlanCommitmentInterval <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON SubscriptionPlanCommitmentInterval
+         where
+        toJSON SubscriptionPlanCommitmentInterval{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _spciStartTime,
+                  ("endTime" .=) <$> _spciEndTime])
+
 -- | JSON template for the ChangePlan rpc request.
 --
 -- /See:/ 'changePlanRequest' smart constructor.
@@ -476,161 +574,226 @@ instance ToJSON Subscriptions where
                   Just ("kind" .= _subKind),
                   ("subscriptions" .=) <$> _subSubscriptions])
 
+-- | Plan details of the subscription
+--
+-- /See:/ 'subscriptionPlan' smart constructor.
+data SubscriptionPlan = SubscriptionPlan
+    { _spCommitmentInterval :: !(Maybe SubscriptionPlanCommitmentInterval)
+    , _spIsCommitmentPlan   :: !(Maybe Bool)
+    , _spPlanName           :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionPlan' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spCommitmentInterval'
+--
+-- * 'spIsCommitmentPlan'
+--
+-- * 'spPlanName'
+subscriptionPlan
+    :: SubscriptionPlan
+subscriptionPlan =
+    SubscriptionPlan
+    { _spCommitmentInterval = Nothing
+    , _spIsCommitmentPlan = Nothing
+    , _spPlanName = Nothing
+    }
+
+-- | Interval of the commitment if it is a commitment plan.
+spCommitmentInterval :: Lens' SubscriptionPlan (Maybe SubscriptionPlanCommitmentInterval)
+spCommitmentInterval
+  = lens _spCommitmentInterval
+      (\ s a -> s{_spCommitmentInterval = a})
+
+-- | Whether the plan is a commitment plan or not.
+spIsCommitmentPlan :: Lens' SubscriptionPlan (Maybe Bool)
+spIsCommitmentPlan
+  = lens _spIsCommitmentPlan
+      (\ s a -> s{_spIsCommitmentPlan = a})
+
+-- | The plan name of this subscription\'s plan.
+spPlanName :: Lens' SubscriptionPlan (Maybe Text)
+spPlanName
+  = lens _spPlanName (\ s a -> s{_spPlanName = a})
+
+instance FromJSON SubscriptionPlan where
+        parseJSON
+          = withObject "SubscriptionPlan"
+              (\ o ->
+                 SubscriptionPlan <$>
+                   (o .:? "commitmentInterval") <*>
+                     (o .:? "isCommitmentPlan")
+                     <*> (o .:? "planName"))
+
+instance ToJSON SubscriptionPlan where
+        toJSON SubscriptionPlan{..}
+          = object
+              (catMaybes
+                 [("commitmentInterval" .=) <$> _spCommitmentInterval,
+                  ("isCommitmentPlan" .=) <$> _spIsCommitmentPlan,
+                  ("planName" .=) <$> _spPlanName])
+
 -- | JSON template for a subscription.
 --
 -- /See:/ 'subscription' smart constructor.
 data Subscription = Subscription
-    { _ssCreationTime      :: !(Maybe Int64)
-    , _ssBillingMethod     :: !(Maybe Text)
-    , _ssStatus            :: !(Maybe Text)
-    , _ssTrialSettings     :: !(Maybe SubscriptionTrialSettings)
-    , _ssResourceUiUrl     :: !(Maybe Text)
-    , _ssKind              :: !Text
-    , _ssSkuId             :: !(Maybe Text)
-    , _ssPlan              :: !(Maybe SubscriptionPlan)
-    , _ssCustomerId        :: !(Maybe Text)
-    , _ssSuspensionReasons :: !(Maybe [Text])
-    , _ssTransferInfo      :: !(Maybe SubscriptionTransferInfo)
-    , _ssPurchaseOrderId   :: !(Maybe Text)
-    , _ssSeats             :: !(Maybe (Maybe Seats))
-    , _ssRenewalSettings   :: !(Maybe (Maybe RenewalSettings))
-    , _ssSubscriptionId    :: !(Maybe Text)
+    { _subuCreationTime      :: !(Maybe Int64)
+    , _subuBillingMethod     :: !(Maybe Text)
+    , _subuStatus            :: !(Maybe Text)
+    , _subuTrialSettings     :: !(Maybe SubscriptionTrialSettings)
+    , _subuResourceUiUrl     :: !(Maybe Text)
+    , _subuKind              :: !Text
+    , _subuSkuId             :: !(Maybe Text)
+    , _subuPlan              :: !(Maybe SubscriptionPlan)
+    , _subuCustomerId        :: !(Maybe Text)
+    , _subuSuspensionReasons :: !(Maybe [Text])
+    , _subuTransferInfo      :: !(Maybe SubscriptionTransferInfo)
+    , _subuPurchaseOrderId   :: !(Maybe Text)
+    , _subuSeats             :: !(Maybe (Maybe Seats))
+    , _subuRenewalSettings   :: !(Maybe (Maybe RenewalSettings))
+    , _subuSubscriptionId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssCreationTime'
+-- * 'subuCreationTime'
 --
--- * 'ssBillingMethod'
+-- * 'subuBillingMethod'
 --
--- * 'ssStatus'
+-- * 'subuStatus'
 --
--- * 'ssTrialSettings'
+-- * 'subuTrialSettings'
 --
--- * 'ssResourceUiUrl'
+-- * 'subuResourceUiUrl'
 --
--- * 'ssKind'
+-- * 'subuKind'
 --
--- * 'ssSkuId'
+-- * 'subuSkuId'
 --
--- * 'ssPlan'
+-- * 'subuPlan'
 --
--- * 'ssCustomerId'
+-- * 'subuCustomerId'
 --
--- * 'ssSuspensionReasons'
+-- * 'subuSuspensionReasons'
 --
--- * 'ssTransferInfo'
+-- * 'subuTransferInfo'
 --
--- * 'ssPurchaseOrderId'
+-- * 'subuPurchaseOrderId'
 --
--- * 'ssSeats'
+-- * 'subuSeats'
 --
--- * 'ssRenewalSettings'
+-- * 'subuRenewalSettings'
 --
--- * 'ssSubscriptionId'
+-- * 'subuSubscriptionId'
 subscription
     :: Subscription
 subscription =
     Subscription
-    { _ssCreationTime = Nothing
-    , _ssBillingMethod = Nothing
-    , _ssStatus = Nothing
-    , _ssTrialSettings = Nothing
-    , _ssResourceUiUrl = Nothing
-    , _ssKind = "reseller#subscription"
-    , _ssSkuId = Nothing
-    , _ssPlan = Nothing
-    , _ssCustomerId = Nothing
-    , _ssSuspensionReasons = Nothing
-    , _ssTransferInfo = Nothing
-    , _ssPurchaseOrderId = Nothing
-    , _ssSeats = Nothing
-    , _ssRenewalSettings = Nothing
-    , _ssSubscriptionId = Nothing
+    { _subuCreationTime = Nothing
+    , _subuBillingMethod = Nothing
+    , _subuStatus = Nothing
+    , _subuTrialSettings = Nothing
+    , _subuResourceUiUrl = Nothing
+    , _subuKind = "reseller#subscription"
+    , _subuSkuId = Nothing
+    , _subuPlan = Nothing
+    , _subuCustomerId = Nothing
+    , _subuSuspensionReasons = Nothing
+    , _subuTransferInfo = Nothing
+    , _subuPurchaseOrderId = Nothing
+    , _subuSeats = Nothing
+    , _subuRenewalSettings = Nothing
+    , _subuSubscriptionId = Nothing
     }
 
 -- | Creation time of this subscription in milliseconds since Unix epoch.
-ssCreationTime :: Lens' Subscription (Maybe Int64)
-ssCreationTime
-  = lens _ssCreationTime
-      (\ s a -> s{_ssCreationTime = a})
+subuCreationTime :: Lens' Subscription (Maybe Int64)
+subuCreationTime
+  = lens _subuCreationTime
+      (\ s a -> s{_subuCreationTime = a})
 
 -- | Billing method of this subscription.
-ssBillingMethod :: Lens' Subscription (Maybe Text)
-ssBillingMethod
-  = lens _ssBillingMethod
-      (\ s a -> s{_ssBillingMethod = a})
+subuBillingMethod :: Lens' Subscription (Maybe Text)
+subuBillingMethod
+  = lens _subuBillingMethod
+      (\ s a -> s{_subuBillingMethod = a})
 
 -- | Status of the subscription.
-ssStatus :: Lens' Subscription (Maybe Text)
-ssStatus = lens _ssStatus (\ s a -> s{_ssStatus = a})
+subuStatus :: Lens' Subscription (Maybe Text)
+subuStatus
+  = lens _subuStatus (\ s a -> s{_subuStatus = a})
 
 -- | Trial Settings of the subscription.
-ssTrialSettings :: Lens' Subscription (Maybe SubscriptionTrialSettings)
-ssTrialSettings
-  = lens _ssTrialSettings
-      (\ s a -> s{_ssTrialSettings = a})
+subuTrialSettings :: Lens' Subscription (Maybe SubscriptionTrialSettings)
+subuTrialSettings
+  = lens _subuTrialSettings
+      (\ s a -> s{_subuTrialSettings = a})
 
 -- | Ui url for subscription resource.
-ssResourceUiUrl :: Lens' Subscription (Maybe Text)
-ssResourceUiUrl
-  = lens _ssResourceUiUrl
-      (\ s a -> s{_ssResourceUiUrl = a})
+subuResourceUiUrl :: Lens' Subscription (Maybe Text)
+subuResourceUiUrl
+  = lens _subuResourceUiUrl
+      (\ s a -> s{_subuResourceUiUrl = a})
 
 -- | Identifies the resource as a Subscription.
-ssKind :: Lens' Subscription Text
-ssKind = lens _ssKind (\ s a -> s{_ssKind = a})
+subuKind :: Lens' Subscription Text
+subuKind = lens _subuKind (\ s a -> s{_subuKind = a})
 
 -- | Name of the sku for which this subscription is purchased.
-ssSkuId :: Lens' Subscription (Maybe Text)
-ssSkuId = lens _ssSkuId (\ s a -> s{_ssSkuId = a})
+subuSkuId :: Lens' Subscription (Maybe Text)
+subuSkuId
+  = lens _subuSkuId (\ s a -> s{_subuSkuId = a})
 
 -- | Plan details of the subscription
-ssPlan :: Lens' Subscription (Maybe SubscriptionPlan)
-ssPlan = lens _ssPlan (\ s a -> s{_ssPlan = a})
+subuPlan :: Lens' Subscription (Maybe SubscriptionPlan)
+subuPlan = lens _subuPlan (\ s a -> s{_subuPlan = a})
 
 -- | The id of the customer to whom the subscription belongs.
-ssCustomerId :: Lens' Subscription (Maybe Text)
-ssCustomerId
-  = lens _ssCustomerId (\ s a -> s{_ssCustomerId = a})
+subuCustomerId :: Lens' Subscription (Maybe Text)
+subuCustomerId
+  = lens _subuCustomerId
+      (\ s a -> s{_subuCustomerId = a})
 
 -- | Suspension Reasons
-ssSuspensionReasons :: Lens' Subscription [Text]
-ssSuspensionReasons
-  = lens _ssSuspensionReasons
-      (\ s a -> s{_ssSuspensionReasons = a})
+subuSuspensionReasons :: Lens' Subscription [Text]
+subuSuspensionReasons
+  = lens _subuSuspensionReasons
+      (\ s a -> s{_subuSuspensionReasons = a})
       . _Default
       . _Coerce
 
 -- | Transfer related information for the subscription.
-ssTransferInfo :: Lens' Subscription (Maybe SubscriptionTransferInfo)
-ssTransferInfo
-  = lens _ssTransferInfo
-      (\ s a -> s{_ssTransferInfo = a})
+subuTransferInfo :: Lens' Subscription (Maybe SubscriptionTransferInfo)
+subuTransferInfo
+  = lens _subuTransferInfo
+      (\ s a -> s{_subuTransferInfo = a})
 
 -- | Purchase order id for your order tracking purposes.
-ssPurchaseOrderId :: Lens' Subscription (Maybe Text)
-ssPurchaseOrderId
-  = lens _ssPurchaseOrderId
-      (\ s a -> s{_ssPurchaseOrderId = a})
+subuPurchaseOrderId :: Lens' Subscription (Maybe Text)
+subuPurchaseOrderId
+  = lens _subuPurchaseOrderId
+      (\ s a -> s{_subuPurchaseOrderId = a})
 
 -- | Number\/Limit of seats in the new plan.
-ssSeats :: Lens' Subscription (Maybe (Maybe Seats))
-ssSeats = lens _ssSeats (\ s a -> s{_ssSeats = a})
+subuSeats :: Lens' Subscription (Maybe (Maybe Seats))
+subuSeats
+  = lens _subuSeats (\ s a -> s{_subuSeats = a})
 
 -- | Renewal settings of the subscription.
-ssRenewalSettings :: Lens' Subscription (Maybe (Maybe RenewalSettings))
-ssRenewalSettings
-  = lens _ssRenewalSettings
-      (\ s a -> s{_ssRenewalSettings = a})
+subuRenewalSettings :: Lens' Subscription (Maybe (Maybe RenewalSettings))
+subuRenewalSettings
+  = lens _subuRenewalSettings
+      (\ s a -> s{_subuRenewalSettings = a})
 
 -- | The id of the subscription.
-ssSubscriptionId :: Lens' Subscription (Maybe Text)
-ssSubscriptionId
-  = lens _ssSubscriptionId
-      (\ s a -> s{_ssSubscriptionId = a})
+subuSubscriptionId :: Lens' Subscription (Maybe Text)
+subuSubscriptionId
+  = lens _subuSubscriptionId
+      (\ s a -> s{_subuSubscriptionId = a})
 
 instance FromJSON Subscription where
         parseJSON
@@ -656,20 +819,21 @@ instance ToJSON Subscription where
         toJSON Subscription{..}
           = object
               (catMaybes
-                 [("creationTime" .=) <$> _ssCreationTime,
-                  ("billingMethod" .=) <$> _ssBillingMethod,
-                  ("status" .=) <$> _ssStatus,
-                  ("trialSettings" .=) <$> _ssTrialSettings,
-                  ("resourceUiUrl" .=) <$> _ssResourceUiUrl,
-                  Just ("kind" .= _ssKind), ("skuId" .=) <$> _ssSkuId,
-                  ("plan" .=) <$> _ssPlan,
-                  ("customerId" .=) <$> _ssCustomerId,
-                  ("suspensionReasons" .=) <$> _ssSuspensionReasons,
-                  ("transferInfo" .=) <$> _ssTransferInfo,
-                  ("purchaseOrderId" .=) <$> _ssPurchaseOrderId,
-                  ("seats" .=) <$> _ssSeats,
-                  ("renewalSettings" .=) <$> _ssRenewalSettings,
-                  ("subscriptionId" .=) <$> _ssSubscriptionId])
+                 [("creationTime" .=) <$> _subuCreationTime,
+                  ("billingMethod" .=) <$> _subuBillingMethod,
+                  ("status" .=) <$> _subuStatus,
+                  ("trialSettings" .=) <$> _subuTrialSettings,
+                  ("resourceUiUrl" .=) <$> _subuResourceUiUrl,
+                  Just ("kind" .= _subuKind),
+                  ("skuId" .=) <$> _subuSkuId,
+                  ("plan" .=) <$> _subuPlan,
+                  ("customerId" .=) <$> _subuCustomerId,
+                  ("suspensionReasons" .=) <$> _subuSuspensionReasons,
+                  ("transferInfo" .=) <$> _subuTransferInfo,
+                  ("purchaseOrderId" .=) <$> _subuPurchaseOrderId,
+                  ("seats" .=) <$> _subuSeats,
+                  ("renewalSettings" .=) <$> _subuRenewalSettings,
+                  ("subscriptionId" .=) <$> _subuSubscriptionId])
 
 -- | JSON template for a subscription renewal settings.
 --
@@ -718,3 +882,54 @@ instance ToJSON RenewalSettings where
               (catMaybes
                  [Just ("kind" .= _rsKind),
                   ("renewalType" .=) <$> _rsRenewalType])
+
+-- | Transfer related information for the subscription.
+--
+-- /See:/ 'subscriptionTransferInfo' smart constructor.
+data SubscriptionTransferInfo = SubscriptionTransferInfo
+    { _stiTransferabilityExpirationTime :: !(Maybe Int64)
+    , _stiMinimumTransferableSeats      :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SubscriptionTransferInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'stiTransferabilityExpirationTime'
+--
+-- * 'stiMinimumTransferableSeats'
+subscriptionTransferInfo
+    :: SubscriptionTransferInfo
+subscriptionTransferInfo =
+    SubscriptionTransferInfo
+    { _stiTransferabilityExpirationTime = Nothing
+    , _stiMinimumTransferableSeats = Nothing
+    }
+
+-- | Time when transfer token or intent to transfer will expire.
+stiTransferabilityExpirationTime :: Lens' SubscriptionTransferInfo (Maybe Int64)
+stiTransferabilityExpirationTime
+  = lens _stiTransferabilityExpirationTime
+      (\ s a -> s{_stiTransferabilityExpirationTime = a})
+
+stiMinimumTransferableSeats :: Lens' SubscriptionTransferInfo (Maybe Int32)
+stiMinimumTransferableSeats
+  = lens _stiMinimumTransferableSeats
+      (\ s a -> s{_stiMinimumTransferableSeats = a})
+
+instance FromJSON SubscriptionTransferInfo where
+        parseJSON
+          = withObject "SubscriptionTransferInfo"
+              (\ o ->
+                 SubscriptionTransferInfo <$>
+                   (o .:? "transferabilityExpirationTime") <*>
+                     (o .:? "minimumTransferableSeats"))
+
+instance ToJSON SubscriptionTransferInfo where
+        toJSON SubscriptionTransferInfo{..}
+          = object
+              (catMaybes
+                 [("transferabilityExpirationTime" .=) <$>
+                    _stiTransferabilityExpirationTime,
+                  ("minimumTransferableSeats" .=) <$>
+                    _stiMinimumTransferableSeats])

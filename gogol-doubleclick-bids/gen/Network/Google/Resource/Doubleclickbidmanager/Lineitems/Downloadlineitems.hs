@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves line items in CSV format.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerLineitemsDownloadlineitems@.
-module Doubleclickbidmanager.Lineitems.Downloadlineitems
+module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Downloadlineitems
     (
     -- * REST Resource
-      LineitemsDownloadlineitemsAPI
+      LineitemsDownloadlineitemsResource
 
     -- * Creating a Request
-    , lineitemsDownloadlineitems
-    , LineitemsDownloadlineitems
+    , lineitemsDownloadlineitems'
+    , LineitemsDownloadlineitems'
 
     -- * Request Lenses
     , ldQuotaUser
@@ -42,23 +43,30 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerLineitemsDownloadlineitems@ which the
--- 'LineitemsDownloadlineitems' request conforms to.
-type LineitemsDownloadlineitemsAPI =
+-- 'LineitemsDownloadlineitems'' request conforms to.
+type LineitemsDownloadlineitemsResource =
      "lineitems" :>
        "downloadlineitems" :>
-         Post '[JSON] DownloadLineItemsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] DownloadLineItemsResponse
 
 -- | Retrieves line items in CSV format.
 --
--- /See:/ 'lineitemsDownloadlineitems' smart constructor.
-data LineitemsDownloadlineitems = LineitemsDownloadlineitems
+-- /See:/ 'lineitemsDownloadlineitems'' smart constructor.
+data LineitemsDownloadlineitems' = LineitemsDownloadlineitems'
     { _ldQuotaUser   :: !(Maybe Text)
     , _ldPrettyPrint :: !Bool
     , _ldUserIp      :: !(Maybe Text)
     , _ldKey         :: !(Maybe Text)
     , _ldOauthToken  :: !(Maybe Text)
     , _ldFields      :: !(Maybe Text)
-    , _ldAlt         :: !Text
+    , _ldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineitemsDownloadlineitems'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data LineitemsDownloadlineitems = LineitemsDownloadlineitems
 -- * 'ldFields'
 --
 -- * 'ldAlt'
-lineitemsDownloadlineitems
-    :: LineitemsDownloadlineitems
-lineitemsDownloadlineitems =
-    LineitemsDownloadlineitems
+lineitemsDownloadlineitems'
+    :: LineitemsDownloadlineitems'
+lineitemsDownloadlineitems' =
+    LineitemsDownloadlineitems'
     { _ldQuotaUser = Nothing
     , _ldPrettyPrint = True
     , _ldUserIp = Nothing
     , _ldKey = Nothing
     , _ldOauthToken = Nothing
     , _ldFields = Nothing
-    , _ldAlt = "json"
+    , _ldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,7 +133,7 @@ ldFields :: Lens' LineitemsDownloadlineitems' (Maybe Text)
 ldFields = lens _ldFields (\ s a -> s{_ldFields = a})
 
 -- | Data format for the response.
-ldAlt :: Lens' LineitemsDownloadlineitems' Text
+ldAlt :: Lens' LineitemsDownloadlineitems' Alt
 ldAlt = lens _ldAlt (\ s a -> s{_ldAlt = a})
 
 instance GoogleRequest LineitemsDownloadlineitems'
@@ -133,13 +141,14 @@ instance GoogleRequest LineitemsDownloadlineitems'
         type Rs LineitemsDownloadlineitems' =
              DownloadLineItemsResponse
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u LineitemsDownloadlineitems{..}
-          = go _ldQuotaUser _ldPrettyPrint _ldUserIp _ldKey
+        requestWithRoute r u LineitemsDownloadlineitems'{..}
+          = go _ldQuotaUser (Just _ldPrettyPrint) _ldUserIp
+              _ldKey
               _ldOauthToken
               _ldFields
-              _ldAlt
+              (Just _ldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LineitemsDownloadlineitemsAPI)
+                      (Proxy :: Proxy LineitemsDownloadlineitemsResource)
                       r
                       u

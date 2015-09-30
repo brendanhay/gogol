@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesList@.
-module DNS.ManagedZones.List
+module Network.Google.Resource.DNS.ManagedZones.List
     (
     -- * REST Resource
-      ManagedZonesListAPI
+      ManagedZonesListResource
 
     -- * Creating a Request
-    , managedZonesList
-    , ManagedZonesList
+    , managedZonesList'
+    , ManagedZonesList'
 
     -- * Request Lenses
     , mzlQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSManagedZonesList@ which the
--- 'ManagedZonesList' request conforms to.
-type ManagedZonesListAPI =
+-- 'ManagedZonesList'' request conforms to.
+type ManagedZonesListResource =
      Capture "project" Text :>
        "managedZones" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "dnsName" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] ManagedZonesListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "dnsName" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ManagedZonesListResponse
 
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
--- /See:/ 'managedZonesList' smart constructor.
-data ManagedZonesList = ManagedZonesList
+-- /See:/ 'managedZonesList'' smart constructor.
+data ManagedZonesList' = ManagedZonesList'
     { _mzlQuotaUser   :: !(Maybe Text)
     , _mzlPrettyPrint :: !Bool
     , _mzlProject     :: !Text
@@ -69,7 +77,7 @@ data ManagedZonesList = ManagedZonesList
     , _mzlDnsName     :: !(Maybe Text)
     , _mzlMaxResults  :: !(Maybe Int32)
     , _mzlFields      :: !(Maybe Text)
-    , _mzlAlt         :: !Text
+    , _mzlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesList'' with the minimum fields required to make a request.
@@ -97,11 +105,11 @@ data ManagedZonesList = ManagedZonesList
 -- * 'mzlFields'
 --
 -- * 'mzlAlt'
-managedZonesList
+managedZonesList'
     :: Text -- ^ 'project'
-    -> ManagedZonesList
-managedZonesList pMzlProject_ =
-    ManagedZonesList
+    -> ManagedZonesList'
+managedZonesList' pMzlProject_ =
+    ManagedZonesList'
     { _mzlQuotaUser = Nothing
     , _mzlPrettyPrint = True
     , _mzlProject = pMzlProject_
@@ -112,7 +120,7 @@ managedZonesList pMzlProject_ =
     , _mzlDnsName = Nothing
     , _mzlMaxResults = Nothing
     , _mzlFields = Nothing
-    , _mzlAlt = "json"
+    , _mzlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,14 +183,14 @@ mzlFields
   = lens _mzlFields (\ s a -> s{_mzlFields = a})
 
 -- | Data format for the response.
-mzlAlt :: Lens' ManagedZonesList' Text
+mzlAlt :: Lens' ManagedZonesList' Alt
 mzlAlt = lens _mzlAlt (\ s a -> s{_mzlAlt = a})
 
 instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesList{..}
-          = go _mzlQuotaUser _mzlPrettyPrint _mzlProject
+        requestWithRoute r u ManagedZonesList'{..}
+          = go _mzlQuotaUser (Just _mzlPrettyPrint) _mzlProject
               _mzlUserIp
               _mzlKey
               _mzlPageToken
@@ -190,9 +198,9 @@ instance GoogleRequest ManagedZonesList' where
               _mzlDnsName
               _mzlMaxResults
               _mzlFields
-              _mzlAlt
+              (Just _mzlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagedZonesListAPI)
+                      (Proxy :: Proxy ManagedZonesListResource)
                       r
                       u

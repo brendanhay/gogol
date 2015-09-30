@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a single profile filter link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileFilterLinksGet@.
-module Analytics.Management.ProfileFilterLinks.Get
+module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Get
     (
     -- * REST Resource
-      ManagementProfileFilterLinksGetAPI
+      ManagementProfileFilterLinksGetResource
 
     -- * Creating a Request
-    , managementProfileFilterLinksGet
-    , ManagementProfileFilterLinksGet
+    , managementProfileFilterLinksGet'
+    , ManagementProfileFilterLinksGet'
 
     -- * Request Lenses
     , mpflgQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileFilterLinksGet@ which the
--- 'ManagementProfileFilterLinksGet' request conforms to.
-type ManagementProfileFilterLinksGetAPI =
+-- 'ManagementProfileFilterLinksGet'' request conforms to.
+type ManagementProfileFilterLinksGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,12 +58,19 @@ type ManagementProfileFilterLinksGetAPI =
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
                      Capture "linkId" Text :>
-                       Get '[JSON] ProfileFilterLink
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] ProfileFilterLink
 
 -- | Returns a single profile filter link.
 --
--- /See:/ 'managementProfileFilterLinksGet' smart constructor.
-data ManagementProfileFilterLinksGet = ManagementProfileFilterLinksGet
+-- /See:/ 'managementProfileFilterLinksGet'' smart constructor.
+data ManagementProfileFilterLinksGet' = ManagementProfileFilterLinksGet'
     { _mpflgQuotaUser     :: !(Maybe Text)
     , _mpflgPrettyPrint   :: !Bool
     , _mpflgWebPropertyId :: !Text
@@ -73,7 +81,7 @@ data ManagementProfileFilterLinksGet = ManagementProfileFilterLinksGet
     , _mpflgLinkId        :: !Text
     , _mpflgOauthToken    :: !(Maybe Text)
     , _mpflgFields        :: !(Maybe Text)
-    , _mpflgAlt           :: !Text
+    , _mpflgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksGet'' with the minimum fields required to make a request.
@@ -101,14 +109,14 @@ data ManagementProfileFilterLinksGet = ManagementProfileFilterLinksGet
 -- * 'mpflgFields'
 --
 -- * 'mpflgAlt'
-managementProfileFilterLinksGet
+managementProfileFilterLinksGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementProfileFilterLinksGet
-managementProfileFilterLinksGet pMpflgWebPropertyId_ pMpflgProfileId_ pMpflgAccountId_ pMpflgLinkId_ =
-    ManagementProfileFilterLinksGet
+    -> ManagementProfileFilterLinksGet'
+managementProfileFilterLinksGet' pMpflgWebPropertyId_ pMpflgProfileId_ pMpflgAccountId_ pMpflgLinkId_ =
+    ManagementProfileFilterLinksGet'
     { _mpflgQuotaUser = Nothing
     , _mpflgPrettyPrint = False
     , _mpflgWebPropertyId = pMpflgWebPropertyId_
@@ -119,7 +127,7 @@ managementProfileFilterLinksGet pMpflgWebPropertyId_ pMpflgProfileId_ pMpflgAcco
     , _mpflgLinkId = pMpflgLinkId_
     , _mpflgOauthToken = Nothing
     , _mpflgFields = Nothing
-    , _mpflgAlt = "json"
+    , _mpflgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ mpflgFields
   = lens _mpflgFields (\ s a -> s{_mpflgFields = a})
 
 -- | Data format for the response.
-mpflgAlt :: Lens' ManagementProfileFilterLinksGet' Text
+mpflgAlt :: Lens' ManagementProfileFilterLinksGet' Alt
 mpflgAlt = lens _mpflgAlt (\ s a -> s{_mpflgAlt = a})
 
 instance GoogleRequest
@@ -192,8 +200,8 @@ instance GoogleRequest
              ProfileFilterLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileFilterLinksGet{..}
-          = go _mpflgQuotaUser _mpflgPrettyPrint
+          ManagementProfileFilterLinksGet'{..}
+          = go _mpflgQuotaUser (Just _mpflgPrettyPrint)
               _mpflgWebPropertyId
               _mpflgUserIp
               _mpflgProfileId
@@ -202,9 +210,10 @@ instance GoogleRequest
               _mpflgLinkId
               _mpflgOauthToken
               _mpflgFields
-              _mpflgAlt
+              (Just _mpflgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileFilterLinksGetAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileFilterLinksGetResource)
                       r
                       u

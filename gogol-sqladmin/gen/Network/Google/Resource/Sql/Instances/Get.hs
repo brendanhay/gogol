@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesGet@.
-module Sql.Instances.Get
+module Network.Google.Resource.Sql.Instances.Get
     (
     -- * REST Resource
-      InstancesGetAPI
+      InstancesGetResource
 
     -- * Creating a Request
-    , instancesGet
-    , InstancesGet
+    , instancesGet'
+    , InstancesGet'
 
     -- * Request Lenses
     , igQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesGet@ which the
--- 'InstancesGet' request conforms to.
-type InstancesGetAPI =
+-- 'InstancesGet'' request conforms to.
+type InstancesGetResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             Get '[JSON] DatabaseInstance
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] DatabaseInstance
 
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 --
--- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet
+-- /See:/ 'instancesGet'' smart constructor.
+data InstancesGet' = InstancesGet'
     { _igQuotaUser   :: !(Maybe Text)
     , _igPrettyPrint :: !Bool
     , _igProject     :: !Text
@@ -63,7 +70,7 @@ data InstancesGet = InstancesGet
     , _igKey         :: !(Maybe Text)
     , _igOauthToken  :: !(Maybe Text)
     , _igFields      :: !(Maybe Text)
-    , _igAlt         :: !Text
+    , _igAlt         :: !Alt
     , _igInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +95,12 @@ data InstancesGet = InstancesGet
 -- * 'igAlt'
 --
 -- * 'igInstance'
-instancesGet
+instancesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesGet
-instancesGet pIgProject_ pIgInstance_ =
-    InstancesGet
+    -> InstancesGet'
+instancesGet' pIgProject_ pIgInstance_ =
+    InstancesGet'
     { _igQuotaUser = Nothing
     , _igPrettyPrint = True
     , _igProject = pIgProject_
@@ -101,7 +108,7 @@ instancesGet pIgProject_ pIgInstance_ =
     , _igKey = Nothing
     , _igOauthToken = Nothing
     , _igFields = Nothing
-    , _igAlt = "json"
+    , _igAlt = JSON
     , _igInstance = pIgInstance_
     }
 
@@ -144,7 +151,7 @@ igFields :: Lens' InstancesGet' (Maybe Text)
 igFields = lens _igFields (\ s a -> s{_igFields = a})
 
 -- | Data format for the response.
-igAlt :: Lens' InstancesGet' Text
+igAlt :: Lens' InstancesGet' Alt
 igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -155,13 +162,16 @@ igInstance
 instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = DatabaseInstance
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesGet{..}
-          = go _igQuotaUser _igPrettyPrint _igProject _igUserIp
+        requestWithRoute r u InstancesGet'{..}
+          = go _igQuotaUser (Just _igPrettyPrint) _igProject
+              _igUserIp
               _igKey
               _igOauthToken
               _igFields
-              _igAlt
+              (Just _igAlt)
               _igInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesGetResource)
+                      r
                       u

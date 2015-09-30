@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsLinuxGetLinuxAccountViews@.
-module Clouduseraccounts.Linux.GetLinuxAccountViews
+module Network.Google.Resource.Clouduseraccounts.Linux.GetLinuxAccountViews
     (
     -- * REST Resource
-      LinuxGetLinuxAccountViewsAPI
+      LinuxGetLinuxAccountViewsResource
 
     -- * Creating a Request
-    , linuxGetLinuxAccountViews
-    , LinuxGetLinuxAccountViews
+    , linuxGetLinuxAccountViews'
+    , LinuxGetLinuxAccountViews'
 
     -- * Request Lenses
     , lglavQuotaUser
@@ -50,24 +51,32 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsLinuxGetLinuxAccountViews@ which the
--- 'LinuxGetLinuxAccountViews' request conforms to.
-type LinuxGetLinuxAccountViewsAPI =
+-- 'LinuxGetLinuxAccountViews'' request conforms to.
+type LinuxGetLinuxAccountViewsResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "linuxAccountViews" :>
-             QueryParam "orderBy" Text :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "instance" Text :>
-                       Post '[JSON] LinuxGetLinuxAccountViewsResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   QueryParam "instance" Text :>
+                                     Post '[JSON]
+                                       LinuxGetLinuxAccountViewsResponse
 
 -- | Retrieves a list of user accounts for an instance within a specific
 -- project.
 --
--- /See:/ 'linuxGetLinuxAccountViews' smart constructor.
-data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
+-- /See:/ 'linuxGetLinuxAccountViews'' smart constructor.
+data LinuxGetLinuxAccountViews' = LinuxGetLinuxAccountViews'
     { _lglavQuotaUser   :: !(Maybe Text)
     , _lglavPrettyPrint :: !Bool
     , _lglavOrderBy     :: !(Maybe Text)
@@ -80,7 +89,7 @@ data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
     , _lglavOauthToken  :: !(Maybe Text)
     , _lglavMaxResults  :: !Word32
     , _lglavFields      :: !(Maybe Text)
-    , _lglavAlt         :: !Text
+    , _lglavAlt         :: !Alt
     , _lglavInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -115,13 +124,13 @@ data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
 -- * 'lglavAlt'
 --
 -- * 'lglavInstance'
-linuxGetLinuxAccountViews
+linuxGetLinuxAccountViews'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> LinuxGetLinuxAccountViews
-linuxGetLinuxAccountViews pLglavProject_ pLglavZone_ pLglavInstance_ =
-    LinuxGetLinuxAccountViews
+    -> LinuxGetLinuxAccountViews'
+linuxGetLinuxAccountViews' pLglavProject_ pLglavZone_ pLglavInstance_ =
+    LinuxGetLinuxAccountViews'
     { _lglavQuotaUser = Nothing
     , _lglavPrettyPrint = True
     , _lglavOrderBy = Nothing
@@ -134,7 +143,7 @@ linuxGetLinuxAccountViews pLglavProject_ pLglavZone_ pLglavInstance_ =
     , _lglavOauthToken = Nothing
     , _lglavMaxResults = 500
     , _lglavFields = Nothing
-    , _lglavAlt = "json"
+    , _lglavAlt = JSON
     , _lglavInstance = pLglavInstance_
     }
 
@@ -227,7 +236,7 @@ lglavFields
   = lens _lglavFields (\ s a -> s{_lglavFields = a})
 
 -- | Data format for the response.
-lglavAlt :: Lens' LinuxGetLinuxAccountViews' Text
+lglavAlt :: Lens' LinuxGetLinuxAccountViews' Alt
 lglavAlt = lens _lglavAlt (\ s a -> s{_lglavAlt = a})
 
 -- | The fully-qualified URL of the virtual machine requesting the views.
@@ -242,8 +251,9 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
              LinuxGetLinuxAccountViewsResponse
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u LinuxGetLinuxAccountViews{..}
-          = go _lglavQuotaUser _lglavPrettyPrint _lglavOrderBy
+        requestWithRoute r u LinuxGetLinuxAccountViews'{..}
+          = go _lglavQuotaUser (Just _lglavPrettyPrint)
+              _lglavOrderBy
               _lglavProject
               _lglavUserIp
               _lglavZone
@@ -253,10 +263,10 @@ instance GoogleRequest LinuxGetLinuxAccountViews'
               _lglavOauthToken
               (Just _lglavMaxResults)
               _lglavFields
-              _lglavAlt
+              (Just _lglavAlt)
               (Just _lglavInstance)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LinuxGetLinuxAccountViewsAPI)
+                      (Proxy :: Proxy LinuxGetLinuxAccountViewsResource)
                       r
                       u

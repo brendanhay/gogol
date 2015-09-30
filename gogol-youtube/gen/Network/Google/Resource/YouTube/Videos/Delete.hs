@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a YouTube video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosDelete@.
-module YouTube.Videos.Delete
+module Network.Google.Resource.YouTube.Videos.Delete
     (
     -- * REST Resource
-      VideosDeleteAPI
+      VideosDeleteResource
 
     -- * Creating a Request
-    , videosDelete
-    , VideosDelete
+    , videosDelete'
+    , VideosDelete'
 
     -- * Request Lenses
     , vdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosDelete@ which the
--- 'VideosDelete' request conforms to.
-type VideosDeleteAPI =
+-- 'VideosDelete'' request conforms to.
+type VideosDeleteResource =
      "videos" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a YouTube video.
 --
--- /See:/ 'videosDelete' smart constructor.
-data VideosDelete = VideosDelete
+-- /See:/ 'videosDelete'' smart constructor.
+data VideosDelete' = VideosDelete'
     { _vdQuotaUser              :: !(Maybe Text)
     , _vdPrettyPrint            :: !Bool
     , _vdUserIp                 :: !(Maybe Text)
@@ -62,7 +70,7 @@ data VideosDelete = VideosDelete
     , _vdId                     :: !Text
     , _vdOauthToken             :: !(Maybe Text)
     , _vdFields                 :: !(Maybe Text)
-    , _vdAlt                    :: !Text
+    , _vdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosDelete'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data VideosDelete = VideosDelete
 -- * 'vdFields'
 --
 -- * 'vdAlt'
-videosDelete
+videosDelete'
     :: Text -- ^ 'id'
-    -> VideosDelete
-videosDelete pVdId_ =
-    VideosDelete
+    -> VideosDelete'
+videosDelete' pVdId_ =
+    VideosDelete'
     { _vdQuotaUser = Nothing
     , _vdPrettyPrint = True
     , _vdUserIp = Nothing
@@ -99,7 +107,7 @@ videosDelete pVdId_ =
     , _vdId = pVdId_
     , _vdOauthToken = Nothing
     , _vdFields = Nothing
-    , _vdAlt = "json"
+    , _vdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,20 +165,22 @@ vdFields :: Lens' VideosDelete' (Maybe Text)
 vdFields = lens _vdFields (\ s a -> s{_vdFields = a})
 
 -- | Data format for the response.
-vdAlt :: Lens' VideosDelete' Text
+vdAlt :: Lens' VideosDelete' Alt
 vdAlt = lens _vdAlt (\ s a -> s{_vdAlt = a})
 
 instance GoogleRequest VideosDelete' where
         type Rs VideosDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosDelete{..}
-          = go _vdQuotaUser _vdPrettyPrint _vdUserIp
+        requestWithRoute r u VideosDelete'{..}
+          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIp
               _vdOnBehalfOfContentOwner
               _vdKey
               (Just _vdId)
               _vdOauthToken
               _vdFields
-              _vdAlt
+              (Just _vdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy VideosDeleteResource)
+                      r
                       u

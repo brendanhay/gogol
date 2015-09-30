@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- recreated using the instance group manager\'s current instance template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersRecreateInstances@.
-module Replicapool.InstanceGroupManagers.RecreateInstances
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.RecreateInstances
     (
     -- * REST Resource
-      InstanceGroupManagersRecreateInstancesAPI
+      InstanceGroupManagersRecreateInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersRecreateInstances
-    , InstanceGroupManagersRecreateInstances
+    , instanceGroupManagersRecreateInstances'
+    , InstanceGroupManagersRecreateInstances'
 
     -- * Request Lenses
     , igmriQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersRecreateInstances@ which the
--- 'InstanceGroupManagersRecreateInstances' request conforms to.
-type InstanceGroupManagersRecreateInstancesAPI =
+-- 'InstanceGroupManagersRecreateInstances'' request conforms to.
+type InstanceGroupManagersRecreateInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               "recreateInstances" :> Post '[JSON] Operation
+               "recreateInstances" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Recreates the specified instances. The instances are deleted, then
 -- recreated using the instance group manager\'s current instance template.
 --
--- /See:/ 'instanceGroupManagersRecreateInstances' smart constructor.
-data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInstances
+-- /See:/ 'instanceGroupManagersRecreateInstances'' smart constructor.
+data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInstances'
     { _igmriQuotaUser            :: !(Maybe Text)
     , _igmriPrettyPrint          :: !Bool
     , _igmriProject              :: !Text
@@ -69,7 +77,7 @@ data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInsta
     , _igmriKey                  :: !(Maybe Text)
     , _igmriOauthToken           :: !(Maybe Text)
     , _igmriFields               :: !(Maybe Text)
-    , _igmriAlt                  :: !Text
+    , _igmriAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersRecreateInstances'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data InstanceGroupManagersRecreateInstances = InstanceGroupManagersRecreateInsta
 -- * 'igmriFields'
 --
 -- * 'igmriAlt'
-instanceGroupManagersRecreateInstances
+instanceGroupManagersRecreateInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersRecreateInstances
-instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ =
-    InstanceGroupManagersRecreateInstances
+    -> InstanceGroupManagersRecreateInstances'
+instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ =
+    InstanceGroupManagersRecreateInstances'
     { _igmriQuotaUser = Nothing
     , _igmriPrettyPrint = True
     , _igmriProject = pIgmriProject_
@@ -111,7 +119,7 @@ instanceGroupManagersRecreateInstances pIgmriProject_ pIgmriInstanceGroupManager
     , _igmriKey = Nothing
     , _igmriOauthToken = Nothing
     , _igmriFields = Nothing
-    , _igmriAlt = "json"
+    , _igmriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ igmriFields
   = lens _igmriFields (\ s a -> s{_igmriFields = a})
 
 -- | Data format for the response.
-igmriAlt :: Lens' InstanceGroupManagersRecreateInstances' Text
+igmriAlt :: Lens' InstanceGroupManagersRecreateInstances' Alt
 igmriAlt = lens _igmriAlt (\ s a -> s{_igmriAlt = a})
 
 instance GoogleRequest
@@ -178,18 +186,19 @@ instance GoogleRequest
         request
           = requestWithRoute defReq instanceGroupsManagerURL
         requestWithRoute r u
-          InstanceGroupManagersRecreateInstances{..}
-          = go _igmriQuotaUser _igmriPrettyPrint _igmriProject
+          InstanceGroupManagersRecreateInstances'{..}
+          = go _igmriQuotaUser (Just _igmriPrettyPrint)
+              _igmriProject
               _igmriInstanceGroupManager
               _igmriUserIp
               _igmriZone
               _igmriKey
               _igmriOauthToken
               _igmriFields
-              _igmriAlt
+              (Just _igmriAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersRecreateInstancesAPI)
+                         Proxy InstanceGroupManagersRecreateInstancesResource)
                       r
                       u

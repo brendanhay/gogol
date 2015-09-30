@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the merchant order ID for a given order.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdatemerchantorderid@.
-module Content.Orders.Updatemerchantorderid
+module Network.Google.Resource.Content.Orders.Updatemerchantorderid
     (
     -- * REST Resource
-      OrdersUpdatemerchantorderidAPI
+      OrdersUpdatemerchantorderidResource
 
     -- * Creating a Request
-    , ordersUpdatemerchantorderid
-    , OrdersUpdatemerchantorderid
+    , ordersUpdatemerchantorderid'
+    , OrdersUpdatemerchantorderid'
 
     -- * Request Lenses
     , ouQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersUpdatemerchantorderid@ which the
--- 'OrdersUpdatemerchantorderid' request conforms to.
-type OrdersUpdatemerchantorderidAPI =
+-- 'OrdersUpdatemerchantorderid'' request conforms to.
+type OrdersUpdatemerchantorderidResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          Capture "orderId" Text :>
            "updateMerchantOrderId" :>
-             Post '[JSON] OrdersUpdateMerchantOrderIdResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersUpdateMerchantOrderIdResponse
 
 -- | Updates the merchant order ID for a given order.
 --
--- /See:/ 'ordersUpdatemerchantorderid' smart constructor.
-data OrdersUpdatemerchantorderid = OrdersUpdatemerchantorderid
+-- /See:/ 'ordersUpdatemerchantorderid'' smart constructor.
+data OrdersUpdatemerchantorderid' = OrdersUpdatemerchantorderid'
     { _ouQuotaUser   :: !(Maybe Text)
     , _ouMerchantId  :: !Word64
     , _ouPrettyPrint :: !Bool
@@ -64,7 +72,7 @@ data OrdersUpdatemerchantorderid = OrdersUpdatemerchantorderid
     , _ouOauthToken  :: !(Maybe Text)
     , _ouOrderId     :: !Text
     , _ouFields      :: !(Maybe Text)
-    , _ouAlt         :: !Text
+    , _ouAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdatemerchantorderid'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data OrdersUpdatemerchantorderid = OrdersUpdatemerchantorderid
 -- * 'ouFields'
 --
 -- * 'ouAlt'
-ordersUpdatemerchantorderid
+ordersUpdatemerchantorderid'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersUpdatemerchantorderid
-ordersUpdatemerchantorderid pOuMerchantId_ pOuOrderId_ =
-    OrdersUpdatemerchantorderid
+    -> OrdersUpdatemerchantorderid'
+ordersUpdatemerchantorderid' pOuMerchantId_ pOuOrderId_ =
+    OrdersUpdatemerchantorderid'
     { _ouQuotaUser = Nothing
     , _ouMerchantId = pOuMerchantId_
     , _ouPrettyPrint = True
@@ -102,7 +110,7 @@ ordersUpdatemerchantorderid pOuMerchantId_ pOuOrderId_ =
     , _ouOauthToken = Nothing
     , _ouOrderId = pOuOrderId_
     , _ouFields = Nothing
-    , _ouAlt = "json"
+    , _ouAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,7 +157,7 @@ ouFields :: Lens' OrdersUpdatemerchantorderid' (Maybe Text)
 ouFields = lens _ouFields (\ s a -> s{_ouFields = a})
 
 -- | Data format for the response.
-ouAlt :: Lens' OrdersUpdatemerchantorderid' Text
+ouAlt :: Lens' OrdersUpdatemerchantorderid' Alt
 ouAlt = lens _ouAlt (\ s a -> s{_ouAlt = a})
 
 instance GoogleRequest OrdersUpdatemerchantorderid'
@@ -157,16 +165,16 @@ instance GoogleRequest OrdersUpdatemerchantorderid'
         type Rs OrdersUpdatemerchantorderid' =
              OrdersUpdateMerchantOrderIdResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersUpdatemerchantorderid{..}
-          = go _ouQuotaUser _ouMerchantId _ouPrettyPrint
+        requestWithRoute r u OrdersUpdatemerchantorderid'{..}
+          = go _ouQuotaUser _ouMerchantId (Just _ouPrettyPrint)
               _ouUserIp
               _ouKey
               _ouOauthToken
               _ouOrderId
               _ouFields
-              _ouAlt
+              (Just _ouAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersUpdatemerchantorderidAPI)
+                      (Proxy :: Proxy OrdersUpdatemerchantorderidResource)
                       r
                       u

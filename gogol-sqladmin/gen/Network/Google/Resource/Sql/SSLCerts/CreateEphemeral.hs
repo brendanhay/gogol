@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- the database.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlSSLCertsCreateEphemeral@.
-module Sql.SSLCerts.CreateEphemeral
+module Network.Google.Resource.Sql.SSLCerts.CreateEphemeral
     (
     -- * REST Resource
-      SslCertsCreateEphemeralAPI
+      SslCertsCreateEphemeralResource
 
     -- * Creating a Request
-    , sSLCertsCreateEphemeral
-    , SSLCertsCreateEphemeral
+    , sSLCertsCreateEphemeral'
+    , SSLCertsCreateEphemeral'
 
     -- * Request Lenses
     , scceQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlSSLCertsCreateEphemeral@ which the
--- 'SSLCertsCreateEphemeral' request conforms to.
-type SslCertsCreateEphemeralAPI =
+-- 'SSLCertsCreateEphemeral'' request conforms to.
+type SslCertsCreateEphemeralResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "createEphemeral" :> Post '[JSON] SSLCert
+             "createEphemeral" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] SSLCert
 
 -- | Generates a short-lived X509 certificate containing the provided public
 -- key and signed by a private key specific to the target instance. Users
 -- may use the certificate to authenticate as themselves when connecting to
 -- the database.
 --
--- /See:/ 'sSLCertsCreateEphemeral' smart constructor.
-data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral
+-- /See:/ 'sSLCertsCreateEphemeral'' smart constructor.
+data SSLCertsCreateEphemeral' = SSLCertsCreateEphemeral'
     { _scceQuotaUser   :: !(Maybe Text)
     , _sccePrettyPrint :: !Bool
     , _scceProject     :: !Text
@@ -69,7 +77,7 @@ data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral
     , _scceKey         :: !(Maybe Text)
     , _scceOauthToken  :: !(Maybe Text)
     , _scceFields      :: !(Maybe Text)
-    , _scceAlt         :: !Text
+    , _scceAlt         :: !Alt
     , _scceInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -94,12 +102,12 @@ data SSLCertsCreateEphemeral = SSLCertsCreateEphemeral
 -- * 'scceAlt'
 --
 -- * 'scceInstance'
-sSLCertsCreateEphemeral
+sSLCertsCreateEphemeral'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> SSLCertsCreateEphemeral
-sSLCertsCreateEphemeral pScceProject_ pScceInstance_ =
-    SSLCertsCreateEphemeral
+    -> SSLCertsCreateEphemeral'
+sSLCertsCreateEphemeral' pScceProject_ pScceInstance_ =
+    SSLCertsCreateEphemeral'
     { _scceQuotaUser = Nothing
     , _sccePrettyPrint = True
     , _scceProject = pScceProject_
@@ -107,7 +115,7 @@ sSLCertsCreateEphemeral pScceProject_ pScceInstance_ =
     , _scceKey = Nothing
     , _scceOauthToken = Nothing
     , _scceFields = Nothing
-    , _scceAlt = "json"
+    , _scceAlt = JSON
     , _scceInstance = pScceInstance_
     }
 
@@ -154,7 +162,7 @@ scceFields
   = lens _scceFields (\ s a -> s{_scceFields = a})
 
 -- | Data format for the response.
-scceAlt :: Lens' SSLCertsCreateEphemeral' Text
+scceAlt :: Lens' SSLCertsCreateEphemeral' Alt
 scceAlt = lens _scceAlt (\ s a -> s{_scceAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -165,16 +173,17 @@ scceInstance
 instance GoogleRequest SSLCertsCreateEphemeral' where
         type Rs SSLCertsCreateEphemeral' = SSLCert
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsCreateEphemeral{..}
-          = go _scceQuotaUser _sccePrettyPrint _scceProject
+        requestWithRoute r u SSLCertsCreateEphemeral'{..}
+          = go _scceQuotaUser (Just _sccePrettyPrint)
+              _scceProject
               _scceUserIp
               _scceKey
               _scceOauthToken
               _scceFields
-              _scceAlt
+              (Just _scceAlt)
               _scceInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SslCertsCreateEphemeralAPI)
+                      (Proxy :: Proxy SslCertsCreateEphemeralResource)
                       r
                       u

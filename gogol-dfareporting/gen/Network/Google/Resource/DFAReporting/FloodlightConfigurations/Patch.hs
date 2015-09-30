@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsPatch@.
-module DFAReporting.FloodlightConfigurations.Patch
+module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     (
     -- * REST Resource
-      FloodlightConfigurationsPatchAPI
+      FloodlightConfigurationsPatchResource
 
     -- * Creating a Request
-    , floodlightConfigurationsPatch
-    , FloodlightConfigurationsPatch
+    , floodlightConfigurationsPatch'
+    , FloodlightConfigurationsPatch'
 
     -- * Request Lenses
     , fcpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightConfigurationsPatch@ which the
--- 'FloodlightConfigurationsPatch' request conforms to.
-type FloodlightConfigurationsPatchAPI =
+-- 'FloodlightConfigurationsPatch'' request conforms to.
+type FloodlightConfigurationsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] FloodlightConfiguration
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
--- /See:/ 'floodlightConfigurationsPatch' smart constructor.
-data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
+-- /See:/ 'floodlightConfigurationsPatch'' smart constructor.
+data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
     { _fcpQuotaUser   :: !(Maybe Text)
     , _fcpPrettyPrint :: !Bool
     , _fcpUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
     , _fcpId          :: !Int64
     , _fcpOauthToken  :: !(Maybe Text)
     , _fcpFields      :: !(Maybe Text)
-    , _fcpAlt         :: !Text
+    , _fcpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data FloodlightConfigurationsPatch = FloodlightConfigurationsPatch
 -- * 'fcpFields'
 --
 -- * 'fcpAlt'
-floodlightConfigurationsPatch
+floodlightConfigurationsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightConfigurationsPatch
-floodlightConfigurationsPatch pFcpProfileId_ pFcpId_ =
-    FloodlightConfigurationsPatch
+    -> FloodlightConfigurationsPatch'
+floodlightConfigurationsPatch' pFcpProfileId_ pFcpId_ =
+    FloodlightConfigurationsPatch'
     { _fcpQuotaUser = Nothing
     , _fcpPrettyPrint = True
     , _fcpUserIp = Nothing
@@ -104,7 +112,7 @@ floodlightConfigurationsPatch pFcpProfileId_ pFcpId_ =
     , _fcpId = pFcpId_
     , _fcpOauthToken = Nothing
     , _fcpFields = Nothing
-    , _fcpAlt = "json"
+    , _fcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ fcpFields
   = lens _fcpFields (\ s a -> s{_fcpFields = a})
 
 -- | Data format for the response.
-fcpAlt :: Lens' FloodlightConfigurationsPatch' Text
+fcpAlt :: Lens' FloodlightConfigurationsPatch' Alt
 fcpAlt = lens _fcpAlt (\ s a -> s{_fcpAlt = a})
 
 instance GoogleRequest FloodlightConfigurationsPatch'
@@ -162,16 +170,17 @@ instance GoogleRequest FloodlightConfigurationsPatch'
              FloodlightConfiguration
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightConfigurationsPatch{..}
-          = go _fcpQuotaUser _fcpPrettyPrint _fcpUserIp
+          FloodlightConfigurationsPatch'{..}
+          = go _fcpQuotaUser (Just _fcpPrettyPrint) _fcpUserIp
               _fcpProfileId
               _fcpKey
               (Just _fcpId)
               _fcpOauthToken
               _fcpFields
-              _fcpAlt
+              (Just _fcpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightConfigurationsPatchAPI)
+                      (Proxy ::
+                         Proxy FloodlightConfigurationsPatchResource)
                       r
                       u

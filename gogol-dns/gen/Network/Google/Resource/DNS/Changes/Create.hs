@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesCreate@.
-module DNS.Changes.Create
+module Network.Google.Resource.DNS.Changes.Create
     (
     -- * REST Resource
-      ChangesCreateAPI
+      ChangesCreateResource
 
     -- * Creating a Request
-    , changesCreate
-    , ChangesCreate
+    , changesCreate'
+    , ChangesCreate'
 
     -- * Request Lenses
     , ccQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSChangesCreate@ which the
--- 'ChangesCreate' request conforms to.
-type ChangesCreateAPI =
+-- 'ChangesCreate'' request conforms to.
+type ChangesCreateResource =
      Capture "project" Text :>
        "managedZones" :>
          Capture "managedZone" Text :>
-           "changes" :> Post '[JSON] Change
+           "changes" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 --
--- /See:/ 'changesCreate' smart constructor.
-data ChangesCreate = ChangesCreate
+-- /See:/ 'changesCreate'' smart constructor.
+data ChangesCreate' = ChangesCreate'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccPrettyPrint :: !Bool
     , _ccProject     :: !Text
@@ -63,7 +71,7 @@ data ChangesCreate = ChangesCreate
     , _ccOauthToken  :: !(Maybe Text)
     , _ccManagedZone :: !Text
     , _ccFields      :: !(Maybe Text)
-    , _ccAlt         :: !Text
+    , _ccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesCreate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ChangesCreate = ChangesCreate
 -- * 'ccFields'
 --
 -- * 'ccAlt'
-changesCreate
+changesCreate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
-    -> ChangesCreate
-changesCreate pCcProject_ pCcManagedZone_ =
-    ChangesCreate
+    -> ChangesCreate'
+changesCreate' pCcProject_ pCcManagedZone_ =
+    ChangesCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
     , _ccProject = pCcProject_
@@ -101,7 +109,7 @@ changesCreate pCcProject_ pCcManagedZone_ =
     , _ccOauthToken = Nothing
     , _ccManagedZone = pCcManagedZone_
     , _ccFields = Nothing
-    , _ccAlt = "json"
+    , _ccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,19 +158,22 @@ ccFields :: Lens' ChangesCreate' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 -- | Data format for the response.
-ccAlt :: Lens' ChangesCreate' Text
+ccAlt :: Lens' ChangesCreate' Alt
 ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
 
 instance GoogleRequest ChangesCreate' where
         type Rs ChangesCreate' = Change
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesCreate{..}
-          = go _ccQuotaUser _ccPrettyPrint _ccProject _ccUserIp
+        requestWithRoute r u ChangesCreate'{..}
+          = go _ccQuotaUser (Just _ccPrettyPrint) _ccProject
+              _ccUserIp
               _ccKey
               _ccOauthToken
               _ccManagedZone
               _ccFields
-              _ccAlt
+              (Just _ccAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesCreateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChangesCreateResource)
+                      r
                       u

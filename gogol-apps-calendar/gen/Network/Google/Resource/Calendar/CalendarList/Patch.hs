@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListPatch@.
-module Calendar.CalendarList.Patch
+module Network.Google.Resource.Calendar.CalendarList.Patch
     (
     -- * REST Resource
-      CalendarListPatchAPI
+      CalendarListPatchResource
 
     -- * Creating a Request
-    , calendarListPatch
-    , CalendarListPatch
+    , calendarListPatch'
+    , CalendarListPatch'
 
     -- * Request Lenses
     , clpQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListPatch@ which the
--- 'CalendarListPatch' request conforms to.
-type CalendarListPatchAPI =
+-- 'CalendarListPatch'' request conforms to.
+type CalendarListPatchResource =
      "users" :>
        "me" :>
          "calendarList" :>
            Capture "calendarId" Text :>
-             QueryParam "colorRgbFormat" Bool :>
-               Patch '[JSON] CalendarListEntry
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "colorRgbFormat" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Patch '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list. This method supports
 -- patch semantics.
 --
--- /See:/ 'calendarListPatch' smart constructor.
-data CalendarListPatch = CalendarListPatch
+-- /See:/ 'calendarListPatch'' smart constructor.
+data CalendarListPatch' = CalendarListPatch'
     { _clpQuotaUser      :: !(Maybe Text)
     , _clpCalendarId     :: !Text
     , _clpPrettyPrint    :: !Bool
@@ -67,7 +75,7 @@ data CalendarListPatch = CalendarListPatch
     , _clpKey            :: !(Maybe Text)
     , _clpOauthToken     :: !(Maybe Text)
     , _clpFields         :: !(Maybe Text)
-    , _clpAlt            :: !Text
+    , _clpAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListPatch'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data CalendarListPatch = CalendarListPatch
 -- * 'clpFields'
 --
 -- * 'clpAlt'
-calendarListPatch
+calendarListPatch'
     :: Text -- ^ 'calendarId'
-    -> CalendarListPatch
-calendarListPatch pClpCalendarId_ =
-    CalendarListPatch
+    -> CalendarListPatch'
+calendarListPatch' pClpCalendarId_ =
+    CalendarListPatch'
     { _clpQuotaUser = Nothing
     , _clpCalendarId = pClpCalendarId_
     , _clpPrettyPrint = True
@@ -104,7 +112,7 @@ calendarListPatch pClpCalendarId_ =
     , _clpKey = Nothing
     , _clpOauthToken = Nothing
     , _clpFields = Nothing
-    , _clpAlt = "json"
+    , _clpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +169,23 @@ clpFields
   = lens _clpFields (\ s a -> s{_clpFields = a})
 
 -- | Data format for the response.
-clpAlt :: Lens' CalendarListPatch' Text
+clpAlt :: Lens' CalendarListPatch' Alt
 clpAlt = lens _clpAlt (\ s a -> s{_clpAlt = a})
 
 instance GoogleRequest CalendarListPatch' where
         type Rs CalendarListPatch' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListPatch{..}
-          = go _clpQuotaUser _clpCalendarId _clpPrettyPrint
+        requestWithRoute r u CalendarListPatch'{..}
+          = go _clpQuotaUser _clpCalendarId
+              (Just _clpPrettyPrint)
               _clpUserIp
               _clpColorRgbFormat
               _clpKey
               _clpOauthToken
               _clpFields
-              _clpAlt
+              (Just _clpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListPatchAPI)
+                      (Proxy :: Proxy CalendarListPatchResource)
                       r
                       u

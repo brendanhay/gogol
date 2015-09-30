@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,150 +20,159 @@
 -- | Returns subscription resources that match the API request criteria.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsList@.
-module YouTube.Subscriptions.List
+module Network.Google.Resource.YouTube.Subscriptions.List
     (
     -- * REST Resource
-      SubscriptionsListAPI
+      SubscriptionsListResource
 
     -- * Creating a Request
-    , subscriptionsList
-    , SubscriptionsList
+    , subscriptionsList'
+    , SubscriptionsList'
 
     -- * Request Lenses
-    , slQuotaUser
-    , slPart
-    , slPrettyPrint
-    , slMine
-    , slUserIp
-    , slChannelId
-    , slOnBehalfOfContentOwner
-    , slKey
-    , slOnBehalfOfContentOwnerChannel
-    , slId
-    , slMySubscribers
-    , slForChannelId
-    , slPageToken
-    , slOauthToken
-    , slOrder
-    , slMaxResults
-    , slFields
-    , slAlt
+    , sQuotaUser
+    , sPart
+    , sPrettyPrint
+    , sMine
+    , sUserIp
+    , sChannelId
+    , sOnBehalfOfContentOwner
+    , sKey
+    , sOnBehalfOfContentOwnerChannel
+    , sId
+    , sMySubscribers
+    , sForChannelId
+    , sPageToken
+    , sOauthToken
+    , sOrder
+    , sMaxResults
+    , sFields
+    , sAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeSubscriptionsList@ which the
--- 'SubscriptionsList' request conforms to.
-type SubscriptionsListAPI =
+-- 'SubscriptionsList'' request conforms to.
+type SubscriptionsListResource =
      "subscriptions" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "mySubscribers" Bool :>
-                     QueryParam "forChannelId" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "order" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] SubscriptionListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "channelId" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                         QueryParam "id" Text :>
+                           QueryParam "mySubscribers" Bool :>
+                             QueryParam "forChannelId" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "order"
+                                     YouTubeSubscriptionsListOrder
+                                     :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] SubscriptionListResponse
 
 -- | Returns subscription resources that match the API request criteria.
 --
--- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
-    { _slQuotaUser                     :: !(Maybe Text)
-    , _slPart                          :: !Text
-    , _slPrettyPrint                   :: !Bool
-    , _slMine                          :: !(Maybe Bool)
-    , _slUserIp                        :: !(Maybe Text)
-    , _slChannelId                     :: !(Maybe Text)
-    , _slOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _slKey                           :: !(Maybe Text)
-    , _slOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _slId                            :: !(Maybe Text)
-    , _slMySubscribers                 :: !(Maybe Bool)
-    , _slForChannelId                  :: !(Maybe Text)
-    , _slPageToken                     :: !(Maybe Text)
-    , _slOauthToken                    :: !(Maybe Text)
-    , _slOrder                         :: !Text
-    , _slMaxResults                    :: !Word32
-    , _slFields                        :: !(Maybe Text)
-    , _slAlt                           :: !Text
+-- /See:/ 'subscriptionsList'' smart constructor.
+data SubscriptionsList' = SubscriptionsList'
+    { _sQuotaUser                     :: !(Maybe Text)
+    , _sPart                          :: !Text
+    , _sPrettyPrint                   :: !Bool
+    , _sMine                          :: !(Maybe Bool)
+    , _sUserIp                        :: !(Maybe Text)
+    , _sChannelId                     :: !(Maybe Text)
+    , _sOnBehalfOfContentOwner        :: !(Maybe Text)
+    , _sKey                           :: !(Maybe Text)
+    , _sOnBehalfOfContentOwnerChannel :: !(Maybe Text)
+    , _sId                            :: !(Maybe Text)
+    , _sMySubscribers                 :: !(Maybe Bool)
+    , _sForChannelId                  :: !(Maybe Text)
+    , _sPageToken                     :: !(Maybe Text)
+    , _sOauthToken                    :: !(Maybe Text)
+    , _sOrder                         :: !YouTubeSubscriptionsListOrder
+    , _sMaxResults                    :: !Word32
+    , _sFields                        :: !(Maybe Text)
+    , _sAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slQuotaUser'
+-- * 'sQuotaUser'
 --
--- * 'slPart'
+-- * 'sPart'
 --
--- * 'slPrettyPrint'
+-- * 'sPrettyPrint'
 --
--- * 'slMine'
+-- * 'sMine'
 --
--- * 'slUserIp'
+-- * 'sUserIp'
 --
--- * 'slChannelId'
+-- * 'sChannelId'
 --
--- * 'slOnBehalfOfContentOwner'
+-- * 'sOnBehalfOfContentOwner'
 --
--- * 'slKey'
+-- * 'sKey'
 --
--- * 'slOnBehalfOfContentOwnerChannel'
+-- * 'sOnBehalfOfContentOwnerChannel'
 --
--- * 'slId'
+-- * 'sId'
 --
--- * 'slMySubscribers'
+-- * 'sMySubscribers'
 --
--- * 'slForChannelId'
+-- * 'sForChannelId'
 --
--- * 'slPageToken'
+-- * 'sPageToken'
 --
--- * 'slOauthToken'
+-- * 'sOauthToken'
 --
--- * 'slOrder'
+-- * 'sOrder'
 --
--- * 'slMaxResults'
+-- * 'sMaxResults'
 --
--- * 'slFields'
+-- * 'sFields'
 --
--- * 'slAlt'
-subscriptionsList
+-- * 'sAlt'
+subscriptionsList'
     :: Text -- ^ 'part'
-    -> SubscriptionsList
-subscriptionsList pSlPart_ =
-    SubscriptionsList
-    { _slQuotaUser = Nothing
-    , _slPart = pSlPart_
-    , _slPrettyPrint = True
-    , _slMine = Nothing
-    , _slUserIp = Nothing
-    , _slChannelId = Nothing
-    , _slOnBehalfOfContentOwner = Nothing
-    , _slKey = Nothing
-    , _slOnBehalfOfContentOwnerChannel = Nothing
-    , _slId = Nothing
-    , _slMySubscribers = Nothing
-    , _slForChannelId = Nothing
-    , _slPageToken = Nothing
-    , _slOauthToken = Nothing
-    , _slOrder = "SUBSCRIPTION_ORDER_RELEVANCE"
-    , _slMaxResults = 5
-    , _slFields = Nothing
-    , _slAlt = "json"
+    -> SubscriptionsList'
+subscriptionsList' pSPart_ =
+    SubscriptionsList'
+    { _sQuotaUser = Nothing
+    , _sPart = pSPart_
+    , _sPrettyPrint = True
+    , _sMine = Nothing
+    , _sUserIp = Nothing
+    , _sChannelId = Nothing
+    , _sOnBehalfOfContentOwner = Nothing
+    , _sKey = Nothing
+    , _sOnBehalfOfContentOwnerChannel = Nothing
+    , _sId = Nothing
+    , _sMySubscribers = Nothing
+    , _sForChannelId = Nothing
+    , _sPageToken = Nothing
+    , _sOauthToken = Nothing
+    , _sOrder = YSubscriptionOrderRelevance
+    , _sMaxResults = 5
+    , _sFields = Nothing
+    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-slQuotaUser :: Lens' SubscriptionsList' (Maybe Text)
-slQuotaUser
-  = lens _slQuotaUser (\ s a -> s{_slQuotaUser = a})
+sQuotaUser :: Lens' SubscriptionsList' (Maybe Text)
+sQuotaUser
+  = lens _sQuotaUser (\ s a -> s{_sQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- subscription resource properties that the API response will include. If
@@ -171,30 +181,29 @@ slQuotaUser
 -- subscription resource, the snippet property contains other properties,
 -- such as a display title for the subscription. If you set part=snippet,
 -- the API response will also contain all of those nested properties.
-slPart :: Lens' SubscriptionsList' Text
-slPart = lens _slPart (\ s a -> s{_slPart = a})
+sPart :: Lens' SubscriptionsList' Text
+sPart = lens _sPart (\ s a -> s{_sPart = a})
 
 -- | Returns response with indentations and line breaks.
-slPrettyPrint :: Lens' SubscriptionsList' Bool
-slPrettyPrint
-  = lens _slPrettyPrint
-      (\ s a -> s{_slPrettyPrint = a})
+sPrettyPrint :: Lens' SubscriptionsList' Bool
+sPrettyPrint
+  = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- authenticated user\'s subscriptions.
-slMine :: Lens' SubscriptionsList' (Maybe Bool)
-slMine = lens _slMine (\ s a -> s{_slMine = a})
+sMine :: Lens' SubscriptionsList' (Maybe Bool)
+sMine = lens _sMine (\ s a -> s{_sMine = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SubscriptionsList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+sUserIp :: Lens' SubscriptionsList' (Maybe Text)
+sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
 
 -- | The channelId parameter specifies a YouTube channel ID. The API will
 -- only return that channel\'s subscriptions.
-slChannelId :: Lens' SubscriptionsList' (Maybe Text)
-slChannelId
-  = lens _slChannelId (\ s a -> s{_slChannelId = a})
+sChannelId :: Lens' SubscriptionsList' (Maybe Text)
+sChannelId
+  = lens _sChannelId (\ s a -> s{_sChannelId = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -206,16 +215,16 @@ slChannelId
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-slOnBehalfOfContentOwner :: Lens' SubscriptionsList' (Maybe Text)
-slOnBehalfOfContentOwner
-  = lens _slOnBehalfOfContentOwner
-      (\ s a -> s{_slOnBehalfOfContentOwner = a})
+sOnBehalfOfContentOwner :: Lens' SubscriptionsList' (Maybe Text)
+sOnBehalfOfContentOwner
+  = lens _sOnBehalfOfContentOwner
+      (\ s a -> s{_sOnBehalfOfContentOwner = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SubscriptionsList' (Maybe Text)
-slKey = lens _slKey (\ s a -> s{_slKey = a})
+sKey :: Lens' SubscriptionsList' (Maybe Text)
+sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
 -- This parameter is intended exclusively for YouTube content partners. The
@@ -233,86 +242,86 @@ slKey = lens _slKey (\ s a -> s{_slKey = a})
 -- actions on behalf of the channel specified in the parameter value,
 -- without having to provide authentication credentials for each separate
 -- channel.
-slOnBehalfOfContentOwnerChannel :: Lens' SubscriptionsList' (Maybe Text)
-slOnBehalfOfContentOwnerChannel
-  = lens _slOnBehalfOfContentOwnerChannel
-      (\ s a -> s{_slOnBehalfOfContentOwnerChannel = a})
+sOnBehalfOfContentOwnerChannel :: Lens' SubscriptionsList' (Maybe Text)
+sOnBehalfOfContentOwnerChannel
+  = lens _sOnBehalfOfContentOwnerChannel
+      (\ s a -> s{_sOnBehalfOfContentOwnerChannel = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube
 -- subscription ID(s) for the resource(s) that are being retrieved. In a
 -- subscription resource, the id property specifies the YouTube
 -- subscription ID.
-slId :: Lens' SubscriptionsList' (Maybe Text)
-slId = lens _slId (\ s a -> s{_slId = a})
+sId :: Lens' SubscriptionsList' (Maybe Text)
+sId = lens _sId (\ s a -> s{_sId = a})
 
 -- | Set this parameter\'s value to true to retrieve a feed of the
 -- subscribers of the authenticated user.
-slMySubscribers :: Lens' SubscriptionsList' (Maybe Bool)
-slMySubscribers
-  = lens _slMySubscribers
-      (\ s a -> s{_slMySubscribers = a})
+sMySubscribers :: Lens' SubscriptionsList' (Maybe Bool)
+sMySubscribers
+  = lens _sMySubscribers
+      (\ s a -> s{_sMySubscribers = a})
 
 -- | The forChannelId parameter specifies a comma-separated list of channel
 -- IDs. The API response will then only contain subscriptions matching
 -- those channels.
-slForChannelId :: Lens' SubscriptionsList' (Maybe Text)
-slForChannelId
-  = lens _slForChannelId
-      (\ s a -> s{_slForChannelId = a})
+sForChannelId :: Lens' SubscriptionsList' (Maybe Text)
+sForChannelId
+  = lens _sForChannelId
+      (\ s a -> s{_sForChannelId = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-slPageToken :: Lens' SubscriptionsList' (Maybe Text)
-slPageToken
-  = lens _slPageToken (\ s a -> s{_slPageToken = a})
+sPageToken :: Lens' SubscriptionsList' (Maybe Text)
+sPageToken
+  = lens _sPageToken (\ s a -> s{_sPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SubscriptionsList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+sOauthToken :: Lens' SubscriptionsList' (Maybe Text)
+sOauthToken
+  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
 
 -- | The order parameter specifies the method that will be used to sort
 -- resources in the API response.
-slOrder :: Lens' SubscriptionsList' Text
-slOrder = lens _slOrder (\ s a -> s{_slOrder = a})
+sOrder :: Lens' SubscriptionsList' YouTubeSubscriptionsListOrder
+sOrder = lens _sOrder (\ s a -> s{_sOrder = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-slMaxResults :: Lens' SubscriptionsList' Word32
-slMaxResults
-  = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
+sMaxResults :: Lens' SubscriptionsList' Word32
+sMaxResults
+  = lens _sMaxResults (\ s a -> s{_sMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-slFields :: Lens' SubscriptionsList' (Maybe Text)
-slFields = lens _slFields (\ s a -> s{_slFields = a})
+sFields :: Lens' SubscriptionsList' (Maybe Text)
+sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SubscriptionsList' Text
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+sAlt :: Lens' SubscriptionsList' Alt
+sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u SubscriptionsList{..}
-          = go _slQuotaUser (Just _slPart) _slPrettyPrint
-              _slMine
-              _slUserIp
-              _slChannelId
-              _slOnBehalfOfContentOwner
-              _slKey
-              _slOnBehalfOfContentOwnerChannel
-              _slId
-              _slMySubscribers
-              _slForChannelId
-              _slPageToken
-              _slOauthToken
-              (Just _slOrder)
-              (Just _slMaxResults)
-              _slFields
-              _slAlt
+        requestWithRoute r u SubscriptionsList'{..}
+          = go _sQuotaUser (Just _sPart) (Just _sPrettyPrint)
+              _sMine
+              _sUserIp
+              _sChannelId
+              _sOnBehalfOfContentOwner
+              _sKey
+              _sOnBehalfOfContentOwnerChannel
+              _sId
+              _sMySubscribers
+              _sForChannelId
+              _sPageToken
+              _sOauthToken
+              (Just _sOrder)
+              (Just _sMaxResults)
+              _sFields
+              (Just _sAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsListAPI)
+                      (Proxy :: Proxy SubscriptionsListResource)
                       r
                       u

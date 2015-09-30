@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the given order. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceordersPatch@.
-module AdExchangeBuyer.Marketplaceorders.Patch
+module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Patch
     (
     -- * REST Resource
-      MarketplaceordersPatchAPI
+      MarketplaceordersPatchResource
 
     -- * Creating a Request
-    , marketplaceordersPatch
-    , MarketplaceordersPatch
+    , marketplaceordersPatch'
+    , MarketplaceordersPatch'
 
     -- * Request Lenses
     , mpQuotaUser
@@ -45,20 +46,29 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceordersPatch@ which the
--- 'MarketplaceordersPatch' request conforms to.
-type MarketplaceordersPatchAPI =
+-- 'MarketplaceordersPatch'' request conforms to.
+type MarketplaceordersPatchResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          Capture "revisionNumber" Int64 :>
-           Capture "updateAction" Text :>
-             Patch '[JSON] MarketplaceOrder
+           Capture "updateAction"
+             AdexchangebuyerMarketplaceordersPatchUpdateAction
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] MarketplaceOrder
 
 -- | Update the given order. This method supports patch semantics.
 --
--- /See:/ 'marketplaceordersPatch' smart constructor.
-data MarketplaceordersPatch = MarketplaceordersPatch
+-- /See:/ 'marketplaceordersPatch'' smart constructor.
+data MarketplaceordersPatch' = MarketplaceordersPatch'
     { _mpQuotaUser      :: !(Maybe Text)
-    , _mpUpdateAction   :: !Text
+    , _mpUpdateAction   :: !AdexchangebuyerMarketplaceordersPatchUpdateAction
     , _mpPrettyPrint    :: !Bool
     , _mpUserIp         :: !(Maybe Text)
     , _mpRevisionNumber :: !Int64
@@ -66,7 +76,7 @@ data MarketplaceordersPatch = MarketplaceordersPatch
     , _mpOauthToken     :: !(Maybe Text)
     , _mpOrderId        :: !Text
     , _mpFields         :: !(Maybe Text)
-    , _mpAlt            :: !Text
+    , _mpAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceordersPatch'' with the minimum fields required to make a request.
@@ -92,13 +102,13 @@ data MarketplaceordersPatch = MarketplaceordersPatch
 -- * 'mpFields'
 --
 -- * 'mpAlt'
-marketplaceordersPatch
-    :: Text -- ^ 'updateAction'
+marketplaceordersPatch'
+    :: AdexchangebuyerMarketplaceordersPatchUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
     -> Text -- ^ 'orderId'
-    -> MarketplaceordersPatch
-marketplaceordersPatch pMpUpdateAction_ pMpRevisionNumber_ pMpOrderId_ =
-    MarketplaceordersPatch
+    -> MarketplaceordersPatch'
+marketplaceordersPatch' pMpUpdateAction_ pMpRevisionNumber_ pMpOrderId_ =
+    MarketplaceordersPatch'
     { _mpQuotaUser = Nothing
     , _mpUpdateAction = pMpUpdateAction_
     , _mpPrettyPrint = True
@@ -108,7 +118,7 @@ marketplaceordersPatch pMpUpdateAction_ pMpRevisionNumber_ pMpOrderId_ =
     , _mpOauthToken = Nothing
     , _mpOrderId = pMpOrderId_
     , _mpFields = Nothing
-    , _mpAlt = "json"
+    , _mpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,7 +129,7 @@ mpQuotaUser
   = lens _mpQuotaUser (\ s a -> s{_mpQuotaUser = a})
 
 -- | The proposed action to take on the order.
-mpUpdateAction :: Lens' MarketplaceordersPatch' Text
+mpUpdateAction :: Lens' MarketplaceordersPatch' AdexchangebuyerMarketplaceordersPatchUpdateAction
 mpUpdateAction
   = lens _mpUpdateAction
       (\ s a -> s{_mpUpdateAction = a})
@@ -165,23 +175,24 @@ mpFields :: Lens' MarketplaceordersPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
 -- | Data format for the response.
-mpAlt :: Lens' MarketplaceordersPatch' Text
+mpAlt :: Lens' MarketplaceordersPatch' Alt
 mpAlt = lens _mpAlt (\ s a -> s{_mpAlt = a})
 
 instance GoogleRequest MarketplaceordersPatch' where
         type Rs MarketplaceordersPatch' = MarketplaceOrder
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceordersPatch{..}
-          = go _mpQuotaUser _mpUpdateAction _mpPrettyPrint
+        requestWithRoute r u MarketplaceordersPatch'{..}
+          = go _mpQuotaUser _mpUpdateAction
+              (Just _mpPrettyPrint)
               _mpUserIp
               _mpRevisionNumber
               _mpKey
               _mpOauthToken
               _mpOrderId
               _mpFields
-              _mpAlt
+              (Just _mpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplaceordersPatchAPI)
+                      (Proxy :: Proxy MarketplaceordersPatchResource)
                       r
                       u

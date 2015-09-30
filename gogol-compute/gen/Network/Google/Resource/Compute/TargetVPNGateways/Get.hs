@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified TargetVpnGateway resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysGet@.
-module Compute.TargetVPNGateways.Get
+module Network.Google.Resource.Compute.TargetVPNGateways.Get
     (
     -- * REST Resource
-      TargetVPNGatewaysGetAPI
+      TargetVPNGatewaysGetResource
 
     -- * Creating a Request
-    , targetVPNGatewaysGet
-    , TargetVPNGatewaysGet
+    , targetVPNGatewaysGet'
+    , TargetVPNGatewaysGet'
 
     -- * Request Lenses
     , tvggQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetVPNGatewaysGet@ which the
--- 'TargetVPNGatewaysGet' request conforms to.
-type TargetVPNGatewaysGetAPI =
+-- 'TargetVPNGatewaysGet'' request conforms to.
+type TargetVPNGatewaysGetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetVpnGateways" :>
              Capture "targetVpnGateway" Text :>
-               Get '[JSON] TargetVPNGateway
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] TargetVPNGateway
 
 -- | Returns the specified TargetVpnGateway resource.
 --
--- /See:/ 'targetVPNGatewaysGet' smart constructor.
-data TargetVPNGatewaysGet = TargetVPNGatewaysGet
+-- /See:/ 'targetVPNGatewaysGet'' smart constructor.
+data TargetVPNGatewaysGet' = TargetVPNGatewaysGet'
     { _tvggQuotaUser        :: !(Maybe Text)
     , _tvggPrettyPrint      :: !Bool
     , _tvggProject          :: !Text
@@ -67,7 +74,7 @@ data TargetVPNGatewaysGet = TargetVPNGatewaysGet
     , _tvggRegion           :: !Text
     , _tvggOauthToken       :: !(Maybe Text)
     , _tvggFields           :: !(Maybe Text)
-    , _tvggAlt              :: !Text
+    , _tvggAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data TargetVPNGatewaysGet = TargetVPNGatewaysGet
 -- * 'tvggFields'
 --
 -- * 'tvggAlt'
-targetVPNGatewaysGet
+targetVPNGatewaysGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetVpnGateway'
     -> Text -- ^ 'region'
-    -> TargetVPNGatewaysGet
-targetVPNGatewaysGet pTvggProject_ pTvggTargetVpnGateway_ pTvggRegion_ =
-    TargetVPNGatewaysGet
+    -> TargetVPNGatewaysGet'
+targetVPNGatewaysGet' pTvggProject_ pTvggTargetVpnGateway_ pTvggRegion_ =
+    TargetVPNGatewaysGet'
     { _tvggQuotaUser = Nothing
     , _tvggPrettyPrint = True
     , _tvggProject = pTvggProject_
@@ -109,7 +116,7 @@ targetVPNGatewaysGet pTvggProject_ pTvggTargetVpnGateway_ pTvggRegion_ =
     , _tvggRegion = pTvggRegion_
     , _tvggOauthToken = Nothing
     , _tvggFields = Nothing
-    , _tvggAlt = "json"
+    , _tvggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +173,24 @@ tvggFields
   = lens _tvggFields (\ s a -> s{_tvggFields = a})
 
 -- | Data format for the response.
-tvggAlt :: Lens' TargetVPNGatewaysGet' Text
+tvggAlt :: Lens' TargetVPNGatewaysGet' Alt
 tvggAlt = lens _tvggAlt (\ s a -> s{_tvggAlt = a})
 
 instance GoogleRequest TargetVPNGatewaysGet' where
         type Rs TargetVPNGatewaysGet' = TargetVPNGateway
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysGet{..}
-          = go _tvggQuotaUser _tvggPrettyPrint _tvggProject
+        requestWithRoute r u TargetVPNGatewaysGet'{..}
+          = go _tvggQuotaUser (Just _tvggPrettyPrint)
+              _tvggProject
               _tvggUserIp
               _tvggTargetVpnGateway
               _tvggKey
               _tvggRegion
               _tvggOauthToken
               _tvggFields
-              _tvggAlt
+              (Just _tvggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetVPNGatewaysGetAPI)
+                      (Proxy :: Proxy TargetVPNGatewaysGetResource)
                       r
                       u

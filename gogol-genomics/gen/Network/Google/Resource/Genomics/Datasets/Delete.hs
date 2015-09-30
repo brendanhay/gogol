@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsDelete@.
-module Genomics.Datasets.Delete
+module Network.Google.Resource.Genomics.Datasets.Delete
     (
     -- * REST Resource
-      DatasetsDeleteAPI
+      DatasetsDeleteResource
 
     -- * Creating a Request
-    , datasetsDelete
-    , DatasetsDelete
+    , datasetsDelete'
+    , DatasetsDelete'
 
     -- * Request Lenses
     , ddQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsDelete@ which the
--- 'DatasetsDelete' request conforms to.
-type DatasetsDeleteAPI =
+-- 'DatasetsDelete'' request conforms to.
+type DatasetsDeleteResource =
      "datasets" :>
-       Capture "datasetId" Text :> Delete '[JSON] ()
+       Capture "datasetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a dataset.
 --
--- /See:/ 'datasetsDelete' smart constructor.
-data DatasetsDelete = DatasetsDelete
+-- /See:/ 'datasetsDelete'' smart constructor.
+data DatasetsDelete' = DatasetsDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
     , _ddUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsDelete = DatasetsDelete
     , _ddDatasetId   :: !Text
     , _ddOauthToken  :: !(Maybe Text)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Text
+    , _ddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsDelete = DatasetsDelete
 -- * 'ddFields'
 --
 -- * 'ddAlt'
-datasetsDelete
+datasetsDelete'
     :: Text -- ^ 'datasetId'
-    -> DatasetsDelete
-datasetsDelete pDdDatasetId_ =
-    DatasetsDelete
+    -> DatasetsDelete'
+datasetsDelete' pDdDatasetId_ =
+    DatasetsDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
     , _ddUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsDelete pDdDatasetId_ =
     , _ddDatasetId = pDdDatasetId_
     , _ddOauthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = "json"
+    , _ddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ ddFields :: Lens' DatasetsDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 -- | Data format for the response.
-ddAlt :: Lens' DatasetsDelete' Text
+ddAlt :: Lens' DatasetsDelete' Alt
 ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
 
 instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsDelete{..}
-          = go _ddQuotaUser _ddPrettyPrint _ddUserIp _ddKey
+        requestWithRoute r u DatasetsDelete'{..}
+          = go _ddQuotaUser (Just _ddPrettyPrint) _ddUserIp
+              _ddKey
               _ddDatasetId
               _ddOauthToken
               _ddFields
-              _ddAlt
+              (Just _ddAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsDeleteResource)
                       r
                       u

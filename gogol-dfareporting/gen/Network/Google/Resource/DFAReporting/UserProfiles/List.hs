@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves list of user profiles for a user.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserProfilesList@.
-module DFAReporting.UserProfiles.List
+module Network.Google.Resource.DFAReporting.UserProfiles.List
     (
     -- * REST Resource
-      UserProfilesListAPI
+      UserProfilesListResource
 
     -- * Creating a Request
-    , userProfilesList
-    , UserProfilesList
+    , userProfilesList'
+    , UserProfilesList'
 
     -- * Request Lenses
     , uplQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserProfilesList@ which the
--- 'UserProfilesList' request conforms to.
-type UserProfilesListAPI =
-     "userprofiles" :> Get '[JSON] UserProfileList
+-- 'UserProfilesList'' request conforms to.
+type UserProfilesListResource =
+     "userprofiles" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] UserProfileList
 
 -- | Retrieves list of user profiles for a user.
 --
--- /See:/ 'userProfilesList' smart constructor.
-data UserProfilesList = UserProfilesList
+-- /See:/ 'userProfilesList'' smart constructor.
+data UserProfilesList' = UserProfilesList'
     { _uplQuotaUser   :: !(Maybe Text)
     , _uplPrettyPrint :: !Bool
     , _uplUserIp      :: !(Maybe Text)
     , _uplKey         :: !(Maybe Text)
     , _uplOauthToken  :: !(Maybe Text)
     , _uplFields      :: !(Maybe Text)
-    , _uplAlt         :: !Text
+    , _uplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesList'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data UserProfilesList = UserProfilesList
 -- * 'uplFields'
 --
 -- * 'uplAlt'
-userProfilesList
-    :: UserProfilesList
-userProfilesList =
-    UserProfilesList
+userProfilesList'
+    :: UserProfilesList'
+userProfilesList' =
+    UserProfilesList'
     { _uplQuotaUser = Nothing
     , _uplPrettyPrint = True
     , _uplUserIp = Nothing
     , _uplKey = Nothing
     , _uplOauthToken = Nothing
     , _uplFields = Nothing
-    , _uplAlt = "json"
+    , _uplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,19 +134,20 @@ uplFields
   = lens _uplFields (\ s a -> s{_uplFields = a})
 
 -- | Data format for the response.
-uplAlt :: Lens' UserProfilesList' Text
+uplAlt :: Lens' UserProfilesList' Alt
 uplAlt = lens _uplAlt (\ s a -> s{_uplAlt = a})
 
 instance GoogleRequest UserProfilesList' where
         type Rs UserProfilesList' = UserProfileList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserProfilesList{..}
-          = go _uplQuotaUser _uplPrettyPrint _uplUserIp _uplKey
+        requestWithRoute r u UserProfilesList'{..}
+          = go _uplQuotaUser (Just _uplPrettyPrint) _uplUserIp
+              _uplKey
               _uplOauthToken
               _uplFields
-              _uplAlt
+              (Just _uplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UserProfilesListAPI)
+                      (Proxy :: Proxy UserProfilesListResource)
                       r
                       u

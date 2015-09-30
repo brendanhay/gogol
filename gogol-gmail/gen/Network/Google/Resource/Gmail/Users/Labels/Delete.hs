@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- from any messages and threads that it is applied to.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsDelete@.
-module Gmail.Users.Labels.Delete
+module Network.Google.Resource.Gmail.Users.Labels.Delete
     (
     -- * REST Resource
-      UsersLabelsDeleteAPI
+      UsersLabelsDeleteResource
 
     -- * Creating a Request
-    , usersLabelsDelete
-    , UsersLabelsDelete
+    , usersLabelsDelete'
+    , UsersLabelsDelete'
 
     -- * Request Lenses
     , uldQuotaUser
@@ -45,16 +46,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsDelete@ which the
--- 'UsersLabelsDelete' request conforms to.
-type UsersLabelsDeleteAPI =
+-- 'UsersLabelsDelete'' request conforms to.
+type UsersLabelsDeleteResource =
      Capture "userId" Text :>
-       "labels" :> Capture "id" Text :> Delete '[JSON] ()
+       "labels" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
 --
--- /See:/ 'usersLabelsDelete' smart constructor.
-data UsersLabelsDelete = UsersLabelsDelete
+-- /See:/ 'usersLabelsDelete'' smart constructor.
+data UsersLabelsDelete' = UsersLabelsDelete'
     { _uldQuotaUser   :: !(Maybe Text)
     , _uldPrettyPrint :: !Bool
     , _uldUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data UsersLabelsDelete = UsersLabelsDelete
     , _uldId          :: !Text
     , _uldOauthToken  :: !(Maybe Text)
     , _uldFields      :: !(Maybe Text)
-    , _uldAlt         :: !Text
+    , _uldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsDelete'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data UsersLabelsDelete = UsersLabelsDelete
 -- * 'uldFields'
 --
 -- * 'uldAlt'
-usersLabelsDelete
+usersLabelsDelete'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersLabelsDelete
-usersLabelsDelete pUldUserId_ pUldId_ =
-    UsersLabelsDelete
+    -> UsersLabelsDelete'
+usersLabelsDelete' pUldUserId_ pUldId_ =
+    UsersLabelsDelete'
     { _uldQuotaUser = Nothing
     , _uldPrettyPrint = True
     , _uldUserIp = Nothing
@@ -101,7 +110,7 @@ usersLabelsDelete pUldUserId_ pUldId_ =
     , _uldId = pUldId_
     , _uldOauthToken = Nothing
     , _uldFields = Nothing
-    , _uldAlt = "json"
+    , _uldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +160,22 @@ uldFields
   = lens _uldFields (\ s a -> s{_uldFields = a})
 
 -- | Data format for the response.
-uldAlt :: Lens' UsersLabelsDelete' Text
+uldAlt :: Lens' UsersLabelsDelete' Alt
 uldAlt = lens _uldAlt (\ s a -> s{_uldAlt = a})
 
 instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsDelete{..}
-          = go _uldQuotaUser _uldPrettyPrint _uldUserIp
+        requestWithRoute r u UsersLabelsDelete'{..}
+          = go _uldQuotaUser (Just _uldPrettyPrint) _uldUserIp
               _uldUserId
               _uldKey
               _uldId
               _uldOauthToken
               _uldFields
-              _uldAlt
+              (Just _uldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersLabelsDeleteAPI)
+                      (Proxy :: Proxy UsersLabelsDeleteResource)
                       r
                       u

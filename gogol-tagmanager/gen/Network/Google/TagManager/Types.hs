@@ -131,6 +131,15 @@ module Network.Google.TagManager.Types
     , uaContainerAccess
     , uaPermissionId
 
+    -- * ContainerAccessPermission
+    , ContainerAccessPermission (..)
+
+    -- * TriggerType
+    , TriggerType (..)
+
+    -- * ConditionType
+    , ConditionType (..)
+
     -- * ListAccountsResponse
     , ListAccountsResponse
     , listAccountsResponse
@@ -153,6 +162,12 @@ module Network.Google.TagManager.Types
     , vEnablingTriggerId
     , vParameter
 
+    -- * TagTagFiringOption
+    , TagTagFiringOption (..)
+
+    -- * AccountAccessPermission
+    , AccountAccessPermission (..)
+
     -- * Rule
     , Rule
     , rule
@@ -173,13 +188,16 @@ module Network.Google.TagManager.Types
     , fAccountId
     , fName
 
+    -- * ParameterType
+    , ParameterType (..)
+
     -- * Account
     , Account
     , account
-    , aShareData
-    , aFingerprint
-    , aAccountId
-    , aName
+    , aaShareData
+    , aaFingerprint
+    , aaAccountId
+    , aaName
 
     -- * ListContainerVersionsResponse
     , ListContainerVersionsResponse
@@ -212,11 +230,17 @@ module Network.Google.TagManager.Types
     , listContainersResponse
     , lcrContainers
 
+    -- * ContainerEnabledBuiltInVariable
+    , ContainerEnabledBuiltInVariable (..)
+
     -- * SetupTag
     , SetupTag
     , setupTag
     , stTagName
     , stStopOnSetupFailure
+
+    -- * ContainerUsageContext
+    , ContainerUsageContext (..)
 
     -- * ContainerVersion
     , ContainerVersion
@@ -296,6 +320,9 @@ module Network.Google.TagManager.Types
     , pMap
     , pKey
     , pType
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -303,7 +330,7 @@ import           Network.Google.TagManager.Types.Product
 import           Network.Google.TagManager.Types.Sum
 
 -- | URL referring to version 'v1' of the Tag Manager API.
-tagManagerURL :: BaseURL
+tagManagerURL :: BaseUrl
 tagManagerURL
   = BaseUrl Https
       "https://www.googleapis.com/tagmanager/v1/"

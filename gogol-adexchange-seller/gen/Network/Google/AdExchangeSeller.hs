@@ -28,46 +28,46 @@ module Network.Google.AdExchangeSeller
     -- * REST Resources
 
     -- ** AdexchangesellerAccountsAdclientsList
-    , module AdExchangeSeller.Accounts.Adclients.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Adclients.List
 
     -- ** AdexchangesellerAccountsAlertsList
-    , module AdExchangeSeller.Accounts.Alerts.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
 
     -- ** AdexchangesellerAccountsCustomchannelsGet
-    , module AdExchangeSeller.Accounts.Customchannels.Get
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.Get
 
     -- ** AdexchangesellerAccountsCustomchannelsList
-    , module AdExchangeSeller.Accounts.Customchannels.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.List
 
     -- ** AdexchangesellerAccountsGet
-    , module AdExchangeSeller.Accounts.Get
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Get
 
     -- ** AdexchangesellerAccountsList
-    , module AdExchangeSeller.Accounts.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.List
 
     -- ** AdexchangesellerAccountsMetadataDimensionsList
-    , module AdExchangeSeller.Accounts.Metadata.Dimensions.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
 
     -- ** AdexchangesellerAccountsMetadataMetricsList
-    , module AdExchangeSeller.Accounts.Metadata.Metrics.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
 
     -- ** AdexchangesellerAccountsPreferreddealsGet
-    , module AdExchangeSeller.Accounts.Preferreddeals.Get
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.Get
 
     -- ** AdexchangesellerAccountsPreferreddealsList
-    , module AdExchangeSeller.Accounts.Preferreddeals.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.List
 
     -- ** AdexchangesellerAccountsReportsGenerate
-    , module AdExchangeSeller.Accounts.Reports.Generate
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
 
     -- ** AdexchangesellerAccountsReportsSavedGenerate
-    , module AdExchangeSeller.Accounts.Reports.Saved.Generate
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
 
     -- ** AdexchangesellerAccountsReportsSavedList
-    , module AdExchangeSeller.Accounts.Reports.Saved.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
 
     -- ** AdexchangesellerAccountsURLchannelsList
-    , module AdExchangeSeller.Accounts.URLchannels.List
+    , module Network.Google.Resource.AdExchangeSeller.Accounts.URLchannels.List
 
     -- * Types
 
@@ -97,6 +97,13 @@ module Network.Google.AdExchangeSeller
     , aNextPageToken
     , aKind
     , aItems
+
+    -- ** ReportHeaders
+    , ReportHeaders
+    , reportHeaders
+    , rhName
+    , rhCurrency
+    , rhType
 
     -- ** Alerts
     , Alerts
@@ -171,6 +178,14 @@ module Network.Google.AdExchangeSeller
     , adId
     , adProductCode
 
+    -- ** CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
+
     -- ** PreferredDeals
     , PreferredDeals
     , preferredDeals
@@ -210,6 +225,9 @@ module Network.Google.AdExchangeSeller
     , pEndTime
     , pId
     , pFixedCpm
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdExchangeSeller.Types
@@ -233,7 +251,21 @@ import           Network.Google.Resource.AdExchangeSeller.Accounts.URLchannels.L
 TODO
 -}
 
-type AdExchangeSellerAPI = Accounts
+type AdExchangeSellerAPI =
+     AccountsAdclientsListResource :<|>
+       AccountsReportsSavedListResource
+       :<|> AccountsReportsSavedGenerateResource
+       :<|> AccountsReportsGenerateResource
+       :<|> AccountsAlertsListResource
+       :<|> AccountsUrlchannelsListResource
+       :<|> AccountsCustomchannelsListResource
+       :<|> AccountsCustomchannelsGetResource
+       :<|> AccountsPreferreddealsListResource
+       :<|> AccountsPreferreddealsGetResource
+       :<|> AccountsMetadataMetricsListResource
+       :<|> AccountsMetadataDimensionsListResource
+       :<|> AccountsListResource
+       :<|> AccountsGetResource
 
 adExchangeSellerAPI :: Proxy AdExchangeSellerAPI
 adExchangeSellerAPI = Proxy

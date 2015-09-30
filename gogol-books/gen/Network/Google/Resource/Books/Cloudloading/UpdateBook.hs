@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- |
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudloadingUpdateBook@.
-module Books.Cloudloading.UpdateBook
+module Network.Google.Resource.Books.Cloudloading.UpdateBook
     (
     -- * REST Resource
-      CloudloadingUpdateBookAPI
+      CloudloadingUpdateBookResource
 
     -- * Creating a Request
-    , cloudloadingUpdateBook
-    , CloudloadingUpdateBook
+    , cloudloadingUpdateBook'
+    , CloudloadingUpdateBook'
 
     -- * Request Lenses
     , cubQuotaUser
@@ -42,23 +43,30 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksCloudloadingUpdateBook@ which the
--- 'CloudloadingUpdateBook' request conforms to.
-type CloudloadingUpdateBookAPI =
+-- 'CloudloadingUpdateBook'' request conforms to.
+type CloudloadingUpdateBookResource =
      "cloudloading" :>
        "updateBook" :>
-         Post '[JSON] BooksCloudloadingResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] BooksCloudloadingResource
 
 -- |
 --
--- /See:/ 'cloudloadingUpdateBook' smart constructor.
-data CloudloadingUpdateBook = CloudloadingUpdateBook
+-- /See:/ 'cloudloadingUpdateBook'' smart constructor.
+data CloudloadingUpdateBook' = CloudloadingUpdateBook'
     { _cubQuotaUser   :: !(Maybe Text)
     , _cubPrettyPrint :: !Bool
     , _cubUserIp      :: !(Maybe Text)
     , _cubKey         :: !(Maybe Text)
     , _cubOauthToken  :: !(Maybe Text)
     , _cubFields      :: !(Maybe Text)
-    , _cubAlt         :: !Text
+    , _cubAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudloadingUpdateBook'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data CloudloadingUpdateBook = CloudloadingUpdateBook
 -- * 'cubFields'
 --
 -- * 'cubAlt'
-cloudloadingUpdateBook
-    :: CloudloadingUpdateBook
-cloudloadingUpdateBook =
-    CloudloadingUpdateBook
+cloudloadingUpdateBook'
+    :: CloudloadingUpdateBook'
+cloudloadingUpdateBook' =
+    CloudloadingUpdateBook'
     { _cubQuotaUser = Nothing
     , _cubPrettyPrint = True
     , _cubUserIp = Nothing
     , _cubKey = Nothing
     , _cubOauthToken = Nothing
     , _cubFields = Nothing
-    , _cubAlt = "json"
+    , _cubAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,20 +136,21 @@ cubFields
   = lens _cubFields (\ s a -> s{_cubFields = a})
 
 -- | Data format for the response.
-cubAlt :: Lens' CloudloadingUpdateBook' Text
+cubAlt :: Lens' CloudloadingUpdateBook' Alt
 cubAlt = lens _cubAlt (\ s a -> s{_cubAlt = a})
 
 instance GoogleRequest CloudloadingUpdateBook' where
         type Rs CloudloadingUpdateBook' =
              BooksCloudloadingResource
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudloadingUpdateBook{..}
-          = go _cubQuotaUser _cubPrettyPrint _cubUserIp _cubKey
+        requestWithRoute r u CloudloadingUpdateBook'{..}
+          = go _cubQuotaUser (Just _cubPrettyPrint) _cubUserIp
+              _cubKey
               _cubOauthToken
               _cubFields
-              _cubAlt
+              (Just _cubAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CloudloadingUpdateBookAPI)
+                      (Proxy :: Proxy CloudloadingUpdateBookResource)
                       r
                       u

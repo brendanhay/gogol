@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,40 +25,47 @@
 -- until they are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesStop@.
-module Compute.Instances.Stop
+module Network.Google.Resource.Compute.Instances.Stop
     (
     -- * REST Resource
-      InstancesStopAPI
+      InstancesStopResource
 
     -- * Creating a Request
-    , instancesStop
-    , InstancesStop
+    , instancesStop'
+    , InstancesStop'
 
     -- * Request Lenses
-    , insnQuotaUser
-    , insnPrettyPrint
-    , insnProject
-    , insnUserIp
-    , insnZone
-    , insnKey
-    , insnOauthToken
-    , insnFields
-    , insnAlt
-    , insnInstance
+    , isQuotaUser
+    , isPrettyPrint
+    , isProject
+    , isUserIp
+    , isZone
+    , isKey
+    , isOauthToken
+    , isFields
+    , isAlt
+    , isInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesStop@ which the
--- 'InstancesStop' request conforms to.
-type InstancesStopAPI =
+-- 'InstancesStop'' request conforms to.
+type InstancesStopResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "stop" :> Post '[JSON] Operation
+               "stop" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and
 -- allows you to restart the instance at a later time. Stopped instances do
@@ -66,129 +74,127 @@ type InstancesStopAPI =
 -- persistent disks and static IP addresses,will continue to be charged
 -- until they are deleted. For more information, see Stopping an instance.
 --
--- /See:/ 'instancesStop' smart constructor.
-data InstancesStop = InstancesStop
-    { _insnQuotaUser   :: !(Maybe Text)
-    , _insnPrettyPrint :: !Bool
-    , _insnProject     :: !Text
-    , _insnUserIp      :: !(Maybe Text)
-    , _insnZone        :: !Text
-    , _insnKey         :: !(Maybe Text)
-    , _insnOauthToken  :: !(Maybe Text)
-    , _insnFields      :: !(Maybe Text)
-    , _insnAlt         :: !Text
-    , _insnInstance    :: !Text
+-- /See:/ 'instancesStop'' smart constructor.
+data InstancesStop' = InstancesStop'
+    { _isQuotaUser   :: !(Maybe Text)
+    , _isPrettyPrint :: !Bool
+    , _isProject     :: !Text
+    , _isUserIp      :: !(Maybe Text)
+    , _isZone        :: !Text
+    , _isKey         :: !(Maybe Text)
+    , _isOauthToken  :: !(Maybe Text)
+    , _isFields      :: !(Maybe Text)
+    , _isAlt         :: !Alt
+    , _isInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStop'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'insnQuotaUser'
+-- * 'isQuotaUser'
 --
--- * 'insnPrettyPrint'
+-- * 'isPrettyPrint'
 --
--- * 'insnProject'
+-- * 'isProject'
 --
--- * 'insnUserIp'
+-- * 'isUserIp'
 --
--- * 'insnZone'
+-- * 'isZone'
 --
--- * 'insnKey'
+-- * 'isKey'
 --
--- * 'insnOauthToken'
+-- * 'isOauthToken'
 --
--- * 'insnFields'
+-- * 'isFields'
 --
--- * 'insnAlt'
+-- * 'isAlt'
 --
--- * 'insnInstance'
-instancesStop
+-- * 'isInstance'
+instancesStop'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesStop
-instancesStop pInsnProject_ pInsnZone_ pInsnInstance_ =
-    InstancesStop
-    { _insnQuotaUser = Nothing
-    , _insnPrettyPrint = True
-    , _insnProject = pInsnProject_
-    , _insnUserIp = Nothing
-    , _insnZone = pInsnZone_
-    , _insnKey = Nothing
-    , _insnOauthToken = Nothing
-    , _insnFields = Nothing
-    , _insnAlt = "json"
-    , _insnInstance = pInsnInstance_
+    -> InstancesStop'
+instancesStop' pIsProject_ pIsZone_ pIsInstance_ =
+    InstancesStop'
+    { _isQuotaUser = Nothing
+    , _isPrettyPrint = True
+    , _isProject = pIsProject_
+    , _isUserIp = Nothing
+    , _isZone = pIsZone_
+    , _isKey = Nothing
+    , _isOauthToken = Nothing
+    , _isFields = Nothing
+    , _isAlt = JSON
+    , _isInstance = pIsInstance_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-insnQuotaUser :: Lens' InstancesStop' (Maybe Text)
-insnQuotaUser
-  = lens _insnQuotaUser
-      (\ s a -> s{_insnQuotaUser = a})
+isQuotaUser :: Lens' InstancesStop' (Maybe Text)
+isQuotaUser
+  = lens _isQuotaUser (\ s a -> s{_isQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-insnPrettyPrint :: Lens' InstancesStop' Bool
-insnPrettyPrint
-  = lens _insnPrettyPrint
-      (\ s a -> s{_insnPrettyPrint = a})
+isPrettyPrint :: Lens' InstancesStop' Bool
+isPrettyPrint
+  = lens _isPrettyPrint
+      (\ s a -> s{_isPrettyPrint = a})
 
 -- | Project ID for this request.
-insnProject :: Lens' InstancesStop' Text
-insnProject
-  = lens _insnProject (\ s a -> s{_insnProject = a})
+isProject :: Lens' InstancesStop' Text
+isProject
+  = lens _isProject (\ s a -> s{_isProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-insnUserIp :: Lens' InstancesStop' (Maybe Text)
-insnUserIp
-  = lens _insnUserIp (\ s a -> s{_insnUserIp = a})
+isUserIp :: Lens' InstancesStop' (Maybe Text)
+isUserIp = lens _isUserIp (\ s a -> s{_isUserIp = a})
 
 -- | The name of the zone for this request.
-insnZone :: Lens' InstancesStop' Text
-insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
+isZone :: Lens' InstancesStop' Text
+isZone = lens _isZone (\ s a -> s{_isZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-insnKey :: Lens' InstancesStop' (Maybe Text)
-insnKey = lens _insnKey (\ s a -> s{_insnKey = a})
+isKey :: Lens' InstancesStop' (Maybe Text)
+isKey = lens _isKey (\ s a -> s{_isKey = a})
 
 -- | OAuth 2.0 token for the current user.
-insnOauthToken :: Lens' InstancesStop' (Maybe Text)
-insnOauthToken
-  = lens _insnOauthToken
-      (\ s a -> s{_insnOauthToken = a})
+isOauthToken :: Lens' InstancesStop' (Maybe Text)
+isOauthToken
+  = lens _isOauthToken (\ s a -> s{_isOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-insnFields :: Lens' InstancesStop' (Maybe Text)
-insnFields
-  = lens _insnFields (\ s a -> s{_insnFields = a})
+isFields :: Lens' InstancesStop' (Maybe Text)
+isFields = lens _isFields (\ s a -> s{_isFields = a})
 
 -- | Data format for the response.
-insnAlt :: Lens' InstancesStop' Text
-insnAlt = lens _insnAlt (\ s a -> s{_insnAlt = a})
+isAlt :: Lens' InstancesStop' Alt
+isAlt = lens _isAlt (\ s a -> s{_isAlt = a})
 
 -- | Name of the instance resource to stop.
-insnInstance :: Lens' InstancesStop' Text
-insnInstance
-  = lens _insnInstance (\ s a -> s{_insnInstance = a})
+isInstance :: Lens' InstancesStop' Text
+isInstance
+  = lens _isInstance (\ s a -> s{_isInstance = a})
 
 instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesStop{..}
-          = go _insnQuotaUser _insnPrettyPrint _insnProject
-              _insnUserIp
-              _insnZone
-              _insnKey
-              _insnOauthToken
-              _insnFields
-              _insnAlt
-              _insnInstance
+        requestWithRoute r u InstancesStop'{..}
+          = go _isQuotaUser (Just _isPrettyPrint) _isProject
+              _isUserIp
+              _isZone
+              _isKey
+              _isOauthToken
+              _isFields
+              (Just _isAlt)
+              _isInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesStopAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesStopResource)
+                      r
                       u

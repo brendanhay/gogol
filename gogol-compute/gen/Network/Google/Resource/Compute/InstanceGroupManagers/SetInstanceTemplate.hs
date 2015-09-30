@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- change unless you recreate them.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersSetInstanceTemplate@.
-module Compute.InstanceGroupManagers.SetInstanceTemplate
+module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
     (
     -- * REST Resource
-      InstanceGroupManagersSetInstanceTemplateAPI
+      InstanceGroupManagersSetInstanceTemplateResource
 
     -- * Creating a Request
-    , instanceGroupManagersSetInstanceTemplate
-    , InstanceGroupManagersSetInstanceTemplate
+    , instanceGroupManagersSetInstanceTemplate'
+    , InstanceGroupManagersSetInstanceTemplate'
 
     -- * Request Lenses
     , igmsitQuotaUser
@@ -47,21 +48,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersSetInstanceTemplate@ which the
--- 'InstanceGroupManagersSetInstanceTemplate' request conforms to.
-type InstanceGroupManagersSetInstanceTemplateAPI =
+-- 'InstanceGroupManagersSetInstanceTemplate'' request conforms to.
+type InstanceGroupManagersSetInstanceTemplateResource
+     =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               "setInstanceTemplate" :> Post '[JSON] Operation
+               "setInstanceTemplate" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Specifies the instance template to use when creating new instances in
 -- this group. The templates for existing instances in the group do not
 -- change unless you recreate them.
 --
--- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
-data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate
+-- /See:/ 'instanceGroupManagersSetInstanceTemplate'' smart constructor.
+data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanceTemplate'
     { _igmsitQuotaUser            :: !(Maybe Text)
     , _igmsitPrettyPrint          :: !Bool
     , _igmsitProject              :: !Text
@@ -71,7 +80,7 @@ data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstance
     , _igmsitKey                  :: !(Maybe Text)
     , _igmsitOauthToken           :: !(Maybe Text)
     , _igmsitFields               :: !(Maybe Text)
-    , _igmsitAlt                  :: !Text
+    , _igmsitAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate'' with the minimum fields required to make a request.
@@ -97,13 +106,13 @@ data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstance
 -- * 'igmsitFields'
 --
 -- * 'igmsitAlt'
-instanceGroupManagersSetInstanceTemplate
+instanceGroupManagersSetInstanceTemplate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetInstanceTemplate
-instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ =
-    InstanceGroupManagersSetInstanceTemplate
+    -> InstanceGroupManagersSetInstanceTemplate'
+instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ =
+    InstanceGroupManagersSetInstanceTemplate'
     { _igmsitQuotaUser = Nothing
     , _igmsitPrettyPrint = True
     , _igmsitProject = pIgmsitProject_
@@ -113,7 +122,7 @@ instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupMan
     , _igmsitKey = Nothing
     , _igmsitOauthToken = Nothing
     , _igmsitFields = Nothing
-    , _igmsitAlt = "json"
+    , _igmsitAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,7 +181,7 @@ igmsitFields
   = lens _igmsitFields (\ s a -> s{_igmsitFields = a})
 
 -- | Data format for the response.
-igmsitAlt :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
+igmsitAlt :: Lens' InstanceGroupManagersSetInstanceTemplate' Alt
 igmsitAlt
   = lens _igmsitAlt (\ s a -> s{_igmsitAlt = a})
 
@@ -182,8 +191,8 @@ instance GoogleRequest
              Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupManagersSetInstanceTemplate{..}
-          = go _igmsitQuotaUser _igmsitPrettyPrint
+          InstanceGroupManagersSetInstanceTemplate'{..}
+          = go _igmsitQuotaUser (Just _igmsitPrettyPrint)
               _igmsitProject
               _igmsitInstanceGroupManager
               _igmsitUserIp
@@ -191,10 +200,11 @@ instance GoogleRequest
               _igmsitKey
               _igmsitOauthToken
               _igmsitFields
-              _igmsitAlt
+              (Just _igmsitAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersSetInstanceTemplateAPI)
+                         Proxy
+                           InstanceGroupManagersSetInstanceTemplateResource)
                       r
                       u

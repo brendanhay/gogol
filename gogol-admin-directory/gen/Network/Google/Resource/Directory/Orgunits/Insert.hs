@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add Organization Unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsInsert@.
-module Directory.Orgunits.Insert
+module Network.Google.Resource.Directory.Orgunits.Insert
     (
     -- * REST Resource
-      OrgunitsInsertAPI
+      OrgunitsInsertResource
 
     -- * Creating a Request
-    , orgunitsInsert
-    , OrgunitsInsert
+    , orgunitsInsert'
+    , OrgunitsInsert'
 
     -- * Request Lenses
     , oiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsInsert@ which the
--- 'OrgunitsInsert' request conforms to.
-type OrgunitsInsertAPI =
+-- 'OrgunitsInsert'' request conforms to.
+type OrgunitsInsertResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits" :> Post '[JSON] OrgUnit
+         "orgunits" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] OrgUnit
 
 -- | Add Organization Unit
 --
--- /See:/ 'orgunitsInsert' smart constructor.
-data OrgunitsInsert = OrgunitsInsert
+-- /See:/ 'orgunitsInsert'' smart constructor.
+data OrgunitsInsert' = OrgunitsInsert'
     { _oiQuotaUser   :: !(Maybe Text)
     , _oiPrettyPrint :: !Bool
     , _oiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data OrgunitsInsert = OrgunitsInsert
     , _oiKey         :: !(Maybe Text)
     , _oiOauthToken  :: !(Maybe Text)
     , _oiFields      :: !(Maybe Text)
-    , _oiAlt         :: !Text
+    , _oiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data OrgunitsInsert = OrgunitsInsert
 -- * 'oiFields'
 --
 -- * 'oiAlt'
-orgunitsInsert
+orgunitsInsert'
     :: Text -- ^ 'customerId'
-    -> OrgunitsInsert
-orgunitsInsert pOiCustomerId_ =
-    OrgunitsInsert
+    -> OrgunitsInsert'
+orgunitsInsert' pOiCustomerId_ =
+    OrgunitsInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True
     , _oiUserIp = Nothing
@@ -94,7 +102,7 @@ orgunitsInsert pOiCustomerId_ =
     , _oiKey = Nothing
     , _oiOauthToken = Nothing
     , _oiFields = Nothing
-    , _oiAlt = "json"
+    , _oiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +144,21 @@ oiFields :: Lens' OrgunitsInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
 -- | Data format for the response.
-oiAlt :: Lens' OrgunitsInsert' Text
+oiAlt :: Lens' OrgunitsInsert' Alt
 oiAlt = lens _oiAlt (\ s a -> s{_oiAlt = a})
 
 instance GoogleRequest OrgunitsInsert' where
         type Rs OrgunitsInsert' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsInsert{..}
-          = go _oiQuotaUser _oiPrettyPrint _oiUserIp
+        requestWithRoute r u OrgunitsInsert'{..}
+          = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIp
               _oiCustomerId
               _oiKey
               _oiOauthToken
               _oiFields
-              _oiAlt
+              (Just _oiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsInsertResource)
                       r
                       u

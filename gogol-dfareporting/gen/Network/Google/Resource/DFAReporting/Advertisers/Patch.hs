@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,153 +20,157 @@
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersPatch@.
-module DFAReporting.Advertisers.Patch
+module Network.Google.Resource.DFAReporting.Advertisers.Patch
     (
     -- * REST Resource
-      AdvertisersPatchAPI
+      AdvertisersPatchResource
 
     -- * Creating a Request
-    , advertisersPatch
-    , AdvertisersPatch
+    , advertisersPatch'
+    , AdvertisersPatch'
 
     -- * Request Lenses
-    , appQuotaUser
-    , appPrettyPrint
-    , appUserIp
-    , appProfileId
-    , appKey
-    , appId
-    , appOauthToken
-    , appFields
-    , appAlt
+    , apQuotaUser
+    , apPrettyPrint
+    , apUserIp
+    , apProfileId
+    , apKey
+    , apId
+    , apOauthToken
+    , apFields
+    , apAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertisersPatch@ which the
--- 'AdvertisersPatch' request conforms to.
-type AdvertisersPatchAPI =
+-- 'AdvertisersPatch'' request conforms to.
+type AdvertisersPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertisers" :>
-           QueryParam "id" Int64 :> Patch '[JSON] Advertiser
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Advertiser
 
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
--- /See:/ 'advertisersPatch' smart constructor.
-data AdvertisersPatch = AdvertisersPatch
-    { _appQuotaUser   :: !(Maybe Text)
-    , _appPrettyPrint :: !Bool
-    , _appUserIp      :: !(Maybe Text)
-    , _appProfileId   :: !Int64
-    , _appKey         :: !(Maybe Text)
-    , _appId          :: !Int64
-    , _appOauthToken  :: !(Maybe Text)
-    , _appFields      :: !(Maybe Text)
-    , _appAlt         :: !Text
+-- /See:/ 'advertisersPatch'' smart constructor.
+data AdvertisersPatch' = AdvertisersPatch'
+    { _apQuotaUser   :: !(Maybe Text)
+    , _apPrettyPrint :: !Bool
+    , _apUserIp      :: !(Maybe Text)
+    , _apProfileId   :: !Int64
+    , _apKey         :: !(Maybe Text)
+    , _apId          :: !Int64
+    , _apOauthToken  :: !(Maybe Text)
+    , _apFields      :: !(Maybe Text)
+    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'appQuotaUser'
+-- * 'apQuotaUser'
 --
--- * 'appPrettyPrint'
+-- * 'apPrettyPrint'
 --
--- * 'appUserIp'
+-- * 'apUserIp'
 --
--- * 'appProfileId'
+-- * 'apProfileId'
 --
--- * 'appKey'
+-- * 'apKey'
 --
--- * 'appId'
+-- * 'apId'
 --
--- * 'appOauthToken'
+-- * 'apOauthToken'
 --
--- * 'appFields'
+-- * 'apFields'
 --
--- * 'appAlt'
-advertisersPatch
+-- * 'apAlt'
+advertisersPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AdvertisersPatch
-advertisersPatch pAppProfileId_ pAppId_ =
-    AdvertisersPatch
-    { _appQuotaUser = Nothing
-    , _appPrettyPrint = True
-    , _appUserIp = Nothing
-    , _appProfileId = pAppProfileId_
-    , _appKey = Nothing
-    , _appId = pAppId_
-    , _appOauthToken = Nothing
-    , _appFields = Nothing
-    , _appAlt = "json"
+    -> AdvertisersPatch'
+advertisersPatch' pApProfileId_ pApId_ =
+    AdvertisersPatch'
+    { _apQuotaUser = Nothing
+    , _apPrettyPrint = True
+    , _apUserIp = Nothing
+    , _apProfileId = pApProfileId_
+    , _apKey = Nothing
+    , _apId = pApId_
+    , _apOauthToken = Nothing
+    , _apFields = Nothing
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-appQuotaUser :: Lens' AdvertisersPatch' (Maybe Text)
-appQuotaUser
-  = lens _appQuotaUser (\ s a -> s{_appQuotaUser = a})
+apQuotaUser :: Lens' AdvertisersPatch' (Maybe Text)
+apQuotaUser
+  = lens _apQuotaUser (\ s a -> s{_apQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-appPrettyPrint :: Lens' AdvertisersPatch' Bool
-appPrettyPrint
-  = lens _appPrettyPrint
-      (\ s a -> s{_appPrettyPrint = a})
+apPrettyPrint :: Lens' AdvertisersPatch' Bool
+apPrettyPrint
+  = lens _apPrettyPrint
+      (\ s a -> s{_apPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-appUserIp :: Lens' AdvertisersPatch' (Maybe Text)
-appUserIp
-  = lens _appUserIp (\ s a -> s{_appUserIp = a})
+apUserIp :: Lens' AdvertisersPatch' (Maybe Text)
+apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
 
 -- | User profile ID associated with this request.
-appProfileId :: Lens' AdvertisersPatch' Int64
-appProfileId
-  = lens _appProfileId (\ s a -> s{_appProfileId = a})
+apProfileId :: Lens' AdvertisersPatch' Int64
+apProfileId
+  = lens _apProfileId (\ s a -> s{_apProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-appKey :: Lens' AdvertisersPatch' (Maybe Text)
-appKey = lens _appKey (\ s a -> s{_appKey = a})
+apKey :: Lens' AdvertisersPatch' (Maybe Text)
+apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | Advertiser ID.
-appId :: Lens' AdvertisersPatch' Int64
-appId = lens _appId (\ s a -> s{_appId = a})
+apId :: Lens' AdvertisersPatch' Int64
+apId = lens _apId (\ s a -> s{_apId = a})
 
 -- | OAuth 2.0 token for the current user.
-appOauthToken :: Lens' AdvertisersPatch' (Maybe Text)
-appOauthToken
-  = lens _appOauthToken
-      (\ s a -> s{_appOauthToken = a})
+apOauthToken :: Lens' AdvertisersPatch' (Maybe Text)
+apOauthToken
+  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-appFields :: Lens' AdvertisersPatch' (Maybe Text)
-appFields
-  = lens _appFields (\ s a -> s{_appFields = a})
+apFields :: Lens' AdvertisersPatch' (Maybe Text)
+apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-appAlt :: Lens' AdvertisersPatch' Text
-appAlt = lens _appAlt (\ s a -> s{_appAlt = a})
+apAlt :: Lens' AdvertisersPatch' Alt
+apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest AdvertisersPatch' where
         type Rs AdvertisersPatch' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersPatch{..}
-          = go _appQuotaUser _appPrettyPrint _appUserIp
-              _appProfileId
-              _appKey
-              (Just _appId)
-              _appOauthToken
-              _appFields
-              _appAlt
+        requestWithRoute r u AdvertisersPatch'{..}
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+              _apProfileId
+              _apKey
+              (Just _apId)
+              _apOauthToken
+              _apFields
+              (Just _apAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertisersPatchAPI)
+                      (Proxy :: Proxy AdvertisersPatchResource)
                       r
                       u

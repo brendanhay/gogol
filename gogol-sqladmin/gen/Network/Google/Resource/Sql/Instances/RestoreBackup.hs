@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Restores a backup of a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesRestoreBackup@.
-module Sql.Instances.RestoreBackup
+module Network.Google.Resource.Sql.Instances.RestoreBackup
     (
     -- * REST Resource
-      InstancesRestoreBackupAPI
+      InstancesRestoreBackupResource
 
     -- * Creating a Request
-    , instancesRestoreBackup
-    , InstancesRestoreBackup
+    , instancesRestoreBackup'
+    , InstancesRestoreBackup'
 
     -- * Request Lenses
     , irbQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesRestoreBackup@ which the
--- 'InstancesRestoreBackup' request conforms to.
-type InstancesRestoreBackupAPI =
+-- 'InstancesRestoreBackup'' request conforms to.
+type InstancesRestoreBackupResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "restoreBackup" :> Post '[JSON] Operation
+             "restoreBackup" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Restores a backup of a Cloud SQL instance.
 --
--- /See:/ 'instancesRestoreBackup' smart constructor.
-data InstancesRestoreBackup = InstancesRestoreBackup
+-- /See:/ 'instancesRestoreBackup'' smart constructor.
+data InstancesRestoreBackup' = InstancesRestoreBackup'
     { _irbQuotaUser   :: !(Maybe Text)
     , _irbPrettyPrint :: !Bool
     , _irbProject     :: !Text
@@ -63,7 +71,7 @@ data InstancesRestoreBackup = InstancesRestoreBackup
     , _irbKey         :: !(Maybe Text)
     , _irbOauthToken  :: !(Maybe Text)
     , _irbFields      :: !(Maybe Text)
-    , _irbAlt         :: !Text
+    , _irbAlt         :: !Alt
     , _irbInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +96,12 @@ data InstancesRestoreBackup = InstancesRestoreBackup
 -- * 'irbAlt'
 --
 -- * 'irbInstance'
-instancesRestoreBackup
+instancesRestoreBackup'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesRestoreBackup
-instancesRestoreBackup pIrbProject_ pIrbInstance_ =
-    InstancesRestoreBackup
+    -> InstancesRestoreBackup'
+instancesRestoreBackup' pIrbProject_ pIrbInstance_ =
+    InstancesRestoreBackup'
     { _irbQuotaUser = Nothing
     , _irbPrettyPrint = True
     , _irbProject = pIrbProject_
@@ -101,7 +109,7 @@ instancesRestoreBackup pIrbProject_ pIrbInstance_ =
     , _irbKey = Nothing
     , _irbOauthToken = Nothing
     , _irbFields = Nothing
-    , _irbAlt = "json"
+    , _irbAlt = JSON
     , _irbInstance = pIrbInstance_
     }
 
@@ -147,7 +155,7 @@ irbFields
   = lens _irbFields (\ s a -> s{_irbFields = a})
 
 -- | Data format for the response.
-irbAlt :: Lens' InstancesRestoreBackup' Text
+irbAlt :: Lens' InstancesRestoreBackup' Alt
 irbAlt = lens _irbAlt (\ s a -> s{_irbAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -158,16 +166,16 @@ irbInstance
 instance GoogleRequest InstancesRestoreBackup' where
         type Rs InstancesRestoreBackup' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesRestoreBackup{..}
-          = go _irbQuotaUser _irbPrettyPrint _irbProject
+        requestWithRoute r u InstancesRestoreBackup'{..}
+          = go _irbQuotaUser (Just _irbPrettyPrint) _irbProject
               _irbUserIp
               _irbKey
               _irbOauthToken
               _irbFields
-              _irbAlt
+              (Just _irbAlt)
               _irbInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesRestoreBackupAPI)
+                      (Proxy :: Proxy InstancesRestoreBackupResource)
                       r
                       u

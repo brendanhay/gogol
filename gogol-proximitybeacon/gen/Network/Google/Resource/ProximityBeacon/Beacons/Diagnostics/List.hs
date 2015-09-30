@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- using the beacon name \`beacons\/-\`.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsDiagnosticsList@.
-module ProximityBeacon.Beacons.Diagnostics.List
+module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     (
     -- * REST Resource
-      BeaconsDiagnosticsListAPI
+      BeaconsDiagnosticsListResource
 
     -- * Creating a Request
-    , beaconsDiagnosticsList
-    , BeaconsDiagnosticsList
+    , beaconsDiagnosticsList'
+    , BeaconsDiagnosticsList'
 
     -- * Request Lenses
     , bdlXgafv
@@ -54,22 +55,35 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsDiagnosticsList@ which the
--- 'BeaconsDiagnosticsList' request conforms to.
-type BeaconsDiagnosticsListAPI =
+-- 'BeaconsDiagnosticsList'' request conforms to.
+type BeaconsDiagnosticsListResource =
      "v1beta1" :>
        "{+beaconName}" :>
          "diagnostics" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               QueryParam "alertFilter" Text :>
-                 Get '[JSON] ListDiagnosticsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "alertFilter" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListDiagnosticsResponse
 
 -- | List the diagnostics for a single beacon. You can also list diagnostics
 -- for all the beacons owned by your Google Developers Console project by
 -- using the beacon name \`beacons\/-\`.
 --
--- /See:/ 'beaconsDiagnosticsList' smart constructor.
-data BeaconsDiagnosticsList = BeaconsDiagnosticsList
+-- /See:/ 'beaconsDiagnosticsList'' smart constructor.
+data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
     { _bdlXgafv          :: !(Maybe Text)
     , _bdlQuotaUser      :: !(Maybe Text)
     , _bdlPrettyPrint    :: !Bool
@@ -126,11 +140,11 @@ data BeaconsDiagnosticsList = BeaconsDiagnosticsList
 -- * 'bdlCallback'
 --
 -- * 'bdlAlt'
-beaconsDiagnosticsList
+beaconsDiagnosticsList'
     :: Text -- ^ 'beaconName'
-    -> BeaconsDiagnosticsList
-beaconsDiagnosticsList pBdlBeaconName_ =
-    BeaconsDiagnosticsList
+    -> BeaconsDiagnosticsList'
+beaconsDiagnosticsList' pBdlBeaconName_ =
+    BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlQuotaUser = Nothing
     , _bdlPrettyPrint = True
@@ -250,10 +264,10 @@ instance GoogleRequest BeaconsDiagnosticsList' where
         type Rs BeaconsDiagnosticsList' =
              ListDiagnosticsResponse
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsDiagnosticsList{..}
-          = go _bdlXgafv _bdlQuotaUser _bdlPrettyPrint
+        requestWithRoute r u BeaconsDiagnosticsList'{..}
+          = go _bdlXgafv _bdlQuotaUser (Just _bdlPrettyPrint)
               _bdlUploadProtocol
-              _bdlPp
+              (Just _bdlPp)
               _bdlAccessToken
               _bdlBeaconName
               _bdlUploadType
@@ -265,9 +279,9 @@ instance GoogleRequest BeaconsDiagnosticsList' where
               _bdlAlertFilter
               _bdlFields
               _bdlCallback
-              _bdlAlt
+              (Just _bdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconsDiagnosticsListAPI)
+                      (Proxy :: Proxy BeaconsDiagnosticsListResource)
                       r
                       u

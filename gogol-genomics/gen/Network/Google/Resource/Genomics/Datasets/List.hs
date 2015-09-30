@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists datasets within a project.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsList@.
-module Genomics.Datasets.List
+module Network.Google.Resource.Genomics.Datasets.List
     (
     -- * REST Resource
-      DatasetsListAPI
+      DatasetsListResource
 
     -- * Creating a Request
-    , datasetsList
-    , DatasetsList
+    , datasetsList'
+    , DatasetsList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsList@ which the
--- 'DatasetsList' request conforms to.
-type DatasetsListAPI =
+-- 'DatasetsList'' request conforms to.
+type DatasetsListResource =
      "datasets" :>
-       QueryParam "projectNumber" Int64 :>
-         QueryParam "pageToken" Text :>
-           QueryParam "pageSize" Int32 :>
-             Get '[JSON] ListDatasetsResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "projectNumber" Int64 :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "pageSize" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ListDatasetsResponse
 
 -- | Lists datasets within a project.
 --
--- /See:/ 'datasetsList' smart constructor.
-data DatasetsList = DatasetsList
+-- /See:/ 'datasetsList'' smart constructor.
+data DatasetsList' = DatasetsList'
     { _dlQuotaUser     :: !(Maybe Text)
     , _dlPrettyPrint   :: !Bool
     , _dlUserIp        :: !(Maybe Text)
@@ -66,7 +74,7 @@ data DatasetsList = DatasetsList
     , _dlOauthToken    :: !(Maybe Text)
     , _dlPageSize      :: !(Maybe Int32)
     , _dlFields        :: !(Maybe Text)
-    , _dlAlt           :: !Text
+    , _dlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data DatasetsList = DatasetsList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-datasetsList
-    :: DatasetsList
-datasetsList =
-    DatasetsList
+datasetsList'
+    :: DatasetsList'
+datasetsList' =
+    DatasetsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlUserIp = Nothing
@@ -105,7 +113,7 @@ datasetsList =
     , _dlOauthToken = Nothing
     , _dlPageSize = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,21 +169,23 @@ dlFields :: Lens' DatasetsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DatasetsList' Text
+dlAlt :: Lens' DatasetsList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlUserIp
+        requestWithRoute r u DatasetsList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
               _dlProjectNumber
               _dlKey
               _dlPageToken
               _dlOauthToken
               _dlPageSize
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsListResource)
+                      r
                       u

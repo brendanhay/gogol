@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,189 +20,205 @@
 -- | Lists all of the replies to a comment.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesList@.
-module Drive.Replies.List
+module Network.Google.Resource.Drive.Replies.List
     (
     -- * REST Resource
-      RepliesListAPI
+      RepliesListResource
 
     -- * Creating a Request
-    , repliesList
-    , RepliesList
+    , repliesList'
+    , RepliesList'
 
     -- * Request Lenses
-    , rlQuotaUser
-    , rlPrettyPrint
-    , rlUserIp
-    , rlKey
-    , rlPageToken
-    , rlFileId
-    , rlOauthToken
-    , rlCommentId
-    , rlMaxResults
-    , rlIncludeDeleted
-    , rlFields
-    , rlAlt
+    , rllQuotaUser
+    , rllPrettyPrint
+    , rllUserIp
+    , rllKey
+    , rllPageToken
+    , rllFileId
+    , rllOauthToken
+    , rllCommentId
+    , rllMaxResults
+    , rllIncludeDeleted
+    , rllFields
+    , rllAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRepliesList@ which the
--- 'RepliesList' request conforms to.
-type RepliesListAPI =
+-- 'RepliesList'' request conforms to.
+type RepliesListResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
              "replies" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     Get '[JSON] CommentReplyList
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "includeDeleted" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] CommentReplyList
 
 -- | Lists all of the replies to a comment.
 --
--- /See:/ 'repliesList' smart constructor.
-data RepliesList = RepliesList
-    { _rlQuotaUser      :: !(Maybe Text)
-    , _rlPrettyPrint    :: !Bool
-    , _rlUserIp         :: !(Maybe Text)
-    , _rlKey            :: !(Maybe Text)
-    , _rlPageToken      :: !(Maybe Text)
-    , _rlFileId         :: !Text
-    , _rlOauthToken     :: !(Maybe Text)
-    , _rlCommentId      :: !Text
-    , _rlMaxResults     :: !Int32
-    , _rlIncludeDeleted :: !Bool
-    , _rlFields         :: !(Maybe Text)
-    , _rlAlt            :: !Text
+-- /See:/ 'repliesList'' smart constructor.
+data RepliesList' = RepliesList'
+    { _rllQuotaUser      :: !(Maybe Text)
+    , _rllPrettyPrint    :: !Bool
+    , _rllUserIp         :: !(Maybe Text)
+    , _rllKey            :: !(Maybe Text)
+    , _rllPageToken      :: !(Maybe Text)
+    , _rllFileId         :: !Text
+    , _rllOauthToken     :: !(Maybe Text)
+    , _rllCommentId      :: !Text
+    , _rllMaxResults     :: !Int32
+    , _rllIncludeDeleted :: !Bool
+    , _rllFields         :: !(Maybe Text)
+    , _rllAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rlQuotaUser'
+-- * 'rllQuotaUser'
 --
--- * 'rlPrettyPrint'
+-- * 'rllPrettyPrint'
 --
--- * 'rlUserIp'
+-- * 'rllUserIp'
 --
--- * 'rlKey'
+-- * 'rllKey'
 --
--- * 'rlPageToken'
+-- * 'rllPageToken'
 --
--- * 'rlFileId'
+-- * 'rllFileId'
 --
--- * 'rlOauthToken'
+-- * 'rllOauthToken'
 --
--- * 'rlCommentId'
+-- * 'rllCommentId'
 --
--- * 'rlMaxResults'
+-- * 'rllMaxResults'
 --
--- * 'rlIncludeDeleted'
+-- * 'rllIncludeDeleted'
 --
--- * 'rlFields'
+-- * 'rllFields'
 --
--- * 'rlAlt'
-repliesList
+-- * 'rllAlt'
+repliesList'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> RepliesList
-repliesList pRlFileId_ pRlCommentId_ =
-    RepliesList
-    { _rlQuotaUser = Nothing
-    , _rlPrettyPrint = True
-    , _rlUserIp = Nothing
-    , _rlKey = Nothing
-    , _rlPageToken = Nothing
-    , _rlFileId = pRlFileId_
-    , _rlOauthToken = Nothing
-    , _rlCommentId = pRlCommentId_
-    , _rlMaxResults = 20
-    , _rlIncludeDeleted = False
-    , _rlFields = Nothing
-    , _rlAlt = "json"
+    -> RepliesList'
+repliesList' pRllFileId_ pRllCommentId_ =
+    RepliesList'
+    { _rllQuotaUser = Nothing
+    , _rllPrettyPrint = True
+    , _rllUserIp = Nothing
+    , _rllKey = Nothing
+    , _rllPageToken = Nothing
+    , _rllFileId = pRllFileId_
+    , _rllOauthToken = Nothing
+    , _rllCommentId = pRllCommentId_
+    , _rllMaxResults = 20
+    , _rllIncludeDeleted = False
+    , _rllFields = Nothing
+    , _rllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rlQuotaUser :: Lens' RepliesList' (Maybe Text)
-rlQuotaUser
-  = lens _rlQuotaUser (\ s a -> s{_rlQuotaUser = a})
+rllQuotaUser :: Lens' RepliesList' (Maybe Text)
+rllQuotaUser
+  = lens _rllQuotaUser (\ s a -> s{_rllQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rlPrettyPrint :: Lens' RepliesList' Bool
-rlPrettyPrint
-  = lens _rlPrettyPrint
-      (\ s a -> s{_rlPrettyPrint = a})
+rllPrettyPrint :: Lens' RepliesList' Bool
+rllPrettyPrint
+  = lens _rllPrettyPrint
+      (\ s a -> s{_rllPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlUserIp :: Lens' RepliesList' (Maybe Text)
-rlUserIp = lens _rlUserIp (\ s a -> s{_rlUserIp = a})
+rllUserIp :: Lens' RepliesList' (Maybe Text)
+rllUserIp
+  = lens _rllUserIp (\ s a -> s{_rllUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RepliesList' (Maybe Text)
-rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
+rllKey :: Lens' RepliesList' (Maybe Text)
+rllKey = lens _rllKey (\ s a -> s{_rllKey = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- \"nextPageToken\" from the previous response.
-rlPageToken :: Lens' RepliesList' (Maybe Text)
-rlPageToken
-  = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
+rllPageToken :: Lens' RepliesList' (Maybe Text)
+rllPageToken
+  = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | The ID of the file.
-rlFileId :: Lens' RepliesList' Text
-rlFileId = lens _rlFileId (\ s a -> s{_rlFileId = a})
+rllFileId :: Lens' RepliesList' Text
+rllFileId
+  = lens _rllFileId (\ s a -> s{_rllFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rlOauthToken :: Lens' RepliesList' (Maybe Text)
-rlOauthToken
-  = lens _rlOauthToken (\ s a -> s{_rlOauthToken = a})
+rllOauthToken :: Lens' RepliesList' (Maybe Text)
+rllOauthToken
+  = lens _rllOauthToken
+      (\ s a -> s{_rllOauthToken = a})
 
 -- | The ID of the comment.
-rlCommentId :: Lens' RepliesList' Text
-rlCommentId
-  = lens _rlCommentId (\ s a -> s{_rlCommentId = a})
+rllCommentId :: Lens' RepliesList' Text
+rllCommentId
+  = lens _rllCommentId (\ s a -> s{_rllCommentId = a})
 
 -- | The maximum number of replies to include in the response, used for
 -- paging.
-rlMaxResults :: Lens' RepliesList' Int32
-rlMaxResults
-  = lens _rlMaxResults (\ s a -> s{_rlMaxResults = a})
+rllMaxResults :: Lens' RepliesList' Int32
+rllMaxResults
+  = lens _rllMaxResults
+      (\ s a -> s{_rllMaxResults = a})
 
 -- | If set, all replies, including deleted replies (with content stripped)
 -- will be returned.
-rlIncludeDeleted :: Lens' RepliesList' Bool
-rlIncludeDeleted
-  = lens _rlIncludeDeleted
-      (\ s a -> s{_rlIncludeDeleted = a})
+rllIncludeDeleted :: Lens' RepliesList' Bool
+rllIncludeDeleted
+  = lens _rllIncludeDeleted
+      (\ s a -> s{_rllIncludeDeleted = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rlFields :: Lens' RepliesList' (Maybe Text)
-rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
+rllFields :: Lens' RepliesList' (Maybe Text)
+rllFields
+  = lens _rllFields (\ s a -> s{_rllFields = a})
 
 -- | Data format for the response.
-rlAlt :: Lens' RepliesList' Text
-rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
+rllAlt :: Lens' RepliesList' Alt
+rllAlt = lens _rllAlt (\ s a -> s{_rllAlt = a})
 
 instance GoogleRequest RepliesList' where
         type Rs RepliesList' = CommentReplyList
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesList{..}
-          = go _rlQuotaUser _rlPrettyPrint _rlUserIp _rlKey
-              _rlPageToken
-              _rlFileId
-              _rlOauthToken
-              _rlCommentId
-              (Just _rlMaxResults)
-              (Just _rlIncludeDeleted)
-              _rlFields
-              _rlAlt
+        requestWithRoute r u RepliesList'{..}
+          = go _rllQuotaUser (Just _rllPrettyPrint) _rllUserIp
+              _rllKey
+              _rllPageToken
+              _rllFileId
+              _rllOauthToken
+              _rllCommentId
+              (Just _rllMaxResults)
+              (Just _rllIncludeDeleted)
+              _rllFields
+              (Just _rllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RepliesListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy RepliesListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new account user profile.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProfilesInsert@.
-module DFAReporting.AccountUserProfiles.Insert
+module Network.Google.Resource.DFAReporting.AccountUserProfiles.Insert
     (
     -- * REST Resource
-      AccountUserProfilesInsertAPI
+      AccountUserProfilesInsertResource
 
     -- * Creating a Request
-    , accountUserProfilesInsert
-    , AccountUserProfilesInsert
+    , accountUserProfilesInsert'
+    , AccountUserProfilesInsert'
 
     -- * Request Lenses
     , aupiQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountUserProfilesInsert@ which the
--- 'AccountUserProfilesInsert' request conforms to.
-type AccountUserProfilesInsertAPI =
+-- 'AccountUserProfilesInsert'' request conforms to.
+type AccountUserProfilesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           Post '[JSON] AccountUserProfile
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] AccountUserProfile
 
 -- | Inserts a new account user profile.
 --
--- /See:/ 'accountUserProfilesInsert' smart constructor.
-data AccountUserProfilesInsert = AccountUserProfilesInsert
+-- /See:/ 'accountUserProfilesInsert'' smart constructor.
+data AccountUserProfilesInsert' = AccountUserProfilesInsert'
     { _aupiQuotaUser   :: !(Maybe Text)
     , _aupiPrettyPrint :: !Bool
     , _aupiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AccountUserProfilesInsert = AccountUserProfilesInsert
     , _aupiKey         :: !(Maybe Text)
     , _aupiOauthToken  :: !(Maybe Text)
     , _aupiFields      :: !(Maybe Text)
-    , _aupiAlt         :: !Text
+    , _aupiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AccountUserProfilesInsert = AccountUserProfilesInsert
 -- * 'aupiFields'
 --
 -- * 'aupiAlt'
-accountUserProfilesInsert
+accountUserProfilesInsert'
     :: Int64 -- ^ 'profileId'
-    -> AccountUserProfilesInsert
-accountUserProfilesInsert pAupiProfileId_ =
-    AccountUserProfilesInsert
+    -> AccountUserProfilesInsert'
+accountUserProfilesInsert' pAupiProfileId_ =
+    AccountUserProfilesInsert'
     { _aupiQuotaUser = Nothing
     , _aupiPrettyPrint = True
     , _aupiUserIp = Nothing
@@ -95,7 +103,7 @@ accountUserProfilesInsert pAupiProfileId_ =
     , _aupiKey = Nothing
     , _aupiOauthToken = Nothing
     , _aupiFields = Nothing
-    , _aupiAlt = "json"
+    , _aupiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ aupiFields
   = lens _aupiFields (\ s a -> s{_aupiFields = a})
 
 -- | Data format for the response.
-aupiAlt :: Lens' AccountUserProfilesInsert' Text
+aupiAlt :: Lens' AccountUserProfilesInsert' Alt
 aupiAlt = lens _aupiAlt (\ s a -> s{_aupiAlt = a})
 
 instance GoogleRequest AccountUserProfilesInsert'
@@ -150,15 +158,16 @@ instance GoogleRequest AccountUserProfilesInsert'
         type Rs AccountUserProfilesInsert' =
              AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProfilesInsert{..}
-          = go _aupiQuotaUser _aupiPrettyPrint _aupiUserIp
+        requestWithRoute r u AccountUserProfilesInsert'{..}
+          = go _aupiQuotaUser (Just _aupiPrettyPrint)
+              _aupiUserIp
               _aupiProfileId
               _aupiKey
               _aupiOauthToken
               _aupiFields
-              _aupiAlt
+              (Just _aupiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountUserProfilesInsertAPI)
+                      (Proxy :: Proxy AccountUserProfilesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets information about a specific deployment.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsGet@.
-module DeploymentManager.Deployments.Get
+module Network.Google.Resource.DeploymentManager.Deployments.Get
     (
     -- * REST Resource
-      DeploymentsGetAPI
+      DeploymentsGetResource
 
     -- * Creating a Request
-    , deploymentsGet
-    , DeploymentsGet
+    , deploymentsGet'
+    , DeploymentsGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerDeploymentsGet@ which the
--- 'DeploymentsGet' request conforms to.
-type DeploymentsGetAPI =
+-- 'DeploymentsGet'' request conforms to.
+type DeploymentsGetResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
-           Capture "deployment" Text :> Get '[JSON] Deployment
+           Capture "deployment" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Deployment
 
 -- | Gets information about a specific deployment.
 --
--- /See:/ 'deploymentsGet' smart constructor.
-data DeploymentsGet = DeploymentsGet
+-- /See:/ 'deploymentsGet'' smart constructor.
+data DeploymentsGet' = DeploymentsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgProject     :: !Text
@@ -62,7 +70,7 @@ data DeploymentsGet = DeploymentsGet
     , _dgKey         :: !(Maybe Text)
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     , _dgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -87,12 +95,12 @@ data DeploymentsGet = DeploymentsGet
 -- * 'dgAlt'
 --
 -- * 'dgDeployment'
-deploymentsGet
+deploymentsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'deployment'
-    -> DeploymentsGet
-deploymentsGet pDgProject_ pDgDeployment_ =
-    DeploymentsGet
+    -> DeploymentsGet'
+deploymentsGet' pDgProject_ pDgDeployment_ =
+    DeploymentsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgProject = pDgProject_
@@ -100,7 +108,7 @@ deploymentsGet pDgProject_ pDgDeployment_ =
     , _dgKey = Nothing
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     , _dgDeployment = pDgDeployment_
     }
 
@@ -143,7 +151,7 @@ dgFields :: Lens' DeploymentsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DeploymentsGet' Text
+dgAlt :: Lens' DeploymentsGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 -- | The name of the deployment for this request.
@@ -155,14 +163,16 @@ instance GoogleRequest DeploymentsGet' where
         type Rs DeploymentsGet' = Deployment
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgProject _dgUserIp
+        requestWithRoute r u DeploymentsGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
+              _dgUserIp
               _dgKey
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
               _dgDeployment
           where go
-                  = clientWithRoute (Proxy :: Proxy DeploymentsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DeploymentsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- AdSense user.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAssociationsessionsStart@.
-module AdSenseHost.Associationsessions.Start
+module Network.Google.Resource.AdSenseHost.Associationsessions.Start
     (
     -- * REST Resource
-      AssociationsessionsStartAPI
+      AssociationsessionsStartResource
 
     -- * Creating a Request
-    , associationsessionsStart
-    , AssociationsessionsStart
+    , associationsessionsStart'
+    , AssociationsessionsStart'
 
     -- * Request Lenses
     , aQuotaUser
@@ -47,21 +48,30 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAssociationsessionsStart@ which the
--- 'AssociationsessionsStart' request conforms to.
-type AssociationsessionsStartAPI =
+-- 'AssociationsessionsStart'' request conforms to.
+type AssociationsessionsStartResource =
      "associationsessions" :>
        "start" :>
-         QueryParam "websiteLocale" Text :>
-           QueryParam "userLocale" Text :>
-             QueryParam "websiteUrl" Text :>
-               QueryParams "productCode" Text :>
-                 Get '[JSON] AssociationSession
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "websiteLocale" Text :>
+                 QueryParam "userLocale" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "websiteUrl" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParams "productCode"
+                           AdsensehostAssociationsessionsStartProductCode
+                           :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] AssociationSession
 
 -- | Create an association session for initiating an association with an
 -- AdSense user.
 --
--- /See:/ 'associationsessionsStart' smart constructor.
-data AssociationsessionsStart = AssociationsessionsStart
+-- /See:/ 'associationsessionsStart'' smart constructor.
+data AssociationsessionsStart' = AssociationsessionsStart'
     { _aQuotaUser     :: !(Maybe Text)
     , _aPrettyPrint   :: !Bool
     , _aUserIp        :: !(Maybe Text)
@@ -70,9 +80,9 @@ data AssociationsessionsStart = AssociationsessionsStart
     , _aKey           :: !(Maybe Text)
     , _aWebsiteUrl    :: !Text
     , _aOauthToken    :: !(Maybe Text)
-    , _aProductCode   :: !Text
+    , _aProductCode   :: !AdsensehostAssociationsessionsStartProductCode
     , _aFields        :: !(Maybe Text)
-    , _aAlt           :: !Text
+    , _aAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationsessionsStart'' with the minimum fields required to make a request.
@@ -100,12 +110,12 @@ data AssociationsessionsStart = AssociationsessionsStart
 -- * 'aFields'
 --
 -- * 'aAlt'
-associationsessionsStart
+associationsessionsStart'
     :: Text -- ^ 'websiteUrl'
-    -> Text -- ^ 'productCode'
-    -> AssociationsessionsStart
-associationsessionsStart pAWebsiteUrl_ pAProductCode_ =
-    AssociationsessionsStart
+    -> AdsensehostAssociationsessionsStartProductCode -- ^ 'productCode'
+    -> AssociationsessionsStart'
+associationsessionsStart' pAWebsiteUrl_ pAProductCode_ =
+    AssociationsessionsStart'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
     , _aUserIp = Nothing
@@ -116,7 +126,7 @@ associationsessionsStart pAWebsiteUrl_ pAProductCode_ =
     , _aOauthToken = Nothing
     , _aProductCode = pAProductCode_
     , _aFields = Nothing
-    , _aAlt = "json"
+    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,7 +174,7 @@ aOauthToken
   = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
 
 -- | Products to associate with the user.
-aProductCode :: Lens' AssociationsessionsStart' Text
+aProductCode :: Lens' AssociationsessionsStart' AdsensehostAssociationsessionsStartProductCode
 aProductCode
   = lens _aProductCode (\ s a -> s{_aProductCode = a})
 
@@ -173,7 +183,7 @@ aFields :: Lens' AssociationsessionsStart' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
 -- | Data format for the response.
-aAlt :: Lens' AssociationsessionsStart' Text
+aAlt :: Lens' AssociationsessionsStart' Alt
 aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
 
 instance GoogleRequest AssociationsessionsStart'
@@ -181,8 +191,8 @@ instance GoogleRequest AssociationsessionsStart'
         type Rs AssociationsessionsStart' =
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AssociationsessionsStart{..}
-          = go _aQuotaUser _aPrettyPrint _aUserIp
+        requestWithRoute r u AssociationsessionsStart'{..}
+          = go _aQuotaUser (Just _aPrettyPrint) _aUserIp
               _aWebsiteLocale
               _aUserLocale
               _aKey
@@ -190,9 +200,9 @@ instance GoogleRequest AssociationsessionsStart'
               _aOauthToken
               (Just _aProductCode)
               _aFields
-              _aAlt
+              (Just _aAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AssociationsessionsStartAPI)
+                      (Proxy :: Proxy AssociationsessionsStartResource)
                       r
                       u

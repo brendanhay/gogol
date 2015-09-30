@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a user from a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlUsersDelete@.
-module Sql.Users.Delete
+module Network.Google.Resource.Sql.Users.Delete
     (
     -- * REST Resource
-      UsersDeleteAPI
+      UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete
-    , UsersDelete
+    , usersDelete'
+    , UsersDelete'
 
     -- * Request Lenses
     , udQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlUsersDelete@ which the
--- 'UsersDelete' request conforms to.
-type UsersDeleteAPI =
+-- 'UsersDelete'' request conforms to.
+type UsersDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "users" :>
-               QueryParam "name" Text :>
-                 QueryParam "host" Text :> Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "name" Text :>
+                         QueryParam "host" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes a user from a Cloud SQL instance.
 --
--- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+-- /See:/ 'usersDelete'' smart constructor.
+data UsersDelete' = UsersDelete'
     { _udQuotaUser   :: !(Maybe Text)
     , _udPrettyPrint :: !Bool
     , _udProject     :: !Text
@@ -69,7 +77,7 @@ data UsersDelete = UsersDelete
     , _udHost        :: !Text
     , _udOauthToken  :: !(Maybe Text)
     , _udFields      :: !(Maybe Text)
-    , _udAlt         :: !Text
+    , _udAlt         :: !Alt
     , _udInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -98,14 +106,14 @@ data UsersDelete = UsersDelete
 -- * 'udAlt'
 --
 -- * 'udInstance'
-usersDelete
+usersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'name'
     -> Text -- ^ 'host'
     -> Text -- ^ 'instance'
-    -> UsersDelete
-usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
-    UsersDelete
+    -> UsersDelete'
+usersDelete' pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
+    UsersDelete'
     { _udQuotaUser = Nothing
     , _udPrettyPrint = True
     , _udProject = pUdProject_
@@ -115,7 +123,7 @@ usersDelete pUdProject_ pUdName_ pUdHost_ pUdInstance_ =
     , _udHost = pUdHost_
     , _udOauthToken = Nothing
     , _udFields = Nothing
-    , _udAlt = "json"
+    , _udAlt = JSON
     , _udInstance = pUdInstance_
     }
 
@@ -166,7 +174,7 @@ udFields :: Lens' UsersDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
 -- | Data format for the response.
-udAlt :: Lens' UsersDelete' Text
+udAlt :: Lens' UsersDelete' Alt
 udAlt = lens _udAlt (\ s a -> s{_udAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -177,14 +185,18 @@ udInstance
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersDelete{..}
-          = go _udQuotaUser _udPrettyPrint _udProject _udUserIp
+        requestWithRoute r u UsersDelete'{..}
+          = go _udQuotaUser (Just _udPrettyPrint) _udProject
+              _udUserIp
               _udKey
               (Just _udName)
               (Just _udHost)
               _udOauthToken
               _udFields
-              _udAlt
+              (Just _udAlt)
               _udInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDeleteResource)
+                      r
+                      u

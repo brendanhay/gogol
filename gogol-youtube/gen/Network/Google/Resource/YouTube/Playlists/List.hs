@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistsList@.
-module YouTube.Playlists.List
+module Network.Google.Resource.YouTube.Playlists.List
     (
     -- * REST Resource
-      PlaylistsListAPI
+      PlaylistsListResource
 
     -- * Creating a Request
-    , playlistsList
-    , PlaylistsList
+    , playlistsList'
+    , PlaylistsList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -53,26 +54,33 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistsList@ which the
--- 'PlaylistsList' request conforms to.
-type PlaylistsListAPI =
+-- 'PlaylistsList'' request conforms to.
+type PlaylistsListResource =
      "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "channelId" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         Get '[JSON] PlaylistListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "channelId" Text :>
+                   QueryParam "hl" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                           QueryParam "id" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] PlaylistListResponse
 
 -- | Returns a collection of playlists that match the API request parameters.
 -- For example, you can retrieve all playlists that the authenticated user
 -- owns, or you can retrieve one or more playlists by their unique IDs.
 --
--- /See:/ 'playlistsList' smart constructor.
-data PlaylistsList = PlaylistsList
+-- /See:/ 'playlistsList'' smart constructor.
+data PlaylistsList' = PlaylistsList'
     { _plQuotaUser                     :: !(Maybe Text)
     , _plPart                          :: !Text
     , _plPrettyPrint                   :: !Bool
@@ -88,7 +96,7 @@ data PlaylistsList = PlaylistsList
     , _plOauthToken                    :: !(Maybe Text)
     , _plMaxResults                    :: !Word32
     , _plFields                        :: !(Maybe Text)
-    , _plAlt                           :: !Text
+    , _plAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistsList'' with the minimum fields required to make a request.
@@ -126,11 +134,11 @@ data PlaylistsList = PlaylistsList
 -- * 'plFields'
 --
 -- * 'plAlt'
-playlistsList
+playlistsList'
     :: Text -- ^ 'part'
-    -> PlaylistsList
-playlistsList pPlPart_ =
-    PlaylistsList
+    -> PlaylistsList'
+playlistsList' pPlPart_ =
+    PlaylistsList'
     { _plQuotaUser = Nothing
     , _plPart = pPlPart_
     , _plPrettyPrint = True
@@ -146,7 +154,7 @@ playlistsList pPlPart_ =
     , _plOauthToken = Nothing
     , _plMaxResults = 5
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -265,14 +273,15 @@ plFields :: Lens' PlaylistsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PlaylistsList' Text
+plAlt :: Lens' PlaylistsList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PlaylistsList' where
         type Rs PlaylistsList' = PlaylistListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistsList{..}
-          = go _plQuotaUser (Just _plPart) _plPrettyPrint
+        requestWithRoute r u PlaylistsList'{..}
+          = go _plQuotaUser (Just _plPart)
+              (Just _plPrettyPrint)
               _plMine
               _plUserIp
               _plChannelId
@@ -285,7 +294,9 @@ instance GoogleRequest PlaylistsList' where
               _plOauthToken
               (Just _plMaxResults)
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlaylistsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PlaylistsListResource)
+                      r
                       u

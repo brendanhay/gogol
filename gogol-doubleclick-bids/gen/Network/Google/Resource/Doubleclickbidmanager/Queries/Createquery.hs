@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a query.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerQueriesCreatequery@.
-module Doubleclickbidmanager.Queries.Createquery
+module Network.Google.Resource.Doubleclickbidmanager.Queries.Createquery
     (
     -- * REST Resource
-      QueriesCreatequeryAPI
+      QueriesCreatequeryResource
 
     -- * Creating a Request
-    , queriesCreatequery
-    , QueriesCreatequery
+    , queriesCreatequery'
+    , QueriesCreatequery'
 
     -- * Request Lenses
     , qcQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerQueriesCreatequery@ which the
--- 'QueriesCreatequery' request conforms to.
-type QueriesCreatequeryAPI =
-     "query" :> Post '[JSON] Query
+-- 'QueriesCreatequery'' request conforms to.
+type QueriesCreatequeryResource =
+     "query" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Query
 
 -- | Creates a query.
 --
--- /See:/ 'queriesCreatequery' smart constructor.
-data QueriesCreatequery = QueriesCreatequery
+-- /See:/ 'queriesCreatequery'' smart constructor.
+data QueriesCreatequery' = QueriesCreatequery'
     { _qcQuotaUser   :: !(Maybe Text)
     , _qcPrettyPrint :: !Bool
     , _qcUserIp      :: !(Maybe Text)
     , _qcKey         :: !(Maybe Text)
     , _qcOauthToken  :: !(Maybe Text)
     , _qcFields      :: !(Maybe Text)
-    , _qcAlt         :: !Text
+    , _qcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesCreatequery'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data QueriesCreatequery = QueriesCreatequery
 -- * 'qcFields'
 --
 -- * 'qcAlt'
-queriesCreatequery
-    :: QueriesCreatequery
-queriesCreatequery =
-    QueriesCreatequery
+queriesCreatequery'
+    :: QueriesCreatequery'
+queriesCreatequery' =
+    QueriesCreatequery'
     { _qcQuotaUser = Nothing
     , _qcPrettyPrint = True
     , _qcUserIp = Nothing
     , _qcKey = Nothing
     , _qcOauthToken = Nothing
     , _qcFields = Nothing
-    , _qcAlt = "json"
+    , _qcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +131,20 @@ qcFields :: Lens' QueriesCreatequery' (Maybe Text)
 qcFields = lens _qcFields (\ s a -> s{_qcFields = a})
 
 -- | Data format for the response.
-qcAlt :: Lens' QueriesCreatequery' Text
+qcAlt :: Lens' QueriesCreatequery' Alt
 qcAlt = lens _qcAlt (\ s a -> s{_qcAlt = a})
 
 instance GoogleRequest QueriesCreatequery' where
         type Rs QueriesCreatequery' = Query
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesCreatequery{..}
-          = go _qcQuotaUser _qcPrettyPrint _qcUserIp _qcKey
+        requestWithRoute r u QueriesCreatequery'{..}
+          = go _qcQuotaUser (Just _qcPrettyPrint) _qcUserIp
+              _qcKey
               _qcOauthToken
               _qcFields
-              _qcAlt
+              (Just _qcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QueriesCreatequeryAPI)
+                      (Proxy :: Proxy QueriesCreatequeryResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists views (profiles) to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesList@.
-module Analytics.Management.Profiles.List
+module Network.Google.Resource.Analytics.Management.Profiles.List
     (
     -- * REST Resource
-      ManagementProfilesListAPI
+      ManagementProfilesListResource
 
     -- * Creating a Request
-    , managementProfilesList
-    , ManagementProfilesList
+    , managementProfilesList'
+    , ManagementProfilesList'
 
     -- * Request Lenses
     , mplQuotaUser
@@ -46,22 +47,28 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesList@ which the
--- 'ManagementProfilesList' request conforms to.
-type ManagementProfilesListAPI =
+-- 'ManagementProfilesList'' request conforms to.
+type ManagementProfilesListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] Profiles
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] Profiles
 
 -- | Lists views (profiles) to which the user has access.
 --
--- /See:/ 'managementProfilesList' smart constructor.
-data ManagementProfilesList = ManagementProfilesList
+-- /See:/ 'managementProfilesList'' smart constructor.
+data ManagementProfilesList' = ManagementProfilesList'
     { _mplQuotaUser     :: !(Maybe Text)
     , _mplPrettyPrint   :: !Bool
     , _mplWebPropertyId :: !Text
@@ -72,7 +79,7 @@ data ManagementProfilesList = ManagementProfilesList
     , _mplStartIndex    :: !(Maybe Int32)
     , _mplMaxResults    :: !(Maybe Int32)
     , _mplFields        :: !(Maybe Text)
-    , _mplAlt           :: !Text
+    , _mplAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesList'' with the minimum fields required to make a request.
@@ -100,12 +107,12 @@ data ManagementProfilesList = ManagementProfilesList
 -- * 'mplFields'
 --
 -- * 'mplAlt'
-managementProfilesList
+managementProfilesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesList
-managementProfilesList pMplWebPropertyId_ pMplAccountId_ =
-    ManagementProfilesList
+    -> ManagementProfilesList'
+managementProfilesList' pMplWebPropertyId_ pMplAccountId_ =
+    ManagementProfilesList'
     { _mplQuotaUser = Nothing
     , _mplPrettyPrint = False
     , _mplWebPropertyId = pMplWebPropertyId_
@@ -116,7 +123,7 @@ managementProfilesList pMplWebPropertyId_ pMplAccountId_ =
     , _mplStartIndex = Nothing
     , _mplMaxResults = Nothing
     , _mplFields = Nothing
-    , _mplAlt = "json"
+    , _mplAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,14 +191,15 @@ mplFields
   = lens _mplFields (\ s a -> s{_mplFields = a})
 
 -- | Data format for the response.
-mplAlt :: Lens' ManagementProfilesList' Text
+mplAlt :: Lens' ManagementProfilesList' Alt
 mplAlt = lens _mplAlt (\ s a -> s{_mplAlt = a})
 
 instance GoogleRequest ManagementProfilesList' where
         type Rs ManagementProfilesList' = Profiles
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesList{..}
-          = go _mplQuotaUser _mplPrettyPrint _mplWebPropertyId
+        requestWithRoute r u ManagementProfilesList'{..}
+          = go _mplQuotaUser (Just _mplPrettyPrint)
+              _mplWebPropertyId
               _mplUserIp
               _mplAccountId
               _mplKey
@@ -199,9 +207,9 @@ instance GoogleRequest ManagementProfilesList' where
               _mplStartIndex
               _mplMaxResults
               _mplFields
-              _mplAlt
+              (Just _mplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesListAPI)
+                      (Proxy :: Proxy ManagementProfilesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- non-existent push token will report success.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPushtokensRemove@.
-module Games.Pushtokens.Remove
+module Network.Google.Resource.Games.Pushtokens.Remove
     (
     -- * REST Resource
-      PushtokensRemoveAPI
+      PushtokensRemoveResource
 
     -- * Creating a Request
-    , pushtokensRemove
-    , PushtokensRemove
+    , pushtokensRemove'
+    , PushtokensRemove'
 
     -- * Request Lenses
     , prQuotaUser
@@ -43,22 +44,30 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesPushtokensRemove@ which the
--- 'PushtokensRemove' request conforms to.
-type PushtokensRemoveAPI =
-     "pushtokens" :> "remove" :> Post '[JSON] ()
+-- 'PushtokensRemove'' request conforms to.
+type PushtokensRemoveResource =
+     "pushtokens" :>
+       "remove" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
 --
--- /See:/ 'pushtokensRemove' smart constructor.
-data PushtokensRemove = PushtokensRemove
+-- /See:/ 'pushtokensRemove'' smart constructor.
+data PushtokensRemove' = PushtokensRemove'
     { _prQuotaUser   :: !(Maybe Text)
     , _prPrettyPrint :: !Bool
     , _prUserIp      :: !(Maybe Text)
     , _prKey         :: !(Maybe Text)
     , _prOauthToken  :: !(Maybe Text)
     , _prFields      :: !(Maybe Text)
-    , _prAlt         :: !Text
+    , _prAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensRemove'' with the minimum fields required to make a request.
@@ -78,17 +87,17 @@ data PushtokensRemove = PushtokensRemove
 -- * 'prFields'
 --
 -- * 'prAlt'
-pushtokensRemove
-    :: PushtokensRemove
-pushtokensRemove =
-    PushtokensRemove
+pushtokensRemove'
+    :: PushtokensRemove'
+pushtokensRemove' =
+    PushtokensRemove'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
     , _prUserIp = Nothing
     , _prKey = Nothing
     , _prOauthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = "json"
+    , _prAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,19 +134,20 @@ prFields :: Lens' PushtokensRemove' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 -- | Data format for the response.
-prAlt :: Lens' PushtokensRemove' Text
+prAlt :: Lens' PushtokensRemove' Alt
 prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
 
 instance GoogleRequest PushtokensRemove' where
         type Rs PushtokensRemove' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PushtokensRemove{..}
-          = go _prQuotaUser _prPrettyPrint _prUserIp _prKey
+        requestWithRoute r u PushtokensRemove'{..}
+          = go _prQuotaUser (Just _prPrettyPrint) _prUserIp
+              _prKey
               _prOauthToken
               _prFields
-              _prAlt
+              (Just _prAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PushtokensRemoveAPI)
+                      (Proxy :: Proxy PushtokensRemoveResource)
                       r
                       u

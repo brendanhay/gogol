@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- query parameters.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedGenerate@.
-module AdSense.Reports.Saved.Generate
+module Network.Google.Resource.AdSense.Reports.Saved.Generate
     (
     -- * REST Resource
-      ReportsSavedGenerateAPI
+      ReportsSavedGenerateResource
 
     -- * Creating a Request
-    , reportsSavedGenerate
-    , ReportsSavedGenerate
+    , reportsSavedGenerate'
+    , ReportsSavedGenerate'
 
     -- * Request Lenses
     , rsgQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsSavedGenerate@ which the
--- 'ReportsSavedGenerate' request conforms to.
-type ReportsSavedGenerateAPI =
+-- 'ReportsSavedGenerate'' request conforms to.
+type ReportsSavedGenerateResource =
      "reports" :>
        Capture "savedReportId" Text :>
-         QueryParam "locale" Text :>
-           QueryParam "startIndex" Int32 :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] AdsenseReportsGenerateResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "startIndex" Int32 :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the saved report ID sent in the
 -- query parameters.
 --
--- /See:/ 'reportsSavedGenerate' smart constructor.
-data ReportsSavedGenerate = ReportsSavedGenerate
+-- /See:/ 'reportsSavedGenerate'' smart constructor.
+data ReportsSavedGenerate' = ReportsSavedGenerate'
     { _rsgQuotaUser     :: !(Maybe Text)
     , _rsgPrettyPrint   :: !Bool
     , _rsgUserIp        :: !(Maybe Text)
@@ -71,7 +79,7 @@ data ReportsSavedGenerate = ReportsSavedGenerate
     , _rsgStartIndex    :: !(Maybe Int32)
     , _rsgMaxResults    :: !(Maybe Int32)
     , _rsgFields        :: !(Maybe Text)
-    , _rsgAlt           :: !Text
+    , _rsgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data ReportsSavedGenerate = ReportsSavedGenerate
 -- * 'rsgFields'
 --
 -- * 'rsgAlt'
-reportsSavedGenerate
+reportsSavedGenerate'
     :: Text -- ^ 'savedReportId'
-    -> ReportsSavedGenerate
-reportsSavedGenerate pRsgSavedReportId_ =
-    ReportsSavedGenerate
+    -> ReportsSavedGenerate'
+reportsSavedGenerate' pRsgSavedReportId_ =
+    ReportsSavedGenerate'
     { _rsgQuotaUser = Nothing
     , _rsgPrettyPrint = True
     , _rsgUserIp = Nothing
@@ -114,7 +122,7 @@ reportsSavedGenerate pRsgSavedReportId_ =
     , _rsgStartIndex = Nothing
     , _rsgMaxResults = Nothing
     , _rsgFields = Nothing
-    , _rsgAlt = "json"
+    , _rsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,15 +186,15 @@ rsgFields
   = lens _rsgFields (\ s a -> s{_rsgFields = a})
 
 -- | Data format for the response.
-rsgAlt :: Lens' ReportsSavedGenerate' Text
+rsgAlt :: Lens' ReportsSavedGenerate' Alt
 rsgAlt = lens _rsgAlt (\ s a -> s{_rsgAlt = a})
 
 instance GoogleRequest ReportsSavedGenerate' where
         type Rs ReportsSavedGenerate' =
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsSavedGenerate{..}
-          = go _rsgQuotaUser _rsgPrettyPrint _rsgUserIp
+        requestWithRoute r u ReportsSavedGenerate'{..}
+          = go _rsgQuotaUser (Just _rsgPrettyPrint) _rsgUserIp
               _rsgLocale
               _rsgSavedReportId
               _rsgKey
@@ -194,9 +202,9 @@ instance GoogleRequest ReportsSavedGenerate' where
               _rsgStartIndex
               _rsgMaxResults
               _rsgFields
-              _rsgAlt
+              (Just _rsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReportsSavedGenerateAPI)
+                      (Proxy :: Proxy ReportsSavedGenerateResource)
                       r
                       u

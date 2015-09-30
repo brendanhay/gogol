@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- cannot be undone.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsDelete@.
-module ProximityBeacon.Beacons.Attachments.Delete
+module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     (
     -- * REST Resource
-      BeaconsAttachmentsDeleteAPI
+      BeaconsAttachmentsDeleteResource
 
     -- * Creating a Request
-    , beaconsAttachmentsDelete
-    , BeaconsAttachmentsDelete
+    , beaconsAttachmentsDelete'
+    , BeaconsAttachmentsDelete'
 
     -- * Request Lenses
     , badXgafv
@@ -53,10 +54,23 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsDelete@ which the
--- 'BeaconsAttachmentsDelete' request conforms to.
-type BeaconsAttachmentsDeleteAPI =
+-- 'BeaconsAttachmentsDelete'' request conforms to.
+type BeaconsAttachmentsDeleteResource =
      "v1beta1" :>
-       "{+attachmentName}" :> Delete '[JSON] Empty
+       "{+attachmentName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
@@ -64,8 +78,8 @@ type BeaconsAttachmentsDeleteAPI =
 -- delete request to control which attachment is removed. This operation
 -- cannot be undone.
 --
--- /See:/ 'beaconsAttachmentsDelete' smart constructor.
-data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
+-- /See:/ 'beaconsAttachmentsDelete'' smart constructor.
+data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
     { _badXgafv          :: !(Maybe Text)
     , _badQuotaUser      :: !(Maybe Text)
     , _badPrettyPrint    :: !Bool
@@ -113,11 +127,11 @@ data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
 -- * 'badCallback'
 --
 -- * 'badAlt'
-beaconsAttachmentsDelete
+beaconsAttachmentsDelete'
     :: Text -- ^ 'attachmentName'
-    -> BeaconsAttachmentsDelete
-beaconsAttachmentsDelete pBadAttachmentName_ =
-    BeaconsAttachmentsDelete
+    -> BeaconsAttachmentsDelete'
+beaconsAttachmentsDelete' pBadAttachmentName_ =
+    BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badQuotaUser = Nothing
     , _badPrettyPrint = True
@@ -218,10 +232,10 @@ instance GoogleRequest BeaconsAttachmentsDelete'
          where
         type Rs BeaconsAttachmentsDelete' = Empty
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsAttachmentsDelete{..}
-          = go _badXgafv _badQuotaUser _badPrettyPrint
+        requestWithRoute r u BeaconsAttachmentsDelete'{..}
+          = go _badXgafv _badQuotaUser (Just _badPrettyPrint)
               _badUploadProtocol
-              _badPp
+              (Just _badPp)
               _badAccessToken
               _badUploadType
               _badAttachmentName
@@ -230,9 +244,9 @@ instance GoogleRequest BeaconsAttachmentsDelete'
               _badOauthToken
               _badFields
               _badCallback
-              _badAlt
+              (Just _badAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconsAttachmentsDeleteAPI)
+                      (Proxy :: Proxy BeaconsAttachmentsDeleteResource)
                       r
                       u

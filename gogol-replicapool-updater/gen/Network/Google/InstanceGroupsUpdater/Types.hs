@@ -17,6 +17,18 @@ module Network.Google.InstanceGroupsUpdater.Types
     -- * Service URL
       instanceGroupsUpdaterURL
 
+    -- * RollingUpdateError
+    , RollingUpdateError
+    , rollingUpdateError
+    , rueErrors
+
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
     -- * RollingUpdate
     , RollingUpdate
     , rollingUpdate
@@ -36,6 +48,12 @@ module Network.Google.InstanceGroupsUpdater.Types
     , ruOldInstanceTemplate
     , ruDescription
     , ruInstanceGroup
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- * OperationList
     , OperationList
@@ -80,12 +98,45 @@ module Network.Google.InstanceGroupsUpdater.Types
     , oTargetLink
     , oClientOperationId
 
+    -- * InstanceUpdateError
+    , InstanceUpdateError
+    , instanceUpdateError
+    , iueErrors
+
     -- * InstanceUpdate
     , InstanceUpdate
     , instanceUpdate
     , iuStatus
     , iuError
     , iuInstance
+
+    -- * RollingUpdatePolicy
+    , RollingUpdatePolicy
+    , rollingUpdatePolicy
+    , rupMinInstanceUpdateTimeSec
+    , rupInstanceStartupTimeoutSec
+    , rupMaxNumFailedInstances
+    , rupAutoPauseAfterInstances
+    , rupMaxNumConcurrentInstances
+
+    -- * RollingUpdateErrorErrors
+    , RollingUpdateErrorErrors
+    , rollingUpdateErrorErrors
+    , rueeLocation
+    , rueeCode
+    , rueeMessage
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
+    -- * InstanceUpdateErrorErrors
+    , InstanceUpdateErrorErrors
+    , instanceUpdateErrorErrors
+    , iueeLocation
+    , iueeCode
+    , iueeMessage
 
     -- * RollingUpdateList
     , RollingUpdateList
@@ -94,6 +145,16 @@ module Network.Google.InstanceGroupsUpdater.Types
     , rulKind
     , rulItems
     , rulSelfLink
+
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.InstanceGroupsUpdater.Types.Product
@@ -101,7 +162,7 @@ import           Network.Google.InstanceGroupsUpdater.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta1' of the Google Compute Engine Instance Group Updater API.
-instanceGroupsUpdaterURL :: BaseURL
+instanceGroupsUpdaterURL :: BaseUrl
 instanceGroupsUpdaterURL
   = BaseUrl Https
       "https://www.googleapis.com/replicapoolupdater/v1beta1/projects/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove photos for the user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosDelete@.
-module Directory.Users.Photos.Delete
+module Network.Google.Resource.Directory.Users.Photos.Delete
     (
     -- * REST Resource
-      UsersPhotosDeleteAPI
+      UsersPhotosDeleteResource
 
     -- * Creating a Request
-    , usersPhotosDelete
-    , UsersPhotosDelete
+    , usersPhotosDelete'
+    , UsersPhotosDelete'
 
     -- * Request Lenses
     , updQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosDelete@ which the
--- 'UsersPhotosDelete' request conforms to.
-type UsersPhotosDeleteAPI =
+-- 'UsersPhotosDelete'' request conforms to.
+type UsersPhotosDeleteResource =
      "users" :>
        Capture "userKey" Text :>
-         "photos" :> "thumbnail" :> Delete '[JSON] ()
+         "photos" :>
+           "thumbnail" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove photos for the user
 --
--- /See:/ 'usersPhotosDelete' smart constructor.
-data UsersPhotosDelete = UsersPhotosDelete
+-- /See:/ 'usersPhotosDelete'' smart constructor.
+data UsersPhotosDelete' = UsersPhotosDelete'
     { _updQuotaUser   :: !(Maybe Text)
     , _updPrettyPrint :: !Bool
     , _updUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data UsersPhotosDelete = UsersPhotosDelete
     , _updOauthToken  :: !(Maybe Text)
     , _updUserKey     :: !Text
     , _updFields      :: !(Maybe Text)
-    , _updAlt         :: !Text
+    , _updAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosDelete'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data UsersPhotosDelete = UsersPhotosDelete
 -- * 'updFields'
 --
 -- * 'updAlt'
-usersPhotosDelete
+usersPhotosDelete'
     :: Text -- ^ 'userKey'
-    -> UsersPhotosDelete
-usersPhotosDelete pUpdUserKey_ =
-    UsersPhotosDelete
+    -> UsersPhotosDelete'
+usersPhotosDelete' pUpdUserKey_ =
+    UsersPhotosDelete'
     { _updQuotaUser = Nothing
     , _updPrettyPrint = True
     , _updUserIp = Nothing
@@ -94,7 +103,7 @@ usersPhotosDelete pUpdUserKey_ =
     , _updOauthToken = Nothing
     , _updUserKey = pUpdUserKey_
     , _updFields = Nothing
-    , _updAlt = "json"
+    , _updAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ updFields
   = lens _updFields (\ s a -> s{_updFields = a})
 
 -- | Data format for the response.
-updAlt :: Lens' UsersPhotosDelete' Text
+updAlt :: Lens' UsersPhotosDelete' Alt
 updAlt = lens _updAlt (\ s a -> s{_updAlt = a})
 
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersPhotosDelete{..}
-          = go _updQuotaUser _updPrettyPrint _updUserIp _updKey
+        requestWithRoute r u UsersPhotosDelete'{..}
+          = go _updQuotaUser (Just _updPrettyPrint) _updUserIp
+              _updKey
               _updOauthToken
               _updUserKey
               _updFields
-              _updAlt
+              (Just _updAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersPhotosDeleteAPI)
+                      (Proxy :: Proxy UsersPhotosDeleteResource)
                       r
                       u

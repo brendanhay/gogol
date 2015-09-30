@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesInsert@.
-module Sql.Instances.Insert
+module Network.Google.Resource.Sql.Instances.Insert
     (
     -- * REST Resource
-      InstancesInsertAPI
+      InstancesInsertResource
 
     -- * Creating a Request
-    , instancesInsert
-    , InstancesInsert
+    , instancesInsert'
+    , InstancesInsert'
 
     -- * Request Lenses
     , iiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesInsert@ which the
--- 'InstancesInsert' request conforms to.
-type InstancesInsertAPI =
+-- 'InstancesInsert'' request conforms to.
+type InstancesInsertResource =
      "projects" :>
        Capture "project" Text :>
-         "instances" :> Post '[JSON] Operation
+         "instances" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a new Cloud SQL instance.
 --
--- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert
+-- /See:/ 'instancesInsert'' smart constructor.
+data InstancesInsert' = InstancesInsert'
     { _iiQuotaUser   :: !(Maybe Text)
     , _iiPrettyPrint :: !Bool
     , _iiProject     :: !Text
@@ -60,7 +68,7 @@ data InstancesInsert = InstancesInsert
     , _iiKey         :: !(Maybe Text)
     , _iiOauthToken  :: !(Maybe Text)
     , _iiFields      :: !(Maybe Text)
-    , _iiAlt         :: !Text
+    , _iiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data InstancesInsert = InstancesInsert
 -- * 'iiFields'
 --
 -- * 'iiAlt'
-instancesInsert
+instancesInsert'
     :: Text -- ^ 'project'
-    -> InstancesInsert
-instancesInsert pIiProject_ =
-    InstancesInsert
+    -> InstancesInsert'
+instancesInsert' pIiProject_ =
+    InstancesInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiProject = pIiProject_
@@ -94,7 +102,7 @@ instancesInsert pIiProject_ =
     , _iiKey = Nothing
     , _iiOauthToken = Nothing
     , _iiFields = Nothing
-    , _iiAlt = "json"
+    , _iiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +145,21 @@ iiFields :: Lens' InstancesInsert' (Maybe Text)
 iiFields = lens _iiFields (\ s a -> s{_iiFields = a})
 
 -- | Data format for the response.
-iiAlt :: Lens' InstancesInsert' Text
+iiAlt :: Lens' InstancesInsert' Alt
 iiAlt = lens _iiAlt (\ s a -> s{_iiAlt = a})
 
 instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesInsert{..}
-          = go _iiQuotaUser _iiPrettyPrint _iiProject _iiUserIp
+        requestWithRoute r u InstancesInsert'{..}
+          = go _iiQuotaUser (Just _iiPrettyPrint) _iiProject
+              _iiUserIp
               _iiKey
               _iiOauthToken
               _iiFields
-              _iiAlt
+              (Just _iiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all filters for an account
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersList@.
-module Analytics.Management.Filters.List
+module Network.Google.Resource.Analytics.Management.Filters.List
     (
     -- * REST Resource
-      ManagementFiltersListAPI
+      ManagementFiltersListResource
 
     -- * Creating a Request
-    , managementFiltersList
-    , ManagementFiltersList
+    , managementFiltersList'
+    , ManagementFiltersList'
 
     -- * Request Lenses
     , mflQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersList@ which the
--- 'ManagementFiltersList' request conforms to.
-type ManagementFiltersListAPI =
+-- 'ManagementFiltersList'' request conforms to.
+type ManagementFiltersListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :> Get '[JSON] Filters
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
 --
--- /See:/ 'managementFiltersList' smart constructor.
-data ManagementFiltersList = ManagementFiltersList
+-- /See:/ 'managementFiltersList'' smart constructor.
+data ManagementFiltersList' = ManagementFiltersList'
     { _mflQuotaUser   :: !(Maybe Text)
     , _mflPrettyPrint :: !Bool
     , _mflUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data ManagementFiltersList = ManagementFiltersList
     , _mflStartIndex  :: !(Maybe Int32)
     , _mflMaxResults  :: !(Maybe Int32)
     , _mflFields      :: !(Maybe Text)
-    , _mflAlt         :: !Text
+    , _mflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data ManagementFiltersList = ManagementFiltersList
 -- * 'mflFields'
 --
 -- * 'mflAlt'
-managementFiltersList
+managementFiltersList'
     :: Text -- ^ 'accountId'
-    -> ManagementFiltersList
-managementFiltersList pMflAccountId_ =
-    ManagementFiltersList
+    -> ManagementFiltersList'
+managementFiltersList' pMflAccountId_ =
+    ManagementFiltersList'
     { _mflQuotaUser = Nothing
     , _mflPrettyPrint = False
     , _mflUserIp = Nothing
@@ -107,7 +115,7 @@ managementFiltersList pMflAccountId_ =
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
     , _mflFields = Nothing
-    , _mflAlt = "json"
+    , _mflAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +173,23 @@ mflFields
   = lens _mflFields (\ s a -> s{_mflFields = a})
 
 -- | Data format for the response.
-mflAlt :: Lens' ManagementFiltersList' Text
+mflAlt :: Lens' ManagementFiltersList' Alt
 mflAlt = lens _mflAlt (\ s a -> s{_mflAlt = a})
 
 instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersList{..}
-          = go _mflQuotaUser _mflPrettyPrint _mflUserIp
+        requestWithRoute r u ManagementFiltersList'{..}
+          = go _mflQuotaUser (Just _mflPrettyPrint) _mflUserIp
               _mflAccountId
               _mflKey
               _mflOauthToken
               _mflStartIndex
               _mflMaxResults
               _mflFields
-              _mflAlt
+              (Just _mflAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersListAPI)
+                      (Proxy :: Proxy ManagementFiltersListResource)
                       r
                       u

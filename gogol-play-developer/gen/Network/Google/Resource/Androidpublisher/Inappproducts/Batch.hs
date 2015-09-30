@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsBatch@.
-module Androidpublisher.Inappproducts.Batch
+module Network.Google.Resource.Androidpublisher.Inappproducts.Batch
     (
     -- * REST Resource
-      InappproductsBatchAPI
+      InappproductsBatchResource
 
     -- * Creating a Request
-    , inappproductsBatch
-    , InappproductsBatch
+    , inappproductsBatch'
+    , InappproductsBatch'
 
     -- * Request Lenses
     , ibQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsBatch@ which the
--- 'InappproductsBatch' request conforms to.
-type InappproductsBatchAPI =
+-- 'InappproductsBatch'' request conforms to.
+type InappproductsBatchResource =
      "inappproducts" :>
-       "batch" :> Post '[JSON] InappproductsBatchResponse
+       "batch" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] InappproductsBatchResponse
 
 --
--- /See:/ 'inappproductsBatch' smart constructor.
-data InappproductsBatch = InappproductsBatch
+-- /See:/ 'inappproductsBatch'' smart constructor.
+data InappproductsBatch' = InappproductsBatch'
     { _ibQuotaUser   :: !(Maybe Text)
     , _ibPrettyPrint :: !Bool
     , _ibUserIp      :: !(Maybe Text)
     , _ibKey         :: !(Maybe Text)
     , _ibOauthToken  :: !(Maybe Text)
     , _ibFields      :: !(Maybe Text)
-    , _ibAlt         :: !Text
+    , _ibAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsBatch'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data InappproductsBatch = InappproductsBatch
 -- * 'ibFields'
 --
 -- * 'ibAlt'
-inappproductsBatch
-    :: InappproductsBatch
-inappproductsBatch =
-    InappproductsBatch
+inappproductsBatch'
+    :: InappproductsBatch'
+inappproductsBatch' =
+    InappproductsBatch'
     { _ibQuotaUser = Nothing
     , _ibPrettyPrint = True
     , _ibUserIp = Nothing
     , _ibKey = Nothing
     , _ibOauthToken = Nothing
     , _ibFields = Nothing
-    , _ibAlt = "json"
+    , _ibAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,20 +132,21 @@ ibFields :: Lens' InappproductsBatch' (Maybe Text)
 ibFields = lens _ibFields (\ s a -> s{_ibFields = a})
 
 -- | Data format for the response.
-ibAlt :: Lens' InappproductsBatch' Text
+ibAlt :: Lens' InappproductsBatch' Alt
 ibAlt = lens _ibAlt (\ s a -> s{_ibAlt = a})
 
 instance GoogleRequest InappproductsBatch' where
         type Rs InappproductsBatch' =
              InappproductsBatchResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsBatch{..}
-          = go _ibQuotaUser _ibPrettyPrint _ibUserIp _ibKey
+        requestWithRoute r u InappproductsBatch'{..}
+          = go _ibQuotaUser (Just _ibPrettyPrint) _ibUserIp
+              _ibKey
               _ibOauthToken
               _ibFields
-              _ibAlt
+              (Just _ibAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsBatchAPI)
+                      (Proxy :: Proxy InappproductsBatchResource)
                       r
                       u

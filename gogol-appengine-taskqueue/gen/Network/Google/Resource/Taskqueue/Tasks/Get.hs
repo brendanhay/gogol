@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a particular task from a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksGet@.
-module Taskqueue.Tasks.Get
+module Network.Google.Resource.Taskqueue.Tasks.Get
     (
     -- * REST Resource
-      TasksGetAPI
+      TasksGetResource
 
     -- * Creating a Request
-    , tasksGet
-    , TasksGet
+    , tasksGet'
+    , TasksGet'
 
     -- * Request Lenses
     , tgTaskqueue
@@ -45,17 +46,25 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksGet@ which the
--- 'TasksGet' request conforms to.
-type TasksGetAPI =
+-- 'TasksGet'' request conforms to.
+type TasksGetResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
-           "tasks" :> Capture "task" Text :> Get '[JSON] Task
+           "tasks" :>
+             Capture "task" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Task
 
 -- | Get a particular task from a TaskQueue.
 --
--- /See:/ 'tasksGet' smart constructor.
-data TasksGet = TasksGet
+-- /See:/ 'tasksGet'' smart constructor.
+data TasksGet' = TasksGet'
     { _tgTaskqueue   :: !Text
     , _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
@@ -65,7 +74,7 @@ data TasksGet = TasksGet
     , _tgTask        :: !Text
     , _tgOauthToken  :: !(Maybe Text)
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksGet'' with the minimum fields required to make a request.
@@ -91,13 +100,13 @@ data TasksGet = TasksGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-tasksGet
+tasksGet'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
     -> Text -- ^ 'task'
-    -> TasksGet
-tasksGet pTgTaskqueue_ pTgProject_ pTgTask_ =
-    TasksGet
+    -> TasksGet'
+tasksGet' pTgTaskqueue_ pTgProject_ pTgTask_ =
+    TasksGet'
     { _tgTaskqueue = pTgTaskqueue_
     , _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
@@ -107,7 +116,7 @@ tasksGet pTgTaskqueue_ pTgProject_ pTgTask_ =
     , _tgTask = pTgTask_
     , _tgOauthToken = Nothing
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | The taskqueue in which the task belongs.
@@ -158,21 +167,22 @@ tgFields :: Lens' TasksGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TasksGet' Text
+tgAlt :: Lens' TasksGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksGet{..}
-          = go _tgTaskqueue _tgQuotaUser _tgPrettyPrint
+        requestWithRoute r u TasksGet'{..}
+          = go _tgTaskqueue _tgQuotaUser (Just _tgPrettyPrint)
               _tgProject
               _tgUserIp
               _tgKey
               _tgTask
               _tgOauthToken
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksGetResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves default object ACL entries on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsList@.
-module Storage.DefaultObjectAccessControls.List
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
     (
     -- * REST Resource
-      DefaultObjectAccessControlsListAPI
+      DefaultObjectAccessControlsListResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsList
-    , DefaultObjectAccessControlsList
+    , defaultObjectAccessControlsList'
+    , DefaultObjectAccessControlsList'
 
     -- * Request Lenses
     , doaclQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsList@ which the
--- 'DefaultObjectAccessControlsList' request conforms to.
-type DefaultObjectAccessControlsListAPI =
+-- 'DefaultObjectAccessControlsList'' request conforms to.
+type DefaultObjectAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
-           QueryParam "ifMetagenerationMatch" Int64 :>
-             QueryParam "ifMetagenerationNotMatch" Int64 :>
-               Get '[JSON] ObjectAccessControls
+           QueryParam "quotaUser" Text :>
+             QueryParam "ifMetagenerationMatch" Int64 :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "ifMetagenerationNotMatch" Int64 :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ObjectAccessControls
 
 -- | Retrieves default object ACL entries on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsList' smart constructor.
-data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
+-- /See:/ 'defaultObjectAccessControlsList'' smart constructor.
+data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
     { _doaclQuotaUser                :: !(Maybe Text)
     , _doaclIfMetagenerationMatch    :: !(Maybe Int64)
     , _doaclPrettyPrint              :: !Bool
@@ -67,7 +75,7 @@ data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
     , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
     , _doaclOauthToken               :: !(Maybe Text)
     , _doaclFields                   :: !(Maybe Text)
-    , _doaclAlt                      :: !Text
+    , _doaclAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data DefaultObjectAccessControlsList = DefaultObjectAccessControlsList
 -- * 'doaclFields'
 --
 -- * 'doaclAlt'
-defaultObjectAccessControlsList
+defaultObjectAccessControlsList'
     :: Text -- ^ 'bucket'
-    -> DefaultObjectAccessControlsList
-defaultObjectAccessControlsList pDoaclBucket_ =
-    DefaultObjectAccessControlsList
+    -> DefaultObjectAccessControlsList'
+defaultObjectAccessControlsList' pDoaclBucket_ =
+    DefaultObjectAccessControlsList'
     { _doaclQuotaUser = Nothing
     , _doaclIfMetagenerationMatch = Nothing
     , _doaclPrettyPrint = True
@@ -107,7 +115,7 @@ defaultObjectAccessControlsList pDoaclBucket_ =
     , _doaclIfMetagenerationNotMatch = Nothing
     , _doaclOauthToken = Nothing
     , _doaclFields = Nothing
-    , _doaclAlt = "json"
+    , _doaclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,7 +175,7 @@ doaclFields
   = lens _doaclFields (\ s a -> s{_doaclFields = a})
 
 -- | Data format for the response.
-doaclAlt :: Lens' DefaultObjectAccessControlsList' Text
+doaclAlt :: Lens' DefaultObjectAccessControlsList' Alt
 doaclAlt = lens _doaclAlt (\ s a -> s{_doaclAlt = a})
 
 instance GoogleRequest
@@ -176,18 +184,19 @@ instance GoogleRequest
              ObjectAccessControls
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsList{..}
+          DefaultObjectAccessControlsList'{..}
           = go _doaclQuotaUser _doaclIfMetagenerationMatch
-              _doaclPrettyPrint
+              (Just _doaclPrettyPrint)
               _doaclUserIp
               _doaclBucket
               _doaclKey
               _doaclIfMetagenerationNotMatch
               _doaclOauthToken
               _doaclFields
-              _doaclAlt
+              (Just _doaclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsListAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,140 +23,149 @@
 -- caption track.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsList@.
-module YouTube.Captions.List
+module Network.Google.Resource.YouTube.Captions.List
     (
     -- * REST Resource
-      CaptionsListAPI
+      CaptionsListResource
 
     -- * Creating a Request
-    , captionsList
-    , CaptionsList
+    , captionsList'
+    , CaptionsList'
 
     -- * Request Lenses
-    , clOnBehalfOf
-    , clQuotaUser
-    , clPart
-    , clPrettyPrint
-    , clUserIp
-    , clOnBehalfOfContentOwner
-    , clVideoId
-    , clKey
-    , clId
-    , clOauthToken
-    , clFields
-    , clAlt
+    , cllOnBehalfOf
+    , cllQuotaUser
+    , cllPart
+    , cllPrettyPrint
+    , cllUserIp
+    , cllOnBehalfOfContentOwner
+    , cllVideoId
+    , cllKey
+    , cllId
+    , cllOauthToken
+    , cllFields
+    , cllAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCaptionsList@ which the
--- 'CaptionsList' request conforms to.
-type CaptionsListAPI =
+-- 'CaptionsList'' request conforms to.
+type CaptionsListResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "part" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "videoId" Text :>
-               QueryParam "id" Text :>
-                 Get '[JSON] CaptionListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "videoId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] CaptionListResponse
 
 -- | Returns a list of caption tracks that are associated with a specified
 -- video. Note that the API response does not contain the actual captions
 -- and that the captions.download method provides the ability to retrieve a
 -- caption track.
 --
--- /See:/ 'captionsList' smart constructor.
-data CaptionsList = CaptionsList
-    { _clOnBehalfOf             :: !(Maybe Text)
-    , _clQuotaUser              :: !(Maybe Text)
-    , _clPart                   :: !Text
-    , _clPrettyPrint            :: !Bool
-    , _clUserIp                 :: !(Maybe Text)
-    , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clVideoId                :: !Text
-    , _clKey                    :: !(Maybe Text)
-    , _clId                     :: !(Maybe Text)
-    , _clOauthToken             :: !(Maybe Text)
-    , _clFields                 :: !(Maybe Text)
-    , _clAlt                    :: !Text
+-- /See:/ 'captionsList'' smart constructor.
+data CaptionsList' = CaptionsList'
+    { _cllOnBehalfOf             :: !(Maybe Text)
+    , _cllQuotaUser              :: !(Maybe Text)
+    , _cllPart                   :: !Text
+    , _cllPrettyPrint            :: !Bool
+    , _cllUserIp                 :: !(Maybe Text)
+    , _cllOnBehalfOfContentOwner :: !(Maybe Text)
+    , _cllVideoId                :: !Text
+    , _cllKey                    :: !(Maybe Text)
+    , _cllId                     :: !(Maybe Text)
+    , _cllOauthToken             :: !(Maybe Text)
+    , _cllFields                 :: !(Maybe Text)
+    , _cllAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'clOnBehalfOf'
+-- * 'cllOnBehalfOf'
 --
--- * 'clQuotaUser'
+-- * 'cllQuotaUser'
 --
--- * 'clPart'
+-- * 'cllPart'
 --
--- * 'clPrettyPrint'
+-- * 'cllPrettyPrint'
 --
--- * 'clUserIp'
+-- * 'cllUserIp'
 --
--- * 'clOnBehalfOfContentOwner'
+-- * 'cllOnBehalfOfContentOwner'
 --
--- * 'clVideoId'
+-- * 'cllVideoId'
 --
--- * 'clKey'
+-- * 'cllKey'
 --
--- * 'clId'
+-- * 'cllId'
 --
--- * 'clOauthToken'
+-- * 'cllOauthToken'
 --
--- * 'clFields'
+-- * 'cllFields'
 --
--- * 'clAlt'
-captionsList
+-- * 'cllAlt'
+captionsList'
     :: Text -- ^ 'part'
     -> Text -- ^ 'videoId'
-    -> CaptionsList
-captionsList pClPart_ pClVideoId_ =
-    CaptionsList
-    { _clOnBehalfOf = Nothing
-    , _clQuotaUser = Nothing
-    , _clPart = pClPart_
-    , _clPrettyPrint = True
-    , _clUserIp = Nothing
-    , _clOnBehalfOfContentOwner = Nothing
-    , _clVideoId = pClVideoId_
-    , _clKey = Nothing
-    , _clId = Nothing
-    , _clOauthToken = Nothing
-    , _clFields = Nothing
-    , _clAlt = "json"
+    -> CaptionsList'
+captionsList' pCllPart_ pCllVideoId_ =
+    CaptionsList'
+    { _cllOnBehalfOf = Nothing
+    , _cllQuotaUser = Nothing
+    , _cllPart = pCllPart_
+    , _cllPrettyPrint = True
+    , _cllUserIp = Nothing
+    , _cllOnBehalfOfContentOwner = Nothing
+    , _cllVideoId = pCllVideoId_
+    , _cllKey = Nothing
+    , _cllId = Nothing
+    , _cllOauthToken = Nothing
+    , _cllFields = Nothing
+    , _cllAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is on behalf of.
-clOnBehalfOf :: Lens' CaptionsList' (Maybe Text)
-clOnBehalfOf
-  = lens _clOnBehalfOf (\ s a -> s{_clOnBehalfOf = a})
+cllOnBehalfOf :: Lens' CaptionsList' (Maybe Text)
+cllOnBehalfOf
+  = lens _cllOnBehalfOf
+      (\ s a -> s{_cllOnBehalfOf = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-clQuotaUser :: Lens' CaptionsList' (Maybe Text)
-clQuotaUser
-  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
+cllQuotaUser :: Lens' CaptionsList' (Maybe Text)
+cllQuotaUser
+  = lens _cllQuotaUser (\ s a -> s{_cllQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- caption resource parts that the API response will include. The part
 -- names that you can include in the parameter value are id and snippet.
-clPart :: Lens' CaptionsList' Text
-clPart = lens _clPart (\ s a -> s{_clPart = a})
+cllPart :: Lens' CaptionsList' Text
+cllPart = lens _cllPart (\ s a -> s{_cllPart = a})
 
 -- | Returns response with indentations and line breaks.
-clPrettyPrint :: Lens' CaptionsList' Bool
-clPrettyPrint
-  = lens _clPrettyPrint
-      (\ s a -> s{_clPrettyPrint = a})
+cllPrettyPrint :: Lens' CaptionsList' Bool
+cllPrettyPrint
+  = lens _cllPrettyPrint
+      (\ s a -> s{_cllPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' CaptionsList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+cllUserIp :: Lens' CaptionsList' (Maybe Text)
+cllUserIp
+  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -167,56 +177,60 @@ clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-clOnBehalfOfContentOwner :: Lens' CaptionsList' (Maybe Text)
-clOnBehalfOfContentOwner
-  = lens _clOnBehalfOfContentOwner
-      (\ s a -> s{_clOnBehalfOfContentOwner = a})
+cllOnBehalfOfContentOwner :: Lens' CaptionsList' (Maybe Text)
+cllOnBehalfOfContentOwner
+  = lens _cllOnBehalfOfContentOwner
+      (\ s a -> s{_cllOnBehalfOfContentOwner = a})
 
 -- | The videoId parameter specifies the YouTube video ID of the video for
 -- which the API should return caption tracks.
-clVideoId :: Lens' CaptionsList' Text
-clVideoId
-  = lens _clVideoId (\ s a -> s{_clVideoId = a})
+cllVideoId :: Lens' CaptionsList' Text
+cllVideoId
+  = lens _cllVideoId (\ s a -> s{_cllVideoId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CaptionsList' (Maybe Text)
-clKey = lens _clKey (\ s a -> s{_clKey = a})
+cllKey :: Lens' CaptionsList' (Maybe Text)
+cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify
 -- the caption resources that should be retrieved. Each ID must identify a
 -- caption track associated with the specified video.
-clId :: Lens' CaptionsList' (Maybe Text)
-clId = lens _clId (\ s a -> s{_clId = a})
+cllId :: Lens' CaptionsList' (Maybe Text)
+cllId = lens _cllId (\ s a -> s{_cllId = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CaptionsList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+cllOauthToken :: Lens' CaptionsList' (Maybe Text)
+cllOauthToken
+  = lens _cllOauthToken
+      (\ s a -> s{_cllOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-clFields :: Lens' CaptionsList' (Maybe Text)
-clFields = lens _clFields (\ s a -> s{_clFields = a})
+cllFields :: Lens' CaptionsList' (Maybe Text)
+cllFields
+  = lens _cllFields (\ s a -> s{_cllFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CaptionsList' Text
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+cllAlt :: Lens' CaptionsList' Alt
+cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
 
 instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsList{..}
-          = go _clOnBehalfOf _clQuotaUser (Just _clPart)
-              _clPrettyPrint
-              _clUserIp
-              _clOnBehalfOfContentOwner
-              (Just _clVideoId)
-              _clKey
-              _clId
-              _clOauthToken
-              _clFields
-              _clAlt
+        requestWithRoute r u CaptionsList'{..}
+          = go _cllOnBehalfOf _cllQuotaUser (Just _cllPart)
+              (Just _cllPrettyPrint)
+              _cllUserIp
+              _cllOnBehalfOfContentOwner
+              (Just _cllVideoId)
+              _cllKey
+              _cllId
+              _cllOauthToken
+              _cllFields
+              (Just _cllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CaptionsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CaptionsListResource)
+                      r
                       u

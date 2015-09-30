@@ -28,49 +28,49 @@ module Network.Google.ResourceManager
     -- * REST Resources
 
     -- ** CloudresourcemanagerOrganizationsGet
-    , module Cloudresourcemanager.Organizations.Get
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.Get
 
     -- ** CloudresourcemanagerOrganizationsGetIAMPolicy
-    , module Cloudresourcemanager.Organizations.GetIAMPolicy
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
 
     -- ** CloudresourcemanagerOrganizationsList
-    , module Cloudresourcemanager.Organizations.List
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.List
 
     -- ** CloudresourcemanagerOrganizationsSetIAMPolicy
-    , module Cloudresourcemanager.Organizations.SetIAMPolicy
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
 
     -- ** CloudresourcemanagerOrganizationsTestIAMPermissions
-    , module Cloudresourcemanager.Organizations.TestIAMPermissions
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
 
     -- ** CloudresourcemanagerOrganizationsUpdate
-    , module Cloudresourcemanager.Organizations.Update
+    , module Network.Google.Resource.Cloudresourcemanager.Organizations.Update
 
     -- ** CloudresourcemanagerProjectsCreate
-    , module Cloudresourcemanager.Projects.Create
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.Create
 
     -- ** CloudresourcemanagerProjectsDelete
-    , module Cloudresourcemanager.Projects.Delete
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.Delete
 
     -- ** CloudresourcemanagerProjectsGet
-    , module Cloudresourcemanager.Projects.Get
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.Get
 
     -- ** CloudresourcemanagerProjectsGetIAMPolicy
-    , module Cloudresourcemanager.Projects.GetIAMPolicy
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
 
     -- ** CloudresourcemanagerProjectsList
-    , module Cloudresourcemanager.Projects.List
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.List
 
     -- ** CloudresourcemanagerProjectsSetIAMPolicy
-    , module Cloudresourcemanager.Projects.SetIAMPolicy
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
 
     -- ** CloudresourcemanagerProjectsTestIAMPermissions
-    , module Cloudresourcemanager.Projects.TestIAMPermissions
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
 
     -- ** CloudresourcemanagerProjectsUndelete
-    , module Cloudresourcemanager.Projects.Undelete
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
 
     -- ** CloudresourcemanagerProjectsUpdate
-    , module Cloudresourcemanager.Projects.Update
+    , module Network.Google.Resource.Cloudresourcemanager.Projects.Update
 
     -- * Types
 
@@ -125,6 +125,10 @@ module Network.Google.ResourceManager
     , testIAMPermissionsResponse
     , tiamprPermissions
 
+    -- ** ProjectLabels
+    , ProjectLabels
+    , projectLabels
+
     -- ** Policy
     , Policy
     , policy
@@ -174,7 +178,22 @@ import           Network.Google.ResourceManager.Types
 TODO
 -}
 
-type ResourceManagerAPI = Organizations :<|> Projects
+type ResourceManagerAPI =
+     OrganizationsListResource :<|>
+       OrganizationsGetIAMPolicyResource
+       :<|> OrganizationsGetResource
+       :<|> OrganizationsSetIAMPolicyResource
+       :<|> OrganizationsTestIAMPermissionsResource
+       :<|> OrganizationsUpdateResource
+       :<|> ProjectsListResource
+       :<|> ProjectsUndeleteResource
+       :<|> ProjectsGetIAMPolicyResource
+       :<|> ProjectsGetResource
+       :<|> ProjectsCreateResource
+       :<|> ProjectsSetIAMPolicyResource
+       :<|> ProjectsTestIAMPermissionsResource
+       :<|> ProjectsDeleteResource
+       :<|> ProjectsUpdateResource
 
 resourceManagerAPI :: Proxy ResourceManagerAPI
 resourceManagerAPI = Proxy

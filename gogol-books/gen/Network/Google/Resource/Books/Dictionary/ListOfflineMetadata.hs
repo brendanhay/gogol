@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of offline dictionary meatadata available
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksDictionaryListOfflineMetadata@.
-module Books.Dictionary.ListOfflineMetadata
+module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
     (
     -- * REST Resource
-      DictionaryListOfflineMetadataAPI
+      DictionaryListOfflineMetadataResource
 
     -- * Creating a Request
-    , dictionaryListOfflineMetadata
-    , DictionaryListOfflineMetadata
+    , dictionaryListOfflineMetadata'
+    , DictionaryListOfflineMetadata'
 
     -- * Request Lenses
     , dlomQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksDictionaryListOfflineMetadata@ which the
--- 'DictionaryListOfflineMetadata' request conforms to.
-type DictionaryListOfflineMetadataAPI =
+-- 'DictionaryListOfflineMetadata'' request conforms to.
+type DictionaryListOfflineMetadataResource =
      "dictionary" :>
        "listOfflineMetadata" :>
-         QueryParam "cpksver" Text :> Get '[JSON] Metadata
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "cpksver" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Metadata
 
 -- | Returns a list of offline dictionary meatadata available
 --
--- /See:/ 'dictionaryListOfflineMetadata' smart constructor.
-data DictionaryListOfflineMetadata = DictionaryListOfflineMetadata
+-- /See:/ 'dictionaryListOfflineMetadata'' smart constructor.
+data DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
     { _dlomQuotaUser   :: !(Maybe Text)
     , _dlomPrettyPrint :: !Bool
     , _dlomCpksver     :: !Text
@@ -60,7 +68,7 @@ data DictionaryListOfflineMetadata = DictionaryListOfflineMetadata
     , _dlomKey         :: !(Maybe Text)
     , _dlomOauthToken  :: !(Maybe Text)
     , _dlomFields      :: !(Maybe Text)
-    , _dlomAlt         :: !Text
+    , _dlomAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DictionaryListOfflineMetadata'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data DictionaryListOfflineMetadata = DictionaryListOfflineMetadata
 -- * 'dlomFields'
 --
 -- * 'dlomAlt'
-dictionaryListOfflineMetadata
+dictionaryListOfflineMetadata'
     :: Text -- ^ 'cpksver'
-    -> DictionaryListOfflineMetadata
-dictionaryListOfflineMetadata pDlomCpksver_ =
-    DictionaryListOfflineMetadata
+    -> DictionaryListOfflineMetadata'
+dictionaryListOfflineMetadata' pDlomCpksver_ =
+    DictionaryListOfflineMetadata'
     { _dlomQuotaUser = Nothing
     , _dlomPrettyPrint = True
     , _dlomCpksver = pDlomCpksver_
@@ -94,7 +102,7 @@ dictionaryListOfflineMetadata pDlomCpksver_ =
     , _dlomKey = Nothing
     , _dlomOauthToken = Nothing
     , _dlomFields = Nothing
-    , _dlomAlt = "json"
+    , _dlomAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ dlomFields
   = lens _dlomFields (\ s a -> s{_dlomFields = a})
 
 -- | Data format for the response.
-dlomAlt :: Lens' DictionaryListOfflineMetadata' Text
+dlomAlt :: Lens' DictionaryListOfflineMetadata' Alt
 dlomAlt = lens _dlomAlt (\ s a -> s{_dlomAlt = a})
 
 instance GoogleRequest DictionaryListOfflineMetadata'
@@ -148,16 +156,17 @@ instance GoogleRequest DictionaryListOfflineMetadata'
         type Rs DictionaryListOfflineMetadata' = Metadata
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          DictionaryListOfflineMetadata{..}
-          = go _dlomQuotaUser _dlomPrettyPrint
+          DictionaryListOfflineMetadata'{..}
+          = go _dlomQuotaUser (Just _dlomPrettyPrint)
               (Just _dlomCpksver)
               _dlomUserIp
               _dlomKey
               _dlomOauthToken
               _dlomFields
-              _dlomAlt
+              (Just _dlomAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DictionaryListOfflineMetadataAPI)
+                      (Proxy ::
+                         Proxy DictionaryListOfflineMetadataResource)
                       r
                       u

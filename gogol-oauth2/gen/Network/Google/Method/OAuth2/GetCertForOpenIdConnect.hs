@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @Oauth2GetCertForOpenIdConnect@.
-module OAuth2.GetCertForOpenIdConnect
+module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
     (
     -- * REST Resource
-      GetCertForOpenIdConnectAPI
+      GetCertForOpenIdConnectMethod
 
     -- * Creating a Request
-    , getCertForOpenIdConnect
-    , GetCertForOpenIdConnect
+    , getCertForOpenIdConnect'
+    , GetCertForOpenIdConnect'
 
     -- * Request Lenses
     , gcfoicQuotaUser
@@ -42,20 +43,29 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @Oauth2GetCertForOpenIdConnect@ which the
--- 'GetCertForOpenIdConnect' request conforms to.
-type GetCertForOpenIdConnectAPI =
-     "oauth2" :> "v2" :> "certs" :> Get '[JSON] Jwk
+-- 'GetCertForOpenIdConnect'' request conforms to.
+type GetCertForOpenIdConnectMethod =
+     "oauth2" :>
+       "v2" :>
+         "certs" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Jwk
 
 --
--- /See:/ 'getCertForOpenIdConnect' smart constructor.
-data GetCertForOpenIdConnect = GetCertForOpenIdConnect
+-- /See:/ 'getCertForOpenIdConnect'' smart constructor.
+data GetCertForOpenIdConnect' = GetCertForOpenIdConnect'
     { _gcfoicQuotaUser   :: !(Maybe Text)
     , _gcfoicPrettyPrint :: !Bool
     , _gcfoicUserIp      :: !(Maybe Text)
     , _gcfoicKey         :: !(Maybe Text)
     , _gcfoicOauthToken  :: !(Maybe Text)
     , _gcfoicFields      :: !(Maybe Text)
-    , _gcfoicAlt         :: !Text
+    , _gcfoicAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCertForOpenIdConnect'' with the minimum fields required to make a request.
@@ -75,17 +85,17 @@ data GetCertForOpenIdConnect = GetCertForOpenIdConnect
 -- * 'gcfoicFields'
 --
 -- * 'gcfoicAlt'
-getCertForOpenIdConnect
-    :: GetCertForOpenIdConnect
-getCertForOpenIdConnect =
-    GetCertForOpenIdConnect
+getCertForOpenIdConnect'
+    :: GetCertForOpenIdConnect'
+getCertForOpenIdConnect' =
+    GetCertForOpenIdConnect'
     { _gcfoicQuotaUser = Nothing
     , _gcfoicPrettyPrint = True
     , _gcfoicUserIp = Nothing
     , _gcfoicKey = Nothing
     , _gcfoicOauthToken = Nothing
     , _gcfoicFields = Nothing
-    , _gcfoicAlt = "json"
+    , _gcfoicAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,22 +137,22 @@ gcfoicFields
   = lens _gcfoicFields (\ s a -> s{_gcfoicFields = a})
 
 -- | Data format for the response.
-gcfoicAlt :: Lens' GetCertForOpenIdConnect' Text
+gcfoicAlt :: Lens' GetCertForOpenIdConnect' Alt
 gcfoicAlt
   = lens _gcfoicAlt (\ s a -> s{_gcfoicAlt = a})
 
 instance GoogleRequest GetCertForOpenIdConnect' where
         type Rs GetCertForOpenIdConnect' = Jwk
         request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u GetCertForOpenIdConnect{..}
-          = go _gcfoicQuotaUser _gcfoicPrettyPrint
+        requestWithRoute r u GetCertForOpenIdConnect'{..}
+          = go _gcfoicQuotaUser (Just _gcfoicPrettyPrint)
               _gcfoicUserIp
               _gcfoicKey
               _gcfoicOauthToken
               _gcfoicFields
-              _gcfoicAlt
+              (Just _gcfoicAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GetCertForOpenIdConnectAPI)
+                      (Proxy :: Proxy GetCertForOpenIdConnectMethod)
                       r
                       u

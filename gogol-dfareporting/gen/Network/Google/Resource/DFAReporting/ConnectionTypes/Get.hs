@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one connection type by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingConnectionTypesGet@.
-module DFAReporting.ConnectionTypes.Get
+module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
     (
     -- * REST Resource
-      ConnectionTypesGetAPI
+      ConnectionTypesGetResource
 
     -- * Creating a Request
-    , connectionTypesGet
-    , ConnectionTypesGet
+    , connectionTypesGet'
+    , ConnectionTypesGet'
 
     -- * Request Lenses
     , ctgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingConnectionTypesGet@ which the
--- 'ConnectionTypesGet' request conforms to.
-type ConnectionTypesGetAPI =
+-- 'ConnectionTypesGet'' request conforms to.
+type ConnectionTypesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "connectionTypes" :>
-           Capture "id" Int64 :> Get '[JSON] ConnectionType
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ConnectionType
 
 -- | Gets one connection type by ID.
 --
--- /See:/ 'connectionTypesGet' smart constructor.
-data ConnectionTypesGet = ConnectionTypesGet
+-- /See:/ 'connectionTypesGet'' smart constructor.
+data ConnectionTypesGet' = ConnectionTypesGet'
     { _ctgQuotaUser   :: !(Maybe Text)
     , _ctgPrettyPrint :: !Bool
     , _ctgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ConnectionTypesGet = ConnectionTypesGet
     , _ctgId          :: !Int64
     , _ctgOauthToken  :: !(Maybe Text)
     , _ctgFields      :: !(Maybe Text)
-    , _ctgAlt         :: !Text
+    , _ctgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ConnectionTypesGet = ConnectionTypesGet
 -- * 'ctgFields'
 --
 -- * 'ctgAlt'
-connectionTypesGet
+connectionTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> ConnectionTypesGet
-connectionTypesGet pCtgProfileId_ pCtgId_ =
-    ConnectionTypesGet
+    -> ConnectionTypesGet'
+connectionTypesGet' pCtgProfileId_ pCtgId_ =
+    ConnectionTypesGet'
     { _ctgQuotaUser = Nothing
     , _ctgPrettyPrint = True
     , _ctgUserIp = Nothing
@@ -101,7 +109,7 @@ connectionTypesGet pCtgProfileId_ pCtgId_ =
     , _ctgId = pCtgId_
     , _ctgOauthToken = Nothing
     , _ctgFields = Nothing
-    , _ctgAlt = "json"
+    , _ctgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ ctgFields
   = lens _ctgFields (\ s a -> s{_ctgFields = a})
 
 -- | Data format for the response.
-ctgAlt :: Lens' ConnectionTypesGet' Text
+ctgAlt :: Lens' ConnectionTypesGet' Alt
 ctgAlt = lens _ctgAlt (\ s a -> s{_ctgAlt = a})
 
 instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ConnectionTypesGet{..}
-          = go _ctgQuotaUser _ctgPrettyPrint _ctgUserIp
+        requestWithRoute r u ConnectionTypesGet'{..}
+          = go _ctgQuotaUser (Just _ctgPrettyPrint) _ctgUserIp
               _ctgProfileId
               _ctgKey
               _ctgId
               _ctgOauthToken
               _ctgFields
-              _ctgAlt
+              (Just _ctgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ConnectionTypesGetAPI)
+                      (Proxy :: Proxy ConnectionTypesGetResource)
                       r
                       u

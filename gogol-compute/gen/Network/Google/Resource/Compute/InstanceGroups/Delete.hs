@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsDelete@.
-module Compute.InstanceGroups.Delete
+module Network.Google.Resource.Compute.InstanceGroups.Delete
     (
     -- * REST Resource
-      InstanceGroupsDeleteAPI
+      InstanceGroupsDeleteResource
 
     -- * Creating a Request
-    , instanceGroupsDelete
-    , InstanceGroupsDelete
+    , instanceGroupsDelete'
+    , InstanceGroupsDelete'
 
     -- * Request Lenses
     , igdQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsDelete@ which the
--- 'InstanceGroupsDelete' request conforms to.
-type InstanceGroupsDeleteAPI =
+-- 'InstanceGroupsDelete'' request conforms to.
+type InstanceGroupsDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance group.
 --
--- /See:/ 'instanceGroupsDelete' smart constructor.
-data InstanceGroupsDelete = InstanceGroupsDelete
+-- /See:/ 'instanceGroupsDelete'' smart constructor.
+data InstanceGroupsDelete' = InstanceGroupsDelete'
     { _igdQuotaUser     :: !(Maybe Text)
     , _igdPrettyPrint   :: !Bool
     , _igdProject       :: !Text
@@ -67,7 +74,7 @@ data InstanceGroupsDelete = InstanceGroupsDelete
     , _igdOauthToken    :: !(Maybe Text)
     , _igdInstanceGroup :: !Text
     , _igdFields        :: !(Maybe Text)
-    , _igdAlt           :: !Text
+    , _igdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsDelete'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data InstanceGroupsDelete = InstanceGroupsDelete
 -- * 'igdFields'
 --
 -- * 'igdAlt'
-instanceGroupsDelete
+instanceGroupsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
-    -> InstanceGroupsDelete
-instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
-    InstanceGroupsDelete
+    -> InstanceGroupsDelete'
+instanceGroupsDelete' pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
+    InstanceGroupsDelete'
     { _igdQuotaUser = Nothing
     , _igdPrettyPrint = True
     , _igdProject = pIgdProject_
@@ -109,7 +116,7 @@ instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
     , _igdOauthToken = Nothing
     , _igdInstanceGroup = pIgdInstanceGroup_
     , _igdFields = Nothing
-    , _igdAlt = "json"
+    , _igdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ igdFields
   = lens _igdFields (\ s a -> s{_igdFields = a})
 
 -- | Data format for the response.
-igdAlt :: Lens' InstanceGroupsDelete' Text
+igdAlt :: Lens' InstanceGroupsDelete' Alt
 igdAlt = lens _igdAlt (\ s a -> s{_igdAlt = a})
 
 instance GoogleRequest InstanceGroupsDelete' where
         type Rs InstanceGroupsDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsDelete{..}
-          = go _igdQuotaUser _igdPrettyPrint _igdProject
+        requestWithRoute r u InstanceGroupsDelete'{..}
+          = go _igdQuotaUser (Just _igdPrettyPrint) _igdProject
               _igdUserIp
               _igdZone
               _igdKey
               _igdOauthToken
               _igdInstanceGroup
               _igdFields
-              _igdAlt
+              (Just _igdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsDeleteAPI)
+                      (Proxy :: Proxy InstanceGroupsDeleteResource)
                       r
                       u

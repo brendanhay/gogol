@@ -27,103 +27,103 @@ module Network.Google.FusionTables
     -- * REST Resources
 
     -- ** FusiontablesColumnDelete
-    , module FusionTables.Column.Delete
+    , module Network.Google.Resource.FusionTables.Column.Delete
 
     -- ** FusiontablesColumnGet
-    , module FusionTables.Column.Get
+    , module Network.Google.Resource.FusionTables.Column.Get
 
     -- ** FusiontablesColumnInsert
-    , module FusionTables.Column.Insert
+    , module Network.Google.Resource.FusionTables.Column.Insert
 
     -- ** FusiontablesColumnList
-    , module FusionTables.Column.List
+    , module Network.Google.Resource.FusionTables.Column.List
 
     -- ** FusiontablesColumnPatch
-    , module FusionTables.Column.Patch
+    , module Network.Google.Resource.FusionTables.Column.Patch
 
     -- ** FusiontablesColumnUpdate
-    , module FusionTables.Column.Update
+    , module Network.Google.Resource.FusionTables.Column.Update
 
     -- ** FusiontablesQuerySql
-    , module FusionTables.Query.Sql
+    , module Network.Google.Resource.FusionTables.Query.Sql
 
     -- ** FusiontablesQuerySqlGet
-    , module FusionTables.Query.SqlGet
+    , module Network.Google.Resource.FusionTables.Query.SqlGet
 
     -- ** FusiontablesStyleDelete
-    , module FusionTables.Style.Delete
+    , module Network.Google.Resource.FusionTables.Style.Delete
 
     -- ** FusiontablesStyleGet
-    , module FusionTables.Style.Get
+    , module Network.Google.Resource.FusionTables.Style.Get
 
     -- ** FusiontablesStyleInsert
-    , module FusionTables.Style.Insert
+    , module Network.Google.Resource.FusionTables.Style.Insert
 
     -- ** FusiontablesStyleList
-    , module FusionTables.Style.List
+    , module Network.Google.Resource.FusionTables.Style.List
 
     -- ** FusiontablesStylePatch
-    , module FusionTables.Style.Patch
+    , module Network.Google.Resource.FusionTables.Style.Patch
 
     -- ** FusiontablesStyleUpdate
-    , module FusionTables.Style.Update
+    , module Network.Google.Resource.FusionTables.Style.Update
 
     -- ** FusiontablesTableCopy
-    , module FusionTables.Table.Copy
+    , module Network.Google.Resource.FusionTables.Table.Copy
 
     -- ** FusiontablesTableDelete
-    , module FusionTables.Table.Delete
+    , module Network.Google.Resource.FusionTables.Table.Delete
 
     -- ** FusiontablesTableGet
-    , module FusionTables.Table.Get
+    , module Network.Google.Resource.FusionTables.Table.Get
 
     -- ** FusiontablesTableImportRows
-    , module FusionTables.Table.ImportRows
+    , module Network.Google.Resource.FusionTables.Table.ImportRows
 
     -- ** FusiontablesTableImportTable
-    , module FusionTables.Table.ImportTable
+    , module Network.Google.Resource.FusionTables.Table.ImportTable
 
     -- ** FusiontablesTableInsert
-    , module FusionTables.Table.Insert
+    , module Network.Google.Resource.FusionTables.Table.Insert
 
     -- ** FusiontablesTableList
-    , module FusionTables.Table.List
+    , module Network.Google.Resource.FusionTables.Table.List
 
     -- ** FusiontablesTablePatch
-    , module FusionTables.Table.Patch
+    , module Network.Google.Resource.FusionTables.Table.Patch
 
     -- ** FusiontablesTableReplaceRows
-    , module FusionTables.Table.ReplaceRows
+    , module Network.Google.Resource.FusionTables.Table.ReplaceRows
 
     -- ** FusiontablesTableUpdate
-    , module FusionTables.Table.Update
+    , module Network.Google.Resource.FusionTables.Table.Update
 
     -- ** FusiontablesTaskDelete
-    , module FusionTables.Task.Delete
+    , module Network.Google.Resource.FusionTables.Task.Delete
 
     -- ** FusiontablesTaskGet
-    , module FusionTables.Task.Get
+    , module Network.Google.Resource.FusionTables.Task.Get
 
     -- ** FusiontablesTaskList
-    , module FusionTables.Task.List
+    , module Network.Google.Resource.FusionTables.Task.List
 
     -- ** FusiontablesTemplateDelete
-    , module FusionTables.Template.Delete
+    , module Network.Google.Resource.FusionTables.Template.Delete
 
     -- ** FusiontablesTemplateGet
-    , module FusionTables.Template.Get
+    , module Network.Google.Resource.FusionTables.Template.Get
 
     -- ** FusiontablesTemplateInsert
-    , module FusionTables.Template.Insert
+    , module Network.Google.Resource.FusionTables.Template.Insert
 
     -- ** FusiontablesTemplateList
-    , module FusionTables.Template.List
+    , module Network.Google.Resource.FusionTables.Template.List
 
     -- ** FusiontablesTemplatePatch
-    , module FusionTables.Template.Patch
+    , module Network.Google.Resource.FusionTables.Template.Patch
 
     -- ** FusiontablesTemplateUpdate
-    , module FusionTables.Template.Update
+    , module Network.Google.Resource.FusionTables.Template.Update
 
     -- * Types
 
@@ -149,6 +149,12 @@ module Network.Google.FusionTables
     , sfKind
     , sfGradient
     , sfColumnName
+
+    -- ** ColumnBaseColumn
+    , ColumnBaseColumn
+    , columnBaseColumn
+    , cbcTableIndex
+    , cbcColumnId
 
     -- ** Sqlresponse
     , Sqlresponse
@@ -227,6 +233,12 @@ module Network.Google.FusionTables
     , gGeometry
     , gType
 
+    -- ** StyleFunctionGradientColors
+    , StyleFunctionGradientColors
+    , styleFunctionGradientColors
+    , sfgcColor
+    , sfgcOpacity
+
     -- ** Task
     , Task
     , task
@@ -245,12 +257,12 @@ module Network.Google.FusionTables
     -- ** Template
     , Template
     , template
-    , ttAutomaticColumnNames
-    , ttTemplateId
-    , ttKind
-    , ttBody
-    , ttName
-    , ttTableId
+    , temeAutomaticColumnNames
+    , temeTemplateId
+    , temeKind
+    , temeBody
+    , temeName
+    , temeTableId
 
     -- ** PointStyle
     , PointStyle
@@ -269,6 +281,13 @@ module Network.Google.FusionTables
     , psFillOpacity
     , psStrokeWeightStyler
     , psStrokeColor
+
+    -- ** StyleFunctionGradient
+    , StyleFunctionGradient
+    , styleFunctionGradient
+    , sfgMax
+    , sfgMin
+    , sfgColors
 
     -- ** Table
     , Table
@@ -311,6 +330,9 @@ module Network.Google.FusionTables
     , lsStrokeOpacity
     , lsStrokeWeightStyler
     , lsStrokeColor
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -354,8 +376,38 @@ TODO
 -}
 
 type FusionTablesAPI =
-     Style :<|> Query :<|> Task :<|> Template :<|> Column
-       :<|> Table
+     StyleInsertResource :<|> StyleListResource :<|>
+       StylePatchResource
+       :<|> StyleGetResource
+       :<|> StyleDeleteResource
+       :<|> StyleUpdateResource
+       :<|> QuerySqlGetResource
+       :<|> QuerySqlResource
+       :<|> TaskListResource
+       :<|> TaskGetResource
+       :<|> TaskDeleteResource
+       :<|> TemplateInsertResource
+       :<|> TemplateListResource
+       :<|> TemplatePatchResource
+       :<|> TemplateGetResource
+       :<|> TemplateDeleteResource
+       :<|> TemplateUpdateResource
+       :<|> ColumnInsertResource
+       :<|> ColumnListResource
+       :<|> ColumnPatchResource
+       :<|> ColumnGetResource
+       :<|> ColumnDeleteResource
+       :<|> ColumnUpdateResource
+       :<|> TableInsertResource
+       :<|> TableListResource
+       :<|> TableCopyResource
+       :<|> TableReplaceRowsResource
+       :<|> TableImportTableResource
+       :<|> TablePatchResource
+       :<|> TableGetResource
+       :<|> TableImportRowsResource
+       :<|> TableDeleteResource
+       :<|> TableUpdateResource
 
 fusionTablesAPI :: Proxy FusionTablesAPI
 fusionTablesAPI = Proxy

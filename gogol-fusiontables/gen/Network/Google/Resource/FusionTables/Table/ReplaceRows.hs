@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- all replacement rows are ready.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableReplaceRows@.
-module FusionTables.Table.ReplaceRows
+module Network.Google.Resource.FusionTables.Table.ReplaceRows
     (
     -- * REST Resource
-      TableReplaceRowsAPI
+      TableReplaceRowsResource
 
     -- * Creating a Request
-    , tableReplaceRows
-    , TableReplaceRows
+    , tableReplaceRows'
+    , TableReplaceRows'
 
     -- * Request Lenses
     , trrQuotaUser
@@ -49,22 +50,29 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableReplaceRows@ which the
--- 'TableReplaceRows' request conforms to.
-type TableReplaceRowsAPI =
+-- 'TableReplaceRows'' request conforms to.
+type TableReplaceRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "replace" :>
-           QueryParam "startLine" Int32 :>
-             QueryParam "endLine" Int32 :>
-               QueryParam "delimiter" Text :>
-                 QueryParam "encoding" Text :>
-                   QueryParam "isStrict" Bool :> Post '[JSON] Task
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "startLine" Int32 :>
+                   QueryParam "endLine" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "delimiter" Text :>
+                           QueryParam "encoding" Text :>
+                             QueryParam "isStrict" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.
 --
--- /See:/ 'tableReplaceRows' smart constructor.
-data TableReplaceRows = TableReplaceRows
+-- /See:/ 'tableReplaceRows'' smart constructor.
+data TableReplaceRows' = TableReplaceRows'
     { _trrQuotaUser   :: !(Maybe Text)
     , _trrPrettyPrint :: !Bool
     , _trrUserIp      :: !(Maybe Text)
@@ -77,7 +85,7 @@ data TableReplaceRows = TableReplaceRows
     , _trrEncoding    :: !(Maybe Text)
     , _trrIsStrict    :: !(Maybe Bool)
     , _trrFields      :: !(Maybe Text)
-    , _trrAlt         :: !Text
+    , _trrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableReplaceRows'' with the minimum fields required to make a request.
@@ -109,11 +117,11 @@ data TableReplaceRows = TableReplaceRows
 -- * 'trrFields'
 --
 -- * 'trrAlt'
-tableReplaceRows
+tableReplaceRows'
     :: Text -- ^ 'tableId'
-    -> TableReplaceRows
-tableReplaceRows pTrrTableId_ =
-    TableReplaceRows
+    -> TableReplaceRows'
+tableReplaceRows' pTrrTableId_ =
+    TableReplaceRows'
     { _trrQuotaUser = Nothing
     , _trrPrettyPrint = True
     , _trrUserIp = Nothing
@@ -126,7 +134,7 @@ tableReplaceRows pTrrTableId_ =
     , _trrEncoding = Nothing
     , _trrIsStrict = Nothing
     , _trrFields = Nothing
-    , _trrAlt = "json"
+    , _trrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -205,14 +213,14 @@ trrFields
   = lens _trrFields (\ s a -> s{_trrFields = a})
 
 -- | Data format for the response.
-trrAlt :: Lens' TableReplaceRows' Text
+trrAlt :: Lens' TableReplaceRows' Alt
 trrAlt = lens _trrAlt (\ s a -> s{_trrAlt = a})
 
 instance GoogleRequest TableReplaceRows' where
         type Rs TableReplaceRows' = Task
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableReplaceRows{..}
-          = go _trrQuotaUser _trrPrettyPrint _trrUserIp
+        requestWithRoute r u TableReplaceRows'{..}
+          = go _trrQuotaUser (Just _trrPrettyPrint) _trrUserIp
               _trrStartLine
               _trrEndLine
               _trrKey
@@ -222,9 +230,9 @@ instance GoogleRequest TableReplaceRows' where
               _trrEncoding
               _trrIsStrict
               _trrFields
-              _trrAlt
+              (Just _trrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TableReplaceRowsAPI)
+                      (Proxy :: Proxy TableReplaceRowsResource)
                       r
                       u

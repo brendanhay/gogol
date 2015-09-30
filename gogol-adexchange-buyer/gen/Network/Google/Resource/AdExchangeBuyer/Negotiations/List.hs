@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all negotiations the authenticated user has access to.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsList@.
-module AdExchangeBuyer.Negotiations.List
+module Network.Google.Resource.AdExchangeBuyer.Negotiations.List
     (
     -- * REST Resource
-      NegotiationsListAPI
+      NegotiationsListResource
 
     -- * Creating a Request
-    , negotiationsList
-    , NegotiationsList
+    , negotiationsList'
+    , NegotiationsList'
 
     -- * Request Lenses
     , nlQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationsList@ which the
--- 'NegotiationsList' request conforms to.
-type NegotiationsListAPI =
-     "negotiations" :> Get '[JSON] GetNegotiationsResponse
+-- 'NegotiationsList'' request conforms to.
+type NegotiationsListResource =
+     "negotiations" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] GetNegotiationsResponse
 
 -- | Lists all negotiations the authenticated user has access to.
 --
--- /See:/ 'negotiationsList' smart constructor.
-data NegotiationsList = NegotiationsList
+-- /See:/ 'negotiationsList'' smart constructor.
+data NegotiationsList' = NegotiationsList'
     { _nlQuotaUser   :: !(Maybe Text)
     , _nlPrettyPrint :: !Bool
     , _nlUserIp      :: !(Maybe Text)
     , _nlKey         :: !(Maybe Text)
     , _nlOauthToken  :: !(Maybe Text)
     , _nlFields      :: !(Maybe Text)
-    , _nlAlt         :: !Text
+    , _nlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data NegotiationsList = NegotiationsList
 -- * 'nlFields'
 --
 -- * 'nlAlt'
-negotiationsList
-    :: NegotiationsList
-negotiationsList =
-    NegotiationsList
+negotiationsList'
+    :: NegotiationsList'
+negotiationsList' =
+    NegotiationsList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
     , _nlUserIp = Nothing
     , _nlKey = Nothing
     , _nlOauthToken = Nothing
     , _nlFields = Nothing
-    , _nlAlt = "json"
+    , _nlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +132,20 @@ nlFields :: Lens' NegotiationsList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
 -- | Data format for the response.
-nlAlt :: Lens' NegotiationsList' Text
+nlAlt :: Lens' NegotiationsList' Alt
 nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
 
 instance GoogleRequest NegotiationsList' where
         type Rs NegotiationsList' = GetNegotiationsResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationsList{..}
-          = go _nlQuotaUser _nlPrettyPrint _nlUserIp _nlKey
+        requestWithRoute r u NegotiationsList'{..}
+          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIp
+              _nlKey
               _nlOauthToken
               _nlFields
-              _nlAlt
+              (Just _nlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy NegotiationsListAPI)
+                      (Proxy :: Proxy NegotiationsListResource)
                       r
                       u

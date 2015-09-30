@@ -46,8 +46,8 @@ data ReportRequest = ReportRequest
     , _rrReportScope            :: !(Maybe ReportRequestReportScope)
     , _rrStatisticsCurrency     :: !(Maybe Text)
     , _rrTimeRange              :: !(Maybe ReportRequestTimeRange)
-    , _rrOrderBy                :: !(Maybe [ReportRequestOrderByItem])
-    , _rrFilters                :: !(Maybe [ReportRequestFiltersItem])
+    , _rrOrderBy                :: !(Maybe [ReportRequestOrderBy])
+    , _rrFilters                :: !(Maybe [ReportRequestFilters])
     , _rrIncludeRemovedEntities :: !Bool
     , _rrIncludeDeletedEntities :: !Bool
     , _rrDownloadFormat         :: !(Maybe Text)
@@ -143,14 +143,14 @@ rrTimeRange
 
 -- | Synchronous report only. A list of columns and directions defining
 -- sorting to be performed on the report rows.
-rrOrderBy :: Lens' ReportRequest [ReportRequestOrderByItem]
+rrOrderBy :: Lens' ReportRequest [ReportRequestOrderBy]
 rrOrderBy
   = lens _rrOrderBy (\ s a -> s{_rrOrderBy = a}) .
       _Default
       . _Coerce
 
 -- | A list of filters to be applied to the report.
-rrFilters :: Lens' ReportRequest [ReportRequestFiltersItem]
+rrFilters :: Lens' ReportRequest [ReportRequestFilters]
 rrFilters
   = lens _rrFilters (\ s a -> s{_rrFilters = a}) .
       _Default
@@ -260,6 +260,51 @@ instance ToJSON ReportRequest where
                     ("verifySingleTimeZone" .= _rrVerifySingleTimeZone),
                   Just ("rowCount" .= _rrRowCount)])
 
+--
+-- /See:/ 'reportFiles' smart constructor.
+data ReportFiles = ReportFiles
+    { _rfUrl       :: !(Maybe Text)
+    , _rfByteCount :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportFiles' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rfUrl'
+--
+-- * 'rfByteCount'
+reportFiles
+    :: ReportFiles
+reportFiles =
+    ReportFiles
+    { _rfUrl = Nothing
+    , _rfByteCount = Nothing
+    }
+
+-- | Use this url to download the report file.
+rfUrl :: Lens' ReportFiles (Maybe Text)
+rfUrl = lens _rfUrl (\ s a -> s{_rfUrl = a})
+
+-- | The size of this report file in bytes.
+rfByteCount :: Lens' ReportFiles (Maybe Int64)
+rfByteCount
+  = lens _rfByteCount (\ s a -> s{_rfByteCount = a})
+
+instance FromJSON ReportFiles where
+        parseJSON
+          = withObject "ReportFiles"
+              (\ o ->
+                 ReportFiles <$>
+                   (o .:? "url") <*> (o .:? "byteCount"))
+
+instance ToJSON ReportFiles where
+        toJSON ReportFiles{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _rfUrl,
+                  ("byteCount" .=) <$> _rfByteCount])
+
 -- | A DoubleClick Search report. This object contains the report request,
 -- some report metadata such as currency code, and the generated report
 -- rows or report files.
@@ -270,7 +315,7 @@ data Report = Report
     , _rRows                   :: !(Maybe [Maybe ReportRow])
     , _rStatisticsCurrencyCode :: !(Maybe Text)
     , _rIsReportReady          :: !(Maybe Bool)
-    , _rFiles                  :: !(Maybe [ReportFilesItem])
+    , _rFiles                  :: !(Maybe [ReportFiles])
     , _rId                     :: !(Maybe Text)
     , _rStatisticsTimeZone     :: !(Maybe Text)
     , _rRowCount               :: !(Maybe Int32)
@@ -342,7 +387,7 @@ rIsReportReady
 
 -- | Asynchronous report only. Contains a list of generated report files once
 -- the report has succesfully completed.
-rFiles :: Lens' Report [ReportFilesItem]
+rFiles :: Lens' Report [ReportFiles]
 rFiles
   = lens _rFiles (\ s a -> s{_rFiles = a}) . _Default .
       _Coerce
@@ -538,6 +583,67 @@ instance ToJSON Availability where
                     _aAvailabilityTimestamp,
                   ("segmentationType" .=) <$> _aSegmentationType])
 
+--
+-- /See:/ 'reportRequestFilters' smart constructor.
+data ReportRequestFilters = ReportRequestFilters
+    { _rrfOperator :: !(Maybe Text)
+    , _rrfValues   :: !(Maybe [JSONValue])
+    , _rrfColumn   :: !(Maybe (Maybe ReportAPIColumnSpec))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportRequestFilters' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrfOperator'
+--
+-- * 'rrfValues'
+--
+-- * 'rrfColumn'
+reportRequestFilters
+    :: ReportRequestFilters
+reportRequestFilters =
+    ReportRequestFilters
+    { _rrfOperator = Nothing
+    , _rrfValues = Nothing
+    , _rrfColumn = Nothing
+    }
+
+-- | Operator to use in the filter. See the filter reference for a list of
+-- available operators.
+rrfOperator :: Lens' ReportRequestFilters (Maybe Text)
+rrfOperator
+  = lens _rrfOperator (\ s a -> s{_rrfOperator = a})
+
+-- | A list of values to filter the column value against.
+rrfValues :: Lens' ReportRequestFilters [JSONValue]
+rrfValues
+  = lens _rrfValues (\ s a -> s{_rrfValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Column to perform the filter on. This can be a DoubleClick Search column
+-- or a saved column.
+rrfColumn :: Lens' ReportRequestFilters (Maybe (Maybe ReportAPIColumnSpec))
+rrfColumn
+  = lens _rrfColumn (\ s a -> s{_rrfColumn = a})
+
+instance FromJSON ReportRequestFilters where
+        parseJSON
+          = withObject "ReportRequestFilters"
+              (\ o ->
+                 ReportRequestFilters <$>
+                   (o .:? "operator") <*> (o .:? "values" .!= mempty)
+                     <*> (o .:? "column"))
+
+instance ToJSON ReportRequestFilters where
+        toJSON ReportRequestFilters{..}
+          = object
+              (catMaybes
+                 [("operator" .=) <$> _rrfOperator,
+                  ("values" .=) <$> _rrfValues,
+                  ("column" .=) <$> _rrfColumn])
+
 -- | A message containing the custome metric.
 --
 -- /See:/ 'customMetric' smart constructor.
@@ -580,6 +686,54 @@ instance ToJSON CustomMetric where
           = object
               (catMaybes
                  [("value" .=) <$> _cmValue, ("name" .=) <$> _cmName])
+
+--
+-- /See:/ 'reportRequestOrderBy' smart constructor.
+data ReportRequestOrderBy = ReportRequestOrderBy
+    { _rrobSortOrder :: !(Maybe Text)
+    , _rrobColumn    :: !(Maybe (Maybe ReportAPIColumnSpec))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportRequestOrderBy' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrobSortOrder'
+--
+-- * 'rrobColumn'
+reportRequestOrderBy
+    :: ReportRequestOrderBy
+reportRequestOrderBy =
+    ReportRequestOrderBy
+    { _rrobSortOrder = Nothing
+    , _rrobColumn = Nothing
+    }
+
+-- | The sort direction, which is either ascending or descending.
+rrobSortOrder :: Lens' ReportRequestOrderBy (Maybe Text)
+rrobSortOrder
+  = lens _rrobSortOrder
+      (\ s a -> s{_rrobSortOrder = a})
+
+-- | Column to perform the sort on. This can be a DoubleClick Search-defined
+-- column or a saved column.
+rrobColumn :: Lens' ReportRequestOrderBy (Maybe (Maybe ReportAPIColumnSpec))
+rrobColumn
+  = lens _rrobColumn (\ s a -> s{_rrobColumn = a})
+
+instance FromJSON ReportRequestOrderBy where
+        parseJSON
+          = withObject "ReportRequestOrderBy"
+              (\ o ->
+                 ReportRequestOrderBy <$>
+                   (o .:? "sortOrder") <*> (o .:? "column"))
+
+instance ToJSON ReportRequestOrderBy where
+        toJSON ReportRequestOrderBy{..}
+          = object
+              (catMaybes
+                 [("sortOrder" .=) <$> _rrobSortOrder,
+                  ("column" .=) <$> _rrobColumn])
 
 -- | A list of conversions.
 --
@@ -783,6 +937,85 @@ instance ToJSON ReportAPIColumnSpec where
                   ("headerText" .=) <$> _racsHeaderText,
                   ("platformSource" .=) <$> _racsPlatformSource,
                   ("columnName" .=) <$> _racsColumnName])
+
+-- | If metrics are requested in a report, this argument will be used to
+-- restrict the metrics to a specific time range.
+--
+-- /See:/ 'reportRequestTimeRange' smart constructor.
+data ReportRequestTimeRange = ReportRequestTimeRange
+    { _rrtrEndDate                         :: !(Maybe Text)
+    , _rrtrChangedAttributesSinceTimestamp :: !(Maybe UTCTime)
+    , _rrtrStartDate                       :: !(Maybe Text)
+    , _rrtrChangedMetricsSinceTimestamp    :: !(Maybe UTCTime)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportRequestTimeRange' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrtrEndDate'
+--
+-- * 'rrtrChangedAttributesSinceTimestamp'
+--
+-- * 'rrtrStartDate'
+--
+-- * 'rrtrChangedMetricsSinceTimestamp'
+reportRequestTimeRange
+    :: ReportRequestTimeRange
+reportRequestTimeRange =
+    ReportRequestTimeRange
+    { _rrtrEndDate = Nothing
+    , _rrtrChangedAttributesSinceTimestamp = Nothing
+    , _rrtrStartDate = Nothing
+    , _rrtrChangedMetricsSinceTimestamp = Nothing
+    }
+
+-- | Inclusive date in YYYY-MM-DD format.
+rrtrEndDate :: Lens' ReportRequestTimeRange (Maybe Text)
+rrtrEndDate
+  = lens _rrtrEndDate (\ s a -> s{_rrtrEndDate = a})
+
+-- | Inclusive UTC timestamp in RFC format, e.g., 2013-07-16T10:16:23.555Z.
+-- See additional references on how changed attribute reports work.
+rrtrChangedAttributesSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe UTCTime)
+rrtrChangedAttributesSinceTimestamp
+  = lens _rrtrChangedAttributesSinceTimestamp
+      (\ s a ->
+         s{_rrtrChangedAttributesSinceTimestamp = a})
+
+-- | Inclusive date in YYYY-MM-DD format.
+rrtrStartDate :: Lens' ReportRequestTimeRange (Maybe Text)
+rrtrStartDate
+  = lens _rrtrStartDate
+      (\ s a -> s{_rrtrStartDate = a})
+
+-- | Inclusive UTC timestamp in RFC format, e.g., 2013-07-16T10:16:23.555Z.
+-- See additional references on how changed metrics reports work.
+rrtrChangedMetricsSinceTimestamp :: Lens' ReportRequestTimeRange (Maybe UTCTime)
+rrtrChangedMetricsSinceTimestamp
+  = lens _rrtrChangedMetricsSinceTimestamp
+      (\ s a -> s{_rrtrChangedMetricsSinceTimestamp = a})
+
+instance FromJSON ReportRequestTimeRange where
+        parseJSON
+          = withObject "ReportRequestTimeRange"
+              (\ o ->
+                 ReportRequestTimeRange <$>
+                   (o .:? "endDate") <*>
+                     (o .:? "changedAttributesSinceTimestamp")
+                     <*> (o .:? "startDate")
+                     <*> (o .:? "changedMetricsSinceTimestamp"))
+
+instance ToJSON ReportRequestTimeRange where
+        toJSON ReportRequestTimeRange{..}
+          = object
+              (catMaybes
+                 [("endDate" .=) <$> _rrtrEndDate,
+                  ("changedAttributesSinceTimestamp" .=) <$>
+                    _rrtrChangedAttributesSinceTimestamp,
+                  ("startDate" .=) <$> _rrtrStartDate,
+                  ("changedMetricsSinceTimestamp" .=) <$>
+                    _rrtrChangedMetricsSinceTimestamp])
 
 -- | A conversion containing data relevant to DoubleClick Search.
 --
@@ -1308,6 +1541,114 @@ instance ToJSON UpdateAvailabilityResponse where
           = object
               (catMaybes
                  [("availabilities" .=) <$> _uAvailabilities])
+
+-- | The reportScope is a set of IDs that are used to determine which subset
+-- of entities will be returned in the report. The full lineage of IDs from
+-- the lowest scoped level desired up through agency is required.
+--
+-- /See:/ 'reportRequestReportScope' smart constructor.
+data ReportRequestReportScope = ReportRequestReportScope
+    { _rrrsKeywordId       :: !(Maybe Int64)
+    , _rrrsAdGroupId       :: !(Maybe Int64)
+    , _rrrsEngineAccountId :: !(Maybe Int64)
+    , _rrrsAgencyId        :: !(Maybe Int64)
+    , _rrrsAdvertiserId    :: !(Maybe Int64)
+    , _rrrsCampaignId      :: !(Maybe Int64)
+    , _rrrsAdId            :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportRequestReportScope' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrsKeywordId'
+--
+-- * 'rrrsAdGroupId'
+--
+-- * 'rrrsEngineAccountId'
+--
+-- * 'rrrsAgencyId'
+--
+-- * 'rrrsAdvertiserId'
+--
+-- * 'rrrsCampaignId'
+--
+-- * 'rrrsAdId'
+reportRequestReportScope
+    :: ReportRequestReportScope
+reportRequestReportScope =
+    ReportRequestReportScope
+    { _rrrsKeywordId = Nothing
+    , _rrrsAdGroupId = Nothing
+    , _rrrsEngineAccountId = Nothing
+    , _rrrsAgencyId = Nothing
+    , _rrrsAdvertiserId = Nothing
+    , _rrrsCampaignId = Nothing
+    , _rrrsAdId = Nothing
+    }
+
+-- | DS keyword ID.
+rrrsKeywordId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsKeywordId
+  = lens _rrrsKeywordId
+      (\ s a -> s{_rrrsKeywordId = a})
+
+-- | DS ad group ID.
+rrrsAdGroupId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsAdGroupId
+  = lens _rrrsAdGroupId
+      (\ s a -> s{_rrrsAdGroupId = a})
+
+-- | DS engine account ID.
+rrrsEngineAccountId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsEngineAccountId
+  = lens _rrrsEngineAccountId
+      (\ s a -> s{_rrrsEngineAccountId = a})
+
+-- | DS agency ID.
+rrrsAgencyId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsAgencyId
+  = lens _rrrsAgencyId (\ s a -> s{_rrrsAgencyId = a})
+
+-- | DS advertiser ID.
+rrrsAdvertiserId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsAdvertiserId
+  = lens _rrrsAdvertiserId
+      (\ s a -> s{_rrrsAdvertiserId = a})
+
+-- | DS campaign ID.
+rrrsCampaignId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsCampaignId
+  = lens _rrrsCampaignId
+      (\ s a -> s{_rrrsCampaignId = a})
+
+-- | DS ad ID.
+rrrsAdId :: Lens' ReportRequestReportScope (Maybe Int64)
+rrrsAdId = lens _rrrsAdId (\ s a -> s{_rrrsAdId = a})
+
+instance FromJSON ReportRequestReportScope where
+        parseJSON
+          = withObject "ReportRequestReportScope"
+              (\ o ->
+                 ReportRequestReportScope <$>
+                   (o .:? "keywordId") <*> (o .:? "adGroupId") <*>
+                     (o .:? "engineAccountId")
+                     <*> (o .:? "agencyId")
+                     <*> (o .:? "advertiserId")
+                     <*> (o .:? "campaignId")
+                     <*> (o .:? "adId"))
+
+instance ToJSON ReportRequestReportScope where
+        toJSON ReportRequestReportScope{..}
+          = object
+              (catMaybes
+                 [("keywordId" .=) <$> _rrrsKeywordId,
+                  ("adGroupId" .=) <$> _rrrsAdGroupId,
+                  ("engineAccountId" .=) <$> _rrrsEngineAccountId,
+                  ("agencyId" .=) <$> _rrrsAgencyId,
+                  ("advertiserId" .=) <$> _rrrsAdvertiserId,
+                  ("campaignId" .=) <$> _rrrsCampaignId,
+                  ("adId" .=) <$> _rrrsAdId])
 
 -- | A message containing the custome dimension.
 --

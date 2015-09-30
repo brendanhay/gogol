@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Submit input and request an output against a hosted model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionHostedmodelsPredict@.
-module Prediction.Hostedmodels.Predict
+module Network.Google.Resource.Prediction.Hostedmodels.Predict
     (
     -- * REST Resource
-      HostedmodelsPredictAPI
+      HostedmodelsPredictResource
 
     -- * Creating a Request
-    , hostedmodelsPredict
-    , HostedmodelsPredict
+    , hostedmodelsPredict'
+    , HostedmodelsPredict'
 
     -- * Request Lenses
     , hpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionHostedmodelsPredict@ which the
--- 'HostedmodelsPredict' request conforms to.
-type HostedmodelsPredictAPI =
+-- 'HostedmodelsPredict'' request conforms to.
+type HostedmodelsPredictResource =
      Capture "project" Text :>
        "hostedmodels" :>
          Capture "hostedModelName" Text :>
-           "predict" :> Post '[JSON] Output
+           "predict" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Output
 
 -- | Submit input and request an output against a hosted model.
 --
--- /See:/ 'hostedmodelsPredict' smart constructor.
-data HostedmodelsPredict = HostedmodelsPredict
+-- /See:/ 'hostedmodelsPredict'' smart constructor.
+data HostedmodelsPredict' = HostedmodelsPredict'
     { _hpQuotaUser       :: !(Maybe Text)
     , _hpPrettyPrint     :: !Bool
     , _hpProject         :: !Text
@@ -63,7 +71,7 @@ data HostedmodelsPredict = HostedmodelsPredict
     , _hpOauthToken      :: !(Maybe Text)
     , _hpFields          :: !(Maybe Text)
     , _hpHostedModelName :: !Text
-    , _hpAlt             :: !Text
+    , _hpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HostedmodelsPredict'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data HostedmodelsPredict = HostedmodelsPredict
 -- * 'hpHostedModelName'
 --
 -- * 'hpAlt'
-hostedmodelsPredict
+hostedmodelsPredict'
     :: Text -- ^ 'project'
     -> Text -- ^ 'hostedModelName'
-    -> HostedmodelsPredict
-hostedmodelsPredict pHpProject_ pHpHostedModelName_ =
-    HostedmodelsPredict
+    -> HostedmodelsPredict'
+hostedmodelsPredict' pHpProject_ pHpHostedModelName_ =
+    HostedmodelsPredict'
     { _hpQuotaUser = Nothing
     , _hpPrettyPrint = True
     , _hpProject = pHpProject_
@@ -101,7 +109,7 @@ hostedmodelsPredict pHpProject_ pHpHostedModelName_ =
     , _hpOauthToken = Nothing
     , _hpFields = Nothing
     , _hpHostedModelName = pHpHostedModelName_
-    , _hpAlt = "json"
+    , _hpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,21 +157,22 @@ hpHostedModelName
       (\ s a -> s{_hpHostedModelName = a})
 
 -- | Data format for the response.
-hpAlt :: Lens' HostedmodelsPredict' Text
+hpAlt :: Lens' HostedmodelsPredict' Alt
 hpAlt = lens _hpAlt (\ s a -> s{_hpAlt = a})
 
 instance GoogleRequest HostedmodelsPredict' where
         type Rs HostedmodelsPredict' = Output
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u HostedmodelsPredict{..}
-          = go _hpQuotaUser _hpPrettyPrint _hpProject _hpUserIp
+        requestWithRoute r u HostedmodelsPredict'{..}
+          = go _hpQuotaUser (Just _hpPrettyPrint) _hpProject
+              _hpUserIp
               _hpKey
               _hpOauthToken
               _hpFields
               _hpHostedModelName
-              _hpAlt
+              (Just _hpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HostedmodelsPredictAPI)
+                      (Proxy :: Proxy HostedmodelsPredictResource)
                       r
                       u

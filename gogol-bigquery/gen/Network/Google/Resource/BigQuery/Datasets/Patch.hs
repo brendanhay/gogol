@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsPatch@.
-module BigQuery.Datasets.Patch
+module Network.Google.Resource.BigQuery.Datasets.Patch
     (
     -- * REST Resource
-      DatasetsPatchAPI
+      DatasetsPatchResource
 
     -- * Creating a Request
-    , datasetsPatch
-    , DatasetsPatch
+    , datasetsPatch'
+    , DatasetsPatch'
 
     -- * Request Lenses
     , dpQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryDatasetsPatch@ which the
--- 'DatasetsPatch' request conforms to.
-type DatasetsPatchAPI =
+-- 'DatasetsPatch'' request conforms to.
+type DatasetsPatchResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
-           Capture "datasetId" Text :> Patch '[JSON] Dataset
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Dataset
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces
 -- fields that are provided in the submitted dataset resource. This method
 -- supports patch semantics.
 --
--- /See:/ 'datasetsPatch' smart constructor.
-data DatasetsPatch = DatasetsPatch
+-- /See:/ 'datasetsPatch'' smart constructor.
+data DatasetsPatch' = DatasetsPatch'
     { _dpQuotaUser   :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
     , _dpUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data DatasetsPatch = DatasetsPatch
     , _dpProjectId   :: !Text
     , _dpOauthToken  :: !(Maybe Text)
     , _dpFields      :: !(Maybe Text)
-    , _dpAlt         :: !Text
+    , _dpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsPatch'' with the minimum fields required to make a request.
@@ -93,12 +101,12 @@ data DatasetsPatch = DatasetsPatch
 -- * 'dpFields'
 --
 -- * 'dpAlt'
-datasetsPatch
+datasetsPatch'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> DatasetsPatch
-datasetsPatch pDpDatasetId_ pDpProjectId_ =
-    DatasetsPatch
+    -> DatasetsPatch'
+datasetsPatch' pDpDatasetId_ pDpProjectId_ =
+    DatasetsPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpUserIp = Nothing
@@ -107,7 +115,7 @@ datasetsPatch pDpDatasetId_ pDpProjectId_ =
     , _dpProjectId = pDpProjectId_
     , _dpOauthToken = Nothing
     , _dpFields = Nothing
-    , _dpAlt = "json"
+    , _dpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,19 +162,22 @@ dpFields :: Lens' DatasetsPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
 -- | Data format for the response.
-dpAlt :: Lens' DatasetsPatch' Text
+dpAlt :: Lens' DatasetsPatch' Alt
 dpAlt = lens _dpAlt (\ s a -> s{_dpAlt = a})
 
 instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsPatch{..}
-          = go _dpQuotaUser _dpPrettyPrint _dpUserIp _dpKey
+        requestWithRoute r u DatasetsPatch'{..}
+          = go _dpQuotaUser (Just _dpPrettyPrint) _dpUserIp
+              _dpKey
               _dpDatasetId
               _dpProjectId
               _dpOauthToken
               _dpFields
-              _dpAlt
+              (Just _dpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsPatchResource)
+                      r
                       u

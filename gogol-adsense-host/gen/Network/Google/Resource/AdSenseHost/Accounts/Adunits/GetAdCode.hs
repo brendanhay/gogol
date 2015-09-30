@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- custom channels.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsGetAdCode@.
-module AdSenseHost.Accounts.Adunits.GetAdCode
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.GetAdCode
     (
     -- * REST Resource
-      AccountsAdunitsGetAdCodeAPI
+      AccountsAdunitsGetAdCodeResource
 
     -- * Creating a Request
-    , accountsAdunitsGetAdCode
-    , AccountsAdunitsGetAdCode
+    , accountsAdunitsGetAdCode'
+    , AccountsAdunitsGetAdCode'
 
     -- * Request Lenses
     , aagacQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsGetAdCode@ which the
--- 'AccountsAdunitsGetAdCode' request conforms to.
-type AccountsAdunitsGetAdCodeAPI =
+-- 'AccountsAdunitsGetAdCode'' request conforms to.
+type AccountsAdunitsGetAdCodeResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
@@ -56,14 +57,20 @@ type AccountsAdunitsGetAdCodeAPI =
              "adunits" :>
                Capture "adUnitId" Text :>
                  "adcode" :>
-                   QueryParams "hostCustomChannelId" Text :>
-                     Get '[JSON] AdCode
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParams "hostCustomChannelId" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit, attaching the specified host
 -- custom channels.
 --
--- /See:/ 'accountsAdunitsGetAdCode' smart constructor.
-data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
+-- /See:/ 'accountsAdunitsGetAdCode'' smart constructor.
+data AccountsAdunitsGetAdCode' = AccountsAdunitsGetAdCode'
     { _aagacQuotaUser           :: !(Maybe Text)
     , _aagacPrettyPrint         :: !Bool
     , _aagacUserIp              :: !(Maybe Text)
@@ -74,7 +81,7 @@ data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
     , _aagacHostCustomChannelId :: !(Maybe Text)
     , _aagacOauthToken          :: !(Maybe Text)
     , _aagacFields              :: !(Maybe Text)
-    , _aagacAlt                 :: !Text
+    , _aagacAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsGetAdCode'' with the minimum fields required to make a request.
@@ -102,13 +109,13 @@ data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
 -- * 'aagacFields'
 --
 -- * 'aagacAlt'
-accountsAdunitsGetAdCode
+accountsAdunitsGetAdCode'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsGetAdCode
-accountsAdunitsGetAdCode pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
-    AccountsAdunitsGetAdCode
+    -> AccountsAdunitsGetAdCode'
+accountsAdunitsGetAdCode' pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
+    AccountsAdunitsGetAdCode'
     { _aagacQuotaUser = Nothing
     , _aagacPrettyPrint = True
     , _aagacUserIp = Nothing
@@ -119,7 +126,7 @@ accountsAdunitsGetAdCode pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
     , _aagacHostCustomChannelId = Nothing
     , _aagacOauthToken = Nothing
     , _aagacFields = Nothing
-    , _aagacAlt = "json"
+    , _aagacAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,15 +191,16 @@ aagacFields
   = lens _aagacFields (\ s a -> s{_aagacFields = a})
 
 -- | Data format for the response.
-aagacAlt :: Lens' AccountsAdunitsGetAdCode' Text
+aagacAlt :: Lens' AccountsAdunitsGetAdCode' Alt
 aagacAlt = lens _aagacAlt (\ s a -> s{_aagacAlt = a})
 
 instance GoogleRequest AccountsAdunitsGetAdCode'
          where
         type Rs AccountsAdunitsGetAdCode' = AdCode
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsGetAdCode{..}
-          = go _aagacQuotaUser _aagacPrettyPrint _aagacUserIp
+        requestWithRoute r u AccountsAdunitsGetAdCode'{..}
+          = go _aagacQuotaUser (Just _aagacPrettyPrint)
+              _aagacUserIp
               _aagacAdUnitId
               _aagacAdClientId
               _aagacAccountId
@@ -200,9 +208,9 @@ instance GoogleRequest AccountsAdunitsGetAdCode'
               _aagacHostCustomChannelId
               _aagacOauthToken
               _aagacFields
-              _aagacAlt
+              (Just _aagacAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsGetAdCodeAPI)
+                      (Proxy :: Proxy AccountsAdunitsGetAdCodeResource)
                       r
                       u

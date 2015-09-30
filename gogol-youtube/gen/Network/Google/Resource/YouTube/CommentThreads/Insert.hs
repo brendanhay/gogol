@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- use the comments.insert method instead.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsInsert@.
-module YouTube.CommentThreads.Insert
+module Network.Google.Resource.YouTube.CommentThreads.Insert
     (
     -- * REST Resource
-      CommentThreadsInsertAPI
+      CommentThreadsInsertResource
 
     -- * Creating a Request
-    , commentThreadsInsert
-    , CommentThreadsInsert
+    , commentThreadsInsert'
+    , CommentThreadsInsert'
 
     -- * Request Lenses
     , ctiQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentThreadsInsert@ which the
--- 'CommentThreadsInsert' request conforms to.
-type CommentThreadsInsertAPI =
+-- 'CommentThreadsInsert'' request conforms to.
+type CommentThreadsInsertResource =
      "commentThreads" :>
-       QueryParam "part" Text :> Post '[JSON] CommentThread
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] CommentThread
 
 -- | Creates a new top-level comment. To add a reply to an existing comment,
 -- use the comments.insert method instead.
 --
--- /See:/ 'commentThreadsInsert' smart constructor.
-data CommentThreadsInsert = CommentThreadsInsert
+-- /See:/ 'commentThreadsInsert'' smart constructor.
+data CommentThreadsInsert' = CommentThreadsInsert'
     { _ctiQuotaUser   :: !(Maybe Text)
     , _ctiPart        :: !Text
     , _ctiPrettyPrint :: !Bool
@@ -61,7 +69,7 @@ data CommentThreadsInsert = CommentThreadsInsert
     , _ctiKey         :: !(Maybe Text)
     , _ctiOauthToken  :: !(Maybe Text)
     , _ctiFields      :: !(Maybe Text)
-    , _ctiAlt         :: !Text
+    , _ctiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CommentThreadsInsert = CommentThreadsInsert
 -- * 'ctiFields'
 --
 -- * 'ctiAlt'
-commentThreadsInsert
+commentThreadsInsert'
     :: Text -- ^ 'part'
-    -> CommentThreadsInsert
-commentThreadsInsert pCtiPart_ =
-    CommentThreadsInsert
+    -> CommentThreadsInsert'
+commentThreadsInsert' pCtiPart_ =
+    CommentThreadsInsert'
     { _ctiQuotaUser = Nothing
     , _ctiPart = pCtiPart_
     , _ctiPrettyPrint = True
@@ -95,7 +103,7 @@ commentThreadsInsert pCtiPart_ =
     , _ctiKey = Nothing
     , _ctiOauthToken = Nothing
     , _ctiFields = Nothing
-    , _ctiAlt = "json"
+    , _ctiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +149,22 @@ ctiFields
   = lens _ctiFields (\ s a -> s{_ctiFields = a})
 
 -- | Data format for the response.
-ctiAlt :: Lens' CommentThreadsInsert' Text
+ctiAlt :: Lens' CommentThreadsInsert' Alt
 ctiAlt = lens _ctiAlt (\ s a -> s{_ctiAlt = a})
 
 instance GoogleRequest CommentThreadsInsert' where
         type Rs CommentThreadsInsert' = CommentThread
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentThreadsInsert{..}
-          = go _ctiQuotaUser (Just _ctiPart) _ctiPrettyPrint
+        requestWithRoute r u CommentThreadsInsert'{..}
+          = go _ctiQuotaUser (Just _ctiPart)
+              (Just _ctiPrettyPrint)
               _ctiUserIp
               _ctiKey
               _ctiOauthToken
               _ctiFields
-              _ctiAlt
+              (Just _ctiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentThreadsInsertAPI)
+                      (Proxy :: Proxy CommentThreadsInsertResource)
                       r
                       u

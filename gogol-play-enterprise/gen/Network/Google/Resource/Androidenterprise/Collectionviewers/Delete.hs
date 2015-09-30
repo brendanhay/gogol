@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,167 +22,180 @@
 -- only such users will see the collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionviewersDelete@.
-module Androidenterprise.Collectionviewers.Delete
+module Network.Google.Resource.Androidenterprise.Collectionviewers.Delete
     (
     -- * REST Resource
-      CollectionviewersDeleteAPI
+      CollectionviewersDeleteResource
 
     -- * Creating a Request
-    , collectionviewersDelete
-    , CollectionviewersDelete
+    , collectionviewersDelete'
+    , CollectionviewersDelete'
 
     -- * Request Lenses
-    , cdQuotaUser
-    , cdPrettyPrint
-    , cdEnterpriseId
-    , cdUserIp
-    , cdCollectionId
-    , cdUserId
-    , cdKey
-    , cdOauthToken
-    , cdFields
-    , cdAlt
+    , cddQuotaUser
+    , cddPrettyPrint
+    , cddEnterpriseId
+    , cddUserIp
+    , cddCollectionId
+    , cddUserId
+    , cddKey
+    , cddOauthToken
+    , cddFields
+    , cddAlt
     ) where
 
 import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionviewersDelete@ which the
--- 'CollectionviewersDelete' request conforms to.
-type CollectionviewersDeleteAPI =
+-- 'CollectionviewersDelete'' request conforms to.
+type CollectionviewersDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
            Capture "collectionId" Text :>
-             "users" :> Capture "userId" Text :> Delete '[JSON] ()
+             "users" :>
+               Capture "userId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes the user from the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection.
 --
--- /See:/ 'collectionviewersDelete' smart constructor.
-data CollectionviewersDelete = CollectionviewersDelete
-    { _cdQuotaUser    :: !(Maybe Text)
-    , _cdPrettyPrint  :: !Bool
-    , _cdEnterpriseId :: !Text
-    , _cdUserIp       :: !(Maybe Text)
-    , _cdCollectionId :: !Text
-    , _cdUserId       :: !Text
-    , _cdKey          :: !(Maybe Text)
-    , _cdOauthToken   :: !(Maybe Text)
-    , _cdFields       :: !(Maybe Text)
-    , _cdAlt          :: !Text
+-- /See:/ 'collectionviewersDelete'' smart constructor.
+data CollectionviewersDelete' = CollectionviewersDelete'
+    { _cddQuotaUser    :: !(Maybe Text)
+    , _cddPrettyPrint  :: !Bool
+    , _cddEnterpriseId :: !Text
+    , _cddUserIp       :: !(Maybe Text)
+    , _cddCollectionId :: !Text
+    , _cddUserId       :: !Text
+    , _cddKey          :: !(Maybe Text)
+    , _cddOauthToken   :: !(Maybe Text)
+    , _cddFields       :: !(Maybe Text)
+    , _cddAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdQuotaUser'
+-- * 'cddQuotaUser'
 --
--- * 'cdPrettyPrint'
+-- * 'cddPrettyPrint'
 --
--- * 'cdEnterpriseId'
+-- * 'cddEnterpriseId'
 --
--- * 'cdUserIp'
+-- * 'cddUserIp'
 --
--- * 'cdCollectionId'
+-- * 'cddCollectionId'
 --
--- * 'cdUserId'
+-- * 'cddUserId'
 --
--- * 'cdKey'
+-- * 'cddKey'
 --
--- * 'cdOauthToken'
+-- * 'cddOauthToken'
 --
--- * 'cdFields'
+-- * 'cddFields'
 --
--- * 'cdAlt'
-collectionviewersDelete
+-- * 'cddAlt'
+collectionviewersDelete'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
     -> Text -- ^ 'userId'
-    -> CollectionviewersDelete
-collectionviewersDelete pCdEnterpriseId_ pCdCollectionId_ pCdUserId_ =
-    CollectionviewersDelete
-    { _cdQuotaUser = Nothing
-    , _cdPrettyPrint = True
-    , _cdEnterpriseId = pCdEnterpriseId_
-    , _cdUserIp = Nothing
-    , _cdCollectionId = pCdCollectionId_
-    , _cdUserId = pCdUserId_
-    , _cdKey = Nothing
-    , _cdOauthToken = Nothing
-    , _cdFields = Nothing
-    , _cdAlt = "json"
+    -> CollectionviewersDelete'
+collectionviewersDelete' pCddEnterpriseId_ pCddCollectionId_ pCddUserId_ =
+    CollectionviewersDelete'
+    { _cddQuotaUser = Nothing
+    , _cddPrettyPrint = True
+    , _cddEnterpriseId = pCddEnterpriseId_
+    , _cddUserIp = Nothing
+    , _cddCollectionId = pCddCollectionId_
+    , _cddUserId = pCddUserId_
+    , _cddKey = Nothing
+    , _cddOauthToken = Nothing
+    , _cddFields = Nothing
+    , _cddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cdQuotaUser :: Lens' CollectionviewersDelete' (Maybe Text)
-cdQuotaUser
-  = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
+cddQuotaUser :: Lens' CollectionviewersDelete' (Maybe Text)
+cddQuotaUser
+  = lens _cddQuotaUser (\ s a -> s{_cddQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cdPrettyPrint :: Lens' CollectionviewersDelete' Bool
-cdPrettyPrint
-  = lens _cdPrettyPrint
-      (\ s a -> s{_cdPrettyPrint = a})
+cddPrettyPrint :: Lens' CollectionviewersDelete' Bool
+cddPrettyPrint
+  = lens _cddPrettyPrint
+      (\ s a -> s{_cddPrettyPrint = a})
 
 -- | The ID of the enterprise.
-cdEnterpriseId :: Lens' CollectionviewersDelete' Text
-cdEnterpriseId
-  = lens _cdEnterpriseId
-      (\ s a -> s{_cdEnterpriseId = a})
+cddEnterpriseId :: Lens' CollectionviewersDelete' Text
+cddEnterpriseId
+  = lens _cddEnterpriseId
+      (\ s a -> s{_cddEnterpriseId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cdUserIp :: Lens' CollectionviewersDelete' (Maybe Text)
-cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
+cddUserIp :: Lens' CollectionviewersDelete' (Maybe Text)
+cddUserIp
+  = lens _cddUserIp (\ s a -> s{_cddUserIp = a})
 
 -- | The ID of the collection.
-cdCollectionId :: Lens' CollectionviewersDelete' Text
-cdCollectionId
-  = lens _cdCollectionId
-      (\ s a -> s{_cdCollectionId = a})
+cddCollectionId :: Lens' CollectionviewersDelete' Text
+cddCollectionId
+  = lens _cddCollectionId
+      (\ s a -> s{_cddCollectionId = a})
 
 -- | The ID of the user.
-cdUserId :: Lens' CollectionviewersDelete' Text
-cdUserId = lens _cdUserId (\ s a -> s{_cdUserId = a})
+cddUserId :: Lens' CollectionviewersDelete' Text
+cddUserId
+  = lens _cddUserId (\ s a -> s{_cddUserId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CollectionviewersDelete' (Maybe Text)
-cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
+cddKey :: Lens' CollectionviewersDelete' (Maybe Text)
+cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' CollectionviewersDelete' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+cddOauthToken :: Lens' CollectionviewersDelete' (Maybe Text)
+cddOauthToken
+  = lens _cddOauthToken
+      (\ s a -> s{_cddOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cdFields :: Lens' CollectionviewersDelete' (Maybe Text)
-cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
+cddFields :: Lens' CollectionviewersDelete' (Maybe Text)
+cddFields
+  = lens _cddFields (\ s a -> s{_cddFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CollectionviewersDelete' Text
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+cddAlt :: Lens' CollectionviewersDelete' Alt
+cddAlt = lens _cddAlt (\ s a -> s{_cddAlt = a})
 
 instance GoogleRequest CollectionviewersDelete' where
         type Rs CollectionviewersDelete' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionviewersDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdEnterpriseId
-              _cdUserIp
-              _cdCollectionId
-              _cdUserId
-              _cdKey
-              _cdOauthToken
-              _cdFields
-              _cdAlt
+        requestWithRoute r u CollectionviewersDelete'{..}
+          = go _cddQuotaUser (Just _cddPrettyPrint)
+              _cddEnterpriseId
+              _cddUserIp
+              _cddCollectionId
+              _cddUserId
+              _cddKey
+              _cddOauthToken
+              _cddFields
+              (Just _cddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionviewersDeleteAPI)
+                      (Proxy :: Proxy CollectionviewersDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove resources from the view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsRemoveResources@.
-module Resourceviews.ZoneViews.RemoveResources
+module Network.Google.Resource.Resourceviews.ZoneViews.RemoveResources
     (
     -- * REST Resource
-      ZoneViewsRemoveResourcesAPI
+      ZoneViewsRemoveResourcesResource
 
     -- * Creating a Request
-    , zoneViewsRemoveResources
-    , ZoneViewsRemoveResources
+    , zoneViewsRemoveResources'
+    , ZoneViewsRemoveResources'
 
     -- * Request Lenses
     , zvrrQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsRemoveResources@ which the
--- 'ZoneViewsRemoveResources' request conforms to.
-type ZoneViewsRemoveResourcesAPI =
+-- 'ZoneViewsRemoveResources'' request conforms to.
+type ZoneViewsRemoveResourcesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               "removeResources" :> Post '[JSON] Operation
+               "removeResources" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Remove resources from the view.
 --
--- /See:/ 'zoneViewsRemoveResources' smart constructor.
-data ZoneViewsRemoveResources = ZoneViewsRemoveResources
+-- /See:/ 'zoneViewsRemoveResources'' smart constructor.
+data ZoneViewsRemoveResources' = ZoneViewsRemoveResources'
     { _zvrrQuotaUser    :: !(Maybe Text)
     , _zvrrPrettyPrint  :: !Bool
     , _zvrrResourceView :: !Text
@@ -67,7 +75,7 @@ data ZoneViewsRemoveResources = ZoneViewsRemoveResources
     , _zvrrKey          :: !(Maybe Text)
     , _zvrrOauthToken   :: !(Maybe Text)
     , _zvrrFields       :: !(Maybe Text)
-    , _zvrrAlt          :: !Text
+    , _zvrrAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsRemoveResources'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data ZoneViewsRemoveResources = ZoneViewsRemoveResources
 -- * 'zvrrFields'
 --
 -- * 'zvrrAlt'
-zoneViewsRemoveResources
+zoneViewsRemoveResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsRemoveResources
-zoneViewsRemoveResources pZvrrResourceView_ pZvrrProject_ pZvrrZone_ =
-    ZoneViewsRemoveResources
+    -> ZoneViewsRemoveResources'
+zoneViewsRemoveResources' pZvrrResourceView_ pZvrrProject_ pZvrrZone_ =
+    ZoneViewsRemoveResources'
     { _zvrrQuotaUser = Nothing
     , _zvrrPrettyPrint = True
     , _zvrrResourceView = pZvrrResourceView_
@@ -109,7 +117,7 @@ zoneViewsRemoveResources pZvrrResourceView_ pZvrrProject_ pZvrrZone_ =
     , _zvrrKey = Nothing
     , _zvrrOauthToken = Nothing
     , _zvrrFields = Nothing
-    , _zvrrAlt = "json"
+    , _zvrrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,15 +173,15 @@ zvrrFields
   = lens _zvrrFields (\ s a -> s{_zvrrFields = a})
 
 -- | Data format for the response.
-zvrrAlt :: Lens' ZoneViewsRemoveResources' Text
+zvrrAlt :: Lens' ZoneViewsRemoveResources' Alt
 zvrrAlt = lens _zvrrAlt (\ s a -> s{_zvrrAlt = a})
 
 instance GoogleRequest ZoneViewsRemoveResources'
          where
         type Rs ZoneViewsRemoveResources' = Operation
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsRemoveResources{..}
-          = go _zvrrQuotaUser _zvrrPrettyPrint
+        requestWithRoute r u ZoneViewsRemoveResources'{..}
+          = go _zvrrQuotaUser (Just _zvrrPrettyPrint)
               _zvrrResourceView
               _zvrrProject
               _zvrrUserIp
@@ -181,9 +189,9 @@ instance GoogleRequest ZoneViewsRemoveResources'
               _zvrrKey
               _zvrrOauthToken
               _zvrrFields
-              _zvrrAlt
+              (Just _zvrrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneViewsRemoveResourcesAPI)
+                      (Proxy :: Proxy ZoneViewsRemoveResourcesResource)
                       r
                       u

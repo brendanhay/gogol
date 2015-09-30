@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- details.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsExport@.
-module Genomics.Readgroupsets.Export
+module Network.Google.Resource.Genomics.Readgroupsets.Export
     (
     -- * REST Resource
-      ReadgroupsetsExportAPI
+      ReadgroupsetsExportResource
 
     -- * Creating a Request
-    , readgroupsetsExport
-    , ReadgroupsetsExport
+    , readgroupsetsExport'
+    , ReadgroupsetsExport'
 
     -- * Request Lenses
     , reQuotaUser
@@ -45,25 +46,33 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsExport@ which the
--- 'ReadgroupsetsExport' request conforms to.
-type ReadgroupsetsExportAPI =
+-- 'ReadgroupsetsExport'' request conforms to.
+type ReadgroupsetsExportResource =
      "readgroupsets" :>
-       "export" :> Post '[JSON] ExportReadGroupSetsResponse
+       "export" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] ExportReadGroupSetsResponse
 
 -- | Exports read group sets to a BAM file in Google Cloud Storage. Note that
 -- currently there may be some differences between exported BAM files and
 -- the original BAM file at the time of import. See ImportReadGroupSets for
 -- details.
 --
--- /See:/ 'readgroupsetsExport' smart constructor.
-data ReadgroupsetsExport = ReadgroupsetsExport
+-- /See:/ 'readgroupsetsExport'' smart constructor.
+data ReadgroupsetsExport' = ReadgroupsetsExport'
     { _reQuotaUser   :: !(Maybe Text)
     , _rePrettyPrint :: !Bool
     , _reUserIp      :: !(Maybe Text)
     , _reKey         :: !(Maybe Text)
     , _reOauthToken  :: !(Maybe Text)
     , _reFields      :: !(Maybe Text)
-    , _reAlt         :: !Text
+    , _reAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsExport'' with the minimum fields required to make a request.
@@ -83,17 +92,17 @@ data ReadgroupsetsExport = ReadgroupsetsExport
 -- * 'reFields'
 --
 -- * 'reAlt'
-readgroupsetsExport
-    :: ReadgroupsetsExport
-readgroupsetsExport =
-    ReadgroupsetsExport
+readgroupsetsExport'
+    :: ReadgroupsetsExport'
+readgroupsetsExport' =
+    ReadgroupsetsExport'
     { _reQuotaUser = Nothing
     , _rePrettyPrint = True
     , _reUserIp = Nothing
     , _reKey = Nothing
     , _reOauthToken = Nothing
     , _reFields = Nothing
-    , _reAlt = "json"
+    , _reAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,20 +139,21 @@ reFields :: Lens' ReadgroupsetsExport' (Maybe Text)
 reFields = lens _reFields (\ s a -> s{_reFields = a})
 
 -- | Data format for the response.
-reAlt :: Lens' ReadgroupsetsExport' Text
+reAlt :: Lens' ReadgroupsetsExport' Alt
 reAlt = lens _reAlt (\ s a -> s{_reAlt = a})
 
 instance GoogleRequest ReadgroupsetsExport' where
         type Rs ReadgroupsetsExport' =
              ExportReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsExport{..}
-          = go _reQuotaUser _rePrettyPrint _reUserIp _reKey
+        requestWithRoute r u ReadgroupsetsExport'{..}
+          = go _reQuotaUser (Just _rePrettyPrint) _reUserIp
+              _reKey
               _reOauthToken
               _reFields
-              _reAlt
+              (Just _reAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsExportAPI)
+                      (Proxy :: Proxy ReadgroupsetsExportResource)
                       r
                       u

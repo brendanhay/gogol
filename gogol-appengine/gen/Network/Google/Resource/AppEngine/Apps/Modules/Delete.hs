@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a module and all enclosed versions.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesDelete@.
-module AppEngine.Apps.Modules.Delete
+module Network.Google.Resource.AppEngine.Apps.Modules.Delete
     (
     -- * REST Resource
-      AppsModulesDeleteAPI
+      AppsModulesDeleteResource
 
     -- * Creating a Request
-    , appsModulesDelete
-    , AppsModulesDelete
+    , appsModulesDelete'
+    , AppsModulesDelete'
 
     -- * Request Lenses
     , amdXgafv
@@ -50,18 +51,32 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesDelete@ which the
--- 'AppsModulesDelete' request conforms to.
-type AppsModulesDeleteAPI =
+-- 'AppsModulesDelete'' request conforms to.
+type AppsModulesDeleteResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
-             Capture "modulesId" Text :> Delete '[JSON] Operation
+             Capture "modulesId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Operation
 
 -- | Deletes a module and all enclosed versions.
 --
--- /See:/ 'appsModulesDelete' smart constructor.
-data AppsModulesDelete = AppsModulesDelete
+-- /See:/ 'appsModulesDelete'' smart constructor.
+data AppsModulesDelete' = AppsModulesDelete'
     { _amdXgafv          :: !(Maybe Text)
     , _amdQuotaUser      :: !(Maybe Text)
     , _amdPrettyPrint    :: !Bool
@@ -112,12 +127,12 @@ data AppsModulesDelete = AppsModulesDelete
 -- * 'amdCallback'
 --
 -- * 'amdAlt'
-appsModulesDelete
+appsModulesDelete'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesDelete
-appsModulesDelete pAmdModulesId_ pAmdAppsId_ =
-    AppsModulesDelete
+    -> AppsModulesDelete'
+appsModulesDelete' pAmdModulesId_ pAmdAppsId_ =
+    AppsModulesDelete'
     { _amdXgafv = Nothing
     , _amdQuotaUser = Nothing
     , _amdPrettyPrint = True
@@ -220,10 +235,10 @@ amdAlt = lens _amdAlt (\ s a -> s{_amdAlt = a})
 instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesDelete{..}
-          = go _amdXgafv _amdQuotaUser _amdPrettyPrint
+        requestWithRoute r u AppsModulesDelete'{..}
+          = go _amdXgafv _amdQuotaUser (Just _amdPrettyPrint)
               _amdUploadProtocol
-              _amdPp
+              (Just _amdPp)
               _amdAccessToken
               _amdUploadType
               _amdModulesId
@@ -233,9 +248,9 @@ instance GoogleRequest AppsModulesDelete' where
               _amdOauthToken
               _amdFields
               _amdCallback
-              _amdAlt
+              (Just _amdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesDeleteAPI)
+                      (Proxy :: Proxy AppsModulesDeleteResource)
                       r
                       u

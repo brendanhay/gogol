@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,141 +20,148 @@
 -- | Updates an existing advertiser.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersUpdate@.
-module DFAReporting.Advertisers.Update
+module Network.Google.Resource.DFAReporting.Advertisers.Update
     (
     -- * REST Resource
-      AdvertisersUpdateAPI
+      AdvertisersUpdateResource
 
     -- * Creating a Request
-    , advertisersUpdate
-    , AdvertisersUpdate
+    , advertisersUpdate'
+    , AdvertisersUpdate'
 
     -- * Request Lenses
-    , auuQuotaUser
-    , auuPrettyPrint
-    , auuUserIp
-    , auuProfileId
-    , auuKey
-    , auuOauthToken
-    , auuFields
-    , auuAlt
+    , advQuotaUser
+    , advPrettyPrint
+    , advUserIp
+    , advProfileId
+    , advKey
+    , advOauthToken
+    , advFields
+    , advAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertisersUpdate@ which the
--- 'AdvertisersUpdate' request conforms to.
-type AdvertisersUpdateAPI =
+-- 'AdvertisersUpdate'' request conforms to.
+type AdvertisersUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "advertisers" :> Put '[JSON] Advertiser
+         "advertisers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Advertiser
 
 -- | Updates an existing advertiser.
 --
--- /See:/ 'advertisersUpdate' smart constructor.
-data AdvertisersUpdate = AdvertisersUpdate
-    { _auuQuotaUser   :: !(Maybe Text)
-    , _auuPrettyPrint :: !Bool
-    , _auuUserIp      :: !(Maybe Text)
-    , _auuProfileId   :: !Int64
-    , _auuKey         :: !(Maybe Text)
-    , _auuOauthToken  :: !(Maybe Text)
-    , _auuFields      :: !(Maybe Text)
-    , _auuAlt         :: !Text
+-- /See:/ 'advertisersUpdate'' smart constructor.
+data AdvertisersUpdate' = AdvertisersUpdate'
+    { _advQuotaUser   :: !(Maybe Text)
+    , _advPrettyPrint :: !Bool
+    , _advUserIp      :: !(Maybe Text)
+    , _advProfileId   :: !Int64
+    , _advKey         :: !(Maybe Text)
+    , _advOauthToken  :: !(Maybe Text)
+    , _advFields      :: !(Maybe Text)
+    , _advAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'auuQuotaUser'
+-- * 'advQuotaUser'
 --
--- * 'auuPrettyPrint'
+-- * 'advPrettyPrint'
 --
--- * 'auuUserIp'
+-- * 'advUserIp'
 --
--- * 'auuProfileId'
+-- * 'advProfileId'
 --
--- * 'auuKey'
+-- * 'advKey'
 --
--- * 'auuOauthToken'
+-- * 'advOauthToken'
 --
--- * 'auuFields'
+-- * 'advFields'
 --
--- * 'auuAlt'
-advertisersUpdate
+-- * 'advAlt'
+advertisersUpdate'
     :: Int64 -- ^ 'profileId'
-    -> AdvertisersUpdate
-advertisersUpdate pAuuProfileId_ =
-    AdvertisersUpdate
-    { _auuQuotaUser = Nothing
-    , _auuPrettyPrint = True
-    , _auuUserIp = Nothing
-    , _auuProfileId = pAuuProfileId_
-    , _auuKey = Nothing
-    , _auuOauthToken = Nothing
-    , _auuFields = Nothing
-    , _auuAlt = "json"
+    -> AdvertisersUpdate'
+advertisersUpdate' pAdvProfileId_ =
+    AdvertisersUpdate'
+    { _advQuotaUser = Nothing
+    , _advPrettyPrint = True
+    , _advUserIp = Nothing
+    , _advProfileId = pAdvProfileId_
+    , _advKey = Nothing
+    , _advOauthToken = Nothing
+    , _advFields = Nothing
+    , _advAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-auuQuotaUser :: Lens' AdvertisersUpdate' (Maybe Text)
-auuQuotaUser
-  = lens _auuQuotaUser (\ s a -> s{_auuQuotaUser = a})
+advQuotaUser :: Lens' AdvertisersUpdate' (Maybe Text)
+advQuotaUser
+  = lens _advQuotaUser (\ s a -> s{_advQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-auuPrettyPrint :: Lens' AdvertisersUpdate' Bool
-auuPrettyPrint
-  = lens _auuPrettyPrint
-      (\ s a -> s{_auuPrettyPrint = a})
+advPrettyPrint :: Lens' AdvertisersUpdate' Bool
+advPrettyPrint
+  = lens _advPrettyPrint
+      (\ s a -> s{_advPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-auuUserIp :: Lens' AdvertisersUpdate' (Maybe Text)
-auuUserIp
-  = lens _auuUserIp (\ s a -> s{_auuUserIp = a})
+advUserIp :: Lens' AdvertisersUpdate' (Maybe Text)
+advUserIp
+  = lens _advUserIp (\ s a -> s{_advUserIp = a})
 
 -- | User profile ID associated with this request.
-auuProfileId :: Lens' AdvertisersUpdate' Int64
-auuProfileId
-  = lens _auuProfileId (\ s a -> s{_auuProfileId = a})
+advProfileId :: Lens' AdvertisersUpdate' Int64
+advProfileId
+  = lens _advProfileId (\ s a -> s{_advProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auuKey :: Lens' AdvertisersUpdate' (Maybe Text)
-auuKey = lens _auuKey (\ s a -> s{_auuKey = a})
+advKey :: Lens' AdvertisersUpdate' (Maybe Text)
+advKey = lens _advKey (\ s a -> s{_advKey = a})
 
 -- | OAuth 2.0 token for the current user.
-auuOauthToken :: Lens' AdvertisersUpdate' (Maybe Text)
-auuOauthToken
-  = lens _auuOauthToken
-      (\ s a -> s{_auuOauthToken = a})
+advOauthToken :: Lens' AdvertisersUpdate' (Maybe Text)
+advOauthToken
+  = lens _advOauthToken
+      (\ s a -> s{_advOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-auuFields :: Lens' AdvertisersUpdate' (Maybe Text)
-auuFields
-  = lens _auuFields (\ s a -> s{_auuFields = a})
+advFields :: Lens' AdvertisersUpdate' (Maybe Text)
+advFields
+  = lens _advFields (\ s a -> s{_advFields = a})
 
 -- | Data format for the response.
-auuAlt :: Lens' AdvertisersUpdate' Text
-auuAlt = lens _auuAlt (\ s a -> s{_auuAlt = a})
+advAlt :: Lens' AdvertisersUpdate' Alt
+advAlt = lens _advAlt (\ s a -> s{_advAlt = a})
 
 instance GoogleRequest AdvertisersUpdate' where
         type Rs AdvertisersUpdate' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersUpdate{..}
-          = go _auuQuotaUser _auuPrettyPrint _auuUserIp
-              _auuProfileId
-              _auuKey
-              _auuOauthToken
-              _auuFields
-              _auuAlt
+        requestWithRoute r u AdvertisersUpdate'{..}
+          = go _advQuotaUser (Just _advPrettyPrint) _advUserIp
+              _advProfileId
+              _advKey
+              _advOauthToken
+              _advFields
+              (Just _advAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertisersUpdateAPI)
+                      (Proxy :: Proxy AdvertisersUpdateResource)
                       r
                       u

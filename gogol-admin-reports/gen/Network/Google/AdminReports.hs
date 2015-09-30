@@ -28,21 +28,28 @@ module Network.Google.AdminReports
     -- * REST Resources
 
     -- ** AdminChannelsStop
-    , module Admin.Channels.Stop
+    , module Network.Google.Resource.Admin.Channels.Stop
 
     -- ** ReportsActivitiesList
-    , module Reports.Activities.List
+    , module Network.Google.Resource.Reports.Activities.List
 
     -- ** ReportsActivitiesWatch
-    , module Reports.Activities.Watch
+    , module Network.Google.Resource.Reports.Activities.Watch
 
     -- ** ReportsCustomerUsageReportsGet
-    , module Reports.CustomerUsageReports.Get
+    , module Network.Google.Resource.Reports.CustomerUsageReports.Get
 
     -- ** ReportsUserUsageReportGet
-    , module Reports.UserUsageReport.Get
+    , module Network.Google.Resource.Reports.UserUsageReport.Get
 
     -- * Types
+
+    -- ** ActivityEvents
+    , ActivityEvents
+    , activityEvents
+    , aeName
+    , aeParameters
+    , aeType
 
     -- ** UsageReports
     , UsageReports
@@ -52,6 +59,14 @@ module Network.Google.AdminReports
     , urUsageReports
     , urKind
     , urWarnings
+
+    -- ** ActivityId
+    , ActivityId
+    , activityId
+    , aiTime
+    , aiUniqueQualifier
+    , aiCustomerId
+    , aiApplicationName
 
     -- ** Activities
     , Activities
@@ -70,6 +85,10 @@ module Network.Google.AdminReports
     , uParameters
     , uEntity
 
+    -- ** UsageReportParametersMsgValue
+    , UsageReportParametersMsgValue
+    , usageReportParametersMsgValue
+
     -- ** Channel
     , Channel
     , channel
@@ -84,6 +103,23 @@ module Network.Google.AdminReports
     , cId
     , cType
 
+    -- ** UsageReportsWarningsData
+    , UsageReportsWarningsData
+    , usageReportsWarningsData
+    , urwdValue
+    , urwdKey
+
+    -- ** UsageReportsWarnings
+    , UsageReportsWarnings
+    , usageReportsWarnings
+    , urwData
+    , urwCode
+    , urwMessage
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
+
     -- ** Activity
     , Activity
     , activity
@@ -94,6 +130,45 @@ module Network.Google.AdminReports
     , actOwnerDomain
     , actEvents
     , actId
+
+    -- ** ActivityEventsParameters
+    , ActivityEventsParameters
+    , activityEventsParameters
+    , aepBoolValue
+    , aepIntValue
+    , aepValue
+    , aepMultiIntValue
+    , aepName
+    , aepMultiValue
+
+    -- ** UsageReportEntity
+    , UsageReportEntity
+    , usageReportEntity
+    , ureProfileId
+    , ureCustomerId
+    , ureUserEmail
+    , ureType
+
+    -- ** ActivityActor
+    , ActivityActor
+    , activityActor
+    , aaEmail
+    , aaCallerType
+    , aaProfileId
+    , aaKey
+
+    -- ** UsageReportParameters
+    , UsageReportParameters
+    , usageReportParameters
+    , urpDatetimeValue
+    , urpBoolValue
+    , urpIntValue
+    , urpStringValue
+    , urpName
+    , urpMsgValue
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdminReports.Types
@@ -109,8 +184,10 @@ TODO
 -}
 
 type AdminReportsAPI =
-     Channels :<|> Activities :<|> CustomerUsageReports
-       :<|> UserUsageReport
+     ChannelsStopResource :<|> ActivitiesListResource :<|>
+       ActivitiesWatchResource
+       :<|> CustomerUsageReportsGetResource
+       :<|> UserUsageReportGetResource
 
 adminReportsAPI :: Proxy AdminReportsAPI
 adminReportsAPI = Proxy

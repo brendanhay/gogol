@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- authenticated user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryBookshelvesGet@.
-module Books.Mylibrary.Bookshelves.Get
+module Network.Google.Resource.Books.Mylibrary.Bookshelves.Get
     (
     -- * REST Resource
-      MylibraryBookshelvesGetAPI
+      MylibraryBookshelvesGetResource
 
     -- * Creating a Request
-    , mylibraryBookshelvesGet
-    , MylibraryBookshelvesGet
+    , mylibraryBookshelvesGet'
+    , MylibraryBookshelvesGet'
 
     -- * Request Lenses
     , mbgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryBookshelvesGet@ which the
--- 'MylibraryBookshelvesGet' request conforms to.
-type MylibraryBookshelvesGetAPI =
+-- 'MylibraryBookshelvesGet'' request conforms to.
+type MylibraryBookshelvesGetResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
-           QueryParam "source" Text :> Get '[JSON] Bookshelf
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Bookshelf
 
 -- | Retrieves metadata for a specific bookshelf belonging to the
 -- authenticated user.
 --
--- /See:/ 'mylibraryBookshelvesGet' smart constructor.
-data MylibraryBookshelvesGet = MylibraryBookshelvesGet
+-- /See:/ 'mylibraryBookshelvesGet'' smart constructor.
+data MylibraryBookshelvesGet' = MylibraryBookshelvesGet'
     { _mbgQuotaUser   :: !(Maybe Text)
     , _mbgPrettyPrint :: !Bool
     , _mbgUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data MylibraryBookshelvesGet = MylibraryBookshelvesGet
     , _mbgSource      :: !(Maybe Text)
     , _mbgOauthToken  :: !(Maybe Text)
     , _mbgFields      :: !(Maybe Text)
-    , _mbgAlt         :: !Text
+    , _mbgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryBookshelvesGet'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data MylibraryBookshelvesGet = MylibraryBookshelvesGet
 -- * 'mbgFields'
 --
 -- * 'mbgAlt'
-mylibraryBookshelvesGet
+mylibraryBookshelvesGet'
     :: Text -- ^ 'shelf'
-    -> MylibraryBookshelvesGet
-mylibraryBookshelvesGet pMbgShelf_ =
-    MylibraryBookshelvesGet
+    -> MylibraryBookshelvesGet'
+mylibraryBookshelvesGet' pMbgShelf_ =
+    MylibraryBookshelvesGet'
     { _mbgQuotaUser = Nothing
     , _mbgPrettyPrint = True
     , _mbgUserIp = Nothing
@@ -102,7 +110,7 @@ mylibraryBookshelvesGet pMbgShelf_ =
     , _mbgSource = Nothing
     , _mbgOauthToken = Nothing
     , _mbgFields = Nothing
-    , _mbgAlt = "json"
+    , _mbgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ mbgFields
   = lens _mbgFields (\ s a -> s{_mbgFields = a})
 
 -- | Data format for the response.
-mbgAlt :: Lens' MylibraryBookshelvesGet' Text
+mbgAlt :: Lens' MylibraryBookshelvesGet' Alt
 mbgAlt = lens _mbgAlt (\ s a -> s{_mbgAlt = a})
 
 instance GoogleRequest MylibraryBookshelvesGet' where
         type Rs MylibraryBookshelvesGet' = Bookshelf
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryBookshelvesGet{..}
-          = go _mbgQuotaUser _mbgPrettyPrint _mbgUserIp
+        requestWithRoute r u MylibraryBookshelvesGet'{..}
+          = go _mbgQuotaUser (Just _mbgPrettyPrint) _mbgUserIp
               _mbgShelf
               _mbgKey
               _mbgSource
               _mbgOauthToken
               _mbgFields
-              _mbgAlt
+              (Just _mbgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryBookshelvesGetAPI)
+                      (Proxy :: Proxy MylibraryBookshelvesGetResource)
                       r
                       u

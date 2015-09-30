@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- is only available to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementApplicationsListHidden@.
-module GamesManagement.Applications.ListHidden
+module Network.Google.Resource.GamesManagement.Applications.ListHidden
     (
     -- * REST Resource
-      ApplicationsListHiddenAPI
+      ApplicationsListHiddenResource
 
     -- * Creating a Request
-    , applicationsListHidden
-    , ApplicationsListHidden
+    , applicationsListHidden'
+    , ApplicationsListHidden'
 
     -- * Request Lenses
     , alhQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementApplicationsListHidden@ which the
--- 'ApplicationsListHidden' request conforms to.
-type ApplicationsListHiddenAPI =
+-- 'ApplicationsListHidden'' request conforms to.
+type ApplicationsListHiddenResource =
      "applications" :>
        Capture "applicationId" Text :>
          "players" :>
            "hidden" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 Get '[JSON] HiddenPlayerList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] HiddenPlayerList
 
 -- | Get the list of players hidden from the given application. This method
 -- is only available to user accounts for your developer console.
 --
--- /See:/ 'applicationsListHidden' smart constructor.
-data ApplicationsListHidden = ApplicationsListHidden
+-- /See:/ 'applicationsListHidden'' smart constructor.
+data ApplicationsListHidden' = ApplicationsListHidden'
     { _alhQuotaUser     :: !(Maybe Text)
     , _alhPrettyPrint   :: !Bool
     , _alhUserIp        :: !(Maybe Text)
@@ -70,7 +78,7 @@ data ApplicationsListHidden = ApplicationsListHidden
     , _alhOauthToken    :: !(Maybe Text)
     , _alhMaxResults    :: !(Maybe Int32)
     , _alhFields        :: !(Maybe Text)
-    , _alhAlt           :: !Text
+    , _alhAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListHidden'' with the minimum fields required to make a request.
@@ -96,11 +104,11 @@ data ApplicationsListHidden = ApplicationsListHidden
 -- * 'alhFields'
 --
 -- * 'alhAlt'
-applicationsListHidden
+applicationsListHidden'
     :: Text -- ^ 'applicationId'
-    -> ApplicationsListHidden
-applicationsListHidden pAlhApplicationId_ =
-    ApplicationsListHidden
+    -> ApplicationsListHidden'
+applicationsListHidden' pAlhApplicationId_ =
+    ApplicationsListHidden'
     { _alhQuotaUser = Nothing
     , _alhPrettyPrint = True
     , _alhUserIp = Nothing
@@ -110,7 +118,7 @@ applicationsListHidden pAlhApplicationId_ =
     , _alhOauthToken = Nothing
     , _alhMaxResults = Nothing
     , _alhFields = Nothing
-    , _alhAlt = "json"
+    , _alhAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,23 +177,23 @@ alhFields
   = lens _alhFields (\ s a -> s{_alhFields = a})
 
 -- | Data format for the response.
-alhAlt :: Lens' ApplicationsListHidden' Text
+alhAlt :: Lens' ApplicationsListHidden' Alt
 alhAlt = lens _alhAlt (\ s a -> s{_alhAlt = a})
 
 instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ApplicationsListHidden{..}
-          = go _alhQuotaUser _alhPrettyPrint _alhUserIp
+        requestWithRoute r u ApplicationsListHidden'{..}
+          = go _alhQuotaUser (Just _alhPrettyPrint) _alhUserIp
               _alhApplicationId
               _alhKey
               _alhPageToken
               _alhOauthToken
               _alhMaxResults
               _alhFields
-              _alhAlt
+              (Just _alhAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ApplicationsListHiddenAPI)
+                      (Proxy :: Proxy ApplicationsListHiddenResource)
                       r
                       u

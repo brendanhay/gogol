@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,150 +20,155 @@
 -- | Returns the specified region resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionsGet@.
-module Compute.Regions.Get
+module Network.Google.Resource.Compute.Regions.Get
     (
     -- * REST Resource
-      RegionsGetAPI
+      RegionsGetResource
 
     -- * Creating a Request
-    , regionsGet
-    , RegionsGet
+    , regionsGet'
+    , RegionsGet'
 
     -- * Request Lenses
-    , regQuotaUser
-    , regPrettyPrint
-    , regProject
-    , regUserIp
-    , regKey
-    , regRegion
-    , regOauthToken
-    , regFields
-    , regAlt
+    , rgQuotaUser
+    , rgPrettyPrint
+    , rgProject
+    , rgUserIp
+    , rgKey
+    , rgRegion
+    , rgOauthToken
+    , rgFields
+    , rgAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRegionsGet@ which the
--- 'RegionsGet' request conforms to.
-type RegionsGetAPI =
+-- 'RegionsGet'' request conforms to.
+type RegionsGetResource =
      Capture "project" Text :>
        "regions" :>
-         Capture "region" Text :> Get '[JSON] Region
+         Capture "region" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Region
 
 -- | Returns the specified region resource.
 --
--- /See:/ 'regionsGet' smart constructor.
-data RegionsGet = RegionsGet
-    { _regQuotaUser   :: !(Maybe Text)
-    , _regPrettyPrint :: !Bool
-    , _regProject     :: !Text
-    , _regUserIp      :: !(Maybe Text)
-    , _regKey         :: !(Maybe Text)
-    , _regRegion      :: !Text
-    , _regOauthToken  :: !(Maybe Text)
-    , _regFields      :: !(Maybe Text)
-    , _regAlt         :: !Text
+-- /See:/ 'regionsGet'' smart constructor.
+data RegionsGet' = RegionsGet'
+    { _rgQuotaUser   :: !(Maybe Text)
+    , _rgPrettyPrint :: !Bool
+    , _rgProject     :: !Text
+    , _rgUserIp      :: !(Maybe Text)
+    , _rgKey         :: !(Maybe Text)
+    , _rgRegion      :: !Text
+    , _rgOauthToken  :: !(Maybe Text)
+    , _rgFields      :: !(Maybe Text)
+    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'regQuotaUser'
+-- * 'rgQuotaUser'
 --
--- * 'regPrettyPrint'
+-- * 'rgPrettyPrint'
 --
--- * 'regProject'
+-- * 'rgProject'
 --
--- * 'regUserIp'
+-- * 'rgUserIp'
 --
--- * 'regKey'
+-- * 'rgKey'
 --
--- * 'regRegion'
+-- * 'rgRegion'
 --
--- * 'regOauthToken'
+-- * 'rgOauthToken'
 --
--- * 'regFields'
+-- * 'rgFields'
 --
--- * 'regAlt'
-regionsGet
+-- * 'rgAlt'
+regionsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> RegionsGet
-regionsGet pRegProject_ pRegRegion_ =
-    RegionsGet
-    { _regQuotaUser = Nothing
-    , _regPrettyPrint = True
-    , _regProject = pRegProject_
-    , _regUserIp = Nothing
-    , _regKey = Nothing
-    , _regRegion = pRegRegion_
-    , _regOauthToken = Nothing
-    , _regFields = Nothing
-    , _regAlt = "json"
+    -> RegionsGet'
+regionsGet' pRgProject_ pRgRegion_ =
+    RegionsGet'
+    { _rgQuotaUser = Nothing
+    , _rgPrettyPrint = True
+    , _rgProject = pRgProject_
+    , _rgUserIp = Nothing
+    , _rgKey = Nothing
+    , _rgRegion = pRgRegion_
+    , _rgOauthToken = Nothing
+    , _rgFields = Nothing
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-regQuotaUser :: Lens' RegionsGet' (Maybe Text)
-regQuotaUser
-  = lens _regQuotaUser (\ s a -> s{_regQuotaUser = a})
+rgQuotaUser :: Lens' RegionsGet' (Maybe Text)
+rgQuotaUser
+  = lens _rgQuotaUser (\ s a -> s{_rgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-regPrettyPrint :: Lens' RegionsGet' Bool
-regPrettyPrint
-  = lens _regPrettyPrint
-      (\ s a -> s{_regPrettyPrint = a})
+rgPrettyPrint :: Lens' RegionsGet' Bool
+rgPrettyPrint
+  = lens _rgPrettyPrint
+      (\ s a -> s{_rgPrettyPrint = a})
 
 -- | Project ID for this request.
-regProject :: Lens' RegionsGet' Text
-regProject
-  = lens _regProject (\ s a -> s{_regProject = a})
+rgProject :: Lens' RegionsGet' Text
+rgProject
+  = lens _rgProject (\ s a -> s{_rgProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-regUserIp :: Lens' RegionsGet' (Maybe Text)
-regUserIp
-  = lens _regUserIp (\ s a -> s{_regUserIp = a})
+rgUserIp :: Lens' RegionsGet' (Maybe Text)
+rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-regKey :: Lens' RegionsGet' (Maybe Text)
-regKey = lens _regKey (\ s a -> s{_regKey = a})
+rgKey :: Lens' RegionsGet' (Maybe Text)
+rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | Name of the region resource to return.
-regRegion :: Lens' RegionsGet' Text
-regRegion
-  = lens _regRegion (\ s a -> s{_regRegion = a})
+rgRegion :: Lens' RegionsGet' Text
+rgRegion = lens _rgRegion (\ s a -> s{_rgRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-regOauthToken :: Lens' RegionsGet' (Maybe Text)
-regOauthToken
-  = lens _regOauthToken
-      (\ s a -> s{_regOauthToken = a})
+rgOauthToken :: Lens' RegionsGet' (Maybe Text)
+rgOauthToken
+  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-regFields :: Lens' RegionsGet' (Maybe Text)
-regFields
-  = lens _regFields (\ s a -> s{_regFields = a})
+rgFields :: Lens' RegionsGet' (Maybe Text)
+rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-regAlt :: Lens' RegionsGet' Text
-regAlt = lens _regAlt (\ s a -> s{_regAlt = a})
+rgAlt :: Lens' RegionsGet' Alt
+rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest RegionsGet' where
         type Rs RegionsGet' = Region
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionsGet{..}
-          = go _regQuotaUser _regPrettyPrint _regProject
-              _regUserIp
-              _regKey
-              _regRegion
-              _regOauthToken
-              _regFields
-              _regAlt
+        requestWithRoute r u RegionsGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgProject
+              _rgUserIp
+              _rgKey
+              _rgRegion
+              _rgOauthToken
+              _rgFields
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RegionsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RegionsGetResource)
+                      r
+                      u

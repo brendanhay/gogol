@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return a single feature, given its ID.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFeaturesGet@.
-module Mapsengine.Tables.Features.Get
+module Network.Google.Resource.Mapsengine.Tables.Features.Get
     (
     -- * REST Resource
-      TablesFeaturesGetAPI
+      TablesFeaturesGetResource
 
     -- * Creating a Request
-    , tablesFeaturesGet
-    , TablesFeaturesGet
+    , tablesFeaturesGet'
+    , TablesFeaturesGet'
 
     -- * Request Lenses
     , tfgQuotaUser
@@ -46,30 +47,39 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFeaturesGet@ which the
--- 'TablesFeaturesGet' request conforms to.
-type TablesFeaturesGetAPI =
+-- 'TablesFeaturesGet'' request conforms to.
+type TablesFeaturesGetResource =
      "tables" :>
        Capture "tableId" Text :>
          "features" :>
            Capture "id" Text :>
-             QueryParam "version" Text :>
-               QueryParam "select" Text :> Get '[JSON] Feature
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "version"
+                       MapsengineTablesFeaturesGetVersion
+                       :>
+                       QueryParam "select" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Feature
 
 -- | Return a single feature, given its ID.
 --
--- /See:/ 'tablesFeaturesGet' smart constructor.
-data TablesFeaturesGet = TablesFeaturesGet
+-- /See:/ 'tablesFeaturesGet'' smart constructor.
+data TablesFeaturesGet' = TablesFeaturesGet'
     { _tfgQuotaUser   :: !(Maybe Text)
     , _tfgPrettyPrint :: !Bool
     , _tfgUserIp      :: !(Maybe Text)
     , _tfgKey         :: !(Maybe Text)
-    , _tfgVersion     :: !(Maybe Text)
+    , _tfgVersion     :: !(Maybe MapsengineTablesFeaturesGetVersion)
     , _tfgId          :: !Text
     , _tfgSelect      :: !(Maybe Text)
     , _tfgOauthToken  :: !(Maybe Text)
     , _tfgTableId     :: !Text
     , _tfgFields      :: !(Maybe Text)
-    , _tfgAlt         :: !Text
+    , _tfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesGet'' with the minimum fields required to make a request.
@@ -97,12 +107,12 @@ data TablesFeaturesGet = TablesFeaturesGet
 -- * 'tfgFields'
 --
 -- * 'tfgAlt'
-tablesFeaturesGet
+tablesFeaturesGet'
     :: Text -- ^ 'id'
     -> Text -- ^ 'tableId'
-    -> TablesFeaturesGet
-tablesFeaturesGet pTfgId_ pTfgTableId_ =
-    TablesFeaturesGet
+    -> TablesFeaturesGet'
+tablesFeaturesGet' pTfgId_ pTfgTableId_ =
+    TablesFeaturesGet'
     { _tfgQuotaUser = Nothing
     , _tfgPrettyPrint = True
     , _tfgUserIp = Nothing
@@ -113,7 +123,7 @@ tablesFeaturesGet pTfgId_ pTfgTableId_ =
     , _tfgOauthToken = Nothing
     , _tfgTableId = pTfgTableId_
     , _tfgFields = Nothing
-    , _tfgAlt = "json"
+    , _tfgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +152,7 @@ tfgKey :: Lens' TablesFeaturesGet' (Maybe Text)
 tfgKey = lens _tfgKey (\ s a -> s{_tfgKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
-tfgVersion :: Lens' TablesFeaturesGet' (Maybe Text)
+tfgVersion :: Lens' TablesFeaturesGet' (Maybe MapsengineTablesFeaturesGetVersion)
 tfgVersion
   = lens _tfgVersion (\ s a -> s{_tfgVersion = a})
 
@@ -173,23 +183,24 @@ tfgFields
   = lens _tfgFields (\ s a -> s{_tfgFields = a})
 
 -- | Data format for the response.
-tfgAlt :: Lens' TablesFeaturesGet' Text
+tfgAlt :: Lens' TablesFeaturesGet' Alt
 tfgAlt = lens _tfgAlt (\ s a -> s{_tfgAlt = a})
 
 instance GoogleRequest TablesFeaturesGet' where
         type Rs TablesFeaturesGet' = Feature
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFeaturesGet{..}
-          = go _tfgQuotaUser _tfgPrettyPrint _tfgUserIp _tfgKey
+        requestWithRoute r u TablesFeaturesGet'{..}
+          = go _tfgQuotaUser (Just _tfgPrettyPrint) _tfgUserIp
+              _tfgKey
               _tfgVersion
               _tfgId
               _tfgSelect
               _tfgOauthToken
               _tfgTableId
               _tfgFields
-              _tfgAlt
+              (Just _tfgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFeaturesGetAPI)
+                      (Proxy :: Proxy TablesFeaturesGetResource)
                       r
                       u

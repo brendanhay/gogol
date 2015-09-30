@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsGet@.
-module Storage.BucketAccessControls.Get
+module Network.Google.Resource.Storage.BucketAccessControls.Get
     (
     -- * REST Resource
-      BucketAccessControlsGetAPI
+      BucketAccessControlsGetResource
 
     -- * Creating a Request
-    , bucketAccessControlsGet
-    , BucketAccessControlsGet
+    , bucketAccessControlsGet'
+    , BucketAccessControlsGet'
 
     -- * Request Lenses
     , bacgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsGet@ which the
--- 'BucketAccessControlsGet' request conforms to.
-type BucketAccessControlsGetAPI =
+-- 'BucketAccessControlsGet'' request conforms to.
+type BucketAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
          "acl" :>
            Capture "entity" Text :>
-             Get '[JSON] BucketAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] BucketAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsGet' smart constructor.
-data BucketAccessControlsGet = BucketAccessControlsGet
+-- /See:/ 'bucketAccessControlsGet'' smart constructor.
+data BucketAccessControlsGet' = BucketAccessControlsGet'
     { _bacgQuotaUser   :: !(Maybe Text)
     , _bacgPrettyPrint :: !Bool
     , _bacgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data BucketAccessControlsGet = BucketAccessControlsGet
     , _bacgOauthToken  :: !(Maybe Text)
     , _bacgEntity      :: !Text
     , _bacgFields      :: !(Maybe Text)
-    , _bacgAlt         :: !Text
+    , _bacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data BucketAccessControlsGet = BucketAccessControlsGet
 -- * 'bacgFields'
 --
 -- * 'bacgAlt'
-bucketAccessControlsGet
+bucketAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> BucketAccessControlsGet
-bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
-    BucketAccessControlsGet
+    -> BucketAccessControlsGet'
+bucketAccessControlsGet' pBacgBucket_ pBacgEntity_ =
+    BucketAccessControlsGet'
     { _bacgQuotaUser = Nothing
     , _bacgPrettyPrint = True
     , _bacgUserIp = Nothing
@@ -102,7 +110,7 @@ bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
     , _bacgOauthToken = Nothing
     , _bacgEntity = pBacgEntity_
     , _bacgFields = Nothing
-    , _bacgAlt = "json"
+    , _bacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,23 +163,24 @@ bacgFields
   = lens _bacgFields (\ s a -> s{_bacgFields = a})
 
 -- | Data format for the response.
-bacgAlt :: Lens' BucketAccessControlsGet' Text
+bacgAlt :: Lens' BucketAccessControlsGet' Alt
 bacgAlt = lens _bacgAlt (\ s a -> s{_bacgAlt = a})
 
 instance GoogleRequest BucketAccessControlsGet' where
         type Rs BucketAccessControlsGet' =
              BucketAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsGet{..}
-          = go _bacgQuotaUser _bacgPrettyPrint _bacgUserIp
+        requestWithRoute r u BucketAccessControlsGet'{..}
+          = go _bacgQuotaUser (Just _bacgPrettyPrint)
+              _bacgUserIp
               _bacgBucket
               _bacgKey
               _bacgOauthToken
               _bacgEntity
               _bacgFields
-              _bacgAlt
+              (Just _bacgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsGetAPI)
+                      (Proxy :: Proxy BucketAccessControlsGetResource)
                       r
                       u

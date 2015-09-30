@@ -240,6 +240,9 @@ module Network.Google.PlayEnterprise.Types
     , eeKind
     , eeReason
     , eeProductId
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.PlayEnterprise.Types.Product
@@ -247,7 +250,7 @@ import           Network.Google.PlayEnterprise.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Play EMM API.
-playEnterpriseURL :: BaseURL
+playEnterpriseURL :: BaseUrl
 playEnterpriseURL
   = BaseUrl Https
       "https://www.googleapis.com/androidenterprise/v1/"

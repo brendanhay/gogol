@@ -44,6 +44,10 @@ module Network.Google.Logging.Types
     , wlerEntries
     , wlerCommonLabels
 
+    -- * WriteLogEntriesRequestCommonLabels
+    , WriteLogEntriesRequestCommonLabels
+    , writeLogEntriesRequestCommonLabels
+
     -- * RequestLog
     , RequestLog
     , requestLog
@@ -100,6 +104,10 @@ module Network.Google.Logging.Types
     , listSinksResponse
     , lsrSinks
 
+    -- * LogEntryProtoPayload
+    , LogEntryProtoPayload
+    , logEntryProtoPayload
+
     -- * ListLogServiceIndexesResponse
     , ListLogServiceIndexesResponse
     , listLogServiceIndexesResponse
@@ -123,6 +131,10 @@ module Network.Google.Logging.Types
     , listLogServicesResponse
     , llsrNextPageToken
     , llsrLogServices
+
+    -- * StatusDetails
+    , StatusDetails
+    , statusDetails
 
     -- * ListLogsResponse
     , ListLogsResponse
@@ -166,6 +178,10 @@ module Network.Google.Logging.Types
     , llLogMessage
     , llSourceLocation
 
+    -- * LogEntryMetadataLabels
+    , LogEntryMetadataLabels
+    , logEntryMetadataLabels
+
     -- * LogEntry
     , LogEntry
     , logEntry
@@ -189,6 +205,10 @@ module Network.Google.Logging.Types
     , sourceReference
     , srRepository
     , srRevisionId
+
+    -- * LogEntryStructPayload
+    , LogEntryStructPayload
+    , logEntryStructPayload
     ) where
 
 import           Network.Google.Logging.Types.Product
@@ -196,6 +216,6 @@ import           Network.Google.Logging.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta3' of the Google Cloud Logging API.
-loggingURL :: BaseURL
+loggingURL :: BaseUrl
 loggingURL
   = BaseUrl Https "https://logging.googleapis.com/" 443

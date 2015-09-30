@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- when read by any other developer reading public data types.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesCreate@.
-module Fitness.Users.DataSources.Create
+module Network.Google.Resource.Fitness.Users.DataSources.Create
     (
     -- * REST Resource
-      UsersDataSourcesCreateAPI
+      UsersDataSourcesCreateResource
 
     -- * Creating a Request
-    , usersDataSourcesCreate
-    , UsersDataSourcesCreate
+    , usersDataSourcesCreate'
+    , UsersDataSourcesCreate'
 
     -- * Request Lenses
     , udscQuotaUser
@@ -50,10 +51,17 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesCreate@ which the
--- 'UsersDataSourcesCreate' request conforms to.
-type UsersDataSourcesCreateAPI =
+-- 'UsersDataSourcesCreate'' request conforms to.
+type UsersDataSourcesCreateResource =
      Capture "userId" Text :>
-       "dataSources" :> Post '[JSON] DataSource
+       "dataSources" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] DataSource
 
 -- | Creates a new data source that is unique across all data sources
 -- belonging to this user. The data stream ID field can be omitted and will
@@ -64,8 +72,8 @@ type UsersDataSourcesCreateAPI =
 -- data source is included. This developer project number is obfuscated
 -- when read by any other developer reading public data types.
 --
--- /See:/ 'usersDataSourcesCreate' smart constructor.
-data UsersDataSourcesCreate = UsersDataSourcesCreate
+-- /See:/ 'usersDataSourcesCreate'' smart constructor.
+data UsersDataSourcesCreate' = UsersDataSourcesCreate'
     { _udscQuotaUser   :: !(Maybe Text)
     , _udscPrettyPrint :: !Bool
     , _udscUserIp      :: !(Maybe Text)
@@ -73,7 +81,7 @@ data UsersDataSourcesCreate = UsersDataSourcesCreate
     , _udscKey         :: !(Maybe Text)
     , _udscOauthToken  :: !(Maybe Text)
     , _udscFields      :: !(Maybe Text)
-    , _udscAlt         :: !Text
+    , _udscAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesCreate'' with the minimum fields required to make a request.
@@ -95,11 +103,11 @@ data UsersDataSourcesCreate = UsersDataSourcesCreate
 -- * 'udscFields'
 --
 -- * 'udscAlt'
-usersDataSourcesCreate
+usersDataSourcesCreate'
     :: Text -- ^ 'userId'
-    -> UsersDataSourcesCreate
-usersDataSourcesCreate pUdscUserId_ =
-    UsersDataSourcesCreate
+    -> UsersDataSourcesCreate'
+usersDataSourcesCreate' pUdscUserId_ =
+    UsersDataSourcesCreate'
     { _udscQuotaUser = Nothing
     , _udscPrettyPrint = True
     , _udscUserIp = Nothing
@@ -107,7 +115,7 @@ usersDataSourcesCreate pUdscUserId_ =
     , _udscKey = Nothing
     , _udscOauthToken = Nothing
     , _udscFields = Nothing
-    , _udscAlt = "json"
+    , _udscAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,21 +162,22 @@ udscFields
   = lens _udscFields (\ s a -> s{_udscFields = a})
 
 -- | Data format for the response.
-udscAlt :: Lens' UsersDataSourcesCreate' Text
+udscAlt :: Lens' UsersDataSourcesCreate' Alt
 udscAlt = lens _udscAlt (\ s a -> s{_udscAlt = a})
 
 instance GoogleRequest UsersDataSourcesCreate' where
         type Rs UsersDataSourcesCreate' = DataSource
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesCreate{..}
-          = go _udscQuotaUser _udscPrettyPrint _udscUserIp
+        requestWithRoute r u UsersDataSourcesCreate'{..}
+          = go _udscQuotaUser (Just _udscPrettyPrint)
+              _udscUserIp
               _udscUserId
               _udscKey
               _udscOauthToken
               _udscFields
-              _udscAlt
+              (Just _udscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesCreateAPI)
+                      (Proxy :: Proxy UsersDataSourcesCreateResource)
                       r
                       u

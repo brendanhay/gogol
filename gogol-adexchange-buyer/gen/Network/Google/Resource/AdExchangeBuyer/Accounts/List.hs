@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the authenticated user\'s list of accounts.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsList@.
-module AdExchangeBuyer.Accounts.List
+module Network.Google.Resource.AdExchangeBuyer.Accounts.List
     (
     -- * REST Resource
-      AccountsListAPI
+      AccountsListResource
 
     -- * Creating a Request
-    , accountsList
-    , AccountsList
+    , accountsList'
+    , AccountsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsList@ which the
--- 'AccountsList' request conforms to.
-type AccountsListAPI =
-     "accounts" :> Get '[JSON] AccountsList
+-- 'AccountsList'' request conforms to.
+type AccountsListResource =
+     "accounts" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] AccountsList
 
 -- | Retrieves the authenticated user\'s list of accounts.
 --
--- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+-- /See:/ 'accountsList'' smart constructor.
+data AccountsList' = AccountsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIp      :: !(Maybe Text)
     , _alKey         :: !(Maybe Text)
     , _alOauthToken  :: !(Maybe Text)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data AccountsList = AccountsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-accountsList
-    :: AccountsList
-accountsList =
-    AccountsList
+accountsList'
+    :: AccountsList'
+accountsList' =
+    AccountsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
     , _alKey = Nothing
     , _alOauthToken = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +131,20 @@ alFields :: Lens' AccountsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AccountsList' Text
+alAlt :: Lens' AccountsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = AccountsList
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp _alKey
+        requestWithRoute r u AccountsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+              _alKey
               _alOauthToken
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsListResource)
+                      r
                       u

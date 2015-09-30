@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a list of user role permissions, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionsList@.
-module DFAReporting.UserRolePermissions.List
+module Network.Google.Resource.DFAReporting.UserRolePermissions.List
     (
     -- * REST Resource
-      UserRolePermissionsListAPI
+      UserRolePermissionsListResource
 
     -- * Creating a Request
-    , userRolePermissionsList
-    , UserRolePermissionsList
+    , userRolePermissionsList'
+    , UserRolePermissionsList'
 
     -- * Request Lenses
     , urplQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolePermissionsList@ which the
--- 'UserRolePermissionsList' request conforms to.
-type UserRolePermissionsListAPI =
+-- 'UserRolePermissionsList'' request conforms to.
+type UserRolePermissionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRolePermissions" :>
-           QueryParams "ids" Int64 :>
-             Get '[JSON] UserRolePermissionsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParams "ids" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] UserRolePermissionsListResponse
 
 -- | Gets a list of user role permissions, possibly filtered.
 --
--- /See:/ 'userRolePermissionsList' smart constructor.
-data UserRolePermissionsList = UserRolePermissionsList
+-- /See:/ 'userRolePermissionsList'' smart constructor.
+data UserRolePermissionsList' = UserRolePermissionsList'
     { _urplQuotaUser   :: !(Maybe Text)
     , _urplPrettyPrint :: !Bool
     , _urplUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data UserRolePermissionsList = UserRolePermissionsList
     , _urplKey         :: !(Maybe Text)
     , _urplOauthToken  :: !(Maybe Text)
     , _urplFields      :: !(Maybe Text)
-    , _urplAlt         :: !Text
+    , _urplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsList'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data UserRolePermissionsList = UserRolePermissionsList
 -- * 'urplFields'
 --
 -- * 'urplAlt'
-userRolePermissionsList
+userRolePermissionsList'
     :: Int64 -- ^ 'profileId'
-    -> UserRolePermissionsList
-userRolePermissionsList pUrplProfileId_ =
-    UserRolePermissionsList
+    -> UserRolePermissionsList'
+userRolePermissionsList' pUrplProfileId_ =
+    UserRolePermissionsList'
     { _urplQuotaUser = Nothing
     , _urplPrettyPrint = True
     , _urplUserIp = Nothing
@@ -101,7 +109,7 @@ userRolePermissionsList pUrplProfileId_ =
     , _urplKey = Nothing
     , _urplOauthToken = Nothing
     , _urplFields = Nothing
-    , _urplAlt = "json"
+    , _urplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +160,24 @@ urplFields
   = lens _urplFields (\ s a -> s{_urplFields = a})
 
 -- | Data format for the response.
-urplAlt :: Lens' UserRolePermissionsList' Text
+urplAlt :: Lens' UserRolePermissionsList' Alt
 urplAlt = lens _urplAlt (\ s a -> s{_urplAlt = a})
 
 instance GoogleRequest UserRolePermissionsList' where
         type Rs UserRolePermissionsList' =
              UserRolePermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolePermissionsList{..}
-          = go _urplQuotaUser _urplPrettyPrint _urplUserIp
+        requestWithRoute r u UserRolePermissionsList'{..}
+          = go _urplQuotaUser (Just _urplPrettyPrint)
+              _urplUserIp
               _urplIds
               _urplProfileId
               _urplKey
               _urplOauthToken
               _urplFields
-              _urplAlt
+              (Just _urplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UserRolePermissionsListAPI)
+                      (Proxy :: Proxy UserRolePermissionsListResource)
                       r
                       u

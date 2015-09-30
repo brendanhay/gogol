@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List custom data sources to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDataSourcesList@.
-module Analytics.Management.CustomDataSources.List
+module Network.Google.Resource.Analytics.Management.CustomDataSources.List
     (
     -- * REST Resource
-      ManagementCustomDataSourcesListAPI
+      ManagementCustomDataSourcesListResource
 
     -- * Creating a Request
-    , managementCustomDataSourcesList
-    , ManagementCustomDataSourcesList
+    , managementCustomDataSourcesList'
+    , ManagementCustomDataSourcesList'
 
     -- * Request Lenses
     , mcdslQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDataSourcesList@ which the
--- 'ManagementCustomDataSourcesList' request conforms to.
-type ManagementCustomDataSourcesListAPI =
+-- 'ManagementCustomDataSourcesList'' request conforms to.
+type ManagementCustomDataSourcesListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customDataSources" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] CustomDataSources
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] CustomDataSources
 
 -- | List custom data sources to which the user has access.
 --
--- /See:/ 'managementCustomDataSourcesList' smart constructor.
-data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
+-- /See:/ 'managementCustomDataSourcesList'' smart constructor.
+data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
     { _mcdslQuotaUser     :: !(Maybe Text)
     , _mcdslPrettyPrint   :: !Bool
     , _mcdslWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
     , _mcdslStartIndex    :: !(Maybe Int32)
     , _mcdslMaxResults    :: !(Maybe Int32)
     , _mcdslFields        :: !(Maybe Text)
-    , _mcdslAlt           :: !Text
+    , _mcdslAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList'' with the minimum fields required to make a request.
@@ -100,12 +108,12 @@ data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
 -- * 'mcdslFields'
 --
 -- * 'mcdslAlt'
-managementCustomDataSourcesList
+managementCustomDataSourcesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomDataSourcesList
-managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
-    ManagementCustomDataSourcesList
+    -> ManagementCustomDataSourcesList'
+managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
+    ManagementCustomDataSourcesList'
     { _mcdslQuotaUser = Nothing
     , _mcdslPrettyPrint = False
     , _mcdslWebPropertyId = pMcdslWebPropertyId_
@@ -116,7 +124,7 @@ managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
     , _mcdslStartIndex = Nothing
     , _mcdslMaxResults = Nothing
     , _mcdslFields = Nothing
-    , _mcdslAlt = "json"
+    , _mcdslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ mcdslFields
   = lens _mcdslFields (\ s a -> s{_mcdslFields = a})
 
 -- | Data format for the response.
-mcdslAlt :: Lens' ManagementCustomDataSourcesList' Text
+mcdslAlt :: Lens' ManagementCustomDataSourcesList' Alt
 mcdslAlt = lens _mcdslAlt (\ s a -> s{_mcdslAlt = a})
 
 instance GoogleRequest
@@ -192,8 +200,8 @@ instance GoogleRequest
              CustomDataSources
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDataSourcesList{..}
-          = go _mcdslQuotaUser _mcdslPrettyPrint
+          ManagementCustomDataSourcesList'{..}
+          = go _mcdslQuotaUser (Just _mcdslPrettyPrint)
               _mcdslWebPropertyId
               _mcdslUserIp
               _mcdslAccountId
@@ -202,9 +210,10 @@ instance GoogleRequest
               _mcdslStartIndex
               _mcdslMaxResults
               _mcdslFields
-              _mcdslAlt
+              (Just _mcdslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDataSourcesListAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDataSourcesListResource)
                       r
                       u

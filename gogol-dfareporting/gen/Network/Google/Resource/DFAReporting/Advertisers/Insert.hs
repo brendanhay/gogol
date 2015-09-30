@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,138 +20,148 @@
 -- | Inserts a new advertiser.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertisersInsert@.
-module DFAReporting.Advertisers.Insert
+module Network.Google.Resource.DFAReporting.Advertisers.Insert
     (
     -- * REST Resource
-      AdvertisersInsertAPI
+      AdvertisersInsertResource
 
     -- * Creating a Request
-    , advertisersInsert
-    , AdvertisersInsert
+    , advertisersInsert'
+    , AdvertisersInsert'
 
     -- * Request Lenses
-    , aiQuotaUser
-    , aiPrettyPrint
-    , aiUserIp
-    , aiProfileId
-    , aiKey
-    , aiOauthToken
-    , aiFields
-    , aiAlt
+    , aiiQuotaUser
+    , aiiPrettyPrint
+    , aiiUserIp
+    , aiiProfileId
+    , aiiKey
+    , aiiOauthToken
+    , aiiFields
+    , aiiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertisersInsert@ which the
--- 'AdvertisersInsert' request conforms to.
-type AdvertisersInsertAPI =
+-- 'AdvertisersInsert'' request conforms to.
+type AdvertisersInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "advertisers" :> Post '[JSON] Advertiser
+         "advertisers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Advertiser
 
 -- | Inserts a new advertiser.
 --
--- /See:/ 'advertisersInsert' smart constructor.
-data AdvertisersInsert = AdvertisersInsert
-    { _aiQuotaUser   :: !(Maybe Text)
-    , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
-    , _aiProfileId   :: !Int64
-    , _aiKey         :: !(Maybe Text)
-    , _aiOauthToken  :: !(Maybe Text)
-    , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+-- /See:/ 'advertisersInsert'' smart constructor.
+data AdvertisersInsert' = AdvertisersInsert'
+    { _aiiQuotaUser   :: !(Maybe Text)
+    , _aiiPrettyPrint :: !Bool
+    , _aiiUserIp      :: !(Maybe Text)
+    , _aiiProfileId   :: !Int64
+    , _aiiKey         :: !(Maybe Text)
+    , _aiiOauthToken  :: !(Maybe Text)
+    , _aiiFields      :: !(Maybe Text)
+    , _aiiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aiQuotaUser'
+-- * 'aiiQuotaUser'
 --
--- * 'aiPrettyPrint'
+-- * 'aiiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiiUserIp'
 --
--- * 'aiProfileId'
+-- * 'aiiProfileId'
 --
--- * 'aiKey'
+-- * 'aiiKey'
 --
--- * 'aiOauthToken'
+-- * 'aiiOauthToken'
 --
--- * 'aiFields'
+-- * 'aiiFields'
 --
--- * 'aiAlt'
-advertisersInsert
+-- * 'aiiAlt'
+advertisersInsert'
     :: Int64 -- ^ 'profileId'
-    -> AdvertisersInsert
-advertisersInsert pAiProfileId_ =
-    AdvertisersInsert
-    { _aiQuotaUser = Nothing
-    , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
-    , _aiProfileId = pAiProfileId_
-    , _aiKey = Nothing
-    , _aiOauthToken = Nothing
-    , _aiFields = Nothing
-    , _aiAlt = "json"
+    -> AdvertisersInsert'
+advertisersInsert' pAiiProfileId_ =
+    AdvertisersInsert'
+    { _aiiQuotaUser = Nothing
+    , _aiiPrettyPrint = True
+    , _aiiUserIp = Nothing
+    , _aiiProfileId = pAiiProfileId_
+    , _aiiKey = Nothing
+    , _aiiOauthToken = Nothing
+    , _aiiFields = Nothing
+    , _aiiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aiQuotaUser :: Lens' AdvertisersInsert' (Maybe Text)
-aiQuotaUser
-  = lens _aiQuotaUser (\ s a -> s{_aiQuotaUser = a})
+aiiQuotaUser :: Lens' AdvertisersInsert' (Maybe Text)
+aiiQuotaUser
+  = lens _aiiQuotaUser (\ s a -> s{_aiiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aiPrettyPrint :: Lens' AdvertisersInsert' Bool
-aiPrettyPrint
-  = lens _aiPrettyPrint
-      (\ s a -> s{_aiPrettyPrint = a})
+aiiPrettyPrint :: Lens' AdvertisersInsert' Bool
+aiiPrettyPrint
+  = lens _aiiPrettyPrint
+      (\ s a -> s{_aiiPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' AdvertisersInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiiUserIp :: Lens' AdvertisersInsert' (Maybe Text)
+aiiUserIp
+  = lens _aiiUserIp (\ s a -> s{_aiiUserIp = a})
 
 -- | User profile ID associated with this request.
-aiProfileId :: Lens' AdvertisersInsert' Int64
-aiProfileId
-  = lens _aiProfileId (\ s a -> s{_aiProfileId = a})
+aiiProfileId :: Lens' AdvertisersInsert' Int64
+aiiProfileId
+  = lens _aiiProfileId (\ s a -> s{_aiiProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AdvertisersInsert' (Maybe Text)
-aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
+aiiKey :: Lens' AdvertisersInsert' (Maybe Text)
+aiiKey = lens _aiiKey (\ s a -> s{_aiiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' AdvertisersInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiiOauthToken :: Lens' AdvertisersInsert' (Maybe Text)
+aiiOauthToken
+  = lens _aiiOauthToken
+      (\ s a -> s{_aiiOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aiFields :: Lens' AdvertisersInsert' (Maybe Text)
-aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
+aiiFields :: Lens' AdvertisersInsert' (Maybe Text)
+aiiFields
+  = lens _aiiFields (\ s a -> s{_aiiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' AdvertisersInsert' Text
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+aiiAlt :: Lens' AdvertisersInsert' Alt
+aiiAlt = lens _aiiAlt (\ s a -> s{_aiiAlt = a})
 
 instance GoogleRequest AdvertisersInsert' where
         type Rs AdvertisersInsert' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertisersInsert{..}
-          = go _aiQuotaUser _aiPrettyPrint _aiUserIp
-              _aiProfileId
-              _aiKey
-              _aiOauthToken
-              _aiFields
-              _aiAlt
+        requestWithRoute r u AdvertisersInsert'{..}
+          = go _aiiQuotaUser (Just _aiiPrettyPrint) _aiiUserIp
+              _aiiProfileId
+              _aiiKey
+              _aiiOauthToken
+              _aiiFields
+              (Just _aiiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertisersInsertAPI)
+                      (Proxy :: Proxy AdvertisersInsertResource)
                       r
                       u

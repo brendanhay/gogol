@@ -27,160 +27,160 @@ module Network.Google.PlayDeveloper
     -- * REST Resources
 
     -- ** AndroidpublisherEditsApklistingsDelete
-    , module Androidpublisher.Edits.Apklistings.Delete
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Delete
 
     -- ** AndroidpublisherEditsApklistingsDeleteall
-    , module Androidpublisher.Edits.Apklistings.Deleteall
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Deleteall
 
     -- ** AndroidpublisherEditsApklistingsGet
-    , module Androidpublisher.Edits.Apklistings.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Get
 
     -- ** AndroidpublisherEditsApklistingsList
-    , module Androidpublisher.Edits.Apklistings.List
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.List
 
     -- ** AndroidpublisherEditsApklistingsPatch
-    , module Androidpublisher.Edits.Apklistings.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Patch
 
     -- ** AndroidpublisherEditsApklistingsUpdate
-    , module Androidpublisher.Edits.Apklistings.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Update
 
     -- ** AndroidpublisherEditsApksAddexternallyhosted
-    , module Androidpublisher.Edits.Apks.Addexternallyhosted
+    , module Network.Google.Resource.Androidpublisher.Edits.Apks.Addexternallyhosted
 
     -- ** AndroidpublisherEditsApksList
-    , module Androidpublisher.Edits.Apks.List
+    , module Network.Google.Resource.Androidpublisher.Edits.Apks.List
 
     -- ** AndroidpublisherEditsApksUpload
-    , module Androidpublisher.Edits.Apks.Upload
+    , module Network.Google.Resource.Androidpublisher.Edits.Apks.Upload
 
     -- ** AndroidpublisherEditsCommit
-    , module Androidpublisher.Edits.Commit
+    , module Network.Google.Resource.Androidpublisher.Edits.Commit
 
     -- ** AndroidpublisherEditsDelete
-    , module Androidpublisher.Edits.Delete
+    , module Network.Google.Resource.Androidpublisher.Edits.Delete
 
     -- ** AndroidpublisherEditsDetailsGet
-    , module Androidpublisher.Edits.Details.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Details.Get
 
     -- ** AndroidpublisherEditsDetailsPatch
-    , module Androidpublisher.Edits.Details.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Details.Patch
 
     -- ** AndroidpublisherEditsDetailsUpdate
-    , module Androidpublisher.Edits.Details.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Details.Update
 
     -- ** AndroidpublisherEditsExpansionfilesGet
-    , module Androidpublisher.Edits.Expansionfiles.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Get
 
     -- ** AndroidpublisherEditsExpansionfilesPatch
-    , module Androidpublisher.Edits.Expansionfiles.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Patch
 
     -- ** AndroidpublisherEditsExpansionfilesUpdate
-    , module Androidpublisher.Edits.Expansionfiles.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Update
 
     -- ** AndroidpublisherEditsExpansionfilesUpload
-    , module Androidpublisher.Edits.Expansionfiles.Upload
+    , module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Upload
 
     -- ** AndroidpublisherEditsGet
-    , module Androidpublisher.Edits.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Get
 
     -- ** AndroidpublisherEditsImagesDelete
-    , module Androidpublisher.Edits.Images.Delete
+    , module Network.Google.Resource.Androidpublisher.Edits.Images.Delete
 
     -- ** AndroidpublisherEditsImagesDeleteall
-    , module Androidpublisher.Edits.Images.Deleteall
+    , module Network.Google.Resource.Androidpublisher.Edits.Images.Deleteall
 
     -- ** AndroidpublisherEditsImagesList
-    , module Androidpublisher.Edits.Images.List
+    , module Network.Google.Resource.Androidpublisher.Edits.Images.List
 
     -- ** AndroidpublisherEditsImagesUpload
-    , module Androidpublisher.Edits.Images.Upload
+    , module Network.Google.Resource.Androidpublisher.Edits.Images.Upload
 
     -- ** AndroidpublisherEditsInsert
-    , module Androidpublisher.Edits.Insert
+    , module Network.Google.Resource.Androidpublisher.Edits.Insert
 
     -- ** AndroidpublisherEditsListingsDelete
-    , module Androidpublisher.Edits.Listings.Delete
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.Delete
 
     -- ** AndroidpublisherEditsListingsDeleteall
-    , module Androidpublisher.Edits.Listings.Deleteall
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.Deleteall
 
     -- ** AndroidpublisherEditsListingsGet
-    , module Androidpublisher.Edits.Listings.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.Get
 
     -- ** AndroidpublisherEditsListingsList
-    , module Androidpublisher.Edits.Listings.List
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.List
 
     -- ** AndroidpublisherEditsListingsPatch
-    , module Androidpublisher.Edits.Listings.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.Patch
 
     -- ** AndroidpublisherEditsListingsUpdate
-    , module Androidpublisher.Edits.Listings.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Listings.Update
 
     -- ** AndroidpublisherEditsTestersGet
-    , module Androidpublisher.Edits.Testers.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Testers.Get
 
     -- ** AndroidpublisherEditsTestersPatch
-    , module Androidpublisher.Edits.Testers.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Testers.Patch
 
     -- ** AndroidpublisherEditsTestersUpdate
-    , module Androidpublisher.Edits.Testers.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Testers.Update
 
     -- ** AndroidpublisherEditsTracksGet
-    , module Androidpublisher.Edits.Tracks.Get
+    , module Network.Google.Resource.Androidpublisher.Edits.Tracks.Get
 
     -- ** AndroidpublisherEditsTracksList
-    , module Androidpublisher.Edits.Tracks.List
+    , module Network.Google.Resource.Androidpublisher.Edits.Tracks.List
 
     -- ** AndroidpublisherEditsTracksPatch
-    , module Androidpublisher.Edits.Tracks.Patch
+    , module Network.Google.Resource.Androidpublisher.Edits.Tracks.Patch
 
     -- ** AndroidpublisherEditsTracksUpdate
-    , module Androidpublisher.Edits.Tracks.Update
+    , module Network.Google.Resource.Androidpublisher.Edits.Tracks.Update
 
     -- ** AndroidpublisherEditsValidate
-    , module Androidpublisher.Edits.Validate
+    , module Network.Google.Resource.Androidpublisher.Edits.Validate
 
     -- ** AndroidpublisherEntitlementsList
-    , module Androidpublisher.Entitlements.List
+    , module Network.Google.Resource.Androidpublisher.Entitlements.List
 
     -- ** AndroidpublisherInappproductsBatch
-    , module Androidpublisher.Inappproducts.Batch
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Batch
 
     -- ** AndroidpublisherInappproductsDelete
-    , module Androidpublisher.Inappproducts.Delete
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Delete
 
     -- ** AndroidpublisherInappproductsGet
-    , module Androidpublisher.Inappproducts.Get
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Get
 
     -- ** AndroidpublisherInappproductsInsert
-    , module Androidpublisher.Inappproducts.Insert
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Insert
 
     -- ** AndroidpublisherInappproductsList
-    , module Androidpublisher.Inappproducts.List
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.List
 
     -- ** AndroidpublisherInappproductsPatch
-    , module Androidpublisher.Inappproducts.Patch
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Patch
 
     -- ** AndroidpublisherInappproductsUpdate
-    , module Androidpublisher.Inappproducts.Update
+    , module Network.Google.Resource.Androidpublisher.Inappproducts.Update
 
     -- ** AndroidpublisherPurchasesProductsGet
-    , module Androidpublisher.Purchases.Products.Get
+    , module Network.Google.Resource.Androidpublisher.Purchases.Products.Get
 
     -- ** AndroidpublisherPurchasesSubscriptionsCancel
-    , module Androidpublisher.Purchases.Subscriptions.Cancel
+    , module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Cancel
 
     -- ** AndroidpublisherPurchasesSubscriptionsDefer
-    , module Androidpublisher.Purchases.Subscriptions.Defer
+    , module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Defer
 
     -- ** AndroidpublisherPurchasesSubscriptionsGet
-    , module Androidpublisher.Purchases.Subscriptions.Get
+    , module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Get
 
     -- ** AndroidpublisherPurchasesSubscriptionsRefund
-    , module Androidpublisher.Purchases.Subscriptions.Refund
+    , module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Refund
 
     -- ** AndroidpublisherPurchasesSubscriptionsRevoke
-    , module Androidpublisher.Purchases.Subscriptions.Revoke
+    , module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Revoke
 
     -- * Types
 
@@ -188,6 +188,10 @@ module Network.Google.PlayDeveloper
     , InappproductsUpdateResponse
     , inappproductsUpdateResponse
     , iurInappproduct
+
+    -- ** InAppProductListings
+    , InAppProductListings
+    , inAppProductListings
 
     -- ** MonthDay
     , MonthDay
@@ -202,6 +206,9 @@ module Network.Google.PlayDeveloper
     , ibreInappproductsinsertrequest
     , ibreInappproductsupdaterequest
     , ibreBatchId
+
+    -- ** AndroidpublisherEditsExpansionfilesPatchExpansionFileType
+    , AndroidpublisherEditsExpansionfilesPatchExpansionFileType (..)
 
     -- ** InAppProductListing
     , InAppProductListing
@@ -227,6 +234,9 @@ module Network.Google.PlayDeveloper
     , expansionFile
     , efFileSize
     , efReferencesVersion
+
+    -- ** AndroidpublisherEditsExpansionfilesGetExpansionFileType
+    , AndroidpublisherEditsExpansionfilesGetExpansionFileType (..)
 
     -- ** Image
     , Image
@@ -302,6 +312,9 @@ module Network.Google.PlayDeveloper
     , alLanguage
     , alRecentChanges
 
+    -- ** AndroidpublisherEditsTracksUpdateTrack
+    , AndroidpublisherEditsTracksUpdateTrack (..)
+
     -- ** SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
     , subscriptionPurchasesDeferResponse
@@ -356,6 +369,10 @@ module Network.Google.PlayDeveloper
     , ehaUsesPermissions
     , ehaCertificateBase64s
 
+    -- ** InAppProductPrices
+    , InAppProductPrices
+    , inAppProductPrices
+
     -- ** ImagesUploadResponse
     , ImagesUploadResponse
     , imagesUploadResponse
@@ -366,6 +383,9 @@ module Network.Google.PlayDeveloper
     , expansionFilesUploadResponse
     , efurExpansionFile
 
+    -- ** AndroidpublisherEditsTracksGetTrack
+    , AndroidpublisherEditsTracksGetTrack (..)
+
     -- ** InappproductsListResponse
     , InappproductsListResponse
     , inappproductsListResponse
@@ -374,11 +394,17 @@ module Network.Google.PlayDeveloper
     , ilrKind
     , ilrInappproduct
 
+    -- ** AndroidpublisherEditsTracksPatchTrack
+    , AndroidpublisherEditsTracksPatchTrack (..)
+
     -- ** SubscriptionDeferralInfo
     , SubscriptionDeferralInfo
     , subscriptionDeferralInfo
     , sdiDesiredExpiryTimeMillis
     , sdiExpectedExpiryTimeMillis
+
+    -- ** AndroidpublisherEditsExpansionfilesUploadExpansionFileType
+    , AndroidpublisherEditsExpansionfilesUploadExpansionFileType (..)
 
     -- ** ApksAddExternallyHostedResponse
     , ApksAddExternallyHostedResponse
@@ -395,6 +421,9 @@ module Network.Google.PlayDeveloper
     , InappproductsInsertResponse
     , inappproductsInsertResponse
     , iirInappproduct
+
+    -- ** AndroidpublisherEditsImagesUploadImageType
+    , AndroidpublisherEditsImagesUploadImageType (..)
 
     -- ** Price
     , Price
@@ -429,6 +458,9 @@ module Network.Google.PlayDeveloper
     , apkBinary
     , abSha1
 
+    -- ** AndroidpublisherEditsImagesDeleteImageType
+    , AndroidpublisherEditsImagesDeleteImageType (..)
+
     -- ** ExternallyHostedApkUsesPermission
     , ExternallyHostedApkUsesPermission
     , externallyHostedApkUsesPermission
@@ -440,6 +472,9 @@ module Network.Google.PlayDeveloper
     , listingsListResponse
     , llrKind
     , llrListings
+
+    -- ** AndroidpublisherEditsExpansionfilesUpdateExpansionFileType
+    , AndroidpublisherEditsExpansionfilesUpdateExpansionFileType (..)
 
     -- ** InappproductsInsertRequest
     , InappproductsInsertRequest
@@ -464,10 +499,25 @@ module Network.Google.PlayDeveloper
     , elrPageInfo
     , elrResources
 
+    -- ** AndroidpublisherEditsImagesListImageType
+    , AndroidpublisherEditsImagesListImageType (..)
+
+    -- ** AndroidpublisherEditsTestersUpdateTrack
+    , AndroidpublisherEditsTestersUpdateTrack (..)
+
     -- ** InappproductsUpdateRequest
     , InappproductsUpdateRequest
     , inappproductsUpdateRequest
     , inaInappproduct
+
+    -- ** AndroidpublisherEditsImagesDeleteallImageType
+    , AndroidpublisherEditsImagesDeleteallImageType (..)
+
+    -- ** AndroidpublisherEditsTestersGetTrack
+    , AndroidpublisherEditsTestersGetTrack (..)
+
+    -- ** AndroidpublisherEditsTestersPatchTrack
+    , AndroidpublisherEditsTestersPatchTrack (..)
 
     -- ** InappproductsBatchResponse
     , InappproductsBatchResponse
@@ -482,6 +532,9 @@ module Network.Google.PlayDeveloper
     , eProductType
     , eToken
     , eProductId
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.PlayDeveloper.Types
@@ -544,8 +597,58 @@ TODO
 -}
 
 type PlayDeveloperAPI =
-     Inappproducts :<|> Edits :<|> Entitlements :<|>
-       Purchases
+     InappproductsBatchResource :<|>
+       InappproductsInsertResource
+       :<|> InappproductsListResource
+       :<|> InappproductsPatchResource
+       :<|> InappproductsGetResource
+       :<|> InappproductsDeleteResource
+       :<|> InappproductsUpdateResource
+       :<|> EditsImagesListResource
+       :<|> EditsImagesDeleteallResource
+       :<|> EditsImagesUploadResource
+       :<|> EditsImagesDeleteResource
+       :<|> EditsExpansionfilesPatchResource
+       :<|> EditsExpansionfilesGetResource
+       :<|> EditsExpansionfilesUploadResource
+       :<|> EditsExpansionfilesUpdateResource
+       :<|> EditsTracksListResource
+       :<|> EditsTracksPatchResource
+       :<|> EditsTracksGetResource
+       :<|> EditsTracksUpdateResource
+       :<|> EditsTestersPatchResource
+       :<|> EditsTestersGetResource
+       :<|> EditsTestersUpdateResource
+       :<|> EditsDetailsPatchResource
+       :<|> EditsDetailsGetResource
+       :<|> EditsDetailsUpdateResource
+       :<|> EditsApklistingsListResource
+       :<|> EditsApklistingsDeleteallResource
+       :<|> EditsApklistingsPatchResource
+       :<|> EditsApklistingsGetResource
+       :<|> EditsApklistingsDeleteResource
+       :<|> EditsApklistingsUpdateResource
+       :<|> EditsApksListResource
+       :<|> EditsApksAddexternallyhostedResource
+       :<|> EditsApksUploadResource
+       :<|> EditsListingsListResource
+       :<|> EditsListingsDeleteallResource
+       :<|> EditsListingsPatchResource
+       :<|> EditsListingsGetResource
+       :<|> EditsListingsDeleteResource
+       :<|> EditsListingsUpdateResource
+       :<|> EditsInsertResource
+       :<|> EditsGetResource
+       :<|> EditsValidateResource
+       :<|> EditsDeleteResource
+       :<|> EditsCommitResource
+       :<|> EntitlementsListResource
+       :<|> PurchasesProductsGetResource
+       :<|> PurchasesSubscriptionsDeferResource
+       :<|> PurchasesSubscriptionsGetResource
+       :<|> PurchasesSubscriptionsRefundResource
+       :<|> PurchasesSubscriptionsRevokeResource
+       :<|> PurchasesSubscriptionsCancelResource
 
 playDeveloperAPI :: Proxy PlayDeveloperAPI
 playDeveloperAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the IAM access control policy for specified project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsGetIAMPolicy@.
-module Cloudresourcemanager.Projects.GetIAMPolicy
+module Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
     (
     -- * REST Resource
-      ProjectsGetIAMPolicyAPI
+      ProjectsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsGetIAMPolicy
-    , ProjectsGetIAMPolicy
+    , projectsGetIAMPolicy'
+    , ProjectsGetIAMPolicy'
 
     -- * Request Lenses
     , pgipXgafv
@@ -49,16 +50,29 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsGetIAMPolicy@ which the
--- 'ProjectsGetIAMPolicy' request conforms to.
-type ProjectsGetIAMPolicyAPI =
+-- 'ProjectsGetIAMPolicy'' request conforms to.
+type ProjectsGetIAMPolicyResource =
      "v1beta1" :>
        "projects" :>
-         "{resource}:getIamPolicy" :> Post '[JSON] Policy
+         "{resource}:getIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Returns the IAM access control policy for specified project.
 --
--- /See:/ 'projectsGetIAMPolicy' smart constructor.
-data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy
+-- /See:/ 'projectsGetIAMPolicy'' smart constructor.
+data ProjectsGetIAMPolicy' = ProjectsGetIAMPolicy'
     { _pgipXgafv          :: !(Maybe Text)
     , _pgipQuotaUser      :: !(Maybe Text)
     , _pgipPrettyPrint    :: !Bool
@@ -106,11 +120,11 @@ data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy
 -- * 'pgipCallback'
 --
 -- * 'pgipAlt'
-projectsGetIAMPolicy
+projectsGetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsGetIAMPolicy
-projectsGetIAMPolicy pPgipResource_ =
-    ProjectsGetIAMPolicy
+    -> ProjectsGetIAMPolicy'
+projectsGetIAMPolicy' pPgipResource_ =
+    ProjectsGetIAMPolicy'
     { _pgipXgafv = Nothing
     , _pgipQuotaUser = Nothing
     , _pgipPrettyPrint = True
@@ -209,10 +223,11 @@ pgipAlt = lens _pgipAlt (\ s a -> s{_pgipAlt = a})
 instance GoogleRequest ProjectsGetIAMPolicy' where
         type Rs ProjectsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsGetIAMPolicy{..}
-          = go _pgipXgafv _pgipQuotaUser _pgipPrettyPrint
+        requestWithRoute r u ProjectsGetIAMPolicy'{..}
+          = go _pgipXgafv _pgipQuotaUser
+              (Just _pgipPrettyPrint)
               _pgipUploadProtocol
-              _pgipPp
+              (Just _pgipPp)
               _pgipAccessToken
               _pgipUploadType
               _pgipBearerToken
@@ -221,9 +236,9 @@ instance GoogleRequest ProjectsGetIAMPolicy' where
               _pgipOauthToken
               _pgipFields
               _pgipCallback
-              _pgipAlt
+              (Just _pgipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsGetIAMPolicyAPI)
+                      (Proxy :: Proxy ProjectsGetIAMPolicyResource)
                       r
                       u

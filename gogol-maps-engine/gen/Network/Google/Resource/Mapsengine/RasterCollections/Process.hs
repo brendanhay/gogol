@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,140 +20,150 @@
 -- | Process a raster collection asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsProcess@.
-module Mapsengine.RasterCollections.Process
+module Network.Google.Resource.Mapsengine.RasterCollections.Process
     (
     -- * REST Resource
-      RasterCollectionsProcessAPI
+      RasterCollectionsProcessResource
 
     -- * Creating a Request
-    , rasterCollectionsProcess
-    , RasterCollectionsProcess
+    , rasterCollectionsProcess'
+    , RasterCollectionsProcess'
 
     -- * Request Lenses
-    , rcpQuotaUser
-    , rcpPrettyPrint
-    , rcpUserIp
-    , rcpKey
-    , rcpId
-    , rcpOauthToken
-    , rcpFields
-    , rcpAlt
+    , rcpcQuotaUser
+    , rcpcPrettyPrint
+    , rcpcUserIp
+    , rcpcKey
+    , rcpcId
+    , rcpcOauthToken
+    , rcpcFields
+    , rcpcAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsProcess@ which the
--- 'RasterCollectionsProcess' request conforms to.
-type RasterCollectionsProcessAPI =
+-- 'RasterCollectionsProcess'' request conforms to.
+type RasterCollectionsProcessResource =
      "rasterCollections" :>
        Capture "id" Text :>
-         "process" :> Post '[JSON] ProcessResponse
+         "process" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Process a raster collection asset.
 --
--- /See:/ 'rasterCollectionsProcess' smart constructor.
-data RasterCollectionsProcess = RasterCollectionsProcess
-    { _rcpQuotaUser   :: !(Maybe Text)
-    , _rcpPrettyPrint :: !Bool
-    , _rcpUserIp      :: !(Maybe Text)
-    , _rcpKey         :: !(Maybe Text)
-    , _rcpId          :: !Text
-    , _rcpOauthToken  :: !(Maybe Text)
-    , _rcpFields      :: !(Maybe Text)
-    , _rcpAlt         :: !Text
+-- /See:/ 'rasterCollectionsProcess'' smart constructor.
+data RasterCollectionsProcess' = RasterCollectionsProcess'
+    { _rcpcQuotaUser   :: !(Maybe Text)
+    , _rcpcPrettyPrint :: !Bool
+    , _rcpcUserIp      :: !(Maybe Text)
+    , _rcpcKey         :: !(Maybe Text)
+    , _rcpcId          :: !Text
+    , _rcpcOauthToken  :: !(Maybe Text)
+    , _rcpcFields      :: !(Maybe Text)
+    , _rcpcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsProcess'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcpQuotaUser'
+-- * 'rcpcQuotaUser'
 --
--- * 'rcpPrettyPrint'
+-- * 'rcpcPrettyPrint'
 --
--- * 'rcpUserIp'
+-- * 'rcpcUserIp'
 --
--- * 'rcpKey'
+-- * 'rcpcKey'
 --
--- * 'rcpId'
+-- * 'rcpcId'
 --
--- * 'rcpOauthToken'
+-- * 'rcpcOauthToken'
 --
--- * 'rcpFields'
+-- * 'rcpcFields'
 --
--- * 'rcpAlt'
-rasterCollectionsProcess
+-- * 'rcpcAlt'
+rasterCollectionsProcess'
     :: Text -- ^ 'id'
-    -> RasterCollectionsProcess
-rasterCollectionsProcess pRcpId_ =
-    RasterCollectionsProcess
-    { _rcpQuotaUser = Nothing
-    , _rcpPrettyPrint = True
-    , _rcpUserIp = Nothing
-    , _rcpKey = Nothing
-    , _rcpId = pRcpId_
-    , _rcpOauthToken = Nothing
-    , _rcpFields = Nothing
-    , _rcpAlt = "json"
+    -> RasterCollectionsProcess'
+rasterCollectionsProcess' pRcpcId_ =
+    RasterCollectionsProcess'
+    { _rcpcQuotaUser = Nothing
+    , _rcpcPrettyPrint = True
+    , _rcpcUserIp = Nothing
+    , _rcpcKey = Nothing
+    , _rcpcId = pRcpcId_
+    , _rcpcOauthToken = Nothing
+    , _rcpcFields = Nothing
+    , _rcpcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rcpQuotaUser :: Lens' RasterCollectionsProcess' (Maybe Text)
-rcpQuotaUser
-  = lens _rcpQuotaUser (\ s a -> s{_rcpQuotaUser = a})
+rcpcQuotaUser :: Lens' RasterCollectionsProcess' (Maybe Text)
+rcpcQuotaUser
+  = lens _rcpcQuotaUser
+      (\ s a -> s{_rcpcQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rcpPrettyPrint :: Lens' RasterCollectionsProcess' Bool
-rcpPrettyPrint
-  = lens _rcpPrettyPrint
-      (\ s a -> s{_rcpPrettyPrint = a})
+rcpcPrettyPrint :: Lens' RasterCollectionsProcess' Bool
+rcpcPrettyPrint
+  = lens _rcpcPrettyPrint
+      (\ s a -> s{_rcpcPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rcpUserIp :: Lens' RasterCollectionsProcess' (Maybe Text)
-rcpUserIp
-  = lens _rcpUserIp (\ s a -> s{_rcpUserIp = a})
+rcpcUserIp :: Lens' RasterCollectionsProcess' (Maybe Text)
+rcpcUserIp
+  = lens _rcpcUserIp (\ s a -> s{_rcpcUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcpKey :: Lens' RasterCollectionsProcess' (Maybe Text)
-rcpKey = lens _rcpKey (\ s a -> s{_rcpKey = a})
+rcpcKey :: Lens' RasterCollectionsProcess' (Maybe Text)
+rcpcKey = lens _rcpcKey (\ s a -> s{_rcpcKey = a})
 
 -- | The ID of the raster collection.
-rcpId :: Lens' RasterCollectionsProcess' Text
-rcpId = lens _rcpId (\ s a -> s{_rcpId = a})
+rcpcId :: Lens' RasterCollectionsProcess' Text
+rcpcId = lens _rcpcId (\ s a -> s{_rcpcId = a})
 
 -- | OAuth 2.0 token for the current user.
-rcpOauthToken :: Lens' RasterCollectionsProcess' (Maybe Text)
-rcpOauthToken
-  = lens _rcpOauthToken
-      (\ s a -> s{_rcpOauthToken = a})
+rcpcOauthToken :: Lens' RasterCollectionsProcess' (Maybe Text)
+rcpcOauthToken
+  = lens _rcpcOauthToken
+      (\ s a -> s{_rcpcOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rcpFields :: Lens' RasterCollectionsProcess' (Maybe Text)
-rcpFields
-  = lens _rcpFields (\ s a -> s{_rcpFields = a})
+rcpcFields :: Lens' RasterCollectionsProcess' (Maybe Text)
+rcpcFields
+  = lens _rcpcFields (\ s a -> s{_rcpcFields = a})
 
 -- | Data format for the response.
-rcpAlt :: Lens' RasterCollectionsProcess' Text
-rcpAlt = lens _rcpAlt (\ s a -> s{_rcpAlt = a})
+rcpcAlt :: Lens' RasterCollectionsProcess' Alt
+rcpcAlt = lens _rcpcAlt (\ s a -> s{_rcpcAlt = a})
 
 instance GoogleRequest RasterCollectionsProcess'
          where
         type Rs RasterCollectionsProcess' = ProcessResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsProcess{..}
-          = go _rcpQuotaUser _rcpPrettyPrint _rcpUserIp _rcpKey
-              _rcpId
-              _rcpOauthToken
-              _rcpFields
-              _rcpAlt
+        requestWithRoute r u RasterCollectionsProcess'{..}
+          = go _rcpcQuotaUser (Just _rcpcPrettyPrint)
+              _rcpcUserIp
+              _rcpcKey
+              _rcpcId
+              _rcpcOauthToken
+              _rcpcFields
+              (Just _rcpcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsProcessAPI)
+                      (Proxy :: Proxy RasterCollectionsProcessResource)
                       r
                       u

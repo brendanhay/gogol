@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns real time data for a view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsDataRealtimeGet@.
-module Analytics.Data.Realtime.Get
+module Network.Google.Resource.Analytics.Data.Realtime.Get
     (
     -- * REST Resource
-      DataRealtimeGetAPI
+      DataRealtimeGetResource
 
     -- * Creating a Request
-    , dataRealtimeGet
-    , DataRealtimeGet
+    , dataRealtimeGet'
+    , DataRealtimeGet'
 
     -- * Request Lenses
     , drgQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsDataRealtimeGet@ which the
--- 'DataRealtimeGet' request conforms to.
-type DataRealtimeGetAPI =
+-- 'DataRealtimeGet'' request conforms to.
+type DataRealtimeGetResource =
      "data" :>
        "realtime" :>
-         QueryParam "metrics" Text :>
-           QueryParam "filters" Text :>
-             QueryParam "ids" Text :>
-               QueryParam "sort" Text :>
-                 QueryParam "dimensions" Text :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] RealtimeData
+         QueryParam "quotaUser" Text :>
+           QueryParam "metrics" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "filters" Text :>
+                   QueryParam "ids" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "sort" Text :>
+                         QueryParam "dimensions" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] RealtimeData
 
 -- | Returns real time data for a view (profile).
 --
--- /See:/ 'dataRealtimeGet' smart constructor.
-data DataRealtimeGet = DataRealtimeGet
+-- /See:/ 'dataRealtimeGet'' smart constructor.
+data DataRealtimeGet' = DataRealtimeGet'
     { _drgQuotaUser   :: !(Maybe Text)
     , _drgMetrics     :: !Text
     , _drgPrettyPrint :: !Bool
@@ -76,7 +84,7 @@ data DataRealtimeGet = DataRealtimeGet
     , _drgOauthToken  :: !(Maybe Text)
     , _drgMaxResults  :: !(Maybe Int32)
     , _drgFields      :: !(Maybe Text)
-    , _drgAlt         :: !Text
+    , _drgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataRealtimeGet'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data DataRealtimeGet = DataRealtimeGet
 -- * 'drgFields'
 --
 -- * 'drgAlt'
-dataRealtimeGet
+dataRealtimeGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
-    -> DataRealtimeGet
-dataRealtimeGet pDrgMetrics_ pDrgIds_ =
-    DataRealtimeGet
+    -> DataRealtimeGet'
+dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
+    DataRealtimeGet'
     { _drgQuotaUser = Nothing
     , _drgMetrics = pDrgMetrics_
     , _drgPrettyPrint = False
@@ -126,7 +134,7 @@ dataRealtimeGet pDrgMetrics_ pDrgIds_ =
     , _drgOauthToken = Nothing
     , _drgMaxResults = Nothing
     , _drgFields = Nothing
-    , _drgAlt = "json"
+    , _drgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,14 +209,15 @@ drgFields
   = lens _drgFields (\ s a -> s{_drgFields = a})
 
 -- | Data format for the response.
-drgAlt :: Lens' DataRealtimeGet' Text
+drgAlt :: Lens' DataRealtimeGet' Alt
 drgAlt = lens _drgAlt (\ s a -> s{_drgAlt = a})
 
 instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u DataRealtimeGet{..}
-          = go _drgQuotaUser (Just _drgMetrics) _drgPrettyPrint
+        requestWithRoute r u DataRealtimeGet'{..}
+          = go _drgQuotaUser (Just _drgMetrics)
+              (Just _drgPrettyPrint)
               _drgUserIp
               _drgFilters
               (Just _drgIds)
@@ -218,8 +227,9 @@ instance GoogleRequest DataRealtimeGet' where
               _drgOauthToken
               _drgMaxResults
               _drgFields
-              _drgAlt
+              (Just _drgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DataRealtimeGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DataRealtimeGetResource)
                       r
                       u

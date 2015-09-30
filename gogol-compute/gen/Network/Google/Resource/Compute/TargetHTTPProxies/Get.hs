@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified TargetHttpProxy resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesGet@.
-module Compute.TargetHTTPProxies.Get
+module Network.Google.Resource.Compute.TargetHTTPProxies.Get
     (
     -- * REST Resource
-      TargetHTTPProxiesGetAPI
+      TargetHTTPProxiesGetResource
 
     -- * Creating a Request
-    , targetHTTPProxiesGet
-    , TargetHTTPProxiesGet
+    , targetHTTPProxiesGet'
+    , TargetHTTPProxiesGet'
 
     -- * Request Lenses
     , thttppgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetHTTPProxiesGet@ which the
--- 'TargetHTTPProxiesGet' request conforms to.
-type TargetHTTPProxiesGetAPI =
+-- 'TargetHTTPProxiesGet'' request conforms to.
+type TargetHTTPProxiesGetResource =
      Capture "project" Text :>
        "global" :>
          "targetHttpProxies" :>
            Capture "targetHttpProxy" Text :>
-             Get '[JSON] TargetHTTPProxy
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] TargetHTTPProxy
 
 -- | Returns the specified TargetHttpProxy resource.
 --
--- /See:/ 'targetHTTPProxiesGet' smart constructor.
-data TargetHTTPProxiesGet = TargetHTTPProxiesGet
+-- /See:/ 'targetHTTPProxiesGet'' smart constructor.
+data TargetHTTPProxiesGet' = TargetHTTPProxiesGet'
     { _thttppgQuotaUser       :: !(Maybe Text)
     , _thttppgPrettyPrint     :: !Bool
     , _thttppgProject         :: !Text
@@ -64,7 +71,7 @@ data TargetHTTPProxiesGet = TargetHTTPProxiesGet
     , _thttppgTargetHttpProxy :: !Text
     , _thttppgOauthToken      :: !(Maybe Text)
     , _thttppgFields          :: !(Maybe Text)
-    , _thttppgAlt             :: !Text
+    , _thttppgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data TargetHTTPProxiesGet = TargetHTTPProxiesGet
 -- * 'thttppgFields'
 --
 -- * 'thttppgAlt'
-targetHTTPProxiesGet
+targetHTTPProxiesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetHttpProxy'
-    -> TargetHTTPProxiesGet
-targetHTTPProxiesGet pThttppgProject_ pThttppgTargetHttpProxy_ =
-    TargetHTTPProxiesGet
+    -> TargetHTTPProxiesGet'
+targetHTTPProxiesGet' pThttppgProject_ pThttppgTargetHttpProxy_ =
+    TargetHTTPProxiesGet'
     { _thttppgQuotaUser = Nothing
     , _thttppgPrettyPrint = True
     , _thttppgProject = pThttppgProject_
@@ -102,7 +109,7 @@ targetHTTPProxiesGet pThttppgProject_ pThttppgTargetHttpProxy_ =
     , _thttppgTargetHttpProxy = pThttppgTargetHttpProxy_
     , _thttppgOauthToken = Nothing
     , _thttppgFields = Nothing
-    , _thttppgAlt = "json"
+    , _thttppgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,24 +165,24 @@ thttppgFields
       (\ s a -> s{_thttppgFields = a})
 
 -- | Data format for the response.
-thttppgAlt :: Lens' TargetHTTPProxiesGet' Text
+thttppgAlt :: Lens' TargetHTTPProxiesGet' Alt
 thttppgAlt
   = lens _thttppgAlt (\ s a -> s{_thttppgAlt = a})
 
 instance GoogleRequest TargetHTTPProxiesGet' where
         type Rs TargetHTTPProxiesGet' = TargetHTTPProxy
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesGet{..}
-          = go _thttppgQuotaUser _thttppgPrettyPrint
+        requestWithRoute r u TargetHTTPProxiesGet'{..}
+          = go _thttppgQuotaUser (Just _thttppgPrettyPrint)
               _thttppgProject
               _thttppgUserIp
               _thttppgKey
               _thttppgTargetHttpProxy
               _thttppgOauthToken
               _thttppgFields
-              _thttppgAlt
+              (Just _thttppgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetHTTPProxiesGetAPI)
+                      (Proxy :: Proxy TargetHTTPProxiesGetResource)
                       r
                       u

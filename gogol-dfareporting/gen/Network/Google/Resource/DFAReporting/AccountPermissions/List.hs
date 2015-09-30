@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of account permissions.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountPermissionsList@.
-module DFAReporting.AccountPermissions.List
+module Network.Google.Resource.DFAReporting.AccountPermissions.List
     (
     -- * REST Resource
-      AccountPermissionsListAPI
+      AccountPermissionsListResource
 
     -- * Creating a Request
-    , accountPermissionsList
-    , AccountPermissionsList
+    , accountPermissionsList'
+    , AccountPermissionsList'
 
     -- * Request Lenses
     , aplQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountPermissionsList@ which the
--- 'AccountPermissionsList' request conforms to.
-type AccountPermissionsListAPI =
+-- 'AccountPermissionsList'' request conforms to.
+type AccountPermissionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountPermissions" :>
-           Get '[JSON] AccountPermissionsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] AccountPermissionsListResponse
 
 -- | Retrieves the list of account permissions.
 --
--- /See:/ 'accountPermissionsList' smart constructor.
-data AccountPermissionsList = AccountPermissionsList
+-- /See:/ 'accountPermissionsList'' smart constructor.
+data AccountPermissionsList' = AccountPermissionsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AccountPermissionsList = AccountPermissionsList
     , _aplKey         :: !(Maybe Text)
     , _aplOauthToken  :: !(Maybe Text)
     , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Text
+    , _aplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AccountPermissionsList = AccountPermissionsList
 -- * 'aplFields'
 --
 -- * 'aplAlt'
-accountPermissionsList
+accountPermissionsList'
     :: Int64 -- ^ 'profileId'
-    -> AccountPermissionsList
-accountPermissionsList pAplProfileId_ =
-    AccountPermissionsList
+    -> AccountPermissionsList'
+accountPermissionsList' pAplProfileId_ =
+    AccountPermissionsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
     , _aplUserIp = Nothing
@@ -95,7 +103,7 @@ accountPermissionsList pAplProfileId_ =
     , _aplKey = Nothing
     , _aplOauthToken = Nothing
     , _aplFields = Nothing
-    , _aplAlt = "json"
+    , _aplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,22 +148,22 @@ aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
 -- | Data format for the response.
-aplAlt :: Lens' AccountPermissionsList' Text
+aplAlt :: Lens' AccountPermissionsList' Alt
 aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
 
 instance GoogleRequest AccountPermissionsList' where
         type Rs AccountPermissionsList' =
              AccountPermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountPermissionsList{..}
-          = go _aplQuotaUser _aplPrettyPrint _aplUserIp
+        requestWithRoute r u AccountPermissionsList'{..}
+          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIp
               _aplProfileId
               _aplKey
               _aplOauthToken
               _aplFields
-              _aplAlt
+              (Just _aplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountPermissionsListAPI)
+                      (Proxy :: Proxy AccountPermissionsListResource)
                       r
                       u

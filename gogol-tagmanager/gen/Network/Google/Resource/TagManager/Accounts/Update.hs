@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a GTM Account.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsUpdate@.
-module TagManager.Accounts.Update
+module Network.Google.Resource.TagManager.Accounts.Update
     (
     -- * REST Resource
-      AccountsUpdateAPI
+      AccountsUpdateResource
 
     -- * Creating a Request
-    , accountsUpdate
-    , AccountsUpdate
+    , accountsUpdate'
+    , AccountsUpdate'
 
     -- * Request Lenses
     , auQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsUpdate@ which the
--- 'AccountsUpdate' request conforms to.
-type AccountsUpdateAPI =
+-- 'AccountsUpdate'' request conforms to.
+type AccountsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
-         QueryParam "fingerprint" Text :> Put '[JSON] Account
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "fingerprint" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Account
 
 -- | Updates a GTM Account.
 --
--- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+-- /See:/ 'accountsUpdate'' smart constructor.
+data AccountsUpdate' = AccountsUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auPrettyPrint :: !Bool
     , _auUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data AccountsUpdate = AccountsUpdate
     , _auKey         :: !(Maybe Text)
     , _auOauthToken  :: !(Maybe Text)
     , _auFields      :: !(Maybe Text)
-    , _auAlt         :: !Text
+    , _auAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsUpdate'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data AccountsUpdate = AccountsUpdate
 -- * 'auFields'
 --
 -- * 'auAlt'
-accountsUpdate
+accountsUpdate'
     :: Text -- ^ 'accountId'
-    -> AccountsUpdate
-accountsUpdate pAuAccountId_ =
-    AccountsUpdate
+    -> AccountsUpdate'
+accountsUpdate' pAuAccountId_ =
+    AccountsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auUserIp = Nothing
@@ -99,7 +107,7 @@ accountsUpdate pAuAccountId_ =
     , _auKey = Nothing
     , _auOauthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = "json"
+    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,21 +156,22 @@ auFields :: Lens' AccountsUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 -- | Data format for the response.
-auAlt :: Lens' AccountsUpdate' Text
+auAlt :: Lens' AccountsUpdate' Alt
 auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
 
 instance GoogleRequest AccountsUpdate' where
         type Rs AccountsUpdate' = Account
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsUpdate{..}
-          = go _auQuotaUser _auPrettyPrint _auUserIp
+        requestWithRoute r u AccountsUpdate'{..}
+          = go _auQuotaUser (Just _auPrettyPrint) _auUserIp
               _auFingerprint
               _auAccountId
               _auKey
               _auOauthToken
               _auFields
-              _auAlt
+              (Just _auAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsUpdateResource)
                       r
                       u

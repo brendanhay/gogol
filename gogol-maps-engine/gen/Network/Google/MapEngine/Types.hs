@@ -43,6 +43,9 @@ module Network.Google.MapEngine.Types
     , vrMax
     , vrMin
 
+    -- * LayerProcessingStatus
+    , LayerProcessingStatus (..)
+
     -- * Feature
     , Feature
     , feature
@@ -50,10 +53,19 @@ module Network.Google.MapEngine.Types
     , fType
     , fProperties
 
+    -- * ScaledShapeShape
+    , ScaledShapeShape (..)
+
+    -- * MapsengineRastersListProcessingStatus
+    , MapsengineRastersListProcessingStatus (..)
+
     -- * PermissionsBatchDeleteRequest
     , PermissionsBatchDeleteRequest
     , permissionsBatchDeleteRequest
     , pbdrIds
+
+    -- * RasterProcessingStatus
+    , RasterProcessingStatus (..)
 
     -- * GeoJSONGeometry
     , GeoJSONGeometry
@@ -75,10 +87,19 @@ module Network.Google.MapEngine.Types
     , rclrNextPageToken
     , rclrRasterCollections
 
+    -- * PermissionRole
+    , PermissionRole (..)
+
     -- * ProjectsListResponse
     , ProjectsListResponse
     , projectsListResponse
     , plrProjects
+
+    -- * GeoJSONMultiLineStringType
+    , GeoJSONMultiLineStringType (..)
+
+    -- * MapsengineRastersListRole
+    , MapsengineRastersListRole (..)
 
     -- * ZoomLevels
     , ZoomLevels
@@ -90,6 +111,9 @@ module Network.Google.MapEngine.Types
     , FeatureInfo
     , featureInfo
     , fiContent
+
+    -- * ScalingFunctionScalingType
+    , ScalingFunctionScalingType (..)
 
     -- * SizeRange
     , SizeRange
@@ -107,6 +131,9 @@ module Network.Google.MapEngine.Types
     , mfKey
     , mfName
     , mfType
+
+    -- * AcquisitionTimePrecision
+    , AcquisitionTimePrecision (..)
 
     -- * RasterCollection
     , RasterCollection
@@ -129,6 +156,13 @@ module Network.Google.MapEngine.Types
     , rcAttribution
     , rcTags
 
+    -- * LineStyleStroke
+    , LineStyleStroke
+    , lineStyleStroke
+    , lssColor
+    , lssWidth
+    , lssOpacity
+
     -- * Project
     , Project
     , project
@@ -140,6 +174,9 @@ module Network.Google.MapEngine.Types
     , color
     , cColor
     , cOpacity
+
+    -- * MapsengineLayersGetVersion
+    , MapsengineLayersGetVersion (..)
 
     -- * Asset
     , Asset
@@ -169,9 +206,27 @@ module Network.Google.MapEngine.Types
     , tcName
     , tcType
 
+    -- * MapsengineTablesGetVersion
+    , MapsengineTablesGetVersion (..)
+
+    -- * MapsengineMapsListRole
+    , MapsengineMapsListRole (..)
+
     -- * RasterCollectionsRastersBatchDeleteResponse
     , RasterCollectionsRastersBatchDeleteResponse
     , rasterCollectionsRastersBatchDeleteResponse
+
+    -- * LayerLayerType
+    , LayerLayerType (..)
+
+    -- * GeoJSONMultiPolygonType
+    , GeoJSONMultiPolygonType (..)
+
+    -- * PublishedLayerLayerType
+    , PublishedLayerLayerType (..)
+
+    -- * GeoJSONMultiPointType
+    , GeoJSONMultiPointType (..)
 
     -- * ScaledShape
     , ScaledShape
@@ -179,6 +234,12 @@ module Network.Google.MapEngine.Types
     , ssBorder
     , ssFill
     , ssShape
+
+    -- * MapProcessingStatus
+    , MapProcessingStatus (..)
+
+    -- * MapsengineMapsListProcessingStatus
+    , MapsengineMapsListProcessingStatus (..)
 
     -- * Icon
     , Icon
@@ -193,9 +254,27 @@ module Network.Google.MapEngine.Types
     , fbdrPrimaryKeys
     , fbdrGxIds
 
+    -- * PermissionType
+    , PermissionType (..)
+
     -- * RasterCollectionsRastersBatchInsertResponse
     , RasterCollectionsRastersBatchInsertResponse
     , rasterCollectionsRastersBatchInsertResponse
+
+    -- * GeoJSONLineStringType
+    , GeoJSONLineStringType (..)
+
+    -- * VectorStyleType
+    , VectorStyleType (..)
+
+    -- * MapKmlLinkType
+    , MapKmlLinkType (..)
+
+    -- * LayerPublishingStatus
+    , LayerPublishingStatus (..)
+
+    -- * LayerDatasourceType
+    , LayerDatasourceType (..)
 
     -- * FeaturesListResponse
     , FeaturesListResponse
@@ -232,6 +311,15 @@ module Network.Google.MapEngine.Types
     , MapItem
     , mapItem
 
+    -- * GeoJSONGeometryCollectionType
+    , GeoJSONGeometryCollectionType (..)
+
+    -- * GeoJSONPointType
+    , GeoJSONPointType (..)
+
+    -- * GeoJSONPolygonType
+    , GeoJSONPolygonType (..)
+
     -- * IconsListResponse
     , IconsListResponse
     , iconsListResponse
@@ -251,6 +339,9 @@ module Network.Google.MapEngine.Types
     , atStart
     , atPrecision
     , atEnd
+
+    -- * MapsengineLayersListProcessingStatus
+    , MapsengineLayersListProcessingStatus (..)
 
     -- * TablesListResponse
     , TablesListResponse
@@ -321,11 +412,23 @@ module Network.Google.MapEngine.Types
     , rasterCollectionsRastersBatchInsertRequest
     , rcrbirIds
 
+    -- * MapsengineAssetsListRole
+    , MapsengineAssetsListRole (..)
+
+    -- * MapLayerType
+    , MapLayerType (..)
+
+    -- * MapsengineTablesFeaturesGetVersion
+    , MapsengineTablesFeaturesGetVersion (..)
+
     -- * RasterCollectionsRastersListResponse
     , RasterCollectionsRastersListResponse
     , rasterCollectionsRastersListResponse
     , rcrlrNextPageToken
     , rcrlrRasters
+
+    -- * MapsengineLayersListRole
+    , MapsengineLayersListRole (..)
 
     -- * GeoJSONMultiLineString
     , GeoJSONMultiLineString
@@ -341,11 +444,29 @@ module Network.Google.MapEngine.Types
     , sfScalingType
     , sfColumn
 
+    -- * MapFolderType
+    , MapFolderType (..)
+
+    -- * LabelStyleFontWeight
+    , LabelStyleFontWeight (..)
+
+    -- * RasterCollectionProcessingStatus
+    , RasterCollectionProcessingStatus (..)
+
+    -- * MapsengineMapsGetVersion
+    , MapsengineMapsGetVersion (..)
+
     -- * AssetsListResponse
     , AssetsListResponse
     , assetsListResponse
     , alrNextPageToken
     , alrAssets
+
+    -- * MapsengineRasterCollectionsListProcessingStatus
+    , MapsengineRasterCollectionsListProcessingStatus (..)
+
+    -- * MapsengineTablesListRole
+    , MapsengineTablesListRole (..)
 
     -- * PublishResponse
     , PublishResponse
@@ -364,6 +485,9 @@ module Network.Google.MapEngine.Types
     , rcrDescription
     , rcrTags
 
+    -- * LabelStyleFontStyle
+    , LabelStyleFontStyle (..)
+
     -- * Datasource
     , Datasource
     , datasource
@@ -375,12 +499,21 @@ module Network.Google.MapEngine.Types
     , fbirFeatures
     , fbirNormalizeGeometries
 
+    -- * FilterOperator
+    , FilterOperator (..)
+
+    -- * AssetType
+    , AssetType (..)
+
     -- * Filter
     , Filter
     , filter'
     , fOperator
     , fValue
     , fColumn
+
+    -- * RasterRasterType
+    , RasterRasterType (..)
 
     -- * GeoJSONMultiPolygon
     , GeoJSONMultiPolygon
@@ -394,28 +527,31 @@ module Network.Google.MapEngine.Types
     , gjsonmpCoordinates
     , gjsonmpType
 
+    -- * TableColumnType
+    , TableColumnType (..)
+
     -- * Raster
     , Raster
     , raster
-    , rCreationTime
-    , rWritersCanEditPermissions
-    , rMaskType
-    , rEtag
-    , rCreatorEmail
-    , rRasterType
-    , rLastModifiedTime
-    , rLastModifierEmail
-    , rAcquisitionTime
-    , rName
-    , rBbox
-    , rProcessingStatus
-    , rFiles
-    , rId
-    , rProjectId
-    , rDraftAccessList
-    , rDescription
-    , rAttribution
-    , rTags
+    , rrCreationTime
+    , rrWritersCanEditPermissions
+    , rrMaskType
+    , rrEtag
+    , rrCreatorEmail
+    , rrRasterType
+    , rrLastModifiedTime
+    , rrLastModifierEmail
+    , rrAcquisitionTime
+    , rrName
+    , rrBbox
+    , rrProcessingStatus
+    , rrFiles
+    , rrId
+    , rrProjectId
+    , rrDraftAccessList
+    , rrDescription
+    , rrAttribution
+    , rrTags
 
     -- * PublishedLayer
     , PublishedLayer
@@ -443,26 +579,26 @@ module Network.Google.MapEngine.Types
     -- * Layer
     , Layer
     , layer
-    , lCreationTime
-    , lWritersCanEditPermissions
-    , lStyle
-    , lEtag
-    , lDatasourceType
-    , lPublishingStatus
-    , lCreatorEmail
-    , lLayerType
-    , lLastModifiedTime
-    , lDatasources
-    , lLastModifierEmail
-    , lName
-    , lBbox
-    , lProcessingStatus
-    , lId
-    , lProjectId
-    , lDraftAccessList
-    , lPublishedAccessList
-    , lDescription
-    , lTags
+    , layaCreationTime
+    , layaWritersCanEditPermissions
+    , layaStyle
+    , layaEtag
+    , layaDatasourceType
+    , layaPublishingStatus
+    , layaCreatorEmail
+    , layaLayerType
+    , layaLastModifiedTime
+    , layaDatasources
+    , layaLastModifierEmail
+    , layaName
+    , layaBbox
+    , layaProcessingStatus
+    , layaId
+    , layaProjectId
+    , layaDraftAccessList
+    , layaPublishedAccessList
+    , layaDescription
+    , layaTags
 
     -- * PolygonStyle
     , PolygonStyle
@@ -470,6 +606,9 @@ module Network.Google.MapEngine.Types
     , pStroke
     , pFill
     , pLabel
+
+    -- * MapsengineTablesFeaturesListVersion
+    , MapsengineTablesFeaturesListVersion (..)
 
     -- * PermissionsBatchUpdateResponse
     , PermissionsBatchUpdateResponse
@@ -483,6 +622,9 @@ module Network.Google.MapEngine.Types
     , mklName
     , mklType
     , mklKmlUrl
+
+    -- * RasterCollectionRasterType
+    , RasterCollectionRasterType (..)
 
     -- * VectorStyle
     , VectorStyle
@@ -504,24 +646,24 @@ module Network.Google.MapEngine.Types
     -- * Table
     , Table
     , table
-    , tCreationTime
-    , tWritersCanEditPermissions
-    , tEtag
-    , tCreatorEmail
-    , tLastModifiedTime
-    , tSchema
-    , tLastModifierEmail
-    , tName
-    , tBbox
-    , tProcessingStatus
-    , tFiles
-    , tId
-    , tProjectId
-    , tDraftAccessList
-    , tPublishedAccessList
-    , tSourceEncoding
-    , tDescription
-    , tTags
+    , ttCreationTime
+    , ttWritersCanEditPermissions
+    , ttEtag
+    , ttCreatorEmail
+    , ttLastModifiedTime
+    , ttSchema
+    , ttLastModifierEmail
+    , ttName
+    , ttBbox
+    , ttProcessingStatus
+    , ttFiles
+    , ttId
+    , ttProjectId
+    , ttDraftAccessList
+    , ttPublishedAccessList
+    , ttSourceEncoding
+    , ttDescription
+    , ttTags
 
     -- * GeoJSONLineString
     , GeoJSONLineString
@@ -541,6 +683,9 @@ module Network.Google.MapEngine.Types
     , fSize
     , fUploadStatus
     , fFilename
+
+    -- * MapsengineRasterCollectionsListRole
+    , MapsengineRasterCollectionsListRole (..)
 
     -- * LayersListResponse
     , LayersListResponse
@@ -565,6 +710,15 @@ module Network.Google.MapEngine.Types
     , permissionsListResponse
     , plrPermissions
 
+    -- * MapsengineTablesListProcessingStatus
+    , MapsengineTablesListProcessingStatus (..)
+
+    -- * MapsengineRasterCollectionsRastersListRole
+    , MapsengineRasterCollectionsRastersListRole (..)
+
+    -- * FileUploadStatus
+    , FileUploadStatus (..)
+
     -- * LineStyle
     , LineStyle
     , lineStyle
@@ -585,11 +739,20 @@ module Network.Google.MapEngine.Types
     , gjgcGeometries
     , gjgcType
 
+    -- * Alt
+    , Alt (..)
+
+    -- * MapPublishingStatus
+    , MapPublishingStatus (..)
+
     -- * RastersListResponse
     , RastersListResponse
     , rastersListResponse
     , rlrNextPageToken
     , rlrRasters
+
+    -- * TableProcessingStatus
+    , TableProcessingStatus (..)
     ) where
 
 import           Network.Google.MapEngine.Types.Product
@@ -597,7 +760,7 @@ import           Network.Google.MapEngine.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Maps Engine API.
-mapEngineURL :: BaseURL
+mapEngineURL :: BaseUrl
 mapEngineURL
   = BaseUrl Https
       "https://www.googleapis.com/mapsengine/v1/"

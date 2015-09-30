@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,137 +20,144 @@
 -- | Inserts a file into a folder.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenInsert@.
-module Drive.Children.Insert
+module Network.Google.Resource.Drive.Children.Insert
     (
     -- * REST Resource
-      ChildrenInsertAPI
+      ChildrenInsertResource
 
     -- * Creating a Request
-    , childrenInsert
-    , ChildrenInsert
+    , childrenInsert'
+    , ChildrenInsert'
 
     -- * Request Lenses
-    , ciQuotaUser
-    , ciPrettyPrint
-    , ciUserIp
-    , ciFolderId
-    , ciKey
-    , ciOauthToken
-    , ciFields
-    , ciAlt
+    , cQuotaUser
+    , cPrettyPrint
+    , cUserIp
+    , cFolderId
+    , cKey
+    , cOauthToken
+    , cFields
+    , cAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveChildrenInsert@ which the
--- 'ChildrenInsert' request conforms to.
-type ChildrenInsertAPI =
+-- 'ChildrenInsert'' request conforms to.
+type ChildrenInsertResource =
      "files" :>
        Capture "folderId" Text :>
-         "children" :> Post '[JSON] ChildReference
+         "children" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ChildReference
 
 -- | Inserts a file into a folder.
 --
--- /See:/ 'childrenInsert' smart constructor.
-data ChildrenInsert = ChildrenInsert
-    { _ciQuotaUser   :: !(Maybe Text)
-    , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
-    , _ciFolderId    :: !Text
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
-    , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+-- /See:/ 'childrenInsert'' smart constructor.
+data ChildrenInsert' = ChildrenInsert'
+    { _cQuotaUser   :: !(Maybe Text)
+    , _cPrettyPrint :: !Bool
+    , _cUserIp      :: !(Maybe Text)
+    , _cFolderId    :: !Text
+    , _cKey         :: !(Maybe Text)
+    , _cOauthToken  :: !(Maybe Text)
+    , _cFields      :: !(Maybe Text)
+    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ciQuotaUser'
+-- * 'cQuotaUser'
 --
--- * 'ciPrettyPrint'
+-- * 'cPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'cUserIp'
 --
--- * 'ciFolderId'
+-- * 'cFolderId'
 --
--- * 'ciKey'
+-- * 'cKey'
 --
--- * 'ciOauthToken'
+-- * 'cOauthToken'
 --
--- * 'ciFields'
+-- * 'cFields'
 --
--- * 'ciAlt'
-childrenInsert
+-- * 'cAlt'
+childrenInsert'
     :: Text -- ^ 'folderId'
-    -> ChildrenInsert
-childrenInsert pCiFolderId_ =
-    ChildrenInsert
-    { _ciQuotaUser = Nothing
-    , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
-    , _ciFolderId = pCiFolderId_
-    , _ciKey = Nothing
-    , _ciOauthToken = Nothing
-    , _ciFields = Nothing
-    , _ciAlt = "json"
+    -> ChildrenInsert'
+childrenInsert' pCFolderId_ =
+    ChildrenInsert'
+    { _cQuotaUser = Nothing
+    , _cPrettyPrint = True
+    , _cUserIp = Nothing
+    , _cFolderId = pCFolderId_
+    , _cKey = Nothing
+    , _cOauthToken = Nothing
+    , _cFields = Nothing
+    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ciQuotaUser :: Lens' ChildrenInsert' (Maybe Text)
-ciQuotaUser
-  = lens _ciQuotaUser (\ s a -> s{_ciQuotaUser = a})
+cQuotaUser :: Lens' ChildrenInsert' (Maybe Text)
+cQuotaUser
+  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ciPrettyPrint :: Lens' ChildrenInsert' Bool
-ciPrettyPrint
-  = lens _ciPrettyPrint
-      (\ s a -> s{_ciPrettyPrint = a})
+cPrettyPrint :: Lens' ChildrenInsert' Bool
+cPrettyPrint
+  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' ChildrenInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+cUserIp :: Lens' ChildrenInsert' (Maybe Text)
+cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
 
 -- | The ID of the folder.
-ciFolderId :: Lens' ChildrenInsert' Text
-ciFolderId
-  = lens _ciFolderId (\ s a -> s{_ciFolderId = a})
+cFolderId :: Lens' ChildrenInsert' Text
+cFolderId
+  = lens _cFolderId (\ s a -> s{_cFolderId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' ChildrenInsert' (Maybe Text)
-ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
+cKey :: Lens' ChildrenInsert' (Maybe Text)
+cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' ChildrenInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+cOauthToken :: Lens' ChildrenInsert' (Maybe Text)
+cOauthToken
+  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ciFields :: Lens' ChildrenInsert' (Maybe Text)
-ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
+cFields :: Lens' ChildrenInsert' (Maybe Text)
+cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' ChildrenInsert' Text
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+cAlt :: Lens' ChildrenInsert' Alt
+cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
 
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp
-              _ciFolderId
-              _ciKey
-              _ciOauthToken
-              _ciFields
-              _ciAlt
+        requestWithRoute r u ChildrenInsert'{..}
+          = go _cQuotaUser (Just _cPrettyPrint) _cUserIp
+              _cFolderId
+              _cKey
+              _cOauthToken
+              _cFields
+              (Just _cAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChildrenInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ChildrenInsertResource)
                       r
                       u

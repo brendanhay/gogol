@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Take action on Mobile Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobiledevicesAction@.
-module Directory.Mobiledevices.Action
+module Network.Google.Resource.Directory.Mobiledevices.Action
     (
     -- * REST Resource
-      MobiledevicesActionAPI
+      MobiledevicesActionResource
 
     -- * Creating a Request
-    , mobiledevicesAction
-    , MobiledevicesAction
+    , mobiledevicesAction'
+    , MobiledevicesAction'
 
     -- * Request Lenses
     , maQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMobiledevicesAction@ which the
--- 'MobiledevicesAction' request conforms to.
-type MobiledevicesActionAPI =
+-- 'MobiledevicesAction'' request conforms to.
+type MobiledevicesActionResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
              Capture "resourceId" Text :>
-               "action" :> Post '[JSON] ()
+               "action" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Take action on Mobile Device
 --
--- /See:/ 'mobiledevicesAction' smart constructor.
-data MobiledevicesAction = MobiledevicesAction
+-- /See:/ 'mobiledevicesAction'' smart constructor.
+data MobiledevicesAction' = MobiledevicesAction'
     { _maQuotaUser   :: !(Maybe Text)
     , _maResourceId  :: !Text
     , _maPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data MobiledevicesAction = MobiledevicesAction
     , _maKey         :: !(Maybe Text)
     , _maOauthToken  :: !(Maybe Text)
     , _maFields      :: !(Maybe Text)
-    , _maAlt         :: !Text
+    , _maAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobiledevicesAction'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data MobiledevicesAction = MobiledevicesAction
 -- * 'maFields'
 --
 -- * 'maAlt'
-mobiledevicesAction
+mobiledevicesAction'
     :: Text -- ^ 'resourceId'
     -> Text -- ^ 'customerId'
-    -> MobiledevicesAction
-mobiledevicesAction pMaResourceId_ pMaCustomerId_ =
-    MobiledevicesAction
+    -> MobiledevicesAction'
+mobiledevicesAction' pMaResourceId_ pMaCustomerId_ =
+    MobiledevicesAction'
     { _maQuotaUser = Nothing
     , _maResourceId = pMaResourceId_
     , _maPrettyPrint = True
@@ -103,7 +111,7 @@ mobiledevicesAction pMaResourceId_ pMaCustomerId_ =
     , _maKey = Nothing
     , _maOauthToken = Nothing
     , _maFields = Nothing
-    , _maAlt = "json"
+    , _maAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ maFields :: Lens' MobiledevicesAction' (Maybe Text)
 maFields = lens _maFields (\ s a -> s{_maFields = a})
 
 -- | Data format for the response.
-maAlt :: Lens' MobiledevicesAction' Text
+maAlt :: Lens' MobiledevicesAction' Alt
 maAlt = lens _maAlt (\ s a -> s{_maAlt = a})
 
 instance GoogleRequest MobiledevicesAction' where
         type Rs MobiledevicesAction' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MobiledevicesAction{..}
-          = go _maQuotaUser _maResourceId _maPrettyPrint
+        requestWithRoute r u MobiledevicesAction'{..}
+          = go _maQuotaUser _maResourceId (Just _maPrettyPrint)
               _maUserIp
               _maCustomerId
               _maKey
               _maOauthToken
               _maFields
-              _maAlt
+              (Just _maAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MobiledevicesActionAPI)
+                      (Proxy :: Proxy MobiledevicesActionResource)
                       r
                       u

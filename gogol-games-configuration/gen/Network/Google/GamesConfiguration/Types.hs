@@ -88,6 +88,9 @@ module Network.Google.GamesConfiguration.Types
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
 
+    -- * GamesConfigurationImageConfigurationsUploadImageType
+    , GamesConfigurationImageConfigurationsUploadImageType (..)
+
     -- * LeaderboardConfigurationDetail
     , LeaderboardConfigurationDetail
     , leaderboardConfigurationDetail
@@ -112,6 +115,9 @@ module Network.Google.GamesConfiguration.Types
     , acdPointValue
     , acdIconUrl
     , acdDescription
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GamesConfiguration.Types.Product
@@ -119,7 +125,7 @@ import           Network.Google.GamesConfiguration.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1configuration' of the Google Play Game Services Publishing API.
-gamesConfigurationURL :: BaseURL
+gamesConfigurationURL :: BaseUrl
 gamesConfigurationURL
   = BaseUrl Https
       "https://www.googleapis.com/games/v1configuration/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove Organization Unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsDelete@.
-module Directory.Orgunits.Delete
+module Network.Google.Resource.Directory.Orgunits.Delete
     (
     -- * REST Resource
-      OrgunitsDeleteAPI
+      OrgunitsDeleteResource
 
     -- * Creating a Request
-    , orgunitsDelete
-    , OrgunitsDelete
+    , orgunitsDelete'
+    , OrgunitsDelete'
 
     -- * Request Lenses
     , odQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsDelete@ which the
--- 'OrgunitsDelete' request conforms to.
-type OrgunitsDeleteAPI =
+-- 'OrgunitsDelete'' request conforms to.
+type OrgunitsDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :> "orgUnitPath*}" :> Delete '[JSON] ()
+         "orgunits{" :>
+           "orgUnitPath*}" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove Organization Unit
 --
--- /See:/ 'orgunitsDelete' smart constructor.
-data OrgunitsDelete = OrgunitsDelete
+-- /See:/ 'orgunitsDelete'' smart constructor.
+data OrgunitsDelete' = OrgunitsDelete'
     { _odQuotaUser   :: !(Maybe Text)
     , _odPrettyPrint :: !Bool
     , _odUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data OrgunitsDelete = OrgunitsDelete
     , _odKey         :: !(Maybe Text)
     , _odOauthToken  :: !(Maybe Text)
     , _odFields      :: !(Maybe Text)
-    , _odAlt         :: !Text
+    , _odAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsDelete'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data OrgunitsDelete = OrgunitsDelete
 -- * 'odFields'
 --
 -- * 'odAlt'
-orgunitsDelete
+orgunitsDelete'
     :: Text -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
-    -> OrgunitsDelete
-orgunitsDelete pOdOrgUnitPath_ pOdCustomerId_ =
-    OrgunitsDelete
+    -> OrgunitsDelete'
+orgunitsDelete' pOdOrgUnitPath_ pOdCustomerId_ =
+    OrgunitsDelete'
     { _odQuotaUser = Nothing
     , _odPrettyPrint = True
     , _odUserIp = Nothing
@@ -100,7 +109,7 @@ orgunitsDelete pOdOrgUnitPath_ pOdCustomerId_ =
     , _odKey = Nothing
     , _odOauthToken = Nothing
     , _odFields = Nothing
-    , _odAlt = "json"
+    , _odAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,21 +157,22 @@ odFields :: Lens' OrgunitsDelete' (Maybe Text)
 odFields = lens _odFields (\ s a -> s{_odFields = a})
 
 -- | Data format for the response.
-odAlt :: Lens' OrgunitsDelete' Text
+odAlt :: Lens' OrgunitsDelete' Alt
 odAlt = lens _odAlt (\ s a -> s{_odAlt = a})
 
 instance GoogleRequest OrgunitsDelete' where
         type Rs OrgunitsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsDelete{..}
-          = go _odQuotaUser _odPrettyPrint _odUserIp
+        requestWithRoute r u OrgunitsDelete'{..}
+          = go _odQuotaUser (Just _odPrettyPrint) _odUserIp
               _odOrgUnitPath
               _odCustomerId
               _odKey
               _odOauthToken
               _odFields
-              _odAlt
+              (Just _odAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsDeleteResource)
                       r
                       u

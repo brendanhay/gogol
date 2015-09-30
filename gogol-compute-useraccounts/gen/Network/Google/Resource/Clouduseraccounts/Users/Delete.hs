@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified User resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersDelete@.
-module Clouduseraccounts.Users.Delete
+module Network.Google.Resource.Clouduseraccounts.Users.Delete
     (
     -- * REST Resource
-      UsersDeleteAPI
+      UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete
-    , UsersDelete
+    , usersDelete'
+    , UsersDelete'
 
     -- * Request Lenses
     , udQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersDelete@ which the
--- 'UsersDelete' request conforms to.
-type UsersDeleteAPI =
+-- 'UsersDelete'' request conforms to.
+type UsersDeleteResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
-           Capture "user" Text :> Delete '[JSON] Operation
+           Capture "user" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified User resource.
 --
--- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+-- /See:/ 'usersDelete'' smart constructor.
+data UsersDelete' = UsersDelete'
     { _udQuotaUser   :: !(Maybe Text)
     , _udPrettyPrint :: !Bool
     , _udProject     :: !Text
@@ -63,7 +71,7 @@ data UsersDelete = UsersDelete
     , _udKey         :: !(Maybe Text)
     , _udOauthToken  :: !(Maybe Text)
     , _udFields      :: !(Maybe Text)
-    , _udAlt         :: !Text
+    , _udAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data UsersDelete = UsersDelete
 -- * 'udFields'
 --
 -- * 'udAlt'
-usersDelete
+usersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'user'
-    -> UsersDelete
-usersDelete pUdProject_ pUdUser_ =
-    UsersDelete
+    -> UsersDelete'
+usersDelete' pUdProject_ pUdUser_ =
+    UsersDelete'
     { _udQuotaUser = Nothing
     , _udPrettyPrint = True
     , _udProject = pUdProject_
@@ -101,7 +109,7 @@ usersDelete pUdProject_ pUdUser_ =
     , _udKey = Nothing
     , _udOauthToken = Nothing
     , _udFields = Nothing
-    , _udAlt = "json"
+    , _udAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +155,23 @@ udFields :: Lens' UsersDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
 -- | Data format for the response.
-udAlt :: Lens' UsersDelete' Text
+udAlt :: Lens' UsersDelete' Alt
 udAlt = lens _udAlt (\ s a -> s{_udAlt = a})
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersDelete{..}
-          = go _udQuotaUser _udPrettyPrint _udProject _udUserIp
+        requestWithRoute r u UsersDelete'{..}
+          = go _udQuotaUser (Just _udPrettyPrint) _udProject
+              _udUserIp
               _udUser
               _udKey
               _udOauthToken
               _udFields
-              _udAlt
+              (Just _udAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDeleteResource)
+                      r
+                      u

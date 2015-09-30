@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new subaccount.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubaccountsInsert@.
-module DFAReporting.Subaccounts.Insert
+module Network.Google.Resource.DFAReporting.Subaccounts.Insert
     (
     -- * REST Resource
-      SubaccountsInsertAPI
+      SubaccountsInsertResource
 
     -- * Creating a Request
-    , subaccountsInsert
-    , SubaccountsInsert
+    , subaccountsInsert'
+    , SubaccountsInsert'
 
     -- * Request Lenses
     , subQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSubaccountsInsert@ which the
--- 'SubaccountsInsert' request conforms to.
-type SubaccountsInsertAPI =
+-- 'SubaccountsInsert'' request conforms to.
+type SubaccountsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "subaccounts" :> Post '[JSON] Subaccount
+         "subaccounts" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Subaccount
 
 -- | Inserts a new subaccount.
 --
--- /See:/ 'subaccountsInsert' smart constructor.
-data SubaccountsInsert = SubaccountsInsert
+-- /See:/ 'subaccountsInsert'' smart constructor.
+data SubaccountsInsert' = SubaccountsInsert'
     { _subQuotaUser   :: !(Maybe Text)
     , _subPrettyPrint :: !Bool
     , _subUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data SubaccountsInsert = SubaccountsInsert
     , _subKey         :: !(Maybe Text)
     , _subOauthToken  :: !(Maybe Text)
     , _subFields      :: !(Maybe Text)
-    , _subAlt         :: !Text
+    , _subAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubaccountsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data SubaccountsInsert = SubaccountsInsert
 -- * 'subFields'
 --
 -- * 'subAlt'
-subaccountsInsert
+subaccountsInsert'
     :: Int64 -- ^ 'profileId'
-    -> SubaccountsInsert
-subaccountsInsert pSubProfileId_ =
-    SubaccountsInsert
+    -> SubaccountsInsert'
+subaccountsInsert' pSubProfileId_ =
+    SubaccountsInsert'
     { _subQuotaUser = Nothing
     , _subPrettyPrint = True
     , _subUserIp = Nothing
@@ -94,7 +102,7 @@ subaccountsInsert pSubProfileId_ =
     , _subKey = Nothing
     , _subOauthToken = Nothing
     , _subFields = Nothing
-    , _subAlt = "json"
+    , _subAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ subFields
   = lens _subFields (\ s a -> s{_subFields = a})
 
 -- | Data format for the response.
-subAlt :: Lens' SubaccountsInsert' Text
+subAlt :: Lens' SubaccountsInsert' Alt
 subAlt = lens _subAlt (\ s a -> s{_subAlt = a})
 
 instance GoogleRequest SubaccountsInsert' where
         type Rs SubaccountsInsert' = Subaccount
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubaccountsInsert{..}
-          = go _subQuotaUser _subPrettyPrint _subUserIp
+        requestWithRoute r u SubaccountsInsert'{..}
+          = go _subQuotaUser (Just _subPrettyPrint) _subUserIp
               _subProfileId
               _subKey
               _subOauthToken
               _subFields
-              _subAlt
+              (Just _subAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubaccountsInsertAPI)
+                      (Proxy :: Proxy SubaccountsInsertResource)
                       r
                       u

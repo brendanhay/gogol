@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a resource containing information about a backup run.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlBackupRunsGet@.
-module Sql.BackupRuns.Get
+module Network.Google.Resource.Sql.BackupRuns.Get
     (
     -- * REST Resource
-      BackupRunsGetAPI
+      BackupRunsGetResource
 
     -- * Creating a Request
-    , backupRunsGet
-    , BackupRunsGet
+    , backupRunsGet'
+    , BackupRunsGet'
 
     -- * Request Lenses
     , brgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlBackupRunsGet@ which the
--- 'BackupRunsGet' request conforms to.
-type BackupRunsGetAPI =
+-- 'BackupRunsGet'' request conforms to.
+type BackupRunsGetResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "backupRuns" :>
-               Capture "id" Int64 :> Get '[JSON] BackupRun
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] BackupRun
 
 -- | Retrieves a resource containing information about a backup run.
 --
--- /See:/ 'backupRunsGet' smart constructor.
-data BackupRunsGet = BackupRunsGet
+-- /See:/ 'backupRunsGet'' smart constructor.
+data BackupRunsGet' = BackupRunsGet'
     { _brgQuotaUser   :: !(Maybe Text)
     , _brgPrettyPrint :: !Bool
     , _brgProject     :: !Text
@@ -66,7 +74,7 @@ data BackupRunsGet = BackupRunsGet
     , _brgId          :: !Int64
     , _brgOauthToken  :: !(Maybe Text)
     , _brgFields      :: !(Maybe Text)
-    , _brgAlt         :: !Text
+    , _brgAlt         :: !Alt
     , _brgInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data BackupRunsGet = BackupRunsGet
 -- * 'brgAlt'
 --
 -- * 'brgInstance'
-backupRunsGet
+backupRunsGet'
     :: Text -- ^ 'project'
     -> Int64 -- ^ 'id'
     -> Text -- ^ 'instance'
-    -> BackupRunsGet
-backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
-    BackupRunsGet
+    -> BackupRunsGet'
+backupRunsGet' pBrgProject_ pBrgId_ pBrgInstance_ =
+    BackupRunsGet'
     { _brgQuotaUser = Nothing
     , _brgPrettyPrint = True
     , _brgProject = pBrgProject_
@@ -108,7 +116,7 @@ backupRunsGet pBrgProject_ pBrgId_ pBrgInstance_ =
     , _brgId = pBrgId_
     , _brgOauthToken = Nothing
     , _brgFields = Nothing
-    , _brgAlt = "json"
+    , _brgAlt = JSON
     , _brgInstance = pBrgInstance_
     }
 
@@ -158,7 +166,7 @@ brgFields
   = lens _brgFields (\ s a -> s{_brgFields = a})
 
 -- | Data format for the response.
-brgAlt :: Lens' BackupRunsGet' Text
+brgAlt :: Lens' BackupRunsGet' Alt
 brgAlt = lens _brgAlt (\ s a -> s{_brgAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -169,15 +177,17 @@ brgInstance
 instance GoogleRequest BackupRunsGet' where
         type Rs BackupRunsGet' = BackupRun
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsGet{..}
-          = go _brgQuotaUser _brgPrettyPrint _brgProject
+        requestWithRoute r u BackupRunsGet'{..}
+          = go _brgQuotaUser (Just _brgPrettyPrint) _brgProject
               _brgUserIp
               _brgKey
               _brgId
               _brgOauthToken
               _brgFields
-              _brgAlt
+              (Just _brgAlt)
               _brgInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy BackupRunsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BackupRunsGetResource)
+                      r
                       u

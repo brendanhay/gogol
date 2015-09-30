@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Restarts a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesRestart@.
-module Sql.Instances.Restart
+module Network.Google.Resource.Sql.Instances.Restart
     (
     -- * REST Resource
-      InstancesRestartAPI
+      InstancesRestartResource
 
     -- * Creating a Request
-    , instancesRestart
-    , InstancesRestart
+    , instancesRestart'
+    , InstancesRestart'
 
     -- * Request Lenses
     , irQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesRestart@ which the
--- 'InstancesRestart' request conforms to.
-type InstancesRestartAPI =
+-- 'InstancesRestart'' request conforms to.
+type InstancesRestartResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "restart" :> Post '[JSON] Operation
+             "restart" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Restarts a Cloud SQL instance.
 --
--- /See:/ 'instancesRestart' smart constructor.
-data InstancesRestart = InstancesRestart
+-- /See:/ 'instancesRestart'' smart constructor.
+data InstancesRestart' = InstancesRestart'
     { _irQuotaUser   :: !(Maybe Text)
     , _irPrettyPrint :: !Bool
     , _irProject     :: !Text
@@ -63,7 +71,7 @@ data InstancesRestart = InstancesRestart
     , _irKey         :: !(Maybe Text)
     , _irOauthToken  :: !(Maybe Text)
     , _irFields      :: !(Maybe Text)
-    , _irAlt         :: !Text
+    , _irAlt         :: !Alt
     , _irInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +96,12 @@ data InstancesRestart = InstancesRestart
 -- * 'irAlt'
 --
 -- * 'irInstance'
-instancesRestart
+instancesRestart'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesRestart
-instancesRestart pIrProject_ pIrInstance_ =
-    InstancesRestart
+    -> InstancesRestart'
+instancesRestart' pIrProject_ pIrInstance_ =
+    InstancesRestart'
     { _irQuotaUser = Nothing
     , _irPrettyPrint = True
     , _irProject = pIrProject_
@@ -101,7 +109,7 @@ instancesRestart pIrProject_ pIrInstance_ =
     , _irKey = Nothing
     , _irOauthToken = Nothing
     , _irFields = Nothing
-    , _irAlt = "json"
+    , _irAlt = JSON
     , _irInstance = pIrInstance_
     }
 
@@ -144,7 +152,7 @@ irFields :: Lens' InstancesRestart' (Maybe Text)
 irFields = lens _irFields (\ s a -> s{_irFields = a})
 
 -- | Data format for the response.
-irAlt :: Lens' InstancesRestart' Text
+irAlt :: Lens' InstancesRestart' Alt
 irAlt = lens _irAlt (\ s a -> s{_irAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -155,15 +163,16 @@ irInstance
 instance GoogleRequest InstancesRestart' where
         type Rs InstancesRestart' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesRestart{..}
-          = go _irQuotaUser _irPrettyPrint _irProject _irUserIp
+        requestWithRoute r u InstancesRestart'{..}
+          = go _irQuotaUser (Just _irPrettyPrint) _irProject
+              _irUserIp
               _irKey
               _irOauthToken
               _irFields
-              _irAlt
+              (Just _irAlt)
               _irInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesRestartAPI)
+                      (Proxy :: Proxy InstancesRestartResource)
                       r
                       u

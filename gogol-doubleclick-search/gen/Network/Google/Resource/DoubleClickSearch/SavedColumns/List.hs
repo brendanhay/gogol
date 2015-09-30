@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchSavedColumnsList@.
-module DoubleClickSearch.SavedColumns.List
+module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
     (
     -- * REST Resource
-      SavedColumnsListAPI
+      SavedColumnsListResource
 
     -- * Creating a Request
-    , savedColumnsList
-    , SavedColumnsList
+    , savedColumnsList'
+    , SavedColumnsList'
 
     -- * Request Lenses
     , sclQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchSavedColumnsList@ which the
--- 'SavedColumnsList' request conforms to.
-type SavedColumnsListAPI =
+-- 'SavedColumnsList'' request conforms to.
+type SavedColumnsListResource =
      "agency" :>
        Capture "agencyId" Int64 :>
          "advertiser" :>
            Capture "advertiserId" Int64 :>
-             "savedcolumns" :> Get '[JSON] SavedColumnList
+             "savedcolumns" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] SavedColumnList
 
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
--- /See:/ 'savedColumnsList' smart constructor.
-data SavedColumnsList = SavedColumnsList
+-- /See:/ 'savedColumnsList'' smart constructor.
+data SavedColumnsList' = SavedColumnsList'
     { _sclQuotaUser    :: !(Maybe Text)
     , _sclPrettyPrint  :: !Bool
     , _sclAgencyId     :: !Int64
@@ -64,7 +72,7 @@ data SavedColumnsList = SavedColumnsList
     , _sclKey          :: !(Maybe Text)
     , _sclOauthToken   :: !(Maybe Text)
     , _sclFields       :: !(Maybe Text)
-    , _sclAlt          :: !Text
+    , _sclAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedColumnsList'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SavedColumnsList = SavedColumnsList
 -- * 'sclFields'
 --
 -- * 'sclAlt'
-savedColumnsList
+savedColumnsList'
     :: Int64 -- ^ 'agencyId'
     -> Int64 -- ^ 'advertiserId'
-    -> SavedColumnsList
-savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
-    SavedColumnsList
+    -> SavedColumnsList'
+savedColumnsList' pSclAgencyId_ pSclAdvertiserId_ =
+    SavedColumnsList'
     { _sclQuotaUser = Nothing
     , _sclPrettyPrint = True
     , _sclAgencyId = pSclAgencyId_
@@ -102,7 +110,7 @@ savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
     , _sclKey = Nothing
     , _sclOauthToken = Nothing
     , _sclFields = Nothing
-    , _sclAlt = "json"
+    , _sclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +161,24 @@ sclFields
   = lens _sclFields (\ s a -> s{_sclFields = a})
 
 -- | Data format for the response.
-sclAlt :: Lens' SavedColumnsList' Text
+sclAlt :: Lens' SavedColumnsList' Alt
 sclAlt = lens _sclAlt (\ s a -> s{_sclAlt = a})
 
 instance GoogleRequest SavedColumnsList' where
         type Rs SavedColumnsList' = SavedColumnList
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u SavedColumnsList{..}
-          = go _sclQuotaUser _sclPrettyPrint _sclAgencyId
+        requestWithRoute r u SavedColumnsList'{..}
+          = go _sclQuotaUser (Just _sclPrettyPrint)
+              _sclAgencyId
               _sclUserIp
               _sclAdvertiserId
               _sclKey
               _sclOauthToken
               _sclFields
-              _sclAlt
+              (Just _sclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SavedColumnsListAPI)
+                      (Proxy :: Proxy SavedColumnsListResource)
                       r
                       u

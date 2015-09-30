@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists files for a report.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsFilesList@.
-module DFAReporting.Reports.Files.List
+module Network.Google.Resource.DFAReporting.Reports.Files.List
     (
     -- * REST Resource
-      ReportsFilesListAPI
+      ReportsFilesListResource
 
     -- * Creating a Request
-    , reportsFilesList
-    , ReportsFilesList
+    , reportsFilesList'
+    , ReportsFilesList'
 
     -- * Request Lenses
     , rflQuotaUser
@@ -48,35 +49,46 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsFilesList@ which the
--- 'ReportsFilesList' request conforms to.
-type ReportsFilesListAPI =
+-- 'ReportsFilesList'' request conforms to.
+type ReportsFilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
            Capture "reportId" Int64 :>
              "files" :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParam "maxResults" Int32 :> Get '[JSON] FileList
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder"
+                       DfareportingReportsFilesListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingReportsFilesListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Get '[JSON] FileList
 
 -- | Lists files for a report.
 --
--- /See:/ 'reportsFilesList' smart constructor.
-data ReportsFilesList = ReportsFilesList
+-- /See:/ 'reportsFilesList'' smart constructor.
+data ReportsFilesList' = ReportsFilesList'
     { _rflQuotaUser   :: !(Maybe Text)
     , _rflPrettyPrint :: !Bool
     , _rflUserIp      :: !(Maybe Text)
     , _rflReportId    :: !Int64
     , _rflProfileId   :: !Int64
-    , _rflSortOrder   :: !Text
+    , _rflSortOrder   :: !DfareportingReportsFilesListSortOrder
     , _rflKey         :: !(Maybe Text)
     , _rflPageToken   :: !(Maybe Text)
-    , _rflSortField   :: !Text
+    , _rflSortField   :: !DfareportingReportsFilesListSortField
     , _rflOauthToken  :: !(Maybe Text)
     , _rflMaxResults  :: !(Maybe Int32)
     , _rflFields      :: !(Maybe Text)
-    , _rflAlt         :: !Text
+    , _rflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesList'' with the minimum fields required to make a request.
@@ -108,25 +120,25 @@ data ReportsFilesList = ReportsFilesList
 -- * 'rflFields'
 --
 -- * 'rflAlt'
-reportsFilesList
+reportsFilesList'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> ReportsFilesList
-reportsFilesList pRflReportId_ pRflProfileId_ =
-    ReportsFilesList
+    -> ReportsFilesList'
+reportsFilesList' pRflReportId_ pRflProfileId_ =
+    ReportsFilesList'
     { _rflQuotaUser = Nothing
     , _rflPrettyPrint = True
     , _rflUserIp = Nothing
     , _rflReportId = pRflReportId_
     , _rflProfileId = pRflProfileId_
-    , _rflSortOrder = "DESCENDING"
+    , _rflSortOrder = DRFLSODescending
     , _rflKey = Nothing
     , _rflPageToken = Nothing
-    , _rflSortField = "LAST_MODIFIED_TIME"
+    , _rflSortField = DRFLSFLastModifiedTime
     , _rflOauthToken = Nothing
     , _rflMaxResults = Nothing
     , _rflFields = Nothing
-    , _rflAlt = "json"
+    , _rflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,7 +171,7 @@ rflProfileId
   = lens _rflProfileId (\ s a -> s{_rflProfileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-rflSortOrder :: Lens' ReportsFilesList' Text
+rflSortOrder :: Lens' ReportsFilesList' DfareportingReportsFilesListSortOrder
 rflSortOrder
   = lens _rflSortOrder (\ s a -> s{_rflSortOrder = a})
 
@@ -175,7 +187,7 @@ rflPageToken
   = lens _rflPageToken (\ s a -> s{_rflPageToken = a})
 
 -- | The field by which to sort the list.
-rflSortField :: Lens' ReportsFilesList' Text
+rflSortField :: Lens' ReportsFilesList' DfareportingReportsFilesListSortField
 rflSortField
   = lens _rflSortField (\ s a -> s{_rflSortField = a})
 
@@ -197,14 +209,14 @@ rflFields
   = lens _rflFields (\ s a -> s{_rflFields = a})
 
 -- | Data format for the response.
-rflAlt :: Lens' ReportsFilesList' Text
+rflAlt :: Lens' ReportsFilesList' Alt
 rflAlt = lens _rflAlt (\ s a -> s{_rflAlt = a})
 
 instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsFilesList{..}
-          = go _rflQuotaUser _rflPrettyPrint _rflUserIp
+        requestWithRoute r u ReportsFilesList'{..}
+          = go _rflQuotaUser (Just _rflPrettyPrint) _rflUserIp
               _rflReportId
               _rflProfileId
               (Just _rflSortOrder)
@@ -214,9 +226,9 @@ instance GoogleRequest ReportsFilesList' where
               _rflOauthToken
               _rflMaxResults
               _rflFields
-              _rflAlt
+              (Just _rflAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReportsFilesListAPI)
+                      (Proxy :: Proxy ReportsFilesListResource)
                       r
                       u

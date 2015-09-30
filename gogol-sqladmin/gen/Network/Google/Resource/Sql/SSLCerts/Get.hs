@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- initial creation.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlSSLCertsGet@.
-module Sql.SSLCerts.Get
+module Network.Google.Resource.Sql.SSLCerts.Get
     (
     -- * REST Resource
-      SslCertsGetAPI
+      SslCertsGetResource
 
     -- * Creating a Request
-    , sSLCertsGet
-    , SSLCertsGet
+    , sSLCertsGet'
+    , SSLCertsGet'
 
     -- * Request Lenses
     , scgQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlSSLCertsGet@ which the
--- 'SSLCertsGet' request conforms to.
-type SslCertsGetAPI =
+-- 'SSLCertsGet'' request conforms to.
+type SslCertsGetResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "sslCerts" :>
-               Capture "sha1Fingerprint" Text :> Get '[JSON] SSLCert
+               Capture "sha1Fingerprint" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] SSLCert
 
 -- | Retrieves a particular SSL certificate. Does not include the private key
 -- (required for usage). The private key must be saved from the response to
 -- initial creation.
 --
--- /See:/ 'sSLCertsGet' smart constructor.
-data SSLCertsGet = SSLCertsGet
+-- /See:/ 'sSLCertsGet'' smart constructor.
+data SSLCertsGet' = SSLCertsGet'
     { _scgQuotaUser       :: !(Maybe Text)
     , _scgPrettyPrint     :: !Bool
     , _scgProject         :: !Text
@@ -70,7 +78,7 @@ data SSLCertsGet = SSLCertsGet
     , _scgOauthToken      :: !(Maybe Text)
     , _scgSha1Fingerprint :: !Text
     , _scgFields          :: !(Maybe Text)
-    , _scgAlt             :: !Text
+    , _scgAlt             :: !Alt
     , _scgInstance        :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -97,13 +105,13 @@ data SSLCertsGet = SSLCertsGet
 -- * 'scgAlt'
 --
 -- * 'scgInstance'
-sSLCertsGet
+sSLCertsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'sha1Fingerprint'
     -> Text -- ^ 'instance'
-    -> SSLCertsGet
-sSLCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
-    SSLCertsGet
+    -> SSLCertsGet'
+sSLCertsGet' pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
+    SSLCertsGet'
     { _scgQuotaUser = Nothing
     , _scgPrettyPrint = True
     , _scgProject = pScgProject_
@@ -112,7 +120,7 @@ sSLCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
     , _scgOauthToken = Nothing
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgFields = Nothing
-    , _scgAlt = "json"
+    , _scgAlt = JSON
     , _scgInstance = pScgInstance_
     }
 
@@ -164,7 +172,7 @@ scgFields
   = lens _scgFields (\ s a -> s{_scgFields = a})
 
 -- | Data format for the response.
-scgAlt :: Lens' SSLCertsGet' Text
+scgAlt :: Lens' SSLCertsGet' Alt
 scgAlt = lens _scgAlt (\ s a -> s{_scgAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -175,14 +183,17 @@ scgInstance
 instance GoogleRequest SSLCertsGet' where
         type Rs SSLCertsGet' = SSLCert
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsGet{..}
-          = go _scgQuotaUser _scgPrettyPrint _scgProject
+        requestWithRoute r u SSLCertsGet'{..}
+          = go _scgQuotaUser (Just _scgPrettyPrint) _scgProject
               _scgUserIp
               _scgKey
               _scgOauthToken
               _scgSha1Fingerprint
               _scgFields
-              _scgAlt
+              (Just _scgAlt)
               _scgInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy SslCertsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SslCertsGetResource)
+                      r
+                      u

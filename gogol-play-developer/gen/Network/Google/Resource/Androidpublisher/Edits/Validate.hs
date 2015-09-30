@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- are not applied to the live app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsValidate@.
-module Androidpublisher.Edits.Validate
+module Network.Google.Resource.Androidpublisher.Edits.Validate
     (
     -- * REST Resource
-      EditsValidateAPI
+      EditsValidateResource
 
     -- * Creating a Request
-    , editsValidate
-    , EditsValidate
+    , editsValidate'
+    , EditsValidate'
 
     -- * Request Lenses
     , evQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsValidate@ which the
--- 'EditsValidate' request conforms to.
-type EditsValidateAPI =
+-- 'EditsValidate'' request conforms to.
+type EditsValidateResource =
      Capture "packageName" Text :>
        "edits" :>
-         "{editId}:validate" :> Post '[JSON] AppEdit
+         "{editId}:validate" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] AppEdit
 
 -- | Checks that the edit can be successfully committed. The edit\'s changes
 -- are not applied to the live app.
 --
--- /See:/ 'editsValidate' smart constructor.
-data EditsValidate = EditsValidate
+-- /See:/ 'editsValidate'' smart constructor.
+data EditsValidate' = EditsValidate'
     { _evQuotaUser   :: !(Maybe Text)
     , _evPrettyPrint :: !Bool
     , _evPackageName :: !Text
@@ -64,7 +72,7 @@ data EditsValidate = EditsValidate
     , _evOauthToken  :: !(Maybe Text)
     , _evEditId      :: !Text
     , _evFields      :: !(Maybe Text)
-    , _evAlt         :: !Text
+    , _evAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsValidate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data EditsValidate = EditsValidate
 -- * 'evFields'
 --
 -- * 'evAlt'
-editsValidate
+editsValidate'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsValidate
-editsValidate pEvPackageName_ pEvEditId_ =
-    EditsValidate
+    -> EditsValidate'
+editsValidate' pEvPackageName_ pEvEditId_ =
+    EditsValidate'
     { _evQuotaUser = Nothing
     , _evPrettyPrint = True
     , _evPackageName = pEvPackageName_
@@ -102,7 +110,7 @@ editsValidate pEvPackageName_ pEvEditId_ =
     , _evOauthToken = Nothing
     , _evEditId = pEvEditId_
     , _evFields = Nothing
-    , _evAlt = "json"
+    , _evAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,23 @@ evFields :: Lens' EditsValidate' (Maybe Text)
 evFields = lens _evFields (\ s a -> s{_evFields = a})
 
 -- | Data format for the response.
-evAlt :: Lens' EditsValidate' Text
+evAlt :: Lens' EditsValidate' Alt
 evAlt = lens _evAlt (\ s a -> s{_evAlt = a})
 
 instance GoogleRequest EditsValidate' where
         type Rs EditsValidate' = AppEdit
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsValidate{..}
-          = go _evQuotaUser _evPrettyPrint _evPackageName
+        requestWithRoute r u EditsValidate'{..}
+          = go _evQuotaUser (Just _evPrettyPrint)
+              _evPackageName
               _evUserIp
               _evKey
               _evOauthToken
               _evEditId
               _evFields
-              _evAlt
+              (Just _evAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsValidateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsValidateResource)
+                      r
                       u

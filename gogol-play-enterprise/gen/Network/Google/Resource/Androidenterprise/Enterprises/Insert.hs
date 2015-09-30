@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- deprecated; use enroll instead.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesInsert@.
-module Androidenterprise.Enterprises.Insert
+module Network.Google.Resource.Androidenterprise.Enterprises.Insert
     (
     -- * REST Resource
-      EnterprisesInsertAPI
+      EnterprisesInsertResource
 
     -- * Creating a Request
-    , enterprisesInsert
-    , EnterprisesInsert
+    , enterprisesInsert'
+    , EnterprisesInsert'
 
     -- * Request Lenses
     , eiQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesInsert@ which the
--- 'EnterprisesInsert' request conforms to.
-type EnterprisesInsertAPI =
+-- 'EnterprisesInsert'' request conforms to.
+type EnterprisesInsertResource =
      "enterprises" :>
-       QueryParam "token" Text :> Post '[JSON] Enterprise
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "token" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Enterprise
 
 -- | Establishes the binding between the MDM and an enterprise. This is now
 -- deprecated; use enroll instead.
 --
--- /See:/ 'enterprisesInsert' smart constructor.
-data EnterprisesInsert = EnterprisesInsert
+-- /See:/ 'enterprisesInsert'' smart constructor.
+data EnterprisesInsert' = EnterprisesInsert'
     { _eiQuotaUser   :: !(Maybe Text)
     , _eiPrettyPrint :: !Bool
     , _eiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data EnterprisesInsert = EnterprisesInsert
     , _eiKey         :: !(Maybe Text)
     , _eiOauthToken  :: !(Maybe Text)
     , _eiFields      :: !(Maybe Text)
-    , _eiAlt         :: !Text
+    , _eiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data EnterprisesInsert = EnterprisesInsert
 -- * 'eiFields'
 --
 -- * 'eiAlt'
-enterprisesInsert
+enterprisesInsert'
     :: Text -- ^ 'token'
-    -> EnterprisesInsert
-enterprisesInsert pEiToken_ =
-    EnterprisesInsert
+    -> EnterprisesInsert'
+enterprisesInsert' pEiToken_ =
+    EnterprisesInsert'
     { _eiQuotaUser = Nothing
     , _eiPrettyPrint = True
     , _eiUserIp = Nothing
@@ -95,7 +103,7 @@ enterprisesInsert pEiToken_ =
     , _eiKey = Nothing
     , _eiOauthToken = Nothing
     , _eiFields = Nothing
-    , _eiAlt = "json"
+    , _eiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,21 @@ eiFields :: Lens' EnterprisesInsert' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
 -- | Data format for the response.
-eiAlt :: Lens' EnterprisesInsert' Text
+eiAlt :: Lens' EnterprisesInsert' Alt
 eiAlt = lens _eiAlt (\ s a -> s{_eiAlt = a})
 
 instance GoogleRequest EnterprisesInsert' where
         type Rs EnterprisesInsert' = Enterprise
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesInsert{..}
-          = go _eiQuotaUser _eiPrettyPrint _eiUserIp
+        requestWithRoute r u EnterprisesInsert'{..}
+          = go _eiQuotaUser (Just _eiPrettyPrint) _eiUserIp
               (Just _eiToken)
               _eiKey
               _eiOauthToken
               _eiFields
-              _eiAlt
+              (Just _eiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EnterprisesInsertAPI)
+                      (Proxy :: Proxy EnterprisesInsertResource)
                       r
                       u

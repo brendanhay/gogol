@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- the response will have is_disabled\' set to true.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerControllerDebuggeesRegister@.
-module Clouddebugger.Controller.Debuggees.Register
+module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Register
     (
     -- * REST Resource
-      ControllerDebuggeesRegisterAPI
+      ControllerDebuggeesRegisterResource
 
     -- * Creating a Request
-    , controllerDebuggeesRegister
-    , ControllerDebuggeesRegister
+    , controllerDebuggeesRegister'
+    , ControllerDebuggeesRegister'
 
     -- * Request Lenses
     , cdrXgafv
@@ -54,12 +55,26 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerControllerDebuggeesRegister@ which the
--- 'ControllerDebuggeesRegister' request conforms to.
-type ControllerDebuggeesRegisterAPI =
+-- 'ControllerDebuggeesRegister'' request conforms to.
+type ControllerDebuggeesRegisterResource =
      "v2" :>
        "controller" :>
          "debuggees" :>
-           "register" :> Post '[JSON] RegisterDebuggeeResponse
+           "register" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] RegisterDebuggeeResponse
 
 -- | Registers the debuggee with the controller. All agents should call this
 -- API with the same request content to get back the same stable
@@ -69,8 +84,8 @@ type ControllerDebuggeesRegisterAPI =
 -- recover from any registration loss. If the debuggee is disabled server,
 -- the response will have is_disabled\' set to true.
 --
--- /See:/ 'controllerDebuggeesRegister' smart constructor.
-data ControllerDebuggeesRegister = ControllerDebuggeesRegister
+-- /See:/ 'controllerDebuggeesRegister'' smart constructor.
+data ControllerDebuggeesRegister' = ControllerDebuggeesRegister'
     { _cdrXgafv          :: !(Maybe Text)
     , _cdrQuotaUser      :: !(Maybe Text)
     , _cdrPrettyPrint    :: !Bool
@@ -115,10 +130,10 @@ data ControllerDebuggeesRegister = ControllerDebuggeesRegister
 -- * 'cdrCallback'
 --
 -- * 'cdrAlt'
-controllerDebuggeesRegister
-    :: ControllerDebuggeesRegister
-controllerDebuggeesRegister =
-    ControllerDebuggeesRegister
+controllerDebuggeesRegister'
+    :: ControllerDebuggeesRegister'
+controllerDebuggeesRegister' =
+    ControllerDebuggeesRegister'
     { _cdrXgafv = Nothing
     , _cdrQuotaUser = Nothing
     , _cdrPrettyPrint = True
@@ -210,10 +225,10 @@ instance GoogleRequest ControllerDebuggeesRegister'
         type Rs ControllerDebuggeesRegister' =
              RegisterDebuggeeResponse
         request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u ControllerDebuggeesRegister{..}
-          = go _cdrXgafv _cdrQuotaUser _cdrPrettyPrint
+        requestWithRoute r u ControllerDebuggeesRegister'{..}
+          = go _cdrXgafv _cdrQuotaUser (Just _cdrPrettyPrint)
               _cdrUploadProtocol
-              _cdrPp
+              (Just _cdrPp)
               _cdrAccessToken
               _cdrUploadType
               _cdrBearerToken
@@ -221,9 +236,9 @@ instance GoogleRequest ControllerDebuggeesRegister'
               _cdrOauthToken
               _cdrFields
               _cdrCallback
-              _cdrAlt
+              (Just _cdrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ControllerDebuggeesRegisterAPI)
+                      (Proxy :: Proxy ControllerDebuggeesRegisterResource)
                       r
                       u

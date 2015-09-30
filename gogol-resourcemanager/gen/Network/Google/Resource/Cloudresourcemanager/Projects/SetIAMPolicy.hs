@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- Calling this method requires enabling the App Engine Admin API.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsSetIAMPolicy@.
-module Cloudresourcemanager.Projects.SetIAMPolicy
+module Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
     (
     -- * REST Resource
-      ProjectsSetIAMPolicyAPI
+      ProjectsSetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsSetIAMPolicy
-    , ProjectsSetIAMPolicy
+    , projectsSetIAMPolicy'
+    , ProjectsSetIAMPolicy'
 
     -- * Request Lenses
     , psipXgafv
@@ -51,18 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsSetIAMPolicy@ which the
--- 'ProjectsSetIAMPolicy' request conforms to.
-type ProjectsSetIAMPolicyAPI =
+-- 'ProjectsSetIAMPolicy'' request conforms to.
+type ProjectsSetIAMPolicyResource =
      "v1beta1" :>
        "projects" :>
-         "{resource}:setIamPolicy" :> Post '[JSON] Policy
+         "{resource}:setIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Sets the IAM access control policy for the specified project. We do not
 -- currently support \'domain:\' prefixed members in a Binding of a Policy.
 -- Calling this method requires enabling the App Engine Admin API.
 --
--- /See:/ 'projectsSetIAMPolicy' smart constructor.
-data ProjectsSetIAMPolicy = ProjectsSetIAMPolicy
+-- /See:/ 'projectsSetIAMPolicy'' smart constructor.
+data ProjectsSetIAMPolicy' = ProjectsSetIAMPolicy'
     { _psipXgafv          :: !(Maybe Text)
     , _psipQuotaUser      :: !(Maybe Text)
     , _psipPrettyPrint    :: !Bool
@@ -110,11 +124,11 @@ data ProjectsSetIAMPolicy = ProjectsSetIAMPolicy
 -- * 'psipCallback'
 --
 -- * 'psipAlt'
-projectsSetIAMPolicy
+projectsSetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsSetIAMPolicy
-projectsSetIAMPolicy pPsipResource_ =
-    ProjectsSetIAMPolicy
+    -> ProjectsSetIAMPolicy'
+projectsSetIAMPolicy' pPsipResource_ =
+    ProjectsSetIAMPolicy'
     { _psipXgafv = Nothing
     , _psipQuotaUser = Nothing
     , _psipPrettyPrint = True
@@ -214,10 +228,11 @@ psipAlt = lens _psipAlt (\ s a -> s{_psipAlt = a})
 instance GoogleRequest ProjectsSetIAMPolicy' where
         type Rs ProjectsSetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsSetIAMPolicy{..}
-          = go _psipXgafv _psipQuotaUser _psipPrettyPrint
+        requestWithRoute r u ProjectsSetIAMPolicy'{..}
+          = go _psipXgafv _psipQuotaUser
+              (Just _psipPrettyPrint)
               _psipUploadProtocol
-              _psipPp
+              (Just _psipPp)
               _psipAccessToken
               _psipUploadType
               _psipBearerToken
@@ -226,9 +241,9 @@ instance GoogleRequest ProjectsSetIAMPolicy' where
               _psipOauthToken
               _psipFields
               _psipCallback
-              _psipAlt
+              (Just _psipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSetIAMPolicyAPI)
+                      (Proxy :: Proxy ProjectsSetIAMPolicyResource)
                       r
                       u

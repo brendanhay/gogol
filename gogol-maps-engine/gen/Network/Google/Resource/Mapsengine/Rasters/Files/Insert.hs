@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Upload a file to a raster asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersFilesInsert@.
-module Mapsengine.Rasters.Files.Insert
+module Network.Google.Resource.Mapsengine.Rasters.Files.Insert
     (
     -- * REST Resource
-      RastersFilesInsertAPI
+      RastersFilesInsertResource
 
     -- * Creating a Request
-    , rastersFilesInsert
-    , RastersFilesInsert
+    , rastersFilesInsert'
+    , RastersFilesInsert'
 
     -- * Request Lenses
     , rfiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersFilesInsert@ which the
--- 'RastersFilesInsert' request conforms to.
-type RastersFilesInsertAPI =
+-- 'RastersFilesInsert'' request conforms to.
+type RastersFilesInsertResource =
      "rasters" :>
        Capture "id" Text :>
          "files" :>
-           QueryParam "filename" Text :> Post '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "filename" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --
--- /See:/ 'rastersFilesInsert' smart constructor.
-data RastersFilesInsert = RastersFilesInsert
+-- /See:/ 'rastersFilesInsert'' smart constructor.
+data RastersFilesInsert' = RastersFilesInsert'
     { _rfiQuotaUser   :: !(Maybe Text)
     , _rfiPrettyPrint :: !Bool
     , _rfiUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data RastersFilesInsert = RastersFilesInsert
     , _rfiOauthToken  :: !(Maybe Text)
     , _rfiFilename    :: !Text
     , _rfiFields      :: !(Maybe Text)
-    , _rfiAlt         :: !Text
+    , _rfiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersFilesInsert'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data RastersFilesInsert = RastersFilesInsert
 -- * 'rfiFields'
 --
 -- * 'rfiAlt'
-rastersFilesInsert
+rastersFilesInsert'
     :: Text -- ^ 'id'
     -> Text -- ^ 'filename'
-    -> RastersFilesInsert
-rastersFilesInsert pRfiId_ pRfiFilename_ =
-    RastersFilesInsert
+    -> RastersFilesInsert'
+rastersFilesInsert' pRfiId_ pRfiFilename_ =
+    RastersFilesInsert'
     { _rfiQuotaUser = Nothing
     , _rfiPrettyPrint = True
     , _rfiUserIp = Nothing
@@ -101,7 +109,7 @@ rastersFilesInsert pRfiId_ pRfiFilename_ =
     , _rfiOauthToken = Nothing
     , _rfiFilename = pRfiFilename_
     , _rfiFields = Nothing
-    , _rfiAlt = "json"
+    , _rfiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ rfiFields
   = lens _rfiFields (\ s a -> s{_rfiFields = a})
 
 -- | Data format for the response.
-rfiAlt :: Lens' RastersFilesInsert' Text
+rfiAlt :: Lens' RastersFilesInsert' Alt
 rfiAlt = lens _rfiAlt (\ s a -> s{_rfiAlt = a})
 
 instance GoogleRequest RastersFilesInsert' where
         type Rs RastersFilesInsert' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersFilesInsert{..}
-          = go _rfiQuotaUser _rfiPrettyPrint _rfiUserIp _rfiKey
+        requestWithRoute r u RastersFilesInsert'{..}
+          = go _rfiQuotaUser (Just _rfiPrettyPrint) _rfiUserIp
+              _rfiKey
               _rfiId
               _rfiOauthToken
               (Just _rfiFilename)
               _rfiFields
-              _rfiAlt
+              (Just _rfiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RastersFilesInsertAPI)
+                      (Proxy :: Proxy RastersFilesInsertResource)
                       r
                       u

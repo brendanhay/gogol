@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksInsert@.
-module Compute.Networks.Insert
+module Network.Google.Resource.Compute.Networks.Insert
     (
     -- * REST Resource
-      NetworksInsertAPI
+      NetworksInsertResource
 
     -- * Creating a Request
-    , networksInsert
-    , NetworksInsert
+    , networksInsert'
+    , NetworksInsert'
 
     -- * Request Lenses
     , niQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeNetworksInsert@ which the
--- 'NetworksInsert' request conforms to.
-type NetworksInsertAPI =
+-- 'NetworksInsert'' request conforms to.
+type NetworksInsertResource =
      Capture "project" Text :>
-       "global" :> "networks" :> Post '[JSON] Operation
+       "global" :>
+         "networks" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a network resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'networksInsert' smart constructor.
-data NetworksInsert = NetworksInsert
+-- /See:/ 'networksInsert'' smart constructor.
+data NetworksInsert' = NetworksInsert'
     { _niQuotaUser   :: !(Maybe Text)
     , _niPrettyPrint :: !Bool
     , _niProject     :: !Text
@@ -61,7 +70,7 @@ data NetworksInsert = NetworksInsert
     , _niKey         :: !(Maybe Text)
     , _niOauthToken  :: !(Maybe Text)
     , _niFields      :: !(Maybe Text)
-    , _niAlt         :: !Text
+    , _niAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data NetworksInsert = NetworksInsert
 -- * 'niFields'
 --
 -- * 'niAlt'
-networksInsert
+networksInsert'
     :: Text -- ^ 'project'
-    -> NetworksInsert
-networksInsert pNiProject_ =
-    NetworksInsert
+    -> NetworksInsert'
+networksInsert' pNiProject_ =
+    NetworksInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True
     , _niProject = pNiProject_
@@ -95,7 +104,7 @@ networksInsert pNiProject_ =
     , _niKey = Nothing
     , _niOauthToken = Nothing
     , _niFields = Nothing
-    , _niAlt = "json"
+    , _niAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +146,21 @@ niFields :: Lens' NetworksInsert' (Maybe Text)
 niFields = lens _niFields (\ s a -> s{_niFields = a})
 
 -- | Data format for the response.
-niAlt :: Lens' NetworksInsert' Text
+niAlt :: Lens' NetworksInsert' Alt
 niAlt = lens _niAlt (\ s a -> s{_niAlt = a})
 
 instance GoogleRequest NetworksInsert' where
         type Rs NetworksInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksInsert{..}
-          = go _niQuotaUser _niPrettyPrint _niProject _niUserIp
+        requestWithRoute r u NetworksInsert'{..}
+          = go _niQuotaUser (Just _niPrettyPrint) _niProject
+              _niUserIp
               _niKey
               _niOauthToken
               _niFields
-              _niAlt
+              (Just _niAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NetworksInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy NetworksInsertResource)
                       r
                       u

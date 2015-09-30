@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- existing policy.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsSetIAMPolicy@.
-module PubSub.Projects.Subscriptions.SetIAMPolicy
+module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     (
     -- * REST Resource
-      ProjectsSubscriptionsSetIAMPolicyAPI
+      ProjectsSubscriptionsSetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsSubscriptionsSetIAMPolicy
-    , ProjectsSubscriptionsSetIAMPolicy
+    , projectsSubscriptionsSetIAMPolicy'
+    , ProjectsSubscriptionsSetIAMPolicy'
 
     -- * Request Lenses
     , pssipXgafv
@@ -50,16 +51,29 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsSetIAMPolicy@ which the
--- 'ProjectsSubscriptionsSetIAMPolicy' request conforms to.
-type ProjectsSubscriptionsSetIAMPolicyAPI =
+-- 'ProjectsSubscriptionsSetIAMPolicy'' request conforms to.
+type ProjectsSubscriptionsSetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:setIamPolicy" :> Post '[JSON] Policy
+       "{+resource}:setIamPolicy" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
--- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy
+-- /See:/ 'projectsSubscriptionsSetIAMPolicy'' smart constructor.
+data ProjectsSubscriptionsSetIAMPolicy' = ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv          :: !(Maybe Text)
     , _pssipQuotaUser      :: !(Maybe Text)
     , _pssipPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy
 -- * 'pssipCallback'
 --
 -- * 'pssipAlt'
-projectsSubscriptionsSetIAMPolicy
+projectsSubscriptionsSetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsSubscriptionsSetIAMPolicy
-projectsSubscriptionsSetIAMPolicy pPssipResource_ =
-    ProjectsSubscriptionsSetIAMPolicy
+    -> ProjectsSubscriptionsSetIAMPolicy'
+projectsSubscriptionsSetIAMPolicy' pPssipResource_ =
+    ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipQuotaUser = Nothing
     , _pssipPrettyPrint = True
@@ -215,10 +229,11 @@ instance GoogleRequest
         type Rs ProjectsSubscriptionsSetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsSetIAMPolicy{..}
-          = go _pssipXgafv _pssipQuotaUser _pssipPrettyPrint
+          ProjectsSubscriptionsSetIAMPolicy'{..}
+          = go _pssipXgafv _pssipQuotaUser
+              (Just _pssipPrettyPrint)
               _pssipUploadProtocol
-              _pssipPp
+              (Just _pssipPp)
               _pssipAccessToken
               _pssipUploadType
               _pssipBearerToken
@@ -227,9 +242,10 @@ instance GoogleRequest
               _pssipOauthToken
               _pssipFields
               _pssipCallback
-              _pssipAlt
+              (Just _pssipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsSetIAMPolicyAPI)
+                      (Proxy ::
+                         Proxy ProjectsSubscriptionsSetIAMPolicyResource)
                       r
                       u

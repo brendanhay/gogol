@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- console. Only draft leaderboards may be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresResetMultipleForAllPlayers@.
-module GamesManagement.Scores.ResetMultipleForAllPlayers
+module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
     (
     -- * REST Resource
-      ScoresResetMultipleForAllPlayersAPI
+      ScoresResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , scoresResetMultipleForAllPlayers
-    , ScoresResetMultipleForAllPlayers
+    , scoresResetMultipleForAllPlayers'
+    , ScoresResetMultipleForAllPlayers'
 
     -- * Request Lenses
     , srmfapQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementScoresResetMultipleForAllPlayers@ which the
--- 'ScoresResetMultipleForAllPlayers' request conforms to.
-type ScoresResetMultipleForAllPlayersAPI =
+-- 'ScoresResetMultipleForAllPlayers'' request conforms to.
+type ScoresResetMultipleForAllPlayersResource =
      "scores" :>
-       "resetMultipleForAllPlayers" :> Post '[JSON] ()
+       "resetMultipleForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets scores for the leaderboards with the given IDs for all players.
 -- This method is only available to user accounts for your developer
 -- console. Only draft leaderboards may be reset.
 --
--- /See:/ 'scoresResetMultipleForAllPlayers' smart constructor.
-data ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers
+-- /See:/ 'scoresResetMultipleForAllPlayers'' smart constructor.
+data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
     { _srmfapQuotaUser   :: !(Maybe Text)
     , _srmfapPrettyPrint :: !Bool
     , _srmfapUserIp      :: !(Maybe Text)
     , _srmfapKey         :: !(Maybe Text)
     , _srmfapOauthToken  :: !(Maybe Text)
     , _srmfapFields      :: !(Maybe Text)
-    , _srmfapAlt         :: !Text
+    , _srmfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data ScoresResetMultipleForAllPlayers = ScoresResetMultipleForAllPlayers
 -- * 'srmfapFields'
 --
 -- * 'srmfapAlt'
-scoresResetMultipleForAllPlayers
-    :: ScoresResetMultipleForAllPlayers
-scoresResetMultipleForAllPlayers =
-    ScoresResetMultipleForAllPlayers
+scoresResetMultipleForAllPlayers'
+    :: ScoresResetMultipleForAllPlayers'
+scoresResetMultipleForAllPlayers' =
+    ScoresResetMultipleForAllPlayers'
     { _srmfapQuotaUser = Nothing
     , _srmfapPrettyPrint = True
     , _srmfapUserIp = Nothing
     , _srmfapKey = Nothing
     , _srmfapOauthToken = Nothing
     , _srmfapFields = Nothing
-    , _srmfapAlt = "json"
+    , _srmfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ srmfapFields
   = lens _srmfapFields (\ s a -> s{_srmfapFields = a})
 
 -- | Data format for the response.
-srmfapAlt :: Lens' ScoresResetMultipleForAllPlayers' Text
+srmfapAlt :: Lens' ScoresResetMultipleForAllPlayers' Alt
 srmfapAlt
   = lens _srmfapAlt (\ s a -> s{_srmfapAlt = a})
 
@@ -142,15 +150,16 @@ instance GoogleRequest
         type Rs ScoresResetMultipleForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
-          ScoresResetMultipleForAllPlayers{..}
-          = go _srmfapQuotaUser _srmfapPrettyPrint
+          ScoresResetMultipleForAllPlayers'{..}
+          = go _srmfapQuotaUser (Just _srmfapPrettyPrint)
               _srmfapUserIp
               _srmfapKey
               _srmfapOauthToken
               _srmfapFields
-              _srmfapAlt
+              (Just _srmfapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ScoresResetMultipleForAllPlayersAPI)
+                      (Proxy ::
+                         Proxy ScoresResetMultipleForAllPlayersResource)
                       r
                       u

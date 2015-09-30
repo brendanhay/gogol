@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsUpdate@.
-module Storage.DefaultObjectAccessControls.Update
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
     (
     -- * REST Resource
-      DefaultObjectAccessControlsUpdateAPI
+      DefaultObjectAccessControlsUpdateResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsUpdate
-    , DefaultObjectAccessControlsUpdate
+    , defaultObjectAccessControlsUpdate'
+    , DefaultObjectAccessControlsUpdate'
 
     -- * Request Lenses
     , doacuQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsUpdate@ which the
--- 'DefaultObjectAccessControlsUpdate' request conforms to.
-type DefaultObjectAccessControlsUpdateAPI =
+-- 'DefaultObjectAccessControlsUpdate'' request conforms to.
+type DefaultObjectAccessControlsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
            Capture "entity" Text :>
-             Put '[JSON] ObjectAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Put '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsUpdate' smart constructor.
-data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate
+-- /See:/ 'defaultObjectAccessControlsUpdate'' smart constructor.
+data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
     { _doacuQuotaUser   :: !(Maybe Text)
     , _doacuPrettyPrint :: !Bool
     , _doacuUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate
     , _doacuOauthToken  :: !(Maybe Text)
     , _doacuEntity      :: !Text
     , _doacuFields      :: !(Maybe Text)
-    , _doacuAlt         :: !Text
+    , _doacuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsUpdate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate
 -- * 'doacuFields'
 --
 -- * 'doacuAlt'
-defaultObjectAccessControlsUpdate
+defaultObjectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> DefaultObjectAccessControlsUpdate
-defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuEntity_ =
-    DefaultObjectAccessControlsUpdate
+    -> DefaultObjectAccessControlsUpdate'
+defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuEntity_ =
+    DefaultObjectAccessControlsUpdate'
     { _doacuQuotaUser = Nothing
     , _doacuPrettyPrint = True
     , _doacuUserIp = Nothing
@@ -102,7 +110,7 @@ defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuEntity_ =
     , _doacuOauthToken = Nothing
     , _doacuEntity = pDoacuEntity_
     , _doacuFields = Nothing
-    , _doacuAlt = "json"
+    , _doacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ doacuFields
   = lens _doacuFields (\ s a -> s{_doacuFields = a})
 
 -- | Data format for the response.
-doacuAlt :: Lens' DefaultObjectAccessControlsUpdate' Text
+doacuAlt :: Lens' DefaultObjectAccessControlsUpdate' Alt
 doacuAlt = lens _doacuAlt (\ s a -> s{_doacuAlt = a})
 
 instance GoogleRequest
@@ -164,16 +172,18 @@ instance GoogleRequest
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsUpdate{..}
-          = go _doacuQuotaUser _doacuPrettyPrint _doacuUserIp
+          DefaultObjectAccessControlsUpdate'{..}
+          = go _doacuQuotaUser (Just _doacuPrettyPrint)
+              _doacuUserIp
               _doacuBucket
               _doacuKey
               _doacuOauthToken
               _doacuEntity
               _doacuFields
-              _doacuAlt
+              (Just _doacuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsUpdateAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a channel\'s watermark image.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeWatermarksUnset@.
-module YouTube.Watermarks.Unset
+module Network.Google.Resource.YouTube.Watermarks.Unset
     (
     -- * REST Resource
-      WatermarksUnsetAPI
+      WatermarksUnsetResource
 
     -- * Creating a Request
-    , watermarksUnset
-    , WatermarksUnset
+    , watermarksUnset'
+    , WatermarksUnset'
 
     -- * Request Lenses
     , wuQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeWatermarksUnset@ which the
--- 'WatermarksUnset' request conforms to.
-type WatermarksUnsetAPI =
+-- 'WatermarksUnset'' request conforms to.
+type WatermarksUnsetResource =
      "watermarks" :>
        "unset" :>
-         QueryParam "channelId" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "channelId" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Deletes a channel\'s watermark image.
 --
--- /See:/ 'watermarksUnset' smart constructor.
-data WatermarksUnset = WatermarksUnset
+-- /See:/ 'watermarksUnset'' smart constructor.
+data WatermarksUnset' = WatermarksUnset'
     { _wuQuotaUser              :: !(Maybe Text)
     , _wuPrettyPrint            :: !Bool
     , _wuUserIp                 :: !(Maybe Text)
@@ -64,7 +71,7 @@ data WatermarksUnset = WatermarksUnset
     , _wuKey                    :: !(Maybe Text)
     , _wuOauthToken             :: !(Maybe Text)
     , _wuFields                 :: !(Maybe Text)
-    , _wuAlt                    :: !Text
+    , _wuAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatermarksUnset'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data WatermarksUnset = WatermarksUnset
 -- * 'wuFields'
 --
 -- * 'wuAlt'
-watermarksUnset
+watermarksUnset'
     :: Text -- ^ 'channelId'
-    -> WatermarksUnset
-watermarksUnset pWuChannelId_ =
-    WatermarksUnset
+    -> WatermarksUnset'
+watermarksUnset' pWuChannelId_ =
+    WatermarksUnset'
     { _wuQuotaUser = Nothing
     , _wuPrettyPrint = True
     , _wuUserIp = Nothing
@@ -101,7 +108,7 @@ watermarksUnset pWuChannelId_ =
     , _wuKey = Nothing
     , _wuOauthToken = Nothing
     , _wuFields = Nothing
-    , _wuAlt = "json"
+    , _wuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,21 +166,22 @@ wuFields :: Lens' WatermarksUnset' (Maybe Text)
 wuFields = lens _wuFields (\ s a -> s{_wuFields = a})
 
 -- | Data format for the response.
-wuAlt :: Lens' WatermarksUnset' Text
+wuAlt :: Lens' WatermarksUnset' Alt
 wuAlt = lens _wuAlt (\ s a -> s{_wuAlt = a})
 
 instance GoogleRequest WatermarksUnset' where
         type Rs WatermarksUnset' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u WatermarksUnset{..}
-          = go _wuQuotaUser _wuPrettyPrint _wuUserIp
+        requestWithRoute r u WatermarksUnset'{..}
+          = go _wuQuotaUser (Just _wuPrettyPrint) _wuUserIp
               (Just _wuChannelId)
               _wuOnBehalfOfContentOwner
               _wuKey
               _wuOauthToken
               _wuFields
-              _wuAlt
+              (Just _wuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy WatermarksUnsetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy WatermarksUnsetResource)
                       r
                       u

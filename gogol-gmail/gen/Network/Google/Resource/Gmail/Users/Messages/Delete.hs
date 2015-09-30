@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- operation cannot be undone. Prefer messages.trash instead.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesDelete@.
-module Gmail.Users.Messages.Delete
+module Network.Google.Resource.Gmail.Users.Messages.Delete
     (
     -- * REST Resource
-      UsersMessagesDeleteAPI
+      UsersMessagesDeleteResource
 
     -- * Creating a Request
-    , usersMessagesDelete
-    , UsersMessagesDelete
+    , usersMessagesDelete'
+    , UsersMessagesDelete'
 
     -- * Request Lenses
     , umdQuotaUser
@@ -45,16 +46,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesDelete@ which the
--- 'UsersMessagesDelete' request conforms to.
-type UsersMessagesDeleteAPI =
+-- 'UsersMessagesDelete'' request conforms to.
+type UsersMessagesDeleteResource =
      Capture "userId" Text :>
-       "messages" :> Capture "id" Text :> Delete '[JSON] ()
+       "messages" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified message. This
 -- operation cannot be undone. Prefer messages.trash instead.
 --
--- /See:/ 'usersMessagesDelete' smart constructor.
-data UsersMessagesDelete = UsersMessagesDelete
+-- /See:/ 'usersMessagesDelete'' smart constructor.
+data UsersMessagesDelete' = UsersMessagesDelete'
     { _umdQuotaUser   :: !(Maybe Text)
     , _umdPrettyPrint :: !Bool
     , _umdUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data UsersMessagesDelete = UsersMessagesDelete
     , _umdId          :: !Text
     , _umdOauthToken  :: !(Maybe Text)
     , _umdFields      :: !(Maybe Text)
-    , _umdAlt         :: !Text
+    , _umdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesDelete'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data UsersMessagesDelete = UsersMessagesDelete
 -- * 'umdFields'
 --
 -- * 'umdAlt'
-usersMessagesDelete
+usersMessagesDelete'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersMessagesDelete
-usersMessagesDelete pUmdUserId_ pUmdId_ =
-    UsersMessagesDelete
+    -> UsersMessagesDelete'
+usersMessagesDelete' pUmdUserId_ pUmdId_ =
+    UsersMessagesDelete'
     { _umdQuotaUser = Nothing
     , _umdPrettyPrint = True
     , _umdUserIp = Nothing
@@ -101,7 +110,7 @@ usersMessagesDelete pUmdUserId_ pUmdId_ =
     , _umdId = pUmdId_
     , _umdOauthToken = Nothing
     , _umdFields = Nothing
-    , _umdAlt = "json"
+    , _umdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +160,22 @@ umdFields
   = lens _umdFields (\ s a -> s{_umdFields = a})
 
 -- | Data format for the response.
-umdAlt :: Lens' UsersMessagesDelete' Text
+umdAlt :: Lens' UsersMessagesDelete' Alt
 umdAlt = lens _umdAlt (\ s a -> s{_umdAlt = a})
 
 instance GoogleRequest UsersMessagesDelete' where
         type Rs UsersMessagesDelete' = ()
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesDelete{..}
-          = go _umdQuotaUser _umdPrettyPrint _umdUserIp
+        requestWithRoute r u UsersMessagesDelete'{..}
+          = go _umdQuotaUser (Just _umdPrettyPrint) _umdUserIp
               _umdUserId
               _umdKey
               _umdId
               _umdOauthToken
               _umdFields
-              _umdAlt
+              (Just _umdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesDeleteAPI)
+                      (Proxy :: Proxy UsersMessagesDeleteResource)
                       r
                       u

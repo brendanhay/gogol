@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of locations for a worker.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateLocationList@.
-module Coordinate.Location.List
+module Network.Google.Resource.Coordinate.Location.List
     (
     -- * REST Resource
-      LocationListAPI
+      LocationListResource
 
     -- * Creating a Request
-    , locationList
-    , LocationList
+    , locationList'
+    , LocationList'
 
     -- * Request Lenses
     , llQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateLocationList@ which the
--- 'LocationList' request conforms to.
-type LocationListAPI =
+-- 'LocationList'' request conforms to.
+type LocationListResource =
      "teams" :>
        Capture "teamId" Text :>
          "workers" :>
            Capture "workerEmail" Text :>
              "locations" :>
-               QueryParam "startTimestampMs" Word64 :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] LocationListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "startTimestampMs" Word64 :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] LocationListResponse
 
 -- | Retrieves a list of locations for a worker.
 --
--- /See:/ 'locationList' smart constructor.
-data LocationList = LocationList
+-- /See:/ 'locationList'' smart constructor.
+data LocationList' = LocationList'
     { _llQuotaUser        :: !(Maybe Text)
     , _llPrettyPrint      :: !Bool
     , _llWorkerEmail      :: !Text
@@ -74,7 +82,7 @@ data LocationList = LocationList
     , _llOauthToken       :: !(Maybe Text)
     , _llMaxResults       :: !(Maybe Word32)
     , _llFields           :: !(Maybe Text)
-    , _llAlt              :: !Text
+    , _llAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationList'' with the minimum fields required to make a request.
@@ -104,13 +112,13 @@ data LocationList = LocationList
 -- * 'llFields'
 --
 -- * 'llAlt'
-locationList
+locationList'
     :: Text -- ^ 'workerEmail'
     -> Word64 -- ^ 'startTimestampMs'
     -> Text -- ^ 'teamId'
-    -> LocationList
-locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
-    LocationList
+    -> LocationList'
+locationList' pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
+    LocationList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llWorkerEmail = pLlWorkerEmail_
@@ -122,7 +130,7 @@ locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
     , _llOauthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,14 +193,15 @@ llFields :: Lens' LocationList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LocationList' Text
+llAlt :: Lens' LocationList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LocationList' where
         type Rs LocationList' = LocationListResponse
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u LocationList{..}
-          = go _llQuotaUser _llPrettyPrint _llWorkerEmail
+        requestWithRoute r u LocationList'{..}
+          = go _llQuotaUser (Just _llPrettyPrint)
+              _llWorkerEmail
               _llUserIp
               (Just _llStartTimestampMs)
               _llTeamId
@@ -201,7 +210,9 @@ instance GoogleRequest LocationList' where
               _llOauthToken
               _llMaxResults
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LocationListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LocationListResource)
+                      r
                       u

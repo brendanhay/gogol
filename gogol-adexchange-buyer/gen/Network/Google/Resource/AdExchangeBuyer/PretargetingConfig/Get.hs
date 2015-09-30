@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a specific pretargeting configuration
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigGet@.
-module AdExchangeBuyer.PretargetingConfig.Get
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
     (
     -- * REST Resource
-      PretargetingConfigGetAPI
+      PretargetingConfigGetResource
 
     -- * Creating a Request
-    , pretargetingConfigGet
-    , PretargetingConfigGet
+    , pretargetingConfigGet'
+    , PretargetingConfigGet'
 
     -- * Request Lenses
     , pcgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigGet@ which the
--- 'PretargetingConfigGet' request conforms to.
-type PretargetingConfigGetAPI =
+-- 'PretargetingConfigGet'' request conforms to.
+type PretargetingConfigGetResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
          Capture "configId" Int64 :>
-           Get '[JSON] PretargetingConfig
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] PretargetingConfig
 
 -- | Gets a specific pretargeting configuration
 --
--- /See:/ 'pretargetingConfigGet' smart constructor.
-data PretargetingConfigGet = PretargetingConfigGet
+-- /See:/ 'pretargetingConfigGet'' smart constructor.
+data PretargetingConfigGet' = PretargetingConfigGet'
     { _pcgQuotaUser   :: !(Maybe Text)
     , _pcgPrettyPrint :: !Bool
     , _pcgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PretargetingConfigGet = PretargetingConfigGet
     , _pcgConfigId    :: !Int64
     , _pcgOauthToken  :: !(Maybe Text)
     , _pcgFields      :: !(Maybe Text)
-    , _pcgAlt         :: !Text
+    , _pcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PretargetingConfigGet = PretargetingConfigGet
 -- * 'pcgFields'
 --
 -- * 'pcgAlt'
-pretargetingConfigGet
+pretargetingConfigGet'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
-    -> PretargetingConfigGet
-pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
-    PretargetingConfigGet
+    -> PretargetingConfigGet'
+pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ =
+    PretargetingConfigGet'
     { _pcgQuotaUser = Nothing
     , _pcgPrettyPrint = True
     , _pcgUserIp = Nothing
@@ -101,7 +109,7 @@ pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
     , _pcgConfigId = pPcgConfigId_
     , _pcgOauthToken = Nothing
     , _pcgFields = Nothing
-    , _pcgAlt = "json"
+    , _pcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ pcgFields
   = lens _pcgFields (\ s a -> s{_pcgFields = a})
 
 -- | Data format for the response.
-pcgAlt :: Lens' PretargetingConfigGet' Text
+pcgAlt :: Lens' PretargetingConfigGet' Alt
 pcgAlt = lens _pcgAlt (\ s a -> s{_pcgAlt = a})
 
 instance GoogleRequest PretargetingConfigGet' where
         type Rs PretargetingConfigGet' = PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigGet{..}
-          = go _pcgQuotaUser _pcgPrettyPrint _pcgUserIp
+        requestWithRoute r u PretargetingConfigGet'{..}
+          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIp
               _pcgAccountId
               _pcgKey
               _pcgConfigId
               _pcgOauthToken
               _pcgFields
-              _pcgAlt
+              (Just _pcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigGetAPI)
+                      (Proxy :: Proxy PretargetingConfigGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing pretargeting config.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigUpdate@.
-module AdExchangeBuyer.PretargetingConfig.Update
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
     (
     -- * REST Resource
-      PretargetingConfigUpdateAPI
+      PretargetingConfigUpdateResource
 
     -- * Creating a Request
-    , pretargetingConfigUpdate
-    , PretargetingConfigUpdate
+    , pretargetingConfigUpdate'
+    , PretargetingConfigUpdate'
 
     -- * Request Lenses
     , pcuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigUpdate@ which the
--- 'PretargetingConfigUpdate' request conforms to.
-type PretargetingConfigUpdateAPI =
+-- 'PretargetingConfigUpdate'' request conforms to.
+type PretargetingConfigUpdateResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
          Capture "configId" Int64 :>
-           Put '[JSON] PretargetingConfig
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] PretargetingConfig
 
 -- | Updates an existing pretargeting config.
 --
--- /See:/ 'pretargetingConfigUpdate' smart constructor.
-data PretargetingConfigUpdate = PretargetingConfigUpdate
+-- /See:/ 'pretargetingConfigUpdate'' smart constructor.
+data PretargetingConfigUpdate' = PretargetingConfigUpdate'
     { _pcuQuotaUser   :: !(Maybe Text)
     , _pcuPrettyPrint :: !Bool
     , _pcuUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PretargetingConfigUpdate = PretargetingConfigUpdate
     , _pcuConfigId    :: !Int64
     , _pcuOauthToken  :: !(Maybe Text)
     , _pcuFields      :: !(Maybe Text)
-    , _pcuAlt         :: !Text
+    , _pcuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PretargetingConfigUpdate = PretargetingConfigUpdate
 -- * 'pcuFields'
 --
 -- * 'pcuAlt'
-pretargetingConfigUpdate
+pretargetingConfigUpdate'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
-    -> PretargetingConfigUpdate
-pretargetingConfigUpdate pPcuAccountId_ pPcuConfigId_ =
-    PretargetingConfigUpdate
+    -> PretargetingConfigUpdate'
+pretargetingConfigUpdate' pPcuAccountId_ pPcuConfigId_ =
+    PretargetingConfigUpdate'
     { _pcuQuotaUser = Nothing
     , _pcuPrettyPrint = True
     , _pcuUserIp = Nothing
@@ -101,7 +109,7 @@ pretargetingConfigUpdate pPcuAccountId_ pPcuConfigId_ =
     , _pcuConfigId = pPcuConfigId_
     , _pcuOauthToken = Nothing
     , _pcuFields = Nothing
-    , _pcuAlt = "json"
+    , _pcuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,7 +159,7 @@ pcuFields
   = lens _pcuFields (\ s a -> s{_pcuFields = a})
 
 -- | Data format for the response.
-pcuAlt :: Lens' PretargetingConfigUpdate' Text
+pcuAlt :: Lens' PretargetingConfigUpdate' Alt
 pcuAlt = lens _pcuAlt (\ s a -> s{_pcuAlt = a})
 
 instance GoogleRequest PretargetingConfigUpdate'
@@ -159,16 +167,16 @@ instance GoogleRequest PretargetingConfigUpdate'
         type Rs PretargetingConfigUpdate' =
              PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigUpdate{..}
-          = go _pcuQuotaUser _pcuPrettyPrint _pcuUserIp
+        requestWithRoute r u PretargetingConfigUpdate'{..}
+          = go _pcuQuotaUser (Just _pcuPrettyPrint) _pcuUserIp
               _pcuAccountId
               _pcuKey
               _pcuConfigId
               _pcuOauthToken
               _pcuFields
-              _pcuAlt
+              (Just _pcuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigUpdateAPI)
+                      (Proxy :: Proxy PretargetingConfigUpdateResource)
                       r
                       u

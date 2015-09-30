@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,148 +20,161 @@
 -- | Retrieve Group Member
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersGet@.
-module Directory.Members.Get
+module Network.Google.Resource.Directory.Members.Get
     (
     -- * REST Resource
-      MembersGetAPI
+      MembersGetResource
 
     -- * Creating a Request
-    , membersGet
-    , MembersGet
+    , membersGet'
+    , MembersGet'
 
     -- * Request Lenses
-    , mgQuotaUser
-    , mgMemberKey
-    , mgPrettyPrint
-    , mgUserIp
-    , mgGroupKey
-    , mgKey
-    , mgOauthToken
-    , mgFields
-    , mgAlt
+    , memQuotaUser
+    , memMemberKey
+    , memPrettyPrint
+    , memUserIp
+    , memGroupKey
+    , memKey
+    , memOauthToken
+    , memFields
+    , memAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersGet@ which the
--- 'MembersGet' request conforms to.
-type MembersGetAPI =
+-- 'MembersGet'' request conforms to.
+type MembersGetResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           Capture "memberKey" Text :> Get '[JSON] Member
+           Capture "memberKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Member
 
 -- | Retrieve Group Member
 --
--- /See:/ 'membersGet' smart constructor.
-data MembersGet = MembersGet
-    { _mgQuotaUser   :: !(Maybe Text)
-    , _mgMemberKey   :: !Text
-    , _mgPrettyPrint :: !Bool
-    , _mgUserIp      :: !(Maybe Text)
-    , _mgGroupKey    :: !Text
-    , _mgKey         :: !(Maybe Text)
-    , _mgOauthToken  :: !(Maybe Text)
-    , _mgFields      :: !(Maybe Text)
-    , _mgAlt         :: !Text
+-- /See:/ 'membersGet'' smart constructor.
+data MembersGet' = MembersGet'
+    { _memQuotaUser   :: !(Maybe Text)
+    , _memMemberKey   :: !Text
+    , _memPrettyPrint :: !Bool
+    , _memUserIp      :: !(Maybe Text)
+    , _memGroupKey    :: !Text
+    , _memKey         :: !(Maybe Text)
+    , _memOauthToken  :: !(Maybe Text)
+    , _memFields      :: !(Maybe Text)
+    , _memAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mgQuotaUser'
+-- * 'memQuotaUser'
 --
--- * 'mgMemberKey'
+-- * 'memMemberKey'
 --
--- * 'mgPrettyPrint'
+-- * 'memPrettyPrint'
 --
--- * 'mgUserIp'
+-- * 'memUserIp'
 --
--- * 'mgGroupKey'
+-- * 'memGroupKey'
 --
--- * 'mgKey'
+-- * 'memKey'
 --
--- * 'mgOauthToken'
+-- * 'memOauthToken'
 --
--- * 'mgFields'
+-- * 'memFields'
 --
--- * 'mgAlt'
-membersGet
+-- * 'memAlt'
+membersGet'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> MembersGet
-membersGet pMgMemberKey_ pMgGroupKey_ =
-    MembersGet
-    { _mgQuotaUser = Nothing
-    , _mgMemberKey = pMgMemberKey_
-    , _mgPrettyPrint = True
-    , _mgUserIp = Nothing
-    , _mgGroupKey = pMgGroupKey_
-    , _mgKey = Nothing
-    , _mgOauthToken = Nothing
-    , _mgFields = Nothing
-    , _mgAlt = "json"
+    -> MembersGet'
+membersGet' pMemMemberKey_ pMemGroupKey_ =
+    MembersGet'
+    { _memQuotaUser = Nothing
+    , _memMemberKey = pMemMemberKey_
+    , _memPrettyPrint = True
+    , _memUserIp = Nothing
+    , _memGroupKey = pMemGroupKey_
+    , _memKey = Nothing
+    , _memOauthToken = Nothing
+    , _memFields = Nothing
+    , _memAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-mgQuotaUser :: Lens' MembersGet' (Maybe Text)
-mgQuotaUser
-  = lens _mgQuotaUser (\ s a -> s{_mgQuotaUser = a})
+memQuotaUser :: Lens' MembersGet' (Maybe Text)
+memQuotaUser
+  = lens _memQuotaUser (\ s a -> s{_memQuotaUser = a})
 
 -- | Email or immutable Id of the member
-mgMemberKey :: Lens' MembersGet' Text
-mgMemberKey
-  = lens _mgMemberKey (\ s a -> s{_mgMemberKey = a})
+memMemberKey :: Lens' MembersGet' Text
+memMemberKey
+  = lens _memMemberKey (\ s a -> s{_memMemberKey = a})
 
 -- | Returns response with indentations and line breaks.
-mgPrettyPrint :: Lens' MembersGet' Bool
-mgPrettyPrint
-  = lens _mgPrettyPrint
-      (\ s a -> s{_mgPrettyPrint = a})
+memPrettyPrint :: Lens' MembersGet' Bool
+memPrettyPrint
+  = lens _memPrettyPrint
+      (\ s a -> s{_memPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mgUserIp :: Lens' MembersGet' (Maybe Text)
-mgUserIp = lens _mgUserIp (\ s a -> s{_mgUserIp = a})
+memUserIp :: Lens' MembersGet' (Maybe Text)
+memUserIp
+  = lens _memUserIp (\ s a -> s{_memUserIp = a})
 
 -- | Email or immutable Id of the group
-mgGroupKey :: Lens' MembersGet' Text
-mgGroupKey
-  = lens _mgGroupKey (\ s a -> s{_mgGroupKey = a})
+memGroupKey :: Lens' MembersGet' Text
+memGroupKey
+  = lens _memGroupKey (\ s a -> s{_memGroupKey = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgKey :: Lens' MembersGet' (Maybe Text)
-mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
+memKey :: Lens' MembersGet' (Maybe Text)
+memKey = lens _memKey (\ s a -> s{_memKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mgOauthToken :: Lens' MembersGet' (Maybe Text)
-mgOauthToken
-  = lens _mgOauthToken (\ s a -> s{_mgOauthToken = a})
+memOauthToken :: Lens' MembersGet' (Maybe Text)
+memOauthToken
+  = lens _memOauthToken
+      (\ s a -> s{_memOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-mgFields :: Lens' MembersGet' (Maybe Text)
-mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
+memFields :: Lens' MembersGet' (Maybe Text)
+memFields
+  = lens _memFields (\ s a -> s{_memFields = a})
 
 -- | Data format for the response.
-mgAlt :: Lens' MembersGet' Text
-mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
+memAlt :: Lens' MembersGet' Alt
+memAlt = lens _memAlt (\ s a -> s{_memAlt = a})
 
 instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersGet{..}
-          = go _mgQuotaUser _mgMemberKey _mgPrettyPrint
-              _mgUserIp
-              _mgGroupKey
-              _mgKey
-              _mgOauthToken
-              _mgFields
-              _mgAlt
+        requestWithRoute r u MembersGet'{..}
+          = go _memQuotaUser _memMemberKey
+              (Just _memPrettyPrint)
+              _memUserIp
+              _memGroupKey
+              _memKey
+              _memOauthToken
+              _memFields
+              (Just _memAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MembersGetResource)
+                      r
+                      u

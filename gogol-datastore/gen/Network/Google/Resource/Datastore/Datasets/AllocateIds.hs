@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- before it is inserted).
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsAllocateIds@.
-module Datastore.Datasets.AllocateIds
+module Network.Google.Resource.Datastore.Datasets.AllocateIds
     (
     -- * REST Resource
-      DatasetsAllocateIdsAPI
+      DatasetsAllocateIdsResource
 
     -- * Creating a Request
-    , datasetsAllocateIds
-    , DatasetsAllocateIds
+    , datasetsAllocateIds'
+    , DatasetsAllocateIds'
 
     -- * Request Lenses
     , daiQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsAllocateIds@ which the
--- 'DatasetsAllocateIds' request conforms to.
-type DatasetsAllocateIdsAPI =
+-- 'DatasetsAllocateIds'' request conforms to.
+type DatasetsAllocateIdsResource =
      Capture "datasetId" Text :>
-       "allocateIds" :> Post '[JSON] AllocateIdsResponse
+       "allocateIds" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] AllocateIdsResponse
 
 -- | Allocate IDs for incomplete keys (useful for referencing an entity
 -- before it is inserted).
 --
--- /See:/ 'datasetsAllocateIds' smart constructor.
-data DatasetsAllocateIds = DatasetsAllocateIds
+-- /See:/ 'datasetsAllocateIds'' smart constructor.
+data DatasetsAllocateIds' = DatasetsAllocateIds'
     { _daiQuotaUser   :: !(Maybe Text)
     , _daiPrettyPrint :: !Bool
     , _daiUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data DatasetsAllocateIds = DatasetsAllocateIds
     , _daiDatasetId   :: !Text
     , _daiOauthToken  :: !(Maybe Text)
     , _daiFields      :: !(Maybe Text)
-    , _daiAlt         :: !Text
+    , _daiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsAllocateIds'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data DatasetsAllocateIds = DatasetsAllocateIds
 -- * 'daiFields'
 --
 -- * 'daiAlt'
-datasetsAllocateIds
+datasetsAllocateIds'
     :: Text -- ^ 'datasetId'
-    -> DatasetsAllocateIds
-datasetsAllocateIds pDaiDatasetId_ =
-    DatasetsAllocateIds
+    -> DatasetsAllocateIds'
+datasetsAllocateIds' pDaiDatasetId_ =
+    DatasetsAllocateIds'
     { _daiQuotaUser = Nothing
     , _daiPrettyPrint = True
     , _daiUserIp = Nothing
@@ -95,7 +104,7 @@ datasetsAllocateIds pDaiDatasetId_ =
     , _daiDatasetId = pDaiDatasetId_
     , _daiOauthToken = Nothing
     , _daiFields = Nothing
-    , _daiAlt = "proto"
+    , _daiAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,20 +149,21 @@ daiFields
   = lens _daiFields (\ s a -> s{_daiFields = a})
 
 -- | Data format for the response.
-daiAlt :: Lens' DatasetsAllocateIds' Text
+daiAlt :: Lens' DatasetsAllocateIds' Alt
 daiAlt = lens _daiAlt (\ s a -> s{_daiAlt = a})
 
 instance GoogleRequest DatasetsAllocateIds' where
         type Rs DatasetsAllocateIds' = AllocateIdsResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsAllocateIds{..}
-          = go _daiQuotaUser _daiPrettyPrint _daiUserIp _daiKey
+        requestWithRoute r u DatasetsAllocateIds'{..}
+          = go _daiQuotaUser (Just _daiPrettyPrint) _daiUserIp
+              _daiKey
               _daiDatasetId
               _daiOauthToken
               _daiFields
-              _daiAlt
+              (Just _daiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DatasetsAllocateIdsAPI)
+                      (Proxy :: Proxy DatasetsAllocateIdsResource)
                       r
                       u

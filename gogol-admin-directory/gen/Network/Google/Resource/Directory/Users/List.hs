@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersList@.
-module Directory.Users.List
+module Network.Google.Resource.Directory.Users.List
     (
     -- * REST Resource
-      UsersListAPI
+      UsersListResource
 
     -- * Creating a Request
-    , usersList
-    , UsersList
+    , usersList'
+    , UsersList'
 
     -- * Request Lenses
     , ulEvent
@@ -54,45 +55,55 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersList@ which the
--- 'UsersList' request conforms to.
-type UsersListAPI =
+-- 'UsersList'' request conforms to.
+type UsersListResource =
      "users" :>
-       QueryParam "event" Text :>
-         QueryParam "orderBy" Text :>
-           QueryParam "viewType" Text :>
-             QueryParam "customFieldMask" Text :>
-               QueryParam "domain" Text :>
-                 QueryParam "showDeleted" Text :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "customer" Text :>
-                       QueryParam "query" Text :>
-                         QueryParam "projection" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Int32 :> Get '[JSON] Users
+       QueryParam "event" DirectoryUsersListEvent :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "orderBy" DirectoryUsersListOrderBy :>
+               QueryParam "viewType" DirectoryUsersListViewType :>
+                 QueryParam "customFieldMask" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "domain" Text :>
+                       QueryParam "showDeleted" Text :>
+                         QueryParam "sortOrder" DirectoryUsersListSortOrder :>
+                           QueryParam "customer" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "query" Text :>
+                                 QueryParam "projection"
+                                   DirectoryUsersListProjection
+                                   :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] Users
 
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
--- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
-    { _ulEvent           :: !(Maybe Text)
+-- /See:/ 'usersList'' smart constructor.
+data UsersList' = UsersList'
+    { _ulEvent           :: !(Maybe DirectoryUsersListEvent)
     , _ulQuotaUser       :: !(Maybe Text)
     , _ulPrettyPrint     :: !Bool
-    , _ulOrderBy         :: !(Maybe Text)
-    , _ulViewType        :: !Text
+    , _ulOrderBy         :: !(Maybe DirectoryUsersListOrderBy)
+    , _ulViewType        :: !DirectoryUsersListViewType
     , _ulCustomFieldMask :: !(Maybe Text)
     , _ulUserIp          :: !(Maybe Text)
     , _ulDomain          :: !(Maybe Text)
     , _ulShowDeleted     :: !(Maybe Text)
-    , _ulSortOrder       :: !(Maybe Text)
+    , _ulSortOrder       :: !(Maybe DirectoryUsersListSortOrder)
     , _ulCustomer        :: !(Maybe Text)
     , _ulKey             :: !(Maybe Text)
     , _ulQuery           :: !(Maybe Text)
-    , _ulProjection      :: !Text
+    , _ulProjection      :: !DirectoryUsersListProjection
     , _ulPageToken       :: !(Maybe Text)
     , _ulOauthToken      :: !(Maybe Text)
     , _ulMaxResults      :: !(Maybe Int32)
     , _ulFields          :: !(Maybe Text)
-    , _ulAlt             :: !Text
+    , _ulAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
@@ -136,15 +147,15 @@ data UsersList = UsersList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-usersList
-    :: UsersList
-usersList =
-    UsersList
+usersList'
+    :: UsersList'
+usersList' =
+    UsersList'
     { _ulEvent = Nothing
     , _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulOrderBy = Nothing
-    , _ulViewType = "admin_view"
+    , _ulViewType = AdminView
     , _ulCustomFieldMask = Nothing
     , _ulUserIp = Nothing
     , _ulDomain = Nothing
@@ -153,16 +164,16 @@ usersList =
     , _ulCustomer = Nothing
     , _ulKey = Nothing
     , _ulQuery = Nothing
-    , _ulProjection = "basic"
+    , _ulProjection = DULPBasic
     , _ulPageToken = Nothing
     , _ulOauthToken = Nothing
     , _ulMaxResults = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ulEvent :: Lens' UsersList' (Maybe Text)
+ulEvent :: Lens' UsersList' (Maybe DirectoryUsersListEvent)
 ulEvent = lens _ulEvent (\ s a -> s{_ulEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,12 +190,12 @@ ulPrettyPrint
       (\ s a -> s{_ulPrettyPrint = a})
 
 -- | Column to use for sorting results
-ulOrderBy :: Lens' UsersList' (Maybe Text)
+ulOrderBy :: Lens' UsersList' (Maybe DirectoryUsersListOrderBy)
 ulOrderBy
   = lens _ulOrderBy (\ s a -> s{_ulOrderBy = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ulViewType :: Lens' UsersList' Text
+ulViewType :: Lens' UsersList' DirectoryUsersListViewType
 ulViewType
   = lens _ulViewType (\ s a -> s{_ulViewType = a})
 
@@ -212,7 +223,7 @@ ulShowDeleted
       (\ s a -> s{_ulShowDeleted = a})
 
 -- | Whether to return results in ascending or descending order.
-ulSortOrder :: Lens' UsersList' (Maybe Text)
+ulSortOrder :: Lens' UsersList' (Maybe DirectoryUsersListSortOrder)
 ulSortOrder
   = lens _ulSortOrder (\ s a -> s{_ulSortOrder = a})
 
@@ -235,7 +246,7 @@ ulQuery :: Lens' UsersList' (Maybe Text)
 ulQuery = lens _ulQuery (\ s a -> s{_ulQuery = a})
 
 -- | What subset of fields to fetch for this user.
-ulProjection :: Lens' UsersList' Text
+ulProjection :: Lens' UsersList' DirectoryUsersListProjection
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
@@ -259,14 +270,15 @@ ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' UsersList' Text
+ulAlt :: Lens' UsersList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = Users
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersList{..}
-          = go _ulEvent _ulQuotaUser _ulPrettyPrint _ulOrderBy
+        requestWithRoute r u UsersList'{..}
+          = go _ulEvent _ulQuotaUser (Just _ulPrettyPrint)
+              _ulOrderBy
               (Just _ulViewType)
               _ulCustomFieldMask
               _ulUserIp
@@ -281,6 +293,8 @@ instance GoogleRequest UsersList' where
               _ulOauthToken
               _ulMaxResults
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes health check URL from targetPool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsRemoveHealthCheck@.
-module Compute.TargetPools.RemoveHealthCheck
+module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
     (
     -- * REST Resource
-      TargetPoolsRemoveHealthCheckAPI
+      TargetPoolsRemoveHealthCheckResource
 
     -- * Creating a Request
-    , targetPoolsRemoveHealthCheck
-    , TargetPoolsRemoveHealthCheck
+    , targetPoolsRemoveHealthCheck'
+    , TargetPoolsRemoveHealthCheck'
 
     -- * Request Lenses
     , tprhcQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsRemoveHealthCheck@ which the
--- 'TargetPoolsRemoveHealthCheck' request conforms to.
-type TargetPoolsRemoveHealthCheckAPI =
+-- 'TargetPoolsRemoveHealthCheck'' request conforms to.
+type TargetPoolsRemoveHealthCheckResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
-               "removeHealthCheck" :> Post '[JSON] Operation
+               "removeHealthCheck" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes health check URL from targetPool.
 --
--- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
-data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
+-- /See:/ 'targetPoolsRemoveHealthCheck'' smart constructor.
+data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
     { _tprhcQuotaUser   :: !(Maybe Text)
     , _tprhcPrettyPrint :: !Bool
     , _tprhcProject     :: !Text
@@ -67,7 +75,7 @@ data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
     , _tprhcRegion      :: !Text
     , _tprhcOauthToken  :: !(Maybe Text)
     , _tprhcFields      :: !(Maybe Text)
-    , _tprhcAlt         :: !Text
+    , _tprhcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheck'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
 -- * 'tprhcFields'
 --
 -- * 'tprhcAlt'
-targetPoolsRemoveHealthCheck
+targetPoolsRemoveHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsRemoveHealthCheck
-targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcRegion_ =
-    TargetPoolsRemoveHealthCheck
+    -> TargetPoolsRemoveHealthCheck'
+targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcRegion_ =
+    TargetPoolsRemoveHealthCheck'
     { _tprhcQuotaUser = Nothing
     , _tprhcPrettyPrint = True
     , _tprhcProject = pTprhcProject_
@@ -109,7 +117,7 @@ targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcRegion_ =
     , _tprhcRegion = pTprhcRegion_
     , _tprhcOauthToken = Nothing
     , _tprhcFields = Nothing
-    , _tprhcAlt = "json"
+    , _tprhcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,26 @@ tprhcFields
   = lens _tprhcFields (\ s a -> s{_tprhcFields = a})
 
 -- | Data format for the response.
-tprhcAlt :: Lens' TargetPoolsRemoveHealthCheck' Text
+tprhcAlt :: Lens' TargetPoolsRemoveHealthCheck' Alt
 tprhcAlt = lens _tprhcAlt (\ s a -> s{_tprhcAlt = a})
 
 instance GoogleRequest TargetPoolsRemoveHealthCheck'
          where
         type Rs TargetPoolsRemoveHealthCheck' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsRemoveHealthCheck{..}
-          = go _tprhcQuotaUser _tprhcPrettyPrint _tprhcProject
+        requestWithRoute r u
+          TargetPoolsRemoveHealthCheck'{..}
+          = go _tprhcQuotaUser (Just _tprhcPrettyPrint)
+              _tprhcProject
               _tprhcTargetPool
               _tprhcUserIp
               _tprhcKey
               _tprhcRegion
               _tprhcOauthToken
               _tprhcFields
-              _tprhcAlt
+              (Just _tprhcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsRemoveHealthCheckAPI)
+                      (Proxy :: Proxy TargetPoolsRemoveHealthCheckResource)
                       r
                       u

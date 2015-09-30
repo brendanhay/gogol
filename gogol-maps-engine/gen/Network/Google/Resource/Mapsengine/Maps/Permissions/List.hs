@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsPermissionsList@.
-module Mapsengine.Maps.Permissions.List
+module Network.Google.Resource.Mapsengine.Maps.Permissions.List
     (
     -- * REST Resource
-      MapsPermissionsListAPI
+      MapsPermissionsListResource
 
     -- * Creating a Request
-    , mapsPermissionsList
-    , MapsPermissionsList
+    , mapsPermissionsList'
+    , MapsPermissionsList'
 
     -- * Request Lenses
     , mplQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsPermissionsList@ which the
--- 'MapsPermissionsList' request conforms to.
-type MapsPermissionsListAPI =
+-- 'MapsPermissionsList'' request conforms to.
+type MapsPermissionsListResource =
      "maps" :>
        Capture "id" Text :>
-         "permissions" :> Get '[JSON] PermissionsListResponse
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] PermissionsListResponse
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'mapsPermissionsList' smart constructor.
-data MapsPermissionsList = MapsPermissionsList
+-- /See:/ 'mapsPermissionsList'' smart constructor.
+data MapsPermissionsList' = MapsPermissionsList'
     { _mplQuotaUser   :: !(Maybe Text)
     , _mplPrettyPrint :: !Bool
     , _mplUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data MapsPermissionsList = MapsPermissionsList
     , _mplId          :: !Text
     , _mplOauthToken  :: !(Maybe Text)
     , _mplFields      :: !(Maybe Text)
-    , _mplAlt         :: !Text
+    , _mplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPermissionsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data MapsPermissionsList = MapsPermissionsList
 -- * 'mplFields'
 --
 -- * 'mplAlt'
-mapsPermissionsList
+mapsPermissionsList'
     :: Text -- ^ 'id'
-    -> MapsPermissionsList
-mapsPermissionsList pMplId_ =
-    MapsPermissionsList
+    -> MapsPermissionsList'
+mapsPermissionsList' pMplId_ =
+    MapsPermissionsList'
     { _mplQuotaUser = Nothing
     , _mplPrettyPrint = True
     , _mplUserIp = Nothing
@@ -94,7 +103,7 @@ mapsPermissionsList pMplId_ =
     , _mplId = pMplId_
     , _mplOauthToken = Nothing
     , _mplFields = Nothing
-    , _mplAlt = "json"
+    , _mplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +147,22 @@ mplFields
   = lens _mplFields (\ s a -> s{_mplFields = a})
 
 -- | Data format for the response.
-mplAlt :: Lens' MapsPermissionsList' Text
+mplAlt :: Lens' MapsPermissionsList' Alt
 mplAlt = lens _mplAlt (\ s a -> s{_mplAlt = a})
 
 instance GoogleRequest MapsPermissionsList' where
         type Rs MapsPermissionsList' =
              PermissionsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsPermissionsList{..}
-          = go _mplQuotaUser _mplPrettyPrint _mplUserIp _mplKey
+        requestWithRoute r u MapsPermissionsList'{..}
+          = go _mplQuotaUser (Just _mplPrettyPrint) _mplUserIp
+              _mplKey
               _mplId
               _mplOauthToken
               _mplFields
-              _mplAlt
+              (Just _mplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MapsPermissionsListAPI)
+                      (Proxy :: Proxy MapsPermissionsListResource)
                       r
                       u

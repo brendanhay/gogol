@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the requested negotiation.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerNegotiationsGet@.
-module AdExchangeBuyer.Negotiations.Get
+module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
     (
     -- * REST Resource
-      NegotiationsGetAPI
+      NegotiationsGetResource
 
     -- * Creating a Request
-    , negotiationsGet
-    , NegotiationsGet
+    , negotiationsGet'
+    , NegotiationsGet'
 
     -- * Request Lenses
     , ngQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerNegotiationsGet@ which the
--- 'NegotiationsGet' request conforms to.
-type NegotiationsGetAPI =
+-- 'NegotiationsGet'' request conforms to.
+type NegotiationsGetResource =
      "negotiations" :>
        Capture "negotiationId" Int64 :>
-         Get '[JSON] NegotiationDto
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] NegotiationDto
 
 -- | Gets the requested negotiation.
 --
--- /See:/ 'negotiationsGet' smart constructor.
-data NegotiationsGet = NegotiationsGet
+-- /See:/ 'negotiationsGet'' smart constructor.
+data NegotiationsGet' = NegotiationsGet'
     { _ngQuotaUser     :: !(Maybe Text)
     , _ngPrettyPrint   :: !Bool
     , _ngUserIp        :: !(Maybe Text)
@@ -60,7 +67,7 @@ data NegotiationsGet = NegotiationsGet
     , _ngOauthToken    :: !(Maybe Text)
     , _ngNegotiationId :: !Int64
     , _ngFields        :: !(Maybe Text)
-    , _ngAlt           :: !Text
+    , _ngAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data NegotiationsGet = NegotiationsGet
 -- * 'ngFields'
 --
 -- * 'ngAlt'
-negotiationsGet
+negotiationsGet'
     :: Int64 -- ^ 'negotiationId'
-    -> NegotiationsGet
-negotiationsGet pNgNegotiationId_ =
-    NegotiationsGet
+    -> NegotiationsGet'
+negotiationsGet' pNgNegotiationId_ =
+    NegotiationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
     , _ngUserIp = Nothing
@@ -94,7 +101,7 @@ negotiationsGet pNgNegotiationId_ =
     , _ngOauthToken = Nothing
     , _ngNegotiationId = pNgNegotiationId_
     , _ngFields = Nothing
-    , _ngAlt = "json"
+    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +143,21 @@ ngFields :: Lens' NegotiationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 -- | Data format for the response.
-ngAlt :: Lens' NegotiationsGet' Text
+ngAlt :: Lens' NegotiationsGet' Alt
 ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
 
 instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u NegotiationsGet{..}
-          = go _ngQuotaUser _ngPrettyPrint _ngUserIp _ngKey
+        requestWithRoute r u NegotiationsGet'{..}
+          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIp
+              _ngKey
               _ngOauthToken
               _ngNegotiationId
               _ngFields
-              _ngAlt
+              (Just _ngAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NegotiationsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy NegotiationsGetResource)
                       r
                       u

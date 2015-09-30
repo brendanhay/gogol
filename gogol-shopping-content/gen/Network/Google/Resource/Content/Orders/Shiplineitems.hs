@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Marks line item(s) as shipped.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersShiplineitems@.
-module Content.Orders.Shiplineitems
+module Network.Google.Resource.Content.Orders.Shiplineitems
     (
     -- * REST Resource
-      OrdersShiplineitemsAPI
+      OrdersShiplineitemsResource
 
     -- * Creating a Request
-    , ordersShiplineitems
-    , OrdersShiplineitems
+    , ordersShiplineitems'
+    , OrdersShiplineitems'
 
     -- * Request Lenses
     , osQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersShiplineitems@ which the
--- 'OrdersShiplineitems' request conforms to.
-type OrdersShiplineitemsAPI =
+-- 'OrdersShiplineitems'' request conforms to.
+type OrdersShiplineitemsResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          Capture "orderId" Text :>
            "shipLineItems" :>
-             Post '[JSON] OrdersShipLineItemsResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersShipLineItemsResponse
 
 -- | Marks line item(s) as shipped.
 --
--- /See:/ 'ordersShiplineitems' smart constructor.
-data OrdersShiplineitems = OrdersShiplineitems
+-- /See:/ 'ordersShiplineitems'' smart constructor.
+data OrdersShiplineitems' = OrdersShiplineitems'
     { _osQuotaUser   :: !(Maybe Text)
     , _osMerchantId  :: !Word64
     , _osPrettyPrint :: !Bool
@@ -64,7 +72,7 @@ data OrdersShiplineitems = OrdersShiplineitems
     , _osOauthToken  :: !(Maybe Text)
     , _osOrderId     :: !Text
     , _osFields      :: !(Maybe Text)
-    , _osAlt         :: !Text
+    , _osAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShiplineitems'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data OrdersShiplineitems = OrdersShiplineitems
 -- * 'osFields'
 --
 -- * 'osAlt'
-ordersShiplineitems
+ordersShiplineitems'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersShiplineitems
-ordersShiplineitems pOsMerchantId_ pOsOrderId_ =
-    OrdersShiplineitems
+    -> OrdersShiplineitems'
+ordersShiplineitems' pOsMerchantId_ pOsOrderId_ =
+    OrdersShiplineitems'
     { _osQuotaUser = Nothing
     , _osMerchantId = pOsMerchantId_
     , _osPrettyPrint = True
@@ -102,7 +110,7 @@ ordersShiplineitems pOsMerchantId_ pOsOrderId_ =
     , _osOauthToken = Nothing
     , _osOrderId = pOsOrderId_
     , _osFields = Nothing
-    , _osAlt = "json"
+    , _osAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,23 +157,23 @@ osFields :: Lens' OrdersShiplineitems' (Maybe Text)
 osFields = lens _osFields (\ s a -> s{_osFields = a})
 
 -- | Data format for the response.
-osAlt :: Lens' OrdersShiplineitems' Text
+osAlt :: Lens' OrdersShiplineitems' Alt
 osAlt = lens _osAlt (\ s a -> s{_osAlt = a})
 
 instance GoogleRequest OrdersShiplineitems' where
         type Rs OrdersShiplineitems' =
              OrdersShipLineItemsResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersShiplineitems{..}
-          = go _osQuotaUser _osMerchantId _osPrettyPrint
+        requestWithRoute r u OrdersShiplineitems'{..}
+          = go _osQuotaUser _osMerchantId (Just _osPrettyPrint)
               _osUserIp
               _osKey
               _osOauthToken
               _osOrderId
               _osFields
-              _osAlt
+              (Just _osAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersShiplineitemsAPI)
+                      (Proxy :: Proxy OrdersShiplineitemsResource)
                       r
                       u

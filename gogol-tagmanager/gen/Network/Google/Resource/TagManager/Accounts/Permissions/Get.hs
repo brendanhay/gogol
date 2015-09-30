@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a user\'s Account & Container Permissions.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsGet@.
-module TagManager.Accounts.Permissions.Get
+module Network.Google.Resource.TagManager.Accounts.Permissions.Get
     (
     -- * REST Resource
-      AccountsPermissionsGetAPI
+      AccountsPermissionsGetResource
 
     -- * Creating a Request
-    , accountsPermissionsGet
-    , AccountsPermissionsGet
+    , accountsPermissionsGet'
+    , AccountsPermissionsGet'
 
     -- * Request Lenses
     , apgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsPermissionsGet@ which the
--- 'AccountsPermissionsGet' request conforms to.
-type AccountsPermissionsGetAPI =
+-- 'AccountsPermissionsGet'' request conforms to.
+type AccountsPermissionsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "permissions" :>
-           Capture "permissionId" Text :> Get '[JSON] UserAccess
+           Capture "permissionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] UserAccess
 
 -- | Gets a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsGet' smart constructor.
-data AccountsPermissionsGet = AccountsPermissionsGet
+-- /See:/ 'accountsPermissionsGet'' smart constructor.
+data AccountsPermissionsGet' = AccountsPermissionsGet'
     { _apgQuotaUser    :: !(Maybe Text)
     , _apgPrettyPrint  :: !Bool
     , _apgUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AccountsPermissionsGet = AccountsPermissionsGet
     , _apgOauthToken   :: !(Maybe Text)
     , _apgPermissionId :: !Text
     , _apgFields       :: !(Maybe Text)
-    , _apgAlt          :: !Text
+    , _apgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AccountsPermissionsGet = AccountsPermissionsGet
 -- * 'apgFields'
 --
 -- * 'apgAlt'
-accountsPermissionsGet
+accountsPermissionsGet'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
-    -> AccountsPermissionsGet
-accountsPermissionsGet pApgAccountId_ pApgPermissionId_ =
-    AccountsPermissionsGet
+    -> AccountsPermissionsGet'
+accountsPermissionsGet' pApgAccountId_ pApgPermissionId_ =
+    AccountsPermissionsGet'
     { _apgQuotaUser = Nothing
     , _apgPrettyPrint = True
     , _apgUserIp = Nothing
@@ -101,7 +109,7 @@ accountsPermissionsGet pApgAccountId_ pApgPermissionId_ =
     , _apgOauthToken = Nothing
     , _apgPermissionId = pApgPermissionId_
     , _apgFields = Nothing
-    , _apgAlt = "json"
+    , _apgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ apgFields
   = lens _apgFields (\ s a -> s{_apgFields = a})
 
 -- | Data format for the response.
-apgAlt :: Lens' AccountsPermissionsGet' Text
+apgAlt :: Lens' AccountsPermissionsGet' Alt
 apgAlt = lens _apgAlt (\ s a -> s{_apgAlt = a})
 
 instance GoogleRequest AccountsPermissionsGet' where
         type Rs AccountsPermissionsGet' = UserAccess
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsGet{..}
-          = go _apgQuotaUser _apgPrettyPrint _apgUserIp
+        requestWithRoute r u AccountsPermissionsGet'{..}
+          = go _apgQuotaUser (Just _apgPrettyPrint) _apgUserIp
               _apgAccountId
               _apgKey
               _apgOauthToken
               _apgPermissionId
               _apgFields
-              _apgAlt
+              (Just _apgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPermissionsGetAPI)
+                      (Proxy :: Proxy AccountsPermissionsGetResource)
                       r
                       u

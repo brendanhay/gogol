@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- guaranteed to return ageRange and language.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleGet@.
-module Plus.People.Get
+module Network.Google.Resource.Plus.People.Get
     (
     -- * REST Resource
-      PeopleGetAPI
+      PeopleGetResource
 
     -- * Creating a Request
-    , peopleGet
-    , PeopleGet
+    , peopleGet'
+    , PeopleGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusPeopleGet@ which the
--- 'PeopleGet' request conforms to.
-type PeopleGetAPI =
+-- 'PeopleGet'' request conforms to.
+type PeopleGetResource =
      "people" :>
-       Capture "userId" Text :> Get '[JSON] Person
+       Capture "userId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Person
 
 -- | Get a person\'s profile. If your app uses scope
 -- https:\/\/www.googleapis.com\/auth\/plus.login, this method is
 -- guaranteed to return ageRange and language.
 --
--- /See:/ 'peopleGet' smart constructor.
-data PeopleGet = PeopleGet
+-- /See:/ 'peopleGet'' smart constructor.
+data PeopleGet' = PeopleGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PeopleGet = PeopleGet
     , _pgKey         :: !(Maybe Text)
     , _pgOauthToken  :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleGet'' with the minimum fields required to make a request.
@@ -85,11 +93,11 @@ data PeopleGet = PeopleGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-peopleGet
+peopleGet'
     :: Text -- ^ 'userId'
-    -> PeopleGet
-peopleGet pPgUserId_ =
-    PeopleGet
+    -> PeopleGet'
+peopleGet' pPgUserId_ =
+    PeopleGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgUserIp = Nothing
@@ -97,7 +105,7 @@ peopleGet pPgUserId_ =
     , _pgKey = Nothing
     , _pgOauthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,17 +147,20 @@ pgFields :: Lens' PeopleGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PeopleGet' Text
+pgAlt :: Lens' PeopleGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest PeopleGet' where
         type Rs PeopleGet' = Person
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgUserId
+        requestWithRoute r u PeopleGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+              _pgUserId
               _pgKey
               _pgOauthToken
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PeopleGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PeopleGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add new data to a trained model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsUpdate@.
-module Prediction.Trainedmodels.Update
+module Network.Google.Resource.Prediction.Trainedmodels.Update
     (
     -- * REST Resource
-      TrainedmodelsUpdateAPI
+      TrainedmodelsUpdateResource
 
     -- * Creating a Request
-    , trainedmodelsUpdate
-    , TrainedmodelsUpdate
+    , trainedmodelsUpdate'
+    , TrainedmodelsUpdate'
 
     -- * Request Lenses
     , tuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsUpdate@ which the
--- 'TrainedmodelsUpdate' request conforms to.
-type TrainedmodelsUpdateAPI =
+-- 'TrainedmodelsUpdate'' request conforms to.
+type TrainedmodelsUpdateResource =
      Capture "project" Text :>
        "trainedmodels" :>
-         Capture "id" Text :> Put '[JSON] Insert2
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Insert2
 
 -- | Add new data to a trained model.
 --
--- /See:/ 'trainedmodelsUpdate' smart constructor.
-data TrainedmodelsUpdate = TrainedmodelsUpdate
+-- /See:/ 'trainedmodelsUpdate'' smart constructor.
+data TrainedmodelsUpdate' = TrainedmodelsUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuProject     :: !Text
@@ -62,7 +70,7 @@ data TrainedmodelsUpdate = TrainedmodelsUpdate
     , _tuId          :: !Text
     , _tuOauthToken  :: !(Maybe Text)
     , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Text
+    , _tuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsUpdate'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data TrainedmodelsUpdate = TrainedmodelsUpdate
 -- * 'tuFields'
 --
 -- * 'tuAlt'
-trainedmodelsUpdate
+trainedmodelsUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
-    -> TrainedmodelsUpdate
-trainedmodelsUpdate pTuProject_ pTuId_ =
-    TrainedmodelsUpdate
+    -> TrainedmodelsUpdate'
+trainedmodelsUpdate' pTuProject_ pTuId_ =
+    TrainedmodelsUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuProject = pTuProject_
@@ -100,7 +108,7 @@ trainedmodelsUpdate pTuProject_ pTuId_ =
     , _tuId = pTuId_
     , _tuOauthToken = Nothing
     , _tuFields = Nothing
-    , _tuAlt = "json"
+    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,21 +154,22 @@ tuFields :: Lens' TrainedmodelsUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuAlt :: Lens' TrainedmodelsUpdate' Text
+tuAlt :: Lens' TrainedmodelsUpdate' Alt
 tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TrainedmodelsUpdate' where
         type Rs TrainedmodelsUpdate' = Insert2
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsUpdate{..}
-          = go _tuQuotaUser _tuPrettyPrint _tuProject _tuUserIp
+        requestWithRoute r u TrainedmodelsUpdate'{..}
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuProject
+              _tuUserIp
               _tuKey
               _tuId
               _tuOauthToken
               _tuFields
-              _tuAlt
+              (Just _tuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsUpdateAPI)
+                      (Proxy :: Proxy TrainedmodelsUpdateResource)
                       r
                       u

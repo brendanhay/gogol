@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists experiments to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsList@.
-module Analytics.Management.Experiments.List
+module Network.Google.Resource.Analytics.Management.Experiments.List
     (
     -- * REST Resource
-      ManagementExperimentsListAPI
+      ManagementExperimentsListResource
 
     -- * Creating a Request
-    , managementExperimentsList
-    , ManagementExperimentsList
+    , managementExperimentsList'
+    , ManagementExperimentsList'
 
     -- * Request Lenses
     , melQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsList@ which the
--- 'ManagementExperimentsList' request conforms to.
-type ManagementExperimentsListAPI =
+-- 'ManagementExperimentsList'' request conforms to.
+type ManagementExperimentsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,14 +58,21 @@ type ManagementExperimentsListAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         Get '[JSON] Experiments
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] Experiments
 
 -- | Lists experiments to which the user has access.
 --
--- /See:/ 'managementExperimentsList' smart constructor.
-data ManagementExperimentsList = ManagementExperimentsList
+-- /See:/ 'managementExperimentsList'' smart constructor.
+data ManagementExperimentsList' = ManagementExperimentsList'
     { _melQuotaUser     :: !(Maybe Text)
     , _melPrettyPrint   :: !Bool
     , _melWebPropertyId :: !Text
@@ -76,7 +84,7 @@ data ManagementExperimentsList = ManagementExperimentsList
     , _melStartIndex    :: !(Maybe Int32)
     , _melMaxResults    :: !(Maybe Int32)
     , _melFields        :: !(Maybe Text)
-    , _melAlt           :: !Text
+    , _melAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsList'' with the minimum fields required to make a request.
@@ -106,13 +114,13 @@ data ManagementExperimentsList = ManagementExperimentsList
 -- * 'melFields'
 --
 -- * 'melAlt'
-managementExperimentsList
+managementExperimentsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementExperimentsList
-managementExperimentsList pMelWebPropertyId_ pMelProfileId_ pMelAccountId_ =
-    ManagementExperimentsList
+    -> ManagementExperimentsList'
+managementExperimentsList' pMelWebPropertyId_ pMelProfileId_ pMelAccountId_ =
+    ManagementExperimentsList'
     { _melQuotaUser = Nothing
     , _melPrettyPrint = False
     , _melWebPropertyId = pMelWebPropertyId_
@@ -124,7 +132,7 @@ managementExperimentsList pMelWebPropertyId_ pMelProfileId_ pMelAccountId_ =
     , _melStartIndex = Nothing
     , _melMaxResults = Nothing
     , _melFields = Nothing
-    , _melAlt = "json"
+    , _melAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -193,15 +201,16 @@ melFields
   = lens _melFields (\ s a -> s{_melFields = a})
 
 -- | Data format for the response.
-melAlt :: Lens' ManagementExperimentsList' Text
+melAlt :: Lens' ManagementExperimentsList' Alt
 melAlt = lens _melAlt (\ s a -> s{_melAlt = a})
 
 instance GoogleRequest ManagementExperimentsList'
          where
         type Rs ManagementExperimentsList' = Experiments
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsList{..}
-          = go _melQuotaUser _melPrettyPrint _melWebPropertyId
+        requestWithRoute r u ManagementExperimentsList'{..}
+          = go _melQuotaUser (Just _melPrettyPrint)
+              _melWebPropertyId
               _melUserIp
               _melProfileId
               _melAccountId
@@ -210,9 +219,9 @@ instance GoogleRequest ManagementExperimentsList'
               _melStartIndex
               _melMaxResults
               _melFields
-              _melAlt
+              (Just _melAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsListAPI)
+                      (Proxy :: Proxy ManagementExperimentsListResource)
                       r
                       u

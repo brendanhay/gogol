@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List available volumes under categories for onboarding experience.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksOnboardingListCategoryVolumes@.
-module Books.Onboarding.ListCategoryVolumes
+module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
     (
     -- * REST Resource
-      OnboardingListCategoryVolumesAPI
+      OnboardingListCategoryVolumesResource
 
     -- * Creating a Request
-    , onboardingListCategoryVolumes
-    , OnboardingListCategoryVolumes
+    , onboardingListCategoryVolumes'
+    , OnboardingListCategoryVolumes'
 
     -- * Request Lenses
     , olcvQuotaUser
@@ -47,32 +48,41 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksOnboardingListCategoryVolumes@ which the
--- 'OnboardingListCategoryVolumes' request conforms to.
-type OnboardingListCategoryVolumesAPI =
+-- 'OnboardingListCategoryVolumes'' request conforms to.
+type OnboardingListCategoryVolumesResource =
      "onboarding" :>
        "listCategoryVolumes" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxAllowedMaturityRating" Text :>
-             QueryParams "categoryId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Word32 :> Get '[JSON] Volume2
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "maxAllowedMaturityRating"
+                   BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
+                   :>
+                   QueryParam "key" Text :>
+                     QueryParams "categoryId" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "pageSize" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
 --
--- /See:/ 'onboardingListCategoryVolumes' smart constructor.
-data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
+-- /See:/ 'onboardingListCategoryVolumes'' smart constructor.
+data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     { _olcvQuotaUser                :: !(Maybe Text)
     , _olcvPrettyPrint              :: !Bool
     , _olcvUserIp                   :: !(Maybe Text)
     , _olcvLocale                   :: !(Maybe Text)
-    , _olcvMaxAllowedMaturityRating :: !(Maybe Text)
+    , _olcvMaxAllowedMaturityRating :: !(Maybe BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvKey                      :: !(Maybe Text)
     , _olcvCategoryId               :: !(Maybe Text)
     , _olcvPageToken                :: !(Maybe Text)
     , _olcvOauthToken               :: !(Maybe Text)
     , _olcvPageSize                 :: !(Maybe Word32)
     , _olcvFields                   :: !(Maybe Text)
-    , _olcvAlt                      :: !Text
+    , _olcvAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategoryVolumes'' with the minimum fields required to make a request.
@@ -102,10 +112,10 @@ data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
 -- * 'olcvFields'
 --
 -- * 'olcvAlt'
-onboardingListCategoryVolumes
-    :: OnboardingListCategoryVolumes
-onboardingListCategoryVolumes =
-    OnboardingListCategoryVolumes
+onboardingListCategoryVolumes'
+    :: OnboardingListCategoryVolumes'
+onboardingListCategoryVolumes' =
+    OnboardingListCategoryVolumes'
     { _olcvQuotaUser = Nothing
     , _olcvPrettyPrint = True
     , _olcvUserIp = Nothing
@@ -117,7 +127,7 @@ onboardingListCategoryVolumes =
     , _olcvOauthToken = Nothing
     , _olcvPageSize = Nothing
     , _olcvFields = Nothing
-    , _olcvAlt = "json"
+    , _olcvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,7 +158,7 @@ olcvLocale
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a
 -- higher maturity rating are filtered out.
-olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvMaxAllowedMaturityRating :: Lens' OnboardingListCategoryVolumes' (Maybe BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating)
 olcvMaxAllowedMaturityRating
   = lens _olcvMaxAllowedMaturityRating
       (\ s a -> s{_olcvMaxAllowedMaturityRating = a})
@@ -188,7 +198,7 @@ olcvFields
   = lens _olcvFields (\ s a -> s{_olcvFields = a})
 
 -- | Data format for the response.
-olcvAlt :: Lens' OnboardingListCategoryVolumes' Text
+olcvAlt :: Lens' OnboardingListCategoryVolumes' Alt
 olcvAlt = lens _olcvAlt (\ s a -> s{_olcvAlt = a})
 
 instance GoogleRequest OnboardingListCategoryVolumes'
@@ -196,8 +206,9 @@ instance GoogleRequest OnboardingListCategoryVolumes'
         type Rs OnboardingListCategoryVolumes' = Volume2
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          OnboardingListCategoryVolumes{..}
-          = go _olcvQuotaUser _olcvPrettyPrint _olcvUserIp
+          OnboardingListCategoryVolumes'{..}
+          = go _olcvQuotaUser (Just _olcvPrettyPrint)
+              _olcvUserIp
               _olcvLocale
               _olcvMaxAllowedMaturityRating
               _olcvKey
@@ -206,9 +217,10 @@ instance GoogleRequest OnboardingListCategoryVolumes'
               _olcvOauthToken
               _olcvPageSize
               _olcvFields
-              _olcvAlt
+              (Just _olcvAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OnboardingListCategoryVolumesAPI)
+                      (Proxy ::
+                         Proxy OnboardingListCategoryVolumesResource)
                       r
                       u

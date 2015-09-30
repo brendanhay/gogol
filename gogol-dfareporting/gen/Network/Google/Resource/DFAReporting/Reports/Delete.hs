@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a report by its ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsDelete@.
-module DFAReporting.Reports.Delete
+module Network.Google.Resource.DFAReporting.Reports.Delete
     (
     -- * REST Resource
-      ReportsDeleteAPI
+      ReportsDeleteResource
 
     -- * Creating a Request
-    , reportsDelete
-    , ReportsDelete
+    , reportsDelete'
+    , ReportsDelete'
 
     -- * Request Lenses
     , rdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsDelete@ which the
--- 'ReportsDelete' request conforms to.
-type ReportsDeleteAPI =
+-- 'ReportsDelete'' request conforms to.
+type ReportsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           Capture "reportId" Int64 :> Delete '[JSON] ()
+           Capture "reportId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
 --
--- /See:/ 'reportsDelete' smart constructor.
-data ReportsDelete = ReportsDelete
+-- /See:/ 'reportsDelete'' smart constructor.
+data ReportsDelete' = ReportsDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ReportsDelete = ReportsDelete
     , _rdKey         :: !(Maybe Text)
     , _rdOauthToken  :: !(Maybe Text)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Text
+    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ReportsDelete = ReportsDelete
 -- * 'rdFields'
 --
 -- * 'rdAlt'
-reportsDelete
+reportsDelete'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> ReportsDelete
-reportsDelete pRdReportId_ pRdProfileId_ =
-    ReportsDelete
+    -> ReportsDelete'
+reportsDelete' pRdReportId_ pRdProfileId_ =
+    ReportsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdUserIp = Nothing
@@ -101,7 +109,7 @@ reportsDelete pRdReportId_ pRdProfileId_ =
     , _rdKey = Nothing
     , _rdOauthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = "json"
+    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ rdFields :: Lens' ReportsDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 -- | Data format for the response.
-rdAlt :: Lens' ReportsDelete' Text
+rdAlt :: Lens' ReportsDelete' Alt
 rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
 
 instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsDelete{..}
-          = go _rdQuotaUser _rdPrettyPrint _rdUserIp
+        requestWithRoute r u ReportsDelete'{..}
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
               _rdReportId
               _rdProfileId
               _rdKey
               _rdOauthToken
               _rdFields
-              _rdAlt
+              (Just _rdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsDeleteResource)
+                      r
                       u

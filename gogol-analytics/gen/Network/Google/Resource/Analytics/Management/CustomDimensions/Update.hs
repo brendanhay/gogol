@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing custom dimension.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsUpdate@.
-module Analytics.Management.CustomDimensions.Update
+module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
     (
     -- * REST Resource
-      ManagementCustomDimensionsUpdateAPI
+      ManagementCustomDimensionsUpdateResource
 
     -- * Creating a Request
-    , managementCustomDimensionsUpdate
-    , ManagementCustomDimensionsUpdate
+    , managementCustomDimensionsUpdate'
+    , ManagementCustomDimensionsUpdate'
 
     -- * Request Lenses
     , mcduQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsUpdate@ which the
--- 'ManagementCustomDimensionsUpdate' request conforms to.
-type ManagementCustomDimensionsUpdateAPI =
+-- 'ManagementCustomDimensionsUpdate'' request conforms to.
+type ManagementCustomDimensionsUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,13 +56,20 @@ type ManagementCustomDimensionsUpdateAPI =
              Capture "webPropertyId" Text :>
                "customDimensions" :>
                  Capture "customDimensionId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     Put '[JSON] CustomDimension
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Put '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension.
 --
--- /See:/ 'managementCustomDimensionsUpdate' smart constructor.
-data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate
+-- /See:/ 'managementCustomDimensionsUpdate'' smart constructor.
+data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
     { _mcduQuotaUser                   :: !(Maybe Text)
     , _mcduPrettyPrint                 :: !Bool
     , _mcduWebPropertyId               :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate
     , _mcduOauthToken                  :: !(Maybe Text)
     , _mcduCustomDimensionId           :: !Text
     , _mcduFields                      :: !(Maybe Text)
-    , _mcduAlt                         :: !Text
+    , _mcduAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsUpdate'' with the minimum fields required to make a request.
@@ -100,13 +108,13 @@ data ManagementCustomDimensionsUpdate = ManagementCustomDimensionsUpdate
 -- * 'mcduFields'
 --
 -- * 'mcduAlt'
-managementCustomDimensionsUpdate
+managementCustomDimensionsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
-    -> ManagementCustomDimensionsUpdate
-managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduAccountId_ pMcduCustomDimensionId_ =
-    ManagementCustomDimensionsUpdate
+    -> ManagementCustomDimensionsUpdate'
+managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduAccountId_ pMcduCustomDimensionId_ =
+    ManagementCustomDimensionsUpdate'
     { _mcduQuotaUser = Nothing
     , _mcduPrettyPrint = False
     , _mcduWebPropertyId = pMcduWebPropertyId_
@@ -117,7 +125,7 @@ managementCustomDimensionsUpdate pMcduWebPropertyId_ pMcduAccountId_ pMcduCustom
     , _mcduOauthToken = Nothing
     , _mcduCustomDimensionId = pMcduCustomDimensionId_
     , _mcduFields = Nothing
-    , _mcduAlt = "json"
+    , _mcduAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ mcduFields
   = lens _mcduFields (\ s a -> s{_mcduFields = a})
 
 -- | Data format for the response.
-mcduAlt :: Lens' ManagementCustomDimensionsUpdate' Text
+mcduAlt :: Lens' ManagementCustomDimensionsUpdate' Alt
 mcduAlt = lens _mcduAlt (\ s a -> s{_mcduAlt = a})
 
 instance GoogleRequest
@@ -192,8 +200,8 @@ instance GoogleRequest
              CustomDimension
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDimensionsUpdate{..}
-          = go _mcduQuotaUser _mcduPrettyPrint
+          ManagementCustomDimensionsUpdate'{..}
+          = go _mcduQuotaUser (Just _mcduPrettyPrint)
               _mcduWebPropertyId
               (Just _mcduIgnoreCustomDataSourceLinks)
               _mcduUserIp
@@ -202,9 +210,10 @@ instance GoogleRequest
               _mcduOauthToken
               _mcduCustomDimensionId
               _mcduFields
-              _mcduAlt
+              (Just _mcduAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDimensionsUpdateAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDimensionsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an event.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsDelete@.
-module Calendar.Events.Delete
+module Network.Google.Resource.Calendar.Events.Delete
     (
     -- * REST Resource
-      EventsDeleteAPI
+      EventsDeleteResource
 
     -- * Creating a Request
-    , eventsDelete
-    , EventsDelete
+    , eventsDelete'
+    , EventsDelete'
 
     -- * Request Lenses
     , edQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsDelete@ which the
--- 'EventsDelete' request conforms to.
-type EventsDeleteAPI =
+-- 'EventsDelete'' request conforms to.
+type EventsDeleteResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "sendNotifications" Bool :>
-               Delete '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "sendNotifications" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an event.
 --
--- /See:/ 'eventsDelete' smart constructor.
-data EventsDelete = EventsDelete
+-- /See:/ 'eventsDelete'' smart constructor.
+data EventsDelete' = EventsDelete'
     { _edQuotaUser         :: !(Maybe Text)
     , _edCalendarId        :: !Text
     , _edPrettyPrint       :: !Bool
@@ -67,7 +74,7 @@ data EventsDelete = EventsDelete
     , _edOauthToken        :: !(Maybe Text)
     , _edEventId           :: !Text
     , _edFields            :: !(Maybe Text)
-    , _edAlt               :: !Text
+    , _edAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsDelete'' with the minimum fields required to make a request.
@@ -93,12 +100,12 @@ data EventsDelete = EventsDelete
 -- * 'edFields'
 --
 -- * 'edAlt'
-eventsDelete
+eventsDelete'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
-    -> EventsDelete
-eventsDelete pEdCalendarId_ pEdEventId_ =
-    EventsDelete
+    -> EventsDelete'
+eventsDelete' pEdCalendarId_ pEdEventId_ =
+    EventsDelete'
     { _edQuotaUser = Nothing
     , _edCalendarId = pEdCalendarId_
     , _edPrettyPrint = True
@@ -108,7 +115,7 @@ eventsDelete pEdCalendarId_ pEdEventId_ =
     , _edOauthToken = Nothing
     , _edEventId = pEdEventId_
     , _edFields = Nothing
-    , _edAlt = "json"
+    , _edAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,21 +171,23 @@ edFields :: Lens' EventsDelete' (Maybe Text)
 edFields = lens _edFields (\ s a -> s{_edFields = a})
 
 -- | Data format for the response.
-edAlt :: Lens' EventsDelete' Text
+edAlt :: Lens' EventsDelete' Alt
 edAlt = lens _edAlt (\ s a -> s{_edAlt = a})
 
 instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsDelete{..}
-          = go _edQuotaUser _edCalendarId _edPrettyPrint
+        requestWithRoute r u EventsDelete'{..}
+          = go _edQuotaUser _edCalendarId (Just _edPrettyPrint)
               _edUserIp
               _edKey
               _edSendNotifications
               _edOauthToken
               _edEventId
               _edFields
-              _edAlt
+              (Just _edAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsDeleteResource)
+                      r
                       u

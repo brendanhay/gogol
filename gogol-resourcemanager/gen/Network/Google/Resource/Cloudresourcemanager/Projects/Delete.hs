@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -42,14 +43,14 @@
 -- methods. The caller must have modify permissions for this project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsDelete@.
-module Cloudresourcemanager.Projects.Delete
+module Network.Google.Resource.Cloudresourcemanager.Projects.Delete
     (
     -- * REST Resource
-      ProjectsDeleteAPI
+      ProjectsDeleteResource
 
     -- * Creating a Request
-    , projectsDelete
-    , ProjectsDelete
+    , projectsDelete'
+    , ProjectsDelete'
 
     -- * Request Lenses
     , pdXgafv
@@ -72,11 +73,24 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsDelete@ which the
--- 'ProjectsDelete' request conforms to.
-type ProjectsDeleteAPI =
+-- 'ProjectsDelete'' request conforms to.
+type ProjectsDeleteResource =
      "v1beta1" :>
        "projects" :>
-         Capture "projectId" Text :> Delete '[JSON] Empty
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Marks the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`) for deletion. This method will only affect
@@ -103,8 +117,8 @@ type ProjectsDeleteAPI =
 -- [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]
 -- methods. The caller must have modify permissions for this project.
 --
--- /See:/ 'projectsDelete' smart constructor.
-data ProjectsDelete = ProjectsDelete
+-- /See:/ 'projectsDelete'' smart constructor.
+data ProjectsDelete' = ProjectsDelete'
     { _pdXgafv          :: !(Maybe Text)
     , _pdQuotaUser      :: !(Maybe Text)
     , _pdPrettyPrint    :: !Bool
@@ -152,11 +166,11 @@ data ProjectsDelete = ProjectsDelete
 -- * 'pdCallback'
 --
 -- * 'pdAlt'
-projectsDelete
+projectsDelete'
     :: Text -- ^ 'projectId'
-    -> ProjectsDelete
-projectsDelete pPdProjectId_ =
-    ProjectsDelete
+    -> ProjectsDelete'
+projectsDelete' pPdProjectId_ =
+    ProjectsDelete'
     { _pdXgafv = Nothing
     , _pdQuotaUser = Nothing
     , _pdPrettyPrint = True
@@ -249,10 +263,10 @@ pdAlt = lens _pdAlt (\ s a -> s{_pdAlt = a})
 instance GoogleRequest ProjectsDelete' where
         type Rs ProjectsDelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsDelete{..}
-          = go _pdXgafv _pdQuotaUser _pdPrettyPrint
+        requestWithRoute r u ProjectsDelete'{..}
+          = go _pdXgafv _pdQuotaUser (Just _pdPrettyPrint)
               _pdUploadProtocol
-              _pdPp
+              (Just _pdPp)
               _pdAccessToken
               _pdUploadType
               _pdBearerToken
@@ -261,8 +275,9 @@ instance GoogleRequest ProjectsDelete' where
               _pdOauthToken
               _pdFields
               _pdCallback
-              _pdAlt
+              (Just _pdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsDeleteResource)
                       r
                       u

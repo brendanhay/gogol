@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a data transfer request.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DatatransferTransfersInsert@.
-module Datatransfer.Transfers.Insert
+module Network.Google.Resource.Datatransfer.Transfers.Insert
     (
     -- * REST Resource
-      TransfersInsertAPI
+      TransfersInsertResource
 
     -- * Creating a Request
-    , transfersInsert
-    , TransfersInsert
+    , transfersInsert'
+    , TransfersInsert'
 
     -- * Request Lenses
     , tiQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatatransferTransfersInsert@ which the
--- 'TransfersInsert' request conforms to.
-type TransfersInsertAPI =
-     "transfers" :> Post '[JSON] DataTransfer
+-- 'TransfersInsert'' request conforms to.
+type TransfersInsertResource =
+     "transfers" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] DataTransfer
 
 -- | Inserts a data transfer request.
 --
--- /See:/ 'transfersInsert' smart constructor.
-data TransfersInsert = TransfersInsert
+-- /See:/ 'transfersInsert'' smart constructor.
+data TransfersInsert' = TransfersInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIp      :: !(Maybe Text)
     , _tiKey         :: !(Maybe Text)
     , _tiOauthToken  :: !(Maybe Text)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data TransfersInsert = TransfersInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-transfersInsert
-    :: TransfersInsert
-transfersInsert =
-    TransfersInsert
+transfersInsert'
+    :: TransfersInsert'
+transfersInsert' =
+    TransfersInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIp = Nothing
     , _tiKey = Nothing
     , _tiOauthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +131,21 @@ tiFields :: Lens' TransfersInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TransfersInsert' Text
+tiAlt :: Lens' TransfersInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TransfersInsert' where
         type Rs TransfersInsert' = DataTransfer
         request
           = requestWithRoute defReq adminDataTransferURL
-        requestWithRoute r u TransfersInsert{..}
-          = go _tiQuotaUser _tiPrettyPrint _tiUserIp _tiKey
+        requestWithRoute r u TransfersInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+              _tiKey
               _tiOauthToken
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TransfersInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TransfersInsertResource)
                       r
                       u

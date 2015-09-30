@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified route resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesDelete@.
-module Compute.Routes.Delete
+module Network.Google.Resource.Compute.Routes.Delete
     (
     -- * REST Resource
-      RoutesDeleteAPI
+      RoutesDeleteResource
 
     -- * Creating a Request
-    , routesDelete
-    , RoutesDelete
+    , routesDelete'
+    , RoutesDelete'
 
     -- * Request Lenses
     , rdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRoutesDelete@ which the
--- 'RoutesDelete' request conforms to.
-type RoutesDeleteAPI =
+-- 'RoutesDelete'' request conforms to.
+type RoutesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "routes" :>
-           Capture "route" Text :> Delete '[JSON] Operation
+           Capture "route" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified route resource.
 --
--- /See:/ 'routesDelete' smart constructor.
-data RoutesDelete = RoutesDelete
+-- /See:/ 'routesDelete'' smart constructor.
+data RoutesDelete' = RoutesDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdProject     :: !Text
@@ -63,7 +71,7 @@ data RoutesDelete = RoutesDelete
     , _rdKey         :: !(Maybe Text)
     , _rdOauthToken  :: !(Maybe Text)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Text
+    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data RoutesDelete = RoutesDelete
 -- * 'rdFields'
 --
 -- * 'rdAlt'
-routesDelete
+routesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'route'
-    -> RoutesDelete
-routesDelete pRdProject_ pRdRoute_ =
-    RoutesDelete
+    -> RoutesDelete'
+routesDelete' pRdProject_ pRdRoute_ =
+    RoutesDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdProject = pRdProject_
@@ -101,7 +109,7 @@ routesDelete pRdProject_ pRdRoute_ =
     , _rdKey = Nothing
     , _rdOauthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = "json"
+    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +155,22 @@ rdFields :: Lens' RoutesDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 -- | Data format for the response.
-rdAlt :: Lens' RoutesDelete' Text
+rdAlt :: Lens' RoutesDelete' Alt
 rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
 
 instance GoogleRequest RoutesDelete' where
         type Rs RoutesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesDelete{..}
-          = go _rdQuotaUser _rdPrettyPrint _rdProject _rdUserIp
+        requestWithRoute r u RoutesDelete'{..}
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdProject
+              _rdUserIp
               _rdRoute
               _rdKey
               _rdOauthToken
               _rdFields
-              _rdAlt
+              (Just _rdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RoutesDeleteResource)
+                      r
                       u

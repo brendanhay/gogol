@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List of available elections to query.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoElectionsElectionQuery@.
-module CivicInfo.Elections.ElectionQuery
+module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     (
     -- * REST Resource
-      ElectionsElectionQueryAPI
+      ElectionsElectionQueryResource
 
     -- * Creating a Request
-    , electionsElectionQuery
-    , ElectionsElectionQuery
+    , electionsElectionQuery'
+    , ElectionsElectionQuery'
 
     -- * Request Lenses
     , eeqQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CivicinfoElectionsElectionQuery@ which the
--- 'ElectionsElectionQuery' request conforms to.
-type ElectionsElectionQueryAPI =
-     "elections" :> Get '[JSON] ElectionsQueryResponse
+-- 'ElectionsElectionQuery'' request conforms to.
+type ElectionsElectionQueryResource =
+     "elections" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] ElectionsQueryResponse
 
 -- | List of available elections to query.
 --
--- /See:/ 'electionsElectionQuery' smart constructor.
-data ElectionsElectionQuery = ElectionsElectionQuery
+-- /See:/ 'electionsElectionQuery'' smart constructor.
+data ElectionsElectionQuery' = ElectionsElectionQuery'
     { _eeqQuotaUser   :: !(Maybe Text)
     , _eeqPrettyPrint :: !Bool
     , _eeqUserIp      :: !(Maybe Text)
     , _eeqKey         :: !(Maybe Text)
     , _eeqOauthToken  :: !(Maybe Text)
     , _eeqFields      :: !(Maybe Text)
-    , _eeqAlt         :: !Text
+    , _eeqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data ElectionsElectionQuery = ElectionsElectionQuery
 -- * 'eeqFields'
 --
 -- * 'eeqAlt'
-electionsElectionQuery
-    :: ElectionsElectionQuery
-electionsElectionQuery =
-    ElectionsElectionQuery
+electionsElectionQuery'
+    :: ElectionsElectionQuery'
+electionsElectionQuery' =
+    ElectionsElectionQuery'
     { _eeqQuotaUser = Nothing
     , _eeqPrettyPrint = True
     , _eeqUserIp = Nothing
     , _eeqKey = Nothing
     , _eeqOauthToken = Nothing
     , _eeqFields = Nothing
-    , _eeqAlt = "json"
+    , _eeqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,20 +135,21 @@ eeqFields
   = lens _eeqFields (\ s a -> s{_eeqFields = a})
 
 -- | Data format for the response.
-eeqAlt :: Lens' ElectionsElectionQuery' Text
+eeqAlt :: Lens' ElectionsElectionQuery' Alt
 eeqAlt = lens _eeqAlt (\ s a -> s{_eeqAlt = a})
 
 instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =
              ElectionsQueryResponse
         request = requestWithRoute defReq civicInfoURL
-        requestWithRoute r u ElectionsElectionQuery{..}
-          = go _eeqQuotaUser _eeqPrettyPrint _eeqUserIp _eeqKey
+        requestWithRoute r u ElectionsElectionQuery'{..}
+          = go _eeqQuotaUser (Just _eeqPrettyPrint) _eeqUserIp
+              _eeqKey
               _eeqOauthToken
               _eeqFields
-              _eeqAlt
+              (Just _eeqAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ElectionsElectionQueryAPI)
+                      (Proxy :: Proxy ElectionsElectionQueryResource)
                       r
                       u

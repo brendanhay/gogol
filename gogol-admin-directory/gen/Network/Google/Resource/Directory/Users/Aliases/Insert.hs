@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a alias for the user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesInsert@.
-module Directory.Users.Aliases.Insert
+module Network.Google.Resource.Directory.Users.Aliases.Insert
     (
     -- * REST Resource
-      UsersAliasesInsertAPI
+      UsersAliasesInsertResource
 
     -- * Creating a Request
-    , usersAliasesInsert
-    , UsersAliasesInsert
+    , usersAliasesInsert'
+    , UsersAliasesInsert'
 
     -- * Request Lenses
     , uaiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersAliasesInsert@ which the
--- 'UsersAliasesInsert' request conforms to.
-type UsersAliasesInsertAPI =
+-- 'UsersAliasesInsert'' request conforms to.
+type UsersAliasesInsertResource =
      "users" :>
        Capture "userKey" Text :>
-         "aliases" :> Post '[JSON] Alias
+         "aliases" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Alias
 
 -- | Add a alias for the user
 --
--- /See:/ 'usersAliasesInsert' smart constructor.
-data UsersAliasesInsert = UsersAliasesInsert
+-- /See:/ 'usersAliasesInsert'' smart constructor.
+data UsersAliasesInsert' = UsersAliasesInsert'
     { _uaiQuotaUser   :: !(Maybe Text)
     , _uaiPrettyPrint :: !Bool
     , _uaiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data UsersAliasesInsert = UsersAliasesInsert
     , _uaiOauthToken  :: !(Maybe Text)
     , _uaiUserKey     :: !Text
     , _uaiFields      :: !(Maybe Text)
-    , _uaiAlt         :: !Text
+    , _uaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data UsersAliasesInsert = UsersAliasesInsert
 -- * 'uaiFields'
 --
 -- * 'uaiAlt'
-usersAliasesInsert
+usersAliasesInsert'
     :: Text -- ^ 'userKey'
-    -> UsersAliasesInsert
-usersAliasesInsert pUaiUserKey_ =
-    UsersAliasesInsert
+    -> UsersAliasesInsert'
+usersAliasesInsert' pUaiUserKey_ =
+    UsersAliasesInsert'
     { _uaiQuotaUser = Nothing
     , _uaiPrettyPrint = True
     , _uaiUserIp = Nothing
@@ -94,7 +102,7 @@ usersAliasesInsert pUaiUserKey_ =
     , _uaiOauthToken = Nothing
     , _uaiUserKey = pUaiUserKey_
     , _uaiFields = Nothing
-    , _uaiAlt = "json"
+    , _uaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ uaiFields
   = lens _uaiFields (\ s a -> s{_uaiFields = a})
 
 -- | Data format for the response.
-uaiAlt :: Lens' UsersAliasesInsert' Text
+uaiAlt :: Lens' UsersAliasesInsert' Alt
 uaiAlt = lens _uaiAlt (\ s a -> s{_uaiAlt = a})
 
 instance GoogleRequest UsersAliasesInsert' where
         type Rs UsersAliasesInsert' = Alias
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersAliasesInsert{..}
-          = go _uaiQuotaUser _uaiPrettyPrint _uaiUserIp _uaiKey
+        requestWithRoute r u UsersAliasesInsert'{..}
+          = go _uaiQuotaUser (Just _uaiPrettyPrint) _uaiUserIp
+              _uaiKey
               _uaiOauthToken
               _uaiUserKey
               _uaiFields
-              _uaiAlt
+              (Just _uaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersAliasesInsertAPI)
+                      (Proxy :: Proxy UsersAliasesInsertResource)
                       r
                       u

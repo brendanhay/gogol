@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesDelete@.
-module DFAReporting.PlacementStrategies.Delete
+module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
     (
     -- * REST Resource
-      PlacementStrategiesDeleteAPI
+      PlacementStrategiesDeleteResource
 
     -- * Creating a Request
-    , placementStrategiesDelete
-    , PlacementStrategiesDelete
+    , placementStrategiesDelete'
+    , PlacementStrategiesDelete'
 
     -- * Request Lenses
     , psdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementStrategiesDelete@ which the
--- 'PlacementStrategiesDelete' request conforms to.
-type PlacementStrategiesDeleteAPI =
+-- 'PlacementStrategiesDelete'' request conforms to.
+type PlacementStrategiesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
 --
--- /See:/ 'placementStrategiesDelete' smart constructor.
-data PlacementStrategiesDelete = PlacementStrategiesDelete
+-- /See:/ 'placementStrategiesDelete'' smart constructor.
+data PlacementStrategiesDelete' = PlacementStrategiesDelete'
     { _psdQuotaUser   :: !(Maybe Text)
     , _psdPrettyPrint :: !Bool
     , _psdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PlacementStrategiesDelete = PlacementStrategiesDelete
     , _psdId          :: !Int64
     , _psdOauthToken  :: !(Maybe Text)
     , _psdFields      :: !(Maybe Text)
-    , _psdAlt         :: !Text
+    , _psdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PlacementStrategiesDelete = PlacementStrategiesDelete
 -- * 'psdFields'
 --
 -- * 'psdAlt'
-placementStrategiesDelete
+placementStrategiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> PlacementStrategiesDelete
-placementStrategiesDelete pPsdProfileId_ pPsdId_ =
-    PlacementStrategiesDelete
+    -> PlacementStrategiesDelete'
+placementStrategiesDelete' pPsdProfileId_ pPsdId_ =
+    PlacementStrategiesDelete'
     { _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
     , _psdUserIp = Nothing
@@ -101,7 +109,7 @@ placementStrategiesDelete pPsdProfileId_ pPsdId_ =
     , _psdId = pPsdId_
     , _psdOauthToken = Nothing
     , _psdFields = Nothing
-    , _psdAlt = "json"
+    , _psdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,23 +158,23 @@ psdFields
   = lens _psdFields (\ s a -> s{_psdFields = a})
 
 -- | Data format for the response.
-psdAlt :: Lens' PlacementStrategiesDelete' Text
+psdAlt :: Lens' PlacementStrategiesDelete' Alt
 psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
 
 instance GoogleRequest PlacementStrategiesDelete'
          where
         type Rs PlacementStrategiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesDelete{..}
-          = go _psdQuotaUser _psdPrettyPrint _psdUserIp
+        requestWithRoute r u PlacementStrategiesDelete'{..}
+          = go _psdQuotaUser (Just _psdPrettyPrint) _psdUserIp
               _psdProfileId
               _psdKey
               _psdId
               _psdOauthToken
               _psdFields
-              _psdAlt
+              (Just _psdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementStrategiesDeleteAPI)
+                      (Proxy :: Proxy PlacementStrategiesDeleteResource)
                       r
                       u

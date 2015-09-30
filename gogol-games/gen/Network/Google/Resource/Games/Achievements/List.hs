@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsList@.
-module Games.Achievements.List
+module Network.Google.Resource.Games.Achievements.List
     (
     -- * REST Resource
-      AchievementsListAPI
+      AchievementsListResource
 
     -- * Creating a Request
-    , achievementsList
-    , AchievementsList
+    , achievementsList'
+    , AchievementsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -48,25 +49,32 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsList@ which the
--- 'AchievementsList' request conforms to.
-type AchievementsListAPI =
+-- 'AchievementsList'' request conforms to.
+type AchievementsListResource =
      "players" :>
        Capture "playerId" Text :>
          "achievements" :>
-           QueryParam "state" Text :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] PlayerAchievementListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "state" GamesAchievementsListState :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] PlayerAchievementListResponse
 
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
 --
--- /See:/ 'achievementsList' smart constructor.
-data AchievementsList = AchievementsList
+-- /See:/ 'achievementsList'' smart constructor.
+data AchievementsList' = AchievementsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alState       :: !(Maybe Text)
+    , _alState       :: !(Maybe GamesAchievementsListState)
     , _alUserIp      :: !(Maybe Text)
     , _alKey         :: !(Maybe Text)
     , _alLanguage    :: !(Maybe Text)
@@ -75,7 +83,7 @@ data AchievementsList = AchievementsList
     , _alPlayerId    :: !Text
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList'' with the minimum fields required to make a request.
@@ -105,11 +113,11 @@ data AchievementsList = AchievementsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-achievementsList
+achievementsList'
     :: Text -- ^ 'playerId'
-    -> AchievementsList
-achievementsList pAlPlayerId_ =
-    AchievementsList
+    -> AchievementsList'
+achievementsList' pAlPlayerId_ =
+    AchievementsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alState = Nothing
@@ -121,7 +129,7 @@ achievementsList pAlPlayerId_ =
     , _alPlayerId = pAlPlayerId_
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ alPrettyPrint
 
 -- | Tells the server to return only achievements with the specified state.
 -- If this parameter isn\'t specified, all achievements are returned.
-alState :: Lens' AchievementsList' (Maybe Text)
+alState :: Lens' AchievementsList' (Maybe GamesAchievementsListState)
 alState = lens _alState (\ s a -> s{_alState = a})
 
 -- | IP address of the site where the request originates. Use this if you
@@ -186,15 +194,16 @@ alFields :: Lens' AchievementsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AchievementsList' Text
+alAlt :: Lens' AchievementsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AchievementsList' where
         type Rs AchievementsList' =
              PlayerAchievementListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsList{..}
-          = go _alQuotaUser _alPrettyPrint _alState _alUserIp
+        requestWithRoute r u AchievementsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alState
+              _alUserIp
               _alKey
               _alLanguage
               _alPageToken
@@ -202,9 +211,9 @@ instance GoogleRequest AchievementsList' where
               _alPlayerId
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsListAPI)
+                      (Proxy :: Proxy AchievementsListResource)
                       r
                       u

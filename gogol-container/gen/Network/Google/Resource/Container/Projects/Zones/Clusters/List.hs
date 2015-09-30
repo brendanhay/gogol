@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all clusters owned by a project in the specified zone.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersList@.
-module Container.Projects.Zones.Clusters.List
+module Network.Google.Resource.Container.Projects.Zones.Clusters.List
     (
     -- * REST Resource
-      ProjectsZonesClustersListAPI
+      ProjectsZonesClustersListResource
 
     -- * Creating a Request
-    , projectsZonesClustersList
-    , ProjectsZonesClustersList
+    , projectsZonesClustersList'
+    , ProjectsZonesClustersList'
 
     -- * Request Lenses
     , pzclQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersList@ which the
--- 'ProjectsZonesClustersList' request conforms to.
-type ProjectsZonesClustersListAPI =
+-- 'ProjectsZonesClustersList'' request conforms to.
+type ProjectsZonesClustersListResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
-           "clusters" :> Get '[JSON] ListClustersResponse
+           "clusters" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ListClustersResponse
 
 -- | Lists all clusters owned by a project in the specified zone.
 --
--- /See:/ 'projectsZonesClustersList' smart constructor.
-data ProjectsZonesClustersList = ProjectsZonesClustersList
+-- /See:/ 'projectsZonesClustersList'' smart constructor.
+data ProjectsZonesClustersList' = ProjectsZonesClustersList'
     { _pzclQuotaUser   :: !(Maybe Text)
     , _pzclPrettyPrint :: !Bool
     , _pzclUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data ProjectsZonesClustersList = ProjectsZonesClustersList
     , _pzclProjectId   :: !Text
     , _pzclOauthToken  :: !(Maybe Text)
     , _pzclFields      :: !(Maybe Text)
-    , _pzclAlt         :: !Text
+    , _pzclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersList'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data ProjectsZonesClustersList = ProjectsZonesClustersList
 -- * 'pzclFields'
 --
 -- * 'pzclAlt'
-projectsZonesClustersList
+projectsZonesClustersList'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
-    -> ProjectsZonesClustersList
-projectsZonesClustersList pPzclZoneId_ pPzclProjectId_ =
-    ProjectsZonesClustersList
+    -> ProjectsZonesClustersList'
+projectsZonesClustersList' pPzclZoneId_ pPzclProjectId_ =
+    ProjectsZonesClustersList'
     { _pzclQuotaUser = Nothing
     , _pzclPrettyPrint = True
     , _pzclUserIp = Nothing
@@ -101,7 +110,7 @@ projectsZonesClustersList pPzclZoneId_ pPzclProjectId_ =
     , _pzclProjectId = pPzclProjectId_
     , _pzclOauthToken = Nothing
     , _pzclFields = Nothing
-    , _pzclAlt = "json"
+    , _pzclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +162,7 @@ pzclFields
   = lens _pzclFields (\ s a -> s{_pzclFields = a})
 
 -- | Data format for the response.
-pzclAlt :: Lens' ProjectsZonesClustersList' Text
+pzclAlt :: Lens' ProjectsZonesClustersList' Alt
 pzclAlt = lens _pzclAlt (\ s a -> s{_pzclAlt = a})
 
 instance GoogleRequest ProjectsZonesClustersList'
@@ -161,16 +170,17 @@ instance GoogleRequest ProjectsZonesClustersList'
         type Rs ProjectsZonesClustersList' =
              ListClustersResponse
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersList{..}
-          = go _pzclQuotaUser _pzclPrettyPrint _pzclUserIp
+        requestWithRoute r u ProjectsZonesClustersList'{..}
+          = go _pzclQuotaUser (Just _pzclPrettyPrint)
+              _pzclUserIp
               _pzclZoneId
               _pzclKey
               _pzclProjectId
               _pzclOauthToken
               _pzclFields
-              _pzclAlt
+              (Just _pzclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesClustersListAPI)
+                      (Proxy :: Proxy ProjectsZonesClustersListResource)
                       r
                       u

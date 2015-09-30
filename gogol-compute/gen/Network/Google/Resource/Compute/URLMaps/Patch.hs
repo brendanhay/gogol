@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsPatch@.
-module Compute.URLMaps.Patch
+module Network.Google.Resource.Compute.URLMaps.Patch
     (
     -- * REST Resource
-      UrlMapsPatchAPI
+      UrlMapsPatchResource
 
     -- * Creating a Request
-    , uRLMapsPatch
-    , URLMapsPatch
+    , uRLMapsPatch'
+    , URLMapsPatch'
 
     -- * Request Lenses
     , umpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsPatch@ which the
--- 'URLMapsPatch' request conforms to.
-type UrlMapsPatchAPI =
+-- 'URLMapsPatch'' request conforms to.
+type UrlMapsPatchResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           Capture "urlMap" Text :> Patch '[JSON] Operation
+           Capture "urlMap" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.
 --
--- /See:/ 'uRLMapsPatch' smart constructor.
-data URLMapsPatch = URLMapsPatch
+-- /See:/ 'uRLMapsPatch'' smart constructor.
+data URLMapsPatch' = URLMapsPatch'
     { _umpQuotaUser   :: !(Maybe Text)
     , _umpUrlMap      :: !Text
     , _umpPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data URLMapsPatch = URLMapsPatch
     , _umpKey         :: !(Maybe Text)
     , _umpOauthToken  :: !(Maybe Text)
     , _umpFields      :: !(Maybe Text)
-    , _umpAlt         :: !Text
+    , _umpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data URLMapsPatch = URLMapsPatch
 -- * 'umpFields'
 --
 -- * 'umpAlt'
-uRLMapsPatch
+uRLMapsPatch'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsPatch
-uRLMapsPatch pUmpUrlMap_ pUmpProject_ =
-    URLMapsPatch
+    -> URLMapsPatch'
+uRLMapsPatch' pUmpUrlMap_ pUmpProject_ =
+    URLMapsPatch'
     { _umpQuotaUser = Nothing
     , _umpUrlMap = pUmpUrlMap_
     , _umpPrettyPrint = True
@@ -103,7 +111,7 @@ uRLMapsPatch pUmpUrlMap_ pUmpProject_ =
     , _umpKey = Nothing
     , _umpOauthToken = Nothing
     , _umpFields = Nothing
-    , _umpAlt = "json"
+    , _umpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,20 +161,22 @@ umpFields
   = lens _umpFields (\ s a -> s{_umpFields = a})
 
 -- | Data format for the response.
-umpAlt :: Lens' URLMapsPatch' Text
+umpAlt :: Lens' URLMapsPatch' Alt
 umpAlt = lens _umpAlt (\ s a -> s{_umpAlt = a})
 
 instance GoogleRequest URLMapsPatch' where
         type Rs URLMapsPatch' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsPatch{..}
-          = go _umpQuotaUser _umpUrlMap _umpPrettyPrint
+        requestWithRoute r u URLMapsPatch'{..}
+          = go _umpQuotaUser _umpUrlMap (Just _umpPrettyPrint)
               _umpProject
               _umpUserIp
               _umpKey
               _umpOauthToken
               _umpFields
-              _umpAlt
+              (Just _umpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsPatchResource)
+                      r
                       u

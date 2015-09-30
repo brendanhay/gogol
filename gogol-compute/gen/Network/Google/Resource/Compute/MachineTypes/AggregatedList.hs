@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of machine type resources grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesAggregatedList@.
-module Compute.MachineTypes.AggregatedList
+module Network.Google.Resource.Compute.MachineTypes.AggregatedList
     (
     -- * REST Resource
-      MachineTypesAggregatedListAPI
+      MachineTypesAggregatedListResource
 
     -- * Creating a Request
-    , machineTypesAggregatedList
-    , MachineTypesAggregatedList
+    , machineTypesAggregatedList'
+    , MachineTypesAggregatedList'
 
     -- * Request Lenses
     , mtalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeMachineTypesAggregatedList@ which the
--- 'MachineTypesAggregatedList' request conforms to.
-type MachineTypesAggregatedListAPI =
+-- 'MachineTypesAggregatedList'' request conforms to.
+type MachineTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "machineTypes" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] MachineTypeAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] MachineTypeAggregatedList
 
 -- | Retrieves the list of machine type resources grouped by scope.
 --
--- /See:/ 'machineTypesAggregatedList' smart constructor.
-data MachineTypesAggregatedList = MachineTypesAggregatedList
+-- /See:/ 'machineTypesAggregatedList'' smart constructor.
+data MachineTypesAggregatedList' = MachineTypesAggregatedList'
     { _mtalQuotaUser   :: !(Maybe Text)
     , _mtalPrettyPrint :: !Bool
     , _mtalProject     :: !Text
@@ -70,7 +78,7 @@ data MachineTypesAggregatedList = MachineTypesAggregatedList
     , _mtalOauthToken  :: !(Maybe Text)
     , _mtalMaxResults  :: !Word32
     , _mtalFields      :: !(Maybe Text)
-    , _mtalAlt         :: !Text
+    , _mtalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data MachineTypesAggregatedList = MachineTypesAggregatedList
 -- * 'mtalFields'
 --
 -- * 'mtalAlt'
-machineTypesAggregatedList
+machineTypesAggregatedList'
     :: Text -- ^ 'project'
-    -> MachineTypesAggregatedList
-machineTypesAggregatedList pMtalProject_ =
-    MachineTypesAggregatedList
+    -> MachineTypesAggregatedList'
+machineTypesAggregatedList' pMtalProject_ =
+    MachineTypesAggregatedList'
     { _mtalQuotaUser = Nothing
     , _mtalPrettyPrint = True
     , _mtalProject = pMtalProject_
@@ -113,7 +121,7 @@ machineTypesAggregatedList pMtalProject_ =
     , _mtalOauthToken = Nothing
     , _mtalMaxResults = 500
     , _mtalFields = Nothing
-    , _mtalAlt = "json"
+    , _mtalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ mtalFields
   = lens _mtalFields (\ s a -> s{_mtalFields = a})
 
 -- | Data format for the response.
-mtalAlt :: Lens' MachineTypesAggregatedList' Text
+mtalAlt :: Lens' MachineTypesAggregatedList' Alt
 mtalAlt = lens _mtalAlt (\ s a -> s{_mtalAlt = a})
 
 instance GoogleRequest MachineTypesAggregatedList'
@@ -196,8 +204,9 @@ instance GoogleRequest MachineTypesAggregatedList'
         type Rs MachineTypesAggregatedList' =
              MachineTypeAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesAggregatedList{..}
-          = go _mtalQuotaUser _mtalPrettyPrint _mtalProject
+        requestWithRoute r u MachineTypesAggregatedList'{..}
+          = go _mtalQuotaUser (Just _mtalPrettyPrint)
+              _mtalProject
               _mtalUserIp
               _mtalKey
               _mtalFilter
@@ -205,9 +214,9 @@ instance GoogleRequest MachineTypesAggregatedList'
               _mtalOauthToken
               (Just _mtalMaxResults)
               _mtalFields
-              _mtalAlt
+              (Just _mtalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MachineTypesAggregatedListAPI)
+                      (Proxy :: Proxy MachineTypesAggregatedListResource)
                       r
                       u

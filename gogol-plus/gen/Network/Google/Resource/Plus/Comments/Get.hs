@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a comment.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsGet@.
-module Plus.Comments.Get
+module Network.Google.Resource.Plus.Comments.Get
     (
     -- * REST Resource
-      CommentsGetAPI
+      CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet
-    , CommentsGet
+    , commentsGet'
+    , CommentsGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusCommentsGet@ which the
--- 'CommentsGet' request conforms to.
-type CommentsGetAPI =
+-- 'CommentsGet'' request conforms to.
+type CommentsGetResource =
      "comments" :>
-       Capture "commentId" Text :> Get '[JSON] Comment
+       Capture "commentId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Comment
 
 -- | Get a comment.
 --
--- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+-- /See:/ 'commentsGet'' smart constructor.
+data CommentsGet' = CommentsGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CommentsGet = CommentsGet
     , _cgOauthToken  :: !(Maybe Text)
     , _cgCommentId   :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CommentsGet = CommentsGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-commentsGet
+commentsGet'
     :: Text -- ^ 'commentId'
-    -> CommentsGet
-commentsGet pCgCommentId_ =
-    CommentsGet
+    -> CommentsGet'
+commentsGet' pCgCommentId_ =
+    CommentsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -93,7 +101,7 @@ commentsGet pCgCommentId_ =
     , _cgOauthToken = Nothing
     , _cgCommentId = pCgCommentId_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,21 @@ cgFields :: Lens' CommentsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CommentsGet' Text
+cgAlt :: Lens' CommentsGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u CommentsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgKey
+        requestWithRoute r u CommentsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
               _cgOauthToken
               _cgCommentId
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the resources of the resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsListResources@.
-module Resourceviews.ZoneViews.ListResources
+module Network.Google.Resource.Resourceviews.ZoneViews.ListResources
     (
     -- * REST Resource
-      ZoneViewsListResourcesAPI
+      ZoneViewsListResourcesResource
 
     -- * Creating a Request
-    , zoneViewsListResources
-    , ZoneViewsListResources
+    , zoneViewsListResources'
+    , ZoneViewsListResources'
 
     -- * Request Lenses
     , zvlrQuotaUser
@@ -50,32 +51,44 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsListResources@ which the
--- 'ZoneViewsListResources' request conforms to.
-type ZoneViewsListResourcesAPI =
+-- 'ZoneViewsListResources'' request conforms to.
+type ZoneViewsListResourcesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
                "resources" :>
-                 QueryParam "listState" Text :>
-                   QueryParam "format" Text :>
-                     QueryParam "serviceName" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           Get '[JSON] ZoneViewsListResourcesResponse
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "listState"
+                       ResourceviewsZoneViewsListResourcesListState
+                       :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "format"
+                           ResourceviewsZoneViewsListResourcesFormat
+                           :>
+                           QueryParam "key" Text :>
+                             QueryParam "serviceName" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON]
+                                           ZoneViewsListResourcesResponse
 
 -- | List the resources of the resource view.
 --
--- /See:/ 'zoneViewsListResources' smart constructor.
-data ZoneViewsListResources = ZoneViewsListResources
+-- /See:/ 'zoneViewsListResources'' smart constructor.
+data ZoneViewsListResources' = ZoneViewsListResources'
     { _zvlrQuotaUser    :: !(Maybe Text)
     , _zvlrPrettyPrint  :: !Bool
     , _zvlrResourceView :: !Text
-    , _zvlrListState    :: !Text
+    , _zvlrListState    :: !ResourceviewsZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
     , _zvlrUserIp       :: !(Maybe Text)
-    , _zvlrFormat       :: !(Maybe Text)
+    , _zvlrFormat       :: !(Maybe ResourceviewsZoneViewsListResourcesFormat)
     , _zvlrZone         :: !Text
     , _zvlrKey          :: !(Maybe Text)
     , _zvlrServiceName  :: !(Maybe Text)
@@ -83,7 +96,7 @@ data ZoneViewsListResources = ZoneViewsListResources
     , _zvlrOauthToken   :: !(Maybe Text)
     , _zvlrMaxResults   :: !Int32
     , _zvlrFields       :: !(Maybe Text)
-    , _zvlrAlt          :: !Text
+    , _zvlrAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsListResources'' with the minimum fields required to make a request.
@@ -119,17 +132,17 @@ data ZoneViewsListResources = ZoneViewsListResources
 -- * 'zvlrFields'
 --
 -- * 'zvlrAlt'
-zoneViewsListResources
+zoneViewsListResources'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsListResources
-zoneViewsListResources pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
-    ZoneViewsListResources
+    -> ZoneViewsListResources'
+zoneViewsListResources' pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
+    ZoneViewsListResources'
     { _zvlrQuotaUser = Nothing
     , _zvlrPrettyPrint = True
     , _zvlrResourceView = pZvlrResourceView_
-    , _zvlrListState = "ALL"
+    , _zvlrListState = All
     , _zvlrProject = pZvlrProject_
     , _zvlrUserIp = Nothing
     , _zvlrFormat = Nothing
@@ -140,7 +153,7 @@ zoneViewsListResources pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
     , _zvlrOauthToken = Nothing
     , _zvlrMaxResults = 5000
     , _zvlrFields = Nothing
-    , _zvlrAlt = "json"
+    , _zvlrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,7 +177,7 @@ zvlrResourceView
       (\ s a -> s{_zvlrResourceView = a})
 
 -- | The state of the instance to list. By default, it lists all instances.
-zvlrListState :: Lens' ZoneViewsListResources' Text
+zvlrListState :: Lens' ZoneViewsListResources' ResourceviewsZoneViewsListResourcesListState
 zvlrListState
   = lens _zvlrListState
       (\ s a -> s{_zvlrListState = a})
@@ -183,7 +196,7 @@ zvlrUserIp
 -- | The requested format of the return value. It can be URL or URL_PORT. A
 -- JSON object will be included in the response based on the format. The
 -- default format is NONE, which results in no JSON in the response.
-zvlrFormat :: Lens' ZoneViewsListResources' (Maybe Text)
+zvlrFormat :: Lens' ZoneViewsListResources' (Maybe ResourceviewsZoneViewsListResourcesFormat)
 zvlrFormat
   = lens _zvlrFormat (\ s a -> s{_zvlrFormat = a})
 
@@ -231,15 +244,15 @@ zvlrFields
   = lens _zvlrFields (\ s a -> s{_zvlrFields = a})
 
 -- | Data format for the response.
-zvlrAlt :: Lens' ZoneViewsListResources' Text
+zvlrAlt :: Lens' ZoneViewsListResources' Alt
 zvlrAlt = lens _zvlrAlt (\ s a -> s{_zvlrAlt = a})
 
 instance GoogleRequest ZoneViewsListResources' where
         type Rs ZoneViewsListResources' =
              ZoneViewsListResourcesResponse
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsListResources{..}
-          = go _zvlrQuotaUser _zvlrPrettyPrint
+        requestWithRoute r u ZoneViewsListResources'{..}
+          = go _zvlrQuotaUser (Just _zvlrPrettyPrint)
               _zvlrResourceView
               (Just _zvlrListState)
               _zvlrProject
@@ -252,9 +265,9 @@ instance GoogleRequest ZoneViewsListResources' where
               _zvlrOauthToken
               (Just _zvlrMaxResults)
               _zvlrFields
-              _zvlrAlt
+              (Just _zvlrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneViewsListResourcesAPI)
+                      (Proxy :: Proxy ZoneViewsListResourcesResource)
                       r
                       u

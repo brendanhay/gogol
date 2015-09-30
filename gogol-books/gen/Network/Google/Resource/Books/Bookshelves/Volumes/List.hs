@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesVolumesList@.
-module Books.Bookshelves.Volumes.List
+module Network.Google.Resource.Books.Bookshelves.Volumes.List
     (
     -- * REST Resource
-      BookshelvesVolumesListAPI
+      BookshelvesVolumesListResource
 
     -- * Creating a Request
-    , bookshelvesVolumesList
-    , BookshelvesVolumesList
+    , bookshelvesVolumesList'
+    , BookshelvesVolumesList'
 
     -- * Request Lenses
     , bvlQuotaUser
@@ -48,23 +49,29 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksBookshelvesVolumesList@ which the
--- 'BookshelvesVolumesList' request conforms to.
-type BookshelvesVolumesListAPI =
+-- 'BookshelvesVolumesList'' request conforms to.
+type BookshelvesVolumesListResource =
      "users" :>
        Capture "userId" Text :>
          "bookshelves" :>
            Capture "shelf" Text :>
              "volumes" :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :>
-                     QueryParam "showPreorders" Bool :>
-                       Get '[JSON] Volumes
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "startIndex" Word32 :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "showPreorders" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Get '[JSON] Volumes
 
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
--- /See:/ 'bookshelvesVolumesList' smart constructor.
-data BookshelvesVolumesList = BookshelvesVolumesList
+-- /See:/ 'bookshelvesVolumesList'' smart constructor.
+data BookshelvesVolumesList' = BookshelvesVolumesList'
     { _bvlQuotaUser     :: !(Maybe Text)
     , _bvlPrettyPrint   :: !Bool
     , _bvlUserIp        :: !(Maybe Text)
@@ -77,7 +84,7 @@ data BookshelvesVolumesList = BookshelvesVolumesList
     , _bvlMaxResults    :: !(Maybe Word32)
     , _bvlShowPreorders :: !(Maybe Bool)
     , _bvlFields        :: !(Maybe Text)
-    , _bvlAlt           :: !Text
+    , _bvlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesVolumesList'' with the minimum fields required to make a request.
@@ -109,12 +116,12 @@ data BookshelvesVolumesList = BookshelvesVolumesList
 -- * 'bvlFields'
 --
 -- * 'bvlAlt'
-bookshelvesVolumesList
+bookshelvesVolumesList'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'shelf'
-    -> BookshelvesVolumesList
-bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
-    BookshelvesVolumesList
+    -> BookshelvesVolumesList'
+bookshelvesVolumesList' pBvlUserId_ pBvlShelf_ =
+    BookshelvesVolumesList'
     { _bvlQuotaUser = Nothing
     , _bvlPrettyPrint = True
     , _bvlUserIp = Nothing
@@ -127,7 +134,7 @@ bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
     , _bvlMaxResults = Nothing
     , _bvlShowPreorders = Nothing
     , _bvlFields = Nothing
-    , _bvlAlt = "json"
+    , _bvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +206,14 @@ bvlFields
   = lens _bvlFields (\ s a -> s{_bvlFields = a})
 
 -- | Data format for the response.
-bvlAlt :: Lens' BookshelvesVolumesList' Text
+bvlAlt :: Lens' BookshelvesVolumesList' Alt
 bvlAlt = lens _bvlAlt (\ s a -> s{_bvlAlt = a})
 
 instance GoogleRequest BookshelvesVolumesList' where
         type Rs BookshelvesVolumesList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u BookshelvesVolumesList{..}
-          = go _bvlQuotaUser _bvlPrettyPrint _bvlUserIp
+        requestWithRoute r u BookshelvesVolumesList'{..}
+          = go _bvlQuotaUser (Just _bvlPrettyPrint) _bvlUserIp
               _bvlUserId
               _bvlShelf
               _bvlKey
@@ -216,9 +223,9 @@ instance GoogleRequest BookshelvesVolumesList' where
               _bvlMaxResults
               _bvlShowPreorders
               _bvlFields
-              _bvlAlt
+              (Just _bvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BookshelvesVolumesListAPI)
+                      (Proxy :: Proxy BookshelvesVolumesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get all the notes associated with an order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplacenotesList@.
-module AdExchangeBuyer.Marketplacenotes.List
+module Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.List
     (
     -- * REST Resource
-      MarketplacenotesListAPI
+      MarketplacenotesListResource
 
     -- * Creating a Request
-    , marketplacenotesList
-    , MarketplacenotesList
+    , marketplacenotesList'
+    , MarketplacenotesList'
 
     -- * Request Lenses
     , mlQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplacenotesList@ which the
--- 'MarketplacenotesList' request conforms to.
-type MarketplacenotesListAPI =
+-- 'MarketplacenotesList'' request conforms to.
+type MarketplacenotesListResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
-         "notes" :> Get '[JSON] GetOrderNotesResponse
+         "notes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] GetOrderNotesResponse
 
 -- | Get all the notes associated with an order
 --
--- /See:/ 'marketplacenotesList' smart constructor.
-data MarketplacenotesList = MarketplacenotesList
+-- /See:/ 'marketplacenotesList'' smart constructor.
+data MarketplacenotesList' = MarketplacenotesList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data MarketplacenotesList = MarketplacenotesList
     , _mlOauthToken  :: !(Maybe Text)
     , _mlOrderId     :: !Text
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Text
+    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplacenotesList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data MarketplacenotesList = MarketplacenotesList
 -- * 'mlFields'
 --
 -- * 'mlAlt'
-marketplacenotesList
+marketplacenotesList'
     :: Text -- ^ 'orderId'
-    -> MarketplacenotesList
-marketplacenotesList pMlOrderId_ =
-    MarketplacenotesList
+    -> MarketplacenotesList'
+marketplacenotesList' pMlOrderId_ =
+    MarketplacenotesList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlUserIp = Nothing
@@ -94,7 +103,7 @@ marketplacenotesList pMlOrderId_ =
     , _mlOauthToken = Nothing
     , _mlOrderId = pMlOrderId_
     , _mlFields = Nothing
-    , _mlAlt = "json"
+    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +145,21 @@ mlFields :: Lens' MarketplacenotesList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | Data format for the response.
-mlAlt :: Lens' MarketplacenotesList' Text
+mlAlt :: Lens' MarketplacenotesList' Alt
 mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
 
 instance GoogleRequest MarketplacenotesList' where
         type Rs MarketplacenotesList' = GetOrderNotesResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplacenotesList{..}
-          = go _mlQuotaUser _mlPrettyPrint _mlUserIp _mlKey
+        requestWithRoute r u MarketplacenotesList'{..}
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlUserIp
+              _mlKey
               _mlOauthToken
               _mlOrderId
               _mlFields
-              _mlAlt
+              (Just _mlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplacenotesListAPI)
+                      (Proxy :: Proxy MarketplacenotesListResource)
                       r
                       u

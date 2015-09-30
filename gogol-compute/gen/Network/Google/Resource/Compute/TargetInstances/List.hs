@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project and zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesList@.
-module Compute.TargetInstances.List
+module Network.Google.Resource.Compute.TargetInstances.List
     (
     -- * REST Resource
-      TargetInstancesListAPI
+      TargetInstancesListResource
 
     -- * Creating a Request
-    , targetInstancesList
-    , TargetInstancesList
+    , targetInstancesList'
+    , TargetInstancesList'
 
     -- * Request Lenses
     , tilQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetInstancesList@ which the
--- 'TargetInstancesList' request conforms to.
-type TargetInstancesListAPI =
+-- 'TargetInstancesList'' request conforms to.
+type TargetInstancesListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "targetInstances" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] TargetInstanceList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] TargetInstanceList
 
 -- | Retrieves the list of TargetInstance resources available to the
 -- specified project and zone.
 --
--- /See:/ 'targetInstancesList' smart constructor.
-data TargetInstancesList = TargetInstancesList
+-- /See:/ 'targetInstancesList'' smart constructor.
+data TargetInstancesList' = TargetInstancesList'
     { _tilQuotaUser   :: !(Maybe Text)
     , _tilPrettyPrint :: !Bool
     , _tilProject     :: !Text
@@ -75,7 +83,7 @@ data TargetInstancesList = TargetInstancesList
     , _tilOauthToken  :: !(Maybe Text)
     , _tilMaxResults  :: !Word32
     , _tilFields      :: !(Maybe Text)
-    , _tilAlt         :: !Text
+    , _tilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data TargetInstancesList = TargetInstancesList
 -- * 'tilFields'
 --
 -- * 'tilAlt'
-targetInstancesList
+targetInstancesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> TargetInstancesList
-targetInstancesList pTilProject_ pTilZone_ =
-    TargetInstancesList
+    -> TargetInstancesList'
+targetInstancesList' pTilProject_ pTilZone_ =
+    TargetInstancesList'
     { _tilQuotaUser = Nothing
     , _tilPrettyPrint = True
     , _tilProject = pTilProject_
@@ -122,7 +130,7 @@ targetInstancesList pTilProject_ pTilZone_ =
     , _tilOauthToken = Nothing
     , _tilMaxResults = 500
     , _tilFields = Nothing
-    , _tilAlt = "json"
+    , _tilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,14 @@ tilFields
   = lens _tilFields (\ s a -> s{_tilFields = a})
 
 -- | Data format for the response.
-tilAlt :: Lens' TargetInstancesList' Text
+tilAlt :: Lens' TargetInstancesList' Alt
 tilAlt = lens _tilAlt (\ s a -> s{_tilAlt = a})
 
 instance GoogleRequest TargetInstancesList' where
         type Rs TargetInstancesList' = TargetInstanceList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesList{..}
-          = go _tilQuotaUser _tilPrettyPrint _tilProject
+        requestWithRoute r u TargetInstancesList'{..}
+          = go _tilQuotaUser (Just _tilPrettyPrint) _tilProject
               _tilUserIp
               _tilZone
               _tilKey
@@ -215,9 +223,9 @@ instance GoogleRequest TargetInstancesList' where
               _tilOauthToken
               (Just _tilMaxResults)
               _tilFields
-              _tilAlt
+              (Just _tilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetInstancesListAPI)
+                      (Proxy :: Proxy TargetInstancesListResource)
                       r
                       u

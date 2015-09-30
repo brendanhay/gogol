@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates\/Transfers a subscription for the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsInsert@.
-module Reseller.Subscriptions.Insert
+module Network.Google.Resource.Reseller.Subscriptions.Insert
     (
     -- * REST Resource
-      SubscriptionsInsertAPI
+      SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert
-    , SubscriptionsInsert
+    , subscriptionsInsert'
+    , SubscriptionsInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsInsert@ which the
--- 'SubscriptionsInsert' request conforms to.
-type SubscriptionsInsertAPI =
+-- 'SubscriptionsInsert'' request conforms to.
+type SubscriptionsInsertResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
-           QueryParam "customerAuthToken" Text :>
-             Post '[JSON] Subscription
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "customerAuthToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Creates\/Transfers a subscription for the customer.
 --
--- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+-- /See:/ 'subscriptionsInsert'' smart constructor.
+data SubscriptionsInsert' = SubscriptionsInsert'
     { _siQuotaUser         :: !(Maybe Text)
     , _siPrettyPrint       :: !Bool
     , _siUserIp            :: !(Maybe Text)
@@ -64,7 +71,7 @@ data SubscriptionsInsert = SubscriptionsInsert
     , _siCustomerAuthToken :: !(Maybe Text)
     , _siOauthToken        :: !(Maybe Text)
     , _siFields            :: !(Maybe Text)
-    , _siAlt               :: !Text
+    , _siAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data SubscriptionsInsert = SubscriptionsInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-subscriptionsInsert
+subscriptionsInsert'
     :: Text -- ^ 'customerId'
-    -> SubscriptionsInsert
-subscriptionsInsert pSiCustomerId_ =
-    SubscriptionsInsert
+    -> SubscriptionsInsert'
+subscriptionsInsert' pSiCustomerId_ =
+    SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIp = Nothing
@@ -101,7 +108,7 @@ subscriptionsInsert pSiCustomerId_ =
     , _siCustomerAuthToken = Nothing
     , _siOauthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +158,22 @@ siFields :: Lens' SubscriptionsInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' SubscriptionsInsert' Text
+siAlt :: Lens' SubscriptionsInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsInsert{..}
-          = go _siQuotaUser _siPrettyPrint _siUserIp
+        requestWithRoute r u SubscriptionsInsert'{..}
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
               _siCustomerId
               _siKey
               _siCustomerAuthToken
               _siOauthToken
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsInsertAPI)
+                      (Proxy :: Proxy SubscriptionsInsertResource)
                       r
                       u

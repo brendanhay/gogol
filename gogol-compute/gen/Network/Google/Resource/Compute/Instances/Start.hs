@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,163 +21,177 @@
 -- instances().stop method. For more information, see Restart an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesStart@.
-module Compute.Instances.Start
+module Network.Google.Resource.Compute.Instances.Start
     (
     -- * REST Resource
-      InstancesStartAPI
+      InstancesStartResource
 
     -- * Creating a Request
-    , instancesStart
-    , InstancesStart
+    , instancesStart'
+    , InstancesStart'
 
     -- * Request Lenses
-    , isQuotaUser
-    , isPrettyPrint
-    , isProject
-    , isUserIp
-    , isZone
-    , isKey
-    , isOauthToken
-    , isFields
-    , isAlt
-    , isInstance
+    , insnQuotaUser
+    , insnPrettyPrint
+    , insnProject
+    , insnUserIp
+    , insnZone
+    , insnKey
+    , insnOauthToken
+    , insnFields
+    , insnAlt
+    , insnInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesStart@ which the
--- 'InstancesStart' request conforms to.
-type InstancesStartAPI =
+-- 'InstancesStart'' request conforms to.
+type InstancesStartResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "start" :> Post '[JSON] Operation
+               "start" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | This method starts an instance that was stopped using the using the
 -- instances().stop method. For more information, see Restart an instance.
 --
--- /See:/ 'instancesStart' smart constructor.
-data InstancesStart = InstancesStart
-    { _isQuotaUser   :: !(Maybe Text)
-    , _isPrettyPrint :: !Bool
-    , _isProject     :: !Text
-    , _isUserIp      :: !(Maybe Text)
-    , _isZone        :: !Text
-    , _isKey         :: !(Maybe Text)
-    , _isOauthToken  :: !(Maybe Text)
-    , _isFields      :: !(Maybe Text)
-    , _isAlt         :: !Text
-    , _isInstance    :: !Text
+-- /See:/ 'instancesStart'' smart constructor.
+data InstancesStart' = InstancesStart'
+    { _insnQuotaUser   :: !(Maybe Text)
+    , _insnPrettyPrint :: !Bool
+    , _insnProject     :: !Text
+    , _insnUserIp      :: !(Maybe Text)
+    , _insnZone        :: !Text
+    , _insnKey         :: !(Maybe Text)
+    , _insnOauthToken  :: !(Maybe Text)
+    , _insnFields      :: !(Maybe Text)
+    , _insnAlt         :: !Alt
+    , _insnInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesStart'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'isQuotaUser'
+-- * 'insnQuotaUser'
 --
--- * 'isPrettyPrint'
+-- * 'insnPrettyPrint'
 --
--- * 'isProject'
+-- * 'insnProject'
 --
--- * 'isUserIp'
+-- * 'insnUserIp'
 --
--- * 'isZone'
+-- * 'insnZone'
 --
--- * 'isKey'
+-- * 'insnKey'
 --
--- * 'isOauthToken'
+-- * 'insnOauthToken'
 --
--- * 'isFields'
+-- * 'insnFields'
 --
--- * 'isAlt'
+-- * 'insnAlt'
 --
--- * 'isInstance'
-instancesStart
+-- * 'insnInstance'
+instancesStart'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesStart
-instancesStart pIsProject_ pIsZone_ pIsInstance_ =
-    InstancesStart
-    { _isQuotaUser = Nothing
-    , _isPrettyPrint = True
-    , _isProject = pIsProject_
-    , _isUserIp = Nothing
-    , _isZone = pIsZone_
-    , _isKey = Nothing
-    , _isOauthToken = Nothing
-    , _isFields = Nothing
-    , _isAlt = "json"
-    , _isInstance = pIsInstance_
+    -> InstancesStart'
+instancesStart' pInsnProject_ pInsnZone_ pInsnInstance_ =
+    InstancesStart'
+    { _insnQuotaUser = Nothing
+    , _insnPrettyPrint = True
+    , _insnProject = pInsnProject_
+    , _insnUserIp = Nothing
+    , _insnZone = pInsnZone_
+    , _insnKey = Nothing
+    , _insnOauthToken = Nothing
+    , _insnFields = Nothing
+    , _insnAlt = JSON
+    , _insnInstance = pInsnInstance_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-isQuotaUser :: Lens' InstancesStart' (Maybe Text)
-isQuotaUser
-  = lens _isQuotaUser (\ s a -> s{_isQuotaUser = a})
+insnQuotaUser :: Lens' InstancesStart' (Maybe Text)
+insnQuotaUser
+  = lens _insnQuotaUser
+      (\ s a -> s{_insnQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-isPrettyPrint :: Lens' InstancesStart' Bool
-isPrettyPrint
-  = lens _isPrettyPrint
-      (\ s a -> s{_isPrettyPrint = a})
+insnPrettyPrint :: Lens' InstancesStart' Bool
+insnPrettyPrint
+  = lens _insnPrettyPrint
+      (\ s a -> s{_insnPrettyPrint = a})
 
 -- | Project ID for this request.
-isProject :: Lens' InstancesStart' Text
-isProject
-  = lens _isProject (\ s a -> s{_isProject = a})
+insnProject :: Lens' InstancesStart' Text
+insnProject
+  = lens _insnProject (\ s a -> s{_insnProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-isUserIp :: Lens' InstancesStart' (Maybe Text)
-isUserIp = lens _isUserIp (\ s a -> s{_isUserIp = a})
+insnUserIp :: Lens' InstancesStart' (Maybe Text)
+insnUserIp
+  = lens _insnUserIp (\ s a -> s{_insnUserIp = a})
 
 -- | The name of the zone for this request.
-isZone :: Lens' InstancesStart' Text
-isZone = lens _isZone (\ s a -> s{_isZone = a})
+insnZone :: Lens' InstancesStart' Text
+insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isKey :: Lens' InstancesStart' (Maybe Text)
-isKey = lens _isKey (\ s a -> s{_isKey = a})
+insnKey :: Lens' InstancesStart' (Maybe Text)
+insnKey = lens _insnKey (\ s a -> s{_insnKey = a})
 
 -- | OAuth 2.0 token for the current user.
-isOauthToken :: Lens' InstancesStart' (Maybe Text)
-isOauthToken
-  = lens _isOauthToken (\ s a -> s{_isOauthToken = a})
+insnOauthToken :: Lens' InstancesStart' (Maybe Text)
+insnOauthToken
+  = lens _insnOauthToken
+      (\ s a -> s{_insnOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-isFields :: Lens' InstancesStart' (Maybe Text)
-isFields = lens _isFields (\ s a -> s{_isFields = a})
+insnFields :: Lens' InstancesStart' (Maybe Text)
+insnFields
+  = lens _insnFields (\ s a -> s{_insnFields = a})
 
 -- | Data format for the response.
-isAlt :: Lens' InstancesStart' Text
-isAlt = lens _isAlt (\ s a -> s{_isAlt = a})
+insnAlt :: Lens' InstancesStart' Alt
+insnAlt = lens _insnAlt (\ s a -> s{_insnAlt = a})
 
 -- | Name of the instance resource to start.
-isInstance :: Lens' InstancesStart' Text
-isInstance
-  = lens _isInstance (\ s a -> s{_isInstance = a})
+insnInstance :: Lens' InstancesStart' Text
+insnInstance
+  = lens _insnInstance (\ s a -> s{_insnInstance = a})
 
 instance GoogleRequest InstancesStart' where
         type Rs InstancesStart' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesStart{..}
-          = go _isQuotaUser _isPrettyPrint _isProject _isUserIp
-              _isZone
-              _isKey
-              _isOauthToken
-              _isFields
-              _isAlt
-              _isInstance
+        requestWithRoute r u InstancesStart'{..}
+          = go _insnQuotaUser (Just _insnPrettyPrint)
+              _insnProject
+              _insnUserIp
+              _insnZone
+              _insnKey
+              _insnOauthToken
+              _insnFields
+              (Just _insnAlt)
+              _insnInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesStartAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesStartResource)
                       r
                       u

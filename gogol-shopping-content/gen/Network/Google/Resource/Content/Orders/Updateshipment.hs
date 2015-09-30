@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersUpdateshipment@.
-module Content.Orders.Updateshipment
+module Network.Google.Resource.Content.Orders.Updateshipment
     (
     -- * REST Resource
-      OrdersUpdateshipmentAPI
+      OrdersUpdateshipmentResource
 
     -- * Creating a Request
-    , ordersUpdateshipment
-    , OrdersUpdateshipment
+    , ordersUpdateshipment'
+    , OrdersUpdateshipment'
 
     -- * Request Lenses
     , ouuQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersUpdateshipment@ which the
--- 'OrdersUpdateshipment' request conforms to.
-type OrdersUpdateshipmentAPI =
+-- 'OrdersUpdateshipment'' request conforms to.
+type OrdersUpdateshipmentResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          Capture "orderId" Text :>
            "updateShipment" :>
-             Post '[JSON] OrdersUpdateShipmentResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
--- /See:/ 'ordersUpdateshipment' smart constructor.
-data OrdersUpdateshipment = OrdersUpdateshipment
+-- /See:/ 'ordersUpdateshipment'' smart constructor.
+data OrdersUpdateshipment' = OrdersUpdateshipment'
     { _ouuQuotaUser   :: !(Maybe Text)
     , _ouuMerchantId  :: !Word64
     , _ouuPrettyPrint :: !Bool
@@ -64,7 +72,7 @@ data OrdersUpdateshipment = OrdersUpdateshipment
     , _ouuOauthToken  :: !(Maybe Text)
     , _ouuOrderId     :: !Text
     , _ouuFields      :: !(Maybe Text)
-    , _ouuAlt         :: !Text
+    , _ouuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateshipment'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data OrdersUpdateshipment = OrdersUpdateshipment
 -- * 'ouuFields'
 --
 -- * 'ouuAlt'
-ordersUpdateshipment
+ordersUpdateshipment'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersUpdateshipment
-ordersUpdateshipment pOuuMerchantId_ pOuuOrderId_ =
-    OrdersUpdateshipment
+    -> OrdersUpdateshipment'
+ordersUpdateshipment' pOuuMerchantId_ pOuuOrderId_ =
+    OrdersUpdateshipment'
     { _ouuQuotaUser = Nothing
     , _ouuMerchantId = pOuuMerchantId_
     , _ouuPrettyPrint = True
@@ -102,7 +110,7 @@ ordersUpdateshipment pOuuMerchantId_ pOuuOrderId_ =
     , _ouuOauthToken = Nothing
     , _ouuOrderId = pOuuOrderId_
     , _ouuFields = Nothing
-    , _ouuAlt = "json"
+    , _ouuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +161,24 @@ ouuFields
   = lens _ouuFields (\ s a -> s{_ouuFields = a})
 
 -- | Data format for the response.
-ouuAlt :: Lens' OrdersUpdateshipment' Text
+ouuAlt :: Lens' OrdersUpdateshipment' Alt
 ouuAlt = lens _ouuAlt (\ s a -> s{_ouuAlt = a})
 
 instance GoogleRequest OrdersUpdateshipment' where
         type Rs OrdersUpdateshipment' =
              OrdersUpdateShipmentResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersUpdateshipment{..}
-          = go _ouuQuotaUser _ouuMerchantId _ouuPrettyPrint
+        requestWithRoute r u OrdersUpdateshipment'{..}
+          = go _ouuQuotaUser _ouuMerchantId
+              (Just _ouuPrettyPrint)
               _ouuUserIp
               _ouuKey
               _ouuOauthToken
               _ouuOrderId
               _ouuFields
-              _ouuAlt
+              (Just _ouuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersUpdateshipmentAPI)
+                      (Proxy :: Proxy OrdersUpdateshipmentResource)
                       r
                       u

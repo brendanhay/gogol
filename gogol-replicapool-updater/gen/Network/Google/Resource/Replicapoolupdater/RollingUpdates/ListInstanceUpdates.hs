@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the current status for each instance within a given update.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesListInstanceUpdates@.
-module Replicapoolupdater.RollingUpdates.ListInstanceUpdates
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.ListInstanceUpdates
     (
     -- * REST Resource
-      RollingUpdatesListInstanceUpdatesAPI
+      RollingUpdatesListInstanceUpdatesResource
 
     -- * Creating a Request
-    , rollingUpdatesListInstanceUpdates
-    , RollingUpdatesListInstanceUpdates
+    , rollingUpdatesListInstanceUpdates'
+    , RollingUpdatesListInstanceUpdates'
 
     -- * Request Lenses
     , ruliuRollingUpdate
@@ -48,23 +49,30 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesListInstanceUpdates@ which the
--- 'RollingUpdatesListInstanceUpdates' request conforms to.
-type RollingUpdatesListInstanceUpdatesAPI =
+-- 'RollingUpdatesListInstanceUpdates'' request conforms to.
+type RollingUpdatesListInstanceUpdatesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
                "instanceUpdates" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       Get '[JSON] InstanceUpdateList
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] InstanceUpdateList
 
 -- | Lists the current status for each instance within a given update.
 --
--- /See:/ 'rollingUpdatesListInstanceUpdates' smart constructor.
-data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
+-- /See:/ 'rollingUpdatesListInstanceUpdates'' smart constructor.
+data RollingUpdatesListInstanceUpdates' = RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate :: !Text
     , _ruliuQuotaUser     :: !(Maybe Text)
     , _ruliuPrettyPrint   :: !Bool
@@ -77,7 +85,7 @@ data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
     , _ruliuOauthToken    :: !(Maybe Text)
     , _ruliuMaxResults    :: !Word32
     , _ruliuFields        :: !(Maybe Text)
-    , _ruliuAlt           :: !Text
+    , _ruliuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesListInstanceUpdates'' with the minimum fields required to make a request.
@@ -109,13 +117,13 @@ data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
 -- * 'ruliuFields'
 --
 -- * 'ruliuAlt'
-rollingUpdatesListInstanceUpdates
+rollingUpdatesListInstanceUpdates'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesListInstanceUpdates
-rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
-    RollingUpdatesListInstanceUpdates
+    -> RollingUpdatesListInstanceUpdates'
+rollingUpdatesListInstanceUpdates' pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
+    RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate = pRuliuRollingUpdate_
     , _ruliuQuotaUser = Nothing
     , _ruliuPrettyPrint = True
@@ -128,7 +136,7 @@ rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone
     , _ruliuOauthToken = Nothing
     , _ruliuMaxResults = 500
     , _ruliuFields = Nothing
-    , _ruliuAlt = "json"
+    , _ruliuAlt = JSON
     }
 
 -- | The name of the update.
@@ -204,7 +212,7 @@ ruliuFields
   = lens _ruliuFields (\ s a -> s{_ruliuFields = a})
 
 -- | Data format for the response.
-ruliuAlt :: Lens' RollingUpdatesListInstanceUpdates' Text
+ruliuAlt :: Lens' RollingUpdatesListInstanceUpdates' Alt
 ruliuAlt = lens _ruliuAlt (\ s a -> s{_ruliuAlt = a})
 
 instance GoogleRequest
@@ -214,9 +222,9 @@ instance GoogleRequest
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
         requestWithRoute r u
-          RollingUpdatesListInstanceUpdates{..}
+          RollingUpdatesListInstanceUpdates'{..}
           = go _ruliuRollingUpdate _ruliuQuotaUser
-              _ruliuPrettyPrint
+              (Just _ruliuPrettyPrint)
               _ruliuProject
               _ruliuUserIp
               _ruliuZone
@@ -226,9 +234,10 @@ instance GoogleRequest
               _ruliuOauthToken
               (Just _ruliuMaxResults)
               _ruliuFields
-              _ruliuAlt
+              (Just _ruliuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesListInstanceUpdatesAPI)
+                      (Proxy ::
+                         Proxy RollingUpdatesListInstanceUpdatesResource)
                       r
                       u

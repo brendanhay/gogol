@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -27,14 +28,14 @@
 -- set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsImportVariants@.
-module Genomics.Variantsets.ImportVariants
+module Network.Google.Resource.Genomics.Variantsets.ImportVariants
     (
     -- * REST Resource
-      VariantsetsImportVariantsAPI
+      VariantsetsImportVariantsResource
 
     -- * Creating a Request
-    , variantsetsImportVariants
-    , VariantsetsImportVariants
+    , variantsetsImportVariants'
+    , VariantsetsImportVariants'
 
     -- * Request Lenses
     , vivQuotaUser
@@ -51,12 +52,19 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsImportVariants@ which the
--- 'VariantsetsImportVariants' request conforms to.
-type VariantsetsImportVariantsAPI =
+-- 'VariantsetsImportVariants'' request conforms to.
+type VariantsetsImportVariantsResource =
      "variantsets" :>
        Capture "variantSetId" Text :>
          "importVariants" :>
-           Post '[JSON] ImportVariantsResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ImportVariantsResponse
 
 -- | Creates variant data by asynchronously importing the provided
 -- information. The variants for import will be merged with any existing
@@ -68,8 +76,8 @@ type VariantsetsImportVariantsAPI =
 -- Imported VCF headers are appended to the metadata already in a variant
 -- set.
 --
--- /See:/ 'variantsetsImportVariants' smart constructor.
-data VariantsetsImportVariants = VariantsetsImportVariants
+-- /See:/ 'variantsetsImportVariants'' smart constructor.
+data VariantsetsImportVariants' = VariantsetsImportVariants'
     { _vivQuotaUser    :: !(Maybe Text)
     , _vivPrettyPrint  :: !Bool
     , _vivVariantSetId :: !Text
@@ -77,7 +85,7 @@ data VariantsetsImportVariants = VariantsetsImportVariants
     , _vivKey          :: !(Maybe Text)
     , _vivOauthToken   :: !(Maybe Text)
     , _vivFields       :: !(Maybe Text)
-    , _vivAlt          :: !Text
+    , _vivAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsImportVariants'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data VariantsetsImportVariants = VariantsetsImportVariants
 -- * 'vivFields'
 --
 -- * 'vivAlt'
-variantsetsImportVariants
+variantsetsImportVariants'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsImportVariants
-variantsetsImportVariants pVivVariantSetId_ =
-    VariantsetsImportVariants
+    -> VariantsetsImportVariants'
+variantsetsImportVariants' pVivVariantSetId_ =
+    VariantsetsImportVariants'
     { _vivQuotaUser = Nothing
     , _vivPrettyPrint = True
     , _vivVariantSetId = pVivVariantSetId_
@@ -111,7 +119,7 @@ variantsetsImportVariants pVivVariantSetId_ =
     , _vivKey = Nothing
     , _vivOauthToken = Nothing
     , _vivFields = Nothing
-    , _vivAlt = "json"
+    , _vivAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ vivFields
   = lens _vivFields (\ s a -> s{_vivFields = a})
 
 -- | Data format for the response.
-vivAlt :: Lens' VariantsetsImportVariants' Text
+vivAlt :: Lens' VariantsetsImportVariants' Alt
 vivAlt = lens _vivAlt (\ s a -> s{_vivAlt = a})
 
 instance GoogleRequest VariantsetsImportVariants'
@@ -165,15 +173,16 @@ instance GoogleRequest VariantsetsImportVariants'
         type Rs VariantsetsImportVariants' =
              ImportVariantsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsImportVariants{..}
-          = go _vivQuotaUser _vivPrettyPrint _vivVariantSetId
+        requestWithRoute r u VariantsetsImportVariants'{..}
+          = go _vivQuotaUser (Just _vivPrettyPrint)
+              _vivVariantSetId
               _vivUserIp
               _vivKey
               _vivOauthToken
               _vivFields
-              _vivAlt
+              (Just _vivAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsImportVariantsAPI)
+                      (Proxy :: Proxy VariantsetsImportVariantsResource)
                       r
                       u

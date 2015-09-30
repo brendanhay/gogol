@@ -27,73 +27,73 @@ module Network.Google.Classroom
     -- * REST Resources
 
     -- ** ClassroomCoursesAliasesCreate
-    , module Classroom.Courses.Aliases.Create
+    , module Network.Google.Resource.Classroom.Courses.Aliases.Create
 
     -- ** ClassroomCoursesAliasesDelete
-    , module Classroom.Courses.Aliases.Delete
+    , module Network.Google.Resource.Classroom.Courses.Aliases.Delete
 
     -- ** ClassroomCoursesAliasesList
-    , module Classroom.Courses.Aliases.List
+    , module Network.Google.Resource.Classroom.Courses.Aliases.List
 
     -- ** ClassroomCoursesCreate
-    , module Classroom.Courses.Create
+    , module Network.Google.Resource.Classroom.Courses.Create
 
     -- ** ClassroomCoursesDelete
-    , module Classroom.Courses.Delete
+    , module Network.Google.Resource.Classroom.Courses.Delete
 
     -- ** ClassroomCoursesGet
-    , module Classroom.Courses.Get
+    , module Network.Google.Resource.Classroom.Courses.Get
 
     -- ** ClassroomCoursesList
-    , module Classroom.Courses.List
+    , module Network.Google.Resource.Classroom.Courses.List
 
     -- ** ClassroomCoursesPatch
-    , module Classroom.Courses.Patch
+    , module Network.Google.Resource.Classroom.Courses.Patch
 
     -- ** ClassroomCoursesStudentsCreate
-    , module Classroom.Courses.Students.Create
+    , module Network.Google.Resource.Classroom.Courses.Students.Create
 
     -- ** ClassroomCoursesStudentsDelete
-    , module Classroom.Courses.Students.Delete
+    , module Network.Google.Resource.Classroom.Courses.Students.Delete
 
     -- ** ClassroomCoursesStudentsGet
-    , module Classroom.Courses.Students.Get
+    , module Network.Google.Resource.Classroom.Courses.Students.Get
 
     -- ** ClassroomCoursesStudentsList
-    , module Classroom.Courses.Students.List
+    , module Network.Google.Resource.Classroom.Courses.Students.List
 
     -- ** ClassroomCoursesTeachersCreate
-    , module Classroom.Courses.Teachers.Create
+    , module Network.Google.Resource.Classroom.Courses.Teachers.Create
 
     -- ** ClassroomCoursesTeachersDelete
-    , module Classroom.Courses.Teachers.Delete
+    , module Network.Google.Resource.Classroom.Courses.Teachers.Delete
 
     -- ** ClassroomCoursesTeachersGet
-    , module Classroom.Courses.Teachers.Get
+    , module Network.Google.Resource.Classroom.Courses.Teachers.Get
 
     -- ** ClassroomCoursesTeachersList
-    , module Classroom.Courses.Teachers.List
+    , module Network.Google.Resource.Classroom.Courses.Teachers.List
 
     -- ** ClassroomCoursesUpdate
-    , module Classroom.Courses.Update
+    , module Network.Google.Resource.Classroom.Courses.Update
 
     -- ** ClassroomInvitationsAccept
-    , module Classroom.Invitations.Accept
+    , module Network.Google.Resource.Classroom.Invitations.Accept
 
     -- ** ClassroomInvitationsCreate
-    , module Classroom.Invitations.Create
+    , module Network.Google.Resource.Classroom.Invitations.Create
 
     -- ** ClassroomInvitationsDelete
-    , module Classroom.Invitations.Delete
+    , module Network.Google.Resource.Classroom.Invitations.Delete
 
     -- ** ClassroomInvitationsGet
-    , module Classroom.Invitations.Get
+    , module Network.Google.Resource.Classroom.Invitations.Get
 
     -- ** ClassroomInvitationsList
-    , module Classroom.Invitations.List
+    , module Network.Google.Resource.Classroom.Invitations.List
 
     -- ** ClassroomUserProfilesGet
-    , module Classroom.UserProfiles.Get
+    , module Network.Google.Resource.Classroom.UserProfiles.Get
 
     -- * Types
 
@@ -227,7 +227,29 @@ TODO
 -}
 
 type ClassroomAPI =
-     Invitations :<|> Courses :<|> UserProfiles
+     InvitationsListResource :<|>
+       InvitationsAcceptResource
+       :<|> InvitationsGetResource
+       :<|> InvitationsCreateResource
+       :<|> InvitationsDeleteResource
+       :<|> CoursesTeachersListResource
+       :<|> CoursesTeachersGetResource
+       :<|> CoursesTeachersCreateResource
+       :<|> CoursesTeachersDeleteResource
+       :<|> CoursesAliasesListResource
+       :<|> CoursesAliasesCreateResource
+       :<|> CoursesAliasesDeleteResource
+       :<|> CoursesStudentsListResource
+       :<|> CoursesStudentsGetResource
+       :<|> CoursesStudentsCreateResource
+       :<|> CoursesStudentsDeleteResource
+       :<|> CoursesListResource
+       :<|> CoursesPatchResource
+       :<|> CoursesGetResource
+       :<|> CoursesCreateResource
+       :<|> CoursesDeleteResource
+       :<|> CoursesUpdateResource
+       :<|> UserProfilesGetResource
 
 classroomAPI :: Proxy ClassroomAPI
 classroomAPI = Proxy

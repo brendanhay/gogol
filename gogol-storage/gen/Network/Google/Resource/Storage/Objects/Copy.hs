@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- overrides metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsCopy@.
-module Storage.Objects.Copy
+module Network.Google.Resource.Storage.Objects.Copy
     (
     -- * REST Resource
-      ObjectsCopyAPI
+      ObjectsCopyResource
 
     -- * Creating a Request
-    , objectsCopy
-    , ObjectsCopy
+    , objectsCopy'
+    , ObjectsCopy'
 
     -- * Request Lenses
     , ocQuotaUser
@@ -57,8 +58,8 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsCopy@ which the
--- 'ObjectsCopy' request conforms to.
-type ObjectsCopyAPI =
+-- 'ObjectsCopy'' request conforms to.
+type ObjectsCopyResource =
      "b" :>
        Capture "sourceBucket" Text :>
          "o" :>
@@ -68,28 +69,44 @@ type ObjectsCopyAPI =
                  Capture "destinationBucket" Text :>
                    "o" :>
                      Capture "destinationObject" Text :>
-                       QueryParam "ifSourceGenerationMatch" Word64 :>
-                         QueryParam "ifMetagenerationMatch" Word64 :>
-                           QueryParam "ifGenerationNotMatch" Word64 :>
-                             QueryParam "ifSourceMetagenerationNotMatch" Word64
-                               :>
-                               QueryParam "ifSourceMetagenerationMatch" Word64
-                                 :>
-                                 QueryParam "ifGenerationMatch" Word64 :>
-                                   QueryParam "ifMetagenerationNotMatch" Word64
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "ifSourceGenerationMatch" Word64 :>
+                           QueryParam "ifMetagenerationMatch" Word64 :>
+                             QueryParam "ifGenerationNotMatch" Word64 :>
+                               QueryParam "prettyPrint" Bool :>
+                                 QueryParam "ifSourceMetagenerationNotMatch"
+                                   Word64
+                                   :>
+                                   QueryParam "ifSourceMetagenerationMatch"
+                                     Word64
                                      :>
-                                     QueryParam "ifSourceGenerationNotMatch"
-                                       Word64
-                                       :>
-                                       QueryParam "projection" Text :>
-                                         QueryParam "sourceGeneration" Word64 :>
-                                           Post '[JSON] Object
+                                     QueryParam "ifGenerationMatch" Word64 :>
+                                       QueryParam "userIp" Text :>
+                                         QueryParam "key" Text :>
+                                           QueryParam "ifMetagenerationNotMatch"
+                                             Word64
+                                             :>
+                                             QueryParam
+                                               "ifSourceGenerationNotMatch"
+                                               Word64
+                                               :>
+                                               QueryParam "projection"
+                                                 StorageObjectsCopyProjection
+                                                 :>
+                                                 QueryParam "oauth_token" Text
+                                                   :>
+                                                   QueryParam "sourceGeneration"
+                                                     Word64
+                                                     :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "alt" Alt :>
+                                                         Post '[JSON] Object
 
 -- | Copies an object to a destination in the same location. Optionally
 -- overrides metadata.
 --
--- /See:/ 'objectsCopy' smart constructor.
-data ObjectsCopy = ObjectsCopy
+-- /See:/ 'objectsCopy'' smart constructor.
+data ObjectsCopy' = ObjectsCopy'
     { _ocQuotaUser                      :: !(Maybe Text)
     , _ocIfSourceGenerationMatch        :: !(Maybe Word64)
     , _ocIfMetagenerationMatch          :: !(Maybe Word64)
@@ -105,11 +122,11 @@ data ObjectsCopy = ObjectsCopy
     , _ocDestinationBucket              :: !Text
     , _ocIfMetagenerationNotMatch       :: !(Maybe Word64)
     , _ocIfSourceGenerationNotMatch     :: !(Maybe Word64)
-    , _ocProjection                     :: !(Maybe Text)
+    , _ocProjection                     :: !(Maybe StorageObjectsCopyProjection)
     , _ocOauthToken                     :: !(Maybe Text)
     , _ocSourceGeneration               :: !(Maybe Word64)
     , _ocFields                         :: !(Maybe Text)
-    , _ocAlt                            :: !Text
+    , _ocAlt                            :: !Alt
     , _ocDestinationObject              :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -158,14 +175,14 @@ data ObjectsCopy = ObjectsCopy
 -- * 'ocAlt'
 --
 -- * 'ocDestinationObject'
-objectsCopy
+objectsCopy'
     :: Text -- ^ 'sourceObject'
     -> Text -- ^ 'sourceBucket'
     -> Text -- ^ 'destinationBucket'
     -> Text -- ^ 'destinationObject'
-    -> ObjectsCopy
-objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcDestinationBucket_ pOcDestinationObject_ =
-    ObjectsCopy
+    -> ObjectsCopy'
+objectsCopy' pOcSourceObject_ pOcSourceBucket_ pOcDestinationBucket_ pOcDestinationObject_ =
+    ObjectsCopy'
     { _ocQuotaUser = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
@@ -185,7 +202,7 @@ objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcDestinationBucket_ pOcDestinati
     , _ocOauthToken = Nothing
     , _ocSourceGeneration = Nothing
     , _ocFields = Nothing
-    , _ocAlt = "json"
+    , _ocAlt = JSON
     , _ocDestinationObject = pOcDestinationObject_
     }
 
@@ -290,7 +307,7 @@ ocIfSourceGenerationNotMatch
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-ocProjection :: Lens' ObjectsCopy' (Maybe Text)
+ocProjection :: Lens' ObjectsCopy' (Maybe StorageObjectsCopyProjection)
 ocProjection
   = lens _ocProjection (\ s a -> s{_ocProjection = a})
 
@@ -311,7 +328,7 @@ ocFields :: Lens' ObjectsCopy' (Maybe Text)
 ocFields = lens _ocFields (\ s a -> s{_ocFields = a})
 
 -- | Data format for the response.
-ocAlt :: Lens' ObjectsCopy' Text
+ocAlt :: Lens' ObjectsCopy' Alt
 ocAlt = lens _ocAlt (\ s a -> s{_ocAlt = a})
 
 -- | Name of the new object. Required when the object metadata is not
@@ -324,11 +341,11 @@ ocDestinationObject
 instance GoogleRequest ObjectsCopy' where
         type Rs ObjectsCopy' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsCopy{..}
+        requestWithRoute r u ObjectsCopy'{..}
           = go _ocQuotaUser _ocIfSourceGenerationMatch
               _ocIfMetagenerationMatch
               _ocIfGenerationNotMatch
-              _ocPrettyPrint
+              (Just _ocPrettyPrint)
               _ocIfSourceMetagenerationNotMatch
               _ocIfSourceMetagenerationMatch
               _ocIfGenerationMatch
@@ -343,7 +360,10 @@ instance GoogleRequest ObjectsCopy' where
               _ocOauthToken
               _ocSourceGeneration
               _ocFields
-              _ocAlt
+              (Just _ocAlt)
               _ocDestinationObject
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsCopyAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsCopyResource)
+                      r
+                      u

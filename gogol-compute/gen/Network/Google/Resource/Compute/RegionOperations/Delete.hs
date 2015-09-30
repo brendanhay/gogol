@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified region-specific Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsDelete@.
-module Compute.RegionOperations.Delete
+module Network.Google.Resource.Compute.RegionOperations.Delete
     (
     -- * REST Resource
-      RegionOperationsDeleteAPI
+      RegionOperationsDeleteResource
 
     -- * Creating a Request
-    , regionOperationsDelete
-    , RegionOperationsDelete
+    , regionOperationsDelete'
+    , RegionOperationsDelete'
 
     -- * Request Lenses
     , rodQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRegionOperationsDelete@ which the
--- 'RegionOperationsDelete' request conforms to.
-type RegionOperationsDeleteAPI =
+-- 'RegionOperationsDelete'' request conforms to.
+type RegionOperationsDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "operations" :>
-             Capture "operation" Text :> Delete '[JSON] ()
+             Capture "operation" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the specified region-specific Operations resource.
 --
--- /See:/ 'regionOperationsDelete' smart constructor.
-data RegionOperationsDelete = RegionOperationsDelete
+-- /See:/ 'regionOperationsDelete'' smart constructor.
+data RegionOperationsDelete' = RegionOperationsDelete'
     { _rodQuotaUser   :: !(Maybe Text)
     , _rodPrettyPrint :: !Bool
     , _rodProject     :: !Text
@@ -66,7 +74,7 @@ data RegionOperationsDelete = RegionOperationsDelete
     , _rodRegion      :: !Text
     , _rodOauthToken  :: !(Maybe Text)
     , _rodFields      :: !(Maybe Text)
-    , _rodAlt         :: !Text
+    , _rodAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsDelete'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data RegionOperationsDelete = RegionOperationsDelete
 -- * 'rodFields'
 --
 -- * 'rodAlt'
-regionOperationsDelete
+regionOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
     -> Text -- ^ 'region'
-    -> RegionOperationsDelete
-regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
-    RegionOperationsDelete
+    -> RegionOperationsDelete'
+regionOperationsDelete' pRodProject_ pRodOperation_ pRodRegion_ =
+    RegionOperationsDelete'
     { _rodQuotaUser = Nothing
     , _rodPrettyPrint = True
     , _rodProject = pRodProject_
@@ -108,7 +116,7 @@ regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
     , _rodRegion = pRodRegion_
     , _rodOauthToken = Nothing
     , _rodFields = Nothing
-    , _rodAlt = "json"
+    , _rodAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ rodFields
   = lens _rodFields (\ s a -> s{_rodFields = a})
 
 -- | Data format for the response.
-rodAlt :: Lens' RegionOperationsDelete' Text
+rodAlt :: Lens' RegionOperationsDelete' Alt
 rodAlt = lens _rodAlt (\ s a -> s{_rodAlt = a})
 
 instance GoogleRequest RegionOperationsDelete' where
         type Rs RegionOperationsDelete' = ()
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsDelete{..}
-          = go _rodQuotaUser _rodPrettyPrint _rodProject
+        requestWithRoute r u RegionOperationsDelete'{..}
+          = go _rodQuotaUser (Just _rodPrettyPrint) _rodProject
               _rodOperation
               _rodUserIp
               _rodKey
               _rodRegion
               _rodOauthToken
               _rodFields
-              _rodAlt
+              (Just _rodAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RegionOperationsDeleteAPI)
+                      (Proxy :: Proxy RegionOperationsDeleteResource)
                       r
                       u

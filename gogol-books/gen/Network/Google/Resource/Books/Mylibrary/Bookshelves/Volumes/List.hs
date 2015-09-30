@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets volume information for volumes on a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryBookshelvesVolumesList@.
-module Books.Mylibrary.Bookshelves.Volumes.List
+module Network.Google.Resource.Books.Mylibrary.Bookshelves.Volumes.List
     (
     -- * REST Resource
-      MylibraryBookshelvesVolumesListAPI
+      MylibraryBookshelvesVolumesListResource
 
     -- * Creating a Request
-    , mylibraryBookshelvesVolumesList
-    , MylibraryBookshelvesVolumesList
+    , mylibraryBookshelvesVolumesList'
+    , MylibraryBookshelvesVolumesList'
 
     -- * Request Lenses
     , mbvlQuotaUser
@@ -50,25 +51,34 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryBookshelvesVolumesList@ which the
--- 'MylibraryBookshelvesVolumesList' request conforms to.
-type MylibraryBookshelvesVolumesListAPI =
+-- 'MylibraryBookshelvesVolumesList'' request conforms to.
+type MylibraryBookshelvesVolumesListResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
            "volumes" :>
-             QueryParam "country" Text :>
-               QueryParam "q" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "projection" Text :>
-                     QueryParam "startIndex" Word32 :>
-                       QueryParam "maxResults" Word32 :>
-                         QueryParam "showPreorders" Bool :>
-                           Get '[JSON] Volumes
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "country" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "q" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "projection"
+                             BooksMylibraryBookshelvesVolumesListProjection
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "startIndex" Word32 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "showPreorders" Bool :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON] Volumes
 
 -- | Gets volume information for volumes on a bookshelf.
 --
--- /See:/ 'mylibraryBookshelvesVolumesList' smart constructor.
-data MylibraryBookshelvesVolumesList = MylibraryBookshelvesVolumesList
+-- /See:/ 'mylibraryBookshelvesVolumesList'' smart constructor.
+data MylibraryBookshelvesVolumesList' = MylibraryBookshelvesVolumesList'
     { _mbvlQuotaUser     :: !(Maybe Text)
     , _mbvlPrettyPrint   :: !Bool
     , _mbvlCountry       :: !(Maybe Text)
@@ -77,13 +87,13 @@ data MylibraryBookshelvesVolumesList = MylibraryBookshelvesVolumesList
     , _mbvlShelf         :: !Text
     , _mbvlKey           :: !(Maybe Text)
     , _mbvlSource        :: !(Maybe Text)
-    , _mbvlProjection    :: !(Maybe Text)
+    , _mbvlProjection    :: !(Maybe BooksMylibraryBookshelvesVolumesListProjection)
     , _mbvlOauthToken    :: !(Maybe Text)
     , _mbvlStartIndex    :: !(Maybe Word32)
     , _mbvlMaxResults    :: !(Maybe Word32)
     , _mbvlShowPreorders :: !(Maybe Bool)
     , _mbvlFields        :: !(Maybe Text)
-    , _mbvlAlt           :: !Text
+    , _mbvlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryBookshelvesVolumesList'' with the minimum fields required to make a request.
@@ -119,11 +129,11 @@ data MylibraryBookshelvesVolumesList = MylibraryBookshelvesVolumesList
 -- * 'mbvlFields'
 --
 -- * 'mbvlAlt'
-mylibraryBookshelvesVolumesList
+mylibraryBookshelvesVolumesList'
     :: Text -- ^ 'shelf'
-    -> MylibraryBookshelvesVolumesList
-mylibraryBookshelvesVolumesList pMbvlShelf_ =
-    MylibraryBookshelvesVolumesList
+    -> MylibraryBookshelvesVolumesList'
+mylibraryBookshelvesVolumesList' pMbvlShelf_ =
+    MylibraryBookshelvesVolumesList'
     { _mbvlQuotaUser = Nothing
     , _mbvlPrettyPrint = True
     , _mbvlCountry = Nothing
@@ -138,7 +148,7 @@ mylibraryBookshelvesVolumesList pMbvlShelf_ =
     , _mbvlMaxResults = Nothing
     , _mbvlShowPreorders = Nothing
     , _mbvlFields = Nothing
-    , _mbvlAlt = "json"
+    , _mbvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -187,7 +197,7 @@ mbvlSource
   = lens _mbvlSource (\ s a -> s{_mbvlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-mbvlProjection :: Lens' MylibraryBookshelvesVolumesList' (Maybe Text)
+mbvlProjection :: Lens' MylibraryBookshelvesVolumesList' (Maybe BooksMylibraryBookshelvesVolumesListProjection)
 mbvlProjection
   = lens _mbvlProjection
       (\ s a -> s{_mbvlProjection = a})
@@ -222,7 +232,7 @@ mbvlFields
   = lens _mbvlFields (\ s a -> s{_mbvlFields = a})
 
 -- | Data format for the response.
-mbvlAlt :: Lens' MylibraryBookshelvesVolumesList' Text
+mbvlAlt :: Lens' MylibraryBookshelvesVolumesList' Alt
 mbvlAlt = lens _mbvlAlt (\ s a -> s{_mbvlAlt = a})
 
 instance GoogleRequest
@@ -230,8 +240,9 @@ instance GoogleRequest
         type Rs MylibraryBookshelvesVolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MylibraryBookshelvesVolumesList{..}
-          = go _mbvlQuotaUser _mbvlPrettyPrint _mbvlCountry
+          MylibraryBookshelvesVolumesList'{..}
+          = go _mbvlQuotaUser (Just _mbvlPrettyPrint)
+              _mbvlCountry
               _mbvlUserIp
               _mbvlQ
               _mbvlShelf
@@ -243,9 +254,10 @@ instance GoogleRequest
               _mbvlMaxResults
               _mbvlShowPreorders
               _mbvlFields
-              _mbvlAlt
+              (Just _mbvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryBookshelvesVolumesListAPI)
+                      (Proxy ::
+                         Proxy MylibraryBookshelvesVolumesListResource)
                       r
                       u

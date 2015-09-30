@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- Caller must have WRITE permission for the associated dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationsUpdate@.
-module Genomics.Annotations.Update
+module Network.Google.Resource.Genomics.Annotations.Update
     (
     -- * REST Resource
-      AnnotationsUpdateAPI
+      AnnotationsUpdateResource
 
     -- * Creating a Request
-    , annotationsUpdate
-    , AnnotationsUpdate
+    , annotationsUpdate'
+    , AnnotationsUpdate'
 
     -- * Request Lenses
     , auQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsUpdate@ which the
--- 'AnnotationsUpdate' request conforms to.
-type AnnotationsUpdateAPI =
+-- 'AnnotationsUpdate'' request conforms to.
+type AnnotationsUpdateResource =
      "annotations" :>
-       Capture "annotationId" Text :> Put '[JSON] Annotation
+       Capture "annotationId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Annotation
 
 -- | Updates an annotation. The update must respect all mutability
 -- restrictions and other invariants described on the annotation resource.
 -- Caller must have WRITE permission for the associated dataset.
 --
--- /See:/ 'annotationsUpdate' smart constructor.
-data AnnotationsUpdate = AnnotationsUpdate
+-- /See:/ 'annotationsUpdate'' smart constructor.
+data AnnotationsUpdate' = AnnotationsUpdate'
     { _auQuotaUser    :: !(Maybe Text)
     , _auPrettyPrint  :: !Bool
     , _auUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AnnotationsUpdate = AnnotationsUpdate
     , _auAnnotationId :: !Text
     , _auOauthToken   :: !(Maybe Text)
     , _auFields       :: !(Maybe Text)
-    , _auAlt          :: !Text
+    , _auAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsUpdate'' with the minimum fields required to make a request.
@@ -85,11 +93,11 @@ data AnnotationsUpdate = AnnotationsUpdate
 -- * 'auFields'
 --
 -- * 'auAlt'
-annotationsUpdate
+annotationsUpdate'
     :: Text -- ^ 'annotationId'
-    -> AnnotationsUpdate
-annotationsUpdate pAuAnnotationId_ =
-    AnnotationsUpdate
+    -> AnnotationsUpdate'
+annotationsUpdate' pAuAnnotationId_ =
+    AnnotationsUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auUserIp = Nothing
@@ -97,7 +105,7 @@ annotationsUpdate pAuAnnotationId_ =
     , _auAnnotationId = pAuAnnotationId_
     , _auOauthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = "json"
+    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,20 +148,21 @@ auFields :: Lens' AnnotationsUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 -- | Data format for the response.
-auAlt :: Lens' AnnotationsUpdate' Text
+auAlt :: Lens' AnnotationsUpdate' Alt
 auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
 
 instance GoogleRequest AnnotationsUpdate' where
         type Rs AnnotationsUpdate' = Annotation
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsUpdate{..}
-          = go _auQuotaUser _auPrettyPrint _auUserIp _auKey
+        requestWithRoute r u AnnotationsUpdate'{..}
+          = go _auQuotaUser (Just _auPrettyPrint) _auUserIp
+              _auKey
               _auAnnotationId
               _auOauthToken
               _auFields
-              _auAlt
+              (Just _auAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationsUpdateAPI)
+                      (Proxy :: Proxy AnnotationsUpdateResource)
                       r
                       u

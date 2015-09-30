@@ -171,6 +171,11 @@ module Network.Google.SQLAdmin.Types
     , icRequireSsl
     , icIpv4Enabled
 
+    -- * ExportContextCSVExportOptions
+    , ExportContextCSVExportOptions
+    , exportContextCSVExportOptions
+    , ecceoSelectQuery
+
     -- * SSLCertsInsertRequest
     , SSLCertsInsertRequest
     , sSLCertsInsertRequest
@@ -187,29 +192,35 @@ module Network.Google.SQLAdmin.Types
     , uHost
     , uInstance
 
+    -- * ImportContextCSVImportOptions
+    , ImportContextCSVImportOptions
+    , importContextCSVImportOptions
+    , iccioColumns
+    , iccioTable
+
     -- * DatabaseInstance
     , DatabaseInstance
     , databaseInstance
-    , diMaxDiskSize
-    , diOnPremisesConfiguration
-    , diEtag
-    , diState
-    , diIpv6Address
-    , diServerCaCert
-    , diDatabaseVersion
-    , diProject
-    , diSettings
-    , diKind
-    , diCurrentDiskSize
-    , diInstanceType
-    , diReplicaNames
-    , diSelfLink
-    , diName
-    , diMasterInstanceName
-    , diReplicaConfiguration
-    , diRegion
-    , diServiceAccountEmailAddress
-    , diIpAddresses
+    , datMaxDiskSize
+    , datOnPremisesConfiguration
+    , datEtag
+    , datState
+    , datIpv6Address
+    , datServerCaCert
+    , datDatabaseVersion
+    , datProject
+    , datSettings
+    , datKind
+    , datCurrentDiskSize
+    , datInstanceType
+    , datReplicaNames
+    , datSelfLink
+    , datName
+    , datMasterInstanceName
+    , datReplicaConfiguration
+    , datRegion
+    , datServiceAccountEmailAddress
+    , datIpAddresses
 
     -- * Flag
     , Flag
@@ -357,12 +368,21 @@ module Network.Google.SQLAdmin.Types
     , bcKind
     , bcBinaryLogEnabled
 
+    -- * ExportContextSqlExportOptions
+    , ExportContextSqlExportOptions
+    , exportContextSqlExportOptions
+    , ecseoSchemaOnly
+    , ecseoTables
+
     -- * RestoreBackupContext
     , RestoreBackupContext
     , restoreBackupContext
     , rbcInstanceId
     , rbcBackupRunId
     , rbcKind
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -370,7 +390,7 @@ import           Network.Google.SQLAdmin.Types.Product
 import           Network.Google.SQLAdmin.Types.Sum
 
 -- | URL referring to version 'v1beta4' of the Cloud SQL Administration API.
-sQLAdminURL :: BaseURL
+sQLAdminURL :: BaseUrl
 sQLAdminURL
   = BaseUrl Https
       "https://www.googleapis.com/sql/v1beta4/"

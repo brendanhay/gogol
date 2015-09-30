@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Developer API
 --
 -- /See:/ <https://developers.google.com/fonts/docs/developer_api Google Fonts Developer API Reference> for @WebfontsWebfontsList@.
-module Webfonts.Webfonts.List
+module Network.Google.Resource.Webfonts.Webfonts.List
     (
     -- * REST Resource
-      WebfontsListAPI
+      WebfontsListResource
 
     -- * Creating a Request
-    , webfontsList
-    , WebfontsList
+    , webfontsList'
+    , WebfontsList'
 
     -- * Request Lenses
     , wlQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.Fonts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @WebfontsWebfontsList@ which the
--- 'WebfontsList' request conforms to.
-type WebfontsListAPI =
+-- 'WebfontsList'' request conforms to.
+type WebfontsListResource =
      "webfonts" :>
-       QueryParam "sort" Text :> Get '[JSON] WebfontList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "sort" WebfontsWebfontsListSort :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] WebfontList
 
 -- | Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
 --
--- /See:/ 'webfontsList' smart constructor.
-data WebfontsList = WebfontsList
+-- /See:/ 'webfontsList'' smart constructor.
+data WebfontsList' = WebfontsList'
     { _wlQuotaUser   :: !(Maybe Text)
     , _wlPrettyPrint :: !Bool
     , _wlUserIp      :: !(Maybe Text)
     , _wlKey         :: !(Maybe Text)
-    , _wlSort        :: !(Maybe Text)
+    , _wlSort        :: !(Maybe WebfontsWebfontsListSort)
     , _wlOauthToken  :: !(Maybe Text)
     , _wlFields      :: !(Maybe Text)
-    , _wlAlt         :: !Text
+    , _wlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebfontsList'' with the minimum fields required to make a request.
@@ -83,10 +91,10 @@ data WebfontsList = WebfontsList
 -- * 'wlFields'
 --
 -- * 'wlAlt'
-webfontsList
-    :: WebfontsList
-webfontsList =
-    WebfontsList
+webfontsList'
+    :: WebfontsList'
+webfontsList' =
+    WebfontsList'
     { _wlQuotaUser = Nothing
     , _wlPrettyPrint = True
     , _wlUserIp = Nothing
@@ -94,7 +102,7 @@ webfontsList =
     , _wlSort = Nothing
     , _wlOauthToken = Nothing
     , _wlFields = Nothing
-    , _wlAlt = "json"
+    , _wlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,7 +130,7 @@ wlKey :: Lens' WebfontsList' (Maybe Text)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | Enables sorting of the list
-wlSort :: Lens' WebfontsList' (Maybe Text)
+wlSort :: Lens' WebfontsList' (Maybe WebfontsWebfontsListSort)
 wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -135,18 +143,21 @@ wlFields :: Lens' WebfontsList' (Maybe Text)
 wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
 
 -- | Data format for the response.
-wlAlt :: Lens' WebfontsList' Text
+wlAlt :: Lens' WebfontsList' Alt
 wlAlt = lens _wlAlt (\ s a -> s{_wlAlt = a})
 
 instance GoogleRequest WebfontsList' where
         type Rs WebfontsList' = WebfontList
         request = requestWithRoute defReq fontsURL
-        requestWithRoute r u WebfontsList{..}
-          = go _wlQuotaUser _wlPrettyPrint _wlUserIp _wlKey
+        requestWithRoute r u WebfontsList'{..}
+          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIp
+              _wlKey
               _wlSort
               _wlOauthToken
               _wlFields
-              _wlAlt
+              (Just _wlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy WebfontsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy WebfontsListResource)
+                      r
                       u

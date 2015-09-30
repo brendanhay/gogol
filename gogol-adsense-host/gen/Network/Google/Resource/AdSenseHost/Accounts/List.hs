@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,140 +21,146 @@
 -- id.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsList@.
-module AdSenseHost.Accounts.List
+module Network.Google.Resource.AdSenseHost.Accounts.List
     (
     -- * REST Resource
-      AccountsListAPI
+      AccountsListResource
 
     -- * Creating a Request
-    , accountsList
-    , AccountsList
+    , accountsList'
+    , AccountsList'
 
     -- * Request Lenses
-    , allQuotaUser
-    , allPrettyPrint
-    , allUserIp
-    , allKey
-    , allOauthToken
-    , allFilterAdClientId
-    , allFields
-    , allAlt
+    , alQuotaUser
+    , alPrettyPrint
+    , alUserIp
+    , alKey
+    , alOauthToken
+    , alFilterAdClientId
+    , alFields
+    , alAlt
     ) where
 
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsList@ which the
--- 'AccountsList' request conforms to.
-type AccountsListAPI =
+-- 'AccountsList'' request conforms to.
+type AccountsListResource =
      "accounts" :>
-       QueryParams "filterAdClientId" Text :>
-         Get '[JSON] Accounts
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParams "filterAdClientId" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Accounts
 
 -- | List hosted accounts associated with this AdSense account by ad client
 -- id.
 --
--- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
-    { _allQuotaUser        :: !(Maybe Text)
-    , _allPrettyPrint      :: !Bool
-    , _allUserIp           :: !(Maybe Text)
-    , _allKey              :: !(Maybe Text)
-    , _allOauthToken       :: !(Maybe Text)
-    , _allFilterAdClientId :: !Text
-    , _allFields           :: !(Maybe Text)
-    , _allAlt              :: !Text
+-- /See:/ 'accountsList'' smart constructor.
+data AccountsList' = AccountsList'
+    { _alQuotaUser        :: !(Maybe Text)
+    , _alPrettyPrint      :: !Bool
+    , _alUserIp           :: !(Maybe Text)
+    , _alKey              :: !(Maybe Text)
+    , _alOauthToken       :: !(Maybe Text)
+    , _alFilterAdClientId :: !Text
+    , _alFields           :: !(Maybe Text)
+    , _alAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allQuotaUser'
+-- * 'alQuotaUser'
 --
--- * 'allPrettyPrint'
+-- * 'alPrettyPrint'
 --
--- * 'allUserIp'
+-- * 'alUserIp'
 --
--- * 'allKey'
+-- * 'alKey'
 --
--- * 'allOauthToken'
+-- * 'alOauthToken'
 --
--- * 'allFilterAdClientId'
+-- * 'alFilterAdClientId'
 --
--- * 'allFields'
+-- * 'alFields'
 --
--- * 'allAlt'
-accountsList
+-- * 'alAlt'
+accountsList'
     :: Text -- ^ 'filterAdClientId'
-    -> AccountsList
-accountsList pAllFilterAdClientId_ =
-    AccountsList
-    { _allQuotaUser = Nothing
-    , _allPrettyPrint = True
-    , _allUserIp = Nothing
-    , _allKey = Nothing
-    , _allOauthToken = Nothing
-    , _allFilterAdClientId = pAllFilterAdClientId_
-    , _allFields = Nothing
-    , _allAlt = "json"
+    -> AccountsList'
+accountsList' pAlFilterAdClientId_ =
+    AccountsList'
+    { _alQuotaUser = Nothing
+    , _alPrettyPrint = True
+    , _alUserIp = Nothing
+    , _alKey = Nothing
+    , _alOauthToken = Nothing
+    , _alFilterAdClientId = pAlFilterAdClientId_
+    , _alFields = Nothing
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-allQuotaUser :: Lens' AccountsList' (Maybe Text)
-allQuotaUser
-  = lens _allQuotaUser (\ s a -> s{_allQuotaUser = a})
+alQuotaUser :: Lens' AccountsList' (Maybe Text)
+alQuotaUser
+  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-allPrettyPrint :: Lens' AccountsList' Bool
-allPrettyPrint
-  = lens _allPrettyPrint
-      (\ s a -> s{_allPrettyPrint = a})
+alPrettyPrint :: Lens' AccountsList' Bool
+alPrettyPrint
+  = lens _alPrettyPrint
+      (\ s a -> s{_alPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-allUserIp :: Lens' AccountsList' (Maybe Text)
-allUserIp
-  = lens _allUserIp (\ s a -> s{_allUserIp = a})
+alUserIp :: Lens' AccountsList' (Maybe Text)
+alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-allKey :: Lens' AccountsList' (Maybe Text)
-allKey = lens _allKey (\ s a -> s{_allKey = a})
+alKey :: Lens' AccountsList' (Maybe Text)
+alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | OAuth 2.0 token for the current user.
-allOauthToken :: Lens' AccountsList' (Maybe Text)
-allOauthToken
-  = lens _allOauthToken
-      (\ s a -> s{_allOauthToken = a})
+alOauthToken :: Lens' AccountsList' (Maybe Text)
+alOauthToken
+  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
 
 -- | Ad clients to list accounts for.
-allFilterAdClientId :: Lens' AccountsList' Text
-allFilterAdClientId
-  = lens _allFilterAdClientId
-      (\ s a -> s{_allFilterAdClientId = a})
+alFilterAdClientId :: Lens' AccountsList' Text
+alFilterAdClientId
+  = lens _alFilterAdClientId
+      (\ s a -> s{_alFilterAdClientId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-allFields :: Lens' AccountsList' (Maybe Text)
-allFields
-  = lens _allFields (\ s a -> s{_allFields = a})
+alFields :: Lens' AccountsList' (Maybe Text)
+alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-allAlt :: Lens' AccountsList' Text
-allAlt = lens _allAlt (\ s a -> s{_allAlt = a})
+alAlt :: Lens' AccountsList' Alt
+alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsList{..}
-          = go _allQuotaUser _allPrettyPrint _allUserIp _allKey
-              _allOauthToken
-              (Just _allFilterAdClientId)
-              _allFields
-              _allAlt
+        requestWithRoute r u AccountsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+              _alKey
+              _alOauthToken
+              (Just _alFilterAdClientId)
+              _alFields
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsListResource)
+                      r
                       u

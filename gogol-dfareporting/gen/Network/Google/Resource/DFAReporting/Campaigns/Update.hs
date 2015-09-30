@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsUpdate@.
-module DFAReporting.Campaigns.Update
+module Network.Google.Resource.DFAReporting.Campaigns.Update
     (
     -- * REST Resource
-      CampaignsUpdateAPI
+      CampaignsUpdateResource
 
     -- * Creating a Request
-    , campaignsUpdate
-    , CampaignsUpdate
+    , campaignsUpdate'
+    , CampaignsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignsUpdate@ which the
--- 'CampaignsUpdate' request conforms to.
-type CampaignsUpdateAPI =
+-- 'CampaignsUpdate'' request conforms to.
+type CampaignsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "campaigns" :> Put '[JSON] Campaign
+         "campaigns" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Campaign
 
 -- | Updates an existing campaign.
 --
--- /See:/ 'campaignsUpdate' smart constructor.
-data CampaignsUpdate = CampaignsUpdate
+-- /See:/ 'campaignsUpdate'' smart constructor.
+data CampaignsUpdate' = CampaignsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CampaignsUpdate = CampaignsUpdate
     , _cuKey         :: !(Maybe Text)
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CampaignsUpdate = CampaignsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-campaignsUpdate
+campaignsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CampaignsUpdate
-campaignsUpdate pCuProfileId_ =
-    CampaignsUpdate
+    -> CampaignsUpdate'
+campaignsUpdate' pCuProfileId_ =
+    CampaignsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -94,7 +102,7 @@ campaignsUpdate pCuProfileId_ =
     , _cuKey = Nothing
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +144,21 @@ cuFields :: Lens' CampaignsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CampaignsUpdate' Text
+cuAlt :: Lens' CampaignsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CampaignsUpdate' where
         type Rs CampaignsUpdate' = Campaign
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp
+        requestWithRoute r u CampaignsUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
               _cuProfileId
               _cuKey
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CampaignsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CampaignsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- effect if invoked when the state of the update is PAUSED.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesPause@.
-module Replicapoolupdater.RollingUpdates.Pause
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Pause
     (
     -- * REST Resource
-      RollingUpdatesPauseAPI
+      RollingUpdatesPauseResource
 
     -- * Creating a Request
-    , rollingUpdatesPause
-    , RollingUpdatesPause
+    , rollingUpdatesPause'
+    , RollingUpdatesPause'
 
     -- * Request Lenses
     , rupRollingUpdate
@@ -46,20 +47,27 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesPause@ which the
--- 'RollingUpdatesPause' request conforms to.
-type RollingUpdatesPauseAPI =
+-- 'RollingUpdatesPause'' request conforms to.
+type RollingUpdatesPauseResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
-               "pause" :> Post '[JSON] Operation
+               "pause" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no
 -- effect if invoked when the state of the update is PAUSED.
 --
--- /See:/ 'rollingUpdatesPause' smart constructor.
-data RollingUpdatesPause = RollingUpdatesPause
+-- /See:/ 'rollingUpdatesPause'' smart constructor.
+data RollingUpdatesPause' = RollingUpdatesPause'
     { _rupRollingUpdate :: !Text
     , _rupQuotaUser     :: !(Maybe Text)
     , _rupPrettyPrint   :: !Bool
@@ -69,7 +77,7 @@ data RollingUpdatesPause = RollingUpdatesPause
     , _rupKey           :: !(Maybe Text)
     , _rupOauthToken    :: !(Maybe Text)
     , _rupFields        :: !(Maybe Text)
-    , _rupAlt           :: !Text
+    , _rupAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesPause'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data RollingUpdatesPause = RollingUpdatesPause
 -- * 'rupFields'
 --
 -- * 'rupAlt'
-rollingUpdatesPause
+rollingUpdatesPause'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesPause
-rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
-    RollingUpdatesPause
+    -> RollingUpdatesPause'
+rollingUpdatesPause' pRupRollingUpdate_ pRupProject_ pRupZone_ =
+    RollingUpdatesPause'
     { _rupRollingUpdate = pRupRollingUpdate_
     , _rupQuotaUser = Nothing
     , _rupPrettyPrint = True
@@ -111,7 +119,7 @@ rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
     , _rupKey = Nothing
     , _rupOauthToken = Nothing
     , _rupFields = Nothing
-    , _rupAlt = "json"
+    , _rupAlt = JSON
     }
 
 -- | The name of the update.
@@ -166,24 +174,25 @@ rupFields
   = lens _rupFields (\ s a -> s{_rupFields = a})
 
 -- | Data format for the response.
-rupAlt :: Lens' RollingUpdatesPause' Text
+rupAlt :: Lens' RollingUpdatesPause' Alt
 rupAlt = lens _rupAlt (\ s a -> s{_rupAlt = a})
 
 instance GoogleRequest RollingUpdatesPause' where
         type Rs RollingUpdatesPause' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesPause{..}
-          = go _rupRollingUpdate _rupQuotaUser _rupPrettyPrint
+        requestWithRoute r u RollingUpdatesPause'{..}
+          = go _rupRollingUpdate _rupQuotaUser
+              (Just _rupPrettyPrint)
               _rupProject
               _rupUserIp
               _rupZone
               _rupKey
               _rupOauthToken
               _rupFields
-              _rupAlt
+              (Just _rupAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesPauseAPI)
+                      (Proxy :: Proxy RollingUpdatesPauseResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves entities to a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMove_foldersUpdate@.
-module TagManager.Accounts.Containers.Move_folders.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
     (
     -- * REST Resource
-      AccountsContainersMove_foldersUpdateAPI
+      AccountsContainersMove_foldersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersMoveFoldersUpdate
-    , AccountsContainersMoveFoldersUpdate
+    , accountsContainersMove_foldersUpdate'
+    , AccountsContainersMove_foldersUpdate'
 
     -- * Request Lenses
     , acmuQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMove_foldersUpdate@ which the
--- 'AccountsContainersMoveFoldersUpdate' request conforms to.
-type AccountsContainersMove_foldersUpdateAPI =
+-- 'AccountsContainersMove_foldersUpdate'' request conforms to.
+type AccountsContainersMove_foldersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "move_folders" :>
                Capture "folderId" Text :>
-                 QueryParams "triggerId" Text :>
-                   QueryParams "variableId" Text :>
-                     QueryParams "tagId" Text :> Put '[JSON] ()
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParams "triggerId" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParams "variableId" Text :>
+                           QueryParams "tagId" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
 --
--- /See:/ 'accountsContainersMoveFoldersUpdate' smart constructor.
-data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
+-- /See:/ 'accountsContainersMove_foldersUpdate'' smart constructor.
+data AccountsContainersMove_foldersUpdate' = AccountsContainersMove_foldersUpdate'
     { _acmuQuotaUser   :: !(Maybe Text)
     , _acmuPrettyPrint :: !Bool
     , _acmuContainerId :: !Text
@@ -76,7 +84,7 @@ data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
     , _acmuKey         :: !(Maybe Text)
     , _acmuOauthToken  :: !(Maybe Text)
     , _acmuFields      :: !(Maybe Text)
-    , _acmuAlt         :: !Text
+    , _acmuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMove_foldersUpdate'' with the minimum fields required to make a request.
@@ -108,13 +116,13 @@ data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
 -- * 'acmuFields'
 --
 -- * 'acmuAlt'
-accountsContainersMoveFoldersUpdate
+accountsContainersMove_foldersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersMoveFoldersUpdate
-accountsContainersMoveFoldersUpdate pAcmuContainerId_ pAcmuFolderId_ pAcmuAccountId_ =
-    AccountsContainersMoveFoldersUpdate
+    -> AccountsContainersMove_foldersUpdate'
+accountsContainersMove_foldersUpdate' pAcmuContainerId_ pAcmuFolderId_ pAcmuAccountId_ =
+    AccountsContainersMove_foldersUpdate'
     { _acmuQuotaUser = Nothing
     , _acmuPrettyPrint = True
     , _acmuContainerId = pAcmuContainerId_
@@ -127,7 +135,7 @@ accountsContainersMoveFoldersUpdate pAcmuContainerId_ pAcmuFolderId_ pAcmuAccoun
     , _acmuKey = Nothing
     , _acmuOauthToken = Nothing
     , _acmuFields = Nothing
-    , _acmuAlt = "json"
+    , _acmuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -202,7 +210,7 @@ acmuFields
   = lens _acmuFields (\ s a -> s{_acmuFields = a})
 
 -- | Data format for the response.
-acmuAlt :: Lens' AccountsContainersMove_foldersUpdate' Text
+acmuAlt :: Lens' AccountsContainersMove_foldersUpdate' Alt
 acmuAlt = lens _acmuAlt (\ s a -> s{_acmuAlt = a})
 
 instance GoogleRequest
@@ -210,8 +218,9 @@ instance GoogleRequest
         type Rs AccountsContainersMove_foldersUpdate' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersMoveFoldersUpdate{..}
-          = go _acmuQuotaUser _acmuPrettyPrint _acmuContainerId
+          AccountsContainersMove_foldersUpdate'{..}
+          = go _acmuQuotaUser (Just _acmuPrettyPrint)
+              _acmuContainerId
               _acmuTriggerId
               _acmuUserIp
               _acmuVariableId
@@ -221,10 +230,10 @@ instance GoogleRequest
               _acmuKey
               _acmuOauthToken
               _acmuFields
-              _acmuAlt
+              (Just _acmuAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy AccountsContainersMove_foldersUpdateAPI)
+                         Proxy AccountsContainersMove_foldersUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsTestIAMPermissions@.
-module PubSub.Projects.Subscriptions.TestIAMPermissions
+module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
     (
     -- * REST Resource
-      ProjectsSubscriptionsTestIAMPermissionsAPI
+      ProjectsSubscriptionsTestIAMPermissionsResource
 
     -- * Creating a Request
-    , projectsSubscriptionsTestIAMPermissions
-    , ProjectsSubscriptionsTestIAMPermissions
+    , projectsSubscriptionsTestIAMPermissions'
+    , ProjectsSubscriptionsTestIAMPermissions'
 
     -- * Request Lenses
     , pstipXgafv
@@ -49,16 +50,30 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsTestIAMPermissions@ which the
--- 'ProjectsSubscriptionsTestIAMPermissions' request conforms to.
-type ProjectsSubscriptionsTestIAMPermissionsAPI =
+-- 'ProjectsSubscriptionsTestIAMPermissions'' request conforms to.
+type ProjectsSubscriptionsTestIAMPermissionsResource
+     =
      "v1beta2" :>
        "{+resource}:testIamPermissions" :>
-         Post '[JSON] TestIAMPermissionsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
--- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
-data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions
+-- /See:/ 'projectsSubscriptionsTestIAMPermissions'' smart constructor.
+data ProjectsSubscriptionsTestIAMPermissions' = ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv          :: !(Maybe Text)
     , _pstipQuotaUser      :: !(Maybe Text)
     , _pstipPrettyPrint    :: !Bool
@@ -106,11 +121,11 @@ data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermi
 -- * 'pstipCallback'
 --
 -- * 'pstipAlt'
-projectsSubscriptionsTestIAMPermissions
+projectsSubscriptionsTestIAMPermissions'
     :: Text -- ^ 'resource'
-    -> ProjectsSubscriptionsTestIAMPermissions
-projectsSubscriptionsTestIAMPermissions pPstipResource_ =
-    ProjectsSubscriptionsTestIAMPermissions
+    -> ProjectsSubscriptionsTestIAMPermissions'
+projectsSubscriptionsTestIAMPermissions' pPstipResource_ =
+    ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipQuotaUser = Nothing
     , _pstipPrettyPrint = True
@@ -214,10 +229,11 @@ instance GoogleRequest
              TestIAMPermissionsResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsTestIAMPermissions{..}
-          = go _pstipXgafv _pstipQuotaUser _pstipPrettyPrint
+          ProjectsSubscriptionsTestIAMPermissions'{..}
+          = go _pstipXgafv _pstipQuotaUser
+              (Just _pstipPrettyPrint)
               _pstipUploadProtocol
-              _pstipPp
+              (Just _pstipPp)
               _pstipAccessToken
               _pstipUploadType
               _pstipBearerToken
@@ -226,10 +242,11 @@ instance GoogleRequest
               _pstipOauthToken
               _pstipFields
               _pstipCallback
-              _pstipAlt
+              (Just _pstipAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ProjectsSubscriptionsTestIAMPermissionsAPI)
+                         Proxy
+                           ProjectsSubscriptionsTestIAMPermissionsResource)
                       r
                       u

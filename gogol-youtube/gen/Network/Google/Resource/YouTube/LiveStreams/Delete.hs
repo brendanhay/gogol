@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a video stream.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsDelete@.
-module YouTube.LiveStreams.Delete
+module Network.Google.Resource.YouTube.LiveStreams.Delete
     (
     -- * REST Resource
-      LiveStreamsDeleteAPI
+      LiveStreamsDeleteResource
 
     -- * Creating a Request
-    , liveStreamsDelete
-    , LiveStreamsDelete
+    , liveStreamsDelete'
+    , LiveStreamsDelete'
 
     -- * Request Lenses
     , lsdQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveStreamsDelete@ which the
--- 'LiveStreamsDelete' request conforms to.
-type LiveStreamsDeleteAPI =
+-- 'LiveStreamsDelete'' request conforms to.
+type LiveStreamsDeleteResource =
      "liveStreams" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "onBehalfOfContentOwnerChannel" Text :>
-           QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a video stream.
 --
--- /See:/ 'liveStreamsDelete' smart constructor.
-data LiveStreamsDelete = LiveStreamsDelete
+-- /See:/ 'liveStreamsDelete'' smart constructor.
+data LiveStreamsDelete' = LiveStreamsDelete'
     { _lsdQuotaUser                     :: !(Maybe Text)
     , _lsdPrettyPrint                   :: !Bool
     , _lsdUserIp                        :: !(Maybe Text)
@@ -65,7 +73,7 @@ data LiveStreamsDelete = LiveStreamsDelete
     , _lsdId                            :: !Text
     , _lsdOauthToken                    :: !(Maybe Text)
     , _lsdFields                        :: !(Maybe Text)
-    , _lsdAlt                           :: !Text
+    , _lsdAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsDelete'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data LiveStreamsDelete = LiveStreamsDelete
 -- * 'lsdFields'
 --
 -- * 'lsdAlt'
-liveStreamsDelete
+liveStreamsDelete'
     :: Text -- ^ 'id'
-    -> LiveStreamsDelete
-liveStreamsDelete pLsdId_ =
-    LiveStreamsDelete
+    -> LiveStreamsDelete'
+liveStreamsDelete' pLsdId_ =
+    LiveStreamsDelete'
     { _lsdQuotaUser = Nothing
     , _lsdPrettyPrint = True
     , _lsdUserIp = Nothing
@@ -105,7 +113,7 @@ liveStreamsDelete pLsdId_ =
     , _lsdId = pLsdId_
     , _lsdOauthToken = Nothing
     , _lsdFields = Nothing
-    , _lsdAlt = "json"
+    , _lsdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,23 +194,23 @@ lsdFields
   = lens _lsdFields (\ s a -> s{_lsdFields = a})
 
 -- | Data format for the response.
-lsdAlt :: Lens' LiveStreamsDelete' Text
+lsdAlt :: Lens' LiveStreamsDelete' Alt
 lsdAlt = lens _lsdAlt (\ s a -> s{_lsdAlt = a})
 
 instance GoogleRequest LiveStreamsDelete' where
         type Rs LiveStreamsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveStreamsDelete{..}
-          = go _lsdQuotaUser _lsdPrettyPrint _lsdUserIp
+        requestWithRoute r u LiveStreamsDelete'{..}
+          = go _lsdQuotaUser (Just _lsdPrettyPrint) _lsdUserIp
               _lsdOnBehalfOfContentOwner
               _lsdKey
               _lsdOnBehalfOfContentOwnerChannel
               (Just _lsdId)
               _lsdOauthToken
               _lsdFields
-              _lsdAlt
+              (Just _lsdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveStreamsDeleteAPI)
+                      (Proxy :: Proxy LiveStreamsDeleteResource)
                       r
                       u

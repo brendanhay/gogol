@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates app details for this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsDetailsUpdate@.
-module Androidpublisher.Edits.Details.Update
+module Network.Google.Resource.Androidpublisher.Edits.Details.Update
     (
     -- * REST Resource
-      EditsDetailsUpdateAPI
+      EditsDetailsUpdateResource
 
     -- * Creating a Request
-    , editsDetailsUpdate
-    , EditsDetailsUpdate
+    , editsDetailsUpdate'
+    , EditsDetailsUpdate'
 
     -- * Request Lenses
     , eduQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsDetailsUpdate@ which the
--- 'EditsDetailsUpdate' request conforms to.
-type EditsDetailsUpdateAPI =
+-- 'EditsDetailsUpdate'' request conforms to.
+type EditsDetailsUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "details" :> Put '[JSON] AppDetails
+           "details" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] AppDetails
 
 -- | Updates app details for this edit.
 --
--- /See:/ 'editsDetailsUpdate' smart constructor.
-data EditsDetailsUpdate = EditsDetailsUpdate
+-- /See:/ 'editsDetailsUpdate'' smart constructor.
+data EditsDetailsUpdate' = EditsDetailsUpdate'
     { _eduQuotaUser   :: !(Maybe Text)
     , _eduPrettyPrint :: !Bool
     , _eduPackageName :: !Text
@@ -63,7 +71,7 @@ data EditsDetailsUpdate = EditsDetailsUpdate
     , _eduOauthToken  :: !(Maybe Text)
     , _eduEditId      :: !Text
     , _eduFields      :: !(Maybe Text)
-    , _eduAlt         :: !Text
+    , _eduAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDetailsUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data EditsDetailsUpdate = EditsDetailsUpdate
 -- * 'eduFields'
 --
 -- * 'eduAlt'
-editsDetailsUpdate
+editsDetailsUpdate'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsDetailsUpdate
-editsDetailsUpdate pEduPackageName_ pEduEditId_ =
-    EditsDetailsUpdate
+    -> EditsDetailsUpdate'
+editsDetailsUpdate' pEduPackageName_ pEduEditId_ =
+    EditsDetailsUpdate'
     { _eduQuotaUser = Nothing
     , _eduPrettyPrint = True
     , _eduPackageName = pEduPackageName_
@@ -101,7 +109,7 @@ editsDetailsUpdate pEduPackageName_ pEduEditId_ =
     , _eduOauthToken = Nothing
     , _eduEditId = pEduEditId_
     , _eduFields = Nothing
-    , _eduAlt = "json"
+    , _eduAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,23 @@ eduFields
   = lens _eduFields (\ s a -> s{_eduFields = a})
 
 -- | Data format for the response.
-eduAlt :: Lens' EditsDetailsUpdate' Text
+eduAlt :: Lens' EditsDetailsUpdate' Alt
 eduAlt = lens _eduAlt (\ s a -> s{_eduAlt = a})
 
 instance GoogleRequest EditsDetailsUpdate' where
         type Rs EditsDetailsUpdate' = AppDetails
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsDetailsUpdate{..}
-          = go _eduQuotaUser _eduPrettyPrint _eduPackageName
+        requestWithRoute r u EditsDetailsUpdate'{..}
+          = go _eduQuotaUser (Just _eduPrettyPrint)
+              _eduPackageName
               _eduUserIp
               _eduKey
               _eduOauthToken
               _eduEditId
               _eduFields
-              _eduAlt
+              (Just _eduAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsDetailsUpdateAPI)
+                      (Proxy :: Proxy EditsDetailsUpdateResource)
                       r
                       u

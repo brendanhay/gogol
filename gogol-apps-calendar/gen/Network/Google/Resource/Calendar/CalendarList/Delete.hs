@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an entry on the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListDelete@.
-module Calendar.CalendarList.Delete
+module Network.Google.Resource.Calendar.CalendarList.Delete
     (
     -- * REST Resource
-      CalendarListDeleteAPI
+      CalendarListDeleteResource
 
     -- * Creating a Request
-    , calendarListDelete
-    , CalendarListDelete
+    , calendarListDelete'
+    , CalendarListDelete'
 
     -- * Request Lenses
     , cldQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListDelete@ which the
--- 'CalendarListDelete' request conforms to.
-type CalendarListDeleteAPI =
+-- 'CalendarListDelete'' request conforms to.
+type CalendarListDeleteResource =
      "users" :>
        "me" :>
          "calendarList" :>
-           Capture "calendarId" Text :> Delete '[JSON] ()
+           Capture "calendarId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an entry on the user\'s calendar list.
 --
--- /See:/ 'calendarListDelete' smart constructor.
-data CalendarListDelete = CalendarListDelete
+-- /See:/ 'calendarListDelete'' smart constructor.
+data CalendarListDelete' = CalendarListDelete'
     { _cldQuotaUser   :: !(Maybe Text)
     , _cldCalendarId  :: !Text
     , _cldPrettyPrint :: !Bool
@@ -61,7 +69,7 @@ data CalendarListDelete = CalendarListDelete
     , _cldKey         :: !(Maybe Text)
     , _cldOauthToken  :: !(Maybe Text)
     , _cldFields      :: !(Maybe Text)
-    , _cldAlt         :: !Text
+    , _cldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CalendarListDelete = CalendarListDelete
 -- * 'cldFields'
 --
 -- * 'cldAlt'
-calendarListDelete
+calendarListDelete'
     :: Text -- ^ 'calendarId'
-    -> CalendarListDelete
-calendarListDelete pCldCalendarId_ =
-    CalendarListDelete
+    -> CalendarListDelete'
+calendarListDelete' pCldCalendarId_ =
+    CalendarListDelete'
     { _cldQuotaUser = Nothing
     , _cldCalendarId = pCldCalendarId_
     , _cldPrettyPrint = True
@@ -95,7 +103,7 @@ calendarListDelete pCldCalendarId_ =
     , _cldKey = Nothing
     , _cldOauthToken = Nothing
     , _cldFields = Nothing
-    , _cldAlt = "json"
+    , _cldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,21 +151,22 @@ cldFields
   = lens _cldFields (\ s a -> s{_cldFields = a})
 
 -- | Data format for the response.
-cldAlt :: Lens' CalendarListDelete' Text
+cldAlt :: Lens' CalendarListDelete' Alt
 cldAlt = lens _cldAlt (\ s a -> s{_cldAlt = a})
 
 instance GoogleRequest CalendarListDelete' where
         type Rs CalendarListDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListDelete{..}
-          = go _cldQuotaUser _cldCalendarId _cldPrettyPrint
+        requestWithRoute r u CalendarListDelete'{..}
+          = go _cldQuotaUser _cldCalendarId
+              (Just _cldPrettyPrint)
               _cldUserIp
               _cldKey
               _cldOauthToken
               _cldFields
-              _cldAlt
+              (Just _cldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListDeleteAPI)
+                      (Proxy :: Proxy CalendarListDeleteResource)
                       r
                       u

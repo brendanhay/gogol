@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,189 +21,196 @@
 -- language code.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsApklistingsDelete@.
-module Androidpublisher.Edits.Apklistings.Delete
+module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Delete
     (
     -- * REST Resource
-      EditsApklistingsDeleteAPI
+      EditsApklistingsDeleteResource
 
     -- * Creating a Request
-    , editsApklistingsDelete
-    , EditsApklistingsDelete
+    , editsApklistingsDelete'
+    , EditsApklistingsDelete'
 
     -- * Request Lenses
-    , eadaQuotaUser
-    , eadaPrettyPrint
-    , eadaPackageName
-    , eadaApkVersionCode
-    , eadaUserIp
-    , eadaKey
-    , eadaLanguage
-    , eadaOauthToken
-    , eadaEditId
-    , eadaFields
-    , eadaAlt
+    , eadQuotaUser
+    , eadPrettyPrint
+    , eadPackageName
+    , eadApkVersionCode
+    , eadUserIp
+    , eadKey
+    , eadLanguage
+    , eadOauthToken
+    , eadEditId
+    , eadFields
+    , eadAlt
     ) where
 
 import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsApklistingsDelete@ which the
--- 'EditsApklistingsDelete' request conforms to.
-type EditsApklistingsDeleteAPI =
+-- 'EditsApklistingsDelete'' request conforms to.
+type EditsApklistingsDeleteResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "listings" :>
-                 Capture "language" Text :> Delete '[JSON] ()
+                 Capture "language" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the APK-specific localized listing for a specified APK and
 -- language code.
 --
--- /See:/ 'editsApklistingsDelete' smart constructor.
-data EditsApklistingsDelete = EditsApklistingsDelete
-    { _eadaQuotaUser      :: !(Maybe Text)
-    , _eadaPrettyPrint    :: !Bool
-    , _eadaPackageName    :: !Text
-    , _eadaApkVersionCode :: !Int32
-    , _eadaUserIp         :: !(Maybe Text)
-    , _eadaKey            :: !(Maybe Text)
-    , _eadaLanguage       :: !Text
-    , _eadaOauthToken     :: !(Maybe Text)
-    , _eadaEditId         :: !Text
-    , _eadaFields         :: !(Maybe Text)
-    , _eadaAlt            :: !Text
+-- /See:/ 'editsApklistingsDelete'' smart constructor.
+data EditsApklistingsDelete' = EditsApklistingsDelete'
+    { _eadQuotaUser      :: !(Maybe Text)
+    , _eadPrettyPrint    :: !Bool
+    , _eadPackageName    :: !Text
+    , _eadApkVersionCode :: !Int32
+    , _eadUserIp         :: !(Maybe Text)
+    , _eadKey            :: !(Maybe Text)
+    , _eadLanguage       :: !Text
+    , _eadOauthToken     :: !(Maybe Text)
+    , _eadEditId         :: !Text
+    , _eadFields         :: !(Maybe Text)
+    , _eadAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsApklistingsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eadaQuotaUser'
+-- * 'eadQuotaUser'
 --
--- * 'eadaPrettyPrint'
+-- * 'eadPrettyPrint'
 --
--- * 'eadaPackageName'
+-- * 'eadPackageName'
 --
--- * 'eadaApkVersionCode'
+-- * 'eadApkVersionCode'
 --
--- * 'eadaUserIp'
+-- * 'eadUserIp'
 --
--- * 'eadaKey'
+-- * 'eadKey'
 --
--- * 'eadaLanguage'
+-- * 'eadLanguage'
 --
--- * 'eadaOauthToken'
+-- * 'eadOauthToken'
 --
--- * 'eadaEditId'
+-- * 'eadEditId'
 --
--- * 'eadaFields'
+-- * 'eadFields'
 --
--- * 'eadaAlt'
-editsApklistingsDelete
+-- * 'eadAlt'
+editsApklistingsDelete'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsApklistingsDelete
-editsApklistingsDelete pEadaPackageName_ pEadaApkVersionCode_ pEadaLanguage_ pEadaEditId_ =
-    EditsApklistingsDelete
-    { _eadaQuotaUser = Nothing
-    , _eadaPrettyPrint = True
-    , _eadaPackageName = pEadaPackageName_
-    , _eadaApkVersionCode = pEadaApkVersionCode_
-    , _eadaUserIp = Nothing
-    , _eadaKey = Nothing
-    , _eadaLanguage = pEadaLanguage_
-    , _eadaOauthToken = Nothing
-    , _eadaEditId = pEadaEditId_
-    , _eadaFields = Nothing
-    , _eadaAlt = "json"
+    -> EditsApklistingsDelete'
+editsApklistingsDelete' pEadPackageName_ pEadApkVersionCode_ pEadLanguage_ pEadEditId_ =
+    EditsApklistingsDelete'
+    { _eadQuotaUser = Nothing
+    , _eadPrettyPrint = True
+    , _eadPackageName = pEadPackageName_
+    , _eadApkVersionCode = pEadApkVersionCode_
+    , _eadUserIp = Nothing
+    , _eadKey = Nothing
+    , _eadLanguage = pEadLanguage_
+    , _eadOauthToken = Nothing
+    , _eadEditId = pEadEditId_
+    , _eadFields = Nothing
+    , _eadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eadaQuotaUser :: Lens' EditsApklistingsDelete' (Maybe Text)
-eadaQuotaUser
-  = lens _eadaQuotaUser
-      (\ s a -> s{_eadaQuotaUser = a})
+eadQuotaUser :: Lens' EditsApklistingsDelete' (Maybe Text)
+eadQuotaUser
+  = lens _eadQuotaUser (\ s a -> s{_eadQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-eadaPrettyPrint :: Lens' EditsApklistingsDelete' Bool
-eadaPrettyPrint
-  = lens _eadaPrettyPrint
-      (\ s a -> s{_eadaPrettyPrint = a})
+eadPrettyPrint :: Lens' EditsApklistingsDelete' Bool
+eadPrettyPrint
+  = lens _eadPrettyPrint
+      (\ s a -> s{_eadPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eadaPackageName :: Lens' EditsApklistingsDelete' Text
-eadaPackageName
-  = lens _eadaPackageName
-      (\ s a -> s{_eadaPackageName = a})
+eadPackageName :: Lens' EditsApklistingsDelete' Text
+eadPackageName
+  = lens _eadPackageName
+      (\ s a -> s{_eadPackageName = a})
 
 -- | The APK version code whose APK-specific listings should be read or
 -- modified.
-eadaApkVersionCode :: Lens' EditsApklistingsDelete' Int32
-eadaApkVersionCode
-  = lens _eadaApkVersionCode
-      (\ s a -> s{_eadaApkVersionCode = a})
+eadApkVersionCode :: Lens' EditsApklistingsDelete' Int32
+eadApkVersionCode
+  = lens _eadApkVersionCode
+      (\ s a -> s{_eadApkVersionCode = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eadaUserIp :: Lens' EditsApklistingsDelete' (Maybe Text)
-eadaUserIp
-  = lens _eadaUserIp (\ s a -> s{_eadaUserIp = a})
+eadUserIp :: Lens' EditsApklistingsDelete' (Maybe Text)
+eadUserIp
+  = lens _eadUserIp (\ s a -> s{_eadUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eadaKey :: Lens' EditsApklistingsDelete' (Maybe Text)
-eadaKey = lens _eadaKey (\ s a -> s{_eadaKey = a})
+eadKey :: Lens' EditsApklistingsDelete' (Maybe Text)
+eadKey = lens _eadKey (\ s a -> s{_eadKey = a})
 
 -- | The language code (a BCP-47 language tag) of the APK-specific localized
 -- listing to read or modify. For example, to select Austrian German, pass
 -- \"de-AT\".
-eadaLanguage :: Lens' EditsApklistingsDelete' Text
-eadaLanguage
-  = lens _eadaLanguage (\ s a -> s{_eadaLanguage = a})
+eadLanguage :: Lens' EditsApklistingsDelete' Text
+eadLanguage
+  = lens _eadLanguage (\ s a -> s{_eadLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-eadaOauthToken :: Lens' EditsApklistingsDelete' (Maybe Text)
-eadaOauthToken
-  = lens _eadaOauthToken
-      (\ s a -> s{_eadaOauthToken = a})
+eadOauthToken :: Lens' EditsApklistingsDelete' (Maybe Text)
+eadOauthToken
+  = lens _eadOauthToken
+      (\ s a -> s{_eadOauthToken = a})
 
 -- | Unique identifier for this edit.
-eadaEditId :: Lens' EditsApklistingsDelete' Text
-eadaEditId
-  = lens _eadaEditId (\ s a -> s{_eadaEditId = a})
+eadEditId :: Lens' EditsApklistingsDelete' Text
+eadEditId
+  = lens _eadEditId (\ s a -> s{_eadEditId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eadaFields :: Lens' EditsApklistingsDelete' (Maybe Text)
-eadaFields
-  = lens _eadaFields (\ s a -> s{_eadaFields = a})
+eadFields :: Lens' EditsApklistingsDelete' (Maybe Text)
+eadFields
+  = lens _eadFields (\ s a -> s{_eadFields = a})
 
 -- | Data format for the response.
-eadaAlt :: Lens' EditsApklistingsDelete' Text
-eadaAlt = lens _eadaAlt (\ s a -> s{_eadaAlt = a})
+eadAlt :: Lens' EditsApklistingsDelete' Alt
+eadAlt = lens _eadAlt (\ s a -> s{_eadAlt = a})
 
 instance GoogleRequest EditsApklistingsDelete' where
         type Rs EditsApklistingsDelete' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsApklistingsDelete{..}
-          = go _eadaQuotaUser _eadaPrettyPrint _eadaPackageName
-              _eadaApkVersionCode
-              _eadaUserIp
-              _eadaKey
-              _eadaLanguage
-              _eadaOauthToken
-              _eadaEditId
-              _eadaFields
-              _eadaAlt
+        requestWithRoute r u EditsApklistingsDelete'{..}
+          = go _eadQuotaUser (Just _eadPrettyPrint)
+              _eadPackageName
+              _eadApkVersionCode
+              _eadUserIp
+              _eadKey
+              _eadLanguage
+              _eadOauthToken
+              _eadEditId
+              _eadFields
+              (Just _eadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApklistingsDeleteAPI)
+                      (Proxy :: Proxy EditsApklistingsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a style.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleDelete@.
-module FusionTables.Style.Delete
+module Network.Google.Resource.FusionTables.Style.Delete
     (
     -- * REST Resource
-      StyleDeleteAPI
+      StyleDeleteResource
 
     -- * Creating a Request
-    , styleDelete
-    , StyleDelete
+    , styleDelete'
+    , StyleDelete'
 
     -- * Request Lenses
     , sdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleDelete@ which the
--- 'StyleDelete' request conforms to.
-type StyleDeleteAPI =
+-- 'StyleDelete'' request conforms to.
+type StyleDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           Capture "styleId" Int32 :> Delete '[JSON] ()
+           Capture "styleId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a style.
 --
--- /See:/ 'styleDelete' smart constructor.
-data StyleDelete = StyleDelete
+-- /See:/ 'styleDelete'' smart constructor.
+data StyleDelete' = StyleDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data StyleDelete = StyleDelete
     , _sdOauthToken  :: !(Maybe Text)
     , _sdTableId     :: !Text
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data StyleDelete = StyleDelete
 -- * 'sdFields'
 --
 -- * 'sdAlt'
-styleDelete
+styleDelete'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
-    -> StyleDelete
-styleDelete pSdStyleId_ pSdTableId_ =
-    StyleDelete
+    -> StyleDelete'
+styleDelete' pSdStyleId_ pSdTableId_ =
+    StyleDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
     , _sdUserIp = Nothing
@@ -101,7 +109,7 @@ styleDelete pSdStyleId_ pSdTableId_ =
     , _sdOauthToken = Nothing
     , _sdTableId = pSdTableId_
     , _sdFields = Nothing
-    , _sdAlt = "json"
+    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,22 @@ sdFields :: Lens' StyleDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' StyleDelete' Text
+sdAlt :: Lens' StyleDelete' Alt
 sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleDelete{..}
-          = go _sdQuotaUser _sdPrettyPrint _sdUserIp _sdKey
+        requestWithRoute r u StyleDelete'{..}
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+              _sdKey
               _sdStyleId
               _sdOauthToken
               _sdTableId
               _sdFields
-              _sdAlt
+              (Just _sdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy StyleDeleteResource)
+                      r
+                      u

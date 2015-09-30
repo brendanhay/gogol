@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsPatch@.
-module AdSenseHost.Accounts.Adunits.Patch
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Patch
     (
     -- * REST Resource
-      AccountsAdunitsPatchAPI
+      AccountsAdunitsPatchResource
 
     -- * Creating a Request
-    , accountsAdunitsPatch
-    , AccountsAdunitsPatch
+    , accountsAdunitsPatch'
+    , AccountsAdunitsPatch'
 
     -- * Request Lenses
     , aapQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsPatch@ which the
--- 'AccountsAdunitsPatch' request conforms to.
-type AccountsAdunitsPatchAPI =
+-- 'AccountsAdunitsPatch'' request conforms to.
+type AccountsAdunitsPatchResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               QueryParam "adUnitId" Text :> Patch '[JSON] AdUnit
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "adUnitId" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 -- This method supports patch semantics.
 --
--- /See:/ 'accountsAdunitsPatch' smart constructor.
-data AccountsAdunitsPatch = AccountsAdunitsPatch
+-- /See:/ 'accountsAdunitsPatch'' smart constructor.
+data AccountsAdunitsPatch' = AccountsAdunitsPatch'
     { _aapQuotaUser   :: !(Maybe Text)
     , _aapPrettyPrint :: !Bool
     , _aapUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data AccountsAdunitsPatch = AccountsAdunitsPatch
     , _aapKey         :: !(Maybe Text)
     , _aapOauthToken  :: !(Maybe Text)
     , _aapFields      :: !(Maybe Text)
-    , _aapAlt         :: !Text
+    , _aapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsPatch'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data AccountsAdunitsPatch = AccountsAdunitsPatch
 -- * 'aapFields'
 --
 -- * 'aapAlt'
-accountsAdunitsPatch
+accountsAdunitsPatch'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsPatch
-accountsAdunitsPatch pAapAdUnitId_ pAapAdClientId_ pAapAccountId_ =
-    AccountsAdunitsPatch
+    -> AccountsAdunitsPatch'
+accountsAdunitsPatch' pAapAdUnitId_ pAapAdClientId_ pAapAccountId_ =
+    AccountsAdunitsPatch'
     { _aapQuotaUser = Nothing
     , _aapPrettyPrint = True
     , _aapUserIp = Nothing
@@ -111,7 +119,7 @@ accountsAdunitsPatch pAapAdUnitId_ pAapAdClientId_ pAapAccountId_ =
     , _aapKey = Nothing
     , _aapOauthToken = Nothing
     , _aapFields = Nothing
-    , _aapAlt = "json"
+    , _aapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,23 @@ aapFields
   = lens _aapFields (\ s a -> s{_aapFields = a})
 
 -- | Data format for the response.
-aapAlt :: Lens' AccountsAdunitsPatch' Text
+aapAlt :: Lens' AccountsAdunitsPatch' Alt
 aapAlt = lens _aapAlt (\ s a -> s{_aapAlt = a})
 
 instance GoogleRequest AccountsAdunitsPatch' where
         type Rs AccountsAdunitsPatch' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsPatch{..}
-          = go _aapQuotaUser _aapPrettyPrint _aapUserIp
+        requestWithRoute r u AccountsAdunitsPatch'{..}
+          = go _aapQuotaUser (Just _aapPrettyPrint) _aapUserIp
               (Just _aapAdUnitId)
               _aapAdClientId
               _aapAccountId
               _aapKey
               _aapOauthToken
               _aapFields
-              _aapAlt
+              (Just _aapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsPatchAPI)
+                      (Proxy :: Proxy AccountsAdunitsPatchResource)
                       r
                       u

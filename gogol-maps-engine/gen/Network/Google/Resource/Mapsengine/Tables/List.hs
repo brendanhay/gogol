@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all tables readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesList@.
-module Mapsengine.Tables.List
+module Network.Google.Resource.Mapsengine.Tables.List
     (
     -- * REST Resource
-      TablesListAPI
+      TablesListResource
 
     -- * Creating a Request
-    , tablesList
-    , TablesList
+    , tablesList'
+    , TablesList'
 
     -- * Request Lenses
     , tlCreatedAfter
@@ -55,37 +56,46 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesList@ which the
--- 'TablesList' request conforms to.
-type TablesListAPI =
+-- 'TablesList'' request conforms to.
+type TablesListResource =
      "tables" :>
        QueryParam "createdAfter" UTCTime :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" Text :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus" Text :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" UTCTime :>
-                                 Get '[JSON] TablesListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "creatorEmail" Text :>
+                 QueryParam "role" MapsengineTablesListRole :>
+                   QueryParam "key" Text :>
+                     QueryParam "bbox" Text :>
+                       QueryParam "processingStatus"
+                         MapsengineTablesListProcessingStatus
+                         :>
+                         QueryParam "modifiedAfter" UTCTime :>
+                           QueryParam "modifiedBefore" UTCTime :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "projectId" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "search" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "tags" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "createdBefore" UTCTime :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON] TablesListResponse
 
 -- | Return all tables readable by the current user.
 --
--- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList
+-- /See:/ 'tablesList'' smart constructor.
+data TablesList' = TablesList'
     { _tlCreatedAfter     :: !(Maybe UTCTime)
     , _tlQuotaUser        :: !(Maybe Text)
     , _tlPrettyPrint      :: !Bool
     , _tlUserIp           :: !(Maybe Text)
     , _tlCreatorEmail     :: !(Maybe Text)
-    , _tlRole             :: !(Maybe Text)
+    , _tlRole             :: !(Maybe MapsengineTablesListRole)
     , _tlKey              :: !(Maybe Text)
     , _tlBbox             :: !(Maybe Text)
-    , _tlProcessingStatus :: !(Maybe Text)
+    , _tlProcessingStatus :: !(Maybe MapsengineTablesListProcessingStatus)
     , _tlModifiedAfter    :: !(Maybe UTCTime)
     , _tlModifiedBefore   :: !(Maybe UTCTime)
     , _tlPageToken        :: !(Maybe Text)
@@ -96,7 +106,7 @@ data TablesList = TablesList
     , _tlTags             :: !(Maybe Text)
     , _tlFields           :: !(Maybe Text)
     , _tlCreatedBefore    :: !(Maybe UTCTime)
-    , _tlAlt              :: !Text
+    , _tlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
@@ -142,10 +152,10 @@ data TablesList = TablesList
 -- * 'tlCreatedBefore'
 --
 -- * 'tlAlt'
-tablesList
-    :: TablesList
-tablesList =
-    TablesList
+tablesList'
+    :: TablesList'
+tablesList' =
+    TablesList'
     { _tlCreatedAfter = Nothing
     , _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
@@ -165,7 +175,7 @@ tablesList =
     , _tlTags = Nothing
     , _tlFields = Nothing
     , _tlCreatedBefore = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
@@ -202,7 +212,7 @@ tlCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-tlRole :: Lens' TablesList' (Maybe Text)
+tlRole :: Lens' TablesList' (Maybe MapsengineTablesListRole)
 tlRole = lens _tlRole (\ s a -> s{_tlRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -216,7 +226,7 @@ tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 tlBbox :: Lens' TablesList' (Maybe Text)
 tlBbox = lens _tlBbox (\ s a -> s{_tlBbox = a})
 
-tlProcessingStatus :: Lens' TablesList' (Maybe Text)
+tlProcessingStatus :: Lens' TablesList' (Maybe MapsengineTablesListProcessingStatus)
 tlProcessingStatus
   = lens _tlProcessingStatus
       (\ s a -> s{_tlProcessingStatus = a})
@@ -283,14 +293,15 @@ tlCreatedBefore
       (\ s a -> s{_tlCreatedBefore = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TablesList' Text
+tlAlt :: Lens' TablesList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TablesListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesList{..}
-          = go _tlCreatedAfter _tlQuotaUser _tlPrettyPrint
+        requestWithRoute r u TablesList'{..}
+          = go _tlCreatedAfter _tlQuotaUser
+              (Just _tlPrettyPrint)
               _tlUserIp
               _tlCreatorEmail
               _tlRole
@@ -307,6 +318,8 @@ instance GoogleRequest TablesList' where
               _tlTags
               _tlFields
               _tlCreatedBefore
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TablesListResource)
+                      r
+                      u

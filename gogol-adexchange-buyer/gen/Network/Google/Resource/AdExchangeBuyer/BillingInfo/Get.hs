@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the billing information for one account specified by account ID.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBillingInfoGet@.
-module AdExchangeBuyer.BillingInfo.Get
+module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
     (
     -- * REST Resource
-      BillingInfoGetAPI
+      BillingInfoGetResource
 
     -- * Creating a Request
-    , billingInfoGet
-    , BillingInfoGet
+    , billingInfoGet'
+    , BillingInfoGet'
 
     -- * Request Lenses
     , bigQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBillingInfoGet@ which the
--- 'BillingInfoGet' request conforms to.
-type BillingInfoGetAPI =
+-- 'BillingInfoGet'' request conforms to.
+type BillingInfoGetResource =
      "billinginfo" :>
-       Capture "accountId" Int32 :> Get '[JSON] BillingInfo
+       Capture "accountId" Int32 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] BillingInfo
 
 -- | Returns the billing information for one account specified by account ID.
 --
--- /See:/ 'billingInfoGet' smart constructor.
-data BillingInfoGet = BillingInfoGet
+-- /See:/ 'billingInfoGet'' smart constructor.
+data BillingInfoGet' = BillingInfoGet'
     { _bigQuotaUser   :: !(Maybe Text)
     , _bigPrettyPrint :: !Bool
     , _bigUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data BillingInfoGet = BillingInfoGet
     , _bigKey         :: !(Maybe Text)
     , _bigOauthToken  :: !(Maybe Text)
     , _bigFields      :: !(Maybe Text)
-    , _bigAlt         :: !Text
+    , _bigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data BillingInfoGet = BillingInfoGet
 -- * 'bigFields'
 --
 -- * 'bigAlt'
-billingInfoGet
+billingInfoGet'
     :: Int32 -- ^ 'accountId'
-    -> BillingInfoGet
-billingInfoGet pBigAccountId_ =
-    BillingInfoGet
+    -> BillingInfoGet'
+billingInfoGet' pBigAccountId_ =
+    BillingInfoGet'
     { _bigQuotaUser = Nothing
     , _bigPrettyPrint = True
     , _bigUserIp = Nothing
@@ -93,7 +101,7 @@ billingInfoGet pBigAccountId_ =
     , _bigKey = Nothing
     , _bigOauthToken = Nothing
     , _bigFields = Nothing
-    , _bigAlt = "json"
+    , _bigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ bigFields
   = lens _bigFields (\ s a -> s{_bigFields = a})
 
 -- | Data format for the response.
-bigAlt :: Lens' BillingInfoGet' Text
+bigAlt :: Lens' BillingInfoGet' Alt
 bigAlt = lens _bigAlt (\ s a -> s{_bigAlt = a})
 
 instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BillingInfoGet{..}
-          = go _bigQuotaUser _bigPrettyPrint _bigUserIp
+        requestWithRoute r u BillingInfoGet'{..}
+          = go _bigQuotaUser (Just _bigPrettyPrint) _bigUserIp
               _bigAccountId
               _bigKey
               _bigOauthToken
               _bigFields
-              _bigAlt
+              (Just _bigAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BillingInfoGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BillingInfoGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of all operations grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsAggregatedList@.
-module Compute.GlobalOperations.AggregatedList
+module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
     (
     -- * REST Resource
-      GlobalOperationsAggregatedListAPI
+      GlobalOperationsAggregatedListResource
 
     -- * Creating a Request
-    , globalOperationsAggregatedList
-    , GlobalOperationsAggregatedList
+    , globalOperationsAggregatedList'
+    , GlobalOperationsAggregatedList'
 
     -- * Request Lenses
     , goalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalOperationsAggregatedList@ which the
--- 'GlobalOperationsAggregatedList' request conforms to.
-type GlobalOperationsAggregatedListAPI =
+-- 'GlobalOperationsAggregatedList'' request conforms to.
+type GlobalOperationsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] OperationAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] OperationAggregatedList
 
 -- | Retrieves the list of all operations grouped by scope.
 --
--- /See:/ 'globalOperationsAggregatedList' smart constructor.
-data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
+-- /See:/ 'globalOperationsAggregatedList'' smart constructor.
+data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
     { _goalQuotaUser   :: !(Maybe Text)
     , _goalPrettyPrint :: !Bool
     , _goalProject     :: !Text
@@ -70,7 +78,7 @@ data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
     , _goalOauthToken  :: !(Maybe Text)
     , _goalMaxResults  :: !Word32
     , _goalFields      :: !(Maybe Text)
-    , _goalAlt         :: !Text
+    , _goalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
 -- * 'goalFields'
 --
 -- * 'goalAlt'
-globalOperationsAggregatedList
+globalOperationsAggregatedList'
     :: Text -- ^ 'project'
-    -> GlobalOperationsAggregatedList
-globalOperationsAggregatedList pGoalProject_ =
-    GlobalOperationsAggregatedList
+    -> GlobalOperationsAggregatedList'
+globalOperationsAggregatedList' pGoalProject_ =
+    GlobalOperationsAggregatedList'
     { _goalQuotaUser = Nothing
     , _goalPrettyPrint = True
     , _goalProject = pGoalProject_
@@ -113,7 +121,7 @@ globalOperationsAggregatedList pGoalProject_ =
     , _goalOauthToken = Nothing
     , _goalMaxResults = 500
     , _goalFields = Nothing
-    , _goalAlt = "json"
+    , _goalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ goalFields
   = lens _goalFields (\ s a -> s{_goalFields = a})
 
 -- | Data format for the response.
-goalAlt :: Lens' GlobalOperationsAggregatedList' Text
+goalAlt :: Lens' GlobalOperationsAggregatedList' Alt
 goalAlt = lens _goalAlt (\ s a -> s{_goalAlt = a})
 
 instance GoogleRequest
@@ -197,8 +205,9 @@ instance GoogleRequest
              OperationAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          GlobalOperationsAggregatedList{..}
-          = go _goalQuotaUser _goalPrettyPrint _goalProject
+          GlobalOperationsAggregatedList'{..}
+          = go _goalQuotaUser (Just _goalPrettyPrint)
+              _goalProject
               _goalUserIp
               _goalKey
               _goalFilter
@@ -206,9 +215,10 @@ instance GoogleRequest
               _goalOauthToken
               (Just _goalMaxResults)
               _goalFields
-              _goalAlt
+              (Just _goalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalOperationsAggregatedListAPI)
+                      (Proxy ::
+                         Proxy GlobalOperationsAggregatedListResource)
                       r
                       u

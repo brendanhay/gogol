@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- for the specified project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsTestIAMPermissions@.
-module Cloudresourcemanager.Projects.TestIAMPermissions
+module Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
     (
     -- * REST Resource
-      ProjectsTestIAMPermissionsAPI
+      ProjectsTestIAMPermissionsResource
 
     -- * Creating a Request
-    , projectsTestIAMPermissions
-    , ProjectsTestIAMPermissions
+    , projectsTestIAMPermissions'
+    , ProjectsTestIAMPermissions'
 
     -- * Request Lenses
     , ptipXgafv
@@ -50,18 +51,31 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsTestIAMPermissions@ which the
--- 'ProjectsTestIAMPermissions' request conforms to.
-type ProjectsTestIAMPermissionsAPI =
+-- 'ProjectsTestIAMPermissions'' request conforms to.
+type ProjectsTestIAMPermissionsResource =
      "v1beta1" :>
        "projects" :>
          "{resource}:testIamPermissions" :>
-           Post '[JSON] TestIAMPermissionsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] TestIAMPermissionsResponse
 
 -- | Tests the specified permissions against the IAM access control policy
 -- for the specified project.
 --
--- /See:/ 'projectsTestIAMPermissions' smart constructor.
-data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
+-- /See:/ 'projectsTestIAMPermissions'' smart constructor.
+data ProjectsTestIAMPermissions' = ProjectsTestIAMPermissions'
     { _ptipXgafv          :: !(Maybe Text)
     , _ptipQuotaUser      :: !(Maybe Text)
     , _ptipPrettyPrint    :: !Bool
@@ -109,11 +123,11 @@ data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
 -- * 'ptipCallback'
 --
 -- * 'ptipAlt'
-projectsTestIAMPermissions
+projectsTestIAMPermissions'
     :: Text -- ^ 'resource'
-    -> ProjectsTestIAMPermissions
-projectsTestIAMPermissions pPtipResource_ =
-    ProjectsTestIAMPermissions
+    -> ProjectsTestIAMPermissions'
+projectsTestIAMPermissions' pPtipResource_ =
+    ProjectsTestIAMPermissions'
     { _ptipXgafv = Nothing
     , _ptipQuotaUser = Nothing
     , _ptipPrettyPrint = True
@@ -215,10 +229,11 @@ instance GoogleRequest ProjectsTestIAMPermissions'
         type Rs ProjectsTestIAMPermissions' =
              TestIAMPermissionsResponse
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsTestIAMPermissions{..}
-          = go _ptipXgafv _ptipQuotaUser _ptipPrettyPrint
+        requestWithRoute r u ProjectsTestIAMPermissions'{..}
+          = go _ptipXgafv _ptipQuotaUser
+              (Just _ptipPrettyPrint)
               _ptipUploadProtocol
-              _ptipPp
+              (Just _ptipPp)
               _ptipAccessToken
               _ptipUploadType
               _ptipBearerToken
@@ -227,9 +242,9 @@ instance GoogleRequest ProjectsTestIAMPermissions'
               _ptipOauthToken
               _ptipFields
               _ptipCallback
-              _ptipAlt
+              (Just _ptipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTestIAMPermissionsAPI)
+                      (Proxy :: Proxy ProjectsTestIAMPermissionsResource)
                       r
                       u

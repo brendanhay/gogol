@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the current configuration of the module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesGet@.
-module AppEngine.Apps.Modules.Get
+module Network.Google.Resource.AppEngine.Apps.Modules.Get
     (
     -- * REST Resource
-      AppsModulesGetAPI
+      AppsModulesGetResource
 
     -- * Creating a Request
-    , appsModulesGet
-    , AppsModulesGet
+    , appsModulesGet'
+    , AppsModulesGet'
 
     -- * Request Lenses
     , amgXgafv
@@ -50,18 +51,32 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesGet@ which the
--- 'AppsModulesGet' request conforms to.
-type AppsModulesGetAPI =
+-- 'AppsModulesGet'' request conforms to.
+type AppsModulesGetResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
-             Capture "modulesId" Text :> Get '[JSON] Module
+             Capture "modulesId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Module
 
 -- | Gets the current configuration of the module.
 --
--- /See:/ 'appsModulesGet' smart constructor.
-data AppsModulesGet = AppsModulesGet
+-- /See:/ 'appsModulesGet'' smart constructor.
+data AppsModulesGet' = AppsModulesGet'
     { _amgXgafv          :: !(Maybe Text)
     , _amgQuotaUser      :: !(Maybe Text)
     , _amgPrettyPrint    :: !Bool
@@ -112,12 +127,12 @@ data AppsModulesGet = AppsModulesGet
 -- * 'amgCallback'
 --
 -- * 'amgAlt'
-appsModulesGet
+appsModulesGet'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesGet
-appsModulesGet pAmgModulesId_ pAmgAppsId_ =
-    AppsModulesGet
+    -> AppsModulesGet'
+appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
+    AppsModulesGet'
     { _amgXgafv = Nothing
     , _amgQuotaUser = Nothing
     , _amgPrettyPrint = True
@@ -220,10 +235,10 @@ amgAlt = lens _amgAlt (\ s a -> s{_amgAlt = a})
 instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesGet{..}
-          = go _amgXgafv _amgQuotaUser _amgPrettyPrint
+        requestWithRoute r u AppsModulesGet'{..}
+          = go _amgXgafv _amgQuotaUser (Just _amgPrettyPrint)
               _amgUploadProtocol
-              _amgPp
+              (Just _amgPp)
               _amgAccessToken
               _amgUploadType
               _amgModulesId
@@ -233,8 +248,9 @@ instance GoogleRequest AppsModulesGet' where
               _amgOauthToken
               _amgFields
               _amgCallback
-              _amgAlt
+              (Just _amgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsModulesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AppsModulesGetResource)
                       r
                       u

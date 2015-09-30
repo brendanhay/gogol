@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- that is included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesInsert@.
-module Compute.InstanceTemplates.Insert
+module Network.Google.Resource.Compute.InstanceTemplates.Insert
     (
     -- * REST Resource
-      InstanceTemplatesInsertAPI
+      InstanceTemplatesInsertResource
 
     -- * Creating a Request
-    , instanceTemplatesInsert
-    , InstanceTemplatesInsert
+    , instanceTemplatesInsert'
+    , InstanceTemplatesInsert'
 
     -- * Request Lenses
     , itiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceTemplatesInsert@ which the
--- 'InstanceTemplatesInsert' request conforms to.
-type InstanceTemplatesInsertAPI =
+-- 'InstanceTemplatesInsert'' request conforms to.
+type InstanceTemplatesInsertResource =
      Capture "project" Text :>
        "global" :>
-         "instanceTemplates" :> Post '[JSON] Operation
+         "instanceTemplates" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data
 -- that is included in the request.
 --
--- /See:/ 'instanceTemplatesInsert' smart constructor.
-data InstanceTemplatesInsert = InstanceTemplatesInsert
+-- /See:/ 'instanceTemplatesInsert'' smart constructor.
+data InstanceTemplatesInsert' = InstanceTemplatesInsert'
     { _itiQuotaUser   :: !(Maybe Text)
     , _itiPrettyPrint :: !Bool
     , _itiProject     :: !Text
@@ -62,7 +70,7 @@ data InstanceTemplatesInsert = InstanceTemplatesInsert
     , _itiKey         :: !(Maybe Text)
     , _itiOauthToken  :: !(Maybe Text)
     , _itiFields      :: !(Maybe Text)
-    , _itiAlt         :: !Text
+    , _itiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesInsert'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data InstanceTemplatesInsert = InstanceTemplatesInsert
 -- * 'itiFields'
 --
 -- * 'itiAlt'
-instanceTemplatesInsert
+instanceTemplatesInsert'
     :: Text -- ^ 'project'
-    -> InstanceTemplatesInsert
-instanceTemplatesInsert pItiProject_ =
-    InstanceTemplatesInsert
+    -> InstanceTemplatesInsert'
+instanceTemplatesInsert' pItiProject_ =
+    InstanceTemplatesInsert'
     { _itiQuotaUser = Nothing
     , _itiPrettyPrint = True
     , _itiProject = pItiProject_
@@ -96,7 +104,7 @@ instanceTemplatesInsert pItiProject_ =
     , _itiKey = Nothing
     , _itiOauthToken = Nothing
     , _itiFields = Nothing
-    , _itiAlt = "json"
+    , _itiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +149,21 @@ itiFields
   = lens _itiFields (\ s a -> s{_itiFields = a})
 
 -- | Data format for the response.
-itiAlt :: Lens' InstanceTemplatesInsert' Text
+itiAlt :: Lens' InstanceTemplatesInsert' Alt
 itiAlt = lens _itiAlt (\ s a -> s{_itiAlt = a})
 
 instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesInsert{..}
-          = go _itiQuotaUser _itiPrettyPrint _itiProject
+        requestWithRoute r u InstanceTemplatesInsert'{..}
+          = go _itiQuotaUser (Just _itiPrettyPrint) _itiProject
               _itiUserIp
               _itiKey
               _itiOauthToken
               _itiFields
-              _itiAlt
+              (Just _itiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceTemplatesInsertAPI)
+                      (Proxy :: Proxy InstanceTemplatesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets information about an application.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsGet@.
-module AppEngine.Apps.Get
+module Network.Google.Resource.AppEngine.Apps.Get
     (
     -- * REST Resource
-      AppsGetAPI
+      AppsGetResource
 
     -- * Creating a Request
-    , appsGet
-    , AppsGet
+    , appsGet'
+    , AppsGet'
 
     -- * Request Lenses
     , agXgafv
@@ -50,18 +51,31 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsGet@ which the
--- 'AppsGet' request conforms to.
-type AppsGetAPI =
+-- 'AppsGet'' request conforms to.
+type AppsGetResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
-           QueryParam "ensureResourcesExist" Bool :>
-             Get '[JSON] Application
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "ensureResourcesExist" Bool :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] Application
 
 -- | Gets information about an application.
 --
--- /See:/ 'appsGet' smart constructor.
-data AppsGet = AppsGet
+-- /See:/ 'appsGet'' smart constructor.
+data AppsGet' = AppsGet'
     { _agXgafv                :: !(Maybe Text)
     , _agQuotaUser            :: !(Maybe Text)
     , _agPrettyPrint          :: !Bool
@@ -112,11 +126,11 @@ data AppsGet = AppsGet
 -- * 'agCallback'
 --
 -- * 'agAlt'
-appsGet
+appsGet'
     :: Text -- ^ 'appsId'
-    -> AppsGet
-appsGet pAgAppsId_ =
-    AppsGet
+    -> AppsGet'
+appsGet' pAgAppsId_ =
+    AppsGet'
     { _agXgafv = Nothing
     , _agQuotaUser = Nothing
     , _agPrettyPrint = True
@@ -219,10 +233,10 @@ agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsGet{..}
-          = go _agXgafv _agQuotaUser _agPrettyPrint
+        requestWithRoute r u AppsGet'{..}
+          = go _agXgafv _agQuotaUser (Just _agPrettyPrint)
               _agUploadProtocol
-              _agPp
+              (Just _agPp)
               _agAccessToken
               _agUploadType
               _agBearerToken
@@ -232,6 +246,7 @@ instance GoogleRequest AppsGet' where
               _agOauthToken
               _agFields
               _agCallback
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AppsGetResource) r
+                      u

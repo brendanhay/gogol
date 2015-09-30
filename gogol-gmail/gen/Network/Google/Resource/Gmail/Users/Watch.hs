@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersWatch@.
-module Gmail.Users.Watch
+module Network.Google.Resource.Gmail.Users.Watch
     (
     -- * REST Resource
-      UsersWatchAPI
+      UsersWatchResource
 
     -- * Creating a Request
-    , usersWatch
-    , UsersWatch
+    , usersWatch'
+    , UsersWatch'
 
     -- * Request Lenses
     , uwQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersWatch@ which the
--- 'UsersWatch' request conforms to.
-type UsersWatchAPI =
+-- 'UsersWatch'' request conforms to.
+type UsersWatchResource =
      Capture "userId" Text :>
-       "watch" :> Post '[JSON] WatchResponse
+       "watch" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] WatchResponse
 
 -- | Set up or update a push notification watch on the given user mailbox.
 --
--- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
+-- /See:/ 'usersWatch'' smart constructor.
+data UsersWatch' = UsersWatch'
     { _uwQuotaUser   :: !(Maybe Text)
     , _uwPrettyPrint :: !Bool
     , _uwUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UsersWatch = UsersWatch
     , _uwKey         :: !(Maybe Text)
     , _uwOauthToken  :: !(Maybe Text)
     , _uwFields      :: !(Maybe Text)
-    , _uwAlt         :: !Text
+    , _uwAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UsersWatch = UsersWatch
 -- * 'uwFields'
 --
 -- * 'uwAlt'
-usersWatch
+usersWatch'
     :: Text
-    -> UsersWatch
-usersWatch pUwUserId_ =
-    UsersWatch
+    -> UsersWatch'
+usersWatch' pUwUserId_ =
+    UsersWatch'
     { _uwQuotaUser = Nothing
     , _uwPrettyPrint = True
     , _uwUserIp = Nothing
@@ -93,7 +101,7 @@ usersWatch pUwUserId_ =
     , _uwKey = Nothing
     , _uwOauthToken = Nothing
     , _uwFields = Nothing
-    , _uwAlt = "json"
+    , _uwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,20 @@ uwFields :: Lens' UsersWatch' (Maybe Text)
 uwFields = lens _uwFields (\ s a -> s{_uwFields = a})
 
 -- | Data format for the response.
-uwAlt :: Lens' UsersWatch' Text
+uwAlt :: Lens' UsersWatch' Alt
 uwAlt = lens _uwAlt (\ s a -> s{_uwAlt = a})
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersWatch{..}
-          = go _uwQuotaUser _uwPrettyPrint _uwUserIp _uwUserId
+        requestWithRoute r u UsersWatch'{..}
+          = go _uwQuotaUser (Just _uwPrettyPrint) _uwUserIp
+              _uwUserId
               _uwKey
               _uwOauthToken
               _uwFields
-              _uwAlt
+              (Just _uwAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersWatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersWatchResource)
+                      r
+                      u

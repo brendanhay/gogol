@@ -139,6 +139,151 @@ instance ToJSON Tasks2 where
               (catMaybes
                  [Just ("kind" .= _tKind), ("items" .=) <$> _tItems])
 
+-- | ACLs that are applicable to this TaskQueue object.
+--
+-- /See:/ 'taskQueueACL' smart constructor.
+data TaskQueueACL = TaskQueueACL
+    { _tqaProducerEmails :: !(Maybe [Text])
+    , _tqaAdminEmails    :: !(Maybe [Text])
+    , _tqaConsumerEmails :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskQueueACL' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tqaProducerEmails'
+--
+-- * 'tqaAdminEmails'
+--
+-- * 'tqaConsumerEmails'
+taskQueueACL
+    :: TaskQueueACL
+taskQueueACL =
+    TaskQueueACL
+    { _tqaProducerEmails = Nothing
+    , _tqaAdminEmails = Nothing
+    , _tqaConsumerEmails = Nothing
+    }
+
+-- | Email addresses of users who can \"produce\" tasks into the TaskQueue.
+-- This means they can Insert tasks into the queue.
+tqaProducerEmails :: Lens' TaskQueueACL [Text]
+tqaProducerEmails
+  = lens _tqaProducerEmails
+      (\ s a -> s{_tqaProducerEmails = a})
+      . _Default
+      . _Coerce
+
+-- | Email addresses of users who are \"admins\" of the TaskQueue. This means
+-- they can control the queue, eg set ACLs for the queue.
+tqaAdminEmails :: Lens' TaskQueueACL [Text]
+tqaAdminEmails
+  = lens _tqaAdminEmails
+      (\ s a -> s{_tqaAdminEmails = a})
+      . _Default
+      . _Coerce
+
+-- | Email addresses of users who can \"consume\" tasks from the TaskQueue.
+-- This means they can Dequeue and Delete tasks from the queue.
+tqaConsumerEmails :: Lens' TaskQueueACL [Text]
+tqaConsumerEmails
+  = lens _tqaConsumerEmails
+      (\ s a -> s{_tqaConsumerEmails = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON TaskQueueACL where
+        parseJSON
+          = withObject "TaskQueueACL"
+              (\ o ->
+                 TaskQueueACL <$>
+                   (o .:? "producerEmails" .!= mempty) <*>
+                     (o .:? "adminEmails" .!= mempty)
+                     <*> (o .:? "consumerEmails" .!= mempty))
+
+instance ToJSON TaskQueueACL where
+        toJSON TaskQueueACL{..}
+          = object
+              (catMaybes
+                 [("producerEmails" .=) <$> _tqaProducerEmails,
+                  ("adminEmails" .=) <$> _tqaAdminEmails,
+                  ("consumerEmails" .=) <$> _tqaConsumerEmails])
+
+-- | Statistics for the TaskQueue object in question.
+--
+-- /See:/ 'taskQueueStats' smart constructor.
+data TaskQueueStats = TaskQueueStats
+    { _tqsTotalTasks       :: !(Maybe Int32)
+    , _tqsOldestTask       :: !(Maybe Int64)
+    , _tqsLeasedLastHour   :: !(Maybe Int64)
+    , _tqsLeasedLastMinute :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TaskQueueStats' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tqsTotalTasks'
+--
+-- * 'tqsOldestTask'
+--
+-- * 'tqsLeasedLastHour'
+--
+-- * 'tqsLeasedLastMinute'
+taskQueueStats
+    :: TaskQueueStats
+taskQueueStats =
+    TaskQueueStats
+    { _tqsTotalTasks = Nothing
+    , _tqsOldestTask = Nothing
+    , _tqsLeasedLastHour = Nothing
+    , _tqsLeasedLastMinute = Nothing
+    }
+
+-- | Number of tasks in the queue.
+tqsTotalTasks :: Lens' TaskQueueStats (Maybe Int32)
+tqsTotalTasks
+  = lens _tqsTotalTasks
+      (\ s a -> s{_tqsTotalTasks = a})
+
+-- | The timestamp (in seconds since the epoch) of the oldest unfinished
+-- task.
+tqsOldestTask :: Lens' TaskQueueStats (Maybe Int64)
+tqsOldestTask
+  = lens _tqsOldestTask
+      (\ s a -> s{_tqsOldestTask = a})
+
+-- | Number of tasks leased in the last hour.
+tqsLeasedLastHour :: Lens' TaskQueueStats (Maybe Int64)
+tqsLeasedLastHour
+  = lens _tqsLeasedLastHour
+      (\ s a -> s{_tqsLeasedLastHour = a})
+
+-- | Number of tasks leased in the last minute.
+tqsLeasedLastMinute :: Lens' TaskQueueStats (Maybe Int64)
+tqsLeasedLastMinute
+  = lens _tqsLeasedLastMinute
+      (\ s a -> s{_tqsLeasedLastMinute = a})
+
+instance FromJSON TaskQueueStats where
+        parseJSON
+          = withObject "TaskQueueStats"
+              (\ o ->
+                 TaskQueueStats <$>
+                   (o .:? "totalTasks") <*> (o .:? "oldestTask") <*>
+                     (o .:? "leasedLastHour")
+                     <*> (o .:? "leasedLastMinute"))
+
+instance ToJSON TaskQueueStats where
+        toJSON TaskQueueStats{..}
+          = object
+              (catMaybes
+                 [("totalTasks" .=) <$> _tqsTotalTasks,
+                  ("oldestTask" .=) <$> _tqsOldestTask,
+                  ("leasedLastHour" .=) <$> _tqsLeasedLastHour,
+                  ("leasedLastMinute" .=) <$> _tqsLeasedLastMinute])
+
 --
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks

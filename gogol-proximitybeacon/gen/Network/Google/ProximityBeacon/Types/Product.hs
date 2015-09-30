@@ -161,6 +161,28 @@ instance FromJSON Empty where
 instance ToJSON Empty where
         toJSON = const (Object mempty)
 
+-- | Properties of the beacon device, for example battery type or firmware
+-- version. Optional.
+--
+-- /See:/ 'beaconProperties' smart constructor.
+data BeaconProperties =
+    BeaconProperties
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BeaconProperties' with the minimum fields required to make a request.
+--
+beaconProperties
+    :: BeaconProperties
+beaconProperties = BeaconProperties
+
+instance FromJSON BeaconProperties where
+        parseJSON
+          = withObject "BeaconProperties"
+              (\ o -> pure BeaconProperties)
+
+instance ToJSON BeaconProperties where
+        toJSON = const (Object mempty)
+
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.

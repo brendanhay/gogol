@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of creative field values, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesList@.
-module DFAReporting.CreativeFieldValues.List
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     (
     -- * REST Resource
-      CreativeFieldValuesListAPI
+      CreativeFieldValuesListResource
 
     -- * Creating a Request
-    , creativeFieldValuesList
-    , CreativeFieldValuesList
+    , creativeFieldValuesList'
+    , CreativeFieldValuesList'
 
     -- * Request Lenses
     , cfvlCreativeFieldId
@@ -50,25 +51,37 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesList@ which the
--- 'CreativeFieldValuesList' request conforms to.
-type CreativeFieldValuesListAPI =
+-- 'CreativeFieldValuesList'' request conforms to.
+type CreativeFieldValuesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           Get '[JSON] CreativeFieldValuesListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingCreativeFieldValuesListSortOrder
+                           :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingCreativeFieldValuesListSortField
+                                 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON]
+                                           CreativeFieldValuesListResponse
 
 -- | Retrieves a list of creative field values, possibly filtered.
 --
--- /See:/ 'creativeFieldValuesList' smart constructor.
-data CreativeFieldValuesList = CreativeFieldValuesList
+-- /See:/ 'creativeFieldValuesList'' smart constructor.
+data CreativeFieldValuesList' = CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !Int64
     , _cfvlQuotaUser       :: !(Maybe Text)
     , _cfvlPrettyPrint     :: !Bool
@@ -76,14 +89,14 @@ data CreativeFieldValuesList = CreativeFieldValuesList
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe Int64)
     , _cfvlProfileId       :: !Int64
-    , _cfvlSortOrder       :: !(Maybe Text)
+    , _cfvlSortOrder       :: !(Maybe DfareportingCreativeFieldValuesListSortOrder)
     , _cfvlKey             :: !(Maybe Text)
     , _cfvlPageToken       :: !(Maybe Text)
-    , _cfvlSortField       :: !(Maybe Text)
+    , _cfvlSortField       :: !(Maybe DfareportingCreativeFieldValuesListSortField)
     , _cfvlOauthToken      :: !(Maybe Text)
     , _cfvlMaxResults      :: !(Maybe Int32)
     , _cfvlFields          :: !(Maybe Text)
-    , _cfvlAlt             :: !Text
+    , _cfvlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList'' with the minimum fields required to make a request.
@@ -119,12 +132,12 @@ data CreativeFieldValuesList = CreativeFieldValuesList
 -- * 'cfvlFields'
 --
 -- * 'cfvlAlt'
-creativeFieldValuesList
+creativeFieldValuesList'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
-    -> CreativeFieldValuesList
-creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProfileId_ =
-    CreativeFieldValuesList
+    -> CreativeFieldValuesList'
+creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProfileId_ =
+    CreativeFieldValuesList'
     { _cfvlCreativeFieldId = pCfvlCreativeFieldId_
     , _cfvlQuotaUser = Nothing
     , _cfvlPrettyPrint = True
@@ -139,7 +152,7 @@ creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProfileId_ =
     , _cfvlOauthToken = Nothing
     , _cfvlMaxResults = Nothing
     , _cfvlFields = Nothing
-    , _cfvlAlt = "json"
+    , _cfvlAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -186,7 +199,7 @@ cfvlProfileId
       (\ s a -> s{_cfvlProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cfvlSortOrder :: Lens' CreativeFieldValuesList' (Maybe Text)
+cfvlSortOrder :: Lens' CreativeFieldValuesList' (Maybe DfareportingCreativeFieldValuesListSortOrder)
 cfvlSortOrder
   = lens _cfvlSortOrder
       (\ s a -> s{_cfvlSortOrder = a})
@@ -204,7 +217,7 @@ cfvlPageToken
       (\ s a -> s{_cfvlPageToken = a})
 
 -- | Field by which to sort the list.
-cfvlSortField :: Lens' CreativeFieldValuesList' (Maybe Text)
+cfvlSortField :: Lens' CreativeFieldValuesList' (Maybe DfareportingCreativeFieldValuesListSortField)
 cfvlSortField
   = lens _cfvlSortField
       (\ s a -> s{_cfvlSortField = a})
@@ -227,16 +240,16 @@ cfvlFields
   = lens _cfvlFields (\ s a -> s{_cfvlFields = a})
 
 -- | Data format for the response.
-cfvlAlt :: Lens' CreativeFieldValuesList' Text
+cfvlAlt :: Lens' CreativeFieldValuesList' Alt
 cfvlAlt = lens _cfvlAlt (\ s a -> s{_cfvlAlt = a})
 
 instance GoogleRequest CreativeFieldValuesList' where
         type Rs CreativeFieldValuesList' =
              CreativeFieldValuesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesList{..}
+        requestWithRoute r u CreativeFieldValuesList'{..}
           = go _cfvlCreativeFieldId _cfvlQuotaUser
-              _cfvlPrettyPrint
+              (Just _cfvlPrettyPrint)
               _cfvlUserIp
               _cfvlSearchString
               _cfvlIds
@@ -248,9 +261,9 @@ instance GoogleRequest CreativeFieldValuesList' where
               _cfvlOauthToken
               _cfvlMaxResults
               _cfvlFields
-              _cfvlAlt
+              (Just _cfvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesListAPI)
+                      (Proxy :: Proxy CreativeFieldValuesListResource)
                       r
                       u

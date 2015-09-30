@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the license.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseGrouplicenseusersList@.
-module Androidenterprise.Grouplicenseusers.List
+module Network.Google.Resource.Androidenterprise.Grouplicenseusers.List
     (
     -- * REST Resource
-      GrouplicenseusersListAPI
+      GrouplicenseusersListResource
 
     -- * Creating a Request
-    , grouplicenseusersList
-    , GrouplicenseusersList
+    , grouplicenseusersList'
+    , GrouplicenseusersList'
 
     -- * Request Lenses
     , gQuotaUser
@@ -45,19 +46,27 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseGrouplicenseusersList@ which the
--- 'GrouplicenseusersList' request conforms to.
-type GrouplicenseusersListAPI =
+-- 'GrouplicenseusersList'' request conforms to.
+type GrouplicenseusersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "groupLicenses" :>
            Capture "groupLicenseId" Text :>
-             "users" :> Get '[JSON] GroupLicenseUsersListResponse
+             "users" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] GroupLicenseUsersListResponse
 
 -- | Retrieves the IDs of the users who have been granted entitlements under
 -- the license.
 --
--- /See:/ 'grouplicenseusersList' smart constructor.
-data GrouplicenseusersList = GrouplicenseusersList
+-- /See:/ 'grouplicenseusersList'' smart constructor.
+data GrouplicenseusersList' = GrouplicenseusersList'
     { _gQuotaUser      :: !(Maybe Text)
     , _gPrettyPrint    :: !Bool
     , _gEnterpriseId   :: !Text
@@ -66,7 +75,7 @@ data GrouplicenseusersList = GrouplicenseusersList
     , _gOauthToken     :: !(Maybe Text)
     , _gGroupLicenseId :: !Text
     , _gFields         :: !(Maybe Text)
-    , _gAlt            :: !Text
+    , _gAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GrouplicenseusersList'' with the minimum fields required to make a request.
@@ -90,12 +99,12 @@ data GrouplicenseusersList = GrouplicenseusersList
 -- * 'gFields'
 --
 -- * 'gAlt'
-grouplicenseusersList
+grouplicenseusersList'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'groupLicenseId'
-    -> GrouplicenseusersList
-grouplicenseusersList pGEnterpriseId_ pGGroupLicenseId_ =
-    GrouplicenseusersList
+    -> GrouplicenseusersList'
+grouplicenseusersList' pGEnterpriseId_ pGGroupLicenseId_ =
+    GrouplicenseusersList'
     { _gQuotaUser = Nothing
     , _gPrettyPrint = True
     , _gEnterpriseId = pGEnterpriseId_
@@ -104,7 +113,7 @@ grouplicenseusersList pGEnterpriseId_ pGGroupLicenseId_ =
     , _gOauthToken = Nothing
     , _gGroupLicenseId = pGGroupLicenseId_
     , _gFields = Nothing
-    , _gAlt = "json"
+    , _gAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +162,23 @@ gFields :: Lens' GrouplicenseusersList' (Maybe Text)
 gFields = lens _gFields (\ s a -> s{_gFields = a})
 
 -- | Data format for the response.
-gAlt :: Lens' GrouplicenseusersList' Text
+gAlt :: Lens' GrouplicenseusersList' Alt
 gAlt = lens _gAlt (\ s a -> s{_gAlt = a})
 
 instance GoogleRequest GrouplicenseusersList' where
         type Rs GrouplicenseusersList' =
              GroupLicenseUsersListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u GrouplicenseusersList{..}
-          = go _gQuotaUser _gPrettyPrint _gEnterpriseId
+        requestWithRoute r u GrouplicenseusersList'{..}
+          = go _gQuotaUser (Just _gPrettyPrint) _gEnterpriseId
               _gUserIp
               _gKey
               _gOauthToken
               _gGroupLicenseId
               _gFields
-              _gAlt
+              (Just _gAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GrouplicenseusersListAPI)
+                      (Proxy :: Proxy GrouplicenseusersListResource)
                       r
                       u

@@ -44,6 +44,13 @@ module Network.Google.AdExchangeSeller.Types
     , aKind
     , aItems
 
+    -- * ReportHeaders
+    , ReportHeaders
+    , reportHeaders
+    , rhName
+    , rhCurrency
+    , rhType
+
     -- * Alerts
     , Alerts
     , alerts
@@ -117,6 +124,14 @@ module Network.Google.AdExchangeSeller.Types
     , adId
     , adProductCode
 
+    -- * CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
+
     -- * PreferredDeals
     , PreferredDeals
     , preferredDeals
@@ -156,6 +171,9 @@ module Network.Google.AdExchangeSeller.Types
     , pEndTime
     , pId
     , pFixedCpm
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdExchangeSeller.Types.Product
@@ -163,7 +181,7 @@ import           Network.Google.AdExchangeSeller.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2.0' of the Ad Exchange Seller API.
-adExchangeSellerURL :: BaseURL
+adExchangeSellerURL :: BaseUrl
 adExchangeSellerURL
   = BaseUrl Https
       "https://www.googleapis.com/adexchangeseller/v2.0/"

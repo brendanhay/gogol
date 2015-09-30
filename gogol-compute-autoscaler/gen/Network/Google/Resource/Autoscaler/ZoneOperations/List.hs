@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- zone.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerZoneOperationsList@.
-module Autoscaler.ZoneOperations.List
+module Network.Google.Resource.Autoscaler.ZoneOperations.List
     (
     -- * REST Resource
-      ZoneOperationsListAPI
+      ZoneOperationsListResource
 
     -- * Creating a Request
-    , zoneOperationsList
-    , ZoneOperationsList
+    , zoneOperationsList'
+    , ZoneOperationsList'
 
     -- * Request Lenses
     , zolQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.ComputeAutoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AutoscalerZoneOperationsList@ which the
--- 'ZoneOperationsList' request conforms to.
-type ZoneOperationsListAPI =
+-- 'ZoneOperationsList'' request conforms to.
+type ZoneOperationsListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "operations" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] OperationList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] OperationList
 
 -- | Retrieves the list of operation resources contained within the specified
 -- zone.
 --
--- /See:/ 'zoneOperationsList' smart constructor.
-data ZoneOperationsList = ZoneOperationsList
+-- /See:/ 'zoneOperationsList'' smart constructor.
+data ZoneOperationsList' = ZoneOperationsList'
     { _zolQuotaUser   :: !(Maybe Text)
     , _zolPrettyPrint :: !Bool
     , _zolProject     :: !Text
@@ -75,7 +82,7 @@ data ZoneOperationsList = ZoneOperationsList
     , _zolOauthToken  :: !(Maybe Text)
     , _zolMaxResults  :: !Word32
     , _zolFields      :: !(Maybe Text)
-    , _zolAlt         :: !Text
+    , _zolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data ZoneOperationsList = ZoneOperationsList
 -- * 'zolFields'
 --
 -- * 'zolAlt'
-zoneOperationsList
+zoneOperationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneOperationsList
-zoneOperationsList pZolProject_ pZolZone_ =
-    ZoneOperationsList
+    -> ZoneOperationsList'
+zoneOperationsList' pZolProject_ pZolZone_ =
+    ZoneOperationsList'
     { _zolQuotaUser = Nothing
     , _zolPrettyPrint = True
     , _zolProject = pZolProject_
@@ -122,7 +129,7 @@ zoneOperationsList pZolProject_ pZolZone_ =
     , _zolOauthToken = Nothing
     , _zolMaxResults = 500
     , _zolFields = Nothing
-    , _zolAlt = "json"
+    , _zolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,15 +189,15 @@ zolFields
   = lens _zolFields (\ s a -> s{_zolFields = a})
 
 -- | Data format for the response.
-zolAlt :: Lens' ZoneOperationsList' Text
+zolAlt :: Lens' ZoneOperationsList' Alt
 zolAlt = lens _zolAlt (\ s a -> s{_zolAlt = a})
 
 instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList
         request
           = requestWithRoute defReq computeAutoscalerURL
-        requestWithRoute r u ZoneOperationsList{..}
-          = go _zolQuotaUser _zolPrettyPrint _zolProject
+        requestWithRoute r u ZoneOperationsList'{..}
+          = go _zolQuotaUser (Just _zolPrettyPrint) _zolProject
               _zolUserIp
               _zolZone
               _zolKey
@@ -199,9 +206,9 @@ instance GoogleRequest ZoneOperationsList' where
               _zolOauthToken
               (Just _zolMaxResults)
               _zolFields
-              _zolAlt
+              (Just _zolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneOperationsListAPI)
+                      (Proxy :: Proxy ZoneOperationsListResource)
                       r
                       u

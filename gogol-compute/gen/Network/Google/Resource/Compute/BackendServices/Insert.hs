@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesInsert@.
-module Compute.BackendServices.Insert
+module Network.Google.Resource.Compute.BackendServices.Insert
     (
     -- * REST Resource
-      BackendServicesInsertAPI
+      BackendServicesInsertResource
 
     -- * Creating a Request
-    , backendServicesInsert
-    , BackendServicesInsert
+    , backendServicesInsert'
+    , BackendServicesInsert'
 
     -- * Request Lenses
     , bsiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeBackendServicesInsert@ which the
--- 'BackendServicesInsert' request conforms to.
-type BackendServicesInsertAPI =
+-- 'BackendServicesInsert'' request conforms to.
+type BackendServicesInsertResource =
      Capture "project" Text :>
        "global" :>
-         "backendServices" :> Post '[JSON] Operation
+         "backendServices" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'backendServicesInsert' smart constructor.
-data BackendServicesInsert = BackendServicesInsert
+-- /See:/ 'backendServicesInsert'' smart constructor.
+data BackendServicesInsert' = BackendServicesInsert'
     { _bsiQuotaUser   :: !(Maybe Text)
     , _bsiPrettyPrint :: !Bool
     , _bsiProject     :: !Text
@@ -62,7 +70,7 @@ data BackendServicesInsert = BackendServicesInsert
     , _bsiKey         :: !(Maybe Text)
     , _bsiOauthToken  :: !(Maybe Text)
     , _bsiFields      :: !(Maybe Text)
-    , _bsiAlt         :: !Text
+    , _bsiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesInsert'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data BackendServicesInsert = BackendServicesInsert
 -- * 'bsiFields'
 --
 -- * 'bsiAlt'
-backendServicesInsert
+backendServicesInsert'
     :: Text -- ^ 'project'
-    -> BackendServicesInsert
-backendServicesInsert pBsiProject_ =
-    BackendServicesInsert
+    -> BackendServicesInsert'
+backendServicesInsert' pBsiProject_ =
+    BackendServicesInsert'
     { _bsiQuotaUser = Nothing
     , _bsiPrettyPrint = True
     , _bsiProject = pBsiProject_
@@ -96,7 +104,7 @@ backendServicesInsert pBsiProject_ =
     , _bsiKey = Nothing
     , _bsiOauthToken = Nothing
     , _bsiFields = Nothing
-    , _bsiAlt = "json"
+    , _bsiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +149,21 @@ bsiFields
   = lens _bsiFields (\ s a -> s{_bsiFields = a})
 
 -- | Data format for the response.
-bsiAlt :: Lens' BackendServicesInsert' Text
+bsiAlt :: Lens' BackendServicesInsert' Alt
 bsiAlt = lens _bsiAlt (\ s a -> s{_bsiAlt = a})
 
 instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesInsert{..}
-          = go _bsiQuotaUser _bsiPrettyPrint _bsiProject
+        requestWithRoute r u BackendServicesInsert'{..}
+          = go _bsiQuotaUser (Just _bsiPrettyPrint) _bsiProject
               _bsiUserIp
               _bsiKey
               _bsiOauthToken
               _bsiFields
-              _bsiAlt
+              (Just _bsiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackendServicesInsertAPI)
+                      (Proxy :: Proxy BackendServicesInsertResource)
                       r
                       u

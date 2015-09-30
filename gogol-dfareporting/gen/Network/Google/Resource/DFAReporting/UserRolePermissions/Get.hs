@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,153 +20,164 @@
 -- | Gets one user role permission by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionsGet@.
-module DFAReporting.UserRolePermissions.Get
+module Network.Google.Resource.DFAReporting.UserRolePermissions.Get
     (
     -- * REST Resource
-      UserRolePermissionsGetAPI
+      UserRolePermissionsGetResource
 
     -- * Creating a Request
-    , userRolePermissionsGet
-    , UserRolePermissionsGet
+    , userRolePermissionsGet'
+    , UserRolePermissionsGet'
 
     -- * Request Lenses
-    , useQuotaUser
-    , usePrettyPrint
-    , useUserIp
-    , useProfileId
-    , useKey
-    , useId
-    , useOauthToken
-    , useFields
-    , useAlt
+    , urpgQuotaUser
+    , urpgPrettyPrint
+    , urpgUserIp
+    , urpgProfileId
+    , urpgKey
+    , urpgId
+    , urpgOauthToken
+    , urpgFields
+    , urpgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolePermissionsGet@ which the
--- 'UserRolePermissionsGet' request conforms to.
-type UserRolePermissionsGetAPI =
+-- 'UserRolePermissionsGet'' request conforms to.
+type UserRolePermissionsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRolePermissions" :>
-           Capture "id" Int64 :> Get '[JSON] UserRolePermission
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] UserRolePermission
 
 -- | Gets one user role permission by ID.
 --
--- /See:/ 'userRolePermissionsGet' smart constructor.
-data UserRolePermissionsGet = UserRolePermissionsGet
-    { _useQuotaUser   :: !(Maybe Text)
-    , _usePrettyPrint :: !Bool
-    , _useUserIp      :: !(Maybe Text)
-    , _useProfileId   :: !Int64
-    , _useKey         :: !(Maybe Text)
-    , _useId          :: !Int64
-    , _useOauthToken  :: !(Maybe Text)
-    , _useFields      :: !(Maybe Text)
-    , _useAlt         :: !Text
+-- /See:/ 'userRolePermissionsGet'' smart constructor.
+data UserRolePermissionsGet' = UserRolePermissionsGet'
+    { _urpgQuotaUser   :: !(Maybe Text)
+    , _urpgPrettyPrint :: !Bool
+    , _urpgUserIp      :: !(Maybe Text)
+    , _urpgProfileId   :: !Int64
+    , _urpgKey         :: !(Maybe Text)
+    , _urpgId          :: !Int64
+    , _urpgOauthToken  :: !(Maybe Text)
+    , _urpgFields      :: !(Maybe Text)
+    , _urpgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'useQuotaUser'
+-- * 'urpgQuotaUser'
 --
--- * 'usePrettyPrint'
+-- * 'urpgPrettyPrint'
 --
--- * 'useUserIp'
+-- * 'urpgUserIp'
 --
--- * 'useProfileId'
+-- * 'urpgProfileId'
 --
--- * 'useKey'
+-- * 'urpgKey'
 --
--- * 'useId'
+-- * 'urpgId'
 --
--- * 'useOauthToken'
+-- * 'urpgOauthToken'
 --
--- * 'useFields'
+-- * 'urpgFields'
 --
--- * 'useAlt'
-userRolePermissionsGet
+-- * 'urpgAlt'
+userRolePermissionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> UserRolePermissionsGet
-userRolePermissionsGet pUseProfileId_ pUseId_ =
-    UserRolePermissionsGet
-    { _useQuotaUser = Nothing
-    , _usePrettyPrint = True
-    , _useUserIp = Nothing
-    , _useProfileId = pUseProfileId_
-    , _useKey = Nothing
-    , _useId = pUseId_
-    , _useOauthToken = Nothing
-    , _useFields = Nothing
-    , _useAlt = "json"
+    -> UserRolePermissionsGet'
+userRolePermissionsGet' pUrpgProfileId_ pUrpgId_ =
+    UserRolePermissionsGet'
+    { _urpgQuotaUser = Nothing
+    , _urpgPrettyPrint = True
+    , _urpgUserIp = Nothing
+    , _urpgProfileId = pUrpgProfileId_
+    , _urpgKey = Nothing
+    , _urpgId = pUrpgId_
+    , _urpgOauthToken = Nothing
+    , _urpgFields = Nothing
+    , _urpgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-useQuotaUser :: Lens' UserRolePermissionsGet' (Maybe Text)
-useQuotaUser
-  = lens _useQuotaUser (\ s a -> s{_useQuotaUser = a})
+urpgQuotaUser :: Lens' UserRolePermissionsGet' (Maybe Text)
+urpgQuotaUser
+  = lens _urpgQuotaUser
+      (\ s a -> s{_urpgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-usePrettyPrint :: Lens' UserRolePermissionsGet' Bool
-usePrettyPrint
-  = lens _usePrettyPrint
-      (\ s a -> s{_usePrettyPrint = a})
+urpgPrettyPrint :: Lens' UserRolePermissionsGet' Bool
+urpgPrettyPrint
+  = lens _urpgPrettyPrint
+      (\ s a -> s{_urpgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-useUserIp :: Lens' UserRolePermissionsGet' (Maybe Text)
-useUserIp
-  = lens _useUserIp (\ s a -> s{_useUserIp = a})
+urpgUserIp :: Lens' UserRolePermissionsGet' (Maybe Text)
+urpgUserIp
+  = lens _urpgUserIp (\ s a -> s{_urpgUserIp = a})
 
 -- | User profile ID associated with this request.
-useProfileId :: Lens' UserRolePermissionsGet' Int64
-useProfileId
-  = lens _useProfileId (\ s a -> s{_useProfileId = a})
+urpgProfileId :: Lens' UserRolePermissionsGet' Int64
+urpgProfileId
+  = lens _urpgProfileId
+      (\ s a -> s{_urpgProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-useKey :: Lens' UserRolePermissionsGet' (Maybe Text)
-useKey = lens _useKey (\ s a -> s{_useKey = a})
+urpgKey :: Lens' UserRolePermissionsGet' (Maybe Text)
+urpgKey = lens _urpgKey (\ s a -> s{_urpgKey = a})
 
 -- | User role permission ID.
-useId :: Lens' UserRolePermissionsGet' Int64
-useId = lens _useId (\ s a -> s{_useId = a})
+urpgId :: Lens' UserRolePermissionsGet' Int64
+urpgId = lens _urpgId (\ s a -> s{_urpgId = a})
 
 -- | OAuth 2.0 token for the current user.
-useOauthToken :: Lens' UserRolePermissionsGet' (Maybe Text)
-useOauthToken
-  = lens _useOauthToken
-      (\ s a -> s{_useOauthToken = a})
+urpgOauthToken :: Lens' UserRolePermissionsGet' (Maybe Text)
+urpgOauthToken
+  = lens _urpgOauthToken
+      (\ s a -> s{_urpgOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-useFields :: Lens' UserRolePermissionsGet' (Maybe Text)
-useFields
-  = lens _useFields (\ s a -> s{_useFields = a})
+urpgFields :: Lens' UserRolePermissionsGet' (Maybe Text)
+urpgFields
+  = lens _urpgFields (\ s a -> s{_urpgFields = a})
 
 -- | Data format for the response.
-useAlt :: Lens' UserRolePermissionsGet' Text
-useAlt = lens _useAlt (\ s a -> s{_useAlt = a})
+urpgAlt :: Lens' UserRolePermissionsGet' Alt
+urpgAlt = lens _urpgAlt (\ s a -> s{_urpgAlt = a})
 
 instance GoogleRequest UserRolePermissionsGet' where
         type Rs UserRolePermissionsGet' = UserRolePermission
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolePermissionsGet{..}
-          = go _useQuotaUser _usePrettyPrint _useUserIp
-              _useProfileId
-              _useKey
-              _useId
-              _useOauthToken
-              _useFields
-              _useAlt
+        requestWithRoute r u UserRolePermissionsGet'{..}
+          = go _urpgQuotaUser (Just _urpgPrettyPrint)
+              _urpgUserIp
+              _urpgProfileId
+              _urpgKey
+              _urpgId
+              _urpgOauthToken
+              _urpgFields
+              (Just _urpgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UserRolePermissionsGetAPI)
+                      (Proxy :: Proxy UserRolePermissionsGetResource)
                       r
                       u

@@ -481,7 +481,7 @@ data Device = Device
     , _dUid          :: !(Maybe Text)
     , _dModel        :: !(Maybe Text)
     , _dVersion      :: !(Maybe Text)
-    , _dType         :: !(Maybe Text)
+    , _dType         :: !(Maybe DeviceType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Device' with the minimum fields required to make a request.
@@ -530,7 +530,7 @@ dVersion :: Lens' Device (Maybe Text)
 dVersion = lens _dVersion (\ s a -> s{_dVersion = a})
 
 -- | A constant representing the type of the device.
-dType :: Lens' Device (Maybe Text)
+dType :: Lens' Device (Maybe DeviceType)
 dType = lens _dType (\ s a -> s{_dType = a})
 
 instance FromJSON Device where
@@ -881,7 +881,7 @@ data AggregateBucket = AggregateBucket
     { _abEndTimeMillis   :: !(Maybe Int64)
     , _abDataset         :: !(Maybe [Maybe Dataset])
     , _abActivity        :: !(Maybe Int32)
-    , _abType            :: !(Maybe Text)
+    , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe Int64)
     , _abSession         :: !(Maybe (Maybe Session))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -934,7 +934,7 @@ abActivity
 
 -- | The type of a bucket signifies how the data aggregation is performed in
 -- the bucket.
-abType :: Lens' AggregateBucket (Maybe Text)
+abType :: Lens' AggregateBucket (Maybe AggregateBucketType)
 abType = lens _abType (\ s a -> s{_abType = a})
 
 -- | The start time for the aggregated data, in milliseconds since epoch,
@@ -1052,7 +1052,7 @@ instance ToJSON MapValue where
 --
 -- /See:/ 'dataTypeField' smart constructor.
 data DataTypeField = DataTypeField
-    { _dtfFormat   :: !(Maybe Text)
+    { _dtfFormat   :: !(Maybe DataTypeFieldFormat)
     , _dtfName     :: !(Maybe Text)
     , _dtfOptional :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1076,7 +1076,7 @@ dataTypeField =
     }
 
 -- | The different supported formats for each field in a data type.
-dtfFormat :: Lens' DataTypeField (Maybe Text)
+dtfFormat :: Lens' DataTypeField (Maybe DataTypeFieldFormat)
 dtfFormat
   = lens _dtfFormat (\ s a -> s{_dtfFormat = a})
 
@@ -1126,7 +1126,7 @@ data DataSource = DataSource
     , _dsDevice         :: !(Maybe (Maybe Device))
     , _dsName           :: !(Maybe Text)
     , _dsDataType       :: !(Maybe (Maybe DataType))
-    , _dsType           :: !(Maybe Text)
+    , _dsType           :: !(Maybe DataSourceType)
     , _dsDataStreamName :: !(Maybe Text)
     , _dsDataStreamId   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1185,7 +1185,7 @@ dsDataType
 
 -- | A constant describing the type of this data source. Indicates whether
 -- this data source produces raw or derived data.
-dsType :: Lens' DataSource (Maybe Text)
+dsType :: Lens' DataSource (Maybe DataSourceType)
 dsType = lens _dsType (\ s a -> s{_dsType = a})
 
 -- | The stream name uniquely identifies this particular data source among

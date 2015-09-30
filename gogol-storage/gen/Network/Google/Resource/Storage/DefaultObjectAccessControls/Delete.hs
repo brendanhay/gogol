@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- entity on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsDelete@.
-module Storage.DefaultObjectAccessControls.Delete
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
     (
     -- * REST Resource
-      DefaultObjectAccessControlsDeleteAPI
+      DefaultObjectAccessControlsDeleteResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsDelete
-    , DefaultObjectAccessControlsDelete
+    , defaultObjectAccessControlsDelete'
+    , DefaultObjectAccessControlsDelete'
 
     -- * Request Lenses
     , doacdQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsDelete@ which the
--- 'DefaultObjectAccessControlsDelete' request conforms to.
-type DefaultObjectAccessControlsDeleteAPI =
+-- 'DefaultObjectAccessControlsDelete'' request conforms to.
+type DefaultObjectAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
-           Capture "entity" Text :> Delete '[JSON] ()
+           Capture "entity" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsDelete' smart constructor.
-data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete
+-- /See:/ 'defaultObjectAccessControlsDelete'' smart constructor.
+data DefaultObjectAccessControlsDelete' = DefaultObjectAccessControlsDelete'
     { _doacdQuotaUser   :: !(Maybe Text)
     , _doacdPrettyPrint :: !Bool
     , _doacdUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete
     , _doacdOauthToken  :: !(Maybe Text)
     , _doacdEntity      :: !Text
     , _doacdFields      :: !(Maybe Text)
-    , _doacdAlt         :: !Text
+    , _doacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsDelete'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete
 -- * 'doacdFields'
 --
 -- * 'doacdAlt'
-defaultObjectAccessControlsDelete
+defaultObjectAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> DefaultObjectAccessControlsDelete
-defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
-    DefaultObjectAccessControlsDelete
+    -> DefaultObjectAccessControlsDelete'
+defaultObjectAccessControlsDelete' pDoacdBucket_ pDoacdEntity_ =
+    DefaultObjectAccessControlsDelete'
     { _doacdQuotaUser = Nothing
     , _doacdPrettyPrint = True
     , _doacdUserIp = Nothing
@@ -103,7 +111,7 @@ defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
     , _doacdOauthToken = Nothing
     , _doacdEntity = pDoacdEntity_
     , _doacdFields = Nothing
-    , _doacdAlt = "json"
+    , _doacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +164,7 @@ doacdFields
   = lens _doacdFields (\ s a -> s{_doacdFields = a})
 
 -- | Data format for the response.
-doacdAlt :: Lens' DefaultObjectAccessControlsDelete' Text
+doacdAlt :: Lens' DefaultObjectAccessControlsDelete' Alt
 doacdAlt = lens _doacdAlt (\ s a -> s{_doacdAlt = a})
 
 instance GoogleRequest
@@ -164,16 +172,18 @@ instance GoogleRequest
         type Rs DefaultObjectAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsDelete{..}
-          = go _doacdQuotaUser _doacdPrettyPrint _doacdUserIp
+          DefaultObjectAccessControlsDelete'{..}
+          = go _doacdQuotaUser (Just _doacdPrettyPrint)
+              _doacdUserIp
               _doacdBucket
               _doacdKey
               _doacdOauthToken
               _doacdEntity
               _doacdFields
-              _doacdAlt
+              (Just _doacdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsDeleteAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsDeleteResource)
                       r
                       u

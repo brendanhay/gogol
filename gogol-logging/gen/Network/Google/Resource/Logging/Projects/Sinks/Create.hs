@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- written to the destination.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsSinksCreate@.
-module Logging.Projects.Sinks.Create
+module Network.Google.Resource.Logging.Projects.Sinks.Create
     (
     -- * REST Resource
-      ProjectsSinksCreateAPI
+      ProjectsSinksCreateResource
 
     -- * Creating a Request
-    , projectsSinksCreate
-    , ProjectsSinksCreate
+    , projectsSinksCreate'
+    , ProjectsSinksCreate'
 
     -- * Request Lenses
     , pscXgafv
@@ -50,18 +51,32 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksCreate@ which the
--- 'ProjectsSinksCreate' request conforms to.
-type ProjectsSinksCreateAPI =
+-- 'ProjectsSinksCreate'' request conforms to.
+type ProjectsSinksCreateResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
-           "sinks" :> Post '[JSON] LogSink
+           "sinks" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] LogSink
 
 -- | Creates a project sink. A logs filter determines which log entries are
 -- written to the destination.
 --
--- /See:/ 'projectsSinksCreate' smart constructor.
-data ProjectsSinksCreate = ProjectsSinksCreate
+-- /See:/ 'projectsSinksCreate'' smart constructor.
+data ProjectsSinksCreate' = ProjectsSinksCreate'
     { _pscXgafv          :: !(Maybe Text)
     , _pscQuotaUser      :: !(Maybe Text)
     , _pscPrettyPrint    :: !Bool
@@ -109,11 +124,11 @@ data ProjectsSinksCreate = ProjectsSinksCreate
 -- * 'pscCallback'
 --
 -- * 'pscAlt'
-projectsSinksCreate
+projectsSinksCreate'
     :: Text -- ^ 'projectsId'
-    -> ProjectsSinksCreate
-projectsSinksCreate pPscProjectsId_ =
-    ProjectsSinksCreate
+    -> ProjectsSinksCreate'
+projectsSinksCreate' pPscProjectsId_ =
+    ProjectsSinksCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing
     , _pscPrettyPrint = True
@@ -211,10 +226,10 @@ pscAlt = lens _pscAlt (\ s a -> s{_pscAlt = a})
 instance GoogleRequest ProjectsSinksCreate' where
         type Rs ProjectsSinksCreate' = LogSink
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksCreate{..}
-          = go _pscXgafv _pscQuotaUser _pscPrettyPrint
+        requestWithRoute r u ProjectsSinksCreate'{..}
+          = go _pscXgafv _pscQuotaUser (Just _pscPrettyPrint)
               _pscUploadProtocol
-              _pscPp
+              (Just _pscPp)
               _pscAccessToken
               _pscUploadType
               _pscBearerToken
@@ -223,9 +238,9 @@ instance GoogleRequest ProjectsSinksCreate' where
               _pscProjectsId
               _pscFields
               _pscCallback
-              _pscAlt
+              (Just _pscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSinksCreateAPI)
+                      (Proxy :: Proxy ProjectsSinksCreateResource)
                       r
                       u

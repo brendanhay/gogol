@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the schedule for a job.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateScheduleGet@.
-module Coordinate.Schedule.Get
+module Network.Google.Resource.Coordinate.Schedule.Get
     (
     -- * REST Resource
-      ScheduleGetAPI
+      ScheduleGetResource
 
     -- * Creating a Request
-    , scheduleGet
-    , ScheduleGet
+    , scheduleGet'
+    , ScheduleGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateScheduleGet@ which the
--- 'ScheduleGet' request conforms to.
-type ScheduleGetAPI =
+-- 'ScheduleGet'' request conforms to.
+type ScheduleGetResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             "schedule" :> Get '[JSON] Schedule
+             "schedule" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Schedule
 
 -- | Retrieves the schedule for a job.
 --
--- /See:/ 'scheduleGet' smart constructor.
-data ScheduleGet = ScheduleGet
+-- /See:/ 'scheduleGet'' smart constructor.
+data ScheduleGet' = ScheduleGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgJobId       :: !Word64
@@ -64,7 +72,7 @@ data ScheduleGet = ScheduleGet
     , _sgKey         :: !(Maybe Text)
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ScheduleGet = ScheduleGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-scheduleGet
+scheduleGet'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> ScheduleGet
-scheduleGet pSgJobId_ pSgTeamId_ =
-    ScheduleGet
+    -> ScheduleGet'
+scheduleGet' pSgJobId_ pSgTeamId_ =
+    ScheduleGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgJobId = pSgJobId_
@@ -102,7 +110,7 @@ scheduleGet pSgJobId_ pSgTeamId_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,18 +155,22 @@ sgFields :: Lens' ScheduleGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' ScheduleGet' Text
+sgAlt :: Lens' ScheduleGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest ScheduleGet' where
         type Rs ScheduleGet' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u ScheduleGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgJobId _sgUserIp
+        requestWithRoute r u ScheduleGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgJobId
+              _sgUserIp
               _sgTeamId
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScheduleGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ScheduleGetResource)
+                      r
+                      u

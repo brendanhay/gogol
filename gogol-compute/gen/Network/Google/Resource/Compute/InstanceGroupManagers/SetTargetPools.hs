@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- change unless you recreate them.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersSetTargetPools@.
-module Compute.InstanceGroupManagers.SetTargetPools
+module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
     (
     -- * REST Resource
-      InstanceGroupManagersSetTargetPoolsAPI
+      InstanceGroupManagersSetTargetPoolsResource
 
     -- * Creating a Request
-    , instanceGroupManagersSetTargetPools
-    , InstanceGroupManagersSetTargetPools
+    , instanceGroupManagersSetTargetPools'
+    , InstanceGroupManagersSetTargetPools'
 
     -- * Request Lenses
     , igmstpQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersSetTargetPools@ which the
--- 'InstanceGroupManagersSetTargetPools' request conforms to.
-type InstanceGroupManagersSetTargetPoolsAPI =
+-- 'InstanceGroupManagersSetTargetPools'' request conforms to.
+type InstanceGroupManagersSetTargetPoolsResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               "setTargetPools" :> Post '[JSON] Operation
+               "setTargetPools" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Modifies the target pools to which all new instances in this group are
 -- assigned. The target pools for existing instances in the group do not
 -- change unless you recreate them.
 --
--- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
-data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
+-- /See:/ 'instanceGroupManagersSetTargetPools'' smart constructor.
+data InstanceGroupManagersSetTargetPools' = InstanceGroupManagersSetTargetPools'
     { _igmstpQuotaUser            :: !(Maybe Text)
     , _igmstpPrettyPrint          :: !Bool
     , _igmstpProject              :: !Text
@@ -71,7 +79,7 @@ data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
     , _igmstpKey                  :: !(Maybe Text)
     , _igmstpOauthToken           :: !(Maybe Text)
     , _igmstpFields               :: !(Maybe Text)
-    , _igmstpAlt                  :: !Text
+    , _igmstpAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetTargetPools'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
 -- * 'igmstpFields'
 --
 -- * 'igmstpAlt'
-instanceGroupManagersSetTargetPools
+instanceGroupManagersSetTargetPools'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersSetTargetPools
-instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ =
-    InstanceGroupManagersSetTargetPools
+    -> InstanceGroupManagersSetTargetPools'
+instanceGroupManagersSetTargetPools' pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ =
+    InstanceGroupManagersSetTargetPools'
     { _igmstpQuotaUser = Nothing
     , _igmstpPrettyPrint = True
     , _igmstpProject = pIgmstpProject_
@@ -113,7 +121,7 @@ instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_
     , _igmstpKey = Nothing
     , _igmstpOauthToken = Nothing
     , _igmstpFields = Nothing
-    , _igmstpAlt = "json"
+    , _igmstpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,7 +180,7 @@ igmstpFields
   = lens _igmstpFields (\ s a -> s{_igmstpFields = a})
 
 -- | Data format for the response.
-igmstpAlt :: Lens' InstanceGroupManagersSetTargetPools' Text
+igmstpAlt :: Lens' InstanceGroupManagersSetTargetPools' Alt
 igmstpAlt
   = lens _igmstpAlt (\ s a -> s{_igmstpAlt = a})
 
@@ -182,8 +190,8 @@ instance GoogleRequest
              Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupManagersSetTargetPools{..}
-          = go _igmstpQuotaUser _igmstpPrettyPrint
+          InstanceGroupManagersSetTargetPools'{..}
+          = go _igmstpQuotaUser (Just _igmstpPrettyPrint)
               _igmstpProject
               _igmstpInstanceGroupManager
               _igmstpUserIp
@@ -191,10 +199,10 @@ instance GoogleRequest
               _igmstpKey
               _igmstpOauthToken
               _igmstpFields
-              _igmstpAlt
+              (Just _igmstpAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersSetTargetPoolsAPI)
+                         Proxy InstanceGroupManagersSetTargetPoolsResource)
                       r
                       u

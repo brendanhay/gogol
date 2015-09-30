@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- in the request.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersInsert@.
-module Clouduseraccounts.Users.Insert
+module Network.Google.Resource.Clouduseraccounts.Users.Insert
     (
     -- * REST Resource
-      UsersInsertAPI
+      UsersInsertResource
 
     -- * Creating a Request
-    , usersInsert
-    , UsersInsert
+    , usersInsert'
+    , UsersInsert'
 
     -- * Request Lenses
     , uiQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersInsert@ which the
--- 'UsersInsert' request conforms to.
-type UsersInsertAPI =
+-- 'UsersInsert'' request conforms to.
+type UsersInsertResource =
      Capture "project" Text :>
-       "global" :> "users" :> Post '[JSON] Operation
+       "global" :>
+         "users" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a User resource in the specified project using the data included
 -- in the request.
 --
--- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+-- /See:/ 'usersInsert'' smart constructor.
+data UsersInsert' = UsersInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiProject     :: !Text
@@ -61,7 +70,7 @@ data UsersInsert = UsersInsert
     , _uiKey         :: !(Maybe Text)
     , _uiOauthToken  :: !(Maybe Text)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Text
+    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data UsersInsert = UsersInsert
 -- * 'uiFields'
 --
 -- * 'uiAlt'
-usersInsert
+usersInsert'
     :: Text -- ^ 'project'
-    -> UsersInsert
-usersInsert pUiProject_ =
-    UsersInsert
+    -> UsersInsert'
+usersInsert' pUiProject_ =
+    UsersInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiProject = pUiProject_
@@ -95,7 +104,7 @@ usersInsert pUiProject_ =
     , _uiKey = Nothing
     , _uiOauthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = "json"
+    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +146,22 @@ uiFields :: Lens' UsersInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 -- | Data format for the response.
-uiAlt :: Lens' UsersInsert' Text
+uiAlt :: Lens' UsersInsert' Alt
 uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersInsert{..}
-          = go _uiQuotaUser _uiPrettyPrint _uiProject _uiUserIp
+        requestWithRoute r u UsersInsert'{..}
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiProject
+              _uiUserIp
               _uiKey
               _uiOauthToken
               _uiFields
-              _uiAlt
+              (Just _uiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersInsertResource)
+                      r
+                      u

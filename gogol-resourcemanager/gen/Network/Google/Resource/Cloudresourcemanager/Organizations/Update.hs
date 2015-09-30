@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an Organization resource.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsUpdate@.
-module Cloudresourcemanager.Organizations.Update
+module Network.Google.Resource.Cloudresourcemanager.Organizations.Update
     (
     -- * REST Resource
-      OrganizationsUpdateAPI
+      OrganizationsUpdateResource
 
     -- * Creating a Request
-    , organizationsUpdate
-    , OrganizationsUpdate
+    , organizationsUpdate'
+    , OrganizationsUpdate'
 
     -- * Request Lenses
     , ouXgafv
@@ -49,17 +50,30 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsUpdate@ which the
--- 'OrganizationsUpdate' request conforms to.
-type OrganizationsUpdateAPI =
+-- 'OrganizationsUpdate'' request conforms to.
+type OrganizationsUpdateResource =
      "v1beta1" :>
        "organizations" :>
          Capture "organizationId" Text :>
-           Put '[JSON] Organization
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] Organization
 
 -- | Updates an Organization resource.
 --
--- /See:/ 'organizationsUpdate' smart constructor.
-data OrganizationsUpdate = OrganizationsUpdate
+-- /See:/ 'organizationsUpdate'' smart constructor.
+data OrganizationsUpdate' = OrganizationsUpdate'
     { _ouXgafv          :: !(Maybe Text)
     , _ouQuotaUser      :: !(Maybe Text)
     , _ouPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data OrganizationsUpdate = OrganizationsUpdate
 -- * 'ouCallback'
 --
 -- * 'ouAlt'
-organizationsUpdate
+organizationsUpdate'
     :: Text -- ^ 'organizationId'
-    -> OrganizationsUpdate
-organizationsUpdate pOuOrganizationId_ =
-    OrganizationsUpdate
+    -> OrganizationsUpdate'
+organizationsUpdate' pOuOrganizationId_ =
+    OrganizationsUpdate'
     { _ouXgafv = Nothing
     , _ouQuotaUser = Nothing
     , _ouPrettyPrint = True
@@ -207,10 +221,10 @@ ouAlt = lens _ouAlt (\ s a -> s{_ouAlt = a})
 instance GoogleRequest OrganizationsUpdate' where
         type Rs OrganizationsUpdate' = Organization
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsUpdate{..}
-          = go _ouXgafv _ouQuotaUser _ouPrettyPrint
+        requestWithRoute r u OrganizationsUpdate'{..}
+          = go _ouXgafv _ouQuotaUser (Just _ouPrettyPrint)
               _ouUploadProtocol
-              _ouPp
+              (Just _ouPp)
               _ouAccessToken
               _ouUploadType
               _ouBearerToken
@@ -219,9 +233,9 @@ instance GoogleRequest OrganizationsUpdate' where
               _ouOrganizationId
               _ouFields
               _ouCallback
-              _ouAlt
+              (Just _ouAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsUpdateAPI)
+                      (Proxy :: Proxy OrganizationsUpdateResource)
                       r
                       u

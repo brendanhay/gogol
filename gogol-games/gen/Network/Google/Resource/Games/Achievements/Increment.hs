@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsIncrement@.
-module Games.Achievements.Increment
+module Network.Google.Resource.Games.Achievements.Increment
     (
     -- * REST Resource
-      AchievementsIncrementAPI
+      AchievementsIncrementResource
 
     -- * Creating a Request
-    , achievementsIncrement
-    , AchievementsIncrement
+    , achievementsIncrement'
+    , AchievementsIncrement'
 
     -- * Request Lenses
     , aiRequestId
@@ -46,20 +47,27 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsIncrement@ which the
--- 'AchievementsIncrement' request conforms to.
-type AchievementsIncrementAPI =
+-- 'AchievementsIncrement'' request conforms to.
+type AchievementsIncrementResource =
      "achievements" :>
        Capture "achievementId" Text :>
          "increment" :>
            QueryParam "requestId" Int64 :>
-             QueryParam "stepsToIncrement" Int32 :>
-               Post '[JSON] AchievementIncrementResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "stepsToIncrement" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] AchievementIncrementResponse
 
 -- | Increments the steps of the achievement with the given ID for the
 -- currently authenticated player.
 --
--- /See:/ 'achievementsIncrement' smart constructor.
-data AchievementsIncrement = AchievementsIncrement
+-- /See:/ 'achievementsIncrement'' smart constructor.
+data AchievementsIncrement' = AchievementsIncrement'
     { _aiRequestId        :: !(Maybe Int64)
     , _aiQuotaUser        :: !(Maybe Text)
     , _aiPrettyPrint      :: !Bool
@@ -69,7 +77,7 @@ data AchievementsIncrement = AchievementsIncrement
     , _aiOauthToken       :: !(Maybe Text)
     , _aiStepsToIncrement :: !Int32
     , _aiFields           :: !(Maybe Text)
-    , _aiAlt              :: !Text
+    , _aiAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsIncrement'' with the minimum fields required to make a request.
@@ -95,12 +103,12 @@ data AchievementsIncrement = AchievementsIncrement
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-achievementsIncrement
+achievementsIncrement'
     :: Text -- ^ 'achievementId'
     -> Int32 -- ^ 'stepsToIncrement'
-    -> AchievementsIncrement
-achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
-    AchievementsIncrement
+    -> AchievementsIncrement'
+achievementsIncrement' pAiAchievementId_ pAiStepsToIncrement_ =
+    AchievementsIncrement'
     { _aiRequestId = Nothing
     , _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
@@ -110,7 +118,7 @@ achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
     , _aiOauthToken = Nothing
     , _aiStepsToIncrement = pAiStepsToIncrement_
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | A randomly generated numeric ID for each request specified by the
@@ -166,24 +174,24 @@ aiFields :: Lens' AchievementsIncrement' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' AchievementsIncrement' Text
+aiAlt :: Lens' AchievementsIncrement' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest AchievementsIncrement' where
         type Rs AchievementsIncrement' =
              AchievementIncrementResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsIncrement{..}
-          = go _aiRequestId _aiQuotaUser _aiPrettyPrint
+        requestWithRoute r u AchievementsIncrement'{..}
+          = go _aiRequestId _aiQuotaUser (Just _aiPrettyPrint)
               _aiAchievementId
               _aiUserIp
               _aiKey
               _aiOauthToken
               (Just _aiStepsToIncrement)
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsIncrementAPI)
+                      (Proxy :: Proxy AchievementsIncrementResource)
                       r
                       u

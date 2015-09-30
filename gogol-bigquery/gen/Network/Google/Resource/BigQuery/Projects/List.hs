@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all projects to which you have been granted any project role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryProjectsList@.
-module BigQuery.Projects.List
+module Network.Google.Resource.BigQuery.Projects.List
     (
     -- * REST Resource
-      ProjectsListAPI
+      ProjectsListResource
 
     -- * Creating a Request
-    , projectsList
-    , ProjectsList
+    , projectsList'
+    , ProjectsList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryProjectsList@ which the
--- 'ProjectsList' request conforms to.
-type ProjectsListAPI =
+-- 'ProjectsList'' request conforms to.
+type ProjectsListResource =
      "projects" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Word32 :>
-           Get '[JSON] ProjectList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "maxResults" Word32 :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] ProjectList
 
 -- | Lists all projects to which you have been granted any project role.
 --
--- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+-- /See:/ 'projectsList'' smart constructor.
+data ProjectsList' = ProjectsList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIp      :: !(Maybe Text)
@@ -63,7 +70,7 @@ data ProjectsList = ProjectsList
     , _plOauthToken  :: !(Maybe Text)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Text
+    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
@@ -87,10 +94,10 @@ data ProjectsList = ProjectsList
 -- * 'plFields'
 --
 -- * 'plAlt'
-projectsList
-    :: ProjectsList
-projectsList =
-    ProjectsList
+projectsList'
+    :: ProjectsList'
+projectsList' =
+    ProjectsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plUserIp = Nothing
@@ -99,7 +106,7 @@ projectsList =
     , _plOauthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +154,22 @@ plFields :: Lens' ProjectsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' ProjectsList' Text
+plAlt :: Lens' ProjectsList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u ProjectsList{..}
-          = go _plQuotaUser _plPrettyPrint _plUserIp _plKey
+        requestWithRoute r u ProjectsList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+              _plKey
               _plPageToken
               _plOauthToken
               _plMaxResults
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsListResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of instance groups, and sorts them by zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAggregatedList@.
-module Compute.InstanceGroups.AggregatedList
+module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
     (
     -- * REST Resource
-      InstanceGroupsAggregatedListAPI
+      InstanceGroupsAggregatedListResource
 
     -- * Creating a Request
-    , instanceGroupsAggregatedList
-    , InstanceGroupsAggregatedList
+    , instanceGroupsAggregatedList'
+    , InstanceGroupsAggregatedList'
 
     -- * Request Lenses
     , igalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsAggregatedList@ which the
--- 'InstanceGroupsAggregatedList' request conforms to.
-type InstanceGroupsAggregatedListAPI =
+-- 'InstanceGroupsAggregatedList'' request conforms to.
+type InstanceGroupsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "instanceGroups" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] InstanceGroupAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] InstanceGroupAggregatedList
 
 -- | Retrieves the list of instance groups, and sorts them by zone.
 --
--- /See:/ 'instanceGroupsAggregatedList' smart constructor.
-data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
+-- /See:/ 'instanceGroupsAggregatedList'' smart constructor.
+data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
     { _igalQuotaUser   :: !(Maybe Text)
     , _igalPrettyPrint :: !Bool
     , _igalProject     :: !Text
@@ -70,7 +78,7 @@ data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
     , _igalOauthToken  :: !(Maybe Text)
     , _igalMaxResults  :: !Word32
     , _igalFields      :: !(Maybe Text)
-    , _igalAlt         :: !Text
+    , _igalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
 -- * 'igalFields'
 --
 -- * 'igalAlt'
-instanceGroupsAggregatedList
+instanceGroupsAggregatedList'
     :: Text -- ^ 'project'
-    -> InstanceGroupsAggregatedList
-instanceGroupsAggregatedList pIgalProject_ =
-    InstanceGroupsAggregatedList
+    -> InstanceGroupsAggregatedList'
+instanceGroupsAggregatedList' pIgalProject_ =
+    InstanceGroupsAggregatedList'
     { _igalQuotaUser = Nothing
     , _igalPrettyPrint = True
     , _igalProject = pIgalProject_
@@ -113,7 +121,7 @@ instanceGroupsAggregatedList pIgalProject_ =
     , _igalOauthToken = Nothing
     , _igalMaxResults = 500
     , _igalFields = Nothing
-    , _igalAlt = "json"
+    , _igalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ igalFields
   = lens _igalFields (\ s a -> s{_igalFields = a})
 
 -- | Data format for the response.
-igalAlt :: Lens' InstanceGroupsAggregatedList' Text
+igalAlt :: Lens' InstanceGroupsAggregatedList' Alt
 igalAlt = lens _igalAlt (\ s a -> s{_igalAlt = a})
 
 instance GoogleRequest InstanceGroupsAggregatedList'
@@ -196,8 +204,10 @@ instance GoogleRequest InstanceGroupsAggregatedList'
         type Rs InstanceGroupsAggregatedList' =
              InstanceGroupAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsAggregatedList{..}
-          = go _igalQuotaUser _igalPrettyPrint _igalProject
+        requestWithRoute r u
+          InstanceGroupsAggregatedList'{..}
+          = go _igalQuotaUser (Just _igalPrettyPrint)
+              _igalProject
               _igalUserIp
               _igalKey
               _igalFilter
@@ -205,9 +215,9 @@ instance GoogleRequest InstanceGroupsAggregatedList'
               _igalOauthToken
               (Just _igalMaxResults)
               _igalFields
-              _igalAlt
+              (Just _igalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsAggregatedListAPI)
+                      (Proxy :: Proxy InstanceGroupsAggregatedListResource)
                       r
                       u

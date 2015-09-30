@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsInsert@.
-module Storage.BucketAccessControls.Insert
+module Network.Google.Resource.Storage.BucketAccessControls.Insert
     (
     -- * REST Resource
-      BucketAccessControlsInsertAPI
+      BucketAccessControlsInsertResource
 
     -- * Creating a Request
-    , bucketAccessControlsInsert
-    , BucketAccessControlsInsert
+    , bucketAccessControlsInsert'
+    , BucketAccessControlsInsert'
 
     -- * Request Lenses
     , baciQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsInsert@ which the
--- 'BucketAccessControlsInsert' request conforms to.
-type BucketAccessControlsInsertAPI =
+-- 'BucketAccessControlsInsert'' request conforms to.
+type BucketAccessControlsInsertResource =
      "b" :>
        Capture "bucket" Text :>
-         "acl" :> Post '[JSON] BucketAccessControl
+         "acl" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsInsert' smart constructor.
-data BucketAccessControlsInsert = BucketAccessControlsInsert
+-- /See:/ 'bucketAccessControlsInsert'' smart constructor.
+data BucketAccessControlsInsert' = BucketAccessControlsInsert'
     { _baciQuotaUser   :: !(Maybe Text)
     , _baciPrettyPrint :: !Bool
     , _baciUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data BucketAccessControlsInsert = BucketAccessControlsInsert
     , _baciKey         :: !(Maybe Text)
     , _baciOauthToken  :: !(Maybe Text)
     , _baciFields      :: !(Maybe Text)
-    , _baciAlt         :: !Text
+    , _baciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsInsert'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data BucketAccessControlsInsert = BucketAccessControlsInsert
 -- * 'baciFields'
 --
 -- * 'baciAlt'
-bucketAccessControlsInsert
+bucketAccessControlsInsert'
     :: Text -- ^ 'bucket'
-    -> BucketAccessControlsInsert
-bucketAccessControlsInsert pBaciBucket_ =
-    BucketAccessControlsInsert
+    -> BucketAccessControlsInsert'
+bucketAccessControlsInsert' pBaciBucket_ =
+    BucketAccessControlsInsert'
     { _baciQuotaUser = Nothing
     , _baciPrettyPrint = True
     , _baciUserIp = Nothing
@@ -94,7 +103,7 @@ bucketAccessControlsInsert pBaciBucket_ =
     , _baciKey = Nothing
     , _baciOauthToken = Nothing
     , _baciFields = Nothing
-    , _baciAlt = "json"
+    , _baciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +149,7 @@ baciFields
   = lens _baciFields (\ s a -> s{_baciFields = a})
 
 -- | Data format for the response.
-baciAlt :: Lens' BucketAccessControlsInsert' Text
+baciAlt :: Lens' BucketAccessControlsInsert' Alt
 baciAlt = lens _baciAlt (\ s a -> s{_baciAlt = a})
 
 instance GoogleRequest BucketAccessControlsInsert'
@@ -148,15 +157,16 @@ instance GoogleRequest BucketAccessControlsInsert'
         type Rs BucketAccessControlsInsert' =
              BucketAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsInsert{..}
-          = go _baciQuotaUser _baciPrettyPrint _baciUserIp
+        requestWithRoute r u BucketAccessControlsInsert'{..}
+          = go _baciQuotaUser (Just _baciPrettyPrint)
+              _baciUserIp
               _baciBucket
               _baciKey
               _baciOauthToken
               _baciFields
-              _baciAlt
+              (Just _baciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsInsertAPI)
+                      (Proxy :: Proxy BucketAccessControlsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersDelete@.
-module Directory.Users.Delete
+module Network.Google.Resource.Directory.Users.Delete
     (
     -- * REST Resource
-      UsersDeleteAPI
+      UsersDeleteResource
 
     -- * Creating a Request
-    , usersDelete
-    , UsersDelete
+    , usersDelete'
+    , UsersDelete'
 
     -- * Request Lenses
     , udQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersDelete@ which the
--- 'UsersDelete' request conforms to.
-type UsersDeleteAPI =
+-- 'UsersDelete'' request conforms to.
+type UsersDeleteResource =
      "users" :>
-       Capture "userKey" Text :> Delete '[JSON] ()
+       Capture "userKey" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete user
 --
--- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+-- /See:/ 'usersDelete'' smart constructor.
+data UsersDelete' = UsersDelete'
     { _udQuotaUser   :: !(Maybe Text)
     , _udPrettyPrint :: !Bool
     , _udUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UsersDelete = UsersDelete
     , _udOauthToken  :: !(Maybe Text)
     , _udUserKey     :: !Text
     , _udFields      :: !(Maybe Text)
-    , _udAlt         :: !Text
+    , _udAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UsersDelete = UsersDelete
 -- * 'udFields'
 --
 -- * 'udAlt'
-usersDelete
+usersDelete'
     :: Text -- ^ 'userKey'
-    -> UsersDelete
-usersDelete pUdUserKey_ =
-    UsersDelete
+    -> UsersDelete'
+usersDelete' pUdUserKey_ =
+    UsersDelete'
     { _udQuotaUser = Nothing
     , _udPrettyPrint = True
     , _udUserIp = Nothing
@@ -93,7 +101,7 @@ usersDelete pUdUserKey_ =
     , _udOauthToken = Nothing
     , _udUserKey = pUdUserKey_
     , _udFields = Nothing
-    , _udAlt = "json"
+    , _udAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,21 @@ udFields :: Lens' UsersDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
 -- | Data format for the response.
-udAlt :: Lens' UsersDelete' Text
+udAlt :: Lens' UsersDelete' Alt
 udAlt = lens _udAlt (\ s a -> s{_udAlt = a})
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersDelete{..}
-          = go _udQuotaUser _udPrettyPrint _udUserIp _udKey
+        requestWithRoute r u UsersDelete'{..}
+          = go _udQuotaUser (Just _udPrettyPrint) _udUserIp
+              _udKey
               _udOauthToken
               _udUserKey
               _udFields
-              _udAlt
+              (Just _udAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDeleteResource)
+                      r
+                      u

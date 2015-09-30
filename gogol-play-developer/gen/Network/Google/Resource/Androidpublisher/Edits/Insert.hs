@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsInsert@.
-module Androidpublisher.Edits.Insert
+module Network.Google.Resource.Androidpublisher.Edits.Insert
     (
     -- * REST Resource
-      EditsInsertAPI
+      EditsInsertResource
 
     -- * Creating a Request
-    , editsInsert
-    , EditsInsert
+    , editsInsert'
+    , EditsInsert'
 
     -- * Request Lenses
     , eiQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsInsert@ which the
--- 'EditsInsert' request conforms to.
-type EditsInsertAPI =
+-- 'EditsInsert'' request conforms to.
+type EditsInsertResource =
      Capture "packageName" Text :>
-       "edits" :> Post '[JSON] AppEdit
+       "edits" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] AppEdit
 
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --
--- /See:/ 'editsInsert' smart constructor.
-data EditsInsert = EditsInsert
+-- /See:/ 'editsInsert'' smart constructor.
+data EditsInsert' = EditsInsert'
     { _eiQuotaUser   :: !(Maybe Text)
     , _eiPrettyPrint :: !Bool
     , _eiPackageName :: !Text
@@ -59,7 +67,7 @@ data EditsInsert = EditsInsert
     , _eiKey         :: !(Maybe Text)
     , _eiOauthToken  :: !(Maybe Text)
     , _eiFields      :: !(Maybe Text)
-    , _eiAlt         :: !Text
+    , _eiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsInsert'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data EditsInsert = EditsInsert
 -- * 'eiFields'
 --
 -- * 'eiAlt'
-editsInsert
+editsInsert'
     :: Text -- ^ 'packageName'
-    -> EditsInsert
-editsInsert pEiPackageName_ =
-    EditsInsert
+    -> EditsInsert'
+editsInsert' pEiPackageName_ =
+    EditsInsert'
     { _eiQuotaUser = Nothing
     , _eiPrettyPrint = True
     , _eiPackageName = pEiPackageName_
@@ -93,7 +101,7 @@ editsInsert pEiPackageName_ =
     , _eiKey = Nothing
     , _eiOauthToken = Nothing
     , _eiFields = Nothing
-    , _eiAlt = "json"
+    , _eiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +145,22 @@ eiFields :: Lens' EditsInsert' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
 -- | Data format for the response.
-eiAlt :: Lens' EditsInsert' Text
+eiAlt :: Lens' EditsInsert' Alt
 eiAlt = lens _eiAlt (\ s a -> s{_eiAlt = a})
 
 instance GoogleRequest EditsInsert' where
         type Rs EditsInsert' = AppEdit
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsInsert{..}
-          = go _eiQuotaUser _eiPrettyPrint _eiPackageName
+        requestWithRoute r u EditsInsert'{..}
+          = go _eiQuotaUser (Just _eiPrettyPrint)
+              _eiPackageName
               _eiUserIp
               _eiKey
               _eiOauthToken
               _eiFields
-              _eiAlt
+              (Just _eiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsInsertResource)
+                      r
+                      u

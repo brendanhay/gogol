@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsStoreInfosList@.
-module PlayMoviesPartner.Accounts.StoreInfos.List
+module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     (
     -- * REST Resource
-      AccountsStoreInfosListAPI
+      AccountsStoreInfosListResource
 
     -- * Creating a Request
-    , accountsStoreInfosList
-    , AccountsStoreInfosList
+    , accountsStoreInfosList'
+    , AccountsStoreInfosList'
 
     -- * Request Lenses
     , asilPphNames
@@ -59,28 +60,42 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsStoreInfosList@ which the
--- 'AccountsStoreInfosList' request conforms to.
-type AccountsStoreInfosListAPI =
+-- 'AccountsStoreInfosList'' request conforms to.
+type AccountsStoreInfosListResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "storeInfos" :>
              QueryParams "pphNames" Text :>
-               QueryParams "studioNames" Text :>
-                 QueryParams "videoIds" Text :>
-                   QueryParams "countries" Text :>
-                     QueryParam "videoId" Text :>
-                       QueryParam "name" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "pageSize" Int32 :>
-                             Get '[JSON] ListStoreInfosResponse
+               QueryParam "$.xgafv" Text :>
+                 QueryParams "studioNames" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParams "videoIds" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParams "countries" Text :>
+                                   QueryParam "videoId" Text :>
+                                     QueryParam "bearer_token" Text :>
+                                       QueryParam "key" Text :>
+                                         QueryParam "name" Text :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "pageSize" Int32 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "callback" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         ListStoreInfosResponse
 
 -- | List StoreInfos owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsStoreInfosList' smart constructor.
-data AccountsStoreInfosList = AccountsStoreInfosList
+-- /See:/ 'accountsStoreInfosList'' smart constructor.
+data AccountsStoreInfosList' = AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe Text)
     , _asilXgafv          :: !(Maybe Text)
     , _asilStudioNames    :: !(Maybe Text)
@@ -152,11 +167,11 @@ data AccountsStoreInfosList = AccountsStoreInfosList
 -- * 'asilCallback'
 --
 -- * 'asilAlt'
-accountsStoreInfosList
+accountsStoreInfosList'
     :: Text -- ^ 'accountId'
-    -> AccountsStoreInfosList
-accountsStoreInfosList pAsilAccountId_ =
-    AccountsStoreInfosList
+    -> AccountsStoreInfosList'
+accountsStoreInfosList' pAsilAccountId_ =
+    AccountsStoreInfosList'
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing
@@ -312,13 +327,13 @@ instance GoogleRequest AccountsStoreInfosList' where
              ListStoreInfosResponse
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsStoreInfosList{..}
+        requestWithRoute r u AccountsStoreInfosList'{..}
           = go _asilPphNames _asilXgafv _asilStudioNames
               _asilQuotaUser
               _asilVideoIds
-              _asilPrettyPrint
+              (Just _asilPrettyPrint)
               _asilUploadProtocol
-              _asilPp
+              (Just _asilPp)
               _asilAccessToken
               _asilUploadType
               _asilCountries
@@ -332,9 +347,9 @@ instance GoogleRequest AccountsStoreInfosList' where
               _asilPageSize
               _asilFields
               _asilCallback
-              _asilAlt
+              (Just _asilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsStoreInfosListAPI)
+                      (Proxy :: Proxy AccountsStoreInfosListResource)
                       r
                       u

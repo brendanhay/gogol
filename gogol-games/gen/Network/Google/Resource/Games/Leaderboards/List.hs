@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the leaderboard metadata for your application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsList@.
-module Games.Leaderboards.List
+module Network.Google.Resource.Games.Leaderboards.List
     (
     -- * REST Resource
-      LeaderboardsListAPI
+      LeaderboardsListResource
 
     -- * Creating a Request
-    , leaderboardsList
-    , LeaderboardsList
+    , leaderboardsList'
+    , LeaderboardsList'
 
     -- * Request Lenses
     , llQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesLeaderboardsList@ which the
--- 'LeaderboardsList' request conforms to.
-type LeaderboardsListAPI =
+-- 'LeaderboardsList'' request conforms to.
+type LeaderboardsListResource =
      "leaderboards" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] LeaderboardListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] LeaderboardListResponse
 
 -- | Lists all the leaderboard metadata for your application.
 --
--- /See:/ 'leaderboardsList' smart constructor.
-data LeaderboardsList = LeaderboardsList
+-- /See:/ 'leaderboardsList'' smart constructor.
+data LeaderboardsList' = LeaderboardsList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
     , _llUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data LeaderboardsList = LeaderboardsList
     , _llOauthToken  :: !(Maybe Text)
     , _llMaxResults  :: !(Maybe Int32)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Text
+    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsList'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data LeaderboardsList = LeaderboardsList
 -- * 'llFields'
 --
 -- * 'llAlt'
-leaderboardsList
-    :: LeaderboardsList
-leaderboardsList =
-    LeaderboardsList
+leaderboardsList'
+    :: LeaderboardsList'
+leaderboardsList' =
+    LeaderboardsList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llUserIp = Nothing
@@ -105,7 +113,7 @@ leaderboardsList =
     , _llOauthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,22 +167,23 @@ llFields :: Lens' LeaderboardsList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LeaderboardsList' Text
+llAlt :: Lens' LeaderboardsList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LeaderboardsList' where
         type Rs LeaderboardsList' = LeaderboardListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u LeaderboardsList{..}
-          = go _llQuotaUser _llPrettyPrint _llUserIp _llKey
+        requestWithRoute r u LeaderboardsList'{..}
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+              _llKey
               _llLanguage
               _llPageToken
               _llOauthToken
               _llMaxResults
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardsListAPI)
+                      (Proxy :: Proxy LeaderboardsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- access to Google services.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseDevicesSetState@.
-module Androidenterprise.Devices.SetState
+module Network.Google.Resource.Androidenterprise.Devices.SetState
     (
     -- * REST Resource
-      DevicesSetStateAPI
+      DevicesSetStateResource
 
     -- * Creating a Request
-    , devicesSetState
-    , DevicesSetState
+    , devicesSetState'
+    , DevicesSetState'
 
     -- * Request Lenses
     , dssQuotaUser
@@ -49,15 +50,22 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseDevicesSetState@ which the
--- 'DevicesSetState' request conforms to.
-type DevicesSetStateAPI =
+-- 'DevicesSetState'' request conforms to.
+type DevicesSetStateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "devices" :>
                Capture "deviceId" Text :>
-                 "state" :> Put '[JSON] DeviceState
+                 "state" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] DeviceState
 
 -- | Sets whether a device is enabled or disabled for access by the user to
 -- Google services. The device state takes effect only if enforcing EMM
@@ -65,8 +73,8 @@ type DevicesSetStateAPI =
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ 'devicesSetState' smart constructor.
-data DevicesSetState = DevicesSetState
+-- /See:/ 'devicesSetState'' smart constructor.
+data DevicesSetState' = DevicesSetState'
     { _dssQuotaUser    :: !(Maybe Text)
     , _dssPrettyPrint  :: !Bool
     , _dssEnterpriseId :: !Text
@@ -76,7 +84,7 @@ data DevicesSetState = DevicesSetState
     , _dssDeviceId     :: !Text
     , _dssOauthToken   :: !(Maybe Text)
     , _dssFields       :: !(Maybe Text)
-    , _dssAlt          :: !Text
+    , _dssAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DevicesSetState'' with the minimum fields required to make a request.
@@ -102,13 +110,13 @@ data DevicesSetState = DevicesSetState
 -- * 'dssFields'
 --
 -- * 'dssAlt'
-devicesSetState
+devicesSetState'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'deviceId'
-    -> DevicesSetState
-devicesSetState pDssEnterpriseId_ pDssUserId_ pDssDeviceId_ =
-    DevicesSetState
+    -> DevicesSetState'
+devicesSetState' pDssEnterpriseId_ pDssUserId_ pDssDeviceId_ =
+    DevicesSetState'
     { _dssQuotaUser = Nothing
     , _dssPrettyPrint = True
     , _dssEnterpriseId = pDssEnterpriseId_
@@ -118,7 +126,7 @@ devicesSetState pDssEnterpriseId_ pDssUserId_ pDssDeviceId_ =
     , _dssDeviceId = pDssDeviceId_
     , _dssOauthToken = Nothing
     , _dssFields = Nothing
-    , _dssAlt = "json"
+    , _dssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -174,22 +182,24 @@ dssFields
   = lens _dssFields (\ s a -> s{_dssFields = a})
 
 -- | Data format for the response.
-dssAlt :: Lens' DevicesSetState' Text
+dssAlt :: Lens' DevicesSetState' Alt
 dssAlt = lens _dssAlt (\ s a -> s{_dssAlt = a})
 
 instance GoogleRequest DevicesSetState' where
         type Rs DevicesSetState' = DeviceState
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u DevicesSetState{..}
-          = go _dssQuotaUser _dssPrettyPrint _dssEnterpriseId
+        requestWithRoute r u DevicesSetState'{..}
+          = go _dssQuotaUser (Just _dssPrettyPrint)
+              _dssEnterpriseId
               _dssUserIp
               _dssUserId
               _dssKey
               _dssDeviceId
               _dssOauthToken
               _dssFields
-              _dssAlt
+              (Just _dssAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DevicesSetStateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DevicesSetStateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new annotation.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryAnnotationsInsert@.
-module Books.Mylibrary.Annotations.Insert
+module Network.Google.Resource.Books.Mylibrary.Annotations.Insert
     (
     -- * REST Resource
-      MylibraryAnnotationsInsertAPI
+      MylibraryAnnotationsInsertResource
 
     -- * Creating a Request
-    , mylibraryAnnotationsInsert
-    , MylibraryAnnotationsInsert
+    , mylibraryAnnotationsInsert'
+    , MylibraryAnnotationsInsert'
 
     -- * Request Lenses
     , maiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryAnnotationsInsert@ which the
--- 'MylibraryAnnotationsInsert' request conforms to.
-type MylibraryAnnotationsInsertAPI =
+-- 'MylibraryAnnotationsInsert'' request conforms to.
+type MylibraryAnnotationsInsertResource =
      "mylibrary" :>
        "annotations" :>
-         QueryParam "country" Text :>
-           QueryParam "showOnlySummaryInResponse" Bool :>
-             QueryParam "source" Text :> Post '[JSON] Annotation
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "country" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "showOnlySummaryInResponse" Bool :>
+                     QueryParam "source" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Annotation
 
 -- | Inserts a new annotation.
 --
--- /See:/ 'mylibraryAnnotationsInsert' smart constructor.
-data MylibraryAnnotationsInsert = MylibraryAnnotationsInsert
+-- /See:/ 'mylibraryAnnotationsInsert'' smart constructor.
+data MylibraryAnnotationsInsert' = MylibraryAnnotationsInsert'
     { _maiQuotaUser                 :: !(Maybe Text)
     , _maiPrettyPrint               :: !Bool
     , _maiCountry                   :: !(Maybe Text)
@@ -66,7 +74,7 @@ data MylibraryAnnotationsInsert = MylibraryAnnotationsInsert
     , _maiSource                    :: !(Maybe Text)
     , _maiOauthToken                :: !(Maybe Text)
     , _maiFields                    :: !(Maybe Text)
-    , _maiAlt                       :: !Text
+    , _maiAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryAnnotationsInsert'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data MylibraryAnnotationsInsert = MylibraryAnnotationsInsert
 -- * 'maiFields'
 --
 -- * 'maiAlt'
-mylibraryAnnotationsInsert
-    :: MylibraryAnnotationsInsert
-mylibraryAnnotationsInsert =
-    MylibraryAnnotationsInsert
+mylibraryAnnotationsInsert'
+    :: MylibraryAnnotationsInsert'
+mylibraryAnnotationsInsert' =
+    MylibraryAnnotationsInsert'
     { _maiQuotaUser = Nothing
     , _maiPrettyPrint = True
     , _maiCountry = Nothing
@@ -105,7 +113,7 @@ mylibraryAnnotationsInsert =
     , _maiSource = Nothing
     , _maiOauthToken = Nothing
     , _maiFields = Nothing
-    , _maiAlt = "json"
+    , _maiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,24 +170,24 @@ maiFields
   = lens _maiFields (\ s a -> s{_maiFields = a})
 
 -- | Data format for the response.
-maiAlt :: Lens' MylibraryAnnotationsInsert' Text
+maiAlt :: Lens' MylibraryAnnotationsInsert' Alt
 maiAlt = lens _maiAlt (\ s a -> s{_maiAlt = a})
 
 instance GoogleRequest MylibraryAnnotationsInsert'
          where
         type Rs MylibraryAnnotationsInsert' = Annotation
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryAnnotationsInsert{..}
-          = go _maiQuotaUser _maiPrettyPrint _maiCountry
+        requestWithRoute r u MylibraryAnnotationsInsert'{..}
+          = go _maiQuotaUser (Just _maiPrettyPrint) _maiCountry
               _maiUserIp
               _maiKey
               _maiShowOnlySummaryInResponse
               _maiSource
               _maiOauthToken
               _maiFields
-              _maiAlt
+              (Just _maiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryAnnotationsInsertAPI)
+                      (Proxy :: Proxy MylibraryAnnotationsInsertResource)
                       r
                       u

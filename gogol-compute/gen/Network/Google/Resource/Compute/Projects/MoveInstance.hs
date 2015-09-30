@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- another.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsMoveInstance@.
-module Compute.Projects.MoveInstance
+module Network.Google.Resource.Compute.Projects.MoveInstance
     (
     -- * REST Resource
-      ProjectsMoveInstanceAPI
+      ProjectsMoveInstanceResource
 
     -- * Creating a Request
-    , projectsMoveInstance
-    , ProjectsMoveInstance
+    , projectsMoveInstance'
+    , ProjectsMoveInstance'
 
     -- * Request Lenses
     , pmiQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeProjectsMoveInstance@ which the
--- 'ProjectsMoveInstance' request conforms to.
-type ProjectsMoveInstanceAPI =
+-- 'ProjectsMoveInstance'' request conforms to.
+type ProjectsMoveInstanceResource =
      Capture "project" Text :>
-       "moveInstance" :> Post '[JSON] Operation
+       "moveInstance" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Moves an instance and its attached persistent disks from one zone to
 -- another.
 --
--- /See:/ 'projectsMoveInstance' smart constructor.
-data ProjectsMoveInstance = ProjectsMoveInstance
+-- /See:/ 'projectsMoveInstance'' smart constructor.
+data ProjectsMoveInstance' = ProjectsMoveInstance'
     { _pmiQuotaUser   :: !(Maybe Text)
     , _pmiPrettyPrint :: !Bool
     , _pmiProject     :: !Text
@@ -61,7 +69,7 @@ data ProjectsMoveInstance = ProjectsMoveInstance
     , _pmiKey         :: !(Maybe Text)
     , _pmiOauthToken  :: !(Maybe Text)
     , _pmiFields      :: !(Maybe Text)
-    , _pmiAlt         :: !Text
+    , _pmiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveInstance'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data ProjectsMoveInstance = ProjectsMoveInstance
 -- * 'pmiFields'
 --
 -- * 'pmiAlt'
-projectsMoveInstance
+projectsMoveInstance'
     :: Text -- ^ 'project'
-    -> ProjectsMoveInstance
-projectsMoveInstance pPmiProject_ =
-    ProjectsMoveInstance
+    -> ProjectsMoveInstance'
+projectsMoveInstance' pPmiProject_ =
+    ProjectsMoveInstance'
     { _pmiQuotaUser = Nothing
     , _pmiPrettyPrint = True
     , _pmiProject = pPmiProject_
@@ -95,7 +103,7 @@ projectsMoveInstance pPmiProject_ =
     , _pmiKey = Nothing
     , _pmiOauthToken = Nothing
     , _pmiFields = Nothing
-    , _pmiAlt = "json"
+    , _pmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,21 @@ pmiFields
   = lens _pmiFields (\ s a -> s{_pmiFields = a})
 
 -- | Data format for the response.
-pmiAlt :: Lens' ProjectsMoveInstance' Text
+pmiAlt :: Lens' ProjectsMoveInstance' Alt
 pmiAlt = lens _pmiAlt (\ s a -> s{_pmiAlt = a})
 
 instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsMoveInstance{..}
-          = go _pmiQuotaUser _pmiPrettyPrint _pmiProject
+        requestWithRoute r u ProjectsMoveInstance'{..}
+          = go _pmiQuotaUser (Just _pmiPrettyPrint) _pmiProject
               _pmiUserIp
               _pmiKey
               _pmiOauthToken
               _pmiFields
-              _pmiAlt
+              (Just _pmiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsMoveInstanceAPI)
+                      (Proxy :: Proxy ProjectsMoveInstanceResource)
                       r
                       u

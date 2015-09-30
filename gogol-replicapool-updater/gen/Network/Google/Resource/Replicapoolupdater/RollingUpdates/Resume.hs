@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- state of the update is ROLLED_OUT.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesResume@.
-module Replicapoolupdater.RollingUpdates.Resume
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Resume
     (
     -- * REST Resource
-      RollingUpdatesResumeAPI
+      RollingUpdatesResumeResource
 
     -- * Creating a Request
-    , rollingUpdatesResume
-    , RollingUpdatesResume
+    , rollingUpdatesResume'
+    , RollingUpdatesResume'
 
     -- * Request Lenses
     , rRollingUpdate
@@ -46,20 +47,27 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesResume@ which the
--- 'RollingUpdatesResume' request conforms to.
-type RollingUpdatesResumeAPI =
+-- 'RollingUpdatesResume'' request conforms to.
+type RollingUpdatesResumeResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
-               "resume" :> Post '[JSON] Operation
+               "resume" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Continues an update in PAUSED state. Has no effect if invoked when the
 -- state of the update is ROLLED_OUT.
 --
--- /See:/ 'rollingUpdatesResume' smart constructor.
-data RollingUpdatesResume = RollingUpdatesResume
+-- /See:/ 'rollingUpdatesResume'' smart constructor.
+data RollingUpdatesResume' = RollingUpdatesResume'
     { _rRollingUpdate :: !Text
     , _rQuotaUser     :: !(Maybe Text)
     , _rPrettyPrint   :: !Bool
@@ -69,7 +77,7 @@ data RollingUpdatesResume = RollingUpdatesResume
     , _rKey           :: !(Maybe Text)
     , _rOauthToken    :: !(Maybe Text)
     , _rFields        :: !(Maybe Text)
-    , _rAlt           :: !Text
+    , _rAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesResume'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data RollingUpdatesResume = RollingUpdatesResume
 -- * 'rFields'
 --
 -- * 'rAlt'
-rollingUpdatesResume
+rollingUpdatesResume'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesResume
-rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
-    RollingUpdatesResume
+    -> RollingUpdatesResume'
+rollingUpdatesResume' pRRollingUpdate_ pRProject_ pRZone_ =
+    RollingUpdatesResume'
     { _rRollingUpdate = pRRollingUpdate_
     , _rQuotaUser = Nothing
     , _rPrettyPrint = True
@@ -111,7 +119,7 @@ rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
     , _rKey = Nothing
     , _rOauthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = "json"
+    , _rAlt = JSON
     }
 
 -- | The name of the update.
@@ -161,24 +169,24 @@ rFields :: Lens' RollingUpdatesResume' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-rAlt :: Lens' RollingUpdatesResume' Text
+rAlt :: Lens' RollingUpdatesResume' Alt
 rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest RollingUpdatesResume' where
         type Rs RollingUpdatesResume' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesResume{..}
-          = go _rRollingUpdate _rQuotaUser _rPrettyPrint
+        requestWithRoute r u RollingUpdatesResume'{..}
+          = go _rRollingUpdate _rQuotaUser (Just _rPrettyPrint)
               _rProject
               _rUserIp
               _rZone
               _rKey
               _rOauthToken
               _rFields
-              _rAlt
+              (Just _rAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesResumeAPI)
+                      (Proxy :: Proxy RollingUpdatesResumeResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesGet@.
-module Classroom.Courses.Get
+module Network.Google.Resource.Classroom.Courses.Get
     (
     -- * REST Resource
-      CoursesGetAPI
+      CoursesGetResource
 
     -- * Creating a Request
-    , coursesGet
-    , CoursesGet
+    , coursesGet'
+    , CoursesGet'
 
     -- * Request Lenses
     , cgXgafv
@@ -53,10 +54,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesGet@ which the
--- 'CoursesGet' request conforms to.
-type CoursesGetAPI =
+-- 'CoursesGet'' request conforms to.
+type CoursesGetResource =
      "v1" :>
-       "courses" :> Capture "id" Text :> Get '[JSON] Course
+       "courses" :>
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Course
 
 -- | Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
@@ -64,8 +79,8 @@ type CoursesGetAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
 -- requested ID.
 --
--- /See:/ 'coursesGet' smart constructor.
-data CoursesGet = CoursesGet
+-- /See:/ 'coursesGet'' smart constructor.
+data CoursesGet' = CoursesGet'
     { _cgXgafv          :: !(Maybe Text)
     , _cgQuotaUser      :: !(Maybe Text)
     , _cgPrettyPrint    :: !Bool
@@ -113,11 +128,11 @@ data CoursesGet = CoursesGet
 -- * 'cgCallback'
 --
 -- * 'cgAlt'
-coursesGet
+coursesGet'
     :: Text -- ^ 'id'
-    -> CoursesGet
-coursesGet pCgId_ =
-    CoursesGet
+    -> CoursesGet'
+coursesGet' pCgId_ =
+    CoursesGet'
     { _cgXgafv = Nothing
     , _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
@@ -211,10 +226,10 @@ cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 instance GoogleRequest CoursesGet' where
         type Rs CoursesGet' = Course
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesGet{..}
-          = go _cgXgafv _cgQuotaUser _cgPrettyPrint
+        requestWithRoute r u CoursesGet'{..}
+          = go _cgXgafv _cgQuotaUser (Just _cgPrettyPrint)
               _cgUploadProtocol
-              _cgPp
+              (Just _cgPp)
               _cgAccessToken
               _cgUploadType
               _cgBearerToken
@@ -223,6 +238,8 @@ instance GoogleRequest CoursesGet' where
               _cgOauthToken
               _cgFields
               _cgCallback
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy CoursesGetResource)
+                      r
+                      u

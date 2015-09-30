@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns an experiment to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsGet@.
-module Analytics.Management.Experiments.Get
+module Network.Google.Resource.Analytics.Management.Experiments.Get
     (
     -- * REST Resource
-      ManagementExperimentsGetAPI
+      ManagementExperimentsGetResource
 
     -- * Creating a Request
-    , managementExperimentsGet
-    , ManagementExperimentsGet
+    , managementExperimentsGet'
+    , ManagementExperimentsGet'
 
     -- * Request Lenses
     , megQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsGet@ which the
--- 'ManagementExperimentsGet' request conforms to.
-type ManagementExperimentsGetAPI =
+-- 'ManagementExperimentsGet'' request conforms to.
+type ManagementExperimentsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,20 @@ type ManagementExperimentsGetAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     Capture "experimentId" Text :> Get '[JSON] Experiment
+                     Capture "experimentId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] Experiment
 
 -- | Returns an experiment to which the user has access.
 --
--- /See:/ 'managementExperimentsGet' smart constructor.
-data ManagementExperimentsGet = ManagementExperimentsGet
+-- /See:/ 'managementExperimentsGet'' smart constructor.
+data ManagementExperimentsGet' = ManagementExperimentsGet'
     { _megQuotaUser     :: !(Maybe Text)
     , _megPrettyPrint   :: !Bool
     , _megWebPropertyId :: !Text
@@ -72,7 +81,7 @@ data ManagementExperimentsGet = ManagementExperimentsGet
     , _megKey           :: !(Maybe Text)
     , _megOauthToken    :: !(Maybe Text)
     , _megFields        :: !(Maybe Text)
-    , _megAlt           :: !Text
+    , _megAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsGet'' with the minimum fields required to make a request.
@@ -100,14 +109,14 @@ data ManagementExperimentsGet = ManagementExperimentsGet
 -- * 'megFields'
 --
 -- * 'megAlt'
-managementExperimentsGet
+managementExperimentsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
-    -> ManagementExperimentsGet
-managementExperimentsGet pMegWebPropertyId_ pMegProfileId_ pMegAccountId_ pMegExperimentId_ =
-    ManagementExperimentsGet
+    -> ManagementExperimentsGet'
+managementExperimentsGet' pMegWebPropertyId_ pMegProfileId_ pMegAccountId_ pMegExperimentId_ =
+    ManagementExperimentsGet'
     { _megQuotaUser = Nothing
     , _megPrettyPrint = False
     , _megWebPropertyId = pMegWebPropertyId_
@@ -118,7 +127,7 @@ managementExperimentsGet pMegWebPropertyId_ pMegProfileId_ pMegAccountId_ pMegEx
     , _megKey = Nothing
     , _megOauthToken = Nothing
     , _megFields = Nothing
-    , _megAlt = "json"
+    , _megAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,15 +189,16 @@ megFields
   = lens _megFields (\ s a -> s{_megFields = a})
 
 -- | Data format for the response.
-megAlt :: Lens' ManagementExperimentsGet' Text
+megAlt :: Lens' ManagementExperimentsGet' Alt
 megAlt = lens _megAlt (\ s a -> s{_megAlt = a})
 
 instance GoogleRequest ManagementExperimentsGet'
          where
         type Rs ManagementExperimentsGet' = Experiment
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsGet{..}
-          = go _megQuotaUser _megPrettyPrint _megWebPropertyId
+        requestWithRoute r u ManagementExperimentsGet'{..}
+          = go _megQuotaUser (Just _megPrettyPrint)
+              _megWebPropertyId
               _megUserIp
               _megProfileId
               _megAccountId
@@ -196,9 +206,9 @@ instance GoogleRequest ManagementExperimentsGet'
               _megKey
               _megOauthToken
               _megFields
-              _megAlt
+              (Just _megAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsGetAPI)
+                      (Proxy :: Proxy ManagementExperimentsGetResource)
                       r
                       u

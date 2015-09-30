@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- be returned.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsList@.
-module ProximityBeacon.Beacons.List
+module Network.Google.Resource.ProximityBeacon.Beacons.List
     (
     -- * REST Resource
-      BeaconsListAPI
+      BeaconsListResource
 
     -- * Creating a Request
-    , beaconsList
-    , BeaconsList
+    , beaconsList'
+    , BeaconsList'
 
     -- * Request Lenses
     , blXgafv
@@ -53,21 +54,34 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsList@ which the
--- 'BeaconsList' request conforms to.
-type BeaconsListAPI =
+-- 'BeaconsList'' request conforms to.
+type BeaconsListResource =
      "v1beta1" :>
        "beacons" :>
-         QueryParam "q" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListBeaconsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "q" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListBeaconsResponse
 
 -- | Searches the beacon registry for beacons that match the given search
 -- criteria. Only those beacons that the client has permission to list will
 -- be returned.
 --
--- /See:/ 'beaconsList' smart constructor.
-data BeaconsList = BeaconsList
+-- /See:/ 'beaconsList'' smart constructor.
+data BeaconsList' = BeaconsList'
     { _blXgafv          :: !(Maybe Text)
     , _blQuotaUser      :: !(Maybe Text)
     , _blPrettyPrint    :: !Bool
@@ -121,10 +135,10 @@ data BeaconsList = BeaconsList
 -- * 'blCallback'
 --
 -- * 'blAlt'
-beaconsList
-    :: BeaconsList
-beaconsList =
-    BeaconsList
+beaconsList'
+    :: BeaconsList'
+beaconsList' =
+    BeaconsList'
     { _blXgafv = Nothing
     , _blQuotaUser = Nothing
     , _blPrettyPrint = True
@@ -274,10 +288,10 @@ blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
 instance GoogleRequest BeaconsList' where
         type Rs BeaconsList' = ListBeaconsResponse
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsList{..}
-          = go _blXgafv _blQuotaUser _blPrettyPrint
+        requestWithRoute r u BeaconsList'{..}
+          = go _blXgafv _blQuotaUser (Just _blPrettyPrint)
               _blUploadProtocol
-              _blPp
+              (Just _blPp)
               _blAccessToken
               _blUploadType
               _blQ
@@ -288,6 +302,9 @@ instance GoogleRequest BeaconsList' where
               _blPageSize
               _blFields
               _blCallback
-              _blAlt
+              (Just _blAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy BeaconsListResource)
+                      r
+                      u

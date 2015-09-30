@@ -50,7 +50,7 @@ import           Network.Google.Billing.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Cloud Billing API.
-billingURL :: BaseURL
+billingURL :: BaseUrl
 billingURL
   = BaseUrl Https
       "https://cloudbilling.googleapis.com/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- delete snapshots.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksDelete@.
-module Compute.Disks.Delete
+module Network.Google.Resource.Compute.Disks.Delete
     (
     -- * REST Resource
-      DisksDeleteAPI
+      DisksDeleteResource
 
     -- * Creating a Request
-    , disksDelete
-    , DisksDelete
+    , disksDelete'
+    , DisksDelete'
 
     -- * Request Lenses
     , ddQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksDelete@ which the
--- 'DisksDelete' request conforms to.
-type DisksDeleteAPI =
+-- 'DisksDelete'' request conforms to.
+type DisksDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
-             Capture "disk" Text :> Delete '[JSON] Operation
+             Capture "disk" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not
 -- delete any snapshots previously made from the disk. You must separately
 -- delete snapshots.
 --
--- /See:/ 'disksDelete' smart constructor.
-data DisksDelete = DisksDelete
+-- /See:/ 'disksDelete'' smart constructor.
+data DisksDelete' = DisksDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
     , _ddProject     :: !Text
@@ -72,7 +80,7 @@ data DisksDelete = DisksDelete
     , _ddKey         :: !(Maybe Text)
     , _ddOauthToken  :: !(Maybe Text)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Text
+    , _ddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksDelete'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data DisksDelete = DisksDelete
 -- * 'ddFields'
 --
 -- * 'ddAlt'
-disksDelete
+disksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
     -> Text -- ^ 'zone'
-    -> DisksDelete
-disksDelete pDdProject_ pDdDisk_ pDdZone_ =
-    DisksDelete
+    -> DisksDelete'
+disksDelete' pDdProject_ pDdDisk_ pDdZone_ =
+    DisksDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
     , _ddProject = pDdProject_
@@ -114,7 +122,7 @@ disksDelete pDdProject_ pDdDisk_ pDdZone_ =
     , _ddKey = Nothing
     , _ddOauthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = "json"
+    , _ddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,19 +172,23 @@ ddFields :: Lens' DisksDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
 -- | Data format for the response.
-ddAlt :: Lens' DisksDelete' Text
+ddAlt :: Lens' DisksDelete' Alt
 ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
 
 instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksDelete{..}
-          = go _ddQuotaUser _ddPrettyPrint _ddProject _ddDisk
+        requestWithRoute r u DisksDelete'{..}
+          = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
+              _ddDisk
               _ddUserIp
               _ddZone
               _ddKey
               _ddOauthToken
               _ddFields
-              _ddAlt
+              (Just _ddAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DisksDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy DisksDeleteResource)
+                      r
+                      u

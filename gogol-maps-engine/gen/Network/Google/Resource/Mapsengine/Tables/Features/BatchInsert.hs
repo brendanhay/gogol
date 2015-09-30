@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- guide.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFeaturesBatchInsert@.
-module Mapsengine.Tables.Features.BatchInsert
+module Network.Google.Resource.Mapsengine.Tables.Features.BatchInsert
     (
     -- * REST Resource
-      TablesFeaturesBatchInsertAPI
+      TablesFeaturesBatchInsertResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchInsert
-    , TablesFeaturesBatchInsert
+    , tablesFeaturesBatchInsert'
+    , TablesFeaturesBatchInsert'
 
     -- * Request Lenses
     , tfbiQuotaUser
@@ -49,11 +50,19 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFeaturesBatchInsert@ which the
--- 'TablesFeaturesBatchInsert' request conforms to.
-type TablesFeaturesBatchInsertAPI =
+-- 'TablesFeaturesBatchInsert'' request conforms to.
+type TablesFeaturesBatchInsertResource =
      "tables" :>
        Capture "id" Text :>
-         "features" :> "batchInsert" :> Post '[JSON] ()
+         "features" :>
+           "batchInsert" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Append features to an existing table. A single batchInsert request can
 -- create: - Up to 50 features. - A combined total of 10 000 vertices.
@@ -63,8 +72,8 @@ type TablesFeaturesBatchInsertAPI =
 -- features, read Creating features in the Google Maps Engine developer\'s
 -- guide.
 --
--- /See:/ 'tablesFeaturesBatchInsert' smart constructor.
-data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
+-- /See:/ 'tablesFeaturesBatchInsert'' smart constructor.
+data TablesFeaturesBatchInsert' = TablesFeaturesBatchInsert'
     { _tfbiQuotaUser   :: !(Maybe Text)
     , _tfbiPrettyPrint :: !Bool
     , _tfbiUserIp      :: !(Maybe Text)
@@ -72,7 +81,7 @@ data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
     , _tfbiId          :: !Text
     , _tfbiOauthToken  :: !(Maybe Text)
     , _tfbiFields      :: !(Maybe Text)
-    , _tfbiAlt         :: !Text
+    , _tfbiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchInsert'' with the minimum fields required to make a request.
@@ -94,11 +103,11 @@ data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
 -- * 'tfbiFields'
 --
 -- * 'tfbiAlt'
-tablesFeaturesBatchInsert
+tablesFeaturesBatchInsert'
     :: Text -- ^ 'id'
-    -> TablesFeaturesBatchInsert
-tablesFeaturesBatchInsert pTfbiId_ =
-    TablesFeaturesBatchInsert
+    -> TablesFeaturesBatchInsert'
+tablesFeaturesBatchInsert' pTfbiId_ =
+    TablesFeaturesBatchInsert'
     { _tfbiQuotaUser = Nothing
     , _tfbiPrettyPrint = True
     , _tfbiUserIp = Nothing
@@ -106,7 +115,7 @@ tablesFeaturesBatchInsert pTfbiId_ =
     , _tfbiId = pTfbiId_
     , _tfbiOauthToken = Nothing
     , _tfbiFields = Nothing
-    , _tfbiAlt = "json"
+    , _tfbiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +160,23 @@ tfbiFields
   = lens _tfbiFields (\ s a -> s{_tfbiFields = a})
 
 -- | Data format for the response.
-tfbiAlt :: Lens' TablesFeaturesBatchInsert' Text
+tfbiAlt :: Lens' TablesFeaturesBatchInsert' Alt
 tfbiAlt = lens _tfbiAlt (\ s a -> s{_tfbiAlt = a})
 
 instance GoogleRequest TablesFeaturesBatchInsert'
          where
         type Rs TablesFeaturesBatchInsert' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFeaturesBatchInsert{..}
-          = go _tfbiQuotaUser _tfbiPrettyPrint _tfbiUserIp
+        requestWithRoute r u TablesFeaturesBatchInsert'{..}
+          = go _tfbiQuotaUser (Just _tfbiPrettyPrint)
+              _tfbiUserIp
               _tfbiKey
               _tfbiId
               _tfbiOauthToken
               _tfbiFields
-              _tfbiAlt
+              (Just _tfbiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFeaturesBatchInsertAPI)
+                      (Proxy :: Proxy TablesFeaturesBatchInsertResource)
                       r
                       u

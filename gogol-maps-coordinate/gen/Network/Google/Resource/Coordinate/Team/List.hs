@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of teams for a user.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateTeamList@.
-module Coordinate.Team.List
+module Network.Google.Resource.Coordinate.Team.List
     (
     -- * REST Resource
-      TeamListAPI
+      TeamListResource
 
     -- * Creating a Request
-    , teamList
-    , TeamList
+    , teamList'
+    , TeamList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateTeamList@ which the
--- 'TeamList' request conforms to.
-type TeamListAPI =
+-- 'TeamList'' request conforms to.
+type TeamListResource =
      "teams" :>
-       QueryParam "dispatcher" Bool :>
-         QueryParam "admin" Bool :>
-           QueryParam "worker" Bool :>
-             Get '[JSON] TeamListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "dispatcher" Bool :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "admin" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "worker" Bool :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] TeamListResponse
 
 -- | Retrieves a list of teams for a user.
 --
--- /See:/ 'teamList' smart constructor.
-data TeamList = TeamList
+-- /See:/ 'teamList'' smart constructor.
+data TeamList' = TeamList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlDispatcher  :: !(Maybe Bool)
     , _tlPrettyPrint :: !Bool
@@ -66,7 +73,7 @@ data TeamList = TeamList
     , _tlOauthToken  :: !(Maybe Text)
     , _tlWorker      :: !(Maybe Bool)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeamList'' with the minimum fields required to make a request.
@@ -92,10 +99,10 @@ data TeamList = TeamList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-teamList
-    :: TeamList
-teamList =
-    TeamList
+teamList'
+    :: TeamList'
+teamList' =
+    TeamList'
     { _tlQuotaUser = Nothing
     , _tlDispatcher = Nothing
     , _tlPrettyPrint = True
@@ -105,7 +112,7 @@ teamList =
     , _tlOauthToken = Nothing
     , _tlWorker = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,20 +162,21 @@ tlFields :: Lens' TeamList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TeamList' Text
+tlAlt :: Lens' TeamList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u TeamList{..}
-          = go _tlQuotaUser _tlDispatcher _tlPrettyPrint
+        requestWithRoute r u TeamList'{..}
+          = go _tlQuotaUser _tlDispatcher (Just _tlPrettyPrint)
               _tlAdmin
               _tlUserIp
               _tlKey
               _tlOauthToken
               _tlWorker
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TeamListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TeamListResource) r
+                      u

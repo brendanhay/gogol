@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- deployment manifest.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsInsert@.
-module DeploymentManager.Deployments.Insert
+module Network.Google.Resource.DeploymentManager.Deployments.Insert
     (
     -- * REST Resource
-      DeploymentsInsertAPI
+      DeploymentsInsertResource
 
     -- * Creating a Request
-    , deploymentsInsert
-    , DeploymentsInsert
+    , deploymentsInsert'
+    , DeploymentsInsert'
 
     -- * Request Lenses
     , diQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerDeploymentsInsert@ which the
--- 'DeploymentsInsert' request conforms to.
-type DeploymentsInsertAPI =
+-- 'DeploymentsInsert'' request conforms to.
+type DeploymentsInsertResource =
      Capture "project" Text :>
-       "global" :> "deployments" :> Post '[JSON] Operation
+       "global" :>
+         "deployments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ 'deploymentsInsert' smart constructor.
-data DeploymentsInsert = DeploymentsInsert
+-- /See:/ 'deploymentsInsert'' smart constructor.
+data DeploymentsInsert' = DeploymentsInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diProject     :: !Text
@@ -61,7 +70,7 @@ data DeploymentsInsert = DeploymentsInsert
     , _diKey         :: !(Maybe Text)
     , _diOauthToken  :: !(Maybe Text)
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Text
+    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data DeploymentsInsert = DeploymentsInsert
 -- * 'diFields'
 --
 -- * 'diAlt'
-deploymentsInsert
+deploymentsInsert'
     :: Text -- ^ 'project'
-    -> DeploymentsInsert
-deploymentsInsert pDiProject_ =
-    DeploymentsInsert
+    -> DeploymentsInsert'
+deploymentsInsert' pDiProject_ =
+    DeploymentsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diProject = pDiProject_
@@ -95,7 +104,7 @@ deploymentsInsert pDiProject_ =
     , _diKey = Nothing
     , _diOauthToken = Nothing
     , _diFields = Nothing
-    , _diAlt = "json"
+    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +146,22 @@ diFields :: Lens' DeploymentsInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 -- | Data format for the response.
-diAlt :: Lens' DeploymentsInsert' Text
+diAlt :: Lens' DeploymentsInsert' Alt
 diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
 
 instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsInsert{..}
-          = go _diQuotaUser _diPrettyPrint _diProject _diUserIp
+        requestWithRoute r u DeploymentsInsert'{..}
+          = go _diQuotaUser (Just _diPrettyPrint) _diProject
+              _diUserIp
               _diKey
               _diOauthToken
               _diFields
-              _diAlt
+              (Just _diAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DeploymentsInsertAPI)
+                      (Proxy :: Proxy DeploymentsInsertResource)
                       r
                       u

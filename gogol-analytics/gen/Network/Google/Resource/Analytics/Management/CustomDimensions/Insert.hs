@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new custom dimension.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsInsert@.
-module Analytics.Management.CustomDimensions.Insert
+module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
     (
     -- * REST Resource
-      ManagementCustomDimensionsInsertAPI
+      ManagementCustomDimensionsInsertResource
 
     -- * Creating a Request
-    , managementCustomDimensionsInsert
-    , ManagementCustomDimensionsInsert
+    , managementCustomDimensionsInsert'
+    , ManagementCustomDimensionsInsert'
 
     -- * Request Lenses
     , mcdiQuotaUser
@@ -44,19 +45,27 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsInsert@ which the
--- 'ManagementCustomDimensionsInsert' request conforms to.
-type ManagementCustomDimensionsInsertAPI =
+-- 'ManagementCustomDimensionsInsert'' request conforms to.
+type ManagementCustomDimensionsInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               "customDimensions" :> Post '[JSON] CustomDimension
+               "customDimensions" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] CustomDimension
 
 -- | Create a new custom dimension.
 --
--- /See:/ 'managementCustomDimensionsInsert' smart constructor.
-data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert
+-- /See:/ 'managementCustomDimensionsInsert'' smart constructor.
+data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
     { _mcdiQuotaUser     :: !(Maybe Text)
     , _mcdiPrettyPrint   :: !Bool
     , _mcdiWebPropertyId :: !Text
@@ -65,7 +74,7 @@ data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert
     , _mcdiKey           :: !(Maybe Text)
     , _mcdiOauthToken    :: !(Maybe Text)
     , _mcdiFields        :: !(Maybe Text)
-    , _mcdiAlt           :: !Text
+    , _mcdiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsInsert'' with the minimum fields required to make a request.
@@ -89,12 +98,12 @@ data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert
 -- * 'mcdiFields'
 --
 -- * 'mcdiAlt'
-managementCustomDimensionsInsert
+managementCustomDimensionsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomDimensionsInsert
-managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiAccountId_ =
-    ManagementCustomDimensionsInsert
+    -> ManagementCustomDimensionsInsert'
+managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiAccountId_ =
+    ManagementCustomDimensionsInsert'
     { _mcdiQuotaUser = Nothing
     , _mcdiPrettyPrint = False
     , _mcdiWebPropertyId = pMcdiWebPropertyId_
@@ -103,7 +112,7 @@ managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiAccountId_ =
     , _mcdiKey = Nothing
     , _mcdiOauthToken = Nothing
     , _mcdiFields = Nothing
-    , _mcdiAlt = "json"
+    , _mcdiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +165,7 @@ mcdiFields
   = lens _mcdiFields (\ s a -> s{_mcdiFields = a})
 
 -- | Data format for the response.
-mcdiAlt :: Lens' ManagementCustomDimensionsInsert' Text
+mcdiAlt :: Lens' ManagementCustomDimensionsInsert' Alt
 mcdiAlt = lens _mcdiAlt (\ s a -> s{_mcdiAlt = a})
 
 instance GoogleRequest
@@ -165,17 +174,18 @@ instance GoogleRequest
              CustomDimension
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDimensionsInsert{..}
-          = go _mcdiQuotaUser _mcdiPrettyPrint
+          ManagementCustomDimensionsInsert'{..}
+          = go _mcdiQuotaUser (Just _mcdiPrettyPrint)
               _mcdiWebPropertyId
               _mcdiUserIp
               _mcdiAccountId
               _mcdiKey
               _mcdiOauthToken
               _mcdiFields
-              _mcdiAlt
+              (Just _mcdiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDimensionsInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDimensionsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an event.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsUpdate@.
-module Calendar.Events.Update
+module Network.Google.Resource.Calendar.Events.Update
     (
     -- * REST Resource
-      EventsUpdateAPI
+      EventsUpdateResource
 
     -- * Creating a Request
-    , eventsUpdate
-    , EventsUpdate
+    , eventsUpdate'
+    , EventsUpdate'
 
     -- * Request Lenses
     , euQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsUpdate@ which the
--- 'EventsUpdate' request conforms to.
-type EventsUpdateAPI =
+-- 'EventsUpdate'' request conforms to.
+type EventsUpdateResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "maxAttendees" Int32 :>
-               QueryParam "sendNotifications" Bool :>
-                 QueryParam "supportsAttachments" Bool :>
-                   QueryParam "alwaysIncludeEmail" Bool :>
-                     Put '[JSON] Event
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "maxAttendees" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "sendNotifications" Bool :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "supportsAttachments" Bool :>
+                             QueryParam "alwaysIncludeEmail" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Put '[JSON] Event
 
 -- | Updates an event.
 --
--- /See:/ 'eventsUpdate' smart constructor.
-data EventsUpdate = EventsUpdate
+-- /See:/ 'eventsUpdate'' smart constructor.
+data EventsUpdate' = EventsUpdate'
     { _euQuotaUser           :: !(Maybe Text)
     , _euCalendarId          :: !Text
     , _euPrettyPrint         :: !Bool
@@ -76,7 +83,7 @@ data EventsUpdate = EventsUpdate
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)
     , _euEventId             :: !Text
     , _euFields              :: !(Maybe Text)
-    , _euAlt                 :: !Text
+    , _euAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsUpdate'' with the minimum fields required to make a request.
@@ -108,12 +115,12 @@ data EventsUpdate = EventsUpdate
 -- * 'euFields'
 --
 -- * 'euAlt'
-eventsUpdate
+eventsUpdate'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
-    -> EventsUpdate
-eventsUpdate pEuCalendarId_ pEuEventId_ =
-    EventsUpdate
+    -> EventsUpdate'
+eventsUpdate' pEuCalendarId_ pEuEventId_ =
+    EventsUpdate'
     { _euQuotaUser = Nothing
     , _euCalendarId = pEuCalendarId_
     , _euPrettyPrint = True
@@ -126,7 +133,7 @@ eventsUpdate pEuCalendarId_ pEuEventId_ =
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
     , _euFields = Nothing
-    , _euAlt = "json"
+    , _euAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -208,14 +215,14 @@ euFields :: Lens' EventsUpdate' (Maybe Text)
 euFields = lens _euFields (\ s a -> s{_euFields = a})
 
 -- | Data format for the response.
-euAlt :: Lens' EventsUpdate' Text
+euAlt :: Lens' EventsUpdate' Alt
 euAlt = lens _euAlt (\ s a -> s{_euAlt = a})
 
 instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsUpdate{..}
-          = go _euQuotaUser _euCalendarId _euPrettyPrint
+        requestWithRoute r u EventsUpdate'{..}
+          = go _euQuotaUser _euCalendarId (Just _euPrettyPrint)
               _euUserIp
               _euMaxAttendees
               _euKey
@@ -225,7 +232,9 @@ instance GoogleRequest EventsUpdate' where
               _euAlwaysIncludeEmail
               _euEventId
               _euFields
-              _euAlt
+              (Just _euAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsUpdateResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,154 +21,160 @@
 -- description, and attribution will be updated.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableUpdate@.
-module FusionTables.Table.Update
+module Network.Google.Resource.FusionTables.Table.Update
     (
     -- * REST Resource
-      TableUpdateAPI
+      TableUpdateResource
 
     -- * Creating a Request
-    , tableUpdate
-    , TableUpdate
+    , tableUpdate'
+    , TableUpdate'
 
     -- * Request Lenses
-    , tuuQuotaUser
-    , tuuPrettyPrint
-    , tuuUserIp
-    , tuuReplaceViewDefinition
-    , tuuKey
-    , tuuOauthToken
-    , tuuTableId
-    , tuuFields
-    , tuuAlt
+    , tuQuotaUser
+    , tuPrettyPrint
+    , tuUserIp
+    , tuReplaceViewDefinition
+    , tuKey
+    , tuOauthToken
+    , tuTableId
+    , tuFields
+    , tuAlt
     ) where
 
 import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableUpdate@ which the
--- 'TableUpdate' request conforms to.
-type TableUpdateAPI =
+-- 'TableUpdate'' request conforms to.
+type TableUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
-         QueryParam "replaceViewDefinition" Bool :>
-           Put '[JSON] Table
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "replaceViewDefinition" Bool :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.
 --
--- /See:/ 'tableUpdate' smart constructor.
-data TableUpdate = TableUpdate
-    { _tuuQuotaUser             :: !(Maybe Text)
-    , _tuuPrettyPrint           :: !Bool
-    , _tuuUserIp                :: !(Maybe Text)
-    , _tuuReplaceViewDefinition :: !(Maybe Bool)
-    , _tuuKey                   :: !(Maybe Text)
-    , _tuuOauthToken            :: !(Maybe Text)
-    , _tuuTableId               :: !Text
-    , _tuuFields                :: !(Maybe Text)
-    , _tuuAlt                   :: !Text
+-- /See:/ 'tableUpdate'' smart constructor.
+data TableUpdate' = TableUpdate'
+    { _tuQuotaUser             :: !(Maybe Text)
+    , _tuPrettyPrint           :: !Bool
+    , _tuUserIp                :: !(Maybe Text)
+    , _tuReplaceViewDefinition :: !(Maybe Bool)
+    , _tuKey                   :: !(Maybe Text)
+    , _tuOauthToken            :: !(Maybe Text)
+    , _tuTableId               :: !Text
+    , _tuFields                :: !(Maybe Text)
+    , _tuAlt                   :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tuuQuotaUser'
+-- * 'tuQuotaUser'
 --
--- * 'tuuPrettyPrint'
+-- * 'tuPrettyPrint'
 --
--- * 'tuuUserIp'
+-- * 'tuUserIp'
 --
--- * 'tuuReplaceViewDefinition'
+-- * 'tuReplaceViewDefinition'
 --
--- * 'tuuKey'
+-- * 'tuKey'
 --
--- * 'tuuOauthToken'
+-- * 'tuOauthToken'
 --
--- * 'tuuTableId'
+-- * 'tuTableId'
 --
--- * 'tuuFields'
+-- * 'tuFields'
 --
--- * 'tuuAlt'
-tableUpdate
+-- * 'tuAlt'
+tableUpdate'
     :: Text -- ^ 'tableId'
-    -> TableUpdate
-tableUpdate pTuuTableId_ =
-    TableUpdate
-    { _tuuQuotaUser = Nothing
-    , _tuuPrettyPrint = True
-    , _tuuUserIp = Nothing
-    , _tuuReplaceViewDefinition = Nothing
-    , _tuuKey = Nothing
-    , _tuuOauthToken = Nothing
-    , _tuuTableId = pTuuTableId_
-    , _tuuFields = Nothing
-    , _tuuAlt = "json"
+    -> TableUpdate'
+tableUpdate' pTuTableId_ =
+    TableUpdate'
+    { _tuQuotaUser = Nothing
+    , _tuPrettyPrint = True
+    , _tuUserIp = Nothing
+    , _tuReplaceViewDefinition = Nothing
+    , _tuKey = Nothing
+    , _tuOauthToken = Nothing
+    , _tuTableId = pTuTableId_
+    , _tuFields = Nothing
+    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tuuQuotaUser :: Lens' TableUpdate' (Maybe Text)
-tuuQuotaUser
-  = lens _tuuQuotaUser (\ s a -> s{_tuuQuotaUser = a})
+tuQuotaUser :: Lens' TableUpdate' (Maybe Text)
+tuQuotaUser
+  = lens _tuQuotaUser (\ s a -> s{_tuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tuuPrettyPrint :: Lens' TableUpdate' Bool
-tuuPrettyPrint
-  = lens _tuuPrettyPrint
-      (\ s a -> s{_tuuPrettyPrint = a})
+tuPrettyPrint :: Lens' TableUpdate' Bool
+tuPrettyPrint
+  = lens _tuPrettyPrint
+      (\ s a -> s{_tuPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuuUserIp :: Lens' TableUpdate' (Maybe Text)
-tuuUserIp
-  = lens _tuuUserIp (\ s a -> s{_tuuUserIp = a})
+tuUserIp :: Lens' TableUpdate' (Maybe Text)
+tuUserIp = lens _tuUserIp (\ s a -> s{_tuUserIp = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
 -- new definition.
-tuuReplaceViewDefinition :: Lens' TableUpdate' (Maybe Bool)
-tuuReplaceViewDefinition
-  = lens _tuuReplaceViewDefinition
-      (\ s a -> s{_tuuReplaceViewDefinition = a})
+tuReplaceViewDefinition :: Lens' TableUpdate' (Maybe Bool)
+tuReplaceViewDefinition
+  = lens _tuReplaceViewDefinition
+      (\ s a -> s{_tuReplaceViewDefinition = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuuKey :: Lens' TableUpdate' (Maybe Text)
-tuuKey = lens _tuuKey (\ s a -> s{_tuuKey = a})
+tuKey :: Lens' TableUpdate' (Maybe Text)
+tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tuuOauthToken :: Lens' TableUpdate' (Maybe Text)
-tuuOauthToken
-  = lens _tuuOauthToken
-      (\ s a -> s{_tuuOauthToken = a})
+tuOauthToken :: Lens' TableUpdate' (Maybe Text)
+tuOauthToken
+  = lens _tuOauthToken (\ s a -> s{_tuOauthToken = a})
 
 -- | ID of the table that is being updated.
-tuuTableId :: Lens' TableUpdate' Text
-tuuTableId
-  = lens _tuuTableId (\ s a -> s{_tuuTableId = a})
+tuTableId :: Lens' TableUpdate' Text
+tuTableId
+  = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tuuFields :: Lens' TableUpdate' (Maybe Text)
-tuuFields
-  = lens _tuuFields (\ s a -> s{_tuuFields = a})
+tuFields :: Lens' TableUpdate' (Maybe Text)
+tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuuAlt :: Lens' TableUpdate' Text
-tuuAlt = lens _tuuAlt (\ s a -> s{_tuuAlt = a})
+tuAlt :: Lens' TableUpdate' Alt
+tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TableUpdate' where
         type Rs TableUpdate' = Table
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableUpdate{..}
-          = go _tuuQuotaUser _tuuPrettyPrint _tuuUserIp
-              _tuuReplaceViewDefinition
-              _tuuKey
-              _tuuOauthToken
-              _tuuTableId
-              _tuuFields
-              _tuuAlt
+        requestWithRoute r u TableUpdate'{..}
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+              _tuReplaceViewDefinition
+              _tuKey
+              _tuOauthToken
+              _tuTableId
+              _tuFields
+              (Just _tuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TableUpdateResource)
+                      r
+                      u

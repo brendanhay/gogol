@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a collection. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionsPatch@.
-module Androidenterprise.Collections.Patch
+module Network.Google.Resource.Androidenterprise.Collections.Patch
     (
     -- * REST Resource
-      CollectionsPatchAPI
+      CollectionsPatchResource
 
     -- * Creating a Request
-    , collectionsPatch
-    , CollectionsPatch
+    , collectionsPatch'
+    , CollectionsPatch'
 
     -- * Request Lenses
     , colQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionsPatch@ which the
--- 'CollectionsPatch' request conforms to.
-type CollectionsPatchAPI =
+-- 'CollectionsPatch'' request conforms to.
+type CollectionsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
            Capture "collectionId" Text :>
-             Patch '[JSON] Collection
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Collection
 
 -- | Updates a collection. This method supports patch semantics.
 --
--- /See:/ 'collectionsPatch' smart constructor.
-data CollectionsPatch = CollectionsPatch
+-- /See:/ 'collectionsPatch'' smart constructor.
+data CollectionsPatch' = CollectionsPatch'
     { _colQuotaUser    :: !(Maybe Text)
     , _colPrettyPrint  :: !Bool
     , _colEnterpriseId :: !Text
@@ -64,7 +71,7 @@ data CollectionsPatch = CollectionsPatch
     , _colKey          :: !(Maybe Text)
     , _colOauthToken   :: !(Maybe Text)
     , _colFields       :: !(Maybe Text)
-    , _colAlt          :: !Text
+    , _colAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsPatch'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data CollectionsPatch = CollectionsPatch
 -- * 'colFields'
 --
 -- * 'colAlt'
-collectionsPatch
+collectionsPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> CollectionsPatch
-collectionsPatch pColEnterpriseId_ pColCollectionId_ =
-    CollectionsPatch
+    -> CollectionsPatch'
+collectionsPatch' pColEnterpriseId_ pColCollectionId_ =
+    CollectionsPatch'
     { _colQuotaUser = Nothing
     , _colPrettyPrint = True
     , _colEnterpriseId = pColEnterpriseId_
@@ -102,7 +109,7 @@ collectionsPatch pColEnterpriseId_ pColCollectionId_ =
     , _colKey = Nothing
     , _colOauthToken = Nothing
     , _colFields = Nothing
-    , _colAlt = "json"
+    , _colAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +161,23 @@ colFields
   = lens _colFields (\ s a -> s{_colFields = a})
 
 -- | Data format for the response.
-colAlt :: Lens' CollectionsPatch' Text
+colAlt :: Lens' CollectionsPatch' Alt
 colAlt = lens _colAlt (\ s a -> s{_colAlt = a})
 
 instance GoogleRequest CollectionsPatch' where
         type Rs CollectionsPatch' = Collection
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionsPatch{..}
-          = go _colQuotaUser _colPrettyPrint _colEnterpriseId
+        requestWithRoute r u CollectionsPatch'{..}
+          = go _colQuotaUser (Just _colPrettyPrint)
+              _colEnterpriseId
               _colUserIp
               _colCollectionId
               _colKey
               _colOauthToken
               _colFields
-              _colAlt
+              (Just _colAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionsPatchAPI)
+                      (Proxy :: Proxy CollectionsPatchResource)
                       r
                       u

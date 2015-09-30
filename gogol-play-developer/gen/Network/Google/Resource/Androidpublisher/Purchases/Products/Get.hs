@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Checks the purchase and consumption status of an inapp item.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherPurchasesProductsGet@.
-module Androidpublisher.Purchases.Products.Get
+module Network.Google.Resource.Androidpublisher.Purchases.Products.Get
     (
     -- * REST Resource
-      PurchasesProductsGetAPI
+      PurchasesProductsGetResource
 
     -- * Creating a Request
-    , purchasesProductsGet
-    , PurchasesProductsGet
+    , purchasesProductsGet'
+    , PurchasesProductsGet'
 
     -- * Request Lenses
     , ppgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherPurchasesProductsGet@ which the
--- 'PurchasesProductsGet' request conforms to.
-type PurchasesProductsGetAPI =
+-- 'PurchasesProductsGet'' request conforms to.
+type PurchasesProductsGetResource =
      Capture "packageName" Text :>
        "purchases" :>
          "products" :>
            Capture "productId" Text :>
              "tokens" :>
-               Capture "token" Text :> Get '[JSON] ProductPurchase
+               Capture "token" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ProductPurchase
 
 -- | Checks the purchase and consumption status of an inapp item.
 --
--- /See:/ 'purchasesProductsGet' smart constructor.
-data PurchasesProductsGet = PurchasesProductsGet
+-- /See:/ 'purchasesProductsGet'' smart constructor.
+data PurchasesProductsGet' = PurchasesProductsGet'
     { _ppgQuotaUser   :: !(Maybe Text)
     , _ppgPrettyPrint :: !Bool
     , _ppgPackageName :: !Text
@@ -67,7 +75,7 @@ data PurchasesProductsGet = PurchasesProductsGet
     , _ppgOauthToken  :: !(Maybe Text)
     , _ppgProductId   :: !Text
     , _ppgFields      :: !(Maybe Text)
-    , _ppgAlt         :: !Text
+    , _ppgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesProductsGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data PurchasesProductsGet = PurchasesProductsGet
 -- * 'ppgFields'
 --
 -- * 'ppgAlt'
-purchasesProductsGet
+purchasesProductsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
     -> Text -- ^ 'productId'
-    -> PurchasesProductsGet
-purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
-    PurchasesProductsGet
+    -> PurchasesProductsGet'
+purchasesProductsGet' pPpgPackageName_ pPpgToken_ pPpgProductId_ =
+    PurchasesProductsGet'
     { _ppgQuotaUser = Nothing
     , _ppgPrettyPrint = True
     , _ppgPackageName = pPpgPackageName_
@@ -109,7 +117,7 @@ purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
     , _ppgOauthToken = Nothing
     , _ppgProductId = pPpgProductId_
     , _ppgFields = Nothing
-    , _ppgAlt = "json"
+    , _ppgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +174,24 @@ ppgFields
   = lens _ppgFields (\ s a -> s{_ppgFields = a})
 
 -- | Data format for the response.
-ppgAlt :: Lens' PurchasesProductsGet' Text
+ppgAlt :: Lens' PurchasesProductsGet' Alt
 ppgAlt = lens _ppgAlt (\ s a -> s{_ppgAlt = a})
 
 instance GoogleRequest PurchasesProductsGet' where
         type Rs PurchasesProductsGet' = ProductPurchase
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u PurchasesProductsGet{..}
-          = go _ppgQuotaUser _ppgPrettyPrint _ppgPackageName
+        requestWithRoute r u PurchasesProductsGet'{..}
+          = go _ppgQuotaUser (Just _ppgPrettyPrint)
+              _ppgPackageName
               _ppgUserIp
               _ppgToken
               _ppgKey
               _ppgOauthToken
               _ppgProductId
               _ppgFields
-              _ppgAlt
+              (Just _ppgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PurchasesProductsGetAPI)
+                      (Proxy :: Proxy PurchasesProductsGetResource)
                       r
                       u

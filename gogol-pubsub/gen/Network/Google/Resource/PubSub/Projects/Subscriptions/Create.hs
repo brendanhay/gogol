@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- this subscription on the same project as the topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsCreate@.
-module PubSub.Projects.Subscriptions.Create
+module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     (
     -- * REST Resource
-      ProjectsSubscriptionsCreateAPI
+      ProjectsSubscriptionsCreateResource
 
     -- * Creating a Request
-    , projectsSubscriptionsCreate
-    , ProjectsSubscriptionsCreate
+    , projectsSubscriptionsCreate'
+    , ProjectsSubscriptionsCreate'
 
     -- * Request Lenses
     , pscXgafv
@@ -53,9 +54,24 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsCreate@ which the
--- 'ProjectsSubscriptionsCreate' request conforms to.
-type ProjectsSubscriptionsCreateAPI =
-     "v1beta2" :> "{+name}" :> Put '[JSON] Subscription
+-- 'ProjectsSubscriptionsCreate'' request conforms to.
+type ProjectsSubscriptionsCreateResource =
+     "v1beta2" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Put '[JSON] Subscription
 
 -- | Creates a subscription to a given topic for a given subscriber. If the
 -- subscription already exists, returns ALREADY_EXISTS. If the
@@ -63,8 +79,8 @@ type ProjectsSubscriptionsCreateAPI =
 -- not provided in the request, the server will assign a random name for
 -- this subscription on the same project as the topic.
 --
--- /See:/ 'projectsSubscriptionsCreate' smart constructor.
-data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate
+-- /See:/ 'projectsSubscriptionsCreate'' smart constructor.
+data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
     { _pscXgafv          :: !(Maybe Text)
     , _pscQuotaUser      :: !(Maybe Text)
     , _pscPrettyPrint    :: !Bool
@@ -112,11 +128,11 @@ data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate
 -- * 'pscCallback'
 --
 -- * 'pscAlt'
-projectsSubscriptionsCreate
+projectsSubscriptionsCreate'
     :: Text -- ^ 'name'
-    -> ProjectsSubscriptionsCreate
-projectsSubscriptionsCreate pPscName_ =
-    ProjectsSubscriptionsCreate
+    -> ProjectsSubscriptionsCreate'
+projectsSubscriptionsCreate' pPscName_ =
+    ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing
     , _pscPrettyPrint = True
@@ -218,10 +234,10 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
          where
         type Rs ProjectsSubscriptionsCreate' = Subscription
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsCreate{..}
-          = go _pscXgafv _pscQuotaUser _pscPrettyPrint
+        requestWithRoute r u ProjectsSubscriptionsCreate'{..}
+          = go _pscXgafv _pscQuotaUser (Just _pscPrettyPrint)
               _pscUploadProtocol
-              _pscPp
+              (Just _pscPp)
               _pscAccessToken
               _pscUploadType
               _pscBearerToken
@@ -230,9 +246,9 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
               _pscOauthToken
               _pscFields
               _pscCallback
-              _pscAlt
+              (Just _pscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsCreateAPI)
+                      (Proxy :: Proxy ProjectsSubscriptionsCreateResource)
                       r
                       u

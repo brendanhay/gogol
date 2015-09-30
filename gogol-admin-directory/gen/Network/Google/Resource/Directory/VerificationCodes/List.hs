@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesList@.
-module Directory.VerificationCodes.List
+module Network.Google.Resource.Directory.VerificationCodes.List
     (
     -- * REST Resource
-      VerificationCodesListAPI
+      VerificationCodesListResource
 
     -- * Creating a Request
-    , verificationCodesList
-    , VerificationCodesList
+    , verificationCodesList'
+    , VerificationCodesList'
 
     -- * Request Lenses
     , vclQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryVerificationCodesList@ which the
--- 'VerificationCodesList' request conforms to.
-type VerificationCodesListAPI =
+-- 'VerificationCodesList'' request conforms to.
+type VerificationCodesListResource =
      "users" :>
        Capture "userKey" Text :>
-         "verificationCodes" :> Get '[JSON] VerificationCodes
+         "verificationCodes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] VerificationCodes
 
 -- | Returns the current set of valid backup verification codes for the
 -- specified user.
 --
--- /See:/ 'verificationCodesList' smart constructor.
-data VerificationCodesList = VerificationCodesList
+-- /See:/ 'verificationCodesList'' smart constructor.
+data VerificationCodesList' = VerificationCodesList'
     { _vclQuotaUser   :: !(Maybe Text)
     , _vclPrettyPrint :: !Bool
     , _vclUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data VerificationCodesList = VerificationCodesList
     , _vclOauthToken  :: !(Maybe Text)
     , _vclUserKey     :: !Text
     , _vclFields      :: !(Maybe Text)
-    , _vclAlt         :: !Text
+    , _vclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesList'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data VerificationCodesList = VerificationCodesList
 -- * 'vclFields'
 --
 -- * 'vclAlt'
-verificationCodesList
+verificationCodesList'
     :: Text -- ^ 'userKey'
-    -> VerificationCodesList
-verificationCodesList pVclUserKey_ =
-    VerificationCodesList
+    -> VerificationCodesList'
+verificationCodesList' pVclUserKey_ =
+    VerificationCodesList'
     { _vclQuotaUser = Nothing
     , _vclPrettyPrint = True
     , _vclUserIp = Nothing
@@ -96,7 +104,7 @@ verificationCodesList pVclUserKey_ =
     , _vclOauthToken = Nothing
     , _vclUserKey = pVclUserKey_
     , _vclFields = Nothing
-    , _vclAlt = "json"
+    , _vclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,20 +150,21 @@ vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
 -- | Data format for the response.
-vclAlt :: Lens' VerificationCodesList' Text
+vclAlt :: Lens' VerificationCodesList' Alt
 vclAlt = lens _vclAlt (\ s a -> s{_vclAlt = a})
 
 instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u VerificationCodesList{..}
-          = go _vclQuotaUser _vclPrettyPrint _vclUserIp _vclKey
+        requestWithRoute r u VerificationCodesList'{..}
+          = go _vclQuotaUser (Just _vclPrettyPrint) _vclUserIp
+              _vclKey
               _vclOauthToken
               _vclUserKey
               _vclFields
-              _vclAlt
+              (Just _vclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VerificationCodesListAPI)
+                      (Proxy :: Proxy VerificationCodesListResource)
                       r
                       u

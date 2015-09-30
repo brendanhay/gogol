@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a photo for the user. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosPatch@.
-module Directory.Users.Photos.Patch
+module Network.Google.Resource.Directory.Users.Photos.Patch
     (
     -- * REST Resource
-      UsersPhotosPatchAPI
+      UsersPhotosPatchResource
 
     -- * Creating a Request
-    , usersPhotosPatch
-    , UsersPhotosPatch
+    , usersPhotosPatch'
+    , UsersPhotosPatch'
 
     -- * Request Lenses
     , uppQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosPatch@ which the
--- 'UsersPhotosPatch' request conforms to.
-type UsersPhotosPatchAPI =
+-- 'UsersPhotosPatch'' request conforms to.
+type UsersPhotosPatchResource =
      "users" :>
        Capture "userKey" Text :>
-         "photos" :> "thumbnail" :> Patch '[JSON] UserPhoto
+         "photos" :>
+           "thumbnail" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] UserPhoto
 
 -- | Add a photo for the user. This method supports patch semantics.
 --
--- /See:/ 'usersPhotosPatch' smart constructor.
-data UsersPhotosPatch = UsersPhotosPatch
+-- /See:/ 'usersPhotosPatch'' smart constructor.
+data UsersPhotosPatch' = UsersPhotosPatch'
     { _uppQuotaUser   :: !(Maybe Text)
     , _uppPrettyPrint :: !Bool
     , _uppUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data UsersPhotosPatch = UsersPhotosPatch
     , _uppOauthToken  :: !(Maybe Text)
     , _uppUserKey     :: !Text
     , _uppFields      :: !(Maybe Text)
-    , _uppAlt         :: !Text
+    , _uppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosPatch'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data UsersPhotosPatch = UsersPhotosPatch
 -- * 'uppFields'
 --
 -- * 'uppAlt'
-usersPhotosPatch
+usersPhotosPatch'
     :: Text -- ^ 'userKey'
-    -> UsersPhotosPatch
-usersPhotosPatch pUppUserKey_ =
-    UsersPhotosPatch
+    -> UsersPhotosPatch'
+usersPhotosPatch' pUppUserKey_ =
+    UsersPhotosPatch'
     { _uppQuotaUser = Nothing
     , _uppPrettyPrint = True
     , _uppUserIp = Nothing
@@ -94,7 +103,7 @@ usersPhotosPatch pUppUserKey_ =
     , _uppOauthToken = Nothing
     , _uppUserKey = pUppUserKey_
     , _uppFields = Nothing
-    , _uppAlt = "json"
+    , _uppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ uppFields
   = lens _uppFields (\ s a -> s{_uppFields = a})
 
 -- | Data format for the response.
-uppAlt :: Lens' UsersPhotosPatch' Text
+uppAlt :: Lens' UsersPhotosPatch' Alt
 uppAlt = lens _uppAlt (\ s a -> s{_uppAlt = a})
 
 instance GoogleRequest UsersPhotosPatch' where
         type Rs UsersPhotosPatch' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersPhotosPatch{..}
-          = go _uppQuotaUser _uppPrettyPrint _uppUserIp _uppKey
+        requestWithRoute r u UsersPhotosPatch'{..}
+          = go _uppQuotaUser (Just _uppPrettyPrint) _uppUserIp
+              _uppKey
               _uppOauthToken
               _uppUserKey
               _uppFields
-              _uppAlt
+              (Just _uppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersPhotosPatchAPI)
+                      (Proxy :: Proxy UsersPhotosPatchResource)
                       r
                       u

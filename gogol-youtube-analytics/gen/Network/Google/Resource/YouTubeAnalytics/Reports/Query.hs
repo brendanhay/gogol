@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsReportsQuery@.
-module YouTubeAnalytics.Reports.Query
+module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     (
     -- * REST Resource
-      ReportsQueryAPI
+      ReportsQueryResource
 
     -- * Creating a Request
-    , reportsQuery
-    , ReportsQuery
+    , reportsQuery'
+    , ReportsQuery'
 
     -- * Request Lenses
     , rqQuotaUser
@@ -52,25 +53,32 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsReportsQuery@ which the
--- 'ReportsQuery' request conforms to.
-type ReportsQueryAPI =
+-- 'ReportsQuery'' request conforms to.
+type ReportsQueryResource =
      "reports" :>
-       QueryParam "metrics" Text :>
-         QueryParam "filters" Text :>
-           QueryParam "ids" Text :>
-             QueryParam "end-date" Text :>
-               QueryParam "currency" Text :>
-                 QueryParam "sort" Text :>
-                   QueryParam "dimensions" Text :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :>
-                         QueryParam "start-date" Text :>
-                           Get '[JSON] ResultTable
+       QueryParam "quotaUser" Text :>
+         QueryParam "metrics" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "filters" Text :>
+                 QueryParam "ids" Text :>
+                   QueryParam "end-date" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "currency" Text :>
+                         QueryParam "sort" Text :>
+                           QueryParam "dimensions" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "start-date" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON] ResultTable
 
 -- | Retrieve your YouTube Analytics reports.
 --
--- /See:/ 'reportsQuery' smart constructor.
-data ReportsQuery = ReportsQuery
+-- /See:/ 'reportsQuery'' smart constructor.
+data ReportsQuery' = ReportsQuery'
     { _rqQuotaUser   :: !(Maybe Text)
     , _rqMetrics     :: !Text
     , _rqPrettyPrint :: !Bool
@@ -87,7 +95,7 @@ data ReportsQuery = ReportsQuery
     , _rqMaxResults  :: !(Maybe Int32)
     , _rqStartDate   :: !Text
     , _rqFields      :: !(Maybe Text)
-    , _rqAlt         :: !Text
+    , _rqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsQuery'' with the minimum fields required to make a request.
@@ -127,14 +135,14 @@ data ReportsQuery = ReportsQuery
 -- * 'rqFields'
 --
 -- * 'rqAlt'
-reportsQuery
+reportsQuery'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
     -> Text -- ^ 'end-date'
     -> Text -- ^ 'start-date'
-    -> ReportsQuery
-reportsQuery pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
-    ReportsQuery
+    -> ReportsQuery'
+reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
+    ReportsQuery'
     { _rqQuotaUser = Nothing
     , _rqMetrics = pRqMetrics_
     , _rqPrettyPrint = True
@@ -151,7 +159,7 @@ reportsQuery pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
     , _rqMaxResults = Nothing
     , _rqStartDate = pRqStartDate_
     , _rqFields = Nothing
-    , _rqAlt = "json"
+    , _rqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -264,14 +272,15 @@ rqFields :: Lens' ReportsQuery' (Maybe Text)
 rqFields = lens _rqFields (\ s a -> s{_rqFields = a})
 
 -- | Data format for the response.
-rqAlt :: Lens' ReportsQuery' Text
+rqAlt :: Lens' ReportsQuery' Alt
 rqAlt = lens _rqAlt (\ s a -> s{_rqAlt = a})
 
 instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u ReportsQuery{..}
-          = go _rqQuotaUser (Just _rqMetrics) _rqPrettyPrint
+        requestWithRoute r u ReportsQuery'{..}
+          = go _rqQuotaUser (Just _rqMetrics)
+              (Just _rqPrettyPrint)
               _rqUserIp
               _rqFilters
               (Just _rqIds)
@@ -285,7 +294,9 @@ instance GoogleRequest ReportsQuery' where
               _rqMaxResults
               (Just _rqStartDate)
               _rqFields
-              _rqAlt
+              (Just _rqAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsQueryAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsQueryResource)
+                      r
                       u

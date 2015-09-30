@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -28,14 +29,14 @@
 -- already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsCreate@.
-module Classroom.Invitations.Create
+module Network.Google.Resource.Classroom.Invitations.Create
     (
     -- * REST Resource
-      InvitationsCreateAPI
+      InvitationsCreateResource
 
     -- * Creating a Request
-    , invitationsCreate
-    , InvitationsCreate
+    , invitationsCreate'
+    , InvitationsCreate'
 
     -- * Request Lenses
     , icXgafv
@@ -57,9 +58,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomInvitationsCreate@ which the
--- 'InvitationsCreate' request conforms to.
-type InvitationsCreateAPI =
-     "v1" :> "invitations" :> Post '[JSON] Invitation
+-- 'InvitationsCreate'' request conforms to.
+type InvitationsCreateResource =
+     "v1" :>
+       "invitations" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] Invitation
 
 -- | Creates an invitation. Only one invitation for a user and course may
 -- exist at a time. Delete and re-create an invitation to make changes.
@@ -72,8 +88,8 @@ type InvitationsCreateAPI =
 -- \`ALREADY_EXISTS\` if an invitation for the specified user and course
 -- already exists.
 --
--- /See:/ 'invitationsCreate' smart constructor.
-data InvitationsCreate = InvitationsCreate
+-- /See:/ 'invitationsCreate'' smart constructor.
+data InvitationsCreate' = InvitationsCreate'
     { _icXgafv          :: !(Maybe Text)
     , _icQuotaUser      :: !(Maybe Text)
     , _icPrettyPrint    :: !Bool
@@ -118,10 +134,10 @@ data InvitationsCreate = InvitationsCreate
 -- * 'icCallback'
 --
 -- * 'icAlt'
-invitationsCreate
-    :: InvitationsCreate
-invitationsCreate =
-    InvitationsCreate
+invitationsCreate'
+    :: InvitationsCreate'
+invitationsCreate' =
+    InvitationsCreate'
     { _icXgafv = Nothing
     , _icQuotaUser = Nothing
     , _icPrettyPrint = True
@@ -208,10 +224,10 @@ icAlt = lens _icAlt (\ s a -> s{_icAlt = a})
 instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsCreate{..}
-          = go _icXgafv _icQuotaUser _icPrettyPrint
+        requestWithRoute r u InvitationsCreate'{..}
+          = go _icXgafv _icQuotaUser (Just _icPrettyPrint)
               _icUploadProtocol
-              _icPp
+              (Just _icPp)
               _icAccessToken
               _icUploadType
               _icBearerToken
@@ -219,9 +235,9 @@ instance GoogleRequest InvitationsCreate' where
               _icOauthToken
               _icFields
               _icCallback
-              _icAlt
+              (Just _icAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InvitationsCreateAPI)
+                      (Proxy :: Proxy InvitationsCreateResource)
                       r
                       u

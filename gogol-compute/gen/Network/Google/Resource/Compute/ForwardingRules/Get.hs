@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified ForwardingRule resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesGet@.
-module Compute.ForwardingRules.Get
+module Network.Google.Resource.Compute.ForwardingRules.Get
     (
     -- * REST Resource
-      ForwardingRulesGetAPI
+      ForwardingRulesGetResource
 
     -- * Creating a Request
-    , forwardingRulesGet
-    , ForwardingRulesGet
+    , forwardingRulesGet'
+    , ForwardingRulesGet'
 
     -- * Request Lenses
     , frgQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeForwardingRulesGet@ which the
--- 'ForwardingRulesGet' request conforms to.
-type ForwardingRulesGetAPI =
+-- 'ForwardingRulesGet'' request conforms to.
+type ForwardingRulesGetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "forwardingRules" :>
              Capture "forwardingRule" Text :>
-               Get '[JSON] ForwardingRule
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ForwardingRule
 
 -- | Returns the specified ForwardingRule resource.
 --
--- /See:/ 'forwardingRulesGet' smart constructor.
-data ForwardingRulesGet = ForwardingRulesGet
+-- /See:/ 'forwardingRulesGet'' smart constructor.
+data ForwardingRulesGet' = ForwardingRulesGet'
     { _frgQuotaUser      :: !(Maybe Text)
     , _frgPrettyPrint    :: !Bool
     , _frgProject        :: !Text
@@ -67,7 +74,7 @@ data ForwardingRulesGet = ForwardingRulesGet
     , _frgRegion         :: !Text
     , _frgOauthToken     :: !(Maybe Text)
     , _frgFields         :: !(Maybe Text)
-    , _frgAlt            :: !Text
+    , _frgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data ForwardingRulesGet = ForwardingRulesGet
 -- * 'frgFields'
 --
 -- * 'frgAlt'
-forwardingRulesGet
+forwardingRulesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
     -> Text -- ^ 'region'
-    -> ForwardingRulesGet
-forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
-    ForwardingRulesGet
+    -> ForwardingRulesGet'
+forwardingRulesGet' pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
+    ForwardingRulesGet'
     { _frgQuotaUser = Nothing
     , _frgPrettyPrint = True
     , _frgProject = pFrgProject_
@@ -109,7 +116,7 @@ forwardingRulesGet pFrgProject_ pFrgForwardingRule_ pFrgRegion_ =
     , _frgRegion = pFrgRegion_
     , _frgOauthToken = Nothing
     , _frgFields = Nothing
-    , _frgAlt = "json"
+    , _frgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +172,23 @@ frgFields
   = lens _frgFields (\ s a -> s{_frgFields = a})
 
 -- | Data format for the response.
-frgAlt :: Lens' ForwardingRulesGet' Text
+frgAlt :: Lens' ForwardingRulesGet' Alt
 frgAlt = lens _frgAlt (\ s a -> s{_frgAlt = a})
 
 instance GoogleRequest ForwardingRulesGet' where
         type Rs ForwardingRulesGet' = ForwardingRule
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesGet{..}
-          = go _frgQuotaUser _frgPrettyPrint _frgProject
+        requestWithRoute r u ForwardingRulesGet'{..}
+          = go _frgQuotaUser (Just _frgPrettyPrint) _frgProject
               _frgForwardingRule
               _frgUserIp
               _frgKey
               _frgRegion
               _frgOauthToken
               _frgFields
-              _frgAlt
+              (Just _frgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ForwardingRulesGetAPI)
+                      (Proxy :: Proxy ForwardingRulesGetResource)
                       r
                       u

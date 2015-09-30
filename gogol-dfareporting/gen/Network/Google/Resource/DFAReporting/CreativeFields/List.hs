@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of creative fields, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsList@.
-module DFAReporting.CreativeFields.List
+module Network.Google.Resource.DFAReporting.CreativeFields.List
     (
     -- * REST Resource
-      CreativeFieldsListAPI
+      CreativeFieldsListResource
 
     -- * Creating a Request
-    , creativeFieldsList
-    , CreativeFieldsList
+    , creativeFieldsList'
+    , CreativeFieldsList'
 
     -- * Request Lenses
     , cflQuotaUser
@@ -50,39 +51,50 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsList@ which the
--- 'CreativeFieldsList' request conforms to.
-type CreativeFieldsListAPI =
+-- 'CreativeFieldsList'' request conforms to.
+type CreativeFieldsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParams "advertiserIds" Int64 :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] CreativeFieldsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingCreativeFieldsListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingCreativeFieldsListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParams "advertiserIds" Int64 :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] CreativeFieldsListResponse
 
 -- | Retrieves a list of creative fields, possibly filtered.
 --
--- /See:/ 'creativeFieldsList' smart constructor.
-data CreativeFieldsList = CreativeFieldsList
+-- /See:/ 'creativeFieldsList'' smart constructor.
+data CreativeFieldsList' = CreativeFieldsList'
     { _cflQuotaUser     :: !(Maybe Text)
     , _cflPrettyPrint   :: !Bool
     , _cflUserIp        :: !(Maybe Text)
     , _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe Int64)
     , _cflProfileId     :: !Int64
-    , _cflSortOrder     :: !(Maybe Text)
+    , _cflSortOrder     :: !(Maybe DfareportingCreativeFieldsListSortOrder)
     , _cflKey           :: !(Maybe Text)
     , _cflPageToken     :: !(Maybe Text)
-    , _cflSortField     :: !(Maybe Text)
+    , _cflSortField     :: !(Maybe DfareportingCreativeFieldsListSortField)
     , _cflOauthToken    :: !(Maybe Text)
     , _cflAdvertiserIds :: !(Maybe Int64)
     , _cflMaxResults    :: !(Maybe Int32)
     , _cflFields        :: !(Maybe Text)
-    , _cflAlt           :: !Text
+    , _cflAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsList'' with the minimum fields required to make a request.
@@ -118,11 +130,11 @@ data CreativeFieldsList = CreativeFieldsList
 -- * 'cflFields'
 --
 -- * 'cflAlt'
-creativeFieldsList
+creativeFieldsList'
     :: Int64 -- ^ 'profileId'
-    -> CreativeFieldsList
-creativeFieldsList pCflProfileId_ =
-    CreativeFieldsList
+    -> CreativeFieldsList'
+creativeFieldsList' pCflProfileId_ =
+    CreativeFieldsList'
     { _cflQuotaUser = Nothing
     , _cflPrettyPrint = True
     , _cflUserIp = Nothing
@@ -137,7 +149,7 @@ creativeFieldsList pCflProfileId_ =
     , _cflAdvertiserIds = Nothing
     , _cflMaxResults = Nothing
     , _cflFields = Nothing
-    , _cflAlt = "json"
+    , _cflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +194,7 @@ cflProfileId
   = lens _cflProfileId (\ s a -> s{_cflProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cflSortOrder :: Lens' CreativeFieldsList' (Maybe Text)
+cflSortOrder :: Lens' CreativeFieldsList' (Maybe DfareportingCreativeFieldsListSortOrder)
 cflSortOrder
   = lens _cflSortOrder (\ s a -> s{_cflSortOrder = a})
 
@@ -198,7 +210,7 @@ cflPageToken
   = lens _cflPageToken (\ s a -> s{_cflPageToken = a})
 
 -- | Field by which to sort the list.
-cflSortField :: Lens' CreativeFieldsList' (Maybe Text)
+cflSortField :: Lens' CreativeFieldsList' (Maybe DfareportingCreativeFieldsListSortField)
 cflSortField
   = lens _cflSortField (\ s a -> s{_cflSortField = a})
 
@@ -226,15 +238,15 @@ cflFields
   = lens _cflFields (\ s a -> s{_cflFields = a})
 
 -- | Data format for the response.
-cflAlt :: Lens' CreativeFieldsList' Text
+cflAlt :: Lens' CreativeFieldsList' Alt
 cflAlt = lens _cflAlt (\ s a -> s{_cflAlt = a})
 
 instance GoogleRequest CreativeFieldsList' where
         type Rs CreativeFieldsList' =
              CreativeFieldsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsList{..}
-          = go _cflQuotaUser _cflPrettyPrint _cflUserIp
+        requestWithRoute r u CreativeFieldsList'{..}
+          = go _cflQuotaUser (Just _cflPrettyPrint) _cflUserIp
               _cflSearchString
               _cflIds
               _cflProfileId
@@ -246,9 +258,9 @@ instance GoogleRequest CreativeFieldsList' where
               _cflAdvertiserIds
               _cflMaxResults
               _cflFields
-              _cflAlt
+              (Just _cflAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsListAPI)
+                      (Proxy :: Proxy CreativeFieldsListResource)
                       r
                       u

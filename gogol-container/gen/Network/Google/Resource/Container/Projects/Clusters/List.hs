@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all clusters owned by a project across all zones.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsClustersList@.
-module Container.Projects.Clusters.List
+module Network.Google.Resource.Container.Projects.Clusters.List
     (
     -- * REST Resource
-      ProjectsClustersListAPI
+      ProjectsClustersListResource
 
     -- * Creating a Request
-    , projectsClustersList
-    , ProjectsClustersList
+    , projectsClustersList'
+    , ProjectsClustersList'
 
     -- * Request Lenses
     , pclQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsClustersList@ which the
--- 'ProjectsClustersList' request conforms to.
-type ProjectsClustersListAPI =
+-- 'ProjectsClustersList'' request conforms to.
+type ProjectsClustersListResource =
      Capture "projectId" Text :>
        "clusters" :>
-         Get '[JSON] ListAggregatedClustersResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] ListAggregatedClustersResponse
 
 -- | Lists all clusters owned by a project across all zones.
 --
--- /See:/ 'projectsClustersList' smart constructor.
-data ProjectsClustersList = ProjectsClustersList
+-- /See:/ 'projectsClustersList'' smart constructor.
+data ProjectsClustersList' = ProjectsClustersList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
     , _pclUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ProjectsClustersList = ProjectsClustersList
     , _pclProjectId   :: !Text
     , _pclOauthToken  :: !(Maybe Text)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Text
+    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsClustersList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ProjectsClustersList = ProjectsClustersList
 -- * 'pclFields'
 --
 -- * 'pclAlt'
-projectsClustersList
+projectsClustersList'
     :: Text -- ^ 'projectId'
-    -> ProjectsClustersList
-projectsClustersList pPclProjectId_ =
-    ProjectsClustersList
+    -> ProjectsClustersList'
+projectsClustersList' pPclProjectId_ =
+    ProjectsClustersList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
     , _pclUserIp = Nothing
@@ -94,7 +102,7 @@ projectsClustersList pPclProjectId_ =
     , _pclProjectId = pPclProjectId_
     , _pclOauthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = "json"
+    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,22 @@ pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
 -- | Data format for the response.
-pclAlt :: Lens' ProjectsClustersList' Text
+pclAlt :: Lens' ProjectsClustersList' Alt
 pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
 
 instance GoogleRequest ProjectsClustersList' where
         type Rs ProjectsClustersList' =
              ListAggregatedClustersResponse
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsClustersList{..}
-          = go _pclQuotaUser _pclPrettyPrint _pclUserIp _pclKey
+        requestWithRoute r u ProjectsClustersList'{..}
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
+              _pclKey
               _pclProjectId
               _pclOauthToken
               _pclFields
-              _pclAlt
+              (Just _pclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsClustersListAPI)
+                      (Proxy :: Proxy ProjectsClustersListResource)
                       r
                       u

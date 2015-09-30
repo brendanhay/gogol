@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- call and may be removed or changed at any time.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsExperimentalJobsCreate@.
-module Genomics.Experimental.Jobs.Create
+module Network.Google.Resource.Genomics.Experimental.Jobs.Create
     (
     -- * REST Resource
-      ExperimentalJobsCreateAPI
+      ExperimentalJobsCreateResource
 
     -- * Creating a Request
-    , experimentalJobsCreate
-    , ExperimentalJobsCreate
+    , experimentalJobsCreate'
+    , ExperimentalJobsCreate'
 
     -- * Request Lenses
     , ejcQuotaUser
@@ -43,25 +44,32 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsExperimentalJobsCreate@ which the
--- 'ExperimentalJobsCreate' request conforms to.
-type ExperimentalJobsCreateAPI =
+-- 'ExperimentalJobsCreate'' request conforms to.
+type ExperimentalJobsCreateResource =
      "experimental" :>
        "jobs" :>
          "create" :>
-           Post '[JSON] ExperimentalCreateJobResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ExperimentalCreateJobResponse
 
 -- | Creates and asynchronously runs an ad-hoc job. This is an experimental
 -- call and may be removed or changed at any time.
 --
--- /See:/ 'experimentalJobsCreate' smart constructor.
-data ExperimentalJobsCreate = ExperimentalJobsCreate
+-- /See:/ 'experimentalJobsCreate'' smart constructor.
+data ExperimentalJobsCreate' = ExperimentalJobsCreate'
     { _ejcQuotaUser   :: !(Maybe Text)
     , _ejcPrettyPrint :: !Bool
     , _ejcUserIp      :: !(Maybe Text)
     , _ejcKey         :: !(Maybe Text)
     , _ejcOauthToken  :: !(Maybe Text)
     , _ejcFields      :: !(Maybe Text)
-    , _ejcAlt         :: !Text
+    , _ejcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExperimentalJobsCreate'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data ExperimentalJobsCreate = ExperimentalJobsCreate
 -- * 'ejcFields'
 --
 -- * 'ejcAlt'
-experimentalJobsCreate
-    :: ExperimentalJobsCreate
-experimentalJobsCreate =
-    ExperimentalJobsCreate
+experimentalJobsCreate'
+    :: ExperimentalJobsCreate'
+experimentalJobsCreate' =
+    ExperimentalJobsCreate'
     { _ejcQuotaUser = Nothing
     , _ejcPrettyPrint = True
     , _ejcUserIp = Nothing
     , _ejcKey = Nothing
     , _ejcOauthToken = Nothing
     , _ejcFields = Nothing
-    , _ejcAlt = "json"
+    , _ejcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,20 +139,21 @@ ejcFields
   = lens _ejcFields (\ s a -> s{_ejcFields = a})
 
 -- | Data format for the response.
-ejcAlt :: Lens' ExperimentalJobsCreate' Text
+ejcAlt :: Lens' ExperimentalJobsCreate' Alt
 ejcAlt = lens _ejcAlt (\ s a -> s{_ejcAlt = a})
 
 instance GoogleRequest ExperimentalJobsCreate' where
         type Rs ExperimentalJobsCreate' =
              ExperimentalCreateJobResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ExperimentalJobsCreate{..}
-          = go _ejcQuotaUser _ejcPrettyPrint _ejcUserIp _ejcKey
+        requestWithRoute r u ExperimentalJobsCreate'{..}
+          = go _ejcQuotaUser (Just _ejcPrettyPrint) _ejcUserIp
+              _ejcKey
               _ejcOauthToken
               _ejcFields
-              _ejcAlt
+              (Just _ejcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ExperimentalJobsCreateAPI)
+                      (Proxy :: Proxy ExperimentalJobsCreateResource)
                       r
                       u

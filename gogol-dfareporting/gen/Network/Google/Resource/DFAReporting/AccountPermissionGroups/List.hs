@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of account permission groups.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountPermissionGroupsList@.
-module DFAReporting.AccountPermissionGroups.List
+module Network.Google.Resource.DFAReporting.AccountPermissionGroups.List
     (
     -- * REST Resource
-      AccountPermissionGroupsListAPI
+      AccountPermissionGroupsListResource
 
     -- * Creating a Request
-    , accountPermissionGroupsList
-    , AccountPermissionGroupsList
+    , accountPermissionGroupsList'
+    , AccountPermissionGroupsList'
 
     -- * Request Lenses
     , apglQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountPermissionGroupsList@ which the
--- 'AccountPermissionGroupsList' request conforms to.
-type AccountPermissionGroupsListAPI =
+-- 'AccountPermissionGroupsList'' request conforms to.
+type AccountPermissionGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountPermissionGroups" :>
-           Get '[JSON] AccountPermissionGroupsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] AccountPermissionGroupsListResponse
 
 -- | Retrieves the list of account permission groups.
 --
--- /See:/ 'accountPermissionGroupsList' smart constructor.
-data AccountPermissionGroupsList = AccountPermissionGroupsList
+-- /See:/ 'accountPermissionGroupsList'' smart constructor.
+data AccountPermissionGroupsList' = AccountPermissionGroupsList'
     { _apglQuotaUser   :: !(Maybe Text)
     , _apglPrettyPrint :: !Bool
     , _apglUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AccountPermissionGroupsList = AccountPermissionGroupsList
     , _apglKey         :: !(Maybe Text)
     , _apglOauthToken  :: !(Maybe Text)
     , _apglFields      :: !(Maybe Text)
-    , _apglAlt         :: !Text
+    , _apglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AccountPermissionGroupsList = AccountPermissionGroupsList
 -- * 'apglFields'
 --
 -- * 'apglAlt'
-accountPermissionGroupsList
+accountPermissionGroupsList'
     :: Int64 -- ^ 'profileId'
-    -> AccountPermissionGroupsList
-accountPermissionGroupsList pApglProfileId_ =
-    AccountPermissionGroupsList
+    -> AccountPermissionGroupsList'
+accountPermissionGroupsList' pApglProfileId_ =
+    AccountPermissionGroupsList'
     { _apglQuotaUser = Nothing
     , _apglPrettyPrint = True
     , _apglUserIp = Nothing
@@ -95,7 +103,7 @@ accountPermissionGroupsList pApglProfileId_ =
     , _apglKey = Nothing
     , _apglOauthToken = Nothing
     , _apglFields = Nothing
-    , _apglAlt = "json"
+    , _apglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ apglFields
   = lens _apglFields (\ s a -> s{_apglFields = a})
 
 -- | Data format for the response.
-apglAlt :: Lens' AccountPermissionGroupsList' Text
+apglAlt :: Lens' AccountPermissionGroupsList' Alt
 apglAlt = lens _apglAlt (\ s a -> s{_apglAlt = a})
 
 instance GoogleRequest AccountPermissionGroupsList'
@@ -150,15 +158,16 @@ instance GoogleRequest AccountPermissionGroupsList'
         type Rs AccountPermissionGroupsList' =
              AccountPermissionGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountPermissionGroupsList{..}
-          = go _apglQuotaUser _apglPrettyPrint _apglUserIp
+        requestWithRoute r u AccountPermissionGroupsList'{..}
+          = go _apglQuotaUser (Just _apglPrettyPrint)
+              _apglUserIp
               _apglProfileId
               _apglKey
               _apglOauthToken
               _apglFields
-              _apglAlt
+              (Just _apglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountPermissionGroupsListAPI)
+                      (Proxy :: Proxy AccountPermissionGroupsListResource)
                       r
                       u

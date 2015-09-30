@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- advertisers they are in a relationship with.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksGet@.
-module Gan.Links.Get
+module Network.Google.Resource.Gan.Links.Get
     (
     -- * REST Resource
-      LinksGetAPI
+      LinksGetResource
 
     -- * Creating a Request
-    , linksGet
-    , LinksGet
+    , linksGet'
+    , LinksGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -48,29 +49,37 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanLinksGet@ which the
--- 'LinksGet' request conforms to.
-type LinksGetAPI =
-     Capture "role" Text :>
+-- 'LinksGet'' request conforms to.
+type LinksGetResource =
+     Capture "role" GanLinksGetRole :>
        Capture "roleId" Text :>
-         "link" :> Capture "linkId" Int64 :> Get '[JSON] Link
+         "link" :>
+           Capture "linkId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Link
 
 -- | Retrieves data about a single link if the requesting
 -- advertiser\/publisher has access to it. Advertisers can look up their
 -- own links. Publishers can look up visible links or links belonging to
 -- advertisers they are in a relationship with.
 --
--- /See:/ 'linksGet' smart constructor.
-data LinksGet = LinksGet
+-- /See:/ 'linksGet'' smart constructor.
+data LinksGet' = LinksGet'
     { _lgQuotaUser   :: !(Maybe Text)
     , _lgPrettyPrint :: !Bool
     , _lgUserIp      :: !(Maybe Text)
     , _lgRoleId      :: !Text
-    , _lgRole        :: !Text
+    , _lgRole        :: !GanLinksGetRole
     , _lgKey         :: !(Maybe Text)
     , _lgLinkId      :: !Int64
     , _lgOauthToken  :: !(Maybe Text)
     , _lgFields      :: !(Maybe Text)
-    , _lgAlt         :: !Text
+    , _lgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksGet'' with the minimum fields required to make a request.
@@ -96,13 +105,13 @@ data LinksGet = LinksGet
 -- * 'lgFields'
 --
 -- * 'lgAlt'
-linksGet
+linksGet'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
+    -> GanLinksGetRole -- ^ 'role'
     -> Int64 -- ^ 'linkId'
-    -> LinksGet
-linksGet pLgRoleId_ pLgRole_ pLgLinkId_ =
-    LinksGet
+    -> LinksGet'
+linksGet' pLgRoleId_ pLgRole_ pLgLinkId_ =
+    LinksGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgUserIp = Nothing
@@ -112,7 +121,7 @@ linksGet pLgRoleId_ pLgRole_ pLgLinkId_ =
     , _lgLinkId = pLgLinkId_
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +148,7 @@ lgRoleId = lens _lgRoleId (\ s a -> s{_lgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-lgRole :: Lens' LinksGet' Text
+lgRole :: Lens' LinksGet' GanLinksGetRole
 lgRole = lens _lgRole (\ s a -> s{_lgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -162,19 +171,21 @@ lgFields :: Lens' LinksGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LinksGet' Text
+lgAlt :: Lens' LinksGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LinksGet' where
         type Rs LinksGet' = Link
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgUserIp _lgRoleId
+        requestWithRoute r u LinksGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
+              _lgRoleId
               _lgRole
               _lgKey
               _lgLinkId
               _lgOauthToken
               _lgFields
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LinksGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LinksGetResource) r
+                      u

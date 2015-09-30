@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,153 +20,162 @@
 -- | Publishes a draft page.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesPublish@.
-module Blogger.Pages.Publish
+module Network.Google.Resource.Blogger.Pages.Publish
     (
     -- * REST Resource
-      PagesPublishAPI
+      PagesPublishResource
 
     -- * Creating a Request
-    , pagesPublish
-    , PagesPublish
+    , pagesPublish'
+    , PagesPublish'
 
     -- * Request Lenses
-    , pagQuotaUser
-    , pagPrettyPrint
-    , pagUserIp
-    , pagBlogId
-    , pagPageId
-    , pagKey
-    , pagOauthToken
-    , pagFields
-    , pagAlt
+    , pppQuotaUser
+    , pppPrettyPrint
+    , pppUserIp
+    , pppBlogId
+    , pppPageId
+    , pppKey
+    , pppOauthToken
+    , pppFields
+    , pppAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesPublish@ which the
--- 'PagesPublish' request conforms to.
-type PagesPublishAPI =
+-- 'PagesPublish'' request conforms to.
+type PagesPublishResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             "publish" :> Post '[JSON] Page
+             "publish" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Page
 
 -- | Publishes a draft page.
 --
--- /See:/ 'pagesPublish' smart constructor.
-data PagesPublish = PagesPublish
-    { _pagQuotaUser   :: !(Maybe Text)
-    , _pagPrettyPrint :: !Bool
-    , _pagUserIp      :: !(Maybe Text)
-    , _pagBlogId      :: !Text
-    , _pagPageId      :: !Text
-    , _pagKey         :: !(Maybe Text)
-    , _pagOauthToken  :: !(Maybe Text)
-    , _pagFields      :: !(Maybe Text)
-    , _pagAlt         :: !Text
+-- /See:/ 'pagesPublish'' smart constructor.
+data PagesPublish' = PagesPublish'
+    { _pppQuotaUser   :: !(Maybe Text)
+    , _pppPrettyPrint :: !Bool
+    , _pppUserIp      :: !(Maybe Text)
+    , _pppBlogId      :: !Text
+    , _pppPageId      :: !Text
+    , _pppKey         :: !(Maybe Text)
+    , _pppOauthToken  :: !(Maybe Text)
+    , _pppFields      :: !(Maybe Text)
+    , _pppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPublish'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pagQuotaUser'
+-- * 'pppQuotaUser'
 --
--- * 'pagPrettyPrint'
+-- * 'pppPrettyPrint'
 --
--- * 'pagUserIp'
+-- * 'pppUserIp'
 --
--- * 'pagBlogId'
+-- * 'pppBlogId'
 --
--- * 'pagPageId'
+-- * 'pppPageId'
 --
--- * 'pagKey'
+-- * 'pppKey'
 --
--- * 'pagOauthToken'
+-- * 'pppOauthToken'
 --
--- * 'pagFields'
+-- * 'pppFields'
 --
--- * 'pagAlt'
-pagesPublish
+-- * 'pppAlt'
+pagesPublish'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
-    -> PagesPublish
-pagesPublish pPagBlogId_ pPagPageId_ =
-    PagesPublish
-    { _pagQuotaUser = Nothing
-    , _pagPrettyPrint = True
-    , _pagUserIp = Nothing
-    , _pagBlogId = pPagBlogId_
-    , _pagPageId = pPagPageId_
-    , _pagKey = Nothing
-    , _pagOauthToken = Nothing
-    , _pagFields = Nothing
-    , _pagAlt = "json"
+    -> PagesPublish'
+pagesPublish' pPppBlogId_ pPppPageId_ =
+    PagesPublish'
+    { _pppQuotaUser = Nothing
+    , _pppPrettyPrint = True
+    , _pppUserIp = Nothing
+    , _pppBlogId = pPppBlogId_
+    , _pppPageId = pPppPageId_
+    , _pppKey = Nothing
+    , _pppOauthToken = Nothing
+    , _pppFields = Nothing
+    , _pppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-pagQuotaUser :: Lens' PagesPublish' (Maybe Text)
-pagQuotaUser
-  = lens _pagQuotaUser (\ s a -> s{_pagQuotaUser = a})
+pppQuotaUser :: Lens' PagesPublish' (Maybe Text)
+pppQuotaUser
+  = lens _pppQuotaUser (\ s a -> s{_pppQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-pagPrettyPrint :: Lens' PagesPublish' Bool
-pagPrettyPrint
-  = lens _pagPrettyPrint
-      (\ s a -> s{_pagPrettyPrint = a})
+pppPrettyPrint :: Lens' PagesPublish' Bool
+pppPrettyPrint
+  = lens _pppPrettyPrint
+      (\ s a -> s{_pppPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pagUserIp :: Lens' PagesPublish' (Maybe Text)
-pagUserIp
-  = lens _pagUserIp (\ s a -> s{_pagUserIp = a})
+pppUserIp :: Lens' PagesPublish' (Maybe Text)
+pppUserIp
+  = lens _pppUserIp (\ s a -> s{_pppUserIp = a})
 
 -- | The ID of the blog.
-pagBlogId :: Lens' PagesPublish' Text
-pagBlogId
-  = lens _pagBlogId (\ s a -> s{_pagBlogId = a})
+pppBlogId :: Lens' PagesPublish' Text
+pppBlogId
+  = lens _pppBlogId (\ s a -> s{_pppBlogId = a})
 
 -- | The ID of the page.
-pagPageId :: Lens' PagesPublish' Text
-pagPageId
-  = lens _pagPageId (\ s a -> s{_pagPageId = a})
+pppPageId :: Lens' PagesPublish' Text
+pppPageId
+  = lens _pppPageId (\ s a -> s{_pppPageId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pagKey :: Lens' PagesPublish' (Maybe Text)
-pagKey = lens _pagKey (\ s a -> s{_pagKey = a})
+pppKey :: Lens' PagesPublish' (Maybe Text)
+pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pagOauthToken :: Lens' PagesPublish' (Maybe Text)
-pagOauthToken
-  = lens _pagOauthToken
-      (\ s a -> s{_pagOauthToken = a})
+pppOauthToken :: Lens' PagesPublish' (Maybe Text)
+pppOauthToken
+  = lens _pppOauthToken
+      (\ s a -> s{_pppOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-pagFields :: Lens' PagesPublish' (Maybe Text)
-pagFields
-  = lens _pagFields (\ s a -> s{_pagFields = a})
+pppFields :: Lens' PagesPublish' (Maybe Text)
+pppFields
+  = lens _pppFields (\ s a -> s{_pppFields = a})
 
 -- | Data format for the response.
-pagAlt :: Lens' PagesPublish' Text
-pagAlt = lens _pagAlt (\ s a -> s{_pagAlt = a})
+pppAlt :: Lens' PagesPublish' Alt
+pppAlt = lens _pppAlt (\ s a -> s{_pppAlt = a})
 
 instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesPublish{..}
-          = go _pagQuotaUser _pagPrettyPrint _pagUserIp
-              _pagBlogId
-              _pagPageId
-              _pagKey
-              _pagOauthToken
-              _pagFields
-              _pagAlt
+        requestWithRoute r u PagesPublish'{..}
+          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIp
+              _pppBlogId
+              _pppPageId
+              _pppKey
+              _pppOauthToken
+              _pppFields
+              (Just _pppAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesPublishAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PagesPublishResource)
+                      r
                       u

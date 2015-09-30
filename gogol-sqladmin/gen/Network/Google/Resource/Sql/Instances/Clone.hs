@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesClone@.
-module Sql.Instances.Clone
+module Network.Google.Resource.Sql.Instances.Clone
     (
     -- * REST Resource
-      InstancesCloneAPI
+      InstancesCloneResource
 
     -- * Creating a Request
-    , instancesClone
-    , InstancesClone
+    , instancesClone'
+    , InstancesClone'
 
     -- * Request Lenses
     , icQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesClone@ which the
--- 'InstancesClone' request conforms to.
-type InstancesCloneAPI =
+-- 'InstancesClone'' request conforms to.
+type InstancesCloneResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "clone" :> Post '[JSON] Operation
+             "clone" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a Cloud SQL instance as a clone of the source instance.
 --
--- /See:/ 'instancesClone' smart constructor.
-data InstancesClone = InstancesClone
+-- /See:/ 'instancesClone'' smart constructor.
+data InstancesClone' = InstancesClone'
     { _icQuotaUser   :: !(Maybe Text)
     , _icPrettyPrint :: !Bool
     , _icProject     :: !Text
@@ -63,7 +71,7 @@ data InstancesClone = InstancesClone
     , _icKey         :: !(Maybe Text)
     , _icOauthToken  :: !(Maybe Text)
     , _icFields      :: !(Maybe Text)
-    , _icAlt         :: !Text
+    , _icAlt         :: !Alt
     , _icInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +96,12 @@ data InstancesClone = InstancesClone
 -- * 'icAlt'
 --
 -- * 'icInstance'
-instancesClone
+instancesClone'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesClone
-instancesClone pIcProject_ pIcInstance_ =
-    InstancesClone
+    -> InstancesClone'
+instancesClone' pIcProject_ pIcInstance_ =
+    InstancesClone'
     { _icQuotaUser = Nothing
     , _icPrettyPrint = True
     , _icProject = pIcProject_
@@ -101,7 +109,7 @@ instancesClone pIcProject_ pIcInstance_ =
     , _icKey = Nothing
     , _icOauthToken = Nothing
     , _icFields = Nothing
-    , _icAlt = "json"
+    , _icAlt = JSON
     , _icInstance = pIcInstance_
     }
 
@@ -144,7 +152,7 @@ icFields :: Lens' InstancesClone' (Maybe Text)
 icFields = lens _icFields (\ s a -> s{_icFields = a})
 
 -- | Data format for the response.
-icAlt :: Lens' InstancesClone' Text
+icAlt :: Lens' InstancesClone' Alt
 icAlt = lens _icAlt (\ s a -> s{_icAlt = a})
 
 -- | The ID of the Cloud SQL instance to be cloned (source). This does not
@@ -156,14 +164,16 @@ icInstance
 instance GoogleRequest InstancesClone' where
         type Rs InstancesClone' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesClone{..}
-          = go _icQuotaUser _icPrettyPrint _icProject _icUserIp
+        requestWithRoute r u InstancesClone'{..}
+          = go _icQuotaUser (Just _icPrettyPrint) _icProject
+              _icUserIp
               _icKey
               _icOauthToken
               _icFields
-              _icAlt
+              (Just _icAlt)
               _icInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesCloneAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesCloneResource)
                       r
                       u

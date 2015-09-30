@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Generates tags for a placement.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsGeneratetags@.
-module DFAReporting.Placements.Generatetags
+module Network.Google.Resource.DFAReporting.Placements.Generatetags
     (
     -- * REST Resource
-      PlacementsGeneratetagsAPI
+      PlacementsGeneratetagsResource
 
     -- * Creating a Request
-    , placementsGeneratetags
-    , PlacementsGeneratetags
+    , placementsGeneratetags'
+    , PlacementsGeneratetags'
 
     -- * Request Lenses
     , pQuotaUser
@@ -46,24 +47,33 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementsGeneratetags@ which the
--- 'PlacementsGeneratetags' request conforms to.
-type PlacementsGeneratetagsAPI =
+-- 'PlacementsGeneratetags'' request conforms to.
+type PlacementsGeneratetagsResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placements" :>
            "generatetags" :>
-             QueryParams "tagFormats" Text :>
-               QueryParam "campaignId" Int64 :>
-                 QueryParams "placementIds" Int64 :>
-                   Post '[JSON] PlacementsGenerateTagsResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParams "tagFormats"
+                   DfareportingPlacementsGeneratetagsTagFormats
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "campaignId" Int64 :>
+                       QueryParam "key" Text :>
+                         QueryParams "placementIds" Int64 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] PlacementsGenerateTagsResponse
 
 -- | Generates tags for a placement.
 --
--- /See:/ 'placementsGeneratetags' smart constructor.
-data PlacementsGeneratetags = PlacementsGeneratetags
+-- /See:/ 'placementsGeneratetags'' smart constructor.
+data PlacementsGeneratetags' = PlacementsGeneratetags'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
-    , _pTagFormats   :: !(Maybe Text)
+    , _pTagFormats   :: !(Maybe DfareportingPlacementsGeneratetagsTagFormats)
     , _pUserIp       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
     , _pProfileId    :: !Int64
@@ -71,7 +81,7 @@ data PlacementsGeneratetags = PlacementsGeneratetags
     , _pPlacementIds :: !(Maybe Int64)
     , _pOauthToken   :: !(Maybe Text)
     , _pFields       :: !(Maybe Text)
-    , _pAlt          :: !Text
+    , _pAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGeneratetags'' with the minimum fields required to make a request.
@@ -99,11 +109,11 @@ data PlacementsGeneratetags = PlacementsGeneratetags
 -- * 'pFields'
 --
 -- * 'pAlt'
-placementsGeneratetags
+placementsGeneratetags'
     :: Int64 -- ^ 'profileId'
-    -> PlacementsGeneratetags
-placementsGeneratetags pPProfileId_ =
-    PlacementsGeneratetags
+    -> PlacementsGeneratetags'
+placementsGeneratetags' pPProfileId_ =
+    PlacementsGeneratetags'
     { _pQuotaUser = Nothing
     , _pPrettyPrint = True
     , _pTagFormats = Nothing
@@ -114,7 +124,7 @@ placementsGeneratetags pPProfileId_ =
     , _pPlacementIds = Nothing
     , _pOauthToken = Nothing
     , _pFields = Nothing
-    , _pAlt = "json"
+    , _pAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,7 +140,7 @@ pPrettyPrint
   = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
 
 -- | Tag formats to generate for these placements.
-pTagFormats :: Lens' PlacementsGeneratetags' (Maybe Text)
+pTagFormats :: Lens' PlacementsGeneratetags' (Maybe DfareportingPlacementsGeneratetagsTagFormats)
 pTagFormats
   = lens _pTagFormats (\ s a -> s{_pTagFormats = a})
 
@@ -172,24 +182,25 @@ pFields :: Lens' PlacementsGeneratetags' (Maybe Text)
 pFields = lens _pFields (\ s a -> s{_pFields = a})
 
 -- | Data format for the response.
-pAlt :: Lens' PlacementsGeneratetags' Text
+pAlt :: Lens' PlacementsGeneratetags' Alt
 pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
 
 instance GoogleRequest PlacementsGeneratetags' where
         type Rs PlacementsGeneratetags' =
              PlacementsGenerateTagsResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsGeneratetags{..}
-          = go _pQuotaUser _pPrettyPrint _pTagFormats _pUserIp
+        requestWithRoute r u PlacementsGeneratetags'{..}
+          = go _pQuotaUser (Just _pPrettyPrint) _pTagFormats
+              _pUserIp
               _pCampaignId
               _pProfileId
               _pKey
               _pPlacementIds
               _pOauthToken
               _pFields
-              _pAlt
+              (Just _pAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementsGeneratetagsAPI)
+                      (Proxy :: Proxy PlacementsGeneratetagsResource)
                       r
                       u

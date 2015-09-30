@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an access control rule.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLDelete@.
-module Calendar.ACL.Delete
+module Network.Google.Resource.Calendar.ACL.Delete
     (
     -- * REST Resource
-      AclDeleteAPI
+      AclDeleteResource
 
     -- * Creating a Request
-    , aCLDelete
-    , ACLDelete
+    , aCLDelete'
+    , ACLDelete'
 
     -- * Request Lenses
     , adQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLDelete@ which the
--- 'ACLDelete' request conforms to.
-type AclDeleteAPI =
+-- 'ACLDelete'' request conforms to.
+type AclDeleteResource =
      "calendars" :>
        Capture "calendarId" Text :>
-         "acl" :> Capture "ruleId" Text :> Delete '[JSON] ()
+         "acl" :>
+           Capture "ruleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an access control rule.
 --
--- /See:/ 'aCLDelete' smart constructor.
-data ACLDelete = ACLDelete
+-- /See:/ 'aCLDelete'' smart constructor.
+data ACLDelete' = ACLDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adCalendarId  :: !Text
     , _adPrettyPrint :: !Bool
@@ -62,7 +71,7 @@ data ACLDelete = ACLDelete
     , _adKey         :: !(Maybe Text)
     , _adOauthToken  :: !(Maybe Text)
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Text
+    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLDelete'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data ACLDelete = ACLDelete
 -- * 'adFields'
 --
 -- * 'adAlt'
-aCLDelete
+aCLDelete'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLDelete
-aCLDelete pAdCalendarId_ pAdRuleId_ =
-    ACLDelete
+    -> ACLDelete'
+aCLDelete' pAdCalendarId_ pAdRuleId_ =
+    ACLDelete'
     { _adQuotaUser = Nothing
     , _adCalendarId = pAdCalendarId_
     , _adPrettyPrint = True
@@ -100,7 +109,7 @@ aCLDelete pAdCalendarId_ pAdRuleId_ =
     , _adKey = Nothing
     , _adOauthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = "json"
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +157,21 @@ adFields :: Lens' ACLDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' ACLDelete' Text
+adAlt :: Lens' ACLDelete' Alt
 adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest ACLDelete' where
         type Rs ACLDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLDelete{..}
-          = go _adQuotaUser _adCalendarId _adPrettyPrint
+        requestWithRoute r u ACLDelete'{..}
+          = go _adQuotaUser _adCalendarId (Just _adPrettyPrint)
               _adUserIp
               _adRuleId
               _adKey
               _adOauthToken
               _adFields
-              _adAlt
+              (Just _adAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclDeleteAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclDeleteResource)
+                      r
+                      u

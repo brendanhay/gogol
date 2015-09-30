@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,144 +21,151 @@
 -- specified zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersList@.
-module Compute.Autoscalers.List
+module Network.Google.Resource.Compute.Autoscalers.List
     (
     -- * REST Resource
-      AutoscalersListAPI
+      AutoscalersListResource
 
     -- * Creating a Request
-    , autoscalersList
-    , AutoscalersList
+    , autoscalersList'
+    , AutoscalersList'
 
     -- * Request Lenses
-    , allQuotaUser
-    , allPrettyPrint
-    , allProject
-    , allUserIp
-    , allZone
-    , allKey
-    , allFilter
-    , allPageToken
-    , allOauthToken
-    , allMaxResults
-    , allFields
-    , allAlt
+    , autQuotaUser
+    , autPrettyPrint
+    , autProject
+    , autUserIp
+    , autZone
+    , autKey
+    , autFilter
+    , autPageToken
+    , autOauthToken
+    , autMaxResults
+    , autFields
+    , autAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAutoscalersList@ which the
--- 'AutoscalersList' request conforms to.
-type AutoscalersListAPI =
+-- 'AutoscalersList'' request conforms to.
+type AutoscalersListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] AutoscalerList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] AutoscalerList
 
 -- | Retrieves the list of autoscaler resources contained within the
 -- specified zone.
 --
--- /See:/ 'autoscalersList' smart constructor.
-data AutoscalersList = AutoscalersList
-    { _allQuotaUser   :: !(Maybe Text)
-    , _allPrettyPrint :: !Bool
-    , _allProject     :: !Text
-    , _allUserIp      :: !(Maybe Text)
-    , _allZone        :: !Text
-    , _allKey         :: !(Maybe Text)
-    , _allFilter      :: !(Maybe Text)
-    , _allPageToken   :: !(Maybe Text)
-    , _allOauthToken  :: !(Maybe Text)
-    , _allMaxResults  :: !Word32
-    , _allFields      :: !(Maybe Text)
-    , _allAlt         :: !Text
+-- /See:/ 'autoscalersList'' smart constructor.
+data AutoscalersList' = AutoscalersList'
+    { _autQuotaUser   :: !(Maybe Text)
+    , _autPrettyPrint :: !Bool
+    , _autProject     :: !Text
+    , _autUserIp      :: !(Maybe Text)
+    , _autZone        :: !Text
+    , _autKey         :: !(Maybe Text)
+    , _autFilter      :: !(Maybe Text)
+    , _autPageToken   :: !(Maybe Text)
+    , _autOauthToken  :: !(Maybe Text)
+    , _autMaxResults  :: !Word32
+    , _autFields      :: !(Maybe Text)
+    , _autAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allQuotaUser'
+-- * 'autQuotaUser'
 --
--- * 'allPrettyPrint'
+-- * 'autPrettyPrint'
 --
--- * 'allProject'
+-- * 'autProject'
 --
--- * 'allUserIp'
+-- * 'autUserIp'
 --
--- * 'allZone'
+-- * 'autZone'
 --
--- * 'allKey'
+-- * 'autKey'
 --
--- * 'allFilter'
+-- * 'autFilter'
 --
--- * 'allPageToken'
+-- * 'autPageToken'
 --
--- * 'allOauthToken'
+-- * 'autOauthToken'
 --
--- * 'allMaxResults'
+-- * 'autMaxResults'
 --
--- * 'allFields'
+-- * 'autFields'
 --
--- * 'allAlt'
-autoscalersList
+-- * 'autAlt'
+autoscalersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> AutoscalersList
-autoscalersList pAllProject_ pAllZone_ =
-    AutoscalersList
-    { _allQuotaUser = Nothing
-    , _allPrettyPrint = True
-    , _allProject = pAllProject_
-    , _allUserIp = Nothing
-    , _allZone = pAllZone_
-    , _allKey = Nothing
-    , _allFilter = Nothing
-    , _allPageToken = Nothing
-    , _allOauthToken = Nothing
-    , _allMaxResults = 500
-    , _allFields = Nothing
-    , _allAlt = "json"
+    -> AutoscalersList'
+autoscalersList' pAutProject_ pAutZone_ =
+    AutoscalersList'
+    { _autQuotaUser = Nothing
+    , _autPrettyPrint = True
+    , _autProject = pAutProject_
+    , _autUserIp = Nothing
+    , _autZone = pAutZone_
+    , _autKey = Nothing
+    , _autFilter = Nothing
+    , _autPageToken = Nothing
+    , _autOauthToken = Nothing
+    , _autMaxResults = 500
+    , _autFields = Nothing
+    , _autAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-allQuotaUser :: Lens' AutoscalersList' (Maybe Text)
-allQuotaUser
-  = lens _allQuotaUser (\ s a -> s{_allQuotaUser = a})
+autQuotaUser :: Lens' AutoscalersList' (Maybe Text)
+autQuotaUser
+  = lens _autQuotaUser (\ s a -> s{_autQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-allPrettyPrint :: Lens' AutoscalersList' Bool
-allPrettyPrint
-  = lens _allPrettyPrint
-      (\ s a -> s{_allPrettyPrint = a})
+autPrettyPrint :: Lens' AutoscalersList' Bool
+autPrettyPrint
+  = lens _autPrettyPrint
+      (\ s a -> s{_autPrettyPrint = a})
 
 -- | Name of the project scoping this request.
-allProject :: Lens' AutoscalersList' Text
-allProject
-  = lens _allProject (\ s a -> s{_allProject = a})
+autProject :: Lens' AutoscalersList' Text
+autProject
+  = lens _autProject (\ s a -> s{_autProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-allUserIp :: Lens' AutoscalersList' (Maybe Text)
-allUserIp
-  = lens _allUserIp (\ s a -> s{_allUserIp = a})
+autUserIp :: Lens' AutoscalersList' (Maybe Text)
+autUserIp
+  = lens _autUserIp (\ s a -> s{_autUserIp = a})
 
 -- | Name of the zone scoping this request.
-allZone :: Lens' AutoscalersList' Text
-allZone = lens _allZone (\ s a -> s{_allZone = a})
+autZone :: Lens' AutoscalersList' Text
+autZone = lens _autZone (\ s a -> s{_autZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-allKey :: Lens' AutoscalersList' (Maybe Text)
-allKey = lens _allKey (\ s a -> s{_allKey = a})
+autKey :: Lens' AutoscalersList' (Maybe Text)
+autKey = lens _autKey (\ s a -> s{_autKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
 -- filter={expression}. Your {expression} must be in the format: FIELD_NAME
@@ -170,53 +178,54 @@ allKey = lens _allKey (\ s a -> s{_allKey = a})
 -- interpreted as a regular expression using RE2 syntax. The literal value
 -- must match the entire field. For example, filter=name ne
 -- example-instance.
-allFilter :: Lens' AutoscalersList' (Maybe Text)
-allFilter
-  = lens _allFilter (\ s a -> s{_allFilter = a})
+autFilter :: Lens' AutoscalersList' (Maybe Text)
+autFilter
+  = lens _autFilter (\ s a -> s{_autFilter = a})
 
 -- | Specifies a page token to use. Use this parameter if you want to list
 -- the next page of results. Set pageToken to the nextPageToken returned by
 -- a previous list request.
-allPageToken :: Lens' AutoscalersList' (Maybe Text)
-allPageToken
-  = lens _allPageToken (\ s a -> s{_allPageToken = a})
+autPageToken :: Lens' AutoscalersList' (Maybe Text)
+autPageToken
+  = lens _autPageToken (\ s a -> s{_autPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-allOauthToken :: Lens' AutoscalersList' (Maybe Text)
-allOauthToken
-  = lens _allOauthToken
-      (\ s a -> s{_allOauthToken = a})
+autOauthToken :: Lens' AutoscalersList' (Maybe Text)
+autOauthToken
+  = lens _autOauthToken
+      (\ s a -> s{_autOauthToken = a})
 
 -- | Maximum count of results to be returned.
-allMaxResults :: Lens' AutoscalersList' Word32
-allMaxResults
-  = lens _allMaxResults
-      (\ s a -> s{_allMaxResults = a})
+autMaxResults :: Lens' AutoscalersList' Word32
+autMaxResults
+  = lens _autMaxResults
+      (\ s a -> s{_autMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-allFields :: Lens' AutoscalersList' (Maybe Text)
-allFields
-  = lens _allFields (\ s a -> s{_allFields = a})
+autFields :: Lens' AutoscalersList' (Maybe Text)
+autFields
+  = lens _autFields (\ s a -> s{_autFields = a})
 
 -- | Data format for the response.
-allAlt :: Lens' AutoscalersList' Text
-allAlt = lens _allAlt (\ s a -> s{_allAlt = a})
+autAlt :: Lens' AutoscalersList' Alt
+autAlt = lens _autAlt (\ s a -> s{_autAlt = a})
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersList{..}
-          = go _allQuotaUser _allPrettyPrint _allProject
-              _allUserIp
-              _allZone
-              _allKey
-              _allFilter
-              _allPageToken
-              _allOauthToken
-              (Just _allMaxResults)
-              _allFields
-              _allAlt
+        requestWithRoute r u AutoscalersList'{..}
+          = go _autQuotaUser (Just _autPrettyPrint) _autProject
+              _autUserIp
+              _autZone
+              _autKey
+              _autFilter
+              _autPageToken
+              _autOauthToken
+              (Just _autMaxResults)
+              _autFields
+              (Just _autAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AutoscalersListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AutoscalersListResource)
                       r
                       u

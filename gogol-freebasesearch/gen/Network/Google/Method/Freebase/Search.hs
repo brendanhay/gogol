@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Search Freebase open data.
 --
 -- /See:/ <https://developers.google.com/freebase/ Freebase Search Reference> for @FreebaseSearch@.
-module Freebase.Search
+module Network.Google.Method.Freebase.Search
     (
     -- * REST Resource
-      SearchAPI
+      SearchMethod
 
     -- * Creating a Request
-    , search
-    , Search
+    , search'
+    , Search'
 
     -- * Request Lenses
     , sWithout
@@ -65,38 +66,63 @@ import           Network.Google.FreebaseSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FreebaseSearch@ which the
--- 'Search' request conforms to.
-type SearchAPI =
+-- 'Search'' request conforms to.
+type SearchMethod =
      "search" :>
        QueryParams "without" Text :>
-         QueryParam "cursor" Int32 :>
-           QueryParams "with" Text :>
-             QueryParams "domain" Text :>
-               QueryParam "format" Text :>
-                 QueryParam "help" Text :>
-                   QueryParams "lang" Text :>
-                     QueryParam "indent" Bool :>
-                       QueryParam "output" Text :>
-                         QueryParam "query" Text :>
-                           QueryParam "scoring" Text :>
-                             QueryParam "limit" Int32 :>
-                               QueryParams "filter" Text :>
-                                 QueryParam "mql_output" Text :>
-                                   QueryParams "mid" Text :>
-                                     QueryParams "type" Text :>
-                                       QueryParam "stemmed" Bool :>
-                                         QueryParam "exact" Bool :>
-                                           QueryParam "spell" Text :>
-                                             QueryParam "as_of_time" Text :>
-                                               QueryParam "encode" Text :>
-                                                 QueryParam "prefixed" Bool :>
-                                                   QueryParam "callback" Text :>
-                                                     Get '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "cursor" Int32 :>
+               QueryParams "with" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParams "domain" Text :>
+                     QueryParam "format" FreebaseSearchFormat :>
+                       QueryParam "help" FreebaseSearchHelp :>
+                         QueryParams "lang" Text :>
+                           QueryParam "indent" Bool :>
+                             QueryParam "key" Text :>
+                               QueryParam "output" Text :>
+                                 QueryParam "query" Text :>
+                                   QueryParam "scoring" FreebaseSearchScoring :>
+                                     QueryParam "limit" Int32 :>
+                                       QueryParams "filter" Text :>
+                                         QueryParam "mql_output" Text :>
+                                           QueryParams "mid" Text :>
+                                             QueryParams "type" Text :>
+                                               QueryParam "stemmed" Bool :>
+                                                 QueryParam "oauth_token" Text
+                                                   :>
+                                                   QueryParam "exact" Bool :>
+                                                     QueryParam "spell"
+                                                       FreebaseSearchSpell
+                                                       :>
+                                                       QueryParam "as_of_time"
+                                                         Text
+                                                         :>
+                                                         QueryParam "encode"
+                                                           FreebaseSearchEncode
+                                                           :>
+                                                           QueryParam "prefixed"
+                                                             Bool
+                                                             :>
+                                                             QueryParam "fields"
+                                                               Text
+                                                               :>
+                                                               QueryParam
+                                                                 "callback"
+                                                                 Text
+                                                                 :>
+                                                                 QueryParam
+                                                                   "alt"
+                                                                   Alt
+                                                                   :>
+                                                                   Get '[JSON]
+                                                                     ()
 
 -- | Search Freebase open data.
 --
--- /See:/ 'search' smart constructor.
-data Search = Search
+-- /See:/ 'search'' smart constructor.
+data Search' = Search'
     { _sWithout     :: !(Maybe Text)
     , _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
@@ -104,14 +130,14 @@ data Search = Search
     , _sWith        :: !(Maybe Text)
     , _sUserIp      :: !(Maybe Text)
     , _sDomain      :: !(Maybe Text)
-    , _sFormat      :: !Text
-    , _sHelp        :: !(Maybe Text)
+    , _sFormat      :: !FreebaseSearchFormat
+    , _sHelp        :: !(Maybe FreebaseSearchHelp)
     , _sLang        :: !(Maybe Text)
     , _sIndent      :: !(Maybe Bool)
     , _sKey         :: !(Maybe Text)
     , _sOutput      :: !(Maybe Text)
     , _sQuery       :: !(Maybe Text)
-    , _sScoring     :: !Text
+    , _sScoring     :: !FreebaseSearchScoring
     , _sLimit       :: !Int32
     , _sFilter      :: !(Maybe Text)
     , _sMqlOutput   :: !(Maybe Text)
@@ -120,13 +146,13 @@ data Search = Search
     , _sStemmed     :: !(Maybe Bool)
     , _sOauthToken  :: !(Maybe Text)
     , _sExact       :: !(Maybe Bool)
-    , _sSpell       :: !Text
+    , _sSpell       :: !FreebaseSearchSpell
     , _sAsOfTime    :: !(Maybe Text)
-    , _sEncode      :: !Text
+    , _sEncode      :: !FreebaseSearchEncode
     , _sPrefixed    :: !(Maybe Bool)
     , _sFields      :: !(Maybe Text)
     , _sCallback    :: !(Maybe Text)
-    , _sAlt         :: !Text
+    , _sAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Search'' with the minimum fields required to make a request.
@@ -192,10 +218,10 @@ data Search = Search
 -- * 'sCallback'
 --
 -- * 'sAlt'
-search
-    :: Search
-search =
-    Search
+search'
+    :: Search'
+search' =
+    Search'
     { _sWithout = Nothing
     , _sQuotaUser = Nothing
     , _sPrettyPrint = True
@@ -203,14 +229,14 @@ search =
     , _sWith = Nothing
     , _sUserIp = Nothing
     , _sDomain = Nothing
-    , _sFormat = "entity"
+    , _sFormat = Entity
     , _sHelp = Nothing
     , _sLang = Nothing
     , _sIndent = Nothing
     , _sKey = Nothing
     , _sOutput = Nothing
     , _sQuery = Nothing
-    , _sScoring = "entity"
+    , _sScoring = FSSEntity
     , _sLimit = 20
     , _sFilter = Nothing
     , _sMqlOutput = Nothing
@@ -219,13 +245,13 @@ search =
     , _sStemmed = Nothing
     , _sOauthToken = Nothing
     , _sExact = Nothing
-    , _sSpell = "no_spelling"
+    , _sSpell = NoSpelling
     , _sAsOfTime = Nothing
-    , _sEncode = "off"
+    , _sEncode = Off
     , _sPrefixed = Nothing
     , _sFields = Nothing
     , _sCallback = Nothing
-    , _sAlt = "json"
+    , _sAlt = JSON
     }
 
 -- | A rule to not match against.
@@ -262,11 +288,11 @@ sDomain :: Lens' Search' (Maybe Text)
 sDomain = lens _sDomain (\ s a -> s{_sDomain = a})
 
 -- | Structural format of the json response.
-sFormat :: Lens' Search' Text
+sFormat :: Lens' Search' FreebaseSearchFormat
 sFormat = lens _sFormat (\ s a -> s{_sFormat = a})
 
 -- | The keyword to request help on.
-sHelp :: Lens' Search' (Maybe Text)
+sHelp :: Lens' Search' (Maybe FreebaseSearchHelp)
 sHelp = lens _sHelp (\ s a -> s{_sHelp = a})
 
 -- | The code of the language to run the query with. Default is \'en\'.
@@ -292,7 +318,7 @@ sQuery :: Lens' Search' (Maybe Text)
 sQuery = lens _sQuery (\ s a -> s{_sQuery = a})
 
 -- | Relevance scoring algorithm to use.
-sScoring :: Lens' Search' Text
+sScoring :: Lens' Search' FreebaseSearchScoring
 sScoring = lens _sScoring (\ s a -> s{_sScoring = a})
 
 -- | Maximum number of results to return.
@@ -330,7 +356,7 @@ sExact :: Lens' Search' (Maybe Bool)
 sExact = lens _sExact (\ s a -> s{_sExact = a})
 
 -- | Request \'did you mean\' suggestions
-sSpell :: Lens' Search' Text
+sSpell :: Lens' Search' FreebaseSearchSpell
 sSpell = lens _sSpell (\ s a -> s{_sSpell = a})
 
 -- | A mql as_of_time value to use with mql_output queries.
@@ -340,7 +366,7 @@ sAsOfTime
 
 -- | The encoding of the response. You can use this parameter to enable html
 -- encoding.
-sEncode :: Lens' Search' Text
+sEncode :: Lens' Search' FreebaseSearchEncode
 sEncode = lens _sEncode (\ s a -> s{_sEncode = a})
 
 -- | Prefix match against names and aliases.
@@ -358,14 +384,15 @@ sCallback
   = lens _sCallback (\ s a -> s{_sCallback = a})
 
 -- | Data format for the response.
-sAlt :: Lens' Search' Text
+sAlt :: Lens' Search' Alt
 sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
 
 instance GoogleRequest Search' where
         type Rs Search' = ()
         request = requestWithRoute defReq freebaseSearchURL
-        requestWithRoute r u Search{..}
-          = go _sWithout _sQuotaUser _sPrettyPrint _sCursor
+        requestWithRoute r u Search'{..}
+          = go _sWithout _sQuotaUser (Just _sPrettyPrint)
+              _sCursor
               _sWith
               _sUserIp
               _sDomain
@@ -391,6 +418,6 @@ instance GoogleRequest Search' where
               _sPrefixed
               _sFields
               _sCallback
-              _sAlt
+              (Just _sAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SearchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SearchMethod) r u

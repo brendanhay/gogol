@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the specified custom channel from the specified ad client.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsCustomchannelsGet@.
-module AdExchangeSeller.Accounts.Customchannels.Get
+module Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.Get
     (
     -- * REST Resource
-      AccountsCustomchannelsGetAPI
+      AccountsCustomchannelsGetResource
 
     -- * Creating a Request
-    , accountsCustomchannelsGet
-    , AccountsCustomchannelsGet
+    , accountsCustomchannelsGet'
+    , AccountsCustomchannelsGet'
 
     -- * Request Lenses
     , acgQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsCustomchannelsGet@ which the
--- 'AccountsCustomchannelsGet' request conforms to.
-type AccountsCustomchannelsGetAPI =
+-- 'AccountsCustomchannelsGet'' request conforms to.
+type AccountsCustomchannelsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "customchannels" :>
                Capture "customChannelId" Text :>
-                 Get '[JSON] CustomChannel
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] CustomChannel
 
 -- | Get the specified custom channel from the specified ad client.
 --
--- /See:/ 'accountsCustomchannelsGet' smart constructor.
-data AccountsCustomchannelsGet = AccountsCustomchannelsGet
+-- /See:/ 'accountsCustomchannelsGet'' smart constructor.
+data AccountsCustomchannelsGet' = AccountsCustomchannelsGet'
     { _acgQuotaUser       :: !(Maybe Text)
     , _acgPrettyPrint     :: !Bool
     , _acgCustomChannelId :: !Text
@@ -68,7 +75,7 @@ data AccountsCustomchannelsGet = AccountsCustomchannelsGet
     , _acgKey             :: !(Maybe Text)
     , _acgOauthToken      :: !(Maybe Text)
     , _acgFields          :: !(Maybe Text)
-    , _acgAlt             :: !Text
+    , _acgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomchannelsGet'' with the minimum fields required to make a request.
@@ -94,13 +101,13 @@ data AccountsCustomchannelsGet = AccountsCustomchannelsGet
 -- * 'acgFields'
 --
 -- * 'acgAlt'
-accountsCustomchannelsGet
+accountsCustomchannelsGet'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsCustomchannelsGet
-accountsCustomchannelsGet pAcgCustomChannelId_ pAcgAdClientId_ pAcgAccountId_ =
-    AccountsCustomchannelsGet
+    -> AccountsCustomchannelsGet'
+accountsCustomchannelsGet' pAcgCustomChannelId_ pAcgAdClientId_ pAcgAccountId_ =
+    AccountsCustomchannelsGet'
     { _acgQuotaUser = Nothing
     , _acgPrettyPrint = True
     , _acgCustomChannelId = pAcgCustomChannelId_
@@ -110,7 +117,7 @@ accountsCustomchannelsGet pAcgCustomChannelId_ pAcgAdClientId_ pAcgAccountId_ =
     , _acgKey = Nothing
     , _acgOauthToken = Nothing
     , _acgFields = Nothing
-    , _acgAlt = "json"
+    , _acgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,15 +174,15 @@ acgFields
   = lens _acgFields (\ s a -> s{_acgFields = a})
 
 -- | Data format for the response.
-acgAlt :: Lens' AccountsCustomchannelsGet' Text
+acgAlt :: Lens' AccountsCustomchannelsGet' Alt
 acgAlt = lens _acgAlt (\ s a -> s{_acgAlt = a})
 
 instance GoogleRequest AccountsCustomchannelsGet'
          where
         type Rs AccountsCustomchannelsGet' = CustomChannel
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsCustomchannelsGet{..}
-          = go _acgQuotaUser _acgPrettyPrint
+        requestWithRoute r u AccountsCustomchannelsGet'{..}
+          = go _acgQuotaUser (Just _acgPrettyPrint)
               _acgCustomChannelId
               _acgUserIp
               _acgAdClientId
@@ -183,9 +190,9 @@ instance GoogleRequest AccountsCustomchannelsGet'
               _acgKey
               _acgOauthToken
               _acgFields
-              _acgAlt
+              (Just _acgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsCustomchannelsGetAPI)
+                      (Proxy :: Proxy AccountsCustomchannelsGetResource)
                       r
                       u

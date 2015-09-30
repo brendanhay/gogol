@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsMetadataDimensionsList@.
-module AdExchangeSeller.Accounts.Metadata.Dimensions.List
+module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
     (
     -- * REST Resource
-      AccountsMetadataDimensionsListAPI
+      AccountsMetadataDimensionsListResource
 
     -- * Creating a Request
-    , accountsMetadataDimensionsList
-    , AccountsMetadataDimensionsList
+    , accountsMetadataDimensionsList'
+    , AccountsMetadataDimensionsList'
 
     -- * Request Lenses
     , amdlQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsMetadataDimensionsList@ which the
--- 'AccountsMetadataDimensionsList' request conforms to.
-type AccountsMetadataDimensionsListAPI =
+-- 'AccountsMetadataDimensionsList'' request conforms to.
+type AccountsMetadataDimensionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "metadata" :> "dimensions" :> Get '[JSON] Metadata
+         "metadata" :>
+           "dimensions" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdExchange
 -- account.
 --
--- /See:/ 'accountsMetadataDimensionsList' smart constructor.
-data AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
+-- /See:/ 'accountsMetadataDimensionsList'' smart constructor.
+data AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
     { _amdlQuotaUser   :: !(Maybe Text)
     , _amdlPrettyPrint :: !Bool
     , _amdlUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
     , _amdlKey         :: !(Maybe Text)
     , _amdlOauthToken  :: !(Maybe Text)
     , _amdlFields      :: !(Maybe Text)
-    , _amdlAlt         :: !Text
+    , _amdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsMetadataDimensionsList'' with the minimum fields required to make a request.
@@ -84,11 +93,11 @@ data AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
 -- * 'amdlFields'
 --
 -- * 'amdlAlt'
-accountsMetadataDimensionsList
+accountsMetadataDimensionsList'
     :: Text -- ^ 'accountId'
-    -> AccountsMetadataDimensionsList
-accountsMetadataDimensionsList pAmdlAccountId_ =
-    AccountsMetadataDimensionsList
+    -> AccountsMetadataDimensionsList'
+accountsMetadataDimensionsList' pAmdlAccountId_ =
+    AccountsMetadataDimensionsList'
     { _amdlQuotaUser = Nothing
     , _amdlPrettyPrint = True
     , _amdlUserIp = Nothing
@@ -96,7 +105,7 @@ accountsMetadataDimensionsList pAmdlAccountId_ =
     , _amdlKey = Nothing
     , _amdlOauthToken = Nothing
     , _amdlFields = Nothing
-    , _amdlAlt = "json"
+    , _amdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,7 +152,7 @@ amdlFields
   = lens _amdlFields (\ s a -> s{_amdlFields = a})
 
 -- | Data format for the response.
-amdlAlt :: Lens' AccountsMetadataDimensionsList' Text
+amdlAlt :: Lens' AccountsMetadataDimensionsList' Alt
 amdlAlt = lens _amdlAlt (\ s a -> s{_amdlAlt = a})
 
 instance GoogleRequest
@@ -151,15 +160,17 @@ instance GoogleRequest
         type Rs AccountsMetadataDimensionsList' = Metadata
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u
-          AccountsMetadataDimensionsList{..}
-          = go _amdlQuotaUser _amdlPrettyPrint _amdlUserIp
+          AccountsMetadataDimensionsList'{..}
+          = go _amdlQuotaUser (Just _amdlPrettyPrint)
+              _amdlUserIp
               _amdlAccountId
               _amdlKey
               _amdlOauthToken
               _amdlFields
-              _amdlAlt
+              (Just _amdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsMetadataDimensionsListAPI)
+                      (Proxy ::
+                         Proxy AccountsMetadataDimensionsListResource)
                       r
                       u

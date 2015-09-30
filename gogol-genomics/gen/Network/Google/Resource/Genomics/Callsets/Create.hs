@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new call set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsCreate@.
-module Genomics.Callsets.Create
+module Network.Google.Resource.Genomics.Callsets.Create
     (
     -- * REST Resource
-      CallsetsCreateAPI
+      CallsetsCreateResource
 
     -- * Creating a Request
-    , callsetsCreate
-    , CallsetsCreate
+    , callsetsCreate'
+    , CallsetsCreate'
 
     -- * Request Lenses
     , ccQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsCreate@ which the
--- 'CallsetsCreate' request conforms to.
-type CallsetsCreateAPI =
-     "callsets" :> Post '[JSON] CallSet
+-- 'CallsetsCreate'' request conforms to.
+type CallsetsCreateResource =
+     "callsets" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] CallSet
 
 -- | Creates a new call set.
 --
--- /See:/ 'callsetsCreate' smart constructor.
-data CallsetsCreate = CallsetsCreate
+-- /See:/ 'callsetsCreate'' smart constructor.
+data CallsetsCreate' = CallsetsCreate'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccPrettyPrint :: !Bool
     , _ccUserIp      :: !(Maybe Text)
     , _ccKey         :: !(Maybe Text)
     , _ccOauthToken  :: !(Maybe Text)
     , _ccFields      :: !(Maybe Text)
-    , _ccAlt         :: !Text
+    , _ccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsCreate'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data CallsetsCreate = CallsetsCreate
 -- * 'ccFields'
 --
 -- * 'ccAlt'
-callsetsCreate
-    :: CallsetsCreate
-callsetsCreate =
-    CallsetsCreate
+callsetsCreate'
+    :: CallsetsCreate'
+callsetsCreate' =
+    CallsetsCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
     , _ccUserIp = Nothing
     , _ccKey = Nothing
     , _ccOauthToken = Nothing
     , _ccFields = Nothing
-    , _ccAlt = "json"
+    , _ccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,18 +131,20 @@ ccFields :: Lens' CallsetsCreate' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 -- | Data format for the response.
-ccAlt :: Lens' CallsetsCreate' Text
+ccAlt :: Lens' CallsetsCreate' Alt
 ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
 
 instance GoogleRequest CallsetsCreate' where
         type Rs CallsetsCreate' = CallSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsCreate{..}
-          = go _ccQuotaUser _ccPrettyPrint _ccUserIp _ccKey
+        requestWithRoute r u CallsetsCreate'{..}
+          = go _ccQuotaUser (Just _ccPrettyPrint) _ccUserIp
+              _ccKey
               _ccOauthToken
               _ccFields
-              _ccAlt
+              (Just _ccAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsCreateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsCreateResource)
                       r
                       u

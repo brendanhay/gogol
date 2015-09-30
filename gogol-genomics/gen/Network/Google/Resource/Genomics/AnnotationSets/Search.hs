@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- the queried datasets.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationSetsSearch@.
-module Genomics.AnnotationSets.Search
+module Network.Google.Resource.Genomics.AnnotationSets.Search
     (
     -- * REST Resource
-      AnnotationSetsSearchAPI
+      AnnotationSetsSearchResource
 
     -- * Creating a Request
-    , annotationSetsSearch
-    , AnnotationSetsSearch
+    , annotationSetsSearch'
+    , AnnotationSetsSearch'
 
     -- * Request Lenses
     , assQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsSearch@ which the
--- 'AnnotationSetsSearch' request conforms to.
-type AnnotationSetsSearchAPI =
+-- 'AnnotationSetsSearch'' request conforms to.
+type AnnotationSetsSearchResource =
      "annotationSets" :>
-       "search" :> Post '[JSON] SearchAnnotationSetsResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchAnnotationSetsResponse
 
 -- | Searches for annotation sets that match the given criteria. Results are
 -- returned in a deterministic order. Caller must have READ permission for
 -- the queried datasets.
 --
--- /See:/ 'annotationSetsSearch' smart constructor.
-data AnnotationSetsSearch = AnnotationSetsSearch
+-- /See:/ 'annotationSetsSearch'' smart constructor.
+data AnnotationSetsSearch' = AnnotationSetsSearch'
     { _assQuotaUser   :: !(Maybe Text)
     , _assPrettyPrint :: !Bool
     , _assUserIp      :: !(Maybe Text)
     , _assKey         :: !(Maybe Text)
     , _assOauthToken  :: !(Maybe Text)
     , _assFields      :: !(Maybe Text)
-    , _assAlt         :: !Text
+    , _assAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsSearch'' with the minimum fields required to make a request.
@@ -81,17 +90,17 @@ data AnnotationSetsSearch = AnnotationSetsSearch
 -- * 'assFields'
 --
 -- * 'assAlt'
-annotationSetsSearch
-    :: AnnotationSetsSearch
-annotationSetsSearch =
-    AnnotationSetsSearch
+annotationSetsSearch'
+    :: AnnotationSetsSearch'
+annotationSetsSearch' =
+    AnnotationSetsSearch'
     { _assQuotaUser = Nothing
     , _assPrettyPrint = True
     , _assUserIp = Nothing
     , _assKey = Nothing
     , _assOauthToken = Nothing
     , _assFields = Nothing
-    , _assAlt = "json"
+    , _assAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,20 +140,21 @@ assFields
   = lens _assFields (\ s a -> s{_assFields = a})
 
 -- | Data format for the response.
-assAlt :: Lens' AnnotationSetsSearch' Text
+assAlt :: Lens' AnnotationSetsSearch' Alt
 assAlt = lens _assAlt (\ s a -> s{_assAlt = a})
 
 instance GoogleRequest AnnotationSetsSearch' where
         type Rs AnnotationSetsSearch' =
              SearchAnnotationSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationSetsSearch{..}
-          = go _assQuotaUser _assPrettyPrint _assUserIp _assKey
+        requestWithRoute r u AnnotationSetsSearch'{..}
+          = go _assQuotaUser (Just _assPrettyPrint) _assUserIp
+              _assKey
               _assOauthToken
               _assFields
-              _assAlt
+              (Just _assAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationSetsSearchAPI)
+                      (Proxy :: Proxy AnnotationSetsSearchResource)
                       r
                       u

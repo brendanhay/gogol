@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- a set of users.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsUserUsageReportGet@.
-module Reports.UserUsageReport.Get
+module Network.Google.Resource.Reports.UserUsageReport.Get
     (
     -- * REST Resource
-      UserUsageReportGetAPI
+      UserUsageReportGetResource
 
     -- * Creating a Request
-    , userUsageReportGet
-    , UserUsageReportGet
+    , userUsageReportGet'
+    , UserUsageReportGet'
 
     -- * Request Lenses
     , uurgQuotaUser
@@ -50,25 +51,32 @@ import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReportsUserUsageReportGet@ which the
--- 'UserUsageReportGet' request conforms to.
-type UserUsageReportGetAPI =
+-- 'UserUsageReportGet'' request conforms to.
+type UserUsageReportGetResource =
      "usage" :>
        "users" :>
          Capture "userKey" Text :>
            "dates" :>
              Capture "date" Text :>
-               QueryParam "filters" Text :>
-                 QueryParam "customerId" Text :>
-                   QueryParam "parameters" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         Get '[JSON] UsageReports
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "filters" Text :>
+                       QueryParam "customerId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "parameters" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a set of users.
 --
--- /See:/ 'userUsageReportGet' smart constructor.
-data UserUsageReportGet = UserUsageReportGet
+-- /See:/ 'userUsageReportGet'' smart constructor.
+data UserUsageReportGet' = UserUsageReportGet'
     { _uurgQuotaUser   :: !(Maybe Text)
     , _uurgPrettyPrint :: !Bool
     , _uurgUserIp      :: !(Maybe Text)
@@ -82,7 +90,7 @@ data UserUsageReportGet = UserUsageReportGet
     , _uurgUserKey     :: !Text
     , _uurgMaxResults  :: !(Maybe Word32)
     , _uurgFields      :: !(Maybe Text)
-    , _uurgAlt         :: !Text
+    , _uurgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet'' with the minimum fields required to make a request.
@@ -116,12 +124,12 @@ data UserUsageReportGet = UserUsageReportGet
 -- * 'uurgFields'
 --
 -- * 'uurgAlt'
-userUsageReportGet
+userUsageReportGet'
     :: Text -- ^ 'date'
     -> Text -- ^ 'userKey'
-    -> UserUsageReportGet
-userUsageReportGet pUurgDate_ pUurgUserKey_ =
-    UserUsageReportGet
+    -> UserUsageReportGet'
+userUsageReportGet' pUurgDate_ pUurgUserKey_ =
+    UserUsageReportGet'
     { _uurgQuotaUser = Nothing
     , _uurgPrettyPrint = True
     , _uurgUserIp = Nothing
@@ -135,7 +143,7 @@ userUsageReportGet pUurgDate_ pUurgUserKey_ =
     , _uurgUserKey = pUurgUserKey_
     , _uurgMaxResults = Nothing
     , _uurgFields = Nothing
-    , _uurgAlt = "json"
+    , _uurgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -217,14 +225,15 @@ uurgFields
   = lens _uurgFields (\ s a -> s{_uurgFields = a})
 
 -- | Data format for the response.
-uurgAlt :: Lens' UserUsageReportGet' Text
+uurgAlt :: Lens' UserUsageReportGet' Alt
 uurgAlt = lens _uurgAlt (\ s a -> s{_uurgAlt = a})
 
 instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
-        requestWithRoute r u UserUsageReportGet{..}
-          = go _uurgQuotaUser _uurgPrettyPrint _uurgUserIp
+        requestWithRoute r u UserUsageReportGet'{..}
+          = go _uurgQuotaUser (Just _uurgPrettyPrint)
+              _uurgUserIp
               _uurgFilters
               _uurgCustomerId
               _uurgDate
@@ -235,9 +244,9 @@ instance GoogleRequest UserUsageReportGet' where
               _uurgUserKey
               _uurgMaxResults
               _uurgFields
-              _uurgAlt
+              (Just _uurgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UserUsageReportGetAPI)
+                      (Proxy :: Proxy UserUsageReportGetResource)
                       r
                       u

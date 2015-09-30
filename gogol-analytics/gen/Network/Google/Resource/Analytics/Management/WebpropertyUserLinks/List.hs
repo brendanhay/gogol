@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists webProperty-user links for a given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertyUserLinksList@.
-module Analytics.Management.WebpropertyUserLinks.List
+module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.List
     (
     -- * REST Resource
-      ManagementWebpropertyUserLinksListAPI
+      ManagementWebpropertyUserLinksListResource
 
     -- * Creating a Request
-    , managementWebpropertyUserLinksList
-    , ManagementWebpropertyUserLinksList
+    , managementWebpropertyUserLinksList'
+    , ManagementWebpropertyUserLinksList'
 
     -- * Request Lenses
     , mwullQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertyUserLinksList@ which the
--- 'ManagementWebpropertyUserLinksList' request conforms to.
-type ManagementWebpropertyUserLinksListAPI =
+-- 'ManagementWebpropertyUserLinksList'' request conforms to.
+type ManagementWebpropertyUserLinksListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityUserLinks" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] EntityUserLinks
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] EntityUserLinks
 
 -- | Lists webProperty-user links for a given web property.
 --
--- /See:/ 'managementWebpropertyUserLinksList' smart constructor.
-data ManagementWebpropertyUserLinksList = ManagementWebpropertyUserLinksList
+-- /See:/ 'managementWebpropertyUserLinksList'' smart constructor.
+data ManagementWebpropertyUserLinksList' = ManagementWebpropertyUserLinksList'
     { _mwullQuotaUser     :: !(Maybe Text)
     , _mwullPrettyPrint   :: !Bool
     , _mwullWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementWebpropertyUserLinksList = ManagementWebpropertyUserLinksList
     , _mwullStartIndex    :: !(Maybe Int32)
     , _mwullMaxResults    :: !(Maybe Int32)
     , _mwullFields        :: !(Maybe Text)
-    , _mwullAlt           :: !Text
+    , _mwullAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertyUserLinksList'' with the minimum fields required to make a request.
@@ -100,12 +108,12 @@ data ManagementWebpropertyUserLinksList = ManagementWebpropertyUserLinksList
 -- * 'mwullFields'
 --
 -- * 'mwullAlt'
-managementWebpropertyUserLinksList
+managementWebpropertyUserLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebpropertyUserLinksList
-managementWebpropertyUserLinksList pMwullWebPropertyId_ pMwullAccountId_ =
-    ManagementWebpropertyUserLinksList
+    -> ManagementWebpropertyUserLinksList'
+managementWebpropertyUserLinksList' pMwullWebPropertyId_ pMwullAccountId_ =
+    ManagementWebpropertyUserLinksList'
     { _mwullQuotaUser = Nothing
     , _mwullPrettyPrint = False
     , _mwullWebPropertyId = pMwullWebPropertyId_
@@ -116,7 +124,7 @@ managementWebpropertyUserLinksList pMwullWebPropertyId_ pMwullAccountId_ =
     , _mwullStartIndex = Nothing
     , _mwullMaxResults = Nothing
     , _mwullFields = Nothing
-    , _mwullAlt = "json"
+    , _mwullAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,7 +194,7 @@ mwullFields
   = lens _mwullFields (\ s a -> s{_mwullFields = a})
 
 -- | Data format for the response.
-mwullAlt :: Lens' ManagementWebpropertyUserLinksList' Text
+mwullAlt :: Lens' ManagementWebpropertyUserLinksList' Alt
 mwullAlt = lens _mwullAlt (\ s a -> s{_mwullAlt = a})
 
 instance GoogleRequest
@@ -195,8 +203,8 @@ instance GoogleRequest
              EntityUserLinks
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertyUserLinksList{..}
-          = go _mwullQuotaUser _mwullPrettyPrint
+          ManagementWebpropertyUserLinksList'{..}
+          = go _mwullQuotaUser (Just _mwullPrettyPrint)
               _mwullWebPropertyId
               _mwullUserIp
               _mwullAccountId
@@ -205,10 +213,10 @@ instance GoogleRequest
               _mwullStartIndex
               _mwullMaxResults
               _mwullFields
-              _mwullAlt
+              (Just _mwullAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebpropertyUserLinksListAPI)
+                         Proxy ManagementWebpropertyUserLinksListResource)
                       r
                       u

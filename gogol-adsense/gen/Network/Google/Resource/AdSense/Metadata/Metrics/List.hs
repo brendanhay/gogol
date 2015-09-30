@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the metadata for the metrics available to this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseMetadataMetricsList@.
-module AdSense.Metadata.Metrics.List
+module Network.Google.Resource.AdSense.Metadata.Metrics.List
     (
     -- * REST Resource
-      MetadataMetricsListAPI
+      MetadataMetricsListResource
 
     -- * Creating a Request
-    , metadataMetricsList
-    , MetadataMetricsList
+    , metadataMetricsList'
+    , MetadataMetricsList'
 
     -- * Request Lenses
     , mmlQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseMetadataMetricsList@ which the
--- 'MetadataMetricsList' request conforms to.
-type MetadataMetricsListAPI =
-     "metadata" :> "metrics" :> Get '[JSON] Metadata
+-- 'MetadataMetricsList'' request conforms to.
+type MetadataMetricsListResource =
+     "metadata" :>
+       "metrics" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdSense account.
 --
--- /See:/ 'metadataMetricsList' smart constructor.
-data MetadataMetricsList = MetadataMetricsList
+-- /See:/ 'metadataMetricsList'' smart constructor.
+data MetadataMetricsList' = MetadataMetricsList'
     { _mmlQuotaUser   :: !(Maybe Text)
     , _mmlPrettyPrint :: !Bool
     , _mmlUserIp      :: !(Maybe Text)
     , _mmlKey         :: !(Maybe Text)
     , _mmlOauthToken  :: !(Maybe Text)
     , _mmlFields      :: !(Maybe Text)
-    , _mmlAlt         :: !Text
+    , _mmlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataMetricsList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data MetadataMetricsList = MetadataMetricsList
 -- * 'mmlFields'
 --
 -- * 'mmlAlt'
-metadataMetricsList
-    :: MetadataMetricsList
-metadataMetricsList =
-    MetadataMetricsList
+metadataMetricsList'
+    :: MetadataMetricsList'
+metadataMetricsList' =
+    MetadataMetricsList'
     { _mmlQuotaUser = Nothing
     , _mmlPrettyPrint = True
     , _mmlUserIp = Nothing
     , _mmlKey = Nothing
     , _mmlOauthToken = Nothing
     , _mmlFields = Nothing
-    , _mmlAlt = "json"
+    , _mmlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,19 +135,20 @@ mmlFields
   = lens _mmlFields (\ s a -> s{_mmlFields = a})
 
 -- | Data format for the response.
-mmlAlt :: Lens' MetadataMetricsList' Text
+mmlAlt :: Lens' MetadataMetricsList' Alt
 mmlAlt = lens _mmlAlt (\ s a -> s{_mmlAlt = a})
 
 instance GoogleRequest MetadataMetricsList' where
         type Rs MetadataMetricsList' = Metadata
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u MetadataMetricsList{..}
-          = go _mmlQuotaUser _mmlPrettyPrint _mmlUserIp _mmlKey
+        requestWithRoute r u MetadataMetricsList'{..}
+          = go _mmlQuotaUser (Just _mmlPrettyPrint) _mmlUserIp
+              _mmlKey
               _mmlOauthToken
               _mmlFields
-              _mmlAlt
+              (Just _mmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetadataMetricsListAPI)
+                      (Proxy :: Proxy MetadataMetricsListResource)
                       r
                       u

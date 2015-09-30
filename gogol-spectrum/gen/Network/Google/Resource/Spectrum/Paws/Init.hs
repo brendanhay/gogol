@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- database.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsInit@.
-module Spectrum.Paws.Init
+module Network.Google.Resource.Spectrum.Paws.Init
     (
     -- * REST Resource
-      PawsInitAPI
+      PawsInitResource
 
     -- * Creating a Request
-    , pawsInit
-    , PawsInit
+    , pawsInit'
+    , PawsInit'
 
     -- * Request Lenses
     , piQuotaUser
@@ -43,22 +44,29 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsInit@ which the
--- 'PawsInit' request conforms to.
-type PawsInitAPI =
-     "init" :> Post '[JSON] PawsInitResponse
+-- 'PawsInit'' request conforms to.
+type PawsInitResource =
+     "init" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] PawsInitResponse
 
 -- | Initializes the connection between a white space device and the
 -- database.
 --
--- /See:/ 'pawsInit' smart constructor.
-data PawsInit = PawsInit
+-- /See:/ 'pawsInit'' smart constructor.
+data PawsInit' = PawsInit'
     { _piQuotaUser   :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
     , _piUserIp      :: !(Maybe Text)
     , _piKey         :: !(Maybe Text)
     , _piOauthToken  :: !(Maybe Text)
     , _piFields      :: !(Maybe Text)
-    , _piAlt         :: !Text
+    , _piAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInit'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data PawsInit = PawsInit
 -- * 'piFields'
 --
 -- * 'piAlt'
-pawsInit
-    :: PawsInit
-pawsInit =
-    PawsInit
+pawsInit'
+    :: PawsInit'
+pawsInit' =
+    PawsInit'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piUserIp = Nothing
     , _piKey = Nothing
     , _piOauthToken = Nothing
     , _piFields = Nothing
-    , _piAlt = "json"
+    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,16 +133,18 @@ piFields :: Lens' PawsInit' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 -- | Data format for the response.
-piAlt :: Lens' PawsInit' Text
+piAlt :: Lens' PawsInit' Alt
 piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
 
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsInit{..}
-          = go _piQuotaUser _piPrettyPrint _piUserIp _piKey
+        requestWithRoute r u PawsInit'{..}
+          = go _piQuotaUser (Just _piPrettyPrint) _piUserIp
+              _piKey
               _piOauthToken
               _piFields
-              _piAlt
+              (Just _piAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PawsInitAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PawsInitResource) r
+                      u

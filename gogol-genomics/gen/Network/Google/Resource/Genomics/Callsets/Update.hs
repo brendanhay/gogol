@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a call set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsUpdate@.
-module Genomics.Callsets.Update
+module Network.Google.Resource.Genomics.Callsets.Update
     (
     -- * REST Resource
-      CallsetsUpdateAPI
+      CallsetsUpdateResource
 
     -- * Creating a Request
-    , callsetsUpdate
-    , CallsetsUpdate
+    , callsetsUpdate'
+    , CallsetsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsUpdate@ which the
--- 'CallsetsUpdate' request conforms to.
-type CallsetsUpdateAPI =
+-- 'CallsetsUpdate'' request conforms to.
+type CallsetsUpdateResource =
      "callsets" :>
-       Capture "callSetId" Text :> Put '[JSON] CallSet
+       Capture "callSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] CallSet
 
 -- | Updates a call set.
 --
--- /See:/ 'callsetsUpdate' smart constructor.
-data CallsetsUpdate = CallsetsUpdate
+-- /See:/ 'callsetsUpdate'' smart constructor.
+data CallsetsUpdate' = CallsetsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CallsetsUpdate = CallsetsUpdate
     , _cuCallSetId   :: !Text
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CallsetsUpdate = CallsetsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-callsetsUpdate
+callsetsUpdate'
     :: Text -- ^ 'callSetId'
-    -> CallsetsUpdate
-callsetsUpdate pCuCallSetId_ =
-    CallsetsUpdate
+    -> CallsetsUpdate'
+callsetsUpdate' pCuCallSetId_ =
+    CallsetsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -93,7 +101,7 @@ callsetsUpdate pCuCallSetId_ =
     , _cuCallSetId = pCuCallSetId_
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ cuFields :: Lens' CallsetsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CallsetsUpdate' Text
+cuAlt :: Lens' CallsetsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CallsetsUpdate' where
         type Rs CallsetsUpdate' = CallSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp _cuKey
+        requestWithRoute r u CallsetsUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+              _cuKey
               _cuCallSetId
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsUpdateResource)
                       r
                       u

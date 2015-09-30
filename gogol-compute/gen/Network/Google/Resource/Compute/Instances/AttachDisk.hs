@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Attaches a Disk resource to an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAttachDisk@.
-module Compute.Instances.AttachDisk
+module Network.Google.Resource.Compute.Instances.AttachDisk
     (
     -- * REST Resource
-      InstancesAttachDiskAPI
+      InstancesAttachDiskResource
 
     -- * Creating a Request
-    , instancesAttachDisk
-    , InstancesAttachDisk
+    , instancesAttachDisk'
+    , InstancesAttachDisk'
 
     -- * Request Lenses
     , iadQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesAttachDisk@ which the
--- 'InstancesAttachDisk' request conforms to.
-type InstancesAttachDiskAPI =
+-- 'InstancesAttachDisk'' request conforms to.
+type InstancesAttachDiskResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "attachDisk" :> Post '[JSON] Operation
+               "attachDisk" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Attaches a Disk resource to an instance.
 --
--- /See:/ 'instancesAttachDisk' smart constructor.
-data InstancesAttachDisk = InstancesAttachDisk
+-- /See:/ 'instancesAttachDisk'' smart constructor.
+data InstancesAttachDisk' = InstancesAttachDisk'
     { _iadQuotaUser   :: !(Maybe Text)
     , _iadPrettyPrint :: !Bool
     , _iadProject     :: !Text
@@ -66,7 +74,7 @@ data InstancesAttachDisk = InstancesAttachDisk
     , _iadKey         :: !(Maybe Text)
     , _iadOauthToken  :: !(Maybe Text)
     , _iadFields      :: !(Maybe Text)
-    , _iadAlt         :: !Text
+    , _iadAlt         :: !Alt
     , _iadInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data InstancesAttachDisk = InstancesAttachDisk
 -- * 'iadAlt'
 --
 -- * 'iadInstance'
-instancesAttachDisk
+instancesAttachDisk'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesAttachDisk
-instancesAttachDisk pIadProject_ pIadZone_ pIadInstance_ =
-    InstancesAttachDisk
+    -> InstancesAttachDisk'
+instancesAttachDisk' pIadProject_ pIadZone_ pIadInstance_ =
+    InstancesAttachDisk'
     { _iadQuotaUser = Nothing
     , _iadPrettyPrint = True
     , _iadProject = pIadProject_
@@ -108,7 +116,7 @@ instancesAttachDisk pIadProject_ pIadZone_ pIadInstance_ =
     , _iadKey = Nothing
     , _iadOauthToken = Nothing
     , _iadFields = Nothing
-    , _iadAlt = "json"
+    , _iadAlt = JSON
     , _iadInstance = pIadInstance_
     }
 
@@ -158,7 +166,7 @@ iadFields
   = lens _iadFields (\ s a -> s{_iadFields = a})
 
 -- | Data format for the response.
-iadAlt :: Lens' InstancesAttachDisk' Text
+iadAlt :: Lens' InstancesAttachDisk' Alt
 iadAlt = lens _iadAlt (\ s a -> s{_iadAlt = a})
 
 -- | Instance name.
@@ -169,17 +177,17 @@ iadInstance
 instance GoogleRequest InstancesAttachDisk' where
         type Rs InstancesAttachDisk' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesAttachDisk{..}
-          = go _iadQuotaUser _iadPrettyPrint _iadProject
+        requestWithRoute r u InstancesAttachDisk'{..}
+          = go _iadQuotaUser (Just _iadPrettyPrint) _iadProject
               _iadUserIp
               _iadZone
               _iadKey
               _iadOauthToken
               _iadFields
-              _iadAlt
+              (Just _iadAlt)
               _iadInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesAttachDiskAPI)
+                      (Proxy :: Proxy InstancesAttachDiskResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the state of the specified dataflow job.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsGet@.
-module Dataflow.Projects.Jobs.Get
+module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     (
     -- * REST Resource
-      ProjectsJobsGetAPI
+      ProjectsJobsGetResource
 
     -- * Creating a Request
-    , projectsJobsGet
-    , ProjectsJobsGet
+    , projectsJobsGet'
+    , ProjectsJobsGet'
 
     -- * Request Lenses
     , pjgXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsGet@ which the
--- 'ProjectsJobsGet' request conforms to.
-type ProjectsJobsGetAPI =
+-- 'ProjectsJobsGet'' request conforms to.
+type ProjectsJobsGetResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
-               QueryParam "view" Text :> Get '[JSON] Job
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "view" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] Job
 
 -- | Gets the state of the specified dataflow job.
 --
--- /See:/ 'projectsJobsGet' smart constructor.
-data ProjectsJobsGet = ProjectsJobsGet
+-- /See:/ 'projectsJobsGet'' smart constructor.
+data ProjectsJobsGet' = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Text)
     , _pjgQuotaUser      :: !(Maybe Text)
     , _pjgPrettyPrint    :: !Bool
@@ -117,12 +132,12 @@ data ProjectsJobsGet = ProjectsJobsGet
 -- * 'pjgCallback'
 --
 -- * 'pjgAlt'
-projectsJobsGet
+projectsJobsGet'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> ProjectsJobsGet
-projectsJobsGet pPjgJobId_ pPjgProjectId_ =
-    ProjectsJobsGet
+    -> ProjectsJobsGet'
+projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
+    ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgQuotaUser = Nothing
     , _pjgPrettyPrint = True
@@ -228,11 +243,11 @@ pjgAlt = lens _pjgAlt (\ s a -> s{_pjgAlt = a})
 instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsGet{..}
-          = go _pjgXgafv _pjgQuotaUser _pjgPrettyPrint
+        requestWithRoute r u ProjectsJobsGet'{..}
+          = go _pjgXgafv _pjgQuotaUser (Just _pjgPrettyPrint)
               _pjgJobId
               _pjgUploadProtocol
-              _pjgPp
+              (Just _pjgPp)
               _pjgAccessToken
               _pjgUploadType
               _pjgBearerToken
@@ -242,8 +257,9 @@ instance GoogleRequest ProjectsJobsGet' where
               _pjgOauthToken
               _pjgFields
               _pjgCallback
-              _pjgAlt
+              (Just _pjgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsJobsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsJobsGetResource)
                       r
                       u

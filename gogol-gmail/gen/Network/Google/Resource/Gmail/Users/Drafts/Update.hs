@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Replaces a draft\'s content.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsUpdate@.
-module Gmail.Users.Drafts.Update
+module Network.Google.Resource.Gmail.Users.Drafts.Update
     (
     -- * REST Resource
-      UsersDraftsUpdateAPI
+      UsersDraftsUpdateResource
 
     -- * Creating a Request
-    , usersDraftsUpdate
-    , UsersDraftsUpdate
+    , usersDraftsUpdate'
+    , UsersDraftsUpdate'
 
     -- * Request Lenses
     , uduQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersDraftsUpdate@ which the
--- 'UsersDraftsUpdate' request conforms to.
-type UsersDraftsUpdateAPI =
+-- 'UsersDraftsUpdate'' request conforms to.
+type UsersDraftsUpdateResource =
      Capture "userId" Text :>
-       "drafts" :> Capture "id" Text :> Put '[JSON] Draft
+       "drafts" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
 --
--- /See:/ 'usersDraftsUpdate' smart constructor.
-data UsersDraftsUpdate = UsersDraftsUpdate
+-- /See:/ 'usersDraftsUpdate'' smart constructor.
+data UsersDraftsUpdate' = UsersDraftsUpdate'
     { _uduQuotaUser   :: !(Maybe Text)
     , _uduPrettyPrint :: !Bool
     , _uduUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersDraftsUpdate = UsersDraftsUpdate
     , _uduId          :: !Text
     , _uduOauthToken  :: !(Maybe Text)
     , _uduFields      :: !(Maybe Text)
-    , _uduAlt         :: !Text
+    , _uduAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsUpdate'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data UsersDraftsUpdate = UsersDraftsUpdate
 -- * 'uduFields'
 --
 -- * 'uduAlt'
-usersDraftsUpdate
+usersDraftsUpdate'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersDraftsUpdate
-usersDraftsUpdate pUduUserId_ pUduId_ =
-    UsersDraftsUpdate
+    -> UsersDraftsUpdate'
+usersDraftsUpdate' pUduUserId_ pUduId_ =
+    UsersDraftsUpdate'
     { _uduQuotaUser = Nothing
     , _uduPrettyPrint = True
     , _uduUserIp = Nothing
@@ -99,7 +108,7 @@ usersDraftsUpdate pUduUserId_ pUduId_ =
     , _uduId = pUduId_
     , _uduOauthToken = Nothing
     , _uduFields = Nothing
-    , _uduAlt = "json"
+    , _uduAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,22 +158,22 @@ uduFields
   = lens _uduFields (\ s a -> s{_uduFields = a})
 
 -- | Data format for the response.
-uduAlt :: Lens' UsersDraftsUpdate' Text
+uduAlt :: Lens' UsersDraftsUpdate' Alt
 uduAlt = lens _uduAlt (\ s a -> s{_uduAlt = a})
 
 instance GoogleRequest UsersDraftsUpdate' where
         type Rs UsersDraftsUpdate' = Draft
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsUpdate{..}
-          = go _uduQuotaUser _uduPrettyPrint _uduUserIp
+        requestWithRoute r u UsersDraftsUpdate'{..}
+          = go _uduQuotaUser (Just _uduPrettyPrint) _uduUserIp
               _uduUserId
               _uduKey
               _uduId
               _uduOauthToken
               _uduFields
-              _uduAlt
+              (Just _uduAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDraftsUpdateAPI)
+                      (Proxy :: Proxy UsersDraftsUpdateResource)
                       r
                       u

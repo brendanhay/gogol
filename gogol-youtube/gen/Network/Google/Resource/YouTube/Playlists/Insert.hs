@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistsInsert@.
-module YouTube.Playlists.Insert
+module Network.Google.Resource.YouTube.Playlists.Insert
     (
     -- * REST Resource
-      PlaylistsInsertAPI
+      PlaylistsInsertResource
 
     -- * Creating a Request
-    , playlistsInsert
-    , PlaylistsInsert
+    , playlistsInsert'
+    , PlaylistsInsert'
 
     -- * Request Lenses
     , piQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistsInsert@ which the
--- 'PlaylistsInsert' request conforms to.
-type PlaylistsInsertAPI =
+-- 'PlaylistsInsert'' request conforms to.
+type PlaylistsInsertResource =
      "playlists" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             Post '[JSON] Playlist
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Playlist
 
 -- | Creates a playlist.
 --
--- /See:/ 'playlistsInsert' smart constructor.
-data PlaylistsInsert = PlaylistsInsert
+-- /See:/ 'playlistsInsert'' smart constructor.
+data PlaylistsInsert' = PlaylistsInsert'
     { _piQuotaUser                     :: !(Maybe Text)
     , _piPart                          :: !Text
     , _piPrettyPrint                   :: !Bool
@@ -66,7 +73,7 @@ data PlaylistsInsert = PlaylistsInsert
     , _piOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _piOauthToken                    :: !(Maybe Text)
     , _piFields                        :: !(Maybe Text)
-    , _piAlt                           :: !Text
+    , _piAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistsInsert'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data PlaylistsInsert = PlaylistsInsert
 -- * 'piFields'
 --
 -- * 'piAlt'
-playlistsInsert
+playlistsInsert'
     :: Text -- ^ 'part'
-    -> PlaylistsInsert
-playlistsInsert pPiPart_ =
-    PlaylistsInsert
+    -> PlaylistsInsert'
+playlistsInsert' pPiPart_ =
+    PlaylistsInsert'
     { _piQuotaUser = Nothing
     , _piPart = pPiPart_
     , _piPrettyPrint = True
@@ -106,7 +113,7 @@ playlistsInsert pPiPart_ =
     , _piOnBehalfOfContentOwnerChannel = Nothing
     , _piOauthToken = Nothing
     , _piFields = Nothing
-    , _piAlt = "json"
+    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,22 +192,24 @@ piFields :: Lens' PlaylistsInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 -- | Data format for the response.
-piAlt :: Lens' PlaylistsInsert' Text
+piAlt :: Lens' PlaylistsInsert' Alt
 piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
 
 instance GoogleRequest PlaylistsInsert' where
         type Rs PlaylistsInsert' = Playlist
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistsInsert{..}
-          = go _piQuotaUser (Just _piPart) _piPrettyPrint
+        requestWithRoute r u PlaylistsInsert'{..}
+          = go _piQuotaUser (Just _piPart)
+              (Just _piPrettyPrint)
               _piUserIp
               _piOnBehalfOfContentOwner
               _piKey
               _piOnBehalfOfContentOwnerChannel
               _piOauthToken
               _piFields
-              _piAlt
+              (Just _piAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlaylistsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PlaylistsInsertResource)
                       r
                       u

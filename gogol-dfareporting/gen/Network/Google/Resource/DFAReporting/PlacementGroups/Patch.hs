@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementGroupsPatch@.
-module DFAReporting.PlacementGroups.Patch
+module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
     (
     -- * REST Resource
-      PlacementGroupsPatchAPI
+      PlacementGroupsPatchResource
 
     -- * Creating a Request
-    , placementGroupsPatch
-    , PlacementGroupsPatch
+    , placementGroupsPatch'
+    , PlacementGroupsPatch'
 
     -- * Request Lenses
     , pgpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementGroupsPatch@ which the
--- 'PlacementGroupsPatch' request conforms to.
-type PlacementGroupsPatchAPI =
+-- 'PlacementGroupsPatch'' request conforms to.
+type PlacementGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementGroups" :>
-           QueryParam "id" Int64 :> Patch '[JSON] PlacementGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] PlacementGroup
 
 -- | Updates an existing placement group. This method supports patch
 -- semantics.
 --
--- /See:/ 'placementGroupsPatch' smart constructor.
-data PlacementGroupsPatch = PlacementGroupsPatch
+-- /See:/ 'placementGroupsPatch'' smart constructor.
+data PlacementGroupsPatch' = PlacementGroupsPatch'
     { _pgpQuotaUser   :: !(Maybe Text)
     , _pgpPrettyPrint :: !Bool
     , _pgpUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data PlacementGroupsPatch = PlacementGroupsPatch
     , _pgpId          :: !Int64
     , _pgpOauthToken  :: !(Maybe Text)
     , _pgpFields      :: !(Maybe Text)
-    , _pgpAlt         :: !Text
+    , _pgpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data PlacementGroupsPatch = PlacementGroupsPatch
 -- * 'pgpFields'
 --
 -- * 'pgpAlt'
-placementGroupsPatch
+placementGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> PlacementGroupsPatch
-placementGroupsPatch pPgpProfileId_ pPgpId_ =
-    PlacementGroupsPatch
+    -> PlacementGroupsPatch'
+placementGroupsPatch' pPgpProfileId_ pPgpId_ =
+    PlacementGroupsPatch'
     { _pgpQuotaUser = Nothing
     , _pgpPrettyPrint = True
     , _pgpUserIp = Nothing
@@ -103,7 +111,7 @@ placementGroupsPatch pPgpProfileId_ pPgpId_ =
     , _pgpId = pPgpId_
     , _pgpOauthToken = Nothing
     , _pgpFields = Nothing
-    , _pgpAlt = "json"
+    , _pgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ pgpFields
   = lens _pgpFields (\ s a -> s{_pgpFields = a})
 
 -- | Data format for the response.
-pgpAlt :: Lens' PlacementGroupsPatch' Text
+pgpAlt :: Lens' PlacementGroupsPatch' Alt
 pgpAlt = lens _pgpAlt (\ s a -> s{_pgpAlt = a})
 
 instance GoogleRequest PlacementGroupsPatch' where
         type Rs PlacementGroupsPatch' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsPatch{..}
-          = go _pgpQuotaUser _pgpPrettyPrint _pgpUserIp
+        requestWithRoute r u PlacementGroupsPatch'{..}
+          = go _pgpQuotaUser (Just _pgpPrettyPrint) _pgpUserIp
               _pgpProfileId
               _pgpKey
               (Just _pgpId)
               _pgpOauthToken
               _pgpFields
-              _pgpAlt
+              (Just _pgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementGroupsPatchAPI)
+                      (Proxy :: Proxy PlacementGroupsPatchResource)
                       r
                       u

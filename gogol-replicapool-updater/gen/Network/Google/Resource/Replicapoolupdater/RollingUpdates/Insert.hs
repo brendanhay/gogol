@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts and starts a new update.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesInsert@.
-module Replicapoolupdater.RollingUpdates.Insert
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Insert
     (
     -- * REST Resource
-      RollingUpdatesInsertAPI
+      RollingUpdatesInsertResource
 
     -- * Creating a Request
-    , rollingUpdatesInsert
-    , RollingUpdatesInsert
+    , rollingUpdatesInsert'
+    , RollingUpdatesInsert'
 
     -- * Request Lenses
     , ruiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesInsert@ which the
--- 'RollingUpdatesInsert' request conforms to.
-type RollingUpdatesInsertAPI =
+-- 'RollingUpdatesInsert'' request conforms to.
+type RollingUpdatesInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "rollingUpdates" :> Post '[JSON] Operation
+           "rollingUpdates" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Inserts and starts a new update.
 --
--- /See:/ 'rollingUpdatesInsert' smart constructor.
-data RollingUpdatesInsert = RollingUpdatesInsert
+-- /See:/ 'rollingUpdatesInsert'' smart constructor.
+data RollingUpdatesInsert' = RollingUpdatesInsert'
     { _ruiQuotaUser   :: !(Maybe Text)
     , _ruiPrettyPrint :: !Bool
     , _ruiProject     :: !Text
@@ -63,7 +71,7 @@ data RollingUpdatesInsert = RollingUpdatesInsert
     , _ruiKey         :: !(Maybe Text)
     , _ruiOauthToken  :: !(Maybe Text)
     , _ruiFields      :: !(Maybe Text)
-    , _ruiAlt         :: !Text
+    , _ruiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesInsert'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data RollingUpdatesInsert = RollingUpdatesInsert
 -- * 'ruiFields'
 --
 -- * 'ruiAlt'
-rollingUpdatesInsert
+rollingUpdatesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesInsert
-rollingUpdatesInsert pRuiProject_ pRuiZone_ =
-    RollingUpdatesInsert
+    -> RollingUpdatesInsert'
+rollingUpdatesInsert' pRuiProject_ pRuiZone_ =
+    RollingUpdatesInsert'
     { _ruiQuotaUser = Nothing
     , _ruiPrettyPrint = True
     , _ruiProject = pRuiProject_
@@ -101,7 +109,7 @@ rollingUpdatesInsert pRuiProject_ pRuiZone_ =
     , _ruiKey = Nothing
     , _ruiOauthToken = Nothing
     , _ruiFields = Nothing
-    , _ruiAlt = "json"
+    , _ruiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,23 +158,23 @@ ruiFields
   = lens _ruiFields (\ s a -> s{_ruiFields = a})
 
 -- | Data format for the response.
-ruiAlt :: Lens' RollingUpdatesInsert' Text
+ruiAlt :: Lens' RollingUpdatesInsert' Alt
 ruiAlt = lens _ruiAlt (\ s a -> s{_ruiAlt = a})
 
 instance GoogleRequest RollingUpdatesInsert' where
         type Rs RollingUpdatesInsert' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesInsert{..}
-          = go _ruiQuotaUser _ruiPrettyPrint _ruiProject
+        requestWithRoute r u RollingUpdatesInsert'{..}
+          = go _ruiQuotaUser (Just _ruiPrettyPrint) _ruiProject
               _ruiUserIp
               _ruiZone
               _ruiKey
               _ruiOauthToken
               _ruiFields
-              _ruiAlt
+              (Just _ruiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesInsertAPI)
+                      (Proxy :: Proxy RollingUpdatesInsertResource)
                       r
                       u

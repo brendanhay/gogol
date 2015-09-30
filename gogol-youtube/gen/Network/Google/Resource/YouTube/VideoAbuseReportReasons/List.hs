@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- videos.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideoAbuseReportReasonsList@.
-module YouTube.VideoAbuseReportReasons.List
+module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
     (
     -- * REST Resource
-      VideoAbuseReportReasonsListAPI
+      VideoAbuseReportReasonsListResource
 
     -- * Creating a Request
-    , videoAbuseReportReasonsList
-    , VideoAbuseReportReasonsList
+    , videoAbuseReportReasonsList'
+    , VideoAbuseReportReasonsList'
 
     -- * Request Lenses
     , varrlQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideoAbuseReportReasonsList@ which the
--- 'VideoAbuseReportReasonsList' request conforms to.
-type VideoAbuseReportReasonsListAPI =
+-- 'VideoAbuseReportReasonsList'' request conforms to.
+type VideoAbuseReportReasonsListResource =
      "videoAbuseReportReasons" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           Get '[JSON] VideoAbuseReportReasonListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "hl" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] VideoAbuseReportReasonListResponse
 
 -- | Returns a list of abuse reasons that can be used for reporting abusive
 -- videos.
 --
--- /See:/ 'videoAbuseReportReasonsList' smart constructor.
-data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList
+-- /See:/ 'videoAbuseReportReasonsList'' smart constructor.
+data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
     { _varrlQuotaUser   :: !(Maybe Text)
     , _varrlPart        :: !Text
     , _varrlPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList
     , _varrlKey         :: !(Maybe Text)
     , _varrlOauthToken  :: !(Maybe Text)
     , _varrlFields      :: !(Maybe Text)
-    , _varrlAlt         :: !Text
+    , _varrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoAbuseReportReasonsList'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList
 -- * 'varrlFields'
 --
 -- * 'varrlAlt'
-videoAbuseReportReasonsList
+videoAbuseReportReasonsList'
     :: Text -- ^ 'part'
-    -> VideoAbuseReportReasonsList
-videoAbuseReportReasonsList pVarrlPart_ =
-    VideoAbuseReportReasonsList
+    -> VideoAbuseReportReasonsList'
+videoAbuseReportReasonsList' pVarrlPart_ =
+    VideoAbuseReportReasonsList'
     { _varrlQuotaUser = Nothing
     , _varrlPart = pVarrlPart_
     , _varrlPrettyPrint = True
@@ -102,7 +110,7 @@ videoAbuseReportReasonsList pVarrlPart_ =
     , _varrlKey = Nothing
     , _varrlOauthToken = Nothing
     , _varrlFields = Nothing
-    , _varrlAlt = "json"
+    , _varrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,7 +162,7 @@ varrlFields
   = lens _varrlFields (\ s a -> s{_varrlFields = a})
 
 -- | Data format for the response.
-varrlAlt :: Lens' VideoAbuseReportReasonsList' Text
+varrlAlt :: Lens' VideoAbuseReportReasonsList' Alt
 varrlAlt = lens _varrlAlt (\ s a -> s{_varrlAlt = a})
 
 instance GoogleRequest VideoAbuseReportReasonsList'
@@ -162,17 +170,17 @@ instance GoogleRequest VideoAbuseReportReasonsList'
         type Rs VideoAbuseReportReasonsList' =
              VideoAbuseReportReasonListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideoAbuseReportReasonsList{..}
+        requestWithRoute r u VideoAbuseReportReasonsList'{..}
           = go _varrlQuotaUser (Just _varrlPart)
-              _varrlPrettyPrint
+              (Just _varrlPrettyPrint)
               _varrlUserIp
               (Just _varrlHl)
               _varrlKey
               _varrlOauthToken
               _varrlFields
-              _varrlAlt
+              (Just _varrlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VideoAbuseReportReasonsListAPI)
+                      (Proxy :: Proxy VideoAbuseReportReasonsListResource)
                       r
                       u

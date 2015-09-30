@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified TargetVpnGateway resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysDelete@.
-module Compute.TargetVPNGateways.Delete
+module Network.Google.Resource.Compute.TargetVPNGateways.Delete
     (
     -- * REST Resource
-      TargetVPNGatewaysDeleteAPI
+      TargetVPNGatewaysDeleteResource
 
     -- * Creating a Request
-    , targetVPNGatewaysDelete
-    , TargetVPNGatewaysDelete
+    , targetVPNGatewaysDelete'
+    , TargetVPNGatewaysDelete'
 
     -- * Request Lenses
     , tvgdQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetVPNGatewaysDelete@ which the
--- 'TargetVPNGatewaysDelete' request conforms to.
-type TargetVPNGatewaysDeleteAPI =
+-- 'TargetVPNGatewaysDelete'' request conforms to.
+type TargetVPNGatewaysDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetVpnGateways" :>
              Capture "targetVpnGateway" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetVpnGateway resource.
 --
--- /See:/ 'targetVPNGatewaysDelete' smart constructor.
-data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
+-- /See:/ 'targetVPNGatewaysDelete'' smart constructor.
+data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
     { _tvgdQuotaUser        :: !(Maybe Text)
     , _tvgdPrettyPrint      :: !Bool
     , _tvgdProject          :: !Text
@@ -67,7 +74,7 @@ data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
     , _tvgdRegion           :: !Text
     , _tvgdOauthToken       :: !(Maybe Text)
     , _tvgdFields           :: !(Maybe Text)
-    , _tvgdAlt              :: !Text
+    , _tvgdAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysDelete'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
 -- * 'tvgdFields'
 --
 -- * 'tvgdAlt'
-targetVPNGatewaysDelete
+targetVPNGatewaysDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetVpnGateway'
     -> Text -- ^ 'region'
-    -> TargetVPNGatewaysDelete
-targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVpnGateway_ pTvgdRegion_ =
-    TargetVPNGatewaysDelete
+    -> TargetVPNGatewaysDelete'
+targetVPNGatewaysDelete' pTvgdProject_ pTvgdTargetVpnGateway_ pTvgdRegion_ =
+    TargetVPNGatewaysDelete'
     { _tvgdQuotaUser = Nothing
     , _tvgdPrettyPrint = True
     , _tvgdProject = pTvgdProject_
@@ -109,7 +116,7 @@ targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVpnGateway_ pTvgdRegion_ =
     , _tvgdRegion = pTvgdRegion_
     , _tvgdOauthToken = Nothing
     , _tvgdFields = Nothing
-    , _tvgdAlt = "json"
+    , _tvgdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +173,24 @@ tvgdFields
   = lens _tvgdFields (\ s a -> s{_tvgdFields = a})
 
 -- | Data format for the response.
-tvgdAlt :: Lens' TargetVPNGatewaysDelete' Text
+tvgdAlt :: Lens' TargetVPNGatewaysDelete' Alt
 tvgdAlt = lens _tvgdAlt (\ s a -> s{_tvgdAlt = a})
 
 instance GoogleRequest TargetVPNGatewaysDelete' where
         type Rs TargetVPNGatewaysDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysDelete{..}
-          = go _tvgdQuotaUser _tvgdPrettyPrint _tvgdProject
+        requestWithRoute r u TargetVPNGatewaysDelete'{..}
+          = go _tvgdQuotaUser (Just _tvgdPrettyPrint)
+              _tvgdProject
               _tvgdUserIp
               _tvgdTargetVpnGateway
               _tvgdKey
               _tvgdRegion
               _tvgdOauthToken
               _tvgdFields
-              _tvgdAlt
+              (Just _tvgdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetVPNGatewaysDeleteAPI)
+                      (Proxy :: Proxy TargetVPNGatewaysDeleteResource)
                       r
                       u

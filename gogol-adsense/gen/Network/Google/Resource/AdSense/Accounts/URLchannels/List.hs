@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsURLchannelsList@.
-module AdSense.Accounts.URLchannels.List
+module Network.Google.Resource.AdSense.Accounts.URLchannels.List
     (
     -- * REST Resource
-      AccountsUrlchannelsListAPI
+      AccountsUrlchannelsListResource
 
     -- * Creating a Request
-    , accountsURLchannelsList
-    , AccountsURLchannelsList
+    , accountsURLchannelsList'
+    , AccountsURLchannelsList'
 
     -- * Request Lenses
     , aulQuotaUser
@@ -47,22 +48,28 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsURLchannelsList@ which the
--- 'AccountsURLchannelsList' request conforms to.
-type AccountsUrlchannelsListAPI =
+-- 'AccountsURLchannelsList'' request conforms to.
+type AccountsUrlchannelsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "urlchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] URLChannels
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] URLChannels
 
 -- | List all URL channels in the specified ad client for the specified
 -- account.
 --
--- /See:/ 'accountsURLchannelsList' smart constructor.
-data AccountsURLchannelsList = AccountsURLchannelsList
+-- /See:/ 'accountsURLchannelsList'' smart constructor.
+data AccountsURLchannelsList' = AccountsURLchannelsList'
     { _aulQuotaUser   :: !(Maybe Text)
     , _aulPrettyPrint :: !Bool
     , _aulUserIp      :: !(Maybe Text)
@@ -73,7 +80,7 @@ data AccountsURLchannelsList = AccountsURLchannelsList
     , _aulOauthToken  :: !(Maybe Text)
     , _aulMaxResults  :: !(Maybe Int32)
     , _aulFields      :: !(Maybe Text)
-    , _aulAlt         :: !Text
+    , _aulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsURLchannelsList'' with the minimum fields required to make a request.
@@ -101,12 +108,12 @@ data AccountsURLchannelsList = AccountsURLchannelsList
 -- * 'aulFields'
 --
 -- * 'aulAlt'
-accountsURLchannelsList
+accountsURLchannelsList'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsURLchannelsList
-accountsURLchannelsList pAulAdClientId_ pAulAccountId_ =
-    AccountsURLchannelsList
+    -> AccountsURLchannelsList'
+accountsURLchannelsList' pAulAdClientId_ pAulAccountId_ =
+    AccountsURLchannelsList'
     { _aulQuotaUser = Nothing
     , _aulPrettyPrint = True
     , _aulUserIp = Nothing
@@ -117,7 +124,7 @@ accountsURLchannelsList pAulAdClientId_ pAulAccountId_ =
     , _aulOauthToken = Nothing
     , _aulMaxResults = Nothing
     , _aulFields = Nothing
-    , _aulAlt = "json"
+    , _aulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,14 +189,14 @@ aulFields
   = lens _aulFields (\ s a -> s{_aulFields = a})
 
 -- | Data format for the response.
-aulAlt :: Lens' AccountsURLchannelsList' Text
+aulAlt :: Lens' AccountsURLchannelsList' Alt
 aulAlt = lens _aulAlt (\ s a -> s{_aulAlt = a})
 
 instance GoogleRequest AccountsURLchannelsList' where
         type Rs AccountsURLchannelsList' = URLChannels
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsURLchannelsList{..}
-          = go _aulQuotaUser _aulPrettyPrint _aulUserIp
+        requestWithRoute r u AccountsURLchannelsList'{..}
+          = go _aulQuotaUser (Just _aulPrettyPrint) _aulUserIp
               _aulAdClientId
               _aulAccountId
               _aulKey
@@ -197,9 +204,9 @@ instance GoogleRequest AccountsURLchannelsList' where
               _aulOauthToken
               _aulMaxResults
               _aulFields
-              _aulAlt
+              (Just _aulAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsUrlchannelsListAPI)
+                      (Proxy :: Proxy AccountsUrlchannelsListResource)
                       r
                       u

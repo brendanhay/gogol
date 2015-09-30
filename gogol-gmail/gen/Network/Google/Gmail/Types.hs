@@ -17,6 +17,9 @@ module Network.Google.Gmail.Types
     -- * Service URL
       gmailURL
 
+    -- * GmailUsersThreadsGetFormat
+    , GmailUsersThreadsGetFormat (..)
+
     -- * ModifyThreadRequest
     , ModifyThreadRequest
     , modifyThreadRequest
@@ -39,6 +42,9 @@ module Network.Google.Gmail.Types
     , mmrRemoveLabelIds
     , mmrAddLabelIds
 
+    -- * GmailUsersMessagesInsertInternalDateSource
+    , GmailUsersMessagesInsertInternalDateSource (..)
+
     -- * ListHistoryResponse
     , ListHistoryResponse
     , listHistoryResponse
@@ -59,6 +65,15 @@ module Network.Google.Gmail.Types
     , pThreadsTotal
     , pHistoryId
     , pEmailAddress
+
+    -- * LabelType
+    , LabelType (..)
+
+    -- * LabelMessageListVisibility
+    , LabelMessageListVisibility (..)
+
+    -- * LabelLabelListVisibility
+    , LabelLabelListVisibility (..)
 
     -- * HistoryMessageDeleted
     , HistoryMessageDeleted
@@ -100,12 +115,18 @@ module Network.Google.Gmail.Types
     , mpbData
     , mpbAttachmentId
 
+    -- * GmailUsersDraftsGetFormat
+    , GmailUsersDraftsGetFormat (..)
+
     -- * ListDraftsResponse
     , ListDraftsResponse
     , listDraftsResponse
     , ldrNextPageToken
     , ldrResultSizeEstimate
     , ldrDrafts
+
+    -- * GmailUsersMessagesImportInternalDateSource
+    , GmailUsersMessagesImportInternalDateSource (..)
 
     -- * WatchResponse
     , WatchResponse
@@ -118,6 +139,9 @@ module Network.Google.Gmail.Types
     , draft
     , dId
     , dMessage
+
+    -- * WatchRequestLabelFilterAction
+    , WatchRequestLabelFilterAction (..)
 
     -- * WatchRequest
     , WatchRequest
@@ -177,6 +201,12 @@ module Network.Google.Gmail.Types
     , lmrNextPageToken
     , lmrResultSizeEstimate
     , lmrMessages
+
+    -- * Alt
+    , Alt (..)
+
+    -- * GmailUsersMessagesGetFormat
+    , GmailUsersMessagesGetFormat (..)
     ) where
 
 import           Network.Google.Gmail.Types.Product
@@ -184,7 +214,7 @@ import           Network.Google.Gmail.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Gmail API.
-gmailURL :: BaseURL
+gmailURL :: BaseUrl
 gmailURL
   = BaseUrl Https
       "https://www.googleapis.com/gmail/v1/users/"

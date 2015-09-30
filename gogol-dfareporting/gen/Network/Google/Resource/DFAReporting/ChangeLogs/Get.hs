@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one change log by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingChangeLogsGet@.
-module DFAReporting.ChangeLogs.Get
+module Network.Google.Resource.DFAReporting.ChangeLogs.Get
     (
     -- * REST Resource
-      ChangeLogsGetAPI
+      ChangeLogsGetResource
 
     -- * Creating a Request
-    , changeLogsGet
-    , ChangeLogsGet
+    , changeLogsGet'
+    , ChangeLogsGet'
 
     -- * Request Lenses
     , clgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingChangeLogsGet@ which the
--- 'ChangeLogsGet' request conforms to.
-type ChangeLogsGetAPI =
+-- 'ChangeLogsGet'' request conforms to.
+type ChangeLogsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "changeLogs" :>
-           Capture "id" Int64 :> Get '[JSON] ChangeLog
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
 --
--- /See:/ 'changeLogsGet' smart constructor.
-data ChangeLogsGet = ChangeLogsGet
+-- /See:/ 'changeLogsGet'' smart constructor.
+data ChangeLogsGet' = ChangeLogsGet'
     { _clgQuotaUser   :: !(Maybe Text)
     , _clgPrettyPrint :: !Bool
     , _clgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ChangeLogsGet = ChangeLogsGet
     , _clgId          :: !Int64
     , _clgOauthToken  :: !(Maybe Text)
     , _clgFields      :: !(Maybe Text)
-    , _clgAlt         :: !Text
+    , _clgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ChangeLogsGet = ChangeLogsGet
 -- * 'clgFields'
 --
 -- * 'clgAlt'
-changeLogsGet
+changeLogsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> ChangeLogsGet
-changeLogsGet pClgProfileId_ pClgId_ =
-    ChangeLogsGet
+    -> ChangeLogsGet'
+changeLogsGet' pClgProfileId_ pClgId_ =
+    ChangeLogsGet'
     { _clgQuotaUser = Nothing
     , _clgPrettyPrint = True
     , _clgUserIp = Nothing
@@ -101,7 +109,7 @@ changeLogsGet pClgProfileId_ pClgId_ =
     , _clgId = pClgId_
     , _clgOauthToken = Nothing
     , _clgFields = Nothing
-    , _clgAlt = "json"
+    , _clgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
 -- | Data format for the response.
-clgAlt :: Lens' ChangeLogsGet' Text
+clgAlt :: Lens' ChangeLogsGet' Alt
 clgAlt = lens _clgAlt (\ s a -> s{_clgAlt = a})
 
 instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ChangeLogsGet{..}
-          = go _clgQuotaUser _clgPrettyPrint _clgUserIp
+        requestWithRoute r u ChangeLogsGet'{..}
+          = go _clgQuotaUser (Just _clgPrettyPrint) _clgUserIp
               _clgProfileId
               _clgKey
               _clgId
               _clgOauthToken
               _clgFields
-              _clgAlt
+              (Just _clgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangeLogsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChangeLogsGetResource)
+                      r
                       u

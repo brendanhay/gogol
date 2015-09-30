@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the rules in the access control list for the calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLList@.
-module Calendar.ACL.List
+module Network.Google.Resource.Calendar.ACL.List
     (
     -- * REST Resource
-      AclListAPI
+      AclListResource
 
     -- * Creating a Request
-    , aCLList
-    , ACLList
+    , aCLList'
+    , ACLList'
 
     -- * Request Lenses
     , alSyncToken
@@ -47,20 +48,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLList@ which the
--- 'ACLList' request conforms to.
-type AclListAPI =
+-- 'ACLList'' request conforms to.
+type AclListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
            QueryParam "syncToken" Text :>
-             QueryParam "showDeleted" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :> Get '[JSON] ACL
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
 --
--- /See:/ 'aCLList' smart constructor.
-data ACLList = ACLList
+-- /See:/ 'aCLList'' smart constructor.
+data ACLList' = ACLList'
     { _alSyncToken   :: !(Maybe Text)
     , _alQuotaUser   :: !(Maybe Text)
     , _alCalendarId  :: !Text
@@ -72,7 +80,7 @@ data ACLList = ACLList
     , _alOauthToken  :: !(Maybe Text)
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLList'' with the minimum fields required to make a request.
@@ -102,11 +110,11 @@ data ACLList = ACLList
 -- * 'alFields'
 --
 -- * 'alAlt'
-aCLList
+aCLList'
     :: Text -- ^ 'calendarId'
-    -> ACLList
-aCLList pAlCalendarId_ =
-    ACLList
+    -> ACLList'
+aCLList' pAlCalendarId_ =
+    ACLList'
     { _alSyncToken = Nothing
     , _alQuotaUser = Nothing
     , _alCalendarId = pAlCalendarId_
@@ -118,7 +126,7 @@ aCLList pAlCalendarId_ =
     , _alOauthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -195,15 +203,15 @@ alFields :: Lens' ACLList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ACLList' Text
+alAlt :: Lens' ACLList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLList{..}
+        requestWithRoute r u ACLList'{..}
           = go _alSyncToken _alQuotaUser _alCalendarId
-              _alPrettyPrint
+              (Just _alPrettyPrint)
               _alUserIp
               _alShowDeleted
               _alKey
@@ -211,6 +219,7 @@ instance GoogleRequest ACLList' where
               _alOauthToken
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclListResource) r
+                      u

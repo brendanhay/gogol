@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified UrlMap resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsDelete@.
-module Compute.URLMaps.Delete
+module Network.Google.Resource.Compute.URLMaps.Delete
     (
     -- * REST Resource
-      UrlMapsDeleteAPI
+      UrlMapsDeleteResource
 
     -- * Creating a Request
-    , uRLMapsDelete
-    , URLMapsDelete
+    , uRLMapsDelete'
+    , URLMapsDelete'
 
     -- * Request Lenses
     , umdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsDelete@ which the
--- 'URLMapsDelete' request conforms to.
-type UrlMapsDeleteAPI =
+-- 'URLMapsDelete'' request conforms to.
+type UrlMapsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           Capture "urlMap" Text :> Delete '[JSON] Operation
+           Capture "urlMap" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified UrlMap resource.
 --
--- /See:/ 'uRLMapsDelete' smart constructor.
-data URLMapsDelete = URLMapsDelete
+-- /See:/ 'uRLMapsDelete'' smart constructor.
+data URLMapsDelete' = URLMapsDelete'
     { _umdQuotaUser   :: !(Maybe Text)
     , _umdUrlMap      :: !Text
     , _umdPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data URLMapsDelete = URLMapsDelete
     , _umdKey         :: !(Maybe Text)
     , _umdOauthToken  :: !(Maybe Text)
     , _umdFields      :: !(Maybe Text)
-    , _umdAlt         :: !Text
+    , _umdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data URLMapsDelete = URLMapsDelete
 -- * 'umdFields'
 --
 -- * 'umdAlt'
-uRLMapsDelete
+uRLMapsDelete'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsDelete
-uRLMapsDelete pUmdUrlMap_ pUmdProject_ =
-    URLMapsDelete
+    -> URLMapsDelete'
+uRLMapsDelete' pUmdUrlMap_ pUmdProject_ =
+    URLMapsDelete'
     { _umdQuotaUser = Nothing
     , _umdUrlMap = pUmdUrlMap_
     , _umdPrettyPrint = True
@@ -101,7 +109,7 @@ uRLMapsDelete pUmdUrlMap_ pUmdProject_ =
     , _umdKey = Nothing
     , _umdOauthToken = Nothing
     , _umdFields = Nothing
-    , _umdAlt = "json"
+    , _umdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,20 +159,22 @@ umdFields
   = lens _umdFields (\ s a -> s{_umdFields = a})
 
 -- | Data format for the response.
-umdAlt :: Lens' URLMapsDelete' Text
+umdAlt :: Lens' URLMapsDelete' Alt
 umdAlt = lens _umdAlt (\ s a -> s{_umdAlt = a})
 
 instance GoogleRequest URLMapsDelete' where
         type Rs URLMapsDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsDelete{..}
-          = go _umdQuotaUser _umdUrlMap _umdPrettyPrint
+        requestWithRoute r u URLMapsDelete'{..}
+          = go _umdQuotaUser _umdUrlMap (Just _umdPrettyPrint)
               _umdProject
               _umdUserIp
               _umdKey
               _umdOauthToken
               _umdFields
-              _umdAlt
+              (Just _umdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsDeleteResource)
+                      r
                       u

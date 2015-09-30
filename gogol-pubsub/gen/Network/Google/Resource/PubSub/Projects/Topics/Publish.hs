@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- either a non-empty data field, or at least one attribute.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsPublish@.
-module PubSub.Projects.Topics.Publish
+module Network.Google.Resource.PubSub.Projects.Topics.Publish
     (
     -- * REST Resource
-      ProjectsTopicsPublishAPI
+      ProjectsTopicsPublishResource
 
     -- * Creating a Request
-    , projectsTopicsPublish
-    , ProjectsTopicsPublish
+    , projectsTopicsPublish'
+    , ProjectsTopicsPublish'
 
     -- * Request Lenses
     , ptpXgafv
@@ -51,17 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsPublish@ which the
--- 'ProjectsTopicsPublish' request conforms to.
-type ProjectsTopicsPublishAPI =
+-- 'ProjectsTopicsPublish'' request conforms to.
+type ProjectsTopicsPublishResource =
      "v1beta2" :>
-       "{+topic}:publish" :> Post '[JSON] PublishResponse
+       "{+topic}:publish" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] PublishResponse
 
 -- | Adds one or more messages to the topic. Returns NOT_FOUND if the topic
 -- does not exist. The message payload must not be empty; it must contain
 -- either a non-empty data field, or at least one attribute.
 --
--- /See:/ 'projectsTopicsPublish' smart constructor.
-data ProjectsTopicsPublish = ProjectsTopicsPublish
+-- /See:/ 'projectsTopicsPublish'' smart constructor.
+data ProjectsTopicsPublish' = ProjectsTopicsPublish'
     { _ptpXgafv          :: !(Maybe Text)
     , _ptpQuotaUser      :: !(Maybe Text)
     , _ptpPrettyPrint    :: !Bool
@@ -109,11 +124,11 @@ data ProjectsTopicsPublish = ProjectsTopicsPublish
 -- * 'ptpCallback'
 --
 -- * 'ptpAlt'
-projectsTopicsPublish
+projectsTopicsPublish'
     :: Text -- ^ 'topic'
-    -> ProjectsTopicsPublish
-projectsTopicsPublish pPtpTopic_ =
-    ProjectsTopicsPublish
+    -> ProjectsTopicsPublish'
+projectsTopicsPublish' pPtpTopic_ =
+    ProjectsTopicsPublish'
     { _ptpXgafv = Nothing
     , _ptpQuotaUser = Nothing
     , _ptpPrettyPrint = True
@@ -208,10 +223,10 @@ ptpAlt = lens _ptpAlt (\ s a -> s{_ptpAlt = a})
 instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsPublish{..}
-          = go _ptpXgafv _ptpQuotaUser _ptpPrettyPrint
+        requestWithRoute r u ProjectsTopicsPublish'{..}
+          = go _ptpXgafv _ptpQuotaUser (Just _ptpPrettyPrint)
               _ptpUploadProtocol
-              _ptpPp
+              (Just _ptpPp)
               _ptpAccessToken
               _ptpUploadType
               _ptpTopic
@@ -220,9 +235,9 @@ instance GoogleRequest ProjectsTopicsPublish' where
               _ptpOauthToken
               _ptpFields
               _ptpCallback
-              _ptpAlt
+              (Just _ptpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsPublishAPI)
+                      (Proxy :: Proxy ProjectsTopicsPublishResource)
                       r
                       u

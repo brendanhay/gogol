@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigPatch@.
-module AdExchangeBuyer.PretargetingConfig.Patch
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
     (
     -- * REST Resource
-      PretargetingConfigPatchAPI
+      PretargetingConfigPatchResource
 
     -- * Creating a Request
-    , pretargetingConfigPatch
-    , PretargetingConfigPatch
+    , pretargetingConfigPatch'
+    , PretargetingConfigPatch'
 
     -- * Request Lenses
     , pcpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigPatch@ which the
--- 'PretargetingConfigPatch' request conforms to.
-type PretargetingConfigPatchAPI =
+-- 'PretargetingConfigPatch'' request conforms to.
+type PretargetingConfigPatchResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
          Capture "configId" Int64 :>
-           Patch '[JSON] PretargetingConfig
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Patch '[JSON] PretargetingConfig
 
 -- | Updates an existing pretargeting config. This method supports patch
 -- semantics.
 --
--- /See:/ 'pretargetingConfigPatch' smart constructor.
-data PretargetingConfigPatch = PretargetingConfigPatch
+-- /See:/ 'pretargetingConfigPatch'' smart constructor.
+data PretargetingConfigPatch' = PretargetingConfigPatch'
     { _pcpQuotaUser   :: !(Maybe Text)
     , _pcpPrettyPrint :: !Bool
     , _pcpUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data PretargetingConfigPatch = PretargetingConfigPatch
     , _pcpConfigId    :: !Int64
     , _pcpOauthToken  :: !(Maybe Text)
     , _pcpFields      :: !(Maybe Text)
-    , _pcpAlt         :: !Text
+    , _pcpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data PretargetingConfigPatch = PretargetingConfigPatch
 -- * 'pcpFields'
 --
 -- * 'pcpAlt'
-pretargetingConfigPatch
+pretargetingConfigPatch'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
-    -> PretargetingConfigPatch
-pretargetingConfigPatch pPcpAccountId_ pPcpConfigId_ =
-    PretargetingConfigPatch
+    -> PretargetingConfigPatch'
+pretargetingConfigPatch' pPcpAccountId_ pPcpConfigId_ =
+    PretargetingConfigPatch'
     { _pcpQuotaUser = Nothing
     , _pcpPrettyPrint = True
     , _pcpUserIp = Nothing
@@ -103,7 +111,7 @@ pretargetingConfigPatch pPcpAccountId_ pPcpConfigId_ =
     , _pcpConfigId = pPcpConfigId_
     , _pcpOauthToken = Nothing
     , _pcpFields = Nothing
-    , _pcpAlt = "json"
+    , _pcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ pcpFields
   = lens _pcpFields (\ s a -> s{_pcpFields = a})
 
 -- | Data format for the response.
-pcpAlt :: Lens' PretargetingConfigPatch' Text
+pcpAlt :: Lens' PretargetingConfigPatch' Alt
 pcpAlt = lens _pcpAlt (\ s a -> s{_pcpAlt = a})
 
 instance GoogleRequest PretargetingConfigPatch' where
         type Rs PretargetingConfigPatch' = PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigPatch{..}
-          = go _pcpQuotaUser _pcpPrettyPrint _pcpUserIp
+        requestWithRoute r u PretargetingConfigPatch'{..}
+          = go _pcpQuotaUser (Just _pcpPrettyPrint) _pcpUserIp
               _pcpAccountId
               _pcpKey
               _pcpConfigId
               _pcpOauthToken
               _pcpFields
-              _pcpAlt
+              (Just _pcpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigPatchAPI)
+                      (Proxy :: Proxy PretargetingConfigPatchResource)
                       r
                       u

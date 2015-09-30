@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of disk type resources grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDiskTypesAggregatedList@.
-module Compute.DiskTypes.AggregatedList
+module Network.Google.Resource.Compute.DiskTypes.AggregatedList
     (
     -- * REST Resource
-      DiskTypesAggregatedListAPI
+      DiskTypesAggregatedListResource
 
     -- * Creating a Request
-    , diskTypesAggregatedList
-    , DiskTypesAggregatedList
+    , diskTypesAggregatedList'
+    , DiskTypesAggregatedList'
 
     -- * Request Lenses
     , dtalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDiskTypesAggregatedList@ which the
--- 'DiskTypesAggregatedList' request conforms to.
-type DiskTypesAggregatedListAPI =
+-- 'DiskTypesAggregatedList'' request conforms to.
+type DiskTypesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "diskTypes" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] DiskTypeAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] DiskTypeAggregatedList
 
 -- | Retrieves the list of disk type resources grouped by scope.
 --
--- /See:/ 'diskTypesAggregatedList' smart constructor.
-data DiskTypesAggregatedList = DiskTypesAggregatedList
+-- /See:/ 'diskTypesAggregatedList'' smart constructor.
+data DiskTypesAggregatedList' = DiskTypesAggregatedList'
     { _dtalQuotaUser   :: !(Maybe Text)
     , _dtalPrettyPrint :: !Bool
     , _dtalProject     :: !Text
@@ -70,7 +78,7 @@ data DiskTypesAggregatedList = DiskTypesAggregatedList
     , _dtalOauthToken  :: !(Maybe Text)
     , _dtalMaxResults  :: !Word32
     , _dtalFields      :: !(Maybe Text)
-    , _dtalAlt         :: !Text
+    , _dtalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data DiskTypesAggregatedList = DiskTypesAggregatedList
 -- * 'dtalFields'
 --
 -- * 'dtalAlt'
-diskTypesAggregatedList
+diskTypesAggregatedList'
     :: Text -- ^ 'project'
-    -> DiskTypesAggregatedList
-diskTypesAggregatedList pDtalProject_ =
-    DiskTypesAggregatedList
+    -> DiskTypesAggregatedList'
+diskTypesAggregatedList' pDtalProject_ =
+    DiskTypesAggregatedList'
     { _dtalQuotaUser = Nothing
     , _dtalPrettyPrint = True
     , _dtalProject = pDtalProject_
@@ -113,7 +121,7 @@ diskTypesAggregatedList pDtalProject_ =
     , _dtalOauthToken = Nothing
     , _dtalMaxResults = 500
     , _dtalFields = Nothing
-    , _dtalAlt = "json"
+    , _dtalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,15 +196,16 @@ dtalFields
   = lens _dtalFields (\ s a -> s{_dtalFields = a})
 
 -- | Data format for the response.
-dtalAlt :: Lens' DiskTypesAggregatedList' Text
+dtalAlt :: Lens' DiskTypesAggregatedList' Alt
 dtalAlt = lens _dtalAlt (\ s a -> s{_dtalAlt = a})
 
 instance GoogleRequest DiskTypesAggregatedList' where
         type Rs DiskTypesAggregatedList' =
              DiskTypeAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesAggregatedList{..}
-          = go _dtalQuotaUser _dtalPrettyPrint _dtalProject
+        requestWithRoute r u DiskTypesAggregatedList'{..}
+          = go _dtalQuotaUser (Just _dtalPrettyPrint)
+              _dtalProject
               _dtalUserIp
               _dtalKey
               _dtalFilter
@@ -204,9 +213,9 @@ instance GoogleRequest DiskTypesAggregatedList' where
               _dtalOauthToken
               (Just _dtalMaxResults)
               _dtalFields
-              _dtalAlt
+              (Just _dtalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DiskTypesAggregatedListAPI)
+                      (Proxy :: Proxy DiskTypesAggregatedListResource)
                       r
                       u

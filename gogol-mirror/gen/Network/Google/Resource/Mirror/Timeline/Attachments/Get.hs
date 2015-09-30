@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsGet@.
-module Mirror.Timeline.Attachments.Get
+module Network.Google.Resource.Mirror.Timeline.Attachments.Get
     (
     -- * REST Resource
-      TimelineAttachmentsGetAPI
+      TimelineAttachmentsGetResource
 
     -- * Creating a Request
-    , timelineAttachmentsGet
-    , TimelineAttachmentsGet
+    , timelineAttachmentsGet'
+    , TimelineAttachmentsGet'
 
     -- * Request Lenses
     , tagQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineAttachmentsGet@ which the
--- 'TimelineAttachmentsGet' request conforms to.
-type TimelineAttachmentsGetAPI =
+-- 'TimelineAttachmentsGet'' request conforms to.
+type TimelineAttachmentsGetResource =
      "timeline" :>
        Capture "itemId" Text :>
          "attachments" :>
-           Capture "attachmentId" Text :> Get '[JSON] Attachment
+           Capture "attachmentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Attachment
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
--- /See:/ 'timelineAttachmentsGet' smart constructor.
-data TimelineAttachmentsGet = TimelineAttachmentsGet
+-- /See:/ 'timelineAttachmentsGet'' smart constructor.
+data TimelineAttachmentsGet' = TimelineAttachmentsGet'
     { _tagQuotaUser    :: !(Maybe Text)
     , _tagPrettyPrint  :: !Bool
     , _tagUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data TimelineAttachmentsGet = TimelineAttachmentsGet
     , _tagKey          :: !(Maybe Text)
     , _tagOauthToken   :: !(Maybe Text)
     , _tagFields       :: !(Maybe Text)
-    , _tagAlt          :: !Text
+    , _tagAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TimelineAttachmentsGet = TimelineAttachmentsGet
 -- * 'tagFields'
 --
 -- * 'tagAlt'
-timelineAttachmentsGet
+timelineAttachmentsGet'
     :: Text -- ^ 'itemId'
     -> Text -- ^ 'attachmentId'
-    -> TimelineAttachmentsGet
-timelineAttachmentsGet pTagItemId_ pTagAttachmentId_ =
-    TimelineAttachmentsGet
+    -> TimelineAttachmentsGet'
+timelineAttachmentsGet' pTagItemId_ pTagAttachmentId_ =
+    TimelineAttachmentsGet'
     { _tagQuotaUser = Nothing
     , _tagPrettyPrint = True
     , _tagUserIp = Nothing
@@ -101,7 +109,7 @@ timelineAttachmentsGet pTagItemId_ pTagAttachmentId_ =
     , _tagKey = Nothing
     , _tagOauthToken = Nothing
     , _tagFields = Nothing
-    , _tagAlt = "json"
+    , _tagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ tagFields
   = lens _tagFields (\ s a -> s{_tagFields = a})
 
 -- | Data format for the response.
-tagAlt :: Lens' TimelineAttachmentsGet' Text
+tagAlt :: Lens' TimelineAttachmentsGet' Alt
 tagAlt = lens _tagAlt (\ s a -> s{_tagAlt = a})
 
 instance GoogleRequest TimelineAttachmentsGet' where
         type Rs TimelineAttachmentsGet' = Attachment
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsGet{..}
-          = go _tagQuotaUser _tagPrettyPrint _tagUserIp
+        requestWithRoute r u TimelineAttachmentsGet'{..}
+          = go _tagQuotaUser (Just _tagPrettyPrint) _tagUserIp
               _tagItemId
               _tagAttachmentId
               _tagKey
               _tagOauthToken
               _tagFields
-              _tagAlt
+              (Just _tagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TimelineAttachmentsGetAPI)
+                      (Proxy :: Proxy TimelineAttachmentsGetResource)
                       r
                       u

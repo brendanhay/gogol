@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- associated annotation set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationSetsDelete@.
-module Genomics.AnnotationSets.Delete
+module Network.Google.Resource.Genomics.AnnotationSets.Delete
     (
     -- * REST Resource
-      AnnotationSetsDeleteAPI
+      AnnotationSetsDeleteResource
 
     -- * Creating a Request
-    , annotationSetsDelete
-    , AnnotationSetsDelete
+    , annotationSetsDelete'
+    , AnnotationSetsDelete'
 
     -- * Request Lenses
     , asdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsDelete@ which the
--- 'AnnotationSetsDelete' request conforms to.
-type AnnotationSetsDeleteAPI =
+-- 'AnnotationSetsDelete'' request conforms to.
+type AnnotationSetsDeleteResource =
      "annotationSets" :>
-       Capture "annotationSetId" Text :> Delete '[JSON] ()
+       Capture "annotationSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an annotation set. Caller must have WRITE permission for the
 -- associated annotation set.
 --
--- /See:/ 'annotationSetsDelete' smart constructor.
-data AnnotationSetsDelete = AnnotationSetsDelete
+-- /See:/ 'annotationSetsDelete'' smart constructor.
+data AnnotationSetsDelete' = AnnotationSetsDelete'
     { _asdQuotaUser       :: !(Maybe Text)
     , _asdPrettyPrint     :: !Bool
     , _asdAnnotationSetId :: !Text
@@ -61,7 +69,7 @@ data AnnotationSetsDelete = AnnotationSetsDelete
     , _asdKey             :: !(Maybe Text)
     , _asdOauthToken      :: !(Maybe Text)
     , _asdFields          :: !(Maybe Text)
-    , _asdAlt             :: !Text
+    , _asdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AnnotationSetsDelete = AnnotationSetsDelete
 -- * 'asdFields'
 --
 -- * 'asdAlt'
-annotationSetsDelete
+annotationSetsDelete'
     :: Text -- ^ 'annotationSetId'
-    -> AnnotationSetsDelete
-annotationSetsDelete pAsdAnnotationSetId_ =
-    AnnotationSetsDelete
+    -> AnnotationSetsDelete'
+annotationSetsDelete' pAsdAnnotationSetId_ =
+    AnnotationSetsDelete'
     { _asdQuotaUser = Nothing
     , _asdPrettyPrint = True
     , _asdAnnotationSetId = pAsdAnnotationSetId_
@@ -95,7 +103,7 @@ annotationSetsDelete pAsdAnnotationSetId_ =
     , _asdKey = Nothing
     , _asdOauthToken = Nothing
     , _asdFields = Nothing
-    , _asdAlt = "json"
+    , _asdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,22 +149,22 @@ asdFields
   = lens _asdFields (\ s a -> s{_asdFields = a})
 
 -- | Data format for the response.
-asdAlt :: Lens' AnnotationSetsDelete' Text
+asdAlt :: Lens' AnnotationSetsDelete' Alt
 asdAlt = lens _asdAlt (\ s a -> s{_asdAlt = a})
 
 instance GoogleRequest AnnotationSetsDelete' where
         type Rs AnnotationSetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationSetsDelete{..}
-          = go _asdQuotaUser _asdPrettyPrint
+        requestWithRoute r u AnnotationSetsDelete'{..}
+          = go _asdQuotaUser (Just _asdPrettyPrint)
               _asdAnnotationSetId
               _asdUserIp
               _asdKey
               _asdOauthToken
               _asdFields
-              _asdAlt
+              (Just _asdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationSetsDeleteAPI)
+                      (Proxy :: Proxy AnnotationSetsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- endpoint.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsAttachmentsList@.
-module ProximityBeacon.Beacons.Attachments.List
+module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     (
     -- * REST Resource
-      BeaconsAttachmentsListAPI
+      BeaconsAttachmentsListResource
 
     -- * Creating a Request
-    , beaconsAttachmentsList
-    , BeaconsAttachmentsList
+    , beaconsAttachmentsList'
+    , BeaconsAttachmentsList'
 
     -- * Request Lenses
     , balXgafv
@@ -55,13 +56,26 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsAttachmentsList@ which the
--- 'BeaconsAttachmentsList' request conforms to.
-type BeaconsAttachmentsListAPI =
+-- 'BeaconsAttachmentsList'' request conforms to.
+type BeaconsAttachmentsListResource =
      "v1beta1" :>
        "{+beaconName}" :>
          "attachments" :>
-           QueryParam "namespacedType" Text :>
-             Get '[JSON] ListBeaconAttachmentsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "namespacedType" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Returns the attachments for the specified beacon that match the
 -- specified namespaced-type pattern. To control which namespaced types are
@@ -70,8 +84,8 @@ type BeaconsAttachmentsListAPI =
 -- namespace must be one of the ones returned from the \`namespaces\`
 -- endpoint.
 --
--- /See:/ 'beaconsAttachmentsList' smart constructor.
-data BeaconsAttachmentsList = BeaconsAttachmentsList
+-- /See:/ 'beaconsAttachmentsList'' smart constructor.
+data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     { _balXgafv          :: !(Maybe Text)
     , _balQuotaUser      :: !(Maybe Text)
     , _balPrettyPrint    :: !Bool
@@ -122,11 +136,11 @@ data BeaconsAttachmentsList = BeaconsAttachmentsList
 -- * 'balCallback'
 --
 -- * 'balAlt'
-beaconsAttachmentsList
+beaconsAttachmentsList'
     :: Text -- ^ 'beaconName'
-    -> BeaconsAttachmentsList
-beaconsAttachmentsList pBalBeaconName_ =
-    BeaconsAttachmentsList
+    -> BeaconsAttachmentsList'
+beaconsAttachmentsList' pBalBeaconName_ =
+    BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balQuotaUser = Nothing
     , _balPrettyPrint = True
@@ -233,10 +247,10 @@ instance GoogleRequest BeaconsAttachmentsList' where
         type Rs BeaconsAttachmentsList' =
              ListBeaconAttachmentsResponse
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsAttachmentsList{..}
-          = go _balXgafv _balQuotaUser _balPrettyPrint
+        requestWithRoute r u BeaconsAttachmentsList'{..}
+          = go _balXgafv _balQuotaUser (Just _balPrettyPrint)
               _balUploadProtocol
-              _balPp
+              (Just _balPp)
               _balAccessToken
               _balBeaconName
               _balUploadType
@@ -246,9 +260,9 @@ instance GoogleRequest BeaconsAttachmentsList' where
               _balOauthToken
               _balFields
               _balCallback
-              _balAlt
+              (Just _balAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconsAttachmentsListAPI)
+                      (Proxy :: Proxy BeaconsAttachmentsListResource)
                       r
                       u

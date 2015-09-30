@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves ACL entries on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsList@.
-module Storage.BucketAccessControls.List
+module Network.Google.Resource.Storage.BucketAccessControls.List
     (
     -- * REST Resource
-      BucketAccessControlsListAPI
+      BucketAccessControlsListResource
 
     -- * Creating a Request
-    , bucketAccessControlsList
-    , BucketAccessControlsList
+    , bucketAccessControlsList'
+    , BucketAccessControlsList'
 
     -- * Request Lenses
     , baclQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsList@ which the
--- 'BucketAccessControlsList' request conforms to.
-type BucketAccessControlsListAPI =
+-- 'BucketAccessControlsList'' request conforms to.
+type BucketAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
-         "acl" :> Get '[JSON] BucketAccessControls
+         "acl" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] BucketAccessControls
 
 -- | Retrieves ACL entries on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsList' smart constructor.
-data BucketAccessControlsList = BucketAccessControlsList
+-- /See:/ 'bucketAccessControlsList'' smart constructor.
+data BucketAccessControlsList' = BucketAccessControlsList'
     { _baclQuotaUser   :: !(Maybe Text)
     , _baclPrettyPrint :: !Bool
     , _baclUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data BucketAccessControlsList = BucketAccessControlsList
     , _baclKey         :: !(Maybe Text)
     , _baclOauthToken  :: !(Maybe Text)
     , _baclFields      :: !(Maybe Text)
-    , _baclAlt         :: !Text
+    , _baclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data BucketAccessControlsList = BucketAccessControlsList
 -- * 'baclFields'
 --
 -- * 'baclAlt'
-bucketAccessControlsList
+bucketAccessControlsList'
     :: Text -- ^ 'bucket'
-    -> BucketAccessControlsList
-bucketAccessControlsList pBaclBucket_ =
-    BucketAccessControlsList
+    -> BucketAccessControlsList'
+bucketAccessControlsList' pBaclBucket_ =
+    BucketAccessControlsList'
     { _baclQuotaUser = Nothing
     , _baclPrettyPrint = True
     , _baclUserIp = Nothing
@@ -94,7 +103,7 @@ bucketAccessControlsList pBaclBucket_ =
     , _baclKey = Nothing
     , _baclOauthToken = Nothing
     , _baclFields = Nothing
-    , _baclAlt = "json"
+    , _baclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +149,7 @@ baclFields
   = lens _baclFields (\ s a -> s{_baclFields = a})
 
 -- | Data format for the response.
-baclAlt :: Lens' BucketAccessControlsList' Text
+baclAlt :: Lens' BucketAccessControlsList' Alt
 baclAlt = lens _baclAlt (\ s a -> s{_baclAlt = a})
 
 instance GoogleRequest BucketAccessControlsList'
@@ -148,15 +157,16 @@ instance GoogleRequest BucketAccessControlsList'
         type Rs BucketAccessControlsList' =
              BucketAccessControls
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsList{..}
-          = go _baclQuotaUser _baclPrettyPrint _baclUserIp
+        requestWithRoute r u BucketAccessControlsList'{..}
+          = go _baclQuotaUser (Just _baclPrettyPrint)
+              _baclUserIp
               _baclBucket
               _baclKey
               _baclOauthToken
               _baclFields
-              _baclAlt
+              (Just _baclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsListAPI)
+                      (Proxy :: Proxy BucketAccessControlsListResource)
                       r
                       u

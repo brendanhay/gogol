@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- and _Get methods rules_ for more information about this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsOrdersGet@.
-module PlayMoviesPartner.Accounts.Orders.Get
+module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
     (
     -- * REST Resource
-      AccountsOrdersGetAPI
+      AccountsOrdersGetResource
 
     -- * Creating a Request
-    , accountsOrdersGet
-    , AccountsOrdersGet
+    , accountsOrdersGet'
+    , AccountsOrdersGet'
 
     -- * Request Lenses
     , aogXgafv
@@ -51,19 +52,33 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsOrdersGet@ which the
--- 'AccountsOrdersGet' request conforms to.
-type AccountsOrdersGetAPI =
+-- 'AccountsOrdersGet'' request conforms to.
+type AccountsOrdersGetResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "orders" :>
-             Capture "orderId" Text :> Get '[JSON] Order
+             Capture "orderId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Order
 
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
 --
--- /See:/ 'accountsOrdersGet' smart constructor.
-data AccountsOrdersGet = AccountsOrdersGet
+-- /See:/ 'accountsOrdersGet'' smart constructor.
+data AccountsOrdersGet' = AccountsOrdersGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogQuotaUser      :: !(Maybe Text)
     , _aogPrettyPrint    :: !Bool
@@ -114,12 +129,12 @@ data AccountsOrdersGet = AccountsOrdersGet
 -- * 'aogCallback'
 --
 -- * 'aogAlt'
-accountsOrdersGet
+accountsOrdersGet'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'orderId'
-    -> AccountsOrdersGet
-accountsOrdersGet pAogAccountId_ pAogOrderId_ =
-    AccountsOrdersGet
+    -> AccountsOrdersGet'
+accountsOrdersGet' pAogAccountId_ pAogOrderId_ =
+    AccountsOrdersGet'
     { _aogXgafv = Nothing
     , _aogQuotaUser = Nothing
     , _aogPrettyPrint = True
@@ -222,10 +237,10 @@ instance GoogleRequest AccountsOrdersGet' where
         type Rs AccountsOrdersGet' = Order
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsOrdersGet{..}
-          = go _aogXgafv _aogQuotaUser _aogPrettyPrint
+        requestWithRoute r u AccountsOrdersGet'{..}
+          = go _aogXgafv _aogQuotaUser (Just _aogPrettyPrint)
               _aogUploadProtocol
-              _aogPp
+              (Just _aogPp)
               _aogAccessToken
               _aogUploadType
               _aogAccountId
@@ -235,9 +250,9 @@ instance GoogleRequest AccountsOrdersGet' where
               _aogOrderId
               _aogFields
               _aogCallback
-              _aogAlt
+              (Just _aogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsOrdersGetAPI)
+                      (Proxy :: Proxy AccountsOrdersGetResource)
                       r
                       u

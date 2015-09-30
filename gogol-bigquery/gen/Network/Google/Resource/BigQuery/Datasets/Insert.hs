@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new empty dataset.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsInsert@.
-module BigQuery.Datasets.Insert
+module Network.Google.Resource.BigQuery.Datasets.Insert
     (
     -- * REST Resource
-      DatasetsInsertAPI
+      DatasetsInsertResource
 
     -- * Creating a Request
-    , datasetsInsert
-    , DatasetsInsert
+    , datasetsInsert'
+    , DatasetsInsert'
 
     -- * Request Lenses
     , diQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryDatasetsInsert@ which the
--- 'DatasetsInsert' request conforms to.
-type DatasetsInsertAPI =
+-- 'DatasetsInsert'' request conforms to.
+type DatasetsInsertResource =
      "projects" :>
        Capture "projectId" Text :>
-         "datasets" :> Post '[JSON] Dataset
+         "datasets" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Dataset
 
 -- | Creates a new empty dataset.
 --
--- /See:/ 'datasetsInsert' smart constructor.
-data DatasetsInsert = DatasetsInsert
+-- /See:/ 'datasetsInsert'' smart constructor.
+data DatasetsInsert' = DatasetsInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data DatasetsInsert = DatasetsInsert
     , _diProjectId   :: !Text
     , _diOauthToken  :: !(Maybe Text)
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Text
+    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data DatasetsInsert = DatasetsInsert
 -- * 'diFields'
 --
 -- * 'diAlt'
-datasetsInsert
+datasetsInsert'
     :: Text -- ^ 'projectId'
-    -> DatasetsInsert
-datasetsInsert pDiProjectId_ =
-    DatasetsInsert
+    -> DatasetsInsert'
+datasetsInsert' pDiProjectId_ =
+    DatasetsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diUserIp = Nothing
@@ -94,7 +102,7 @@ datasetsInsert pDiProjectId_ =
     , _diProjectId = pDiProjectId_
     , _diOauthToken = Nothing
     , _diFields = Nothing
-    , _diAlt = "json"
+    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ diFields :: Lens' DatasetsInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 -- | Data format for the response.
-diAlt :: Lens' DatasetsInsert' Text
+diAlt :: Lens' DatasetsInsert' Alt
 diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
 
 instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsInsert{..}
-          = go _diQuotaUser _diPrettyPrint _diUserIp _diKey
+        requestWithRoute r u DatasetsInsert'{..}
+          = go _diQuotaUser (Just _diPrettyPrint) _diUserIp
+              _diKey
               _diProjectId
               _diOauthToken
               _diFields
-              _diAlt
+              (Just _diAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsInsertResource)
                       r
                       u

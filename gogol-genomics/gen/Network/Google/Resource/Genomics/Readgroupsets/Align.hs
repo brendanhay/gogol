@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- more details.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsAlign@.
-module Genomics.Readgroupsets.Align
+module Network.Google.Resource.Genomics.Readgroupsets.Align
     (
     -- * REST Resource
-      ReadgroupsetsAlignAPI
+      ReadgroupsetsAlignResource
 
     -- * Creating a Request
-    , readgroupsetsAlign
-    , ReadgroupsetsAlign
+    , readgroupsetsAlign'
+    , ReadgroupsetsAlign'
 
     -- * Request Lenses
     , raQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsAlign@ which the
--- 'ReadgroupsetsAlign' request conforms to.
-type ReadgroupsetsAlignAPI =
+-- 'ReadgroupsetsAlign'' request conforms to.
+type ReadgroupsetsAlignResource =
      "readgroupsets" :>
-       "align" :> Post '[JSON] AlignReadGroupSetsResponse
+       "align" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] AlignReadGroupSetsResponse
 
 -- | Aligns read data from existing read group sets or files from Google
 -- Cloud Storage. See the alignment and variant calling documentation for
 -- more details.
 --
--- /See:/ 'readgroupsetsAlign' smart constructor.
-data ReadgroupsetsAlign = ReadgroupsetsAlign
+-- /See:/ 'readgroupsetsAlign'' smart constructor.
+data ReadgroupsetsAlign' = ReadgroupsetsAlign'
     { _raQuotaUser   :: !(Maybe Text)
     , _raPrettyPrint :: !Bool
     , _raUserIp      :: !(Maybe Text)
     , _raKey         :: !(Maybe Text)
     , _raOauthToken  :: !(Maybe Text)
     , _raFields      :: !(Maybe Text)
-    , _raAlt         :: !Text
+    , _raAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsAlign'' with the minimum fields required to make a request.
@@ -81,17 +90,17 @@ data ReadgroupsetsAlign = ReadgroupsetsAlign
 -- * 'raFields'
 --
 -- * 'raAlt'
-readgroupsetsAlign
-    :: ReadgroupsetsAlign
-readgroupsetsAlign =
-    ReadgroupsetsAlign
+readgroupsetsAlign'
+    :: ReadgroupsetsAlign'
+readgroupsetsAlign' =
+    ReadgroupsetsAlign'
     { _raQuotaUser = Nothing
     , _raPrettyPrint = True
     , _raUserIp = Nothing
     , _raKey = Nothing
     , _raOauthToken = Nothing
     , _raFields = Nothing
-    , _raAlt = "json"
+    , _raAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,20 +137,21 @@ raFields :: Lens' ReadgroupsetsAlign' (Maybe Text)
 raFields = lens _raFields (\ s a -> s{_raFields = a})
 
 -- | Data format for the response.
-raAlt :: Lens' ReadgroupsetsAlign' Text
+raAlt :: Lens' ReadgroupsetsAlign' Alt
 raAlt = lens _raAlt (\ s a -> s{_raAlt = a})
 
 instance GoogleRequest ReadgroupsetsAlign' where
         type Rs ReadgroupsetsAlign' =
              AlignReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsAlign{..}
-          = go _raQuotaUser _raPrettyPrint _raUserIp _raKey
+        requestWithRoute r u ReadgroupsetsAlign'{..}
+          = go _raQuotaUser (Just _raPrettyPrint) _raUserIp
+              _raKey
               _raOauthToken
               _raFields
-              _raAlt
+              (Just _raAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsAlignAPI)
+                      (Proxy :: Proxy ReadgroupsetsAlignResource)
                       r
                       u

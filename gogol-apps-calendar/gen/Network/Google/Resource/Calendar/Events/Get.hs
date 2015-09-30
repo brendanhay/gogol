@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns an event.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsGet@.
-module Calendar.Events.Get
+module Network.Google.Resource.Calendar.Events.Get
     (
     -- * REST Resource
-      EventsGetAPI
+      EventsGetResource
 
     -- * Creating a Request
-    , eventsGet
-    , EventsGet
+    , eventsGet'
+    , EventsGet'
 
     -- * Request Lenses
     , egQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsGet@ which the
--- 'EventsGet' request conforms to.
-type EventsGetAPI =
+-- 'EventsGet'' request conforms to.
+type EventsGetResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "maxAttendees" Int32 :>
-               QueryParam "timeZone" Text :>
-                 QueryParam "alwaysIncludeEmail" Bool :>
-                   Get '[JSON] Event
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "maxAttendees" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "timeZone" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "alwaysIncludeEmail" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Event
 
 -- | Returns an event.
 --
--- /See:/ 'eventsGet' smart constructor.
-data EventsGet = EventsGet
+-- /See:/ 'eventsGet'' smart constructor.
+data EventsGet' = EventsGet'
     { _egQuotaUser          :: !(Maybe Text)
     , _egCalendarId         :: !Text
     , _egPrettyPrint        :: !Bool
@@ -73,7 +80,7 @@ data EventsGet = EventsGet
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
     , _egEventId            :: !Text
     , _egFields             :: !(Maybe Text)
-    , _egAlt                :: !Text
+    , _egAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsGet'' with the minimum fields required to make a request.
@@ -103,12 +110,12 @@ data EventsGet = EventsGet
 -- * 'egFields'
 --
 -- * 'egAlt'
-eventsGet
+eventsGet'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
-    -> EventsGet
-eventsGet pEgCalendarId_ pEgEventId_ =
-    EventsGet
+    -> EventsGet'
+eventsGet' pEgCalendarId_ pEgEventId_ =
+    EventsGet'
     { _egQuotaUser = Nothing
     , _egCalendarId = pEgCalendarId_
     , _egPrettyPrint = True
@@ -120,7 +127,7 @@ eventsGet pEgCalendarId_ pEgEventId_ =
     , _egAlwaysIncludeEmail = Nothing
     , _egEventId = pEgEventId_
     , _egFields = Nothing
-    , _egAlt = "json"
+    , _egAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -194,14 +201,14 @@ egFields :: Lens' EventsGet' (Maybe Text)
 egFields = lens _egFields (\ s a -> s{_egFields = a})
 
 -- | Data format for the response.
-egAlt :: Lens' EventsGet' Text
+egAlt :: Lens' EventsGet' Alt
 egAlt = lens _egAlt (\ s a -> s{_egAlt = a})
 
 instance GoogleRequest EventsGet' where
         type Rs EventsGet' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsGet{..}
-          = go _egQuotaUser _egCalendarId _egPrettyPrint
+        requestWithRoute r u EventsGet'{..}
+          = go _egQuotaUser _egCalendarId (Just _egPrettyPrint)
               _egUserIp
               _egMaxAttendees
               _egKey
@@ -210,6 +217,8 @@ instance GoogleRequest EventsGet' where
               _egAlwaysIncludeEmail
               _egEventId
               _egFields
-              _egAlt
+              (Just _egAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy EventsGetResource)
+                      r
+                      u

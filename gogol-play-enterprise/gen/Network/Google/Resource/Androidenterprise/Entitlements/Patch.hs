@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEntitlementsPatch@.
-module Androidenterprise.Entitlements.Patch
+module Network.Google.Resource.Androidenterprise.Entitlements.Patch
     (
     -- * REST Resource
-      EntitlementsPatchAPI
+      EntitlementsPatchResource
 
     -- * Creating a Request
-    , entitlementsPatch
-    , EntitlementsPatch
+    , entitlementsPatch'
+    , EntitlementsPatch'
 
     -- * Request Lenses
     , epEntitlementId
@@ -47,22 +48,28 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEntitlementsPatch@ which the
--- 'EntitlementsPatch' request conforms to.
-type EntitlementsPatchAPI =
+-- 'EntitlementsPatch'' request conforms to.
+type EntitlementsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "entitlements" :>
                Capture "entitlementId" Text :>
-                 QueryParam "install" Bool :>
-                   Patch '[JSON] Entitlement
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "install" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Patch '[JSON] Entitlement
 
 -- | Adds or updates an entitlement to an app for a user. This method
 -- supports patch semantics.
 --
--- /See:/ 'entitlementsPatch' smart constructor.
-data EntitlementsPatch = EntitlementsPatch
+-- /See:/ 'entitlementsPatch'' smart constructor.
+data EntitlementsPatch' = EntitlementsPatch'
     { _epEntitlementId :: !Text
     , _epQuotaUser     :: !(Maybe Text)
     , _epPrettyPrint   :: !Bool
@@ -73,7 +80,7 @@ data EntitlementsPatch = EntitlementsPatch
     , _epKey           :: !(Maybe Text)
     , _epOauthToken    :: !(Maybe Text)
     , _epFields        :: !(Maybe Text)
-    , _epAlt           :: !Text
+    , _epAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsPatch'' with the minimum fields required to make a request.
@@ -101,13 +108,13 @@ data EntitlementsPatch = EntitlementsPatch
 -- * 'epFields'
 --
 -- * 'epAlt'
-entitlementsPatch
+entitlementsPatch'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> EntitlementsPatch
-entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpUserId_ =
-    EntitlementsPatch
+    -> EntitlementsPatch'
+entitlementsPatch' pEpEntitlementId_ pEpEnterpriseId_ pEpUserId_ =
+    EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
     , _epQuotaUser = Nothing
     , _epPrettyPrint = True
@@ -118,7 +125,7 @@ entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpUserId_ =
     , _epKey = Nothing
     , _epOauthToken = Nothing
     , _epFields = Nothing
-    , _epAlt = "json"
+    , _epAlt = JSON
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
@@ -179,14 +186,15 @@ epFields :: Lens' EntitlementsPatch' (Maybe Text)
 epFields = lens _epFields (\ s a -> s{_epFields = a})
 
 -- | Data format for the response.
-epAlt :: Lens' EntitlementsPatch' Text
+epAlt :: Lens' EntitlementsPatch' Alt
 epAlt = lens _epAlt (\ s a -> s{_epAlt = a})
 
 instance GoogleRequest EntitlementsPatch' where
         type Rs EntitlementsPatch' = Entitlement
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EntitlementsPatch{..}
-          = go _epEntitlementId _epQuotaUser _epPrettyPrint
+        requestWithRoute r u EntitlementsPatch'{..}
+          = go _epEntitlementId _epQuotaUser
+              (Just _epPrettyPrint)
               _epEnterpriseId
               _epUserIp
               _epInstall
@@ -194,9 +202,9 @@ instance GoogleRequest EntitlementsPatch' where
               _epKey
               _epOauthToken
               _epFields
-              _epAlt
+              (Just _epAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EntitlementsPatchAPI)
+                      (Proxy :: Proxy EntitlementsPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return an icon or its associated metadata
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineProjectsIconsGet@.
-module Mapsengine.Projects.Icons.Get
+module Network.Google.Resource.Mapsengine.Projects.Icons.Get
     (
     -- * REST Resource
-      ProjectsIconsGetAPI
+      ProjectsIconsGetResource
 
     -- * Creating a Request
-    , projectsIconsGet
-    , ProjectsIconsGet
+    , projectsIconsGet'
+    , ProjectsIconsGet'
 
     -- * Request Lenses
     , pigQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineProjectsIconsGet@ which the
--- 'ProjectsIconsGet' request conforms to.
-type ProjectsIconsGetAPI =
+-- 'ProjectsIconsGet'' request conforms to.
+type ProjectsIconsGetResource =
      "projects" :>
        Capture "projectId" Text :>
-         "icons" :> Capture "id" Text :> Get '[JSON] Icon
+         "icons" :>
+           Capture "id" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Icon
 
 -- | Return an icon or its associated metadata
 --
--- /See:/ 'projectsIconsGet' smart constructor.
-data ProjectsIconsGet = ProjectsIconsGet
+-- /See:/ 'projectsIconsGet'' smart constructor.
+data ProjectsIconsGet' = ProjectsIconsGet'
     { _pigQuotaUser   :: !(Maybe Text)
     , _pigPrettyPrint :: !Bool
     , _pigUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data ProjectsIconsGet = ProjectsIconsGet
     , _pigProjectId   :: !Text
     , _pigOauthToken  :: !(Maybe Text)
     , _pigFields      :: !(Maybe Text)
-    , _pigAlt         :: !Text
+    , _pigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data ProjectsIconsGet = ProjectsIconsGet
 -- * 'pigFields'
 --
 -- * 'pigAlt'
-projectsIconsGet
+projectsIconsGet'
     :: Text -- ^ 'id'
     -> Text -- ^ 'projectId'
-    -> ProjectsIconsGet
-projectsIconsGet pPigId_ pPigProjectId_ =
-    ProjectsIconsGet
+    -> ProjectsIconsGet'
+projectsIconsGet' pPigId_ pPigProjectId_ =
+    ProjectsIconsGet'
     { _pigQuotaUser = Nothing
     , _pigPrettyPrint = True
     , _pigUserIp = Nothing
@@ -100,7 +109,7 @@ projectsIconsGet pPigId_ pPigProjectId_ =
     , _pigProjectId = pPigProjectId_
     , _pigOauthToken = Nothing
     , _pigFields = Nothing
-    , _pigAlt = "json"
+    , _pigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,21 +158,22 @@ pigFields
   = lens _pigFields (\ s a -> s{_pigFields = a})
 
 -- | Data format for the response.
-pigAlt :: Lens' ProjectsIconsGet' Text
+pigAlt :: Lens' ProjectsIconsGet' Alt
 pigAlt = lens _pigAlt (\ s a -> s{_pigAlt = a})
 
 instance GoogleRequest ProjectsIconsGet' where
         type Rs ProjectsIconsGet' = Icon
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u ProjectsIconsGet{..}
-          = go _pigQuotaUser _pigPrettyPrint _pigUserIp _pigKey
+        requestWithRoute r u ProjectsIconsGet'{..}
+          = go _pigQuotaUser (Just _pigPrettyPrint) _pigUserIp
+              _pigKey
               _pigId
               _pigProjectId
               _pigOauthToken
               _pigFields
-              _pigAlt
+              (Just _pigAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsIconsGetAPI)
+                      (Proxy :: Proxy ProjectsIconsGetResource)
                       r
                       u

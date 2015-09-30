@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified Snapshot resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsGet@.
-module Compute.Snapshots.Get
+module Network.Google.Resource.Compute.Snapshots.Get
     (
     -- * REST Resource
-      SnapshotsGetAPI
+      SnapshotsGetResource
 
     -- * Creating a Request
-    , snapshotsGet
-    , SnapshotsGet
+    , snapshotsGet'
+    , SnapshotsGet'
 
     -- * Request Lenses
     , sgSnapshot
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeSnapshotsGet@ which the
--- 'SnapshotsGet' request conforms to.
-type SnapshotsGetAPI =
+-- 'SnapshotsGet'' request conforms to.
+type SnapshotsGetResource =
      Capture "project" Text :>
        "global" :>
          "snapshots" :>
-           Capture "snapshot" Text :> Get '[JSON] Snapshot
+           Capture "snapshot" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Snapshot
 
 -- | Returns the specified Snapshot resource.
 --
--- /See:/ 'snapshotsGet' smart constructor.
-data SnapshotsGet = SnapshotsGet
+-- /See:/ 'snapshotsGet'' smart constructor.
+data SnapshotsGet' = SnapshotsGet'
     { _sgSnapshot    :: !Text
     , _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data SnapshotsGet = SnapshotsGet
     , _sgKey         :: !(Maybe Text)
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SnapshotsGet = SnapshotsGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-snapshotsGet
+snapshotsGet'
     :: Text -- ^ 'snapshot'
     -> Text -- ^ 'project'
-    -> SnapshotsGet
-snapshotsGet pSgSnapshot_ pSgProject_ =
-    SnapshotsGet
+    -> SnapshotsGet'
+snapshotsGet' pSgSnapshot_ pSgProject_ =
+    SnapshotsGet'
     { _sgSnapshot = pSgSnapshot_
     , _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
@@ -101,7 +109,7 @@ snapshotsGet pSgSnapshot_ pSgProject_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Name of the Snapshot resource to return.
@@ -148,20 +156,22 @@ sgFields :: Lens' SnapshotsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SnapshotsGet' Text
+sgAlt :: Lens' SnapshotsGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u SnapshotsGet{..}
-          = go _sgSnapshot _sgQuotaUser _sgPrettyPrint
+        requestWithRoute r u SnapshotsGet'{..}
+          = go _sgSnapshot _sgQuotaUser (Just _sgPrettyPrint)
               _sgProject
               _sgUserIp
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SnapshotsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SnapshotsGetResource)
+                      r
                       u

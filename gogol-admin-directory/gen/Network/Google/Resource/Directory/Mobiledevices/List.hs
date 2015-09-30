@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobiledevicesList@.
-module Directory.Mobiledevices.List
+module Network.Google.Resource.Directory.Mobiledevices.List
     (
     -- * REST Resource
-      MobiledevicesListAPI
+      MobiledevicesListResource
 
     -- * Creating a Request
-    , mobiledevicesList
-    , MobiledevicesList
+    , mobiledevicesList'
+    , MobiledevicesList'
 
     -- * Request Lenses
     , mQuotaUser
@@ -49,38 +50,51 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMobiledevicesList@ which the
--- 'MobiledevicesList' request conforms to.
-type MobiledevicesListAPI =
+-- 'MobiledevicesList'' request conforms to.
+type MobiledevicesListResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
-             QueryParam "orderBy" Text :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "query" Text :>
-                   QueryParam "projection" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] MobileDevices
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy"
+                   DirectoryMobiledevicesListOrderBy
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder"
+                       DirectoryMobiledevicesListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "query" Text :>
+                           QueryParam "projection"
+                             DirectoryMobiledevicesListProjection
+                             :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] MobileDevices
 
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
--- /See:/ 'mobiledevicesList' smart constructor.
-data MobiledevicesList = MobiledevicesList
+-- /See:/ 'mobiledevicesList'' smart constructor.
+data MobiledevicesList' = MobiledevicesList'
     { _mQuotaUser   :: !(Maybe Text)
     , _mPrettyPrint :: !Bool
-    , _mOrderBy     :: !(Maybe Text)
+    , _mOrderBy     :: !(Maybe DirectoryMobiledevicesListOrderBy)
     , _mUserIp      :: !(Maybe Text)
     , _mCustomerId  :: !Text
-    , _mSortOrder   :: !(Maybe Text)
+    , _mSortOrder   :: !(Maybe DirectoryMobiledevicesListSortOrder)
     , _mKey         :: !(Maybe Text)
     , _mQuery       :: !(Maybe Text)
-    , _mProjection  :: !(Maybe Text)
+    , _mProjection  :: !(Maybe DirectoryMobiledevicesListProjection)
     , _mPageToken   :: !(Maybe Text)
     , _mOauthToken  :: !(Maybe Text)
     , _mMaxResults  :: !(Maybe Int32)
     , _mFields      :: !(Maybe Text)
-    , _mAlt         :: !Text
+    , _mAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobiledevicesList'' with the minimum fields required to make a request.
@@ -114,11 +128,11 @@ data MobiledevicesList = MobiledevicesList
 -- * 'mFields'
 --
 -- * 'mAlt'
-mobiledevicesList
+mobiledevicesList'
     :: Text -- ^ 'customerId'
-    -> MobiledevicesList
-mobiledevicesList pMCustomerId_ =
-    MobiledevicesList
+    -> MobiledevicesList'
+mobiledevicesList' pMCustomerId_ =
+    MobiledevicesList'
     { _mQuotaUser = Nothing
     , _mPrettyPrint = True
     , _mOrderBy = Nothing
@@ -132,7 +146,7 @@ mobiledevicesList pMCustomerId_ =
     , _mOauthToken = Nothing
     , _mMaxResults = Nothing
     , _mFields = Nothing
-    , _mAlt = "json"
+    , _mAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,7 +162,7 @@ mPrettyPrint
   = lens _mPrettyPrint (\ s a -> s{_mPrettyPrint = a})
 
 -- | Column to use for sorting results
-mOrderBy :: Lens' MobiledevicesList' (Maybe Text)
+mOrderBy :: Lens' MobiledevicesList' (Maybe DirectoryMobiledevicesListOrderBy)
 mOrderBy = lens _mOrderBy (\ s a -> s{_mOrderBy = a})
 
 -- | IP address of the site where the request originates. Use this if you
@@ -163,7 +177,7 @@ mCustomerId
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-mSortOrder :: Lens' MobiledevicesList' (Maybe Text)
+mSortOrder :: Lens' MobiledevicesList' (Maybe DirectoryMobiledevicesListSortOrder)
 mSortOrder
   = lens _mSortOrder (\ s a -> s{_mSortOrder = a})
 
@@ -179,7 +193,7 @@ mQuery :: Lens' MobiledevicesList' (Maybe Text)
 mQuery = lens _mQuery (\ s a -> s{_mQuery = a})
 
 -- | Restrict information returned to a set of selected fields.
-mProjection :: Lens' MobiledevicesList' (Maybe Text)
+mProjection :: Lens' MobiledevicesList' (Maybe DirectoryMobiledevicesListProjection)
 mProjection
   = lens _mProjection (\ s a -> s{_mProjection = a})
 
@@ -203,14 +217,15 @@ mFields :: Lens' MobiledevicesList' (Maybe Text)
 mFields = lens _mFields (\ s a -> s{_mFields = a})
 
 -- | Data format for the response.
-mAlt :: Lens' MobiledevicesList' Text
+mAlt :: Lens' MobiledevicesList' Alt
 mAlt = lens _mAlt (\ s a -> s{_mAlt = a})
 
 instance GoogleRequest MobiledevicesList' where
         type Rs MobiledevicesList' = MobileDevices
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MobiledevicesList{..}
-          = go _mQuotaUser _mPrettyPrint _mOrderBy _mUserIp
+        requestWithRoute r u MobiledevicesList'{..}
+          = go _mQuotaUser (Just _mPrettyPrint) _mOrderBy
+              _mUserIp
               _mCustomerId
               _mSortOrder
               _mKey
@@ -220,9 +235,9 @@ instance GoogleRequest MobiledevicesList' where
               _mOauthToken
               _mMaxResults
               _mFields
-              _mAlt
+              (Just _mAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MobiledevicesListAPI)
+                      (Proxy :: Proxy MobiledevicesListResource)
                       r
                       u

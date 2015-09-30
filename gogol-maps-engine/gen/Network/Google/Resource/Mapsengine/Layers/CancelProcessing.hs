@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Cancel processing on a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersCancelProcessing@.
-module Mapsengine.Layers.CancelProcessing
+module Network.Google.Resource.Mapsengine.Layers.CancelProcessing
     (
     -- * REST Resource
-      LayersCancelProcessingAPI
+      LayersCancelProcessingResource
 
     -- * Creating a Request
-    , layersCancelProcessing
-    , LayersCancelProcessing
+    , layersCancelProcessing'
+    , LayersCancelProcessing'
 
     -- * Request Lenses
     , lcpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersCancelProcessing@ which the
--- 'LayersCancelProcessing' request conforms to.
-type LayersCancelProcessingAPI =
+-- 'LayersCancelProcessing'' request conforms to.
+type LayersCancelProcessingResource =
      "layers" :>
        Capture "id" Text :>
-         "cancelProcessing" :> Post '[JSON] ProcessResponse
+         "cancelProcessing" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Cancel processing on a layer asset.
 --
--- /See:/ 'layersCancelProcessing' smart constructor.
-data LayersCancelProcessing = LayersCancelProcessing
+-- /See:/ 'layersCancelProcessing'' smart constructor.
+data LayersCancelProcessing' = LayersCancelProcessing'
     { _lcpQuotaUser   :: !(Maybe Text)
     , _lcpPrettyPrint :: !Bool
     , _lcpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data LayersCancelProcessing = LayersCancelProcessing
     , _lcpId          :: !Text
     , _lcpOauthToken  :: !(Maybe Text)
     , _lcpFields      :: !(Maybe Text)
-    , _lcpAlt         :: !Text
+    , _lcpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersCancelProcessing'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data LayersCancelProcessing = LayersCancelProcessing
 -- * 'lcpFields'
 --
 -- * 'lcpAlt'
-layersCancelProcessing
+layersCancelProcessing'
     :: Text -- ^ 'id'
-    -> LayersCancelProcessing
-layersCancelProcessing pLcpId_ =
-    LayersCancelProcessing
+    -> LayersCancelProcessing'
+layersCancelProcessing' pLcpId_ =
+    LayersCancelProcessing'
     { _lcpQuotaUser = Nothing
     , _lcpPrettyPrint = True
     , _lcpUserIp = Nothing
@@ -94,7 +102,7 @@ layersCancelProcessing pLcpId_ =
     , _lcpId = pLcpId_
     , _lcpOauthToken = Nothing
     , _lcpFields = Nothing
-    , _lcpAlt = "json"
+    , _lcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ lcpFields
   = lens _lcpFields (\ s a -> s{_lcpFields = a})
 
 -- | Data format for the response.
-lcpAlt :: Lens' LayersCancelProcessing' Text
+lcpAlt :: Lens' LayersCancelProcessing' Alt
 lcpAlt = lens _lcpAlt (\ s a -> s{_lcpAlt = a})
 
 instance GoogleRequest LayersCancelProcessing' where
         type Rs LayersCancelProcessing' = ProcessResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersCancelProcessing{..}
-          = go _lcpQuotaUser _lcpPrettyPrint _lcpUserIp _lcpKey
+        requestWithRoute r u LayersCancelProcessing'{..}
+          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIp
+              _lcpKey
               _lcpId
               _lcpOauthToken
               _lcpFields
-              _lcpAlt
+              (Just _lcpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersCancelProcessingAPI)
+                      (Proxy :: Proxy LayersCancelProcessingResource)
                       r
                       u

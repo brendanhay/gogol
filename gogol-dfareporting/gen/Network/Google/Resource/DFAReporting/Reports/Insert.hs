@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a report.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsInsert@.
-module DFAReporting.Reports.Insert
+module Network.Google.Resource.DFAReporting.Reports.Insert
     (
     -- * REST Resource
-      ReportsInsertAPI
+      ReportsInsertResource
 
     -- * Creating a Request
-    , reportsInsert
-    , ReportsInsert
+    , reportsInsert'
+    , ReportsInsert'
 
     -- * Request Lenses
     , riQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsInsert@ which the
--- 'ReportsInsert' request conforms to.
-type ReportsInsertAPI =
+-- 'ReportsInsert'' request conforms to.
+type ReportsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "reports" :> Post '[JSON] Report
+         "reports" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Report
 
 -- | Creates a report.
 --
--- /See:/ 'reportsInsert' smart constructor.
-data ReportsInsert = ReportsInsert
+-- /See:/ 'reportsInsert'' smart constructor.
+data ReportsInsert' = ReportsInsert'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ReportsInsert = ReportsInsert
     , _riKey         :: !(Maybe Text)
     , _riOauthToken  :: !(Maybe Text)
     , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Text
+    , _riAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ReportsInsert = ReportsInsert
 -- * 'riFields'
 --
 -- * 'riAlt'
-reportsInsert
+reportsInsert'
     :: Int64 -- ^ 'profileId'
-    -> ReportsInsert
-reportsInsert pRiProfileId_ =
-    ReportsInsert
+    -> ReportsInsert'
+reportsInsert' pRiProfileId_ =
+    ReportsInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIp = Nothing
@@ -94,7 +102,7 @@ reportsInsert pRiProfileId_ =
     , _riKey = Nothing
     , _riOauthToken = Nothing
     , _riFields = Nothing
-    , _riAlt = "json"
+    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ riFields :: Lens' ReportsInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 -- | Data format for the response.
-riAlt :: Lens' ReportsInsert' Text
+riAlt :: Lens' ReportsInsert' Alt
 riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
 
 instance GoogleRequest ReportsInsert' where
         type Rs ReportsInsert' = Report
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsInsert{..}
-          = go _riQuotaUser _riPrettyPrint _riUserIp
+        requestWithRoute r u ReportsInsert'{..}
+          = go _riQuotaUser (Just _riPrettyPrint) _riUserIp
               _riProfileId
               _riKey
               _riOauthToken
               _riFields
-              _riAlt
+              (Just _riAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsInsertResource)
+                      r
                       u

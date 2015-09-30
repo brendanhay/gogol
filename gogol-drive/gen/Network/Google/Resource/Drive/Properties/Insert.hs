@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a property to a file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePropertiesInsert@.
-module Drive.Properties.Insert
+module Network.Google.Resource.Drive.Properties.Insert
     (
     -- * REST Resource
-      PropertiesInsertAPI
+      PropertiesInsertResource
 
     -- * Creating a Request
-    , propertiesInsert
-    , PropertiesInsert
+    , propertiesInsert'
+    , PropertiesInsert'
 
     -- * Request Lenses
     , proQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePropertiesInsert@ which the
--- 'PropertiesInsert' request conforms to.
-type PropertiesInsertAPI =
+-- 'PropertiesInsert'' request conforms to.
+type PropertiesInsertResource =
      "files" :>
        Capture "fileId" Text :>
-         "properties" :> Post '[JSON] Property
+         "properties" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Property
 
 -- | Adds a property to a file.
 --
--- /See:/ 'propertiesInsert' smart constructor.
-data PropertiesInsert = PropertiesInsert
+-- /See:/ 'propertiesInsert'' smart constructor.
+data PropertiesInsert' = PropertiesInsert'
     { _proQuotaUser   :: !(Maybe Text)
     , _proPrettyPrint :: !Bool
     , _proUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PropertiesInsert = PropertiesInsert
     , _proFileId      :: !Text
     , _proOauthToken  :: !(Maybe Text)
     , _proFields      :: !(Maybe Text)
-    , _proAlt         :: !Text
+    , _proAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PropertiesInsert = PropertiesInsert
 -- * 'proFields'
 --
 -- * 'proAlt'
-propertiesInsert
+propertiesInsert'
     :: Text -- ^ 'fileId'
-    -> PropertiesInsert
-propertiesInsert pProFileId_ =
-    PropertiesInsert
+    -> PropertiesInsert'
+propertiesInsert' pProFileId_ =
+    PropertiesInsert'
     { _proQuotaUser = Nothing
     , _proPrettyPrint = True
     , _proUserIp = Nothing
@@ -94,7 +102,7 @@ propertiesInsert pProFileId_ =
     , _proFileId = pProFileId_
     , _proOauthToken = Nothing
     , _proFields = Nothing
-    , _proAlt = "json"
+    , _proAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ proFields
   = lens _proFields (\ s a -> s{_proFields = a})
 
 -- | Data format for the response.
-proAlt :: Lens' PropertiesInsert' Text
+proAlt :: Lens' PropertiesInsert' Alt
 proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
 
 instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PropertiesInsert{..}
-          = go _proQuotaUser _proPrettyPrint _proUserIp _proKey
+        requestWithRoute r u PropertiesInsert'{..}
+          = go _proQuotaUser (Just _proPrettyPrint) _proUserIp
+              _proKey
               _proFileId
               _proOauthToken
               _proFields
-              _proAlt
+              (Just _proAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PropertiesInsertAPI)
+                      (Proxy :: Proxy PropertiesInsertResource)
                       r
                       u

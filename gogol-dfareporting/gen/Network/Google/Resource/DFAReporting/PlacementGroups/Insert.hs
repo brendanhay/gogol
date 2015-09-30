@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new placement group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementGroupsInsert@.
-module DFAReporting.PlacementGroups.Insert
+module Network.Google.Resource.DFAReporting.PlacementGroups.Insert
     (
     -- * REST Resource
-      PlacementGroupsInsertAPI
+      PlacementGroupsInsertResource
 
     -- * Creating a Request
-    , placementGroupsInsert
-    , PlacementGroupsInsert
+    , placementGroupsInsert'
+    , PlacementGroupsInsert'
 
     -- * Request Lenses
     , pgiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementGroupsInsert@ which the
--- 'PlacementGroupsInsert' request conforms to.
-type PlacementGroupsInsertAPI =
+-- 'PlacementGroupsInsert'' request conforms to.
+type PlacementGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "placementGroups" :> Post '[JSON] PlacementGroup
+         "placementGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] PlacementGroup
 
 -- | Inserts a new placement group.
 --
--- /See:/ 'placementGroupsInsert' smart constructor.
-data PlacementGroupsInsert = PlacementGroupsInsert
+-- /See:/ 'placementGroupsInsert'' smart constructor.
+data PlacementGroupsInsert' = PlacementGroupsInsert'
     { _pgiQuotaUser   :: !(Maybe Text)
     , _pgiPrettyPrint :: !Bool
     , _pgiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PlacementGroupsInsert = PlacementGroupsInsert
     , _pgiKey         :: !(Maybe Text)
     , _pgiOauthToken  :: !(Maybe Text)
     , _pgiFields      :: !(Maybe Text)
-    , _pgiAlt         :: !Text
+    , _pgiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PlacementGroupsInsert = PlacementGroupsInsert
 -- * 'pgiFields'
 --
 -- * 'pgiAlt'
-placementGroupsInsert
+placementGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> PlacementGroupsInsert
-placementGroupsInsert pPgiProfileId_ =
-    PlacementGroupsInsert
+    -> PlacementGroupsInsert'
+placementGroupsInsert' pPgiProfileId_ =
+    PlacementGroupsInsert'
     { _pgiQuotaUser = Nothing
     , _pgiPrettyPrint = True
     , _pgiUserIp = Nothing
@@ -94,7 +102,7 @@ placementGroupsInsert pPgiProfileId_ =
     , _pgiKey = Nothing
     , _pgiOauthToken = Nothing
     , _pgiFields = Nothing
-    , _pgiAlt = "json"
+    , _pgiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ pgiFields
   = lens _pgiFields (\ s a -> s{_pgiFields = a})
 
 -- | Data format for the response.
-pgiAlt :: Lens' PlacementGroupsInsert' Text
+pgiAlt :: Lens' PlacementGroupsInsert' Alt
 pgiAlt = lens _pgiAlt (\ s a -> s{_pgiAlt = a})
 
 instance GoogleRequest PlacementGroupsInsert' where
         type Rs PlacementGroupsInsert' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsInsert{..}
-          = go _pgiQuotaUser _pgiPrettyPrint _pgiUserIp
+        requestWithRoute r u PlacementGroupsInsert'{..}
+          = go _pgiQuotaUser (Just _pgiPrettyPrint) _pgiUserIp
               _pgiProfileId
               _pgiKey
               _pgiOauthToken
               _pgiFields
-              _pgiAlt
+              (Just _pgiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementGroupsInsertAPI)
+                      (Proxy :: Proxy PlacementGroupsInsertResource)
                       r
                       u

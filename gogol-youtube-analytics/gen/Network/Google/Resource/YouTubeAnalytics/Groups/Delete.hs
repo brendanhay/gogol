@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a group.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsDelete@.
-module YouTubeAnalytics.Groups.Delete
+module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
     (
     -- * REST Resource
-      GroupsDeleteAPI
+      GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete
-    , GroupsDelete
+    , groupsDelete'
+    , GroupsDelete'
 
     -- * Request Lenses
     , gdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsGroupsDelete@ which the
--- 'GroupsDelete' request conforms to.
-type GroupsDeleteAPI =
+-- 'GroupsDelete'' request conforms to.
+type GroupsDeleteResource =
      "groups" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a group.
 --
--- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+-- /See:/ 'groupsDelete'' smart constructor.
+data GroupsDelete' = GroupsDelete'
     { _gdQuotaUser              :: !(Maybe Text)
     , _gdPrettyPrint            :: !Bool
     , _gdUserIp                 :: !(Maybe Text)
@@ -62,7 +70,7 @@ data GroupsDelete = GroupsDelete
     , _gdId                     :: !Text
     , _gdOauthToken             :: !(Maybe Text)
     , _gdFields                 :: !(Maybe Text)
-    , _gdAlt                    :: !Text
+    , _gdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data GroupsDelete = GroupsDelete
 -- * 'gdFields'
 --
 -- * 'gdAlt'
-groupsDelete
+groupsDelete'
     :: Text -- ^ 'id'
-    -> GroupsDelete
-groupsDelete pGdId_ =
-    GroupsDelete
+    -> GroupsDelete'
+groupsDelete' pGdId_ =
+    GroupsDelete'
     { _gdQuotaUser = Nothing
     , _gdPrettyPrint = True
     , _gdUserIp = Nothing
@@ -99,7 +107,7 @@ groupsDelete pGdId_ =
     , _gdId = pGdId_
     , _gdOauthToken = Nothing
     , _gdFields = Nothing
-    , _gdAlt = "json"
+    , _gdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,20 +164,22 @@ gdFields :: Lens' GroupsDelete' (Maybe Text)
 gdFields = lens _gdFields (\ s a -> s{_gdFields = a})
 
 -- | Data format for the response.
-gdAlt :: Lens' GroupsDelete' Text
+gdAlt :: Lens' GroupsDelete' Alt
 gdAlt = lens _gdAlt (\ s a -> s{_gdAlt = a})
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupsDelete{..}
-          = go _gdQuotaUser _gdPrettyPrint _gdUserIp
+        requestWithRoute r u GroupsDelete'{..}
+          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIp
               _gdOnBehalfOfContentOwner
               _gdKey
               (Just _gdId)
               _gdOauthToken
               _gdFields
-              _gdAlt
+              (Just _gdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsDeleteResource)
+                      r
                       u

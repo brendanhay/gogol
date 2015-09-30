@@ -173,6 +173,13 @@ module Network.Google.IdentityToolkit.Types
     , identitytoolkitRelyingpartyDeleteAccountRequest
     , irdarLocalId
 
+    -- * SetAccountInfoResponseProviderUserInfo
+    , SetAccountInfoResponseProviderUserInfo
+    , setAccountInfoResponseProviderUserInfo
+    , sairpuiProviderId
+    , sairpuiPhotoUrl
+    , sairpuiDisplayName
+
     -- * IdentitytoolkitRelyingpartyDownloadAccountRequest
     , IdentitytoolkitRelyingpartyDownloadAccountRequest
     , identitytoolkitRelyingpartyDownloadAccountRequest
@@ -243,6 +250,23 @@ module Network.Google.IdentityToolkit.Types
     , grprRecaptchaSiteKey
     , grprKind
     , grprRecaptchaStoken
+
+    -- * UploadAccountResponseError
+    , UploadAccountResponseError
+    , uploadAccountResponseError
+    , uareMessage
+    , uareIndex
+
+    -- * UserInfoProviderUserInfo
+    , UserInfoProviderUserInfo
+    , userInfoProviderUserInfo
+    , uipuiProviderId
+    , uipuiPhotoUrl
+    , uipuiFederatedId
+    , uipuiDisplayName
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.IdentityToolkit.Types.Product
@@ -250,7 +274,7 @@ import           Network.Google.IdentityToolkit.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Google Identity Toolkit API.
-identityToolkitURL :: BaseURL
+identityToolkitURL :: BaseUrl
 identityToolkitURL
   = BaseUrl Https
       "https://www.googleapis.com/identitytoolkit/v3/relyingparty/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- canceling the match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesLeaveTurn@.
-module Games.TurnBasedMatches.LeaveTurn
+module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
     (
     -- * REST Resource
-      TurnBasedMatchesLeaveTurnAPI
+      TurnBasedMatchesLeaveTurnResource
 
     -- * Creating a Request
-    , turnBasedMatchesLeaveTurn
-    , TurnBasedMatchesLeaveTurn
+    , turnBasedMatchesLeaveTurn'
+    , TurnBasedMatchesLeaveTurn'
 
     -- * Request Lenses
     , tbmltQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesLeaveTurn@ which the
--- 'TurnBasedMatchesLeaveTurn' request conforms to.
-type TurnBasedMatchesLeaveTurnAPI =
+-- 'TurnBasedMatchesLeaveTurn'' request conforms to.
+type TurnBasedMatchesLeaveTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "leaveTurn" :>
-           QueryParam "language" Text :>
-             QueryParam "pendingParticipantId" Text :>
-               QueryParam "matchVersion" Int32 :>
-                 Put '[JSON] TurnBasedMatch
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pendingParticipantId" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "matchVersion" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
 
 -- | Leave a turn-based match during the current player\'s turn, without
 -- canceling the match.
 --
--- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
-data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
+-- /See:/ 'turnBasedMatchesLeaveTurn'' smart constructor.
+data TurnBasedMatchesLeaveTurn' = TurnBasedMatchesLeaveTurn'
     { _tbmltQuotaUser            :: !(Maybe Text)
     , _tbmltPrettyPrint          :: !Bool
     , _tbmltUserIp               :: !(Maybe Text)
@@ -72,7 +79,7 @@ data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
     , _tbmltMatchId              :: !Text
     , _tbmltMatchVersion         :: !Int32
     , _tbmltFields               :: !(Maybe Text)
-    , _tbmltAlt                  :: !Text
+    , _tbmltAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesLeaveTurn'' with the minimum fields required to make a request.
@@ -100,12 +107,12 @@ data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
 -- * 'tbmltFields'
 --
 -- * 'tbmltAlt'
-turnBasedMatchesLeaveTurn
+turnBasedMatchesLeaveTurn'
     :: Text -- ^ 'matchId'
     -> Int32 -- ^ 'matchVersion'
-    -> TurnBasedMatchesLeaveTurn
-turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn
+    -> TurnBasedMatchesLeaveTurn'
+turnBasedMatchesLeaveTurn' pTbmltMatchId_ pTbmltMatchVersion_ =
+    TurnBasedMatchesLeaveTurn'
     { _tbmltQuotaUser = Nothing
     , _tbmltPrettyPrint = True
     , _tbmltUserIp = Nothing
@@ -116,7 +123,7 @@ turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
     , _tbmltMatchId = pTbmltMatchId_
     , _tbmltMatchVersion = pTbmltMatchVersion_
     , _tbmltFields = Nothing
-    , _tbmltAlt = "json"
+    , _tbmltAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,15 +190,16 @@ tbmltFields
   = lens _tbmltFields (\ s a -> s{_tbmltFields = a})
 
 -- | Data format for the response.
-tbmltAlt :: Lens' TurnBasedMatchesLeaveTurn' Text
+tbmltAlt :: Lens' TurnBasedMatchesLeaveTurn' Alt
 tbmltAlt = lens _tbmltAlt (\ s a -> s{_tbmltAlt = a})
 
 instance GoogleRequest TurnBasedMatchesLeaveTurn'
          where
         type Rs TurnBasedMatchesLeaveTurn' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesLeaveTurn{..}
-          = go _tbmltQuotaUser _tbmltPrettyPrint _tbmltUserIp
+        requestWithRoute r u TurnBasedMatchesLeaveTurn'{..}
+          = go _tbmltQuotaUser (Just _tbmltPrettyPrint)
+              _tbmltUserIp
               _tbmltKey
               _tbmltLanguage
               _tbmltPendingParticipantId
@@ -199,9 +207,9 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn'
               _tbmltMatchId
               (Just _tbmltMatchVersion)
               _tbmltFields
-              _tbmltAlt
+              (Just _tbmltAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesLeaveTurnAPI)
+                      (Proxy :: Proxy TurnBasedMatchesLeaveTurnResource)
                       r
                       u

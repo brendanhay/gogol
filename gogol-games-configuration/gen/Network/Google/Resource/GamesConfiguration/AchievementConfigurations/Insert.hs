@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Insert a new achievement configuration in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsInsert@.
-module GamesConfiguration.AchievementConfigurations.Insert
+module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
     (
     -- * REST Resource
-      AchievementConfigurationsInsertAPI
+      AchievementConfigurationsInsertResource
 
     -- * Creating a Request
-    , achievementConfigurationsInsert
-    , AchievementConfigurationsInsert
+    , achievementConfigurationsInsert'
+    , AchievementConfigurationsInsert'
 
     -- * Request Lenses
     , aciQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationAchievementConfigurationsInsert@ which the
--- 'AchievementConfigurationsInsert' request conforms to.
-type AchievementConfigurationsInsertAPI =
+-- 'AchievementConfigurationsInsert'' request conforms to.
+type AchievementConfigurationsInsertResource =
      "applications" :>
        Capture "applicationId" Text :>
          "achievements" :>
-           Post '[JSON] AchievementConfiguration
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] AchievementConfiguration
 
 -- | Insert a new achievement configuration in this application.
 --
--- /See:/ 'achievementConfigurationsInsert' smart constructor.
-data AchievementConfigurationsInsert = AchievementConfigurationsInsert
+-- /See:/ 'achievementConfigurationsInsert'' smart constructor.
+data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
     { _aciQuotaUser     :: !(Maybe Text)
     , _aciPrettyPrint   :: !Bool
     , _aciUserIp        :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AchievementConfigurationsInsert = AchievementConfigurationsInsert
     , _aciKey           :: !(Maybe Text)
     , _aciOauthToken    :: !(Maybe Text)
     , _aciFields        :: !(Maybe Text)
-    , _aciAlt           :: !Text
+    , _aciAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AchievementConfigurationsInsert = AchievementConfigurationsInsert
 -- * 'aciFields'
 --
 -- * 'aciAlt'
-achievementConfigurationsInsert
+achievementConfigurationsInsert'
     :: Text -- ^ 'applicationId'
-    -> AchievementConfigurationsInsert
-achievementConfigurationsInsert pAciApplicationId_ =
-    AchievementConfigurationsInsert
+    -> AchievementConfigurationsInsert'
+achievementConfigurationsInsert' pAciApplicationId_ =
+    AchievementConfigurationsInsert'
     { _aciQuotaUser = Nothing
     , _aciPrettyPrint = True
     , _aciUserIp = Nothing
@@ -95,7 +103,7 @@ achievementConfigurationsInsert pAciApplicationId_ =
     , _aciKey = Nothing
     , _aciOauthToken = Nothing
     , _aciFields = Nothing
-    , _aciAlt = "json"
+    , _aciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ aciFields
   = lens _aciFields (\ s a -> s{_aciFields = a})
 
 -- | Data format for the response.
-aciAlt :: Lens' AchievementConfigurationsInsert' Text
+aciAlt :: Lens' AchievementConfigurationsInsert' Alt
 aciAlt = lens _aciAlt (\ s a -> s{_aciAlt = a})
 
 instance GoogleRequest
@@ -151,15 +159,16 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          AchievementConfigurationsInsert{..}
-          = go _aciQuotaUser _aciPrettyPrint _aciUserIp
+          AchievementConfigurationsInsert'{..}
+          = go _aciQuotaUser (Just _aciPrettyPrint) _aciUserIp
               _aciApplicationId
               _aciKey
               _aciOauthToken
               _aciFields
-              _aciAlt
+              (Just _aciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementConfigurationsInsertAPI)
+                      (Proxy ::
+                         Proxy AchievementConfigurationsInsertResource)
                       r
                       u

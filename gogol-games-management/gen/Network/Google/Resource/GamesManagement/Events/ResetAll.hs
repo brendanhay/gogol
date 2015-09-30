@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- for your application. All quests for this player will also be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsResetAll@.
-module GamesManagement.Events.ResetAll
+module Network.Google.Resource.GamesManagement.Events.ResetAll
     (
     -- * REST Resource
-      EventsResetAllAPI
+      EventsResetAllResource
 
     -- * Creating a Request
-    , eventsResetAll
-    , EventsResetAll
+    , eventsResetAll'
+    , EventsResetAll'
 
     -- * Request Lenses
     , eraQuotaUser
@@ -44,23 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementEventsResetAll@ which the
--- 'EventsResetAll' request conforms to.
-type EventsResetAllAPI =
-     "events" :> "reset" :> Post '[JSON] ()
+-- 'EventsResetAll'' request conforms to.
+type EventsResetAllResource =
+     "events" :>
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all player progress on all events for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application. All quests for this player will also be reset.
 --
--- /See:/ 'eventsResetAll' smart constructor.
-data EventsResetAll = EventsResetAll
+-- /See:/ 'eventsResetAll'' smart constructor.
+data EventsResetAll' = EventsResetAll'
     { _eraQuotaUser   :: !(Maybe Text)
     , _eraPrettyPrint :: !Bool
     , _eraUserIp      :: !(Maybe Text)
     , _eraKey         :: !(Maybe Text)
     , _eraOauthToken  :: !(Maybe Text)
     , _eraFields      :: !(Maybe Text)
-    , _eraAlt         :: !Text
+    , _eraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAll'' with the minimum fields required to make a request.
@@ -80,17 +89,17 @@ data EventsResetAll = EventsResetAll
 -- * 'eraFields'
 --
 -- * 'eraAlt'
-eventsResetAll
-    :: EventsResetAll
-eventsResetAll =
-    EventsResetAll
+eventsResetAll'
+    :: EventsResetAll'
+eventsResetAll' =
+    EventsResetAll'
     { _eraQuotaUser = Nothing
     , _eraPrettyPrint = True
     , _eraUserIp = Nothing
     , _eraKey = Nothing
     , _eraOauthToken = Nothing
     , _eraFields = Nothing
-    , _eraAlt = "json"
+    , _eraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,18 +139,20 @@ eraFields
   = lens _eraFields (\ s a -> s{_eraFields = a})
 
 -- | Data format for the response.
-eraAlt :: Lens' EventsResetAll' Text
+eraAlt :: Lens' EventsResetAll' Alt
 eraAlt = lens _eraAlt (\ s a -> s{_eraAlt = a})
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsResetAll{..}
-          = go _eraQuotaUser _eraPrettyPrint _eraUserIp _eraKey
+        requestWithRoute r u EventsResetAll'{..}
+          = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIp
+              _eraKey
               _eraOauthToken
               _eraFields
-              _eraAlt
+              (Just _eraAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsResetAllAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsResetAllResource)
                       r
                       u

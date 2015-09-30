@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the states keys, and optionally the state data.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppstateStatesList@.
-module Appstate.States.List
+module Network.Google.Resource.Appstate.States.List
     (
     -- * REST Resource
-      StatesListAPI
+      StatesListResource
 
     -- * Creating a Request
-    , statesList
-    , StatesList
+    , statesList'
+    , StatesList'
 
     -- * Request Lenses
     , slIncludeData
@@ -43,16 +44,22 @@ import           Network.Google.GamesAppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppstateStatesList@ which the
--- 'StatesList' request conforms to.
-type StatesListAPI =
+-- 'StatesList'' request conforms to.
+type StatesListResource =
      "states" :>
        QueryParam "includeData" Bool :>
-         Get '[JSON] ListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] ListResponse
 
 -- | Lists all the states keys, and optionally the state data.
 --
--- /See:/ 'statesList' smart constructor.
-data StatesList = StatesList
+-- /See:/ 'statesList'' smart constructor.
+data StatesList' = StatesList'
     { _slIncludeData :: !Bool
     , _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
@@ -60,7 +67,7 @@ data StatesList = StatesList
     , _slKey         :: !(Maybe Text)
     , _slOauthToken  :: !(Maybe Text)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesList'' with the minimum fields required to make a request.
@@ -82,10 +89,10 @@ data StatesList = StatesList
 -- * 'slFields'
 --
 -- * 'slAlt'
-statesList
-    :: StatesList
-statesList =
-    StatesList
+statesList'
+    :: StatesList'
+statesList' =
+    StatesList'
     { _slIncludeData = False
     , _slQuotaUser = Nothing
     , _slPrettyPrint = True
@@ -93,7 +100,7 @@ statesList =
     , _slKey = Nothing
     , _slOauthToken = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Whether to include the full data in addition to the version number
@@ -136,19 +143,21 @@ slFields :: Lens' StatesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' StatesList' Text
+slAlt :: Lens' StatesList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest StatesList' where
         type Rs StatesList' = ListResponse
         request = requestWithRoute defReq gamesAppStateURL
-        requestWithRoute r u StatesList{..}
+        requestWithRoute r u StatesList'{..}
           = go (Just _slIncludeData) _slQuotaUser
-              _slPrettyPrint
+              (Just _slPrettyPrint)
               _slUserIp
               _slKey
               _slOauthToken
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy StatesListResource)
+                      r
+                      u

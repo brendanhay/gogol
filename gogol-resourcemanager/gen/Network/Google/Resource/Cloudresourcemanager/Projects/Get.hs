@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsGet@.
-module Cloudresourcemanager.Projects.Get
+module Network.Google.Resource.Cloudresourcemanager.Projects.Get
     (
     -- * REST Resource
-      ProjectsGetAPI
+      ProjectsGetResource
 
     -- * Creating a Request
-    , projectsGet
-    , ProjectsGet
+    , projectsGet'
+    , ProjectsGet'
 
     -- * Request Lenses
     , pgXgafv
@@ -51,18 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsGet@ which the
--- 'ProjectsGet' request conforms to.
-type ProjectsGetAPI =
+-- 'ProjectsGet'' request conforms to.
+type ProjectsGetResource =
      "v1beta1" :>
        "projects" :>
-         Capture "projectId" Text :> Get '[JSON] Project
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Get '[JSON] Project
 
 -- | Retrieves the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). The caller must have read permissions for
 -- this project.
 --
--- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet
+-- /See:/ 'projectsGet'' smart constructor.
+data ProjectsGet' = ProjectsGet'
     { _pgXgafv          :: !(Maybe Text)
     , _pgQuotaUser      :: !(Maybe Text)
     , _pgPrettyPrint    :: !Bool
@@ -110,11 +124,11 @@ data ProjectsGet = ProjectsGet
 -- * 'pgCallback'
 --
 -- * 'pgAlt'
-projectsGet
+projectsGet'
     :: Text -- ^ 'projectId'
-    -> ProjectsGet
-projectsGet pPgProjectId_ =
-    ProjectsGet
+    -> ProjectsGet'
+projectsGet' pPgProjectId_ =
+    ProjectsGet'
     { _pgXgafv = Nothing
     , _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
@@ -207,10 +221,10 @@ pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsGet{..}
-          = go _pgXgafv _pgQuotaUser _pgPrettyPrint
+        requestWithRoute r u ProjectsGet'{..}
+          = go _pgXgafv _pgQuotaUser (Just _pgPrettyPrint)
               _pgUploadProtocol
-              _pgPp
+              (Just _pgPp)
               _pgAccessToken
               _pgUploadType
               _pgBearerToken
@@ -219,6 +233,9 @@ instance GoogleRequest ProjectsGet' where
               _pgOauthToken
               _pgFields
               _pgCallback
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsGetResource)
+                      r
+                      u

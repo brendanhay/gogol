@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksList@.
-module Compute.Disks.List
+module Network.Google.Resource.Compute.Disks.List
     (
     -- * REST Resource
-      DisksListAPI
+      DisksListResource
 
     -- * Creating a Request
-    , disksList
-    , DisksList
+    , disksList'
+    , DisksList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksList@ which the
--- 'DisksList' request conforms to.
-type DisksListAPI =
+-- 'DisksList'' request conforms to.
+type DisksListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] DiskList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] DiskList
 
 -- | Retrieves the list of persistent disks contained within the specified
 -- zone.
 --
--- /See:/ 'disksList' smart constructor.
-data DisksList = DisksList
+-- /See:/ 'disksList'' smart constructor.
+data DisksList' = DisksList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlProject     :: !Text
@@ -75,7 +82,7 @@ data DisksList = DisksList
     , _dlOauthToken  :: !(Maybe Text)
     , _dlMaxResults  :: !Word32
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data DisksList = DisksList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-disksList
+disksList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> DisksList
-disksList pDlProject_ pDlZone_ =
-    DisksList
+    -> DisksList'
+disksList' pDlProject_ pDlZone_ =
+    DisksList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlProject = pDlProject_
@@ -122,7 +129,7 @@ disksList pDlProject_ pDlZone_ =
     , _dlOauthToken = Nothing
     , _dlMaxResults = 500
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -194,14 +201,15 @@ dlFields :: Lens' DisksList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DisksList' Text
+dlAlt :: Lens' DisksList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlProject _dlUserIp
+        requestWithRoute r u DisksList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
+              _dlUserIp
               _dlZone
               _dlKey
               _dlFilter
@@ -209,6 +217,8 @@ instance GoogleRequest DisksList' where
               _dlOauthToken
               (Just _dlMaxResults)
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DisksListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy DisksListResource)
+                      r
+                      u

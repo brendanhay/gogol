@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesRollback@.
-module Replicapoolupdater.RollingUpdates.Rollback
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Rollback
     (
     -- * REST Resource
-      RollingUpdatesRollbackAPI
+      RollingUpdatesRollbackResource
 
     -- * Creating a Request
-    , rollingUpdatesRollback
-    , RollingUpdatesRollback
+    , rollingUpdatesRollback'
+    , RollingUpdatesRollback'
 
     -- * Request Lenses
     , rurRollingUpdate
@@ -46,20 +47,27 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesRollback@ which the
--- 'RollingUpdatesRollback' request conforms to.
-type RollingUpdatesRollbackAPI =
+-- 'RollingUpdatesRollback'' request conforms to.
+type RollingUpdatesRollbackResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
-               "rollback" :> Post '[JSON] Operation
+               "rollback" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
--- /See:/ 'rollingUpdatesRollback' smart constructor.
-data RollingUpdatesRollback = RollingUpdatesRollback
+-- /See:/ 'rollingUpdatesRollback'' smart constructor.
+data RollingUpdatesRollback' = RollingUpdatesRollback'
     { _rurRollingUpdate :: !Text
     , _rurQuotaUser     :: !(Maybe Text)
     , _rurPrettyPrint   :: !Bool
@@ -69,7 +77,7 @@ data RollingUpdatesRollback = RollingUpdatesRollback
     , _rurKey           :: !(Maybe Text)
     , _rurOauthToken    :: !(Maybe Text)
     , _rurFields        :: !(Maybe Text)
-    , _rurAlt           :: !Text
+    , _rurAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesRollback'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data RollingUpdatesRollback = RollingUpdatesRollback
 -- * 'rurFields'
 --
 -- * 'rurAlt'
-rollingUpdatesRollback
+rollingUpdatesRollback'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesRollback
-rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
-    RollingUpdatesRollback
+    -> RollingUpdatesRollback'
+rollingUpdatesRollback' pRurRollingUpdate_ pRurProject_ pRurZone_ =
+    RollingUpdatesRollback'
     { _rurRollingUpdate = pRurRollingUpdate_
     , _rurQuotaUser = Nothing
     , _rurPrettyPrint = True
@@ -111,7 +119,7 @@ rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
     , _rurKey = Nothing
     , _rurOauthToken = Nothing
     , _rurFields = Nothing
-    , _rurAlt = "json"
+    , _rurAlt = JSON
     }
 
 -- | The name of the update.
@@ -166,24 +174,25 @@ rurFields
   = lens _rurFields (\ s a -> s{_rurFields = a})
 
 -- | Data format for the response.
-rurAlt :: Lens' RollingUpdatesRollback' Text
+rurAlt :: Lens' RollingUpdatesRollback' Alt
 rurAlt = lens _rurAlt (\ s a -> s{_rurAlt = a})
 
 instance GoogleRequest RollingUpdatesRollback' where
         type Rs RollingUpdatesRollback' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesRollback{..}
-          = go _rurRollingUpdate _rurQuotaUser _rurPrettyPrint
+        requestWithRoute r u RollingUpdatesRollback'{..}
+          = go _rurRollingUpdate _rurQuotaUser
+              (Just _rurPrettyPrint)
               _rurProject
               _rurUserIp
               _rurZone
               _rurKey
               _rurOauthToken
               _rurFields
-              _rurAlt
+              (Just _rurAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesRollbackAPI)
+                      (Proxy :: Proxy RollingUpdatesRollbackResource)
                       r
                       u

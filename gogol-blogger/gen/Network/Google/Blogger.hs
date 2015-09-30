@@ -27,105 +27,113 @@ module Network.Google.Blogger
     -- * REST Resources
 
     -- ** BloggerBlogUserInfosGet
-    , module Blogger.BlogUserInfos.Get
+    , module Network.Google.Resource.Blogger.BlogUserInfos.Get
 
     -- ** BloggerBlogsGet
-    , module Blogger.Blogs.Get
+    , module Network.Google.Resource.Blogger.Blogs.Get
 
     -- ** BloggerBlogsGetByURL
-    , module Blogger.Blogs.GetByURL
+    , module Network.Google.Resource.Blogger.Blogs.GetByURL
 
     -- ** BloggerBlogsListByUser
-    , module Blogger.Blogs.ListByUser
+    , module Network.Google.Resource.Blogger.Blogs.ListByUser
 
     -- ** BloggerCommentsApprove
-    , module Blogger.Comments.Approve
+    , module Network.Google.Resource.Blogger.Comments.Approve
 
     -- ** BloggerCommentsDelete
-    , module Blogger.Comments.Delete
+    , module Network.Google.Resource.Blogger.Comments.Delete
 
     -- ** BloggerCommentsGet
-    , module Blogger.Comments.Get
+    , module Network.Google.Resource.Blogger.Comments.Get
 
     -- ** BloggerCommentsList
-    , module Blogger.Comments.List
+    , module Network.Google.Resource.Blogger.Comments.List
 
     -- ** BloggerCommentsListByBlog
-    , module Blogger.Comments.ListByBlog
+    , module Network.Google.Resource.Blogger.Comments.ListByBlog
 
     -- ** BloggerCommentsMarkAsSpam
-    , module Blogger.Comments.MarkAsSpam
+    , module Network.Google.Resource.Blogger.Comments.MarkAsSpam
 
     -- ** BloggerCommentsRemoveContent
-    , module Blogger.Comments.RemoveContent
+    , module Network.Google.Resource.Blogger.Comments.RemoveContent
 
     -- ** BloggerPageViewsGet
-    , module Blogger.PageViews.Get
+    , module Network.Google.Resource.Blogger.PageViews.Get
 
     -- ** BloggerPagesDelete
-    , module Blogger.Pages.Delete
+    , module Network.Google.Resource.Blogger.Pages.Delete
 
     -- ** BloggerPagesGet
-    , module Blogger.Pages.Get
+    , module Network.Google.Resource.Blogger.Pages.Get
 
     -- ** BloggerPagesInsert
-    , module Blogger.Pages.Insert
+    , module Network.Google.Resource.Blogger.Pages.Insert
 
     -- ** BloggerPagesList
-    , module Blogger.Pages.List
+    , module Network.Google.Resource.Blogger.Pages.List
 
     -- ** BloggerPagesPatch
-    , module Blogger.Pages.Patch
+    , module Network.Google.Resource.Blogger.Pages.Patch
 
     -- ** BloggerPagesPublish
-    , module Blogger.Pages.Publish
+    , module Network.Google.Resource.Blogger.Pages.Publish
 
     -- ** BloggerPagesRevert
-    , module Blogger.Pages.Revert
+    , module Network.Google.Resource.Blogger.Pages.Revert
 
     -- ** BloggerPagesUpdate
-    , module Blogger.Pages.Update
+    , module Network.Google.Resource.Blogger.Pages.Update
 
     -- ** BloggerPostUserInfosGet
-    , module Blogger.PostUserInfos.Get
+    , module Network.Google.Resource.Blogger.PostUserInfos.Get
 
     -- ** BloggerPostUserInfosList
-    , module Blogger.PostUserInfos.List
+    , module Network.Google.Resource.Blogger.PostUserInfos.List
 
     -- ** BloggerPostsDelete
-    , module Blogger.Posts.Delete
+    , module Network.Google.Resource.Blogger.Posts.Delete
 
     -- ** BloggerPostsGet
-    , module Blogger.Posts.Get
+    , module Network.Google.Resource.Blogger.Posts.Get
 
     -- ** BloggerPostsGetByPath
-    , module Blogger.Posts.GetByPath
+    , module Network.Google.Resource.Blogger.Posts.GetByPath
 
     -- ** BloggerPostsInsert
-    , module Blogger.Posts.Insert
+    , module Network.Google.Resource.Blogger.Posts.Insert
 
     -- ** BloggerPostsList
-    , module Blogger.Posts.List
+    , module Network.Google.Resource.Blogger.Posts.List
 
     -- ** BloggerPostsPatch
-    , module Blogger.Posts.Patch
+    , module Network.Google.Resource.Blogger.Posts.Patch
 
     -- ** BloggerPostsPublish
-    , module Blogger.Posts.Publish
+    , module Network.Google.Resource.Blogger.Posts.Publish
 
     -- ** BloggerPostsRevert
-    , module Blogger.Posts.Revert
+    , module Network.Google.Resource.Blogger.Posts.Revert
 
     -- ** BloggerPostsSearch
-    , module Blogger.Posts.Search
+    , module Network.Google.Resource.Blogger.Posts.Search
 
     -- ** BloggerPostsUpdate
-    , module Blogger.Posts.Update
+    , module Network.Google.Resource.Blogger.Posts.Update
 
     -- ** BloggerUsersGet
-    , module Blogger.Users.Get
+    , module Network.Google.Resource.Blogger.Users.Get
 
     -- * Types
+
+    -- ** PostImages
+    , PostImages
+    , postImages
+    , piUrl
+
+    -- ** BloggerPostUserInfosListStatus
+    , BloggerPostUserInfosListStatus (..)
 
     -- ** PostUserInfo
     , PostUserInfo
@@ -133,6 +141,23 @@ module Network.Google.Blogger
     , puiPostUserInfo
     , puiPost
     , puiKind
+
+    -- ** BloggerBlogsListByUserStatus
+    , BloggerBlogsListByUserStatus (..)
+
+    -- ** BloggerPostsListView
+    , BloggerPostsListView (..)
+
+    -- ** PostAuthorImage
+    , PostAuthorImage
+    , postAuthorImage
+    , paiUrl
+
+    -- ** BloggerPageViewsGetRange
+    , BloggerPageViewsGetRange (..)
+
+    -- ** BloggerPostsListOrderBy
+    , BloggerPostsListOrderBy (..)
 
     -- ** PostList
     , PostList
@@ -142,12 +167,58 @@ module Network.Google.Blogger
     , plKind
     , plItems
 
+    -- ** BloggerCommentsListByBlogStatus
+    , BloggerCommentsListByBlogStatus (..)
+
+    -- ** BloggerPagesGetView
+    , BloggerPagesGetView (..)
+
+    -- ** BlogPosts
+    , BlogPosts
+    , blogPosts
+    , bpTotalItems
+    , bpItems
+    , bpSelfLink
+
+    -- ** PostLocation
+    , PostLocation
+    , postLocation
+    , plSpan
+    , plLat
+    , plName
+    , plLng
+
+    -- ** CommentBlog
+    , CommentBlog
+    , commentBlog
+    , cbId
+
+    -- ** PageviewsCounts
+    , PageviewsCounts
+    , pageviewsCounts
+    , pcTimeRange
+    , pcCount
+
+    -- ** BloggerPostUserInfosListOrderBy
+    , BloggerPostUserInfosListOrderBy (..)
+
+    -- ** CommentInReplyTo
+    , CommentInReplyTo
+    , commentInReplyTo
+    , cirtId
+
     -- ** Pageviews
     , Pageviews
     , pageviews
     , pKind
     , pCounts
     , pBlogId
+
+    -- ** BloggerPagesListStatus
+    , BloggerPagesListStatus (..)
+
+    -- ** BloggerPostsGetByPathView
+    , BloggerPostsGetByPathView (..)
 
     -- ** Post
     , Post
@@ -188,6 +259,29 @@ module Network.Google.Blogger
     , pagUpdated
     , pagTitle
 
+    -- ** PostBlog
+    , PostBlog
+    , postBlog
+    , pbId
+
+    -- ** BloggerBlogsListByUserView
+    , BloggerBlogsListByUserView (..)
+
+    -- ** BlogLocale
+    , BlogLocale
+    , blogLocale
+    , blVariant
+    , blCountry
+    , blLanguage
+
+    -- ** PageAuthor
+    , PageAuthor
+    , pageAuthor
+    , paImage
+    , paUrl
+    , paDisplayName
+    , paId
+
     -- ** Blog
     , Blog
     , blog
@@ -204,6 +298,20 @@ module Network.Google.Blogger
     , bUpdated
     , bPosts
     , bDescription
+
+    -- ** BlogPages
+    , BlogPages
+    , blogPages
+    , bpsTotalItems
+    , bpsSelfLink
+
+    -- ** CommentAuthorImage
+    , CommentAuthorImage
+    , commentAuthorImage
+    , caiUrl
+
+    -- ** BloggerCommentsListView
+    , BloggerCommentsListView (..)
 
     -- ** PageList
     , PageList
@@ -226,12 +334,56 @@ module Network.Google.Blogger
     , uDisplayName
     , uId
 
+    -- ** UserLocale
+    , UserLocale
+    , userLocale
+    , ulVariant
+    , ulCountry
+    , ulLanguage
+
+    -- ** PostReplies
+    , PostReplies
+    , postReplies
+    , prTotalItems
+    , prItems
+    , prSelfLink
+
+    -- ** UserBlogs
+    , UserBlogs
+    , userBlogs
+    , ubSelfLink
+
     -- ** BlogList
     , BlogList
     , blogList
     , blKind
     , blItems
     , blBlogUserInfos
+
+    -- ** BloggerBlogsListByUserRole
+    , BloggerBlogsListByUserRole (..)
+
+    -- ** BloggerPostUserInfosListView
+    , BloggerPostUserInfosListView (..)
+
+    -- ** PostAuthor
+    , PostAuthor
+    , postAuthor
+    , pImage
+    , pUrl
+    , pDisplayName
+    , pId
+
+    -- ** BloggerCommentsGetView
+    , BloggerCommentsGetView (..)
+
+    -- ** PageBlog
+    , PageBlog
+    , pageBlog
+    , pbbId
+
+    -- ** BloggerBlogsGetByURLView
+    , BloggerBlogsGetByURLView (..)
 
     -- ** PostPerUserInfo
     , PostPerUserInfo
@@ -241,6 +393,20 @@ module Network.Google.Blogger
     , ppuiUserId
     , ppuiHasEditAccess
     , ppuiPostId
+
+    -- ** BloggerCommentsListStatus
+    , BloggerCommentsListStatus (..)
+
+    -- ** BloggerBlogsGetView
+    , BloggerBlogsGetView (..)
+
+    -- ** CommentPost
+    , CommentPost
+    , commentPost
+    , cpId
+
+    -- ** BloggerPostsListStatus
+    , BloggerPostsListStatus (..)
 
     -- ** Comment
     , Comment
@@ -257,12 +423,26 @@ module Network.Google.Blogger
     , cUpdated
     , cInReplyTo
 
+    -- ** CommentAuthor
+    , CommentAuthor
+    , commentAuthor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+
+    -- ** BloggerPostsGetView
+    , BloggerPostsGetView (..)
+
     -- ** PostUserInfosList
     , PostUserInfosList
     , postUserInfosList
     , puilNextPageToken
     , puilKind
     , puilItems
+
+    -- ** BloggerPostsSearchOrderBy
+    , BloggerPostsSearchOrderBy (..)
 
     -- ** BlogPerUserInfo
     , BlogPerUserInfo
@@ -282,6 +462,17 @@ module Network.Google.Blogger
     , clKind
     , clItems
     , clPrevPageToken
+
+    -- ** PageAuthorImage
+    , PageAuthorImage
+    , pageAuthorImage
+    , paiaUrl
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** BloggerPagesListView
+    , BloggerPagesListView (..)
 
     -- ** BlogUserInfo
     , BlogUserInfo
@@ -332,11 +523,39 @@ TODO
 -}
 
 type BloggerAPI =
-     PostUserInfos :<|> Users :<|> PageViews :<|> Blogs
-       :<|> Pages
-       :<|> BlogUserInfos
-       :<|> Comments
-       :<|> Posts
+     PostUserInfosListResource :<|>
+       PostUserInfosGetResource
+       :<|> UsersGetResource
+       :<|> PageViewsGetResource
+       :<|> BlogsListByUserResource
+       :<|> BlogsGetResource
+       :<|> BlogsGetByURLResource
+       :<|> PagesInsertResource
+       :<|> PagesListResource
+       :<|> PagesPatchResource
+       :<|> PagesGetResource
+       :<|> PagesRevertResource
+       :<|> PagesDeleteResource
+       :<|> PagesUpdateResource
+       :<|> PagesPublishResource
+       :<|> BlogUserInfosGetResource
+       :<|> CommentsListResource
+       :<|> CommentsGetResource
+       :<|> CommentsListByBlogResource
+       :<|> CommentsRemoveContentResource
+       :<|> CommentsApproveResource
+       :<|> CommentsMarkAsSpamResource
+       :<|> CommentsDeleteResource
+       :<|> PostsInsertResource
+       :<|> PostsListResource
+       :<|> PostsPatchResource
+       :<|> PostsGetResource
+       :<|> PostsRevertResource
+       :<|> PostsGetByPathResource
+       :<|> PostsSearchResource
+       :<|> PostsDeleteResource
+       :<|> PostsUpdateResource
+       :<|> PostsPublishResource
 
 bloggerAPI :: Proxy BloggerAPI
 bloggerAPI = Proxy

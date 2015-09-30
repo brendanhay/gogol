@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the service information of a resource view or a resource.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsSetService@.
-module Resourceviews.ZoneViews.SetService
+module Network.Google.Resource.Resourceviews.ZoneViews.SetService
     (
     -- * REST Resource
-      ZoneViewsSetServiceAPI
+      ZoneViewsSetServiceResource
 
     -- * Creating a Request
-    , zoneViewsSetService
-    , ZoneViewsSetService
+    , zoneViewsSetService'
+    , ZoneViewsSetService'
 
     -- * Request Lenses
     , zvssQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsSetService@ which the
--- 'ZoneViewsSetService' request conforms to.
-type ZoneViewsSetServiceAPI =
+-- 'ZoneViewsSetService'' request conforms to.
+type ZoneViewsSetServiceResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               "setService" :> Post '[JSON] Operation
+               "setService" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Update the service information of a resource view or a resource.
 --
--- /See:/ 'zoneViewsSetService' smart constructor.
-data ZoneViewsSetService = ZoneViewsSetService
+-- /See:/ 'zoneViewsSetService'' smart constructor.
+data ZoneViewsSetService' = ZoneViewsSetService'
     { _zvssQuotaUser    :: !(Maybe Text)
     , _zvssPrettyPrint  :: !Bool
     , _zvssResourceView :: !Text
@@ -67,7 +75,7 @@ data ZoneViewsSetService = ZoneViewsSetService
     , _zvssKey          :: !(Maybe Text)
     , _zvssOauthToken   :: !(Maybe Text)
     , _zvssFields       :: !(Maybe Text)
-    , _zvssAlt          :: !Text
+    , _zvssAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsSetService'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data ZoneViewsSetService = ZoneViewsSetService
 -- * 'zvssFields'
 --
 -- * 'zvssAlt'
-zoneViewsSetService
+zoneViewsSetService'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsSetService
-zoneViewsSetService pZvssResourceView_ pZvssProject_ pZvssZone_ =
-    ZoneViewsSetService
+    -> ZoneViewsSetService'
+zoneViewsSetService' pZvssResourceView_ pZvssProject_ pZvssZone_ =
+    ZoneViewsSetService'
     { _zvssQuotaUser = Nothing
     , _zvssPrettyPrint = True
     , _zvssResourceView = pZvssResourceView_
@@ -109,7 +117,7 @@ zoneViewsSetService pZvssResourceView_ pZvssProject_ pZvssZone_ =
     , _zvssKey = Nothing
     , _zvssOauthToken = Nothing
     , _zvssFields = Nothing
-    , _zvssAlt = "json"
+    , _zvssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,14 +173,14 @@ zvssFields
   = lens _zvssFields (\ s a -> s{_zvssFields = a})
 
 -- | Data format for the response.
-zvssAlt :: Lens' ZoneViewsSetService' Text
+zvssAlt :: Lens' ZoneViewsSetService' Alt
 zvssAlt = lens _zvssAlt (\ s a -> s{_zvssAlt = a})
 
 instance GoogleRequest ZoneViewsSetService' where
         type Rs ZoneViewsSetService' = Operation
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsSetService{..}
-          = go _zvssQuotaUser _zvssPrettyPrint
+        requestWithRoute r u ZoneViewsSetService'{..}
+          = go _zvssQuotaUser (Just _zvssPrettyPrint)
               _zvssResourceView
               _zvssProject
               _zvssUserIp
@@ -180,9 +188,9 @@ instance GoogleRequest ZoneViewsSetService' where
               _zvssKey
               _zvssOauthToken
               _zvssFields
-              _zvssAlt
+              (Just _zvssAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneViewsSetServiceAPI)
+                      (Proxy :: Proxy ZoneViewsSetServiceResource)
                       r
                       u

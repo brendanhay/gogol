@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,133 +20,147 @@
 -- | Gets a variant by ID.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsGet@.
-module Genomics.Variants.Get
+module Network.Google.Resource.Genomics.Variants.Get
     (
     -- * REST Resource
-      VariantsGetAPI
+      VariantsGetResource
 
     -- * Creating a Request
-    , variantsGet
-    , VariantsGet
+    , variantsGet'
+    , VariantsGet'
 
     -- * Request Lenses
-    , vgQuotaUser
-    , vgPrettyPrint
-    , vgUserIp
-    , vgKey
-    , vgVariantId
-    , vgOauthToken
-    , vgFields
-    , vgAlt
+    , vggQuotaUser
+    , vggPrettyPrint
+    , vggUserIp
+    , vggKey
+    , vggVariantId
+    , vggOauthToken
+    , vggFields
+    , vggAlt
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsGet@ which the
--- 'VariantsGet' request conforms to.
-type VariantsGetAPI =
+-- 'VariantsGet'' request conforms to.
+type VariantsGetResource =
      "variants" :>
-       Capture "variantId" Text :> Get '[JSON] Variant
+       Capture "variantId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Variant
 
 -- | Gets a variant by ID.
 --
--- /See:/ 'variantsGet' smart constructor.
-data VariantsGet = VariantsGet
-    { _vgQuotaUser   :: !(Maybe Text)
-    , _vgPrettyPrint :: !Bool
-    , _vgUserIp      :: !(Maybe Text)
-    , _vgKey         :: !(Maybe Text)
-    , _vgVariantId   :: !Text
-    , _vgOauthToken  :: !(Maybe Text)
-    , _vgFields      :: !(Maybe Text)
-    , _vgAlt         :: !Text
+-- /See:/ 'variantsGet'' smart constructor.
+data VariantsGet' = VariantsGet'
+    { _vggQuotaUser   :: !(Maybe Text)
+    , _vggPrettyPrint :: !Bool
+    , _vggUserIp      :: !(Maybe Text)
+    , _vggKey         :: !(Maybe Text)
+    , _vggVariantId   :: !Text
+    , _vggOauthToken  :: !(Maybe Text)
+    , _vggFields      :: !(Maybe Text)
+    , _vggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vgQuotaUser'
+-- * 'vggQuotaUser'
 --
--- * 'vgPrettyPrint'
+-- * 'vggPrettyPrint'
 --
--- * 'vgUserIp'
+-- * 'vggUserIp'
 --
--- * 'vgKey'
+-- * 'vggKey'
 --
--- * 'vgVariantId'
+-- * 'vggVariantId'
 --
--- * 'vgOauthToken'
+-- * 'vggOauthToken'
 --
--- * 'vgFields'
+-- * 'vggFields'
 --
--- * 'vgAlt'
-variantsGet
+-- * 'vggAlt'
+variantsGet'
     :: Text -- ^ 'variantId'
-    -> VariantsGet
-variantsGet pVgVariantId_ =
-    VariantsGet
-    { _vgQuotaUser = Nothing
-    , _vgPrettyPrint = True
-    , _vgUserIp = Nothing
-    , _vgKey = Nothing
-    , _vgVariantId = pVgVariantId_
-    , _vgOauthToken = Nothing
-    , _vgFields = Nothing
-    , _vgAlt = "json"
+    -> VariantsGet'
+variantsGet' pVggVariantId_ =
+    VariantsGet'
+    { _vggQuotaUser = Nothing
+    , _vggPrettyPrint = True
+    , _vggUserIp = Nothing
+    , _vggKey = Nothing
+    , _vggVariantId = pVggVariantId_
+    , _vggOauthToken = Nothing
+    , _vggFields = Nothing
+    , _vggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-vgQuotaUser :: Lens' VariantsGet' (Maybe Text)
-vgQuotaUser
-  = lens _vgQuotaUser (\ s a -> s{_vgQuotaUser = a})
+vggQuotaUser :: Lens' VariantsGet' (Maybe Text)
+vggQuotaUser
+  = lens _vggQuotaUser (\ s a -> s{_vggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-vgPrettyPrint :: Lens' VariantsGet' Bool
-vgPrettyPrint
-  = lens _vgPrettyPrint
-      (\ s a -> s{_vgPrettyPrint = a})
+vggPrettyPrint :: Lens' VariantsGet' Bool
+vggPrettyPrint
+  = lens _vggPrettyPrint
+      (\ s a -> s{_vggPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vgUserIp :: Lens' VariantsGet' (Maybe Text)
-vgUserIp = lens _vgUserIp (\ s a -> s{_vgUserIp = a})
+vggUserIp :: Lens' VariantsGet' (Maybe Text)
+vggUserIp
+  = lens _vggUserIp (\ s a -> s{_vggUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgKey :: Lens' VariantsGet' (Maybe Text)
-vgKey = lens _vgKey (\ s a -> s{_vgKey = a})
+vggKey :: Lens' VariantsGet' (Maybe Text)
+vggKey = lens _vggKey (\ s a -> s{_vggKey = a})
 
 -- | The ID of the variant.
-vgVariantId :: Lens' VariantsGet' Text
-vgVariantId
-  = lens _vgVariantId (\ s a -> s{_vgVariantId = a})
+vggVariantId :: Lens' VariantsGet' Text
+vggVariantId
+  = lens _vggVariantId (\ s a -> s{_vggVariantId = a})
 
 -- | OAuth 2.0 token for the current user.
-vgOauthToken :: Lens' VariantsGet' (Maybe Text)
-vgOauthToken
-  = lens _vgOauthToken (\ s a -> s{_vgOauthToken = a})
+vggOauthToken :: Lens' VariantsGet' (Maybe Text)
+vggOauthToken
+  = lens _vggOauthToken
+      (\ s a -> s{_vggOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-vgFields :: Lens' VariantsGet' (Maybe Text)
-vgFields = lens _vgFields (\ s a -> s{_vgFields = a})
+vggFields :: Lens' VariantsGet' (Maybe Text)
+vggFields
+  = lens _vggFields (\ s a -> s{_vggFields = a})
 
 -- | Data format for the response.
-vgAlt :: Lens' VariantsGet' Text
-vgAlt = lens _vgAlt (\ s a -> s{_vgAlt = a})
+vggAlt :: Lens' VariantsGet' Alt
+vggAlt = lens _vggAlt (\ s a -> s{_vggAlt = a})
 
 instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsGet{..}
-          = go _vgQuotaUser _vgPrettyPrint _vgUserIp _vgKey
-              _vgVariantId
-              _vgOauthToken
-              _vgFields
-              _vgAlt
+        requestWithRoute r u VariantsGet'{..}
+          = go _vggQuotaUser (Just _vggPrettyPrint) _vggUserIp
+              _vggKey
+              _vggVariantId
+              _vggOauthToken
+              _vggFields
+              (Just _vggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VariantsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy VariantsGetResource)
+                      r
+                      u

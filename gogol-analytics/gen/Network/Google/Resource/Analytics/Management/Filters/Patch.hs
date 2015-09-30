@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing filter. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersPatch@.
-module Analytics.Management.Filters.Patch
+module Network.Google.Resource.Analytics.Management.Filters.Patch
     (
     -- * REST Resource
-      ManagementFiltersPatchAPI
+      ManagementFiltersPatchResource
 
     -- * Creating a Request
-    , managementFiltersPatch
-    , ManagementFiltersPatch
+    , managementFiltersPatch'
+    , ManagementFiltersPatch'
 
     -- * Request Lenses
     , mfpQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersPatch@ which the
--- 'ManagementFiltersPatch' request conforms to.
-type ManagementFiltersPatchAPI =
+-- 'ManagementFiltersPatch'' request conforms to.
+type ManagementFiltersPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             Capture "filterId" Text :> Patch '[JSON] Filter
+             Capture "filterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Filter
 
 -- | Updates an existing filter. This method supports patch semantics.
 --
--- /See:/ 'managementFiltersPatch' smart constructor.
-data ManagementFiltersPatch = ManagementFiltersPatch
+-- /See:/ 'managementFiltersPatch'' smart constructor.
+data ManagementFiltersPatch' = ManagementFiltersPatch'
     { _mfpQuotaUser   :: !(Maybe Text)
     , _mfpPrettyPrint :: !Bool
     , _mfpFilterId    :: !Text
@@ -64,7 +72,7 @@ data ManagementFiltersPatch = ManagementFiltersPatch
     , _mfpKey         :: !(Maybe Text)
     , _mfpOauthToken  :: !(Maybe Text)
     , _mfpFields      :: !(Maybe Text)
-    , _mfpAlt         :: !Text
+    , _mfpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersPatch'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ManagementFiltersPatch = ManagementFiltersPatch
 -- * 'mfpFields'
 --
 -- * 'mfpAlt'
-managementFiltersPatch
+managementFiltersPatch'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
-    -> ManagementFiltersPatch
-managementFiltersPatch pMfpFilterId_ pMfpAccountId_ =
-    ManagementFiltersPatch
+    -> ManagementFiltersPatch'
+managementFiltersPatch' pMfpFilterId_ pMfpAccountId_ =
+    ManagementFiltersPatch'
     { _mfpQuotaUser = Nothing
     , _mfpPrettyPrint = False
     , _mfpFilterId = pMfpFilterId_
@@ -102,7 +110,7 @@ managementFiltersPatch pMfpFilterId_ pMfpAccountId_ =
     , _mfpKey = Nothing
     , _mfpOauthToken = Nothing
     , _mfpFields = Nothing
-    , _mfpAlt = "json"
+    , _mfpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ mfpFields
   = lens _mfpFields (\ s a -> s{_mfpFields = a})
 
 -- | Data format for the response.
-mfpAlt :: Lens' ManagementFiltersPatch' Text
+mfpAlt :: Lens' ManagementFiltersPatch' Alt
 mfpAlt = lens _mfpAlt (\ s a -> s{_mfpAlt = a})
 
 instance GoogleRequest ManagementFiltersPatch' where
         type Rs ManagementFiltersPatch' = Filter
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersPatch{..}
-          = go _mfpQuotaUser _mfpPrettyPrint _mfpFilterId
+        requestWithRoute r u ManagementFiltersPatch'{..}
+          = go _mfpQuotaUser (Just _mfpPrettyPrint)
+              _mfpFilterId
               _mfpUserIp
               _mfpAccountId
               _mfpKey
               _mfpOauthToken
               _mfpFields
-              _mfpAlt
+              (Just _mfpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersPatchAPI)
+                      (Proxy :: Proxy ManagementFiltersPatchResource)
                       r
                       u

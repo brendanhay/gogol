@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a specified caption track.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsDelete@.
-module YouTube.Captions.Delete
+module Network.Google.Resource.YouTube.Captions.Delete
     (
     -- * REST Resource
-      CaptionsDeleteAPI
+      CaptionsDeleteResource
 
     -- * Creating a Request
-    , captionsDelete
-    , CaptionsDelete
+    , captionsDelete'
+    , CaptionsDelete'
 
     -- * Request Lenses
     , cddOnBehalfOf
@@ -45,17 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCaptionsDelete@ which the
--- 'CaptionsDelete' request conforms to.
-type CaptionsDeleteAPI =
+-- 'CaptionsDelete'' request conforms to.
+type CaptionsDeleteResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :> Delete '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a specified caption track.
 --
--- /See:/ 'captionsDelete' smart constructor.
-data CaptionsDelete = CaptionsDelete
+-- /See:/ 'captionsDelete'' smart constructor.
+data CaptionsDelete' = CaptionsDelete'
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddQuotaUser              :: !(Maybe Text)
     , _cddPrettyPrint            :: !Bool
@@ -65,7 +73,7 @@ data CaptionsDelete = CaptionsDelete
     , _cddId                     :: !Text
     , _cddOauthToken             :: !(Maybe Text)
     , _cddFields                 :: !(Maybe Text)
-    , _cddAlt                    :: !Text
+    , _cddAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDelete'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data CaptionsDelete = CaptionsDelete
 -- * 'cddFields'
 --
 -- * 'cddAlt'
-captionsDelete
+captionsDelete'
     :: Text -- ^ 'id'
-    -> CaptionsDelete
-captionsDelete pCddId_ =
-    CaptionsDelete
+    -> CaptionsDelete'
+captionsDelete' pCddId_ =
+    CaptionsDelete'
     { _cddOnBehalfOf = Nothing
     , _cddQuotaUser = Nothing
     , _cddPrettyPrint = True
@@ -105,7 +113,7 @@ captionsDelete pCddId_ =
     , _cddId = pCddId_
     , _cddOauthToken = Nothing
     , _cddFields = Nothing
-    , _cddAlt = "json"
+    , _cddAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -173,22 +181,24 @@ cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
 -- | Data format for the response.
-cddAlt :: Lens' CaptionsDelete' Text
+cddAlt :: Lens' CaptionsDelete' Alt
 cddAlt = lens _cddAlt (\ s a -> s{_cddAlt = a})
 
 instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsDelete{..}
-          = go _cddOnBehalfOf _cddQuotaUser _cddPrettyPrint
+        requestWithRoute r u CaptionsDelete'{..}
+          = go _cddOnBehalfOf _cddQuotaUser
+              (Just _cddPrettyPrint)
               _cddUserIp
               _cddOnBehalfOfContentOwner
               _cddKey
               (Just _cddId)
               _cddOauthToken
               _cddFields
-              _cddAlt
+              (Just _cddAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CaptionsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CaptionsDeleteResource)
                       r
                       u

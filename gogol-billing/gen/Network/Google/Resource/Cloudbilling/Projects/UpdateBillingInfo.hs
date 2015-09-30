@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -45,14 +46,14 @@
 -- billing account.
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudbillingProjectsUpdateBillingInfo@.
-module Cloudbilling.Projects.UpdateBillingInfo
+module Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
     (
     -- * REST Resource
-      ProjectsUpdateBillingInfoAPI
+      ProjectsUpdateBillingInfoResource
 
     -- * Creating a Request
-    , projectsUpdateBillingInfo
-    , ProjectsUpdateBillingInfo
+    , projectsUpdateBillingInfo'
+    , ProjectsUpdateBillingInfo'
 
     -- * Request Lenses
     , pubiXgafv
@@ -75,11 +76,25 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudbillingProjectsUpdateBillingInfo@ which the
--- 'ProjectsUpdateBillingInfo' request conforms to.
-type ProjectsUpdateBillingInfoAPI =
+-- 'ProjectsUpdateBillingInfo'' request conforms to.
+type ProjectsUpdateBillingInfoResource =
      "v1" :>
        "{+name}" :>
-         "billingInfo" :> Put '[JSON] ProjectBillingInfo
+         "billingInfo" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Put '[JSON] ProjectBillingInfo
 
 -- | Sets or updates the billing account associated with a project. You
 -- specify the new billing account by setting the \`billing_account_name\`
@@ -109,8 +124,8 @@ type ProjectsUpdateBillingInfoAPI =
 -- billing, you should always call this method with the name of an *open*
 -- billing account.
 --
--- /See:/ 'projectsUpdateBillingInfo' smart constructor.
-data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo
+-- /See:/ 'projectsUpdateBillingInfo'' smart constructor.
+data ProjectsUpdateBillingInfo' = ProjectsUpdateBillingInfo'
     { _pubiXgafv          :: !(Maybe Text)
     , _pubiQuotaUser      :: !(Maybe Text)
     , _pubiPrettyPrint    :: !Bool
@@ -158,11 +173,11 @@ data ProjectsUpdateBillingInfo = ProjectsUpdateBillingInfo
 -- * 'pubiCallback'
 --
 -- * 'pubiAlt'
-projectsUpdateBillingInfo
+projectsUpdateBillingInfo'
     :: Text -- ^ 'name'
-    -> ProjectsUpdateBillingInfo
-projectsUpdateBillingInfo pPubiName_ =
-    ProjectsUpdateBillingInfo
+    -> ProjectsUpdateBillingInfo'
+projectsUpdateBillingInfo' pPubiName_ =
+    ProjectsUpdateBillingInfo'
     { _pubiXgafv = Nothing
     , _pubiQuotaUser = Nothing
     , _pubiPrettyPrint = True
@@ -262,10 +277,11 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
         type Rs ProjectsUpdateBillingInfo' =
              ProjectBillingInfo
         request = requestWithRoute defReq billingURL
-        requestWithRoute r u ProjectsUpdateBillingInfo{..}
-          = go _pubiXgafv _pubiQuotaUser _pubiPrettyPrint
+        requestWithRoute r u ProjectsUpdateBillingInfo'{..}
+          = go _pubiXgafv _pubiQuotaUser
+              (Just _pubiPrettyPrint)
               _pubiUploadProtocol
-              _pubiPp
+              (Just _pubiPp)
               _pubiAccessToken
               _pubiUploadType
               _pubiBearerToken
@@ -274,9 +290,9 @@ instance GoogleRequest ProjectsUpdateBillingInfo'
               _pubiOauthToken
               _pubiFields
               _pubiCallback
-              _pubiAlt
+              (Just _pubiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsUpdateBillingInfoAPI)
+                      (Proxy :: Proxy ProjectsUpdateBillingInfoResource)
                       r
                       u

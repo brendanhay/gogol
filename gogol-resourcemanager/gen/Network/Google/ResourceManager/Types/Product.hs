@@ -450,6 +450,35 @@ instance ToJSON TestIAMPermissionsResponse where
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
 
+-- | The labels associated with this project. Label keys must be between 1
+-- and 63 characters long and must conform to the following regular
+-- expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be
+-- between 0 and 63 characters long and must conform to the regular
+-- expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256
+-- labels can be associated with a given resource. Clients should store
+-- labels in a representation such as JSON that does not depend on specific
+-- characters being disallowed. Example: \"environment\" : \"dev\"
+-- Read-write.
+--
+-- /See:/ 'projectLabels' smart constructor.
+data ProjectLabels =
+    ProjectLabels
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProjectLabels' with the minimum fields required to make a request.
+--
+projectLabels
+    :: ProjectLabels
+projectLabels = ProjectLabels
+
+instance FromJSON ProjectLabels where
+        parseJSON
+          = withObject "ProjectLabels"
+              (\ o -> pure ProjectLabels)
+
+instance ToJSON ProjectLabels where
+        toJSON = const (Object mempty)
+
 -- | Defines an Identity and Access Management (IAM) policy. It is used to
 -- specify access control policies for Cloud Platform resources. A
 -- \`Policy\` consists of a list of \`bindings\`. A \`Binding\` binds a

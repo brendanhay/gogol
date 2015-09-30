@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update Organization Unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsUpdate@.
-module Directory.Orgunits.Update
+module Network.Google.Resource.Directory.Orgunits.Update
     (
     -- * REST Resource
-      OrgunitsUpdateAPI
+      OrgunitsUpdateResource
 
     -- * Creating a Request
-    , orgunitsUpdate
-    , OrgunitsUpdate
+    , orgunitsUpdate'
+    , OrgunitsUpdate'
 
     -- * Request Lenses
     , oQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsUpdate@ which the
--- 'OrgunitsUpdate' request conforms to.
-type OrgunitsUpdateAPI =
+-- 'OrgunitsUpdate'' request conforms to.
+type OrgunitsUpdateResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :> "orgUnitPath*}" :> Put '[JSON] OrgUnit
+         "orgunits{" :>
+           "orgUnitPath*}" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] OrgUnit
 
 -- | Update Organization Unit
 --
--- /See:/ 'orgunitsUpdate' smart constructor.
-data OrgunitsUpdate = OrgunitsUpdate
+-- /See:/ 'orgunitsUpdate'' smart constructor.
+data OrgunitsUpdate' = OrgunitsUpdate'
     { _oQuotaUser   :: !(Maybe Text)
     , _oPrettyPrint :: !Bool
     , _oUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data OrgunitsUpdate = OrgunitsUpdate
     , _oKey         :: !(Maybe Text)
     , _oOauthToken  :: !(Maybe Text)
     , _oFields      :: !(Maybe Text)
-    , _oAlt         :: !Text
+    , _oAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsUpdate'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data OrgunitsUpdate = OrgunitsUpdate
 -- * 'oFields'
 --
 -- * 'oAlt'
-orgunitsUpdate
+orgunitsUpdate'
     :: Text -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
-    -> OrgunitsUpdate
-orgunitsUpdate pOOrgUnitPath_ pOCustomerId_ =
-    OrgunitsUpdate
+    -> OrgunitsUpdate'
+orgunitsUpdate' pOOrgUnitPath_ pOCustomerId_ =
+    OrgunitsUpdate'
     { _oQuotaUser = Nothing
     , _oPrettyPrint = True
     , _oUserIp = Nothing
@@ -100,7 +109,7 @@ orgunitsUpdate pOOrgUnitPath_ pOCustomerId_ =
     , _oKey = Nothing
     , _oOauthToken = Nothing
     , _oFields = Nothing
-    , _oAlt = "json"
+    , _oAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,20 +155,22 @@ oFields :: Lens' OrgunitsUpdate' (Maybe Text)
 oFields = lens _oFields (\ s a -> s{_oFields = a})
 
 -- | Data format for the response.
-oAlt :: Lens' OrgunitsUpdate' Text
+oAlt :: Lens' OrgunitsUpdate' Alt
 oAlt = lens _oAlt (\ s a -> s{_oAlt = a})
 
 instance GoogleRequest OrgunitsUpdate' where
         type Rs OrgunitsUpdate' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsUpdate{..}
-          = go _oQuotaUser _oPrettyPrint _oUserIp _oOrgUnitPath
+        requestWithRoute r u OrgunitsUpdate'{..}
+          = go _oQuotaUser (Just _oPrettyPrint) _oUserIp
+              _oOrgUnitPath
               _oCustomerId
               _oKey
               _oOauthToken
               _oFields
-              _oAlt
+              (Just _oAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new creative field value.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesInsert@.
-module DFAReporting.CreativeFieldValues.Insert
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.Insert
     (
     -- * REST Resource
-      CreativeFieldValuesInsertAPI
+      CreativeFieldValuesInsertResource
 
     -- * Creating a Request
-    , creativeFieldValuesInsert
-    , CreativeFieldValuesInsert
+    , creativeFieldValuesInsert'
+    , CreativeFieldValuesInsert'
 
     -- * Request Lenses
     , cfviCreativeFieldId
@@ -44,19 +45,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesInsert@ which the
--- 'CreativeFieldValuesInsert' request conforms to.
-type CreativeFieldValuesInsertAPI =
+-- 'CreativeFieldValuesInsert'' request conforms to.
+type CreativeFieldValuesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               Post '[JSON] CreativeFieldValue
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] CreativeFieldValue
 
 -- | Inserts a new creative field value.
 --
--- /See:/ 'creativeFieldValuesInsert' smart constructor.
-data CreativeFieldValuesInsert = CreativeFieldValuesInsert
+-- /See:/ 'creativeFieldValuesInsert'' smart constructor.
+data CreativeFieldValuesInsert' = CreativeFieldValuesInsert'
     { _cfviCreativeFieldId :: !Int64
     , _cfviQuotaUser       :: !(Maybe Text)
     , _cfviPrettyPrint     :: !Bool
@@ -65,7 +73,7 @@ data CreativeFieldValuesInsert = CreativeFieldValuesInsert
     , _cfviKey             :: !(Maybe Text)
     , _cfviOauthToken      :: !(Maybe Text)
     , _cfviFields          :: !(Maybe Text)
-    , _cfviAlt             :: !Text
+    , _cfviAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data CreativeFieldValuesInsert = CreativeFieldValuesInsert
 -- * 'cfviFields'
 --
 -- * 'cfviAlt'
-creativeFieldValuesInsert
+creativeFieldValuesInsert'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
-    -> CreativeFieldValuesInsert
-creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProfileId_ =
-    CreativeFieldValuesInsert
+    -> CreativeFieldValuesInsert'
+creativeFieldValuesInsert' pCfviCreativeFieldId_ pCfviProfileId_ =
+    CreativeFieldValuesInsert'
     { _cfviCreativeFieldId = pCfviCreativeFieldId_
     , _cfviQuotaUser = Nothing
     , _cfviPrettyPrint = True
@@ -103,7 +111,7 @@ creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProfileId_ =
     , _cfviKey = Nothing
     , _cfviOauthToken = Nothing
     , _cfviFields = Nothing
-    , _cfviAlt = "json"
+    , _cfviAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -156,7 +164,7 @@ cfviFields
   = lens _cfviFields (\ s a -> s{_cfviFields = a})
 
 -- | Data format for the response.
-cfviAlt :: Lens' CreativeFieldValuesInsert' Text
+cfviAlt :: Lens' CreativeFieldValuesInsert' Alt
 cfviAlt = lens _cfviAlt (\ s a -> s{_cfviAlt = a})
 
 instance GoogleRequest CreativeFieldValuesInsert'
@@ -164,17 +172,17 @@ instance GoogleRequest CreativeFieldValuesInsert'
         type Rs CreativeFieldValuesInsert' =
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesInsert{..}
+        requestWithRoute r u CreativeFieldValuesInsert'{..}
           = go _cfviCreativeFieldId _cfviQuotaUser
-              _cfviPrettyPrint
+              (Just _cfviPrettyPrint)
               _cfviUserIp
               _cfviProfileId
               _cfviKey
               _cfviOauthToken
               _cfviFields
-              _cfviAlt
+              (Just _cfviAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesInsertAPI)
+                      (Proxy :: Proxy CreativeFieldValuesInsertResource)
                       r
                       u

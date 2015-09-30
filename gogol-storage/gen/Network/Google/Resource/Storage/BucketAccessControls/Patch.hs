@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsPatch@.
-module Storage.BucketAccessControls.Patch
+module Network.Google.Resource.Storage.BucketAccessControls.Patch
     (
     -- * REST Resource
-      BucketAccessControlsPatchAPI
+      BucketAccessControlsPatchResource
 
     -- * Creating a Request
-    , bucketAccessControlsPatch
-    , BucketAccessControlsPatch
+    , bucketAccessControlsPatch'
+    , BucketAccessControlsPatch'
 
     -- * Request Lenses
     , bacpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsPatch@ which the
--- 'BucketAccessControlsPatch' request conforms to.
-type BucketAccessControlsPatchAPI =
+-- 'BucketAccessControlsPatch'' request conforms to.
+type BucketAccessControlsPatchResource =
      "b" :>
        Capture "bucket" Text :>
          "acl" :>
            Capture "entity" Text :>
-             Patch '[JSON] BucketAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket. This method supports patch
 -- semantics.
 --
--- /See:/ 'bucketAccessControlsPatch' smart constructor.
-data BucketAccessControlsPatch = BucketAccessControlsPatch
+-- /See:/ 'bucketAccessControlsPatch'' smart constructor.
+data BucketAccessControlsPatch' = BucketAccessControlsPatch'
     { _bacpQuotaUser   :: !(Maybe Text)
     , _bacpPrettyPrint :: !Bool
     , _bacpUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data BucketAccessControlsPatch = BucketAccessControlsPatch
     , _bacpOauthToken  :: !(Maybe Text)
     , _bacpEntity      :: !Text
     , _bacpFields      :: !(Maybe Text)
-    , _bacpAlt         :: !Text
+    , _bacpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data BucketAccessControlsPatch = BucketAccessControlsPatch
 -- * 'bacpFields'
 --
 -- * 'bacpAlt'
-bucketAccessControlsPatch
+bucketAccessControlsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> BucketAccessControlsPatch
-bucketAccessControlsPatch pBacpBucket_ pBacpEntity_ =
-    BucketAccessControlsPatch
+    -> BucketAccessControlsPatch'
+bucketAccessControlsPatch' pBacpBucket_ pBacpEntity_ =
+    BucketAccessControlsPatch'
     { _bacpQuotaUser = Nothing
     , _bacpPrettyPrint = True
     , _bacpUserIp = Nothing
@@ -104,7 +112,7 @@ bucketAccessControlsPatch pBacpBucket_ pBacpEntity_ =
     , _bacpOauthToken = Nothing
     , _bacpEntity = pBacpEntity_
     , _bacpFields = Nothing
-    , _bacpAlt = "json"
+    , _bacpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ bacpFields
   = lens _bacpFields (\ s a -> s{_bacpFields = a})
 
 -- | Data format for the response.
-bacpAlt :: Lens' BucketAccessControlsPatch' Text
+bacpAlt :: Lens' BucketAccessControlsPatch' Alt
 bacpAlt = lens _bacpAlt (\ s a -> s{_bacpAlt = a})
 
 instance GoogleRequest BucketAccessControlsPatch'
@@ -165,16 +173,17 @@ instance GoogleRequest BucketAccessControlsPatch'
         type Rs BucketAccessControlsPatch' =
              BucketAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsPatch{..}
-          = go _bacpQuotaUser _bacpPrettyPrint _bacpUserIp
+        requestWithRoute r u BucketAccessControlsPatch'{..}
+          = go _bacpQuotaUser (Just _bacpPrettyPrint)
+              _bacpUserIp
               _bacpBucket
               _bacpKey
               _bacpOauthToken
               _bacpEntity
               _bacpFields
-              _bacpAlt
+              (Just _bacpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsPatchAPI)
+                      (Proxy :: Proxy BucketAccessControlsPatchResource)
                       r
                       u

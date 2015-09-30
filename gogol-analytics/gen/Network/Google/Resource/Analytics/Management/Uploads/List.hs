@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List uploads to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsList@.
-module Analytics.Management.Uploads.List
+module Network.Google.Resource.Analytics.Management.Uploads.List
     (
     -- * REST Resource
-      ManagementUploadsListAPI
+      ManagementUploadsListResource
 
     -- * Creating a Request
-    , managementUploadsList
-    , ManagementUploadsList
+    , managementUploadsList'
+    , ManagementUploadsList'
 
     -- * Request Lenses
     , mulQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsList@ which the
--- 'ManagementUploadsList' request conforms to.
-type ManagementUploadsListAPI =
+-- 'ManagementUploadsList'' request conforms to.
+type ManagementUploadsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,13 +58,20 @@ type ManagementUploadsListAPI =
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
                    "uploads" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :> Get '[JSON] Uploads
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Get '[JSON] Uploads
 
 -- | List uploads to which the user has access.
 --
--- /See:/ 'managementUploadsList' smart constructor.
-data ManagementUploadsList = ManagementUploadsList
+-- /See:/ 'managementUploadsList'' smart constructor.
+data ManagementUploadsList' = ManagementUploadsList'
     { _mulQuotaUser          :: !(Maybe Text)
     , _mulPrettyPrint        :: !Bool
     , _mulWebPropertyId      :: !Text
@@ -75,7 +83,7 @@ data ManagementUploadsList = ManagementUploadsList
     , _mulStartIndex         :: !(Maybe Int32)
     , _mulMaxResults         :: !(Maybe Int32)
     , _mulFields             :: !(Maybe Text)
-    , _mulAlt                :: !Text
+    , _mulAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
@@ -105,13 +113,13 @@ data ManagementUploadsList = ManagementUploadsList
 -- * 'mulFields'
 --
 -- * 'mulAlt'
-managementUploadsList
+managementUploadsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
     -> Text -- ^ 'accountId'
-    -> ManagementUploadsList
-managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
-    ManagementUploadsList
+    -> ManagementUploadsList'
+managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ =
+    ManagementUploadsList'
     { _mulQuotaUser = Nothing
     , _mulPrettyPrint = False
     , _mulWebPropertyId = pMulWebPropertyId_
@@ -123,7 +131,7 @@ managementUploadsList pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_ 
     , _mulStartIndex = Nothing
     , _mulMaxResults = Nothing
     , _mulFields = Nothing
-    , _mulAlt = "json"
+    , _mulAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -193,14 +201,15 @@ mulFields
   = lens _mulFields (\ s a -> s{_mulFields = a})
 
 -- | Data format for the response.
-mulAlt :: Lens' ManagementUploadsList' Text
+mulAlt :: Lens' ManagementUploadsList' Alt
 mulAlt = lens _mulAlt (\ s a -> s{_mulAlt = a})
 
 instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsList{..}
-          = go _mulQuotaUser _mulPrettyPrint _mulWebPropertyId
+        requestWithRoute r u ManagementUploadsList'{..}
+          = go _mulQuotaUser (Just _mulPrettyPrint)
+              _mulWebPropertyId
               _mulUserIp
               _mulCustomDataSourceId
               _mulAccountId
@@ -209,9 +218,9 @@ instance GoogleRequest ManagementUploadsList' where
               _mulStartIndex
               _mulMaxResults
               _mulFields
-              _mulAlt
+              (Just _mulAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUploadsListAPI)
+                      (Proxy :: Proxy ManagementUploadsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the messages in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesList@.
-module Gmail.Users.Messages.List
+module Network.Google.Resource.Gmail.Users.Messages.List
     (
     -- * REST Resource
-      UsersMessagesListAPI
+      UsersMessagesListResource
 
     -- * Creating a Request
-    , usersMessagesList
-    , UsersMessagesList
+    , usersMessagesList'
+    , UsersMessagesList'
 
     -- * Request Lenses
     , umlQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesList@ which the
--- 'UsersMessagesList' request conforms to.
-type UsersMessagesListAPI =
+-- 'UsersMessagesList'' request conforms to.
+type UsersMessagesListResource =
      Capture "userId" Text :>
        "messages" :>
-         QueryParam "q" Text :>
-           QueryParam "includeSpamTrash" Bool :>
-             QueryParams "labelIds" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] ListMessagesResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "q" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "includeSpamTrash" Bool :>
+                     QueryParams "labelIds" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] ListMessagesResponse
 
 -- | Lists the messages in the user\'s mailbox.
 --
--- /See:/ 'usersMessagesList' smart constructor.
-data UsersMessagesList = UsersMessagesList
+-- /See:/ 'usersMessagesList'' smart constructor.
+data UsersMessagesList' = UsersMessagesList'
     { _umlQuotaUser        :: !(Maybe Text)
     , _umlPrettyPrint      :: !Bool
     , _umlUserIp           :: !(Maybe Text)
@@ -75,7 +83,7 @@ data UsersMessagesList = UsersMessagesList
     , _umlOauthToken       :: !(Maybe Text)
     , _umlMaxResults       :: !Word32
     , _umlFields           :: !(Maybe Text)
-    , _umlAlt              :: !Text
+    , _umlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesList'' with the minimum fields required to make a request.
@@ -107,11 +115,11 @@ data UsersMessagesList = UsersMessagesList
 -- * 'umlFields'
 --
 -- * 'umlAlt'
-usersMessagesList
+usersMessagesList'
     :: Text
-    -> UsersMessagesList
-usersMessagesList pUmlUserId_ =
-    UsersMessagesList
+    -> UsersMessagesList'
+usersMessagesList' pUmlUserId_ =
+    UsersMessagesList'
     { _umlQuotaUser = Nothing
     , _umlPrettyPrint = True
     , _umlUserIp = Nothing
@@ -124,7 +132,7 @@ usersMessagesList pUmlUserId_ =
     , _umlOauthToken = Nothing
     , _umlMaxResults = 100
     , _umlFields = Nothing
-    , _umlAlt = "json"
+    , _umlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,15 @@ umlFields
   = lens _umlFields (\ s a -> s{_umlFields = a})
 
 -- | Data format for the response.
-umlAlt :: Lens' UsersMessagesList' Text
+umlAlt :: Lens' UsersMessagesList' Alt
 umlAlt = lens _umlAlt (\ s a -> s{_umlAlt = a})
 
 instance GoogleRequest UsersMessagesList' where
         type Rs UsersMessagesList' = ListMessagesResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesList{..}
-          = go _umlQuotaUser _umlPrettyPrint _umlUserIp _umlQ
+        requestWithRoute r u UsersMessagesList'{..}
+          = go _umlQuotaUser (Just _umlPrettyPrint) _umlUserIp
+              _umlQ
               _umlUserId
               _umlKey
               (Just _umlIncludeSpamTrash)
@@ -215,9 +224,9 @@ instance GoogleRequest UsersMessagesList' where
               _umlOauthToken
               (Just _umlMaxResults)
               _umlFields
-              _umlAlt
+              (Just _umlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesListAPI)
+                      (Proxy :: Proxy UsersMessagesListResource)
                       r
                       u

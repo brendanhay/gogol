@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Train a Prediction API model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsInsert@.
-module Prediction.Trainedmodels.Insert
+module Network.Google.Resource.Prediction.Trainedmodels.Insert
     (
     -- * REST Resource
-      TrainedmodelsInsertAPI
+      TrainedmodelsInsertResource
 
     -- * Creating a Request
-    , trainedmodelsInsert
-    , TrainedmodelsInsert
+    , trainedmodelsInsert'
+    , TrainedmodelsInsert'
 
     -- * Request Lenses
     , tiQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsInsert@ which the
--- 'TrainedmodelsInsert' request conforms to.
-type TrainedmodelsInsertAPI =
+-- 'TrainedmodelsInsert'' request conforms to.
+type TrainedmodelsInsertResource =
      Capture "project" Text :>
-       "trainedmodels" :> Post '[JSON] Insert2
+       "trainedmodels" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Insert2
 
 -- | Train a Prediction API model.
 --
--- /See:/ 'trainedmodelsInsert' smart constructor.
-data TrainedmodelsInsert = TrainedmodelsInsert
+-- /See:/ 'trainedmodelsInsert'' smart constructor.
+data TrainedmodelsInsert' = TrainedmodelsInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiProject     :: !Text
@@ -59,7 +67,7 @@ data TrainedmodelsInsert = TrainedmodelsInsert
     , _tiKey         :: !(Maybe Text)
     , _tiOauthToken  :: !(Maybe Text)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsInsert'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data TrainedmodelsInsert = TrainedmodelsInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-trainedmodelsInsert
+trainedmodelsInsert'
     :: Text -- ^ 'project'
-    -> TrainedmodelsInsert
-trainedmodelsInsert pTiProject_ =
-    TrainedmodelsInsert
+    -> TrainedmodelsInsert'
+trainedmodelsInsert' pTiProject_ =
+    TrainedmodelsInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiProject = pTiProject_
@@ -93,7 +101,7 @@ trainedmodelsInsert pTiProject_ =
     , _tiKey = Nothing
     , _tiOauthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,20 +143,21 @@ tiFields :: Lens' TrainedmodelsInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TrainedmodelsInsert' Text
+tiAlt :: Lens' TrainedmodelsInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TrainedmodelsInsert' where
         type Rs TrainedmodelsInsert' = Insert2
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsInsert{..}
-          = go _tiQuotaUser _tiPrettyPrint _tiProject _tiUserIp
+        requestWithRoute r u TrainedmodelsInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiProject
+              _tiUserIp
               _tiKey
               _tiOauthToken
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsInsertAPI)
+                      (Proxy :: Proxy TrainedmodelsInsertResource)
                       r
                       u

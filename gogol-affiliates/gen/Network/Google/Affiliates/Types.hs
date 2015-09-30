@@ -17,6 +17,16 @@ module Network.Google.Affiliates.Types
     -- * Service URL
       affiliatesURL
 
+    -- * CcOfferRewards
+    , CcOfferRewards
+    , ccOfferRewards
+    , corAmount
+    , corExpirationMonths
+    , corCategory
+    , corAdditionalDetails
+    , corMaxRewardTier
+    , corMinRewardTier
+
     -- * Event
     , Event
     , event
@@ -38,6 +48,27 @@ module Network.Google.Affiliates.Types
     , ePublisherId
     , eEarnings
     , ePublisherName
+
+    -- * GanPublishersGetRole
+    , GanPublishersGetRole (..)
+
+    -- * GanReportsGetEventType
+    , GanReportsGetEventType (..)
+
+    -- * GanReportsGetStatus
+    , GanReportsGetStatus (..)
+
+    -- * GanLinksListPromotionType
+    , GanLinksListPromotionType (..)
+
+    -- * GanLinksListRole
+    , GanLinksListRole (..)
+
+    -- * GanEventsListType
+    , GanEventsListType (..)
+
+    -- * GanReportsGetReportType
+    , GanReportsGetReportType (..)
 
     -- * Link
     , Link
@@ -70,11 +101,20 @@ module Network.Google.Affiliates.Types
     , mAmount
     , mCurrencyCode
 
+    -- * GanLinksInsertRole
+    , GanLinksInsertRole (..)
+
+    -- * GanAdvertisersListRole
+    , GanAdvertisersListRole (..)
+
     -- * CcOffers
     , CcOffers
     , ccOffers
     , coKind
     , coItems
+
+    -- * GanPublishersListRole
+    , GanPublishersListRole (..)
 
     -- * Advertisers
     , Advertisers
@@ -82,6 +122,14 @@ module Network.Google.Affiliates.Types
     , aNextPageToken
     , aKind
     , aItems
+
+    -- * CcOfferDefaultFees
+    , CcOfferDefaultFees
+    , ccOfferDefaultFees
+    , codfRateType
+    , codfMinRate
+    , codfCategory
+    , codfMaxRate
 
     -- * Report
     , Report
@@ -95,12 +143,73 @@ module Network.Google.Affiliates.Types
     , rColumnNames
     , rType
 
+    -- * GanLinksListAuthorship
+    , GanLinksListAuthorship (..)
+
+    -- * GanLinksGetRole
+    , GanLinksGetRole (..)
+
+    -- * CcOfferBonusRewards
+    , CcOfferBonusRewards
+    , ccOfferBonusRewards
+    , cobrAmount
+    , cobrDetails
+
+    -- * GanEventsListRole
+    , GanEventsListRole (..)
+
+    -- * GanLinksListLinkType
+    , GanLinksListLinkType (..)
+
+    -- * GanAdvertisersGetRole
+    , GanAdvertisersGetRole (..)
+
+    -- * EventProducts
+    , EventProducts
+    , eventProducts
+    , epSkuName
+    , epNetworkFee
+    , epQuantity
+    , epCategoryName
+    , epCategoryId
+    , epSku
+    , epPublisherFee
+    , epUnitPrice
+    , epEarnings
+
+    -- * GanAdvertisersListRelationshipStatus
+    , GanAdvertisersListRelationshipStatus (..)
+
+    -- * GanCcOffersListProjection
+    , GanCcOffersListProjection (..)
+
+    -- * GanReportsGetRole
+    , GanReportsGetRole (..)
+
     -- * Events
     , Events
     , events
     , eveNextPageToken
     , eveKind
     , eveItems
+
+    -- * GanEventsListChargeType
+    , GanEventsListChargeType (..)
+
+    -- * GanPublishersListRelationshipStatus
+    , GanPublishersListRelationshipStatus (..)
+
+    -- * LinkSpecialOffers
+    , LinkSpecialOffers
+    , linkSpecialOffers
+    , lsoFreeShippingMin
+    , lsoPercentOff
+    , lsoPriceCut
+    , lsoPriceCutMin
+    , lsoPercentOffMin
+    , lsoFreeShipping
+    , lsoPromotionCodes
+    , lsoFreeGift
 
     -- * Publishers
     , Publishers
@@ -222,6 +331,15 @@ module Network.Google.Affiliates.Types
     , pubId
     , pubEpcNinetyDayAverage
     , pubSites
+
+    -- * GanLinksListRelationshipStatus
+    , GanLinksListRelationshipStatus (..)
+
+    -- * GanEventsListStatus
+    , GanEventsListStatus (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Affiliates.Types.Product
@@ -229,7 +347,7 @@ import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta1' of the Google Affiliate Network API.
-affiliatesURL :: BaseURL
+affiliatesURL :: BaseUrl
 affiliatesURL
   = BaseUrl Https
       "https://www.googleapis.com/gan/v1beta1/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the annotation data.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersAnnotationDataGet@.
-module Books.Layers.AnnotationData.Get
+module Network.Google.Resource.Books.Layers.AnnotationData.Get
     (
     -- * REST Resource
-      LayersAnnotationDataGetAPI
+      LayersAnnotationDataGetResource
 
     -- * Creating a Request
-    , layersAnnotationDataGet
-    , LayersAnnotationDataGet
+    , layersAnnotationDataGet'
+    , LayersAnnotationDataGet'
 
     -- * Request Lenses
     , ladgQuotaUser
@@ -52,26 +53,34 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersAnnotationDataGet@ which the
--- 'LayersAnnotationDataGet' request conforms to.
-type LayersAnnotationDataGetAPI =
+-- 'LayersAnnotationDataGet'' request conforms to.
+type LayersAnnotationDataGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
              "data" :>
                Capture "annotationDataId" Text :>
-                 QueryParam "w" Int32 :>
-                   QueryParam "scale" Int32 :>
-                     QueryParam "locale" Text :>
-                       QueryParam "contentVersion" Text :>
-                         QueryParam "allowWebDefinitions" Bool :>
-                           QueryParam "source" Text :>
-                             QueryParam "h" Int32 :> Get '[JSON] Annotationdata
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "w" Int32 :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "scale" Int32 :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "locale" Text :>
+                             QueryParam "contentVersion" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "allowWebDefinitions" Bool :>
+                                   QueryParam "source" Text :>
+                                     QueryParam "h" Int32 :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] Annotationdata
 
 -- | Gets the annotation data.
 --
--- /See:/ 'layersAnnotationDataGet' smart constructor.
-data LayersAnnotationDataGet = LayersAnnotationDataGet
+-- /See:/ 'layersAnnotationDataGet'' smart constructor.
+data LayersAnnotationDataGet' = LayersAnnotationDataGet'
     { _ladgQuotaUser           :: !(Maybe Text)
     , _ladgW                   :: !(Maybe Int32)
     , _ladgPrettyPrint         :: !Bool
@@ -88,7 +97,7 @@ data LayersAnnotationDataGet = LayersAnnotationDataGet
     , _ladgOauthToken          :: !(Maybe Text)
     , _ladgLayerId             :: !Text
     , _ladgFields              :: !(Maybe Text)
-    , _ladgAlt                 :: !Text
+    , _ladgAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataGet'' with the minimum fields required to make a request.
@@ -128,14 +137,14 @@ data LayersAnnotationDataGet = LayersAnnotationDataGet
 -- * 'ladgFields'
 --
 -- * 'ladgAlt'
-layersAnnotationDataGet
+layersAnnotationDataGet'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'annotationDataId'
     -> Text -- ^ 'volumeId'
     -> Text -- ^ 'layerId'
-    -> LayersAnnotationDataGet
-layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
-    LayersAnnotationDataGet
+    -> LayersAnnotationDataGet'
+layersAnnotationDataGet' pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
+    LayersAnnotationDataGet'
     { _ladgQuotaUser = Nothing
     , _ladgW = Nothing
     , _ladgPrettyPrint = True
@@ -152,7 +161,7 @@ layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeI
     , _ladgOauthToken = Nothing
     , _ladgLayerId = pLadgLayerId_
     , _ladgFields = Nothing
-    , _ladgAlt = "json"
+    , _ladgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -247,14 +256,14 @@ ladgFields
   = lens _ladgFields (\ s a -> s{_ladgFields = a})
 
 -- | Data format for the response.
-ladgAlt :: Lens' LayersAnnotationDataGet' Text
+ladgAlt :: Lens' LayersAnnotationDataGet' Alt
 ladgAlt = lens _ladgAlt (\ s a -> s{_ladgAlt = a})
 
 instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersAnnotationDataGet{..}
-          = go _ladgQuotaUser _ladgW _ladgPrettyPrint
+        requestWithRoute r u LayersAnnotationDataGet'{..}
+          = go _ladgQuotaUser _ladgW (Just _ladgPrettyPrint)
               _ladgScale
               _ladgUserIp
               _ladgLocale
@@ -268,9 +277,9 @@ instance GoogleRequest LayersAnnotationDataGet' where
               _ladgOauthToken
               _ladgLayerId
               _ladgFields
-              _ladgAlt
+              (Just _ladgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersAnnotationDataGetAPI)
+                      (Proxy :: Proxy LayersAnnotationDataGetResource)
                       r
                       u

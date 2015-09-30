@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateSchedulePatch@.
-module Coordinate.Schedule.Patch
+module Network.Google.Resource.Coordinate.Schedule.Patch
     (
     -- * REST Resource
-      SchedulePatchAPI
+      SchedulePatchResource
 
     -- * Creating a Request
-    , schedulePatch
-    , SchedulePatch
+    , schedulePatch'
+    , SchedulePatch'
 
     -- * Request Lenses
     , spQuotaUser
@@ -49,24 +50,31 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateSchedulePatch@ which the
--- 'SchedulePatch' request conforms to.
-type SchedulePatchAPI =
+-- 'SchedulePatch'' request conforms to.
+type SchedulePatchResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
              "schedule" :>
-               QueryParam "allDay" Bool :>
-                 QueryParam "startTime" Word64 :>
-                   QueryParam "endTime" Word64 :>
-                     QueryParam "duration" Word64 :>
-                       Patch '[JSON] Schedule
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "allDay" Bool :>
+                     QueryParam "startTime" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "endTime" Word64 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "duration" Word64 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Patch '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
 --
--- /See:/ 'schedulePatch' smart constructor.
-data SchedulePatch = SchedulePatch
+-- /See:/ 'schedulePatch'' smart constructor.
+data SchedulePatch' = SchedulePatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spJobId       :: !Word64
@@ -79,7 +87,7 @@ data SchedulePatch = SchedulePatch
     , _spOauthToken  :: !(Maybe Text)
     , _spDuration    :: !(Maybe Word64)
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Text
+    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchedulePatch'' with the minimum fields required to make a request.
@@ -111,12 +119,12 @@ data SchedulePatch = SchedulePatch
 -- * 'spFields'
 --
 -- * 'spAlt'
-schedulePatch
+schedulePatch'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> SchedulePatch
-schedulePatch pSpJobId_ pSpTeamId_ =
-    SchedulePatch
+    -> SchedulePatch'
+schedulePatch' pSpJobId_ pSpTeamId_ =
+    SchedulePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spJobId = pSpJobId_
@@ -129,7 +137,7 @@ schedulePatch pSpJobId_ pSpTeamId_ =
     , _spOauthToken = Nothing
     , _spDuration = Nothing
     , _spFields = Nothing
-    , _spAlt = "json"
+    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -194,14 +202,15 @@ spFields :: Lens' SchedulePatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
 -- | Data format for the response.
-spAlt :: Lens' SchedulePatch' Text
+spAlt :: Lens' SchedulePatch' Alt
 spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
 
 instance GoogleRequest SchedulePatch' where
         type Rs SchedulePatch' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u SchedulePatch{..}
-          = go _spQuotaUser _spPrettyPrint _spJobId _spAllDay
+        requestWithRoute r u SchedulePatch'{..}
+          = go _spQuotaUser (Just _spPrettyPrint) _spJobId
+              _spAllDay
               _spStartTime
               _spUserIp
               _spTeamId
@@ -210,7 +219,9 @@ instance GoogleRequest SchedulePatch' where
               _spOauthToken
               _spDuration
               _spFields
-              _spAlt
+              (Just _spAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchedulePatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SchedulePatchResource)
+                      r
                       u

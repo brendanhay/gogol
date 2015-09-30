@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Cloud SQL instance. This method supports patch semantics.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlDatabasesPatch@.
-module Sql.Databases.Patch
+module Network.Google.Resource.Sql.Databases.Patch
     (
     -- * REST Resource
-      DatabasesPatchAPI
+      DatabasesPatchResource
 
     -- * Creating a Request
-    , databasesPatch
-    , DatabasesPatch
+    , databasesPatch'
+    , DatabasesPatch'
 
     -- * Request Lenses
     , dpQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlDatabasesPatch@ which the
--- 'DatabasesPatch' request conforms to.
-type DatabasesPatchAPI =
+-- 'DatabasesPatch'' request conforms to.
+type DatabasesPatchResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "databases" :>
-               Capture "database" Text :> Patch '[JSON] Operation
+               Capture "database" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates a resource containing information about a database inside a
 -- Cloud SQL instance. This method supports patch semantics.
 --
--- /See:/ 'databasesPatch' smart constructor.
-data DatabasesPatch = DatabasesPatch
+-- /See:/ 'databasesPatch'' smart constructor.
+data DatabasesPatch' = DatabasesPatch'
     { _dpQuotaUser   :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
     , _dpProject     :: !Text
@@ -68,7 +76,7 @@ data DatabasesPatch = DatabasesPatch
     , _dpKey         :: !(Maybe Text)
     , _dpOauthToken  :: !(Maybe Text)
     , _dpFields      :: !(Maybe Text)
-    , _dpAlt         :: !Text
+    , _dpAlt         :: !Alt
     , _dpInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data DatabasesPatch = DatabasesPatch
 -- * 'dpAlt'
 --
 -- * 'dpInstance'
-databasesPatch
+databasesPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'database'
     -> Text -- ^ 'instance'
-    -> DatabasesPatch
-databasesPatch pDpProject_ pDpDatabase_ pDpInstance_ =
-    DatabasesPatch
+    -> DatabasesPatch'
+databasesPatch' pDpProject_ pDpDatabase_ pDpInstance_ =
+    DatabasesPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
@@ -110,7 +118,7 @@ databasesPatch pDpProject_ pDpDatabase_ pDpInstance_ =
     , _dpKey = Nothing
     , _dpOauthToken = Nothing
     , _dpFields = Nothing
-    , _dpAlt = "json"
+    , _dpAlt = JSON
     , _dpInstance = pDpInstance_
     }
 
@@ -158,7 +166,7 @@ dpFields :: Lens' DatabasesPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
 -- | Data format for the response.
-dpAlt :: Lens' DatabasesPatch' Text
+dpAlt :: Lens' DatabasesPatch' Alt
 dpAlt = lens _dpAlt (\ s a -> s{_dpAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -169,16 +177,17 @@ dpInstance
 instance GoogleRequest DatabasesPatch' where
         type Rs DatabasesPatch' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesPatch{..}
-          = go _dpQuotaUser _dpPrettyPrint _dpProject
+        requestWithRoute r u DatabasesPatch'{..}
+          = go _dpQuotaUser (Just _dpPrettyPrint) _dpProject
               _dpDatabase
               _dpUserIp
               _dpKey
               _dpOauthToken
               _dpFields
-              _dpAlt
+              (Just _dpAlt)
               _dpInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy DatabasesPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatabasesPatchResource)
                       r
                       u

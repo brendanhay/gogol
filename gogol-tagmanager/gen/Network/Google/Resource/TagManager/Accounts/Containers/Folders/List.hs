@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all GTM Folders of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersList@.
-module TagManager.Accounts.Containers.Folders.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
     (
     -- * REST Resource
-      AccountsContainersFoldersListAPI
+      AccountsContainersFoldersListResource
 
     -- * Creating a Request
-    , accountsContainersFoldersList
-    , AccountsContainersFoldersList
+    , accountsContainersFoldersList'
+    , AccountsContainersFoldersList'
 
     -- * Request Lenses
     , acflQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersList@ which the
--- 'AccountsContainersFoldersList' request conforms to.
-type AccountsContainersFoldersListAPI =
+-- 'AccountsContainersFoldersList'' request conforms to.
+type AccountsContainersFoldersListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "folders" :> Get '[JSON] ListFoldersResponse
+             "folders" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ListFoldersResponse
 
 -- | Lists all GTM Folders of a Container.
 --
--- /See:/ 'accountsContainersFoldersList' smart constructor.
-data AccountsContainersFoldersList = AccountsContainersFoldersList
+-- /See:/ 'accountsContainersFoldersList'' smart constructor.
+data AccountsContainersFoldersList' = AccountsContainersFoldersList'
     { _acflQuotaUser   :: !(Maybe Text)
     , _acflPrettyPrint :: !Bool
     , _acflContainerId :: !Text
@@ -64,7 +73,7 @@ data AccountsContainersFoldersList = AccountsContainersFoldersList
     , _acflKey         :: !(Maybe Text)
     , _acflOauthToken  :: !(Maybe Text)
     , _acflFields      :: !(Maybe Text)
-    , _acflAlt         :: !Text
+    , _acflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersList'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data AccountsContainersFoldersList = AccountsContainersFoldersList
 -- * 'acflFields'
 --
 -- * 'acflAlt'
-accountsContainersFoldersList
+accountsContainersFoldersList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersList
-accountsContainersFoldersList pAcflContainerId_ pAcflAccountId_ =
-    AccountsContainersFoldersList
+    -> AccountsContainersFoldersList'
+accountsContainersFoldersList' pAcflContainerId_ pAcflAccountId_ =
+    AccountsContainersFoldersList'
     { _acflQuotaUser = Nothing
     , _acflPrettyPrint = True
     , _acflContainerId = pAcflContainerId_
@@ -102,7 +111,7 @@ accountsContainersFoldersList pAcflContainerId_ pAcflAccountId_ =
     , _acflKey = Nothing
     , _acflOauthToken = Nothing
     , _acflFields = Nothing
-    , _acflAlt = "json"
+    , _acflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +164,7 @@ acflFields
   = lens _acflFields (\ s a -> s{_acflFields = a})
 
 -- | Data format for the response.
-acflAlt :: Lens' AccountsContainersFoldersList' Text
+acflAlt :: Lens' AccountsContainersFoldersList' Alt
 acflAlt = lens _acflAlt (\ s a -> s{_acflAlt = a})
 
 instance GoogleRequest AccountsContainersFoldersList'
@@ -164,16 +173,18 @@ instance GoogleRequest AccountsContainersFoldersList'
              ListFoldersResponse
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersFoldersList{..}
-          = go _acflQuotaUser _acflPrettyPrint _acflContainerId
+          AccountsContainersFoldersList'{..}
+          = go _acflQuotaUser (Just _acflPrettyPrint)
+              _acflContainerId
               _acflUserIp
               _acflAccountId
               _acflKey
               _acflOauthToken
               _acflFields
-              _acflAlt
+              (Just _acflAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersFoldersListAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersFoldersListResource)
                       r
                       u

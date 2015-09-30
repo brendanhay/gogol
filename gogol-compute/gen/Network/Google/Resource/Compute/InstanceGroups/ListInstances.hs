@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- information.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsListInstances@.
-module Compute.InstanceGroups.ListInstances
+module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     (
     -- * REST Resource
-      InstanceGroupsListInstancesAPI
+      InstanceGroupsListInstancesResource
 
     -- * Creating a Request
-    , instanceGroupsListInstances
-    , InstanceGroupsListInstances
+    , instanceGroupsListInstances'
+    , InstanceGroupsListInstances'
 
     -- * Request Lenses
     , igliQuotaUser
@@ -50,25 +51,32 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsListInstances@ which the
--- 'InstanceGroupsListInstances' request conforms to.
-type InstanceGroupsListInstancesAPI =
+-- 'InstanceGroupsListInstances'' request conforms to.
+type InstanceGroupsListInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
                "listInstances" :>
-                 QueryParam "filter" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       Post '[JSON] InstanceGroupsListInstances
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "filter" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Post '[JSON] InstanceGroupsListInstances
 
 -- | Lists instances in an instance group. The parameters for this method
 -- specify whether the list filters instances by state and named ports
 -- information.
 --
--- /See:/ 'instanceGroupsListInstances' smart constructor.
-data InstanceGroupsListInstances = InstanceGroupsListInstances
+-- /See:/ 'instanceGroupsListInstances'' smart constructor.
+data InstanceGroupsListInstances' = InstanceGroupsListInstances'
     { _igliQuotaUser     :: !(Maybe Text)
     , _igliPrettyPrint   :: !Bool
     , _igliProject       :: !Text
@@ -81,7 +89,7 @@ data InstanceGroupsListInstances = InstanceGroupsListInstances
     , _igliInstanceGroup :: !Text
     , _igliMaxResults    :: !Word32
     , _igliFields        :: !(Maybe Text)
-    , _igliAlt           :: !Text
+    , _igliAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.
@@ -113,13 +121,13 @@ data InstanceGroupsListInstances = InstanceGroupsListInstances
 -- * 'igliFields'
 --
 -- * 'igliAlt'
-instanceGroupsListInstances
+instanceGroupsListInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
-    -> InstanceGroupsListInstances
-instanceGroupsListInstances pIgliProject_ pIgliZone_ pIgliInstanceGroup_ =
-    InstanceGroupsListInstances
+    -> InstanceGroupsListInstances'
+instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliInstanceGroup_ =
+    InstanceGroupsListInstances'
     { _igliQuotaUser = Nothing
     , _igliPrettyPrint = True
     , _igliProject = pIgliProject_
@@ -132,7 +140,7 @@ instanceGroupsListInstances pIgliProject_ pIgliZone_ pIgliInstanceGroup_ =
     , _igliInstanceGroup = pIgliInstanceGroup_
     , _igliMaxResults = 500
     , _igliFields = Nothing
-    , _igliAlt = "json"
+    , _igliAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -218,7 +226,7 @@ igliFields
   = lens _igliFields (\ s a -> s{_igliFields = a})
 
 -- | Data format for the response.
-igliAlt :: Lens' InstanceGroupsListInstances' Text
+igliAlt :: Lens' InstanceGroupsListInstances' Alt
 igliAlt = lens _igliAlt (\ s a -> s{_igliAlt = a})
 
 instance GoogleRequest InstanceGroupsListInstances'
@@ -226,8 +234,9 @@ instance GoogleRequest InstanceGroupsListInstances'
         type Rs InstanceGroupsListInstances' =
              InstanceGroupsListInstances
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsListInstances{..}
-          = go _igliQuotaUser _igliPrettyPrint _igliProject
+        requestWithRoute r u InstanceGroupsListInstances'{..}
+          = go _igliQuotaUser (Just _igliPrettyPrint)
+              _igliProject
               _igliUserIp
               _igliZone
               _igliKey
@@ -237,9 +246,9 @@ instance GoogleRequest InstanceGroupsListInstances'
               _igliInstanceGroup
               (Just _igliMaxResults)
               _igliFields
-              _igliAlt
+              (Just _igliAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsListInstancesAPI)
+                      (Proxy :: Proxy InstanceGroupsListInstancesResource)
                       r
                       u

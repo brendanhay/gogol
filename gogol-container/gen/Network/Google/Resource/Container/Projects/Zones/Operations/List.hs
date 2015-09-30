@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all operations in a project in a specific zone.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsList@.
-module Container.Projects.Zones.Operations.List
+module Network.Google.Resource.Container.Projects.Zones.Operations.List
     (
     -- * REST Resource
-      ProjectsZonesOperationsListAPI
+      ProjectsZonesOperationsListResource
 
     -- * Creating a Request
-    , projectsZonesOperationsList
-    , ProjectsZonesOperationsList
+    , projectsZonesOperationsList'
+    , ProjectsZonesOperationsList'
 
     -- * Request Lenses
     , pzolQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesOperationsList@ which the
--- 'ProjectsZonesOperationsList' request conforms to.
-type ProjectsZonesOperationsListAPI =
+-- 'ProjectsZonesOperationsList'' request conforms to.
+type ProjectsZonesOperationsListResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
-           "operations" :> Get '[JSON] ListOperationsResponse
+           "operations" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ListOperationsResponse
 
 -- | Lists all operations in a project in a specific zone.
 --
--- /See:/ 'projectsZonesOperationsList' smart constructor.
-data ProjectsZonesOperationsList = ProjectsZonesOperationsList
+-- /See:/ 'projectsZonesOperationsList'' smart constructor.
+data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
     { _pzolQuotaUser   :: !(Maybe Text)
     , _pzolPrettyPrint :: !Bool
     , _pzolUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data ProjectsZonesOperationsList = ProjectsZonesOperationsList
     , _pzolProjectId   :: !Text
     , _pzolOauthToken  :: !(Maybe Text)
     , _pzolFields      :: !(Maybe Text)
-    , _pzolAlt         :: !Text
+    , _pzolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsList'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data ProjectsZonesOperationsList = ProjectsZonesOperationsList
 -- * 'pzolFields'
 --
 -- * 'pzolAlt'
-projectsZonesOperationsList
+projectsZonesOperationsList'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
-    -> ProjectsZonesOperationsList
-projectsZonesOperationsList pPzolZoneId_ pPzolProjectId_ =
-    ProjectsZonesOperationsList
+    -> ProjectsZonesOperationsList'
+projectsZonesOperationsList' pPzolZoneId_ pPzolProjectId_ =
+    ProjectsZonesOperationsList'
     { _pzolQuotaUser = Nothing
     , _pzolPrettyPrint = True
     , _pzolUserIp = Nothing
@@ -101,7 +110,7 @@ projectsZonesOperationsList pPzolZoneId_ pPzolProjectId_ =
     , _pzolProjectId = pPzolProjectId_
     , _pzolOauthToken = Nothing
     , _pzolFields = Nothing
-    , _pzolAlt = "json"
+    , _pzolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +162,7 @@ pzolFields
   = lens _pzolFields (\ s a -> s{_pzolFields = a})
 
 -- | Data format for the response.
-pzolAlt :: Lens' ProjectsZonesOperationsList' Text
+pzolAlt :: Lens' ProjectsZonesOperationsList' Alt
 pzolAlt = lens _pzolAlt (\ s a -> s{_pzolAlt = a})
 
 instance GoogleRequest ProjectsZonesOperationsList'
@@ -161,16 +170,17 @@ instance GoogleRequest ProjectsZonesOperationsList'
         type Rs ProjectsZonesOperationsList' =
              ListOperationsResponse
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesOperationsList{..}
-          = go _pzolQuotaUser _pzolPrettyPrint _pzolUserIp
+        requestWithRoute r u ProjectsZonesOperationsList'{..}
+          = go _pzolQuotaUser (Just _pzolPrettyPrint)
+              _pzolUserIp
               _pzolZoneId
               _pzolKey
               _pzolProjectId
               _pzolOauthToken
               _pzolFields
-              _pzolAlt
+              (Just _pzolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesOperationsListAPI)
+                      (Proxy :: Proxy ProjectsZonesOperationsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementPlayersHide@.
-module GamesManagement.Players.Hide
+module Network.Google.Resource.GamesManagement.Players.Hide
     (
     -- * REST Resource
-      PlayersHideAPI
+      PlayersHideResource
 
     -- * Creating a Request
-    , playersHide
-    , PlayersHide
+    , playersHide'
+    , PlayersHide'
 
     -- * Request Lenses
     , phQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementPlayersHide@ which the
--- 'PlayersHide' request conforms to.
-type PlayersHideAPI =
+-- 'PlayersHide'' request conforms to.
+type PlayersHideResource =
      "applications" :>
        Capture "applicationId" Text :>
          "players" :>
            "hidden" :>
-             Capture "playerId" Text :> Post '[JSON] ()
+             Capture "playerId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Hide the given player\'s leaderboard scores from the given application.
 -- This method is only available to user accounts for your developer
 -- console.
 --
--- /See:/ 'playersHide' smart constructor.
-data PlayersHide = PlayersHide
+-- /See:/ 'playersHide'' smart constructor.
+data PlayersHide' = PlayersHide'
     { _phQuotaUser     :: !(Maybe Text)
     , _phPrettyPrint   :: !Bool
     , _phUserIp        :: !(Maybe Text)
@@ -68,7 +76,7 @@ data PlayersHide = PlayersHide
     , _phOauthToken    :: !(Maybe Text)
     , _phPlayerId      :: !Text
     , _phFields        :: !(Maybe Text)
-    , _phAlt           :: !Text
+    , _phAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersHide'' with the minimum fields required to make a request.
@@ -92,12 +100,12 @@ data PlayersHide = PlayersHide
 -- * 'phFields'
 --
 -- * 'phAlt'
-playersHide
+playersHide'
     :: Text -- ^ 'applicationId'
     -> Text -- ^ 'playerId'
-    -> PlayersHide
-playersHide pPhApplicationId_ pPhPlayerId_ =
-    PlayersHide
+    -> PlayersHide'
+playersHide' pPhApplicationId_ pPhPlayerId_ =
+    PlayersHide'
     { _phQuotaUser = Nothing
     , _phPrettyPrint = True
     , _phUserIp = Nothing
@@ -106,7 +114,7 @@ playersHide pPhApplicationId_ pPhPlayerId_ =
     , _phOauthToken = Nothing
     , _phPlayerId = pPhPlayerId_
     , _phFields = Nothing
-    , _phAlt = "json"
+    , _phAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,19 +163,22 @@ phFields :: Lens' PlayersHide' (Maybe Text)
 phFields = lens _phFields (\ s a -> s{_phFields = a})
 
 -- | Data format for the response.
-phAlt :: Lens' PlayersHide' Text
+phAlt :: Lens' PlayersHide' Alt
 phAlt = lens _phAlt (\ s a -> s{_phAlt = a})
 
 instance GoogleRequest PlayersHide' where
         type Rs PlayersHide' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u PlayersHide{..}
-          = go _phQuotaUser _phPrettyPrint _phUserIp
+        requestWithRoute r u PlayersHide'{..}
+          = go _phQuotaUser (Just _phPrettyPrint) _phUserIp
               _phApplicationId
               _phKey
               _phOauthToken
               _phPlayerId
               _phFields
-              _phAlt
+              (Just _phAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlayersHideAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PlayersHideResource)
+                      r
+                      u

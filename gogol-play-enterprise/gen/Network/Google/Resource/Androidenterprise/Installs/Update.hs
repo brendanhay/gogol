@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- necessary.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseInstallsUpdate@.
-module Androidenterprise.Installs.Update
+module Network.Google.Resource.Androidenterprise.Installs.Update
     (
     -- * REST Resource
-      InstallsUpdateAPI
+      InstallsUpdateResource
 
     -- * Creating a Request
-    , installsUpdate
-    , InstallsUpdate
+    , installsUpdate'
+    , InstallsUpdate'
 
     -- * Request Lenses
     , iuQuotaUser
@@ -48,8 +49,8 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseInstallsUpdate@ which the
--- 'InstallsUpdate' request conforms to.
-type InstallsUpdateAPI =
+-- 'InstallsUpdate'' request conforms to.
+type InstallsUpdateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
@@ -57,14 +58,21 @@ type InstallsUpdateAPI =
              "devices" :>
                Capture "deviceId" Text :>
                  "installs" :>
-                   Capture "installId" Text :> Put '[JSON] Install
+                   Capture "installId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Put '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app
 -- is already installed then it is updated to the latest version if
 -- necessary.
 --
--- /See:/ 'installsUpdate' smart constructor.
-data InstallsUpdate = InstallsUpdate
+-- /See:/ 'installsUpdate'' smart constructor.
+data InstallsUpdate' = InstallsUpdate'
     { _iuQuotaUser    :: !(Maybe Text)
     , _iuPrettyPrint  :: !Bool
     , _iuEnterpriseId :: !Text
@@ -75,7 +83,7 @@ data InstallsUpdate = InstallsUpdate
     , _iuDeviceId     :: !Text
     , _iuOauthToken   :: !(Maybe Text)
     , _iuFields       :: !(Maybe Text)
-    , _iuAlt          :: !Text
+    , _iuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsUpdate'' with the minimum fields required to make a request.
@@ -103,14 +111,14 @@ data InstallsUpdate = InstallsUpdate
 -- * 'iuFields'
 --
 -- * 'iuAlt'
-installsUpdate
+installsUpdate'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
-    -> InstallsUpdate
-installsUpdate pIuEnterpriseId_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
-    InstallsUpdate
+    -> InstallsUpdate'
+installsUpdate' pIuEnterpriseId_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
+    InstallsUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuEnterpriseId = pIuEnterpriseId_
@@ -121,7 +129,7 @@ installsUpdate pIuEnterpriseId_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
     , _iuDeviceId = pIuDeviceId_
     , _iuOauthToken = Nothing
     , _iuFields = Nothing
-    , _iuAlt = "json"
+    , _iuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,14 +187,15 @@ iuFields :: Lens' InstallsUpdate' (Maybe Text)
 iuFields = lens _iuFields (\ s a -> s{_iuFields = a})
 
 -- | Data format for the response.
-iuAlt :: Lens' InstallsUpdate' Text
+iuAlt :: Lens' InstallsUpdate' Alt
 iuAlt = lens _iuAlt (\ s a -> s{_iuAlt = a})
 
 instance GoogleRequest InstallsUpdate' where
         type Rs InstallsUpdate' = Install
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u InstallsUpdate{..}
-          = go _iuQuotaUser _iuPrettyPrint _iuEnterpriseId
+        requestWithRoute r u InstallsUpdate'{..}
+          = go _iuQuotaUser (Just _iuPrettyPrint)
+              _iuEnterpriseId
               _iuUserIp
               _iuUserId
               _iuInstallId
@@ -194,8 +203,9 @@ instance GoogleRequest InstallsUpdate' where
               _iuDeviceId
               _iuOauthToken
               _iuFields
-              _iuAlt
+              (Just _iuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstallsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstallsUpdateResource)
                       r
                       u

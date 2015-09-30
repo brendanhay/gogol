@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsGetSpectrumBatch@.
-module Spectrum.Paws.GetSpectrumBatch
+module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
     (
     -- * REST Resource
-      PawsGetSpectrumBatchAPI
+      PawsGetSpectrumBatchResource
 
     -- * Creating a Request
-    , pawsGetSpectrumBatch
-    , PawsGetSpectrumBatch
+    , pawsGetSpectrumBatch'
+    , PawsGetSpectrumBatch'
 
     -- * Request Lenses
     , pgsbQuotaUser
@@ -43,23 +44,30 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsGetSpectrumBatch@ which the
--- 'PawsGetSpectrumBatch' request conforms to.
-type PawsGetSpectrumBatchAPI =
+-- 'PawsGetSpectrumBatch'' request conforms to.
+type PawsGetSpectrumBatchResource =
      "getSpectrumBatch" :>
-       Post '[JSON] PawsGetSpectrumBatchResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] PawsGetSpectrumBatchResponse
 
 -- | The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsGetSpectrumBatch' smart constructor.
-data PawsGetSpectrumBatch = PawsGetSpectrumBatch
+-- /See:/ 'pawsGetSpectrumBatch'' smart constructor.
+data PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
     { _pgsbQuotaUser   :: !(Maybe Text)
     , _pgsbPrettyPrint :: !Bool
     , _pgsbUserIp      :: !(Maybe Text)
     , _pgsbKey         :: !(Maybe Text)
     , _pgsbOauthToken  :: !(Maybe Text)
     , _pgsbFields      :: !(Maybe Text)
-    , _pgsbAlt         :: !Text
+    , _pgsbAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatch'' with the minimum fields required to make a request.
@@ -79,17 +87,17 @@ data PawsGetSpectrumBatch = PawsGetSpectrumBatch
 -- * 'pgsbFields'
 --
 -- * 'pgsbAlt'
-pawsGetSpectrumBatch
-    :: PawsGetSpectrumBatch
-pawsGetSpectrumBatch =
-    PawsGetSpectrumBatch
+pawsGetSpectrumBatch'
+    :: PawsGetSpectrumBatch'
+pawsGetSpectrumBatch' =
+    PawsGetSpectrumBatch'
     { _pgsbQuotaUser = Nothing
     , _pgsbPrettyPrint = True
     , _pgsbUserIp = Nothing
     , _pgsbKey = Nothing
     , _pgsbOauthToken = Nothing
     , _pgsbFields = Nothing
-    , _pgsbAlt = "json"
+    , _pgsbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,21 +138,22 @@ pgsbFields
   = lens _pgsbFields (\ s a -> s{_pgsbFields = a})
 
 -- | Data format for the response.
-pgsbAlt :: Lens' PawsGetSpectrumBatch' Text
+pgsbAlt :: Lens' PawsGetSpectrumBatch' Alt
 pgsbAlt = lens _pgsbAlt (\ s a -> s{_pgsbAlt = a})
 
 instance GoogleRequest PawsGetSpectrumBatch' where
         type Rs PawsGetSpectrumBatch' =
              PawsGetSpectrumBatchResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsGetSpectrumBatch{..}
-          = go _pgsbQuotaUser _pgsbPrettyPrint _pgsbUserIp
+        requestWithRoute r u PawsGetSpectrumBatch'{..}
+          = go _pgsbQuotaUser (Just _pgsbPrettyPrint)
+              _pgsbUserIp
               _pgsbKey
               _pgsbOauthToken
               _pgsbFields
-              _pgsbAlt
+              (Just _pgsbAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PawsGetSpectrumBatchAPI)
+                      (Proxy :: Proxy PawsGetSpectrumBatchResource)
                       r
                       u

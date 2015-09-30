@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,125 +21,137 @@
 -- GlobalAllianceApi.searchReferences.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesSearch@.
-module Genomics.References.Search
+module Network.Google.Resource.Genomics.References.Search
     (
     -- * REST Resource
-      ReferencesSearchAPI
+      ReferencesSearchResource
 
     -- * Creating a Request
-    , referencesSearch
-    , ReferencesSearch
+    , referencesSearch'
+    , ReferencesSearch'
 
     -- * Request Lenses
-    , rsQuotaUser
-    , rsPrettyPrint
-    , rsUserIp
-    , rsKey
-    , rsOauthToken
-    , rsFields
-    , rsAlt
+    , refQuotaUser
+    , refPrettyPrint
+    , refUserIp
+    , refKey
+    , refOauthToken
+    , refFields
+    , refAlt
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesSearch@ which the
--- 'ReferencesSearch' request conforms to.
-type ReferencesSearchAPI =
+-- 'ReferencesSearch'' request conforms to.
+type ReferencesSearchResource =
      "references" :>
-       "search" :> Post '[JSON] SearchReferencesResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchReferencesResponse
 
 -- | Searches for references which match the given criteria. Implements
 -- GlobalAllianceApi.searchReferences.
 --
--- /See:/ 'referencesSearch' smart constructor.
-data ReferencesSearch = ReferencesSearch
-    { _rsQuotaUser   :: !(Maybe Text)
-    , _rsPrettyPrint :: !Bool
-    , _rsUserIp      :: !(Maybe Text)
-    , _rsKey         :: !(Maybe Text)
-    , _rsOauthToken  :: !(Maybe Text)
-    , _rsFields      :: !(Maybe Text)
-    , _rsAlt         :: !Text
+-- /See:/ 'referencesSearch'' smart constructor.
+data ReferencesSearch' = ReferencesSearch'
+    { _refQuotaUser   :: !(Maybe Text)
+    , _refPrettyPrint :: !Bool
+    , _refUserIp      :: !(Maybe Text)
+    , _refKey         :: !(Maybe Text)
+    , _refOauthToken  :: !(Maybe Text)
+    , _refFields      :: !(Maybe Text)
+    , _refAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesSearch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rsQuotaUser'
+-- * 'refQuotaUser'
 --
--- * 'rsPrettyPrint'
+-- * 'refPrettyPrint'
 --
--- * 'rsUserIp'
+-- * 'refUserIp'
 --
--- * 'rsKey'
+-- * 'refKey'
 --
--- * 'rsOauthToken'
+-- * 'refOauthToken'
 --
--- * 'rsFields'
+-- * 'refFields'
 --
--- * 'rsAlt'
-referencesSearch
-    :: ReferencesSearch
-referencesSearch =
-    ReferencesSearch
-    { _rsQuotaUser = Nothing
-    , _rsPrettyPrint = True
-    , _rsUserIp = Nothing
-    , _rsKey = Nothing
-    , _rsOauthToken = Nothing
-    , _rsFields = Nothing
-    , _rsAlt = "json"
+-- * 'refAlt'
+referencesSearch'
+    :: ReferencesSearch'
+referencesSearch' =
+    ReferencesSearch'
+    { _refQuotaUser = Nothing
+    , _refPrettyPrint = True
+    , _refUserIp = Nothing
+    , _refKey = Nothing
+    , _refOauthToken = Nothing
+    , _refFields = Nothing
+    , _refAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rsQuotaUser :: Lens' ReferencesSearch' (Maybe Text)
-rsQuotaUser
-  = lens _rsQuotaUser (\ s a -> s{_rsQuotaUser = a})
+refQuotaUser :: Lens' ReferencesSearch' (Maybe Text)
+refQuotaUser
+  = lens _refQuotaUser (\ s a -> s{_refQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rsPrettyPrint :: Lens' ReferencesSearch' Bool
-rsPrettyPrint
-  = lens _rsPrettyPrint
-      (\ s a -> s{_rsPrettyPrint = a})
+refPrettyPrint :: Lens' ReferencesSearch' Bool
+refPrettyPrint
+  = lens _refPrettyPrint
+      (\ s a -> s{_refPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rsUserIp :: Lens' ReferencesSearch' (Maybe Text)
-rsUserIp = lens _rsUserIp (\ s a -> s{_rsUserIp = a})
+refUserIp :: Lens' ReferencesSearch' (Maybe Text)
+refUserIp
+  = lens _refUserIp (\ s a -> s{_refUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rsKey :: Lens' ReferencesSearch' (Maybe Text)
-rsKey = lens _rsKey (\ s a -> s{_rsKey = a})
+refKey :: Lens' ReferencesSearch' (Maybe Text)
+refKey = lens _refKey (\ s a -> s{_refKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rsOauthToken :: Lens' ReferencesSearch' (Maybe Text)
-rsOauthToken
-  = lens _rsOauthToken (\ s a -> s{_rsOauthToken = a})
+refOauthToken :: Lens' ReferencesSearch' (Maybe Text)
+refOauthToken
+  = lens _refOauthToken
+      (\ s a -> s{_refOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rsFields :: Lens' ReferencesSearch' (Maybe Text)
-rsFields = lens _rsFields (\ s a -> s{_rsFields = a})
+refFields :: Lens' ReferencesSearch' (Maybe Text)
+refFields
+  = lens _refFields (\ s a -> s{_refFields = a})
 
 -- | Data format for the response.
-rsAlt :: Lens' ReferencesSearch' Text
-rsAlt = lens _rsAlt (\ s a -> s{_rsAlt = a})
+refAlt :: Lens' ReferencesSearch' Alt
+refAlt = lens _refAlt (\ s a -> s{_refAlt = a})
 
 instance GoogleRequest ReferencesSearch' where
         type Rs ReferencesSearch' = SearchReferencesResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesSearch{..}
-          = go _rsQuotaUser _rsPrettyPrint _rsUserIp _rsKey
-              _rsOauthToken
-              _rsFields
-              _rsAlt
+        requestWithRoute r u ReferencesSearch'{..}
+          = go _refQuotaUser (Just _refPrettyPrint) _refUserIp
+              _refKey
+              _refOauthToken
+              _refFields
+              (Just _refAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReferencesSearchAPI)
+                      (Proxy :: Proxy ReferencesSearchResource)
                       r
                       u

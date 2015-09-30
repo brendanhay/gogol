@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an access config from an instance\'s network interface.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDeleteAccessConfig@.
-module Compute.Instances.DeleteAccessConfig
+module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
     (
     -- * REST Resource
-      InstancesDeleteAccessConfigAPI
+      InstancesDeleteAccessConfigResource
 
     -- * Creating a Request
-    , instancesDeleteAccessConfig
-    , InstancesDeleteAccessConfig
+    , instancesDeleteAccessConfig'
+    , InstancesDeleteAccessConfig'
 
     -- * Request Lenses
     , idacQuotaUser
@@ -47,22 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesDeleteAccessConfig@ which the
--- 'InstancesDeleteAccessConfig' request conforms to.
-type InstancesDeleteAccessConfigAPI =
+-- 'InstancesDeleteAccessConfig'' request conforms to.
+type InstancesDeleteAccessConfigResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
                "deleteAccessConfig" :>
-                 QueryParam "networkInterface" Text :>
-                   QueryParam "accessConfig" Text :>
-                     Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "networkInterface" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "accessConfig" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Deletes an access config from an instance\'s network interface.
 --
--- /See:/ 'instancesDeleteAccessConfig' smart constructor.
-data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig
+-- /See:/ 'instancesDeleteAccessConfig'' smart constructor.
+data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
     { _idacQuotaUser        :: !(Maybe Text)
     , _idacPrettyPrint      :: !Bool
     , _idacProject          :: !Text
@@ -73,7 +80,7 @@ data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig
     , _idacOauthToken       :: !(Maybe Text)
     , _idacAccessConfig     :: !Text
     , _idacFields           :: !(Maybe Text)
-    , _idacAlt              :: !Text
+    , _idacAlt              :: !Alt
     , _idacInstance         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -104,15 +111,15 @@ data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig
 -- * 'idacAlt'
 --
 -- * 'idacInstance'
-instancesDeleteAccessConfig
+instancesDeleteAccessConfig'
     :: Text -- ^ 'project'
     -> Text -- ^ 'networkInterface'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'accessConfig'
     -> Text -- ^ 'instance'
-    -> InstancesDeleteAccessConfig
-instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
-    InstancesDeleteAccessConfig
+    -> InstancesDeleteAccessConfig'
+instancesDeleteAccessConfig' pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
+    InstancesDeleteAccessConfig'
     { _idacQuotaUser = Nothing
     , _idacPrettyPrint = True
     , _idacProject = pIdacProject_
@@ -123,7 +130,7 @@ instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIda
     , _idacOauthToken = Nothing
     , _idacAccessConfig = pIdacAccessConfig_
     , _idacFields = Nothing
-    , _idacAlt = "json"
+    , _idacAlt = JSON
     , _idacInstance = pIdacInstance_
     }
 
@@ -186,7 +193,7 @@ idacFields
   = lens _idacFields (\ s a -> s{_idacFields = a})
 
 -- | Data format for the response.
-idacAlt :: Lens' InstancesDeleteAccessConfig' Text
+idacAlt :: Lens' InstancesDeleteAccessConfig' Alt
 idacAlt = lens _idacAlt (\ s a -> s{_idacAlt = a})
 
 -- | The instance name for this request.
@@ -198,8 +205,9 @@ instance GoogleRequest InstancesDeleteAccessConfig'
          where
         type Rs InstancesDeleteAccessConfig' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDeleteAccessConfig{..}
-          = go _idacQuotaUser _idacPrettyPrint _idacProject
+        requestWithRoute r u InstancesDeleteAccessConfig'{..}
+          = go _idacQuotaUser (Just _idacPrettyPrint)
+              _idacProject
               _idacUserIp
               (Just _idacNetworkInterface)
               _idacZone
@@ -207,10 +215,10 @@ instance GoogleRequest InstancesDeleteAccessConfig'
               _idacOauthToken
               (Just _idacAccessConfig)
               _idacFields
-              _idacAlt
+              (Just _idacAlt)
               _idacInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesDeleteAccessConfigAPI)
+                      (Proxy :: Proxy InstancesDeleteAccessConfigResource)
                       r
                       u

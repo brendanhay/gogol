@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one blog and user info pair by blogId and userId.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogUserInfosGet@.
-module Blogger.BlogUserInfos.Get
+module Network.Google.Resource.Blogger.BlogUserInfos.Get
     (
     -- * REST Resource
-      BlogUserInfosGetAPI
+      BlogUserInfosGetResource
 
     -- * Creating a Request
-    , blogUserInfosGet
-    , BlogUserInfosGet
+    , blogUserInfosGet'
+    , BlogUserInfosGet'
 
     -- * Request Lenses
     , buigQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogUserInfosGet@ which the
--- 'BlogUserInfosGet' request conforms to.
-type BlogUserInfosGetAPI =
+-- 'BlogUserInfosGet'' request conforms to.
+type BlogUserInfosGetResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
            Capture "blogId" Text :>
-             QueryParam "maxPosts" Word32 :>
-               Get '[JSON] BlogUserInfo
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "maxPosts" Word32 :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] BlogUserInfo
 
 -- | Gets one blog and user info pair by blogId and userId.
 --
--- /See:/ 'blogUserInfosGet' smart constructor.
-data BlogUserInfosGet = BlogUserInfosGet
+-- /See:/ 'blogUserInfosGet'' smart constructor.
+data BlogUserInfosGet' = BlogUserInfosGet'
     { _buigQuotaUser   :: !(Maybe Text)
     , _buigPrettyPrint :: !Bool
     , _buigUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data BlogUserInfosGet = BlogUserInfosGet
     , _buigMaxPosts    :: !(Maybe Word32)
     , _buigOauthToken  :: !(Maybe Text)
     , _buigFields      :: !(Maybe Text)
-    , _buigAlt         :: !Text
+    , _buigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogUserInfosGet'' with the minimum fields required to make a request.
@@ -93,12 +100,12 @@ data BlogUserInfosGet = BlogUserInfosGet
 -- * 'buigFields'
 --
 -- * 'buigAlt'
-blogUserInfosGet
+blogUserInfosGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
-    -> BlogUserInfosGet
-blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
-    BlogUserInfosGet
+    -> BlogUserInfosGet'
+blogUserInfosGet' pBuigBlogId_ pBuigUserId_ =
+    BlogUserInfosGet'
     { _buigQuotaUser = Nothing
     , _buigPrettyPrint = True
     , _buigUserIp = Nothing
@@ -108,7 +115,7 @@ blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
     , _buigMaxPosts = Nothing
     , _buigOauthToken = Nothing
     , _buigFields = Nothing
-    , _buigAlt = "json"
+    , _buigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +172,24 @@ buigFields
   = lens _buigFields (\ s a -> s{_buigFields = a})
 
 -- | Data format for the response.
-buigAlt :: Lens' BlogUserInfosGet' Text
+buigAlt :: Lens' BlogUserInfosGet' Alt
 buigAlt = lens _buigAlt (\ s a -> s{_buigAlt = a})
 
 instance GoogleRequest BlogUserInfosGet' where
         type Rs BlogUserInfosGet' = BlogUserInfo
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogUserInfosGet{..}
-          = go _buigQuotaUser _buigPrettyPrint _buigUserIp
+        requestWithRoute r u BlogUserInfosGet'{..}
+          = go _buigQuotaUser (Just _buigPrettyPrint)
+              _buigUserIp
               _buigBlogId
               _buigUserId
               _buigKey
               _buigMaxPosts
               _buigOauthToken
               _buigFields
-              _buigAlt
+              (Just _buigAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BlogUserInfosGetAPI)
+                      (Proxy :: Proxy BlogUserInfosGetResource)
                       r
                       u

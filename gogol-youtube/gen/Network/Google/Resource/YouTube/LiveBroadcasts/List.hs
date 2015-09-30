@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- parameters.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsList@.
-module YouTube.LiveBroadcasts.List
+module Network.Google.Resource.YouTube.LiveBroadcasts.List
     (
     -- * REST Resource
-      LiveBroadcastsListAPI
+      LiveBroadcastsListResource
 
     -- * Creating a Request
-    , liveBroadcastsList
-    , LiveBroadcastsList
+    , liveBroadcastsList'
+    , LiveBroadcastsList'
 
     -- * Request Lenses
     , lblQuotaUser
@@ -51,30 +52,39 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsList@ which the
--- 'LiveBroadcastsList' request conforms to.
-type LiveBroadcastsListAPI =
+-- 'LiveBroadcastsList'' request conforms to.
+type LiveBroadcastsListResource =
      "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "broadcastStatus" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                 QueryParam "id" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       Get '[JSON] LiveBroadcastListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "broadcastStatus"
+                   YouTubeLiveBroadcastsListBroadcastStatus
+                   :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                         QueryParam "id" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] LiveBroadcastListResponse
 
 -- | Returns a list of YouTube broadcasts that match the API request
 -- parameters.
 --
--- /See:/ 'liveBroadcastsList' smart constructor.
-data LiveBroadcastsList = LiveBroadcastsList
+-- /See:/ 'liveBroadcastsList'' smart constructor.
+data LiveBroadcastsList' = LiveBroadcastsList'
     { _lblQuotaUser                     :: !(Maybe Text)
     , _lblPart                          :: !Text
     , _lblPrettyPrint                   :: !Bool
     , _lblMine                          :: !(Maybe Bool)
     , _lblUserIp                        :: !(Maybe Text)
-    , _lblBroadcastStatus               :: !(Maybe Text)
+    , _lblBroadcastStatus               :: !(Maybe YouTubeLiveBroadcastsListBroadcastStatus)
     , _lblOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lblKey                           :: !(Maybe Text)
     , _lblOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -83,7 +93,7 @@ data LiveBroadcastsList = LiveBroadcastsList
     , _lblOauthToken                    :: !(Maybe Text)
     , _lblMaxResults                    :: !Word32
     , _lblFields                        :: !(Maybe Text)
-    , _lblAlt                           :: !Text
+    , _lblAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsList'' with the minimum fields required to make a request.
@@ -119,11 +129,11 @@ data LiveBroadcastsList = LiveBroadcastsList
 -- * 'lblFields'
 --
 -- * 'lblAlt'
-liveBroadcastsList
+liveBroadcastsList'
     :: Text -- ^ 'part'
-    -> LiveBroadcastsList
-liveBroadcastsList pLblPart_ =
-    LiveBroadcastsList
+    -> LiveBroadcastsList'
+liveBroadcastsList' pLblPart_ =
+    LiveBroadcastsList'
     { _lblQuotaUser = Nothing
     , _lblPart = pLblPart_
     , _lblPrettyPrint = True
@@ -138,7 +148,7 @@ liveBroadcastsList pLblPart_ =
     , _lblOauthToken = Nothing
     , _lblMaxResults = 5
     , _lblFields = Nothing
-    , _lblAlt = "json"
+    , _lblAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,7 +185,7 @@ lblUserIp
 
 -- | The broadcastStatus parameter filters the API response to only include
 -- broadcasts with the specified status.
-lblBroadcastStatus :: Lens' LiveBroadcastsList' (Maybe Text)
+lblBroadcastStatus :: Lens' LiveBroadcastsList' (Maybe YouTubeLiveBroadcastsListBroadcastStatus)
 lblBroadcastStatus
   = lens _lblBroadcastStatus
       (\ s a -> s{_lblBroadcastStatus = a})
@@ -254,15 +264,16 @@ lblFields
   = lens _lblFields (\ s a -> s{_lblFields = a})
 
 -- | Data format for the response.
-lblAlt :: Lens' LiveBroadcastsList' Text
+lblAlt :: Lens' LiveBroadcastsList' Alt
 lblAlt = lens _lblAlt (\ s a -> s{_lblAlt = a})
 
 instance GoogleRequest LiveBroadcastsList' where
         type Rs LiveBroadcastsList' =
              LiveBroadcastListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsList{..}
-          = go _lblQuotaUser (Just _lblPart) _lblPrettyPrint
+        requestWithRoute r u LiveBroadcastsList'{..}
+          = go _lblQuotaUser (Just _lblPart)
+              (Just _lblPrettyPrint)
               _lblMine
               _lblUserIp
               _lblBroadcastStatus
@@ -274,9 +285,9 @@ instance GoogleRequest LiveBroadcastsList' where
               _lblOauthToken
               (Just _lblMaxResults)
               _lblFields
-              _lblAlt
+              (Just _lblAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsListAPI)
+                      (Proxy :: Proxy LiveBroadcastsListResource)
                       r
                       u

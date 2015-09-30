@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all resources in a given deployment.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerResourcesList@.
-module DeploymentManager.Resources.List
+module Network.Google.Resource.DeploymentManager.Resources.List
     (
     -- * REST Resource
-      ResourcesListAPI
+      ResourcesListResource
 
     -- * Creating a Request
-    , resourcesList
-    , ResourcesList
+    , resourcesList'
+    , ResourcesList'
 
     -- * Request Lenses
     , rlQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerResourcesList@ which the
--- 'ResourcesList' request conforms to.
-type ResourcesListAPI =
+-- 'ResourcesList'' request conforms to.
+type ResourcesListResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
              "resources" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] ResourcesListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] ResourcesListResponse
 
 -- | Lists all resources in a given deployment.
 --
--- /See:/ 'resourcesList' smart constructor.
-data ResourcesList = ResourcesList
+-- /See:/ 'resourcesList'' smart constructor.
+data ResourcesList' = ResourcesList'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlPrettyPrint :: !Bool
     , _rlProject     :: !Text
@@ -73,7 +81,7 @@ data ResourcesList = ResourcesList
     , _rlOauthToken  :: !(Maybe Text)
     , _rlMaxResults  :: !Word32
     , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Text
+    , _rlAlt         :: !Alt
     , _rlDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -104,12 +112,12 @@ data ResourcesList = ResourcesList
 -- * 'rlAlt'
 --
 -- * 'rlDeployment'
-resourcesList
+resourcesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'deployment'
-    -> ResourcesList
-resourcesList pRlProject_ pRlDeployment_ =
-    ResourcesList
+    -> ResourcesList'
+resourcesList' pRlProject_ pRlDeployment_ =
+    ResourcesList'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
     , _rlProject = pRlProject_
@@ -120,7 +128,7 @@ resourcesList pRlProject_ pRlDeployment_ =
     , _rlOauthToken = Nothing
     , _rlMaxResults = 500
     , _rlFields = Nothing
-    , _rlAlt = "json"
+    , _rlAlt = JSON
     , _rlDeployment = pRlDeployment_
     }
 
@@ -189,7 +197,7 @@ rlFields :: Lens' ResourcesList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 -- | Data format for the response.
-rlAlt :: Lens' ResourcesList' Text
+rlAlt :: Lens' ResourcesList' Alt
 rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
 
 -- | The name of the deployment for this request.
@@ -201,16 +209,19 @@ instance GoogleRequest ResourcesList' where
         type Rs ResourcesList' = ResourcesListResponse
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ResourcesList{..}
-          = go _rlQuotaUser _rlPrettyPrint _rlProject _rlUserIp
+        requestWithRoute r u ResourcesList'{..}
+          = go _rlQuotaUser (Just _rlPrettyPrint) _rlProject
+              _rlUserIp
               _rlKey
               _rlFilter
               _rlPageToken
               _rlOauthToken
               (Just _rlMaxResults)
               _rlFields
-              _rlAlt
+              (Just _rlAlt)
               _rlDeployment
           where go
-                  = clientWithRoute (Proxy :: Proxy ResourcesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ResourcesListResource)
+                      r
                       u

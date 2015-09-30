@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- subscription.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsPull@.
-module PubSub.Projects.Subscriptions.Pull
+module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
     (
     -- * REST Resource
-      ProjectsSubscriptionsPullAPI
+      ProjectsSubscriptionsPullResource
 
     -- * Creating a Request
-    , projectsSubscriptionsPull
-    , ProjectsSubscriptionsPull
+    , projectsSubscriptionsPull'
+    , ProjectsSubscriptionsPull'
 
     -- * Request Lenses
     , pspXgafv
@@ -52,18 +53,32 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsPull@ which the
--- 'ProjectsSubscriptionsPull' request conforms to.
-type ProjectsSubscriptionsPullAPI =
+-- 'ProjectsSubscriptionsPull'' request conforms to.
+type ProjectsSubscriptionsPullResource =
      "v1beta2" :>
-       "{+subscription}:pull" :> Post '[JSON] PullResponse
+       "{+subscription}:pull" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] PullResponse
 
 -- | Pulls messages from the server. Returns an empty list if there are no
 -- messages available in the backlog. The server may return UNAVAILABLE if
 -- there are too many concurrent pull requests pending for the given
 -- subscription.
 --
--- /See:/ 'projectsSubscriptionsPull' smart constructor.
-data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull
+-- /See:/ 'projectsSubscriptionsPull'' smart constructor.
+data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
     { _pspXgafv          :: !(Maybe Text)
     , _pspQuotaUser      :: !(Maybe Text)
     , _pspPrettyPrint    :: !Bool
@@ -111,11 +126,11 @@ data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull
 -- * 'pspCallback'
 --
 -- * 'pspAlt'
-projectsSubscriptionsPull
+projectsSubscriptionsPull'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsPull
-projectsSubscriptionsPull pPspSubscription_ =
-    ProjectsSubscriptionsPull
+    -> ProjectsSubscriptionsPull'
+projectsSubscriptionsPull' pPspSubscription_ =
+    ProjectsSubscriptionsPull'
     { _pspXgafv = Nothing
     , _pspQuotaUser = Nothing
     , _pspPrettyPrint = True
@@ -213,10 +228,10 @@ instance GoogleRequest ProjectsSubscriptionsPull'
          where
         type Rs ProjectsSubscriptionsPull' = PullResponse
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsPull{..}
-          = go _pspXgafv _pspQuotaUser _pspPrettyPrint
+        requestWithRoute r u ProjectsSubscriptionsPull'{..}
+          = go _pspXgafv _pspQuotaUser (Just _pspPrettyPrint)
               _pspUploadProtocol
-              _pspPp
+              (Just _pspPp)
               _pspAccessToken
               _pspUploadType
               _pspBearerToken
@@ -225,9 +240,9 @@ instance GoogleRequest ProjectsSubscriptionsPull'
               _pspSubscription
               _pspFields
               _pspCallback
-              _pspAlt
+              (Just _pspAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsPullAPI)
+                      (Proxy :: Proxy ProjectsSubscriptionsPullResource)
                       r
                       u

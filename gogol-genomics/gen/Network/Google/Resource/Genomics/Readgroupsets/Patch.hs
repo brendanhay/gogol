@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a read group set. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsPatch@.
-module Genomics.Readgroupsets.Patch
+module Network.Google.Resource.Genomics.Readgroupsets.Patch
     (
     -- * REST Resource
-      ReadgroupsetsPatchAPI
+      ReadgroupsetsPatchResource
 
     -- * Creating a Request
-    , readgroupsetsPatch
-    , ReadgroupsetsPatch
+    , readgroupsetsPatch'
+    , ReadgroupsetsPatch'
 
     -- * Request Lenses
     , rpQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsPatch@ which the
--- 'ReadgroupsetsPatch' request conforms to.
-type ReadgroupsetsPatchAPI =
+-- 'ReadgroupsetsPatch'' request conforms to.
+type ReadgroupsetsPatchResource =
      "readgroupsets" :>
        Capture "readGroupSetId" Text :>
-         Patch '[JSON] ReadGroupSet
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] ReadGroupSet
 
 -- | Updates a read group set. This method supports patch semantics.
 --
--- /See:/ 'readgroupsetsPatch' smart constructor.
-data ReadgroupsetsPatch = ReadgroupsetsPatch
+-- /See:/ 'readgroupsetsPatch'' smart constructor.
+data ReadgroupsetsPatch' = ReadgroupsetsPatch'
     { _rpQuotaUser      :: !(Maybe Text)
     , _rpPrettyPrint    :: !Bool
     , _rpReadGroupSetId :: !Text
@@ -60,7 +67,7 @@ data ReadgroupsetsPatch = ReadgroupsetsPatch
     , _rpKey            :: !(Maybe Text)
     , _rpOauthToken     :: !(Maybe Text)
     , _rpFields         :: !(Maybe Text)
-    , _rpAlt            :: !Text
+    , _rpAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsPatch'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data ReadgroupsetsPatch = ReadgroupsetsPatch
 -- * 'rpFields'
 --
 -- * 'rpAlt'
-readgroupsetsPatch
+readgroupsetsPatch'
     :: Text -- ^ 'readGroupSetId'
-    -> ReadgroupsetsPatch
-readgroupsetsPatch pRpReadGroupSetId_ =
-    ReadgroupsetsPatch
+    -> ReadgroupsetsPatch'
+readgroupsetsPatch' pRpReadGroupSetId_ =
+    ReadgroupsetsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpReadGroupSetId = pRpReadGroupSetId_
@@ -94,7 +101,7 @@ readgroupsetsPatch pRpReadGroupSetId_ =
     , _rpKey = Nothing
     , _rpOauthToken = Nothing
     , _rpFields = Nothing
-    , _rpAlt = "json"
+    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +145,22 @@ rpFields :: Lens' ReadgroupsetsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 -- | Data format for the response.
-rpAlt :: Lens' ReadgroupsetsPatch' Text
+rpAlt :: Lens' ReadgroupsetsPatch' Alt
 rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
 
 instance GoogleRequest ReadgroupsetsPatch' where
         type Rs ReadgroupsetsPatch' = ReadGroupSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsPatch{..}
-          = go _rpQuotaUser _rpPrettyPrint _rpReadGroupSetId
+        requestWithRoute r u ReadgroupsetsPatch'{..}
+          = go _rpQuotaUser (Just _rpPrettyPrint)
+              _rpReadGroupSetId
               _rpUserIp
               _rpKey
               _rpOauthToken
               _rpFields
-              _rpAlt
+              (Just _rpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsPatchAPI)
+                      (Proxy :: Proxy ReadgroupsetsPatchResource)
                       r
                       u

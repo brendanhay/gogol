@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesList@.
-module Compute.Images.List
+module Network.Google.Resource.Compute.Images.List
     (
     -- * REST Resource
-      ImagesListAPI
+      ImagesListResource
 
     -- * Creating a Request
-    , imagesList
-    , ImagesList
+    , imagesList'
+    , ImagesList'
 
     -- * Request Lenses
     , ilQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeImagesList@ which the
--- 'ImagesList' request conforms to.
-type ImagesListAPI =
+-- 'ImagesList'' request conforms to.
+type ImagesListResource =
      Capture "project" Text :>
        "global" :>
          "images" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ImageList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ImageList
 
 -- | Retrieves the list of image resources available to the specified
 -- project.
 --
--- /See:/ 'imagesList' smart constructor.
-data ImagesList = ImagesList
+-- /See:/ 'imagesList'' smart constructor.
+data ImagesList' = ImagesList'
     { _ilQuotaUser   :: !(Maybe Text)
     , _ilPrettyPrint :: !Bool
     , _ilProject     :: !Text
@@ -72,7 +79,7 @@ data ImagesList = ImagesList
     , _ilOauthToken  :: !(Maybe Text)
     , _ilMaxResults  :: !Word32
     , _ilFields      :: !(Maybe Text)
-    , _ilAlt         :: !Text
+    , _ilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data ImagesList = ImagesList
 -- * 'ilFields'
 --
 -- * 'ilAlt'
-imagesList
+imagesList'
     :: Text -- ^ 'project'
-    -> ImagesList
-imagesList pIlProject_ =
-    ImagesList
+    -> ImagesList'
+imagesList' pIlProject_ =
+    ImagesList'
     { _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
     , _ilProject = pIlProject_
@@ -115,7 +122,7 @@ imagesList pIlProject_ =
     , _ilOauthToken = Nothing
     , _ilMaxResults = 500
     , _ilFields = Nothing
-    , _ilAlt = "json"
+    , _ilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,20 +190,23 @@ ilFields :: Lens' ImagesList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 -- | Data format for the response.
-ilAlt :: Lens' ImagesList' Text
+ilAlt :: Lens' ImagesList' Alt
 ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
 
 instance GoogleRequest ImagesList' where
         type Rs ImagesList' = ImageList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesList{..}
-          = go _ilQuotaUser _ilPrettyPrint _ilProject _ilUserIp
+        requestWithRoute r u ImagesList'{..}
+          = go _ilQuotaUser (Just _ilPrettyPrint) _ilProject
+              _ilUserIp
               _ilKey
               _ilFilter
               _ilPageToken
               _ilOauthToken
               (Just _ilMaxResults)
               _ilFields
-              _ilAlt
+              (Just _ilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ImagesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ImagesListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove the book and its contents
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksCloudloadingDeleteBook@.
-module Books.Cloudloading.DeleteBook
+module Network.Google.Resource.Books.Cloudloading.DeleteBook
     (
     -- * REST Resource
-      CloudloadingDeleteBookAPI
+      CloudloadingDeleteBookResource
 
     -- * Creating a Request
-    , cloudloadingDeleteBook
-    , CloudloadingDeleteBook
+    , cloudloadingDeleteBook'
+    , CloudloadingDeleteBook'
 
     -- * Request Lenses
     , cdbQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksCloudloadingDeleteBook@ which the
--- 'CloudloadingDeleteBook' request conforms to.
-type CloudloadingDeleteBookAPI =
+-- 'CloudloadingDeleteBook'' request conforms to.
+type CloudloadingDeleteBookResource =
      "cloudloading" :>
        "deleteBook" :>
-         QueryParam "volumeId" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "volumeId" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Remove the book and its contents
 --
--- /See:/ 'cloudloadingDeleteBook' smart constructor.
-data CloudloadingDeleteBook = CloudloadingDeleteBook
+-- /See:/ 'cloudloadingDeleteBook'' smart constructor.
+data CloudloadingDeleteBook' = CloudloadingDeleteBook'
     { _cdbQuotaUser   :: !(Maybe Text)
     , _cdbPrettyPrint :: !Bool
     , _cdbUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CloudloadingDeleteBook = CloudloadingDeleteBook
     , _cdbVolumeId    :: !Text
     , _cdbOauthToken  :: !(Maybe Text)
     , _cdbFields      :: !(Maybe Text)
-    , _cdbAlt         :: !Text
+    , _cdbAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudloadingDeleteBook'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CloudloadingDeleteBook = CloudloadingDeleteBook
 -- * 'cdbFields'
 --
 -- * 'cdbAlt'
-cloudloadingDeleteBook
+cloudloadingDeleteBook'
     :: Text -- ^ 'volumeId'
-    -> CloudloadingDeleteBook
-cloudloadingDeleteBook pCdbVolumeId_ =
-    CloudloadingDeleteBook
+    -> CloudloadingDeleteBook'
+cloudloadingDeleteBook' pCdbVolumeId_ =
+    CloudloadingDeleteBook'
     { _cdbQuotaUser = Nothing
     , _cdbPrettyPrint = True
     , _cdbUserIp = Nothing
@@ -94,7 +102,7 @@ cloudloadingDeleteBook pCdbVolumeId_ =
     , _cdbVolumeId = pCdbVolumeId_
     , _cdbOauthToken = Nothing
     , _cdbFields = Nothing
-    , _cdbAlt = "json"
+    , _cdbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ cdbFields
   = lens _cdbFields (\ s a -> s{_cdbFields = a})
 
 -- | Data format for the response.
-cdbAlt :: Lens' CloudloadingDeleteBook' Text
+cdbAlt :: Lens' CloudloadingDeleteBook' Alt
 cdbAlt = lens _cdbAlt (\ s a -> s{_cdbAlt = a})
 
 instance GoogleRequest CloudloadingDeleteBook' where
         type Rs CloudloadingDeleteBook' = ()
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u CloudloadingDeleteBook{..}
-          = go _cdbQuotaUser _cdbPrettyPrint _cdbUserIp _cdbKey
+        requestWithRoute r u CloudloadingDeleteBook'{..}
+          = go _cdbQuotaUser (Just _cdbPrettyPrint) _cdbUserIp
+              _cdbKey
               (Just _cdbVolumeId)
               _cdbOauthToken
               _cdbFields
-              _cdbAlt
+              (Just _cdbAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CloudloadingDeleteBookAPI)
+                      (Proxy :: Proxy CloudloadingDeleteBookResource)
                       r
                       u

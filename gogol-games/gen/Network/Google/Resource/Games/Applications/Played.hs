@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesApplicationsPlayed@.
-module Games.Applications.Played
+module Network.Google.Resource.Games.Applications.Played
     (
     -- * REST Resource
-      ApplicationsPlayedAPI
+      ApplicationsPlayedResource
 
     -- * Creating a Request
-    , applicationsPlayed
-    , ApplicationsPlayed
+    , applicationsPlayed'
+    , ApplicationsPlayed'
 
     -- * Request Lenses
     , apQuotaUser
@@ -43,22 +44,30 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesApplicationsPlayed@ which the
--- 'ApplicationsPlayed' request conforms to.
-type ApplicationsPlayedAPI =
-     "applications" :> "played" :> Post '[JSON] ()
+-- 'ApplicationsPlayed'' request conforms to.
+type ApplicationsPlayedResource =
+     "applications" :>
+       "played" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Indicate that the the currently authenticated user is playing your
 -- application.
 --
--- /See:/ 'applicationsPlayed' smart constructor.
-data ApplicationsPlayed = ApplicationsPlayed
+-- /See:/ 'applicationsPlayed'' smart constructor.
+data ApplicationsPlayed' = ApplicationsPlayed'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apUserIp      :: !(Maybe Text)
     , _apKey         :: !(Maybe Text)
     , _apOauthToken  :: !(Maybe Text)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Text
+    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsPlayed'' with the minimum fields required to make a request.
@@ -78,17 +87,17 @@ data ApplicationsPlayed = ApplicationsPlayed
 -- * 'apFields'
 --
 -- * 'apAlt'
-applicationsPlayed
-    :: ApplicationsPlayed
-applicationsPlayed =
-    ApplicationsPlayed
+applicationsPlayed'
+    :: ApplicationsPlayed'
+applicationsPlayed' =
+    ApplicationsPlayed'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIp = Nothing
     , _apKey = Nothing
     , _apOauthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = "json"
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,19 +134,20 @@ apFields :: Lens' ApplicationsPlayed' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-apAlt :: Lens' ApplicationsPlayed' Text
+apAlt :: Lens' ApplicationsPlayed' Alt
 apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ApplicationsPlayed{..}
-          = go _apQuotaUser _apPrettyPrint _apUserIp _apKey
+        requestWithRoute r u ApplicationsPlayed'{..}
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+              _apKey
               _apOauthToken
               _apFields
-              _apAlt
+              (Just _apAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ApplicationsPlayedAPI)
+                      (Proxy :: Proxy ApplicationsPlayedResource)
                       r
                       u

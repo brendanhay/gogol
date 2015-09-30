@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsDelete@.
-module Compute.GlobalOperations.Delete
+module Network.Google.Resource.Compute.GlobalOperations.Delete
     (
     -- * REST Resource
-      GlobalOperationsDeleteAPI
+      GlobalOperationsDeleteResource
 
     -- * Creating a Request
-    , globalOperationsDelete
-    , GlobalOperationsDelete
+    , globalOperationsDelete'
+    , GlobalOperationsDelete'
 
     -- * Request Lenses
     , godQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalOperationsDelete@ which the
--- 'GlobalOperationsDelete' request conforms to.
-type GlobalOperationsDeleteAPI =
+-- 'GlobalOperationsDelete'' request conforms to.
+type GlobalOperationsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           Capture "operation" Text :> Delete '[JSON] ()
+           Capture "operation" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the specified Operations resource.
 --
--- /See:/ 'globalOperationsDelete' smart constructor.
-data GlobalOperationsDelete = GlobalOperationsDelete
+-- /See:/ 'globalOperationsDelete'' smart constructor.
+data GlobalOperationsDelete' = GlobalOperationsDelete'
     { _godQuotaUser   :: !(Maybe Text)
     , _godPrettyPrint :: !Bool
     , _godProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalOperationsDelete = GlobalOperationsDelete
     , _godKey         :: !(Maybe Text)
     , _godOauthToken  :: !(Maybe Text)
     , _godFields      :: !(Maybe Text)
-    , _godAlt         :: !Text
+    , _godAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalOperationsDelete = GlobalOperationsDelete
 -- * 'godFields'
 --
 -- * 'godAlt'
-globalOperationsDelete
+globalOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
-    -> GlobalOperationsDelete
-globalOperationsDelete pGodProject_ pGodOperation_ =
-    GlobalOperationsDelete
+    -> GlobalOperationsDelete'
+globalOperationsDelete' pGodProject_ pGodOperation_ =
+    GlobalOperationsDelete'
     { _godQuotaUser = Nothing
     , _godPrettyPrint = True
     , _godProject = pGodProject_
@@ -101,7 +109,7 @@ globalOperationsDelete pGodProject_ pGodOperation_ =
     , _godKey = Nothing
     , _godOauthToken = Nothing
     , _godFields = Nothing
-    , _godAlt = "json"
+    , _godAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ godFields
   = lens _godFields (\ s a -> s{_godFields = a})
 
 -- | Data format for the response.
-godAlt :: Lens' GlobalOperationsDelete' Text
+godAlt :: Lens' GlobalOperationsDelete' Alt
 godAlt = lens _godAlt (\ s a -> s{_godAlt = a})
 
 instance GoogleRequest GlobalOperationsDelete' where
         type Rs GlobalOperationsDelete' = ()
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalOperationsDelete{..}
-          = go _godQuotaUser _godPrettyPrint _godProject
+        requestWithRoute r u GlobalOperationsDelete'{..}
+          = go _godQuotaUser (Just _godPrettyPrint) _godProject
               _godOperation
               _godUserIp
               _godKey
               _godOauthToken
               _godFields
-              _godAlt
+              (Just _godAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalOperationsDeleteAPI)
+                      (Proxy :: Proxy GlobalOperationsDeleteResource)
                       r
                       u

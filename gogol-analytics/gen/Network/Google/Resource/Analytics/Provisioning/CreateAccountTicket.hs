@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates an account ticket.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsProvisioningCreateAccountTicket@.
-module Analytics.Provisioning.CreateAccountTicket
+module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     (
     -- * REST Resource
-      ProvisioningCreateAccountTicketAPI
+      ProvisioningCreateAccountTicketResource
 
     -- * Creating a Request
-    , provisioningCreateAccountTicket
-    , ProvisioningCreateAccountTicket
+    , provisioningCreateAccountTicket'
+    , ProvisioningCreateAccountTicket'
 
     -- * Request Lenses
     , pcatQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsProvisioningCreateAccountTicket@ which the
--- 'ProvisioningCreateAccountTicket' request conforms to.
-type ProvisioningCreateAccountTicketAPI =
+-- 'ProvisioningCreateAccountTicket'' request conforms to.
+type ProvisioningCreateAccountTicketResource =
      "provisioning" :>
-       "createAccountTicket" :> Post '[JSON] AccountTicket
+       "createAccountTicket" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] AccountTicket
 
 -- | Creates an account ticket.
 --
--- /See:/ 'provisioningCreateAccountTicket' smart constructor.
-data ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket
+-- /See:/ 'provisioningCreateAccountTicket'' smart constructor.
+data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
     { _pcatQuotaUser   :: !(Maybe Text)
     , _pcatPrettyPrint :: !Bool
     , _pcatUserIp      :: !(Maybe Text)
     , _pcatKey         :: !(Maybe Text)
     , _pcatOauthToken  :: !(Maybe Text)
     , _pcatFields      :: !(Maybe Text)
-    , _pcatAlt         :: !Text
+    , _pcatAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket
 -- * 'pcatFields'
 --
 -- * 'pcatAlt'
-provisioningCreateAccountTicket
-    :: ProvisioningCreateAccountTicket
-provisioningCreateAccountTicket =
-    ProvisioningCreateAccountTicket
+provisioningCreateAccountTicket'
+    :: ProvisioningCreateAccountTicket'
+provisioningCreateAccountTicket' =
+    ProvisioningCreateAccountTicket'
     { _pcatQuotaUser = Nothing
     , _pcatPrettyPrint = False
     , _pcatUserIp = Nothing
     , _pcatKey = Nothing
     , _pcatOauthToken = Nothing
     , _pcatFields = Nothing
-    , _pcatAlt = "json"
+    , _pcatAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +136,7 @@ pcatFields
   = lens _pcatFields (\ s a -> s{_pcatFields = a})
 
 -- | Data format for the response.
-pcatAlt :: Lens' ProvisioningCreateAccountTicket' Text
+pcatAlt :: Lens' ProvisioningCreateAccountTicket' Alt
 pcatAlt = lens _pcatAlt (\ s a -> s{_pcatAlt = a})
 
 instance GoogleRequest
@@ -137,14 +145,16 @@ instance GoogleRequest
              AccountTicket
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ProvisioningCreateAccountTicket{..}
-          = go _pcatQuotaUser _pcatPrettyPrint _pcatUserIp
+          ProvisioningCreateAccountTicket'{..}
+          = go _pcatQuotaUser (Just _pcatPrettyPrint)
+              _pcatUserIp
               _pcatKey
               _pcatOauthToken
               _pcatFields
-              _pcatAlt
+              (Just _pcatAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProvisioningCreateAccountTicketAPI)
+                      (Proxy ::
+                         Proxy ProvisioningCreateAccountTicketResource)
                       r
                       u

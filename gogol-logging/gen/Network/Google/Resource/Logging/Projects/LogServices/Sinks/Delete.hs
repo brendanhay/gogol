@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- written to the destination.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogServicesSinksDelete@.
-module Logging.Projects.LogServices.Sinks.Delete
+module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Delete
     (
     -- * REST Resource
-      ProjectsLogServicesSinksDeleteAPI
+      ProjectsLogServicesSinksDeleteResource
 
     -- * Creating a Request
-    , projectsLogServicesSinksDelete
-    , ProjectsLogServicesSinksDelete
+    , projectsLogServicesSinksDelete'
+    , ProjectsLogServicesSinksDelete'
 
     -- * Request Lenses
     , plssdXgafv
@@ -52,21 +53,35 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksDelete@ which the
--- 'ProjectsLogServicesSinksDelete' request conforms to.
-type ProjectsLogServicesSinksDeleteAPI =
+-- 'ProjectsLogServicesSinksDelete'' request conforms to.
+type ProjectsLogServicesSinksDeleteResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logServices" :>
              Capture "logServicesId" Text :>
                "sinks" :>
-                 Capture "sinksId" Text :> Delete '[JSON] Empty
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Delete '[JSON] Empty
 
 -- | Deletes a log service sink. After deletion, no new log entries are
 -- written to the destination.
 --
--- /See:/ 'projectsLogServicesSinksDelete' smart constructor.
-data ProjectsLogServicesSinksDelete = ProjectsLogServicesSinksDelete
+-- /See:/ 'projectsLogServicesSinksDelete'' smart constructor.
+data ProjectsLogServicesSinksDelete' = ProjectsLogServicesSinksDelete'
     { _plssdXgafv          :: !(Maybe Text)
     , _plssdQuotaUser      :: !(Maybe Text)
     , _plssdPrettyPrint    :: !Bool
@@ -120,13 +135,13 @@ data ProjectsLogServicesSinksDelete = ProjectsLogServicesSinksDelete
 -- * 'plssdCallback'
 --
 -- * 'plssdAlt'
-projectsLogServicesSinksDelete
+projectsLogServicesSinksDelete'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsLogServicesSinksDelete
-projectsLogServicesSinksDelete pPlssdLogServicesId_ pPlssdProjectsId_ pPlssdSinksId_ =
-    ProjectsLogServicesSinksDelete
+    -> ProjectsLogServicesSinksDelete'
+projectsLogServicesSinksDelete' pPlssdLogServicesId_ pPlssdProjectsId_ pPlssdSinksId_ =
+    ProjectsLogServicesSinksDelete'
     { _plssdXgafv = Nothing
     , _plssdQuotaUser = Nothing
     , _plssdPrettyPrint = True
@@ -242,10 +257,11 @@ instance GoogleRequest
         type Rs ProjectsLogServicesSinksDelete' = Empty
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
-          ProjectsLogServicesSinksDelete{..}
-          = go _plssdXgafv _plssdQuotaUser _plssdPrettyPrint
+          ProjectsLogServicesSinksDelete'{..}
+          = go _plssdXgafv _plssdQuotaUser
+              (Just _plssdPrettyPrint)
               _plssdUploadProtocol
-              _plssdPp
+              (Just _plssdPp)
               _plssdAccessToken
               _plssdUploadType
               _plssdBearerToken
@@ -256,9 +272,10 @@ instance GoogleRequest
               _plssdSinksId
               _plssdFields
               _plssdCallback
-              _plssdAlt
+              (Just _plssdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogServicesSinksDeleteAPI)
+                      (Proxy ::
+                         Proxy ProjectsLogServicesSinksDeleteResource)
                       r
                       u

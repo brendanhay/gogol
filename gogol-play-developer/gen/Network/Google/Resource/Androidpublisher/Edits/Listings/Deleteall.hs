@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,156 +20,164 @@
 -- | Deletes all localized listings from an edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsListingsDeleteall@.
-module Androidpublisher.Edits.Listings.Deleteall
+module Network.Google.Resource.Androidpublisher.Edits.Listings.Deleteall
     (
     -- * REST Resource
-      EditsListingsDeleteallAPI
+      EditsListingsDeleteallResource
 
     -- * Creating a Request
-    , editsListingsDeleteall
-    , EditsListingsDeleteall
+    , editsListingsDeleteall'
+    , EditsListingsDeleteall'
 
     -- * Request Lenses
-    , eldQuotaUser
-    , eldPrettyPrint
-    , eldPackageName
-    , eldUserIp
-    , eldKey
-    , eldOauthToken
-    , eldEditId
-    , eldFields
-    , eldAlt
+    , ediQuotaUser
+    , ediPrettyPrint
+    , ediPackageName
+    , ediUserIp
+    , ediKey
+    , ediOauthToken
+    , ediEditId
+    , ediFields
+    , ediAlt
     ) where
 
 import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsListingsDeleteall@ which the
--- 'EditsListingsDeleteall' request conforms to.
-type EditsListingsDeleteallAPI =
+-- 'EditsListingsDeleteall'' request conforms to.
+type EditsListingsDeleteallResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "listings" :> Delete '[JSON] ()
+           "listings" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes all localized listings from an edit.
 --
--- /See:/ 'editsListingsDeleteall' smart constructor.
-data EditsListingsDeleteall = EditsListingsDeleteall
-    { _eldQuotaUser   :: !(Maybe Text)
-    , _eldPrettyPrint :: !Bool
-    , _eldPackageName :: !Text
-    , _eldUserIp      :: !(Maybe Text)
-    , _eldKey         :: !(Maybe Text)
-    , _eldOauthToken  :: !(Maybe Text)
-    , _eldEditId      :: !Text
-    , _eldFields      :: !(Maybe Text)
-    , _eldAlt         :: !Text
+-- /See:/ 'editsListingsDeleteall'' smart constructor.
+data EditsListingsDeleteall' = EditsListingsDeleteall'
+    { _ediQuotaUser   :: !(Maybe Text)
+    , _ediPrettyPrint :: !Bool
+    , _ediPackageName :: !Text
+    , _ediUserIp      :: !(Maybe Text)
+    , _ediKey         :: !(Maybe Text)
+    , _ediOauthToken  :: !(Maybe Text)
+    , _ediEditId      :: !Text
+    , _ediFields      :: !(Maybe Text)
+    , _ediAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsDeleteall'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eldQuotaUser'
+-- * 'ediQuotaUser'
 --
--- * 'eldPrettyPrint'
+-- * 'ediPrettyPrint'
 --
--- * 'eldPackageName'
+-- * 'ediPackageName'
 --
--- * 'eldUserIp'
+-- * 'ediUserIp'
 --
--- * 'eldKey'
+-- * 'ediKey'
 --
--- * 'eldOauthToken'
+-- * 'ediOauthToken'
 --
--- * 'eldEditId'
+-- * 'ediEditId'
 --
--- * 'eldFields'
+-- * 'ediFields'
 --
--- * 'eldAlt'
-editsListingsDeleteall
+-- * 'ediAlt'
+editsListingsDeleteall'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsListingsDeleteall
-editsListingsDeleteall pEldPackageName_ pEldEditId_ =
-    EditsListingsDeleteall
-    { _eldQuotaUser = Nothing
-    , _eldPrettyPrint = True
-    , _eldPackageName = pEldPackageName_
-    , _eldUserIp = Nothing
-    , _eldKey = Nothing
-    , _eldOauthToken = Nothing
-    , _eldEditId = pEldEditId_
-    , _eldFields = Nothing
-    , _eldAlt = "json"
+    -> EditsListingsDeleteall'
+editsListingsDeleteall' pEdiPackageName_ pEdiEditId_ =
+    EditsListingsDeleteall'
+    { _ediQuotaUser = Nothing
+    , _ediPrettyPrint = True
+    , _ediPackageName = pEdiPackageName_
+    , _ediUserIp = Nothing
+    , _ediKey = Nothing
+    , _ediOauthToken = Nothing
+    , _ediEditId = pEdiEditId_
+    , _ediFields = Nothing
+    , _ediAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eldQuotaUser :: Lens' EditsListingsDeleteall' (Maybe Text)
-eldQuotaUser
-  = lens _eldQuotaUser (\ s a -> s{_eldQuotaUser = a})
+ediQuotaUser :: Lens' EditsListingsDeleteall' (Maybe Text)
+ediQuotaUser
+  = lens _ediQuotaUser (\ s a -> s{_ediQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-eldPrettyPrint :: Lens' EditsListingsDeleteall' Bool
-eldPrettyPrint
-  = lens _eldPrettyPrint
-      (\ s a -> s{_eldPrettyPrint = a})
+ediPrettyPrint :: Lens' EditsListingsDeleteall' Bool
+ediPrettyPrint
+  = lens _ediPrettyPrint
+      (\ s a -> s{_ediPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eldPackageName :: Lens' EditsListingsDeleteall' Text
-eldPackageName
-  = lens _eldPackageName
-      (\ s a -> s{_eldPackageName = a})
+ediPackageName :: Lens' EditsListingsDeleteall' Text
+ediPackageName
+  = lens _ediPackageName
+      (\ s a -> s{_ediPackageName = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eldUserIp :: Lens' EditsListingsDeleteall' (Maybe Text)
-eldUserIp
-  = lens _eldUserIp (\ s a -> s{_eldUserIp = a})
+ediUserIp :: Lens' EditsListingsDeleteall' (Maybe Text)
+ediUserIp
+  = lens _ediUserIp (\ s a -> s{_ediUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eldKey :: Lens' EditsListingsDeleteall' (Maybe Text)
-eldKey = lens _eldKey (\ s a -> s{_eldKey = a})
+ediKey :: Lens' EditsListingsDeleteall' (Maybe Text)
+ediKey = lens _ediKey (\ s a -> s{_ediKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eldOauthToken :: Lens' EditsListingsDeleteall' (Maybe Text)
-eldOauthToken
-  = lens _eldOauthToken
-      (\ s a -> s{_eldOauthToken = a})
+ediOauthToken :: Lens' EditsListingsDeleteall' (Maybe Text)
+ediOauthToken
+  = lens _ediOauthToken
+      (\ s a -> s{_ediOauthToken = a})
 
 -- | Unique identifier for this edit.
-eldEditId :: Lens' EditsListingsDeleteall' Text
-eldEditId
-  = lens _eldEditId (\ s a -> s{_eldEditId = a})
+ediEditId :: Lens' EditsListingsDeleteall' Text
+ediEditId
+  = lens _ediEditId (\ s a -> s{_ediEditId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eldFields :: Lens' EditsListingsDeleteall' (Maybe Text)
-eldFields
-  = lens _eldFields (\ s a -> s{_eldFields = a})
+ediFields :: Lens' EditsListingsDeleteall' (Maybe Text)
+ediFields
+  = lens _ediFields (\ s a -> s{_ediFields = a})
 
 -- | Data format for the response.
-eldAlt :: Lens' EditsListingsDeleteall' Text
-eldAlt = lens _eldAlt (\ s a -> s{_eldAlt = a})
+ediAlt :: Lens' EditsListingsDeleteall' Alt
+ediAlt = lens _ediAlt (\ s a -> s{_ediAlt = a})
 
 instance GoogleRequest EditsListingsDeleteall' where
         type Rs EditsListingsDeleteall' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsListingsDeleteall{..}
-          = go _eldQuotaUser _eldPrettyPrint _eldPackageName
-              _eldUserIp
-              _eldKey
-              _eldOauthToken
-              _eldEditId
-              _eldFields
-              _eldAlt
+        requestWithRoute r u EditsListingsDeleteall'{..}
+          = go _ediQuotaUser (Just _ediPrettyPrint)
+              _ediPackageName
+              _ediUserIp
+              _ediKey
+              _ediOauthToken
+              _ediEditId
+              _ediFields
+              (Just _ediAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsListingsDeleteallAPI)
+                      (Proxy :: Proxy EditsListingsDeleteallResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- the value of the nextPageToken.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringTimeseriesList@.
-module Cloudmonitoring.Timeseries.List
+module Network.Google.Resource.Cloudmonitoring.Timeseries.List
     (
     -- * REST Resource
-      TimeseriesListAPI
+      TimeseriesListResource
 
     -- * Creating a Request
-    , timeseriesList
-    , TimeseriesList
+    , timeseriesList'
+    , TimeseriesList'
 
     -- * Request Lenses
     , tlWindow
@@ -56,20 +57,29 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringTimeseriesList@ which the
--- 'TimeseriesList' request conforms to.
-type TimeseriesListAPI =
+-- 'TimeseriesList'' request conforms to.
+type TimeseriesListResource =
      Capture "project" Text :>
        "timeseries" :>
          Capture "metric" Text :>
            QueryParam "window" Text :>
-             QueryParam "count" Int32 :>
-               QueryParam "aggregator" Text :>
-                 QueryParam "timespan" Text :>
-                   QueryParam "oldest" Text :>
-                     QueryParams "labels" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "youngest" Text :>
-                           Get '[JSON] ListTimeseriesResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "count" Int32 :>
+                     QueryParam "aggregator"
+                       CloudmonitoringTimeseriesListAggregator
+                       :>
+                       QueryParam "timespan" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oldest" Text :>
+                             QueryParams "labels" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "youngest" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON] ListTimeseriesResponse
 
 -- | List the data points of the time series that match the metric and labels
 -- values and that have data points in the interval. Large responses are
@@ -77,15 +87,15 @@ type TimeseriesListAPI =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 --
--- /See:/ 'timeseriesList' smart constructor.
-data TimeseriesList = TimeseriesList
+-- /See:/ 'timeseriesList'' smart constructor.
+data TimeseriesList' = TimeseriesList'
     { _tlWindow      :: !(Maybe Text)
     , _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
     , _tlUserIp      :: !(Maybe Text)
     , _tlCount       :: !Int32
-    , _tlAggregator  :: !(Maybe Text)
+    , _tlAggregator  :: !(Maybe CloudmonitoringTimeseriesListAggregator)
     , _tlTimespan    :: !(Maybe Text)
     , _tlMetric      :: !Text
     , _tlKey         :: !(Maybe Text)
@@ -95,7 +105,7 @@ data TimeseriesList = TimeseriesList
     , _tlYoungest    :: !Text
     , _tlOauthToken  :: !(Maybe Text)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesList'' with the minimum fields required to make a request.
@@ -135,13 +145,13 @@ data TimeseriesList = TimeseriesList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-timeseriesList
+timeseriesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'metric'
     -> Text -- ^ 'youngest'
-    -> TimeseriesList
-timeseriesList pTlProject_ pTlMetric_ pTlYoungest_ =
-    TimeseriesList
+    -> TimeseriesList'
+timeseriesList' pTlProject_ pTlMetric_ pTlYoungest_ =
+    TimeseriesList'
     { _tlWindow = Nothing
     , _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
@@ -158,7 +168,7 @@ timeseriesList pTlProject_ pTlMetric_ pTlYoungest_ =
     , _tlYoungest = pTlYoungest_
     , _tlOauthToken = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | The sampling window. At most one data point will be returned for each
@@ -201,7 +211,7 @@ tlCount = lens _tlCount (\ s a -> s{_tlCount = a})
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tlAggregator :: Lens' TimeseriesList' (Maybe Text)
+tlAggregator :: Lens' TimeseriesList' (Maybe CloudmonitoringTimeseriesListAggregator)
 tlAggregator
   = lens _tlAggregator (\ s a -> s{_tlAggregator = a})
 
@@ -266,14 +276,15 @@ tlFields :: Lens' TimeseriesList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TimeseriesList' Text
+tlAlt :: Lens' TimeseriesList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TimeseriesList' where
         type Rs TimeseriesList' = ListTimeseriesResponse
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesList{..}
-          = go _tlWindow _tlQuotaUser _tlPrettyPrint _tlProject
+        requestWithRoute r u TimeseriesList'{..}
+          = go _tlWindow _tlQuotaUser (Just _tlPrettyPrint)
+              _tlProject
               _tlUserIp
               (Just _tlCount)
               _tlAggregator
@@ -286,8 +297,9 @@ instance GoogleRequest TimeseriesList' where
               (Just _tlYoungest)
               _tlOauthToken
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimeseriesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TimeseriesListResource)
                       r
                       u

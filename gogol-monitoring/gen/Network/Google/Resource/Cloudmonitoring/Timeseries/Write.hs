@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- written sequentially in the order of their end time.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringTimeseriesWrite@.
-module Cloudmonitoring.Timeseries.Write
+module Network.Google.Resource.Cloudmonitoring.Timeseries.Write
     (
     -- * REST Resource
-      TimeseriesWriteAPI
+      TimeseriesWriteResource
 
     -- * Creating a Request
-    , timeseriesWrite
-    , TimeseriesWrite
+    , timeseriesWrite'
+    , TimeseriesWrite'
 
     -- * Request Lenses
     , twQuotaUser
@@ -49,11 +50,18 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringTimeseriesWrite@ which the
--- 'TimeseriesWrite' request conforms to.
-type TimeseriesWriteAPI =
+-- 'TimeseriesWrite'' request conforms to.
+type TimeseriesWriteResource =
      Capture "project" Text :>
        "timeseries:write" :>
-         Post '[JSON] WriteTimeseriesResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] WriteTimeseriesResponse
 
 -- | Put data points to one or more time series for one or more metrics. If a
 -- time series does not exist, a new time series will be created. It is not
@@ -63,8 +71,8 @@ type TimeseriesWriteAPI =
 -- Therefore, users should make sure that points of a time series are
 -- written sequentially in the order of their end time.
 --
--- /See:/ 'timeseriesWrite' smart constructor.
-data TimeseriesWrite = TimeseriesWrite
+-- /See:/ 'timeseriesWrite'' smart constructor.
+data TimeseriesWrite' = TimeseriesWrite'
     { _twQuotaUser   :: !(Maybe Text)
     , _twPrettyPrint :: !Bool
     , _twProject     :: !Text
@@ -72,7 +80,7 @@ data TimeseriesWrite = TimeseriesWrite
     , _twKey         :: !(Maybe Text)
     , _twOauthToken  :: !(Maybe Text)
     , _twFields      :: !(Maybe Text)
-    , _twAlt         :: !Text
+    , _twAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesWrite'' with the minimum fields required to make a request.
@@ -94,11 +102,11 @@ data TimeseriesWrite = TimeseriesWrite
 -- * 'twFields'
 --
 -- * 'twAlt'
-timeseriesWrite
+timeseriesWrite'
     :: Text -- ^ 'project'
-    -> TimeseriesWrite
-timeseriesWrite pTwProject_ =
-    TimeseriesWrite
+    -> TimeseriesWrite'
+timeseriesWrite' pTwProject_ =
+    TimeseriesWrite'
     { _twQuotaUser = Nothing
     , _twPrettyPrint = True
     , _twProject = pTwProject_
@@ -106,7 +114,7 @@ timeseriesWrite pTwProject_ =
     , _twKey = Nothing
     , _twOauthToken = Nothing
     , _twFields = Nothing
-    , _twAlt = "json"
+    , _twAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +157,21 @@ twFields :: Lens' TimeseriesWrite' (Maybe Text)
 twFields = lens _twFields (\ s a -> s{_twFields = a})
 
 -- | Data format for the response.
-twAlt :: Lens' TimeseriesWrite' Text
+twAlt :: Lens' TimeseriesWrite' Alt
 twAlt = lens _twAlt (\ s a -> s{_twAlt = a})
 
 instance GoogleRequest TimeseriesWrite' where
         type Rs TimeseriesWrite' = WriteTimeseriesResponse
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesWrite{..}
-          = go _twQuotaUser _twPrettyPrint _twProject _twUserIp
+        requestWithRoute r u TimeseriesWrite'{..}
+          = go _twQuotaUser (Just _twPrettyPrint) _twProject
+              _twUserIp
               _twKey
               _twOauthToken
               _twFields
-              _twAlt
+              (Just _twAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimeseriesWriteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TimeseriesWriteResource)
                       r
                       u

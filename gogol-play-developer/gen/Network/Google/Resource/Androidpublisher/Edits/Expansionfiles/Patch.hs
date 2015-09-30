@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- method. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsExpansionfilesPatch@.
-module Androidpublisher.Edits.Expansionfiles.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Patch
     (
     -- * REST Resource
-      EditsExpansionfilesPatchAPI
+      EditsExpansionfilesPatchResource
 
     -- * Creating a Request
-    , editsExpansionfilesPatch
-    , EditsExpansionfilesPatch
+    , editsExpansionfilesPatch'
+    , EditsExpansionfilesPatch'
 
     -- * Request Lenses
     , eepQuotaUser
@@ -48,34 +49,43 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsExpansionfilesPatch@ which the
--- 'EditsExpansionfilesPatch' request conforms to.
-type EditsExpansionfilesPatchAPI =
+-- 'EditsExpansionfilesPatch'' request conforms to.
+type EditsExpansionfilesPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "expansionFiles" :>
-                 Capture "expansionFileType" Text :>
-                   Patch '[JSON] ExpansionFile
+                 Capture "expansionFileType"
+                   AndroidpublisherEditsExpansionfilesPatchExpansionFileType
+                   :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Patch '[JSON] ExpansionFile
 
 -- | Updates the APK\'s Expansion File configuration to reference another
 -- APK\'s Expansion Files. To add a new Expansion File use the Upload
 -- method. This method supports patch semantics.
 --
--- /See:/ 'editsExpansionfilesPatch' smart constructor.
-data EditsExpansionfilesPatch = EditsExpansionfilesPatch
+-- /See:/ 'editsExpansionfilesPatch'' smart constructor.
+data EditsExpansionfilesPatch' = EditsExpansionfilesPatch'
     { _eepQuotaUser         :: !(Maybe Text)
     , _eepPrettyPrint       :: !Bool
     , _eepPackageName       :: !Text
     , _eepApkVersionCode    :: !Int32
     , _eepUserIp            :: !(Maybe Text)
     , _eepKey               :: !(Maybe Text)
-    , _eepExpansionFileType :: !Text
+    , _eepExpansionFileType :: !AndroidpublisherEditsExpansionfilesPatchExpansionFileType
     , _eepOauthToken        :: !(Maybe Text)
     , _eepEditId            :: !Text
     , _eepFields            :: !(Maybe Text)
-    , _eepAlt               :: !Text
+    , _eepAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesPatch'' with the minimum fields required to make a request.
@@ -103,14 +113,14 @@ data EditsExpansionfilesPatch = EditsExpansionfilesPatch
 -- * 'eepFields'
 --
 -- * 'eepAlt'
-editsExpansionfilesPatch
+editsExpansionfilesPatch'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'expansionFileType'
+    -> AndroidpublisherEditsExpansionfilesPatchExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
-    -> EditsExpansionfilesPatch
-editsExpansionfilesPatch pEepPackageName_ pEepApkVersionCode_ pEepExpansionFileType_ pEepEditId_ =
-    EditsExpansionfilesPatch
+    -> EditsExpansionfilesPatch'
+editsExpansionfilesPatch' pEepPackageName_ pEepApkVersionCode_ pEepExpansionFileType_ pEepEditId_ =
+    EditsExpansionfilesPatch'
     { _eepQuotaUser = Nothing
     , _eepPrettyPrint = True
     , _eepPackageName = pEepPackageName_
@@ -121,7 +131,7 @@ editsExpansionfilesPatch pEepPackageName_ pEepApkVersionCode_ pEepExpansionFileT
     , _eepOauthToken = Nothing
     , _eepEditId = pEepEditId_
     , _eepFields = Nothing
-    , _eepAlt = "json"
+    , _eepAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,7 +173,7 @@ eepUserIp
 eepKey :: Lens' EditsExpansionfilesPatch' (Maybe Text)
 eepKey = lens _eepKey (\ s a -> s{_eepKey = a})
 
-eepExpansionFileType :: Lens' EditsExpansionfilesPatch' Text
+eepExpansionFileType :: Lens' EditsExpansionfilesPatch' AndroidpublisherEditsExpansionfilesPatchExpansionFileType
 eepExpansionFileType
   = lens _eepExpansionFileType
       (\ s a -> s{_eepExpansionFileType = a})
@@ -185,15 +195,16 @@ eepFields
   = lens _eepFields (\ s a -> s{_eepFields = a})
 
 -- | Data format for the response.
-eepAlt :: Lens' EditsExpansionfilesPatch' Text
+eepAlt :: Lens' EditsExpansionfilesPatch' Alt
 eepAlt = lens _eepAlt (\ s a -> s{_eepAlt = a})
 
 instance GoogleRequest EditsExpansionfilesPatch'
          where
         type Rs EditsExpansionfilesPatch' = ExpansionFile
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsExpansionfilesPatch{..}
-          = go _eepQuotaUser _eepPrettyPrint _eepPackageName
+        requestWithRoute r u EditsExpansionfilesPatch'{..}
+          = go _eepQuotaUser (Just _eepPrettyPrint)
+              _eepPackageName
               _eepApkVersionCode
               _eepUserIp
               _eepKey
@@ -201,9 +212,9 @@ instance GoogleRequest EditsExpansionfilesPatch'
               _eepOauthToken
               _eepEditId
               _eepFields
-              _eepAlt
+              (Just _eepAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsExpansionfilesPatchAPI)
+                      (Proxy :: Proxy EditsExpansionfilesPatchResource)
                       r
                       u

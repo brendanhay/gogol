@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsPatch@.
-module DFAReporting.FloodlightActivityGroups.Patch
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Patch
     (
     -- * REST Resource
-      FloodlightActivityGroupsPatchAPI
+      FloodlightActivityGroupsPatchResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsPatch
-    , FloodlightActivityGroupsPatch
+    , floodlightActivityGroupsPatch'
+    , FloodlightActivityGroupsPatch'
 
     -- * Request Lenses
     , fagpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsPatch@ which the
--- 'FloodlightActivityGroupsPatch' request conforms to.
-type FloodlightActivityGroupsPatchAPI =
+-- 'FloodlightActivityGroupsPatch'' request conforms to.
+type FloodlightActivityGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] FloodlightActivityGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group. This method supports
 -- patch semantics.
 --
--- /See:/ 'floodlightActivityGroupsPatch' smart constructor.
-data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch
+-- /See:/ 'floodlightActivityGroupsPatch'' smart constructor.
+data FloodlightActivityGroupsPatch' = FloodlightActivityGroupsPatch'
     { _fagpQuotaUser   :: !(Maybe Text)
     , _fagpPrettyPrint :: !Bool
     , _fagpUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch
     , _fagpId          :: !Int64
     , _fagpOauthToken  :: !(Maybe Text)
     , _fagpFields      :: !(Maybe Text)
-    , _fagpAlt         :: !Text
+    , _fagpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data FloodlightActivityGroupsPatch = FloodlightActivityGroupsPatch
 -- * 'fagpFields'
 --
 -- * 'fagpAlt'
-floodlightActivityGroupsPatch
+floodlightActivityGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightActivityGroupsPatch
-floodlightActivityGroupsPatch pFagpProfileId_ pFagpId_ =
-    FloodlightActivityGroupsPatch
+    -> FloodlightActivityGroupsPatch'
+floodlightActivityGroupsPatch' pFagpProfileId_ pFagpId_ =
+    FloodlightActivityGroupsPatch'
     { _fagpQuotaUser = Nothing
     , _fagpPrettyPrint = True
     , _fagpUserIp = Nothing
@@ -104,7 +112,7 @@ floodlightActivityGroupsPatch pFagpProfileId_ pFagpId_ =
     , _fagpId = pFagpId_
     , _fagpOauthToken = Nothing
     , _fagpFields = Nothing
-    , _fagpAlt = "json"
+    , _fagpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ fagpFields
   = lens _fagpFields (\ s a -> s{_fagpFields = a})
 
 -- | Data format for the response.
-fagpAlt :: Lens' FloodlightActivityGroupsPatch' Text
+fagpAlt :: Lens' FloodlightActivityGroupsPatch' Alt
 fagpAlt = lens _fagpAlt (\ s a -> s{_fagpAlt = a})
 
 instance GoogleRequest FloodlightActivityGroupsPatch'
@@ -164,16 +172,18 @@ instance GoogleRequest FloodlightActivityGroupsPatch'
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightActivityGroupsPatch{..}
-          = go _fagpQuotaUser _fagpPrettyPrint _fagpUserIp
+          FloodlightActivityGroupsPatch'{..}
+          = go _fagpQuotaUser (Just _fagpPrettyPrint)
+              _fagpUserIp
               _fagpProfileId
               _fagpKey
               (Just _fagpId)
               _fagpOauthToken
               _fagpFields
-              _fagpAlt
+              (Just _fagpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsPatchAPI)
+                      (Proxy ::
+                         Proxy FloodlightActivityGroupsPatchResource)
                       r
                       u

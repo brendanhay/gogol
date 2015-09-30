@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one creative field by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsGet@.
-module DFAReporting.CreativeFields.Get
+module Network.Google.Resource.DFAReporting.CreativeFields.Get
     (
     -- * REST Resource
-      CreativeFieldsGetAPI
+      CreativeFieldsGetResource
 
     -- * Creating a Request
-    , creativeFieldsGet
-    , CreativeFieldsGet
+    , creativeFieldsGet'
+    , CreativeFieldsGet'
 
     -- * Request Lenses
     , cfgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsGet@ which the
--- 'CreativeFieldsGet' request conforms to.
-type CreativeFieldsGetAPI =
+-- 'CreativeFieldsGet'' request conforms to.
+type CreativeFieldsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           Capture "id" Int64 :> Get '[JSON] CreativeField
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] CreativeField
 
 -- | Gets one creative field by ID.
 --
--- /See:/ 'creativeFieldsGet' smart constructor.
-data CreativeFieldsGet = CreativeFieldsGet
+-- /See:/ 'creativeFieldsGet'' smart constructor.
+data CreativeFieldsGet' = CreativeFieldsGet'
     { _cfgQuotaUser   :: !(Maybe Text)
     , _cfgPrettyPrint :: !Bool
     , _cfgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CreativeFieldsGet = CreativeFieldsGet
     , _cfgId          :: !Int64
     , _cfgOauthToken  :: !(Maybe Text)
     , _cfgFields      :: !(Maybe Text)
-    , _cfgAlt         :: !Text
+    , _cfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CreativeFieldsGet = CreativeFieldsGet
 -- * 'cfgFields'
 --
 -- * 'cfgAlt'
-creativeFieldsGet
+creativeFieldsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldsGet
-creativeFieldsGet pCfgProfileId_ pCfgId_ =
-    CreativeFieldsGet
+    -> CreativeFieldsGet'
+creativeFieldsGet' pCfgProfileId_ pCfgId_ =
+    CreativeFieldsGet'
     { _cfgQuotaUser = Nothing
     , _cfgPrettyPrint = True
     , _cfgUserIp = Nothing
@@ -101,7 +109,7 @@ creativeFieldsGet pCfgProfileId_ pCfgId_ =
     , _cfgId = pCfgId_
     , _cfgOauthToken = Nothing
     , _cfgFields = Nothing
-    , _cfgAlt = "json"
+    , _cfgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ cfgFields
   = lens _cfgFields (\ s a -> s{_cfgFields = a})
 
 -- | Data format for the response.
-cfgAlt :: Lens' CreativeFieldsGet' Text
+cfgAlt :: Lens' CreativeFieldsGet' Alt
 cfgAlt = lens _cfgAlt (\ s a -> s{_cfgAlt = a})
 
 instance GoogleRequest CreativeFieldsGet' where
         type Rs CreativeFieldsGet' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsGet{..}
-          = go _cfgQuotaUser _cfgPrettyPrint _cfgUserIp
+        requestWithRoute r u CreativeFieldsGet'{..}
+          = go _cfgQuotaUser (Just _cfgPrettyPrint) _cfgUserIp
               _cfgProfileId
               _cfgKey
               _cfgId
               _cfgOauthToken
               _cfgFields
-              _cfgAlt
+              (Just _cfgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsGetAPI)
+                      (Proxy :: Proxy CreativeFieldsGetResource)
                       r
                       u

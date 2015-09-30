@@ -34,6 +34,16 @@ module Network.Google.Fonts.Types
     , webfontList
     , wlKind
     , wlItems
+
+    -- * WebfontsWebfontsListSort
+    , WebfontsWebfontsListSort (..)
+
+    -- * WebfontFiles
+    , WebfontFiles
+    , webfontFiles
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Fonts.Types.Product
@@ -41,7 +51,7 @@ import           Network.Google.Fonts.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Fonts Developer API.
-fontsURL :: BaseURL
+fontsURL :: BaseUrl
 fontsURL
   = BaseUrl Https
       "https://www.googleapis.com/webfonts/v1/"

@@ -18,6 +18,65 @@ module Network.Google.Analytics.Types.Product where
 import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'gaDataColumnHeaders' smart constructor.
+data GaDataColumnHeaders = GaDataColumnHeaders
+    { _gdchColumnType :: !(Maybe Text)
+    , _gdchName       :: !(Maybe Text)
+    , _gdchDataType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataColumnHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdchColumnType'
+--
+-- * 'gdchName'
+--
+-- * 'gdchDataType'
+gaDataColumnHeaders
+    :: GaDataColumnHeaders
+gaDataColumnHeaders =
+    GaDataColumnHeaders
+    { _gdchColumnType = Nothing
+    , _gdchName = Nothing
+    , _gdchDataType = Nothing
+    }
+
+-- | Column Type. Either DIMENSION or METRIC.
+gdchColumnType :: Lens' GaDataColumnHeaders (Maybe Text)
+gdchColumnType
+  = lens _gdchColumnType
+      (\ s a -> s{_gdchColumnType = a})
+
+-- | Column name.
+gdchName :: Lens' GaDataColumnHeaders (Maybe Text)
+gdchName = lens _gdchName (\ s a -> s{_gdchName = a})
+
+-- | Data type. Dimension column headers have only STRING as the data type.
+-- Metric column headers have data types for metric values such as INTEGER,
+-- DOUBLE, CURRENCY etc.
+gdchDataType :: Lens' GaDataColumnHeaders (Maybe Text)
+gdchDataType
+  = lens _gdchDataType (\ s a -> s{_gdchDataType = a})
+
+instance FromJSON GaDataColumnHeaders where
+        parseJSON
+          = withObject "GaDataColumnHeaders"
+              (\ o ->
+                 GaDataColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON GaDataColumnHeaders where
+        toJSON GaDataColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _gdchColumnType,
+                  ("name" .=) <$> _gdchName,
+                  ("dataType" .=) <$> _gdchDataType])
+
 -- | An unsampled report collection lists Analytics unsampled reports to
 -- which the user has access. Each view (profile) can have a set of
 -- unsampled reports. Each resource in the unsampled report collection
@@ -141,6 +200,159 @@ instance ToJSON UnsampledReports where
                   ("totalResults" .=) <$> _urTotalResults,
                   ("startIndex" .=) <$> _urStartIndex,
                   ("previousLink" .=) <$> _urPreviousLink])
+
+-- | Analytics data request query parameters.
+--
+-- /See:/ 'gaDataQuery' smart constructor.
+data GaDataQuery = GaDataQuery
+    { _gdqMetrics       :: !(Maybe [Text])
+    , _gdqSamplingLevel :: !(Maybe Text)
+    , _gdqFilters       :: !(Maybe Text)
+    , _gdqIds           :: !(Maybe Text)
+    , _gdqEndDate       :: !(Maybe Text)
+    , _gdqSort          :: !(Maybe [Text])
+    , _gdqDimensions    :: !(Maybe Text)
+    , _gdqStartIndex    :: !(Maybe Int32)
+    , _gdqMaxResults    :: !(Maybe Int32)
+    , _gdqSegment       :: !(Maybe Text)
+    , _gdqStartDate     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataQuery' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdqMetrics'
+--
+-- * 'gdqSamplingLevel'
+--
+-- * 'gdqFilters'
+--
+-- * 'gdqIds'
+--
+-- * 'gdqEndDate'
+--
+-- * 'gdqSort'
+--
+-- * 'gdqDimensions'
+--
+-- * 'gdqStartIndex'
+--
+-- * 'gdqMaxResults'
+--
+-- * 'gdqSegment'
+--
+-- * 'gdqStartDate'
+gaDataQuery
+    :: GaDataQuery
+gaDataQuery =
+    GaDataQuery
+    { _gdqMetrics = Nothing
+    , _gdqSamplingLevel = Nothing
+    , _gdqFilters = Nothing
+    , _gdqIds = Nothing
+    , _gdqEndDate = Nothing
+    , _gdqSort = Nothing
+    , _gdqDimensions = Nothing
+    , _gdqStartIndex = Nothing
+    , _gdqMaxResults = Nothing
+    , _gdqSegment = Nothing
+    , _gdqStartDate = Nothing
+    }
+
+-- | List of analytics metrics.
+gdqMetrics :: Lens' GaDataQuery [Text]
+gdqMetrics
+  = lens _gdqMetrics (\ s a -> s{_gdqMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | Desired sampling level
+gdqSamplingLevel :: Lens' GaDataQuery (Maybe Text)
+gdqSamplingLevel
+  = lens _gdqSamplingLevel
+      (\ s a -> s{_gdqSamplingLevel = a})
+
+-- | Comma-separated list of dimension or metric filters.
+gdqFilters :: Lens' GaDataQuery (Maybe Text)
+gdqFilters
+  = lens _gdqFilters (\ s a -> s{_gdqFilters = a})
+
+-- | Unique table ID.
+gdqIds :: Lens' GaDataQuery (Maybe Text)
+gdqIds = lens _gdqIds (\ s a -> s{_gdqIds = a})
+
+-- | End date.
+gdqEndDate :: Lens' GaDataQuery (Maybe Text)
+gdqEndDate
+  = lens _gdqEndDate (\ s a -> s{_gdqEndDate = a})
+
+-- | List of dimensions or metrics based on which Analytics data is sorted.
+gdqSort :: Lens' GaDataQuery [Text]
+gdqSort
+  = lens _gdqSort (\ s a -> s{_gdqSort = a}) . _Default
+      . _Coerce
+
+-- | List of analytics dimensions.
+gdqDimensions :: Lens' GaDataQuery (Maybe Text)
+gdqDimensions
+  = lens _gdqDimensions
+      (\ s a -> s{_gdqDimensions = a})
+
+-- | Start index.
+gdqStartIndex :: Lens' GaDataQuery (Maybe Int32)
+gdqStartIndex
+  = lens _gdqStartIndex
+      (\ s a -> s{_gdqStartIndex = a})
+
+-- | Maximum results per page.
+gdqMaxResults :: Lens' GaDataQuery (Maybe Int32)
+gdqMaxResults
+  = lens _gdqMaxResults
+      (\ s a -> s{_gdqMaxResults = a})
+
+-- | Analytics advanced segment.
+gdqSegment :: Lens' GaDataQuery (Maybe Text)
+gdqSegment
+  = lens _gdqSegment (\ s a -> s{_gdqSegment = a})
+
+-- | Start date.
+gdqStartDate :: Lens' GaDataQuery (Maybe Text)
+gdqStartDate
+  = lens _gdqStartDate (\ s a -> s{_gdqStartDate = a})
+
+instance FromJSON GaDataQuery where
+        parseJSON
+          = withObject "GaDataQuery"
+              (\ o ->
+                 GaDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "samplingLevel")
+                     <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "end-date")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "start-index")
+                     <*> (o .:? "max-results")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "start-date"))
+
+instance ToJSON GaDataQuery where
+        toJSON GaDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _gdqMetrics,
+                  ("samplingLevel" .=) <$> _gdqSamplingLevel,
+                  ("filters" .=) <$> _gdqFilters,
+                  ("ids" .=) <$> _gdqIds,
+                  ("end-date" .=) <$> _gdqEndDate,
+                  ("sort" .=) <$> _gdqSort,
+                  ("dimensions" .=) <$> _gdqDimensions,
+                  ("start-index" .=) <$> _gdqStartIndex,
+                  ("max-results" .=) <$> _gdqMaxResults,
+                  ("segment" .=) <$> _gdqSegment,
+                  ("start-date" .=) <$> _gdqStartDate])
 
 -- | JSON template for Analytics unsampled report resource.
 --
@@ -373,6 +585,163 @@ instance ToJSON UnsampledReport where
                     _uCloudStorageDownloadDetails,
                   ("start-date" .=) <$> _uStartDate])
 
+--
+-- /See:/ 'goalEventDetailsEventConditions' smart constructor.
+data GoalEventDetailsEventConditions = GoalEventDetailsEventConditions
+    { _gedecMatchType       :: !(Maybe Text)
+    , _gedecExpression      :: !(Maybe Text)
+    , _gedecComparisonValue :: !(Maybe Int64)
+    , _gedecType            :: !(Maybe Text)
+    , _gedecComparisonType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalEventDetailsEventConditions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gedecMatchType'
+--
+-- * 'gedecExpression'
+--
+-- * 'gedecComparisonValue'
+--
+-- * 'gedecType'
+--
+-- * 'gedecComparisonType'
+goalEventDetailsEventConditions
+    :: GoalEventDetailsEventConditions
+goalEventDetailsEventConditions =
+    GoalEventDetailsEventConditions
+    { _gedecMatchType = Nothing
+    , _gedecExpression = Nothing
+    , _gedecComparisonValue = Nothing
+    , _gedecType = Nothing
+    , _gedecComparisonType = Nothing
+    }
+
+-- | Type of the match to be performed. Possible values are REGEXP,
+-- BEGINS_WITH, or EXACT.
+gedecMatchType :: Lens' GoalEventDetailsEventConditions (Maybe Text)
+gedecMatchType
+  = lens _gedecMatchType
+      (\ s a -> s{_gedecMatchType = a})
+
+-- | Expression used for this match.
+gedecExpression :: Lens' GoalEventDetailsEventConditions (Maybe Text)
+gedecExpression
+  = lens _gedecExpression
+      (\ s a -> s{_gedecExpression = a})
+
+-- | Value used for this comparison.
+gedecComparisonValue :: Lens' GoalEventDetailsEventConditions (Maybe Int64)
+gedecComparisonValue
+  = lens _gedecComparisonValue
+      (\ s a -> s{_gedecComparisonValue = a})
+
+-- | Type of this event condition. Possible values are CATEGORY, ACTION,
+-- LABEL, or VALUE.
+gedecType :: Lens' GoalEventDetailsEventConditions (Maybe Text)
+gedecType
+  = lens _gedecType (\ s a -> s{_gedecType = a})
+
+-- | Type of comparison. Possible values are LESS_THAN, GREATER_THAN or
+-- EQUAL.
+gedecComparisonType :: Lens' GoalEventDetailsEventConditions (Maybe Text)
+gedecComparisonType
+  = lens _gedecComparisonType
+      (\ s a -> s{_gedecComparisonType = a})
+
+instance FromJSON GoalEventDetailsEventConditions
+         where
+        parseJSON
+          = withObject "GoalEventDetailsEventConditions"
+              (\ o ->
+                 GoalEventDetailsEventConditions <$>
+                   (o .:? "matchType") <*> (o .:? "expression") <*>
+                     (o .:? "comparisonValue")
+                     <*> (o .:? "type")
+                     <*> (o .:? "comparisonType"))
+
+instance ToJSON GoalEventDetailsEventConditions where
+        toJSON GoalEventDetailsEventConditions{..}
+          = object
+              (catMaybes
+                 [("matchType" .=) <$> _gedecMatchType,
+                  ("expression" .=) <$> _gedecExpression,
+                  ("comparisonValue" .=) <$> _gedecComparisonValue,
+                  ("type" .=) <$> _gedecType,
+                  ("comparisonType" .=) <$> _gedecComparisonType])
+
+-- | Parent link for this view (profile). Points to the web property to which
+-- this view (profile) belongs.
+--
+-- /See:/ 'profileParentLink' smart constructor.
+data ProfileParentLink = ProfileParentLink
+    { _pplHref :: !(Maybe Text)
+    , _pplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProfileParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pplHref'
+--
+-- * 'pplType'
+profileParentLink
+    :: ProfileParentLink
+profileParentLink =
+    ProfileParentLink
+    { _pplHref = Nothing
+    , _pplType = "analytics#webproperty"
+    }
+
+-- | Link to the web property to which this view (profile) belongs.
+pplHref :: Lens' ProfileParentLink (Maybe Text)
+pplHref = lens _pplHref (\ s a -> s{_pplHref = a})
+
+-- | Value is \"analytics#webproperty\".
+pplType :: Lens' ProfileParentLink Text
+pplType = lens _pplType (\ s a -> s{_pplType = a})
+
+instance FromJSON ProfileParentLink where
+        parseJSON
+          = withObject "ProfileParentLink"
+              (\ o ->
+                 ProfileParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON ProfileParentLink where
+        toJSON ProfileParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _pplHref,
+                  Just ("type" .= _pplType)])
+
+-- | Total values for the requested metrics over all the results, not just
+-- the results returned in this response. The order of the metric totals is
+-- same as the metric order specified in the request.
+--
+-- /See:/ 'gaDataTotalsForAllResults' smart constructor.
+data GaDataTotalsForAllResults =
+    GaDataTotalsForAllResults
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataTotalsForAllResults' with the minimum fields required to make a request.
+--
+gaDataTotalsForAllResults
+    :: GaDataTotalsForAllResults
+gaDataTotalsForAllResults = GaDataTotalsForAllResults
+
+instance FromJSON GaDataTotalsForAllResults where
+        parseJSON
+          = withObject "GaDataTotalsForAllResults"
+              (\ o -> pure GaDataTotalsForAllResults)
+
+instance ToJSON GaDataTotalsForAllResults where
+        toJSON = const (Object mempty)
+
 -- | JSON template for a linked view (profile).
 --
 -- /See:/ 'profileRef' smart constructor.
@@ -598,6 +967,64 @@ instance ToJSON Experiments where
                   ("totalResults" .=) <$> _eTotalResults,
                   ("startIndex" .=) <$> _eStartIndex,
                   ("previousLink" .=) <$> _ePreviousLink])
+
+-- | Permissions the user has for this entity.
+--
+-- /See:/ 'entityUserLinkPermissions' smart constructor.
+data EntityUserLinkPermissions = EntityUserLinkPermissions
+    { _eulpLocal     :: !(Maybe [Text])
+    , _eulpEffective :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityUserLinkPermissions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eulpLocal'
+--
+-- * 'eulpEffective'
+entityUserLinkPermissions
+    :: EntityUserLinkPermissions
+entityUserLinkPermissions =
+    EntityUserLinkPermissions
+    { _eulpLocal = Nothing
+    , _eulpEffective = Nothing
+    }
+
+-- | Permissions that a user has been assigned at this very level. Does not
+-- include any implied or inherited permissions. Local permissions are
+-- modifiable.
+eulpLocal :: Lens' EntityUserLinkPermissions [Text]
+eulpLocal
+  = lens _eulpLocal (\ s a -> s{_eulpLocal = a}) .
+      _Default
+      . _Coerce
+
+-- | Effective permissions represent all the permissions that a user has for
+-- this entity. These include any implied permissions (e.g., EDIT implies
+-- VIEW) or inherited permissions from the parent entity. Effective
+-- permissions are read-only.
+eulpEffective :: Lens' EntityUserLinkPermissions [Text]
+eulpEffective
+  = lens _eulpEffective
+      (\ s a -> s{_eulpEffective = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON EntityUserLinkPermissions where
+        parseJSON
+          = withObject "EntityUserLinkPermissions"
+              (\ o ->
+                 EntityUserLinkPermissions <$>
+                   (o .:? "local" .!= mempty) <*>
+                     (o .:? "effective" .!= mempty))
+
+instance ToJSON EntityUserLinkPermissions where
+        toJSON EntityUserLinkPermissions{..}
+          = object
+              (catMaybes
+                 [("local" .=) <$> _eulpLocal,
+                  ("effective" .=) <$> _eulpEffective])
 
 -- | An account collection provides a list of Analytics accounts to which a
 -- user has access. The account collection is the entry point to all
@@ -844,6 +1271,336 @@ instance ToJSON FilterExpression where
                   ("matchType" .=) <$> _feMatchType,
                   ("caseSensitive" .=) <$> _feCaseSensitive,
                   ("expressionValue" .=) <$> _feExpressionValue])
+
+-- | Information for the view (profile), for which the real time data was
+-- requested.
+--
+-- /See:/ 'realtimeDataProfileInfo' smart constructor.
+data RealtimeDataProfileInfo = RealtimeDataProfileInfo
+    { _rdpiWebPropertyId         :: !(Maybe Text)
+    , _rdpiProfileId             :: !(Maybe Text)
+    , _rdpiProfileName           :: !(Maybe Text)
+    , _rdpiAccountId             :: !(Maybe Text)
+    , _rdpiInternalWebPropertyId :: !(Maybe Text)
+    , _rdpiTableId               :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RealtimeDataProfileInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdpiWebPropertyId'
+--
+-- * 'rdpiProfileId'
+--
+-- * 'rdpiProfileName'
+--
+-- * 'rdpiAccountId'
+--
+-- * 'rdpiInternalWebPropertyId'
+--
+-- * 'rdpiTableId'
+realtimeDataProfileInfo
+    :: RealtimeDataProfileInfo
+realtimeDataProfileInfo =
+    RealtimeDataProfileInfo
+    { _rdpiWebPropertyId = Nothing
+    , _rdpiProfileId = Nothing
+    , _rdpiProfileName = Nothing
+    , _rdpiAccountId = Nothing
+    , _rdpiInternalWebPropertyId = Nothing
+    , _rdpiTableId = Nothing
+    }
+
+-- | Web Property ID to which this view (profile) belongs.
+rdpiWebPropertyId :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiWebPropertyId
+  = lens _rdpiWebPropertyId
+      (\ s a -> s{_rdpiWebPropertyId = a})
+
+-- | View (Profile) ID.
+rdpiProfileId :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiProfileId
+  = lens _rdpiProfileId
+      (\ s a -> s{_rdpiProfileId = a})
+
+-- | View (Profile) name.
+rdpiProfileName :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiProfileName
+  = lens _rdpiProfileName
+      (\ s a -> s{_rdpiProfileName = a})
+
+-- | Account ID to which this view (profile) belongs.
+rdpiAccountId :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiAccountId
+  = lens _rdpiAccountId
+      (\ s a -> s{_rdpiAccountId = a})
+
+-- | Internal ID for the web property to which this view (profile) belongs.
+rdpiInternalWebPropertyId :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiInternalWebPropertyId
+  = lens _rdpiInternalWebPropertyId
+      (\ s a -> s{_rdpiInternalWebPropertyId = a})
+
+-- | Table ID for view (profile).
+rdpiTableId :: Lens' RealtimeDataProfileInfo (Maybe Text)
+rdpiTableId
+  = lens _rdpiTableId (\ s a -> s{_rdpiTableId = a})
+
+instance FromJSON RealtimeDataProfileInfo where
+        parseJSON
+          = withObject "RealtimeDataProfileInfo"
+              (\ o ->
+                 RealtimeDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON RealtimeDataProfileInfo where
+        toJSON RealtimeDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _rdpiWebPropertyId,
+                  ("profileId" .=) <$> _rdpiProfileId,
+                  ("profileName" .=) <$> _rdpiProfileName,
+                  ("accountId" .=) <$> _rdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _rdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _rdpiTableId])
+
+-- | Parent link for an experiment. Points to the view (profile) to which
+-- this experiment belongs.
+--
+-- /See:/ 'experimentParentLink' smart constructor.
+data ExperimentParentLink = ExperimentParentLink
+    { _eplHref :: !(Maybe Text)
+    , _eplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExperimentParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eplHref'
+--
+-- * 'eplType'
+experimentParentLink
+    :: ExperimentParentLink
+experimentParentLink =
+    ExperimentParentLink
+    { _eplHref = Nothing
+    , _eplType = "analytics#profile"
+    }
+
+-- | Link to the view (profile) to which this experiment belongs. This field
+-- is read-only.
+eplHref :: Lens' ExperimentParentLink (Maybe Text)
+eplHref = lens _eplHref (\ s a -> s{_eplHref = a})
+
+-- | Value is \"analytics#profile\". This field is read-only.
+eplType :: Lens' ExperimentParentLink Text
+eplType = lens _eplType (\ s a -> s{_eplType = a})
+
+instance FromJSON ExperimentParentLink where
+        parseJSON
+          = withObject "ExperimentParentLink"
+              (\ o ->
+                 ExperimentParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profile"))
+
+instance ToJSON ExperimentParentLink where
+        toJSON ExperimentParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _eplHref,
+                  Just ("type" .= _eplType)])
+
+-- | Download details for a file stored in Google Drive.
+--
+-- /See:/ 'unsampledReportDriveDownloadDetails' smart constructor.
+newtype UnsampledReportDriveDownloadDetails = UnsampledReportDriveDownloadDetails
+    { _urdddDocumentId :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnsampledReportDriveDownloadDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'urdddDocumentId'
+unsampledReportDriveDownloadDetails
+    :: UnsampledReportDriveDownloadDetails
+unsampledReportDriveDownloadDetails =
+    UnsampledReportDriveDownloadDetails
+    { _urdddDocumentId = Nothing
+    }
+
+-- | Id of the document\/file containing the report data.
+urdddDocumentId :: Lens' UnsampledReportDriveDownloadDetails (Maybe Text)
+urdddDocumentId
+  = lens _urdddDocumentId
+      (\ s a -> s{_urdddDocumentId = a})
+
+instance FromJSON UnsampledReportDriveDownloadDetails
+         where
+        parseJSON
+          = withObject "UnsampledReportDriveDownloadDetails"
+              (\ o ->
+                 UnsampledReportDriveDownloadDetails <$>
+                   (o .:? "documentId"))
+
+instance ToJSON UnsampledReportDriveDownloadDetails
+         where
+        toJSON UnsampledReportDriveDownloadDetails{..}
+          = object
+              (catMaybes [("documentId" .=) <$> _urdddDocumentId])
+
+-- | Child link for this web property. Points to the list of views (profiles)
+-- for this web property.
+--
+-- /See:/ 'webpropertyChildLink' smart constructor.
+data WebpropertyChildLink = WebpropertyChildLink
+    { _wclHref :: !(Maybe Text)
+    , _wclType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WebpropertyChildLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wclHref'
+--
+-- * 'wclType'
+webpropertyChildLink
+    :: WebpropertyChildLink
+webpropertyChildLink =
+    WebpropertyChildLink
+    { _wclHref = Nothing
+    , _wclType = "analytics#profiles"
+    }
+
+-- | Link to the list of views (profiles) for this web property.
+wclHref :: Lens' WebpropertyChildLink (Maybe Text)
+wclHref = lens _wclHref (\ s a -> s{_wclHref = a})
+
+-- | Type of the parent link. Its value is \"analytics#profiles\".
+wclType :: Lens' WebpropertyChildLink Text
+wclType = lens _wclType (\ s a -> s{_wclType = a})
+
+instance FromJSON WebpropertyChildLink where
+        parseJSON
+          = withObject "WebpropertyChildLink"
+              (\ o ->
+                 WebpropertyChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profiles"))
+
+instance ToJSON WebpropertyChildLink where
+        toJSON WebpropertyChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _wclHref,
+                  Just ("type" .= _wclType)])
+
+-- | Information for the view (profile), for which the Analytics data was
+-- requested.
+--
+-- /See:/ 'mcfDataProfileInfo' smart constructor.
+data McfDataProfileInfo = McfDataProfileInfo
+    { _mdpiWebPropertyId         :: !(Maybe Text)
+    , _mdpiProfileId             :: !(Maybe Text)
+    , _mdpiProfileName           :: !(Maybe Text)
+    , _mdpiAccountId             :: !(Maybe Text)
+    , _mdpiInternalWebPropertyId :: !(Maybe Text)
+    , _mdpiTableId               :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataProfileInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdpiWebPropertyId'
+--
+-- * 'mdpiProfileId'
+--
+-- * 'mdpiProfileName'
+--
+-- * 'mdpiAccountId'
+--
+-- * 'mdpiInternalWebPropertyId'
+--
+-- * 'mdpiTableId'
+mcfDataProfileInfo
+    :: McfDataProfileInfo
+mcfDataProfileInfo =
+    McfDataProfileInfo
+    { _mdpiWebPropertyId = Nothing
+    , _mdpiProfileId = Nothing
+    , _mdpiProfileName = Nothing
+    , _mdpiAccountId = Nothing
+    , _mdpiInternalWebPropertyId = Nothing
+    , _mdpiTableId = Nothing
+    }
+
+-- | Web Property ID to which this view (profile) belongs.
+mdpiWebPropertyId :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiWebPropertyId
+  = lens _mdpiWebPropertyId
+      (\ s a -> s{_mdpiWebPropertyId = a})
+
+-- | View (Profile) ID.
+mdpiProfileId :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiProfileId
+  = lens _mdpiProfileId
+      (\ s a -> s{_mdpiProfileId = a})
+
+-- | View (Profile) name.
+mdpiProfileName :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiProfileName
+  = lens _mdpiProfileName
+      (\ s a -> s{_mdpiProfileName = a})
+
+-- | Account ID to which this view (profile) belongs.
+mdpiAccountId :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiAccountId
+  = lens _mdpiAccountId
+      (\ s a -> s{_mdpiAccountId = a})
+
+-- | Internal ID for the web property to which this view (profile) belongs.
+mdpiInternalWebPropertyId :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiInternalWebPropertyId
+  = lens _mdpiInternalWebPropertyId
+      (\ s a -> s{_mdpiInternalWebPropertyId = a})
+
+-- | Table ID for view (profile).
+mdpiTableId :: Lens' McfDataProfileInfo (Maybe Text)
+mdpiTableId
+  = lens _mdpiTableId (\ s a -> s{_mdpiTableId = a})
+
+instance FromJSON McfDataProfileInfo where
+        parseJSON
+          = withObject "McfDataProfileInfo"
+              (\ o ->
+                 McfDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON McfDataProfileInfo where
+        toJSON McfDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _mdpiWebPropertyId,
+                  ("profileId" .=) <$> _mdpiProfileId,
+                  ("profileName" .=) <$> _mdpiProfileName,
+                  ("accountId" .=) <$> _mdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _mdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _mdpiTableId])
 
 -- | Lists Analytics custom data sources to which the user has access. Each
 -- resource in the collection corresponds to a single Analytics custom data
@@ -1157,10 +1914,10 @@ data McfData = McfData
     , _mdProfileInfo         :: !(Maybe McfDataProfileInfo)
     , _mdKind                :: !Text
     , _mdSampleSize          :: !(Maybe Int64)
-    , _mdRows                :: !(Maybe [[McfDataRowsItemItem]])
+    , _mdRows                :: !(Maybe [[McfDataRows]])
     , _mdSelfLink            :: !(Maybe Text)
     , _mdQuery               :: !(Maybe McfDataQuery)
-    , _mdColumnHeaders       :: !(Maybe [McfDataColumnHeadersItem])
+    , _mdColumnHeaders       :: !(Maybe [McfDataColumnHeaders])
     , _mdId                  :: !(Maybe Text)
     , _mdTotalResults        :: !(Maybe Int32)
     , _mdContainsSampledData :: !(Maybe Bool)
@@ -1261,7 +2018,7 @@ mdSampleSize
 -- | Analytics data rows, where each row contains a list of dimension values
 -- followed by the metric values. The order of dimensions and metrics is
 -- same as specified in the request.
-mdRows :: Lens' McfData [[McfDataRowsItemItem]]
+mdRows :: Lens' McfData [[McfDataRows]]
 mdRows
   = lens _mdRows (\ s a -> s{_mdRows = a}) . _Default .
       _Coerce
@@ -1277,7 +2034,7 @@ mdQuery = lens _mdQuery (\ s a -> s{_mdQuery = a})
 
 -- | Column headers that list dimension names followed by the metric names.
 -- The order of dimensions and metrics is same as specified in the request.
-mdColumnHeaders :: Lens' McfData [McfDataColumnHeadersItem]
+mdColumnHeaders :: Lens' McfData [McfDataColumnHeaders]
 mdColumnHeaders
   = lens _mdColumnHeaders
       (\ s a -> s{_mdColumnHeaders = a})
@@ -1400,6 +2157,57 @@ instance ToJSON
               (catMaybes
                  [("customDataImportUids" .=) <$>
                     _addudrCustomDataImportUids])
+
+-- | Details for the goal of the type VISIT_NUM_PAGES.
+--
+-- /See:/ 'goalVisitNumPagesDetails' smart constructor.
+data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails
+    { _gvnpdComparisonValue :: !(Maybe Int64)
+    , _gvnpdComparisonType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalVisitNumPagesDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gvnpdComparisonValue'
+--
+-- * 'gvnpdComparisonType'
+goalVisitNumPagesDetails
+    :: GoalVisitNumPagesDetails
+goalVisitNumPagesDetails =
+    GoalVisitNumPagesDetails
+    { _gvnpdComparisonValue = Nothing
+    , _gvnpdComparisonType = Nothing
+    }
+
+-- | Value used for this comparison.
+gvnpdComparisonValue :: Lens' GoalVisitNumPagesDetails (Maybe Int64)
+gvnpdComparisonValue
+  = lens _gvnpdComparisonValue
+      (\ s a -> s{_gvnpdComparisonValue = a})
+
+-- | Type of comparison. Possible values are LESS_THAN, GREATER_THAN, or
+-- EQUAL.
+gvnpdComparisonType :: Lens' GoalVisitNumPagesDetails (Maybe Text)
+gvnpdComparisonType
+  = lens _gvnpdComparisonType
+      (\ s a -> s{_gvnpdComparisonType = a})
+
+instance FromJSON GoalVisitNumPagesDetails where
+        parseJSON
+          = withObject "GoalVisitNumPagesDetails"
+              (\ o ->
+                 GoalVisitNumPagesDetails <$>
+                   (o .:? "comparisonValue") <*>
+                     (o .:? "comparisonType"))
+
+instance ToJSON GoalVisitNumPagesDetails where
+        toJSON GoalVisitNumPagesDetails{..}
+          = object
+              (catMaybes
+                 [("comparisonValue" .=) <$> _gvnpdComparisonValue,
+                  ("comparisonType" .=) <$> _gvnpdComparisonType])
 
 -- | A view (profile) collection lists Analytics views (profiles) to which
 -- the user has access. Each resource in the collection corresponds to a
@@ -1577,6 +2385,46 @@ instance ToJSON UserRef where
               (catMaybes
                  [("email" .=) <$> _useEmail,
                   Just ("kind" .= _useKind), ("id" .=) <$> _useId])
+
+-- | Permissions the user has for this view (profile).
+--
+-- /See:/ 'profilePermissions' smart constructor.
+newtype ProfilePermissions = ProfilePermissions
+    { _ppEffective :: Maybe [Text]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProfilePermissions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppEffective'
+profilePermissions
+    :: ProfilePermissions
+profilePermissions =
+    ProfilePermissions
+    { _ppEffective = Nothing
+    }
+
+-- | All the permissions that the user has for this view (profile). These
+-- include any implied permissions (e.g., EDIT implies VIEW) or inherited
+-- permissions from the parent web property.
+ppEffective :: Lens' ProfilePermissions [Text]
+ppEffective
+  = lens _ppEffective (\ s a -> s{_ppEffective = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ProfilePermissions where
+        parseJSON
+          = withObject "ProfilePermissions"
+              (\ o ->
+                 ProfilePermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON ProfilePermissions where
+        toJSON ProfilePermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _ppEffective])
 
 -- | A filter collection lists filters created by users in an Analytics
 -- account. Each resource in the collection corresponds to a filter.
@@ -1804,6 +2652,143 @@ instance ToJSON WebPropertySummary where
                   ("id" .=) <$> _wpsId,
                   ("websiteUrl" .=) <$> _wpsWebsiteUrl,
                   ("level" .=) <$> _wpsLevel])
+
+-- | Details for the goal of the type EVENT.
+--
+-- /See:/ 'goalEventDetails' smart constructor.
+data GoalEventDetails = GoalEventDetails
+    { _gedUseEventValue   :: !(Maybe Bool)
+    , _gedEventConditions :: !(Maybe [GoalEventDetailsEventConditions])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalEventDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gedUseEventValue'
+--
+-- * 'gedEventConditions'
+goalEventDetails
+    :: GoalEventDetails
+goalEventDetails =
+    GoalEventDetails
+    { _gedUseEventValue = Nothing
+    , _gedEventConditions = Nothing
+    }
+
+-- | Determines if the event value should be used as the value for this goal.
+gedUseEventValue :: Lens' GoalEventDetails (Maybe Bool)
+gedUseEventValue
+  = lens _gedUseEventValue
+      (\ s a -> s{_gedUseEventValue = a})
+
+-- | List of event conditions.
+gedEventConditions :: Lens' GoalEventDetails [GoalEventDetailsEventConditions]
+gedEventConditions
+  = lens _gedEventConditions
+      (\ s a -> s{_gedEventConditions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON GoalEventDetails where
+        parseJSON
+          = withObject "GoalEventDetails"
+              (\ o ->
+                 GoalEventDetails <$>
+                   (o .:? "useEventValue") <*>
+                     (o .:? "eventConditions" .!= mempty))
+
+instance ToJSON GoalEventDetails where
+        toJSON GoalEventDetails{..}
+          = object
+              (catMaybes
+                 [("useEventValue" .=) <$> _gedUseEventValue,
+                  ("eventConditions" .=) <$> _gedEventConditions])
+
+-- | Details for the filter of the type SEARCH_AND_REPLACE.
+--
+-- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
+data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails
+    { _fsardFieldIndex    :: !(Maybe Int32)
+    , _fsardField         :: !(Maybe Text)
+    , _fsardSearchString  :: !(Maybe Text)
+    , _fsardReplaceString :: !(Maybe Text)
+    , _fsardCaseSensitive :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterSearchAndReplaceDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fsardFieldIndex'
+--
+-- * 'fsardField'
+--
+-- * 'fsardSearchString'
+--
+-- * 'fsardReplaceString'
+--
+-- * 'fsardCaseSensitive'
+filterSearchAndReplaceDetails
+    :: FilterSearchAndReplaceDetails
+filterSearchAndReplaceDetails =
+    FilterSearchAndReplaceDetails
+    { _fsardFieldIndex = Nothing
+    , _fsardField = Nothing
+    , _fsardSearchString = Nothing
+    , _fsardReplaceString = Nothing
+    , _fsardCaseSensitive = Nothing
+    }
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fsardFieldIndex :: Lens' FilterSearchAndReplaceDetails (Maybe Int32)
+fsardFieldIndex
+  = lens _fsardFieldIndex
+      (\ s a -> s{_fsardFieldIndex = a})
+
+-- | Field to use in the filter.
+fsardField :: Lens' FilterSearchAndReplaceDetails (Maybe Text)
+fsardField
+  = lens _fsardField (\ s a -> s{_fsardField = a})
+
+-- | Term to search.
+fsardSearchString :: Lens' FilterSearchAndReplaceDetails (Maybe Text)
+fsardSearchString
+  = lens _fsardSearchString
+      (\ s a -> s{_fsardSearchString = a})
+
+-- | Term to replace the search term with.
+fsardReplaceString :: Lens' FilterSearchAndReplaceDetails (Maybe Text)
+fsardReplaceString
+  = lens _fsardReplaceString
+      (\ s a -> s{_fsardReplaceString = a})
+
+-- | Determines if the filter is case sensitive.
+fsardCaseSensitive :: Lens' FilterSearchAndReplaceDetails (Maybe Bool)
+fsardCaseSensitive
+  = lens _fsardCaseSensitive
+      (\ s a -> s{_fsardCaseSensitive = a})
+
+instance FromJSON FilterSearchAndReplaceDetails where
+        parseJSON
+          = withObject "FilterSearchAndReplaceDetails"
+              (\ o ->
+                 FilterSearchAndReplaceDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field") <*>
+                     (o .:? "searchString")
+                     <*> (o .:? "replaceString")
+                     <*> (o .:? "caseSensitive"))
+
+instance ToJSON FilterSearchAndReplaceDetails where
+        toJSON FilterSearchAndReplaceDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fsardFieldIndex,
+                  ("field" .=) <$> _fsardField,
+                  ("searchString" .=) <$> _fsardSearchString,
+                  ("replaceString" .=) <$> _fsardReplaceString,
+                  ("caseSensitive" .=) <$> _fsardCaseSensitive])
 
 -- | An AccountSummary collection lists a summary of accounts, properties and
 -- views (profiles) to which the user has access. Each resource in the
@@ -2363,7 +3348,7 @@ data GaData = GaData
     , _gdRows                :: !(Maybe [[Text]])
     , _gdSelfLink            :: !(Maybe Text)
     , _gdQuery               :: !(Maybe GaDataQuery)
-    , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeadersItem])
+    , _gdColumnHeaders       :: !(Maybe [GaDataColumnHeaders])
     , _gdId                  :: !(Maybe Text)
     , _gdTotalResults        :: !(Maybe Int32)
     , _gdDataTable           :: !(Maybe GaDataDataTable)
@@ -2484,7 +3469,7 @@ gdQuery = lens _gdQuery (\ s a -> s{_gdQuery = a})
 
 -- | Column headers that list dimension names followed by the metric names.
 -- The order of dimensions and metrics is same as specified in the request.
-gdColumnHeaders :: Lens' GaData [GaDataColumnHeadersItem]
+gdColumnHeaders :: Lens' GaData [GaDataColumnHeaders]
 gdColumnHeaders
   = lens _gdColumnHeaders
       (\ s a -> s{_gdColumnHeaders = a})
@@ -2781,6 +3766,30 @@ instance ToJSON Goals where
                   ("totalResults" .=) <$> _gTotalResults,
                   ("startIndex" .=) <$> _gStartIndex,
                   ("previousLink" .=) <$> _gPreviousLink])
+
+-- | Total values for the requested metrics over all the results, not just
+-- the results returned in this response. The order of the metric totals is
+-- same as the metric order specified in the request.
+--
+-- /See:/ 'realtimeDataTotalsForAllResults' smart constructor.
+data RealtimeDataTotalsForAllResults =
+    RealtimeDataTotalsForAllResults
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RealtimeDataTotalsForAllResults' with the minimum fields required to make a request.
+--
+realtimeDataTotalsForAllResults
+    :: RealtimeDataTotalsForAllResults
+realtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
+
+instance FromJSON RealtimeDataTotalsForAllResults
+         where
+        parseJSON
+          = withObject "RealtimeDataTotalsForAllResults"
+              (\ o -> pure RealtimeDataTotalsForAllResults)
+
+instance ToJSON RealtimeDataTotalsForAllResults where
+        toJSON = const (Object mempty)
 
 -- | JSON template for an Analytics custom data source.
 --
@@ -3091,6 +4100,62 @@ instance ToJSON Webproperties where
                   ("startIndex" .=) <$> _wStartIndex,
                   ("previousLink" .=) <$> _wPreviousLink])
 
+-- | A union object representing a dimension or metric value. Only one of
+-- \"primitiveValue\" or \"conversionPathValue\" attribute will be
+-- populated.
+--
+-- /See:/ 'mcfDataRows' smart constructor.
+data McfDataRows = McfDataRows
+    { _mdrPrimitiveValue      :: !(Maybe Text)
+    , _mdrConversionPathValue :: !(Maybe [McfDataRowsConversionPathValue])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataRows' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdrPrimitiveValue'
+--
+-- * 'mdrConversionPathValue'
+mcfDataRows
+    :: McfDataRows
+mcfDataRows =
+    McfDataRows
+    { _mdrPrimitiveValue = Nothing
+    , _mdrConversionPathValue = Nothing
+    }
+
+-- | A primitive dimension value. A primitive metric value.
+mdrPrimitiveValue :: Lens' McfDataRows (Maybe Text)
+mdrPrimitiveValue
+  = lens _mdrPrimitiveValue
+      (\ s a -> s{_mdrPrimitiveValue = a})
+
+-- | A conversion path dimension value, containing a list of interactions
+-- with their attributes.
+mdrConversionPathValue :: Lens' McfDataRows [McfDataRowsConversionPathValue]
+mdrConversionPathValue
+  = lens _mdrConversionPathValue
+      (\ s a -> s{_mdrConversionPathValue = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON McfDataRows where
+        parseJSON
+          = withObject "McfDataRows"
+              (\ o ->
+                 McfDataRows <$>
+                   (o .:? "primitiveValue") <*>
+                     (o .:? "conversionPathValue" .!= mempty))
+
+instance ToJSON McfDataRows where
+        toJSON McfDataRows{..}
+          = object
+              (catMaybes
+                 [("primitiveValue" .=) <$> _mdrPrimitiveValue,
+                  ("conversionPathValue" .=) <$>
+                    _mdrConversionPathValue])
+
 -- | JSON template for an AdWords account.
 --
 -- /See:/ 'adWordsAccount' smart constructor.
@@ -3152,6 +4217,56 @@ instance ToJSON AdWordsAccount where
                     _awaAutoTaggingEnabled,
                   Just ("kind" .= _awaKind),
                   ("customerId" .=) <$> _awaCustomerId])
+
+-- | Details for the goal of the type VISIT_TIME_ON_SITE.
+--
+-- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
+data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails
+    { _gvtosdComparisonValue :: !(Maybe Int64)
+    , _gvtosdComparisonType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalVisitTimeOnSiteDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gvtosdComparisonValue'
+--
+-- * 'gvtosdComparisonType'
+goalVisitTimeOnSiteDetails
+    :: GoalVisitTimeOnSiteDetails
+goalVisitTimeOnSiteDetails =
+    GoalVisitTimeOnSiteDetails
+    { _gvtosdComparisonValue = Nothing
+    , _gvtosdComparisonType = Nothing
+    }
+
+-- | Value used for this comparison.
+gvtosdComparisonValue :: Lens' GoalVisitTimeOnSiteDetails (Maybe Int64)
+gvtosdComparisonValue
+  = lens _gvtosdComparisonValue
+      (\ s a -> s{_gvtosdComparisonValue = a})
+
+-- | Type of comparison. Possible values are LESS_THAN or GREATER_THAN.
+gvtosdComparisonType :: Lens' GoalVisitTimeOnSiteDetails (Maybe Text)
+gvtosdComparisonType
+  = lens _gvtosdComparisonType
+      (\ s a -> s{_gvtosdComparisonType = a})
+
+instance FromJSON GoalVisitTimeOnSiteDetails where
+        parseJSON
+          = withObject "GoalVisitTimeOnSiteDetails"
+              (\ o ->
+                 GoalVisitTimeOnSiteDetails <$>
+                   (o .:? "comparisonValue") <*>
+                     (o .:? "comparisonType"))
+
+instance ToJSON GoalVisitTimeOnSiteDetails where
+        toJSON GoalVisitTimeOnSiteDetails{..}
+          = object
+              (catMaybes
+                 [("comparisonValue" .=) <$> _gvtosdComparisonValue,
+                  ("comparisonType" .=) <$> _gvtosdComparisonType])
 
 -- | JSON template for Analytics account entry.
 --
@@ -3340,6 +4455,107 @@ instance ToJSON FilterRef where
                   ("accountId" .=) <$> _frAccountId,
                   ("name" .=) <$> _frName, ("id" .=) <$> _frId])
 
+-- | Permissions the user has for this account.
+--
+-- /See:/ 'accountPermissions' smart constructor.
+newtype AccountPermissions = AccountPermissions
+    { _apEffective :: Maybe [Text]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountPermissions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'apEffective'
+accountPermissions
+    :: AccountPermissions
+accountPermissions =
+    AccountPermissions
+    { _apEffective = Nothing
+    }
+
+-- | All the permissions that the user has for this account. These include
+-- any implied permissions (e.g., EDIT implies VIEW).
+apEffective :: Lens' AccountPermissions [Text]
+apEffective
+  = lens _apEffective (\ s a -> s{_apEffective = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON AccountPermissions where
+        parseJSON
+          = withObject "AccountPermissions"
+              (\ o ->
+                 AccountPermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON AccountPermissions where
+        toJSON AccountPermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _apEffective])
+
+-- | Entity for this link. It can be an account, a web property, or a view
+-- (profile).
+--
+-- /See:/ 'entityUserLinkEntity' smart constructor.
+data EntityUserLinkEntity = EntityUserLinkEntity
+    { _euleProfileRef     :: !(Maybe (Maybe ProfileRef))
+    , _euleAccountRef     :: !(Maybe (Maybe AccountRef))
+    , _euleWebPropertyRef :: !(Maybe (Maybe WebPropertyRef))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityUserLinkEntity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'euleProfileRef'
+--
+-- * 'euleAccountRef'
+--
+-- * 'euleWebPropertyRef'
+entityUserLinkEntity
+    :: EntityUserLinkEntity
+entityUserLinkEntity =
+    EntityUserLinkEntity
+    { _euleProfileRef = Nothing
+    , _euleAccountRef = Nothing
+    , _euleWebPropertyRef = Nothing
+    }
+
+-- | View (Profile) for this link.
+euleProfileRef :: Lens' EntityUserLinkEntity (Maybe (Maybe ProfileRef))
+euleProfileRef
+  = lens _euleProfileRef
+      (\ s a -> s{_euleProfileRef = a})
+
+-- | Account for this link.
+euleAccountRef :: Lens' EntityUserLinkEntity (Maybe (Maybe AccountRef))
+euleAccountRef
+  = lens _euleAccountRef
+      (\ s a -> s{_euleAccountRef = a})
+
+-- | Web property for this link.
+euleWebPropertyRef :: Lens' EntityUserLinkEntity (Maybe (Maybe WebPropertyRef))
+euleWebPropertyRef
+  = lens _euleWebPropertyRef
+      (\ s a -> s{_euleWebPropertyRef = a})
+
+instance FromJSON EntityUserLinkEntity where
+        parseJSON
+          = withObject "EntityUserLinkEntity"
+              (\ o ->
+                 EntityUserLinkEntity <$>
+                   (o .:? "profileRef") <*> (o .:? "accountRef") <*>
+                     (o .:? "webPropertyRef"))
+
+instance ToJSON EntityUserLinkEntity where
+        toJSON EntityUserLinkEntity{..}
+          = object
+              (catMaybes
+                 [("profileRef" .=) <$> _euleProfileRef,
+                  ("accountRef" .=) <$> _euleAccountRef,
+                  ("webPropertyRef" .=) <$> _euleWebPropertyRef])
+
 -- | JSON template for Analytics experiment resource.
 --
 -- /See:/ 'experiment' smart constructor.
@@ -3363,7 +4579,7 @@ data Experiment = Experiment
     , _expName                           :: !(Maybe Text)
     , _expWinnerFound                    :: !(Maybe Bool)
     , _expEndTime                        :: !(Maybe UTCTime)
-    , _expVariations                     :: !(Maybe [ExperimentVariationsItem])
+    , _expVariations                     :: !(Maybe [ExperimentVariations])
     , _expInternalWebPropertyId          :: !(Maybe Text)
     , _expId                             :: !(Maybe Text)
     , _expUpdated                        :: !(Maybe UTCTime)
@@ -3604,7 +4820,7 @@ expEndTime
 -- The number of variations may not change once an experiment is in the
 -- RUNNING state. At least two variations are required before status can be
 -- set to RUNNING.
-expVariations :: Lens' Experiment [ExperimentVariationsItem]
+expVariations :: Lens' Experiment [ExperimentVariations]
 expVariations
   = lens _expVariations
       (\ s a -> s{_expVariations = a})
@@ -3857,6 +5073,53 @@ instance ToJSON EntityUserLinks where
                   ("startIndex" .=) <$> _eulStartIndex,
                   ("previousLink" .=) <$> _eulPreviousLink])
 
+-- | Parent link for this filter. Points to the account to which this filter
+-- belongs.
+--
+-- /See:/ 'filterParentLink' smart constructor.
+data FilterParentLink = FilterParentLink
+    { _fplHref :: !(Maybe Text)
+    , _fplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fplHref'
+--
+-- * 'fplType'
+filterParentLink
+    :: FilterParentLink
+filterParentLink =
+    FilterParentLink
+    { _fplHref = Nothing
+    , _fplType = "analytics#account"
+    }
+
+-- | Link to the account to which this filter belongs.
+fplHref :: Lens' FilterParentLink (Maybe Text)
+fplHref = lens _fplHref (\ s a -> s{_fplHref = a})
+
+-- | Value is \"analytics#account\".
+fplType :: Lens' FilterParentLink Text
+fplType = lens _fplType (\ s a -> s{_fplType = a})
+
+instance FromJSON FilterParentLink where
+        parseJSON
+          = withObject "FilterParentLink"
+              (\ o ->
+                 FilterParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#account"))
+
+instance ToJSON FilterParentLink where
+        toJSON FilterParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _fplHref,
+                  Just ("type" .= _fplType)])
+
 -- | A custom metric collection lists Analytics custom metrics to which the
 -- user has access. Each resource in the collection corresponds to a single
 -- Analytics custom metric.
@@ -3979,6 +5242,330 @@ instance ToJSON CustomMetrics where
                   ("totalResults" .=) <$> _cmTotalResults,
                   ("startIndex" .=) <$> _cmStartIndex,
                   ("previousLink" .=) <$> _cmPreviousLink])
+
+-- | Details for the filter of the type ADVANCED.
+--
+-- /See:/ 'filterAdvancedDetails' smart constructor.
+data FilterAdvancedDetails = FilterAdvancedDetails
+    { _fadExtractA            :: !(Maybe Text)
+    , _fadFieldARequired      :: !(Maybe Bool)
+    , _fadFieldA              :: !(Maybe Text)
+    , _fadFieldBIndex         :: !(Maybe Int32)
+    , _fadOutputToField       :: !(Maybe Text)
+    , _fadOutputConstructor   :: !(Maybe Text)
+    , _fadExtractB            :: !(Maybe Text)
+    , _fadFieldAIndex         :: !(Maybe Int32)
+    , _fadCaseSensitive       :: !(Maybe Bool)
+    , _fadOutputToFieldIndex  :: !(Maybe Int32)
+    , _fadFieldB              :: !(Maybe Text)
+    , _fadFieldBRequired      :: !(Maybe Bool)
+    , _fadOverrideOutputField :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterAdvancedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fadExtractA'
+--
+-- * 'fadFieldARequired'
+--
+-- * 'fadFieldA'
+--
+-- * 'fadFieldBIndex'
+--
+-- * 'fadOutputToField'
+--
+-- * 'fadOutputConstructor'
+--
+-- * 'fadExtractB'
+--
+-- * 'fadFieldAIndex'
+--
+-- * 'fadCaseSensitive'
+--
+-- * 'fadOutputToFieldIndex'
+--
+-- * 'fadFieldB'
+--
+-- * 'fadFieldBRequired'
+--
+-- * 'fadOverrideOutputField'
+filterAdvancedDetails
+    :: FilterAdvancedDetails
+filterAdvancedDetails =
+    FilterAdvancedDetails
+    { _fadExtractA = Nothing
+    , _fadFieldARequired = Nothing
+    , _fadFieldA = Nothing
+    , _fadFieldBIndex = Nothing
+    , _fadOutputToField = Nothing
+    , _fadOutputConstructor = Nothing
+    , _fadExtractB = Nothing
+    , _fadFieldAIndex = Nothing
+    , _fadCaseSensitive = Nothing
+    , _fadOutputToFieldIndex = Nothing
+    , _fadFieldB = Nothing
+    , _fadFieldBRequired = Nothing
+    , _fadOverrideOutputField = Nothing
+    }
+
+-- | Expression to extract from field A.
+fadExtractA :: Lens' FilterAdvancedDetails (Maybe Text)
+fadExtractA
+  = lens _fadExtractA (\ s a -> s{_fadExtractA = a})
+
+-- | Indicates if field A is required to match.
+fadFieldARequired :: Lens' FilterAdvancedDetails (Maybe Bool)
+fadFieldARequired
+  = lens _fadFieldARequired
+      (\ s a -> s{_fadFieldARequired = a})
+
+-- | Field A.
+fadFieldA :: Lens' FilterAdvancedDetails (Maybe Text)
+fadFieldA
+  = lens _fadFieldA (\ s a -> s{_fadFieldA = a})
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fadFieldBIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
+fadFieldBIndex
+  = lens _fadFieldBIndex
+      (\ s a -> s{_fadFieldBIndex = a})
+
+-- | Output field.
+fadOutputToField :: Lens' FilterAdvancedDetails (Maybe Text)
+fadOutputToField
+  = lens _fadOutputToField
+      (\ s a -> s{_fadOutputToField = a})
+
+-- | Expression used to construct the output value.
+fadOutputConstructor :: Lens' FilterAdvancedDetails (Maybe Text)
+fadOutputConstructor
+  = lens _fadOutputConstructor
+      (\ s a -> s{_fadOutputConstructor = a})
+
+-- | Expression to extract from field B.
+fadExtractB :: Lens' FilterAdvancedDetails (Maybe Text)
+fadExtractB
+  = lens _fadExtractB (\ s a -> s{_fadExtractB = a})
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fadFieldAIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
+fadFieldAIndex
+  = lens _fadFieldAIndex
+      (\ s a -> s{_fadFieldAIndex = a})
+
+-- | Indicates if the filter expressions are case sensitive.
+fadCaseSensitive :: Lens' FilterAdvancedDetails (Maybe Bool)
+fadCaseSensitive
+  = lens _fadCaseSensitive
+      (\ s a -> s{_fadCaseSensitive = a})
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fadOutputToFieldIndex :: Lens' FilterAdvancedDetails (Maybe Int32)
+fadOutputToFieldIndex
+  = lens _fadOutputToFieldIndex
+      (\ s a -> s{_fadOutputToFieldIndex = a})
+
+-- | Field B.
+fadFieldB :: Lens' FilterAdvancedDetails (Maybe Text)
+fadFieldB
+  = lens _fadFieldB (\ s a -> s{_fadFieldB = a})
+
+-- | Indicates if field B is required to match.
+fadFieldBRequired :: Lens' FilterAdvancedDetails (Maybe Bool)
+fadFieldBRequired
+  = lens _fadFieldBRequired
+      (\ s a -> s{_fadFieldBRequired = a})
+
+-- | Indicates if the existing value of the output field, if any, should be
+-- overridden by the output expression.
+fadOverrideOutputField :: Lens' FilterAdvancedDetails (Maybe Bool)
+fadOverrideOutputField
+  = lens _fadOverrideOutputField
+      (\ s a -> s{_fadOverrideOutputField = a})
+
+instance FromJSON FilterAdvancedDetails where
+        parseJSON
+          = withObject "FilterAdvancedDetails"
+              (\ o ->
+                 FilterAdvancedDetails <$>
+                   (o .:? "extractA") <*> (o .:? "fieldARequired") <*>
+                     (o .:? "fieldA")
+                     <*> (o .:? "fieldBIndex")
+                     <*> (o .:? "outputToField")
+                     <*> (o .:? "outputConstructor")
+                     <*> (o .:? "extractB")
+                     <*> (o .:? "fieldAIndex")
+                     <*> (o .:? "caseSensitive")
+                     <*> (o .:? "outputToFieldIndex")
+                     <*> (o .:? "fieldB")
+                     <*> (o .:? "fieldBRequired")
+                     <*> (o .:? "overrideOutputField"))
+
+instance ToJSON FilterAdvancedDetails where
+        toJSON FilterAdvancedDetails{..}
+          = object
+              (catMaybes
+                 [("extractA" .=) <$> _fadExtractA,
+                  ("fieldARequired" .=) <$> _fadFieldARequired,
+                  ("fieldA" .=) <$> _fadFieldA,
+                  ("fieldBIndex" .=) <$> _fadFieldBIndex,
+                  ("outputToField" .=) <$> _fadOutputToField,
+                  ("outputConstructor" .=) <$> _fadOutputConstructor,
+                  ("extractB" .=) <$> _fadExtractB,
+                  ("fieldAIndex" .=) <$> _fadFieldAIndex,
+                  ("caseSensitive" .=) <$> _fadCaseSensitive,
+                  ("outputToFieldIndex" .=) <$> _fadOutputToFieldIndex,
+                  ("fieldB" .=) <$> _fadFieldB,
+                  ("fieldBRequired" .=) <$> _fadFieldBRequired,
+                  ("overrideOutputField" .=) <$>
+                    _fadOverrideOutputField])
+
+-- | Details for the filter of the type UPPER.
+--
+-- /See:/ 'filterUppercaseDetails' smart constructor.
+data FilterUppercaseDetails = FilterUppercaseDetails
+    { _fudFieldIndex :: !(Maybe Int32)
+    , _fudField      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterUppercaseDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fudFieldIndex'
+--
+-- * 'fudField'
+filterUppercaseDetails
+    :: FilterUppercaseDetails
+filterUppercaseDetails =
+    FilterUppercaseDetails
+    { _fudFieldIndex = Nothing
+    , _fudField = Nothing
+    }
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fudFieldIndex :: Lens' FilterUppercaseDetails (Maybe Int32)
+fudFieldIndex
+  = lens _fudFieldIndex
+      (\ s a -> s{_fudFieldIndex = a})
+
+-- | Field to use in the filter.
+fudField :: Lens' FilterUppercaseDetails (Maybe Text)
+fudField = lens _fudField (\ s a -> s{_fudField = a})
+
+instance FromJSON FilterUppercaseDetails where
+        parseJSON
+          = withObject "FilterUppercaseDetails"
+              (\ o ->
+                 FilterUppercaseDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field"))
+
+instance ToJSON FilterUppercaseDetails where
+        toJSON FilterUppercaseDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fudFieldIndex,
+                  ("field" .=) <$> _fudField])
+
+--
+-- /See:/ 'customDataSourceChildLink' smart constructor.
+data CustomDataSourceChildLink = CustomDataSourceChildLink
+    { _cdsclHref :: !(Maybe Text)
+    , _cdsclType :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomDataSourceChildLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdsclHref'
+--
+-- * 'cdsclType'
+customDataSourceChildLink
+    :: CustomDataSourceChildLink
+customDataSourceChildLink =
+    CustomDataSourceChildLink
+    { _cdsclHref = Nothing
+    , _cdsclType = Nothing
+    }
+
+-- | Link to the list of daily uploads for this custom data source. Link to
+-- the list of uploads for this custom data source.
+cdsclHref :: Lens' CustomDataSourceChildLink (Maybe Text)
+cdsclHref
+  = lens _cdsclHref (\ s a -> s{_cdsclHref = a})
+
+-- | Value is \"analytics#dailyUploads\". Value is \"analytics#uploads\".
+cdsclType :: Lens' CustomDataSourceChildLink (Maybe Text)
+cdsclType
+  = lens _cdsclType (\ s a -> s{_cdsclType = a})
+
+instance FromJSON CustomDataSourceChildLink where
+        parseJSON
+          = withObject "CustomDataSourceChildLink"
+              (\ o ->
+                 CustomDataSourceChildLink <$>
+                   (o .:? "href") <*> (o .:? "type"))
+
+instance ToJSON CustomDataSourceChildLink where
+        toJSON CustomDataSourceChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdsclHref,
+                  ("type" .=) <$> _cdsclType])
+
+-- | Parent link for the custom dimension. Points to the property to which
+-- the custom dimension belongs.
+--
+-- /See:/ 'customDimensionParentLink' smart constructor.
+data CustomDimensionParentLink = CustomDimensionParentLink
+    { _cdplHref :: !(Maybe Text)
+    , _cdplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomDimensionParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdplHref'
+--
+-- * 'cdplType'
+customDimensionParentLink
+    :: CustomDimensionParentLink
+customDimensionParentLink =
+    CustomDimensionParentLink
+    { _cdplHref = Nothing
+    , _cdplType = "analytics#webproperty"
+    }
+
+-- | Link to the property to which the custom dimension belongs.
+cdplHref :: Lens' CustomDimensionParentLink (Maybe Text)
+cdplHref = lens _cdplHref (\ s a -> s{_cdplHref = a})
+
+-- | Type of the parent link. Set to \"analytics#webproperty\".
+cdplType :: Lens' CustomDimensionParentLink Text
+cdplType = lens _cdplType (\ s a -> s{_cdplType = a})
+
+instance FromJSON CustomDimensionParentLink where
+        parseJSON
+          = withObject "CustomDimensionParentLink"
+              (\ o ->
+                 CustomDimensionParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomDimensionParentLink where
+        toJSON CustomDimensionParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdplHref,
+                  Just ("type" .= _cdplType)])
 
 -- | JSON template for an Analytics web property.
 --
@@ -4372,6 +5959,46 @@ instance ToJSON CustomMetric where
                   ("type" .=) <$> _cusType,
                   ("index" .=) <$> _cusIndex])
 
+-- | Permissions the user has for this web property.
+--
+-- /See:/ 'webpropertyPermissions' smart constructor.
+newtype WebpropertyPermissions = WebpropertyPermissions
+    { _wpEffective :: Maybe [Text]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WebpropertyPermissions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wpEffective'
+webpropertyPermissions
+    :: WebpropertyPermissions
+webpropertyPermissions =
+    WebpropertyPermissions
+    { _wpEffective = Nothing
+    }
+
+-- | All the permissions that the user has for this web property. These
+-- include any implied permissions (e.g., EDIT implies VIEW) or inherited
+-- permissions from the parent account.
+wpEffective :: Lens' WebpropertyPermissions [Text]
+wpEffective
+  = lens _wpEffective (\ s a -> s{_wpEffective = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON WebpropertyPermissions where
+        parseJSON
+          = withObject "WebpropertyPermissions"
+              (\ o ->
+                 WebpropertyPermissions <$>
+                   (o .:? "effective" .!= mempty))
+
+instance ToJSON WebpropertyPermissions where
+        toJSON WebpropertyPermissions{..}
+          = object
+              (catMaybes [("effective" .=) <$> _wpEffective])
+
 -- | Real time data for a given view (profile).
 --
 -- /See:/ 'realtimeData' smart constructor.
@@ -4381,7 +6008,7 @@ data RealtimeData = RealtimeData
     , _rdRows                :: !(Maybe [[Text]])
     , _rdSelfLink            :: !(Maybe Text)
     , _rdQuery               :: !(Maybe RealtimeDataQuery)
-    , _rdColumnHeaders       :: !(Maybe [RealtimeDataColumnHeadersItem])
+    , _rdColumnHeaders       :: !(Maybe [RealtimeDataColumnHeaders])
     , _rdId                  :: !(Maybe Text)
     , _rdTotalResults        :: !(Maybe Int32)
     , _rdTotalsForAllResults :: !(Maybe RealtimeDataTotalsForAllResults)
@@ -4453,7 +6080,7 @@ rdQuery = lens _rdQuery (\ s a -> s{_rdQuery = a})
 
 -- | Column headers that list dimension names followed by the metric names.
 -- The order of dimensions and metrics is same as specified in the request.
-rdColumnHeaders :: Lens' RealtimeData [RealtimeDataColumnHeadersItem]
+rdColumnHeaders :: Lens' RealtimeData [RealtimeDataColumnHeaders]
 rdColumnHeaders
   = lens _rdColumnHeaders
       (\ s a -> s{_rdColumnHeaders = a})
@@ -4573,6 +6200,87 @@ instance ToJSON ProfileSummary where
                  [Just ("kind" .= _psKind), ("name" .=) <$> _psName,
                   ("id" .=) <$> _psId, ("type" .=) <$> _psType])
 
+--
+-- /See:/ 'mcfDataRowsConversionPathValue' smart constructor.
+data McfDataRowsConversionPathValue = McfDataRowsConversionPathValue
+    { _mdrcpvInteractionType :: !(Maybe Text)
+    , _mdrcpvNodeValue       :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataRowsConversionPathValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdrcpvInteractionType'
+--
+-- * 'mdrcpvNodeValue'
+mcfDataRowsConversionPathValue
+    :: McfDataRowsConversionPathValue
+mcfDataRowsConversionPathValue =
+    McfDataRowsConversionPathValue
+    { _mdrcpvInteractionType = Nothing
+    , _mdrcpvNodeValue = Nothing
+    }
+
+-- | Type of an interaction on conversion path. Such as CLICK, IMPRESSION
+-- etc.
+mdrcpvInteractionType :: Lens' McfDataRowsConversionPathValue (Maybe Text)
+mdrcpvInteractionType
+  = lens _mdrcpvInteractionType
+      (\ s a -> s{_mdrcpvInteractionType = a})
+
+-- | Node value of an interaction on conversion path. Such as source, medium
+-- etc.
+mdrcpvNodeValue :: Lens' McfDataRowsConversionPathValue (Maybe Text)
+mdrcpvNodeValue
+  = lens _mdrcpvNodeValue
+      (\ s a -> s{_mdrcpvNodeValue = a})
+
+instance FromJSON McfDataRowsConversionPathValue
+         where
+        parseJSON
+          = withObject "McfDataRowsConversionPathValue"
+              (\ o ->
+                 McfDataRowsConversionPathValue <$>
+                   (o .:? "interactionType") <*> (o .:? "nodeValue"))
+
+instance ToJSON McfDataRowsConversionPathValue where
+        toJSON McfDataRowsConversionPathValue{..}
+          = object
+              (catMaybes
+                 [("interactionType" .=) <$> _mdrcpvInteractionType,
+                  ("nodeValue" .=) <$> _mdrcpvNodeValue])
+
+--
+-- /See:/ 'gaDataDataTableRowsC' smart constructor.
+newtype GaDataDataTableRowsC = GaDataDataTableRowsC
+    { _gddtrcV :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataDataTableRowsC' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gddtrcV'
+gaDataDataTableRowsC
+    :: GaDataDataTableRowsC
+gaDataDataTableRowsC =
+    GaDataDataTableRowsC
+    { _gddtrcV = Nothing
+    }
+
+gddtrcV :: Lens' GaDataDataTableRowsC (Maybe Text)
+gddtrcV = lens _gddtrcV (\ s a -> s{_gddtrcV = a})
+
+instance FromJSON GaDataDataTableRowsC where
+        parseJSON
+          = withObject "GaDataDataTableRowsC"
+              (\ o -> GaDataDataTableRowsC <$> (o .:? "v"))
+
+instance ToJSON GaDataDataTableRowsC where
+        toJSON GaDataDataTableRowsC{..}
+          = object (catMaybes [("v" .=) <$> _gddtrcV])
+
 -- | JSON template for an Analytics Entity-User Link. Returns permissions
 -- that a user has for an entity.
 --
@@ -4665,6 +6373,266 @@ instance ToJSON EntityUserLink where
                   ("id" .=) <$> _euluId,
                   ("permissions" .=) <$> _euluPermissions,
                   ("entity" .=) <$> _euluEntity])
+
+--
+-- /See:/ 'mcfDataColumnHeaders' smart constructor.
+data McfDataColumnHeaders = McfDataColumnHeaders
+    { _mdchColumnType :: !(Maybe Text)
+    , _mdchName       :: !(Maybe Text)
+    , _mdchDataType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataColumnHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdchColumnType'
+--
+-- * 'mdchName'
+--
+-- * 'mdchDataType'
+mcfDataColumnHeaders
+    :: McfDataColumnHeaders
+mcfDataColumnHeaders =
+    McfDataColumnHeaders
+    { _mdchColumnType = Nothing
+    , _mdchName = Nothing
+    , _mdchDataType = Nothing
+    }
+
+-- | Column Type. Either DIMENSION or METRIC.
+mdchColumnType :: Lens' McfDataColumnHeaders (Maybe Text)
+mdchColumnType
+  = lens _mdchColumnType
+      (\ s a -> s{_mdchColumnType = a})
+
+-- | Column name.
+mdchName :: Lens' McfDataColumnHeaders (Maybe Text)
+mdchName = lens _mdchName (\ s a -> s{_mdchName = a})
+
+-- | Data type. Dimension and metric values data types such as INTEGER,
+-- DOUBLE, CURRENCY, MCF_SEQUENCE etc.
+mdchDataType :: Lens' McfDataColumnHeaders (Maybe Text)
+mdchDataType
+  = lens _mdchDataType (\ s a -> s{_mdchDataType = a})
+
+instance FromJSON McfDataColumnHeaders where
+        parseJSON
+          = withObject "McfDataColumnHeaders"
+              (\ o ->
+                 McfDataColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON McfDataColumnHeaders where
+        toJSON McfDataColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _mdchColumnType,
+                  ("name" .=) <$> _mdchName,
+                  ("dataType" .=) <$> _mdchDataType])
+
+-- | Analytics data request query parameters.
+--
+-- /See:/ 'mcfDataQuery' smart constructor.
+data McfDataQuery = McfDataQuery
+    { _mdqMetrics       :: !(Maybe [Text])
+    , _mdqSamplingLevel :: !(Maybe Text)
+    , _mdqFilters       :: !(Maybe Text)
+    , _mdqIds           :: !(Maybe Text)
+    , _mdqEndDate       :: !(Maybe Text)
+    , _mdqSort          :: !(Maybe [Text])
+    , _mdqDimensions    :: !(Maybe Text)
+    , _mdqStartIndex    :: !(Maybe Int32)
+    , _mdqMaxResults    :: !(Maybe Int32)
+    , _mdqSegment       :: !(Maybe Text)
+    , _mdqStartDate     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataQuery' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mdqMetrics'
+--
+-- * 'mdqSamplingLevel'
+--
+-- * 'mdqFilters'
+--
+-- * 'mdqIds'
+--
+-- * 'mdqEndDate'
+--
+-- * 'mdqSort'
+--
+-- * 'mdqDimensions'
+--
+-- * 'mdqStartIndex'
+--
+-- * 'mdqMaxResults'
+--
+-- * 'mdqSegment'
+--
+-- * 'mdqStartDate'
+mcfDataQuery
+    :: McfDataQuery
+mcfDataQuery =
+    McfDataQuery
+    { _mdqMetrics = Nothing
+    , _mdqSamplingLevel = Nothing
+    , _mdqFilters = Nothing
+    , _mdqIds = Nothing
+    , _mdqEndDate = Nothing
+    , _mdqSort = Nothing
+    , _mdqDimensions = Nothing
+    , _mdqStartIndex = Nothing
+    , _mdqMaxResults = Nothing
+    , _mdqSegment = Nothing
+    , _mdqStartDate = Nothing
+    }
+
+-- | List of analytics metrics.
+mdqMetrics :: Lens' McfDataQuery [Text]
+mdqMetrics
+  = lens _mdqMetrics (\ s a -> s{_mdqMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | Desired sampling level
+mdqSamplingLevel :: Lens' McfDataQuery (Maybe Text)
+mdqSamplingLevel
+  = lens _mdqSamplingLevel
+      (\ s a -> s{_mdqSamplingLevel = a})
+
+-- | Comma-separated list of dimension or metric filters.
+mdqFilters :: Lens' McfDataQuery (Maybe Text)
+mdqFilters
+  = lens _mdqFilters (\ s a -> s{_mdqFilters = a})
+
+-- | Unique table ID.
+mdqIds :: Lens' McfDataQuery (Maybe Text)
+mdqIds = lens _mdqIds (\ s a -> s{_mdqIds = a})
+
+-- | End date.
+mdqEndDate :: Lens' McfDataQuery (Maybe Text)
+mdqEndDate
+  = lens _mdqEndDate (\ s a -> s{_mdqEndDate = a})
+
+-- | List of dimensions or metrics based on which Analytics data is sorted.
+mdqSort :: Lens' McfDataQuery [Text]
+mdqSort
+  = lens _mdqSort (\ s a -> s{_mdqSort = a}) . _Default
+      . _Coerce
+
+-- | List of analytics dimensions.
+mdqDimensions :: Lens' McfDataQuery (Maybe Text)
+mdqDimensions
+  = lens _mdqDimensions
+      (\ s a -> s{_mdqDimensions = a})
+
+-- | Start index.
+mdqStartIndex :: Lens' McfDataQuery (Maybe Int32)
+mdqStartIndex
+  = lens _mdqStartIndex
+      (\ s a -> s{_mdqStartIndex = a})
+
+-- | Maximum results per page.
+mdqMaxResults :: Lens' McfDataQuery (Maybe Int32)
+mdqMaxResults
+  = lens _mdqMaxResults
+      (\ s a -> s{_mdqMaxResults = a})
+
+-- | Analytics advanced segment.
+mdqSegment :: Lens' McfDataQuery (Maybe Text)
+mdqSegment
+  = lens _mdqSegment (\ s a -> s{_mdqSegment = a})
+
+-- | Start date.
+mdqStartDate :: Lens' McfDataQuery (Maybe Text)
+mdqStartDate
+  = lens _mdqStartDate (\ s a -> s{_mdqStartDate = a})
+
+instance FromJSON McfDataQuery where
+        parseJSON
+          = withObject "McfDataQuery"
+              (\ o ->
+                 McfDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*>
+                     (o .:? "samplingLevel")
+                     <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "end-date")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "start-index")
+                     <*> (o .:? "max-results")
+                     <*> (o .:? "segment")
+                     <*> (o .:? "start-date"))
+
+instance ToJSON McfDataQuery where
+        toJSON McfDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _mdqMetrics,
+                  ("samplingLevel" .=) <$> _mdqSamplingLevel,
+                  ("filters" .=) <$> _mdqFilters,
+                  ("ids" .=) <$> _mdqIds,
+                  ("end-date" .=) <$> _mdqEndDate,
+                  ("sort" .=) <$> _mdqSort,
+                  ("dimensions" .=) <$> _mdqDimensions,
+                  ("start-index" .=) <$> _mdqStartIndex,
+                  ("max-results" .=) <$> _mdqMaxResults,
+                  ("segment" .=) <$> _mdqSegment,
+                  ("start-date" .=) <$> _mdqStartDate])
+
+-- | Parent link for this custom data source. Points to the web property to
+-- which this custom data source belongs.
+--
+-- /See:/ 'customDataSourceParentLink' smart constructor.
+data CustomDataSourceParentLink = CustomDataSourceParentLink
+    { _cdsplHref :: !(Maybe Text)
+    , _cdsplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomDataSourceParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cdsplHref'
+--
+-- * 'cdsplType'
+customDataSourceParentLink
+    :: CustomDataSourceParentLink
+customDataSourceParentLink =
+    CustomDataSourceParentLink
+    { _cdsplHref = Nothing
+    , _cdsplType = "analytics#webproperty"
+    }
+
+-- | Link to the web property to which this custom data source belongs.
+cdsplHref :: Lens' CustomDataSourceParentLink (Maybe Text)
+cdsplHref
+  = lens _cdsplHref (\ s a -> s{_cdsplHref = a})
+
+-- | Value is \"analytics#webproperty\".
+cdsplType :: Lens' CustomDataSourceParentLink Text
+cdsplType
+  = lens _cdsplType (\ s a -> s{_cdsplType = a})
+
+instance FromJSON CustomDataSourceParentLink where
+        parseJSON
+          = withObject "CustomDataSourceParentLink"
+              (\ o ->
+                 CustomDataSourceParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomDataSourceParentLink where
+        toJSON CustomDataSourceParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cdsplHref,
+                  Just ("type" .= _cdsplType)])
 
 -- | JSON template for an Analytics account ticket. The account ticket
 -- consists of the ticket ID and the basic information for the account,
@@ -4760,6 +6728,159 @@ instance ToJSON AccountTicket where
                   ("account" .=) <$> _atAccount,
                   ("webproperty" .=) <$> _atWebproperty,
                   ("id" .=) <$> _atId])
+
+-- | Real time data request query parameters.
+--
+-- /See:/ 'realtimeDataQuery' smart constructor.
+data RealtimeDataQuery = RealtimeDataQuery
+    { _rdqMetrics    :: !(Maybe [Text])
+    , _rdqFilters    :: !(Maybe Text)
+    , _rdqIds        :: !(Maybe Text)
+    , _rdqSort       :: !(Maybe [Text])
+    , _rdqDimensions :: !(Maybe Text)
+    , _rdqMaxResults :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RealtimeDataQuery' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdqMetrics'
+--
+-- * 'rdqFilters'
+--
+-- * 'rdqIds'
+--
+-- * 'rdqSort'
+--
+-- * 'rdqDimensions'
+--
+-- * 'rdqMaxResults'
+realtimeDataQuery
+    :: RealtimeDataQuery
+realtimeDataQuery =
+    RealtimeDataQuery
+    { _rdqMetrics = Nothing
+    , _rdqFilters = Nothing
+    , _rdqIds = Nothing
+    , _rdqSort = Nothing
+    , _rdqDimensions = Nothing
+    , _rdqMaxResults = Nothing
+    }
+
+-- | List of real time metrics.
+rdqMetrics :: Lens' RealtimeDataQuery [Text]
+rdqMetrics
+  = lens _rdqMetrics (\ s a -> s{_rdqMetrics = a}) .
+      _Default
+      . _Coerce
+
+-- | Comma-separated list of dimension or metric filters.
+rdqFilters :: Lens' RealtimeDataQuery (Maybe Text)
+rdqFilters
+  = lens _rdqFilters (\ s a -> s{_rdqFilters = a})
+
+-- | Unique table ID.
+rdqIds :: Lens' RealtimeDataQuery (Maybe Text)
+rdqIds = lens _rdqIds (\ s a -> s{_rdqIds = a})
+
+-- | List of dimensions or metrics based on which real time data is sorted.
+rdqSort :: Lens' RealtimeDataQuery [Text]
+rdqSort
+  = lens _rdqSort (\ s a -> s{_rdqSort = a}) . _Default
+      . _Coerce
+
+-- | List of real time dimensions.
+rdqDimensions :: Lens' RealtimeDataQuery (Maybe Text)
+rdqDimensions
+  = lens _rdqDimensions
+      (\ s a -> s{_rdqDimensions = a})
+
+-- | Maximum results per page.
+rdqMaxResults :: Lens' RealtimeDataQuery (Maybe Int32)
+rdqMaxResults
+  = lens _rdqMaxResults
+      (\ s a -> s{_rdqMaxResults = a})
+
+instance FromJSON RealtimeDataQuery where
+        parseJSON
+          = withObject "RealtimeDataQuery"
+              (\ o ->
+                 RealtimeDataQuery <$>
+                   (o .:? "metrics" .!= mempty) <*> (o .:? "filters")
+                     <*> (o .:? "ids")
+                     <*> (o .:? "sort" .!= mempty)
+                     <*> (o .:? "dimensions")
+                     <*> (o .:? "max-results"))
+
+instance ToJSON RealtimeDataQuery where
+        toJSON RealtimeDataQuery{..}
+          = object
+              (catMaybes
+                 [("metrics" .=) <$> _rdqMetrics,
+                  ("filters" .=) <$> _rdqFilters,
+                  ("ids" .=) <$> _rdqIds, ("sort" .=) <$> _rdqSort,
+                  ("dimensions" .=) <$> _rdqDimensions,
+                  ("max-results" .=) <$> _rdqMaxResults])
+
+--
+-- /See:/ 'realtimeDataColumnHeaders' smart constructor.
+data RealtimeDataColumnHeaders = RealtimeDataColumnHeaders
+    { _rdchColumnType :: !(Maybe Text)
+    , _rdchName       :: !(Maybe Text)
+    , _rdchDataType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RealtimeDataColumnHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdchColumnType'
+--
+-- * 'rdchName'
+--
+-- * 'rdchDataType'
+realtimeDataColumnHeaders
+    :: RealtimeDataColumnHeaders
+realtimeDataColumnHeaders =
+    RealtimeDataColumnHeaders
+    { _rdchColumnType = Nothing
+    , _rdchName = Nothing
+    , _rdchDataType = Nothing
+    }
+
+-- | Column Type. Either DIMENSION or METRIC.
+rdchColumnType :: Lens' RealtimeDataColumnHeaders (Maybe Text)
+rdchColumnType
+  = lens _rdchColumnType
+      (\ s a -> s{_rdchColumnType = a})
+
+-- | Column name.
+rdchName :: Lens' RealtimeDataColumnHeaders (Maybe Text)
+rdchName = lens _rdchName (\ s a -> s{_rdchName = a})
+
+-- | Data type. Dimension column headers have only STRING as the data type.
+-- Metric column headers have data types for metric values such as INTEGER,
+-- DOUBLE, CURRENCY etc.
+rdchDataType :: Lens' RealtimeDataColumnHeaders (Maybe Text)
+rdchDataType
+  = lens _rdchDataType (\ s a -> s{_rdchDataType = a})
+
+instance FromJSON RealtimeDataColumnHeaders where
+        parseJSON
+          = withObject "RealtimeDataColumnHeaders"
+              (\ o ->
+                 RealtimeDataColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON RealtimeDataColumnHeaders where
+        toJSON RealtimeDataColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _rdchColumnType,
+                  ("name" .=) <$> _rdchName,
+                  ("dataType" .=) <$> _rdchDataType])
 
 -- | JSON template for an Analytics AccountSummary. An AccountSummary is a
 -- lightweight tree comprised of properties\/profiles.
@@ -5148,6 +7269,90 @@ instance ToJSON Columns where
                   ("totalResults" .=) <$> _colTotalResults,
                   ("attributeNames" .=) <$> _colAttributeNames])
 
+-- | Details for the filter of the type LOWER.
+--
+-- /See:/ 'filterLowercaseDetails' smart constructor.
+data FilterLowercaseDetails = FilterLowercaseDetails
+    { _fldFieldIndex :: !(Maybe Int32)
+    , _fldField      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FilterLowercaseDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'fldFieldIndex'
+--
+-- * 'fldField'
+filterLowercaseDetails
+    :: FilterLowercaseDetails
+filterLowercaseDetails =
+    FilterLowercaseDetails
+    { _fldFieldIndex = Nothing
+    , _fldField = Nothing
+    }
+
+-- | The Index of the custom dimension. Required if field is a
+-- CUSTOM_DIMENSION.
+fldFieldIndex :: Lens' FilterLowercaseDetails (Maybe Int32)
+fldFieldIndex
+  = lens _fldFieldIndex
+      (\ s a -> s{_fldFieldIndex = a})
+
+-- | Field to use in the filter.
+fldField :: Lens' FilterLowercaseDetails (Maybe Text)
+fldField = lens _fldField (\ s a -> s{_fldField = a})
+
+instance FromJSON FilterLowercaseDetails where
+        parseJSON
+          = withObject "FilterLowercaseDetails"
+              (\ o ->
+                 FilterLowercaseDetails <$>
+                   (o .:? "fieldIndex") <*> (o .:? "field"))
+
+instance ToJSON FilterLowercaseDetails where
+        toJSON FilterLowercaseDetails{..}
+          = object
+              (catMaybes
+                 [("fieldIndex" .=) <$> _fldFieldIndex,
+                  ("field" .=) <$> _fldField])
+
+-- | Web property being linked.
+--
+-- /See:/ 'entityAdWordsLinkEntity' smart constructor.
+newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity
+    { _eawleWebPropertyRef :: Maybe (Maybe WebPropertyRef)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EntityAdWordsLinkEntity' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eawleWebPropertyRef'
+entityAdWordsLinkEntity
+    :: EntityAdWordsLinkEntity
+entityAdWordsLinkEntity =
+    EntityAdWordsLinkEntity
+    { _eawleWebPropertyRef = Nothing
+    }
+
+eawleWebPropertyRef :: Lens' EntityAdWordsLinkEntity (Maybe (Maybe WebPropertyRef))
+eawleWebPropertyRef
+  = lens _eawleWebPropertyRef
+      (\ s a -> s{_eawleWebPropertyRef = a})
+
+instance FromJSON EntityAdWordsLinkEntity where
+        parseJSON
+          = withObject "EntityAdWordsLinkEntity"
+              (\ o ->
+                 EntityAdWordsLinkEntity <$> (o .:? "webPropertyRef"))
+
+instance ToJSON EntityAdWordsLinkEntity where
+        toJSON EntityAdWordsLinkEntity{..}
+          = object
+              (catMaybes
+                 [("webPropertyRef" .=) <$> _eawleWebPropertyRef])
+
 -- | A custom dimension collection lists Analytics custom dimensions to which
 -- the user has access. Each resource in the collection corresponds to a
 -- single Analytics custom dimension.
@@ -5385,6 +7590,91 @@ instance ToJSON Uploads where
                   ("startIndex" .=) <$> _uplStartIndex,
                   ("previousLink" .=) <$> _uplPreviousLink])
 
+-- | Details for the goal of the type URL_DESTINATION.
+--
+-- /See:/ 'goalURLDestinationDetails' smart constructor.
+data GoalURLDestinationDetails = GoalURLDestinationDetails
+    { _guddUrl               :: !(Maybe Text)
+    , _guddMatchType         :: !(Maybe Text)
+    , _guddSteps             :: !(Maybe [GoalURLDestinationDetailsSteps])
+    , _guddCaseSensitive     :: !(Maybe Bool)
+    , _guddFirstStepRequired :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalURLDestinationDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'guddUrl'
+--
+-- * 'guddMatchType'
+--
+-- * 'guddSteps'
+--
+-- * 'guddCaseSensitive'
+--
+-- * 'guddFirstStepRequired'
+goalURLDestinationDetails
+    :: GoalURLDestinationDetails
+goalURLDestinationDetails =
+    GoalURLDestinationDetails
+    { _guddUrl = Nothing
+    , _guddMatchType = Nothing
+    , _guddSteps = Nothing
+    , _guddCaseSensitive = Nothing
+    , _guddFirstStepRequired = Nothing
+    }
+
+-- | URL for this goal.
+guddUrl :: Lens' GoalURLDestinationDetails (Maybe Text)
+guddUrl = lens _guddUrl (\ s a -> s{_guddUrl = a})
+
+-- | Match type for the goal URL. Possible values are HEAD, EXACT, or REGEX.
+guddMatchType :: Lens' GoalURLDestinationDetails (Maybe Text)
+guddMatchType
+  = lens _guddMatchType
+      (\ s a -> s{_guddMatchType = a})
+
+-- | List of steps configured for this goal funnel.
+guddSteps :: Lens' GoalURLDestinationDetails [GoalURLDestinationDetailsSteps]
+guddSteps
+  = lens _guddSteps (\ s a -> s{_guddSteps = a}) .
+      _Default
+      . _Coerce
+
+-- | Determines if the goal URL must exactly match the capitalization of
+-- visited URLs.
+guddCaseSensitive :: Lens' GoalURLDestinationDetails (Maybe Bool)
+guddCaseSensitive
+  = lens _guddCaseSensitive
+      (\ s a -> s{_guddCaseSensitive = a})
+
+-- | Determines if the first step in this goal is required.
+guddFirstStepRequired :: Lens' GoalURLDestinationDetails (Maybe Bool)
+guddFirstStepRequired
+  = lens _guddFirstStepRequired
+      (\ s a -> s{_guddFirstStepRequired = a})
+
+instance FromJSON GoalURLDestinationDetails where
+        parseJSON
+          = withObject "GoalURLDestinationDetails"
+              (\ o ->
+                 GoalURLDestinationDetails <$>
+                   (o .:? "url") <*> (o .:? "matchType") <*>
+                     (o .:? "steps" .!= mempty)
+                     <*> (o .:? "caseSensitive")
+                     <*> (o .:? "firstStepRequired"))
+
+instance ToJSON GoalURLDestinationDetails where
+        toJSON GoalURLDestinationDetails{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _guddUrl,
+                  ("matchType" .=) <$> _guddMatchType,
+                  ("steps" .=) <$> _guddSteps,
+                  ("caseSensitive" .=) <$> _guddCaseSensitive,
+                  ("firstStepRequired" .=) <$> _guddFirstStepRequired])
+
 -- | JSON template for an Analytics account filter.
 --
 -- /See:/ 'filter'' smart constructor.
@@ -5579,6 +7869,55 @@ instance ToJSON Filter where
                   ("type" .=) <$> _filType,
                   ("searchAndReplaceDetails" .=) <$>
                     _filSearchAndReplaceDetails])
+
+--
+-- /See:/ 'gaDataDataTable' smart constructor.
+data GaDataDataTable = GaDataDataTable
+    { _gddtCols :: !(Maybe [GaDataDataTableCols])
+    , _gddtRows :: !(Maybe [GaDataDataTableRows])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataDataTable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gddtCols'
+--
+-- * 'gddtRows'
+gaDataDataTable
+    :: GaDataDataTable
+gaDataDataTable =
+    GaDataDataTable
+    { _gddtCols = Nothing
+    , _gddtRows = Nothing
+    }
+
+gddtCols :: Lens' GaDataDataTable [GaDataDataTableCols]
+gddtCols
+  = lens _gddtCols (\ s a -> s{_gddtCols = a}) .
+      _Default
+      . _Coerce
+
+gddtRows :: Lens' GaDataDataTable [GaDataDataTableRows]
+gddtRows
+  = lens _gddtRows (\ s a -> s{_gddtRows = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON GaDataDataTable where
+        parseJSON
+          = withObject "GaDataDataTable"
+              (\ o ->
+                 GaDataDataTable <$>
+                   (o .:? "cols" .!= mempty) <*>
+                     (o .:? "rows" .!= mempty))
+
+instance ToJSON GaDataDataTable where
+        toJSON GaDataDataTable{..}
+          = object
+              (catMaybes
+                 [("cols" .=) <$> _gddtCols,
+                  ("rows" .=) <$> _gddtRows])
 
 -- | An segment collection lists Analytics segments that the user has access
 -- to. Each resource in the collection corresponds to a single Analytics
@@ -5950,6 +8289,278 @@ instance ToJSON Segment where
                   ("type" .=) <$> _segType,
                   ("segmentId" .=) <$> _segSegmentId])
 
+-- | Child link for an account entry. Points to the list of web properties
+-- for this account.
+--
+-- /See:/ 'accountChildLink' smart constructor.
+data AccountChildLink = AccountChildLink
+    { _aclHref :: !(Maybe Text)
+    , _aclType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountChildLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aclHref'
+--
+-- * 'aclType'
+accountChildLink
+    :: AccountChildLink
+accountChildLink =
+    AccountChildLink
+    { _aclHref = Nothing
+    , _aclType = "analytics#webproperties"
+    }
+
+-- | Link to the list of web properties for this account.
+aclHref :: Lens' AccountChildLink (Maybe Text)
+aclHref = lens _aclHref (\ s a -> s{_aclHref = a})
+
+-- | Type of the child link. Its value is \"analytics#webproperties\".
+aclType :: Lens' AccountChildLink Text
+aclType = lens _aclType (\ s a -> s{_aclType = a})
+
+instance FromJSON AccountChildLink where
+        parseJSON
+          = withObject "AccountChildLink"
+              (\ o ->
+                 AccountChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperties"))
+
+instance ToJSON AccountChildLink where
+        toJSON AccountChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _aclHref,
+                  Just ("type" .= _aclType)])
+
+--
+-- /See:/ 'experimentVariations' smart constructor.
+data ExperimentVariations = ExperimentVariations
+    { _evStatus :: !(Maybe Text)
+    , _evWeight :: !(Maybe Double)
+    , _evUrl    :: !(Maybe Text)
+    , _evWon    :: !(Maybe Bool)
+    , _evName   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExperimentVariations' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'evStatus'
+--
+-- * 'evWeight'
+--
+-- * 'evUrl'
+--
+-- * 'evWon'
+--
+-- * 'evName'
+experimentVariations
+    :: ExperimentVariations
+experimentVariations =
+    ExperimentVariations
+    { _evStatus = Nothing
+    , _evWeight = Nothing
+    , _evUrl = Nothing
+    , _evWon = Nothing
+    , _evName = Nothing
+    }
+
+-- | Status of the variation. Possible values: \"ACTIVE\", \"INACTIVE\".
+-- INACTIVE variations are not served. This field may not be changed for an
+-- experiment whose status is ENDED.
+evStatus :: Lens' ExperimentVariations (Maybe Text)
+evStatus = lens _evStatus (\ s a -> s{_evStatus = a})
+
+-- | Weight that this variation should receive. Only present if the
+-- experiment is running. This field is read-only.
+evWeight :: Lens' ExperimentVariations (Maybe Double)
+evWeight = lens _evWeight (\ s a -> s{_evWeight = a})
+
+-- | The URL of the variation. This field may not be changed for an
+-- experiment whose status is RUNNING or ENDED.
+evUrl :: Lens' ExperimentVariations (Maybe Text)
+evUrl = lens _evUrl (\ s a -> s{_evUrl = a})
+
+-- | True if the experiment has ended and this variation performed
+-- (statistically) significantly better than the original. This field is
+-- read-only.
+evWon :: Lens' ExperimentVariations (Maybe Bool)
+evWon = lens _evWon (\ s a -> s{_evWon = a})
+
+-- | The name of the variation. This field is required when creating an
+-- experiment. This field may not be changed for an experiment whose status
+-- is ENDED.
+evName :: Lens' ExperimentVariations (Maybe Text)
+evName = lens _evName (\ s a -> s{_evName = a})
+
+instance FromJSON ExperimentVariations where
+        parseJSON
+          = withObject "ExperimentVariations"
+              (\ o ->
+                 ExperimentVariations <$>
+                   (o .:? "status") <*> (o .:? "weight") <*>
+                     (o .:? "url")
+                     <*> (o .:? "won")
+                     <*> (o .:? "name"))
+
+instance ToJSON ExperimentVariations where
+        toJSON ExperimentVariations{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _evStatus,
+                  ("weight" .=) <$> _evWeight, ("url" .=) <$> _evUrl,
+                  ("won" .=) <$> _evWon, ("name" .=) <$> _evName])
+
+-- | Information for the view (profile), for which the Analytics data was
+-- requested.
+--
+-- /See:/ 'gaDataProfileInfo' smart constructor.
+data GaDataProfileInfo = GaDataProfileInfo
+    { _gdpiWebPropertyId         :: !(Maybe Text)
+    , _gdpiProfileId             :: !(Maybe Text)
+    , _gdpiProfileName           :: !(Maybe Text)
+    , _gdpiAccountId             :: !(Maybe Text)
+    , _gdpiInternalWebPropertyId :: !(Maybe Text)
+    , _gdpiTableId               :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataProfileInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gdpiWebPropertyId'
+--
+-- * 'gdpiProfileId'
+--
+-- * 'gdpiProfileName'
+--
+-- * 'gdpiAccountId'
+--
+-- * 'gdpiInternalWebPropertyId'
+--
+-- * 'gdpiTableId'
+gaDataProfileInfo
+    :: GaDataProfileInfo
+gaDataProfileInfo =
+    GaDataProfileInfo
+    { _gdpiWebPropertyId = Nothing
+    , _gdpiProfileId = Nothing
+    , _gdpiProfileName = Nothing
+    , _gdpiAccountId = Nothing
+    , _gdpiInternalWebPropertyId = Nothing
+    , _gdpiTableId = Nothing
+    }
+
+-- | Web Property ID to which this view (profile) belongs.
+gdpiWebPropertyId :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiWebPropertyId
+  = lens _gdpiWebPropertyId
+      (\ s a -> s{_gdpiWebPropertyId = a})
+
+-- | View (Profile) ID.
+gdpiProfileId :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiProfileId
+  = lens _gdpiProfileId
+      (\ s a -> s{_gdpiProfileId = a})
+
+-- | View (Profile) name.
+gdpiProfileName :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiProfileName
+  = lens _gdpiProfileName
+      (\ s a -> s{_gdpiProfileName = a})
+
+-- | Account ID to which this view (profile) belongs.
+gdpiAccountId :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiAccountId
+  = lens _gdpiAccountId
+      (\ s a -> s{_gdpiAccountId = a})
+
+-- | Internal ID for the web property to which this view (profile) belongs.
+gdpiInternalWebPropertyId :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiInternalWebPropertyId
+  = lens _gdpiInternalWebPropertyId
+      (\ s a -> s{_gdpiInternalWebPropertyId = a})
+
+-- | Table ID for view (profile).
+gdpiTableId :: Lens' GaDataProfileInfo (Maybe Text)
+gdpiTableId
+  = lens _gdpiTableId (\ s a -> s{_gdpiTableId = a})
+
+instance FromJSON GaDataProfileInfo where
+        parseJSON
+          = withObject "GaDataProfileInfo"
+              (\ o ->
+                 GaDataProfileInfo <$>
+                   (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
+                     (o .:? "profileName")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "internalWebPropertyId")
+                     <*> (o .:? "tableId"))
+
+instance ToJSON GaDataProfileInfo where
+        toJSON GaDataProfileInfo{..}
+          = object
+              (catMaybes
+                 [("webPropertyId" .=) <$> _gdpiWebPropertyId,
+                  ("profileId" .=) <$> _gdpiProfileId,
+                  ("profileName" .=) <$> _gdpiProfileName,
+                  ("accountId" .=) <$> _gdpiAccountId,
+                  ("internalWebPropertyId" .=) <$>
+                    _gdpiInternalWebPropertyId,
+                  ("tableId" .=) <$> _gdpiTableId])
+
+-- | Parent link for the custom metric. Points to the property to which the
+-- custom metric belongs.
+--
+-- /See:/ 'customMetricParentLink' smart constructor.
+data CustomMetricParentLink = CustomMetricParentLink
+    { _cmplHref :: !(Maybe Text)
+    , _cmplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomMetricParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cmplHref'
+--
+-- * 'cmplType'
+customMetricParentLink
+    :: CustomMetricParentLink
+customMetricParentLink =
+    CustomMetricParentLink
+    { _cmplHref = Nothing
+    , _cmplType = "analytics#webproperty"
+    }
+
+-- | Link to the property to which the custom metric belongs.
+cmplHref :: Lens' CustomMetricParentLink (Maybe Text)
+cmplHref = lens _cmplHref (\ s a -> s{_cmplHref = a})
+
+-- | Type of the parent link. Set to \"analytics#webproperty\".
+cmplType :: Lens' CustomMetricParentLink Text
+cmplType = lens _cmplType (\ s a -> s{_cmplType = a})
+
+instance FromJSON CustomMetricParentLink where
+        parseJSON
+          = withObject "CustomMetricParentLink"
+              (\ o ->
+                 CustomMetricParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#webproperty"))
+
+instance ToJSON CustomMetricParentLink where
+        toJSON CustomMetricParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _cmplHref,
+                  Just ("type" .= _cmplType)])
+
 -- | JSON template for Analytics Custom Dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
@@ -6103,6 +8714,53 @@ instance ToJSON CustomDimension where
                   ("name" .=) <$> _cddName, ("scope" .=) <$> _cddScope,
                   ("id" .=) <$> _cddId, ("updated" .=) <$> _cddUpdated,
                   ("index" .=) <$> _cddIndex])
+
+-- | Parent link for this web property. Points to the account to which this
+-- web property belongs.
+--
+-- /See:/ 'webpropertyParentLink' smart constructor.
+data WebpropertyParentLink = WebpropertyParentLink
+    { _wplHref :: !(Maybe Text)
+    , _wplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WebpropertyParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'wplHref'
+--
+-- * 'wplType'
+webpropertyParentLink
+    :: WebpropertyParentLink
+webpropertyParentLink =
+    WebpropertyParentLink
+    { _wplHref = Nothing
+    , _wplType = "analytics#account"
+    }
+
+-- | Link to the account for this web property.
+wplHref :: Lens' WebpropertyParentLink (Maybe Text)
+wplHref = lens _wplHref (\ s a -> s{_wplHref = a})
+
+-- | Type of the parent link. Its value is \"analytics#account\".
+wplType :: Lens' WebpropertyParentLink Text
+wplType = lens _wplType (\ s a -> s{_wplType = a})
+
+instance FromJSON WebpropertyParentLink where
+        parseJSON
+          = withObject "WebpropertyParentLink"
+              (\ o ->
+                 WebpropertyParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#account"))
+
+instance ToJSON WebpropertyParentLink where
+        toJSON WebpropertyParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _wplHref,
+                  Just ("type" .= _wplType)])
 
 -- | Metadata returned for an upload operation.
 --
@@ -6296,6 +8954,57 @@ instance ToJSON ProfileFilterLink where
                   ("selfLink" .=) <$> _pflfSelfLink,
                   ("id" .=) <$> _pflfId, ("rank" .=) <$> _pflfRank])
 
+--
+-- /See:/ 'gaDataDataTableCols' smart constructor.
+data GaDataDataTableCols = GaDataDataTableCols
+    { _gddtcId    :: !(Maybe Text)
+    , _gddtcType  :: !(Maybe Text)
+    , _gddtcLabel :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataDataTableCols' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gddtcId'
+--
+-- * 'gddtcType'
+--
+-- * 'gddtcLabel'
+gaDataDataTableCols
+    :: GaDataDataTableCols
+gaDataDataTableCols =
+    GaDataDataTableCols
+    { _gddtcId = Nothing
+    , _gddtcType = Nothing
+    , _gddtcLabel = Nothing
+    }
+
+gddtcId :: Lens' GaDataDataTableCols (Maybe Text)
+gddtcId = lens _gddtcId (\ s a -> s{_gddtcId = a})
+
+gddtcType :: Lens' GaDataDataTableCols (Maybe Text)
+gddtcType
+  = lens _gddtcType (\ s a -> s{_gddtcType = a})
+
+gddtcLabel :: Lens' GaDataDataTableCols (Maybe Text)
+gddtcLabel
+  = lens _gddtcLabel (\ s a -> s{_gddtcLabel = a})
+
+instance FromJSON GaDataDataTableCols where
+        parseJSON
+          = withObject "GaDataDataTableCols"
+              (\ o ->
+                 GaDataDataTableCols <$>
+                   (o .:? "id") <*> (o .:? "type") <*> (o .:? "label"))
+
+instance ToJSON GaDataDataTableCols where
+        toJSON GaDataDataTableCols{..}
+          = object
+              (catMaybes
+                 [("id" .=) <$> _gddtcId, ("type" .=) <$> _gddtcType,
+                  ("label" .=) <$> _gddtcLabel])
+
 -- | JSON template for a metadata column.
 --
 -- /See:/ 'column' smart constructor.
@@ -6352,3 +9061,283 @@ instance ToJSON Column where
                  [Just ("kind" .= _ccKind),
                   ("attributes" .=) <$> _ccAttributes,
                   ("id" .=) <$> _ccId])
+
+-- | Total values for the requested metrics over all the results, not just
+-- the results returned in this response. The order of the metric totals is
+-- same as the metric order specified in the request.
+--
+-- /See:/ 'mcfDataTotalsForAllResults' smart constructor.
+data McfDataTotalsForAllResults =
+    McfDataTotalsForAllResults
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'McfDataTotalsForAllResults' with the minimum fields required to make a request.
+--
+mcfDataTotalsForAllResults
+    :: McfDataTotalsForAllResults
+mcfDataTotalsForAllResults = McfDataTotalsForAllResults
+
+instance FromJSON McfDataTotalsForAllResults where
+        parseJSON
+          = withObject "McfDataTotalsForAllResults"
+              (\ o -> pure McfDataTotalsForAllResults)
+
+instance ToJSON McfDataTotalsForAllResults where
+        toJSON = const (Object mempty)
+
+-- | Download details for a file stored in Google Cloud Storage.
+--
+-- /See:/ 'unsampledReportCloudStorageDownloadDetails' smart constructor.
+data UnsampledReportCloudStorageDownloadDetails = UnsampledReportCloudStorageDownloadDetails
+    { _urcsddObjectId :: !(Maybe Text)
+    , _urcsddBucketId :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UnsampledReportCloudStorageDownloadDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'urcsddObjectId'
+--
+-- * 'urcsddBucketId'
+unsampledReportCloudStorageDownloadDetails
+    :: UnsampledReportCloudStorageDownloadDetails
+unsampledReportCloudStorageDownloadDetails =
+    UnsampledReportCloudStorageDownloadDetails
+    { _urcsddObjectId = Nothing
+    , _urcsddBucketId = Nothing
+    }
+
+-- | Id of the file object containing the report data.
+urcsddObjectId :: Lens' UnsampledReportCloudStorageDownloadDetails (Maybe Text)
+urcsddObjectId
+  = lens _urcsddObjectId
+      (\ s a -> s{_urcsddObjectId = a})
+
+-- | Id of the bucket the file object is stored in.
+urcsddBucketId :: Lens' UnsampledReportCloudStorageDownloadDetails (Maybe Text)
+urcsddBucketId
+  = lens _urcsddBucketId
+      (\ s a -> s{_urcsddBucketId = a})
+
+instance FromJSON
+         UnsampledReportCloudStorageDownloadDetails where
+        parseJSON
+          = withObject
+              "UnsampledReportCloudStorageDownloadDetails"
+              (\ o ->
+                 UnsampledReportCloudStorageDownloadDetails <$>
+                   (o .:? "objectId") <*> (o .:? "bucketId"))
+
+instance ToJSON
+         UnsampledReportCloudStorageDownloadDetails where
+        toJSON UnsampledReportCloudStorageDownloadDetails{..}
+          = object
+              (catMaybes
+                 [("objectId" .=) <$> _urcsddObjectId,
+                  ("bucketId" .=) <$> _urcsddBucketId])
+
+--
+-- /See:/ 'goalURLDestinationDetailsSteps' smart constructor.
+data GoalURLDestinationDetailsSteps = GoalURLDestinationDetailsSteps
+    { _guddsUrl    :: !(Maybe Text)
+    , _guddsName   :: !(Maybe Text)
+    , _guddsNumber :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalURLDestinationDetailsSteps' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'guddsUrl'
+--
+-- * 'guddsName'
+--
+-- * 'guddsNumber'
+goalURLDestinationDetailsSteps
+    :: GoalURLDestinationDetailsSteps
+goalURLDestinationDetailsSteps =
+    GoalURLDestinationDetailsSteps
+    { _guddsUrl = Nothing
+    , _guddsName = Nothing
+    , _guddsNumber = Nothing
+    }
+
+-- | URL for this step.
+guddsUrl :: Lens' GoalURLDestinationDetailsSteps (Maybe Text)
+guddsUrl = lens _guddsUrl (\ s a -> s{_guddsUrl = a})
+
+-- | Step name.
+guddsName :: Lens' GoalURLDestinationDetailsSteps (Maybe Text)
+guddsName
+  = lens _guddsName (\ s a -> s{_guddsName = a})
+
+-- | Step number.
+guddsNumber :: Lens' GoalURLDestinationDetailsSteps (Maybe Int32)
+guddsNumber
+  = lens _guddsNumber (\ s a -> s{_guddsNumber = a})
+
+instance FromJSON GoalURLDestinationDetailsSteps
+         where
+        parseJSON
+          = withObject "GoalURLDestinationDetailsSteps"
+              (\ o ->
+                 GoalURLDestinationDetailsSteps <$>
+                   (o .:? "url") <*> (o .:? "name") <*>
+                     (o .:? "number"))
+
+instance ToJSON GoalURLDestinationDetailsSteps where
+        toJSON GoalURLDestinationDetailsSteps{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _guddsUrl,
+                  ("name" .=) <$> _guddsName,
+                  ("number" .=) <$> _guddsNumber])
+
+-- | Map of attribute name and value for this column.
+--
+-- /See:/ 'columnAttributes' smart constructor.
+data ColumnAttributes =
+    ColumnAttributes
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ColumnAttributes' with the minimum fields required to make a request.
+--
+columnAttributes
+    :: ColumnAttributes
+columnAttributes = ColumnAttributes
+
+instance FromJSON ColumnAttributes where
+        parseJSON
+          = withObject "ColumnAttributes"
+              (\ o -> pure ColumnAttributes)
+
+instance ToJSON ColumnAttributes where
+        toJSON = const (Object mempty)
+
+-- | Child link for this view (profile). Points to the list of goals for this
+-- view (profile).
+--
+-- /See:/ 'profileChildLink' smart constructor.
+data ProfileChildLink = ProfileChildLink
+    { _pclHref :: !(Maybe Text)
+    , _pclType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProfileChildLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pclHref'
+--
+-- * 'pclType'
+profileChildLink
+    :: ProfileChildLink
+profileChildLink =
+    ProfileChildLink
+    { _pclHref = Nothing
+    , _pclType = "analytics#goals"
+    }
+
+-- | Link to the list of goals for this view (profile).
+pclHref :: Lens' ProfileChildLink (Maybe Text)
+pclHref = lens _pclHref (\ s a -> s{_pclHref = a})
+
+-- | Value is \"analytics#goals\".
+pclType :: Lens' ProfileChildLink Text
+pclType = lens _pclType (\ s a -> s{_pclType = a})
+
+instance FromJSON ProfileChildLink where
+        parseJSON
+          = withObject "ProfileChildLink"
+              (\ o ->
+                 ProfileChildLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#goals"))
+
+instance ToJSON ProfileChildLink where
+        toJSON ProfileChildLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _pclHref,
+                  Just ("type" .= _pclType)])
+
+--
+-- /See:/ 'gaDataDataTableRows' smart constructor.
+newtype GaDataDataTableRows = GaDataDataTableRows
+    { _gddtrC :: Maybe [GaDataDataTableRowsC]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GaDataDataTableRows' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gddtrC'
+gaDataDataTableRows
+    :: GaDataDataTableRows
+gaDataDataTableRows =
+    GaDataDataTableRows
+    { _gddtrC = Nothing
+    }
+
+gddtrC :: Lens' GaDataDataTableRows [GaDataDataTableRowsC]
+gddtrC
+  = lens _gddtrC (\ s a -> s{_gddtrC = a}) . _Default .
+      _Coerce
+
+instance FromJSON GaDataDataTableRows where
+        parseJSON
+          = withObject "GaDataDataTableRows"
+              (\ o ->
+                 GaDataDataTableRows <$> (o .:? "c" .!= mempty))
+
+instance ToJSON GaDataDataTableRows where
+        toJSON GaDataDataTableRows{..}
+          = object (catMaybes [("c" .=) <$> _gddtrC])
+
+-- | Parent link for a goal. Points to the view (profile) to which this goal
+-- belongs.
+--
+-- /See:/ 'goalParentLink' smart constructor.
+data GoalParentLink = GoalParentLink
+    { _gplHref :: !(Maybe Text)
+    , _gplType :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoalParentLink' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gplHref'
+--
+-- * 'gplType'
+goalParentLink
+    :: GoalParentLink
+goalParentLink =
+    GoalParentLink
+    { _gplHref = Nothing
+    , _gplType = "analytics#profile"
+    }
+
+-- | Link to the view (profile) to which this goal belongs.
+gplHref :: Lens' GoalParentLink (Maybe Text)
+gplHref = lens _gplHref (\ s a -> s{_gplHref = a})
+
+-- | Value is \"analytics#profile\".
+gplType :: Lens' GoalParentLink Text
+gplType = lens _gplType (\ s a -> s{_gplType = a})
+
+instance FromJSON GoalParentLink where
+        parseJSON
+          = withObject "GoalParentLink"
+              (\ o ->
+                 GoalParentLink <$>
+                   (o .:? "href") <*>
+                     (o .:? "type" .!= "analytics#profile"))
+
+instance ToJSON GoalParentLink where
+        toJSON GoalParentLink{..}
+          = object
+              (catMaybes
+                 [("href" .=) <$> _gplHref,
+                  Just ("type" .= _gplType)])

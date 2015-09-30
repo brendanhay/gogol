@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersGet@.
-module Container.Projects.Zones.Clusters.Get
+module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     (
     -- * REST Resource
-      ProjectsZonesClustersGetAPI
+      ProjectsZonesClustersGetResource
 
     -- * Creating a Request
-    , projectsZonesClustersGet
-    , ProjectsZonesClustersGet
+    , projectsZonesClustersGet'
+    , ProjectsZonesClustersGet'
 
     -- * Request Lenses
     , pzcgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersGet@ which the
--- 'ProjectsZonesClustersGet' request conforms to.
-type ProjectsZonesClustersGetAPI =
+-- 'ProjectsZonesClustersGet'' request conforms to.
+type ProjectsZonesClustersGetResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
            "clusters" :>
-             Capture "clusterId" Text :> Get '[JSON] Cluster
+             Capture "clusterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Cluster
 
 -- | Gets a specific cluster.
 --
--- /See:/ 'projectsZonesClustersGet' smart constructor.
-data ProjectsZonesClustersGet = ProjectsZonesClustersGet
+-- /See:/ 'projectsZonesClustersGet'' smart constructor.
+data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
     { _pzcgQuotaUser   :: !(Maybe Text)
     , _pzcgPrettyPrint :: !Bool
     , _pzcgUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data ProjectsZonesClustersGet = ProjectsZonesClustersGet
     , _pzcgProjectId   :: !Text
     , _pzcgOauthToken  :: !(Maybe Text)
     , _pzcgFields      :: !(Maybe Text)
-    , _pzcgAlt         :: !Text
+    , _pzcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data ProjectsZonesClustersGet = ProjectsZonesClustersGet
 -- * 'pzcgFields'
 --
 -- * 'pzcgAlt'
-projectsZonesClustersGet
+projectsZonesClustersGet'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'clusterId'
     -> Text -- ^ 'projectId'
-    -> ProjectsZonesClustersGet
-projectsZonesClustersGet pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ =
-    ProjectsZonesClustersGet
+    -> ProjectsZonesClustersGet'
+projectsZonesClustersGet' pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ =
+    ProjectsZonesClustersGet'
     { _pzcgQuotaUser = Nothing
     , _pzcgPrettyPrint = True
     , _pzcgUserIp = Nothing
@@ -108,7 +116,7 @@ projectsZonesClustersGet pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ =
     , _pzcgProjectId = pPzcgProjectId_
     , _pzcgOauthToken = Nothing
     , _pzcgFields = Nothing
-    , _pzcgAlt = "json"
+    , _pzcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ pzcgFields
   = lens _pzcgFields (\ s a -> s{_pzcgFields = a})
 
 -- | Data format for the response.
-pzcgAlt :: Lens' ProjectsZonesClustersGet' Text
+pzcgAlt :: Lens' ProjectsZonesClustersGet' Alt
 pzcgAlt = lens _pzcgAlt (\ s a -> s{_pzcgAlt = a})
 
 instance GoogleRequest ProjectsZonesClustersGet'
          where
         type Rs ProjectsZonesClustersGet' = Cluster
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersGet{..}
-          = go _pzcgQuotaUser _pzcgPrettyPrint _pzcgUserIp
+        requestWithRoute r u ProjectsZonesClustersGet'{..}
+          = go _pzcgQuotaUser (Just _pzcgPrettyPrint)
+              _pzcgUserIp
               _pzcgZoneId
               _pzcgKey
               _pzcgClusterId
               _pzcgProjectId
               _pzcgOauthToken
               _pzcgFields
-              _pzcgAlt
+              (Just _pzcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesClustersGetAPI)
+                      (Proxy :: Proxy ProjectsZonesClustersGetResource)
                       r
                       u

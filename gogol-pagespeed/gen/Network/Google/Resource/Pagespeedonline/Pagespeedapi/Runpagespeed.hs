@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- other information.
 --
 -- /See:/ <https://developers.google.com/speed/docs/insights/v2/getting-started PageSpeed Insights API Reference> for @PagespeedonlinePagespeedapiRunpagespeed@.
-module Pagespeedonline.Pagespeedapi.Runpagespeed
+module Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
     (
     -- * REST Resource
-      PagespeedapiRunpagespeedAPI
+      PagespeedapiRunpagespeedResource
 
     -- * Creating a Request
-    , pagespeedapiRunpagespeed
-    , PagespeedapiRunpagespeed
+    , pagespeedapiRunpagespeed'
+    , PagespeedapiRunpagespeed'
 
     -- * Request Lenses
     , prScreenshot
@@ -50,22 +51,31 @@ import           Network.Google.PageSpeed.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PagespeedonlinePagespeedapiRunpagespeed@ which the
--- 'PagespeedapiRunpagespeed' request conforms to.
-type PagespeedapiRunpagespeedAPI =
+-- 'PagespeedapiRunpagespeed'' request conforms to.
+type PagespeedapiRunpagespeedResource =
      "runPagespeed" :>
        QueryParam "screenshot" Bool :>
-         QueryParam "locale" Text :>
-           QueryParam "url" Text :>
-             QueryParam "filter_third_party_resources" Bool :>
-               QueryParam "strategy" Text :>
-                 QueryParams "rule" Text :> Get '[JSON] Result
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "url" Text :>
+                   QueryParam "filter_third_party_resources" Bool :>
+                     QueryParam "strategy"
+                       PagespeedonlinePagespeedapiRunpagespeedStrategy
+                       :>
+                       QueryParams "rule" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Result
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
 -- PageSpeed scores, a list of suggestions to make that page faster, and
 -- other information.
 --
--- /See:/ 'pagespeedapiRunpagespeed' smart constructor.
-data PagespeedapiRunpagespeed = PagespeedapiRunpagespeed
+-- /See:/ 'pagespeedapiRunpagespeed'' smart constructor.
+data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
     { _prScreenshot                :: !Bool
     , _prQuotaUser                 :: !(Maybe Text)
     , _prPrettyPrint               :: !Bool
@@ -73,12 +83,12 @@ data PagespeedapiRunpagespeed = PagespeedapiRunpagespeed
     , _prLocale                    :: !(Maybe Text)
     , _prUrl                       :: !Text
     , _prFilterThirdPartyResources :: !Bool
-    , _prStrategy                  :: !(Maybe Text)
+    , _prStrategy                  :: !(Maybe PagespeedonlinePagespeedapiRunpagespeedStrategy)
     , _prRule                      :: !(Maybe Text)
     , _prKey                       :: !(Maybe Text)
     , _prOauthToken                :: !(Maybe Text)
     , _prFields                    :: !(Maybe Text)
-    , _prAlt                       :: !Text
+    , _prAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedapiRunpagespeed'' with the minimum fields required to make a request.
@@ -110,11 +120,11 @@ data PagespeedapiRunpagespeed = PagespeedapiRunpagespeed
 -- * 'prFields'
 --
 -- * 'prAlt'
-pagespeedapiRunpagespeed
+pagespeedapiRunpagespeed'
     :: Text -- ^ 'url'
-    -> PagespeedapiRunpagespeed
-pagespeedapiRunpagespeed pPrUrl_ =
-    PagespeedapiRunpagespeed
+    -> PagespeedapiRunpagespeed'
+pagespeedapiRunpagespeed' pPrUrl_ =
+    PagespeedapiRunpagespeed'
     { _prScreenshot = False
     , _prQuotaUser = Nothing
     , _prPrettyPrint = True
@@ -127,7 +137,7 @@ pagespeedapiRunpagespeed pPrUrl_ =
     , _prKey = Nothing
     , _prOauthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = "json"
+    , _prAlt = JSON
     }
 
 -- | Indicates if binary data containing a screenshot should be included
@@ -169,7 +179,7 @@ prFilterThirdPartyResources
       (\ s a -> s{_prFilterThirdPartyResources = a})
 
 -- | The analysis strategy to use
-prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
+prStrategy :: Lens' PagespeedapiRunpagespeed' (Maybe PagespeedonlinePagespeedapiRunpagespeedStrategy)
 prStrategy
   = lens _prStrategy (\ s a -> s{_prStrategy = a})
 
@@ -193,15 +203,16 @@ prFields :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 -- | Data format for the response.
-prAlt :: Lens' PagespeedapiRunpagespeed' Text
+prAlt :: Lens' PagespeedapiRunpagespeed' Alt
 prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
 
 instance GoogleRequest PagespeedapiRunpagespeed'
          where
         type Rs PagespeedapiRunpagespeed' = Result
         request = requestWithRoute defReq pageSpeedURL
-        requestWithRoute r u PagespeedapiRunpagespeed{..}
-          = go (Just _prScreenshot) _prQuotaUser _prPrettyPrint
+        requestWithRoute r u PagespeedapiRunpagespeed'{..}
+          = go (Just _prScreenshot) _prQuotaUser
+              (Just _prPrettyPrint)
               _prUserIp
               _prLocale
               (Just _prUrl)
@@ -211,9 +222,9 @@ instance GoogleRequest PagespeedapiRunpagespeed'
               _prKey
               _prOauthToken
               _prFields
-              _prAlt
+              (Just _prAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PagespeedapiRunpagespeedAPI)
+                      (Proxy :: Proxy PagespeedapiRunpagespeedResource)
                       r
                       u

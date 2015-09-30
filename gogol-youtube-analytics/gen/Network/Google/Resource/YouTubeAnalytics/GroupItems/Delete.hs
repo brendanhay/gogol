@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes an item from a group.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsDelete@.
-module YouTubeAnalytics.GroupItems.Delete
+module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
     (
     -- * REST Resource
-      GroupItemsDeleteAPI
+      GroupItemsDeleteResource
 
     -- * Creating a Request
-    , groupItemsDelete
-    , GroupItemsDelete
+    , groupItemsDelete'
+    , GroupItemsDelete'
 
     -- * Request Lenses
     , gidQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsGroupItemsDelete@ which the
--- 'GroupItemsDelete' request conforms to.
-type GroupItemsDeleteAPI =
+-- 'GroupItemsDelete'' request conforms to.
+type GroupItemsDeleteResource =
      "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes an item from a group.
 --
--- /See:/ 'groupItemsDelete' smart constructor.
-data GroupItemsDelete = GroupItemsDelete
+-- /See:/ 'groupItemsDelete'' smart constructor.
+data GroupItemsDelete' = GroupItemsDelete'
     { _gidQuotaUser              :: !(Maybe Text)
     , _gidPrettyPrint            :: !Bool
     , _gidUserIp                 :: !(Maybe Text)
@@ -62,7 +70,7 @@ data GroupItemsDelete = GroupItemsDelete
     , _gidId                     :: !Text
     , _gidOauthToken             :: !(Maybe Text)
     , _gidFields                 :: !(Maybe Text)
-    , _gidAlt                    :: !Text
+    , _gidAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsDelete'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data GroupItemsDelete = GroupItemsDelete
 -- * 'gidFields'
 --
 -- * 'gidAlt'
-groupItemsDelete
+groupItemsDelete'
     :: Text -- ^ 'id'
-    -> GroupItemsDelete
-groupItemsDelete pGidId_ =
-    GroupItemsDelete
+    -> GroupItemsDelete'
+groupItemsDelete' pGidId_ =
+    GroupItemsDelete'
     { _gidQuotaUser = Nothing
     , _gidPrettyPrint = True
     , _gidUserIp = Nothing
@@ -99,7 +107,7 @@ groupItemsDelete pGidId_ =
     , _gidId = pGidId_
     , _gidOauthToken = Nothing
     , _gidFields = Nothing
-    , _gidAlt = "json"
+    , _gidAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,22 +167,22 @@ gidFields
   = lens _gidFields (\ s a -> s{_gidFields = a})
 
 -- | Data format for the response.
-gidAlt :: Lens' GroupItemsDelete' Text
+gidAlt :: Lens' GroupItemsDelete' Alt
 gidAlt = lens _gidAlt (\ s a -> s{_gidAlt = a})
 
 instance GoogleRequest GroupItemsDelete' where
         type Rs GroupItemsDelete' = ()
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsDelete{..}
-          = go _gidQuotaUser _gidPrettyPrint _gidUserIp
+        requestWithRoute r u GroupItemsDelete'{..}
+          = go _gidQuotaUser (Just _gidPrettyPrint) _gidUserIp
               _gidOnBehalfOfContentOwner
               _gidKey
               (Just _gidId)
               _gidOauthToken
               _gidFields
-              _gidAlt
+              (Just _gidAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GroupItemsDeleteAPI)
+                      (Proxy :: Proxy GroupItemsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementRoomsReset@.
-module GamesManagement.Rooms.Reset
+module Network.Google.Resource.GamesManagement.Rooms.Reset
     (
     -- * REST Resource
-      RoomsResetAPI
+      RoomsResetResource
 
     -- * Creating a Request
-    , roomsReset
-    , RoomsReset
+    , roomsReset'
+    , RoomsReset'
 
     -- * Request Lenses
     , rrQuotaUser
@@ -44,23 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementRoomsReset@ which the
--- 'RoomsReset' request conforms to.
-type RoomsResetAPI =
-     "rooms" :> "reset" :> Post '[JSON] ()
+-- 'RoomsReset'' request conforms to.
+type RoomsResetResource =
+     "rooms" :>
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Reset all rooms for the currently authenticated player for your
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ 'roomsReset' smart constructor.
-data RoomsReset = RoomsReset
+-- /See:/ 'roomsReset'' smart constructor.
+data RoomsReset' = RoomsReset'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
     , _rrUserIp      :: !(Maybe Text)
     , _rrKey         :: !(Maybe Text)
     , _rrOauthToken  :: !(Maybe Text)
     , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Text
+    , _rrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReset'' with the minimum fields required to make a request.
@@ -80,17 +89,17 @@ data RoomsReset = RoomsReset
 -- * 'rrFields'
 --
 -- * 'rrAlt'
-roomsReset
-    :: RoomsReset
-roomsReset =
-    RoomsReset
+roomsReset'
+    :: RoomsReset'
+roomsReset' =
+    RoomsReset'
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
     , _rrUserIp = Nothing
     , _rrKey = Nothing
     , _rrOauthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = "json"
+    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,16 +136,19 @@ rrFields :: Lens' RoomsReset' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
 -- | Data format for the response.
-rrAlt :: Lens' RoomsReset' Text
+rrAlt :: Lens' RoomsReset' Alt
 rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
 
 instance GoogleRequest RoomsReset' where
         type Rs RoomsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u RoomsReset{..}
-          = go _rrQuotaUser _rrPrettyPrint _rrUserIp _rrKey
+        requestWithRoute r u RoomsReset'{..}
+          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIp
+              _rrKey
               _rrOauthToken
               _rrFields
-              _rrAlt
+              (Just _rrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsResetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoomsResetResource)
+                      r
+                      u

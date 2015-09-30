@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsPatch@.
-module Calendar.Calendars.Patch
+module Network.Google.Resource.Calendar.Calendars.Patch
     (
     -- * REST Resource
-      CalendarsPatchAPI
+      CalendarsPatchResource
 
     -- * Creating a Request
-    , calendarsPatch
-    , CalendarsPatch
+    , calendarsPatch'
+    , CalendarsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsPatch@ which the
--- 'CalendarsPatch' request conforms to.
-type CalendarsPatchAPI =
+-- 'CalendarsPatch'' request conforms to.
+type CalendarsPatchResource =
      "calendars" :>
-       Capture "calendarId" Text :> Patch '[JSON] Calendar
+       Capture "calendarId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Calendar
 
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
--- /See:/ 'calendarsPatch' smart constructor.
-data CalendarsPatch = CalendarsPatch
+-- /See:/ 'calendarsPatch'' smart constructor.
+data CalendarsPatch' = CalendarsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpCalendarId  :: !Text
     , _cpPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data CalendarsPatch = CalendarsPatch
     , _cpKey         :: !(Maybe Text)
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CalendarsPatch = CalendarsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-calendarsPatch
+calendarsPatch'
     :: Text -- ^ 'calendarId'
-    -> CalendarsPatch
-calendarsPatch pCpCalendarId_ =
-    CalendarsPatch
+    -> CalendarsPatch'
+calendarsPatch' pCpCalendarId_ =
+    CalendarsPatch'
     { _cpQuotaUser = Nothing
     , _cpCalendarId = pCpCalendarId_
     , _cpPrettyPrint = True
@@ -93,7 +101,7 @@ calendarsPatch pCpCalendarId_ =
     , _cpKey = Nothing
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ cpFields :: Lens' CalendarsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CalendarsPatch' Text
+cpAlt :: Lens' CalendarsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CalendarsPatch' where
         type Rs CalendarsPatch' = Calendar
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsPatch{..}
-          = go _cpQuotaUser _cpCalendarId _cpPrettyPrint
+        requestWithRoute r u CalendarsPatch'{..}
+          = go _cpQuotaUser _cpCalendarId (Just _cpPrettyPrint)
               _cpUserIp
               _cpKey
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsPatchResource)
                       r
                       u

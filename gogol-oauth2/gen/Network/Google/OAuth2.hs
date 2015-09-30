@@ -25,20 +25,30 @@ module Network.Google.OAuth2
     -- * Service Methods
 
     -- ** Oauth2GetCertForOpenIdConnect
-    , module OAuth2.GetCertForOpenIdConnect
+    , module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 
     -- ** Oauth2Tokeninfo
-    , module OAuth2.Tokeninfo
+    , module Network.Google.Method.OAuth2.Tokeninfo
 
     -- * REST Resources
 
     -- ** Oauth2UserinfoGet
-    , module OAuth2.Userinfo.Get
+    , module Network.Google.Resource.OAuth2.Userinfo.Get
 
     -- ** Oauth2UserinfoV2MeGet
-    , module OAuth2.Userinfo.V2.Me.Get
+    , module Network.Google.Resource.OAuth2.Userinfo.V2.Me.Get
 
     -- * Types
+
+    -- ** JwkKeys
+    , JwkKeys
+    , jwkKeys
+    , jkAlg
+    , jkUse
+    , jkKid
+    , jkN
+    , jkE
+    , jkKty
 
     -- ** Tokeninfo
     , Tokeninfo
@@ -72,6 +82,9 @@ module Network.Google.OAuth2
     , uName
     , uVerifiedEmail
     , uId
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Method.OAuth2.GetCertForOpenIdConnect
@@ -86,8 +99,9 @@ TODO
 -}
 
 type OAuth2API =
-     Oauth2GetCertForOpenIdConnect :<|> Oauth2Tokeninfo
-       :<|> Userinfo
+     UserinfoV2MeGetResource :<|> UserinfoGetResource :<|>
+       GetCertForOpenIdConnectMethod
+       :<|> TokeninfoMethod
 
 oAuth2API :: Proxy OAuth2API
 oAuth2API = Proxy

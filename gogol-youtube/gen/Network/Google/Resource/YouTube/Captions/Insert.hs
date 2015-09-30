@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads a caption track.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsInsert@.
-module YouTube.Captions.Insert
+module Network.Google.Resource.YouTube.Captions.Insert
     (
     -- * REST Resource
-      CaptionsInsertAPI
+      CaptionsInsertResource
 
     -- * Creating a Request
-    , captionsInsert
-    , CaptionsInsert
+    , captionsInsert'
+    , CaptionsInsert'
 
     -- * Request Lenses
     , ciOnBehalfOf
@@ -46,18 +47,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCaptionsInsert@ which the
--- 'CaptionsInsert' request conforms to.
-type CaptionsInsertAPI =
+-- 'CaptionsInsert'' request conforms to.
+type CaptionsInsertResource =
      "captions" :>
        QueryParam "onBehalfOf" Text :>
-         QueryParam "part" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "sync" Bool :> Post '[JSON] Caption
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "sync" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Caption
 
 -- | Uploads a caption track.
 --
--- /See:/ 'captionsInsert' smart constructor.
-data CaptionsInsert = CaptionsInsert
+-- /See:/ 'captionsInsert'' smart constructor.
+data CaptionsInsert' = CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciQuotaUser              :: !(Maybe Text)
     , _ciPart                   :: !Text
@@ -68,7 +76,7 @@ data CaptionsInsert = CaptionsInsert
     , _ciSync                   :: !(Maybe Bool)
     , _ciOauthToken             :: !(Maybe Text)
     , _ciFields                 :: !(Maybe Text)
-    , _ciAlt                    :: !Text
+    , _ciAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsInsert'' with the minimum fields required to make a request.
@@ -96,11 +104,11 @@ data CaptionsInsert = CaptionsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-captionsInsert
+captionsInsert'
     :: Text -- ^ 'part'
-    -> CaptionsInsert
-captionsInsert pCiPart_ =
-    CaptionsInsert
+    -> CaptionsInsert'
+captionsInsert' pCiPart_ =
+    CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciQuotaUser = Nothing
     , _ciPart = pCiPart_
@@ -111,7 +119,7 @@ captionsInsert pCiPart_ =
     , _ciSync = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -184,23 +192,24 @@ ciFields :: Lens' CaptionsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CaptionsInsert' Text
+ciAlt :: Lens' CaptionsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsInsert{..}
+        requestWithRoute r u CaptionsInsert'{..}
           = go _ciOnBehalfOf _ciQuotaUser (Just _ciPart)
-              _ciPrettyPrint
+              (Just _ciPrettyPrint)
               _ciUserIp
               _ciOnBehalfOfContentOwner
               _ciKey
               _ciSync
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CaptionsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CaptionsInsertResource)
                       r
                       u

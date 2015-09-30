@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- namespaced type, and the namespace must be owned by your project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconNamespacesList@.
-module ProximityBeacon.Namespaces.List
+module Network.Google.Resource.ProximityBeacon.Namespaces.List
     (
     -- * REST Resource
-      NamespacesListAPI
+      NamespacesListResource
 
     -- * Creating a Request
-    , namespacesList
-    , NamespacesList
+    , namespacesList'
+    , NamespacesList'
 
     -- * Request Lenses
     , nlXgafv
@@ -50,17 +51,31 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconNamespacesList@ which the
--- 'NamespacesList' request conforms to.
-type NamespacesListAPI =
+-- 'NamespacesList'' request conforms to.
+type NamespacesListResource =
      "v1beta1" :>
-       "namespaces" :> Get '[JSON] ListNamespacesResponse
+       "namespaces" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] ListNamespacesResponse
 
 -- | Lists all attachment namespaces owned by your Google Developers Console
 -- project. Attachment data associated with a beacon must include a
 -- namespaced type, and the namespace must be owned by your project.
 --
--- /See:/ 'namespacesList' smart constructor.
-data NamespacesList = NamespacesList
+-- /See:/ 'namespacesList'' smart constructor.
+data NamespacesList' = NamespacesList'
     { _nlXgafv          :: !(Maybe Text)
     , _nlQuotaUser      :: !(Maybe Text)
     , _nlPrettyPrint    :: !Bool
@@ -105,10 +120,10 @@ data NamespacesList = NamespacesList
 -- * 'nlCallback'
 --
 -- * 'nlAlt'
-namespacesList
-    :: NamespacesList
-namespacesList =
-    NamespacesList
+namespacesList'
+    :: NamespacesList'
+namespacesList' =
+    NamespacesList'
     { _nlXgafv = Nothing
     , _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
@@ -195,10 +210,10 @@ nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
 instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u NamespacesList{..}
-          = go _nlXgafv _nlQuotaUser _nlPrettyPrint
+        requestWithRoute r u NamespacesList'{..}
+          = go _nlXgafv _nlQuotaUser (Just _nlPrettyPrint)
               _nlUploadProtocol
-              _nlPp
+              (Just _nlPp)
               _nlAccessToken
               _nlUploadType
               _nlBearerToken
@@ -206,8 +221,9 @@ instance GoogleRequest NamespacesList' where
               _nlOauthToken
               _nlFields
               _nlCallback
-              _nlAlt
+              (Just _nlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NamespacesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy NamespacesListResource)
                       r
                       u

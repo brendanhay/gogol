@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,135 +20,148 @@
 -- | Updates an existing site.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesUpdate@.
-module DFAReporting.Sites.Update
+module Network.Google.Resource.DFAReporting.Sites.Update
     (
     -- * REST Resource
-      SitesUpdateAPI
+      SitesUpdateResource
 
     -- * Creating a Request
-    , sitesUpdate
-    , SitesUpdate
+    , sitesUpdate'
+    , SitesUpdate'
 
     -- * Request Lenses
-    , suQuotaUser
-    , suPrettyPrint
-    , suUserIp
-    , suProfileId
-    , suKey
-    , suOauthToken
-    , suFields
-    , suAlt
+    , sitQuotaUser
+    , sitPrettyPrint
+    , sitUserIp
+    , sitProfileId
+    , sitKey
+    , sitOauthToken
+    , sitFields
+    , sitAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSitesUpdate@ which the
--- 'SitesUpdate' request conforms to.
-type SitesUpdateAPI =
+-- 'SitesUpdate'' request conforms to.
+type SitesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "sites" :> Put '[JSON] Site
+         "sites" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Site
 
 -- | Updates an existing site.
 --
--- /See:/ 'sitesUpdate' smart constructor.
-data SitesUpdate = SitesUpdate
-    { _suQuotaUser   :: !(Maybe Text)
-    , _suPrettyPrint :: !Bool
-    , _suUserIp      :: !(Maybe Text)
-    , _suProfileId   :: !Int64
-    , _suKey         :: !(Maybe Text)
-    , _suOauthToken  :: !(Maybe Text)
-    , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Text
+-- /See:/ 'sitesUpdate'' smart constructor.
+data SitesUpdate' = SitesUpdate'
+    { _sitQuotaUser   :: !(Maybe Text)
+    , _sitPrettyPrint :: !Bool
+    , _sitUserIp      :: !(Maybe Text)
+    , _sitProfileId   :: !Int64
+    , _sitKey         :: !(Maybe Text)
+    , _sitOauthToken  :: !(Maybe Text)
+    , _sitFields      :: !(Maybe Text)
+    , _sitAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'suQuotaUser'
+-- * 'sitQuotaUser'
 --
--- * 'suPrettyPrint'
+-- * 'sitPrettyPrint'
 --
--- * 'suUserIp'
+-- * 'sitUserIp'
 --
--- * 'suProfileId'
+-- * 'sitProfileId'
 --
--- * 'suKey'
+-- * 'sitKey'
 --
--- * 'suOauthToken'
+-- * 'sitOauthToken'
 --
--- * 'suFields'
+-- * 'sitFields'
 --
--- * 'suAlt'
-sitesUpdate
+-- * 'sitAlt'
+sitesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> SitesUpdate
-sitesUpdate pSuProfileId_ =
-    SitesUpdate
-    { _suQuotaUser = Nothing
-    , _suPrettyPrint = True
-    , _suUserIp = Nothing
-    , _suProfileId = pSuProfileId_
-    , _suKey = Nothing
-    , _suOauthToken = Nothing
-    , _suFields = Nothing
-    , _suAlt = "json"
+    -> SitesUpdate'
+sitesUpdate' pSitProfileId_ =
+    SitesUpdate'
+    { _sitQuotaUser = Nothing
+    , _sitPrettyPrint = True
+    , _sitUserIp = Nothing
+    , _sitProfileId = pSitProfileId_
+    , _sitKey = Nothing
+    , _sitOauthToken = Nothing
+    , _sitFields = Nothing
+    , _sitAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-suQuotaUser :: Lens' SitesUpdate' (Maybe Text)
-suQuotaUser
-  = lens _suQuotaUser (\ s a -> s{_suQuotaUser = a})
+sitQuotaUser :: Lens' SitesUpdate' (Maybe Text)
+sitQuotaUser
+  = lens _sitQuotaUser (\ s a -> s{_sitQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-suPrettyPrint :: Lens' SitesUpdate' Bool
-suPrettyPrint
-  = lens _suPrettyPrint
-      (\ s a -> s{_suPrettyPrint = a})
+sitPrettyPrint :: Lens' SitesUpdate' Bool
+sitPrettyPrint
+  = lens _sitPrettyPrint
+      (\ s a -> s{_sitPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-suUserIp :: Lens' SitesUpdate' (Maybe Text)
-suUserIp = lens _suUserIp (\ s a -> s{_suUserIp = a})
+sitUserIp :: Lens' SitesUpdate' (Maybe Text)
+sitUserIp
+  = lens _sitUserIp (\ s a -> s{_sitUserIp = a})
 
 -- | User profile ID associated with this request.
-suProfileId :: Lens' SitesUpdate' Int64
-suProfileId
-  = lens _suProfileId (\ s a -> s{_suProfileId = a})
+sitProfileId :: Lens' SitesUpdate' Int64
+sitProfileId
+  = lens _sitProfileId (\ s a -> s{_sitProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SitesUpdate' (Maybe Text)
-suKey = lens _suKey (\ s a -> s{_suKey = a})
+sitKey :: Lens' SitesUpdate' (Maybe Text)
+sitKey = lens _sitKey (\ s a -> s{_sitKey = a})
 
 -- | OAuth 2.0 token for the current user.
-suOauthToken :: Lens' SitesUpdate' (Maybe Text)
-suOauthToken
-  = lens _suOauthToken (\ s a -> s{_suOauthToken = a})
+sitOauthToken :: Lens' SitesUpdate' (Maybe Text)
+sitOauthToken
+  = lens _sitOauthToken
+      (\ s a -> s{_sitOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-suFields :: Lens' SitesUpdate' (Maybe Text)
-suFields = lens _suFields (\ s a -> s{_suFields = a})
+sitFields :: Lens' SitesUpdate' (Maybe Text)
+sitFields
+  = lens _sitFields (\ s a -> s{_sitFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' SitesUpdate' Text
-suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
+sitAlt :: Lens' SitesUpdate' Alt
+sitAlt = lens _sitAlt (\ s a -> s{_sitAlt = a})
 
 instance GoogleRequest SitesUpdate' where
         type Rs SitesUpdate' = Site
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesUpdate{..}
-          = go _suQuotaUser _suPrettyPrint _suUserIp
-              _suProfileId
-              _suKey
-              _suOauthToken
-              _suFields
-              _suAlt
+        requestWithRoute r u SitesUpdate'{..}
+          = go _sitQuotaUser (Just _sitPrettyPrint) _sitUserIp
+              _sitProfileId
+              _sitKey
+              _sitOauthToken
+              _sitFields
+              (Just _sitAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SitesUpdateResource)
+                      r
+                      u

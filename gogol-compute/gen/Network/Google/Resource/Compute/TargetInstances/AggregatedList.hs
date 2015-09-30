@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of target instances grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesAggregatedList@.
-module Compute.TargetInstances.AggregatedList
+module Network.Google.Resource.Compute.TargetInstances.AggregatedList
     (
     -- * REST Resource
-      TargetInstancesAggregatedListAPI
+      TargetInstancesAggregatedListResource
 
     -- * Creating a Request
-    , targetInstancesAggregatedList
-    , TargetInstancesAggregatedList
+    , targetInstancesAggregatedList'
+    , TargetInstancesAggregatedList'
 
     -- * Request Lenses
     , tialQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetInstancesAggregatedList@ which the
--- 'TargetInstancesAggregatedList' request conforms to.
-type TargetInstancesAggregatedListAPI =
+-- 'TargetInstancesAggregatedList'' request conforms to.
+type TargetInstancesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetInstances" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TargetInstanceAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TargetInstanceAggregatedList
 
 -- | Retrieves the list of target instances grouped by scope.
 --
--- /See:/ 'targetInstancesAggregatedList' smart constructor.
-data TargetInstancesAggregatedList = TargetInstancesAggregatedList
+-- /See:/ 'targetInstancesAggregatedList'' smart constructor.
+data TargetInstancesAggregatedList' = TargetInstancesAggregatedList'
     { _tialQuotaUser   :: !(Maybe Text)
     , _tialPrettyPrint :: !Bool
     , _tialProject     :: !Text
@@ -70,7 +78,7 @@ data TargetInstancesAggregatedList = TargetInstancesAggregatedList
     , _tialOauthToken  :: !(Maybe Text)
     , _tialMaxResults  :: !Word32
     , _tialFields      :: !(Maybe Text)
-    , _tialAlt         :: !Text
+    , _tialAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data TargetInstancesAggregatedList = TargetInstancesAggregatedList
 -- * 'tialFields'
 --
 -- * 'tialAlt'
-targetInstancesAggregatedList
+targetInstancesAggregatedList'
     :: Text -- ^ 'project'
-    -> TargetInstancesAggregatedList
-targetInstancesAggregatedList pTialProject_ =
-    TargetInstancesAggregatedList
+    -> TargetInstancesAggregatedList'
+targetInstancesAggregatedList' pTialProject_ =
+    TargetInstancesAggregatedList'
     { _tialQuotaUser = Nothing
     , _tialPrettyPrint = True
     , _tialProject = pTialProject_
@@ -113,7 +121,7 @@ targetInstancesAggregatedList pTialProject_ =
     , _tialOauthToken = Nothing
     , _tialMaxResults = 500
     , _tialFields = Nothing
-    , _tialAlt = "json"
+    , _tialAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ tialFields
   = lens _tialFields (\ s a -> s{_tialFields = a})
 
 -- | Data format for the response.
-tialAlt :: Lens' TargetInstancesAggregatedList' Text
+tialAlt :: Lens' TargetInstancesAggregatedList' Alt
 tialAlt = lens _tialAlt (\ s a -> s{_tialAlt = a})
 
 instance GoogleRequest TargetInstancesAggregatedList'
@@ -197,8 +205,9 @@ instance GoogleRequest TargetInstancesAggregatedList'
              TargetInstanceAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          TargetInstancesAggregatedList{..}
-          = go _tialQuotaUser _tialPrettyPrint _tialProject
+          TargetInstancesAggregatedList'{..}
+          = go _tialQuotaUser (Just _tialPrettyPrint)
+              _tialProject
               _tialUserIp
               _tialKey
               _tialFilter
@@ -206,9 +215,10 @@ instance GoogleRequest TargetInstancesAggregatedList'
               _tialOauthToken
               (Just _tialMaxResults)
               _tialFields
-              _tialAlt
+              (Just _tialAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetInstancesAggregatedListAPI)
+                      (Proxy ::
+                         Proxy TargetInstancesAggregatedListResource)
                       r
                       u

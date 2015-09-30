@@ -29,28 +29,28 @@ module Network.Google.Container
     -- * REST Resources
 
     -- ** ContainerProjectsClustersList
-    , module Container.Projects.Clusters.List
+    , module Network.Google.Resource.Container.Projects.Clusters.List
 
     -- ** ContainerProjectsOperationsList
-    , module Container.Projects.Operations.List
+    , module Network.Google.Resource.Container.Projects.Operations.List
 
     -- ** ContainerProjectsZonesClustersCreate
-    , module Container.Projects.Zones.Clusters.Create
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.Create
 
     -- ** ContainerProjectsZonesClustersDelete
-    , module Container.Projects.Zones.Clusters.Delete
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
 
     -- ** ContainerProjectsZonesClustersGet
-    , module Container.Projects.Zones.Clusters.Get
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
 
     -- ** ContainerProjectsZonesClustersList
-    , module Container.Projects.Zones.Clusters.List
+    , module Network.Google.Resource.Container.Projects.Zones.Clusters.List
 
     -- ** ContainerProjectsZonesOperationsGet
-    , module Container.Projects.Zones.Operations.Get
+    , module Network.Google.Resource.Container.Projects.Zones.Operations.Get
 
     -- ** ContainerProjectsZonesOperationsList
-    , module Container.Projects.Zones.Operations.List
+    , module Network.Google.Resource.Container.Projects.Zones.Operations.List
 
     -- * Types
 
@@ -111,6 +111,12 @@ module Network.Google.Container
     , oTargetLink
     , oTarget
 
+    -- ** OperationOperationType
+    , OperationOperationType (..)
+
+    -- ** OperationStatus
+    , OperationStatus (..)
+
     -- ** ServiceAccount
     , ServiceAccount
     , serviceAccount
@@ -136,6 +142,12 @@ module Network.Google.Container
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+
+    -- ** ClusterStatus
+    , ClusterStatus (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Container.Types
@@ -153,7 +165,15 @@ import           Network.Google.Resource.Container.Projects.Zones.Operations.Lis
 TODO
 -}
 
-type ContainerAPI = Projects
+type ContainerAPI =
+     ProjectsZonesOperationsListResource :<|>
+       ProjectsZonesOperationsGetResource
+       :<|> ProjectsZonesClustersListResource
+       :<|> ProjectsZonesClustersGetResource
+       :<|> ProjectsZonesClustersCreateResource
+       :<|> ProjectsZonesClustersDeleteResource
+       :<|> ProjectsOperationsListResource
+       :<|> ProjectsClustersListResource
 
 containerAPI :: Proxy ContainerAPI
 containerAPI = Proxy

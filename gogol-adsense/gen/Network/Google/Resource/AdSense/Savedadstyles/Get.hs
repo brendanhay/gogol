@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a specific saved ad style from the user\'s account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseSavedadstylesGet@.
-module AdSense.Savedadstyles.Get
+module Network.Google.Resource.AdSense.Savedadstyles.Get
     (
     -- * REST Resource
-      SavedadstylesGetAPI
+      SavedadstylesGetResource
 
     -- * Creating a Request
-    , savedadstylesGet
-    , SavedadstylesGet
+    , savedadstylesGet'
+    , SavedadstylesGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseSavedadstylesGet@ which the
--- 'SavedadstylesGet' request conforms to.
-type SavedadstylesGetAPI =
+-- 'SavedadstylesGet'' request conforms to.
+type SavedadstylesGetResource =
      "savedadstyles" :>
        Capture "savedAdStyleId" Text :>
-         Get '[JSON] SavedAdStyle
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] SavedAdStyle
 
 -- | Get a specific saved ad style from the user\'s account.
 --
--- /See:/ 'savedadstylesGet' smart constructor.
-data SavedadstylesGet = SavedadstylesGet
+-- /See:/ 'savedadstylesGet'' smart constructor.
+data SavedadstylesGet' = SavedadstylesGet'
     { _sgQuotaUser      :: !(Maybe Text)
     , _sgPrettyPrint    :: !Bool
     , _sgSavedAdStyleId :: !Text
@@ -60,7 +67,7 @@ data SavedadstylesGet = SavedadstylesGet
     , _sgKey            :: !(Maybe Text)
     , _sgOauthToken     :: !(Maybe Text)
     , _sgFields         :: !(Maybe Text)
-    , _sgAlt            :: !Text
+    , _sgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data SavedadstylesGet = SavedadstylesGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-savedadstylesGet
+savedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
-    -> SavedadstylesGet
-savedadstylesGet pSgSavedAdStyleId_ =
-    SavedadstylesGet
+    -> SavedadstylesGet'
+savedadstylesGet' pSgSavedAdStyleId_ =
+    SavedadstylesGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgSavedAdStyleId = pSgSavedAdStyleId_
@@ -94,7 +101,7 @@ savedadstylesGet pSgSavedAdStyleId_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +144,22 @@ sgFields :: Lens' SavedadstylesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SavedadstylesGet' Text
+sgAlt :: Lens' SavedadstylesGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u SavedadstylesGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgSavedAdStyleId
+        requestWithRoute r u SavedadstylesGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint)
+              _sgSavedAdStyleId
               _sgUserIp
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SavedadstylesGetAPI)
+                      (Proxy :: Proxy SavedadstylesGetResource)
                       r
                       u

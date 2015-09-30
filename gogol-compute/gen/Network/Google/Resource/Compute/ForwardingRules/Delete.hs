@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesDelete@.
-module Compute.ForwardingRules.Delete
+module Network.Google.Resource.Compute.ForwardingRules.Delete
     (
     -- * REST Resource
-      ForwardingRulesDeleteAPI
+      ForwardingRulesDeleteResource
 
     -- * Creating a Request
-    , forwardingRulesDelete
-    , ForwardingRulesDelete
+    , forwardingRulesDelete'
+    , ForwardingRulesDelete'
 
     -- * Request Lenses
     , frdQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeForwardingRulesDelete@ which the
--- 'ForwardingRulesDelete' request conforms to.
-type ForwardingRulesDeleteAPI =
+-- 'ForwardingRulesDelete'' request conforms to.
+type ForwardingRulesDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "forwardingRules" :>
              Capture "forwardingRule" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --
--- /See:/ 'forwardingRulesDelete' smart constructor.
-data ForwardingRulesDelete = ForwardingRulesDelete
+-- /See:/ 'forwardingRulesDelete'' smart constructor.
+data ForwardingRulesDelete' = ForwardingRulesDelete'
     { _frdQuotaUser      :: !(Maybe Text)
     , _frdPrettyPrint    :: !Bool
     , _frdProject        :: !Text
@@ -67,7 +74,7 @@ data ForwardingRulesDelete = ForwardingRulesDelete
     , _frdRegion         :: !Text
     , _frdOauthToken     :: !(Maybe Text)
     , _frdFields         :: !(Maybe Text)
-    , _frdAlt            :: !Text
+    , _frdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesDelete'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data ForwardingRulesDelete = ForwardingRulesDelete
 -- * 'frdFields'
 --
 -- * 'frdAlt'
-forwardingRulesDelete
+forwardingRulesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
     -> Text -- ^ 'region'
-    -> ForwardingRulesDelete
-forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
-    ForwardingRulesDelete
+    -> ForwardingRulesDelete'
+forwardingRulesDelete' pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
+    ForwardingRulesDelete'
     { _frdQuotaUser = Nothing
     , _frdPrettyPrint = True
     , _frdProject = pFrdProject_
@@ -109,7 +116,7 @@ forwardingRulesDelete pFrdProject_ pFrdForwardingRule_ pFrdRegion_ =
     , _frdRegion = pFrdRegion_
     , _frdOauthToken = Nothing
     , _frdFields = Nothing
-    , _frdAlt = "json"
+    , _frdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +172,23 @@ frdFields
   = lens _frdFields (\ s a -> s{_frdFields = a})
 
 -- | Data format for the response.
-frdAlt :: Lens' ForwardingRulesDelete' Text
+frdAlt :: Lens' ForwardingRulesDelete' Alt
 frdAlt = lens _frdAlt (\ s a -> s{_frdAlt = a})
 
 instance GoogleRequest ForwardingRulesDelete' where
         type Rs ForwardingRulesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesDelete{..}
-          = go _frdQuotaUser _frdPrettyPrint _frdProject
+        requestWithRoute r u ForwardingRulesDelete'{..}
+          = go _frdQuotaUser (Just _frdPrettyPrint) _frdProject
               _frdForwardingRule
               _frdUserIp
               _frdKey
               _frdRegion
               _frdOauthToken
               _frdFields
-              _frdAlt
+              (Just _frdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ForwardingRulesDeleteAPI)
+                      (Proxy :: Proxy ForwardingRulesDeleteResource)
                       r
                       u

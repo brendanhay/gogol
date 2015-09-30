@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Submits a sitemap for a site.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsSubmit@.
-module Webmasters.Sitemaps.Submit
+module Network.Google.Resource.Webmasters.Sitemaps.Submit
     (
     -- * REST Resource
-      SitemapsSubmitAPI
+      SitemapsSubmitResource
 
     -- * Creating a Request
-    , sitemapsSubmit
-    , SitemapsSubmit
+    , sitemapsSubmit'
+    , SitemapsSubmit'
 
     -- * Request Lenses
     , ssQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSitemapsSubmit@ which the
--- 'SitemapsSubmit' request conforms to.
-type SitemapsSubmitAPI =
+-- 'SitemapsSubmit'' request conforms to.
+type SitemapsSubmitResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "sitemaps" :>
-           Capture "feedpath" Text :> Put '[JSON] ()
+           Capture "feedpath" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Submits a sitemap for a site.
 --
--- /See:/ 'sitemapsSubmit' smart constructor.
-data SitemapsSubmit = SitemapsSubmit
+-- /See:/ 'sitemapsSubmit'' smart constructor.
+data SitemapsSubmit' = SitemapsSubmit'
     { _ssQuotaUser   :: !(Maybe Text)
     , _ssPrettyPrint :: !Bool
     , _ssFeedpath    :: !Text
@@ -63,7 +71,7 @@ data SitemapsSubmit = SitemapsSubmit
     , _ssKey         :: !(Maybe Text)
     , _ssOauthToken  :: !(Maybe Text)
     , _ssFields      :: !(Maybe Text)
-    , _ssAlt         :: !Text
+    , _ssAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsSubmit'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SitemapsSubmit = SitemapsSubmit
 -- * 'ssFields'
 --
 -- * 'ssAlt'
-sitemapsSubmit
+sitemapsSubmit'
     :: Text -- ^ 'feedpath'
     -> Text -- ^ 'siteUrl'
-    -> SitemapsSubmit
-sitemapsSubmit pSsFeedpath_ pSsSiteUrl_ =
-    SitemapsSubmit
+    -> SitemapsSubmit'
+sitemapsSubmit' pSsFeedpath_ pSsSiteUrl_ =
+    SitemapsSubmit'
     { _ssQuotaUser = Nothing
     , _ssPrettyPrint = True
     , _ssFeedpath = pSsFeedpath_
@@ -101,7 +109,7 @@ sitemapsSubmit pSsFeedpath_ pSsSiteUrl_ =
     , _ssKey = Nothing
     , _ssOauthToken = Nothing
     , _ssFields = Nothing
-    , _ssAlt = "json"
+    , _ssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ ssFields :: Lens' SitemapsSubmit' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
 -- | Data format for the response.
-ssAlt :: Lens' SitemapsSubmit' Text
+ssAlt :: Lens' SitemapsSubmit' Alt
 ssAlt = lens _ssAlt (\ s a -> s{_ssAlt = a})
 
 instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitemapsSubmit{..}
-          = go _ssQuotaUser _ssPrettyPrint _ssFeedpath
+        requestWithRoute r u SitemapsSubmit'{..}
+          = go _ssQuotaUser (Just _ssPrettyPrint) _ssFeedpath
               _ssUserIp
               _ssSiteUrl
               _ssKey
               _ssOauthToken
               _ssFields
-              _ssAlt
+              (Just _ssAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitemapsSubmitAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SitemapsSubmitResource)
                       r
                       u

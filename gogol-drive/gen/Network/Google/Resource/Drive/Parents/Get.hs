@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,147 +20,162 @@
 -- | Gets a specific parent reference.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveParentsGet@.
-module Drive.Parents.Get
+module Network.Google.Resource.Drive.Parents.Get
     (
     -- * REST Resource
-      ParentsGetAPI
+      ParentsGetResource
 
     -- * Creating a Request
-    , parentsGet
-    , ParentsGet
+    , parentsGet'
+    , ParentsGet'
 
     -- * Request Lenses
-    , pgQuotaUser
-    , pgPrettyPrint
-    , pgUserIp
-    , pgKey
-    , pgFileId
-    , pgOauthToken
-    , pgParentId
-    , pgFields
-    , pgAlt
+    , paraQuotaUser
+    , paraPrettyPrint
+    , paraUserIp
+    , paraKey
+    , paraFileId
+    , paraOauthToken
+    , paraParentId
+    , paraFields
+    , paraAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveParentsGet@ which the
--- 'ParentsGet' request conforms to.
-type ParentsGetAPI =
+-- 'ParentsGet'' request conforms to.
+type ParentsGetResource =
      "files" :>
        Capture "fileId" Text :>
          "parents" :>
            Capture "parentId" Text :>
-             Get '[JSON] ParentReference
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ParentReference
 
 -- | Gets a specific parent reference.
 --
--- /See:/ 'parentsGet' smart constructor.
-data ParentsGet = ParentsGet
-    { _pgQuotaUser   :: !(Maybe Text)
-    , _pgPrettyPrint :: !Bool
-    , _pgUserIp      :: !(Maybe Text)
-    , _pgKey         :: !(Maybe Text)
-    , _pgFileId      :: !Text
-    , _pgOauthToken  :: !(Maybe Text)
-    , _pgParentId    :: !Text
-    , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+-- /See:/ 'parentsGet'' smart constructor.
+data ParentsGet' = ParentsGet'
+    { _paraQuotaUser   :: !(Maybe Text)
+    , _paraPrettyPrint :: !Bool
+    , _paraUserIp      :: !(Maybe Text)
+    , _paraKey         :: !(Maybe Text)
+    , _paraFileId      :: !Text
+    , _paraOauthToken  :: !(Maybe Text)
+    , _paraParentId    :: !Text
+    , _paraFields      :: !(Maybe Text)
+    , _paraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgQuotaUser'
+-- * 'paraQuotaUser'
 --
--- * 'pgPrettyPrint'
+-- * 'paraPrettyPrint'
 --
--- * 'pgUserIp'
+-- * 'paraUserIp'
 --
--- * 'pgKey'
+-- * 'paraKey'
 --
--- * 'pgFileId'
+-- * 'paraFileId'
 --
--- * 'pgOauthToken'
+-- * 'paraOauthToken'
 --
--- * 'pgParentId'
+-- * 'paraParentId'
 --
--- * 'pgFields'
+-- * 'paraFields'
 --
--- * 'pgAlt'
-parentsGet
+-- * 'paraAlt'
+parentsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'parentId'
-    -> ParentsGet
-parentsGet pPgFileId_ pPgParentId_ =
-    ParentsGet
-    { _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
-    , _pgUserIp = Nothing
-    , _pgKey = Nothing
-    , _pgFileId = pPgFileId_
-    , _pgOauthToken = Nothing
-    , _pgParentId = pPgParentId_
-    , _pgFields = Nothing
-    , _pgAlt = "json"
+    -> ParentsGet'
+parentsGet' pParaFileId_ pParaParentId_ =
+    ParentsGet'
+    { _paraQuotaUser = Nothing
+    , _paraPrettyPrint = True
+    , _paraUserIp = Nothing
+    , _paraKey = Nothing
+    , _paraFileId = pParaFileId_
+    , _paraOauthToken = Nothing
+    , _paraParentId = pParaParentId_
+    , _paraFields = Nothing
+    , _paraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-pgQuotaUser :: Lens' ParentsGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
+paraQuotaUser :: Lens' ParentsGet' (Maybe Text)
+paraQuotaUser
+  = lens _paraQuotaUser
+      (\ s a -> s{_paraQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' ParentsGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
+paraPrettyPrint :: Lens' ParentsGet' Bool
+paraPrettyPrint
+  = lens _paraPrettyPrint
+      (\ s a -> s{_paraPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' ParentsGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+paraUserIp :: Lens' ParentsGet' (Maybe Text)
+paraUserIp
+  = lens _paraUserIp (\ s a -> s{_paraUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' ParentsGet' (Maybe Text)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
+paraKey :: Lens' ParentsGet' (Maybe Text)
+paraKey = lens _paraKey (\ s a -> s{_paraKey = a})
 
 -- | The ID of the file.
-pgFileId :: Lens' ParentsGet' Text
-pgFileId = lens _pgFileId (\ s a -> s{_pgFileId = a})
+paraFileId :: Lens' ParentsGet' Text
+paraFileId
+  = lens _paraFileId (\ s a -> s{_paraFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' ParentsGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+paraOauthToken :: Lens' ParentsGet' (Maybe Text)
+paraOauthToken
+  = lens _paraOauthToken
+      (\ s a -> s{_paraOauthToken = a})
 
 -- | The ID of the parent.
-pgParentId :: Lens' ParentsGet' Text
-pgParentId
-  = lens _pgParentId (\ s a -> s{_pgParentId = a})
+paraParentId :: Lens' ParentsGet' Text
+paraParentId
+  = lens _paraParentId (\ s a -> s{_paraParentId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' ParentsGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
+paraFields :: Lens' ParentsGet' (Maybe Text)
+paraFields
+  = lens _paraFields (\ s a -> s{_paraFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' ParentsGet' Text
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+paraAlt :: Lens' ParentsGet' Alt
+paraAlt = lens _paraAlt (\ s a -> s{_paraAlt = a})
 
 instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u ParentsGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgKey
-              _pgFileId
-              _pgOauthToken
-              _pgParentId
-              _pgFields
-              _pgAlt
+        requestWithRoute r u ParentsGet'{..}
+          = go _paraQuotaUser (Just _paraPrettyPrint)
+              _paraUserIp
+              _paraKey
+              _paraFileId
+              _paraOauthToken
+              _paraParentId
+              _paraFields
+              (Just _paraAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ParentsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ParentsGetResource)
+                      r
+                      u

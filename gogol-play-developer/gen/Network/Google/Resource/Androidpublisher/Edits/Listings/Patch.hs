@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsListingsPatch@.
-module Androidpublisher.Edits.Listings.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Listings.Patch
     (
     -- * REST Resource
-      EditsListingsPatchAPI
+      EditsListingsPatchResource
 
     -- * Creating a Request
-    , editsListingsPatch
-    , EditsListingsPatch
+    , editsListingsPatch'
+    , EditsListingsPatch'
 
     -- * Request Lenses
     , elpQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsListingsPatch@ which the
--- 'EditsListingsPatch' request conforms to.
-type EditsListingsPatchAPI =
+-- 'EditsListingsPatch'' request conforms to.
+type EditsListingsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
-             Capture "language" Text :> Patch '[JSON] Listing
+             Capture "language" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Listing
 
 -- | Creates or updates a localized store listing. This method supports patch
 -- semantics.
 --
--- /See:/ 'editsListingsPatch' smart constructor.
-data EditsListingsPatch = EditsListingsPatch
+-- /See:/ 'editsListingsPatch'' smart constructor.
+data EditsListingsPatch' = EditsListingsPatch'
     { _elpQuotaUser   :: !(Maybe Text)
     , _elpPrettyPrint :: !Bool
     , _elpPackageName :: !Text
@@ -68,7 +76,7 @@ data EditsListingsPatch = EditsListingsPatch
     , _elpOauthToken  :: !(Maybe Text)
     , _elpEditId      :: !Text
     , _elpFields      :: !(Maybe Text)
-    , _elpAlt         :: !Text
+    , _elpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsPatch'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data EditsListingsPatch = EditsListingsPatch
 -- * 'elpFields'
 --
 -- * 'elpAlt'
-editsListingsPatch
+editsListingsPatch'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsListingsPatch
-editsListingsPatch pElpPackageName_ pElpLanguage_ pElpEditId_ =
-    EditsListingsPatch
+    -> EditsListingsPatch'
+editsListingsPatch' pElpPackageName_ pElpLanguage_ pElpEditId_ =
+    EditsListingsPatch'
     { _elpQuotaUser = Nothing
     , _elpPrettyPrint = True
     , _elpPackageName = pElpPackageName_
@@ -110,7 +118,7 @@ editsListingsPatch pElpPackageName_ pElpLanguage_ pElpEditId_ =
     , _elpOauthToken = Nothing
     , _elpEditId = pElpEditId_
     , _elpFields = Nothing
-    , _elpAlt = "json"
+    , _elpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ elpFields
   = lens _elpFields (\ s a -> s{_elpFields = a})
 
 -- | Data format for the response.
-elpAlt :: Lens' EditsListingsPatch' Text
+elpAlt :: Lens' EditsListingsPatch' Alt
 elpAlt = lens _elpAlt (\ s a -> s{_elpAlt = a})
 
 instance GoogleRequest EditsListingsPatch' where
         type Rs EditsListingsPatch' = Listing
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsListingsPatch{..}
-          = go _elpQuotaUser _elpPrettyPrint _elpPackageName
+        requestWithRoute r u EditsListingsPatch'{..}
+          = go _elpQuotaUser (Just _elpPrettyPrint)
+              _elpPackageName
               _elpUserIp
               _elpKey
               _elpLanguage
               _elpOauthToken
               _elpEditId
               _elpFields
-              _elpAlt
+              (Just _elpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsListingsPatchAPI)
+                      (Proxy :: Proxy EditsListingsPatchResource)
                       r
                       u

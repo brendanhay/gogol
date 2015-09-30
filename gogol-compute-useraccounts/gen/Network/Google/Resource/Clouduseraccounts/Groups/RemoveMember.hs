@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes users from the specified group.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGroupsRemoveMember@.
-module Clouduseraccounts.Groups.RemoveMember
+module Network.Google.Resource.Clouduseraccounts.Groups.RemoveMember
     (
     -- * REST Resource
-      GroupsRemoveMemberAPI
+      GroupsRemoveMemberResource
 
     -- * Creating a Request
-    , groupsRemoveMember
-    , GroupsRemoveMember
+    , groupsRemoveMember'
+    , GroupsRemoveMember'
 
     -- * Request Lenses
     , grmQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGroupsRemoveMember@ which the
--- 'GroupsRemoveMember' request conforms to.
-type GroupsRemoveMemberAPI =
+-- 'GroupsRemoveMember'' request conforms to.
+type GroupsRemoveMemberResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
            Capture "groupName" Text :>
-             "removeMember" :> Post '[JSON] Operation
+             "removeMember" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes users from the specified group.
 --
--- /See:/ 'groupsRemoveMember' smart constructor.
-data GroupsRemoveMember = GroupsRemoveMember
+-- /See:/ 'groupsRemoveMember'' smart constructor.
+data GroupsRemoveMember' = GroupsRemoveMember'
     { _grmQuotaUser   :: !(Maybe Text)
     , _grmPrettyPrint :: !Bool
     , _grmProject     :: !Text
@@ -64,7 +72,7 @@ data GroupsRemoveMember = GroupsRemoveMember
     , _grmGroupName   :: !Text
     , _grmOauthToken  :: !(Maybe Text)
     , _grmFields      :: !(Maybe Text)
-    , _grmAlt         :: !Text
+    , _grmAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsRemoveMember'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data GroupsRemoveMember = GroupsRemoveMember
 -- * 'grmFields'
 --
 -- * 'grmAlt'
-groupsRemoveMember
+groupsRemoveMember'
     :: Text -- ^ 'project'
     -> Text -- ^ 'groupName'
-    -> GroupsRemoveMember
-groupsRemoveMember pGrmProject_ pGrmGroupName_ =
-    GroupsRemoveMember
+    -> GroupsRemoveMember'
+groupsRemoveMember' pGrmProject_ pGrmGroupName_ =
+    GroupsRemoveMember'
     { _grmQuotaUser = Nothing
     , _grmPrettyPrint = True
     , _grmProject = pGrmProject_
@@ -102,7 +110,7 @@ groupsRemoveMember pGrmProject_ pGrmGroupName_ =
     , _grmGroupName = pGrmGroupName_
     , _grmOauthToken = Nothing
     , _grmFields = Nothing
-    , _grmAlt = "json"
+    , _grmAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +160,23 @@ grmFields
   = lens _grmFields (\ s a -> s{_grmFields = a})
 
 -- | Data format for the response.
-grmAlt :: Lens' GroupsRemoveMember' Text
+grmAlt :: Lens' GroupsRemoveMember' Alt
 grmAlt = lens _grmAlt (\ s a -> s{_grmAlt = a})
 
 instance GoogleRequest GroupsRemoveMember' where
         type Rs GroupsRemoveMember' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GroupsRemoveMember{..}
-          = go _grmQuotaUser _grmPrettyPrint _grmProject
+        requestWithRoute r u GroupsRemoveMember'{..}
+          = go _grmQuotaUser (Just _grmPrettyPrint) _grmProject
               _grmUserIp
               _grmKey
               _grmGroupName
               _grmOauthToken
               _grmFields
-              _grmAlt
+              (Just _grmAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GroupsRemoveMemberAPI)
+                      (Proxy :: Proxy GroupsRemoveMemberResource)
                       r
                       u

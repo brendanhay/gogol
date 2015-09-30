@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the orders in your Merchant Center account.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersList@.
-module Content.Orders.List
+module Network.Google.Resource.Content.Orders.List
     (
     -- * REST Resource
-      OrdersListAPI
+      OrdersListResource
 
     -- * Creating a Request
-    , ordersList
-    , OrdersList
+    , ordersList'
+    , OrdersList'
 
     -- * Request Lenses
     , olPlacedDateEnd
@@ -50,38 +51,45 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersList@ which the
--- 'OrdersList' request conforms to.
-type OrdersListAPI =
+-- 'OrdersList'' request conforms to.
+type OrdersListResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          QueryParam "placedDateEnd" Text :>
-           QueryParam "orderBy" Text :>
-             QueryParam "acknowledged" Bool :>
-               QueryParams "statuses" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "placedDateStart" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       Get '[JSON] OrdersListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" ContentOrdersListOrderBy :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "acknowledged" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParams "statuses" ContentOrdersListStatuses :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "placedDateStart" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] OrdersListResponse
 
 -- | Lists the orders in your Merchant Center account.
 --
--- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList
+-- /See:/ 'ordersList'' smart constructor.
+data OrdersList' = OrdersList'
     { _olPlacedDateEnd   :: !(Maybe Text)
     , _olQuotaUser       :: !(Maybe Text)
     , _olMerchantId      :: !Word64
     , _olPrettyPrint     :: !Bool
-    , _olOrderBy         :: !(Maybe Text)
+    , _olOrderBy         :: !(Maybe ContentOrdersListOrderBy)
     , _olUserIp          :: !(Maybe Text)
     , _olAcknowledged    :: !(Maybe Bool)
     , _olKey             :: !(Maybe Text)
-    , _olStatuses        :: !(Maybe Text)
+    , _olStatuses        :: !(Maybe ContentOrdersListStatuses)
     , _olPageToken       :: !(Maybe Text)
     , _olOauthToken      :: !(Maybe Text)
     , _olPlacedDateStart :: !(Maybe Text)
     , _olMaxResults      :: !(Maybe Word32)
     , _olFields          :: !(Maybe Text)
-    , _olAlt             :: !Text
+    , _olAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
@@ -117,11 +125,11 @@ data OrdersList = OrdersList
 -- * 'olFields'
 --
 -- * 'olAlt'
-ordersList
+ordersList'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersList
-ordersList pOlMerchantId_ =
-    OrdersList
+    -> OrdersList'
+ordersList' pOlMerchantId_ =
+    OrdersList'
     { _olPlacedDateEnd = Nothing
     , _olQuotaUser = Nothing
     , _olMerchantId = pOlMerchantId_
@@ -136,7 +144,7 @@ ordersList pOlMerchantId_ =
     , _olPlacedDateStart = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Obtains orders placed before this date (exclusively), in ISO 8601
@@ -170,7 +178,7 @@ olPrettyPrint
 -- placement date, from oldest to most recent. \"placedDate asc\" stands
 -- for listing orders by placement date, from most recent to oldest. In
 -- future releases we\'ll support other sorting criteria.
-olOrderBy :: Lens' OrdersList' (Maybe Text)
+olOrderBy :: Lens' OrdersList' (Maybe ContentOrdersListOrderBy)
 olOrderBy
   = lens _olOrderBy (\ s a -> s{_olOrderBy = a})
 
@@ -200,7 +208,7 @@ olKey = lens _olKey (\ s a -> s{_olKey = a})
 -- active is a shortcut for pendingShipment and partiallyShipped, and
 -- completed is a shortcut for shipped , partiallyDelivered, delivered,
 -- partiallyReturned, returned, and canceled.
-olStatuses :: Lens' OrdersList' (Maybe Text)
+olStatuses :: Lens' OrdersList' (Maybe ContentOrdersListStatuses)
 olStatuses
   = lens _olStatuses (\ s a -> s{_olStatuses = a})
 
@@ -233,15 +241,15 @@ olFields :: Lens' OrdersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OrdersList' Text
+olAlt :: Lens' OrdersList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersList{..}
+        requestWithRoute r u OrdersList'{..}
           = go _olPlacedDateEnd _olQuotaUser _olMerchantId
-              _olPrettyPrint
+              (Just _olPrettyPrint)
               _olOrderBy
               _olUserIp
               _olAcknowledged
@@ -252,6 +260,8 @@ instance GoogleRequest OrdersList' where
               _olPlacedDateStart
               _olMaxResults
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy OrdersListResource)
+                      r
+                      u

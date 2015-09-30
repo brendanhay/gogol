@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves all links that match the query parameters.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksList@.
-module Gan.Links.List
+module Network.Google.Resource.Gan.Links.List
     (
     -- * REST Resource
-      LinksListAPI
+      LinksListResource
 
     -- * Creating a Request
-    , linksList
-    , LinksList
+    , linksList'
+    , LinksList'
 
     -- * Request Lenses
     , llCreateDateMax
@@ -57,52 +58,63 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanLinksList@ which the
--- 'LinksList' request conforms to.
-type LinksListAPI =
-     Capture "role" Text :>
+-- 'LinksList'' request conforms to.
+type LinksListResource =
+     Capture "role" GanLinksListRole :>
        Capture "roleId" Text :>
          "links" :>
            QueryParam "createDateMax" Text :>
-             QueryParam "authorship" Text :>
-               QueryParams "assetSize" Text :>
-                 QueryParam "relationshipStatus" Text :>
-                   QueryParams "advertiserId" Int64 :>
-                     QueryParam "searchText" Text :>
-                       QueryParams "promotionType" Text :>
-                         QueryParam "createDateMin" Text :>
-                           QueryParam "linkType" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "startDateMax" Text :>
-                                 QueryParam "startDateMin" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     Get '[JSON] Links
+             QueryParam "authorship" GanLinksListAuthorship :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParams "assetSize" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "relationshipStatus"
+                         GanLinksListRelationshipStatus
+                         :>
+                         QueryParams "advertiserId" Int64 :>
+                           QueryParam "searchText" Text :>
+                             QueryParams "promotionType"
+                               GanLinksListPromotionType
+                               :>
+                               QueryParam "key" Text :>
+                                 QueryParam "createDateMin" Text :>
+                                   QueryParam "linkType" GanLinksListLinkType :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "startDateMax" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "startDateMin" Text :>
+                                             QueryParam "maxResults" Word32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Alt :>
+                                                   Get '[JSON] Links
 
 -- | Retrieves all links that match the query parameters.
 --
--- /See:/ 'linksList' smart constructor.
-data LinksList = LinksList
+-- /See:/ 'linksList'' smart constructor.
+data LinksList' = LinksList'
     { _llCreateDateMax      :: !(Maybe Text)
-    , _llAuthorship         :: !(Maybe Text)
+    , _llAuthorship         :: !(Maybe GanLinksListAuthorship)
     , _llQuotaUser          :: !(Maybe Text)
     , _llPrettyPrint        :: !Bool
     , _llAssetSize          :: !(Maybe Text)
     , _llUserIp             :: !(Maybe Text)
-    , _llRelationshipStatus :: !(Maybe Text)
+    , _llRelationshipStatus :: !(Maybe GanLinksListRelationshipStatus)
     , _llAdvertiserId       :: !(Maybe Int64)
     , _llSearchText         :: !(Maybe Text)
-    , _llPromotionType      :: !(Maybe Text)
+    , _llPromotionType      :: !(Maybe GanLinksListPromotionType)
     , _llRoleId             :: !Text
-    , _llRole               :: !Text
+    , _llRole               :: !GanLinksListRole
     , _llKey                :: !(Maybe Text)
     , _llCreateDateMin      :: !(Maybe Text)
-    , _llLinkType           :: !(Maybe Text)
+    , _llLinkType           :: !(Maybe GanLinksListLinkType)
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
     , _llOauthToken         :: !(Maybe Text)
     , _llStartDateMin       :: !(Maybe Text)
     , _llMaxResults         :: !(Maybe Word32)
     , _llFields             :: !(Maybe Text)
-    , _llAlt                :: !Text
+    , _llAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksList'' with the minimum fields required to make a request.
@@ -152,12 +164,12 @@ data LinksList = LinksList
 -- * 'llFields'
 --
 -- * 'llAlt'
-linksList
+linksList'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> LinksList
-linksList pLlRoleId_ pLlRole_ =
-    LinksList
+    -> GanLinksListRole -- ^ 'role'
+    -> LinksList'
+linksList' pLlRoleId_ pLlRole_ =
+    LinksList'
     { _llCreateDateMax = Nothing
     , _llAuthorship = Nothing
     , _llQuotaUser = Nothing
@@ -179,7 +191,7 @@ linksList pLlRoleId_ pLlRole_ =
     , _llStartDateMin = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | The end of the create date range.
@@ -189,7 +201,7 @@ llCreateDateMax
       (\ s a -> s{_llCreateDateMax = a})
 
 -- | The role of the author of the link.
-llAuthorship :: Lens' LinksList' (Maybe Text)
+llAuthorship :: Lens' LinksList' (Maybe GanLinksListAuthorship)
 llAuthorship
   = lens _llAuthorship (\ s a -> s{_llAuthorship = a})
 
@@ -217,7 +229,7 @@ llUserIp :: Lens' LinksList' (Maybe Text)
 llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
 
 -- | The status of the relationship.
-llRelationshipStatus :: Lens' LinksList' (Maybe Text)
+llRelationshipStatus :: Lens' LinksList' (Maybe GanLinksListRelationshipStatus)
 llRelationshipStatus
   = lens _llRelationshipStatus
       (\ s a -> s{_llRelationshipStatus = a})
@@ -236,7 +248,7 @@ llSearchText
   = lens _llSearchText (\ s a -> s{_llSearchText = a})
 
 -- | The promotion type.
-llPromotionType :: Lens' LinksList' (Maybe Text)
+llPromotionType :: Lens' LinksList' (Maybe GanLinksListPromotionType)
 llPromotionType
   = lens _llPromotionType
       (\ s a -> s{_llPromotionType = a})
@@ -247,7 +259,7 @@ llRoleId = lens _llRoleId (\ s a -> s{_llRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-llRole :: Lens' LinksList' Text
+llRole :: Lens' LinksList' GanLinksListRole
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -263,7 +275,7 @@ llCreateDateMin
       (\ s a -> s{_llCreateDateMin = a})
 
 -- | The type of the link.
-llLinkType :: Lens' LinksList' (Maybe Text)
+llLinkType :: Lens' LinksList' (Maybe GanLinksListLinkType)
 llLinkType
   = lens _llLinkType (\ s a -> s{_llLinkType = a})
 
@@ -299,15 +311,15 @@ llFields :: Lens' LinksList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LinksList' Text
+llAlt :: Lens' LinksList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksList{..}
+        requestWithRoute r u LinksList'{..}
           = go _llCreateDateMax _llAuthorship _llQuotaUser
-              _llPrettyPrint
+              (Just _llPrettyPrint)
               _llAssetSize
               _llUserIp
               _llRelationshipStatus
@@ -325,6 +337,8 @@ instance GoogleRequest LinksList' where
               _llStartDateMin
               _llMaxResults
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LinksListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LinksListResource)
+                      r
+                      u

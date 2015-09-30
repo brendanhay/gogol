@@ -27,67 +27,67 @@ module Network.Google.BigQuery
     -- * REST Resources
 
     -- ** BigqueryDatasetsDelete
-    , module BigQuery.Datasets.Delete
+    , module Network.Google.Resource.BigQuery.Datasets.Delete
 
     -- ** BigqueryDatasetsGet
-    , module BigQuery.Datasets.Get
+    , module Network.Google.Resource.BigQuery.Datasets.Get
 
     -- ** BigqueryDatasetsInsert
-    , module BigQuery.Datasets.Insert
+    , module Network.Google.Resource.BigQuery.Datasets.Insert
 
     -- ** BigqueryDatasetsList
-    , module BigQuery.Datasets.List
+    , module Network.Google.Resource.BigQuery.Datasets.List
 
     -- ** BigqueryDatasetsPatch
-    , module BigQuery.Datasets.Patch
+    , module Network.Google.Resource.BigQuery.Datasets.Patch
 
     -- ** BigqueryDatasetsUpdate
-    , module BigQuery.Datasets.Update
+    , module Network.Google.Resource.BigQuery.Datasets.Update
 
     -- ** BigqueryJobsCancel
-    , module BigQuery.Jobs.Cancel
+    , module Network.Google.Resource.BigQuery.Jobs.Cancel
 
     -- ** BigqueryJobsGet
-    , module BigQuery.Jobs.Get
+    , module Network.Google.Resource.BigQuery.Jobs.Get
 
     -- ** BigqueryJobsGetQueryResults
-    , module BigQuery.Jobs.GetQueryResults
+    , module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
 
     -- ** BigqueryJobsInsert
-    , module BigQuery.Jobs.Insert
+    , module Network.Google.Resource.BigQuery.Jobs.Insert
 
     -- ** BigqueryJobsList
-    , module BigQuery.Jobs.List
+    , module Network.Google.Resource.BigQuery.Jobs.List
 
     -- ** BigqueryJobsQuery
-    , module BigQuery.Jobs.Query
+    , module Network.Google.Resource.BigQuery.Jobs.Query
 
     -- ** BigqueryProjectsList
-    , module BigQuery.Projects.List
+    , module Network.Google.Resource.BigQuery.Projects.List
 
     -- ** BigqueryTabledataInsertAll
-    , module BigQuery.Tabledata.InsertAll
+    , module Network.Google.Resource.BigQuery.Tabledata.InsertAll
 
     -- ** BigqueryTabledataList
-    , module BigQuery.Tabledata.List
+    , module Network.Google.Resource.BigQuery.Tabledata.List
 
     -- ** BigqueryTablesDelete
-    , module BigQuery.Tables.Delete
+    , module Network.Google.Resource.BigQuery.Tables.Delete
 
     -- ** BigqueryTablesGet
-    , module BigQuery.Tables.Get
+    , module Network.Google.Resource.BigQuery.Tables.Get
 
     -- ** BigqueryTablesInsert
-    , module BigQuery.Tables.Insert
+    , module Network.Google.Resource.BigQuery.Tables.Insert
 
     -- ** BigqueryTablesList
-    , module BigQuery.Tables.List
+    , module Network.Google.Resource.BigQuery.Tables.List
 
     -- ** BigqueryTablesPatch
-    , module BigQuery.Tables.Patch
+    , module Network.Google.Resource.BigQuery.Tables.Patch
 
     -- ** BigqueryTablesUpdate
-    , module BigQuery.Tables.Update
+    , module Network.Google.Resource.BigQuery.Tables.Update
 
     -- * Types
 
@@ -129,6 +129,12 @@ module Network.Google.BigQuery
     , tableSchema
     , tsFields
 
+    -- ** TableDataInsertAllResponseInsertErrors
+    , TableDataInsertAllResponseInsertErrors
+    , tableDataInsertAllResponseInsertErrors
+    , tdiarieErrors
+    , tdiarieIndex
+
     -- ** ProjectList
     , ProjectList
     , projectList
@@ -137,6 +143,9 @@ module Network.Google.BigQuery
     , plNextPageToken
     , plKind
     , plProjects
+
+    -- ** BigqueryJobsListStateFilter
+    , BigqueryJobsListStateFilter (..)
 
     -- ** JobStatistics
     , JobStatistics
@@ -171,6 +180,9 @@ module Network.Google.BigQuery
     , trDatasetId
     , trProjectId
     , trTableId
+
+    -- ** BigqueryJobsListProjection
+    , BigqueryJobsListProjection (..)
 
     -- ** TableFieldSchema
     , TableFieldSchema
@@ -215,6 +227,12 @@ module Network.Google.BigQuery
     , dlKind
     , dlDatasets
 
+    -- ** TableDataInsertAllRequestRows
+    , TableDataInsertAllRequestRows
+    , tableDataInsertAllRequestRows
+    , tdiarrJson
+    , tdiarrInsertId
+
     -- ** QueryRequest
     , QueryRequest
     , queryRequest
@@ -245,6 +263,15 @@ module Network.Google.BigQuery
     , tdiarRows
     , tdiarSkipInvalidRows
 
+    -- ** ProjectListProjects
+    , ProjectListProjects
+    , projectListProjects
+    , plpFriendlyName
+    , plpKind
+    , plpProjectReference
+    , plpId
+    , plpNumericId
+
     -- ** JobConfigurationLoad
     , JobConfigurationLoad
     , jobConfigurationLoad
@@ -271,6 +298,19 @@ module Network.Google.BigQuery
     , datasetReference
     , drDatasetId
     , drProjectId
+
+    -- ** JobListJobs
+    , JobListJobs
+    , jobListJobs
+    , jljJobReference
+    , jljStatus
+    , jljState
+    , jljUserEmail
+    , jljKind
+    , jljErrorResult
+    , jljId
+    , jljStatistics
+    , jljConfiguration
 
     -- ** TableRow
     , TableRow
@@ -336,6 +376,10 @@ module Network.Google.BigQuery
     , JSONObject
     , jSONObject
 
+    -- ** JobConfigurationQueryTableDefinitions
+    , JobConfigurationQueryTableDefinitions
+    , jobConfigurationQueryTableDefinitions
+
     -- ** JobConfigurationQuery
     , JobConfigurationQuery
     , jobConfigurationQuery
@@ -397,6 +441,16 @@ module Network.Google.BigQuery
     , tKind
     , tInsertErrors
 
+    -- ** DatasetAccess
+    , DatasetAccess
+    , datasetAccess
+    , daGroupByEmail
+    , daDomain
+    , daSpecialGroup
+    , daRole
+    , daView
+    , daUserByEmail
+
     -- ** Table
     , Table
     , table
@@ -445,6 +499,14 @@ module Network.Google.BigQuery
     , jsOutputBytes
     , jsInputFileBytes
 
+    -- ** DatasetListDatasets
+    , DatasetListDatasets
+    , datasetListDatasets
+    , dldFriendlyName
+    , dldKind
+    , dldDatasetReference
+    , dldId
+
     -- ** QueryResponse
     , QueryResponse
     , queryResponse
@@ -458,6 +520,18 @@ module Network.Google.BigQuery
     , qErrors
     , qJobComplete
     , qCacheHit
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** TableListTables
+    , TableListTables
+    , tableListTables
+    , tltTableReference
+    , tltFriendlyName
+    , tltKind
+    , tltId
+    , tltType
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -489,8 +563,26 @@ TODO
 -}
 
 type BigQueryAPI =
-     Jobs :<|> Tables :<|> Tabledata :<|> Projects :<|>
-       Datasets
+     JobsInsertResource :<|> JobsListResource :<|>
+       JobsGetResource
+       :<|> JobsQueryResource
+       :<|> JobsCancelResource
+       :<|> JobsGetQueryResultsResource
+       :<|> TablesInsertResource
+       :<|> TablesListResource
+       :<|> TablesPatchResource
+       :<|> TablesGetResource
+       :<|> TablesDeleteResource
+       :<|> TablesUpdateResource
+       :<|> TabledataListResource
+       :<|> TabledataInsertAllResource
+       :<|> ProjectsListResource
+       :<|> DatasetsInsertResource
+       :<|> DatasetsListResource
+       :<|> DatasetsPatchResource
+       :<|> DatasetsGetResource
+       :<|> DatasetsDeleteResource
+       :<|> DatasetsUpdateResource
 
 bigQueryAPI :: Proxy BigQueryAPI
 bigQueryAPI = Proxy

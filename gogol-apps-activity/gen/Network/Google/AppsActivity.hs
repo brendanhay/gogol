@@ -27,7 +27,7 @@ module Network.Google.AppsActivity
     -- * REST Resources
 
     -- ** AppsactivityActivitiesList
-    , module AppsActivity.Activities.List
+    , module Network.Google.Resource.AppsActivity.Activities.List
 
     -- * Types
 
@@ -37,6 +37,9 @@ module Network.Google.AppsActivity
     , pIsRoot
     , pId
     , pTitle
+
+    -- ** EventPrimaryEventType
+    , EventPrimaryEventType (..)
 
     -- ** Photo
     , Photo
@@ -56,17 +59,29 @@ module Network.Google.AppsActivity
     , eTarget
     , eMove
 
+    -- ** PermissionRole
+    , PermissionRole (..)
+
     -- ** ListActivitiesResponse
     , ListActivitiesResponse
     , listActivitiesResponse
     , larNextPageToken
     , larActivities
 
+    -- ** EventAdditionalEventTypes
+    , EventAdditionalEventTypes (..)
+
+    -- ** AppsactivityActivitiesListGroupingStrategy
+    , AppsactivityActivitiesListGroupingStrategy (..)
+
     -- ** PermissionChange
     , PermissionChange
     , permissionChange
     , pcAddedPermissions
     , pcRemovedPermissions
+
+    -- ** PermissionType
+    , PermissionType (..)
 
     -- ** User
     , User
@@ -96,6 +111,9 @@ module Network.Google.AppsActivity
     , pType
     , pPermissionId
 
+    -- ** Alt
+    , Alt (..)
+
     -- ** Move
     , Move
     , move
@@ -118,7 +136,7 @@ import           Network.Google.Resource.AppsActivity.Activities.List
 TODO
 -}
 
-type AppsActivityAPI = Activities
+type AppsActivityAPI = ActivitiesListResource
 
 appsActivityAPI :: Proxy AppsActivityAPI
 appsActivityAPI = Proxy

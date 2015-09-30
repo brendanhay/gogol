@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the user\'s files.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesList@.
-module Drive.Files.List
+module Network.Google.Resource.Drive.Files.List
     (
     -- * REST Resource
-      FilesListAPI
+      FilesListResource
 
     -- * Creating a Request
-    , filesList
-    , FilesList
+    , filesList'
+    , FilesList'
 
     -- * Request Lenses
     , flQuotaUser
@@ -49,21 +50,28 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesList@ which the
--- 'FilesList' request conforms to.
-type FilesListAPI =
+-- 'FilesList'' request conforms to.
+type FilesListResource =
      "files" :>
-       QueryParam "orderBy" Text :>
-         QueryParam "q" Text :>
-           QueryParam "spaces" Text :>
-             QueryParam "projection" Text :>
-               QueryParam "corpus" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :> Get '[JSON] FileList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "orderBy" Text :>
+             QueryParam "userIp" Text :>
+               QueryParam "q" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "spaces" Text :>
+                     QueryParam "projection" DriveFilesListProjection :>
+                       QueryParam "corpus" DriveFilesListCorpus :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] FileList
 
 -- | Lists the user\'s files.
 --
--- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
+-- /See:/ 'filesList'' smart constructor.
+data FilesList' = FilesList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flOrderBy     :: !(Maybe Text)
@@ -71,13 +79,13 @@ data FilesList = FilesList
     , _flQ           :: !(Maybe Text)
     , _flKey         :: !(Maybe Text)
     , _flSpaces      :: !(Maybe Text)
-    , _flProjection  :: !(Maybe Text)
-    , _flCorpus      :: !(Maybe Text)
+    , _flProjection  :: !(Maybe DriveFilesListProjection)
+    , _flCorpus      :: !(Maybe DriveFilesListCorpus)
     , _flPageToken   :: !(Maybe Text)
     , _flOauthToken  :: !(Maybe Text)
     , _flMaxResults  :: !Int32
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Text
+    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
@@ -111,10 +119,10 @@ data FilesList = FilesList
 -- * 'flFields'
 --
 -- * 'flAlt'
-filesList
-    :: FilesList
-filesList =
-    FilesList
+filesList'
+    :: FilesList'
+filesList' =
+    FilesList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flOrderBy = Nothing
@@ -128,7 +136,7 @@ filesList =
     , _flOauthToken = Nothing
     , _flMaxResults = 100
     , _flFields = Nothing
-    , _flAlt = "json"
+    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -177,12 +185,12 @@ flSpaces :: Lens' FilesList' (Maybe Text)
 flSpaces = lens _flSpaces (\ s a -> s{_flSpaces = a})
 
 -- | This parameter is deprecated and has no function.
-flProjection :: Lens' FilesList' (Maybe Text)
+flProjection :: Lens' FilesList' (Maybe DriveFilesListProjection)
 flProjection
   = lens _flProjection (\ s a -> s{_flProjection = a})
 
 -- | The body of items (files\/documents) to which the query applies.
-flCorpus :: Lens' FilesList' (Maybe Text)
+flCorpus :: Lens' FilesList' (Maybe DriveFilesListCorpus)
 flCorpus = lens _flCorpus (\ s a -> s{_flCorpus = a})
 
 -- | Page token for files.
@@ -205,14 +213,15 @@ flFields :: Lens' FilesList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 -- | Data format for the response.
-flAlt :: Lens' FilesList' Text
+flAlt :: Lens' FilesList' Alt
 flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesList{..}
-          = go _flQuotaUser _flPrettyPrint _flOrderBy _flUserIp
+        requestWithRoute r u FilesList'{..}
+          = go _flQuotaUser (Just _flPrettyPrint) _flOrderBy
+              _flUserIp
               _flQ
               _flKey
               _flSpaces
@@ -222,6 +231,8 @@ instance GoogleRequest FilesList' where
               _flOauthToken
               (Just _flMaxResults)
               _flFields
-              _flAlt
+              (Just _flAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Implements GlobalAllianceApi.getReferenceBases.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesBasesList@.
-module Genomics.References.Bases.List
+module Network.Google.Resource.Genomics.References.Bases.List
     (
     -- * REST Resource
-      ReferencesBasesListAPI
+      ReferencesBasesListResource
 
     -- * Creating a Request
-    , referencesBasesList
-    , ReferencesBasesList
+    , referencesBasesList'
+    , ReferencesBasesList'
 
     -- * Request Lenses
     , rblQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesBasesList@ which the
--- 'ReferencesBasesList' request conforms to.
-type ReferencesBasesListAPI =
+-- 'ReferencesBasesList'' request conforms to.
+type ReferencesBasesListResource =
      "references" :>
        Capture "referenceId" Text :>
          "bases" :>
-           QueryParam "start" Int64 :>
-             QueryParam "end" Int64 :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   Get '[JSON] ListBasesResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "start" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "end" Int64 :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "pageSize" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] ListBasesResponse
 
 -- | Lists the bases in a reference, optionally restricted to a range.
 -- Implements GlobalAllianceApi.getReferenceBases.
 --
--- /See:/ 'referencesBasesList' smart constructor.
-data ReferencesBasesList = ReferencesBasesList
+-- /See:/ 'referencesBasesList'' smart constructor.
+data ReferencesBasesList' = ReferencesBasesList'
     { _rblQuotaUser   :: !(Maybe Text)
     , _rblPrettyPrint :: !Bool
     , _rblUserIp      :: !(Maybe Text)
@@ -75,7 +83,7 @@ data ReferencesBasesList = ReferencesBasesList
     , _rblOauthToken  :: !(Maybe Text)
     , _rblPageSize    :: !(Maybe Int32)
     , _rblFields      :: !(Maybe Text)
-    , _rblAlt         :: !Text
+    , _rblAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
@@ -105,11 +113,11 @@ data ReferencesBasesList = ReferencesBasesList
 -- * 'rblFields'
 --
 -- * 'rblAlt'
-referencesBasesList
+referencesBasesList'
     :: Text -- ^ 'referenceId'
-    -> ReferencesBasesList
-referencesBasesList pRblReferenceId_ =
-    ReferencesBasesList
+    -> ReferencesBasesList'
+referencesBasesList' pRblReferenceId_ =
+    ReferencesBasesList'
     { _rblQuotaUser = Nothing
     , _rblPrettyPrint = True
     , _rblUserIp = Nothing
@@ -121,7 +129,7 @@ referencesBasesList pRblReferenceId_ =
     , _rblOauthToken = Nothing
     , _rblPageSize = Nothing
     , _rblFields = Nothing
-    , _rblAlt = "json"
+    , _rblAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +196,14 @@ rblFields
   = lens _rblFields (\ s a -> s{_rblFields = a})
 
 -- | Data format for the response.
-rblAlt :: Lens' ReferencesBasesList' Text
+rblAlt :: Lens' ReferencesBasesList' Alt
 rblAlt = lens _rblAlt (\ s a -> s{_rblAlt = a})
 
 instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesBasesList{..}
-          = go _rblQuotaUser _rblPrettyPrint _rblUserIp
+        requestWithRoute r u ReferencesBasesList'{..}
+          = go _rblQuotaUser (Just _rblPrettyPrint) _rblUserIp
               _rblStart
               _rblReferenceId
               _rblKey
@@ -204,9 +212,9 @@ instance GoogleRequest ReferencesBasesList' where
               _rblOauthToken
               _rblPageSize
               _rblFields
-              _rblAlt
+              (Just _rblAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReferencesBasesListAPI)
+                      (Proxy :: Proxy ReferencesBasesListResource)
                       r
                       u

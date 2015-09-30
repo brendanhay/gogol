@@ -53,6 +53,10 @@ module Network.Google.Monitoring.Types
     , pdubUpperBound
     , pdubCount
 
+    -- * WriteTimeseriesRequestCommonLabels
+    , WriteTimeseriesRequestCommonLabels
+    , writeTimeseriesRequestCommonLabels
+
     -- * WriteTimeseriesRequest
     , WriteTimeseriesRequest
     , writeTimeseriesRequest
@@ -76,12 +80,22 @@ module Network.Google.Monitoring.Types
     , writeTimeseriesResponse
     , wtrKind
 
+    -- * TimeseriesDescriptorLabels
+    , TimeseriesDescriptorLabels
+    , timeseriesDescriptorLabels
+
     -- * PointDistributionBucket
     , PointDistributionBucket
     , pointDistributionBucket
     , pdbUpperBound
     , pdbCount
     , pdbLowerBound
+
+    -- * CloudmonitoringTimeseriesListAggregator
+    , CloudmonitoringTimeseriesListAggregator (..)
+
+    -- * CloudmonitoringTimeseriesDescriptorsListAggregator
+    , CloudmonitoringTimeseriesDescriptorsListAggregator (..)
 
     -- * TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -155,6 +169,9 @@ module Network.Google.Monitoring.Types
     , timeseries
     , tPoints
     , tTimeseriesDesc
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Monitoring.Types.Product
@@ -162,7 +179,7 @@ import           Network.Google.Monitoring.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2beta2' of the Cloud Monitoring API.
-monitoringURL :: BaseURL
+monitoringURL :: BaseUrl
 monitoringURL
   = BaseUrl Https
       "https://www.googleapis.com/cloudmonitoring/v2beta2/projects/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of the event definitions in this application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListDefinitions@.
-module Games.Events.ListDefinitions
+module Network.Google.Resource.Games.Events.ListDefinitions
     (
     -- * REST Resource
-      EventsListDefinitionsAPI
+      EventsListDefinitionsResource
 
     -- * Creating a Request
-    , eventsListDefinitions
-    , EventsListDefinitions
+    , eventsListDefinitions'
+    , EventsListDefinitions'
 
     -- * Request Lenses
     , eldQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesEventsListDefinitions@ which the
--- 'EventsListDefinitions' request conforms to.
-type EventsListDefinitionsAPI =
+-- 'EventsListDefinitions'' request conforms to.
+type EventsListDefinitionsResource =
      "eventDefinitions" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] EventDefinitionListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] EventDefinitionListResponse
 
 -- | Returns a list of the event definitions in this application.
 --
--- /See:/ 'eventsListDefinitions' smart constructor.
-data EventsListDefinitions = EventsListDefinitions
+-- /See:/ 'eventsListDefinitions'' smart constructor.
+data EventsListDefinitions' = EventsListDefinitions'
     { _eldQuotaUser   :: !(Maybe Text)
     , _eldPrettyPrint :: !Bool
     , _eldUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data EventsListDefinitions = EventsListDefinitions
     , _eldOauthToken  :: !(Maybe Text)
     , _eldMaxResults  :: !(Maybe Int32)
     , _eldFields      :: !(Maybe Text)
-    , _eldAlt         :: !Text
+    , _eldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListDefinitions'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data EventsListDefinitions = EventsListDefinitions
 -- * 'eldFields'
 --
 -- * 'eldAlt'
-eventsListDefinitions
-    :: EventsListDefinitions
-eventsListDefinitions =
-    EventsListDefinitions
+eventsListDefinitions'
+    :: EventsListDefinitions'
+eventsListDefinitions' =
+    EventsListDefinitions'
     { _eldQuotaUser = Nothing
     , _eldPrettyPrint = True
     , _eldUserIp = Nothing
@@ -105,7 +113,7 @@ eventsListDefinitions =
     , _eldOauthToken = Nothing
     , _eldMaxResults = Nothing
     , _eldFields = Nothing
-    , _eldAlt = "json"
+    , _eldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,24 @@ eldFields
   = lens _eldFields (\ s a -> s{_eldFields = a})
 
 -- | Data format for the response.
-eldAlt :: Lens' EventsListDefinitions' Text
+eldAlt :: Lens' EventsListDefinitions' Alt
 eldAlt = lens _eldAlt (\ s a -> s{_eldAlt = a})
 
 instance GoogleRequest EventsListDefinitions' where
         type Rs EventsListDefinitions' =
              EventDefinitionListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsListDefinitions{..}
-          = go _eldQuotaUser _eldPrettyPrint _eldUserIp _eldKey
+        requestWithRoute r u EventsListDefinitions'{..}
+          = go _eldQuotaUser (Just _eldPrettyPrint) _eldUserIp
+              _eldKey
               _eldLanguage
               _eldPageToken
               _eldOauthToken
               _eldMaxResults
               _eldFields
-              _eldAlt
+              (Just _eldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EventsListDefinitionsAPI)
+                      (Proxy :: Proxy EventsListDefinitionsResource)
                       r
                       u

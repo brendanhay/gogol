@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesPatch@.
-module BigQuery.Tables.Patch
+module Network.Google.Resource.BigQuery.Tables.Patch
     (
     -- * REST Resource
-      TablesPatchAPI
+      TablesPatchResource
 
     -- * Creating a Request
-    , tablesPatch
-    , TablesPatch
+    , tablesPatch'
+    , TablesPatch'
 
     -- * Request Lenses
     , tpQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesPatch@ which the
--- 'TablesPatch' request conforms to.
-type TablesPatchAPI =
+-- 'TablesPatch'' request conforms to.
+type TablesPatchResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               Capture "tableId" Text :> Patch '[JSON] Table
+               Capture "tableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields
 -- that are provided in the submitted table resource. This method supports
 -- patch semantics.
 --
--- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch
+-- /See:/ 'tablesPatch'' smart constructor.
+data TablesPatch' = TablesPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpUserIp      :: !(Maybe Text)
@@ -73,7 +81,7 @@ data TablesPatch = TablesPatch
     , _tpOauthToken  :: !(Maybe Text)
     , _tpTableId     :: !Text
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data TablesPatch = TablesPatch
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-tablesPatch
+tablesPatch'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TablesPatch
-tablesPatch pTpDatasetId_ pTpProjectId_ pTpTableId_ =
-    TablesPatch
+    -> TablesPatch'
+tablesPatch' pTpDatasetId_ pTpProjectId_ pTpTableId_ =
+    TablesPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpUserIp = Nothing
@@ -115,7 +123,7 @@ tablesPatch pTpDatasetId_ pTpProjectId_ pTpTableId_ =
     , _tpOauthToken = Nothing
     , _tpTableId = pTpTableId_
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,19 +175,23 @@ tpFields :: Lens' TablesPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TablesPatch' Text
+tpAlt :: Lens' TablesPatch' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = Table
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesPatch{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpUserIp _tpKey
+        requestWithRoute r u TablesPatch'{..}
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+              _tpKey
               _tpDatasetId
               _tpProjectId
               _tpOauthToken
               _tpTableId
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesPatchResource)
+                      r
+                      u

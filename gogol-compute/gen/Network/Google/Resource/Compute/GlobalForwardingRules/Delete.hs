@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesDelete@.
-module Compute.GlobalForwardingRules.Delete
+module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
     (
     -- * REST Resource
-      GlobalForwardingRulesDeleteAPI
+      GlobalForwardingRulesDeleteResource
 
     -- * Creating a Request
-    , globalForwardingRulesDelete
-    , GlobalForwardingRulesDelete
+    , globalForwardingRulesDelete'
+    , GlobalForwardingRulesDelete'
 
     -- * Request Lenses
     , gfrdQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalForwardingRulesDelete@ which the
--- 'GlobalForwardingRulesDelete' request conforms to.
-type GlobalForwardingRulesDeleteAPI =
+-- 'GlobalForwardingRulesDelete'' request conforms to.
+type GlobalForwardingRulesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "forwardingRules" :>
            Capture "forwardingRule" Text :>
-             Delete '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --
--- /See:/ 'globalForwardingRulesDelete' smart constructor.
-data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
+-- /See:/ 'globalForwardingRulesDelete'' smart constructor.
+data GlobalForwardingRulesDelete' = GlobalForwardingRulesDelete'
     { _gfrdQuotaUser      :: !(Maybe Text)
     , _gfrdPrettyPrint    :: !Bool
     , _gfrdProject        :: !Text
@@ -64,7 +71,7 @@ data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
     , _gfrdKey            :: !(Maybe Text)
     , _gfrdOauthToken     :: !(Maybe Text)
     , _gfrdFields         :: !(Maybe Text)
-    , _gfrdAlt            :: !Text
+    , _gfrdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
 -- * 'gfrdFields'
 --
 -- * 'gfrdAlt'
-globalForwardingRulesDelete
+globalForwardingRulesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
-    -> GlobalForwardingRulesDelete
-globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
-    GlobalForwardingRulesDelete
+    -> GlobalForwardingRulesDelete'
+globalForwardingRulesDelete' pGfrdProject_ pGfrdForwardingRule_ =
+    GlobalForwardingRulesDelete'
     { _gfrdQuotaUser = Nothing
     , _gfrdPrettyPrint = True
     , _gfrdProject = pGfrdProject_
@@ -102,7 +109,7 @@ globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
     , _gfrdKey = Nothing
     , _gfrdOauthToken = Nothing
     , _gfrdFields = Nothing
-    , _gfrdAlt = "json"
+    , _gfrdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +161,24 @@ gfrdFields
   = lens _gfrdFields (\ s a -> s{_gfrdFields = a})
 
 -- | Data format for the response.
-gfrdAlt :: Lens' GlobalForwardingRulesDelete' Text
+gfrdAlt :: Lens' GlobalForwardingRulesDelete' Alt
 gfrdAlt = lens _gfrdAlt (\ s a -> s{_gfrdAlt = a})
 
 instance GoogleRequest GlobalForwardingRulesDelete'
          where
         type Rs GlobalForwardingRulesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesDelete{..}
-          = go _gfrdQuotaUser _gfrdPrettyPrint _gfrdProject
+        requestWithRoute r u GlobalForwardingRulesDelete'{..}
+          = go _gfrdQuotaUser (Just _gfrdPrettyPrint)
+              _gfrdProject
               _gfrdForwardingRule
               _gfrdUserIp
               _gfrdKey
               _gfrdOauthToken
               _gfrdFields
-              _gfrdAlt
+              (Just _gfrdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalForwardingRulesDeleteAPI)
+                      (Proxy :: Proxy GlobalForwardingRulesDeleteResource)
                       r
                       u

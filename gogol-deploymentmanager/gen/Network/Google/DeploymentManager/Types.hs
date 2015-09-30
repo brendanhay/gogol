@@ -17,6 +17,25 @@ module Network.Google.DeploymentManager.Types
     -- * Service URL
       deploymentManagerURL
 
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
+
+    -- * DeploymentmanagerDeploymentsPatchDeletePolicy
+    , DeploymentmanagerDeploymentsPatchDeletePolicy (..)
+
+    -- * DeploymentmanagerDeploymentsPatchUpdatePolicy
+    , DeploymentmanagerDeploymentsPatchUpdatePolicy (..)
+
     -- * OperationsListResponse
     , OperationsListResponse
     , operationsListResponse
@@ -28,6 +47,12 @@ module Network.Google.DeploymentManager.Types
     , typesListResponse
     , tlrNextPageToken
     , tlrTypes
+
+    -- * DeploymentmanagerDeploymentsPatchCreatePolicy
+    , DeploymentmanagerDeploymentsPatchCreatePolicy (..)
+
+    -- * DeploymentmanagerDeploymentsUpdateCreatePolicy
+    , DeploymentmanagerDeploymentsUpdateCreatePolicy (..)
 
     -- * Operation
     , Operation
@@ -60,6 +85,12 @@ module Network.Google.DeploymentManager.Types
     , resourcesListResponse
     , rlrNextPageToken
     , rlrResources
+
+    -- * DeploymentmanagerDeploymentsUpdateUpdatePolicy
+    , DeploymentmanagerDeploymentsUpdateUpdatePolicy (..)
+
+    -- * DeploymentmanagerDeploymentsUpdateDeletePolicy
+    , DeploymentmanagerDeploymentsUpdateDeletePolicy (..)
 
     -- * DeploymentUpdate
     , DeploymentUpdate
@@ -103,6 +134,11 @@ module Network.Google.DeploymentManager.Types
     , rUpdate
     , rProperties
 
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
     -- * ManifestsListResponse
     , ManifestsListResponse
     , manifestsListResponse
@@ -129,6 +165,13 @@ module Network.Google.DeploymentManager.Types
     , dlrNextPageToken
     , dlrDeployments
 
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- * Deployment
     , Deployment
     , deployment
@@ -149,6 +192,9 @@ module Network.Google.DeploymentManager.Types
     , targetConfiguration
     , tcConfig
     , tcImports
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.DeploymentManager.Types.Product
@@ -156,7 +202,7 @@ import           Network.Google.DeploymentManager.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2beta2' of the Google Cloud Deployment Manager API.
-deploymentManagerURL :: BaseURL
+deploymentManagerURL :: BaseUrl
 deploymentManagerURL
   = BaseUrl Https
       "https://www.googleapis.com/deploymentmanager/v2beta2/projects/"

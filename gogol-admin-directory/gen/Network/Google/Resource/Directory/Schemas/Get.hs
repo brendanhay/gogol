@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve schema
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasGet@.
-module Directory.Schemas.Get
+module Network.Google.Resource.Directory.Schemas.Get
     (
     -- * REST Resource
-      SchemasGetAPI
+      SchemasGetResource
 
     -- * Creating a Request
-    , schemasGet
-    , SchemasGet
+    , schemasGet'
+    , SchemasGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasGet@ which the
--- 'SchemasGet' request conforms to.
-type SchemasGetAPI =
+-- 'SchemasGet'' request conforms to.
+type SchemasGetResource =
      "customer" :>
        Capture "customerId" Text :>
          "schemas" :>
-           Capture "schemaKey" Text :> Get '[JSON] Schema
+           Capture "schemaKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Schema
 
 -- | Retrieve schema
 --
--- /See:/ 'schemasGet' smart constructor.
-data SchemasGet = SchemasGet
+-- /See:/ 'schemasGet'' smart constructor.
+data SchemasGet' = SchemasGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SchemasGet = SchemasGet
     , _sgOauthToken  :: !(Maybe Text)
     , _sgSchemaKey   :: !Text
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SchemasGet = SchemasGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-schemasGet
+schemasGet'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
-    -> SchemasGet
-schemasGet pSgCustomerId_ pSgSchemaKey_ =
-    SchemasGet
+    -> SchemasGet'
+schemasGet' pSgCustomerId_ pSgSchemaKey_ =
+    SchemasGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -101,7 +109,7 @@ schemasGet pSgCustomerId_ pSgSchemaKey_ =
     , _sgOauthToken = Nothing
     , _sgSchemaKey = pSgSchemaKey_
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,21 @@ sgFields :: Lens' SchemasGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SchemasGet' Text
+sgAlt :: Lens' SchemasGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SchemasGet' where
         type Rs SchemasGet' = Schema
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp
+        requestWithRoute r u SchemasGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
               _sgCustomerId
               _sgKey
               _sgOauthToken
               _sgSchemaKey
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SchemasGetResource)
+                      r
+                      u

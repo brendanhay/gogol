@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersGet@.
-module TagManager.Accounts.Containers.Folders.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
     (
     -- * REST Resource
-      AccountsContainersFoldersGetAPI
+      AccountsContainersFoldersGetResource
 
     -- * Creating a Request
-    , accountsContainersFoldersGet
-    , AccountsContainersFoldersGet
+    , accountsContainersFoldersGet'
+    , AccountsContainersFoldersGet'
 
     -- * Request Lenses
     , acfgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersGet@ which the
--- 'AccountsContainersFoldersGet' request conforms to.
-type AccountsContainersFoldersGetAPI =
+-- 'AccountsContainersFoldersGet'' request conforms to.
+type AccountsContainersFoldersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "folders" :>
-               Capture "folderId" Text :> Get '[JSON] Folder
+               Capture "folderId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Folder
 
 -- | Gets a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersGet' smart constructor.
-data AccountsContainersFoldersGet = AccountsContainersFoldersGet
+-- /See:/ 'accountsContainersFoldersGet'' smart constructor.
+data AccountsContainersFoldersGet' = AccountsContainersFoldersGet'
     { _acfgQuotaUser   :: !(Maybe Text)
     , _acfgPrettyPrint :: !Bool
     , _acfgContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersFoldersGet = AccountsContainersFoldersGet
     , _acfgKey         :: !(Maybe Text)
     , _acfgOauthToken  :: !(Maybe Text)
     , _acfgFields      :: !(Maybe Text)
-    , _acfgAlt         :: !Text
+    , _acfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersFoldersGet = AccountsContainersFoldersGet
 -- * 'acfgFields'
 --
 -- * 'acfgAlt'
-accountsContainersFoldersGet
+accountsContainersFoldersGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersGet
-accountsContainersFoldersGet pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
-    AccountsContainersFoldersGet
+    -> AccountsContainersFoldersGet'
+accountsContainersFoldersGet' pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
+    AccountsContainersFoldersGet'
     { _acfgQuotaUser = Nothing
     , _acfgPrettyPrint = True
     , _acfgContainerId = pAcfgContainerId_
@@ -109,7 +117,7 @@ accountsContainersFoldersGet pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
     , _acfgKey = Nothing
     , _acfgOauthToken = Nothing
     , _acfgFields = Nothing
-    , _acfgAlt = "json"
+    , _acfgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,24 +175,26 @@ acfgFields
   = lens _acfgFields (\ s a -> s{_acfgFields = a})
 
 -- | Data format for the response.
-acfgAlt :: Lens' AccountsContainersFoldersGet' Text
+acfgAlt :: Lens' AccountsContainersFoldersGet' Alt
 acfgAlt = lens _acfgAlt (\ s a -> s{_acfgAlt = a})
 
 instance GoogleRequest AccountsContainersFoldersGet'
          where
         type Rs AccountsContainersFoldersGet' = Folder
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersFoldersGet{..}
-          = go _acfgQuotaUser _acfgPrettyPrint _acfgContainerId
+        requestWithRoute r u
+          AccountsContainersFoldersGet'{..}
+          = go _acfgQuotaUser (Just _acfgPrettyPrint)
+              _acfgContainerId
               _acfgUserIp
               _acfgFolderId
               _acfgAccountId
               _acfgKey
               _acfgOauthToken
               _acfgFields
-              _acfgAlt
+              (Just _acfgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersFoldersGetAPI)
+                      (Proxy :: Proxy AccountsContainersFoldersGetResource)
                       r
                       u

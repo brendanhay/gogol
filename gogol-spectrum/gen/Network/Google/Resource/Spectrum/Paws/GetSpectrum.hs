@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- information so the device can be registered with the database.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsGetSpectrum@.
-module Spectrum.Paws.GetSpectrum
+module Network.Google.Resource.Spectrum.Paws.GetSpectrum
     (
     -- * REST Resource
-      PawsGetSpectrumAPI
+      PawsGetSpectrumResource
 
     -- * Creating a Request
-    , pawsGetSpectrum
-    , PawsGetSpectrum
+    , pawsGetSpectrum'
+    , PawsGetSpectrum'
 
     -- * Request Lenses
     , pgsQuotaUser
@@ -44,23 +45,31 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsGetSpectrum@ which the
--- 'PawsGetSpectrum' request conforms to.
-type PawsGetSpectrumAPI =
-     "getSpectrum" :> Post '[JSON] PawsGetSpectrumResponse
+-- 'PawsGetSpectrum'' request conforms to.
+type PawsGetSpectrumResource =
+     "getSpectrum" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] PawsGetSpectrumResponse
 
 -- | Requests information about the available spectrum for a device at a
 -- location. Requests from a fixed-mode device must include owner
 -- information so the device can be registered with the database.
 --
--- /See:/ 'pawsGetSpectrum' smart constructor.
-data PawsGetSpectrum = PawsGetSpectrum
+-- /See:/ 'pawsGetSpectrum'' smart constructor.
+data PawsGetSpectrum' = PawsGetSpectrum'
     { _pgsQuotaUser   :: !(Maybe Text)
     , _pgsPrettyPrint :: !Bool
     , _pgsUserIp      :: !(Maybe Text)
     , _pgsKey         :: !(Maybe Text)
     , _pgsOauthToken  :: !(Maybe Text)
     , _pgsFields      :: !(Maybe Text)
-    , _pgsAlt         :: !Text
+    , _pgsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrum'' with the minimum fields required to make a request.
@@ -80,17 +89,17 @@ data PawsGetSpectrum = PawsGetSpectrum
 -- * 'pgsFields'
 --
 -- * 'pgsAlt'
-pawsGetSpectrum
-    :: PawsGetSpectrum
-pawsGetSpectrum =
-    PawsGetSpectrum
+pawsGetSpectrum'
+    :: PawsGetSpectrum'
+pawsGetSpectrum' =
+    PawsGetSpectrum'
     { _pgsQuotaUser = Nothing
     , _pgsPrettyPrint = True
     , _pgsUserIp = Nothing
     , _pgsKey = Nothing
     , _pgsOauthToken = Nothing
     , _pgsFields = Nothing
-    , _pgsAlt = "json"
+    , _pgsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,18 +139,20 @@ pgsFields
   = lens _pgsFields (\ s a -> s{_pgsFields = a})
 
 -- | Data format for the response.
-pgsAlt :: Lens' PawsGetSpectrum' Text
+pgsAlt :: Lens' PawsGetSpectrum' Alt
 pgsAlt = lens _pgsAlt (\ s a -> s{_pgsAlt = a})
 
 instance GoogleRequest PawsGetSpectrum' where
         type Rs PawsGetSpectrum' = PawsGetSpectrumResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsGetSpectrum{..}
-          = go _pgsQuotaUser _pgsPrettyPrint _pgsUserIp _pgsKey
+        requestWithRoute r u PawsGetSpectrum'{..}
+          = go _pgsQuotaUser (Just _pgsPrettyPrint) _pgsUserIp
+              _pgsKey
               _pgsOauthToken
               _pgsFields
-              _pgsAlt
+              (Just _pgsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PawsGetSpectrumAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PawsGetSpectrumResource)
                       r
                       u

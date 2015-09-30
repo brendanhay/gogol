@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- access to Google services.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseDevicesGetState@.
-module Androidenterprise.Devices.GetState
+module Network.Google.Resource.Androidenterprise.Devices.GetState
     (
     -- * REST Resource
-      DevicesGetStateAPI
+      DevicesGetStateResource
 
     -- * Creating a Request
-    , devicesGetState
-    , DevicesGetState
+    , devicesGetState'
+    , DevicesGetState'
 
     -- * Request Lenses
     , dgsQuotaUser
@@ -49,15 +50,22 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseDevicesGetState@ which the
--- 'DevicesGetState' request conforms to.
-type DevicesGetStateAPI =
+-- 'DevicesGetState'' request conforms to.
+type DevicesGetStateResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "devices" :>
                Capture "deviceId" Text :>
-                 "state" :> Get '[JSON] DeviceState
+                 "state" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] DeviceState
 
 -- | Retrieves whether a device is enabled or disabled for access by the user
 -- to Google services. The device state takes effect only if enforcing EMM
@@ -65,8 +73,8 @@ type DevicesGetStateAPI =
 -- Otherwise, the device state is ignored and all devices are allowed
 -- access to Google services.
 --
--- /See:/ 'devicesGetState' smart constructor.
-data DevicesGetState = DevicesGetState
+-- /See:/ 'devicesGetState'' smart constructor.
+data DevicesGetState' = DevicesGetState'
     { _dgsQuotaUser    :: !(Maybe Text)
     , _dgsPrettyPrint  :: !Bool
     , _dgsEnterpriseId :: !Text
@@ -76,7 +84,7 @@ data DevicesGetState = DevicesGetState
     , _dgsDeviceId     :: !Text
     , _dgsOauthToken   :: !(Maybe Text)
     , _dgsFields       :: !(Maybe Text)
-    , _dgsAlt          :: !Text
+    , _dgsAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DevicesGetState'' with the minimum fields required to make a request.
@@ -102,13 +110,13 @@ data DevicesGetState = DevicesGetState
 -- * 'dgsFields'
 --
 -- * 'dgsAlt'
-devicesGetState
+devicesGetState'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'deviceId'
-    -> DevicesGetState
-devicesGetState pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
-    DevicesGetState
+    -> DevicesGetState'
+devicesGetState' pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
+    DevicesGetState'
     { _dgsQuotaUser = Nothing
     , _dgsPrettyPrint = True
     , _dgsEnterpriseId = pDgsEnterpriseId_
@@ -118,7 +126,7 @@ devicesGetState pDgsEnterpriseId_ pDgsUserId_ pDgsDeviceId_ =
     , _dgsDeviceId = pDgsDeviceId_
     , _dgsOauthToken = Nothing
     , _dgsFields = Nothing
-    , _dgsAlt = "json"
+    , _dgsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -174,22 +182,24 @@ dgsFields
   = lens _dgsFields (\ s a -> s{_dgsFields = a})
 
 -- | Data format for the response.
-dgsAlt :: Lens' DevicesGetState' Text
+dgsAlt :: Lens' DevicesGetState' Alt
 dgsAlt = lens _dgsAlt (\ s a -> s{_dgsAlt = a})
 
 instance GoogleRequest DevicesGetState' where
         type Rs DevicesGetState' = DeviceState
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u DevicesGetState{..}
-          = go _dgsQuotaUser _dgsPrettyPrint _dgsEnterpriseId
+        requestWithRoute r u DevicesGetState'{..}
+          = go _dgsQuotaUser (Just _dgsPrettyPrint)
+              _dgsEnterpriseId
               _dgsUserIp
               _dgsUserId
               _dgsKey
               _dgsDeviceId
               _dgsOauthToken
               _dgsFields
-              _dgsAlt
+              (Just _dgsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DevicesGetStateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DevicesGetStateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsDelete@.
-module Storage.ObjectAccessControls.Delete
+module Network.Google.Resource.Storage.ObjectAccessControls.Delete
     (
     -- * REST Resource
-      ObjectAccessControlsDeleteAPI
+      ObjectAccessControlsDeleteResource
 
     -- * Creating a Request
-    , objectAccessControlsDelete
-    , ObjectAccessControlsDelete
+    , objectAccessControlsDelete'
+    , ObjectAccessControlsDelete'
 
     -- * Request Lenses
     , oacdQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectAccessControlsDelete@ which the
--- 'ObjectAccessControlsDelete' request conforms to.
-type ObjectAccessControlsDeleteAPI =
+-- 'ObjectAccessControlsDelete'' request conforms to.
+type ObjectAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :> Delete '[JSON] ()
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "generation" Word64 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
 --
--- /See:/ 'objectAccessControlsDelete' smart constructor.
-data ObjectAccessControlsDelete = ObjectAccessControlsDelete
+-- /See:/ 'objectAccessControlsDelete'' smart constructor.
+data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
     { _oacdQuotaUser   :: !(Maybe Text)
     , _oacdPrettyPrint :: !Bool
     , _oacdUserIp      :: !(Maybe Text)
@@ -72,7 +80,7 @@ data ObjectAccessControlsDelete = ObjectAccessControlsDelete
     , _oacdEntity      :: !Text
     , _oacdGeneration  :: !(Maybe Word64)
     , _oacdFields      :: !(Maybe Text)
-    , _oacdAlt         :: !Text
+    , _oacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsDelete'' with the minimum fields required to make a request.
@@ -100,13 +108,13 @@ data ObjectAccessControlsDelete = ObjectAccessControlsDelete
 -- * 'oacdFields'
 --
 -- * 'oacdAlt'
-objectAccessControlsDelete
+objectAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControlsDelete
-objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
-    ObjectAccessControlsDelete
+    -> ObjectAccessControlsDelete'
+objectAccessControlsDelete' pOacdBucket_ pOacdObject_ pOacdEntity_ =
+    ObjectAccessControlsDelete'
     { _oacdQuotaUser = Nothing
     , _oacdPrettyPrint = True
     , _oacdUserIp = Nothing
@@ -117,7 +125,7 @@ objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
     , _oacdEntity = pOacdEntity_
     , _oacdGeneration = Nothing
     , _oacdFields = Nothing
-    , _oacdAlt = "json"
+    , _oacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,15 +190,16 @@ oacdFields
   = lens _oacdFields (\ s a -> s{_oacdFields = a})
 
 -- | Data format for the response.
-oacdAlt :: Lens' ObjectAccessControlsDelete' Text
+oacdAlt :: Lens' ObjectAccessControlsDelete' Alt
 oacdAlt = lens _oacdAlt (\ s a -> s{_oacdAlt = a})
 
 instance GoogleRequest ObjectAccessControlsDelete'
          where
         type Rs ObjectAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsDelete{..}
-          = go _oacdQuotaUser _oacdPrettyPrint _oacdUserIp
+        requestWithRoute r u ObjectAccessControlsDelete'{..}
+          = go _oacdQuotaUser (Just _oacdPrettyPrint)
+              _oacdUserIp
               _oacdBucket
               _oacdKey
               _oacdObject
@@ -198,9 +207,9 @@ instance GoogleRequest ObjectAccessControlsDelete'
               _oacdEntity
               _oacdGeneration
               _oacdFields
-              _oacdAlt
+              (Just _oacdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ObjectAccessControlsDeleteAPI)
+                      (Proxy :: Proxy ObjectAccessControlsDeleteResource)
                       r
                       u

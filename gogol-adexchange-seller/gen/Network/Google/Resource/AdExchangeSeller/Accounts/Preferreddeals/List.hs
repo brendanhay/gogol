@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the preferred deals for this Ad Exchange account.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/seller-rest/ Ad Exchange Seller API Reference> for @AdexchangesellerAccountsPreferreddealsList@.
-module AdExchangeSeller.Accounts.Preferreddeals.List
+module Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.List
     (
     -- * REST Resource
-      AccountsPreferreddealsListAPI
+      AccountsPreferreddealsListResource
 
     -- * Creating a Request
-    , accountsPreferreddealsList
-    , AccountsPreferreddealsList
+    , accountsPreferreddealsList'
+    , AccountsPreferreddealsList'
 
     -- * Request Lenses
     , aplQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdExchangeSeller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangesellerAccountsPreferreddealsList@ which the
--- 'AccountsPreferreddealsList' request conforms to.
-type AccountsPreferreddealsListAPI =
+-- 'AccountsPreferreddealsList'' request conforms to.
+type AccountsPreferreddealsListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "preferreddeals" :> Get '[JSON] PreferredDeals
+         "preferreddeals" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] PreferredDeals
 
 -- | List the preferred deals for this Ad Exchange account.
 --
--- /See:/ 'accountsPreferreddealsList' smart constructor.
-data AccountsPreferreddealsList = AccountsPreferreddealsList
+-- /See:/ 'accountsPreferreddealsList'' smart constructor.
+data AccountsPreferreddealsList' = AccountsPreferreddealsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data AccountsPreferreddealsList = AccountsPreferreddealsList
     , _aplKey         :: !(Maybe Text)
     , _aplOauthToken  :: !(Maybe Text)
     , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Text
+    , _aplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPreferreddealsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data AccountsPreferreddealsList = AccountsPreferreddealsList
 -- * 'aplFields'
 --
 -- * 'aplAlt'
-accountsPreferreddealsList
+accountsPreferreddealsList'
     :: Text -- ^ 'accountId'
-    -> AccountsPreferreddealsList
-accountsPreferreddealsList pAplAccountId_ =
-    AccountsPreferreddealsList
+    -> AccountsPreferreddealsList'
+accountsPreferreddealsList' pAplAccountId_ =
+    AccountsPreferreddealsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
     , _aplUserIp = Nothing
@@ -94,7 +102,7 @@ accountsPreferreddealsList pAplAccountId_ =
     , _aplKey = Nothing
     , _aplOauthToken = Nothing
     , _aplFields = Nothing
-    , _aplAlt = "json"
+    , _aplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +147,22 @@ aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
 -- | Data format for the response.
-aplAlt :: Lens' AccountsPreferreddealsList' Text
+aplAlt :: Lens' AccountsPreferreddealsList' Alt
 aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
 
 instance GoogleRequest AccountsPreferreddealsList'
          where
         type Rs AccountsPreferreddealsList' = PreferredDeals
         request = requestWithRoute defReq adExchangeSellerURL
-        requestWithRoute r u AccountsPreferreddealsList{..}
-          = go _aplQuotaUser _aplPrettyPrint _aplUserIp
+        requestWithRoute r u AccountsPreferreddealsList'{..}
+          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIp
               _aplAccountId
               _aplKey
               _aplOauthToken
               _aplFields
-              _aplAlt
+              (Just _aplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPreferreddealsListAPI)
+                      (Proxy :: Proxy AccountsPreferreddealsListResource)
                       r
                       u

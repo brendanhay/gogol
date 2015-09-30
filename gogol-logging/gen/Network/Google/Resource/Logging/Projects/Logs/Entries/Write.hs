@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- of creating identical copies for each entry.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsEntriesWrite@.
-module Logging.Projects.Logs.Entries.Write
+module Network.Google.Resource.Logging.Projects.Logs.Entries.Write
     (
     -- * REST Resource
-      ProjectsLogsEntriesWriteAPI
+      ProjectsLogsEntriesWriteResource
 
     -- * Creating a Request
-    , projectsLogsEntriesWrite
-    , ProjectsLogsEntriesWrite
+    , projectsLogsEntriesWrite'
+    , ProjectsLogsEntriesWrite'
 
     -- * Request Lenses
     , plewXgafv
@@ -55,15 +56,28 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsEntriesWrite@ which the
--- 'ProjectsLogsEntriesWrite' request conforms to.
-type ProjectsLogsEntriesWriteAPI =
+-- 'ProjectsLogsEntriesWrite'' request conforms to.
+type ProjectsLogsEntriesWriteResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
              Capture "logsId" Text :>
                "entries:write" :>
-                 Post '[JSON] WriteLogEntriesResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] WriteLogEntriesResponse
 
 -- | Writes log entries to Cloud Logging. Each entry consists of a
 -- \`LogEntry\` object. You must fill in all the fields of the object,
@@ -72,8 +86,8 @@ type ProjectsLogsEntriesWriteAPI =
 -- \`entries[].metadata.labels\` map in each entry, saving you the trouble
 -- of creating identical copies for each entry.
 --
--- /See:/ 'projectsLogsEntriesWrite' smart constructor.
-data ProjectsLogsEntriesWrite = ProjectsLogsEntriesWrite
+-- /See:/ 'projectsLogsEntriesWrite'' smart constructor.
+data ProjectsLogsEntriesWrite' = ProjectsLogsEntriesWrite'
     { _plewXgafv          :: !(Maybe Text)
     , _plewQuotaUser      :: !(Maybe Text)
     , _plewPrettyPrint    :: !Bool
@@ -124,12 +138,12 @@ data ProjectsLogsEntriesWrite = ProjectsLogsEntriesWrite
 -- * 'plewCallback'
 --
 -- * 'plewAlt'
-projectsLogsEntriesWrite
+projectsLogsEntriesWrite'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogsEntriesWrite
-projectsLogsEntriesWrite pPlewLogsId_ pPlewProjectsId_ =
-    ProjectsLogsEntriesWrite
+    -> ProjectsLogsEntriesWrite'
+projectsLogsEntriesWrite' pPlewLogsId_ pPlewProjectsId_ =
+    ProjectsLogsEntriesWrite'
     { _plewXgafv = Nothing
     , _plewQuotaUser = Nothing
     , _plewPrettyPrint = True
@@ -237,11 +251,12 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
         type Rs ProjectsLogsEntriesWrite' =
              WriteLogEntriesResponse
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsEntriesWrite{..}
-          = go _plewXgafv _plewQuotaUser _plewPrettyPrint
+        requestWithRoute r u ProjectsLogsEntriesWrite'{..}
+          = go _plewXgafv _plewQuotaUser
+              (Just _plewPrettyPrint)
               _plewUploadProtocol
               _plewLogsId
-              _plewPp
+              (Just _plewPp)
               _plewAccessToken
               _plewUploadType
               _plewBearerToken
@@ -250,9 +265,9 @@ instance GoogleRequest ProjectsLogsEntriesWrite'
               _plewProjectsId
               _plewFields
               _plewCallback
-              _plewAlt
+              (Just _plewAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsEntriesWriteAPI)
+                      (Proxy :: Proxy ProjectsLogsEntriesWriteResource)
                       r
                       u

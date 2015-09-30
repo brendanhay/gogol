@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all features readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFeaturesList@.
-module Mapsengine.Tables.Features.List
+module Network.Google.Resource.Mapsengine.Tables.Features.List
     (
     -- * REST Resource
-      TablesFeaturesListAPI
+      TablesFeaturesListResource
 
     -- * Creating a Request
-    , tablesFeaturesList
-    , TablesFeaturesList
+    , tablesFeaturesList'
+    , TablesFeaturesList'
 
     -- * Request Lenses
     , tflInclude
@@ -52,26 +53,35 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFeaturesList@ which the
--- 'TablesFeaturesList' request conforms to.
-type TablesFeaturesListAPI =
+-- 'TablesFeaturesList'' request conforms to.
+type TablesFeaturesListResource =
      "tables" :>
        Capture "id" Text :>
          "features" :>
            QueryParam "include" Text :>
-             QueryParam "where" Text :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "version" Text :>
-                   QueryParam "limit" Word32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "select" Text :>
-                         QueryParam "intersects" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] FeaturesListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "where" Text :>
+                   QueryParam "orderBy" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "version"
+                           MapsengineTablesFeaturesListVersion
+                           :>
+                           QueryParam "limit" Word32 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "select" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "intersects" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] FeaturesListResponse
 
 -- | Return all features readable by the current user.
 --
--- /See:/ 'tablesFeaturesList' smart constructor.
-data TablesFeaturesList = TablesFeaturesList
+-- /See:/ 'tablesFeaturesList'' smart constructor.
+data TablesFeaturesList' = TablesFeaturesList'
     { _tflInclude     :: !(Maybe Text)
     , _tflQuotaUser   :: !(Maybe Text)
     , _tflPrettyPrint :: !Bool
@@ -79,7 +89,7 @@ data TablesFeaturesList = TablesFeaturesList
     , _tflOrderBy     :: !(Maybe Text)
     , _tflUserIp      :: !(Maybe Text)
     , _tflKey         :: !(Maybe Text)
-    , _tflVersion     :: !(Maybe Text)
+    , _tflVersion     :: !(Maybe MapsengineTablesFeaturesListVersion)
     , _tflId          :: !Text
     , _tflLimit       :: !(Maybe Word32)
     , _tflPageToken   :: !(Maybe Text)
@@ -88,7 +98,7 @@ data TablesFeaturesList = TablesFeaturesList
     , _tflIntersects  :: !(Maybe Text)
     , _tflMaxResults  :: !(Maybe Word32)
     , _tflFields      :: !(Maybe Text)
-    , _tflAlt         :: !Text
+    , _tflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesList'' with the minimum fields required to make a request.
@@ -128,11 +138,11 @@ data TablesFeaturesList = TablesFeaturesList
 -- * 'tflFields'
 --
 -- * 'tflAlt'
-tablesFeaturesList
+tablesFeaturesList'
     :: Text -- ^ 'id'
-    -> TablesFeaturesList
-tablesFeaturesList pTflId_ =
-    TablesFeaturesList
+    -> TablesFeaturesList'
+tablesFeaturesList' pTflId_ =
+    TablesFeaturesList'
     { _tflInclude = Nothing
     , _tflQuotaUser = Nothing
     , _tflPrettyPrint = True
@@ -149,7 +159,7 @@ tablesFeaturesList pTflId_ =
     , _tflIntersects = Nothing
     , _tflMaxResults = Nothing
     , _tflFields = Nothing
-    , _tflAlt = "json"
+    , _tflAlt = JSON
     }
 
 -- | A comma separated list of optional data to include. Optional data
@@ -194,7 +204,7 @@ tflKey :: Lens' TablesFeaturesList' (Maybe Text)
 tflKey = lens _tflKey (\ s a -> s{_tflKey = a})
 
 -- | The table version to access. See Accessing Public Data for information.
-tflVersion :: Lens' TablesFeaturesList' (Maybe Text)
+tflVersion :: Lens' TablesFeaturesList' (Maybe MapsengineTablesFeaturesListVersion)
 tflVersion
   = lens _tflVersion (\ s a -> s{_tflVersion = a})
 
@@ -245,14 +255,14 @@ tflFields
   = lens _tflFields (\ s a -> s{_tflFields = a})
 
 -- | Data format for the response.
-tflAlt :: Lens' TablesFeaturesList' Text
+tflAlt :: Lens' TablesFeaturesList' Alt
 tflAlt = lens _tflAlt (\ s a -> s{_tflAlt = a})
 
 instance GoogleRequest TablesFeaturesList' where
         type Rs TablesFeaturesList' = FeaturesListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFeaturesList{..}
-          = go _tflInclude _tflQuotaUser _tflPrettyPrint
+        requestWithRoute r u TablesFeaturesList'{..}
+          = go _tflInclude _tflQuotaUser (Just _tflPrettyPrint)
               _tflWhere
               _tflOrderBy
               _tflUserIp
@@ -266,9 +276,9 @@ instance GoogleRequest TablesFeaturesList' where
               _tflIntersects
               _tflMaxResults
               _tflFields
-              _tflAlt
+              (Just _tflAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFeaturesListAPI)
+                      (Proxy :: Proxy TablesFeaturesListResource)
                       r
                       u

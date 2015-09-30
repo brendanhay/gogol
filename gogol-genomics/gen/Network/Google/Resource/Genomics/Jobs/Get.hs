@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a job by ID.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsJobsGet@.
-module Genomics.Jobs.Get
+module Network.Google.Resource.Genomics.Jobs.Get
     (
     -- * REST Resource
-      JobsGetAPI
+      JobsGetResource
 
     -- * Creating a Request
-    , jobsGet
-    , JobsGet
+    , jobsGet'
+    , JobsGet'
 
     -- * Request Lenses
     , jgQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsGet@ which the
--- 'JobsGet' request conforms to.
-type JobsGetAPI =
-     "jobs" :> Capture "jobId" Text :> Get '[JSON] Job
+-- 'JobsGet'' request conforms to.
+type JobsGetResource =
+     "jobs" :>
+       Capture "jobId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Job
 
 -- | Gets a job by ID.
 --
--- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+-- /See:/ 'jobsGet'' smart constructor.
+data JobsGet' = JobsGet'
     { _jgQuotaUser   :: !(Maybe Text)
     , _jgPrettyPrint :: !Bool
     , _jgJobId       :: !Text
@@ -58,7 +67,7 @@ data JobsGet = JobsGet
     , _jgKey         :: !(Maybe Text)
     , _jgOauthToken  :: !(Maybe Text)
     , _jgFields      :: !(Maybe Text)
-    , _jgAlt         :: !Text
+    , _jgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data JobsGet = JobsGet
 -- * 'jgFields'
 --
 -- * 'jgAlt'
-jobsGet
+jobsGet'
     :: Text -- ^ 'jobId'
-    -> JobsGet
-jobsGet pJgJobId_ =
-    JobsGet
+    -> JobsGet'
+jobsGet' pJgJobId_ =
+    JobsGet'
     { _jgQuotaUser = Nothing
     , _jgPrettyPrint = True
     , _jgJobId = pJgJobId_
@@ -92,7 +101,7 @@ jobsGet pJgJobId_ =
     , _jgKey = Nothing
     , _jgOauthToken = Nothing
     , _jgFields = Nothing
-    , _jgAlt = "json"
+    , _jgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +142,19 @@ jgFields :: Lens' JobsGet' (Maybe Text)
 jgFields = lens _jgFields (\ s a -> s{_jgFields = a})
 
 -- | Data format for the response.
-jgAlt :: Lens' JobsGet' Text
+jgAlt :: Lens' JobsGet' Alt
 jgAlt = lens _jgAlt (\ s a -> s{_jgAlt = a})
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u JobsGet{..}
-          = go _jgQuotaUser _jgPrettyPrint _jgJobId _jgUserIp
+        requestWithRoute r u JobsGet'{..}
+          = go _jgQuotaUser (Just _jgPrettyPrint) _jgJobId
+              _jgUserIp
               _jgKey
               _jgOauthToken
               _jgFields
-              _jgAlt
+              (Just _jgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsGetResource) r
+                      u

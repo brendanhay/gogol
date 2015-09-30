@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified label.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsGet@.
-module Gmail.Users.Labels.Get
+module Network.Google.Resource.Gmail.Users.Labels.Get
     (
     -- * REST Resource
-      UsersLabelsGetAPI
+      UsersLabelsGetResource
 
     -- * Creating a Request
-    , usersLabelsGet
-    , UsersLabelsGet
+    , usersLabelsGet'
+    , UsersLabelsGet'
 
     -- * Request Lenses
     , ulgQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsGet@ which the
--- 'UsersLabelsGet' request conforms to.
-type UsersLabelsGetAPI =
+-- 'UsersLabelsGet'' request conforms to.
+type UsersLabelsGetResource =
      Capture "userId" Text :>
-       "labels" :> Capture "id" Text :> Get '[JSON] Label
+       "labels" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Label
 
 -- | Gets the specified label.
 --
--- /See:/ 'usersLabelsGet' smart constructor.
-data UsersLabelsGet = UsersLabelsGet
+-- /See:/ 'usersLabelsGet'' smart constructor.
+data UsersLabelsGet' = UsersLabelsGet'
     { _ulgQuotaUser   :: !(Maybe Text)
     , _ulgPrettyPrint :: !Bool
     , _ulgUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersLabelsGet = UsersLabelsGet
     , _ulgId          :: !Text
     , _ulgOauthToken  :: !(Maybe Text)
     , _ulgFields      :: !(Maybe Text)
-    , _ulgAlt         :: !Text
+    , _ulgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsGet'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data UsersLabelsGet = UsersLabelsGet
 -- * 'ulgFields'
 --
 -- * 'ulgAlt'
-usersLabelsGet
+usersLabelsGet'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersLabelsGet
-usersLabelsGet pUlgUserId_ pUlgId_ =
-    UsersLabelsGet
+    -> UsersLabelsGet'
+usersLabelsGet' pUlgUserId_ pUlgId_ =
+    UsersLabelsGet'
     { _ulgQuotaUser = Nothing
     , _ulgPrettyPrint = True
     , _ulgUserIp = Nothing
@@ -99,7 +108,7 @@ usersLabelsGet pUlgUserId_ pUlgId_ =
     , _ulgId = pUlgId_
     , _ulgOauthToken = Nothing
     , _ulgFields = Nothing
-    , _ulgAlt = "json"
+    , _ulgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,21 +158,22 @@ ulgFields
   = lens _ulgFields (\ s a -> s{_ulgFields = a})
 
 -- | Data format for the response.
-ulgAlt :: Lens' UsersLabelsGet' Text
+ulgAlt :: Lens' UsersLabelsGet' Alt
 ulgAlt = lens _ulgAlt (\ s a -> s{_ulgAlt = a})
 
 instance GoogleRequest UsersLabelsGet' where
         type Rs UsersLabelsGet' = Label
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsGet{..}
-          = go _ulgQuotaUser _ulgPrettyPrint _ulgUserIp
+        requestWithRoute r u UsersLabelsGet'{..}
+          = go _ulgQuotaUser (Just _ulgPrettyPrint) _ulgUserIp
               _ulgUserId
               _ulgKey
               _ulgId
               _ulgOauthToken
               _ulgFields
-              _ulgAlt
+              (Just _ulgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersLabelsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersLabelsGetResource)
                       r
                       u

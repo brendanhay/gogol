@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all of the people who are members of a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsPeopleListByCircle@.
-module PlusDomains.People.ListByCircle
+module Network.Google.Resource.PlusDomains.People.ListByCircle
     (
     -- * REST Resource
-      PeopleListByCircleAPI
+      PeopleListByCircleResource
 
     -- * Creating a Request
-    , peopleListByCircle
-    , PeopleListByCircle
+    , peopleListByCircle'
+    , PeopleListByCircle'
 
     -- * Request Lenses
     , plbcQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsPeopleListByCircle@ which the
--- 'PeopleListByCircle' request conforms to.
-type PeopleListByCircleAPI =
+-- 'PeopleListByCircle'' request conforms to.
+type PeopleListByCircleResource =
      "circles" :>
        Capture "circleId" Text :>
          "people" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] PeopleFeed
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
 --
--- /See:/ 'peopleListByCircle' smart constructor.
-data PeopleListByCircle = PeopleListByCircle
+-- /See:/ 'peopleListByCircle'' smart constructor.
+data PeopleListByCircle' = PeopleListByCircle'
     { _plbcQuotaUser   :: !(Maybe Text)
     , _plbcPrettyPrint :: !Bool
     , _plbcUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data PeopleListByCircle = PeopleListByCircle
     , _plbcOauthToken  :: !(Maybe Text)
     , _plbcMaxResults  :: !Word32
     , _plbcFields      :: !(Maybe Text)
-    , _plbcAlt         :: !Text
+    , _plbcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByCircle'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data PeopleListByCircle = PeopleListByCircle
 -- * 'plbcFields'
 --
 -- * 'plbcAlt'
-peopleListByCircle
+peopleListByCircle'
     :: Text -- ^ 'circleId'
-    -> PeopleListByCircle
-peopleListByCircle pPlbcCircleId_ =
-    PeopleListByCircle
+    -> PeopleListByCircle'
+peopleListByCircle' pPlbcCircleId_ =
+    PeopleListByCircle'
     { _plbcQuotaUser = Nothing
     , _plbcPrettyPrint = True
     , _plbcUserIp = Nothing
@@ -107,7 +114,7 @@ peopleListByCircle pPlbcCircleId_ =
     , _plbcOauthToken = Nothing
     , _plbcMaxResults = 20
     , _plbcFields = Nothing
-    , _plbcAlt = "json"
+    , _plbcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,23 +176,24 @@ plbcFields
   = lens _plbcFields (\ s a -> s{_plbcFields = a})
 
 -- | Data format for the response.
-plbcAlt :: Lens' PeopleListByCircle' Text
+plbcAlt :: Lens' PeopleListByCircle' Alt
 plbcAlt = lens _plbcAlt (\ s a -> s{_plbcAlt = a})
 
 instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u PeopleListByCircle{..}
-          = go _plbcQuotaUser _plbcPrettyPrint _plbcUserIp
+        requestWithRoute r u PeopleListByCircle'{..}
+          = go _plbcQuotaUser (Just _plbcPrettyPrint)
+              _plbcUserIp
               _plbcKey
               _plbcCircleId
               _plbcPageToken
               _plbcOauthToken
               (Just _plbcMaxResults)
               _plbcFields
-              _plbcAlt
+              (Just _plbcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PeopleListByCircleAPI)
+                      (Proxy :: Proxy PeopleListByCircleResource)
                       r
                       u

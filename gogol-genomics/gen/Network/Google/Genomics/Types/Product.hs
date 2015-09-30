@@ -103,6 +103,46 @@ instance ToJSON FastqMetadata where
                   ("platformName" .=) <$> _fmPlatformName,
                   ("sampleName" .=) <$> _fmSampleName])
 
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'callInfo' smart constructor.
+data CallInfo =
+    CallInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CallInfo' with the minimum fields required to make a request.
+--
+callInfo
+    :: CallInfo
+callInfo = CallInfo
+
+instance FromJSON CallInfo where
+        parseJSON
+          = withObject "CallInfo" (\ o -> pure CallInfo)
+
+instance ToJSON CallInfo where
+        toJSON = const (Object mempty)
+
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'readInfo' smart constructor.
+data ReadInfo =
+    ReadInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadInfo' with the minimum fields required to make a request.
+--
+readInfo
+    :: ReadInfo
+readInfo = ReadInfo
+
+instance FromJSON ReadInfo where
+        parseJSON
+          = withObject "ReadInfo" (\ o -> pure ReadInfo)
+
+instance ToJSON ReadInfo where
+        toJSON = const (Object mempty)
+
 -- | Used to hold basic key value information.
 --
 -- /See:/ 'keyValue' smart constructor.
@@ -356,7 +396,7 @@ data Annotation = Annotation
     , _aAnnotationSetId :: !(Maybe Text)
     , _aName            :: !(Maybe Text)
     , _aId              :: !(Maybe Text)
-    , _aType            :: !(Maybe Text)
+    , _aType            :: !(Maybe AnnotationType)
     , _aTranscript      :: !(Maybe (Maybe Transcript))
     , _aInfo            :: !(Maybe AnnotationInfo)
     , _aPosition        :: !(Maybe (Maybe RangePosition))
@@ -418,7 +458,7 @@ aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | The data type for this annotation. Must match the containing annotation
 -- set\'s type.
-aType :: Lens' Annotation (Maybe Text)
+aType :: Lens' Annotation (Maybe AnnotationType)
 aType = lens _aType (\ s a -> s{_aType = a})
 
 -- | A transcript value represents the assertion that a particular region of
@@ -1903,12 +1943,12 @@ instance ToJSON CoverageBucket where
 --
 -- /See:/ 'variantAnnotation' smart constructor.
 data VariantAnnotation = VariantAnnotation
-    { _vaEffect               :: !(Maybe Text)
-    , _vaClinicalSignificance :: !(Maybe Text)
+    { _vaEffect               :: !(Maybe VariantAnnotationEffect)
+    , _vaClinicalSignificance :: !(Maybe VariantAnnotationClinicalSignificance)
     , _vaAlternateBases       :: !(Maybe Text)
     , _vaGeneId               :: !(Maybe Text)
     , _vaConditions           :: !(Maybe [Maybe VariantAnnotationCondition])
-    , _vaType                 :: !(Maybe Text)
+    , _vaType                 :: !(Maybe VariantAnnotationType)
     , _vaTranscriptIds        :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1943,13 +1983,13 @@ variantAnnotation =
     }
 
 -- | Effect of the variant on the coding sequence.
-vaEffect :: Lens' VariantAnnotation (Maybe Text)
+vaEffect :: Lens' VariantAnnotation (Maybe VariantAnnotationEffect)
 vaEffect = lens _vaEffect (\ s a -> s{_vaEffect = a})
 
 -- | Describes the clinical significance of a variant. It is adapted from the
 -- ClinVar controlled vocabulary for clinical significance described at:
 -- http:\/\/www.ncbi.nlm.nih.gov\/clinvar\/docs\/clinsig\/
-vaClinicalSignificance :: Lens' VariantAnnotation (Maybe Text)
+vaClinicalSignificance :: Lens' VariantAnnotation (Maybe VariantAnnotationClinicalSignificance)
 vaClinicalSignificance
   = lens _vaClinicalSignificance
       (\ s a -> s{_vaClinicalSignificance = a})
@@ -1976,7 +2016,7 @@ vaConditions
       . _Coerce
 
 -- | Type has been adapted from ClinVar\'s list of variant types.
-vaType :: Lens' VariantAnnotation (Maybe Text)
+vaType :: Lens' VariantAnnotation (Maybe VariantAnnotationType)
 vaType = lens _vaType (\ s a -> s{_vaType = a})
 
 -- | Google annotation IDs of the transcripts affected by this variant. These
@@ -2098,6 +2138,27 @@ instance FromJSON BatchAnnotationsResponse where
 instance ToJSON BatchAnnotationsResponse where
         toJSON BatchAnnotationsResponse{..}
           = object (catMaybes [("entries" .=) <$> _barEntries])
+
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'readGroupInfo' smart constructor.
+data ReadGroupInfo =
+    ReadGroupInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadGroupInfo' with the minimum fields required to make a request.
+--
+readGroupInfo
+    :: ReadGroupInfo
+readGroupInfo = ReadGroupInfo
+
+instance FromJSON ReadGroupInfo where
+        parseJSON
+          = withObject "ReadGroupInfo"
+              (\ o -> pure ReadGroupInfo)
+
+instance ToJSON ReadGroupInfo where
+        toJSON = const (Object mempty)
 
 -- | A reference is a canonical assembled DNA sequence, intended to act as a
 -- reference coordinate space for other genomic annotations. A single
@@ -2297,7 +2358,7 @@ instance ToJSON SearchReadGroupSetsRequest where
 -- /See:/ 'searchJobsRequest' smart constructor.
 data SearchJobsRequest = SearchJobsRequest
     { _sjrCreatedAfter  :: !(Maybe Int64)
-    , _sjrStatus        :: !(Maybe [Text])
+    , _sjrStatus        :: !(Maybe [SearchJobsRequestStatus])
     , _sjrProjectNumber :: !(Maybe Int64)
     , _sjrPageToken     :: !(Maybe Text)
     , _sjrPageSize      :: !(Maybe Int32)
@@ -2339,7 +2400,7 @@ sjrCreatedAfter
       (\ s a -> s{_sjrCreatedAfter = a})
 
 -- | Only return jobs which have a matching status.
-sjrStatus :: Lens' SearchJobsRequest [Text]
+sjrStatus :: Lens' SearchJobsRequest [SearchJobsRequestStatus]
 sjrStatus
   = lens _sjrStatus (\ s a -> s{_sjrStatus = a}) .
       _Default
@@ -2573,7 +2634,7 @@ instance ToJSON SearchCallSetsResponse where
 data JobRequest = JobRequest
     { _jrDestination :: !(Maybe [Text])
     , _jrSource      :: !(Maybe [Text])
-    , _jrType        :: !(Maybe Text)
+    , _jrType        :: !(Maybe JobRequestType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobRequest' with the minimum fields required to make a request.
@@ -2612,7 +2673,7 @@ jrSource
       . _Coerce
 
 -- | The original request type.
-jrType :: Lens' JobRequest (Maybe Text)
+jrType :: Lens' JobRequest (Maybe JobRequestType)
 jrType = lens _jrType (\ s a -> s{_jrType = a})
 
 instance FromJSON JobRequest where
@@ -2821,6 +2882,27 @@ instance ToJSON ReadGroupProgram where
                   ("version" .=) <$> _rgpVersion, ("id" .=) <$> _rgpId,
                   ("commandLine" .=) <$> _rgpCommandLine])
 
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'annotationInfo' smart constructor.
+data AnnotationInfo =
+    AnnotationInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnnotationInfo' with the minimum fields required to make a request.
+--
+annotationInfo
+    :: AnnotationInfo
+annotationInfo = AnnotationInfo
+
+instance FromJSON AnnotationInfo where
+        parseJSON
+          = withObject "AnnotationInfo"
+              (\ o -> pure AnnotationInfo)
+
+instance ToJSON AnnotationInfo where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'searchAnnotationsResponse' smart constructor.
 data SearchAnnotationsResponse = SearchAnnotationsResponse
@@ -2941,11 +3023,31 @@ instance ToJSON SearchVariantSetsRequest where
                   ("pageToken" .=) <$> _svsrPageToken,
                   ("pageSize" .=) <$> _svsrPageSize])
 
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'variantInfo' smart constructor.
+data VariantInfo =
+    VariantInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VariantInfo' with the minimum fields required to make a request.
+--
+variantInfo
+    :: VariantInfo
+variantInfo = VariantInfo
+
+instance FromJSON VariantInfo where
+        parseJSON
+          = withObject "VariantInfo" (\ o -> pure VariantInfo)
+
+instance ToJSON VariantInfo where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'searchAnnotationSetsRequest' smart constructor.
 data SearchAnnotationSetsRequest = SearchAnnotationSetsRequest
     { _sasrReferenceSetId :: !(Maybe Text)
-    , _sasrTypes          :: !(Maybe [Text])
+    , _sasrTypes          :: !(Maybe [SearchAnnotationSetsRequestTypes])
     , _sasrDatasetIds     :: !(Maybe [Text])
     , _sasrName           :: !(Maybe Text)
     , _sasrPageToken      :: !(Maybe Text)
@@ -2988,7 +3090,7 @@ sasrReferenceSetId
 
 -- | If specified, only annotation sets that have any of these types are
 -- returned.
-sasrTypes :: Lens' SearchAnnotationSetsRequest [Text]
+sasrTypes :: Lens' SearchAnnotationSetsRequest [SearchAnnotationSetsRequestTypes]
 sasrTypes
   = lens _sasrTypes (\ s a -> s{_sasrTypes = a}) .
       _Default
@@ -3448,7 +3550,7 @@ instance ToJSON Range where
 -- /See:/ 'job' smart constructor.
 data Job = Job
     { _jobDetailedStatus :: !(Maybe Text)
-    , _jobStatus         :: !(Maybe Text)
+    , _jobStatus         :: !(Maybe JobStatus)
     , _jobCreated        :: !(Maybe Int64)
     , _jobProjectNumber  :: !(Maybe Int64)
     , _jobWarnings       :: !(Maybe [Text])
@@ -3501,7 +3603,7 @@ jobDetailedStatus
       (\ s a -> s{_jobDetailedStatus = a})
 
 -- | The status of this job.
-jobStatus :: Lens' Job (Maybe Text)
+jobStatus :: Lens' Job (Maybe JobStatus)
 jobStatus
   = lens _jobStatus (\ s a -> s{_jobStatus = a})
 
@@ -4221,7 +4323,7 @@ data AnnotationSet = AnnotationSet
     , _asName           :: !(Maybe Text)
     , _asDatasetId      :: !(Maybe Text)
     , _asId             :: !(Maybe Text)
-    , _asType           :: !(Maybe Text)
+    , _asType           :: !(Maybe AnnotationSetType)
     , _asSourceUri      :: !(Maybe Text)
     , _asInfo           :: !(Maybe AnnotationSetInfo)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4277,7 +4379,7 @@ asId :: Lens' AnnotationSet (Maybe Text)
 asId = lens _asId (\ s a -> s{_asId = a})
 
 -- | The type of annotations contained within this set.
-asType :: Lens' AnnotationSet (Maybe Text)
+asType :: Lens' AnnotationSet (Maybe AnnotationSetType)
 asType = lens _asType (\ s a -> s{_asType = a})
 
 -- | The source URI describing the file from which this annotation set was
@@ -4322,7 +4424,7 @@ data Metadata = Metadata
     { _mValue       :: !(Maybe Text)
     , _mKey         :: !(Maybe Text)
     , _mId          :: !(Maybe Text)
-    , _mType        :: !(Maybe Text)
+    , _mType        :: !(Maybe MetadataType)
     , _mNumber      :: !(Maybe Text)
     , _mDescription :: !(Maybe Text)
     , _mInfo        :: !(Maybe MetadataInfo)
@@ -4374,7 +4476,7 @@ mId = lens _mId (\ s a -> s{_mId = a})
 
 -- | The type of data. Possible types include: Integer, Float, Flag,
 -- Character, and String.
-mType :: Lens' Metadata (Maybe Text)
+mType :: Lens' Metadata (Maybe MetadataType)
 mType = lens _mType (\ s a -> s{_mType = a})
 
 -- | The number of values that can be included in a field described by this
@@ -4493,7 +4595,7 @@ instance ToJSON VariantSet where
 --
 -- /See:/ 'cigarUnit' smart constructor.
 data CigarUnit = CigarUnit
-    { _cuOperation         :: !(Maybe Text)
+    { _cuOperation         :: !(Maybe CigarUnitOperation)
     , _cuOperationLength   :: !(Maybe Int64)
     , _cuReferenceSequence :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4516,7 +4618,7 @@ cigarUnit =
     , _cuReferenceSequence = Nothing
     }
 
-cuOperation :: Lens' CigarUnit (Maybe Text)
+cuOperation :: Lens' CigarUnit (Maybe CigarUnitOperation)
 cuOperation
   = lens _cuOperation (\ s a -> s{_cuOperation = a})
 
@@ -4658,7 +4760,7 @@ instance ToJSON AlignReadGroupSetsRequest where
 data ExportVariantSetRequest = ExportVariantSetRequest
     { _evsrBigqueryDataset :: !(Maybe Text)
     , _evsrBigqueryTable   :: !(Maybe Text)
-    , _evsrFormat          :: !(Maybe Text)
+    , _evsrFormat          :: !(Maybe ExportVariantSetRequestFormat)
     , _evsrProjectNumber   :: !(Maybe Int64)
     , _evsrCallSetIds      :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4703,7 +4805,7 @@ evsrBigqueryTable
       (\ s a -> s{_evsrBigqueryTable = a})
 
 -- | The format for the exported data.
-evsrFormat :: Lens' ExportVariantSetRequest (Maybe Text)
+evsrFormat :: Lens' ExportVariantSetRequest (Maybe ExportVariantSetRequestFormat)
 evsrFormat
   = lens _evsrFormat (\ s a -> s{_evsrFormat = a})
 
@@ -4748,7 +4850,7 @@ instance ToJSON ExportVariantSetRequest where
 --
 -- /See:/ 'importVariantsRequest' smart constructor.
 data ImportVariantsRequest = ImportVariantsRequest
-    { _ivrFormat                  :: !(Maybe Text)
+    { _ivrFormat                  :: !(Maybe ImportVariantsRequestFormat)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
     , _ivrSourceUris              :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4773,7 +4875,7 @@ importVariantsRequest =
 
 -- | The format of the variant data being imported. If unspecified, defaults
 -- to to \"VCF\".
-ivrFormat :: Lens' ImportVariantsRequest (Maybe Text)
+ivrFormat :: Lens' ImportVariantsRequest (Maybe ImportVariantsRequestFormat)
 ivrFormat
   = lens _ivrFormat (\ s a -> s{_ivrFormat = a})
 
@@ -4869,7 +4971,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
     { _irgsrReferenceSetId    :: !(Maybe Text)
     , _irgsrDatasetId         :: !(Maybe Text)
     , _irgsrSourceUris        :: !(Maybe [Text])
-    , _irgsrPartitionStrategy :: !(Maybe Text)
+    , _irgsrPartitionStrategy :: !(Maybe ImportReadGroupSetsRequestPartitionStrategy)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -4920,7 +5022,7 @@ irgsrSourceUris
 
 -- | The partition strategy describes how read groups are partitioned into
 -- read group sets.
-irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe Text)
+irgsrPartitionStrategy :: Lens' ImportReadGroupSetsRequest (Maybe ImportReadGroupSetsRequestPartitionStrategy)
 irgsrPartitionStrategy
   = lens _irgsrPartitionStrategy
       (\ s a -> s{_irgsrPartitionStrategy = a})
@@ -5074,6 +5176,27 @@ instance ToJSON VariantAnnotationCondition where
                   ("names" .=) <$> _vacNames,
                   ("conceptId" .=) <$> _vacConceptId,
                   ("omimId" .=) <$> _vacOmimId])
+
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'annotationSetInfo' smart constructor.
+data AnnotationSetInfo =
+    AnnotationSetInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnnotationSetInfo' with the minimum fields required to make a request.
+--
+annotationSetInfo
+    :: AnnotationSetInfo
+annotationSetInfo = AnnotationSetInfo
+
+instance FromJSON AnnotationSetInfo where
+        parseJSON
+          = withObject "AnnotationSetInfo"
+              (\ o -> pure AnnotationSetInfo)
+
+instance ToJSON AnnotationSetInfo where
+        toJSON = const (Object mempty)
 
 -- | The search variant sets response.
 --
@@ -5273,6 +5396,27 @@ instance ToJSON SearchVariantsRequest where
                   ("variantSetIds" .=) <$> _svrVariantSetIds,
                   ("pageSize" .=) <$> _svrPageSize])
 
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'metadataInfo' smart constructor.
+data MetadataInfo =
+    MetadataInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetadataInfo' with the minimum fields required to make a request.
+--
+metadataInfo
+    :: MetadataInfo
+metadataInfo = MetadataInfo
+
+instance FromJSON MetadataInfo where
+        parseJSON
+          = withObject "MetadataInfo"
+              (\ o -> pure MetadataInfo)
+
+instance ToJSON MetadataInfo where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'searchAnnotationsRequest' smart constructor.
 data SearchAnnotationsRequest = SearchAnnotationsRequest
@@ -5436,6 +5580,26 @@ instance ToJSON SearchAnnotationSetsResponse where
               (catMaybes
                  [("nextPageToken" .=) <$> _sasrNextPageToken,
                   ("annotationSets" .=) <$> _sasrAnnotationSets])
+
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'callSetInfo' smart constructor.
+data CallSetInfo =
+    CallSetInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CallSetInfo' with the minimum fields required to make a request.
+--
+callSetInfo
+    :: CallSetInfo
+callSetInfo = CallSetInfo
+
+instance FromJSON CallSetInfo where
+        parseJSON
+          = withObject "CallSetInfo" (\ o -> pure CallSetInfo)
+
+instance ToJSON CallSetInfo where
+        toJSON = const (Object mempty)
 
 -- | A 0-based half-open genomic coordinate range over a reference sequence,
 -- for representing the position of a genomic resource.
@@ -5866,6 +6030,27 @@ instance ToJSON ReferenceBound where
               (catMaybes
                  [("upperBound" .=) <$> _rbUpperBound,
                   ("referenceName" .=) <$> _rbReferenceName])
+
+-- | A string which maps to an array of values.
+--
+-- /See:/ 'readGroupSetInfo' smart constructor.
+data ReadGroupSetInfo =
+    ReadGroupSetInfo
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReadGroupSetInfo' with the minimum fields required to make a request.
+--
+readGroupSetInfo
+    :: ReadGroupSetInfo
+readGroupSetInfo = ReadGroupSetInfo
+
+instance FromJSON ReadGroupSetInfo where
+        parseJSON
+          = withObject "ReadGroupSetInfo"
+              (\ o -> pure ReadGroupSetInfo)
+
+instance ToJSON ReadGroupSetInfo where
+        toJSON = const (Object mempty)
 
 -- | A reference set is a set of references which typically comprise a
 -- reference assembly for a species, such as GRCh38 which is representative

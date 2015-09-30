@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a video\'s metadata.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosUpdate@.
-module YouTube.Videos.Update
+module Network.Google.Resource.YouTube.Videos.Update
     (
     -- * REST Resource
-      VideosUpdateAPI
+      VideosUpdateResource
 
     -- * Creating a Request
-    , videosUpdate
-    , VideosUpdate
+    , videosUpdate'
+    , VideosUpdate'
 
     -- * Request Lenses
     , vuQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosUpdate@ which the
--- 'VideosUpdate' request conforms to.
-type VideosUpdateAPI =
+-- 'VideosUpdate'' request conforms to.
+type VideosUpdateResource =
      "videos" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Put '[JSON] Video
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Video
 
 -- | Updates a video\'s metadata.
 --
--- /See:/ 'videosUpdate' smart constructor.
-data VideosUpdate = VideosUpdate
+-- /See:/ 'videosUpdate'' smart constructor.
+data VideosUpdate' = VideosUpdate'
     { _vuQuotaUser              :: !(Maybe Text)
     , _vuPart                   :: !Text
     , _vuPrettyPrint            :: !Bool
@@ -63,7 +70,7 @@ data VideosUpdate = VideosUpdate
     , _vuKey                    :: !(Maybe Text)
     , _vuOauthToken             :: !(Maybe Text)
     , _vuFields                 :: !(Maybe Text)
-    , _vuAlt                    :: !Text
+    , _vuAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosUpdate'' with the minimum fields required to make a request.
@@ -87,11 +94,11 @@ data VideosUpdate = VideosUpdate
 -- * 'vuFields'
 --
 -- * 'vuAlt'
-videosUpdate
+videosUpdate'
     :: Text -- ^ 'part'
-    -> VideosUpdate
-videosUpdate pVuPart_ =
-    VideosUpdate
+    -> VideosUpdate'
+videosUpdate' pVuPart_ =
+    VideosUpdate'
     { _vuQuotaUser = Nothing
     , _vuPart = pVuPart_
     , _vuPrettyPrint = True
@@ -100,7 +107,7 @@ videosUpdate pVuPart_ =
     , _vuKey = Nothing
     , _vuOauthToken = Nothing
     , _vuFields = Nothing
-    , _vuAlt = "json"
+    , _vuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,20 +179,23 @@ vuFields :: Lens' VideosUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
 -- | Data format for the response.
-vuAlt :: Lens' VideosUpdate' Text
+vuAlt :: Lens' VideosUpdate' Alt
 vuAlt = lens _vuAlt (\ s a -> s{_vuAlt = a})
 
 instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosUpdate{..}
-          = go _vuQuotaUser (Just _vuPart) _vuPrettyPrint
+        requestWithRoute r u VideosUpdate'{..}
+          = go _vuQuotaUser (Just _vuPart)
+              (Just _vuPrettyPrint)
               _vuUserIp
               _vuOnBehalfOfContentOwner
               _vuKey
               _vuOauthToken
               _vuFields
-              _vuAlt
+              (Just _vuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy VideosUpdateResource)
+                      r
                       u

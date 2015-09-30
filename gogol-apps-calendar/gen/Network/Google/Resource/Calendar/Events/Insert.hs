@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,182 +20,195 @@
 -- | Creates an event.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsInsert@.
-module Calendar.Events.Insert
+module Network.Google.Resource.Calendar.Events.Insert
     (
     -- * REST Resource
-      EventsInsertAPI
+      EventsInsertResource
 
     -- * Creating a Request
-    , eventsInsert
-    , EventsInsert
+    , eventsInsert'
+    , EventsInsert'
 
     -- * Request Lenses
-    , eiQuotaUser
-    , eiCalendarId
-    , eiPrettyPrint
-    , eiUserIp
-    , eiMaxAttendees
-    , eiKey
-    , eiSendNotifications
-    , eiOauthToken
-    , eiSupportsAttachments
-    , eiFields
-    , eiAlt
+    , eveQuotaUser
+    , eveCalendarId
+    , evePrettyPrint
+    , eveUserIp
+    , eveMaxAttendees
+    , eveKey
+    , eveSendNotifications
+    , eveOauthToken
+    , eveSupportsAttachments
+    , eveFields
+    , eveAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsInsert@ which the
--- 'EventsInsert' request conforms to.
-type EventsInsertAPI =
+-- 'EventsInsert'' request conforms to.
+type EventsInsertResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
-           QueryParam "maxAttendees" Int32 :>
-             QueryParam "sendNotifications" Bool :>
-               QueryParam "supportsAttachments" Bool :>
-                 Post '[JSON] Event
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "maxAttendees" Int32 :>
+                   QueryParam "key" Text :>
+                     QueryParam "sendNotifications" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "supportsAttachments" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Event
 
 -- | Creates an event.
 --
--- /See:/ 'eventsInsert' smart constructor.
-data EventsInsert = EventsInsert
-    { _eiQuotaUser           :: !(Maybe Text)
-    , _eiCalendarId          :: !Text
-    , _eiPrettyPrint         :: !Bool
-    , _eiUserIp              :: !(Maybe Text)
-    , _eiMaxAttendees        :: !(Maybe Int32)
-    , _eiKey                 :: !(Maybe Text)
-    , _eiSendNotifications   :: !(Maybe Bool)
-    , _eiOauthToken          :: !(Maybe Text)
-    , _eiSupportsAttachments :: !(Maybe Bool)
-    , _eiFields              :: !(Maybe Text)
-    , _eiAlt                 :: !Text
+-- /See:/ 'eventsInsert'' smart constructor.
+data EventsInsert' = EventsInsert'
+    { _eveQuotaUser           :: !(Maybe Text)
+    , _eveCalendarId          :: !Text
+    , _evePrettyPrint         :: !Bool
+    , _eveUserIp              :: !(Maybe Text)
+    , _eveMaxAttendees        :: !(Maybe Int32)
+    , _eveKey                 :: !(Maybe Text)
+    , _eveSendNotifications   :: !(Maybe Bool)
+    , _eveOauthToken          :: !(Maybe Text)
+    , _eveSupportsAttachments :: !(Maybe Bool)
+    , _eveFields              :: !(Maybe Text)
+    , _eveAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eiQuotaUser'
+-- * 'eveQuotaUser'
 --
--- * 'eiCalendarId'
+-- * 'eveCalendarId'
 --
--- * 'eiPrettyPrint'
+-- * 'evePrettyPrint'
 --
--- * 'eiUserIp'
+-- * 'eveUserIp'
 --
--- * 'eiMaxAttendees'
+-- * 'eveMaxAttendees'
 --
--- * 'eiKey'
+-- * 'eveKey'
 --
--- * 'eiSendNotifications'
+-- * 'eveSendNotifications'
 --
--- * 'eiOauthToken'
+-- * 'eveOauthToken'
 --
--- * 'eiSupportsAttachments'
+-- * 'eveSupportsAttachments'
 --
--- * 'eiFields'
+-- * 'eveFields'
 --
--- * 'eiAlt'
-eventsInsert
+-- * 'eveAlt'
+eventsInsert'
     :: Text -- ^ 'calendarId'
-    -> EventsInsert
-eventsInsert pEiCalendarId_ =
-    EventsInsert
-    { _eiQuotaUser = Nothing
-    , _eiCalendarId = pEiCalendarId_
-    , _eiPrettyPrint = True
-    , _eiUserIp = Nothing
-    , _eiMaxAttendees = Nothing
-    , _eiKey = Nothing
-    , _eiSendNotifications = Nothing
-    , _eiOauthToken = Nothing
-    , _eiSupportsAttachments = Nothing
-    , _eiFields = Nothing
-    , _eiAlt = "json"
+    -> EventsInsert'
+eventsInsert' pEveCalendarId_ =
+    EventsInsert'
+    { _eveQuotaUser = Nothing
+    , _eveCalendarId = pEveCalendarId_
+    , _evePrettyPrint = True
+    , _eveUserIp = Nothing
+    , _eveMaxAttendees = Nothing
+    , _eveKey = Nothing
+    , _eveSendNotifications = Nothing
+    , _eveOauthToken = Nothing
+    , _eveSupportsAttachments = Nothing
+    , _eveFields = Nothing
+    , _eveAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eiQuotaUser :: Lens' EventsInsert' (Maybe Text)
-eiQuotaUser
-  = lens _eiQuotaUser (\ s a -> s{_eiQuotaUser = a})
+eveQuotaUser :: Lens' EventsInsert' (Maybe Text)
+eveQuotaUser
+  = lens _eveQuotaUser (\ s a -> s{_eveQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-eiCalendarId :: Lens' EventsInsert' Text
-eiCalendarId
-  = lens _eiCalendarId (\ s a -> s{_eiCalendarId = a})
+eveCalendarId :: Lens' EventsInsert' Text
+eveCalendarId
+  = lens _eveCalendarId
+      (\ s a -> s{_eveCalendarId = a})
 
 -- | Returns response with indentations and line breaks.
-eiPrettyPrint :: Lens' EventsInsert' Bool
-eiPrettyPrint
-  = lens _eiPrettyPrint
-      (\ s a -> s{_eiPrettyPrint = a})
+evePrettyPrint :: Lens' EventsInsert' Bool
+evePrettyPrint
+  = lens _evePrettyPrint
+      (\ s a -> s{_evePrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eiUserIp :: Lens' EventsInsert' (Maybe Text)
-eiUserIp = lens _eiUserIp (\ s a -> s{_eiUserIp = a})
+eveUserIp :: Lens' EventsInsert' (Maybe Text)
+eveUserIp
+  = lens _eveUserIp (\ s a -> s{_eveUserIp = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
 -- returned. Optional.
-eiMaxAttendees :: Lens' EventsInsert' (Maybe Int32)
-eiMaxAttendees
-  = lens _eiMaxAttendees
-      (\ s a -> s{_eiMaxAttendees = a})
+eveMaxAttendees :: Lens' EventsInsert' (Maybe Int32)
+eveMaxAttendees
+  = lens _eveMaxAttendees
+      (\ s a -> s{_eveMaxAttendees = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eiKey :: Lens' EventsInsert' (Maybe Text)
-eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
+eveKey :: Lens' EventsInsert' (Maybe Text)
+eveKey = lens _eveKey (\ s a -> s{_eveKey = a})
 
 -- | Whether to send notifications about the creation of the new event.
 -- Optional. The default is False.
-eiSendNotifications :: Lens' EventsInsert' (Maybe Bool)
-eiSendNotifications
-  = lens _eiSendNotifications
-      (\ s a -> s{_eiSendNotifications = a})
+eveSendNotifications :: Lens' EventsInsert' (Maybe Bool)
+eveSendNotifications
+  = lens _eveSendNotifications
+      (\ s a -> s{_eveSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-eiOauthToken :: Lens' EventsInsert' (Maybe Text)
-eiOauthToken
-  = lens _eiOauthToken (\ s a -> s{_eiOauthToken = a})
+eveOauthToken :: Lens' EventsInsert' (Maybe Text)
+eveOauthToken
+  = lens _eveOauthToken
+      (\ s a -> s{_eveOauthToken = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
-eiSupportsAttachments :: Lens' EventsInsert' (Maybe Bool)
-eiSupportsAttachments
-  = lens _eiSupportsAttachments
-      (\ s a -> s{_eiSupportsAttachments = a})
+eveSupportsAttachments :: Lens' EventsInsert' (Maybe Bool)
+eveSupportsAttachments
+  = lens _eveSupportsAttachments
+      (\ s a -> s{_eveSupportsAttachments = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eiFields :: Lens' EventsInsert' (Maybe Text)
-eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
+eveFields :: Lens' EventsInsert' (Maybe Text)
+eveFields
+  = lens _eveFields (\ s a -> s{_eveFields = a})
 
 -- | Data format for the response.
-eiAlt :: Lens' EventsInsert' Text
-eiAlt = lens _eiAlt (\ s a -> s{_eiAlt = a})
+eveAlt :: Lens' EventsInsert' Alt
+eveAlt = lens _eveAlt (\ s a -> s{_eveAlt = a})
 
 instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsInsert{..}
-          = go _eiQuotaUser _eiCalendarId _eiPrettyPrint
-              _eiUserIp
-              _eiMaxAttendees
-              _eiKey
-              _eiSendNotifications
-              _eiOauthToken
-              _eiSupportsAttachments
-              _eiFields
-              _eiAlt
+        requestWithRoute r u EventsInsert'{..}
+          = go _eveQuotaUser _eveCalendarId
+              (Just _evePrettyPrint)
+              _eveUserIp
+              _eveMaxAttendees
+              _eveKey
+              _eveSendNotifications
+              _eveOauthToken
+              _eveSupportsAttachments
+              _eveFields
+              (Just _eveAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsInsertResource)
+                      r
                       u

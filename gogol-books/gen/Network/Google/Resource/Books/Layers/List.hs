@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the layer summaries for a volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersList@.
-module Books.Layers.List
+module Network.Google.Resource.Books.Layers.List
     (
     -- * REST Resource
-      LayersListAPI
+      LayersListResource
 
     -- * Creating a Request
-    , layersList
-    , LayersList
+    , layersList'
+    , LayersList'
 
     -- * Request Lenses
     , llQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersList@ which the
--- 'LayersList' request conforms to.
-type LayersListAPI =
+-- 'LayersList'' request conforms to.
+type LayersListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layersummary" :>
-           QueryParam "contentVersion" Text :>
-             QueryParam "source" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] Layersummaries
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "contentVersion" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] Layersummaries
 
 -- | List the layer summaries for a volume.
 --
--- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+-- /See:/ 'layersList'' smart constructor.
+data LayersList' = LayersList'
     { _llQuotaUser      :: !(Maybe Text)
     , _llPrettyPrint    :: !Bool
     , _llUserIp         :: !(Maybe Text)
@@ -73,7 +81,7 @@ data LayersList = LayersList
     , _llOauthToken     :: !(Maybe Text)
     , _llMaxResults     :: !(Maybe Word32)
     , _llFields         :: !(Maybe Text)
-    , _llAlt            :: !Text
+    , _llAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
@@ -103,11 +111,11 @@ data LayersList = LayersList
 -- * 'llFields'
 --
 -- * 'llAlt'
-layersList
+layersList'
     :: Text -- ^ 'volumeId'
-    -> LayersList
-layersList pLlVolumeId_ =
-    LayersList
+    -> LayersList'
+layersList' pLlVolumeId_ =
+    LayersList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llUserIp = Nothing
@@ -119,7 +127,7 @@ layersList pLlVolumeId_ =
     , _llOauthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,14 +189,14 @@ llFields :: Lens' LayersList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LayersList' Text
+llAlt :: Lens' LayersList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersList{..}
-          = go _llQuotaUser _llPrettyPrint _llUserIp
+        requestWithRoute r u LayersList'{..}
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
               _llContentVersion
               _llKey
               _llVolumeId
@@ -197,6 +205,8 @@ instance GoogleRequest LayersList' where
               _llOauthToken
               _llMaxResults
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LayersListResource)
+                      r
+                      u

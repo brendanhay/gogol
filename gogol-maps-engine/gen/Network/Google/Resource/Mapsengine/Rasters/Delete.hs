@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a raster.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersDelete@.
-module Mapsengine.Rasters.Delete
+module Network.Google.Resource.Mapsengine.Rasters.Delete
     (
     -- * REST Resource
-      RastersDeleteAPI
+      RastersDeleteResource
 
     -- * Creating a Request
-    , rastersDelete
-    , RastersDelete
+    , rastersDelete'
+    , RastersDelete'
 
     -- * Request Lenses
     , rdQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersDelete@ which the
--- 'RastersDelete' request conforms to.
-type RastersDeleteAPI =
-     "rasters" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'RastersDelete'' request conforms to.
+type RastersDeleteResource =
+     "rasters" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a raster.
 --
--- /See:/ 'rastersDelete' smart constructor.
-data RastersDelete = RastersDelete
+-- /See:/ 'rastersDelete'' smart constructor.
+data RastersDelete' = RastersDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data RastersDelete = RastersDelete
     , _rdId          :: !Text
     , _rdOauthToken  :: !(Maybe Text)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Text
+    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data RastersDelete = RastersDelete
 -- * 'rdFields'
 --
 -- * 'rdAlt'
-rastersDelete
+rastersDelete'
     :: Text -- ^ 'id'
-    -> RastersDelete
-rastersDelete pRdId_ =
-    RastersDelete
+    -> RastersDelete'
+rastersDelete' pRdId_ =
+    RastersDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdUserIp = Nothing
@@ -92,7 +101,7 @@ rastersDelete pRdId_ =
     , _rdId = pRdId_
     , _rdOauthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = "json"
+    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +144,21 @@ rdFields :: Lens' RastersDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 -- | Data format for the response.
-rdAlt :: Lens' RastersDelete' Text
+rdAlt :: Lens' RastersDelete' Alt
 rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
 
 instance GoogleRequest RastersDelete' where
         type Rs RastersDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersDelete{..}
-          = go _rdQuotaUser _rdPrettyPrint _rdUserIp _rdKey
+        requestWithRoute r u RastersDelete'{..}
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
+              _rdKey
               _rdId
               _rdOauthToken
               _rdFields
-              _rdAlt
+              (Just _rdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RastersDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RastersDeleteResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsPatch@.
-module DFAReporting.RemarketingLists.Patch
+module Network.Google.Resource.DFAReporting.RemarketingLists.Patch
     (
     -- * REST Resource
-      RemarketingListsPatchAPI
+      RemarketingListsPatchResource
 
     -- * Creating a Request
-    , remarketingListsPatch
-    , RemarketingListsPatch
+    , remarketingListsPatch'
+    , RemarketingListsPatch'
 
     -- * Request Lenses
     , rlpQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListsPatch@ which the
--- 'RemarketingListsPatch' request conforms to.
-type RemarketingListsPatchAPI =
+-- 'RemarketingListsPatch'' request conforms to.
+type RemarketingListsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] RemarketingList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list. This method supports patch
 -- semantics.
 --
--- /See:/ 'remarketingListsPatch' smart constructor.
-data RemarketingListsPatch = RemarketingListsPatch
+-- /See:/ 'remarketingListsPatch'' smart constructor.
+data RemarketingListsPatch' = RemarketingListsPatch'
     { _rlpQuotaUser   :: !(Maybe Text)
     , _rlpPrettyPrint :: !Bool
     , _rlpUserIp      :: !(Maybe Text)
@@ -66,7 +73,7 @@ data RemarketingListsPatch = RemarketingListsPatch
     , _rlpId          :: !Int64
     , _rlpOauthToken  :: !(Maybe Text)
     , _rlpFields      :: !(Maybe Text)
-    , _rlpAlt         :: !Text
+    , _rlpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsPatch'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data RemarketingListsPatch = RemarketingListsPatch
 -- * 'rlpFields'
 --
 -- * 'rlpAlt'
-remarketingListsPatch
+remarketingListsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> RemarketingListsPatch
-remarketingListsPatch pRlpProfileId_ pRlpId_ =
-    RemarketingListsPatch
+    -> RemarketingListsPatch'
+remarketingListsPatch' pRlpProfileId_ pRlpId_ =
+    RemarketingListsPatch'
     { _rlpQuotaUser = Nothing
     , _rlpPrettyPrint = True
     , _rlpUserIp = Nothing
@@ -104,7 +111,7 @@ remarketingListsPatch pRlpProfileId_ pRlpId_ =
     , _rlpId = pRlpId_
     , _rlpOauthToken = Nothing
     , _rlpFields = Nothing
-    , _rlpAlt = "json"
+    , _rlpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +160,22 @@ rlpFields
   = lens _rlpFields (\ s a -> s{_rlpFields = a})
 
 -- | Data format for the response.
-rlpAlt :: Lens' RemarketingListsPatch' Text
+rlpAlt :: Lens' RemarketingListsPatch' Alt
 rlpAlt = lens _rlpAlt (\ s a -> s{_rlpAlt = a})
 
 instance GoogleRequest RemarketingListsPatch' where
         type Rs RemarketingListsPatch' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsPatch{..}
-          = go _rlpQuotaUser _rlpPrettyPrint _rlpUserIp
+        requestWithRoute r u RemarketingListsPatch'{..}
+          = go _rlpQuotaUser (Just _rlpPrettyPrint) _rlpUserIp
               _rlpProfileId
               _rlpKey
               (Just _rlpId)
               _rlpOauthToken
               _rlpFields
-              _rlpAlt
+              (Just _rlpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListsPatchAPI)
+                      (Proxy :: Proxy RemarketingListsPatchResource)
                       r
                       u

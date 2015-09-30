@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Unpublish a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersUnpublish@.
-module Mapsengine.Layers.Unpublish
+module Network.Google.Resource.Mapsengine.Layers.Unpublish
     (
     -- * REST Resource
-      LayersUnpublishAPI
+      LayersUnpublishResource
 
     -- * Creating a Request
-    , layersUnpublish
-    , LayersUnpublish
+    , layersUnpublish'
+    , LayersUnpublish'
 
     -- * Request Lenses
     , luQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersUnpublish@ which the
--- 'LayersUnpublish' request conforms to.
-type LayersUnpublishAPI =
+-- 'LayersUnpublish'' request conforms to.
+type LayersUnpublishResource =
      "layers" :>
        Capture "id" Text :>
-         "unpublish" :> Post '[JSON] PublishResponse
+         "unpublish" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] PublishResponse
 
 -- | Unpublish a layer asset.
 --
--- /See:/ 'layersUnpublish' smart constructor.
-data LayersUnpublish = LayersUnpublish
+-- /See:/ 'layersUnpublish'' smart constructor.
+data LayersUnpublish' = LayersUnpublish'
     { _luQuotaUser   :: !(Maybe Text)
     , _luPrettyPrint :: !Bool
     , _luUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data LayersUnpublish = LayersUnpublish
     , _luId          :: !Text
     , _luOauthToken  :: !(Maybe Text)
     , _luFields      :: !(Maybe Text)
-    , _luAlt         :: !Text
+    , _luAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersUnpublish'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data LayersUnpublish = LayersUnpublish
 -- * 'luFields'
 --
 -- * 'luAlt'
-layersUnpublish
+layersUnpublish'
     :: Text -- ^ 'id'
-    -> LayersUnpublish
-layersUnpublish pLuId_ =
-    LayersUnpublish
+    -> LayersUnpublish'
+layersUnpublish' pLuId_ =
+    LayersUnpublish'
     { _luQuotaUser = Nothing
     , _luPrettyPrint = True
     , _luUserIp = Nothing
@@ -94,7 +102,7 @@ layersUnpublish pLuId_ =
     , _luId = pLuId_
     , _luOauthToken = Nothing
     , _luFields = Nothing
-    , _luAlt = "json"
+    , _luAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ luFields :: Lens' LayersUnpublish' (Maybe Text)
 luFields = lens _luFields (\ s a -> s{_luFields = a})
 
 -- | Data format for the response.
-luAlt :: Lens' LayersUnpublish' Text
+luAlt :: Lens' LayersUnpublish' Alt
 luAlt = lens _luAlt (\ s a -> s{_luAlt = a})
 
 instance GoogleRequest LayersUnpublish' where
         type Rs LayersUnpublish' = PublishResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersUnpublish{..}
-          = go _luQuotaUser _luPrettyPrint _luUserIp _luKey
+        requestWithRoute r u LayersUnpublish'{..}
+          = go _luQuotaUser (Just _luPrettyPrint) _luUserIp
+              _luKey
               _luId
               _luOauthToken
               _luFields
-              _luAlt
+              (Just _luAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersUnpublishAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersUnpublishResource)
                       r
                       u

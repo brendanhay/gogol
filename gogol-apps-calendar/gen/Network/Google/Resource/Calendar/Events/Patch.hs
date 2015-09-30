@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an event. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsPatch@.
-module Calendar.Events.Patch
+module Network.Google.Resource.Calendar.Events.Patch
     (
     -- * REST Resource
-      EventsPatchAPI
+      EventsPatchResource
 
     -- * Creating a Request
-    , eventsPatch
-    , EventsPatch
+    , eventsPatch'
+    , EventsPatch'
 
     -- * Request Lenses
     , epQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsPatch@ which the
--- 'EventsPatch' request conforms to.
-type EventsPatchAPI =
+-- 'EventsPatch'' request conforms to.
+type EventsPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            Capture "eventId" Text :>
-             QueryParam "maxAttendees" Int32 :>
-               QueryParam "sendNotifications" Bool :>
-                 QueryParam "supportsAttachments" Bool :>
-                   QueryParam "alwaysIncludeEmail" Bool :>
-                     Patch '[JSON] Event
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "maxAttendees" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "sendNotifications" Bool :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "supportsAttachments" Bool :>
+                             QueryParam "alwaysIncludeEmail" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Patch '[JSON] Event
 
 -- | Updates an event. This method supports patch semantics.
 --
--- /See:/ 'eventsPatch' smart constructor.
-data EventsPatch = EventsPatch
+-- /See:/ 'eventsPatch'' smart constructor.
+data EventsPatch' = EventsPatch'
     { _epQuotaUser           :: !(Maybe Text)
     , _epCalendarId          :: !Text
     , _epPrettyPrint         :: !Bool
@@ -76,7 +83,7 @@ data EventsPatch = EventsPatch
     , _epAlwaysIncludeEmail  :: !(Maybe Bool)
     , _epEventId             :: !Text
     , _epFields              :: !(Maybe Text)
-    , _epAlt                 :: !Text
+    , _epAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsPatch'' with the minimum fields required to make a request.
@@ -108,12 +115,12 @@ data EventsPatch = EventsPatch
 -- * 'epFields'
 --
 -- * 'epAlt'
-eventsPatch
+eventsPatch'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
-    -> EventsPatch
-eventsPatch pEpCalendarId_ pEpEventId_ =
-    EventsPatch
+    -> EventsPatch'
+eventsPatch' pEpCalendarId_ pEpEventId_ =
+    EventsPatch'
     { _epQuotaUser = Nothing
     , _epCalendarId = pEpCalendarId_
     , _epPrettyPrint = True
@@ -126,7 +133,7 @@ eventsPatch pEpCalendarId_ pEpEventId_ =
     , _epAlwaysIncludeEmail = Nothing
     , _epEventId = pEpEventId_
     , _epFields = Nothing
-    , _epAlt = "json"
+    , _epAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -208,14 +215,14 @@ epFields :: Lens' EventsPatch' (Maybe Text)
 epFields = lens _epFields (\ s a -> s{_epFields = a})
 
 -- | Data format for the response.
-epAlt :: Lens' EventsPatch' Text
+epAlt :: Lens' EventsPatch' Alt
 epAlt = lens _epAlt (\ s a -> s{_epAlt = a})
 
 instance GoogleRequest EventsPatch' where
         type Rs EventsPatch' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsPatch{..}
-          = go _epQuotaUser _epCalendarId _epPrettyPrint
+        requestWithRoute r u EventsPatch'{..}
+          = go _epQuotaUser _epCalendarId (Just _epPrettyPrint)
               _epUserIp
               _epMaxAttendees
               _epKey
@@ -225,6 +232,9 @@ instance GoogleRequest EventsPatch' where
               _epAlwaysIncludeEmail
               _epEventId
               _epFields
-              _epAlt
+              (Just _epAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsPatchResource)
+                      r
+                      u

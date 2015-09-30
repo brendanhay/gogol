@@ -27,7 +27,7 @@ module Network.Google.Fonts
     -- * REST Resources
 
     -- ** WebfontsWebfontsList
-    , module Webfonts.Webfonts.List
+    , module Network.Google.Resource.Webfonts.Webfonts.List
 
     -- * Types
 
@@ -48,6 +48,16 @@ module Network.Google.Fonts
     , webfontList
     , wlKind
     , wlItems
+
+    -- ** WebfontsWebfontsListSort
+    , WebfontsWebfontsListSort (..)
+
+    -- ** WebfontFiles
+    , WebfontFiles
+    , webfontFiles
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Fonts.Types
@@ -58,7 +68,7 @@ import           Network.Google.Resource.Webfonts.Webfonts.List
 TODO
 -}
 
-type FontsAPI = Webfonts
+type FontsAPI = WebfontsListResource
 
 fontsAPI :: Proxy FontsAPI
 fontsAPI = Proxy

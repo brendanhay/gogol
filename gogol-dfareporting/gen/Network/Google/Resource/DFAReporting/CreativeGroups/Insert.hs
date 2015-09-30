@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new creative group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsInsert@.
-module DFAReporting.CreativeGroups.Insert
+module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     (
     -- * REST Resource
-      CreativeGroupsInsertAPI
+      CreativeGroupsInsertResource
 
     -- * Creating a Request
-    , creativeGroupsInsert
-    , CreativeGroupsInsert
+    , creativeGroupsInsert'
+    , CreativeGroupsInsert'
 
     -- * Request Lenses
     , cgiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeGroupsInsert@ which the
--- 'CreativeGroupsInsert' request conforms to.
-type CreativeGroupsInsertAPI =
+-- 'CreativeGroupsInsert'' request conforms to.
+type CreativeGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creativeGroups" :> Post '[JSON] CreativeGroup
+         "creativeGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] CreativeGroup
 
 -- | Inserts a new creative group.
 --
--- /See:/ 'creativeGroupsInsert' smart constructor.
-data CreativeGroupsInsert = CreativeGroupsInsert
+-- /See:/ 'creativeGroupsInsert'' smart constructor.
+data CreativeGroupsInsert' = CreativeGroupsInsert'
     { _cgiQuotaUser   :: !(Maybe Text)
     , _cgiPrettyPrint :: !Bool
     , _cgiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativeGroupsInsert = CreativeGroupsInsert
     , _cgiKey         :: !(Maybe Text)
     , _cgiOauthToken  :: !(Maybe Text)
     , _cgiFields      :: !(Maybe Text)
-    , _cgiAlt         :: !Text
+    , _cgiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativeGroupsInsert = CreativeGroupsInsert
 -- * 'cgiFields'
 --
 -- * 'cgiAlt'
-creativeGroupsInsert
+creativeGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroupsInsert
-creativeGroupsInsert pCgiProfileId_ =
-    CreativeGroupsInsert
+    -> CreativeGroupsInsert'
+creativeGroupsInsert' pCgiProfileId_ =
+    CreativeGroupsInsert'
     { _cgiQuotaUser = Nothing
     , _cgiPrettyPrint = True
     , _cgiUserIp = Nothing
@@ -94,7 +102,7 @@ creativeGroupsInsert pCgiProfileId_ =
     , _cgiKey = Nothing
     , _cgiOauthToken = Nothing
     , _cgiFields = Nothing
-    , _cgiAlt = "json"
+    , _cgiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ cgiFields
   = lens _cgiFields (\ s a -> s{_cgiFields = a})
 
 -- | Data format for the response.
-cgiAlt :: Lens' CreativeGroupsInsert' Text
+cgiAlt :: Lens' CreativeGroupsInsert' Alt
 cgiAlt = lens _cgiAlt (\ s a -> s{_cgiAlt = a})
 
 instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsInsert{..}
-          = go _cgiQuotaUser _cgiPrettyPrint _cgiUserIp
+        requestWithRoute r u CreativeGroupsInsert'{..}
+          = go _cgiQuotaUser (Just _cgiPrettyPrint) _cgiUserIp
               _cgiProfileId
               _cgiKey
               _cgiOauthToken
               _cgiFields
-              _cgiAlt
+              (Just _cgiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeGroupsInsertAPI)
+                      (Proxy :: Proxy CreativeGroupsInsertResource)
                       r
                       u

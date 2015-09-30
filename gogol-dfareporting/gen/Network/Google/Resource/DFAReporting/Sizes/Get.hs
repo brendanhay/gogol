@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one size by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSizesGet@.
-module DFAReporting.Sizes.Get
+module Network.Google.Resource.DFAReporting.Sizes.Get
     (
     -- * REST Resource
-      SizesGetAPI
+      SizesGetResource
 
     -- * Creating a Request
-    , sizesGet
-    , SizesGet
+    , sizesGet'
+    , SizesGet'
 
     -- * Request Lenses
     , sggQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSizesGet@ which the
--- 'SizesGet' request conforms to.
-type SizesGetAPI =
+-- 'SizesGet'' request conforms to.
+type SizesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "sizes" :> Capture "id" Int64 :> Get '[JSON] Size
+         "sizes" :>
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Size
 
 -- | Gets one size by ID.
 --
--- /See:/ 'sizesGet' smart constructor.
-data SizesGet = SizesGet
+-- /See:/ 'sizesGet'' smart constructor.
+data SizesGet' = SizesGet'
     { _sggQuotaUser   :: !(Maybe Text)
     , _sggPrettyPrint :: !Bool
     , _sggUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data SizesGet = SizesGet
     , _sggId          :: !Int64
     , _sggOauthToken  :: !(Maybe Text)
     , _sggFields      :: !(Maybe Text)
-    , _sggAlt         :: !Text
+    , _sggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data SizesGet = SizesGet
 -- * 'sggFields'
 --
 -- * 'sggAlt'
-sizesGet
+sizesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> SizesGet
-sizesGet pSggProfileId_ pSggId_ =
-    SizesGet
+    -> SizesGet'
+sizesGet' pSggProfileId_ pSggId_ =
+    SizesGet'
     { _sggQuotaUser = Nothing
     , _sggPrettyPrint = True
     , _sggUserIp = Nothing
@@ -100,7 +109,7 @@ sizesGet pSggProfileId_ pSggId_ =
     , _sggId = pSggId_
     , _sggOauthToken = Nothing
     , _sggFields = Nothing
-    , _sggAlt = "json"
+    , _sggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +158,20 @@ sggFields
   = lens _sggFields (\ s a -> s{_sggFields = a})
 
 -- | Data format for the response.
-sggAlt :: Lens' SizesGet' Text
+sggAlt :: Lens' SizesGet' Alt
 sggAlt = lens _sggAlt (\ s a -> s{_sggAlt = a})
 
 instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SizesGet{..}
-          = go _sggQuotaUser _sggPrettyPrint _sggUserIp
+        requestWithRoute r u SizesGet'{..}
+          = go _sggQuotaUser (Just _sggPrettyPrint) _sggUserIp
               _sggProfileId
               _sggKey
               _sggId
               _sggOauthToken
               _sggFields
-              _sggAlt
+              (Just _sggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SizesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SizesGetResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- is atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesPermissionsBatchUpdate@.
-module Mapsengine.Tables.Permissions.BatchUpdate
+module Network.Google.Resource.Mapsengine.Tables.Permissions.BatchUpdate
     (
     -- * REST Resource
-      TablesPermissionsBatchUpdateAPI
+      TablesPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , tablesPermissionsBatchUpdate
-    , TablesPermissionsBatchUpdate
+    , tablesPermissionsBatchUpdate'
+    , TablesPermissionsBatchUpdate'
 
     -- * Request Lenses
     , tpbuQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesPermissionsBatchUpdate@ which the
--- 'TablesPermissionsBatchUpdate' request conforms to.
-type TablesPermissionsBatchUpdateAPI =
+-- 'TablesPermissionsBatchUpdate'' request conforms to.
+type TablesPermissionsBatchUpdateResource =
      "tables" :>
        Capture "id" Text :>
          "permissions" :>
            "batchUpdate" :>
-             Post '[JSON] PermissionsBatchUpdateResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'tablesPermissionsBatchUpdate' smart constructor.
-data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
+-- /See:/ 'tablesPermissionsBatchUpdate'' smart constructor.
+data TablesPermissionsBatchUpdate' = TablesPermissionsBatchUpdate'
     { _tpbuQuotaUser   :: !(Maybe Text)
     , _tpbuPrettyPrint :: !Bool
     , _tpbuUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
     , _tpbuId          :: !Text
     , _tpbuOauthToken  :: !(Maybe Text)
     , _tpbuFields      :: !(Maybe Text)
-    , _tpbuAlt         :: !Text
+    , _tpbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPermissionsBatchUpdate'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
 -- * 'tpbuFields'
 --
 -- * 'tpbuAlt'
-tablesPermissionsBatchUpdate
+tablesPermissionsBatchUpdate'
     :: Text -- ^ 'id'
-    -> TablesPermissionsBatchUpdate
-tablesPermissionsBatchUpdate pTpbuId_ =
-    TablesPermissionsBatchUpdate
+    -> TablesPermissionsBatchUpdate'
+tablesPermissionsBatchUpdate' pTpbuId_ =
+    TablesPermissionsBatchUpdate'
     { _tpbuQuotaUser = Nothing
     , _tpbuPrettyPrint = True
     , _tpbuUserIp = Nothing
@@ -100,7 +108,7 @@ tablesPermissionsBatchUpdate pTpbuId_ =
     , _tpbuId = pTpbuId_
     , _tpbuOauthToken = Nothing
     , _tpbuFields = Nothing
-    , _tpbuAlt = "json"
+    , _tpbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ tpbuFields
   = lens _tpbuFields (\ s a -> s{_tpbuFields = a})
 
 -- | Data format for the response.
-tpbuAlt :: Lens' TablesPermissionsBatchUpdate' Text
+tpbuAlt :: Lens' TablesPermissionsBatchUpdate' Alt
 tpbuAlt = lens _tpbuAlt (\ s a -> s{_tpbuAlt = a})
 
 instance GoogleRequest TablesPermissionsBatchUpdate'
@@ -153,15 +161,17 @@ instance GoogleRequest TablesPermissionsBatchUpdate'
         type Rs TablesPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesPermissionsBatchUpdate{..}
-          = go _tpbuQuotaUser _tpbuPrettyPrint _tpbuUserIp
+        requestWithRoute r u
+          TablesPermissionsBatchUpdate'{..}
+          = go _tpbuQuotaUser (Just _tpbuPrettyPrint)
+              _tpbuUserIp
               _tpbuKey
               _tpbuId
               _tpbuOauthToken
               _tpbuFields
-              _tpbuAlt
+              (Just _tpbuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesPermissionsBatchUpdateAPI)
+                      (Proxy :: Proxy TablesPermissionsBatchUpdateResource)
                       r
                       u

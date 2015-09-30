@@ -27,22 +27,22 @@ module Network.Google.Monitoring
     -- * REST Resources
 
     -- ** CloudmonitoringMetricDescriptorsCreate
-    , module Cloudmonitoring.MetricDescriptors.Create
+    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Create
 
     -- ** CloudmonitoringMetricDescriptorsDelete
-    , module Cloudmonitoring.MetricDescriptors.Delete
+    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Delete
 
     -- ** CloudmonitoringMetricDescriptorsList
-    , module Cloudmonitoring.MetricDescriptors.List
+    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.List
 
     -- ** CloudmonitoringTimeseriesList
-    , module Cloudmonitoring.Timeseries.List
+    , module Network.Google.Resource.Cloudmonitoring.Timeseries.List
 
     -- ** CloudmonitoringTimeseriesWrite
-    , module Cloudmonitoring.Timeseries.Write
+    , module Network.Google.Resource.Cloudmonitoring.Timeseries.Write
 
     -- ** CloudmonitoringTimeseriesDescriptorsList
-    , module Cloudmonitoring.TimeseriesDescriptors.List
+    , module Network.Google.Resource.Cloudmonitoring.TimeseriesDescriptors.List
 
     -- * Types
 
@@ -82,6 +82,10 @@ module Network.Google.Monitoring
     , pdubUpperBound
     , pdubCount
 
+    -- ** WriteTimeseriesRequestCommonLabels
+    , WriteTimeseriesRequestCommonLabels
+    , writeTimeseriesRequestCommonLabels
+
     -- ** WriteTimeseriesRequest
     , WriteTimeseriesRequest
     , writeTimeseriesRequest
@@ -105,12 +109,22 @@ module Network.Google.Monitoring
     , writeTimeseriesResponse
     , wtrKind
 
+    -- ** TimeseriesDescriptorLabels
+    , TimeseriesDescriptorLabels
+    , timeseriesDescriptorLabels
+
     -- ** PointDistributionBucket
     , PointDistributionBucket
     , pointDistributionBucket
     , pdbUpperBound
     , pdbCount
     , pdbLowerBound
+
+    -- ** CloudmonitoringTimeseriesListAggregator
+    , CloudmonitoringTimeseriesListAggregator (..)
+
+    -- ** CloudmonitoringTimeseriesDescriptorsListAggregator
+    , CloudmonitoringTimeseriesDescriptorsListAggregator (..)
 
     -- ** TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -184,6 +198,9 @@ module Network.Google.Monitoring
     , timeseries
     , tPoints
     , tTimeseriesDesc
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Monitoring.Types
@@ -200,8 +217,12 @@ TODO
 -}
 
 type MonitoringAPI =
-     MetricDescriptors :<|> TimeseriesDescriptors :<|>
-       Timeseries
+     MetricDescriptorsListResource :<|>
+       MetricDescriptorsCreateResource
+       :<|> MetricDescriptorsDeleteResource
+       :<|> TimeseriesDescriptorsListResource
+       :<|> TimeseriesListResource
+       :<|> TimeseriesWriteResource
 
 monitoringAPI :: Proxy MonitoringAPI
 monitoringAPI = Proxy

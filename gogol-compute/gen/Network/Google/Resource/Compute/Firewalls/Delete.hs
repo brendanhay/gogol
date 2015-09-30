@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified firewall resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsDelete@.
-module Compute.Firewalls.Delete
+module Network.Google.Resource.Compute.Firewalls.Delete
     (
     -- * REST Resource
-      FirewallsDeleteAPI
+      FirewallsDeleteResource
 
     -- * Creating a Request
-    , firewallsDelete
-    , FirewallsDelete
+    , firewallsDelete'
+    , FirewallsDelete'
 
     -- * Request Lenses
     , fdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsDelete@ which the
--- 'FirewallsDelete' request conforms to.
-type FirewallsDeleteAPI =
+-- 'FirewallsDelete'' request conforms to.
+type FirewallsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           Capture "firewall" Text :> Delete '[JSON] Operation
+           Capture "firewall" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified firewall resource.
 --
--- /See:/ 'firewallsDelete' smart constructor.
-data FirewallsDelete = FirewallsDelete
+-- /See:/ 'firewallsDelete'' smart constructor.
+data FirewallsDelete' = FirewallsDelete'
     { _fdQuotaUser   :: !(Maybe Text)
     , _fdPrettyPrint :: !Bool
     , _fdProject     :: !Text
@@ -63,7 +71,7 @@ data FirewallsDelete = FirewallsDelete
     , _fdOauthToken  :: !(Maybe Text)
     , _fdFirewall    :: !Text
     , _fdFields      :: !(Maybe Text)
-    , _fdAlt         :: !Text
+    , _fdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data FirewallsDelete = FirewallsDelete
 -- * 'fdFields'
 --
 -- * 'fdAlt'
-firewallsDelete
+firewallsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
-    -> FirewallsDelete
-firewallsDelete pFdProject_ pFdFirewall_ =
-    FirewallsDelete
+    -> FirewallsDelete'
+firewallsDelete' pFdProject_ pFdFirewall_ =
+    FirewallsDelete'
     { _fdQuotaUser = Nothing
     , _fdPrettyPrint = True
     , _fdProject = pFdProject_
@@ -101,7 +109,7 @@ firewallsDelete pFdProject_ pFdFirewall_ =
     , _fdOauthToken = Nothing
     , _fdFirewall = pFdFirewall_
     , _fdFields = Nothing
-    , _fdAlt = "json"
+    , _fdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ fdFields :: Lens' FirewallsDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
 -- | Data format for the response.
-fdAlt :: Lens' FirewallsDelete' Text
+fdAlt :: Lens' FirewallsDelete' Alt
 fdAlt = lens _fdAlt (\ s a -> s{_fdAlt = a})
 
 instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsDelete{..}
-          = go _fdQuotaUser _fdPrettyPrint _fdProject _fdUserIp
+        requestWithRoute r u FirewallsDelete'{..}
+          = go _fdQuotaUser (Just _fdPrettyPrint) _fdProject
+              _fdUserIp
               _fdKey
               _fdOauthToken
               _fdFirewall
               _fdFields
-              _fdAlt
+              (Just _fdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsDeleteResource)
                       r
                       u

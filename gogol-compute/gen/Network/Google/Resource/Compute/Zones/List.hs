@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of zone resources available to the specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZonesList@.
-module Compute.Zones.List
+module Network.Google.Resource.Compute.Zones.List
     (
     -- * REST Resource
-      ZonesListAPI
+      ZonesListResource
 
     -- * Creating a Request
-    , zonesList
-    , ZonesList
+    , zonesList'
+    , ZonesList'
 
     -- * Request Lenses
     , zlQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeZonesList@ which the
--- 'ZonesList' request conforms to.
-type ZonesListAPI =
+-- 'ZonesList'' request conforms to.
+type ZonesListResource =
      Capture "project" Text :>
        "zones" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ZoneList
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of zone resources available to the specified project.
 --
--- /See:/ 'zonesList' smart constructor.
-data ZonesList = ZonesList
+-- /See:/ 'zonesList'' smart constructor.
+data ZonesList' = ZonesList'
     { _zlQuotaUser   :: !(Maybe Text)
     , _zlPrettyPrint :: !Bool
     , _zlProject     :: !Text
@@ -69,7 +76,7 @@ data ZonesList = ZonesList
     , _zlOauthToken  :: !(Maybe Text)
     , _zlMaxResults  :: !Word32
     , _zlFields      :: !(Maybe Text)
-    , _zlAlt         :: !Text
+    , _zlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesList'' with the minimum fields required to make a request.
@@ -97,11 +104,11 @@ data ZonesList = ZonesList
 -- * 'zlFields'
 --
 -- * 'zlAlt'
-zonesList
+zonesList'
     :: Text -- ^ 'project'
-    -> ZonesList
-zonesList pZlProject_ =
-    ZonesList
+    -> ZonesList'
+zonesList' pZlProject_ =
+    ZonesList'
     { _zlQuotaUser = Nothing
     , _zlPrettyPrint = True
     , _zlProject = pZlProject_
@@ -112,7 +119,7 @@ zonesList pZlProject_ =
     , _zlOauthToken = Nothing
     , _zlMaxResults = 500
     , _zlFields = Nothing
-    , _zlAlt = "json"
+    , _zlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,20 +187,23 @@ zlFields :: Lens' ZonesList' (Maybe Text)
 zlFields = lens _zlFields (\ s a -> s{_zlFields = a})
 
 -- | Data format for the response.
-zlAlt :: Lens' ZonesList' Text
+zlAlt :: Lens' ZonesList' Alt
 zlAlt = lens _zlAlt (\ s a -> s{_zlAlt = a})
 
 instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ZonesList{..}
-          = go _zlQuotaUser _zlPrettyPrint _zlProject _zlUserIp
+        requestWithRoute r u ZonesList'{..}
+          = go _zlQuotaUser (Just _zlPrettyPrint) _zlProject
+              _zlUserIp
               _zlKey
               _zlFilter
               _zlPageToken
               _zlOauthToken
               (Just _zlMaxResults)
               _zlFields
-              _zlAlt
+              (Just _zlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZonesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ZonesListResource)
+                      r
+                      u

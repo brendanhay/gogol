@@ -27,160 +27,160 @@ module Network.Google.Games
     -- * REST Resources
 
     -- ** GamesAchievementDefinitionsList
-    , module Games.AchievementDefinitions.List
+    , module Network.Google.Resource.Games.AchievementDefinitions.List
 
     -- ** GamesAchievementsIncrement
-    , module Games.Achievements.Increment
+    , module Network.Google.Resource.Games.Achievements.Increment
 
     -- ** GamesAchievementsList
-    , module Games.Achievements.List
+    , module Network.Google.Resource.Games.Achievements.List
 
     -- ** GamesAchievementsReveal
-    , module Games.Achievements.Reveal
+    , module Network.Google.Resource.Games.Achievements.Reveal
 
     -- ** GamesAchievementsSetStepsAtLeast
-    , module Games.Achievements.SetStepsAtLeast
+    , module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
 
     -- ** GamesAchievementsUnlock
-    , module Games.Achievements.Unlock
+    , module Network.Google.Resource.Games.Achievements.Unlock
 
     -- ** GamesAchievementsUpdateMultiple
-    , module Games.Achievements.UpdateMultiple
+    , module Network.Google.Resource.Games.Achievements.UpdateMultiple
 
     -- ** GamesApplicationsGet
-    , module Games.Applications.Get
+    , module Network.Google.Resource.Games.Applications.Get
 
     -- ** GamesApplicationsPlayed
-    , module Games.Applications.Played
+    , module Network.Google.Resource.Games.Applications.Played
 
     -- ** GamesEventsListByPlayer
-    , module Games.Events.ListByPlayer
+    , module Network.Google.Resource.Games.Events.ListByPlayer
 
     -- ** GamesEventsListDefinitions
-    , module Games.Events.ListDefinitions
+    , module Network.Google.Resource.Games.Events.ListDefinitions
 
     -- ** GamesEventsRecord
-    , module Games.Events.Record
+    , module Network.Google.Resource.Games.Events.Record
 
     -- ** GamesLeaderboardsGet
-    , module Games.Leaderboards.Get
+    , module Network.Google.Resource.Games.Leaderboards.Get
 
     -- ** GamesLeaderboardsList
-    , module Games.Leaderboards.List
+    , module Network.Google.Resource.Games.Leaderboards.List
 
     -- ** GamesMetagameGetMetagameConfig
-    , module Games.Metagame.GetMetagameConfig
+    , module Network.Google.Resource.Games.Metagame.GetMetagameConfig
 
     -- ** GamesMetagameListCategoriesByPlayer
-    , module Games.Metagame.ListCategoriesByPlayer
+    , module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
 
     -- ** GamesPlayersGet
-    , module Games.Players.Get
+    , module Network.Google.Resource.Games.Players.Get
 
     -- ** GamesPlayersList
-    , module Games.Players.List
+    , module Network.Google.Resource.Games.Players.List
 
     -- ** GamesPushtokensRemove
-    , module Games.Pushtokens.Remove
+    , module Network.Google.Resource.Games.Pushtokens.Remove
 
     -- ** GamesPushtokensUpdate
-    , module Games.Pushtokens.Update
+    , module Network.Google.Resource.Games.Pushtokens.Update
 
     -- ** GamesQuestMilestonesClaim
-    , module Games.QuestMilestones.Claim
+    , module Network.Google.Resource.Games.QuestMilestones.Claim
 
     -- ** GamesQuestsAccept
-    , module Games.Quests.Accept
+    , module Network.Google.Resource.Games.Quests.Accept
 
     -- ** GamesQuestsList
-    , module Games.Quests.List
+    , module Network.Google.Resource.Games.Quests.List
 
     -- ** GamesRevisionsCheck
-    , module Games.Revisions.Check
+    , module Network.Google.Resource.Games.Revisions.Check
 
     -- ** GamesRoomsCreate
-    , module Games.Rooms.Create
+    , module Network.Google.Resource.Games.Rooms.Create
 
     -- ** GamesRoomsDecline
-    , module Games.Rooms.Decline
+    , module Network.Google.Resource.Games.Rooms.Decline
 
     -- ** GamesRoomsDismiss
-    , module Games.Rooms.Dismiss
+    , module Network.Google.Resource.Games.Rooms.Dismiss
 
     -- ** GamesRoomsGet
-    , module Games.Rooms.Get
+    , module Network.Google.Resource.Games.Rooms.Get
 
     -- ** GamesRoomsJoin
-    , module Games.Rooms.Join
+    , module Network.Google.Resource.Games.Rooms.Join
 
     -- ** GamesRoomsLeave
-    , module Games.Rooms.Leave
+    , module Network.Google.Resource.Games.Rooms.Leave
 
     -- ** GamesRoomsList
-    , module Games.Rooms.List
+    , module Network.Google.Resource.Games.Rooms.List
 
     -- ** GamesRoomsReportStatus
-    , module Games.Rooms.ReportStatus
+    , module Network.Google.Resource.Games.Rooms.ReportStatus
 
     -- ** GamesScoresGet
-    , module Games.Scores.Get
+    , module Network.Google.Resource.Games.Scores.Get
 
     -- ** GamesScoresList
-    , module Games.Scores.List
+    , module Network.Google.Resource.Games.Scores.List
 
     -- ** GamesScoresListWindow
-    , module Games.Scores.ListWindow
+    , module Network.Google.Resource.Games.Scores.ListWindow
 
     -- ** GamesScoresSubmit
-    , module Games.Scores.Submit
+    , module Network.Google.Resource.Games.Scores.Submit
 
     -- ** GamesScoresSubmitMultiple
-    , module Games.Scores.SubmitMultiple
+    , module Network.Google.Resource.Games.Scores.SubmitMultiple
 
     -- ** GamesSnapshotsGet
-    , module Games.Snapshots.Get
+    , module Network.Google.Resource.Games.Snapshots.Get
 
     -- ** GamesSnapshotsList
-    , module Games.Snapshots.List
+    , module Network.Google.Resource.Games.Snapshots.List
 
     -- ** GamesTurnBasedMatchesCancel
-    , module Games.TurnBasedMatches.Cancel
+    , module Network.Google.Resource.Games.TurnBasedMatches.Cancel
 
     -- ** GamesTurnBasedMatchesCreate
-    , module Games.TurnBasedMatches.Create
+    , module Network.Google.Resource.Games.TurnBasedMatches.Create
 
     -- ** GamesTurnBasedMatchesDecline
-    , module Games.TurnBasedMatches.Decline
+    , module Network.Google.Resource.Games.TurnBasedMatches.Decline
 
     -- ** GamesTurnBasedMatchesDismiss
-    , module Games.TurnBasedMatches.Dismiss
+    , module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
 
     -- ** GamesTurnBasedMatchesFinish
-    , module Games.TurnBasedMatches.Finish
+    , module Network.Google.Resource.Games.TurnBasedMatches.Finish
 
     -- ** GamesTurnBasedMatchesGet
-    , module Games.TurnBasedMatches.Get
+    , module Network.Google.Resource.Games.TurnBasedMatches.Get
 
     -- ** GamesTurnBasedMatchesJoin
-    , module Games.TurnBasedMatches.Join
+    , module Network.Google.Resource.Games.TurnBasedMatches.Join
 
     -- ** GamesTurnBasedMatchesLeave
-    , module Games.TurnBasedMatches.Leave
+    , module Network.Google.Resource.Games.TurnBasedMatches.Leave
 
     -- ** GamesTurnBasedMatchesLeaveTurn
-    , module Games.TurnBasedMatches.LeaveTurn
+    , module Network.Google.Resource.Games.TurnBasedMatches.LeaveTurn
 
     -- ** GamesTurnBasedMatchesList
-    , module Games.TurnBasedMatches.List
+    , module Network.Google.Resource.Games.TurnBasedMatches.List
 
     -- ** GamesTurnBasedMatchesRematch
-    , module Games.TurnBasedMatches.Rematch
+    , module Network.Google.Resource.Games.TurnBasedMatches.Rematch
 
     -- ** GamesTurnBasedMatchesSync
-    , module Games.TurnBasedMatches.Sync
+    , module Network.Google.Resource.Games.TurnBasedMatches.Sync
 
     -- ** GamesTurnBasedMatchesTakeTurn
-    , module Games.TurnBasedMatches.TakeTurn
+    , module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
 
     -- * Types
 
@@ -191,6 +191,12 @@ module Network.Google.Games
     , rjrKind
     , rjrClientAddress
     , rjrCapabilities
+
+    -- ** PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
 
     -- ** Snapshot
     , Snapshot
@@ -206,6 +212,9 @@ module Network.Google.Games
     , sType
     , sDescription
     , sDriveId
+
+    -- ** GamesAchievementsListState
+    , GamesAchievementsListState (..)
 
     -- ** TurnBasedMatchData
     , TurnBasedMatchData
@@ -303,6 +312,9 @@ module Network.Google.Games
     , acSecondary
     , acKind
     , acPrimary
+
+    -- ** GamesScoresListCollection
+    , GamesScoresListCollection (..)
 
     -- ** PlayerScoreListResponse
     , PlayerScoreListResponse
@@ -643,6 +655,9 @@ module Network.Google.Games
     , edChildEvents
     , edDescription
 
+    -- ** GamesScoresGetTimeSpan
+    , GamesScoresGetTimeSpan (..)
+
     -- ** RoomModification
     , RoomModification
     , roomModification
@@ -673,6 +688,9 @@ module Network.Google.Games
     , paId
     , paCurrentSteps
     , paLastUpdatedTimestamp
+
+    -- ** GamesMetagameListCategoriesByPlayerCollection
+    , GamesMetagameListCategoriesByPlayerCollection (..)
 
     -- ** RoomP2PStatuses
     , RoomP2PStatuses
@@ -748,6 +766,9 @@ module Network.Google.Games
     , plrKind
     , plrItems
 
+    -- ** GamesScoresGetIncludeRankType
+    , GamesScoresGetIncludeRankType (..)
+
     -- ** TurnBasedMatchCreateRequest
     , TurnBasedMatchCreateRequest
     , turnBasedMatchCreateRequest
@@ -773,6 +794,12 @@ module Network.Google.Games
     , adDescription
     , adIsRevealedIconUrlDefault
     , adUnlockedIconUrl
+
+    -- ** PushTokenIdIos
+    , PushTokenIdIos
+    , pushTokenIdIos
+    , ptiiApnsDeviceToken
+    , ptiiApnsEnvironment
 
     -- ** PlayerAchievementListResponse
     , PlayerAchievementListResponse
@@ -810,6 +837,9 @@ module Network.Google.Games
     , rlrReason
     , rlrLeaveDiagnostics
 
+    -- ** GamesApplicationsGetPlatformType
+    , GamesApplicationsGetPlatformType (..)
+
     -- ** AchievementIncrementResponse
     , AchievementIncrementResponse
     , achievementIncrementResponse
@@ -829,6 +859,9 @@ module Network.Google.Games
     , pKind
     , pAutoMatched
     , pTimeMillis
+
+    -- ** GamesScoresListTimeSpan
+    , GamesScoresListTimeSpan (..)
 
     -- ** RoomAutoMatchingCriteria
     , RoomAutoMatchingCriteria
@@ -963,6 +996,9 @@ module Network.Google.Games
     , iwdKind
     , iwdLaunchUrl
 
+    -- ** GamesScoresListWindowCollection
+    , GamesScoresListWindowCollection (..)
+
     -- ** EventChild
     , EventChild
     , eventChild
@@ -1029,11 +1065,20 @@ module Network.Google.Games
     , iTurnBasedPlay
     , iRealtimePlay
 
+    -- ** GamesPlayersListCollection
+    , GamesPlayersListCollection (..)
+
     -- ** PlayerScoreSubmissionList
     , PlayerScoreSubmissionList
     , playerScoreSubmissionList
     , psslKind
     , psslScores
+
+    -- ** GamesScoresListWindowTimeSpan
+    , GamesScoresListWindowTimeSpan (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Games.Types
@@ -1096,19 +1141,57 @@ TODO
 -}
 
 type GamesAPI =
-     Rooms :<|> Leaderboards :<|> QuestMilestones :<|>
-       Metagame
-       :<|> AchievementDefinitions
-       :<|> Achievements
-       :<|> Snapshots
-       :<|> Events
-       :<|> Quests
-       :<|> Players
-       :<|> Revisions
-       :<|> Scores
-       :<|> Pushtokens
-       :<|> TurnBasedMatches
-       :<|> Applications
+     RoomsListResource :<|> RoomsJoinResource :<|>
+       RoomsGetResource
+       :<|> RoomsCreateResource
+       :<|> RoomsDeclineResource
+       :<|> RoomsDismissResource
+       :<|> RoomsReportStatusResource
+       :<|> RoomsLeaveResource
+       :<|> LeaderboardsListResource
+       :<|> LeaderboardsGetResource
+       :<|> QuestMilestonesClaimResource
+       :<|> MetagameListCategoriesByPlayerResource
+       :<|> MetagameGetMetagameConfigResource
+       :<|> AchievementDefinitionsListResource
+       :<|> AchievementsListResource
+       :<|> AchievementsUnlockResource
+       :<|> AchievementsRevealResource
+       :<|> AchievementsSetStepsAtLeastResource
+       :<|> AchievementsUpdateMultipleResource
+       :<|> AchievementsIncrementResource
+       :<|> SnapshotsListResource
+       :<|> SnapshotsGetResource
+       :<|> EventsListDefinitionsResource
+       :<|> EventsListByPlayerResource
+       :<|> EventsRecordResource
+       :<|> QuestsListResource
+       :<|> QuestsAcceptResource
+       :<|> PlayersListResource
+       :<|> PlayersGetResource
+       :<|> RevisionsCheckResource
+       :<|> ScoresListResource
+       :<|> ScoresGetResource
+       :<|> ScoresSubmitResource
+       :<|> ScoresSubmitMultipleResource
+       :<|> ScoresListWindowResource
+       :<|> PushtokensRemoveResource
+       :<|> PushtokensUpdateResource
+       :<|> TurnBasedMatchesRematchResource
+       :<|> TurnBasedMatchesListResource
+       :<|> TurnBasedMatchesJoinResource
+       :<|> TurnBasedMatchesFinishResource
+       :<|> TurnBasedMatchesTakeTurnResource
+       :<|> TurnBasedMatchesLeaveTurnResource
+       :<|> TurnBasedMatchesGetResource
+       :<|> TurnBasedMatchesCreateResource
+       :<|> TurnBasedMatchesDeclineResource
+       :<|> TurnBasedMatchesSyncResource
+       :<|> TurnBasedMatchesDismissResource
+       :<|> TurnBasedMatchesLeaveResource
+       :<|> TurnBasedMatchesCancelResource
+       :<|> ApplicationsGetResource
+       :<|> ApplicationsPlayedResource
 
 gamesAPI :: Proxy GamesAPI
 gamesAPI = Proxy

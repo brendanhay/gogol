@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- separate methods on this API for (de)activation and decommissioning.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsUpdate@.
-module ProximityBeacon.Beacons.Update
+module Network.Google.Resource.ProximityBeacon.Beacons.Update
     (
     -- * REST Resource
-      BeaconsUpdateAPI
+      BeaconsUpdateResource
 
     -- * Creating a Request
-    , beaconsUpdate
-    , BeaconsUpdate
+    , beaconsUpdate'
+    , BeaconsUpdate'
 
     -- * Request Lenses
     , buXgafv
@@ -54,9 +55,23 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsUpdate@ which the
--- 'BeaconsUpdate' request conforms to.
-type BeaconsUpdateAPI =
-     "v1beta1" :> "{+beaconName}" :> Put '[JSON] Beacon
+-- 'BeaconsUpdate'' request conforms to.
+type BeaconsUpdateResource =
+     "v1beta1" :>
+       "{+beaconName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
@@ -65,8 +80,8 @@ type BeaconsUpdateAPI =
 -- method will be silently ignored. To update beacon status, use the
 -- separate methods on this API for (de)activation and decommissioning.
 --
--- /See:/ 'beaconsUpdate' smart constructor.
-data BeaconsUpdate = BeaconsUpdate
+-- /See:/ 'beaconsUpdate'' smart constructor.
+data BeaconsUpdate' = BeaconsUpdate'
     { _buXgafv          :: !(Maybe Text)
     , _buQuotaUser      :: !(Maybe Text)
     , _buPrettyPrint    :: !Bool
@@ -114,11 +129,11 @@ data BeaconsUpdate = BeaconsUpdate
 -- * 'buCallback'
 --
 -- * 'buAlt'
-beaconsUpdate
+beaconsUpdate'
     :: Text -- ^ 'beaconName'
-    -> BeaconsUpdate
-beaconsUpdate pBuBeaconName_ =
-    BeaconsUpdate
+    -> BeaconsUpdate'
+beaconsUpdate' pBuBeaconName_ =
+    BeaconsUpdate'
     { _buXgafv = Nothing
     , _buQuotaUser = Nothing
     , _buPrettyPrint = True
@@ -216,10 +231,10 @@ buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
 instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsUpdate{..}
-          = go _buXgafv _buQuotaUser _buPrettyPrint
+        requestWithRoute r u BeaconsUpdate'{..}
+          = go _buXgafv _buQuotaUser (Just _buPrettyPrint)
               _buUploadProtocol
-              _buPp
+              (Just _buPp)
               _buAccessToken
               _buBeaconName
               _buUploadType
@@ -228,7 +243,9 @@ instance GoogleRequest BeaconsUpdate' where
               _buOauthToken
               _buFields
               _buCallback
-              _buAlt
+              (Just _buAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BeaconsUpdateResource)
+                      r
                       u

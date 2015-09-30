@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryBookshelvesClearVolumes@.
-module Books.Mylibrary.Bookshelves.ClearVolumes
+module Network.Google.Resource.Books.Mylibrary.Bookshelves.ClearVolumes
     (
     -- * REST Resource
-      MylibraryBookshelvesClearVolumesAPI
+      MylibraryBookshelvesClearVolumesResource
 
     -- * Creating a Request
-    , mylibraryBookshelvesClearVolumes
-    , MylibraryBookshelvesClearVolumes
+    , mylibraryBookshelvesClearVolumes'
+    , MylibraryBookshelvesClearVolumes'
 
     -- * Request Lenses
     , mbcvQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryBookshelvesClearVolumes@ which the
--- 'MylibraryBookshelvesClearVolumes' request conforms to.
-type MylibraryBookshelvesClearVolumesAPI =
+-- 'MylibraryBookshelvesClearVolumes'' request conforms to.
+type MylibraryBookshelvesClearVolumesResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
            "clearVolumes" :>
-             QueryParam "source" Text :> Post '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Clears all volumes from a bookshelf.
 --
--- /See:/ 'mylibraryBookshelvesClearVolumes' smart constructor.
-data MylibraryBookshelvesClearVolumes = MylibraryBookshelvesClearVolumes
+-- /See:/ 'mylibraryBookshelvesClearVolumes'' smart constructor.
+data MylibraryBookshelvesClearVolumes' = MylibraryBookshelvesClearVolumes'
     { _mbcvQuotaUser   :: !(Maybe Text)
     , _mbcvPrettyPrint :: !Bool
     , _mbcvUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data MylibraryBookshelvesClearVolumes = MylibraryBookshelvesClearVolumes
     , _mbcvSource      :: !(Maybe Text)
     , _mbcvOauthToken  :: !(Maybe Text)
     , _mbcvFields      :: !(Maybe Text)
-    , _mbcvAlt         :: !Text
+    , _mbcvAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryBookshelvesClearVolumes'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data MylibraryBookshelvesClearVolumes = MylibraryBookshelvesClearVolumes
 -- * 'mbcvFields'
 --
 -- * 'mbcvAlt'
-mylibraryBookshelvesClearVolumes
+mylibraryBookshelvesClearVolumes'
     :: Text -- ^ 'shelf'
-    -> MylibraryBookshelvesClearVolumes
-mylibraryBookshelvesClearVolumes pMbcvShelf_ =
-    MylibraryBookshelvesClearVolumes
+    -> MylibraryBookshelvesClearVolumes'
+mylibraryBookshelvesClearVolumes' pMbcvShelf_ =
+    MylibraryBookshelvesClearVolumes'
     { _mbcvQuotaUser = Nothing
     , _mbcvPrettyPrint = True
     , _mbcvUserIp = Nothing
@@ -101,7 +109,7 @@ mylibraryBookshelvesClearVolumes pMbcvShelf_ =
     , _mbcvSource = Nothing
     , _mbcvOauthToken = Nothing
     , _mbcvFields = Nothing
-    , _mbcvAlt = "json"
+    , _mbcvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,7 +160,7 @@ mbcvFields
   = lens _mbcvFields (\ s a -> s{_mbcvFields = a})
 
 -- | Data format for the response.
-mbcvAlt :: Lens' MylibraryBookshelvesClearVolumes' Text
+mbcvAlt :: Lens' MylibraryBookshelvesClearVolumes' Alt
 mbcvAlt = lens _mbcvAlt (\ s a -> s{_mbcvAlt = a})
 
 instance GoogleRequest
@@ -160,16 +168,18 @@ instance GoogleRequest
         type Rs MylibraryBookshelvesClearVolumes' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MylibraryBookshelvesClearVolumes{..}
-          = go _mbcvQuotaUser _mbcvPrettyPrint _mbcvUserIp
+          MylibraryBookshelvesClearVolumes'{..}
+          = go _mbcvQuotaUser (Just _mbcvPrettyPrint)
+              _mbcvUserIp
               _mbcvShelf
               _mbcvKey
               _mbcvSource
               _mbcvOauthToken
               _mbcvFields
-              _mbcvAlt
+              (Just _mbcvAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryBookshelvesClearVolumesAPI)
+                      (Proxy ::
+                         Proxy MylibraryBookshelvesClearVolumesResource)
                       r
                       u

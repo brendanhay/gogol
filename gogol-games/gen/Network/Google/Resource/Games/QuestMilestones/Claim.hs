@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- authorized user.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestMilestonesClaim@.
-module Games.QuestMilestones.Claim
+module Network.Google.Resource.Games.QuestMilestones.Claim
     (
     -- * REST Resource
-      QuestMilestonesClaimAPI
+      QuestMilestonesClaimResource
 
     -- * Creating a Request
-    , questMilestonesClaim
-    , QuestMilestonesClaim
+    , questMilestonesClaim'
+    , QuestMilestonesClaim'
 
     -- * Request Lenses
     , qmcRequestId
@@ -47,21 +48,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesQuestMilestonesClaim@ which the
--- 'QuestMilestonesClaim' request conforms to.
-type QuestMilestonesClaimAPI =
+-- 'QuestMilestonesClaim'' request conforms to.
+type QuestMilestonesClaimResource =
      "quests" :>
        Capture "questId" Text :>
          "milestones" :>
            Capture "milestoneId" Text :>
              "claim" :>
-               QueryParam "requestId" Int64 :> Put '[JSON] ()
+               QueryParam "requestId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Report that a reward for the milestone corresponding to milestoneId for
 -- the quest corresponding to questId has been claimed by the currently
 -- authorized user.
 --
--- /See:/ 'questMilestonesClaim' smart constructor.
-data QuestMilestonesClaim = QuestMilestonesClaim
+-- /See:/ 'questMilestonesClaim'' smart constructor.
+data QuestMilestonesClaim' = QuestMilestonesClaim'
     { _qmcRequestId   :: !Int64
     , _qmcQuotaUser   :: !(Maybe Text)
     , _qmcPrettyPrint :: !Bool
@@ -71,7 +79,7 @@ data QuestMilestonesClaim = QuestMilestonesClaim
     , _qmcOauthToken  :: !(Maybe Text)
     , _qmcQuestId     :: !Text
     , _qmcFields      :: !(Maybe Text)
-    , _qmcAlt         :: !Text
+    , _qmcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestMilestonesClaim'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data QuestMilestonesClaim = QuestMilestonesClaim
 -- * 'qmcFields'
 --
 -- * 'qmcAlt'
-questMilestonesClaim
+questMilestonesClaim'
     :: Int64 -- ^ 'requestId'
     -> Text -- ^ 'milestoneId'
     -> Text -- ^ 'questId'
-    -> QuestMilestonesClaim
-questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
-    QuestMilestonesClaim
+    -> QuestMilestonesClaim'
+questMilestonesClaim' pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
+    QuestMilestonesClaim'
     { _qmcRequestId = pQmcRequestId_
     , _qmcQuotaUser = Nothing
     , _qmcPrettyPrint = True
@@ -113,7 +121,7 @@ questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
     , _qmcOauthToken = Nothing
     , _qmcQuestId = pQmcQuestId_
     , _qmcFields = Nothing
-    , _qmcAlt = "json"
+    , _qmcAlt = JSON
     }
 
 -- | A numeric ID to ensure that the request is handled correctly across
@@ -170,24 +178,24 @@ qmcFields
   = lens _qmcFields (\ s a -> s{_qmcFields = a})
 
 -- | Data format for the response.
-qmcAlt :: Lens' QuestMilestonesClaim' Text
+qmcAlt :: Lens' QuestMilestonesClaim' Alt
 qmcAlt = lens _qmcAlt (\ s a -> s{_qmcAlt = a})
 
 instance GoogleRequest QuestMilestonesClaim' where
         type Rs QuestMilestonesClaim' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestMilestonesClaim{..}
+        requestWithRoute r u QuestMilestonesClaim'{..}
           = go (Just _qmcRequestId) _qmcQuotaUser
-              _qmcPrettyPrint
+              (Just _qmcPrettyPrint)
               _qmcUserIp
               _qmcMilestoneId
               _qmcKey
               _qmcOauthToken
               _qmcQuestId
               _qmcFields
-              _qmcAlt
+              (Just _qmcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QuestMilestonesClaimAPI)
+                      (Proxy :: Proxy QuestMilestonesClaimResource)
                       r
                       u

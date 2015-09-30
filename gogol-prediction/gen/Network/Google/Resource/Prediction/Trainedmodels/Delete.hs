@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a trained model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsDelete@.
-module Prediction.Trainedmodels.Delete
+module Network.Google.Resource.Prediction.Trainedmodels.Delete
     (
     -- * REST Resource
-      TrainedmodelsDeleteAPI
+      TrainedmodelsDeleteResource
 
     -- * Creating a Request
-    , trainedmodelsDelete
-    , TrainedmodelsDelete
+    , trainedmodelsDelete'
+    , TrainedmodelsDelete'
 
     -- * Request Lenses
     , tdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsDelete@ which the
--- 'TrainedmodelsDelete' request conforms to.
-type TrainedmodelsDeleteAPI =
+-- 'TrainedmodelsDelete'' request conforms to.
+type TrainedmodelsDeleteResource =
      Capture "project" Text :>
        "trainedmodels" :>
-         Capture "id" Text :> Delete '[JSON] ()
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a trained model.
 --
--- /See:/ 'trainedmodelsDelete' smart constructor.
-data TrainedmodelsDelete = TrainedmodelsDelete
+-- /See:/ 'trainedmodelsDelete'' smart constructor.
+data TrainedmodelsDelete' = TrainedmodelsDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdProject     :: !Text
@@ -62,7 +70,7 @@ data TrainedmodelsDelete = TrainedmodelsDelete
     , _tdId          :: !Text
     , _tdOauthToken  :: !(Maybe Text)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsDelete'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data TrainedmodelsDelete = TrainedmodelsDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-trainedmodelsDelete
+trainedmodelsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
-    -> TrainedmodelsDelete
-trainedmodelsDelete pTdProject_ pTdId_ =
-    TrainedmodelsDelete
+    -> TrainedmodelsDelete'
+trainedmodelsDelete' pTdProject_ pTdId_ =
+    TrainedmodelsDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
     , _tdProject = pTdProject_
@@ -100,7 +108,7 @@ trainedmodelsDelete pTdProject_ pTdId_ =
     , _tdId = pTdId_
     , _tdOauthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,21 +154,22 @@ tdFields :: Lens' TrainedmodelsDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TrainedmodelsDelete' Text
+tdAlt :: Lens' TrainedmodelsDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TrainedmodelsDelete' where
         type Rs TrainedmodelsDelete' = ()
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsDelete{..}
-          = go _tdQuotaUser _tdPrettyPrint _tdProject _tdUserIp
+        requestWithRoute r u TrainedmodelsDelete'{..}
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdProject
+              _tdUserIp
               _tdKey
               _tdId
               _tdOauthToken
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsDeleteAPI)
+                      (Proxy :: Proxy TrainedmodelsDeleteResource)
                       r
                       u

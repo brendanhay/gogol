@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionInsert@.
-module DoubleClickSearch.Conversion.Insert
+module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
     (
     -- * REST Resource
-      ConversionInsertAPI
+      ConversionInsertResource
 
     -- * Creating a Request
-    , conversionInsert
-    , ConversionInsert
+    , conversionInsert'
+    , ConversionInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchConversionInsert@ which the
--- 'ConversionInsert' request conforms to.
-type ConversionInsertAPI =
-     "conversion" :> Post '[JSON] ConversionList
+-- 'ConversionInsert'' request conforms to.
+type ConversionInsertResource =
+     "conversion" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] ConversionList
 
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ 'conversionInsert' smart constructor.
-data ConversionInsert = ConversionInsert
+-- /See:/ 'conversionInsert'' smart constructor.
+data ConversionInsert' = ConversionInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
     , _ciKey         :: !(Maybe Text)
     , _ciOauthToken  :: !(Maybe Text)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data ConversionInsert = ConversionInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-conversionInsert
-    :: ConversionInsert
-conversionInsert =
-    ConversionInsert
+conversionInsert'
+    :: ConversionInsert'
+conversionInsert' =
+    ConversionInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,20 +131,21 @@ ciFields :: Lens' ConversionInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' ConversionInsert' Text
+ciAlt :: Lens' ConversionInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest ConversionInsert' where
         type Rs ConversionInsert' = ConversionList
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp _ciKey
+        requestWithRoute r u ConversionInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ConversionInsertAPI)
+                      (Proxy :: Proxy ConversionInsertResource)
                       r
                       u

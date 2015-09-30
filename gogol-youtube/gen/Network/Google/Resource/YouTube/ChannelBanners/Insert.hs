@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -27,14 +28,14 @@
 -- obtained in step 2.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelBannersInsert@.
-module YouTube.ChannelBanners.Insert
+module Network.Google.Resource.YouTube.ChannelBanners.Insert
     (
     -- * REST Resource
-      ChannelBannersInsertAPI
+      ChannelBannersInsertResource
 
     -- * Creating a Request
-    , channelBannersInsert
-    , ChannelBannersInsert
+    , channelBannersInsert'
+    , ChannelBannersInsert'
 
     -- * Request Lenses
     , cbiQuotaUser
@@ -51,12 +52,19 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelBannersInsert@ which the
--- 'ChannelBannersInsert' request conforms to.
-type ChannelBannersInsertAPI =
+-- 'ChannelBannersInsert'' request conforms to.
+type ChannelBannersInsertResource =
      "channelBanners" :>
        "insert" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Post '[JSON] ChannelBannerResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
@@ -68,8 +76,8 @@ type ChannelBannersInsertAPI =
 -- brandingSettings.image.bannerExternalUrl property\'s value to the URL
 -- obtained in step 2.
 --
--- /See:/ 'channelBannersInsert' smart constructor.
-data ChannelBannersInsert = ChannelBannersInsert
+-- /See:/ 'channelBannersInsert'' smart constructor.
+data ChannelBannersInsert' = ChannelBannersInsert'
     { _cbiQuotaUser              :: !(Maybe Text)
     , _cbiPrettyPrint            :: !Bool
     , _cbiUserIp                 :: !(Maybe Text)
@@ -77,7 +85,7 @@ data ChannelBannersInsert = ChannelBannersInsert
     , _cbiKey                    :: !(Maybe Text)
     , _cbiOauthToken             :: !(Maybe Text)
     , _cbiFields                 :: !(Maybe Text)
-    , _cbiAlt                    :: !Text
+    , _cbiAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelBannersInsert'' with the minimum fields required to make a request.
@@ -99,10 +107,10 @@ data ChannelBannersInsert = ChannelBannersInsert
 -- * 'cbiFields'
 --
 -- * 'cbiAlt'
-channelBannersInsert
-    :: ChannelBannersInsert
-channelBannersInsert =
-    ChannelBannersInsert
+channelBannersInsert'
+    :: ChannelBannersInsert'
+channelBannersInsert' =
+    ChannelBannersInsert'
     { _cbiQuotaUser = Nothing
     , _cbiPrettyPrint = True
     , _cbiUserIp = Nothing
@@ -110,7 +118,7 @@ channelBannersInsert =
     , _cbiKey = Nothing
     , _cbiOauthToken = Nothing
     , _cbiFields = Nothing
-    , _cbiAlt = "json"
+    , _cbiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,21 +173,21 @@ cbiFields
   = lens _cbiFields (\ s a -> s{_cbiFields = a})
 
 -- | Data format for the response.
-cbiAlt :: Lens' ChannelBannersInsert' Text
+cbiAlt :: Lens' ChannelBannersInsert' Alt
 cbiAlt = lens _cbiAlt (\ s a -> s{_cbiAlt = a})
 
 instance GoogleRequest ChannelBannersInsert' where
         type Rs ChannelBannersInsert' = ChannelBannerResource
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelBannersInsert{..}
-          = go _cbiQuotaUser _cbiPrettyPrint _cbiUserIp
+        requestWithRoute r u ChannelBannersInsert'{..}
+          = go _cbiQuotaUser (Just _cbiPrettyPrint) _cbiUserIp
               _cbiOnBehalfOfContentOwner
               _cbiKey
               _cbiOauthToken
               _cbiFields
-              _cbiAlt
+              (Just _cbiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChannelBannersInsertAPI)
+                      (Proxy :: Proxy ChannelBannersInsertResource)
                       r
                       u

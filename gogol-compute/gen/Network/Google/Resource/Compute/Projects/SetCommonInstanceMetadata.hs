@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsSetCommonInstanceMetadata@.
-module Compute.Projects.SetCommonInstanceMetadata
+module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
     (
     -- * REST Resource
-      ProjectsSetCommonInstanceMetadataAPI
+      ProjectsSetCommonInstanceMetadataResource
 
     -- * Creating a Request
-    , projectsSetCommonInstanceMetadata
-    , ProjectsSetCommonInstanceMetadata
+    , projectsSetCommonInstanceMetadata'
+    , ProjectsSetCommonInstanceMetadata'
 
     -- * Request Lenses
     , pscimQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeProjectsSetCommonInstanceMetadata@ which the
--- 'ProjectsSetCommonInstanceMetadata' request conforms to.
-type ProjectsSetCommonInstanceMetadataAPI =
+-- 'ProjectsSetCommonInstanceMetadata'' request conforms to.
+type ProjectsSetCommonInstanceMetadataResource =
      Capture "project" Text :>
-       "setCommonInstanceMetadata" :> Post '[JSON] Operation
+       "setCommonInstanceMetadata" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets metadata common to all instances within the specified project using
 -- the data included in the request.
 --
--- /See:/ 'projectsSetCommonInstanceMetadata' smart constructor.
-data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata
+-- /See:/ 'projectsSetCommonInstanceMetadata'' smart constructor.
+data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
     { _pscimQuotaUser   :: !(Maybe Text)
     , _pscimPrettyPrint :: !Bool
     , _pscimProject     :: !Text
@@ -61,7 +69,7 @@ data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata
     , _pscimKey         :: !(Maybe Text)
     , _pscimOauthToken  :: !(Maybe Text)
     , _pscimFields      :: !(Maybe Text)
-    , _pscimAlt         :: !Text
+    , _pscimAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetCommonInstanceMetadata'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata
 -- * 'pscimFields'
 --
 -- * 'pscimAlt'
-projectsSetCommonInstanceMetadata
+projectsSetCommonInstanceMetadata'
     :: Text -- ^ 'project'
-    -> ProjectsSetCommonInstanceMetadata
-projectsSetCommonInstanceMetadata pPscimProject_ =
-    ProjectsSetCommonInstanceMetadata
+    -> ProjectsSetCommonInstanceMetadata'
+projectsSetCommonInstanceMetadata' pPscimProject_ =
+    ProjectsSetCommonInstanceMetadata'
     { _pscimQuotaUser = Nothing
     , _pscimPrettyPrint = True
     , _pscimProject = pPscimProject_
@@ -95,7 +103,7 @@ projectsSetCommonInstanceMetadata pPscimProject_ =
     , _pscimKey = Nothing
     , _pscimOauthToken = Nothing
     , _pscimFields = Nothing
-    , _pscimAlt = "json"
+    , _pscimAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ pscimFields
   = lens _pscimFields (\ s a -> s{_pscimFields = a})
 
 -- | Data format for the response.
-pscimAlt :: Lens' ProjectsSetCommonInstanceMetadata' Text
+pscimAlt :: Lens' ProjectsSetCommonInstanceMetadata' Alt
 pscimAlt = lens _pscimAlt (\ s a -> s{_pscimAlt = a})
 
 instance GoogleRequest
@@ -150,15 +158,17 @@ instance GoogleRequest
              Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          ProjectsSetCommonInstanceMetadata{..}
-          = go _pscimQuotaUser _pscimPrettyPrint _pscimProject
+          ProjectsSetCommonInstanceMetadata'{..}
+          = go _pscimQuotaUser (Just _pscimPrettyPrint)
+              _pscimProject
               _pscimUserIp
               _pscimKey
               _pscimOauthToken
               _pscimFields
-              _pscimAlt
+              (Just _pscimAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSetCommonInstanceMetadataAPI)
+                      (Proxy ::
+                         Proxy ProjectsSetCommonInstanceMetadataResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,175 +20,185 @@
 -- | List all ad units in the specified ad client for this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdunitsList@.
-module AdSense.Adunits.List
+module Network.Google.Resource.AdSense.Adunits.List
     (
     -- * REST Resource
-      AdunitsListAPI
+      AdunitsListResource
 
     -- * Creating a Request
-    , adunitsList
-    , AdunitsList
+    , adunitsList'
+    , AdunitsList'
 
     -- * Request Lenses
-    , aaQuotaUser
-    , aaPrettyPrint
-    , aaIncludeInactive
-    , aaUserIp
-    , aaAdClientId
-    , aaKey
-    , aaPageToken
-    , aaOauthToken
-    , aaMaxResults
-    , aaFields
-    , aaAlt
+    , aQuotaUser
+    , aPrettyPrint
+    , aIncludeInactive
+    , aUserIp
+    , aAdClientId
+    , aKey
+    , aPageToken
+    , aOauthToken
+    , aMaxResults
+    , aFields
+    , aAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdunitsList@ which the
--- 'AdunitsList' request conforms to.
-type AdunitsListAPI =
+-- 'AdunitsList'' request conforms to.
+type AdunitsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "adunits" :>
-           QueryParam "includeInactive" Bool :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :> Get '[JSON] AdUnits
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "includeInactive" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] AdUnits
 
 -- | List all ad units in the specified ad client for this AdSense account.
 --
--- /See:/ 'adunitsList' smart constructor.
-data AdunitsList = AdunitsList
-    { _aaQuotaUser       :: !(Maybe Text)
-    , _aaPrettyPrint     :: !Bool
-    , _aaIncludeInactive :: !(Maybe Bool)
-    , _aaUserIp          :: !(Maybe Text)
-    , _aaAdClientId      :: !Text
-    , _aaKey             :: !(Maybe Text)
-    , _aaPageToken       :: !(Maybe Text)
-    , _aaOauthToken      :: !(Maybe Text)
-    , _aaMaxResults      :: !(Maybe Int32)
-    , _aaFields          :: !(Maybe Text)
-    , _aaAlt             :: !Text
+-- /See:/ 'adunitsList'' smart constructor.
+data AdunitsList' = AdunitsList'
+    { _aQuotaUser       :: !(Maybe Text)
+    , _aPrettyPrint     :: !Bool
+    , _aIncludeInactive :: !(Maybe Bool)
+    , _aUserIp          :: !(Maybe Text)
+    , _aAdClientId      :: !Text
+    , _aKey             :: !(Maybe Text)
+    , _aPageToken       :: !(Maybe Text)
+    , _aOauthToken      :: !(Maybe Text)
+    , _aMaxResults      :: !(Maybe Int32)
+    , _aFields          :: !(Maybe Text)
+    , _aAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdunitsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaQuotaUser'
+-- * 'aQuotaUser'
 --
--- * 'aaPrettyPrint'
+-- * 'aPrettyPrint'
 --
--- * 'aaIncludeInactive'
+-- * 'aIncludeInactive'
 --
--- * 'aaUserIp'
+-- * 'aUserIp'
 --
--- * 'aaAdClientId'
+-- * 'aAdClientId'
 --
--- * 'aaKey'
+-- * 'aKey'
 --
--- * 'aaPageToken'
+-- * 'aPageToken'
 --
--- * 'aaOauthToken'
+-- * 'aOauthToken'
 --
--- * 'aaMaxResults'
+-- * 'aMaxResults'
 --
--- * 'aaFields'
+-- * 'aFields'
 --
--- * 'aaAlt'
-adunitsList
+-- * 'aAlt'
+adunitsList'
     :: Text -- ^ 'adClientId'
-    -> AdunitsList
-adunitsList pAaAdClientId_ =
-    AdunitsList
-    { _aaQuotaUser = Nothing
-    , _aaPrettyPrint = True
-    , _aaIncludeInactive = Nothing
-    , _aaUserIp = Nothing
-    , _aaAdClientId = pAaAdClientId_
-    , _aaKey = Nothing
-    , _aaPageToken = Nothing
-    , _aaOauthToken = Nothing
-    , _aaMaxResults = Nothing
-    , _aaFields = Nothing
-    , _aaAlt = "json"
+    -> AdunitsList'
+adunitsList' pAAdClientId_ =
+    AdunitsList'
+    { _aQuotaUser = Nothing
+    , _aPrettyPrint = True
+    , _aIncludeInactive = Nothing
+    , _aUserIp = Nothing
+    , _aAdClientId = pAAdClientId_
+    , _aKey = Nothing
+    , _aPageToken = Nothing
+    , _aOauthToken = Nothing
+    , _aMaxResults = Nothing
+    , _aFields = Nothing
+    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aaQuotaUser :: Lens' AdunitsList' (Maybe Text)
-aaQuotaUser
-  = lens _aaQuotaUser (\ s a -> s{_aaQuotaUser = a})
+aQuotaUser :: Lens' AdunitsList' (Maybe Text)
+aQuotaUser
+  = lens _aQuotaUser (\ s a -> s{_aQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aaPrettyPrint :: Lens' AdunitsList' Bool
-aaPrettyPrint
-  = lens _aaPrettyPrint
-      (\ s a -> s{_aaPrettyPrint = a})
+aPrettyPrint :: Lens' AdunitsList' Bool
+aPrettyPrint
+  = lens _aPrettyPrint (\ s a -> s{_aPrettyPrint = a})
 
 -- | Whether to include inactive ad units. Default: true.
-aaIncludeInactive :: Lens' AdunitsList' (Maybe Bool)
-aaIncludeInactive
-  = lens _aaIncludeInactive
-      (\ s a -> s{_aaIncludeInactive = a})
+aIncludeInactive :: Lens' AdunitsList' (Maybe Bool)
+aIncludeInactive
+  = lens _aIncludeInactive
+      (\ s a -> s{_aIncludeInactive = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aaUserIp :: Lens' AdunitsList' (Maybe Text)
-aaUserIp = lens _aaUserIp (\ s a -> s{_aaUserIp = a})
+aUserIp :: Lens' AdunitsList' (Maybe Text)
+aUserIp = lens _aUserIp (\ s a -> s{_aUserIp = a})
 
 -- | Ad client for which to list ad units.
-aaAdClientId :: Lens' AdunitsList' Text
-aaAdClientId
-  = lens _aaAdClientId (\ s a -> s{_aaAdClientId = a})
+aAdClientId :: Lens' AdunitsList' Text
+aAdClientId
+  = lens _aAdClientId (\ s a -> s{_aAdClientId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaKey :: Lens' AdunitsList' (Maybe Text)
-aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
+aKey :: Lens' AdunitsList' (Maybe Text)
+aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | A continuation token, used to page through ad units. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aaPageToken :: Lens' AdunitsList' (Maybe Text)
-aaPageToken
-  = lens _aaPageToken (\ s a -> s{_aaPageToken = a})
+aPageToken :: Lens' AdunitsList' (Maybe Text)
+aPageToken
+  = lens _aPageToken (\ s a -> s{_aPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aaOauthToken :: Lens' AdunitsList' (Maybe Text)
-aaOauthToken
-  = lens _aaOauthToken (\ s a -> s{_aaOauthToken = a})
+aOauthToken :: Lens' AdunitsList' (Maybe Text)
+aOauthToken
+  = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
 
 -- | The maximum number of ad units to include in the response, used for
 -- paging.
-aaMaxResults :: Lens' AdunitsList' (Maybe Int32)
-aaMaxResults
-  = lens _aaMaxResults (\ s a -> s{_aaMaxResults = a})
+aMaxResults :: Lens' AdunitsList' (Maybe Int32)
+aMaxResults
+  = lens _aMaxResults (\ s a -> s{_aMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aaFields :: Lens' AdunitsList' (Maybe Text)
-aaFields = lens _aaFields (\ s a -> s{_aaFields = a})
+aFields :: Lens' AdunitsList' (Maybe Text)
+aFields = lens _aFields (\ s a -> s{_aFields = a})
 
 -- | Data format for the response.
-aaAlt :: Lens' AdunitsList' Text
-aaAlt = lens _aaAlt (\ s a -> s{_aaAlt = a})
+aAlt :: Lens' AdunitsList' Alt
+aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
 
 instance GoogleRequest AdunitsList' where
         type Rs AdunitsList' = AdUnits
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AdunitsList{..}
-          = go _aaQuotaUser _aaPrettyPrint _aaIncludeInactive
-              _aaUserIp
-              _aaAdClientId
-              _aaKey
-              _aaPageToken
-              _aaOauthToken
-              _aaMaxResults
-              _aaFields
-              _aaAlt
+        requestWithRoute r u AdunitsList'{..}
+          = go _aQuotaUser (Just _aPrettyPrint)
+              _aIncludeInactive
+              _aUserIp
+              _aAdClientId
+              _aKey
+              _aPageToken
+              _aOauthToken
+              _aMaxResults
+              _aFields
+              (Just _aAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdunitsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy AdunitsListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAdclientsGet@.
-module AdSenseHost.Adclients.Get
+module Network.Google.Resource.AdSenseHost.Adclients.Get
     (
     -- * REST Resource
-      AdclientsGetAPI
+      AdclientsGetResource
 
     -- * Creating a Request
-    , adclientsGet
-    , AdclientsGet
+    , adclientsGet'
+    , AdclientsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAdclientsGet@ which the
--- 'AdclientsGet' request conforms to.
-type AdclientsGetAPI =
+-- 'AdclientsGet'' request conforms to.
+type AdclientsGetResource =
      "adclients" :>
-       Capture "adClientId" Text :> Get '[JSON] AdClient
+       Capture "adClientId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] AdClient
 
 -- | Get information about one of the ad clients in the Host AdSense account.
 --
--- /See:/ 'adclientsGet' smart constructor.
-data AdclientsGet = AdclientsGet
+-- /See:/ 'adclientsGet'' smart constructor.
+data AdclientsGet' = AdclientsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AdclientsGet = AdclientsGet
     , _agKey         :: !(Maybe Text)
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdclientsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AdclientsGet = AdclientsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-adclientsGet
+adclientsGet'
     :: Text -- ^ 'adClientId'
-    -> AdclientsGet
-adclientsGet pAgAdClientId_ =
-    AdclientsGet
+    -> AdclientsGet'
+adclientsGet' pAgAdClientId_ =
+    AdclientsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -93,7 +101,7 @@ adclientsGet pAgAdClientId_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ agFields :: Lens' AdclientsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AdclientsGet' Text
+agAlt :: Lens' AdclientsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AdclientsGet' where
         type Rs AdclientsGet' = AdClient
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AdclientsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u AdclientsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agAdClientId
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdclientsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AdclientsGetResource)
+                      r
                       u

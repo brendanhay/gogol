@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Assign License.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsInsert@.
-module Licensing.LicenseAssignments.Insert
+module Network.Google.Resource.Licensing.LicenseAssignments.Insert
     (
     -- * REST Resource
-      LicenseAssignmentsInsertAPI
+      LicenseAssignmentsInsertResource
 
     -- * Creating a Request
-    , licenseAssignmentsInsert
-    , LicenseAssignmentsInsert
+    , licenseAssignmentsInsert'
+    , LicenseAssignmentsInsert'
 
     -- * Request Lenses
     , laiQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsInsert@ which the
--- 'LicenseAssignmentsInsert' request conforms to.
-type LicenseAssignmentsInsertAPI =
+-- 'LicenseAssignmentsInsert'' request conforms to.
+type LicenseAssignmentsInsertResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
-           "user" :> Post '[JSON] LicenseAssignment
+           "user" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] LicenseAssignment
 
 -- | Assign License.
 --
--- /See:/ 'licenseAssignmentsInsert' smart constructor.
-data LicenseAssignmentsInsert = LicenseAssignmentsInsert
+-- /See:/ 'licenseAssignmentsInsert'' smart constructor.
+data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
     { _laiQuotaUser   :: !(Maybe Text)
     , _laiPrettyPrint :: !Bool
     , _laiUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data LicenseAssignmentsInsert = LicenseAssignmentsInsert
     , _laiOauthToken  :: !(Maybe Text)
     , _laiProductId   :: !Text
     , _laiFields      :: !(Maybe Text)
-    , _laiAlt         :: !Text
+    , _laiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsInsert'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data LicenseAssignmentsInsert = LicenseAssignmentsInsert
 -- * 'laiFields'
 --
 -- * 'laiAlt'
-licenseAssignmentsInsert
+licenseAssignmentsInsert'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsInsert
-licenseAssignmentsInsert pLaiSkuId_ pLaiProductId_ =
-    LicenseAssignmentsInsert
+    -> LicenseAssignmentsInsert'
+licenseAssignmentsInsert' pLaiSkuId_ pLaiProductId_ =
+    LicenseAssignmentsInsert'
     { _laiQuotaUser = Nothing
     , _laiPrettyPrint = True
     , _laiUserIp = Nothing
@@ -101,7 +110,7 @@ licenseAssignmentsInsert pLaiSkuId_ pLaiProductId_ =
     , _laiOauthToken = Nothing
     , _laiProductId = pLaiProductId_
     , _laiFields = Nothing
-    , _laiAlt = "json"
+    , _laiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,23 +159,23 @@ laiFields
   = lens _laiFields (\ s a -> s{_laiFields = a})
 
 -- | Data format for the response.
-laiAlt :: Lens' LicenseAssignmentsInsert' Text
+laiAlt :: Lens' LicenseAssignmentsInsert' Alt
 laiAlt = lens _laiAlt (\ s a -> s{_laiAlt = a})
 
 instance GoogleRequest LicenseAssignmentsInsert'
          where
         type Rs LicenseAssignmentsInsert' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsInsert{..}
-          = go _laiQuotaUser _laiPrettyPrint _laiUserIp
+        requestWithRoute r u LicenseAssignmentsInsert'{..}
+          = go _laiQuotaUser (Just _laiPrettyPrint) _laiUserIp
               _laiSkuId
               _laiKey
               _laiOauthToken
               _laiProductId
               _laiFields
-              _laiAlt
+              (Just _laiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsInsertAPI)
+                      (Proxy :: Proxy LicenseAssignmentsInsertResource)
                       r
                       u

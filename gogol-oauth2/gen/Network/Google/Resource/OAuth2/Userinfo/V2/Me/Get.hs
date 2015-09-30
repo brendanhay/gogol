@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @Oauth2UserinfoV2MeGet@.
-module OAuth2.Userinfo.V2.Me.Get
+module Network.Google.Resource.OAuth2.Userinfo.V2.Me.Get
     (
     -- * REST Resource
-      UserinfoV2MeGetAPI
+      UserinfoV2MeGetResource
 
     -- * Creating a Request
-    , userinfoV2MeGet
-    , UserinfoV2MeGet
+    , userinfoV2MeGet'
+    , UserinfoV2MeGet'
 
     -- * Request Lenses
     , uvmgQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @Oauth2UserinfoV2MeGet@ which the
--- 'UserinfoV2MeGet' request conforms to.
-type UserinfoV2MeGetAPI =
+-- 'UserinfoV2MeGet'' request conforms to.
+type UserinfoV2MeGetResource =
      "userinfo" :>
-       "v2" :> "me" :> Get '[JSON] Userinfoplus
+       "v2" :>
+         "me" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Userinfoplus
 
 --
--- /See:/ 'userinfoV2MeGet' smart constructor.
-data UserinfoV2MeGet = UserinfoV2MeGet
+-- /See:/ 'userinfoV2MeGet'' smart constructor.
+data UserinfoV2MeGet' = UserinfoV2MeGet'
     { _uvmgQuotaUser   :: !(Maybe Text)
     , _uvmgPrettyPrint :: !Bool
     , _uvmgUserIp      :: !(Maybe Text)
     , _uvmgKey         :: !(Maybe Text)
     , _uvmgOauthToken  :: !(Maybe Text)
     , _uvmgFields      :: !(Maybe Text)
-    , _uvmgAlt         :: !Text
+    , _uvmgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserinfoV2MeGet'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data UserinfoV2MeGet = UserinfoV2MeGet
 -- * 'uvmgFields'
 --
 -- * 'uvmgAlt'
-userinfoV2MeGet
-    :: UserinfoV2MeGet
-userinfoV2MeGet =
-    UserinfoV2MeGet
+userinfoV2MeGet'
+    :: UserinfoV2MeGet'
+userinfoV2MeGet' =
+    UserinfoV2MeGet'
     { _uvmgQuotaUser = Nothing
     , _uvmgPrettyPrint = True
     , _uvmgUserIp = Nothing
     , _uvmgKey = Nothing
     , _uvmgOauthToken = Nothing
     , _uvmgFields = Nothing
-    , _uvmgAlt = "json"
+    , _uvmgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +136,21 @@ uvmgFields
   = lens _uvmgFields (\ s a -> s{_uvmgFields = a})
 
 -- | Data format for the response.
-uvmgAlt :: Lens' UserinfoV2MeGet' Text
+uvmgAlt :: Lens' UserinfoV2MeGet' Alt
 uvmgAlt = lens _uvmgAlt (\ s a -> s{_uvmgAlt = a})
 
 instance GoogleRequest UserinfoV2MeGet' where
         type Rs UserinfoV2MeGet' = Userinfoplus
         request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u UserinfoV2MeGet{..}
-          = go _uvmgQuotaUser _uvmgPrettyPrint _uvmgUserIp
+        requestWithRoute r u UserinfoV2MeGet'{..}
+          = go _uvmgQuotaUser (Just _uvmgPrettyPrint)
+              _uvmgUserIp
               _uvmgKey
               _uvmgOauthToken
               _uvmgFields
-              _uvmgAlt
+              (Just _uvmgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserinfoV2MeGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserinfoV2MeGetResource)
                       r
                       u

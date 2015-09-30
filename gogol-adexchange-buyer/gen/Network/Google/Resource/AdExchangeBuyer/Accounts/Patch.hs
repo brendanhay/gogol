@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsPatch@.
-module AdExchangeBuyer.Accounts.Patch
+module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     (
     -- * REST Resource
-      AccountsPatchAPI
+      AccountsPatchResource
 
     -- * Creating a Request
-    , accountsPatch
-    , AccountsPatch
+    , accountsPatch'
+    , AccountsPatch'
 
     -- * Request Lenses
     , apQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsPatch@ which the
--- 'AccountsPatch' request conforms to.
-type AccountsPatchAPI =
+-- 'AccountsPatch'' request conforms to.
+type AccountsPatchResource =
      "accounts" :>
-       Capture "id" Int32 :> Patch '[JSON] Account
+       Capture "id" Int32 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --
--- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+-- /See:/ 'accountsPatch'' smart constructor.
+data AccountsPatch' = AccountsPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AccountsPatch = AccountsPatch
     , _apId          :: !Int32
     , _apOauthToken  :: !(Maybe Text)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Text
+    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AccountsPatch = AccountsPatch
 -- * 'apFields'
 --
 -- * 'apAlt'
-accountsPatch
+accountsPatch'
     :: Int32 -- ^ 'id'
-    -> AccountsPatch
-accountsPatch pApId_ =
-    AccountsPatch
+    -> AccountsPatch'
+accountsPatch' pApId_ =
+    AccountsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIp = Nothing
@@ -93,7 +101,7 @@ accountsPatch pApId_ =
     , _apId = pApId_
     , _apOauthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = "json"
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +142,21 @@ apFields :: Lens' AccountsPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-apAlt :: Lens' AccountsPatch' Text
+apAlt :: Lens' AccountsPatch' Alt
 apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsPatch{..}
-          = go _apQuotaUser _apPrettyPrint _apUserIp _apKey
+        requestWithRoute r u AccountsPatch'{..}
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+              _apKey
               _apId
               _apOauthToken
               _apFields
-              _apAlt
+              (Just _apAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsPatchResource)
+                      r
                       u

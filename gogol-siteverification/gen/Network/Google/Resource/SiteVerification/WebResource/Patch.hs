@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourcePatch@.
-module SiteVerification.WebResource.Patch
+module Network.Google.Resource.SiteVerification.WebResource.Patch
     (
     -- * REST Resource
-      WebResourcePatchAPI
+      WebResourcePatchResource
 
     -- * Creating a Request
-    , webResourcePatch
-    , WebResourcePatch
+    , webResourcePatch'
+    , WebResourcePatch'
 
     -- * Request Lenses
     , wrpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourcePatch@ which the
--- 'WebResourcePatch' request conforms to.
-type WebResourcePatchAPI =
+-- 'WebResourcePatch'' request conforms to.
+type WebResourcePatchResource =
      "webResource" :>
        Capture "id" Text :>
-         Patch '[JSON] SiteVerificationWebResourceResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Patch '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 --
--- /See:/ 'webResourcePatch' smart constructor.
-data WebResourcePatch = WebResourcePatch
+-- /See:/ 'webResourcePatch'' smart constructor.
+data WebResourcePatch' = WebResourcePatch'
     { _wrpQuotaUser   :: !(Maybe Text)
     , _wrpPrettyPrint :: !Bool
     , _wrpUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data WebResourcePatch = WebResourcePatch
     , _wrpId          :: !Text
     , _wrpOauthToken  :: !(Maybe Text)
     , _wrpFields      :: !(Maybe Text)
-    , _wrpAlt         :: !Text
+    , _wrpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourcePatch'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data WebResourcePatch = WebResourcePatch
 -- * 'wrpFields'
 --
 -- * 'wrpAlt'
-webResourcePatch
+webResourcePatch'
     :: Text -- ^ 'id'
-    -> WebResourcePatch
-webResourcePatch pWrpId_ =
-    WebResourcePatch
+    -> WebResourcePatch'
+webResourcePatch' pWrpId_ =
+    WebResourcePatch'
     { _wrpQuotaUser = Nothing
     , _wrpPrettyPrint = False
     , _wrpUserIp = Nothing
@@ -96,7 +104,7 @@ webResourcePatch pWrpId_ =
     , _wrpId = pWrpId_
     , _wrpOauthToken = Nothing
     , _wrpFields = Nothing
-    , _wrpAlt = "json"
+    , _wrpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,22 @@ wrpFields
   = lens _wrpFields (\ s a -> s{_wrpFields = a})
 
 -- | Data format for the response.
-wrpAlt :: Lens' WebResourcePatch' Text
+wrpAlt :: Lens' WebResourcePatch' Alt
 wrpAlt = lens _wrpAlt (\ s a -> s{_wrpAlt = a})
 
 instance GoogleRequest WebResourcePatch' where
         type Rs WebResourcePatch' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourcePatch{..}
-          = go _wrpQuotaUser _wrpPrettyPrint _wrpUserIp _wrpKey
+        requestWithRoute r u WebResourcePatch'{..}
+          = go _wrpQuotaUser (Just _wrpPrettyPrint) _wrpUserIp
+              _wrpKey
               _wrpId
               _wrpOauthToken
               _wrpFields
-              _wrpAlt
+              (Just _wrpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy WebResourcePatchAPI)
+                      (Proxy :: Proxy WebResourcePatchResource)
                       r
                       u

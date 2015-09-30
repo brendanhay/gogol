@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- when retrieving all tasks for a task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksClear@.
-module Tasks.Tasks.Clear
+module Network.Google.Resource.Tasks.Tasks.Clear
     (
     -- * REST Resource
-      TasksClearAPI
+      TasksClearResource
 
     -- * Creating a Request
-    , tasksClear
-    , TasksClear
+    , tasksClear'
+    , TasksClear'
 
     -- * Request Lenses
     , tcQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TasksTasksClear@ which the
--- 'TasksClear' request conforms to.
-type TasksClearAPI =
+-- 'TasksClear'' request conforms to.
+type TasksClearResource =
      "lists" :>
-       Capture "tasklist" Text :> "clear" :> Post '[JSON] ()
+       Capture "tasklist" Text :>
+         "clear" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Clears all completed tasks from the specified task list. The affected
 -- tasks will be marked as \'hidden\' and no longer be returned by default
 -- when retrieving all tasks for a task list.
 --
--- /See:/ 'tasksClear' smart constructor.
-data TasksClear = TasksClear
+-- /See:/ 'tasksClear'' smart constructor.
+data TasksClear' = TasksClear'
     { _tcQuotaUser   :: !(Maybe Text)
     , _tcPrettyPrint :: !Bool
     , _tcUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data TasksClear = TasksClear
     , _tcTasklist    :: !Text
     , _tcOauthToken  :: !(Maybe Text)
     , _tcFields      :: !(Maybe Text)
-    , _tcAlt         :: !Text
+    , _tcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksClear'' with the minimum fields required to make a request.
@@ -85,11 +94,11 @@ data TasksClear = TasksClear
 -- * 'tcFields'
 --
 -- * 'tcAlt'
-tasksClear
+tasksClear'
     :: Text -- ^ 'tasklist'
-    -> TasksClear
-tasksClear pTcTasklist_ =
-    TasksClear
+    -> TasksClear'
+tasksClear' pTcTasklist_ =
+    TasksClear'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True
     , _tcUserIp = Nothing
@@ -97,7 +106,7 @@ tasksClear pTcTasklist_ =
     , _tcTasklist = pTcTasklist_
     , _tcOauthToken = Nothing
     , _tcFields = Nothing
-    , _tcAlt = "json"
+    , _tcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,17 +148,20 @@ tcFields :: Lens' TasksClear' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 -- | Data format for the response.
-tcAlt :: Lens' TasksClear' Text
+tcAlt :: Lens' TasksClear' Alt
 tcAlt = lens _tcAlt (\ s a -> s{_tcAlt = a})
 
 instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()
         request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksClear{..}
-          = go _tcQuotaUser _tcPrettyPrint _tcUserIp _tcKey
+        requestWithRoute r u TasksClear'{..}
+          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIp
+              _tcKey
               _tcTasklist
               _tcOauthToken
               _tcFields
-              _tcAlt
+              (Just _tcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksClearAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksClearResource)
+                      r
+                      u

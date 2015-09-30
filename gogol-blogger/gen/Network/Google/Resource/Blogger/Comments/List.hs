@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the comments for a post, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsList@.
-module Blogger.Comments.List
+module Network.Google.Resource.Blogger.Comments.List
     (
     -- * REST Resource
-      CommentsListAPI
+      CommentsListResource
 
     -- * Creating a Request
-    , commentsList
-    , CommentsList
+    , commentsList'
+    , CommentsList'
 
     -- * Request Lenses
     , clStatus
@@ -51,27 +52,34 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsList@ which the
--- 'CommentsList' request conforms to.
-type CommentsListAPI =
+-- 'CommentsList'' request conforms to.
+type CommentsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               QueryParams "status" Text :>
-                 QueryParam "endDate" UTCTime :>
-                   QueryParam "startDate" UTCTime :>
-                     QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] CommentList
+               QueryParams "status" BloggerCommentsListStatus :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "endDate" UTCTime :>
+                         QueryParam "startDate" UTCTime :>
+                           QueryParam "key" Text :>
+                             QueryParam "fetchBodies" Bool :>
+                               QueryParam "view" BloggerCommentsListView :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] CommentList
 
 -- | Retrieves the comments for a post, possibly filtered.
 --
--- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
-    { _clStatus      :: !(Maybe Text)
+-- /See:/ 'commentsList'' smart constructor.
+data CommentsList' = CommentsList'
+    { _clStatus      :: !(Maybe BloggerCommentsListStatus)
     , _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIp      :: !(Maybe Text)
@@ -80,13 +88,13 @@ data CommentsList = CommentsList
     , _clStartDate   :: !(Maybe UTCTime)
     , _clKey         :: !(Maybe Text)
     , _clFetchBodies :: !(Maybe Bool)
-    , _clView        :: !(Maybe Text)
+    , _clView        :: !(Maybe BloggerCommentsListView)
     , _clPostId      :: !Text
     , _clPageToken   :: !(Maybe Text)
     , _clOauthToken  :: !(Maybe Text)
     , _clMaxResults  :: !(Maybe Word32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -124,12 +132,12 @@ data CommentsList = CommentsList
 -- * 'clFields'
 --
 -- * 'clAlt'
-commentsList
+commentsList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
-    -> CommentsList
-commentsList pClBlogId_ pClPostId_ =
-    CommentsList
+    -> CommentsList'
+commentsList' pClBlogId_ pClPostId_ =
+    CommentsList'
     { _clStatus = Nothing
     , _clQuotaUser = Nothing
     , _clPrettyPrint = True
@@ -145,10 +153,10 @@ commentsList pClBlogId_ pClPostId_ =
     , _clOauthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
-clStatus :: Lens' CommentsList' (Maybe Text)
+clStatus :: Lens' CommentsList' (Maybe BloggerCommentsListStatus)
 clStatus = lens _clStatus (\ s a -> s{_clStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,7 +205,7 @@ clFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-clView :: Lens' CommentsList' (Maybe Text)
+clView :: Lens' CommentsList' (Maybe BloggerCommentsListView)
 clView = lens _clView (\ s a -> s{_clView = a})
 
 -- | ID of the post to fetch posts from.
@@ -224,14 +232,15 @@ clFields :: Lens' CommentsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CommentsList' Text
+clAlt :: Lens' CommentsList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsList{..}
-          = go _clStatus _clQuotaUser _clPrettyPrint _clUserIp
+        requestWithRoute r u CommentsList'{..}
+          = go _clStatus _clQuotaUser (Just _clPrettyPrint)
+              _clUserIp
               _clEndDate
               _clBlogId
               _clStartDate
@@ -243,7 +252,9 @@ instance GoogleRequest CommentsList' where
               _clOauthToken
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsListResource)
+                      r
                       u

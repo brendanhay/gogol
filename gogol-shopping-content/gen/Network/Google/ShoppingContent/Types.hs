@@ -40,6 +40,9 @@ module Network.Google.ShoppingContent.Types
     , ordersAcknowledgeRequest
     , oarOperationId
 
+    -- * ContentOrdersListStatuses
+    , ContentOrdersListStatuses (..)
+
     -- * OrderReturn
     , OrderReturn
     , orderReturn
@@ -153,6 +156,9 @@ module Network.Google.ShoppingContent.Types
     , orderShipmentLineItemShipment
     , oslisQuantity
     , oslisLineItemId
+
+    -- * ContentOrdersGettestordertemplateTemplateName
+    , ContentOrdersGettestordertemplateTemplateName (..)
 
     -- * OrdersRefundResponse
     , OrdersRefundResponse
@@ -380,6 +386,9 @@ module Network.Google.ShoppingContent.Types
     , opmLastFourDigits
     , opmType
 
+    -- * ContentOrdersListOrderBy
+    , ContentOrdersListOrderBy (..)
+
     -- * Errors
     , Errors
     , errors
@@ -429,24 +438,24 @@ module Network.Google.ShoppingContent.Types
     -- * Order
     , Order
     , order
-    , ordStatus
-    , ordMerchantId
-    , ordRefunds
-    , ordKind
-    , ordLineItems
-    , ordShipments
-    , ordNetAmount
-    , ordPlacedDate
-    , ordDeliveryDetails
-    , ordShippingOption
-    , ordMerchantOrderId
-    , ordAcknowledged
-    , ordShippingCostTax
-    , ordCustomer
-    , ordId
-    , ordPaymentMethod
-    , ordPaymentStatus
-    , ordShippingCost
+    , ooStatus
+    , ooMerchantId
+    , ooRefunds
+    , ooKind
+    , ooLineItems
+    , ooShipments
+    , ooNetAmount
+    , ooPlacedDate
+    , ooDeliveryDetails
+    , ooShippingOption
+    , ooMerchantOrderId
+    , ooAcknowledged
+    , ooShippingCostTax
+    , ooCustomer
+    , ooId
+    , ooPaymentMethod
+    , ooPaymentStatus
+    , ooShippingCost
 
     -- * OrdersCustomBatchRequestEntryReturnLineItem
     , OrdersCustomBatchRequestEntryReturnLineItem
@@ -469,6 +478,9 @@ module Network.Google.ShoppingContent.Types
     , ocbrerReason
     , ocbrerReasonText
 
+    -- * Alt
+    , Alt (..)
+
     -- * OrderCancellation
     , OrderCancellation
     , orderCancellation
@@ -481,8 +493,8 @@ module Network.Google.ShoppingContent.Types
     -- * OrdersCustomBatchResponse
     , OrdersCustomBatchResponse
     , ordersCustomBatchResponse
-    , ocbrcEntries
-    , ocbrcKind
+    , ordEntries
+    , ordKind
     ) where
 
 import           Network.Google.Prelude
@@ -490,7 +502,7 @@ import           Network.Google.ShoppingContent.Types.Product
 import           Network.Google.ShoppingContent.Types.Sum
 
 -- | URL referring to version 'v2sandbox' of the Content API for Shopping.
-shoppingContentURL :: BaseURL
+shoppingContentURL :: BaseUrl
 shoppingContentURL
   = BaseUrl Https
       "https://www.googleapis.com/content/v2sandbox/"

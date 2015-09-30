@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of styles.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleList@.
-module FusionTables.Style.List
+module Network.Google.Resource.FusionTables.Style.List
     (
     -- * REST Resource
-      StyleListAPI
+      StyleListResource
 
     -- * Creating a Request
-    , styleList
-    , StyleList
+    , styleList'
+    , StyleList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleList@ which the
--- 'StyleList' request conforms to.
-type StyleListAPI =
+-- 'StyleList'' request conforms to.
+type StyleListResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] StyleSettingList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] StyleSettingList
 
 -- | Retrieves a list of styles.
 --
--- /See:/ 'styleList' smart constructor.
-data StyleList = StyleList
+-- /See:/ 'styleList'' smart constructor.
+data StyleList' = StyleList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data StyleList = StyleList
     , _slTableId     :: !Text
     , _slMaxResults  :: !(Maybe Word32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleList'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data StyleList = StyleList
 -- * 'slFields'
 --
 -- * 'slAlt'
-styleList
+styleList'
     :: Text -- ^ 'tableId'
-    -> StyleList
-styleList pSlTableId_ =
-    StyleList
+    -> StyleList'
+styleList' pSlTableId_ =
+    StyleList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
@@ -107,7 +114,7 @@ styleList pSlTableId_ =
     , _slTableId = pSlTableId_
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,19 +166,22 @@ slFields :: Lens' StyleList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' StyleList' Text
+slAlt :: Lens' StyleList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest StyleList' where
         type Rs StyleList' = StyleSettingList
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp _slKey
+        requestWithRoute r u StyleList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+              _slKey
               _slPageToken
               _slOauthToken
               _slTableId
               _slMaxResults
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy StyleListResource)
+                      r
+                      u

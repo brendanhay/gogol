@@ -27,40 +27,40 @@ module Network.Google.MapsCoordinate
     -- * REST Resources
 
     -- ** CoordinateCustomFieldDefList
-    , module Coordinate.CustomFieldDef.List
+    , module Network.Google.Resource.Coordinate.CustomFieldDef.List
 
     -- ** CoordinateJobsGet
-    , module Coordinate.Jobs.Get
+    , module Network.Google.Resource.Coordinate.Jobs.Get
 
     -- ** CoordinateJobsInsert
-    , module Coordinate.Jobs.Insert
+    , module Network.Google.Resource.Coordinate.Jobs.Insert
 
     -- ** CoordinateJobsList
-    , module Coordinate.Jobs.List
+    , module Network.Google.Resource.Coordinate.Jobs.List
 
     -- ** CoordinateJobsPatch
-    , module Coordinate.Jobs.Patch
+    , module Network.Google.Resource.Coordinate.Jobs.Patch
 
     -- ** CoordinateJobsUpdate
-    , module Coordinate.Jobs.Update
+    , module Network.Google.Resource.Coordinate.Jobs.Update
 
     -- ** CoordinateLocationList
-    , module Coordinate.Location.List
+    , module Network.Google.Resource.Coordinate.Location.List
 
     -- ** CoordinateScheduleGet
-    , module Coordinate.Schedule.Get
+    , module Network.Google.Resource.Coordinate.Schedule.Get
 
     -- ** CoordinateSchedulePatch
-    , module Coordinate.Schedule.Patch
+    , module Network.Google.Resource.Coordinate.Schedule.Patch
 
     -- ** CoordinateScheduleUpdate
-    , module Coordinate.Schedule.Update
+    , module Network.Google.Resource.Coordinate.Schedule.Update
 
     -- ** CoordinateTeamList
-    , module Coordinate.Team.List
+    , module Network.Google.Resource.Coordinate.Team.List
 
     -- ** CoordinateWorkerList
-    , module Coordinate.Worker.List
+    , module Network.Google.Resource.Coordinate.Worker.List
 
     -- * Types
 
@@ -160,6 +160,9 @@ module Network.Google.MapsCoordinate
     , jobJobChange
     , jobId
 
+    -- ** CoordinateJobsUpdateProgress
+    , CoordinateJobsUpdateProgress (..)
+
     -- ** CustomFields
     , CustomFields
     , customFields
@@ -172,6 +175,9 @@ module Network.Google.MapsCoordinate
     , tKind
     , tName
     , tId
+
+    -- ** CoordinateJobsPatchProgress
+    , CoordinateJobsPatchProgress (..)
 
     -- ** LocationRecord
     , LocationRecord
@@ -194,6 +200,9 @@ module Network.Google.MapsCoordinate
     , cCustomFieldId
     , cKind
     , cValue
+
+    -- ** Alt
+    , Alt (..)
 
     -- ** EnumItemDef
     , EnumItemDef
@@ -223,9 +232,17 @@ TODO
 -}
 
 type MapsCoordinateAPI =
-     Schedule :<|> Location :<|> CustomFieldDef :<|> Jobs
-       :<|> Team
-       :<|> Worker
+     SchedulePatchResource :<|> ScheduleGetResource :<|>
+       ScheduleUpdateResource
+       :<|> LocationListResource
+       :<|> CustomFieldDefListResource
+       :<|> JobsInsertResource
+       :<|> JobsListResource
+       :<|> JobsPatchResource
+       :<|> JobsGetResource
+       :<|> JobsUpdateResource
+       :<|> TeamListResource
+       :<|> WorkerListResource
 
 mapsCoordinateAPI :: Proxy MapsCoordinateAPI
 mapsCoordinateAPI = Proxy

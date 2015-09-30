@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified operation resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGlobalAccountsOperationsDelete@.
-module Clouduseraccounts.GlobalAccountsOperations.Delete
+module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.Delete
     (
     -- * REST Resource
-      GlobalAccountsOperationsDeleteAPI
+      GlobalAccountsOperationsDeleteResource
 
     -- * Creating a Request
-    , globalAccountsOperationsDelete
-    , GlobalAccountsOperationsDelete
+    , globalAccountsOperationsDelete'
+    , GlobalAccountsOperationsDelete'
 
     -- * Request Lenses
     , gaodQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGlobalAccountsOperationsDelete@ which the
--- 'GlobalAccountsOperationsDelete' request conforms to.
-type GlobalAccountsOperationsDeleteAPI =
+-- 'GlobalAccountsOperationsDelete'' request conforms to.
+type GlobalAccountsOperationsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           Capture "operation" Text :> Delete '[JSON] ()
+           Capture "operation" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the specified operation resource.
 --
--- /See:/ 'globalAccountsOperationsDelete' smart constructor.
-data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
+-- /See:/ 'globalAccountsOperationsDelete'' smart constructor.
+data GlobalAccountsOperationsDelete' = GlobalAccountsOperationsDelete'
     { _gaodQuotaUser   :: !(Maybe Text)
     , _gaodPrettyPrint :: !Bool
     , _gaodProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
     , _gaodKey         :: !(Maybe Text)
     , _gaodOauthToken  :: !(Maybe Text)
     , _gaodFields      :: !(Maybe Text)
-    , _gaodAlt         :: !Text
+    , _gaodAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
 -- * 'gaodFields'
 --
 -- * 'gaodAlt'
-globalAccountsOperationsDelete
+globalAccountsOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
-    -> GlobalAccountsOperationsDelete
-globalAccountsOperationsDelete pGaodProject_ pGaodOperation_ =
-    GlobalAccountsOperationsDelete
+    -> GlobalAccountsOperationsDelete'
+globalAccountsOperationsDelete' pGaodProject_ pGaodOperation_ =
+    GlobalAccountsOperationsDelete'
     { _gaodQuotaUser = Nothing
     , _gaodPrettyPrint = True
     , _gaodProject = pGaodProject_
@@ -101,7 +109,7 @@ globalAccountsOperationsDelete pGaodProject_ pGaodOperation_ =
     , _gaodKey = Nothing
     , _gaodOauthToken = Nothing
     , _gaodFields = Nothing
-    , _gaodAlt = "json"
+    , _gaodAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ gaodFields
   = lens _gaodFields (\ s a -> s{_gaodFields = a})
 
 -- | Data format for the response.
-gaodAlt :: Lens' GlobalAccountsOperationsDelete' Text
+gaodAlt :: Lens' GlobalAccountsOperationsDelete' Alt
 gaodAlt = lens _gaodAlt (\ s a -> s{_gaodAlt = a})
 
 instance GoogleRequest
@@ -162,16 +170,18 @@ instance GoogleRequest
         request
           = requestWithRoute defReq computeUserAccountsURL
         requestWithRoute r u
-          GlobalAccountsOperationsDelete{..}
-          = go _gaodQuotaUser _gaodPrettyPrint _gaodProject
+          GlobalAccountsOperationsDelete'{..}
+          = go _gaodQuotaUser (Just _gaodPrettyPrint)
+              _gaodProject
               _gaodOperation
               _gaodUserIp
               _gaodKey
               _gaodOauthToken
               _gaodFields
-              _gaodAlt
+              (Just _gaodAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAccountsOperationsDeleteAPI)
+                      (Proxy ::
+                         Proxy GlobalAccountsOperationsDeleteResource)
                       r
                       u

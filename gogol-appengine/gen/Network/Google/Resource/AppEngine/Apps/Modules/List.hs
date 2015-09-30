@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the modules in the application.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesList@.
-module AppEngine.Apps.Modules.List
+module Network.Google.Resource.AppEngine.Apps.Modules.List
     (
     -- * REST Resource
-      AppsModulesListAPI
+      AppsModulesListResource
 
     -- * Creating a Request
-    , appsModulesList
-    , AppsModulesList
+    , appsModulesList'
+    , AppsModulesList'
 
     -- * Request Lenses
     , amlXgafv
@@ -51,20 +52,33 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesList@ which the
--- 'AppsModulesList' request conforms to.
-type AppsModulesListAPI =
+-- 'AppsModulesList'' request conforms to.
+type AppsModulesListResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "pageSize" Int32 :>
-                 Get '[JSON] ListModulesResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListModulesResponse
 
 -- | Lists all the modules in the application.
 --
--- /See:/ 'appsModulesList' smart constructor.
-data AppsModulesList = AppsModulesList
+-- /See:/ 'appsModulesList'' smart constructor.
+data AppsModulesList' = AppsModulesList'
     { _amlXgafv          :: !(Maybe Text)
     , _amlQuotaUser      :: !(Maybe Text)
     , _amlPrettyPrint    :: !Bool
@@ -118,11 +132,11 @@ data AppsModulesList = AppsModulesList
 -- * 'amlCallback'
 --
 -- * 'amlAlt'
-appsModulesList
+appsModulesList'
     :: Text -- ^ 'appsId'
-    -> AppsModulesList
-appsModulesList pAmlAppsId_ =
-    AppsModulesList
+    -> AppsModulesList'
+appsModulesList' pAmlAppsId_ =
+    AppsModulesList'
     { _amlXgafv = Nothing
     , _amlQuotaUser = Nothing
     , _amlPrettyPrint = True
@@ -231,10 +245,10 @@ amlAlt = lens _amlAlt (\ s a -> s{_amlAlt = a})
 instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesList{..}
-          = go _amlXgafv _amlQuotaUser _amlPrettyPrint
+        requestWithRoute r u AppsModulesList'{..}
+          = go _amlXgafv _amlQuotaUser (Just _amlPrettyPrint)
               _amlUploadProtocol
-              _amlPp
+              (Just _amlPp)
               _amlAccessToken
               _amlUploadType
               _amlBearerToken
@@ -245,8 +259,9 @@ instance GoogleRequest AppsModulesList' where
               _amlPageSize
               _amlFields
               _amlCallback
-              _amlAlt
+              (Just _amlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AppsModulesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AppsModulesListResource)
                       r
                       u

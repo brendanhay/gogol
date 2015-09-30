@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- associated annotation set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationsDelete@.
-module Genomics.Annotations.Delete
+module Network.Google.Resource.Genomics.Annotations.Delete
     (
     -- * REST Resource
-      AnnotationsDeleteAPI
+      AnnotationsDeleteResource
 
     -- * Creating a Request
-    , annotationsDelete
-    , AnnotationsDelete
+    , annotationsDelete'
+    , AnnotationsDelete'
 
     -- * Request Lenses
     , adQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsDelete@ which the
--- 'AnnotationsDelete' request conforms to.
-type AnnotationsDeleteAPI =
+-- 'AnnotationsDelete'' request conforms to.
+type AnnotationsDeleteResource =
      "annotations" :>
-       Capture "annotationId" Text :> Delete '[JSON] ()
+       Capture "annotationId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an annotation. Caller must have WRITE permission for the
 -- associated annotation set.
 --
--- /See:/ 'annotationsDelete' smart constructor.
-data AnnotationsDelete = AnnotationsDelete
+-- /See:/ 'annotationsDelete'' smart constructor.
+data AnnotationsDelete' = AnnotationsDelete'
     { _adQuotaUser    :: !(Maybe Text)
     , _adPrettyPrint  :: !Bool
     , _adUserIp       :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AnnotationsDelete = AnnotationsDelete
     , _adAnnotationId :: !Text
     , _adOauthToken   :: !(Maybe Text)
     , _adFields       :: !(Maybe Text)
-    , _adAlt          :: !Text
+    , _adAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AnnotationsDelete = AnnotationsDelete
 -- * 'adFields'
 --
 -- * 'adAlt'
-annotationsDelete
+annotationsDelete'
     :: Text -- ^ 'annotationId'
-    -> AnnotationsDelete
-annotationsDelete pAdAnnotationId_ =
-    AnnotationsDelete
+    -> AnnotationsDelete'
+annotationsDelete' pAdAnnotationId_ =
+    AnnotationsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
     , _adUserIp = Nothing
@@ -95,7 +103,7 @@ annotationsDelete pAdAnnotationId_ =
     , _adAnnotationId = pAdAnnotationId_
     , _adOauthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = "json"
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ adFields :: Lens' AnnotationsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' AnnotationsDelete' Text
+adAlt :: Lens' AnnotationsDelete' Alt
 adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest AnnotationsDelete' where
         type Rs AnnotationsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsDelete{..}
-          = go _adQuotaUser _adPrettyPrint _adUserIp _adKey
+        requestWithRoute r u AnnotationsDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adUserIp
+              _adKey
               _adAnnotationId
               _adOauthToken
               _adFields
-              _adAlt
+              (Just _adAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationsDeleteAPI)
+                      (Proxy :: Proxy AnnotationsDeleteResource)
                       r
                       u

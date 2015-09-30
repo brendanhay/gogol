@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- player that use the event will also be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementEventsReset@.
-module GamesManagement.Events.Reset
+module Network.Google.Resource.GamesManagement.Events.Reset
     (
     -- * REST Resource
-      EventsResetAPI
+      EventsResetResource
 
     -- * Creating a Request
-    , eventsReset
-    , EventsReset
+    , eventsReset'
+    , EventsReset'
 
     -- * Request Lenses
     , erQuotaUser
@@ -46,18 +47,26 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementEventsReset@ which the
--- 'EventsReset' request conforms to.
-type EventsResetAPI =
+-- 'EventsReset'' request conforms to.
+type EventsResetResource =
      "events" :>
-       Capture "eventId" Text :> "reset" :> Post '[JSON] ()
+       Capture "eventId" Text :>
+         "reset" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all player progress on the event with the given ID for the
 -- currently authenticated player. This method is only accessible to
 -- whitelisted tester accounts for your application. All quests for this
 -- player that use the event will also be reset.
 --
--- /See:/ 'eventsReset' smart constructor.
-data EventsReset = EventsReset
+-- /See:/ 'eventsReset'' smart constructor.
+data EventsReset' = EventsReset'
     { _erQuotaUser   :: !(Maybe Text)
     , _erPrettyPrint :: !Bool
     , _erUserIp      :: !(Maybe Text)
@@ -65,7 +74,7 @@ data EventsReset = EventsReset
     , _erOauthToken  :: !(Maybe Text)
     , _erEventId     :: !Text
     , _erFields      :: !(Maybe Text)
-    , _erAlt         :: !Text
+    , _erAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsReset'' with the minimum fields required to make a request.
@@ -87,11 +96,11 @@ data EventsReset = EventsReset
 -- * 'erFields'
 --
 -- * 'erAlt'
-eventsReset
+eventsReset'
     :: Text -- ^ 'eventId'
-    -> EventsReset
-eventsReset pErEventId_ =
-    EventsReset
+    -> EventsReset'
+eventsReset' pErEventId_ =
+    EventsReset'
     { _erQuotaUser = Nothing
     , _erPrettyPrint = True
     , _erUserIp = Nothing
@@ -99,7 +108,7 @@ eventsReset pErEventId_ =
     , _erOauthToken = Nothing
     , _erEventId = pErEventId_
     , _erFields = Nothing
-    , _erAlt = "json"
+    , _erAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,17 +150,21 @@ erFields :: Lens' EventsReset' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
 -- | Data format for the response.
-erAlt :: Lens' EventsReset' Text
+erAlt :: Lens' EventsReset' Alt
 erAlt = lens _erAlt (\ s a -> s{_erAlt = a})
 
 instance GoogleRequest EventsReset' where
         type Rs EventsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u EventsReset{..}
-          = go _erQuotaUser _erPrettyPrint _erUserIp _erKey
+        requestWithRoute r u EventsReset'{..}
+          = go _erQuotaUser (Just _erPrettyPrint) _erUserIp
+              _erKey
               _erOauthToken
               _erEventId
               _erFields
-              _erAlt
+              (Just _erAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsResetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsResetResource)
+                      r
+                      u

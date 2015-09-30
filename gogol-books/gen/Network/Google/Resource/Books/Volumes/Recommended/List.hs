@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return a list of recommended books for the current user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesRecommendedList@.
-module Books.Volumes.Recommended.List
+module Network.Google.Resource.Books.Volumes.Recommended.List
     (
     -- * REST Resource
-      VolumesRecommendedListAPI
+      VolumesRecommendedListResource
 
     -- * Creating a Request
-    , volumesRecommendedList
-    , VolumesRecommendedList
+    , volumesRecommendedList'
+    , VolumesRecommendedList'
 
     -- * Request Lenses
     , vrlQuotaUser
@@ -45,28 +46,37 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesRecommendedList@ which the
--- 'VolumesRecommendedList' request conforms to.
-type VolumesRecommendedListAPI =
+-- 'VolumesRecommendedList'' request conforms to.
+type VolumesRecommendedListResource =
      "volumes" :>
        "recommended" :>
-         QueryParam "locale" Text :>
-           QueryParam "maxAllowedMaturityRating" Text :>
-             QueryParam "source" Text :> Get '[JSON] Volumes
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "locale" Text :>
+                 QueryParam "maxAllowedMaturityRating"
+                   BooksVolumesRecommendedListMaxAllowedMaturityRating
+                   :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Volumes
 
 -- | Return a list of recommended books for the current user.
 --
--- /See:/ 'volumesRecommendedList' smart constructor.
-data VolumesRecommendedList = VolumesRecommendedList
+-- /See:/ 'volumesRecommendedList'' smart constructor.
+data VolumesRecommendedList' = VolumesRecommendedList'
     { _vrlQuotaUser                :: !(Maybe Text)
     , _vrlPrettyPrint              :: !Bool
     , _vrlUserIp                   :: !(Maybe Text)
     , _vrlLocale                   :: !(Maybe Text)
-    , _vrlMaxAllowedMaturityRating :: !(Maybe Text)
+    , _vrlMaxAllowedMaturityRating :: !(Maybe BooksVolumesRecommendedListMaxAllowedMaturityRating)
     , _vrlKey                      :: !(Maybe Text)
     , _vrlSource                   :: !(Maybe Text)
     , _vrlOauthToken               :: !(Maybe Text)
     , _vrlFields                   :: !(Maybe Text)
-    , _vrlAlt                      :: !Text
+    , _vrlAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesRecommendedList'' with the minimum fields required to make a request.
@@ -92,10 +102,10 @@ data VolumesRecommendedList = VolumesRecommendedList
 -- * 'vrlFields'
 --
 -- * 'vrlAlt'
-volumesRecommendedList
-    :: VolumesRecommendedList
-volumesRecommendedList =
-    VolumesRecommendedList
+volumesRecommendedList'
+    :: VolumesRecommendedList'
+volumesRecommendedList' =
+    VolumesRecommendedList'
     { _vrlQuotaUser = Nothing
     , _vrlPrettyPrint = True
     , _vrlUserIp = Nothing
@@ -105,7 +115,7 @@ volumesRecommendedList =
     , _vrlSource = Nothing
     , _vrlOauthToken = Nothing
     , _vrlFields = Nothing
-    , _vrlAlt = "json"
+    , _vrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,7 +145,7 @@ vrlLocale
 
 -- | The maximum allowed maturity rating of returned recommendations. Books
 -- with a higher maturity rating are filtered out.
-vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList' (Maybe Text)
+vrlMaxAllowedMaturityRating :: Lens' VolumesRecommendedList' (Maybe BooksVolumesRecommendedListMaxAllowedMaturityRating)
 vrlMaxAllowedMaturityRating
   = lens _vrlMaxAllowedMaturityRating
       (\ s a -> s{_vrlMaxAllowedMaturityRating = a})
@@ -163,23 +173,23 @@ vrlFields
   = lens _vrlFields (\ s a -> s{_vrlFields = a})
 
 -- | Data format for the response.
-vrlAlt :: Lens' VolumesRecommendedList' Text
+vrlAlt :: Lens' VolumesRecommendedList' Alt
 vrlAlt = lens _vrlAlt (\ s a -> s{_vrlAlt = a})
 
 instance GoogleRequest VolumesRecommendedList' where
         type Rs VolumesRecommendedList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesRecommendedList{..}
-          = go _vrlQuotaUser _vrlPrettyPrint _vrlUserIp
+        requestWithRoute r u VolumesRecommendedList'{..}
+          = go _vrlQuotaUser (Just _vrlPrettyPrint) _vrlUserIp
               _vrlLocale
               _vrlMaxAllowedMaturityRating
               _vrlKey
               _vrlSource
               _vrlOauthToken
               _vrlFields
-              _vrlAlt
+              (Just _vrlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VolumesRecommendedListAPI)
+                      (Proxy :: Proxy VolumesRecommendedListResource)
                       r
                       u

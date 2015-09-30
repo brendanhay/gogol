@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesAddPeople@.
-module PlusDomains.Circles.AddPeople
+module Network.Google.Resource.PlusDomains.Circles.AddPeople
     (
     -- * REST Resource
-      CirclesAddPeopleAPI
+      CirclesAddPeopleResource
 
     -- * Creating a Request
-    , circlesAddPeople
-    , CirclesAddPeople
+    , circlesAddPeople'
+    , CirclesAddPeople'
 
     -- * Request Lenses
     , capEmail
@@ -46,19 +47,26 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesAddPeople@ which the
--- 'CirclesAddPeople' request conforms to.
-type CirclesAddPeopleAPI =
+-- 'CirclesAddPeople'' request conforms to.
+type CirclesAddPeopleResource =
      "circles" :>
        Capture "circleId" Text :>
          "people" :>
            QueryParams "email" Text :>
-             QueryParams "userId" Text :> Put '[JSON] Circle
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParams "userId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Circle
 
 -- | Add a person to a circle. Google+ limits certain circle operations,
 -- including the number of circle adds. Learn More.
 --
--- /See:/ 'circlesAddPeople' smart constructor.
-data CirclesAddPeople = CirclesAddPeople
+-- /See:/ 'circlesAddPeople'' smart constructor.
+data CirclesAddPeople' = CirclesAddPeople'
     { _capEmail       :: !(Maybe Text)
     , _capQuotaUser   :: !(Maybe Text)
     , _capPrettyPrint :: !Bool
@@ -68,7 +76,7 @@ data CirclesAddPeople = CirclesAddPeople
     , _capCircleId    :: !Text
     , _capOauthToken  :: !(Maybe Text)
     , _capFields      :: !(Maybe Text)
-    , _capAlt         :: !Text
+    , _capAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesAddPeople'' with the minimum fields required to make a request.
@@ -94,11 +102,11 @@ data CirclesAddPeople = CirclesAddPeople
 -- * 'capFields'
 --
 -- * 'capAlt'
-circlesAddPeople
+circlesAddPeople'
     :: Text -- ^ 'circleId'
-    -> CirclesAddPeople
-circlesAddPeople pCapCircleId_ =
-    CirclesAddPeople
+    -> CirclesAddPeople'
+circlesAddPeople' pCapCircleId_ =
+    CirclesAddPeople'
     { _capEmail = Nothing
     , _capQuotaUser = Nothing
     , _capPrettyPrint = True
@@ -108,7 +116,7 @@ circlesAddPeople pCapCircleId_ =
     , _capCircleId = pCapCircleId_
     , _capOauthToken = Nothing
     , _capFields = Nothing
-    , _capAlt = "json"
+    , _capAlt = JSON
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
@@ -162,23 +170,23 @@ capFields
   = lens _capFields (\ s a -> s{_capFields = a})
 
 -- | Data format for the response.
-capAlt :: Lens' CirclesAddPeople' Text
+capAlt :: Lens' CirclesAddPeople' Alt
 capAlt = lens _capAlt (\ s a -> s{_capAlt = a})
 
 instance GoogleRequest CirclesAddPeople' where
         type Rs CirclesAddPeople' = Circle
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesAddPeople{..}
-          = go _capEmail _capQuotaUser _capPrettyPrint
+        requestWithRoute r u CirclesAddPeople'{..}
+          = go _capEmail _capQuotaUser (Just _capPrettyPrint)
               _capUserIp
               _capUserId
               _capKey
               _capCircleId
               _capOauthToken
               _capFields
-              _capAlt
+              (Just _capAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CirclesAddPeopleAPI)
+                      (Proxy :: Proxy CirclesAddPeopleResource)
                       r
                       u

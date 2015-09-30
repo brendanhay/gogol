@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,138 +20,148 @@
 -- | Gets a list of subaccounts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubaccountsList@.
-module DFAReporting.Subaccounts.List
+module Network.Google.Resource.DFAReporting.Subaccounts.List
     (
     -- * REST Resource
-      SubaccountsListAPI
+      SubaccountsListResource
 
     -- * Creating a Request
-    , subaccountsList
-    , SubaccountsList
+    , subaccountsList'
+    , SubaccountsList'
 
     -- * Request Lenses
-    , ssQuotaUser
-    , ssPrettyPrint
-    , ssUserIp
-    , ssSearchString
-    , ssIds
-    , ssProfileId
-    , ssSortOrder
-    , ssKey
-    , ssPageToken
-    , ssSortField
-    , ssOauthToken
-    , ssMaxResults
-    , ssFields
-    , ssAlt
+    , sQuotaUser
+    , sPrettyPrint
+    , sUserIp
+    , sSearchString
+    , sIds
+    , sProfileId
+    , sSortOrder
+    , sKey
+    , sPageToken
+    , sSortField
+    , sOauthToken
+    , sMaxResults
+    , sFields
+    , sAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSubaccountsList@ which the
--- 'SubaccountsList' request conforms to.
-type SubaccountsListAPI =
+-- 'SubaccountsList'' request conforms to.
+type SubaccountsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       Get '[JSON] SubaccountsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingSubaccountsListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingSubaccountsListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] SubaccountsListResponse
 
 -- | Gets a list of subaccounts, possibly filtered.
 --
--- /See:/ 'subaccountsList' smart constructor.
-data SubaccountsList = SubaccountsList
-    { _ssQuotaUser    :: !(Maybe Text)
-    , _ssPrettyPrint  :: !Bool
-    , _ssUserIp       :: !(Maybe Text)
-    , _ssSearchString :: !(Maybe Text)
-    , _ssIds          :: !(Maybe Int64)
-    , _ssProfileId    :: !Int64
-    , _ssSortOrder    :: !(Maybe Text)
-    , _ssKey          :: !(Maybe Text)
-    , _ssPageToken    :: !(Maybe Text)
-    , _ssSortField    :: !(Maybe Text)
-    , _ssOauthToken   :: !(Maybe Text)
-    , _ssMaxResults   :: !(Maybe Int32)
-    , _ssFields       :: !(Maybe Text)
-    , _ssAlt          :: !Text
+-- /See:/ 'subaccountsList'' smart constructor.
+data SubaccountsList' = SubaccountsList'
+    { _sQuotaUser    :: !(Maybe Text)
+    , _sPrettyPrint  :: !Bool
+    , _sUserIp       :: !(Maybe Text)
+    , _sSearchString :: !(Maybe Text)
+    , _sIds          :: !(Maybe Int64)
+    , _sProfileId    :: !Int64
+    , _sSortOrder    :: !(Maybe DfareportingSubaccountsListSortOrder)
+    , _sKey          :: !(Maybe Text)
+    , _sPageToken    :: !(Maybe Text)
+    , _sSortField    :: !(Maybe DfareportingSubaccountsListSortField)
+    , _sOauthToken   :: !(Maybe Text)
+    , _sMaxResults   :: !(Maybe Int32)
+    , _sFields       :: !(Maybe Text)
+    , _sAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubaccountsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ssQuotaUser'
+-- * 'sQuotaUser'
 --
--- * 'ssPrettyPrint'
+-- * 'sPrettyPrint'
 --
--- * 'ssUserIp'
+-- * 'sUserIp'
 --
--- * 'ssSearchString'
+-- * 'sSearchString'
 --
--- * 'ssIds'
+-- * 'sIds'
 --
--- * 'ssProfileId'
+-- * 'sProfileId'
 --
--- * 'ssSortOrder'
+-- * 'sSortOrder'
 --
--- * 'ssKey'
+-- * 'sKey'
 --
--- * 'ssPageToken'
+-- * 'sPageToken'
 --
--- * 'ssSortField'
+-- * 'sSortField'
 --
--- * 'ssOauthToken'
+-- * 'sOauthToken'
 --
--- * 'ssMaxResults'
+-- * 'sMaxResults'
 --
--- * 'ssFields'
+-- * 'sFields'
 --
--- * 'ssAlt'
-subaccountsList
+-- * 'sAlt'
+subaccountsList'
     :: Int64 -- ^ 'profileId'
-    -> SubaccountsList
-subaccountsList pSsProfileId_ =
-    SubaccountsList
-    { _ssQuotaUser = Nothing
-    , _ssPrettyPrint = True
-    , _ssUserIp = Nothing
-    , _ssSearchString = Nothing
-    , _ssIds = Nothing
-    , _ssProfileId = pSsProfileId_
-    , _ssSortOrder = Nothing
-    , _ssKey = Nothing
-    , _ssPageToken = Nothing
-    , _ssSortField = Nothing
-    , _ssOauthToken = Nothing
-    , _ssMaxResults = Nothing
-    , _ssFields = Nothing
-    , _ssAlt = "json"
+    -> SubaccountsList'
+subaccountsList' pSProfileId_ =
+    SubaccountsList'
+    { _sQuotaUser = Nothing
+    , _sPrettyPrint = True
+    , _sUserIp = Nothing
+    , _sSearchString = Nothing
+    , _sIds = Nothing
+    , _sProfileId = pSProfileId_
+    , _sSortOrder = Nothing
+    , _sKey = Nothing
+    , _sPageToken = Nothing
+    , _sSortField = Nothing
+    , _sOauthToken = Nothing
+    , _sMaxResults = Nothing
+    , _sFields = Nothing
+    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ssQuotaUser :: Lens' SubaccountsList' (Maybe Text)
-ssQuotaUser
-  = lens _ssQuotaUser (\ s a -> s{_ssQuotaUser = a})
+sQuotaUser :: Lens' SubaccountsList' (Maybe Text)
+sQuotaUser
+  = lens _sQuotaUser (\ s a -> s{_sQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ssPrettyPrint :: Lens' SubaccountsList' Bool
-ssPrettyPrint
-  = lens _ssPrettyPrint
-      (\ s a -> s{_ssPrettyPrint = a})
+sPrettyPrint :: Lens' SubaccountsList' Bool
+sPrettyPrint
+  = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ssUserIp :: Lens' SubaccountsList' (Maybe Text)
-ssUserIp = lens _ssUserIp (\ s a -> s{_ssUserIp = a})
+sUserIp :: Lens' SubaccountsList' (Maybe Text)
+sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"subaccount*2015\" will return objects with names like
@@ -159,76 +170,77 @@ ssUserIp = lens _ssUserIp (\ s a -> s{_ssUserIp = a})
 -- at the start and the end of the search string. For example, a search
 -- string of \"subaccount\" will match objects with name \"my subaccount\",
 -- \"subaccount 2015\", or simply \"subaccount\".
-ssSearchString :: Lens' SubaccountsList' (Maybe Text)
-ssSearchString
-  = lens _ssSearchString
-      (\ s a -> s{_ssSearchString = a})
+sSearchString :: Lens' SubaccountsList' (Maybe Text)
+sSearchString
+  = lens _sSearchString
+      (\ s a -> s{_sSearchString = a})
 
 -- | Select only subaccounts with these IDs.
-ssIds :: Lens' SubaccountsList' (Maybe Int64)
-ssIds = lens _ssIds (\ s a -> s{_ssIds = a})
+sIds :: Lens' SubaccountsList' (Maybe Int64)
+sIds = lens _sIds (\ s a -> s{_sIds = a})
 
 -- | User profile ID associated with this request.
-ssProfileId :: Lens' SubaccountsList' Int64
-ssProfileId
-  = lens _ssProfileId (\ s a -> s{_ssProfileId = a})
+sProfileId :: Lens' SubaccountsList' Int64
+sProfileId
+  = lens _sProfileId (\ s a -> s{_sProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-ssSortOrder :: Lens' SubaccountsList' (Maybe Text)
-ssSortOrder
-  = lens _ssSortOrder (\ s a -> s{_ssSortOrder = a})
+sSortOrder :: Lens' SubaccountsList' (Maybe DfareportingSubaccountsListSortOrder)
+sSortOrder
+  = lens _sSortOrder (\ s a -> s{_sSortOrder = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssKey :: Lens' SubaccountsList' (Maybe Text)
-ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
+sKey :: Lens' SubaccountsList' (Maybe Text)
+sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
-ssPageToken :: Lens' SubaccountsList' (Maybe Text)
-ssPageToken
-  = lens _ssPageToken (\ s a -> s{_ssPageToken = a})
+sPageToken :: Lens' SubaccountsList' (Maybe Text)
+sPageToken
+  = lens _sPageToken (\ s a -> s{_sPageToken = a})
 
 -- | Field by which to sort the list.
-ssSortField :: Lens' SubaccountsList' (Maybe Text)
-ssSortField
-  = lens _ssSortField (\ s a -> s{_ssSortField = a})
+sSortField :: Lens' SubaccountsList' (Maybe DfareportingSubaccountsListSortField)
+sSortField
+  = lens _sSortField (\ s a -> s{_sSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-ssOauthToken :: Lens' SubaccountsList' (Maybe Text)
-ssOauthToken
-  = lens _ssOauthToken (\ s a -> s{_ssOauthToken = a})
+sOauthToken :: Lens' SubaccountsList' (Maybe Text)
+sOauthToken
+  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
 
 -- | Maximum number of results to return.
-ssMaxResults :: Lens' SubaccountsList' (Maybe Int32)
-ssMaxResults
-  = lens _ssMaxResults (\ s a -> s{_ssMaxResults = a})
+sMaxResults :: Lens' SubaccountsList' (Maybe Int32)
+sMaxResults
+  = lens _sMaxResults (\ s a -> s{_sMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ssFields :: Lens' SubaccountsList' (Maybe Text)
-ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
+sFields :: Lens' SubaccountsList' (Maybe Text)
+sFields = lens _sFields (\ s a -> s{_sFields = a})
 
 -- | Data format for the response.
-ssAlt :: Lens' SubaccountsList' Text
-ssAlt = lens _ssAlt (\ s a -> s{_ssAlt = a})
+sAlt :: Lens' SubaccountsList' Alt
+sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
 
 instance GoogleRequest SubaccountsList' where
         type Rs SubaccountsList' = SubaccountsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubaccountsList{..}
-          = go _ssQuotaUser _ssPrettyPrint _ssUserIp
-              _ssSearchString
-              _ssIds
-              _ssProfileId
-              _ssSortOrder
-              _ssKey
-              _ssPageToken
-              _ssSortField
-              _ssOauthToken
-              _ssMaxResults
-              _ssFields
-              _ssAlt
+        requestWithRoute r u SubaccountsList'{..}
+          = go _sQuotaUser (Just _sPrettyPrint) _sUserIp
+              _sSearchString
+              _sIds
+              _sProfileId
+              _sSortOrder
+              _sKey
+              _sPageToken
+              _sSortField
+              _sOauthToken
+              _sMaxResults
+              _sFields
+              (Just _sAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SubaccountsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SubaccountsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementRoomsResetForAllPlayers@.
-module GamesManagement.Rooms.ResetForAllPlayers
+module Network.Google.Resource.GamesManagement.Rooms.ResetForAllPlayers
     (
     -- * REST Resource
-      RoomsResetForAllPlayersAPI
+      RoomsResetForAllPlayersResource
 
     -- * Creating a Request
-    , roomsResetForAllPlayers
-    , RoomsResetForAllPlayers
+    , roomsResetForAllPlayers'
+    , RoomsResetForAllPlayers'
 
     -- * Request Lenses
     , rrfapQuotaUser
@@ -44,23 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementRoomsResetForAllPlayers@ which the
--- 'RoomsResetForAllPlayers' request conforms to.
-type RoomsResetForAllPlayersAPI =
-     "rooms" :> "resetForAllPlayers" :> Post '[JSON] ()
+-- 'RoomsResetForAllPlayers'' request conforms to.
+type RoomsResetForAllPlayersResource =
+     "rooms" :>
+       "resetForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Deletes rooms where the only room participants are from whitelisted
 -- tester accounts for your application. This method is only available to
 -- user accounts for your developer console.
 --
--- /See:/ 'roomsResetForAllPlayers' smart constructor.
-data RoomsResetForAllPlayers = RoomsResetForAllPlayers
+-- /See:/ 'roomsResetForAllPlayers'' smart constructor.
+data RoomsResetForAllPlayers' = RoomsResetForAllPlayers'
     { _rrfapQuotaUser   :: !(Maybe Text)
     , _rrfapPrettyPrint :: !Bool
     , _rrfapUserIp      :: !(Maybe Text)
     , _rrfapKey         :: !(Maybe Text)
     , _rrfapOauthToken  :: !(Maybe Text)
     , _rrfapFields      :: !(Maybe Text)
-    , _rrfapAlt         :: !Text
+    , _rrfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsResetForAllPlayers'' with the minimum fields required to make a request.
@@ -80,17 +89,17 @@ data RoomsResetForAllPlayers = RoomsResetForAllPlayers
 -- * 'rrfapFields'
 --
 -- * 'rrfapAlt'
-roomsResetForAllPlayers
-    :: RoomsResetForAllPlayers
-roomsResetForAllPlayers =
-    RoomsResetForAllPlayers
+roomsResetForAllPlayers'
+    :: RoomsResetForAllPlayers'
+roomsResetForAllPlayers' =
+    RoomsResetForAllPlayers'
     { _rrfapQuotaUser = Nothing
     , _rrfapPrettyPrint = True
     , _rrfapUserIp = Nothing
     , _rrfapKey = Nothing
     , _rrfapOauthToken = Nothing
     , _rrfapFields = Nothing
-    , _rrfapAlt = "json"
+    , _rrfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,20 +140,21 @@ rrfapFields
   = lens _rrfapFields (\ s a -> s{_rrfapFields = a})
 
 -- | Data format for the response.
-rrfapAlt :: Lens' RoomsResetForAllPlayers' Text
+rrfapAlt :: Lens' RoomsResetForAllPlayers' Alt
 rrfapAlt = lens _rrfapAlt (\ s a -> s{_rrfapAlt = a})
 
 instance GoogleRequest RoomsResetForAllPlayers' where
         type Rs RoomsResetForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u RoomsResetForAllPlayers{..}
-          = go _rrfapQuotaUser _rrfapPrettyPrint _rrfapUserIp
+        requestWithRoute r u RoomsResetForAllPlayers'{..}
+          = go _rrfapQuotaUser (Just _rrfapPrettyPrint)
+              _rrfapUserIp
               _rrfapKey
               _rrfapOauthToken
               _rrfapFields
-              _rrfapAlt
+              (Just _rrfapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RoomsResetForAllPlayersAPI)
+                      (Proxy :: Proxy RoomsResetForAllPlayersResource)
                       r
                       u

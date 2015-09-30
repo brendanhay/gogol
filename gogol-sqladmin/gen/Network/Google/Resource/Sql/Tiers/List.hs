@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- D2. For related information, see Pricing.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlTiersList@.
-module Sql.Tiers.List
+module Network.Google.Resource.Sql.Tiers.List
     (
     -- * REST Resource
-      TiersListAPI
+      TiersListResource
 
     -- * Creating a Request
-    , tiersList
-    , TiersList
+    , tiersList'
+    , TiersList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlTiersList@ which the
--- 'TiersList' request conforms to.
-type TiersListAPI =
+-- 'TiersList'' request conforms to.
+type TiersListResource =
      "projects" :>
        Capture "project" Text :>
-         "tiers" :> Get '[JSON] TiersListResponse
+         "tiers" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] TiersListResponse
 
 -- | Lists all available service tiers for Google Cloud SQL, for example D1,
 -- D2. For related information, see Pricing.
 --
--- /See:/ 'tiersList' smart constructor.
-data TiersList = TiersList
+-- /See:/ 'tiersList'' smart constructor.
+data TiersList' = TiersList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
@@ -62,7 +70,7 @@ data TiersList = TiersList
     , _tlKey         :: !(Maybe Text)
     , _tlOauthToken  :: !(Maybe Text)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TiersList'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data TiersList = TiersList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-tiersList
+tiersList'
     :: Text -- ^ 'project'
-    -> TiersList
-tiersList pTlProject_ =
-    TiersList
+    -> TiersList'
+tiersList' pTlProject_ =
+    TiersList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlProject = pTlProject_
@@ -96,7 +104,7 @@ tiersList pTlProject_ =
     , _tlKey = Nothing
     , _tlOauthToken = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,17 +146,20 @@ tlFields :: Lens' TiersList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TiersList' Text
+tlAlt :: Lens' TiersList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TiersList' where
         type Rs TiersList' = TiersListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u TiersList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlProject _tlUserIp
+        requestWithRoute r u TiersList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlProject
+              _tlUserIp
               _tlKey
               _tlOauthToken
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TiersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TiersListResource)
+                      r
+                      u

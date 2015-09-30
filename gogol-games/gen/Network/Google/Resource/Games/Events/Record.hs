@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- for the currently authenticated user of this application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsRecord@.
-module Games.Events.Record
+module Network.Google.Resource.Games.Events.Record
     (
     -- * REST Resource
-      EventsRecordAPI
+      EventsRecordResource
 
     -- * Creating a Request
-    , eventsRecord
-    , EventsRecord
+    , eventsRecord'
+    , EventsRecord'
 
     -- * Request Lenses
     , erQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesEventsRecord@ which the
--- 'EventsRecord' request conforms to.
-type EventsRecordAPI =
+-- 'EventsRecord'' request conforms to.
+type EventsRecordResource =
      "events" :>
-       QueryParam "language" Text :>
-         Post '[JSON] EventUpdateResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] EventUpdateResponse
 
 -- | Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 --
--- /See:/ 'eventsRecord' smart constructor.
-data EventsRecord = EventsRecord
+-- /See:/ 'eventsRecord'' smart constructor.
+data EventsRecord' = EventsRecord'
     { _erQuotaUser   :: !(Maybe Text)
     , _erPrettyPrint :: !Bool
     , _erUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data EventsRecord = EventsRecord
     , _erLanguage    :: !(Maybe Text)
     , _erOauthToken  :: !(Maybe Text)
     , _erFields      :: !(Maybe Text)
-    , _erAlt         :: !Text
+    , _erAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsRecord'' with the minimum fields required to make a request.
@@ -84,10 +92,10 @@ data EventsRecord = EventsRecord
 -- * 'erFields'
 --
 -- * 'erAlt'
-eventsRecord
-    :: EventsRecord
-eventsRecord =
-    EventsRecord
+eventsRecord'
+    :: EventsRecord'
+eventsRecord' =
+    EventsRecord'
     { _erQuotaUser = Nothing
     , _erPrettyPrint = True
     , _erUserIp = Nothing
@@ -95,7 +103,7 @@ eventsRecord =
     , _erLanguage = Nothing
     , _erOauthToken = Nothing
     , _erFields = Nothing
-    , _erAlt = "json"
+    , _erAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +145,21 @@ erFields :: Lens' EventsRecord' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
 -- | Data format for the response.
-erAlt :: Lens' EventsRecord' Text
+erAlt :: Lens' EventsRecord' Alt
 erAlt = lens _erAlt (\ s a -> s{_erAlt = a})
 
 instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsRecord{..}
-          = go _erQuotaUser _erPrettyPrint _erUserIp _erKey
+        requestWithRoute r u EventsRecord'{..}
+          = go _erQuotaUser (Just _erPrettyPrint) _erUserIp
+              _erKey
               _erLanguage
               _erOauthToken
               _erFields
-              _erAlt
+              (Just _erAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsRecordAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsRecordResource)
+                      r
                       u

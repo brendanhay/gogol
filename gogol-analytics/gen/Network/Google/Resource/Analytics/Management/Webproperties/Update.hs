@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertiesUpdate@.
-module Analytics.Management.Webproperties.Update
+module Network.Google.Resource.Analytics.Management.Webproperties.Update
     (
     -- * REST Resource
-      ManagementWebpropertiesUpdateAPI
+      ManagementWebpropertiesUpdateResource
 
     -- * Creating a Request
-    , managementWebpropertiesUpdate
-    , ManagementWebpropertiesUpdate
+    , managementWebpropertiesUpdate'
+    , ManagementWebpropertiesUpdate'
 
     -- * Request Lenses
     , mwuQuotaUser
@@ -44,19 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertiesUpdate@ which the
--- 'ManagementWebpropertiesUpdate' request conforms to.
-type ManagementWebpropertiesUpdateAPI =
+-- 'ManagementWebpropertiesUpdate'' request conforms to.
+type ManagementWebpropertiesUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               Put '[JSON] Webproperty
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Webproperty
 
 -- | Updates an existing web property.
 --
--- /See:/ 'managementWebpropertiesUpdate' smart constructor.
-data ManagementWebpropertiesUpdate = ManagementWebpropertiesUpdate
+-- /See:/ 'managementWebpropertiesUpdate'' smart constructor.
+data ManagementWebpropertiesUpdate' = ManagementWebpropertiesUpdate'
     { _mwuQuotaUser     :: !(Maybe Text)
     , _mwuPrettyPrint   :: !Bool
     , _mwuWebPropertyId :: !Text
@@ -65,7 +72,7 @@ data ManagementWebpropertiesUpdate = ManagementWebpropertiesUpdate
     , _mwuKey           :: !(Maybe Text)
     , _mwuOauthToken    :: !(Maybe Text)
     , _mwuFields        :: !(Maybe Text)
-    , _mwuAlt           :: !Text
+    , _mwuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertiesUpdate'' with the minimum fields required to make a request.
@@ -89,12 +96,12 @@ data ManagementWebpropertiesUpdate = ManagementWebpropertiesUpdate
 -- * 'mwuFields'
 --
 -- * 'mwuAlt'
-managementWebpropertiesUpdate
+managementWebpropertiesUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebpropertiesUpdate
-managementWebpropertiesUpdate pMwuWebPropertyId_ pMwuAccountId_ =
-    ManagementWebpropertiesUpdate
+    -> ManagementWebpropertiesUpdate'
+managementWebpropertiesUpdate' pMwuWebPropertyId_ pMwuAccountId_ =
+    ManagementWebpropertiesUpdate'
     { _mwuQuotaUser = Nothing
     , _mwuPrettyPrint = False
     , _mwuWebPropertyId = pMwuWebPropertyId_
@@ -103,7 +110,7 @@ managementWebpropertiesUpdate pMwuWebPropertyId_ pMwuAccountId_ =
     , _mwuKey = Nothing
     , _mwuOauthToken = Nothing
     , _mwuFields = Nothing
-    , _mwuAlt = "json"
+    , _mwuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,7 +161,7 @@ mwuFields
   = lens _mwuFields (\ s a -> s{_mwuFields = a})
 
 -- | Data format for the response.
-mwuAlt :: Lens' ManagementWebpropertiesUpdate' Text
+mwuAlt :: Lens' ManagementWebpropertiesUpdate' Alt
 mwuAlt = lens _mwuAlt (\ s a -> s{_mwuAlt = a})
 
 instance GoogleRequest ManagementWebpropertiesUpdate'
@@ -162,16 +169,18 @@ instance GoogleRequest ManagementWebpropertiesUpdate'
         type Rs ManagementWebpropertiesUpdate' = Webproperty
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertiesUpdate{..}
-          = go _mwuQuotaUser _mwuPrettyPrint _mwuWebPropertyId
+          ManagementWebpropertiesUpdate'{..}
+          = go _mwuQuotaUser (Just _mwuPrettyPrint)
+              _mwuWebPropertyId
               _mwuUserIp
               _mwuAccountId
               _mwuKey
               _mwuOauthToken
               _mwuFields
-              _mwuAlt
+              (Just _mwuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementWebpropertiesUpdateAPI)
+                      (Proxy ::
+                         Proxy ManagementWebpropertiesUpdateResource)
                       r
                       u

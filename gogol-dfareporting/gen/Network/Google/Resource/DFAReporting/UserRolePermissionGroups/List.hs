@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a list of all supported user role permission groups.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolePermissionGroupsList@.
-module DFAReporting.UserRolePermissionGroups.List
+module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
     (
     -- * REST Resource
-      UserRolePermissionGroupsListAPI
+      UserRolePermissionGroupsListResource
 
     -- * Creating a Request
-    , userRolePermissionGroupsList
-    , UserRolePermissionGroupsList
+    , userRolePermissionGroupsList'
+    , UserRolePermissionGroupsList'
 
     -- * Request Lenses
     , urpglQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolePermissionGroupsList@ which the
--- 'UserRolePermissionGroupsList' request conforms to.
-type UserRolePermissionGroupsListAPI =
+-- 'UserRolePermissionGroupsList'' request conforms to.
+type UserRolePermissionGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRolePermissionGroups" :>
-           Get '[JSON] UserRolePermissionGroupsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] UserRolePermissionGroupsListResponse
 
 -- | Gets a list of all supported user role permission groups.
 --
--- /See:/ 'userRolePermissionGroupsList' smart constructor.
-data UserRolePermissionGroupsList = UserRolePermissionGroupsList
+-- /See:/ 'userRolePermissionGroupsList'' smart constructor.
+data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
     { _urpglQuotaUser   :: !(Maybe Text)
     , _urpglPrettyPrint :: !Bool
     , _urpglUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data UserRolePermissionGroupsList = UserRolePermissionGroupsList
     , _urpglKey         :: !(Maybe Text)
     , _urpglOauthToken  :: !(Maybe Text)
     , _urpglFields      :: !(Maybe Text)
-    , _urpglAlt         :: !Text
+    , _urpglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroupsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data UserRolePermissionGroupsList = UserRolePermissionGroupsList
 -- * 'urpglFields'
 --
 -- * 'urpglAlt'
-userRolePermissionGroupsList
+userRolePermissionGroupsList'
     :: Int64 -- ^ 'profileId'
-    -> UserRolePermissionGroupsList
-userRolePermissionGroupsList pUrpglProfileId_ =
-    UserRolePermissionGroupsList
+    -> UserRolePermissionGroupsList'
+userRolePermissionGroupsList' pUrpglProfileId_ =
+    UserRolePermissionGroupsList'
     { _urpglQuotaUser = Nothing
     , _urpglPrettyPrint = True
     , _urpglUserIp = Nothing
@@ -95,7 +103,7 @@ userRolePermissionGroupsList pUrpglProfileId_ =
     , _urpglKey = Nothing
     , _urpglOauthToken = Nothing
     , _urpglFields = Nothing
-    , _urpglAlt = "json"
+    , _urpglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ urpglFields
   = lens _urpglFields (\ s a -> s{_urpglFields = a})
 
 -- | Data format for the response.
-urpglAlt :: Lens' UserRolePermissionGroupsList' Text
+urpglAlt :: Lens' UserRolePermissionGroupsList' Alt
 urpglAlt = lens _urpglAlt (\ s a -> s{_urpglAlt = a})
 
 instance GoogleRequest UserRolePermissionGroupsList'
@@ -150,15 +158,17 @@ instance GoogleRequest UserRolePermissionGroupsList'
         type Rs UserRolePermissionGroupsList' =
              UserRolePermissionGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolePermissionGroupsList{..}
-          = go _urpglQuotaUser _urpglPrettyPrint _urpglUserIp
+        requestWithRoute r u
+          UserRolePermissionGroupsList'{..}
+          = go _urpglQuotaUser (Just _urpglPrettyPrint)
+              _urpglUserIp
               _urpglProfileId
               _urpglKey
               _urpglOauthToken
               _urpglFields
-              _urpglAlt
+              (Just _urpglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UserRolePermissionGroupsListAPI)
+                      (Proxy :: Proxy UserRolePermissionGroupsListResource)
                       r
                       u

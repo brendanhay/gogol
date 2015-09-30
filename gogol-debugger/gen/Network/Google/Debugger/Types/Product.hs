@@ -1233,6 +1233,28 @@ instance ToJSON StackFrame where
                   ("arguments" .=) <$> _sfArguments,
                   ("locals" .=) <$> _sfLocals])
 
+-- | A set of custom debuggee properties, populated by the agent, to be
+-- displayed to the user.
+--
+-- /See:/ 'debuggeeLabels' smart constructor.
+data DebuggeeLabels =
+    DebuggeeLabels
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DebuggeeLabels' with the minimum fields required to make a request.
+--
+debuggeeLabels
+    :: DebuggeeLabels
+debuggeeLabels = DebuggeeLabels
+
+instance FromJSON DebuggeeLabels where
+        parseJSON
+          = withObject "DebuggeeLabels"
+              (\ o -> pure DebuggeeLabels)
+
+instance ToJSON DebuggeeLabels where
+        toJSON = const (Object mempty)
+
 -- | A CloudRepoSourceContext denotes a particular revision in a cloud repo
 -- (a repo hosted by the Google Cloud Platform).
 --

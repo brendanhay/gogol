@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves event data for a given advertiser\/publisher.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanEventsList@.
-module Gan.Events.List
+module Network.Google.Resource.Gan.Events.List
     (
     -- * REST Resource
-      EventsListAPI
+      EventsListResource
 
     -- * Creating a Request
-    , eventsList
-    , EventsList
+    , eventsList'
+    , EventsList'
 
     -- * Request Lenses
     , elStatus
@@ -60,58 +61,69 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanEventsList@ which the
--- 'EventsList' request conforms to.
-type EventsListAPI =
-     Capture "role" Text :>
+-- 'EventsList'' request conforms to.
+type EventsListResource =
+     Capture "role" GanEventsListRole :>
        Capture "roleId" Text :>
          "events" :>
-           QueryParam "status" Text :>
-             QueryParam "eventDateMin" Text :>
-               QueryParam "chargeType" Text :>
-                 QueryParam "memberId" Text :>
-                   QueryParam "modifyDateMax" Text :>
-                     QueryParam "advertiserId" Text :>
-                       QueryParam "modifyDateMin" Text :>
-                         QueryParam "eventDateMax" Text :>
-                           QueryParam "sku" Text :>
-                             QueryParam "linkId" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "type" Text :>
-                                   QueryParam "orderId" Text :>
-                                     QueryParam "publisherId" Text :>
-                                       QueryParam "productCategory" Text :>
-                                         QueryParam "maxResults" Word32 :>
-                                           Get '[JSON] Events
+           QueryParam "status" GanEventsListStatus :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "eventDateMin" Text :>
+                   QueryParam "chargeType" GanEventsListChargeType :>
+                     QueryParam "memberId" Text :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "modifyDateMax" Text :>
+                           QueryParam "advertiserId" Text :>
+                             QueryParam "modifyDateMin" Text :>
+                               QueryParam "eventDateMax" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "sku" Text :>
+                                     QueryParam "linkId" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "type" GanEventsListType :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "orderId" Text :>
+                                               QueryParam "publisherId" Text :>
+                                                 QueryParam "productCategory"
+                                                   Text
+                                                   :>
+                                                   QueryParam "maxResults"
+                                                     Word32
+                                                     :>
+                                                     QueryParam "fields" Text :>
+                                                       QueryParam "alt" Alt :>
+                                                         Get '[JSON] Events
 
 -- | Retrieves event data for a given advertiser\/publisher.
 --
--- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
-    { _elStatus          :: !(Maybe Text)
+-- /See:/ 'eventsList'' smart constructor.
+data EventsList' = EventsList'
+    { _elStatus          :: !(Maybe GanEventsListStatus)
     , _elQuotaUser       :: !(Maybe Text)
     , _elPrettyPrint     :: !Bool
     , _elEventDateMin    :: !(Maybe Text)
-    , _elChargeType      :: !(Maybe Text)
+    , _elChargeType      :: !(Maybe GanEventsListChargeType)
     , _elMemberId        :: !(Maybe Text)
     , _elUserIp          :: !(Maybe Text)
     , _elModifyDateMax   :: !(Maybe Text)
     , _elAdvertiserId    :: !(Maybe Text)
     , _elModifyDateMin   :: !(Maybe Text)
     , _elRoleId          :: !Text
-    , _elRole            :: !Text
+    , _elRole            :: !GanEventsListRole
     , _elEventDateMax    :: !(Maybe Text)
     , _elKey             :: !(Maybe Text)
     , _elSku             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
-    , _elType            :: !(Maybe Text)
+    , _elType            :: !(Maybe GanEventsListType)
     , _elOauthToken      :: !(Maybe Text)
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
     , _elMaxResults      :: !(Maybe Word32)
     , _elFields          :: !(Maybe Text)
-    , _elAlt             :: !Text
+    , _elAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
@@ -167,12 +179,12 @@ data EventsList = EventsList
 -- * 'elFields'
 --
 -- * 'elAlt'
-eventsList
+eventsList'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> EventsList
-eventsList pElRoleId_ pElRole_ =
-    EventsList
+    -> GanEventsListRole -- ^ 'role'
+    -> EventsList'
+eventsList' pElRoleId_ pElRole_ =
+    EventsList'
     { _elStatus = Nothing
     , _elQuotaUser = Nothing
     , _elPrettyPrint = True
@@ -197,12 +209,12 @@ eventsList pElRoleId_ pElRole_ =
     , _elProductCategory = Nothing
     , _elMaxResults = Nothing
     , _elFields = Nothing
-    , _elAlt = "json"
+    , _elAlt = JSON
     }
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\'. Optional.
-elStatus :: Lens' EventsList' (Maybe Text)
+elStatus :: Lens' EventsList' (Maybe GanEventsListStatus)
 elStatus = lens _elStatus (\ s a -> s{_elStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -228,7 +240,7 @@ elEventDateMin
 -- | Filters out all charge events that are not of the given charge type.
 -- Valid values: \'other\', \'slotting_fee\', \'monthly_minimum\',
 -- \'tier_bonus\', \'credit\', \'debit\'. Optional.
-elChargeType :: Lens' EventsList' (Maybe Text)
+elChargeType :: Lens' EventsList' (Maybe GanEventsListChargeType)
 elChargeType
   = lens _elChargeType (\ s a -> s{_elChargeType = a})
 
@@ -273,7 +285,7 @@ elRoleId = lens _elRoleId (\ s a -> s{_elRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-elRole :: Lens' EventsList' Text
+elRole :: Lens' EventsList' GanEventsListRole
 elRole = lens _elRole (\ s a -> s{_elRole = a})
 
 -- | Filters out all events later than given date. Optional. Defaults to 24
@@ -306,7 +318,7 @@ elPageToken
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', \'charge\'. Optional.
-elType :: Lens' EventsList' (Maybe Text)
+elType :: Lens' EventsList' (Maybe GanEventsListType)
 elType = lens _elType (\ s a -> s{_elType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -346,14 +358,14 @@ elFields :: Lens' EventsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 -- | Data format for the response.
-elAlt :: Lens' EventsList' Text
+elAlt :: Lens' EventsList' Alt
 elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u EventsList{..}
-          = go _elStatus _elQuotaUser _elPrettyPrint
+        requestWithRoute r u EventsList'{..}
+          = go _elStatus _elQuotaUser (Just _elPrettyPrint)
               _elEventDateMin
               _elChargeType
               _elMemberId
@@ -375,6 +387,8 @@ instance GoogleRequest EventsList' where
               _elProductCategory
               _elMaxResults
               _elFields
-              _elAlt
+              (Just _elAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy EventsListResource)
+                      r
+                      u

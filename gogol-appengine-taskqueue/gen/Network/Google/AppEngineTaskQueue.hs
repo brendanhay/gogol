@@ -27,28 +27,28 @@ module Network.Google.AppEngineTaskQueue
     -- * REST Resources
 
     -- ** TaskqueueTaskqueuesGet
-    , module Taskqueue.Taskqueues.Get
+    , module Network.Google.Resource.Taskqueue.Taskqueues.Get
 
     -- ** TaskqueueTasksDelete
-    , module Taskqueue.Tasks.Delete
+    , module Network.Google.Resource.Taskqueue.Tasks.Delete
 
     -- ** TaskqueueTasksGet
-    , module Taskqueue.Tasks.Get
+    , module Network.Google.Resource.Taskqueue.Tasks.Get
 
     -- ** TaskqueueTasksInsert
-    , module Taskqueue.Tasks.Insert
+    , module Network.Google.Resource.Taskqueue.Tasks.Insert
 
     -- ** TaskqueueTasksLease
-    , module Taskqueue.Tasks.Lease
+    , module Network.Google.Resource.Taskqueue.Tasks.Lease
 
     -- ** TaskqueueTasksList
-    , module Taskqueue.Tasks.List
+    , module Network.Google.Resource.Taskqueue.Tasks.List
 
     -- ** TaskqueueTasksPatch
-    , module Taskqueue.Tasks.Patch
+    , module Network.Google.Resource.Taskqueue.Tasks.Patch
 
     -- ** TaskqueueTasksUpdate
-    , module Taskqueue.Tasks.Update
+    , module Network.Google.Resource.Taskqueue.Tasks.Update
 
     -- * Types
 
@@ -67,6 +67,21 @@ module Network.Google.AppEngineTaskQueue
     , tKind
     , tItems
 
+    -- ** TaskQueueACL
+    , TaskQueueACL
+    , taskQueueACL
+    , tqaProducerEmails
+    , tqaAdminEmails
+    , tqaConsumerEmails
+
+    -- ** TaskQueueStats
+    , TaskQueueStats
+    , taskQueueStats
+    , tqsTotalTasks
+    , tqsOldestTask
+    , tqsLeasedLastHour
+    , tqsLeasedLastMinute
+
     -- ** Tasks
     , Tasks
     , tasks
@@ -84,6 +99,9 @@ module Network.Google.AppEngineTaskQueue
     , ttPayloadBase64
     , ttId
     , ttLeaseTimestamp
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -101,7 +119,14 @@ import           Network.Google.Resource.Taskqueue.Tasks.Update
 TODO
 -}
 
-type AppEngineTaskQueueAPI = Tasks :<|> Taskqueues
+type AppEngineTaskQueueAPI =
+     TasksInsertResource :<|> TasksListResource :<|>
+       TasksPatchResource
+       :<|> TasksGetResource
+       :<|> TasksLeaseResource
+       :<|> TasksDeleteResource
+       :<|> TasksUpdateResource
+       :<|> TaskqueuesGetResource
 
 appEngineTaskQueueAPI :: Proxy AppEngineTaskQueueAPI
 appEngineTaskQueueAPI = Proxy

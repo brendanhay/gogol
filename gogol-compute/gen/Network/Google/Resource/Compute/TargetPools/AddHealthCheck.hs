@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds health check URL to targetPool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsAddHealthCheck@.
-module Compute.TargetPools.AddHealthCheck
+module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
     (
     -- * REST Resource
-      TargetPoolsAddHealthCheckAPI
+      TargetPoolsAddHealthCheckResource
 
     -- * Creating a Request
-    , targetPoolsAddHealthCheck
-    , TargetPoolsAddHealthCheck
+    , targetPoolsAddHealthCheck'
+    , TargetPoolsAddHealthCheck'
 
     -- * Request Lenses
     , tpahcQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsAddHealthCheck@ which the
--- 'TargetPoolsAddHealthCheck' request conforms to.
-type TargetPoolsAddHealthCheckAPI =
+-- 'TargetPoolsAddHealthCheck'' request conforms to.
+type TargetPoolsAddHealthCheckResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
-               "addHealthCheck" :> Post '[JSON] Operation
+               "addHealthCheck" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds health check URL to targetPool.
 --
--- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
-data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
+-- /See:/ 'targetPoolsAddHealthCheck'' smart constructor.
+data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
     { _tpahcQuotaUser   :: !(Maybe Text)
     , _tpahcPrettyPrint :: !Bool
     , _tpahcProject     :: !Text
@@ -67,7 +75,7 @@ data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
     , _tpahcRegion      :: !Text
     , _tpahcOauthToken  :: !(Maybe Text)
     , _tpahcFields      :: !(Maybe Text)
-    , _tpahcAlt         :: !Text
+    , _tpahcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheck'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
 -- * 'tpahcFields'
 --
 -- * 'tpahcAlt'
-targetPoolsAddHealthCheck
+targetPoolsAddHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsAddHealthCheck
-targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcRegion_ =
-    TargetPoolsAddHealthCheck
+    -> TargetPoolsAddHealthCheck'
+targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcRegion_ =
+    TargetPoolsAddHealthCheck'
     { _tpahcQuotaUser = Nothing
     , _tpahcPrettyPrint = True
     , _tpahcProject = pTpahcProject_
@@ -109,7 +117,7 @@ targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcRegion_ =
     , _tpahcRegion = pTpahcRegion_
     , _tpahcOauthToken = Nothing
     , _tpahcFields = Nothing
-    , _tpahcAlt = "json"
+    , _tpahcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ tpahcFields
   = lens _tpahcFields (\ s a -> s{_tpahcFields = a})
 
 -- | Data format for the response.
-tpahcAlt :: Lens' TargetPoolsAddHealthCheck' Text
+tpahcAlt :: Lens' TargetPoolsAddHealthCheck' Alt
 tpahcAlt = lens _tpahcAlt (\ s a -> s{_tpahcAlt = a})
 
 instance GoogleRequest TargetPoolsAddHealthCheck'
          where
         type Rs TargetPoolsAddHealthCheck' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsAddHealthCheck{..}
-          = go _tpahcQuotaUser _tpahcPrettyPrint _tpahcProject
+        requestWithRoute r u TargetPoolsAddHealthCheck'{..}
+          = go _tpahcQuotaUser (Just _tpahcPrettyPrint)
+              _tpahcProject
               _tpahcTargetPool
               _tpahcUserIp
               _tpahcKey
               _tpahcRegion
               _tpahcOauthToken
               _tpahcFields
-              _tpahcAlt
+              (Just _tpahcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsAddHealthCheckAPI)
+                      (Proxy :: Proxy TargetPoolsAddHealthCheckResource)
                       r
                       u

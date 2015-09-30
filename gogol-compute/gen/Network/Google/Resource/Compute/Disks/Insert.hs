@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksInsert@.
-module Compute.Disks.Insert
+module Network.Google.Resource.Compute.Disks.Insert
     (
     -- * REST Resource
-      DisksInsertAPI
+      DisksInsertResource
 
     -- * Creating a Request
-    , disksInsert
-    , DisksInsert
+    , disksInsert'
+    , DisksInsert'
 
     -- * Request Lenses
     , diQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksInsert@ which the
--- 'DisksInsert' request conforms to.
-type DisksInsertAPI =
+-- 'DisksInsert'' request conforms to.
+type DisksInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "disks" :>
-             QueryParam "sourceImage" Text :>
-               Post '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "sourceImage" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a persistent disk in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'disksInsert' smart constructor.
-data DisksInsert = DisksInsert
+-- /See:/ 'disksInsert'' smart constructor.
+data DisksInsert' = DisksInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diSourceImage :: !(Maybe Text)
@@ -69,7 +76,7 @@ data DisksInsert = DisksInsert
     , _diKey         :: !(Maybe Text)
     , _diOauthToken  :: !(Maybe Text)
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Text
+    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksInsert'' with the minimum fields required to make a request.
@@ -95,12 +102,12 @@ data DisksInsert = DisksInsert
 -- * 'diFields'
 --
 -- * 'diAlt'
-disksInsert
+disksInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> DisksInsert
-disksInsert pDiProject_ pDiZone_ =
-    DisksInsert
+    -> DisksInsert'
+disksInsert' pDiProject_ pDiZone_ =
+    DisksInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diSourceImage = Nothing
@@ -110,7 +117,7 @@ disksInsert pDiProject_ pDiZone_ =
     , _diKey = Nothing
     , _diOauthToken = Nothing
     , _diFields = Nothing
-    , _diAlt = "json"
+    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,20 +169,24 @@ diFields :: Lens' DisksInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
 -- | Data format for the response.
-diAlt :: Lens' DisksInsert' Text
+diAlt :: Lens' DisksInsert' Alt
 diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
 
 instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksInsert{..}
-          = go _diQuotaUser _diPrettyPrint _diSourceImage
+        requestWithRoute r u DisksInsert'{..}
+          = go _diQuotaUser (Just _diPrettyPrint)
+              _diSourceImage
               _diProject
               _diUserIp
               _diZone
               _diKey
               _diOauthToken
               _diFields
-              _diAlt
+              (Just _diAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DisksInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy DisksInsertResource)
+                      r
+                      u

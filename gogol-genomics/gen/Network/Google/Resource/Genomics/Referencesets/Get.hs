@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,142 +20,145 @@
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesetsGet@.
-module Genomics.Referencesets.Get
+module Network.Google.Resource.Genomics.Referencesets.Get
     (
     -- * REST Resource
-      ReferencesetsGetAPI
+      ReferencesetsGetResource
 
     -- * Creating a Request
-    , referencesetsGet
-    , ReferencesetsGet
+    , referencesetsGet'
+    , ReferencesetsGet'
 
     -- * Request Lenses
-    , refReferenceSetId
-    , refQuotaUser
-    , refPrettyPrint
-    , refUserIp
-    , refKey
-    , refOauthToken
-    , refFields
-    , refAlt
+    , rReferenceSetId
+    , rQuotaUser
+    , rPrettyPrint
+    , rUserIp
+    , rKey
+    , rOauthToken
+    , rFields
+    , rAlt
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesetsGet@ which the
--- 'ReferencesetsGet' request conforms to.
-type ReferencesetsGetAPI =
+-- 'ReferencesetsGet'' request conforms to.
+type ReferencesetsGetResource =
      "referencesets" :>
        Capture "referenceSetId" Text :>
-         Get '[JSON] ReferenceSet
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] ReferenceSet
 
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
 --
--- /See:/ 'referencesetsGet' smart constructor.
-data ReferencesetsGet = ReferencesetsGet
-    { _refReferenceSetId :: !Text
-    , _refQuotaUser      :: !(Maybe Text)
-    , _refPrettyPrint    :: !Bool
-    , _refUserIp         :: !(Maybe Text)
-    , _refKey            :: !(Maybe Text)
-    , _refOauthToken     :: !(Maybe Text)
-    , _refFields         :: !(Maybe Text)
-    , _refAlt            :: !Text
+-- /See:/ 'referencesetsGet'' smart constructor.
+data ReferencesetsGet' = ReferencesetsGet'
+    { _rReferenceSetId :: !Text
+    , _rQuotaUser      :: !(Maybe Text)
+    , _rPrettyPrint    :: !Bool
+    , _rUserIp         :: !(Maybe Text)
+    , _rKey            :: !(Maybe Text)
+    , _rOauthToken     :: !(Maybe Text)
+    , _rFields         :: !(Maybe Text)
+    , _rAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'refReferenceSetId'
+-- * 'rReferenceSetId'
 --
--- * 'refQuotaUser'
+-- * 'rQuotaUser'
 --
--- * 'refPrettyPrint'
+-- * 'rPrettyPrint'
 --
--- * 'refUserIp'
+-- * 'rUserIp'
 --
--- * 'refKey'
+-- * 'rKey'
 --
--- * 'refOauthToken'
+-- * 'rOauthToken'
 --
--- * 'refFields'
+-- * 'rFields'
 --
--- * 'refAlt'
-referencesetsGet
+-- * 'rAlt'
+referencesetsGet'
     :: Text -- ^ 'referenceSetId'
-    -> ReferencesetsGet
-referencesetsGet pRefReferenceSetId_ =
-    ReferencesetsGet
-    { _refReferenceSetId = pRefReferenceSetId_
-    , _refQuotaUser = Nothing
-    , _refPrettyPrint = True
-    , _refUserIp = Nothing
-    , _refKey = Nothing
-    , _refOauthToken = Nothing
-    , _refFields = Nothing
-    , _refAlt = "json"
+    -> ReferencesetsGet'
+referencesetsGet' pRReferenceSetId_ =
+    ReferencesetsGet'
+    { _rReferenceSetId = pRReferenceSetId_
+    , _rQuotaUser = Nothing
+    , _rPrettyPrint = True
+    , _rUserIp = Nothing
+    , _rKey = Nothing
+    , _rOauthToken = Nothing
+    , _rFields = Nothing
+    , _rAlt = JSON
     }
 
 -- | The ID of the reference set.
-refReferenceSetId :: Lens' ReferencesetsGet' Text
-refReferenceSetId
-  = lens _refReferenceSetId
-      (\ s a -> s{_refReferenceSetId = a})
+rReferenceSetId :: Lens' ReferencesetsGet' Text
+rReferenceSetId
+  = lens _rReferenceSetId
+      (\ s a -> s{_rReferenceSetId = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-refQuotaUser :: Lens' ReferencesetsGet' (Maybe Text)
-refQuotaUser
-  = lens _refQuotaUser (\ s a -> s{_refQuotaUser = a})
+rQuotaUser :: Lens' ReferencesetsGet' (Maybe Text)
+rQuotaUser
+  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-refPrettyPrint :: Lens' ReferencesetsGet' Bool
-refPrettyPrint
-  = lens _refPrettyPrint
-      (\ s a -> s{_refPrettyPrint = a})
+rPrettyPrint :: Lens' ReferencesetsGet' Bool
+rPrettyPrint
+  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-refUserIp :: Lens' ReferencesetsGet' (Maybe Text)
-refUserIp
-  = lens _refUserIp (\ s a -> s{_refUserIp = a})
+rUserIp :: Lens' ReferencesetsGet' (Maybe Text)
+rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-refKey :: Lens' ReferencesetsGet' (Maybe Text)
-refKey = lens _refKey (\ s a -> s{_refKey = a})
+rKey :: Lens' ReferencesetsGet' (Maybe Text)
+rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | OAuth 2.0 token for the current user.
-refOauthToken :: Lens' ReferencesetsGet' (Maybe Text)
-refOauthToken
-  = lens _refOauthToken
-      (\ s a -> s{_refOauthToken = a})
+rOauthToken :: Lens' ReferencesetsGet' (Maybe Text)
+rOauthToken
+  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-refFields :: Lens' ReferencesetsGet' (Maybe Text)
-refFields
-  = lens _refFields (\ s a -> s{_refFields = a})
+rFields :: Lens' ReferencesetsGet' (Maybe Text)
+rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-refAlt :: Lens' ReferencesetsGet' Text
-refAlt = lens _refAlt (\ s a -> s{_refAlt = a})
+rAlt :: Lens' ReferencesetsGet' Alt
+rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest ReferencesetsGet' where
         type Rs ReferencesetsGet' = ReferenceSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesetsGet{..}
-          = go _refReferenceSetId _refQuotaUser _refPrettyPrint
-              _refUserIp
-              _refKey
-              _refOauthToken
-              _refFields
-              _refAlt
+        requestWithRoute r u ReferencesetsGet'{..}
+          = go _rReferenceSetId _rQuotaUser
+              (Just _rPrettyPrint)
+              _rUserIp
+              _rKey
+              _rOauthToken
+              _rFields
+              (Just _rAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReferencesetsGetAPI)
+                      (Proxy :: Proxy ReferencesetsGetResource)
                       r
                       u

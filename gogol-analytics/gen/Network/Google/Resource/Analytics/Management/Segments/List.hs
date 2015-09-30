@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists segments to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementSegmentsList@.
-module Analytics.Management.Segments.List
+module Network.Google.Resource.Analytics.Management.Segments.List
     (
     -- * REST Resource
-      ManagementSegmentsListAPI
+      ManagementSegmentsListResource
 
     -- * Creating a Request
-    , managementSegmentsList
-    , ManagementSegmentsList
+    , managementSegmentsList'
+    , ManagementSegmentsList'
 
     -- * Request Lenses
     , mslQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementSegmentsList@ which the
--- 'ManagementSegmentsList' request conforms to.
-type ManagementSegmentsListAPI =
+-- 'ManagementSegmentsList'' request conforms to.
+type ManagementSegmentsListResource =
      "management" :>
        "segments" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             Get '[JSON] Segments
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
 --
--- /See:/ 'managementSegmentsList' smart constructor.
-data ManagementSegmentsList = ManagementSegmentsList
+-- /See:/ 'managementSegmentsList'' smart constructor.
+data ManagementSegmentsList' = ManagementSegmentsList'
     { _mslQuotaUser   :: !(Maybe Text)
     , _mslPrettyPrint :: !Bool
     , _mslUserIp      :: !(Maybe Text)
@@ -64,7 +71,7 @@ data ManagementSegmentsList = ManagementSegmentsList
     , _mslStartIndex  :: !(Maybe Int32)
     , _mslMaxResults  :: !(Maybe Int32)
     , _mslFields      :: !(Maybe Text)
-    , _mslAlt         :: !Text
+    , _mslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList'' with the minimum fields required to make a request.
@@ -88,10 +95,10 @@ data ManagementSegmentsList = ManagementSegmentsList
 -- * 'mslFields'
 --
 -- * 'mslAlt'
-managementSegmentsList
-    :: ManagementSegmentsList
-managementSegmentsList =
-    ManagementSegmentsList
+managementSegmentsList'
+    :: ManagementSegmentsList'
+managementSegmentsList' =
+    ManagementSegmentsList'
     { _mslQuotaUser = Nothing
     , _mslPrettyPrint = False
     , _mslUserIp = Nothing
@@ -100,7 +107,7 @@ managementSegmentsList =
     , _mslStartIndex = Nothing
     , _mslMaxResults = Nothing
     , _mslFields = Nothing
-    , _mslAlt = "json"
+    , _mslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,21 +160,22 @@ mslFields
   = lens _mslFields (\ s a -> s{_mslFields = a})
 
 -- | Data format for the response.
-mslAlt :: Lens' ManagementSegmentsList' Text
+mslAlt :: Lens' ManagementSegmentsList' Alt
 mslAlt = lens _mslAlt (\ s a -> s{_mslAlt = a})
 
 instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementSegmentsList{..}
-          = go _mslQuotaUser _mslPrettyPrint _mslUserIp _mslKey
+        requestWithRoute r u ManagementSegmentsList'{..}
+          = go _mslQuotaUser (Just _mslPrettyPrint) _mslUserIp
+              _mslKey
               _mslOauthToken
               _mslStartIndex
               _mslMaxResults
               _mslFields
-              _mslAlt
+              (Just _mslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementSegmentsListAPI)
+                      (Proxy :: Proxy ManagementSegmentsListResource)
                       r
                       u

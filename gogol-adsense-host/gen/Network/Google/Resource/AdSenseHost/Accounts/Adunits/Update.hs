@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsUpdate@.
-module AdSenseHost.Accounts.Adunits.Update
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Update
     (
     -- * REST Resource
-      AccountsAdunitsUpdateAPI
+      AccountsAdunitsUpdateResource
 
     -- * Creating a Request
-    , accountsAdunitsUpdate
-    , AccountsAdunitsUpdate
+    , accountsAdunitsUpdate'
+    , AccountsAdunitsUpdate'
 
     -- * Request Lenses
     , aauQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsUpdate@ which the
--- 'AccountsAdunitsUpdate' request conforms to.
-type AccountsAdunitsUpdateAPI =
+-- 'AccountsAdunitsUpdate'' request conforms to.
+type AccountsAdunitsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
-             "adunits" :> Put '[JSON] AdUnit
+             "adunits" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] AdUnit
 
 -- | Update the supplied ad unit in the specified publisher AdSense account.
 --
--- /See:/ 'accountsAdunitsUpdate' smart constructor.
-data AccountsAdunitsUpdate = AccountsAdunitsUpdate
+-- /See:/ 'accountsAdunitsUpdate'' smart constructor.
+data AccountsAdunitsUpdate' = AccountsAdunitsUpdate'
     { _aauQuotaUser   :: !(Maybe Text)
     , _aauPrettyPrint :: !Bool
     , _aauUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data AccountsAdunitsUpdate = AccountsAdunitsUpdate
     , _aauKey         :: !(Maybe Text)
     , _aauOauthToken  :: !(Maybe Text)
     , _aauFields      :: !(Maybe Text)
-    , _aauAlt         :: !Text
+    , _aauAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsUpdate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsAdunitsUpdate = AccountsAdunitsUpdate
 -- * 'aauFields'
 --
 -- * 'aauAlt'
-accountsAdunitsUpdate
+accountsAdunitsUpdate'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsUpdate
-accountsAdunitsUpdate pAauAdClientId_ pAauAccountId_ =
-    AccountsAdunitsUpdate
+    -> AccountsAdunitsUpdate'
+accountsAdunitsUpdate' pAauAdClientId_ pAauAccountId_ =
+    AccountsAdunitsUpdate'
     { _aauQuotaUser = Nothing
     , _aauPrettyPrint = True
     , _aauUserIp = Nothing
@@ -102,7 +110,7 @@ accountsAdunitsUpdate pAauAdClientId_ pAauAccountId_ =
     , _aauKey = Nothing
     , _aauOauthToken = Nothing
     , _aauFields = Nothing
-    , _aauAlt = "json"
+    , _aauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ aauFields
   = lens _aauFields (\ s a -> s{_aauFields = a})
 
 -- | Data format for the response.
-aauAlt :: Lens' AccountsAdunitsUpdate' Text
+aauAlt :: Lens' AccountsAdunitsUpdate' Alt
 aauAlt = lens _aauAlt (\ s a -> s{_aauAlt = a})
 
 instance GoogleRequest AccountsAdunitsUpdate' where
         type Rs AccountsAdunitsUpdate' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsUpdate{..}
-          = go _aauQuotaUser _aauPrettyPrint _aauUserIp
+        requestWithRoute r u AccountsAdunitsUpdate'{..}
+          = go _aauQuotaUser (Just _aauPrettyPrint) _aauUserIp
               _aauAdClientId
               _aauAccountId
               _aauKey
               _aauOauthToken
               _aauFields
-              _aauAlt
+              (Just _aauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsUpdateAPI)
+                      (Proxy :: Proxy AccountsAdunitsUpdateResource)
                       r
                       u

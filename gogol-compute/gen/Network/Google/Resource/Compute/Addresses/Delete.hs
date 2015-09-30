@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,161 +20,174 @@
 -- | Deletes the specified address resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesDelete@.
-module Compute.Addresses.Delete
+module Network.Google.Resource.Compute.Addresses.Delete
     (
     -- * REST Resource
-      AddressesDeleteAPI
+      AddressesDeleteResource
 
     -- * Creating a Request
-    , addressesDelete
-    , AddressesDelete
+    , addressesDelete'
+    , AddressesDelete'
 
     -- * Request Lenses
-    , adQuotaUser
-    , adPrettyPrint
-    , adProject
-    , adUserIp
-    , adAddress
-    , adKey
-    , adRegion
-    , adOauthToken
-    , adFields
-    , adAlt
+    , addQuotaUser
+    , addPrettyPrint
+    , addProject
+    , addUserIp
+    , addAddress
+    , addKey
+    , addRegion
+    , addOauthToken
+    , addFields
+    , addAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAddressesDelete@ which the
--- 'AddressesDelete' request conforms to.
-type AddressesDeleteAPI =
+-- 'AddressesDelete'' request conforms to.
+type AddressesDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "addresses" :>
-             Capture "address" Text :> Delete '[JSON] Operation
+             Capture "address" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified address resource.
 --
--- /See:/ 'addressesDelete' smart constructor.
-data AddressesDelete = AddressesDelete
-    { _adQuotaUser   :: !(Maybe Text)
-    , _adPrettyPrint :: !Bool
-    , _adProject     :: !Text
-    , _adUserIp      :: !(Maybe Text)
-    , _adAddress     :: !Text
-    , _adKey         :: !(Maybe Text)
-    , _adRegion      :: !Text
-    , _adOauthToken  :: !(Maybe Text)
-    , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Text
+-- /See:/ 'addressesDelete'' smart constructor.
+data AddressesDelete' = AddressesDelete'
+    { _addQuotaUser   :: !(Maybe Text)
+    , _addPrettyPrint :: !Bool
+    , _addProject     :: !Text
+    , _addUserIp      :: !(Maybe Text)
+    , _addAddress     :: !Text
+    , _addKey         :: !(Maybe Text)
+    , _addRegion      :: !Text
+    , _addOauthToken  :: !(Maybe Text)
+    , _addFields      :: !(Maybe Text)
+    , _addAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'adQuotaUser'
+-- * 'addQuotaUser'
 --
--- * 'adPrettyPrint'
+-- * 'addPrettyPrint'
 --
--- * 'adProject'
+-- * 'addProject'
 --
--- * 'adUserIp'
+-- * 'addUserIp'
 --
--- * 'adAddress'
+-- * 'addAddress'
 --
--- * 'adKey'
+-- * 'addKey'
 --
--- * 'adRegion'
+-- * 'addRegion'
 --
--- * 'adOauthToken'
+-- * 'addOauthToken'
 --
--- * 'adFields'
+-- * 'addFields'
 --
--- * 'adAlt'
-addressesDelete
+-- * 'addAlt'
+addressesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
     -> Text -- ^ 'region'
-    -> AddressesDelete
-addressesDelete pAdProject_ pAdAddress_ pAdRegion_ =
-    AddressesDelete
-    { _adQuotaUser = Nothing
-    , _adPrettyPrint = True
-    , _adProject = pAdProject_
-    , _adUserIp = Nothing
-    , _adAddress = pAdAddress_
-    , _adKey = Nothing
-    , _adRegion = pAdRegion_
-    , _adOauthToken = Nothing
-    , _adFields = Nothing
-    , _adAlt = "json"
+    -> AddressesDelete'
+addressesDelete' pAddProject_ pAddAddress_ pAddRegion_ =
+    AddressesDelete'
+    { _addQuotaUser = Nothing
+    , _addPrettyPrint = True
+    , _addProject = pAddProject_
+    , _addUserIp = Nothing
+    , _addAddress = pAddAddress_
+    , _addKey = Nothing
+    , _addRegion = pAddRegion_
+    , _addOauthToken = Nothing
+    , _addFields = Nothing
+    , _addAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-adQuotaUser :: Lens' AddressesDelete' (Maybe Text)
-adQuotaUser
-  = lens _adQuotaUser (\ s a -> s{_adQuotaUser = a})
+addQuotaUser :: Lens' AddressesDelete' (Maybe Text)
+addQuotaUser
+  = lens _addQuotaUser (\ s a -> s{_addQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-adPrettyPrint :: Lens' AddressesDelete' Bool
-adPrettyPrint
-  = lens _adPrettyPrint
-      (\ s a -> s{_adPrettyPrint = a})
+addPrettyPrint :: Lens' AddressesDelete' Bool
+addPrettyPrint
+  = lens _addPrettyPrint
+      (\ s a -> s{_addPrettyPrint = a})
 
 -- | Project ID for this request.
-adProject :: Lens' AddressesDelete' Text
-adProject
-  = lens _adProject (\ s a -> s{_adProject = a})
+addProject :: Lens' AddressesDelete' Text
+addProject
+  = lens _addProject (\ s a -> s{_addProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adUserIp :: Lens' AddressesDelete' (Maybe Text)
-adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
+addUserIp :: Lens' AddressesDelete' (Maybe Text)
+addUserIp
+  = lens _addUserIp (\ s a -> s{_addUserIp = a})
 
 -- | Name of the address resource to delete.
-adAddress :: Lens' AddressesDelete' Text
-adAddress
-  = lens _adAddress (\ s a -> s{_adAddress = a})
+addAddress :: Lens' AddressesDelete' Text
+addAddress
+  = lens _addAddress (\ s a -> s{_addAddress = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AddressesDelete' (Maybe Text)
-adKey = lens _adKey (\ s a -> s{_adKey = a})
+addKey :: Lens' AddressesDelete' (Maybe Text)
+addKey = lens _addKey (\ s a -> s{_addKey = a})
 
 -- | The name of the region for this request.
-adRegion :: Lens' AddressesDelete' Text
-adRegion = lens _adRegion (\ s a -> s{_adRegion = a})
+addRegion :: Lens' AddressesDelete' Text
+addRegion
+  = lens _addRegion (\ s a -> s{_addRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-adOauthToken :: Lens' AddressesDelete' (Maybe Text)
-adOauthToken
-  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
+addOauthToken :: Lens' AddressesDelete' (Maybe Text)
+addOauthToken
+  = lens _addOauthToken
+      (\ s a -> s{_addOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-adFields :: Lens' AddressesDelete' (Maybe Text)
-adFields = lens _adFields (\ s a -> s{_adFields = a})
+addFields :: Lens' AddressesDelete' (Maybe Text)
+addFields
+  = lens _addFields (\ s a -> s{_addFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' AddressesDelete' Text
-adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
+addAlt :: Lens' AddressesDelete' Alt
+addAlt = lens _addAlt (\ s a -> s{_addAlt = a})
 
 instance GoogleRequest AddressesDelete' where
         type Rs AddressesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesDelete{..}
-          = go _adQuotaUser _adPrettyPrint _adProject _adUserIp
-              _adAddress
-              _adKey
-              _adRegion
-              _adOauthToken
-              _adFields
-              _adAlt
+        requestWithRoute r u AddressesDelete'{..}
+          = go _addQuotaUser (Just _addPrettyPrint) _addProject
+              _addUserIp
+              _addAddress
+              _addKey
+              _addRegion
+              _addOauthToken
+              _addFields
+              (Just _addAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AddressesDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AddressesDeleteResource)
                       r
                       u

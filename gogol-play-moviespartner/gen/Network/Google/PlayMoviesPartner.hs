@@ -28,25 +28,25 @@ module Network.Google.PlayMoviesPartner
     -- * REST Resources
 
     -- ** PlaymoviespartnerAccountsAvailsList
-    , module PlayMoviesPartner.Accounts.Avails.List
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
 
     -- ** PlaymoviespartnerAccountsExperienceLocalesGet
-    , module PlayMoviesPartner.Accounts.ExperienceLocales.Get
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 
     -- ** PlaymoviespartnerAccountsExperienceLocalesList
-    , module PlayMoviesPartner.Accounts.ExperienceLocales.List
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 
     -- ** PlaymoviespartnerAccountsOrdersGet
-    , module PlayMoviesPartner.Accounts.Orders.Get
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 
     -- ** PlaymoviespartnerAccountsOrdersList
-    , module PlayMoviesPartner.Accounts.Orders.List
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
 
     -- ** PlaymoviespartnerAccountsStoreInfosCountryGet
-    , module PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 
     -- ** PlaymoviespartnerAccountsStoreInfosList
-    , module PlayMoviesPartner.Accounts.StoreInfos.List
+    , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 
     -- * Types
 
@@ -208,7 +208,14 @@ import           Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.L
 TODO
 -}
 
-type PlayMoviesPartnerAPI = Accounts
+type PlayMoviesPartnerAPI =
+     AccountsAvailsListResource :<|>
+       AccountsStoreInfosCountryGetResource
+       :<|> AccountsStoreInfosListResource
+       :<|> AccountsOrdersListResource
+       :<|> AccountsOrdersGetResource
+       :<|> AccountsExperienceLocalesListResource
+       :<|> AccountsExperienceLocalesGetResource
 
 playMoviesPartnerAPI :: Proxy PlayMoviesPartnerAPI
 playMoviesPartnerAPI = Proxy

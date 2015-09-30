@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves a volume within a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryBookshelvesMoveVolume@.
-module Books.Mylibrary.Bookshelves.MoveVolume
+module Network.Google.Resource.Books.Mylibrary.Bookshelves.MoveVolume
     (
     -- * REST Resource
-      MylibraryBookshelvesMoveVolumeAPI
+      MylibraryBookshelvesMoveVolumeResource
 
     -- * Creating a Request
-    , mylibraryBookshelvesMoveVolume
-    , MylibraryBookshelvesMoveVolume
+    , mylibraryBookshelvesMoveVolume'
+    , MylibraryBookshelvesMoveVolume'
 
     -- * Request Lenses
     , mbmvQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryBookshelvesMoveVolume@ which the
--- 'MylibraryBookshelvesMoveVolume' request conforms to.
-type MylibraryBookshelvesMoveVolumeAPI =
+-- 'MylibraryBookshelvesMoveVolume'' request conforms to.
+type MylibraryBookshelvesMoveVolumeResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
            "moveVolume" :>
-             QueryParam "volumeId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "volumePosition" Int32 :> Post '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "volumePosition" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Moves a volume within a bookshelf.
 --
--- /See:/ 'mylibraryBookshelvesMoveVolume' smart constructor.
-data MylibraryBookshelvesMoveVolume = MylibraryBookshelvesMoveVolume
+-- /See:/ 'mylibraryBookshelvesMoveVolume'' smart constructor.
+data MylibraryBookshelvesMoveVolume' = MylibraryBookshelvesMoveVolume'
     { _mbmvQuotaUser      :: !(Maybe Text)
     , _mbmvPrettyPrint    :: !Bool
     , _mbmvUserIp         :: !(Maybe Text)
@@ -70,7 +78,7 @@ data MylibraryBookshelvesMoveVolume = MylibraryBookshelvesMoveVolume
     , _mbmvOauthToken     :: !(Maybe Text)
     , _mbmvVolumePosition :: !Int32
     , _mbmvFields         :: !(Maybe Text)
-    , _mbmvAlt            :: !Text
+    , _mbmvAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryBookshelvesMoveVolume'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data MylibraryBookshelvesMoveVolume = MylibraryBookshelvesMoveVolume
 -- * 'mbmvFields'
 --
 -- * 'mbmvAlt'
-mylibraryBookshelvesMoveVolume
+mylibraryBookshelvesMoveVolume'
     :: Text -- ^ 'shelf'
     -> Text -- ^ 'volumeId'
     -> Int32 -- ^ 'volumePosition'
-    -> MylibraryBookshelvesMoveVolume
-mylibraryBookshelvesMoveVolume pMbmvShelf_ pMbmvVolumeId_ pMbmvVolumePosition_ =
-    MylibraryBookshelvesMoveVolume
+    -> MylibraryBookshelvesMoveVolume'
+mylibraryBookshelvesMoveVolume' pMbmvShelf_ pMbmvVolumeId_ pMbmvVolumePosition_ =
+    MylibraryBookshelvesMoveVolume'
     { _mbmvQuotaUser = Nothing
     , _mbmvPrettyPrint = True
     , _mbmvUserIp = Nothing
@@ -115,7 +123,7 @@ mylibraryBookshelvesMoveVolume pMbmvShelf_ pMbmvVolumeId_ pMbmvVolumePosition_ =
     , _mbmvOauthToken = Nothing
     , _mbmvVolumePosition = pMbmvVolumePosition_
     , _mbmvFields = Nothing
-    , _mbmvAlt = "json"
+    , _mbmvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,7 +186,7 @@ mbmvFields
   = lens _mbmvFields (\ s a -> s{_mbmvFields = a})
 
 -- | Data format for the response.
-mbmvAlt :: Lens' MylibraryBookshelvesMoveVolume' Text
+mbmvAlt :: Lens' MylibraryBookshelvesMoveVolume' Alt
 mbmvAlt = lens _mbmvAlt (\ s a -> s{_mbmvAlt = a})
 
 instance GoogleRequest
@@ -186,8 +194,9 @@ instance GoogleRequest
         type Rs MylibraryBookshelvesMoveVolume' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MylibraryBookshelvesMoveVolume{..}
-          = go _mbmvQuotaUser _mbmvPrettyPrint _mbmvUserIp
+          MylibraryBookshelvesMoveVolume'{..}
+          = go _mbmvQuotaUser (Just _mbmvPrettyPrint)
+              _mbmvUserIp
               _mbmvShelf
               _mbmvKey
               (Just _mbmvVolumeId)
@@ -195,9 +204,10 @@ instance GoogleRequest
               _mbmvOauthToken
               (Just _mbmvVolumePosition)
               _mbmvFields
-              _mbmvAlt
+              (Just _mbmvAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryBookshelvesMoveVolumeAPI)
+                      (Proxy ::
+                         Proxy MylibraryBookshelvesMoveVolumeResource)
                       r
                       u

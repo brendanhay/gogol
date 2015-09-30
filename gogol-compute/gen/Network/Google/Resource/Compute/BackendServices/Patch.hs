@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesPatch@.
-module Compute.BackendServices.Patch
+module Network.Google.Resource.Compute.BackendServices.Patch
     (
     -- * REST Resource
-      BackendServicesPatchAPI
+      BackendServicesPatchResource
 
     -- * Creating a Request
-    , backendServicesPatch
-    , BackendServicesPatch
+    , backendServicesPatch'
+    , BackendServicesPatch'
 
     -- * Request Lenses
     , bspQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeBackendServicesPatch@ which the
--- 'BackendServicesPatch' request conforms to.
-type BackendServicesPatchAPI =
+-- 'BackendServicesPatch'' request conforms to.
+type BackendServicesPatchResource =
      Capture "project" Text :>
        "global" :>
          "backendServices" :>
            Capture "backendService" Text :>
-             Patch '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource. This method
 -- supports patch semantics.
 --
--- /See:/ 'backendServicesPatch' smart constructor.
-data BackendServicesPatch = BackendServicesPatch
+-- /See:/ 'backendServicesPatch'' smart constructor.
+data BackendServicesPatch' = BackendServicesPatch'
     { _bspQuotaUser      :: !(Maybe Text)
     , _bspPrettyPrint    :: !Bool
     , _bspProject        :: !Text
@@ -65,7 +72,7 @@ data BackendServicesPatch = BackendServicesPatch
     , _bspKey            :: !(Maybe Text)
     , _bspOauthToken     :: !(Maybe Text)
     , _bspFields         :: !(Maybe Text)
-    , _bspAlt            :: !Text
+    , _bspAlt            :: !Alt
     , _bspBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,12 +97,12 @@ data BackendServicesPatch = BackendServicesPatch
 -- * 'bspAlt'
 --
 -- * 'bspBackendService'
-backendServicesPatch
+backendServicesPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'backendService'
-    -> BackendServicesPatch
-backendServicesPatch pBspProject_ pBspBackendService_ =
-    BackendServicesPatch
+    -> BackendServicesPatch'
+backendServicesPatch' pBspProject_ pBspBackendService_ =
+    BackendServicesPatch'
     { _bspQuotaUser = Nothing
     , _bspPrettyPrint = True
     , _bspProject = pBspProject_
@@ -103,7 +110,7 @@ backendServicesPatch pBspProject_ pBspBackendService_ =
     , _bspKey = Nothing
     , _bspOauthToken = Nothing
     , _bspFields = Nothing
-    , _bspAlt = "json"
+    , _bspAlt = JSON
     , _bspBackendService = pBspBackendService_
     }
 
@@ -149,7 +156,7 @@ bspFields
   = lens _bspFields (\ s a -> s{_bspFields = a})
 
 -- | Data format for the response.
-bspAlt :: Lens' BackendServicesPatch' Text
+bspAlt :: Lens' BackendServicesPatch' Alt
 bspAlt = lens _bspAlt (\ s a -> s{_bspAlt = a})
 
 -- | Name of the BackendService resource to update.
@@ -161,16 +168,16 @@ bspBackendService
 instance GoogleRequest BackendServicesPatch' where
         type Rs BackendServicesPatch' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesPatch{..}
-          = go _bspQuotaUser _bspPrettyPrint _bspProject
+        requestWithRoute r u BackendServicesPatch'{..}
+          = go _bspQuotaUser (Just _bspPrettyPrint) _bspProject
               _bspUserIp
               _bspKey
               _bspOauthToken
               _bspFields
-              _bspAlt
+              (Just _bspAlt)
               _bspBackendService
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackendServicesPatchAPI)
+                      (Proxy :: Proxy BackendServicesPatchResource)
                       r
                       u

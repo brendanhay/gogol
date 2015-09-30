@@ -17,6 +17,19 @@ module Network.Google.ComputeUserAccounts.Types
     -- * Service URL
       computeUserAccountsURL
 
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
+
     -- * OperationList
     , OperationList
     , operationList
@@ -90,6 +103,9 @@ module Network.Google.ComputeUserAccounts.Types
     , pkExpirationTimestamp
     , pkDescription
 
+    -- * OperationStatus
+    , OperationStatus (..)
+
     -- * User
     , User
     , user
@@ -137,6 +153,11 @@ module Network.Google.ComputeUserAccounts.Types
     , luvGid
     , luvHomeDirectory
 
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
     -- * LinuxGetAuthorizedKeysViewResponse
     , LinuxGetAuthorizedKeysViewResponse
     , linuxGetAuthorizedKeysViewResponse
@@ -147,11 +168,24 @@ module Network.Google.ComputeUserAccounts.Types
     , groupsRemoveMemberRequest
     , grmrUsers
 
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- * AuthorizedKeysView
     , AuthorizedKeysView
     , authorizedKeysView
     , akvSudoer
     , akvKeys
+
+    -- * Alt
+    , Alt (..)
+
+    -- * OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.ComputeUserAccounts.Types.Product
@@ -159,7 +193,7 @@ import           Network.Google.ComputeUserAccounts.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'vm_beta' of the Cloud User Accounts API.
-computeUserAccountsURL :: BaseURL
+computeUserAccountsURL :: BaseUrl
 computeUserAccountsURL
   = BaseUrl Https
       "https://www.googleapis.com/clouduseraccounts/vm_beta/projects/"

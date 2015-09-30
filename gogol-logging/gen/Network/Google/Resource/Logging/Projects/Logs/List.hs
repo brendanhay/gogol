@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the logs in the project. Only logs that have entries are listed.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsList@.
-module Logging.Projects.Logs.List
+module Network.Google.Resource.Logging.Projects.Logs.List
     (
     -- * REST Resource
-      ProjectsLogsListAPI
+      ProjectsLogsListResource
 
     -- * Creating a Request
-    , projectsLogsList
-    , ProjectsLogsList
+    , projectsLogsList'
+    , ProjectsLogsList'
 
     -- * Request Lenses
     , pllXgafv
@@ -53,22 +54,35 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsList@ which the
--- 'ProjectsLogsList' request conforms to.
-type ProjectsLogsListAPI =
+-- 'ProjectsLogsList'' request conforms to.
+type ProjectsLogsListResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
-             QueryParam "serviceName" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "serviceIndexPrefix" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     Get '[JSON] ListLogsResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "serviceName" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "serviceIndexPrefix" Text :>
+                                       QueryParam "pageSize" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in the project. Only logs that have entries are listed.
 --
--- /See:/ 'projectsLogsList' smart constructor.
-data ProjectsLogsList = ProjectsLogsList
+-- /See:/ 'projectsLogsList'' smart constructor.
+data ProjectsLogsList' = ProjectsLogsList'
     { _pllXgafv              :: !(Maybe Text)
     , _pllQuotaUser          :: !(Maybe Text)
     , _pllPrettyPrint        :: !Bool
@@ -128,11 +142,11 @@ data ProjectsLogsList = ProjectsLogsList
 -- * 'pllCallback'
 --
 -- * 'pllAlt'
-projectsLogsList
+projectsLogsList'
     :: Text -- ^ 'projectsId'
-    -> ProjectsLogsList
-projectsLogsList pPllProjectsId_ =
-    ProjectsLogsList
+    -> ProjectsLogsList'
+projectsLogsList' pPllProjectsId_ =
+    ProjectsLogsList'
     { _pllXgafv = Nothing
     , _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
@@ -269,10 +283,10 @@ pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
 instance GoogleRequest ProjectsLogsList' where
         type Rs ProjectsLogsList' = ListLogsResponse
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsList{..}
-          = go _pllXgafv _pllQuotaUser _pllPrettyPrint
+        requestWithRoute r u ProjectsLogsList'{..}
+          = go _pllXgafv _pllQuotaUser (Just _pllPrettyPrint)
               _pllUploadProtocol
-              _pllPp
+              (Just _pllPp)
               _pllAccessToken
               _pllUploadType
               _pllBearerToken
@@ -285,9 +299,9 @@ instance GoogleRequest ProjectsLogsList' where
               _pllPageSize
               _pllFields
               _pllCallback
-              _pllAlt
+              (Just _pllAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsListAPI)
+                      (Proxy :: Proxy ProjectsLogsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes target url for forwarding rule.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesSetTarget@.
-module Compute.GlobalForwardingRules.SetTarget
+module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
     (
     -- * REST Resource
-      GlobalForwardingRulesSetTargetAPI
+      GlobalForwardingRulesSetTargetResource
 
     -- * Creating a Request
-    , globalForwardingRulesSetTarget
-    , GlobalForwardingRulesSetTarget
+    , globalForwardingRulesSetTarget'
+    , GlobalForwardingRulesSetTarget'
 
     -- * Request Lenses
     , gfrstQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalForwardingRulesSetTarget@ which the
--- 'GlobalForwardingRulesSetTarget' request conforms to.
-type GlobalForwardingRulesSetTargetAPI =
+-- 'GlobalForwardingRulesSetTarget'' request conforms to.
+type GlobalForwardingRulesSetTargetResource =
      Capture "project" Text :>
        "global" :>
          "forwardingRules" :>
            Capture "forwardingRule" Text :>
-             "setTarget" :> Post '[JSON] Operation
+             "setTarget" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Changes target url for forwarding rule.
 --
--- /See:/ 'globalForwardingRulesSetTarget' smart constructor.
-data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget
+-- /See:/ 'globalForwardingRulesSetTarget'' smart constructor.
+data GlobalForwardingRulesSetTarget' = GlobalForwardingRulesSetTarget'
     { _gfrstQuotaUser      :: !(Maybe Text)
     , _gfrstPrettyPrint    :: !Bool
     , _gfrstProject        :: !Text
@@ -64,7 +72,7 @@ data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget
     , _gfrstKey            :: !(Maybe Text)
     , _gfrstOauthToken     :: !(Maybe Text)
     , _gfrstFields         :: !(Maybe Text)
-    , _gfrstAlt            :: !Text
+    , _gfrstAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesSetTarget'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget
 -- * 'gfrstFields'
 --
 -- * 'gfrstAlt'
-globalForwardingRulesSetTarget
+globalForwardingRulesSetTarget'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
-    -> GlobalForwardingRulesSetTarget
-globalForwardingRulesSetTarget pGfrstProject_ pGfrstForwardingRule_ =
-    GlobalForwardingRulesSetTarget
+    -> GlobalForwardingRulesSetTarget'
+globalForwardingRulesSetTarget' pGfrstProject_ pGfrstForwardingRule_ =
+    GlobalForwardingRulesSetTarget'
     { _gfrstQuotaUser = Nothing
     , _gfrstPrettyPrint = True
     , _gfrstProject = pGfrstProject_
@@ -102,7 +110,7 @@ globalForwardingRulesSetTarget pGfrstProject_ pGfrstForwardingRule_ =
     , _gfrstKey = Nothing
     , _gfrstOauthToken = Nothing
     , _gfrstFields = Nothing
-    , _gfrstAlt = "json"
+    , _gfrstAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,7 +162,7 @@ gfrstFields
   = lens _gfrstFields (\ s a -> s{_gfrstFields = a})
 
 -- | Data format for the response.
-gfrstAlt :: Lens' GlobalForwardingRulesSetTarget' Text
+gfrstAlt :: Lens' GlobalForwardingRulesSetTarget' Alt
 gfrstAlt = lens _gfrstAlt (\ s a -> s{_gfrstAlt = a})
 
 instance GoogleRequest
@@ -162,16 +170,18 @@ instance GoogleRequest
         type Rs GlobalForwardingRulesSetTarget' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          GlobalForwardingRulesSetTarget{..}
-          = go _gfrstQuotaUser _gfrstPrettyPrint _gfrstProject
+          GlobalForwardingRulesSetTarget'{..}
+          = go _gfrstQuotaUser (Just _gfrstPrettyPrint)
+              _gfrstProject
               _gfrstForwardingRule
               _gfrstUserIp
               _gfrstKey
               _gfrstOauthToken
               _gfrstFields
-              _gfrstAlt
+              (Just _gfrstAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalForwardingRulesSetTargetAPI)
+                      (Proxy ::
+                         Proxy GlobalForwardingRulesSetTargetResource)
                       r
                       u

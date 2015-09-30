@@ -17,11 +17,61 @@ module Network.Google.CustomSearch.Types
     -- * Service URL
       customSearchURL
 
+    -- * PromotionImage
+    , PromotionImage
+    , promotionImage
+    , piHeight
+    , piWidth
+    , piSource
+
+    -- * SearchCseListSiteSearchFilter
+    , SearchCseListSiteSearchFilter (..)
+
     -- * Context
     , Context
     , context
     , cFacets
     , cTitle
+
+    -- * SearchCseListImgColorType
+    , SearchCseListImgColorType (..)
+
+    -- * SearchCseListImgType
+    , SearchCseListImgType (..)
+
+    -- * SearchQueries
+    , SearchQueries
+    , searchQueries
+
+    -- * SearchURL
+    , SearchURL
+    , searchURL
+    , suType
+    , suTemplate
+
+    -- * SearchCseListImgDominantColor
+    , SearchCseListImgDominantColor (..)
+
+    -- * SearchSpelling
+    , SearchSpelling
+    , searchSpelling
+    , ssCorrectedQuery
+    , ssHtmlCorrectedQuery
+
+    -- * ResultPagemap
+    , ResultPagemap
+    , resultPagemap
+
+    -- * ResultImage
+    , ResultImage
+    , resultImage
+    , riThumbnailLink
+    , riHeight
+    , riByteSize
+    , riContextLink
+    , riThumbnailHeight
+    , riWidth
+    , riThumbnailWidth
 
     -- * Result
     , Result
@@ -41,6 +91,30 @@ module Network.Google.CustomSearch.Types
     , rHtmlTitle
     , rLabels
     , rTitle
+
+    -- * ResultLabels
+    , ResultLabels
+    , resultLabels
+    , rlName
+    , rlDisplayName
+    , rlLabelWithOp
+
+    -- * SearchSearchInformation
+    , SearchSearchInformation
+    , searchSearchInformation
+    , ssiSearchTime
+    , ssiFormattedSearchTime
+    , ssiTotalResults
+    , ssiFormattedTotalResults
+
+    -- * SearchCseListSearchType
+    , SearchCseListSearchType (..)
+
+    -- * SearchCseListLr
+    , SearchCseListLr (..)
+
+    -- * SearchCseListImgSize
+    , SearchCseListImgSize (..)
 
     -- * Query
     , Query
@@ -83,6 +157,9 @@ module Network.Google.CustomSearch.Types
     , qHq
     , qHighRange
 
+    -- * SearchCseListSafe
+    , SearchCseListSafe (..)
+
     -- * Promotion
     , Promotion
     , promotion
@@ -104,6 +181,27 @@ module Network.Google.CustomSearch.Types
     , sSearchInformation
     , sPromotions
     , sSpelling
+
+    -- * PromotionBodyLines
+    , PromotionBodyLines
+    , promotionBodyLines
+    , pblLink
+    , pblUrl
+    , pblHtmlTitle
+    , pblTitle
+
+    -- * SearchCseListFilter
+    , SearchCseListFilter (..)
+
+    -- * ContextFacets
+    , ContextFacets
+    , contextFacets
+    , cfAnchor
+    , cfLabelWithOp
+    , cfLabel
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.CustomSearch.Types.Product
@@ -111,7 +209,7 @@ import           Network.Google.CustomSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the CustomSearch API.
-customSearchURL :: BaseURL
+customSearchURL :: BaseUrl
 customSearchURL
   = BaseUrl Https
       "https://www.googleapis.com/customsearch/"

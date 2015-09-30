@@ -27,22 +27,22 @@ module Network.Google.Spectrum
     -- * REST Resources
 
     -- ** SpectrumPawsGetSpectrum
-    , module Spectrum.Paws.GetSpectrum
+    , module Network.Google.Resource.Spectrum.Paws.GetSpectrum
 
     -- ** SpectrumPawsGetSpectrumBatch
-    , module Spectrum.Paws.GetSpectrumBatch
+    , module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
 
     -- ** SpectrumPawsInit
-    , module Spectrum.Paws.Init
+    , module Network.Google.Resource.Spectrum.Paws.Init
 
     -- ** SpectrumPawsNotifySpectrumUse
-    , module Spectrum.Paws.NotifySpectrumUse
+    , module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 
     -- ** SpectrumPawsRegister
-    , module Spectrum.Paws.Register
+    , module Network.Google.Resource.Spectrum.Paws.Register
 
     -- ** SpectrumPawsVerifyDevice
-    , module Spectrum.Paws.VerifyDevice
+    , module Network.Google.Resource.Spectrum.Paws.VerifyDevice
 
     -- * Types
 
@@ -313,6 +313,9 @@ module Network.Google.Spectrum
     , DeviceCapabilities
     , deviceCapabilities
     , dcFrequencyRanges
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -328,7 +331,12 @@ import           Network.Google.Spectrum.Types
 TODO
 -}
 
-type SpectrumAPI = Paws
+type SpectrumAPI =
+     PawsVerifyDeviceResource :<|> PawsInitResource :<|>
+       PawsGetSpectrumResource
+       :<|> PawsNotifySpectrumUseResource
+       :<|> PawsRegisterResource
+       :<|> PawsGetSpectrumBatchResource
 
 spectrumAPI :: Proxy SpectrumAPI
 spectrumAPI = Proxy

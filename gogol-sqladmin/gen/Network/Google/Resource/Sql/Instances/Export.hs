@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- as a MySQL dump file.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesExport@.
-module Sql.Instances.Export
+module Network.Google.Resource.Sql.Instances.Export
     (
     -- * REST Resource
-      InstancesExportAPI
+      InstancesExportResource
 
     -- * Creating a Request
-    , instancesExport
-    , InstancesExport
+    , instancesExport'
+    , InstancesExport'
 
     -- * Request Lenses
     , ieQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesExport@ which the
--- 'InstancesExport' request conforms to.
-type InstancesExportAPI =
+-- 'InstancesExport'' request conforms to.
+type InstancesExportResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "export" :> Post '[JSON] Operation
+             "export" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Exports data from a Cloud SQL instance to a Google Cloud Storage bucket
 -- as a MySQL dump file.
 --
--- /See:/ 'instancesExport' smart constructor.
-data InstancesExport = InstancesExport
+-- /See:/ 'instancesExport'' smart constructor.
+data InstancesExport' = InstancesExport'
     { _ieQuotaUser   :: !(Maybe Text)
     , _iePrettyPrint :: !Bool
     , _ieProject     :: !Text
@@ -65,7 +73,7 @@ data InstancesExport = InstancesExport
     , _ieKey         :: !(Maybe Text)
     , _ieOauthToken  :: !(Maybe Text)
     , _ieFields      :: !(Maybe Text)
-    , _ieAlt         :: !Text
+    , _ieAlt         :: !Alt
     , _ieInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,12 +98,12 @@ data InstancesExport = InstancesExport
 -- * 'ieAlt'
 --
 -- * 'ieInstance'
-instancesExport
+instancesExport'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesExport
-instancesExport pIeProject_ pIeInstance_ =
-    InstancesExport
+    -> InstancesExport'
+instancesExport' pIeProject_ pIeInstance_ =
+    InstancesExport'
     { _ieQuotaUser = Nothing
     , _iePrettyPrint = True
     , _ieProject = pIeProject_
@@ -103,7 +111,7 @@ instancesExport pIeProject_ pIeInstance_ =
     , _ieKey = Nothing
     , _ieOauthToken = Nothing
     , _ieFields = Nothing
-    , _ieAlt = "json"
+    , _ieAlt = JSON
     , _ieInstance = pIeInstance_
     }
 
@@ -146,7 +154,7 @@ ieFields :: Lens' InstancesExport' (Maybe Text)
 ieFields = lens _ieFields (\ s a -> s{_ieFields = a})
 
 -- | Data format for the response.
-ieAlt :: Lens' InstancesExport' Text
+ieAlt :: Lens' InstancesExport' Alt
 ieAlt = lens _ieAlt (\ s a -> s{_ieAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -157,14 +165,16 @@ ieInstance
 instance GoogleRequest InstancesExport' where
         type Rs InstancesExport' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesExport{..}
-          = go _ieQuotaUser _iePrettyPrint _ieProject _ieUserIp
+        requestWithRoute r u InstancesExport'{..}
+          = go _ieQuotaUser (Just _iePrettyPrint) _ieProject
+              _ieUserIp
               _ieKey
               _ieOauthToken
               _ieFields
-              _ieAlt
+              (Just _ieAlt)
               _ieInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesExportAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesExportResource)
                       r
                       u

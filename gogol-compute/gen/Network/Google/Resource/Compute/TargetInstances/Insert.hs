@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- using the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesInsert@.
-module Compute.TargetInstances.Insert
+module Network.Google.Resource.Compute.TargetInstances.Insert
     (
     -- * REST Resource
-      TargetInstancesInsertAPI
+      TargetInstancesInsertResource
 
     -- * Creating a Request
-    , targetInstancesInsert
-    , TargetInstancesInsert
+    , targetInstancesInsert'
+    , TargetInstancesInsert'
 
     -- * Request Lenses
     , tiiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetInstancesInsert@ which the
--- 'TargetInstancesInsert' request conforms to.
-type TargetInstancesInsertAPI =
+-- 'TargetInstancesInsert'' request conforms to.
+type TargetInstancesInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "targetInstances" :> Post '[JSON] Operation
+           "targetInstances" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a TargetInstance resource in the specified project and zone
 -- using the data included in the request.
 --
--- /See:/ 'targetInstancesInsert' smart constructor.
-data TargetInstancesInsert = TargetInstancesInsert
+-- /See:/ 'targetInstancesInsert'' smart constructor.
+data TargetInstancesInsert' = TargetInstancesInsert'
     { _tiiQuotaUser   :: !(Maybe Text)
     , _tiiPrettyPrint :: !Bool
     , _tiiProject     :: !Text
@@ -65,7 +73,7 @@ data TargetInstancesInsert = TargetInstancesInsert
     , _tiiKey         :: !(Maybe Text)
     , _tiiOauthToken  :: !(Maybe Text)
     , _tiiFields      :: !(Maybe Text)
-    , _tiiAlt         :: !Text
+    , _tiiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data TargetInstancesInsert = TargetInstancesInsert
 -- * 'tiiFields'
 --
 -- * 'tiiAlt'
-targetInstancesInsert
+targetInstancesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> TargetInstancesInsert
-targetInstancesInsert pTiiProject_ pTiiZone_ =
-    TargetInstancesInsert
+    -> TargetInstancesInsert'
+targetInstancesInsert' pTiiProject_ pTiiZone_ =
+    TargetInstancesInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True
     , _tiiProject = pTiiProject_
@@ -103,7 +111,7 @@ targetInstancesInsert pTiiProject_ pTiiZone_ =
     , _tiiKey = Nothing
     , _tiiOauthToken = Nothing
     , _tiiFields = Nothing
-    , _tiiAlt = "json"
+    , _tiiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ tiiFields
   = lens _tiiFields (\ s a -> s{_tiiFields = a})
 
 -- | Data format for the response.
-tiiAlt :: Lens' TargetInstancesInsert' Text
+tiiAlt :: Lens' TargetInstancesInsert' Alt
 tiiAlt = lens _tiiAlt (\ s a -> s{_tiiAlt = a})
 
 instance GoogleRequest TargetInstancesInsert' where
         type Rs TargetInstancesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesInsert{..}
-          = go _tiiQuotaUser _tiiPrettyPrint _tiiProject
+        requestWithRoute r u TargetInstancesInsert'{..}
+          = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiProject
               _tiiUserIp
               _tiiZone
               _tiiKey
               _tiiOauthToken
               _tiiFields
-              _tiiAlt
+              (Just _tiiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetInstancesInsertAPI)
+                      (Proxy :: Proxy TargetInstancesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsDelete@.
-module Resourceviews.ZoneViews.Delete
+module Network.Google.Resource.Resourceviews.ZoneViews.Delete
     (
     -- * REST Resource
-      ZoneViewsDeleteAPI
+      ZoneViewsDeleteResource
 
     -- * Creating a Request
-    , zoneViewsDelete
-    , ZoneViewsDelete
+    , zoneViewsDelete'
+    , ZoneViewsDelete'
 
     -- * Request Lenses
     , zvdQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsDelete@ which the
--- 'ZoneViewsDelete' request conforms to.
-type ZoneViewsDeleteAPI =
+-- 'ZoneViewsDelete'' request conforms to.
+type ZoneViewsDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Delete a resource view.
 --
--- /See:/ 'zoneViewsDelete' smart constructor.
-data ZoneViewsDelete = ZoneViewsDelete
+-- /See:/ 'zoneViewsDelete'' smart constructor.
+data ZoneViewsDelete' = ZoneViewsDelete'
     { _zvdQuotaUser    :: !(Maybe Text)
     , _zvdPrettyPrint  :: !Bool
     , _zvdResourceView :: !Text
@@ -67,7 +74,7 @@ data ZoneViewsDelete = ZoneViewsDelete
     , _zvdKey          :: !(Maybe Text)
     , _zvdOauthToken   :: !(Maybe Text)
     , _zvdFields       :: !(Maybe Text)
-    , _zvdAlt          :: !Text
+    , _zvdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsDelete'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data ZoneViewsDelete = ZoneViewsDelete
 -- * 'zvdFields'
 --
 -- * 'zvdAlt'
-zoneViewsDelete
+zoneViewsDelete'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsDelete
-zoneViewsDelete pZvdResourceView_ pZvdProject_ pZvdZone_ =
-    ZoneViewsDelete
+    -> ZoneViewsDelete'
+zoneViewsDelete' pZvdResourceView_ pZvdProject_ pZvdZone_ =
+    ZoneViewsDelete'
     { _zvdQuotaUser = Nothing
     , _zvdPrettyPrint = True
     , _zvdResourceView = pZvdResourceView_
@@ -109,7 +116,7 @@ zoneViewsDelete pZvdResourceView_ pZvdProject_ pZvdZone_ =
     , _zvdKey = Nothing
     , _zvdOauthToken = Nothing
     , _zvdFields = Nothing
-    , _zvdAlt = "json"
+    , _zvdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,22 +171,24 @@ zvdFields
   = lens _zvdFields (\ s a -> s{_zvdFields = a})
 
 -- | Data format for the response.
-zvdAlt :: Lens' ZoneViewsDelete' Text
+zvdAlt :: Lens' ZoneViewsDelete' Alt
 zvdAlt = lens _zvdAlt (\ s a -> s{_zvdAlt = a})
 
 instance GoogleRequest ZoneViewsDelete' where
         type Rs ZoneViewsDelete' = Operation
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsDelete{..}
-          = go _zvdQuotaUser _zvdPrettyPrint _zvdResourceView
+        requestWithRoute r u ZoneViewsDelete'{..}
+          = go _zvdQuotaUser (Just _zvdPrettyPrint)
+              _zvdResourceView
               _zvdProject
               _zvdUserIp
               _zvdZone
               _zvdKey
               _zvdOauthToken
               _zvdFields
-              _zvdAlt
+              (Just _zvdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZoneViewsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ZoneViewsDeleteResource)
                       r
                       u

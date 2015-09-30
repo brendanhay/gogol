@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesList@.
-module Compute.MachineTypes.List
+module Network.Google.Resource.Compute.MachineTypes.List
     (
     -- * REST Resource
-      MachineTypesListAPI
+      MachineTypesListResource
 
     -- * Creating a Request
-    , machineTypesList
-    , MachineTypesList
+    , machineTypesList'
+    , MachineTypesList'
 
     -- * Request Lenses
     , mtlQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeMachineTypesList@ which the
--- 'MachineTypesList' request conforms to.
-type MachineTypesListAPI =
+-- 'MachineTypesList'' request conforms to.
+type MachineTypesListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "machineTypes" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] MachineTypeList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] MachineTypeList
 
 -- | Retrieves the list of machine type resources available to the specified
 -- project.
 --
--- /See:/ 'machineTypesList' smart constructor.
-data MachineTypesList = MachineTypesList
+-- /See:/ 'machineTypesList'' smart constructor.
+data MachineTypesList' = MachineTypesList'
     { _mtlQuotaUser   :: !(Maybe Text)
     , _mtlPrettyPrint :: !Bool
     , _mtlProject     :: !Text
@@ -75,7 +83,7 @@ data MachineTypesList = MachineTypesList
     , _mtlOauthToken  :: !(Maybe Text)
     , _mtlMaxResults  :: !Word32
     , _mtlFields      :: !(Maybe Text)
-    , _mtlAlt         :: !Text
+    , _mtlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data MachineTypesList = MachineTypesList
 -- * 'mtlFields'
 --
 -- * 'mtlAlt'
-machineTypesList
+machineTypesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> MachineTypesList
-machineTypesList pMtlProject_ pMtlZone_ =
-    MachineTypesList
+    -> MachineTypesList'
+machineTypesList' pMtlProject_ pMtlZone_ =
+    MachineTypesList'
     { _mtlQuotaUser = Nothing
     , _mtlPrettyPrint = True
     , _mtlProject = pMtlProject_
@@ -122,7 +130,7 @@ machineTypesList pMtlProject_ pMtlZone_ =
     , _mtlOauthToken = Nothing
     , _mtlMaxResults = 500
     , _mtlFields = Nothing
-    , _mtlAlt = "json"
+    , _mtlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,14 @@ mtlFields
   = lens _mtlFields (\ s a -> s{_mtlFields = a})
 
 -- | Data format for the response.
-mtlAlt :: Lens' MachineTypesList' Text
+mtlAlt :: Lens' MachineTypesList' Alt
 mtlAlt = lens _mtlAlt (\ s a -> s{_mtlAlt = a})
 
 instance GoogleRequest MachineTypesList' where
         type Rs MachineTypesList' = MachineTypeList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesList{..}
-          = go _mtlQuotaUser _mtlPrettyPrint _mtlProject
+        requestWithRoute r u MachineTypesList'{..}
+          = go _mtlQuotaUser (Just _mtlPrettyPrint) _mtlProject
               _mtlUserIp
               _mtlZone
               _mtlKey
@@ -215,9 +223,9 @@ instance GoogleRequest MachineTypesList' where
               _mtlOauthToken
               (Just _mtlMaxResults)
               _mtlFields
-              _mtlAlt
+              (Just _mtlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MachineTypesListAPI)
+                      (Proxy :: Proxy MachineTypesListResource)
                       r
                       u

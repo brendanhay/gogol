@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new profile filter link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileFilterLinksInsert@.
-module Analytics.Management.ProfileFilterLinks.Insert
+module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Insert
     (
     -- * REST Resource
-      ManagementProfileFilterLinksInsertAPI
+      ManagementProfileFilterLinksInsertResource
 
     -- * Creating a Request
-    , managementProfileFilterLinksInsert
-    , ManagementProfileFilterLinksInsert
+    , managementProfileFilterLinksInsert'
+    , ManagementProfileFilterLinksInsert'
 
     -- * Request Lenses
     , mpfliQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileFilterLinksInsert@ which the
--- 'ManagementProfileFilterLinksInsert' request conforms to.
-type ManagementProfileFilterLinksInsertAPI =
+-- 'ManagementProfileFilterLinksInsert'' request conforms to.
+type ManagementProfileFilterLinksInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,12 +56,19 @@ type ManagementProfileFilterLinksInsertAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
-                     Post '[JSON] ProfileFilterLink
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Post '[JSON] ProfileFilterLink
 
 -- | Create a new profile filter link.
 --
--- /See:/ 'managementProfileFilterLinksInsert' smart constructor.
-data ManagementProfileFilterLinksInsert = ManagementProfileFilterLinksInsert
+-- /See:/ 'managementProfileFilterLinksInsert'' smart constructor.
+data ManagementProfileFilterLinksInsert' = ManagementProfileFilterLinksInsert'
     { _mpfliQuotaUser     :: !(Maybe Text)
     , _mpfliPrettyPrint   :: !Bool
     , _mpfliWebPropertyId :: !Text
@@ -70,7 +78,7 @@ data ManagementProfileFilterLinksInsert = ManagementProfileFilterLinksInsert
     , _mpfliKey           :: !(Maybe Text)
     , _mpfliOauthToken    :: !(Maybe Text)
     , _mpfliFields        :: !(Maybe Text)
-    , _mpfliAlt           :: !Text
+    , _mpfliAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksInsert'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data ManagementProfileFilterLinksInsert = ManagementProfileFilterLinksInsert
 -- * 'mpfliFields'
 --
 -- * 'mpfliAlt'
-managementProfileFilterLinksInsert
+managementProfileFilterLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfileFilterLinksInsert
-managementProfileFilterLinksInsert pMpfliWebPropertyId_ pMpfliProfileId_ pMpfliAccountId_ =
-    ManagementProfileFilterLinksInsert
+    -> ManagementProfileFilterLinksInsert'
+managementProfileFilterLinksInsert' pMpfliWebPropertyId_ pMpfliProfileId_ pMpfliAccountId_ =
+    ManagementProfileFilterLinksInsert'
     { _mpfliQuotaUser = Nothing
     , _mpfliPrettyPrint = False
     , _mpfliWebPropertyId = pMpfliWebPropertyId_
@@ -112,7 +120,7 @@ managementProfileFilterLinksInsert pMpfliWebPropertyId_ pMpfliProfileId_ pMpfliA
     , _mpfliKey = Nothing
     , _mpfliOauthToken = Nothing
     , _mpfliFields = Nothing
-    , _mpfliAlt = "json"
+    , _mpfliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -171,7 +179,7 @@ mpfliFields
   = lens _mpfliFields (\ s a -> s{_mpfliFields = a})
 
 -- | Data format for the response.
-mpfliAlt :: Lens' ManagementProfileFilterLinksInsert' Text
+mpfliAlt :: Lens' ManagementProfileFilterLinksInsert' Alt
 mpfliAlt = lens _mpfliAlt (\ s a -> s{_mpfliAlt = a})
 
 instance GoogleRequest
@@ -180,8 +188,8 @@ instance GoogleRequest
              ProfileFilterLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileFilterLinksInsert{..}
-          = go _mpfliQuotaUser _mpfliPrettyPrint
+          ManagementProfileFilterLinksInsert'{..}
+          = go _mpfliQuotaUser (Just _mpfliPrettyPrint)
               _mpfliWebPropertyId
               _mpfliUserIp
               _mpfliProfileId
@@ -189,10 +197,10 @@ instance GoogleRequest
               _mpfliKey
               _mpfliOauthToken
               _mpfliFields
-              _mpfliAlt
+              (Just _mpfliAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementProfileFilterLinksInsertAPI)
+                         Proxy ManagementProfileFilterLinksInsertResource)
                       r
                       u

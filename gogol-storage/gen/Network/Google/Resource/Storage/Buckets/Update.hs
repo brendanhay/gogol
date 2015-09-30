@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsUpdate@.
-module Storage.Buckets.Update
+module Network.Google.Resource.Storage.Buckets.Update
     (
     -- * REST Resource
-      BucketsUpdateAPI
+      BucketsUpdateResource
 
     -- * Creating a Request
-    , bucketsUpdate
-    , BucketsUpdate
+    , bucketsUpdate'
+    , BucketsUpdate'
 
     -- * Request Lenses
     , buQuotaUser
@@ -46,18 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketsUpdate@ which the
--- 'BucketsUpdate' request conforms to.
-type BucketsUpdateAPI =
+-- 'BucketsUpdate'' request conforms to.
+type BucketsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection" Text :> Put '[JSON] Bucket
+         QueryParam "quotaUser" Text :>
+           QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection"
+                       StorageBucketsUpdateProjection
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Bucket
 
 -- | Updates a bucket.
 --
--- /See:/ 'bucketsUpdate' smart constructor.
-data BucketsUpdate = BucketsUpdate
+-- /See:/ 'bucketsUpdate'' smart constructor.
+data BucketsUpdate' = BucketsUpdate'
     { _buQuotaUser                :: !(Maybe Text)
     , _buIfMetagenerationMatch    :: !(Maybe Word64)
     , _buPrettyPrint              :: !Bool
@@ -65,10 +75,10 @@ data BucketsUpdate = BucketsUpdate
     , _buBucket                   :: !Text
     , _buKey                      :: !(Maybe Text)
     , _buIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _buProjection               :: !(Maybe Text)
+    , _buProjection               :: !(Maybe StorageBucketsUpdateProjection)
     , _buOauthToken               :: !(Maybe Text)
     , _buFields                   :: !(Maybe Text)
-    , _buAlt                      :: !Text
+    , _buAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsUpdate'' with the minimum fields required to make a request.
@@ -96,11 +106,11 @@ data BucketsUpdate = BucketsUpdate
 -- * 'buFields'
 --
 -- * 'buAlt'
-bucketsUpdate
+bucketsUpdate'
     :: Text -- ^ 'bucket'
-    -> BucketsUpdate
-bucketsUpdate pBuBucket_ =
-    BucketsUpdate
+    -> BucketsUpdate'
+bucketsUpdate' pBuBucket_ =
+    BucketsUpdate'
     { _buQuotaUser = Nothing
     , _buIfMetagenerationMatch = Nothing
     , _buPrettyPrint = True
@@ -111,7 +121,7 @@ bucketsUpdate pBuBucket_ =
     , _buProjection = Nothing
     , _buOauthToken = Nothing
     , _buFields = Nothing
-    , _buAlt = "json"
+    , _buAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +167,7 @@ buIfMetagenerationNotMatch
       (\ s a -> s{_buIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-buProjection :: Lens' BucketsUpdate' (Maybe Text)
+buProjection :: Lens' BucketsUpdate' (Maybe StorageBucketsUpdateProjection)
 buProjection
   = lens _buProjection (\ s a -> s{_buProjection = a})
 
@@ -171,15 +181,15 @@ buFields :: Lens' BucketsUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
 -- | Data format for the response.
-buAlt :: Lens' BucketsUpdate' Text
+buAlt :: Lens' BucketsUpdate' Alt
 buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
 
 instance GoogleRequest BucketsUpdate' where
         type Rs BucketsUpdate' = Bucket
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsUpdate{..}
+        requestWithRoute r u BucketsUpdate'{..}
           = go _buQuotaUser _buIfMetagenerationMatch
-              _buPrettyPrint
+              (Just _buPrettyPrint)
               _buUserIp
               _buBucket
               _buKey
@@ -187,7 +197,9 @@ instance GoogleRequest BucketsUpdate' where
               _buProjection
               _buOauthToken
               _buFields
-              _buAlt
+              (Just _buAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BucketsUpdateResource)
+                      r
                       u

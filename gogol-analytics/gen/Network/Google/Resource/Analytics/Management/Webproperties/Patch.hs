@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing web property. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertiesPatch@.
-module Analytics.Management.Webproperties.Patch
+module Network.Google.Resource.Analytics.Management.Webproperties.Patch
     (
     -- * REST Resource
-      ManagementWebpropertiesPatchAPI
+      ManagementWebpropertiesPatchResource
 
     -- * Creating a Request
-    , managementWebpropertiesPatch
-    , ManagementWebpropertiesPatch
+    , managementWebpropertiesPatch'
+    , ManagementWebpropertiesPatch'
 
     -- * Request Lenses
     , mwpQuotaUser
@@ -44,19 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertiesPatch@ which the
--- 'ManagementWebpropertiesPatch' request conforms to.
-type ManagementWebpropertiesPatchAPI =
+-- 'ManagementWebpropertiesPatch'' request conforms to.
+type ManagementWebpropertiesPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               Patch '[JSON] Webproperty
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Webproperty
 
 -- | Updates an existing web property. This method supports patch semantics.
 --
--- /See:/ 'managementWebpropertiesPatch' smart constructor.
-data ManagementWebpropertiesPatch = ManagementWebpropertiesPatch
+-- /See:/ 'managementWebpropertiesPatch'' smart constructor.
+data ManagementWebpropertiesPatch' = ManagementWebpropertiesPatch'
     { _mwpQuotaUser     :: !(Maybe Text)
     , _mwpPrettyPrint   :: !Bool
     , _mwpWebPropertyId :: !Text
@@ -65,7 +72,7 @@ data ManagementWebpropertiesPatch = ManagementWebpropertiesPatch
     , _mwpKey           :: !(Maybe Text)
     , _mwpOauthToken    :: !(Maybe Text)
     , _mwpFields        :: !(Maybe Text)
-    , _mwpAlt           :: !Text
+    , _mwpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertiesPatch'' with the minimum fields required to make a request.
@@ -89,12 +96,12 @@ data ManagementWebpropertiesPatch = ManagementWebpropertiesPatch
 -- * 'mwpFields'
 --
 -- * 'mwpAlt'
-managementWebpropertiesPatch
+managementWebpropertiesPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebpropertiesPatch
-managementWebpropertiesPatch pMwpWebPropertyId_ pMwpAccountId_ =
-    ManagementWebpropertiesPatch
+    -> ManagementWebpropertiesPatch'
+managementWebpropertiesPatch' pMwpWebPropertyId_ pMwpAccountId_ =
+    ManagementWebpropertiesPatch'
     { _mwpQuotaUser = Nothing
     , _mwpPrettyPrint = False
     , _mwpWebPropertyId = pMwpWebPropertyId_
@@ -103,7 +110,7 @@ managementWebpropertiesPatch pMwpWebPropertyId_ pMwpAccountId_ =
     , _mwpKey = Nothing
     , _mwpOauthToken = Nothing
     , _mwpFields = Nothing
-    , _mwpAlt = "json"
+    , _mwpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +161,25 @@ mwpFields
   = lens _mwpFields (\ s a -> s{_mwpFields = a})
 
 -- | Data format for the response.
-mwpAlt :: Lens' ManagementWebpropertiesPatch' Text
+mwpAlt :: Lens' ManagementWebpropertiesPatch' Alt
 mwpAlt = lens _mwpAlt (\ s a -> s{_mwpAlt = a})
 
 instance GoogleRequest ManagementWebpropertiesPatch'
          where
         type Rs ManagementWebpropertiesPatch' = Webproperty
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementWebpropertiesPatch{..}
-          = go _mwpQuotaUser _mwpPrettyPrint _mwpWebPropertyId
+        requestWithRoute r u
+          ManagementWebpropertiesPatch'{..}
+          = go _mwpQuotaUser (Just _mwpPrettyPrint)
+              _mwpWebPropertyId
               _mwpUserIp
               _mwpAccountId
               _mwpKey
               _mwpOauthToken
               _mwpFields
-              _mwpAlt
+              (Just _mwpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementWebpropertiesPatchAPI)
+                      (Proxy :: Proxy ManagementWebpropertiesPatchResource)
                       r
                       u

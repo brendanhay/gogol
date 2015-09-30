@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- set the allUsers property.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsList@.
-module BigQuery.Jobs.List
+module Network.Google.Resource.BigQuery.Jobs.List
     (
     -- * REST Resource
-      JobsListAPI
+      JobsListResource
 
     -- * Creating a Request
-    , jobsList
-    , JobsList
+    , jobsList'
+    , JobsList'
 
     -- * Request Lenses
     , jlQuotaUser
@@ -52,16 +53,24 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryJobsList@ which the
--- 'JobsList' request conforms to.
-type JobsListAPI =
+-- 'JobsList'' request conforms to.
+type JobsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "jobs" :>
-           QueryParams "stateFilter" Text :>
-             QueryParam "projection" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "allUsers" Bool :>
-                   QueryParam "maxResults" Word32 :> Get '[JSON] JobList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParams "stateFilter" BigqueryJobsListStateFilter
+                     :>
+                     QueryParam "projection" BigqueryJobsListProjection :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "allUsers" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] JobList
 
 -- | Lists all jobs that you started in the specified project. Job
 -- information is available for a six month period after creation. The job
@@ -69,21 +78,21 @@ type JobsListAPI =
 -- Requires the Can View project role, or the Is Owner project role if you
 -- set the allUsers property.
 --
--- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+-- /See:/ 'jobsList'' smart constructor.
+data JobsList' = JobsList'
     { _jlQuotaUser   :: !(Maybe Text)
     , _jlPrettyPrint :: !Bool
     , _jlUserIp      :: !(Maybe Text)
     , _jlKey         :: !(Maybe Text)
-    , _jlStateFilter :: !(Maybe Text)
-    , _jlProjection  :: !(Maybe Text)
+    , _jlStateFilter :: !(Maybe BigqueryJobsListStateFilter)
+    , _jlProjection  :: !(Maybe BigqueryJobsListProjection)
     , _jlPageToken   :: !(Maybe Text)
     , _jlProjectId   :: !Text
     , _jlAllUsers    :: !(Maybe Bool)
     , _jlOauthToken  :: !(Maybe Text)
     , _jlMaxResults  :: !(Maybe Word32)
     , _jlFields      :: !(Maybe Text)
-    , _jlAlt         :: !Text
+    , _jlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
@@ -115,11 +124,11 @@ data JobsList = JobsList
 -- * 'jlFields'
 --
 -- * 'jlAlt'
-jobsList
+jobsList'
     :: Text -- ^ 'projectId'
-    -> JobsList
-jobsList pJlProjectId_ =
-    JobsList
+    -> JobsList'
+jobsList' pJlProjectId_ =
+    JobsList'
     { _jlQuotaUser = Nothing
     , _jlPrettyPrint = True
     , _jlUserIp = Nothing
@@ -132,7 +141,7 @@ jobsList pJlProjectId_ =
     , _jlOauthToken = Nothing
     , _jlMaxResults = Nothing
     , _jlFields = Nothing
-    , _jlAlt = "json"
+    , _jlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,13 +169,13 @@ jlKey :: Lens' JobsList' (Maybe Text)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Filter for job state
-jlStateFilter :: Lens' JobsList' (Maybe Text)
+jlStateFilter :: Lens' JobsList' (Maybe BigqueryJobsListStateFilter)
 jlStateFilter
   = lens _jlStateFilter
       (\ s a -> s{_jlStateFilter = a})
 
 -- | Restrict information returned to a set of selected fields
-jlProjection :: Lens' JobsList' (Maybe Text)
+jlProjection :: Lens' JobsList' (Maybe BigqueryJobsListProjection)
 jlProjection
   = lens _jlProjection (\ s a -> s{_jlProjection = a})
 
@@ -201,14 +210,15 @@ jlFields :: Lens' JobsList' (Maybe Text)
 jlFields = lens _jlFields (\ s a -> s{_jlFields = a})
 
 -- | Data format for the response.
-jlAlt :: Lens' JobsList' Text
+jlAlt :: Lens' JobsList' Alt
 jlAlt = lens _jlAlt (\ s a -> s{_jlAlt = a})
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobList
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsList{..}
-          = go _jlQuotaUser _jlPrettyPrint _jlUserIp _jlKey
+        requestWithRoute r u JobsList'{..}
+          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIp
+              _jlKey
               _jlStateFilter
               _jlProjection
               _jlPageToken
@@ -217,6 +227,7 @@ instance GoogleRequest JobsList' where
               _jlOauthToken
               _jlMaxResults
               _jlFields
-              _jlAlt
+              (Just _jlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsListResource) r
+                      u

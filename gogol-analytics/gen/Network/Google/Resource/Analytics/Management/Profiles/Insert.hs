@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesInsert@.
-module Analytics.Management.Profiles.Insert
+module Network.Google.Resource.Analytics.Management.Profiles.Insert
     (
     -- * REST Resource
-      ManagementProfilesInsertAPI
+      ManagementProfilesInsertResource
 
     -- * Creating a Request
-    , managementProfilesInsert
-    , ManagementProfilesInsert
+    , managementProfilesInsert'
+    , ManagementProfilesInsert'
 
     -- * Request Lenses
     , mpiQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesInsert@ which the
--- 'ManagementProfilesInsert' request conforms to.
-type ManagementProfilesInsertAPI =
+-- 'ManagementProfilesInsert'' request conforms to.
+type ManagementProfilesInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               "profiles" :> Post '[JSON] Profile
+               "profiles" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Profile
 
 -- | Create a new view (profile).
 --
--- /See:/ 'managementProfilesInsert' smart constructor.
-data ManagementProfilesInsert = ManagementProfilesInsert
+-- /See:/ 'managementProfilesInsert'' smart constructor.
+data ManagementProfilesInsert' = ManagementProfilesInsert'
     { _mpiQuotaUser     :: !(Maybe Text)
     , _mpiPrettyPrint   :: !Bool
     , _mpiWebPropertyId :: !Text
@@ -65,7 +73,7 @@ data ManagementProfilesInsert = ManagementProfilesInsert
     , _mpiKey           :: !(Maybe Text)
     , _mpiOauthToken    :: !(Maybe Text)
     , _mpiFields        :: !(Maybe Text)
-    , _mpiAlt           :: !Text
+    , _mpiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data ManagementProfilesInsert = ManagementProfilesInsert
 -- * 'mpiFields'
 --
 -- * 'mpiAlt'
-managementProfilesInsert
+managementProfilesInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesInsert
-managementProfilesInsert pMpiWebPropertyId_ pMpiAccountId_ =
-    ManagementProfilesInsert
+    -> ManagementProfilesInsert'
+managementProfilesInsert' pMpiWebPropertyId_ pMpiAccountId_ =
+    ManagementProfilesInsert'
     { _mpiQuotaUser = Nothing
     , _mpiPrettyPrint = False
     , _mpiWebPropertyId = pMpiWebPropertyId_
@@ -103,7 +111,7 @@ managementProfilesInsert pMpiWebPropertyId_ pMpiAccountId_ =
     , _mpiKey = Nothing
     , _mpiOauthToken = Nothing
     , _mpiFields = Nothing
-    , _mpiAlt = "json"
+    , _mpiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +162,24 @@ mpiFields
   = lens _mpiFields (\ s a -> s{_mpiFields = a})
 
 -- | Data format for the response.
-mpiAlt :: Lens' ManagementProfilesInsert' Text
+mpiAlt :: Lens' ManagementProfilesInsert' Alt
 mpiAlt = lens _mpiAlt (\ s a -> s{_mpiAlt = a})
 
 instance GoogleRequest ManagementProfilesInsert'
          where
         type Rs ManagementProfilesInsert' = Profile
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesInsert{..}
-          = go _mpiQuotaUser _mpiPrettyPrint _mpiWebPropertyId
+        requestWithRoute r u ManagementProfilesInsert'{..}
+          = go _mpiQuotaUser (Just _mpiPrettyPrint)
+              _mpiWebPropertyId
               _mpiUserIp
               _mpiAccountId
               _mpiKey
               _mpiOauthToken
               _mpiFields
-              _mpiAlt
+              (Just _mpiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesInsertAPI)
+                      (Proxy :: Proxy ManagementProfilesInsertResource)
                       r
                       u

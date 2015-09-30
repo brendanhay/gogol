@@ -17,6 +17,12 @@ module Network.Google.AppsReseller.Types
     -- * Service URL
       appsResellerURL
 
+    -- * SubscriptionTrialSettings
+    , SubscriptionTrialSettings
+    , subscriptionTrialSettings
+    , stsIsInTrial
+    , stsTrialEndTime
+
     -- * Address
     , Address
     , address
@@ -42,6 +48,12 @@ module Network.Google.AppsReseller.Types
     , cPhoneNumber
     , cPostalAddress
 
+    -- * SubscriptionPlanCommitmentInterval
+    , SubscriptionPlanCommitmentInterval
+    , subscriptionPlanCommitmentInterval
+    , spciStartTime
+    , spciEndTime
+
     -- * ChangePlanRequest
     , ChangePlanRequest
     , changePlanRequest
@@ -65,30 +77,49 @@ module Network.Google.AppsReseller.Types
     , subKind
     , subSubscriptions
 
+    -- * SubscriptionPlan
+    , SubscriptionPlan
+    , subscriptionPlan
+    , spCommitmentInterval
+    , spIsCommitmentPlan
+    , spPlanName
+
+    -- * ResellerSubscriptionsDeleteDeletionType
+    , ResellerSubscriptionsDeleteDeletionType (..)
+
     -- * Subscription
     , Subscription
     , subscription
-    , ssCreationTime
-    , ssBillingMethod
-    , ssStatus
-    , ssTrialSettings
-    , ssResourceUiUrl
-    , ssKind
-    , ssSkuId
-    , ssPlan
-    , ssCustomerId
-    , ssSuspensionReasons
-    , ssTransferInfo
-    , ssPurchaseOrderId
-    , ssSeats
-    , ssRenewalSettings
-    , ssSubscriptionId
+    , subuCreationTime
+    , subuBillingMethod
+    , subuStatus
+    , subuTrialSettings
+    , subuResourceUiUrl
+    , subuKind
+    , subuSkuId
+    , subuPlan
+    , subuCustomerId
+    , subuSuspensionReasons
+    , subuTransferInfo
+    , subuPurchaseOrderId
+    , subuSeats
+    , subuRenewalSettings
+    , subuSubscriptionId
 
     -- * RenewalSettings
     , RenewalSettings
     , renewalSettings
     , rsKind
     , rsRenewalType
+
+    -- * SubscriptionTransferInfo
+    , SubscriptionTransferInfo
+    , subscriptionTransferInfo
+    , stiTransferabilityExpirationTime
+    , stiMinimumTransferableSeats
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsReseller.Types.Product
@@ -96,7 +127,7 @@ import           Network.Google.AppsReseller.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1sandbox' of the Enterprise Apps Reseller API.
-appsResellerURL :: BaseURL
+appsResellerURL :: BaseUrl
 appsResellerURL
   = BaseUrl Https
       "https://www.googleapis.com/apps/reseller/v1sandbox/"

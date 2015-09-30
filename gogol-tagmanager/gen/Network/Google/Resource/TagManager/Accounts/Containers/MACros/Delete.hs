@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a GTM Macro.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMACrosDelete@.
-module TagManager.Accounts.Containers.MACros.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Delete
     (
     -- * REST Resource
-      AccountsContainersMacrosDeleteAPI
+      AccountsContainersMacrosDeleteResource
 
     -- * Creating a Request
-    , accountsContainersMACrosDelete
-    , AccountsContainersMACrosDelete
+    , accountsContainersMACrosDelete'
+    , AccountsContainersMACrosDelete'
 
     -- * Request Lenses
     , acmacdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMACrosDelete@ which the
--- 'AccountsContainersMACrosDelete' request conforms to.
-type AccountsContainersMacrosDeleteAPI =
+-- 'AccountsContainersMACrosDelete'' request conforms to.
+type AccountsContainersMacrosDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "macros" :>
-               Capture "macroId" Text :> Delete '[JSON] ()
+               Capture "macroId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a GTM Macro.
 --
--- /See:/ 'accountsContainersMACrosDelete' smart constructor.
-data AccountsContainersMACrosDelete = AccountsContainersMACrosDelete
+-- /See:/ 'accountsContainersMACrosDelete'' smart constructor.
+data AccountsContainersMACrosDelete' = AccountsContainersMACrosDelete'
     { _acmacdQuotaUser   :: !(Maybe Text)
     , _acmacdPrettyPrint :: !Bool
     , _acmacdContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersMACrosDelete = AccountsContainersMACrosDelete
     , _acmacdMacroId     :: !Text
     , _acmacdOauthToken  :: !(Maybe Text)
     , _acmacdFields      :: !(Maybe Text)
-    , _acmacdAlt         :: !Text
+    , _acmacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMACrosDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersMACrosDelete = AccountsContainersMACrosDelete
 -- * 'acmacdFields'
 --
 -- * 'acmacdAlt'
-accountsContainersMACrosDelete
+accountsContainersMACrosDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'macroId'
-    -> AccountsContainersMACrosDelete
-accountsContainersMACrosDelete pAcmacdContainerId_ pAcmacdAccountId_ pAcmacdMacroId_ =
-    AccountsContainersMACrosDelete
+    -> AccountsContainersMACrosDelete'
+accountsContainersMACrosDelete' pAcmacdContainerId_ pAcmacdAccountId_ pAcmacdMacroId_ =
+    AccountsContainersMACrosDelete'
     { _acmacdQuotaUser = Nothing
     , _acmacdPrettyPrint = True
     , _acmacdContainerId = pAcmacdContainerId_
@@ -109,7 +117,7 @@ accountsContainersMACrosDelete pAcmacdContainerId_ pAcmacdAccountId_ pAcmacdMacr
     , _acmacdMacroId = pAcmacdMacroId_
     , _acmacdOauthToken = Nothing
     , _acmacdFields = Nothing
-    , _acmacdAlt = "json"
+    , _acmacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,7 +177,7 @@ acmacdFields
   = lens _acmacdFields (\ s a -> s{_acmacdFields = a})
 
 -- | Data format for the response.
-acmacdAlt :: Lens' AccountsContainersMACrosDelete' Text
+acmacdAlt :: Lens' AccountsContainersMACrosDelete' Alt
 acmacdAlt
   = lens _acmacdAlt (\ s a -> s{_acmacdAlt = a})
 
@@ -178,8 +186,8 @@ instance GoogleRequest
         type Rs AccountsContainersMACrosDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersMACrosDelete{..}
-          = go _acmacdQuotaUser _acmacdPrettyPrint
+          AccountsContainersMACrosDelete'{..}
+          = go _acmacdQuotaUser (Just _acmacdPrettyPrint)
               _acmacdContainerId
               _acmacdUserIp
               _acmacdAccountId
@@ -187,9 +195,10 @@ instance GoogleRequest
               _acmacdMacroId
               _acmacdOauthToken
               _acmacdFields
-              _acmacdAlt
+              (Just _acmacdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersMacrosDeleteAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersMacrosDeleteResource)
                       r
                       u

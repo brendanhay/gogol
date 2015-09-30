@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new content category.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesInsert@.
-module DFAReporting.ContentCategories.Insert
+module Network.Google.Resource.DFAReporting.ContentCategories.Insert
     (
     -- * REST Resource
-      ContentCategoriesInsertAPI
+      ContentCategoriesInsertResource
 
     -- * Creating a Request
-    , contentCategoriesInsert
-    , ContentCategoriesInsert
+    , contentCategoriesInsert'
+    , ContentCategoriesInsert'
 
     -- * Request Lenses
     , cciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesInsert@ which the
--- 'ContentCategoriesInsert' request conforms to.
-type ContentCategoriesInsertAPI =
+-- 'ContentCategoriesInsert'' request conforms to.
+type ContentCategoriesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "contentCategories" :> Post '[JSON] ContentCategory
+         "contentCategories" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ContentCategory
 
 -- | Inserts a new content category.
 --
--- /See:/ 'contentCategoriesInsert' smart constructor.
-data ContentCategoriesInsert = ContentCategoriesInsert
+-- /See:/ 'contentCategoriesInsert'' smart constructor.
+data ContentCategoriesInsert' = ContentCategoriesInsert'
     { _cciQuotaUser   :: !(Maybe Text)
     , _cciPrettyPrint :: !Bool
     , _cciUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ContentCategoriesInsert = ContentCategoriesInsert
     , _cciKey         :: !(Maybe Text)
     , _cciOauthToken  :: !(Maybe Text)
     , _cciFields      :: !(Maybe Text)
-    , _cciAlt         :: !Text
+    , _cciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ContentCategoriesInsert = ContentCategoriesInsert
 -- * 'cciFields'
 --
 -- * 'cciAlt'
-contentCategoriesInsert
+contentCategoriesInsert'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategoriesInsert
-contentCategoriesInsert pCciProfileId_ =
-    ContentCategoriesInsert
+    -> ContentCategoriesInsert'
+contentCategoriesInsert' pCciProfileId_ =
+    ContentCategoriesInsert'
     { _cciQuotaUser = Nothing
     , _cciPrettyPrint = True
     , _cciUserIp = Nothing
@@ -94,7 +102,7 @@ contentCategoriesInsert pCciProfileId_ =
     , _cciKey = Nothing
     , _cciOauthToken = Nothing
     , _cciFields = Nothing
-    , _cciAlt = "json"
+    , _cciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ cciFields
   = lens _cciFields (\ s a -> s{_cciFields = a})
 
 -- | Data format for the response.
-cciAlt :: Lens' ContentCategoriesInsert' Text
+cciAlt :: Lens' ContentCategoriesInsert' Alt
 cciAlt = lens _cciAlt (\ s a -> s{_cciAlt = a})
 
 instance GoogleRequest ContentCategoriesInsert' where
         type Rs ContentCategoriesInsert' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesInsert{..}
-          = go _cciQuotaUser _cciPrettyPrint _cciUserIp
+        requestWithRoute r u ContentCategoriesInsert'{..}
+          = go _cciQuotaUser (Just _cciPrettyPrint) _cciUserIp
               _cciProfileId
               _cciKey
               _cciOauthToken
               _cciFields
-              _cciAlt
+              (Just _cciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesInsertAPI)
+                      (Proxy :: Proxy ContentCategoriesInsertResource)
                       r
                       u

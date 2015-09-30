@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a template
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplateDelete@.
-module FusionTables.Template.Delete
+module Network.Google.Resource.FusionTables.Template.Delete
     (
     -- * REST Resource
-      TemplateDeleteAPI
+      TemplateDeleteResource
 
     -- * Creating a Request
-    , templateDelete
-    , TemplateDelete
+    , templateDelete'
+    , TemplateDelete'
 
     -- * Request Lenses
     , tddQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplateDelete@ which the
--- 'TemplateDelete' request conforms to.
-type TemplateDeleteAPI =
+-- 'TemplateDelete'' request conforms to.
+type TemplateDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
          "templates" :>
-           Capture "templateId" Int32 :> Delete '[JSON] ()
+           Capture "templateId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a template
 --
--- /See:/ 'templateDelete' smart constructor.
-data TemplateDelete = TemplateDelete
+-- /See:/ 'templateDelete'' smart constructor.
+data TemplateDelete' = TemplateDelete'
     { _tddQuotaUser   :: !(Maybe Text)
     , _tddPrettyPrint :: !Bool
     , _tddTemplateId  :: !Int32
@@ -63,7 +71,7 @@ data TemplateDelete = TemplateDelete
     , _tddOauthToken  :: !(Maybe Text)
     , _tddTableId     :: !Text
     , _tddFields      :: !(Maybe Text)
-    , _tddAlt         :: !Text
+    , _tddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TemplateDelete = TemplateDelete
 -- * 'tddFields'
 --
 -- * 'tddAlt'
-templateDelete
+templateDelete'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
-    -> TemplateDelete
-templateDelete pTddTemplateId_ pTddTableId_ =
-    TemplateDelete
+    -> TemplateDelete'
+templateDelete' pTddTemplateId_ pTddTableId_ =
+    TemplateDelete'
     { _tddQuotaUser = Nothing
     , _tddPrettyPrint = True
     , _tddTemplateId = pTddTemplateId_
@@ -101,7 +109,7 @@ templateDelete pTddTemplateId_ pTddTableId_ =
     , _tddOauthToken = Nothing
     , _tddTableId = pTddTableId_
     , _tddFields = Nothing
-    , _tddAlt = "json"
+    , _tddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,21 +160,23 @@ tddFields
   = lens _tddFields (\ s a -> s{_tddFields = a})
 
 -- | Data format for the response.
-tddAlt :: Lens' TemplateDelete' Text
+tddAlt :: Lens' TemplateDelete' Alt
 tddAlt = lens _tddAlt (\ s a -> s{_tddAlt = a})
 
 instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplateDelete{..}
-          = go _tddQuotaUser _tddPrettyPrint _tddTemplateId
+        requestWithRoute r u TemplateDelete'{..}
+          = go _tddQuotaUser (Just _tddPrettyPrint)
+              _tddTemplateId
               _tddUserIp
               _tddKey
               _tddOauthToken
               _tddTableId
               _tddFields
-              _tddAlt
+              (Just _tddAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TemplateDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TemplateDeleteResource)
                       r
                       u

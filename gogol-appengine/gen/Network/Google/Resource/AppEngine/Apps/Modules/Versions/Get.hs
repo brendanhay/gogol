@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets application deployment information.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsGet@.
-module AppEngine.Apps.Modules.Versions.Get
+module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
     (
     -- * REST Resource
-      AppsModulesVersionsGetAPI
+      AppsModulesVersionsGetResource
 
     -- * Creating a Request
-    , appsModulesVersionsGet
-    , AppsModulesVersionsGet
+    , appsModulesVersionsGet'
+    , AppsModulesVersionsGet'
 
     -- * Request Lenses
     , amvgXgafv
@@ -52,8 +53,8 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesVersionsGet@ which the
--- 'AppsModulesVersionsGet' request conforms to.
-type AppsModulesVersionsGetAPI =
+-- 'AppsModulesVersionsGet'' request conforms to.
+type AppsModulesVersionsGetResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
@@ -61,12 +62,26 @@ type AppsModulesVersionsGetAPI =
              Capture "modulesId" Text :>
                "versions" :>
                  Capture "versionsId" Text :>
-                   QueryParam "view" Text :> Get '[JSON] Version
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "view" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" Text :>
+                                               Get '[JSON] Version
 
 -- | Gets application deployment information.
 --
--- /See:/ 'appsModulesVersionsGet' smart constructor.
-data AppsModulesVersionsGet = AppsModulesVersionsGet
+-- /See:/ 'appsModulesVersionsGet'' smart constructor.
+data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     { _amvgXgafv          :: !(Maybe Text)
     , _amvgQuotaUser      :: !(Maybe Text)
     , _amvgPrettyPrint    :: !Bool
@@ -123,13 +138,13 @@ data AppsModulesVersionsGet = AppsModulesVersionsGet
 -- * 'amvgCallback'
 --
 -- * 'amvgAlt'
-appsModulesVersionsGet
+appsModulesVersionsGet'
     :: Text -- ^ 'versionsId'
     -> Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesVersionsGet
-appsModulesVersionsGet pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
-    AppsModulesVersionsGet
+    -> AppsModulesVersionsGet'
+appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
+    AppsModulesVersionsGet'
     { _amvgXgafv = Nothing
     , _amvgQuotaUser = Nothing
     , _amvgPrettyPrint = True
@@ -247,10 +262,11 @@ amvgAlt = lens _amvgAlt (\ s a -> s{_amvgAlt = a})
 instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsGet{..}
-          = go _amvgXgafv _amvgQuotaUser _amvgPrettyPrint
+        requestWithRoute r u AppsModulesVersionsGet'{..}
+          = go _amvgXgafv _amvgQuotaUser
+              (Just _amvgPrettyPrint)
               _amvgUploadProtocol
-              _amvgPp
+              (Just _amvgPp)
               _amvgAccessToken
               _amvgUploadType
               _amvgVersionsId
@@ -262,9 +278,9 @@ instance GoogleRequest AppsModulesVersionsGet' where
               _amvgOauthToken
               _amvgFields
               _amvgCallback
-              _amvgAlt
+              (Just _amvgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesVersionsGetAPI)
+                      (Proxy :: Proxy AppsModulesVersionsGetResource)
                       r
                       u

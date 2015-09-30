@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns free\/busy information for a set of calendars.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarFreebusyQuery@.
-module Calendar.Freebusy.Query
+module Network.Google.Resource.Calendar.Freebusy.Query
     (
     -- * REST Resource
-      FreebusyQueryAPI
+      FreebusyQueryResource
 
     -- * Creating a Request
-    , freebusyQuery
-    , FreebusyQuery
+    , freebusyQuery'
+    , FreebusyQuery'
 
     -- * Request Lenses
     , fqQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarFreebusyQuery@ which the
--- 'FreebusyQuery' request conforms to.
-type FreebusyQueryAPI =
-     "freeBusy" :> Post '[JSON] FreeBusyResponse
+-- 'FreebusyQuery'' request conforms to.
+type FreebusyQueryResource =
+     "freeBusy" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] FreeBusyResponse
 
 -- | Returns free\/busy information for a set of calendars.
 --
--- /See:/ 'freebusyQuery' smart constructor.
-data FreebusyQuery = FreebusyQuery
+-- /See:/ 'freebusyQuery'' smart constructor.
+data FreebusyQuery' = FreebusyQuery'
     { _fqQuotaUser   :: !(Maybe Text)
     , _fqPrettyPrint :: !Bool
     , _fqUserIp      :: !(Maybe Text)
     , _fqKey         :: !(Maybe Text)
     , _fqOauthToken  :: !(Maybe Text)
     , _fqFields      :: !(Maybe Text)
-    , _fqAlt         :: !Text
+    , _fqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreebusyQuery'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data FreebusyQuery = FreebusyQuery
 -- * 'fqFields'
 --
 -- * 'fqAlt'
-freebusyQuery
-    :: FreebusyQuery
-freebusyQuery =
-    FreebusyQuery
+freebusyQuery'
+    :: FreebusyQuery'
+freebusyQuery' =
+    FreebusyQuery'
     { _fqQuotaUser = Nothing
     , _fqPrettyPrint = True
     , _fqUserIp = Nothing
     , _fqKey = Nothing
     , _fqOauthToken = Nothing
     , _fqFields = Nothing
-    , _fqAlt = "json"
+    , _fqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +131,20 @@ fqFields :: Lens' FreebusyQuery' (Maybe Text)
 fqFields = lens _fqFields (\ s a -> s{_fqFields = a})
 
 -- | Data format for the response.
-fqAlt :: Lens' FreebusyQuery' Text
+fqAlt :: Lens' FreebusyQuery' Alt
 fqAlt = lens _fqAlt (\ s a -> s{_fqAlt = a})
 
 instance GoogleRequest FreebusyQuery' where
         type Rs FreebusyQuery' = FreeBusyResponse
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u FreebusyQuery{..}
-          = go _fqQuotaUser _fqPrettyPrint _fqUserIp _fqKey
+        requestWithRoute r u FreebusyQuery'{..}
+          = go _fqQuotaUser (Just _fqPrettyPrint) _fqUserIp
+              _fqKey
               _fqOauthToken
               _fqFields
-              _fqAlt
+              (Just _fqAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FreebusyQueryAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy FreebusyQueryResource)
+                      r
                       u

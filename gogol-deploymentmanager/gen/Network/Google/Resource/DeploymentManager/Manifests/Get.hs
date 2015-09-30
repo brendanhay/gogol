@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets information about a specific manifest.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerManifestsGet@.
-module DeploymentManager.Manifests.Get
+module Network.Google.Resource.DeploymentManager.Manifests.Get
     (
     -- * REST Resource
-      ManifestsGetAPI
+      ManifestsGetResource
 
     -- * Creating a Request
-    , manifestsGet
-    , ManifestsGet
+    , manifestsGet'
+    , ManifestsGet'
 
     -- * Request Lenses
     , mgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerManifestsGet@ which the
--- 'ManifestsGet' request conforms to.
-type ManifestsGetAPI =
+-- 'ManifestsGet'' request conforms to.
+type ManifestsGetResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
              "manifests" :>
-               Capture "manifest" Text :> Get '[JSON] Manifest
+               Capture "manifest" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Manifest
 
 -- | Gets information about a specific manifest.
 --
--- /See:/ 'manifestsGet' smart constructor.
-data ManifestsGet = ManifestsGet
+-- /See:/ 'manifestsGet'' smart constructor.
+data ManifestsGet' = ManifestsGet'
     { _mgQuotaUser   :: !(Maybe Text)
     , _mgPrettyPrint :: !Bool
     , _mgProject     :: !Text
@@ -66,7 +74,7 @@ data ManifestsGet = ManifestsGet
     , _mgManifest    :: !Text
     , _mgOauthToken  :: !(Maybe Text)
     , _mgFields      :: !(Maybe Text)
-    , _mgAlt         :: !Text
+    , _mgAlt         :: !Alt
     , _mgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data ManifestsGet = ManifestsGet
 -- * 'mgAlt'
 --
 -- * 'mgDeployment'
-manifestsGet
+manifestsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'manifest'
     -> Text -- ^ 'deployment'
-    -> ManifestsGet
-manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
-    ManifestsGet
+    -> ManifestsGet'
+manifestsGet' pMgProject_ pMgManifest_ pMgDeployment_ =
+    ManifestsGet'
     { _mgQuotaUser = Nothing
     , _mgPrettyPrint = True
     , _mgProject = pMgProject_
@@ -108,7 +116,7 @@ manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
     , _mgManifest = pMgManifest_
     , _mgOauthToken = Nothing
     , _mgFields = Nothing
-    , _mgAlt = "json"
+    , _mgAlt = JSON
     , _mgDeployment = pMgDeployment_
     }
 
@@ -156,7 +164,7 @@ mgFields :: Lens' ManifestsGet' (Maybe Text)
 mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
 -- | Data format for the response.
-mgAlt :: Lens' ManifestsGet' Text
+mgAlt :: Lens' ManifestsGet' Alt
 mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
 
 -- | The name of the deployment for this request.
@@ -168,14 +176,17 @@ instance GoogleRequest ManifestsGet' where
         type Rs ManifestsGet' = Manifest
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ManifestsGet{..}
-          = go _mgQuotaUser _mgPrettyPrint _mgProject _mgUserIp
+        requestWithRoute r u ManifestsGet'{..}
+          = go _mgQuotaUser (Just _mgPrettyPrint) _mgProject
+              _mgUserIp
               _mgKey
               _mgManifest
               _mgOauthToken
               _mgFields
-              _mgAlt
+              (Just _mgAlt)
               _mgDeployment
           where go
-                  = clientWithRoute (Proxy :: Proxy ManifestsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ManifestsGetResource)
+                      r
                       u

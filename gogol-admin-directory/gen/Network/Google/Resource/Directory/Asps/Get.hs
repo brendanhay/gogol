@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsGet@.
-module Directory.Asps.Get
+module Network.Google.Resource.Directory.Asps.Get
     (
     -- * REST Resource
-      AspsGetAPI
+      AspsGetResource
 
     -- * Creating a Request
-    , aspsGet
-    , AspsGet
+    , aspsGet'
+    , AspsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryAspsGet@ which the
--- 'AspsGet' request conforms to.
-type AspsGetAPI =
+-- 'AspsGet'' request conforms to.
+type AspsGetResource =
      "users" :>
        Capture "userKey" Text :>
-         "asps" :> Capture "codeId" Int32 :> Get '[JSON] Asp
+         "asps" :>
+           Capture "codeId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
 --
--- /See:/ 'aspsGet' smart constructor.
-data AspsGet = AspsGet
+-- /See:/ 'aspsGet'' smart constructor.
+data AspsGet' = AspsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agCodeId      :: !Int32
@@ -62,7 +71,7 @@ data AspsGet = AspsGet
     , _agOauthToken  :: !(Maybe Text)
     , _agUserKey     :: !Text
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data AspsGet = AspsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-aspsGet
+aspsGet'
     :: Int32 -- ^ 'codeId'
     -> Text -- ^ 'userKey'
-    -> AspsGet
-aspsGet pAgCodeId_ pAgUserKey_ =
-    AspsGet
+    -> AspsGet'
+aspsGet' pAgCodeId_ pAgUserKey_ =
+    AspsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agCodeId = pAgCodeId_
@@ -100,7 +109,7 @@ aspsGet pAgCodeId_ pAgUserKey_ =
     , _agOauthToken = Nothing
     , _agUserKey = pAgUserKey_
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,18 +156,20 @@ agFields :: Lens' AspsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AspsGet' Text
+agAlt :: Lens' AspsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u AspsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agCodeId _agUserIp
+        requestWithRoute r u AspsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agCodeId
+              _agUserIp
               _agKey
               _agOauthToken
               _agUserKey
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AspsGetResource) r
+                      u

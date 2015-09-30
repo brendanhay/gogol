@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a page.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesInsert@.
-module Blogger.Pages.Insert
+module Network.Google.Resource.Blogger.Pages.Insert
     (
     -- * REST Resource
-      PagesInsertAPI
+      PagesInsertResource
 
     -- * Creating a Request
-    , pagesInsert
-    , PagesInsert
+    , pagesInsert'
+    , PagesInsert'
 
     -- * Request Lenses
     , piQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesInsert@ which the
--- 'PagesInsert' request conforms to.
-type PagesInsertAPI =
+-- 'PagesInsert'' request conforms to.
+type PagesInsertResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
-           QueryParam "isDraft" Bool :> Post '[JSON] Page
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "isDraft" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Page
 
 -- | Add a page.
 --
--- /See:/ 'pagesInsert' smart constructor.
-data PagesInsert = PagesInsert
+-- /See:/ 'pagesInsert'' smart constructor.
+data PagesInsert' = PagesInsert'
     { _piQuotaUser   :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
     , _piIsDraft     :: !(Maybe Bool)
@@ -63,7 +71,7 @@ data PagesInsert = PagesInsert
     , _piKey         :: !(Maybe Text)
     , _piOauthToken  :: !(Maybe Text)
     , _piFields      :: !(Maybe Text)
-    , _piAlt         :: !Text
+    , _piAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesInsert'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data PagesInsert = PagesInsert
 -- * 'piFields'
 --
 -- * 'piAlt'
-pagesInsert
+pagesInsert'
     :: Text -- ^ 'blogId'
-    -> PagesInsert
-pagesInsert pPiBlogId_ =
-    PagesInsert
+    -> PagesInsert'
+pagesInsert' pPiBlogId_ =
+    PagesInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piIsDraft = Nothing
@@ -100,7 +108,7 @@ pagesInsert pPiBlogId_ =
     , _piKey = Nothing
     , _piOauthToken = Nothing
     , _piFields = Nothing
-    , _piAlt = "json"
+    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,18 +154,22 @@ piFields :: Lens' PagesInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
 -- | Data format for the response.
-piAlt :: Lens' PagesInsert' Text
+piAlt :: Lens' PagesInsert' Alt
 piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
 
 instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesInsert{..}
-          = go _piQuotaUser _piPrettyPrint _piIsDraft _piUserIp
+        requestWithRoute r u PagesInsert'{..}
+          = go _piQuotaUser (Just _piPrettyPrint) _piIsDraft
+              _piUserIp
               _piBlogId
               _piKey
               _piOauthToken
               _piFields
-              _piAlt
+              (Just _piAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PagesInsertResource)
+                      r
+                      u

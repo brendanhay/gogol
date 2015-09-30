@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- Engine help center.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFilesInsert@.
-module Mapsengine.Tables.Files.Insert
+module Network.Google.Resource.Mapsengine.Tables.Files.Insert
     (
     -- * REST Resource
-      TablesFilesInsertAPI
+      TablesFilesInsertResource
 
     -- * Creating a Request
-    , tablesFilesInsert
-    , TablesFilesInsert
+    , tablesFilesInsert'
+    , TablesFilesInsert'
 
     -- * Request Lenses
     , tfiQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFilesInsert@ which the
--- 'TablesFilesInsert' request conforms to.
-type TablesFilesInsertAPI =
+-- 'TablesFilesInsert'' request conforms to.
+type TablesFilesInsertResource =
      "tables" :>
        Capture "id" Text :>
          "files" :>
-           QueryParam "filename" Text :> Post '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "filename" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed
 -- in the Supported data formats and limits article of the Google Maps
 -- Engine help center.
 --
--- /See:/ 'tablesFilesInsert' smart constructor.
-data TablesFilesInsert = TablesFilesInsert
+-- /See:/ 'tablesFilesInsert'' smart constructor.
+data TablesFilesInsert' = TablesFilesInsert'
     { _tfiQuotaUser   :: !(Maybe Text)
     , _tfiPrettyPrint :: !Bool
     , _tfiUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data TablesFilesInsert = TablesFilesInsert
     , _tfiOauthToken  :: !(Maybe Text)
     , _tfiFilename    :: !Text
     , _tfiFields      :: !(Maybe Text)
-    , _tfiAlt         :: !Text
+    , _tfiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFilesInsert'' with the minimum fields required to make a request.
@@ -93,12 +101,12 @@ data TablesFilesInsert = TablesFilesInsert
 -- * 'tfiFields'
 --
 -- * 'tfiAlt'
-tablesFilesInsert
+tablesFilesInsert'
     :: Text -- ^ 'id'
     -> Text -- ^ 'filename'
-    -> TablesFilesInsert
-tablesFilesInsert pTfiId_ pTfiFilename_ =
-    TablesFilesInsert
+    -> TablesFilesInsert'
+tablesFilesInsert' pTfiId_ pTfiFilename_ =
+    TablesFilesInsert'
     { _tfiQuotaUser = Nothing
     , _tfiPrettyPrint = True
     , _tfiUserIp = Nothing
@@ -107,7 +115,7 @@ tablesFilesInsert pTfiId_ pTfiFilename_ =
     , _tfiOauthToken = Nothing
     , _tfiFilename = pTfiFilename_
     , _tfiFields = Nothing
-    , _tfiAlt = "json"
+    , _tfiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,21 +164,22 @@ tfiFields
   = lens _tfiFields (\ s a -> s{_tfiFields = a})
 
 -- | Data format for the response.
-tfiAlt :: Lens' TablesFilesInsert' Text
+tfiAlt :: Lens' TablesFilesInsert' Alt
 tfiAlt = lens _tfiAlt (\ s a -> s{_tfiAlt = a})
 
 instance GoogleRequest TablesFilesInsert' where
         type Rs TablesFilesInsert' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFilesInsert{..}
-          = go _tfiQuotaUser _tfiPrettyPrint _tfiUserIp _tfiKey
+        requestWithRoute r u TablesFilesInsert'{..}
+          = go _tfiQuotaUser (Just _tfiPrettyPrint) _tfiUserIp
+              _tfiKey
               _tfiId
               _tfiOauthToken
               (Just _tfiFilename)
               _tfiFields
-              _tfiAlt
+              (Just _tfiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFilesInsertAPI)
+                      (Proxy :: Proxy TablesFilesInsertResource)
                       r
                       u

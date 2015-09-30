@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- containers.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsDelete@.
-module TagManager.Accounts.Permissions.Delete
+module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
     (
     -- * REST Resource
-      AccountsPermissionsDeleteAPI
+      AccountsPermissionsDeleteResource
 
     -- * Creating a Request
-    , accountsPermissionsDelete
-    , AccountsPermissionsDelete
+    , accountsPermissionsDelete'
+    , AccountsPermissionsDelete'
 
     -- * Request Lenses
     , apdQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsPermissionsDelete@ which the
--- 'AccountsPermissionsDelete' request conforms to.
-type AccountsPermissionsDeleteAPI =
+-- 'AccountsPermissionsDelete'' request conforms to.
+type AccountsPermissionsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "permissions" :>
-           Capture "permissionId" Text :> Delete '[JSON] ()
+           Capture "permissionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
--- /See:/ 'accountsPermissionsDelete' smart constructor.
-data AccountsPermissionsDelete = AccountsPermissionsDelete
+-- /See:/ 'accountsPermissionsDelete'' smart constructor.
+data AccountsPermissionsDelete' = AccountsPermissionsDelete'
     { _apdQuotaUser    :: !(Maybe Text)
     , _apdPrettyPrint  :: !Bool
     , _apdUserIp       :: !(Maybe Text)
@@ -65,7 +73,7 @@ data AccountsPermissionsDelete = AccountsPermissionsDelete
     , _apdOauthToken   :: !(Maybe Text)
     , _apdPermissionId :: !Text
     , _apdFields       :: !(Maybe Text)
-    , _apdAlt          :: !Text
+    , _apdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsDelete'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data AccountsPermissionsDelete = AccountsPermissionsDelete
 -- * 'apdFields'
 --
 -- * 'apdAlt'
-accountsPermissionsDelete
+accountsPermissionsDelete'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
-    -> AccountsPermissionsDelete
-accountsPermissionsDelete pApdAccountId_ pApdPermissionId_ =
-    AccountsPermissionsDelete
+    -> AccountsPermissionsDelete'
+accountsPermissionsDelete' pApdAccountId_ pApdPermissionId_ =
+    AccountsPermissionsDelete'
     { _apdQuotaUser = Nothing
     , _apdPrettyPrint = True
     , _apdUserIp = Nothing
@@ -103,7 +111,7 @@ accountsPermissionsDelete pApdAccountId_ pApdPermissionId_ =
     , _apdOauthToken = Nothing
     , _apdPermissionId = pApdPermissionId_
     , _apdFields = Nothing
-    , _apdAlt = "json"
+    , _apdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +162,23 @@ apdFields
   = lens _apdFields (\ s a -> s{_apdFields = a})
 
 -- | Data format for the response.
-apdAlt :: Lens' AccountsPermissionsDelete' Text
+apdAlt :: Lens' AccountsPermissionsDelete' Alt
 apdAlt = lens _apdAlt (\ s a -> s{_apdAlt = a})
 
 instance GoogleRequest AccountsPermissionsDelete'
          where
         type Rs AccountsPermissionsDelete' = ()
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsDelete{..}
-          = go _apdQuotaUser _apdPrettyPrint _apdUserIp
+        requestWithRoute r u AccountsPermissionsDelete'{..}
+          = go _apdQuotaUser (Just _apdPrettyPrint) _apdUserIp
               _apdAccountId
               _apdKey
               _apdOauthToken
               _apdPermissionId
               _apdFields
-              _apdAlt
+              (Just _apdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPermissionsDeleteAPI)
+                      (Proxy :: Proxy AccountsPermissionsDeleteResource)
                       r
                       u

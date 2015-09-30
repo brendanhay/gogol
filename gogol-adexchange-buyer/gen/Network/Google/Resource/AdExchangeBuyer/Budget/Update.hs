@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- accountId and billingId, with the budget amount in the request.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetUpdate@.
-module AdExchangeBuyer.Budget.Update
+module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     (
     -- * REST Resource
-      BudgetUpdateAPI
+      BudgetUpdateResource
 
     -- * Creating a Request
-    , budgetUpdate
-    , BudgetUpdate
+    , budgetUpdate'
+    , BudgetUpdate'
 
     -- * Request Lenses
     , buQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetUpdate@ which the
--- 'BudgetUpdate' request conforms to.
-type BudgetUpdateAPI =
+-- 'BudgetUpdate'' request conforms to.
+type BudgetUpdateResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
-         Capture "billingId" Int64 :> Put '[JSON] Budget
+         Capture "billingId" Int64 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.
 --
--- /See:/ 'budgetUpdate' smart constructor.
-data BudgetUpdate = BudgetUpdate
+-- /See:/ 'budgetUpdate'' smart constructor.
+data BudgetUpdate' = BudgetUpdate'
     { _buQuotaUser   :: !(Maybe Text)
     , _buPrettyPrint :: !Bool
     , _buUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data BudgetUpdate = BudgetUpdate
     , _buOauthToken  :: !(Maybe Text)
     , _buBillingId   :: !Int64
     , _buFields      :: !(Maybe Text)
-    , _buAlt         :: !Text
+    , _buAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetUpdate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data BudgetUpdate = BudgetUpdate
 -- * 'buFields'
 --
 -- * 'buAlt'
-budgetUpdate
+budgetUpdate'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
-    -> BudgetUpdate
-budgetUpdate pBuAccountId_ pBuBillingId_ =
-    BudgetUpdate
+    -> BudgetUpdate'
+budgetUpdate' pBuAccountId_ pBuBillingId_ =
+    BudgetUpdate'
     { _buQuotaUser = Nothing
     , _buPrettyPrint = True
     , _buUserIp = Nothing
@@ -102,7 +110,7 @@ budgetUpdate pBuAccountId_ pBuBillingId_ =
     , _buOauthToken = Nothing
     , _buBillingId = pBuBillingId_
     , _buFields = Nothing
-    , _buAlt = "json"
+    , _buAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,20 +157,22 @@ buFields :: Lens' BudgetUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
 -- | Data format for the response.
-buAlt :: Lens' BudgetUpdate' Text
+buAlt :: Lens' BudgetUpdate' Alt
 buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
 
 instance GoogleRequest BudgetUpdate' where
         type Rs BudgetUpdate' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BudgetUpdate{..}
-          = go _buQuotaUser _buPrettyPrint _buUserIp
+        requestWithRoute r u BudgetUpdate'{..}
+          = go _buQuotaUser (Just _buPrettyPrint) _buUserIp
               _buAccountId
               _buKey
               _buOauthToken
               _buBillingId
               _buFields
-              _buAlt
+              (Just _buAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BudgetUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BudgetUpdateResource)
+                      r
                       u

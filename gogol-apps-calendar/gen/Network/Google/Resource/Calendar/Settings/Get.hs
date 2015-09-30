@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a single user setting.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsGet@.
-module Calendar.Settings.Get
+module Network.Google.Resource.Calendar.Settings.Get
     (
     -- * REST Resource
-      SettingsGetAPI
+      SettingsGetResource
 
     -- * Creating a Request
-    , settingsGet
-    , SettingsGet
+    , settingsGet'
+    , SettingsGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarSettingsGet@ which the
--- 'SettingsGet' request conforms to.
-type SettingsGetAPI =
+-- 'SettingsGet'' request conforms to.
+type SettingsGetResource =
      "users" :>
        "me" :>
          "settings" :>
-           Capture "setting" Text :> Get '[JSON] Setting
+           Capture "setting" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Setting
 
 -- | Returns a single user setting.
 --
--- /See:/ 'settingsGet' smart constructor.
-data SettingsGet = SettingsGet
+-- /See:/ 'settingsGet'' smart constructor.
+data SettingsGet' = SettingsGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data SettingsGet = SettingsGet
     , _sgKey         :: !(Maybe Text)
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsGet'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data SettingsGet = SettingsGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-settingsGet
+settingsGet'
     :: Text -- ^ 'setting'
-    -> SettingsGet
-settingsGet pSgSetting_ =
-    SettingsGet
+    -> SettingsGet'
+settingsGet' pSgSetting_ =
+    SettingsGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -95,7 +103,7 @@ settingsGet pSgSetting_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,17 +145,21 @@ sgFields :: Lens' SettingsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SettingsGet' Text
+sgAlt :: Lens' SettingsGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp _sgSetting
+        requestWithRoute r u SettingsGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
+              _sgSetting
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SettingsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SettingsGetResource)
+                      r
+                      u

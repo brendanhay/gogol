@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesList@.
-module BigQuery.Tables.List
+module Network.Google.Resource.BigQuery.Tables.List
     (
     -- * REST Resource
-      TablesListAPI
+      TablesListResource
 
     -- * Creating a Request
-    , tablesList
-    , TablesList
+    , tablesList'
+    , TablesList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -47,22 +48,28 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesList@ which the
--- 'TablesList' request conforms to.
-type TablesListAPI =
+-- 'TablesList'' request conforms to.
+type TablesListResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] TableList
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] TableList
 
 -- | Lists all tables in the specified dataset. Requires the READER dataset
 -- role.
 --
--- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList
+-- /See:/ 'tablesList'' smart constructor.
+data TablesList' = TablesList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIp      :: !(Maybe Text)
@@ -73,7 +80,7 @@ data TablesList = TablesList
     , _tlOauthToken  :: !(Maybe Text)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
@@ -101,12 +108,12 @@ data TablesList = TablesList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-tablesList
+tablesList'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> TablesList
-tablesList pTlDatasetId_ pTlProjectId_ =
-    TablesList
+    -> TablesList'
+tablesList' pTlDatasetId_ pTlProjectId_ =
+    TablesList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlUserIp = Nothing
@@ -117,7 +124,7 @@ tablesList pTlDatasetId_ pTlProjectId_ =
     , _tlOauthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,20 +182,23 @@ tlFields :: Lens' TablesList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TablesList' Text
+tlAlt :: Lens' TablesList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TableList
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlUserIp _tlKey
+        requestWithRoute r u TablesList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+              _tlKey
               _tlDatasetId
               _tlPageToken
               _tlProjectId
               _tlOauthToken
               _tlMaxResults
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TablesListResource)
+                      r
+                      u

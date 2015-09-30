@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update Group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsUpdate@.
-module Directory.Groups.Update
+module Network.Google.Resource.Directory.Groups.Update
     (
     -- * REST Resource
-      GroupsUpdateAPI
+      GroupsUpdateResource
 
     -- * Creating a Request
-    , groupsUpdate
-    , GroupsUpdate
+    , groupsUpdate'
+    , GroupsUpdate'
 
     -- * Request Lenses
     , guQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsUpdate@ which the
--- 'GroupsUpdate' request conforms to.
-type GroupsUpdateAPI =
+-- 'GroupsUpdate'' request conforms to.
+type GroupsUpdateResource =
      "groups" :>
-       Capture "groupKey" Text :> Put '[JSON] Group
+       Capture "groupKey" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Group
 
 -- | Update Group
 --
--- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+-- /See:/ 'groupsUpdate'' smart constructor.
+data GroupsUpdate' = GroupsUpdate'
     { _guQuotaUser   :: !(Maybe Text)
     , _guPrettyPrint :: !Bool
     , _guUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data GroupsUpdate = GroupsUpdate
     , _guKey         :: !(Maybe Text)
     , _guOauthToken  :: !(Maybe Text)
     , _guFields      :: !(Maybe Text)
-    , _guAlt         :: !Text
+    , _guAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data GroupsUpdate = GroupsUpdate
 -- * 'guFields'
 --
 -- * 'guAlt'
-groupsUpdate
+groupsUpdate'
     :: Text -- ^ 'groupKey'
-    -> GroupsUpdate
-groupsUpdate pGuGroupKey_ =
-    GroupsUpdate
+    -> GroupsUpdate'
+groupsUpdate' pGuGroupKey_ =
+    GroupsUpdate'
     { _guQuotaUser = Nothing
     , _guPrettyPrint = True
     , _guUserIp = Nothing
@@ -93,7 +101,7 @@ groupsUpdate pGuGroupKey_ =
     , _guKey = Nothing
     , _guOauthToken = Nothing
     , _guFields = Nothing
-    , _guAlt = "json"
+    , _guAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ guFields :: Lens' GroupsUpdate' (Maybe Text)
 guFields = lens _guFields (\ s a -> s{_guFields = a})
 
 -- | Data format for the response.
-guAlt :: Lens' GroupsUpdate' Text
+guAlt :: Lens' GroupsUpdate' Alt
 guAlt = lens _guAlt (\ s a -> s{_guAlt = a})
 
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Group
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsUpdate{..}
-          = go _guQuotaUser _guPrettyPrint _guUserIp
+        requestWithRoute r u GroupsUpdate'{..}
+          = go _guQuotaUser (Just _guPrettyPrint) _guUserIp
               _guGroupKey
               _guKey
               _guOauthToken
               _guFields
-              _guAlt
+              (Just _guAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsUpdateResource)
+                      r
                       u

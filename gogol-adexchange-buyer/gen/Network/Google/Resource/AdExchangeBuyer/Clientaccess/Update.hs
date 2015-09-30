@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientaccessUpdate@.
-module AdExchangeBuyer.Clientaccess.Update
+module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Update
     (
     -- * REST Resource
-      ClientaccessUpdateAPI
+      ClientaccessUpdateResource
 
     -- * Creating a Request
-    , clientaccessUpdate
-    , ClientaccessUpdate
+    , clientaccessUpdate'
+    , ClientaccessUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientaccessUpdate@ which the
--- 'ClientaccessUpdate' request conforms to.
-type ClientaccessUpdateAPI =
+-- 'ClientaccessUpdate'' request conforms to.
+type ClientaccessUpdateResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           Put '[JSON] ClientAccessCapabilities
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "sponsorAccountId" Int32 :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientaccessUpdate' smart constructor.
-data ClientaccessUpdate = ClientaccessUpdate
+-- /See:/ 'clientaccessUpdate'' smart constructor.
+data ClientaccessUpdate' = ClientaccessUpdate'
     { _cuQuotaUser        :: !(Maybe Text)
     , _cuPrettyPrint      :: !Bool
     , _cuUserIp           :: !(Maybe Text)
@@ -62,7 +70,7 @@ data ClientaccessUpdate = ClientaccessUpdate
     , _cuClientAccountId  :: !Int64
     , _cuOauthToken       :: !(Maybe Text)
     , _cuFields           :: !(Maybe Text)
-    , _cuAlt              :: !Text
+    , _cuAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientaccessUpdate'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data ClientaccessUpdate = ClientaccessUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-clientaccessUpdate
+clientaccessUpdate'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientaccessUpdate
-clientaccessUpdate pCuSponsorAccountId_ pCuClientAccountId_ =
-    ClientaccessUpdate
+    -> ClientaccessUpdate'
+clientaccessUpdate' pCuSponsorAccountId_ pCuClientAccountId_ =
+    ClientaccessUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -100,7 +108,7 @@ clientaccessUpdate pCuSponsorAccountId_ pCuClientAccountId_ =
     , _cuClientAccountId = pCuClientAccountId_
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,23 +155,23 @@ cuFields :: Lens' ClientaccessUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' ClientaccessUpdate' Text
+cuAlt :: Lens' ClientaccessUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest ClientaccessUpdate' where
         type Rs ClientaccessUpdate' =
              ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientaccessUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp
+        requestWithRoute r u ClientaccessUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
               (Just _cuSponsorAccountId)
               _cuKey
               _cuClientAccountId
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ClientaccessUpdateAPI)
+                      (Proxy :: Proxy ClientaccessUpdateResource)
                       r
                       u

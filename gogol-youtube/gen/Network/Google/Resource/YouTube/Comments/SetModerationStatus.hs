@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- comments.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsSetModerationStatus@.
-module YouTube.Comments.SetModerationStatus
+module Network.Google.Resource.YouTube.Comments.SetModerationStatus
     (
     -- * REST Resource
-      CommentsSetModerationStatusAPI
+      CommentsSetModerationStatusResource
 
     -- * Creating a Request
-    , commentsSetModerationStatus
-    , CommentsSetModerationStatus
+    , commentsSetModerationStatus'
+    , CommentsSetModerationStatus'
 
     -- * Request Lenses
     , csmsQuotaUser
@@ -47,30 +48,39 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentsSetModerationStatus@ which the
--- 'CommentsSetModerationStatus' request conforms to.
-type CommentsSetModerationStatusAPI =
+-- 'CommentsSetModerationStatus'' request conforms to.
+type CommentsSetModerationStatusResource =
      "comments" :>
        "setModerationStatus" :>
-         QueryParam "banAuthor" Bool :>
-           QueryParam "moderationStatus" Text :>
-             QueryParam "id" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "banAuthor" Bool :>
+               QueryParam "moderationStatus"
+                 YouTubeCommentsSetModerationStatusModerationStatus
+                 :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Sets the moderation status of one or more comments. The API request must
 -- be authorized by the owner of the channel or video associated with the
 -- comments.
 --
--- /See:/ 'commentsSetModerationStatus' smart constructor.
-data CommentsSetModerationStatus = CommentsSetModerationStatus
+-- /See:/ 'commentsSetModerationStatus'' smart constructor.
+data CommentsSetModerationStatus' = CommentsSetModerationStatus'
     { _csmsQuotaUser        :: !(Maybe Text)
     , _csmsPrettyPrint      :: !Bool
     , _csmsBanAuthor        :: !Bool
-    , _csmsModerationStatus :: !Text
+    , _csmsModerationStatus :: !YouTubeCommentsSetModerationStatusModerationStatus
     , _csmsUserIp           :: !(Maybe Text)
     , _csmsKey              :: !(Maybe Text)
     , _csmsId               :: !Text
     , _csmsOauthToken       :: !(Maybe Text)
     , _csmsFields           :: !(Maybe Text)
-    , _csmsAlt              :: !Text
+    , _csmsAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsSetModerationStatus'' with the minimum fields required to make a request.
@@ -96,12 +106,12 @@ data CommentsSetModerationStatus = CommentsSetModerationStatus
 -- * 'csmsFields'
 --
 -- * 'csmsAlt'
-commentsSetModerationStatus
-    :: Text -- ^ 'moderationStatus'
+commentsSetModerationStatus'
+    :: YouTubeCommentsSetModerationStatusModerationStatus -- ^ 'moderationStatus'
     -> Text -- ^ 'id'
-    -> CommentsSetModerationStatus
-commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
-    CommentsSetModerationStatus
+    -> CommentsSetModerationStatus'
+commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
+    CommentsSetModerationStatus'
     { _csmsQuotaUser = Nothing
     , _csmsPrettyPrint = True
     , _csmsBanAuthor = False
@@ -111,7 +121,7 @@ commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
     , _csmsId = pCsmsId_
     , _csmsOauthToken = Nothing
     , _csmsFields = Nothing
-    , _csmsAlt = "json"
+    , _csmsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,7 +148,7 @@ csmsBanAuthor
       (\ s a -> s{_csmsBanAuthor = a})
 
 -- | Identifies the new moderation status of the specified comments.
-csmsModerationStatus :: Lens' CommentsSetModerationStatus' Text
+csmsModerationStatus :: Lens' CommentsSetModerationStatus' YouTubeCommentsSetModerationStatusModerationStatus
 csmsModerationStatus
   = lens _csmsModerationStatus
       (\ s a -> s{_csmsModerationStatus = a})
@@ -172,15 +182,15 @@ csmsFields
   = lens _csmsFields (\ s a -> s{_csmsFields = a})
 
 -- | Data format for the response.
-csmsAlt :: Lens' CommentsSetModerationStatus' Text
+csmsAlt :: Lens' CommentsSetModerationStatus' Alt
 csmsAlt = lens _csmsAlt (\ s a -> s{_csmsAlt = a})
 
 instance GoogleRequest CommentsSetModerationStatus'
          where
         type Rs CommentsSetModerationStatus' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsSetModerationStatus{..}
-          = go _csmsQuotaUser _csmsPrettyPrint
+        requestWithRoute r u CommentsSetModerationStatus'{..}
+          = go _csmsQuotaUser (Just _csmsPrettyPrint)
               (Just _csmsBanAuthor)
               (Just _csmsModerationStatus)
               _csmsUserIp
@@ -188,9 +198,9 @@ instance GoogleRequest CommentsSetModerationStatus'
               (Just _csmsId)
               _csmsOauthToken
               _csmsFields
-              _csmsAlt
+              (Just _csmsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentsSetModerationStatusAPI)
+                      (Proxy :: Proxy CommentsSetModerationStatusResource)
                       r
                       u

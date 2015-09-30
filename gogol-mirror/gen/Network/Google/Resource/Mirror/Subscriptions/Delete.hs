@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a subscription.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsDelete@.
-module Mirror.Subscriptions.Delete
+module Network.Google.Resource.Mirror.Subscriptions.Delete
     (
     -- * REST Resource
-      SubscriptionsDeleteAPI
+      SubscriptionsDeleteResource
 
     -- * Creating a Request
-    , subscriptionsDelete
-    , SubscriptionsDelete
+    , subscriptionsDelete'
+    , SubscriptionsDelete'
 
     -- * Request Lenses
     , sdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorSubscriptionsDelete@ which the
--- 'SubscriptionsDelete' request conforms to.
-type SubscriptionsDeleteAPI =
+-- 'SubscriptionsDelete'' request conforms to.
+type SubscriptionsDeleteResource =
      "subscriptions" :>
-       Capture "id" Text :> Delete '[JSON] ()
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a subscription.
 --
--- /See:/ 'subscriptionsDelete' smart constructor.
-data SubscriptionsDelete = SubscriptionsDelete
+-- /See:/ 'subscriptionsDelete'' smart constructor.
+data SubscriptionsDelete' = SubscriptionsDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data SubscriptionsDelete = SubscriptionsDelete
     , _sdId          :: !Text
     , _sdOauthToken  :: !(Maybe Text)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data SubscriptionsDelete = SubscriptionsDelete
 -- * 'sdFields'
 --
 -- * 'sdAlt'
-subscriptionsDelete
+subscriptionsDelete'
     :: Text -- ^ 'id'
-    -> SubscriptionsDelete
-subscriptionsDelete pSdId_ =
-    SubscriptionsDelete
+    -> SubscriptionsDelete'
+subscriptionsDelete' pSdId_ =
+    SubscriptionsDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
     , _sdUserIp = Nothing
@@ -93,7 +101,7 @@ subscriptionsDelete pSdId_ =
     , _sdId = pSdId_
     , _sdOauthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = "json"
+    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,20 +142,21 @@ sdFields :: Lens' SubscriptionsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' SubscriptionsDelete' Text
+sdAlt :: Lens' SubscriptionsDelete' Alt
 sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsDelete{..}
-          = go _sdQuotaUser _sdPrettyPrint _sdUserIp _sdKey
+        requestWithRoute r u SubscriptionsDelete'{..}
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+              _sdKey
               _sdId
               _sdOauthToken
               _sdFields
-              _sdAlt
+              (Just _sdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsDeleteAPI)
+                      (Proxy :: Proxy SubscriptionsDeleteResource)
                       r
                       u

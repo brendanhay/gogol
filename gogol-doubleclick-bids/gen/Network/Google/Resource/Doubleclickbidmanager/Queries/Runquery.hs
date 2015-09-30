@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Runs a stored query to generate a report.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerQueriesRunquery@.
-module Doubleclickbidmanager.Queries.Runquery
+module Network.Google.Resource.Doubleclickbidmanager.Queries.Runquery
     (
     -- * REST Resource
-      QueriesRunqueryAPI
+      QueriesRunqueryResource
 
     -- * Creating a Request
-    , queriesRunquery
-    , QueriesRunquery
+    , queriesRunquery'
+    , QueriesRunquery'
 
     -- * Request Lenses
     , qrQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerQueriesRunquery@ which the
--- 'QueriesRunquery' request conforms to.
-type QueriesRunqueryAPI =
-     "query" :> Capture "queryId" Int64 :> Post '[JSON] ()
+-- 'QueriesRunquery'' request conforms to.
+type QueriesRunqueryResource =
+     "query" :>
+       Capture "queryId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Runs a stored query to generate a report.
 --
--- /See:/ 'queriesRunquery' smart constructor.
-data QueriesRunquery = QueriesRunquery
+-- /See:/ 'queriesRunquery'' smart constructor.
+data QueriesRunquery' = QueriesRunquery'
     { _qrQuotaUser   :: !(Maybe Text)
     , _qrQueryId     :: !Int64
     , _qrPrettyPrint :: !Bool
@@ -58,7 +67,7 @@ data QueriesRunquery = QueriesRunquery
     , _qrKey         :: !(Maybe Text)
     , _qrOauthToken  :: !(Maybe Text)
     , _qrFields      :: !(Maybe Text)
-    , _qrAlt         :: !Text
+    , _qrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesRunquery'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data QueriesRunquery = QueriesRunquery
 -- * 'qrFields'
 --
 -- * 'qrAlt'
-queriesRunquery
+queriesRunquery'
     :: Int64 -- ^ 'queryId'
-    -> QueriesRunquery
-queriesRunquery pQrQueryId_ =
-    QueriesRunquery
+    -> QueriesRunquery'
+queriesRunquery' pQrQueryId_ =
+    QueriesRunquery'
     { _qrQuotaUser = Nothing
     , _qrQueryId = pQrQueryId_
     , _qrPrettyPrint = True
@@ -92,7 +101,7 @@ queriesRunquery pQrQueryId_ =
     , _qrKey = Nothing
     , _qrOauthToken = Nothing
     , _qrFields = Nothing
-    , _qrAlt = "json"
+    , _qrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,19 +143,21 @@ qrFields :: Lens' QueriesRunquery' (Maybe Text)
 qrFields = lens _qrFields (\ s a -> s{_qrFields = a})
 
 -- | Data format for the response.
-qrAlt :: Lens' QueriesRunquery' Text
+qrAlt :: Lens' QueriesRunquery' Alt
 qrAlt = lens _qrAlt (\ s a -> s{_qrAlt = a})
 
 instance GoogleRequest QueriesRunquery' where
         type Rs QueriesRunquery' = ()
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesRunquery{..}
-          = go _qrQuotaUser _qrQueryId _qrPrettyPrint _qrUserIp
+        requestWithRoute r u QueriesRunquery'{..}
+          = go _qrQuotaUser _qrQueryId (Just _qrPrettyPrint)
+              _qrUserIp
               _qrKey
               _qrOauthToken
               _qrFields
-              _qrAlt
+              (Just _qrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QueriesRunqueryAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy QueriesRunqueryResource)
                       r
                       u

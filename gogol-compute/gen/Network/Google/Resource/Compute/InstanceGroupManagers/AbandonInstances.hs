@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- value by the number of instances that you abandon from the group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAbandonInstances@.
-module Compute.InstanceGroupManagers.AbandonInstances
+module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
     (
     -- * REST Resource
-      InstanceGroupManagersAbandonInstancesAPI
+      InstanceGroupManagersAbandonInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersAbandonInstances
-    , InstanceGroupManagersAbandonInstances
+    , instanceGroupManagersAbandonInstances'
+    , InstanceGroupManagersAbandonInstances'
 
     -- * Request Lenses
     , igmaiQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersAbandonInstances@ which the
--- 'InstanceGroupManagersAbandonInstances' request conforms to.
-type InstanceGroupManagersAbandonInstancesAPI =
+-- 'InstanceGroupManagersAbandonInstances'' request conforms to.
+type InstanceGroupManagersAbandonInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               "abandonInstances" :> Post '[JSON] Operation
+               "abandonInstances" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes the specified instances from the managed instance group, and
 -- from any target pools where they are a member. The instances are not
 -- deleted. The managed instance group automatically reduces its targetSize
 -- value by the number of instances that you abandon from the group.
 --
--- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
-data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances
+-- /See:/ 'instanceGroupManagersAbandonInstances'' smart constructor.
+data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstances'
     { _igmaiQuotaUser            :: !(Maybe Text)
     , _igmaiPrettyPrint          :: !Bool
     , _igmaiProject              :: !Text
@@ -73,7 +81,7 @@ data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstanc
     , _igmaiKey                  :: !(Maybe Text)
     , _igmaiOauthToken           :: !(Maybe Text)
     , _igmaiFields               :: !(Maybe Text)
-    , _igmaiAlt                  :: !Text
+    , _igmaiAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAbandonInstances'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstanc
 -- * 'igmaiFields'
 --
 -- * 'igmaiAlt'
-instanceGroupManagersAbandonInstances
+instanceGroupManagersAbandonInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersAbandonInstances
-instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ =
-    InstanceGroupManagersAbandonInstances
+    -> InstanceGroupManagersAbandonInstances'
+instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ =
+    InstanceGroupManagersAbandonInstances'
     { _igmaiQuotaUser = Nothing
     , _igmaiPrettyPrint = True
     , _igmaiProject = pIgmaiProject_
@@ -115,7 +123,7 @@ instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_
     , _igmaiKey = Nothing
     , _igmaiOauthToken = Nothing
     , _igmaiFields = Nothing
-    , _igmaiAlt = "json"
+    , _igmaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,7 +180,7 @@ igmaiFields
   = lens _igmaiFields (\ s a -> s{_igmaiFields = a})
 
 -- | Data format for the response.
-igmaiAlt :: Lens' InstanceGroupManagersAbandonInstances' Text
+igmaiAlt :: Lens' InstanceGroupManagersAbandonInstances' Alt
 igmaiAlt = lens _igmaiAlt (\ s a -> s{_igmaiAlt = a})
 
 instance GoogleRequest
@@ -181,18 +189,19 @@ instance GoogleRequest
              Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupManagersAbandonInstances{..}
-          = go _igmaiQuotaUser _igmaiPrettyPrint _igmaiProject
+          InstanceGroupManagersAbandonInstances'{..}
+          = go _igmaiQuotaUser (Just _igmaiPrettyPrint)
+              _igmaiProject
               _igmaiInstanceGroupManager
               _igmaiUserIp
               _igmaiZone
               _igmaiKey
               _igmaiOauthToken
               _igmaiFields
-              _igmaiAlt
+              (Just _igmaiAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersAbandonInstancesAPI)
+                         Proxy InstanceGroupManagersAbandonInstancesResource)
                       r
                       u

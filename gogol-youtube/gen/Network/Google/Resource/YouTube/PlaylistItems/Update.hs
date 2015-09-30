@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- position in the playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistItemsUpdate@.
-module YouTube.PlaylistItems.Update
+module Network.Google.Resource.YouTube.PlaylistItems.Update
     (
     -- * REST Resource
-      PlaylistItemsUpdateAPI
+      PlaylistItemsUpdateResource
 
     -- * Creating a Request
-    , playlistItemsUpdate
-    , PlaylistItemsUpdate
+    , playlistItemsUpdate'
+    , PlaylistItemsUpdate'
 
     -- * Request Lenses
     , piuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistItemsUpdate@ which the
--- 'PlaylistItemsUpdate' request conforms to.
-type PlaylistItemsUpdateAPI =
+-- 'PlaylistItemsUpdate'' request conforms to.
+type PlaylistItemsUpdateResource =
      "playlistItems" :>
-       QueryParam "part" Text :> Put '[JSON] PlaylistItem
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] PlaylistItem
 
 -- | Modifies a playlist item. For example, you could update the item\'s
 -- position in the playlist.
 --
--- /See:/ 'playlistItemsUpdate' smart constructor.
-data PlaylistItemsUpdate = PlaylistItemsUpdate
+-- /See:/ 'playlistItemsUpdate'' smart constructor.
+data PlaylistItemsUpdate' = PlaylistItemsUpdate'
     { _piuQuotaUser   :: !(Maybe Text)
     , _piuPart        :: !Text
     , _piuPrettyPrint :: !Bool
@@ -61,7 +69,7 @@ data PlaylistItemsUpdate = PlaylistItemsUpdate
     , _piuKey         :: !(Maybe Text)
     , _piuOauthToken  :: !(Maybe Text)
     , _piuFields      :: !(Maybe Text)
-    , _piuAlt         :: !Text
+    , _piuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistItemsUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data PlaylistItemsUpdate = PlaylistItemsUpdate
 -- * 'piuFields'
 --
 -- * 'piuAlt'
-playlistItemsUpdate
+playlistItemsUpdate'
     :: Text -- ^ 'part'
-    -> PlaylistItemsUpdate
-playlistItemsUpdate pPiuPart_ =
-    PlaylistItemsUpdate
+    -> PlaylistItemsUpdate'
+playlistItemsUpdate' pPiuPart_ =
+    PlaylistItemsUpdate'
     { _piuQuotaUser = Nothing
     , _piuPart = pPiuPart_
     , _piuPrettyPrint = True
@@ -95,7 +103,7 @@ playlistItemsUpdate pPiuPart_ =
     , _piuKey = Nothing
     , _piuOauthToken = Nothing
     , _piuFields = Nothing
-    , _piuAlt = "json"
+    , _piuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,21 +159,22 @@ piuFields
   = lens _piuFields (\ s a -> s{_piuFields = a})
 
 -- | Data format for the response.
-piuAlt :: Lens' PlaylistItemsUpdate' Text
+piuAlt :: Lens' PlaylistItemsUpdate' Alt
 piuAlt = lens _piuAlt (\ s a -> s{_piuAlt = a})
 
 instance GoogleRequest PlaylistItemsUpdate' where
         type Rs PlaylistItemsUpdate' = PlaylistItem
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistItemsUpdate{..}
-          = go _piuQuotaUser (Just _piuPart) _piuPrettyPrint
+        requestWithRoute r u PlaylistItemsUpdate'{..}
+          = go _piuQuotaUser (Just _piuPart)
+              (Just _piuPrettyPrint)
               _piuUserIp
               _piuKey
               _piuOauthToken
               _piuFields
-              _piuAlt
+              (Just _piuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlaylistItemsUpdateAPI)
+                      (Proxy :: Proxy PlaylistItemsUpdateResource)
                       r
                       u

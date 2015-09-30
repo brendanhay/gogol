@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns entries on the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListList@.
-module Calendar.CalendarList.List
+module Network.Google.Resource.Calendar.CalendarList.List
     (
     -- * REST Resource
-      CalendarListListAPI
+      CalendarListListResource
 
     -- * Creating a Request
-    , calendarListList
-    , CalendarListList
+    , calendarListList'
+    , CalendarListList'
 
     -- * Request Lenses
     , cllSyncToken
@@ -48,27 +49,36 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListList@ which the
--- 'CalendarListList' request conforms to.
-type CalendarListListAPI =
+-- 'CalendarListList'' request conforms to.
+type CalendarListListResource =
      "users" :>
        "me" :>
          "calendarList" :>
            QueryParam "syncToken" Text :>
-             QueryParam "minAccessRole" Text :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "showHidden" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       Get '[JSON] CalendarList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "minAccessRole"
+                   CalendarCalendarListListMinAccessRole
+                   :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "showHidden" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] CalendarList
 
 -- | Returns entries on the user\'s calendar list.
 --
--- /See:/ 'calendarListList' smart constructor.
-data CalendarListList = CalendarListList
+-- /See:/ 'calendarListList'' smart constructor.
+data CalendarListList' = CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllQuotaUser     :: !(Maybe Text)
     , _cllPrettyPrint   :: !Bool
-    , _cllMinAccessRole :: !(Maybe Text)
+    , _cllMinAccessRole :: !(Maybe CalendarCalendarListListMinAccessRole)
     , _cllUserIp        :: !(Maybe Text)
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
@@ -77,7 +87,7 @@ data CalendarListList = CalendarListList
     , _cllOauthToken    :: !(Maybe Text)
     , _cllMaxResults    :: !(Maybe Int32)
     , _cllFields        :: !(Maybe Text)
-    , _cllAlt           :: !Text
+    , _cllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListList'' with the minimum fields required to make a request.
@@ -109,10 +119,10 @@ data CalendarListList = CalendarListList
 -- * 'cllFields'
 --
 -- * 'cllAlt'
-calendarListList
-    :: CalendarListList
-calendarListList =
-    CalendarListList
+calendarListList'
+    :: CalendarListList'
+calendarListList' =
+    CalendarListList'
     { _cllSyncToken = Nothing
     , _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
@@ -125,7 +135,7 @@ calendarListList =
     , _cllOauthToken = Nothing
     , _cllMaxResults = Nothing
     , _cllFields = Nothing
-    , _cllAlt = "json"
+    , _cllAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -160,7 +170,7 @@ cllPrettyPrint
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-cllMinAccessRole :: Lens' CalendarListList' (Maybe Text)
+cllMinAccessRole :: Lens' CalendarListList' (Maybe CalendarCalendarListListMinAccessRole)
 cllMinAccessRole
   = lens _cllMinAccessRole
       (\ s a -> s{_cllMinAccessRole = a})
@@ -215,14 +225,15 @@ cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
 -- | Data format for the response.
-cllAlt :: Lens' CalendarListList' Text
+cllAlt :: Lens' CalendarListList' Alt
 cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
 
 instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListList{..}
-          = go _cllSyncToken _cllQuotaUser _cllPrettyPrint
+        requestWithRoute r u CalendarListList'{..}
+          = go _cllSyncToken _cllQuotaUser
+              (Just _cllPrettyPrint)
               _cllMinAccessRole
               _cllUserIp
               _cllShowDeleted
@@ -232,9 +243,9 @@ instance GoogleRequest CalendarListList' where
               _cllOauthToken
               _cllMaxResults
               _cllFields
-              _cllAlt
+              (Just _cllAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListListAPI)
+                      (Proxy :: Proxy CalendarListListResource)
                       r
                       u

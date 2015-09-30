@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified thread.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsGet@.
-module Gmail.Users.Threads.Get
+module Network.Google.Resource.Gmail.Users.Threads.Get
     (
     -- * REST Resource
-      UsersThreadsGetAPI
+      UsersThreadsGetResource
 
     -- * Creating a Request
-    , usersThreadsGet
-    , UsersThreadsGet
+    , usersThreadsGet'
+    , UsersThreadsGet'
 
     -- * Request Lenses
     , utgQuotaUser
@@ -46,30 +47,36 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsGet@ which the
--- 'UsersThreadsGet' request conforms to.
-type UsersThreadsGetAPI =
+-- 'UsersThreadsGet'' request conforms to.
+type UsersThreadsGetResource =
      Capture "userId" Text :>
        "threads" :>
          Capture "id" Text :>
-           QueryParam "format" Text :>
-             QueryParams "metadataHeaders" Text :>
-               Get '[JSON] Thread
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "format" GmailUsersThreadsGetFormat :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParams "metadataHeaders" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Thread
 
 -- | Gets the specified thread.
 --
--- /See:/ 'usersThreadsGet' smart constructor.
-data UsersThreadsGet = UsersThreadsGet
+-- /See:/ 'usersThreadsGet'' smart constructor.
+data UsersThreadsGet' = UsersThreadsGet'
     { _utgQuotaUser       :: !(Maybe Text)
     , _utgPrettyPrint     :: !Bool
     , _utgUserIp          :: !(Maybe Text)
-    , _utgFormat          :: !Text
+    , _utgFormat          :: !GmailUsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgKey             :: !(Maybe Text)
     , _utgId              :: !Text
     , _utgOauthToken      :: !(Maybe Text)
     , _utgMetadataHeaders :: !(Maybe Text)
     , _utgFields          :: !(Maybe Text)
-    , _utgAlt             :: !Text
+    , _utgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsGet'' with the minimum fields required to make a request.
@@ -97,23 +104,23 @@ data UsersThreadsGet = UsersThreadsGet
 -- * 'utgFields'
 --
 -- * 'utgAlt'
-usersThreadsGet
+usersThreadsGet'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersThreadsGet
-usersThreadsGet pUtgUserId_ pUtgId_ =
-    UsersThreadsGet
+    -> UsersThreadsGet'
+usersThreadsGet' pUtgUserId_ pUtgId_ =
+    UsersThreadsGet'
     { _utgQuotaUser = Nothing
     , _utgPrettyPrint = True
     , _utgUserIp = Nothing
-    , _utgFormat = "full"
+    , _utgFormat = Full
     , _utgUserId = pUtgUserId_
     , _utgKey = Nothing
     , _utgId = pUtgId_
     , _utgOauthToken = Nothing
     , _utgMetadataHeaders = Nothing
     , _utgFields = Nothing
-    , _utgAlt = "json"
+    , _utgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,7 +143,7 @@ utgUserIp
   = lens _utgUserIp (\ s a -> s{_utgUserIp = a})
 
 -- | The format to return the messages in.
-utgFormat :: Lens' UsersThreadsGet' Text
+utgFormat :: Lens' UsersThreadsGet' GmailUsersThreadsGetFormat
 utgFormat
   = lens _utgFormat (\ s a -> s{_utgFormat = a})
 
@@ -174,14 +181,14 @@ utgFields
   = lens _utgFields (\ s a -> s{_utgFields = a})
 
 -- | Data format for the response.
-utgAlt :: Lens' UsersThreadsGet' Text
+utgAlt :: Lens' UsersThreadsGet' Alt
 utgAlt = lens _utgAlt (\ s a -> s{_utgAlt = a})
 
 instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsGet{..}
-          = go _utgQuotaUser _utgPrettyPrint _utgUserIp
+        requestWithRoute r u UsersThreadsGet'{..}
+          = go _utgQuotaUser (Just _utgPrettyPrint) _utgUserIp
               (Just _utgFormat)
               _utgUserId
               _utgKey
@@ -189,8 +196,9 @@ instance GoogleRequest UsersThreadsGet' where
               _utgOauthToken
               _utgMetadataHeaders
               _utgFields
-              _utgAlt
+              (Just _utgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersThreadsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersThreadsGetResource)
                       r
                       u

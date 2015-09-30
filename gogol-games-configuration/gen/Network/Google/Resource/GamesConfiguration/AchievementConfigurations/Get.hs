@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsGet@.
-module GamesConfiguration.AchievementConfigurations.Get
+module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
     (
     -- * REST Resource
-      AchievementConfigurationsGetAPI
+      AchievementConfigurationsGetResource
 
     -- * Creating a Request
-    , achievementConfigurationsGet
-    , AchievementConfigurationsGet
+    , achievementConfigurationsGet'
+    , AchievementConfigurationsGet'
 
     -- * Request Lenses
     , acgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationAchievementConfigurationsGet@ which the
--- 'AchievementConfigurationsGet' request conforms to.
-type AchievementConfigurationsGetAPI =
+-- 'AchievementConfigurationsGet'' request conforms to.
+type AchievementConfigurationsGetResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         Get '[JSON] AchievementConfiguration
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] AchievementConfiguration
 
 -- | Retrieves the metadata of the achievement configuration with the given
 -- ID.
 --
--- /See:/ 'achievementConfigurationsGet' smart constructor.
-data AchievementConfigurationsGet = AchievementConfigurationsGet
+-- /See:/ 'achievementConfigurationsGet'' smart constructor.
+data AchievementConfigurationsGet' = AchievementConfigurationsGet'
     { _acgQuotaUser     :: !(Maybe Text)
     , _acgPrettyPrint   :: !Bool
     , _acgAchievementId :: !Text
@@ -62,7 +70,7 @@ data AchievementConfigurationsGet = AchievementConfigurationsGet
     , _acgKey           :: !(Maybe Text)
     , _acgOauthToken    :: !(Maybe Text)
     , _acgFields        :: !(Maybe Text)
-    , _acgAlt           :: !Text
+    , _acgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsGet'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data AchievementConfigurationsGet = AchievementConfigurationsGet
 -- * 'acgFields'
 --
 -- * 'acgAlt'
-achievementConfigurationsGet
+achievementConfigurationsGet'
     :: Text -- ^ 'achievementId'
-    -> AchievementConfigurationsGet
-achievementConfigurationsGet pAcgAchievementId_ =
-    AchievementConfigurationsGet
+    -> AchievementConfigurationsGet'
+achievementConfigurationsGet' pAcgAchievementId_ =
+    AchievementConfigurationsGet'
     { _acgQuotaUser = Nothing
     , _acgPrettyPrint = True
     , _acgAchievementId = pAcgAchievementId_
@@ -96,7 +104,7 @@ achievementConfigurationsGet pAcgAchievementId_ =
     , _acgKey = Nothing
     , _acgOauthToken = Nothing
     , _acgFields = Nothing
-    , _acgAlt = "json"
+    , _acgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ acgFields
   = lens _acgFields (\ s a -> s{_acgFields = a})
 
 -- | Data format for the response.
-acgAlt :: Lens' AchievementConfigurationsGet' Text
+acgAlt :: Lens' AchievementConfigurationsGet' Alt
 acgAlt = lens _acgAlt (\ s a -> s{_acgAlt = a})
 
 instance GoogleRequest AchievementConfigurationsGet'
@@ -151,15 +159,17 @@ instance GoogleRequest AchievementConfigurationsGet'
              AchievementConfiguration
         request
           = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u AchievementConfigurationsGet{..}
-          = go _acgQuotaUser _acgPrettyPrint _acgAchievementId
+        requestWithRoute r u
+          AchievementConfigurationsGet'{..}
+          = go _acgQuotaUser (Just _acgPrettyPrint)
+              _acgAchievementId
               _acgUserIp
               _acgKey
               _acgOauthToken
               _acgFields
-              _acgAlt
+              (Just _acgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementConfigurationsGetAPI)
+                      (Proxy :: Proxy AchievementConfigurationsGetResource)
                       r
                       u

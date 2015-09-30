@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Assign License. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsPatch@.
-module Licensing.LicenseAssignments.Patch
+module Network.Google.Resource.Licensing.LicenseAssignments.Patch
     (
     -- * REST Resource
-      LicenseAssignmentsPatchAPI
+      LicenseAssignmentsPatchResource
 
     -- * Creating a Request
-    , licenseAssignmentsPatch
-    , LicenseAssignmentsPatch
+    , licenseAssignmentsPatch'
+    , LicenseAssignmentsPatch'
 
     -- * Request Lenses
     , lapQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsPatch@ which the
--- 'LicenseAssignmentsPatch' request conforms to.
-type LicenseAssignmentsPatchAPI =
+-- 'LicenseAssignmentsPatch'' request conforms to.
+type LicenseAssignmentsPatchResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
            "user" :>
              Capture "userId" Text :>
-               Patch '[JSON] LicenseAssignment
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Patch '[JSON] LicenseAssignment
 
 -- | Assign License. This method supports patch semantics.
 --
--- /See:/ 'licenseAssignmentsPatch' smart constructor.
-data LicenseAssignmentsPatch = LicenseAssignmentsPatch
+-- /See:/ 'licenseAssignmentsPatch'' smart constructor.
+data LicenseAssignmentsPatch' = LicenseAssignmentsPatch'
     { _lapQuotaUser   :: !(Maybe Text)
     , _lapPrettyPrint :: !Bool
     , _lapUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data LicenseAssignmentsPatch = LicenseAssignmentsPatch
     , _lapOauthToken  :: !(Maybe Text)
     , _lapProductId   :: !Text
     , _lapFields      :: !(Maybe Text)
-    , _lapAlt         :: !Text
+    , _lapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsPatch'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data LicenseAssignmentsPatch = LicenseAssignmentsPatch
 -- * 'lapFields'
 --
 -- * 'lapAlt'
-licenseAssignmentsPatch
+licenseAssignmentsPatch'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsPatch
-licenseAssignmentsPatch pLapSkuId_ pLapUserId_ pLapProductId_ =
-    LicenseAssignmentsPatch
+    -> LicenseAssignmentsPatch'
+licenseAssignmentsPatch' pLapSkuId_ pLapUserId_ pLapProductId_ =
+    LicenseAssignmentsPatch'
     { _lapQuotaUser = Nothing
     , _lapPrettyPrint = True
     , _lapUserIp = Nothing
@@ -109,7 +117,7 @@ licenseAssignmentsPatch pLapSkuId_ pLapUserId_ pLapProductId_ =
     , _lapOauthToken = Nothing
     , _lapProductId = pLapProductId_
     , _lapFields = Nothing
-    , _lapAlt = "json"
+    , _lapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ lapFields
   = lens _lapFields (\ s a -> s{_lapFields = a})
 
 -- | Data format for the response.
-lapAlt :: Lens' LicenseAssignmentsPatch' Text
+lapAlt :: Lens' LicenseAssignmentsPatch' Alt
 lapAlt = lens _lapAlt (\ s a -> s{_lapAlt = a})
 
 instance GoogleRequest LicenseAssignmentsPatch' where
         type Rs LicenseAssignmentsPatch' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsPatch{..}
-          = go _lapQuotaUser _lapPrettyPrint _lapUserIp
+        requestWithRoute r u LicenseAssignmentsPatch'{..}
+          = go _lapQuotaUser (Just _lapPrettyPrint) _lapUserIp
               _lapSkuId
               _lapUserId
               _lapKey
               _lapOauthToken
               _lapProductId
               _lapFields
-              _lapAlt
+              (Just _lapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsPatchAPI)
+                      (Proxy :: Proxy LicenseAssignmentsPatchResource)
                       r
                       u

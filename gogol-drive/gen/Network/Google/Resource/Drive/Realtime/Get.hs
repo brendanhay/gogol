@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,148 +21,164 @@
 -- file as JSON.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeGet@.
-module Drive.Realtime.Get
+module Network.Google.Resource.Drive.Realtime.Get
     (
     -- * REST Resource
-      RealtimeGetAPI
+      RealtimeGetResource
 
     -- * Creating a Request
-    , realtimeGet
-    , RealtimeGet
+    , realtimeGet'
+    , RealtimeGet'
 
     -- * Request Lenses
-    , rQuotaUser
-    , rPrettyPrint
-    , rUserIp
-    , rKey
-    , rFileId
-    , rOauthToken
-    , rRevision
-    , rFields
-    , rAlt
+    , reaQuotaUser
+    , reaPrettyPrint
+    , reaUserIp
+    , reaKey
+    , reaFileId
+    , reaOauthToken
+    , reaRevision
+    , reaFields
+    , reaAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRealtimeGet@ which the
--- 'RealtimeGet' request conforms to.
-type RealtimeGetAPI =
+-- 'RealtimeGet'' request conforms to.
+type RealtimeGetResource =
      "files" :>
        Capture "fileId" Text :>
          "realtime" :>
-           QueryParam "revision" Int32 :> Get '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "revision" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ()
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
 --
--- /See:/ 'realtimeGet' smart constructor.
-data RealtimeGet = RealtimeGet
-    { _rQuotaUser   :: !(Maybe Text)
-    , _rPrettyPrint :: !Bool
-    , _rUserIp      :: !(Maybe Text)
-    , _rKey         :: !(Maybe Text)
-    , _rFileId      :: !Text
-    , _rOauthToken  :: !(Maybe Text)
-    , _rRevision    :: !(Maybe Int32)
-    , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Text
+-- /See:/ 'realtimeGet'' smart constructor.
+data RealtimeGet' = RealtimeGet'
+    { _reaQuotaUser   :: !(Maybe Text)
+    , _reaPrettyPrint :: !Bool
+    , _reaUserIp      :: !(Maybe Text)
+    , _reaKey         :: !(Maybe Text)
+    , _reaFileId      :: !Text
+    , _reaOauthToken  :: !(Maybe Text)
+    , _reaRevision    :: !(Maybe Int32)
+    , _reaFields      :: !(Maybe Text)
+    , _reaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rQuotaUser'
+-- * 'reaQuotaUser'
 --
--- * 'rPrettyPrint'
+-- * 'reaPrettyPrint'
 --
--- * 'rUserIp'
+-- * 'reaUserIp'
 --
--- * 'rKey'
+-- * 'reaKey'
 --
--- * 'rFileId'
+-- * 'reaFileId'
 --
--- * 'rOauthToken'
+-- * 'reaOauthToken'
 --
--- * 'rRevision'
+-- * 'reaRevision'
 --
--- * 'rFields'
+-- * 'reaFields'
 --
--- * 'rAlt'
-realtimeGet
+-- * 'reaAlt'
+realtimeGet'
     :: Text -- ^ 'fileId'
-    -> RealtimeGet
-realtimeGet pRFileId_ =
-    RealtimeGet
-    { _rQuotaUser = Nothing
-    , _rPrettyPrint = True
-    , _rUserIp = Nothing
-    , _rKey = Nothing
-    , _rFileId = pRFileId_
-    , _rOauthToken = Nothing
-    , _rRevision = Nothing
-    , _rFields = Nothing
-    , _rAlt = "json"
+    -> RealtimeGet'
+realtimeGet' pReaFileId_ =
+    RealtimeGet'
+    { _reaQuotaUser = Nothing
+    , _reaPrettyPrint = True
+    , _reaUserIp = Nothing
+    , _reaKey = Nothing
+    , _reaFileId = pReaFileId_
+    , _reaOauthToken = Nothing
+    , _reaRevision = Nothing
+    , _reaFields = Nothing
+    , _reaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rQuotaUser :: Lens' RealtimeGet' (Maybe Text)
-rQuotaUser
-  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
+reaQuotaUser :: Lens' RealtimeGet' (Maybe Text)
+reaQuotaUser
+  = lens _reaQuotaUser (\ s a -> s{_reaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rPrettyPrint :: Lens' RealtimeGet' Bool
-rPrettyPrint
-  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
+reaPrettyPrint :: Lens' RealtimeGet' Bool
+reaPrettyPrint
+  = lens _reaPrettyPrint
+      (\ s a -> s{_reaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' RealtimeGet' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+reaUserIp :: Lens' RealtimeGet' (Maybe Text)
+reaUserIp
+  = lens _reaUserIp (\ s a -> s{_reaUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RealtimeGet' (Maybe Text)
-rKey = lens _rKey (\ s a -> s{_rKey = a})
+reaKey :: Lens' RealtimeGet' (Maybe Text)
+reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.
-rFileId :: Lens' RealtimeGet' Text
-rFileId = lens _rFileId (\ s a -> s{_rFileId = a})
+reaFileId :: Lens' RealtimeGet' Text
+reaFileId
+  = lens _reaFileId (\ s a -> s{_reaFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' RealtimeGet' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+reaOauthToken :: Lens' RealtimeGet' (Maybe Text)
+reaOauthToken
+  = lens _reaOauthToken
+      (\ s a -> s{_reaOauthToken = a})
 
 -- | The revision of the Realtime API data model to export. Revisions start
 -- at 1 (the initial empty data model) and are incremented with each
 -- change. If this parameter is excluded, the most recent data model will
 -- be returned.
-rRevision :: Lens' RealtimeGet' (Maybe Int32)
-rRevision
-  = lens _rRevision (\ s a -> s{_rRevision = a})
+reaRevision :: Lens' RealtimeGet' (Maybe Int32)
+reaRevision
+  = lens _reaRevision (\ s a -> s{_reaRevision = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rFields :: Lens' RealtimeGet' (Maybe Text)
-rFields = lens _rFields (\ s a -> s{_rFields = a})
+reaFields :: Lens' RealtimeGet' (Maybe Text)
+reaFields
+  = lens _reaFields (\ s a -> s{_reaFields = a})
 
 -- | Data format for the response.
-rAlt :: Lens' RealtimeGet' Text
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+reaAlt :: Lens' RealtimeGet' Alt
+reaAlt = lens _reaAlt (\ s a -> s{_reaAlt = a})
 
 instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RealtimeGet{..}
-          = go _rQuotaUser _rPrettyPrint _rUserIp _rKey
-              _rFileId
-              _rOauthToken
-              _rRevision
-              _rFields
-              _rAlt
+        requestWithRoute r u RealtimeGet'{..}
+          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIp
+              _reaKey
+              _reaFileId
+              _reaOauthToken
+              _reaRevision
+              _reaFields
+              (Just _reaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RealtimeGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy RealtimeGetResource)
+                      r
+                      u

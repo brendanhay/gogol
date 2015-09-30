@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a specific custom channel from the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomchannelsDelete@.
-module AdSenseHost.Customchannels.Delete
+module Network.Google.Resource.AdSenseHost.Customchannels.Delete
     (
     -- * REST Resource
-      CustomchannelsDeleteAPI
+      CustomchannelsDeleteResource
 
     -- * Creating a Request
-    , customchannelsDelete
-    , CustomchannelsDelete
+    , customchannelsDelete'
+    , CustomchannelsDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostCustomchannelsDelete@ which the
--- 'CustomchannelsDelete' request conforms to.
-type CustomchannelsDeleteAPI =
+-- 'CustomchannelsDelete'' request conforms to.
+type CustomchannelsDeleteResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
            Capture "customChannelId" Text :>
-             Delete '[JSON] CustomChannel
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] CustomChannel
 
 -- | Delete a specific custom channel from the host AdSense account.
 --
--- /See:/ 'customchannelsDelete' smart constructor.
-data CustomchannelsDelete = CustomchannelsDelete
+-- /See:/ 'customchannelsDelete'' smart constructor.
+data CustomchannelsDelete' = CustomchannelsDelete'
     { _cdQuotaUser       :: !(Maybe Text)
     , _cdPrettyPrint     :: !Bool
     , _cdCustomChannelId :: !Text
@@ -64,7 +71,7 @@ data CustomchannelsDelete = CustomchannelsDelete
     , _cdKey             :: !(Maybe Text)
     , _cdOauthToken      :: !(Maybe Text)
     , _cdFields          :: !(Maybe Text)
-    , _cdAlt             :: !Text
+    , _cdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data CustomchannelsDelete = CustomchannelsDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-customchannelsDelete
+customchannelsDelete'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
-    -> CustomchannelsDelete
-customchannelsDelete pCdCustomChannelId_ pCdAdClientId_ =
-    CustomchannelsDelete
+    -> CustomchannelsDelete'
+customchannelsDelete' pCdCustomChannelId_ pCdAdClientId_ =
+    CustomchannelsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdCustomChannelId = pCdCustomChannelId_
@@ -102,7 +109,7 @@ customchannelsDelete pCdCustomChannelId_ pCdAdClientId_ =
     , _cdKey = Nothing
     , _cdOauthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +157,23 @@ cdFields :: Lens' CustomchannelsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CustomchannelsDelete' Text
+cdAlt :: Lens' CustomchannelsDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CustomchannelsDelete' where
         type Rs CustomchannelsDelete' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomchannelsDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdCustomChannelId
+        requestWithRoute r u CustomchannelsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint)
+              _cdCustomChannelId
               _cdUserIp
               _cdAdClientId
               _cdKey
               _cdOauthToken
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsDeleteAPI)
+                      (Proxy :: Proxy CustomchannelsDeleteResource)
                       r
                       u

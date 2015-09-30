@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistsDelete@.
-module YouTube.Playlists.Delete
+module Network.Google.Resource.YouTube.Playlists.Delete
     (
     -- * REST Resource
-      PlaylistsDeleteAPI
+      PlaylistsDeleteResource
 
     -- * Creating a Request
-    , playlistsDelete
-    , PlaylistsDelete
+    , playlistsDelete'
+    , PlaylistsDelete'
 
     -- * Request Lenses
     , pdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistsDelete@ which the
--- 'PlaylistsDelete' request conforms to.
-type PlaylistsDeleteAPI =
+-- 'PlaylistsDelete'' request conforms to.
+type PlaylistsDeleteResource =
      "playlists" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a playlist.
 --
--- /See:/ 'playlistsDelete' smart constructor.
-data PlaylistsDelete = PlaylistsDelete
+-- /See:/ 'playlistsDelete'' smart constructor.
+data PlaylistsDelete' = PlaylistsDelete'
     { _pdQuotaUser              :: !(Maybe Text)
     , _pdPrettyPrint            :: !Bool
     , _pdUserIp                 :: !(Maybe Text)
@@ -62,7 +70,7 @@ data PlaylistsDelete = PlaylistsDelete
     , _pdId                     :: !Text
     , _pdOauthToken             :: !(Maybe Text)
     , _pdFields                 :: !(Maybe Text)
-    , _pdAlt                    :: !Text
+    , _pdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistsDelete'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data PlaylistsDelete = PlaylistsDelete
 -- * 'pdFields'
 --
 -- * 'pdAlt'
-playlistsDelete
+playlistsDelete'
     :: Text -- ^ 'id'
-    -> PlaylistsDelete
-playlistsDelete pPdId_ =
-    PlaylistsDelete
+    -> PlaylistsDelete'
+playlistsDelete' pPdId_ =
+    PlaylistsDelete'
     { _pdQuotaUser = Nothing
     , _pdPrettyPrint = True
     , _pdUserIp = Nothing
@@ -99,7 +107,7 @@ playlistsDelete pPdId_ =
     , _pdId = pPdId_
     , _pdOauthToken = Nothing
     , _pdFields = Nothing
-    , _pdAlt = "json"
+    , _pdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,21 +165,22 @@ pdFields :: Lens' PlaylistsDelete' (Maybe Text)
 pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
 -- | Data format for the response.
-pdAlt :: Lens' PlaylistsDelete' Text
+pdAlt :: Lens' PlaylistsDelete' Alt
 pdAlt = lens _pdAlt (\ s a -> s{_pdAlt = a})
 
 instance GoogleRequest PlaylistsDelete' where
         type Rs PlaylistsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistsDelete{..}
-          = go _pdQuotaUser _pdPrettyPrint _pdUserIp
+        requestWithRoute r u PlaylistsDelete'{..}
+          = go _pdQuotaUser (Just _pdPrettyPrint) _pdUserIp
               _pdOnBehalfOfContentOwner
               _pdKey
               (Just _pdId)
               _pdOauthToken
               _pdFields
-              _pdAlt
+              (Just _pdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlaylistsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PlaylistsDeleteResource)
                       r
                       u

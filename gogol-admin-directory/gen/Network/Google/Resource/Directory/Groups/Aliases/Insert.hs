@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a alias for the group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesInsert@.
-module Directory.Groups.Aliases.Insert
+module Network.Google.Resource.Directory.Groups.Aliases.Insert
     (
     -- * REST Resource
-      GroupsAliasesInsertAPI
+      GroupsAliasesInsertResource
 
     -- * Creating a Request
-    , groupsAliasesInsert
-    , GroupsAliasesInsert
+    , groupsAliasesInsert'
+    , GroupsAliasesInsert'
 
     -- * Request Lenses
     , gaiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsAliasesInsert@ which the
--- 'GroupsAliasesInsert' request conforms to.
-type GroupsAliasesInsertAPI =
+-- 'GroupsAliasesInsert'' request conforms to.
+type GroupsAliasesInsertResource =
      "groups" :>
        Capture "groupKey" Text :>
-         "aliases" :> Post '[JSON] Alias
+         "aliases" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Alias
 
 -- | Add a alias for the group
 --
--- /See:/ 'groupsAliasesInsert' smart constructor.
-data GroupsAliasesInsert = GroupsAliasesInsert
+-- /See:/ 'groupsAliasesInsert'' smart constructor.
+data GroupsAliasesInsert' = GroupsAliasesInsert'
     { _gaiQuotaUser   :: !(Maybe Text)
     , _gaiPrettyPrint :: !Bool
     , _gaiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data GroupsAliasesInsert = GroupsAliasesInsert
     , _gaiKey         :: !(Maybe Text)
     , _gaiOauthToken  :: !(Maybe Text)
     , _gaiFields      :: !(Maybe Text)
-    , _gaiAlt         :: !Text
+    , _gaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data GroupsAliasesInsert = GroupsAliasesInsert
 -- * 'gaiFields'
 --
 -- * 'gaiAlt'
-groupsAliasesInsert
+groupsAliasesInsert'
     :: Text -- ^ 'groupKey'
-    -> GroupsAliasesInsert
-groupsAliasesInsert pGaiGroupKey_ =
-    GroupsAliasesInsert
+    -> GroupsAliasesInsert'
+groupsAliasesInsert' pGaiGroupKey_ =
+    GroupsAliasesInsert'
     { _gaiQuotaUser = Nothing
     , _gaiPrettyPrint = True
     , _gaiUserIp = Nothing
@@ -94,7 +102,7 @@ groupsAliasesInsert pGaiGroupKey_ =
     , _gaiKey = Nothing
     , _gaiOauthToken = Nothing
     , _gaiFields = Nothing
-    , _gaiAlt = "json"
+    , _gaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ gaiFields
   = lens _gaiFields (\ s a -> s{_gaiFields = a})
 
 -- | Data format for the response.
-gaiAlt :: Lens' GroupsAliasesInsert' Text
+gaiAlt :: Lens' GroupsAliasesInsert' Alt
 gaiAlt = lens _gaiAlt (\ s a -> s{_gaiAlt = a})
 
 instance GoogleRequest GroupsAliasesInsert' where
         type Rs GroupsAliasesInsert' = Alias
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsAliasesInsert{..}
-          = go _gaiQuotaUser _gaiPrettyPrint _gaiUserIp
+        requestWithRoute r u GroupsAliasesInsert'{..}
+          = go _gaiQuotaUser (Just _gaiPrettyPrint) _gaiUserIp
               _gaiGroupKey
               _gaiKey
               _gaiOauthToken
               _gaiFields
-              _gaiAlt
+              (Just _gaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GroupsAliasesInsertAPI)
+                      (Proxy :: Proxy GroupsAliasesInsertResource)
                       r
                       u

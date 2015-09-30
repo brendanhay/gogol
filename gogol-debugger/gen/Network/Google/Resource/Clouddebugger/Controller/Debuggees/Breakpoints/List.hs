@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -28,14 +29,14 @@
 -- setting those breakpoints again.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerControllerDebuggeesBreakpointsList@.
-module Clouddebugger.Controller.Debuggees.Breakpoints.List
+module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.List
     (
     -- * REST Resource
-      ControllerDebuggeesBreakpointsListAPI
+      ControllerDebuggeesBreakpointsListResource
 
     -- * Creating a Request
-    , controllerDebuggeesBreakpointsList
-    , ControllerDebuggeesBreakpointsList
+    , controllerDebuggeesBreakpointsList'
+    , ControllerDebuggeesBreakpointsList'
 
     -- * Request Lenses
     , cdblXgafv
@@ -59,15 +60,29 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerControllerDebuggeesBreakpointsList@ which the
--- 'ControllerDebuggeesBreakpointsList' request conforms to.
-type ControllerDebuggeesBreakpointsListAPI =
+-- 'ControllerDebuggeesBreakpointsList'' request conforms to.
+type ControllerDebuggeesBreakpointsListResource =
      "v2" :>
        "controller" :>
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               QueryParam "waitToken" Text :>
-                 Get '[JSON] ListActiveBreakpointsResponse
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "waitToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             ListActiveBreakpointsResponse
 
 -- | Returns the list of all active breakpoints for the specified debuggee.
 -- The breakpoint specification (location, condition, and expression
@@ -80,8 +95,8 @@ type ControllerDebuggeesBreakpointsListAPI =
 -- complete until the controller removes them from the active list to avoid
 -- setting those breakpoints again.
 --
--- /See:/ 'controllerDebuggeesBreakpointsList' smart constructor.
-data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList
+-- /See:/ 'controllerDebuggeesBreakpointsList'' smart constructor.
+data ControllerDebuggeesBreakpointsList' = ControllerDebuggeesBreakpointsList'
     { _cdblXgafv          :: !(Maybe Text)
     , _cdblQuotaUser      :: !(Maybe Text)
     , _cdblPrettyPrint    :: !Bool
@@ -132,11 +147,11 @@ data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList
 -- * 'cdblCallback'
 --
 -- * 'cdblAlt'
-controllerDebuggeesBreakpointsList
+controllerDebuggeesBreakpointsList'
     :: Text -- ^ 'debuggeeId'
-    -> ControllerDebuggeesBreakpointsList
-controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
-    ControllerDebuggeesBreakpointsList
+    -> ControllerDebuggeesBreakpointsList'
+controllerDebuggeesBreakpointsList' pCdblDebuggeeId_ =
+    ControllerDebuggeesBreakpointsList'
     { _cdblXgafv = Nothing
     , _cdblQuotaUser = Nothing
     , _cdblPrettyPrint = True
@@ -249,10 +264,11 @@ instance GoogleRequest
              ListActiveBreakpointsResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
-          ControllerDebuggeesBreakpointsList{..}
-          = go _cdblXgafv _cdblQuotaUser _cdblPrettyPrint
+          ControllerDebuggeesBreakpointsList'{..}
+          = go _cdblXgafv _cdblQuotaUser
+              (Just _cdblPrettyPrint)
               _cdblUploadProtocol
-              _cdblPp
+              (Just _cdblPp)
               _cdblAccessToken
               _cdblUploadType
               _cdblBearerToken
@@ -262,10 +278,10 @@ instance GoogleRequest
               _cdblOauthToken
               _cdblFields
               _cdblCallback
-              _cdblAlt
+              (Just _cdblAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ControllerDebuggeesBreakpointsListAPI)
+                         Proxy ControllerDebuggeesBreakpointsListResource)
                       r
                       u

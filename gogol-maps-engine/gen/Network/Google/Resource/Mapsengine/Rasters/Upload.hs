@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a skeleton raster asset for upload.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersUpload@.
-module Mapsengine.Rasters.Upload
+module Network.Google.Resource.Mapsengine.Rasters.Upload
     (
     -- * REST Resource
-      RastersUploadAPI
+      RastersUploadResource
 
     -- * Creating a Request
-    , rastersUpload
-    , RastersUpload
+    , rastersUpload'
+    , RastersUpload'
 
     -- * Request Lenses
     , ruQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersUpload@ which the
--- 'RastersUpload' request conforms to.
-type RastersUploadAPI =
-     "rasters" :> "upload" :> Post '[JSON] Raster
+-- 'RastersUpload'' request conforms to.
+type RastersUploadResource =
+     "rasters" :>
+       "upload" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Raster
 
 -- | Create a skeleton raster asset for upload.
 --
--- /See:/ 'rastersUpload' smart constructor.
-data RastersUpload = RastersUpload
+-- /See:/ 'rastersUpload'' smart constructor.
+data RastersUpload' = RastersUpload'
     { _ruQuotaUser   :: !(Maybe Text)
     , _ruPrettyPrint :: !Bool
     , _ruUserIp      :: !(Maybe Text)
     , _ruKey         :: !(Maybe Text)
     , _ruOauthToken  :: !(Maybe Text)
     , _ruFields      :: !(Maybe Text)
-    , _ruAlt         :: !Text
+    , _ruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersUpload'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data RastersUpload = RastersUpload
 -- * 'ruFields'
 --
 -- * 'ruAlt'
-rastersUpload
-    :: RastersUpload
-rastersUpload =
-    RastersUpload
+rastersUpload'
+    :: RastersUpload'
+rastersUpload' =
+    RastersUpload'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruUserIp = Nothing
     , _ruKey = Nothing
     , _ruOauthToken = Nothing
     , _ruFields = Nothing
-    , _ruAlt = "json"
+    , _ruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +132,20 @@ ruFields :: Lens' RastersUpload' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
 -- | Data format for the response.
-ruAlt :: Lens' RastersUpload' Text
+ruAlt :: Lens' RastersUpload' Alt
 ruAlt = lens _ruAlt (\ s a -> s{_ruAlt = a})
 
 instance GoogleRequest RastersUpload' where
         type Rs RastersUpload' = Raster
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersUpload{..}
-          = go _ruQuotaUser _ruPrettyPrint _ruUserIp _ruKey
+        requestWithRoute r u RastersUpload'{..}
+          = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIp
+              _ruKey
               _ruOauthToken
               _ruFields
-              _ruAlt
+              (Just _ruAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RastersUploadAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RastersUploadResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List resource views.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsList@.
-module Resourceviews.ZoneViews.List
+module Network.Google.Resource.Resourceviews.ZoneViews.List
     (
     -- * REST Resource
-      ZoneViewsListAPI
+      ZoneViewsListResource
 
     -- * Creating a Request
-    , zoneViewsList
-    , ZoneViewsList
+    , zoneViewsList'
+    , ZoneViewsList'
 
     -- * Request Lenses
     , zvlQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsList@ which the
--- 'ZoneViewsList' request conforms to.
-type ZoneViewsListAPI =
+-- 'ZoneViewsList'' request conforms to.
+type ZoneViewsListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 Get '[JSON] ZoneViewsList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ZoneViewsList
 
 -- | List resource views.
 --
--- /See:/ 'zoneViewsList' smart constructor.
-data ZoneViewsList = ZoneViewsList
+-- /See:/ 'zoneViewsList'' smart constructor.
+data ZoneViewsList' = ZoneViewsList'
     { _zvlQuotaUser   :: !(Maybe Text)
     , _zvlPrettyPrint :: !Bool
     , _zvlProject     :: !Text
@@ -70,7 +77,7 @@ data ZoneViewsList = ZoneViewsList
     , _zvlOauthToken  :: !(Maybe Text)
     , _zvlMaxResults  :: !Int32
     , _zvlFields      :: !(Maybe Text)
-    , _zvlAlt         :: !Text
+    , _zvlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsList'' with the minimum fields required to make a request.
@@ -98,12 +105,12 @@ data ZoneViewsList = ZoneViewsList
 -- * 'zvlFields'
 --
 -- * 'zvlAlt'
-zoneViewsList
+zoneViewsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsList
-zoneViewsList pZvlProject_ pZvlZone_ =
-    ZoneViewsList
+    -> ZoneViewsList'
+zoneViewsList' pZvlProject_ pZvlZone_ =
+    ZoneViewsList'
     { _zvlQuotaUser = Nothing
     , _zvlPrettyPrint = True
     , _zvlProject = pZvlProject_
@@ -114,7 +121,7 @@ zoneViewsList pZvlProject_ pZvlZone_ =
     , _zvlOauthToken = Nothing
     , _zvlMaxResults = 5000
     , _zvlFields = Nothing
-    , _zvlAlt = "json"
+    , _zvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -177,14 +184,14 @@ zvlFields
   = lens _zvlFields (\ s a -> s{_zvlFields = a})
 
 -- | Data format for the response.
-zvlAlt :: Lens' ZoneViewsList' Text
+zvlAlt :: Lens' ZoneViewsList' Alt
 zvlAlt = lens _zvlAlt (\ s a -> s{_zvlAlt = a})
 
 instance GoogleRequest ZoneViewsList' where
         type Rs ZoneViewsList' = ZoneViewsList
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsList{..}
-          = go _zvlQuotaUser _zvlPrettyPrint _zvlProject
+        requestWithRoute r u ZoneViewsList'{..}
+          = go _zvlQuotaUser (Just _zvlPrettyPrint) _zvlProject
               _zvlUserIp
               _zvlZone
               _zvlKey
@@ -192,7 +199,9 @@ instance GoogleRequest ZoneViewsList' where
               _zvlOauthToken
               (Just _zvlMaxResults)
               _zvlFields
-              _zvlAlt
+              (Just _zvlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZoneViewsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ZoneViewsListResource)
+                      r
                       u

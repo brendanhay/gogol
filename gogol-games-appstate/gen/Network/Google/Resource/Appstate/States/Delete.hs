@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- can result in data loss and data corruption.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppstateStatesDelete@.
-module Appstate.States.Delete
+module Network.Google.Resource.Appstate.States.Delete
     (
     -- * REST Resource
-      StatesDeleteAPI
+      StatesDeleteResource
 
     -- * Creating a Request
-    , statesDelete
-    , StatesDelete
+    , statesDelete'
+    , StatesDelete'
 
     -- * Request Lenses
     , sdQuotaUser
@@ -47,10 +48,17 @@ import           Network.Google.GamesAppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppstateStatesDelete@ which the
--- 'StatesDelete' request conforms to.
-type StatesDeleteAPI =
+-- 'StatesDelete'' request conforms to.
+type StatesDeleteResource =
      "states" :>
-       Capture "stateKey" Int32 :> Delete '[JSON] ()
+       Capture "stateKey" Int32 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a key and the data associated with it. The key is removed and no
 -- longer counts against the key quota. Note that since this method is not
@@ -58,8 +66,8 @@ type StatesDeleteAPI =
 -- development and testing purposes. Invoking this method in shipping code
 -- can result in data loss and data corruption.
 --
--- /See:/ 'statesDelete' smart constructor.
-data StatesDelete = StatesDelete
+-- /See:/ 'statesDelete'' smart constructor.
+data StatesDelete' = StatesDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data StatesDelete = StatesDelete
     , _sdKey         :: !(Maybe Text)
     , _sdOauthToken  :: !(Maybe Text)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesDelete'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data StatesDelete = StatesDelete
 -- * 'sdFields'
 --
 -- * 'sdAlt'
-statesDelete
+statesDelete'
     :: Int32 -- ^ 'stateKey'
-    -> StatesDelete
-statesDelete pSdStateKey_ =
-    StatesDelete
+    -> StatesDelete'
+statesDelete' pSdStateKey_ =
+    StatesDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
     , _sdUserIp = Nothing
@@ -101,7 +109,7 @@ statesDelete pSdStateKey_ =
     , _sdKey = Nothing
     , _sdOauthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = "json"
+    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,19 +151,21 @@ sdFields :: Lens' StatesDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' StatesDelete' Text
+sdAlt :: Lens' StatesDelete' Alt
 sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest StatesDelete' where
         type Rs StatesDelete' = ()
         request = requestWithRoute defReq gamesAppStateURL
-        requestWithRoute r u StatesDelete{..}
-          = go _sdQuotaUser _sdPrettyPrint _sdUserIp
+        requestWithRoute r u StatesDelete'{..}
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
               _sdStateKey
               _sdKey
               _sdOauthToken
               _sdFields
-              _sdAlt
+              (Just _sdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy StatesDeleteResource)
+                      r
                       u

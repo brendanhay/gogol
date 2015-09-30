@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a new custom channel to the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomchannelsInsert@.
-module AdSenseHost.Customchannels.Insert
+module Network.Google.Resource.AdSenseHost.Customchannels.Insert
     (
     -- * REST Resource
-      CustomchannelsInsertAPI
+      CustomchannelsInsertResource
 
     -- * Creating a Request
-    , customchannelsInsert
-    , CustomchannelsInsert
+    , customchannelsInsert'
+    , CustomchannelsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostCustomchannelsInsert@ which the
--- 'CustomchannelsInsert' request conforms to.
-type CustomchannelsInsertAPI =
+-- 'CustomchannelsInsert'' request conforms to.
+type CustomchannelsInsertResource =
      "adclients" :>
        Capture "adClientId" Text :>
-         "customchannels" :> Post '[JSON] CustomChannel
+         "customchannels" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] CustomChannel
 
 -- | Add a new custom channel to the host AdSense account.
 --
--- /See:/ 'customchannelsInsert' smart constructor.
-data CustomchannelsInsert = CustomchannelsInsert
+-- /See:/ 'customchannelsInsert'' smart constructor.
+data CustomchannelsInsert' = CustomchannelsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CustomchannelsInsert = CustomchannelsInsert
     , _ciKey         :: !(Maybe Text)
     , _ciOauthToken  :: !(Maybe Text)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CustomchannelsInsert = CustomchannelsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-customchannelsInsert
+customchannelsInsert'
     :: Text -- ^ 'adClientId'
-    -> CustomchannelsInsert
-customchannelsInsert pCiAdClientId_ =
-    CustomchannelsInsert
+    -> CustomchannelsInsert'
+customchannelsInsert' pCiAdClientId_ =
+    CustomchannelsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
@@ -94,7 +102,7 @@ customchannelsInsert pCiAdClientId_ =
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,21 @@ ciFields :: Lens' CustomchannelsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CustomchannelsInsert' Text
+ciAlt :: Lens' CustomchannelsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CustomchannelsInsert' where
         type Rs CustomchannelsInsert' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomchannelsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp
+        requestWithRoute r u CustomchannelsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
               _ciAdClientId
               _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsInsertAPI)
+                      (Proxy :: Proxy CustomchannelsInsertResource)
                       r
                       u

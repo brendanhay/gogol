@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Pauses a transfer operation.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsPause@.
-module StorageTransfer.TransferOperations.Pause
+module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
     (
     -- * REST Resource
-      TransferOperationsPauseAPI
+      TransferOperationsPauseResource
 
     -- * Creating a Request
-    , transferOperationsPause
-    , TransferOperationsPause
+    , transferOperationsPause'
+    , TransferOperationsPause'
 
     -- * Request Lenses
     , topXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsPause@ which the
--- 'TransferOperationsPause' request conforms to.
-type TransferOperationsPauseAPI =
-     "v1" :> "{+name}:pause" :> Post '[JSON] Empty
+-- 'TransferOperationsPause'' request conforms to.
+type TransferOperationsPauseResource =
+     "v1" :>
+       "{+name}:pause" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Pauses a transfer operation.
 --
--- /See:/ 'transferOperationsPause' smart constructor.
-data TransferOperationsPause = TransferOperationsPause
+-- /See:/ 'transferOperationsPause'' smart constructor.
+data TransferOperationsPause' = TransferOperationsPause'
     { _topXgafv          :: !(Maybe Text)
     , _topQuotaUser      :: !(Maybe Text)
     , _topPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data TransferOperationsPause = TransferOperationsPause
 -- * 'topCallback'
 --
 -- * 'topAlt'
-transferOperationsPause
+transferOperationsPause'
     :: Text -- ^ 'name'
-    -> TransferOperationsPause
-transferOperationsPause pTopName_ =
-    TransferOperationsPause
+    -> TransferOperationsPause'
+transferOperationsPause' pTopName_ =
+    TransferOperationsPause'
     { _topXgafv = Nothing
     , _topQuotaUser = Nothing
     , _topPrettyPrint = True
@@ -203,10 +218,10 @@ topAlt = lens _topAlt (\ s a -> s{_topAlt = a})
 instance GoogleRequest TransferOperationsPause' where
         type Rs TransferOperationsPause' = Empty
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsPause{..}
-          = go _topXgafv _topQuotaUser _topPrettyPrint
+        requestWithRoute r u TransferOperationsPause'{..}
+          = go _topXgafv _topQuotaUser (Just _topPrettyPrint)
               _topUploadProtocol
-              _topPp
+              (Just _topPp)
               _topAccessToken
               _topUploadType
               _topBearerToken
@@ -215,9 +230,9 @@ instance GoogleRequest TransferOperationsPause' where
               _topOauthToken
               _topFields
               _topCallback
-              _topAlt
+              (Just _topAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsPauseAPI)
+                      (Proxy :: Proxy TransferOperationsPauseResource)
                       r
                       u

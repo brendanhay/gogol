@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete all features matching the given IDs.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFeaturesBatchDelete@.
-module Mapsengine.Tables.Features.BatchDelete
+module Network.Google.Resource.Mapsengine.Tables.Features.BatchDelete
     (
     -- * REST Resource
-      TablesFeaturesBatchDeleteAPI
+      TablesFeaturesBatchDeleteResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchDelete
-    , TablesFeaturesBatchDelete
+    , tablesFeaturesBatchDelete'
+    , TablesFeaturesBatchDelete'
 
     -- * Request Lenses
     , tfbdQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFeaturesBatchDelete@ which the
--- 'TablesFeaturesBatchDelete' request conforms to.
-type TablesFeaturesBatchDeleteAPI =
+-- 'TablesFeaturesBatchDelete'' request conforms to.
+type TablesFeaturesBatchDeleteResource =
      "tables" :>
        Capture "id" Text :>
-         "features" :> "batchDelete" :> Post '[JSON] ()
+         "features" :>
+           "batchDelete" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Delete all features matching the given IDs.
 --
--- /See:/ 'tablesFeaturesBatchDelete' smart constructor.
-data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
+-- /See:/ 'tablesFeaturesBatchDelete'' smart constructor.
+data TablesFeaturesBatchDelete' = TablesFeaturesBatchDelete'
     { _tfbdQuotaUser   :: !(Maybe Text)
     , _tfbdPrettyPrint :: !Bool
     , _tfbdUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
     , _tfbdId          :: !Text
     , _tfbdOauthToken  :: !(Maybe Text)
     , _tfbdFields      :: !(Maybe Text)
-    , _tfbdAlt         :: !Text
+    , _tfbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchDelete'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
 -- * 'tfbdFields'
 --
 -- * 'tfbdAlt'
-tablesFeaturesBatchDelete
+tablesFeaturesBatchDelete'
     :: Text -- ^ 'id'
-    -> TablesFeaturesBatchDelete
-tablesFeaturesBatchDelete pTfbdId_ =
-    TablesFeaturesBatchDelete
+    -> TablesFeaturesBatchDelete'
+tablesFeaturesBatchDelete' pTfbdId_ =
+    TablesFeaturesBatchDelete'
     { _tfbdQuotaUser = Nothing
     , _tfbdPrettyPrint = True
     , _tfbdUserIp = Nothing
@@ -94,7 +103,7 @@ tablesFeaturesBatchDelete pTfbdId_ =
     , _tfbdId = pTfbdId_
     , _tfbdOauthToken = Nothing
     , _tfbdFields = Nothing
-    , _tfbdAlt = "json"
+    , _tfbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +148,23 @@ tfbdFields
   = lens _tfbdFields (\ s a -> s{_tfbdFields = a})
 
 -- | Data format for the response.
-tfbdAlt :: Lens' TablesFeaturesBatchDelete' Text
+tfbdAlt :: Lens' TablesFeaturesBatchDelete' Alt
 tfbdAlt = lens _tfbdAlt (\ s a -> s{_tfbdAlt = a})
 
 instance GoogleRequest TablesFeaturesBatchDelete'
          where
         type Rs TablesFeaturesBatchDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFeaturesBatchDelete{..}
-          = go _tfbdQuotaUser _tfbdPrettyPrint _tfbdUserIp
+        requestWithRoute r u TablesFeaturesBatchDelete'{..}
+          = go _tfbdQuotaUser (Just _tfbdPrettyPrint)
+              _tfbdUserIp
               _tfbdKey
               _tfbdId
               _tfbdOauthToken
               _tfbdFields
-              _tfbdAlt
+              (Just _tfbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFeaturesBatchDeleteAPI)
+                      (Proxy :: Proxy TablesFeaturesBatchDeleteResource)
                       r
                       u

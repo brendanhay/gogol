@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified machine type resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeMachineTypesGet@.
-module Compute.MachineTypes.Get
+module Network.Google.Resource.Compute.MachineTypes.Get
     (
     -- * REST Resource
-      MachineTypesGetAPI
+      MachineTypesGetResource
 
     -- * Creating a Request
-    , machineTypesGet
-    , MachineTypesGet
+    , machineTypesGet'
+    , MachineTypesGet'
 
     -- * Request Lenses
     , mtgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeMachineTypesGet@ which the
--- 'MachineTypesGet' request conforms to.
-type MachineTypesGetAPI =
+-- 'MachineTypesGet'' request conforms to.
+type MachineTypesGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "machineTypes" :>
-             Capture "machineType" Text :> Get '[JSON] MachineType
+             Capture "machineType" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] MachineType
 
 -- | Returns the specified machine type resource.
 --
--- /See:/ 'machineTypesGet' smart constructor.
-data MachineTypesGet = MachineTypesGet
+-- /See:/ 'machineTypesGet'' smart constructor.
+data MachineTypesGet' = MachineTypesGet'
     { _mtgQuotaUser   :: !(Maybe Text)
     , _mtgPrettyPrint :: !Bool
     , _mtgProject     :: !Text
@@ -66,7 +74,7 @@ data MachineTypesGet = MachineTypesGet
     , _mtgMachineType :: !Text
     , _mtgOauthToken  :: !(Maybe Text)
     , _mtgFields      :: !(Maybe Text)
-    , _mtgAlt         :: !Text
+    , _mtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data MachineTypesGet = MachineTypesGet
 -- * 'mtgFields'
 --
 -- * 'mtgAlt'
-machineTypesGet
+machineTypesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'machineType'
-    -> MachineTypesGet
-machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
-    MachineTypesGet
+    -> MachineTypesGet'
+machineTypesGet' pMtgProject_ pMtgZone_ pMtgMachineType_ =
+    MachineTypesGet'
     { _mtgQuotaUser = Nothing
     , _mtgPrettyPrint = True
     , _mtgProject = pMtgProject_
@@ -108,7 +116,7 @@ machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
     , _mtgMachineType = pMtgMachineType_
     , _mtgOauthToken = Nothing
     , _mtgFields = Nothing
-    , _mtgAlt = "json"
+    , _mtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,22 +171,23 @@ mtgFields
   = lens _mtgFields (\ s a -> s{_mtgFields = a})
 
 -- | Data format for the response.
-mtgAlt :: Lens' MachineTypesGet' Text
+mtgAlt :: Lens' MachineTypesGet' Alt
 mtgAlt = lens _mtgAlt (\ s a -> s{_mtgAlt = a})
 
 instance GoogleRequest MachineTypesGet' where
         type Rs MachineTypesGet' = MachineType
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u MachineTypesGet{..}
-          = go _mtgQuotaUser _mtgPrettyPrint _mtgProject
+        requestWithRoute r u MachineTypesGet'{..}
+          = go _mtgQuotaUser (Just _mtgPrettyPrint) _mtgProject
               _mtgUserIp
               _mtgZone
               _mtgKey
               _mtgMachineType
               _mtgOauthToken
               _mtgFields
-              _mtgAlt
+              (Just _mtgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MachineTypesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy MachineTypesGetResource)
                       r
                       u

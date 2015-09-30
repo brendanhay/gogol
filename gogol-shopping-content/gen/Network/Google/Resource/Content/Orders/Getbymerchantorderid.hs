@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,154 +20,166 @@
 -- | Retrieves an order using merchant order id.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersGetbymerchantorderid@.
-module Content.Orders.Getbymerchantorderid
+module Network.Google.Resource.Content.Orders.Getbymerchantorderid
     (
     -- * REST Resource
-      OrdersGetbymerchantorderidAPI
+      OrdersGetbymerchantorderidResource
 
     -- * Creating a Request
-    , ordersGetbymerchantorderid
-    , OrdersGetbymerchantorderid
+    , ordersGetbymerchantorderid'
+    , OrdersGetbymerchantorderid'
 
     -- * Request Lenses
-    , ogQuotaUser
-    , ogMerchantId
-    , ogPrettyPrint
-    , ogUserIp
-    , ogMerchantOrderId
-    , ogKey
-    , ogOauthToken
-    , ogFields
-    , ogAlt
+    , oggQuotaUser
+    , oggMerchantId
+    , oggPrettyPrint
+    , oggUserIp
+    , oggMerchantOrderId
+    , oggKey
+    , oggOauthToken
+    , oggFields
+    , oggAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersGetbymerchantorderid@ which the
--- 'OrdersGetbymerchantorderid' request conforms to.
-type OrdersGetbymerchantorderidAPI =
+-- 'OrdersGetbymerchantorderid'' request conforms to.
+type OrdersGetbymerchantorderidResource =
      Capture "merchantId" Word64 :>
        "ordersbymerchantid" :>
          Capture "merchantOrderId" Text :>
-           Get '[JSON] OrdersGetByMerchantOrderIdResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] OrdersGetByMerchantOrderIdResponse
 
 -- | Retrieves an order using merchant order id.
 --
--- /See:/ 'ordersGetbymerchantorderid' smart constructor.
-data OrdersGetbymerchantorderid = OrdersGetbymerchantorderid
-    { _ogQuotaUser       :: !(Maybe Text)
-    , _ogMerchantId      :: !Word64
-    , _ogPrettyPrint     :: !Bool
-    , _ogUserIp          :: !(Maybe Text)
-    , _ogMerchantOrderId :: !Text
-    , _ogKey             :: !(Maybe Text)
-    , _ogOauthToken      :: !(Maybe Text)
-    , _ogFields          :: !(Maybe Text)
-    , _ogAlt             :: !Text
+-- /See:/ 'ordersGetbymerchantorderid'' smart constructor.
+data OrdersGetbymerchantorderid' = OrdersGetbymerchantorderid'
+    { _oggQuotaUser       :: !(Maybe Text)
+    , _oggMerchantId      :: !Word64
+    , _oggPrettyPrint     :: !Bool
+    , _oggUserIp          :: !(Maybe Text)
+    , _oggMerchantOrderId :: !Text
+    , _oggKey             :: !(Maybe Text)
+    , _oggOauthToken      :: !(Maybe Text)
+    , _oggFields          :: !(Maybe Text)
+    , _oggAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGetbymerchantorderid'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ogQuotaUser'
+-- * 'oggQuotaUser'
 --
--- * 'ogMerchantId'
+-- * 'oggMerchantId'
 --
--- * 'ogPrettyPrint'
+-- * 'oggPrettyPrint'
 --
--- * 'ogUserIp'
+-- * 'oggUserIp'
 --
--- * 'ogMerchantOrderId'
+-- * 'oggMerchantOrderId'
 --
--- * 'ogKey'
+-- * 'oggKey'
 --
--- * 'ogOauthToken'
+-- * 'oggOauthToken'
 --
--- * 'ogFields'
+-- * 'oggFields'
 --
--- * 'ogAlt'
-ordersGetbymerchantorderid
+-- * 'oggAlt'
+ordersGetbymerchantorderid'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'merchantOrderId'
-    -> OrdersGetbymerchantorderid
-ordersGetbymerchantorderid pOgMerchantId_ pOgMerchantOrderId_ =
-    OrdersGetbymerchantorderid
-    { _ogQuotaUser = Nothing
-    , _ogMerchantId = pOgMerchantId_
-    , _ogPrettyPrint = True
-    , _ogUserIp = Nothing
-    , _ogMerchantOrderId = pOgMerchantOrderId_
-    , _ogKey = Nothing
-    , _ogOauthToken = Nothing
-    , _ogFields = Nothing
-    , _ogAlt = "json"
+    -> OrdersGetbymerchantorderid'
+ordersGetbymerchantorderid' pOggMerchantId_ pOggMerchantOrderId_ =
+    OrdersGetbymerchantorderid'
+    { _oggQuotaUser = Nothing
+    , _oggMerchantId = pOggMerchantId_
+    , _oggPrettyPrint = True
+    , _oggUserIp = Nothing
+    , _oggMerchantOrderId = pOggMerchantOrderId_
+    , _oggKey = Nothing
+    , _oggOauthToken = Nothing
+    , _oggFields = Nothing
+    , _oggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ogQuotaUser :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
-ogQuotaUser
-  = lens _ogQuotaUser (\ s a -> s{_ogQuotaUser = a})
+oggQuotaUser :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
+oggQuotaUser
+  = lens _oggQuotaUser (\ s a -> s{_oggQuotaUser = a})
 
 -- | The ID of the managing account.
-ogMerchantId :: Lens' OrdersGetbymerchantorderid' Word64
-ogMerchantId
-  = lens _ogMerchantId (\ s a -> s{_ogMerchantId = a})
+oggMerchantId :: Lens' OrdersGetbymerchantorderid' Word64
+oggMerchantId
+  = lens _oggMerchantId
+      (\ s a -> s{_oggMerchantId = a})
 
 -- | Returns response with indentations and line breaks.
-ogPrettyPrint :: Lens' OrdersGetbymerchantorderid' Bool
-ogPrettyPrint
-  = lens _ogPrettyPrint
-      (\ s a -> s{_ogPrettyPrint = a})
+oggPrettyPrint :: Lens' OrdersGetbymerchantorderid' Bool
+oggPrettyPrint
+  = lens _oggPrettyPrint
+      (\ s a -> s{_oggPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ogUserIp :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
-ogUserIp = lens _ogUserIp (\ s a -> s{_ogUserIp = a})
+oggUserIp :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
+oggUserIp
+  = lens _oggUserIp (\ s a -> s{_oggUserIp = a})
 
 -- | The merchant order id to be looked for.
-ogMerchantOrderId :: Lens' OrdersGetbymerchantorderid' Text
-ogMerchantOrderId
-  = lens _ogMerchantOrderId
-      (\ s a -> s{_ogMerchantOrderId = a})
+oggMerchantOrderId :: Lens' OrdersGetbymerchantorderid' Text
+oggMerchantOrderId
+  = lens _oggMerchantOrderId
+      (\ s a -> s{_oggMerchantOrderId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
-ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
+oggKey :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
+oggKey = lens _oggKey (\ s a -> s{_oggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ogOauthToken :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
-ogOauthToken
-  = lens _ogOauthToken (\ s a -> s{_ogOauthToken = a})
+oggOauthToken :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
+oggOauthToken
+  = lens _oggOauthToken
+      (\ s a -> s{_oggOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ogFields :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
-ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
+oggFields :: Lens' OrdersGetbymerchantorderid' (Maybe Text)
+oggFields
+  = lens _oggFields (\ s a -> s{_oggFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' OrdersGetbymerchantorderid' Text
-ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
+oggAlt :: Lens' OrdersGetbymerchantorderid' Alt
+oggAlt = lens _oggAlt (\ s a -> s{_oggAlt = a})
 
 instance GoogleRequest OrdersGetbymerchantorderid'
          where
         type Rs OrdersGetbymerchantorderid' =
              OrdersGetByMerchantOrderIdResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersGetbymerchantorderid{..}
-          = go _ogQuotaUser _ogMerchantId _ogPrettyPrint
-              _ogUserIp
-              _ogMerchantOrderId
-              _ogKey
-              _ogOauthToken
-              _ogFields
-              _ogAlt
+        requestWithRoute r u OrdersGetbymerchantorderid'{..}
+          = go _oggQuotaUser _oggMerchantId
+              (Just _oggPrettyPrint)
+              _oggUserIp
+              _oggMerchantOrderId
+              _oggKey
+              _oggOauthToken
+              _oggFields
+              (Just _oggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersGetbymerchantorderidAPI)
+                      (Proxy :: Proxy OrdersGetbymerchantorderidResource)
                       r
                       u

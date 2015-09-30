@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Batch upload existing user accounts.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyUploadAccount@.
-module IdentityToolkit.Relyingparty.UploadAccount
+module Network.Google.Resource.IdentityToolkit.Relyingparty.UploadAccount
     (
     -- * REST Resource
-      RelyingpartyUploadAccountAPI
+      RelyingpartyUploadAccountResource
 
     -- * Creating a Request
-    , relyingpartyUploadAccount
-    , RelyingpartyUploadAccount
+    , relyingpartyUploadAccount'
+    , RelyingpartyUploadAccount'
 
     -- * Request Lenses
     , ruaQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyUploadAccount@ which the
--- 'RelyingpartyUploadAccount' request conforms to.
-type RelyingpartyUploadAccountAPI =
-     "uploadAccount" :> Post '[JSON] UploadAccountResponse
+-- 'RelyingpartyUploadAccount'' request conforms to.
+type RelyingpartyUploadAccountResource =
+     "uploadAccount" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] UploadAccountResponse
 
 -- | Batch upload existing user accounts.
 --
--- /See:/ 'relyingpartyUploadAccount' smart constructor.
-data RelyingpartyUploadAccount = RelyingpartyUploadAccount
+-- /See:/ 'relyingpartyUploadAccount'' smart constructor.
+data RelyingpartyUploadAccount' = RelyingpartyUploadAccount'
     { _ruaQuotaUser   :: !(Maybe Text)
     , _ruaPrettyPrint :: !Bool
     , _ruaUserIp      :: !(Maybe Text)
     , _ruaKey         :: !(Maybe Text)
     , _ruaOauthToken  :: !(Maybe Text)
     , _ruaFields      :: !(Maybe Text)
-    , _ruaAlt         :: !Text
+    , _ruaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyUploadAccount'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data RelyingpartyUploadAccount = RelyingpartyUploadAccount
 -- * 'ruaFields'
 --
 -- * 'ruaAlt'
-relyingpartyUploadAccount
-    :: RelyingpartyUploadAccount
-relyingpartyUploadAccount =
-    RelyingpartyUploadAccount
+relyingpartyUploadAccount'
+    :: RelyingpartyUploadAccount'
+relyingpartyUploadAccount' =
+    RelyingpartyUploadAccount'
     { _ruaQuotaUser = Nothing
     , _ruaPrettyPrint = True
     , _ruaUserIp = Nothing
     , _ruaKey = Nothing
     , _ruaOauthToken = Nothing
     , _ruaFields = Nothing
-    , _ruaAlt = "json"
+    , _ruaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,7 +135,7 @@ ruaFields
   = lens _ruaFields (\ s a -> s{_ruaFields = a})
 
 -- | Data format for the response.
-ruaAlt :: Lens' RelyingpartyUploadAccount' Text
+ruaAlt :: Lens' RelyingpartyUploadAccount' Alt
 ruaAlt = lens _ruaAlt (\ s a -> s{_ruaAlt = a})
 
 instance GoogleRequest RelyingpartyUploadAccount'
@@ -134,13 +143,14 @@ instance GoogleRequest RelyingpartyUploadAccount'
         type Rs RelyingpartyUploadAccount' =
              UploadAccountResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyUploadAccount{..}
-          = go _ruaQuotaUser _ruaPrettyPrint _ruaUserIp _ruaKey
+        requestWithRoute r u RelyingpartyUploadAccount'{..}
+          = go _ruaQuotaUser (Just _ruaPrettyPrint) _ruaUserIp
+              _ruaKey
               _ruaOauthToken
               _ruaFields
-              _ruaAlt
+              (Just _ruaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyUploadAccountAPI)
+                      (Proxy :: Proxy RelyingpartyUploadAccountResource)
                       r
                       u

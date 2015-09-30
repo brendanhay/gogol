@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTemplatePatch@.
-module FusionTables.Template.Patch
+module Network.Google.Resource.FusionTables.Template.Patch
     (
     -- * REST Resource
-      TemplatePatchAPI
+      TemplatePatchResource
 
     -- * Creating a Request
-    , templatePatch
-    , TemplatePatch
+    , templatePatch'
+    , TemplatePatch'
 
     -- * Request Lenses
     , tpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTemplatePatch@ which the
--- 'TemplatePatch' request conforms to.
-type TemplatePatchAPI =
+-- 'TemplatePatch'' request conforms to.
+type TemplatePatchResource =
      "tables" :>
        Capture "tableId" Text :>
          "templates" :>
-           Capture "templateId" Int32 :> Patch '[JSON] Template
+           Capture "templateId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Template
 
 -- | Updates an existing template. This method supports patch semantics.
 --
--- /See:/ 'templatePatch' smart constructor.
-data TemplatePatch = TemplatePatch
+-- /See:/ 'templatePatch'' smart constructor.
+data TemplatePatch' = TemplatePatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpTemplateId  :: !Int32
@@ -63,7 +71,7 @@ data TemplatePatch = TemplatePatch
     , _tpOauthToken  :: !(Maybe Text)
     , _tpTableId     :: !Text
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplatePatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TemplatePatch = TemplatePatch
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-templatePatch
+templatePatch'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
-    -> TemplatePatch
-templatePatch pTpTemplateId_ pTpTableId_ =
-    TemplatePatch
+    -> TemplatePatch'
+templatePatch' pTpTemplateId_ pTpTableId_ =
+    TemplatePatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpTemplateId = pTpTemplateId_
@@ -101,7 +109,7 @@ templatePatch pTpTemplateId_ pTpTableId_ =
     , _tpOauthToken = Nothing
     , _tpTableId = pTpTableId_
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ tpFields :: Lens' TemplatePatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TemplatePatch' Text
+tpAlt :: Lens' TemplatePatch' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TemplatePatch' where
         type Rs TemplatePatch' = Template
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TemplatePatch{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpTemplateId
+        requestWithRoute r u TemplatePatch'{..}
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpTemplateId
               _tpUserIp
               _tpKey
               _tpOauthToken
               _tpTableId
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TemplatePatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TemplatePatchResource)
+                      r
                       u

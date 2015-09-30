@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- platform.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersURLcrawlerrorssamplesList@.
-module Webmasters.URLcrawlerrorssamples.List
+module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.List
     (
     -- * REST Resource
-      UrlcrawlerrorssamplesListAPI
+      UrlcrawlerrorssamplesListResource
 
     -- * Creating a Request
-    , uRLcrawlerrorssamplesList
-    , URLcrawlerrorssamplesList
+    , uRLcrawlerrorssamplesList'
+    , URLcrawlerrorssamplesList'
 
     -- * Request Lenses
     , ulQuotaUser
@@ -46,30 +47,41 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersURLcrawlerrorssamplesList@ which the
--- 'URLcrawlerrorssamplesList' request conforms to.
-type UrlcrawlerrorssamplesListAPI =
+-- 'URLcrawlerrorssamplesList'' request conforms to.
+type UrlcrawlerrorssamplesListResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "urlCrawlErrorsSamples" :>
-           QueryParam "platform" Text :>
-             QueryParam "category" Text :>
-               Get '[JSON] URLCrawlErrorsSamplesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "platform"
+                 WebmastersURLcrawlerrorssamplesListPlatform
+                 :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "category"
+                     WebmastersURLcrawlerrorssamplesListCategory
+                     :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] URLCrawlErrorsSamplesListResponse
 
 -- | Lists a site\'s sample URLs for the specified crawl error category and
 -- platform.
 --
--- /See:/ 'uRLcrawlerrorssamplesList' smart constructor.
-data URLcrawlerrorssamplesList = URLcrawlerrorssamplesList
+-- /See:/ 'uRLcrawlerrorssamplesList'' smart constructor.
+data URLcrawlerrorssamplesList' = URLcrawlerrorssamplesList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
-    , _ulPlatform    :: !Text
+    , _ulPlatform    :: !WebmastersURLcrawlerrorssamplesListPlatform
     , _ulUserIp      :: !(Maybe Text)
-    , _ulCategory    :: !Text
+    , _ulCategory    :: !WebmastersURLcrawlerrorssamplesListCategory
     , _ulSiteUrl     :: !Text
     , _ulKey         :: !(Maybe Text)
     , _ulOauthToken  :: !(Maybe Text)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Text
+    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorssamplesList'' with the minimum fields required to make a request.
@@ -95,13 +107,13 @@ data URLcrawlerrorssamplesList = URLcrawlerrorssamplesList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-uRLcrawlerrorssamplesList
-    :: Text -- ^ 'platform'
-    -> Text -- ^ 'category'
+uRLcrawlerrorssamplesList'
+    :: WebmastersURLcrawlerrorssamplesListPlatform -- ^ 'platform'
+    -> WebmastersURLcrawlerrorssamplesListCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
-    -> URLcrawlerrorssamplesList
-uRLcrawlerrorssamplesList pUlPlatform_ pUlCategory_ pUlSiteUrl_ =
-    URLcrawlerrorssamplesList
+    -> URLcrawlerrorssamplesList'
+uRLcrawlerrorssamplesList' pUlPlatform_ pUlCategory_ pUlSiteUrl_ =
+    URLcrawlerrorssamplesList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulPlatform = pUlPlatform_
@@ -111,7 +123,7 @@ uRLcrawlerrorssamplesList pUlPlatform_ pUlCategory_ pUlSiteUrl_ =
     , _ulKey = Nothing
     , _ulOauthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +140,7 @@ ulPrettyPrint
       (\ s a -> s{_ulPrettyPrint = a})
 
 -- | The user agent type (platform) that made the request. For example: web
-ulPlatform :: Lens' URLcrawlerrorssamplesList' Text
+ulPlatform :: Lens' URLcrawlerrorssamplesList' WebmastersURLcrawlerrorssamplesListPlatform
 ulPlatform
   = lens _ulPlatform (\ s a -> s{_ulPlatform = a})
 
@@ -138,7 +150,7 @@ ulUserIp :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
 ulUserIp = lens _ulUserIp (\ s a -> s{_ulUserIp = a})
 
 -- | The crawl error category. For example: authPermissions
-ulCategory :: Lens' URLcrawlerrorssamplesList' Text
+ulCategory :: Lens' URLcrawlerrorssamplesList' WebmastersURLcrawlerrorssamplesListCategory
 ulCategory
   = lens _ulCategory (\ s a -> s{_ulCategory = a})
 
@@ -164,7 +176,7 @@ ulFields :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' URLcrawlerrorssamplesList' Text
+ulAlt :: Lens' URLcrawlerrorssamplesList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest URLcrawlerrorssamplesList'
@@ -172,17 +184,18 @@ instance GoogleRequest URLcrawlerrorssamplesList'
         type Rs URLcrawlerrorssamplesList' =
              URLCrawlErrorsSamplesListResponse
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u URLcrawlerrorssamplesList{..}
-          = go _ulQuotaUser _ulPrettyPrint (Just _ulPlatform)
+        requestWithRoute r u URLcrawlerrorssamplesList'{..}
+          = go _ulQuotaUser (Just _ulPrettyPrint)
+              (Just _ulPlatform)
               _ulUserIp
               (Just _ulCategory)
               _ulSiteUrl
               _ulKey
               _ulOauthToken
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UrlcrawlerrorssamplesListAPI)
+                      (Proxy :: Proxy UrlcrawlerrorssamplesListResource)
                       r
                       u

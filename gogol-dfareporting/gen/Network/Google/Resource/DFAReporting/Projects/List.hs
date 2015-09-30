@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,145 +20,155 @@
 -- | Retrieves a list of projects, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingProjectsList@.
-module DFAReporting.Projects.List
+module Network.Google.Resource.DFAReporting.Projects.List
     (
     -- * REST Resource
-      ProjectsListAPI
+      ProjectsListResource
 
     -- * Creating a Request
-    , projectsList
-    , ProjectsList
+    , projectsList'
+    , ProjectsList'
 
     -- * Request Lenses
-    , proQuotaUser
-    , proPrettyPrint
-    , proUserIp
-    , proSearchString
-    , proIds
-    , proProfileId
-    , proSortOrder
-    , proKey
-    , proPageToken
-    , proSortField
-    , proOauthToken
-    , proAdvertiserIds
-    , proMaxResults
-    , proFields
-    , proAlt
+    , plQuotaUser
+    , plPrettyPrint
+    , plUserIp
+    , plSearchString
+    , plIds
+    , plProfileId
+    , plSortOrder
+    , plKey
+    , plPageToken
+    , plSortField
+    , plOauthToken
+    , plAdvertiserIds
+    , plMaxResults
+    , plFields
+    , plAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingProjectsList@ which the
--- 'ProjectsList' request conforms to.
-type ProjectsListAPI =
+-- 'ProjectsList'' request conforms to.
+type ProjectsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParams "advertiserIds" Int64 :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] ProjectsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingProjectsListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingProjectsListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParams "advertiserIds" Int64 :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] ProjectsListResponse
 
 -- | Retrieves a list of projects, possibly filtered.
 --
--- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
-    { _proQuotaUser     :: !(Maybe Text)
-    , _proPrettyPrint   :: !Bool
-    , _proUserIp        :: !(Maybe Text)
-    , _proSearchString  :: !(Maybe Text)
-    , _proIds           :: !(Maybe Int64)
-    , _proProfileId     :: !Int64
-    , _proSortOrder     :: !(Maybe Text)
-    , _proKey           :: !(Maybe Text)
-    , _proPageToken     :: !(Maybe Text)
-    , _proSortField     :: !(Maybe Text)
-    , _proOauthToken    :: !(Maybe Text)
-    , _proAdvertiserIds :: !(Maybe Int64)
-    , _proMaxResults    :: !(Maybe Int32)
-    , _proFields        :: !(Maybe Text)
-    , _proAlt           :: !Text
+-- /See:/ 'projectsList'' smart constructor.
+data ProjectsList' = ProjectsList'
+    { _plQuotaUser     :: !(Maybe Text)
+    , _plPrettyPrint   :: !Bool
+    , _plUserIp        :: !(Maybe Text)
+    , _plSearchString  :: !(Maybe Text)
+    , _plIds           :: !(Maybe Int64)
+    , _plProfileId     :: !Int64
+    , _plSortOrder     :: !(Maybe DfareportingProjectsListSortOrder)
+    , _plKey           :: !(Maybe Text)
+    , _plPageToken     :: !(Maybe Text)
+    , _plSortField     :: !(Maybe DfareportingProjectsListSortField)
+    , _plOauthToken    :: !(Maybe Text)
+    , _plAdvertiserIds :: !(Maybe Int64)
+    , _plMaxResults    :: !(Maybe Int32)
+    , _plFields        :: !(Maybe Text)
+    , _plAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proQuotaUser'
+-- * 'plQuotaUser'
 --
--- * 'proPrettyPrint'
+-- * 'plPrettyPrint'
 --
--- * 'proUserIp'
+-- * 'plUserIp'
 --
--- * 'proSearchString'
+-- * 'plSearchString'
 --
--- * 'proIds'
+-- * 'plIds'
 --
--- * 'proProfileId'
+-- * 'plProfileId'
 --
--- * 'proSortOrder'
+-- * 'plSortOrder'
 --
--- * 'proKey'
+-- * 'plKey'
 --
--- * 'proPageToken'
+-- * 'plPageToken'
 --
--- * 'proSortField'
+-- * 'plSortField'
 --
--- * 'proOauthToken'
+-- * 'plOauthToken'
 --
--- * 'proAdvertiserIds'
+-- * 'plAdvertiserIds'
 --
--- * 'proMaxResults'
+-- * 'plMaxResults'
 --
--- * 'proFields'
+-- * 'plFields'
 --
--- * 'proAlt'
-projectsList
+-- * 'plAlt'
+projectsList'
     :: Int64 -- ^ 'profileId'
-    -> ProjectsList
-projectsList pProProfileId_ =
-    ProjectsList
-    { _proQuotaUser = Nothing
-    , _proPrettyPrint = True
-    , _proUserIp = Nothing
-    , _proSearchString = Nothing
-    , _proIds = Nothing
-    , _proProfileId = pProProfileId_
-    , _proSortOrder = Nothing
-    , _proKey = Nothing
-    , _proPageToken = Nothing
-    , _proSortField = Nothing
-    , _proOauthToken = Nothing
-    , _proAdvertiserIds = Nothing
-    , _proMaxResults = Nothing
-    , _proFields = Nothing
-    , _proAlt = "json"
+    -> ProjectsList'
+projectsList' pPlProfileId_ =
+    ProjectsList'
+    { _plQuotaUser = Nothing
+    , _plPrettyPrint = True
+    , _plUserIp = Nothing
+    , _plSearchString = Nothing
+    , _plIds = Nothing
+    , _plProfileId = pPlProfileId_
+    , _plSortOrder = Nothing
+    , _plKey = Nothing
+    , _plPageToken = Nothing
+    , _plSortField = Nothing
+    , _plOauthToken = Nothing
+    , _plAdvertiserIds = Nothing
+    , _plMaxResults = Nothing
+    , _plFields = Nothing
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-proQuotaUser :: Lens' ProjectsList' (Maybe Text)
-proQuotaUser
-  = lens _proQuotaUser (\ s a -> s{_proQuotaUser = a})
+plQuotaUser :: Lens' ProjectsList' (Maybe Text)
+plQuotaUser
+  = lens _plQuotaUser (\ s a -> s{_plQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-proPrettyPrint :: Lens' ProjectsList' Bool
-proPrettyPrint
-  = lens _proPrettyPrint
-      (\ s a -> s{_proPrettyPrint = a})
+plPrettyPrint :: Lens' ProjectsList' Bool
+plPrettyPrint
+  = lens _plPrettyPrint
+      (\ s a -> s{_plPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-proUserIp :: Lens' ProjectsList' (Maybe Text)
-proUserIp
-  = lens _proUserIp (\ s a -> s{_proUserIp = a})
+plUserIp :: Lens' ProjectsList' (Maybe Text)
+plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
 -- For example, \"project*2015\" will return projects with names like
@@ -166,85 +177,84 @@ proUserIp
 -- and the end of the search string. For example, a search string of
 -- \"project\" will match projects with name \"my project\", \"project
 -- 2015\", or simply \"project\".
-proSearchString :: Lens' ProjectsList' (Maybe Text)
-proSearchString
-  = lens _proSearchString
-      (\ s a -> s{_proSearchString = a})
+plSearchString :: Lens' ProjectsList' (Maybe Text)
+plSearchString
+  = lens _plSearchString
+      (\ s a -> s{_plSearchString = a})
 
 -- | Select only projects with these IDs.
-proIds :: Lens' ProjectsList' (Maybe Int64)
-proIds = lens _proIds (\ s a -> s{_proIds = a})
+plIds :: Lens' ProjectsList' (Maybe Int64)
+plIds = lens _plIds (\ s a -> s{_plIds = a})
 
 -- | User profile ID associated with this request.
-proProfileId :: Lens' ProjectsList' Int64
-proProfileId
-  = lens _proProfileId (\ s a -> s{_proProfileId = a})
+plProfileId :: Lens' ProjectsList' Int64
+plProfileId
+  = lens _plProfileId (\ s a -> s{_plProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-proSortOrder :: Lens' ProjectsList' (Maybe Text)
-proSortOrder
-  = lens _proSortOrder (\ s a -> s{_proSortOrder = a})
+plSortOrder :: Lens' ProjectsList' (Maybe DfareportingProjectsListSortOrder)
+plSortOrder
+  = lens _plSortOrder (\ s a -> s{_plSortOrder = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' ProjectsList' (Maybe Text)
-proKey = lens _proKey (\ s a -> s{_proKey = a})
+plKey :: Lens' ProjectsList' (Maybe Text)
+plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
-proPageToken :: Lens' ProjectsList' (Maybe Text)
-proPageToken
-  = lens _proPageToken (\ s a -> s{_proPageToken = a})
+plPageToken :: Lens' ProjectsList' (Maybe Text)
+plPageToken
+  = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | Field by which to sort the list.
-proSortField :: Lens' ProjectsList' (Maybe Text)
-proSortField
-  = lens _proSortField (\ s a -> s{_proSortField = a})
+plSortField :: Lens' ProjectsList' (Maybe DfareportingProjectsListSortField)
+plSortField
+  = lens _plSortField (\ s a -> s{_plSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-proOauthToken :: Lens' ProjectsList' (Maybe Text)
-proOauthToken
-  = lens _proOauthToken
-      (\ s a -> s{_proOauthToken = a})
+plOauthToken :: Lens' ProjectsList' (Maybe Text)
+plOauthToken
+  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
 
 -- | Select only projects with these advertiser IDs.
-proAdvertiserIds :: Lens' ProjectsList' (Maybe Int64)
-proAdvertiserIds
-  = lens _proAdvertiserIds
-      (\ s a -> s{_proAdvertiserIds = a})
+plAdvertiserIds :: Lens' ProjectsList' (Maybe Int64)
+plAdvertiserIds
+  = lens _plAdvertiserIds
+      (\ s a -> s{_plAdvertiserIds = a})
 
 -- | Maximum number of results to return.
-proMaxResults :: Lens' ProjectsList' (Maybe Int32)
-proMaxResults
-  = lens _proMaxResults
-      (\ s a -> s{_proMaxResults = a})
+plMaxResults :: Lens' ProjectsList' (Maybe Int32)
+plMaxResults
+  = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-proFields :: Lens' ProjectsList' (Maybe Text)
-proFields
-  = lens _proFields (\ s a -> s{_proFields = a})
+plFields :: Lens' ProjectsList' (Maybe Text)
+plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-proAlt :: Lens' ProjectsList' Text
-proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
+plAlt :: Lens' ProjectsList' Alt
+plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ProjectsList{..}
-          = go _proQuotaUser _proPrettyPrint _proUserIp
-              _proSearchString
-              _proIds
-              _proProfileId
-              _proSortOrder
-              _proKey
-              _proPageToken
-              _proSortField
-              _proOauthToken
-              _proAdvertiserIds
-              _proMaxResults
-              _proFields
-              _proAlt
+        requestWithRoute r u ProjectsList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+              _plSearchString
+              _plIds
+              _plProfileId
+              _plSortOrder
+              _plKey
+              _plPageToken
+              _plSortField
+              _plOauthToken
+              _plAdvertiserIds
+              _plMaxResults
+              _plFields
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsListResource)
+                      r
                       u

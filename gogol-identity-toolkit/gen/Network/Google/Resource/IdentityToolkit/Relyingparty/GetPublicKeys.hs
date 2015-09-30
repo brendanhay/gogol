@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get token signing public key.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyGetPublicKeys@.
-module IdentityToolkit.Relyingparty.GetPublicKeys
+module Network.Google.Resource.IdentityToolkit.Relyingparty.GetPublicKeys
     (
     -- * REST Resource
-      RelyingpartyGetPublicKeysAPI
+      RelyingpartyGetPublicKeysResource
 
     -- * Creating a Request
-    , relyingpartyGetPublicKeys
-    , RelyingpartyGetPublicKeys
+    , relyingpartyGetPublicKeys'
+    , RelyingpartyGetPublicKeys'
 
     -- * Request Lenses
     , rgpkQuotaUser
@@ -42,23 +43,30 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyGetPublicKeys@ which the
--- 'RelyingpartyGetPublicKeys' request conforms to.
-type RelyingpartyGetPublicKeysAPI =
+-- 'RelyingpartyGetPublicKeys'' request conforms to.
+type RelyingpartyGetPublicKeysResource =
      "publicKeys" :>
-       Get '[JSON]
-         IdentitytoolkitRelyingpartyGetPublicKeysResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON]
+                       IdentitytoolkitRelyingpartyGetPublicKeysResponse
 
 -- | Get token signing public key.
 --
--- /See:/ 'relyingpartyGetPublicKeys' smart constructor.
-data RelyingpartyGetPublicKeys = RelyingpartyGetPublicKeys
+-- /See:/ 'relyingpartyGetPublicKeys'' smart constructor.
+data RelyingpartyGetPublicKeys' = RelyingpartyGetPublicKeys'
     { _rgpkQuotaUser   :: !(Maybe Text)
     , _rgpkPrettyPrint :: !Bool
     , _rgpkUserIp      :: !(Maybe Text)
     , _rgpkKey         :: !(Maybe Text)
     , _rgpkOauthToken  :: !(Maybe Text)
     , _rgpkFields      :: !(Maybe Text)
-    , _rgpkAlt         :: !Text
+    , _rgpkAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyGetPublicKeys'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data RelyingpartyGetPublicKeys = RelyingpartyGetPublicKeys
 -- * 'rgpkFields'
 --
 -- * 'rgpkAlt'
-relyingpartyGetPublicKeys
-    :: RelyingpartyGetPublicKeys
-relyingpartyGetPublicKeys =
-    RelyingpartyGetPublicKeys
+relyingpartyGetPublicKeys'
+    :: RelyingpartyGetPublicKeys'
+relyingpartyGetPublicKeys' =
+    RelyingpartyGetPublicKeys'
     { _rgpkQuotaUser = Nothing
     , _rgpkPrettyPrint = True
     , _rgpkUserIp = Nothing
     , _rgpkKey = Nothing
     , _rgpkOauthToken = Nothing
     , _rgpkFields = Nothing
-    , _rgpkAlt = "json"
+    , _rgpkAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,7 +137,7 @@ rgpkFields
   = lens _rgpkFields (\ s a -> s{_rgpkFields = a})
 
 -- | Data format for the response.
-rgpkAlt :: Lens' RelyingpartyGetPublicKeys' Text
+rgpkAlt :: Lens' RelyingpartyGetPublicKeys' Alt
 rgpkAlt = lens _rgpkAlt (\ s a -> s{_rgpkAlt = a})
 
 instance GoogleRequest RelyingpartyGetPublicKeys'
@@ -137,14 +145,15 @@ instance GoogleRequest RelyingpartyGetPublicKeys'
         type Rs RelyingpartyGetPublicKeys' =
              IdentitytoolkitRelyingpartyGetPublicKeysResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyGetPublicKeys{..}
-          = go _rgpkQuotaUser _rgpkPrettyPrint _rgpkUserIp
+        requestWithRoute r u RelyingpartyGetPublicKeys'{..}
+          = go _rgpkQuotaUser (Just _rgpkPrettyPrint)
+              _rgpkUserIp
               _rgpkKey
               _rgpkOauthToken
               _rgpkFields
-              _rgpkAlt
+              (Just _rgpkAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyGetPublicKeysAPI)
+                      (Proxy :: Proxy RelyingpartyGetPublicKeysResource)
                       r
                       u

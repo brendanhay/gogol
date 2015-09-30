@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the instance group must be in the same network.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsAddInstances@.
-module Compute.InstanceGroups.AddInstances
+module Network.Google.Resource.Compute.InstanceGroups.AddInstances
     (
     -- * REST Resource
-      InstanceGroupsAddInstancesAPI
+      InstanceGroupsAddInstancesResource
 
     -- * Creating a Request
-    , instanceGroupsAddInstances
-    , InstanceGroupsAddInstances
+    , instanceGroupsAddInstances'
+    , InstanceGroupsAddInstances'
 
     -- * Request Lenses
     , igaiQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsAddInstances@ which the
--- 'InstanceGroupsAddInstances' request conforms to.
-type InstanceGroupsAddInstancesAPI =
+-- 'InstanceGroupsAddInstances'' request conforms to.
+type InstanceGroupsAddInstancesResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroups" :>
              Capture "instanceGroup" Text :>
-               "addInstances" :> Post '[JSON] Operation
+               "addInstances" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds a list of instances to an instance group. All of the instances in
 -- the instance group must be in the same network.
 --
--- /See:/ 'instanceGroupsAddInstances' smart constructor.
-data InstanceGroupsAddInstances = InstanceGroupsAddInstances
+-- /See:/ 'instanceGroupsAddInstances'' smart constructor.
+data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
     { _igaiQuotaUser     :: !(Maybe Text)
     , _igaiPrettyPrint   :: !Bool
     , _igaiProject       :: !Text
@@ -69,7 +77,7 @@ data InstanceGroupsAddInstances = InstanceGroupsAddInstances
     , _igaiOauthToken    :: !(Maybe Text)
     , _igaiInstanceGroup :: !Text
     , _igaiFields        :: !(Maybe Text)
-    , _igaiAlt           :: !Text
+    , _igaiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstances'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data InstanceGroupsAddInstances = InstanceGroupsAddInstances
 -- * 'igaiFields'
 --
 -- * 'igaiAlt'
-instanceGroupsAddInstances
+instanceGroupsAddInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
-    -> InstanceGroupsAddInstances
-instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
-    InstanceGroupsAddInstances
+    -> InstanceGroupsAddInstances'
+instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
+    InstanceGroupsAddInstances'
     { _igaiQuotaUser = Nothing
     , _igaiPrettyPrint = True
     , _igaiProject = pIgaiProject_
@@ -111,7 +119,7 @@ instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
     , _igaiOauthToken = Nothing
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     , _igaiFields = Nothing
-    , _igaiAlt = "json"
+    , _igaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,24 +175,25 @@ igaiFields
   = lens _igaiFields (\ s a -> s{_igaiFields = a})
 
 -- | Data format for the response.
-igaiAlt :: Lens' InstanceGroupsAddInstances' Text
+igaiAlt :: Lens' InstanceGroupsAddInstances' Alt
 igaiAlt = lens _igaiAlt (\ s a -> s{_igaiAlt = a})
 
 instance GoogleRequest InstanceGroupsAddInstances'
          where
         type Rs InstanceGroupsAddInstances' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsAddInstances{..}
-          = go _igaiQuotaUser _igaiPrettyPrint _igaiProject
+        requestWithRoute r u InstanceGroupsAddInstances'{..}
+          = go _igaiQuotaUser (Just _igaiPrettyPrint)
+              _igaiProject
               _igaiUserIp
               _igaiZone
               _igaiKey
               _igaiOauthToken
               _igaiInstanceGroup
               _igaiFields
-              _igaiAlt
+              (Just _igaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsAddInstancesAPI)
+                      (Proxy :: Proxy InstanceGroupsAddInstancesResource)
                       r
                       u

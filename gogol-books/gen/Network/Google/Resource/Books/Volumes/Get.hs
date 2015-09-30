@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets volume information for a single volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesGet@.
-module Books.Volumes.Get
+module Network.Google.Resource.Books.Volumes.Get
     (
     -- * REST Resource
-      VolumesGetAPI
+      VolumesGetResource
 
     -- * Creating a Request
-    , volumesGet
-    , VolumesGet
+    , volumesGet'
+    , VolumesGet'
 
     -- * Request Lenses
     , vgQuotaUser
@@ -48,21 +49,27 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesGet@ which the
--- 'VolumesGet' request conforms to.
-type VolumesGetAPI =
+-- 'VolumesGet'' request conforms to.
+type VolumesGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
-         QueryParam "country" Text :>
-           QueryParam "partner" Text :>
-             QueryParam "source" Text :>
-               QueryParam "projection" Text :>
-                 QueryParam "user_library_consistent_read" Bool :>
-                   Get '[JSON] Volume
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "country" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "partner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "projection" BooksVolumesGetProjection :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "user_library_consistent_read" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
 --
--- /See:/ 'volumesGet' smart constructor.
-data VolumesGet = VolumesGet
+-- /See:/ 'volumesGet'' smart constructor.
+data VolumesGet' = VolumesGet'
     { _vgQuotaUser                 :: !(Maybe Text)
     , _vgPrettyPrint               :: !Bool
     , _vgCountry                   :: !(Maybe Text)
@@ -71,11 +78,11 @@ data VolumesGet = VolumesGet
     , _vgKey                       :: !(Maybe Text)
     , _vgVolumeId                  :: !Text
     , _vgSource                    :: !(Maybe Text)
-    , _vgProjection                :: !(Maybe Text)
+    , _vgProjection                :: !(Maybe BooksVolumesGetProjection)
     , _vgOauthToken                :: !(Maybe Text)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
     , _vgFields                    :: !(Maybe Text)
-    , _vgAlt                       :: !Text
+    , _vgAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesGet'' with the minimum fields required to make a request.
@@ -107,11 +114,11 @@ data VolumesGet = VolumesGet
 -- * 'vgFields'
 --
 -- * 'vgAlt'
-volumesGet
+volumesGet'
     :: Text -- ^ 'volumeId'
-    -> VolumesGet
-volumesGet pVgVolumeId_ =
-    VolumesGet
+    -> VolumesGet'
+volumesGet' pVgVolumeId_ =
+    VolumesGet'
     { _vgQuotaUser = Nothing
     , _vgPrettyPrint = True
     , _vgCountry = Nothing
@@ -124,7 +131,7 @@ volumesGet pVgVolumeId_ =
     , _vgOauthToken = Nothing
     , _vgUserLibraryConsistentRead = Nothing
     , _vgFields = Nothing
-    , _vgAlt = "json"
+    , _vgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -171,7 +178,7 @@ vgSource :: Lens' VolumesGet' (Maybe Text)
 vgSource = lens _vgSource (\ s a -> s{_vgSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-vgProjection :: Lens' VolumesGet' (Maybe Text)
+vgProjection :: Lens' VolumesGet' (Maybe BooksVolumesGetProjection)
 vgProjection
   = lens _vgProjection (\ s a -> s{_vgProjection = a})
 
@@ -190,14 +197,15 @@ vgFields :: Lens' VolumesGet' (Maybe Text)
 vgFields = lens _vgFields (\ s a -> s{_vgFields = a})
 
 -- | Data format for the response.
-vgAlt :: Lens' VolumesGet' Text
+vgAlt :: Lens' VolumesGet' Alt
 vgAlt = lens _vgAlt (\ s a -> s{_vgAlt = a})
 
 instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesGet{..}
-          = go _vgQuotaUser _vgPrettyPrint _vgCountry _vgUserIp
+        requestWithRoute r u VolumesGet'{..}
+          = go _vgQuotaUser (Just _vgPrettyPrint) _vgCountry
+              _vgUserIp
               _vgPartner
               _vgKey
               _vgVolumeId
@@ -206,6 +214,8 @@ instance GoogleRequest VolumesGet' where
               _vgOauthToken
               _vgUserLibraryConsistentRead
               _vgFields
-              _vgAlt
+              (Just _vgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VolumesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy VolumesGetResource)
+                      r
+                      u

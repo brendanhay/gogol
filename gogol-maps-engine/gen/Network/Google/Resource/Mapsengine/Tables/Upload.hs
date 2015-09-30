@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- insert in the reference documentation for more information.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesUpload@.
-module Mapsengine.Tables.Upload
+module Network.Google.Resource.Mapsengine.Tables.Upload
     (
     -- * REST Resource
-      TablesUploadAPI
+      TablesUploadResource
 
     -- * Creating a Request
-    , tablesUpload
-    , TablesUpload
+    , tablesUpload'
+    , TablesUpload'
 
     -- * Request Lenses
     , tuQuotaUser
@@ -46,9 +47,17 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesUpload@ which the
--- 'TablesUpload' request conforms to.
-type TablesUploadAPI =
-     "tables" :> "upload" :> Post '[JSON] Table
+-- 'TablesUpload'' request conforms to.
+type TablesUploadResource =
+     "tables" :>
+       "upload" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Table
 
 -- | Create a placeholder table asset to which table files can be uploaded.
 -- Once the placeholder has been created, files are uploaded to the
@@ -56,15 +65,15 @@ type TablesUploadAPI =
 -- endpoint. See Table Upload in the Developer\'s Guide or Table.files:
 -- insert in the reference documentation for more information.
 --
--- /See:/ 'tablesUpload' smart constructor.
-data TablesUpload = TablesUpload
+-- /See:/ 'tablesUpload'' smart constructor.
+data TablesUpload' = TablesUpload'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuUserIp      :: !(Maybe Text)
     , _tuKey         :: !(Maybe Text)
     , _tuOauthToken  :: !(Maybe Text)
     , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Text
+    , _tuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesUpload'' with the minimum fields required to make a request.
@@ -84,17 +93,17 @@ data TablesUpload = TablesUpload
 -- * 'tuFields'
 --
 -- * 'tuAlt'
-tablesUpload
-    :: TablesUpload
-tablesUpload =
-    TablesUpload
+tablesUpload'
+    :: TablesUpload'
+tablesUpload' =
+    TablesUpload'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIp = Nothing
     , _tuKey = Nothing
     , _tuOauthToken = Nothing
     , _tuFields = Nothing
-    , _tuAlt = "json"
+    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,17 +140,20 @@ tuFields :: Lens' TablesUpload' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuAlt :: Lens' TablesUpload' Text
+tuAlt :: Lens' TablesUpload' Alt
 tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TablesUpload' where
         type Rs TablesUpload' = Table
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesUpload{..}
-          = go _tuQuotaUser _tuPrettyPrint _tuUserIp _tuKey
+        requestWithRoute r u TablesUpload'{..}
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+              _tuKey
               _tuOauthToken
               _tuFields
-              _tuAlt
+              (Just _tuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesUploadAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesUploadResource)
+                      r
                       u

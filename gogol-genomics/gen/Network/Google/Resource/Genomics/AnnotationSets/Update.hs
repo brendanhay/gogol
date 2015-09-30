@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- resource. Caller must have WRITE permission for the associated dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationSetsUpdate@.
-module Genomics.AnnotationSets.Update
+module Network.Google.Resource.Genomics.AnnotationSets.Update
     (
     -- * REST Resource
-      AnnotationSetsUpdateAPI
+      AnnotationSetsUpdateResource
 
     -- * Creating a Request
-    , annotationSetsUpdate
-    , AnnotationSetsUpdate
+    , annotationSetsUpdate'
+    , AnnotationSetsUpdate'
 
     -- * Request Lenses
     , asuQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsUpdate@ which the
--- 'AnnotationSetsUpdate' request conforms to.
-type AnnotationSetsUpdateAPI =
+-- 'AnnotationSetsUpdate'' request conforms to.
+type AnnotationSetsUpdateResource =
      "annotationSets" :>
        Capture "annotationSetId" Text :>
-         Put '[JSON] AnnotationSet
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] AnnotationSet
 
 -- | Updates an annotation set. The update must respect all mutability
 -- restrictions and other invariants described on the annotation set
 -- resource. Caller must have WRITE permission for the associated dataset.
 --
--- /See:/ 'annotationSetsUpdate' smart constructor.
-data AnnotationSetsUpdate = AnnotationSetsUpdate
+-- /See:/ 'annotationSetsUpdate'' smart constructor.
+data AnnotationSetsUpdate' = AnnotationSetsUpdate'
     { _asuQuotaUser       :: !(Maybe Text)
     , _asuPrettyPrint     :: !Bool
     , _asuAnnotationSetId :: !Text
@@ -64,7 +71,7 @@ data AnnotationSetsUpdate = AnnotationSetsUpdate
     , _asuKey             :: !(Maybe Text)
     , _asuOauthToken      :: !(Maybe Text)
     , _asuFields          :: !(Maybe Text)
-    , _asuAlt             :: !Text
+    , _asuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsUpdate'' with the minimum fields required to make a request.
@@ -86,11 +93,11 @@ data AnnotationSetsUpdate = AnnotationSetsUpdate
 -- * 'asuFields'
 --
 -- * 'asuAlt'
-annotationSetsUpdate
+annotationSetsUpdate'
     :: Text -- ^ 'annotationSetId'
-    -> AnnotationSetsUpdate
-annotationSetsUpdate pAsuAnnotationSetId_ =
-    AnnotationSetsUpdate
+    -> AnnotationSetsUpdate'
+annotationSetsUpdate' pAsuAnnotationSetId_ =
+    AnnotationSetsUpdate'
     { _asuQuotaUser = Nothing
     , _asuPrettyPrint = True
     , _asuAnnotationSetId = pAsuAnnotationSetId_
@@ -98,7 +105,7 @@ annotationSetsUpdate pAsuAnnotationSetId_ =
     , _asuKey = Nothing
     , _asuOauthToken = Nothing
     , _asuFields = Nothing
-    , _asuAlt = "json"
+    , _asuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,22 +151,22 @@ asuFields
   = lens _asuFields (\ s a -> s{_asuFields = a})
 
 -- | Data format for the response.
-asuAlt :: Lens' AnnotationSetsUpdate' Text
+asuAlt :: Lens' AnnotationSetsUpdate' Alt
 asuAlt = lens _asuAlt (\ s a -> s{_asuAlt = a})
 
 instance GoogleRequest AnnotationSetsUpdate' where
         type Rs AnnotationSetsUpdate' = AnnotationSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationSetsUpdate{..}
-          = go _asuQuotaUser _asuPrettyPrint
+        requestWithRoute r u AnnotationSetsUpdate'{..}
+          = go _asuQuotaUser (Just _asuPrettyPrint)
               _asuAnnotationSetId
               _asuUserIp
               _asuKey
               _asuOauthToken
               _asuFields
-              _asuAlt
+              (Just _asuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationSetsUpdateAPI)
+                      (Proxy :: Proxy AnnotationSetsUpdateResource)
                       r
                       u

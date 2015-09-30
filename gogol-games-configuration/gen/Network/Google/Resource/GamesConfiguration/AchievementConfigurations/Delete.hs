@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete the achievement configuration with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsDelete@.
-module GamesConfiguration.AchievementConfigurations.Delete
+module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
     (
     -- * REST Resource
-      AchievementConfigurationsDeleteAPI
+      AchievementConfigurationsDeleteResource
 
     -- * Creating a Request
-    , achievementConfigurationsDelete
-    , AchievementConfigurationsDelete
+    , achievementConfigurationsDelete'
+    , AchievementConfigurationsDelete'
 
     -- * Request Lenses
     , acdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationAchievementConfigurationsDelete@ which the
--- 'AchievementConfigurationsDelete' request conforms to.
-type AchievementConfigurationsDeleteAPI =
+-- 'AchievementConfigurationsDelete'' request conforms to.
+type AchievementConfigurationsDeleteResource =
      "achievements" :>
-       Capture "achievementId" Text :> Delete '[JSON] ()
+       Capture "achievementId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete the achievement configuration with the given ID.
 --
--- /See:/ 'achievementConfigurationsDelete' smart constructor.
-data AchievementConfigurationsDelete = AchievementConfigurationsDelete
+-- /See:/ 'achievementConfigurationsDelete'' smart constructor.
+data AchievementConfigurationsDelete' = AchievementConfigurationsDelete'
     { _acdQuotaUser     :: !(Maybe Text)
     , _acdPrettyPrint   :: !Bool
     , _acdAchievementId :: !Text
@@ -59,7 +67,7 @@ data AchievementConfigurationsDelete = AchievementConfigurationsDelete
     , _acdKey           :: !(Maybe Text)
     , _acdOauthToken    :: !(Maybe Text)
     , _acdFields        :: !(Maybe Text)
-    , _acdAlt           :: !Text
+    , _acdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AchievementConfigurationsDelete = AchievementConfigurationsDelete
 -- * 'acdFields'
 --
 -- * 'acdAlt'
-achievementConfigurationsDelete
+achievementConfigurationsDelete'
     :: Text -- ^ 'achievementId'
-    -> AchievementConfigurationsDelete
-achievementConfigurationsDelete pAcdAchievementId_ =
-    AchievementConfigurationsDelete
+    -> AchievementConfigurationsDelete'
+achievementConfigurationsDelete' pAcdAchievementId_ =
+    AchievementConfigurationsDelete'
     { _acdQuotaUser = Nothing
     , _acdPrettyPrint = True
     , _acdAchievementId = pAcdAchievementId_
@@ -93,7 +101,7 @@ achievementConfigurationsDelete pAcdAchievementId_ =
     , _acdKey = Nothing
     , _acdOauthToken = Nothing
     , _acdFields = Nothing
-    , _acdAlt = "json"
+    , _acdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ acdFields
   = lens _acdFields (\ s a -> s{_acdFields = a})
 
 -- | Data format for the response.
-acdAlt :: Lens' AchievementConfigurationsDelete' Text
+acdAlt :: Lens' AchievementConfigurationsDelete' Alt
 acdAlt = lens _acdAlt (\ s a -> s{_acdAlt = a})
 
 instance GoogleRequest
@@ -148,15 +156,17 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          AchievementConfigurationsDelete{..}
-          = go _acdQuotaUser _acdPrettyPrint _acdAchievementId
+          AchievementConfigurationsDelete'{..}
+          = go _acdQuotaUser (Just _acdPrettyPrint)
+              _acdAchievementId
               _acdUserIp
               _acdKey
               _acdOauthToken
               _acdFields
-              _acdAlt
+              (Just _acdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementConfigurationsDeleteAPI)
+                      (Proxy ::
+                         Proxy AchievementConfigurationsDeleteResource)
                       r
                       u

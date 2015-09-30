@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a data blob\'s associated metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsUpdate@.
-module Storage.Objects.Update
+module Network.Google.Resource.Storage.Objects.Update
     (
     -- * REST Resource
-      ObjectsUpdateAPI
+      ObjectsUpdateResource
 
     -- * Creating a Request
-    , objectsUpdate
-    , ObjectsUpdate
+    , objectsUpdate'
+    , ObjectsUpdate'
 
     -- * Request Lenses
     , ouQuotaUser
@@ -50,23 +51,32 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsUpdate@ which the
--- 'ObjectsUpdate' request conforms to.
-type ObjectsUpdateAPI =
+-- 'ObjectsUpdate'' request conforms to.
+type ObjectsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" Text :>
-                       QueryParam "generation" Word64 :> Put '[JSON] Object
+             QueryParam "quotaUser" Text :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "ifGenerationMatch" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Word64 :>
+                             QueryParam "projection"
+                               StorageObjectsUpdateProjection
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "generation" Word64 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Put '[JSON] Object
 
 -- | Updates a data blob\'s associated metadata.
 --
--- /See:/ 'objectsUpdate' smart constructor.
-data ObjectsUpdate = ObjectsUpdate
+-- /See:/ 'objectsUpdate'' smart constructor.
+data ObjectsUpdate' = ObjectsUpdate'
     { _ouQuotaUser                :: !(Maybe Text)
     , _ouIfMetagenerationMatch    :: !(Maybe Word64)
     , _ouIfGenerationNotMatch     :: !(Maybe Word64)
@@ -77,11 +87,11 @@ data ObjectsUpdate = ObjectsUpdate
     , _ouKey                      :: !(Maybe Text)
     , _ouIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ouObject                   :: !Text
-    , _ouProjection               :: !(Maybe Text)
+    , _ouProjection               :: !(Maybe StorageObjectsUpdateProjection)
     , _ouOauthToken               :: !(Maybe Text)
     , _ouGeneration               :: !(Maybe Word64)
     , _ouFields                   :: !(Maybe Text)
-    , _ouAlt                      :: !Text
+    , _ouAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsUpdate'' with the minimum fields required to make a request.
@@ -117,12 +127,12 @@ data ObjectsUpdate = ObjectsUpdate
 -- * 'ouFields'
 --
 -- * 'ouAlt'
-objectsUpdate
+objectsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
-    -> ObjectsUpdate
-objectsUpdate pOuBucket_ pOuObject_ =
-    ObjectsUpdate
+    -> ObjectsUpdate'
+objectsUpdate' pOuBucket_ pOuObject_ =
+    ObjectsUpdate'
     { _ouQuotaUser = Nothing
     , _ouIfMetagenerationMatch = Nothing
     , _ouIfGenerationNotMatch = Nothing
@@ -137,7 +147,7 @@ objectsUpdate pOuBucket_ pOuObject_ =
     , _ouOauthToken = Nothing
     , _ouGeneration = Nothing
     , _ouFields = Nothing
-    , _ouAlt = "json"
+    , _ouAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,7 +211,7 @@ ouObject :: Lens' ObjectsUpdate' Text
 ouObject = lens _ouObject (\ s a -> s{_ouObject = a})
 
 -- | Set of properties to return. Defaults to full.
-ouProjection :: Lens' ObjectsUpdate' (Maybe Text)
+ouProjection :: Lens' ObjectsUpdate' (Maybe StorageObjectsUpdateProjection)
 ouProjection
   = lens _ouProjection (\ s a -> s{_ouProjection = a})
 
@@ -221,16 +231,16 @@ ouFields :: Lens' ObjectsUpdate' (Maybe Text)
 ouFields = lens _ouFields (\ s a -> s{_ouFields = a})
 
 -- | Data format for the response.
-ouAlt :: Lens' ObjectsUpdate' Text
+ouAlt :: Lens' ObjectsUpdate' Alt
 ouAlt = lens _ouAlt (\ s a -> s{_ouAlt = a})
 
 instance GoogleRequest ObjectsUpdate' where
         type Rs ObjectsUpdate' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsUpdate{..}
+        requestWithRoute r u ObjectsUpdate'{..}
           = go _ouQuotaUser _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
-              _ouPrettyPrint
+              (Just _ouPrettyPrint)
               _ouIfGenerationMatch
               _ouUserIp
               _ouBucket
@@ -241,7 +251,9 @@ instance GoogleRequest ObjectsUpdate' where
               _ouOauthToken
               _ouGeneration
               _ouFields
-              _ouAlt
+              (Just _ouAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsUpdateResource)
+                      r
                       u

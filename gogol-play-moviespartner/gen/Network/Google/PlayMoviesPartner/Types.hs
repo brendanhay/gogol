@@ -166,7 +166,7 @@ import           Network.Google.PlayMoviesPartner.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Play Movies Partner API.
-playMoviesPartnerURL :: BaseURL
+playMoviesPartnerURL :: BaseUrl
 playMoviesPartnerURL
   = BaseUrl Https
       "https://playmoviespartner.googleapis.com/"

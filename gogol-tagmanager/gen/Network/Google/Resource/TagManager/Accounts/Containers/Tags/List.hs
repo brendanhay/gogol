@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all GTM Tags of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsList@.
-module TagManager.Accounts.Containers.Tags.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
     (
     -- * REST Resource
-      AccountsContainersTagsListAPI
+      AccountsContainersTagsListResource
 
     -- * Creating a Request
-    , accountsContainersTagsList
-    , AccountsContainersTagsList
+    , accountsContainersTagsList'
+    , AccountsContainersTagsList'
 
     -- * Request Lenses
     , actlcQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTagsList@ which the
--- 'AccountsContainersTagsList' request conforms to.
-type AccountsContainersTagsListAPI =
+-- 'AccountsContainersTagsList'' request conforms to.
+type AccountsContainersTagsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "tags" :> Get '[JSON] ListTagsResponse
+             "tags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ListTagsResponse
 
 -- | Lists all GTM Tags of a Container.
 --
--- /See:/ 'accountsContainersTagsList' smart constructor.
-data AccountsContainersTagsList = AccountsContainersTagsList
+-- /See:/ 'accountsContainersTagsList'' smart constructor.
+data AccountsContainersTagsList' = AccountsContainersTagsList'
     { _actlcQuotaUser   :: !(Maybe Text)
     , _actlcPrettyPrint :: !Bool
     , _actlcContainerId :: !Text
@@ -64,7 +72,7 @@ data AccountsContainersTagsList = AccountsContainersTagsList
     , _actlcKey         :: !(Maybe Text)
     , _actlcOauthToken  :: !(Maybe Text)
     , _actlcFields      :: !(Maybe Text)
-    , _actlcAlt         :: !Text
+    , _actlcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsList'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsContainersTagsList = AccountsContainersTagsList
 -- * 'actlcFields'
 --
 -- * 'actlcAlt'
-accountsContainersTagsList
+accountsContainersTagsList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTagsList
-accountsContainersTagsList pActlcContainerId_ pActlcAccountId_ =
-    AccountsContainersTagsList
+    -> AccountsContainersTagsList'
+accountsContainersTagsList' pActlcContainerId_ pActlcAccountId_ =
+    AccountsContainersTagsList'
     { _actlcQuotaUser = Nothing
     , _actlcPrettyPrint = True
     , _actlcContainerId = pActlcContainerId_
@@ -102,7 +110,7 @@ accountsContainersTagsList pActlcContainerId_ pActlcAccountId_ =
     , _actlcKey = Nothing
     , _actlcOauthToken = Nothing
     , _actlcFields = Nothing
-    , _actlcAlt = "json"
+    , _actlcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ actlcFields
   = lens _actlcFields (\ s a -> s{_actlcFields = a})
 
 -- | Data format for the response.
-actlcAlt :: Lens' AccountsContainersTagsList' Text
+actlcAlt :: Lens' AccountsContainersTagsList' Alt
 actlcAlt = lens _actlcAlt (\ s a -> s{_actlcAlt = a})
 
 instance GoogleRequest AccountsContainersTagsList'
@@ -163,17 +171,17 @@ instance GoogleRequest AccountsContainersTagsList'
         type Rs AccountsContainersTagsList' =
              ListTagsResponse
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersTagsList{..}
-          = go _actlcQuotaUser _actlcPrettyPrint
+        requestWithRoute r u AccountsContainersTagsList'{..}
+          = go _actlcQuotaUser (Just _actlcPrettyPrint)
               _actlcContainerId
               _actlcUserIp
               _actlcAccountId
               _actlcKey
               _actlcOauthToken
               _actlcFields
-              _actlcAlt
+              (Just _actlcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTagsListAPI)
+                      (Proxy :: Proxy AccountsContainersTagsListResource)
                       r
                       u

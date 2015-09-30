@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,145 +20,157 @@
 -- | Deletes the specified image resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesDelete@.
-module Compute.Images.Delete
+module Network.Google.Resource.Compute.Images.Delete
     (
     -- * REST Resource
-      ImagesDeleteAPI
+      ImagesDeleteResource
 
     -- * Creating a Request
-    , imagesDelete
-    , ImagesDelete
+    , imagesDelete'
+    , ImagesDelete'
 
     -- * Request Lenses
-    , iQuotaUser
-    , iImage
-    , iPrettyPrint
-    , iProject
-    , iUserIp
-    , iKey
-    , iOauthToken
-    , iFields
-    , iAlt
+    , idQuotaUser
+    , idImage
+    , idPrettyPrint
+    , idProject
+    , idUserIp
+    , idKey
+    , idOauthToken
+    , idFields
+    , idAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeImagesDelete@ which the
--- 'ImagesDelete' request conforms to.
-type ImagesDeleteAPI =
+-- 'ImagesDelete'' request conforms to.
+type ImagesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "images" :>
-           Capture "image" Text :> Delete '[JSON] Operation
+           Capture "image" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified image resource.
 --
--- /See:/ 'imagesDelete' smart constructor.
-data ImagesDelete = ImagesDelete
-    { _iQuotaUser   :: !(Maybe Text)
-    , _iImage       :: !Text
-    , _iPrettyPrint :: !Bool
-    , _iProject     :: !Text
-    , _iUserIp      :: !(Maybe Text)
-    , _iKey         :: !(Maybe Text)
-    , _iOauthToken  :: !(Maybe Text)
-    , _iFields      :: !(Maybe Text)
-    , _iAlt         :: !Text
+-- /See:/ 'imagesDelete'' smart constructor.
+data ImagesDelete' = ImagesDelete'
+    { _idQuotaUser   :: !(Maybe Text)
+    , _idImage       :: !Text
+    , _idPrettyPrint :: !Bool
+    , _idProject     :: !Text
+    , _idUserIp      :: !(Maybe Text)
+    , _idKey         :: !(Maybe Text)
+    , _idOauthToken  :: !(Maybe Text)
+    , _idFields      :: !(Maybe Text)
+    , _idAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iQuotaUser'
+-- * 'idQuotaUser'
 --
--- * 'iImage'
+-- * 'idImage'
 --
--- * 'iPrettyPrint'
+-- * 'idPrettyPrint'
 --
--- * 'iProject'
+-- * 'idProject'
 --
--- * 'iUserIp'
+-- * 'idUserIp'
 --
--- * 'iKey'
+-- * 'idKey'
 --
--- * 'iOauthToken'
+-- * 'idOauthToken'
 --
--- * 'iFields'
+-- * 'idFields'
 --
--- * 'iAlt'
-imagesDelete
+-- * 'idAlt'
+imagesDelete'
     :: Text -- ^ 'image'
     -> Text -- ^ 'project'
-    -> ImagesDelete
-imagesDelete pIImage_ pIProject_ =
-    ImagesDelete
-    { _iQuotaUser = Nothing
-    , _iImage = pIImage_
-    , _iPrettyPrint = True
-    , _iProject = pIProject_
-    , _iUserIp = Nothing
-    , _iKey = Nothing
-    , _iOauthToken = Nothing
-    , _iFields = Nothing
-    , _iAlt = "json"
+    -> ImagesDelete'
+imagesDelete' pIdImage_ pIdProject_ =
+    ImagesDelete'
+    { _idQuotaUser = Nothing
+    , _idImage = pIdImage_
+    , _idPrettyPrint = True
+    , _idProject = pIdProject_
+    , _idUserIp = Nothing
+    , _idKey = Nothing
+    , _idOauthToken = Nothing
+    , _idFields = Nothing
+    , _idAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-iQuotaUser :: Lens' ImagesDelete' (Maybe Text)
-iQuotaUser
-  = lens _iQuotaUser (\ s a -> s{_iQuotaUser = a})
+idQuotaUser :: Lens' ImagesDelete' (Maybe Text)
+idQuotaUser
+  = lens _idQuotaUser (\ s a -> s{_idQuotaUser = a})
 
 -- | Name of the image resource to delete.
-iImage :: Lens' ImagesDelete' Text
-iImage = lens _iImage (\ s a -> s{_iImage = a})
+idImage :: Lens' ImagesDelete' Text
+idImage = lens _idImage (\ s a -> s{_idImage = a})
 
 -- | Returns response with indentations and line breaks.
-iPrettyPrint :: Lens' ImagesDelete' Bool
-iPrettyPrint
-  = lens _iPrettyPrint (\ s a -> s{_iPrettyPrint = a})
+idPrettyPrint :: Lens' ImagesDelete' Bool
+idPrettyPrint
+  = lens _idPrettyPrint
+      (\ s a -> s{_idPrettyPrint = a})
 
 -- | Project ID for this request.
-iProject :: Lens' ImagesDelete' Text
-iProject = lens _iProject (\ s a -> s{_iProject = a})
+idProject :: Lens' ImagesDelete' Text
+idProject
+  = lens _idProject (\ s a -> s{_idProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iUserIp :: Lens' ImagesDelete' (Maybe Text)
-iUserIp = lens _iUserIp (\ s a -> s{_iUserIp = a})
+idUserIp :: Lens' ImagesDelete' (Maybe Text)
+idUserIp = lens _idUserIp (\ s a -> s{_idUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iKey :: Lens' ImagesDelete' (Maybe Text)
-iKey = lens _iKey (\ s a -> s{_iKey = a})
+idKey :: Lens' ImagesDelete' (Maybe Text)
+idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iOauthToken :: Lens' ImagesDelete' (Maybe Text)
-iOauthToken
-  = lens _iOauthToken (\ s a -> s{_iOauthToken = a})
+idOauthToken :: Lens' ImagesDelete' (Maybe Text)
+idOauthToken
+  = lens _idOauthToken (\ s a -> s{_idOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-iFields :: Lens' ImagesDelete' (Maybe Text)
-iFields = lens _iFields (\ s a -> s{_iFields = a})
+idFields :: Lens' ImagesDelete' (Maybe Text)
+idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 -- | Data format for the response.
-iAlt :: Lens' ImagesDelete' Text
-iAlt = lens _iAlt (\ s a -> s{_iAlt = a})
+idAlt :: Lens' ImagesDelete' Alt
+idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
 
 instance GoogleRequest ImagesDelete' where
         type Rs ImagesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesDelete{..}
-          = go _iQuotaUser _iImage _iPrettyPrint _iProject
-              _iUserIp
-              _iKey
-              _iOauthToken
-              _iFields
-              _iAlt
+        requestWithRoute r u ImagesDelete'{..}
+          = go _idQuotaUser _idImage (Just _idPrettyPrint)
+              _idProject
+              _idUserIp
+              _idKey
+              _idOauthToken
+              _idFields
+              (Just _idAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ImagesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ImagesDeleteResource)
+                      r
                       u

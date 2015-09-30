@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return the metagame configuration data for the calling application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameGetMetagameConfig@.
-module Games.Metagame.GetMetagameConfig
+module Network.Google.Resource.Games.Metagame.GetMetagameConfig
     (
     -- * REST Resource
-      MetagameGetMetagameConfigAPI
+      MetagameGetMetagameConfigResource
 
     -- * Creating a Request
-    , metagameGetMetagameConfig
-    , MetagameGetMetagameConfig
+    , metagameGetMetagameConfig'
+    , MetagameGetMetagameConfig'
 
     -- * Request Lenses
     , mgmcQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesMetagameGetMetagameConfig@ which the
--- 'MetagameGetMetagameConfig' request conforms to.
-type MetagameGetMetagameConfigAPI =
-     "metagameConfig" :> Get '[JSON] MetagameConfig
+-- 'MetagameGetMetagameConfig'' request conforms to.
+type MetagameGetMetagameConfigResource =
+     "metagameConfig" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] MetagameConfig
 
 -- | Return the metagame configuration data for the calling application.
 --
--- /See:/ 'metagameGetMetagameConfig' smart constructor.
-data MetagameGetMetagameConfig = MetagameGetMetagameConfig
+-- /See:/ 'metagameGetMetagameConfig'' smart constructor.
+data MetagameGetMetagameConfig' = MetagameGetMetagameConfig'
     { _mgmcQuotaUser   :: !(Maybe Text)
     , _mgmcPrettyPrint :: !Bool
     , _mgmcUserIp      :: !(Maybe Text)
     , _mgmcKey         :: !(Maybe Text)
     , _mgmcOauthToken  :: !(Maybe Text)
     , _mgmcFields      :: !(Maybe Text)
-    , _mgmcAlt         :: !Text
+    , _mgmcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data MetagameGetMetagameConfig = MetagameGetMetagameConfig
 -- * 'mgmcFields'
 --
 -- * 'mgmcAlt'
-metagameGetMetagameConfig
-    :: MetagameGetMetagameConfig
-metagameGetMetagameConfig =
-    MetagameGetMetagameConfig
+metagameGetMetagameConfig'
+    :: MetagameGetMetagameConfig'
+metagameGetMetagameConfig' =
+    MetagameGetMetagameConfig'
     { _mgmcQuotaUser = Nothing
     , _mgmcPrettyPrint = True
     , _mgmcUserIp = Nothing
     , _mgmcKey = Nothing
     , _mgmcOauthToken = Nothing
     , _mgmcFields = Nothing
-    , _mgmcAlt = "json"
+    , _mgmcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,21 +135,22 @@ mgmcFields
   = lens _mgmcFields (\ s a -> s{_mgmcFields = a})
 
 -- | Data format for the response.
-mgmcAlt :: Lens' MetagameGetMetagameConfig' Text
+mgmcAlt :: Lens' MetagameGetMetagameConfig' Alt
 mgmcAlt = lens _mgmcAlt (\ s a -> s{_mgmcAlt = a})
 
 instance GoogleRequest MetagameGetMetagameConfig'
          where
         type Rs MetagameGetMetagameConfig' = MetagameConfig
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u MetagameGetMetagameConfig{..}
-          = go _mgmcQuotaUser _mgmcPrettyPrint _mgmcUserIp
+        requestWithRoute r u MetagameGetMetagameConfig'{..}
+          = go _mgmcQuotaUser (Just _mgmcPrettyPrint)
+              _mgmcUserIp
               _mgmcKey
               _mgmcOauthToken
               _mgmcFields
-              _mgmcAlt
+              (Just _mgmcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetagameGetMetagameConfigAPI)
+                      (Proxy :: Proxy MetagameGetMetagameConfigResource)
                       r
                       u

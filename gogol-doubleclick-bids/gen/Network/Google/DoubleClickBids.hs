@@ -27,28 +27,28 @@ module Network.Google.DoubleClickBids
     -- * REST Resources
 
     -- ** DoubleclickbidmanagerLineitemsDownloadlineitems
-    , module Doubleclickbidmanager.Lineitems.Downloadlineitems
+    , module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Downloadlineitems
 
     -- ** DoubleclickbidmanagerLineitemsUploadlineitems
-    , module Doubleclickbidmanager.Lineitems.Uploadlineitems
+    , module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Uploadlineitems
 
     -- ** DoubleclickbidmanagerQueriesCreatequery
-    , module Doubleclickbidmanager.Queries.Createquery
+    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Createquery
 
     -- ** DoubleclickbidmanagerQueriesDeletequery
-    , module Doubleclickbidmanager.Queries.Deletequery
+    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Deletequery
 
     -- ** DoubleclickbidmanagerQueriesGetquery
-    , module Doubleclickbidmanager.Queries.Getquery
+    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Getquery
 
     -- ** DoubleclickbidmanagerQueriesListqueries
-    , module Doubleclickbidmanager.Queries.Listqueries
+    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Listqueries
 
     -- ** DoubleclickbidmanagerQueriesRunquery
-    , module Doubleclickbidmanager.Queries.Runquery
+    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Runquery
 
     -- ** DoubleclickbidmanagerReportsListreports
-    , module Doubleclickbidmanager.Reports.Listreports
+    , module Network.Google.Resource.Doubleclickbidmanager.Reports.Listreports
 
     -- * Types
 
@@ -57,6 +57,9 @@ module Network.Google.DoubleClickBids
     , listReportsResponse
     , lrrReports
     , lrrKind
+
+    -- ** QueryMetadataFormat
+    , QueryMetadataFormat (..)
 
     -- ** QueryMetadata
     , QueryMetadata
@@ -72,6 +75,9 @@ module Network.Google.DoubleClickBids
     , qmReportCount
     , qmTitle
     , qmSendNotification
+
+    -- ** ParametersType
+    , ParametersType (..)
 
     -- ** UploadLineItemsRequest
     , UploadLineItemsRequest
@@ -94,6 +100,9 @@ module Network.Google.DoubleClickBids
     , rqrReportDataStartTimeMs
     , rqrTimezoneCode
 
+    -- ** ParametersGroupBys
+    , ParametersGroupBys (..)
+
     -- ** ListQueriesResponse
     , ListQueriesResponse
     , listQueriesResponse
@@ -107,10 +116,16 @@ module Network.Google.DoubleClickBids
     , dlirFormat
     , dlirFilterIds
 
+    -- ** DownloadLineItemsRequestFilterType
+    , DownloadLineItemsRequestFilterType (..)
+
     -- ** UploadLineItemsResponse
     , UploadLineItemsResponse
     , uploadLineItemsResponse
     , ulirUploadStatus
+
+    -- ** QueryMetadataDataRange
+    , QueryMetadataDataRange (..)
 
     -- ** ReportMetadata
     , ReportMetadata
@@ -119,6 +134,9 @@ module Network.Google.DoubleClickBids
     , rmReportDataEndTimeMs
     , rmGoogleCloudStoragePath
     , rmReportDataStartTimeMs
+
+    -- ** QueryScheduleFrequency
+    , QueryScheduleFrequency (..)
 
     -- ** Report
     , Report
@@ -142,6 +160,9 @@ module Network.Google.DoubleClickBids
     , reportKey
     , rkQueryId
     , rkReportId
+
+    -- ** UploadLineItemsRequestFormat
+    , UploadLineItemsRequestFormat (..)
 
     -- ** UploadStatus
     , UploadStatus
@@ -170,6 +191,9 @@ module Network.Google.DoubleClickBids
     , rsFormat
     , rsFailure
 
+    -- ** FilterPairType
+    , FilterPairType (..)
+
     -- ** Query
     , Query
     , query
@@ -191,10 +215,31 @@ module Network.Google.DoubleClickBids
     , pGroupBys
     , pType
 
+    -- ** RunQueryRequestDataRange
+    , RunQueryRequestDataRange (..)
+
+    -- ** ReportStatusState
+    , ReportStatusState (..)
+
+    -- ** ParametersMetrics
+    , ParametersMetrics (..)
+
+    -- ** ReportFailureErrorCode
+    , ReportFailureErrorCode (..)
+
     -- ** ReportFailure
     , ReportFailure
     , reportFailure
     , rfErrorCode
+
+    -- ** DownloadLineItemsRequestFormat
+    , DownloadLineItemsRequestFormat (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ReportStatusFormat
+    , ReportStatusFormat (..)
     ) where
 
 import           Network.Google.DoubleClickBids.Types
@@ -213,7 +258,13 @@ TODO
 -}
 
 type DoubleClickBidsAPI =
-     Queries :<|> Reports :<|> Lineitems
+     QueriesGetqueryResource :<|> QueriesRunqueryResource
+       :<|> QueriesDeletequeryResource
+       :<|> QueriesCreatequeryResource
+       :<|> QueriesListqueriesResource
+       :<|> ReportsListreportsResource
+       :<|> LineitemsUploadlineitemsResource
+       :<|> LineitemsDownloadlineitemsResource
 
 doubleClickBidsAPI :: Proxy DoubleClickBidsAPI
 doubleClickBidsAPI = Proxy

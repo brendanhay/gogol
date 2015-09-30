@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a log service sink. If the sink does not exist, it is created.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogServicesSinksUpdate@.
-module Logging.Projects.LogServices.Sinks.Update
+module Network.Google.Resource.Logging.Projects.LogServices.Sinks.Update
     (
     -- * REST Resource
-      ProjectsLogServicesSinksUpdateAPI
+      ProjectsLogServicesSinksUpdateResource
 
     -- * Creating a Request
-    , projectsLogServicesSinksUpdate
-    , ProjectsLogServicesSinksUpdate
+    , projectsLogServicesSinksUpdate'
+    , ProjectsLogServicesSinksUpdate'
 
     -- * Request Lenses
     , plssuXgafv
@@ -51,20 +52,34 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksUpdate@ which the
--- 'ProjectsLogServicesSinksUpdate' request conforms to.
-type ProjectsLogServicesSinksUpdateAPI =
+-- 'ProjectsLogServicesSinksUpdate'' request conforms to.
+type ProjectsLogServicesSinksUpdateResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logServices" :>
              Capture "logServicesId" Text :>
                "sinks" :>
-                 Capture "sinksId" Text :> Put '[JSON] LogSink
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Put '[JSON] LogSink
 
 -- | Updates a log service sink. If the sink does not exist, it is created.
 --
--- /See:/ 'projectsLogServicesSinksUpdate' smart constructor.
-data ProjectsLogServicesSinksUpdate = ProjectsLogServicesSinksUpdate
+-- /See:/ 'projectsLogServicesSinksUpdate'' smart constructor.
+data ProjectsLogServicesSinksUpdate' = ProjectsLogServicesSinksUpdate'
     { _plssuXgafv          :: !(Maybe Text)
     , _plssuQuotaUser      :: !(Maybe Text)
     , _plssuPrettyPrint    :: !Bool
@@ -118,13 +133,13 @@ data ProjectsLogServicesSinksUpdate = ProjectsLogServicesSinksUpdate
 -- * 'plssuCallback'
 --
 -- * 'plssuAlt'
-projectsLogServicesSinksUpdate
+projectsLogServicesSinksUpdate'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsLogServicesSinksUpdate
-projectsLogServicesSinksUpdate pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ =
-    ProjectsLogServicesSinksUpdate
+    -> ProjectsLogServicesSinksUpdate'
+projectsLogServicesSinksUpdate' pPlssuLogServicesId_ pPlssuProjectsId_ pPlssuSinksId_ =
+    ProjectsLogServicesSinksUpdate'
     { _plssuXgafv = Nothing
     , _plssuQuotaUser = Nothing
     , _plssuPrettyPrint = True
@@ -240,10 +255,11 @@ instance GoogleRequest
         type Rs ProjectsLogServicesSinksUpdate' = LogSink
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
-          ProjectsLogServicesSinksUpdate{..}
-          = go _plssuXgafv _plssuQuotaUser _plssuPrettyPrint
+          ProjectsLogServicesSinksUpdate'{..}
+          = go _plssuXgafv _plssuQuotaUser
+              (Just _plssuPrettyPrint)
               _plssuUploadProtocol
-              _plssuPp
+              (Just _plssuPp)
               _plssuAccessToken
               _plssuUploadType
               _plssuBearerToken
@@ -254,9 +270,10 @@ instance GoogleRequest
               _plssuSinksId
               _plssuFields
               _plssuCallback
-              _plssuAlt
+              (Just _plssuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogServicesSinksUpdateAPI)
+                      (Proxy ::
+                         Proxy ProjectsLogServicesSinksUpdateResource)
                       r
                       u

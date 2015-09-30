@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference> for @GroupsmigrationArchiveInsert@.
-module GroupsMigration.Archive.Insert
+module Network.Google.Resource.GroupsMigration.Archive.Insert
     (
     -- * REST Resource
-      ArchiveInsertAPI
+      ArchiveInsertResource
 
     -- * Creating a Request
-    , archiveInsert
-    , ArchiveInsert
+    , archiveInsert'
+    , ArchiveInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.GroupsMigration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsmigrationArchiveInsert@ which the
--- 'ArchiveInsert' request conforms to.
-type ArchiveInsertAPI =
+-- 'ArchiveInsert'' request conforms to.
+type ArchiveInsertResource =
      Capture "groupId" Text :>
-       "archive" :> Post '[JSON] Groups
+       "archive" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
--- /See:/ 'archiveInsert' smart constructor.
-data ArchiveInsert = ArchiveInsert
+-- /See:/ 'archiveInsert'' smart constructor.
+data ArchiveInsert' = ArchiveInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ArchiveInsert = ArchiveInsert
     , _aiGroupId     :: !Text
     , _aiOauthToken  :: !(Maybe Text)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ArchiveInsert'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ArchiveInsert = ArchiveInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-archiveInsert
+archiveInsert'
     :: Text -- ^ 'groupId'
-    -> ArchiveInsert
-archiveInsert pAiGroupId_ =
-    ArchiveInsert
+    -> ArchiveInsert'
+archiveInsert' pAiGroupId_ =
+    ArchiveInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiUserIp = Nothing
@@ -93,7 +101,7 @@ archiveInsert pAiGroupId_ =
     , _aiGroupId = pAiGroupId_
     , _aiOauthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ aiFields :: Lens' ArchiveInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' ArchiveInsert' Text
+aiAlt :: Lens' ArchiveInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
         request = requestWithRoute defReq groupsMigrationURL
-        requestWithRoute r u ArchiveInsert{..}
-          = go _aiQuotaUser _aiPrettyPrint _aiUserIp _aiKey
+        requestWithRoute r u ArchiveInsert'{..}
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIp
+              _aiKey
               _aiGroupId
               _aiOauthToken
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ArchiveInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ArchiveInsertResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns all tasks in the specified task list.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasksList@.
-module Tasks.Tasks.List
+module Network.Google.Resource.Tasks.Tasks.List
     (
     -- * REST Resource
-      TasksListAPI
+      TasksListResource
 
     -- * Creating a Request
-    , tasksList
-    , TasksList
+    , tasksList'
+    , TasksList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -53,26 +54,34 @@ import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TasksTasksList@ which the
--- 'TasksList' request conforms to.
-type TasksListAPI =
+-- 'TasksList'' request conforms to.
+type TasksListResource =
      "lists" :>
        Capture "tasklist" Text :>
          "tasks" :>
-           QueryParam "dueMax" Text :>
-             QueryParam "showDeleted" Bool :>
-               QueryParam "showCompleted" Bool :>
-                 QueryParam "dueMin" Text :>
-                   QueryParam "showHidden" Bool :>
-                     QueryParam "completedMax" Text :>
-                       QueryParam "updatedMin" Text :>
-                         QueryParam "completedMin" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Int64 :> Get '[JSON] Tasks
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "dueMax" Text :>
+                   QueryParam "showDeleted" Bool :>
+                     QueryParam "showCompleted" Bool :>
+                       QueryParam "dueMin" Text :>
+                         QueryParam "showHidden" Bool :>
+                           QueryParam "completedMax" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "updatedMin" Text :>
+                                 QueryParam "completedMin" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Int64 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] Tasks
 
 -- | Returns all tasks in the specified task list.
 --
--- /See:/ 'tasksList' smart constructor.
-data TasksList = TasksList
+-- /See:/ 'tasksList'' smart constructor.
+data TasksList' = TasksList'
     { _tlQuotaUser     :: !(Maybe Text)
     , _tlPrettyPrint   :: !Bool
     , _tlUserIp        :: !(Maybe Text)
@@ -90,7 +99,7 @@ data TasksList = TasksList
     , _tlOauthToken    :: !(Maybe Text)
     , _tlMaxResults    :: !(Maybe Int64)
     , _tlFields        :: !(Maybe Text)
-    , _tlAlt           :: !Text
+    , _tlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
@@ -132,11 +141,11 @@ data TasksList = TasksList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-tasksList
+tasksList'
     :: Text -- ^ 'tasklist'
-    -> TasksList
-tasksList pTlTasklist_ =
-    TasksList
+    -> TasksList'
+tasksList' pTlTasklist_ =
+    TasksList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlUserIp = Nothing
@@ -154,7 +163,7 @@ tasksList pTlTasklist_ =
     , _tlOauthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -258,14 +267,15 @@ tlFields :: Lens' TasksList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TasksList' Text
+tlAlt :: Lens' TasksList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks
         request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasksList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlUserIp _tlDueMax
+        requestWithRoute r u TasksList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+              _tlDueMax
               _tlShowDeleted
               _tlShowCompleted
               _tlDueMin
@@ -279,6 +289,8 @@ instance GoogleRequest TasksList' where
               _tlOauthToken
               _tlMaxResults
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksListResource)
+                      r
+                      u

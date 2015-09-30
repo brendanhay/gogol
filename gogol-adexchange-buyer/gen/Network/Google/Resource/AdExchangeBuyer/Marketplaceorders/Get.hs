@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get an order given its id
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceordersGet@.
-module AdExchangeBuyer.Marketplaceorders.Get
+module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Get
     (
     -- * REST Resource
-      MarketplaceordersGetAPI
+      MarketplaceordersGetResource
 
     -- * Creating a Request
-    , marketplaceordersGet
-    , MarketplaceordersGet
+    , marketplaceordersGet'
+    , MarketplaceordersGet'
 
     -- * Request Lenses
     , marQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceordersGet@ which the
--- 'MarketplaceordersGet' request conforms to.
-type MarketplaceordersGetAPI =
+-- 'MarketplaceordersGet'' request conforms to.
+type MarketplaceordersGetResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
-         Get '[JSON] MarketplaceOrder
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] MarketplaceOrder
 
 -- | Get an order given its id
 --
--- /See:/ 'marketplaceordersGet' smart constructor.
-data MarketplaceordersGet = MarketplaceordersGet
+-- /See:/ 'marketplaceordersGet'' smart constructor.
+data MarketplaceordersGet' = MarketplaceordersGet'
     { _marQuotaUser   :: !(Maybe Text)
     , _marPrettyPrint :: !Bool
     , _marUserIp      :: !(Maybe Text)
@@ -60,7 +67,7 @@ data MarketplaceordersGet = MarketplaceordersGet
     , _marOauthToken  :: !(Maybe Text)
     , _marOrderId     :: !Text
     , _marFields      :: !(Maybe Text)
-    , _marAlt         :: !Text
+    , _marAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceordersGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data MarketplaceordersGet = MarketplaceordersGet
 -- * 'marFields'
 --
 -- * 'marAlt'
-marketplaceordersGet
+marketplaceordersGet'
     :: Text -- ^ 'orderId'
-    -> MarketplaceordersGet
-marketplaceordersGet pMarOrderId_ =
-    MarketplaceordersGet
+    -> MarketplaceordersGet'
+marketplaceordersGet' pMarOrderId_ =
+    MarketplaceordersGet'
     { _marQuotaUser = Nothing
     , _marPrettyPrint = True
     , _marUserIp = Nothing
@@ -94,7 +101,7 @@ marketplaceordersGet pMarOrderId_ =
     , _marOauthToken = Nothing
     , _marOrderId = pMarOrderId_
     , _marFields = Nothing
-    , _marAlt = "json"
+    , _marAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +146,21 @@ marFields
   = lens _marFields (\ s a -> s{_marFields = a})
 
 -- | Data format for the response.
-marAlt :: Lens' MarketplaceordersGet' Text
+marAlt :: Lens' MarketplaceordersGet' Alt
 marAlt = lens _marAlt (\ s a -> s{_marAlt = a})
 
 instance GoogleRequest MarketplaceordersGet' where
         type Rs MarketplaceordersGet' = MarketplaceOrder
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceordersGet{..}
-          = go _marQuotaUser _marPrettyPrint _marUserIp _marKey
+        requestWithRoute r u MarketplaceordersGet'{..}
+          = go _marQuotaUser (Just _marPrettyPrint) _marUserIp
+              _marKey
               _marOauthToken
               _marOrderId
               _marFields
-              _marAlt
+              (Just _marAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplaceordersGetAPI)
+                      (Proxy :: Proxy MarketplaceordersGetResource)
                       r
                       u

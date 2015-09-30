@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified BackendService resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesGet@.
-module Compute.BackendServices.Get
+module Network.Google.Resource.Compute.BackendServices.Get
     (
     -- * REST Resource
-      BackendServicesGetAPI
+      BackendServicesGetResource
 
     -- * Creating a Request
-    , backendServicesGet
-    , BackendServicesGet
+    , backendServicesGet'
+    , BackendServicesGet'
 
     -- * Request Lenses
     , bsgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeBackendServicesGet@ which the
--- 'BackendServicesGet' request conforms to.
-type BackendServicesGetAPI =
+-- 'BackendServicesGet'' request conforms to.
+type BackendServicesGetResource =
      Capture "project" Text :>
        "global" :>
          "backendServices" :>
            Capture "backendService" Text :>
-             Get '[JSON] BackendService
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] BackendService
 
 -- | Returns the specified BackendService resource.
 --
--- /See:/ 'backendServicesGet' smart constructor.
-data BackendServicesGet = BackendServicesGet
+-- /See:/ 'backendServicesGet'' smart constructor.
+data BackendServicesGet' = BackendServicesGet'
     { _bsgQuotaUser      :: !(Maybe Text)
     , _bsgPrettyPrint    :: !Bool
     , _bsgProject        :: !Text
@@ -63,7 +70,7 @@ data BackendServicesGet = BackendServicesGet
     , _bsgKey            :: !(Maybe Text)
     , _bsgOauthToken     :: !(Maybe Text)
     , _bsgFields         :: !(Maybe Text)
-    , _bsgAlt            :: !Text
+    , _bsgAlt            :: !Alt
     , _bsgBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +95,12 @@ data BackendServicesGet = BackendServicesGet
 -- * 'bsgAlt'
 --
 -- * 'bsgBackendService'
-backendServicesGet
+backendServicesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'backendService'
-    -> BackendServicesGet
-backendServicesGet pBsgProject_ pBsgBackendService_ =
-    BackendServicesGet
+    -> BackendServicesGet'
+backendServicesGet' pBsgProject_ pBsgBackendService_ =
+    BackendServicesGet'
     { _bsgQuotaUser = Nothing
     , _bsgPrettyPrint = True
     , _bsgProject = pBsgProject_
@@ -101,7 +108,7 @@ backendServicesGet pBsgProject_ pBsgBackendService_ =
     , _bsgKey = Nothing
     , _bsgOauthToken = Nothing
     , _bsgFields = Nothing
-    , _bsgAlt = "json"
+    , _bsgAlt = JSON
     , _bsgBackendService = pBsgBackendService_
     }
 
@@ -147,7 +154,7 @@ bsgFields
   = lens _bsgFields (\ s a -> s{_bsgFields = a})
 
 -- | Data format for the response.
-bsgAlt :: Lens' BackendServicesGet' Text
+bsgAlt :: Lens' BackendServicesGet' Alt
 bsgAlt = lens _bsgAlt (\ s a -> s{_bsgAlt = a})
 
 -- | Name of the BackendService resource to return.
@@ -159,16 +166,16 @@ bsgBackendService
 instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesGet{..}
-          = go _bsgQuotaUser _bsgPrettyPrint _bsgProject
+        requestWithRoute r u BackendServicesGet'{..}
+          = go _bsgQuotaUser (Just _bsgPrettyPrint) _bsgProject
               _bsgUserIp
               _bsgKey
               _bsgOauthToken
               _bsgFields
-              _bsgAlt
+              (Just _bsgAlt)
               _bsgBackendService
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackendServicesGetAPI)
+                      (Proxy :: Proxy BackendServicesGetResource)
                       r
                       u

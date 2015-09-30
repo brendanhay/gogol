@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List available models.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsList@.
-module Prediction.Trainedmodels.List
+module Network.Google.Resource.Prediction.Trainedmodels.List
     (
     -- * REST Resource
-      TrainedmodelsListAPI
+      TrainedmodelsListResource
 
     -- * Creating a Request
-    , trainedmodelsList
-    , TrainedmodelsList
+    , trainedmodelsList'
+    , TrainedmodelsList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsList@ which the
--- 'TrainedmodelsList' request conforms to.
-type TrainedmodelsListAPI =
+-- 'TrainedmodelsList'' request conforms to.
+type TrainedmodelsListResource =
      Capture "project" Text :>
        "trainedmodels" :>
          "list" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :> Get '[JSON] List
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] List
 
 -- | List available models.
 --
--- /See:/ 'trainedmodelsList' smart constructor.
-data TrainedmodelsList = TrainedmodelsList
+-- /See:/ 'trainedmodelsList'' smart constructor.
+data TrainedmodelsList' = TrainedmodelsList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlProject     :: !Text
@@ -66,7 +74,7 @@ data TrainedmodelsList = TrainedmodelsList
     , _tlOauthToken  :: !(Maybe Text)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsList'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data TrainedmodelsList = TrainedmodelsList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-trainedmodelsList
+trainedmodelsList'
     :: Text -- ^ 'project'
-    -> TrainedmodelsList
-trainedmodelsList pTlProject_ =
-    TrainedmodelsList
+    -> TrainedmodelsList'
+trainedmodelsList' pTlProject_ =
+    TrainedmodelsList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlProject = pTlProject_
@@ -106,7 +114,7 @@ trainedmodelsList pTlProject_ =
     , _tlOauthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,22 +166,23 @@ tlFields :: Lens' TrainedmodelsList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TrainedmodelsList' Text
+tlAlt :: Lens' TrainedmodelsList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TrainedmodelsList' where
         type Rs TrainedmodelsList' = List
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlProject _tlUserIp
+        requestWithRoute r u TrainedmodelsList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlProject
+              _tlUserIp
               _tlKey
               _tlPageToken
               _tlOauthToken
               _tlMaxResults
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsListAPI)
+                      (Proxy :: Proxy TrainedmodelsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return a list of books uploaded by the current user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesUseruploadedList@.
-module Books.Volumes.Useruploaded.List
+module Network.Google.Resource.Books.Volumes.Useruploaded.List
     (
     -- * REST Resource
-      VolumesUseruploadedListAPI
+      VolumesUseruploadedListResource
 
     -- * Creating a Request
-    , volumesUseruploadedList
-    , VolumesUseruploadedList
+    , volumesUseruploadedList'
+    , VolumesUseruploadedList'
 
     -- * Request Lenses
     , vulProcessingState
@@ -48,22 +49,31 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesUseruploadedList@ which the
--- 'VolumesUseruploadedList' request conforms to.
-type VolumesUseruploadedListAPI =
+-- 'VolumesUseruploadedList'' request conforms to.
+type VolumesUseruploadedListResource =
      "volumes" :>
        "useruploaded" :>
-         QueryParams "processingState" Text :>
-           QueryParam "locale" Text :>
-             QueryParams "volumeId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :> Get '[JSON] Volumes
+         QueryParams "processingState"
+           BooksVolumesUseruploadedListProcessingState
+           :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "key" Text :>
+                     QueryParams "volumeId" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "startIndex" Word32 :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] Volumes
 
 -- | Return a list of books uploaded by the current user.
 --
--- /See:/ 'volumesUseruploadedList' smart constructor.
-data VolumesUseruploadedList = VolumesUseruploadedList
-    { _vulProcessingState :: !(Maybe Text)
+-- /See:/ 'volumesUseruploadedList'' smart constructor.
+data VolumesUseruploadedList' = VolumesUseruploadedList'
+    { _vulProcessingState :: !(Maybe BooksVolumesUseruploadedListProcessingState)
     , _vulQuotaUser       :: !(Maybe Text)
     , _vulPrettyPrint     :: !Bool
     , _vulUserIp          :: !(Maybe Text)
@@ -75,7 +85,7 @@ data VolumesUseruploadedList = VolumesUseruploadedList
     , _vulStartIndex      :: !(Maybe Word32)
     , _vulMaxResults      :: !(Maybe Word32)
     , _vulFields          :: !(Maybe Text)
-    , _vulAlt             :: !Text
+    , _vulAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesUseruploadedList'' with the minimum fields required to make a request.
@@ -107,10 +117,10 @@ data VolumesUseruploadedList = VolumesUseruploadedList
 -- * 'vulFields'
 --
 -- * 'vulAlt'
-volumesUseruploadedList
-    :: VolumesUseruploadedList
-volumesUseruploadedList =
-    VolumesUseruploadedList
+volumesUseruploadedList'
+    :: VolumesUseruploadedList'
+volumesUseruploadedList' =
+    VolumesUseruploadedList'
     { _vulProcessingState = Nothing
     , _vulQuotaUser = Nothing
     , _vulPrettyPrint = True
@@ -123,11 +133,11 @@ volumesUseruploadedList =
     , _vulStartIndex = Nothing
     , _vulMaxResults = Nothing
     , _vulFields = Nothing
-    , _vulAlt = "json"
+    , _vulAlt = JSON
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
-vulProcessingState :: Lens' VolumesUseruploadedList' (Maybe Text)
+vulProcessingState :: Lens' VolumesUseruploadedList' (Maybe BooksVolumesUseruploadedListProcessingState)
 vulProcessingState
   = lens _vulProcessingState
       (\ s a -> s{_vulProcessingState = a})
@@ -198,15 +208,15 @@ vulFields
   = lens _vulFields (\ s a -> s{_vulFields = a})
 
 -- | Data format for the response.
-vulAlt :: Lens' VolumesUseruploadedList' Text
+vulAlt :: Lens' VolumesUseruploadedList' Alt
 vulAlt = lens _vulAlt (\ s a -> s{_vulAlt = a})
 
 instance GoogleRequest VolumesUseruploadedList' where
         type Rs VolumesUseruploadedList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesUseruploadedList{..}
+        requestWithRoute r u VolumesUseruploadedList'{..}
           = go _vulProcessingState _vulQuotaUser
-              _vulPrettyPrint
+              (Just _vulPrettyPrint)
               _vulUserIp
               _vulLocale
               _vulKey
@@ -216,9 +226,9 @@ instance GoogleRequest VolumesUseruploadedList' where
               _vulStartIndex
               _vulMaxResults
               _vulFields
-              _vulAlt
+              (Just _vulAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VolumesUseruploadedListAPI)
+                      (Proxy :: Proxy VolumesUseruploadedListResource)
                       r
                       u

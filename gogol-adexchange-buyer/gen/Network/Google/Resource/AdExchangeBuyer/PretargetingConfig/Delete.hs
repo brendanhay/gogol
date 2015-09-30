@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing pretargeting config.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigDelete@.
-module AdExchangeBuyer.PretargetingConfig.Delete
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
     (
     -- * REST Resource
-      PretargetingConfigDeleteAPI
+      PretargetingConfigDeleteResource
 
     -- * Creating a Request
-    , pretargetingConfigDelete
-    , PretargetingConfigDelete
+    , pretargetingConfigDelete'
+    , PretargetingConfigDelete'
 
     -- * Request Lenses
     , pcdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigDelete@ which the
--- 'PretargetingConfigDelete' request conforms to.
-type PretargetingConfigDeleteAPI =
+-- 'PretargetingConfigDelete'' request conforms to.
+type PretargetingConfigDeleteResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
-         Capture "configId" Int64 :> Delete '[JSON] ()
+         Capture "configId" Int64 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --
--- /See:/ 'pretargetingConfigDelete' smart constructor.
-data PretargetingConfigDelete = PretargetingConfigDelete
+-- /See:/ 'pretargetingConfigDelete'' smart constructor.
+data PretargetingConfigDelete' = PretargetingConfigDelete'
     { _pcdQuotaUser   :: !(Maybe Text)
     , _pcdPrettyPrint :: !Bool
     , _pcdUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data PretargetingConfigDelete = PretargetingConfigDelete
     , _pcdConfigId    :: !Int64
     , _pcdOauthToken  :: !(Maybe Text)
     , _pcdFields      :: !(Maybe Text)
-    , _pcdAlt         :: !Text
+    , _pcdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDelete'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data PretargetingConfigDelete = PretargetingConfigDelete
 -- * 'pcdFields'
 --
 -- * 'pcdAlt'
-pretargetingConfigDelete
+pretargetingConfigDelete'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
-    -> PretargetingConfigDelete
-pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
-    PretargetingConfigDelete
+    -> PretargetingConfigDelete'
+pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ =
+    PretargetingConfigDelete'
     { _pcdQuotaUser = Nothing
     , _pcdPrettyPrint = True
     , _pcdUserIp = Nothing
@@ -100,7 +108,7 @@ pretargetingConfigDelete pPcdAccountId_ pPcdConfigId_ =
     , _pcdConfigId = pPcdConfigId_
     , _pcdOauthToken = Nothing
     , _pcdFields = Nothing
-    , _pcdAlt = "json"
+    , _pcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,23 +158,23 @@ pcdFields
   = lens _pcdFields (\ s a -> s{_pcdFields = a})
 
 -- | Data format for the response.
-pcdAlt :: Lens' PretargetingConfigDelete' Text
+pcdAlt :: Lens' PretargetingConfigDelete' Alt
 pcdAlt = lens _pcdAlt (\ s a -> s{_pcdAlt = a})
 
 instance GoogleRequest PretargetingConfigDelete'
          where
         type Rs PretargetingConfigDelete' = ()
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigDelete{..}
-          = go _pcdQuotaUser _pcdPrettyPrint _pcdUserIp
+        requestWithRoute r u PretargetingConfigDelete'{..}
+          = go _pcdQuotaUser (Just _pcdPrettyPrint) _pcdUserIp
               _pcdAccountId
               _pcdKey
               _pcdConfigId
               _pcdOauthToken
               _pcdFields
-              _pcdAlt
+              (Just _pcdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigDeleteAPI)
+                      (Proxy :: Proxy PretargetingConfigDeleteResource)
                       r
                       u

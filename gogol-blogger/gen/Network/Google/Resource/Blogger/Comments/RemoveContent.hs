@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes the content of a comment.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsRemoveContent@.
-module Blogger.Comments.RemoveContent
+module Network.Google.Resource.Blogger.Comments.RemoveContent
     (
     -- * REST Resource
-      CommentsRemoveContentAPI
+      CommentsRemoveContentResource
 
     -- * Creating a Request
-    , commentsRemoveContent
-    , CommentsRemoveContent
+    , commentsRemoveContent'
+    , CommentsRemoveContent'
 
     -- * Request Lenses
     , crcQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsRemoveContent@ which the
--- 'CommentsRemoveContent' request conforms to.
-type CommentsRemoveContentAPI =
+-- 'CommentsRemoveContent'' request conforms to.
+type CommentsRemoveContentResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 "removecontent" :> Post '[JSON] Comment
+                 "removecontent" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Comment
 
 -- | Removes the content of a comment.
 --
--- /See:/ 'commentsRemoveContent' smart constructor.
-data CommentsRemoveContent = CommentsRemoveContent
+-- /See:/ 'commentsRemoveContent'' smart constructor.
+data CommentsRemoveContent' = CommentsRemoveContent'
     { _crcQuotaUser   :: !(Maybe Text)
     , _crcPrettyPrint :: !Bool
     , _crcUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data CommentsRemoveContent = CommentsRemoveContent
     , _crcOauthToken  :: !(Maybe Text)
     , _crcCommentId   :: !Text
     , _crcFields      :: !(Maybe Text)
-    , _crcAlt         :: !Text
+    , _crcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsRemoveContent'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data CommentsRemoveContent = CommentsRemoveContent
 -- * 'crcFields'
 --
 -- * 'crcAlt'
-commentsRemoveContent
+commentsRemoveContent'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
-    -> CommentsRemoveContent
-commentsRemoveContent pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
-    CommentsRemoveContent
+    -> CommentsRemoveContent'
+commentsRemoveContent' pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
+    CommentsRemoveContent'
     { _crcQuotaUser = Nothing
     , _crcPrettyPrint = True
     , _crcUserIp = Nothing
@@ -110,7 +118,7 @@ commentsRemoveContent pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
     , _crcOauthToken = Nothing
     , _crcCommentId = pCrcCommentId_
     , _crcFields = Nothing
-    , _crcAlt = "json"
+    , _crcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,23 +173,23 @@ crcFields
   = lens _crcFields (\ s a -> s{_crcFields = a})
 
 -- | Data format for the response.
-crcAlt :: Lens' CommentsRemoveContent' Text
+crcAlt :: Lens' CommentsRemoveContent' Alt
 crcAlt = lens _crcAlt (\ s a -> s{_crcAlt = a})
 
 instance GoogleRequest CommentsRemoveContent' where
         type Rs CommentsRemoveContent' = Comment
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsRemoveContent{..}
-          = go _crcQuotaUser _crcPrettyPrint _crcUserIp
+        requestWithRoute r u CommentsRemoveContent'{..}
+          = go _crcQuotaUser (Just _crcPrettyPrint) _crcUserIp
               _crcBlogId
               _crcKey
               _crcPostId
               _crcOauthToken
               _crcCommentId
               _crcFields
-              _crcAlt
+              (Just _crcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentsRemoveContentAPI)
+                      (Proxy :: Proxy CommentsRemoveContentResource)
                       r
                       u

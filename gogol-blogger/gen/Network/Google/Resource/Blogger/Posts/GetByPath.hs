@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve a Post by Path.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsGetByPath@.
-module Blogger.Posts.GetByPath
+module Network.Google.Resource.Blogger.Posts.GetByPath
     (
     -- * REST Resource
-      PostsGetByPathAPI
+      PostsGetByPathResource
 
     -- * Creating a Request
-    , postsGetByPath
-    , PostsGetByPath
+    , postsGetByPath'
+    , PostsGetByPath'
 
     -- * Request Lenses
     , pgbpQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsGetByPath@ which the
--- 'PostsGetByPath' request conforms to.
-type PostsGetByPathAPI =
+-- 'PostsGetByPath'' request conforms to.
+type PostsGetByPathResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            "bypath" :>
-             QueryParam "path" Text :>
-               QueryParam "maxComments" Word32 :>
-                 QueryParam "view" Text :> Get '[JSON] Post
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "path" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "maxComments" Word32 :>
+                       QueryParam "key" Text :>
+                         QueryParam "view" BloggerPostsGetByPathView :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] Post
 
 -- | Retrieve a Post by Path.
 --
--- /See:/ 'postsGetByPath' smart constructor.
-data PostsGetByPath = PostsGetByPath
+-- /See:/ 'postsGetByPath'' smart constructor.
+data PostsGetByPath' = PostsGetByPath'
     { _pgbpQuotaUser   :: !(Maybe Text)
     , _pgbpPrettyPrint :: !Bool
     , _pgbpPath        :: !Text
@@ -67,10 +75,10 @@ data PostsGetByPath = PostsGetByPath
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
     , _pgbpKey         :: !(Maybe Text)
-    , _pgbpView        :: !(Maybe Text)
+    , _pgbpView        :: !(Maybe BloggerPostsGetByPathView)
     , _pgbpOauthToken  :: !(Maybe Text)
     , _pgbpFields      :: !(Maybe Text)
-    , _pgbpAlt         :: !Text
+    , _pgbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGetByPath'' with the minimum fields required to make a request.
@@ -98,12 +106,12 @@ data PostsGetByPath = PostsGetByPath
 -- * 'pgbpFields'
 --
 -- * 'pgbpAlt'
-postsGetByPath
+postsGetByPath'
     :: Text -- ^ 'path'
     -> Text -- ^ 'blogId'
-    -> PostsGetByPath
-postsGetByPath pPgbpPath_ pPgbpBlogId_ =
-    PostsGetByPath
+    -> PostsGetByPath'
+postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
+    PostsGetByPath'
     { _pgbpQuotaUser = Nothing
     , _pgbpPrettyPrint = True
     , _pgbpPath = pPgbpPath_
@@ -114,7 +122,7 @@ postsGetByPath pPgbpPath_ pPgbpBlogId_ =
     , _pgbpView = Nothing
     , _pgbpOauthToken = Nothing
     , _pgbpFields = Nothing
-    , _pgbpAlt = "json"
+    , _pgbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,7 +168,7 @@ pgbpKey = lens _pgbpKey (\ s a -> s{_pgbpKey = a})
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-pgbpView :: Lens' PostsGetByPath' (Maybe Text)
+pgbpView :: Lens' PostsGetByPath' (Maybe BloggerPostsGetByPathView)
 pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -175,14 +183,15 @@ pgbpFields
   = lens _pgbpFields (\ s a -> s{_pgbpFields = a})
 
 -- | Data format for the response.
-pgbpAlt :: Lens' PostsGetByPath' Text
+pgbpAlt :: Lens' PostsGetByPath' Alt
 pgbpAlt = lens _pgbpAlt (\ s a -> s{_pgbpAlt = a})
 
 instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsGetByPath{..}
-          = go _pgbpQuotaUser _pgbpPrettyPrint (Just _pgbpPath)
+        requestWithRoute r u PostsGetByPath'{..}
+          = go _pgbpQuotaUser (Just _pgbpPrettyPrint)
+              (Just _pgbpPath)
               _pgbpUserIp
               _pgbpBlogId
               _pgbpMaxComments
@@ -190,8 +199,9 @@ instance GoogleRequest PostsGetByPath' where
               _pgbpView
               _pgbpOauthToken
               _pgbpFields
-              _pgbpAlt
+              (Just _pgbpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsGetByPathAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PostsGetByPathResource)
                       r
                       u

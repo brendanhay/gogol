@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of inventory items, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingInventoryItemsList@.
-module DFAReporting.InventoryItems.List
+module Network.Google.Resource.DFAReporting.InventoryItems.List
     (
     -- * REST Resource
-      InventoryItemsListAPI
+      InventoryItemsListResource
 
     -- * Creating a Request
-    , inventoryItemsList
-    , InventoryItemsList
+    , inventoryItemsList'
+    , InventoryItemsList'
 
     -- * Request Lenses
     , iilQuotaUser
@@ -52,44 +53,56 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingInventoryItemsList@ which the
--- 'InventoryItemsList' request conforms to.
-type InventoryItemsListAPI =
+-- 'InventoryItemsList'' request conforms to.
+type InventoryItemsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
              "inventoryItems" :>
-               QueryParams "ids" Int64 :>
-                 QueryParam "sortOrder" Text :>
-                   QueryParam "inPlan" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParams "orderId" Int64 :>
-                           QueryParams "siteId" Int64 :>
-                             QueryParam "maxResults" Int32 :>
-                               Get '[JSON] InventoryItemsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParams "ids" Int64 :>
+                       QueryParam "sortOrder"
+                         DfareportingInventoryItemsListSortOrder
+                         :>
+                         QueryParam "inPlan" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingInventoryItemsListSortField
+                                 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParams "orderId" Int64 :>
+                                     QueryParams "siteId" Int64 :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON]
+                                               InventoryItemsListResponse
 
 -- | Retrieves a list of inventory items, possibly filtered.
 --
--- /See:/ 'inventoryItemsList' smart constructor.
-data InventoryItemsList = InventoryItemsList
+-- /See:/ 'inventoryItemsList'' smart constructor.
+data InventoryItemsList' = InventoryItemsList'
     { _iilQuotaUser   :: !(Maybe Text)
     , _iilPrettyPrint :: !Bool
     , _iilUserIp      :: !(Maybe Text)
     , _iilIds         :: !(Maybe Int64)
     , _iilProfileId   :: !Int64
-    , _iilSortOrder   :: !(Maybe Text)
+    , _iilSortOrder   :: !(Maybe DfareportingInventoryItemsListSortOrder)
     , _iilInPlan      :: !(Maybe Bool)
     , _iilKey         :: !(Maybe Text)
     , _iilPageToken   :: !(Maybe Text)
     , _iilProjectId   :: !Int64
-    , _iilSortField   :: !(Maybe Text)
+    , _iilSortField   :: !(Maybe DfareportingInventoryItemsListSortField)
     , _iilOauthToken  :: !(Maybe Text)
     , _iilOrderId     :: !(Maybe Int64)
     , _iilSiteId      :: !(Maybe Int64)
     , _iilMaxResults  :: !(Maybe Int32)
     , _iilFields      :: !(Maybe Text)
-    , _iilAlt         :: !Text
+    , _iilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsList'' with the minimum fields required to make a request.
@@ -129,12 +142,12 @@ data InventoryItemsList = InventoryItemsList
 -- * 'iilFields'
 --
 -- * 'iilAlt'
-inventoryItemsList
+inventoryItemsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
-    -> InventoryItemsList
-inventoryItemsList pIilProfileId_ pIilProjectId_ =
-    InventoryItemsList
+    -> InventoryItemsList'
+inventoryItemsList' pIilProfileId_ pIilProjectId_ =
+    InventoryItemsList'
     { _iilQuotaUser = Nothing
     , _iilPrettyPrint = True
     , _iilUserIp = Nothing
@@ -151,7 +164,7 @@ inventoryItemsList pIilProfileId_ pIilProjectId_ =
     , _iilSiteId = Nothing
     , _iilMaxResults = Nothing
     , _iilFields = Nothing
-    , _iilAlt = "json"
+    , _iilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +196,7 @@ iilProfileId
   = lens _iilProfileId (\ s a -> s{_iilProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-iilSortOrder :: Lens' InventoryItemsList' (Maybe Text)
+iilSortOrder :: Lens' InventoryItemsList' (Maybe DfareportingInventoryItemsListSortOrder)
 iilSortOrder
   = lens _iilSortOrder (\ s a -> s{_iilSortOrder = a})
 
@@ -209,7 +222,7 @@ iilProjectId
   = lens _iilProjectId (\ s a -> s{_iilProjectId = a})
 
 -- | Field by which to sort the list.
-iilSortField :: Lens' InventoryItemsList' (Maybe Text)
+iilSortField :: Lens' InventoryItemsList' (Maybe DfareportingInventoryItemsListSortField)
 iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
@@ -241,15 +254,16 @@ iilFields
   = lens _iilFields (\ s a -> s{_iilFields = a})
 
 -- | Data format for the response.
-iilAlt :: Lens' InventoryItemsList' Text
+iilAlt :: Lens' InventoryItemsList' Alt
 iilAlt = lens _iilAlt (\ s a -> s{_iilAlt = a})
 
 instance GoogleRequest InventoryItemsList' where
         type Rs InventoryItemsList' =
              InventoryItemsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u InventoryItemsList{..}
-          = go _iilQuotaUser _iilPrettyPrint _iilUserIp _iilIds
+        requestWithRoute r u InventoryItemsList'{..}
+          = go _iilQuotaUser (Just _iilPrettyPrint) _iilUserIp
+              _iilIds
               _iilProfileId
               _iilSortOrder
               _iilInPlan
@@ -262,9 +276,9 @@ instance GoogleRequest InventoryItemsList' where
               _iilSiteId
               _iilMaxResults
               _iilFields
-              _iilAlt
+              (Just _iilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InventoryItemsListAPI)
+                      (Proxy :: Proxy InventoryItemsListResource)
                       r
                       u

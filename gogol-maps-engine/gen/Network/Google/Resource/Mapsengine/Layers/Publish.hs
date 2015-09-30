@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,154 +20,156 @@
 -- | Publish a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersPublish@.
-module Mapsengine.Layers.Publish
+module Network.Google.Resource.Mapsengine.Layers.Publish
     (
     -- * REST Resource
-      LayersPublishAPI
+      LayersPublishResource
 
     -- * Creating a Request
-    , layersPublish
-    , LayersPublish
+    , layersPublish'
+    , LayersPublish'
 
     -- * Request Lenses
-    , layaQuotaUser
-    , layaPrettyPrint
-    , layaForce
-    , layaUserIp
-    , layaKey
-    , layaId
-    , layaOauthToken
-    , layaFields
-    , layaAlt
+    , lQuotaUser
+    , lPrettyPrint
+    , lForce
+    , lUserIp
+    , lKey
+    , lId
+    , lOauthToken
+    , lFields
+    , lAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersPublish@ which the
--- 'LayersPublish' request conforms to.
-type LayersPublishAPI =
+-- 'LayersPublish'' request conforms to.
+type LayersPublishResource =
      "layers" :>
        Capture "id" Text :>
          "publish" :>
-           QueryParam "force" Bool :>
-             Post '[JSON] PublishResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "force" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] PublishResponse
 
 -- | Publish a layer asset.
 --
--- /See:/ 'layersPublish' smart constructor.
-data LayersPublish = LayersPublish
-    { _layaQuotaUser   :: !(Maybe Text)
-    , _layaPrettyPrint :: !Bool
-    , _layaForce       :: !(Maybe Bool)
-    , _layaUserIp      :: !(Maybe Text)
-    , _layaKey         :: !(Maybe Text)
-    , _layaId          :: !Text
-    , _layaOauthToken  :: !(Maybe Text)
-    , _layaFields      :: !(Maybe Text)
-    , _layaAlt         :: !Text
+-- /See:/ 'layersPublish'' smart constructor.
+data LayersPublish' = LayersPublish'
+    { _lQuotaUser   :: !(Maybe Text)
+    , _lPrettyPrint :: !Bool
+    , _lForce       :: !(Maybe Bool)
+    , _lUserIp      :: !(Maybe Text)
+    , _lKey         :: !(Maybe Text)
+    , _lId          :: !Text
+    , _lOauthToken  :: !(Maybe Text)
+    , _lFields      :: !(Maybe Text)
+    , _lAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPublish'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'layaQuotaUser'
+-- * 'lQuotaUser'
 --
--- * 'layaPrettyPrint'
+-- * 'lPrettyPrint'
 --
--- * 'layaForce'
+-- * 'lForce'
 --
--- * 'layaUserIp'
+-- * 'lUserIp'
 --
--- * 'layaKey'
+-- * 'lKey'
 --
--- * 'layaId'
+-- * 'lId'
 --
--- * 'layaOauthToken'
+-- * 'lOauthToken'
 --
--- * 'layaFields'
+-- * 'lFields'
 --
--- * 'layaAlt'
-layersPublish
+-- * 'lAlt'
+layersPublish'
     :: Text -- ^ 'id'
-    -> LayersPublish
-layersPublish pLayaId_ =
-    LayersPublish
-    { _layaQuotaUser = Nothing
-    , _layaPrettyPrint = True
-    , _layaForce = Nothing
-    , _layaUserIp = Nothing
-    , _layaKey = Nothing
-    , _layaId = pLayaId_
-    , _layaOauthToken = Nothing
-    , _layaFields = Nothing
-    , _layaAlt = "json"
+    -> LayersPublish'
+layersPublish' pLId_ =
+    LayersPublish'
+    { _lQuotaUser = Nothing
+    , _lPrettyPrint = True
+    , _lForce = Nothing
+    , _lUserIp = Nothing
+    , _lKey = Nothing
+    , _lId = pLId_
+    , _lOauthToken = Nothing
+    , _lFields = Nothing
+    , _lAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-layaQuotaUser :: Lens' LayersPublish' (Maybe Text)
-layaQuotaUser
-  = lens _layaQuotaUser
-      (\ s a -> s{_layaQuotaUser = a})
+lQuotaUser :: Lens' LayersPublish' (Maybe Text)
+lQuotaUser
+  = lens _lQuotaUser (\ s a -> s{_lQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-layaPrettyPrint :: Lens' LayersPublish' Bool
-layaPrettyPrint
-  = lens _layaPrettyPrint
-      (\ s a -> s{_layaPrettyPrint = a})
+lPrettyPrint :: Lens' LayersPublish' Bool
+lPrettyPrint
+  = lens _lPrettyPrint (\ s a -> s{_lPrettyPrint = a})
 
 -- | If set to true, the API will allow publication of the layer even if
 -- it\'s out of date. If not true, you\'ll need to reprocess any
 -- out-of-date layer before publishing.
-layaForce :: Lens' LayersPublish' (Maybe Bool)
-layaForce
-  = lens _layaForce (\ s a -> s{_layaForce = a})
+lForce :: Lens' LayersPublish' (Maybe Bool)
+lForce = lens _lForce (\ s a -> s{_lForce = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-layaUserIp :: Lens' LayersPublish' (Maybe Text)
-layaUserIp
-  = lens _layaUserIp (\ s a -> s{_layaUserIp = a})
+lUserIp :: Lens' LayersPublish' (Maybe Text)
+lUserIp = lens _lUserIp (\ s a -> s{_lUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-layaKey :: Lens' LayersPublish' (Maybe Text)
-layaKey = lens _layaKey (\ s a -> s{_layaKey = a})
+lKey :: Lens' LayersPublish' (Maybe Text)
+lKey = lens _lKey (\ s a -> s{_lKey = a})
 
 -- | The ID of the layer.
-layaId :: Lens' LayersPublish' Text
-layaId = lens _layaId (\ s a -> s{_layaId = a})
+lId :: Lens' LayersPublish' Text
+lId = lens _lId (\ s a -> s{_lId = a})
 
 -- | OAuth 2.0 token for the current user.
-layaOauthToken :: Lens' LayersPublish' (Maybe Text)
-layaOauthToken
-  = lens _layaOauthToken
-      (\ s a -> s{_layaOauthToken = a})
+lOauthToken :: Lens' LayersPublish' (Maybe Text)
+lOauthToken
+  = lens _lOauthToken (\ s a -> s{_lOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-layaFields :: Lens' LayersPublish' (Maybe Text)
-layaFields
-  = lens _layaFields (\ s a -> s{_layaFields = a})
+lFields :: Lens' LayersPublish' (Maybe Text)
+lFields = lens _lFields (\ s a -> s{_lFields = a})
 
 -- | Data format for the response.
-layaAlt :: Lens' LayersPublish' Text
-layaAlt = lens _layaAlt (\ s a -> s{_layaAlt = a})
+lAlt :: Lens' LayersPublish' Alt
+lAlt = lens _lAlt (\ s a -> s{_lAlt = a})
 
 instance GoogleRequest LayersPublish' where
         type Rs LayersPublish' = PublishResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersPublish{..}
-          = go _layaQuotaUser _layaPrettyPrint _layaForce
-              _layaUserIp
-              _layaKey
-              _layaId
-              _layaOauthToken
-              _layaFields
-              _layaAlt
+        requestWithRoute r u LayersPublish'{..}
+          = go _lQuotaUser (Just _lPrettyPrint) _lForce
+              _lUserIp
+              _lKey
+              _lId
+              _lOauthToken
+              _lFields
+              (Just _lAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersPublishAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersPublishResource)
+                      r
                       u

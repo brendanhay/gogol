@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified TargetInstance resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetInstancesGet@.
-module Compute.TargetInstances.Get
+module Network.Google.Resource.Compute.TargetInstances.Get
     (
     -- * REST Resource
-      TargetInstancesGetAPI
+      TargetInstancesGetResource
 
     -- * Creating a Request
-    , targetInstancesGet
-    , TargetInstancesGet
+    , targetInstancesGet'
+    , TargetInstancesGet'
 
     -- * Request Lenses
     , tigQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetInstancesGet@ which the
--- 'TargetInstancesGet' request conforms to.
-type TargetInstancesGetAPI =
+-- 'TargetInstancesGet'' request conforms to.
+type TargetInstancesGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "targetInstances" :>
              Capture "targetInstance" Text :>
-               Get '[JSON] TargetInstance
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] TargetInstance
 
 -- | Returns the specified TargetInstance resource.
 --
--- /See:/ 'targetInstancesGet' smart constructor.
-data TargetInstancesGet = TargetInstancesGet
+-- /See:/ 'targetInstancesGet'' smart constructor.
+data TargetInstancesGet' = TargetInstancesGet'
     { _tigQuotaUser      :: !(Maybe Text)
     , _tigPrettyPrint    :: !Bool
     , _tigProject        :: !Text
@@ -67,7 +74,7 @@ data TargetInstancesGet = TargetInstancesGet
     , _tigKey            :: !(Maybe Text)
     , _tigOauthToken     :: !(Maybe Text)
     , _tigFields         :: !(Maybe Text)
-    , _tigAlt            :: !Text
+    , _tigAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data TargetInstancesGet = TargetInstancesGet
 -- * 'tigFields'
 --
 -- * 'tigAlt'
-targetInstancesGet
+targetInstancesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetInstance'
     -> Text -- ^ 'zone'
-    -> TargetInstancesGet
-targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
-    TargetInstancesGet
+    -> TargetInstancesGet'
+targetInstancesGet' pTigProject_ pTigTargetInstance_ pTigZone_ =
+    TargetInstancesGet'
     { _tigQuotaUser = Nothing
     , _tigPrettyPrint = True
     , _tigProject = pTigProject_
@@ -109,7 +116,7 @@ targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
     , _tigKey = Nothing
     , _tigOauthToken = Nothing
     , _tigFields = Nothing
-    , _tigAlt = "json"
+    , _tigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ tigFields
   = lens _tigFields (\ s a -> s{_tigFields = a})
 
 -- | Data format for the response.
-tigAlt :: Lens' TargetInstancesGet' Text
+tigAlt :: Lens' TargetInstancesGet' Alt
 tigAlt = lens _tigAlt (\ s a -> s{_tigAlt = a})
 
 instance GoogleRequest TargetInstancesGet' where
         type Rs TargetInstancesGet' = TargetInstance
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetInstancesGet{..}
-          = go _tigQuotaUser _tigPrettyPrint _tigProject
+        requestWithRoute r u TargetInstancesGet'{..}
+          = go _tigQuotaUser (Just _tigPrettyPrint) _tigProject
               _tigTargetInstance
               _tigUserIp
               _tigZone
               _tigKey
               _tigOauthToken
               _tigFields
-              _tigAlt
+              (Just _tigAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetInstancesGetAPI)
+                      (Proxy :: Proxy TargetInstancesGetResource)
                       r
                       u

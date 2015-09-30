@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,185 +20,197 @@
 -- | Deletes all images for the specified language and image type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsImagesDeleteall@.
-module Androidpublisher.Edits.Images.Deleteall
+module Network.Google.Resource.Androidpublisher.Edits.Images.Deleteall
     (
     -- * REST Resource
-      EditsImagesDeleteallAPI
+      EditsImagesDeleteallResource
 
     -- * Creating a Request
-    , editsImagesDeleteall
-    , EditsImagesDeleteall
+    , editsImagesDeleteall'
+    , EditsImagesDeleteall'
 
     -- * Request Lenses
-    , eidQuotaUser
-    , eidPrettyPrint
-    , eidPackageName
-    , eidUserIp
-    , eidImageType
-    , eidKey
-    , eidLanguage
-    , eidOauthToken
-    , eidEditId
-    , eidFields
-    , eidAlt
+    , eidiQuotaUser
+    , eidiPrettyPrint
+    , eidiPackageName
+    , eidiUserIp
+    , eidiImageType
+    , eidiKey
+    , eidiLanguage
+    , eidiOauthToken
+    , eidiEditId
+    , eidiFields
+    , eidiAlt
     ) where
 
 import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsImagesDeleteall@ which the
--- 'EditsImagesDeleteall' request conforms to.
-type EditsImagesDeleteallAPI =
+-- 'EditsImagesDeleteall'' request conforms to.
+type EditsImagesDeleteallResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType" Text :>
-                 Delete '[JSON] ImagesDeleteAllResponse
+               Capture "imageType"
+                 AndroidpublisherEditsImagesDeleteallImageType
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Delete '[JSON] ImagesDeleteAllResponse
 
 -- | Deletes all images for the specified language and image type.
 --
--- /See:/ 'editsImagesDeleteall' smart constructor.
-data EditsImagesDeleteall = EditsImagesDeleteall
-    { _eidQuotaUser   :: !(Maybe Text)
-    , _eidPrettyPrint :: !Bool
-    , _eidPackageName :: !Text
-    , _eidUserIp      :: !(Maybe Text)
-    , _eidImageType   :: !Text
-    , _eidKey         :: !(Maybe Text)
-    , _eidLanguage    :: !Text
-    , _eidOauthToken  :: !(Maybe Text)
-    , _eidEditId      :: !Text
-    , _eidFields      :: !(Maybe Text)
-    , _eidAlt         :: !Text
+-- /See:/ 'editsImagesDeleteall'' smart constructor.
+data EditsImagesDeleteall' = EditsImagesDeleteall'
+    { _eidiQuotaUser   :: !(Maybe Text)
+    , _eidiPrettyPrint :: !Bool
+    , _eidiPackageName :: !Text
+    , _eidiUserIp      :: !(Maybe Text)
+    , _eidiImageType   :: !AndroidpublisherEditsImagesDeleteallImageType
+    , _eidiKey         :: !(Maybe Text)
+    , _eidiLanguage    :: !Text
+    , _eidiOauthToken  :: !(Maybe Text)
+    , _eidiEditId      :: !Text
+    , _eidiFields      :: !(Maybe Text)
+    , _eidiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesDeleteall'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eidQuotaUser'
+-- * 'eidiQuotaUser'
 --
--- * 'eidPrettyPrint'
+-- * 'eidiPrettyPrint'
 --
--- * 'eidPackageName'
+-- * 'eidiPackageName'
 --
--- * 'eidUserIp'
+-- * 'eidiUserIp'
 --
--- * 'eidImageType'
+-- * 'eidiImageType'
 --
--- * 'eidKey'
+-- * 'eidiKey'
 --
--- * 'eidLanguage'
+-- * 'eidiLanguage'
 --
--- * 'eidOauthToken'
+-- * 'eidiOauthToken'
 --
--- * 'eidEditId'
+-- * 'eidiEditId'
 --
--- * 'eidFields'
+-- * 'eidiFields'
 --
--- * 'eidAlt'
-editsImagesDeleteall
+-- * 'eidiAlt'
+editsImagesDeleteall'
     :: Text -- ^ 'packageName'
-    -> Text -- ^ 'imageType'
+    -> AndroidpublisherEditsImagesDeleteallImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsImagesDeleteall
-editsImagesDeleteall pEidPackageName_ pEidImageType_ pEidLanguage_ pEidEditId_ =
-    EditsImagesDeleteall
-    { _eidQuotaUser = Nothing
-    , _eidPrettyPrint = True
-    , _eidPackageName = pEidPackageName_
-    , _eidUserIp = Nothing
-    , _eidImageType = pEidImageType_
-    , _eidKey = Nothing
-    , _eidLanguage = pEidLanguage_
-    , _eidOauthToken = Nothing
-    , _eidEditId = pEidEditId_
-    , _eidFields = Nothing
-    , _eidAlt = "json"
+    -> EditsImagesDeleteall'
+editsImagesDeleteall' pEidiPackageName_ pEidiImageType_ pEidiLanguage_ pEidiEditId_ =
+    EditsImagesDeleteall'
+    { _eidiQuotaUser = Nothing
+    , _eidiPrettyPrint = True
+    , _eidiPackageName = pEidiPackageName_
+    , _eidiUserIp = Nothing
+    , _eidiImageType = pEidiImageType_
+    , _eidiKey = Nothing
+    , _eidiLanguage = pEidiLanguage_
+    , _eidiOauthToken = Nothing
+    , _eidiEditId = pEidiEditId_
+    , _eidiFields = Nothing
+    , _eidiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eidQuotaUser :: Lens' EditsImagesDeleteall' (Maybe Text)
-eidQuotaUser
-  = lens _eidQuotaUser (\ s a -> s{_eidQuotaUser = a})
+eidiQuotaUser :: Lens' EditsImagesDeleteall' (Maybe Text)
+eidiQuotaUser
+  = lens _eidiQuotaUser
+      (\ s a -> s{_eidiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-eidPrettyPrint :: Lens' EditsImagesDeleteall' Bool
-eidPrettyPrint
-  = lens _eidPrettyPrint
-      (\ s a -> s{_eidPrettyPrint = a})
+eidiPrettyPrint :: Lens' EditsImagesDeleteall' Bool
+eidiPrettyPrint
+  = lens _eidiPrettyPrint
+      (\ s a -> s{_eidiPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eidPackageName :: Lens' EditsImagesDeleteall' Text
-eidPackageName
-  = lens _eidPackageName
-      (\ s a -> s{_eidPackageName = a})
+eidiPackageName :: Lens' EditsImagesDeleteall' Text
+eidiPackageName
+  = lens _eidiPackageName
+      (\ s a -> s{_eidiPackageName = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eidUserIp :: Lens' EditsImagesDeleteall' (Maybe Text)
-eidUserIp
-  = lens _eidUserIp (\ s a -> s{_eidUserIp = a})
+eidiUserIp :: Lens' EditsImagesDeleteall' (Maybe Text)
+eidiUserIp
+  = lens _eidiUserIp (\ s a -> s{_eidiUserIp = a})
 
-eidImageType :: Lens' EditsImagesDeleteall' Text
-eidImageType
-  = lens _eidImageType (\ s a -> s{_eidImageType = a})
+eidiImageType :: Lens' EditsImagesDeleteall' AndroidpublisherEditsImagesDeleteallImageType
+eidiImageType
+  = lens _eidiImageType
+      (\ s a -> s{_eidiImageType = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eidKey :: Lens' EditsImagesDeleteall' (Maybe Text)
-eidKey = lens _eidKey (\ s a -> s{_eidKey = a})
+eidiKey :: Lens' EditsImagesDeleteall' (Maybe Text)
+eidiKey = lens _eidiKey (\ s a -> s{_eidiKey = a})
 
 -- | The language code (a BCP-47 language tag) of the localized listing whose
 -- images are to read or modified. For example, to select Austrian German,
 -- pass \"de-AT\".
-eidLanguage :: Lens' EditsImagesDeleteall' Text
-eidLanguage
-  = lens _eidLanguage (\ s a -> s{_eidLanguage = a})
+eidiLanguage :: Lens' EditsImagesDeleteall' Text
+eidiLanguage
+  = lens _eidiLanguage (\ s a -> s{_eidiLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-eidOauthToken :: Lens' EditsImagesDeleteall' (Maybe Text)
-eidOauthToken
-  = lens _eidOauthToken
-      (\ s a -> s{_eidOauthToken = a})
+eidiOauthToken :: Lens' EditsImagesDeleteall' (Maybe Text)
+eidiOauthToken
+  = lens _eidiOauthToken
+      (\ s a -> s{_eidiOauthToken = a})
 
 -- | Unique identifier for this edit.
-eidEditId :: Lens' EditsImagesDeleteall' Text
-eidEditId
-  = lens _eidEditId (\ s a -> s{_eidEditId = a})
+eidiEditId :: Lens' EditsImagesDeleteall' Text
+eidiEditId
+  = lens _eidiEditId (\ s a -> s{_eidiEditId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eidFields :: Lens' EditsImagesDeleteall' (Maybe Text)
-eidFields
-  = lens _eidFields (\ s a -> s{_eidFields = a})
+eidiFields :: Lens' EditsImagesDeleteall' (Maybe Text)
+eidiFields
+  = lens _eidiFields (\ s a -> s{_eidiFields = a})
 
 -- | Data format for the response.
-eidAlt :: Lens' EditsImagesDeleteall' Text
-eidAlt = lens _eidAlt (\ s a -> s{_eidAlt = a})
+eidiAlt :: Lens' EditsImagesDeleteall' Alt
+eidiAlt = lens _eidiAlt (\ s a -> s{_eidiAlt = a})
 
 instance GoogleRequest EditsImagesDeleteall' where
         type Rs EditsImagesDeleteall' =
              ImagesDeleteAllResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsImagesDeleteall{..}
-          = go _eidQuotaUser _eidPrettyPrint _eidPackageName
-              _eidUserIp
-              _eidImageType
-              _eidKey
-              _eidLanguage
-              _eidOauthToken
-              _eidEditId
-              _eidFields
-              _eidAlt
+        requestWithRoute r u EditsImagesDeleteall'{..}
+          = go _eidiQuotaUser (Just _eidiPrettyPrint)
+              _eidiPackageName
+              _eidiUserIp
+              _eidiImageType
+              _eidiKey
+              _eidiLanguage
+              _eidiOauthToken
+              _eidiEditId
+              _eidiFields
+              (Just _eidiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsImagesDeleteallAPI)
+                      (Proxy :: Proxy EditsImagesDeleteallResource)
                       r
                       u

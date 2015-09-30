@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve Chrome OS Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryChromeosdevicesGet@.
-module Directory.Chromeosdevices.Get
+module Network.Google.Resource.Directory.Chromeosdevices.Get
     (
     -- * REST Resource
-      ChromeosdevicesGetAPI
+      ChromeosdevicesGetResource
 
     -- * Creating a Request
-    , chromeosdevicesGet
-    , ChromeosdevicesGet
+    , chromeosdevicesGet'
+    , ChromeosdevicesGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -45,30 +46,38 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryChromeosdevicesGet@ which the
--- 'ChromeosdevicesGet' request conforms to.
-type ChromeosdevicesGetAPI =
+-- 'ChromeosdevicesGet'' request conforms to.
+type ChromeosdevicesGetResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "chromeos" :>
              Capture "deviceId" Text :>
-               QueryParam "projection" Text :>
-                 Get '[JSON] ChromeOsDevice
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection"
+                         DirectoryChromeosdevicesGetProjection
+                         :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ChromeOsDevice
 
 -- | Retrieve Chrome OS Device
 --
--- /See:/ 'chromeosdevicesGet' smart constructor.
-data ChromeosdevicesGet = ChromeosdevicesGet
+-- /See:/ 'chromeosdevicesGet'' smart constructor.
+data ChromeosdevicesGet' = ChromeosdevicesGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
     , _cgCustomerId  :: !Text
     , _cgKey         :: !(Maybe Text)
     , _cgDeviceId    :: !Text
-    , _cgProjection  :: !(Maybe Text)
+    , _cgProjection  :: !(Maybe DirectoryChromeosdevicesGetProjection)
     , _cgOauthToken  :: !(Maybe Text)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChromeosdevicesGet'' with the minimum fields required to make a request.
@@ -94,12 +103,12 @@ data ChromeosdevicesGet = ChromeosdevicesGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-chromeosdevicesGet
+chromeosdevicesGet'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'deviceId'
-    -> ChromeosdevicesGet
-chromeosdevicesGet pCgCustomerId_ pCgDeviceId_ =
-    ChromeosdevicesGet
+    -> ChromeosdevicesGet'
+chromeosdevicesGet' pCgCustomerId_ pCgDeviceId_ =
+    ChromeosdevicesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -109,7 +118,7 @@ chromeosdevicesGet pCgCustomerId_ pCgDeviceId_ =
     , _cgProjection = Nothing
     , _cgOauthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,7 +156,7 @@ cgDeviceId
   = lens _cgDeviceId (\ s a -> s{_cgDeviceId = a})
 
 -- | Restrict information returned to a set of selected fields.
-cgProjection :: Lens' ChromeosdevicesGet' (Maybe Text)
+cgProjection :: Lens' ChromeosdevicesGet' (Maybe DirectoryChromeosdevicesGetProjection)
 cgProjection
   = lens _cgProjection (\ s a -> s{_cgProjection = a})
 
@@ -161,23 +170,23 @@ cgFields :: Lens' ChromeosdevicesGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' ChromeosdevicesGet' Text
+cgAlt :: Lens' ChromeosdevicesGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ChromeosdevicesGet' where
         type Rs ChromeosdevicesGet' = ChromeOsDevice
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u ChromeosdevicesGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp
+        requestWithRoute r u ChromeosdevicesGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
               _cgCustomerId
               _cgKey
               _cgDeviceId
               _cgProjection
               _cgOauthToken
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChromeosdevicesGetAPI)
+                      (Proxy :: Proxy ChromeosdevicesGetResource)
                       r
                       u

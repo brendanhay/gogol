@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- if no such policy or resource exists.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsGetIAMPolicy@.
-module Cloudresourcemanager.Organizations.GetIAMPolicy
+module Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
     (
     -- * REST Resource
-      OrganizationsGetIAMPolicyAPI
+      OrganizationsGetIAMPolicyResource
 
     -- * Creating a Request
-    , organizationsGetIAMPolicy
-    , OrganizationsGetIAMPolicy
+    , organizationsGetIAMPolicy'
+    , OrganizationsGetIAMPolicy'
 
     -- * Request Lenses
     , ogipXgafv
@@ -50,17 +51,30 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsGetIAMPolicy@ which the
--- 'OrganizationsGetIAMPolicy' request conforms to.
-type OrganizationsGetIAMPolicyAPI =
+-- 'OrganizationsGetIAMPolicy'' request conforms to.
+type OrganizationsGetIAMPolicyResource =
      "v1beta1" :>
        "organizations" :>
-         "{resource}:getIamPolicy" :> Post '[JSON] Policy
+         "{resource}:getIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Gets the access control policy for a Organization resource. May be empty
 -- if no such policy or resource exists.
 --
--- /See:/ 'organizationsGetIAMPolicy' smart constructor.
-data OrganizationsGetIAMPolicy = OrganizationsGetIAMPolicy
+-- /See:/ 'organizationsGetIAMPolicy'' smart constructor.
+data OrganizationsGetIAMPolicy' = OrganizationsGetIAMPolicy'
     { _ogipXgafv          :: !(Maybe Text)
     , _ogipQuotaUser      :: !(Maybe Text)
     , _ogipPrettyPrint    :: !Bool
@@ -108,11 +122,11 @@ data OrganizationsGetIAMPolicy = OrganizationsGetIAMPolicy
 -- * 'ogipCallback'
 --
 -- * 'ogipAlt'
-organizationsGetIAMPolicy
+organizationsGetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> OrganizationsGetIAMPolicy
-organizationsGetIAMPolicy pOgipResource_ =
-    OrganizationsGetIAMPolicy
+    -> OrganizationsGetIAMPolicy'
+organizationsGetIAMPolicy' pOgipResource_ =
+    OrganizationsGetIAMPolicy'
     { _ogipXgafv = Nothing
     , _ogipQuotaUser = Nothing
     , _ogipPrettyPrint = True
@@ -212,10 +226,11 @@ instance GoogleRequest OrganizationsGetIAMPolicy'
          where
         type Rs OrganizationsGetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsGetIAMPolicy{..}
-          = go _ogipXgafv _ogipQuotaUser _ogipPrettyPrint
+        requestWithRoute r u OrganizationsGetIAMPolicy'{..}
+          = go _ogipXgafv _ogipQuotaUser
+              (Just _ogipPrettyPrint)
               _ogipUploadProtocol
-              _ogipPp
+              (Just _ogipPp)
               _ogipAccessToken
               _ogipUploadType
               _ogipBearerToken
@@ -224,9 +239,9 @@ instance GoogleRequest OrganizationsGetIAMPolicy'
               _ogipOauthToken
               _ogipFields
               _ogipCallback
-              _ogipAlt
+              (Just _ogipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsGetIAMPolicyAPI)
+                      (Proxy :: Proxy OrganizationsGetIAMPolicyResource)
                       r
                       u

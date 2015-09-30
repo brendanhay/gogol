@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesList@.
-module Compute.GlobalForwardingRules.List
+module Network.Google.Resource.Compute.GlobalForwardingRules.List
     (
     -- * REST Resource
-      GlobalForwardingRulesListAPI
+      GlobalForwardingRulesListResource
 
     -- * Creating a Request
-    , globalForwardingRulesList
-    , GlobalForwardingRulesList
+    , globalForwardingRulesList'
+    , GlobalForwardingRulesList'
 
     -- * Request Lenses
     , gfrlQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalForwardingRulesList@ which the
--- 'GlobalForwardingRulesList' request conforms to.
-type GlobalForwardingRulesListAPI =
+-- 'GlobalForwardingRulesList'' request conforms to.
+type GlobalForwardingRulesListResource =
      Capture "project" Text :>
        "global" :>
          "forwardingRules" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ForwardingRuleList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ForwardingRuleList
 
 -- | Retrieves the list of ForwardingRule resources available to the
 -- specified project.
 --
--- /See:/ 'globalForwardingRulesList' smart constructor.
-data GlobalForwardingRulesList = GlobalForwardingRulesList
+-- /See:/ 'globalForwardingRulesList'' smart constructor.
+data GlobalForwardingRulesList' = GlobalForwardingRulesList'
     { _gfrlQuotaUser   :: !(Maybe Text)
     , _gfrlPrettyPrint :: !Bool
     , _gfrlProject     :: !Text
@@ -72,7 +80,7 @@ data GlobalForwardingRulesList = GlobalForwardingRulesList
     , _gfrlOauthToken  :: !(Maybe Text)
     , _gfrlMaxResults  :: !Word32
     , _gfrlFields      :: !(Maybe Text)
-    , _gfrlAlt         :: !Text
+    , _gfrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data GlobalForwardingRulesList = GlobalForwardingRulesList
 -- * 'gfrlFields'
 --
 -- * 'gfrlAlt'
-globalForwardingRulesList
+globalForwardingRulesList'
     :: Text -- ^ 'project'
-    -> GlobalForwardingRulesList
-globalForwardingRulesList pGfrlProject_ =
-    GlobalForwardingRulesList
+    -> GlobalForwardingRulesList'
+globalForwardingRulesList' pGfrlProject_ =
+    GlobalForwardingRulesList'
     { _gfrlQuotaUser = Nothing
     , _gfrlPrettyPrint = True
     , _gfrlProject = pGfrlProject_
@@ -115,7 +123,7 @@ globalForwardingRulesList pGfrlProject_ =
     , _gfrlOauthToken = Nothing
     , _gfrlMaxResults = 500
     , _gfrlFields = Nothing
-    , _gfrlAlt = "json"
+    , _gfrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -190,7 +198,7 @@ gfrlFields
   = lens _gfrlFields (\ s a -> s{_gfrlFields = a})
 
 -- | Data format for the response.
-gfrlAlt :: Lens' GlobalForwardingRulesList' Text
+gfrlAlt :: Lens' GlobalForwardingRulesList' Alt
 gfrlAlt = lens _gfrlAlt (\ s a -> s{_gfrlAlt = a})
 
 instance GoogleRequest GlobalForwardingRulesList'
@@ -198,8 +206,9 @@ instance GoogleRequest GlobalForwardingRulesList'
         type Rs GlobalForwardingRulesList' =
              ForwardingRuleList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesList{..}
-          = go _gfrlQuotaUser _gfrlPrettyPrint _gfrlProject
+        requestWithRoute r u GlobalForwardingRulesList'{..}
+          = go _gfrlQuotaUser (Just _gfrlPrettyPrint)
+              _gfrlProject
               _gfrlUserIp
               _gfrlKey
               _gfrlFilter
@@ -207,9 +216,9 @@ instance GoogleRequest GlobalForwardingRulesList'
               _gfrlOauthToken
               (Just _gfrlMaxResults)
               _gfrlFields
-              _gfrlAlt
+              (Just _gfrlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalForwardingRulesListAPI)
+                      (Proxy :: Proxy GlobalForwardingRulesListResource)
                       r
                       u

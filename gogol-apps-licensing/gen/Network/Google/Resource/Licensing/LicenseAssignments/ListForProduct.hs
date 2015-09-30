@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List license assignments for given product of the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsListForProduct@.
-module Licensing.LicenseAssignments.ListForProduct
+module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
     (
     -- * REST Resource
-      LicenseAssignmentsListForProductAPI
+      LicenseAssignmentsListForProductResource
 
     -- * Creating a Request
-    , licenseAssignmentsListForProduct
-    , LicenseAssignmentsListForProduct
+    , licenseAssignmentsListForProduct'
+    , LicenseAssignmentsListForProduct'
 
     -- * Request Lenses
     , lalfpQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsListForProduct@ which the
--- 'LicenseAssignmentsListForProduct' request conforms to.
-type LicenseAssignmentsListForProductAPI =
+-- 'LicenseAssignmentsListForProduct'' request conforms to.
+type LicenseAssignmentsListForProductResource =
      Capture "productId" Text :>
        "users" :>
-         QueryParam "customerId" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] LicenseAssignmentList
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "customerId" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product of the customer.
 --
--- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
-data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
+-- /See:/ 'licenseAssignmentsListForProduct'' smart constructor.
+data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
     { _lalfpQuotaUser   :: !(Maybe Text)
     , _lalfpPrettyPrint :: !Bool
     , _lalfpUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
     , _lalfpProductId   :: !Text
     , _lalfpMaxResults  :: !Word32
     , _lalfpFields      :: !(Maybe Text)
-    , _lalfpAlt         :: !Text
+    , _lalfpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProduct'' with the minimum fields required to make a request.
@@ -97,12 +105,12 @@ data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
 -- * 'lalfpFields'
 --
 -- * 'lalfpAlt'
-licenseAssignmentsListForProduct
+licenseAssignmentsListForProduct'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsListForProduct
-licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
-    LicenseAssignmentsListForProduct
+    -> LicenseAssignmentsListForProduct'
+licenseAssignmentsListForProduct' pLalfpCustomerId_ pLalfpProductId_ =
+    LicenseAssignmentsListForProduct'
     { _lalfpQuotaUser = Nothing
     , _lalfpPrettyPrint = True
     , _lalfpUserIp = Nothing
@@ -113,7 +121,7 @@ licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
     , _lalfpProductId = pLalfpProductId_
     , _lalfpMaxResults = 100
     , _lalfpFields = Nothing
-    , _lalfpAlt = "json"
+    , _lalfpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,7 +189,7 @@ lalfpFields
   = lens _lalfpFields (\ s a -> s{_lalfpFields = a})
 
 -- | Data format for the response.
-lalfpAlt :: Lens' LicenseAssignmentsListForProduct' Text
+lalfpAlt :: Lens' LicenseAssignmentsListForProduct' Alt
 lalfpAlt = lens _lalfpAlt (\ s a -> s{_lalfpAlt = a})
 
 instance GoogleRequest
@@ -190,8 +198,9 @@ instance GoogleRequest
              LicenseAssignmentList
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u
-          LicenseAssignmentsListForProduct{..}
-          = go _lalfpQuotaUser _lalfpPrettyPrint _lalfpUserIp
+          LicenseAssignmentsListForProduct'{..}
+          = go _lalfpQuotaUser (Just _lalfpPrettyPrint)
+              _lalfpUserIp
               (Just _lalfpCustomerId)
               _lalfpKey
               (Just _lalfpPageToken)
@@ -199,9 +208,10 @@ instance GoogleRequest
               _lalfpProductId
               (Just _lalfpMaxResults)
               _lalfpFields
-              _lalfpAlt
+              (Just _lalfpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsListForProductAPI)
+                      (Proxy ::
+                         Proxy LicenseAssignmentsListForProductResource)
                       r
                       u

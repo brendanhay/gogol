@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing floodlight configuration.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightConfigurationsUpdate@.
-module DFAReporting.FloodlightConfigurations.Update
+module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Update
     (
     -- * REST Resource
-      FloodlightConfigurationsUpdateAPI
+      FloodlightConfigurationsUpdateResource
 
     -- * Creating a Request
-    , floodlightConfigurationsUpdate
-    , FloodlightConfigurationsUpdate
+    , floodlightConfigurationsUpdate'
+    , FloodlightConfigurationsUpdate'
 
     -- * Request Lenses
     , fcuQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightConfigurationsUpdate@ which the
--- 'FloodlightConfigurationsUpdate' request conforms to.
-type FloodlightConfigurationsUpdateAPI =
+-- 'FloodlightConfigurationsUpdate'' request conforms to.
+type FloodlightConfigurationsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightConfigurations" :>
-           Put '[JSON] FloodlightConfiguration
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration.
 --
--- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
-data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
+-- /See:/ 'floodlightConfigurationsUpdate'' smart constructor.
+data FloodlightConfigurationsUpdate' = FloodlightConfigurationsUpdate'
     { _fcuQuotaUser   :: !(Maybe Text)
     , _fcuPrettyPrint :: !Bool
     , _fcuUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
     , _fcuKey         :: !(Maybe Text)
     , _fcuOauthToken  :: !(Maybe Text)
     , _fcuFields      :: !(Maybe Text)
-    , _fcuAlt         :: !Text
+    , _fcuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
 -- * 'fcuFields'
 --
 -- * 'fcuAlt'
-floodlightConfigurationsUpdate
+floodlightConfigurationsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightConfigurationsUpdate
-floodlightConfigurationsUpdate pFcuProfileId_ =
-    FloodlightConfigurationsUpdate
+    -> FloodlightConfigurationsUpdate'
+floodlightConfigurationsUpdate' pFcuProfileId_ =
+    FloodlightConfigurationsUpdate'
     { _fcuQuotaUser = Nothing
     , _fcuPrettyPrint = True
     , _fcuUserIp = Nothing
@@ -95,7 +103,7 @@ floodlightConfigurationsUpdate pFcuProfileId_ =
     , _fcuKey = Nothing
     , _fcuOauthToken = Nothing
     , _fcuFields = Nothing
-    , _fcuAlt = "json"
+    , _fcuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ fcuFields
   = lens _fcuFields (\ s a -> s{_fcuFields = a})
 
 -- | Data format for the response.
-fcuAlt :: Lens' FloodlightConfigurationsUpdate' Text
+fcuAlt :: Lens' FloodlightConfigurationsUpdate' Alt
 fcuAlt = lens _fcuAlt (\ s a -> s{_fcuAlt = a})
 
 instance GoogleRequest
@@ -149,15 +157,16 @@ instance GoogleRequest
              FloodlightConfiguration
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightConfigurationsUpdate{..}
-          = go _fcuQuotaUser _fcuPrettyPrint _fcuUserIp
+          FloodlightConfigurationsUpdate'{..}
+          = go _fcuQuotaUser (Just _fcuPrettyPrint) _fcuUserIp
               _fcuProfileId
               _fcuKey
               _fcuOauthToken
               _fcuFields
-              _fcuAlt
+              (Just _fcuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightConfigurationsUpdateAPI)
+                      (Proxy ::
+                         Proxy FloodlightConfigurationsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,171 +20,173 @@
 -- | Retrieve Mobile Device
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMobiledevicesGet@.
-module Directory.Mobiledevices.Get
+module Network.Google.Resource.Directory.Mobiledevices.Get
     (
     -- * REST Resource
-      MobiledevicesGetAPI
+      MobiledevicesGetResource
 
     -- * Creating a Request
-    , mobiledevicesGet
-    , MobiledevicesGet
+    , mobiledevicesGet'
+    , MobiledevicesGet'
 
     -- * Request Lenses
-    , mggQuotaUser
-    , mggResourceId
-    , mggPrettyPrint
-    , mggUserIp
-    , mggCustomerId
-    , mggKey
-    , mggProjection
-    , mggOauthToken
-    , mggFields
-    , mggAlt
+    , mgQuotaUser
+    , mgResourceId
+    , mgPrettyPrint
+    , mgUserIp
+    , mgCustomerId
+    , mgKey
+    , mgProjection
+    , mgOauthToken
+    , mgFields
+    , mgAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMobiledevicesGet@ which the
--- 'MobiledevicesGet' request conforms to.
-type MobiledevicesGetAPI =
+-- 'MobiledevicesGet'' request conforms to.
+type MobiledevicesGetResource =
      "customer" :>
        Capture "customerId" Text :>
          "devices" :>
            "mobile" :>
              Capture "resourceId" Text :>
-               QueryParam "projection" Text :>
-                 Get '[JSON] MobileDevice
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection"
+                         DirectoryMobiledevicesGetProjection
+                         :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] MobileDevice
 
 -- | Retrieve Mobile Device
 --
--- /See:/ 'mobiledevicesGet' smart constructor.
-data MobiledevicesGet = MobiledevicesGet
-    { _mggQuotaUser   :: !(Maybe Text)
-    , _mggResourceId  :: !Text
-    , _mggPrettyPrint :: !Bool
-    , _mggUserIp      :: !(Maybe Text)
-    , _mggCustomerId  :: !Text
-    , _mggKey         :: !(Maybe Text)
-    , _mggProjection  :: !(Maybe Text)
-    , _mggOauthToken  :: !(Maybe Text)
-    , _mggFields      :: !(Maybe Text)
-    , _mggAlt         :: !Text
+-- /See:/ 'mobiledevicesGet'' smart constructor.
+data MobiledevicesGet' = MobiledevicesGet'
+    { _mgQuotaUser   :: !(Maybe Text)
+    , _mgResourceId  :: !Text
+    , _mgPrettyPrint :: !Bool
+    , _mgUserIp      :: !(Maybe Text)
+    , _mgCustomerId  :: !Text
+    , _mgKey         :: !(Maybe Text)
+    , _mgProjection  :: !(Maybe DirectoryMobiledevicesGetProjection)
+    , _mgOauthToken  :: !(Maybe Text)
+    , _mgFields      :: !(Maybe Text)
+    , _mgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobiledevicesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mggQuotaUser'
+-- * 'mgQuotaUser'
 --
--- * 'mggResourceId'
+-- * 'mgResourceId'
 --
--- * 'mggPrettyPrint'
+-- * 'mgPrettyPrint'
 --
--- * 'mggUserIp'
+-- * 'mgUserIp'
 --
--- * 'mggCustomerId'
+-- * 'mgCustomerId'
 --
--- * 'mggKey'
+-- * 'mgKey'
 --
--- * 'mggProjection'
+-- * 'mgProjection'
 --
--- * 'mggOauthToken'
+-- * 'mgOauthToken'
 --
--- * 'mggFields'
+-- * 'mgFields'
 --
--- * 'mggAlt'
-mobiledevicesGet
+-- * 'mgAlt'
+mobiledevicesGet'
     :: Text -- ^ 'resourceId'
     -> Text -- ^ 'customerId'
-    -> MobiledevicesGet
-mobiledevicesGet pMggResourceId_ pMggCustomerId_ =
-    MobiledevicesGet
-    { _mggQuotaUser = Nothing
-    , _mggResourceId = pMggResourceId_
-    , _mggPrettyPrint = True
-    , _mggUserIp = Nothing
-    , _mggCustomerId = pMggCustomerId_
-    , _mggKey = Nothing
-    , _mggProjection = Nothing
-    , _mggOauthToken = Nothing
-    , _mggFields = Nothing
-    , _mggAlt = "json"
+    -> MobiledevicesGet'
+mobiledevicesGet' pMgResourceId_ pMgCustomerId_ =
+    MobiledevicesGet'
+    { _mgQuotaUser = Nothing
+    , _mgResourceId = pMgResourceId_
+    , _mgPrettyPrint = True
+    , _mgUserIp = Nothing
+    , _mgCustomerId = pMgCustomerId_
+    , _mgKey = Nothing
+    , _mgProjection = Nothing
+    , _mgOauthToken = Nothing
+    , _mgFields = Nothing
+    , _mgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-mggQuotaUser :: Lens' MobiledevicesGet' (Maybe Text)
-mggQuotaUser
-  = lens _mggQuotaUser (\ s a -> s{_mggQuotaUser = a})
+mgQuotaUser :: Lens' MobiledevicesGet' (Maybe Text)
+mgQuotaUser
+  = lens _mgQuotaUser (\ s a -> s{_mgQuotaUser = a})
 
 -- | Immutable id of Mobile Device
-mggResourceId :: Lens' MobiledevicesGet' Text
-mggResourceId
-  = lens _mggResourceId
-      (\ s a -> s{_mggResourceId = a})
+mgResourceId :: Lens' MobiledevicesGet' Text
+mgResourceId
+  = lens _mgResourceId (\ s a -> s{_mgResourceId = a})
 
 -- | Returns response with indentations and line breaks.
-mggPrettyPrint :: Lens' MobiledevicesGet' Bool
-mggPrettyPrint
-  = lens _mggPrettyPrint
-      (\ s a -> s{_mggPrettyPrint = a})
+mgPrettyPrint :: Lens' MobiledevicesGet' Bool
+mgPrettyPrint
+  = lens _mgPrettyPrint
+      (\ s a -> s{_mgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mggUserIp :: Lens' MobiledevicesGet' (Maybe Text)
-mggUserIp
-  = lens _mggUserIp (\ s a -> s{_mggUserIp = a})
+mgUserIp :: Lens' MobiledevicesGet' (Maybe Text)
+mgUserIp = lens _mgUserIp (\ s a -> s{_mgUserIp = a})
 
 -- | Immutable id of the Google Apps account
-mggCustomerId :: Lens' MobiledevicesGet' Text
-mggCustomerId
-  = lens _mggCustomerId
-      (\ s a -> s{_mggCustomerId = a})
+mgCustomerId :: Lens' MobiledevicesGet' Text
+mgCustomerId
+  = lens _mgCustomerId (\ s a -> s{_mgCustomerId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mggKey :: Lens' MobiledevicesGet' (Maybe Text)
-mggKey = lens _mggKey (\ s a -> s{_mggKey = a})
+mgKey :: Lens' MobiledevicesGet' (Maybe Text)
+mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | Restrict information returned to a set of selected fields.
-mggProjection :: Lens' MobiledevicesGet' (Maybe Text)
-mggProjection
-  = lens _mggProjection
-      (\ s a -> s{_mggProjection = a})
+mgProjection :: Lens' MobiledevicesGet' (Maybe DirectoryMobiledevicesGetProjection)
+mgProjection
+  = lens _mgProjection (\ s a -> s{_mgProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-mggOauthToken :: Lens' MobiledevicesGet' (Maybe Text)
-mggOauthToken
-  = lens _mggOauthToken
-      (\ s a -> s{_mggOauthToken = a})
+mgOauthToken :: Lens' MobiledevicesGet' (Maybe Text)
+mgOauthToken
+  = lens _mgOauthToken (\ s a -> s{_mgOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-mggFields :: Lens' MobiledevicesGet' (Maybe Text)
-mggFields
-  = lens _mggFields (\ s a -> s{_mggFields = a})
+mgFields :: Lens' MobiledevicesGet' (Maybe Text)
+mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
 -- | Data format for the response.
-mggAlt :: Lens' MobiledevicesGet' Text
-mggAlt = lens _mggAlt (\ s a -> s{_mggAlt = a})
+mgAlt :: Lens' MobiledevicesGet' Alt
+mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
 
 instance GoogleRequest MobiledevicesGet' where
         type Rs MobiledevicesGet' = MobileDevice
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MobiledevicesGet{..}
-          = go _mggQuotaUser _mggResourceId _mggPrettyPrint
-              _mggUserIp
-              _mggCustomerId
-              _mggKey
-              _mggProjection
-              _mggOauthToken
-              _mggFields
-              _mggAlt
+        requestWithRoute r u MobiledevicesGet'{..}
+          = go _mgQuotaUser _mgResourceId (Just _mgPrettyPrint)
+              _mgUserIp
+              _mgCustomerId
+              _mgKey
+              _mgProjection
+              _mgOauthToken
+              _mgFields
+              (Just _mgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MobiledevicesGetAPI)
+                      (Proxy :: Proxy MobiledevicesGetResource)
                       r
                       u

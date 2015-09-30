@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns an entry on the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListGet@.
-module Calendar.CalendarList.Get
+module Network.Google.Resource.Calendar.CalendarList.Get
     (
     -- * REST Resource
-      CalendarListGetAPI
+      CalendarListGetResource
 
     -- * Creating a Request
-    , calendarListGet
-    , CalendarListGet
+    , calendarListGet'
+    , CalendarListGet'
 
     -- * Request Lenses
     , clgQuotaUser
@@ -43,18 +44,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListGet@ which the
--- 'CalendarListGet' request conforms to.
-type CalendarListGetAPI =
+-- 'CalendarListGet'' request conforms to.
+type CalendarListGetResource =
      "users" :>
        "me" :>
          "calendarList" :>
            Capture "calendarId" Text :>
-             Get '[JSON] CalendarListEntry
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] CalendarListEntry
 
 -- | Returns an entry on the user\'s calendar list.
 --
--- /See:/ 'calendarListGet' smart constructor.
-data CalendarListGet = CalendarListGet
+-- /See:/ 'calendarListGet'' smart constructor.
+data CalendarListGet' = CalendarListGet'
     { _clgQuotaUser   :: !(Maybe Text)
     , _clgCalendarId  :: !Text
     , _clgPrettyPrint :: !Bool
@@ -62,7 +69,7 @@ data CalendarListGet = CalendarListGet
     , _clgKey         :: !(Maybe Text)
     , _clgOauthToken  :: !(Maybe Text)
     , _clgFields      :: !(Maybe Text)
-    , _clgAlt         :: !Text
+    , _clgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListGet'' with the minimum fields required to make a request.
@@ -84,11 +91,11 @@ data CalendarListGet = CalendarListGet
 -- * 'clgFields'
 --
 -- * 'clgAlt'
-calendarListGet
+calendarListGet'
     :: Text -- ^ 'calendarId'
-    -> CalendarListGet
-calendarListGet pClgCalendarId_ =
-    CalendarListGet
+    -> CalendarListGet'
+calendarListGet' pClgCalendarId_ =
+    CalendarListGet'
     { _clgQuotaUser = Nothing
     , _clgCalendarId = pClgCalendarId_
     , _clgPrettyPrint = True
@@ -96,7 +103,7 @@ calendarListGet pClgCalendarId_ =
     , _clgKey = Nothing
     , _clgOauthToken = Nothing
     , _clgFields = Nothing
-    , _clgAlt = "json"
+    , _clgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,20 +151,22 @@ clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
 -- | Data format for the response.
-clgAlt :: Lens' CalendarListGet' Text
+clgAlt :: Lens' CalendarListGet' Alt
 clgAlt = lens _clgAlt (\ s a -> s{_clgAlt = a})
 
 instance GoogleRequest CalendarListGet' where
         type Rs CalendarListGet' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListGet{..}
-          = go _clgQuotaUser _clgCalendarId _clgPrettyPrint
+        requestWithRoute r u CalendarListGet'{..}
+          = go _clgQuotaUser _clgCalendarId
+              (Just _clgPrettyPrint)
               _clgUserIp
               _clgKey
               _clgOauthToken
               _clgFields
-              _clgAlt
+              (Just _clgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarListGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarListGetResource)
                       r
                       u

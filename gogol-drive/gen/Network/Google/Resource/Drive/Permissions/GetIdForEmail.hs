@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the permission ID for an email address.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGetIdForEmail@.
-module Drive.Permissions.GetIdForEmail
+module Network.Google.Resource.Drive.Permissions.GetIdForEmail
     (
     -- * REST Resource
-      PermissionsGetIdForEmailAPI
+      PermissionsGetIdForEmailResource
 
     -- * Creating a Request
-    , permissionsGetIdForEmail
-    , PermissionsGetIdForEmail
+    , permissionsGetIdForEmail'
+    , PermissionsGetIdForEmail'
 
     -- * Request Lenses
     , pgifeEmail
@@ -43,15 +44,22 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePermissionsGetIdForEmail@ which the
--- 'PermissionsGetIdForEmail' request conforms to.
-type PermissionsGetIdForEmailAPI =
+-- 'PermissionsGetIdForEmail'' request conforms to.
+type PermissionsGetIdForEmailResource =
      "permissionIds" :>
-       Capture "email" Text :> Get '[JSON] PermissionId
+       Capture "email" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] PermissionId
 
 -- | Returns the permission ID for an email address.
 --
--- /See:/ 'permissionsGetIdForEmail' smart constructor.
-data PermissionsGetIdForEmail = PermissionsGetIdForEmail
+-- /See:/ 'permissionsGetIdForEmail'' smart constructor.
+data PermissionsGetIdForEmail' = PermissionsGetIdForEmail'
     { _pgifeEmail       :: !Text
     , _pgifeQuotaUser   :: !(Maybe Text)
     , _pgifePrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data PermissionsGetIdForEmail = PermissionsGetIdForEmail
     , _pgifeKey         :: !(Maybe Text)
     , _pgifeOauthToken  :: !(Maybe Text)
     , _pgifeFields      :: !(Maybe Text)
-    , _pgifeAlt         :: !Text
+    , _pgifeAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGetIdForEmail'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data PermissionsGetIdForEmail = PermissionsGetIdForEmail
 -- * 'pgifeFields'
 --
 -- * 'pgifeAlt'
-permissionsGetIdForEmail
+permissionsGetIdForEmail'
     :: Text -- ^ 'email'
-    -> PermissionsGetIdForEmail
-permissionsGetIdForEmail pPgifeEmail_ =
-    PermissionsGetIdForEmail
+    -> PermissionsGetIdForEmail'
+permissionsGetIdForEmail' pPgifeEmail_ =
+    PermissionsGetIdForEmail'
     { _pgifeEmail = pPgifeEmail_
     , _pgifeQuotaUser = Nothing
     , _pgifePrettyPrint = True
@@ -93,7 +101,7 @@ permissionsGetIdForEmail pPgifeEmail_ =
     , _pgifeKey = Nothing
     , _pgifeOauthToken = Nothing
     , _pgifeFields = Nothing
-    , _pgifeAlt = "json"
+    , _pgifeAlt = JSON
     }
 
 -- | The email address for which to return a permission ID
@@ -139,22 +147,23 @@ pgifeFields
   = lens _pgifeFields (\ s a -> s{_pgifeFields = a})
 
 -- | Data format for the response.
-pgifeAlt :: Lens' PermissionsGetIdForEmail' Text
+pgifeAlt :: Lens' PermissionsGetIdForEmail' Alt
 pgifeAlt = lens _pgifeAlt (\ s a -> s{_pgifeAlt = a})
 
 instance GoogleRequest PermissionsGetIdForEmail'
          where
         type Rs PermissionsGetIdForEmail' = PermissionId
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsGetIdForEmail{..}
-          = go _pgifeEmail _pgifeQuotaUser _pgifePrettyPrint
+        requestWithRoute r u PermissionsGetIdForEmail'{..}
+          = go _pgifeEmail _pgifeQuotaUser
+              (Just _pgifePrettyPrint)
               _pgifeUserIp
               _pgifeKey
               _pgifeOauthToken
               _pgifeFields
-              _pgifeAlt
+              (Just _pgifeAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PermissionsGetIdForEmailAPI)
+                      (Proxy :: Proxy PermissionsGetIdForEmailResource)
                       r
                       u

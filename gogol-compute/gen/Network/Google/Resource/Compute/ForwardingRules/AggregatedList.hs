@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of forwarding rules grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesAggregatedList@.
-module Compute.ForwardingRules.AggregatedList
+module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
     (
     -- * REST Resource
-      ForwardingRulesAggregatedListAPI
+      ForwardingRulesAggregatedListResource
 
     -- * Creating a Request
-    , forwardingRulesAggregatedList
-    , ForwardingRulesAggregatedList
+    , forwardingRulesAggregatedList'
+    , ForwardingRulesAggregatedList'
 
     -- * Request Lenses
     , fralQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeForwardingRulesAggregatedList@ which the
--- 'ForwardingRulesAggregatedList' request conforms to.
-type ForwardingRulesAggregatedListAPI =
+-- 'ForwardingRulesAggregatedList'' request conforms to.
+type ForwardingRulesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "forwardingRules" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ForwardingRuleAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ForwardingRuleAggregatedList
 
 -- | Retrieves the list of forwarding rules grouped by scope.
 --
--- /See:/ 'forwardingRulesAggregatedList' smart constructor.
-data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
+-- /See:/ 'forwardingRulesAggregatedList'' smart constructor.
+data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
     { _fralQuotaUser   :: !(Maybe Text)
     , _fralPrettyPrint :: !Bool
     , _fralProject     :: !Text
@@ -70,7 +78,7 @@ data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
     , _fralOauthToken  :: !(Maybe Text)
     , _fralMaxResults  :: !Word32
     , _fralFields      :: !(Maybe Text)
-    , _fralAlt         :: !Text
+    , _fralAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
 -- * 'fralFields'
 --
 -- * 'fralAlt'
-forwardingRulesAggregatedList
+forwardingRulesAggregatedList'
     :: Text -- ^ 'project'
-    -> ForwardingRulesAggregatedList
-forwardingRulesAggregatedList pFralProject_ =
-    ForwardingRulesAggregatedList
+    -> ForwardingRulesAggregatedList'
+forwardingRulesAggregatedList' pFralProject_ =
+    ForwardingRulesAggregatedList'
     { _fralQuotaUser = Nothing
     , _fralPrettyPrint = True
     , _fralProject = pFralProject_
@@ -113,7 +121,7 @@ forwardingRulesAggregatedList pFralProject_ =
     , _fralOauthToken = Nothing
     , _fralMaxResults = 500
     , _fralFields = Nothing
-    , _fralAlt = "json"
+    , _fralAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ fralFields
   = lens _fralFields (\ s a -> s{_fralFields = a})
 
 -- | Data format for the response.
-fralAlt :: Lens' ForwardingRulesAggregatedList' Text
+fralAlt :: Lens' ForwardingRulesAggregatedList' Alt
 fralAlt = lens _fralAlt (\ s a -> s{_fralAlt = a})
 
 instance GoogleRequest ForwardingRulesAggregatedList'
@@ -197,8 +205,9 @@ instance GoogleRequest ForwardingRulesAggregatedList'
              ForwardingRuleAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          ForwardingRulesAggregatedList{..}
-          = go _fralQuotaUser _fralPrettyPrint _fralProject
+          ForwardingRulesAggregatedList'{..}
+          = go _fralQuotaUser (Just _fralPrettyPrint)
+              _fralProject
               _fralUserIp
               _fralKey
               _fralFilter
@@ -206,9 +215,10 @@ instance GoogleRequest ForwardingRulesAggregatedList'
               _fralOauthToken
               (Just _fralMaxResults)
               _fralFields
-              _fralAlt
+              (Just _fralAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ForwardingRulesAggregatedListAPI)
+                      (Proxy ::
+                         Proxy ForwardingRulesAggregatedListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified TargetHttpProxy resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesDelete@.
-module Compute.TargetHTTPProxies.Delete
+module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
     (
     -- * REST Resource
-      TargetHTTPProxiesDeleteAPI
+      TargetHTTPProxiesDeleteResource
 
     -- * Creating a Request
-    , targetHTTPProxiesDelete
-    , TargetHTTPProxiesDelete
+    , targetHTTPProxiesDelete'
+    , TargetHTTPProxiesDelete'
 
     -- * Request Lenses
     , thttppdQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetHTTPProxiesDelete@ which the
--- 'TargetHTTPProxiesDelete' request conforms to.
-type TargetHTTPProxiesDeleteAPI =
+-- 'TargetHTTPProxiesDelete'' request conforms to.
+type TargetHTTPProxiesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "targetHttpProxies" :>
            Capture "targetHttpProxy" Text :>
-             Delete '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetHttpProxy resource.
 --
--- /See:/ 'targetHTTPProxiesDelete' smart constructor.
-data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete
+-- /See:/ 'targetHTTPProxiesDelete'' smart constructor.
+data TargetHTTPProxiesDelete' = TargetHTTPProxiesDelete'
     { _thttppdQuotaUser       :: !(Maybe Text)
     , _thttppdPrettyPrint     :: !Bool
     , _thttppdProject         :: !Text
@@ -64,7 +71,7 @@ data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete
     , _thttppdTargetHttpProxy :: !Text
     , _thttppdOauthToken      :: !(Maybe Text)
     , _thttppdFields          :: !(Maybe Text)
-    , _thttppdAlt             :: !Text
+    , _thttppdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete
 -- * 'thttppdFields'
 --
 -- * 'thttppdAlt'
-targetHTTPProxiesDelete
+targetHTTPProxiesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetHttpProxy'
-    -> TargetHTTPProxiesDelete
-targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHttpProxy_ =
-    TargetHTTPProxiesDelete
+    -> TargetHTTPProxiesDelete'
+targetHTTPProxiesDelete' pThttppdProject_ pThttppdTargetHttpProxy_ =
+    TargetHTTPProxiesDelete'
     { _thttppdQuotaUser = Nothing
     , _thttppdPrettyPrint = True
     , _thttppdProject = pThttppdProject_
@@ -102,7 +109,7 @@ targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHttpProxy_ =
     , _thttppdTargetHttpProxy = pThttppdTargetHttpProxy_
     , _thttppdOauthToken = Nothing
     , _thttppdFields = Nothing
-    , _thttppdAlt = "json"
+    , _thttppdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,24 +165,24 @@ thttppdFields
       (\ s a -> s{_thttppdFields = a})
 
 -- | Data format for the response.
-thttppdAlt :: Lens' TargetHTTPProxiesDelete' Text
+thttppdAlt :: Lens' TargetHTTPProxiesDelete' Alt
 thttppdAlt
   = lens _thttppdAlt (\ s a -> s{_thttppdAlt = a})
 
 instance GoogleRequest TargetHTTPProxiesDelete' where
         type Rs TargetHTTPProxiesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesDelete{..}
-          = go _thttppdQuotaUser _thttppdPrettyPrint
+        requestWithRoute r u TargetHTTPProxiesDelete'{..}
+          = go _thttppdQuotaUser (Just _thttppdPrettyPrint)
               _thttppdProject
               _thttppdUserIp
               _thttppdKey
               _thttppdTargetHttpProxy
               _thttppdOauthToken
               _thttppdFields
-              _thttppdAlt
+              (Just _thttppdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetHTTPProxiesDeleteAPI)
+                      (Proxy :: Proxy TargetHTTPProxiesDeleteResource)
                       r
                       u

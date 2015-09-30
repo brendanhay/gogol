@@ -18,13 +18,145 @@ module Network.Google.Prediction.Types.Product where
 import           Network.Google.Prediction.Types.Sum
 import           Network.Google.Prelude
 
+-- | Model metadata.
+--
+-- /See:/ 'insert2ModelInfo' smart constructor.
+data Insert2ModelInfo = Insert2ModelInfo
+    { _imiModelType              :: !(Maybe Text)
+    , _imiClassWeightedAccuracy  :: !(Maybe Text)
+    , _imiClassificationAccuracy :: !(Maybe Text)
+    , _imiMeanSquaredError       :: !(Maybe Text)
+    , _imiNumberLabels           :: !(Maybe Int64)
+    , _imiNumberInstances        :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Insert2ModelInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'imiModelType'
+--
+-- * 'imiClassWeightedAccuracy'
+--
+-- * 'imiClassificationAccuracy'
+--
+-- * 'imiMeanSquaredError'
+--
+-- * 'imiNumberLabels'
+--
+-- * 'imiNumberInstances'
+insert2ModelInfo
+    :: Insert2ModelInfo
+insert2ModelInfo =
+    Insert2ModelInfo
+    { _imiModelType = Nothing
+    , _imiClassWeightedAccuracy = Nothing
+    , _imiClassificationAccuracy = Nothing
+    , _imiMeanSquaredError = Nothing
+    , _imiNumberLabels = Nothing
+    , _imiNumberInstances = Nothing
+    }
+
+-- | Type of predictive model (CLASSIFICATION or REGRESSION).
+imiModelType :: Lens' Insert2ModelInfo (Maybe Text)
+imiModelType
+  = lens _imiModelType (\ s a -> s{_imiModelType = a})
+
+-- | Estimated accuracy of model taking utility weights into account
+-- (Categorical models only).
+imiClassWeightedAccuracy :: Lens' Insert2ModelInfo (Maybe Text)
+imiClassWeightedAccuracy
+  = lens _imiClassWeightedAccuracy
+      (\ s a -> s{_imiClassWeightedAccuracy = a})
+
+-- | A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an
+-- estimate, based on the amount and quality of the training data, of the
+-- estimated prediction accuracy. You can use this is a guide to decide
+-- whether the results are accurate enough for your needs. This estimate
+-- will be more reliable if your real input data is similar to your
+-- training data (Categorical models only).
+imiClassificationAccuracy :: Lens' Insert2ModelInfo (Maybe Text)
+imiClassificationAccuracy
+  = lens _imiClassificationAccuracy
+      (\ s a -> s{_imiClassificationAccuracy = a})
+
+-- | An estimated mean squared error. The can be used to measure the quality
+-- of the predicted model (Regression models only).
+imiMeanSquaredError :: Lens' Insert2ModelInfo (Maybe Text)
+imiMeanSquaredError
+  = lens _imiMeanSquaredError
+      (\ s a -> s{_imiMeanSquaredError = a})
+
+-- | Number of class labels in the trained model (Categorical models only).
+imiNumberLabels :: Lens' Insert2ModelInfo (Maybe Int64)
+imiNumberLabels
+  = lens _imiNumberLabels
+      (\ s a -> s{_imiNumberLabels = a})
+
+-- | Number of valid data instances used in the trained model.
+imiNumberInstances :: Lens' Insert2ModelInfo (Maybe Int64)
+imiNumberInstances
+  = lens _imiNumberInstances
+      (\ s a -> s{_imiNumberInstances = a})
+
+instance FromJSON Insert2ModelInfo where
+        parseJSON
+          = withObject "Insert2ModelInfo"
+              (\ o ->
+                 Insert2ModelInfo <$>
+                   (o .:? "modelType") <*>
+                     (o .:? "classWeightedAccuracy")
+                     <*> (o .:? "classificationAccuracy")
+                     <*> (o .:? "meanSquaredError")
+                     <*> (o .:? "numberLabels")
+                     <*> (o .:? "numberInstances"))
+
+instance ToJSON Insert2ModelInfo where
+        toJSON Insert2ModelInfo{..}
+          = object
+              (catMaybes
+                 [("modelType" .=) <$> _imiModelType,
+                  ("classWeightedAccuracy" .=) <$>
+                    _imiClassWeightedAccuracy,
+                  ("classificationAccuracy" .=) <$>
+                    _imiClassificationAccuracy,
+                  ("meanSquaredError" .=) <$> _imiMeanSquaredError,
+                  ("numberLabels" .=) <$> _imiNumberLabels,
+                  ("numberInstances" .=) <$> _imiNumberInstances])
+
+-- | A list of the confusion matrix row totals.
+--
+-- /See:/ 'analyzeModelDescriptionConfusionMatrixRowTotals' smart constructor.
+data AnalyzeModelDescriptionConfusionMatrixRowTotals =
+    AnalyzeModelDescriptionConfusionMatrixRowTotals
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrixRowTotals' with the minimum fields required to make a request.
+--
+analyzeModelDescriptionConfusionMatrixRowTotals
+    :: AnalyzeModelDescriptionConfusionMatrixRowTotals
+analyzeModelDescriptionConfusionMatrixRowTotals =
+    AnalyzeModelDescriptionConfusionMatrixRowTotals
+
+instance FromJSON
+         AnalyzeModelDescriptionConfusionMatrixRowTotals where
+        parseJSON
+          = withObject
+              "AnalyzeModelDescriptionConfusionMatrixRowTotals"
+              (\ o ->
+                 pure AnalyzeModelDescriptionConfusionMatrixRowTotals)
+
+instance ToJSON
+         AnalyzeModelDescriptionConfusionMatrixRowTotals where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'insert' smart constructor.
 data Insert = Insert
     { _iStorageDataLocation      :: !(Maybe Text)
     , _iModelType                :: !(Maybe Text)
-    , _iTrainingInstances        :: !(Maybe [InsertTrainingInstancesItem])
-    , _iUtility                  :: !(Maybe [InsertUtilityItem])
+    , _iTrainingInstances        :: !(Maybe [InsertTrainingInstances])
+    , _iUtility                  :: !(Maybe [InsertUtility])
     , _iStoragePMMLModelLocation :: !(Maybe Text)
     , _iSourceModel              :: !(Maybe Text)
     , _iId                       :: !(Maybe Text)
@@ -76,7 +208,7 @@ iModelType
   = lens _iModelType (\ s a -> s{_iModelType = a})
 
 -- | Instances to train model on.
-iTrainingInstances :: Lens' Insert [InsertTrainingInstancesItem]
+iTrainingInstances :: Lens' Insert [InsertTrainingInstances]
 iTrainingInstances
   = lens _iTrainingInstances
       (\ s a -> s{_iTrainingInstances = a})
@@ -85,7 +217,7 @@ iTrainingInstances
 
 -- | A class weighting function, which allows the importance weights for
 -- class labels to be specified (Categorical models only).
-iUtility :: Lens' Insert [InsertUtilityItem]
+iUtility :: Lens' Insert [InsertUtility]
 iUtility
   = lens _iUtility (\ s a -> s{_iUtility = a}) .
       _Default
@@ -140,6 +272,26 @@ instance ToJSON Insert where
                   ("id" .=) <$> _iId,
                   ("storagePMMLLocation" .=) <$>
                     _iStoragePMMLLocation])
+
+--
+-- /See:/ 'analyzeErrors' smart constructor.
+data AnalyzeErrors =
+    AnalyzeErrors
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeErrors' with the minimum fields required to make a request.
+--
+analyzeErrors
+    :: AnalyzeErrors
+analyzeErrors = AnalyzeErrors
+
+instance FromJSON AnalyzeErrors where
+        parseJSON
+          = withObject "AnalyzeErrors"
+              (\ o -> pure AnalyzeErrors)
+
+instance ToJSON AnalyzeErrors where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'list' smart constructor.
@@ -363,6 +515,150 @@ instance ToJSON Insert2 where
                   ("modelInfo" .=) <$> _insModelInfo])
 
 --
+-- /See:/ 'analyzeDataDescriptionFeatures' smart constructor.
+data AnalyzeDataDescriptionFeatures = AnalyzeDataDescriptionFeatures
+    { _addfText        :: !(Maybe AnalyzeDataDescriptionFeaturesText)
+    , _addfNumeric     :: !(Maybe AnalyzeDataDescriptionFeaturesNumeric)
+    , _addfIndex       :: !(Maybe Int64)
+    , _addfCategorical :: !(Maybe AnalyzeDataDescriptionFeaturesCategorical)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionFeatures' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addfText'
+--
+-- * 'addfNumeric'
+--
+-- * 'addfIndex'
+--
+-- * 'addfCategorical'
+analyzeDataDescriptionFeatures
+    :: AnalyzeDataDescriptionFeatures
+analyzeDataDescriptionFeatures =
+    AnalyzeDataDescriptionFeatures
+    { _addfText = Nothing
+    , _addfNumeric = Nothing
+    , _addfIndex = Nothing
+    , _addfCategorical = Nothing
+    }
+
+-- | Description of multiple-word text values of this feature.
+addfText :: Lens' AnalyzeDataDescriptionFeatures (Maybe AnalyzeDataDescriptionFeaturesText)
+addfText = lens _addfText (\ s a -> s{_addfText = a})
+
+-- | Description of the numeric values of this feature.
+addfNumeric :: Lens' AnalyzeDataDescriptionFeatures (Maybe AnalyzeDataDescriptionFeaturesNumeric)
+addfNumeric
+  = lens _addfNumeric (\ s a -> s{_addfNumeric = a})
+
+-- | The feature index.
+addfIndex :: Lens' AnalyzeDataDescriptionFeatures (Maybe Int64)
+addfIndex
+  = lens _addfIndex (\ s a -> s{_addfIndex = a})
+
+-- | Description of the categorical values of this feature.
+addfCategorical :: Lens' AnalyzeDataDescriptionFeatures (Maybe AnalyzeDataDescriptionFeaturesCategorical)
+addfCategorical
+  = lens _addfCategorical
+      (\ s a -> s{_addfCategorical = a})
+
+instance FromJSON AnalyzeDataDescriptionFeatures
+         where
+        parseJSON
+          = withObject "AnalyzeDataDescriptionFeatures"
+              (\ o ->
+                 AnalyzeDataDescriptionFeatures <$>
+                   (o .:? "text") <*> (o .:? "numeric") <*>
+                     (o .:? "index")
+                     <*> (o .:? "categorical"))
+
+instance ToJSON AnalyzeDataDescriptionFeatures where
+        toJSON AnalyzeDataDescriptionFeatures{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _addfText,
+                  ("numeric" .=) <$> _addfNumeric,
+                  ("index" .=) <$> _addfIndex,
+                  ("categorical" .=) <$> _addfCategorical])
+
+-- | Description of multiple-word text values of this feature.
+--
+-- /See:/ 'analyzeDataDescriptionFeaturesText' smart constructor.
+newtype AnalyzeDataDescriptionFeaturesText = AnalyzeDataDescriptionFeaturesText
+    { _addftCount :: Maybe Int64
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionFeaturesText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addftCount'
+analyzeDataDescriptionFeaturesText
+    :: AnalyzeDataDescriptionFeaturesText
+analyzeDataDescriptionFeaturesText =
+    AnalyzeDataDescriptionFeaturesText
+    { _addftCount = Nothing
+    }
+
+-- | Number of multiple-word text values for this feature.
+addftCount :: Lens' AnalyzeDataDescriptionFeaturesText (Maybe Int64)
+addftCount
+  = lens _addftCount (\ s a -> s{_addftCount = a})
+
+instance FromJSON AnalyzeDataDescriptionFeaturesText
+         where
+        parseJSON
+          = withObject "AnalyzeDataDescriptionFeaturesText"
+              (\ o ->
+                 AnalyzeDataDescriptionFeaturesText <$>
+                   (o .:? "count"))
+
+instance ToJSON AnalyzeDataDescriptionFeaturesText
+         where
+        toJSON AnalyzeDataDescriptionFeaturesText{..}
+          = object (catMaybes [("count" .=) <$> _addftCount])
+
+-- | Input to the model for a prediction.
+--
+-- /See:/ 'inputInput' smart constructor.
+newtype InputInput = InputInput
+    { _iiCsvInstance :: Maybe [JSONValue]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InputInput' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iiCsvInstance'
+inputInput
+    :: InputInput
+inputInput =
+    InputInput
+    { _iiCsvInstance = Nothing
+    }
+
+-- | A list of input features, these can be strings or doubles.
+iiCsvInstance :: Lens' InputInput [JSONValue]
+iiCsvInstance
+  = lens _iiCsvInstance
+      (\ s a -> s{_iiCsvInstance = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON InputInput where
+        parseJSON
+          = withObject "InputInput"
+              (\ o ->
+                 InputInput <$> (o .:? "csvInstance" .!= mempty))
+
+instance ToJSON InputInput where
+        toJSON InputInput{..}
+          = object
+              (catMaybes [("csvInstance" .=) <$> _iiCsvInstance])
+
+--
 -- /See:/ 'input' smart constructor.
 newtype Input = Input
     { _iInput :: Maybe InputInput
@@ -394,13 +690,134 @@ instance ToJSON Input where
           = object (catMaybes [("input" .=) <$> _iInput])
 
 --
+-- /See:/ 'outputOutputMulti' smart constructor.
+data OutputOutputMulti = OutputOutputMulti
+    { _oomScore :: !(Maybe Text)
+    , _oomLabel :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OutputOutputMulti' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oomScore'
+--
+-- * 'oomLabel'
+outputOutputMulti
+    :: OutputOutputMulti
+outputOutputMulti =
+    OutputOutputMulti
+    { _oomScore = Nothing
+    , _oomLabel = Nothing
+    }
+
+-- | The probability of the class label.
+oomScore :: Lens' OutputOutputMulti (Maybe Text)
+oomScore = lens _oomScore (\ s a -> s{_oomScore = a})
+
+-- | The class label.
+oomLabel :: Lens' OutputOutputMulti (Maybe Text)
+oomLabel = lens _oomLabel (\ s a -> s{_oomLabel = a})
+
+instance FromJSON OutputOutputMulti where
+        parseJSON
+          = withObject "OutputOutputMulti"
+              (\ o ->
+                 OutputOutputMulti <$>
+                   (o .:? "score") <*> (o .:? "label"))
+
+instance ToJSON OutputOutputMulti where
+        toJSON OutputOutputMulti{..}
+          = object
+              (catMaybes
+                 [("score" .=) <$> _oomScore,
+                  ("label" .=) <$> _oomLabel])
+
+-- | An output confusion matrix. This shows an estimate for how this model
+-- will do in predictions. This is first indexed by the true class label.
+-- For each true class label, this provides a pair {predicted_label,
+-- count}, where count is the estimated number of times the model will
+-- predict the predicted label given the true label. Will not output if
+-- more then 100 classes (Categorical models only).
+--
+-- /See:/ 'analyzeModelDescriptionConfusionMatrix' smart constructor.
+data AnalyzeModelDescriptionConfusionMatrix =
+    AnalyzeModelDescriptionConfusionMatrix
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeModelDescriptionConfusionMatrix' with the minimum fields required to make a request.
+--
+analyzeModelDescriptionConfusionMatrix
+    :: AnalyzeModelDescriptionConfusionMatrix
+analyzeModelDescriptionConfusionMatrix = AnalyzeModelDescriptionConfusionMatrix
+
+instance FromJSON
+         AnalyzeModelDescriptionConfusionMatrix where
+        parseJSON
+          = withObject "AnalyzeModelDescriptionConfusionMatrix"
+              (\ o -> pure AnalyzeModelDescriptionConfusionMatrix)
+
+instance ToJSON
+         AnalyzeModelDescriptionConfusionMatrix where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'analyzeDataDescriptionOutputFeatureText' smart constructor.
+data AnalyzeDataDescriptionOutputFeatureText = AnalyzeDataDescriptionOutputFeatureText
+    { _addoftValue :: !(Maybe Text)
+    , _addoftCount :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureText' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addoftValue'
+--
+-- * 'addoftCount'
+analyzeDataDescriptionOutputFeatureText
+    :: AnalyzeDataDescriptionOutputFeatureText
+analyzeDataDescriptionOutputFeatureText =
+    AnalyzeDataDescriptionOutputFeatureText
+    { _addoftValue = Nothing
+    , _addoftCount = Nothing
+    }
+
+-- | The output label.
+addoftValue :: Lens' AnalyzeDataDescriptionOutputFeatureText (Maybe Text)
+addoftValue
+  = lens _addoftValue (\ s a -> s{_addoftValue = a})
+
+-- | Number of times the output label occurred in the data set.
+addoftCount :: Lens' AnalyzeDataDescriptionOutputFeatureText (Maybe Int64)
+addoftCount
+  = lens _addoftCount (\ s a -> s{_addoftCount = a})
+
+instance FromJSON
+         AnalyzeDataDescriptionOutputFeatureText where
+        parseJSON
+          = withObject
+              "AnalyzeDataDescriptionOutputFeatureText"
+              (\ o ->
+                 AnalyzeDataDescriptionOutputFeatureText <$>
+                   (o .:? "value") <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeDataDescriptionOutputFeatureText where
+        toJSON AnalyzeDataDescriptionOutputFeatureText{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _addoftValue,
+                  ("count" .=) <$> _addoftCount])
+
+--
 -- /See:/ 'analyze' smart constructor.
 data Analyze = Analyze
     { _aKind             :: !Text
     , _aModelDescription :: !(Maybe AnalyzeModelDescription)
     , _aSelfLink         :: !(Maybe Text)
     , _aId               :: !(Maybe Text)
-    , _aErrors           :: !(Maybe [AnalyzeErrorsItem])
+    , _aErrors           :: !(Maybe [AnalyzeErrors])
     , _aDataDescription  :: !(Maybe AnalyzeDataDescription)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -451,7 +868,7 @@ aId :: Lens' Analyze (Maybe Text)
 aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | List of errors with the data.
-aErrors :: Lens' Analyze [AnalyzeErrorsItem]
+aErrors :: Lens' Analyze [AnalyzeErrors]
 aErrors
   = lens _aErrors (\ s a -> s{_aErrors = a}) . _Default
       . _Coerce
@@ -492,7 +909,7 @@ data Output = Output
     , _oOutputLabel :: !(Maybe Text)
     , _oSelfLink    :: !(Maybe Text)
     , _oId          :: !(Maybe Text)
-    , _oOutputMulti :: !(Maybe [OutputOutputMultiItem])
+    , _oOutputMulti :: !(Maybe [OutputOutputMulti])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Output' with the minimum fields required to make a request.
@@ -547,7 +964,7 @@ oId = lens _oId (\ s a -> s{_oId = a})
 
 -- | A list of class labels with their estimated probabilities (Categorical
 -- models only).
-oOutputMulti :: Lens' Output [OutputOutputMultiItem]
+oOutputMulti :: Lens' Output [OutputOutputMulti]
 oOutputMulti
   = lens _oOutputMulti (\ s a -> s{_oOutputMulti = a})
       . _Default
@@ -575,10 +992,424 @@ instance ToJSON Output where
                   ("selfLink" .=) <$> _oSelfLink, ("id" .=) <$> _oId,
                   ("outputMulti" .=) <$> _oOutputMulti])
 
+-- | Class label (string).
+--
+-- /See:/ 'insertUtility' smart constructor.
+data InsertUtility =
+    InsertUtility
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InsertUtility' with the minimum fields required to make a request.
+--
+insertUtility
+    :: InsertUtility
+insertUtility = InsertUtility
+
+instance FromJSON InsertUtility where
+        parseJSON
+          = withObject "InsertUtility"
+              (\ o -> pure InsertUtility)
+
+instance ToJSON InsertUtility where
+        toJSON = const (Object mempty)
+
+-- | Description of the data the model was trained on.
+--
+-- /See:/ 'analyzeDataDescription' smart constructor.
+data AnalyzeDataDescription = AnalyzeDataDescription
+    { _addOutputFeature :: !(Maybe AnalyzeDataDescriptionOutputFeature)
+    , _addFeatures      :: !(Maybe [AnalyzeDataDescriptionFeatures])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescription' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addOutputFeature'
+--
+-- * 'addFeatures'
+analyzeDataDescription
+    :: AnalyzeDataDescription
+analyzeDataDescription =
+    AnalyzeDataDescription
+    { _addOutputFeature = Nothing
+    , _addFeatures = Nothing
+    }
+
+-- | Description of the output value or label.
+addOutputFeature :: Lens' AnalyzeDataDescription (Maybe AnalyzeDataDescriptionOutputFeature)
+addOutputFeature
+  = lens _addOutputFeature
+      (\ s a -> s{_addOutputFeature = a})
+
+-- | Description of the input features in the data set.
+addFeatures :: Lens' AnalyzeDataDescription [AnalyzeDataDescriptionFeatures]
+addFeatures
+  = lens _addFeatures (\ s a -> s{_addFeatures = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON AnalyzeDataDescription where
+        parseJSON
+          = withObject "AnalyzeDataDescription"
+              (\ o ->
+                 AnalyzeDataDescription <$>
+                   (o .:? "outputFeature") <*>
+                     (o .:? "features" .!= mempty))
+
+instance ToJSON AnalyzeDataDescription where
+        toJSON AnalyzeDataDescription{..}
+          = object
+              (catMaybes
+                 [("outputFeature" .=) <$> _addOutputFeature,
+                  ("features" .=) <$> _addFeatures])
+
+-- | Description of the output values in the data set.
+--
+-- /See:/ 'analyzeDataDescriptionOutputFeatureNumeric' smart constructor.
+data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric
+    { _addofnMean     :: !(Maybe Text)
+    , _addofnCount    :: !(Maybe Int64)
+    , _addofnVariance :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionOutputFeatureNumeric' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addofnMean'
+--
+-- * 'addofnCount'
+--
+-- * 'addofnVariance'
+analyzeDataDescriptionOutputFeatureNumeric
+    :: AnalyzeDataDescriptionOutputFeatureNumeric
+analyzeDataDescriptionOutputFeatureNumeric =
+    AnalyzeDataDescriptionOutputFeatureNumeric
+    { _addofnMean = Nothing
+    , _addofnCount = Nothing
+    , _addofnVariance = Nothing
+    }
+
+-- | Mean of the output values in the data set.
+addofnMean :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Text)
+addofnMean
+  = lens _addofnMean (\ s a -> s{_addofnMean = a})
+
+-- | Number of numeric output values in the data set.
+addofnCount :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Int64)
+addofnCount
+  = lens _addofnCount (\ s a -> s{_addofnCount = a})
+
+-- | Variance of the output values in the data set.
+addofnVariance :: Lens' AnalyzeDataDescriptionOutputFeatureNumeric (Maybe Text)
+addofnVariance
+  = lens _addofnVariance
+      (\ s a -> s{_addofnVariance = a})
+
+instance FromJSON
+         AnalyzeDataDescriptionOutputFeatureNumeric where
+        parseJSON
+          = withObject
+              "AnalyzeDataDescriptionOutputFeatureNumeric"
+              (\ o ->
+                 AnalyzeDataDescriptionOutputFeatureNumeric <$>
+                   (o .:? "mean") <*> (o .:? "count") <*>
+                     (o .:? "variance"))
+
+instance ToJSON
+         AnalyzeDataDescriptionOutputFeatureNumeric where
+        toJSON AnalyzeDataDescriptionOutputFeatureNumeric{..}
+          = object
+              (catMaybes
+                 [("mean" .=) <$> _addofnMean,
+                  ("count" .=) <$> _addofnCount,
+                  ("variance" .=) <$> _addofnVariance])
+
+-- | Description of the model.
+--
+-- /See:/ 'analyzeModelDescription' smart constructor.
+data AnalyzeModelDescription = AnalyzeModelDescription
+    { _amdConfusionMatrixRowTotals :: !(Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
+    , _amdConfusionMatrix          :: !(Maybe AnalyzeModelDescriptionConfusionMatrix)
+    , _amdModelinfo                :: !(Maybe (Maybe Insert2))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeModelDescription' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'amdConfusionMatrixRowTotals'
+--
+-- * 'amdConfusionMatrix'
+--
+-- * 'amdModelinfo'
+analyzeModelDescription
+    :: AnalyzeModelDescription
+analyzeModelDescription =
+    AnalyzeModelDescription
+    { _amdConfusionMatrixRowTotals = Nothing
+    , _amdConfusionMatrix = Nothing
+    , _amdModelinfo = Nothing
+    }
+
+-- | A list of the confusion matrix row totals.
+amdConfusionMatrixRowTotals :: Lens' AnalyzeModelDescription (Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
+amdConfusionMatrixRowTotals
+  = lens _amdConfusionMatrixRowTotals
+      (\ s a -> s{_amdConfusionMatrixRowTotals = a})
+
+-- | An output confusion matrix. This shows an estimate for how this model
+-- will do in predictions. This is first indexed by the true class label.
+-- For each true class label, this provides a pair {predicted_label,
+-- count}, where count is the estimated number of times the model will
+-- predict the predicted label given the true label. Will not output if
+-- more then 100 classes (Categorical models only).
+amdConfusionMatrix :: Lens' AnalyzeModelDescription (Maybe AnalyzeModelDescriptionConfusionMatrix)
+amdConfusionMatrix
+  = lens _amdConfusionMatrix
+      (\ s a -> s{_amdConfusionMatrix = a})
+
+-- | Basic information about the model.
+amdModelinfo :: Lens' AnalyzeModelDescription (Maybe (Maybe Insert2))
+amdModelinfo
+  = lens _amdModelinfo (\ s a -> s{_amdModelinfo = a})
+
+instance FromJSON AnalyzeModelDescription where
+        parseJSON
+          = withObject "AnalyzeModelDescription"
+              (\ o ->
+                 AnalyzeModelDescription <$>
+                   (o .:? "confusionMatrixRowTotals") <*>
+                     (o .:? "confusionMatrix")
+                     <*> (o .:? "modelinfo"))
+
+instance ToJSON AnalyzeModelDescription where
+        toJSON AnalyzeModelDescription{..}
+          = object
+              (catMaybes
+                 [("confusionMatrixRowTotals" .=) <$>
+                    _amdConfusionMatrixRowTotals,
+                  ("confusionMatrix" .=) <$> _amdConfusionMatrix,
+                  ("modelinfo" .=) <$> _amdModelinfo])
+
+--
+-- /See:/ 'insertTrainingInstances' smart constructor.
+data InsertTrainingInstances = InsertTrainingInstances
+    { _itiCsvInstance :: !(Maybe [JSONValue])
+    , _itiOutput      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InsertTrainingInstances' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'itiCsvInstance'
+--
+-- * 'itiOutput'
+insertTrainingInstances
+    :: InsertTrainingInstances
+insertTrainingInstances =
+    InsertTrainingInstances
+    { _itiCsvInstance = Nothing
+    , _itiOutput = Nothing
+    }
+
+-- | The input features for this instance.
+itiCsvInstance :: Lens' InsertTrainingInstances [JSONValue]
+itiCsvInstance
+  = lens _itiCsvInstance
+      (\ s a -> s{_itiCsvInstance = a})
+      . _Default
+      . _Coerce
+
+-- | The generic output value - could be regression or class label.
+itiOutput :: Lens' InsertTrainingInstances (Maybe Text)
+itiOutput
+  = lens _itiOutput (\ s a -> s{_itiOutput = a})
+
+instance FromJSON InsertTrainingInstances where
+        parseJSON
+          = withObject "InsertTrainingInstances"
+              (\ o ->
+                 InsertTrainingInstances <$>
+                   (o .:? "csvInstance" .!= mempty) <*>
+                     (o .:? "output"))
+
+instance ToJSON InsertTrainingInstances where
+        toJSON InsertTrainingInstances{..}
+          = object
+              (catMaybes
+                 [("csvInstance" .=) <$> _itiCsvInstance,
+                  ("output" .=) <$> _itiOutput])
+
+--
+-- /See:/ 'analyzeDataDescriptionFeaturesCategoricalValues' smart constructor.
+data AnalyzeDataDescriptionFeaturesCategoricalValues = AnalyzeDataDescriptionFeaturesCategoricalValues
+    { _addfcvValue :: !(Maybe Text)
+    , _addfcvCount :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionFeaturesCategoricalValues' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addfcvValue'
+--
+-- * 'addfcvCount'
+analyzeDataDescriptionFeaturesCategoricalValues
+    :: AnalyzeDataDescriptionFeaturesCategoricalValues
+analyzeDataDescriptionFeaturesCategoricalValues =
+    AnalyzeDataDescriptionFeaturesCategoricalValues
+    { _addfcvValue = Nothing
+    , _addfcvCount = Nothing
+    }
+
+-- | The category name.
+addfcvValue :: Lens' AnalyzeDataDescriptionFeaturesCategoricalValues (Maybe Text)
+addfcvValue
+  = lens _addfcvValue (\ s a -> s{_addfcvValue = a})
+
+-- | Number of times this feature had this value.
+addfcvCount :: Lens' AnalyzeDataDescriptionFeaturesCategoricalValues (Maybe Int64)
+addfcvCount
+  = lens _addfcvCount (\ s a -> s{_addfcvCount = a})
+
+instance FromJSON
+         AnalyzeDataDescriptionFeaturesCategoricalValues where
+        parseJSON
+          = withObject
+              "AnalyzeDataDescriptionFeaturesCategoricalValues"
+              (\ o ->
+                 AnalyzeDataDescriptionFeaturesCategoricalValues <$>
+                   (o .:? "value") <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeDataDescriptionFeaturesCategoricalValues where
+        toJSON
+          AnalyzeDataDescriptionFeaturesCategoricalValues{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _addfcvValue,
+                  ("count" .=) <$> _addfcvCount])
+
+-- | Description of the categorical values of this feature.
+--
+-- /See:/ 'analyzeDataDescriptionFeaturesCategorical' smart constructor.
+data AnalyzeDataDescriptionFeaturesCategorical = AnalyzeDataDescriptionFeaturesCategorical
+    { _addfcValues :: !(Maybe [AnalyzeDataDescriptionFeaturesCategoricalValues])
+    , _addfcCount  :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionFeaturesCategorical' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addfcValues'
+--
+-- * 'addfcCount'
+analyzeDataDescriptionFeaturesCategorical
+    :: AnalyzeDataDescriptionFeaturesCategorical
+analyzeDataDescriptionFeaturesCategorical =
+    AnalyzeDataDescriptionFeaturesCategorical
+    { _addfcValues = Nothing
+    , _addfcCount = Nothing
+    }
+
+-- | List of all the categories for this feature in the data set.
+addfcValues :: Lens' AnalyzeDataDescriptionFeaturesCategorical [AnalyzeDataDescriptionFeaturesCategoricalValues]
+addfcValues
+  = lens _addfcValues (\ s a -> s{_addfcValues = a}) .
+      _Default
+      . _Coerce
+
+-- | Number of categorical values for this feature in the data.
+addfcCount :: Lens' AnalyzeDataDescriptionFeaturesCategorical (Maybe Int64)
+addfcCount
+  = lens _addfcCount (\ s a -> s{_addfcCount = a})
+
+instance FromJSON
+         AnalyzeDataDescriptionFeaturesCategorical where
+        parseJSON
+          = withObject
+              "AnalyzeDataDescriptionFeaturesCategorical"
+              (\ o ->
+                 AnalyzeDataDescriptionFeaturesCategorical <$>
+                   (o .:? "values" .!= mempty) <*> (o .:? "count"))
+
+instance ToJSON
+         AnalyzeDataDescriptionFeaturesCategorical where
+        toJSON AnalyzeDataDescriptionFeaturesCategorical{..}
+          = object
+              (catMaybes
+                 [("values" .=) <$> _addfcValues,
+                  ("count" .=) <$> _addfcCount])
+
+-- | Description of the numeric values of this feature.
+--
+-- /See:/ 'analyzeDataDescriptionFeaturesNumeric' smart constructor.
+data AnalyzeDataDescriptionFeaturesNumeric = AnalyzeDataDescriptionFeaturesNumeric
+    { _addfnMean     :: !(Maybe Text)
+    , _addfnCount    :: !(Maybe Int64)
+    , _addfnVariance :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionFeaturesNumeric' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addfnMean'
+--
+-- * 'addfnCount'
+--
+-- * 'addfnVariance'
+analyzeDataDescriptionFeaturesNumeric
+    :: AnalyzeDataDescriptionFeaturesNumeric
+analyzeDataDescriptionFeaturesNumeric =
+    AnalyzeDataDescriptionFeaturesNumeric
+    { _addfnMean = Nothing
+    , _addfnCount = Nothing
+    , _addfnVariance = Nothing
+    }
+
+-- | Mean of the numeric values of this feature in the data set.
+addfnMean :: Lens' AnalyzeDataDescriptionFeaturesNumeric (Maybe Text)
+addfnMean
+  = lens _addfnMean (\ s a -> s{_addfnMean = a})
+
+-- | Number of numeric values for this feature in the data set.
+addfnCount :: Lens' AnalyzeDataDescriptionFeaturesNumeric (Maybe Int64)
+addfnCount
+  = lens _addfnCount (\ s a -> s{_addfnCount = a})
+
+-- | Variance of the numeric values of this feature in the data set.
+addfnVariance :: Lens' AnalyzeDataDescriptionFeaturesNumeric (Maybe Text)
+addfnVariance
+  = lens _addfnVariance
+      (\ s a -> s{_addfnVariance = a})
+
+instance FromJSON
+         AnalyzeDataDescriptionFeaturesNumeric where
+        parseJSON
+          = withObject "AnalyzeDataDescriptionFeaturesNumeric"
+              (\ o ->
+                 AnalyzeDataDescriptionFeaturesNumeric <$>
+                   (o .:? "mean") <*> (o .:? "count") <*>
+                     (o .:? "variance"))
+
+instance ToJSON AnalyzeDataDescriptionFeaturesNumeric
+         where
+        toJSON AnalyzeDataDescriptionFeaturesNumeric{..}
+          = object
+              (catMaybes
+                 [("mean" .=) <$> _addfnMean,
+                  ("count" .=) <$> _addfnCount,
+                  ("variance" .=) <$> _addfnVariance])
+
 --
 -- /See:/ 'update' smart constructor.
 data Update = Update
-    { _uCsvInstance :: !(Maybe [JSON])
+    { _uCsvInstance :: !(Maybe [JSONValue])
     , _uOutput      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -598,7 +1429,7 @@ update =
     }
 
 -- | The input features for this instance.
-uCsvInstance :: Lens' Update [JSON]
+uCsvInstance :: Lens' Update [JSONValue]
 uCsvInstance
   = lens _uCsvInstance (\ s a -> s{_uCsvInstance = a})
       . _Default
@@ -622,3 +1453,54 @@ instance ToJSON Update where
               (catMaybes
                  [("csvInstance" .=) <$> _uCsvInstance,
                   ("output" .=) <$> _uOutput])
+
+-- | Description of the output value or label.
+--
+-- /See:/ 'analyzeDataDescriptionOutputFeature' smart constructor.
+data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature
+    { _addofText    :: !(Maybe [AnalyzeDataDescriptionOutputFeatureText])
+    , _addofNumeric :: !(Maybe AnalyzeDataDescriptionOutputFeatureNumeric)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AnalyzeDataDescriptionOutputFeature' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'addofText'
+--
+-- * 'addofNumeric'
+analyzeDataDescriptionOutputFeature
+    :: AnalyzeDataDescriptionOutputFeature
+analyzeDataDescriptionOutputFeature =
+    AnalyzeDataDescriptionOutputFeature
+    { _addofText = Nothing
+    , _addofNumeric = Nothing
+    }
+
+-- | Description of the output labels in the data set.
+addofText :: Lens' AnalyzeDataDescriptionOutputFeature [AnalyzeDataDescriptionOutputFeatureText]
+addofText
+  = lens _addofText (\ s a -> s{_addofText = a}) .
+      _Default
+      . _Coerce
+
+-- | Description of the output values in the data set.
+addofNumeric :: Lens' AnalyzeDataDescriptionOutputFeature (Maybe AnalyzeDataDescriptionOutputFeatureNumeric)
+addofNumeric
+  = lens _addofNumeric (\ s a -> s{_addofNumeric = a})
+
+instance FromJSON AnalyzeDataDescriptionOutputFeature
+         where
+        parseJSON
+          = withObject "AnalyzeDataDescriptionOutputFeature"
+              (\ o ->
+                 AnalyzeDataDescriptionOutputFeature <$>
+                   (o .:? "text" .!= mempty) <*> (o .:? "numeric"))
+
+instance ToJSON AnalyzeDataDescriptionOutputFeature
+         where
+        toJSON AnalyzeDataDescriptionOutputFeature{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _addofText,
+                  ("numeric" .=) <$> _addofNumeric])

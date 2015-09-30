@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a code for user action confirmation.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyGetOobConfirmationCode@.
-module IdentityToolkit.Relyingparty.GetOobConfirmationCode
+module Network.Google.Resource.IdentityToolkit.Relyingparty.GetOobConfirmationCode
     (
     -- * REST Resource
-      RelyingpartyGetOobConfirmationCodeAPI
+      RelyingpartyGetOobConfirmationCodeResource
 
     -- * Creating a Request
-    , relyingpartyGetOobConfirmationCode
-    , RelyingpartyGetOobConfirmationCode
+    , relyingpartyGetOobConfirmationCode'
+    , RelyingpartyGetOobConfirmationCode'
 
     -- * Request Lenses
     , rgoccQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyGetOobConfirmationCode@ which the
--- 'RelyingpartyGetOobConfirmationCode' request conforms to.
-type RelyingpartyGetOobConfirmationCodeAPI =
+-- 'RelyingpartyGetOobConfirmationCode'' request conforms to.
+type RelyingpartyGetOobConfirmationCodeResource =
      "getOobConfirmationCode" :>
-       Post '[JSON] GetOobConfirmationCodeResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] GetOobConfirmationCodeResponse
 
 -- | Get a code for user action confirmation.
 --
--- /See:/ 'relyingpartyGetOobConfirmationCode' smart constructor.
-data RelyingpartyGetOobConfirmationCode = RelyingpartyGetOobConfirmationCode
+-- /See:/ 'relyingpartyGetOobConfirmationCode'' smart constructor.
+data RelyingpartyGetOobConfirmationCode' = RelyingpartyGetOobConfirmationCode'
     { _rgoccQuotaUser   :: !(Maybe Text)
     , _rgoccPrettyPrint :: !Bool
     , _rgoccUserIp      :: !(Maybe Text)
     , _rgoccKey         :: !(Maybe Text)
     , _rgoccOauthToken  :: !(Maybe Text)
     , _rgoccFields      :: !(Maybe Text)
-    , _rgoccAlt         :: !Text
+    , _rgoccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyGetOobConfirmationCode'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data RelyingpartyGetOobConfirmationCode = RelyingpartyGetOobConfirmationCode
 -- * 'rgoccFields'
 --
 -- * 'rgoccAlt'
-relyingpartyGetOobConfirmationCode
-    :: RelyingpartyGetOobConfirmationCode
-relyingpartyGetOobConfirmationCode =
-    RelyingpartyGetOobConfirmationCode
+relyingpartyGetOobConfirmationCode'
+    :: RelyingpartyGetOobConfirmationCode'
+relyingpartyGetOobConfirmationCode' =
+    RelyingpartyGetOobConfirmationCode'
     { _rgoccQuotaUser = Nothing
     , _rgoccPrettyPrint = True
     , _rgoccUserIp = Nothing
     , _rgoccKey = Nothing
     , _rgoccOauthToken = Nothing
     , _rgoccFields = Nothing
-    , _rgoccAlt = "json"
+    , _rgoccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +136,7 @@ rgoccFields
   = lens _rgoccFields (\ s a -> s{_rgoccFields = a})
 
 -- | Data format for the response.
-rgoccAlt :: Lens' RelyingpartyGetOobConfirmationCode' Text
+rgoccAlt :: Lens' RelyingpartyGetOobConfirmationCode' Alt
 rgoccAlt = lens _rgoccAlt (\ s a -> s{_rgoccAlt = a})
 
 instance GoogleRequest
@@ -137,15 +145,16 @@ instance GoogleRequest
              GetOobConfirmationCodeResponse
         request = requestWithRoute defReq identityToolkitURL
         requestWithRoute r u
-          RelyingpartyGetOobConfirmationCode{..}
-          = go _rgoccQuotaUser _rgoccPrettyPrint _rgoccUserIp
+          RelyingpartyGetOobConfirmationCode'{..}
+          = go _rgoccQuotaUser (Just _rgoccPrettyPrint)
+              _rgoccUserIp
               _rgoccKey
               _rgoccOauthToken
               _rgoccFields
-              _rgoccAlt
+              (Just _rgoccAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RelyingpartyGetOobConfirmationCodeAPI)
+                         Proxy RelyingpartyGetOobConfirmationCodeResource)
                       r
                       u

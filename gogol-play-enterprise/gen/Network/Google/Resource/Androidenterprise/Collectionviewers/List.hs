@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- then only these users will see the collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionviewersList@.
-module Androidenterprise.Collectionviewers.List
+module Network.Google.Resource.Androidenterprise.Collectionviewers.List
     (
     -- * REST Resource
-      CollectionviewersListAPI
+      CollectionviewersListResource
 
     -- * Creating a Request
-    , collectionviewersList
-    , CollectionviewersList
+    , collectionviewersList'
+    , CollectionviewersList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -46,20 +47,28 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionviewersList@ which the
--- 'CollectionviewersList' request conforms to.
-type CollectionviewersListAPI =
+-- 'CollectionviewersList'' request conforms to.
+type CollectionviewersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
            Capture "collectionId" Text :>
-             "users" :> Get '[JSON] CollectionViewersListResponse
+             "users" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] CollectionViewersListResponse
 
 -- | Retrieves the IDs of the users who have been specifically allowed to see
 -- the collection. If the collection\'s visibility is set to viewersOnly
 -- then only these users will see the collection.
 --
--- /See:/ 'collectionviewersList' smart constructor.
-data CollectionviewersList = CollectionviewersList
+-- /See:/ 'collectionviewersList'' smart constructor.
+data CollectionviewersList' = CollectionviewersList'
     { _clQuotaUser    :: !(Maybe Text)
     , _clPrettyPrint  :: !Bool
     , _clEnterpriseId :: !Text
@@ -68,7 +77,7 @@ data CollectionviewersList = CollectionviewersList
     , _clKey          :: !(Maybe Text)
     , _clOauthToken   :: !(Maybe Text)
     , _clFields       :: !(Maybe Text)
-    , _clAlt          :: !Text
+    , _clAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersList'' with the minimum fields required to make a request.
@@ -92,12 +101,12 @@ data CollectionviewersList = CollectionviewersList
 -- * 'clFields'
 --
 -- * 'clAlt'
-collectionviewersList
+collectionviewersList'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> CollectionviewersList
-collectionviewersList pClEnterpriseId_ pClCollectionId_ =
-    CollectionviewersList
+    -> CollectionviewersList'
+collectionviewersList' pClEnterpriseId_ pClCollectionId_ =
+    CollectionviewersList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clEnterpriseId = pClEnterpriseId_
@@ -106,7 +115,7 @@ collectionviewersList pClEnterpriseId_ pClCollectionId_ =
     , _clKey = Nothing
     , _clOauthToken = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,23 +164,24 @@ clFields :: Lens' CollectionviewersList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CollectionviewersList' Text
+clAlt :: Lens' CollectionviewersList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CollectionviewersList' where
         type Rs CollectionviewersList' =
              CollectionViewersListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionviewersList{..}
-          = go _clQuotaUser _clPrettyPrint _clEnterpriseId
+        requestWithRoute r u CollectionviewersList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint)
+              _clEnterpriseId
               _clUserIp
               _clCollectionId
               _clKey
               _clOauthToken
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionviewersListAPI)
+                      (Proxy :: Proxy CollectionviewersListResource)
                       r
                       u

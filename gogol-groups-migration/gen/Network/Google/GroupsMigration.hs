@@ -27,7 +27,7 @@ module Network.Google.GroupsMigration
     -- * REST Resources
 
     -- ** GroupsmigrationArchiveInsert
-    , module GroupsMigration.Archive.Insert
+    , module Network.Google.Resource.GroupsMigration.Archive.Insert
 
     -- * Types
 
@@ -36,6 +36,9 @@ module Network.Google.GroupsMigration
     , groups
     , gKind
     , gResponseCode
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GroupsMigration.Types
@@ -46,7 +49,7 @@ import           Network.Google.Resource.GroupsMigration.Archive.Insert
 TODO
 -}
 
-type GroupsMigrationAPI = Archive
+type GroupsMigrationAPI = ArchiveInsertResource
 
 groupsMigrationAPI :: Proxy GroupsMigrationAPI
 groupsMigrationAPI = Proxy

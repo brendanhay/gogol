@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesDelete@.
-module Classroom.Courses.Delete
+module Network.Google.Resource.Classroom.Courses.Delete
     (
     -- * REST Resource
-      CoursesDeleteAPI
+      CoursesDeleteResource
 
     -- * Creating a Request
-    , coursesDelete
-    , CoursesDelete
+    , coursesDelete'
+    , CoursesDelete'
 
     -- * Request Lenses
     , cdXgafv
@@ -53,11 +54,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesDelete@ which the
--- 'CoursesDelete' request conforms to.
-type CoursesDeleteAPI =
+-- 'CoursesDelete'' request conforms to.
+type CoursesDeleteResource =
      "v1" :>
        "courses" :>
-         Capture "id" Text :> Delete '[JSON] Empty
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -65,8 +79,8 @@ type CoursesDeleteAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
 -- requested ID.
 --
--- /See:/ 'coursesDelete' smart constructor.
-data CoursesDelete = CoursesDelete
+-- /See:/ 'coursesDelete'' smart constructor.
+data CoursesDelete' = CoursesDelete'
     { _cdXgafv          :: !(Maybe Text)
     , _cdQuotaUser      :: !(Maybe Text)
     , _cdPrettyPrint    :: !Bool
@@ -114,11 +128,11 @@ data CoursesDelete = CoursesDelete
 -- * 'cdCallback'
 --
 -- * 'cdAlt'
-coursesDelete
+coursesDelete'
     :: Text -- ^ 'id'
-    -> CoursesDelete
-coursesDelete pCdId_ =
-    CoursesDelete
+    -> CoursesDelete'
+coursesDelete' pCdId_ =
+    CoursesDelete'
     { _cdXgafv = Nothing
     , _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
@@ -212,10 +226,10 @@ cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 instance GoogleRequest CoursesDelete' where
         type Rs CoursesDelete' = Empty
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesDelete{..}
-          = go _cdXgafv _cdQuotaUser _cdPrettyPrint
+        requestWithRoute r u CoursesDelete'{..}
+          = go _cdXgafv _cdQuotaUser (Just _cdPrettyPrint)
               _cdUploadProtocol
-              _cdPp
+              (Just _cdPp)
               _cdAccessToken
               _cdUploadType
               _cdBearerToken
@@ -224,7 +238,9 @@ instance GoogleRequest CoursesDelete' where
               _cdOauthToken
               _cdFields
               _cdCallback
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesDeleteResource)
+                      r
                       u

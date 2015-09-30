@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get an activity.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesGet@.
-module Plus.Activities.Get
+module Network.Google.Resource.Plus.Activities.Get
     (
     -- * REST Resource
-      ActivitiesGetAPI
+      ActivitiesGetResource
 
     -- * Creating a Request
-    , activitiesGet
-    , ActivitiesGet
+    , activitiesGet'
+    , ActivitiesGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusActivitiesGet@ which the
--- 'ActivitiesGet' request conforms to.
-type ActivitiesGetAPI =
+-- 'ActivitiesGet'' request conforms to.
+type ActivitiesGetResource =
      "activities" :>
-       Capture "activityId" Text :> Get '[JSON] Activity
+       Capture "activityId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Activity
 
 -- | Get an activity.
 --
--- /See:/ 'activitiesGet' smart constructor.
-data ActivitiesGet = ActivitiesGet
+-- /See:/ 'activitiesGet'' smart constructor.
+data ActivitiesGet' = ActivitiesGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ActivitiesGet = ActivitiesGet
     , _agKey         :: !(Maybe Text)
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ActivitiesGet = ActivitiesGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-activitiesGet
+activitiesGet'
     :: Text -- ^ 'activityId'
-    -> ActivitiesGet
-activitiesGet pAgActivityId_ =
-    ActivitiesGet
+    -> ActivitiesGet'
+activitiesGet' pAgActivityId_ =
+    ActivitiesGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -93,7 +101,7 @@ activitiesGet pAgActivityId_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ agFields :: Lens' ActivitiesGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' ActivitiesGet' Text
+agAlt :: Lens' ActivitiesGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u ActivitiesGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u ActivitiesGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agActivityId
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesGetResource)
+                      r
                       u

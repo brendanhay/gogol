@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove a alias for the group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsAliasesDelete@.
-module Directory.Groups.Aliases.Delete
+module Network.Google.Resource.Directory.Groups.Aliases.Delete
     (
     -- * REST Resource
-      GroupsAliasesDeleteAPI
+      GroupsAliasesDeleteResource
 
     -- * Creating a Request
-    , groupsAliasesDelete
-    , GroupsAliasesDelete
+    , groupsAliasesDelete'
+    , GroupsAliasesDelete'
 
     -- * Request Lenses
     , gadQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsAliasesDelete@ which the
--- 'GroupsAliasesDelete' request conforms to.
-type GroupsAliasesDeleteAPI =
+-- 'GroupsAliasesDelete'' request conforms to.
+type GroupsAliasesDeleteResource =
      "groups" :>
        Capture "groupKey" Text :>
          "aliases" :>
-           Capture "alias" Text :> Delete '[JSON] ()
+           Capture "alias" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove a alias for the group
 --
--- /See:/ 'groupsAliasesDelete' smart constructor.
-data GroupsAliasesDelete = GroupsAliasesDelete
+-- /See:/ 'groupsAliasesDelete'' smart constructor.
+data GroupsAliasesDelete' = GroupsAliasesDelete'
     { _gadQuotaUser   :: !(Maybe Text)
     , _gadPrettyPrint :: !Bool
     , _gadUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data GroupsAliasesDelete = GroupsAliasesDelete
     , _gadKey         :: !(Maybe Text)
     , _gadOauthToken  :: !(Maybe Text)
     , _gadFields      :: !(Maybe Text)
-    , _gadAlt         :: !Text
+    , _gadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GroupsAliasesDelete = GroupsAliasesDelete
 -- * 'gadFields'
 --
 -- * 'gadAlt'
-groupsAliasesDelete
+groupsAliasesDelete'
     :: Text -- ^ 'groupKey'
     -> Text -- ^ 'alias'
-    -> GroupsAliasesDelete
-groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
-    GroupsAliasesDelete
+    -> GroupsAliasesDelete'
+groupsAliasesDelete' pGadGroupKey_ pGadAlias_ =
+    GroupsAliasesDelete'
     { _gadQuotaUser = Nothing
     , _gadPrettyPrint = True
     , _gadUserIp = Nothing
@@ -101,7 +109,7 @@ groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
     , _gadKey = Nothing
     , _gadOauthToken = Nothing
     , _gadFields = Nothing
-    , _gadAlt = "json"
+    , _gadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ gadFields
   = lens _gadFields (\ s a -> s{_gadFields = a})
 
 -- | Data format for the response.
-gadAlt :: Lens' GroupsAliasesDelete' Text
+gadAlt :: Lens' GroupsAliasesDelete' Alt
 gadAlt = lens _gadAlt (\ s a -> s{_gadAlt = a})
 
 instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsAliasesDelete{..}
-          = go _gadQuotaUser _gadPrettyPrint _gadUserIp
+        requestWithRoute r u GroupsAliasesDelete'{..}
+          = go _gadQuotaUser (Just _gadPrettyPrint) _gadUserIp
               _gadGroupKey
               _gadAlias
               _gadKey
               _gadOauthToken
               _gadFields
-              _gadAlt
+              (Just _gadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GroupsAliasesDeleteAPI)
+                      (Proxy :: Proxy GroupsAliasesDeleteResource)
                       r
                       u

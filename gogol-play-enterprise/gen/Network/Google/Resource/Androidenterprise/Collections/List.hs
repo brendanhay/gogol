@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionsList@.
-module Androidenterprise.Collections.List
+module Network.Google.Resource.Androidenterprise.Collections.List
     (
     -- * REST Resource
-      CollectionsListAPI
+      CollectionsListResource
 
     -- * Creating a Request
-    , collectionsList
-    , CollectionsList
+    , collectionsList'
+    , CollectionsList'
 
     -- * Request Lenses
     , cQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionsList@ which the
--- 'CollectionsList' request conforms to.
-type CollectionsListAPI =
+-- 'CollectionsList'' request conforms to.
+type CollectionsListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
-         "collections" :> Get '[JSON] CollectionsListResponse
+         "collections" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] CollectionsListResponse
 
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
--- /See:/ 'collectionsList' smart constructor.
-data CollectionsList = CollectionsList
+-- /See:/ 'collectionsList'' smart constructor.
+data CollectionsList' = CollectionsList'
     { _cQuotaUser    :: !(Maybe Text)
     , _cPrettyPrint  :: !Bool
     , _cEnterpriseId :: !Text
@@ -60,7 +69,7 @@ data CollectionsList = CollectionsList
     , _cKey          :: !(Maybe Text)
     , _cOauthToken   :: !(Maybe Text)
     , _cFields       :: !(Maybe Text)
-    , _cAlt          :: !Text
+    , _cAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data CollectionsList = CollectionsList
 -- * 'cFields'
 --
 -- * 'cAlt'
-collectionsList
+collectionsList'
     :: Text -- ^ 'enterpriseId'
-    -> CollectionsList
-collectionsList pCEnterpriseId_ =
-    CollectionsList
+    -> CollectionsList'
+collectionsList' pCEnterpriseId_ =
+    CollectionsList'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
     , _cEnterpriseId = pCEnterpriseId_
@@ -94,7 +103,7 @@ collectionsList pCEnterpriseId_ =
     , _cKey = Nothing
     , _cOauthToken = Nothing
     , _cFields = Nothing
-    , _cAlt = "json"
+    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +145,21 @@ cFields :: Lens' CollectionsList' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 -- | Data format for the response.
-cAlt :: Lens' CollectionsList' Text
+cAlt :: Lens' CollectionsList' Alt
 cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
 
 instance GoogleRequest CollectionsList' where
         type Rs CollectionsList' = CollectionsListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionsList{..}
-          = go _cQuotaUser _cPrettyPrint _cEnterpriseId
+        requestWithRoute r u CollectionsList'{..}
+          = go _cQuotaUser (Just _cPrettyPrint) _cEnterpriseId
               _cUserIp
               _cKey
               _cOauthToken
               _cFields
-              _cAlt
+              (Just _cAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CollectionsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CollectionsListResource)
                       r
                       u

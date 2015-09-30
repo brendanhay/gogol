@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of target pools grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsAggregatedList@.
-module Compute.TargetPools.AggregatedList
+module Network.Google.Resource.Compute.TargetPools.AggregatedList
     (
     -- * REST Resource
-      TargetPoolsAggregatedListAPI
+      TargetPoolsAggregatedListResource
 
     -- * Creating a Request
-    , targetPoolsAggregatedList
-    , TargetPoolsAggregatedList
+    , targetPoolsAggregatedList'
+    , TargetPoolsAggregatedList'
 
     -- * Request Lenses
     , tpalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsAggregatedList@ which the
--- 'TargetPoolsAggregatedList' request conforms to.
-type TargetPoolsAggregatedListAPI =
+-- 'TargetPoolsAggregatedList'' request conforms to.
+type TargetPoolsAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetPools" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TargetPoolAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TargetPoolAggregatedList
 
 -- | Retrieves the list of target pools grouped by scope.
 --
--- /See:/ 'targetPoolsAggregatedList' smart constructor.
-data TargetPoolsAggregatedList = TargetPoolsAggregatedList
+-- /See:/ 'targetPoolsAggregatedList'' smart constructor.
+data TargetPoolsAggregatedList' = TargetPoolsAggregatedList'
     { _tpalQuotaUser   :: !(Maybe Text)
     , _tpalPrettyPrint :: !Bool
     , _tpalProject     :: !Text
@@ -70,7 +78,7 @@ data TargetPoolsAggregatedList = TargetPoolsAggregatedList
     , _tpalOauthToken  :: !(Maybe Text)
     , _tpalMaxResults  :: !Word32
     , _tpalFields      :: !(Maybe Text)
-    , _tpalAlt         :: !Text
+    , _tpalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data TargetPoolsAggregatedList = TargetPoolsAggregatedList
 -- * 'tpalFields'
 --
 -- * 'tpalAlt'
-targetPoolsAggregatedList
+targetPoolsAggregatedList'
     :: Text -- ^ 'project'
-    -> TargetPoolsAggregatedList
-targetPoolsAggregatedList pTpalProject_ =
-    TargetPoolsAggregatedList
+    -> TargetPoolsAggregatedList'
+targetPoolsAggregatedList' pTpalProject_ =
+    TargetPoolsAggregatedList'
     { _tpalQuotaUser = Nothing
     , _tpalPrettyPrint = True
     , _tpalProject = pTpalProject_
@@ -113,7 +121,7 @@ targetPoolsAggregatedList pTpalProject_ =
     , _tpalOauthToken = Nothing
     , _tpalMaxResults = 500
     , _tpalFields = Nothing
-    , _tpalAlt = "json"
+    , _tpalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ tpalFields
   = lens _tpalFields (\ s a -> s{_tpalFields = a})
 
 -- | Data format for the response.
-tpalAlt :: Lens' TargetPoolsAggregatedList' Text
+tpalAlt :: Lens' TargetPoolsAggregatedList' Alt
 tpalAlt = lens _tpalAlt (\ s a -> s{_tpalAlt = a})
 
 instance GoogleRequest TargetPoolsAggregatedList'
@@ -196,8 +204,9 @@ instance GoogleRequest TargetPoolsAggregatedList'
         type Rs TargetPoolsAggregatedList' =
              TargetPoolAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsAggregatedList{..}
-          = go _tpalQuotaUser _tpalPrettyPrint _tpalProject
+        requestWithRoute r u TargetPoolsAggregatedList'{..}
+          = go _tpalQuotaUser (Just _tpalPrettyPrint)
+              _tpalProject
               _tpalUserIp
               _tpalKey
               _tpalFilter
@@ -205,9 +214,9 @@ instance GoogleRequest TargetPoolsAggregatedList'
               _tpalOauthToken
               (Just _tpalMaxResults)
               _tpalFields
-              _tpalAlt
+              (Just _tpalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsAggregatedListAPI)
+                      (Proxy :: Proxy TargetPoolsAggregatedListResource)
                       r
                       u

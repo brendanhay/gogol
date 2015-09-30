@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,157 @@
 
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientaccessGet@.
-module AdExchangeBuyer.Clientaccess.Get
+module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Get
     (
     -- * REST Resource
-      ClientaccessGetAPI
+      ClientaccessGetResource
 
     -- * Creating a Request
-    , clientaccessGet
-    , ClientaccessGet
+    , clientaccessGet'
+    , ClientaccessGet'
 
     -- * Request Lenses
-    , cggQuotaUser
-    , cggPrettyPrint
-    , cggUserIp
-    , cggSponsorAccountId
-    , cggKey
-    , cggClientAccountId
-    , cggOauthToken
-    , cggFields
-    , cggAlt
+    , cgQuotaUser
+    , cgPrettyPrint
+    , cgUserIp
+    , cgSponsorAccountId
+    , cgKey
+    , cgClientAccountId
+    , cgOauthToken
+    , cgFields
+    , cgAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientaccessGet@ which the
--- 'ClientaccessGet' request conforms to.
-type ClientaccessGetAPI =
+-- 'ClientaccessGet'' request conforms to.
+type ClientaccessGetResource =
      "clientAccess" :>
        Capture "clientAccountId" Int64 :>
-         QueryParam "sponsorAccountId" Int32 :>
-           Get '[JSON] ClientAccessCapabilities
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "sponsorAccountId" Int32 :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientaccessGet' smart constructor.
-data ClientaccessGet = ClientaccessGet
-    { _cggQuotaUser        :: !(Maybe Text)
-    , _cggPrettyPrint      :: !Bool
-    , _cggUserIp           :: !(Maybe Text)
-    , _cggSponsorAccountId :: !Int32
-    , _cggKey              :: !(Maybe Text)
-    , _cggClientAccountId  :: !Int64
-    , _cggOauthToken       :: !(Maybe Text)
-    , _cggFields           :: !(Maybe Text)
-    , _cggAlt              :: !Text
+-- /See:/ 'clientaccessGet'' smart constructor.
+data ClientaccessGet' = ClientaccessGet'
+    { _cgQuotaUser        :: !(Maybe Text)
+    , _cgPrettyPrint      :: !Bool
+    , _cgUserIp           :: !(Maybe Text)
+    , _cgSponsorAccountId :: !Int32
+    , _cgKey              :: !(Maybe Text)
+    , _cgClientAccountId  :: !Int64
+    , _cgOauthToken       :: !(Maybe Text)
+    , _cgFields           :: !(Maybe Text)
+    , _cgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientaccessGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cggQuotaUser'
+-- * 'cgQuotaUser'
 --
--- * 'cggPrettyPrint'
+-- * 'cgPrettyPrint'
 --
--- * 'cggUserIp'
+-- * 'cgUserIp'
 --
--- * 'cggSponsorAccountId'
+-- * 'cgSponsorAccountId'
 --
--- * 'cggKey'
+-- * 'cgKey'
 --
--- * 'cggClientAccountId'
+-- * 'cgClientAccountId'
 --
--- * 'cggOauthToken'
+-- * 'cgOauthToken'
 --
--- * 'cggFields'
+-- * 'cgFields'
 --
--- * 'cggAlt'
-clientaccessGet
+-- * 'cgAlt'
+clientaccessGet'
     :: Int32 -- ^ 'sponsorAccountId'
     -> Int64 -- ^ 'clientAccountId'
-    -> ClientaccessGet
-clientaccessGet pCggSponsorAccountId_ pCggClientAccountId_ =
-    ClientaccessGet
-    { _cggQuotaUser = Nothing
-    , _cggPrettyPrint = True
-    , _cggUserIp = Nothing
-    , _cggSponsorAccountId = pCggSponsorAccountId_
-    , _cggKey = Nothing
-    , _cggClientAccountId = pCggClientAccountId_
-    , _cggOauthToken = Nothing
-    , _cggFields = Nothing
-    , _cggAlt = "json"
+    -> ClientaccessGet'
+clientaccessGet' pCgSponsorAccountId_ pCgClientAccountId_ =
+    ClientaccessGet'
+    { _cgQuotaUser = Nothing
+    , _cgPrettyPrint = True
+    , _cgUserIp = Nothing
+    , _cgSponsorAccountId = pCgSponsorAccountId_
+    , _cgKey = Nothing
+    , _cgClientAccountId = pCgClientAccountId_
+    , _cgOauthToken = Nothing
+    , _cgFields = Nothing
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cggQuotaUser :: Lens' ClientaccessGet' (Maybe Text)
-cggQuotaUser
-  = lens _cggQuotaUser (\ s a -> s{_cggQuotaUser = a})
+cgQuotaUser :: Lens' ClientaccessGet' (Maybe Text)
+cgQuotaUser
+  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cggPrettyPrint :: Lens' ClientaccessGet' Bool
-cggPrettyPrint
-  = lens _cggPrettyPrint
-      (\ s a -> s{_cggPrettyPrint = a})
+cgPrettyPrint :: Lens' ClientaccessGet' Bool
+cgPrettyPrint
+  = lens _cgPrettyPrint
+      (\ s a -> s{_cgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cggUserIp :: Lens' ClientaccessGet' (Maybe Text)
-cggUserIp
-  = lens _cggUserIp (\ s a -> s{_cggUserIp = a})
+cgUserIp :: Lens' ClientaccessGet' (Maybe Text)
+cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
 
-cggSponsorAccountId :: Lens' ClientaccessGet' Int32
-cggSponsorAccountId
-  = lens _cggSponsorAccountId
-      (\ s a -> s{_cggSponsorAccountId = a})
+cgSponsorAccountId :: Lens' ClientaccessGet' Int32
+cgSponsorAccountId
+  = lens _cgSponsorAccountId
+      (\ s a -> s{_cgSponsorAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' ClientaccessGet' (Maybe Text)
-cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
+cgKey :: Lens' ClientaccessGet' (Maybe Text)
+cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
-cggClientAccountId :: Lens' ClientaccessGet' Int64
-cggClientAccountId
-  = lens _cggClientAccountId
-      (\ s a -> s{_cggClientAccountId = a})
+cgClientAccountId :: Lens' ClientaccessGet' Int64
+cgClientAccountId
+  = lens _cgClientAccountId
+      (\ s a -> s{_cgClientAccountId = a})
 
 -- | OAuth 2.0 token for the current user.
-cggOauthToken :: Lens' ClientaccessGet' (Maybe Text)
-cggOauthToken
-  = lens _cggOauthToken
-      (\ s a -> s{_cggOauthToken = a})
+cgOauthToken :: Lens' ClientaccessGet' (Maybe Text)
+cgOauthToken
+  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cggFields :: Lens' ClientaccessGet' (Maybe Text)
-cggFields
-  = lens _cggFields (\ s a -> s{_cggFields = a})
+cgFields :: Lens' ClientaccessGet' (Maybe Text)
+cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cggAlt :: Lens' ClientaccessGet' Text
-cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
+cgAlt :: Lens' ClientaccessGet' Alt
+cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ClientaccessGet' where
         type Rs ClientaccessGet' = ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientaccessGet{..}
-          = go _cggQuotaUser _cggPrettyPrint _cggUserIp
-              (Just _cggSponsorAccountId)
-              _cggKey
-              _cggClientAccountId
-              _cggOauthToken
-              _cggFields
-              _cggAlt
+        requestWithRoute r u ClientaccessGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              (Just _cgSponsorAccountId)
+              _cgKey
+              _cgClientAccountId
+              _cgOauthToken
+              _cgFields
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ClientaccessGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ClientaccessGetResource)
                       r
                       u

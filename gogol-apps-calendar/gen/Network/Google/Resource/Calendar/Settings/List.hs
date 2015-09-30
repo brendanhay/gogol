@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns all user settings for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarSettingsList@.
-module Calendar.Settings.List
+module Network.Google.Resource.Calendar.Settings.List
     (
     -- * REST Resource
-      SettingsListAPI
+      SettingsListResource
 
     -- * Creating a Request
-    , settingsList
-    , SettingsList
+    , settingsList'
+    , SettingsList'
 
     -- * Request Lenses
     , slSyncToken
@@ -45,19 +46,26 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarSettingsList@ which the
--- 'SettingsList' request conforms to.
-type SettingsListAPI =
+-- 'SettingsList'' request conforms to.
+type SettingsListResource =
      "users" :>
        "me" :>
          "settings" :>
            QueryParam "syncToken" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :> Get '[JSON] Settings
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
 --
--- /See:/ 'settingsList' smart constructor.
-data SettingsList = SettingsList
+-- /See:/ 'settingsList'' smart constructor.
+data SettingsList' = SettingsList'
     { _slSyncToken   :: !(Maybe Text)
     , _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
@@ -67,7 +75,7 @@ data SettingsList = SettingsList
     , _slOauthToken  :: !(Maybe Text)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsList'' with the minimum fields required to make a request.
@@ -93,10 +101,10 @@ data SettingsList = SettingsList
 -- * 'slFields'
 --
 -- * 'slAlt'
-settingsList
-    :: SettingsList
-settingsList =
-    SettingsList
+settingsList'
+    :: SettingsList'
+settingsList' =
+    SettingsList'
     { _slSyncToken = Nothing
     , _slQuotaUser = Nothing
     , _slPrettyPrint = True
@@ -106,7 +114,7 @@ settingsList =
     , _slOauthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -166,21 +174,23 @@ slFields :: Lens' SettingsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SettingsList' Text
+slAlt :: Lens' SettingsList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u SettingsList{..}
-          = go _slSyncToken _slQuotaUser _slPrettyPrint
+        requestWithRoute r u SettingsList'{..}
+          = go _slSyncToken _slQuotaUser (Just _slPrettyPrint)
               _slUserIp
               _slKey
               _slPageToken
               _slOauthToken
               _slMaxResults
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SettingsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SettingsListResource)
+                      r
                       u

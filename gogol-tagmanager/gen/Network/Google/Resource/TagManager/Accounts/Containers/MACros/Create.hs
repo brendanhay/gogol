@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a GTM Macro.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMACrosCreate@.
-module TagManager.Accounts.Containers.MACros.Create
+module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Create
     (
     -- * REST Resource
-      AccountsContainersMacrosCreateAPI
+      AccountsContainersMacrosCreateResource
 
     -- * Creating a Request
-    , accountsContainersMACrosCreate
-    , AccountsContainersMACrosCreate
+    , accountsContainersMACrosCreate'
+    , AccountsContainersMACrosCreate'
 
     -- * Request Lenses
     , acmaccQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMACrosCreate@ which the
--- 'AccountsContainersMACrosCreate' request conforms to.
-type AccountsContainersMacrosCreateAPI =
+-- 'AccountsContainersMACrosCreate'' request conforms to.
+type AccountsContainersMacrosCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "macros" :> Post '[JSON] MACro
+             "macros" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] MACro
 
 -- | Creates a GTM Macro.
 --
--- /See:/ 'accountsContainersMACrosCreate' smart constructor.
-data AccountsContainersMACrosCreate = AccountsContainersMACrosCreate
+-- /See:/ 'accountsContainersMACrosCreate'' smart constructor.
+data AccountsContainersMACrosCreate' = AccountsContainersMACrosCreate'
     { _acmaccQuotaUser   :: !(Maybe Text)
     , _acmaccPrettyPrint :: !Bool
     , _acmaccContainerId :: !Text
@@ -64,7 +72,7 @@ data AccountsContainersMACrosCreate = AccountsContainersMACrosCreate
     , _acmaccKey         :: !(Maybe Text)
     , _acmaccOauthToken  :: !(Maybe Text)
     , _acmaccFields      :: !(Maybe Text)
-    , _acmaccAlt         :: !Text
+    , _acmaccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMACrosCreate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsContainersMACrosCreate = AccountsContainersMACrosCreate
 -- * 'acmaccFields'
 --
 -- * 'acmaccAlt'
-accountsContainersMACrosCreate
+accountsContainersMACrosCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersMACrosCreate
-accountsContainersMACrosCreate pAcmaccContainerId_ pAcmaccAccountId_ =
-    AccountsContainersMACrosCreate
+    -> AccountsContainersMACrosCreate'
+accountsContainersMACrosCreate' pAcmaccContainerId_ pAcmaccAccountId_ =
+    AccountsContainersMACrosCreate'
     { _acmaccQuotaUser = Nothing
     , _acmaccPrettyPrint = True
     , _acmaccContainerId = pAcmaccContainerId_
@@ -102,7 +110,7 @@ accountsContainersMACrosCreate pAcmaccContainerId_ pAcmaccAccountId_ =
     , _acmaccKey = Nothing
     , _acmaccOauthToken = Nothing
     , _acmaccFields = Nothing
-    , _acmaccAlt = "json"
+    , _acmaccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +164,7 @@ acmaccFields
   = lens _acmaccFields (\ s a -> s{_acmaccFields = a})
 
 -- | Data format for the response.
-acmaccAlt :: Lens' AccountsContainersMACrosCreate' Text
+acmaccAlt :: Lens' AccountsContainersMACrosCreate' Alt
 acmaccAlt
   = lens _acmaccAlt (\ s a -> s{_acmaccAlt = a})
 
@@ -165,17 +173,18 @@ instance GoogleRequest
         type Rs AccountsContainersMACrosCreate' = MACro
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersMACrosCreate{..}
-          = go _acmaccQuotaUser _acmaccPrettyPrint
+          AccountsContainersMACrosCreate'{..}
+          = go _acmaccQuotaUser (Just _acmaccPrettyPrint)
               _acmaccContainerId
               _acmaccUserIp
               _acmaccAccountId
               _acmaccKey
               _acmaccOauthToken
               _acmaccFields
-              _acmaccAlt
+              (Just _acmaccAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersMacrosCreateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersMacrosCreateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Fetches information about a localized store listing.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsListingsGet@.
-module Androidpublisher.Edits.Listings.Get
+module Network.Google.Resource.Androidpublisher.Edits.Listings.Get
     (
     -- * REST Resource
-      EditsListingsGetAPI
+      EditsListingsGetResource
 
     -- * Creating a Request
-    , editsListingsGet
-    , EditsListingsGet
+    , editsListingsGet'
+    , EditsListingsGet'
 
     -- * Request Lenses
     , elgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsListingsGet@ which the
--- 'EditsListingsGet' request conforms to.
-type EditsListingsGetAPI =
+-- 'EditsListingsGet'' request conforms to.
+type EditsListingsGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
-             Capture "language" Text :> Get '[JSON] Listing
+             Capture "language" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Listing
 
 -- | Fetches information about a localized store listing.
 --
--- /See:/ 'editsListingsGet' smart constructor.
-data EditsListingsGet = EditsListingsGet
+-- /See:/ 'editsListingsGet'' smart constructor.
+data EditsListingsGet' = EditsListingsGet'
     { _elgQuotaUser   :: !(Maybe Text)
     , _elgPrettyPrint :: !Bool
     , _elgPackageName :: !Text
@@ -66,7 +74,7 @@ data EditsListingsGet = EditsListingsGet
     , _elgOauthToken  :: !(Maybe Text)
     , _elgEditId      :: !Text
     , _elgFields      :: !(Maybe Text)
-    , _elgAlt         :: !Text
+    , _elgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data EditsListingsGet = EditsListingsGet
 -- * 'elgFields'
 --
 -- * 'elgAlt'
-editsListingsGet
+editsListingsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsListingsGet
-editsListingsGet pElgPackageName_ pElgLanguage_ pElgEditId_ =
-    EditsListingsGet
+    -> EditsListingsGet'
+editsListingsGet' pElgPackageName_ pElgLanguage_ pElgEditId_ =
+    EditsListingsGet'
     { _elgQuotaUser = Nothing
     , _elgPrettyPrint = True
     , _elgPackageName = pElgPackageName_
@@ -108,7 +116,7 @@ editsListingsGet pElgPackageName_ pElgLanguage_ pElgEditId_ =
     , _elgOauthToken = Nothing
     , _elgEditId = pElgEditId_
     , _elgFields = Nothing
-    , _elgAlt = "json"
+    , _elgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +174,24 @@ elgFields
   = lens _elgFields (\ s a -> s{_elgFields = a})
 
 -- | Data format for the response.
-elgAlt :: Lens' EditsListingsGet' Text
+elgAlt :: Lens' EditsListingsGet' Alt
 elgAlt = lens _elgAlt (\ s a -> s{_elgAlt = a})
 
 instance GoogleRequest EditsListingsGet' where
         type Rs EditsListingsGet' = Listing
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsListingsGet{..}
-          = go _elgQuotaUser _elgPrettyPrint _elgPackageName
+        requestWithRoute r u EditsListingsGet'{..}
+          = go _elgQuotaUser (Just _elgPrettyPrint)
+              _elgPackageName
               _elgUserIp
               _elgKey
               _elgLanguage
               _elgOauthToken
               _elgEditId
               _elgFields
-              _elgAlt
+              (Just _elgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsListingsGetAPI)
+                      (Proxy :: Proxy EditsListingsGetResource)
                       r
                       u

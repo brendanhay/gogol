@@ -40,6 +40,12 @@ module Network.Google.FusionTables.Types
     , sfGradient
     , sfColumnName
 
+    -- * ColumnBaseColumn
+    , ColumnBaseColumn
+    , columnBaseColumn
+    , cbcTableIndex
+    , cbcColumnId
+
     -- * Sqlresponse
     , Sqlresponse
     , sqlresponse
@@ -117,6 +123,12 @@ module Network.Google.FusionTables.Types
     , gGeometry
     , gType
 
+    -- * StyleFunctionGradientColors
+    , StyleFunctionGradientColors
+    , styleFunctionGradientColors
+    , sfgcColor
+    , sfgcOpacity
+
     -- * Task
     , Task
     , task
@@ -135,12 +147,12 @@ module Network.Google.FusionTables.Types
     -- * Template
     , Template
     , template
-    , ttAutomaticColumnNames
-    , ttTemplateId
-    , ttKind
-    , ttBody
-    , ttName
-    , ttTableId
+    , temeAutomaticColumnNames
+    , temeTemplateId
+    , temeKind
+    , temeBody
+    , temeName
+    , temeTableId
 
     -- * PointStyle
     , PointStyle
@@ -159,6 +171,13 @@ module Network.Google.FusionTables.Types
     , psFillOpacity
     , psStrokeWeightStyler
     , psStrokeColor
+
+    -- * StyleFunctionGradient
+    , StyleFunctionGradient
+    , styleFunctionGradient
+    , sfgMax
+    , sfgMin
+    , sfgColors
 
     -- * Table
     , Table
@@ -201,6 +220,9 @@ module Network.Google.FusionTables.Types
     , lsStrokeOpacity
     , lsStrokeWeightStyler
     , lsStrokeColor
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.FusionTables.Types.Product
@@ -208,7 +230,7 @@ import           Network.Google.FusionTables.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Fusion Tables API.
-fusionTablesURL :: BaseURL
+fusionTablesURL :: BaseUrl
 fusionTablesURL
   = BaseUrl Https
       "https://www.googleapis.com/fusiontables/v2/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersPatch@.
-module Directory.Members.Patch
+module Network.Google.Resource.Directory.Members.Patch
     (
     -- * REST Resource
-      MembersPatchAPI
+      MembersPatchResource
 
     -- * Creating a Request
-    , membersPatch
-    , MembersPatch
+    , membersPatch'
+    , MembersPatch'
 
     -- * Request Lenses
     , mpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersPatch@ which the
--- 'MembersPatch' request conforms to.
-type MembersPatchAPI =
+-- 'MembersPatch'' request conforms to.
+type MembersPatchResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           Capture "memberKey" Text :> Patch '[JSON] Member
+           Capture "memberKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Member
 
 -- | Update membership of a user in the specified group. This method supports
 -- patch semantics.
 --
--- /See:/ 'membersPatch' smart constructor.
-data MembersPatch = MembersPatch
+-- /See:/ 'membersPatch'' smart constructor.
+data MembersPatch' = MembersPatch'
     { _mpQuotaUser   :: !(Maybe Text)
     , _mpMemberKey   :: !Text
     , _mpPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data MembersPatch = MembersPatch
     , _mpKey         :: !(Maybe Text)
     , _mpOauthToken  :: !(Maybe Text)
     , _mpFields      :: !(Maybe Text)
-    , _mpAlt         :: !Text
+    , _mpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data MembersPatch = MembersPatch
 -- * 'mpFields'
 --
 -- * 'mpAlt'
-membersPatch
+membersPatch'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> MembersPatch
-membersPatch pMpMemberKey_ pMpGroupKey_ =
-    MembersPatch
+    -> MembersPatch'
+membersPatch' pMpMemberKey_ pMpGroupKey_ =
+    MembersPatch'
     { _mpQuotaUser = Nothing
     , _mpMemberKey = pMpMemberKey_
     , _mpPrettyPrint = True
@@ -103,7 +111,7 @@ membersPatch pMpMemberKey_ pMpGroupKey_ =
     , _mpKey = Nothing
     , _mpOauthToken = Nothing
     , _mpFields = Nothing
-    , _mpAlt = "json"
+    , _mpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,22 @@ mpFields :: Lens' MembersPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
 -- | Data format for the response.
-mpAlt :: Lens' MembersPatch' Text
+mpAlt :: Lens' MembersPatch' Alt
 mpAlt = lens _mpAlt (\ s a -> s{_mpAlt = a})
 
 instance GoogleRequest MembersPatch' where
         type Rs MembersPatch' = Member
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersPatch{..}
-          = go _mpQuotaUser _mpMemberKey _mpPrettyPrint
+        requestWithRoute r u MembersPatch'{..}
+          = go _mpQuotaUser _mpMemberKey (Just _mpPrettyPrint)
               _mpUserIp
               _mpGroupKey
               _mpKey
               _mpOauthToken
               _mpFields
-              _mpAlt
+              (Just _mpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MembersPatchResource)
+                      r
                       u

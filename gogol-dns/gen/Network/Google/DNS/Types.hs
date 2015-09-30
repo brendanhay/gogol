@@ -42,6 +42,9 @@ module Network.Google.DNS.Types
     , cDeletions
     , cId
 
+    -- * DNSChangesListSortBy
+    , DNSChangesListSortBy (..)
+
     -- * ResourceRecordSetsListResponse
     , ResourceRecordSetsListResponse
     , resourceRecordSetsListResponse
@@ -87,6 +90,9 @@ module Network.Google.DNS.Types
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.DNS.Types.Product
@@ -94,7 +100,7 @@ import           Network.Google.DNS.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta1' of the Google Cloud DNS API.
-dNSURL :: BaseURL
+dNSURL :: BaseUrl
 dNSURL
   = BaseUrl Https
       "https://www.googleapis.com/dns/v1beta1/projects/"

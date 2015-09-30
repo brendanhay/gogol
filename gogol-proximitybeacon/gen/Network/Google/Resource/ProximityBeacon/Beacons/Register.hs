@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- once.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsRegister@.
-module ProximityBeacon.Beacons.Register
+module Network.Google.Resource.ProximityBeacon.Beacons.Register
     (
     -- * REST Resource
-      BeaconsRegisterAPI
+      BeaconsRegisterResource
 
     -- * Creating a Request
-    , beaconsRegister
-    , BeaconsRegister
+    , beaconsRegister'
+    , BeaconsRegister'
 
     -- * Request Lenses
     , brXgafv
@@ -50,17 +51,30 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsRegister@ which the
--- 'BeaconsRegister' request conforms to.
-type BeaconsRegisterAPI =
+-- 'BeaconsRegister'' request conforms to.
+type BeaconsRegisterResource =
      "v1beta1" :>
-       "beacons:register" :> Post '[JSON] Beacon
+       "beacons:register" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Beacon
 
 -- | Registers a previously unregistered beacon given its \`advertisedId\`.
 -- These IDs are unique within the system. An ID can be registered only
 -- once.
 --
--- /See:/ 'beaconsRegister' smart constructor.
-data BeaconsRegister = BeaconsRegister
+-- /See:/ 'beaconsRegister'' smart constructor.
+data BeaconsRegister' = BeaconsRegister'
     { _brXgafv          :: !(Maybe Text)
     , _brQuotaUser      :: !(Maybe Text)
     , _brPrettyPrint    :: !Bool
@@ -105,10 +119,10 @@ data BeaconsRegister = BeaconsRegister
 -- * 'brCallback'
 --
 -- * 'brAlt'
-beaconsRegister
-    :: BeaconsRegister
-beaconsRegister =
-    BeaconsRegister
+beaconsRegister'
+    :: BeaconsRegister'
+beaconsRegister' =
+    BeaconsRegister'
     { _brXgafv = Nothing
     , _brQuotaUser = Nothing
     , _brPrettyPrint = True
@@ -195,10 +209,10 @@ brAlt = lens _brAlt (\ s a -> s{_brAlt = a})
 instance GoogleRequest BeaconsRegister' where
         type Rs BeaconsRegister' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsRegister{..}
-          = go _brXgafv _brQuotaUser _brPrettyPrint
+        requestWithRoute r u BeaconsRegister'{..}
+          = go _brXgafv _brQuotaUser (Just _brPrettyPrint)
               _brUploadProtocol
-              _brPp
+              (Just _brPp)
               _brAccessToken
               _brUploadType
               _brBearerToken
@@ -206,8 +220,9 @@ instance GoogleRequest BeaconsRegister' where
               _brOauthToken
               _brFields
               _brCallback
-              _brAlt
+              (Just _brAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsRegisterAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BeaconsRegisterResource)
                       r
                       u

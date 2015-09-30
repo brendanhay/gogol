@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsPatch@.
-module GroupsSettings.Groups.Patch
+module Network.Google.Resource.GroupsSettings.Groups.Patch
     (
     -- * REST Resource
-      GroupsPatchAPI
+      GroupsPatchResource
 
     -- * Creating a Request
-    , groupsPatch
-    , GroupsPatch
+    , groupsPatch'
+    , GroupsPatch'
 
     -- * Request Lenses
     , gpQuotaUser
@@ -43,14 +44,21 @@ import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsPatch@ which the
--- 'GroupsPatch' request conforms to.
-type GroupsPatchAPI =
-     Capture "groupUniqueId" Text :> Patch '[JSON] Groups
+-- 'GroupsPatch'' request conforms to.
+type GroupsPatchResource =
+     Capture "groupUniqueId" Text :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Patch '[JSON] Groups
 
 -- | Updates an existing resource. This method supports patch semantics.
 --
--- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch
+-- /See:/ 'groupsPatch'' smart constructor.
+data GroupsPatch' = GroupsPatch'
     { _gpQuotaUser     :: !(Maybe Text)
     , _gpPrettyPrint   :: !Bool
     , _gpUserIp        :: !(Maybe Text)
@@ -58,7 +66,7 @@ data GroupsPatch = GroupsPatch
     , _gpOauthToken    :: !(Maybe Text)
     , _gpGroupUniqueId :: !Text
     , _gpFields        :: !(Maybe Text)
-    , _gpAlt           :: !Text
+    , _gpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsPatch'' with the minimum fields required to make a request.
@@ -80,11 +88,11 @@ data GroupsPatch = GroupsPatch
 -- * 'gpFields'
 --
 -- * 'gpAlt'
-groupsPatch
+groupsPatch'
     :: Text -- ^ 'groupUniqueId'
-    -> GroupsPatch
-groupsPatch pGpGroupUniqueId_ =
-    GroupsPatch
+    -> GroupsPatch'
+groupsPatch' pGpGroupUniqueId_ =
+    GroupsPatch'
     { _gpQuotaUser = Nothing
     , _gpPrettyPrint = True
     , _gpUserIp = Nothing
@@ -92,7 +100,7 @@ groupsPatch pGpGroupUniqueId_ =
     , _gpOauthToken = Nothing
     , _gpGroupUniqueId = pGpGroupUniqueId_
     , _gpFields = Nothing
-    , _gpAlt = "atom"
+    , _gpAlt = Atom
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,21 @@ gpFields :: Lens' GroupsPatch' (Maybe Text)
 gpFields = lens _gpFields (\ s a -> s{_gpFields = a})
 
 -- | Data format for the response.
-gpAlt :: Lens' GroupsPatch' Text
+gpAlt :: Lens' GroupsPatch' Alt
 gpAlt = lens _gpAlt (\ s a -> s{_gpAlt = a})
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Groups
         request = requestWithRoute defReq groupsSettingsURL
-        requestWithRoute r u GroupsPatch{..}
-          = go _gpQuotaUser _gpPrettyPrint _gpUserIp _gpKey
+        requestWithRoute r u GroupsPatch'{..}
+          = go _gpQuotaUser (Just _gpPrettyPrint) _gpUserIp
+              _gpKey
               _gpOauthToken
               _gpGroupUniqueId
               _gpFields
-              _gpAlt
+              (Just _gpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsPatchResource)
+                      r
+                      u

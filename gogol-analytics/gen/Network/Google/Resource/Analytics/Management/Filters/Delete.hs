@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a filter.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementFiltersDelete@.
-module Analytics.Management.Filters.Delete
+module Network.Google.Resource.Analytics.Management.Filters.Delete
     (
     -- * REST Resource
-      ManagementFiltersDeleteAPI
+      ManagementFiltersDeleteResource
 
     -- * Creating a Request
-    , managementFiltersDelete
-    , ManagementFiltersDelete
+    , managementFiltersDelete'
+    , ManagementFiltersDelete'
 
     -- * Request Lenses
     , mfdQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementFiltersDelete@ which the
--- 'ManagementFiltersDelete' request conforms to.
-type ManagementFiltersDeleteAPI =
+-- 'ManagementFiltersDelete'' request conforms to.
+type ManagementFiltersDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "filters" :>
-             Capture "filterId" Text :> Delete '[JSON] Filter
+             Capture "filterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Filter
 
 -- | Delete a filter.
 --
--- /See:/ 'managementFiltersDelete' smart constructor.
-data ManagementFiltersDelete = ManagementFiltersDelete
+-- /See:/ 'managementFiltersDelete'' smart constructor.
+data ManagementFiltersDelete' = ManagementFiltersDelete'
     { _mfdQuotaUser   :: !(Maybe Text)
     , _mfdPrettyPrint :: !Bool
     , _mfdFilterId    :: !Text
@@ -64,7 +72,7 @@ data ManagementFiltersDelete = ManagementFiltersDelete
     , _mfdKey         :: !(Maybe Text)
     , _mfdOauthToken  :: !(Maybe Text)
     , _mfdFields      :: !(Maybe Text)
-    , _mfdAlt         :: !Text
+    , _mfdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersDelete'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data ManagementFiltersDelete = ManagementFiltersDelete
 -- * 'mfdFields'
 --
 -- * 'mfdAlt'
-managementFiltersDelete
+managementFiltersDelete'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
-    -> ManagementFiltersDelete
-managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
-    ManagementFiltersDelete
+    -> ManagementFiltersDelete'
+managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ =
+    ManagementFiltersDelete'
     { _mfdQuotaUser = Nothing
     , _mfdPrettyPrint = False
     , _mfdFilterId = pMfdFilterId_
@@ -102,7 +110,7 @@ managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
     , _mfdKey = Nothing
     , _mfdOauthToken = Nothing
     , _mfdFields = Nothing
-    , _mfdAlt = "json"
+    , _mfdAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ mfdFields
   = lens _mfdFields (\ s a -> s{_mfdFields = a})
 
 -- | Data format for the response.
-mfdAlt :: Lens' ManagementFiltersDelete' Text
+mfdAlt :: Lens' ManagementFiltersDelete' Alt
 mfdAlt = lens _mfdAlt (\ s a -> s{_mfdAlt = a})
 
 instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementFiltersDelete{..}
-          = go _mfdQuotaUser _mfdPrettyPrint _mfdFilterId
+        requestWithRoute r u ManagementFiltersDelete'{..}
+          = go _mfdQuotaUser (Just _mfdPrettyPrint)
+              _mfdFilterId
               _mfdUserIp
               _mfdAccountId
               _mfdKey
               _mfdOauthToken
               _mfdFields
-              _mfdAlt
+              (Just _mfdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementFiltersDeleteAPI)
+                      (Proxy :: Proxy ManagementFiltersDeleteResource)
                       r
                       u

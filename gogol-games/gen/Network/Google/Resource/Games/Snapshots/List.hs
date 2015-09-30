@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- corresponding to the player ID.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesSnapshotsList@.
-module Games.Snapshots.List
+module Network.Google.Resource.Games.Snapshots.List
     (
     -- * REST Resource
-      SnapshotsListAPI
+      SnapshotsListResource
 
     -- * Creating a Request
-    , snapshotsList
-    , SnapshotsList
+    , snapshotsList'
+    , SnapshotsList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesSnapshotsList@ which the
--- 'SnapshotsList' request conforms to.
-type SnapshotsListAPI =
+-- 'SnapshotsList'' request conforms to.
+type SnapshotsListResource =
      "players" :>
        Capture "playerId" Text :>
          "snapshots" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 Get '[JSON] SnapshotListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] SnapshotListResponse
 
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
 --
--- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList
+-- /See:/ 'snapshotsList'' smart constructor.
+data SnapshotsList' = SnapshotsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIp      :: !(Maybe Text)
@@ -72,7 +80,7 @@ data SnapshotsList = SnapshotsList
     , _slPlayerId    :: !Text
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data SnapshotsList = SnapshotsList
 -- * 'slFields'
 --
 -- * 'slAlt'
-snapshotsList
+snapshotsList'
     :: Text -- ^ 'playerId'
-    -> SnapshotsList
-snapshotsList pSlPlayerId_ =
-    SnapshotsList
+    -> SnapshotsList'
+snapshotsList' pSlPlayerId_ =
+    SnapshotsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
@@ -115,7 +123,7 @@ snapshotsList pSlPlayerId_ =
     , _slPlayerId = pSlPlayerId_
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,21 +183,24 @@ slFields :: Lens' SnapshotsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SnapshotsList' Text
+slAlt :: Lens' SnapshotsList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u SnapshotsList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp _slKey
+        requestWithRoute r u SnapshotsList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+              _slKey
               _slLanguage
               _slPageToken
               _slOauthToken
               _slPlayerId
               _slMaxResults
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SnapshotsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SnapshotsListResource)
+                      r
                       u

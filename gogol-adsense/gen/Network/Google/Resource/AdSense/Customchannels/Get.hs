@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the specified custom channel from the specified ad client.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomchannelsGet@.
-module AdSense.Customchannels.Get
+module Network.Google.Resource.AdSense.Customchannels.Get
     (
     -- * REST Resource
-      CustomchannelsGetAPI
+      CustomchannelsGetResource
 
     -- * Creating a Request
-    , customchannelsGet
-    , CustomchannelsGet
+    , customchannelsGet'
+    , CustomchannelsGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseCustomchannelsGet@ which the
--- 'CustomchannelsGet' request conforms to.
-type CustomchannelsGetAPI =
+-- 'CustomchannelsGet'' request conforms to.
+type CustomchannelsGetResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
            Capture "customChannelId" Text :>
-             Get '[JSON] CustomChannel
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] CustomChannel
 
 -- | Get the specified custom channel from the specified ad client.
 --
--- /See:/ 'customchannelsGet' smart constructor.
-data CustomchannelsGet = CustomchannelsGet
+-- /See:/ 'customchannelsGet'' smart constructor.
+data CustomchannelsGet' = CustomchannelsGet'
     { _cgQuotaUser       :: !(Maybe Text)
     , _cgPrettyPrint     :: !Bool
     , _cgCustomChannelId :: !Text
@@ -64,7 +71,7 @@ data CustomchannelsGet = CustomchannelsGet
     , _cgKey             :: !(Maybe Text)
     , _cgOauthToken      :: !(Maybe Text)
     , _cgFields          :: !(Maybe Text)
-    , _cgAlt             :: !Text
+    , _cgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data CustomchannelsGet = CustomchannelsGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-customchannelsGet
+customchannelsGet'
     :: Text -- ^ 'customChannelId'
     -> Text -- ^ 'adClientId'
-    -> CustomchannelsGet
-customchannelsGet pCgCustomChannelId_ pCgAdClientId_ =
-    CustomchannelsGet
+    -> CustomchannelsGet'
+customchannelsGet' pCgCustomChannelId_ pCgAdClientId_ =
+    CustomchannelsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgCustomChannelId = pCgCustomChannelId_
@@ -102,7 +109,7 @@ customchannelsGet pCgCustomChannelId_ pCgAdClientId_ =
     , _cgKey = Nothing
     , _cgOauthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +157,23 @@ cgFields :: Lens' CustomchannelsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CustomchannelsGet' Text
+cgAlt :: Lens' CustomchannelsGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CustomchannelsGet' where
         type Rs CustomchannelsGet' = CustomChannel
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u CustomchannelsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgCustomChannelId
+        requestWithRoute r u CustomchannelsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint)
+              _cgCustomChannelId
               _cgUserIp
               _cgAdClientId
               _cgKey
               _cgOauthToken
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsGetAPI)
+                      (Proxy :: Proxy CustomchannelsGetResource)
                       r
                       u

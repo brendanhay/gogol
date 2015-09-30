@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,169 +20,181 @@
 -- | Update the given order
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceordersUpdate@.
-module AdExchangeBuyer.Marketplaceorders.Update
+module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Update
     (
     -- * REST Resource
-      MarketplaceordersUpdateAPI
+      MarketplaceordersUpdateResource
 
     -- * Creating a Request
-    , marketplaceordersUpdate
-    , MarketplaceordersUpdate
+    , marketplaceordersUpdate'
+    , MarketplaceordersUpdate'
 
     -- * Request Lenses
-    , muQuotaUser
-    , muUpdateAction
-    , muPrettyPrint
-    , muUserIp
-    , muRevisionNumber
-    , muKey
-    , muOauthToken
-    , muOrderId
-    , muFields
-    , muAlt
+    , muuQuotaUser
+    , muuUpdateAction
+    , muuPrettyPrint
+    , muuUserIp
+    , muuRevisionNumber
+    , muuKey
+    , muuOauthToken
+    , muuOrderId
+    , muuFields
+    , muuAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceordersUpdate@ which the
--- 'MarketplaceordersUpdate' request conforms to.
-type MarketplaceordersUpdateAPI =
+-- 'MarketplaceordersUpdate'' request conforms to.
+type MarketplaceordersUpdateResource =
      "marketplaceOrders" :>
        Capture "orderId" Text :>
          Capture "revisionNumber" Int64 :>
-           Capture "updateAction" Text :>
-             Put '[JSON] MarketplaceOrder
+           Capture "updateAction"
+             AdexchangebuyerMarketplaceordersUpdateUpdateAction
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] MarketplaceOrder
 
 -- | Update the given order
 --
--- /See:/ 'marketplaceordersUpdate' smart constructor.
-data MarketplaceordersUpdate = MarketplaceordersUpdate
-    { _muQuotaUser      :: !(Maybe Text)
-    , _muUpdateAction   :: !Text
-    , _muPrettyPrint    :: !Bool
-    , _muUserIp         :: !(Maybe Text)
-    , _muRevisionNumber :: !Int64
-    , _muKey            :: !(Maybe Text)
-    , _muOauthToken     :: !(Maybe Text)
-    , _muOrderId        :: !Text
-    , _muFields         :: !(Maybe Text)
-    , _muAlt            :: !Text
+-- /See:/ 'marketplaceordersUpdate'' smart constructor.
+data MarketplaceordersUpdate' = MarketplaceordersUpdate'
+    { _muuQuotaUser      :: !(Maybe Text)
+    , _muuUpdateAction   :: !AdexchangebuyerMarketplaceordersUpdateUpdateAction
+    , _muuPrettyPrint    :: !Bool
+    , _muuUserIp         :: !(Maybe Text)
+    , _muuRevisionNumber :: !Int64
+    , _muuKey            :: !(Maybe Text)
+    , _muuOauthToken     :: !(Maybe Text)
+    , _muuOrderId        :: !Text
+    , _muuFields         :: !(Maybe Text)
+    , _muuAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceordersUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'muQuotaUser'
+-- * 'muuQuotaUser'
 --
--- * 'muUpdateAction'
+-- * 'muuUpdateAction'
 --
--- * 'muPrettyPrint'
+-- * 'muuPrettyPrint'
 --
--- * 'muUserIp'
+-- * 'muuUserIp'
 --
--- * 'muRevisionNumber'
+-- * 'muuRevisionNumber'
 --
--- * 'muKey'
+-- * 'muuKey'
 --
--- * 'muOauthToken'
+-- * 'muuOauthToken'
 --
--- * 'muOrderId'
+-- * 'muuOrderId'
 --
--- * 'muFields'
+-- * 'muuFields'
 --
--- * 'muAlt'
-marketplaceordersUpdate
-    :: Text -- ^ 'updateAction'
+-- * 'muuAlt'
+marketplaceordersUpdate'
+    :: AdexchangebuyerMarketplaceordersUpdateUpdateAction -- ^ 'updateAction'
     -> Int64 -- ^ 'revisionNumber'
     -> Text -- ^ 'orderId'
-    -> MarketplaceordersUpdate
-marketplaceordersUpdate pMuUpdateAction_ pMuRevisionNumber_ pMuOrderId_ =
-    MarketplaceordersUpdate
-    { _muQuotaUser = Nothing
-    , _muUpdateAction = pMuUpdateAction_
-    , _muPrettyPrint = True
-    , _muUserIp = Nothing
-    , _muRevisionNumber = pMuRevisionNumber_
-    , _muKey = Nothing
-    , _muOauthToken = Nothing
-    , _muOrderId = pMuOrderId_
-    , _muFields = Nothing
-    , _muAlt = "json"
+    -> MarketplaceordersUpdate'
+marketplaceordersUpdate' pMuuUpdateAction_ pMuuRevisionNumber_ pMuuOrderId_ =
+    MarketplaceordersUpdate'
+    { _muuQuotaUser = Nothing
+    , _muuUpdateAction = pMuuUpdateAction_
+    , _muuPrettyPrint = True
+    , _muuUserIp = Nothing
+    , _muuRevisionNumber = pMuuRevisionNumber_
+    , _muuKey = Nothing
+    , _muuOauthToken = Nothing
+    , _muuOrderId = pMuuOrderId_
+    , _muuFields = Nothing
+    , _muuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-muQuotaUser :: Lens' MarketplaceordersUpdate' (Maybe Text)
-muQuotaUser
-  = lens _muQuotaUser (\ s a -> s{_muQuotaUser = a})
+muuQuotaUser :: Lens' MarketplaceordersUpdate' (Maybe Text)
+muuQuotaUser
+  = lens _muuQuotaUser (\ s a -> s{_muuQuotaUser = a})
 
 -- | The proposed action to take on the order.
-muUpdateAction :: Lens' MarketplaceordersUpdate' Text
-muUpdateAction
-  = lens _muUpdateAction
-      (\ s a -> s{_muUpdateAction = a})
+muuUpdateAction :: Lens' MarketplaceordersUpdate' AdexchangebuyerMarketplaceordersUpdateUpdateAction
+muuUpdateAction
+  = lens _muuUpdateAction
+      (\ s a -> s{_muuUpdateAction = a})
 
 -- | Returns response with indentations and line breaks.
-muPrettyPrint :: Lens' MarketplaceordersUpdate' Bool
-muPrettyPrint
-  = lens _muPrettyPrint
-      (\ s a -> s{_muPrettyPrint = a})
+muuPrettyPrint :: Lens' MarketplaceordersUpdate' Bool
+muuPrettyPrint
+  = lens _muuPrettyPrint
+      (\ s a -> s{_muuPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-muUserIp :: Lens' MarketplaceordersUpdate' (Maybe Text)
-muUserIp = lens _muUserIp (\ s a -> s{_muUserIp = a})
+muuUserIp :: Lens' MarketplaceordersUpdate' (Maybe Text)
+muuUserIp
+  = lens _muuUserIp (\ s a -> s{_muuUserIp = a})
 
 -- | The last known revision number to update. If the head revision in the
 -- marketplace database has since changed, an error will be thrown. The
 -- caller should then fetch the lastest order at head revision and retry
 -- the update at that revision.
-muRevisionNumber :: Lens' MarketplaceordersUpdate' Int64
-muRevisionNumber
-  = lens _muRevisionNumber
-      (\ s a -> s{_muRevisionNumber = a})
+muuRevisionNumber :: Lens' MarketplaceordersUpdate' Int64
+muuRevisionNumber
+  = lens _muuRevisionNumber
+      (\ s a -> s{_muuRevisionNumber = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-muKey :: Lens' MarketplaceordersUpdate' (Maybe Text)
-muKey = lens _muKey (\ s a -> s{_muKey = a})
+muuKey :: Lens' MarketplaceordersUpdate' (Maybe Text)
+muuKey = lens _muuKey (\ s a -> s{_muuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-muOauthToken :: Lens' MarketplaceordersUpdate' (Maybe Text)
-muOauthToken
-  = lens _muOauthToken (\ s a -> s{_muOauthToken = a})
+muuOauthToken :: Lens' MarketplaceordersUpdate' (Maybe Text)
+muuOauthToken
+  = lens _muuOauthToken
+      (\ s a -> s{_muuOauthToken = a})
 
 -- | The order id to update.
-muOrderId :: Lens' MarketplaceordersUpdate' Text
-muOrderId
-  = lens _muOrderId (\ s a -> s{_muOrderId = a})
+muuOrderId :: Lens' MarketplaceordersUpdate' Text
+muuOrderId
+  = lens _muuOrderId (\ s a -> s{_muuOrderId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-muFields :: Lens' MarketplaceordersUpdate' (Maybe Text)
-muFields = lens _muFields (\ s a -> s{_muFields = a})
+muuFields :: Lens' MarketplaceordersUpdate' (Maybe Text)
+muuFields
+  = lens _muuFields (\ s a -> s{_muuFields = a})
 
 -- | Data format for the response.
-muAlt :: Lens' MarketplaceordersUpdate' Text
-muAlt = lens _muAlt (\ s a -> s{_muAlt = a})
+muuAlt :: Lens' MarketplaceordersUpdate' Alt
+muuAlt = lens _muuAlt (\ s a -> s{_muuAlt = a})
 
 instance GoogleRequest MarketplaceordersUpdate' where
         type Rs MarketplaceordersUpdate' = MarketplaceOrder
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceordersUpdate{..}
-          = go _muQuotaUser _muUpdateAction _muPrettyPrint
-              _muUserIp
-              _muRevisionNumber
-              _muKey
-              _muOauthToken
-              _muOrderId
-              _muFields
-              _muAlt
+        requestWithRoute r u MarketplaceordersUpdate'{..}
+          = go _muuQuotaUser _muuUpdateAction
+              (Just _muuPrettyPrint)
+              _muuUserIp
+              _muuRevisionNumber
+              _muuKey
+              _muuOauthToken
+              _muuOrderId
+              _muuFields
+              (Just _muuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplaceordersUpdateAPI)
+                      (Proxy :: Proxy MarketplaceordersUpdateResource)
                       r
                       u

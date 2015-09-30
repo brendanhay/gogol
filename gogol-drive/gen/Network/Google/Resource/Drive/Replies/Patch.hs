@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing reply. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesPatch@.
-module Drive.Replies.Patch
+module Network.Google.Resource.Drive.Replies.Patch
     (
     -- * REST Resource
-      RepliesPatchAPI
+      RepliesPatchResource
 
     -- * Creating a Request
-    , repliesPatch
-    , RepliesPatch
+    , repliesPatch'
+    , RepliesPatch'
 
     -- * Request Lenses
     , rpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRepliesPatch@ which the
--- 'RepliesPatch' request conforms to.
-type RepliesPatchAPI =
+-- 'RepliesPatch'' request conforms to.
+type RepliesPatchResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
              "replies" :>
-               Capture "replyId" Text :> Patch '[JSON] CommentReply
+               Capture "replyId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] CommentReply
 
 -- | Updates an existing reply. This method supports patch semantics.
 --
--- /See:/ 'repliesPatch' smart constructor.
-data RepliesPatch = RepliesPatch
+-- /See:/ 'repliesPatch'' smart constructor.
+data RepliesPatch' = RepliesPatch'
     { _rpQuotaUser   :: !(Maybe Text)
     , _rpPrettyPrint :: !Bool
     , _rpUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data RepliesPatch = RepliesPatch
     , _rpOauthToken  :: !(Maybe Text)
     , _rpCommentId   :: !Text
     , _rpFields      :: !(Maybe Text)
-    , _rpAlt         :: !Text
+    , _rpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesPatch'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data RepliesPatch = RepliesPatch
 -- * 'rpFields'
 --
 -- * 'rpAlt'
-repliesPatch
+repliesPatch'
     :: Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> RepliesPatch
-repliesPatch pRpReplyId_ pRpFileId_ pRpCommentId_ =
-    RepliesPatch
+    -> RepliesPatch'
+repliesPatch' pRpReplyId_ pRpFileId_ pRpCommentId_ =
+    RepliesPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIp = Nothing
@@ -109,7 +117,7 @@ repliesPatch pRpReplyId_ pRpFileId_ pRpCommentId_ =
     , _rpOauthToken = Nothing
     , _rpCommentId = pRpCommentId_
     , _rpFields = Nothing
-    , _rpAlt = "json"
+    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,20 +168,23 @@ rpFields :: Lens' RepliesPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 -- | Data format for the response.
-rpAlt :: Lens' RepliesPatch' Text
+rpAlt :: Lens' RepliesPatch' Alt
 rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
 
 instance GoogleRequest RepliesPatch' where
         type Rs RepliesPatch' = CommentReply
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesPatch{..}
-          = go _rpQuotaUser _rpPrettyPrint _rpUserIp _rpKey
+        requestWithRoute r u RepliesPatch'{..}
+          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIp
+              _rpKey
               _rpReplyId
               _rpFileId
               _rpOauthToken
               _rpCommentId
               _rpFields
-              _rpAlt
+              (Just _rpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RepliesPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RepliesPatchResource)
+                      r
                       u

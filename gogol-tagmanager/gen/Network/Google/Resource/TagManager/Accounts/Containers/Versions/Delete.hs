@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsDelete@.
-module TagManager.Accounts.Containers.Versions.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     (
     -- * REST Resource
-      AccountsContainersVersionsDeleteAPI
+      AccountsContainersVersionsDeleteResource
 
     -- * Creating a Request
-    , accountsContainersVersionsDelete
-    , AccountsContainersVersionsDelete
+    , accountsContainersVersionsDelete'
+    , AccountsContainersVersionsDelete'
 
     -- * Request Lenses
     , acvdcQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsDelete@ which the
--- 'AccountsContainersVersionsDelete' request conforms to.
-type AccountsContainersVersionsDeleteAPI =
+-- 'AccountsContainersVersionsDelete'' request conforms to.
+type AccountsContainersVersionsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 Delete '[JSON] ()
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a Container Version.
 --
--- /See:/ 'accountsContainersVersionsDelete' smart constructor.
-data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
+-- /See:/ 'accountsContainersVersionsDelete'' smart constructor.
+data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
     { _acvdcQuotaUser          :: !(Maybe Text)
     , _acvdcPrettyPrint        :: !Bool
     , _acvdcContainerId        :: !Text
@@ -68,7 +75,7 @@ data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
     , _acvdcKey                :: !(Maybe Text)
     , _acvdcOauthToken         :: !(Maybe Text)
     , _acvdcFields             :: !(Maybe Text)
-    , _acvdcAlt                :: !Text
+    , _acvdcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsDelete'' with the minimum fields required to make a request.
@@ -94,13 +101,13 @@ data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
 -- * 'acvdcFields'
 --
 -- * 'acvdcAlt'
-accountsContainersVersionsDelete
+accountsContainersVersionsDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsDelete
-accountsContainersVersionsDelete pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
-    AccountsContainersVersionsDelete
+    -> AccountsContainersVersionsDelete'
+accountsContainersVersionsDelete' pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
+    AccountsContainersVersionsDelete'
     { _acvdcQuotaUser = Nothing
     , _acvdcPrettyPrint = True
     , _acvdcContainerId = pAcvdcContainerId_
@@ -110,7 +117,7 @@ accountsContainersVersionsDelete pAcvdcContainerId_ pAcvdcContainerVersionId_ pA
     , _acvdcKey = Nothing
     , _acvdcOauthToken = Nothing
     , _acvdcFields = Nothing
-    , _acvdcAlt = "json"
+    , _acvdcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,7 +176,7 @@ acvdcFields
   = lens _acvdcFields (\ s a -> s{_acvdcFields = a})
 
 -- | Data format for the response.
-acvdcAlt :: Lens' AccountsContainersVersionsDelete' Text
+acvdcAlt :: Lens' AccountsContainersVersionsDelete' Alt
 acvdcAlt = lens _acvdcAlt (\ s a -> s{_acvdcAlt = a})
 
 instance GoogleRequest
@@ -177,8 +184,8 @@ instance GoogleRequest
         type Rs AccountsContainersVersionsDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsDelete{..}
-          = go _acvdcQuotaUser _acvdcPrettyPrint
+          AccountsContainersVersionsDelete'{..}
+          = go _acvdcQuotaUser (Just _acvdcPrettyPrint)
               _acvdcContainerId
               _acvdcUserIp
               _acvdcContainerVersionId
@@ -186,9 +193,10 @@ instance GoogleRequest
               _acvdcKey
               _acvdcOauthToken
               _acvdcFields
-              _acvdcAlt
+              (Just _acvdcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsDeleteAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a specified persistent disk.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksGet@.
-module Compute.Disks.Get
+module Network.Google.Resource.Compute.Disks.Get
     (
     -- * REST Resource
-      DisksGetAPI
+      DisksGetResource
 
     -- * Creating a Request
-    , disksGet
-    , DisksGet
+    , disksGet'
+    , DisksGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksGet@ which the
--- 'DisksGet' request conforms to.
-type DisksGetAPI =
+-- 'DisksGet'' request conforms to.
+type DisksGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "disks" :> Capture "disk" Text :> Get '[JSON] Disk
+           "disks" :>
+             Capture "disk" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Disk
 
 -- | Returns a specified persistent disk.
 --
--- /See:/ 'disksGet' smart constructor.
-data DisksGet = DisksGet
+-- /See:/ 'disksGet'' smart constructor.
+data DisksGet' = DisksGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgProject     :: !Text
@@ -65,7 +74,7 @@ data DisksGet = DisksGet
     , _dgKey         :: !(Maybe Text)
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksGet'' with the minimum fields required to make a request.
@@ -91,13 +100,13 @@ data DisksGet = DisksGet
 -- * 'dgFields'
 --
 -- * 'dgAlt'
-disksGet
+disksGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
     -> Text -- ^ 'zone'
-    -> DisksGet
-disksGet pDgProject_ pDgDisk_ pDgZone_ =
-    DisksGet
+    -> DisksGet'
+disksGet' pDgProject_ pDgDisk_ pDgZone_ =
+    DisksGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgProject = pDgProject_
@@ -107,7 +116,7 @@ disksGet pDgProject_ pDgDisk_ pDgZone_ =
     , _dgKey = Nothing
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,19 +166,21 @@ dgFields :: Lens' DisksGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DisksGet' Text
+dgAlt :: Lens' DisksGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 instance GoogleRequest DisksGet' where
         type Rs DisksGet' = Disk
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgProject _dgDisk
+        requestWithRoute r u DisksGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
+              _dgDisk
               _dgUserIp
               _dgZone
               _dgKey
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DisksGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy DisksGetResource) r
+                      u

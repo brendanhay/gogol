@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesLeaderboardsGet@.
-module Games.Leaderboards.Get
+module Network.Google.Resource.Games.Leaderboards.Get
     (
     -- * REST Resource
-      LeaderboardsGetAPI
+      LeaderboardsGetResource
 
     -- * Creating a Request
-    , leaderboardsGet
-    , LeaderboardsGet
+    , leaderboardsGet'
+    , LeaderboardsGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesLeaderboardsGet@ which the
--- 'LeaderboardsGet' request conforms to.
-type LeaderboardsGetAPI =
+-- 'LeaderboardsGet'' request conforms to.
+type LeaderboardsGetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
-         QueryParam "language" Text :> Get '[JSON] Leaderboard
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Leaderboard
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
--- /See:/ 'leaderboardsGet' smart constructor.
-data LeaderboardsGet = LeaderboardsGet
+-- /See:/ 'leaderboardsGet'' smart constructor.
+data LeaderboardsGet' = LeaderboardsGet'
     { _lgQuotaUser     :: !(Maybe Text)
     , _lgPrettyPrint   :: !Bool
     , _lgUserIp        :: !(Maybe Text)
@@ -62,7 +70,7 @@ data LeaderboardsGet = LeaderboardsGet
     , _lgLanguage      :: !(Maybe Text)
     , _lgOauthToken    :: !(Maybe Text)
     , _lgFields        :: !(Maybe Text)
-    , _lgAlt           :: !Text
+    , _lgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsGet'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data LeaderboardsGet = LeaderboardsGet
 -- * 'lgFields'
 --
 -- * 'lgAlt'
-leaderboardsGet
+leaderboardsGet'
     :: Text -- ^ 'leaderboardId'
-    -> LeaderboardsGet
-leaderboardsGet pLgLeaderboardId_ =
-    LeaderboardsGet
+    -> LeaderboardsGet'
+leaderboardsGet' pLgLeaderboardId_ =
+    LeaderboardsGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgUserIp = Nothing
@@ -99,7 +107,7 @@ leaderboardsGet pLgLeaderboardId_ =
     , _lgLanguage = Nothing
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,21 +155,22 @@ lgFields :: Lens' LeaderboardsGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LeaderboardsGet' Text
+lgAlt :: Lens' LeaderboardsGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u LeaderboardsGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgUserIp
+        requestWithRoute r u LeaderboardsGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
               _lgLeaderboardId
               _lgKey
               _lgLanguage
               _lgOauthToken
               _lgFields
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LeaderboardsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy LeaderboardsGetResource)
                       r
                       u

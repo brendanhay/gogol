@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of contacts for the authenticated user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsList@.
-module Mirror.Contacts.List
+module Network.Google.Resource.Mirror.Contacts.List
     (
     -- * REST Resource
-      ContactsListAPI
+      ContactsListResource
 
     -- * Creating a Request
-    , contactsList
-    , ContactsList
+    , contactsList'
+    , ContactsList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsList@ which the
--- 'ContactsList' request conforms to.
-type ContactsListAPI =
-     "contacts" :> Get '[JSON] ContactsListResponse
+-- 'ContactsList'' request conforms to.
+type ContactsListResource =
+     "contacts" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] ContactsListResponse
 
 -- | Retrieves a list of contacts for the authenticated user.
 --
--- /See:/ 'contactsList' smart constructor.
-data ContactsList = ContactsList
+-- /See:/ 'contactsList'' smart constructor.
+data ContactsList' = ContactsList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIp      :: !(Maybe Text)
     , _clKey         :: !(Maybe Text)
     , _clOauthToken  :: !(Maybe Text)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data ContactsList = ContactsList
 -- * 'clFields'
 --
 -- * 'clAlt'
-contactsList
-    :: ContactsList
-contactsList =
-    ContactsList
+contactsList'
+    :: ContactsList'
+contactsList' =
+    ContactsList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clUserIp = Nothing
     , _clKey = Nothing
     , _clOauthToken = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +132,20 @@ clFields :: Lens' ContactsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' ContactsList' Text
+clAlt :: Lens' ContactsList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest ContactsList' where
         type Rs ContactsList' = ContactsListResponse
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsList{..}
-          = go _clQuotaUser _clPrettyPrint _clUserIp _clKey
+        requestWithRoute r u ContactsList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
+              _clKey
               _clOauthToken
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsListResource)
+                      r
                       u

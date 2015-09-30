@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves jobs created or modified since the given timestamp.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsList@.
-module Coordinate.Jobs.List
+module Network.Google.Resource.Coordinate.Jobs.List
     (
     -- * REST Resource
-      JobsListAPI
+      JobsListResource
 
     -- * Creating a Request
-    , jobsList
-    , JobsList
+    , jobsList'
+    , JobsList'
 
     -- * Request Lenses
     , jlQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateJobsList@ which the
--- 'JobsList' request conforms to.
-type JobsListAPI =
+-- 'JobsList'' request conforms to.
+type JobsListResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "minModifiedTimestampMs" Word64 :>
-             QueryParam "omitJobChanges" Bool :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] JobListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "minModifiedTimestampMs" Word64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "omitJobChanges" Bool :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] JobListResponse
 
 -- | Retrieves jobs created or modified since the given timestamp.
 --
--- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+-- /See:/ 'jobsList'' smart constructor.
+data JobsList' = JobsList'
     { _jlQuotaUser              :: !(Maybe Text)
     , _jlPrettyPrint            :: !Bool
     , _jlUserIp                 :: !(Maybe Text)
@@ -73,7 +81,7 @@ data JobsList = JobsList
     , _jlOauthToken             :: !(Maybe Text)
     , _jlMaxResults             :: !(Maybe Word32)
     , _jlFields                 :: !(Maybe Text)
-    , _jlAlt                    :: !Text
+    , _jlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
@@ -103,11 +111,11 @@ data JobsList = JobsList
 -- * 'jlFields'
 --
 -- * 'jlAlt'
-jobsList
+jobsList'
     :: Text -- ^ 'teamId'
-    -> JobsList
-jobsList pJlTeamId_ =
-    JobsList
+    -> JobsList'
+jobsList' pJlTeamId_ =
+    JobsList'
     { _jlQuotaUser = Nothing
     , _jlPrettyPrint = True
     , _jlUserIp = Nothing
@@ -119,7 +127,7 @@ jobsList pJlTeamId_ =
     , _jlOauthToken = Nothing
     , _jlMaxResults = Nothing
     , _jlFields = Nothing
-    , _jlAlt = "json"
+    , _jlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,14 +190,15 @@ jlFields :: Lens' JobsList' (Maybe Text)
 jlFields = lens _jlFields (\ s a -> s{_jlFields = a})
 
 -- | Data format for the response.
-jlAlt :: Lens' JobsList' Text
+jlAlt :: Lens' JobsList' Alt
 jlAlt = lens _jlAlt (\ s a -> s{_jlAlt = a})
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobListResponse
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsList{..}
-          = go _jlQuotaUser _jlPrettyPrint _jlUserIp _jlTeamId
+        requestWithRoute r u JobsList'{..}
+          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIp
+              _jlTeamId
               _jlMinModifiedTimestampMs
               _jlKey
               _jlOmitJobChanges
@@ -197,6 +206,7 @@ instance GoogleRequest JobsList' where
               _jlOauthToken
               _jlMaxResults
               _jlFields
-              _jlAlt
+              (Just _jlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsListResource) r
+                      u

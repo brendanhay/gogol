@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one order by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrdersGet@.
-module DFAReporting.Orders.Get
+module Network.Google.Resource.DFAReporting.Orders.Get
     (
     -- * REST Resource
-      OrdersGetAPI
+      OrdersGetResource
 
     -- * Creating a Request
-    , ordersGet
-    , OrdersGet
+    , ordersGet'
+    , OrdersGet'
 
     -- * Request Lenses
     , ogQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOrdersGet@ which the
--- 'OrdersGet' request conforms to.
-type OrdersGetAPI =
+-- 'OrdersGet'' request conforms to.
+type OrdersGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
-             "orders" :> Capture "id" Int64 :> Get '[JSON] Order
+             "orders" :>
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Order
 
 -- | Gets one order by ID.
 --
--- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet
+-- /See:/ 'ordersGet'' smart constructor.
+data OrdersGet' = OrdersGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
     , _ogUserIp      :: !(Maybe Text)
@@ -66,7 +75,7 @@ data OrdersGet = OrdersGet
     , _ogProjectId   :: !Int64
     , _ogOauthToken  :: !(Maybe Text)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Text
+    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGet'' with the minimum fields required to make a request.
@@ -92,13 +101,13 @@ data OrdersGet = OrdersGet
 -- * 'ogFields'
 --
 -- * 'ogAlt'
-ordersGet
+ordersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
-    -> OrdersGet
-ordersGet pOgProfileId_ pOgId_ pOgProjectId_ =
-    OrdersGet
+    -> OrdersGet'
+ordersGet' pOgProfileId_ pOgId_ pOgProjectId_ =
+    OrdersGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
     , _ogUserIp = Nothing
@@ -108,7 +117,7 @@ ordersGet pOgProfileId_ pOgId_ pOgProjectId_ =
     , _ogProjectId = pOgProjectId_
     , _ogOauthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = "json"
+    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,20 +168,22 @@ ogFields :: Lens' OrdersGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' OrdersGet' Text
+ogAlt :: Lens' OrdersGet' Alt
 ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 
 instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrdersGet{..}
-          = go _ogQuotaUser _ogPrettyPrint _ogUserIp
+        requestWithRoute r u OrdersGet'{..}
+          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIp
               _ogProfileId
               _ogKey
               _ogId
               _ogProjectId
               _ogOauthToken
               _ogFields
-              _ogAlt
+              (Just _ogAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy OrdersGetResource)
+                      r
+                      u

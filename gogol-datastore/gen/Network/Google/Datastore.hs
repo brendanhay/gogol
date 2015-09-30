@@ -27,24 +27,27 @@ module Network.Google.Datastore
     -- * REST Resources
 
     -- ** DatastoreDatasetsAllocateIds
-    , module Datastore.Datasets.AllocateIds
+    , module Network.Google.Resource.Datastore.Datasets.AllocateIds
 
     -- ** DatastoreDatasetsBeginTransaction
-    , module Datastore.Datasets.BeginTransaction
+    , module Network.Google.Resource.Datastore.Datasets.BeginTransaction
 
     -- ** DatastoreDatasetsCommit
-    , module Datastore.Datasets.Commit
+    , module Network.Google.Resource.Datastore.Datasets.Commit
 
     -- ** DatastoreDatasetsLookup
-    , module Datastore.Datasets.Lookup
+    , module Network.Google.Resource.Datastore.Datasets.Lookup
 
     -- ** DatastoreDatasetsRollback
-    , module Datastore.Datasets.Rollback
+    , module Network.Google.Resource.Datastore.Datasets.Rollback
 
     -- ** DatastoreDatasetsRunQuery
-    , module Datastore.Datasets.RunQuery
+    , module Network.Google.Resource.Datastore.Datasets.RunQuery
 
     -- * Types
+
+    -- ** PropertyOrderDirection
+    , PropertyOrderDirection (..)
 
     -- ** RollbackRequest
     , RollbackRequest
@@ -87,6 +90,10 @@ module Network.Google.Datastore
     , allocateIdsRequest
     , airKeys
 
+    -- ** EntityProperties
+    , EntityProperties
+    , entityProperties
+
     -- ** BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
@@ -100,17 +107,26 @@ module Network.Google.Datastore
     , rqrQuery
     , rqrReadOptions
 
+    -- ** CompositeFilterOperator
+    , CompositeFilterOperator (..)
+
     -- ** CompositeFilter
     , CompositeFilter
     , compositeFilter
     , cfOperator
     , cfFilters
 
+    -- ** QueryResultBatchEntityResultType
+    , QueryResultBatchEntityResultType (..)
+
     -- ** BeginTransactionResponse
     , BeginTransactionResponse
     , beginTransactionResponse
     , btrTransaction
     , btrHeader
+
+    -- ** QueryResultBatchMoreResults
+    , QueryResultBatchMoreResults (..)
 
     -- ** RunQueryResponse
     , RunQueryResponse
@@ -160,6 +176,9 @@ module Network.Google.Datastore
     , lrKeys
     , lrReadOptions
 
+    -- ** ReadOptionsReadConsistency
+    , ReadOptionsReadConsistency (..)
+
     -- ** Mutation
     , Mutation
     , mutation
@@ -199,6 +218,9 @@ module Network.Google.Datastore
     , key
     , keyPartitionId
     , keyPath
+
+    -- ** PropertyFilterOperator
+    , PropertyFilterOperator (..)
 
     -- ** PropertyFilter
     , PropertyFilter
@@ -253,6 +275,9 @@ module Network.Google.Datastore
     , peProperty
     , peAggregationFunction
 
+    -- ** BeginTransactionRequestIsolationLevel
+    , BeginTransactionRequestIsolationLevel (..)
+
     -- ** Filter
     , Filter
     , filter'
@@ -266,6 +291,12 @@ module Network.Google.Datastore
     , crMutation
     , crTransaction
     , crIgnoreReadOnly
+
+    -- ** CommitRequestMode
+    , CommitRequestMode (..)
+
+    -- ** PropertyExpressionAggregationFunction
+    , PropertyExpressionAggregationFunction (..)
 
     -- ** Entity
     , Entity
@@ -286,6 +317,9 @@ module Network.Google.Datastore
     , propertyOrder
     , poProperty
     , poDirection
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Datastore.Types
@@ -301,7 +335,13 @@ import           Network.Google.Resource.Datastore.Datasets.RunQuery
 TODO
 -}
 
-type DatastoreAPI = Datasets
+type DatastoreAPI =
+     DatasetsBeginTransactionResource :<|>
+       DatasetsAllocateIdsResource
+       :<|> DatasetsRunQueryResource
+       :<|> DatasetsRollbackResource
+       :<|> DatasetsLookupResource
+       :<|> DatasetsCommitResource
 
 datastoreAPI :: Proxy DatastoreAPI
 datastoreAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a log sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsSinksGet@.
-module Logging.Projects.Logs.Sinks.Get
+module Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
     (
     -- * REST Resource
-      ProjectsLogsSinksGetAPI
+      ProjectsLogsSinksGetResource
 
     -- * Creating a Request
-    , projectsLogsSinksGet
-    , ProjectsLogsSinksGet
+    , projectsLogsSinksGet'
+    , ProjectsLogsSinksGet'
 
     -- * Request Lenses
     , plsgXgafv
@@ -51,20 +52,34 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksGet@ which the
--- 'ProjectsLogsSinksGet' request conforms to.
-type ProjectsLogsSinksGetAPI =
+-- 'ProjectsLogsSinksGet'' request conforms to.
+type ProjectsLogsSinksGetResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
              Capture "logsId" Text :>
                "sinks" :>
-                 Capture "sinksId" Text :> Get '[JSON] LogSink
+                 Capture "sinksId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] LogSink
 
 -- | Gets a log sink.
 --
--- /See:/ 'projectsLogsSinksGet' smart constructor.
-data ProjectsLogsSinksGet = ProjectsLogsSinksGet
+-- /See:/ 'projectsLogsSinksGet'' smart constructor.
+data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
     { _plsgXgafv          :: !(Maybe Text)
     , _plsgQuotaUser      :: !(Maybe Text)
     , _plsgPrettyPrint    :: !Bool
@@ -118,13 +133,13 @@ data ProjectsLogsSinksGet = ProjectsLogsSinksGet
 -- * 'plsgCallback'
 --
 -- * 'plsgAlt'
-projectsLogsSinksGet
+projectsLogsSinksGet'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsLogsSinksGet
-projectsLogsSinksGet pPlsgLogsId_ pPlsgProjectsId_ pPlsgSinksId_ =
-    ProjectsLogsSinksGet
+    -> ProjectsLogsSinksGet'
+projectsLogsSinksGet' pPlsgLogsId_ pPlsgProjectsId_ pPlsgSinksId_ =
+    ProjectsLogsSinksGet'
     { _plsgXgafv = Nothing
     , _plsgQuotaUser = Nothing
     , _plsgPrettyPrint = True
@@ -235,11 +250,12 @@ plsgAlt = lens _plsgAlt (\ s a -> s{_plsgAlt = a})
 instance GoogleRequest ProjectsLogsSinksGet' where
         type Rs ProjectsLogsSinksGet' = LogSink
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsSinksGet{..}
-          = go _plsgXgafv _plsgQuotaUser _plsgPrettyPrint
+        requestWithRoute r u ProjectsLogsSinksGet'{..}
+          = go _plsgXgafv _plsgQuotaUser
+              (Just _plsgPrettyPrint)
               _plsgUploadProtocol
               _plsgLogsId
-              _plsgPp
+              (Just _plsgPp)
               _plsgAccessToken
               _plsgUploadType
               _plsgBearerToken
@@ -249,9 +265,9 @@ instance GoogleRequest ProjectsLogsSinksGet' where
               _plsgSinksId
               _plsgFields
               _plsgCallback
-              _plsgAlt
+              (Just _plsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsSinksGetAPI)
+                      (Proxy :: Proxy ProjectsLogsSinksGetResource)
                       r
                       u

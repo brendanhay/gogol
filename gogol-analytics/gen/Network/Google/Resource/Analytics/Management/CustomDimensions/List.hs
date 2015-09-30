@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists custom dimensions to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsList@.
-module Analytics.Management.CustomDimensions.List
+module Network.Google.Resource.Analytics.Management.CustomDimensions.List
     (
     -- * REST Resource
-      ManagementCustomDimensionsListAPI
+      ManagementCustomDimensionsListResource
 
     -- * Creating a Request
-    , managementCustomDimensionsList
-    , ManagementCustomDimensionsList
+    , managementCustomDimensionsList'
+    , ManagementCustomDimensionsList'
 
     -- * Request Lenses
     , mcdlQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsList@ which the
--- 'ManagementCustomDimensionsList' request conforms to.
-type ManagementCustomDimensionsListAPI =
+-- 'ManagementCustomDimensionsList'' request conforms to.
+type ManagementCustomDimensionsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customDimensions" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] CustomDimensions
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] CustomDimensions
 
 -- | Lists custom dimensions to which the user has access.
 --
--- /See:/ 'managementCustomDimensionsList' smart constructor.
-data ManagementCustomDimensionsList = ManagementCustomDimensionsList
+-- /See:/ 'managementCustomDimensionsList'' smart constructor.
+data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
     { _mcdlQuotaUser     :: !(Maybe Text)
     , _mcdlPrettyPrint   :: !Bool
     , _mcdlWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomDimensionsList = ManagementCustomDimensionsList
     , _mcdlStartIndex    :: !(Maybe Int32)
     , _mcdlMaxResults    :: !(Maybe Int32)
     , _mcdlFields        :: !(Maybe Text)
-    , _mcdlAlt           :: !Text
+    , _mcdlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsList'' with the minimum fields required to make a request.
@@ -100,12 +108,12 @@ data ManagementCustomDimensionsList = ManagementCustomDimensionsList
 -- * 'mcdlFields'
 --
 -- * 'mcdlAlt'
-managementCustomDimensionsList
+managementCustomDimensionsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomDimensionsList
-managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
-    ManagementCustomDimensionsList
+    -> ManagementCustomDimensionsList'
+managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
+    ManagementCustomDimensionsList'
     { _mcdlQuotaUser = Nothing
     , _mcdlPrettyPrint = False
     , _mcdlWebPropertyId = pMcdlWebPropertyId_
@@ -116,7 +124,7 @@ managementCustomDimensionsList pMcdlWebPropertyId_ pMcdlAccountId_ =
     , _mcdlStartIndex = Nothing
     , _mcdlMaxResults = Nothing
     , _mcdlFields = Nothing
-    , _mcdlAlt = "json"
+    , _mcdlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +190,7 @@ mcdlFields
   = lens _mcdlFields (\ s a -> s{_mcdlFields = a})
 
 -- | Data format for the response.
-mcdlAlt :: Lens' ManagementCustomDimensionsList' Text
+mcdlAlt :: Lens' ManagementCustomDimensionsList' Alt
 mcdlAlt = lens _mcdlAlt (\ s a -> s{_mcdlAlt = a})
 
 instance GoogleRequest
@@ -191,8 +199,8 @@ instance GoogleRequest
              CustomDimensions
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDimensionsList{..}
-          = go _mcdlQuotaUser _mcdlPrettyPrint
+          ManagementCustomDimensionsList'{..}
+          = go _mcdlQuotaUser (Just _mcdlPrettyPrint)
               _mcdlWebPropertyId
               _mcdlUserIp
               _mcdlAccountId
@@ -201,9 +209,10 @@ instance GoogleRequest
               _mcdlStartIndex
               _mcdlMaxResults
               _mcdlFields
-              _mcdlAlt
+              (Just _mcdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDimensionsListAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDimensionsListResource)
                       r
                       u

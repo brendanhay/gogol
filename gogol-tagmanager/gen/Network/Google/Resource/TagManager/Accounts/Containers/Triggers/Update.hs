@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a GTM Trigger.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersUpdate@.
-module TagManager.Accounts.Containers.Triggers.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
     (
     -- * REST Resource
-      AccountsContainersTriggersUpdateAPI
+      AccountsContainersTriggersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersTriggersUpdate
-    , AccountsContainersTriggersUpdate
+    , accountsContainersTriggersUpdate'
+    , AccountsContainersTriggersUpdate'
 
     -- * Request Lenses
     , actuQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTriggersUpdate@ which the
--- 'AccountsContainersTriggersUpdate' request conforms to.
-type AccountsContainersTriggersUpdateAPI =
+-- 'AccountsContainersTriggersUpdate'' request conforms to.
+type AccountsContainersTriggersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "triggers" :>
                Capture "triggerId" Text :>
-                 QueryParam "fingerprint" Text :> Put '[JSON] Trigger
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] Trigger
 
 -- | Updates a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersUpdate' smart constructor.
-data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
+-- /See:/ 'accountsContainersTriggersUpdate'' smart constructor.
+data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
     { _actuQuotaUser   :: !(Maybe Text)
     , _actuPrettyPrint :: !Bool
     , _actuContainerId :: !Text
@@ -70,7 +78,7 @@ data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
     , _actuKey         :: !(Maybe Text)
     , _actuOauthToken  :: !(Maybe Text)
     , _actuFields      :: !(Maybe Text)
-    , _actuAlt         :: !Text
+    , _actuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersUpdate'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
 -- * 'actuFields'
 --
 -- * 'actuAlt'
-accountsContainersTriggersUpdate
+accountsContainersTriggersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTriggersUpdate
-accountsContainersTriggersUpdate pActuContainerId_ pActuTriggerId_ pActuAccountId_ =
-    AccountsContainersTriggersUpdate
+    -> AccountsContainersTriggersUpdate'
+accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuAccountId_ =
+    AccountsContainersTriggersUpdate'
     { _actuQuotaUser = Nothing
     , _actuPrettyPrint = True
     , _actuContainerId = pActuContainerId_
@@ -115,7 +123,7 @@ accountsContainersTriggersUpdate pActuContainerId_ pActuTriggerId_ pActuAccountI
     , _actuKey = Nothing
     , _actuOauthToken = Nothing
     , _actuFields = Nothing
-    , _actuAlt = "json"
+    , _actuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,7 +189,7 @@ actuFields
   = lens _actuFields (\ s a -> s{_actuFields = a})
 
 -- | Data format for the response.
-actuAlt :: Lens' AccountsContainersTriggersUpdate' Text
+actuAlt :: Lens' AccountsContainersTriggersUpdate' Alt
 actuAlt = lens _actuAlt (\ s a -> s{_actuAlt = a})
 
 instance GoogleRequest
@@ -189,8 +197,9 @@ instance GoogleRequest
         type Rs AccountsContainersTriggersUpdate' = Trigger
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersTriggersUpdate{..}
-          = go _actuQuotaUser _actuPrettyPrint _actuContainerId
+          AccountsContainersTriggersUpdate'{..}
+          = go _actuQuotaUser (Just _actuPrettyPrint)
+              _actuContainerId
               _actuTriggerId
               _actuUserIp
               _actuFingerprint
@@ -198,9 +207,10 @@ instance GoogleRequest
               _actuKey
               _actuOauthToken
               _actuFields
-              _actuAlt
+              (Just _actuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTriggersUpdateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersTriggersUpdateResource)
                       r
                       u

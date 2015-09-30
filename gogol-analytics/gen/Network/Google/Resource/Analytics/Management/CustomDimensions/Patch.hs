@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsPatch@.
-module Analytics.Management.CustomDimensions.Patch
+module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
     (
     -- * REST Resource
-      ManagementCustomDimensionsPatchAPI
+      ManagementCustomDimensionsPatchResource
 
     -- * Creating a Request
-    , managementCustomDimensionsPatch
-    , ManagementCustomDimensionsPatch
+    , managementCustomDimensionsPatch'
+    , ManagementCustomDimensionsPatch'
 
     -- * Request Lenses
     , mcdpQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsPatch@ which the
--- 'ManagementCustomDimensionsPatch' request conforms to.
-type ManagementCustomDimensionsPatchAPI =
+-- 'ManagementCustomDimensionsPatch'' request conforms to.
+type ManagementCustomDimensionsPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,14 +57,21 @@ type ManagementCustomDimensionsPatchAPI =
              Capture "webPropertyId" Text :>
                "customDimensions" :>
                  Capture "customDimensionId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     Patch '[JSON] CustomDimension
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Patch '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension. This method supports patch
 -- semantics.
 --
--- /See:/ 'managementCustomDimensionsPatch' smart constructor.
-data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch
+-- /See:/ 'managementCustomDimensionsPatch'' smart constructor.
+data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
     { _mcdpQuotaUser                   :: !(Maybe Text)
     , _mcdpPrettyPrint                 :: !Bool
     , _mcdpWebPropertyId               :: !Text
@@ -74,7 +82,7 @@ data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch
     , _mcdpOauthToken                  :: !(Maybe Text)
     , _mcdpCustomDimensionId           :: !Text
     , _mcdpFields                      :: !(Maybe Text)
-    , _mcdpAlt                         :: !Text
+    , _mcdpAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsPatch'' with the minimum fields required to make a request.
@@ -102,13 +110,13 @@ data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch
 -- * 'mcdpFields'
 --
 -- * 'mcdpAlt'
-managementCustomDimensionsPatch
+managementCustomDimensionsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
-    -> ManagementCustomDimensionsPatch
-managementCustomDimensionsPatch pMcdpWebPropertyId_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
-    ManagementCustomDimensionsPatch
+    -> ManagementCustomDimensionsPatch'
+managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
+    ManagementCustomDimensionsPatch'
     { _mcdpQuotaUser = Nothing
     , _mcdpPrettyPrint = False
     , _mcdpWebPropertyId = pMcdpWebPropertyId_
@@ -119,7 +127,7 @@ managementCustomDimensionsPatch pMcdpWebPropertyId_ pMcdpAccountId_ pMcdpCustomD
     , _mcdpOauthToken = Nothing
     , _mcdpCustomDimensionId = pMcdpCustomDimensionId_
     , _mcdpFields = Nothing
-    , _mcdpAlt = "json"
+    , _mcdpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,7 +193,7 @@ mcdpFields
   = lens _mcdpFields (\ s a -> s{_mcdpFields = a})
 
 -- | Data format for the response.
-mcdpAlt :: Lens' ManagementCustomDimensionsPatch' Text
+mcdpAlt :: Lens' ManagementCustomDimensionsPatch' Alt
 mcdpAlt = lens _mcdpAlt (\ s a -> s{_mcdpAlt = a})
 
 instance GoogleRequest
@@ -194,8 +202,8 @@ instance GoogleRequest
              CustomDimension
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDimensionsPatch{..}
-          = go _mcdpQuotaUser _mcdpPrettyPrint
+          ManagementCustomDimensionsPatch'{..}
+          = go _mcdpQuotaUser (Just _mcdpPrettyPrint)
               _mcdpWebPropertyId
               (Just _mcdpIgnoreCustomDataSourceLinks)
               _mcdpUserIp
@@ -204,9 +212,10 @@ instance GoogleRequest
               _mcdpOauthToken
               _mcdpCustomDimensionId
               _mcdpFields
-              _mcdpAlt
+              (Just _mcdpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDimensionsPatchAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDimensionsPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified firewall resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsGet@.
-module Compute.Firewalls.Get
+module Network.Google.Resource.Compute.Firewalls.Get
     (
     -- * REST Resource
-      FirewallsGetAPI
+      FirewallsGetResource
 
     -- * Creating a Request
-    , firewallsGet
-    , FirewallsGet
+    , firewallsGet'
+    , FirewallsGet'
 
     -- * Request Lenses
     , fgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsGet@ which the
--- 'FirewallsGet' request conforms to.
-type FirewallsGetAPI =
+-- 'FirewallsGet'' request conforms to.
+type FirewallsGetResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           Capture "firewall" Text :> Get '[JSON] Firewall
+           Capture "firewall" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Firewall
 
 -- | Returns the specified firewall resource.
 --
--- /See:/ 'firewallsGet' smart constructor.
-data FirewallsGet = FirewallsGet
+-- /See:/ 'firewallsGet'' smart constructor.
+data FirewallsGet' = FirewallsGet'
     { _fgQuotaUser   :: !(Maybe Text)
     , _fgPrettyPrint :: !Bool
     , _fgProject     :: !Text
@@ -63,7 +71,7 @@ data FirewallsGet = FirewallsGet
     , _fgOauthToken  :: !(Maybe Text)
     , _fgFirewall    :: !Text
     , _fgFields      :: !(Maybe Text)
-    , _fgAlt         :: !Text
+    , _fgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data FirewallsGet = FirewallsGet
 -- * 'fgFields'
 --
 -- * 'fgAlt'
-firewallsGet
+firewallsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
-    -> FirewallsGet
-firewallsGet pFgProject_ pFgFirewall_ =
-    FirewallsGet
+    -> FirewallsGet'
+firewallsGet' pFgProject_ pFgFirewall_ =
+    FirewallsGet'
     { _fgQuotaUser = Nothing
     , _fgPrettyPrint = True
     , _fgProject = pFgProject_
@@ -101,7 +109,7 @@ firewallsGet pFgProject_ pFgFirewall_ =
     , _fgOauthToken = Nothing
     , _fgFirewall = pFgFirewall_
     , _fgFields = Nothing
-    , _fgAlt = "json"
+    , _fgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,22 @@ fgFields :: Lens' FirewallsGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
 -- | Data format for the response.
-fgAlt :: Lens' FirewallsGet' Text
+fgAlt :: Lens' FirewallsGet' Alt
 fgAlt = lens _fgAlt (\ s a -> s{_fgAlt = a})
 
 instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsGet{..}
-          = go _fgQuotaUser _fgPrettyPrint _fgProject _fgUserIp
+        requestWithRoute r u FirewallsGet'{..}
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgProject
+              _fgUserIp
               _fgKey
               _fgOauthToken
               _fgFirewall
               _fgFields
-              _fgAlt
+              (Just _fgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsGetResource)
+                      r
                       u

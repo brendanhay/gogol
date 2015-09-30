@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsPatch@.
-module Storage.ObjectAccessControls.Patch
+module Network.Google.Resource.Storage.ObjectAccessControls.Patch
     (
     -- * REST Resource
-      ObjectAccessControlsPatchAPI
+      ObjectAccessControlsPatchResource
 
     -- * Creating a Request
-    , objectAccessControlsPatch
-    , ObjectAccessControlsPatch
+    , objectAccessControlsPatch'
+    , ObjectAccessControlsPatch'
 
     -- * Request Lenses
     , oacpQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectAccessControlsPatch@ which the
--- 'ObjectAccessControlsPatch' request conforms to.
-type ObjectAccessControlsPatchAPI =
+-- 'ObjectAccessControlsPatch'' request conforms to.
+type ObjectAccessControlsPatchResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
-                   Patch '[JSON] ObjectAccessControl
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "generation" Word64 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Patch '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object. This method supports patch
 -- semantics.
 --
--- /See:/ 'objectAccessControlsPatch' smart constructor.
-data ObjectAccessControlsPatch = ObjectAccessControlsPatch
+-- /See:/ 'objectAccessControlsPatch'' smart constructor.
+data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
     { _oacpQuotaUser   :: !(Maybe Text)
     , _oacpPrettyPrint :: !Bool
     , _oacpUserIp      :: !(Maybe Text)
@@ -73,7 +81,7 @@ data ObjectAccessControlsPatch = ObjectAccessControlsPatch
     , _oacpEntity      :: !Text
     , _oacpGeneration  :: !(Maybe Word64)
     , _oacpFields      :: !(Maybe Text)
-    , _oacpAlt         :: !Text
+    , _oacpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch'' with the minimum fields required to make a request.
@@ -101,13 +109,13 @@ data ObjectAccessControlsPatch = ObjectAccessControlsPatch
 -- * 'oacpFields'
 --
 -- * 'oacpAlt'
-objectAccessControlsPatch
+objectAccessControlsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControlsPatch
-objectAccessControlsPatch pOacpBucket_ pOacpObject_ pOacpEntity_ =
-    ObjectAccessControlsPatch
+    -> ObjectAccessControlsPatch'
+objectAccessControlsPatch' pOacpBucket_ pOacpObject_ pOacpEntity_ =
+    ObjectAccessControlsPatch'
     { _oacpQuotaUser = Nothing
     , _oacpPrettyPrint = True
     , _oacpUserIp = Nothing
@@ -118,7 +126,7 @@ objectAccessControlsPatch pOacpBucket_ pOacpObject_ pOacpEntity_ =
     , _oacpEntity = pOacpEntity_
     , _oacpGeneration = Nothing
     , _oacpFields = Nothing
-    , _oacpAlt = "json"
+    , _oacpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ oacpFields
   = lens _oacpFields (\ s a -> s{_oacpFields = a})
 
 -- | Data format for the response.
-oacpAlt :: Lens' ObjectAccessControlsPatch' Text
+oacpAlt :: Lens' ObjectAccessControlsPatch' Alt
 oacpAlt = lens _oacpAlt (\ s a -> s{_oacpAlt = a})
 
 instance GoogleRequest ObjectAccessControlsPatch'
@@ -191,8 +199,9 @@ instance GoogleRequest ObjectAccessControlsPatch'
         type Rs ObjectAccessControlsPatch' =
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsPatch{..}
-          = go _oacpQuotaUser _oacpPrettyPrint _oacpUserIp
+        requestWithRoute r u ObjectAccessControlsPatch'{..}
+          = go _oacpQuotaUser (Just _oacpPrettyPrint)
+              _oacpUserIp
               _oacpBucket
               _oacpKey
               _oacpObject
@@ -200,9 +209,9 @@ instance GoogleRequest ObjectAccessControlsPatch'
               _oacpEntity
               _oacpGeneration
               _oacpFields
-              _oacpAlt
+              (Just _oacpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ObjectAccessControlsPatchAPI)
+                      (Proxy :: Proxy ObjectAccessControlsPatchResource)
                       r
                       u

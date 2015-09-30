@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get information about an access token issued by a user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensGet@.
-module Directory.Tokens.Get
+module Network.Google.Resource.Directory.Tokens.Get
     (
     -- * REST Resource
-      TokensGetAPI
+      TokensGetResource
 
     -- * Creating a Request
-    , tokensGet
-    , TokensGet
+    , tokensGet'
+    , TokensGet'
 
     -- * Request Lenses
     , tgClientId
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryTokensGet@ which the
--- 'TokensGet' request conforms to.
-type TokensGetAPI =
+-- 'TokensGet'' request conforms to.
+type TokensGetResource =
      "users" :>
        Capture "userKey" Text :>
          "tokens" :>
-           Capture "clientId" Text :> Get '[JSON] Token
+           Capture "clientId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Token
 
 -- | Get information about an access token issued by a user.
 --
--- /See:/ 'tokensGet' smart constructor.
-data TokensGet = TokensGet
+-- /See:/ 'tokensGet'' smart constructor.
+data TokensGet' = TokensGet'
     { _tgClientId    :: !Text
     , _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data TokensGet = TokensGet
     , _tgOauthToken  :: !(Maybe Text)
     , _tgUserKey     :: !Text
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokensGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TokensGet = TokensGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-tokensGet
+tokensGet'
     :: Text -- ^ 'clientId'
     -> Text -- ^ 'userKey'
-    -> TokensGet
-tokensGet pTgClientId_ pTgUserKey_ =
-    TokensGet
+    -> TokensGet'
+tokensGet' pTgClientId_ pTgUserKey_ =
+    TokensGet'
     { _tgClientId = pTgClientId_
     , _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
@@ -101,7 +109,7 @@ tokensGet pTgClientId_ pTgUserKey_ =
     , _tgOauthToken = Nothing
     , _tgUserKey = pTgUserKey_
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | The Client ID of the application the token is issued to.
@@ -149,19 +157,21 @@ tgFields :: Lens' TokensGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TokensGet' Text
+tgAlt :: Lens' TokensGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TokensGet' where
         type Rs TokensGet' = Token
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u TokensGet{..}
-          = go _tgClientId _tgQuotaUser _tgPrettyPrint
+        requestWithRoute r u TokensGet'{..}
+          = go _tgClientId _tgQuotaUser (Just _tgPrettyPrint)
               _tgUserIp
               _tgKey
               _tgOauthToken
               _tgUserKey
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokensGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TokensGetResource)
+                      r
+                      u

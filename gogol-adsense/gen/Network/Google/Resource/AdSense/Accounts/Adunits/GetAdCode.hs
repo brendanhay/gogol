@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdunitsGetAdCode@.
-module AdSense.Accounts.Adunits.GetAdCode
+module Network.Google.Resource.AdSense.Accounts.Adunits.GetAdCode
     (
     -- * REST Resource
-      AccountsAdunitsGetAdCodeAPI
+      AccountsAdunitsGetAdCodeResource
 
     -- * Creating a Request
-    , accountsAdunitsGetAdCode
-    , AccountsAdunitsGetAdCode
+    , accountsAdunitsGetAdCode'
+    , AccountsAdunitsGetAdCode'
 
     -- * Request Lenses
     , aagacQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAdunitsGetAdCode@ which the
--- 'AccountsAdunitsGetAdCode' request conforms to.
-type AccountsAdunitsGetAdCodeAPI =
+-- 'AccountsAdunitsGetAdCode'' request conforms to.
+type AccountsAdunitsGetAdCodeResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
                Capture "adUnitId" Text :>
-                 "adcode" :> Get '[JSON] AdCode
+                 "adcode" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] AdCode
 
 -- | Get ad code for the specified ad unit.
 --
--- /See:/ 'accountsAdunitsGetAdCode' smart constructor.
-data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
+-- /See:/ 'accountsAdunitsGetAdCode'' smart constructor.
+data AccountsAdunitsGetAdCode' = AccountsAdunitsGetAdCode'
     { _aagacQuotaUser   :: !(Maybe Text)
     , _aagacPrettyPrint :: !Bool
     , _aagacUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
     , _aagacKey         :: !(Maybe Text)
     , _aagacOauthToken  :: !(Maybe Text)
     , _aagacFields      :: !(Maybe Text)
-    , _aagacAlt         :: !Text
+    , _aagacAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsGetAdCode'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data AccountsAdunitsGetAdCode = AccountsAdunitsGetAdCode
 -- * 'aagacFields'
 --
 -- * 'aagacAlt'
-accountsAdunitsGetAdCode
+accountsAdunitsGetAdCode'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsGetAdCode
-accountsAdunitsGetAdCode pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
-    AccountsAdunitsGetAdCode
+    -> AccountsAdunitsGetAdCode'
+accountsAdunitsGetAdCode' pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
+    AccountsAdunitsGetAdCode'
     { _aagacQuotaUser = Nothing
     , _aagacPrettyPrint = True
     , _aagacUserIp = Nothing
@@ -110,7 +118,7 @@ accountsAdunitsGetAdCode pAagacAdUnitId_ pAagacAdClientId_ pAagacAccountId_ =
     , _aagacKey = Nothing
     , _aagacOauthToken = Nothing
     , _aagacFields = Nothing
-    , _aagacAlt = "json"
+    , _aagacAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,24 +177,25 @@ aagacFields
   = lens _aagacFields (\ s a -> s{_aagacFields = a})
 
 -- | Data format for the response.
-aagacAlt :: Lens' AccountsAdunitsGetAdCode' Text
+aagacAlt :: Lens' AccountsAdunitsGetAdCode' Alt
 aagacAlt = lens _aagacAlt (\ s a -> s{_aagacAlt = a})
 
 instance GoogleRequest AccountsAdunitsGetAdCode'
          where
         type Rs AccountsAdunitsGetAdCode' = AdCode
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsAdunitsGetAdCode{..}
-          = go _aagacQuotaUser _aagacPrettyPrint _aagacUserIp
+        requestWithRoute r u AccountsAdunitsGetAdCode'{..}
+          = go _aagacQuotaUser (Just _aagacPrettyPrint)
+              _aagacUserIp
               _aagacAdUnitId
               _aagacAdClientId
               _aagacAccountId
               _aagacKey
               _aagacOauthToken
               _aagacFields
-              _aagacAlt
+              (Just _aagacAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsGetAdCodeAPI)
+                      (Proxy :: Proxy AccountsAdunitsGetAdCodeResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsList@.
-module DFAReporting.RemarketingLists.List
+module Network.Google.Resource.DFAReporting.RemarketingLists.List
     (
     -- * REST Resource
-      RemarketingListsListAPI
+      RemarketingListsListResource
 
     -- * Creating a Request
-    , remarketingListsList
-    , RemarketingListsList
+    , remarketingListsList'
+    , RemarketingListsList'
 
     -- * Request Lenses
     , rllQuotaUser
@@ -51,41 +52,53 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListsList@ which the
--- 'RemarketingListsList' request conforms to.
-type RemarketingListsListAPI =
+-- 'RemarketingListsList'' request conforms to.
+type RemarketingListsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           QueryParam "floodlightActivityId" Int64 :>
-             QueryParam "advertiserId" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "active" Bool :>
-                   QueryParam "name" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParam "maxResults" Int32 :>
-                           Get '[JSON] RemarketingListsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "floodlightActivityId" Int64 :>
+                   QueryParam "advertiserId" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingRemarketingListsListSortOrder
+                       :>
+                       QueryParam "active" Bool :>
+                         QueryParam "key" Text :>
+                           QueryParam "name" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingRemarketingListsListSortField
+                                 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON]
+                                           RemarketingListsListResponse
 
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
--- /See:/ 'remarketingListsList' smart constructor.
-data RemarketingListsList = RemarketingListsList
+-- /See:/ 'remarketingListsList'' smart constructor.
+data RemarketingListsList' = RemarketingListsList'
     { _rllQuotaUser            :: !(Maybe Text)
     , _rllPrettyPrint          :: !Bool
     , _rllUserIp               :: !(Maybe Text)
     , _rllFloodlightActivityId :: !(Maybe Int64)
     , _rllAdvertiserId         :: !Int64
     , _rllProfileId            :: !Int64
-    , _rllSortOrder            :: !(Maybe Text)
+    , _rllSortOrder            :: !(Maybe DfareportingRemarketingListsListSortOrder)
     , _rllActive               :: !(Maybe Bool)
     , _rllKey                  :: !(Maybe Text)
     , _rllName                 :: !(Maybe Text)
     , _rllPageToken            :: !(Maybe Text)
-    , _rllSortField            :: !(Maybe Text)
+    , _rllSortField            :: !(Maybe DfareportingRemarketingListsListSortField)
     , _rllOauthToken           :: !(Maybe Text)
     , _rllMaxResults           :: !(Maybe Int32)
     , _rllFields               :: !(Maybe Text)
-    , _rllAlt                  :: !Text
+    , _rllAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsList'' with the minimum fields required to make a request.
@@ -123,12 +136,12 @@ data RemarketingListsList = RemarketingListsList
 -- * 'rllFields'
 --
 -- * 'rllAlt'
-remarketingListsList
+remarketingListsList'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
-    -> RemarketingListsList
-remarketingListsList pRllAdvertiserId_ pRllProfileId_ =
-    RemarketingListsList
+    -> RemarketingListsList'
+remarketingListsList' pRllAdvertiserId_ pRllProfileId_ =
+    RemarketingListsList'
     { _rllQuotaUser = Nothing
     , _rllPrettyPrint = True
     , _rllUserIp = Nothing
@@ -144,7 +157,7 @@ remarketingListsList pRllAdvertiserId_ pRllProfileId_ =
     , _rllOauthToken = Nothing
     , _rllMaxResults = Nothing
     , _rllFields = Nothing
-    , _rllAlt = "json"
+    , _rllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,7 +197,7 @@ rllProfileId
   = lens _rllProfileId (\ s a -> s{_rllProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-rllSortOrder :: Lens' RemarketingListsList' (Maybe Text)
+rllSortOrder :: Lens' RemarketingListsList' (Maybe DfareportingRemarketingListsListSortOrder)
 rllSortOrder
   = lens _rllSortOrder (\ s a -> s{_rllSortOrder = a})
 
@@ -216,7 +229,7 @@ rllPageToken
   = lens _rllPageToken (\ s a -> s{_rllPageToken = a})
 
 -- | Field by which to sort the list.
-rllSortField :: Lens' RemarketingListsList' (Maybe Text)
+rllSortField :: Lens' RemarketingListsList' (Maybe DfareportingRemarketingListsListSortField)
 rllSortField
   = lens _rllSortField (\ s a -> s{_rllSortField = a})
 
@@ -238,15 +251,15 @@ rllFields
   = lens _rllFields (\ s a -> s{_rllFields = a})
 
 -- | Data format for the response.
-rllAlt :: Lens' RemarketingListsList' Text
+rllAlt :: Lens' RemarketingListsList' Alt
 rllAlt = lens _rllAlt (\ s a -> s{_rllAlt = a})
 
 instance GoogleRequest RemarketingListsList' where
         type Rs RemarketingListsList' =
              RemarketingListsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsList{..}
-          = go _rllQuotaUser _rllPrettyPrint _rllUserIp
+        requestWithRoute r u RemarketingListsList'{..}
+          = go _rllQuotaUser (Just _rllPrettyPrint) _rllUserIp
               _rllFloodlightActivityId
               (Just _rllAdvertiserId)
               _rllProfileId
@@ -259,9 +272,9 @@ instance GoogleRequest RemarketingListsList' where
               _rllOauthToken
               _rllMaxResults
               _rllFields
-              _rllAlt
+              (Just _rllAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListsListAPI)
+                      (Proxy :: Proxy RemarketingListsListResource)
                       r
                       u

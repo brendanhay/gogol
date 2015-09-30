@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified VpnTunnel resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsGet@.
-module Compute.VPNTunnels.Get
+module Network.Google.Resource.Compute.VPNTunnels.Get
     (
     -- * REST Resource
-      VpnTunnelsGetAPI
+      VpnTunnelsGetResource
 
     -- * Creating a Request
-    , vPNTunnelsGet
-    , VPNTunnelsGet
+    , vPNTunnelsGet'
+    , VPNTunnelsGet'
 
     -- * Request Lenses
     , vtgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsGet@ which the
--- 'VPNTunnelsGet' request conforms to.
-type VpnTunnelsGetAPI =
+-- 'VPNTunnelsGet'' request conforms to.
+type VpnTunnelsGetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "vpnTunnels" :>
-             Capture "vpnTunnel" Text :> Get '[JSON] VPNTunnel
+             Capture "vpnTunnel" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] VPNTunnel
 
 -- | Returns the specified VpnTunnel resource.
 --
--- /See:/ 'vPNTunnelsGet' smart constructor.
-data VPNTunnelsGet = VPNTunnelsGet
+-- /See:/ 'vPNTunnelsGet'' smart constructor.
+data VPNTunnelsGet' = VPNTunnelsGet'
     { _vtgQuotaUser   :: !(Maybe Text)
     , _vtgPrettyPrint :: !Bool
     , _vtgProject     :: !Text
@@ -66,7 +74,7 @@ data VPNTunnelsGet = VPNTunnelsGet
     , _vtgRegion      :: !Text
     , _vtgOauthToken  :: !(Maybe Text)
     , _vtgFields      :: !(Maybe Text)
-    , _vtgAlt         :: !Text
+    , _vtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data VPNTunnelsGet = VPNTunnelsGet
 -- * 'vtgFields'
 --
 -- * 'vtgAlt'
-vPNTunnelsGet
+vPNTunnelsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
-    -> VPNTunnelsGet
-vPNTunnelsGet pVtgProject_ pVtgVpnTunnel_ pVtgRegion_ =
-    VPNTunnelsGet
+    -> VPNTunnelsGet'
+vPNTunnelsGet' pVtgProject_ pVtgVpnTunnel_ pVtgRegion_ =
+    VPNTunnelsGet'
     { _vtgQuotaUser = Nothing
     , _vtgPrettyPrint = True
     , _vtgProject = pVtgProject_
@@ -108,7 +116,7 @@ vPNTunnelsGet pVtgProject_ pVtgVpnTunnel_ pVtgRegion_ =
     , _vtgRegion = pVtgRegion_
     , _vtgOauthToken = Nothing
     , _vtgFields = Nothing
-    , _vtgAlt = "json"
+    , _vtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,21 +171,23 @@ vtgFields
   = lens _vtgFields (\ s a -> s{_vtgFields = a})
 
 -- | Data format for the response.
-vtgAlt :: Lens' VPNTunnelsGet' Text
+vtgAlt :: Lens' VPNTunnelsGet' Alt
 vtgAlt = lens _vtgAlt (\ s a -> s{_vtgAlt = a})
 
 instance GoogleRequest VPNTunnelsGet' where
         type Rs VPNTunnelsGet' = VPNTunnel
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsGet{..}
-          = go _vtgQuotaUser _vtgPrettyPrint _vtgProject
+        requestWithRoute r u VPNTunnelsGet'{..}
+          = go _vtgQuotaUser (Just _vtgPrettyPrint) _vtgProject
               _vtgUserIp
               _vtgKey
               _vtgVpnTunnel
               _vtgRegion
               _vtgOauthToken
               _vtgFields
-              _vtgAlt
+              (Just _vtgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VpnTunnelsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy VpnTunnelsGetResource)
+                      r
                       u

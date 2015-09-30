@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing user role.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesUpdate@.
-module DFAReporting.UserRoles.Update
+module Network.Google.Resource.DFAReporting.UserRoles.Update
     (
     -- * REST Resource
-      UserRolesUpdateAPI
+      UserRolesUpdateResource
 
     -- * Creating a Request
-    , userRolesUpdate
-    , UserRolesUpdate
+    , userRolesUpdate'
+    , UserRolesUpdate'
 
     -- * Request Lenses
     , uruQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolesUpdate@ which the
--- 'UserRolesUpdate' request conforms to.
-type UserRolesUpdateAPI =
+-- 'UserRolesUpdate'' request conforms to.
+type UserRolesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "userRoles" :> Put '[JSON] UserRole
+         "userRoles" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] UserRole
 
 -- | Updates an existing user role.
 --
--- /See:/ 'userRolesUpdate' smart constructor.
-data UserRolesUpdate = UserRolesUpdate
+-- /See:/ 'userRolesUpdate'' smart constructor.
+data UserRolesUpdate' = UserRolesUpdate'
     { _uruQuotaUser   :: !(Maybe Text)
     , _uruPrettyPrint :: !Bool
     , _uruUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data UserRolesUpdate = UserRolesUpdate
     , _uruKey         :: !(Maybe Text)
     , _uruOauthToken  :: !(Maybe Text)
     , _uruFields      :: !(Maybe Text)
-    , _uruAlt         :: !Text
+    , _uruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data UserRolesUpdate = UserRolesUpdate
 -- * 'uruFields'
 --
 -- * 'uruAlt'
-userRolesUpdate
+userRolesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> UserRolesUpdate
-userRolesUpdate pUruProfileId_ =
-    UserRolesUpdate
+    -> UserRolesUpdate'
+userRolesUpdate' pUruProfileId_ =
+    UserRolesUpdate'
     { _uruQuotaUser = Nothing
     , _uruPrettyPrint = True
     , _uruUserIp = Nothing
@@ -94,7 +102,7 @@ userRolesUpdate pUruProfileId_ =
     , _uruKey = Nothing
     , _uruOauthToken = Nothing
     , _uruFields = Nothing
-    , _uruAlt = "json"
+    , _uruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ uruFields
   = lens _uruFields (\ s a -> s{_uruFields = a})
 
 -- | Data format for the response.
-uruAlt :: Lens' UserRolesUpdate' Text
+uruAlt :: Lens' UserRolesUpdate' Alt
 uruAlt = lens _uruAlt (\ s a -> s{_uruAlt = a})
 
 instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesUpdate{..}
-          = go _uruQuotaUser _uruPrettyPrint _uruUserIp
+        requestWithRoute r u UserRolesUpdate'{..}
+          = go _uruQuotaUser (Just _uruPrettyPrint) _uruUserIp
               _uruProfileId
               _uruKey
               _uruOauthToken
               _uruFields
-              _uruAlt
+              (Just _uruAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserRolesUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserRolesUpdateResource)
                       r
                       u

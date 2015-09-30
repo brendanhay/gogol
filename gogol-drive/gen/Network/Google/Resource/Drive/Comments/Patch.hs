@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing comment. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsPatch@.
-module Drive.Comments.Patch
+module Network.Google.Resource.Drive.Comments.Patch
     (
     -- * REST Resource
-      CommentsPatchAPI
+      CommentsPatchResource
 
     -- * Creating a Request
-    , commentsPatch
-    , CommentsPatch
+    , commentsPatch'
+    , CommentsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveCommentsPatch@ which the
--- 'CommentsPatch' request conforms to.
-type CommentsPatchAPI =
+-- 'CommentsPatch'' request conforms to.
+type CommentsPatchResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
-           Capture "commentId" Text :> Patch '[JSON] Comment
+           Capture "commentId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Comment
 
 -- | Updates an existing comment. This method supports patch semantics.
 --
--- /See:/ 'commentsPatch' smart constructor.
-data CommentsPatch = CommentsPatch
+-- /See:/ 'commentsPatch'' smart constructor.
+data CommentsPatch' = CommentsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CommentsPatch = CommentsPatch
     , _cpOauthToken  :: !(Maybe Text)
     , _cpCommentId   :: !Text
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CommentsPatch = CommentsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-commentsPatch
+commentsPatch'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> CommentsPatch
-commentsPatch pCpFileId_ pCpCommentId_ =
-    CommentsPatch
+    -> CommentsPatch'
+commentsPatch' pCpFileId_ pCpCommentId_ =
+    CommentsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -101,7 +109,7 @@ commentsPatch pCpFileId_ pCpCommentId_ =
     , _cpOauthToken = Nothing
     , _cpCommentId = pCpCommentId_
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +155,22 @@ cpFields :: Lens' CommentsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CommentsPatch' Text
+cpAlt :: Lens' CommentsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CommentsPatch' where
         type Rs CommentsPatch' = Comment
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp _cpKey
+        requestWithRoute r u CommentsPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+              _cpKey
               _cpFileId
               _cpOauthToken
               _cpCommentId
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsPatchResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- is used.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsDelete@.
-module Storage.Objects.Delete
+module Network.Google.Resource.Storage.Objects.Delete
     (
     -- * REST Resource
-      ObjectsDeleteAPI
+      ObjectsDeleteResource
 
     -- * Creating a Request
-    , objectsDelete
-    , ObjectsDelete
+    , objectsDelete'
+    , ObjectsDelete'
 
     -- * Request Lenses
     , odQuotaUser
@@ -51,24 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsDelete@ which the
--- 'ObjectsDelete' request conforms to.
-type ObjectsDeleteAPI =
+-- 'ObjectsDelete'' request conforms to.
+type ObjectsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "generation" Word64 :> Delete '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "ifGenerationMatch" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Word64 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "generation" Word64 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes data blobs and associated metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
 -- is used.
 --
--- /See:/ 'objectsDelete' smart constructor.
-data ObjectsDelete = ObjectsDelete
+-- /See:/ 'objectsDelete'' smart constructor.
+data ObjectsDelete' = ObjectsDelete'
     { _odQuotaUser                :: !(Maybe Text)
     , _odIfMetagenerationMatch    :: !(Maybe Word64)
     , _odIfGenerationNotMatch     :: !(Maybe Word64)
@@ -82,7 +90,7 @@ data ObjectsDelete = ObjectsDelete
     , _odOauthToken               :: !(Maybe Text)
     , _odGeneration               :: !(Maybe Word64)
     , _odFields                   :: !(Maybe Text)
-    , _odAlt                      :: !Text
+    , _odAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsDelete'' with the minimum fields required to make a request.
@@ -116,12 +124,12 @@ data ObjectsDelete = ObjectsDelete
 -- * 'odFields'
 --
 -- * 'odAlt'
-objectsDelete
+objectsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
-    -> ObjectsDelete
-objectsDelete pOdBucket_ pOdObject_ =
-    ObjectsDelete
+    -> ObjectsDelete'
+objectsDelete' pOdBucket_ pOdObject_ =
+    ObjectsDelete'
     { _odQuotaUser = Nothing
     , _odIfMetagenerationMatch = Nothing
     , _odIfGenerationNotMatch = Nothing
@@ -135,7 +143,7 @@ objectsDelete pOdBucket_ pOdObject_ =
     , _odOauthToken = Nothing
     , _odGeneration = Nothing
     , _odFields = Nothing
-    , _odAlt = "json"
+    , _odAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -214,16 +222,16 @@ odFields :: Lens' ObjectsDelete' (Maybe Text)
 odFields = lens _odFields (\ s a -> s{_odFields = a})
 
 -- | Data format for the response.
-odAlt :: Lens' ObjectsDelete' Text
+odAlt :: Lens' ObjectsDelete' Alt
 odAlt = lens _odAlt (\ s a -> s{_odAlt = a})
 
 instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsDelete{..}
+        requestWithRoute r u ObjectsDelete'{..}
           = go _odQuotaUser _odIfMetagenerationMatch
               _odIfGenerationNotMatch
-              _odPrettyPrint
+              (Just _odPrettyPrint)
               _odIfGenerationMatch
               _odUserIp
               _odBucket
@@ -233,7 +241,9 @@ instance GoogleRequest ObjectsDelete' where
               _odOauthToken
               _odGeneration
               _odFields
-              _odAlt
+              (Just _odAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsDeleteResource)
+                      r
                       u

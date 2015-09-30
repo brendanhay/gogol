@@ -28,66 +28,71 @@ module Network.Google.PlusDomains
     -- * REST Resources
 
     -- ** PlusDomainsActivitiesGet
-    , module PlusDomains.Activities.Get
+    , module Network.Google.Resource.PlusDomains.Activities.Get
 
     -- ** PlusDomainsActivitiesInsert
-    , module PlusDomains.Activities.Insert
+    , module Network.Google.Resource.PlusDomains.Activities.Insert
 
     -- ** PlusDomainsActivitiesList
-    , module PlusDomains.Activities.List
+    , module Network.Google.Resource.PlusDomains.Activities.List
 
     -- ** PlusDomainsAudiencesList
-    , module PlusDomains.Audiences.List
+    , module Network.Google.Resource.PlusDomains.Audiences.List
 
     -- ** PlusDomainsCirclesAddPeople
-    , module PlusDomains.Circles.AddPeople
+    , module Network.Google.Resource.PlusDomains.Circles.AddPeople
 
     -- ** PlusDomainsCirclesGet
-    , module PlusDomains.Circles.Get
+    , module Network.Google.Resource.PlusDomains.Circles.Get
 
     -- ** PlusDomainsCirclesInsert
-    , module PlusDomains.Circles.Insert
+    , module Network.Google.Resource.PlusDomains.Circles.Insert
 
     -- ** PlusDomainsCirclesList
-    , module PlusDomains.Circles.List
+    , module Network.Google.Resource.PlusDomains.Circles.List
 
     -- ** PlusDomainsCirclesPatch
-    , module PlusDomains.Circles.Patch
+    , module Network.Google.Resource.PlusDomains.Circles.Patch
 
     -- ** PlusDomainsCirclesRemove
-    , module PlusDomains.Circles.Remove
+    , module Network.Google.Resource.PlusDomains.Circles.Remove
 
     -- ** PlusDomainsCirclesRemovePeople
-    , module PlusDomains.Circles.RemovePeople
+    , module Network.Google.Resource.PlusDomains.Circles.RemovePeople
 
     -- ** PlusDomainsCirclesUpdate
-    , module PlusDomains.Circles.Update
+    , module Network.Google.Resource.PlusDomains.Circles.Update
 
     -- ** PlusDomainsCommentsGet
-    , module PlusDomains.Comments.Get
+    , module Network.Google.Resource.PlusDomains.Comments.Get
 
     -- ** PlusDomainsCommentsInsert
-    , module PlusDomains.Comments.Insert
+    , module Network.Google.Resource.PlusDomains.Comments.Insert
 
     -- ** PlusDomainsCommentsList
-    , module PlusDomains.Comments.List
+    , module Network.Google.Resource.PlusDomains.Comments.List
 
     -- ** PlusDomainsMediaInsert
-    , module PlusDomains.Media.Insert
+    , module Network.Google.Resource.PlusDomains.Media.Insert
 
     -- ** PlusDomainsPeopleGet
-    , module PlusDomains.People.Get
+    , module Network.Google.Resource.PlusDomains.People.Get
 
     -- ** PlusDomainsPeopleList
-    , module PlusDomains.People.List
+    , module Network.Google.Resource.PlusDomains.People.List
 
     -- ** PlusDomainsPeopleListByActivity
-    , module PlusDomains.People.ListByActivity
+    , module Network.Google.Resource.PlusDomains.People.ListByActivity
 
     -- ** PlusDomainsPeopleListByCircle
-    , module PlusDomains.People.ListByCircle
+    , module Network.Google.Resource.PlusDomains.People.ListByCircle
 
     -- * Types
+
+    -- ** CommentPlusoners
+    , CommentPlusoners
+    , commentPlusoners
+    , cpTotalItems
 
     -- ** Audience
     , Audience
@@ -97,6 +102,27 @@ module Network.Google.PlusDomains
     , aVisibility
     , aItem
     , aMemberCount
+
+    -- ** ActivityProvider
+    , ActivityProvider
+    , activityProvider
+    , apTitle
+
+    -- ** ActivityObjectAttachmentsPreviewThumbnails
+    , ActivityObjectAttachmentsPreviewThumbnails
+    , activityObjectAttachmentsPreviewThumbnails
+    , aoaptUrl
+
+    -- ** CommentActorImage
+    , CommentActorImage
+    , commentActorImage
+    , caiUrl
+
+    -- ** ActivityObjectPlusoners
+    , ActivityObjectPlusoners
+    , activityObjectPlusoners
+    , aopTotalItems
+    , aopSelfLink
 
     -- ** Circle
     , Circle
@@ -108,6 +134,41 @@ module Network.Google.PlusDomains
     , cDisplayName
     , cId
     , cDescription
+
+    -- ** ActivityObjectAttachments
+    , ActivityObjectAttachments
+    , activityObjectAttachments
+    , aoaFullImage
+    , aoaImage
+    , aoaObjectType
+    , aoaPreviewThumbnails
+    , aoaUrl
+    , aoaEmbed
+    , aoaContent
+    , aoaThumbnails
+    , aoaDisplayName
+    , aoaId
+
+    -- ** ActivityObjectAttachmentsThumbnailsImage
+    , ActivityObjectAttachmentsThumbnailsImage
+    , activityObjectAttachmentsThumbnailsImage
+    , aoatiHeight
+    , aoatiUrl
+    , aoatiWidth
+    , aoatiType
+
+    -- ** PlacePosition
+    , PlacePosition
+    , placePosition
+    , ppLatitude
+    , ppLongitude
+
+    -- ** PersonURLs
+    , PersonURLs
+    , personURLs
+    , puValue
+    , puType
+    , puLabel
 
     -- ** Person
     , Person
@@ -149,6 +210,45 @@ module Network.Google.PlusDomains
     , vWidth
     , vType
 
+    -- ** PlusDomainsPeopleListOrderBy
+    , PlusDomainsPeopleListOrderBy (..)
+
+    -- ** CommentInReplyTo
+    , CommentInReplyTo
+    , commentInReplyTo
+    , cirtUrl
+    , cirtId
+
+    -- ** PersonOrganizations
+    , PersonOrganizations
+    , personOrganizations
+    , poDepartment
+    , poLocation
+    , poEndDate
+    , poPrimary
+    , poStartDate
+    , poName
+    , poTitle
+    , poType
+    , poDescription
+
+    -- ** ActivityObjectAttachmentsImage
+    , ActivityObjectAttachmentsImage
+    , activityObjectAttachmentsImage
+    , aoaiHeight
+    , aoaiUrl
+    , aoaiWidth
+    , aoaiType
+
+    -- ** CommentActor
+    , CommentActor
+    , commentActor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+    , caVerification
+
     -- ** CircleFeed
     , CircleFeed
     , circleFeed
@@ -161,12 +261,63 @@ module Network.Google.PlusDomains
     , cfSelfLink
     , cfTitle
 
+    -- ** ActivityObject
+    , ActivityObject
+    , activityObject
+    , aoPlusoners
+    , aoAttachments
+    , aoObjectType
+    , aoOriginalContent
+    , aoUrl
+    , aoActor
+    , aoContent
+    , aoReplies
+    , aoId
+    , aoStatusForViewer
+    , aoResharers
+
+    -- ** PlusDomainsPeopleListByActivityCollection
+    , PlusDomainsPeopleListByActivityCollection (..)
+
+    -- ** ActivityObjectActor
+    , ActivityObjectActor
+    , activityObjectActor
+    , aImage
+    , aUrl
+    , aDisplayName
+    , aId
+    , aVerification
+
+    -- ** PlusDomainsActivitiesListCollection
+    , PlusDomainsActivitiesListCollection (..)
+
+    -- ** PlusDomainsPeopleListCollection
+    , PlusDomainsPeopleListCollection (..)
+
+    -- ** MediaAuthorImage
+    , MediaAuthorImage
+    , mediaAuthorImage
+    , maiUrl
+
+    -- ** ActivityActorImage
+    , ActivityActorImage
+    , activityActorImage
+    , aaiUrl
+
     -- ** PlusDomainsACLentryResource
     , PlusDomainsACLentryResource
     , plusDomainsACLentryResource
     , pdarDisplayName
     , pdarId
     , pdarType
+
+    -- ** MediaAuthor
+    , MediaAuthor
+    , mediaAuthor
+    , maImage
+    , maUrl
+    , maDisplayName
+    , maId
 
     -- ** PeopleFeed
     , PeopleFeed
@@ -178,6 +329,33 @@ module Network.Google.PlusDomains
     , pfItems
     , pfSelfLink
     , pfTitle
+
+    -- ** ActivityObjectAttachmentsEmbed
+    , ActivityObjectAttachmentsEmbed
+    , activityObjectAttachmentsEmbed
+    , aoaeUrl
+    , aoaeType
+
+    -- ** PersonCoverCoverPhoto
+    , PersonCoverCoverPhoto
+    , personCoverCoverPhoto
+    , pccpHeight
+    , pccpUrl
+    , pccpWidth
+
+    -- ** CirclePeople
+    , CirclePeople
+    , circlePeople
+    , cTotalItems
+
+    -- ** ActivityObjectReplies
+    , ActivityObjectReplies
+    , activityObjectReplies
+    , aorTotalItems
+    , aorSelfLink
+
+    -- ** PlusDomainsMediaInsertCollection
+    , PlusDomainsMediaInsertCollection (..)
 
     -- ** Media
     , Media
@@ -201,6 +379,19 @@ module Network.Google.PlusDomains
     , mUpdated
     , mMediaCreatedTime
 
+    -- ** ActivityObjectActorImage
+    , ActivityObjectActorImage
+    , activityObjectActorImage
+    , actUrl
+
+    -- ** ActivityActorVerification
+    , ActivityActorVerification
+    , activityActorVerification
+    , aavAdHocVerified
+
+    -- ** PlusDomainsCommentsListSortOrder
+    , PlusDomainsCommentsListSortOrder (..)
+
     -- ** ActivityFeed
     , ActivityFeed
     , activityFeed
@@ -214,6 +405,60 @@ module Network.Google.PlusDomains
     , afUpdated
     , afTitle
 
+    -- ** PersonPlacesLived
+    , PersonPlacesLived
+    , personPlacesLived
+    , pplValue
+    , pplPrimary
+
+    -- ** ActivityObjectActorVerification
+    , ActivityObjectActorVerification
+    , activityObjectActorVerification
+    , aoavAdHocVerified
+
+    -- ** PersonEmails
+    , PersonEmails
+    , personEmails
+    , peValue
+    , peType
+
+    -- ** PersonImage
+    , PersonImage
+    , personImage
+    , piUrl
+    , piIsDefault
+
+    -- ** PersonName
+    , PersonName
+    , personName
+    , pnGivenName
+    , pnMiddleName
+    , pnFormatted
+    , pnHonorificPrefix
+    , pnFamilyName
+    , pnHonorificSuffix
+
+    -- ** PlaceAddress
+    , PlaceAddress
+    , placeAddress
+    , paFormatted
+
+    -- ** ActivityObjectAttachmentsThumbnails
+    , ActivityObjectAttachmentsThumbnails
+    , activityObjectAttachmentsThumbnails
+    , aoatImage
+    , aoatUrl
+    , aoatDescription
+
+    -- ** ActivityObjectStatusForViewer
+    , ActivityObjectStatusForViewer
+    , activityObjectStatusForViewer
+    , aosfvCanComment
+    , aosfvResharingDisabled
+    , aosfvCanUpdate
+    , aosfvIsPlusOned
+    , aosfvCanPlusone
+
     -- ** AudiencesFeed
     , AudiencesFeed
     , audiencesFeed
@@ -226,26 +471,33 @@ module Network.Google.PlusDomains
     -- ** Activity
     , Activity
     , activity
-    , actAccess
-    , actPlaceName
-    , actEtag
-    , actAnnotation
-    , actLocation
-    , actGeocode
-    , actKind
-    , actRadius
-    , actPublished
-    , actUrl
-    , actActor
-    , actAddress
-    , actObject
-    , actId
-    , actUpdated
-    , actTitle
-    , actVerb
-    , actCrosspostSource
-    , actPlaceId
-    , actProvider
+    , aaAccess
+    , aaPlaceName
+    , aaEtag
+    , aaAnnotation
+    , aaLocation
+    , aaGeocode
+    , aaKind
+    , aaRadius
+    , aaPublished
+    , aaUrl
+    , aaActor
+    , aaAddress
+    , aaObject
+    , aaId
+    , aaUpdated
+    , aaTitle
+    , aaVerb
+    , aaCrosspostSource
+    , aaPlaceId
+    , aaProvider
+
+    -- ** PersonCover
+    , PersonCover
+    , personCover
+    , pcLayout
+    , pcCoverInfo
+    , pcCoverPhoto
 
     -- ** Place
     , Place
@@ -255,6 +507,18 @@ module Network.Google.PlusDomains
     , plaDisplayName
     , plaId
     , plaPosition
+
+    -- ** PersonCoverCoverInfo
+    , PersonCoverCoverInfo
+    , personCoverCoverInfo
+    , pcciTopImageOffset
+    , pcciLeftImageOffset
+
+    -- ** ActivityObjectResharers
+    , ActivityObjectResharers
+    , activityObjectResharers
+    , aTotalItems
+    , aSelfLink
 
     -- ** Comment
     , Comment
@@ -271,6 +535,31 @@ module Network.Google.PlusDomains
     , comVerb
     , comInReplyTo
 
+    -- ** ActivityActor
+    , ActivityActor
+    , activityActor
+    , aaaImage
+    , aaaUrl
+    , aaaName
+    , aaaDisplayName
+    , aaaId
+    , aaaVerification
+
+    -- ** CommentObject
+    , CommentObject
+    , commentObject
+    , coObjectType
+    , coOriginalContent
+    , coContent
+
+    -- ** ActivityObjectAttachmentsFullImage
+    , ActivityObjectAttachmentsFullImage
+    , activityObjectAttachmentsFullImage
+    , aoafiHeight
+    , aoafiUrl
+    , aoafiWidth
+    , aoafiType
+
     -- ** ACL
     , ACL
     , aCL
@@ -278,6 +567,11 @@ module Network.Google.PlusDomains
     , aclItems
     , aclDomainRestricted
     , aclDescription
+
+    -- ** MediaExif
+    , MediaExif
+    , mediaExif
+    , meTime
 
     -- ** CommentFeed
     , CommentFeed
@@ -290,6 +584,20 @@ module Network.Google.PlusDomains
     , cffId
     , cffUpdated
     , cffTitle
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** CommentActorVerification
+    , CommentActorVerification
+    , commentActorVerification
+    , cavAdHocVerified
+
+    -- ** ActivityActorName
+    , ActivityActorName
+    , activityActorName
+    , aanGivenName
+    , aanFamilyName
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -320,9 +628,25 @@ TODO
 -}
 
 type PlusDomainsAPI =
-     Activities :<|> People :<|> Media :<|> Audiences :<|>
-       Comments
-       :<|> Circles
+     ActivitiesInsertResource :<|> ActivitiesListResource
+       :<|> ActivitiesGetResource
+       :<|> PeopleListResource
+       :<|> PeopleListByCircleResource
+       :<|> PeopleGetResource
+       :<|> PeopleListByActivityResource
+       :<|> MediaInsertResource
+       :<|> AudiencesListResource
+       :<|> CommentsInsertResource
+       :<|> CommentsListResource
+       :<|> CommentsGetResource
+       :<|> CirclesInsertResource
+       :<|> CirclesAddPeopleResource
+       :<|> CirclesListResource
+       :<|> CirclesPatchResource
+       :<|> CirclesGetResource
+       :<|> CirclesRemoveResource
+       :<|> CirclesRemovePeopleResource
+       :<|> CirclesUpdateResource
 
 plusDomainsAPI :: Proxy PlusDomainsAPI
 plusDomainsAPI = Proxy

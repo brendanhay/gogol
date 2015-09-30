@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an access control rule. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLPatch@.
-module Calendar.ACL.Patch
+module Network.Google.Resource.Calendar.ACL.Patch
     (
     -- * REST Resource
-      AclPatchAPI
+      AclPatchResource
 
     -- * Creating a Request
-    , aCLPatch
-    , ACLPatch
+    , aCLPatch'
+    , ACLPatch'
 
     -- * Request Lenses
     , apQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLPatch@ which the
--- 'ACLPatch' request conforms to.
-type AclPatchAPI =
+-- 'ACLPatch'' request conforms to.
+type AclPatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
-           Capture "ruleId" Text :> Patch '[JSON] ACLRule
+           Capture "ruleId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --
--- /See:/ 'aCLPatch' smart constructor.
-data ACLPatch = ACLPatch
+-- /See:/ 'aCLPatch'' smart constructor.
+data ACLPatch' = ACLPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apCalendarId  :: !Text
     , _apPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data ACLPatch = ACLPatch
     , _apKey         :: !(Maybe Text)
     , _apOauthToken  :: !(Maybe Text)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Text
+    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ACLPatch = ACLPatch
 -- * 'apFields'
 --
 -- * 'apAlt'
-aCLPatch
+aCLPatch'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
-    -> ACLPatch
-aCLPatch pApCalendarId_ pApRuleId_ =
-    ACLPatch
+    -> ACLPatch'
+aCLPatch' pApCalendarId_ pApRuleId_ =
+    ACLPatch'
     { _apQuotaUser = Nothing
     , _apCalendarId = pApCalendarId_
     , _apPrettyPrint = True
@@ -101,7 +109,7 @@ aCLPatch pApCalendarId_ pApRuleId_ =
     , _apKey = Nothing
     , _apOauthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = "json"
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +157,20 @@ apFields :: Lens' ACLPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-apAlt :: Lens' ACLPatch' Text
+apAlt :: Lens' ACLPatch' Alt
 apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest ACLPatch' where
         type Rs ACLPatch' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLPatch{..}
-          = go _apQuotaUser _apCalendarId _apPrettyPrint
+        requestWithRoute r u ACLPatch'{..}
+          = go _apQuotaUser _apCalendarId (Just _apPrettyPrint)
               _apUserIp
               _apRuleId
               _apKey
               _apOauthToken
               _apFields
-              _apAlt
+              (Just _apAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclPatchResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing user role.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesDelete@.
-module DFAReporting.UserRoles.Delete
+module Network.Google.Resource.DFAReporting.UserRoles.Delete
     (
     -- * REST Resource
-      UserRolesDeleteAPI
+      UserRolesDeleteResource
 
     -- * Creating a Request
-    , userRolesDelete
-    , UserRolesDelete
+    , userRolesDelete'
+    , UserRolesDelete'
 
     -- * Request Lenses
     , urdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolesDelete@ which the
--- 'UserRolesDelete' request conforms to.
-type UserRolesDeleteAPI =
+-- 'UserRolesDelete'' request conforms to.
+type UserRolesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
 --
--- /See:/ 'userRolesDelete' smart constructor.
-data UserRolesDelete = UserRolesDelete
+-- /See:/ 'userRolesDelete'' smart constructor.
+data UserRolesDelete' = UserRolesDelete'
     { _urdQuotaUser   :: !(Maybe Text)
     , _urdPrettyPrint :: !Bool
     , _urdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data UserRolesDelete = UserRolesDelete
     , _urdId          :: !Int64
     , _urdOauthToken  :: !(Maybe Text)
     , _urdFields      :: !(Maybe Text)
-    , _urdAlt         :: !Text
+    , _urdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data UserRolesDelete = UserRolesDelete
 -- * 'urdFields'
 --
 -- * 'urdAlt'
-userRolesDelete
+userRolesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> UserRolesDelete
-userRolesDelete pUrdProfileId_ pUrdId_ =
-    UserRolesDelete
+    -> UserRolesDelete'
+userRolesDelete' pUrdProfileId_ pUrdId_ =
+    UserRolesDelete'
     { _urdQuotaUser = Nothing
     , _urdPrettyPrint = True
     , _urdUserIp = Nothing
@@ -101,7 +109,7 @@ userRolesDelete pUrdProfileId_ pUrdId_ =
     , _urdId = pUrdId_
     , _urdOauthToken = Nothing
     , _urdFields = Nothing
-    , _urdAlt = "json"
+    , _urdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ urdFields
   = lens _urdFields (\ s a -> s{_urdFields = a})
 
 -- | Data format for the response.
-urdAlt :: Lens' UserRolesDelete' Text
+urdAlt :: Lens' UserRolesDelete' Alt
 urdAlt = lens _urdAlt (\ s a -> s{_urdAlt = a})
 
 instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesDelete{..}
-          = go _urdQuotaUser _urdPrettyPrint _urdUserIp
+        requestWithRoute r u UserRolesDelete'{..}
+          = go _urdQuotaUser (Just _urdPrettyPrint) _urdUserIp
               _urdProfileId
               _urdKey
               _urdId
               _urdOauthToken
               _urdFields
-              _urdAlt
+              (Just _urdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserRolesDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserRolesDeleteResource)
                       r
                       u

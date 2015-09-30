@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- and already exists.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesCreate@.
-module Classroom.Courses.Create
+module Network.Google.Resource.Classroom.Courses.Create
     (
     -- * REST Resource
-      CoursesCreateAPI
+      CoursesCreateResource
 
     -- * Creating a Request
-    , coursesCreate
-    , CoursesCreate
+    , coursesCreate'
+    , CoursesCreate'
 
     -- * Request Lenses
     , ccXgafv
@@ -55,9 +56,23 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesCreate@ which the
--- 'CoursesCreate' request conforms to.
-type CoursesCreateAPI =
-     "v1" :> "courses" :> Post '[JSON] Course
+-- 'CoursesCreate'' request conforms to.
+type CoursesCreateResource =
+     "v1" :>
+       "courses" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Course
 
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
@@ -68,8 +83,8 @@ type CoursesCreateAPI =
 -- disabled. * \`ALREADY_EXISTS\` if an alias was specified in the \`id\`
 -- and already exists.
 --
--- /See:/ 'coursesCreate' smart constructor.
-data CoursesCreate = CoursesCreate
+-- /See:/ 'coursesCreate'' smart constructor.
+data CoursesCreate' = CoursesCreate'
     { _ccXgafv          :: !(Maybe Text)
     , _ccQuotaUser      :: !(Maybe Text)
     , _ccPrettyPrint    :: !Bool
@@ -114,10 +129,10 @@ data CoursesCreate = CoursesCreate
 -- * 'ccCallback'
 --
 -- * 'ccAlt'
-coursesCreate
-    :: CoursesCreate
-coursesCreate =
-    CoursesCreate
+coursesCreate'
+    :: CoursesCreate'
+coursesCreate' =
+    CoursesCreate'
     { _ccXgafv = Nothing
     , _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
@@ -204,10 +219,10 @@ ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
 instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesCreate{..}
-          = go _ccXgafv _ccQuotaUser _ccPrettyPrint
+        requestWithRoute r u CoursesCreate'{..}
+          = go _ccXgafv _ccQuotaUser (Just _ccPrettyPrint)
               _ccUploadProtocol
-              _ccPp
+              (Just _ccPp)
               _ccAccessToken
               _ccUploadType
               _ccBearerToken
@@ -215,7 +230,9 @@ instance GoogleRequest CoursesCreate' where
               _ccOauthToken
               _ccFields
               _ccCallback
-              _ccAlt
+              (Just _ccAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesCreateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesCreateResource)
+                      r
                       u

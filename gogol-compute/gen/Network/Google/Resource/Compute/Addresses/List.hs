@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesList@.
-module Compute.Addresses.List
+module Network.Google.Resource.Compute.Addresses.List
     (
     -- * REST Resource
-      AddressesListAPI
+      AddressesListResource
 
     -- * Creating a Request
-    , addressesList
-    , AddressesList
+    , addressesList'
+    , AddressesList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAddressesList@ which the
--- 'AddressesList' request conforms to.
-type AddressesListAPI =
+-- 'AddressesList'' request conforms to.
+type AddressesListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "addresses" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] AddressList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] AddressList
 
 -- | Retrieves the list of address resources contained within the specified
 -- region.
 --
--- /See:/ 'addressesList' smart constructor.
-data AddressesList = AddressesList
+-- /See:/ 'addressesList'' smart constructor.
+data AddressesList' = AddressesList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alProject     :: !Text
@@ -75,7 +82,7 @@ data AddressesList = AddressesList
     , _alOauthToken  :: !(Maybe Text)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data AddressesList = AddressesList
 -- * 'alFields'
 --
 -- * 'alAlt'
-addressesList
+addressesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> AddressesList
-addressesList pAlProject_ pAlRegion_ =
-    AddressesList
+    -> AddressesList'
+addressesList' pAlProject_ pAlRegion_ =
+    AddressesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alProject = pAlProject_
@@ -122,7 +129,7 @@ addressesList pAlProject_ pAlRegion_ =
     , _alOauthToken = Nothing
     , _alMaxResults = 500
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -194,14 +201,15 @@ alFields :: Lens' AddressesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AddressesList' Text
+alAlt :: Lens' AddressesList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AddressesList' where
         type Rs AddressesList' = AddressList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesList{..}
-          = go _alQuotaUser _alPrettyPrint _alProject _alUserIp
+        requestWithRoute r u AddressesList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alProject
+              _alUserIp
               _alKey
               _alFilter
               _alRegion
@@ -209,7 +217,9 @@ instance GoogleRequest AddressesList' where
               _alOauthToken
               (Just _alMaxResults)
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AddressesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AddressesListResource)
+                      r
                       u

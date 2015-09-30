@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- managed in-app products..
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsList@.
-module Androidpublisher.Inappproducts.List
+module Network.Google.Resource.Androidpublisher.Inappproducts.List
     (
     -- * REST Resource
-      InappproductsListAPI
+      InappproductsListResource
 
     -- * Creating a Request
-    , inappproductsList
-    , InappproductsList
+    , inappproductsList'
+    , InappproductsList'
 
     -- * Request Lenses
     , ilQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsList@ which the
--- 'InappproductsList' request conforms to.
-type InappproductsListAPI =
+-- 'InappproductsList'' request conforms to.
+type InappproductsListResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         QueryParam "token" Text :>
-           QueryParam "startIndex" Word32 :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] InappproductsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "token" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] InappproductsListResponse
 
 -- | List all the in-app products for an Android app, both subscriptions and
 -- managed in-app products..
 --
--- /See:/ 'inappproductsList' smart constructor.
-data InappproductsList = InappproductsList
+-- /See:/ 'inappproductsList'' smart constructor.
+data InappproductsList' = InappproductsList'
     { _ilQuotaUser   :: !(Maybe Text)
     , _ilPrettyPrint :: !Bool
     , _ilPackageName :: !Text
@@ -71,7 +79,7 @@ data InappproductsList = InappproductsList
     , _ilStartIndex  :: !(Maybe Word32)
     , _ilMaxResults  :: !(Maybe Word32)
     , _ilFields      :: !(Maybe Text)
-    , _ilAlt         :: !Text
+    , _ilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsList'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data InappproductsList = InappproductsList
 -- * 'ilFields'
 --
 -- * 'ilAlt'
-inappproductsList
+inappproductsList'
     :: Text -- ^ 'packageName'
-    -> InappproductsList
-inappproductsList pIlPackageName_ =
-    InappproductsList
+    -> InappproductsList'
+inappproductsList' pIlPackageName_ =
+    InappproductsList'
     { _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
     , _ilPackageName = pIlPackageName_
@@ -114,7 +122,7 @@ inappproductsList pIlPackageName_ =
     , _ilStartIndex = Nothing
     , _ilMaxResults = Nothing
     , _ilFields = Nothing
-    , _ilAlt = "json"
+    , _ilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,15 +177,16 @@ ilFields :: Lens' InappproductsList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
 -- | Data format for the response.
-ilAlt :: Lens' InappproductsList' Text
+ilAlt :: Lens' InappproductsList' Alt
 ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
 
 instance GoogleRequest InappproductsList' where
         type Rs InappproductsList' =
              InappproductsListResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsList{..}
-          = go _ilQuotaUser _ilPrettyPrint _ilPackageName
+        requestWithRoute r u InappproductsList'{..}
+          = go _ilQuotaUser (Just _ilPrettyPrint)
+              _ilPackageName
               _ilUserIp
               _ilToken
               _ilKey
@@ -185,9 +194,9 @@ instance GoogleRequest InappproductsList' where
               _ilStartIndex
               _ilMaxResults
               _ilFields
-              _ilAlt
+              (Just _ilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsListAPI)
+                      (Proxy :: Proxy InappproductsListResource)
                       r
                       u

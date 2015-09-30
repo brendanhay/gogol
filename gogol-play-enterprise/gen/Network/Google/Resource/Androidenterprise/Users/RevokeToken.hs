@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Revokes a previously generated token (activation code) for the user.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseUsersRevokeToken@.
-module Androidenterprise.Users.RevokeToken
+module Network.Google.Resource.Androidenterprise.Users.RevokeToken
     (
     -- * REST Resource
-      UsersRevokeTokenAPI
+      UsersRevokeTokenResource
 
     -- * Creating a Request
-    , usersRevokeToken
-    , UsersRevokeToken
+    , usersRevokeToken'
+    , UsersRevokeToken'
 
     -- * Request Lenses
     , urtQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseUsersRevokeToken@ which the
--- 'UsersRevokeToken' request conforms to.
-type UsersRevokeTokenAPI =
+-- 'UsersRevokeToken'' request conforms to.
+type UsersRevokeTokenResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
-           Capture "userId" Text :> "token" :> Delete '[JSON] ()
+           Capture "userId" Text :>
+             "token" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Revokes a previously generated token (activation code) for the user.
 --
--- /See:/ 'usersRevokeToken' smart constructor.
-data UsersRevokeToken = UsersRevokeToken
+-- /See:/ 'usersRevokeToken'' smart constructor.
+data UsersRevokeToken' = UsersRevokeToken'
     { _urtQuotaUser    :: !(Maybe Text)
     , _urtPrettyPrint  :: !Bool
     , _urtEnterpriseId :: !Text
@@ -63,7 +72,7 @@ data UsersRevokeToken = UsersRevokeToken
     , _urtKey          :: !(Maybe Text)
     , _urtOauthToken   :: !(Maybe Text)
     , _urtFields       :: !(Maybe Text)
-    , _urtAlt          :: !Text
+    , _urtAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersRevokeToken'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data UsersRevokeToken = UsersRevokeToken
 -- * 'urtFields'
 --
 -- * 'urtAlt'
-usersRevokeToken
+usersRevokeToken'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> UsersRevokeToken
-usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
-    UsersRevokeToken
+    -> UsersRevokeToken'
+usersRevokeToken' pUrtEnterpriseId_ pUrtUserId_ =
+    UsersRevokeToken'
     { _urtQuotaUser = Nothing
     , _urtPrettyPrint = True
     , _urtEnterpriseId = pUrtEnterpriseId_
@@ -101,7 +110,7 @@ usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
     , _urtKey = Nothing
     , _urtOauthToken = Nothing
     , _urtFields = Nothing
-    , _urtAlt = "json"
+    , _urtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +161,23 @@ urtFields
   = lens _urtFields (\ s a -> s{_urtFields = a})
 
 -- | Data format for the response.
-urtAlt :: Lens' UsersRevokeToken' Text
+urtAlt :: Lens' UsersRevokeToken' Alt
 urtAlt = lens _urtAlt (\ s a -> s{_urtAlt = a})
 
 instance GoogleRequest UsersRevokeToken' where
         type Rs UsersRevokeToken' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u UsersRevokeToken{..}
-          = go _urtQuotaUser _urtPrettyPrint _urtEnterpriseId
+        requestWithRoute r u UsersRevokeToken'{..}
+          = go _urtQuotaUser (Just _urtPrettyPrint)
+              _urtEnterpriseId
               _urtUserIp
               _urtUserId
               _urtKey
               _urtOauthToken
               _urtFields
-              _urtAlt
+              (Just _urtAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersRevokeTokenAPI)
+                      (Proxy :: Proxy UsersRevokeTokenResource)
                       r
                       u

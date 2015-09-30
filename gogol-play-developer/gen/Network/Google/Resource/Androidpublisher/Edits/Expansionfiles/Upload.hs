@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsExpansionfilesUpload@.
-module Androidpublisher.Edits.Expansionfiles.Upload
+module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Upload
     (
     -- * REST Resource
-      EditsExpansionfilesUploadAPI
+      EditsExpansionfilesUploadResource
 
     -- * Creating a Request
-    , editsExpansionfilesUpload
-    , EditsExpansionfilesUpload
+    , editsExpansionfilesUpload'
+    , EditsExpansionfilesUpload'
 
     -- * Request Lenses
     , eeuQuotaUser
@@ -46,32 +47,41 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsExpansionfilesUpload@ which the
--- 'EditsExpansionfilesUpload' request conforms to.
-type EditsExpansionfilesUploadAPI =
+-- 'EditsExpansionfilesUpload'' request conforms to.
+type EditsExpansionfilesUploadResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "expansionFiles" :>
-                 Capture "expansionFileType" Text :>
-                   Post '[JSON] ExpansionFilesUploadResponse
+                 Capture "expansionFileType"
+                   AndroidpublisherEditsExpansionfilesUploadExpansionFileType
+                   :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
--- /See:/ 'editsExpansionfilesUpload' smart constructor.
-data EditsExpansionfilesUpload = EditsExpansionfilesUpload
+-- /See:/ 'editsExpansionfilesUpload'' smart constructor.
+data EditsExpansionfilesUpload' = EditsExpansionfilesUpload'
     { _eeuQuotaUser         :: !(Maybe Text)
     , _eeuPrettyPrint       :: !Bool
     , _eeuPackageName       :: !Text
     , _eeuApkVersionCode    :: !Int32
     , _eeuUserIp            :: !(Maybe Text)
     , _eeuKey               :: !(Maybe Text)
-    , _eeuExpansionFileType :: !Text
+    , _eeuExpansionFileType :: !AndroidpublisherEditsExpansionfilesUploadExpansionFileType
     , _eeuOauthToken        :: !(Maybe Text)
     , _eeuEditId            :: !Text
     , _eeuFields            :: !(Maybe Text)
-    , _eeuAlt               :: !Text
+    , _eeuAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesUpload'' with the minimum fields required to make a request.
@@ -99,14 +109,14 @@ data EditsExpansionfilesUpload = EditsExpansionfilesUpload
 -- * 'eeuFields'
 --
 -- * 'eeuAlt'
-editsExpansionfilesUpload
+editsExpansionfilesUpload'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'expansionFileType'
+    -> AndroidpublisherEditsExpansionfilesUploadExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
-    -> EditsExpansionfilesUpload
-editsExpansionfilesUpload pEeuPackageName_ pEeuApkVersionCode_ pEeuExpansionFileType_ pEeuEditId_ =
-    EditsExpansionfilesUpload
+    -> EditsExpansionfilesUpload'
+editsExpansionfilesUpload' pEeuPackageName_ pEeuApkVersionCode_ pEeuExpansionFileType_ pEeuEditId_ =
+    EditsExpansionfilesUpload'
     { _eeuQuotaUser = Nothing
     , _eeuPrettyPrint = True
     , _eeuPackageName = pEeuPackageName_
@@ -117,7 +127,7 @@ editsExpansionfilesUpload pEeuPackageName_ pEeuApkVersionCode_ pEeuExpansionFile
     , _eeuOauthToken = Nothing
     , _eeuEditId = pEeuEditId_
     , _eeuFields = Nothing
-    , _eeuAlt = "json"
+    , _eeuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,7 +169,7 @@ eeuUserIp
 eeuKey :: Lens' EditsExpansionfilesUpload' (Maybe Text)
 eeuKey = lens _eeuKey (\ s a -> s{_eeuKey = a})
 
-eeuExpansionFileType :: Lens' EditsExpansionfilesUpload' Text
+eeuExpansionFileType :: Lens' EditsExpansionfilesUpload' AndroidpublisherEditsExpansionfilesUploadExpansionFileType
 eeuExpansionFileType
   = lens _eeuExpansionFileType
       (\ s a -> s{_eeuExpansionFileType = a})
@@ -181,7 +191,7 @@ eeuFields
   = lens _eeuFields (\ s a -> s{_eeuFields = a})
 
 -- | Data format for the response.
-eeuAlt :: Lens' EditsExpansionfilesUpload' Text
+eeuAlt :: Lens' EditsExpansionfilesUpload' Alt
 eeuAlt = lens _eeuAlt (\ s a -> s{_eeuAlt = a})
 
 instance GoogleRequest EditsExpansionfilesUpload'
@@ -189,8 +199,9 @@ instance GoogleRequest EditsExpansionfilesUpload'
         type Rs EditsExpansionfilesUpload' =
              ExpansionFilesUploadResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsExpansionfilesUpload{..}
-          = go _eeuQuotaUser _eeuPrettyPrint _eeuPackageName
+        requestWithRoute r u EditsExpansionfilesUpload'{..}
+          = go _eeuQuotaUser (Just _eeuPrettyPrint)
+              _eeuPackageName
               _eeuApkVersionCode
               _eeuUserIp
               _eeuKey
@@ -198,9 +209,9 @@ instance GoogleRequest EditsExpansionfilesUpload'
               _eeuOauthToken
               _eeuEditId
               _eeuFields
-              _eeuAlt
+              (Just _eeuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsExpansionfilesUploadAPI)
+                      (Proxy :: Proxy EditsExpansionfilesUploadResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetTags@.
-module Compute.Instances.SetTags
+module Network.Google.Resource.Compute.Instances.SetTags
     (
     -- * REST Resource
-      InstancesSetTagsAPI
+      InstancesSetTagsResource
 
     -- * Creating a Request
-    , instancesSetTags
-    , InstancesSetTags
+    , instancesSetTags'
+    , InstancesSetTags'
 
     -- * Request Lenses
     , istQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesSetTags@ which the
--- 'InstancesSetTags' request conforms to.
-type InstancesSetTagsAPI =
+-- 'InstancesSetTags'' request conforms to.
+type InstancesSetTagsResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "setTags" :> Post '[JSON] Operation
+               "setTags" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets tags for the specified instance to the data included in the
 -- request.
 --
--- /See:/ 'instancesSetTags' smart constructor.
-data InstancesSetTags = InstancesSetTags
+-- /See:/ 'instancesSetTags'' smart constructor.
+data InstancesSetTags' = InstancesSetTags'
     { _istQuotaUser   :: !(Maybe Text)
     , _istPrettyPrint :: !Bool
     , _istProject     :: !Text
@@ -68,7 +76,7 @@ data InstancesSetTags = InstancesSetTags
     , _istKey         :: !(Maybe Text)
     , _istOauthToken  :: !(Maybe Text)
     , _istFields      :: !(Maybe Text)
-    , _istAlt         :: !Text
+    , _istAlt         :: !Alt
     , _istInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data InstancesSetTags = InstancesSetTags
 -- * 'istAlt'
 --
 -- * 'istInstance'
-instancesSetTags
+instancesSetTags'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesSetTags
-instancesSetTags pIstProject_ pIstZone_ pIstInstance_ =
-    InstancesSetTags
+    -> InstancesSetTags'
+instancesSetTags' pIstProject_ pIstZone_ pIstInstance_ =
+    InstancesSetTags'
     { _istQuotaUser = Nothing
     , _istPrettyPrint = True
     , _istProject = pIstProject_
@@ -110,7 +118,7 @@ instancesSetTags pIstProject_ pIstZone_ pIstInstance_ =
     , _istKey = Nothing
     , _istOauthToken = Nothing
     , _istFields = Nothing
-    , _istAlt = "json"
+    , _istAlt = JSON
     , _istInstance = pIstInstance_
     }
 
@@ -160,7 +168,7 @@ istFields
   = lens _istFields (\ s a -> s{_istFields = a})
 
 -- | Data format for the response.
-istAlt :: Lens' InstancesSetTags' Text
+istAlt :: Lens' InstancesSetTags' Alt
 istAlt = lens _istAlt (\ s a -> s{_istAlt = a})
 
 -- | Name of the instance scoping this request.
@@ -171,17 +179,17 @@ istInstance
 instance GoogleRequest InstancesSetTags' where
         type Rs InstancesSetTags' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetTags{..}
-          = go _istQuotaUser _istPrettyPrint _istProject
+        requestWithRoute r u InstancesSetTags'{..}
+          = go _istQuotaUser (Just _istPrettyPrint) _istProject
               _istUserIp
               _istZone
               _istKey
               _istOauthToken
               _istFields
-              _istAlt
+              (Just _istAlt)
               _istInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesSetTagsAPI)
+                      (Proxy :: Proxy InstancesSetTagsResource)
                       r
                       u

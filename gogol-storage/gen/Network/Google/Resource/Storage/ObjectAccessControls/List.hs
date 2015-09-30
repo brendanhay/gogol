@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves ACL entries on the specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsList@.
-module Storage.ObjectAccessControls.List
+module Network.Google.Resource.Storage.ObjectAccessControls.List
     (
     -- * REST Resource
-      ObjectAccessControlsListAPI
+      ObjectAccessControlsListResource
 
     -- * Creating a Request
-    , objectAccessControlsList
-    , ObjectAccessControlsList
+    , objectAccessControlsList'
+    , ObjectAccessControlsList'
 
     -- * Request Lenses
     , oaclQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectAccessControlsList@ which the
--- 'ObjectAccessControlsList' request conforms to.
-type ObjectAccessControlsListAPI =
+-- 'ObjectAccessControlsList'' request conforms to.
+type ObjectAccessControlsListResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
              "acl" :>
-               QueryParam "generation" Word64 :>
-                 Get '[JSON] ObjectAccessControls
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "generation" Word64 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ObjectAccessControls
 
 -- | Retrieves ACL entries on the specified object.
 --
--- /See:/ 'objectAccessControlsList' smart constructor.
-data ObjectAccessControlsList = ObjectAccessControlsList
+-- /See:/ 'objectAccessControlsList'' smart constructor.
+data ObjectAccessControlsList' = ObjectAccessControlsList'
     { _oaclQuotaUser   :: !(Maybe Text)
     , _oaclPrettyPrint :: !Bool
     , _oaclUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data ObjectAccessControlsList = ObjectAccessControlsList
     , _oaclOauthToken  :: !(Maybe Text)
     , _oaclGeneration  :: !(Maybe Word64)
     , _oaclFields      :: !(Maybe Text)
-    , _oaclAlt         :: !Text
+    , _oaclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsList'' with the minimum fields required to make a request.
@@ -94,12 +102,12 @@ data ObjectAccessControlsList = ObjectAccessControlsList
 -- * 'oaclFields'
 --
 -- * 'oaclAlt'
-objectAccessControlsList
+objectAccessControlsList'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
-    -> ObjectAccessControlsList
-objectAccessControlsList pOaclBucket_ pOaclObject_ =
-    ObjectAccessControlsList
+    -> ObjectAccessControlsList'
+objectAccessControlsList' pOaclBucket_ pOaclObject_ =
+    ObjectAccessControlsList'
     { _oaclQuotaUser = Nothing
     , _oaclPrettyPrint = True
     , _oaclUserIp = Nothing
@@ -109,7 +117,7 @@ objectAccessControlsList pOaclBucket_ pOaclObject_ =
     , _oaclOauthToken = Nothing
     , _oaclGeneration = Nothing
     , _oaclFields = Nothing
-    , _oaclAlt = "json"
+    , _oaclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,7 +175,7 @@ oaclFields
   = lens _oaclFields (\ s a -> s{_oaclFields = a})
 
 -- | Data format for the response.
-oaclAlt :: Lens' ObjectAccessControlsList' Text
+oaclAlt :: Lens' ObjectAccessControlsList' Alt
 oaclAlt = lens _oaclAlt (\ s a -> s{_oaclAlt = a})
 
 instance GoogleRequest ObjectAccessControlsList'
@@ -175,17 +183,18 @@ instance GoogleRequest ObjectAccessControlsList'
         type Rs ObjectAccessControlsList' =
              ObjectAccessControls
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsList{..}
-          = go _oaclQuotaUser _oaclPrettyPrint _oaclUserIp
+        requestWithRoute r u ObjectAccessControlsList'{..}
+          = go _oaclQuotaUser (Just _oaclPrettyPrint)
+              _oaclUserIp
               _oaclBucket
               _oaclKey
               _oaclObject
               _oaclOauthToken
               _oaclGeneration
               _oaclFields
-              _oaclAlt
+              (Just _oaclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ObjectAccessControlsListAPI)
+                      (Proxy :: Proxy ObjectAccessControlsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- teacher or student in the course.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersCreate@.
-module Classroom.Courses.Teachers.Create
+module Network.Google.Resource.Classroom.Courses.Teachers.Create
     (
     -- * REST Resource
-      CoursesTeachersCreateAPI
+      CoursesTeachersCreateResource
 
     -- * Creating a Request
-    , coursesTeachersCreate
-    , CoursesTeachersCreate
+    , coursesTeachersCreate'
+    , CoursesTeachersCreate'
 
     -- * Request Lenses
     , ctcXgafv
@@ -55,12 +56,26 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesTeachersCreate@ which the
--- 'CoursesTeachersCreate' request conforms to.
-type CoursesTeachersCreateAPI =
+-- 'CoursesTeachersCreate'' request conforms to.
+type CoursesTeachersCreateResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
-           "teachers" :> Post '[JSON] Teacher
+           "teachers" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] Teacher
 
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -70,8 +85,8 @@ type CoursesTeachersCreateAPI =
 -- account is disabled. * \`ALREADY_EXISTS\` if the user is already a
 -- teacher or student in the course.
 --
--- /See:/ 'coursesTeachersCreate' smart constructor.
-data CoursesTeachersCreate = CoursesTeachersCreate
+-- /See:/ 'coursesTeachersCreate'' smart constructor.
+data CoursesTeachersCreate' = CoursesTeachersCreate'
     { _ctcXgafv          :: !(Maybe Text)
     , _ctcQuotaUser      :: !(Maybe Text)
     , _ctcPrettyPrint    :: !Bool
@@ -119,11 +134,11 @@ data CoursesTeachersCreate = CoursesTeachersCreate
 -- * 'ctcCallback'
 --
 -- * 'ctcAlt'
-coursesTeachersCreate
+coursesTeachersCreate'
     :: Text -- ^ 'courseId'
-    -> CoursesTeachersCreate
-coursesTeachersCreate pCtcCourseId_ =
-    CoursesTeachersCreate
+    -> CoursesTeachersCreate'
+coursesTeachersCreate' pCtcCourseId_ =
+    CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcQuotaUser = Nothing
     , _ctcPrettyPrint = True
@@ -221,10 +236,10 @@ ctcAlt = lens _ctcAlt (\ s a -> s{_ctcAlt = a})
 instance GoogleRequest CoursesTeachersCreate' where
         type Rs CoursesTeachersCreate' = Teacher
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesTeachersCreate{..}
-          = go _ctcXgafv _ctcQuotaUser _ctcPrettyPrint
+        requestWithRoute r u CoursesTeachersCreate'{..}
+          = go _ctcXgafv _ctcQuotaUser (Just _ctcPrettyPrint)
               _ctcUploadProtocol
-              _ctcPp
+              (Just _ctcPp)
               _ctcCourseId
               _ctcAccessToken
               _ctcUploadType
@@ -233,9 +248,9 @@ instance GoogleRequest CoursesTeachersCreate' where
               _ctcOauthToken
               _ctcFields
               _ctcCallback
-              _ctcAlt
+              (Just _ctcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesTeachersCreateAPI)
+                      (Proxy :: Proxy CoursesTeachersCreateResource)
                       r
                       u

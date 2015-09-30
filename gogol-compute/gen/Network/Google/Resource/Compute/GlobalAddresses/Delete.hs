@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified address resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesDelete@.
-module Compute.GlobalAddresses.Delete
+module Network.Google.Resource.Compute.GlobalAddresses.Delete
     (
     -- * REST Resource
-      GlobalAddressesDeleteAPI
+      GlobalAddressesDeleteResource
 
     -- * Creating a Request
-    , globalAddressesDelete
-    , GlobalAddressesDelete
+    , globalAddressesDelete'
+    , GlobalAddressesDelete'
 
     -- * Request Lenses
     , gadQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalAddressesDelete@ which the
--- 'GlobalAddressesDelete' request conforms to.
-type GlobalAddressesDeleteAPI =
+-- 'GlobalAddressesDelete'' request conforms to.
+type GlobalAddressesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "addresses" :>
-           Capture "address" Text :> Delete '[JSON] Operation
+           Capture "address" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified address resource.
 --
--- /See:/ 'globalAddressesDelete' smart constructor.
-data GlobalAddressesDelete = GlobalAddressesDelete
+-- /See:/ 'globalAddressesDelete'' smart constructor.
+data GlobalAddressesDelete' = GlobalAddressesDelete'
     { _gadQuotaUser   :: !(Maybe Text)
     , _gadPrettyPrint :: !Bool
     , _gadProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalAddressesDelete = GlobalAddressesDelete
     , _gadKey         :: !(Maybe Text)
     , _gadOauthToken  :: !(Maybe Text)
     , _gadFields      :: !(Maybe Text)
-    , _gadAlt         :: !Text
+    , _gadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalAddressesDelete = GlobalAddressesDelete
 -- * 'gadFields'
 --
 -- * 'gadAlt'
-globalAddressesDelete
+globalAddressesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
-    -> GlobalAddressesDelete
-globalAddressesDelete pGadProject_ pGadAddress_ =
-    GlobalAddressesDelete
+    -> GlobalAddressesDelete'
+globalAddressesDelete' pGadProject_ pGadAddress_ =
+    GlobalAddressesDelete'
     { _gadQuotaUser = Nothing
     , _gadPrettyPrint = True
     , _gadProject = pGadProject_
@@ -101,7 +109,7 @@ globalAddressesDelete pGadProject_ pGadAddress_ =
     , _gadKey = Nothing
     , _gadOauthToken = Nothing
     , _gadFields = Nothing
-    , _gadAlt = "json"
+    , _gadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ gadFields
   = lens _gadFields (\ s a -> s{_gadFields = a})
 
 -- | Data format for the response.
-gadAlt :: Lens' GlobalAddressesDelete' Text
+gadAlt :: Lens' GlobalAddressesDelete' Alt
 gadAlt = lens _gadAlt (\ s a -> s{_gadAlt = a})
 
 instance GoogleRequest GlobalAddressesDelete' where
         type Rs GlobalAddressesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesDelete{..}
-          = go _gadQuotaUser _gadPrettyPrint _gadProject
+        requestWithRoute r u GlobalAddressesDelete'{..}
+          = go _gadQuotaUser (Just _gadPrettyPrint) _gadProject
               _gadUserIp
               _gadAddress
               _gadKey
               _gadOauthToken
               _gadFields
-              _gadAlt
+              (Just _gadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAddressesDeleteAPI)
+                      (Proxy :: Proxy GlobalAddressesDeleteResource)
                       r
                       u

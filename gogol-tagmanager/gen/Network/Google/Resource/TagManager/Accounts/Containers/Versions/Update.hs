@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,166 +20,178 @@
 -- | Updates a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsUpdate@.
-module TagManager.Accounts.Containers.Versions.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
     (
     -- * REST Resource
-      AccountsContainersVersionsUpdateAPI
+      AccountsContainersVersionsUpdateResource
 
     -- * Creating a Request
-    , accountsContainersVersionsUpdate
-    , AccountsContainersVersionsUpdate
+    , accountsContainersVersionsUpdate'
+    , AccountsContainersVersionsUpdate'
 
     -- * Request Lenses
-    , aaQuotaUser
-    , aaPrettyPrint
-    , aaContainerId
-    , aaUserIp
-    , aaFingerprint
-    , aaContainerVersionId
-    , aaAccountId
-    , aaKey
-    , aaOauthToken
-    , aaFields
-    , aaAlt
+    , acvucQuotaUser
+    , acvucPrettyPrint
+    , acvucContainerId
+    , acvucUserIp
+    , acvucFingerprint
+    , acvucContainerVersionId
+    , acvucAccountId
+    , acvucKey
+    , acvucOauthToken
+    , acvucFields
+    , acvucAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsUpdate@ which the
--- 'AccountsContainersVersionsUpdate' request conforms to.
-type AccountsContainersVersionsUpdateAPI =
+-- 'AccountsContainersVersionsUpdate'' request conforms to.
+type AccountsContainersVersionsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 QueryParam "fingerprint" Text :>
-                   Put '[JSON] ContainerVersion
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Put '[JSON] ContainerVersion
 
 -- | Updates a Container Version.
 --
--- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
-data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate
-    { _aaQuotaUser          :: !(Maybe Text)
-    , _aaPrettyPrint        :: !Bool
-    , _aaContainerId        :: !Text
-    , _aaUserIp             :: !(Maybe Text)
-    , _aaFingerprint        :: !(Maybe Text)
-    , _aaContainerVersionId :: !Text
-    , _aaAccountId          :: !Text
-    , _aaKey                :: !(Maybe Text)
-    , _aaOauthToken         :: !(Maybe Text)
-    , _aaFields             :: !(Maybe Text)
-    , _aaAlt                :: !Text
+-- /See:/ 'accountsContainersVersionsUpdate'' smart constructor.
+data AccountsContainersVersionsUpdate' = AccountsContainersVersionsUpdate'
+    { _acvucQuotaUser          :: !(Maybe Text)
+    , _acvucPrettyPrint        :: !Bool
+    , _acvucContainerId        :: !Text
+    , _acvucUserIp             :: !(Maybe Text)
+    , _acvucFingerprint        :: !(Maybe Text)
+    , _acvucContainerVersionId :: !Text
+    , _acvucAccountId          :: !Text
+    , _acvucKey                :: !(Maybe Text)
+    , _acvucOauthToken         :: !(Maybe Text)
+    , _acvucFields             :: !(Maybe Text)
+    , _acvucAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaQuotaUser'
+-- * 'acvucQuotaUser'
 --
--- * 'aaPrettyPrint'
+-- * 'acvucPrettyPrint'
 --
--- * 'aaContainerId'
+-- * 'acvucContainerId'
 --
--- * 'aaUserIp'
+-- * 'acvucUserIp'
 --
--- * 'aaFingerprint'
+-- * 'acvucFingerprint'
 --
--- * 'aaContainerVersionId'
+-- * 'acvucContainerVersionId'
 --
--- * 'aaAccountId'
+-- * 'acvucAccountId'
 --
--- * 'aaKey'
+-- * 'acvucKey'
 --
--- * 'aaOauthToken'
+-- * 'acvucOauthToken'
 --
--- * 'aaFields'
+-- * 'acvucFields'
 --
--- * 'aaAlt'
-accountsContainersVersionsUpdate
+-- * 'acvucAlt'
+accountsContainersVersionsUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsUpdate
-accountsContainersVersionsUpdate pAaContainerId_ pAaContainerVersionId_ pAaAccountId_ =
-    AccountsContainersVersionsUpdate
-    { _aaQuotaUser = Nothing
-    , _aaPrettyPrint = True
-    , _aaContainerId = pAaContainerId_
-    , _aaUserIp = Nothing
-    , _aaFingerprint = Nothing
-    , _aaContainerVersionId = pAaContainerVersionId_
-    , _aaAccountId = pAaAccountId_
-    , _aaKey = Nothing
-    , _aaOauthToken = Nothing
-    , _aaFields = Nothing
-    , _aaAlt = "json"
+    -> AccountsContainersVersionsUpdate'
+accountsContainersVersionsUpdate' pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucAccountId_ =
+    AccountsContainersVersionsUpdate'
+    { _acvucQuotaUser = Nothing
+    , _acvucPrettyPrint = True
+    , _acvucContainerId = pAcvucContainerId_
+    , _acvucUserIp = Nothing
+    , _acvucFingerprint = Nothing
+    , _acvucContainerVersionId = pAcvucContainerVersionId_
+    , _acvucAccountId = pAcvucAccountId_
+    , _acvucKey = Nothing
+    , _acvucOauthToken = Nothing
+    , _acvucFields = Nothing
+    , _acvucAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aaQuotaUser :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaQuotaUser
-  = lens _aaQuotaUser (\ s a -> s{_aaQuotaUser = a})
+acvucQuotaUser :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucQuotaUser
+  = lens _acvucQuotaUser
+      (\ s a -> s{_acvucQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aaPrettyPrint :: Lens' AccountsContainersVersionsUpdate' Bool
-aaPrettyPrint
-  = lens _aaPrettyPrint
-      (\ s a -> s{_aaPrettyPrint = a})
+acvucPrettyPrint :: Lens' AccountsContainersVersionsUpdate' Bool
+acvucPrettyPrint
+  = lens _acvucPrettyPrint
+      (\ s a -> s{_acvucPrettyPrint = a})
 
 -- | The GTM Container ID.
-aaContainerId :: Lens' AccountsContainersVersionsUpdate' Text
-aaContainerId
-  = lens _aaContainerId
-      (\ s a -> s{_aaContainerId = a})
+acvucContainerId :: Lens' AccountsContainersVersionsUpdate' Text
+acvucContainerId
+  = lens _acvucContainerId
+      (\ s a -> s{_acvucContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aaUserIp :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaUserIp = lens _aaUserIp (\ s a -> s{_aaUserIp = a})
+acvucUserIp :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucUserIp
+  = lens _acvucUserIp (\ s a -> s{_acvucUserIp = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
-aaFingerprint :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaFingerprint
-  = lens _aaFingerprint
-      (\ s a -> s{_aaFingerprint = a})
+acvucFingerprint :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucFingerprint
+  = lens _acvucFingerprint
+      (\ s a -> s{_acvucFingerprint = a})
 
 -- | The GTM Container Version ID.
-aaContainerVersionId :: Lens' AccountsContainersVersionsUpdate' Text
-aaContainerVersionId
-  = lens _aaContainerVersionId
-      (\ s a -> s{_aaContainerVersionId = a})
+acvucContainerVersionId :: Lens' AccountsContainersVersionsUpdate' Text
+acvucContainerVersionId
+  = lens _acvucContainerVersionId
+      (\ s a -> s{_acvucContainerVersionId = a})
 
 -- | The GTM Account ID.
-aaAccountId :: Lens' AccountsContainersVersionsUpdate' Text
-aaAccountId
-  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
+acvucAccountId :: Lens' AccountsContainersVersionsUpdate' Text
+acvucAccountId
+  = lens _acvucAccountId
+      (\ s a -> s{_acvucAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaKey :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
+acvucKey :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucKey = lens _acvucKey (\ s a -> s{_acvucKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aaOauthToken :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaOauthToken
-  = lens _aaOauthToken (\ s a -> s{_aaOauthToken = a})
+acvucOauthToken :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucOauthToken
+  = lens _acvucOauthToken
+      (\ s a -> s{_acvucOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aaFields :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
-aaFields = lens _aaFields (\ s a -> s{_aaFields = a})
+acvucFields :: Lens' AccountsContainersVersionsUpdate' (Maybe Text)
+acvucFields
+  = lens _acvucFields (\ s a -> s{_acvucFields = a})
 
 -- | Data format for the response.
-aaAlt :: Lens' AccountsContainersVersionsUpdate' Text
-aaAlt = lens _aaAlt (\ s a -> s{_aaAlt = a})
+acvucAlt :: Lens' AccountsContainersVersionsUpdate' Alt
+acvucAlt = lens _acvucAlt (\ s a -> s{_acvucAlt = a})
 
 instance GoogleRequest
          AccountsContainersVersionsUpdate' where
@@ -186,18 +199,20 @@ instance GoogleRequest
              ContainerVersion
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsUpdate{..}
-          = go _aaQuotaUser _aaPrettyPrint _aaContainerId
-              _aaUserIp
-              _aaFingerprint
-              _aaContainerVersionId
-              _aaAccountId
-              _aaKey
-              _aaOauthToken
-              _aaFields
-              _aaAlt
+          AccountsContainersVersionsUpdate'{..}
+          = go _acvucQuotaUser (Just _acvucPrettyPrint)
+              _acvucContainerId
+              _acvucUserIp
+              _acvucFingerprint
+              _acvucContainerVersionId
+              _acvucAccountId
+              _acvucKey
+              _acvucOauthToken
+              _acvucFields
+              (Just _acvucAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsUpdateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsUpdateResource)
                       r
                       u

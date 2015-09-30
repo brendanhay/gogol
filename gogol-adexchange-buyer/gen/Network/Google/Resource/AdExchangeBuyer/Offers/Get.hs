@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the requested offer.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersGet@.
-module AdExchangeBuyer.Offers.Get
+module Network.Google.Resource.AdExchangeBuyer.Offers.Get
     (
     -- * REST Resource
-      OffersGetAPI
+      OffersGetResource
 
     -- * Creating a Request
-    , offersGet
-    , OffersGet
+    , offersGet'
+    , OffersGet'
 
     -- * Request Lenses
     , ogQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersGet@ which the
--- 'OffersGet' request conforms to.
-type OffersGetAPI =
+-- 'OffersGet'' request conforms to.
+type OffersGetResource =
      "offers" :>
-       Capture "offerId" Int64 :> Get '[JSON] OfferDto
+       Capture "offerId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] OfferDto
 
 -- | Gets the requested offer.
 --
--- /See:/ 'offersGet' smart constructor.
-data OffersGet = OffersGet
+-- /See:/ 'offersGet'' smart constructor.
+data OffersGet' = OffersGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
     , _ogUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data OffersGet = OffersGet
     , _ogOfferId     :: !Int64
     , _ogOauthToken  :: !(Maybe Text)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Text
+    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data OffersGet = OffersGet
 -- * 'ogFields'
 --
 -- * 'ogAlt'
-offersGet
+offersGet'
     :: Int64 -- ^ 'offerId'
-    -> OffersGet
-offersGet pOgOfferId_ =
-    OffersGet
+    -> OffersGet'
+offersGet' pOgOfferId_ =
+    OffersGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
     , _ogUserIp = Nothing
@@ -93,7 +101,7 @@ offersGet pOgOfferId_ =
     , _ogOfferId = pOgOfferId_
     , _ogOauthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = "json"
+    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +142,20 @@ ogFields :: Lens' OffersGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' OffersGet' Text
+ogAlt :: Lens' OffersGet' Alt
 ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 
 instance GoogleRequest OffersGet' where
         type Rs OffersGet' = OfferDto
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersGet{..}
-          = go _ogQuotaUser _ogPrettyPrint _ogUserIp _ogKey
+        requestWithRoute r u OffersGet'{..}
+          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIp
+              _ogKey
               _ogOfferId
               _ogOauthToken
               _ogFields
-              _ogAlt
+              (Just _ogAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OffersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy OffersGetResource)
+                      r
+                      u

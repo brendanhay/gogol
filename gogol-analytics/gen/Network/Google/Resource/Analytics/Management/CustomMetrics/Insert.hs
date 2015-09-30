@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new custom metric.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsInsert@.
-module Analytics.Management.CustomMetrics.Insert
+module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     (
     -- * REST Resource
-      ManagementCustomMetricsInsertAPI
+      ManagementCustomMetricsInsertResource
 
     -- * Creating a Request
-    , managementCustomMetricsInsert
-    , ManagementCustomMetricsInsert
+    , managementCustomMetricsInsert'
+    , ManagementCustomMetricsInsert'
 
     -- * Request Lenses
     , mcmiQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsInsert@ which the
--- 'ManagementCustomMetricsInsert' request conforms to.
-type ManagementCustomMetricsInsertAPI =
+-- 'ManagementCustomMetricsInsert'' request conforms to.
+type ManagementCustomMetricsInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               "customMetrics" :> Post '[JSON] CustomMetric
+               "customMetrics" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] CustomMetric
 
 -- | Create a new custom metric.
 --
--- /See:/ 'managementCustomMetricsInsert' smart constructor.
-data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
+-- /See:/ 'managementCustomMetricsInsert'' smart constructor.
+data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
     { _mcmiQuotaUser     :: !(Maybe Text)
     , _mcmiPrettyPrint   :: !Bool
     , _mcmiWebPropertyId :: !Text
@@ -65,7 +73,7 @@ data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
     , _mcmiKey           :: !(Maybe Text)
     , _mcmiOauthToken    :: !(Maybe Text)
     , _mcmiFields        :: !(Maybe Text)
-    , _mcmiAlt           :: !Text
+    , _mcmiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
 -- * 'mcmiFields'
 --
 -- * 'mcmiAlt'
-managementCustomMetricsInsert
+managementCustomMetricsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomMetricsInsert
-managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiAccountId_ =
-    ManagementCustomMetricsInsert
+    -> ManagementCustomMetricsInsert'
+managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiAccountId_ =
+    ManagementCustomMetricsInsert'
     { _mcmiQuotaUser = Nothing
     , _mcmiPrettyPrint = False
     , _mcmiWebPropertyId = pMcmiWebPropertyId_
@@ -103,7 +111,7 @@ managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiAccountId_ =
     , _mcmiKey = Nothing
     , _mcmiOauthToken = Nothing
     , _mcmiFields = Nothing
-    , _mcmiAlt = "json"
+    , _mcmiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +164,7 @@ mcmiFields
   = lens _mcmiFields (\ s a -> s{_mcmiFields = a})
 
 -- | Data format for the response.
-mcmiAlt :: Lens' ManagementCustomMetricsInsert' Text
+mcmiAlt :: Lens' ManagementCustomMetricsInsert' Alt
 mcmiAlt = lens _mcmiAlt (\ s a -> s{_mcmiAlt = a})
 
 instance GoogleRequest ManagementCustomMetricsInsert'
@@ -164,17 +172,18 @@ instance GoogleRequest ManagementCustomMetricsInsert'
         type Rs ManagementCustomMetricsInsert' = CustomMetric
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomMetricsInsert{..}
-          = go _mcmiQuotaUser _mcmiPrettyPrint
+          ManagementCustomMetricsInsert'{..}
+          = go _mcmiQuotaUser (Just _mcmiPrettyPrint)
               _mcmiWebPropertyId
               _mcmiUserIp
               _mcmiAccountId
               _mcmiKey
               _mcmiOauthToken
               _mcmiFields
-              _mcmiAlt
+              (Just _mcmiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomMetricsInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomMetricsInsertResource)
                       r
                       u

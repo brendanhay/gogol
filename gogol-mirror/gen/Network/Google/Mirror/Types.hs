@@ -56,6 +56,9 @@ module Network.Google.Mirror.Types
     , nVerifyToken
     , nUserToken
 
+    -- * MirrorTimelineListOrderBy
+    , MirrorTimelineListOrderBy (..)
+
     -- * Contact
     , Contact
     , contact
@@ -197,6 +200,9 @@ module Network.Google.Mirror.Types
     , subscriptionsListResponse
     , slrKind
     , slrItems
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Mirror.Types.Product
@@ -204,7 +210,7 @@ import           Network.Google.Mirror.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Mirror API.
-mirrorURL :: BaseURL
+mirrorURL :: BaseUrl
 mirrorURL
   = BaseUrl Https
       "https://www.googleapis.com/mirror/v1/"

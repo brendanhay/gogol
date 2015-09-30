@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a specific column by its ID.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnGet@.
-module FusionTables.Column.Get
+module Network.Google.Resource.FusionTables.Column.Get
     (
     -- * REST Resource
-      ColumnGetAPI
+      ColumnGetResource
 
     -- * Creating a Request
-    , columnGet
-    , ColumnGet
+    , columnGet'
+    , ColumnGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnGet@ which the
--- 'ColumnGet' request conforms to.
-type ColumnGetAPI =
+-- 'ColumnGet'' request conforms to.
+type ColumnGetResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           Capture "columnId" Text :> Get '[JSON] Column
+           Capture "columnId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Column
 
 -- | Retrieves a specific column by its ID.
 --
--- /See:/ 'columnGet' smart constructor.
-data ColumnGet = ColumnGet
+-- /See:/ 'columnGet'' smart constructor.
+data ColumnGet' = ColumnGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ColumnGet = ColumnGet
     , _cgTableId     :: !Text
     , _cgColumnId    :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ColumnGet = ColumnGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-columnGet
+columnGet'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> ColumnGet
-columnGet pCgTableId_ pCgColumnId_ =
-    ColumnGet
+    -> ColumnGet'
+columnGet' pCgTableId_ pCgColumnId_ =
+    ColumnGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -101,7 +109,7 @@ columnGet pCgTableId_ pCgColumnId_ =
     , _cgTableId = pCgTableId_
     , _cgColumnId = pCgColumnId_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,21 @@ cgFields :: Lens' ColumnGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' ColumnGet' Text
+cgAlt :: Lens' ColumnGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgKey
+        requestWithRoute r u ColumnGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
               _cgOauthToken
               _cgTableId
               _cgColumnId
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ColumnGetResource)
+                      r
+                      u

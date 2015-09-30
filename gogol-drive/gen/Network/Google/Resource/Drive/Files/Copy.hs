@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a copy of the specified file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesCopy@.
-module Drive.Files.Copy
+module Network.Google.Resource.Drive.Files.Copy
     (
     -- * REST Resource
-      FilesCopyAPI
+      FilesCopyResource
 
     -- * Creating a Request
-    , filesCopy
-    , FilesCopy
+    , filesCopy'
+    , FilesCopy'
 
     -- * Request Lenses
     , fcQuotaUser
@@ -50,28 +51,35 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesCopy@ which the
--- 'FilesCopy' request conforms to.
-type FilesCopyAPI =
+-- 'FilesCopy'' request conforms to.
+type FilesCopyResource =
      "files" :>
        Capture "fileId" Text :>
          "copy" :>
-           QueryParam "pinned" Bool :>
-             QueryParam "visibility" Text :>
-               QueryParam "timedTextLanguage" Text :>
-                 QueryParam "timedTextTrackName" Text :>
-                   QueryParam "ocrLanguage" Text :>
-                     QueryParam "convert" Bool :>
-                       QueryParam "ocr" Bool :> Post '[JSON] File
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "pinned" Bool :>
+                   QueryParam "visibility" DriveFilesCopyVisibility :>
+                     QueryParam "timedTextLanguage" Text :>
+                       QueryParam "timedTextTrackName" Text :>
+                         QueryParam "ocrLanguage" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "convert" Bool :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "ocr" Bool :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Post '[JSON] File
 
 -- | Creates a copy of the specified file.
 --
--- /See:/ 'filesCopy' smart constructor.
-data FilesCopy = FilesCopy
+-- /See:/ 'filesCopy'' smart constructor.
+data FilesCopy' = FilesCopy'
     { _fcQuotaUser          :: !(Maybe Text)
     , _fcPrettyPrint        :: !Bool
     , _fcUserIp             :: !(Maybe Text)
     , _fcPinned             :: !Bool
-    , _fcVisibility         :: !Text
+    , _fcVisibility         :: !DriveFilesCopyVisibility
     , _fcTimedTextLanguage  :: !(Maybe Text)
     , _fcTimedTextTrackName :: !(Maybe Text)
     , _fcOcrLanguage        :: !(Maybe Text)
@@ -81,7 +89,7 @@ data FilesCopy = FilesCopy
     , _fcOauthToken         :: !(Maybe Text)
     , _fcOcr                :: !Bool
     , _fcFields             :: !(Maybe Text)
-    , _fcAlt                :: !Text
+    , _fcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCopy'' with the minimum fields required to make a request.
@@ -117,16 +125,16 @@ data FilesCopy = FilesCopy
 -- * 'fcFields'
 --
 -- * 'fcAlt'
-filesCopy
+filesCopy'
     :: Text -- ^ 'fileId'
-    -> FilesCopy
-filesCopy pFcFileId_ =
-    FilesCopy
+    -> FilesCopy'
+filesCopy' pFcFileId_ =
+    FilesCopy'
     { _fcQuotaUser = Nothing
     , _fcPrettyPrint = True
     , _fcUserIp = Nothing
     , _fcPinned = False
-    , _fcVisibility = "DEFAULT"
+    , _fcVisibility = Default
     , _fcTimedTextLanguage = Nothing
     , _fcTimedTextTrackName = Nothing
     , _fcOcrLanguage = Nothing
@@ -136,7 +144,7 @@ filesCopy pFcFileId_ =
     , _fcOauthToken = Nothing
     , _fcOcr = False
     , _fcFields = Nothing
-    , _fcAlt = "json"
+    , _fcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,7 +172,7 @@ fcPinned = lens _fcPinned (\ s a -> s{_fcPinned = a})
 
 -- | The visibility of the new file. This parameter is only relevant when the
 -- source is not a native Google Doc and convert=false.
-fcVisibility :: Lens' FilesCopy' Text
+fcVisibility :: Lens' FilesCopy' DriveFilesCopyVisibility
 fcVisibility
   = lens _fcVisibility (\ s a -> s{_fcVisibility = a})
 
@@ -216,14 +224,14 @@ fcFields :: Lens' FilesCopy' (Maybe Text)
 fcFields = lens _fcFields (\ s a -> s{_fcFields = a})
 
 -- | Data format for the response.
-fcAlt :: Lens' FilesCopy' Text
+fcAlt :: Lens' FilesCopy' Alt
 fcAlt = lens _fcAlt (\ s a -> s{_fcAlt = a})
 
 instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesCopy{..}
-          = go _fcQuotaUser _fcPrettyPrint _fcUserIp
+        requestWithRoute r u FilesCopy'{..}
+          = go _fcQuotaUser (Just _fcPrettyPrint) _fcUserIp
               (Just _fcPinned)
               (Just _fcVisibility)
               _fcTimedTextLanguage
@@ -235,6 +243,8 @@ instance GoogleRequest FilesCopy' where
               _fcOauthToken
               (Just _fcOcr)
               _fcFields
-              _fcAlt
+              (Just _fcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesCopyAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesCopyResource)
+                      r
+                      u

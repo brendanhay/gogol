@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsListByBlog@.
-module Blogger.Comments.ListByBlog
+module Network.Google.Resource.Blogger.Comments.ListByBlog
     (
     -- * REST Resource
-      CommentsListByBlogAPI
+      CommentsListByBlogResource
 
     -- * Creating a Request
-    , commentsListByBlog
-    , CommentsListByBlog
+    , commentsListByBlog'
+    , CommentsListByBlog'
 
     -- * Request Lenses
     , clbbStatus
@@ -49,24 +50,32 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsListByBlog@ which the
--- 'CommentsListByBlog' request conforms to.
-type CommentsListByBlogAPI =
+-- 'CommentsListByBlog'' request conforms to.
+type CommentsListByBlogResource =
      "blogs" :>
        Capture "blogId" Text :>
          "comments" :>
-           QueryParams "status" Text :>
-             QueryParam "endDate" UTCTime :>
-               QueryParam "startDate" UTCTime :>
-                 QueryParam "fetchBodies" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" Word32 :>
-                       Get '[JSON] CommentList
+           QueryParams "status" BloggerCommentsListByBlogStatus
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "endDate" UTCTime :>
+                     QueryParam "startDate" UTCTime :>
+                       QueryParam "key" Text :>
+                         QueryParam "fetchBodies" Bool :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] CommentList
 
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --
--- /See:/ 'commentsListByBlog' smart constructor.
-data CommentsListByBlog = CommentsListByBlog
-    { _clbbStatus      :: !(Maybe Text)
+-- /See:/ 'commentsListByBlog'' smart constructor.
+data CommentsListByBlog' = CommentsListByBlog'
+    { _clbbStatus      :: !(Maybe BloggerCommentsListByBlogStatus)
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
     , _clbbUserIp      :: !(Maybe Text)
@@ -79,7 +88,7 @@ data CommentsListByBlog = CommentsListByBlog
     , _clbbOauthToken  :: !(Maybe Text)
     , _clbbMaxResults  :: !(Maybe Word32)
     , _clbbFields      :: !(Maybe Text)
-    , _clbbAlt         :: !Text
+    , _clbbAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsListByBlog'' with the minimum fields required to make a request.
@@ -113,11 +122,11 @@ data CommentsListByBlog = CommentsListByBlog
 -- * 'clbbFields'
 --
 -- * 'clbbAlt'
-commentsListByBlog
+commentsListByBlog'
     :: Text -- ^ 'blogId'
-    -> CommentsListByBlog
-commentsListByBlog pClbbBlogId_ =
-    CommentsListByBlog
+    -> CommentsListByBlog'
+commentsListByBlog' pClbbBlogId_ =
+    CommentsListByBlog'
     { _clbbStatus = Nothing
     , _clbbQuotaUser = Nothing
     , _clbbPrettyPrint = True
@@ -131,10 +140,10 @@ commentsListByBlog pClbbBlogId_ =
     , _clbbOauthToken = Nothing
     , _clbbMaxResults = Nothing
     , _clbbFields = Nothing
-    , _clbbAlt = "json"
+    , _clbbAlt = JSON
     }
 
-clbbStatus :: Lens' CommentsListByBlog' (Maybe Text)
+clbbStatus :: Lens' CommentsListByBlog' (Maybe BloggerCommentsListByBlogStatus)
 clbbStatus
   = lens _clbbStatus (\ s a -> s{_clbbStatus = a})
 
@@ -210,14 +219,15 @@ clbbFields
   = lens _clbbFields (\ s a -> s{_clbbFields = a})
 
 -- | Data format for the response.
-clbbAlt :: Lens' CommentsListByBlog' Text
+clbbAlt :: Lens' CommentsListByBlog' Alt
 clbbAlt = lens _clbbAlt (\ s a -> s{_clbbAlt = a})
 
 instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsListByBlog{..}
-          = go _clbbStatus _clbbQuotaUser _clbbPrettyPrint
+        requestWithRoute r u CommentsListByBlog'{..}
+          = go _clbbStatus _clbbQuotaUser
+              (Just _clbbPrettyPrint)
               _clbbUserIp
               _clbbEndDate
               _clbbBlogId
@@ -228,9 +238,9 @@ instance GoogleRequest CommentsListByBlog' where
               _clbbOauthToken
               _clbbMaxResults
               _clbbFields
-              _clbbAlt
+              (Just _clbbAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentsListByBlogAPI)
+                      (Proxy :: Proxy CommentsListByBlogResource)
                       r
                       u

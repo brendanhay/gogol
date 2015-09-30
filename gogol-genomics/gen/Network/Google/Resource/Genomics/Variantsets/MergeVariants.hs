@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- other fields (such as key\/value pairs) are discarded.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsMergeVariants@.
-module Genomics.Variantsets.MergeVariants
+module Network.Google.Resource.Genomics.Variantsets.MergeVariants
     (
     -- * REST Resource
-      VariantsetsMergeVariantsAPI
+      VariantsetsMergeVariantsResource
 
     -- * Creating a Request
-    , variantsetsMergeVariants
-    , VariantsetsMergeVariants
+    , variantsetsMergeVariants'
+    , VariantsetsMergeVariants'
 
     -- * Request Lenses
     , vmvQuotaUser
@@ -48,11 +49,18 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsMergeVariants@ which the
--- 'VariantsetsMergeVariants' request conforms to.
-type VariantsetsMergeVariantsAPI =
+-- 'VariantsetsMergeVariants'' request conforms to.
+type VariantsetsMergeVariantsResource =
      "variantsets" :>
        Capture "variantSetId" Text :>
-         "mergeVariants" :> Post '[JSON] ()
+         "mergeVariants" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Merges the given variants with existing variants. Each variant will be
 -- merged with an existing variant that matches its reference sequence,
@@ -61,8 +69,8 @@ type VariantsetsMergeVariantsAPI =
 -- information from the new variant is added to the existing variant, and
 -- other fields (such as key\/value pairs) are discarded.
 --
--- /See:/ 'variantsetsMergeVariants' smart constructor.
-data VariantsetsMergeVariants = VariantsetsMergeVariants
+-- /See:/ 'variantsetsMergeVariants'' smart constructor.
+data VariantsetsMergeVariants' = VariantsetsMergeVariants'
     { _vmvQuotaUser    :: !(Maybe Text)
     , _vmvPrettyPrint  :: !Bool
     , _vmvVariantSetId :: !Text
@@ -70,7 +78,7 @@ data VariantsetsMergeVariants = VariantsetsMergeVariants
     , _vmvKey          :: !(Maybe Text)
     , _vmvOauthToken   :: !(Maybe Text)
     , _vmvFields       :: !(Maybe Text)
-    , _vmvAlt          :: !Text
+    , _vmvAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsMergeVariants'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data VariantsetsMergeVariants = VariantsetsMergeVariants
 -- * 'vmvFields'
 --
 -- * 'vmvAlt'
-variantsetsMergeVariants
+variantsetsMergeVariants'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsMergeVariants
-variantsetsMergeVariants pVmvVariantSetId_ =
-    VariantsetsMergeVariants
+    -> VariantsetsMergeVariants'
+variantsetsMergeVariants' pVmvVariantSetId_ =
+    VariantsetsMergeVariants'
     { _vmvQuotaUser = Nothing
     , _vmvPrettyPrint = True
     , _vmvVariantSetId = pVmvVariantSetId_
@@ -104,7 +112,7 @@ variantsetsMergeVariants pVmvVariantSetId_ =
     , _vmvKey = Nothing
     , _vmvOauthToken = Nothing
     , _vmvFields = Nothing
-    , _vmvAlt = "json"
+    , _vmvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,23 @@ vmvFields
   = lens _vmvFields (\ s a -> s{_vmvFields = a})
 
 -- | Data format for the response.
-vmvAlt :: Lens' VariantsetsMergeVariants' Text
+vmvAlt :: Lens' VariantsetsMergeVariants' Alt
 vmvAlt = lens _vmvAlt (\ s a -> s{_vmvAlt = a})
 
 instance GoogleRequest VariantsetsMergeVariants'
          where
         type Rs VariantsetsMergeVariants' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsMergeVariants{..}
-          = go _vmvQuotaUser _vmvPrettyPrint _vmvVariantSetId
+        requestWithRoute r u VariantsetsMergeVariants'{..}
+          = go _vmvQuotaUser (Just _vmvPrettyPrint)
+              _vmvVariantSetId
               _vmvUserIp
               _vmvKey
               _vmvOauthToken
               _vmvFields
-              _vmvAlt
+              (Just _vmvAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsMergeVariantsAPI)
+                      (Proxy :: Proxy VariantsetsMergeVariantsResource)
                       r
                       u

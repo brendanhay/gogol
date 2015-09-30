@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- enterprise admin.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterprisePermissionsGet@.
-module Androidenterprise.Permissions.Get
+module Network.Google.Resource.Androidenterprise.Permissions.Get
     (
     -- * REST Resource
-      PermissionsGetAPI
+      PermissionsGetResource
 
     -- * Creating a Request
-    , permissionsGet
-    , PermissionsGet
+    , permissionsGet'
+    , PermissionsGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterprisePermissionsGet@ which the
--- 'PermissionsGet' request conforms to.
-type PermissionsGetAPI =
+-- 'PermissionsGet'' request conforms to.
+type PermissionsGetResource =
      "permissions" :>
        Capture "permissionId" Text :>
-         QueryParam "language" Text :> Get '[JSON] Permission
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Permission
 
 -- | Retrieves details of an Android app permission for display to an
 -- enterprise admin.
 --
--- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet
+-- /See:/ 'permissionsGet'' smart constructor.
+data PermissionsGet' = PermissionsGet'
     { _pgQuotaUser    :: !(Maybe Text)
     , _pgPrettyPrint  :: !Bool
     , _pgUserIp       :: !(Maybe Text)
@@ -64,7 +72,7 @@ data PermissionsGet = PermissionsGet
     , _pgOauthToken   :: !(Maybe Text)
     , _pgPermissionId :: !Text
     , _pgFields       :: !(Maybe Text)
-    , _pgAlt          :: !Text
+    , _pgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGet'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data PermissionsGet = PermissionsGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-permissionsGet
+permissionsGet'
     :: Text -- ^ 'permissionId'
-    -> PermissionsGet
-permissionsGet pPgPermissionId_ =
-    PermissionsGet
+    -> PermissionsGet'
+permissionsGet' pPgPermissionId_ =
+    PermissionsGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgUserIp = Nothing
@@ -101,7 +109,7 @@ permissionsGet pPgPermissionId_ =
     , _pgOauthToken = Nothing
     , _pgPermissionId = pPgPermissionId_
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ pgFields :: Lens' PermissionsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PermissionsGet' Text
+pgAlt :: Lens' PermissionsGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u PermissionsGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgKey
+        requestWithRoute r u PermissionsGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+              _pgKey
               _pgLanguage
               _pgOauthToken
               _pgPermissionId
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PermissionsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PermissionsGetResource)
                       r
                       u

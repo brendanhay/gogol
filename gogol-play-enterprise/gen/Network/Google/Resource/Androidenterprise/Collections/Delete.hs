@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,156 +20,161 @@
 -- | Deletes a collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionsDelete@.
-module Androidenterprise.Collections.Delete
+module Network.Google.Resource.Androidenterprise.Collections.Delete
     (
     -- * REST Resource
-      CollectionsDeleteAPI
+      CollectionsDeleteResource
 
     -- * Creating a Request
-    , collectionsDelete
-    , CollectionsDelete
+    , collectionsDelete'
+    , CollectionsDelete'
 
     -- * Request Lenses
-    , cddQuotaUser
-    , cddPrettyPrint
-    , cddEnterpriseId
-    , cddUserIp
-    , cddCollectionId
-    , cddKey
-    , cddOauthToken
-    , cddFields
-    , cddAlt
+    , cdQuotaUser
+    , cdPrettyPrint
+    , cdEnterpriseId
+    , cdUserIp
+    , cdCollectionId
+    , cdKey
+    , cdOauthToken
+    , cdFields
+    , cdAlt
     ) where
 
 import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionsDelete@ which the
--- 'CollectionsDelete' request conforms to.
-type CollectionsDeleteAPI =
+-- 'CollectionsDelete'' request conforms to.
+type CollectionsDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
-           Capture "collectionId" Text :> Delete '[JSON] ()
+           Capture "collectionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a collection.
 --
--- /See:/ 'collectionsDelete' smart constructor.
-data CollectionsDelete = CollectionsDelete
-    { _cddQuotaUser    :: !(Maybe Text)
-    , _cddPrettyPrint  :: !Bool
-    , _cddEnterpriseId :: !Text
-    , _cddUserIp       :: !(Maybe Text)
-    , _cddCollectionId :: !Text
-    , _cddKey          :: !(Maybe Text)
-    , _cddOauthToken   :: !(Maybe Text)
-    , _cddFields       :: !(Maybe Text)
-    , _cddAlt          :: !Text
+-- /See:/ 'collectionsDelete'' smart constructor.
+data CollectionsDelete' = CollectionsDelete'
+    { _cdQuotaUser    :: !(Maybe Text)
+    , _cdPrettyPrint  :: !Bool
+    , _cdEnterpriseId :: !Text
+    , _cdUserIp       :: !(Maybe Text)
+    , _cdCollectionId :: !Text
+    , _cdKey          :: !(Maybe Text)
+    , _cdOauthToken   :: !(Maybe Text)
+    , _cdFields       :: !(Maybe Text)
+    , _cdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cddQuotaUser'
+-- * 'cdQuotaUser'
 --
--- * 'cddPrettyPrint'
+-- * 'cdPrettyPrint'
 --
--- * 'cddEnterpriseId'
+-- * 'cdEnterpriseId'
 --
--- * 'cddUserIp'
+-- * 'cdUserIp'
 --
--- * 'cddCollectionId'
+-- * 'cdCollectionId'
 --
--- * 'cddKey'
+-- * 'cdKey'
 --
--- * 'cddOauthToken'
+-- * 'cdOauthToken'
 --
--- * 'cddFields'
+-- * 'cdFields'
 --
--- * 'cddAlt'
-collectionsDelete
+-- * 'cdAlt'
+collectionsDelete'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> CollectionsDelete
-collectionsDelete pCddEnterpriseId_ pCddCollectionId_ =
-    CollectionsDelete
-    { _cddQuotaUser = Nothing
-    , _cddPrettyPrint = True
-    , _cddEnterpriseId = pCddEnterpriseId_
-    , _cddUserIp = Nothing
-    , _cddCollectionId = pCddCollectionId_
-    , _cddKey = Nothing
-    , _cddOauthToken = Nothing
-    , _cddFields = Nothing
-    , _cddAlt = "json"
+    -> CollectionsDelete'
+collectionsDelete' pCdEnterpriseId_ pCdCollectionId_ =
+    CollectionsDelete'
+    { _cdQuotaUser = Nothing
+    , _cdPrettyPrint = True
+    , _cdEnterpriseId = pCdEnterpriseId_
+    , _cdUserIp = Nothing
+    , _cdCollectionId = pCdCollectionId_
+    , _cdKey = Nothing
+    , _cdOauthToken = Nothing
+    , _cdFields = Nothing
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cddQuotaUser :: Lens' CollectionsDelete' (Maybe Text)
-cddQuotaUser
-  = lens _cddQuotaUser (\ s a -> s{_cddQuotaUser = a})
+cdQuotaUser :: Lens' CollectionsDelete' (Maybe Text)
+cdQuotaUser
+  = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cddPrettyPrint :: Lens' CollectionsDelete' Bool
-cddPrettyPrint
-  = lens _cddPrettyPrint
-      (\ s a -> s{_cddPrettyPrint = a})
+cdPrettyPrint :: Lens' CollectionsDelete' Bool
+cdPrettyPrint
+  = lens _cdPrettyPrint
+      (\ s a -> s{_cdPrettyPrint = a})
 
 -- | The ID of the enterprise.
-cddEnterpriseId :: Lens' CollectionsDelete' Text
-cddEnterpriseId
-  = lens _cddEnterpriseId
-      (\ s a -> s{_cddEnterpriseId = a})
+cdEnterpriseId :: Lens' CollectionsDelete' Text
+cdEnterpriseId
+  = lens _cdEnterpriseId
+      (\ s a -> s{_cdEnterpriseId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cddUserIp :: Lens' CollectionsDelete' (Maybe Text)
-cddUserIp
-  = lens _cddUserIp (\ s a -> s{_cddUserIp = a})
+cdUserIp :: Lens' CollectionsDelete' (Maybe Text)
+cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
 
 -- | The ID of the collection.
-cddCollectionId :: Lens' CollectionsDelete' Text
-cddCollectionId
-  = lens _cddCollectionId
-      (\ s a -> s{_cddCollectionId = a})
+cdCollectionId :: Lens' CollectionsDelete' Text
+cdCollectionId
+  = lens _cdCollectionId
+      (\ s a -> s{_cdCollectionId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cddKey :: Lens' CollectionsDelete' (Maybe Text)
-cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
+cdKey :: Lens' CollectionsDelete' (Maybe Text)
+cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cddOauthToken :: Lens' CollectionsDelete' (Maybe Text)
-cddOauthToken
-  = lens _cddOauthToken
-      (\ s a -> s{_cddOauthToken = a})
+cdOauthToken :: Lens' CollectionsDelete' (Maybe Text)
+cdOauthToken
+  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cddFields :: Lens' CollectionsDelete' (Maybe Text)
-cddFields
-  = lens _cddFields (\ s a -> s{_cddFields = a})
+cdFields :: Lens' CollectionsDelete' (Maybe Text)
+cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cddAlt :: Lens' CollectionsDelete' Text
-cddAlt = lens _cddAlt (\ s a -> s{_cddAlt = a})
+cdAlt :: Lens' CollectionsDelete' Alt
+cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CollectionsDelete' where
         type Rs CollectionsDelete' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionsDelete{..}
-          = go _cddQuotaUser _cddPrettyPrint _cddEnterpriseId
-              _cddUserIp
-              _cddCollectionId
-              _cddKey
-              _cddOauthToken
-              _cddFields
-              _cddAlt
+        requestWithRoute r u CollectionsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint)
+              _cdEnterpriseId
+              _cdUserIp
+              _cdCollectionId
+              _cdKey
+              _cdOauthToken
+              _cdFields
+              (Just _cdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionsDeleteAPI)
+                      (Proxy :: Proxy CollectionsDeleteResource)
                       r
                       u

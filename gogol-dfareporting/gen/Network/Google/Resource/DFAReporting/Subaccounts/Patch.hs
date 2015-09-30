@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSubaccountsPatch@.
-module DFAReporting.Subaccounts.Patch
+module Network.Google.Resource.DFAReporting.Subaccounts.Patch
     (
     -- * REST Resource
-      SubaccountsPatchAPI
+      SubaccountsPatchResource
 
     -- * Creating a Request
-    , subaccountsPatch
-    , SubaccountsPatch
+    , subaccountsPatch'
+    , SubaccountsPatch'
 
     -- * Request Lenses
     , sppQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSubaccountsPatch@ which the
--- 'SubaccountsPatch' request conforms to.
-type SubaccountsPatchAPI =
+-- 'SubaccountsPatch'' request conforms to.
+type SubaccountsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "subaccounts" :>
-           QueryParam "id" Int64 :> Patch '[JSON] Subaccount
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Subaccount
 
 -- | Updates an existing subaccount. This method supports patch semantics.
 --
--- /See:/ 'subaccountsPatch' smart constructor.
-data SubaccountsPatch = SubaccountsPatch
+-- /See:/ 'subaccountsPatch'' smart constructor.
+data SubaccountsPatch' = SubaccountsPatch'
     { _sppQuotaUser   :: !(Maybe Text)
     , _sppPrettyPrint :: !Bool
     , _sppUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SubaccountsPatch = SubaccountsPatch
     , _sppId          :: !Int64
     , _sppOauthToken  :: !(Maybe Text)
     , _sppFields      :: !(Maybe Text)
-    , _sppAlt         :: !Text
+    , _sppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubaccountsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SubaccountsPatch = SubaccountsPatch
 -- * 'sppFields'
 --
 -- * 'sppAlt'
-subaccountsPatch
+subaccountsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> SubaccountsPatch
-subaccountsPatch pSppProfileId_ pSppId_ =
-    SubaccountsPatch
+    -> SubaccountsPatch'
+subaccountsPatch' pSppProfileId_ pSppId_ =
+    SubaccountsPatch'
     { _sppQuotaUser = Nothing
     , _sppPrettyPrint = True
     , _sppUserIp = Nothing
@@ -101,7 +109,7 @@ subaccountsPatch pSppProfileId_ pSppId_ =
     , _sppId = pSppId_
     , _sppOauthToken = Nothing
     , _sppFields = Nothing
-    , _sppAlt = "json"
+    , _sppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ sppFields
   = lens _sppFields (\ s a -> s{_sppFields = a})
 
 -- | Data format for the response.
-sppAlt :: Lens' SubaccountsPatch' Text
+sppAlt :: Lens' SubaccountsPatch' Alt
 sppAlt = lens _sppAlt (\ s a -> s{_sppAlt = a})
 
 instance GoogleRequest SubaccountsPatch' where
         type Rs SubaccountsPatch' = Subaccount
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SubaccountsPatch{..}
-          = go _sppQuotaUser _sppPrettyPrint _sppUserIp
+        requestWithRoute r u SubaccountsPatch'{..}
+          = go _sppQuotaUser (Just _sppPrettyPrint) _sppUserIp
               _sppProfileId
               _sppKey
               (Just _sppId)
               _sppOauthToken
               _sppFields
-              _sppAlt
+              (Just _sppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubaccountsPatchAPI)
+                      (Proxy :: Proxy SubaccountsPatchResource)
                       r
                       u

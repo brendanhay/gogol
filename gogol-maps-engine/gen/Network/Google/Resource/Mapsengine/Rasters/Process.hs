@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Process a raster asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersProcess@.
-module Mapsengine.Rasters.Process
+module Network.Google.Resource.Mapsengine.Rasters.Process
     (
     -- * REST Resource
-      RastersProcessAPI
+      RastersProcessResource
 
     -- * Creating a Request
-    , rastersProcess
-    , RastersProcess
+    , rastersProcess'
+    , RastersProcess'
 
     -- * Request Lenses
     , rpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersProcess@ which the
--- 'RastersProcess' request conforms to.
-type RastersProcessAPI =
+-- 'RastersProcess'' request conforms to.
+type RastersProcessResource =
      "rasters" :>
        Capture "id" Text :>
-         "process" :> Post '[JSON] ProcessResponse
+         "process" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Process a raster asset.
 --
--- /See:/ 'rastersProcess' smart constructor.
-data RastersProcess = RastersProcess
+-- /See:/ 'rastersProcess'' smart constructor.
+data RastersProcess' = RastersProcess'
     { _rpQuotaUser   :: !(Maybe Text)
     , _rpPrettyPrint :: !Bool
     , _rpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data RastersProcess = RastersProcess
     , _rpId          :: !Text
     , _rpOauthToken  :: !(Maybe Text)
     , _rpFields      :: !(Maybe Text)
-    , _rpAlt         :: !Text
+    , _rpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersProcess'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data RastersProcess = RastersProcess
 -- * 'rpFields'
 --
 -- * 'rpAlt'
-rastersProcess
+rastersProcess'
     :: Text -- ^ 'id'
-    -> RastersProcess
-rastersProcess pRpId_ =
-    RastersProcess
+    -> RastersProcess'
+rastersProcess' pRpId_ =
+    RastersProcess'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIp = Nothing
@@ -94,7 +102,7 @@ rastersProcess pRpId_ =
     , _rpId = pRpId_
     , _rpOauthToken = Nothing
     , _rpFields = Nothing
-    , _rpAlt = "json"
+    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ rpFields :: Lens' RastersProcess' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 -- | Data format for the response.
-rpAlt :: Lens' RastersProcess' Text
+rpAlt :: Lens' RastersProcess' Alt
 rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
 
 instance GoogleRequest RastersProcess' where
         type Rs RastersProcess' = ProcessResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersProcess{..}
-          = go _rpQuotaUser _rpPrettyPrint _rpUserIp _rpKey
+        requestWithRoute r u RastersProcess'{..}
+          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIp
+              _rpKey
               _rpId
               _rpOauthToken
               _rpFields
-              _rpAlt
+              (Just _rpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RastersProcessAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy RastersProcessResource)
                       r
                       u

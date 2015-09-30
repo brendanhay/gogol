@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsGet@.
-module Androidenterprise.Products.Get
+module Network.Google.Resource.Androidenterprise.Products.Get
     (
     -- * REST Resource
-      ProductsGetAPI
+      ProductsGetResource
 
     -- * Creating a Request
-    , productsGet
-    , ProductsGet
+    , productsGet'
+    , ProductsGet'
 
     -- * Request Lenses
     , pQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsGet@ which the
--- 'ProductsGet' request conforms to.
-type ProductsGetAPI =
+-- 'ProductsGet'' request conforms to.
+type ProductsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
-             QueryParam "language" Text :> Get '[JSON] Product
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Product
 
 -- | Retrieves details of a product for display to an enterprise admin.
 --
--- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet
+-- /See:/ 'productsGet'' smart constructor.
+data ProductsGet' = ProductsGet'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
     , _pEnterpriseId :: !Text
@@ -66,7 +74,7 @@ data ProductsGet = ProductsGet
     , _pOauthToken   :: !(Maybe Text)
     , _pProductId    :: !Text
     , _pFields       :: !(Maybe Text)
-    , _pAlt          :: !Text
+    , _pAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGet'' with the minimum fields required to make a request.
@@ -92,12 +100,12 @@ data ProductsGet = ProductsGet
 -- * 'pFields'
 --
 -- * 'pAlt'
-productsGet
+productsGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsGet
-productsGet pPEnterpriseId_ pPProductId_ =
-    ProductsGet
+    -> ProductsGet'
+productsGet' pPEnterpriseId_ pPProductId_ =
+    ProductsGet'
     { _pQuotaUser = Nothing
     , _pPrettyPrint = True
     , _pEnterpriseId = pPEnterpriseId_
@@ -107,7 +115,7 @@ productsGet pPEnterpriseId_ pPProductId_ =
     , _pOauthToken = Nothing
     , _pProductId = pPProductId_
     , _pFields = Nothing
-    , _pAlt = "json"
+    , _pAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,20 +168,23 @@ pFields :: Lens' ProductsGet' (Maybe Text)
 pFields = lens _pFields (\ s a -> s{_pFields = a})
 
 -- | Data format for the response.
-pAlt :: Lens' ProductsGet' Text
+pAlt :: Lens' ProductsGet' Alt
 pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
 
 instance GoogleRequest ProductsGet' where
         type Rs ProductsGet' = Product
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u ProductsGet{..}
-          = go _pQuotaUser _pPrettyPrint _pEnterpriseId
+        requestWithRoute r u ProductsGet'{..}
+          = go _pQuotaUser (Just _pPrettyPrint) _pEnterpriseId
               _pUserIp
               _pKey
               _pLanguage
               _pOauthToken
               _pProductId
               _pFields
-              _pAlt
+              (Just _pAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProductsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ProductsGetResource)
+                      r
+                      u

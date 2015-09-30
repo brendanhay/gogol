@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- chronological order and paginated format.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesList@.
-module Replicapoolupdater.RollingUpdates.List
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.List
     (
     -- * REST Resource
-      RollingUpdatesListAPI
+      RollingUpdatesListResource
 
     -- * Creating a Request
-    , rollingUpdatesList
-    , RollingUpdatesList
+    , rollingUpdatesList'
+    , RollingUpdatesList'
 
     -- * Request Lenses
     , rulQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesList@ which the
--- 'RollingUpdatesList' request conforms to.
-type RollingUpdatesListAPI =
+-- 'RollingUpdatesList'' request conforms to.
+type RollingUpdatesListResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] RollingUpdateList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] RollingUpdateList
 
 -- | Lists recent updates for a given managed instance group, in reverse
 -- chronological order and paginated format.
 --
--- /See:/ 'rollingUpdatesList' smart constructor.
-data RollingUpdatesList = RollingUpdatesList
+-- /See:/ 'rollingUpdatesList'' smart constructor.
+data RollingUpdatesList' = RollingUpdatesList'
     { _rulQuotaUser   :: !(Maybe Text)
     , _rulPrettyPrint :: !Bool
     , _rulProject     :: !Text
@@ -75,7 +83,7 @@ data RollingUpdatesList = RollingUpdatesList
     , _rulOauthToken  :: !(Maybe Text)
     , _rulMaxResults  :: !Word32
     , _rulFields      :: !(Maybe Text)
-    , _rulAlt         :: !Text
+    , _rulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data RollingUpdatesList = RollingUpdatesList
 -- * 'rulFields'
 --
 -- * 'rulAlt'
-rollingUpdatesList
+rollingUpdatesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesList
-rollingUpdatesList pRulProject_ pRulZone_ =
-    RollingUpdatesList
+    -> RollingUpdatesList'
+rollingUpdatesList' pRulProject_ pRulZone_ =
+    RollingUpdatesList'
     { _rulQuotaUser = Nothing
     , _rulPrettyPrint = True
     , _rulProject = pRulProject_
@@ -122,7 +130,7 @@ rollingUpdatesList pRulProject_ pRulZone_ =
     , _rulOauthToken = Nothing
     , _rulMaxResults = 500
     , _rulFields = Nothing
-    , _rulAlt = "json"
+    , _rulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -189,15 +197,15 @@ rulFields
   = lens _rulFields (\ s a -> s{_rulFields = a})
 
 -- | Data format for the response.
-rulAlt :: Lens' RollingUpdatesList' Text
+rulAlt :: Lens' RollingUpdatesList' Alt
 rulAlt = lens _rulAlt (\ s a -> s{_rulAlt = a})
 
 instance GoogleRequest RollingUpdatesList' where
         type Rs RollingUpdatesList' = RollingUpdateList
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesList{..}
-          = go _rulQuotaUser _rulPrettyPrint _rulProject
+        requestWithRoute r u RollingUpdatesList'{..}
+          = go _rulQuotaUser (Just _rulPrettyPrint) _rulProject
               _rulUserIp
               _rulZone
               _rulKey
@@ -206,9 +214,9 @@ instance GoogleRequest RollingUpdatesList' where
               _rulOauthToken
               (Just _rulMaxResults)
               _rulFields
-              _rulAlt
+              (Just _rulAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesListAPI)
+                      (Proxy :: Proxy RollingUpdatesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Mutate a map asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsPatch@.
-module Mapsengine.Maps.Patch
+module Network.Google.Resource.Mapsengine.Maps.Patch
     (
     -- * REST Resource
-      MapsPatchAPI
+      MapsPatchResource
 
     -- * Creating a Request
-    , mapsPatch
-    , MapsPatch
+    , mapsPatch'
+    , MapsPatch'
 
     -- * Request Lenses
     , mpQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsPatch@ which the
--- 'MapsPatch' request conforms to.
-type MapsPatchAPI =
-     "maps" :> Capture "id" Text :> Patch '[JSON] ()
+-- 'MapsPatch'' request conforms to.
+type MapsPatchResource =
+     "maps" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] ()
 
 -- | Mutate a map asset.
 --
--- /See:/ 'mapsPatch' smart constructor.
-data MapsPatch = MapsPatch
+-- /See:/ 'mapsPatch'' smart constructor.
+data MapsPatch' = MapsPatch'
     { _mpQuotaUser   :: !(Maybe Text)
     , _mpPrettyPrint :: !Bool
     , _mpUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data MapsPatch = MapsPatch
     , _mpId          :: !Text
     , _mpOauthToken  :: !(Maybe Text)
     , _mpFields      :: !(Maybe Text)
-    , _mpAlt         :: !Text
+    , _mpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPatch'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data MapsPatch = MapsPatch
 -- * 'mpFields'
 --
 -- * 'mpAlt'
-mapsPatch
+mapsPatch'
     :: Text -- ^ 'id'
-    -> MapsPatch
-mapsPatch pMpId_ =
-    MapsPatch
+    -> MapsPatch'
+mapsPatch' pMpId_ =
+    MapsPatch'
     { _mpQuotaUser = Nothing
     , _mpPrettyPrint = True
     , _mpUserIp = Nothing
@@ -92,7 +101,7 @@ mapsPatch pMpId_ =
     , _mpId = pMpId_
     , _mpOauthToken = Nothing
     , _mpFields = Nothing
-    , _mpAlt = "json"
+    , _mpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +142,20 @@ mpFields :: Lens' MapsPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
 -- | Data format for the response.
-mpAlt :: Lens' MapsPatch' Text
+mpAlt :: Lens' MapsPatch' Alt
 mpAlt = lens _mpAlt (\ s a -> s{_mpAlt = a})
 
 instance GoogleRequest MapsPatch' where
         type Rs MapsPatch' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsPatch{..}
-          = go _mpQuotaUser _mpPrettyPrint _mpUserIp _mpKey
+        requestWithRoute r u MapsPatch'{..}
+          = go _mpQuotaUser (Just _mpPrettyPrint) _mpUserIp
+              _mpKey
               _mpId
               _mpOauthToken
               _mpFields
-              _mpAlt
+              (Just _mpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MapsPatchResource)
+                      r
+                      u

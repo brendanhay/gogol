@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads line items in CSV format.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerLineitemsUploadlineitems@.
-module Doubleclickbidmanager.Lineitems.Uploadlineitems
+module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Uploadlineitems
     (
     -- * REST Resource
-      LineitemsUploadlineitemsAPI
+      LineitemsUploadlineitemsResource
 
     -- * Creating a Request
-    , lineitemsUploadlineitems
-    , LineitemsUploadlineitems
+    , lineitemsUploadlineitems'
+    , LineitemsUploadlineitems'
 
     -- * Request Lenses
     , luQuotaUser
@@ -42,23 +43,30 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerLineitemsUploadlineitems@ which the
--- 'LineitemsUploadlineitems' request conforms to.
-type LineitemsUploadlineitemsAPI =
+-- 'LineitemsUploadlineitems'' request conforms to.
+type LineitemsUploadlineitemsResource =
      "lineitems" :>
        "uploadlineitems" :>
-         Post '[JSON] UploadLineItemsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] UploadLineItemsResponse
 
 -- | Uploads line items in CSV format.
 --
--- /See:/ 'lineitemsUploadlineitems' smart constructor.
-data LineitemsUploadlineitems = LineitemsUploadlineitems
+-- /See:/ 'lineitemsUploadlineitems'' smart constructor.
+data LineitemsUploadlineitems' = LineitemsUploadlineitems'
     { _luQuotaUser   :: !(Maybe Text)
     , _luPrettyPrint :: !Bool
     , _luUserIp      :: !(Maybe Text)
     , _luKey         :: !(Maybe Text)
     , _luOauthToken  :: !(Maybe Text)
     , _luFields      :: !(Maybe Text)
-    , _luAlt         :: !Text
+    , _luAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LineitemsUploadlineitems'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data LineitemsUploadlineitems = LineitemsUploadlineitems
 -- * 'luFields'
 --
 -- * 'luAlt'
-lineitemsUploadlineitems
-    :: LineitemsUploadlineitems
-lineitemsUploadlineitems =
-    LineitemsUploadlineitems
+lineitemsUploadlineitems'
+    :: LineitemsUploadlineitems'
+lineitemsUploadlineitems' =
+    LineitemsUploadlineitems'
     { _luQuotaUser = Nothing
     , _luPrettyPrint = True
     , _luUserIp = Nothing
     , _luKey = Nothing
     , _luOauthToken = Nothing
     , _luFields = Nothing
-    , _luAlt = "json"
+    , _luAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,7 +133,7 @@ luFields :: Lens' LineitemsUploadlineitems' (Maybe Text)
 luFields = lens _luFields (\ s a -> s{_luFields = a})
 
 -- | Data format for the response.
-luAlt :: Lens' LineitemsUploadlineitems' Text
+luAlt :: Lens' LineitemsUploadlineitems' Alt
 luAlt = lens _luAlt (\ s a -> s{_luAlt = a})
 
 instance GoogleRequest LineitemsUploadlineitems'
@@ -133,13 +141,14 @@ instance GoogleRequest LineitemsUploadlineitems'
         type Rs LineitemsUploadlineitems' =
              UploadLineItemsResponse
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u LineitemsUploadlineitems{..}
-          = go _luQuotaUser _luPrettyPrint _luUserIp _luKey
+        requestWithRoute r u LineitemsUploadlineitems'{..}
+          = go _luQuotaUser (Just _luPrettyPrint) _luUserIp
+              _luKey
               _luOauthToken
               _luFields
-              _luAlt
+              (Just _luAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LineitemsUploadlineitemsAPI)
+                      (Proxy :: Proxy LineitemsUploadlineitemsResource)
                       r
                       u

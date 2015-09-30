@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a volume to a bookshelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryBookshelvesAddVolume@.
-module Books.Mylibrary.Bookshelves.AddVolume
+module Network.Google.Resource.Books.Mylibrary.Bookshelves.AddVolume
     (
     -- * REST Resource
-      MylibraryBookshelvesAddVolumeAPI
+      MylibraryBookshelvesAddVolumeResource
 
     -- * Creating a Request
-    , mylibraryBookshelvesAddVolume
-    , MylibraryBookshelvesAddVolume
+    , mylibraryBookshelvesAddVolume'
+    , MylibraryBookshelvesAddVolume'
 
     -- * Request Lenses
     , mbavQuotaUser
@@ -46,31 +47,40 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryBookshelvesAddVolume@ which the
--- 'MylibraryBookshelvesAddVolume' request conforms to.
-type MylibraryBookshelvesAddVolumeAPI =
+-- 'MylibraryBookshelvesAddVolume'' request conforms to.
+type MylibraryBookshelvesAddVolumeResource =
      "mylibrary" :>
        "bookshelves" :>
          Capture "shelf" Text :>
            "addVolume" :>
-             QueryParam "reason" Text :>
-               QueryParam "volumeId" Text :>
-                 QueryParam "source" Text :> Post '[JSON] ()
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "reason"
+                     BooksMylibraryBookshelvesAddVolumeReason
+                     :>
+                     QueryParam "key" Text :>
+                       QueryParam "volumeId" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Adds a volume to a bookshelf.
 --
--- /See:/ 'mylibraryBookshelvesAddVolume' smart constructor.
-data MylibraryBookshelvesAddVolume = MylibraryBookshelvesAddVolume
+-- /See:/ 'mylibraryBookshelvesAddVolume'' smart constructor.
+data MylibraryBookshelvesAddVolume' = MylibraryBookshelvesAddVolume'
     { _mbavQuotaUser   :: !(Maybe Text)
     , _mbavPrettyPrint :: !Bool
     , _mbavUserIp      :: !(Maybe Text)
-    , _mbavReason      :: !(Maybe Text)
+    , _mbavReason      :: !(Maybe BooksMylibraryBookshelvesAddVolumeReason)
     , _mbavShelf       :: !Text
     , _mbavKey         :: !(Maybe Text)
     , _mbavVolumeId    :: !Text
     , _mbavSource      :: !(Maybe Text)
     , _mbavOauthToken  :: !(Maybe Text)
     , _mbavFields      :: !(Maybe Text)
-    , _mbavAlt         :: !Text
+    , _mbavAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryBookshelvesAddVolume'' with the minimum fields required to make a request.
@@ -98,12 +108,12 @@ data MylibraryBookshelvesAddVolume = MylibraryBookshelvesAddVolume
 -- * 'mbavFields'
 --
 -- * 'mbavAlt'
-mylibraryBookshelvesAddVolume
+mylibraryBookshelvesAddVolume'
     :: Text -- ^ 'shelf'
     -> Text -- ^ 'volumeId'
-    -> MylibraryBookshelvesAddVolume
-mylibraryBookshelvesAddVolume pMbavShelf_ pMbavVolumeId_ =
-    MylibraryBookshelvesAddVolume
+    -> MylibraryBookshelvesAddVolume'
+mylibraryBookshelvesAddVolume' pMbavShelf_ pMbavVolumeId_ =
+    MylibraryBookshelvesAddVolume'
     { _mbavQuotaUser = Nothing
     , _mbavPrettyPrint = True
     , _mbavUserIp = Nothing
@@ -114,7 +124,7 @@ mylibraryBookshelvesAddVolume pMbavShelf_ pMbavVolumeId_ =
     , _mbavSource = Nothing
     , _mbavOauthToken = Nothing
     , _mbavFields = Nothing
-    , _mbavAlt = "json"
+    , _mbavAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,7 +148,7 @@ mbavUserIp
   = lens _mbavUserIp (\ s a -> s{_mbavUserIp = a})
 
 -- | The reason for which the book is added to the library.
-mbavReason :: Lens' MylibraryBookshelvesAddVolume' (Maybe Text)
+mbavReason :: Lens' MylibraryBookshelvesAddVolume' (Maybe BooksMylibraryBookshelvesAddVolumeReason)
 mbavReason
   = lens _mbavReason (\ s a -> s{_mbavReason = a})
 
@@ -175,7 +185,7 @@ mbavFields
   = lens _mbavFields (\ s a -> s{_mbavFields = a})
 
 -- | Data format for the response.
-mbavAlt :: Lens' MylibraryBookshelvesAddVolume' Text
+mbavAlt :: Lens' MylibraryBookshelvesAddVolume' Alt
 mbavAlt = lens _mbavAlt (\ s a -> s{_mbavAlt = a})
 
 instance GoogleRequest MylibraryBookshelvesAddVolume'
@@ -183,8 +193,9 @@ instance GoogleRequest MylibraryBookshelvesAddVolume'
         type Rs MylibraryBookshelvesAddVolume' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MylibraryBookshelvesAddVolume{..}
-          = go _mbavQuotaUser _mbavPrettyPrint _mbavUserIp
+          MylibraryBookshelvesAddVolume'{..}
+          = go _mbavQuotaUser (Just _mbavPrettyPrint)
+              _mbavUserIp
               _mbavReason
               _mbavShelf
               _mbavKey
@@ -192,9 +203,10 @@ instance GoogleRequest MylibraryBookshelvesAddVolume'
               _mbavSource
               _mbavOauthToken
               _mbavFields
-              _mbavAlt
+              (Just _mbavAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryBookshelvesAddVolumeAPI)
+                      (Proxy ::
+                         Proxy MylibraryBookshelvesAddVolumeResource)
                       r
                       u

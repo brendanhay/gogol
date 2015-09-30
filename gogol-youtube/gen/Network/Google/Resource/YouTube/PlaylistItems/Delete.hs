@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a playlist item.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistItemsDelete@.
-module YouTube.PlaylistItems.Delete
+module Network.Google.Resource.YouTube.PlaylistItems.Delete
     (
     -- * REST Resource
-      PlaylistItemsDeleteAPI
+      PlaylistItemsDeleteResource
 
     -- * Creating a Request
-    , playlistItemsDelete
-    , PlaylistItemsDelete
+    , playlistItemsDelete'
+    , PlaylistItemsDelete'
 
     -- * Request Lenses
     , pidQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistItemsDelete@ which the
--- 'PlaylistItemsDelete' request conforms to.
-type PlaylistItemsDeleteAPI =
+-- 'PlaylistItemsDelete'' request conforms to.
+type PlaylistItemsDeleteResource =
      "playlistItems" :>
-       QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "id" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a playlist item.
 --
--- /See:/ 'playlistItemsDelete' smart constructor.
-data PlaylistItemsDelete = PlaylistItemsDelete
+-- /See:/ 'playlistItemsDelete'' smart constructor.
+data PlaylistItemsDelete' = PlaylistItemsDelete'
     { _pidQuotaUser   :: !(Maybe Text)
     , _pidPrettyPrint :: !Bool
     , _pidUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data PlaylistItemsDelete = PlaylistItemsDelete
     , _pidId          :: !Text
     , _pidOauthToken  :: !(Maybe Text)
     , _pidFields      :: !(Maybe Text)
-    , _pidAlt         :: !Text
+    , _pidAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistItemsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data PlaylistItemsDelete = PlaylistItemsDelete
 -- * 'pidFields'
 --
 -- * 'pidAlt'
-playlistItemsDelete
+playlistItemsDelete'
     :: Text -- ^ 'id'
-    -> PlaylistItemsDelete
-playlistItemsDelete pPidId_ =
-    PlaylistItemsDelete
+    -> PlaylistItemsDelete'
+playlistItemsDelete' pPidId_ =
+    PlaylistItemsDelete'
     { _pidQuotaUser = Nothing
     , _pidPrettyPrint = True
     , _pidUserIp = Nothing
@@ -93,7 +101,7 @@ playlistItemsDelete pPidId_ =
     , _pidId = pPidId_
     , _pidOauthToken = Nothing
     , _pidFields = Nothing
-    , _pidAlt = "json"
+    , _pidAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ pidFields
   = lens _pidFields (\ s a -> s{_pidFields = a})
 
 -- | Data format for the response.
-pidAlt :: Lens' PlaylistItemsDelete' Text
+pidAlt :: Lens' PlaylistItemsDelete' Alt
 pidAlt = lens _pidAlt (\ s a -> s{_pidAlt = a})
 
 instance GoogleRequest PlaylistItemsDelete' where
         type Rs PlaylistItemsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistItemsDelete{..}
-          = go _pidQuotaUser _pidPrettyPrint _pidUserIp _pidKey
+        requestWithRoute r u PlaylistItemsDelete'{..}
+          = go _pidQuotaUser (Just _pidPrettyPrint) _pidUserIp
+              _pidKey
               (Just _pidId)
               _pidOauthToken
               _pidFields
-              _pidAlt
+              (Just _pidAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlaylistItemsDeleteAPI)
+                      (Proxy :: Proxy PlaylistItemsDeleteResource)
                       r
                       u

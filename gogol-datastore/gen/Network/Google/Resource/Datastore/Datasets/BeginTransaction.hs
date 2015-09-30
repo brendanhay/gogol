@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Begin a new transaction.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsBeginTransaction@.
-module Datastore.Datasets.BeginTransaction
+module Network.Google.Resource.Datastore.Datasets.BeginTransaction
     (
     -- * REST Resource
-      DatasetsBeginTransactionAPI
+      DatasetsBeginTransactionResource
 
     -- * Creating a Request
-    , datasetsBeginTransaction
-    , DatasetsBeginTransaction
+    , datasetsBeginTransaction'
+    , DatasetsBeginTransaction'
 
     -- * Request Lenses
     , dbtQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsBeginTransaction@ which the
--- 'DatasetsBeginTransaction' request conforms to.
-type DatasetsBeginTransactionAPI =
+-- 'DatasetsBeginTransaction'' request conforms to.
+type DatasetsBeginTransactionResource =
      Capture "datasetId" Text :>
        "beginTransaction" :>
-         Post '[JSON] BeginTransactionResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] BeginTransactionResponse
 
 -- | Begin a new transaction.
 --
--- /See:/ 'datasetsBeginTransaction' smart constructor.
-data DatasetsBeginTransaction = DatasetsBeginTransaction
+-- /See:/ 'datasetsBeginTransaction'' smart constructor.
+data DatasetsBeginTransaction' = DatasetsBeginTransaction'
     { _dbtQuotaUser   :: !(Maybe Text)
     , _dbtPrettyPrint :: !Bool
     , _dbtUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data DatasetsBeginTransaction = DatasetsBeginTransaction
     , _dbtDatasetId   :: !Text
     , _dbtOauthToken  :: !(Maybe Text)
     , _dbtFields      :: !(Maybe Text)
-    , _dbtAlt         :: !Text
+    , _dbtAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsBeginTransaction'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data DatasetsBeginTransaction = DatasetsBeginTransaction
 -- * 'dbtFields'
 --
 -- * 'dbtAlt'
-datasetsBeginTransaction
+datasetsBeginTransaction'
     :: Text -- ^ 'datasetId'
-    -> DatasetsBeginTransaction
-datasetsBeginTransaction pDbtDatasetId_ =
-    DatasetsBeginTransaction
+    -> DatasetsBeginTransaction'
+datasetsBeginTransaction' pDbtDatasetId_ =
+    DatasetsBeginTransaction'
     { _dbtQuotaUser = Nothing
     , _dbtPrettyPrint = True
     , _dbtUserIp = Nothing
@@ -94,7 +102,7 @@ datasetsBeginTransaction pDbtDatasetId_ =
     , _dbtDatasetId = pDbtDatasetId_
     , _dbtOauthToken = Nothing
     , _dbtFields = Nothing
-    , _dbtAlt = "proto"
+    , _dbtAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ dbtFields
   = lens _dbtFields (\ s a -> s{_dbtFields = a})
 
 -- | Data format for the response.
-dbtAlt :: Lens' DatasetsBeginTransaction' Text
+dbtAlt :: Lens' DatasetsBeginTransaction' Alt
 dbtAlt = lens _dbtAlt (\ s a -> s{_dbtAlt = a})
 
 instance GoogleRequest DatasetsBeginTransaction'
@@ -147,14 +155,15 @@ instance GoogleRequest DatasetsBeginTransaction'
         type Rs DatasetsBeginTransaction' =
              BeginTransactionResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsBeginTransaction{..}
-          = go _dbtQuotaUser _dbtPrettyPrint _dbtUserIp _dbtKey
+        requestWithRoute r u DatasetsBeginTransaction'{..}
+          = go _dbtQuotaUser (Just _dbtPrettyPrint) _dbtUserIp
+              _dbtKey
               _dbtDatasetId
               _dbtOauthToken
               _dbtFields
-              _dbtAlt
+              (Just _dbtAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DatasetsBeginTransactionAPI)
+                      (Proxy :: Proxy DatasetsBeginTransactionResource)
                       r
                       u

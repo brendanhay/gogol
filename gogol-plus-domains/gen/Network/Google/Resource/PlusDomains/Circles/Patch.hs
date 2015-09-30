@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update a circle\'s description. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesPatch@.
-module PlusDomains.Circles.Patch
+module Network.Google.Resource.PlusDomains.Circles.Patch
     (
     -- * REST Resource
-      CirclesPatchAPI
+      CirclesPatchResource
 
     -- * Creating a Request
-    , circlesPatch
-    , CirclesPatch
+    , circlesPatch'
+    , CirclesPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesPatch@ which the
--- 'CirclesPatch' request conforms to.
-type CirclesPatchAPI =
+-- 'CirclesPatch'' request conforms to.
+type CirclesPatchResource =
      "circles" :>
-       Capture "circleId" Text :> Patch '[JSON] Circle
+       Capture "circleId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Circle
 
 -- | Update a circle\'s description. This method supports patch semantics.
 --
--- /See:/ 'circlesPatch' smart constructor.
-data CirclesPatch = CirclesPatch
+-- /See:/ 'circlesPatch'' smart constructor.
+data CirclesPatch' = CirclesPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CirclesPatch = CirclesPatch
     , _cpCircleId    :: !Text
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CirclesPatch = CirclesPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-circlesPatch
+circlesPatch'
     :: Text -- ^ 'circleId'
-    -> CirclesPatch
-circlesPatch pCpCircleId_ =
-    CirclesPatch
+    -> CirclesPatch'
+circlesPatch' pCpCircleId_ =
+    CirclesPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -93,7 +101,7 @@ circlesPatch pCpCircleId_ =
     , _cpCircleId = pCpCircleId_
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ cpFields :: Lens' CirclesPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CirclesPatch' Text
+cpAlt :: Lens' CirclesPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CirclesPatch' where
         type Rs CirclesPatch' = Circle
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp _cpKey
+        requestWithRoute r u CirclesPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+              _cpKey
               _cpCircleId
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CirclesPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CirclesPatchResource)
+                      r
                       u

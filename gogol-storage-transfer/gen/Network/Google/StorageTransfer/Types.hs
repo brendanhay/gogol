@@ -74,6 +74,10 @@ module Network.Google.StorageTransfer.Types
     , Empty
     , empty
 
+    -- * StatusDetails
+    , StatusDetails
+    , statusDetails
+
     -- * Date
     , Date
     , date
@@ -131,6 +135,10 @@ module Network.Google.StorageTransfer.Types
     , awsS3Data
     , asdBucketName
     , asdAwsAccessKey
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
 
     -- * HTTPData
     , HTTPData
@@ -196,6 +204,10 @@ module Network.Google.StorageTransfer.Types
     -- * ResumeTransferOperationRequest
     , ResumeTransferOperationRequest
     , resumeTransferOperationRequest
+
+    -- * OperationResponse
+    , OperationResponse
+    , operationResponse
     ) where
 
 import           Network.Google.Prelude
@@ -203,7 +215,7 @@ import           Network.Google.StorageTransfer.Types.Product
 import           Network.Google.StorageTransfer.Types.Sum
 
 -- | URL referring to version 'v1' of the Google Storage Transfer API.
-storageTransferURL :: BaseURL
+storageTransferURL :: BaseUrl
 storageTransferURL
   = BaseUrl Https
       "https://storagetransfer.googleapis.com/"

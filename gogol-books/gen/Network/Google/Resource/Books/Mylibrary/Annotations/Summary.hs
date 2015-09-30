@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the summary of specified layers.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryAnnotationsSummary@.
-module Books.Mylibrary.Annotations.Summary
+module Network.Google.Resource.Books.Mylibrary.Annotations.Summary
     (
     -- * REST Resource
-      MylibraryAnnotationsSummaryAPI
+      MylibraryAnnotationsSummaryResource
 
     -- * Creating a Request
-    , mylibraryAnnotationsSummary
-    , MylibraryAnnotationsSummary
+    , mylibraryAnnotationsSummary'
+    , MylibraryAnnotationsSummary'
 
     -- * Request Lenses
     , masQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryAnnotationsSummary@ which the
--- 'MylibraryAnnotationsSummary' request conforms to.
-type MylibraryAnnotationsSummaryAPI =
+-- 'MylibraryAnnotationsSummary'' request conforms to.
+type MylibraryAnnotationsSummaryResource =
      "mylibrary" :>
        "annotations" :>
          "summary" :>
-           QueryParams "layerIds" Text :>
-             QueryParam "volumeId" Text :>
-               Post '[JSON] AnnotationsSummary
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParams "layerIds" Text :>
+                     QueryParam "volumeId" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] AnnotationsSummary
 
 -- | Gets the summary of specified layers.
 --
--- /See:/ 'mylibraryAnnotationsSummary' smart constructor.
-data MylibraryAnnotationsSummary = MylibraryAnnotationsSummary
+-- /See:/ 'mylibraryAnnotationsSummary'' smart constructor.
+data MylibraryAnnotationsSummary' = MylibraryAnnotationsSummary'
     { _masQuotaUser   :: !(Maybe Text)
     , _masPrettyPrint :: !Bool
     , _masUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data MylibraryAnnotationsSummary = MylibraryAnnotationsSummary
     , _masVolumeId    :: !Text
     , _masOauthToken  :: !(Maybe Text)
     , _masFields      :: !(Maybe Text)
-    , _masAlt         :: !Text
+    , _masAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryAnnotationsSummary'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data MylibraryAnnotationsSummary = MylibraryAnnotationsSummary
 -- * 'masFields'
 --
 -- * 'masAlt'
-mylibraryAnnotationsSummary
+mylibraryAnnotationsSummary'
     :: Text -- ^ 'layerIds'
     -> Text -- ^ 'volumeId'
-    -> MylibraryAnnotationsSummary
-mylibraryAnnotationsSummary pMasLayerIds_ pMasVolumeId_ =
-    MylibraryAnnotationsSummary
+    -> MylibraryAnnotationsSummary'
+mylibraryAnnotationsSummary' pMasLayerIds_ pMasVolumeId_ =
+    MylibraryAnnotationsSummary'
     { _masQuotaUser = Nothing
     , _masPrettyPrint = True
     , _masUserIp = Nothing
@@ -103,7 +111,7 @@ mylibraryAnnotationsSummary pMasLayerIds_ pMasVolumeId_ =
     , _masVolumeId = pMasVolumeId_
     , _masOauthToken = Nothing
     , _masFields = Nothing
-    , _masAlt = "json"
+    , _masAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ masFields
   = lens _masFields (\ s a -> s{_masFields = a})
 
 -- | Data format for the response.
-masAlt :: Lens' MylibraryAnnotationsSummary' Text
+masAlt :: Lens' MylibraryAnnotationsSummary' Alt
 masAlt = lens _masAlt (\ s a -> s{_masAlt = a})
 
 instance GoogleRequest MylibraryAnnotationsSummary'
@@ -161,15 +169,16 @@ instance GoogleRequest MylibraryAnnotationsSummary'
         type Rs MylibraryAnnotationsSummary' =
              AnnotationsSummary
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryAnnotationsSummary{..}
-          = go _masQuotaUser _masPrettyPrint _masUserIp _masKey
+        requestWithRoute r u MylibraryAnnotationsSummary'{..}
+          = go _masQuotaUser (Just _masPrettyPrint) _masUserIp
+              _masKey
               (Just _masLayerIds)
               (Just _masVolumeId)
               _masOauthToken
               _masFields
-              _masAlt
+              (Just _masAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryAnnotationsSummaryAPI)
+                      (Proxy :: Proxy MylibraryAnnotationsSummaryResource)
                       r
                       u

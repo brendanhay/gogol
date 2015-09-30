@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the configuration of the specified module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesPatch@.
-module AppEngine.Apps.Modules.Patch
+module Network.Google.Resource.AppEngine.Apps.Modules.Patch
     (
     -- * REST Resource
-      AppsModulesPatchAPI
+      AppsModulesPatchResource
 
     -- * Creating a Request
-    , appsModulesPatch
-    , AppsModulesPatch
+    , appsModulesPatch'
+    , AppsModulesPatch'
 
     -- * Request Lenses
     , ampXgafv
@@ -52,20 +53,34 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesPatch@ which the
--- 'AppsModulesPatch' request conforms to.
-type AppsModulesPatchAPI =
+-- 'AppsModulesPatch'' request conforms to.
+type AppsModulesPatchResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
              Capture "modulesId" Text :>
-               QueryParam "migrateTraffic" Bool :>
-                 QueryParam "mask" Text :> Patch '[JSON] Operation
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "migrateTraffic" Bool :>
+                               QueryParam "mask" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Patch '[JSON] Operation
 
 -- | Updates the configuration of the specified module.
 --
--- /See:/ 'appsModulesPatch' smart constructor.
-data AppsModulesPatch = AppsModulesPatch
+-- /See:/ 'appsModulesPatch'' smart constructor.
+data AppsModulesPatch' = AppsModulesPatch'
     { _ampXgafv          :: !(Maybe Text)
     , _ampQuotaUser      :: !(Maybe Text)
     , _ampPrettyPrint    :: !Bool
@@ -122,12 +137,12 @@ data AppsModulesPatch = AppsModulesPatch
 -- * 'ampCallback'
 --
 -- * 'ampAlt'
-appsModulesPatch
+appsModulesPatch'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesPatch
-appsModulesPatch pAmpModulesId_ pAmpAppsId_ =
-    AppsModulesPatch
+    -> AppsModulesPatch'
+appsModulesPatch' pAmpModulesId_ pAmpAppsId_ =
+    AppsModulesPatch'
     { _ampXgafv = Nothing
     , _ampQuotaUser = Nothing
     , _ampPrettyPrint = True
@@ -243,10 +258,10 @@ ampAlt = lens _ampAlt (\ s a -> s{_ampAlt = a})
 instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesPatch{..}
-          = go _ampXgafv _ampQuotaUser _ampPrettyPrint
+        requestWithRoute r u AppsModulesPatch'{..}
+          = go _ampXgafv _ampQuotaUser (Just _ampPrettyPrint)
               _ampUploadProtocol
-              _ampPp
+              (Just _ampPp)
               _ampAccessToken
               _ampUploadType
               _ampModulesId
@@ -258,9 +273,9 @@ instance GoogleRequest AppsModulesPatch' where
               _ampOauthToken
               _ampFields
               _ampCallback
-              _ampAlt
+              (Just _ampAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesPatchAPI)
+                      (Proxy :: Proxy AppsModulesPatchResource)
                       r
                       u

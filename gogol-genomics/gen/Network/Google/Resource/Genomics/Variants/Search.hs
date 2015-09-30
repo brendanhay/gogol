@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- GlobalAllianceApi.searchVariants.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsSearch@.
-module Genomics.Variants.Search
+module Network.Google.Resource.Genomics.Variants.Search
     (
     -- * REST Resource
-      VariantsSearchAPI
+      VariantsSearchResource
 
     -- * Creating a Request
-    , variantsSearch
-    , VariantsSearch
+    , variantsSearch'
+    , VariantsSearch'
 
     -- * Request Lenses
     , vsQuotaUser
@@ -43,23 +44,31 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsSearch@ which the
--- 'VariantsSearch' request conforms to.
-type VariantsSearchAPI =
+-- 'VariantsSearch'' request conforms to.
+type VariantsSearchResource =
      "variants" :>
-       "search" :> Post '[JSON] SearchVariantsResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchVariantsResponse
 
 -- | Gets a list of variants matching the criteria. Implements
 -- GlobalAllianceApi.searchVariants.
 --
--- /See:/ 'variantsSearch' smart constructor.
-data VariantsSearch = VariantsSearch
+-- /See:/ 'variantsSearch'' smart constructor.
+data VariantsSearch' = VariantsSearch'
     { _vsQuotaUser   :: !(Maybe Text)
     , _vsPrettyPrint :: !Bool
     , _vsUserIp      :: !(Maybe Text)
     , _vsKey         :: !(Maybe Text)
     , _vsOauthToken  :: !(Maybe Text)
     , _vsFields      :: !(Maybe Text)
-    , _vsAlt         :: !Text
+    , _vsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsSearch'' with the minimum fields required to make a request.
@@ -79,17 +88,17 @@ data VariantsSearch = VariantsSearch
 -- * 'vsFields'
 --
 -- * 'vsAlt'
-variantsSearch
-    :: VariantsSearch
-variantsSearch =
-    VariantsSearch
+variantsSearch'
+    :: VariantsSearch'
+variantsSearch' =
+    VariantsSearch'
     { _vsQuotaUser = Nothing
     , _vsPrettyPrint = True
     , _vsUserIp = Nothing
     , _vsKey = Nothing
     , _vsOauthToken = Nothing
     , _vsFields = Nothing
-    , _vsAlt = "json"
+    , _vsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,18 +135,20 @@ vsFields :: Lens' VariantsSearch' (Maybe Text)
 vsFields = lens _vsFields (\ s a -> s{_vsFields = a})
 
 -- | Data format for the response.
-vsAlt :: Lens' VariantsSearch' Text
+vsAlt :: Lens' VariantsSearch' Alt
 vsAlt = lens _vsAlt (\ s a -> s{_vsAlt = a})
 
 instance GoogleRequest VariantsSearch' where
         type Rs VariantsSearch' = SearchVariantsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsSearch{..}
-          = go _vsQuotaUser _vsPrettyPrint _vsUserIp _vsKey
+        requestWithRoute r u VariantsSearch'{..}
+          = go _vsQuotaUser (Just _vsPrettyPrint) _vsUserIp
+              _vsKey
               _vsOauthToken
               _vsFields
-              _vsAlt
+              (Just _vsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VariantsSearchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy VariantsSearchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns detailed information about the specified beacon.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsGet@.
-module ProximityBeacon.Beacons.Get
+module Network.Google.Resource.ProximityBeacon.Beacons.Get
     (
     -- * REST Resource
-      BeaconsGetAPI
+      BeaconsGetResource
 
     -- * Creating a Request
-    , beaconsGet
-    , BeaconsGet
+    , beaconsGet'
+    , BeaconsGet'
 
     -- * Request Lenses
     , bgXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsGet@ which the
--- 'BeaconsGet' request conforms to.
-type BeaconsGetAPI =
-     "v1beta1" :> "{+beaconName}" :> Get '[JSON] Beacon
+-- 'BeaconsGet'' request conforms to.
+type BeaconsGetResource =
+     "v1beta1" :>
+       "{+beaconName}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Beacon
 
 -- | Returns detailed information about the specified beacon.
 --
--- /See:/ 'beaconsGet' smart constructor.
-data BeaconsGet = BeaconsGet
+-- /See:/ 'beaconsGet'' smart constructor.
+data BeaconsGet' = BeaconsGet'
     { _bgXgafv          :: !(Maybe Text)
     , _bgQuotaUser      :: !(Maybe Text)
     , _bgPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data BeaconsGet = BeaconsGet
 -- * 'bgCallback'
 --
 -- * 'bgAlt'
-beaconsGet
+beaconsGet'
     :: Text -- ^ 'beaconName'
-    -> BeaconsGet
-beaconsGet pBgBeaconName_ =
-    BeaconsGet
+    -> BeaconsGet'
+beaconsGet' pBgBeaconName_ =
+    BeaconsGet'
     { _bgXgafv = Nothing
     , _bgQuotaUser = Nothing
     , _bgPrettyPrint = True
@@ -201,10 +216,10 @@ bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
 instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsGet{..}
-          = go _bgXgafv _bgQuotaUser _bgPrettyPrint
+        requestWithRoute r u BeaconsGet'{..}
+          = go _bgXgafv _bgQuotaUser (Just _bgPrettyPrint)
               _bgUploadProtocol
-              _bgPp
+              (Just _bgPp)
               _bgAccessToken
               _bgBeaconName
               _bgUploadType
@@ -213,6 +228,8 @@ instance GoogleRequest BeaconsGet' where
               _bgOauthToken
               _bgFields
               _bgCallback
-              _bgAlt
+              (Just _bgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy BeaconsGetResource)
+                      r
+                      u

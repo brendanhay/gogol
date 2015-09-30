@@ -28,235 +28,235 @@ module Network.Google.MapEngine
     -- * REST Resources
 
     -- ** MapsengineAssetsGet
-    , module Mapsengine.Assets.Get
+    , module Network.Google.Resource.Mapsengine.Assets.Get
 
     -- ** MapsengineAssetsList
-    , module Mapsengine.Assets.List
+    , module Network.Google.Resource.Mapsengine.Assets.List
 
     -- ** MapsengineAssetsParentsList
-    , module Mapsengine.Assets.Parents.List
+    , module Network.Google.Resource.Mapsengine.Assets.Parents.List
 
     -- ** MapsengineAssetsPermissionsList
-    , module Mapsengine.Assets.Permissions.List
+    , module Network.Google.Resource.Mapsengine.Assets.Permissions.List
 
     -- ** MapsengineLayersCancelProcessing
-    , module Mapsengine.Layers.CancelProcessing
+    , module Network.Google.Resource.Mapsengine.Layers.CancelProcessing
 
     -- ** MapsengineLayersCreate
-    , module Mapsengine.Layers.Create
+    , module Network.Google.Resource.Mapsengine.Layers.Create
 
     -- ** MapsengineLayersDelete
-    , module Mapsengine.Layers.Delete
+    , module Network.Google.Resource.Mapsengine.Layers.Delete
 
     -- ** MapsengineLayersGet
-    , module Mapsengine.Layers.Get
+    , module Network.Google.Resource.Mapsengine.Layers.Get
 
     -- ** MapsengineLayersGetPublished
-    , module Mapsengine.Layers.GetPublished
+    , module Network.Google.Resource.Mapsengine.Layers.GetPublished
 
     -- ** MapsengineLayersList
-    , module Mapsengine.Layers.List
+    , module Network.Google.Resource.Mapsengine.Layers.List
 
     -- ** MapsengineLayersListPublished
-    , module Mapsengine.Layers.ListPublished
+    , module Network.Google.Resource.Mapsengine.Layers.ListPublished
 
     -- ** MapsengineLayersParentsList
-    , module Mapsengine.Layers.Parents.List
+    , module Network.Google.Resource.Mapsengine.Layers.Parents.List
 
     -- ** MapsengineLayersPatch
-    , module Mapsengine.Layers.Patch
+    , module Network.Google.Resource.Mapsengine.Layers.Patch
 
     -- ** MapsengineLayersPermissionsBatchDelete
-    , module Mapsengine.Layers.Permissions.BatchDelete
+    , module Network.Google.Resource.Mapsengine.Layers.Permissions.BatchDelete
 
     -- ** MapsengineLayersPermissionsBatchUpdate
-    , module Mapsengine.Layers.Permissions.BatchUpdate
+    , module Network.Google.Resource.Mapsengine.Layers.Permissions.BatchUpdate
 
     -- ** MapsengineLayersPermissionsList
-    , module Mapsengine.Layers.Permissions.List
+    , module Network.Google.Resource.Mapsengine.Layers.Permissions.List
 
     -- ** MapsengineLayersProcess
-    , module Mapsengine.Layers.Process
+    , module Network.Google.Resource.Mapsengine.Layers.Process
 
     -- ** MapsengineLayersPublish
-    , module Mapsengine.Layers.Publish
+    , module Network.Google.Resource.Mapsengine.Layers.Publish
 
     -- ** MapsengineLayersUnpublish
-    , module Mapsengine.Layers.Unpublish
+    , module Network.Google.Resource.Mapsengine.Layers.Unpublish
 
     -- ** MapsengineMapsCreate
-    , module Mapsengine.Maps.Create
+    , module Network.Google.Resource.Mapsengine.Maps.Create
 
     -- ** MapsengineMapsDelete
-    , module Mapsengine.Maps.Delete
+    , module Network.Google.Resource.Mapsengine.Maps.Delete
 
     -- ** MapsengineMapsGet
-    , module Mapsengine.Maps.Get
+    , module Network.Google.Resource.Mapsengine.Maps.Get
 
     -- ** MapsengineMapsGetPublished
-    , module Mapsengine.Maps.GetPublished
+    , module Network.Google.Resource.Mapsengine.Maps.GetPublished
 
     -- ** MapsengineMapsList
-    , module Mapsengine.Maps.List
+    , module Network.Google.Resource.Mapsengine.Maps.List
 
     -- ** MapsengineMapsListPublished
-    , module Mapsengine.Maps.ListPublished
+    , module Network.Google.Resource.Mapsengine.Maps.ListPublished
 
     -- ** MapsengineMapsPatch
-    , module Mapsengine.Maps.Patch
+    , module Network.Google.Resource.Mapsengine.Maps.Patch
 
     -- ** MapsengineMapsPermissionsBatchDelete
-    , module Mapsengine.Maps.Permissions.BatchDelete
+    , module Network.Google.Resource.Mapsengine.Maps.Permissions.BatchDelete
 
     -- ** MapsengineMapsPermissionsBatchUpdate
-    , module Mapsengine.Maps.Permissions.BatchUpdate
+    , module Network.Google.Resource.Mapsengine.Maps.Permissions.BatchUpdate
 
     -- ** MapsengineMapsPermissionsList
-    , module Mapsengine.Maps.Permissions.List
+    , module Network.Google.Resource.Mapsengine.Maps.Permissions.List
 
     -- ** MapsengineMapsPublish
-    , module Mapsengine.Maps.Publish
+    , module Network.Google.Resource.Mapsengine.Maps.Publish
 
     -- ** MapsengineMapsUnpublish
-    , module Mapsengine.Maps.Unpublish
+    , module Network.Google.Resource.Mapsengine.Maps.Unpublish
 
     -- ** MapsengineProjectsIconsCreate
-    , module Mapsengine.Projects.Icons.Create
+    , module Network.Google.Resource.Mapsengine.Projects.Icons.Create
 
     -- ** MapsengineProjectsIconsGet
-    , module Mapsengine.Projects.Icons.Get
+    , module Network.Google.Resource.Mapsengine.Projects.Icons.Get
 
     -- ** MapsengineProjectsIconsList
-    , module Mapsengine.Projects.Icons.List
+    , module Network.Google.Resource.Mapsengine.Projects.Icons.List
 
     -- ** MapsengineProjectsList
-    , module Mapsengine.Projects.List
+    , module Network.Google.Resource.Mapsengine.Projects.List
 
     -- ** MapsengineRasterCollectionsCancelProcessing
-    , module Mapsengine.RasterCollections.CancelProcessing
+    , module Network.Google.Resource.Mapsengine.RasterCollections.CancelProcessing
 
     -- ** MapsengineRasterCollectionsCreate
-    , module Mapsengine.RasterCollections.Create
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Create
 
     -- ** MapsengineRasterCollectionsDelete
-    , module Mapsengine.RasterCollections.Delete
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Delete
 
     -- ** MapsengineRasterCollectionsGet
-    , module Mapsengine.RasterCollections.Get
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Get
 
     -- ** MapsengineRasterCollectionsList
-    , module Mapsengine.RasterCollections.List
+    , module Network.Google.Resource.Mapsengine.RasterCollections.List
 
     -- ** MapsengineRasterCollectionsParentsList
-    , module Mapsengine.RasterCollections.Parents.List
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Parents.List
 
     -- ** MapsengineRasterCollectionsPatch
-    , module Mapsengine.RasterCollections.Patch
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Patch
 
     -- ** MapsengineRasterCollectionsPermissionsBatchDelete
-    , module Mapsengine.RasterCollections.Permissions.BatchDelete
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Permissions.BatchDelete
 
     -- ** MapsengineRasterCollectionsPermissionsBatchUpdate
-    , module Mapsengine.RasterCollections.Permissions.BatchUpdate
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Permissions.BatchUpdate
 
     -- ** MapsengineRasterCollectionsPermissionsList
-    , module Mapsengine.RasterCollections.Permissions.List
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Permissions.List
 
     -- ** MapsengineRasterCollectionsProcess
-    , module Mapsengine.RasterCollections.Process
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Process
 
     -- ** MapsengineRasterCollectionsRastersBatchDelete
-    , module Mapsengine.RasterCollections.Rasters.BatchDelete
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchDelete
 
     -- ** MapsengineRasterCollectionsRastersBatchInsert
-    , module Mapsengine.RasterCollections.Rasters.BatchInsert
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchInsert
 
     -- ** MapsengineRasterCollectionsRastersList
-    , module Mapsengine.RasterCollections.Rasters.List
+    , module Network.Google.Resource.Mapsengine.RasterCollections.Rasters.List
 
     -- ** MapsengineRastersDelete
-    , module Mapsengine.Rasters.Delete
+    , module Network.Google.Resource.Mapsengine.Rasters.Delete
 
     -- ** MapsengineRastersFilesInsert
-    , module Mapsengine.Rasters.Files.Insert
+    , module Network.Google.Resource.Mapsengine.Rasters.Files.Insert
 
     -- ** MapsengineRastersGet
-    , module Mapsengine.Rasters.Get
+    , module Network.Google.Resource.Mapsengine.Rasters.Get
 
     -- ** MapsengineRastersList
-    , module Mapsengine.Rasters.List
+    , module Network.Google.Resource.Mapsengine.Rasters.List
 
     -- ** MapsengineRastersParentsList
-    , module Mapsengine.Rasters.Parents.List
+    , module Network.Google.Resource.Mapsengine.Rasters.Parents.List
 
     -- ** MapsengineRastersPatch
-    , module Mapsengine.Rasters.Patch
+    , module Network.Google.Resource.Mapsengine.Rasters.Patch
 
     -- ** MapsengineRastersPermissionsBatchDelete
-    , module Mapsengine.Rasters.Permissions.BatchDelete
+    , module Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchDelete
 
     -- ** MapsengineRastersPermissionsBatchUpdate
-    , module Mapsengine.Rasters.Permissions.BatchUpdate
+    , module Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchUpdate
 
     -- ** MapsengineRastersPermissionsList
-    , module Mapsengine.Rasters.Permissions.List
+    , module Network.Google.Resource.Mapsengine.Rasters.Permissions.List
 
     -- ** MapsengineRastersProcess
-    , module Mapsengine.Rasters.Process
+    , module Network.Google.Resource.Mapsengine.Rasters.Process
 
     -- ** MapsengineRastersUpload
-    , module Mapsengine.Rasters.Upload
+    , module Network.Google.Resource.Mapsengine.Rasters.Upload
 
     -- ** MapsengineTablesCreate
-    , module Mapsengine.Tables.Create
+    , module Network.Google.Resource.Mapsengine.Tables.Create
 
     -- ** MapsengineTablesDelete
-    , module Mapsengine.Tables.Delete
+    , module Network.Google.Resource.Mapsengine.Tables.Delete
 
     -- ** MapsengineTablesFeaturesBatchDelete
-    , module Mapsengine.Tables.Features.BatchDelete
+    , module Network.Google.Resource.Mapsengine.Tables.Features.BatchDelete
 
     -- ** MapsengineTablesFeaturesBatchInsert
-    , module Mapsengine.Tables.Features.BatchInsert
+    , module Network.Google.Resource.Mapsengine.Tables.Features.BatchInsert
 
     -- ** MapsengineTablesFeaturesBatchPatch
-    , module Mapsengine.Tables.Features.BatchPatch
+    , module Network.Google.Resource.Mapsengine.Tables.Features.BatchPatch
 
     -- ** MapsengineTablesFeaturesGet
-    , module Mapsengine.Tables.Features.Get
+    , module Network.Google.Resource.Mapsengine.Tables.Features.Get
 
     -- ** MapsengineTablesFeaturesList
-    , module Mapsengine.Tables.Features.List
+    , module Network.Google.Resource.Mapsengine.Tables.Features.List
 
     -- ** MapsengineTablesFilesInsert
-    , module Mapsengine.Tables.Files.Insert
+    , module Network.Google.Resource.Mapsengine.Tables.Files.Insert
 
     -- ** MapsengineTablesGet
-    , module Mapsengine.Tables.Get
+    , module Network.Google.Resource.Mapsengine.Tables.Get
 
     -- ** MapsengineTablesList
-    , module Mapsengine.Tables.List
+    , module Network.Google.Resource.Mapsengine.Tables.List
 
     -- ** MapsengineTablesParentsList
-    , module Mapsengine.Tables.Parents.List
+    , module Network.Google.Resource.Mapsengine.Tables.Parents.List
 
     -- ** MapsengineTablesPatch
-    , module Mapsengine.Tables.Patch
+    , module Network.Google.Resource.Mapsengine.Tables.Patch
 
     -- ** MapsengineTablesPermissionsBatchDelete
-    , module Mapsengine.Tables.Permissions.BatchDelete
+    , module Network.Google.Resource.Mapsengine.Tables.Permissions.BatchDelete
 
     -- ** MapsengineTablesPermissionsBatchUpdate
-    , module Mapsengine.Tables.Permissions.BatchUpdate
+    , module Network.Google.Resource.Mapsengine.Tables.Permissions.BatchUpdate
 
     -- ** MapsengineTablesPermissionsList
-    , module Mapsengine.Tables.Permissions.List
+    , module Network.Google.Resource.Mapsengine.Tables.Permissions.List
 
     -- ** MapsengineTablesProcess
-    , module Mapsengine.Tables.Process
+    , module Network.Google.Resource.Mapsengine.Tables.Process
 
     -- ** MapsengineTablesUpload
-    , module Mapsengine.Tables.Upload
+    , module Network.Google.Resource.Mapsengine.Tables.Upload
 
     -- * Types
 
@@ -286,6 +286,9 @@ module Network.Google.MapEngine
     , vrMax
     , vrMin
 
+    -- ** LayerProcessingStatus
+    , LayerProcessingStatus (..)
+
     -- ** Feature
     , Feature
     , feature
@@ -293,10 +296,19 @@ module Network.Google.MapEngine
     , fType
     , fProperties
 
+    -- ** ScaledShapeShape
+    , ScaledShapeShape (..)
+
+    -- ** MapsengineRastersListProcessingStatus
+    , MapsengineRastersListProcessingStatus (..)
+
     -- ** PermissionsBatchDeleteRequest
     , PermissionsBatchDeleteRequest
     , permissionsBatchDeleteRequest
     , pbdrIds
+
+    -- ** RasterProcessingStatus
+    , RasterProcessingStatus (..)
 
     -- ** GeoJSONGeometry
     , GeoJSONGeometry
@@ -318,10 +330,19 @@ module Network.Google.MapEngine
     , rclrNextPageToken
     , rclrRasterCollections
 
+    -- ** PermissionRole
+    , PermissionRole (..)
+
     -- ** ProjectsListResponse
     , ProjectsListResponse
     , projectsListResponse
     , plrProjects
+
+    -- ** GeoJSONMultiLineStringType
+    , GeoJSONMultiLineStringType (..)
+
+    -- ** MapsengineRastersListRole
+    , MapsengineRastersListRole (..)
 
     -- ** ZoomLevels
     , ZoomLevels
@@ -333,6 +354,9 @@ module Network.Google.MapEngine
     , FeatureInfo
     , featureInfo
     , fiContent
+
+    -- ** ScalingFunctionScalingType
+    , ScalingFunctionScalingType (..)
 
     -- ** SizeRange
     , SizeRange
@@ -350,6 +374,9 @@ module Network.Google.MapEngine
     , mfKey
     , mfName
     , mfType
+
+    -- ** AcquisitionTimePrecision
+    , AcquisitionTimePrecision (..)
 
     -- ** RasterCollection
     , RasterCollection
@@ -372,6 +399,13 @@ module Network.Google.MapEngine
     , rcAttribution
     , rcTags
 
+    -- ** LineStyleStroke
+    , LineStyleStroke
+    , lineStyleStroke
+    , lssColor
+    , lssWidth
+    , lssOpacity
+
     -- ** Project
     , Project
     , project
@@ -383,6 +417,9 @@ module Network.Google.MapEngine
     , color
     , cColor
     , cOpacity
+
+    -- ** MapsengineLayersGetVersion
+    , MapsengineLayersGetVersion (..)
 
     -- ** Asset
     , Asset
@@ -412,9 +449,27 @@ module Network.Google.MapEngine
     , tcName
     , tcType
 
+    -- ** MapsengineTablesGetVersion
+    , MapsengineTablesGetVersion (..)
+
+    -- ** MapsengineMapsListRole
+    , MapsengineMapsListRole (..)
+
     -- ** RasterCollectionsRastersBatchDeleteResponse
     , RasterCollectionsRastersBatchDeleteResponse
     , rasterCollectionsRastersBatchDeleteResponse
+
+    -- ** LayerLayerType
+    , LayerLayerType (..)
+
+    -- ** GeoJSONMultiPolygonType
+    , GeoJSONMultiPolygonType (..)
+
+    -- ** PublishedLayerLayerType
+    , PublishedLayerLayerType (..)
+
+    -- ** GeoJSONMultiPointType
+    , GeoJSONMultiPointType (..)
 
     -- ** ScaledShape
     , ScaledShape
@@ -422,6 +477,12 @@ module Network.Google.MapEngine
     , ssBorder
     , ssFill
     , ssShape
+
+    -- ** MapProcessingStatus
+    , MapProcessingStatus (..)
+
+    -- ** MapsengineMapsListProcessingStatus
+    , MapsengineMapsListProcessingStatus (..)
 
     -- ** Icon
     , Icon
@@ -436,9 +497,27 @@ module Network.Google.MapEngine
     , fbdrPrimaryKeys
     , fbdrGxIds
 
+    -- ** PermissionType
+    , PermissionType (..)
+
     -- ** RasterCollectionsRastersBatchInsertResponse
     , RasterCollectionsRastersBatchInsertResponse
     , rasterCollectionsRastersBatchInsertResponse
+
+    -- ** GeoJSONLineStringType
+    , GeoJSONLineStringType (..)
+
+    -- ** VectorStyleType
+    , VectorStyleType (..)
+
+    -- ** MapKmlLinkType
+    , MapKmlLinkType (..)
+
+    -- ** LayerPublishingStatus
+    , LayerPublishingStatus (..)
+
+    -- ** LayerDatasourceType
+    , LayerDatasourceType (..)
 
     -- ** FeaturesListResponse
     , FeaturesListResponse
@@ -475,6 +554,15 @@ module Network.Google.MapEngine
     , MapItem
     , mapItem
 
+    -- ** GeoJSONGeometryCollectionType
+    , GeoJSONGeometryCollectionType (..)
+
+    -- ** GeoJSONPointType
+    , GeoJSONPointType (..)
+
+    -- ** GeoJSONPolygonType
+    , GeoJSONPolygonType (..)
+
     -- ** IconsListResponse
     , IconsListResponse
     , iconsListResponse
@@ -494,6 +582,9 @@ module Network.Google.MapEngine
     , atStart
     , atPrecision
     , atEnd
+
+    -- ** MapsengineLayersListProcessingStatus
+    , MapsengineLayersListProcessingStatus (..)
 
     -- ** TablesListResponse
     , TablesListResponse
@@ -564,11 +655,23 @@ module Network.Google.MapEngine
     , rasterCollectionsRastersBatchInsertRequest
     , rcrbirIds
 
+    -- ** MapsengineAssetsListRole
+    , MapsengineAssetsListRole (..)
+
+    -- ** MapLayerType
+    , MapLayerType (..)
+
+    -- ** MapsengineTablesFeaturesGetVersion
+    , MapsengineTablesFeaturesGetVersion (..)
+
     -- ** RasterCollectionsRastersListResponse
     , RasterCollectionsRastersListResponse
     , rasterCollectionsRastersListResponse
     , rcrlrNextPageToken
     , rcrlrRasters
+
+    -- ** MapsengineLayersListRole
+    , MapsengineLayersListRole (..)
 
     -- ** GeoJSONMultiLineString
     , GeoJSONMultiLineString
@@ -584,11 +687,29 @@ module Network.Google.MapEngine
     , sfScalingType
     , sfColumn
 
+    -- ** MapFolderType
+    , MapFolderType (..)
+
+    -- ** LabelStyleFontWeight
+    , LabelStyleFontWeight (..)
+
+    -- ** RasterCollectionProcessingStatus
+    , RasterCollectionProcessingStatus (..)
+
+    -- ** MapsengineMapsGetVersion
+    , MapsengineMapsGetVersion (..)
+
     -- ** AssetsListResponse
     , AssetsListResponse
     , assetsListResponse
     , alrNextPageToken
     , alrAssets
+
+    -- ** MapsengineRasterCollectionsListProcessingStatus
+    , MapsengineRasterCollectionsListProcessingStatus (..)
+
+    -- ** MapsengineTablesListRole
+    , MapsengineTablesListRole (..)
 
     -- ** PublishResponse
     , PublishResponse
@@ -607,6 +728,9 @@ module Network.Google.MapEngine
     , rcrDescription
     , rcrTags
 
+    -- ** LabelStyleFontStyle
+    , LabelStyleFontStyle (..)
+
     -- ** Datasource
     , Datasource
     , datasource
@@ -618,12 +742,21 @@ module Network.Google.MapEngine
     , fbirFeatures
     , fbirNormalizeGeometries
 
+    -- ** FilterOperator
+    , FilterOperator (..)
+
+    -- ** AssetType
+    , AssetType (..)
+
     -- ** Filter
     , Filter
     , filter'
     , fOperator
     , fValue
     , fColumn
+
+    -- ** RasterRasterType
+    , RasterRasterType (..)
 
     -- ** GeoJSONMultiPolygon
     , GeoJSONMultiPolygon
@@ -637,28 +770,31 @@ module Network.Google.MapEngine
     , gjsonmpCoordinates
     , gjsonmpType
 
+    -- ** TableColumnType
+    , TableColumnType (..)
+
     -- ** Raster
     , Raster
     , raster
-    , rCreationTime
-    , rWritersCanEditPermissions
-    , rMaskType
-    , rEtag
-    , rCreatorEmail
-    , rRasterType
-    , rLastModifiedTime
-    , rLastModifierEmail
-    , rAcquisitionTime
-    , rName
-    , rBbox
-    , rProcessingStatus
-    , rFiles
-    , rId
-    , rProjectId
-    , rDraftAccessList
-    , rDescription
-    , rAttribution
-    , rTags
+    , rrCreationTime
+    , rrWritersCanEditPermissions
+    , rrMaskType
+    , rrEtag
+    , rrCreatorEmail
+    , rrRasterType
+    , rrLastModifiedTime
+    , rrLastModifierEmail
+    , rrAcquisitionTime
+    , rrName
+    , rrBbox
+    , rrProcessingStatus
+    , rrFiles
+    , rrId
+    , rrProjectId
+    , rrDraftAccessList
+    , rrDescription
+    , rrAttribution
+    , rrTags
 
     -- ** PublishedLayer
     , PublishedLayer
@@ -686,26 +822,26 @@ module Network.Google.MapEngine
     -- ** Layer
     , Layer
     , layer
-    , lCreationTime
-    , lWritersCanEditPermissions
-    , lStyle
-    , lEtag
-    , lDatasourceType
-    , lPublishingStatus
-    , lCreatorEmail
-    , lLayerType
-    , lLastModifiedTime
-    , lDatasources
-    , lLastModifierEmail
-    , lName
-    , lBbox
-    , lProcessingStatus
-    , lId
-    , lProjectId
-    , lDraftAccessList
-    , lPublishedAccessList
-    , lDescription
-    , lTags
+    , layaCreationTime
+    , layaWritersCanEditPermissions
+    , layaStyle
+    , layaEtag
+    , layaDatasourceType
+    , layaPublishingStatus
+    , layaCreatorEmail
+    , layaLayerType
+    , layaLastModifiedTime
+    , layaDatasources
+    , layaLastModifierEmail
+    , layaName
+    , layaBbox
+    , layaProcessingStatus
+    , layaId
+    , layaProjectId
+    , layaDraftAccessList
+    , layaPublishedAccessList
+    , layaDescription
+    , layaTags
 
     -- ** PolygonStyle
     , PolygonStyle
@@ -713,6 +849,9 @@ module Network.Google.MapEngine
     , pStroke
     , pFill
     , pLabel
+
+    -- ** MapsengineTablesFeaturesListVersion
+    , MapsengineTablesFeaturesListVersion (..)
 
     -- ** PermissionsBatchUpdateResponse
     , PermissionsBatchUpdateResponse
@@ -726,6 +865,9 @@ module Network.Google.MapEngine
     , mklName
     , mklType
     , mklKmlUrl
+
+    -- ** RasterCollectionRasterType
+    , RasterCollectionRasterType (..)
 
     -- ** VectorStyle
     , VectorStyle
@@ -747,24 +889,24 @@ module Network.Google.MapEngine
     -- ** Table
     , Table
     , table
-    , tCreationTime
-    , tWritersCanEditPermissions
-    , tEtag
-    , tCreatorEmail
-    , tLastModifiedTime
-    , tSchema
-    , tLastModifierEmail
-    , tName
-    , tBbox
-    , tProcessingStatus
-    , tFiles
-    , tId
-    , tProjectId
-    , tDraftAccessList
-    , tPublishedAccessList
-    , tSourceEncoding
-    , tDescription
-    , tTags
+    , ttCreationTime
+    , ttWritersCanEditPermissions
+    , ttEtag
+    , ttCreatorEmail
+    , ttLastModifiedTime
+    , ttSchema
+    , ttLastModifierEmail
+    , ttName
+    , ttBbox
+    , ttProcessingStatus
+    , ttFiles
+    , ttId
+    , ttProjectId
+    , ttDraftAccessList
+    , ttPublishedAccessList
+    , ttSourceEncoding
+    , ttDescription
+    , ttTags
 
     -- ** GeoJSONLineString
     , GeoJSONLineString
@@ -784,6 +926,9 @@ module Network.Google.MapEngine
     , fSize
     , fUploadStatus
     , fFilename
+
+    -- ** MapsengineRasterCollectionsListRole
+    , MapsengineRasterCollectionsListRole (..)
 
     -- ** LayersListResponse
     , LayersListResponse
@@ -808,6 +953,15 @@ module Network.Google.MapEngine
     , permissionsListResponse
     , plrPermissions
 
+    -- ** MapsengineTablesListProcessingStatus
+    , MapsengineTablesListProcessingStatus (..)
+
+    -- ** MapsengineRasterCollectionsRastersListRole
+    , MapsengineRasterCollectionsRastersListRole (..)
+
+    -- ** FileUploadStatus
+    , FileUploadStatus (..)
+
     -- ** LineStyle
     , LineStyle
     , lineStyle
@@ -828,11 +982,20 @@ module Network.Google.MapEngine
     , gjgcGeometries
     , gjgcType
 
+    -- ** Alt
+    , Alt (..)
+
+    -- ** MapPublishingStatus
+    , MapPublishingStatus (..)
+
     -- ** RastersListResponse
     , RastersListResponse
     , rastersListResponse
     , rlrNextPageToken
     , rlrRasters
+
+    -- ** TableProcessingStatus
+    , TableProcessingStatus (..)
     ) where
 
 import           Network.Google.MapEngine.Types
@@ -920,9 +1083,83 @@ TODO
 -}
 
 type MapEngineAPI =
-     Maps :<|> Tables :<|> Layers :<|> Rasters :<|> Assets
-       :<|> Projects
-       :<|> RasterCollections
+     MapsPermissionsListResource :<|>
+       MapsPermissionsBatchUpdateResource
+       :<|> MapsPermissionsBatchDeleteResource
+       :<|> MapsListResource
+       :<|> MapsListPublishedResource
+       :<|> MapsPatchResource
+       :<|> MapsGetResource
+       :<|> MapsGetPublishedResource
+       :<|> MapsCreateResource
+       :<|> MapsUnpublishResource
+       :<|> MapsDeleteResource
+       :<|> MapsPublishResource
+       :<|> TablesParentsListResource
+       :<|> TablesFeaturesListResource
+       :<|> TablesFeaturesBatchInsertResource
+       :<|> TablesFeaturesGetResource
+       :<|> TablesFeaturesBatchPatchResource
+       :<|> TablesFeaturesBatchDeleteResource
+       :<|> TablesFilesInsertResource
+       :<|> TablesPermissionsListResource
+       :<|> TablesPermissionsBatchUpdateResource
+       :<|> TablesPermissionsBatchDeleteResource
+       :<|> TablesListResource
+       :<|> TablesProcessResource
+       :<|> TablesPatchResource
+       :<|> TablesGetResource
+       :<|> TablesCreateResource
+       :<|> TablesUploadResource
+       :<|> TablesDeleteResource
+       :<|> LayersParentsListResource
+       :<|> LayersPermissionsListResource
+       :<|> LayersPermissionsBatchUpdateResource
+       :<|> LayersPermissionsBatchDeleteResource
+       :<|> LayersListResource
+       :<|> LayersListPublishedResource
+       :<|> LayersProcessResource
+       :<|> LayersPatchResource
+       :<|> LayersGetResource
+       :<|> LayersGetPublishedResource
+       :<|> LayersCreateResource
+       :<|> LayersUnpublishResource
+       :<|> LayersCancelProcessingResource
+       :<|> LayersDeleteResource
+       :<|> LayersPublishResource
+       :<|> RastersParentsListResource
+       :<|> RastersFilesInsertResource
+       :<|> RastersPermissionsListResource
+       :<|> RastersPermissionsBatchUpdateResource
+       :<|> RastersPermissionsBatchDeleteResource
+       :<|> RastersListResource
+       :<|> RastersProcessResource
+       :<|> RastersPatchResource
+       :<|> RastersGetResource
+       :<|> RastersUploadResource
+       :<|> RastersDeleteResource
+       :<|> AssetsParentsListResource
+       :<|> AssetsPermissionsListResource
+       :<|> AssetsListResource
+       :<|> AssetsGetResource
+       :<|> ProjectsIconsListResource
+       :<|> ProjectsIconsGetResource
+       :<|> ProjectsIconsCreateResource
+       :<|> ProjectsListResource
+       :<|> RasterCollectionsParentsListResource
+       :<|> RasterCollectionsPermissionsListResource
+       :<|> RasterCollectionsPermissionsBatchUpdateResource
+       :<|> RasterCollectionsPermissionsBatchDeleteResource
+       :<|> RasterCollectionsRastersListResource
+       :<|> RasterCollectionsRastersBatchInsertResource
+       :<|> RasterCollectionsRastersBatchDeleteResource
+       :<|> RasterCollectionsListResource
+       :<|> RasterCollectionsProcessResource
+       :<|> RasterCollectionsPatchResource
+       :<|> RasterCollectionsGetResource
+       :<|> RasterCollectionsCreateResource
+       :<|> RasterCollectionsCancelProcessingResource
+       :<|> RasterCollectionsDeleteResource
 
 mapEngineAPI :: Proxy MapEngineAPI
 mapEngineAPI = Proxy

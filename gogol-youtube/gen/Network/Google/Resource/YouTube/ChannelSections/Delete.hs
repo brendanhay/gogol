@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a channelSection.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsDelete@.
-module YouTube.ChannelSections.Delete
+module Network.Google.Resource.YouTube.ChannelSections.Delete
     (
     -- * REST Resource
-      ChannelSectionsDeleteAPI
+      ChannelSectionsDeleteResource
 
     -- * Creating a Request
-    , channelSectionsDelete
-    , ChannelSectionsDelete
+    , channelSectionsDelete'
+    , ChannelSectionsDelete'
 
     -- * Request Lenses
     , csdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelSectionsDelete@ which the
--- 'ChannelSectionsDelete' request conforms to.
-type ChannelSectionsDeleteAPI =
+-- 'ChannelSectionsDelete'' request conforms to.
+type ChannelSectionsDeleteResource =
      "channelSections" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a channelSection.
 --
--- /See:/ 'channelSectionsDelete' smart constructor.
-data ChannelSectionsDelete = ChannelSectionsDelete
+-- /See:/ 'channelSectionsDelete'' smart constructor.
+data ChannelSectionsDelete' = ChannelSectionsDelete'
     { _csdQuotaUser              :: !(Maybe Text)
     , _csdPrettyPrint            :: !Bool
     , _csdUserIp                 :: !(Maybe Text)
@@ -62,7 +70,7 @@ data ChannelSectionsDelete = ChannelSectionsDelete
     , _csdId                     :: !Text
     , _csdOauthToken             :: !(Maybe Text)
     , _csdFields                 :: !(Maybe Text)
-    , _csdAlt                    :: !Text
+    , _csdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsDelete'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data ChannelSectionsDelete = ChannelSectionsDelete
 -- * 'csdFields'
 --
 -- * 'csdAlt'
-channelSectionsDelete
+channelSectionsDelete'
     :: Text -- ^ 'id'
-    -> ChannelSectionsDelete
-channelSectionsDelete pCsdId_ =
-    ChannelSectionsDelete
+    -> ChannelSectionsDelete'
+channelSectionsDelete' pCsdId_ =
+    ChannelSectionsDelete'
     { _csdQuotaUser = Nothing
     , _csdPrettyPrint = True
     , _csdUserIp = Nothing
@@ -99,7 +107,7 @@ channelSectionsDelete pCsdId_ =
     , _csdId = pCsdId_
     , _csdOauthToken = Nothing
     , _csdFields = Nothing
-    , _csdAlt = "json"
+    , _csdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,22 +168,22 @@ csdFields
   = lens _csdFields (\ s a -> s{_csdFields = a})
 
 -- | Data format for the response.
-csdAlt :: Lens' ChannelSectionsDelete' Text
+csdAlt :: Lens' ChannelSectionsDelete' Alt
 csdAlt = lens _csdAlt (\ s a -> s{_csdAlt = a})
 
 instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsDelete{..}
-          = go _csdQuotaUser _csdPrettyPrint _csdUserIp
+        requestWithRoute r u ChannelSectionsDelete'{..}
+          = go _csdQuotaUser (Just _csdPrettyPrint) _csdUserIp
               _csdOnBehalfOfContentOwner
               _csdKey
               (Just _csdId)
               _csdOauthToken
               _csdFields
-              _csdAlt
+              (Just _csdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChannelSectionsDeleteAPI)
+                      (Proxy :: Proxy ChannelSectionsDeleteResource)
                       r
                       u

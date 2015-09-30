@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Detaches a disk from an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDetachDisk@.
-module Compute.Instances.DetachDisk
+module Network.Google.Resource.Compute.Instances.DetachDisk
     (
     -- * REST Resource
-      InstancesDetachDiskAPI
+      InstancesDetachDiskResource
 
     -- * Creating a Request
-    , instancesDetachDisk
-    , InstancesDetachDisk
+    , instancesDetachDisk'
+    , InstancesDetachDisk'
 
     -- * Request Lenses
     , iddQuotaUser
@@ -46,21 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesDetachDisk@ which the
--- 'InstancesDetachDisk' request conforms to.
-type InstancesDetachDiskAPI =
+-- 'InstancesDetachDisk'' request conforms to.
+type InstancesDetachDiskResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
                "detachDisk" :>
-                 QueryParam "deviceName" Text :>
-                   Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "deviceName" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Detaches a disk from an instance.
 --
--- /See:/ 'instancesDetachDisk' smart constructor.
-data InstancesDetachDisk = InstancesDetachDisk
+-- /See:/ 'instancesDetachDisk'' smart constructor.
+data InstancesDetachDisk' = InstancesDetachDisk'
     { _iddQuotaUser   :: !(Maybe Text)
     , _iddPrettyPrint :: !Bool
     , _iddProject     :: !Text
@@ -70,7 +77,7 @@ data InstancesDetachDisk = InstancesDetachDisk
     , _iddKey         :: !(Maybe Text)
     , _iddOauthToken  :: !(Maybe Text)
     , _iddFields      :: !(Maybe Text)
-    , _iddAlt         :: !Text
+    , _iddAlt         :: !Alt
     , _iddInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -99,14 +106,14 @@ data InstancesDetachDisk = InstancesDetachDisk
 -- * 'iddAlt'
 --
 -- * 'iddInstance'
-instancesDetachDisk
+instancesDetachDisk'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'deviceName'
     -> Text -- ^ 'instance'
-    -> InstancesDetachDisk
-instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
-    InstancesDetachDisk
+    -> InstancesDetachDisk'
+instancesDetachDisk' pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
+    InstancesDetachDisk'
     { _iddQuotaUser = Nothing
     , _iddPrettyPrint = True
     , _iddProject = pIddProject_
@@ -116,7 +123,7 @@ instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
     , _iddKey = Nothing
     , _iddOauthToken = Nothing
     , _iddFields = Nothing
-    , _iddAlt = "json"
+    , _iddAlt = JSON
     , _iddInstance = pIddInstance_
     }
 
@@ -172,7 +179,7 @@ iddFields
   = lens _iddFields (\ s a -> s{_iddFields = a})
 
 -- | Data format for the response.
-iddAlt :: Lens' InstancesDetachDisk' Text
+iddAlt :: Lens' InstancesDetachDisk' Alt
 iddAlt = lens _iddAlt (\ s a -> s{_iddAlt = a})
 
 -- | Instance name.
@@ -183,18 +190,18 @@ iddInstance
 instance GoogleRequest InstancesDetachDisk' where
         type Rs InstancesDetachDisk' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDetachDisk{..}
-          = go _iddQuotaUser _iddPrettyPrint _iddProject
+        requestWithRoute r u InstancesDetachDisk'{..}
+          = go _iddQuotaUser (Just _iddPrettyPrint) _iddProject
               _iddUserIp
               _iddZone
               (Just _iddDeviceName)
               _iddKey
               _iddOauthToken
               _iddFields
-              _iddAlt
+              (Just _iddAlt)
               _iddInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesDetachDiskAPI)
+                      (Proxy :: Proxy InstancesDetachDiskResource)
                       r
                       u

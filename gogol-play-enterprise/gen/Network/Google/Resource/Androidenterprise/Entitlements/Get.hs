@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,170 +20,172 @@
 -- | Retrieves details of an entitlement.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEntitlementsGet@.
-module Androidenterprise.Entitlements.Get
+module Network.Google.Resource.Androidenterprise.Entitlements.Get
     (
     -- * REST Resource
-      EntitlementsGetAPI
+      EntitlementsGetResource
 
     -- * Creating a Request
-    , entitlementsGet
-    , EntitlementsGet
+    , entitlementsGet'
+    , EntitlementsGet'
 
     -- * Request Lenses
-    , entEntitlementId
-    , entQuotaUser
-    , entPrettyPrint
-    , entEnterpriseId
-    , entUserIp
-    , entUserId
-    , entKey
-    , entOauthToken
-    , entFields
-    , entAlt
+    , eEntitlementId
+    , eQuotaUser
+    , ePrettyPrint
+    , eEnterpriseId
+    , eUserIp
+    , eUserId
+    , eKey
+    , eOauthToken
+    , eFields
+    , eAlt
     ) where
 
 import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEntitlementsGet@ which the
--- 'EntitlementsGet' request conforms to.
-type EntitlementsGetAPI =
+-- 'EntitlementsGet'' request conforms to.
+type EntitlementsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
              "entitlements" :>
                Capture "entitlementId" Text :>
-                 Get '[JSON] Entitlement
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Entitlement
 
 -- | Retrieves details of an entitlement.
 --
--- /See:/ 'entitlementsGet' smart constructor.
-data EntitlementsGet = EntitlementsGet
-    { _entEntitlementId :: !Text
-    , _entQuotaUser     :: !(Maybe Text)
-    , _entPrettyPrint   :: !Bool
-    , _entEnterpriseId  :: !Text
-    , _entUserIp        :: !(Maybe Text)
-    , _entUserId        :: !Text
-    , _entKey           :: !(Maybe Text)
-    , _entOauthToken    :: !(Maybe Text)
-    , _entFields        :: !(Maybe Text)
-    , _entAlt           :: !Text
+-- /See:/ 'entitlementsGet'' smart constructor.
+data EntitlementsGet' = EntitlementsGet'
+    { _eEntitlementId :: !Text
+    , _eQuotaUser     :: !(Maybe Text)
+    , _ePrettyPrint   :: !Bool
+    , _eEnterpriseId  :: !Text
+    , _eUserIp        :: !(Maybe Text)
+    , _eUserId        :: !Text
+    , _eKey           :: !(Maybe Text)
+    , _eOauthToken    :: !(Maybe Text)
+    , _eFields        :: !(Maybe Text)
+    , _eAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'entEntitlementId'
+-- * 'eEntitlementId'
 --
--- * 'entQuotaUser'
+-- * 'eQuotaUser'
 --
--- * 'entPrettyPrint'
+-- * 'ePrettyPrint'
 --
--- * 'entEnterpriseId'
+-- * 'eEnterpriseId'
 --
--- * 'entUserIp'
+-- * 'eUserIp'
 --
--- * 'entUserId'
+-- * 'eUserId'
 --
--- * 'entKey'
+-- * 'eKey'
 --
--- * 'entOauthToken'
+-- * 'eOauthToken'
 --
--- * 'entFields'
+-- * 'eFields'
 --
--- * 'entAlt'
-entitlementsGet
+-- * 'eAlt'
+entitlementsGet'
     :: Text -- ^ 'entitlementId'
     -> Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> EntitlementsGet
-entitlementsGet pEntEntitlementId_ pEntEnterpriseId_ pEntUserId_ =
-    EntitlementsGet
-    { _entEntitlementId = pEntEntitlementId_
-    , _entQuotaUser = Nothing
-    , _entPrettyPrint = True
-    , _entEnterpriseId = pEntEnterpriseId_
-    , _entUserIp = Nothing
-    , _entUserId = pEntUserId_
-    , _entKey = Nothing
-    , _entOauthToken = Nothing
-    , _entFields = Nothing
-    , _entAlt = "json"
+    -> EntitlementsGet'
+entitlementsGet' pEEntitlementId_ pEEnterpriseId_ pEUserId_ =
+    EntitlementsGet'
+    { _eEntitlementId = pEEntitlementId_
+    , _eQuotaUser = Nothing
+    , _ePrettyPrint = True
+    , _eEnterpriseId = pEEnterpriseId_
+    , _eUserIp = Nothing
+    , _eUserId = pEUserId_
+    , _eKey = Nothing
+    , _eOauthToken = Nothing
+    , _eFields = Nothing
+    , _eAlt = JSON
     }
 
 -- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
-entEntitlementId :: Lens' EntitlementsGet' Text
-entEntitlementId
-  = lens _entEntitlementId
-      (\ s a -> s{_entEntitlementId = a})
+eEntitlementId :: Lens' EntitlementsGet' Text
+eEntitlementId
+  = lens _eEntitlementId
+      (\ s a -> s{_eEntitlementId = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-entQuotaUser :: Lens' EntitlementsGet' (Maybe Text)
-entQuotaUser
-  = lens _entQuotaUser (\ s a -> s{_entQuotaUser = a})
+eQuotaUser :: Lens' EntitlementsGet' (Maybe Text)
+eQuotaUser
+  = lens _eQuotaUser (\ s a -> s{_eQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-entPrettyPrint :: Lens' EntitlementsGet' Bool
-entPrettyPrint
-  = lens _entPrettyPrint
-      (\ s a -> s{_entPrettyPrint = a})
+ePrettyPrint :: Lens' EntitlementsGet' Bool
+ePrettyPrint
+  = lens _ePrettyPrint (\ s a -> s{_ePrettyPrint = a})
 
 -- | The ID of the enterprise.
-entEnterpriseId :: Lens' EntitlementsGet' Text
-entEnterpriseId
-  = lens _entEnterpriseId
-      (\ s a -> s{_entEnterpriseId = a})
+eEnterpriseId :: Lens' EntitlementsGet' Text
+eEnterpriseId
+  = lens _eEnterpriseId
+      (\ s a -> s{_eEnterpriseId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-entUserIp :: Lens' EntitlementsGet' (Maybe Text)
-entUserIp
-  = lens _entUserIp (\ s a -> s{_entUserIp = a})
+eUserIp :: Lens' EntitlementsGet' (Maybe Text)
+eUserIp = lens _eUserIp (\ s a -> s{_eUserIp = a})
 
 -- | The ID of the user.
-entUserId :: Lens' EntitlementsGet' Text
-entUserId
-  = lens _entUserId (\ s a -> s{_entUserId = a})
+eUserId :: Lens' EntitlementsGet' Text
+eUserId = lens _eUserId (\ s a -> s{_eUserId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-entKey :: Lens' EntitlementsGet' (Maybe Text)
-entKey = lens _entKey (\ s a -> s{_entKey = a})
+eKey :: Lens' EntitlementsGet' (Maybe Text)
+eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 -- | OAuth 2.0 token for the current user.
-entOauthToken :: Lens' EntitlementsGet' (Maybe Text)
-entOauthToken
-  = lens _entOauthToken
-      (\ s a -> s{_entOauthToken = a})
+eOauthToken :: Lens' EntitlementsGet' (Maybe Text)
+eOauthToken
+  = lens _eOauthToken (\ s a -> s{_eOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-entFields :: Lens' EntitlementsGet' (Maybe Text)
-entFields
-  = lens _entFields (\ s a -> s{_entFields = a})
+eFields :: Lens' EntitlementsGet' (Maybe Text)
+eFields = lens _eFields (\ s a -> s{_eFields = a})
 
 -- | Data format for the response.
-entAlt :: Lens' EntitlementsGet' Text
-entAlt = lens _entAlt (\ s a -> s{_entAlt = a})
+eAlt :: Lens' EntitlementsGet' Alt
+eAlt = lens _eAlt (\ s a -> s{_eAlt = a})
 
 instance GoogleRequest EntitlementsGet' where
         type Rs EntitlementsGet' = Entitlement
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EntitlementsGet{..}
-          = go _entEntitlementId _entQuotaUser _entPrettyPrint
-              _entEnterpriseId
-              _entUserIp
-              _entUserId
-              _entKey
-              _entOauthToken
-              _entFields
-              _entAlt
+        requestWithRoute r u EntitlementsGet'{..}
+          = go _eEntitlementId _eQuotaUser (Just _ePrettyPrint)
+              _eEnterpriseId
+              _eUserIp
+              _eUserId
+              _eKey
+              _eOauthToken
+              _eFields
+              (Just _eAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EntitlementsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EntitlementsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,49 +24,59 @@
 -- same request; only one parameter may be set to \'ALL\'.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresGet@.
-module Games.Scores.Get
+module Network.Google.Resource.Games.Scores.Get
     (
     -- * REST Resource
-      ScoresGetAPI
+      ScoresGetResource
 
     -- * Creating a Request
-    , scoresGet
-    , ScoresGet
+    , scoresGet'
+    , ScoresGet'
 
     -- * Request Lenses
-    , scoQuotaUser
-    , scoPrettyPrint
-    , scoUserIp
-    , scoTimeSpan
-    , scoLeaderboardId
-    , scoKey
-    , scoIncludeRankType
-    , scoLanguage
-    , scoPageToken
-    , scoOauthToken
-    , scoPlayerId
-    , scoMaxResults
-    , scoFields
-    , scoAlt
+    , sgQuotaUser
+    , sgPrettyPrint
+    , sgUserIp
+    , sgTimeSpan
+    , sgLeaderboardId
+    , sgKey
+    , sgIncludeRankType
+    , sgLanguage
+    , sgPageToken
+    , sgOauthToken
+    , sgPlayerId
+    , sgMaxResults
+    , sgFields
+    , sgAlt
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesScoresGet@ which the
--- 'ScoresGet' request conforms to.
-type ScoresGetAPI =
+-- 'ScoresGet'' request conforms to.
+type ScoresGetResource =
      "players" :>
        Capture "playerId" Text :>
          "leaderboards" :>
            Capture "leaderboardId" Text :>
              "scores" :>
-               Capture "timeSpan" Text :>
-                 QueryParam "includeRankType" Text :>
-                   QueryParam "language" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] PlayerLeaderboardScoreListResponse
+               Capture "timeSpan" GamesScoresGetTimeSpan :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "includeRankType"
+                           GamesScoresGetIncludeRankType
+                           :>
+                           QueryParam "language" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON]
+                                         PlayerLeaderboardScoreListResponse
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently
 -- authenticated player. For a specific time span, leaderboardId can be set
@@ -73,177 +84,175 @@ type ScoresGetAPI =
 -- You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the
 -- same request; only one parameter may be set to \'ALL\'.
 --
--- /See:/ 'scoresGet' smart constructor.
-data ScoresGet = ScoresGet
-    { _scoQuotaUser       :: !(Maybe Text)
-    , _scoPrettyPrint     :: !Bool
-    , _scoUserIp          :: !(Maybe Text)
-    , _scoTimeSpan        :: !Text
-    , _scoLeaderboardId   :: !Text
-    , _scoKey             :: !(Maybe Text)
-    , _scoIncludeRankType :: !(Maybe Text)
-    , _scoLanguage        :: !(Maybe Text)
-    , _scoPageToken       :: !(Maybe Text)
-    , _scoOauthToken      :: !(Maybe Text)
-    , _scoPlayerId        :: !Text
-    , _scoMaxResults      :: !(Maybe Int32)
-    , _scoFields          :: !(Maybe Text)
-    , _scoAlt             :: !Text
+-- /See:/ 'scoresGet'' smart constructor.
+data ScoresGet' = ScoresGet'
+    { _sgQuotaUser       :: !(Maybe Text)
+    , _sgPrettyPrint     :: !Bool
+    , _sgUserIp          :: !(Maybe Text)
+    , _sgTimeSpan        :: !GamesScoresGetTimeSpan
+    , _sgLeaderboardId   :: !Text
+    , _sgKey             :: !(Maybe Text)
+    , _sgIncludeRankType :: !(Maybe GamesScoresGetIncludeRankType)
+    , _sgLanguage        :: !(Maybe Text)
+    , _sgPageToken       :: !(Maybe Text)
+    , _sgOauthToken      :: !(Maybe Text)
+    , _sgPlayerId        :: !Text
+    , _sgMaxResults      :: !(Maybe Int32)
+    , _sgFields          :: !(Maybe Text)
+    , _sgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scoQuotaUser'
+-- * 'sgQuotaUser'
 --
--- * 'scoPrettyPrint'
+-- * 'sgPrettyPrint'
 --
--- * 'scoUserIp'
+-- * 'sgUserIp'
 --
--- * 'scoTimeSpan'
+-- * 'sgTimeSpan'
 --
--- * 'scoLeaderboardId'
+-- * 'sgLeaderboardId'
 --
--- * 'scoKey'
+-- * 'sgKey'
 --
--- * 'scoIncludeRankType'
+-- * 'sgIncludeRankType'
 --
--- * 'scoLanguage'
+-- * 'sgLanguage'
 --
--- * 'scoPageToken'
+-- * 'sgPageToken'
 --
--- * 'scoOauthToken'
+-- * 'sgOauthToken'
 --
--- * 'scoPlayerId'
+-- * 'sgPlayerId'
 --
--- * 'scoMaxResults'
+-- * 'sgMaxResults'
 --
--- * 'scoFields'
+-- * 'sgFields'
 --
--- * 'scoAlt'
-scoresGet
-    :: Text -- ^ 'timeSpan'
+-- * 'sgAlt'
+scoresGet'
+    :: GamesScoresGetTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
     -> Text -- ^ 'playerId'
-    -> ScoresGet
-scoresGet pScoTimeSpan_ pScoLeaderboardId_ pScoPlayerId_ =
-    ScoresGet
-    { _scoQuotaUser = Nothing
-    , _scoPrettyPrint = True
-    , _scoUserIp = Nothing
-    , _scoTimeSpan = pScoTimeSpan_
-    , _scoLeaderboardId = pScoLeaderboardId_
-    , _scoKey = Nothing
-    , _scoIncludeRankType = Nothing
-    , _scoLanguage = Nothing
-    , _scoPageToken = Nothing
-    , _scoOauthToken = Nothing
-    , _scoPlayerId = pScoPlayerId_
-    , _scoMaxResults = Nothing
-    , _scoFields = Nothing
-    , _scoAlt = "json"
+    -> ScoresGet'
+scoresGet' pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
+    ScoresGet'
+    { _sgQuotaUser = Nothing
+    , _sgPrettyPrint = True
+    , _sgUserIp = Nothing
+    , _sgTimeSpan = pSgTimeSpan_
+    , _sgLeaderboardId = pSgLeaderboardId_
+    , _sgKey = Nothing
+    , _sgIncludeRankType = Nothing
+    , _sgLanguage = Nothing
+    , _sgPageToken = Nothing
+    , _sgOauthToken = Nothing
+    , _sgPlayerId = pSgPlayerId_
+    , _sgMaxResults = Nothing
+    , _sgFields = Nothing
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-scoQuotaUser :: Lens' ScoresGet' (Maybe Text)
-scoQuotaUser
-  = lens _scoQuotaUser (\ s a -> s{_scoQuotaUser = a})
+sgQuotaUser :: Lens' ScoresGet' (Maybe Text)
+sgQuotaUser
+  = lens _sgQuotaUser (\ s a -> s{_sgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-scoPrettyPrint :: Lens' ScoresGet' Bool
-scoPrettyPrint
-  = lens _scoPrettyPrint
-      (\ s a -> s{_scoPrettyPrint = a})
+sgPrettyPrint :: Lens' ScoresGet' Bool
+sgPrettyPrint
+  = lens _sgPrettyPrint
+      (\ s a -> s{_sgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-scoUserIp :: Lens' ScoresGet' (Maybe Text)
-scoUserIp
-  = lens _scoUserIp (\ s a -> s{_scoUserIp = a})
+sgUserIp :: Lens' ScoresGet' (Maybe Text)
+sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-scoTimeSpan :: Lens' ScoresGet' Text
-scoTimeSpan
-  = lens _scoTimeSpan (\ s a -> s{_scoTimeSpan = a})
+sgTimeSpan :: Lens' ScoresGet' GamesScoresGetTimeSpan
+sgTimeSpan
+  = lens _sgTimeSpan (\ s a -> s{_sgTimeSpan = a})
 
 -- | The ID of the leaderboard. Can be set to \'ALL\' to retrieve data for
 -- all leaderboards for this application.
-scoLeaderboardId :: Lens' ScoresGet' Text
-scoLeaderboardId
-  = lens _scoLeaderboardId
-      (\ s a -> s{_scoLeaderboardId = a})
+sgLeaderboardId :: Lens' ScoresGet' Text
+sgLeaderboardId
+  = lens _sgLeaderboardId
+      (\ s a -> s{_sgLeaderboardId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scoKey :: Lens' ScoresGet' (Maybe Text)
-scoKey = lens _scoKey (\ s a -> s{_scoKey = a})
+sgKey :: Lens' ScoresGet' (Maybe Text)
+sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | The types of ranks to return. If the parameter is omitted, no ranks will
 -- be returned.
-scoIncludeRankType :: Lens' ScoresGet' (Maybe Text)
-scoIncludeRankType
-  = lens _scoIncludeRankType
-      (\ s a -> s{_scoIncludeRankType = a})
+sgIncludeRankType :: Lens' ScoresGet' (Maybe GamesScoresGetIncludeRankType)
+sgIncludeRankType
+  = lens _sgIncludeRankType
+      (\ s a -> s{_sgIncludeRankType = a})
 
 -- | The preferred language to use for strings returned by this method.
-scoLanguage :: Lens' ScoresGet' (Maybe Text)
-scoLanguage
-  = lens _scoLanguage (\ s a -> s{_scoLanguage = a})
+sgLanguage :: Lens' ScoresGet' (Maybe Text)
+sgLanguage
+  = lens _sgLanguage (\ s a -> s{_sgLanguage = a})
 
 -- | The token returned by the previous request.
-scoPageToken :: Lens' ScoresGet' (Maybe Text)
-scoPageToken
-  = lens _scoPageToken (\ s a -> s{_scoPageToken = a})
+sgPageToken :: Lens' ScoresGet' (Maybe Text)
+sgPageToken
+  = lens _sgPageToken (\ s a -> s{_sgPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-scoOauthToken :: Lens' ScoresGet' (Maybe Text)
-scoOauthToken
-  = lens _scoOauthToken
-      (\ s a -> s{_scoOauthToken = a})
+sgOauthToken :: Lens' ScoresGet' (Maybe Text)
+sgOauthToken
+  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
-scoPlayerId :: Lens' ScoresGet' Text
-scoPlayerId
-  = lens _scoPlayerId (\ s a -> s{_scoPlayerId = a})
+sgPlayerId :: Lens' ScoresGet' Text
+sgPlayerId
+  = lens _sgPlayerId (\ s a -> s{_sgPlayerId = a})
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
 -- less than the specified maxResults.
-scoMaxResults :: Lens' ScoresGet' (Maybe Int32)
-scoMaxResults
-  = lens _scoMaxResults
-      (\ s a -> s{_scoMaxResults = a})
+sgMaxResults :: Lens' ScoresGet' (Maybe Int32)
+sgMaxResults
+  = lens _sgMaxResults (\ s a -> s{_sgMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-scoFields :: Lens' ScoresGet' (Maybe Text)
-scoFields
-  = lens _scoFields (\ s a -> s{_scoFields = a})
+sgFields :: Lens' ScoresGet' (Maybe Text)
+sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-scoAlt :: Lens' ScoresGet' Text
-scoAlt = lens _scoAlt (\ s a -> s{_scoAlt = a})
+sgAlt :: Lens' ScoresGet' Alt
+sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest ScoresGet' where
         type Rs ScoresGet' =
              PlayerLeaderboardScoreListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresGet{..}
-          = go _scoQuotaUser _scoPrettyPrint _scoUserIp
-              _scoTimeSpan
-              _scoLeaderboardId
-              _scoKey
-              _scoIncludeRankType
-              _scoLanguage
-              _scoPageToken
-              _scoOauthToken
-              _scoPlayerId
-              _scoMaxResults
-              _scoFields
-              _scoAlt
+        requestWithRoute r u ScoresGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
+              _sgTimeSpan
+              _sgLeaderboardId
+              _sgKey
+              _sgIncludeRankType
+              _sgLanguage
+              _sgPageToken
+              _sgOauthToken
+              _sgPlayerId
+              _sgMaxResults
+              _sgFields
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScoresGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ScoresGetResource)
+                      r
+                      u

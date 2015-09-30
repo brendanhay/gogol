@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves information about an application for the given application ID.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DatatransferApplicationsGet@.
-module Datatransfer.Applications.Get
+module Network.Google.Resource.Datatransfer.Applications.Get
     (
     -- * REST Resource
-      ApplicationsGetAPI
+      ApplicationsGetResource
 
     -- * Creating a Request
-    , applicationsGet
-    , ApplicationsGet
+    , applicationsGet'
+    , ApplicationsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatatransferApplicationsGet@ which the
--- 'ApplicationsGet' request conforms to.
-type ApplicationsGetAPI =
+-- 'ApplicationsGet'' request conforms to.
+type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Int64 :>
-         Get '[JSON] Application
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Application
 
 -- | Retrieves information about an application for the given application ID.
 --
--- /See:/ 'applicationsGet' smart constructor.
-data ApplicationsGet = ApplicationsGet
+-- /See:/ 'applicationsGet'' smart constructor.
+data ApplicationsGet' = ApplicationsGet'
     { _agQuotaUser     :: !(Maybe Text)
     , _agPrettyPrint   :: !Bool
     , _agUserIp        :: !(Maybe Text)
@@ -60,7 +67,7 @@ data ApplicationsGet = ApplicationsGet
     , _agKey           :: !(Maybe Text)
     , _agOauthToken    :: !(Maybe Text)
     , _agFields        :: !(Maybe Text)
-    , _agAlt           :: !Text
+    , _agAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data ApplicationsGet = ApplicationsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-applicationsGet
+applicationsGet'
     :: Int64 -- ^ 'applicationId'
-    -> ApplicationsGet
-applicationsGet pAgApplicationId_ =
-    ApplicationsGet
+    -> ApplicationsGet'
+applicationsGet' pAgApplicationId_ =
+    ApplicationsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -94,7 +101,7 @@ applicationsGet pAgApplicationId_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +144,22 @@ agFields :: Lens' ApplicationsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' ApplicationsGet' Text
+agAlt :: Lens' ApplicationsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         request
           = requestWithRoute defReq adminDataTransferURL
-        requestWithRoute r u ApplicationsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u ApplicationsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agApplicationId
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ApplicationsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ApplicationsGetResource)
                       r
                       u

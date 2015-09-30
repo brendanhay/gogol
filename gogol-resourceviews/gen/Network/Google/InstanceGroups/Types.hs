@@ -17,6 +17,22 @@ module Network.Google.InstanceGroups.Types
     -- * Service URL
       instanceGroupsURL
 
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- * ResourceviewsZoneViewsListResourcesFormat
+    , ResourceviewsZoneViewsListResourcesFormat (..)
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
+
     -- * ResourceView
     , ResourceView
     , resourceView
@@ -89,6 +105,10 @@ module Network.Google.InstanceGroups.Types
     , seName
     , sePort
 
+    -- * ListResourceResponseItemEndpoints
+    , ListResourceResponseItemEndpoints
+    , listResourceResponseItemEndpoints
+
     -- * ZoneViewsRemoveResourcesRequest
     , ZoneViewsRemoveResourcesRequest
     , zoneViewsRemoveResourcesRequest
@@ -98,6 +118,14 @@ module Network.Google.InstanceGroups.Types
     , ZoneViewsAddResourcesRequest
     , zoneViewsAddResourcesRequest
     , zvarrResources
+
+    -- * ResourceviewsZoneViewsListResourcesListState
+    , ResourceviewsZoneViewsListResourcesListState (..)
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * ZoneViewsGetServiceResponse
     , ZoneViewsGetServiceResponse
@@ -117,12 +145,22 @@ module Network.Google.InstanceGroups.Types
     , lValue
     , lKey
 
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- * ZoneViewsSetServiceRequest
     , ZoneViewsSetServiceRequest
     , zoneViewsSetServiceRequest
     , zvssrResourceName
     , zvssrFingerprint
     , zvssrEndpoints
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.InstanceGroups.Types.Product
@@ -130,7 +168,7 @@ import           Network.Google.InstanceGroups.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the Google Compute Engine Instance Groups API.
-instanceGroupsURL :: BaseURL
+instanceGroupsURL :: BaseUrl
 instanceGroupsURL
   = BaseUrl Https
       "https://www.googleapis.com/resourceviews/v1beta2/projects/"

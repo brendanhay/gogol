@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return metadata for a particular asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineAssetsGet@.
-module Mapsengine.Assets.Get
+module Network.Google.Resource.Mapsengine.Assets.Get
     (
     -- * REST Resource
-      AssetsGetAPI
+      AssetsGetResource
 
     -- * Creating a Request
-    , assetsGet
-    , AssetsGet
+    , assetsGet'
+    , AssetsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineAssetsGet@ which the
--- 'AssetsGet' request conforms to.
-type AssetsGetAPI =
-     "assets" :> Capture "id" Text :> Get '[JSON] Asset
+-- 'AssetsGet'' request conforms to.
+type AssetsGetResource =
+     "assets" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Asset
 
 -- | Return metadata for a particular asset.
 --
--- /See:/ 'assetsGet' smart constructor.
-data AssetsGet = AssetsGet
+-- /See:/ 'assetsGet'' smart constructor.
+data AssetsGet' = AssetsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data AssetsGet = AssetsGet
     , _agId          :: !Text
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsGet'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data AssetsGet = AssetsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-assetsGet
+assetsGet'
     :: Text -- ^ 'id'
-    -> AssetsGet
-assetsGet pAgId_ =
-    AssetsGet
+    -> AssetsGet'
+assetsGet' pAgId_ =
+    AssetsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -92,7 +101,7 @@ assetsGet pAgId_ =
     , _agId = pAgId_
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +142,20 @@ agFields :: Lens' AssetsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AssetsGet' Text
+agAlt :: Lens' AssetsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AssetsGet' where
         type Rs AssetsGet' = Asset
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u AssetsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp _agKey
+        requestWithRoute r u AssetsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+              _agKey
               _agId
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AssetsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AssetsGetResource)
+                      r
+                      u

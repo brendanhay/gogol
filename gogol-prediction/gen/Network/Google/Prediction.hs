@@ -28,30 +28,44 @@ module Network.Google.Prediction
     -- * REST Resources
 
     -- ** PredictionHostedmodelsPredict
-    , module Prediction.Hostedmodels.Predict
+    , module Network.Google.Resource.Prediction.Hostedmodels.Predict
 
     -- ** PredictionTrainedmodelsAnalyze
-    , module Prediction.Trainedmodels.Analyze
+    , module Network.Google.Resource.Prediction.Trainedmodels.Analyze
 
     -- ** PredictionTrainedmodelsDelete
-    , module Prediction.Trainedmodels.Delete
+    , module Network.Google.Resource.Prediction.Trainedmodels.Delete
 
     -- ** PredictionTrainedmodelsGet
-    , module Prediction.Trainedmodels.Get
+    , module Network.Google.Resource.Prediction.Trainedmodels.Get
 
     -- ** PredictionTrainedmodelsInsert
-    , module Prediction.Trainedmodels.Insert
+    , module Network.Google.Resource.Prediction.Trainedmodels.Insert
 
     -- ** PredictionTrainedmodelsList
-    , module Prediction.Trainedmodels.List
+    , module Network.Google.Resource.Prediction.Trainedmodels.List
 
     -- ** PredictionTrainedmodelsPredict
-    , module Prediction.Trainedmodels.Predict
+    , module Network.Google.Resource.Prediction.Trainedmodels.Predict
 
     -- ** PredictionTrainedmodelsUpdate
-    , module Prediction.Trainedmodels.Update
+    , module Network.Google.Resource.Prediction.Trainedmodels.Update
 
     -- * Types
+
+    -- ** Insert2ModelInfo
+    , Insert2ModelInfo
+    , insert2ModelInfo
+    , imiModelType
+    , imiClassWeightedAccuracy
+    , imiClassificationAccuracy
+    , imiMeanSquaredError
+    , imiNumberLabels
+    , imiNumberInstances
+
+    -- ** AnalyzeModelDescriptionConfusionMatrixRowTotals
+    , AnalyzeModelDescriptionConfusionMatrixRowTotals
+    , analyzeModelDescriptionConfusionMatrixRowTotals
 
     -- ** Insert
     , Insert
@@ -64,6 +78,10 @@ module Network.Google.Prediction
     , iSourceModel
     , iId
     , iStoragePMMLLocation
+
+    -- ** AnalyzeErrors
+    , AnalyzeErrors
+    , analyzeErrors
 
     -- ** List
     , List
@@ -88,10 +106,44 @@ module Network.Google.Prediction
     , insStoragePMMLLocation
     , insModelInfo
 
+    -- ** AnalyzeDataDescriptionFeatures
+    , AnalyzeDataDescriptionFeatures
+    , analyzeDataDescriptionFeatures
+    , addfText
+    , addfNumeric
+    , addfIndex
+    , addfCategorical
+
+    -- ** AnalyzeDataDescriptionFeaturesText
+    , AnalyzeDataDescriptionFeaturesText
+    , analyzeDataDescriptionFeaturesText
+    , addftCount
+
+    -- ** InputInput
+    , InputInput
+    , inputInput
+    , iiCsvInstance
+
     -- ** Input
     , Input
     , input
     , iInput
+
+    -- ** OutputOutputMulti
+    , OutputOutputMulti
+    , outputOutputMulti
+    , oomScore
+    , oomLabel
+
+    -- ** AnalyzeModelDescriptionConfusionMatrix
+    , AnalyzeModelDescriptionConfusionMatrix
+    , analyzeModelDescriptionConfusionMatrix
+
+    -- ** AnalyzeDataDescriptionOutputFeatureText
+    , AnalyzeDataDescriptionOutputFeatureText
+    , analyzeDataDescriptionOutputFeatureText
+    , addoftValue
+    , addoftCount
 
     -- ** Analyze
     , Analyze
@@ -113,11 +165,69 @@ module Network.Google.Prediction
     , oId
     , oOutputMulti
 
+    -- ** InsertUtility
+    , InsertUtility
+    , insertUtility
+
+    -- ** AnalyzeDataDescription
+    , AnalyzeDataDescription
+    , analyzeDataDescription
+    , addOutputFeature
+    , addFeatures
+
+    -- ** AnalyzeDataDescriptionOutputFeatureNumeric
+    , AnalyzeDataDescriptionOutputFeatureNumeric
+    , analyzeDataDescriptionOutputFeatureNumeric
+    , addofnMean
+    , addofnCount
+    , addofnVariance
+
+    -- ** AnalyzeModelDescription
+    , AnalyzeModelDescription
+    , analyzeModelDescription
+    , amdConfusionMatrixRowTotals
+    , amdConfusionMatrix
+    , amdModelinfo
+
+    -- ** InsertTrainingInstances
+    , InsertTrainingInstances
+    , insertTrainingInstances
+    , itiCsvInstance
+    , itiOutput
+
+    -- ** AnalyzeDataDescriptionFeaturesCategoricalValues
+    , AnalyzeDataDescriptionFeaturesCategoricalValues
+    , analyzeDataDescriptionFeaturesCategoricalValues
+    , addfcvValue
+    , addfcvCount
+
+    -- ** AnalyzeDataDescriptionFeaturesCategorical
+    , AnalyzeDataDescriptionFeaturesCategorical
+    , analyzeDataDescriptionFeaturesCategorical
+    , addfcValues
+    , addfcCount
+
+    -- ** AnalyzeDataDescriptionFeaturesNumeric
+    , AnalyzeDataDescriptionFeaturesNumeric
+    , analyzeDataDescriptionFeaturesNumeric
+    , addfnMean
+    , addfnCount
+    , addfnVariance
+
     -- ** Update
     , Update
     , update
     , uCsvInstance
     , uOutput
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** AnalyzeDataDescriptionOutputFeature
+    , AnalyzeDataDescriptionOutputFeature
+    , analyzeDataDescriptionOutputFeature
+    , addofText
+    , addofNumeric
     ) where
 
 import           Network.Google.Prediction.Types
@@ -135,7 +245,15 @@ import           Network.Google.Resource.Prediction.Trainedmodels.Update
 TODO
 -}
 
-type PredictionAPI = Trainedmodels :<|> Hostedmodels
+type PredictionAPI =
+     TrainedmodelsInsertResource :<|>
+       TrainedmodelsListResource
+       :<|> TrainedmodelsGetResource
+       :<|> TrainedmodelsAnalyzeResource
+       :<|> TrainedmodelsPredictResource
+       :<|> TrainedmodelsDeleteResource
+       :<|> TrainedmodelsUpdateResource
+       :<|> HostedmodelsPredictResource
 
 predictionAPI :: Proxy PredictionAPI
 predictionAPI = Proxy

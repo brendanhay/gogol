@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- will be stripped of positional information (referenceName and position)
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsImport@.
-module Genomics.Readgroupsets.Import
+module Network.Google.Resource.Genomics.Readgroupsets.Import
     (
     -- * REST Resource
-      ReadgroupsetsImportAPI
+      ReadgroupsetsImportResource
 
     -- * Creating a Request
-    , readgroupsetsImport
-    , ReadgroupsetsImport
+    , readgroupsetsImport'
+    , ReadgroupsetsImport'
 
     -- * Request Lenses
     , riQuotaUser
@@ -49,10 +50,18 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsImport@ which the
--- 'ReadgroupsetsImport' request conforms to.
-type ReadgroupsetsImportAPI =
+-- 'ReadgroupsetsImport'' request conforms to.
+type ReadgroupsetsImportResource =
      "readgroupsets" :>
-       "import" :> Post '[JSON] ImportReadGroupSetsResponse
+       "import" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] ImportReadGroupSetsResponse
 
 -- | Creates read group sets by asynchronously importing the provided
 -- information. The caller must have WRITE permissions to the dataset.
@@ -63,15 +72,15 @@ type ReadgroupsetsImportAPI =
 -- qualities (and \"BQ\" tag, if any) will be reversed - Unmapped reads
 -- will be stripped of positional information (referenceName and position)
 --
--- /See:/ 'readgroupsetsImport' smart constructor.
-data ReadgroupsetsImport = ReadgroupsetsImport
+-- /See:/ 'readgroupsetsImport'' smart constructor.
+data ReadgroupsetsImport' = ReadgroupsetsImport'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riUserIp      :: !(Maybe Text)
     , _riKey         :: !(Maybe Text)
     , _riOauthToken  :: !(Maybe Text)
     , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Text
+    , _riAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsImport'' with the minimum fields required to make a request.
@@ -91,17 +100,17 @@ data ReadgroupsetsImport = ReadgroupsetsImport
 -- * 'riFields'
 --
 -- * 'riAlt'
-readgroupsetsImport
-    :: ReadgroupsetsImport
-readgroupsetsImport =
-    ReadgroupsetsImport
+readgroupsetsImport'
+    :: ReadgroupsetsImport'
+readgroupsetsImport' =
+    ReadgroupsetsImport'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riUserIp = Nothing
     , _riKey = Nothing
     , _riOauthToken = Nothing
     , _riFields = Nothing
-    , _riAlt = "json"
+    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +147,21 @@ riFields :: Lens' ReadgroupsetsImport' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 -- | Data format for the response.
-riAlt :: Lens' ReadgroupsetsImport' Text
+riAlt :: Lens' ReadgroupsetsImport' Alt
 riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
 
 instance GoogleRequest ReadgroupsetsImport' where
         type Rs ReadgroupsetsImport' =
              ImportReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsImport{..}
-          = go _riQuotaUser _riPrettyPrint _riUserIp _riKey
+        requestWithRoute r u ReadgroupsetsImport'{..}
+          = go _riQuotaUser (Just _riPrettyPrint) _riUserIp
+              _riKey
               _riOauthToken
               _riFields
-              _riAlt
+              (Just _riAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsImportAPI)
+                      (Proxy :: Proxy ReadgroupsetsImportResource)
                       r
                       u

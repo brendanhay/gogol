@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists log service sinks associated with a log service.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogServicesSinksList@.
-module Logging.Projects.LogServices.Sinks.List
+module Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
     (
     -- * REST Resource
-      ProjectsLogServicesSinksListAPI
+      ProjectsLogServicesSinksListResource
 
     -- * Creating a Request
-    , projectsLogServicesSinksList
-    , ProjectsLogServicesSinksList
+    , projectsLogServicesSinksList'
+    , ProjectsLogServicesSinksList'
 
     -- * Request Lenses
     , plsslXgafv
@@ -50,19 +51,34 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesSinksList@ which the
--- 'ProjectsLogServicesSinksList' request conforms to.
-type ProjectsLogServicesSinksListAPI =
+-- 'ProjectsLogServicesSinksList'' request conforms to.
+type ProjectsLogServicesSinksListResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logServices" :>
              Capture "logServicesId" Text :>
-               "sinks" :> Get '[JSON] ListLogServiceSinksResponse
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON]
+                                             ListLogServiceSinksResponse
 
 -- | Lists log service sinks associated with a log service.
 --
--- /See:/ 'projectsLogServicesSinksList' smart constructor.
-data ProjectsLogServicesSinksList = ProjectsLogServicesSinksList
+-- /See:/ 'projectsLogServicesSinksList'' smart constructor.
+data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
     { _plsslXgafv          :: !(Maybe Text)
     , _plsslQuotaUser      :: !(Maybe Text)
     , _plsslPrettyPrint    :: !Bool
@@ -113,12 +129,12 @@ data ProjectsLogServicesSinksList = ProjectsLogServicesSinksList
 -- * 'plsslCallback'
 --
 -- * 'plsslAlt'
-projectsLogServicesSinksList
+projectsLogServicesSinksList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogServicesSinksList
-projectsLogServicesSinksList pPlsslLogServicesId_ pPlsslProjectsId_ =
-    ProjectsLogServicesSinksList
+    -> ProjectsLogServicesSinksList'
+projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ =
+    ProjectsLogServicesSinksList'
     { _plsslXgafv = Nothing
     , _plsslQuotaUser = Nothing
     , _plsslPrettyPrint = True
@@ -227,10 +243,12 @@ instance GoogleRequest ProjectsLogServicesSinksList'
         type Rs ProjectsLogServicesSinksList' =
              ListLogServiceSinksResponse
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogServicesSinksList{..}
-          = go _plsslXgafv _plsslQuotaUser _plsslPrettyPrint
+        requestWithRoute r u
+          ProjectsLogServicesSinksList'{..}
+          = go _plsslXgafv _plsslQuotaUser
+              (Just _plsslPrettyPrint)
               _plsslUploadProtocol
-              _plsslPp
+              (Just _plsslPp)
               _plsslAccessToken
               _plsslUploadType
               _plsslBearerToken
@@ -240,9 +258,9 @@ instance GoogleRequest ProjectsLogServicesSinksList'
               _plsslProjectsId
               _plsslFields
               _plsslCallback
-              _plsslAlt
+              (Just _plsslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogServicesSinksListAPI)
+                      (Proxy :: Proxy ProjectsLogServicesSinksListResource)
                       r
                       u

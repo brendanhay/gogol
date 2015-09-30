@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudbillingBillingAccountsProjectsList@.
-module Cloudbilling.BillingAccounts.Projects.List
+module Network.Google.Resource.Cloudbilling.BillingAccounts.Projects.List
     (
     -- * REST Resource
-      BillingAccountsProjectsListAPI
+      BillingAccountsProjectsListResource
 
     -- * Creating a Request
-    , billingAccountsProjectsList
-    , BillingAccountsProjectsList
+    , billingAccountsProjectsList'
+    , BillingAccountsProjectsList'
 
     -- * Request Lenses
     , baplXgafv
@@ -53,21 +54,35 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudbillingBillingAccountsProjectsList@ which the
--- 'BillingAccountsProjectsList' request conforms to.
-type BillingAccountsProjectsListAPI =
+-- 'BillingAccountsProjectsList'' request conforms to.
+type BillingAccountsProjectsListResource =
      "v1" :>
        "{+name}" :>
          "projects" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListProjectBillingInfoResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           ListProjectBillingInfoResponse
 
 -- | Lists the projects associated with a billing account. The current
 -- authenticated user must be an [owner of the billing
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ 'billingAccountsProjectsList' smart constructor.
-data BillingAccountsProjectsList = BillingAccountsProjectsList
+-- /See:/ 'billingAccountsProjectsList'' smart constructor.
+data BillingAccountsProjectsList' = BillingAccountsProjectsList'
     { _baplXgafv          :: !(Maybe Text)
     , _baplQuotaUser      :: !(Maybe Text)
     , _baplPrettyPrint    :: !Bool
@@ -121,11 +136,11 @@ data BillingAccountsProjectsList = BillingAccountsProjectsList
 -- * 'baplCallback'
 --
 -- * 'baplAlt'
-billingAccountsProjectsList
+billingAccountsProjectsList'
     :: Text -- ^ 'name'
-    -> BillingAccountsProjectsList
-billingAccountsProjectsList pBaplName_ =
-    BillingAccountsProjectsList
+    -> BillingAccountsProjectsList'
+billingAccountsProjectsList' pBaplName_ =
+    BillingAccountsProjectsList'
     { _baplXgafv = Nothing
     , _baplQuotaUser = Nothing
     , _baplPrettyPrint = True
@@ -243,10 +258,11 @@ instance GoogleRequest BillingAccountsProjectsList'
         type Rs BillingAccountsProjectsList' =
              ListProjectBillingInfoResponse
         request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsProjectsList{..}
-          = go _baplXgafv _baplQuotaUser _baplPrettyPrint
+        requestWithRoute r u BillingAccountsProjectsList'{..}
+          = go _baplXgafv _baplQuotaUser
+              (Just _baplPrettyPrint)
               _baplUploadProtocol
-              _baplPp
+              (Just _baplPp)
               _baplAccessToken
               _baplUploadType
               _baplBearerToken
@@ -257,9 +273,9 @@ instance GoogleRequest BillingAccountsProjectsList'
               _baplPageSize
               _baplFields
               _baplCallback
-              _baplAlt
+              (Just _baplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BillingAccountsProjectsListAPI)
+                      (Proxy :: Proxy BillingAccountsProjectsListResource)
                       r
                       u

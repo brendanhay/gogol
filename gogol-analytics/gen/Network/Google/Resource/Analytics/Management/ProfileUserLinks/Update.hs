@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates permissions for an existing user on the given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileUserLinksUpdate@.
-module Analytics.Management.ProfileUserLinks.Update
+module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Update
     (
     -- * REST Resource
-      ManagementProfileUserLinksUpdateAPI
+      ManagementProfileUserLinksUpdateResource
 
     -- * Creating a Request
-    , managementProfileUserLinksUpdate
-    , ManagementProfileUserLinksUpdate
+    , managementProfileUserLinksUpdate'
+    , ManagementProfileUserLinksUpdate'
 
     -- * Request Lenses
     , mpuluQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileUserLinksUpdate@ which the
--- 'ManagementProfileUserLinksUpdate' request conforms to.
-type ManagementProfileUserLinksUpdateAPI =
+-- 'ManagementProfileUserLinksUpdate'' request conforms to.
+type ManagementProfileUserLinksUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,20 @@ type ManagementProfileUserLinksUpdateAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "entityUserLinks" :>
-                     Capture "linkId" Text :> Put '[JSON] EntityUserLink
+                     Capture "linkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given view (profile).
 --
--- /See:/ 'managementProfileUserLinksUpdate' smart constructor.
-data ManagementProfileUserLinksUpdate = ManagementProfileUserLinksUpdate
+-- /See:/ 'managementProfileUserLinksUpdate'' smart constructor.
+data ManagementProfileUserLinksUpdate' = ManagementProfileUserLinksUpdate'
     { _mpuluQuotaUser     :: !(Maybe Text)
     , _mpuluPrettyPrint   :: !Bool
     , _mpuluWebPropertyId :: !Text
@@ -72,7 +81,7 @@ data ManagementProfileUserLinksUpdate = ManagementProfileUserLinksUpdate
     , _mpuluLinkId        :: !Text
     , _mpuluOauthToken    :: !(Maybe Text)
     , _mpuluFields        :: !(Maybe Text)
-    , _mpuluAlt           :: !Text
+    , _mpuluAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksUpdate'' with the minimum fields required to make a request.
@@ -100,14 +109,14 @@ data ManagementProfileUserLinksUpdate = ManagementProfileUserLinksUpdate
 -- * 'mpuluFields'
 --
 -- * 'mpuluAlt'
-managementProfileUserLinksUpdate
+managementProfileUserLinksUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementProfileUserLinksUpdate
-managementProfileUserLinksUpdate pMpuluWebPropertyId_ pMpuluProfileId_ pMpuluAccountId_ pMpuluLinkId_ =
-    ManagementProfileUserLinksUpdate
+    -> ManagementProfileUserLinksUpdate'
+managementProfileUserLinksUpdate' pMpuluWebPropertyId_ pMpuluProfileId_ pMpuluAccountId_ pMpuluLinkId_ =
+    ManagementProfileUserLinksUpdate'
     { _mpuluQuotaUser = Nothing
     , _mpuluPrettyPrint = False
     , _mpuluWebPropertyId = pMpuluWebPropertyId_
@@ -118,7 +127,7 @@ managementProfileUserLinksUpdate pMpuluWebPropertyId_ pMpuluProfileId_ pMpuluAcc
     , _mpuluLinkId = pMpuluLinkId_
     , _mpuluOauthToken = Nothing
     , _mpuluFields = Nothing
-    , _mpuluAlt = "json"
+    , _mpuluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +191,7 @@ mpuluFields
   = lens _mpuluFields (\ s a -> s{_mpuluFields = a})
 
 -- | Data format for the response.
-mpuluAlt :: Lens' ManagementProfileUserLinksUpdate' Text
+mpuluAlt :: Lens' ManagementProfileUserLinksUpdate' Alt
 mpuluAlt = lens _mpuluAlt (\ s a -> s{_mpuluAlt = a})
 
 instance GoogleRequest
@@ -191,8 +200,8 @@ instance GoogleRequest
              EntityUserLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileUserLinksUpdate{..}
-          = go _mpuluQuotaUser _mpuluPrettyPrint
+          ManagementProfileUserLinksUpdate'{..}
+          = go _mpuluQuotaUser (Just _mpuluPrettyPrint)
               _mpuluWebPropertyId
               _mpuluUserIp
               _mpuluProfileId
@@ -201,9 +210,10 @@ instance GoogleRequest
               _mpuluLinkId
               _mpuluOauthToken
               _mpuluFields
-              _mpuluAlt
+              (Just _mpuluAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileUserLinksUpdateAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileUserLinksUpdateResource)
                       r
                       u

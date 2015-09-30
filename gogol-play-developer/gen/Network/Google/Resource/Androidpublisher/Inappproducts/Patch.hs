@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsPatch@.
-module Androidpublisher.Inappproducts.Patch
+module Network.Google.Resource.Androidpublisher.Inappproducts.Patch
     (
     -- * REST Resource
-      InappproductsPatchAPI
+      InappproductsPatchResource
 
     -- * Creating a Request
-    , inappproductsPatch
-    , InappproductsPatch
+    , inappproductsPatch'
+    , InappproductsPatch'
 
     -- * Request Lenses
     , ipQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsPatch@ which the
--- 'InappproductsPatch' request conforms to.
-type InappproductsPatchAPI =
+-- 'InappproductsPatch'' request conforms to.
+type InappproductsPatchResource =
      Capture "packageName" Text :>
        "inappproducts" :>
          Capture "sku" Text :>
-           QueryParam "autoConvertMissingPrices" Bool :>
-             Patch '[JSON] InAppProduct
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "autoConvertMissingPrices" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] InAppProduct
 
 -- | Updates the details of an in-app product. This method supports patch
 -- semantics.
 --
--- /See:/ 'inappproductsPatch' smart constructor.
-data InappproductsPatch = InappproductsPatch
+-- /See:/ 'inappproductsPatch'' smart constructor.
+data InappproductsPatch' = InappproductsPatch'
     { _ipQuotaUser                :: !(Maybe Text)
     , _ipPrettyPrint              :: !Bool
     , _ipAutoConvertMissingPrices :: !(Maybe Bool)
@@ -68,7 +75,7 @@ data InappproductsPatch = InappproductsPatch
     , _ipSku                      :: !Text
     , _ipOauthToken               :: !(Maybe Text)
     , _ipFields                   :: !(Maybe Text)
-    , _ipAlt                      :: !Text
+    , _ipAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsPatch'' with the minimum fields required to make a request.
@@ -94,12 +101,12 @@ data InappproductsPatch = InappproductsPatch
 -- * 'ipFields'
 --
 -- * 'ipAlt'
-inappproductsPatch
+inappproductsPatch'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
-    -> InappproductsPatch
-inappproductsPatch pIpPackageName_ pIpSku_ =
-    InappproductsPatch
+    -> InappproductsPatch'
+inappproductsPatch' pIpPackageName_ pIpSku_ =
+    InappproductsPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipAutoConvertMissingPrices = Nothing
@@ -109,7 +116,7 @@ inappproductsPatch pIpPackageName_ pIpSku_ =
     , _ipSku = pIpSku_
     , _ipOauthToken = Nothing
     , _ipFields = Nothing
-    , _ipAlt = "json"
+    , _ipAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,14 +173,14 @@ ipFields :: Lens' InappproductsPatch' (Maybe Text)
 ipFields = lens _ipFields (\ s a -> s{_ipFields = a})
 
 -- | Data format for the response.
-ipAlt :: Lens' InappproductsPatch' Text
+ipAlt :: Lens' InappproductsPatch' Alt
 ipAlt = lens _ipAlt (\ s a -> s{_ipAlt = a})
 
 instance GoogleRequest InappproductsPatch' where
         type Rs InappproductsPatch' = InAppProduct
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsPatch{..}
-          = go _ipQuotaUser _ipPrettyPrint
+        requestWithRoute r u InappproductsPatch'{..}
+          = go _ipQuotaUser (Just _ipPrettyPrint)
               _ipAutoConvertMissingPrices
               _ipPackageName
               _ipUserIp
@@ -181,9 +188,9 @@ instance GoogleRequest InappproductsPatch' where
               _ipSku
               _ipOauthToken
               _ipFields
-              _ipAlt
+              (Just _ipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsPatchAPI)
+                      (Proxy :: Proxy InappproductsPatchResource)
                       r
                       u

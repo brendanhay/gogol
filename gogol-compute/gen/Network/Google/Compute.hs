@@ -27,526 +27,526 @@ module Network.Google.Compute
     -- * REST Resources
 
     -- ** ComputeAddressesAggregatedList
-    , module Compute.Addresses.AggregatedList
+    , module Network.Google.Resource.Compute.Addresses.AggregatedList
 
     -- ** ComputeAddressesDelete
-    , module Compute.Addresses.Delete
+    , module Network.Google.Resource.Compute.Addresses.Delete
 
     -- ** ComputeAddressesGet
-    , module Compute.Addresses.Get
+    , module Network.Google.Resource.Compute.Addresses.Get
 
     -- ** ComputeAddressesInsert
-    , module Compute.Addresses.Insert
+    , module Network.Google.Resource.Compute.Addresses.Insert
 
     -- ** ComputeAddressesList
-    , module Compute.Addresses.List
+    , module Network.Google.Resource.Compute.Addresses.List
 
     -- ** ComputeAutoscalersAggregatedList
-    , module Compute.Autoscalers.AggregatedList
+    , module Network.Google.Resource.Compute.Autoscalers.AggregatedList
 
     -- ** ComputeAutoscalersDelete
-    , module Compute.Autoscalers.Delete
+    , module Network.Google.Resource.Compute.Autoscalers.Delete
 
     -- ** ComputeAutoscalersGet
-    , module Compute.Autoscalers.Get
+    , module Network.Google.Resource.Compute.Autoscalers.Get
 
     -- ** ComputeAutoscalersInsert
-    , module Compute.Autoscalers.Insert
+    , module Network.Google.Resource.Compute.Autoscalers.Insert
 
     -- ** ComputeAutoscalersList
-    , module Compute.Autoscalers.List
+    , module Network.Google.Resource.Compute.Autoscalers.List
 
     -- ** ComputeAutoscalersPatch
-    , module Compute.Autoscalers.Patch
+    , module Network.Google.Resource.Compute.Autoscalers.Patch
 
     -- ** ComputeAutoscalersUpdate
-    , module Compute.Autoscalers.Update
+    , module Network.Google.Resource.Compute.Autoscalers.Update
 
     -- ** ComputeBackendServicesDelete
-    , module Compute.BackendServices.Delete
+    , module Network.Google.Resource.Compute.BackendServices.Delete
 
     -- ** ComputeBackendServicesGet
-    , module Compute.BackendServices.Get
+    , module Network.Google.Resource.Compute.BackendServices.Get
 
     -- ** ComputeBackendServicesGetHealth
-    , module Compute.BackendServices.GetHealth
+    , module Network.Google.Resource.Compute.BackendServices.GetHealth
 
     -- ** ComputeBackendServicesInsert
-    , module Compute.BackendServices.Insert
+    , module Network.Google.Resource.Compute.BackendServices.Insert
 
     -- ** ComputeBackendServicesList
-    , module Compute.BackendServices.List
+    , module Network.Google.Resource.Compute.BackendServices.List
 
     -- ** ComputeBackendServicesPatch
-    , module Compute.BackendServices.Patch
+    , module Network.Google.Resource.Compute.BackendServices.Patch
 
     -- ** ComputeBackendServicesUpdate
-    , module Compute.BackendServices.Update
+    , module Network.Google.Resource.Compute.BackendServices.Update
 
     -- ** ComputeDiskTypesAggregatedList
-    , module Compute.DiskTypes.AggregatedList
+    , module Network.Google.Resource.Compute.DiskTypes.AggregatedList
 
     -- ** ComputeDiskTypesGet
-    , module Compute.DiskTypes.Get
+    , module Network.Google.Resource.Compute.DiskTypes.Get
 
     -- ** ComputeDiskTypesList
-    , module Compute.DiskTypes.List
+    , module Network.Google.Resource.Compute.DiskTypes.List
 
     -- ** ComputeDisksAggregatedList
-    , module Compute.Disks.AggregatedList
+    , module Network.Google.Resource.Compute.Disks.AggregatedList
 
     -- ** ComputeDisksCreateSnapshot
-    , module Compute.Disks.CreateSnapshot
+    , module Network.Google.Resource.Compute.Disks.CreateSnapshot
 
     -- ** ComputeDisksDelete
-    , module Compute.Disks.Delete
+    , module Network.Google.Resource.Compute.Disks.Delete
 
     -- ** ComputeDisksGet
-    , module Compute.Disks.Get
+    , module Network.Google.Resource.Compute.Disks.Get
 
     -- ** ComputeDisksInsert
-    , module Compute.Disks.Insert
+    , module Network.Google.Resource.Compute.Disks.Insert
 
     -- ** ComputeDisksList
-    , module Compute.Disks.List
+    , module Network.Google.Resource.Compute.Disks.List
 
     -- ** ComputeFirewallsDelete
-    , module Compute.Firewalls.Delete
+    , module Network.Google.Resource.Compute.Firewalls.Delete
 
     -- ** ComputeFirewallsGet
-    , module Compute.Firewalls.Get
+    , module Network.Google.Resource.Compute.Firewalls.Get
 
     -- ** ComputeFirewallsInsert
-    , module Compute.Firewalls.Insert
+    , module Network.Google.Resource.Compute.Firewalls.Insert
 
     -- ** ComputeFirewallsList
-    , module Compute.Firewalls.List
+    , module Network.Google.Resource.Compute.Firewalls.List
 
     -- ** ComputeFirewallsPatch
-    , module Compute.Firewalls.Patch
+    , module Network.Google.Resource.Compute.Firewalls.Patch
 
     -- ** ComputeFirewallsUpdate
-    , module Compute.Firewalls.Update
+    , module Network.Google.Resource.Compute.Firewalls.Update
 
     -- ** ComputeForwardingRulesAggregatedList
-    , module Compute.ForwardingRules.AggregatedList
+    , module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
 
     -- ** ComputeForwardingRulesDelete
-    , module Compute.ForwardingRules.Delete
+    , module Network.Google.Resource.Compute.ForwardingRules.Delete
 
     -- ** ComputeForwardingRulesGet
-    , module Compute.ForwardingRules.Get
+    , module Network.Google.Resource.Compute.ForwardingRules.Get
 
     -- ** ComputeForwardingRulesInsert
-    , module Compute.ForwardingRules.Insert
+    , module Network.Google.Resource.Compute.ForwardingRules.Insert
 
     -- ** ComputeForwardingRulesList
-    , module Compute.ForwardingRules.List
+    , module Network.Google.Resource.Compute.ForwardingRules.List
 
     -- ** ComputeForwardingRulesSetTarget
-    , module Compute.ForwardingRules.SetTarget
+    , module Network.Google.Resource.Compute.ForwardingRules.SetTarget
 
     -- ** ComputeGlobalAddressesDelete
-    , module Compute.GlobalAddresses.Delete
+    , module Network.Google.Resource.Compute.GlobalAddresses.Delete
 
     -- ** ComputeGlobalAddressesGet
-    , module Compute.GlobalAddresses.Get
+    , module Network.Google.Resource.Compute.GlobalAddresses.Get
 
     -- ** ComputeGlobalAddressesInsert
-    , module Compute.GlobalAddresses.Insert
+    , module Network.Google.Resource.Compute.GlobalAddresses.Insert
 
     -- ** ComputeGlobalAddressesList
-    , module Compute.GlobalAddresses.List
+    , module Network.Google.Resource.Compute.GlobalAddresses.List
 
     -- ** ComputeGlobalForwardingRulesDelete
-    , module Compute.GlobalForwardingRules.Delete
+    , module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
 
     -- ** ComputeGlobalForwardingRulesGet
-    , module Compute.GlobalForwardingRules.Get
+    , module Network.Google.Resource.Compute.GlobalForwardingRules.Get
 
     -- ** ComputeGlobalForwardingRulesInsert
-    , module Compute.GlobalForwardingRules.Insert
+    , module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
 
     -- ** ComputeGlobalForwardingRulesList
-    , module Compute.GlobalForwardingRules.List
+    , module Network.Google.Resource.Compute.GlobalForwardingRules.List
 
     -- ** ComputeGlobalForwardingRulesSetTarget
-    , module Compute.GlobalForwardingRules.SetTarget
+    , module Network.Google.Resource.Compute.GlobalForwardingRules.SetTarget
 
     -- ** ComputeGlobalOperationsAggregatedList
-    , module Compute.GlobalOperations.AggregatedList
+    , module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
 
     -- ** ComputeGlobalOperationsDelete
-    , module Compute.GlobalOperations.Delete
+    , module Network.Google.Resource.Compute.GlobalOperations.Delete
 
     -- ** ComputeGlobalOperationsGet
-    , module Compute.GlobalOperations.Get
+    , module Network.Google.Resource.Compute.GlobalOperations.Get
 
     -- ** ComputeGlobalOperationsList
-    , module Compute.GlobalOperations.List
+    , module Network.Google.Resource.Compute.GlobalOperations.List
 
     -- ** ComputeHTTPHealthChecksDelete
-    , module Compute.HTTPHealthChecks.Delete
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
 
     -- ** ComputeHTTPHealthChecksGet
-    , module Compute.HTTPHealthChecks.Get
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.Get
 
     -- ** ComputeHTTPHealthChecksInsert
-    , module Compute.HTTPHealthChecks.Insert
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
 
     -- ** ComputeHTTPHealthChecksList
-    , module Compute.HTTPHealthChecks.List
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.List
 
     -- ** ComputeHTTPHealthChecksPatch
-    , module Compute.HTTPHealthChecks.Patch
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
 
     -- ** ComputeHTTPHealthChecksUpdate
-    , module Compute.HTTPHealthChecks.Update
+    , module Network.Google.Resource.Compute.HTTPHealthChecks.Update
 
     -- ** ComputeImagesDelete
-    , module Compute.Images.Delete
+    , module Network.Google.Resource.Compute.Images.Delete
 
     -- ** ComputeImagesDeprecate
-    , module Compute.Images.Deprecate
+    , module Network.Google.Resource.Compute.Images.Deprecate
 
     -- ** ComputeImagesGet
-    , module Compute.Images.Get
+    , module Network.Google.Resource.Compute.Images.Get
 
     -- ** ComputeImagesInsert
-    , module Compute.Images.Insert
+    , module Network.Google.Resource.Compute.Images.Insert
 
     -- ** ComputeImagesList
-    , module Compute.Images.List
+    , module Network.Google.Resource.Compute.Images.List
 
     -- ** ComputeInstanceGroupManagersAbandonInstances
-    , module Compute.InstanceGroupManagers.AbandonInstances
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
 
     -- ** ComputeInstanceGroupManagersAggregatedList
-    , module Compute.InstanceGroupManagers.AggregatedList
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
 
     -- ** ComputeInstanceGroupManagersDelete
-    , module Compute.InstanceGroupManagers.Delete
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
 
     -- ** ComputeInstanceGroupManagersDeleteInstances
-    , module Compute.InstanceGroupManagers.DeleteInstances
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
 
     -- ** ComputeInstanceGroupManagersGet
-    , module Compute.InstanceGroupManagers.Get
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.Get
 
     -- ** ComputeInstanceGroupManagersInsert
-    , module Compute.InstanceGroupManagers.Insert
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
 
     -- ** ComputeInstanceGroupManagersList
-    , module Compute.InstanceGroupManagers.List
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.List
 
     -- ** ComputeInstanceGroupManagersListManagedInstances
-    , module Compute.InstanceGroupManagers.ListManagedInstances
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
 
     -- ** ComputeInstanceGroupManagersRecreateInstances
-    , module Compute.InstanceGroupManagers.RecreateInstances
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
 
     -- ** ComputeInstanceGroupManagersResize
-    , module Compute.InstanceGroupManagers.Resize
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
 
     -- ** ComputeInstanceGroupManagersSetInstanceTemplate
-    , module Compute.InstanceGroupManagers.SetInstanceTemplate
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
 
     -- ** ComputeInstanceGroupManagersSetTargetPools
-    , module Compute.InstanceGroupManagers.SetTargetPools
+    , module Network.Google.Resource.Compute.InstanceGroupManagers.SetTargetPools
 
     -- ** ComputeInstanceGroupsAddInstances
-    , module Compute.InstanceGroups.AddInstances
+    , module Network.Google.Resource.Compute.InstanceGroups.AddInstances
 
     -- ** ComputeInstanceGroupsAggregatedList
-    , module Compute.InstanceGroups.AggregatedList
+    , module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
 
     -- ** ComputeInstanceGroupsDelete
-    , module Compute.InstanceGroups.Delete
+    , module Network.Google.Resource.Compute.InstanceGroups.Delete
 
     -- ** ComputeInstanceGroupsGet
-    , module Compute.InstanceGroups.Get
+    , module Network.Google.Resource.Compute.InstanceGroups.Get
 
     -- ** ComputeInstanceGroupsInsert
-    , module Compute.InstanceGroups.Insert
+    , module Network.Google.Resource.Compute.InstanceGroups.Insert
 
     -- ** ComputeInstanceGroupsList
-    , module Compute.InstanceGroups.List
+    , module Network.Google.Resource.Compute.InstanceGroups.List
 
     -- ** ComputeInstanceGroupsListInstances
-    , module Compute.InstanceGroups.ListInstances
+    , module Network.Google.Resource.Compute.InstanceGroups.ListInstances
 
     -- ** ComputeInstanceGroupsRemoveInstances
-    , module Compute.InstanceGroups.RemoveInstances
+    , module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
 
     -- ** ComputeInstanceGroupsSetNamedPorts
-    , module Compute.InstanceGroups.SetNamedPorts
+    , module Network.Google.Resource.Compute.InstanceGroups.SetNamedPorts
 
     -- ** ComputeInstanceTemplatesDelete
-    , module Compute.InstanceTemplates.Delete
+    , module Network.Google.Resource.Compute.InstanceTemplates.Delete
 
     -- ** ComputeInstanceTemplatesGet
-    , module Compute.InstanceTemplates.Get
+    , module Network.Google.Resource.Compute.InstanceTemplates.Get
 
     -- ** ComputeInstanceTemplatesInsert
-    , module Compute.InstanceTemplates.Insert
+    , module Network.Google.Resource.Compute.InstanceTemplates.Insert
 
     -- ** ComputeInstanceTemplatesList
-    , module Compute.InstanceTemplates.List
+    , module Network.Google.Resource.Compute.InstanceTemplates.List
 
     -- ** ComputeInstancesAddAccessConfig
-    , module Compute.Instances.AddAccessConfig
+    , module Network.Google.Resource.Compute.Instances.AddAccessConfig
 
     -- ** ComputeInstancesAggregatedList
-    , module Compute.Instances.AggregatedList
+    , module Network.Google.Resource.Compute.Instances.AggregatedList
 
     -- ** ComputeInstancesAttachDisk
-    , module Compute.Instances.AttachDisk
+    , module Network.Google.Resource.Compute.Instances.AttachDisk
 
     -- ** ComputeInstancesDelete
-    , module Compute.Instances.Delete
+    , module Network.Google.Resource.Compute.Instances.Delete
 
     -- ** ComputeInstancesDeleteAccessConfig
-    , module Compute.Instances.DeleteAccessConfig
+    , module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
 
     -- ** ComputeInstancesDetachDisk
-    , module Compute.Instances.DetachDisk
+    , module Network.Google.Resource.Compute.Instances.DetachDisk
 
     -- ** ComputeInstancesGet
-    , module Compute.Instances.Get
+    , module Network.Google.Resource.Compute.Instances.Get
 
     -- ** ComputeInstancesGetSerialPortOutput
-    , module Compute.Instances.GetSerialPortOutput
+    , module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
 
     -- ** ComputeInstancesInsert
-    , module Compute.Instances.Insert
+    , module Network.Google.Resource.Compute.Instances.Insert
 
     -- ** ComputeInstancesList
-    , module Compute.Instances.List
+    , module Network.Google.Resource.Compute.Instances.List
 
     -- ** ComputeInstancesReset
-    , module Compute.Instances.Reset
+    , module Network.Google.Resource.Compute.Instances.Reset
 
     -- ** ComputeInstancesSetDiskAutoDelete
-    , module Compute.Instances.SetDiskAutoDelete
+    , module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
 
     -- ** ComputeInstancesSetMetadata
-    , module Compute.Instances.SetMetadata
+    , module Network.Google.Resource.Compute.Instances.SetMetadata
 
     -- ** ComputeInstancesSetScheduling
-    , module Compute.Instances.SetScheduling
+    , module Network.Google.Resource.Compute.Instances.SetScheduling
 
     -- ** ComputeInstancesSetTags
-    , module Compute.Instances.SetTags
+    , module Network.Google.Resource.Compute.Instances.SetTags
 
     -- ** ComputeInstancesStart
-    , module Compute.Instances.Start
+    , module Network.Google.Resource.Compute.Instances.Start
 
     -- ** ComputeInstancesStop
-    , module Compute.Instances.Stop
+    , module Network.Google.Resource.Compute.Instances.Stop
 
     -- ** ComputeLicensesGet
-    , module Compute.Licenses.Get
+    , module Network.Google.Resource.Compute.Licenses.Get
 
     -- ** ComputeMachineTypesAggregatedList
-    , module Compute.MachineTypes.AggregatedList
+    , module Network.Google.Resource.Compute.MachineTypes.AggregatedList
 
     -- ** ComputeMachineTypesGet
-    , module Compute.MachineTypes.Get
+    , module Network.Google.Resource.Compute.MachineTypes.Get
 
     -- ** ComputeMachineTypesList
-    , module Compute.MachineTypes.List
+    , module Network.Google.Resource.Compute.MachineTypes.List
 
     -- ** ComputeNetworksDelete
-    , module Compute.Networks.Delete
+    , module Network.Google.Resource.Compute.Networks.Delete
 
     -- ** ComputeNetworksGet
-    , module Compute.Networks.Get
+    , module Network.Google.Resource.Compute.Networks.Get
 
     -- ** ComputeNetworksInsert
-    , module Compute.Networks.Insert
+    , module Network.Google.Resource.Compute.Networks.Insert
 
     -- ** ComputeNetworksList
-    , module Compute.Networks.List
+    , module Network.Google.Resource.Compute.Networks.List
 
     -- ** ComputeProjectsGet
-    , module Compute.Projects.Get
+    , module Network.Google.Resource.Compute.Projects.Get
 
     -- ** ComputeProjectsMoveDisk
-    , module Compute.Projects.MoveDisk
+    , module Network.Google.Resource.Compute.Projects.MoveDisk
 
     -- ** ComputeProjectsMoveInstance
-    , module Compute.Projects.MoveInstance
+    , module Network.Google.Resource.Compute.Projects.MoveInstance
 
     -- ** ComputeProjectsSetCommonInstanceMetadata
-    , module Compute.Projects.SetCommonInstanceMetadata
+    , module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
 
     -- ** ComputeProjectsSetUsageExportBucket
-    , module Compute.Projects.SetUsageExportBucket
+    , module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
 
     -- ** ComputeRegionOperationsDelete
-    , module Compute.RegionOperations.Delete
+    , module Network.Google.Resource.Compute.RegionOperations.Delete
 
     -- ** ComputeRegionOperationsGet
-    , module Compute.RegionOperations.Get
+    , module Network.Google.Resource.Compute.RegionOperations.Get
 
     -- ** ComputeRegionOperationsList
-    , module Compute.RegionOperations.List
+    , module Network.Google.Resource.Compute.RegionOperations.List
 
     -- ** ComputeRegionsGet
-    , module Compute.Regions.Get
+    , module Network.Google.Resource.Compute.Regions.Get
 
     -- ** ComputeRegionsList
-    , module Compute.Regions.List
+    , module Network.Google.Resource.Compute.Regions.List
 
     -- ** ComputeRoutesDelete
-    , module Compute.Routes.Delete
+    , module Network.Google.Resource.Compute.Routes.Delete
 
     -- ** ComputeRoutesGet
-    , module Compute.Routes.Get
+    , module Network.Google.Resource.Compute.Routes.Get
 
     -- ** ComputeRoutesInsert
-    , module Compute.Routes.Insert
+    , module Network.Google.Resource.Compute.Routes.Insert
 
     -- ** ComputeRoutesList
-    , module Compute.Routes.List
+    , module Network.Google.Resource.Compute.Routes.List
 
     -- ** ComputeSnapshotsDelete
-    , module Compute.Snapshots.Delete
+    , module Network.Google.Resource.Compute.Snapshots.Delete
 
     -- ** ComputeSnapshotsGet
-    , module Compute.Snapshots.Get
+    , module Network.Google.Resource.Compute.Snapshots.Get
 
     -- ** ComputeSnapshotsList
-    , module Compute.Snapshots.List
+    , module Network.Google.Resource.Compute.Snapshots.List
 
     -- ** ComputeTargetHTTPProxiesDelete
-    , module Compute.TargetHTTPProxies.Delete
+    , module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
 
     -- ** ComputeTargetHTTPProxiesGet
-    , module Compute.TargetHTTPProxies.Get
+    , module Network.Google.Resource.Compute.TargetHTTPProxies.Get
 
     -- ** ComputeTargetHTTPProxiesInsert
-    , module Compute.TargetHTTPProxies.Insert
+    , module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
 
     -- ** ComputeTargetHTTPProxiesList
-    , module Compute.TargetHTTPProxies.List
+    , module Network.Google.Resource.Compute.TargetHTTPProxies.List
 
     -- ** ComputeTargetHTTPProxiesSetURLMap
-    , module Compute.TargetHTTPProxies.SetURLMap
+    , module Network.Google.Resource.Compute.TargetHTTPProxies.SetURLMap
 
     -- ** ComputeTargetInstancesAggregatedList
-    , module Compute.TargetInstances.AggregatedList
+    , module Network.Google.Resource.Compute.TargetInstances.AggregatedList
 
     -- ** ComputeTargetInstancesDelete
-    , module Compute.TargetInstances.Delete
+    , module Network.Google.Resource.Compute.TargetInstances.Delete
 
     -- ** ComputeTargetInstancesGet
-    , module Compute.TargetInstances.Get
+    , module Network.Google.Resource.Compute.TargetInstances.Get
 
     -- ** ComputeTargetInstancesInsert
-    , module Compute.TargetInstances.Insert
+    , module Network.Google.Resource.Compute.TargetInstances.Insert
 
     -- ** ComputeTargetInstancesList
-    , module Compute.TargetInstances.List
+    , module Network.Google.Resource.Compute.TargetInstances.List
 
     -- ** ComputeTargetPoolsAddHealthCheck
-    , module Compute.TargetPools.AddHealthCheck
+    , module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
 
     -- ** ComputeTargetPoolsAddInstance
-    , module Compute.TargetPools.AddInstance
+    , module Network.Google.Resource.Compute.TargetPools.AddInstance
 
     -- ** ComputeTargetPoolsAggregatedList
-    , module Compute.TargetPools.AggregatedList
+    , module Network.Google.Resource.Compute.TargetPools.AggregatedList
 
     -- ** ComputeTargetPoolsDelete
-    , module Compute.TargetPools.Delete
+    , module Network.Google.Resource.Compute.TargetPools.Delete
 
     -- ** ComputeTargetPoolsGet
-    , module Compute.TargetPools.Get
+    , module Network.Google.Resource.Compute.TargetPools.Get
 
     -- ** ComputeTargetPoolsGetHealth
-    , module Compute.TargetPools.GetHealth
+    , module Network.Google.Resource.Compute.TargetPools.GetHealth
 
     -- ** ComputeTargetPoolsInsert
-    , module Compute.TargetPools.Insert
+    , module Network.Google.Resource.Compute.TargetPools.Insert
 
     -- ** ComputeTargetPoolsList
-    , module Compute.TargetPools.List
+    , module Network.Google.Resource.Compute.TargetPools.List
 
     -- ** ComputeTargetPoolsRemoveHealthCheck
-    , module Compute.TargetPools.RemoveHealthCheck
+    , module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
 
     -- ** ComputeTargetPoolsRemoveInstance
-    , module Compute.TargetPools.RemoveInstance
+    , module Network.Google.Resource.Compute.TargetPools.RemoveInstance
 
     -- ** ComputeTargetPoolsSetBackup
-    , module Compute.TargetPools.SetBackup
+    , module Network.Google.Resource.Compute.TargetPools.SetBackup
 
     -- ** ComputeTargetVPNGatewaysAggregatedList
-    , module Compute.TargetVPNGateways.AggregatedList
+    , module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
 
     -- ** ComputeTargetVPNGatewaysDelete
-    , module Compute.TargetVPNGateways.Delete
+    , module Network.Google.Resource.Compute.TargetVPNGateways.Delete
 
     -- ** ComputeTargetVPNGatewaysGet
-    , module Compute.TargetVPNGateways.Get
+    , module Network.Google.Resource.Compute.TargetVPNGateways.Get
 
     -- ** ComputeTargetVPNGatewaysInsert
-    , module Compute.TargetVPNGateways.Insert
+    , module Network.Google.Resource.Compute.TargetVPNGateways.Insert
 
     -- ** ComputeTargetVPNGatewaysList
-    , module Compute.TargetVPNGateways.List
+    , module Network.Google.Resource.Compute.TargetVPNGateways.List
 
     -- ** ComputeURLMapsDelete
-    , module Compute.URLMaps.Delete
+    , module Network.Google.Resource.Compute.URLMaps.Delete
 
     -- ** ComputeURLMapsGet
-    , module Compute.URLMaps.Get
+    , module Network.Google.Resource.Compute.URLMaps.Get
 
     -- ** ComputeURLMapsInsert
-    , module Compute.URLMaps.Insert
+    , module Network.Google.Resource.Compute.URLMaps.Insert
 
     -- ** ComputeURLMapsList
-    , module Compute.URLMaps.List
+    , module Network.Google.Resource.Compute.URLMaps.List
 
     -- ** ComputeURLMapsPatch
-    , module Compute.URLMaps.Patch
+    , module Network.Google.Resource.Compute.URLMaps.Patch
 
     -- ** ComputeURLMapsUpdate
-    , module Compute.URLMaps.Update
+    , module Network.Google.Resource.Compute.URLMaps.Update
 
     -- ** ComputeURLMapsValidate
-    , module Compute.URLMaps.Validate
+    , module Network.Google.Resource.Compute.URLMaps.Validate
 
     -- ** ComputeVPNTunnelsAggregatedList
-    , module Compute.VPNTunnels.AggregatedList
+    , module Network.Google.Resource.Compute.VPNTunnels.AggregatedList
 
     -- ** ComputeVPNTunnelsDelete
-    , module Compute.VPNTunnels.Delete
+    , module Network.Google.Resource.Compute.VPNTunnels.Delete
 
     -- ** ComputeVPNTunnelsGet
-    , module Compute.VPNTunnels.Get
+    , module Network.Google.Resource.Compute.VPNTunnels.Get
 
     -- ** ComputeVPNTunnelsInsert
-    , module Compute.VPNTunnels.Insert
+    , module Network.Google.Resource.Compute.VPNTunnels.Insert
 
     -- ** ComputeVPNTunnelsList
-    , module Compute.VPNTunnels.List
+    , module Network.Google.Resource.Compute.VPNTunnels.List
 
     -- ** ComputeZoneOperationsDelete
-    , module Compute.ZoneOperations.Delete
+    , module Network.Google.Resource.Compute.ZoneOperations.Delete
 
     -- ** ComputeZoneOperationsGet
-    , module Compute.ZoneOperations.Get
+    , module Network.Google.Resource.Compute.ZoneOperations.Get
 
     -- ** ComputeZoneOperationsList
-    , module Compute.ZoneOperations.List
+    , module Network.Google.Resource.Compute.ZoneOperations.List
 
     -- ** ComputeZonesGet
-    , module Compute.Zones.Get
+    , module Network.Google.Resource.Compute.Zones.Get
 
     -- ** ComputeZonesList
-    , module Compute.Zones.List
+    , module Network.Google.Resource.Compute.Zones.List
 
     -- * Types
 
@@ -559,21 +559,59 @@ module Network.Google.Compute
     , iglSelfLink
     , iglId
 
+    -- ** DiskTypeAggregatedListItems
+    , DiskTypeAggregatedListItems
+    , diskTypeAggregatedListItems
+
+    -- ** InstancesScopedListWarning
+    , InstancesScopedListWarning
+    , instancesScopedListWarning
+    , islwData
+    , islwCode
+    , islwMessage
+
     -- ** InstanceGroupManagersSetInstanceTemplateRequest
     , InstanceGroupManagersSetInstanceTemplateRequest
     , instanceGroupManagersSetInstanceTemplateRequest
     , igmsitrInstanceTemplate
+
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- ** MachineTypeAggregatedListItems
+    , MachineTypeAggregatedListItems
+    , machineTypeAggregatedListItems
 
     -- ** InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
 
+    -- ** AutoscalerAggregatedListItems
+    , AutoscalerAggregatedListItems
+    , autoscalerAggregatedListItems
+
+    -- ** AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
+    , AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType (..)
+
     -- ** AddressesScopedList
     , AddressesScopedList
     , addressesScopedList
     , aslAddresses
     , aslWarning
+
+    -- ** InstancesScopedListWarningData
+    , InstancesScopedListWarningData
+    , instancesScopedListWarningData
+    , islwdValue
+    , islwdKey
+
+    -- ** SchedulingOnHostMaintenance
+    , SchedulingOnHostMaintenance (..)
 
     -- ** Snapshot
     , Snapshot
@@ -609,6 +647,24 @@ module Network.Google.Compute
     , dsReplacement
     , dsObsolete
     , dsDeprecated
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
+
+    -- ** InstanceGroupAggregatedListItems
+    , InstanceGroupAggregatedListItems
+    , instanceGroupAggregatedListItems
+
+    -- ** MachineTypeScratchDisks
+    , MachineTypeScratchDisks
+    , machineTypeScratchDisks
+    , mtsdDiskGb
+
+    -- ** BackendServiceProtocol
+    , BackendServiceProtocol (..)
 
     -- ** OperationList
     , OperationList
@@ -647,6 +703,9 @@ module Network.Google.Compute
     , dlItems
     , dlSelfLink
     , dlId
+
+    -- ** AttachedDiskType
+    , AttachedDiskType (..)
 
     -- ** TargetPoolsAddInstanceRequest
     , TargetPoolsAddInstanceRequest
@@ -781,6 +840,9 @@ module Network.Google.Compute
     , npName
     , npPort
 
+    -- ** ImageSourceType
+    , ImageSourceType (..)
+
     -- ** TargetPoolsScopedList
     , TargetPoolsScopedList
     , targetPoolsScopedList
@@ -859,6 +921,12 @@ module Network.Google.Compute
     , tpDescription
     , tpHealthChecks
 
+    -- ** DisksScopedListWarningCode
+    , DisksScopedListWarningCode (..)
+
+    -- ** TargetPoolsScopedListWarningCode
+    , TargetPoolsScopedListWarningCode (..)
+
     -- ** Disk
     , Disk
     , disk
@@ -881,6 +949,12 @@ module Network.Google.Compute
     , dType
     , dDescription
     , dSourceSnapshot
+
+    -- ** VPNTunnelsScopedListWarningData
+    , VPNTunnelsScopedListWarningData
+    , vPNTunnelsScopedListWarningData
+    , vtslwdValue
+    , vtslwdKey
 
     -- ** AutoscalingPolicyLoadBalancingUtilization
     , AutoscalingPolicyLoadBalancingUtilization
@@ -905,6 +979,15 @@ module Network.Google.Compute
     , igmDescription
     , igmInstanceGroup
 
+    -- ** TargetVPNGatewayStatus
+    , TargetVPNGatewayStatus (..)
+
+    -- ** InstanceGroupManagersScopedListWarningCode
+    , InstanceGroupManagersScopedListWarningCode (..)
+
+    -- ** ForwardingRulesScopedListWarningCode
+    , ForwardingRulesScopedListWarningCode (..)
+
     -- ** ForwardingRule
     , ForwardingRule
     , forwardingRule
@@ -925,6 +1008,13 @@ module Network.Google.Compute
     , diskMoveRequest
     , dmrTargetDisk
     , dmrDestinationZone
+
+    -- ** VPNTunnelsScopedListWarning
+    , VPNTunnelsScopedListWarning
+    , vPNTunnelsScopedListWarning
+    , vtslwData
+    , vtslwCode
+    , vtslwMessage
 
     -- ** Operation
     , Operation
@@ -966,6 +1056,9 @@ module Network.Google.Compute
     , pDescription
     , pCommonInstanceMetadata
 
+    -- ** OperationsScopedListWarningCode
+    , OperationsScopedListWarningCode (..)
+
     -- ** URLMapList
     , URLMapList
     , uRLMapList
@@ -980,6 +1073,13 @@ module Network.Google.Compute
     , targetPoolsRemoveInstanceRequest
     , tprirInstances
 
+    -- ** RouteWarnings
+    , RouteWarnings
+    , routeWarnings
+    , rwData
+    , rwCode
+    , rwMessage
+
     -- ** InstanceProperties
     , InstanceProperties
     , instanceProperties
@@ -992,6 +1092,50 @@ module Network.Google.Compute
     , ipCanIpForward
     , ipDescription
     , ipTags
+
+    -- ** TargetInstancesScopedListWarningCode
+    , TargetInstancesScopedListWarningCode (..)
+
+    -- ** SnapshotStorageBytesStatus
+    , SnapshotStorageBytesStatus (..)
+
+    -- ** DiskTypesScopedListWarning
+    , DiskTypesScopedListWarning
+    , diskTypesScopedListWarning
+    , dtslwData
+    , dtslwCode
+    , dtslwMessage
+
+    -- ** RouteWarningsData
+    , RouteWarningsData
+    , routeWarningsData
+    , rwdValue
+    , rwdKey
+
+    -- ** InstanceAggregatedListItems
+    , InstanceAggregatedListItems
+    , instanceAggregatedListItems
+
+    -- ** MachineTypesScopedListWarning
+    , MachineTypesScopedListWarning
+    , machineTypesScopedListWarning
+    , mtslwData
+    , mtslwCode
+    , mtslwMessage
+
+    -- ** MachineTypesScopedListWarningData
+    , MachineTypesScopedListWarningData
+    , machineTypesScopedListWarningData
+    , mtslwdValue
+    , mtslwdKey
+
+    -- ** ManagedInstanceLastAttemptErrors
+    , ManagedInstanceLastAttemptErrors
+    , managedInstanceLastAttemptErrors
+    , milaeErrors
+
+    -- ** SnapshotStatus
+    , SnapshotStatus (..)
 
     -- ** TargetPoolInstanceHealth
     , TargetPoolInstanceHealth
@@ -1012,6 +1156,19 @@ module Network.Google.Compute
     , tiDescription
     , tiInstance
 
+    -- ** AutoscalersScopedListWarning
+    , AutoscalersScopedListWarning
+    , autoscalersScopedListWarning
+    , aslwData
+    , aslwCode
+    , aslwMessage
+
+    -- ** DiskTypesScopedListWarningData
+    , DiskTypesScopedListWarningData
+    , diskTypesScopedListWarningData
+    , dtslwdValue
+    , dtslwdKey
+
     -- ** InstanceGroupManagersListManagedInstancesResponse
     , InstanceGroupManagersListManagedInstancesResponse
     , instanceGroupManagersListManagedInstancesResponse
@@ -1021,6 +1178,12 @@ module Network.Google.Compute
     , InstanceGroupsRemoveInstancesRequest
     , instanceGroupsRemoveInstancesRequest
     , igrirInstances
+
+    -- ** AutoscalersScopedListWarningData
+    , AutoscalersScopedListWarningData
+    , autoscalersScopedListWarningData
+    , aslwdValue
+    , aslwdKey
 
     -- ** AttachedDiskInitializeParams
     , AttachedDiskInitializeParams
@@ -1038,6 +1201,9 @@ module Network.Google.Compute
     , niNetworkIP
     , niAccessConfigs
 
+    -- ** TargetInstanceNATPolicy
+    , TargetInstanceNATPolicy (..)
+
     -- ** InstanceTemplateList
     , InstanceTemplateList
     , instanceTemplateList
@@ -1052,6 +1218,12 @@ module Network.Google.Compute
     , targetPoolsRemoveHealthCheckRequest
     , tprhcrHealthChecks
 
+    -- ** ManagedInstanceCurrentAction
+    , ManagedInstanceCurrentAction (..)
+
+    -- ** ImageStatus
+    , ImageStatus (..)
+
     -- ** RouteList
     , RouteList
     , routeList
@@ -1061,6 +1233,12 @@ module Network.Google.Compute
     , rlSelfLink
     , rlId
 
+    -- ** DeprecationStatusState
+    , DeprecationStatusState (..)
+
+    -- ** AddressesScopedListWarningCode
+    , AddressesScopedListWarningCode (..)
+
     -- ** TargetVPNGatewayList
     , TargetVPNGatewayList
     , targetVPNGatewayList
@@ -1069,6 +1247,9 @@ module Network.Google.Compute
     , tvglItems
     , tvglSelfLink
     , tvglId
+
+    -- ** HealthStatusHealthState
+    , HealthStatusHealthState (..)
 
     -- ** Address
     , Address
@@ -1083,6 +1264,15 @@ module Network.Google.Compute
     , aId
     , aRegion
     , aDescription
+
+    -- ** AddressesScopedListWarningData
+    , AddressesScopedListWarningData
+    , addressesScopedListWarningData
+    , aValue
+    , aKey
+
+    -- ** AccessConfigType
+    , AccessConfigType (..)
 
     -- ** InstanceAggregatedList
     , InstanceAggregatedList
@@ -1113,6 +1303,13 @@ module Network.Google.Compute
     , zDescription
     , zDeprecated
 
+    -- ** ImageRawDisk
+    , ImageRawDisk
+    , imageRawDisk
+    , irdContainerType
+    , irdSource
+    , irdSha1Checksum
+
     -- ** InstanceGroupManagersRecreateInstancesRequest
     , InstanceGroupManagersRecreateInstancesRequest
     , instanceGroupManagersRecreateInstancesRequest
@@ -1129,6 +1326,32 @@ module Network.Google.Compute
     , nId
     , nGatewayIPv4
     , nDescription
+
+    -- ** FirewallAllowed
+    , FirewallAllowed
+    , firewallAllowed
+    , faIPProtocol
+    , faPorts
+
+    -- ** AddressesScopedListWarning
+    , AddressesScopedListWarning
+    , addressesScopedListWarning
+    , aData
+    , aCode
+    , aMessage
+
+    -- ** TargetInstanceAggregatedListItems
+    , TargetInstanceAggregatedListItems
+    , targetInstanceAggregatedListItems
+
+    -- ** DiskStatus
+    , DiskStatus (..)
+
+    -- ** ManagedInstanceInstanceStatus
+    , ManagedInstanceInstanceStatus (..)
+
+    -- ** OperationStatus
+    , OperationStatus (..)
 
     -- ** Route
     , Route
@@ -1160,6 +1383,9 @@ module Network.Google.Compute
     , itId
     , itDescription
     , itProperties
+
+    -- ** TargetVPNGatewaysScopedListWarningCode
+    , TargetVPNGatewaysScopedListWarningCode (..)
 
     -- ** HealthCheckReference
     , HealthCheckReference
@@ -1195,11 +1421,22 @@ module Network.Google.Compute
     , tvgDescription
     , tvgForwardingRules
 
+    -- ** AttachedDiskMode
+    , AttachedDiskMode (..)
+
+    -- ** OperationAggregatedListItems
+    , OperationAggregatedListItems
+    , operationAggregatedListItems
+
     -- ** UsageExportLocation
     , UsageExportLocation
     , usageExportLocation
     , uelReportNamePrefix
     , uelBucketName
+
+    -- ** DiskAggregatedListItems
+    , DiskAggregatedListItems
+    , diskAggregatedListItems
 
     -- ** InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
@@ -1229,6 +1466,10 @@ module Network.Google.Compute
     , alSelfLink
     , alId
 
+    -- ** ForwardingRuleAggregatedListItems
+    , ForwardingRuleAggregatedListItems
+    , forwardingRuleAggregatedListItems
+
     -- ** ZoneList
     , ZoneList
     , zoneList
@@ -1237,6 +1478,12 @@ module Network.Google.Compute
     , zlItems
     , zlSelfLink
     , zlId
+
+    -- ** TargetVPNGatewaysScopedListWarningData
+    , TargetVPNGatewaysScopedListWarningData
+    , targetVPNGatewaysScopedListWarningData
+    , tvgslwdValue
+    , tvgslwdKey
 
     -- ** InstanceGroupManagerActionsSummary
     , InstanceGroupManagerActionsSummary
@@ -1253,6 +1500,17 @@ module Network.Google.Compute
     , URLMapReference
     , uRLMapReference
     , umrUrlMap
+
+    -- ** VPNTunnelStatus
+    , VPNTunnelStatus (..)
+
+    -- ** ZoneMaintenanceWindows
+    , ZoneMaintenanceWindows
+    , zoneMaintenanceWindows
+    , zmwBeginTime
+    , zmwName
+    , zmwEndTime
+    , zmwDescription
 
     -- ** TargetPoolsAddHealthCheckRequest
     , TargetPoolsAddHealthCheckRequest
@@ -1274,6 +1532,17 @@ module Network.Google.Compute
     , saEmail
     , saScopes
 
+    -- ** InstanceGroupManagerAggregatedListItems
+    , InstanceGroupManagerAggregatedListItems
+    , instanceGroupManagerAggregatedListItems
+
+    -- ** TargetVPNGatewaysScopedListWarning
+    , TargetVPNGatewaysScopedListWarning
+    , targetVPNGatewaysScopedListWarning
+    , tvgslwData
+    , tvgslwCode
+    , tvgslwMessage
+
     -- ** Backend
     , Backend
     , backend
@@ -1284,6 +1553,16 @@ module Network.Google.Compute
     , bMaxRatePerInstance
     , bDescription
     , bCapacityScaler
+
+    -- ** BackendBalancingMode
+    , BackendBalancingMode (..)
+
+    -- ** RegionStatus
+    , RegionStatus (..)
+
+    -- ** TargetPoolAggregatedListItems
+    , TargetPoolAggregatedListItems
+    , targetPoolAggregatedListItems
 
     -- ** TargetInstancesScopedList
     , TargetInstancesScopedList
@@ -1351,6 +1630,10 @@ module Network.Google.Compute
     , thttpplSelfLink
     , thttpplId
 
+    -- ** AddressAggregatedListItems
+    , AddressAggregatedListItems
+    , addressAggregatedListItems
+
     -- ** MachineTypesScopedList
     , MachineTypesScopedList
     , machineTypesScopedList
@@ -1372,6 +1655,15 @@ module Network.Google.Compute
     , bsghKind
     , bsghHealthStatus
 
+    -- ** QuotaMetric
+    , QuotaMetric (..)
+
+    -- ** InstanceGroupsListInstancesRequestInstanceState
+    , InstanceGroupsListInstancesRequestInstanceState (..)
+
+    -- ** ZoneStatus
+    , ZoneStatus (..)
+
     -- ** DiskTypeAggregatedList
     , DiskTypeAggregatedList
     , diskTypeAggregatedList
@@ -1380,6 +1672,9 @@ module Network.Google.Compute
     , dtalItems
     , dtalSelfLink
     , dtalId
+
+    -- ** AddressStatus
+    , AddressStatus (..)
 
     -- ** HTTPHealthCheck
     , HTTPHealthCheck
@@ -1407,6 +1702,12 @@ module Network.Google.Compute
     , apLoadBalancingUtilization
     , apMinNumReplicas
     , apCoolDownPeriodSec
+
+    -- ** ForwardingRuleIPProtocol
+    , ForwardingRuleIPProtocol (..)
+
+    -- ** AttachedDiskInterface
+    , AttachedDiskInterface (..)
 
     -- ** AutoscalersScopedList
     , AutoscalersScopedList
@@ -1446,6 +1747,14 @@ module Network.Google.Compute
     , regItems
     , regSelfLink
     , regId
+
+    -- ** MachineTypesScopedListWarningCode
+    , MachineTypesScopedListWarningCode (..)
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** MachineType
     , MachineType
@@ -1487,6 +1796,16 @@ module Network.Google.Compute
     , umvrTestPassed
     , umvrTestFailures
 
+    -- ** AutoscalersScopedListWarningCode
+    , AutoscalersScopedListWarningCode (..)
+
+    -- ** TargetInstancesScopedListWarning
+    , TargetInstancesScopedListWarning
+    , targetInstancesScopedListWarning
+    , tislwData
+    , tislwCode
+    , tislwMessage
+
     -- ** Autoscaler
     , Autoscaler
     , autoscaler
@@ -1500,6 +1819,9 @@ module Network.Google.Compute
     , aaDescription
     , aaTarget
 
+    -- ** RouteWarningsCode
+    , RouteWarningsCode (..)
+
     -- ** InstanceGroupsListInstances
     , InstanceGroupsListInstances
     , instanceGroupsListInstances
@@ -1509,12 +1831,24 @@ module Network.Google.Compute
     , igliSelfLink
     , igliId
 
+    -- ** TargetInstancesScopedListWarningData
+    , TargetInstancesScopedListWarningData
+    , targetInstancesScopedListWarningData
+    , tislwdValue
+    , tislwdKey
+
     -- ** Metadata
     , Metadata
     , metadata
     , mKind
     , mFingerprint
     , mItems
+
+    -- ** DiskTypesScopedListWarningCode
+    , DiskTypesScopedListWarningCode (..)
+
+    -- ** InstanceStatus
+    , InstanceStatus (..)
 
     -- ** TargetHTTPProxy
     , TargetHTTPProxy
@@ -1541,6 +1875,25 @@ module Network.Google.Compute
     , rrDescription
     , rrDeprecated
 
+    -- ** OperationsScopedListWarningData
+    , OperationsScopedListWarningData
+    , operationsScopedListWarningData
+    , oslwdValue
+    , oslwdKey
+
+    -- ** DisksScopedListWarningData
+    , DisksScopedListWarningData
+    , disksScopedListWarningData
+    , dslwdValue
+    , dslwdKey
+
+    -- ** ForwardingRulesScopedListWarning
+    , ForwardingRulesScopedListWarning
+    , forwardingRulesScopedListWarning
+    , frslwData
+    , frslwCode
+    , frslwMessage
+
     -- ** VPNTunnel
     , VPNTunnel
     , vPNTunnel
@@ -1559,12 +1912,47 @@ module Network.Google.Compute
     , vtRegion
     , vtDescription
 
+    -- ** VPNTunnelsScopedListWarningCode
+    , VPNTunnelsScopedListWarningCode (..)
+
+    -- ** OperationsScopedListWarning
+    , OperationsScopedListWarning
+    , operationsScopedListWarning
+    , oslwData
+    , oslwCode
+    , oslwMessage
+
+    -- ** TargetPoolsScopedListWarningData
+    , TargetPoolsScopedListWarningData
+    , targetPoolsScopedListWarningData
+    , tpslwdValue
+    , tpslwdKey
+
     -- ** Scheduling
     , Scheduling
     , scheduling
     , sAutomaticRestart
     , sOnHostMaintenance
     , sPreemptible
+
+    -- ** ForwardingRulesScopedListWarningData
+    , ForwardingRulesScopedListWarningData
+    , forwardingRulesScopedListWarningData
+    , frslwdValue
+    , frslwdKey
+
+    -- ** TargetPoolsScopedListWarning
+    , TargetPoolsScopedListWarning
+    , targetPoolsScopedListWarning
+    , tpslwData
+    , tpslwCode
+    , tpslwMessage
+
+    -- ** InstanceGroupManagersScopedListWarningData
+    , InstanceGroupManagersScopedListWarningData
+    , instanceGroupManagersScopedListWarningData
+    , igmslwdValue
+    , igmslwdKey
 
     -- ** HealthStatus
     , HealthStatus
@@ -1573,6 +1961,24 @@ module Network.Google.Compute
     , hsHealthState
     , hsPort
     , hsInstance
+
+    -- ** TargetVPNGatewayAggregatedListItems
+    , TargetVPNGatewayAggregatedListItems
+    , targetVPNGatewayAggregatedListItems
+
+    -- ** DisksScopedListWarning
+    , DisksScopedListWarning
+    , disksScopedListWarning
+    , dslwData
+    , dslwCode
+    , dslwMessage
+
+    -- ** InstanceGroupManagersScopedListWarning
+    , InstanceGroupManagersScopedListWarning
+    , instanceGroupManagersScopedListWarning
+    , igmslwData
+    , igmslwCode
+    , igmslwMessage
 
     -- ** HTTPHealthCheckList
     , HTTPHealthCheckList
@@ -1603,6 +2009,26 @@ module Network.Google.Compute
     , bslSelfLink
     , bslId
 
+    -- ** ManagedInstanceLastAttemptErrorsErrors
+    , ManagedInstanceLastAttemptErrorsErrors
+    , managedInstanceLastAttemptErrorsErrors
+    , milaeeLocation
+    , milaeeCode
+    , milaeeMessage
+
+    -- ** InstanceGroupsScopedListWarning
+    , InstanceGroupsScopedListWarning
+    , instanceGroupsScopedListWarning
+    , igslwData
+    , igslwCode
+    , igslwMessage
+
+    -- ** MetadataItems
+    , MetadataItems
+    , metadataItems
+    , miValue
+    , miKey
+
     -- ** License
     , License
     , license
@@ -1610,6 +2036,12 @@ module Network.Google.Compute
     , lKind
     , lSelfLink
     , lName
+
+    -- ** InstanceGroupsScopedListWarningData
+    , InstanceGroupsScopedListWarningData
+    , instanceGroupsScopedListWarningData
+    , igslwdValue
+    , igslwdKey
 
     -- ** InstanceList
     , InstanceList
@@ -1643,17 +2075,17 @@ module Network.Google.Compute
     -- ** InstanceGroup
     , InstanceGroup
     , instanceGroup
-    , igSize
-    , igKind
-    , igFingerprint
-    , igNetwork
-    , igZone
-    , igSelfLink
-    , igName
-    , igCreationTimestamp
-    , igId
-    , igDescription
-    , igNamedPorts
+    , ig1Size
+    , ig1Kind
+    , ig1Fingerprint
+    , ig1Network
+    , ig1Zone
+    , ig1SelfLink
+    , ig1Name
+    , ig1CreationTimestamp
+    , ig1Id
+    , ig1Description
+    , ig1NamedPorts
 
     -- ** HostRule
     , HostRule
@@ -1661,6 +2093,16 @@ module Network.Google.Compute
     , hrHosts
     , hrDescription
     , hrPathMatcher
+
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- ** InstanceWithNamedPortsStatus
+    , InstanceWithNamedPortsStatus (..)
 
     -- ** SerialPortOutput
     , SerialPortOutput
@@ -1682,6 +2124,9 @@ module Network.Google.Compute
     , targetVPNGatewaysScopedList
     , tvgslTargetVpnGateways
     , tvgslWarning
+
+    -- ** InstanceGroupsScopedListWarningCode
+    , InstanceGroupsScopedListWarningCode (..)
 
     -- ** Quota
     , Quota
@@ -1732,6 +2177,9 @@ module Network.Google.Compute
     , fAllowed
     , fDescription
 
+    -- ** TargetPoolSessionAffinity
+    , TargetPoolSessionAffinity (..)
+
     -- ** AddressAggregatedList
     , AddressAggregatedList
     , addressAggregatedList
@@ -1740,6 +2188,9 @@ module Network.Google.Compute
     , addItems
     , addSelfLink
     , addId
+
+    -- ** ImageRawDiskContainerType
+    , ImageRawDiskContainerType (..)
 
     -- ** Tags
     , Tags
@@ -1781,24 +2232,34 @@ module Network.Google.Compute
     -- ** Instance
     , Instance
     , instance'
-    , iiStatus
-    , iiServiceAccounts
-    , iiNetworkInterfaces
-    , iiKind
-    , iiZone
-    , iiCpuPlatform
-    , iiSelfLink
-    , iiName
-    , iiStatusMessage
-    , iiCreationTimestamp
-    , iiMachineType
-    , iiMetadata
-    , iiId
-    , iiScheduling
-    , iiDisks
-    , iiCanIpForward
-    , iiDescription
-    , iiTags
+    , i1Status
+    , i1ServiceAccounts
+    , i1NetworkInterfaces
+    , i1Kind
+    , i1Zone
+    , i1CpuPlatform
+    , i1SelfLink
+    , i1Name
+    , i1StatusMessage
+    , i1CreationTimestamp
+    , i1MachineType
+    , i1Metadata
+    , i1Id
+    , i1Scheduling
+    , i1Disks
+    , i1CanIpForward
+    , i1Description
+    , i1Tags
+
+    -- ** InstancesScopedListWarningCode
+    , InstancesScopedListWarningCode (..)
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** VPNTunnelAggregatedListItems
+    , VPNTunnelAggregatedListItems
+    , vPNTunnelAggregatedListItems
 
     -- ** PathMatcher
     , PathMatcher
@@ -1813,6 +2274,9 @@ module Network.Google.Compute
     , instanceGroupsScopedList
     , igslWarning
     , igslInstanceGroups
+
+    -- ** OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.Compute.Types
@@ -1997,36 +2461,180 @@ TODO
 -}
 
 type ComputeAPI =
-     Images :<|> URLMaps :<|> InstanceTemplates :<|>
-       Routes
-       :<|> TargetVPNGateways
-       :<|> Zones
-       :<|> GlobalForwardingRules
-       :<|> Networks
-       :<|> Addresses
-       :<|> VPNTunnels
-       :<|> Regions
-       :<|> GlobalAddresses
-       :<|> TargetHTTPProxies
-       :<|> Autoscalers
-       :<|> DiskTypes
-       :<|> RegionOperations
-       :<|> MachineTypes
-       :<|> HTTPHealthChecks
-       :<|> Snapshots
-       :<|> Instances
-       :<|> BackendServices
-       :<|> InstanceGroups
-       :<|> GlobalOperations
-       :<|> Firewalls
-       :<|> Licenses
-       :<|> ZoneOperations
-       :<|> TargetInstances
-       :<|> Disks
-       :<|> TargetPools
-       :<|> InstanceGroupManagers
-       :<|> Projects
-       :<|> ForwardingRules
+     ImagesInsertResource :<|> ImagesListResource :<|>
+       ImagesGetResource
+       :<|> ImagesDeprecateResource
+       :<|> ImagesDeleteResource
+       :<|> UrlMapsInsertResource
+       :<|> UrlMapsListResource
+       :<|> UrlMapsPatchResource
+       :<|> UrlMapsGetResource
+       :<|> UrlMapsValidateResource
+       :<|> UrlMapsDeleteResource
+       :<|> UrlMapsUpdateResource
+       :<|> InstanceTemplatesInsertResource
+       :<|> InstanceTemplatesListResource
+       :<|> InstanceTemplatesGetResource
+       :<|> InstanceTemplatesDeleteResource
+       :<|> RoutesInsertResource
+       :<|> RoutesListResource
+       :<|> RoutesGetResource
+       :<|> RoutesDeleteResource
+       :<|> TargetVPNGatewaysAggregatedListResource
+       :<|> TargetVPNGatewaysInsertResource
+       :<|> TargetVPNGatewaysListResource
+       :<|> TargetVPNGatewaysGetResource
+       :<|> TargetVPNGatewaysDeleteResource
+       :<|> ZonesListResource
+       :<|> ZonesGetResource
+       :<|> GlobalForwardingRulesInsertResource
+       :<|> GlobalForwardingRulesListResource
+       :<|> GlobalForwardingRulesGetResource
+       :<|> GlobalForwardingRulesSetTargetResource
+       :<|> GlobalForwardingRulesDeleteResource
+       :<|> NetworksInsertResource
+       :<|> NetworksListResource
+       :<|> NetworksGetResource
+       :<|> NetworksDeleteResource
+       :<|> AddressesAggregatedListResource
+       :<|> AddressesInsertResource
+       :<|> AddressesListResource
+       :<|> AddressesGetResource
+       :<|> AddressesDeleteResource
+       :<|> VpnTunnelsAggregatedListResource
+       :<|> VpnTunnelsInsertResource
+       :<|> VpnTunnelsListResource
+       :<|> VpnTunnelsGetResource
+       :<|> VpnTunnelsDeleteResource
+       :<|> RegionsListResource
+       :<|> RegionsGetResource
+       :<|> GlobalAddressesInsertResource
+       :<|> GlobalAddressesListResource
+       :<|> GlobalAddressesGetResource
+       :<|> GlobalAddressesDeleteResource
+       :<|> TargetHTTPProxiesInsertResource
+       :<|> TargetHTTPProxiesListResource
+       :<|> TargetHTTPProxiesSetURLMapResource
+       :<|> TargetHTTPProxiesGetResource
+       :<|> TargetHTTPProxiesDeleteResource
+       :<|> AutoscalersAggregatedListResource
+       :<|> AutoscalersInsertResource
+       :<|> AutoscalersListResource
+       :<|> AutoscalersPatchResource
+       :<|> AutoscalersGetResource
+       :<|> AutoscalersDeleteResource
+       :<|> AutoscalersUpdateResource
+       :<|> DiskTypesAggregatedListResource
+       :<|> DiskTypesListResource
+       :<|> DiskTypesGetResource
+       :<|> RegionOperationsListResource
+       :<|> RegionOperationsGetResource
+       :<|> RegionOperationsDeleteResource
+       :<|> MachineTypesAggregatedListResource
+       :<|> MachineTypesListResource
+       :<|> MachineTypesGetResource
+       :<|> HttpHealthChecksInsertResource
+       :<|> HttpHealthChecksListResource
+       :<|> HttpHealthChecksPatchResource
+       :<|> HttpHealthChecksGetResource
+       :<|> HttpHealthChecksDeleteResource
+       :<|> HttpHealthChecksUpdateResource
+       :<|> SnapshotsListResource
+       :<|> SnapshotsGetResource
+       :<|> SnapshotsDeleteResource
+       :<|> InstancesAddAccessConfigResource
+       :<|> InstancesAggregatedListResource
+       :<|> InstancesInsertResource
+       :<|> InstancesDetachDiskResource
+       :<|> InstancesListResource
+       :<|> InstancesStartResource
+       :<|> InstancesGetResource
+       :<|> InstancesDeleteAccessConfigResource
+       :<|> InstancesSetMetadataResource
+       :<|> InstancesSetSchedulingResource
+       :<|> InstancesResetResource
+       :<|> InstancesStopResource
+       :<|> InstancesGetSerialPortOutputResource
+       :<|> InstancesSetTagsResource
+       :<|> InstancesAttachDiskResource
+       :<|> InstancesDeleteResource
+       :<|> InstancesSetDiskAutoDeleteResource
+       :<|> BackendServicesInsertResource
+       :<|> BackendServicesListResource
+       :<|> BackendServicesGetHealthResource
+       :<|> BackendServicesPatchResource
+       :<|> BackendServicesGetResource
+       :<|> BackendServicesDeleteResource
+       :<|> BackendServicesUpdateResource
+       :<|> InstanceGroupsRemoveInstancesResource
+       :<|> InstanceGroupsAggregatedListResource
+       :<|> InstanceGroupsInsertResource
+       :<|> InstanceGroupsListResource
+       :<|> InstanceGroupsAddInstancesResource
+       :<|> InstanceGroupsGetResource
+       :<|> InstanceGroupsListInstancesResource
+       :<|> InstanceGroupsSetNamedPortsResource
+       :<|> InstanceGroupsDeleteResource
+       :<|> GlobalOperationsAggregatedListResource
+       :<|> GlobalOperationsListResource
+       :<|> GlobalOperationsGetResource
+       :<|> GlobalOperationsDeleteResource
+       :<|> FirewallsInsertResource
+       :<|> FirewallsListResource
+       :<|> FirewallsPatchResource
+       :<|> FirewallsGetResource
+       :<|> FirewallsDeleteResource
+       :<|> FirewallsUpdateResource
+       :<|> LicensesGetResource
+       :<|> ZoneOperationsListResource
+       :<|> ZoneOperationsGetResource
+       :<|> ZoneOperationsDeleteResource
+       :<|> TargetInstancesAggregatedListResource
+       :<|> TargetInstancesInsertResource
+       :<|> TargetInstancesListResource
+       :<|> TargetInstancesGetResource
+       :<|> TargetInstancesDeleteResource
+       :<|> DisksAggregatedListResource
+       :<|> DisksInsertResource
+       :<|> DisksListResource
+       :<|> DisksGetResource
+       :<|> DisksCreateSnapshotResource
+       :<|> DisksDeleteResource
+       :<|> TargetPoolsAggregatedListResource
+       :<|> TargetPoolsRemoveInstanceResource
+       :<|> TargetPoolsInsertResource
+       :<|> TargetPoolsListResource
+       :<|> TargetPoolsGetHealthResource
+       :<|> TargetPoolsGetResource
+       :<|> TargetPoolsRemoveHealthCheckResource
+       :<|> TargetPoolsSetBackupResource
+       :<|> TargetPoolsAddInstanceResource
+       :<|> TargetPoolsAddHealthCheckResource
+       :<|> TargetPoolsDeleteResource
+       :<|> InstanceGroupManagersSetTargetPoolsResource
+       :<|> InstanceGroupManagersAggregatedListResource
+       :<|> InstanceGroupManagersInsertResource
+       :<|> InstanceGroupManagersResizeResource
+       :<|> InstanceGroupManagersListResource
+       :<|>
+       InstanceGroupManagersListManagedInstancesResource
+       :<|> InstanceGroupManagersAbandonInstancesResource
+       :<|> InstanceGroupManagersSetInstanceTemplateResource
+       :<|> InstanceGroupManagersGetResource
+       :<|> InstanceGroupManagersDeleteInstancesResource
+       :<|> InstanceGroupManagersDeleteResource
+       :<|> InstanceGroupManagersRecreateInstancesResource
+       :<|> ProjectsSetUsageExportBucketResource
+       :<|> ProjectsMoveInstanceResource
+       :<|> ProjectsGetResource
+       :<|> ProjectsMoveDiskResource
+       :<|> ProjectsSetCommonInstanceMetadataResource
+       :<|> ForwardingRulesAggregatedListResource
+       :<|> ForwardingRulesInsertResource
+       :<|> ForwardingRulesListResource
+       :<|> ForwardingRulesGetResource
+       :<|> ForwardingRulesSetTargetResource
+       :<|> ForwardingRulesDeleteResource
 
 computeAPI :: Proxy ComputeAPI
 computeAPI = Proxy

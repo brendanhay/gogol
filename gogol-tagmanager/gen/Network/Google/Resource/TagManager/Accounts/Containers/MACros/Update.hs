@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a GTM Macro.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMACrosUpdate@.
-module TagManager.Accounts.Containers.MACros.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Update
     (
     -- * REST Resource
-      AccountsContainersMacrosUpdateAPI
+      AccountsContainersMacrosUpdateResource
 
     -- * Creating a Request
-    , accountsContainersMACrosUpdate
-    , AccountsContainersMACrosUpdate
+    , accountsContainersMACrosUpdate'
+    , AccountsContainersMACrosUpdate'
 
     -- * Request Lenses
     , acmacuQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMACrosUpdate@ which the
--- 'AccountsContainersMACrosUpdate' request conforms to.
-type AccountsContainersMacrosUpdateAPI =
+-- 'AccountsContainersMACrosUpdate'' request conforms to.
+type AccountsContainersMacrosUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "macros" :>
                Capture "macroId" Text :>
-                 QueryParam "fingerprint" Text :> Put '[JSON] MACro
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] MACro
 
 -- | Updates a GTM Macro.
 --
--- /See:/ 'accountsContainersMACrosUpdate' smart constructor.
-data AccountsContainersMACrosUpdate = AccountsContainersMACrosUpdate
+-- /See:/ 'accountsContainersMACrosUpdate'' smart constructor.
+data AccountsContainersMACrosUpdate' = AccountsContainersMACrosUpdate'
     { _acmacuQuotaUser   :: !(Maybe Text)
     , _acmacuPrettyPrint :: !Bool
     , _acmacuContainerId :: !Text
@@ -70,7 +78,7 @@ data AccountsContainersMACrosUpdate = AccountsContainersMACrosUpdate
     , _acmacuMacroId     :: !Text
     , _acmacuOauthToken  :: !(Maybe Text)
     , _acmacuFields      :: !(Maybe Text)
-    , _acmacuAlt         :: !Text
+    , _acmacuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMACrosUpdate'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data AccountsContainersMACrosUpdate = AccountsContainersMACrosUpdate
 -- * 'acmacuFields'
 --
 -- * 'acmacuAlt'
-accountsContainersMACrosUpdate
+accountsContainersMACrosUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'macroId'
-    -> AccountsContainersMACrosUpdate
-accountsContainersMACrosUpdate pAcmacuContainerId_ pAcmacuAccountId_ pAcmacuMacroId_ =
-    AccountsContainersMACrosUpdate
+    -> AccountsContainersMACrosUpdate'
+accountsContainersMACrosUpdate' pAcmacuContainerId_ pAcmacuAccountId_ pAcmacuMacroId_ =
+    AccountsContainersMACrosUpdate'
     { _acmacuQuotaUser = Nothing
     , _acmacuPrettyPrint = True
     , _acmacuContainerId = pAcmacuContainerId_
@@ -115,7 +123,7 @@ accountsContainersMACrosUpdate pAcmacuContainerId_ pAcmacuAccountId_ pAcmacuMacr
     , _acmacuMacroId = pAcmacuMacroId_
     , _acmacuOauthToken = Nothing
     , _acmacuFields = Nothing
-    , _acmacuAlt = "json"
+    , _acmacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +190,7 @@ acmacuFields
   = lens _acmacuFields (\ s a -> s{_acmacuFields = a})
 
 -- | Data format for the response.
-acmacuAlt :: Lens' AccountsContainersMACrosUpdate' Text
+acmacuAlt :: Lens' AccountsContainersMACrosUpdate' Alt
 acmacuAlt
   = lens _acmacuAlt (\ s a -> s{_acmacuAlt = a})
 
@@ -191,8 +199,8 @@ instance GoogleRequest
         type Rs AccountsContainersMACrosUpdate' = MACro
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersMACrosUpdate{..}
-          = go _acmacuQuotaUser _acmacuPrettyPrint
+          AccountsContainersMACrosUpdate'{..}
+          = go _acmacuQuotaUser (Just _acmacuPrettyPrint)
               _acmacuContainerId
               _acmacuUserIp
               _acmacuFingerprint
@@ -201,9 +209,10 @@ instance GoogleRequest
               _acmacuMacroId
               _acmacuOauthToken
               _acmacuFields
-              _acmacuAlt
+              (Just _acmacuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersMacrosUpdateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersMacrosUpdateResource)
                       r
                       u

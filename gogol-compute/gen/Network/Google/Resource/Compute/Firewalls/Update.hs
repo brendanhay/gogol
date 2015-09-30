@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsUpdate@.
-module Compute.Firewalls.Update
+module Network.Google.Resource.Compute.Firewalls.Update
     (
     -- * REST Resource
-      FirewallsUpdateAPI
+      FirewallsUpdateResource
 
     -- * Creating a Request
-    , firewallsUpdate
-    , FirewallsUpdate
+    , firewallsUpdate'
+    , FirewallsUpdate'
 
     -- * Request Lenses
     , fuQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsUpdate@ which the
--- 'FirewallsUpdate' request conforms to.
-type FirewallsUpdateAPI =
+-- 'FirewallsUpdate'' request conforms to.
+type FirewallsUpdateResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           Capture "firewall" Text :> Put '[JSON] Operation
+           Capture "firewall" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request.
 --
--- /See:/ 'firewallsUpdate' smart constructor.
-data FirewallsUpdate = FirewallsUpdate
+-- /See:/ 'firewallsUpdate'' smart constructor.
+data FirewallsUpdate' = FirewallsUpdate'
     { _fuQuotaUser   :: !(Maybe Text)
     , _fuPrettyPrint :: !Bool
     , _fuProject     :: !Text
@@ -65,7 +73,7 @@ data FirewallsUpdate = FirewallsUpdate
     , _fuOauthToken  :: !(Maybe Text)
     , _fuFirewall    :: !Text
     , _fuFields      :: !(Maybe Text)
-    , _fuAlt         :: !Text
+    , _fuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsUpdate'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data FirewallsUpdate = FirewallsUpdate
 -- * 'fuFields'
 --
 -- * 'fuAlt'
-firewallsUpdate
+firewallsUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
-    -> FirewallsUpdate
-firewallsUpdate pFuProject_ pFuFirewall_ =
-    FirewallsUpdate
+    -> FirewallsUpdate'
+firewallsUpdate' pFuProject_ pFuFirewall_ =
+    FirewallsUpdate'
     { _fuQuotaUser = Nothing
     , _fuPrettyPrint = True
     , _fuProject = pFuProject_
@@ -103,7 +111,7 @@ firewallsUpdate pFuProject_ pFuFirewall_ =
     , _fuOauthToken = Nothing
     , _fuFirewall = pFuFirewall_
     , _fuFields = Nothing
-    , _fuAlt = "json"
+    , _fuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ fuFields :: Lens' FirewallsUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
 
 -- | Data format for the response.
-fuAlt :: Lens' FirewallsUpdate' Text
+fuAlt :: Lens' FirewallsUpdate' Alt
 fuAlt = lens _fuAlt (\ s a -> s{_fuAlt = a})
 
 instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsUpdate{..}
-          = go _fuQuotaUser _fuPrettyPrint _fuProject _fuUserIp
+        requestWithRoute r u FirewallsUpdate'{..}
+          = go _fuQuotaUser (Just _fuPrettyPrint) _fuProject
+              _fuUserIp
               _fuKey
               _fuOauthToken
               _fuFirewall
               _fuFields
-              _fuAlt
+              (Just _fuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsUpdateResource)
                       r
                       u

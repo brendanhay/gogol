@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldsPatch@.
-module DFAReporting.CreativeFields.Patch
+module Network.Google.Resource.DFAReporting.CreativeFields.Patch
     (
     -- * REST Resource
-      CreativeFieldsPatchAPI
+      CreativeFieldsPatchResource
 
     -- * Creating a Request
-    , creativeFieldsPatch
-    , CreativeFieldsPatch
+    , creativeFieldsPatch'
+    , CreativeFieldsPatch'
 
     -- * Request Lenses
     , cfpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldsPatch@ which the
--- 'CreativeFieldsPatch' request conforms to.
-type CreativeFieldsPatchAPI =
+-- 'CreativeFieldsPatch'' request conforms to.
+type CreativeFieldsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
-           QueryParam "id" Int64 :> Patch '[JSON] CreativeField
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] CreativeField
 
 -- | Updates an existing creative field. This method supports patch
 -- semantics.
 --
--- /See:/ 'creativeFieldsPatch' smart constructor.
-data CreativeFieldsPatch = CreativeFieldsPatch
+-- /See:/ 'creativeFieldsPatch'' smart constructor.
+data CreativeFieldsPatch' = CreativeFieldsPatch'
     { _cfpQuotaUser   :: !(Maybe Text)
     , _cfpPrettyPrint :: !Bool
     , _cfpUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data CreativeFieldsPatch = CreativeFieldsPatch
     , _cfpId          :: !Int64
     , _cfpOauthToken  :: !(Maybe Text)
     , _cfpFields      :: !(Maybe Text)
-    , _cfpAlt         :: !Text
+    , _cfpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data CreativeFieldsPatch = CreativeFieldsPatch
 -- * 'cfpFields'
 --
 -- * 'cfpAlt'
-creativeFieldsPatch
+creativeFieldsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldsPatch
-creativeFieldsPatch pCfpProfileId_ pCfpId_ =
-    CreativeFieldsPatch
+    -> CreativeFieldsPatch'
+creativeFieldsPatch' pCfpProfileId_ pCfpId_ =
+    CreativeFieldsPatch'
     { _cfpQuotaUser = Nothing
     , _cfpPrettyPrint = True
     , _cfpUserIp = Nothing
@@ -103,7 +111,7 @@ creativeFieldsPatch pCfpProfileId_ pCfpId_ =
     , _cfpId = pCfpId_
     , _cfpOauthToken = Nothing
     , _cfpFields = Nothing
-    , _cfpAlt = "json"
+    , _cfpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ cfpFields
   = lens _cfpFields (\ s a -> s{_cfpFields = a})
 
 -- | Data format for the response.
-cfpAlt :: Lens' CreativeFieldsPatch' Text
+cfpAlt :: Lens' CreativeFieldsPatch' Alt
 cfpAlt = lens _cfpAlt (\ s a -> s{_cfpAlt = a})
 
 instance GoogleRequest CreativeFieldsPatch' where
         type Rs CreativeFieldsPatch' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldsPatch{..}
-          = go _cfpQuotaUser _cfpPrettyPrint _cfpUserIp
+        requestWithRoute r u CreativeFieldsPatch'{..}
+          = go _cfpQuotaUser (Just _cfpPrettyPrint) _cfpUserIp
               _cfpProfileId
               _cfpKey
               (Just _cfpId)
               _cfpOauthToken
               _cfpFields
-              _cfpAlt
+              (Just _cfpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldsPatchAPI)
+                      (Proxy :: Proxy CreativeFieldsPatchResource)
                       r
                       u

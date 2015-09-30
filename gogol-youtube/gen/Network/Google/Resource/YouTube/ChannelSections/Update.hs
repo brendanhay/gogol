@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update a channelSection.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsUpdate@.
-module YouTube.ChannelSections.Update
+module Network.Google.Resource.YouTube.ChannelSections.Update
     (
     -- * REST Resource
-      ChannelSectionsUpdateAPI
+      ChannelSectionsUpdateResource
 
     -- * Creating a Request
-    , channelSectionsUpdate
-    , ChannelSectionsUpdate
+    , channelSectionsUpdate'
+    , ChannelSectionsUpdate'
 
     -- * Request Lenses
     , csuQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelSectionsUpdate@ which the
--- 'ChannelSectionsUpdate' request conforms to.
-type ChannelSectionsUpdateAPI =
+-- 'ChannelSectionsUpdate'' request conforms to.
+type ChannelSectionsUpdateResource =
      "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Put '[JSON] ChannelSection
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] ChannelSection
 
 -- | Update a channelSection.
 --
--- /See:/ 'channelSectionsUpdate' smart constructor.
-data ChannelSectionsUpdate = ChannelSectionsUpdate
+-- /See:/ 'channelSectionsUpdate'' smart constructor.
+data ChannelSectionsUpdate' = ChannelSectionsUpdate'
     { _csuQuotaUser              :: !(Maybe Text)
     , _csuPart                   :: !Text
     , _csuPrettyPrint            :: !Bool
@@ -63,7 +70,7 @@ data ChannelSectionsUpdate = ChannelSectionsUpdate
     , _csuKey                    :: !(Maybe Text)
     , _csuOauthToken             :: !(Maybe Text)
     , _csuFields                 :: !(Maybe Text)
-    , _csuAlt                    :: !Text
+    , _csuAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsUpdate'' with the minimum fields required to make a request.
@@ -87,11 +94,11 @@ data ChannelSectionsUpdate = ChannelSectionsUpdate
 -- * 'csuFields'
 --
 -- * 'csuAlt'
-channelSectionsUpdate
+channelSectionsUpdate'
     :: Text -- ^ 'part'
-    -> ChannelSectionsUpdate
-channelSectionsUpdate pCsuPart_ =
-    ChannelSectionsUpdate
+    -> ChannelSectionsUpdate'
+channelSectionsUpdate' pCsuPart_ =
+    ChannelSectionsUpdate'
     { _csuQuotaUser = Nothing
     , _csuPart = pCsuPart_
     , _csuPrettyPrint = True
@@ -100,7 +107,7 @@ channelSectionsUpdate pCsuPart_ =
     , _csuKey = Nothing
     , _csuOauthToken = Nothing
     , _csuFields = Nothing
-    , _csuAlt = "json"
+    , _csuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,22 +169,23 @@ csuFields
   = lens _csuFields (\ s a -> s{_csuFields = a})
 
 -- | Data format for the response.
-csuAlt :: Lens' ChannelSectionsUpdate' Text
+csuAlt :: Lens' ChannelSectionsUpdate' Alt
 csuAlt = lens _csuAlt (\ s a -> s{_csuAlt = a})
 
 instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsUpdate{..}
-          = go _csuQuotaUser (Just _csuPart) _csuPrettyPrint
+        requestWithRoute r u ChannelSectionsUpdate'{..}
+          = go _csuQuotaUser (Just _csuPart)
+              (Just _csuPrettyPrint)
               _csuUserIp
               _csuOnBehalfOfContentOwner
               _csuKey
               _csuOauthToken
               _csuFields
-              _csuAlt
+              (Just _csuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChannelSectionsUpdateAPI)
+                      (Proxy :: Proxy ChannelSectionsUpdateResource)
                       r
                       u

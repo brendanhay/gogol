@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Commit the results of a player turn.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesTakeTurn@.
-module Games.TurnBasedMatches.TakeTurn
+module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
     (
     -- * REST Resource
-      TurnBasedMatchesTakeTurnAPI
+      TurnBasedMatchesTakeTurnResource
 
     -- * Creating a Request
-    , turnBasedMatchesTakeTurn
-    , TurnBasedMatchesTakeTurn
+    , turnBasedMatchesTakeTurn'
+    , TurnBasedMatchesTakeTurn'
 
     -- * Request Lenses
     , tbmttQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesTakeTurn@ which the
--- 'TurnBasedMatchesTakeTurn' request conforms to.
-type TurnBasedMatchesTakeTurnAPI =
+-- 'TurnBasedMatchesTakeTurn'' request conforms to.
+type TurnBasedMatchesTakeTurnResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "turn" :>
-           QueryParam "language" Text :>
-             Put '[JSON] TurnBasedMatch
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.
 --
--- /See:/ 'turnBasedMatchesTakeTurn' smart constructor.
-data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
+-- /See:/ 'turnBasedMatchesTakeTurn'' smart constructor.
+data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
     { _tbmttQuotaUser   :: !(Maybe Text)
     , _tbmttPrettyPrint :: !Bool
     , _tbmttUserIp      :: !(Maybe Text)
@@ -64,7 +71,7 @@ data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
     , _tbmttOauthToken  :: !(Maybe Text)
     , _tbmttMatchId     :: !Text
     , _tbmttFields      :: !(Maybe Text)
-    , _tbmttAlt         :: !Text
+    , _tbmttAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesTakeTurn'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
 -- * 'tbmttFields'
 --
 -- * 'tbmttAlt'
-turnBasedMatchesTakeTurn
+turnBasedMatchesTakeTurn'
     :: Text -- ^ 'matchId'
-    -> TurnBasedMatchesTakeTurn
-turnBasedMatchesTakeTurn pTbmttMatchId_ =
-    TurnBasedMatchesTakeTurn
+    -> TurnBasedMatchesTakeTurn'
+turnBasedMatchesTakeTurn' pTbmttMatchId_ =
+    TurnBasedMatchesTakeTurn'
     { _tbmttQuotaUser = Nothing
     , _tbmttPrettyPrint = True
     , _tbmttUserIp = Nothing
@@ -101,7 +108,7 @@ turnBasedMatchesTakeTurn pTbmttMatchId_ =
     , _tbmttOauthToken = Nothing
     , _tbmttMatchId = pTbmttMatchId_
     , _tbmttFields = Nothing
-    , _tbmttAlt = "json"
+    , _tbmttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +160,24 @@ tbmttFields
   = lens _tbmttFields (\ s a -> s{_tbmttFields = a})
 
 -- | Data format for the response.
-tbmttAlt :: Lens' TurnBasedMatchesTakeTurn' Text
+tbmttAlt :: Lens' TurnBasedMatchesTakeTurn' Alt
 tbmttAlt = lens _tbmttAlt (\ s a -> s{_tbmttAlt = a})
 
 instance GoogleRequest TurnBasedMatchesTakeTurn'
          where
         type Rs TurnBasedMatchesTakeTurn' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesTakeTurn{..}
-          = go _tbmttQuotaUser _tbmttPrettyPrint _tbmttUserIp
+        requestWithRoute r u TurnBasedMatchesTakeTurn'{..}
+          = go _tbmttQuotaUser (Just _tbmttPrettyPrint)
+              _tbmttUserIp
               _tbmttKey
               _tbmttLanguage
               _tbmttOauthToken
               _tbmttMatchId
               _tbmttFields
-              _tbmttAlt
+              (Just _tbmttAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesTakeTurnAPI)
+                      (Proxy :: Proxy TurnBasedMatchesTakeTurnResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Trigger.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersGet@.
-module TagManager.Accounts.Containers.Triggers.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
     (
     -- * REST Resource
-      AccountsContainersTriggersGetAPI
+      AccountsContainersTriggersGetResource
 
     -- * Creating a Request
-    , accountsContainersTriggersGet
-    , AccountsContainersTriggersGet
+    , accountsContainersTriggersGet'
+    , AccountsContainersTriggersGet'
 
     -- * Request Lenses
     , actgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTriggersGet@ which the
--- 'AccountsContainersTriggersGet' request conforms to.
-type AccountsContainersTriggersGetAPI =
+-- 'AccountsContainersTriggersGet'' request conforms to.
+type AccountsContainersTriggersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "triggers" :>
-               Capture "triggerId" Text :> Get '[JSON] Trigger
+               Capture "triggerId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Trigger
 
 -- | Gets a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersGet' smart constructor.
-data AccountsContainersTriggersGet = AccountsContainersTriggersGet
+-- /See:/ 'accountsContainersTriggersGet'' smart constructor.
+data AccountsContainersTriggersGet' = AccountsContainersTriggersGet'
     { _actgQuotaUser   :: !(Maybe Text)
     , _actgPrettyPrint :: !Bool
     , _actgContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersTriggersGet = AccountsContainersTriggersGet
     , _actgKey         :: !(Maybe Text)
     , _actgOauthToken  :: !(Maybe Text)
     , _actgFields      :: !(Maybe Text)
-    , _actgAlt         :: !Text
+    , _actgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersTriggersGet = AccountsContainersTriggersGet
 -- * 'actgFields'
 --
 -- * 'actgAlt'
-accountsContainersTriggersGet
+accountsContainersTriggersGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTriggersGet
-accountsContainersTriggersGet pActgContainerId_ pActgTriggerId_ pActgAccountId_ =
-    AccountsContainersTriggersGet
+    -> AccountsContainersTriggersGet'
+accountsContainersTriggersGet' pActgContainerId_ pActgTriggerId_ pActgAccountId_ =
+    AccountsContainersTriggersGet'
     { _actgQuotaUser = Nothing
     , _actgPrettyPrint = True
     , _actgContainerId = pActgContainerId_
@@ -109,7 +117,7 @@ accountsContainersTriggersGet pActgContainerId_ pActgTriggerId_ pActgAccountId_ 
     , _actgKey = Nothing
     , _actgOauthToken = Nothing
     , _actgFields = Nothing
-    , _actgAlt = "json"
+    , _actgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ actgFields
   = lens _actgFields (\ s a -> s{_actgFields = a})
 
 -- | Data format for the response.
-actgAlt :: Lens' AccountsContainersTriggersGet' Text
+actgAlt :: Lens' AccountsContainersTriggersGet' Alt
 actgAlt = lens _actgAlt (\ s a -> s{_actgAlt = a})
 
 instance GoogleRequest AccountsContainersTriggersGet'
@@ -176,17 +184,19 @@ instance GoogleRequest AccountsContainersTriggersGet'
         type Rs AccountsContainersTriggersGet' = Trigger
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersTriggersGet{..}
-          = go _actgQuotaUser _actgPrettyPrint _actgContainerId
+          AccountsContainersTriggersGet'{..}
+          = go _actgQuotaUser (Just _actgPrettyPrint)
+              _actgContainerId
               _actgTriggerId
               _actgUserIp
               _actgAccountId
               _actgKey
               _actgOauthToken
               _actgFields
-              _actgAlt
+              (Just _actgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTriggersGetAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersTriggersGetResource)
                       r
                       u

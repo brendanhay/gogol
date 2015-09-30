@@ -45,6 +45,13 @@ module Network.Google.AdSenseHost.Types
     , aKind
     , aItems
 
+    -- * ReportHeaders
+    , ReportHeaders
+    , reportHeaders
+    , rhName
+    , rhCurrency
+    , rhType
+
     -- * AdUnits
     , AdUnits
     , adUnits
@@ -92,6 +99,23 @@ module Network.Google.AdSenseHost.Types
     , rHeaders
     , rTotalMatchedRows
 
+    -- * AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
+
+    -- * AdsensehostAssociationsessionsStartProductCode
+    , AdsensehostAssociationsessionsStartProductCode (..)
+
+    -- * AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
+
     -- * Account
     , Account
     , account
@@ -99,6 +123,15 @@ module Network.Google.AdSenseHost.Types
     , accKind
     , accName
     , accId
+
+    -- * AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascUrl
+    , ascBorder
+    , ascTitle
+    , ascBackground
 
     -- * AdClient
     , AdClient
@@ -108,6 +141,13 @@ module Network.Google.AdSenseHost.Types
     , aaSupportsReporting
     , aaId
     , aaProductCode
+
+    -- * AdUnitContentAdsSettingsBackupOption
+    , AdUnitContentAdsSettingsBackupOption
+    , adUnitContentAdsSettingsBackupOption
+    , aucasboColor
+    , aucasboUrl
+    , aucasboType
 
     -- * AdStyle
     , AdStyle
@@ -137,6 +177,16 @@ module Network.Google.AdSenseHost.Types
     , adCode
     , addKind
     , addAdCode
+
+    -- * AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdSenseHost.Types.Product
@@ -144,7 +194,7 @@ import           Network.Google.AdSenseHost.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v4.1' of the AdSense Host API.
-adSenseHostURL :: BaseURL
+adSenseHostURL :: BaseUrl
 adSenseHostURL
   = BaseUrl Https
       "https://www.googleapis.com/adsensehost/v4.1/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing floodlight activity.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesUpdate@.
-module DFAReporting.FloodlightActivities.Update
+module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     (
     -- * REST Resource
-      FloodlightActivitiesUpdateAPI
+      FloodlightActivitiesUpdateResource
 
     -- * Creating a Request
-    , floodlightActivitiesUpdate
-    , FloodlightActivitiesUpdate
+    , floodlightActivitiesUpdate'
+    , FloodlightActivitiesUpdate'
 
     -- * Request Lenses
     , fauQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesUpdate@ which the
--- 'FloodlightActivitiesUpdate' request conforms to.
-type FloodlightActivitiesUpdateAPI =
+-- 'FloodlightActivitiesUpdate'' request conforms to.
+type FloodlightActivitiesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           Put '[JSON] FloodlightActivity
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity.
 --
--- /See:/ 'floodlightActivitiesUpdate' smart constructor.
-data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
+-- /See:/ 'floodlightActivitiesUpdate'' smart constructor.
+data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
     { _fauQuotaUser   :: !(Maybe Text)
     , _fauPrettyPrint :: !Bool
     , _fauUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
     , _fauKey         :: !(Maybe Text)
     , _fauOauthToken  :: !(Maybe Text)
     , _fauFields      :: !(Maybe Text)
-    , _fauAlt         :: !Text
+    , _fauAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
 -- * 'fauFields'
 --
 -- * 'fauAlt'
-floodlightActivitiesUpdate
+floodlightActivitiesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivitiesUpdate
-floodlightActivitiesUpdate pFauProfileId_ =
-    FloodlightActivitiesUpdate
+    -> FloodlightActivitiesUpdate'
+floodlightActivitiesUpdate' pFauProfileId_ =
+    FloodlightActivitiesUpdate'
     { _fauQuotaUser = Nothing
     , _fauPrettyPrint = True
     , _fauUserIp = Nothing
@@ -95,7 +103,7 @@ floodlightActivitiesUpdate pFauProfileId_ =
     , _fauKey = Nothing
     , _fauOauthToken = Nothing
     , _fauFields = Nothing
-    , _fauAlt = "json"
+    , _fauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ fauFields
   = lens _fauFields (\ s a -> s{_fauFields = a})
 
 -- | Data format for the response.
-fauAlt :: Lens' FloodlightActivitiesUpdate' Text
+fauAlt :: Lens' FloodlightActivitiesUpdate' Alt
 fauAlt = lens _fauAlt (\ s a -> s{_fauAlt = a})
 
 instance GoogleRequest FloodlightActivitiesUpdate'
@@ -148,15 +156,15 @@ instance GoogleRequest FloodlightActivitiesUpdate'
         type Rs FloodlightActivitiesUpdate' =
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesUpdate{..}
-          = go _fauQuotaUser _fauPrettyPrint _fauUserIp
+        requestWithRoute r u FloodlightActivitiesUpdate'{..}
+          = go _fauQuotaUser (Just _fauPrettyPrint) _fauUserIp
               _fauProfileId
               _fauKey
               _fauOauthToken
               _fauFields
-              _fauAlt
+              (Just _fauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesUpdateAPI)
+                      (Proxy :: Proxy FloodlightActivitiesUpdateResource)
                       r
                       u

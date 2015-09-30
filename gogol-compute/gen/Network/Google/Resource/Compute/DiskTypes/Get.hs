@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified disk type resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDiskTypesGet@.
-module Compute.DiskTypes.Get
+module Network.Google.Resource.Compute.DiskTypes.Get
     (
     -- * REST Resource
-      DiskTypesGetAPI
+      DiskTypesGetResource
 
     -- * Creating a Request
-    , diskTypesGet
-    , DiskTypesGet
+    , diskTypesGet'
+    , DiskTypesGet'
 
     -- * Request Lenses
     , dtgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDiskTypesGet@ which the
--- 'DiskTypesGet' request conforms to.
-type DiskTypesGetAPI =
+-- 'DiskTypesGet'' request conforms to.
+type DiskTypesGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "diskTypes" :>
-             Capture "diskType" Text :> Get '[JSON] DiskType
+             Capture "diskType" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] DiskType
 
 -- | Returns the specified disk type resource.
 --
--- /See:/ 'diskTypesGet' smart constructor.
-data DiskTypesGet = DiskTypesGet
+-- /See:/ 'diskTypesGet'' smart constructor.
+data DiskTypesGet' = DiskTypesGet'
     { _dtgQuotaUser   :: !(Maybe Text)
     , _dtgPrettyPrint :: !Bool
     , _dtgProject     :: !Text
@@ -66,7 +74,7 @@ data DiskTypesGet = DiskTypesGet
     , _dtgDiskType    :: !Text
     , _dtgOauthToken  :: !(Maybe Text)
     , _dtgFields      :: !(Maybe Text)
-    , _dtgAlt         :: !Text
+    , _dtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data DiskTypesGet = DiskTypesGet
 -- * 'dtgFields'
 --
 -- * 'dtgAlt'
-diskTypesGet
+diskTypesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'diskType'
-    -> DiskTypesGet
-diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
-    DiskTypesGet
+    -> DiskTypesGet'
+diskTypesGet' pDtgProject_ pDtgZone_ pDtgDiskType_ =
+    DiskTypesGet'
     { _dtgQuotaUser = Nothing
     , _dtgPrettyPrint = True
     , _dtgProject = pDtgProject_
@@ -108,7 +116,7 @@ diskTypesGet pDtgProject_ pDtgZone_ pDtgDiskType_ =
     , _dtgDiskType = pDtgDiskType_
     , _dtgOauthToken = Nothing
     , _dtgFields = Nothing
-    , _dtgAlt = "json"
+    , _dtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,21 +170,23 @@ dtgFields
   = lens _dtgFields (\ s a -> s{_dtgFields = a})
 
 -- | Data format for the response.
-dtgAlt :: Lens' DiskTypesGet' Text
+dtgAlt :: Lens' DiskTypesGet' Alt
 dtgAlt = lens _dtgAlt (\ s a -> s{_dtgAlt = a})
 
 instance GoogleRequest DiskTypesGet' where
         type Rs DiskTypesGet' = DiskType
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DiskTypesGet{..}
-          = go _dtgQuotaUser _dtgPrettyPrint _dtgProject
+        requestWithRoute r u DiskTypesGet'{..}
+          = go _dtgQuotaUser (Just _dtgPrettyPrint) _dtgProject
               _dtgUserIp
               _dtgZone
               _dtgKey
               _dtgDiskType
               _dtgOauthToken
               _dtgFields
-              _dtgAlt
+              (Just _dtgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DiskTypesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DiskTypesGetResource)
+                      r
                       u

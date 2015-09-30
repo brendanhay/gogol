@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a report request into the reporting system.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsRequest@.
-module DoubleClickSearch.Reports.Request
+module Network.Google.Resource.DoubleClickSearch.Reports.Request
     (
     -- * REST Resource
-      ReportsRequestAPI
+      ReportsRequestResource
 
     -- * Creating a Request
-    , reportsRequest
-    , ReportsRequest
+    , reportsRequest'
+    , ReportsRequest'
 
     -- * Request Lenses
     , rrQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchReportsRequest@ which the
--- 'ReportsRequest' request conforms to.
-type ReportsRequestAPI =
-     "reports" :> Post '[JSON] Report
+-- 'ReportsRequest'' request conforms to.
+type ReportsRequestResource =
+     "reports" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Report
 
 -- | Inserts a report request into the reporting system.
 --
--- /See:/ 'reportsRequest' smart constructor.
-data ReportsRequest = ReportsRequest
+-- /See:/ 'reportsRequest'' smart constructor.
+data ReportsRequest' = ReportsRequest'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
     , _rrUserIp      :: !(Maybe Text)
     , _rrKey         :: !(Maybe Text)
     , _rrOauthToken  :: !(Maybe Text)
     , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Text
+    , _rrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRequest'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data ReportsRequest = ReportsRequest
 -- * 'rrFields'
 --
 -- * 'rrAlt'
-reportsRequest
-    :: ReportsRequest
-reportsRequest =
-    ReportsRequest
+reportsRequest'
+    :: ReportsRequest'
+reportsRequest' =
+    ReportsRequest'
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
     , _rrUserIp = Nothing
     , _rrKey = Nothing
     , _rrOauthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = "json"
+    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +131,21 @@ rrFields :: Lens' ReportsRequest' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
 -- | Data format for the response.
-rrAlt :: Lens' ReportsRequest' Text
+rrAlt :: Lens' ReportsRequest' Alt
 rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
 
 instance GoogleRequest ReportsRequest' where
         type Rs ReportsRequest' = Report
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsRequest{..}
-          = go _rrQuotaUser _rrPrettyPrint _rrUserIp _rrKey
+        requestWithRoute r u ReportsRequest'{..}
+          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIp
+              _rrKey
               _rrOauthToken
               _rrFields
-              _rrAlt
+              (Just _rrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsRequestAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsRequestResource)
                       r
                       u

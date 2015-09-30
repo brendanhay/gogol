@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsList@.
-module Compute.GlobalOperations.List
+module Network.Google.Resource.Compute.GlobalOperations.List
     (
     -- * REST Resource
-      GlobalOperationsListAPI
+      GlobalOperationsListResource
 
     -- * Creating a Request
-    , globalOperationsList
-    , GlobalOperationsList
+    , globalOperationsList'
+    , GlobalOperationsList'
 
     -- * Request Lenses
     , golQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalOperationsList@ which the
--- 'GlobalOperationsList' request conforms to.
-type GlobalOperationsListAPI =
+-- 'GlobalOperationsList'' request conforms to.
+type GlobalOperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] OperationList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- project.
 --
--- /See:/ 'globalOperationsList' smart constructor.
-data GlobalOperationsList = GlobalOperationsList
+-- /See:/ 'globalOperationsList'' smart constructor.
+data GlobalOperationsList' = GlobalOperationsList'
     { _golQuotaUser   :: !(Maybe Text)
     , _golPrettyPrint :: !Bool
     , _golProject     :: !Text
@@ -72,7 +79,7 @@ data GlobalOperationsList = GlobalOperationsList
     , _golOauthToken  :: !(Maybe Text)
     , _golMaxResults  :: !Word32
     , _golFields      :: !(Maybe Text)
-    , _golAlt         :: !Text
+    , _golAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data GlobalOperationsList = GlobalOperationsList
 -- * 'golFields'
 --
 -- * 'golAlt'
-globalOperationsList
+globalOperationsList'
     :: Text -- ^ 'project'
-    -> GlobalOperationsList
-globalOperationsList pGolProject_ =
-    GlobalOperationsList
+    -> GlobalOperationsList'
+globalOperationsList' pGolProject_ =
+    GlobalOperationsList'
     { _golQuotaUser = Nothing
     , _golPrettyPrint = True
     , _golProject = pGolProject_
@@ -115,7 +122,7 @@ globalOperationsList pGolProject_ =
     , _golOauthToken = Nothing
     , _golMaxResults = 500
     , _golFields = Nothing
-    , _golAlt = "json"
+    , _golAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +195,14 @@ golFields
   = lens _golFields (\ s a -> s{_golFields = a})
 
 -- | Data format for the response.
-golAlt :: Lens' GlobalOperationsList' Text
+golAlt :: Lens' GlobalOperationsList' Alt
 golAlt = lens _golAlt (\ s a -> s{_golAlt = a})
 
 instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalOperationsList{..}
-          = go _golQuotaUser _golPrettyPrint _golProject
+        requestWithRoute r u GlobalOperationsList'{..}
+          = go _golQuotaUser (Just _golPrettyPrint) _golProject
               _golUserIp
               _golKey
               _golFilter
@@ -203,9 +210,9 @@ instance GoogleRequest GlobalOperationsList' where
               _golOauthToken
               (Just _golMaxResults)
               _golFields
-              _golAlt
+              (Just _golAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalOperationsListAPI)
+                      (Proxy :: Proxy GlobalOperationsListResource)
                       r
                       u

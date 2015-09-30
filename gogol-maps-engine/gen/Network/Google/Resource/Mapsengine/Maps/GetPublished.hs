@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return the published metadata for a particular map.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsGetPublished@.
-module Mapsengine.Maps.GetPublished
+module Network.Google.Resource.Mapsengine.Maps.GetPublished
     (
     -- * REST Resource
-      MapsGetPublishedAPI
+      MapsGetPublishedResource
 
     -- * Creating a Request
-    , mapsGetPublished
-    , MapsGetPublished
+    , mapsGetPublished'
+    , MapsGetPublished'
 
     -- * Request Lenses
     , mgpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsGetPublished@ which the
--- 'MapsGetPublished' request conforms to.
-type MapsGetPublishedAPI =
+-- 'MapsGetPublished'' request conforms to.
+type MapsGetPublishedResource =
      "maps" :>
        Capture "id" Text :>
-         "published" :> Get '[JSON] PublishedMap
+         "published" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] PublishedMap
 
 -- | Return the published metadata for a particular map.
 --
--- /See:/ 'mapsGetPublished' smart constructor.
-data MapsGetPublished = MapsGetPublished
+-- /See:/ 'mapsGetPublished'' smart constructor.
+data MapsGetPublished' = MapsGetPublished'
     { _mgpQuotaUser   :: !(Maybe Text)
     , _mgpPrettyPrint :: !Bool
     , _mgpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data MapsGetPublished = MapsGetPublished
     , _mgpId          :: !Text
     , _mgpOauthToken  :: !(Maybe Text)
     , _mgpFields      :: !(Maybe Text)
-    , _mgpAlt         :: !Text
+    , _mgpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsGetPublished'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data MapsGetPublished = MapsGetPublished
 -- * 'mgpFields'
 --
 -- * 'mgpAlt'
-mapsGetPublished
+mapsGetPublished'
     :: Text -- ^ 'id'
-    -> MapsGetPublished
-mapsGetPublished pMgpId_ =
-    MapsGetPublished
+    -> MapsGetPublished'
+mapsGetPublished' pMgpId_ =
+    MapsGetPublished'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = True
     , _mgpUserIp = Nothing
@@ -94,7 +102,7 @@ mapsGetPublished pMgpId_ =
     , _mgpId = pMgpId_
     , _mgpOauthToken = Nothing
     , _mgpFields = Nothing
-    , _mgpAlt = "json"
+    , _mgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ mgpFields
   = lens _mgpFields (\ s a -> s{_mgpFields = a})
 
 -- | Data format for the response.
-mgpAlt :: Lens' MapsGetPublished' Text
+mgpAlt :: Lens' MapsGetPublished' Alt
 mgpAlt = lens _mgpAlt (\ s a -> s{_mgpAlt = a})
 
 instance GoogleRequest MapsGetPublished' where
         type Rs MapsGetPublished' = PublishedMap
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsGetPublished{..}
-          = go _mgpQuotaUser _mgpPrettyPrint _mgpUserIp _mgpKey
+        requestWithRoute r u MapsGetPublished'{..}
+          = go _mgpQuotaUser (Just _mgpPrettyPrint) _mgpUserIp
+              _mgpKey
               _mgpId
               _mgpOauthToken
               _mgpFields
-              _mgpAlt
+              (Just _mgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MapsGetPublishedAPI)
+                      (Proxy :: Proxy MapsGetPublishedResource)
                       r
                       u

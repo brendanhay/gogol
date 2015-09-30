@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a channelSection for the authenticated user\'s channel.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelSectionsInsert@.
-module YouTube.ChannelSections.Insert
+module Network.Google.Resource.YouTube.ChannelSections.Insert
     (
     -- * REST Resource
-      ChannelSectionsInsertAPI
+      ChannelSectionsInsertResource
 
     -- * Creating a Request
-    , channelSectionsInsert
-    , ChannelSectionsInsert
+    , channelSectionsInsert'
+    , ChannelSectionsInsert'
 
     -- * Request Lenses
     , csiQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelSectionsInsert@ which the
--- 'ChannelSectionsInsert' request conforms to.
-type ChannelSectionsInsertAPI =
+-- 'ChannelSectionsInsert'' request conforms to.
+type ChannelSectionsInsertResource =
      "channelSections" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             Post '[JSON] ChannelSection
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ChannelSection
 
 -- | Adds a channelSection for the authenticated user\'s channel.
 --
--- /See:/ 'channelSectionsInsert' smart constructor.
-data ChannelSectionsInsert = ChannelSectionsInsert
+-- /See:/ 'channelSectionsInsert'' smart constructor.
+data ChannelSectionsInsert' = ChannelSectionsInsert'
     { _csiQuotaUser                     :: !(Maybe Text)
     , _csiPart                          :: !Text
     , _csiPrettyPrint                   :: !Bool
@@ -66,7 +73,7 @@ data ChannelSectionsInsert = ChannelSectionsInsert
     , _csiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _csiOauthToken                    :: !(Maybe Text)
     , _csiFields                        :: !(Maybe Text)
-    , _csiAlt                           :: !Text
+    , _csiAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsInsert'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data ChannelSectionsInsert = ChannelSectionsInsert
 -- * 'csiFields'
 --
 -- * 'csiAlt'
-channelSectionsInsert
+channelSectionsInsert'
     :: Text -- ^ 'part'
-    -> ChannelSectionsInsert
-channelSectionsInsert pCsiPart_ =
-    ChannelSectionsInsert
+    -> ChannelSectionsInsert'
+channelSectionsInsert' pCsiPart_ =
+    ChannelSectionsInsert'
     { _csiQuotaUser = Nothing
     , _csiPart = pCsiPart_
     , _csiPrettyPrint = True
@@ -106,7 +113,7 @@ channelSectionsInsert pCsiPart_ =
     , _csiOnBehalfOfContentOwnerChannel = Nothing
     , _csiOauthToken = Nothing
     , _csiFields = Nothing
-    , _csiAlt = "json"
+    , _csiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -189,23 +196,24 @@ csiFields
   = lens _csiFields (\ s a -> s{_csiFields = a})
 
 -- | Data format for the response.
-csiAlt :: Lens' ChannelSectionsInsert' Text
+csiAlt :: Lens' ChannelSectionsInsert' Alt
 csiAlt = lens _csiAlt (\ s a -> s{_csiAlt = a})
 
 instance GoogleRequest ChannelSectionsInsert' where
         type Rs ChannelSectionsInsert' = ChannelSection
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelSectionsInsert{..}
-          = go _csiQuotaUser (Just _csiPart) _csiPrettyPrint
+        requestWithRoute r u ChannelSectionsInsert'{..}
+          = go _csiQuotaUser (Just _csiPart)
+              (Just _csiPrettyPrint)
               _csiUserIp
               _csiOnBehalfOfContentOwner
               _csiKey
               _csiOnBehalfOfContentOwnerChannel
               _csiOauthToken
               _csiFields
-              _csiAlt
+              (Just _csiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ChannelSectionsInsertAPI)
+                      (Proxy :: Proxy ChannelSectionsInsertResource)
                       r
                       u

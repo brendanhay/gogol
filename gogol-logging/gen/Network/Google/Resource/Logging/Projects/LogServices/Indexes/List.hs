@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the current index values for a log service.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogServicesIndexesList@.
-module Logging.Projects.LogServices.Indexes.List
+module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
     (
     -- * REST Resource
-      ProjectsLogServicesIndexesListAPI
+      ProjectsLogServicesIndexesListResource
 
     -- * Creating a Request
-    , projectsLogServicesIndexesList
-    , ProjectsLogServicesIndexesList
+    , projectsLogServicesIndexesList'
+    , ProjectsLogServicesIndexesList'
 
     -- * Request Lenses
     , plsilLog
@@ -55,8 +56,8 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogServicesIndexesList@ which the
--- 'ProjectsLogServicesIndexesList' request conforms to.
-type ProjectsLogServicesIndexesListAPI =
+-- 'ProjectsLogServicesIndexesList'' request conforms to.
+type ProjectsLogServicesIndexesListResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
@@ -64,16 +65,30 @@ type ProjectsLogServicesIndexesListAPI =
              Capture "logServicesId" Text :>
                "indexes" :>
                  QueryParam "log" Text :>
-                   QueryParam "depth" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "pageSize" Int32 :>
-                         QueryParam "indexPrefix" Text :>
-                           Get '[JSON] ListLogServiceIndexesResponse
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "depth" Int32 :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "pageSize" Int32 :>
+                                             QueryParam "indexPrefix" Text :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListLogServiceIndexesResponse
 
 -- | Lists the current index values for a log service.
 --
--- /See:/ 'projectsLogServicesIndexesList' smart constructor.
-data ProjectsLogServicesIndexesList = ProjectsLogServicesIndexesList
+-- /See:/ 'projectsLogServicesIndexesList'' smart constructor.
+data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
     { _plsilLog            :: !(Maybe Text)
     , _plsilXgafv          :: !(Maybe Text)
     , _plsilQuotaUser      :: !(Maybe Text)
@@ -139,12 +154,12 @@ data ProjectsLogServicesIndexesList = ProjectsLogServicesIndexesList
 -- * 'plsilCallback'
 --
 -- * 'plsilAlt'
-projectsLogServicesIndexesList
+projectsLogServicesIndexesList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogServicesIndexesList
-projectsLogServicesIndexesList pPlsilLogServicesId_ pPlsilProjectsId_ =
-    ProjectsLogServicesIndexesList
+    -> ProjectsLogServicesIndexesList'
+projectsLogServicesIndexesList' pPlsilLogServicesId_ pPlsilProjectsId_ =
+    ProjectsLogServicesIndexesList'
     { _plsilLog = Nothing
     , _plsilXgafv = Nothing
     , _plsilQuotaUser = Nothing
@@ -314,11 +329,11 @@ instance GoogleRequest
              ListLogServiceIndexesResponse
         request = requestWithRoute defReq loggingURL
         requestWithRoute r u
-          ProjectsLogServicesIndexesList{..}
+          ProjectsLogServicesIndexesList'{..}
           = go _plsilLog _plsilXgafv _plsilQuotaUser
-              _plsilPrettyPrint
+              (Just _plsilPrettyPrint)
               _plsilUploadProtocol
-              _plsilPp
+              (Just _plsilPp)
               _plsilAccessToken
               _plsilUploadType
               _plsilBearerToken
@@ -332,9 +347,10 @@ instance GoogleRequest
               _plsilIndexPrefix
               _plsilFields
               _plsilCallback
-              _plsilAlt
+              (Just _plsilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogServicesIndexesListAPI)
+                      (Proxy ::
+                         Proxy ProjectsLogServicesIndexesListResource)
                       r
                       u

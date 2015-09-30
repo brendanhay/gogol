@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectAccessControlsGet@.
-module Storage.ObjectAccessControls.Get
+module Network.Google.Resource.Storage.ObjectAccessControls.Get
     (
     -- * REST Resource
-      ObjectAccessControlsGetAPI
+      ObjectAccessControlsGetResource
 
     -- * Creating a Request
-    , objectAccessControlsGet
-    , ObjectAccessControlsGet
+    , objectAccessControlsGet'
+    , ObjectAccessControlsGet'
 
     -- * Request Lenses
     , oacgQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectAccessControlsGet@ which the
--- 'ObjectAccessControlsGet' request conforms to.
-type ObjectAccessControlsGetAPI =
+-- 'ObjectAccessControlsGet'' request conforms to.
+type ObjectAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
              "acl" :>
                Capture "entity" Text :>
-                 QueryParam "generation" Word64 :>
-                   Get '[JSON] ObjectAccessControl
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "generation" Word64 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] ObjectAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
--- /See:/ 'objectAccessControlsGet' smart constructor.
-data ObjectAccessControlsGet = ObjectAccessControlsGet
+-- /See:/ 'objectAccessControlsGet'' smart constructor.
+data ObjectAccessControlsGet' = ObjectAccessControlsGet'
     { _oacgQuotaUser   :: !(Maybe Text)
     , _oacgPrettyPrint :: !Bool
     , _oacgUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data ObjectAccessControlsGet = ObjectAccessControlsGet
     , _oacgEntity      :: !Text
     , _oacgGeneration  :: !(Maybe Word64)
     , _oacgFields      :: !(Maybe Text)
-    , _oacgAlt         :: !Text
+    , _oacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsGet'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data ObjectAccessControlsGet = ObjectAccessControlsGet
 -- * 'oacgFields'
 --
 -- * 'oacgAlt'
-objectAccessControlsGet
+objectAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
-    -> ObjectAccessControlsGet
-objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
-    ObjectAccessControlsGet
+    -> ObjectAccessControlsGet'
+objectAccessControlsGet' pOacgBucket_ pOacgObject_ pOacgEntity_ =
+    ObjectAccessControlsGet'
     { _oacgQuotaUser = Nothing
     , _oacgPrettyPrint = True
     , _oacgUserIp = Nothing
@@ -116,7 +124,7 @@ objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
     , _oacgEntity = pOacgEntity_
     , _oacgGeneration = Nothing
     , _oacgFields = Nothing
-    , _oacgAlt = "json"
+    , _oacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,15 +189,16 @@ oacgFields
   = lens _oacgFields (\ s a -> s{_oacgFields = a})
 
 -- | Data format for the response.
-oacgAlt :: Lens' ObjectAccessControlsGet' Text
+oacgAlt :: Lens' ObjectAccessControlsGet' Alt
 oacgAlt = lens _oacgAlt (\ s a -> s{_oacgAlt = a})
 
 instance GoogleRequest ObjectAccessControlsGet' where
         type Rs ObjectAccessControlsGet' =
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectAccessControlsGet{..}
-          = go _oacgQuotaUser _oacgPrettyPrint _oacgUserIp
+        requestWithRoute r u ObjectAccessControlsGet'{..}
+          = go _oacgQuotaUser (Just _oacgPrettyPrint)
+              _oacgUserIp
               _oacgBucket
               _oacgKey
               _oacgObject
@@ -197,9 +206,9 @@ instance GoogleRequest ObjectAccessControlsGet' where
               _oacgEntity
               _oacgGeneration
               _oacgFields
-              _oacgAlt
+              (Just _oacgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ObjectAccessControlsGetAPI)
+                      (Proxy :: Proxy ObjectAccessControlsGetResource)
                       r
                       u

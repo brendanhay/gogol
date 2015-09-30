@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update tasks that are leased out of a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksUpdate@.
-module Taskqueue.Tasks.Update
+module Network.Google.Resource.Taskqueue.Tasks.Update
     (
     -- * REST Resource
-      TasksUpdateAPI
+      TasksUpdateResource
 
     -- * Creating a Request
-    , tasksUpdate
-    , TasksUpdate
+    , tasksUpdate'
+    , TasksUpdate'
 
     -- * Request Lenses
     , tuTaskqueue
@@ -46,20 +47,26 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksUpdate@ which the
--- 'TasksUpdate' request conforms to.
-type TasksUpdateAPI =
+-- 'TasksUpdate'' request conforms to.
+type TasksUpdateResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
            "tasks" :>
              Capture "task" Text :>
-               QueryParam "newLeaseSeconds" Int32 :>
-                 Post '[JSON] Task
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "newLeaseSeconds" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue.
 --
--- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate
+-- /See:/ 'tasksUpdate'' smart constructor.
+data TasksUpdate' = TasksUpdate'
     { _tuTaskqueue       :: !Text
     , _tuQuotaUser       :: !(Maybe Text)
     , _tuPrettyPrint     :: !Bool
@@ -70,7 +77,7 @@ data TasksUpdate = TasksUpdate
     , _tuOauthToken      :: !(Maybe Text)
     , _tuNewLeaseSeconds :: !Int32
     , _tuFields          :: !(Maybe Text)
-    , _tuAlt             :: !Text
+    , _tuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
@@ -98,14 +105,14 @@ data TasksUpdate = TasksUpdate
 -- * 'tuFields'
 --
 -- * 'tuAlt'
-tasksUpdate
+tasksUpdate'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
     -> Text -- ^ 'task'
     -> Int32 -- ^ 'newLeaseSeconds'
-    -> TasksUpdate
-tasksUpdate pTuTaskqueue_ pTuProject_ pTuTask_ pTuNewLeaseSeconds_ =
-    TasksUpdate
+    -> TasksUpdate'
+tasksUpdate' pTuTaskqueue_ pTuProject_ pTuTask_ pTuNewLeaseSeconds_ =
+    TasksUpdate'
     { _tuTaskqueue = pTuTaskqueue_
     , _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
@@ -116,7 +123,7 @@ tasksUpdate pTuTaskqueue_ pTuProject_ pTuTask_ pTuNewLeaseSeconds_ =
     , _tuOauthToken = Nothing
     , _tuNewLeaseSeconds = pTuNewLeaseSeconds_
     , _tuFields = Nothing
-    , _tuAlt = "json"
+    , _tuAlt = JSON
     }
 
 tuTaskqueue :: Lens' TasksUpdate' Text
@@ -171,15 +178,15 @@ tuFields :: Lens' TasksUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuAlt :: Lens' TasksUpdate' Text
+tuAlt :: Lens' TasksUpdate' Alt
 tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TasksUpdate' where
         type Rs TasksUpdate' = Task
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksUpdate{..}
-          = go _tuTaskqueue _tuQuotaUser _tuPrettyPrint
+        requestWithRoute r u TasksUpdate'{..}
+          = go _tuTaskqueue _tuQuotaUser (Just _tuPrettyPrint)
               _tuProject
               _tuUserIp
               _tuKey
@@ -187,6 +194,9 @@ instance GoogleRequest TasksUpdate' where
               _tuOauthToken
               (Just _tuNewLeaseSeconds)
               _tuFields
-              _tuAlt
+              (Just _tuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TasksUpdateResource)
+                      r
+                      u

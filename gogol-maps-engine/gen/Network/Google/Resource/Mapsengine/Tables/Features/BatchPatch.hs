@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -30,14 +31,14 @@
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesFeaturesBatchPatch@.
-module Mapsengine.Tables.Features.BatchPatch
+module Network.Google.Resource.Mapsengine.Tables.Features.BatchPatch
     (
     -- * REST Resource
-      TablesFeaturesBatchPatchAPI
+      TablesFeaturesBatchPatchResource
 
     -- * Creating a Request
-    , tablesFeaturesBatchPatch
-    , TablesFeaturesBatchPatch
+    , tablesFeaturesBatchPatch'
+    , TablesFeaturesBatchPatch'
 
     -- * Request Lenses
     , tfbpQuotaUser
@@ -54,11 +55,19 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesFeaturesBatchPatch@ which the
--- 'TablesFeaturesBatchPatch' request conforms to.
-type TablesFeaturesBatchPatchAPI =
+-- 'TablesFeaturesBatchPatch'' request conforms to.
+type TablesFeaturesBatchPatchResource =
      "tables" :>
        Capture "id" Text :>
-         "features" :> "batchPatch" :> Post '[JSON] ()
+         "features" :>
+           "batchPatch" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Update the supplied features. A single batchPatch request can update: -
 -- Up to 50 features. - A combined total of 10 000 vertices. Feature limits
@@ -73,8 +82,8 @@ type TablesFeaturesBatchPatchAPI =
 -- deletes that property. For more information about updating features,
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
--- /See:/ 'tablesFeaturesBatchPatch' smart constructor.
-data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
+-- /See:/ 'tablesFeaturesBatchPatch'' smart constructor.
+data TablesFeaturesBatchPatch' = TablesFeaturesBatchPatch'
     { _tfbpQuotaUser   :: !(Maybe Text)
     , _tfbpPrettyPrint :: !Bool
     , _tfbpUserIp      :: !(Maybe Text)
@@ -82,7 +91,7 @@ data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
     , _tfbpId          :: !Text
     , _tfbpOauthToken  :: !(Maybe Text)
     , _tfbpFields      :: !(Maybe Text)
-    , _tfbpAlt         :: !Text
+    , _tfbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesFeaturesBatchPatch'' with the minimum fields required to make a request.
@@ -104,11 +113,11 @@ data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
 -- * 'tfbpFields'
 --
 -- * 'tfbpAlt'
-tablesFeaturesBatchPatch
+tablesFeaturesBatchPatch'
     :: Text -- ^ 'id'
-    -> TablesFeaturesBatchPatch
-tablesFeaturesBatchPatch pTfbpId_ =
-    TablesFeaturesBatchPatch
+    -> TablesFeaturesBatchPatch'
+tablesFeaturesBatchPatch' pTfbpId_ =
+    TablesFeaturesBatchPatch'
     { _tfbpQuotaUser = Nothing
     , _tfbpPrettyPrint = True
     , _tfbpUserIp = Nothing
@@ -116,7 +125,7 @@ tablesFeaturesBatchPatch pTfbpId_ =
     , _tfbpId = pTfbpId_
     , _tfbpOauthToken = Nothing
     , _tfbpFields = Nothing
-    , _tfbpAlt = "json"
+    , _tfbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +170,23 @@ tfbpFields
   = lens _tfbpFields (\ s a -> s{_tfbpFields = a})
 
 -- | Data format for the response.
-tfbpAlt :: Lens' TablesFeaturesBatchPatch' Text
+tfbpAlt :: Lens' TablesFeaturesBatchPatch' Alt
 tfbpAlt = lens _tfbpAlt (\ s a -> s{_tfbpAlt = a})
 
 instance GoogleRequest TablesFeaturesBatchPatch'
          where
         type Rs TablesFeaturesBatchPatch' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesFeaturesBatchPatch{..}
-          = go _tfbpQuotaUser _tfbpPrettyPrint _tfbpUserIp
+        requestWithRoute r u TablesFeaturesBatchPatch'{..}
+          = go _tfbpQuotaUser (Just _tfbpPrettyPrint)
+              _tfbpUserIp
               _tfbpKey
               _tfbpId
               _tfbpOauthToken
               _tfbpFields
-              _tfbpAlt
+              (Just _tfbpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesFeaturesBatchPatchAPI)
+                      (Proxy :: Proxy TablesFeaturesBatchPatchResource)
                       r
                       u

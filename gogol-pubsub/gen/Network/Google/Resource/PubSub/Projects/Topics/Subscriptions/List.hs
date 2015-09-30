@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the name of the subscriptions for this topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsSubscriptionsList@.
-module PubSub.Projects.Topics.Subscriptions.List
+module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     (
     -- * REST Resource
-      ProjectsTopicsSubscriptionsListAPI
+      ProjectsTopicsSubscriptionsListResource
 
     -- * Creating a Request
-    , projectsTopicsSubscriptionsList
-    , ProjectsTopicsSubscriptionsList
+    , projectsTopicsSubscriptionsList'
+    , ProjectsTopicsSubscriptionsList'
 
     -- * Request Lenses
     , ptslXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsSubscriptionsList@ which the
--- 'ProjectsTopicsSubscriptionsList' request conforms to.
-type ProjectsTopicsSubscriptionsListAPI =
+-- 'ProjectsTopicsSubscriptionsList'' request conforms to.
+type ProjectsTopicsSubscriptionsListResource =
      "v1beta2" :>
        "{+topic}" :>
          "subscriptions" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListTopicSubscriptionsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON]
+                                           ListTopicSubscriptionsResponse
 
 -- | Lists the name of the subscriptions for this topic.
 --
--- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
-data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
+-- /See:/ 'projectsTopicsSubscriptionsList'' smart constructor.
+data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
     { _ptslXgafv          :: !(Maybe Text)
     , _ptslQuotaUser      :: !(Maybe Text)
     , _ptslPrettyPrint    :: !Bool
@@ -117,11 +132,11 @@ data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
 -- * 'ptslCallback'
 --
 -- * 'ptslAlt'
-projectsTopicsSubscriptionsList
+projectsTopicsSubscriptionsList'
     :: Text -- ^ 'topic'
-    -> ProjectsTopicsSubscriptionsList
-projectsTopicsSubscriptionsList pPtslTopic_ =
-    ProjectsTopicsSubscriptionsList
+    -> ProjectsTopicsSubscriptionsList'
+projectsTopicsSubscriptionsList' pPtslTopic_ =
+    ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
     , _ptslQuotaUser = Nothing
     , _ptslPrettyPrint = True
@@ -237,10 +252,11 @@ instance GoogleRequest
              ListTopicSubscriptionsResponse
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsTopicsSubscriptionsList{..}
-          = go _ptslXgafv _ptslQuotaUser _ptslPrettyPrint
+          ProjectsTopicsSubscriptionsList'{..}
+          = go _ptslXgafv _ptslQuotaUser
+              (Just _ptslPrettyPrint)
               _ptslUploadProtocol
-              _ptslPp
+              (Just _ptslPp)
               _ptslAccessToken
               _ptslUploadType
               _ptslTopic
@@ -251,9 +267,10 @@ instance GoogleRequest
               _ptslPageSize
               _ptslFields
               _ptslCallback
-              _ptslAlt
+              (Just _ptslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsSubscriptionsListAPI)
+                      (Proxy ::
+                         Proxy ProjectsTopicsSubscriptionsListResource)
                       r
                       u

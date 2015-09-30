@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all entities in a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersEntitiesList@.
-module TagManager.Accounts.Containers.Folders.Entities.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
     (
     -- * REST Resource
-      AccountsContainersFoldersEntitiesListAPI
+      AccountsContainersFoldersEntitiesListResource
 
     -- * Creating a Request
-    , accountsContainersFoldersEntitiesList
-    , AccountsContainersFoldersEntitiesList
+    , accountsContainersFoldersEntitiesList'
+    , AccountsContainersFoldersEntitiesList'
 
     -- * Request Lenses
     , acfelQuotaUser
@@ -45,20 +46,28 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersEntitiesList@ which the
--- 'AccountsContainersFoldersEntitiesList' request conforms to.
-type AccountsContainersFoldersEntitiesListAPI =
+-- 'AccountsContainersFoldersEntitiesList'' request conforms to.
+type AccountsContainersFoldersEntitiesListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "folders" :>
                Capture "folderId" Text :>
-                 "entities" :> Get '[JSON] FolderEntities
+                 "entities" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] FolderEntities
 
 -- | List all entities in a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersEntitiesList' smart constructor.
-data AccountsContainersFoldersEntitiesList = AccountsContainersFoldersEntitiesList
+-- /See:/ 'accountsContainersFoldersEntitiesList'' smart constructor.
+data AccountsContainersFoldersEntitiesList' = AccountsContainersFoldersEntitiesList'
     { _acfelQuotaUser   :: !(Maybe Text)
     , _acfelPrettyPrint :: !Bool
     , _acfelContainerId :: !Text
@@ -68,7 +77,7 @@ data AccountsContainersFoldersEntitiesList = AccountsContainersFoldersEntitiesLi
     , _acfelKey         :: !(Maybe Text)
     , _acfelOauthToken  :: !(Maybe Text)
     , _acfelFields      :: !(Maybe Text)
-    , _acfelAlt         :: !Text
+    , _acfelAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersEntitiesList'' with the minimum fields required to make a request.
@@ -94,13 +103,13 @@ data AccountsContainersFoldersEntitiesList = AccountsContainersFoldersEntitiesLi
 -- * 'acfelFields'
 --
 -- * 'acfelAlt'
-accountsContainersFoldersEntitiesList
+accountsContainersFoldersEntitiesList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersEntitiesList
-accountsContainersFoldersEntitiesList pAcfelContainerId_ pAcfelFolderId_ pAcfelAccountId_ =
-    AccountsContainersFoldersEntitiesList
+    -> AccountsContainersFoldersEntitiesList'
+accountsContainersFoldersEntitiesList' pAcfelContainerId_ pAcfelFolderId_ pAcfelAccountId_ =
+    AccountsContainersFoldersEntitiesList'
     { _acfelQuotaUser = Nothing
     , _acfelPrettyPrint = True
     , _acfelContainerId = pAcfelContainerId_
@@ -110,7 +119,7 @@ accountsContainersFoldersEntitiesList pAcfelContainerId_ pAcfelFolderId_ pAcfelA
     , _acfelKey = Nothing
     , _acfelOauthToken = Nothing
     , _acfelFields = Nothing
-    , _acfelAlt = "json"
+    , _acfelAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,7 +178,7 @@ acfelFields
   = lens _acfelFields (\ s a -> s{_acfelFields = a})
 
 -- | Data format for the response.
-acfelAlt :: Lens' AccountsContainersFoldersEntitiesList' Text
+acfelAlt :: Lens' AccountsContainersFoldersEntitiesList' Alt
 acfelAlt = lens _acfelAlt (\ s a -> s{_acfelAlt = a})
 
 instance GoogleRequest
@@ -178,8 +187,8 @@ instance GoogleRequest
              FolderEntities
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersFoldersEntitiesList{..}
-          = go _acfelQuotaUser _acfelPrettyPrint
+          AccountsContainersFoldersEntitiesList'{..}
+          = go _acfelQuotaUser (Just _acfelPrettyPrint)
               _acfelContainerId
               _acfelUserIp
               _acfelFolderId
@@ -187,10 +196,10 @@ instance GoogleRequest
               _acfelKey
               _acfelOauthToken
               _acfelFields
-              _acfelAlt
+              (Just _acfelAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy AccountsContainersFoldersEntitiesListAPI)
+                         Proxy AccountsContainersFoldersEntitiesListResource)
                       r
                       u

@@ -27,108 +27,132 @@ module Network.Google.Storage
     -- * REST Resources
 
     -- ** StorageBucketAccessControlsDelete
-    , module Storage.BucketAccessControls.Delete
+    , module Network.Google.Resource.Storage.BucketAccessControls.Delete
 
     -- ** StorageBucketAccessControlsGet
-    , module Storage.BucketAccessControls.Get
+    , module Network.Google.Resource.Storage.BucketAccessControls.Get
 
     -- ** StorageBucketAccessControlsInsert
-    , module Storage.BucketAccessControls.Insert
+    , module Network.Google.Resource.Storage.BucketAccessControls.Insert
 
     -- ** StorageBucketAccessControlsList
-    , module Storage.BucketAccessControls.List
+    , module Network.Google.Resource.Storage.BucketAccessControls.List
 
     -- ** StorageBucketAccessControlsPatch
-    , module Storage.BucketAccessControls.Patch
+    , module Network.Google.Resource.Storage.BucketAccessControls.Patch
 
     -- ** StorageBucketAccessControlsUpdate
-    , module Storage.BucketAccessControls.Update
+    , module Network.Google.Resource.Storage.BucketAccessControls.Update
 
     -- ** StorageBucketsDelete
-    , module Storage.Buckets.Delete
+    , module Network.Google.Resource.Storage.Buckets.Delete
 
     -- ** StorageBucketsGet
-    , module Storage.Buckets.Get
+    , module Network.Google.Resource.Storage.Buckets.Get
 
     -- ** StorageBucketsInsert
-    , module Storage.Buckets.Insert
+    , module Network.Google.Resource.Storage.Buckets.Insert
 
     -- ** StorageBucketsList
-    , module Storage.Buckets.List
+    , module Network.Google.Resource.Storage.Buckets.List
 
     -- ** StorageBucketsPatch
-    , module Storage.Buckets.Patch
+    , module Network.Google.Resource.Storage.Buckets.Patch
 
     -- ** StorageBucketsUpdate
-    , module Storage.Buckets.Update
+    , module Network.Google.Resource.Storage.Buckets.Update
 
     -- ** StorageChannelsStop
-    , module Storage.Channels.Stop
+    , module Network.Google.Resource.Storage.Channels.Stop
 
     -- ** StorageDefaultObjectAccessControlsDelete
-    , module Storage.DefaultObjectAccessControls.Delete
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
 
     -- ** StorageDefaultObjectAccessControlsGet
-    , module Storage.DefaultObjectAccessControls.Get
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
 
     -- ** StorageDefaultObjectAccessControlsInsert
-    , module Storage.DefaultObjectAccessControls.Insert
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
 
     -- ** StorageDefaultObjectAccessControlsList
-    , module Storage.DefaultObjectAccessControls.List
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
 
     -- ** StorageDefaultObjectAccessControlsPatch
-    , module Storage.DefaultObjectAccessControls.Patch
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
 
     -- ** StorageDefaultObjectAccessControlsUpdate
-    , module Storage.DefaultObjectAccessControls.Update
+    , module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
 
     -- ** StorageObjectAccessControlsDelete
-    , module Storage.ObjectAccessControls.Delete
+    , module Network.Google.Resource.Storage.ObjectAccessControls.Delete
 
     -- ** StorageObjectAccessControlsGet
-    , module Storage.ObjectAccessControls.Get
+    , module Network.Google.Resource.Storage.ObjectAccessControls.Get
 
     -- ** StorageObjectAccessControlsInsert
-    , module Storage.ObjectAccessControls.Insert
+    , module Network.Google.Resource.Storage.ObjectAccessControls.Insert
 
     -- ** StorageObjectAccessControlsList
-    , module Storage.ObjectAccessControls.List
+    , module Network.Google.Resource.Storage.ObjectAccessControls.List
 
     -- ** StorageObjectAccessControlsPatch
-    , module Storage.ObjectAccessControls.Patch
+    , module Network.Google.Resource.Storage.ObjectAccessControls.Patch
 
     -- ** StorageObjectAccessControlsUpdate
-    , module Storage.ObjectAccessControls.Update
+    , module Network.Google.Resource.Storage.ObjectAccessControls.Update
 
     -- ** StorageObjectsCompose
-    , module Storage.Objects.Compose
+    , module Network.Google.Resource.Storage.Objects.Compose
 
     -- ** StorageObjectsCopy
-    , module Storage.Objects.Copy
+    , module Network.Google.Resource.Storage.Objects.Copy
 
     -- ** StorageObjectsDelete
-    , module Storage.Objects.Delete
+    , module Network.Google.Resource.Storage.Objects.Delete
 
     -- ** StorageObjectsGet
-    , module Storage.Objects.Get
+    , module Network.Google.Resource.Storage.Objects.Get
 
     -- ** StorageObjectsInsert
-    , module Storage.Objects.Insert
+    , module Network.Google.Resource.Storage.Objects.Insert
 
     -- ** StorageObjectsList
-    , module Storage.Objects.List
+    , module Network.Google.Resource.Storage.Objects.List
 
     -- ** StorageObjectsPatch
-    , module Storage.Objects.Patch
+    , module Network.Google.Resource.Storage.Objects.Patch
 
     -- ** StorageObjectsUpdate
-    , module Storage.Objects.Update
+    , module Network.Google.Resource.Storage.Objects.Update
 
     -- ** StorageObjectsWatchAll
-    , module Storage.Objects.WatchAll
+    , module Network.Google.Resource.Storage.Objects.WatchAll
 
     -- * Types
+
+    -- ** BucketVersioning
+    , BucketVersioning
+    , bucketVersioning
+    , bvEnabled
+
+    -- ** ObjectOwner
+    , ObjectOwner
+    , objectOwner
+    , ooEntity
+    , ooEntityId
+
+    -- ** ComposeRequestSourceObjects
+    , ComposeRequestSourceObjects
+    , composeRequestSourceObjects
+    , crsoName
+    , crsoObjectPreconditions
+    , crsoGeneration
+
+    -- ** BucketLogging
+    , BucketLogging
+    , bucketLogging
+    , blLogBucket
+    , blLogObjectPrefix
 
     -- ** Buckets
     , Buckets
@@ -136,6 +160,42 @@ module Network.Google.Storage
     , bNextPageToken
     , bKind
     , bItems
+
+    -- ** BucketLifecycleRuleCondition
+    , BucketLifecycleRuleCondition
+    , bucketLifecycleRuleCondition
+    , blrcAge
+    , blrcIsLive
+    , blrcNumNewerVersions
+    , blrcCreatedBefore
+
+    -- ** BucketLifecycle
+    , BucketLifecycle
+    , bucketLifecycle
+    , blRule
+
+    -- ** BucketLifecycleRuleAction
+    , BucketLifecycleRuleAction
+    , bucketLifecycleRuleAction
+    , blraType
+
+    -- ** ObjectMetadata
+    , ObjectMetadata
+    , objectMetadata
+
+    -- ** StorageBucketsListProjection
+    , StorageBucketsListProjection (..)
+
+    -- ** BucketCORS
+    , BucketCORS
+    , bucketCORS
+    , bcMaxAgeSeconds
+    , bcOrigin
+    , bcResponseHeader
+    , bcMethod
+
+    -- ** StorageObjectsUpdateProjection
+    , StorageObjectsUpdateProjection (..)
 
     -- ** Channel
     , Channel
@@ -178,6 +238,12 @@ module Network.Google.Storage
     , bacKind
     , bacItems
 
+    -- ** BucketLifecycleRule
+    , BucketLifecycleRule
+    , bucketLifecycleRule
+    , blrAction
+    , blrCondition
+
     -- ** Objects
     , Objects
     , objects
@@ -192,6 +258,40 @@ module Network.Google.Storage
     , crDestination
     , crKind
     , crSourceObjects
+
+    -- ** StorageObjectsPatchProjection
+    , StorageObjectsPatchProjection (..)
+
+    -- ** StorageObjectsGetProjection
+    , StorageObjectsGetProjection (..)
+
+    -- ** StorageBucketsGetProjection
+    , StorageBucketsGetProjection (..)
+
+    -- ** ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- ** StorageObjectsCopyProjection
+    , StorageObjectsCopyProjection (..)
+
+    -- ** StorageBucketsPatchProjection
+    , StorageBucketsPatchProjection (..)
+
+    -- ** BucketOwner
+    , BucketOwner
+    , bucketOwner
+    , boEntity
+    , boEntityId
+
+    -- ** StorageObjectsWatchAllProjection
+    , StorageObjectsWatchAllProjection (..)
+
+    -- ** BucketWebsite
+    , BucketWebsite
+    , bucketWebsite
+    , bwMainPageSuffix
+    , bwNotFoundPage
 
     -- ** BucketAccessControl
     , BucketAccessControl
@@ -212,6 +312,9 @@ module Network.Google.Storage
     , objectAccessControls
     , oacKind
     , oacItems
+
+    -- ** StorageObjectsInsertProjection
+    , StorageObjectsInsertProjection (..)
 
     -- ** Object
     , Object
@@ -241,6 +344,17 @@ module Network.Google.Storage
     , objMd5Hash
     , objContentType
 
+    -- ** ComposeRequestSourceObjectsObjectPreconditions
+    , ComposeRequestSourceObjectsObjectPreconditions
+    , composeRequestSourceObjectsObjectPreconditions
+    , crsoopIfGenerationMatch
+
+    -- ** StorageBucketsUpdateProjection
+    , StorageBucketsUpdateProjection (..)
+
+    -- ** StorageObjectsListProjection
+    , StorageObjectsListProjection (..)
+
     -- ** ObjectAccessControl
     , ObjectAccessControl
     , objectAccessControl
@@ -256,6 +370,12 @@ module Network.Google.Storage
     , oacaEntity
     , oacaGeneration
     , oacaEntityId
+
+    -- ** StorageBucketsInsertProjection
+    , StorageBucketsInsertProjection (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -300,10 +420,39 @@ TODO
 -}
 
 type StorageAPI =
-     Buckets :<|> Channels :<|> BucketAccessControls :<|>
-       Objects
-       :<|> DefaultObjectAccessControls
-       :<|> ObjectAccessControls
+     BucketsInsertResource :<|> BucketsListResource :<|>
+       BucketsPatchResource
+       :<|> BucketsGetResource
+       :<|> BucketsDeleteResource
+       :<|> BucketsUpdateResource
+       :<|> ChannelsStopResource
+       :<|> BucketAccessControlsInsertResource
+       :<|> BucketAccessControlsListResource
+       :<|> BucketAccessControlsPatchResource
+       :<|> BucketAccessControlsGetResource
+       :<|> BucketAccessControlsDeleteResource
+       :<|> BucketAccessControlsUpdateResource
+       :<|> ObjectsInsertResource
+       :<|> ObjectsListResource
+       :<|> ObjectsCopyResource
+       :<|> ObjectsWatchAllResource
+       :<|> ObjectsPatchResource
+       :<|> ObjectsGetResource
+       :<|> ObjectsComposeResource
+       :<|> ObjectsDeleteResource
+       :<|> ObjectsUpdateResource
+       :<|> DefaultObjectAccessControlsInsertResource
+       :<|> DefaultObjectAccessControlsListResource
+       :<|> DefaultObjectAccessControlsPatchResource
+       :<|> DefaultObjectAccessControlsGetResource
+       :<|> DefaultObjectAccessControlsDeleteResource
+       :<|> DefaultObjectAccessControlsUpdateResource
+       :<|> ObjectAccessControlsInsertResource
+       :<|> ObjectAccessControlsListResource
+       :<|> ObjectAccessControlsPatchResource
+       :<|> ObjectAccessControlsGetResource
+       :<|> ObjectAccessControlsDeleteResource
+       :<|> ObjectAccessControlsUpdateResource
 
 storageAPI :: Proxy StorageAPI
 storageAPI = Proxy

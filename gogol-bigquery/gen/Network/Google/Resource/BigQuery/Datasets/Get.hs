@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the dataset specified by datasetID.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsGet@.
-module BigQuery.Datasets.Get
+module Network.Google.Resource.BigQuery.Datasets.Get
     (
     -- * REST Resource
-      DatasetsGetAPI
+      DatasetsGetResource
 
     -- * Creating a Request
-    , datasetsGet
-    , DatasetsGet
+    , datasetsGet'
+    , DatasetsGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryDatasetsGet@ which the
--- 'DatasetsGet' request conforms to.
-type DatasetsGetAPI =
+-- 'DatasetsGet'' request conforms to.
+type DatasetsGetResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
-           Capture "datasetId" Text :> Get '[JSON] Dataset
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Dataset
 
 -- | Returns the dataset specified by datasetID.
 --
--- /See:/ 'datasetsGet' smart constructor.
-data DatasetsGet = DatasetsGet
+-- /See:/ 'datasetsGet'' smart constructor.
+data DatasetsGet' = DatasetsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data DatasetsGet = DatasetsGet
     , _dgProjectId   :: !Text
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data DatasetsGet = DatasetsGet
 -- * 'dgFields'
 --
 -- * 'dgAlt'
-datasetsGet
+datasetsGet'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> DatasetsGet
-datasetsGet pDgDatasetId_ pDgProjectId_ =
-    DatasetsGet
+    -> DatasetsGet'
+datasetsGet' pDgDatasetId_ pDgProjectId_ =
+    DatasetsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgUserIp = Nothing
@@ -101,7 +109,7 @@ datasetsGet pDgDatasetId_ pDgProjectId_ =
     , _dgProjectId = pDgProjectId_
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,22 @@ dgFields :: Lens' DatasetsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DatasetsGet' Text
+dgAlt :: Lens' DatasetsGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgUserIp _dgKey
+        requestWithRoute r u DatasetsGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIp
+              _dgKey
               _dgDatasetId
               _dgProjectId
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all assets readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineAssetsList@.
-module Mapsengine.Assets.List
+module Network.Google.Resource.Mapsengine.Assets.List
     (
     -- * REST Resource
-      AssetsListAPI
+      AssetsListResource
 
     -- * Creating a Request
-    , assetsList
-    , AssetsList
+    , assetsList'
+    , AssetsList'
 
     -- * Request Lenses
     , alCreatedAfter
@@ -55,34 +56,41 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineAssetsList@ which the
--- 'AssetsList' request conforms to.
-type AssetsListAPI =
+-- 'AssetsList'' request conforms to.
+type AssetsListResource =
      "assets" :>
        QueryParam "createdAfter" UTCTime :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" Text :>
-             QueryParam "bbox" Text :>
-               QueryParam "modifiedAfter" UTCTime :>
-                 QueryParam "modifiedBefore" UTCTime :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "projectId" Text :>
-                       QueryParam "type" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" UTCTime :>
-                                 Get '[JSON] AssetsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "creatorEmail" Text :>
+                 QueryParam "role" MapsengineAssetsListRole :>
+                   QueryParam "key" Text :>
+                     QueryParam "bbox" Text :>
+                       QueryParam "modifiedAfter" UTCTime :>
+                         QueryParam "modifiedBefore" UTCTime :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "projectId" Text :>
+                               QueryParam "type" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "search" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "tags" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "createdBefore" UTCTime :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON] AssetsListResponse
 
 -- | Return all assets readable by the current user.
 --
--- /See:/ 'assetsList' smart constructor.
-data AssetsList = AssetsList
+-- /See:/ 'assetsList'' smart constructor.
+data AssetsList' = AssetsList'
     { _alCreatedAfter   :: !(Maybe UTCTime)
     , _alQuotaUser      :: !(Maybe Text)
     , _alPrettyPrint    :: !Bool
     , _alUserIp         :: !(Maybe Text)
     , _alCreatorEmail   :: !(Maybe Text)
-    , _alRole           :: !(Maybe Text)
+    , _alRole           :: !(Maybe MapsengineAssetsListRole)
     , _alKey            :: !(Maybe Text)
     , _alBbox           :: !(Maybe Text)
     , _alModifiedAfter  :: !(Maybe UTCTime)
@@ -96,7 +104,7 @@ data AssetsList = AssetsList
     , _alTags           :: !(Maybe Text)
     , _alFields         :: !(Maybe Text)
     , _alCreatedBefore  :: !(Maybe UTCTime)
-    , _alAlt            :: !Text
+    , _alAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsList'' with the minimum fields required to make a request.
@@ -142,10 +150,10 @@ data AssetsList = AssetsList
 -- * 'alCreatedBefore'
 --
 -- * 'alAlt'
-assetsList
-    :: AssetsList
-assetsList =
-    AssetsList
+assetsList'
+    :: AssetsList'
+assetsList' =
+    AssetsList'
     { _alCreatedAfter = Nothing
     , _alQuotaUser = Nothing
     , _alPrettyPrint = True
@@ -165,7 +173,7 @@ assetsList =
     , _alTags = Nothing
     , _alFields = Nothing
     , _alCreatedBefore = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
@@ -202,7 +210,7 @@ alCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-alRole :: Lens' AssetsList' (Maybe Text)
+alRole :: Lens' AssetsList' (Maybe MapsengineAssetsListRole)
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -284,14 +292,15 @@ alCreatedBefore
       (\ s a -> s{_alCreatedBefore = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AssetsList' Text
+alAlt :: Lens' AssetsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AssetsList' where
         type Rs AssetsList' = AssetsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u AssetsList{..}
-          = go _alCreatedAfter _alQuotaUser _alPrettyPrint
+        requestWithRoute r u AssetsList'{..}
+          = go _alCreatedAfter _alQuotaUser
+              (Just _alPrettyPrint)
               _alUserIp
               _alCreatorEmail
               _alRole
@@ -308,6 +317,8 @@ instance GoogleRequest AssetsList' where
               _alTags
               _alFields
               _alCreatedBefore
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AssetsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AssetsListResource)
+                      r
+                      u

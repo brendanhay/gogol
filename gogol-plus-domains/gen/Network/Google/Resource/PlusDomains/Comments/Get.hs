@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,133 +20,142 @@
 -- | Get a comment.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCommentsGet@.
-module PlusDomains.Comments.Get
+module Network.Google.Resource.PlusDomains.Comments.Get
     (
     -- * REST Resource
-      CommentsGetAPI
+      CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet
-    , CommentsGet
+    , commentsGet'
+    , CommentsGet'
 
     -- * Request Lenses
-    , cgQuotaUser
-    , cgPrettyPrint
-    , cgUserIp
-    , cgKey
-    , cgOauthToken
-    , cgCommentId
-    , cgFields
-    , cgAlt
+    , cQuotaUser
+    , cPrettyPrint
+    , cUserIp
+    , cKey
+    , cOauthToken
+    , cCommentId
+    , cFields
+    , cAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCommentsGet@ which the
--- 'CommentsGet' request conforms to.
-type CommentsGetAPI =
+-- 'CommentsGet'' request conforms to.
+type CommentsGetResource =
      "comments" :>
-       Capture "commentId" Text :> Get '[JSON] Comment
+       Capture "commentId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Comment
 
 -- | Get a comment.
 --
--- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
-    { _cgQuotaUser   :: !(Maybe Text)
-    , _cgPrettyPrint :: !Bool
-    , _cgUserIp      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
-    , _cgCommentId   :: !Text
-    , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+-- /See:/ 'commentsGet'' smart constructor.
+data CommentsGet' = CommentsGet'
+    { _cQuotaUser   :: !(Maybe Text)
+    , _cPrettyPrint :: !Bool
+    , _cUserIp      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Text)
+    , _cOauthToken  :: !(Maybe Text)
+    , _cCommentId   :: !Text
+    , _cFields      :: !(Maybe Text)
+    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgQuotaUser'
+-- * 'cQuotaUser'
 --
--- * 'cgPrettyPrint'
+-- * 'cPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cUserIp'
 --
--- * 'cgKey'
+-- * 'cKey'
 --
--- * 'cgOauthToken'
+-- * 'cOauthToken'
 --
--- * 'cgCommentId'
+-- * 'cCommentId'
 --
--- * 'cgFields'
+-- * 'cFields'
 --
--- * 'cgAlt'
-commentsGet
+-- * 'cAlt'
+commentsGet'
     :: Text -- ^ 'commentId'
-    -> CommentsGet
-commentsGet pCgCommentId_ =
-    CommentsGet
-    { _cgQuotaUser = Nothing
-    , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
-    , _cgKey = Nothing
-    , _cgOauthToken = Nothing
-    , _cgCommentId = pCgCommentId_
-    , _cgFields = Nothing
-    , _cgAlt = "json"
+    -> CommentsGet'
+commentsGet' pCCommentId_ =
+    CommentsGet'
+    { _cQuotaUser = Nothing
+    , _cPrettyPrint = True
+    , _cUserIp = Nothing
+    , _cKey = Nothing
+    , _cOauthToken = Nothing
+    , _cCommentId = pCCommentId_
+    , _cFields = Nothing
+    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cgQuotaUser :: Lens' CommentsGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
+cQuotaUser :: Lens' CommentsGet' (Maybe Text)
+cQuotaUser
+  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' CommentsGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
+cPrettyPrint :: Lens' CommentsGet' Bool
+cPrettyPrint
+  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' CommentsGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cUserIp :: Lens' CommentsGet' (Maybe Text)
+cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CommentsGet' (Maybe Text)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
+cKey :: Lens' CommentsGet' (Maybe Text)
+cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CommentsGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cOauthToken :: Lens' CommentsGet' (Maybe Text)
+cOauthToken
+  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
 
 -- | The ID of the comment to get.
-cgCommentId :: Lens' CommentsGet' Text
-cgCommentId
-  = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
+cCommentId :: Lens' CommentsGet' Text
+cCommentId
+  = lens _cCommentId (\ s a -> s{_cCommentId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' CommentsGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
+cFields :: Lens' CommentsGet' (Maybe Text)
+cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CommentsGet' Text
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+cAlt :: Lens' CommentsGet' Alt
+cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CommentsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgKey
-              _cgOauthToken
-              _cgCommentId
-              _cgFields
-              _cgAlt
+        requestWithRoute r u CommentsGet'{..}
+          = go _cQuotaUser (Just _cPrettyPrint) _cUserIp _cKey
+              _cOauthToken
+              _cCommentId
+              _cFields
+              (Just _cAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsGetResource)
+                      r
+                      u

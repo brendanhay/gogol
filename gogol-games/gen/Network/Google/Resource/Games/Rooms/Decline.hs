@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsDecline@.
-module Games.Rooms.Decline
+module Network.Google.Resource.Games.Rooms.Decline
     (
     -- * REST Resource
-      RoomsDeclineAPI
+      RoomsDeclineResource
 
     -- * Creating a Request
-    , roomsDecline
-    , RoomsDecline
+    , roomsDecline'
+    , RoomsDecline'
 
     -- * Request Lenses
     , rdQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsDecline@ which the
--- 'RoomsDecline' request conforms to.
-type RoomsDeclineAPI =
+-- 'RoomsDecline'' request conforms to.
+type RoomsDeclineResource =
      "rooms" :>
        Capture "roomId" Text :>
          "decline" :>
-           QueryParam "language" Text :> Post '[JSON] Room
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Room
 
 -- | Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ 'roomsDecline' smart constructor.
-data RoomsDecline = RoomsDecline
+-- /See:/ 'roomsDecline'' smart constructor.
+data RoomsDecline' = RoomsDecline'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data RoomsDecline = RoomsDecline
     , _rdLanguage    :: !(Maybe Text)
     , _rdOauthToken  :: !(Maybe Text)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Text
+    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsDecline'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data RoomsDecline = RoomsDecline
 -- * 'rdFields'
 --
 -- * 'rdAlt'
-roomsDecline
+roomsDecline'
     :: Text -- ^ 'roomId'
-    -> RoomsDecline
-roomsDecline pRdRoomId_ =
-    RoomsDecline
+    -> RoomsDecline'
+roomsDecline' pRdRoomId_ =
+    RoomsDecline'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdUserIp = Nothing
@@ -102,7 +110,7 @@ roomsDecline pRdRoomId_ =
     , _rdLanguage = Nothing
     , _rdOauthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = "json"
+    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,22 @@ rdFields :: Lens' RoomsDecline' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
 -- | Data format for the response.
-rdAlt :: Lens' RoomsDecline' Text
+rdAlt :: Lens' RoomsDecline' Alt
 rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
 
 instance GoogleRequest RoomsDecline' where
         type Rs RoomsDecline' = Room
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsDecline{..}
-          = go _rdQuotaUser _rdPrettyPrint _rdUserIp _rdKey
+        requestWithRoute r u RoomsDecline'{..}
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
+              _rdKey
               _rdRoomId
               _rdLanguage
               _rdOauthToken
               _rdFields
-              _rdAlt
+              (Just _rdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsDeclineAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RoomsDeclineResource)
+                      r
                       u

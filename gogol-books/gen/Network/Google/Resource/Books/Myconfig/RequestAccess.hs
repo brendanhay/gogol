@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Request concurrent and download access restrictions.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyconfigRequestAccess@.
-module Books.Myconfig.RequestAccess
+module Network.Google.Resource.Books.Myconfig.RequestAccess
     (
     -- * REST Resource
-      MyconfigRequestAccessAPI
+      MyconfigRequestAccessResource
 
     -- * Creating a Request
-    , myconfigRequestAccess
-    , MyconfigRequestAccess
+    , myconfigRequestAccess'
+    , MyconfigRequestAccess'
 
     -- * Request Lenses
     , mraQuotaUser
@@ -48,34 +49,44 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMyconfigRequestAccess@ which the
--- 'MyconfigRequestAccess' request conforms to.
-type MyconfigRequestAccessAPI =
+-- 'MyconfigRequestAccess'' request conforms to.
+type MyconfigRequestAccessResource =
      "myconfig" :>
        "requestAccess" :>
-         QueryParam "cpksver" Text :>
-           QueryParam "locale" Text :>
-             QueryParam "licenseTypes" Text :>
-               QueryParam "volumeId" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "nonce" Text :> Post '[JSON] RequestAccess
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "cpksver" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParam "licenseTypes"
+                     BooksMyconfigRequestAccessLicenseTypes
+                     :>
+                     QueryParam "key" Text :>
+                       QueryParam "volumeId" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "nonce" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Post '[JSON] RequestAccess
 
 -- | Request concurrent and download access restrictions.
 --
--- /See:/ 'myconfigRequestAccess' smart constructor.
-data MyconfigRequestAccess = MyconfigRequestAccess
+-- /See:/ 'myconfigRequestAccess'' smart constructor.
+data MyconfigRequestAccess' = MyconfigRequestAccess'
     { _mraQuotaUser    :: !(Maybe Text)
     , _mraPrettyPrint  :: !Bool
     , _mraCpksver      :: !Text
     , _mraUserIp       :: !(Maybe Text)
     , _mraLocale       :: !(Maybe Text)
-    , _mraLicenseTypes :: !(Maybe Text)
+    , _mraLicenseTypes :: !(Maybe BooksMyconfigRequestAccessLicenseTypes)
     , _mraKey          :: !(Maybe Text)
     , _mraVolumeId     :: !Text
     , _mraSource       :: !Text
     , _mraOauthToken   :: !(Maybe Text)
     , _mraFields       :: !(Maybe Text)
     , _mraNonce        :: !Text
-    , _mraAlt          :: !Text
+    , _mraAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyconfigRequestAccess'' with the minimum fields required to make a request.
@@ -107,14 +118,14 @@ data MyconfigRequestAccess = MyconfigRequestAccess
 -- * 'mraNonce'
 --
 -- * 'mraAlt'
-myconfigRequestAccess
+myconfigRequestAccess'
     :: Text -- ^ 'cpksver'
     -> Text -- ^ 'volumeId'
     -> Text -- ^ 'source'
     -> Text -- ^ 'nonce'
-    -> MyconfigRequestAccess
-myconfigRequestAccess pMraCpksver_ pMraVolumeId_ pMraSource_ pMraNonce_ =
-    MyconfigRequestAccess
+    -> MyconfigRequestAccess'
+myconfigRequestAccess' pMraCpksver_ pMraVolumeId_ pMraSource_ pMraNonce_ =
+    MyconfigRequestAccess'
     { _mraQuotaUser = Nothing
     , _mraPrettyPrint = True
     , _mraCpksver = pMraCpksver_
@@ -127,7 +138,7 @@ myconfigRequestAccess pMraCpksver_ pMraVolumeId_ pMraSource_ pMraNonce_ =
     , _mraOauthToken = Nothing
     , _mraFields = Nothing
     , _mraNonce = pMraNonce_
-    , _mraAlt = "json"
+    , _mraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,7 +172,7 @@ mraLocale
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-mraLicenseTypes :: Lens' MyconfigRequestAccess' (Maybe Text)
+mraLicenseTypes :: Lens' MyconfigRequestAccess' (Maybe BooksMyconfigRequestAccessLicenseTypes)
 mraLicenseTypes
   = lens _mraLicenseTypes
       (\ s a -> s{_mraLicenseTypes = a})
@@ -198,14 +209,15 @@ mraNonce :: Lens' MyconfigRequestAccess' Text
 mraNonce = lens _mraNonce (\ s a -> s{_mraNonce = a})
 
 -- | Data format for the response.
-mraAlt :: Lens' MyconfigRequestAccess' Text
+mraAlt :: Lens' MyconfigRequestAccess' Alt
 mraAlt = lens _mraAlt (\ s a -> s{_mraAlt = a})
 
 instance GoogleRequest MyconfigRequestAccess' where
         type Rs MyconfigRequestAccess' = RequestAccess
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyconfigRequestAccess{..}
-          = go _mraQuotaUser _mraPrettyPrint (Just _mraCpksver)
+        requestWithRoute r u MyconfigRequestAccess'{..}
+          = go _mraQuotaUser (Just _mraPrettyPrint)
+              (Just _mraCpksver)
               _mraUserIp
               _mraLocale
               _mraLicenseTypes
@@ -215,9 +227,9 @@ instance GoogleRequest MyconfigRequestAccess' where
               _mraOauthToken
               _mraFields
               (Just _mraNonce)
-              _mraAlt
+              (Just _mraAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MyconfigRequestAccessAPI)
+                      (Proxy :: Proxy MyconfigRequestAccessResource)
                       r
                       u

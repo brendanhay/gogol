@@ -39,6 +39,12 @@ module Network.Google.DoubleClickSearch.Types
     , rrVerifySingleTimeZone
     , rrRowCount
 
+    -- * ReportFiles
+    , ReportFiles
+    , reportFiles
+    , rfUrl
+    , rfByteCount
+
     -- * Report
     , Report
     , report
@@ -67,11 +73,24 @@ module Network.Google.DoubleClickSearch.Types
     , aAvailabilityTimestamp
     , aSegmentationType
 
+    -- * ReportRequestFilters
+    , ReportRequestFilters
+    , reportRequestFilters
+    , rrfOperator
+    , rrfValues
+    , rrfColumn
+
     -- * CustomMetric
     , CustomMetric
     , customMetric
     , cmValue
     , cmName
+
+    -- * ReportRequestOrderBy
+    , ReportRequestOrderBy
+    , reportRequestOrderBy
+    , rrobSortOrder
+    , rrobColumn
 
     -- * ConversionList
     , ConversionList
@@ -91,6 +110,14 @@ module Network.Google.DoubleClickSearch.Types
     , racsHeaderText
     , racsPlatformSource
     , racsColumnName
+
+    -- * ReportRequestTimeRange
+    , ReportRequestTimeRange
+    , reportRequestTimeRange
+    , rrtrEndDate
+    , rrtrChangedAttributesSinceTimestamp
+    , rrtrStartDate
+    , rrtrChangedMetricsSinceTimestamp
 
     -- * Conversion
     , Conversion
@@ -141,6 +168,17 @@ module Network.Google.DoubleClickSearch.Types
     , updateAvailabilityResponse
     , uAvailabilities
 
+    -- * ReportRequestReportScope
+    , ReportRequestReportScope
+    , reportRequestReportScope
+    , rrrsKeywordId
+    , rrrsAdGroupId
+    , rrrsEngineAccountId
+    , rrrsAgencyId
+    , rrrsAdvertiserId
+    , rrrsCampaignId
+    , rrrsAdId
+
     -- * CustomDimension
     , CustomDimension
     , customDimension
@@ -152,6 +190,9 @@ module Network.Google.DoubleClickSearch.Types
     , savedColumnList
     , sclKind
     , sclItems
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.DoubleClickSearch.Types.Product
@@ -159,7 +200,7 @@ import           Network.Google.DoubleClickSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the DoubleClick Search API.
-doubleClickSearchURL :: BaseURL
+doubleClickSearchURL :: BaseUrl
 doubleClickSearchURL
   = BaseUrl Https
       "https://www.googleapis.com/doubleclicksearch/v2/"

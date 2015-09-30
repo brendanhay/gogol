@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves stored reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerReportsListreports@.
-module Doubleclickbidmanager.Reports.Listreports
+module Network.Google.Resource.Doubleclickbidmanager.Reports.Listreports
     (
     -- * REST Resource
-      ReportsListreportsAPI
+      ReportsListreportsResource
 
     -- * Creating a Request
-    , reportsListreports
-    , ReportsListreports
+    , reportsListreports'
+    , ReportsListreports'
 
     -- * Request Lenses
     , rlQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerReportsListreports@ which the
--- 'ReportsListreports' request conforms to.
-type ReportsListreportsAPI =
+-- 'ReportsListreports'' request conforms to.
+type ReportsListreportsResource =
      "queries" :>
        Capture "queryId" Int64 :>
-         "reports" :> Get '[JSON] ListReportsResponse
+         "reports" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ListReportsResponse
 
 -- | Retrieves stored reports.
 --
--- /See:/ 'reportsListreports' smart constructor.
-data ReportsListreports = ReportsListreports
+-- /See:/ 'reportsListreports'' smart constructor.
+data ReportsListreports' = ReportsListreports'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlQueryId     :: !Int64
     , _rlPrettyPrint :: !Bool
@@ -60,7 +69,7 @@ data ReportsListreports = ReportsListreports
     , _rlKey         :: !(Maybe Text)
     , _rlOauthToken  :: !(Maybe Text)
     , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Text
+    , _rlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsListreports'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data ReportsListreports = ReportsListreports
 -- * 'rlFields'
 --
 -- * 'rlAlt'
-reportsListreports
+reportsListreports'
     :: Int64 -- ^ 'queryId'
-    -> ReportsListreports
-reportsListreports pRlQueryId_ =
-    ReportsListreports
+    -> ReportsListreports'
+reportsListreports' pRlQueryId_ =
+    ReportsListreports'
     { _rlQuotaUser = Nothing
     , _rlQueryId = pRlQueryId_
     , _rlPrettyPrint = True
@@ -94,7 +103,7 @@ reportsListreports pRlQueryId_ =
     , _rlKey = Nothing
     , _rlOauthToken = Nothing
     , _rlFields = Nothing
-    , _rlAlt = "json"
+    , _rlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +145,21 @@ rlFields :: Lens' ReportsListreports' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
 -- | Data format for the response.
-rlAlt :: Lens' ReportsListreports' Text
+rlAlt :: Lens' ReportsListreports' Alt
 rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
 
 instance GoogleRequest ReportsListreports' where
         type Rs ReportsListreports' = ListReportsResponse
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u ReportsListreports{..}
-          = go _rlQuotaUser _rlQueryId _rlPrettyPrint _rlUserIp
+        requestWithRoute r u ReportsListreports'{..}
+          = go _rlQuotaUser _rlQueryId (Just _rlPrettyPrint)
+              _rlUserIp
               _rlKey
               _rlOauthToken
               _rlFields
-              _rlAlt
+              (Just _rlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReportsListreportsAPI)
+                      (Proxy :: Proxy ReportsListreportsResource)
                       r
                       u

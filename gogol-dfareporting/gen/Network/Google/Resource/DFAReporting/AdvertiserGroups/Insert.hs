@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new advertiser group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsInsert@.
-module DFAReporting.AdvertiserGroups.Insert
+module Network.Google.Resource.DFAReporting.AdvertiserGroups.Insert
     (
     -- * REST Resource
-      AdvertiserGroupsInsertAPI
+      AdvertiserGroupsInsertResource
 
     -- * Creating a Request
-    , advertiserGroupsInsert
-    , AdvertiserGroupsInsert
+    , advertiserGroupsInsert'
+    , AdvertiserGroupsInsert'
 
     -- * Request Lenses
     , agiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertiserGroupsInsert@ which the
--- 'AdvertiserGroupsInsert' request conforms to.
-type AdvertiserGroupsInsertAPI =
+-- 'AdvertiserGroupsInsert'' request conforms to.
+type AdvertiserGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "advertiserGroups" :> Post '[JSON] AdvertiserGroup
+         "advertiserGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] AdvertiserGroup
 
 -- | Inserts a new advertiser group.
 --
--- /See:/ 'advertiserGroupsInsert' smart constructor.
-data AdvertiserGroupsInsert = AdvertiserGroupsInsert
+-- /See:/ 'advertiserGroupsInsert'' smart constructor.
+data AdvertiserGroupsInsert' = AdvertiserGroupsInsert'
     { _agiQuotaUser   :: !(Maybe Text)
     , _agiPrettyPrint :: !Bool
     , _agiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data AdvertiserGroupsInsert = AdvertiserGroupsInsert
     , _agiKey         :: !(Maybe Text)
     , _agiOauthToken  :: !(Maybe Text)
     , _agiFields      :: !(Maybe Text)
-    , _agiAlt         :: !Text
+    , _agiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data AdvertiserGroupsInsert = AdvertiserGroupsInsert
 -- * 'agiFields'
 --
 -- * 'agiAlt'
-advertiserGroupsInsert
+advertiserGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> AdvertiserGroupsInsert
-advertiserGroupsInsert pAgiProfileId_ =
-    AdvertiserGroupsInsert
+    -> AdvertiserGroupsInsert'
+advertiserGroupsInsert' pAgiProfileId_ =
+    AdvertiserGroupsInsert'
     { _agiQuotaUser = Nothing
     , _agiPrettyPrint = True
     , _agiUserIp = Nothing
@@ -94,7 +102,7 @@ advertiserGroupsInsert pAgiProfileId_ =
     , _agiKey = Nothing
     , _agiOauthToken = Nothing
     , _agiFields = Nothing
-    , _agiAlt = "json"
+    , _agiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ agiFields
   = lens _agiFields (\ s a -> s{_agiFields = a})
 
 -- | Data format for the response.
-agiAlt :: Lens' AdvertiserGroupsInsert' Text
+agiAlt :: Lens' AdvertiserGroupsInsert' Alt
 agiAlt = lens _agiAlt (\ s a -> s{_agiAlt = a})
 
 instance GoogleRequest AdvertiserGroupsInsert' where
         type Rs AdvertiserGroupsInsert' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsInsert{..}
-          = go _agiQuotaUser _agiPrettyPrint _agiUserIp
+        requestWithRoute r u AdvertiserGroupsInsert'{..}
+          = go _agiQuotaUser (Just _agiPrettyPrint) _agiUserIp
               _agiProfileId
               _agiKey
               _agiOauthToken
               _agiFields
-              _agiAlt
+              (Just _agiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertiserGroupsInsertAPI)
+                      (Proxy :: Proxy AdvertiserGroupsInsertResource)
                       r
                       u

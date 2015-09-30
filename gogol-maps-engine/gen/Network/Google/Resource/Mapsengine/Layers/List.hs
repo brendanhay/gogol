@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all layers readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersList@.
-module Mapsengine.Layers.List
+module Network.Google.Resource.Mapsengine.Layers.List
     (
     -- * REST Resource
-      LayersListAPI
+      LayersListResource
 
     -- * Creating a Request
-    , layersList
-    , LayersList
+    , layersList'
+    , LayersList'
 
     -- * Request Lenses
     , llCreatedAfter
@@ -55,37 +56,46 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersList@ which the
--- 'LayersList' request conforms to.
-type LayersListAPI =
+-- 'LayersList'' request conforms to.
+type LayersListResource =
      "layers" :>
        QueryParam "createdAfter" UTCTime :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" Text :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus" Text :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" UTCTime :>
-                                 Get '[JSON] LayersListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "creatorEmail" Text :>
+                 QueryParam "role" MapsengineLayersListRole :>
+                   QueryParam "key" Text :>
+                     QueryParam "bbox" Text :>
+                       QueryParam "processingStatus"
+                         MapsengineLayersListProcessingStatus
+                         :>
+                         QueryParam "modifiedAfter" UTCTime :>
+                           QueryParam "modifiedBefore" UTCTime :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "projectId" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "search" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "tags" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "createdBefore" UTCTime :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON] LayersListResponse
 
 -- | Return all layers readable by the current user.
 --
--- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+-- /See:/ 'layersList'' smart constructor.
+data LayersList' = LayersList'
     { _llCreatedAfter     :: !(Maybe UTCTime)
     , _llQuotaUser        :: !(Maybe Text)
     , _llPrettyPrint      :: !Bool
     , _llUserIp           :: !(Maybe Text)
     , _llCreatorEmail     :: !(Maybe Text)
-    , _llRole             :: !(Maybe Text)
+    , _llRole             :: !(Maybe MapsengineLayersListRole)
     , _llKey              :: !(Maybe Text)
     , _llBbox             :: !(Maybe Text)
-    , _llProcessingStatus :: !(Maybe Text)
+    , _llProcessingStatus :: !(Maybe MapsengineLayersListProcessingStatus)
     , _llModifiedAfter    :: !(Maybe UTCTime)
     , _llModifiedBefore   :: !(Maybe UTCTime)
     , _llPageToken        :: !(Maybe Text)
@@ -96,7 +106,7 @@ data LayersList = LayersList
     , _llTags             :: !(Maybe Text)
     , _llFields           :: !(Maybe Text)
     , _llCreatedBefore    :: !(Maybe UTCTime)
-    , _llAlt              :: !Text
+    , _llAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
@@ -142,10 +152,10 @@ data LayersList = LayersList
 -- * 'llCreatedBefore'
 --
 -- * 'llAlt'
-layersList
-    :: LayersList
-layersList =
-    LayersList
+layersList'
+    :: LayersList'
+layersList' =
+    LayersList'
     { _llCreatedAfter = Nothing
     , _llQuotaUser = Nothing
     , _llPrettyPrint = True
@@ -165,7 +175,7 @@ layersList =
     , _llTags = Nothing
     , _llFields = Nothing
     , _llCreatedBefore = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
@@ -202,7 +212,7 @@ llCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-llRole :: Lens' LayersList' (Maybe Text)
+llRole :: Lens' LayersList' (Maybe MapsengineLayersListRole)
 llRole = lens _llRole (\ s a -> s{_llRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -216,7 +226,7 @@ llKey = lens _llKey (\ s a -> s{_llKey = a})
 llBbox :: Lens' LayersList' (Maybe Text)
 llBbox = lens _llBbox (\ s a -> s{_llBbox = a})
 
-llProcessingStatus :: Lens' LayersList' (Maybe Text)
+llProcessingStatus :: Lens' LayersList' (Maybe MapsengineLayersListProcessingStatus)
 llProcessingStatus
   = lens _llProcessingStatus
       (\ s a -> s{_llProcessingStatus = a})
@@ -283,14 +293,15 @@ llCreatedBefore
       (\ s a -> s{_llCreatedBefore = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LayersList' Text
+llAlt :: Lens' LayersList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = LayersListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersList{..}
-          = go _llCreatedAfter _llQuotaUser _llPrettyPrint
+        requestWithRoute r u LayersList'{..}
+          = go _llCreatedAfter _llQuotaUser
+              (Just _llPrettyPrint)
               _llUserIp
               _llCreatorEmail
               _llRole
@@ -307,6 +318,8 @@ instance GoogleRequest LayersList' where
               _llTags
               _llFields
               _llCreatedBefore
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LayersListResource)
+                      r
+                      u

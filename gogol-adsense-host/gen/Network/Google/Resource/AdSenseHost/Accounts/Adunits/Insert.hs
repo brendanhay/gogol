@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsInsert@.
-module AdSenseHost.Accounts.Adunits.Insert
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Insert
     (
     -- * REST Resource
-      AccountsAdunitsInsertAPI
+      AccountsAdunitsInsertResource
 
     -- * Creating a Request
-    , accountsAdunitsInsert
-    , AccountsAdunitsInsert
+    , accountsAdunitsInsert'
+    , AccountsAdunitsInsert'
 
     -- * Request Lenses
     , aaiQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsInsert@ which the
--- 'AccountsAdunitsInsert' request conforms to.
-type AccountsAdunitsInsertAPI =
+-- 'AccountsAdunitsInsert'' request conforms to.
+type AccountsAdunitsInsertResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
-             "adunits" :> Post '[JSON] AdUnit
+             "adunits" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] AdUnit
 
 -- | Insert the supplied ad unit into the specified publisher AdSense
 -- account.
 --
--- /See:/ 'accountsAdunitsInsert' smart constructor.
-data AccountsAdunitsInsert = AccountsAdunitsInsert
+-- /See:/ 'accountsAdunitsInsert'' smart constructor.
+data AccountsAdunitsInsert' = AccountsAdunitsInsert'
     { _aaiQuotaUser   :: !(Maybe Text)
     , _aaiPrettyPrint :: !Bool
     , _aaiUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data AccountsAdunitsInsert = AccountsAdunitsInsert
     , _aaiKey         :: !(Maybe Text)
     , _aaiOauthToken  :: !(Maybe Text)
     , _aaiFields      :: !(Maybe Text)
-    , _aaiAlt         :: !Text
+    , _aaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsInsert'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data AccountsAdunitsInsert = AccountsAdunitsInsert
 -- * 'aaiFields'
 --
 -- * 'aaiAlt'
-accountsAdunitsInsert
+accountsAdunitsInsert'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsInsert
-accountsAdunitsInsert pAaiAdClientId_ pAaiAccountId_ =
-    AccountsAdunitsInsert
+    -> AccountsAdunitsInsert'
+accountsAdunitsInsert' pAaiAdClientId_ pAaiAccountId_ =
+    AccountsAdunitsInsert'
     { _aaiQuotaUser = Nothing
     , _aaiPrettyPrint = True
     , _aaiUserIp = Nothing
@@ -104,7 +112,7 @@ accountsAdunitsInsert pAaiAdClientId_ pAaiAccountId_ =
     , _aaiKey = Nothing
     , _aaiOauthToken = Nothing
     , _aaiFields = Nothing
-    , _aaiAlt = "json"
+    , _aaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,22 +163,22 @@ aaiFields
   = lens _aaiFields (\ s a -> s{_aaiFields = a})
 
 -- | Data format for the response.
-aaiAlt :: Lens' AccountsAdunitsInsert' Text
+aaiAlt :: Lens' AccountsAdunitsInsert' Alt
 aaiAlt = lens _aaiAlt (\ s a -> s{_aaiAlt = a})
 
 instance GoogleRequest AccountsAdunitsInsert' where
         type Rs AccountsAdunitsInsert' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsInsert{..}
-          = go _aaiQuotaUser _aaiPrettyPrint _aaiUserIp
+        requestWithRoute r u AccountsAdunitsInsert'{..}
+          = go _aaiQuotaUser (Just _aaiPrettyPrint) _aaiUserIp
               _aaiAdClientId
               _aaiAccountId
               _aaiKey
               _aaiOauthToken
               _aaiFields
-              _aaiAlt
+              (Just _aaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsInsertAPI)
+                      (Proxy :: Proxy AccountsAdunitsInsertResource)
                       r
                       u

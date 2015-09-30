@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,141 +21,145 @@
 -- comment, use the commentThreads.insert method.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsInsert@.
-module YouTube.Comments.Insert
+module Network.Google.Resource.YouTube.Comments.Insert
     (
     -- * REST Resource
-      CommentsInsertAPI
+      CommentsInsertResource
 
     -- * Creating a Request
-    , commentsInsert
-    , CommentsInsert
+    , commentsInsert'
+    , CommentsInsert'
 
     -- * Request Lenses
-    , comQuotaUser
-    , comPart
-    , comPrettyPrint
-    , comUserIp
-    , comKey
-    , comOauthToken
-    , comFields
-    , comAlt
+    , cQuotaUser
+    , cPart
+    , cPrettyPrint
+    , cUserIp
+    , cKey
+    , cOauthToken
+    , cFields
+    , cAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentsInsert@ which the
--- 'CommentsInsert' request conforms to.
-type CommentsInsertAPI =
+-- 'CommentsInsert'' request conforms to.
+type CommentsInsertResource =
      "comments" :>
-       QueryParam "part" Text :> Post '[JSON] Comment
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Comment
 
 -- | Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.
 --
--- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
-    { _comQuotaUser   :: !(Maybe Text)
-    , _comPart        :: !Text
-    , _comPrettyPrint :: !Bool
-    , _comUserIp      :: !(Maybe Text)
-    , _comKey         :: !(Maybe Text)
-    , _comOauthToken  :: !(Maybe Text)
-    , _comFields      :: !(Maybe Text)
-    , _comAlt         :: !Text
+-- /See:/ 'commentsInsert'' smart constructor.
+data CommentsInsert' = CommentsInsert'
+    { _cQuotaUser   :: !(Maybe Text)
+    , _cPart        :: !Text
+    , _cPrettyPrint :: !Bool
+    , _cUserIp      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Text)
+    , _cOauthToken  :: !(Maybe Text)
+    , _cFields      :: !(Maybe Text)
+    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'comQuotaUser'
+-- * 'cQuotaUser'
 --
--- * 'comPart'
+-- * 'cPart'
 --
--- * 'comPrettyPrint'
+-- * 'cPrettyPrint'
 --
--- * 'comUserIp'
+-- * 'cUserIp'
 --
--- * 'comKey'
+-- * 'cKey'
 --
--- * 'comOauthToken'
+-- * 'cOauthToken'
 --
--- * 'comFields'
+-- * 'cFields'
 --
--- * 'comAlt'
-commentsInsert
+-- * 'cAlt'
+commentsInsert'
     :: Text -- ^ 'part'
-    -> CommentsInsert
-commentsInsert pComPart_ =
-    CommentsInsert
-    { _comQuotaUser = Nothing
-    , _comPart = pComPart_
-    , _comPrettyPrint = True
-    , _comUserIp = Nothing
-    , _comKey = Nothing
-    , _comOauthToken = Nothing
-    , _comFields = Nothing
-    , _comAlt = "json"
+    -> CommentsInsert'
+commentsInsert' pCPart_ =
+    CommentsInsert'
+    { _cQuotaUser = Nothing
+    , _cPart = pCPart_
+    , _cPrettyPrint = True
+    , _cUserIp = Nothing
+    , _cKey = Nothing
+    , _cOauthToken = Nothing
+    , _cFields = Nothing
+    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-comQuotaUser :: Lens' CommentsInsert' (Maybe Text)
-comQuotaUser
-  = lens _comQuotaUser (\ s a -> s{_comQuotaUser = a})
+cQuotaUser :: Lens' CommentsInsert' (Maybe Text)
+cQuotaUser
+  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
 
 -- | The part parameter identifies the properties that the API response will
 -- include. Set the parameter value to snippet. The snippet part has a
 -- quota cost of 2 units.
-comPart :: Lens' CommentsInsert' Text
-comPart = lens _comPart (\ s a -> s{_comPart = a})
+cPart :: Lens' CommentsInsert' Text
+cPart = lens _cPart (\ s a -> s{_cPart = a})
 
 -- | Returns response with indentations and line breaks.
-comPrettyPrint :: Lens' CommentsInsert' Bool
-comPrettyPrint
-  = lens _comPrettyPrint
-      (\ s a -> s{_comPrettyPrint = a})
+cPrettyPrint :: Lens' CommentsInsert' Bool
+cPrettyPrint
+  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-comUserIp :: Lens' CommentsInsert' (Maybe Text)
-comUserIp
-  = lens _comUserIp (\ s a -> s{_comUserIp = a})
+cUserIp :: Lens' CommentsInsert' (Maybe Text)
+cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comKey :: Lens' CommentsInsert' (Maybe Text)
-comKey = lens _comKey (\ s a -> s{_comKey = a})
+cKey :: Lens' CommentsInsert' (Maybe Text)
+cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-comOauthToken :: Lens' CommentsInsert' (Maybe Text)
-comOauthToken
-  = lens _comOauthToken
-      (\ s a -> s{_comOauthToken = a})
+cOauthToken :: Lens' CommentsInsert' (Maybe Text)
+cOauthToken
+  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-comFields :: Lens' CommentsInsert' (Maybe Text)
-comFields
-  = lens _comFields (\ s a -> s{_comFields = a})
+cFields :: Lens' CommentsInsert' (Maybe Text)
+cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 -- | Data format for the response.
-comAlt :: Lens' CommentsInsert' Text
-comAlt = lens _comAlt (\ s a -> s{_comAlt = a})
+cAlt :: Lens' CommentsInsert' Alt
+cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsInsert{..}
-          = go _comQuotaUser (Just _comPart) _comPrettyPrint
-              _comUserIp
-              _comKey
-              _comOauthToken
-              _comFields
-              _comAlt
+        requestWithRoute r u CommentsInsert'{..}
+          = go _cQuotaUser (Just _cPart) (Just _cPrettyPrint)
+              _cUserIp
+              _cKey
+              _cOauthToken
+              _cFields
+              (Just _cAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsInsertResource)
                       r
                       u

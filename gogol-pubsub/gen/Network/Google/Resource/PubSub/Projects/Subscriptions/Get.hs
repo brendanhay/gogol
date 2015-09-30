@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the configuration details of a subscription.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGet@.
-module PubSub.Projects.Subscriptions.Get
+module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
     (
     -- * REST Resource
-      ProjectsSubscriptionsGetAPI
+      ProjectsSubscriptionsGetResource
 
     -- * Creating a Request
-    , projectsSubscriptionsGet
-    , ProjectsSubscriptionsGet
+    , projectsSubscriptionsGet'
+    , ProjectsSubscriptionsGet'
 
     -- * Request Lenses
     , psgXgafv
@@ -49,15 +50,29 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsGet@ which the
--- 'ProjectsSubscriptionsGet' request conforms to.
-type ProjectsSubscriptionsGetAPI =
+-- 'ProjectsSubscriptionsGet'' request conforms to.
+type ProjectsSubscriptionsGetResource =
      "v1beta2" :>
-       "{+subscription}" :> Get '[JSON] Subscription
+       "{+subscription}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Get '[JSON] Subscription
 
 -- | Gets the configuration details of a subscription.
 --
--- /See:/ 'projectsSubscriptionsGet' smart constructor.
-data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet
+-- /See:/ 'projectsSubscriptionsGet'' smart constructor.
+data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
     { _psgXgafv          :: !(Maybe Text)
     , _psgQuotaUser      :: !(Maybe Text)
     , _psgPrettyPrint    :: !Bool
@@ -105,11 +120,11 @@ data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet
 -- * 'psgCallback'
 --
 -- * 'psgAlt'
-projectsSubscriptionsGet
+projectsSubscriptionsGet'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsGet
-projectsSubscriptionsGet pPsgSubscription_ =
-    ProjectsSubscriptionsGet
+    -> ProjectsSubscriptionsGet'
+projectsSubscriptionsGet' pPsgSubscription_ =
+    ProjectsSubscriptionsGet'
     { _psgXgafv = Nothing
     , _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
@@ -207,10 +222,10 @@ instance GoogleRequest ProjectsSubscriptionsGet'
          where
         type Rs ProjectsSubscriptionsGet' = Subscription
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsGet{..}
-          = go _psgXgafv _psgQuotaUser _psgPrettyPrint
+        requestWithRoute r u ProjectsSubscriptionsGet'{..}
+          = go _psgXgafv _psgQuotaUser (Just _psgPrettyPrint)
               _psgUploadProtocol
-              _psgPp
+              (Just _psgPp)
               _psgAccessToken
               _psgUploadType
               _psgBearerToken
@@ -219,9 +234,9 @@ instance GoogleRequest ProjectsSubscriptionsGet'
               _psgSubscription
               _psgFields
               _psgCallback
-              _psgAlt
+              (Just _psgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsGetAPI)
+                      (Proxy :: Proxy ProjectsSubscriptionsGetResource)
                       r
                       u

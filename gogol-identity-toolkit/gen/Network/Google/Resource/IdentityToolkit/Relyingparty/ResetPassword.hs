@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Reset password for a user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyResetPassword@.
-module IdentityToolkit.Relyingparty.ResetPassword
+module Network.Google.Resource.IdentityToolkit.Relyingparty.ResetPassword
     (
     -- * REST Resource
-      RelyingpartyResetPasswordAPI
+      RelyingpartyResetPasswordResource
 
     -- * Creating a Request
-    , relyingpartyResetPassword
-    , RelyingpartyResetPassword
+    , relyingpartyResetPassword'
+    , RelyingpartyResetPassword'
 
     -- * Request Lenses
     , rrpQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyResetPassword@ which the
--- 'RelyingpartyResetPassword' request conforms to.
-type RelyingpartyResetPasswordAPI =
-     "resetPassword" :> Post '[JSON] ResetPasswordResponse
+-- 'RelyingpartyResetPassword'' request conforms to.
+type RelyingpartyResetPasswordResource =
+     "resetPassword" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] ResetPasswordResponse
 
 -- | Reset password for a user.
 --
--- /See:/ 'relyingpartyResetPassword' smart constructor.
-data RelyingpartyResetPassword = RelyingpartyResetPassword
+-- /See:/ 'relyingpartyResetPassword'' smart constructor.
+data RelyingpartyResetPassword' = RelyingpartyResetPassword'
     { _rrpQuotaUser   :: !(Maybe Text)
     , _rrpPrettyPrint :: !Bool
     , _rrpUserIp      :: !(Maybe Text)
     , _rrpKey         :: !(Maybe Text)
     , _rrpOauthToken  :: !(Maybe Text)
     , _rrpFields      :: !(Maybe Text)
-    , _rrpAlt         :: !Text
+    , _rrpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyResetPassword'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data RelyingpartyResetPassword = RelyingpartyResetPassword
 -- * 'rrpFields'
 --
 -- * 'rrpAlt'
-relyingpartyResetPassword
-    :: RelyingpartyResetPassword
-relyingpartyResetPassword =
-    RelyingpartyResetPassword
+relyingpartyResetPassword'
+    :: RelyingpartyResetPassword'
+relyingpartyResetPassword' =
+    RelyingpartyResetPassword'
     { _rrpQuotaUser = Nothing
     , _rrpPrettyPrint = True
     , _rrpUserIp = Nothing
     , _rrpKey = Nothing
     , _rrpOauthToken = Nothing
     , _rrpFields = Nothing
-    , _rrpAlt = "json"
+    , _rrpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,7 +135,7 @@ rrpFields
   = lens _rrpFields (\ s a -> s{_rrpFields = a})
 
 -- | Data format for the response.
-rrpAlt :: Lens' RelyingpartyResetPassword' Text
+rrpAlt :: Lens' RelyingpartyResetPassword' Alt
 rrpAlt = lens _rrpAlt (\ s a -> s{_rrpAlt = a})
 
 instance GoogleRequest RelyingpartyResetPassword'
@@ -134,13 +143,14 @@ instance GoogleRequest RelyingpartyResetPassword'
         type Rs RelyingpartyResetPassword' =
              ResetPasswordResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyResetPassword{..}
-          = go _rrpQuotaUser _rrpPrettyPrint _rrpUserIp _rrpKey
+        requestWithRoute r u RelyingpartyResetPassword'{..}
+          = go _rrpQuotaUser (Just _rrpPrettyPrint) _rrpUserIp
+              _rrpKey
               _rrpOauthToken
               _rrpFields
-              _rrpAlt
+              (Just _rrpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyResetPasswordAPI)
+                      (Proxy :: Proxy RelyingpartyResetPasswordResource)
                       r
                       u

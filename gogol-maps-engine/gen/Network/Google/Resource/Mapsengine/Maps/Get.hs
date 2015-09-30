@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return metadata for a particular map.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsGet@.
-module Mapsengine.Maps.Get
+module Network.Google.Resource.Mapsengine.Maps.Get
     (
     -- * REST Resource
-      MapsGetAPI
+      MapsGetResource
 
     -- * Creating a Request
-    , mapsGet
-    , MapsGet
+    , mapsGet'
+    , MapsGet'
 
     -- * Request Lenses
     , mgQuotaUser
@@ -44,25 +45,32 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsGet@ which the
--- 'MapsGet' request conforms to.
-type MapsGetAPI =
+-- 'MapsGet'' request conforms to.
+type MapsGetResource =
      "maps" :>
        Capture "id" Text :>
-         QueryParam "version" Text :> Get '[JSON] Map
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "version" MapsengineMapsGetVersion :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Map
 
 -- | Return metadata for a particular map.
 --
--- /See:/ 'mapsGet' smart constructor.
-data MapsGet = MapsGet
+-- /See:/ 'mapsGet'' smart constructor.
+data MapsGet' = MapsGet'
     { _mgQuotaUser   :: !(Maybe Text)
     , _mgPrettyPrint :: !Bool
     , _mgUserIp      :: !(Maybe Text)
     , _mgKey         :: !(Maybe Text)
-    , _mgVersion     :: !(Maybe Text)
+    , _mgVersion     :: !(Maybe MapsengineMapsGetVersion)
     , _mgId          :: !Text
     , _mgOauthToken  :: !(Maybe Text)
     , _mgFields      :: !(Maybe Text)
-    , _mgAlt         :: !Text
+    , _mgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsGet'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data MapsGet = MapsGet
 -- * 'mgFields'
 --
 -- * 'mgAlt'
-mapsGet
+mapsGet'
     :: Text -- ^ 'id'
-    -> MapsGet
-mapsGet pMgId_ =
-    MapsGet
+    -> MapsGet'
+mapsGet' pMgId_ =
+    MapsGet'
     { _mgQuotaUser = Nothing
     , _mgPrettyPrint = True
     , _mgUserIp = Nothing
@@ -99,7 +107,7 @@ mapsGet pMgId_ =
     , _mgId = pMgId_
     , _mgOauthToken = Nothing
     , _mgFields = Nothing
-    , _mgAlt = "json"
+    , _mgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,7 +138,7 @@ mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 -- should be returned. When version is set to published, the published
 -- version of the map will be returned. Please use the maps.getPublished
 -- endpoint instead.
-mgVersion :: Lens' MapsGet' (Maybe Text)
+mgVersion :: Lens' MapsGet' (Maybe MapsengineMapsGetVersion)
 mgVersion
   = lens _mgVersion (\ s a -> s{_mgVersion = a})
 
@@ -148,18 +156,20 @@ mgFields :: Lens' MapsGet' (Maybe Text)
 mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
 -- | Data format for the response.
-mgAlt :: Lens' MapsGet' Text
+mgAlt :: Lens' MapsGet' Alt
 mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
 
 instance GoogleRequest MapsGet' where
         type Rs MapsGet' = Map
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsGet{..}
-          = go _mgQuotaUser _mgPrettyPrint _mgUserIp _mgKey
+        requestWithRoute r u MapsGet'{..}
+          = go _mgQuotaUser (Just _mgPrettyPrint) _mgUserIp
+              _mgKey
               _mgVersion
               _mgId
               _mgOauthToken
               _mgFields
-              _mgAlt
+              (Just _mgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MapsGetResource) r
+                      u

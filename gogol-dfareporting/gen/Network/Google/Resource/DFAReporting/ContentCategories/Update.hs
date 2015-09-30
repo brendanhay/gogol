@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing content category.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesUpdate@.
-module DFAReporting.ContentCategories.Update
+module Network.Google.Resource.DFAReporting.ContentCategories.Update
     (
     -- * REST Resource
-      ContentCategoriesUpdateAPI
+      ContentCategoriesUpdateResource
 
     -- * Creating a Request
-    , contentCategoriesUpdate
-    , ContentCategoriesUpdate
+    , contentCategoriesUpdate'
+    , ContentCategoriesUpdate'
 
     -- * Request Lenses
     , ccuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesUpdate@ which the
--- 'ContentCategoriesUpdate' request conforms to.
-type ContentCategoriesUpdateAPI =
+-- 'ContentCategoriesUpdate'' request conforms to.
+type ContentCategoriesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "contentCategories" :> Put '[JSON] ContentCategory
+         "contentCategories" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] ContentCategory
 
 -- | Updates an existing content category.
 --
--- /See:/ 'contentCategoriesUpdate' smart constructor.
-data ContentCategoriesUpdate = ContentCategoriesUpdate
+-- /See:/ 'contentCategoriesUpdate'' smart constructor.
+data ContentCategoriesUpdate' = ContentCategoriesUpdate'
     { _ccuQuotaUser   :: !(Maybe Text)
     , _ccuPrettyPrint :: !Bool
     , _ccuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ContentCategoriesUpdate = ContentCategoriesUpdate
     , _ccuKey         :: !(Maybe Text)
     , _ccuOauthToken  :: !(Maybe Text)
     , _ccuFields      :: !(Maybe Text)
-    , _ccuAlt         :: !Text
+    , _ccuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ContentCategoriesUpdate = ContentCategoriesUpdate
 -- * 'ccuFields'
 --
 -- * 'ccuAlt'
-contentCategoriesUpdate
+contentCategoriesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategoriesUpdate
-contentCategoriesUpdate pCcuProfileId_ =
-    ContentCategoriesUpdate
+    -> ContentCategoriesUpdate'
+contentCategoriesUpdate' pCcuProfileId_ =
+    ContentCategoriesUpdate'
     { _ccuQuotaUser = Nothing
     , _ccuPrettyPrint = True
     , _ccuUserIp = Nothing
@@ -94,7 +102,7 @@ contentCategoriesUpdate pCcuProfileId_ =
     , _ccuKey = Nothing
     , _ccuOauthToken = Nothing
     , _ccuFields = Nothing
-    , _ccuAlt = "json"
+    , _ccuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ ccuFields
   = lens _ccuFields (\ s a -> s{_ccuFields = a})
 
 -- | Data format for the response.
-ccuAlt :: Lens' ContentCategoriesUpdate' Text
+ccuAlt :: Lens' ContentCategoriesUpdate' Alt
 ccuAlt = lens _ccuAlt (\ s a -> s{_ccuAlt = a})
 
 instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesUpdate{..}
-          = go _ccuQuotaUser _ccuPrettyPrint _ccuUserIp
+        requestWithRoute r u ContentCategoriesUpdate'{..}
+          = go _ccuQuotaUser (Just _ccuPrettyPrint) _ccuUserIp
               _ccuProfileId
               _ccuKey
               _ccuOauthToken
               _ccuFields
-              _ccuAlt
+              (Just _ccuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesUpdateAPI)
+                      (Proxy :: Proxy ContentCategoriesUpdateResource)
                       r
                       u

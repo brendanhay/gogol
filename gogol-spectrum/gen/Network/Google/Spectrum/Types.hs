@@ -284,6 +284,9 @@ module Network.Google.Spectrum.Types
     , DeviceCapabilities
     , deviceCapabilities
     , dcFrequencyRanges
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -291,7 +294,7 @@ import           Network.Google.Spectrum.Types.Product
 import           Network.Google.Spectrum.Types.Sum
 
 -- | URL referring to version 'v1explorer' of the Google Spectrum Database API.
-spectrumURL :: BaseURL
+spectrumURL :: BaseUrl
 spectrumURL
   = BaseUrl Https
       "https://www.googleapis.com/spectrum/v1explorer/paws/"

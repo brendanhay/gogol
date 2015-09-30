@@ -1461,6 +1461,44 @@ instance ToJSON IPConfiguration where
                   ("requireSsl" .=) <$> _icRequireSsl,
                   ("ipv4Enabled" .=) <$> _icIpv4Enabled])
 
+-- | Options for exporting data as CSV.
+--
+-- /See:/ 'exportContextCSVExportOptions' smart constructor.
+newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions
+    { _ecceoSelectQuery :: Maybe Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportContextCSVExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecceoSelectQuery'
+exportContextCSVExportOptions
+    :: ExportContextCSVExportOptions
+exportContextCSVExportOptions =
+    ExportContextCSVExportOptions
+    { _ecceoSelectQuery = Nothing
+    }
+
+-- | The select query used to extract the data.
+ecceoSelectQuery :: Lens' ExportContextCSVExportOptions (Maybe Text)
+ecceoSelectQuery
+  = lens _ecceoSelectQuery
+      (\ s a -> s{_ecceoSelectQuery = a})
+
+instance FromJSON ExportContextCSVExportOptions where
+        parseJSON
+          = withObject "ExportContextCSVExportOptions"
+              (\ o ->
+                 ExportContextCSVExportOptions <$>
+                   (o .:? "selectQuery"))
+
+instance ToJSON ExportContextCSVExportOptions where
+        toJSON ExportContextCSVExportOptions{..}
+          = object
+              (catMaybes
+                 [("selectQuery" .=) <$> _ecceoSelectQuery])
+
 -- | SslCerts insert request.
 --
 -- /See:/ 'sSLCertsInsertRequest' smart constructor.
@@ -1602,116 +1640,166 @@ instance ToJSON User where
                   ("host" .=) <$> _uHost,
                   ("instance" .=) <$> _uInstance])
 
+-- | Options for importing data as CSV.
+--
+-- /See:/ 'importContextCSVImportOptions' smart constructor.
+data ImportContextCSVImportOptions = ImportContextCSVImportOptions
+    { _iccioColumns :: !(Maybe [Text])
+    , _iccioTable   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImportContextCSVImportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iccioColumns'
+--
+-- * 'iccioTable'
+importContextCSVImportOptions
+    :: ImportContextCSVImportOptions
+importContextCSVImportOptions =
+    ImportContextCSVImportOptions
+    { _iccioColumns = Nothing
+    , _iccioTable = Nothing
+    }
+
+-- | The columns to which CSV data is imported. If not specified, all columns
+-- of the database table are loaded with CSV data.
+iccioColumns :: Lens' ImportContextCSVImportOptions [Text]
+iccioColumns
+  = lens _iccioColumns (\ s a -> s{_iccioColumns = a})
+      . _Default
+      . _Coerce
+
+-- | The table to which CSV data is imported.
+iccioTable :: Lens' ImportContextCSVImportOptions (Maybe Text)
+iccioTable
+  = lens _iccioTable (\ s a -> s{_iccioTable = a})
+
+instance FromJSON ImportContextCSVImportOptions where
+        parseJSON
+          = withObject "ImportContextCSVImportOptions"
+              (\ o ->
+                 ImportContextCSVImportOptions <$>
+                   (o .:? "columns" .!= mempty) <*> (o .:? "table"))
+
+instance ToJSON ImportContextCSVImportOptions where
+        toJSON ImportContextCSVImportOptions{..}
+          = object
+              (catMaybes
+                 [("columns" .=) <$> _iccioColumns,
+                  ("table" .=) <$> _iccioTable])
+
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'databaseInstance' smart constructor.
 data DatabaseInstance = DatabaseInstance
-    { _diMaxDiskSize                :: !(Maybe Int64)
-    , _diOnPremisesConfiguration    :: !(Maybe (Maybe OnPremisesConfiguration))
-    , _diEtag                       :: !(Maybe Text)
-    , _diState                      :: !(Maybe Text)
-    , _diIpv6Address                :: !(Maybe Text)
-    , _diServerCaCert               :: !(Maybe (Maybe SSLCert))
-    , _diDatabaseVersion            :: !(Maybe Text)
-    , _diProject                    :: !(Maybe Text)
-    , _diSettings                   :: !(Maybe (Maybe Settings))
-    , _diKind                       :: !Text
-    , _diCurrentDiskSize            :: !(Maybe Int64)
-    , _diInstanceType               :: !(Maybe Text)
-    , _diReplicaNames               :: !(Maybe [Text])
-    , _diSelfLink                   :: !(Maybe Text)
-    , _diName                       :: !(Maybe Text)
-    , _diMasterInstanceName         :: !(Maybe Text)
-    , _diReplicaConfiguration       :: !(Maybe (Maybe ReplicaConfiguration))
-    , _diRegion                     :: !(Maybe Text)
-    , _diServiceAccountEmailAddress :: !(Maybe Text)
-    , _diIpAddresses                :: !(Maybe [Maybe IPMapping])
+    { _datMaxDiskSize                :: !(Maybe Int64)
+    , _datOnPremisesConfiguration    :: !(Maybe (Maybe OnPremisesConfiguration))
+    , _datEtag                       :: !(Maybe Text)
+    , _datState                      :: !(Maybe Text)
+    , _datIpv6Address                :: !(Maybe Text)
+    , _datServerCaCert               :: !(Maybe (Maybe SSLCert))
+    , _datDatabaseVersion            :: !(Maybe Text)
+    , _datProject                    :: !(Maybe Text)
+    , _datSettings                   :: !(Maybe (Maybe Settings))
+    , _datKind                       :: !Text
+    , _datCurrentDiskSize            :: !(Maybe Int64)
+    , _datInstanceType               :: !(Maybe Text)
+    , _datReplicaNames               :: !(Maybe [Text])
+    , _datSelfLink                   :: !(Maybe Text)
+    , _datName                       :: !(Maybe Text)
+    , _datMasterInstanceName         :: !(Maybe Text)
+    , _datReplicaConfiguration       :: !(Maybe (Maybe ReplicaConfiguration))
+    , _datRegion                     :: !(Maybe Text)
+    , _datServiceAccountEmailAddress :: !(Maybe Text)
+    , _datIpAddresses                :: !(Maybe [Maybe IPMapping])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatabaseInstance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diMaxDiskSize'
+-- * 'datMaxDiskSize'
 --
--- * 'diOnPremisesConfiguration'
+-- * 'datOnPremisesConfiguration'
 --
--- * 'diEtag'
+-- * 'datEtag'
 --
--- * 'diState'
+-- * 'datState'
 --
--- * 'diIpv6Address'
+-- * 'datIpv6Address'
 --
--- * 'diServerCaCert'
+-- * 'datServerCaCert'
 --
--- * 'diDatabaseVersion'
+-- * 'datDatabaseVersion'
 --
--- * 'diProject'
+-- * 'datProject'
 --
--- * 'diSettings'
+-- * 'datSettings'
 --
--- * 'diKind'
+-- * 'datKind'
 --
--- * 'diCurrentDiskSize'
+-- * 'datCurrentDiskSize'
 --
--- * 'diInstanceType'
+-- * 'datInstanceType'
 --
--- * 'diReplicaNames'
+-- * 'datReplicaNames'
 --
--- * 'diSelfLink'
+-- * 'datSelfLink'
 --
--- * 'diName'
+-- * 'datName'
 --
--- * 'diMasterInstanceName'
+-- * 'datMasterInstanceName'
 --
--- * 'diReplicaConfiguration'
+-- * 'datReplicaConfiguration'
 --
--- * 'diRegion'
+-- * 'datRegion'
 --
--- * 'diServiceAccountEmailAddress'
+-- * 'datServiceAccountEmailAddress'
 --
--- * 'diIpAddresses'
+-- * 'datIpAddresses'
 databaseInstance
     :: DatabaseInstance
 databaseInstance =
     DatabaseInstance
-    { _diMaxDiskSize = Nothing
-    , _diOnPremisesConfiguration = Nothing
-    , _diEtag = Nothing
-    , _diState = Nothing
-    , _diIpv6Address = Nothing
-    , _diServerCaCert = Nothing
-    , _diDatabaseVersion = Nothing
-    , _diProject = Nothing
-    , _diSettings = Nothing
-    , _diKind = "sql#instance"
-    , _diCurrentDiskSize = Nothing
-    , _diInstanceType = Nothing
-    , _diReplicaNames = Nothing
-    , _diSelfLink = Nothing
-    , _diName = Nothing
-    , _diMasterInstanceName = Nothing
-    , _diReplicaConfiguration = Nothing
-    , _diRegion = Nothing
-    , _diServiceAccountEmailAddress = Nothing
-    , _diIpAddresses = Nothing
+    { _datMaxDiskSize = Nothing
+    , _datOnPremisesConfiguration = Nothing
+    , _datEtag = Nothing
+    , _datState = Nothing
+    , _datIpv6Address = Nothing
+    , _datServerCaCert = Nothing
+    , _datDatabaseVersion = Nothing
+    , _datProject = Nothing
+    , _datSettings = Nothing
+    , _datKind = "sql#instance"
+    , _datCurrentDiskSize = Nothing
+    , _datInstanceType = Nothing
+    , _datReplicaNames = Nothing
+    , _datSelfLink = Nothing
+    , _datName = Nothing
+    , _datMasterInstanceName = Nothing
+    , _datReplicaConfiguration = Nothing
+    , _datRegion = Nothing
+    , _datServiceAccountEmailAddress = Nothing
+    , _datIpAddresses = Nothing
     }
 
 -- | The maximum disk size of the instance in bytes.
-diMaxDiskSize :: Lens' DatabaseInstance (Maybe Int64)
-diMaxDiskSize
-  = lens _diMaxDiskSize
-      (\ s a -> s{_diMaxDiskSize = a})
+datMaxDiskSize :: Lens' DatabaseInstance (Maybe Int64)
+datMaxDiskSize
+  = lens _datMaxDiskSize
+      (\ s a -> s{_datMaxDiskSize = a})
 
 -- | Configuration specific to on-premises instances.
-diOnPremisesConfiguration :: Lens' DatabaseInstance (Maybe (Maybe OnPremisesConfiguration))
-diOnPremisesConfiguration
-  = lens _diOnPremisesConfiguration
-      (\ s a -> s{_diOnPremisesConfiguration = a})
+datOnPremisesConfiguration :: Lens' DatabaseInstance (Maybe (Maybe OnPremisesConfiguration))
+datOnPremisesConfiguration
+  = lens _datOnPremisesConfiguration
+      (\ s a -> s{_datOnPremisesConfiguration = a})
 
 -- | HTTP 1.1 Entity tag for the resource.
-diEtag :: Lens' DatabaseInstance (Maybe Text)
-diEtag = lens _diEtag (\ s a -> s{_diEtag = a})
+datEtag :: Lens' DatabaseInstance (Maybe Text)
+datEtag = lens _datEtag (\ s a -> s{_datEtag = a})
 
 -- | The current serving state of the Cloud SQL instance. This can be one of
 -- the following. RUNNABLE: The instance is running, or is ready to run
@@ -1719,108 +1807,109 @@ diEtag = lens _diEtag (\ s a -> s{_diEtag = a})
 -- to problems with billing. PENDING_CREATE: The instance is being created.
 -- MAINTENANCE: The instance is down for maintenance. FAILED: The instance
 -- creation failed. UNKNOWN_STATE: The state of the instance is unknown.
-diState :: Lens' DatabaseInstance (Maybe Text)
-diState = lens _diState (\ s a -> s{_diState = a})
+datState :: Lens' DatabaseInstance (Maybe Text)
+datState = lens _datState (\ s a -> s{_datState = a})
 
 -- | The IPv6 address assigned to the instance.
-diIpv6Address :: Lens' DatabaseInstance (Maybe Text)
-diIpv6Address
-  = lens _diIpv6Address
-      (\ s a -> s{_diIpv6Address = a})
+datIpv6Address :: Lens' DatabaseInstance (Maybe Text)
+datIpv6Address
+  = lens _datIpv6Address
+      (\ s a -> s{_datIpv6Address = a})
 
 -- | SSL configuration.
-diServerCaCert :: Lens' DatabaseInstance (Maybe (Maybe SSLCert))
-diServerCaCert
-  = lens _diServerCaCert
-      (\ s a -> s{_diServerCaCert = a})
+datServerCaCert :: Lens' DatabaseInstance (Maybe (Maybe SSLCert))
+datServerCaCert
+  = lens _datServerCaCert
+      (\ s a -> s{_datServerCaCert = a})
 
 -- | The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6.
 -- Defaults to MYSQL_5_5. The databaseVersion can not be changed after
 -- instance creation.
-diDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
-diDatabaseVersion
-  = lens _diDatabaseVersion
-      (\ s a -> s{_diDatabaseVersion = a})
+datDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
+datDatabaseVersion
+  = lens _datDatabaseVersion
+      (\ s a -> s{_datDatabaseVersion = a})
 
 -- | The project ID of the project containing the Cloud SQL instance. The
 -- Google apps domain is prefixed if applicable.
-diProject :: Lens' DatabaseInstance (Maybe Text)
-diProject
-  = lens _diProject (\ s a -> s{_diProject = a})
+datProject :: Lens' DatabaseInstance (Maybe Text)
+datProject
+  = lens _datProject (\ s a -> s{_datProject = a})
 
 -- | The user settings.
-diSettings :: Lens' DatabaseInstance (Maybe (Maybe Settings))
-diSettings
-  = lens _diSettings (\ s a -> s{_diSettings = a})
+datSettings :: Lens' DatabaseInstance (Maybe (Maybe Settings))
+datSettings
+  = lens _datSettings (\ s a -> s{_datSettings = a})
 
 -- | This is always sql#instance.
-diKind :: Lens' DatabaseInstance Text
-diKind = lens _diKind (\ s a -> s{_diKind = a})
+datKind :: Lens' DatabaseInstance Text
+datKind = lens _datKind (\ s a -> s{_datKind = a})
 
 -- | The current disk usage of the instance in bytes.
-diCurrentDiskSize :: Lens' DatabaseInstance (Maybe Int64)
-diCurrentDiskSize
-  = lens _diCurrentDiskSize
-      (\ s a -> s{_diCurrentDiskSize = a})
+datCurrentDiskSize :: Lens' DatabaseInstance (Maybe Int64)
+datCurrentDiskSize
+  = lens _datCurrentDiskSize
+      (\ s a -> s{_datCurrentDiskSize = a})
 
 -- | The instance type. This can be one of the following. CLOUD_SQL_INSTANCE:
 -- A Cloud SQL instance that is not replicating from a master.
 -- ON_PREMISES_INSTANCE: An instance running on the customer\'s premises.
 -- READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a
 -- read-replica.
-diInstanceType :: Lens' DatabaseInstance (Maybe Text)
-diInstanceType
-  = lens _diInstanceType
-      (\ s a -> s{_diInstanceType = a})
+datInstanceType :: Lens' DatabaseInstance (Maybe Text)
+datInstanceType
+  = lens _datInstanceType
+      (\ s a -> s{_datInstanceType = a})
 
 -- | The replicas of the instance.
-diReplicaNames :: Lens' DatabaseInstance [Text]
-diReplicaNames
-  = lens _diReplicaNames
-      (\ s a -> s{_diReplicaNames = a})
+datReplicaNames :: Lens' DatabaseInstance [Text]
+datReplicaNames
+  = lens _datReplicaNames
+      (\ s a -> s{_datReplicaNames = a})
       . _Default
       . _Coerce
 
 -- | The URI of this resource.
-diSelfLink :: Lens' DatabaseInstance (Maybe Text)
-diSelfLink
-  = lens _diSelfLink (\ s a -> s{_diSelfLink = a})
+datSelfLink :: Lens' DatabaseInstance (Maybe Text)
+datSelfLink
+  = lens _datSelfLink (\ s a -> s{_datSelfLink = a})
 
 -- | Name of the Cloud SQL instance. This does not include the project ID.
-diName :: Lens' DatabaseInstance (Maybe Text)
-diName = lens _diName (\ s a -> s{_diName = a})
+datName :: Lens' DatabaseInstance (Maybe Text)
+datName = lens _datName (\ s a -> s{_datName = a})
 
 -- | The name of the instance which will act as master in the replication
 -- setup.
-diMasterInstanceName :: Lens' DatabaseInstance (Maybe Text)
-diMasterInstanceName
-  = lens _diMasterInstanceName
-      (\ s a -> s{_diMasterInstanceName = a})
+datMasterInstanceName :: Lens' DatabaseInstance (Maybe Text)
+datMasterInstanceName
+  = lens _datMasterInstanceName
+      (\ s a -> s{_datMasterInstanceName = a})
 
 -- | Configuration specific to read-replicas replicating from on-premises
 -- masters.
-diReplicaConfiguration :: Lens' DatabaseInstance (Maybe (Maybe ReplicaConfiguration))
-diReplicaConfiguration
-  = lens _diReplicaConfiguration
-      (\ s a -> s{_diReplicaConfiguration = a})
+datReplicaConfiguration :: Lens' DatabaseInstance (Maybe (Maybe ReplicaConfiguration))
+datReplicaConfiguration
+  = lens _datReplicaConfiguration
+      (\ s a -> s{_datReplicaConfiguration = a})
 
 -- | The geographical region. Can be us-central, asia-east1 or europe-west1.
 -- Defaults to us-central. The region can not be changed after instance
 -- creation.
-diRegion :: Lens' DatabaseInstance (Maybe Text)
-diRegion = lens _diRegion (\ s a -> s{_diRegion = a})
+datRegion :: Lens' DatabaseInstance (Maybe Text)
+datRegion
+  = lens _datRegion (\ s a -> s{_datRegion = a})
 
 -- | The service account email address assigned to the instance.
-diServiceAccountEmailAddress :: Lens' DatabaseInstance (Maybe Text)
-diServiceAccountEmailAddress
-  = lens _diServiceAccountEmailAddress
-      (\ s a -> s{_diServiceAccountEmailAddress = a})
+datServiceAccountEmailAddress :: Lens' DatabaseInstance (Maybe Text)
+datServiceAccountEmailAddress
+  = lens _datServiceAccountEmailAddress
+      (\ s a -> s{_datServiceAccountEmailAddress = a})
 
 -- | The assigned IP addresses for the instance.
-diIpAddresses :: Lens' DatabaseInstance [Maybe IPMapping]
-diIpAddresses
-  = lens _diIpAddresses
-      (\ s a -> s{_diIpAddresses = a})
+datIpAddresses :: Lens' DatabaseInstance [Maybe IPMapping]
+datIpAddresses
+  = lens _datIpAddresses
+      (\ s a -> s{_datIpAddresses = a})
       . _Default
       . _Coerce
 
@@ -1854,28 +1943,28 @@ instance ToJSON DatabaseInstance where
         toJSON DatabaseInstance{..}
           = object
               (catMaybes
-                 [("maxDiskSize" .=) <$> _diMaxDiskSize,
+                 [("maxDiskSize" .=) <$> _datMaxDiskSize,
                   ("onPremisesConfiguration" .=) <$>
-                    _diOnPremisesConfiguration,
-                  ("etag" .=) <$> _diEtag, ("state" .=) <$> _diState,
-                  ("ipv6Address" .=) <$> _diIpv6Address,
-                  ("serverCaCert" .=) <$> _diServerCaCert,
-                  ("databaseVersion" .=) <$> _diDatabaseVersion,
-                  ("project" .=) <$> _diProject,
-                  ("settings" .=) <$> _diSettings,
-                  Just ("kind" .= _diKind),
-                  ("currentDiskSize" .=) <$> _diCurrentDiskSize,
-                  ("instanceType" .=) <$> _diInstanceType,
-                  ("replicaNames" .=) <$> _diReplicaNames,
-                  ("selfLink" .=) <$> _diSelfLink,
-                  ("name" .=) <$> _diName,
-                  ("masterInstanceName" .=) <$> _diMasterInstanceName,
+                    _datOnPremisesConfiguration,
+                  ("etag" .=) <$> _datEtag, ("state" .=) <$> _datState,
+                  ("ipv6Address" .=) <$> _datIpv6Address,
+                  ("serverCaCert" .=) <$> _datServerCaCert,
+                  ("databaseVersion" .=) <$> _datDatabaseVersion,
+                  ("project" .=) <$> _datProject,
+                  ("settings" .=) <$> _datSettings,
+                  Just ("kind" .= _datKind),
+                  ("currentDiskSize" .=) <$> _datCurrentDiskSize,
+                  ("instanceType" .=) <$> _datInstanceType,
+                  ("replicaNames" .=) <$> _datReplicaNames,
+                  ("selfLink" .=) <$> _datSelfLink,
+                  ("name" .=) <$> _datName,
+                  ("masterInstanceName" .=) <$> _datMasterInstanceName,
                   ("replicaConfiguration" .=) <$>
-                    _diReplicaConfiguration,
-                  ("region" .=) <$> _diRegion,
+                    _datReplicaConfiguration,
+                  ("region" .=) <$> _datRegion,
                   ("serviceAccountEmailAddress" .=) <$>
-                    _diServiceAccountEmailAddress,
-                  ("ipAddresses" .=) <$> _diIpAddresses])
+                    _datServiceAccountEmailAddress,
+                  ("ipAddresses" .=) <$> _datIpAddresses])
 
 -- | A Google Cloud SQL service flag resource.
 --
@@ -3188,6 +3277,57 @@ instance ToJSON BackupConfiguration where
                   ("startTime" .=) <$> _bcStartTime,
                   Just ("kind" .= _bcKind),
                   ("binaryLogEnabled" .=) <$> _bcBinaryLogEnabled])
+
+-- | Options for exporting data as SQL statements.
+--
+-- /See:/ 'exportContextSqlExportOptions' smart constructor.
+data ExportContextSqlExportOptions = ExportContextSqlExportOptions
+    { _ecseoSchemaOnly :: !(Maybe Bool)
+    , _ecseoTables     :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ExportContextSqlExportOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecseoSchemaOnly'
+--
+-- * 'ecseoTables'
+exportContextSqlExportOptions
+    :: ExportContextSqlExportOptions
+exportContextSqlExportOptions =
+    ExportContextSqlExportOptions
+    { _ecseoSchemaOnly = Nothing
+    , _ecseoTables = Nothing
+    }
+
+-- | Export only schema.
+ecseoSchemaOnly :: Lens' ExportContextSqlExportOptions (Maybe Bool)
+ecseoSchemaOnly
+  = lens _ecseoSchemaOnly
+      (\ s a -> s{_ecseoSchemaOnly = a})
+
+-- | Tables to export, or that were exported, from the specified database. If
+-- you specify tables, specify one and only one database.
+ecseoTables :: Lens' ExportContextSqlExportOptions [Text]
+ecseoTables
+  = lens _ecseoTables (\ s a -> s{_ecseoTables = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ExportContextSqlExportOptions where
+        parseJSON
+          = withObject "ExportContextSqlExportOptions"
+              (\ o ->
+                 ExportContextSqlExportOptions <$>
+                   (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
+
+instance ToJSON ExportContextSqlExportOptions where
+        toJSON ExportContextSqlExportOptions{..}
+          = object
+              (catMaybes
+                 [("schemaOnly" .=) <$> _ecseoSchemaOnly,
+                  ("tables" .=) <$> _ecseoTables])
 
 -- | Database instance restore from backup context.
 --

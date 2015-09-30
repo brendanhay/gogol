@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a list of jobs matching the criteria.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsJobsSearch@.
-module Genomics.Jobs.Search
+module Network.Google.Resource.Genomics.Jobs.Search
     (
     -- * REST Resource
-      JobsSearchAPI
+      JobsSearchResource
 
     -- * Creating a Request
-    , jobsSearch
-    , JobsSearch
+    , jobsSearch'
+    , JobsSearch'
 
     -- * Request Lenses
     , jsQuotaUser
@@ -42,21 +43,30 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsJobsSearch@ which the
--- 'JobsSearch' request conforms to.
-type JobsSearchAPI =
-     "jobs" :> "search" :> Post '[JSON] SearchJobsResponse
+-- 'JobsSearch'' request conforms to.
+type JobsSearchResource =
+     "jobs" :>
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchJobsResponse
 
 -- | Gets a list of jobs matching the criteria.
 --
--- /See:/ 'jobsSearch' smart constructor.
-data JobsSearch = JobsSearch
+-- /See:/ 'jobsSearch'' smart constructor.
+data JobsSearch' = JobsSearch'
     { _jsQuotaUser   :: !(Maybe Text)
     , _jsPrettyPrint :: !Bool
     , _jsUserIp      :: !(Maybe Text)
     , _jsKey         :: !(Maybe Text)
     , _jsOauthToken  :: !(Maybe Text)
     , _jsFields      :: !(Maybe Text)
-    , _jsAlt         :: !Text
+    , _jsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsSearch'' with the minimum fields required to make a request.
@@ -76,17 +86,17 @@ data JobsSearch = JobsSearch
 -- * 'jsFields'
 --
 -- * 'jsAlt'
-jobsSearch
-    :: JobsSearch
-jobsSearch =
-    JobsSearch
+jobsSearch'
+    :: JobsSearch'
+jobsSearch' =
+    JobsSearch'
     { _jsQuotaUser = Nothing
     , _jsPrettyPrint = True
     , _jsUserIp = Nothing
     , _jsKey = Nothing
     , _jsOauthToken = Nothing
     , _jsFields = Nothing
-    , _jsAlt = "json"
+    , _jsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,16 +133,19 @@ jsFields :: Lens' JobsSearch' (Maybe Text)
 jsFields = lens _jsFields (\ s a -> s{_jsFields = a})
 
 -- | Data format for the response.
-jsAlt :: Lens' JobsSearch' Text
+jsAlt :: Lens' JobsSearch' Alt
 jsAlt = lens _jsAlt (\ s a -> s{_jsAlt = a})
 
 instance GoogleRequest JobsSearch' where
         type Rs JobsSearch' = SearchJobsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u JobsSearch{..}
-          = go _jsQuotaUser _jsPrettyPrint _jsUserIp _jsKey
+        requestWithRoute r u JobsSearch'{..}
+          = go _jsQuotaUser (Just _jsPrettyPrint) _jsUserIp
+              _jsKey
               _jsOauthToken
               _jsFields
-              _jsAlt
+              (Just _jsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsSearchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsSearchResource)
+                      r
+                      u

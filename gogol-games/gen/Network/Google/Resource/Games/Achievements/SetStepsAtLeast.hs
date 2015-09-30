@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- achievement is not modified.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsSetStepsAtLeast@.
-module Games.Achievements.SetStepsAtLeast
+module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
     (
     -- * REST Resource
-      AchievementsSetStepsAtLeastAPI
+      AchievementsSetStepsAtLeastResource
 
     -- * Creating a Request
-    , achievementsSetStepsAtLeast
-    , AchievementsSetStepsAtLeast
+    , achievementsSetStepsAtLeast'
+    , AchievementsSetStepsAtLeast'
 
     -- * Request Lenses
     , assalQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsSetStepsAtLeast@ which the
--- 'AchievementsSetStepsAtLeast' request conforms to.
-type AchievementsSetStepsAtLeastAPI =
+-- 'AchievementsSetStepsAtLeast'' request conforms to.
+type AchievementsSetStepsAtLeastResource =
      "achievements" :>
        Capture "achievementId" Text :>
          "setStepsAtLeast" :>
-           QueryParam "steps" Int32 :>
-             Post '[JSON] AchievementSetStepsAtLeastResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "steps" Int32 :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] AchievementSetStepsAtLeastResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking
 -- an achievement. If the steps parameter is less than the current number
 -- of steps that the player already gained for the achievement, the
 -- achievement is not modified.
 --
--- /See:/ 'achievementsSetStepsAtLeast' smart constructor.
-data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
+-- /See:/ 'achievementsSetStepsAtLeast'' smart constructor.
+data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
     { _assalQuotaUser     :: !(Maybe Text)
     , _assalPrettyPrint   :: !Bool
     , _assalAchievementId :: !Text
@@ -70,7 +78,7 @@ data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
     , _assalKey           :: !(Maybe Text)
     , _assalOauthToken    :: !(Maybe Text)
     , _assalFields        :: !(Maybe Text)
-    , _assalAlt           :: !Text
+    , _assalAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast'' with the minimum fields required to make a request.
@@ -94,12 +102,12 @@ data AchievementsSetStepsAtLeast = AchievementsSetStepsAtLeast
 -- * 'assalFields'
 --
 -- * 'assalAlt'
-achievementsSetStepsAtLeast
+achievementsSetStepsAtLeast'
     :: Text -- ^ 'achievementId'
     -> Int32 -- ^ 'steps'
-    -> AchievementsSetStepsAtLeast
-achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
-    AchievementsSetStepsAtLeast
+    -> AchievementsSetStepsAtLeast'
+achievementsSetStepsAtLeast' pAssalAchievementId_ pAssalSteps_ =
+    AchievementsSetStepsAtLeast'
     { _assalQuotaUser = Nothing
     , _assalPrettyPrint = True
     , _assalAchievementId = pAssalAchievementId_
@@ -108,7 +116,7 @@ achievementsSetStepsAtLeast pAssalAchievementId_ pAssalSteps_ =
     , _assalKey = Nothing
     , _assalOauthToken = Nothing
     , _assalFields = Nothing
-    , _assalAlt = "json"
+    , _assalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,7 +168,7 @@ assalFields
   = lens _assalFields (\ s a -> s{_assalFields = a})
 
 -- | Data format for the response.
-assalAlt :: Lens' AchievementsSetStepsAtLeast' Text
+assalAlt :: Lens' AchievementsSetStepsAtLeast' Alt
 assalAlt = lens _assalAlt (\ s a -> s{_assalAlt = a})
 
 instance GoogleRequest AchievementsSetStepsAtLeast'
@@ -168,17 +176,17 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
         type Rs AchievementsSetStepsAtLeast' =
              AchievementSetStepsAtLeastResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsSetStepsAtLeast{..}
-          = go _assalQuotaUser _assalPrettyPrint
+        requestWithRoute r u AchievementsSetStepsAtLeast'{..}
+          = go _assalQuotaUser (Just _assalPrettyPrint)
               _assalAchievementId
               _assalUserIp
               (Just _assalSteps)
               _assalKey
               _assalOauthToken
               _assalFields
-              _assalAlt
+              (Just _assalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsSetStepsAtLeastAPI)
+                      (Proxy :: Proxy AchievementsSetStepsAtLeastResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- course has the requested ID or if the course does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsGet@.
-module Classroom.Courses.Students.Get
+module Network.Google.Resource.Classroom.Courses.Students.Get
     (
     -- * REST Resource
-      CoursesStudentsGetAPI
+      CoursesStudentsGetResource
 
     -- * Creating a Request
-    , coursesStudentsGet
-    , CoursesStudentsGet
+    , coursesStudentsGet'
+    , CoursesStudentsGet'
 
     -- * Request Lenses
     , csgXgafv
@@ -54,13 +55,27 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesStudentsGet@ which the
--- 'CoursesStudentsGet' request conforms to.
-type CoursesStudentsGetAPI =
+-- 'CoursesStudentsGet'' request conforms to.
+type CoursesStudentsGetResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             Capture "userId" Text :> Get '[JSON] Student
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] Student
 
 -- | Returns a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -68,8 +83,8 @@ type CoursesStudentsGetAPI =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
 -- course has the requested ID or if the course does not exist.
 --
--- /See:/ 'coursesStudentsGet' smart constructor.
-data CoursesStudentsGet = CoursesStudentsGet
+-- /See:/ 'coursesStudentsGet'' smart constructor.
+data CoursesStudentsGet' = CoursesStudentsGet'
     { _csgXgafv          :: !(Maybe Text)
     , _csgQuotaUser      :: !(Maybe Text)
     , _csgPrettyPrint    :: !Bool
@@ -120,12 +135,12 @@ data CoursesStudentsGet = CoursesStudentsGet
 -- * 'csgCallback'
 --
 -- * 'csgAlt'
-coursesStudentsGet
+coursesStudentsGet'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'userId'
-    -> CoursesStudentsGet
-coursesStudentsGet pCsgCourseId_ pCsgUserId_ =
-    CoursesStudentsGet
+    -> CoursesStudentsGet'
+coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
+    CoursesStudentsGet'
     { _csgXgafv = Nothing
     , _csgQuotaUser = Nothing
     , _csgPrettyPrint = True
@@ -231,10 +246,10 @@ csgAlt = lens _csgAlt (\ s a -> s{_csgAlt = a})
 instance GoogleRequest CoursesStudentsGet' where
         type Rs CoursesStudentsGet' = Student
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesStudentsGet{..}
-          = go _csgXgafv _csgQuotaUser _csgPrettyPrint
+        requestWithRoute r u CoursesStudentsGet'{..}
+          = go _csgXgafv _csgQuotaUser (Just _csgPrettyPrint)
               _csgUploadProtocol
-              _csgPp
+              (Just _csgPp)
               _csgCourseId
               _csgAccessToken
               _csgUploadType
@@ -244,9 +259,9 @@ instance GoogleRequest CoursesStudentsGet' where
               _csgOauthToken
               _csgFields
               _csgCallback
-              _csgAlt
+              (Just _csgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesStudentsGetAPI)
+                      (Proxy :: Proxy CoursesStudentsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes to Events resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsWatch@.
-module Calendar.Events.Watch
+module Network.Google.Resource.Calendar.Events.Watch
     (
     -- * REST Resource
-      EventsWatchAPI
+      EventsWatchResource
 
     -- * Creating a Request
-    , eventsWatch
-    , EventsWatch
+    , eventsWatch'
+    , EventsWatch'
 
     -- * Request Lenses
     , ewSyncToken
@@ -60,43 +61,61 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsWatch@ which the
--- 'EventsWatch' request conforms to.
-type EventsWatchAPI =
+-- 'EventsWatch'' request conforms to.
+type EventsWatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            "watch" :>
              QueryParam "syncToken" Text :>
-               QueryParam "timeMin" UTCTime :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "singleEvents" Bool :>
-                     QueryParams "privateExtendedProperty" Text :>
-                       QueryParam "showDeleted" Bool :>
-                         QueryParam "q" Text :>
-                           QueryParams "sharedExtendedProperty" Text :>
-                             QueryParam "maxAttendees" Int32 :>
-                               QueryParam "iCalUID" Text :>
-                                 QueryParam "updatedMin" UTCTime :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "timeZone" Text :>
-                                       QueryParam "showHiddenInvitations" Bool
-                                         :>
-                                         QueryParam "maxResults" Int32 :>
-                                           QueryParam "alwaysIncludeEmail" Bool
-                                             :>
-                                             QueryParam "timeMax" UTCTime :>
-                                               Post '[JSON] Channel
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "timeMin" UTCTime :>
+                     QueryParam "orderBy" CalendarEventsWatchOrderBy :>
+                       QueryParam "singleEvents" Bool :>
+                         QueryParams "privateExtendedProperty" Text :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "showDeleted" Bool :>
+                               QueryParam "q" Text :>
+                                 QueryParams "sharedExtendedProperty" Text :>
+                                   QueryParam "maxAttendees" Int32 :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "iCalUID" Text :>
+                                         QueryParam "updatedMin" UTCTime :>
+                                           QueryParam "pageToken" Text :>
+                                             QueryParam "timeZone" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam
+                                                   "showHiddenInvitations"
+                                                   Bool
+                                                   :>
+                                                   QueryParam "maxResults" Int32
+                                                     :>
+                                                     QueryParam
+                                                       "alwaysIncludeEmail"
+                                                       Bool
+                                                       :>
+                                                       QueryParam "timeMax"
+                                                         UTCTime
+                                                         :>
+                                                         QueryParam "fields"
+                                                           Text
+                                                           :>
+                                                           QueryParam "alt" Alt
+                                                             :>
+                                                             Post '[JSON]
+                                                               Channel
 
 -- | Watch for changes to Events resources.
 --
--- /See:/ 'eventsWatch' smart constructor.
-data EventsWatch = EventsWatch
+-- /See:/ 'eventsWatch'' smart constructor.
+data EventsWatch' = EventsWatch'
     { _ewSyncToken               :: !(Maybe Text)
     , _ewQuotaUser               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewPrettyPrint             :: !Bool
     , _ewTimeMin                 :: !(Maybe UTCTime)
-    , _ewOrderBy                 :: !(Maybe Text)
+    , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe Text)
     , _ewUserIp                  :: !(Maybe Text)
@@ -115,7 +134,7 @@ data EventsWatch = EventsWatch
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe UTCTime)
     , _ewFields                  :: !(Maybe Text)
-    , _ewAlt                     :: !Text
+    , _ewAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsWatch'' with the minimum fields required to make a request.
@@ -171,11 +190,11 @@ data EventsWatch = EventsWatch
 -- * 'ewFields'
 --
 -- * 'ewAlt'
-eventsWatch
+eventsWatch'
     :: Text -- ^ 'calendarId'
-    -> EventsWatch
-eventsWatch pEwCalendarId_ =
-    EventsWatch
+    -> EventsWatch'
+eventsWatch' pEwCalendarId_ =
+    EventsWatch'
     { _ewSyncToken = Nothing
     , _ewQuotaUser = Nothing
     , _ewCalendarId = pEwCalendarId_
@@ -200,7 +219,7 @@ eventsWatch pEwCalendarId_ =
     , _ewAlwaysIncludeEmail = Nothing
     , _ewTimeMax = Nothing
     , _ewFields = Nothing
-    , _ewAlt = "json"
+    , _ewAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -250,7 +269,7 @@ ewTimeMin
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-ewOrderBy :: Lens' EventsWatch' (Maybe Text)
+ewOrderBy :: Lens' EventsWatch' (Maybe CalendarEventsWatchOrderBy)
 ewOrderBy
   = lens _ewOrderBy (\ s a -> s{_ewOrderBy = a})
 
@@ -382,15 +401,15 @@ ewFields :: Lens' EventsWatch' (Maybe Text)
 ewFields = lens _ewFields (\ s a -> s{_ewFields = a})
 
 -- | Data format for the response.
-ewAlt :: Lens' EventsWatch' Text
+ewAlt :: Lens' EventsWatch' Alt
 ewAlt = lens _ewAlt (\ s a -> s{_ewAlt = a})
 
 instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsWatch{..}
+        requestWithRoute r u EventsWatch'{..}
           = go _ewSyncToken _ewQuotaUser _ewCalendarId
-              _ewPrettyPrint
+              (Just _ewPrettyPrint)
               _ewTimeMin
               _ewOrderBy
               _ewSingleEvents
@@ -411,6 +430,9 @@ instance GoogleRequest EventsWatch' where
               _ewAlwaysIncludeEmail
               _ewTimeMax
               _ewFields
-              _ewAlt
+              (Just _ewAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsWatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsWatchResource)
+                      r
+                      u

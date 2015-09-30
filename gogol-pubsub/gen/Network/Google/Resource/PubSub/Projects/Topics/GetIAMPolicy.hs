@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the resource does not exist.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsGetIAMPolicy@.
-module PubSub.Projects.Topics.GetIAMPolicy
+module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
     (
     -- * REST Resource
-      ProjectsTopicsGetIAMPolicyAPI
+      ProjectsTopicsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsTopicsGetIAMPolicy
-    , ProjectsTopicsGetIAMPolicy
+    , projectsTopicsGetIAMPolicy'
+    , ProjectsTopicsGetIAMPolicy'
 
     -- * Request Lenses
     , ptgipXgafv
@@ -50,16 +51,29 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsGetIAMPolicy@ which the
--- 'ProjectsTopicsGetIAMPolicy' request conforms to.
-type ProjectsTopicsGetIAMPolicyAPI =
+-- 'ProjectsTopicsGetIAMPolicy'' request conforms to.
+type ProjectsTopicsGetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:getIamPolicy" :> Get '[JSON] Policy
+       "{+resource}:getIamPolicy" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
 -- the resource does not exist.
 --
--- /See:/ 'projectsTopicsGetIAMPolicy' smart constructor.
-data ProjectsTopicsGetIAMPolicy = ProjectsTopicsGetIAMPolicy
+-- /See:/ 'projectsTopicsGetIAMPolicy'' smart constructor.
+data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
     { _ptgipXgafv          :: !(Maybe Text)
     , _ptgipQuotaUser      :: !(Maybe Text)
     , _ptgipPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data ProjectsTopicsGetIAMPolicy = ProjectsTopicsGetIAMPolicy
 -- * 'ptgipCallback'
 --
 -- * 'ptgipAlt'
-projectsTopicsGetIAMPolicy
+projectsTopicsGetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsTopicsGetIAMPolicy
-projectsTopicsGetIAMPolicy pPtgipResource_ =
-    ProjectsTopicsGetIAMPolicy
+    -> ProjectsTopicsGetIAMPolicy'
+projectsTopicsGetIAMPolicy' pPtgipResource_ =
+    ProjectsTopicsGetIAMPolicy'
     { _ptgipXgafv = Nothing
     , _ptgipQuotaUser = Nothing
     , _ptgipPrettyPrint = True
@@ -213,10 +227,11 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
          where
         type Rs ProjectsTopicsGetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsGetIAMPolicy{..}
-          = go _ptgipXgafv _ptgipQuotaUser _ptgipPrettyPrint
+        requestWithRoute r u ProjectsTopicsGetIAMPolicy'{..}
+          = go _ptgipXgafv _ptgipQuotaUser
+              (Just _ptgipPrettyPrint)
               _ptgipUploadProtocol
-              _ptgipPp
+              (Just _ptgipPp)
               _ptgipAccessToken
               _ptgipUploadType
               _ptgipBearerToken
@@ -225,9 +240,9 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
               _ptgipOauthToken
               _ptgipFields
               _ptgipCallback
-              _ptgipAlt
+              (Just _ptgipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsGetIAMPolicyAPI)
+                      (Proxy :: Proxy ProjectsTopicsGetIAMPolicyResource)
                       r
                       u

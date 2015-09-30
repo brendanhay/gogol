@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete schema
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasDelete@.
-module Directory.Schemas.Delete
+module Network.Google.Resource.Directory.Schemas.Delete
     (
     -- * REST Resource
-      SchemasDeleteAPI
+      SchemasDeleteResource
 
     -- * Creating a Request
-    , schemasDelete
-    , SchemasDelete
+    , schemasDelete'
+    , SchemasDelete'
 
     -- * Request Lenses
     , sdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasDelete@ which the
--- 'SchemasDelete' request conforms to.
-type SchemasDeleteAPI =
+-- 'SchemasDelete'' request conforms to.
+type SchemasDeleteResource =
      "customer" :>
        Capture "customerId" Text :>
          "schemas" :>
-           Capture "schemaKey" Text :> Delete '[JSON] ()
+           Capture "schemaKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete schema
 --
--- /See:/ 'schemasDelete' smart constructor.
-data SchemasDelete = SchemasDelete
+-- /See:/ 'schemasDelete'' smart constructor.
+data SchemasDelete' = SchemasDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SchemasDelete = SchemasDelete
     , _sdOauthToken  :: !(Maybe Text)
     , _sdSchemaKey   :: !Text
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SchemasDelete = SchemasDelete
 -- * 'sdFields'
 --
 -- * 'sdAlt'
-schemasDelete
+schemasDelete'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
-    -> SchemasDelete
-schemasDelete pSdCustomerId_ pSdSchemaKey_ =
-    SchemasDelete
+    -> SchemasDelete'
+schemasDelete' pSdCustomerId_ pSdSchemaKey_ =
+    SchemasDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
     , _sdUserIp = Nothing
@@ -101,7 +109,7 @@ schemasDelete pSdCustomerId_ pSdSchemaKey_ =
     , _sdOauthToken = Nothing
     , _sdSchemaKey = pSdSchemaKey_
     , _sdFields = Nothing
-    , _sdAlt = "json"
+    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ sdFields :: Lens' SchemasDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' SchemasDelete' Text
+sdAlt :: Lens' SchemasDelete' Alt
 sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest SchemasDelete' where
         type Rs SchemasDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasDelete{..}
-          = go _sdQuotaUser _sdPrettyPrint _sdUserIp
+        requestWithRoute r u SchemasDelete'{..}
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
               _sdCustomerId
               _sdKey
               _sdOauthToken
               _sdSchemaKey
               _sdFields
-              _sdAlt
+              (Just _sdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SchemasDeleteResource)
+                      r
                       u

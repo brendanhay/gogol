@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new event tag.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsInsert@.
-module DFAReporting.EventTags.Insert
+module Network.Google.Resource.DFAReporting.EventTags.Insert
     (
     -- * REST Resource
-      EventTagsInsertAPI
+      EventTagsInsertResource
 
     -- * Creating a Request
-    , eventTagsInsert
-    , EventTagsInsert
+    , eventTagsInsert'
+    , EventTagsInsert'
 
     -- * Request Lenses
     , etiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsInsert@ which the
--- 'EventTagsInsert' request conforms to.
-type EventTagsInsertAPI =
+-- 'EventTagsInsert'' request conforms to.
+type EventTagsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "eventTags" :> Post '[JSON] EventTag
+         "eventTags" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] EventTag
 
 -- | Inserts a new event tag.
 --
--- /See:/ 'eventTagsInsert' smart constructor.
-data EventTagsInsert = EventTagsInsert
+-- /See:/ 'eventTagsInsert'' smart constructor.
+data EventTagsInsert' = EventTagsInsert'
     { _etiQuotaUser   :: !(Maybe Text)
     , _etiPrettyPrint :: !Bool
     , _etiUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data EventTagsInsert = EventTagsInsert
     , _etiKey         :: !(Maybe Text)
     , _etiOauthToken  :: !(Maybe Text)
     , _etiFields      :: !(Maybe Text)
-    , _etiAlt         :: !Text
+    , _etiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data EventTagsInsert = EventTagsInsert
 -- * 'etiFields'
 --
 -- * 'etiAlt'
-eventTagsInsert
+eventTagsInsert'
     :: Int64 -- ^ 'profileId'
-    -> EventTagsInsert
-eventTagsInsert pEtiProfileId_ =
-    EventTagsInsert
+    -> EventTagsInsert'
+eventTagsInsert' pEtiProfileId_ =
+    EventTagsInsert'
     { _etiQuotaUser = Nothing
     , _etiPrettyPrint = True
     , _etiUserIp = Nothing
@@ -94,7 +102,7 @@ eventTagsInsert pEtiProfileId_ =
     , _etiKey = Nothing
     , _etiOauthToken = Nothing
     , _etiFields = Nothing
-    , _etiAlt = "json"
+    , _etiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ etiFields
   = lens _etiFields (\ s a -> s{_etiFields = a})
 
 -- | Data format for the response.
-etiAlt :: Lens' EventTagsInsert' Text
+etiAlt :: Lens' EventTagsInsert' Alt
 etiAlt = lens _etiAlt (\ s a -> s{_etiAlt = a})
 
 instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsInsert{..}
-          = go _etiQuotaUser _etiPrettyPrint _etiUserIp
+        requestWithRoute r u EventTagsInsert'{..}
+          = go _etiQuotaUser (Just _etiPrettyPrint) _etiUserIp
               _etiProfileId
               _etiKey
               _etiOauthToken
               _etiFields
-              _etiAlt
+              (Just _etiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- accountId and billingId.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetGet@.
-module AdExchangeBuyer.Budget.Get
+module Network.Google.Resource.AdExchangeBuyer.Budget.Get
     (
     -- * REST Resource
-      BudgetGetAPI
+      BudgetGetResource
 
     -- * Creating a Request
-    , budgetGet
-    , BudgetGet
+    , budgetGet'
+    , BudgetGet'
 
     -- * Request Lenses
     , bgQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetGet@ which the
--- 'BudgetGet' request conforms to.
-type BudgetGetAPI =
+-- 'BudgetGet'' request conforms to.
+type BudgetGetResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
-         Capture "billingId" Int64 :> Get '[JSON] Budget
+         Capture "billingId" Int64 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Budget
 
 -- | Returns the budget information for the adgroup specified by the
 -- accountId and billingId.
 --
--- /See:/ 'budgetGet' smart constructor.
-data BudgetGet = BudgetGet
+-- /See:/ 'budgetGet'' smart constructor.
+data BudgetGet' = BudgetGet'
     { _bgQuotaUser   :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
     , _bgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data BudgetGet = BudgetGet
     , _bgOauthToken  :: !(Maybe Text)
     , _bgBillingId   :: !Int64
     , _bgFields      :: !(Maybe Text)
-    , _bgAlt         :: !Text
+    , _bgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data BudgetGet = BudgetGet
 -- * 'bgFields'
 --
 -- * 'bgAlt'
-budgetGet
+budgetGet'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
-    -> BudgetGet
-budgetGet pBgAccountId_ pBgBillingId_ =
-    BudgetGet
+    -> BudgetGet'
+budgetGet' pBgAccountId_ pBgBillingId_ =
+    BudgetGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True
     , _bgUserIp = Nothing
@@ -102,7 +110,7 @@ budgetGet pBgAccountId_ pBgBillingId_ =
     , _bgOauthToken = Nothing
     , _bgBillingId = pBgBillingId_
     , _bgFields = Nothing
-    , _bgAlt = "json"
+    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +157,21 @@ bgFields :: Lens' BudgetGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
 -- | Data format for the response.
-bgAlt :: Lens' BudgetGet' Text
+bgAlt :: Lens' BudgetGet' Alt
 bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
 
 instance GoogleRequest BudgetGet' where
         type Rs BudgetGet' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BudgetGet{..}
-          = go _bgQuotaUser _bgPrettyPrint _bgUserIp
+        requestWithRoute r u BudgetGet'{..}
+          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIp
               _bgAccountId
               _bgKey
               _bgOauthToken
               _bgBillingId
               _bgFields
-              _bgAlt
+              (Just _bgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BudgetGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy BudgetGetResource)
+                      r
+                      u

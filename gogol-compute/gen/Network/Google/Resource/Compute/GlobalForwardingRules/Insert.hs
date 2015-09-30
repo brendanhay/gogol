@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- using the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesInsert@.
-module Compute.GlobalForwardingRules.Insert
+module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
     (
     -- * REST Resource
-      GlobalForwardingRulesInsertAPI
+      GlobalForwardingRulesInsertResource
 
     -- * Creating a Request
-    , globalForwardingRulesInsert
-    , GlobalForwardingRulesInsert
+    , globalForwardingRulesInsert'
+    , GlobalForwardingRulesInsert'
 
     -- * Request Lenses
     , gfriQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalForwardingRulesInsert@ which the
--- 'GlobalForwardingRulesInsert' request conforms to.
-type GlobalForwardingRulesInsertAPI =
+-- 'GlobalForwardingRulesInsert'' request conforms to.
+type GlobalForwardingRulesInsertResource =
      Capture "project" Text :>
        "global" :>
-         "forwardingRules" :> Post '[JSON] Operation
+         "forwardingRules" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ 'globalForwardingRulesInsert' smart constructor.
-data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
+-- /See:/ 'globalForwardingRulesInsert'' smart constructor.
+data GlobalForwardingRulesInsert' = GlobalForwardingRulesInsert'
     { _gfriQuotaUser   :: !(Maybe Text)
     , _gfriPrettyPrint :: !Bool
     , _gfriProject     :: !Text
@@ -62,7 +70,7 @@ data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
     , _gfriKey         :: !(Maybe Text)
     , _gfriOauthToken  :: !(Maybe Text)
     , _gfriFields      :: !(Maybe Text)
-    , _gfriAlt         :: !Text
+    , _gfriAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesInsert'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
 -- * 'gfriFields'
 --
 -- * 'gfriAlt'
-globalForwardingRulesInsert
+globalForwardingRulesInsert'
     :: Text -- ^ 'project'
-    -> GlobalForwardingRulesInsert
-globalForwardingRulesInsert pGfriProject_ =
-    GlobalForwardingRulesInsert
+    -> GlobalForwardingRulesInsert'
+globalForwardingRulesInsert' pGfriProject_ =
+    GlobalForwardingRulesInsert'
     { _gfriQuotaUser = Nothing
     , _gfriPrettyPrint = True
     , _gfriProject = pGfriProject_
@@ -96,7 +104,7 @@ globalForwardingRulesInsert pGfriProject_ =
     , _gfriKey = Nothing
     , _gfriOauthToken = Nothing
     , _gfriFields = Nothing
-    , _gfriAlt = "json"
+    , _gfriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,22 +150,23 @@ gfriFields
   = lens _gfriFields (\ s a -> s{_gfriFields = a})
 
 -- | Data format for the response.
-gfriAlt :: Lens' GlobalForwardingRulesInsert' Text
+gfriAlt :: Lens' GlobalForwardingRulesInsert' Alt
 gfriAlt = lens _gfriAlt (\ s a -> s{_gfriAlt = a})
 
 instance GoogleRequest GlobalForwardingRulesInsert'
          where
         type Rs GlobalForwardingRulesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesInsert{..}
-          = go _gfriQuotaUser _gfriPrettyPrint _gfriProject
+        requestWithRoute r u GlobalForwardingRulesInsert'{..}
+          = go _gfriQuotaUser (Just _gfriPrettyPrint)
+              _gfriProject
               _gfriUserIp
               _gfriKey
               _gfriOauthToken
               _gfriFields
-              _gfriAlt
+              (Just _gfriAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalForwardingRulesInsertAPI)
+                      (Proxy :: Proxy GlobalForwardingRulesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing creative.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesUpdate@.
-module DFAReporting.Creatives.Update
+module Network.Google.Resource.DFAReporting.Creatives.Update
     (
     -- * REST Resource
-      CreativesUpdateAPI
+      CreativesUpdateResource
 
     -- * Creating a Request
-    , creativesUpdate
-    , CreativesUpdate
+    , creativesUpdate'
+    , CreativesUpdate'
 
     -- * Request Lenses
     , cuuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativesUpdate@ which the
--- 'CreativesUpdate' request conforms to.
-type CreativesUpdateAPI =
+-- 'CreativesUpdate'' request conforms to.
+type CreativesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creatives" :> Put '[JSON] Creative
+         "creatives" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --
--- /See:/ 'creativesUpdate' smart constructor.
-data CreativesUpdate = CreativesUpdate
+-- /See:/ 'creativesUpdate'' smart constructor.
+data CreativesUpdate' = CreativesUpdate'
     { _cuuQuotaUser   :: !(Maybe Text)
     , _cuuPrettyPrint :: !Bool
     , _cuuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativesUpdate = CreativesUpdate
     , _cuuKey         :: !(Maybe Text)
     , _cuuOauthToken  :: !(Maybe Text)
     , _cuuFields      :: !(Maybe Text)
-    , _cuuAlt         :: !Text
+    , _cuuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativesUpdate = CreativesUpdate
 -- * 'cuuFields'
 --
 -- * 'cuuAlt'
-creativesUpdate
+creativesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CreativesUpdate
-creativesUpdate pCuuProfileId_ =
-    CreativesUpdate
+    -> CreativesUpdate'
+creativesUpdate' pCuuProfileId_ =
+    CreativesUpdate'
     { _cuuQuotaUser = Nothing
     , _cuuPrettyPrint = True
     , _cuuUserIp = Nothing
@@ -94,7 +102,7 @@ creativesUpdate pCuuProfileId_ =
     , _cuuKey = Nothing
     , _cuuOauthToken = Nothing
     , _cuuFields = Nothing
-    , _cuuAlt = "json"
+    , _cuuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ cuuFields
   = lens _cuuFields (\ s a -> s{_cuuFields = a})
 
 -- | Data format for the response.
-cuuAlt :: Lens' CreativesUpdate' Text
+cuuAlt :: Lens' CreativesUpdate' Alt
 cuuAlt = lens _cuuAlt (\ s a -> s{_cuuAlt = a})
 
 instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesUpdate{..}
-          = go _cuuQuotaUser _cuuPrettyPrint _cuuUserIp
+        requestWithRoute r u CreativesUpdate'{..}
+          = go _cuuQuotaUser (Just _cuuPrettyPrint) _cuuUserIp
               _cuuProfileId
               _cuuKey
               _cuuOauthToken
               _cuuFields
-              _cuuAlt
+              (Just _cuuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesUpdateResource)
                       r
                       u

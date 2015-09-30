@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a job. Fields that are set in the job state will be updated.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsUpdate@.
-module Coordinate.Jobs.Update
+module Network.Google.Resource.Coordinate.Jobs.Update
     (
     -- * REST Resource
-      JobsUpdateAPI
+      JobsUpdateResource
 
     -- * Creating a Request
-    , jobsUpdate
-    , JobsUpdate
+    , jobsUpdate'
+    , JobsUpdate'
 
     -- * Request Lenses
     , juQuotaUser
@@ -54,31 +55,39 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateJobsUpdate@ which the
--- 'JobsUpdate' request conforms to.
-type JobsUpdateAPI =
+-- 'JobsUpdate'' request conforms to.
+type JobsUpdateResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "progress" Text :>
-               QueryParam "note" Text :>
-                 QueryParam "customerPhoneNumber" Text :>
-                   QueryParam "customerName" Text :>
-                     QueryParam "address" Text :>
-                       QueryParam "assignee" Text :>
-                         QueryParam "lat" Double :>
-                           QueryParam "lng" Double :>
-                             QueryParam "title" Text :>
-                               QueryParams "customField" Text :> Put '[JSON] Job
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "progress" CoordinateJobsUpdateProgress :>
+                   QueryParam "note" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "customerPhoneNumber" Text :>
+                         QueryParam "customerName" Text :>
+                           QueryParam "address" Text :>
+                             QueryParam "assignee" Text :>
+                               QueryParam "lat" Double :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "lng" Double :>
+                                     QueryParam "title" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParams "customField" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Put '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 --
--- /See:/ 'jobsUpdate' smart constructor.
-data JobsUpdate = JobsUpdate
+-- /See:/ 'jobsUpdate'' smart constructor.
+data JobsUpdate' = JobsUpdate'
     { _juQuotaUser           :: !(Maybe Text)
     , _juPrettyPrint         :: !Bool
     , _juJobId               :: !Word64
-    , _juProgress            :: !(Maybe Text)
+    , _juProgress            :: !(Maybe CoordinateJobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
     , _juUserIp              :: !(Maybe Text)
     , _juTeamId              :: !Text
@@ -93,7 +102,7 @@ data JobsUpdate = JobsUpdate
     , _juOauthToken          :: !(Maybe Text)
     , _juFields              :: !(Maybe Text)
     , _juCustomField         :: !(Maybe Text)
-    , _juAlt                 :: !Text
+    , _juAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsUpdate'' with the minimum fields required to make a request.
@@ -137,12 +146,12 @@ data JobsUpdate = JobsUpdate
 -- * 'juCustomField'
 --
 -- * 'juAlt'
-jobsUpdate
+jobsUpdate'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> JobsUpdate
-jobsUpdate pJuJobId_ pJuTeamId_ =
-    JobsUpdate
+    -> JobsUpdate'
+jobsUpdate' pJuJobId_ pJuTeamId_ =
+    JobsUpdate'
     { _juQuotaUser = Nothing
     , _juPrettyPrint = True
     , _juJobId = pJuJobId_
@@ -161,7 +170,7 @@ jobsUpdate pJuJobId_ pJuTeamId_ =
     , _juOauthToken = Nothing
     , _juFields = Nothing
     , _juCustomField = Nothing
-    , _juAlt = "json"
+    , _juAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +191,7 @@ juJobId :: Lens' JobsUpdate' Word64
 juJobId = lens _juJobId (\ s a -> s{_juJobId = a})
 
 -- | Job progress
-juProgress :: Lens' JobsUpdate' (Maybe Text)
+juProgress :: Lens' JobsUpdate' (Maybe CoordinateJobsUpdateProgress)
 juProgress
   = lens _juProgress (\ s a -> s{_juProgress = a})
 
@@ -260,14 +269,15 @@ juCustomField
       (\ s a -> s{_juCustomField = a})
 
 -- | Data format for the response.
-juAlt :: Lens' JobsUpdate' Text
+juAlt :: Lens' JobsUpdate' Alt
 juAlt = lens _juAlt (\ s a -> s{_juAlt = a})
 
 instance GoogleRequest JobsUpdate' where
         type Rs JobsUpdate' = Job
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsUpdate{..}
-          = go _juQuotaUser _juPrettyPrint _juJobId _juProgress
+        requestWithRoute r u JobsUpdate'{..}
+          = go _juQuotaUser (Just _juPrettyPrint) _juJobId
+              _juProgress
               _juNote
               _juUserIp
               _juTeamId
@@ -282,6 +292,8 @@ instance GoogleRequest JobsUpdate' where
               _juOauthToken
               _juFields
               _juCustomField
-              _juAlt
+              (Just _juAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsUpdateAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsUpdateResource)
+                      r
+                      u

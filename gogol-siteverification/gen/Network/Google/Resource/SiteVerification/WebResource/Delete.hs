@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Relinquish ownership of a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceDelete@.
-module SiteVerification.WebResource.Delete
+module Network.Google.Resource.SiteVerification.WebResource.Delete
     (
     -- * REST Resource
-      WebResourceDeleteAPI
+      WebResourceDeleteResource
 
     -- * Creating a Request
-    , webResourceDelete
-    , WebResourceDelete
+    , webResourceDelete'
+    , WebResourceDelete'
 
     -- * Request Lenses
     , wrdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourceDelete@ which the
--- 'WebResourceDelete' request conforms to.
-type WebResourceDeleteAPI =
+-- 'WebResourceDelete'' request conforms to.
+type WebResourceDeleteResource =
      "webResource" :>
-       Capture "id" Text :> Delete '[JSON] ()
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Relinquish ownership of a website or domain.
 --
--- /See:/ 'webResourceDelete' smart constructor.
-data WebResourceDelete = WebResourceDelete
+-- /See:/ 'webResourceDelete'' smart constructor.
+data WebResourceDelete' = WebResourceDelete'
     { _wrdQuotaUser   :: !(Maybe Text)
     , _wrdPrettyPrint :: !Bool
     , _wrdUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data WebResourceDelete = WebResourceDelete
     , _wrdId          :: !Text
     , _wrdOauthToken  :: !(Maybe Text)
     , _wrdFields      :: !(Maybe Text)
-    , _wrdAlt         :: !Text
+    , _wrdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data WebResourceDelete = WebResourceDelete
 -- * 'wrdFields'
 --
 -- * 'wrdAlt'
-webResourceDelete
+webResourceDelete'
     :: Text -- ^ 'id'
-    -> WebResourceDelete
-webResourceDelete pWrdId_ =
-    WebResourceDelete
+    -> WebResourceDelete'
+webResourceDelete' pWrdId_ =
+    WebResourceDelete'
     { _wrdQuotaUser = Nothing
     , _wrdPrettyPrint = False
     , _wrdUserIp = Nothing
@@ -93,7 +101,7 @@ webResourceDelete pWrdId_ =
     , _wrdId = pWrdId_
     , _wrdOauthToken = Nothing
     , _wrdFields = Nothing
-    , _wrdAlt = "json"
+    , _wrdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ wrdFields
   = lens _wrdFields (\ s a -> s{_wrdFields = a})
 
 -- | Data format for the response.
-wrdAlt :: Lens' WebResourceDelete' Text
+wrdAlt :: Lens' WebResourceDelete' Alt
 wrdAlt = lens _wrdAlt (\ s a -> s{_wrdAlt = a})
 
 instance GoogleRequest WebResourceDelete' where
         type Rs WebResourceDelete' = ()
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceDelete{..}
-          = go _wrdQuotaUser _wrdPrettyPrint _wrdUserIp _wrdKey
+        requestWithRoute r u WebResourceDelete'{..}
+          = go _wrdQuotaUser (Just _wrdPrettyPrint) _wrdUserIp
+              _wrdKey
               _wrdId
               _wrdOauthToken
               _wrdFields
-              _wrdAlt
+              (Just _wrdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy WebResourceDeleteAPI)
+                      (Proxy :: Proxy WebResourceDeleteResource)
                       r
                       u

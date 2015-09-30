@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Marks a comment as not spam.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsApprove@.
-module Blogger.Comments.Approve
+module Network.Google.Resource.Blogger.Comments.Approve
     (
     -- * REST Resource
-      CommentsApproveAPI
+      CommentsApproveResource
 
     -- * Creating a Request
-    , commentsApprove
-    , CommentsApprove
+    , commentsApprove'
+    , CommentsApprove'
 
     -- * Request Lenses
     , caQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsApprove@ which the
--- 'CommentsApprove' request conforms to.
-type CommentsApproveAPI =
+-- 'CommentsApprove'' request conforms to.
+type CommentsApproveResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
                Capture "commentId" Text :>
-                 "approve" :> Post '[JSON] Comment
+                 "approve" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Comment
 
 -- | Marks a comment as not spam.
 --
--- /See:/ 'commentsApprove' smart constructor.
-data CommentsApprove = CommentsApprove
+-- /See:/ 'commentsApprove'' smart constructor.
+data CommentsApprove' = CommentsApprove'
     { _caQuotaUser   :: !(Maybe Text)
     , _caPrettyPrint :: !Bool
     , _caUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data CommentsApprove = CommentsApprove
     , _caOauthToken  :: !(Maybe Text)
     , _caCommentId   :: !Text
     , _caFields      :: !(Maybe Text)
-    , _caAlt         :: !Text
+    , _caAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsApprove'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data CommentsApprove = CommentsApprove
 -- * 'caFields'
 --
 -- * 'caAlt'
-commentsApprove
+commentsApprove'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
-    -> CommentsApprove
-commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
-    CommentsApprove
+    -> CommentsApprove'
+commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ =
+    CommentsApprove'
     { _caQuotaUser = Nothing
     , _caPrettyPrint = True
     , _caUserIp = Nothing
@@ -110,7 +118,7 @@ commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
     , _caOauthToken = Nothing
     , _caCommentId = pCaCommentId_
     , _caFields = Nothing
-    , _caAlt = "json"
+    , _caAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,21 +168,23 @@ caFields :: Lens' CommentsApprove' (Maybe Text)
 caFields = lens _caFields (\ s a -> s{_caFields = a})
 
 -- | Data format for the response.
-caAlt :: Lens' CommentsApprove' Text
+caAlt :: Lens' CommentsApprove' Alt
 caAlt = lens _caAlt (\ s a -> s{_caAlt = a})
 
 instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsApprove{..}
-          = go _caQuotaUser _caPrettyPrint _caUserIp _caBlogId
+        requestWithRoute r u CommentsApprove'{..}
+          = go _caQuotaUser (Just _caPrettyPrint) _caUserIp
+              _caBlogId
               _caKey
               _caPostId
               _caOauthToken
               _caCommentId
               _caFields
-              _caAlt
+              (Just _caAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsApproveAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsApproveResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing placement.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementsUpdate@.
-module DFAReporting.Placements.Update
+module Network.Google.Resource.DFAReporting.Placements.Update
     (
     -- * REST Resource
-      PlacementsUpdateAPI
+      PlacementsUpdateResource
 
     -- * Creating a Request
-    , placementsUpdate
-    , PlacementsUpdate
+    , placementsUpdate'
+    , PlacementsUpdate'
 
     -- * Request Lenses
     , puQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementsUpdate@ which the
--- 'PlacementsUpdate' request conforms to.
-type PlacementsUpdateAPI =
+-- 'PlacementsUpdate'' request conforms to.
+type PlacementsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "placements" :> Put '[JSON] Placement
+         "placements" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Placement
 
 -- | Updates an existing placement.
 --
--- /See:/ 'placementsUpdate' smart constructor.
-data PlacementsUpdate = PlacementsUpdate
+-- /See:/ 'placementsUpdate'' smart constructor.
+data PlacementsUpdate' = PlacementsUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
     , _puUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PlacementsUpdate = PlacementsUpdate
     , _puKey         :: !(Maybe Text)
     , _puOauthToken  :: !(Maybe Text)
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Text
+    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PlacementsUpdate = PlacementsUpdate
 -- * 'puFields'
 --
 -- * 'puAlt'
-placementsUpdate
+placementsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> PlacementsUpdate
-placementsUpdate pPuProfileId_ =
-    PlacementsUpdate
+    -> PlacementsUpdate'
+placementsUpdate' pPuProfileId_ =
+    PlacementsUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIp = Nothing
@@ -94,7 +102,7 @@ placementsUpdate pPuProfileId_ =
     , _puKey = Nothing
     , _puOauthToken = Nothing
     , _puFields = Nothing
-    , _puAlt = "json"
+    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,21 @@ puFields :: Lens' PlacementsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PlacementsUpdate' Text
+puAlt :: Lens' PlacementsUpdate' Alt
 puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
 
 instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementsUpdate{..}
-          = go _puQuotaUser _puPrettyPrint _puUserIp
+        requestWithRoute r u PlacementsUpdate'{..}
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
               _puProfileId
               _puKey
               _puOauthToken
               _puFields
-              _puAlt
+              (Just _puAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementsUpdateAPI)
+                      (Proxy :: Proxy PlacementsUpdateResource)
                       r
                       u

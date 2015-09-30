@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @Oauth2UserinfoGet@.
-module OAuth2.Userinfo.Get
+module Network.Google.Resource.OAuth2.Userinfo.Get
     (
     -- * REST Resource
-      UserinfoGetAPI
+      UserinfoGetResource
 
     -- * Creating a Request
-    , userinfoGet
-    , UserinfoGet
+    , userinfoGet'
+    , UserinfoGet'
 
     -- * Request Lenses
     , ugQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @Oauth2UserinfoGet@ which the
--- 'UserinfoGet' request conforms to.
-type UserinfoGetAPI =
+-- 'UserinfoGet'' request conforms to.
+type UserinfoGetResource =
      "oauth2" :>
-       "v2" :> "userinfo" :> Get '[JSON] Userinfoplus
+       "v2" :>
+         "userinfo" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Userinfoplus
 
 --
--- /See:/ 'userinfoGet' smart constructor.
-data UserinfoGet = UserinfoGet
+-- /See:/ 'userinfoGet'' smart constructor.
+data UserinfoGet' = UserinfoGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugUserIp      :: !(Maybe Text)
     , _ugKey         :: !(Maybe Text)
     , _ugOauthToken  :: !(Maybe Text)
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Text
+    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserinfoGet'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data UserinfoGet = UserinfoGet
 -- * 'ugFields'
 --
 -- * 'ugAlt'
-userinfoGet
-    :: UserinfoGet
-userinfoGet =
-    UserinfoGet
+userinfoGet'
+    :: UserinfoGet'
+userinfoGet' =
+    UserinfoGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
     , _ugUserIp = Nothing
     , _ugKey = Nothing
     , _ugOauthToken = Nothing
     , _ugFields = Nothing
-    , _ugAlt = "json"
+    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,16 +132,20 @@ ugFields :: Lens' UserinfoGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 -- | Data format for the response.
-ugAlt :: Lens' UserinfoGet' Text
+ugAlt :: Lens' UserinfoGet' Alt
 ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
 
 instance GoogleRequest UserinfoGet' where
         type Rs UserinfoGet' = Userinfoplus
         request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u UserinfoGet{..}
-          = go _ugQuotaUser _ugPrettyPrint _ugUserIp _ugKey
+        requestWithRoute r u UserinfoGet'{..}
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIp
+              _ugKey
               _ugOauthToken
               _ugFields
-              _ugAlt
+              (Just _ugAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserinfoGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UserinfoGetResource)
+                      r
+                      u

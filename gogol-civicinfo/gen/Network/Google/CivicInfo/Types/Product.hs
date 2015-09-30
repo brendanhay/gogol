@@ -18,6 +18,29 @@ module Network.Google.CivicInfo.Types.Product where
 import           Network.Google.CivicInfo.Types.Sum
 import           Network.Google.Prelude
 
+-- | Political geographic divisions that contain the requested address.
+--
+-- /See:/ 'representativeInfoResponseDivisions' smart constructor.
+data RepresentativeInfoResponseDivisions =
+    RepresentativeInfoResponseDivisions
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoResponseDivisions' with the minimum fields required to make a request.
+--
+representativeInfoResponseDivisions
+    :: RepresentativeInfoResponseDivisions
+representativeInfoResponseDivisions = RepresentativeInfoResponseDivisions
+
+instance FromJSON RepresentativeInfoResponseDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoResponseDivisions"
+              (\ o -> pure RepresentativeInfoResponseDivisions)
+
+instance ToJSON RepresentativeInfoResponseDivisions
+         where
+        toJSON = const (Object mempty)
+
 -- | The result of a voter info lookup query.
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
@@ -1475,6 +1498,28 @@ instance ToJSON DivisionSearchResponse where
               (catMaybes
                  [("results" .=) <$> _dsrResults,
                   Just ("kind" .= _dsrKind)])
+
+-- | Political geographic divisions that contain the requested address.
+--
+-- /See:/ 'representativeInfoDataDivisions' smart constructor.
+data RepresentativeInfoDataDivisions =
+    RepresentativeInfoDataDivisions
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RepresentativeInfoDataDivisions' with the minimum fields required to make a request.
+--
+representativeInfoDataDivisions
+    :: RepresentativeInfoDataDivisions
+representativeInfoDataDivisions = RepresentativeInfoDataDivisions
+
+instance FromJSON RepresentativeInfoDataDivisions
+         where
+        parseJSON
+          = withObject "RepresentativeInfoDataDivisions"
+              (\ o -> pure RepresentativeInfoDataDivisions)
+
+instance ToJSON RepresentativeInfoDataDivisions where
+        toJSON = const (Object mempty)
 
 -- | Information about individual election officials.
 --

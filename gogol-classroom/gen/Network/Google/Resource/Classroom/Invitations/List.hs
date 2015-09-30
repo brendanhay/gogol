@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- Permission Errors].
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsList@.
-module Classroom.Invitations.List
+module Network.Google.Resource.Classroom.Invitations.List
     (
     -- * REST Resource
-      InvitationsListAPI
+      InvitationsListResource
 
     -- * Creating a Request
-    , invitationsList
-    , InvitationsList
+    , invitationsList'
+    , InvitationsList'
 
     -- * Request Lenses
     , ilXgafv
@@ -57,15 +58,28 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomInvitationsList@ which the
--- 'InvitationsList' request conforms to.
-type InvitationsListAPI =
+-- 'InvitationsList'' request conforms to.
+type InvitationsListResource =
      "v1" :>
        "invitations" :>
-         QueryParam "courseId" Text :>
-           QueryParam "userId" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "pageSize" Int32 :>
-                 Get '[JSON] ListInvitationsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "courseId" Text :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "userId" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListInvitationsResponse
 
 -- | Returns a list of invitations that the requesting user is permitted to
 -- view, restricted to those that match the list request. *Note:* At least
@@ -74,8 +88,8 @@ type InvitationsListAPI =
 -- \`PERMISSION_DENIED\` for [general user permission errors][User
 -- Permission Errors].
 --
--- /See:/ 'invitationsList' smart constructor.
-data InvitationsList = InvitationsList
+-- /See:/ 'invitationsList'' smart constructor.
+data InvitationsList' = InvitationsList'
     { _ilXgafv          :: !(Maybe Text)
     , _ilQuotaUser      :: !(Maybe Text)
     , _ilPrettyPrint    :: !Bool
@@ -132,10 +146,10 @@ data InvitationsList = InvitationsList
 -- * 'ilCallback'
 --
 -- * 'ilAlt'
-invitationsList
-    :: InvitationsList
-invitationsList =
-    InvitationsList
+invitationsList'
+    :: InvitationsList'
+invitationsList' =
+    InvitationsList'
     { _ilXgafv = Nothing
     , _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
@@ -255,10 +269,10 @@ ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
 instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsList{..}
-          = go _ilXgafv _ilQuotaUser _ilPrettyPrint
+        requestWithRoute r u InvitationsList'{..}
+          = go _ilXgafv _ilQuotaUser (Just _ilPrettyPrint)
               _ilUploadProtocol
-              _ilPp
+              (Just _ilPp)
               _ilCourseId
               _ilAccessToken
               _ilUploadType
@@ -270,8 +284,9 @@ instance GoogleRequest InvitationsList' where
               _ilPageSize
               _ilFields
               _ilCallback
-              _ilAlt
+              (Just _ilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InvitationsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InvitationsListResource)
                       r
                       u

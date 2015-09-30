@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlDatabasesGet@.
-module Sql.Databases.Get
+module Network.Google.Resource.Sql.Databases.Get
     (
     -- * REST Resource
-      DatabasesGetAPI
+      DatabasesGetResource
 
     -- * Creating a Request
-    , databasesGet
-    , DatabasesGet
+    , databasesGet'
+    , DatabasesGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlDatabasesGet@ which the
--- 'DatabasesGet' request conforms to.
-type DatabasesGetAPI =
+-- 'DatabasesGet'' request conforms to.
+type DatabasesGetResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "databases" :>
-               Capture "database" Text :> Get '[JSON] Database
+               Capture "database" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Database
 
 -- | Retrieves a resource containing information about a database inside a
 -- Cloud SQL instance.
 --
--- /See:/ 'databasesGet' smart constructor.
-data DatabasesGet = DatabasesGet
+-- /See:/ 'databasesGet'' smart constructor.
+data DatabasesGet' = DatabasesGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgProject     :: !Text
@@ -68,7 +76,7 @@ data DatabasesGet = DatabasesGet
     , _dgKey         :: !(Maybe Text)
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     , _dgInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,13 +103,13 @@ data DatabasesGet = DatabasesGet
 -- * 'dgAlt'
 --
 -- * 'dgInstance'
-databasesGet
+databasesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'database'
     -> Text -- ^ 'instance'
-    -> DatabasesGet
-databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
-    DatabasesGet
+    -> DatabasesGet'
+databasesGet' pDgProject_ pDgDatabase_ pDgInstance_ =
+    DatabasesGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgProject = pDgProject_
@@ -110,7 +118,7 @@ databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
     , _dgKey = Nothing
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     , _dgInstance = pDgInstance_
     }
 
@@ -158,7 +166,7 @@ dgFields :: Lens' DatabasesGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DatabasesGet' Text
+dgAlt :: Lens' DatabasesGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -169,15 +177,17 @@ dgInstance
 instance GoogleRequest DatabasesGet' where
         type Rs DatabasesGet' = Database
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgProject
+        requestWithRoute r u DatabasesGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
               _dgDatabase
               _dgUserIp
               _dgKey
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
               _dgInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy DatabasesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DatabasesGetResource)
+                      r
                       u

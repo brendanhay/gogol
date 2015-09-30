@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- access rights, specific to the user.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostUserInfosList@.
-module Blogger.PostUserInfos.List
+module Network.Google.Resource.Blogger.PostUserInfos.List
     (
     -- * REST Resource
-      PostUserInfosListAPI
+      PostUserInfosListResource
 
     -- * Creating a Request
-    , postUserInfosList
-    , PostUserInfosList
+    , postUserInfosList'
+    , PostUserInfosList'
 
     -- * Request Lenses
     , puilStatus
@@ -55,34 +56,44 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostUserInfosList@ which the
--- 'PostUserInfosList' request conforms to.
-type PostUserInfosListAPI =
+-- 'PostUserInfosList'' request conforms to.
+type PostUserInfosListResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
-               QueryParams "status" Text :>
-                 QueryParam "orderBy" Text :>
-                   QueryParam "endDate" UTCTime :>
-                     QueryParam "startDate" UTCTime :>
-                       QueryParam "fetchBodies" Bool :>
-                         QueryParam "view" Text :>
-                           QueryParam "labels" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Word32 :>
-                                 Get '[JSON] PostUserInfosList
+               QueryParams "status" BloggerPostUserInfosListStatus
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "orderBy" BloggerPostUserInfosListOrderBy
+                       :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "endDate" UTCTime :>
+                           QueryParam "startDate" UTCTime :>
+                             QueryParam "key" Text :>
+                               QueryParam "fetchBodies" Bool :>
+                                 QueryParam "view" BloggerPostUserInfosListView
+                                   :>
+                                   QueryParam "labels" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Word32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON] PostUserInfosList
 
 -- | Retrieves a list of post and post user info pairs, possibly filtered.
 -- The post user info contains per-user information about the post, such as
 -- access rights, specific to the user.
 --
--- /See:/ 'postUserInfosList' smart constructor.
-data PostUserInfosList = PostUserInfosList
-    { _puilStatus      :: !(Maybe Text)
+-- /See:/ 'postUserInfosList'' smart constructor.
+data PostUserInfosList' = PostUserInfosList'
+    { _puilStatus      :: !(Maybe BloggerPostUserInfosListStatus)
     , _puilQuotaUser   :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
-    , _puilOrderBy     :: !Text
+    , _puilOrderBy     :: !BloggerPostUserInfosListOrderBy
     , _puilUserIp      :: !(Maybe Text)
     , _puilEndDate     :: !(Maybe UTCTime)
     , _puilBlogId      :: !Text
@@ -90,13 +101,13 @@ data PostUserInfosList = PostUserInfosList
     , _puilStartDate   :: !(Maybe UTCTime)
     , _puilKey         :: !(Maybe Text)
     , _puilFetchBodies :: !Bool
-    , _puilView        :: !(Maybe Text)
+    , _puilView        :: !(Maybe BloggerPostUserInfosListView)
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
     , _puilOauthToken  :: !(Maybe Text)
     , _puilMaxResults  :: !(Maybe Word32)
     , _puilFields      :: !(Maybe Text)
-    , _puilAlt         :: !Text
+    , _puilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
@@ -138,16 +149,16 @@ data PostUserInfosList = PostUserInfosList
 -- * 'puilFields'
 --
 -- * 'puilAlt'
-postUserInfosList
+postUserInfosList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
-    -> PostUserInfosList
-postUserInfosList pPuilBlogId_ pPuilUserId_ =
-    PostUserInfosList
+    -> PostUserInfosList'
+postUserInfosList' pPuilBlogId_ pPuilUserId_ =
+    PostUserInfosList'
     { _puilStatus = Nothing
     , _puilQuotaUser = Nothing
     , _puilPrettyPrint = True
-    , _puilOrderBy = "PUBLISHED"
+    , _puilOrderBy = BPUILOBPublished
     , _puilUserIp = Nothing
     , _puilEndDate = Nothing
     , _puilBlogId = pPuilBlogId_
@@ -161,10 +172,10 @@ postUserInfosList pPuilBlogId_ pPuilUserId_ =
     , _puilOauthToken = Nothing
     , _puilMaxResults = Nothing
     , _puilFields = Nothing
-    , _puilAlt = "json"
+    , _puilAlt = JSON
     }
 
-puilStatus :: Lens' PostUserInfosList' (Maybe Text)
+puilStatus :: Lens' PostUserInfosList' (Maybe BloggerPostUserInfosListStatus)
 puilStatus
   = lens _puilStatus (\ s a -> s{_puilStatus = a})
 
@@ -183,7 +194,7 @@ puilPrettyPrint
       (\ s a -> s{_puilPrettyPrint = a})
 
 -- | Sort order applied to search results. Default is published.
-puilOrderBy :: Lens' PostUserInfosList' Text
+puilOrderBy :: Lens' PostUserInfosList' BloggerPostUserInfosListOrderBy
 puilOrderBy
   = lens _puilOrderBy (\ s a -> s{_puilOrderBy = a})
 
@@ -229,7 +240,7 @@ puilFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require elevated access.
-puilView :: Lens' PostUserInfosList' (Maybe Text)
+puilView :: Lens' PostUserInfosList' (Maybe BloggerPostUserInfosListView)
 puilView = lens _puilView (\ s a -> s{_puilView = a})
 
 -- | Comma-separated list of labels to search for.
@@ -261,14 +272,15 @@ puilFields
   = lens _puilFields (\ s a -> s{_puilFields = a})
 
 -- | Data format for the response.
-puilAlt :: Lens' PostUserInfosList' Text
+puilAlt :: Lens' PostUserInfosList' Alt
 puilAlt = lens _puilAlt (\ s a -> s{_puilAlt = a})
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostUserInfosList{..}
-          = go _puilStatus _puilQuotaUser _puilPrettyPrint
+        requestWithRoute r u PostUserInfosList'{..}
+          = go _puilStatus _puilQuotaUser
+              (Just _puilPrettyPrint)
               (Just _puilOrderBy)
               _puilUserIp
               _puilEndDate
@@ -283,9 +295,9 @@ instance GoogleRequest PostUserInfosList' where
               _puilOauthToken
               _puilMaxResults
               _puilFields
-              _puilAlt
+              (Just _puilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PostUserInfosListAPI)
+                      (Proxy :: Proxy PostUserInfosListResource)
                       r
                       u

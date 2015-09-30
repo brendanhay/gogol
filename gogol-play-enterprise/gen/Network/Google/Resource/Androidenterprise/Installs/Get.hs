@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves details of an installation of an app on a device.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseInstallsGet@.
-module Androidenterprise.Installs.Get
+module Network.Google.Resource.Androidenterprise.Installs.Get
     (
     -- * REST Resource
-      InstallsGetAPI
+      InstallsGetResource
 
     -- * Creating a Request
-    , installsGet
-    , InstallsGet
+    , installsGet'
+    , InstallsGet'
 
     -- * Request Lenses
     , igQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseInstallsGet@ which the
--- 'InstallsGet' request conforms to.
-type InstallsGetAPI =
+-- 'InstallsGet'' request conforms to.
+type InstallsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
@@ -55,12 +56,19 @@ type InstallsGetAPI =
              "devices" :>
                Capture "deviceId" Text :>
                  "installs" :>
-                   Capture "installId" Text :> Get '[JSON] Install
+                   Capture "installId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] Install
 
 -- | Retrieves details of an installation of an app on a device.
 --
--- /See:/ 'installsGet' smart constructor.
-data InstallsGet = InstallsGet
+-- /See:/ 'installsGet'' smart constructor.
+data InstallsGet' = InstallsGet'
     { _igQuotaUser    :: !(Maybe Text)
     , _igPrettyPrint  :: !Bool
     , _igEnterpriseId :: !Text
@@ -71,7 +79,7 @@ data InstallsGet = InstallsGet
     , _igDeviceId     :: !Text
     , _igOauthToken   :: !(Maybe Text)
     , _igFields       :: !(Maybe Text)
-    , _igAlt          :: !Text
+    , _igAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsGet'' with the minimum fields required to make a request.
@@ -99,14 +107,14 @@ data InstallsGet = InstallsGet
 -- * 'igFields'
 --
 -- * 'igAlt'
-installsGet
+installsGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
-    -> InstallsGet
-installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
-    InstallsGet
+    -> InstallsGet'
+installsGet' pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
+    InstallsGet'
     { _igQuotaUser = Nothing
     , _igPrettyPrint = True
     , _igEnterpriseId = pIgEnterpriseId_
@@ -117,7 +125,7 @@ installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
     , _igDeviceId = pIgDeviceId_
     , _igOauthToken = Nothing
     , _igFields = Nothing
-    , _igAlt = "json"
+    , _igAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,14 +183,15 @@ igFields :: Lens' InstallsGet' (Maybe Text)
 igFields = lens _igFields (\ s a -> s{_igFields = a})
 
 -- | Data format for the response.
-igAlt :: Lens' InstallsGet' Text
+igAlt :: Lens' InstallsGet' Alt
 igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
 
 instance GoogleRequest InstallsGet' where
         type Rs InstallsGet' = Install
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u InstallsGet{..}
-          = go _igQuotaUser _igPrettyPrint _igEnterpriseId
+        requestWithRoute r u InstallsGet'{..}
+          = go _igQuotaUser (Just _igPrettyPrint)
+              _igEnterpriseId
               _igUserIp
               _igUserId
               _igInstallId
@@ -190,6 +199,9 @@ instance GoogleRequest InstallsGet' where
               _igDeviceId
               _igOauthToken
               _igFields
-              _igAlt
+              (Just _igAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstallsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy InstallsGetResource)
+                      r
+                      u

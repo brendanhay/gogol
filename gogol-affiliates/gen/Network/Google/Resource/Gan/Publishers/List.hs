@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- advertiser\/publisher has access to.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanPublishersList@.
-module Gan.Publishers.List
+module Network.Google.Resource.Gan.Publishers.List
     (
     -- * REST Resource
-      PublishersListAPI
+      PublishersListResource
 
     -- * Creating a Request
-    , publishersList
-    , PublishersList
+    , publishersList'
+    , PublishersList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -52,33 +53,42 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanPublishersList@ which the
--- 'PublishersList' request conforms to.
-type PublishersListAPI =
-     Capture "role" Text :>
+-- 'PublishersList'' request conforms to.
+type PublishersListResource =
+     Capture "role" GanPublishersListRole :>
        Capture "roleId" Text :>
          "publishers" :>
-           QueryParam "relationshipStatus" Text :>
-             QueryParam "minSevenDayEpc" Double :>
-               QueryParam "minNinetyDayEpc" Double :>
-                 QueryParam "minPayoutRank" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "publisherCategory" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         Get '[JSON] Publishers
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "relationshipStatus"
+                   GanPublishersListRelationshipStatus
+                   :>
+                   QueryParam "minSevenDayEpc" Double :>
+                     QueryParam "minNinetyDayEpc" Double :>
+                       QueryParam "key" Text :>
+                         QueryParam "minPayoutRank" Int32 :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "publisherCategory" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] Publishers
 
 -- | Retrieves data about all publishers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ 'publishersList' smart constructor.
-data PublishersList = PublishersList
+-- /See:/ 'publishersList'' smart constructor.
+data PublishersList' = PublishersList'
     { _plQuotaUser          :: !(Maybe Text)
     , _plPrettyPrint        :: !Bool
     , _plUserIp             :: !(Maybe Text)
-    , _plRelationshipStatus :: !(Maybe Text)
+    , _plRelationshipStatus :: !(Maybe GanPublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe Double)
     , _plRoleId             :: !Text
     , _plMinNinetyDayEpc    :: !(Maybe Double)
-    , _plRole               :: !Text
+    , _plRole               :: !GanPublishersListRole
     , _plKey                :: !(Maybe Text)
     , _plMinPayoutRank      :: !(Maybe Int32)
     , _plPageToken          :: !(Maybe Text)
@@ -86,7 +96,7 @@ data PublishersList = PublishersList
     , _plPublisherCategory  :: !(Maybe Text)
     , _plMaxResults         :: !(Maybe Word32)
     , _plFields             :: !(Maybe Text)
-    , _plAlt                :: !Text
+    , _plAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersList'' with the minimum fields required to make a request.
@@ -124,12 +134,12 @@ data PublishersList = PublishersList
 -- * 'plFields'
 --
 -- * 'plAlt'
-publishersList
+publishersList'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> PublishersList
-publishersList pPlRoleId_ pPlRole_ =
-    PublishersList
+    -> GanPublishersListRole -- ^ 'role'
+    -> PublishersList'
+publishersList' pPlRoleId_ pPlRole_ =
+    PublishersList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plUserIp = Nothing
@@ -145,7 +155,7 @@ publishersList pPlRoleId_ pPlRole_ =
     , _plPublisherCategory = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +178,7 @@ plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
 
 -- | Filters out all publishers for which do not have the given relationship
 -- status with the requesting publisher.
-plRelationshipStatus :: Lens' PublishersList' (Maybe Text)
+plRelationshipStatus :: Lens' PublishersList' (Maybe GanPublishersListRelationshipStatus)
 plRelationshipStatus
   = lens _plRelationshipStatus
       (\ s a -> s{_plRelationshipStatus = a})
@@ -193,7 +203,7 @@ plMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-plRole :: Lens' PublishersList' Text
+plRole :: Lens' PublishersList' GanPublishersListRole
 plRole = lens _plRole (\ s a -> s{_plRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -241,14 +251,14 @@ plFields :: Lens' PublishersList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PublishersList' Text
+plAlt :: Lens' PublishersList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PublishersList' where
         type Rs PublishersList' = Publishers
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u PublishersList{..}
-          = go _plQuotaUser _plPrettyPrint _plUserIp
+        requestWithRoute r u PublishersList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
               _plRelationshipStatus
               _plMinSevenDayEpc
               _plRoleId
@@ -261,8 +271,9 @@ instance GoogleRequest PublishersList' where
               _plPublisherCategory
               _plMaxResults
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PublishersListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PublishersListResource)
                       r
                       u

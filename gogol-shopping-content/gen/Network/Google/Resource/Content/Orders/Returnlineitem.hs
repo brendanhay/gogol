@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a line item.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersReturnlineitem@.
-module Content.Orders.Returnlineitem
+module Network.Google.Resource.Content.Orders.Returnlineitem
     (
     -- * REST Resource
-      OrdersReturnlineitemAPI
+      OrdersReturnlineitemResource
 
     -- * Creating a Request
-    , ordersReturnlineitem
-    , OrdersReturnlineitem
+    , ordersReturnlineitem'
+    , OrdersReturnlineitem'
 
     -- * Request Lenses
     , orrQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersReturnlineitem@ which the
--- 'OrdersReturnlineitem' request conforms to.
-type OrdersReturnlineitemAPI =
+-- 'OrdersReturnlineitem'' request conforms to.
+type OrdersReturnlineitemResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          Capture "orderId" Text :>
            "returnLineItem" :>
-             Post '[JSON] OrdersReturnLineItemResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersReturnLineItemResponse
 
 -- | Returns a line item.
 --
--- /See:/ 'ordersReturnlineitem' smart constructor.
-data OrdersReturnlineitem = OrdersReturnlineitem
+-- /See:/ 'ordersReturnlineitem'' smart constructor.
+data OrdersReturnlineitem' = OrdersReturnlineitem'
     { _orrQuotaUser   :: !(Maybe Text)
     , _orrMerchantId  :: !Word64
     , _orrPrettyPrint :: !Bool
@@ -64,7 +72,7 @@ data OrdersReturnlineitem = OrdersReturnlineitem
     , _orrOauthToken  :: !(Maybe Text)
     , _orrOrderId     :: !Text
     , _orrFields      :: !(Maybe Text)
-    , _orrAlt         :: !Text
+    , _orrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersReturnlineitem'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data OrdersReturnlineitem = OrdersReturnlineitem
 -- * 'orrFields'
 --
 -- * 'orrAlt'
-ordersReturnlineitem
+ordersReturnlineitem'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersReturnlineitem
-ordersReturnlineitem pOrrMerchantId_ pOrrOrderId_ =
-    OrdersReturnlineitem
+    -> OrdersReturnlineitem'
+ordersReturnlineitem' pOrrMerchantId_ pOrrOrderId_ =
+    OrdersReturnlineitem'
     { _orrQuotaUser = Nothing
     , _orrMerchantId = pOrrMerchantId_
     , _orrPrettyPrint = True
@@ -102,7 +110,7 @@ ordersReturnlineitem pOrrMerchantId_ pOrrOrderId_ =
     , _orrOauthToken = Nothing
     , _orrOrderId = pOrrOrderId_
     , _orrFields = Nothing
-    , _orrAlt = "json"
+    , _orrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +161,24 @@ orrFields
   = lens _orrFields (\ s a -> s{_orrFields = a})
 
 -- | Data format for the response.
-orrAlt :: Lens' OrdersReturnlineitem' Text
+orrAlt :: Lens' OrdersReturnlineitem' Alt
 orrAlt = lens _orrAlt (\ s a -> s{_orrAlt = a})
 
 instance GoogleRequest OrdersReturnlineitem' where
         type Rs OrdersReturnlineitem' =
              OrdersReturnLineItemResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersReturnlineitem{..}
-          = go _orrQuotaUser _orrMerchantId _orrPrettyPrint
+        requestWithRoute r u OrdersReturnlineitem'{..}
+          = go _orrQuotaUser _orrMerchantId
+              (Just _orrPrettyPrint)
               _orrUserIp
               _orrKey
               _orrOauthToken
               _orrOrderId
               _orrFields
-              _orrAlt
+              (Just _orrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersReturnlineitemAPI)
+                      (Proxy :: Proxy OrdersReturnlineitemResource)
                       r
                       u

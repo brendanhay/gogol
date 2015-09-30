@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- deployment manifest. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsPatch@.
-module DeploymentManager.Deployments.Patch
+module Network.Google.Resource.DeploymentManager.Deployments.Patch
     (
     -- * REST Resource
-      DeploymentsPatchAPI
+      DeploymentsPatchResource
 
     -- * Creating a Request
-    , deploymentsPatch
-    , DeploymentsPatch
+    , deploymentsPatch'
+    , DeploymentsPatch'
 
     -- * Request Lenses
     , dpCreatePolicy
@@ -48,33 +49,45 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerDeploymentsPatch@ which the
--- 'DeploymentsPatch' request conforms to.
-type DeploymentsPatchAPI =
+-- 'DeploymentsPatch'' request conforms to.
+type DeploymentsPatchResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
-             QueryParam "createPolicy" Text :>
-               QueryParam "updatePolicy" Text :>
-                 QueryParam "deletePolicy" Text :>
-                   Patch '[JSON] Operation
+             QueryParam "createPolicy"
+               DeploymentmanagerDeploymentsPatchCreatePolicy
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "updatePolicy"
+                       DeploymentmanagerDeploymentsPatchUpdatePolicy
+                       :>
+                       QueryParam "deletePolicy"
+                         DeploymentmanagerDeploymentsPatchDeletePolicy
+                         :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
--- /See:/ 'deploymentsPatch' smart constructor.
-data DeploymentsPatch = DeploymentsPatch
-    { _dpCreatePolicy :: !Text
+-- /See:/ 'deploymentsPatch'' smart constructor.
+data DeploymentsPatch' = DeploymentsPatch'
+    { _dpCreatePolicy :: !DeploymentmanagerDeploymentsPatchCreatePolicy
     , _dpQuotaUser    :: !(Maybe Text)
     , _dpPrettyPrint  :: !Bool
     , _dpProject      :: !Text
     , _dpUserIp       :: !(Maybe Text)
-    , _dpUpdatePolicy :: !Text
-    , _dpDeletePolicy :: !Text
+    , _dpUpdatePolicy :: !DeploymentmanagerDeploymentsPatchUpdatePolicy
+    , _dpDeletePolicy :: !DeploymentmanagerDeploymentsPatchDeletePolicy
     , _dpKey          :: !(Maybe Text)
     , _dpOauthToken   :: !(Maybe Text)
     , _dpFields       :: !(Maybe Text)
-    , _dpAlt          :: !Text
+    , _dpAlt          :: !Alt
     , _dpDeployment   :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -105,28 +118,28 @@ data DeploymentsPatch = DeploymentsPatch
 -- * 'dpAlt'
 --
 -- * 'dpDeployment'
-deploymentsPatch
+deploymentsPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'deployment'
-    -> DeploymentsPatch
-deploymentsPatch pDpProject_ pDpDeployment_ =
-    DeploymentsPatch
-    { _dpCreatePolicy = "CREATE_OR_ACQUIRE"
+    -> DeploymentsPatch'
+deploymentsPatch' pDpProject_ pDpDeployment_ =
+    DeploymentsPatch'
+    { _dpCreatePolicy = CreateOrAcquire
     , _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
     , _dpUserIp = Nothing
-    , _dpUpdatePolicy = "PATCH"
-    , _dpDeletePolicy = "DELETE"
+    , _dpUpdatePolicy = Patch
+    , _dpDeletePolicy = Delete
     , _dpKey = Nothing
     , _dpOauthToken = Nothing
     , _dpFields = Nothing
-    , _dpAlt = "json"
+    , _dpAlt = JSON
     , _dpDeployment = pDpDeployment_
     }
 
 -- | Sets the policy to use for creating new resources.
-dpCreatePolicy :: Lens' DeploymentsPatch' Text
+dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchCreatePolicy
 dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
@@ -155,13 +168,13 @@ dpUserIp :: Lens' DeploymentsPatch' (Maybe Text)
 dpUserIp = lens _dpUserIp (\ s a -> s{_dpUserIp = a})
 
 -- | Sets the policy to use for updating resources.
-dpUpdatePolicy :: Lens' DeploymentsPatch' Text
+dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchUpdatePolicy
 dpUpdatePolicy
   = lens _dpUpdatePolicy
       (\ s a -> s{_dpUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-dpDeletePolicy :: Lens' DeploymentsPatch' Text
+dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchDeletePolicy
 dpDeletePolicy
   = lens _dpDeletePolicy
       (\ s a -> s{_dpDeletePolicy = a})
@@ -182,7 +195,7 @@ dpFields :: Lens' DeploymentsPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
 -- | Data format for the response.
-dpAlt :: Lens' DeploymentsPatch' Text
+dpAlt :: Lens' DeploymentsPatch' Alt
 dpAlt = lens _dpAlt (\ s a -> s{_dpAlt = a})
 
 -- | The name of the deployment for this request.
@@ -194,9 +207,9 @@ instance GoogleRequest DeploymentsPatch' where
         type Rs DeploymentsPatch' = Operation
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsPatch{..}
+        requestWithRoute r u DeploymentsPatch'{..}
           = go (Just _dpCreatePolicy) _dpQuotaUser
-              _dpPrettyPrint
+              (Just _dpPrettyPrint)
               _dpProject
               _dpUserIp
               (Just _dpUpdatePolicy)
@@ -204,10 +217,10 @@ instance GoogleRequest DeploymentsPatch' where
               _dpKey
               _dpOauthToken
               _dpFields
-              _dpAlt
+              (Just _dpAlt)
               _dpDeployment
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DeploymentsPatchAPI)
+                      (Proxy :: Proxy DeploymentsPatchResource)
                       r
                       u

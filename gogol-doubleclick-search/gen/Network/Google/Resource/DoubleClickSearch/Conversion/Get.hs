@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionGet@.
-module DoubleClickSearch.Conversion.Get
+module Network.Google.Resource.DoubleClickSearch.Conversion.Get
     (
     -- * REST Resource
-      ConversionGetAPI
+      ConversionGetResource
 
     -- * Creating a Request
-    , conversionGet
-    , ConversionGet
+    , conversionGet'
+    , ConversionGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -54,8 +55,8 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchConversionGet@ which the
--- 'ConversionGet' request conforms to.
-type ConversionGetAPI =
+-- 'ConversionGet'' request conforms to.
+type ConversionGetResource =
      "agency" :>
        Capture "agencyId" Int64 :>
          "advertiser" :>
@@ -63,21 +64,28 @@ type ConversionGetAPI =
              "engine" :>
                Capture "engineAccountId" Int64 :>
                  "conversion" :>
-                   QueryParam "adGroupId" Int64 :>
-                     QueryParam "endDate" Int32 :>
-                       QueryParam "campaignId" Int64 :>
-                         QueryParam "criterionId" Int64 :>
-                           QueryParam "startDate" Int32 :>
-                             QueryParam "startRow" Word32 :>
-                               QueryParam "adId" Int64 :>
-                                 QueryParam "rowCount" Int32 :>
-                                   Get '[JSON] ConversionList
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "adGroupId" Int64 :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "endDate" Int32 :>
+                             QueryParam "campaignId" Int64 :>
+                               QueryParam "criterionId" Int64 :>
+                                 QueryParam "startDate" Int32 :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "startRow" Word32 :>
+                                       QueryParam "adId" Int64 :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "rowCount" Int32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Alt :>
+                                                 Get '[JSON] ConversionList
 
 -- | Retrieves a list of conversions from a DoubleClick Search engine
 -- account.
 --
--- /See:/ 'conversionGet' smart constructor.
-data ConversionGet = ConversionGet
+-- /See:/ 'conversionGet'' smart constructor.
+data ConversionGet' = ConversionGet'
     { _cgQuotaUser       :: !(Maybe Text)
     , _cgAdGroupId       :: !(Maybe Int64)
     , _cgPrettyPrint     :: !Bool
@@ -95,7 +103,7 @@ data ConversionGet = ConversionGet
     , _cgOauthToken      :: !(Maybe Text)
     , _cgRowCount        :: !Int32
     , _cgFields          :: !(Maybe Text)
-    , _cgAlt             :: !Text
+    , _cgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionGet'' with the minimum fields required to make a request.
@@ -137,7 +145,7 @@ data ConversionGet = ConversionGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-conversionGet
+conversionGet'
     :: Int64 -- ^ 'engineAccountId'
     -> Int64 -- ^ 'agencyId'
     -> Int64 -- ^ 'advertiserId'
@@ -145,9 +153,9 @@ conversionGet
     -> Int32 -- ^ 'startDate'
     -> Word32 -- ^ 'startRow'
     -> Int32 -- ^ 'rowCount'
-    -> ConversionGet
-conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
-    ConversionGet
+    -> ConversionGet'
+conversionGet' pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
+    ConversionGet'
     { _cgQuotaUser = Nothing
     , _cgAdGroupId = Nothing
     , _cgPrettyPrint = True
@@ -165,7 +173,7 @@ conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgS
     , _cgOauthToken = Nothing
     , _cgRowCount = pCgRowCount_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -261,15 +269,15 @@ cgFields :: Lens' ConversionGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' ConversionGet' Text
+cgAlt :: Lens' ConversionGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ConversionGet' where
         type Rs ConversionGet' = ConversionList
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionGet{..}
-          = go _cgQuotaUser _cgAdGroupId _cgPrettyPrint
+        requestWithRoute r u ConversionGet'{..}
+          = go _cgQuotaUser _cgAdGroupId (Just _cgPrettyPrint)
               _cgEngineAccountId
               _cgAgencyId
               _cgUserIp
@@ -284,7 +292,9 @@ instance GoogleRequest ConversionGet' where
               _cgOauthToken
               (Just _cgRowCount)
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ConversionGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ConversionGetResource)
+                      r
                       u

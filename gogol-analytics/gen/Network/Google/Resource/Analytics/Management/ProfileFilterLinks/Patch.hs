@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileFilterLinksPatch@.
-module Analytics.Management.ProfileFilterLinks.Patch
+module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Patch
     (
     -- * REST Resource
-      ManagementProfileFilterLinksPatchAPI
+      ManagementProfileFilterLinksPatchResource
 
     -- * Creating a Request
-    , managementProfileFilterLinksPatch
-    , ManagementProfileFilterLinksPatch
+    , managementProfileFilterLinksPatch'
+    , ManagementProfileFilterLinksPatch'
 
     -- * Request Lenses
     , mpflpQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileFilterLinksPatch@ which the
--- 'ManagementProfileFilterLinksPatch' request conforms to.
-type ManagementProfileFilterLinksPatchAPI =
+-- 'ManagementProfileFilterLinksPatch'' request conforms to.
+type ManagementProfileFilterLinksPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -58,13 +59,20 @@ type ManagementProfileFilterLinksPatchAPI =
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
                      Capture "linkId" Text :>
-                       Patch '[JSON] ProfileFilterLink
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Patch '[JSON] ProfileFilterLink
 
 -- | Update an existing profile filter link. This method supports patch
 -- semantics.
 --
--- /See:/ 'managementProfileFilterLinksPatch' smart constructor.
-data ManagementProfileFilterLinksPatch = ManagementProfileFilterLinksPatch
+-- /See:/ 'managementProfileFilterLinksPatch'' smart constructor.
+data ManagementProfileFilterLinksPatch' = ManagementProfileFilterLinksPatch'
     { _mpflpQuotaUser     :: !(Maybe Text)
     , _mpflpPrettyPrint   :: !Bool
     , _mpflpWebPropertyId :: !Text
@@ -75,7 +83,7 @@ data ManagementProfileFilterLinksPatch = ManagementProfileFilterLinksPatch
     , _mpflpLinkId        :: !Text
     , _mpflpOauthToken    :: !(Maybe Text)
     , _mpflpFields        :: !(Maybe Text)
-    , _mpflpAlt           :: !Text
+    , _mpflpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksPatch'' with the minimum fields required to make a request.
@@ -103,14 +111,14 @@ data ManagementProfileFilterLinksPatch = ManagementProfileFilterLinksPatch
 -- * 'mpflpFields'
 --
 -- * 'mpflpAlt'
-managementProfileFilterLinksPatch
+managementProfileFilterLinksPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementProfileFilterLinksPatch
-managementProfileFilterLinksPatch pMpflpWebPropertyId_ pMpflpProfileId_ pMpflpAccountId_ pMpflpLinkId_ =
-    ManagementProfileFilterLinksPatch
+    -> ManagementProfileFilterLinksPatch'
+managementProfileFilterLinksPatch' pMpflpWebPropertyId_ pMpflpProfileId_ pMpflpAccountId_ pMpflpLinkId_ =
+    ManagementProfileFilterLinksPatch'
     { _mpflpQuotaUser = Nothing
     , _mpflpPrettyPrint = False
     , _mpflpWebPropertyId = pMpflpWebPropertyId_
@@ -121,7 +129,7 @@ managementProfileFilterLinksPatch pMpflpWebPropertyId_ pMpflpProfileId_ pMpflpAc
     , _mpflpLinkId = pMpflpLinkId_
     , _mpflpOauthToken = Nothing
     , _mpflpFields = Nothing
-    , _mpflpAlt = "json"
+    , _mpflpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,7 +193,7 @@ mpflpFields
   = lens _mpflpFields (\ s a -> s{_mpflpFields = a})
 
 -- | Data format for the response.
-mpflpAlt :: Lens' ManagementProfileFilterLinksPatch' Text
+mpflpAlt :: Lens' ManagementProfileFilterLinksPatch' Alt
 mpflpAlt = lens _mpflpAlt (\ s a -> s{_mpflpAlt = a})
 
 instance GoogleRequest
@@ -194,8 +202,8 @@ instance GoogleRequest
              ProfileFilterLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileFilterLinksPatch{..}
-          = go _mpflpQuotaUser _mpflpPrettyPrint
+          ManagementProfileFilterLinksPatch'{..}
+          = go _mpflpQuotaUser (Just _mpflpPrettyPrint)
               _mpflpWebPropertyId
               _mpflpUserIp
               _mpflpProfileId
@@ -204,9 +212,10 @@ instance GoogleRequest
               _mpflpLinkId
               _mpflpOauthToken
               _mpflpFields
-              _mpflpAlt
+              (Just _mpflpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileFilterLinksPatchAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileFilterLinksPatchResource)
                       r
                       u

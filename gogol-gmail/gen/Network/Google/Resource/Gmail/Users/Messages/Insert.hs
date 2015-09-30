@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesInsert@.
-module Gmail.Users.Messages.Insert
+module Network.Google.Resource.Gmail.Users.Messages.Insert
     (
     -- * REST Resource
-      UsersMessagesInsertAPI
+      UsersMessagesInsertResource
 
     -- * Creating a Request
-    , usersMessagesInsert
-    , UsersMessagesInsert
+    , usersMessagesInsert'
+    , UsersMessagesInsert'
 
     -- * Request Lenses
     , umiQuotaUser
@@ -47,20 +48,28 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesInsert@ which the
--- 'UsersMessagesInsert' request conforms to.
-type UsersMessagesInsertAPI =
+-- 'UsersMessagesInsert'' request conforms to.
+type UsersMessagesInsertResource =
      Capture "userId" Text :>
        "messages" :>
-         QueryParam "deleted" Bool :>
-           QueryParam "internalDateSource" Text :>
-             Post '[JSON] Message
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "deleted" Bool :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "internalDateSource"
+                       GmailUsersMessagesInsertInternalDateSource
+                       :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
 -- message.
 --
--- /See:/ 'usersMessagesInsert' smart constructor.
-data UsersMessagesInsert = UsersMessagesInsert
+-- /See:/ 'usersMessagesInsert'' smart constructor.
+data UsersMessagesInsert' = UsersMessagesInsert'
     { _umiQuotaUser          :: !(Maybe Text)
     , _umiPrettyPrint        :: !Bool
     , _umiUserIp             :: !(Maybe Text)
@@ -68,9 +77,9 @@ data UsersMessagesInsert = UsersMessagesInsert
     , _umiKey                :: !(Maybe Text)
     , _umiDeleted            :: !Bool
     , _umiOauthToken         :: !(Maybe Text)
-    , _umiInternalDateSource :: !Text
+    , _umiInternalDateSource :: !GmailUsersMessagesInsertInternalDateSource
     , _umiFields             :: !(Maybe Text)
-    , _umiAlt                :: !Text
+    , _umiAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesInsert'' with the minimum fields required to make a request.
@@ -96,11 +105,11 @@ data UsersMessagesInsert = UsersMessagesInsert
 -- * 'umiFields'
 --
 -- * 'umiAlt'
-usersMessagesInsert
+usersMessagesInsert'
     :: Text
-    -> UsersMessagesInsert
-usersMessagesInsert pUmiUserId_ =
-    UsersMessagesInsert
+    -> UsersMessagesInsert'
+usersMessagesInsert' pUmiUserId_ =
+    UsersMessagesInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
     , _umiUserIp = Nothing
@@ -108,9 +117,9 @@ usersMessagesInsert pUmiUserId_ =
     , _umiKey = Nothing
     , _umiDeleted = False
     , _umiOauthToken = Nothing
-    , _umiInternalDateSource = "receivedTime"
+    , _umiInternalDateSource = ReceivedTime
     , _umiFields = Nothing
-    , _umiAlt = "json"
+    , _umiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,7 +167,7 @@ umiOauthToken
       (\ s a -> s{_umiOauthToken = a})
 
 -- | Source for Gmail\'s internal date of the message.
-umiInternalDateSource :: Lens' UsersMessagesInsert' Text
+umiInternalDateSource :: Lens' UsersMessagesInsert' GmailUsersMessagesInsertInternalDateSource
 umiInternalDateSource
   = lens _umiInternalDateSource
       (\ s a -> s{_umiInternalDateSource = a})
@@ -169,23 +178,23 @@ umiFields
   = lens _umiFields (\ s a -> s{_umiFields = a})
 
 -- | Data format for the response.
-umiAlt :: Lens' UsersMessagesInsert' Text
+umiAlt :: Lens' UsersMessagesInsert' Alt
 umiAlt = lens _umiAlt (\ s a -> s{_umiAlt = a})
 
 instance GoogleRequest UsersMessagesInsert' where
         type Rs UsersMessagesInsert' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesInsert{..}
-          = go _umiQuotaUser _umiPrettyPrint _umiUserIp
+        requestWithRoute r u UsersMessagesInsert'{..}
+          = go _umiQuotaUser (Just _umiPrettyPrint) _umiUserIp
               _umiUserId
               _umiKey
               (Just _umiDeleted)
               _umiOauthToken
               (Just _umiInternalDateSource)
               _umiFields
-              _umiAlt
+              (Just _umiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesInsertAPI)
+                      (Proxy :: Proxy UsersMessagesInsertResource)
                       r
                       u

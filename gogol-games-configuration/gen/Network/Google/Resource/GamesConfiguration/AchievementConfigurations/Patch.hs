@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsPatch@.
-module GamesConfiguration.AchievementConfigurations.Patch
+module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
     (
     -- * REST Resource
-      AchievementConfigurationsPatchAPI
+      AchievementConfigurationsPatchResource
 
     -- * Creating a Request
-    , achievementConfigurationsPatch
-    , AchievementConfigurationsPatch
+    , achievementConfigurationsPatch'
+    , AchievementConfigurationsPatch'
 
     -- * Request Lenses
     , acpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationAchievementConfigurationsPatch@ which the
--- 'AchievementConfigurationsPatch' request conforms to.
-type AchievementConfigurationsPatchAPI =
+-- 'AchievementConfigurationsPatch'' request conforms to.
+type AchievementConfigurationsPatchResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         Patch '[JSON] AchievementConfiguration
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Patch '[JSON] AchievementConfiguration
 
 -- | Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.
 --
--- /See:/ 'achievementConfigurationsPatch' smart constructor.
-data AchievementConfigurationsPatch = AchievementConfigurationsPatch
+-- /See:/ 'achievementConfigurationsPatch'' smart constructor.
+data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
     { _acpQuotaUser     :: !(Maybe Text)
     , _acpPrettyPrint   :: !Bool
     , _acpAchievementId :: !Text
@@ -62,7 +70,7 @@ data AchievementConfigurationsPatch = AchievementConfigurationsPatch
     , _acpKey           :: !(Maybe Text)
     , _acpOauthToken    :: !(Maybe Text)
     , _acpFields        :: !(Maybe Text)
-    , _acpAlt           :: !Text
+    , _acpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsPatch'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data AchievementConfigurationsPatch = AchievementConfigurationsPatch
 -- * 'acpFields'
 --
 -- * 'acpAlt'
-achievementConfigurationsPatch
+achievementConfigurationsPatch'
     :: Text -- ^ 'achievementId'
-    -> AchievementConfigurationsPatch
-achievementConfigurationsPatch pAcpAchievementId_ =
-    AchievementConfigurationsPatch
+    -> AchievementConfigurationsPatch'
+achievementConfigurationsPatch' pAcpAchievementId_ =
+    AchievementConfigurationsPatch'
     { _acpQuotaUser = Nothing
     , _acpPrettyPrint = True
     , _acpAchievementId = pAcpAchievementId_
@@ -96,7 +104,7 @@ achievementConfigurationsPatch pAcpAchievementId_ =
     , _acpKey = Nothing
     , _acpOauthToken = Nothing
     , _acpFields = Nothing
-    , _acpAlt = "json"
+    , _acpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ acpFields
   = lens _acpFields (\ s a -> s{_acpFields = a})
 
 -- | Data format for the response.
-acpAlt :: Lens' AchievementConfigurationsPatch' Text
+acpAlt :: Lens' AchievementConfigurationsPatch' Alt
 acpAlt = lens _acpAlt (\ s a -> s{_acpAlt = a})
 
 instance GoogleRequest
@@ -152,15 +160,17 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          AchievementConfigurationsPatch{..}
-          = go _acpQuotaUser _acpPrettyPrint _acpAchievementId
+          AchievementConfigurationsPatch'{..}
+          = go _acpQuotaUser (Just _acpPrettyPrint)
+              _acpAchievementId
               _acpUserIp
               _acpKey
               _acpOauthToken
               _acpFields
-              _acpAlt
+              (Just _acpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementConfigurationsPatchAPI)
+                      (Proxy ::
+                         Proxy AchievementConfigurationsPatchResource)
                       r
                       u

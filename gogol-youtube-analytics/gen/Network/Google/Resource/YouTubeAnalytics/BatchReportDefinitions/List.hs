@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of available batch report definitions.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsBatchReportDefinitionsList@.
-module YouTubeAnalytics.BatchReportDefinitions.List
+module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
     (
     -- * REST Resource
-      BatchReportDefinitionsListAPI
+      BatchReportDefinitionsListResource
 
     -- * Creating a Request
-    , batchReportDefinitionsList
-    , BatchReportDefinitionsList
+    , batchReportDefinitionsList'
+    , BatchReportDefinitionsList'
 
     -- * Request Lenses
     , brdlQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsBatchReportDefinitionsList@ which the
--- 'BatchReportDefinitionsList' request conforms to.
-type BatchReportDefinitionsListAPI =
+-- 'BatchReportDefinitionsList'' request conforms to.
+type BatchReportDefinitionsListResource =
      "batchReportDefinitions" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         Get '[JSON] BatchReportDefinitionList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] BatchReportDefinitionList
 
 -- | Retrieves a list of available batch report definitions.
 --
--- /See:/ 'batchReportDefinitionsList' smart constructor.
-data BatchReportDefinitionsList = BatchReportDefinitionsList
+-- /See:/ 'batchReportDefinitionsList'' smart constructor.
+data BatchReportDefinitionsList' = BatchReportDefinitionsList'
     { _brdlQuotaUser              :: !(Maybe Text)
     , _brdlPrettyPrint            :: !Bool
     , _brdlUserIp                 :: !(Maybe Text)
@@ -60,7 +68,7 @@ data BatchReportDefinitionsList = BatchReportDefinitionsList
     , _brdlKey                    :: !(Maybe Text)
     , _brdlOauthToken             :: !(Maybe Text)
     , _brdlFields                 :: !(Maybe Text)
-    , _brdlAlt                    :: !Text
+    , _brdlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportDefinitionsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data BatchReportDefinitionsList = BatchReportDefinitionsList
 -- * 'brdlFields'
 --
 -- * 'brdlAlt'
-batchReportDefinitionsList
+batchReportDefinitionsList'
     :: Text -- ^ 'onBehalfOfContentOwner'
-    -> BatchReportDefinitionsList
-batchReportDefinitionsList pBrdlOnBehalfOfContentOwner_ =
-    BatchReportDefinitionsList
+    -> BatchReportDefinitionsList'
+batchReportDefinitionsList' pBrdlOnBehalfOfContentOwner_ =
+    BatchReportDefinitionsList'
     { _brdlQuotaUser = Nothing
     , _brdlPrettyPrint = True
     , _brdlUserIp = Nothing
@@ -94,7 +102,7 @@ batchReportDefinitionsList pBrdlOnBehalfOfContentOwner_ =
     , _brdlKey = Nothing
     , _brdlOauthToken = Nothing
     , _brdlFields = Nothing
-    , _brdlAlt = "json"
+    , _brdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ brdlFields
   = lens _brdlFields (\ s a -> s{_brdlFields = a})
 
 -- | Data format for the response.
-brdlAlt :: Lens' BatchReportDefinitionsList' Text
+brdlAlt :: Lens' BatchReportDefinitionsList' Alt
 brdlAlt = lens _brdlAlt (\ s a -> s{_brdlAlt = a})
 
 instance GoogleRequest BatchReportDefinitionsList'
@@ -150,15 +158,16 @@ instance GoogleRequest BatchReportDefinitionsList'
         type Rs BatchReportDefinitionsList' =
              BatchReportDefinitionList
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u BatchReportDefinitionsList{..}
-          = go _brdlQuotaUser _brdlPrettyPrint _brdlUserIp
+        requestWithRoute r u BatchReportDefinitionsList'{..}
+          = go _brdlQuotaUser (Just _brdlPrettyPrint)
+              _brdlUserIp
               (Just _brdlOnBehalfOfContentOwner)
               _brdlKey
               _brdlOauthToken
               _brdlFields
-              _brdlAlt
+              (Just _brdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BatchReportDefinitionsListAPI)
+                      (Proxy :: Proxy BatchReportDefinitionsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Starts paid service of a trial subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsStartPaidService@.
-module Reseller.Subscriptions.StartPaidService
+module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
     (
     -- * REST Resource
-      SubscriptionsStartPaidServiceAPI
+      SubscriptionsStartPaidServiceResource
 
     -- * Creating a Request
-    , subscriptionsStartPaidService
-    , SubscriptionsStartPaidService
+    , subscriptionsStartPaidService'
+    , SubscriptionsStartPaidService'
 
     -- * Request Lenses
     , sspsQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsStartPaidService@ which the
--- 'SubscriptionsStartPaidService' request conforms to.
-type SubscriptionsStartPaidServiceAPI =
+-- 'SubscriptionsStartPaidService'' request conforms to.
+type SubscriptionsStartPaidServiceResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "startPaidService" :> Post '[JSON] Subscription
+             "startPaidService" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Starts paid service of a trial subscription
 --
--- /See:/ 'subscriptionsStartPaidService' smart constructor.
-data SubscriptionsStartPaidService = SubscriptionsStartPaidService
+-- /See:/ 'subscriptionsStartPaidService'' smart constructor.
+data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
     { _sspsQuotaUser      :: !(Maybe Text)
     , _sspsPrettyPrint    :: !Bool
     , _sspsUserIp         :: !(Maybe Text)
@@ -64,7 +72,7 @@ data SubscriptionsStartPaidService = SubscriptionsStartPaidService
     , _sspsOauthToken     :: !(Maybe Text)
     , _sspsSubscriptionId :: !Text
     , _sspsFields         :: !(Maybe Text)
-    , _sspsAlt            :: !Text
+    , _sspsAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsStartPaidService'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SubscriptionsStartPaidService = SubscriptionsStartPaidService
 -- * 'sspsFields'
 --
 -- * 'sspsAlt'
-subscriptionsStartPaidService
+subscriptionsStartPaidService'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsStartPaidService
-subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
-    SubscriptionsStartPaidService
+    -> SubscriptionsStartPaidService'
+subscriptionsStartPaidService' pSspsCustomerId_ pSspsSubscriptionId_ =
+    SubscriptionsStartPaidService'
     { _sspsQuotaUser = Nothing
     , _sspsPrettyPrint = True
     , _sspsUserIp = Nothing
@@ -102,7 +110,7 @@ subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
     , _sspsOauthToken = Nothing
     , _sspsSubscriptionId = pSspsSubscriptionId_
     , _sspsFields = Nothing
-    , _sspsAlt = "json"
+    , _sspsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ sspsFields
   = lens _sspsFields (\ s a -> s{_sspsFields = a})
 
 -- | Data format for the response.
-sspsAlt :: Lens' SubscriptionsStartPaidService' Text
+sspsAlt :: Lens' SubscriptionsStartPaidService' Alt
 sspsAlt = lens _sspsAlt (\ s a -> s{_sspsAlt = a})
 
 instance GoogleRequest SubscriptionsStartPaidService'
@@ -163,16 +171,18 @@ instance GoogleRequest SubscriptionsStartPaidService'
         type Rs SubscriptionsStartPaidService' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u
-          SubscriptionsStartPaidService{..}
-          = go _sspsQuotaUser _sspsPrettyPrint _sspsUserIp
+          SubscriptionsStartPaidService'{..}
+          = go _sspsQuotaUser (Just _sspsPrettyPrint)
+              _sspsUserIp
               _sspsCustomerId
               _sspsKey
               _sspsOauthToken
               _sspsSubscriptionId
               _sspsFields
-              _sspsAlt
+              (Just _sspsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsStartPaidServiceAPI)
+                      (Proxy ::
+                         Proxy SubscriptionsStartPaidServiceResource)
                       r
                       u

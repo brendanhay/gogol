@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Search for a post.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsSearch@.
-module Blogger.Posts.Search
+module Network.Google.Resource.Blogger.Posts.Search
     (
     -- * REST Resource
-      PostsSearchAPI
+      PostsSearchResource
 
     -- * Creating a Request
-    , postsSearch
-    , PostsSearch
+    , postsSearch'
+    , PostsSearch'
 
     -- * Request Lenses
     , psQuotaUser
@@ -46,23 +47,30 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsSearch@ which the
--- 'PostsSearch' request conforms to.
-type PostsSearchAPI =
+-- 'PostsSearch'' request conforms to.
+type PostsSearchResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            "search" :>
-             QueryParam "orderBy" Text :>
-               QueryParam "q" Text :>
-                 QueryParam "fetchBodies" Bool :> Get '[JSON] PostList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy" BloggerPostsSearchOrderBy :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "q" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "fetchBodies" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] PostList
 
 -- | Search for a post.
 --
--- /See:/ 'postsSearch' smart constructor.
-data PostsSearch = PostsSearch
+-- /See:/ 'postsSearch'' smart constructor.
+data PostsSearch' = PostsSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
-    , _psOrderBy     :: !Text
+    , _psOrderBy     :: !BloggerPostsSearchOrderBy
     , _psUserIp      :: !(Maybe Text)
     , _psBlogId      :: !Text
     , _psQ           :: !Text
@@ -70,7 +78,7 @@ data PostsSearch = PostsSearch
     , _psFetchBodies :: !Bool
     , _psOauthToken  :: !(Maybe Text)
     , _psFields      :: !(Maybe Text)
-    , _psAlt         :: !Text
+    , _psAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsSearch'' with the minimum fields required to make a request.
@@ -98,15 +106,15 @@ data PostsSearch = PostsSearch
 -- * 'psFields'
 --
 -- * 'psAlt'
-postsSearch
+postsSearch'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'q'
-    -> PostsSearch
-postsSearch pPsBlogId_ pPsQ_ =
-    PostsSearch
+    -> PostsSearch'
+postsSearch' pPsBlogId_ pPsQ_ =
+    PostsSearch'
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True
-    , _psOrderBy = "PUBLISHED"
+    , _psOrderBy = BPSOBPublished
     , _psUserIp = Nothing
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
@@ -114,7 +122,7 @@ postsSearch pPsBlogId_ pPsQ_ =
     , _psFetchBodies = True
     , _psOauthToken = Nothing
     , _psFields = Nothing
-    , _psAlt = "json"
+    , _psAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +139,7 @@ psPrettyPrint
       (\ s a -> s{_psPrettyPrint = a})
 
 -- | Sort search results
-psOrderBy :: Lens' PostsSearch' Text
+psOrderBy :: Lens' PostsSearch' BloggerPostsSearchOrderBy
 psOrderBy
   = lens _psOrderBy (\ s a -> s{_psOrderBy = a})
 
@@ -172,14 +180,15 @@ psFields :: Lens' PostsSearch' (Maybe Text)
 psFields = lens _psFields (\ s a -> s{_psFields = a})
 
 -- | Data format for the response.
-psAlt :: Lens' PostsSearch' Text
+psAlt :: Lens' PostsSearch' Alt
 psAlt = lens _psAlt (\ s a -> s{_psAlt = a})
 
 instance GoogleRequest PostsSearch' where
         type Rs PostsSearch' = PostList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsSearch{..}
-          = go _psQuotaUser _psPrettyPrint (Just _psOrderBy)
+        requestWithRoute r u PostsSearch'{..}
+          = go _psQuotaUser (Just _psPrettyPrint)
+              (Just _psOrderBy)
               _psUserIp
               _psBlogId
               (Just _psQ)
@@ -187,6 +196,9 @@ instance GoogleRequest PostsSearch' where
               (Just _psFetchBodies)
               _psOauthToken
               _psFields
-              _psAlt
+              (Just _psAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsSearchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PostsSearchResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified instance template.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesDelete@.
-module Compute.InstanceTemplates.Delete
+module Network.Google.Resource.Compute.InstanceTemplates.Delete
     (
     -- * REST Resource
-      InstanceTemplatesDeleteAPI
+      InstanceTemplatesDeleteResource
 
     -- * Creating a Request
-    , instanceTemplatesDelete
-    , InstanceTemplatesDelete
+    , instanceTemplatesDelete'
+    , InstanceTemplatesDelete'
 
     -- * Request Lenses
     , itdQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceTemplatesDelete@ which the
--- 'InstanceTemplatesDelete' request conforms to.
-type InstanceTemplatesDeleteAPI =
+-- 'InstanceTemplatesDelete'' request conforms to.
+type InstanceTemplatesDeleteResource =
      Capture "project" Text :>
        "global" :>
          "instanceTemplates" :>
            Capture "instanceTemplate" Text :>
-             Delete '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template.
 --
--- /See:/ 'instanceTemplatesDelete' smart constructor.
-data InstanceTemplatesDelete = InstanceTemplatesDelete
+-- /See:/ 'instanceTemplatesDelete'' smart constructor.
+data InstanceTemplatesDelete' = InstanceTemplatesDelete'
     { _itdQuotaUser        :: !(Maybe Text)
     , _itdPrettyPrint      :: !Bool
     , _itdProject          :: !Text
@@ -64,7 +71,7 @@ data InstanceTemplatesDelete = InstanceTemplatesDelete
     , _itdKey              :: !(Maybe Text)
     , _itdOauthToken       :: !(Maybe Text)
     , _itdFields           :: !(Maybe Text)
-    , _itdAlt              :: !Text
+    , _itdAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data InstanceTemplatesDelete = InstanceTemplatesDelete
 -- * 'itdFields'
 --
 -- * 'itdAlt'
-instanceTemplatesDelete
+instanceTemplatesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceTemplate'
-    -> InstanceTemplatesDelete
-instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete
+    -> InstanceTemplatesDelete'
+instanceTemplatesDelete' pItdProject_ pItdInstanceTemplate_ =
+    InstanceTemplatesDelete'
     { _itdQuotaUser = Nothing
     , _itdPrettyPrint = True
     , _itdProject = pItdProject_
@@ -102,7 +109,7 @@ instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
     , _itdKey = Nothing
     , _itdOauthToken = Nothing
     , _itdFields = Nothing
-    , _itdAlt = "json"
+    , _itdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +160,22 @@ itdFields
   = lens _itdFields (\ s a -> s{_itdFields = a})
 
 -- | Data format for the response.
-itdAlt :: Lens' InstanceTemplatesDelete' Text
+itdAlt :: Lens' InstanceTemplatesDelete' Alt
 itdAlt = lens _itdAlt (\ s a -> s{_itdAlt = a})
 
 instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesDelete{..}
-          = go _itdQuotaUser _itdPrettyPrint _itdProject
+        requestWithRoute r u InstanceTemplatesDelete'{..}
+          = go _itdQuotaUser (Just _itdPrettyPrint) _itdProject
               _itdUserIp
               _itdInstanceTemplate
               _itdKey
               _itdOauthToken
               _itdFields
-              _itdAlt
+              (Just _itdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceTemplatesDeleteAPI)
+                      (Proxy :: Proxy InstanceTemplatesDeleteResource)
                       r
                       u

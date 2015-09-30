@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the specified host ad unit in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsGet@.
-module AdSenseHost.Accounts.Adunits.Get
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Get
     (
     -- * REST Resource
-      AccountsAdunitsGetAPI
+      AccountsAdunitsGetResource
 
     -- * Creating a Request
-    , accountsAdunitsGet
-    , AccountsAdunitsGet
+    , accountsAdunitsGet'
+    , AccountsAdunitsGet'
 
     -- * Request Lenses
     , aagaQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsGet@ which the
--- 'AccountsAdunitsGet' request conforms to.
-type AccountsAdunitsGetAPI =
+-- 'AccountsAdunitsGet'' request conforms to.
+type AccountsAdunitsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               Capture "adUnitId" Text :> Get '[JSON] AdUnit
+               Capture "adUnitId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] AdUnit
 
 -- | Get the specified host ad unit in this AdSense account.
 --
--- /See:/ 'accountsAdunitsGet' smart constructor.
-data AccountsAdunitsGet = AccountsAdunitsGet
+-- /See:/ 'accountsAdunitsGet'' smart constructor.
+data AccountsAdunitsGet' = AccountsAdunitsGet'
     { _aagaQuotaUser   :: !(Maybe Text)
     , _aagaPrettyPrint :: !Bool
     , _aagaUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data AccountsAdunitsGet = AccountsAdunitsGet
     , _aagaKey         :: !(Maybe Text)
     , _aagaOauthToken  :: !(Maybe Text)
     , _aagaFields      :: !(Maybe Text)
-    , _aagaAlt         :: !Text
+    , _aagaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsAdunitsGet = AccountsAdunitsGet
 -- * 'aagaFields'
 --
 -- * 'aagaAlt'
-accountsAdunitsGet
+accountsAdunitsGet'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsGet
-accountsAdunitsGet pAagaAdUnitId_ pAagaAdClientId_ pAagaAccountId_ =
-    AccountsAdunitsGet
+    -> AccountsAdunitsGet'
+accountsAdunitsGet' pAagaAdUnitId_ pAagaAdClientId_ pAagaAccountId_ =
+    AccountsAdunitsGet'
     { _aagaQuotaUser = Nothing
     , _aagaPrettyPrint = True
     , _aagaUserIp = Nothing
@@ -109,7 +117,7 @@ accountsAdunitsGet pAagaAdUnitId_ pAagaAdClientId_ pAagaAccountId_ =
     , _aagaKey = Nothing
     , _aagaOauthToken = Nothing
     , _aagaFields = Nothing
-    , _aagaAlt = "json"
+    , _aagaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,24 @@ aagaFields
   = lens _aagaFields (\ s a -> s{_aagaFields = a})
 
 -- | Data format for the response.
-aagaAlt :: Lens' AccountsAdunitsGet' Text
+aagaAlt :: Lens' AccountsAdunitsGet' Alt
 aagaAlt = lens _aagaAlt (\ s a -> s{_aagaAlt = a})
 
 instance GoogleRequest AccountsAdunitsGet' where
         type Rs AccountsAdunitsGet' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsGet{..}
-          = go _aagaQuotaUser _aagaPrettyPrint _aagaUserIp
+        requestWithRoute r u AccountsAdunitsGet'{..}
+          = go _aagaQuotaUser (Just _aagaPrettyPrint)
+              _aagaUserIp
               _aagaAdUnitId
               _aagaAdClientId
               _aagaAccountId
               _aagaKey
               _aagaOauthToken
               _aagaFields
-              _aagaAlt
+              (Just _aagaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsGetAPI)
+                      (Proxy :: Proxy AccountsAdunitsGetResource)
                       r
                       u

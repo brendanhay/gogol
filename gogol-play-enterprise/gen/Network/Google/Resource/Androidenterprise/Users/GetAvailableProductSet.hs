@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseUsersGetAvailableProductSet@.
-module Androidenterprise.Users.GetAvailableProductSet
+module Network.Google.Resource.Androidenterprise.Users.GetAvailableProductSet
     (
     -- * REST Resource
-      UsersGetAvailableProductSetAPI
+      UsersGetAvailableProductSetResource
 
     -- * Creating a Request
-    , usersGetAvailableProductSet
-    , UsersGetAvailableProductSet
+    , usersGetAvailableProductSet'
+    , UsersGetAvailableProductSet'
 
     -- * Request Lenses
     , ugapsQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseUsersGetAvailableProductSet@ which the
--- 'UsersGetAvailableProductSet' request conforms to.
-type UsersGetAvailableProductSetAPI =
+-- 'UsersGetAvailableProductSet'' request conforms to.
+type UsersGetAvailableProductSetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
-             "availableProductSet" :> Get '[JSON] ProductSet
+             "availableProductSet" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ProductSet
 
 -- | Retrieves the set of products a user is entitled to access.
 --
--- /See:/ 'usersGetAvailableProductSet' smart constructor.
-data UsersGetAvailableProductSet = UsersGetAvailableProductSet
+-- /See:/ 'usersGetAvailableProductSet'' smart constructor.
+data UsersGetAvailableProductSet' = UsersGetAvailableProductSet'
     { _ugapsQuotaUser    :: !(Maybe Text)
     , _ugapsPrettyPrint  :: !Bool
     , _ugapsEnterpriseId :: !Text
@@ -64,7 +72,7 @@ data UsersGetAvailableProductSet = UsersGetAvailableProductSet
     , _ugapsKey          :: !(Maybe Text)
     , _ugapsOauthToken   :: !(Maybe Text)
     , _ugapsFields       :: !(Maybe Text)
-    , _ugapsAlt          :: !Text
+    , _ugapsAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGetAvailableProductSet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data UsersGetAvailableProductSet = UsersGetAvailableProductSet
 -- * 'ugapsFields'
 --
 -- * 'ugapsAlt'
-usersGetAvailableProductSet
+usersGetAvailableProductSet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> UsersGetAvailableProductSet
-usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
-    UsersGetAvailableProductSet
+    -> UsersGetAvailableProductSet'
+usersGetAvailableProductSet' pUgapsEnterpriseId_ pUgapsUserId_ =
+    UsersGetAvailableProductSet'
     { _ugapsQuotaUser = Nothing
     , _ugapsPrettyPrint = True
     , _ugapsEnterpriseId = pUgapsEnterpriseId_
@@ -102,7 +110,7 @@ usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
     , _ugapsKey = Nothing
     , _ugapsOauthToken = Nothing
     , _ugapsFields = Nothing
-    , _ugapsAlt = "json"
+    , _ugapsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,24 +162,24 @@ ugapsFields
   = lens _ugapsFields (\ s a -> s{_ugapsFields = a})
 
 -- | Data format for the response.
-ugapsAlt :: Lens' UsersGetAvailableProductSet' Text
+ugapsAlt :: Lens' UsersGetAvailableProductSet' Alt
 ugapsAlt = lens _ugapsAlt (\ s a -> s{_ugapsAlt = a})
 
 instance GoogleRequest UsersGetAvailableProductSet'
          where
         type Rs UsersGetAvailableProductSet' = ProductSet
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u UsersGetAvailableProductSet{..}
-          = go _ugapsQuotaUser _ugapsPrettyPrint
+        requestWithRoute r u UsersGetAvailableProductSet'{..}
+          = go _ugapsQuotaUser (Just _ugapsPrettyPrint)
               _ugapsEnterpriseId
               _ugapsUserIp
               _ugapsUserId
               _ugapsKey
               _ugapsOauthToken
               _ugapsFields
-              _ugapsAlt
+              (Just _ugapsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersGetAvailableProductSetAPI)
+                      (Proxy :: Proxy UsersGetAvailableProductSetResource)
                       r
                       u

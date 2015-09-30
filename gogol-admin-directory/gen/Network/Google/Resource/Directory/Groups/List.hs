@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all groups in a domain (paginated)
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsList@.
-module Directory.Groups.List
+module Network.Google.Resource.Directory.Groups.List
     (
     -- * REST Resource
-      GroupsListAPI
+      GroupsListResource
 
     -- * Creating a Request
-    , groupsList
-    , GroupsList
+    , groupsList'
+    , GroupsList'
 
     -- * Request Lenses
     , glQuotaUser
@@ -47,19 +48,26 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsList@ which the
--- 'GroupsList' request conforms to.
-type GroupsListAPI =
+-- 'GroupsList'' request conforms to.
+type GroupsListResource =
      "groups" :>
-       QueryParam "domain" Text :>
-         QueryParam "customer" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "userKey" Text :>
-               QueryParam "maxResults" Int32 :> Get '[JSON] Groups
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "domain" Text :>
+               QueryParam "customer" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "userKey" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Groups
 
 -- | Retrieve all groups in a domain (paginated)
 --
--- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+-- /See:/ 'groupsList'' smart constructor.
+data GroupsList' = GroupsList'
     { _glQuotaUser   :: !(Maybe Text)
     , _glPrettyPrint :: !Bool
     , _glUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data GroupsList = GroupsList
     , _glUserKey     :: !(Maybe Text)
     , _glMaxResults  :: !(Maybe Int32)
     , _glFields      :: !(Maybe Text)
-    , _glAlt         :: !Text
+    , _glAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
@@ -101,10 +109,10 @@ data GroupsList = GroupsList
 -- * 'glFields'
 --
 -- * 'glAlt'
-groupsList
-    :: GroupsList
-groupsList =
-    GroupsList
+groupsList'
+    :: GroupsList'
+groupsList' =
+    GroupsList'
     { _glQuotaUser = Nothing
     , _glPrettyPrint = True
     , _glUserIp = Nothing
@@ -116,7 +124,7 @@ groupsList =
     , _glUserKey = Nothing
     , _glMaxResults = Nothing
     , _glFields = Nothing
-    , _glAlt = "json"
+    , _glAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,14 +189,15 @@ glFields :: Lens' GroupsList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
 -- | Data format for the response.
-glAlt :: Lens' GroupsList' Text
+glAlt :: Lens' GroupsList' Alt
 glAlt = lens _glAlt (\ s a -> s{_glAlt = a})
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = Groups
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsList{..}
-          = go _glQuotaUser _glPrettyPrint _glUserIp _glDomain
+        requestWithRoute r u GroupsList'{..}
+          = go _glQuotaUser (Just _glPrettyPrint) _glUserIp
+              _glDomain
               _glCustomer
               _glKey
               _glPageToken
@@ -196,6 +205,8 @@ instance GoogleRequest GroupsList' where
               _glUserKey
               _glMaxResults
               _glFields
-              _glAlt
+              (Just _glAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy GroupsListResource)
+                      r
+                      u

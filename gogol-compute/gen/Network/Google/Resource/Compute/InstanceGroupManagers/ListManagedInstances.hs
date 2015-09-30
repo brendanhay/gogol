@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists managed instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersListManagedInstances@.
-module Compute.InstanceGroupManagers.ListManagedInstances
+module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstances
     (
     -- * REST Resource
-      InstanceGroupManagersListManagedInstancesAPI
+      InstanceGroupManagersListManagedInstancesResource
 
     -- * Creating a Request
-    , instanceGroupManagersListManagedInstances
-    , InstanceGroupManagersListManagedInstances
+    , instanceGroupManagersListManagedInstances'
+    , InstanceGroupManagersListManagedInstances'
 
     -- * Request Lenses
     , igmlmiQuotaUser
@@ -45,21 +46,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersListManagedInstances@ which the
--- 'InstanceGroupManagersListManagedInstances' request conforms to.
-type InstanceGroupManagersListManagedInstancesAPI =
+-- 'InstanceGroupManagersListManagedInstances'' request conforms to.
+type InstanceGroupManagersListManagedInstancesResource
+     =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
                "listManagedInstances" :>
-                 Post '[JSON]
-                   InstanceGroupManagersListManagedInstancesResponse
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON]
+                                 InstanceGroupManagersListManagedInstancesResponse
 
 -- | Lists managed instances.
 --
--- /See:/ 'instanceGroupManagersListManagedInstances' smart constructor.
-data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances
+-- /See:/ 'instanceGroupManagersListManagedInstances'' smart constructor.
+data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManagedInstances'
     { _igmlmiQuotaUser            :: !(Maybe Text)
     , _igmlmiPrettyPrint          :: !Bool
     , _igmlmiProject              :: !Text
@@ -69,7 +78,7 @@ data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManage
     , _igmlmiKey                  :: !(Maybe Text)
     , _igmlmiOauthToken           :: !(Maybe Text)
     , _igmlmiFields               :: !(Maybe Text)
-    , _igmlmiAlt                  :: !Text
+    , _igmlmiAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstances'' with the minimum fields required to make a request.
@@ -95,13 +104,13 @@ data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManage
 -- * 'igmlmiFields'
 --
 -- * 'igmlmiAlt'
-instanceGroupManagersListManagedInstances
+instanceGroupManagersListManagedInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersListManagedInstances
-instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
-    InstanceGroupManagersListManagedInstances
+    -> InstanceGroupManagersListManagedInstances'
+instanceGroupManagersListManagedInstances' pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
+    InstanceGroupManagersListManagedInstances'
     { _igmlmiQuotaUser = Nothing
     , _igmlmiPrettyPrint = True
     , _igmlmiProject = pIgmlmiProject_
@@ -111,7 +120,7 @@ instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupMa
     , _igmlmiKey = Nothing
     , _igmlmiOauthToken = Nothing
     , _igmlmiFields = Nothing
-    , _igmlmiAlt = "json"
+    , _igmlmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +179,7 @@ igmlmiFields
   = lens _igmlmiFields (\ s a -> s{_igmlmiFields = a})
 
 -- | Data format for the response.
-igmlmiAlt :: Lens' InstanceGroupManagersListManagedInstances' Text
+igmlmiAlt :: Lens' InstanceGroupManagersListManagedInstances' Alt
 igmlmiAlt
   = lens _igmlmiAlt (\ s a -> s{_igmlmiAlt = a})
 
@@ -180,8 +189,8 @@ instance GoogleRequest
              InstanceGroupManagersListManagedInstancesResponse
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupManagersListManagedInstances{..}
-          = go _igmlmiQuotaUser _igmlmiPrettyPrint
+          InstanceGroupManagersListManagedInstances'{..}
+          = go _igmlmiQuotaUser (Just _igmlmiPrettyPrint)
               _igmlmiProject
               _igmlmiInstanceGroupManager
               _igmlmiUserIp
@@ -189,10 +198,11 @@ instance GoogleRequest
               _igmlmiKey
               _igmlmiOauthToken
               _igmlmiFields
-              _igmlmiAlt
+              (Just _igmlmiAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersListManagedInstancesAPI)
+                         Proxy
+                           InstanceGroupManagersListManagedInstancesResource)
                       r
                       u

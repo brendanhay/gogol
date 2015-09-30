@@ -71,7 +71,7 @@ instance ToJSON TranslationsResource where
 --
 -- /See:/ 'detectionsListResponse' smart constructor.
 newtype DetectionsListResponse = DetectionsListResponse
-    { _dlrDetections :: Maybe [Maybe [DetectionsResourceItem]]
+    { _dlrDetections :: Maybe [Maybe [DetectionsResource]]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsListResponse' with the minimum fields required to make a request.
@@ -87,7 +87,7 @@ detectionsListResponse =
     }
 
 -- | A detections contains detection results of several text
-dlrDetections :: Lens' DetectionsListResponse [[DetectionsResourceItem]]
+dlrDetections :: Lens' DetectionsListResponse [[DetectionsResource]]
 dlrDetections
   = lens _dlrDetections
       (\ s a -> s{_dlrDetections = a})
@@ -146,6 +146,63 @@ instance ToJSON LanguagesListResponse where
         toJSON LanguagesListResponse{..}
           = object
               (catMaybes [("languages" .=) <$> _llrLanguages])
+
+--
+-- /See:/ 'detectionsResource' smart constructor.
+data DetectionsResource = DetectionsResource
+    { _drConfidence :: !(Maybe Float)
+    , _drIsReliable :: !(Maybe Bool)
+    , _drLanguage   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DetectionsResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drConfidence'
+--
+-- * 'drIsReliable'
+--
+-- * 'drLanguage'
+detectionsResource
+    :: DetectionsResource
+detectionsResource =
+    DetectionsResource
+    { _drConfidence = Nothing
+    , _drIsReliable = Nothing
+    , _drLanguage = Nothing
+    }
+
+-- | The confidence of the detection resul of this language.
+drConfidence :: Lens' DetectionsResource (Maybe Float)
+drConfidence
+  = lens _drConfidence (\ s a -> s{_drConfidence = a})
+
+-- | A boolean to indicate is the language detection result reliable.
+drIsReliable :: Lens' DetectionsResource (Maybe Bool)
+drIsReliable
+  = lens _drIsReliable (\ s a -> s{_drIsReliable = a})
+
+-- | The language we detect
+drLanguage :: Lens' DetectionsResource (Maybe Text)
+drLanguage
+  = lens _drLanguage (\ s a -> s{_drLanguage = a})
+
+instance FromJSON DetectionsResource where
+        parseJSON
+          = withObject "DetectionsResource"
+              (\ o ->
+                 DetectionsResource <$>
+                   (o .:? "confidence") <*> (o .:? "isReliable") <*>
+                     (o .:? "language"))
+
+instance ToJSON DetectionsResource where
+        toJSON DetectionsResource{..}
+          = object
+              (catMaybes
+                 [("confidence" .=) <$> _drConfidence,
+                  ("isReliable" .=) <$> _drIsReliable,
+                  ("language" .=) <$> _drLanguage])
 
 --
 -- /See:/ 'languagesResource' smart constructor.

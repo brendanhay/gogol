@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all of the people in the specified collection.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusPeopleList@.
-module Plus.People.List
+module Network.Google.Resource.Plus.People.List
     (
     -- * REST Resource
-      PeopleListAPI
+      PeopleListResource
 
     -- * Creating a Request
-    , peopleList
-    , PeopleList
+    , peopleList'
+    , PeopleList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -47,33 +48,39 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusPeopleList@ which the
--- 'PeopleList' request conforms to.
-type PeopleListAPI =
+-- 'PeopleList'' request conforms to.
+type PeopleListResource =
      "people" :>
        Capture "userId" Text :>
          "people" :>
-           Capture "collection" Text :>
-             QueryParam "orderBy" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] PeopleFeed
+           Capture "collection" PlusPeopleListCollection :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy" PlusPeopleListOrderBy :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection.
 --
--- /See:/ 'peopleList' smart constructor.
-data PeopleList = PeopleList
+-- /See:/ 'peopleList'' smart constructor.
+data PeopleList' = PeopleList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plOrderBy     :: !(Maybe Text)
+    , _plOrderBy     :: !(Maybe PlusPeopleListOrderBy)
     , _plUserIp      :: !(Maybe Text)
-    , _plCollection  :: !Text
+    , _plCollection  :: !PlusPeopleListCollection
     , _plUserId      :: !Text
     , _plKey         :: !(Maybe Text)
     , _plPageToken   :: !(Maybe Text)
     , _plOauthToken  :: !(Maybe Text)
     , _plMaxResults  :: !Word32
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Text
+    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
@@ -103,12 +110,12 @@ data PeopleList = PeopleList
 -- * 'plFields'
 --
 -- * 'plAlt'
-peopleList
-    :: Text -- ^ 'collection'
+peopleList'
+    :: PlusPeopleListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
-    -> PeopleList
-peopleList pPlCollection_ pPlUserId_ =
-    PeopleList
+    -> PeopleList'
+peopleList' pPlCollection_ pPlUserId_ =
+    PeopleList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plOrderBy = Nothing
@@ -120,7 +127,7 @@ peopleList pPlCollection_ pPlUserId_ =
     , _plOauthToken = Nothing
     , _plMaxResults = 100
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,7 +144,7 @@ plPrettyPrint
       (\ s a -> s{_plPrettyPrint = a})
 
 -- | The order to return people in.
-plOrderBy :: Lens' PeopleList' (Maybe Text)
+plOrderBy :: Lens' PeopleList' (Maybe PlusPeopleListOrderBy)
 plOrderBy
   = lens _plOrderBy (\ s a -> s{_plOrderBy = a})
 
@@ -147,7 +154,7 @@ plUserIp :: Lens' PeopleList' (Maybe Text)
 plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
 
 -- | The collection of people to list.
-plCollection :: Lens' PeopleList' Text
+plCollection :: Lens' PeopleList' PlusPeopleListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 
@@ -186,14 +193,15 @@ plFields :: Lens' PeopleList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PeopleList' Text
+plAlt :: Lens' PeopleList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u PeopleList{..}
-          = go _plQuotaUser _plPrettyPrint _plOrderBy _plUserIp
+        requestWithRoute r u PeopleList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plOrderBy
+              _plUserIp
               _plCollection
               _plUserId
               _plKey
@@ -201,6 +209,8 @@ instance GoogleRequest PeopleList' where
               _plOauthToken
               (Just _plMaxResults)
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PeopleListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PeopleListResource)
+                      r
+                      u

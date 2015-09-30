@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return metadata for a single raster.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersGet@.
-module Mapsengine.Rasters.Get
+module Network.Google.Resource.Mapsengine.Rasters.Get
     (
     -- * REST Resource
-      RastersGetAPI
+      RastersGetResource
 
     -- * Creating a Request
-    , rastersGet
-    , RastersGet
+    , rastersGet'
+    , RastersGet'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersGet@ which the
--- 'RastersGet' request conforms to.
-type RastersGetAPI =
-     "rasters" :> Capture "id" Text :> Get '[JSON] Raster
+-- 'RastersGet'' request conforms to.
+type RastersGetResource =
+     "rasters" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Raster
 
 -- | Return metadata for a single raster.
 --
--- /See:/ 'rastersGet' smart constructor.
-data RastersGet = RastersGet
+-- /See:/ 'rastersGet'' smart constructor.
+data RastersGet' = RastersGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data RastersGet = RastersGet
     , _rgId          :: !Text
     , _rgOauthToken  :: !(Maybe Text)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersGet'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data RastersGet = RastersGet
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-rastersGet
+rastersGet'
     :: Text -- ^ 'id'
-    -> RastersGet
-rastersGet pRgId_ =
-    RastersGet
+    -> RastersGet'
+rastersGet' pRgId_ =
+    RastersGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIp = Nothing
@@ -92,7 +101,7 @@ rastersGet pRgId_ =
     , _rgId = pRgId_
     , _rgOauthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,17 +142,20 @@ rgFields :: Lens' RastersGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' RastersGet' Text
+rgAlt :: Lens' RastersGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest RastersGet' where
         type Rs RastersGet' = Raster
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp _rgKey
+        requestWithRoute r u RastersGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+              _rgKey
               _rgId
               _rgOauthToken
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RastersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RastersGetResource)
+                      r
+                      u

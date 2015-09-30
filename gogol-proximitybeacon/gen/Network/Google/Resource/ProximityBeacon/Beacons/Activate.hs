@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- will return a successful response code).
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconsActivate@.
-module ProximityBeacon.Beacons.Activate
+module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     (
     -- * REST Resource
-      BeaconsActivateAPI
+      BeaconsActivateResource
 
     -- * Creating a Request
-    , beaconsActivate
-    , BeaconsActivate
+    , beaconsActivate'
+    , BeaconsActivate'
 
     -- * Request Lenses
     , baXgafv
@@ -52,18 +53,31 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconsActivate@ which the
--- 'BeaconsActivate' request conforms to.
-type BeaconsActivateAPI =
+-- 'BeaconsActivate'' request conforms to.
+type BeaconsActivateResource =
      "v1beta1" :>
-       "{+beaconName}:activate" :> Post '[JSON] Empty
+       "{+beaconName}:activate" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | (Re)activates a beacon. A beacon that is active will return information
 -- and attachment data when queried via \`beaconinfo.getforobserved\`.
 -- Calling this method on an already active beacon will do nothing (but
 -- will return a successful response code).
 --
--- /See:/ 'beaconsActivate' smart constructor.
-data BeaconsActivate = BeaconsActivate
+-- /See:/ 'beaconsActivate'' smart constructor.
+data BeaconsActivate' = BeaconsActivate'
     { _baXgafv          :: !(Maybe Text)
     , _baQuotaUser      :: !(Maybe Text)
     , _baPrettyPrint    :: !Bool
@@ -111,11 +125,11 @@ data BeaconsActivate = BeaconsActivate
 -- * 'baCallback'
 --
 -- * 'baAlt'
-beaconsActivate
+beaconsActivate'
     :: Text -- ^ 'beaconName'
-    -> BeaconsActivate
-beaconsActivate pBaBeaconName_ =
-    BeaconsActivate
+    -> BeaconsActivate'
+beaconsActivate' pBaBeaconName_ =
+    BeaconsActivate'
     { _baXgafv = Nothing
     , _baQuotaUser = Nothing
     , _baPrettyPrint = True
@@ -208,10 +222,10 @@ baAlt = lens _baAlt (\ s a -> s{_baAlt = a})
 instance GoogleRequest BeaconsActivate' where
         type Rs BeaconsActivate' = Empty
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconsActivate{..}
-          = go _baXgafv _baQuotaUser _baPrettyPrint
+        requestWithRoute r u BeaconsActivate'{..}
+          = go _baXgafv _baQuotaUser (Just _baPrettyPrint)
               _baUploadProtocol
-              _baPp
+              (Just _baPp)
               _baAccessToken
               _baBeaconName
               _baUploadType
@@ -220,8 +234,9 @@ instance GoogleRequest BeaconsActivate' where
               _baOauthToken
               _baFields
               _baCallback
-              _baAlt
+              (Just _baAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BeaconsActivateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BeaconsActivateResource)
                       r
                       u

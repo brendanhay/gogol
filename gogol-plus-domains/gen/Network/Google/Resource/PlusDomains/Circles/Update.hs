@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update a circle\'s description.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesUpdate@.
-module PlusDomains.Circles.Update
+module Network.Google.Resource.PlusDomains.Circles.Update
     (
     -- * REST Resource
-      CirclesUpdateAPI
+      CirclesUpdateResource
 
     -- * Creating a Request
-    , circlesUpdate
-    , CirclesUpdate
+    , circlesUpdate'
+    , CirclesUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesUpdate@ which the
--- 'CirclesUpdate' request conforms to.
-type CirclesUpdateAPI =
+-- 'CirclesUpdate'' request conforms to.
+type CirclesUpdateResource =
      "circles" :>
-       Capture "circleId" Text :> Put '[JSON] Circle
+       Capture "circleId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Circle
 
 -- | Update a circle\'s description.
 --
--- /See:/ 'circlesUpdate' smart constructor.
-data CirclesUpdate = CirclesUpdate
+-- /See:/ 'circlesUpdate'' smart constructor.
+data CirclesUpdate' = CirclesUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CirclesUpdate = CirclesUpdate
     , _cuCircleId    :: !Text
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CirclesUpdate = CirclesUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-circlesUpdate
+circlesUpdate'
     :: Text -- ^ 'circleId'
-    -> CirclesUpdate
-circlesUpdate pCuCircleId_ =
-    CirclesUpdate
+    -> CirclesUpdate'
+circlesUpdate' pCuCircleId_ =
+    CirclesUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -93,7 +101,7 @@ circlesUpdate pCuCircleId_ =
     , _cuCircleId = pCuCircleId_
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ cuFields :: Lens' CirclesUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CirclesUpdate' Text
+cuAlt :: Lens' CirclesUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp _cuKey
+        requestWithRoute r u CirclesUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+              _cuKey
               _cuCircleId
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CirclesUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CirclesUpdateResource)
+                      r
                       u

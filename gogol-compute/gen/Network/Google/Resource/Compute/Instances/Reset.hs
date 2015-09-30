@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Performs a hard reset on the instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesReset@.
-module Compute.Instances.Reset
+module Network.Google.Resource.Compute.Instances.Reset
     (
     -- * REST Resource
-      InstancesResetAPI
+      InstancesResetResource
 
     -- * Creating a Request
-    , instancesReset
-    , InstancesReset
+    , instancesReset'
+    , InstancesReset'
 
     -- * Request Lenses
     , irrQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesReset@ which the
--- 'InstancesReset' request conforms to.
-type InstancesResetAPI =
+-- 'InstancesReset'' request conforms to.
+type InstancesResetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
-               "reset" :> Post '[JSON] Operation
+               "reset" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Performs a hard reset on the instance.
 --
--- /See:/ 'instancesReset' smart constructor.
-data InstancesReset = InstancesReset
+-- /See:/ 'instancesReset'' smart constructor.
+data InstancesReset' = InstancesReset'
     { _irrQuotaUser   :: !(Maybe Text)
     , _irrPrettyPrint :: !Bool
     , _irrProject     :: !Text
@@ -66,7 +74,7 @@ data InstancesReset = InstancesReset
     , _irrKey         :: !(Maybe Text)
     , _irrOauthToken  :: !(Maybe Text)
     , _irrFields      :: !(Maybe Text)
-    , _irrAlt         :: !Text
+    , _irrAlt         :: !Alt
     , _irrInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data InstancesReset = InstancesReset
 -- * 'irrAlt'
 --
 -- * 'irrInstance'
-instancesReset
+instancesReset'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesReset
-instancesReset pIrrProject_ pIrrZone_ pIrrInstance_ =
-    InstancesReset
+    -> InstancesReset'
+instancesReset' pIrrProject_ pIrrZone_ pIrrInstance_ =
+    InstancesReset'
     { _irrQuotaUser = Nothing
     , _irrPrettyPrint = True
     , _irrProject = pIrrProject_
@@ -108,7 +116,7 @@ instancesReset pIrrProject_ pIrrZone_ pIrrInstance_ =
     , _irrKey = Nothing
     , _irrOauthToken = Nothing
     , _irrFields = Nothing
-    , _irrAlt = "json"
+    , _irrAlt = JSON
     , _irrInstance = pIrrInstance_
     }
 
@@ -158,7 +166,7 @@ irrFields
   = lens _irrFields (\ s a -> s{_irrFields = a})
 
 -- | Data format for the response.
-irrAlt :: Lens' InstancesReset' Text
+irrAlt :: Lens' InstancesReset' Alt
 irrAlt = lens _irrAlt (\ s a -> s{_irrAlt = a})
 
 -- | Name of the instance scoping this request.
@@ -169,16 +177,17 @@ irrInstance
 instance GoogleRequest InstancesReset' where
         type Rs InstancesReset' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesReset{..}
-          = go _irrQuotaUser _irrPrettyPrint _irrProject
+        requestWithRoute r u InstancesReset'{..}
+          = go _irrQuotaUser (Just _irrPrettyPrint) _irrProject
               _irrUserIp
               _irrZone
               _irrKey
               _irrOauthToken
               _irrFields
-              _irrAlt
+              (Just _irrAlt)
               _irrInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesResetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesResetResource)
                       r
                       u

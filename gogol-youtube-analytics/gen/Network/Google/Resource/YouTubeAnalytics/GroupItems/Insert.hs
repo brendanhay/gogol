@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a group item.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsInsert@.
-module YouTubeAnalytics.GroupItems.Insert
+module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
     (
     -- * REST Resource
-      GroupItemsInsertAPI
+      GroupItemsInsertResource
 
     -- * Creating a Request
-    , groupItemsInsert
-    , GroupItemsInsert
+    , groupItemsInsert'
+    , GroupItemsInsert'
 
     -- * Request Lenses
     , giiQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsGroupItemsInsert@ which the
--- 'GroupItemsInsert' request conforms to.
-type GroupItemsInsertAPI =
+-- 'GroupItemsInsert'' request conforms to.
+type GroupItemsInsertResource =
      "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         Post '[JSON] GroupItem
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] GroupItem
 
 -- | Creates a group item.
 --
--- /See:/ 'groupItemsInsert' smart constructor.
-data GroupItemsInsert = GroupItemsInsert
+-- /See:/ 'groupItemsInsert'' smart constructor.
+data GroupItemsInsert' = GroupItemsInsert'
     { _giiQuotaUser              :: !(Maybe Text)
     , _giiPrettyPrint            :: !Bool
     , _giiUserIp                 :: !(Maybe Text)
@@ -60,7 +67,7 @@ data GroupItemsInsert = GroupItemsInsert
     , _giiKey                    :: !(Maybe Text)
     , _giiOauthToken             :: !(Maybe Text)
     , _giiFields                 :: !(Maybe Text)
-    , _giiAlt                    :: !Text
+    , _giiAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsInsert'' with the minimum fields required to make a request.
@@ -82,10 +89,10 @@ data GroupItemsInsert = GroupItemsInsert
 -- * 'giiFields'
 --
 -- * 'giiAlt'
-groupItemsInsert
-    :: GroupItemsInsert
-groupItemsInsert =
-    GroupItemsInsert
+groupItemsInsert'
+    :: GroupItemsInsert'
+groupItemsInsert' =
+    GroupItemsInsert'
     { _giiQuotaUser = Nothing
     , _giiPrettyPrint = True
     , _giiUserIp = Nothing
@@ -93,7 +100,7 @@ groupItemsInsert =
     , _giiKey = Nothing
     , _giiOauthToken = Nothing
     , _giiFields = Nothing
-    , _giiAlt = "json"
+    , _giiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,21 +155,21 @@ giiFields
   = lens _giiFields (\ s a -> s{_giiFields = a})
 
 -- | Data format for the response.
-giiAlt :: Lens' GroupItemsInsert' Text
+giiAlt :: Lens' GroupItemsInsert' Alt
 giiAlt = lens _giiAlt (\ s a -> s{_giiAlt = a})
 
 instance GoogleRequest GroupItemsInsert' where
         type Rs GroupItemsInsert' = GroupItem
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsInsert{..}
-          = go _giiQuotaUser _giiPrettyPrint _giiUserIp
+        requestWithRoute r u GroupItemsInsert'{..}
+          = go _giiQuotaUser (Just _giiPrettyPrint) _giiUserIp
               _giiOnBehalfOfContentOwner
               _giiKey
               _giiOauthToken
               _giiFields
-              _giiAlt
+              (Just _giiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GroupItemsInsertAPI)
+                      (Proxy :: Proxy GroupItemsInsertResource)
                       r
                       u

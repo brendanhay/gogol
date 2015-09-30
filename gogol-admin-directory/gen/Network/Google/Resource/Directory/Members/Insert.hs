@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add user to the specified group.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersInsert@.
-module Directory.Members.Insert
+module Network.Google.Resource.Directory.Members.Insert
     (
     -- * REST Resource
-      MembersInsertAPI
+      MembersInsertResource
 
     -- * Creating a Request
-    , membersInsert
-    , MembersInsert
+    , membersInsert'
+    , MembersInsert'
 
     -- * Request Lenses
     , miQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersInsert@ which the
--- 'MembersInsert' request conforms to.
-type MembersInsertAPI =
+-- 'MembersInsert'' request conforms to.
+type MembersInsertResource =
      "groups" :>
        Capture "groupKey" Text :>
-         "members" :> Post '[JSON] Member
+         "members" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Member
 
 -- | Add user to the specified group.
 --
--- /See:/ 'membersInsert' smart constructor.
-data MembersInsert = MembersInsert
+-- /See:/ 'membersInsert'' smart constructor.
+data MembersInsert' = MembersInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data MembersInsert = MembersInsert
     , _miKey         :: !(Maybe Text)
     , _miOauthToken  :: !(Maybe Text)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Text
+    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data MembersInsert = MembersInsert
 -- * 'miFields'
 --
 -- * 'miAlt'
-membersInsert
+membersInsert'
     :: Text -- ^ 'groupKey'
-    -> MembersInsert
-membersInsert pMiGroupKey_ =
-    MembersInsert
+    -> MembersInsert'
+membersInsert' pMiGroupKey_ =
+    MembersInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIp = Nothing
@@ -94,7 +102,7 @@ membersInsert pMiGroupKey_ =
     , _miKey = Nothing
     , _miOauthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = "json"
+    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ miFields :: Lens' MembersInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 -- | Data format for the response.
-miAlt :: Lens' MembersInsert' Text
+miAlt :: Lens' MembersInsert' Alt
 miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
 
 instance GoogleRequest MembersInsert' where
         type Rs MembersInsert' = Member
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersInsert{..}
-          = go _miQuotaUser _miPrettyPrint _miUserIp
+        requestWithRoute r u MembersInsert'{..}
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
               _miGroupKey
               _miKey
               _miOauthToken
               _miFields
-              _miAlt
+              (Just _miAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MembersInsertResource)
+                      r
                       u

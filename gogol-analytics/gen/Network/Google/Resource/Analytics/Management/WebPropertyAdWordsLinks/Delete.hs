@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a web property-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksDelete@.
-module Analytics.Management.WebPropertyAdWordsLinks.Delete
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksDeleteAPI
+      ManagementWebPropertyAdWordsLinksDeleteResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksDelete
-    , ManagementWebPropertyAdWordsLinksDelete
+    , managementWebPropertyAdWordsLinksDelete'
+    , ManagementWebPropertyAdWordsLinksDelete'
 
     -- * Request Lenses
     , mwpawldQuotaUser
@@ -45,8 +46,9 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksDelete@ which the
--- 'ManagementWebPropertyAdWordsLinksDelete' request conforms to.
-type ManagementWebPropertyAdWordsLinksDeleteAPI =
+-- 'ManagementWebPropertyAdWordsLinksDelete'' request conforms to.
+type ManagementWebPropertyAdWordsLinksDeleteResource
+     =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +56,18 @@ type ManagementWebPropertyAdWordsLinksDeleteAPI =
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
                  Capture "webPropertyAdWordsLinkId" Text :>
-                   Delete '[JSON] ()
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a web property-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
-data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete
+-- /See:/ 'managementWebPropertyAdWordsLinksDelete'' smart constructor.
+data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldQuotaUser                :: !(Maybe Text)
     , _mwpawldPrettyPrint              :: !Bool
     , _mwpawldWebPropertyId            :: !Text
@@ -69,7 +77,7 @@ data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinks
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
     , _mwpawldOauthToken               :: !(Maybe Text)
     , _mwpawldFields                   :: !(Maybe Text)
-    , _mwpawldAlt                      :: !Text
+    , _mwpawldAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinks
 -- * 'mwpawldFields'
 --
 -- * 'mwpawldAlt'
-managementWebPropertyAdWordsLinksDelete
+managementWebPropertyAdWordsLinksDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksDelete
-managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksDelete
+    -> ManagementWebPropertyAdWordsLinksDelete'
+managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldQuotaUser = Nothing
     , _mwpawldPrettyPrint = False
     , _mwpawldWebPropertyId = pMwpawldWebPropertyId_
@@ -111,7 +119,7 @@ managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
     , _mwpawldOauthToken = Nothing
     , _mwpawldFields = Nothing
-    , _mwpawldAlt = "json"
+    , _mwpawldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,7 +181,7 @@ mwpawldFields
       (\ s a -> s{_mwpawldFields = a})
 
 -- | Data format for the response.
-mwpawldAlt :: Lens' ManagementWebPropertyAdWordsLinksDelete' Text
+mwpawldAlt :: Lens' ManagementWebPropertyAdWordsLinksDelete' Alt
 mwpawldAlt
   = lens _mwpawldAlt (\ s a -> s{_mwpawldAlt = a})
 
@@ -182,8 +190,8 @@ instance GoogleRequest
         type Rs ManagementWebPropertyAdWordsLinksDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksDelete{..}
-          = go _mwpawldQuotaUser _mwpawldPrettyPrint
+          ManagementWebPropertyAdWordsLinksDelete'{..}
+          = go _mwpawldQuotaUser (Just _mwpawldPrettyPrint)
               _mwpawldWebPropertyId
               _mwpawldUserIp
               _mwpawldAccountId
@@ -191,10 +199,11 @@ instance GoogleRequest
               _mwpawldWebPropertyAdWordsLinkId
               _mwpawldOauthToken
               _mwpawldFields
-              _mwpawldAlt
+              (Just _mwpawldAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksDeleteAPI)
+                         Proxy
+                           ManagementWebPropertyAdWordsLinksDeleteResource)
                       r
                       u

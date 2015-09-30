@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one campaign by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsGet@.
-module DFAReporting.Campaigns.Get
+module Network.Google.Resource.DFAReporting.Campaigns.Get
     (
     -- * REST Resource
-      CampaignsGetAPI
+      CampaignsGetResource
 
     -- * Creating a Request
-    , campaignsGet
-    , CampaignsGet
+    , campaignsGet'
+    , CampaignsGet'
 
     -- * Request Lenses
     , camaQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignsGet@ which the
--- 'CampaignsGet' request conforms to.
-type CampaignsGetAPI =
+-- 'CampaignsGet'' request conforms to.
+type CampaignsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           Capture "id" Int64 :> Get '[JSON] Campaign
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Campaign
 
 -- | Gets one campaign by ID.
 --
--- /See:/ 'campaignsGet' smart constructor.
-data CampaignsGet = CampaignsGet
+-- /See:/ 'campaignsGet'' smart constructor.
+data CampaignsGet' = CampaignsGet'
     { _camaQuotaUser   :: !(Maybe Text)
     , _camaPrettyPrint :: !Bool
     , _camaUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CampaignsGet = CampaignsGet
     , _camaId          :: !Int64
     , _camaOauthToken  :: !(Maybe Text)
     , _camaFields      :: !(Maybe Text)
-    , _camaAlt         :: !Text
+    , _camaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CampaignsGet = CampaignsGet
 -- * 'camaFields'
 --
 -- * 'camaAlt'
-campaignsGet
+campaignsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CampaignsGet
-campaignsGet pCamaProfileId_ pCamaId_ =
-    CampaignsGet
+    -> CampaignsGet'
+campaignsGet' pCamaProfileId_ pCamaId_ =
+    CampaignsGet'
     { _camaQuotaUser = Nothing
     , _camaPrettyPrint = True
     , _camaUserIp = Nothing
@@ -101,7 +109,7 @@ campaignsGet pCamaProfileId_ pCamaId_ =
     , _camaId = pCamaId_
     , _camaOauthToken = Nothing
     , _camaFields = Nothing
-    , _camaAlt = "json"
+    , _camaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,23 @@ camaFields
   = lens _camaFields (\ s a -> s{_camaFields = a})
 
 -- | Data format for the response.
-camaAlt :: Lens' CampaignsGet' Text
+camaAlt :: Lens' CampaignsGet' Alt
 camaAlt = lens _camaAlt (\ s a -> s{_camaAlt = a})
 
 instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsGet{..}
-          = go _camaQuotaUser _camaPrettyPrint _camaUserIp
+        requestWithRoute r u CampaignsGet'{..}
+          = go _camaQuotaUser (Just _camaPrettyPrint)
+              _camaUserIp
               _camaProfileId
               _camaKey
               _camaId
               _camaOauthToken
               _camaFields
-              _camaAlt
+              (Just _camaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CampaignsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CampaignsGetResource)
+                      r
                       u

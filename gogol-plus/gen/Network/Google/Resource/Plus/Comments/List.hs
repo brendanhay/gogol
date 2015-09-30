@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all of the comments for an activity.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusCommentsList@.
-module Plus.Comments.List
+module Network.Google.Resource.Plus.Comments.List
     (
     -- * REST Resource
-      CommentsListAPI
+      CommentsListResource
 
     -- * Creating a Request
-    , commentsList
-    , CommentsList
+    , commentsList'
+    , CommentsList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -46,31 +47,37 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusCommentsList@ which the
--- 'CommentsList' request conforms to.
-type CommentsListAPI =
+-- 'CommentsList'' request conforms to.
+type CommentsListResource =
      "activities" :>
        Capture "activityId" Text :>
          "comments" :>
-           QueryParam "sortOrder" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] CommentFeed
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "sortOrder" PlusCommentsListSortOrder :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] CommentFeed
 
 -- | List all of the comments for an activity.
 --
--- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+-- /See:/ 'commentsList'' smart constructor.
+data CommentsList' = CommentsList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIp      :: !(Maybe Text)
     , _clActivityId  :: !Text
-    , _clSortOrder   :: !Text
+    , _clSortOrder   :: !PlusCommentsListSortOrder
     , _clKey         :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
     , _clOauthToken  :: !(Maybe Text)
     , _clMaxResults  :: !Word32
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -98,22 +105,22 @@ data CommentsList = CommentsList
 -- * 'clFields'
 --
 -- * 'clAlt'
-commentsList
+commentsList'
     :: Text -- ^ 'activityId'
-    -> CommentsList
-commentsList pClActivityId_ =
-    CommentsList
+    -> CommentsList'
+commentsList' pClActivityId_ =
+    CommentsList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clUserIp = Nothing
     , _clActivityId = pClActivityId_
-    , _clSortOrder = "ascending"
+    , _clSortOrder = Ascending
     , _clKey = Nothing
     , _clPageToken = Nothing
     , _clOauthToken = Nothing
     , _clMaxResults = 20
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +147,7 @@ clActivityId
   = lens _clActivityId (\ s a -> s{_clActivityId = a})
 
 -- | The order in which to sort the list of comments.
-clSortOrder :: Lens' CommentsList' Text
+clSortOrder :: Lens' CommentsList' PlusCommentsListSortOrder
 clSortOrder
   = lens _clSortOrder (\ s a -> s{_clSortOrder = a})
 
@@ -174,14 +181,14 @@ clFields :: Lens' CommentsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CommentsList' Text
+clAlt :: Lens' CommentsList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u CommentsList{..}
-          = go _clQuotaUser _clPrettyPrint _clUserIp
+        requestWithRoute r u CommentsList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
               _clActivityId
               (Just _clSortOrder)
               _clKey
@@ -189,7 +196,9 @@ instance GoogleRequest CommentsList' where
               _clOauthToken
               (Just _clMaxResults)
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsListResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified number of instances.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersInsert@.
-module Replicapool.InstanceGroupManagers.Insert
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.Insert
     (
     -- * REST Resource
-      InstanceGroupManagersInsertAPI
+      InstanceGroupManagersInsertResource
 
     -- * Creating a Request
-    , instanceGroupManagersInsert
-    , InstanceGroupManagersInsert
+    , instanceGroupManagersInsert'
+    , InstanceGroupManagersInsert'
 
     -- * Request Lenses
     , igmiQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersInsert@ which the
--- 'InstanceGroupManagersInsert' request conforms to.
-type InstanceGroupManagersInsertAPI =
+-- 'InstanceGroupManagersInsert'' request conforms to.
+type InstanceGroupManagersInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
-             QueryParam "size" Int32 :> Post '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "size" Int32 :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an instance group manager, as well as the instance group and the
 -- specified number of instances.
 --
--- /See:/ 'instanceGroupManagersInsert' smart constructor.
-data InstanceGroupManagersInsert = InstanceGroupManagersInsert
+-- /See:/ 'instanceGroupManagersInsert'' smart constructor.
+data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
     { _igmiQuotaUser   :: !(Maybe Text)
     , _igmiPrettyPrint :: !Bool
     , _igmiProject     :: !Text
@@ -68,7 +76,7 @@ data InstanceGroupManagersInsert = InstanceGroupManagersInsert
     , _igmiKey         :: !(Maybe Text)
     , _igmiOauthToken  :: !(Maybe Text)
     , _igmiFields      :: !(Maybe Text)
-    , _igmiAlt         :: !Text
+    , _igmiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data InstanceGroupManagersInsert = InstanceGroupManagersInsert
 -- * 'igmiFields'
 --
 -- * 'igmiAlt'
-instanceGroupManagersInsert
+instanceGroupManagersInsert'
     :: Text -- ^ 'project'
     -> Int32 -- ^ 'size'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersInsert
-instanceGroupManagersInsert pIgmiProject_ pIgmiSize_ pIgmiZone_ =
-    InstanceGroupManagersInsert
+    -> InstanceGroupManagersInsert'
+instanceGroupManagersInsert' pIgmiProject_ pIgmiSize_ pIgmiZone_ =
+    InstanceGroupManagersInsert'
     { _igmiQuotaUser = Nothing
     , _igmiPrettyPrint = True
     , _igmiProject = pIgmiProject_
@@ -110,7 +118,7 @@ instanceGroupManagersInsert pIgmiProject_ pIgmiSize_ pIgmiZone_ =
     , _igmiKey = Nothing
     , _igmiOauthToken = Nothing
     , _igmiFields = Nothing
-    , _igmiAlt = "json"
+    , _igmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,7 +172,7 @@ igmiFields
   = lens _igmiFields (\ s a -> s{_igmiFields = a})
 
 -- | Data format for the response.
-igmiAlt :: Lens' InstanceGroupManagersInsert' Text
+igmiAlt :: Lens' InstanceGroupManagersInsert' Alt
 igmiAlt = lens _igmiAlt (\ s a -> s{_igmiAlt = a})
 
 instance GoogleRequest InstanceGroupManagersInsert'
@@ -172,17 +180,18 @@ instance GoogleRequest InstanceGroupManagersInsert'
         type Rs InstanceGroupManagersInsert' = Operation
         request
           = requestWithRoute defReq instanceGroupsManagerURL
-        requestWithRoute r u InstanceGroupManagersInsert{..}
-          = go _igmiQuotaUser _igmiPrettyPrint _igmiProject
+        requestWithRoute r u InstanceGroupManagersInsert'{..}
+          = go _igmiQuotaUser (Just _igmiPrettyPrint)
+              _igmiProject
               (Just _igmiSize)
               _igmiUserIp
               _igmiZone
               _igmiKey
               _igmiOauthToken
               _igmiFields
-              _igmiAlt
+              (Just _igmiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupManagersInsertAPI)
+                      (Proxy :: Proxy InstanceGroupManagersInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of directory sites, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesList@.
-module DFAReporting.DirectorySites.List
+module Network.Google.Resource.DFAReporting.DirectorySites.List
     (
     -- * REST Resource
-      DirectorySitesListAPI
+      DirectorySitesListResource
 
     -- * Creating a Request
-    , directorySitesList
-    , DirectorySitesList
+    , directorySitesList'
+    , DirectorySitesList'
 
     -- * Request Lenses
     , dslQuotaUser
@@ -56,30 +57,45 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingDirectorySitesList@ which the
--- 'DirectorySitesList' request conforms to.
-type DirectorySitesListAPI =
+-- 'DirectorySitesList'' request conforms to.
+type DirectorySitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySites" :>
-           QueryParam "searchString" Text :>
-             QueryParam "acceptsInterstitialPlacements" Bool :>
-               QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "active" Bool :>
-                       QueryParam "countryId" Int64 :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "sortField" Text :>
-                             QueryParam "acceptsInStreamVideoPlacements" Bool :>
-                               QueryParam "maxResults" Int32 :>
-                                 QueryParam "parentId" Int64 :>
-                                   QueryParam "dfp_network_code" Text :>
-                                     Get '[JSON] DirectorySitesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParam "acceptsInterstitialPlacements" Bool :>
+                     QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingDirectorySitesListSortOrder
+                           :>
+                           QueryParam "active" Bool :>
+                             QueryParam "key" Text :>
+                               QueryParam "countryId" Int64 :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "sortField"
+                                     DfareportingDirectorySitesListSortField
+                                     :>
+                                     QueryParam "acceptsInStreamVideoPlacements"
+                                       Bool
+                                       :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "parentId" Int64 :>
+                                             QueryParam "dfp_network_code" Text
+                                               :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Alt :>
+                                                   Get '[JSON]
+                                                     DirectorySitesListResponse
 
 -- | Retrieves a list of directory sites, possibly filtered.
 --
--- /See:/ 'directorySitesList' smart constructor.
-data DirectorySitesList = DirectorySitesList
+-- /See:/ 'directorySitesList'' smart constructor.
+data DirectorySitesList' = DirectorySitesList'
     { _dslQuotaUser                      :: !(Maybe Text)
     , _dslPrettyPrint                    :: !Bool
     , _dslUserIp                         :: !(Maybe Text)
@@ -88,19 +104,19 @@ data DirectorySitesList = DirectorySitesList
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
     , _dslIds                            :: !(Maybe Int64)
     , _dslProfileId                      :: !Int64
-    , _dslSortOrder                      :: !(Maybe Text)
+    , _dslSortOrder                      :: !(Maybe DfareportingDirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
     , _dslKey                            :: !(Maybe Text)
     , _dslCountryId                      :: !(Maybe Int64)
     , _dslPageToken                      :: !(Maybe Text)
-    , _dslSortField                      :: !(Maybe Text)
+    , _dslSortField                      :: !(Maybe DfareportingDirectorySitesListSortField)
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
     , _dslOauthToken                     :: !(Maybe Text)
     , _dslMaxResults                     :: !(Maybe Int32)
     , _dslParentId                       :: !(Maybe Int64)
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     , _dslFields                         :: !(Maybe Text)
-    , _dslAlt                            :: !Text
+    , _dslAlt                            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesList'' with the minimum fields required to make a request.
@@ -148,11 +164,11 @@ data DirectorySitesList = DirectorySitesList
 -- * 'dslFields'
 --
 -- * 'dslAlt'
-directorySitesList
+directorySitesList'
     :: Int64 -- ^ 'profileId'
-    -> DirectorySitesList
-directorySitesList pDslProfileId_ =
-    DirectorySitesList
+    -> DirectorySitesList'
+directorySitesList' pDslProfileId_ =
+    DirectorySitesList'
     { _dslQuotaUser = Nothing
     , _dslPrettyPrint = True
     , _dslUserIp = Nothing
@@ -173,7 +189,7 @@ directorySitesList pDslProfileId_ =
     , _dslParentId = Nothing
     , _dslDfpNetworkCode = Nothing
     , _dslFields = Nothing
-    , _dslAlt = "json"
+    , _dslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -232,7 +248,7 @@ dslProfileId
   = lens _dslProfileId (\ s a -> s{_dslProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-dslSortOrder :: Lens' DirectorySitesList' (Maybe Text)
+dslSortOrder :: Lens' DirectorySitesList' (Maybe DfareportingDirectorySitesListSortOrder)
 dslSortOrder
   = lens _dslSortOrder (\ s a -> s{_dslSortOrder = a})
 
@@ -259,7 +275,7 @@ dslPageToken
   = lens _dslPageToken (\ s a -> s{_dslPageToken = a})
 
 -- | Field by which to sort the list.
-dslSortField :: Lens' DirectorySitesList' (Maybe Text)
+dslSortField :: Lens' DirectorySitesList' (Maybe DfareportingDirectorySitesListSortField)
 dslSortField
   = lens _dslSortField (\ s a -> s{_dslSortField = a})
 
@@ -299,15 +315,15 @@ dslFields
   = lens _dslFields (\ s a -> s{_dslFields = a})
 
 -- | Data format for the response.
-dslAlt :: Lens' DirectorySitesList' Text
+dslAlt :: Lens' DirectorySitesList' Alt
 dslAlt = lens _dslAlt (\ s a -> s{_dslAlt = a})
 
 instance GoogleRequest DirectorySitesList' where
         type Rs DirectorySitesList' =
              DirectorySitesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesList{..}
-          = go _dslQuotaUser _dslPrettyPrint _dslUserIp
+        requestWithRoute r u DirectorySitesList'{..}
+          = go _dslQuotaUser (Just _dslPrettyPrint) _dslUserIp
               _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
@@ -325,9 +341,9 @@ instance GoogleRequest DirectorySitesList' where
               _dslParentId
               _dslDfpNetworkCode
               _dslFields
-              _dslAlt
+              (Just _dslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DirectorySitesListAPI)
+                      (Proxy :: Proxy DirectorySitesListResource)
                       r
                       u

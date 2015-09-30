@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists matching subscriptions.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsList@.
-module PubSub.Projects.Subscriptions.List
+module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     (
     -- * REST Resource
-      ProjectsSubscriptionsListAPI
+      ProjectsSubscriptionsListResource
 
     -- * Creating a Request
-    , projectsSubscriptionsList
-    , ProjectsSubscriptionsList
+    , projectsSubscriptionsList'
+    , ProjectsSubscriptionsList'
 
     -- * Request Lenses
     , pslXgafv
@@ -51,19 +52,32 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsList@ which the
--- 'ProjectsSubscriptionsList' request conforms to.
-type ProjectsSubscriptionsListAPI =
+-- 'ProjectsSubscriptionsList'' request conforms to.
+type ProjectsSubscriptionsListResource =
      "v1beta2" :>
        "{+project}" :>
          "subscriptions" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListSubscriptionsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListSubscriptionsResponse
 
 -- | Lists matching subscriptions.
 --
--- /See:/ 'projectsSubscriptionsList' smart constructor.
-data ProjectsSubscriptionsList = ProjectsSubscriptionsList
+-- /See:/ 'projectsSubscriptionsList'' smart constructor.
+data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
     { _pslXgafv          :: !(Maybe Text)
     , _pslQuotaUser      :: !(Maybe Text)
     , _pslPrettyPrint    :: !Bool
@@ -117,11 +131,11 @@ data ProjectsSubscriptionsList = ProjectsSubscriptionsList
 -- * 'pslCallback'
 --
 -- * 'pslAlt'
-projectsSubscriptionsList
+projectsSubscriptionsList'
     :: Text -- ^ 'project'
-    -> ProjectsSubscriptionsList
-projectsSubscriptionsList pPslProject_ =
-    ProjectsSubscriptionsList
+    -> ProjectsSubscriptionsList'
+projectsSubscriptionsList' pPslProject_ =
+    ProjectsSubscriptionsList'
     { _pslXgafv = Nothing
     , _pslQuotaUser = Nothing
     , _pslPrettyPrint = True
@@ -233,11 +247,11 @@ instance GoogleRequest ProjectsSubscriptionsList'
         type Rs ProjectsSubscriptionsList' =
              ListSubscriptionsResponse
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsList{..}
-          = go _pslXgafv _pslQuotaUser _pslPrettyPrint
+        requestWithRoute r u ProjectsSubscriptionsList'{..}
+          = go _pslXgafv _pslQuotaUser (Just _pslPrettyPrint)
               _pslUploadProtocol
               _pslProject
-              _pslPp
+              (Just _pslPp)
               _pslAccessToken
               _pslUploadType
               _pslBearerToken
@@ -247,9 +261,9 @@ instance GoogleRequest ProjectsSubscriptionsList'
               _pslPageSize
               _pslFields
               _pslCallback
-              _pslAlt
+              (Just _pslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsListAPI)
+                      (Proxy :: Proxy ProjectsSubscriptionsListResource)
                       r
                       u

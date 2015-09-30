@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Unpublish a map asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsUnpublish@.
-module Mapsengine.Maps.Unpublish
+module Network.Google.Resource.Mapsengine.Maps.Unpublish
     (
     -- * REST Resource
-      MapsUnpublishAPI
+      MapsUnpublishResource
 
     -- * Creating a Request
-    , mapsUnpublish
-    , MapsUnpublish
+    , mapsUnpublish'
+    , MapsUnpublish'
 
     -- * Request Lenses
     , muQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsUnpublish@ which the
--- 'MapsUnpublish' request conforms to.
-type MapsUnpublishAPI =
+-- 'MapsUnpublish'' request conforms to.
+type MapsUnpublishResource =
      "maps" :>
        Capture "id" Text :>
-         "unpublish" :> Post '[JSON] PublishResponse
+         "unpublish" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] PublishResponse
 
 -- | Unpublish a map asset.
 --
--- /See:/ 'mapsUnpublish' smart constructor.
-data MapsUnpublish = MapsUnpublish
+-- /See:/ 'mapsUnpublish'' smart constructor.
+data MapsUnpublish' = MapsUnpublish'
     { _muQuotaUser   :: !(Maybe Text)
     , _muPrettyPrint :: !Bool
     , _muUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data MapsUnpublish = MapsUnpublish
     , _muId          :: !Text
     , _muOauthToken  :: !(Maybe Text)
     , _muFields      :: !(Maybe Text)
-    , _muAlt         :: !Text
+    , _muAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsUnpublish'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data MapsUnpublish = MapsUnpublish
 -- * 'muFields'
 --
 -- * 'muAlt'
-mapsUnpublish
+mapsUnpublish'
     :: Text -- ^ 'id'
-    -> MapsUnpublish
-mapsUnpublish pMuId_ =
-    MapsUnpublish
+    -> MapsUnpublish'
+mapsUnpublish' pMuId_ =
+    MapsUnpublish'
     { _muQuotaUser = Nothing
     , _muPrettyPrint = True
     , _muUserIp = Nothing
@@ -94,7 +102,7 @@ mapsUnpublish pMuId_ =
     , _muId = pMuId_
     , _muOauthToken = Nothing
     , _muFields = Nothing
-    , _muAlt = "json"
+    , _muAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ muFields :: Lens' MapsUnpublish' (Maybe Text)
 muFields = lens _muFields (\ s a -> s{_muFields = a})
 
 -- | Data format for the response.
-muAlt :: Lens' MapsUnpublish' Text
+muAlt :: Lens' MapsUnpublish' Alt
 muAlt = lens _muAlt (\ s a -> s{_muAlt = a})
 
 instance GoogleRequest MapsUnpublish' where
         type Rs MapsUnpublish' = PublishResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsUnpublish{..}
-          = go _muQuotaUser _muPrettyPrint _muUserIp _muKey
+        requestWithRoute r u MapsUnpublish'{..}
+          = go _muQuotaUser (Just _muPrettyPrint) _muUserIp
+              _muKey
               _muId
               _muOauthToken
               _muFields
-              _muAlt
+              (Just _muAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsUnpublishAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MapsUnpublishResource)
+                      r
                       u

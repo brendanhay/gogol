@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineDelete@.
-module Mirror.Timeline.Delete
+module Network.Google.Resource.Mirror.Timeline.Delete
     (
     -- * REST Resource
-      TimelineDeleteAPI
+      TimelineDeleteResource
 
     -- * Creating a Request
-    , timelineDelete
-    , TimelineDelete
+    , timelineDelete'
+    , TimelineDelete'
 
     -- * Request Lenses
     , tdQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineDelete@ which the
--- 'TimelineDelete' request conforms to.
-type TimelineDeleteAPI =
-     "timeline" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'TimelineDelete'' request conforms to.
+type TimelineDeleteResource =
+     "timeline" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a timeline item.
 --
--- /See:/ 'timelineDelete' smart constructor.
-data TimelineDelete = TimelineDelete
+-- /See:/ 'timelineDelete'' smart constructor.
+data TimelineDelete' = TimelineDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data TimelineDelete = TimelineDelete
     , _tdId          :: !Text
     , _tdOauthToken  :: !(Maybe Text)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data TimelineDelete = TimelineDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-timelineDelete
+timelineDelete'
     :: Text -- ^ 'id'
-    -> TimelineDelete
-timelineDelete pTdId_ =
-    TimelineDelete
+    -> TimelineDelete'
+timelineDelete' pTdId_ =
+    TimelineDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
     , _tdUserIp = Nothing
@@ -92,7 +101,7 @@ timelineDelete pTdId_ =
     , _tdId = pTdId_
     , _tdOauthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,19 +142,21 @@ tdFields :: Lens' TimelineDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TimelineDelete' Text
+tdAlt :: Lens' TimelineDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineDelete{..}
-          = go _tdQuotaUser _tdPrettyPrint _tdUserIp _tdKey
+        requestWithRoute r u TimelineDelete'{..}
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+              _tdKey
               _tdId
               _tdOauthToken
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelineDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelineDeleteResource)
                       r
                       u

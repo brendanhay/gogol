@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List license assignments for given product and sku of the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsListForProductAndSku@.
-module Licensing.LicenseAssignments.ListForProductAndSku
+module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
     (
     -- * REST Resource
-      LicenseAssignmentsListForProductAndSkuAPI
+      LicenseAssignmentsListForProductAndSkuResource
 
     -- * Creating a Request
-    , licenseAssignmentsListForProductAndSku
-    , LicenseAssignmentsListForProductAndSku
+    , licenseAssignmentsListForProductAndSku'
+    , LicenseAssignmentsListForProductAndSku'
 
     -- * Request Lenses
     , lalfpasQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsListForProductAndSku@ which the
--- 'LicenseAssignmentsListForProductAndSku' request conforms to.
-type LicenseAssignmentsListForProductAndSkuAPI =
+-- 'LicenseAssignmentsListForProductAndSku'' request conforms to.
+type LicenseAssignmentsListForProductAndSkuResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
            "users" :>
-             QueryParam "customerId" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] LicenseAssignmentList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "customerId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product and sku of the customer.
 --
--- /See:/ 'licenseAssignmentsListForProductAndSku' smart constructor.
-data LicenseAssignmentsListForProductAndSku = LicenseAssignmentsListForProductAndSku
+-- /See:/ 'licenseAssignmentsListForProductAndSku'' smart constructor.
+data LicenseAssignmentsListForProductAndSku' = LicenseAssignmentsListForProductAndSku'
     { _lalfpasQuotaUser   :: !(Maybe Text)
     , _lalfpasPrettyPrint :: !Bool
     , _lalfpasUserIp      :: !(Maybe Text)
@@ -73,7 +81,7 @@ data LicenseAssignmentsListForProductAndSku = LicenseAssignmentsListForProductAn
     , _lalfpasProductId   :: !Text
     , _lalfpasMaxResults  :: !Word32
     , _lalfpasFields      :: !(Maybe Text)
-    , _lalfpasAlt         :: !Text
+    , _lalfpasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProductAndSku'' with the minimum fields required to make a request.
@@ -103,13 +111,13 @@ data LicenseAssignmentsListForProductAndSku = LicenseAssignmentsListForProductAn
 -- * 'lalfpasFields'
 --
 -- * 'lalfpasAlt'
-licenseAssignmentsListForProductAndSku
+licenseAssignmentsListForProductAndSku'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'customerId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsListForProductAndSku
-licenseAssignmentsListForProductAndSku pLalfpasSkuId_ pLalfpasCustomerId_ pLalfpasProductId_ =
-    LicenseAssignmentsListForProductAndSku
+    -> LicenseAssignmentsListForProductAndSku'
+licenseAssignmentsListForProductAndSku' pLalfpasSkuId_ pLalfpasCustomerId_ pLalfpasProductId_ =
+    LicenseAssignmentsListForProductAndSku'
     { _lalfpasQuotaUser = Nothing
     , _lalfpasPrettyPrint = True
     , _lalfpasUserIp = Nothing
@@ -121,7 +129,7 @@ licenseAssignmentsListForProductAndSku pLalfpasSkuId_ pLalfpasCustomerId_ pLalfp
     , _lalfpasProductId = pLalfpasProductId_
     , _lalfpasMaxResults = 100
     , _lalfpasFields = Nothing
-    , _lalfpasAlt = "json"
+    , _lalfpasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,7 +205,7 @@ lalfpasFields
       (\ s a -> s{_lalfpasFields = a})
 
 -- | Data format for the response.
-lalfpasAlt :: Lens' LicenseAssignmentsListForProductAndSku' Text
+lalfpasAlt :: Lens' LicenseAssignmentsListForProductAndSku' Alt
 lalfpasAlt
   = lens _lalfpasAlt (\ s a -> s{_lalfpasAlt = a})
 
@@ -207,8 +215,8 @@ instance GoogleRequest
              LicenseAssignmentList
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u
-          LicenseAssignmentsListForProductAndSku{..}
-          = go _lalfpasQuotaUser _lalfpasPrettyPrint
+          LicenseAssignmentsListForProductAndSku'{..}
+          = go _lalfpasQuotaUser (Just _lalfpasPrettyPrint)
               _lalfpasUserIp
               _lalfpasSkuId
               (Just _lalfpasCustomerId)
@@ -218,10 +226,10 @@ instance GoogleRequest
               _lalfpasProductId
               (Just _lalfpasMaxResults)
               _lalfpasFields
-              _lalfpasAlt
+              (Just _lalfpasAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy LicenseAssignmentsListForProductAndSkuAPI)
+                         Proxy LicenseAssignmentsListForProductAndSkuResource)
                       r
                       u

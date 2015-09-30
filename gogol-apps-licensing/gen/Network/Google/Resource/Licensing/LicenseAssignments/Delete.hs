@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Revoke License.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsDelete@.
-module Licensing.LicenseAssignments.Delete
+module Network.Google.Resource.Licensing.LicenseAssignments.Delete
     (
     -- * REST Resource
-      LicenseAssignmentsDeleteAPI
+      LicenseAssignmentsDeleteResource
 
     -- * Creating a Request
-    , licenseAssignmentsDelete
-    , LicenseAssignmentsDelete
+    , licenseAssignmentsDelete'
+    , LicenseAssignmentsDelete'
 
     -- * Request Lenses
     , ladQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsDelete@ which the
--- 'LicenseAssignmentsDelete' request conforms to.
-type LicenseAssignmentsDeleteAPI =
+-- 'LicenseAssignmentsDelete'' request conforms to.
+type LicenseAssignmentsDeleteResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
-           "user" :> Capture "userId" Text :> Delete '[JSON] ()
+           "user" :>
+             Capture "userId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Revoke License.
 --
--- /See:/ 'licenseAssignmentsDelete' smart constructor.
-data LicenseAssignmentsDelete = LicenseAssignmentsDelete
+-- /See:/ 'licenseAssignmentsDelete'' smart constructor.
+data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
     { _ladQuotaUser   :: !(Maybe Text)
     , _ladPrettyPrint :: !Bool
     , _ladUserIp      :: !(Maybe Text)
@@ -65,7 +74,7 @@ data LicenseAssignmentsDelete = LicenseAssignmentsDelete
     , _ladOauthToken  :: !(Maybe Text)
     , _ladProductId   :: !Text
     , _ladFields      :: !(Maybe Text)
-    , _ladAlt         :: !Text
+    , _ladAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsDelete'' with the minimum fields required to make a request.
@@ -91,13 +100,13 @@ data LicenseAssignmentsDelete = LicenseAssignmentsDelete
 -- * 'ladFields'
 --
 -- * 'ladAlt'
-licenseAssignmentsDelete
+licenseAssignmentsDelete'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsDelete
-licenseAssignmentsDelete pLadSkuId_ pLadUserId_ pLadProductId_ =
-    LicenseAssignmentsDelete
+    -> LicenseAssignmentsDelete'
+licenseAssignmentsDelete' pLadSkuId_ pLadUserId_ pLadProductId_ =
+    LicenseAssignmentsDelete'
     { _ladQuotaUser = Nothing
     , _ladPrettyPrint = True
     , _ladUserIp = Nothing
@@ -107,7 +116,7 @@ licenseAssignmentsDelete pLadSkuId_ pLadUserId_ pLadProductId_ =
     , _ladOauthToken = Nothing
     , _ladProductId = pLadProductId_
     , _ladFields = Nothing
-    , _ladAlt = "json"
+    , _ladAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,24 +170,24 @@ ladFields
   = lens _ladFields (\ s a -> s{_ladFields = a})
 
 -- | Data format for the response.
-ladAlt :: Lens' LicenseAssignmentsDelete' Text
+ladAlt :: Lens' LicenseAssignmentsDelete' Alt
 ladAlt = lens _ladAlt (\ s a -> s{_ladAlt = a})
 
 instance GoogleRequest LicenseAssignmentsDelete'
          where
         type Rs LicenseAssignmentsDelete' = ()
         request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsDelete{..}
-          = go _ladQuotaUser _ladPrettyPrint _ladUserIp
+        requestWithRoute r u LicenseAssignmentsDelete'{..}
+          = go _ladQuotaUser (Just _ladPrettyPrint) _ladUserIp
               _ladSkuId
               _ladUserId
               _ladKey
               _ladOauthToken
               _ladProductId
               _ladFields
-              _ladAlt
+              (Just _ladAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsDeleteAPI)
+                      (Proxy :: Proxy LicenseAssignmentsDeleteResource)
                       r
                       u

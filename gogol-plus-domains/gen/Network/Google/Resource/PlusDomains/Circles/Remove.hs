@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a circle.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference> for @PlusDomainsCirclesRemove@.
-module PlusDomains.Circles.Remove
+module Network.Google.Resource.PlusDomains.Circles.Remove
     (
     -- * REST Resource
-      CirclesRemoveAPI
+      CirclesRemoveResource
 
     -- * Creating a Request
-    , circlesRemove
-    , CirclesRemove
+    , circlesRemove'
+    , CirclesRemove'
 
     -- * Request Lenses
     , crQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.PlusDomains.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusDomainsCirclesRemove@ which the
--- 'CirclesRemove' request conforms to.
-type CirclesRemoveAPI =
+-- 'CirclesRemove'' request conforms to.
+type CirclesRemoveResource =
      "circles" :>
-       Capture "circleId" Text :> Delete '[JSON] ()
+       Capture "circleId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a circle.
 --
--- /See:/ 'circlesRemove' smart constructor.
-data CirclesRemove = CirclesRemove
+-- /See:/ 'circlesRemove'' smart constructor.
+data CirclesRemove' = CirclesRemove'
     { _crQuotaUser   :: !(Maybe Text)
     , _crPrettyPrint :: !Bool
     , _crUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CirclesRemove = CirclesRemove
     , _crCircleId    :: !Text
     , _crOauthToken  :: !(Maybe Text)
     , _crFields      :: !(Maybe Text)
-    , _crAlt         :: !Text
+    , _crAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemove'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CirclesRemove = CirclesRemove
 -- * 'crFields'
 --
 -- * 'crAlt'
-circlesRemove
+circlesRemove'
     :: Text -- ^ 'circleId'
-    -> CirclesRemove
-circlesRemove pCrCircleId_ =
-    CirclesRemove
+    -> CirclesRemove'
+circlesRemove' pCrCircleId_ =
+    CirclesRemove'
     { _crQuotaUser = Nothing
     , _crPrettyPrint = True
     , _crUserIp = Nothing
@@ -93,7 +101,7 @@ circlesRemove pCrCircleId_ =
     , _crCircleId = pCrCircleId_
     , _crOauthToken = Nothing
     , _crFields = Nothing
-    , _crAlt = "json"
+    , _crAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ crFields :: Lens' CirclesRemove' (Maybe Text)
 crFields = lens _crFields (\ s a -> s{_crFields = a})
 
 -- | Data format for the response.
-crAlt :: Lens' CirclesRemove' Text
+crAlt :: Lens' CirclesRemove' Alt
 crAlt = lens _crAlt (\ s a -> s{_crAlt = a})
 
 instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()
         request = requestWithRoute defReq plusDomainsURL
-        requestWithRoute r u CirclesRemove{..}
-          = go _crQuotaUser _crPrettyPrint _crUserIp _crKey
+        requestWithRoute r u CirclesRemove'{..}
+          = go _crQuotaUser (Just _crPrettyPrint) _crUserIp
+              _crKey
               _crCircleId
               _crOauthToken
               _crFields
-              _crAlt
+              (Just _crAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CirclesRemoveAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CirclesRemoveResource)
+                      r
                       u

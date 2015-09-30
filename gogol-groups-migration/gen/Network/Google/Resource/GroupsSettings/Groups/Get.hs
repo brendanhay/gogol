@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one resource by id.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsGet@.
-module GroupsSettings.Groups.Get
+module Network.Google.Resource.GroupsSettings.Groups.Get
     (
     -- * REST Resource
-      GroupsGetAPI
+      GroupsGetResource
 
     -- * Creating a Request
-    , groupsGet
-    , GroupsGet
+    , groupsGet'
+    , GroupsGet'
 
     -- * Request Lenses
     , ggQuotaUser
@@ -43,14 +44,21 @@ import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsGet@ which the
--- 'GroupsGet' request conforms to.
-type GroupsGetAPI =
-     Capture "groupUniqueId" Text :> Get '[JSON] Groups
+-- 'GroupsGet'' request conforms to.
+type GroupsGetResource =
+     Capture "groupUniqueId" Text :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] Groups
 
 -- | Gets one resource by id.
 --
--- /See:/ 'groupsGet' smart constructor.
-data GroupsGet = GroupsGet
+-- /See:/ 'groupsGet'' smart constructor.
+data GroupsGet' = GroupsGet'
     { _ggQuotaUser     :: !(Maybe Text)
     , _ggPrettyPrint   :: !Bool
     , _ggUserIp        :: !(Maybe Text)
@@ -58,7 +66,7 @@ data GroupsGet = GroupsGet
     , _ggOauthToken    :: !(Maybe Text)
     , _ggGroupUniqueId :: !Text
     , _ggFields        :: !(Maybe Text)
-    , _ggAlt           :: !Text
+    , _ggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
@@ -80,11 +88,11 @@ data GroupsGet = GroupsGet
 -- * 'ggFields'
 --
 -- * 'ggAlt'
-groupsGet
+groupsGet'
     :: Text -- ^ 'groupUniqueId'
-    -> GroupsGet
-groupsGet pGgGroupUniqueId_ =
-    GroupsGet
+    -> GroupsGet'
+groupsGet' pGgGroupUniqueId_ =
+    GroupsGet'
     { _ggQuotaUser = Nothing
     , _ggPrettyPrint = True
     , _ggUserIp = Nothing
@@ -92,7 +100,7 @@ groupsGet pGgGroupUniqueId_ =
     , _ggOauthToken = Nothing
     , _ggGroupUniqueId = pGgGroupUniqueId_
     , _ggFields = Nothing
-    , _ggAlt = "atom"
+    , _ggAlt = Atom
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,20 @@ ggFields :: Lens' GroupsGet' (Maybe Text)
 ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
 
 -- | Data format for the response.
-ggAlt :: Lens' GroupsGet' Text
+ggAlt :: Lens' GroupsGet' Alt
 ggAlt = lens _ggAlt (\ s a -> s{_ggAlt = a})
 
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Groups
         request = requestWithRoute defReq groupsSettingsURL
-        requestWithRoute r u GroupsGet{..}
-          = go _ggQuotaUser _ggPrettyPrint _ggUserIp _ggKey
+        requestWithRoute r u GroupsGet'{..}
+          = go _ggQuotaUser (Just _ggPrettyPrint) _ggUserIp
+              _ggKey
               _ggOauthToken
               _ggGroupUniqueId
               _ggFields
-              _ggAlt
+              (Just _ggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy GroupsGetResource)
+                      r
+                      u

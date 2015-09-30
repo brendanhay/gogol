@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one account permission group by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountPermissionGroupsGet@.
-module DFAReporting.AccountPermissionGroups.Get
+module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
     (
     -- * REST Resource
-      AccountPermissionGroupsGetAPI
+      AccountPermissionGroupsGetResource
 
     -- * Creating a Request
-    , accountPermissionGroupsGet
-    , AccountPermissionGroupsGet
+    , accountPermissionGroupsGet'
+    , AccountPermissionGroupsGet'
 
     -- * Request Lenses
     , apggQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountPermissionGroupsGet@ which the
--- 'AccountPermissionGroupsGet' request conforms to.
-type AccountPermissionGroupsGetAPI =
+-- 'AccountPermissionGroupsGet'' request conforms to.
+type AccountPermissionGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountPermissionGroups" :>
            Capture "id" Int64 :>
-             Get '[JSON] AccountPermissionGroup
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] AccountPermissionGroup
 
 -- | Gets one account permission group by ID.
 --
--- /See:/ 'accountPermissionGroupsGet' smart constructor.
-data AccountPermissionGroupsGet = AccountPermissionGroupsGet
+-- /See:/ 'accountPermissionGroupsGet'' smart constructor.
+data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
     { _apggQuotaUser   :: !(Maybe Text)
     , _apggPrettyPrint :: !Bool
     , _apggUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data AccountPermissionGroupsGet = AccountPermissionGroupsGet
     , _apggId          :: !Int64
     , _apggOauthToken  :: !(Maybe Text)
     , _apggFields      :: !(Maybe Text)
-    , _apggAlt         :: !Text
+    , _apggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountPermissionGroupsGet = AccountPermissionGroupsGet
 -- * 'apggFields'
 --
 -- * 'apggAlt'
-accountPermissionGroupsGet
+accountPermissionGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AccountPermissionGroupsGet
-accountPermissionGroupsGet pApggProfileId_ pApggId_ =
-    AccountPermissionGroupsGet
+    -> AccountPermissionGroupsGet'
+accountPermissionGroupsGet' pApggProfileId_ pApggId_ =
+    AccountPermissionGroupsGet'
     { _apggQuotaUser = Nothing
     , _apggPrettyPrint = True
     , _apggUserIp = Nothing
@@ -102,7 +110,7 @@ accountPermissionGroupsGet pApggProfileId_ pApggId_ =
     , _apggId = pApggId_
     , _apggOauthToken = Nothing
     , _apggFields = Nothing
-    , _apggAlt = "json"
+    , _apggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ apggFields
   = lens _apggFields (\ s a -> s{_apggFields = a})
 
 -- | Data format for the response.
-apggAlt :: Lens' AccountPermissionGroupsGet' Text
+apggAlt :: Lens' AccountPermissionGroupsGet' Alt
 apggAlt = lens _apggAlt (\ s a -> s{_apggAlt = a})
 
 instance GoogleRequest AccountPermissionGroupsGet'
@@ -161,16 +169,17 @@ instance GoogleRequest AccountPermissionGroupsGet'
         type Rs AccountPermissionGroupsGet' =
              AccountPermissionGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountPermissionGroupsGet{..}
-          = go _apggQuotaUser _apggPrettyPrint _apggUserIp
+        requestWithRoute r u AccountPermissionGroupsGet'{..}
+          = go _apggQuotaUser (Just _apggPrettyPrint)
+              _apggUserIp
               _apggProfileId
               _apggKey
               _apggId
               _apggOauthToken
               _apggFields
-              _apggAlt
+              (Just _apggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountPermissionGroupsGetAPI)
+                      (Proxy :: Proxy AccountPermissionGroupsGetResource)
                       r
                       u

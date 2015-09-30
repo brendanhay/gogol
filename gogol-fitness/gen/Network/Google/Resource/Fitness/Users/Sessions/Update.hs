@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates or insert a given session.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsUpdate@.
-module Fitness.Users.Sessions.Update
+module Network.Google.Resource.Fitness.Users.Sessions.Update
     (
     -- * REST Resource
-      UsersSessionsUpdateAPI
+      UsersSessionsUpdateResource
 
     -- * Creating a Request
-    , usersSessionsUpdate
-    , UsersSessionsUpdate
+    , usersSessionsUpdate'
+    , UsersSessionsUpdate'
 
     -- * Request Lenses
     , usuQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersSessionsUpdate@ which the
--- 'UsersSessionsUpdate' request conforms to.
-type UsersSessionsUpdateAPI =
+-- 'UsersSessionsUpdate'' request conforms to.
+type UsersSessionsUpdateResource =
      Capture "userId" Text :>
        "sessions" :>
          Capture "sessionId" Text :>
-           QueryParam "currentTimeMillis" Int64 :>
-             Put '[JSON] Session
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "currentTimeMillis" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Session
 
 -- | Updates or insert a given session.
 --
--- /See:/ 'usersSessionsUpdate' smart constructor.
-data UsersSessionsUpdate = UsersSessionsUpdate
+-- /See:/ 'usersSessionsUpdate'' smart constructor.
+data UsersSessionsUpdate' = UsersSessionsUpdate'
     { _usuQuotaUser         :: !(Maybe Text)
     , _usuPrettyPrint       :: !Bool
     , _usuUserIp            :: !(Maybe Text)
@@ -66,7 +73,7 @@ data UsersSessionsUpdate = UsersSessionsUpdate
     , _usuOauthToken        :: !(Maybe Text)
     , _usuSessionId         :: !Text
     , _usuFields            :: !(Maybe Text)
-    , _usuAlt               :: !Text
+    , _usuAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsUpdate'' with the minimum fields required to make a request.
@@ -92,12 +99,12 @@ data UsersSessionsUpdate = UsersSessionsUpdate
 -- * 'usuFields'
 --
 -- * 'usuAlt'
-usersSessionsUpdate
+usersSessionsUpdate'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'sessionId'
-    -> UsersSessionsUpdate
-usersSessionsUpdate pUsuUserId_ pUsuSessionId_ =
-    UsersSessionsUpdate
+    -> UsersSessionsUpdate'
+usersSessionsUpdate' pUsuUserId_ pUsuSessionId_ =
+    UsersSessionsUpdate'
     { _usuQuotaUser = Nothing
     , _usuPrettyPrint = True
     , _usuUserIp = Nothing
@@ -107,7 +114,7 @@ usersSessionsUpdate pUsuUserId_ pUsuSessionId_ =
     , _usuOauthToken = Nothing
     , _usuSessionId = pUsuSessionId_
     , _usuFields = Nothing
-    , _usuAlt = "json"
+    , _usuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ usuFields
   = lens _usuFields (\ s a -> s{_usuFields = a})
 
 -- | Data format for the response.
-usuAlt :: Lens' UsersSessionsUpdate' Text
+usuAlt :: Lens' UsersSessionsUpdate' Alt
 usuAlt = lens _usuAlt (\ s a -> s{_usuAlt = a})
 
 instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsUpdate{..}
-          = go _usuQuotaUser _usuPrettyPrint _usuUserIp
+        requestWithRoute r u UsersSessionsUpdate'{..}
+          = go _usuQuotaUser (Just _usuPrettyPrint) _usuUserIp
               _usuUserId
               _usuKey
               _usuCurrentTimeMillis
               _usuOauthToken
               _usuSessionId
               _usuFields
-              _usuAlt
+              (Just _usuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersSessionsUpdateAPI)
+                      (Proxy :: Proxy UsersSessionsUpdateResource)
                       r
                       u

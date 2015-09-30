@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Fetch the representation of an existing Change.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSChangesGet@.
-module DNS.Changes.Get
+module Network.Google.Resource.DNS.Changes.Get
     (
     -- * REST Resource
-      ChangesGetAPI
+      ChangesGetResource
 
     -- * Creating a Request
-    , changesGet
-    , ChangesGet
+    , changesGet'
+    , ChangesGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSChangesGet@ which the
--- 'ChangesGet' request conforms to.
-type ChangesGetAPI =
+-- 'ChangesGet'' request conforms to.
+type ChangesGetResource =
      Capture "project" Text :>
        "managedZones" :>
          Capture "managedZone" Text :>
            "changes" :>
-             Capture "changeId" Text :> Get '[JSON] Change
+             Capture "changeId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Change
 
 -- | Fetch the representation of an existing Change.
 --
--- /See:/ 'changesGet' smart constructor.
-data ChangesGet = ChangesGet
+-- /See:/ 'changesGet'' smart constructor.
+data ChangesGet' = ChangesGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgProject     :: !Text
@@ -66,7 +74,7 @@ data ChangesGet = ChangesGet
     , _cgOauthToken  :: !(Maybe Text)
     , _cgManagedZone :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data ChangesGet = ChangesGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-changesGet
+changesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'changeId'
     -> Text -- ^ 'managedZone'
-    -> ChangesGet
-changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
-    ChangesGet
+    -> ChangesGet'
+changesGet' pCgProject_ pCgChangeId_ pCgManagedZone_ =
+    ChangesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgProject = pCgProject_
@@ -108,7 +116,7 @@ changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
     , _cgOauthToken = Nothing
     , _cgManagedZone = pCgManagedZone_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,19 +171,22 @@ cgFields :: Lens' ChangesGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' ChangesGet' Text
+cgAlt :: Lens' ChangesGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ChangesGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgProject _cgUserIp
+        requestWithRoute r u ChangesGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgProject
+              _cgUserIp
               _cgChangeId
               _cgKey
               _cgOauthToken
               _cgManagedZone
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ChangesGetResource)
+                      r
+                      u

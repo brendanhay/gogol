@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- Permission Errors]. * \`NOT_FOUND\` if the alias does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesDelete@.
-module Classroom.Courses.Aliases.Delete
+module Network.Google.Resource.Classroom.Courses.Aliases.Delete
     (
     -- * REST Resource
-      CoursesAliasesDeleteAPI
+      CoursesAliasesDeleteResource
 
     -- * Creating a Request
-    , coursesAliasesDelete
-    , CoursesAliasesDelete
+    , coursesAliasesDelete'
+    , CoursesAliasesDelete'
 
     -- * Request Lenses
     , cadXgafv
@@ -53,21 +54,35 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesAliasesDelete@ which the
--- 'CoursesAliasesDelete' request conforms to.
-type CoursesAliasesDeleteAPI =
+-- 'CoursesAliasesDelete'' request conforms to.
+type CoursesAliasesDeleteResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "aliases" :>
-             Capture "alias" Text :> Delete '[JSON] Empty
+             Capture "alias" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 -- | Deletes an alias of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
 -- to remove the alias or for [general user permission errors][User
 -- Permission Errors]. * \`NOT_FOUND\` if the alias does not exist.
 --
--- /See:/ 'coursesAliasesDelete' smart constructor.
-data CoursesAliasesDelete = CoursesAliasesDelete
+-- /See:/ 'coursesAliasesDelete'' smart constructor.
+data CoursesAliasesDelete' = CoursesAliasesDelete'
     { _cadXgafv          :: !(Maybe Text)
     , _cadQuotaUser      :: !(Maybe Text)
     , _cadPrettyPrint    :: !Bool
@@ -118,12 +133,12 @@ data CoursesAliasesDelete = CoursesAliasesDelete
 -- * 'cadCallback'
 --
 -- * 'cadAlt'
-coursesAliasesDelete
+coursesAliasesDelete'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'alias'
-    -> CoursesAliasesDelete
-coursesAliasesDelete pCadCourseId_ pCadAlias_ =
-    CoursesAliasesDelete
+    -> CoursesAliasesDelete'
+coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
+    CoursesAliasesDelete'
     { _cadXgafv = Nothing
     , _cadQuotaUser = Nothing
     , _cadPrettyPrint = True
@@ -226,10 +241,10 @@ cadAlt = lens _cadAlt (\ s a -> s{_cadAlt = a})
 instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesAliasesDelete{..}
-          = go _cadXgafv _cadQuotaUser _cadPrettyPrint
+        requestWithRoute r u CoursesAliasesDelete'{..}
+          = go _cadXgafv _cadQuotaUser (Just _cadPrettyPrint)
               _cadUploadProtocol
-              _cadPp
+              (Just _cadPp)
               _cadCourseId
               _cadAccessToken
               _cadUploadType
@@ -239,9 +254,9 @@ instance GoogleRequest CoursesAliasesDelete' where
               _cadOauthToken
               _cadFields
               _cadCallback
-              _cadAlt
+              (Just _cadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesAliasesDeleteAPI)
+                      (Proxy :: Proxy CoursesAliasesDeleteResource)
                       r
                       u

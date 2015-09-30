@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the specified Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalOperationsGet@.
-module Compute.GlobalOperations.Get
+module Network.Google.Resource.Compute.GlobalOperations.Get
     (
     -- * REST Resource
-      GlobalOperationsGetAPI
+      GlobalOperationsGetResource
 
     -- * Creating a Request
-    , globalOperationsGet
-    , GlobalOperationsGet
+    , globalOperationsGet'
+    , GlobalOperationsGet'
 
     -- * Request Lenses
     , gogQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalOperationsGet@ which the
--- 'GlobalOperationsGet' request conforms to.
-type GlobalOperationsGetAPI =
+-- 'GlobalOperationsGet'' request conforms to.
+type GlobalOperationsGetResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           Capture "operation" Text :> Get '[JSON] Operation
+           Capture "operation" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Retrieves the specified Operations resource.
 --
--- /See:/ 'globalOperationsGet' smart constructor.
-data GlobalOperationsGet = GlobalOperationsGet
+-- /See:/ 'globalOperationsGet'' smart constructor.
+data GlobalOperationsGet' = GlobalOperationsGet'
     { _gogQuotaUser   :: !(Maybe Text)
     , _gogPrettyPrint :: !Bool
     , _gogProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalOperationsGet = GlobalOperationsGet
     , _gogKey         :: !(Maybe Text)
     , _gogOauthToken  :: !(Maybe Text)
     , _gogFields      :: !(Maybe Text)
-    , _gogAlt         :: !Text
+    , _gogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalOperationsGet = GlobalOperationsGet
 -- * 'gogFields'
 --
 -- * 'gogAlt'
-globalOperationsGet
+globalOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
-    -> GlobalOperationsGet
-globalOperationsGet pGogProject_ pGogOperation_ =
-    GlobalOperationsGet
+    -> GlobalOperationsGet'
+globalOperationsGet' pGogProject_ pGogOperation_ =
+    GlobalOperationsGet'
     { _gogQuotaUser = Nothing
     , _gogPrettyPrint = True
     , _gogProject = pGogProject_
@@ -101,7 +109,7 @@ globalOperationsGet pGogProject_ pGogOperation_ =
     , _gogKey = Nothing
     , _gogOauthToken = Nothing
     , _gogFields = Nothing
-    , _gogAlt = "json"
+    , _gogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ gogFields
   = lens _gogFields (\ s a -> s{_gogFields = a})
 
 -- | Data format for the response.
-gogAlt :: Lens' GlobalOperationsGet' Text
+gogAlt :: Lens' GlobalOperationsGet' Alt
 gogAlt = lens _gogAlt (\ s a -> s{_gogAlt = a})
 
 instance GoogleRequest GlobalOperationsGet' where
         type Rs GlobalOperationsGet' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalOperationsGet{..}
-          = go _gogQuotaUser _gogPrettyPrint _gogProject
+        requestWithRoute r u GlobalOperationsGet'{..}
+          = go _gogQuotaUser (Just _gogPrettyPrint) _gogProject
               _gogOperation
               _gogUserIp
               _gogKey
               _gogOauthToken
               _gogFields
-              _gogAlt
+              (Just _gogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalOperationsGetAPI)
+                      (Proxy :: Proxy GlobalOperationsGetResource)
                       r
                       u

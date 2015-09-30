@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of columns.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnList@.
-module FusionTables.Column.List
+module Network.Google.Resource.FusionTables.Column.List
     (
     -- * REST Resource
-      ColumnListAPI
+      ColumnListResource
 
     -- * Creating a Request
-    , columnList
-    , ColumnList
+    , columnList'
+    , ColumnList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnList@ which the
--- 'ColumnList' request conforms to.
-type ColumnListAPI =
+-- 'ColumnList'' request conforms to.
+type ColumnListResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ColumnList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ColumnList
 
 -- | Retrieves a list of columns.
 --
--- /See:/ 'columnList' smart constructor.
-data ColumnList = ColumnList
+-- /See:/ 'columnList'' smart constructor.
+data ColumnList' = ColumnList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data ColumnList = ColumnList
     , _clTableId     :: !Text
     , _clMaxResults  :: !(Maybe Word32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data ColumnList = ColumnList
 -- * 'clFields'
 --
 -- * 'clAlt'
-columnList
+columnList'
     :: Text -- ^ 'tableId'
-    -> ColumnList
-columnList pClTableId_ =
-    ColumnList
+    -> ColumnList'
+columnList' pClTableId_ =
+    ColumnList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clUserIp = Nothing
@@ -107,7 +114,7 @@ columnList pClTableId_ =
     , _clTableId = pClTableId_
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,19 +166,22 @@ clFields :: Lens' ColumnList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' ColumnList' Text
+clAlt :: Lens' ColumnList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest ColumnList' where
         type Rs ColumnList' = ColumnList
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnList{..}
-          = go _clQuotaUser _clPrettyPrint _clUserIp _clKey
+        requestWithRoute r u ColumnList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
+              _clKey
               _clPageToken
               _clOauthToken
               _clTableId
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ColumnListResource)
+                      r
+                      u

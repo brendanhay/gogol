@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesInsert@.
-module Compute.GlobalAddresses.Insert
+module Network.Google.Resource.Compute.GlobalAddresses.Insert
     (
     -- * REST Resource
-      GlobalAddressesInsertAPI
+      GlobalAddressesInsertResource
 
     -- * Creating a Request
-    , globalAddressesInsert
-    , GlobalAddressesInsert
+    , globalAddressesInsert'
+    , GlobalAddressesInsert'
 
     -- * Request Lenses
     , gaiQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalAddressesInsert@ which the
--- 'GlobalAddressesInsert' request conforms to.
-type GlobalAddressesInsertAPI =
+-- 'GlobalAddressesInsert'' request conforms to.
+type GlobalAddressesInsertResource =
      Capture "project" Text :>
-       "global" :> "addresses" :> Post '[JSON] Operation
+       "global" :>
+         "addresses" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'globalAddressesInsert' smart constructor.
-data GlobalAddressesInsert = GlobalAddressesInsert
+-- /See:/ 'globalAddressesInsert'' smart constructor.
+data GlobalAddressesInsert' = GlobalAddressesInsert'
     { _gaiQuotaUser   :: !(Maybe Text)
     , _gaiPrettyPrint :: !Bool
     , _gaiProject     :: !Text
@@ -61,7 +70,7 @@ data GlobalAddressesInsert = GlobalAddressesInsert
     , _gaiKey         :: !(Maybe Text)
     , _gaiOauthToken  :: !(Maybe Text)
     , _gaiFields      :: !(Maybe Text)
-    , _gaiAlt         :: !Text
+    , _gaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data GlobalAddressesInsert = GlobalAddressesInsert
 -- * 'gaiFields'
 --
 -- * 'gaiAlt'
-globalAddressesInsert
+globalAddressesInsert'
     :: Text -- ^ 'project'
-    -> GlobalAddressesInsert
-globalAddressesInsert pGaiProject_ =
-    GlobalAddressesInsert
+    -> GlobalAddressesInsert'
+globalAddressesInsert' pGaiProject_ =
+    GlobalAddressesInsert'
     { _gaiQuotaUser = Nothing
     , _gaiPrettyPrint = True
     , _gaiProject = pGaiProject_
@@ -95,7 +104,7 @@ globalAddressesInsert pGaiProject_ =
     , _gaiKey = Nothing
     , _gaiOauthToken = Nothing
     , _gaiFields = Nothing
-    , _gaiAlt = "json"
+    , _gaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +149,21 @@ gaiFields
   = lens _gaiFields (\ s a -> s{_gaiFields = a})
 
 -- | Data format for the response.
-gaiAlt :: Lens' GlobalAddressesInsert' Text
+gaiAlt :: Lens' GlobalAddressesInsert' Alt
 gaiAlt = lens _gaiAlt (\ s a -> s{_gaiAlt = a})
 
 instance GoogleRequest GlobalAddressesInsert' where
         type Rs GlobalAddressesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesInsert{..}
-          = go _gaiQuotaUser _gaiPrettyPrint _gaiProject
+        requestWithRoute r u GlobalAddressesInsert'{..}
+          = go _gaiQuotaUser (Just _gaiPrettyPrint) _gaiProject
               _gaiUserIp
               _gaiKey
               _gaiOauthToken
               _gaiFields
-              _gaiAlt
+              (Just _gaiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAddressesInsertAPI)
+                      (Proxy :: Proxy GlobalAddressesInsertResource)
                       r
                       u

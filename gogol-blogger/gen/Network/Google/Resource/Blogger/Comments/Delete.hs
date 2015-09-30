@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a comment by ID.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerCommentsDelete@.
-module Blogger.Comments.Delete
+module Network.Google.Resource.Blogger.Comments.Delete
     (
     -- * REST Resource
-      CommentsDeleteAPI
+      CommentsDeleteResource
 
     -- * Creating a Request
-    , commentsDelete
-    , CommentsDelete
+    , commentsDelete'
+    , CommentsDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerCommentsDelete@ which the
--- 'CommentsDelete' request conforms to.
-type CommentsDeleteAPI =
+-- 'CommentsDelete'' request conforms to.
+type CommentsDeleteResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              "comments" :>
-               Capture "commentId" Text :> Delete '[JSON] ()
+               Capture "commentId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a comment by ID.
 --
--- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete
+-- /See:/ 'commentsDelete'' smart constructor.
+data CommentsDelete' = CommentsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
     , _cdUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data CommentsDelete = CommentsDelete
     , _cdOauthToken  :: !(Maybe Text)
     , _cdCommentId   :: !Text
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Text
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data CommentsDelete = CommentsDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-commentsDelete
+commentsDelete'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> Text -- ^ 'commentId'
-    -> CommentsDelete
-commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
-    CommentsDelete
+    -> CommentsDelete'
+commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ =
+    CommentsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdUserIp = Nothing
@@ -109,7 +117,7 @@ commentsDelete pCdBlogId_ pCdPostId_ pCdCommentId_ =
     , _cdOauthToken = Nothing
     , _cdCommentId = pCdCommentId_
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,21 +167,23 @@ cdFields :: Lens' CommentsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CommentsDelete' Text
+cdAlt :: Lens' CommentsDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u CommentsDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdUserIp _cdBlogId
+        requestWithRoute r u CommentsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+              _cdBlogId
               _cdKey
               _cdPostId
               _cdOauthToken
               _cdCommentId
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsDeleteResource)
                       r
                       u

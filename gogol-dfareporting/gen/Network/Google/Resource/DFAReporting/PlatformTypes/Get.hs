@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one platform type by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlatformTypesGet@.
-module DFAReporting.PlatformTypes.Get
+module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     (
     -- * REST Resource
-      PlatformTypesGetAPI
+      PlatformTypesGetResource
 
     -- * Creating a Request
-    , platformTypesGet
-    , PlatformTypesGet
+    , platformTypesGet'
+    , PlatformTypesGet'
 
     -- * Request Lenses
     , ptgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlatformTypesGet@ which the
--- 'PlatformTypesGet' request conforms to.
-type PlatformTypesGetAPI =
+-- 'PlatformTypesGet'' request conforms to.
+type PlatformTypesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "platformTypes" :>
-           Capture "id" Int64 :> Get '[JSON] PlatformType
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
 --
--- /See:/ 'platformTypesGet' smart constructor.
-data PlatformTypesGet = PlatformTypesGet
+-- /See:/ 'platformTypesGet'' smart constructor.
+data PlatformTypesGet' = PlatformTypesGet'
     { _ptgQuotaUser   :: !(Maybe Text)
     , _ptgPrettyPrint :: !Bool
     , _ptgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PlatformTypesGet = PlatformTypesGet
     , _ptgId          :: !Int64
     , _ptgOauthToken  :: !(Maybe Text)
     , _ptgFields      :: !(Maybe Text)
-    , _ptgAlt         :: !Text
+    , _ptgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PlatformTypesGet = PlatformTypesGet
 -- * 'ptgFields'
 --
 -- * 'ptgAlt'
-platformTypesGet
+platformTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> PlatformTypesGet
-platformTypesGet pPtgProfileId_ pPtgId_ =
-    PlatformTypesGet
+    -> PlatformTypesGet'
+platformTypesGet' pPtgProfileId_ pPtgId_ =
+    PlatformTypesGet'
     { _ptgQuotaUser = Nothing
     , _ptgPrettyPrint = True
     , _ptgUserIp = Nothing
@@ -101,7 +109,7 @@ platformTypesGet pPtgProfileId_ pPtgId_ =
     , _ptgId = pPtgId_
     , _ptgOauthToken = Nothing
     , _ptgFields = Nothing
-    , _ptgAlt = "json"
+    , _ptgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ ptgFields
   = lens _ptgFields (\ s a -> s{_ptgFields = a})
 
 -- | Data format for the response.
-ptgAlt :: Lens' PlatformTypesGet' Text
+ptgAlt :: Lens' PlatformTypesGet' Alt
 ptgAlt = lens _ptgAlt (\ s a -> s{_ptgAlt = a})
 
 instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlatformTypesGet{..}
-          = go _ptgQuotaUser _ptgPrettyPrint _ptgUserIp
+        requestWithRoute r u PlatformTypesGet'{..}
+          = go _ptgQuotaUser (Just _ptgPrettyPrint) _ptgUserIp
               _ptgProfileId
               _ptgKey
               _ptgId
               _ptgOauthToken
               _ptgFields
-              _ptgAlt
+              (Just _ptgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlatformTypesGetAPI)
+                      (Proxy :: Proxy PlatformTypesGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new floodlight activity.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesInsert@.
-module DFAReporting.FloodlightActivities.Insert
+module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
     (
     -- * REST Resource
-      FloodlightActivitiesInsertAPI
+      FloodlightActivitiesInsertResource
 
     -- * Creating a Request
-    , floodlightActivitiesInsert
-    , FloodlightActivitiesInsert
+    , floodlightActivitiesInsert'
+    , FloodlightActivitiesInsert'
 
     -- * Request Lenses
     , faiQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesInsert@ which the
--- 'FloodlightActivitiesInsert' request conforms to.
-type FloodlightActivitiesInsertAPI =
+-- 'FloodlightActivitiesInsert'' request conforms to.
+type FloodlightActivitiesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           Post '[JSON] FloodlightActivity
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] FloodlightActivity
 
 -- | Inserts a new floodlight activity.
 --
--- /See:/ 'floodlightActivitiesInsert' smart constructor.
-data FloodlightActivitiesInsert = FloodlightActivitiesInsert
+-- /See:/ 'floodlightActivitiesInsert'' smart constructor.
+data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
     { _faiQuotaUser   :: !(Maybe Text)
     , _faiPrettyPrint :: !Bool
     , _faiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data FloodlightActivitiesInsert = FloodlightActivitiesInsert
     , _faiKey         :: !(Maybe Text)
     , _faiOauthToken  :: !(Maybe Text)
     , _faiFields      :: !(Maybe Text)
-    , _faiAlt         :: !Text
+    , _faiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data FloodlightActivitiesInsert = FloodlightActivitiesInsert
 -- * 'faiFields'
 --
 -- * 'faiAlt'
-floodlightActivitiesInsert
+floodlightActivitiesInsert'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivitiesInsert
-floodlightActivitiesInsert pFaiProfileId_ =
-    FloodlightActivitiesInsert
+    -> FloodlightActivitiesInsert'
+floodlightActivitiesInsert' pFaiProfileId_ =
+    FloodlightActivitiesInsert'
     { _faiQuotaUser = Nothing
     , _faiPrettyPrint = True
     , _faiUserIp = Nothing
@@ -95,7 +103,7 @@ floodlightActivitiesInsert pFaiProfileId_ =
     , _faiKey = Nothing
     , _faiOauthToken = Nothing
     , _faiFields = Nothing
-    , _faiAlt = "json"
+    , _faiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ faiFields
   = lens _faiFields (\ s a -> s{_faiFields = a})
 
 -- | Data format for the response.
-faiAlt :: Lens' FloodlightActivitiesInsert' Text
+faiAlt :: Lens' FloodlightActivitiesInsert' Alt
 faiAlt = lens _faiAlt (\ s a -> s{_faiAlt = a})
 
 instance GoogleRequest FloodlightActivitiesInsert'
@@ -148,15 +156,15 @@ instance GoogleRequest FloodlightActivitiesInsert'
         type Rs FloodlightActivitiesInsert' =
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesInsert{..}
-          = go _faiQuotaUser _faiPrettyPrint _faiUserIp
+        requestWithRoute r u FloodlightActivitiesInsert'{..}
+          = go _faiQuotaUser (Just _faiPrettyPrint) _faiUserIp
               _faiProfileId
               _faiKey
               _faiOauthToken
               _faiFields
-              _faiAlt
+              (Just _faiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesInsertAPI)
+                      (Proxy :: Proxy FloodlightActivitiesInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,155 +20,169 @@
 -- | Gets one blog page by ID.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesGet@.
-module Blogger.Pages.Get
+module Network.Google.Resource.Blogger.Pages.Get
     (
     -- * REST Resource
-      PagesGetAPI
+      PagesGetResource
 
     -- * Creating a Request
-    , pagesGet
-    , PagesGet
+    , pagesGet'
+    , PagesGet'
 
     -- * Request Lenses
-    , pgQuotaUser
-    , pgPrettyPrint
-    , pgUserIp
-    , pgBlogId
-    , pgPageId
-    , pgKey
-    , pgView
-    , pgOauthToken
-    , pgFields
-    , pgAlt
+    , pggQuotaUser
+    , pggPrettyPrint
+    , pggUserIp
+    , pggBlogId
+    , pggPageId
+    , pggKey
+    , pggView
+    , pggOauthToken
+    , pggFields
+    , pggAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesGet@ which the
--- 'PagesGet' request conforms to.
-type PagesGetAPI =
+-- 'PagesGet'' request conforms to.
+type PagesGetResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "view" Text :> Get '[JSON] Page
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "view" BloggerPagesGetView :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Page
 
 -- | Gets one blog page by ID.
 --
--- /See:/ 'pagesGet' smart constructor.
-data PagesGet = PagesGet
-    { _pgQuotaUser   :: !(Maybe Text)
-    , _pgPrettyPrint :: !Bool
-    , _pgUserIp      :: !(Maybe Text)
-    , _pgBlogId      :: !Text
-    , _pgPageId      :: !Text
-    , _pgKey         :: !(Maybe Text)
-    , _pgView        :: !(Maybe Text)
-    , _pgOauthToken  :: !(Maybe Text)
-    , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+-- /See:/ 'pagesGet'' smart constructor.
+data PagesGet' = PagesGet'
+    { _pggQuotaUser   :: !(Maybe Text)
+    , _pggPrettyPrint :: !Bool
+    , _pggUserIp      :: !(Maybe Text)
+    , _pggBlogId      :: !Text
+    , _pggPageId      :: !Text
+    , _pggKey         :: !(Maybe Text)
+    , _pggView        :: !(Maybe BloggerPagesGetView)
+    , _pggOauthToken  :: !(Maybe Text)
+    , _pggFields      :: !(Maybe Text)
+    , _pggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pgQuotaUser'
+-- * 'pggQuotaUser'
 --
--- * 'pgPrettyPrint'
+-- * 'pggPrettyPrint'
 --
--- * 'pgUserIp'
+-- * 'pggUserIp'
 --
--- * 'pgBlogId'
+-- * 'pggBlogId'
 --
--- * 'pgPageId'
+-- * 'pggPageId'
 --
--- * 'pgKey'
+-- * 'pggKey'
 --
--- * 'pgView'
+-- * 'pggView'
 --
--- * 'pgOauthToken'
+-- * 'pggOauthToken'
 --
--- * 'pgFields'
+-- * 'pggFields'
 --
--- * 'pgAlt'
-pagesGet
+-- * 'pggAlt'
+pagesGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
-    -> PagesGet
-pagesGet pPgBlogId_ pPgPageId_ =
-    PagesGet
-    { _pgQuotaUser = Nothing
-    , _pgPrettyPrint = True
-    , _pgUserIp = Nothing
-    , _pgBlogId = pPgBlogId_
-    , _pgPageId = pPgPageId_
-    , _pgKey = Nothing
-    , _pgView = Nothing
-    , _pgOauthToken = Nothing
-    , _pgFields = Nothing
-    , _pgAlt = "json"
+    -> PagesGet'
+pagesGet' pPggBlogId_ pPggPageId_ =
+    PagesGet'
+    { _pggQuotaUser = Nothing
+    , _pggPrettyPrint = True
+    , _pggUserIp = Nothing
+    , _pggBlogId = pPggBlogId_
+    , _pggPageId = pPggPageId_
+    , _pggKey = Nothing
+    , _pggView = Nothing
+    , _pggOauthToken = Nothing
+    , _pggFields = Nothing
+    , _pggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-pgQuotaUser :: Lens' PagesGet' (Maybe Text)
-pgQuotaUser
-  = lens _pgQuotaUser (\ s a -> s{_pgQuotaUser = a})
+pggQuotaUser :: Lens' PagesGet' (Maybe Text)
+pggQuotaUser
+  = lens _pggQuotaUser (\ s a -> s{_pggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-pgPrettyPrint :: Lens' PagesGet' Bool
-pgPrettyPrint
-  = lens _pgPrettyPrint
-      (\ s a -> s{_pgPrettyPrint = a})
+pggPrettyPrint :: Lens' PagesGet' Bool
+pggPrettyPrint
+  = lens _pggPrettyPrint
+      (\ s a -> s{_pggPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' PagesGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pggUserIp :: Lens' PagesGet' (Maybe Text)
+pggUserIp
+  = lens _pggUserIp (\ s a -> s{_pggUserIp = a})
 
 -- | ID of the blog containing the page.
-pgBlogId :: Lens' PagesGet' Text
-pgBlogId = lens _pgBlogId (\ s a -> s{_pgBlogId = a})
+pggBlogId :: Lens' PagesGet' Text
+pggBlogId
+  = lens _pggBlogId (\ s a -> s{_pggBlogId = a})
 
 -- | The ID of the page to get.
-pgPageId :: Lens' PagesGet' Text
-pgPageId = lens _pgPageId (\ s a -> s{_pgPageId = a})
+pggPageId :: Lens' PagesGet' Text
+pggPageId
+  = lens _pggPageId (\ s a -> s{_pggPageId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PagesGet' (Maybe Text)
-pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
+pggKey :: Lens' PagesGet' (Maybe Text)
+pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
-pgView :: Lens' PagesGet' (Maybe Text)
-pgView = lens _pgView (\ s a -> s{_pgView = a})
+pggView :: Lens' PagesGet' (Maybe BloggerPagesGetView)
+pggView = lens _pggView (\ s a -> s{_pggView = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' PagesGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pggOauthToken :: Lens' PagesGet' (Maybe Text)
+pggOauthToken
+  = lens _pggOauthToken
+      (\ s a -> s{_pggOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-pgFields :: Lens' PagesGet' (Maybe Text)
-pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
+pggFields :: Lens' PagesGet' (Maybe Text)
+pggFields
+  = lens _pggFields (\ s a -> s{_pggFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PagesGet' Text
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+pggAlt :: Lens' PagesGet' Alt
+pggAlt = lens _pggAlt (\ s a -> s{_pggAlt = a})
 
 instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgBlogId
-              _pgPageId
-              _pgKey
-              _pgView
-              _pgOauthToken
-              _pgFields
-              _pgAlt
+        requestWithRoute r u PagesGet'{..}
+          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIp
+              _pggBlogId
+              _pggPageId
+              _pggKey
+              _pggView
+              _pggOauthToken
+              _pggFields
+              (Just _pggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PagesGetResource) r
+                      u

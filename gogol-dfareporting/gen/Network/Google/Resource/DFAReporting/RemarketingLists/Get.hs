@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one remarketing list by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsGet@.
-module DFAReporting.RemarketingLists.Get
+module Network.Google.Resource.DFAReporting.RemarketingLists.Get
     (
     -- * REST Resource
-      RemarketingListsGetAPI
+      RemarketingListsGetResource
 
     -- * Creating a Request
-    , remarketingListsGet
-    , RemarketingListsGet
+    , remarketingListsGet'
+    , RemarketingListsGet'
 
     -- * Request Lenses
     , rlgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListsGet@ which the
--- 'RemarketingListsGet' request conforms to.
-type RemarketingListsGetAPI =
+-- 'RemarketingListsGet'' request conforms to.
+type RemarketingListsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingLists" :>
-           Capture "id" Int64 :> Get '[JSON] RemarketingList
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] RemarketingList
 
 -- | Gets one remarketing list by ID.
 --
--- /See:/ 'remarketingListsGet' smart constructor.
-data RemarketingListsGet = RemarketingListsGet
+-- /See:/ 'remarketingListsGet'' smart constructor.
+data RemarketingListsGet' = RemarketingListsGet'
     { _rlgQuotaUser   :: !(Maybe Text)
     , _rlgPrettyPrint :: !Bool
     , _rlgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data RemarketingListsGet = RemarketingListsGet
     , _rlgId          :: !Int64
     , _rlgOauthToken  :: !(Maybe Text)
     , _rlgFields      :: !(Maybe Text)
-    , _rlgAlt         :: !Text
+    , _rlgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data RemarketingListsGet = RemarketingListsGet
 -- * 'rlgFields'
 --
 -- * 'rlgAlt'
-remarketingListsGet
+remarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> RemarketingListsGet
-remarketingListsGet pRlgProfileId_ pRlgId_ =
-    RemarketingListsGet
+    -> RemarketingListsGet'
+remarketingListsGet' pRlgProfileId_ pRlgId_ =
+    RemarketingListsGet'
     { _rlgQuotaUser = Nothing
     , _rlgPrettyPrint = True
     , _rlgUserIp = Nothing
@@ -101,7 +109,7 @@ remarketingListsGet pRlgProfileId_ pRlgId_ =
     , _rlgId = pRlgId_
     , _rlgOauthToken = Nothing
     , _rlgFields = Nothing
-    , _rlgAlt = "json"
+    , _rlgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ rlgFields
   = lens _rlgFields (\ s a -> s{_rlgFields = a})
 
 -- | Data format for the response.
-rlgAlt :: Lens' RemarketingListsGet' Text
+rlgAlt :: Lens' RemarketingListsGet' Alt
 rlgAlt = lens _rlgAlt (\ s a -> s{_rlgAlt = a})
 
 instance GoogleRequest RemarketingListsGet' where
         type Rs RemarketingListsGet' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsGet{..}
-          = go _rlgQuotaUser _rlgPrettyPrint _rlgUserIp
+        requestWithRoute r u RemarketingListsGet'{..}
+          = go _rlgQuotaUser (Just _rlgPrettyPrint) _rlgUserIp
               _rlgProfileId
               _rlgKey
               _rlgId
               _rlgOauthToken
               _rlgFields
-              _rlgAlt
+              (Just _rlgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListsGetAPI)
+                      (Proxy :: Proxy RemarketingListsGetResource)
                       r
                       u

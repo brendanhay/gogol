@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsPermissionsList@.
-module Mapsengine.RasterCollections.Permissions.List
+module Network.Google.Resource.Mapsengine.RasterCollections.Permissions.List
     (
     -- * REST Resource
-      RasterCollectionsPermissionsListAPI
+      RasterCollectionsPermissionsListResource
 
     -- * Creating a Request
-    , rasterCollectionsPermissionsList
-    , RasterCollectionsPermissionsList
+    , rasterCollectionsPermissionsList'
+    , RasterCollectionsPermissionsList'
 
     -- * Request Lenses
     , rcplcQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsPermissionsList@ which the
--- 'RasterCollectionsPermissionsList' request conforms to.
-type RasterCollectionsPermissionsListAPI =
+-- 'RasterCollectionsPermissionsList'' request conforms to.
+type RasterCollectionsPermissionsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
-         "permissions" :> Get '[JSON] PermissionsListResponse
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] PermissionsListResponse
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'rasterCollectionsPermissionsList' smart constructor.
-data RasterCollectionsPermissionsList = RasterCollectionsPermissionsList
+-- /See:/ 'rasterCollectionsPermissionsList'' smart constructor.
+data RasterCollectionsPermissionsList' = RasterCollectionsPermissionsList'
     { _rcplcQuotaUser   :: !(Maybe Text)
     , _rcplcPrettyPrint :: !Bool
     , _rcplcUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data RasterCollectionsPermissionsList = RasterCollectionsPermissionsList
     , _rcplcId          :: !Text
     , _rcplcOauthToken  :: !(Maybe Text)
     , _rcplcFields      :: !(Maybe Text)
-    , _rcplcAlt         :: !Text
+    , _rcplcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsPermissionsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data RasterCollectionsPermissionsList = RasterCollectionsPermissionsList
 -- * 'rcplcFields'
 --
 -- * 'rcplcAlt'
-rasterCollectionsPermissionsList
+rasterCollectionsPermissionsList'
     :: Text -- ^ 'id'
-    -> RasterCollectionsPermissionsList
-rasterCollectionsPermissionsList pRcplcId_ =
-    RasterCollectionsPermissionsList
+    -> RasterCollectionsPermissionsList'
+rasterCollectionsPermissionsList' pRcplcId_ =
+    RasterCollectionsPermissionsList'
     { _rcplcQuotaUser = Nothing
     , _rcplcPrettyPrint = True
     , _rcplcUserIp = Nothing
@@ -94,7 +103,7 @@ rasterCollectionsPermissionsList pRcplcId_ =
     , _rcplcId = pRcplcId_
     , _rcplcOauthToken = Nothing
     , _rcplcFields = Nothing
-    , _rcplcAlt = "json"
+    , _rcplcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +148,7 @@ rcplcFields
   = lens _rcplcFields (\ s a -> s{_rcplcFields = a})
 
 -- | Data format for the response.
-rcplcAlt :: Lens' RasterCollectionsPermissionsList' Text
+rcplcAlt :: Lens' RasterCollectionsPermissionsList' Alt
 rcplcAlt = lens _rcplcAlt (\ s a -> s{_rcplcAlt = a})
 
 instance GoogleRequest
@@ -148,15 +157,17 @@ instance GoogleRequest
              PermissionsListResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RasterCollectionsPermissionsList{..}
-          = go _rcplcQuotaUser _rcplcPrettyPrint _rcplcUserIp
+          RasterCollectionsPermissionsList'{..}
+          = go _rcplcQuotaUser (Just _rcplcPrettyPrint)
+              _rcplcUserIp
               _rcplcKey
               _rcplcId
               _rcplcOauthToken
               _rcplcFields
-              _rcplcAlt
+              (Just _rcplcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsPermissionsListAPI)
+                      (Proxy ::
+                         Proxy RasterCollectionsPermissionsListResource)
                       r
                       u

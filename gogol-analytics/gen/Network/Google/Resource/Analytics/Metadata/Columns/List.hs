@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all columns for a report type
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsMetadataColumnsList@.
-module Analytics.Metadata.Columns.List
+module Network.Google.Resource.Analytics.Metadata.Columns.List
     (
     -- * REST Resource
-      MetadataColumnsListAPI
+      MetadataColumnsListResource
 
     -- * Creating a Request
-    , metadataColumnsList
-    , MetadataColumnsList
+    , metadataColumnsList'
+    , MetadataColumnsList'
 
     -- * Request Lenses
     , mclQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsMetadataColumnsList@ which the
--- 'MetadataColumnsList' request conforms to.
-type MetadataColumnsListAPI =
+-- 'MetadataColumnsList'' request conforms to.
+type MetadataColumnsListResource =
      "metadata" :>
        Capture "reportType" Text :>
-         "columns" :> Get '[JSON] Columns
+         "columns" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Columns
 
 -- | Lists all columns for a report type
 --
--- /See:/ 'metadataColumnsList' smart constructor.
-data MetadataColumnsList = MetadataColumnsList
+-- /See:/ 'metadataColumnsList'' smart constructor.
+data MetadataColumnsList' = MetadataColumnsList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
     , _mclUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data MetadataColumnsList = MetadataColumnsList
     , _mclOauthToken  :: !(Maybe Text)
     , _mclReportType  :: !Text
     , _mclFields      :: !(Maybe Text)
-    , _mclAlt         :: !Text
+    , _mclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataColumnsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data MetadataColumnsList = MetadataColumnsList
 -- * 'mclFields'
 --
 -- * 'mclAlt'
-metadataColumnsList
+metadataColumnsList'
     :: Text -- ^ 'reportType'
-    -> MetadataColumnsList
-metadataColumnsList pMclReportType_ =
-    MetadataColumnsList
+    -> MetadataColumnsList'
+metadataColumnsList' pMclReportType_ =
+    MetadataColumnsList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = False
     , _mclUserIp = Nothing
@@ -94,7 +102,7 @@ metadataColumnsList pMclReportType_ =
     , _mclOauthToken = Nothing
     , _mclReportType = pMclReportType_
     , _mclFields = Nothing
-    , _mclAlt = "json"
+    , _mclAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,20 +149,21 @@ mclFields
   = lens _mclFields (\ s a -> s{_mclFields = a})
 
 -- | Data format for the response.
-mclAlt :: Lens' MetadataColumnsList' Text
+mclAlt :: Lens' MetadataColumnsList' Alt
 mclAlt = lens _mclAlt (\ s a -> s{_mclAlt = a})
 
 instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u MetadataColumnsList{..}
-          = go _mclQuotaUser _mclPrettyPrint _mclUserIp _mclKey
+        requestWithRoute r u MetadataColumnsList'{..}
+          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIp
+              _mclKey
               _mclOauthToken
               _mclReportType
               _mclFields
-              _mclAlt
+              (Just _mclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetadataColumnsListAPI)
+                      (Proxy :: Proxy MetadataColumnsListResource)
                       r
                       u

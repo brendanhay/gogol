@@ -171,7 +171,7 @@ instance ToJSON ComputationTopology where
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetailsItem])
+    { _sDetails :: !(Maybe [StatusDetails])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -196,7 +196,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetailsItem]
+sDetails :: Lens' Status [StatusDetails]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -420,6 +420,27 @@ instance ToJSON WorkItem where
                   ("configuration" .=) <$> _wiConfiguration,
                   ("seqMapTask" .=) <$> _wiSeqMapTask])
 
+-- | A mapping from each stage to the information about that stage.
+--
+-- /See:/ 'jobExecutionInfoStages' smart constructor.
+data JobExecutionInfoStages =
+    JobExecutionInfoStages
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobExecutionInfoStages' with the minimum fields required to make a request.
+--
+jobExecutionInfoStages
+    :: JobExecutionInfoStages
+jobExecutionInfoStages = JobExecutionInfoStages
+
+instance FromJSON JobExecutionInfoStages where
+        parseJSON
+          = withObject "JobExecutionInfoStages"
+              (\ o -> pure JobExecutionInfoStages)
+
+instance ToJSON JobExecutionInfoStages where
+        toJSON = const (Object mempty)
+
 -- | The response to a SourceSplitRequest.
 --
 -- /See:/ 'sourceSplitResponse' smart constructor.
@@ -489,6 +510,27 @@ instance ToJSON SourceSplitResponse where
                   ("shards" .=) <$> _ssrShards,
                   ("outcome" .=) <$> _ssrOutcome])
 
+-- | Metadata to set on the Google Compute Engine VMs.
+--
+-- /See:/ 'workerPoolMetadata' smart constructor.
+data WorkerPoolMetadata =
+    WorkerPoolMetadata
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerPoolMetadata' with the minimum fields required to make a request.
+--
+workerPoolMetadata
+    :: WorkerPoolMetadata
+workerPoolMetadata = WorkerPoolMetadata
+
+instance FromJSON WorkerPoolMetadata where
+        parseJSON
+          = withObject "WorkerPoolMetadata"
+              (\ o -> pure WorkerPoolMetadata)
+
+instance ToJSON WorkerPoolMetadata where
+        toJSON = const (Object mempty)
+
 -- | Settings for WorkerPool autoscaling.
 --
 -- /See:/ 'autoscalingSettings' smart constructor.
@@ -536,6 +578,28 @@ instance ToJSON AutoscalingSettings where
               (catMaybes
                  [("maxNumWorkers" .=) <$> _asMaxNumWorkers,
                   ("algorithm" .=) <$> _asAlgorithm])
+
+-- | A structure describing which components and their versions of the
+-- service are required in order to run the job.
+--
+-- /See:/ 'environmentVersion' smart constructor.
+data EnvironmentVersion =
+    EnvironmentVersion
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentVersion' with the minimum fields required to make a request.
+--
+environmentVersion
+    :: EnvironmentVersion
+environmentVersion = EnvironmentVersion
+
+instance FromJSON EnvironmentVersion where
+        parseJSON
+          = withObject "EnvironmentVersion"
+              (\ o -> pure EnvironmentVersion)
+
+instance ToJSON EnvironmentVersion where
+        toJSON = const (Object mempty)
 
 -- | A sink that records can be encoded and written to.
 --
@@ -1210,19 +1274,65 @@ instance ToJSON SourceGetMetadataResponse where
           = object
               (catMaybes [("metadata" .=) <$> _sgmrMetadata])
 
+-- | A description of the process that generated the request.
+--
+-- /See:/ 'environmentUserAgent' smart constructor.
+data EnvironmentUserAgent =
+    EnvironmentUserAgent
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentUserAgent' with the minimum fields required to make a request.
+--
+environmentUserAgent
+    :: EnvironmentUserAgent
+environmentUserAgent = EnvironmentUserAgent
+
+instance FromJSON EnvironmentUserAgent where
+        parseJSON
+          = withObject "EnvironmentUserAgent"
+              (\ o -> pure EnvironmentUserAgent)
+
+instance ToJSON EnvironmentUserAgent where
+        toJSON = const (Object mempty)
+
+-- | Zero or more labeled fields which identify the part of the job this
+-- metric is associated with, such as the name of a step or collection. For
+-- example, built-in counters associated with steps will have
+-- context[\'step\'] = . Counters associated with PCollections in the SDK
+-- will have context[\'pcollection\'] = .
+--
+-- /See:/ 'metricStructuredNameContext' smart constructor.
+data MetricStructuredNameContext =
+    MetricStructuredNameContext
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetricStructuredNameContext' with the minimum fields required to make a request.
+--
+metricStructuredNameContext
+    :: MetricStructuredNameContext
+metricStructuredNameContext = MetricStructuredNameContext
+
+instance FromJSON MetricStructuredNameContext where
+        parseJSON
+          = withObject "MetricStructuredNameContext"
+              (\ o -> pure MetricStructuredNameContext)
+
+instance ToJSON MetricStructuredNameContext where
+        toJSON = const (Object mempty)
+
 -- | Describes the state of a metric.
 --
 -- /See:/ 'metricUpdate' smart constructor.
 data MetricUpdate = MetricUpdate
-    { _muMeanSum    :: !(Maybe JSON)
-    , _muInternal   :: !(Maybe JSON)
-    , _muSet        :: !(Maybe JSON)
+    { _muMeanSum    :: !(Maybe JSONValue)
+    , _muInternal   :: !(Maybe JSONValue)
+    , _muSet        :: !(Maybe JSONValue)
     , _muCumulative :: !(Maybe Bool)
     , _muKind       :: !(Maybe Text)
     , _muUpdateTime :: !(Maybe Text)
-    , _muMeanCount  :: !(Maybe JSON)
+    , _muMeanCount  :: !(Maybe JSONValue)
     , _muName       :: !(Maybe (Maybe MetricStructuredName))
-    , _muScalar     :: !(Maybe JSON)
+    , _muScalar     :: !(Maybe JSONValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricUpdate' with the minimum fields required to make a request.
@@ -1265,13 +1375,13 @@ metricUpdate =
 -- holds the sum of the aggregated values and is used in combination with
 -- mean_count below to obtain the actual mean aggregate value. The only
 -- possible value types are Long and Double.
-muMeanSum :: Lens' MetricUpdate (Maybe JSON)
+muMeanSum :: Lens' MetricUpdate (Maybe JSONValue)
 muMeanSum
   = lens _muMeanSum (\ s a -> s{_muMeanSum = a})
 
 -- | Worker-computed aggregate value for internal use by the Dataflow
 -- service.
-muInternal :: Lens' MetricUpdate (Maybe JSON)
+muInternal :: Lens' MetricUpdate (Maybe JSONValue)
 muInternal
   = lens _muInternal (\ s a -> s{_muInternal = a})
 
@@ -1279,7 +1389,7 @@ muInternal
 -- only possible value type is a list of Values whose type can be Long,
 -- Double, or String, according to the metric\'s type. All Values in the
 -- list must be of the same type.
-muSet :: Lens' MetricUpdate (Maybe JSON)
+muSet :: Lens' MetricUpdate (Maybe JSONValue)
 muSet = lens _muSet (\ s a -> s{_muSet = a})
 
 -- | True if this metric is reported as the total cumulative aggregate value
@@ -1308,7 +1418,7 @@ muUpdateTime
 -- holds the count of the aggregated values and is used in combination with
 -- mean_sum above to obtain the actual mean aggregate value. The only
 -- possible value type is Long.
-muMeanCount :: Lens' MetricUpdate (Maybe JSON)
+muMeanCount :: Lens' MetricUpdate (Maybe JSONValue)
 muMeanCount
   = lens _muMeanCount (\ s a -> s{_muMeanCount = a})
 
@@ -1319,7 +1429,7 @@ muName = lens _muName (\ s a -> s{_muName = a})
 -- | Worker-computed aggregate value for aggregation kinds \"Sum\", \"Max\",
 -- \"Min\", \"And\", and \"Or\". The possible value types are Long, Double,
 -- and Boolean.
-muScalar :: Lens' MetricUpdate (Maybe JSON)
+muScalar :: Lens' MetricUpdate (Maybe JSONValue)
 muScalar = lens _muScalar (\ s a -> s{_muScalar = a})
 
 instance FromJSON MetricUpdate where
@@ -1435,6 +1545,26 @@ instance ToJSON DerivedSource where
               (catMaybes
                  [("derivationMode" .=) <$> _dsDerivationMode,
                   ("source" .=) <$> _dsSource])
+
+-- | The source to read from, plus its parameters.
+--
+-- /See:/ 'sourceSpec' smart constructor.
+data SourceSpec =
+    SourceSpec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceSpec' with the minimum fields required to make a request.
+--
+sourceSpec
+    :: SourceSpec
+sourceSpec = SourceSpec
+
+instance FromJSON SourceSpec where
+        parseJSON
+          = withObject "SourceSpec" (\ o -> pure SourceSpec)
+
+instance ToJSON SourceSpec where
+        toJSON = const (Object mempty)
 
 -- | Taskrunner configuration settings.
 --
@@ -1704,6 +1834,28 @@ instance ToJSON TaskRunnerSettings where
                     _trsParallelWorkerSettings,
                   ("languageHint" .=) <$> _trsLanguageHint])
 
+-- | Map of transform name prefixes of the job to be replaced to the
+-- corresponding name prefixes of the new job.
+--
+-- /See:/ 'jobTransformNameMapping' smart constructor.
+data JobTransformNameMapping =
+    JobTransformNameMapping
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'JobTransformNameMapping' with the minimum fields required to make a request.
+--
+jobTransformNameMapping
+    :: JobTransformNameMapping
+jobTransformNameMapping = JobTransformNameMapping
+
+instance FromJSON JobTransformNameMapping where
+        parseJSON
+          = withObject "JobTransformNameMapping"
+              (\ o -> pure JobTransformNameMapping)
+
+instance ToJSON JobTransformNameMapping where
+        toJSON = const (Object mempty)
+
 -- | JobMetrics contains a collection of metrics descibing the detailed
 -- progress of a Dataflow job. Metrics correspond to user-defined and
 -- system-defined metrics in the job. This resource captures only the most
@@ -1794,6 +1946,28 @@ instance FromJSON FlattenInstruction where
 instance ToJSON FlattenInstruction where
         toJSON FlattenInstruction{..}
           = object (catMaybes [("inputs" .=) <$> _fiInputs])
+
+-- | Experimental settings.
+--
+-- /See:/ 'environmentInternalExperiments' smart constructor.
+data EnvironmentInternalExperiments =
+    EnvironmentInternalExperiments
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentInternalExperiments' with the minimum fields required to make a request.
+--
+environmentInternalExperiments
+    :: EnvironmentInternalExperiments
+environmentInternalExperiments = EnvironmentInternalExperiments
+
+instance FromJSON EnvironmentInternalExperiments
+         where
+        parseJSON
+          = withObject "EnvironmentInternalExperiments"
+              (\ o -> pure EnvironmentInternalExperiments)
+
+instance ToJSON EnvironmentInternalExperiments where
+        toJSON = const (Object mempty)
 
 -- | Metadata about a Source useful for automatically optimizing and tuning
 -- the pipeline, etc.
@@ -2103,6 +2277,52 @@ instance ToJSON ShellTask where
               (catMaybes
                  [("command" .=) <$> _stCommand,
                   ("exitCode" .=) <$> _stExitCode])
+
+-- | Named properties associated with the step. Each kind of predefined step
+-- has its own required set of properties.
+--
+-- /See:/ 'stepProperties' smart constructor.
+data StepProperties =
+    StepProperties
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StepProperties' with the minimum fields required to make a request.
+--
+stepProperties
+    :: StepProperties
+stepProperties = StepProperties
+
+instance FromJSON StepProperties where
+        parseJSON
+          = withObject "StepProperties"
+              (\ o -> pure StepProperties)
+
+instance ToJSON StepProperties where
+        toJSON = const (Object mempty)
+
+-- | The Dataflow SDK pipeline options specified by the user. These options
+-- are passed through the service and are used to recreate the SDK pipeline
+-- options on the worker in a language agnostic and platform independent
+-- way.
+--
+-- /See:/ 'environmentSdkPipelineOptions' smart constructor.
+data EnvironmentSdkPipelineOptions =
+    EnvironmentSdkPipelineOptions
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EnvironmentSdkPipelineOptions' with the minimum fields required to make a request.
+--
+environmentSdkPipelineOptions
+    :: EnvironmentSdkPipelineOptions
+environmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
+
+instance FromJSON EnvironmentSdkPipelineOptions where
+        parseJSON
+          = withObject "EnvironmentSdkPipelineOptions"
+              (\ o -> pure EnvironmentSdkPipelineOptions)
+
+instance ToJSON EnvironmentSdkPipelineOptions where
+        toJSON = const (Object mempty)
 
 -- | Request to lease WorkItems.
 --
@@ -2420,6 +2640,75 @@ instance ToJSON WorkerSettings where
                   ("reportingEnabled" .=) <$> _wsReportingEnabled,
                   ("workerId" .=) <$> _wsWorkerId])
 
+-- | Maps user stage names to stable computation names.
+--
+-- /See:/ 'topologyConfigUserStageToComputationNameMap' smart constructor.
+data TopologyConfigUserStageToComputationNameMap =
+    TopologyConfigUserStageToComputationNameMap
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TopologyConfigUserStageToComputationNameMap' with the minimum fields required to make a request.
+--
+topologyConfigUserStageToComputationNameMap
+    :: TopologyConfigUserStageToComputationNameMap
+topologyConfigUserStageToComputationNameMap =
+    TopologyConfigUserStageToComputationNameMap
+
+instance FromJSON
+         TopologyConfigUserStageToComputationNameMap where
+        parseJSON
+          = withObject
+              "TopologyConfigUserStageToComputationNameMap"
+              (\ o ->
+                 pure TopologyConfigUserStageToComputationNameMap)
+
+instance ToJSON
+         TopologyConfigUserStageToComputationNameMap where
+        toJSON = const (Object mempty)
+
+-- | Other data returned by the service, specific to the particular worker
+-- harness.
+--
+-- /See:/ 'workItemServiceStateHarnessData' smart constructor.
+data WorkItemServiceStateHarnessData =
+    WorkItemServiceStateHarnessData
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkItemServiceStateHarnessData' with the minimum fields required to make a request.
+--
+workItemServiceStateHarnessData
+    :: WorkItemServiceStateHarnessData
+workItemServiceStateHarnessData = WorkItemServiceStateHarnessData
+
+instance FromJSON WorkItemServiceStateHarnessData
+         where
+        parseJSON
+          = withObject "WorkItemServiceStateHarnessData"
+              (\ o -> pure WorkItemServiceStateHarnessData)
+
+instance ToJSON WorkItemServiceStateHarnessData where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'statusDetails' smart constructor.
+data StatusDetails =
+    StatusDetails
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
+--
+statusDetails
+    :: StatusDetails
+statusDetails = StatusDetails
+
+instance FromJSON StatusDetails where
+        parseJSON
+          = withObject "StatusDetails"
+              (\ o -> pure StatusDetails)
+
+instance ToJSON StatusDetails where
+        toJSON = const (Object mempty)
+
 -- | The Dataflow service\'s idea of the current state of a WorkItem being
 -- processed by a worker.
 --
@@ -2646,6 +2935,73 @@ instance ToJSON StreamingSetupTask where
                   ("receiveWorkPort" .=) <$> _sstReceiveWorkPort,
                   ("workerHarnessPort" .=) <$> _sstWorkerHarnessPort])
 
+-- | The codec to use for interpreting an element in the input PTable.
+--
+-- /See:/ 'partialGroupByKeyInstructionInputElementCodec' smart constructor.
+data PartialGroupByKeyInstructionInputElementCodec =
+    PartialGroupByKeyInstructionInputElementCodec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PartialGroupByKeyInstructionInputElementCodec' with the minimum fields required to make a request.
+--
+partialGroupByKeyInstructionInputElementCodec
+    :: PartialGroupByKeyInstructionInputElementCodec
+partialGroupByKeyInstructionInputElementCodec =
+    PartialGroupByKeyInstructionInputElementCodec
+
+instance FromJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionInputElementCodec"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionInputElementCodec)
+
+instance ToJSON
+         PartialGroupByKeyInstructionInputElementCodec where
+        toJSON = const (Object mempty)
+
+-- | Extra arguments for this worker pool.
+--
+-- /See:/ 'workerPoolPoolArgs' smart constructor.
+data WorkerPoolPoolArgs =
+    WorkerPoolPoolArgs
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WorkerPoolPoolArgs' with the minimum fields required to make a request.
+--
+workerPoolPoolArgs
+    :: WorkerPoolPoolArgs
+workerPoolPoolArgs = WorkerPoolPoolArgs
+
+instance FromJSON WorkerPoolPoolArgs where
+        parseJSON
+          = withObject "WorkerPoolPoolArgs"
+              (\ o -> pure WorkerPoolPoolArgs)
+
+instance ToJSON WorkerPoolPoolArgs where
+        toJSON = const (Object mempty)
+
+-- | The codec to use to encode data written to the sink.
+--
+-- /See:/ 'sinkCodec' smart constructor.
+data SinkCodec =
+    SinkCodec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SinkCodec' with the minimum fields required to make a request.
+--
+sinkCodec
+    :: SinkCodec
+sinkCodec = SinkCodec
+
+instance FromJSON SinkCodec where
+        parseJSON
+          = withObject "SinkCodec" (\ o -> pure SinkCodec)
+
+instance ToJSON SinkCodec where
+        toJSON = const (Object mempty)
+
 -- | Describes a stream of data, either as input to be processed or as output
 -- of a streaming Dataflow job.
 --
@@ -2760,6 +3116,27 @@ instance ToJSON MountedDataDisk where
           = object
               (catMaybes [("dataDisk" .=) <$> _mddDataDisk])
 
+-- | The codec to use to encode data being written via this output.
+--
+-- /See:/ 'instructionOutputCodec' smart constructor.
+data InstructionOutputCodec =
+    InstructionOutputCodec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstructionOutputCodec' with the minimum fields required to make a request.
+--
+instructionOutputCodec
+    :: InstructionOutputCodec
+instructionOutputCodec = InstructionOutputCodec
+
+instance FromJSON InstructionOutputCodec where
+        parseJSON
+          = withObject "InstructionOutputCodec"
+              (\ o -> pure InstructionOutputCodec)
+
+instance ToJSON InstructionOutputCodec where
+        toJSON = const (Object mempty)
+
 -- | MapTask consists of an ordered set of instructions, each of which
 -- describes one particular low-level operation for the worker to perform
 -- in order to accomplish the MapTask\'s WorkItem. Each instruction must
@@ -2825,6 +3202,27 @@ instance ToJSON MapTask where
                  [("instructions" .=) <$> _mtInstructions,
                   ("systemName" .=) <$> _mtSystemName,
                   ("stageName" .=) <$> _mtStageName])
+
+-- | The user function to invoke.
+--
+-- /See:/ 'parDoInstructionUserFn' smart constructor.
+data ParDoInstructionUserFn =
+    ParDoInstructionUserFn
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ParDoInstructionUserFn' with the minimum fields required to make a request.
+--
+parDoInstructionUserFn
+    :: ParDoInstructionUserFn
+parDoInstructionUserFn = ParDoInstructionUserFn
+
+instance FromJSON ParDoInstructionUserFn where
+        parseJSON
+          = withObject "ParDoInstructionUserFn"
+              (\ o -> pure ParDoInstructionUserFn)
+
+instance ToJSON ParDoInstructionUserFn where
+        toJSON = const (Object mempty)
 
 -- | A task which describes what action should be performed for the specified
 -- streaming computation ranges.
@@ -3232,6 +3630,27 @@ instance ToJSON Job where
                   ("replaceJobId" .=) <$> _jobReplaceJobId,
                   ("createTime" .=) <$> _jobCreateTime])
 
+-- | The user function to invoke.
+--
+-- /See:/ 'seqMapTaskUserFn' smart constructor.
+data SeqMapTaskUserFn =
+    SeqMapTaskUserFn
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SeqMapTaskUserFn' with the minimum fields required to make a request.
+--
+seqMapTaskUserFn
+    :: SeqMapTaskUserFn
+seqMapTaskUserFn = SeqMapTaskUserFn
+
+instance FromJSON SeqMapTaskUserFn where
+        parseJSON
+          = withObject "SeqMapTaskUserFn"
+              (\ o -> pure SeqMapTaskUserFn)
+
+instance ToJSON SeqMapTaskUserFn where
+        toJSON = const (Object mempty)
+
 -- | Information about an output of a SeqMapTask.
 --
 -- /See:/ 'seqMapTaskOutputInfo' smart constructor.
@@ -3277,6 +3696,32 @@ instance ToJSON SeqMapTaskOutputInfo where
               (catMaybes
                  [("sink" .=) <$> _smtoiSink,
                   ("tag" .=) <$> _smtoiTag])
+
+-- | The value combining function to invoke.
+--
+-- /See:/ 'partialGroupByKeyInstructionValueCombiningFn' smart constructor.
+data PartialGroupByKeyInstructionValueCombiningFn =
+    PartialGroupByKeyInstructionValueCombiningFn
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PartialGroupByKeyInstructionValueCombiningFn' with the minimum fields required to make a request.
+--
+partialGroupByKeyInstructionValueCombiningFn
+    :: PartialGroupByKeyInstructionValueCombiningFn
+partialGroupByKeyInstructionValueCombiningFn =
+    PartialGroupByKeyInstructionValueCombiningFn
+
+instance FromJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        parseJSON
+          = withObject
+              "PartialGroupByKeyInstructionValueCombiningFn"
+              (\ o ->
+                 pure PartialGroupByKeyInstructionValueCombiningFn)
+
+instance ToJSON
+         PartialGroupByKeyInstructionValueCombiningFn where
+        toJSON = const (Object mempty)
 
 -- | A request to compute the SourceMetadata of a Source.
 --
@@ -3695,6 +4140,26 @@ instance ToJSON Package where
                  [("location" .=) <$> _pLocation,
                   ("name" .=) <$> _pName])
 
+-- | The sink to write to, plus its parameters.
+--
+-- /See:/ 'sinkSpec' smart constructor.
+data SinkSpec =
+    SinkSpec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SinkSpec' with the minimum fields required to make a request.
+--
+sinkSpec
+    :: SinkSpec
+sinkSpec = SinkSpec
+
+instance FromJSON SinkSpec where
+        parseJSON
+          = withObject "SinkSpec" (\ o -> pure SinkSpec)
+
+instance ToJSON SinkSpec where
+        toJSON = const (Object mempty)
+
 -- | Defines a particular step within a Dataflow job. A job consists of
 -- multiple steps, each of which performs some specific operation as part
 -- of the overall job. Data is typically passed from one step to another as
@@ -3768,7 +4233,7 @@ instance ToJSON Step where
 -- /See:/ 'source' smart constructor.
 data Source = Source
     { _souDoesNotNeedSplitting :: !(Maybe Bool)
-    , _souBaseSpecs            :: !(Maybe [SourceBaseSpecsItem])
+    , _souBaseSpecs            :: !(Maybe [SourceBaseSpecs])
     , _souCodec                :: !(Maybe SourceCodec)
     , _souSpec                 :: !(Maybe SourceSpec)
     , _souMetadata             :: !(Maybe (Maybe SourceMetadata))
@@ -3822,7 +4287,7 @@ souDoesNotNeedSplitting
 -- taking the latest explicitly specified value of each parameter in the
 -- order: base_specs (later items win), spec (overrides anything in
 -- base_specs).
-souBaseSpecs :: Lens' Source [SourceBaseSpecsItem]
+souBaseSpecs :: Lens' Source [SourceBaseSpecs]
 souBaseSpecs
   = lens _souBaseSpecs (\ s a -> s{_souBaseSpecs = a})
       . _Default
@@ -4687,6 +5152,26 @@ instance ToJSON SourceSplitShard where
                  [("derivationMode" .=) <$> _sssDerivationMode,
                   ("source" .=) <$> _sssSource])
 
+-- | The codec to use to decode data read from the source.
+--
+-- /See:/ 'sourceCodec' smart constructor.
+data SourceCodec =
+    SourceCodec
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceCodec' with the minimum fields required to make a request.
+--
+sourceCodec
+    :: SourceCodec
+sourceCodec = SourceCodec
+
+instance FromJSON SourceCodec where
+        parseJSON
+          = withObject "SourceCodec" (\ o -> pure SourceCodec)
+
+instance ToJSON SourceCodec where
+        toJSON = const (Object mempty)
+
 -- | Identifies the location of a custom souce.
 --
 -- /See:/ 'customSourceLocation' smart constructor.
@@ -4754,6 +5239,27 @@ instance FromJSON JobExecutionInfo where
 instance ToJSON JobExecutionInfo where
         toJSON JobExecutionInfo{..}
           = object (catMaybes [("stages" .=) <$> _jeiStages])
+
+-- | How to interpret the source element(s) as a side input value.
+--
+-- /See:/ 'sideInputInfoKind' smart constructor.
+data SideInputInfoKind =
+    SideInputInfoKind
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SideInputInfoKind' with the minimum fields required to make a request.
+--
+sideInputInfoKind
+    :: SideInputInfoKind
+sideInputInfoKind = SideInputInfoKind
+
+instance FromJSON SideInputInfoKind where
+        parseJSON
+          = withObject "SideInputInfoKind"
+              (\ o -> pure SideInputInfoKind)
+
+instance ToJSON SideInputInfoKind where
+        toJSON = const (Object mempty)
 
 -- | Describes a particular function to invoke.
 --
@@ -4966,6 +5472,26 @@ instance ToJSON KeyRangeDataDiskAssignment where
                  [("dataDisk" .=) <$> _krddaDataDisk,
                   ("start" .=) <$> _krddaStart,
                   ("end" .=) <$> _krddaEnd])
+
+--
+-- /See:/ 'sourceBaseSpecs' smart constructor.
+data SourceBaseSpecs =
+    SourceBaseSpecs
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SourceBaseSpecs' with the minimum fields required to make a request.
+--
+sourceBaseSpecs
+    :: SourceBaseSpecs
+sourceBaseSpecs = SourceBaseSpecs
+
+instance FromJSON SourceBaseSpecs where
+        parseJSON
+          = withObject "SourceBaseSpecs"
+              (\ o -> pure SourceBaseSpecs)
+
+instance ToJSON SourceBaseSpecs where
+        toJSON = const (Object mempty)
 
 -- | Identifies a pubsub location to use for transferring data into or out of
 -- a streaming Dataflow job.

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the specified region-specific Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsGet@.
-module Compute.RegionOperations.Get
+module Network.Google.Resource.Compute.RegionOperations.Get
     (
     -- * REST Resource
-      RegionOperationsGetAPI
+      RegionOperationsGetResource
 
     -- * Creating a Request
-    , regionOperationsGet
-    , RegionOperationsGet
+    , regionOperationsGet'
+    , RegionOperationsGet'
 
     -- * Request Lenses
     , rogQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRegionOperationsGet@ which the
--- 'RegionOperationsGet' request conforms to.
-type RegionOperationsGetAPI =
+-- 'RegionOperationsGet'' request conforms to.
+type RegionOperationsGetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "operations" :>
-             Capture "operation" Text :> Get '[JSON] Operation
+             Capture "operation" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Retrieves the specified region-specific Operations resource.
 --
--- /See:/ 'regionOperationsGet' smart constructor.
-data RegionOperationsGet = RegionOperationsGet
+-- /See:/ 'regionOperationsGet'' smart constructor.
+data RegionOperationsGet' = RegionOperationsGet'
     { _rogQuotaUser   :: !(Maybe Text)
     , _rogPrettyPrint :: !Bool
     , _rogProject     :: !Text
@@ -66,7 +74,7 @@ data RegionOperationsGet = RegionOperationsGet
     , _rogRegion      :: !Text
     , _rogOauthToken  :: !(Maybe Text)
     , _rogFields      :: !(Maybe Text)
-    , _rogAlt         :: !Text
+    , _rogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data RegionOperationsGet = RegionOperationsGet
 -- * 'rogFields'
 --
 -- * 'rogAlt'
-regionOperationsGet
+regionOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
     -> Text -- ^ 'region'
-    -> RegionOperationsGet
-regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
-    RegionOperationsGet
+    -> RegionOperationsGet'
+regionOperationsGet' pRogProject_ pRogOperation_ pRogRegion_ =
+    RegionOperationsGet'
     { _rogQuotaUser = Nothing
     , _rogPrettyPrint = True
     , _rogProject = pRogProject_
@@ -108,7 +116,7 @@ regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
     , _rogRegion = pRogRegion_
     , _rogOauthToken = Nothing
     , _rogFields = Nothing
-    , _rogAlt = "json"
+    , _rogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ rogFields
   = lens _rogFields (\ s a -> s{_rogFields = a})
 
 -- | Data format for the response.
-rogAlt :: Lens' RegionOperationsGet' Text
+rogAlt :: Lens' RegionOperationsGet' Alt
 rogAlt = lens _rogAlt (\ s a -> s{_rogAlt = a})
 
 instance GoogleRequest RegionOperationsGet' where
         type Rs RegionOperationsGet' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsGet{..}
-          = go _rogQuotaUser _rogPrettyPrint _rogProject
+        requestWithRoute r u RegionOperationsGet'{..}
+          = go _rogQuotaUser (Just _rogPrettyPrint) _rogProject
               _rogOperation
               _rogUserIp
               _rogKey
               _rogRegion
               _rogOauthToken
               _rogFields
-              _rogAlt
+              (Just _rogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RegionOperationsGetAPI)
+                      (Proxy :: Proxy RegionOperationsGetResource)
                       r
                       u

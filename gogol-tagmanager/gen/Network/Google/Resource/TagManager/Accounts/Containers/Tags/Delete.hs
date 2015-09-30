@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a GTM Tag.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsDelete@.
-module TagManager.Accounts.Containers.Tags.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
     (
     -- * REST Resource
-      AccountsContainersTagsDeleteAPI
+      AccountsContainersTagsDeleteResource
 
     -- * Creating a Request
-    , accountsContainersTagsDelete
-    , AccountsContainersTagsDelete
+    , accountsContainersTagsDelete'
+    , AccountsContainersTagsDelete'
 
     -- * Request Lenses
     , actdcQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTagsDelete@ which the
--- 'AccountsContainersTagsDelete' request conforms to.
-type AccountsContainersTagsDeleteAPI =
+-- 'AccountsContainersTagsDelete'' request conforms to.
+type AccountsContainersTagsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "tags" :> Capture "tagId" Text :> Delete '[JSON] ()
+             "tags" :>
+               Capture "tagId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a GTM Tag.
 --
--- /See:/ 'accountsContainersTagsDelete' smart constructor.
-data AccountsContainersTagsDelete = AccountsContainersTagsDelete
+-- /See:/ 'accountsContainersTagsDelete'' smart constructor.
+data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
     { _actdcQuotaUser   :: !(Maybe Text)
     , _actdcPrettyPrint :: !Bool
     , _actdcContainerId :: !Text
@@ -66,7 +75,7 @@ data AccountsContainersTagsDelete = AccountsContainersTagsDelete
     , _actdcKey         :: !(Maybe Text)
     , _actdcOauthToken  :: !(Maybe Text)
     , _actdcFields      :: !(Maybe Text)
-    , _actdcAlt         :: !Text
+    , _actdcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsDelete'' with the minimum fields required to make a request.
@@ -92,13 +101,13 @@ data AccountsContainersTagsDelete = AccountsContainersTagsDelete
 -- * 'actdcFields'
 --
 -- * 'actdcAlt'
-accountsContainersTagsDelete
+accountsContainersTagsDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'tagId'
-    -> AccountsContainersTagsDelete
-accountsContainersTagsDelete pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
-    AccountsContainersTagsDelete
+    -> AccountsContainersTagsDelete'
+accountsContainersTagsDelete' pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
+    AccountsContainersTagsDelete'
     { _actdcQuotaUser = Nothing
     , _actdcPrettyPrint = True
     , _actdcContainerId = pActdcContainerId_
@@ -108,7 +117,7 @@ accountsContainersTagsDelete pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
     , _actdcKey = Nothing
     , _actdcOauthToken = Nothing
     , _actdcFields = Nothing
-    , _actdcAlt = "json"
+    , _actdcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,15 +175,16 @@ actdcFields
   = lens _actdcFields (\ s a -> s{_actdcFields = a})
 
 -- | Data format for the response.
-actdcAlt :: Lens' AccountsContainersTagsDelete' Text
+actdcAlt :: Lens' AccountsContainersTagsDelete' Alt
 actdcAlt = lens _actdcAlt (\ s a -> s{_actdcAlt = a})
 
 instance GoogleRequest AccountsContainersTagsDelete'
          where
         type Rs AccountsContainersTagsDelete' = ()
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersTagsDelete{..}
-          = go _actdcQuotaUser _actdcPrettyPrint
+        requestWithRoute r u
+          AccountsContainersTagsDelete'{..}
+          = go _actdcQuotaUser (Just _actdcPrettyPrint)
               _actdcContainerId
               _actdcUserIp
               _actdcAccountId
@@ -182,9 +192,9 @@ instance GoogleRequest AccountsContainersTagsDelete'
               _actdcKey
               _actdcOauthToken
               _actdcFields
-              _actdcAlt
+              (Just _actdcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTagsDeleteAPI)
+                      (Proxy :: Proxy AccountsContainersTagsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing creative. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesPatch@.
-module DFAReporting.Creatives.Patch
+module Network.Google.Resource.DFAReporting.Creatives.Patch
     (
     -- * REST Resource
-      CreativesPatchAPI
+      CreativesPatchResource
 
     -- * Creating a Request
-    , creativesPatch
-    , CreativesPatch
+    , creativesPatch'
+    , CreativesPatch'
 
     -- * Request Lenses
     , cppQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativesPatch@ which the
--- 'CreativesPatch' request conforms to.
-type CreativesPatchAPI =
+-- 'CreativesPatch'' request conforms to.
+type CreativesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           QueryParam "id" Int64 :> Patch '[JSON] Creative
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Creative
 
 -- | Updates an existing creative. This method supports patch semantics.
 --
--- /See:/ 'creativesPatch' smart constructor.
-data CreativesPatch = CreativesPatch
+-- /See:/ 'creativesPatch'' smart constructor.
+data CreativesPatch' = CreativesPatch'
     { _cppQuotaUser   :: !(Maybe Text)
     , _cppPrettyPrint :: !Bool
     , _cppUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CreativesPatch = CreativesPatch
     , _cppId          :: !Int64
     , _cppOauthToken  :: !(Maybe Text)
     , _cppFields      :: !(Maybe Text)
-    , _cppAlt         :: !Text
+    , _cppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CreativesPatch = CreativesPatch
 -- * 'cppFields'
 --
 -- * 'cppAlt'
-creativesPatch
+creativesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativesPatch
-creativesPatch pCppProfileId_ pCppId_ =
-    CreativesPatch
+    -> CreativesPatch'
+creativesPatch' pCppProfileId_ pCppId_ =
+    CreativesPatch'
     { _cppQuotaUser = Nothing
     , _cppPrettyPrint = True
     , _cppUserIp = Nothing
@@ -101,7 +109,7 @@ creativesPatch pCppProfileId_ pCppId_ =
     , _cppId = pCppId_
     , _cppOauthToken = Nothing
     , _cppFields = Nothing
-    , _cppAlt = "json"
+    , _cppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ cppFields
   = lens _cppFields (\ s a -> s{_cppFields = a})
 
 -- | Data format for the response.
-cppAlt :: Lens' CreativesPatch' Text
+cppAlt :: Lens' CreativesPatch' Alt
 cppAlt = lens _cppAlt (\ s a -> s{_cppAlt = a})
 
 instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesPatch{..}
-          = go _cppQuotaUser _cppPrettyPrint _cppUserIp
+        requestWithRoute r u CreativesPatch'{..}
+          = go _cppQuotaUser (Just _cppPrettyPrint) _cppUserIp
               _cppProfileId
               _cppKey
               (Just _cppId)
               _cppOauthToken
               _cppFields
-              _cppAlt
+              (Just _cppAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesPatchResource)
                       r
                       u

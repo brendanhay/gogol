@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppstateStatesGet@.
-module Appstate.States.Get
+module Network.Google.Resource.Appstate.States.Get
     (
     -- * REST Resource
-      StatesGetAPI
+      StatesGetResource
 
     -- * Creating a Request
-    , statesGet
-    , StatesGet
+    , statesGet'
+    , StatesGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.GamesAppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppstateStatesGet@ which the
--- 'StatesGet' request conforms to.
-type StatesGetAPI =
+-- 'StatesGet'' request conforms to.
+type StatesGetResource =
      "states" :>
-       Capture "stateKey" Int32 :> Get '[JSON] GetResponse
+       Capture "stateKey" Int32 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] GetResponse
 
 -- | Retrieves the data corresponding to the passed key. If the key does not
 -- exist on the server, an HTTP 404 will be returned.
 --
--- /See:/ 'statesGet' smart constructor.
-data StatesGet = StatesGet
+-- /See:/ 'statesGet'' smart constructor.
+data StatesGet' = StatesGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data StatesGet = StatesGet
     , _sgKey         :: !(Maybe Text)
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesGet'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data StatesGet = StatesGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-statesGet
+statesGet'
     :: Int32 -- ^ 'stateKey'
-    -> StatesGet
-statesGet pSgStateKey_ =
-    StatesGet
+    -> StatesGet'
+statesGet' pSgStateKey_ =
+    StatesGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -95,7 +103,7 @@ statesGet pSgStateKey_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +145,20 @@ sgFields :: Lens' StatesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' StatesGet' Text
+sgAlt :: Lens' StatesGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest StatesGet' where
         type Rs StatesGet' = GetResponse
         request = requestWithRoute defReq gamesAppStateURL
-        requestWithRoute r u StatesGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp
+        requestWithRoute r u StatesGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
               _sgStateKey
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy StatesGetResource)
+                      r
+                      u

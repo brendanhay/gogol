@@ -122,6 +122,20 @@ module Network.Google.AdSense.Types
     , aaType
     , aaMessage
 
+    -- * AdStyleFont
+    , AdStyleFont
+    , adStyleFont
+    , asfSize
+    , asfFamily
+
+    -- * AdUnitMobileContentAdsSettings
+    , AdUnitMobileContentAdsSettings
+    , adUnitMobileContentAdsSettings
+    , aumcasSize
+    , aumcasScriptingLanguage
+    , aumcasMarkupLanguage
+    , aumcasType
+
     -- * Account
     , Account
     , account
@@ -131,6 +145,15 @@ module Network.Google.AdSense.Types
     , accId
     , accTimezone
     , accSubAccounts
+
+    -- * AdStyleColors
+    , AdStyleColors
+    , adStyleColors
+    , ascText
+    , ascUrl
+    , ascBorder
+    , ascTitle
+    , ascBackground
 
     -- * AdClient
     , AdClient
@@ -142,6 +165,13 @@ module Network.Google.AdSense.Types
     , addProductCode
     , addArcReviewMode
 
+    -- * AdUnitContentAdsSettingsBackupOption
+    , AdUnitContentAdsSettingsBackupOption
+    , adUnitContentAdsSettingsBackupOption
+    , aucasboColor
+    , aucasboUrl
+    , aucasboType
+
     -- * SavedAdStyles
     , SavedAdStyles
     , savedAdStyles
@@ -149,6 +179,14 @@ module Network.Google.AdSense.Types
     , sasNextPageToken
     , sasKind
     , sasItems
+
+    -- * CustomChannelTargetingInfo
+    , CustomChannelTargetingInfo
+    , customChannelTargetingInfo
+    , cctiLocation
+    , cctiSiteLanguage
+    , cctiAdsAppearOn
+    , cctiDescription
 
     -- * SavedAdStyle
     , SavedAdStyle
@@ -158,6 +196,13 @@ module Network.Google.AdSense.Types
     , savAdStyle
     , savId
 
+    -- * AdsenseReportsGenerateResponseHeaders
+    , AdsenseReportsGenerateResponseHeaders
+    , adsenseReportsGenerateResponseHeaders
+    , argrhName
+    , argrhCurrency
+    , argrhType
+
     -- * AdStyle
     , AdStyle
     , adStyle
@@ -165,6 +210,14 @@ module Network.Google.AdSense.Types
     , asKind
     , asFont
     , asColors
+
+    -- * AdUnitFeedAdsSettings
+    , AdUnitFeedAdsSettings
+    , adUnitFeedAdsSettings
+    , aufasFrequency
+    , aufasAdPosition
+    , aufasType
+    , aufasMinimumWordCount
 
     -- * Metadata
     , Metadata
@@ -212,6 +265,16 @@ module Network.Google.AdSense.Types
     , payments
     , payKind
     , payItems
+
+    -- * AdUnitContentAdsSettings
+    , AdUnitContentAdsSettings
+    , adUnitContentAdsSettings
+    , aucasBackupOption
+    , aucasSize
+    , aucasType
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdSense.Types.Product
@@ -219,7 +282,7 @@ import           Network.Google.AdSense.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1.4' of the AdSense Management API.
-adSenseURL :: BaseURL
+adSenseURL :: BaseUrl
 adSenseURL
   = BaseUrl Https
       "https://www.googleapis.com/adsense/v1.4/"

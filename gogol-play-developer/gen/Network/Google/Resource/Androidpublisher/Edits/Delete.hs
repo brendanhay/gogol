@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- you want to preemptively abandon an edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsDelete@.
-module Androidpublisher.Edits.Delete
+module Network.Google.Resource.Androidpublisher.Edits.Delete
     (
     -- * REST Resource
-      EditsDeleteAPI
+      EditsDeleteResource
 
     -- * Creating a Request
-    , editsDelete
-    , EditsDelete
+    , editsDelete'
+    , EditsDelete'
 
     -- * Request Lenses
     , edQuotaUser
@@ -46,17 +47,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsDelete@ which the
--- 'EditsDelete' request conforms to.
-type EditsDeleteAPI =
+-- 'EditsDelete'' request conforms to.
+type EditsDeleteResource =
      Capture "packageName" Text :>
-       "edits" :> Capture "editId" Text :> Delete '[JSON] ()
+       "edits" :>
+         Capture "editId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an edit for an app. Creating a new edit will automatically
 -- delete any of your previous edits so this method need only be called if
 -- you want to preemptively abandon an edit.
 --
--- /See:/ 'editsDelete' smart constructor.
-data EditsDelete = EditsDelete
+-- /See:/ 'editsDelete'' smart constructor.
+data EditsDelete' = EditsDelete'
     { _edQuotaUser   :: !(Maybe Text)
     , _edPrettyPrint :: !Bool
     , _edPackageName :: !Text
@@ -65,7 +74,7 @@ data EditsDelete = EditsDelete
     , _edOauthToken  :: !(Maybe Text)
     , _edEditId      :: !Text
     , _edFields      :: !(Maybe Text)
-    , _edAlt         :: !Text
+    , _edAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDelete'' with the minimum fields required to make a request.
@@ -89,12 +98,12 @@ data EditsDelete = EditsDelete
 -- * 'edFields'
 --
 -- * 'edAlt'
-editsDelete
+editsDelete'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsDelete
-editsDelete pEdPackageName_ pEdEditId_ =
-    EditsDelete
+    -> EditsDelete'
+editsDelete' pEdPackageName_ pEdEditId_ =
+    EditsDelete'
     { _edQuotaUser = Nothing
     , _edPrettyPrint = True
     , _edPackageName = pEdPackageName_
@@ -103,7 +112,7 @@ editsDelete pEdPackageName_ pEdEditId_ =
     , _edOauthToken = Nothing
     , _edEditId = pEdEditId_
     , _edFields = Nothing
-    , _edAlt = "json"
+    , _edAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,19 +160,23 @@ edFields :: Lens' EditsDelete' (Maybe Text)
 edFields = lens _edFields (\ s a -> s{_edFields = a})
 
 -- | Data format for the response.
-edAlt :: Lens' EditsDelete' Text
+edAlt :: Lens' EditsDelete' Alt
 edAlt = lens _edAlt (\ s a -> s{_edAlt = a})
 
 instance GoogleRequest EditsDelete' where
         type Rs EditsDelete' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsDelete{..}
-          = go _edQuotaUser _edPrettyPrint _edPackageName
+        requestWithRoute r u EditsDelete'{..}
+          = go _edQuotaUser (Just _edPrettyPrint)
+              _edPackageName
               _edUserIp
               _edKey
               _edOauthToken
               _edEditId
               _edFields
-              _edAlt
+              (Just _edAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsDeleteAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsDeleteResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsPatch@.
-module Storage.DefaultObjectAccessControls.Patch
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.Patch
     (
     -- * REST Resource
-      DefaultObjectAccessControlsPatchAPI
+      DefaultObjectAccessControlsPatchResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsPatch
-    , DefaultObjectAccessControlsPatch
+    , defaultObjectAccessControlsPatch'
+    , DefaultObjectAccessControlsPatch'
 
     -- * Request Lenses
     , doacpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsPatch@ which the
--- 'DefaultObjectAccessControlsPatch' request conforms to.
-type DefaultObjectAccessControlsPatchAPI =
+-- 'DefaultObjectAccessControlsPatch'' request conforms to.
+type DefaultObjectAccessControlsPatchResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
            Capture "entity" Text :>
-             Patch '[JSON] ObjectAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket. This method
 -- supports patch semantics.
 --
--- /See:/ 'defaultObjectAccessControlsPatch' smart constructor.
-data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch
+-- /See:/ 'defaultObjectAccessControlsPatch'' smart constructor.
+data DefaultObjectAccessControlsPatch' = DefaultObjectAccessControlsPatch'
     { _doacpQuotaUser   :: !(Maybe Text)
     , _doacpPrettyPrint :: !Bool
     , _doacpUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch
     , _doacpOauthToken  :: !(Maybe Text)
     , _doacpEntity      :: !Text
     , _doacpFields      :: !(Maybe Text)
-    , _doacpAlt         :: !Text
+    , _doacpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch
 -- * 'doacpFields'
 --
 -- * 'doacpAlt'
-defaultObjectAccessControlsPatch
+defaultObjectAccessControlsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> DefaultObjectAccessControlsPatch
-defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpEntity_ =
-    DefaultObjectAccessControlsPatch
+    -> DefaultObjectAccessControlsPatch'
+defaultObjectAccessControlsPatch' pDoacpBucket_ pDoacpEntity_ =
+    DefaultObjectAccessControlsPatch'
     { _doacpQuotaUser = Nothing
     , _doacpPrettyPrint = True
     , _doacpUserIp = Nothing
@@ -104,7 +112,7 @@ defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpEntity_ =
     , _doacpOauthToken = Nothing
     , _doacpEntity = pDoacpEntity_
     , _doacpFields = Nothing
-    , _doacpAlt = "json"
+    , _doacpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ doacpFields
   = lens _doacpFields (\ s a -> s{_doacpFields = a})
 
 -- | Data format for the response.
-doacpAlt :: Lens' DefaultObjectAccessControlsPatch' Text
+doacpAlt :: Lens' DefaultObjectAccessControlsPatch' Alt
 doacpAlt = lens _doacpAlt (\ s a -> s{_doacpAlt = a})
 
 instance GoogleRequest
@@ -166,16 +174,18 @@ instance GoogleRequest
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsPatch{..}
-          = go _doacpQuotaUser _doacpPrettyPrint _doacpUserIp
+          DefaultObjectAccessControlsPatch'{..}
+          = go _doacpQuotaUser (Just _doacpPrettyPrint)
+              _doacpUserIp
               _doacpBucket
               _doacpKey
               _doacpOauthToken
               _doacpEntity
               _doacpFields
-              _doacpAlt
+              (Just _doacpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsPatchAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsPatchResource)
                       r
                       u

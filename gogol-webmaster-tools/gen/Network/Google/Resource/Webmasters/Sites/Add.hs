@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitesAdd@.
-module Webmasters.Sites.Add
+module Network.Google.Resource.Webmasters.Sites.Add
     (
     -- * REST Resource
-      SitesAddAPI
+      SitesAddResource
 
     -- * Creating a Request
-    , sitesAdd
-    , SitesAdd
+    , sitesAdd'
+    , SitesAdd'
 
     -- * Request Lenses
     , saQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSitesAdd@ which the
--- 'SitesAdd' request conforms to.
-type SitesAddAPI =
-     "sites" :> Capture "siteUrl" Text :> Put '[JSON] ()
+-- 'SitesAdd'' request conforms to.
+type SitesAddResource =
+     "sites" :>
+       Capture "siteUrl" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
--- /See:/ 'sitesAdd' smart constructor.
-data SitesAdd = SitesAdd
+-- /See:/ 'sitesAdd'' smart constructor.
+data SitesAdd' = SitesAdd'
     { _saQuotaUser   :: !(Maybe Text)
     , _saPrettyPrint :: !Bool
     , _saUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data SitesAdd = SitesAdd
     , _saKey         :: !(Maybe Text)
     , _saOauthToken  :: !(Maybe Text)
     , _saFields      :: !(Maybe Text)
-    , _saAlt         :: !Text
+    , _saAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesAdd'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data SitesAdd = SitesAdd
 -- * 'saFields'
 --
 -- * 'saAlt'
-sitesAdd
+sitesAdd'
     :: Text -- ^ 'siteUrl'
-    -> SitesAdd
-sitesAdd pSaSiteUrl_ =
-    SitesAdd
+    -> SitesAdd'
+sitesAdd' pSaSiteUrl_ =
+    SitesAdd'
     { _saQuotaUser = Nothing
     , _saPrettyPrint = True
     , _saUserIp = Nothing
@@ -92,7 +101,7 @@ sitesAdd pSaSiteUrl_ =
     , _saKey = Nothing
     , _saOauthToken = Nothing
     , _saFields = Nothing
-    , _saAlt = "json"
+    , _saAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +143,19 @@ saFields :: Lens' SitesAdd' (Maybe Text)
 saFields = lens _saFields (\ s a -> s{_saFields = a})
 
 -- | Data format for the response.
-saAlt :: Lens' SitesAdd' Text
+saAlt :: Lens' SitesAdd' Alt
 saAlt = lens _saAlt (\ s a -> s{_saAlt = a})
 
 instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitesAdd{..}
-          = go _saQuotaUser _saPrettyPrint _saUserIp _saSiteUrl
+        requestWithRoute r u SitesAdd'{..}
+          = go _saQuotaUser (Just _saPrettyPrint) _saUserIp
+              _saSiteUrl
               _saKey
               _saOauthToken
               _saFields
-              _saAlt
+              (Just _saAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesAddAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SitesAddResource) r
+                      u

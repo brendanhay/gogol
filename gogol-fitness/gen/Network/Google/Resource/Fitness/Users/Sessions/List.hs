@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists sessions previously created.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsList@.
-module Fitness.Users.Sessions.List
+module Network.Google.Resource.Fitness.Users.Sessions.List
     (
     -- * REST Resource
-      UsersSessionsListAPI
+      UsersSessionsListResource
 
     -- * Creating a Request
-    , usersSessionsList
-    , UsersSessionsList
+    , usersSessionsList'
+    , UsersSessionsList'
 
     -- * Request Lenses
     , uslQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersSessionsList@ which the
--- 'UsersSessionsList' request conforms to.
-type UsersSessionsListAPI =
+-- 'UsersSessionsList'' request conforms to.
+type UsersSessionsListResource =
      Capture "userId" Text :>
        "sessions" :>
-         QueryParam "startTime" Text :>
-           QueryParam "endTime" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "includeDeleted" Bool :>
-                 Get '[JSON] ListSessionsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "startTime" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "endTime" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "includeDeleted" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ListSessionsResponse
 
 -- | Lists sessions previously created.
 --
--- /See:/ 'usersSessionsList' smart constructor.
-data UsersSessionsList = UsersSessionsList
+-- /See:/ 'usersSessionsList'' smart constructor.
+data UsersSessionsList' = UsersSessionsList'
     { _uslQuotaUser      :: !(Maybe Text)
     , _uslPrettyPrint    :: !Bool
     , _uslStartTime      :: !(Maybe Text)
@@ -72,7 +80,7 @@ data UsersSessionsList = UsersSessionsList
     , _uslOauthToken     :: !(Maybe Text)
     , _uslIncludeDeleted :: !(Maybe Bool)
     , _uslFields         :: !(Maybe Text)
-    , _uslAlt            :: !Text
+    , _uslAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsList'' with the minimum fields required to make a request.
@@ -102,11 +110,11 @@ data UsersSessionsList = UsersSessionsList
 -- * 'uslFields'
 --
 -- * 'uslAlt'
-usersSessionsList
+usersSessionsList'
     :: Text -- ^ 'userId'
-    -> UsersSessionsList
-usersSessionsList pUslUserId_ =
-    UsersSessionsList
+    -> UsersSessionsList'
+usersSessionsList' pUslUserId_ =
+    UsersSessionsList'
     { _uslQuotaUser = Nothing
     , _uslPrettyPrint = True
     , _uslStartTime = Nothing
@@ -118,7 +126,7 @@ usersSessionsList pUslUserId_ =
     , _uslOauthToken = Nothing
     , _uslIncludeDeleted = Nothing
     , _uslFields = Nothing
-    , _uslAlt = "json"
+    , _uslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -191,14 +199,15 @@ uslFields
   = lens _uslFields (\ s a -> s{_uslFields = a})
 
 -- | Data format for the response.
-uslAlt :: Lens' UsersSessionsList' Text
+uslAlt :: Lens' UsersSessionsList' Alt
 uslAlt = lens _uslAlt (\ s a -> s{_uslAlt = a})
 
 instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsList{..}
-          = go _uslQuotaUser _uslPrettyPrint _uslStartTime
+        requestWithRoute r u UsersSessionsList'{..}
+          = go _uslQuotaUser (Just _uslPrettyPrint)
+              _uslStartTime
               _uslUserIp
               _uslUserId
               _uslKey
@@ -207,9 +216,9 @@ instance GoogleRequest UsersSessionsList' where
               _uslOauthToken
               _uslIncludeDeleted
               _uslFields
-              _uslAlt
+              (Just _uslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersSessionsListAPI)
+                      (Proxy :: Proxy UsersSessionsListResource)
                       r
                       u

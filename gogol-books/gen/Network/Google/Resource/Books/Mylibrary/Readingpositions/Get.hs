@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves my reading position information for a volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryReadingpositionsGet@.
-module Books.Mylibrary.Readingpositions.Get
+module Network.Google.Resource.Books.Mylibrary.Readingpositions.Get
     (
     -- * REST Resource
-      MylibraryReadingpositionsGetAPI
+      MylibraryReadingpositionsGetResource
 
     -- * Creating a Request
-    , mylibraryReadingpositionsGet
-    , MylibraryReadingpositionsGet
+    , mylibraryReadingpositionsGet'
+    , MylibraryReadingpositionsGet'
 
     -- * Request Lenses
     , mrgQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryReadingpositionsGet@ which the
--- 'MylibraryReadingpositionsGet' request conforms to.
-type MylibraryReadingpositionsGetAPI =
+-- 'MylibraryReadingpositionsGet'' request conforms to.
+type MylibraryReadingpositionsGetResource =
      "mylibrary" :>
        "readingpositions" :>
          Capture "volumeId" Text :>
-           QueryParam "contentVersion" Text :>
-             QueryParam "source" Text :>
-               Get '[JSON] ReadingPosition
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "contentVersion" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "source" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ReadingPosition
 
 -- | Retrieves my reading position information for a volume.
 --
--- /See:/ 'mylibraryReadingpositionsGet' smart constructor.
-data MylibraryReadingpositionsGet = MylibraryReadingpositionsGet
+-- /See:/ 'mylibraryReadingpositionsGet'' smart constructor.
+data MylibraryReadingpositionsGet' = MylibraryReadingpositionsGet'
     { _mrgQuotaUser      :: !(Maybe Text)
     , _mrgPrettyPrint    :: !Bool
     , _mrgUserIp         :: !(Maybe Text)
@@ -67,7 +74,7 @@ data MylibraryReadingpositionsGet = MylibraryReadingpositionsGet
     , _mrgSource         :: !(Maybe Text)
     , _mrgOauthToken     :: !(Maybe Text)
     , _mrgFields         :: !(Maybe Text)
-    , _mrgAlt            :: !Text
+    , _mrgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryReadingpositionsGet'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data MylibraryReadingpositionsGet = MylibraryReadingpositionsGet
 -- * 'mrgFields'
 --
 -- * 'mrgAlt'
-mylibraryReadingpositionsGet
+mylibraryReadingpositionsGet'
     :: Text -- ^ 'volumeId'
-    -> MylibraryReadingpositionsGet
-mylibraryReadingpositionsGet pMrgVolumeId_ =
-    MylibraryReadingpositionsGet
+    -> MylibraryReadingpositionsGet'
+mylibraryReadingpositionsGet' pMrgVolumeId_ =
+    MylibraryReadingpositionsGet'
     { _mrgQuotaUser = Nothing
     , _mrgPrettyPrint = True
     , _mrgUserIp = Nothing
@@ -107,7 +114,7 @@ mylibraryReadingpositionsGet pMrgVolumeId_ =
     , _mrgSource = Nothing
     , _mrgOauthToken = Nothing
     , _mrgFields = Nothing
-    , _mrgAlt = "json"
+    , _mrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,7 +170,7 @@ mrgFields
   = lens _mrgFields (\ s a -> s{_mrgFields = a})
 
 -- | Data format for the response.
-mrgAlt :: Lens' MylibraryReadingpositionsGet' Text
+mrgAlt :: Lens' MylibraryReadingpositionsGet' Alt
 mrgAlt = lens _mrgAlt (\ s a -> s{_mrgAlt = a})
 
 instance GoogleRequest MylibraryReadingpositionsGet'
@@ -171,17 +178,18 @@ instance GoogleRequest MylibraryReadingpositionsGet'
         type Rs MylibraryReadingpositionsGet' =
              ReadingPosition
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryReadingpositionsGet{..}
-          = go _mrgQuotaUser _mrgPrettyPrint _mrgUserIp
+        requestWithRoute r u
+          MylibraryReadingpositionsGet'{..}
+          = go _mrgQuotaUser (Just _mrgPrettyPrint) _mrgUserIp
               _mrgContentVersion
               _mrgKey
               _mrgVolumeId
               _mrgSource
               _mrgOauthToken
               _mrgFields
-              _mrgAlt
+              (Just _mrgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryReadingpositionsGetAPI)
+                      (Proxy :: Proxy MylibraryReadingpositionsGetResource)
                       r
                       u

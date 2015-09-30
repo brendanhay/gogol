@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesUpdate@.
-module Classroom.Courses.Update
+module Network.Google.Resource.Classroom.Courses.Update
     (
     -- * REST Resource
-      CoursesUpdateAPI
+      CoursesUpdateResource
 
     -- * Creating a Request
-    , coursesUpdate
-    , CoursesUpdate
+    , coursesUpdate'
+    , CoursesUpdate'
 
     -- * Request Lenses
     , cuXgafv
@@ -53,10 +54,24 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesUpdate@ which the
--- 'CoursesUpdate' request conforms to.
-type CoursesUpdateAPI =
+-- 'CoursesUpdate'' request conforms to.
+type CoursesUpdateResource =
      "v1" :>
-       "courses" :> Capture "id" Text :> Put '[JSON] Course
+       "courses" :>
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Put '[JSON] Course
 
 -- | Updates a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to modify
@@ -64,8 +79,8 @@ type CoursesUpdateAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if no course exists with the
 -- requested ID.
 --
--- /See:/ 'coursesUpdate' smart constructor.
-data CoursesUpdate = CoursesUpdate
+-- /See:/ 'coursesUpdate'' smart constructor.
+data CoursesUpdate' = CoursesUpdate'
     { _cuXgafv          :: !(Maybe Text)
     , _cuQuotaUser      :: !(Maybe Text)
     , _cuPrettyPrint    :: !Bool
@@ -113,11 +128,11 @@ data CoursesUpdate = CoursesUpdate
 -- * 'cuCallback'
 --
 -- * 'cuAlt'
-coursesUpdate
+coursesUpdate'
     :: Text -- ^ 'id'
-    -> CoursesUpdate
-coursesUpdate pCuId_ =
-    CoursesUpdate
+    -> CoursesUpdate'
+coursesUpdate' pCuId_ =
+    CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
@@ -211,10 +226,10 @@ cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 instance GoogleRequest CoursesUpdate' where
         type Rs CoursesUpdate' = Course
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesUpdate{..}
-          = go _cuXgafv _cuQuotaUser _cuPrettyPrint
+        requestWithRoute r u CoursesUpdate'{..}
+          = go _cuXgafv _cuQuotaUser (Just _cuPrettyPrint)
               _cuUploadProtocol
-              _cuPp
+              (Just _cuPp)
               _cuAccessToken
               _cuUploadType
               _cuBearerToken
@@ -223,7 +238,9 @@ instance GoogleRequest CoursesUpdate' where
               _cuOauthToken
               _cuFields
               _cuCallback
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesUpdateResource)
+                      r
                       u

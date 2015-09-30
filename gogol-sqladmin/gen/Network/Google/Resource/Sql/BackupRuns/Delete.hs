@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the backup taken by a backup run.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlBackupRunsDelete@.
-module Sql.BackupRuns.Delete
+module Network.Google.Resource.Sql.BackupRuns.Delete
     (
     -- * REST Resource
-      BackupRunsDeleteAPI
+      BackupRunsDeleteResource
 
     -- * Creating a Request
-    , backupRunsDelete
-    , BackupRunsDelete
+    , backupRunsDelete'
+    , BackupRunsDelete'
 
     -- * Request Lenses
     , brdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlBackupRunsDelete@ which the
--- 'BackupRunsDelete' request conforms to.
-type BackupRunsDeleteAPI =
+-- 'BackupRunsDelete'' request conforms to.
+type BackupRunsDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "backupRuns" :>
-               Capture "id" Int64 :> Delete '[JSON] Operation
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the backup taken by a backup run.
 --
--- /See:/ 'backupRunsDelete' smart constructor.
-data BackupRunsDelete = BackupRunsDelete
+-- /See:/ 'backupRunsDelete'' smart constructor.
+data BackupRunsDelete' = BackupRunsDelete'
     { _brdQuotaUser   :: !(Maybe Text)
     , _brdPrettyPrint :: !Bool
     , _brdProject     :: !Text
@@ -66,7 +74,7 @@ data BackupRunsDelete = BackupRunsDelete
     , _brdId          :: !Int64
     , _brdOauthToken  :: !(Maybe Text)
     , _brdFields      :: !(Maybe Text)
-    , _brdAlt         :: !Text
+    , _brdAlt         :: !Alt
     , _brdInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data BackupRunsDelete = BackupRunsDelete
 -- * 'brdAlt'
 --
 -- * 'brdInstance'
-backupRunsDelete
+backupRunsDelete'
     :: Text -- ^ 'project'
     -> Int64 -- ^ 'id'
     -> Text -- ^ 'instance'
-    -> BackupRunsDelete
-backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
-    BackupRunsDelete
+    -> BackupRunsDelete'
+backupRunsDelete' pBrdProject_ pBrdId_ pBrdInstance_ =
+    BackupRunsDelete'
     { _brdQuotaUser = Nothing
     , _brdPrettyPrint = True
     , _brdProject = pBrdProject_
@@ -108,7 +116,7 @@ backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
     , _brdId = pBrdId_
     , _brdOauthToken = Nothing
     , _brdFields = Nothing
-    , _brdAlt = "json"
+    , _brdAlt = JSON
     , _brdInstance = pBrdInstance_
     }
 
@@ -158,7 +166,7 @@ brdFields
   = lens _brdFields (\ s a -> s{_brdFields = a})
 
 -- | Data format for the response.
-brdAlt :: Lens' BackupRunsDelete' Text
+brdAlt :: Lens' BackupRunsDelete' Alt
 brdAlt = lens _brdAlt (\ s a -> s{_brdAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -169,17 +177,17 @@ brdInstance
 instance GoogleRequest BackupRunsDelete' where
         type Rs BackupRunsDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsDelete{..}
-          = go _brdQuotaUser _brdPrettyPrint _brdProject
+        requestWithRoute r u BackupRunsDelete'{..}
+          = go _brdQuotaUser (Just _brdPrettyPrint) _brdProject
               _brdUserIp
               _brdKey
               _brdId
               _brdOauthToken
               _brdFields
-              _brdAlt
+              (Just _brdAlt)
               _brdInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackupRunsDeleteAPI)
+                      (Proxy :: Proxy BackupRunsDeleteResource)
                       r
                       u

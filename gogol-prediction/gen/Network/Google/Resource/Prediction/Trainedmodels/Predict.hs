@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Submit model id and request a prediction.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsPredict@.
-module Prediction.Trainedmodels.Predict
+module Network.Google.Resource.Prediction.Trainedmodels.Predict
     (
     -- * REST Resource
-      TrainedmodelsPredictAPI
+      TrainedmodelsPredictResource
 
     -- * Creating a Request
-    , trainedmodelsPredict
-    , TrainedmodelsPredict
+    , trainedmodelsPredict'
+    , TrainedmodelsPredict'
 
     -- * Request Lenses
     , tpQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsPredict@ which the
--- 'TrainedmodelsPredict' request conforms to.
-type TrainedmodelsPredictAPI =
+-- 'TrainedmodelsPredict'' request conforms to.
+type TrainedmodelsPredictResource =
      Capture "project" Text :>
        "trainedmodels" :>
-         Capture "id" Text :> "predict" :> Post '[JSON] Output
+         Capture "id" Text :>
+           "predict" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Output
 
 -- | Submit model id and request a prediction.
 --
--- /See:/ 'trainedmodelsPredict' smart constructor.
-data TrainedmodelsPredict = TrainedmodelsPredict
+-- /See:/ 'trainedmodelsPredict'' smart constructor.
+data TrainedmodelsPredict' = TrainedmodelsPredict'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
     , _tpProject     :: !Text
@@ -62,7 +71,7 @@ data TrainedmodelsPredict = TrainedmodelsPredict
     , _tpId          :: !Text
     , _tpOauthToken  :: !(Maybe Text)
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsPredict'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data TrainedmodelsPredict = TrainedmodelsPredict
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-trainedmodelsPredict
+trainedmodelsPredict'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
-    -> TrainedmodelsPredict
-trainedmodelsPredict pTpProject_ pTpId_ =
-    TrainedmodelsPredict
+    -> TrainedmodelsPredict'
+trainedmodelsPredict' pTpProject_ pTpId_ =
+    TrainedmodelsPredict'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
     , _tpProject = pTpProject_
@@ -100,7 +109,7 @@ trainedmodelsPredict pTpProject_ pTpId_ =
     , _tpId = pTpId_
     , _tpOauthToken = Nothing
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,21 +155,22 @@ tpFields :: Lens' TrainedmodelsPredict' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TrainedmodelsPredict' Text
+tpAlt :: Lens' TrainedmodelsPredict' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TrainedmodelsPredict' where
         type Rs TrainedmodelsPredict' = Output
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsPredict{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpProject _tpUserIp
+        requestWithRoute r u TrainedmodelsPredict'{..}
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpProject
+              _tpUserIp
               _tpKey
               _tpId
               _tpOauthToken
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsPredictAPI)
+                      (Proxy :: Proxy TrainedmodelsPredictResource)
                       r
                       u

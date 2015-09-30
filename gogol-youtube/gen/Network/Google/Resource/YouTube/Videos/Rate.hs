@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,151 +20,157 @@
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosRate@.
-module YouTube.Videos.Rate
+module Network.Google.Resource.YouTube.Videos.Rate
     (
     -- * REST Resource
-      VideosRateAPI
+      VideosRateResource
 
     -- * Creating a Request
-    , videosRate
-    , VideosRate
+    , videosRate'
+    , VideosRate'
 
     -- * Request Lenses
-    , vidQuotaUser
-    , vidRating
-    , vidPrettyPrint
-    , vidUserIp
-    , vidKey
-    , vidId
-    , vidOauthToken
-    , vidFields
-    , vidAlt
+    , vrQuotaUser
+    , vrRating
+    , vrPrettyPrint
+    , vrUserIp
+    , vrKey
+    , vrId
+    , vrOauthToken
+    , vrFields
+    , vrAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosRate@ which the
--- 'VideosRate' request conforms to.
-type VideosRateAPI =
+-- 'VideosRate'' request conforms to.
+type VideosRateResource =
      "videos" :>
        "rate" :>
-         QueryParam "rating" Text :>
-           QueryParam "id" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "rating" YouTubeVideosRateRating :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
--- /See:/ 'videosRate' smart constructor.
-data VideosRate = VideosRate
-    { _vidQuotaUser   :: !(Maybe Text)
-    , _vidRating      :: !Text
-    , _vidPrettyPrint :: !Bool
-    , _vidUserIp      :: !(Maybe Text)
-    , _vidKey         :: !(Maybe Text)
-    , _vidId          :: !Text
-    , _vidOauthToken  :: !(Maybe Text)
-    , _vidFields      :: !(Maybe Text)
-    , _vidAlt         :: !Text
+-- /See:/ 'videosRate'' smart constructor.
+data VideosRate' = VideosRate'
+    { _vrQuotaUser   :: !(Maybe Text)
+    , _vrRating      :: !YouTubeVideosRateRating
+    , _vrPrettyPrint :: !Bool
+    , _vrUserIp      :: !(Maybe Text)
+    , _vrKey         :: !(Maybe Text)
+    , _vrId          :: !Text
+    , _vrOauthToken  :: !(Maybe Text)
+    , _vrFields      :: !(Maybe Text)
+    , _vrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosRate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vidQuotaUser'
+-- * 'vrQuotaUser'
 --
--- * 'vidRating'
+-- * 'vrRating'
 --
--- * 'vidPrettyPrint'
+-- * 'vrPrettyPrint'
 --
--- * 'vidUserIp'
+-- * 'vrUserIp'
 --
--- * 'vidKey'
+-- * 'vrKey'
 --
--- * 'vidId'
+-- * 'vrId'
 --
--- * 'vidOauthToken'
+-- * 'vrOauthToken'
 --
--- * 'vidFields'
+-- * 'vrFields'
 --
--- * 'vidAlt'
-videosRate
-    :: Text -- ^ 'rating'
+-- * 'vrAlt'
+videosRate'
+    :: YouTubeVideosRateRating -- ^ 'rating'
     -> Text -- ^ 'id'
-    -> VideosRate
-videosRate pVidRating_ pVidId_ =
-    VideosRate
-    { _vidQuotaUser = Nothing
-    , _vidRating = pVidRating_
-    , _vidPrettyPrint = True
-    , _vidUserIp = Nothing
-    , _vidKey = Nothing
-    , _vidId = pVidId_
-    , _vidOauthToken = Nothing
-    , _vidFields = Nothing
-    , _vidAlt = "json"
+    -> VideosRate'
+videosRate' pVrRating_ pVrId_ =
+    VideosRate'
+    { _vrQuotaUser = Nothing
+    , _vrRating = pVrRating_
+    , _vrPrettyPrint = True
+    , _vrUserIp = Nothing
+    , _vrKey = Nothing
+    , _vrId = pVrId_
+    , _vrOauthToken = Nothing
+    , _vrFields = Nothing
+    , _vrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-vidQuotaUser :: Lens' VideosRate' (Maybe Text)
-vidQuotaUser
-  = lens _vidQuotaUser (\ s a -> s{_vidQuotaUser = a})
+vrQuotaUser :: Lens' VideosRate' (Maybe Text)
+vrQuotaUser
+  = lens _vrQuotaUser (\ s a -> s{_vrQuotaUser = a})
 
 -- | Specifies the rating to record.
-vidRating :: Lens' VideosRate' Text
-vidRating
-  = lens _vidRating (\ s a -> s{_vidRating = a})
+vrRating :: Lens' VideosRate' YouTubeVideosRateRating
+vrRating = lens _vrRating (\ s a -> s{_vrRating = a})
 
 -- | Returns response with indentations and line breaks.
-vidPrettyPrint :: Lens' VideosRate' Bool
-vidPrettyPrint
-  = lens _vidPrettyPrint
-      (\ s a -> s{_vidPrettyPrint = a})
+vrPrettyPrint :: Lens' VideosRate' Bool
+vrPrettyPrint
+  = lens _vrPrettyPrint
+      (\ s a -> s{_vrPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vidUserIp :: Lens' VideosRate' (Maybe Text)
-vidUserIp
-  = lens _vidUserIp (\ s a -> s{_vidUserIp = a})
+vrUserIp :: Lens' VideosRate' (Maybe Text)
+vrUserIp = lens _vrUserIp (\ s a -> s{_vrUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vidKey :: Lens' VideosRate' (Maybe Text)
-vidKey = lens _vidKey (\ s a -> s{_vidKey = a})
+vrKey :: Lens' VideosRate' (Maybe Text)
+vrKey = lens _vrKey (\ s a -> s{_vrKey = a})
 
 -- | The id parameter specifies the YouTube video ID of the video that is
 -- being rated or having its rating removed.
-vidId :: Lens' VideosRate' Text
-vidId = lens _vidId (\ s a -> s{_vidId = a})
+vrId :: Lens' VideosRate' Text
+vrId = lens _vrId (\ s a -> s{_vrId = a})
 
 -- | OAuth 2.0 token for the current user.
-vidOauthToken :: Lens' VideosRate' (Maybe Text)
-vidOauthToken
-  = lens _vidOauthToken
-      (\ s a -> s{_vidOauthToken = a})
+vrOauthToken :: Lens' VideosRate' (Maybe Text)
+vrOauthToken
+  = lens _vrOauthToken (\ s a -> s{_vrOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-vidFields :: Lens' VideosRate' (Maybe Text)
-vidFields
-  = lens _vidFields (\ s a -> s{_vidFields = a})
+vrFields :: Lens' VideosRate' (Maybe Text)
+vrFields = lens _vrFields (\ s a -> s{_vrFields = a})
 
 -- | Data format for the response.
-vidAlt :: Lens' VideosRate' Text
-vidAlt = lens _vidAlt (\ s a -> s{_vidAlt = a})
+vrAlt :: Lens' VideosRate' Alt
+vrAlt = lens _vrAlt (\ s a -> s{_vrAlt = a})
 
 instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosRate{..}
-          = go _vidQuotaUser (Just _vidRating) _vidPrettyPrint
-              _vidUserIp
-              _vidKey
-              (Just _vidId)
-              _vidOauthToken
-              _vidFields
-              _vidAlt
+        requestWithRoute r u VideosRate'{..}
+          = go _vrQuotaUser (Just _vrRating)
+              (Just _vrPrettyPrint)
+              _vrUserIp
+              _vrKey
+              (Just _vrId)
+              _vrOauthToken
+              _vrFields
+              (Just _vrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosRateAPI) r u
+                  = clientWithRoute (Proxy :: Proxy VideosRateResource)
+                      r
+                      u

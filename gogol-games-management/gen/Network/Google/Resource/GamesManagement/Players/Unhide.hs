@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementPlayersUnhide@.
-module GamesManagement.Players.Unhide
+module Network.Google.Resource.GamesManagement.Players.Unhide
     (
     -- * REST Resource
-      PlayersUnhideAPI
+      PlayersUnhideResource
 
     -- * Creating a Request
-    , playersUnhide
-    , PlayersUnhide
+    , playersUnhide'
+    , PlayersUnhide'
 
     -- * Request Lenses
     , puQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementPlayersUnhide@ which the
--- 'PlayersUnhide' request conforms to.
-type PlayersUnhideAPI =
+-- 'PlayersUnhide'' request conforms to.
+type PlayersUnhideResource =
      "applications" :>
        Capture "applicationId" Text :>
          "players" :>
            "hidden" :>
-             Capture "playerId" Text :> Delete '[JSON] ()
+             Capture "playerId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Unhide the given player\'s leaderboard scores from the given
 -- application. This method is only available to user accounts for your
 -- developer console.
 --
--- /See:/ 'playersUnhide' smart constructor.
-data PlayersUnhide = PlayersUnhide
+-- /See:/ 'playersUnhide'' smart constructor.
+data PlayersUnhide' = PlayersUnhide'
     { _puQuotaUser     :: !(Maybe Text)
     , _puPrettyPrint   :: !Bool
     , _puUserIp        :: !(Maybe Text)
@@ -68,7 +76,7 @@ data PlayersUnhide = PlayersUnhide
     , _puOauthToken    :: !(Maybe Text)
     , _puPlayerId      :: !Text
     , _puFields        :: !(Maybe Text)
-    , _puAlt           :: !Text
+    , _puAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersUnhide'' with the minimum fields required to make a request.
@@ -92,12 +100,12 @@ data PlayersUnhide = PlayersUnhide
 -- * 'puFields'
 --
 -- * 'puAlt'
-playersUnhide
+playersUnhide'
     :: Text -- ^ 'applicationId'
     -> Text -- ^ 'playerId'
-    -> PlayersUnhide
-playersUnhide pPuApplicationId_ pPuPlayerId_ =
-    PlayersUnhide
+    -> PlayersUnhide'
+playersUnhide' pPuApplicationId_ pPuPlayerId_ =
+    PlayersUnhide'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIp = Nothing
@@ -106,7 +114,7 @@ playersUnhide pPuApplicationId_ pPuPlayerId_ =
     , _puOauthToken = Nothing
     , _puPlayerId = pPuPlayerId_
     , _puFields = Nothing
-    , _puAlt = "json"
+    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,20 +163,22 @@ puFields :: Lens' PlayersUnhide' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PlayersUnhide' Text
+puAlt :: Lens' PlayersUnhide' Alt
 puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
 
 instance GoogleRequest PlayersUnhide' where
         type Rs PlayersUnhide' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u PlayersUnhide{..}
-          = go _puQuotaUser _puPrettyPrint _puUserIp
+        requestWithRoute r u PlayersUnhide'{..}
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
               _puApplicationId
               _puKey
               _puOauthToken
               _puPlayerId
               _puFields
-              _puAlt
+              (Just _puAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlayersUnhideAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PlayersUnhideResource)
+                      r
                       u

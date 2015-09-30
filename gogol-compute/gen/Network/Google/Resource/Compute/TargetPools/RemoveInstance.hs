@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes instance URL from targetPool.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsRemoveInstance@.
-module Compute.TargetPools.RemoveInstance
+module Network.Google.Resource.Compute.TargetPools.RemoveInstance
     (
     -- * REST Resource
-      TargetPoolsRemoveInstanceAPI
+      TargetPoolsRemoveInstanceResource
 
     -- * Creating a Request
-    , targetPoolsRemoveInstance
-    , TargetPoolsRemoveInstance
+    , targetPoolsRemoveInstance'
+    , TargetPoolsRemoveInstance'
 
     -- * Request Lenses
     , tpriQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsRemoveInstance@ which the
--- 'TargetPoolsRemoveInstance' request conforms to.
-type TargetPoolsRemoveInstanceAPI =
+-- 'TargetPoolsRemoveInstance'' request conforms to.
+type TargetPoolsRemoveInstanceResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
-               "removeInstance" :> Post '[JSON] Operation
+               "removeInstance" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes instance URL from targetPool.
 --
--- /See:/ 'targetPoolsRemoveInstance' smart constructor.
-data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
+-- /See:/ 'targetPoolsRemoveInstance'' smart constructor.
+data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
     { _tpriQuotaUser   :: !(Maybe Text)
     , _tpriPrettyPrint :: !Bool
     , _tpriProject     :: !Text
@@ -67,7 +75,7 @@ data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
     , _tpriRegion      :: !Text
     , _tpriOauthToken  :: !(Maybe Text)
     , _tpriFields      :: !(Maybe Text)
-    , _tpriAlt         :: !Text
+    , _tpriAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveInstance'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
 -- * 'tpriFields'
 --
 -- * 'tpriAlt'
-targetPoolsRemoveInstance
+targetPoolsRemoveInstance'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsRemoveInstance
-targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriRegion_ =
-    TargetPoolsRemoveInstance
+    -> TargetPoolsRemoveInstance'
+targetPoolsRemoveInstance' pTpriProject_ pTpriTargetPool_ pTpriRegion_ =
+    TargetPoolsRemoveInstance'
     { _tpriQuotaUser = Nothing
     , _tpriPrettyPrint = True
     , _tpriProject = pTpriProject_
@@ -109,7 +117,7 @@ targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriRegion_ =
     , _tpriRegion = pTpriRegion_
     , _tpriOauthToken = Nothing
     , _tpriFields = Nothing
-    , _tpriAlt = "json"
+    , _tpriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,24 +173,25 @@ tpriFields
   = lens _tpriFields (\ s a -> s{_tpriFields = a})
 
 -- | Data format for the response.
-tpriAlt :: Lens' TargetPoolsRemoveInstance' Text
+tpriAlt :: Lens' TargetPoolsRemoveInstance' Alt
 tpriAlt = lens _tpriAlt (\ s a -> s{_tpriAlt = a})
 
 instance GoogleRequest TargetPoolsRemoveInstance'
          where
         type Rs TargetPoolsRemoveInstance' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsRemoveInstance{..}
-          = go _tpriQuotaUser _tpriPrettyPrint _tpriProject
+        requestWithRoute r u TargetPoolsRemoveInstance'{..}
+          = go _tpriQuotaUser (Just _tpriPrettyPrint)
+              _tpriProject
               _tpriTargetPool
               _tpriUserIp
               _tpriKey
               _tpriRegion
               _tpriOauthToken
               _tpriFields
-              _tpriAlt
+              (Just _tpriAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsRemoveInstanceAPI)
+                      (Proxy :: Proxy TargetPoolsRemoveInstanceResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesGet@.
-module DNS.ManagedZones.Get
+module Network.Google.Resource.DNS.ManagedZones.Get
     (
     -- * REST Resource
-      ManagedZonesGetAPI
+      ManagedZonesGetResource
 
     -- * Creating a Request
-    , managedZonesGet
-    , ManagedZonesGet
+    , managedZonesGet'
+    , ManagedZonesGet'
 
     -- * Request Lenses
     , mzgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSManagedZonesGet@ which the
--- 'ManagedZonesGet' request conforms to.
-type ManagedZonesGetAPI =
+-- 'ManagedZonesGet'' request conforms to.
+type ManagedZonesGetResource =
      Capture "project" Text :>
        "managedZones" :>
-         Capture "managedZone" Text :> Get '[JSON] ManagedZone
+         Capture "managedZone" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
 --
--- /See:/ 'managedZonesGet' smart constructor.
-data ManagedZonesGet = ManagedZonesGet
+-- /See:/ 'managedZonesGet'' smart constructor.
+data ManagedZonesGet' = ManagedZonesGet'
     { _mzgQuotaUser   :: !(Maybe Text)
     , _mzgPrettyPrint :: !Bool
     , _mzgProject     :: !Text
@@ -62,7 +70,7 @@ data ManagedZonesGet = ManagedZonesGet
     , _mzgOauthToken  :: !(Maybe Text)
     , _mzgManagedZone :: !Text
     , _mzgFields      :: !(Maybe Text)
-    , _mzgAlt         :: !Text
+    , _mzgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesGet'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data ManagedZonesGet = ManagedZonesGet
 -- * 'mzgFields'
 --
 -- * 'mzgAlt'
-managedZonesGet
+managedZonesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
-    -> ManagedZonesGet
-managedZonesGet pMzgProject_ pMzgManagedZone_ =
-    ManagedZonesGet
+    -> ManagedZonesGet'
+managedZonesGet' pMzgProject_ pMzgManagedZone_ =
+    ManagedZonesGet'
     { _mzgQuotaUser = Nothing
     , _mzgPrettyPrint = True
     , _mzgProject = pMzgProject_
@@ -100,7 +108,7 @@ managedZonesGet pMzgProject_ pMzgManagedZone_ =
     , _mzgOauthToken = Nothing
     , _mzgManagedZone = pMzgManagedZone_
     , _mzgFields = Nothing
-    , _mzgAlt = "json"
+    , _mzgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,21 +160,22 @@ mzgFields
   = lens _mzgFields (\ s a -> s{_mzgFields = a})
 
 -- | Data format for the response.
-mzgAlt :: Lens' ManagedZonesGet' Text
+mzgAlt :: Lens' ManagedZonesGet' Alt
 mzgAlt = lens _mzgAlt (\ s a -> s{_mzgAlt = a})
 
 instance GoogleRequest ManagedZonesGet' where
         type Rs ManagedZonesGet' = ManagedZone
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesGet{..}
-          = go _mzgQuotaUser _mzgPrettyPrint _mzgProject
+        requestWithRoute r u ManagedZonesGet'{..}
+          = go _mzgQuotaUser (Just _mzgPrettyPrint) _mzgProject
               _mzgUserIp
               _mzgKey
               _mzgOauthToken
               _mzgManagedZone
               _mzgFields
-              _mzgAlt
+              (Just _mzgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ManagedZonesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ManagedZonesGetResource)
                       r
                       u

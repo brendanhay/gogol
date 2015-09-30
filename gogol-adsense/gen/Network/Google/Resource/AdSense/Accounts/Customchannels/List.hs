@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,187 +21,194 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsCustomchannelsList@.
-module AdSense.Accounts.Customchannels.List
+module Network.Google.Resource.AdSense.Accounts.Customchannels.List
     (
     -- * REST Resource
-      AccountsCustomchannelsListAPI
+      AccountsCustomchannelsListResource
 
     -- * Creating a Request
-    , accountsCustomchannelsList
-    , AccountsCustomchannelsList
+    , accountsCustomchannelsList'
+    , AccountsCustomchannelsList'
 
     -- * Request Lenses
-    , aclQuotaUser
-    , aclPrettyPrint
-    , aclUserIp
-    , aclAdClientId
-    , aclAccountId
-    , aclKey
-    , aclPageToken
-    , aclOauthToken
-    , aclMaxResults
-    , aclFields
-    , aclAlt
+    , accQuotaUser
+    , accPrettyPrint
+    , accUserIp
+    , accAdClientId
+    , accAccountId
+    , accKey
+    , accPageToken
+    , accOauthToken
+    , accMaxResults
+    , accFields
+    , accAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsCustomchannelsList@ which the
--- 'AccountsCustomchannelsList' request conforms to.
-type AccountsCustomchannelsListAPI =
+-- 'AccountsCustomchannelsList'' request conforms to.
+type AccountsCustomchannelsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "customchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] CustomChannels
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] CustomChannels
 
 -- | List all custom channels in the specified ad client for the specified
 -- account.
 --
--- /See:/ 'accountsCustomchannelsList' smart constructor.
-data AccountsCustomchannelsList = AccountsCustomchannelsList
-    { _aclQuotaUser   :: !(Maybe Text)
-    , _aclPrettyPrint :: !Bool
-    , _aclUserIp      :: !(Maybe Text)
-    , _aclAdClientId  :: !Text
-    , _aclAccountId   :: !Text
-    , _aclKey         :: !(Maybe Text)
-    , _aclPageToken   :: !(Maybe Text)
-    , _aclOauthToken  :: !(Maybe Text)
-    , _aclMaxResults  :: !(Maybe Int32)
-    , _aclFields      :: !(Maybe Text)
-    , _aclAlt         :: !Text
+-- /See:/ 'accountsCustomchannelsList'' smart constructor.
+data AccountsCustomchannelsList' = AccountsCustomchannelsList'
+    { _accQuotaUser   :: !(Maybe Text)
+    , _accPrettyPrint :: !Bool
+    , _accUserIp      :: !(Maybe Text)
+    , _accAdClientId  :: !Text
+    , _accAccountId   :: !Text
+    , _accKey         :: !(Maybe Text)
+    , _accPageToken   :: !(Maybe Text)
+    , _accOauthToken  :: !(Maybe Text)
+    , _accMaxResults  :: !(Maybe Int32)
+    , _accFields      :: !(Maybe Text)
+    , _accAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsCustomchannelsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aclQuotaUser'
+-- * 'accQuotaUser'
 --
--- * 'aclPrettyPrint'
+-- * 'accPrettyPrint'
 --
--- * 'aclUserIp'
+-- * 'accUserIp'
 --
--- * 'aclAdClientId'
+-- * 'accAdClientId'
 --
--- * 'aclAccountId'
+-- * 'accAccountId'
 --
--- * 'aclKey'
+-- * 'accKey'
 --
--- * 'aclPageToken'
+-- * 'accPageToken'
 --
--- * 'aclOauthToken'
+-- * 'accOauthToken'
 --
--- * 'aclMaxResults'
+-- * 'accMaxResults'
 --
--- * 'aclFields'
+-- * 'accFields'
 --
--- * 'aclAlt'
-accountsCustomchannelsList
+-- * 'accAlt'
+accountsCustomchannelsList'
     :: Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsCustomchannelsList
-accountsCustomchannelsList pAclAdClientId_ pAclAccountId_ =
-    AccountsCustomchannelsList
-    { _aclQuotaUser = Nothing
-    , _aclPrettyPrint = True
-    , _aclUserIp = Nothing
-    , _aclAdClientId = pAclAdClientId_
-    , _aclAccountId = pAclAccountId_
-    , _aclKey = Nothing
-    , _aclPageToken = Nothing
-    , _aclOauthToken = Nothing
-    , _aclMaxResults = Nothing
-    , _aclFields = Nothing
-    , _aclAlt = "json"
+    -> AccountsCustomchannelsList'
+accountsCustomchannelsList' pAccAdClientId_ pAccAccountId_ =
+    AccountsCustomchannelsList'
+    { _accQuotaUser = Nothing
+    , _accPrettyPrint = True
+    , _accUserIp = Nothing
+    , _accAdClientId = pAccAdClientId_
+    , _accAccountId = pAccAccountId_
+    , _accKey = Nothing
+    , _accPageToken = Nothing
+    , _accOauthToken = Nothing
+    , _accMaxResults = Nothing
+    , _accFields = Nothing
+    , _accAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aclQuotaUser :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclQuotaUser
-  = lens _aclQuotaUser (\ s a -> s{_aclQuotaUser = a})
+accQuotaUser :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accQuotaUser
+  = lens _accQuotaUser (\ s a -> s{_accQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aclPrettyPrint :: Lens' AccountsCustomchannelsList' Bool
-aclPrettyPrint
-  = lens _aclPrettyPrint
-      (\ s a -> s{_aclPrettyPrint = a})
+accPrettyPrint :: Lens' AccountsCustomchannelsList' Bool
+accPrettyPrint
+  = lens _accPrettyPrint
+      (\ s a -> s{_accPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aclUserIp :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclUserIp
-  = lens _aclUserIp (\ s a -> s{_aclUserIp = a})
+accUserIp :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accUserIp
+  = lens _accUserIp (\ s a -> s{_accUserIp = a})
 
 -- | Ad client for which to list custom channels.
-aclAdClientId :: Lens' AccountsCustomchannelsList' Text
-aclAdClientId
-  = lens _aclAdClientId
-      (\ s a -> s{_aclAdClientId = a})
+accAdClientId :: Lens' AccountsCustomchannelsList' Text
+accAdClientId
+  = lens _accAdClientId
+      (\ s a -> s{_accAdClientId = a})
 
 -- | Account to which the ad client belongs.
-aclAccountId :: Lens' AccountsCustomchannelsList' Text
-aclAccountId
-  = lens _aclAccountId (\ s a -> s{_aclAccountId = a})
+accAccountId :: Lens' AccountsCustomchannelsList' Text
+accAccountId
+  = lens _accAccountId (\ s a -> s{_accAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aclKey :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclKey = lens _aclKey (\ s a -> s{_aclKey = a})
+accKey :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accKey = lens _accKey (\ s a -> s{_accKey = a})
 
 -- | A continuation token, used to page through custom channels. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-aclPageToken :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclPageToken
-  = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
+accPageToken :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accPageToken
+  = lens _accPageToken (\ s a -> s{_accPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aclOauthToken :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclOauthToken
-  = lens _aclOauthToken
-      (\ s a -> s{_aclOauthToken = a})
+accOauthToken :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accOauthToken
+  = lens _accOauthToken
+      (\ s a -> s{_accOauthToken = a})
 
 -- | The maximum number of custom channels to include in the response, used
 -- for paging.
-aclMaxResults :: Lens' AccountsCustomchannelsList' (Maybe Int32)
-aclMaxResults
-  = lens _aclMaxResults
-      (\ s a -> s{_aclMaxResults = a})
+accMaxResults :: Lens' AccountsCustomchannelsList' (Maybe Int32)
+accMaxResults
+  = lens _accMaxResults
+      (\ s a -> s{_accMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aclFields :: Lens' AccountsCustomchannelsList' (Maybe Text)
-aclFields
-  = lens _aclFields (\ s a -> s{_aclFields = a})
+accFields :: Lens' AccountsCustomchannelsList' (Maybe Text)
+accFields
+  = lens _accFields (\ s a -> s{_accFields = a})
 
 -- | Data format for the response.
-aclAlt :: Lens' AccountsCustomchannelsList' Text
-aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
+accAlt :: Lens' AccountsCustomchannelsList' Alt
+accAlt = lens _accAlt (\ s a -> s{_accAlt = a})
 
 instance GoogleRequest AccountsCustomchannelsList'
          where
         type Rs AccountsCustomchannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsCustomchannelsList{..}
-          = go _aclQuotaUser _aclPrettyPrint _aclUserIp
-              _aclAdClientId
-              _aclAccountId
-              _aclKey
-              _aclPageToken
-              _aclOauthToken
-              _aclMaxResults
-              _aclFields
-              _aclAlt
+        requestWithRoute r u AccountsCustomchannelsList'{..}
+          = go _accQuotaUser (Just _accPrettyPrint) _accUserIp
+              _accAdClientId
+              _accAccountId
+              _accKey
+              _accPageToken
+              _accOauthToken
+              _accMaxResults
+              _accFields
+              (Just _accAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsCustomchannelsListAPI)
+                      (Proxy :: Proxy AccountsCustomchannelsListResource)
                       r
                       u

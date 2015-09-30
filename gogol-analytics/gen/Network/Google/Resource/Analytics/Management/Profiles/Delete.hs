@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesDelete@.
-module Analytics.Management.Profiles.Delete
+module Network.Google.Resource.Analytics.Management.Profiles.Delete
     (
     -- * REST Resource
-      ManagementProfilesDeleteAPI
+      ManagementProfilesDeleteResource
 
     -- * Creating a Request
-    , managementProfilesDelete
-    , ManagementProfilesDelete
+    , managementProfilesDelete'
+    , ManagementProfilesDelete'
 
     -- * Request Lenses
     , mpdQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesDelete@ which the
--- 'ManagementProfilesDelete' request conforms to.
-type ManagementProfilesDeleteAPI =
+-- 'ManagementProfilesDelete'' request conforms to.
+type ManagementProfilesDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 Capture "profileId" Text :> Delete '[JSON] ()
+                 Capture "profileId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a view (profile).
 --
--- /See:/ 'managementProfilesDelete' smart constructor.
-data ManagementProfilesDelete = ManagementProfilesDelete
+-- /See:/ 'managementProfilesDelete'' smart constructor.
+data ManagementProfilesDelete' = ManagementProfilesDelete'
     { _mpdQuotaUser     :: !(Maybe Text)
     , _mpdPrettyPrint   :: !Bool
     , _mpdWebPropertyId :: !Text
@@ -68,7 +76,7 @@ data ManagementProfilesDelete = ManagementProfilesDelete
     , _mpdKey           :: !(Maybe Text)
     , _mpdOauthToken    :: !(Maybe Text)
     , _mpdFields        :: !(Maybe Text)
-    , _mpdAlt           :: !Text
+    , _mpdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesDelete'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data ManagementProfilesDelete = ManagementProfilesDelete
 -- * 'mpdFields'
 --
 -- * 'mpdAlt'
-managementProfilesDelete
+managementProfilesDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesDelete
-managementProfilesDelete pMpdWebPropertyId_ pMpdProfileId_ pMpdAccountId_ =
-    ManagementProfilesDelete
+    -> ManagementProfilesDelete'
+managementProfilesDelete' pMpdWebPropertyId_ pMpdProfileId_ pMpdAccountId_ =
+    ManagementProfilesDelete'
     { _mpdQuotaUser = Nothing
     , _mpdPrettyPrint = False
     , _mpdWebPropertyId = pMpdWebPropertyId_
@@ -110,7 +118,7 @@ managementProfilesDelete pMpdWebPropertyId_ pMpdProfileId_ pMpdAccountId_ =
     , _mpdKey = Nothing
     , _mpdOauthToken = Nothing
     , _mpdFields = Nothing
-    , _mpdAlt = "json"
+    , _mpdAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ mpdFields
   = lens _mpdFields (\ s a -> s{_mpdFields = a})
 
 -- | Data format for the response.
-mpdAlt :: Lens' ManagementProfilesDelete' Text
+mpdAlt :: Lens' ManagementProfilesDelete' Alt
 mpdAlt = lens _mpdAlt (\ s a -> s{_mpdAlt = a})
 
 instance GoogleRequest ManagementProfilesDelete'
          where
         type Rs ManagementProfilesDelete' = ()
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesDelete{..}
-          = go _mpdQuotaUser _mpdPrettyPrint _mpdWebPropertyId
+        requestWithRoute r u ManagementProfilesDelete'{..}
+          = go _mpdQuotaUser (Just _mpdPrettyPrint)
+              _mpdWebPropertyId
               _mpdUserIp
               _mpdProfileId
               _mpdAccountId
               _mpdKey
               _mpdOauthToken
               _mpdFields
-              _mpdAlt
+              (Just _mpdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesDeleteAPI)
+                      (Proxy :: Proxy ManagementProfilesDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- configured to restrict distribution to the enterprise domain.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsApksAddexternallyhosted@.
-module Androidpublisher.Edits.Apks.Addexternallyhosted
+module Network.Google.Resource.Androidpublisher.Edits.Apks.Addexternallyhosted
     (
     -- * REST Resource
-      EditsApksAddexternallyhostedAPI
+      EditsApksAddexternallyhostedResource
 
     -- * Creating a Request
-    , editsApksAddexternallyhosted
-    , EditsApksAddexternallyhosted
+    , editsApksAddexternallyhosted'
+    , EditsApksAddexternallyhosted'
 
     -- * Request Lenses
     , eaaQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsApksAddexternallyhosted@ which the
--- 'EditsApksAddexternallyhosted' request conforms to.
-type EditsApksAddexternallyhostedAPI =
+-- 'EditsApksAddexternallyhosted'' request conforms to.
+type EditsApksAddexternallyhostedResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              "externallyHosted" :>
-               Post '[JSON] ApksAddExternallyHostedResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] ApksAddExternallyHostedResponse
 
 -- | Creates a new APK without uploading the APK itself to Google Play,
 -- instead hosting the APK at a specified URL. This function is only
 -- available to enterprises using Google Play for Work whose application is
 -- configured to restrict distribution to the enterprise domain.
 --
--- /See:/ 'editsApksAddexternallyhosted' smart constructor.
-data EditsApksAddexternallyhosted = EditsApksAddexternallyhosted
+-- /See:/ 'editsApksAddexternallyhosted'' smart constructor.
+data EditsApksAddexternallyhosted' = EditsApksAddexternallyhosted'
     { _eaaQuotaUser   :: !(Maybe Text)
     , _eaaPrettyPrint :: !Bool
     , _eaaPackageName :: !Text
@@ -71,7 +79,7 @@ data EditsApksAddexternallyhosted = EditsApksAddexternallyhosted
     , _eaaOauthToken  :: !(Maybe Text)
     , _eaaEditId      :: !Text
     , _eaaFields      :: !(Maybe Text)
-    , _eaaAlt         :: !Text
+    , _eaaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsApksAddexternallyhosted'' with the minimum fields required to make a request.
@@ -95,12 +103,12 @@ data EditsApksAddexternallyhosted = EditsApksAddexternallyhosted
 -- * 'eaaFields'
 --
 -- * 'eaaAlt'
-editsApksAddexternallyhosted
+editsApksAddexternallyhosted'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsApksAddexternallyhosted
-editsApksAddexternallyhosted pEaaPackageName_ pEaaEditId_ =
-    EditsApksAddexternallyhosted
+    -> EditsApksAddexternallyhosted'
+editsApksAddexternallyhosted' pEaaPackageName_ pEaaEditId_ =
+    EditsApksAddexternallyhosted'
     { _eaaQuotaUser = Nothing
     , _eaaPrettyPrint = True
     , _eaaPackageName = pEaaPackageName_
@@ -109,7 +117,7 @@ editsApksAddexternallyhosted pEaaPackageName_ pEaaEditId_ =
     , _eaaOauthToken = Nothing
     , _eaaEditId = pEaaEditId_
     , _eaaFields = Nothing
-    , _eaaAlt = "json"
+    , _eaaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,7 +169,7 @@ eaaFields
   = lens _eaaFields (\ s a -> s{_eaaFields = a})
 
 -- | Data format for the response.
-eaaAlt :: Lens' EditsApksAddexternallyhosted' Text
+eaaAlt :: Lens' EditsApksAddexternallyhosted' Alt
 eaaAlt = lens _eaaAlt (\ s a -> s{_eaaAlt = a})
 
 instance GoogleRequest EditsApksAddexternallyhosted'
@@ -169,16 +177,18 @@ instance GoogleRequest EditsApksAddexternallyhosted'
         type Rs EditsApksAddexternallyhosted' =
              ApksAddExternallyHostedResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsApksAddexternallyhosted{..}
-          = go _eaaQuotaUser _eaaPrettyPrint _eaaPackageName
+        requestWithRoute r u
+          EditsApksAddexternallyhosted'{..}
+          = go _eaaQuotaUser (Just _eaaPrettyPrint)
+              _eaaPackageName
               _eaaUserIp
               _eaaKey
               _eaaOauthToken
               _eaaEditId
               _eaaFields
-              _eaaAlt
+              (Just _eaaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApksAddexternallyhostedAPI)
+                      (Proxy :: Proxy EditsApksAddexternallyhostedResource)
                       r
                       u

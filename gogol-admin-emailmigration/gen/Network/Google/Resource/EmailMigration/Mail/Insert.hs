@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Insert Mail into Google\'s Gmail backends
 --
 -- /See:/ <https://developers.google.com/admin-sdk/email-migration/v2/ Email Migration API v2 Reference> for @EmailMigrationMailInsert@.
-module EmailMigration.Mail.Insert
+module Network.Google.Resource.EmailMigration.Mail.Insert
     (
     -- * REST Resource
-      MailInsertAPI
+      MailInsertResource
 
     -- * Creating a Request
-    , mailInsert
-    , MailInsert
+    , mailInsert'
+    , MailInsert'
 
     -- * Request Lenses
     , miQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.AdminEmailMigration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @EmailMigrationMailInsert@ which the
--- 'MailInsert' request conforms to.
-type MailInsertAPI =
-     Capture "userKey" Text :> "mail" :> Post '[JSON] ()
+-- 'MailInsert'' request conforms to.
+type MailInsertResource =
+     Capture "userKey" Text :>
+       "mail" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
 --
--- /See:/ 'mailInsert' smart constructor.
-data MailInsert = MailInsert
+-- /See:/ 'mailInsert'' smart constructor.
+data MailInsert' = MailInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data MailInsert = MailInsert
     , _miOauthToken  :: !(Maybe Text)
     , _miUserKey     :: !Text
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Text
+    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data MailInsert = MailInsert
 -- * 'miFields'
 --
 -- * 'miAlt'
-mailInsert
+mailInsert'
     :: Text -- ^ 'userKey'
-    -> MailInsert
-mailInsert pMiUserKey_ =
-    MailInsert
+    -> MailInsert'
+mailInsert' pMiUserKey_ =
+    MailInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIp = Nothing
@@ -92,7 +101,7 @@ mailInsert pMiUserKey_ =
     , _miOauthToken = Nothing
     , _miUserKey = pMiUserKey_
     , _miFields = Nothing
-    , _miAlt = "json"
+    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +143,21 @@ miFields :: Lens' MailInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 -- | Data format for the response.
-miAlt :: Lens' MailInsert' Text
+miAlt :: Lens' MailInsert' Alt
 miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
 
 instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()
         request
           = requestWithRoute defReq adminEmailMigrationURL
-        requestWithRoute r u MailInsert{..}
-          = go _miQuotaUser _miPrettyPrint _miUserIp _miKey
+        requestWithRoute r u MailInsert'{..}
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
+              _miKey
               _miOauthToken
               _miUserKey
               _miFields
-              _miAlt
+              (Just _miAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MailInsertAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MailInsertResource)
+                      r
+                      u

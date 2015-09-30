@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete data associated with a previous upload.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsDeleteUploadData@.
-module Analytics.Management.Uploads.DeleteUploadData
+module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
     (
     -- * REST Resource
-      ManagementUploadsDeleteUploadDataAPI
+      ManagementUploadsDeleteUploadDataResource
 
     -- * Creating a Request
-    , managementUploadsDeleteUploadData
-    , ManagementUploadsDeleteUploadData
+    , managementUploadsDeleteUploadData'
+    , ManagementUploadsDeleteUploadData'
 
     -- * Request Lenses
     , mududQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsDeleteUploadData@ which the
--- 'ManagementUploadsDeleteUploadData' request conforms to.
-type ManagementUploadsDeleteUploadDataAPI =
+-- 'ManagementUploadsDeleteUploadData'' request conforms to.
+type ManagementUploadsDeleteUploadDataResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementUploadsDeleteUploadDataAPI =
              Capture "webPropertyId" Text :>
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
-                   "deleteUploadData" :> Post '[JSON] ()
+                   "deleteUploadData" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Delete data associated with a previous upload.
 --
--- /See:/ 'managementUploadsDeleteUploadData' smart constructor.
-data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData
+-- /See:/ 'managementUploadsDeleteUploadData'' smart constructor.
+data ManagementUploadsDeleteUploadData' = ManagementUploadsDeleteUploadData'
     { _mududQuotaUser          :: !(Maybe Text)
     , _mududPrettyPrint        :: !Bool
     , _mududWebPropertyId      :: !Text
@@ -69,7 +77,7 @@ data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData
     , _mududKey                :: !(Maybe Text)
     , _mududOauthToken         :: !(Maybe Text)
     , _mududFields             :: !(Maybe Text)
-    , _mududAlt                :: !Text
+    , _mududAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsDeleteUploadData'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementUploadsDeleteUploadData = ManagementUploadsDeleteUploadData
 -- * 'mududFields'
 --
 -- * 'mududAlt'
-managementUploadsDeleteUploadData
+managementUploadsDeleteUploadData'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
     -> Text -- ^ 'accountId'
-    -> ManagementUploadsDeleteUploadData
-managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_ pMududAccountId_ =
-    ManagementUploadsDeleteUploadData
+    -> ManagementUploadsDeleteUploadData'
+managementUploadsDeleteUploadData' pMududWebPropertyId_ pMududCustomDataSourceId_ pMududAccountId_ =
+    ManagementUploadsDeleteUploadData'
     { _mududQuotaUser = Nothing
     , _mududPrettyPrint = False
     , _mududWebPropertyId = pMududWebPropertyId_
@@ -111,7 +119,7 @@ managementUploadsDeleteUploadData pMududWebPropertyId_ pMududCustomDataSourceId_
     , _mududKey = Nothing
     , _mududOauthToken = Nothing
     , _mududFields = Nothing
-    , _mududAlt = "json"
+    , _mududAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +178,7 @@ mududFields
   = lens _mududFields (\ s a -> s{_mududFields = a})
 
 -- | Data format for the response.
-mududAlt :: Lens' ManagementUploadsDeleteUploadData' Text
+mududAlt :: Lens' ManagementUploadsDeleteUploadData' Alt
 mududAlt = lens _mududAlt (\ s a -> s{_mududAlt = a})
 
 instance GoogleRequest
@@ -178,8 +186,8 @@ instance GoogleRequest
         type Rs ManagementUploadsDeleteUploadData' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementUploadsDeleteUploadData{..}
-          = go _mududQuotaUser _mududPrettyPrint
+          ManagementUploadsDeleteUploadData'{..}
+          = go _mududQuotaUser (Just _mududPrettyPrint)
               _mududWebPropertyId
               _mududUserIp
               _mududCustomDataSourceId
@@ -187,9 +195,10 @@ instance GoogleRequest
               _mududKey
               _mududOauthToken
               _mududFields
-              _mududAlt
+              (Just _mududAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUploadsDeleteUploadDataAPI)
+                      (Proxy ::
+                         Proxy ManagementUploadsDeleteUploadDataResource)
                       r
                       u

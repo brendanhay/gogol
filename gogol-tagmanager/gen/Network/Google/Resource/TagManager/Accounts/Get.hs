@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Account.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsGet@.
-module TagManager.Accounts.Get
+module Network.Google.Resource.TagManager.Accounts.Get
     (
     -- * REST Resource
-      AccountsGetAPI
+      AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet
-    , AccountsGet
+    , accountsGet'
+    , AccountsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsGet@ which the
--- 'AccountsGet' request conforms to.
-type AccountsGetAPI =
+-- 'AccountsGet'' request conforms to.
+type AccountsGetResource =
      "accounts" :>
-       Capture "accountId" Text :> Get '[JSON] Account
+       Capture "accountId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Account
 
 -- | Gets a GTM Account.
 --
--- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+-- /See:/ 'accountsGet'' smart constructor.
+data AccountsGet' = AccountsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AccountsGet = AccountsGet
     , _agKey         :: !(Maybe Text)
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AccountsGet = AccountsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-accountsGet
+accountsGet'
     :: Text -- ^ 'accountId'
-    -> AccountsGet
-accountsGet pAgAccountId_ =
-    AccountsGet
+    -> AccountsGet'
+accountsGet' pAgAccountId_ =
+    AccountsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -93,7 +101,7 @@ accountsGet pAgAccountId_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ agFields :: Lens' AccountsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AccountsGet' Text
+agAlt :: Lens' AccountsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u AccountsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agAccountId
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsGetResource)
+                      r
+                      u

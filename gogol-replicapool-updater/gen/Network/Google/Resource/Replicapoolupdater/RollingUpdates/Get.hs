@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns information about an update.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterRollingUpdatesGet@.
-module Replicapoolupdater.RollingUpdates.Get
+module Network.Google.Resource.Replicapoolupdater.RollingUpdates.Get
     (
     -- * REST Resource
-      RollingUpdatesGetAPI
+      RollingUpdatesGetResource
 
     -- * Creating a Request
-    , rollingUpdatesGet
-    , RollingUpdatesGet
+    , rollingUpdatesGet'
+    , RollingUpdatesGet'
 
     -- * Request Lenses
     , rugRollingUpdate
@@ -45,19 +46,25 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterRollingUpdatesGet@ which the
--- 'RollingUpdatesGet' request conforms to.
-type RollingUpdatesGetAPI =
+-- 'RollingUpdatesGet'' request conforms to.
+type RollingUpdatesGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "rollingUpdates" :>
              Capture "rollingUpdate" Text :>
-               Get '[JSON] RollingUpdate
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] RollingUpdate
 
 -- | Returns information about an update.
 --
--- /See:/ 'rollingUpdatesGet' smart constructor.
-data RollingUpdatesGet = RollingUpdatesGet
+-- /See:/ 'rollingUpdatesGet'' smart constructor.
+data RollingUpdatesGet' = RollingUpdatesGet'
     { _rugRollingUpdate :: !Text
     , _rugQuotaUser     :: !(Maybe Text)
     , _rugPrettyPrint   :: !Bool
@@ -67,7 +74,7 @@ data RollingUpdatesGet = RollingUpdatesGet
     , _rugKey           :: !(Maybe Text)
     , _rugOauthToken    :: !(Maybe Text)
     , _rugFields        :: !(Maybe Text)
-    , _rugAlt           :: !Text
+    , _rugAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollingUpdatesGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data RollingUpdatesGet = RollingUpdatesGet
 -- * 'rugFields'
 --
 -- * 'rugAlt'
-rollingUpdatesGet
+rollingUpdatesGet'
     :: Text -- ^ 'rollingUpdate'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> RollingUpdatesGet
-rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
-    RollingUpdatesGet
+    -> RollingUpdatesGet'
+rollingUpdatesGet' pRugRollingUpdate_ pRugProject_ pRugZone_ =
+    RollingUpdatesGet'
     { _rugRollingUpdate = pRugRollingUpdate_
     , _rugQuotaUser = Nothing
     , _rugPrettyPrint = True
@@ -109,7 +116,7 @@ rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
     , _rugKey = Nothing
     , _rugOauthToken = Nothing
     , _rugFields = Nothing
-    , _rugAlt = "json"
+    , _rugAlt = JSON
     }
 
 -- | The name of the update.
@@ -164,24 +171,25 @@ rugFields
   = lens _rugFields (\ s a -> s{_rugFields = a})
 
 -- | Data format for the response.
-rugAlt :: Lens' RollingUpdatesGet' Text
+rugAlt :: Lens' RollingUpdatesGet' Alt
 rugAlt = lens _rugAlt (\ s a -> s{_rugAlt = a})
 
 instance GoogleRequest RollingUpdatesGet' where
         type Rs RollingUpdatesGet' = RollingUpdate
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u RollingUpdatesGet{..}
-          = go _rugRollingUpdate _rugQuotaUser _rugPrettyPrint
+        requestWithRoute r u RollingUpdatesGet'{..}
+          = go _rugRollingUpdate _rugQuotaUser
+              (Just _rugPrettyPrint)
               _rugProject
               _rugUserIp
               _rugZone
               _rugKey
               _rugOauthToken
               _rugFields
-              _rugAlt
+              (Just _rugAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RollingUpdatesGetAPI)
+                      (Proxy :: Proxy RollingUpdatesGetResource)
                       r
                       u

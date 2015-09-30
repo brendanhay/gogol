@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return metadata for a particular raster collection.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsGet@.
-module Mapsengine.RasterCollections.Get
+module Network.Google.Resource.Mapsengine.RasterCollections.Get
     (
     -- * REST Resource
-      RasterCollectionsGetAPI
+      RasterCollectionsGetResource
 
     -- * Creating a Request
-    , rasterCollectionsGet
-    , RasterCollectionsGet
+    , rasterCollectionsGet'
+    , RasterCollectionsGet'
 
     -- * Request Lenses
     , rcgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsGet@ which the
--- 'RasterCollectionsGet' request conforms to.
-type RasterCollectionsGetAPI =
+-- 'RasterCollectionsGet'' request conforms to.
+type RasterCollectionsGetResource =
      "rasterCollections" :>
-       Capture "id" Text :> Get '[JSON] RasterCollection
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] RasterCollection
 
 -- | Return metadata for a particular raster collection.
 --
--- /See:/ 'rasterCollectionsGet' smart constructor.
-data RasterCollectionsGet = RasterCollectionsGet
+-- /See:/ 'rasterCollectionsGet'' smart constructor.
+data RasterCollectionsGet' = RasterCollectionsGet'
     { _rcgQuotaUser   :: !(Maybe Text)
     , _rcgPrettyPrint :: !Bool
     , _rcgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data RasterCollectionsGet = RasterCollectionsGet
     , _rcgId          :: !Text
     , _rcgOauthToken  :: !(Maybe Text)
     , _rcgFields      :: !(Maybe Text)
-    , _rcgAlt         :: !Text
+    , _rcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data RasterCollectionsGet = RasterCollectionsGet
 -- * 'rcgFields'
 --
 -- * 'rcgAlt'
-rasterCollectionsGet
+rasterCollectionsGet'
     :: Text -- ^ 'id'
-    -> RasterCollectionsGet
-rasterCollectionsGet pRcgId_ =
-    RasterCollectionsGet
+    -> RasterCollectionsGet'
+rasterCollectionsGet' pRcgId_ =
+    RasterCollectionsGet'
     { _rcgQuotaUser = Nothing
     , _rcgPrettyPrint = True
     , _rcgUserIp = Nothing
@@ -93,7 +101,7 @@ rasterCollectionsGet pRcgId_ =
     , _rcgId = pRcgId_
     , _rcgOauthToken = Nothing
     , _rcgFields = Nothing
-    , _rcgAlt = "json"
+    , _rcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ rcgFields
   = lens _rcgFields (\ s a -> s{_rcgFields = a})
 
 -- | Data format for the response.
-rcgAlt :: Lens' RasterCollectionsGet' Text
+rcgAlt :: Lens' RasterCollectionsGet' Alt
 rcgAlt = lens _rcgAlt (\ s a -> s{_rcgAlt = a})
 
 instance GoogleRequest RasterCollectionsGet' where
         type Rs RasterCollectionsGet' = RasterCollection
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsGet{..}
-          = go _rcgQuotaUser _rcgPrettyPrint _rcgUserIp _rcgKey
+        requestWithRoute r u RasterCollectionsGet'{..}
+          = go _rcgQuotaUser (Just _rcgPrettyPrint) _rcgUserIp
+              _rcgKey
               _rcgId
               _rcgOauthToken
               _rcgFields
-              _rcgAlt
+              (Just _rcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsGetAPI)
+                      (Proxy :: Proxy RasterCollectionsGetResource)
                       r
                       u

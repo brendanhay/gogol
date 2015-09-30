@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsPatch@.
-module Analytics.Management.Goals.Patch
+module Network.Google.Resource.Analytics.Management.Goals.Patch
     (
     -- * REST Resource
-      ManagementGoalsPatchAPI
+      ManagementGoalsPatchResource
 
     -- * Creating a Request
-    , managementGoalsPatch
-    , ManagementGoalsPatch
+    , managementGoalsPatch'
+    , ManagementGoalsPatch'
 
     -- * Request Lenses
     , mgpQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsPatch@ which the
--- 'ManagementGoalsPatch' request conforms to.
-type ManagementGoalsPatchAPI =
+-- 'ManagementGoalsPatch'' request conforms to.
+type ManagementGoalsPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,13 +58,20 @@ type ManagementGoalsPatchAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "goals" :>
-                     Capture "goalId" Text :> Patch '[JSON] Goal
+                     Capture "goalId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Patch '[JSON] Goal
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 --
--- /See:/ 'managementGoalsPatch' smart constructor.
-data ManagementGoalsPatch = ManagementGoalsPatch
+-- /See:/ 'managementGoalsPatch'' smart constructor.
+data ManagementGoalsPatch' = ManagementGoalsPatch'
     { _mgpQuotaUser     :: !(Maybe Text)
     , _mgpPrettyPrint   :: !Bool
     , _mgpWebPropertyId :: !Text
@@ -74,7 +82,7 @@ data ManagementGoalsPatch = ManagementGoalsPatch
     , _mgpKey           :: !(Maybe Text)
     , _mgpOauthToken    :: !(Maybe Text)
     , _mgpFields        :: !(Maybe Text)
-    , _mgpAlt           :: !Text
+    , _mgpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsPatch'' with the minimum fields required to make a request.
@@ -102,14 +110,14 @@ data ManagementGoalsPatch = ManagementGoalsPatch
 -- * 'mgpFields'
 --
 -- * 'mgpAlt'
-managementGoalsPatch
+managementGoalsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementGoalsPatch
-managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId_ =
-    ManagementGoalsPatch
+    -> ManagementGoalsPatch'
+managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId_ =
+    ManagementGoalsPatch'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = False
     , _mgpWebPropertyId = pMgpWebPropertyId_
@@ -120,7 +128,7 @@ managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId
     , _mgpKey = Nothing
     , _mgpOauthToken = Nothing
     , _mgpFields = Nothing
-    , _mgpAlt = "json"
+    , _mgpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,14 +189,15 @@ mgpFields
   = lens _mgpFields (\ s a -> s{_mgpFields = a})
 
 -- | Data format for the response.
-mgpAlt :: Lens' ManagementGoalsPatch' Text
+mgpAlt :: Lens' ManagementGoalsPatch' Alt
 mgpAlt = lens _mgpAlt (\ s a -> s{_mgpAlt = a})
 
 instance GoogleRequest ManagementGoalsPatch' where
         type Rs ManagementGoalsPatch' = Goal
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsPatch{..}
-          = go _mgpQuotaUser _mgpPrettyPrint _mgpWebPropertyId
+        requestWithRoute r u ManagementGoalsPatch'{..}
+          = go _mgpQuotaUser (Just _mgpPrettyPrint)
+              _mgpWebPropertyId
               _mgpGoalId
               _mgpUserIp
               _mgpProfileId
@@ -196,9 +205,9 @@ instance GoogleRequest ManagementGoalsPatch' where
               _mgpKey
               _mgpOauthToken
               _mgpFields
-              _mgpAlt
+              (Just _mgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementGoalsPatchAPI)
+                      (Proxy :: Proxy ManagementGoalsPatchResource)
                       r
                       u

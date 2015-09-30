@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- \"pendingShipment\".
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersAdvancetestorder@.
-module Content.Orders.Advancetestorder
+module Network.Google.Resource.Content.Orders.Advancetestorder
     (
     -- * REST Resource
-      OrdersAdvancetestorderAPI
+      OrdersAdvancetestorderResource
 
     -- * Creating a Request
-    , ordersAdvancetestorder
-    , OrdersAdvancetestorder
+    , ordersAdvancetestorder'
+    , OrdersAdvancetestorder'
 
     -- * Request Lenses
     , oaaQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersAdvancetestorder@ which the
--- 'OrdersAdvancetestorder' request conforms to.
-type OrdersAdvancetestorderAPI =
+-- 'OrdersAdvancetestorder'' request conforms to.
+type OrdersAdvancetestorderResource =
      Capture "merchantId" Word64 :>
        "testorders" :>
          Capture "orderId" Text :>
            "advance" :>
-             Post '[JSON] OrdersAdvanceTestOrderResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersAdvanceTestOrderResponse
 
 -- | Sandbox only. Moves a test order from state \"inProgress\" to state
 -- \"pendingShipment\".
 --
--- /See:/ 'ordersAdvancetestorder' smart constructor.
-data OrdersAdvancetestorder = OrdersAdvancetestorder
+-- /See:/ 'ordersAdvancetestorder'' smart constructor.
+data OrdersAdvancetestorder' = OrdersAdvancetestorder'
     { _oaaQuotaUser   :: !(Maybe Text)
     , _oaaMerchantId  :: !Word64
     , _oaaPrettyPrint :: !Bool
@@ -66,7 +74,7 @@ data OrdersAdvancetestorder = OrdersAdvancetestorder
     , _oaaOauthToken  :: !(Maybe Text)
     , _oaaOrderId     :: !Text
     , _oaaFields      :: !(Maybe Text)
-    , _oaaAlt         :: !Text
+    , _oaaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAdvancetestorder'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data OrdersAdvancetestorder = OrdersAdvancetestorder
 -- * 'oaaFields'
 --
 -- * 'oaaAlt'
-ordersAdvancetestorder
+ordersAdvancetestorder'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersAdvancetestorder
-ordersAdvancetestorder pOaaMerchantId_ pOaaOrderId_ =
-    OrdersAdvancetestorder
+    -> OrdersAdvancetestorder'
+ordersAdvancetestorder' pOaaMerchantId_ pOaaOrderId_ =
+    OrdersAdvancetestorder'
     { _oaaQuotaUser = Nothing
     , _oaaMerchantId = pOaaMerchantId_
     , _oaaPrettyPrint = True
@@ -104,7 +112,7 @@ ordersAdvancetestorder pOaaMerchantId_ pOaaOrderId_ =
     , _oaaOauthToken = Nothing
     , _oaaOrderId = pOaaOrderId_
     , _oaaFields = Nothing
-    , _oaaAlt = "json"
+    , _oaaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,23 +163,24 @@ oaaFields
   = lens _oaaFields (\ s a -> s{_oaaFields = a})
 
 -- | Data format for the response.
-oaaAlt :: Lens' OrdersAdvancetestorder' Text
+oaaAlt :: Lens' OrdersAdvancetestorder' Alt
 oaaAlt = lens _oaaAlt (\ s a -> s{_oaaAlt = a})
 
 instance GoogleRequest OrdersAdvancetestorder' where
         type Rs OrdersAdvancetestorder' =
              OrdersAdvanceTestOrderResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersAdvancetestorder{..}
-          = go _oaaQuotaUser _oaaMerchantId _oaaPrettyPrint
+        requestWithRoute r u OrdersAdvancetestorder'{..}
+          = go _oaaQuotaUser _oaaMerchantId
+              (Just _oaaPrettyPrint)
               _oaaUserIp
               _oaaKey
               _oaaOauthToken
               _oaaOrderId
               _oaaFields
-              _oaaAlt
+              (Just _oaaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersAdvancetestorderAPI)
+                      (Proxy :: Proxy OrdersAdvancetestorderResource)
                       r
                       u

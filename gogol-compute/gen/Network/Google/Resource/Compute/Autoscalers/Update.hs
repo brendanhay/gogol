@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersUpdate@.
-module Compute.Autoscalers.Update
+module Network.Google.Resource.Compute.Autoscalers.Update
     (
     -- * REST Resource
-      AutoscalersUpdateAPI
+      AutoscalersUpdateResource
 
     -- * Creating a Request
-    , autoscalersUpdate
-    , AutoscalersUpdate
+    , autoscalersUpdate'
+    , AutoscalersUpdate'
 
     -- * Request Lenses
     , auQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAutoscalersUpdate@ which the
--- 'AutoscalersUpdate' request conforms to.
-type AutoscalersUpdateAPI =
+-- 'AutoscalersUpdate'' request conforms to.
+type AutoscalersUpdateResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             QueryParam "autoscaler" Text :> Put '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "autoscaler" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'autoscalersUpdate' smart constructor.
-data AutoscalersUpdate = AutoscalersUpdate
+-- /See:/ 'autoscalersUpdate'' smart constructor.
+data AutoscalersUpdate' = AutoscalersUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auPrettyPrint :: !Bool
     , _auProject     :: !Text
@@ -68,7 +76,7 @@ data AutoscalersUpdate = AutoscalersUpdate
     , _auAutoscaler  :: !(Maybe Text)
     , _auOauthToken  :: !(Maybe Text)
     , _auFields      :: !(Maybe Text)
-    , _auAlt         :: !Text
+    , _auAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersUpdate'' with the minimum fields required to make a request.
@@ -94,12 +102,12 @@ data AutoscalersUpdate = AutoscalersUpdate
 -- * 'auFields'
 --
 -- * 'auAlt'
-autoscalersUpdate
+autoscalersUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> AutoscalersUpdate
-autoscalersUpdate pAuProject_ pAuZone_ =
-    AutoscalersUpdate
+    -> AutoscalersUpdate'
+autoscalersUpdate' pAuProject_ pAuZone_ =
+    AutoscalersUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auProject = pAuProject_
@@ -109,7 +117,7 @@ autoscalersUpdate pAuProject_ pAuZone_ =
     , _auAutoscaler = Nothing
     , _auOauthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = "json"
+    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,22 +168,23 @@ auFields :: Lens' AutoscalersUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 -- | Data format for the response.
-auAlt :: Lens' AutoscalersUpdate' Text
+auAlt :: Lens' AutoscalersUpdate' Alt
 auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
 
 instance GoogleRequest AutoscalersUpdate' where
         type Rs AutoscalersUpdate' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersUpdate{..}
-          = go _auQuotaUser _auPrettyPrint _auProject _auUserIp
+        requestWithRoute r u AutoscalersUpdate'{..}
+          = go _auQuotaUser (Just _auPrettyPrint) _auProject
+              _auUserIp
               _auZone
               _auKey
               _auAutoscaler
               _auOauthToken
               _auFields
-              _auAlt
+              (Just _auAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersUpdateAPI)
+                      (Proxy :: Proxy AutoscalersUpdateResource)
                       r
                       u

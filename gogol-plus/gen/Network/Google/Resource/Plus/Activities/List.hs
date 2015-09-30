@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- user.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesList@.
-module Plus.Activities.List
+module Network.Google.Resource.Plus.Activities.List
     (
     -- * REST Resource
-      ActivitiesListAPI
+      ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList
-    , ActivitiesList
+    , activitiesList'
+    , ActivitiesList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -47,32 +48,38 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusActivitiesList@ which the
--- 'ActivitiesList' request conforms to.
-type ActivitiesListAPI =
+-- 'ActivitiesList'' request conforms to.
+type ActivitiesListResource =
      "people" :>
        Capture "userId" Text :>
          "activities" :>
-           Capture "collection" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ActivityFeed
+           Capture "collection" PlusActivitiesListCollection :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ActivityFeed
 
 -- | List all of the activities in the specified collection for a particular
 -- user.
 --
--- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+-- /See:/ 'activitiesList'' smart constructor.
+data ActivitiesList' = ActivitiesList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIp      :: !(Maybe Text)
-    , _alCollection  :: !Text
+    , _alCollection  :: !PlusActivitiesListCollection
     , _alUserId      :: !Text
     , _alKey         :: !(Maybe Text)
     , _alPageToken   :: !(Maybe Text)
     , _alOauthToken  :: !(Maybe Text)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -100,12 +107,12 @@ data ActivitiesList = ActivitiesList
 -- * 'alFields'
 --
 -- * 'alAlt'
-activitiesList
-    :: Text -- ^ 'collection'
+activitiesList'
+    :: PlusActivitiesListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
-    -> ActivitiesList
-activitiesList pAlCollection_ pAlUserId_ =
-    ActivitiesList
+    -> ActivitiesList'
+activitiesList' pAlCollection_ pAlUserId_ =
+    ActivitiesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
@@ -116,7 +123,7 @@ activitiesList pAlCollection_ pAlUserId_ =
     , _alOauthToken = Nothing
     , _alMaxResults = 20
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,7 +145,7 @@ alUserIp :: Lens' ActivitiesList' (Maybe Text)
 alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
 
 -- | The collection of activities to list.
-alCollection :: Lens' ActivitiesList' Text
+alCollection :: Lens' ActivitiesList' PlusActivitiesListCollection
 alCollection
   = lens _alCollection (\ s a -> s{_alCollection = a})
 
@@ -177,14 +184,14 @@ alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Text
+alAlt :: Lens' ActivitiesList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u ActivitiesList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp
+        requestWithRoute r u ActivitiesList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
               _alCollection
               _alUserId
               _alKey
@@ -192,8 +199,9 @@ instance GoogleRequest ActivitiesList' where
               _alOauthToken
               (Just _alMaxResults)
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a revision. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRevisionsPatch@.
-module Drive.Revisions.Patch
+module Network.Google.Resource.Drive.Revisions.Patch
     (
     -- * REST Resource
-      RevisionsPatchAPI
+      RevisionsPatchResource
 
     -- * Creating a Request
-    , revisionsPatch
-    , RevisionsPatch
+    , revisionsPatch'
+    , RevisionsPatch'
 
     -- * Request Lenses
     , rppQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRevisionsPatch@ which the
--- 'RevisionsPatch' request conforms to.
-type RevisionsPatchAPI =
+-- 'RevisionsPatch'' request conforms to.
+type RevisionsPatchResource =
      "files" :>
        Capture "fileId" Text :>
          "revisions" :>
-           Capture "revisionId" Text :> Patch '[JSON] Revision
+           Capture "revisionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Revision
 
 -- | Updates a revision. This method supports patch semantics.
 --
--- /See:/ 'revisionsPatch' smart constructor.
-data RevisionsPatch = RevisionsPatch
+-- /See:/ 'revisionsPatch'' smart constructor.
+data RevisionsPatch' = RevisionsPatch'
     { _rppQuotaUser   :: !(Maybe Text)
     , _rppPrettyPrint :: !Bool
     , _rppUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data RevisionsPatch = RevisionsPatch
     , _rppOauthToken  :: !(Maybe Text)
     , _rppRevisionId  :: !Text
     , _rppFields      :: !(Maybe Text)
-    , _rppAlt         :: !Text
+    , _rppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data RevisionsPatch = RevisionsPatch
 -- * 'rppFields'
 --
 -- * 'rppAlt'
-revisionsPatch
+revisionsPatch'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'revisionId'
-    -> RevisionsPatch
-revisionsPatch pRppFileId_ pRppRevisionId_ =
-    RevisionsPatch
+    -> RevisionsPatch'
+revisionsPatch' pRppFileId_ pRppRevisionId_ =
+    RevisionsPatch'
     { _rppQuotaUser = Nothing
     , _rppPrettyPrint = True
     , _rppUserIp = Nothing
@@ -101,7 +109,7 @@ revisionsPatch pRppFileId_ pRppRevisionId_ =
     , _rppOauthToken = Nothing
     , _rppRevisionId = pRppRevisionId_
     , _rppFields = Nothing
-    , _rppAlt = "json"
+    , _rppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,22 @@ rppFields
   = lens _rppFields (\ s a -> s{_rppFields = a})
 
 -- | Data format for the response.
-rppAlt :: Lens' RevisionsPatch' Text
+rppAlt :: Lens' RevisionsPatch' Alt
 rppAlt = lens _rppAlt (\ s a -> s{_rppAlt = a})
 
 instance GoogleRequest RevisionsPatch' where
         type Rs RevisionsPatch' = Revision
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RevisionsPatch{..}
-          = go _rppQuotaUser _rppPrettyPrint _rppUserIp _rppKey
+        requestWithRoute r u RevisionsPatch'{..}
+          = go _rppQuotaUser (Just _rppPrettyPrint) _rppUserIp
+              _rppKey
               _rppFileId
               _rppOauthToken
               _rppRevisionId
               _rppFields
-              _rppAlt
+              (Just _rppAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RevisionsPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy RevisionsPatchResource)
                       r
                       u

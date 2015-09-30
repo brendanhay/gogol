@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- rights, specific to the user.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostUserInfosGet@.
-module Blogger.PostUserInfos.Get
+module Network.Google.Resource.Blogger.PostUserInfos.Get
     (
     -- * REST Resource
-      PostUserInfosGetAPI
+      PostUserInfosGetResource
 
     -- * Creating a Request
-    , postUserInfosGet
-    , PostUserInfosGet
+    , postUserInfosGet'
+    , PostUserInfosGet'
 
     -- * Request Lenses
     , puigQuotaUser
@@ -48,23 +49,29 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostUserInfosGet@ which the
--- 'PostUserInfosGet' request conforms to.
-type PostUserInfosGetAPI =
+-- 'PostUserInfosGet'' request conforms to.
+type PostUserInfosGetResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
            Capture "blogId" Text :>
              "posts" :>
                Capture "postId" Text :>
-                 QueryParam "maxComments" Word32 :>
-                   Get '[JSON] PostUserInfo
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "maxComments" Word32 :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] PostUserInfo
 
 -- | Gets one post and user info pair, by post ID and user ID. The post user
 -- info contains per-user information about the post, such as access
 -- rights, specific to the user.
 --
--- /See:/ 'postUserInfosGet' smart constructor.
-data PostUserInfosGet = PostUserInfosGet
+-- /See:/ 'postUserInfosGet'' smart constructor.
+data PostUserInfosGet' = PostUserInfosGet'
     { _puigQuotaUser   :: !(Maybe Text)
     , _puigPrettyPrint :: !Bool
     , _puigUserIp      :: !(Maybe Text)
@@ -75,7 +82,7 @@ data PostUserInfosGet = PostUserInfosGet
     , _puigPostId      :: !Text
     , _puigOauthToken  :: !(Maybe Text)
     , _puigFields      :: !(Maybe Text)
-    , _puigAlt         :: !Text
+    , _puigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosGet'' with the minimum fields required to make a request.
@@ -103,13 +110,13 @@ data PostUserInfosGet = PostUserInfosGet
 -- * 'puigFields'
 --
 -- * 'puigAlt'
-postUserInfosGet
+postUserInfosGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'postId'
-    -> PostUserInfosGet
-postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
-    PostUserInfosGet
+    -> PostUserInfosGet'
+postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
+    PostUserInfosGet'
     { _puigQuotaUser = Nothing
     , _puigPrettyPrint = True
     , _puigUserIp = Nothing
@@ -120,7 +127,7 @@ postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
     , _puigPostId = pPuigPostId_
     , _puigOauthToken = Nothing
     , _puigFields = Nothing
-    , _puigAlt = "json"
+    , _puigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,14 +190,15 @@ puigFields
   = lens _puigFields (\ s a -> s{_puigFields = a})
 
 -- | Data format for the response.
-puigAlt :: Lens' PostUserInfosGet' Text
+puigAlt :: Lens' PostUserInfosGet' Alt
 puigAlt = lens _puigAlt (\ s a -> s{_puigAlt = a})
 
 instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostUserInfosGet{..}
-          = go _puigQuotaUser _puigPrettyPrint _puigUserIp
+        requestWithRoute r u PostUserInfosGet'{..}
+          = go _puigQuotaUser (Just _puigPrettyPrint)
+              _puigUserIp
               _puigBlogId
               _puigMaxComments
               _puigUserId
@@ -198,9 +206,9 @@ instance GoogleRequest PostUserInfosGet' where
               _puigPostId
               _puigOauthToken
               _puigFields
-              _puigAlt
+              (Just _puigAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PostUserInfosGetAPI)
+                      (Proxy :: Proxy PostUserInfosGetResource)
                       r
                       u

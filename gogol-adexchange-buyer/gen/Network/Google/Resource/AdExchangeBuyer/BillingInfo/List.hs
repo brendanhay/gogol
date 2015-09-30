@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- authenticated user.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBillingInfoList@.
-module AdExchangeBuyer.BillingInfo.List
+module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
     (
     -- * REST Resource
-      BillingInfoListAPI
+      BillingInfoListResource
 
     -- * Creating a Request
-    , billingInfoList
-    , BillingInfoList
+    , billingInfoList'
+    , BillingInfoList'
 
     -- * Request Lenses
     , bilQuotaUser
@@ -43,22 +44,29 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBillingInfoList@ which the
--- 'BillingInfoList' request conforms to.
-type BillingInfoListAPI =
-     "billinginfo" :> Get '[JSON] BillingInfoList
+-- 'BillingInfoList'' request conforms to.
+type BillingInfoListResource =
+     "billinginfo" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] BillingInfoList
 
 -- | Retrieves a list of billing information for all accounts of the
 -- authenticated user.
 --
--- /See:/ 'billingInfoList' smart constructor.
-data BillingInfoList = BillingInfoList
+-- /See:/ 'billingInfoList'' smart constructor.
+data BillingInfoList' = BillingInfoList'
     { _bilQuotaUser   :: !(Maybe Text)
     , _bilPrettyPrint :: !Bool
     , _bilUserIp      :: !(Maybe Text)
     , _bilKey         :: !(Maybe Text)
     , _bilOauthToken  :: !(Maybe Text)
     , _bilFields      :: !(Maybe Text)
-    , _bilAlt         :: !Text
+    , _bilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoList'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data BillingInfoList = BillingInfoList
 -- * 'bilFields'
 --
 -- * 'bilAlt'
-billingInfoList
-    :: BillingInfoList
-billingInfoList =
-    BillingInfoList
+billingInfoList'
+    :: BillingInfoList'
+billingInfoList' =
+    BillingInfoList'
     { _bilQuotaUser = Nothing
     , _bilPrettyPrint = True
     , _bilUserIp = Nothing
     , _bilKey = Nothing
     , _bilOauthToken = Nothing
     , _bilFields = Nothing
-    , _bilAlt = "json"
+    , _bilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,18 +136,20 @@ bilFields
   = lens _bilFields (\ s a -> s{_bilFields = a})
 
 -- | Data format for the response.
-bilAlt :: Lens' BillingInfoList' Text
+bilAlt :: Lens' BillingInfoList' Alt
 bilAlt = lens _bilAlt (\ s a -> s{_bilAlt = a})
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BillingInfoList{..}
-          = go _bilQuotaUser _bilPrettyPrint _bilUserIp _bilKey
+        requestWithRoute r u BillingInfoList'{..}
+          = go _bilQuotaUser (Just _bilPrettyPrint) _bilUserIp
+              _bilKey
               _bilOauthToken
               _bilFields
-              _bilAlt
+              (Just _bilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BillingInfoListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BillingInfoListResource)
                       r
                       u

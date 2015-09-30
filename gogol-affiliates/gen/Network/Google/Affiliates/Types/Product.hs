@@ -18,6 +18,103 @@ module Network.Google.Affiliates.Types.Product where
 import           Network.Google.Affiliates.Types.Sum
 import           Network.Google.Prelude
 
+--
+-- /See:/ 'ccOfferRewards' smart constructor.
+data CcOfferRewards = CcOfferRewards
+    { _corAmount            :: !(Maybe Double)
+    , _corExpirationMonths  :: !(Maybe Double)
+    , _corCategory          :: !(Maybe Text)
+    , _corAdditionalDetails :: !(Maybe Text)
+    , _corMaxRewardTier     :: !(Maybe Double)
+    , _corMinRewardTier     :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOfferRewards' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'corAmount'
+--
+-- * 'corExpirationMonths'
+--
+-- * 'corCategory'
+--
+-- * 'corAdditionalDetails'
+--
+-- * 'corMaxRewardTier'
+--
+-- * 'corMinRewardTier'
+ccOfferRewards
+    :: CcOfferRewards
+ccOfferRewards =
+    CcOfferRewards
+    { _corAmount = Nothing
+    , _corExpirationMonths = Nothing
+    , _corCategory = Nothing
+    , _corAdditionalDetails = Nothing
+    , _corMaxRewardTier = Nothing
+    , _corMinRewardTier = Nothing
+    }
+
+-- | The number of units rewarded per purchase dollar.
+corAmount :: Lens' CcOfferRewards (Maybe Double)
+corAmount
+  = lens _corAmount (\ s a -> s{_corAmount = a})
+
+-- | How long rewards granted by this rule last.
+corExpirationMonths :: Lens' CcOfferRewards (Maybe Double)
+corExpirationMonths
+  = lens _corExpirationMonths
+      (\ s a -> s{_corExpirationMonths = a})
+
+-- | The kind of purchases covered by this rule.
+corCategory :: Lens' CcOfferRewards (Maybe Text)
+corCategory
+  = lens _corCategory (\ s a -> s{_corCategory = a})
+
+-- | Other limits, for example, if this rule only applies during an
+-- introductory period.
+corAdditionalDetails :: Lens' CcOfferRewards (Maybe Text)
+corAdditionalDetails
+  = lens _corAdditionalDetails
+      (\ s a -> s{_corAdditionalDetails = a})
+
+-- | The maximum purchase amount in the given category for this rule to
+-- apply.
+corMaxRewardTier :: Lens' CcOfferRewards (Maybe Double)
+corMaxRewardTier
+  = lens _corMaxRewardTier
+      (\ s a -> s{_corMaxRewardTier = a})
+
+-- | The minimum purchase amount in the given category before this rule
+-- applies.
+corMinRewardTier :: Lens' CcOfferRewards (Maybe Double)
+corMinRewardTier
+  = lens _corMinRewardTier
+      (\ s a -> s{_corMinRewardTier = a})
+
+instance FromJSON CcOfferRewards where
+        parseJSON
+          = withObject "CcOfferRewards"
+              (\ o ->
+                 CcOfferRewards <$>
+                   (o .:? "amount") <*> (o .:? "expirationMonths") <*>
+                     (o .:? "category")
+                     <*> (o .:? "additionalDetails")
+                     <*> (o .:? "maxRewardTier")
+                     <*> (o .:? "minRewardTier"))
+
+instance ToJSON CcOfferRewards where
+        toJSON CcOfferRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _corAmount,
+                  ("expirationMonths" .=) <$> _corExpirationMonths,
+                  ("category" .=) <$> _corCategory,
+                  ("additionalDetails" .=) <$> _corAdditionalDetails,
+                  ("maxRewardTier" .=) <$> _corMaxRewardTier,
+                  ("minRewardTier" .=) <$> _corMinRewardTier])
+
 -- | An EventResource.
 --
 -- /See:/ 'event' smart constructor.
@@ -33,7 +130,7 @@ data Event = Event
     , _eNetworkFee          :: !(Maybe (Maybe Money))
     , _eAdvertiserId        :: !(Maybe Int64)
     , _eEventDate           :: !(Maybe UTCTime)
-    , _eProducts            :: !(Maybe [EventProductsItem])
+    , _eProducts            :: !(Maybe [EventProducts])
     , _ePublisherFee        :: !(Maybe (Maybe Money))
     , _eType                :: !(Maybe Text)
     , _eOrderId             :: !(Maybe Text)
@@ -168,7 +265,7 @@ eEventDate
   = lens _eEventDate (\ s a -> s{_eEventDate = a})
 
 -- | Products associated with the event.
-eProducts :: Lens' Event [EventProductsItem]
+eProducts :: Lens' Event [EventProducts]
 eProducts
   = lens _eProducts (\ s a -> s{_eProducts = a}) .
       _Default
@@ -669,16 +766,86 @@ instance ToJSON Advertisers where
                  [("nextPageToken" .=) <$> _aNextPageToken,
                   Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
+--
+-- /See:/ 'ccOfferDefaultFees' smart constructor.
+data CcOfferDefaultFees = CcOfferDefaultFees
+    { _codfRateType :: !(Maybe Text)
+    , _codfMinRate  :: !(Maybe Double)
+    , _codfCategory :: !(Maybe Text)
+    , _codfMaxRate  :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOfferDefaultFees' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'codfRateType'
+--
+-- * 'codfMinRate'
+--
+-- * 'codfCategory'
+--
+-- * 'codfMaxRate'
+ccOfferDefaultFees
+    :: CcOfferDefaultFees
+ccOfferDefaultFees =
+    CcOfferDefaultFees
+    { _codfRateType = Nothing
+    , _codfMinRate = Nothing
+    , _codfCategory = Nothing
+    , _codfMaxRate = Nothing
+    }
+
+-- | Fixed or variable.
+codfRateType :: Lens' CcOfferDefaultFees (Maybe Text)
+codfRateType
+  = lens _codfRateType (\ s a -> s{_codfRateType = a})
+
+-- | The lowest rate the issuer may charge for defaulting on debt in this
+-- category. Expressed as an absolute number, not as a percentage.
+codfMinRate :: Lens' CcOfferDefaultFees (Maybe Double)
+codfMinRate
+  = lens _codfMinRate (\ s a -> s{_codfMinRate = a})
+
+-- | The type of charge, for example Purchases.
+codfCategory :: Lens' CcOfferDefaultFees (Maybe Text)
+codfCategory
+  = lens _codfCategory (\ s a -> s{_codfCategory = a})
+
+-- | The highest rate the issuer may charge for defaulting on debt in this
+-- category. Expressed as an absolute number, not as a percentage.
+codfMaxRate :: Lens' CcOfferDefaultFees (Maybe Double)
+codfMaxRate
+  = lens _codfMaxRate (\ s a -> s{_codfMaxRate = a})
+
+instance FromJSON CcOfferDefaultFees where
+        parseJSON
+          = withObject "CcOfferDefaultFees"
+              (\ o ->
+                 CcOfferDefaultFees <$>
+                   (o .:? "rateType") <*> (o .:? "minRate") <*>
+                     (o .:? "category")
+                     <*> (o .:? "maxRate"))
+
+instance ToJSON CcOfferDefaultFees where
+        toJSON CcOfferDefaultFees{..}
+          = object
+              (catMaybes
+                 [("rateType" .=) <$> _codfRateType,
+                  ("minRate" .=) <$> _codfMinRate,
+                  ("category" .=) <$> _codfCategory,
+                  ("maxRate" .=) <$> _codfMaxRate])
+
 -- | A ReportResource representing a report of a certain type either for an
 -- advertiser or publisher.
 --
 -- /See:/ 'report' smart constructor.
 data Report = Report
     { _rEndDate          :: !(Maybe Text)
-    , _rTotalsRows       :: !(Maybe [[JSON]])
+    , _rTotalsRows       :: !(Maybe [[JSONValue]])
     , _rKind             :: !Text
     , _rStartDate        :: !(Maybe Text)
-    , _rRows             :: !(Maybe [[JSON]])
+    , _rRows             :: !(Maybe [[JSONValue]])
     , _rMatchingRowCount :: !(Maybe Int64)
     , _rColumnNames      :: !(Maybe [Text])
     , _rType             :: !(Maybe Text)
@@ -722,7 +889,7 @@ rEndDate :: Lens' Report (Maybe Text)
 rEndDate = lens _rEndDate (\ s a -> s{_rEndDate = a})
 
 -- | The totals rows for the report
-rTotalsRows :: Lens' Report [[JSON]]
+rTotalsRows :: Lens' Report [[JSONValue]]
 rTotalsRows
   = lens _rTotalsRows (\ s a -> s{_rTotalsRows = a}) .
       _Default
@@ -738,7 +905,7 @@ rStartDate
   = lens _rStartDate (\ s a -> s{_rStartDate = a})
 
 -- | The rows of data for the report
-rRows :: Lens' Report [[JSON]]
+rRows :: Lens' Report [[JSONValue]]
 rRows
   = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
       _Coerce
@@ -786,6 +953,178 @@ instance ToJSON Report where
                   ("matching_row_count" .=) <$> _rMatchingRowCount,
                   ("column_names" .=) <$> _rColumnNames,
                   ("type" .=) <$> _rType])
+
+--
+-- /See:/ 'ccOfferBonusRewards' smart constructor.
+data CcOfferBonusRewards = CcOfferBonusRewards
+    { _cobrAmount  :: !(Maybe Double)
+    , _cobrDetails :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CcOfferBonusRewards' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cobrAmount'
+--
+-- * 'cobrDetails'
+ccOfferBonusRewards
+    :: CcOfferBonusRewards
+ccOfferBonusRewards =
+    CcOfferBonusRewards
+    { _cobrAmount = Nothing
+    , _cobrDetails = Nothing
+    }
+
+-- | How many units of reward will be granted.
+cobrAmount :: Lens' CcOfferBonusRewards (Maybe Double)
+cobrAmount
+  = lens _cobrAmount (\ s a -> s{_cobrAmount = a})
+
+-- | The circumstances under which this rule applies, for example, booking a
+-- flight via Orbitz.
+cobrDetails :: Lens' CcOfferBonusRewards (Maybe Text)
+cobrDetails
+  = lens _cobrDetails (\ s a -> s{_cobrDetails = a})
+
+instance FromJSON CcOfferBonusRewards where
+        parseJSON
+          = withObject "CcOfferBonusRewards"
+              (\ o ->
+                 CcOfferBonusRewards <$>
+                   (o .:? "amount") <*> (o .:? "details"))
+
+instance ToJSON CcOfferBonusRewards where
+        toJSON CcOfferBonusRewards{..}
+          = object
+              (catMaybes
+                 [("amount" .=) <$> _cobrAmount,
+                  ("details" .=) <$> _cobrDetails])
+
+--
+-- /See:/ 'eventProducts' smart constructor.
+data EventProducts = EventProducts
+    { _epSkuName      :: !(Maybe Text)
+    , _epNetworkFee   :: !(Maybe (Maybe Money))
+    , _epQuantity     :: !(Maybe Int64)
+    , _epCategoryName :: !(Maybe Text)
+    , _epCategoryId   :: !(Maybe Text)
+    , _epSku          :: !(Maybe Text)
+    , _epPublisherFee :: !(Maybe (Maybe Money))
+    , _epUnitPrice    :: !(Maybe (Maybe Money))
+    , _epEarnings     :: !(Maybe (Maybe Money))
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventProducts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'epSkuName'
+--
+-- * 'epNetworkFee'
+--
+-- * 'epQuantity'
+--
+-- * 'epCategoryName'
+--
+-- * 'epCategoryId'
+--
+-- * 'epSku'
+--
+-- * 'epPublisherFee'
+--
+-- * 'epUnitPrice'
+--
+-- * 'epEarnings'
+eventProducts
+    :: EventProducts
+eventProducts =
+    EventProducts
+    { _epSkuName = Nothing
+    , _epNetworkFee = Nothing
+    , _epQuantity = Nothing
+    , _epCategoryName = Nothing
+    , _epCategoryId = Nothing
+    , _epSku = Nothing
+    , _epPublisherFee = Nothing
+    , _epUnitPrice = Nothing
+    , _epEarnings = Nothing
+    }
+
+-- | Sku name of this product.
+epSkuName :: Lens' EventProducts (Maybe Text)
+epSkuName
+  = lens _epSkuName (\ s a -> s{_epSkuName = a})
+
+-- | Fee that the advertiser paid to the Google Affiliate Network for this
+-- product.
+epNetworkFee :: Lens' EventProducts (Maybe (Maybe Money))
+epNetworkFee
+  = lens _epNetworkFee (\ s a -> s{_epNetworkFee = a})
+
+-- | Quantity of this product bought\/exchanged.
+epQuantity :: Lens' EventProducts (Maybe Int64)
+epQuantity
+  = lens _epQuantity (\ s a -> s{_epQuantity = a})
+
+-- | Name of the category this product belongs to.
+epCategoryName :: Lens' EventProducts (Maybe Text)
+epCategoryName
+  = lens _epCategoryName
+      (\ s a -> s{_epCategoryName = a})
+
+-- | Id of the category this product belongs to.
+epCategoryId :: Lens' EventProducts (Maybe Text)
+epCategoryId
+  = lens _epCategoryId (\ s a -> s{_epCategoryId = a})
+
+-- | Sku of this product.
+epSku :: Lens' EventProducts (Maybe Text)
+epSku = lens _epSku (\ s a -> s{_epSku = a})
+
+-- | Fee that the advertiser paid to the publisehr for this product.
+epPublisherFee :: Lens' EventProducts (Maybe (Maybe Money))
+epPublisherFee
+  = lens _epPublisherFee
+      (\ s a -> s{_epPublisherFee = a})
+
+-- | Price per unit of this product.
+epUnitPrice :: Lens' EventProducts (Maybe (Maybe Money))
+epUnitPrice
+  = lens _epUnitPrice (\ s a -> s{_epUnitPrice = a})
+
+-- | Amount earned by the publisher on this product.
+epEarnings :: Lens' EventProducts (Maybe (Maybe Money))
+epEarnings
+  = lens _epEarnings (\ s a -> s{_epEarnings = a})
+
+instance FromJSON EventProducts where
+        parseJSON
+          = withObject "EventProducts"
+              (\ o ->
+                 EventProducts <$>
+                   (o .:? "skuName") <*> (o .:? "networkFee") <*>
+                     (o .:? "quantity")
+                     <*> (o .:? "categoryName")
+                     <*> (o .:? "categoryId")
+                     <*> (o .:? "sku")
+                     <*> (o .:? "publisherFee")
+                     <*> (o .:? "unitPrice")
+                     <*> (o .:? "earnings"))
+
+instance ToJSON EventProducts where
+        toJSON EventProducts{..}
+          = object
+              (catMaybes
+                 [("skuName" .=) <$> _epSkuName,
+                  ("networkFee" .=) <$> _epNetworkFee,
+                  ("quantity" .=) <$> _epQuantity,
+                  ("categoryName" .=) <$> _epCategoryName,
+                  ("categoryId" .=) <$> _epCategoryId,
+                  ("sku" .=) <$> _epSku,
+                  ("publisherFee" .=) <$> _epPublisherFee,
+                  ("unitPrice" .=) <$> _epUnitPrice,
+                  ("earnings" .=) <$> _epEarnings])
 
 --
 -- /See:/ 'events' smart constructor.
@@ -847,6 +1186,127 @@ instance ToJSON Events where
                  [("nextPageToken" .=) <$> _eveNextPageToken,
                   Just ("kind" .= _eveKind),
                   ("items" .=) <$> _eveItems])
+
+-- | Special offers on the link.
+--
+-- /See:/ 'linkSpecialOffers' smart constructor.
+data LinkSpecialOffers = LinkSpecialOffers
+    { _lsoFreeShippingMin :: !(Maybe (Maybe Money))
+    , _lsoPercentOff      :: !(Maybe Double)
+    , _lsoPriceCut        :: !(Maybe (Maybe Money))
+    , _lsoPriceCutMin     :: !(Maybe (Maybe Money))
+    , _lsoPercentOffMin   :: !(Maybe (Maybe Money))
+    , _lsoFreeShipping    :: !(Maybe Bool)
+    , _lsoPromotionCodes  :: !(Maybe [Text])
+    , _lsoFreeGift        :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LinkSpecialOffers' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lsoFreeShippingMin'
+--
+-- * 'lsoPercentOff'
+--
+-- * 'lsoPriceCut'
+--
+-- * 'lsoPriceCutMin'
+--
+-- * 'lsoPercentOffMin'
+--
+-- * 'lsoFreeShipping'
+--
+-- * 'lsoPromotionCodes'
+--
+-- * 'lsoFreeGift'
+linkSpecialOffers
+    :: LinkSpecialOffers
+linkSpecialOffers =
+    LinkSpecialOffers
+    { _lsoFreeShippingMin = Nothing
+    , _lsoPercentOff = Nothing
+    , _lsoPriceCut = Nothing
+    , _lsoPriceCutMin = Nothing
+    , _lsoPercentOffMin = Nothing
+    , _lsoFreeShipping = Nothing
+    , _lsoPromotionCodes = Nothing
+    , _lsoFreeGift = Nothing
+    }
+
+-- | Minimum purchase amount for free shipping promotion
+lsoFreeShippingMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoFreeShippingMin
+  = lens _lsoFreeShippingMin
+      (\ s a -> s{_lsoFreeShippingMin = a})
+
+-- | Percent off on the purchase
+lsoPercentOff :: Lens' LinkSpecialOffers (Maybe Double)
+lsoPercentOff
+  = lens _lsoPercentOff
+      (\ s a -> s{_lsoPercentOff = a})
+
+-- | Price cut on the purchase
+lsoPriceCut :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCut
+  = lens _lsoPriceCut (\ s a -> s{_lsoPriceCut = a})
+
+-- | Minimum purchase amount for price cut promotion
+lsoPriceCutMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCutMin
+  = lens _lsoPriceCutMin
+      (\ s a -> s{_lsoPriceCutMin = a})
+
+-- | Minimum purchase amount for percent off promotion
+lsoPercentOffMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPercentOffMin
+  = lens _lsoPercentOffMin
+      (\ s a -> s{_lsoPercentOffMin = a})
+
+-- | Whether there is free shipping
+lsoFreeShipping :: Lens' LinkSpecialOffers (Maybe Bool)
+lsoFreeShipping
+  = lens _lsoFreeShipping
+      (\ s a -> s{_lsoFreeShipping = a})
+
+-- | List of promotion code associated with the link
+lsoPromotionCodes :: Lens' LinkSpecialOffers [Text]
+lsoPromotionCodes
+  = lens _lsoPromotionCodes
+      (\ s a -> s{_lsoPromotionCodes = a})
+      . _Default
+      . _Coerce
+
+-- | Whether there is a free gift
+lsoFreeGift :: Lens' LinkSpecialOffers (Maybe Bool)
+lsoFreeGift
+  = lens _lsoFreeGift (\ s a -> s{_lsoFreeGift = a})
+
+instance FromJSON LinkSpecialOffers where
+        parseJSON
+          = withObject "LinkSpecialOffers"
+              (\ o ->
+                 LinkSpecialOffers <$>
+                   (o .:? "freeShippingMin") <*> (o .:? "percentOff")
+                     <*> (o .:? "priceCut")
+                     <*> (o .:? "priceCutMin")
+                     <*> (o .:? "percentOffMin")
+                     <*> (o .:? "freeShipping")
+                     <*> (o .:? "promotionCodes" .!= mempty)
+                     <*> (o .:? "freeGift"))
+
+instance ToJSON LinkSpecialOffers where
+        toJSON LinkSpecialOffers{..}
+          = object
+              (catMaybes
+                 [("freeShippingMin" .=) <$> _lsoFreeShippingMin,
+                  ("percentOff" .=) <$> _lsoPercentOff,
+                  ("priceCut" .=) <$> _lsoPriceCut,
+                  ("priceCutMin" .=) <$> _lsoPriceCutMin,
+                  ("percentOffMin" .=) <$> _lsoPercentOffMin,
+                  ("freeShipping" .=) <$> _lsoFreeShipping,
+                  ("promotionCodes" .=) <$> _lsoPromotionCodes,
+                  ("freeGift" .=) <$> _lsoFreeGift])
 
 --
 -- /See:/ 'publishers' smart constructor.
@@ -1227,7 +1687,7 @@ data CcOffer = CcOffer
     , _cStatementCopyFee              :: !(Maybe Text)
     , _cAprDisplay                    :: !(Maybe Text)
     , _cOffersImmediateCashReward     :: !(Maybe Bool)
-    , _cRewards                       :: !(Maybe [CcOfferRewardsItem])
+    , _cRewards                       :: !(Maybe [CcOfferRewards])
     , _cCardType                      :: !(Maybe Text)
     , _cImageUrl                      :: !(Maybe Text)
     , _cCreditLimitMax                :: !(Maybe Double)
@@ -1253,10 +1713,10 @@ data CcOffer = CcOffer
     , _cAnnualRewardMaximum           :: !(Maybe Double)
     , _cIssuerId                      :: !(Maybe Text)
     , _cIntroBalanceTransferTerms     :: !(Maybe Text)
-    , _cDefaultFees                   :: !(Maybe [CcOfferDefaultFeesItem])
+    , _cDefaultFees                   :: !(Maybe [CcOfferDefaultFees])
     , _cAdditionalCardBenefits        :: !(Maybe [Text])
     , _cRewardUnit                    :: !(Maybe Text)
-    , _cBonusRewards                  :: !(Maybe [CcOfferBonusRewardsItem])
+    , _cBonusRewards                  :: !(Maybe [CcOfferBonusRewards])
     , _cFlightAccidentInsurance       :: !(Maybe Text)
     , _cRewardPartner                 :: !(Maybe Text)
     , _cPurchaseRateType              :: !(Maybe Text)
@@ -1653,7 +2113,7 @@ cOffersImmediateCashReward
 
 -- | For cards with rewards programs, detailed rules about how the program
 -- works.
-cRewards :: Lens' CcOffer [CcOfferRewardsItem]
+cRewards :: Lens' CcOffer [CcOfferRewards]
 cRewards
   = lens _cRewards (\ s a -> s{_cRewards = a}) .
       _Default
@@ -1819,7 +2279,7 @@ cIntroBalanceTransferTerms
       (\ s a -> s{_cIntroBalanceTransferTerms = a})
 
 -- | Fees for defaulting on your payments.
-cDefaultFees :: Lens' CcOffer [CcOfferDefaultFeesItem]
+cDefaultFees :: Lens' CcOffer [CcOfferDefaultFees]
 cDefaultFees
   = lens _cDefaultFees (\ s a -> s{_cDefaultFees = a})
       . _Default
@@ -1841,7 +2301,7 @@ cRewardUnit
 
 -- | For cards with rewards programs, extra circumstances whereby additional
 -- rewards may be granted.
-cBonusRewards :: Lens' CcOffer [CcOfferBonusRewardsItem]
+cBonusRewards :: Lens' CcOffer [CcOfferBonusRewards]
 cBonusRewards
   = lens _cBonusRewards
       (\ s a -> s{_cBonusRewards = a})

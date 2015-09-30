@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetAll@.
-module GamesManagement.Achievements.ResetAll
+module Network.Google.Resource.GamesManagement.Achievements.ResetAll
     (
     -- * REST Resource
-      AchievementsResetAllAPI
+      AchievementsResetAllResource
 
     -- * Creating a Request
-    , achievementsResetAll
-    , AchievementsResetAll
+    , achievementsResetAll'
+    , AchievementsResetAll'
 
     -- * Request Lenses
     , araQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementAchievementsResetAll@ which the
--- 'AchievementsResetAll' request conforms to.
-type AchievementsResetAllAPI =
+-- 'AchievementsResetAll'' request conforms to.
+type AchievementsResetAllResource =
      "achievements" :>
-       "reset" :> Post '[JSON] AchievementResetAllResponse
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] AchievementResetAllResponse
 
 -- | Resets all achievements for the currently authenticated player for your
 -- application. This method is only accessible to whitelisted tester
 -- accounts for your application.
 --
--- /See:/ 'achievementsResetAll' smart constructor.
-data AchievementsResetAll = AchievementsResetAll
+-- /See:/ 'achievementsResetAll'' smart constructor.
+data AchievementsResetAll' = AchievementsResetAll'
     { _araQuotaUser   :: !(Maybe Text)
     , _araPrettyPrint :: !Bool
     , _araUserIp      :: !(Maybe Text)
     , _araKey         :: !(Maybe Text)
     , _araOauthToken  :: !(Maybe Text)
     , _araFields      :: !(Maybe Text)
-    , _araAlt         :: !Text
+    , _araAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAll'' with the minimum fields required to make a request.
@@ -81,17 +90,17 @@ data AchievementsResetAll = AchievementsResetAll
 -- * 'araFields'
 --
 -- * 'araAlt'
-achievementsResetAll
-    :: AchievementsResetAll
-achievementsResetAll =
-    AchievementsResetAll
+achievementsResetAll'
+    :: AchievementsResetAll'
+achievementsResetAll' =
+    AchievementsResetAll'
     { _araQuotaUser = Nothing
     , _araPrettyPrint = True
     , _araUserIp = Nothing
     , _araKey = Nothing
     , _araOauthToken = Nothing
     , _araFields = Nothing
-    , _araAlt = "json"
+    , _araAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,20 +140,21 @@ araFields
   = lens _araFields (\ s a -> s{_araFields = a})
 
 -- | Data format for the response.
-araAlt :: Lens' AchievementsResetAll' Text
+araAlt :: Lens' AchievementsResetAll' Alt
 araAlt = lens _araAlt (\ s a -> s{_araAlt = a})
 
 instance GoogleRequest AchievementsResetAll' where
         type Rs AchievementsResetAll' =
              AchievementResetAllResponse
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u AchievementsResetAll{..}
-          = go _araQuotaUser _araPrettyPrint _araUserIp _araKey
+        requestWithRoute r u AchievementsResetAll'{..}
+          = go _araQuotaUser (Just _araPrettyPrint) _araUserIp
+              _araKey
               _araOauthToken
               _araFields
-              _araAlt
+              (Just _araAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsResetAllAPI)
+                      (Proxy :: Proxy AchievementsResetAllResource)
                       r
                       u

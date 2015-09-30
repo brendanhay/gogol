@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,166 +21,169 @@
 -- Shutting down an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesDelete@.
-module Compute.Instances.Delete
+module Network.Google.Resource.Compute.Instances.Delete
     (
     -- * REST Resource
-      InstancesDeleteAPI
+      InstancesDeleteResource
 
     -- * Creating a Request
-    , instancesDelete
-    , InstancesDelete
+    , instancesDelete'
+    , InstancesDelete'
 
     -- * Request Lenses
-    , id1QuotaUser
-    , id1PrettyPrint
-    , id1Project
-    , id1UserIp
-    , id1Zone
-    , id1Key
-    , id1OauthToken
-    , id1Fields
-    , id1Alt
-    , id1Instance
+    , iQuotaUser
+    , iPrettyPrint
+    , iProject
+    , iUserIp
+    , iZone
+    , iKey
+    , iOauthToken
+    , iFields
+    , iAlt
+    , iInstance
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesDelete@ which the
--- 'InstancesDelete' request conforms to.
-type InstancesDeleteAPI =
+-- 'InstancesDelete'' request conforms to.
+type InstancesDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
-             Capture "instance" Text :> Delete '[JSON] Operation
+             Capture "instance" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
 -- Shutting down an instance.
 --
--- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
-    { _id1QuotaUser   :: !(Maybe Text)
-    , _id1PrettyPrint :: !Bool
-    , _id1Project     :: !Text
-    , _id1UserIp      :: !(Maybe Text)
-    , _id1Zone        :: !Text
-    , _id1Key         :: !(Maybe Text)
-    , _id1OauthToken  :: !(Maybe Text)
-    , _id1Fields      :: !(Maybe Text)
-    , _id1Alt         :: !Text
-    , _id1Instance    :: !Text
+-- /See:/ 'instancesDelete'' smart constructor.
+data InstancesDelete' = InstancesDelete'
+    { _iQuotaUser   :: !(Maybe Text)
+    , _iPrettyPrint :: !Bool
+    , _iProject     :: !Text
+    , _iUserIp      :: !(Maybe Text)
+    , _iZone        :: !Text
+    , _iKey         :: !(Maybe Text)
+    , _iOauthToken  :: !(Maybe Text)
+    , _iFields      :: !(Maybe Text)
+    , _iAlt         :: !Alt
+    , _iInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'id1QuotaUser'
+-- * 'iQuotaUser'
 --
--- * 'id1PrettyPrint'
+-- * 'iPrettyPrint'
 --
--- * 'id1Project'
+-- * 'iProject'
 --
--- * 'id1UserIp'
+-- * 'iUserIp'
 --
--- * 'id1Zone'
+-- * 'iZone'
 --
--- * 'id1Key'
+-- * 'iKey'
 --
--- * 'id1OauthToken'
+-- * 'iOauthToken'
 --
--- * 'id1Fields'
+-- * 'iFields'
 --
--- * 'id1Alt'
+-- * 'iAlt'
 --
--- * 'id1Instance'
-instancesDelete
+-- * 'iInstance'
+instancesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesDelete
-instancesDelete pId1Project_ pId1Zone_ pId1Instance_ =
-    InstancesDelete
-    { _id1QuotaUser = Nothing
-    , _id1PrettyPrint = True
-    , _id1Project = pId1Project_
-    , _id1UserIp = Nothing
-    , _id1Zone = pId1Zone_
-    , _id1Key = Nothing
-    , _id1OauthToken = Nothing
-    , _id1Fields = Nothing
-    , _id1Alt = "json"
-    , _id1Instance = pId1Instance_
+    -> InstancesDelete'
+instancesDelete' pIProject_ pIZone_ pIInstance_ =
+    InstancesDelete'
+    { _iQuotaUser = Nothing
+    , _iPrettyPrint = True
+    , _iProject = pIProject_
+    , _iUserIp = Nothing
+    , _iZone = pIZone_
+    , _iKey = Nothing
+    , _iOauthToken = Nothing
+    , _iFields = Nothing
+    , _iAlt = JSON
+    , _iInstance = pIInstance_
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-id1QuotaUser :: Lens' InstancesDelete' (Maybe Text)
-id1QuotaUser
-  = lens _id1QuotaUser (\ s a -> s{_id1QuotaUser = a})
+iQuotaUser :: Lens' InstancesDelete' (Maybe Text)
+iQuotaUser
+  = lens _iQuotaUser (\ s a -> s{_iQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-id1PrettyPrint :: Lens' InstancesDelete' Bool
-id1PrettyPrint
-  = lens _id1PrettyPrint
-      (\ s a -> s{_id1PrettyPrint = a})
+iPrettyPrint :: Lens' InstancesDelete' Bool
+iPrettyPrint
+  = lens _iPrettyPrint (\ s a -> s{_iPrettyPrint = a})
 
 -- | Project ID for this request.
-id1Project :: Lens' InstancesDelete' Text
-id1Project
-  = lens _id1Project (\ s a -> s{_id1Project = a})
+iProject :: Lens' InstancesDelete' Text
+iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-id1UserIp :: Lens' InstancesDelete' (Maybe Text)
-id1UserIp
-  = lens _id1UserIp (\ s a -> s{_id1UserIp = a})
+iUserIp :: Lens' InstancesDelete' (Maybe Text)
+iUserIp = lens _iUserIp (\ s a -> s{_iUserIp = a})
 
 -- | The name of the zone for this request.
-id1Zone :: Lens' InstancesDelete' Text
-id1Zone = lens _id1Zone (\ s a -> s{_id1Zone = a})
+iZone :: Lens' InstancesDelete' Text
+iZone = lens _iZone (\ s a -> s{_iZone = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-id1Key :: Lens' InstancesDelete' (Maybe Text)
-id1Key = lens _id1Key (\ s a -> s{_id1Key = a})
+iKey :: Lens' InstancesDelete' (Maybe Text)
+iKey = lens _iKey (\ s a -> s{_iKey = a})
 
 -- | OAuth 2.0 token for the current user.
-id1OauthToken :: Lens' InstancesDelete' (Maybe Text)
-id1OauthToken
-  = lens _id1OauthToken
-      (\ s a -> s{_id1OauthToken = a})
+iOauthToken :: Lens' InstancesDelete' (Maybe Text)
+iOauthToken
+  = lens _iOauthToken (\ s a -> s{_iOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-id1Fields :: Lens' InstancesDelete' (Maybe Text)
-id1Fields
-  = lens _id1Fields (\ s a -> s{_id1Fields = a})
+iFields :: Lens' InstancesDelete' (Maybe Text)
+iFields = lens _iFields (\ s a -> s{_iFields = a})
 
 -- | Data format for the response.
-id1Alt :: Lens' InstancesDelete' Text
-id1Alt = lens _id1Alt (\ s a -> s{_id1Alt = a})
+iAlt :: Lens' InstancesDelete' Alt
+iAlt = lens _iAlt (\ s a -> s{_iAlt = a})
 
 -- | Name of the instance resource to delete.
-id1Instance :: Lens' InstancesDelete' Text
-id1Instance
-  = lens _id1Instance (\ s a -> s{_id1Instance = a})
+iInstance :: Lens' InstancesDelete' Text
+iInstance
+  = lens _iInstance (\ s a -> s{_iInstance = a})
 
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesDelete{..}
-          = go _id1QuotaUser _id1PrettyPrint _id1Project
-              _id1UserIp
-              _id1Zone
-              _id1Key
-              _id1OauthToken
-              _id1Fields
-              _id1Alt
-              _id1Instance
+        requestWithRoute r u InstancesDelete'{..}
+          = go _iQuotaUser (Just _iPrettyPrint) _iProject
+              _iUserIp
+              _iZone
+              _iKey
+              _iOauthToken
+              _iFields
+              (Just _iAlt)
+              _iInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesDeleteResource)
                       r
                       u

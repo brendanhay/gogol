@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- the value of the nextPageToken.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringTimeseriesDescriptorsList@.
-module Cloudmonitoring.TimeseriesDescriptors.List
+module Network.Google.Resource.Cloudmonitoring.TimeseriesDescriptors.List
     (
     -- * REST Resource
-      TimeseriesDescriptorsListAPI
+      TimeseriesDescriptorsListResource
 
     -- * Creating a Request
-    , timeseriesDescriptorsList
-    , TimeseriesDescriptorsList
+    , timeseriesDescriptorsList'
+    , TimeseriesDescriptorsList'
 
     -- * Request Lenses
     , tWindow
@@ -56,20 +57,30 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringTimeseriesDescriptorsList@ which the
--- 'TimeseriesDescriptorsList' request conforms to.
-type TimeseriesDescriptorsListAPI =
+-- 'TimeseriesDescriptorsList'' request conforms to.
+type TimeseriesDescriptorsListResource =
      Capture "project" Text :>
        "timeseriesDescriptors" :>
          Capture "metric" Text :>
            QueryParam "window" Text :>
-             QueryParam "count" Int32 :>
-               QueryParam "aggregator" Text :>
-                 QueryParam "timespan" Text :>
-                   QueryParam "oldest" Text :>
-                     QueryParams "labels" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "youngest" Text :>
-                           Get '[JSON] ListTimeseriesDescriptorsResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "count" Int32 :>
+                     QueryParam "aggregator"
+                       CloudmonitoringTimeseriesDescriptorsListAggregator
+                       :>
+                       QueryParam "timespan" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oldest" Text :>
+                             QueryParams "labels" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "youngest" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON]
+                                           ListTimeseriesDescriptorsResponse
 
 -- | List the descriptors of the time series that match the metric and labels
 -- values and that have data points in the interval. Large responses are
@@ -77,15 +88,15 @@ type TimeseriesDescriptorsListAPI =
 -- subsequent pages of results by setting the pageToken query parameter to
 -- the value of the nextPageToken.
 --
--- /See:/ 'timeseriesDescriptorsList' smart constructor.
-data TimeseriesDescriptorsList = TimeseriesDescriptorsList
+-- /See:/ 'timeseriesDescriptorsList'' smart constructor.
+data TimeseriesDescriptorsList' = TimeseriesDescriptorsList'
     { _tWindow      :: !(Maybe Text)
     , _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
     , _tProject     :: !Text
     , _tUserIp      :: !(Maybe Text)
     , _tCount       :: !Int32
-    , _tAggregator  :: !(Maybe Text)
+    , _tAggregator  :: !(Maybe CloudmonitoringTimeseriesDescriptorsListAggregator)
     , _tTimespan    :: !(Maybe Text)
     , _tMetric      :: !Text
     , _tKey         :: !(Maybe Text)
@@ -95,7 +106,7 @@ data TimeseriesDescriptorsList = TimeseriesDescriptorsList
     , _tYoungest    :: !Text
     , _tOauthToken  :: !(Maybe Text)
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Text
+    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesDescriptorsList'' with the minimum fields required to make a request.
@@ -135,13 +146,13 @@ data TimeseriesDescriptorsList = TimeseriesDescriptorsList
 -- * 'tFields'
 --
 -- * 'tAlt'
-timeseriesDescriptorsList
+timeseriesDescriptorsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'metric'
     -> Text -- ^ 'youngest'
-    -> TimeseriesDescriptorsList
-timeseriesDescriptorsList pTProject_ pTMetric_ pTYoungest_ =
-    TimeseriesDescriptorsList
+    -> TimeseriesDescriptorsList'
+timeseriesDescriptorsList' pTProject_ pTMetric_ pTYoungest_ =
+    TimeseriesDescriptorsList'
     { _tWindow = Nothing
     , _tQuotaUser = Nothing
     , _tPrettyPrint = True
@@ -158,7 +169,7 @@ timeseriesDescriptorsList pTProject_ pTMetric_ pTYoungest_ =
     , _tYoungest = pTYoungest_
     , _tOauthToken = Nothing
     , _tFields = Nothing
-    , _tAlt = "json"
+    , _tAlt = JSON
     }
 
 -- | The sampling window. At most one data point will be returned for each
@@ -199,7 +210,7 @@ tCount = lens _tCount (\ s a -> s{_tCount = a})
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-tAggregator :: Lens' TimeseriesDescriptorsList' (Maybe Text)
+tAggregator :: Lens' TimeseriesDescriptorsList' (Maybe CloudmonitoringTimeseriesDescriptorsListAggregator)
 tAggregator
   = lens _tAggregator (\ s a -> s{_tAggregator = a})
 
@@ -264,7 +275,7 @@ tFields :: Lens' TimeseriesDescriptorsList' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
 -- | Data format for the response.
-tAlt :: Lens' TimeseriesDescriptorsList' Text
+tAlt :: Lens' TimeseriesDescriptorsList' Alt
 tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
 
 instance GoogleRequest TimeseriesDescriptorsList'
@@ -272,8 +283,9 @@ instance GoogleRequest TimeseriesDescriptorsList'
         type Rs TimeseriesDescriptorsList' =
              ListTimeseriesDescriptorsResponse
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u TimeseriesDescriptorsList{..}
-          = go _tWindow _tQuotaUser _tPrettyPrint _tProject
+        requestWithRoute r u TimeseriesDescriptorsList'{..}
+          = go _tWindow _tQuotaUser (Just _tPrettyPrint)
+              _tProject
               _tUserIp
               (Just _tCount)
               _tAggregator
@@ -286,9 +298,9 @@ instance GoogleRequest TimeseriesDescriptorsList'
               (Just _tYoungest)
               _tOauthToken
               _tFields
-              _tAlt
+              (Just _tAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TimeseriesDescriptorsListAPI)
+                      (Proxy :: Proxy TimeseriesDescriptorsListResource)
                       r
                       u

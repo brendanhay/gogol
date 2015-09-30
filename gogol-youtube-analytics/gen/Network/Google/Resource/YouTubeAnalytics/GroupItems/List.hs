@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- parameters.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupItemsList@.
-module YouTubeAnalytics.GroupItems.List
+module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
     (
     -- * REST Resource
-      GroupItemsListAPI
+      GroupItemsListResource
 
     -- * Creating a Request
-    , groupItemsList
-    , GroupItemsList
+    , groupItemsList'
+    , GroupItemsList'
 
     -- * Request Lenses
     , gilQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsGroupItemsList@ which the
--- 'GroupItemsList' request conforms to.
-type GroupItemsListAPI =
+-- 'GroupItemsList'' request conforms to.
+type GroupItemsListResource =
      "groupItems" :>
-       QueryParam "onBehalfOfContentOwner" Text :>
-         QueryParam "groupId" Text :>
-           Get '[JSON] GroupItemListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "onBehalfOfContentOwner" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "groupId" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] GroupItemListResponse
 
 -- | Returns a collection of group items that match the API request
 -- parameters.
 --
--- /See:/ 'groupItemsList' smart constructor.
-data GroupItemsList = GroupItemsList
+-- /See:/ 'groupItemsList'' smart constructor.
+data GroupItemsList' = GroupItemsList'
     { _gilQuotaUser              :: !(Maybe Text)
     , _gilPrettyPrint            :: !Bool
     , _gilUserIp                 :: !(Maybe Text)
@@ -65,7 +73,7 @@ data GroupItemsList = GroupItemsList
     , _gilGroupId                :: !Text
     , _gilOauthToken             :: !(Maybe Text)
     , _gilFields                 :: !(Maybe Text)
-    , _gilAlt                    :: !Text
+    , _gilAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsList'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data GroupItemsList = GroupItemsList
 -- * 'gilFields'
 --
 -- * 'gilAlt'
-groupItemsList
+groupItemsList'
     :: Text -- ^ 'groupId'
-    -> GroupItemsList
-groupItemsList pGilGroupId_ =
-    GroupItemsList
+    -> GroupItemsList'
+groupItemsList' pGilGroupId_ =
+    GroupItemsList'
     { _gilQuotaUser = Nothing
     , _gilPrettyPrint = True
     , _gilUserIp = Nothing
@@ -102,7 +110,7 @@ groupItemsList pGilGroupId_ =
     , _gilGroupId = pGilGroupId_
     , _gilOauthToken = Nothing
     , _gilFields = Nothing
-    , _gilAlt = "json"
+    , _gilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,21 +171,22 @@ gilFields
   = lens _gilFields (\ s a -> s{_gilFields = a})
 
 -- | Data format for the response.
-gilAlt :: Lens' GroupItemsList' Text
+gilAlt :: Lens' GroupItemsList' Alt
 gilAlt = lens _gilAlt (\ s a -> s{_gilAlt = a})
 
 instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupItemsList{..}
-          = go _gilQuotaUser _gilPrettyPrint _gilUserIp
+        requestWithRoute r u GroupItemsList'{..}
+          = go _gilQuotaUser (Just _gilPrettyPrint) _gilUserIp
               _gilOnBehalfOfContentOwner
               _gilKey
               (Just _gilGroupId)
               _gilOauthToken
               _gilFields
-              _gilAlt
+              (Just _gilAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupItemsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupItemsListResource)
                       r
                       u

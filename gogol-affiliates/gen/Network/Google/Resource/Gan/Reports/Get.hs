@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a report of the specified type.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanReportsGet@.
-module Gan.Reports.Get
+module Network.Google.Resource.Gan.Reports.Get
     (
     -- * REST Resource
-      ReportsGetAPI
+      ReportsGetResource
 
     -- * Creating a Request
-    , reportsGet
-    , ReportsGet
+    , reportsGet'
+    , ReportsGet'
 
     -- * Request Lenses
     , rgStatus
@@ -56,38 +57,45 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanReportsGet@ which the
--- 'ReportsGet' request conforms to.
-type ReportsGetAPI =
-     Capture "role" Text :>
+-- 'ReportsGet'' request conforms to.
+type ReportsGetResource =
+     Capture "role" GanReportsGetRole :>
        Capture "roleId" Text :>
          "report" :>
-           Capture "reportType" Text :>
-             QueryParam "status" Text :>
-               QueryParams "advertiserId" Text :>
-                 QueryParam "endDate" Text :>
-                   QueryParam "eventType" Text :>
-                     QueryParam "startDate" Text :>
-                       QueryParam "calculateTotals" Bool :>
-                         QueryParams "linkId" Text :>
-                           QueryParams "orderId" Text :>
-                             QueryParams "publisherId" Text :>
-                               QueryParam "startIndex" Word32 :>
-                                 QueryParam "maxResults" Word32 :>
-                                   Get '[JSON] Report
+           Capture "reportType" GanReportsGetReportType :>
+             QueryParam "status" GanReportsGetStatus :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParams "advertiserId" Text :>
+                       QueryParam "endDate" Text :>
+                         QueryParam "eventType" GanReportsGetEventType :>
+                           QueryParam "startDate" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "calculateTotals" Bool :>
+                                 QueryParams "linkId" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParams "orderId" Text :>
+                                       QueryParams "publisherId" Text :>
+                                         QueryParam "startIndex" Word32 :>
+                                           QueryParam "maxResults" Word32 :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "alt" Alt :>
+                                                 Get '[JSON] Report
 
 -- | Retrieves a report of the specified type.
 --
--- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet
-    { _rgStatus          :: !(Maybe Text)
+-- /See:/ 'reportsGet'' smart constructor.
+data ReportsGet' = ReportsGet'
+    { _rgStatus          :: !(Maybe GanReportsGetStatus)
     , _rgQuotaUser       :: !(Maybe Text)
     , _rgPrettyPrint     :: !Bool
     , _rgUserIp          :: !(Maybe Text)
     , _rgAdvertiserId    :: !(Maybe Text)
     , _rgEndDate         :: !(Maybe Text)
     , _rgRoleId          :: !Text
-    , _rgRole            :: !Text
-    , _rgEventType       :: !(Maybe Text)
+    , _rgRole            :: !GanReportsGetRole
+    , _rgEventType       :: !(Maybe GanReportsGetEventType)
     , _rgStartDate       :: !(Maybe Text)
     , _rgKey             :: !(Maybe Text)
     , _rgCalculateTotals :: !(Maybe Bool)
@@ -95,11 +103,11 @@ data ReportsGet = ReportsGet
     , _rgOauthToken      :: !(Maybe Text)
     , _rgOrderId         :: !(Maybe Text)
     , _rgPublisherId     :: !(Maybe Text)
-    , _rgReportType      :: !Text
+    , _rgReportType      :: !GanReportsGetReportType
     , _rgStartIndex      :: !(Maybe Word32)
     , _rgMaxResults      :: !(Maybe Word32)
     , _rgFields          :: !(Maybe Text)
-    , _rgAlt             :: !Text
+    , _rgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
@@ -147,13 +155,13 @@ data ReportsGet = ReportsGet
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-reportsGet
+reportsGet'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> Text -- ^ 'reportType'
-    -> ReportsGet
-reportsGet pRgRoleId_ pRgRole_ pRgReportType_ =
-    ReportsGet
+    -> GanReportsGetRole -- ^ 'role'
+    -> GanReportsGetReportType -- ^ 'reportType'
+    -> ReportsGet'
+reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
+    ReportsGet'
     { _rgStatus = Nothing
     , _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
@@ -174,12 +182,12 @@ reportsGet pRgRoleId_ pRgRole_ pRgReportType_ =
     , _rgStartIndex = Nothing
     , _rgMaxResults = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Filters out all events that do not have the given status. Valid values:
 -- \'active\', \'canceled\', or \'invalid\'. Optional.
-rgStatus :: Lens' ReportsGet' (Maybe Text)
+rgStatus :: Lens' ReportsGet' (Maybe GanReportsGetStatus)
 rgStatus = lens _rgStatus (\ s a -> s{_rgStatus = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -219,12 +227,12 @@ rgRoleId = lens _rgRoleId (\ s a -> s{_rgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-rgRole :: Lens' ReportsGet' Text
+rgRole :: Lens' ReportsGet' GanReportsGetRole
 rgRole = lens _rgRole (\ s a -> s{_rgRole = a})
 
 -- | Filters out all events that are not of the given type. Valid values:
 -- \'action\', \'transaction\', or \'charge\'. Optional.
-rgEventType :: Lens' ReportsGet' (Maybe Text)
+rgEventType :: Lens' ReportsGet' (Maybe GanReportsGetEventType)
 rgEventType
   = lens _rgEventType (\ s a -> s{_rgEventType = a})
 
@@ -269,7 +277,7 @@ rgPublisherId
 
 -- | The type of report being requested. Valid values: \'order_delta\'.
 -- Required.
-rgReportType :: Lens' ReportsGet' Text
+rgReportType :: Lens' ReportsGet' GanReportsGetReportType
 rgReportType
   = lens _rgReportType (\ s a -> s{_rgReportType = a})
 
@@ -289,14 +297,15 @@ rgFields :: Lens' ReportsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' ReportsGet' Text
+rgAlt :: Lens' ReportsGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u ReportsGet{..}
-          = go _rgStatus _rgQuotaUser _rgPrettyPrint _rgUserIp
+        requestWithRoute r u ReportsGet'{..}
+          = go _rgStatus _rgQuotaUser (Just _rgPrettyPrint)
+              _rgUserIp
               _rgAdvertiserId
               _rgEndDate
               _rgRoleId
@@ -313,6 +322,8 @@ instance GoogleRequest ReportsGet' where
               _rgStartIndex
               _rgMaxResults
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ReportsGetResource)
+                      r
+                      u

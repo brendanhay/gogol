@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsPatch@.
-module Coordinate.Jobs.Patch
+module Network.Google.Resource.Coordinate.Jobs.Patch
     (
     -- * REST Resource
-      JobsPatchAPI
+      JobsPatchResource
 
     -- * Creating a Request
-    , jobsPatch
-    , JobsPatch
+    , jobsPatch'
+    , JobsPatch'
 
     -- * Request Lenses
     , jpQuotaUser
@@ -55,33 +56,40 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateJobsPatch@ which the
--- 'JobsPatch' request conforms to.
-type JobsPatchAPI =
+-- 'JobsPatch'' request conforms to.
+type JobsPatchResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
            Capture "jobId" Word64 :>
-             QueryParam "progress" Text :>
-               QueryParam "note" Text :>
-                 QueryParam "customerPhoneNumber" Text :>
-                   QueryParam "customerName" Text :>
-                     QueryParam "address" Text :>
-                       QueryParam "assignee" Text :>
-                         QueryParam "lat" Double :>
-                           QueryParam "lng" Double :>
-                             QueryParam "title" Text :>
-                               QueryParams "customField" Text :>
-                                 Patch '[JSON] Job
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "progress" CoordinateJobsPatchProgress :>
+                   QueryParam "note" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "customerPhoneNumber" Text :>
+                         QueryParam "customerName" Text :>
+                           QueryParam "address" Text :>
+                             QueryParam "assignee" Text :>
+                               QueryParam "lat" Double :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "lng" Double :>
+                                     QueryParam "title" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParams "customField" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Patch '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 -- This method supports patch semantics.
 --
--- /See:/ 'jobsPatch' smart constructor.
-data JobsPatch = JobsPatch
+-- /See:/ 'jobsPatch'' smart constructor.
+data JobsPatch' = JobsPatch'
     { _jpQuotaUser           :: !(Maybe Text)
     , _jpPrettyPrint         :: !Bool
     , _jpJobId               :: !Word64
-    , _jpProgress            :: !(Maybe Text)
+    , _jpProgress            :: !(Maybe CoordinateJobsPatchProgress)
     , _jpNote                :: !(Maybe Text)
     , _jpUserIp              :: !(Maybe Text)
     , _jpTeamId              :: !Text
@@ -96,7 +104,7 @@ data JobsPatch = JobsPatch
     , _jpOauthToken          :: !(Maybe Text)
     , _jpFields              :: !(Maybe Text)
     , _jpCustomField         :: !(Maybe Text)
-    , _jpAlt                 :: !Text
+    , _jpAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsPatch'' with the minimum fields required to make a request.
@@ -140,12 +148,12 @@ data JobsPatch = JobsPatch
 -- * 'jpCustomField'
 --
 -- * 'jpAlt'
-jobsPatch
+jobsPatch'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
-    -> JobsPatch
-jobsPatch pJpJobId_ pJpTeamId_ =
-    JobsPatch
+    -> JobsPatch'
+jobsPatch' pJpJobId_ pJpTeamId_ =
+    JobsPatch'
     { _jpQuotaUser = Nothing
     , _jpPrettyPrint = True
     , _jpJobId = pJpJobId_
@@ -164,7 +172,7 @@ jobsPatch pJpJobId_ pJpTeamId_ =
     , _jpOauthToken = Nothing
     , _jpFields = Nothing
     , _jpCustomField = Nothing
-    , _jpAlt = "json"
+    , _jpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,7 +193,7 @@ jpJobId :: Lens' JobsPatch' Word64
 jpJobId = lens _jpJobId (\ s a -> s{_jpJobId = a})
 
 -- | Job progress
-jpProgress :: Lens' JobsPatch' (Maybe Text)
+jpProgress :: Lens' JobsPatch' (Maybe CoordinateJobsPatchProgress)
 jpProgress
   = lens _jpProgress (\ s a -> s{_jpProgress = a})
 
@@ -263,14 +271,15 @@ jpCustomField
       (\ s a -> s{_jpCustomField = a})
 
 -- | Data format for the response.
-jpAlt :: Lens' JobsPatch' Text
+jpAlt :: Lens' JobsPatch' Alt
 jpAlt = lens _jpAlt (\ s a -> s{_jpAlt = a})
 
 instance GoogleRequest JobsPatch' where
         type Rs JobsPatch' = Job
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsPatch{..}
-          = go _jpQuotaUser _jpPrettyPrint _jpJobId _jpProgress
+        requestWithRoute r u JobsPatch'{..}
+          = go _jpQuotaUser (Just _jpPrettyPrint) _jpJobId
+              _jpProgress
               _jpNote
               _jpUserIp
               _jpTeamId
@@ -285,6 +294,8 @@ instance GoogleRequest JobsPatch' where
               _jpOauthToken
               _jpFields
               _jpCustomField
-              _jpAlt
+              (Just _jpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsPatchResource)
+                      r
+                      u

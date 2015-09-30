@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified column.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnDelete@.
-module FusionTables.Column.Delete
+module Network.Google.Resource.FusionTables.Column.Delete
     (
     -- * REST Resource
-      ColumnDeleteAPI
+      ColumnDeleteResource
 
     -- * Creating a Request
-    , columnDelete
-    , ColumnDelete
+    , columnDelete'
+    , ColumnDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnDelete@ which the
--- 'ColumnDelete' request conforms to.
-type ColumnDeleteAPI =
+-- 'ColumnDelete'' request conforms to.
+type ColumnDeleteResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           Capture "columnId" Text :> Delete '[JSON] ()
+           Capture "columnId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the specified column.
 --
--- /See:/ 'columnDelete' smart constructor.
-data ColumnDelete = ColumnDelete
+-- /See:/ 'columnDelete'' smart constructor.
+data ColumnDelete' = ColumnDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
     , _cdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ColumnDelete = ColumnDelete
     , _cdTableId     :: !Text
     , _cdColumnId    :: !Text
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Text
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ColumnDelete = ColumnDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-columnDelete
+columnDelete'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> ColumnDelete
-columnDelete pCdTableId_ pCdColumnId_ =
-    ColumnDelete
+    -> ColumnDelete'
+columnDelete' pCdTableId_ pCdColumnId_ =
+    ColumnDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdUserIp = Nothing
@@ -101,7 +109,7 @@ columnDelete pCdTableId_ pCdColumnId_ =
     , _cdTableId = pCdTableId_
     , _cdColumnId = pCdColumnId_
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,22 @@ cdFields :: Lens' ColumnDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' ColumnDelete' Text
+cdAlt :: Lens' ColumnDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdUserIp _cdKey
+        requestWithRoute r u ColumnDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+              _cdKey
               _cdOauthToken
               _cdTableId
               _cdColumnId
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ColumnDeleteResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,178 +20,188 @@
 -- | Add a post.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsInsert@.
-module Blogger.Posts.Insert
+module Network.Google.Resource.Blogger.Posts.Insert
     (
     -- * REST Resource
-      PostsInsertAPI
+      PostsInsertResource
 
     -- * Creating a Request
-    , postsInsert
-    , PostsInsert
+    , postsInsert'
+    , PostsInsert'
 
     -- * Request Lenses
-    , posFetchBody
-    , posQuotaUser
-    , posPrettyPrint
-    , posIsDraft
-    , posUserIp
-    , posFetchImages
-    , posBlogId
-    , posKey
-    , posOauthToken
-    , posFields
-    , posAlt
+    , piiFetchBody
+    , piiQuotaUser
+    , piiPrettyPrint
+    , piiIsDraft
+    , piiUserIp
+    , piiFetchImages
+    , piiBlogId
+    , piiKey
+    , piiOauthToken
+    , piiFields
+    , piiAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsInsert@ which the
--- 'PostsInsert' request conforms to.
-type PostsInsertAPI =
+-- 'PostsInsert'' request conforms to.
+type PostsInsertResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            QueryParam "fetchBody" Bool :>
-             QueryParam "isDraft" Bool :>
-               QueryParam "fetchImages" Bool :> Post '[JSON] Post
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "isDraft" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fetchImages" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Post
 
 -- | Add a post.
 --
--- /See:/ 'postsInsert' smart constructor.
-data PostsInsert = PostsInsert
-    { _posFetchBody   :: !Bool
-    , _posQuotaUser   :: !(Maybe Text)
-    , _posPrettyPrint :: !Bool
-    , _posIsDraft     :: !(Maybe Bool)
-    , _posUserIp      :: !(Maybe Text)
-    , _posFetchImages :: !(Maybe Bool)
-    , _posBlogId      :: !Text
-    , _posKey         :: !(Maybe Text)
-    , _posOauthToken  :: !(Maybe Text)
-    , _posFields      :: !(Maybe Text)
-    , _posAlt         :: !Text
+-- /See:/ 'postsInsert'' smart constructor.
+data PostsInsert' = PostsInsert'
+    { _piiFetchBody   :: !Bool
+    , _piiQuotaUser   :: !(Maybe Text)
+    , _piiPrettyPrint :: !Bool
+    , _piiIsDraft     :: !(Maybe Bool)
+    , _piiUserIp      :: !(Maybe Text)
+    , _piiFetchImages :: !(Maybe Bool)
+    , _piiBlogId      :: !Text
+    , _piiKey         :: !(Maybe Text)
+    , _piiOauthToken  :: !(Maybe Text)
+    , _piiFields      :: !(Maybe Text)
+    , _piiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'posFetchBody'
+-- * 'piiFetchBody'
 --
--- * 'posQuotaUser'
+-- * 'piiQuotaUser'
 --
--- * 'posPrettyPrint'
+-- * 'piiPrettyPrint'
 --
--- * 'posIsDraft'
+-- * 'piiIsDraft'
 --
--- * 'posUserIp'
+-- * 'piiUserIp'
 --
--- * 'posFetchImages'
+-- * 'piiFetchImages'
 --
--- * 'posBlogId'
+-- * 'piiBlogId'
 --
--- * 'posKey'
+-- * 'piiKey'
 --
--- * 'posOauthToken'
+-- * 'piiOauthToken'
 --
--- * 'posFields'
+-- * 'piiFields'
 --
--- * 'posAlt'
-postsInsert
+-- * 'piiAlt'
+postsInsert'
     :: Text -- ^ 'blogId'
-    -> PostsInsert
-postsInsert pPosBlogId_ =
-    PostsInsert
-    { _posFetchBody = True
-    , _posQuotaUser = Nothing
-    , _posPrettyPrint = True
-    , _posIsDraft = Nothing
-    , _posUserIp = Nothing
-    , _posFetchImages = Nothing
-    , _posBlogId = pPosBlogId_
-    , _posKey = Nothing
-    , _posOauthToken = Nothing
-    , _posFields = Nothing
-    , _posAlt = "json"
+    -> PostsInsert'
+postsInsert' pPiiBlogId_ =
+    PostsInsert'
+    { _piiFetchBody = True
+    , _piiQuotaUser = Nothing
+    , _piiPrettyPrint = True
+    , _piiIsDraft = Nothing
+    , _piiUserIp = Nothing
+    , _piiFetchImages = Nothing
+    , _piiBlogId = pPiiBlogId_
+    , _piiKey = Nothing
+    , _piiOauthToken = Nothing
+    , _piiFields = Nothing
+    , _piiAlt = JSON
     }
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).
-posFetchBody :: Lens' PostsInsert' Bool
-posFetchBody
-  = lens _posFetchBody (\ s a -> s{_posFetchBody = a})
+piiFetchBody :: Lens' PostsInsert' Bool
+piiFetchBody
+  = lens _piiFetchBody (\ s a -> s{_piiFetchBody = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-posQuotaUser :: Lens' PostsInsert' (Maybe Text)
-posQuotaUser
-  = lens _posQuotaUser (\ s a -> s{_posQuotaUser = a})
+piiQuotaUser :: Lens' PostsInsert' (Maybe Text)
+piiQuotaUser
+  = lens _piiQuotaUser (\ s a -> s{_piiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-posPrettyPrint :: Lens' PostsInsert' Bool
-posPrettyPrint
-  = lens _posPrettyPrint
-      (\ s a -> s{_posPrettyPrint = a})
+piiPrettyPrint :: Lens' PostsInsert' Bool
+piiPrettyPrint
+  = lens _piiPrettyPrint
+      (\ s a -> s{_piiPrettyPrint = a})
 
 -- | Whether to create the post as a draft (default: false).
-posIsDraft :: Lens' PostsInsert' (Maybe Bool)
-posIsDraft
-  = lens _posIsDraft (\ s a -> s{_posIsDraft = a})
+piiIsDraft :: Lens' PostsInsert' (Maybe Bool)
+piiIsDraft
+  = lens _piiIsDraft (\ s a -> s{_piiIsDraft = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-posUserIp :: Lens' PostsInsert' (Maybe Text)
-posUserIp
-  = lens _posUserIp (\ s a -> s{_posUserIp = a})
+piiUserIp :: Lens' PostsInsert' (Maybe Text)
+piiUserIp
+  = lens _piiUserIp (\ s a -> s{_piiUserIp = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
-posFetchImages :: Lens' PostsInsert' (Maybe Bool)
-posFetchImages
-  = lens _posFetchImages
-      (\ s a -> s{_posFetchImages = a})
+piiFetchImages :: Lens' PostsInsert' (Maybe Bool)
+piiFetchImages
+  = lens _piiFetchImages
+      (\ s a -> s{_piiFetchImages = a})
 
 -- | ID of the blog to add the post to.
-posBlogId :: Lens' PostsInsert' Text
-posBlogId
-  = lens _posBlogId (\ s a -> s{_posBlogId = a})
+piiBlogId :: Lens' PostsInsert' Text
+piiBlogId
+  = lens _piiBlogId (\ s a -> s{_piiBlogId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-posKey :: Lens' PostsInsert' (Maybe Text)
-posKey = lens _posKey (\ s a -> s{_posKey = a})
+piiKey :: Lens' PostsInsert' (Maybe Text)
+piiKey = lens _piiKey (\ s a -> s{_piiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-posOauthToken :: Lens' PostsInsert' (Maybe Text)
-posOauthToken
-  = lens _posOauthToken
-      (\ s a -> s{_posOauthToken = a})
+piiOauthToken :: Lens' PostsInsert' (Maybe Text)
+piiOauthToken
+  = lens _piiOauthToken
+      (\ s a -> s{_piiOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-posFields :: Lens' PostsInsert' (Maybe Text)
-posFields
-  = lens _posFields (\ s a -> s{_posFields = a})
+piiFields :: Lens' PostsInsert' (Maybe Text)
+piiFields
+  = lens _piiFields (\ s a -> s{_piiFields = a})
 
 -- | Data format for the response.
-posAlt :: Lens' PostsInsert' Text
-posAlt = lens _posAlt (\ s a -> s{_posAlt = a})
+piiAlt :: Lens' PostsInsert' Alt
+piiAlt = lens _piiAlt (\ s a -> s{_piiAlt = a})
 
 instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsInsert{..}
-          = go (Just _posFetchBody) _posQuotaUser
-              _posPrettyPrint
-              _posIsDraft
-              _posUserIp
-              _posFetchImages
-              _posBlogId
-              _posKey
-              _posOauthToken
-              _posFields
-              _posAlt
+        requestWithRoute r u PostsInsert'{..}
+          = go (Just _piiFetchBody) _piiQuotaUser
+              (Just _piiPrettyPrint)
+              _piiIsDraft
+              _piiUserIp
+              _piiFetchImages
+              _piiBlogId
+              _piiKey
+              _piiOauthToken
+              _piiFields
+              (Just _piiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PostsInsertResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsCompose@.
-module Storage.Objects.Compose
+module Network.Google.Resource.Storage.Objects.Compose
     (
     -- * REST Resource
-      ObjectsComposeAPI
+      ObjectsComposeResource
 
     -- * Creating a Request
-    , objectsCompose
-    , ObjectsCompose
+    , objectsCompose'
+    , ObjectsCompose'
 
     -- * Request Lenses
     , oQuotaUser
@@ -47,22 +48,28 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsCompose@ which the
--- 'ObjectsCompose' request conforms to.
-type ObjectsComposeAPI =
+-- 'ObjectsCompose'' request conforms to.
+type ObjectsComposeResource =
      "b" :>
        Capture "destinationBucket" Text :>
          "o" :>
            Capture "destinationObject" Text :>
              "compose" :>
-               QueryParam "ifMetagenerationMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   Post '[JSON] Object
+               QueryParam "quotaUser" Text :>
+                 QueryParam "ifMetagenerationMatch" Word64 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "ifGenerationMatch" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Object
 
 -- | Concatenates a list of existing objects into a new object in the same
 -- bucket.
 --
--- /See:/ 'objectsCompose' smart constructor.
-data ObjectsCompose = ObjectsCompose
+-- /See:/ 'objectsCompose'' smart constructor.
+data ObjectsCompose' = ObjectsCompose'
     { _oQuotaUser             :: !(Maybe Text)
     , _oIfMetagenerationMatch :: !(Maybe Word64)
     , _oPrettyPrint           :: !Bool
@@ -72,7 +79,7 @@ data ObjectsCompose = ObjectsCompose
     , _oDestinationBucket     :: !Text
     , _oOauthToken            :: !(Maybe Text)
     , _oFields                :: !(Maybe Text)
-    , _oAlt                   :: !Text
+    , _oAlt                   :: !Alt
     , _oDestinationObject     :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -101,12 +108,12 @@ data ObjectsCompose = ObjectsCompose
 -- * 'oAlt'
 --
 -- * 'oDestinationObject'
-objectsCompose
+objectsCompose'
     :: Text -- ^ 'destinationBucket'
     -> Text -- ^ 'destinationObject'
-    -> ObjectsCompose
-objectsCompose pODestinationBucket_ pODestinationObject_ =
-    ObjectsCompose
+    -> ObjectsCompose'
+objectsCompose' pODestinationBucket_ pODestinationObject_ =
+    ObjectsCompose'
     { _oQuotaUser = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oPrettyPrint = True
@@ -116,7 +123,7 @@ objectsCompose pODestinationBucket_ pODestinationObject_ =
     , _oDestinationBucket = pODestinationBucket_
     , _oOauthToken = Nothing
     , _oFields = Nothing
-    , _oAlt = "json"
+    , _oAlt = JSON
     , _oDestinationObject = pODestinationObject_
     }
 
@@ -173,7 +180,7 @@ oFields :: Lens' ObjectsCompose' (Maybe Text)
 oFields = lens _oFields (\ s a -> s{_oFields = a})
 
 -- | Data format for the response.
-oAlt :: Lens' ObjectsCompose' Text
+oAlt :: Lens' ObjectsCompose' Alt
 oAlt = lens _oAlt (\ s a -> s{_oAlt = a})
 
 -- | Name of the new object.
@@ -185,18 +192,19 @@ oDestinationObject
 instance GoogleRequest ObjectsCompose' where
         type Rs ObjectsCompose' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsCompose{..}
+        requestWithRoute r u ObjectsCompose'{..}
           = go _oQuotaUser _oIfMetagenerationMatch
-              _oPrettyPrint
+              (Just _oPrettyPrint)
               _oIfGenerationMatch
               _oUserIp
               _oKey
               _oDestinationBucket
               _oOauthToken
               _oFields
-              _oAlt
+              (Just _oAlt)
               _oDestinationObject
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsComposeAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsComposeResource)
                       r
                       u

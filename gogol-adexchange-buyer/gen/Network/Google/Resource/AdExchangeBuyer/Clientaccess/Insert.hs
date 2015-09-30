@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,148 +20,156 @@
 
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerClientaccessInsert@.
-module AdExchangeBuyer.Clientaccess.Insert
+module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Insert
     (
     -- * REST Resource
-      ClientaccessInsertAPI
+      ClientaccessInsertResource
 
     -- * Creating a Request
-    , clientaccessInsert
-    , ClientaccessInsert
+    , clientaccessInsert'
+    , ClientaccessInsert'
 
     -- * Request Lenses
-    , cQuotaUser
-    , cPrettyPrint
-    , cUserIp
-    , cSponsorAccountId
-    , cKey
-    , cClientAccountId
-    , cOauthToken
-    , cFields
-    , cAlt
+    , ciQuotaUser
+    , ciPrettyPrint
+    , ciUserIp
+    , ciSponsorAccountId
+    , ciKey
+    , ciClientAccountId
+    , ciOauthToken
+    , ciFields
+    , ciAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerClientaccessInsert@ which the
--- 'ClientaccessInsert' request conforms to.
-type ClientaccessInsertAPI =
+-- 'ClientaccessInsert'' request conforms to.
+type ClientaccessInsertResource =
      "clientAccess" :>
-       QueryParam "sponsorAccountId" Int32 :>
-         QueryParam "clientAccountId" Int64 :>
-           Post '[JSON] ClientAccessCapabilities
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "sponsorAccountId" Int32 :>
+               QueryParam "key" Text :>
+                 QueryParam "clientAccountId" Int64 :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ClientAccessCapabilities
 
 --
--- /See:/ 'clientaccessInsert' smart constructor.
-data ClientaccessInsert = ClientaccessInsert
-    { _cQuotaUser        :: !(Maybe Text)
-    , _cPrettyPrint      :: !Bool
-    , _cUserIp           :: !(Maybe Text)
-    , _cSponsorAccountId :: !(Maybe Int32)
-    , _cKey              :: !(Maybe Text)
-    , _cClientAccountId  :: !(Maybe Int64)
-    , _cOauthToken       :: !(Maybe Text)
-    , _cFields           :: !(Maybe Text)
-    , _cAlt              :: !Text
+-- /See:/ 'clientaccessInsert'' smart constructor.
+data ClientaccessInsert' = ClientaccessInsert'
+    { _ciQuotaUser        :: !(Maybe Text)
+    , _ciPrettyPrint      :: !Bool
+    , _ciUserIp           :: !(Maybe Text)
+    , _ciSponsorAccountId :: !(Maybe Int32)
+    , _ciKey              :: !(Maybe Text)
+    , _ciClientAccountId  :: !(Maybe Int64)
+    , _ciOauthToken       :: !(Maybe Text)
+    , _ciFields           :: !(Maybe Text)
+    , _ciAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClientaccessInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cQuotaUser'
+-- * 'ciQuotaUser'
 --
--- * 'cPrettyPrint'
+-- * 'ciPrettyPrint'
 --
--- * 'cUserIp'
+-- * 'ciUserIp'
 --
--- * 'cSponsorAccountId'
+-- * 'ciSponsorAccountId'
 --
--- * 'cKey'
+-- * 'ciKey'
 --
--- * 'cClientAccountId'
+-- * 'ciClientAccountId'
 --
--- * 'cOauthToken'
+-- * 'ciOauthToken'
 --
--- * 'cFields'
+-- * 'ciFields'
 --
--- * 'cAlt'
-clientaccessInsert
-    :: ClientaccessInsert
-clientaccessInsert =
-    ClientaccessInsert
-    { _cQuotaUser = Nothing
-    , _cPrettyPrint = True
-    , _cUserIp = Nothing
-    , _cSponsorAccountId = Nothing
-    , _cKey = Nothing
-    , _cClientAccountId = Nothing
-    , _cOauthToken = Nothing
-    , _cFields = Nothing
-    , _cAlt = "json"
+-- * 'ciAlt'
+clientaccessInsert'
+    :: ClientaccessInsert'
+clientaccessInsert' =
+    ClientaccessInsert'
+    { _ciQuotaUser = Nothing
+    , _ciPrettyPrint = True
+    , _ciUserIp = Nothing
+    , _ciSponsorAccountId = Nothing
+    , _ciKey = Nothing
+    , _ciClientAccountId = Nothing
+    , _ciOauthToken = Nothing
+    , _ciFields = Nothing
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cQuotaUser :: Lens' ClientaccessInsert' (Maybe Text)
-cQuotaUser
-  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
+ciQuotaUser :: Lens' ClientaccessInsert' (Maybe Text)
+ciQuotaUser
+  = lens _ciQuotaUser (\ s a -> s{_ciQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cPrettyPrint :: Lens' ClientaccessInsert' Bool
-cPrettyPrint
-  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
+ciPrettyPrint :: Lens' ClientaccessInsert' Bool
+ciPrettyPrint
+  = lens _ciPrettyPrint
+      (\ s a -> s{_ciPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' ClientaccessInsert' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+ciUserIp :: Lens' ClientaccessInsert' (Maybe Text)
+ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
 
-cSponsorAccountId :: Lens' ClientaccessInsert' (Maybe Int32)
-cSponsorAccountId
-  = lens _cSponsorAccountId
-      (\ s a -> s{_cSponsorAccountId = a})
+ciSponsorAccountId :: Lens' ClientaccessInsert' (Maybe Int32)
+ciSponsorAccountId
+  = lens _ciSponsorAccountId
+      (\ s a -> s{_ciSponsorAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' ClientaccessInsert' (Maybe Text)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
+ciKey :: Lens' ClientaccessInsert' (Maybe Text)
+ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
-cClientAccountId :: Lens' ClientaccessInsert' (Maybe Int64)
-cClientAccountId
-  = lens _cClientAccountId
-      (\ s a -> s{_cClientAccountId = a})
+ciClientAccountId :: Lens' ClientaccessInsert' (Maybe Int64)
+ciClientAccountId
+  = lens _ciClientAccountId
+      (\ s a -> s{_ciClientAccountId = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' ClientaccessInsert' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+ciOauthToken :: Lens' ClientaccessInsert' (Maybe Text)
+ciOauthToken
+  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cFields :: Lens' ClientaccessInsert' (Maybe Text)
-cFields = lens _cFields (\ s a -> s{_cFields = a})
+ciFields :: Lens' ClientaccessInsert' (Maybe Text)
+ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-cAlt :: Lens' ClientaccessInsert' Text
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+ciAlt :: Lens' ClientaccessInsert' Alt
+ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest ClientaccessInsert' where
         type Rs ClientaccessInsert' =
              ClientAccessCapabilities
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u ClientaccessInsert{..}
-          = go _cQuotaUser _cPrettyPrint _cUserIp
-              _cSponsorAccountId
-              _cKey
-              _cClientAccountId
-              _cOauthToken
-              _cFields
-              _cAlt
+        requestWithRoute r u ClientaccessInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciSponsorAccountId
+              _ciKey
+              _ciClientAccountId
+              _ciOauthToken
+              _ciFields
+              (Just _ciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ClientaccessInsertAPI)
+                      (Proxy :: Proxy ClientaccessInsertResource)
                       r
                       u

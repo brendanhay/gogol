@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project and region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysList@.
-module Compute.TargetVPNGateways.List
+module Network.Google.Resource.Compute.TargetVPNGateways.List
     (
     -- * REST Resource
-      TargetVPNGatewaysListAPI
+      TargetVPNGatewaysListResource
 
     -- * Creating a Request
-    , targetVPNGatewaysList
-    , TargetVPNGatewaysList
+    , targetVPNGatewaysList'
+    , TargetVPNGatewaysList'
 
     -- * Request Lenses
     , tvglQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetVPNGatewaysList@ which the
--- 'TargetVPNGatewaysList' request conforms to.
-type TargetVPNGatewaysListAPI =
+-- 'TargetVPNGatewaysList'' request conforms to.
+type TargetVPNGatewaysListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetVpnGateways" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] TargetVPNGatewayList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] TargetVPNGatewayList
 
 -- | Retrieves the list of TargetVpnGateway resources available to the
 -- specified project and region.
 --
--- /See:/ 'targetVPNGatewaysList' smart constructor.
-data TargetVPNGatewaysList = TargetVPNGatewaysList
+-- /See:/ 'targetVPNGatewaysList'' smart constructor.
+data TargetVPNGatewaysList' = TargetVPNGatewaysList'
     { _tvglQuotaUser   :: !(Maybe Text)
     , _tvglPrettyPrint :: !Bool
     , _tvglProject     :: !Text
@@ -75,7 +83,7 @@ data TargetVPNGatewaysList = TargetVPNGatewaysList
     , _tvglOauthToken  :: !(Maybe Text)
     , _tvglMaxResults  :: !Word32
     , _tvglFields      :: !(Maybe Text)
-    , _tvglAlt         :: !Text
+    , _tvglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysList'' with the minimum fields required to make a request.
@@ -105,12 +113,12 @@ data TargetVPNGatewaysList = TargetVPNGatewaysList
 -- * 'tvglFields'
 --
 -- * 'tvglAlt'
-targetVPNGatewaysList
+targetVPNGatewaysList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> TargetVPNGatewaysList
-targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
-    TargetVPNGatewaysList
+    -> TargetVPNGatewaysList'
+targetVPNGatewaysList' pTvglProject_ pTvglRegion_ =
+    TargetVPNGatewaysList'
     { _tvglQuotaUser = Nothing
     , _tvglPrettyPrint = True
     , _tvglProject = pTvglProject_
@@ -122,7 +130,7 @@ targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
     , _tvglOauthToken = Nothing
     , _tvglMaxResults = 500
     , _tvglFields = Nothing
-    , _tvglAlt = "json"
+    , _tvglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -202,14 +210,15 @@ tvglFields
   = lens _tvglFields (\ s a -> s{_tvglFields = a})
 
 -- | Data format for the response.
-tvglAlt :: Lens' TargetVPNGatewaysList' Text
+tvglAlt :: Lens' TargetVPNGatewaysList' Alt
 tvglAlt = lens _tvglAlt (\ s a -> s{_tvglAlt = a})
 
 instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetVPNGatewaysList{..}
-          = go _tvglQuotaUser _tvglPrettyPrint _tvglProject
+        requestWithRoute r u TargetVPNGatewaysList'{..}
+          = go _tvglQuotaUser (Just _tvglPrettyPrint)
+              _tvglProject
               _tvglUserIp
               _tvglKey
               _tvglFilter
@@ -218,9 +227,9 @@ instance GoogleRequest TargetVPNGatewaysList' where
               _tvglOauthToken
               (Just _tvglMaxResults)
               _tvglFields
-              _tvglAlt
+              (Just _tvglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetVPNGatewaysListAPI)
+                      (Proxy :: Proxy TargetVPNGatewaysListResource)
                       r
                       u

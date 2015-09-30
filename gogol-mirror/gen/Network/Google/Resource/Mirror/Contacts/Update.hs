@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a contact in place.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsUpdate@.
-module Mirror.Contacts.Update
+module Network.Google.Resource.Mirror.Contacts.Update
     (
     -- * REST Resource
-      ContactsUpdateAPI
+      ContactsUpdateResource
 
     -- * Creating a Request
-    , contactsUpdate
-    , ContactsUpdate
+    , contactsUpdate'
+    , ContactsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsUpdate@ which the
--- 'ContactsUpdate' request conforms to.
-type ContactsUpdateAPI =
+-- 'ContactsUpdate'' request conforms to.
+type ContactsUpdateResource =
      "contacts" :>
-       Capture "id" Text :> Put '[JSON] Contact
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Contact
 
 -- | Updates a contact in place.
 --
--- /See:/ 'contactsUpdate' smart constructor.
-data ContactsUpdate = ContactsUpdate
+-- /See:/ 'contactsUpdate'' smart constructor.
+data ContactsUpdate' = ContactsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ContactsUpdate = ContactsUpdate
     , _cuId          :: !Text
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ContactsUpdate = ContactsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-contactsUpdate
+contactsUpdate'
     :: Text -- ^ 'id'
-    -> ContactsUpdate
-contactsUpdate pCuId_ =
-    ContactsUpdate
+    -> ContactsUpdate'
+contactsUpdate' pCuId_ =
+    ContactsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -93,7 +101,7 @@ contactsUpdate pCuId_ =
     , _cuId = pCuId_
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,19 +142,21 @@ cuFields :: Lens' ContactsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' ContactsUpdate' Text
+cuAlt :: Lens' ContactsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest ContactsUpdate' where
         type Rs ContactsUpdate' = Contact
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp _cuKey
+        requestWithRoute r u ContactsUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+              _cuKey
               _cuId
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsUpdateResource)
                       r
                       u

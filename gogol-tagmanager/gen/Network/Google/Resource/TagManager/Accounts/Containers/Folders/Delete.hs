@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersDelete@.
-module TagManager.Accounts.Containers.Folders.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
     (
     -- * REST Resource
-      AccountsContainersFoldersDeleteAPI
+      AccountsContainersFoldersDeleteResource
 
     -- * Creating a Request
-    , accountsContainersFoldersDelete
-    , AccountsContainersFoldersDelete
+    , accountsContainersFoldersDelete'
+    , AccountsContainersFoldersDelete'
 
     -- * Request Lenses
     , acfdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersDelete@ which the
--- 'AccountsContainersFoldersDelete' request conforms to.
-type AccountsContainersFoldersDeleteAPI =
+-- 'AccountsContainersFoldersDelete'' request conforms to.
+type AccountsContainersFoldersDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "folders" :>
-               Capture "folderId" Text :> Delete '[JSON] ()
+               Capture "folderId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersDelete' smart constructor.
-data AccountsContainersFoldersDelete = AccountsContainersFoldersDelete
+-- /See:/ 'accountsContainersFoldersDelete'' smart constructor.
+data AccountsContainersFoldersDelete' = AccountsContainersFoldersDelete'
     { _acfdQuotaUser   :: !(Maybe Text)
     , _acfdPrettyPrint :: !Bool
     , _acfdContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersFoldersDelete = AccountsContainersFoldersDelete
     , _acfdKey         :: !(Maybe Text)
     , _acfdOauthToken  :: !(Maybe Text)
     , _acfdFields      :: !(Maybe Text)
-    , _acfdAlt         :: !Text
+    , _acfdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersFoldersDelete = AccountsContainersFoldersDelete
 -- * 'acfdFields'
 --
 -- * 'acfdAlt'
-accountsContainersFoldersDelete
+accountsContainersFoldersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersDelete
-accountsContainersFoldersDelete pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_ =
-    AccountsContainersFoldersDelete
+    -> AccountsContainersFoldersDelete'
+accountsContainersFoldersDelete' pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_ =
+    AccountsContainersFoldersDelete'
     { _acfdQuotaUser = Nothing
     , _acfdPrettyPrint = True
     , _acfdContainerId = pAcfdContainerId_
@@ -109,7 +117,7 @@ accountsContainersFoldersDelete pAcfdContainerId_ pAcfdFolderId_ pAcfdAccountId_
     , _acfdKey = Nothing
     , _acfdOauthToken = Nothing
     , _acfdFields = Nothing
-    , _acfdAlt = "json"
+    , _acfdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,7 +175,7 @@ acfdFields
   = lens _acfdFields (\ s a -> s{_acfdFields = a})
 
 -- | Data format for the response.
-acfdAlt :: Lens' AccountsContainersFoldersDelete' Text
+acfdAlt :: Lens' AccountsContainersFoldersDelete' Alt
 acfdAlt = lens _acfdAlt (\ s a -> s{_acfdAlt = a})
 
 instance GoogleRequest
@@ -175,17 +183,19 @@ instance GoogleRequest
         type Rs AccountsContainersFoldersDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersFoldersDelete{..}
-          = go _acfdQuotaUser _acfdPrettyPrint _acfdContainerId
+          AccountsContainersFoldersDelete'{..}
+          = go _acfdQuotaUser (Just _acfdPrettyPrint)
+              _acfdContainerId
               _acfdUserIp
               _acfdFolderId
               _acfdAccountId
               _acfdKey
               _acfdOauthToken
               _acfdFields
-              _acfdAlt
+              (Just _acfdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersFoldersDeleteAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersFoldersDeleteResource)
                       r
                       u

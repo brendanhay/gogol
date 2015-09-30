@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- |
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPromoofferDismiss@.
-module Books.Promooffer.Dismiss
+module Network.Google.Resource.Books.Promooffer.Dismiss
     (
     -- * REST Resource
-      PromoofferDismissAPI
+      PromoofferDismissResource
 
     -- * Creating a Request
-    , promoofferDismiss
-    , PromoofferDismiss
+    , promoofferDismiss'
+    , PromoofferDismiss'
 
     -- * Request Lenses
     , pdQuotaUser
@@ -49,22 +50,29 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksPromoofferDismiss@ which the
--- 'PromoofferDismiss' request conforms to.
-type PromoofferDismissAPI =
+-- 'PromoofferDismiss'' request conforms to.
+type PromoofferDismissResource =
      "promooffer" :>
        "dismiss" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "offerId" Text :>
-                   QueryParam "product" Text :>
-                     QueryParam "androidId" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "serial" Text :>
+                   QueryParam "device" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "model" Text :>
+                         QueryParam "offerId" Text :>
+                           QueryParam "product" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "androidId" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- |
 --
--- /See:/ 'promoofferDismiss' smart constructor.
-data PromoofferDismiss = PromoofferDismiss
+-- /See:/ 'promoofferDismiss'' smart constructor.
+data PromoofferDismiss' = PromoofferDismiss'
     { _pdQuotaUser    :: !(Maybe Text)
     , _pdPrettyPrint  :: !Bool
     , _pdManufacturer :: !(Maybe Text)
@@ -78,7 +86,7 @@ data PromoofferDismiss = PromoofferDismiss
     , _pdOauthToken   :: !(Maybe Text)
     , _pdAndroidId    :: !(Maybe Text)
     , _pdFields       :: !(Maybe Text)
-    , _pdAlt          :: !Text
+    , _pdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoofferDismiss'' with the minimum fields required to make a request.
@@ -112,10 +120,10 @@ data PromoofferDismiss = PromoofferDismiss
 -- * 'pdFields'
 --
 -- * 'pdAlt'
-promoofferDismiss
-    :: PromoofferDismiss
-promoofferDismiss =
-    PromoofferDismiss
+promoofferDismiss'
+    :: PromoofferDismiss'
+promoofferDismiss' =
+    PromoofferDismiss'
     { _pdQuotaUser = Nothing
     , _pdPrettyPrint = True
     , _pdManufacturer = Nothing
@@ -129,7 +137,7 @@ promoofferDismiss =
     , _pdOauthToken = Nothing
     , _pdAndroidId = Nothing
     , _pdFields = Nothing
-    , _pdAlt = "json"
+    , _pdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,15 @@ pdFields :: Lens' PromoofferDismiss' (Maybe Text)
 pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
 -- | Data format for the response.
-pdAlt :: Lens' PromoofferDismiss' Text
+pdAlt :: Lens' PromoofferDismiss' Alt
 pdAlt = lens _pdAlt (\ s a -> s{_pdAlt = a})
 
 instance GoogleRequest PromoofferDismiss' where
         type Rs PromoofferDismiss' = ()
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoofferDismiss{..}
-          = go _pdQuotaUser _pdPrettyPrint _pdManufacturer
+        requestWithRoute r u PromoofferDismiss'{..}
+          = go _pdQuotaUser (Just _pdPrettyPrint)
+              _pdManufacturer
               _pdUserIp
               _pdSerial
               _pdDevice
@@ -217,9 +226,9 @@ instance GoogleRequest PromoofferDismiss' where
               _pdOauthToken
               _pdAndroidId
               _pdFields
-              _pdAlt
+              (Just _pdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PromoofferDismissAPI)
+                      (Proxy :: Proxy PromoofferDismissResource)
                       r
                       u

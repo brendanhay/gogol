@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- using the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesInsert@.
-module Compute.ForwardingRules.Insert
+module Network.Google.Resource.Compute.ForwardingRules.Insert
     (
     -- * REST Resource
-      ForwardingRulesInsertAPI
+      ForwardingRulesInsertResource
 
     -- * Creating a Request
-    , forwardingRulesInsert
-    , ForwardingRulesInsert
+    , forwardingRulesInsert'
+    , ForwardingRulesInsert'
 
     -- * Request Lenses
     , friQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeForwardingRulesInsert@ which the
--- 'ForwardingRulesInsert' request conforms to.
-type ForwardingRulesInsertAPI =
+-- 'ForwardingRulesInsert'' request conforms to.
+type ForwardingRulesInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
-           "forwardingRules" :> Post '[JSON] Operation
+           "forwardingRules" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
--- /See:/ 'forwardingRulesInsert' smart constructor.
-data ForwardingRulesInsert = ForwardingRulesInsert
+-- /See:/ 'forwardingRulesInsert'' smart constructor.
+data ForwardingRulesInsert' = ForwardingRulesInsert'
     { _friQuotaUser   :: !(Maybe Text)
     , _friPrettyPrint :: !Bool
     , _friProject     :: !Text
@@ -65,7 +73,7 @@ data ForwardingRulesInsert = ForwardingRulesInsert
     , _friRegion      :: !Text
     , _friOauthToken  :: !(Maybe Text)
     , _friFields      :: !(Maybe Text)
-    , _friAlt         :: !Text
+    , _friAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data ForwardingRulesInsert = ForwardingRulesInsert
 -- * 'friFields'
 --
 -- * 'friAlt'
-forwardingRulesInsert
+forwardingRulesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> ForwardingRulesInsert
-forwardingRulesInsert pFriProject_ pFriRegion_ =
-    ForwardingRulesInsert
+    -> ForwardingRulesInsert'
+forwardingRulesInsert' pFriProject_ pFriRegion_ =
+    ForwardingRulesInsert'
     { _friQuotaUser = Nothing
     , _friPrettyPrint = True
     , _friProject = pFriProject_
@@ -103,7 +111,7 @@ forwardingRulesInsert pFriProject_ pFriRegion_ =
     , _friRegion = pFriRegion_
     , _friOauthToken = Nothing
     , _friFields = Nothing
-    , _friAlt = "json"
+    , _friAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ friFields
   = lens _friFields (\ s a -> s{_friFields = a})
 
 -- | Data format for the response.
-friAlt :: Lens' ForwardingRulesInsert' Text
+friAlt :: Lens' ForwardingRulesInsert' Alt
 friAlt = lens _friAlt (\ s a -> s{_friAlt = a})
 
 instance GoogleRequest ForwardingRulesInsert' where
         type Rs ForwardingRulesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesInsert{..}
-          = go _friQuotaUser _friPrettyPrint _friProject
+        requestWithRoute r u ForwardingRulesInsert'{..}
+          = go _friQuotaUser (Just _friPrettyPrint) _friProject
               _friUserIp
               _friKey
               _friRegion
               _friOauthToken
               _friFields
-              _friAlt
+              (Just _friAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ForwardingRulesInsertAPI)
+                      (Proxy :: Proxy ForwardingRulesInsertResource)
                       r
                       u

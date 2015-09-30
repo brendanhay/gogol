@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Release downloaded content access restriction.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyconfigReleaseDownloadAccess@.
-module Books.Myconfig.ReleaseDownloadAccess
+module Network.Google.Resource.Books.Myconfig.ReleaseDownloadAccess
     (
     -- * REST Resource
-      MyconfigReleaseDownloadAccessAPI
+      MyconfigReleaseDownloadAccessResource
 
     -- * Creating a Request
-    , myconfigReleaseDownloadAccess
-    , MyconfigReleaseDownloadAccess
+    , myconfigReleaseDownloadAccess'
+    , MyconfigReleaseDownloadAccess'
 
     -- * Request Lenses
     , mrdaQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMyconfigReleaseDownloadAccess@ which the
--- 'MyconfigReleaseDownloadAccess' request conforms to.
-type MyconfigReleaseDownloadAccessAPI =
+-- 'MyconfigReleaseDownloadAccess'' request conforms to.
+type MyconfigReleaseDownloadAccessResource =
      "myconfig" :>
        "releaseDownloadAccess" :>
-         QueryParam "cpksver" Text :>
-           QueryParam "locale" Text :>
-             QueryParams "volumeIds" Text :>
-               QueryParam "source" Text :>
-                 Post '[JSON] DownloadAccesses
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "cpksver" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParams "volumeIds" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] DownloadAccesses
 
 -- | Release downloaded content access restriction.
 --
--- /See:/ 'myconfigReleaseDownloadAccess' smart constructor.
-data MyconfigReleaseDownloadAccess = MyconfigReleaseDownloadAccess
+-- /See:/ 'myconfigReleaseDownloadAccess'' smart constructor.
+data MyconfigReleaseDownloadAccess' = MyconfigReleaseDownloadAccess'
     { _mrdaQuotaUser   :: !(Maybe Text)
     , _mrdaPrettyPrint :: !Bool
     , _mrdaCpksver     :: !Text
@@ -70,7 +78,7 @@ data MyconfigReleaseDownloadAccess = MyconfigReleaseDownloadAccess
     , _mrdaSource      :: !(Maybe Text)
     , _mrdaOauthToken  :: !(Maybe Text)
     , _mrdaFields      :: !(Maybe Text)
-    , _mrdaAlt         :: !Text
+    , _mrdaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyconfigReleaseDownloadAccess'' with the minimum fields required to make a request.
@@ -98,12 +106,12 @@ data MyconfigReleaseDownloadAccess = MyconfigReleaseDownloadAccess
 -- * 'mrdaFields'
 --
 -- * 'mrdaAlt'
-myconfigReleaseDownloadAccess
+myconfigReleaseDownloadAccess'
     :: Text -- ^ 'cpksver'
     -> Text -- ^ 'volumeIds'
-    -> MyconfigReleaseDownloadAccess
-myconfigReleaseDownloadAccess pMrdaCpksver_ pMrdaVolumeIds_ =
-    MyconfigReleaseDownloadAccess
+    -> MyconfigReleaseDownloadAccess'
+myconfigReleaseDownloadAccess' pMrdaCpksver_ pMrdaVolumeIds_ =
+    MyconfigReleaseDownloadAccess'
     { _mrdaQuotaUser = Nothing
     , _mrdaPrettyPrint = True
     , _mrdaCpksver = pMrdaCpksver_
@@ -114,7 +122,7 @@ myconfigReleaseDownloadAccess pMrdaCpksver_ pMrdaVolumeIds_ =
     , _mrdaSource = Nothing
     , _mrdaOauthToken = Nothing
     , _mrdaFields = Nothing
-    , _mrdaAlt = "json"
+    , _mrdaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -176,7 +184,7 @@ mrdaFields
   = lens _mrdaFields (\ s a -> s{_mrdaFields = a})
 
 -- | Data format for the response.
-mrdaAlt :: Lens' MyconfigReleaseDownloadAccess' Text
+mrdaAlt :: Lens' MyconfigReleaseDownloadAccess' Alt
 mrdaAlt = lens _mrdaAlt (\ s a -> s{_mrdaAlt = a})
 
 instance GoogleRequest MyconfigReleaseDownloadAccess'
@@ -185,8 +193,8 @@ instance GoogleRequest MyconfigReleaseDownloadAccess'
              DownloadAccesses
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MyconfigReleaseDownloadAccess{..}
-          = go _mrdaQuotaUser _mrdaPrettyPrint
+          MyconfigReleaseDownloadAccess'{..}
+          = go _mrdaQuotaUser (Just _mrdaPrettyPrint)
               (Just _mrdaCpksver)
               _mrdaUserIp
               _mrdaLocale
@@ -195,9 +203,10 @@ instance GoogleRequest MyconfigReleaseDownloadAccess'
               _mrdaSource
               _mrdaOauthToken
               _mrdaFields
-              _mrdaAlt
+              (Just _mrdaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MyconfigReleaseDownloadAccessAPI)
+                      (Proxy ::
+                         Proxy MyconfigReleaseDownloadAccessResource)
                       r
                       u

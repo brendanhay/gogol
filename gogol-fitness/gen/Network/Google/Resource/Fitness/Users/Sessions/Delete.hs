@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a session specified by the given session ID.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersSessionsDelete@.
-module Fitness.Users.Sessions.Delete
+module Network.Google.Resource.Fitness.Users.Sessions.Delete
     (
     -- * REST Resource
-      UsersSessionsDeleteAPI
+      UsersSessionsDeleteResource
 
     -- * Creating a Request
-    , usersSessionsDelete
-    , UsersSessionsDelete
+    , usersSessionsDelete'
+    , UsersSessionsDelete'
 
     -- * Request Lenses
     , usdQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersSessionsDelete@ which the
--- 'UsersSessionsDelete' request conforms to.
-type UsersSessionsDeleteAPI =
+-- 'UsersSessionsDelete'' request conforms to.
+type UsersSessionsDeleteResource =
      Capture "userId" Text :>
        "sessions" :>
          Capture "sessionId" Text :>
-           QueryParam "currentTimeMillis" Int64 :>
-             Delete '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "currentTimeMillis" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a session specified by the given session ID.
 --
--- /See:/ 'usersSessionsDelete' smart constructor.
-data UsersSessionsDelete = UsersSessionsDelete
+-- /See:/ 'usersSessionsDelete'' smart constructor.
+data UsersSessionsDelete' = UsersSessionsDelete'
     { _usdQuotaUser         :: !(Maybe Text)
     , _usdPrettyPrint       :: !Bool
     , _usdUserIp            :: !(Maybe Text)
@@ -66,7 +73,7 @@ data UsersSessionsDelete = UsersSessionsDelete
     , _usdOauthToken        :: !(Maybe Text)
     , _usdSessionId         :: !Text
     , _usdFields            :: !(Maybe Text)
-    , _usdAlt               :: !Text
+    , _usdAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsDelete'' with the minimum fields required to make a request.
@@ -92,12 +99,12 @@ data UsersSessionsDelete = UsersSessionsDelete
 -- * 'usdFields'
 --
 -- * 'usdAlt'
-usersSessionsDelete
+usersSessionsDelete'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'sessionId'
-    -> UsersSessionsDelete
-usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
-    UsersSessionsDelete
+    -> UsersSessionsDelete'
+usersSessionsDelete' pUsdUserId_ pUsdSessionId_ =
+    UsersSessionsDelete'
     { _usdQuotaUser = Nothing
     , _usdPrettyPrint = True
     , _usdUserIp = Nothing
@@ -107,7 +114,7 @@ usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
     , _usdOauthToken = Nothing
     , _usdSessionId = pUsdSessionId_
     , _usdFields = Nothing
-    , _usdAlt = "json"
+    , _usdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ usdFields
   = lens _usdFields (\ s a -> s{_usdFields = a})
 
 -- | Data format for the response.
-usdAlt :: Lens' UsersSessionsDelete' Text
+usdAlt :: Lens' UsersSessionsDelete' Alt
 usdAlt = lens _usdAlt (\ s a -> s{_usdAlt = a})
 
 instance GoogleRequest UsersSessionsDelete' where
         type Rs UsersSessionsDelete' = ()
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersSessionsDelete{..}
-          = go _usdQuotaUser _usdPrettyPrint _usdUserIp
+        requestWithRoute r u UsersSessionsDelete'{..}
+          = go _usdQuotaUser (Just _usdPrettyPrint) _usdUserIp
               _usdUserId
               _usdKey
               _usdCurrentTimeMillis
               _usdOauthToken
               _usdSessionId
               _usdFields
-              _usdAlt
+              (Just _usdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersSessionsDeleteAPI)
+                      (Proxy :: Proxy UsersSessionsDeleteResource)
                       r
                       u

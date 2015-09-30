@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the versions of a module.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsList@.
-module AppEngine.Apps.Modules.Versions.List
+module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
     (
     -- * REST Resource
-      AppsModulesVersionsListAPI
+      AppsModulesVersionsListResource
 
     -- * Creating a Request
-    , appsModulesVersionsList
-    , AppsModulesVersionsList
+    , appsModulesVersionsList'
+    , AppsModulesVersionsList'
 
     -- * Request Lenses
     , amvlXgafv
@@ -53,23 +54,37 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesVersionsList@ which the
--- 'AppsModulesVersionsList' request conforms to.
-type AppsModulesVersionsListAPI =
+-- 'AppsModulesVersionsList'' request conforms to.
+type AppsModulesVersionsListResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
              Capture "modulesId" Text :>
                "versions" :>
-                 QueryParam "view" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "pageSize" Int32 :>
-                       Get '[JSON] ListVersionsResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "view" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "pageSize" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   ListVersionsResponse
 
 -- | Lists the versions of a module.
 --
--- /See:/ 'appsModulesVersionsList' smart constructor.
-data AppsModulesVersionsList = AppsModulesVersionsList
+-- /See:/ 'appsModulesVersionsList'' smart constructor.
+data AppsModulesVersionsList' = AppsModulesVersionsList'
     { _amvlXgafv          :: !(Maybe Text)
     , _amvlQuotaUser      :: !(Maybe Text)
     , _amvlPrettyPrint    :: !Bool
@@ -129,12 +144,12 @@ data AppsModulesVersionsList = AppsModulesVersionsList
 -- * 'amvlCallback'
 --
 -- * 'amvlAlt'
-appsModulesVersionsList
+appsModulesVersionsList'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesVersionsList
-appsModulesVersionsList pAmvlModulesId_ pAmvlAppsId_ =
-    AppsModulesVersionsList
+    -> AppsModulesVersionsList'
+appsModulesVersionsList' pAmvlModulesId_ pAmvlAppsId_ =
+    AppsModulesVersionsList'
     { _amvlXgafv = Nothing
     , _amvlQuotaUser = Nothing
     , _amvlPrettyPrint = True
@@ -259,10 +274,11 @@ instance GoogleRequest AppsModulesVersionsList' where
         type Rs AppsModulesVersionsList' =
              ListVersionsResponse
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsList{..}
-          = go _amvlXgafv _amvlQuotaUser _amvlPrettyPrint
+        requestWithRoute r u AppsModulesVersionsList'{..}
+          = go _amvlXgafv _amvlQuotaUser
+              (Just _amvlPrettyPrint)
               _amvlUploadProtocol
-              _amvlPp
+              (Just _amvlPp)
               _amvlAccessToken
               _amvlUploadType
               _amvlModulesId
@@ -275,9 +291,9 @@ instance GoogleRequest AppsModulesVersionsList' where
               _amvlPageSize
               _amvlFields
               _amvlCallback
-              _amvlAlt
+              (Just _amvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesVersionsListAPI)
+                      (Proxy :: Proxy AppsModulesVersionsListResource)
                       r
                       u

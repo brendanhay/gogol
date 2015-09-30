@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- [general user permission errors][User Permission Errors].
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomUserProfilesGet@.
-module Classroom.UserProfiles.Get
+module Network.Google.Resource.Classroom.UserProfiles.Get
     (
     -- * REST Resource
-      UserProfilesGetAPI
+      UserProfilesGetResource
 
     -- * Creating a Request
-    , userProfilesGet
-    , UserProfilesGet
+    , userProfilesGet'
+    , UserProfilesGet'
 
     -- * Request Lenses
     , upgXgafv
@@ -52,19 +53,33 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomUserProfilesGet@ which the
--- 'UserProfilesGet' request conforms to.
-type UserProfilesGetAPI =
+-- 'UserProfilesGet'' request conforms to.
+type UserProfilesGetResource =
      "v1" :>
        "userProfiles" :>
-         Capture "userId" Text :> Get '[JSON] UserProfile
+         Capture "userId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] UserProfile
 
 -- | Returns a user profile. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
 -- this user profile or if no profile exists with the requested ID or for
 -- [general user permission errors][User Permission Errors].
 --
--- /See:/ 'userProfilesGet' smart constructor.
-data UserProfilesGet = UserProfilesGet
+-- /See:/ 'userProfilesGet'' smart constructor.
+data UserProfilesGet' = UserProfilesGet'
     { _upgXgafv          :: !(Maybe Text)
     , _upgQuotaUser      :: !(Maybe Text)
     , _upgPrettyPrint    :: !Bool
@@ -112,11 +127,11 @@ data UserProfilesGet = UserProfilesGet
 -- * 'upgCallback'
 --
 -- * 'upgAlt'
-userProfilesGet
+userProfilesGet'
     :: Text -- ^ 'userId'
-    -> UserProfilesGet
-userProfilesGet pUpgUserId_ =
-    UserProfilesGet
+    -> UserProfilesGet'
+userProfilesGet' pUpgUserId_ =
+    UserProfilesGet'
     { _upgXgafv = Nothing
     , _upgQuotaUser = Nothing
     , _upgPrettyPrint = True
@@ -214,10 +229,10 @@ upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
 instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u UserProfilesGet{..}
-          = go _upgXgafv _upgQuotaUser _upgPrettyPrint
+        requestWithRoute r u UserProfilesGet'{..}
+          = go _upgXgafv _upgQuotaUser (Just _upgPrettyPrint)
               _upgUploadProtocol
-              _upgPp
+              (Just _upgPp)
               _upgAccessToken
               _upgUploadType
               _upgUserId
@@ -226,8 +241,9 @@ instance GoogleRequest UserProfilesGet' where
               _upgOauthToken
               _upgFields
               _upgCallback
-              _upgAlt
+              (Just _upgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserProfilesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserProfilesGetResource)
                       r
                       u

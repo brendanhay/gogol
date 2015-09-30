@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes target url for forwarding rule.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeForwardingRulesSetTarget@.
-module Compute.ForwardingRules.SetTarget
+module Network.Google.Resource.Compute.ForwardingRules.SetTarget
     (
     -- * REST Resource
-      ForwardingRulesSetTargetAPI
+      ForwardingRulesSetTargetResource
 
     -- * Creating a Request
-    , forwardingRulesSetTarget
-    , ForwardingRulesSetTarget
+    , forwardingRulesSetTarget'
+    , ForwardingRulesSetTarget'
 
     -- * Request Lenses
     , frstQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeForwardingRulesSetTarget@ which the
--- 'ForwardingRulesSetTarget' request conforms to.
-type ForwardingRulesSetTargetAPI =
+-- 'ForwardingRulesSetTarget'' request conforms to.
+type ForwardingRulesSetTargetResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "forwardingRules" :>
              Capture "forwardingRule" Text :>
-               "setTarget" :> Post '[JSON] Operation
+               "setTarget" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Changes target url for forwarding rule.
 --
--- /See:/ 'forwardingRulesSetTarget' smart constructor.
-data ForwardingRulesSetTarget = ForwardingRulesSetTarget
+-- /See:/ 'forwardingRulesSetTarget'' smart constructor.
+data ForwardingRulesSetTarget' = ForwardingRulesSetTarget'
     { _frstQuotaUser      :: !(Maybe Text)
     , _frstPrettyPrint    :: !Bool
     , _frstProject        :: !Text
@@ -67,7 +75,7 @@ data ForwardingRulesSetTarget = ForwardingRulesSetTarget
     , _frstRegion         :: !Text
     , _frstOauthToken     :: !(Maybe Text)
     , _frstFields         :: !(Maybe Text)
-    , _frstAlt            :: !Text
+    , _frstAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesSetTarget'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data ForwardingRulesSetTarget = ForwardingRulesSetTarget
 -- * 'frstFields'
 --
 -- * 'frstAlt'
-forwardingRulesSetTarget
+forwardingRulesSetTarget'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
     -> Text -- ^ 'region'
-    -> ForwardingRulesSetTarget
-forwardingRulesSetTarget pFrstProject_ pFrstForwardingRule_ pFrstRegion_ =
-    ForwardingRulesSetTarget
+    -> ForwardingRulesSetTarget'
+forwardingRulesSetTarget' pFrstProject_ pFrstForwardingRule_ pFrstRegion_ =
+    ForwardingRulesSetTarget'
     { _frstQuotaUser = Nothing
     , _frstPrettyPrint = True
     , _frstProject = pFrstProject_
@@ -109,7 +117,7 @@ forwardingRulesSetTarget pFrstProject_ pFrstForwardingRule_ pFrstRegion_ =
     , _frstRegion = pFrstRegion_
     , _frstOauthToken = Nothing
     , _frstFields = Nothing
-    , _frstAlt = "json"
+    , _frstAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ frstFields
   = lens _frstFields (\ s a -> s{_frstFields = a})
 
 -- | Data format for the response.
-frstAlt :: Lens' ForwardingRulesSetTarget' Text
+frstAlt :: Lens' ForwardingRulesSetTarget' Alt
 frstAlt = lens _frstAlt (\ s a -> s{_frstAlt = a})
 
 instance GoogleRequest ForwardingRulesSetTarget'
          where
         type Rs ForwardingRulesSetTarget' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ForwardingRulesSetTarget{..}
-          = go _frstQuotaUser _frstPrettyPrint _frstProject
+        requestWithRoute r u ForwardingRulesSetTarget'{..}
+          = go _frstQuotaUser (Just _frstPrettyPrint)
+              _frstProject
               _frstForwardingRule
               _frstUserIp
               _frstKey
               _frstRegion
               _frstOauthToken
               _frstFields
-              _frstAlt
+              (Just _frstAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ForwardingRulesSetTargetAPI)
+                      (Proxy :: Proxy ForwardingRulesSetTargetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesPatch@.
-module Analytics.Management.Profiles.Patch
+module Network.Google.Resource.Analytics.Management.Profiles.Patch
     (
     -- * REST Resource
-      ManagementProfilesPatchAPI
+      ManagementProfilesPatchResource
 
     -- * Creating a Request
-    , managementProfilesPatch
-    , ManagementProfilesPatch
+    , managementProfilesPatch'
+    , ManagementProfilesPatch'
 
     -- * Request Lenses
     , mppQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesPatch@ which the
--- 'ManagementProfilesPatch' request conforms to.
-type ManagementProfilesPatchAPI =
+-- 'ManagementProfilesPatch'' request conforms to.
+type ManagementProfilesPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 Capture "profileId" Text :> Patch '[JSON] Profile
+                 Capture "profileId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Patch '[JSON] Profile
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
 --
--- /See:/ 'managementProfilesPatch' smart constructor.
-data ManagementProfilesPatch = ManagementProfilesPatch
+-- /See:/ 'managementProfilesPatch'' smart constructor.
+data ManagementProfilesPatch' = ManagementProfilesPatch'
     { _mppQuotaUser     :: !(Maybe Text)
     , _mppPrettyPrint   :: !Bool
     , _mppWebPropertyId :: !Text
@@ -70,7 +78,7 @@ data ManagementProfilesPatch = ManagementProfilesPatch
     , _mppKey           :: !(Maybe Text)
     , _mppOauthToken    :: !(Maybe Text)
     , _mppFields        :: !(Maybe Text)
-    , _mppAlt           :: !Text
+    , _mppAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesPatch'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data ManagementProfilesPatch = ManagementProfilesPatch
 -- * 'mppFields'
 --
 -- * 'mppAlt'
-managementProfilesPatch
+managementProfilesPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesPatch
-managementProfilesPatch pMppWebPropertyId_ pMppProfileId_ pMppAccountId_ =
-    ManagementProfilesPatch
+    -> ManagementProfilesPatch'
+managementProfilesPatch' pMppWebPropertyId_ pMppProfileId_ pMppAccountId_ =
+    ManagementProfilesPatch'
     { _mppQuotaUser = Nothing
     , _mppPrettyPrint = False
     , _mppWebPropertyId = pMppWebPropertyId_
@@ -112,7 +120,7 @@ managementProfilesPatch pMppWebPropertyId_ pMppProfileId_ pMppAccountId_ =
     , _mppKey = Nothing
     , _mppOauthToken = Nothing
     , _mppFields = Nothing
-    , _mppAlt = "json"
+    , _mppAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ mppFields
   = lens _mppFields (\ s a -> s{_mppFields = a})
 
 -- | Data format for the response.
-mppAlt :: Lens' ManagementProfilesPatch' Text
+mppAlt :: Lens' ManagementProfilesPatch' Alt
 mppAlt = lens _mppAlt (\ s a -> s{_mppAlt = a})
 
 instance GoogleRequest ManagementProfilesPatch' where
         type Rs ManagementProfilesPatch' = Profile
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesPatch{..}
-          = go _mppQuotaUser _mppPrettyPrint _mppWebPropertyId
+        requestWithRoute r u ManagementProfilesPatch'{..}
+          = go _mppQuotaUser (Just _mppPrettyPrint)
+              _mppWebPropertyId
               _mppUserIp
               _mppProfileId
               _mppAccountId
               _mppKey
               _mppOauthToken
               _mppFields
-              _mppAlt
+              (Just _mppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesPatchAPI)
+                      (Proxy :: Proxy ManagementProfilesPatchResource)
                       r
                       u

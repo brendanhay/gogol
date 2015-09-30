@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one creative by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesGet@.
-module DFAReporting.Creatives.Get
+module Network.Google.Resource.DFAReporting.Creatives.Get
     (
     -- * REST Resource
-      CreativesGetAPI
+      CreativesGetResource
 
     -- * Creating a Request
-    , creativesGet
-    , CreativesGet
+    , creativesGet'
+    , CreativesGet'
 
     -- * Request Lenses
     , crerQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativesGet@ which the
--- 'CreativesGet' request conforms to.
-type CreativesGetAPI =
+-- 'CreativesGet'' request conforms to.
+type CreativesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creatives" :>
-           Capture "id" Int64 :> Get '[JSON] Creative
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Creative
 
 -- | Gets one creative by ID.
 --
--- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
+-- /See:/ 'creativesGet'' smart constructor.
+data CreativesGet' = CreativesGet'
     { _crerQuotaUser   :: !(Maybe Text)
     , _crerPrettyPrint :: !Bool
     , _crerUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CreativesGet = CreativesGet
     , _crerId          :: !Int64
     , _crerOauthToken  :: !(Maybe Text)
     , _crerFields      :: !(Maybe Text)
-    , _crerAlt         :: !Text
+    , _crerAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CreativesGet = CreativesGet
 -- * 'crerFields'
 --
 -- * 'crerAlt'
-creativesGet
+creativesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativesGet
-creativesGet pCrerProfileId_ pCrerId_ =
-    CreativesGet
+    -> CreativesGet'
+creativesGet' pCrerProfileId_ pCrerId_ =
+    CreativesGet'
     { _crerQuotaUser = Nothing
     , _crerPrettyPrint = True
     , _crerUserIp = Nothing
@@ -101,7 +109,7 @@ creativesGet pCrerProfileId_ pCrerId_ =
     , _crerId = pCrerId_
     , _crerOauthToken = Nothing
     , _crerFields = Nothing
-    , _crerAlt = "json"
+    , _crerAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,23 @@ crerFields
   = lens _crerFields (\ s a -> s{_crerFields = a})
 
 -- | Data format for the response.
-crerAlt :: Lens' CreativesGet' Text
+crerAlt :: Lens' CreativesGet' Alt
 crerAlt = lens _crerAlt (\ s a -> s{_crerAlt = a})
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesGet{..}
-          = go _crerQuotaUser _crerPrettyPrint _crerUserIp
+        requestWithRoute r u CreativesGet'{..}
+          = go _crerQuotaUser (Just _crerPrettyPrint)
+              _crerUserIp
               _crerProfileId
               _crerKey
               _crerId
               _crerOauthToken
               _crerFields
-              _crerAlt
+              (Just _crerAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesGetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryAnnotationsList@.
-module Books.Mylibrary.Annotations.List
+module Network.Google.Resource.Books.Mylibrary.Annotations.List
     (
     -- * REST Resource
-      MylibraryAnnotationsListAPI
+      MylibraryAnnotationsListResource
 
     -- * Creating a Request
-    , mylibraryAnnotationsList
-    , MylibraryAnnotationsList
+    , mylibraryAnnotationsList'
+    , MylibraryAnnotationsList'
 
     -- * Request Lenses
     , malQuotaUser
@@ -52,26 +53,33 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryAnnotationsList@ which the
--- 'MylibraryAnnotationsList' request conforms to.
-type MylibraryAnnotationsListAPI =
+-- 'MylibraryAnnotationsList'' request conforms to.
+type MylibraryAnnotationsListResource =
      "mylibrary" :>
        "annotations" :>
-         QueryParam "contentVersion" Text :>
-           QueryParam "showDeleted" Bool :>
-             QueryParam "updatedMax" Text :>
-               QueryParam "updatedMin" Text :>
-                 QueryParams "layerIds" Text :>
-                   QueryParam "volumeId" Text :>
-                     QueryParam "source" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "layerId" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] Annotations
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "contentVersion" Text :>
+                 QueryParam "showDeleted" Bool :>
+                   QueryParam "updatedMax" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "updatedMin" Text :>
+                         QueryParams "layerIds" Text :>
+                           QueryParam "volumeId" Text :>
+                             QueryParam "source" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "layerId" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] Annotations
 
 -- | Retrieves a list of annotations, possibly filtered.
 --
--- /See:/ 'mylibraryAnnotationsList' smart constructor.
-data MylibraryAnnotationsList = MylibraryAnnotationsList
+-- /See:/ 'mylibraryAnnotationsList'' smart constructor.
+data MylibraryAnnotationsList' = MylibraryAnnotationsList'
     { _malQuotaUser      :: !(Maybe Text)
     , _malPrettyPrint    :: !Bool
     , _malUserIp         :: !(Maybe Text)
@@ -88,7 +96,7 @@ data MylibraryAnnotationsList = MylibraryAnnotationsList
     , _malLayerId        :: !(Maybe Text)
     , _malMaxResults     :: !(Maybe Word32)
     , _malFields         :: !(Maybe Text)
-    , _malAlt            :: !Text
+    , _malAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryAnnotationsList'' with the minimum fields required to make a request.
@@ -128,10 +136,10 @@ data MylibraryAnnotationsList = MylibraryAnnotationsList
 -- * 'malFields'
 --
 -- * 'malAlt'
-mylibraryAnnotationsList
-    :: MylibraryAnnotationsList
-mylibraryAnnotationsList =
-    MylibraryAnnotationsList
+mylibraryAnnotationsList'
+    :: MylibraryAnnotationsList'
+mylibraryAnnotationsList' =
+    MylibraryAnnotationsList'
     { _malQuotaUser = Nothing
     , _malPrettyPrint = True
     , _malUserIp = Nothing
@@ -148,7 +156,7 @@ mylibraryAnnotationsList =
     , _malLayerId = Nothing
     , _malMaxResults = Nothing
     , _malFields = Nothing
-    , _malAlt = "json"
+    , _malAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -246,15 +254,15 @@ malFields
   = lens _malFields (\ s a -> s{_malFields = a})
 
 -- | Data format for the response.
-malAlt :: Lens' MylibraryAnnotationsList' Text
+malAlt :: Lens' MylibraryAnnotationsList' Alt
 malAlt = lens _malAlt (\ s a -> s{_malAlt = a})
 
 instance GoogleRequest MylibraryAnnotationsList'
          where
         type Rs MylibraryAnnotationsList' = Annotations
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryAnnotationsList{..}
-          = go _malQuotaUser _malPrettyPrint _malUserIp
+        requestWithRoute r u MylibraryAnnotationsList'{..}
+          = go _malQuotaUser (Just _malPrettyPrint) _malUserIp
               _malContentVersion
               _malShowDeleted
               _malUpdatedMax
@@ -268,9 +276,9 @@ instance GoogleRequest MylibraryAnnotationsList'
               _malLayerId
               _malMaxResults
               _malFields
-              _malAlt
+              (Just _malAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryAnnotationsListAPI)
+                      (Proxy :: Proxy MylibraryAnnotationsListResource)
                       r
                       u

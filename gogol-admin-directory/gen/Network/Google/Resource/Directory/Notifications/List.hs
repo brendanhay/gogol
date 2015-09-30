@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of notifications.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsList@.
-module Directory.Notifications.List
+module Network.Google.Resource.Directory.Notifications.List
     (
     -- * REST Resource
-      NotificationsListAPI
+      NotificationsListResource
 
     -- * Creating a Request
-    , notificationsList
-    , NotificationsList
+    , notificationsList'
+    , NotificationsList'
 
     -- * Request Lenses
     , nlQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsList@ which the
--- 'NotificationsList' request conforms to.
-type NotificationsListAPI =
+-- 'NotificationsList'' request conforms to.
+type NotificationsListResource =
      "customer" :>
        Capture "customer" Text :>
          "notifications" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] Notifications
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Notifications
 
 -- | Retrieves a list of notifications.
 --
--- /See:/ 'notificationsList' smart constructor.
-data NotificationsList = NotificationsList
+-- /See:/ 'notificationsList'' smart constructor.
+data NotificationsList' = NotificationsList'
     { _nlQuotaUser   :: !(Maybe Text)
     , _nlPrettyPrint :: !Bool
     , _nlUserIp      :: !(Maybe Text)
@@ -70,7 +77,7 @@ data NotificationsList = NotificationsList
     , _nlOauthToken  :: !(Maybe Text)
     , _nlMaxResults  :: !(Maybe Word32)
     , _nlFields      :: !(Maybe Text)
-    , _nlAlt         :: !Text
+    , _nlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsList'' with the minimum fields required to make a request.
@@ -98,11 +105,11 @@ data NotificationsList = NotificationsList
 -- * 'nlFields'
 --
 -- * 'nlAlt'
-notificationsList
+notificationsList'
     :: Text -- ^ 'customer'
-    -> NotificationsList
-notificationsList pNlCustomer_ =
-    NotificationsList
+    -> NotificationsList'
+notificationsList' pNlCustomer_ =
+    NotificationsList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
     , _nlUserIp = Nothing
@@ -113,7 +120,7 @@ notificationsList pNlCustomer_ =
     , _nlOauthToken = Nothing
     , _nlMaxResults = Nothing
     , _nlFields = Nothing
-    , _nlAlt = "json"
+    , _nlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -171,14 +178,14 @@ nlFields :: Lens' NotificationsList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
 -- | Data format for the response.
-nlAlt :: Lens' NotificationsList' Text
+nlAlt :: Lens' NotificationsList' Alt
 nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
 
 instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u NotificationsList{..}
-          = go _nlQuotaUser _nlPrettyPrint _nlUserIp
+        requestWithRoute r u NotificationsList'{..}
+          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIp
               _nlCustomer
               _nlKey
               _nlLanguage
@@ -186,9 +193,9 @@ instance GoogleRequest NotificationsList' where
               _nlOauthToken
               _nlMaxResults
               _nlFields
-              _nlAlt
+              (Just _nlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy NotificationsListAPI)
+                      (Proxy :: Proxy NotificationsListResource)
                       r
                       u

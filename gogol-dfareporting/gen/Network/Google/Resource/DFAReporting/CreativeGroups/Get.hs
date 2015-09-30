@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one creative group by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsGet@.
-module DFAReporting.CreativeGroups.Get
+module Network.Google.Resource.DFAReporting.CreativeGroups.Get
     (
     -- * REST Resource
-      CreativeGroupsGetAPI
+      CreativeGroupsGetResource
 
     -- * Creating a Request
-    , creativeGroupsGet
-    , CreativeGroupsGet
+    , creativeGroupsGet'
+    , CreativeGroupsGet'
 
     -- * Request Lenses
     , cggQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeGroupsGet@ which the
--- 'CreativeGroupsGet' request conforms to.
-type CreativeGroupsGetAPI =
+-- 'CreativeGroupsGet'' request conforms to.
+type CreativeGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           Capture "id" Int64 :> Get '[JSON] CreativeGroup
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 --
--- /See:/ 'creativeGroupsGet' smart constructor.
-data CreativeGroupsGet = CreativeGroupsGet
+-- /See:/ 'creativeGroupsGet'' smart constructor.
+data CreativeGroupsGet' = CreativeGroupsGet'
     { _cggQuotaUser   :: !(Maybe Text)
     , _cggPrettyPrint :: !Bool
     , _cggUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CreativeGroupsGet = CreativeGroupsGet
     , _cggId          :: !Int64
     , _cggOauthToken  :: !(Maybe Text)
     , _cggFields      :: !(Maybe Text)
-    , _cggAlt         :: !Text
+    , _cggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CreativeGroupsGet = CreativeGroupsGet
 -- * 'cggFields'
 --
 -- * 'cggAlt'
-creativeGroupsGet
+creativeGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeGroupsGet
-creativeGroupsGet pCggProfileId_ pCggId_ =
-    CreativeGroupsGet
+    -> CreativeGroupsGet'
+creativeGroupsGet' pCggProfileId_ pCggId_ =
+    CreativeGroupsGet'
     { _cggQuotaUser = Nothing
     , _cggPrettyPrint = True
     , _cggUserIp = Nothing
@@ -101,7 +109,7 @@ creativeGroupsGet pCggProfileId_ pCggId_ =
     , _cggId = pCggId_
     , _cggOauthToken = Nothing
     , _cggFields = Nothing
-    , _cggAlt = "json"
+    , _cggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ cggFields
   = lens _cggFields (\ s a -> s{_cggFields = a})
 
 -- | Data format for the response.
-cggAlt :: Lens' CreativeGroupsGet' Text
+cggAlt :: Lens' CreativeGroupsGet' Alt
 cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
 
 instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsGet{..}
-          = go _cggQuotaUser _cggPrettyPrint _cggUserIp
+        requestWithRoute r u CreativeGroupsGet'{..}
+          = go _cggQuotaUser (Just _cggPrettyPrint) _cggUserIp
               _cggProfileId
               _cggKey
               _cggId
               _cggOauthToken
               _cggFields
-              _cggAlt
+              (Just _cggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeGroupsGetAPI)
+                      (Proxy :: Proxy CreativeGroupsGetResource)
                       r
                       u

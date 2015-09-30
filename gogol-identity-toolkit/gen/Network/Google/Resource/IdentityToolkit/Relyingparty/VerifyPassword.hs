@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Verifies the user entered password.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyVerifyPassword@.
-module IdentityToolkit.Relyingparty.VerifyPassword
+module Network.Google.Resource.IdentityToolkit.Relyingparty.VerifyPassword
     (
     -- * REST Resource
-      RelyingpartyVerifyPasswordAPI
+      RelyingpartyVerifyPasswordResource
 
     -- * Creating a Request
-    , relyingpartyVerifyPassword
-    , RelyingpartyVerifyPassword
+    , relyingpartyVerifyPassword'
+    , RelyingpartyVerifyPassword'
 
     -- * Request Lenses
     , rvpQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyVerifyPassword@ which the
--- 'RelyingpartyVerifyPassword' request conforms to.
-type RelyingpartyVerifyPasswordAPI =
+-- 'RelyingpartyVerifyPassword'' request conforms to.
+type RelyingpartyVerifyPasswordResource =
      "verifyPassword" :>
-       Post '[JSON] VerifyPasswordResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] VerifyPasswordResponse
 
 -- | Verifies the user entered password.
 --
--- /See:/ 'relyingpartyVerifyPassword' smart constructor.
-data RelyingpartyVerifyPassword = RelyingpartyVerifyPassword
+-- /See:/ 'relyingpartyVerifyPassword'' smart constructor.
+data RelyingpartyVerifyPassword' = RelyingpartyVerifyPassword'
     { _rvpQuotaUser   :: !(Maybe Text)
     , _rvpPrettyPrint :: !Bool
     , _rvpUserIp      :: !(Maybe Text)
     , _rvpKey         :: !(Maybe Text)
     , _rvpOauthToken  :: !(Maybe Text)
     , _rvpFields      :: !(Maybe Text)
-    , _rvpAlt         :: !Text
+    , _rvpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyVerifyPassword'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data RelyingpartyVerifyPassword = RelyingpartyVerifyPassword
 -- * 'rvpFields'
 --
 -- * 'rvpAlt'
-relyingpartyVerifyPassword
-    :: RelyingpartyVerifyPassword
-relyingpartyVerifyPassword =
-    RelyingpartyVerifyPassword
+relyingpartyVerifyPassword'
+    :: RelyingpartyVerifyPassword'
+relyingpartyVerifyPassword' =
+    RelyingpartyVerifyPassword'
     { _rvpQuotaUser = Nothing
     , _rvpPrettyPrint = True
     , _rvpUserIp = Nothing
     , _rvpKey = Nothing
     , _rvpOauthToken = Nothing
     , _rvpFields = Nothing
-    , _rvpAlt = "json"
+    , _rvpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,7 +135,7 @@ rvpFields
   = lens _rvpFields (\ s a -> s{_rvpFields = a})
 
 -- | Data format for the response.
-rvpAlt :: Lens' RelyingpartyVerifyPassword' Text
+rvpAlt :: Lens' RelyingpartyVerifyPassword' Alt
 rvpAlt = lens _rvpAlt (\ s a -> s{_rvpAlt = a})
 
 instance GoogleRequest RelyingpartyVerifyPassword'
@@ -135,13 +143,14 @@ instance GoogleRequest RelyingpartyVerifyPassword'
         type Rs RelyingpartyVerifyPassword' =
              VerifyPasswordResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyVerifyPassword{..}
-          = go _rvpQuotaUser _rvpPrettyPrint _rvpUserIp _rvpKey
+        requestWithRoute r u RelyingpartyVerifyPassword'{..}
+          = go _rvpQuotaUser (Just _rvpPrettyPrint) _rvpUserIp
+              _rvpKey
               _rvpOauthToken
               _rvpFields
-              _rvpAlt
+              (Just _rvpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyVerifyPasswordAPI)
+                      (Proxy :: Proxy RelyingpartyVerifyPasswordResource)
                       r
                       u

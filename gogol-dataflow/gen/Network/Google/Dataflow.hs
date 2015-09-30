@@ -27,28 +27,28 @@ module Network.Google.Dataflow
     -- * REST Resources
 
     -- ** DataflowProjectsJobsCreate
-    , module Dataflow.Projects.Jobs.Create
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Create
 
     -- ** DataflowProjectsJobsGet
-    , module Dataflow.Projects.Jobs.Get
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Get
 
     -- ** DataflowProjectsJobsGetMetrics
-    , module Dataflow.Projects.Jobs.GetMetrics
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
 
     -- ** DataflowProjectsJobsList
-    , module Dataflow.Projects.Jobs.List
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.List
 
     -- ** DataflowProjectsJobsMessagesList
-    , module Dataflow.Projects.Jobs.Messages.List
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
 
     -- ** DataflowProjectsJobsUpdate
-    , module Dataflow.Projects.Jobs.Update
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.Update
 
     -- ** DataflowProjectsJobsWorkItemsLease
-    , module Dataflow.Projects.Jobs.WorkItems.Lease
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
 
     -- ** DataflowProjectsJobsWorkItemsReportStatus
-    , module Dataflow.Projects.Jobs.WorkItems.ReportStatus
+    , module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
 
     -- * Types
 
@@ -88,6 +88,10 @@ module Network.Google.Dataflow
     , wiConfiguration
     , wiSeqMapTask
 
+    -- ** JobExecutionInfoStages
+    , JobExecutionInfoStages
+    , jobExecutionInfoStages
+
     -- ** SourceSplitResponse
     , SourceSplitResponse
     , sourceSplitResponse
@@ -95,11 +99,19 @@ module Network.Google.Dataflow
     , ssrShards
     , ssrOutcome
 
+    -- ** WorkerPoolMetadata
+    , WorkerPoolMetadata
+    , workerPoolMetadata
+
     -- ** AutoscalingSettings
     , AutoscalingSettings
     , autoscalingSettings
     , asMaxNumWorkers
     , asAlgorithm
+
+    -- ** EnvironmentVersion
+    , EnvironmentVersion
+    , environmentVersion
 
     -- ** Sink
     , Sink
@@ -176,6 +188,14 @@ module Network.Google.Dataflow
     , sourceGetMetadataResponse
     , sgmrMetadata
 
+    -- ** EnvironmentUserAgent
+    , EnvironmentUserAgent
+    , environmentUserAgent
+
+    -- ** MetricStructuredNameContext
+    , MetricStructuredNameContext
+    , metricStructuredNameContext
+
     -- ** MetricUpdate
     , MetricUpdate
     , metricUpdate
@@ -200,6 +220,10 @@ module Network.Google.Dataflow
     , dsDerivationMode
     , dsSource
 
+    -- ** SourceSpec
+    , SourceSpec
+    , sourceSpec
+
     -- ** TaskRunnerSettings
     , TaskRunnerSettings
     , taskRunnerSettings
@@ -223,6 +247,10 @@ module Network.Google.Dataflow
     , trsParallelWorkerSettings
     , trsLanguageHint
 
+    -- ** JobTransformNameMapping
+    , JobTransformNameMapping
+    , jobTransformNameMapping
+
     -- ** JobMetrics
     , JobMetrics
     , jobMetrics
@@ -233,6 +261,10 @@ module Network.Google.Dataflow
     , FlattenInstruction
     , flattenInstruction
     , fiInputs
+
+    -- ** EnvironmentInternalExperiments
+    , EnvironmentInternalExperiments
+    , environmentInternalExperiments
 
     -- ** SourceMetadata
     , SourceMetadata
@@ -261,6 +293,14 @@ module Network.Google.Dataflow
     , shellTask
     , stCommand
     , stExitCode
+
+    -- ** StepProperties
+    , StepProperties
+    , stepProperties
+
+    -- ** EnvironmentSdkPipelineOptions
+    , EnvironmentSdkPipelineOptions
+    , environmentSdkPipelineOptions
 
     -- ** LeaseWorkItemRequest
     , LeaseWorkItemRequest
@@ -294,6 +334,18 @@ module Network.Google.Dataflow
     , wsReportingEnabled
     , wsWorkerId
 
+    -- ** TopologyConfigUserStageToComputationNameMap
+    , TopologyConfigUserStageToComputationNameMap
+    , topologyConfigUserStageToComputationNameMap
+
+    -- ** WorkItemServiceStateHarnessData
+    , WorkItemServiceStateHarnessData
+    , workItemServiceStateHarnessData
+
+    -- ** StatusDetails
+    , StatusDetails
+    , statusDetails
+
     -- ** WorkItemServiceState
     , WorkItemServiceState
     , workItemServiceState
@@ -317,6 +369,18 @@ module Network.Google.Dataflow
     , sstReceiveWorkPort
     , sstWorkerHarnessPort
 
+    -- ** PartialGroupByKeyInstructionInputElementCodec
+    , PartialGroupByKeyInstructionInputElementCodec
+    , partialGroupByKeyInstructionInputElementCodec
+
+    -- ** WorkerPoolPoolArgs
+    , WorkerPoolPoolArgs
+    , workerPoolPoolArgs
+
+    -- ** SinkCodec
+    , SinkCodec
+    , sinkCodec
+
     -- ** StreamLocation
     , StreamLocation
     , streamLocation
@@ -330,12 +394,20 @@ module Network.Google.Dataflow
     , mountedDataDisk
     , mddDataDisk
 
+    -- ** InstructionOutputCodec
+    , InstructionOutputCodec
+    , instructionOutputCodec
+
     -- ** MapTask
     , MapTask
     , mapTask
     , mtInstructions
     , mtSystemName
     , mtStageName
+
+    -- ** ParDoInstructionUserFn
+    , ParDoInstructionUserFn
+    , parDoInstructionUserFn
 
     -- ** StreamingComputationTask
     , StreamingComputationTask
@@ -377,11 +449,19 @@ module Network.Google.Dataflow
     , jobReplaceJobId
     , jobCreateTime
 
+    -- ** SeqMapTaskUserFn
+    , SeqMapTaskUserFn
+    , seqMapTaskUserFn
+
     -- ** SeqMapTaskOutputInfo
     , SeqMapTaskOutputInfo
     , seqMapTaskOutputInfo
     , smtoiSink
     , smtoiTag
+
+    -- ** PartialGroupByKeyInstructionValueCombiningFn
+    , PartialGroupByKeyInstructionValueCombiningFn
+    , partialGroupByKeyInstructionValueCombiningFn
 
     -- ** SourceGetMetadataRequest
     , SourceGetMetadataRequest
@@ -425,6 +505,10 @@ module Network.Google.Dataflow
     , package
     , pLocation
     , pName
+
+    -- ** SinkSpec
+    , SinkSpec
+    , sinkSpec
 
     -- ** Step
     , Step
@@ -535,6 +619,10 @@ module Network.Google.Dataflow
     , sssDerivationMode
     , sssSource
 
+    -- ** SourceCodec
+    , SourceCodec
+    , sourceCodec
+
     -- ** CustomSourceLocation
     , CustomSourceLocation
     , customSourceLocation
@@ -544,6 +632,10 @@ module Network.Google.Dataflow
     , JobExecutionInfo
     , jobExecutionInfo
     , jeiStages
+
+    -- ** SideInputInfoKind
+    , SideInputInfoKind
+    , sideInputInfoKind
 
     -- ** SeqMapTask
     , SeqMapTask
@@ -567,6 +659,10 @@ module Network.Google.Dataflow
     , krddaDataDisk
     , krddaStart
     , krddaEnd
+
+    -- ** SourceBaseSpecs
+    , SourceBaseSpecs
+    , sourceBaseSpecs
 
     -- ** PubsubLocation
     , PubsubLocation
@@ -627,7 +723,15 @@ import           Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Report
 TODO
 -}
 
-type DataflowAPI = Projects
+type DataflowAPI =
+     ProjectsJobsWorkItemsLeaseResource :<|>
+       ProjectsJobsWorkItemsReportStatusResource
+       :<|> ProjectsJobsMessagesListResource
+       :<|> ProjectsJobsListResource
+       :<|> ProjectsJobsGetResource
+       :<|> ProjectsJobsCreateResource
+       :<|> ProjectsJobsUpdateResource
+       :<|> ProjectsJobsGetMetricsResource
 
 dataflowAPI :: Proxy DataflowAPI
 dataflowAPI = Proxy

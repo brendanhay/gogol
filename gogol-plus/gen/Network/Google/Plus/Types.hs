@@ -17,6 +17,64 @@ module Network.Google.Plus.Types
     -- * Service URL
       plusURL
 
+    -- * CommentPlusoners
+    , CommentPlusoners
+    , commentPlusoners
+    , cpTotalItems
+
+    -- * ActivityProvider
+    , ActivityProvider
+    , activityProvider
+    , apTitle
+
+    -- * CommentActorImage
+    , CommentActorImage
+    , commentActorImage
+    , caiUrl
+
+    -- * ActivityObjectPlusoners
+    , ActivityObjectPlusoners
+    , activityObjectPlusoners
+    , aopTotalItems
+    , aopSelfLink
+
+    -- * PlusActivitiesSearchOrderBy
+    , PlusActivitiesSearchOrderBy (..)
+
+    -- * ActivityObjectAttachments
+    , ActivityObjectAttachments
+    , activityObjectAttachments
+    , aoaFullImage
+    , aoaImage
+    , aoaObjectType
+    , aoaUrl
+    , aoaEmbed
+    , aoaContent
+    , aoaThumbnails
+    , aoaDisplayName
+    , aoaId
+
+    -- * ActivityObjectAttachmentsThumbnailsImage
+    , ActivityObjectAttachmentsThumbnailsImage
+    , activityObjectAttachmentsThumbnailsImage
+    , aoatiHeight
+    , aoatiUrl
+    , aoatiWidth
+    , aoatiType
+
+    -- * PlacePosition
+    , PlacePosition
+    , placePosition
+    , ppLatitude
+    , ppLongitude
+
+    -- * PersonURLs
+    , PersonURLs
+    , personURLs
+    , puValue
+    , puType
+    , puLabel
+
     -- * Person
     , Person
     , person
@@ -51,6 +109,48 @@ module Network.Google.Plus.Types
     , pOrganizations
     , pCircledByCount
 
+    -- * PlusActivitiesListCollection
+    , PlusActivitiesListCollection (..)
+
+    -- * PlusPeopleListCollection
+    , PlusPeopleListCollection (..)
+
+    -- * CommentInReplyTo
+    , CommentInReplyTo
+    , commentInReplyTo
+    , cirtUrl
+    , cirtId
+
+    -- * PersonOrganizations
+    , PersonOrganizations
+    , personOrganizations
+    , poDepartment
+    , poLocation
+    , poEndDate
+    , poPrimary
+    , poStartDate
+    , poName
+    , poTitle
+    , poType
+    , poDescription
+
+    -- * ActivityObjectAttachmentsImage
+    , ActivityObjectAttachmentsImage
+    , activityObjectAttachmentsImage
+    , aoaiHeight
+    , aoaiUrl
+    , aoaiWidth
+    , aoaiType
+
+    -- * CommentActor
+    , CommentActor
+    , commentActor
+    , caImage
+    , caUrl
+    , caDisplayName
+    , caId
+    , caVerification
+
     -- * Moment
     , Moment
     , moment
@@ -62,6 +162,34 @@ module Network.Google.Plus.Types
     , mType
     , mTarget
 
+    -- * ActivityObject
+    , ActivityObject
+    , activityObject
+    , aoPlusoners
+    , aoAttachments
+    , aoObjectType
+    , aoOriginalContent
+    , aoUrl
+    , aoActor
+    , aoContent
+    , aoReplies
+    , aoId
+    , aoResharers
+
+    -- * ActivityObjectActor
+    , ActivityObjectActor
+    , activityObjectActor
+    , aImage
+    , aUrl
+    , aDisplayName
+    , aId
+    , aVerification
+
+    -- * ActivityActorImage
+    , ActivityActorImage
+    , activityActorImage
+    , aaiUrl
+
     -- * PeopleFeed
     , PeopleFeed
     , peopleFeed
@@ -72,6 +200,39 @@ module Network.Google.Plus.Types
     , pfItems
     , pfSelfLink
     , pfTitle
+
+    -- * ActivityObjectAttachmentsEmbed
+    , ActivityObjectAttachmentsEmbed
+    , activityObjectAttachmentsEmbed
+    , aoaeUrl
+    , aoaeType
+
+    -- * PersonCoverCoverPhoto
+    , PersonCoverCoverPhoto
+    , personCoverCoverPhoto
+    , pccpHeight
+    , pccpUrl
+    , pccpWidth
+
+    -- * PersonAgeRange
+    , PersonAgeRange
+    , personAgeRange
+    , parMax
+    , parMin
+
+    -- * ActivityObjectReplies
+    , ActivityObjectReplies
+    , activityObjectReplies
+    , aorTotalItems
+    , aorSelfLink
+
+    -- * ActivityObjectActorImage
+    , ActivityObjectActorImage
+    , activityObjectActorImage
+    , actUrl
+
+    -- * PlusCommentsListSortOrder
+    , PlusCommentsListSortOrder (..)
 
     -- * ItemScope
     , ItemScope
@@ -132,6 +293,11 @@ module Network.Google.Plus.Types
     , isDescription
     , isBirthDate
 
+    -- * ActivityActorVerification
+    , ActivityActorVerification
+    , activityActorVerification
+    , aavAdHocVerified
+
     -- * ActivityFeed
     , ActivityFeed
     , activityFeed
@@ -145,6 +311,17 @@ module Network.Google.Plus.Types
     , afUpdated
     , afTitle
 
+    -- * PersonPlacesLived
+    , PersonPlacesLived
+    , personPlacesLived
+    , pplValue
+    , pplPrimary
+
+    -- * ActivityObjectActorVerification
+    , ActivityObjectActorVerification
+    , activityObjectActorVerification
+    , aoavAdHocVerified
+
     -- * PlusACLentryResource
     , PlusACLentryResource
     , plusACLentryResource
@@ -152,29 +329,76 @@ module Network.Google.Plus.Types
     , parId
     , parType
 
+    -- * PersonEmails
+    , PersonEmails
+    , personEmails
+    , peValue
+    , peType
+
+    -- * PersonImage
+    , PersonImage
+    , personImage
+    , piUrl
+    , piIsDefault
+
+    -- * PersonName
+    , PersonName
+    , personName
+    , pnGivenName
+    , pnMiddleName
+    , pnFormatted
+    , pnHonorificPrefix
+    , pnFamilyName
+    , pnHonorificSuffix
+
+    -- * PlaceAddress
+    , PlaceAddress
+    , placeAddress
+    , paFormatted
+
+    -- * ActivityObjectAttachmentsThumbnails
+    , ActivityObjectAttachmentsThumbnails
+    , activityObjectAttachmentsThumbnails
+    , aoatImage
+    , aoatUrl
+    , aoatDescription
+
+    -- * PlusMomentsListCollection
+    , PlusMomentsListCollection (..)
+
     -- * Activity
     , Activity
     , activity
-    , aAccess
-    , aPlaceName
-    , aEtag
-    , aAnnotation
-    , aLocation
-    , aGeocode
-    , aKind
-    , aRadius
-    , aPublished
-    , aUrl
-    , aActor
-    , aAddress
-    , aObject
-    , aId
-    , aUpdated
-    , aTitle
-    , aVerb
-    , aCrosspostSource
-    , aPlaceId
-    , aProvider
+    , aaAccess
+    , aaPlaceName
+    , aaEtag
+    , aaAnnotation
+    , aaLocation
+    , aaGeocode
+    , aaKind
+    , aaRadius
+    , aaPublished
+    , aaUrl
+    , aaActor
+    , aaAddress
+    , aaObject
+    , aaId
+    , aaUpdated
+    , aaTitle
+    , aaVerb
+    , aaCrosspostSource
+    , aaPlaceId
+    , aaProvider
+
+    -- * PersonCover
+    , PersonCover
+    , personCover
+    , pcLayout
+    , pcCoverInfo
+    , pcCoverPhoto
+
+    -- * PlusMomentsInsertCollection
+    , PlusMomentsInsertCollection (..)
 
     -- * Place
     , Place
@@ -184,6 +408,21 @@ module Network.Google.Plus.Types
     , plaDisplayName
     , plaId
     , plaPosition
+
+    -- * PersonCoverCoverInfo
+    , PersonCoverCoverInfo
+    , personCoverCoverInfo
+    , pcciTopImageOffset
+    , pcciLeftImageOffset
+
+    -- * PlusPeopleListByActivityCollection
+    , PlusPeopleListByActivityCollection (..)
+
+    -- * ActivityObjectResharers
+    , ActivityObjectResharers
+    , activityObjectResharers
+    , aTotalItems
+    , aSelfLink
 
     -- * Comment
     , Comment
@@ -199,6 +438,34 @@ module Network.Google.Plus.Types
     , cUpdated
     , cVerb
     , cInReplyTo
+
+    -- * ActivityActor
+    , ActivityActor
+    , activityActor
+    , aaaImage
+    , aaaUrl
+    , aaaName
+    , aaaDisplayName
+    , aaaId
+    , aaaVerification
+
+    -- * CommentObject
+    , CommentObject
+    , commentObject
+    , coObjectType
+    , coOriginalContent
+    , coContent
+
+    -- * ActivityObjectAttachmentsFullImage
+    , ActivityObjectAttachmentsFullImage
+    , activityObjectAttachmentsFullImage
+    , aoafiHeight
+    , aoafiUrl
+    , aoafiWidth
+    , aoafiType
+
+    -- * PlusPeopleListOrderBy
+    , PlusPeopleListOrderBy (..)
 
     -- * ACL
     , ACL
@@ -230,6 +497,20 @@ module Network.Google.Plus.Types
     , cfId
     , cfUpdated
     , cfTitle
+
+    -- * Alt
+    , Alt (..)
+
+    -- * CommentActorVerification
+    , CommentActorVerification
+    , commentActorVerification
+    , cavAdHocVerified
+
+    -- * ActivityActorName
+    , ActivityActorName
+    , activityActorName
+    , aanGivenName
+    , aanFamilyName
     ) where
 
 import           Network.Google.Plus.Types.Product
@@ -237,7 +518,7 @@ import           Network.Google.Plus.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google+ API.
-plusURL :: BaseURL
+plusURL :: BaseUrl
 plusURL
   = BaseUrl Https "https://www.googleapis.com/plus/v1/"
       443

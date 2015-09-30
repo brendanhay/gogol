@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,129 +21,133 @@
 -- GlobalAllianceApi.searchVariantSets.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsSearch@.
-module Genomics.Variantsets.Search
+module Network.Google.Resource.Genomics.Variantsets.Search
     (
     -- * REST Resource
-      VariantsetsSearchAPI
+      VariantsetsSearchResource
 
     -- * Creating a Request
-    , variantsetsSearch
-    , VariantsetsSearch
+    , variantsetsSearch'
+    , VariantsetsSearch'
 
     -- * Request Lenses
-    , vssQuotaUser
-    , vssPrettyPrint
-    , vssUserIp
-    , vssKey
-    , vssOauthToken
-    , vssFields
-    , vssAlt
+    , vQuotaUser
+    , vPrettyPrint
+    , vUserIp
+    , vKey
+    , vOauthToken
+    , vFields
+    , vAlt
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsSearch@ which the
--- 'VariantsetsSearch' request conforms to.
-type VariantsetsSearchAPI =
+-- 'VariantsetsSearch'' request conforms to.
+type VariantsetsSearchResource =
      "variantsets" :>
-       "search" :> Post '[JSON] SearchVariantSetsResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchVariantSetsResponse
 
 -- | Returns a list of all variant sets matching search criteria. Implements
 -- GlobalAllianceApi.searchVariantSets.
 --
--- /See:/ 'variantsetsSearch' smart constructor.
-data VariantsetsSearch = VariantsetsSearch
-    { _vssQuotaUser   :: !(Maybe Text)
-    , _vssPrettyPrint :: !Bool
-    , _vssUserIp      :: !(Maybe Text)
-    , _vssKey         :: !(Maybe Text)
-    , _vssOauthToken  :: !(Maybe Text)
-    , _vssFields      :: !(Maybe Text)
-    , _vssAlt         :: !Text
+-- /See:/ 'variantsetsSearch'' smart constructor.
+data VariantsetsSearch' = VariantsetsSearch'
+    { _vQuotaUser   :: !(Maybe Text)
+    , _vPrettyPrint :: !Bool
+    , _vUserIp      :: !(Maybe Text)
+    , _vKey         :: !(Maybe Text)
+    , _vOauthToken  :: !(Maybe Text)
+    , _vFields      :: !(Maybe Text)
+    , _vAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsSearch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vssQuotaUser'
+-- * 'vQuotaUser'
 --
--- * 'vssPrettyPrint'
+-- * 'vPrettyPrint'
 --
--- * 'vssUserIp'
+-- * 'vUserIp'
 --
--- * 'vssKey'
+-- * 'vKey'
 --
--- * 'vssOauthToken'
+-- * 'vOauthToken'
 --
--- * 'vssFields'
+-- * 'vFields'
 --
--- * 'vssAlt'
-variantsetsSearch
-    :: VariantsetsSearch
-variantsetsSearch =
-    VariantsetsSearch
-    { _vssQuotaUser = Nothing
-    , _vssPrettyPrint = True
-    , _vssUserIp = Nothing
-    , _vssKey = Nothing
-    , _vssOauthToken = Nothing
-    , _vssFields = Nothing
-    , _vssAlt = "json"
+-- * 'vAlt'
+variantsetsSearch'
+    :: VariantsetsSearch'
+variantsetsSearch' =
+    VariantsetsSearch'
+    { _vQuotaUser = Nothing
+    , _vPrettyPrint = True
+    , _vUserIp = Nothing
+    , _vKey = Nothing
+    , _vOauthToken = Nothing
+    , _vFields = Nothing
+    , _vAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-vssQuotaUser :: Lens' VariantsetsSearch' (Maybe Text)
-vssQuotaUser
-  = lens _vssQuotaUser (\ s a -> s{_vssQuotaUser = a})
+vQuotaUser :: Lens' VariantsetsSearch' (Maybe Text)
+vQuotaUser
+  = lens _vQuotaUser (\ s a -> s{_vQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-vssPrettyPrint :: Lens' VariantsetsSearch' Bool
-vssPrettyPrint
-  = lens _vssPrettyPrint
-      (\ s a -> s{_vssPrettyPrint = a})
+vPrettyPrint :: Lens' VariantsetsSearch' Bool
+vPrettyPrint
+  = lens _vPrettyPrint (\ s a -> s{_vPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vssUserIp :: Lens' VariantsetsSearch' (Maybe Text)
-vssUserIp
-  = lens _vssUserIp (\ s a -> s{_vssUserIp = a})
+vUserIp :: Lens' VariantsetsSearch' (Maybe Text)
+vUserIp = lens _vUserIp (\ s a -> s{_vUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vssKey :: Lens' VariantsetsSearch' (Maybe Text)
-vssKey = lens _vssKey (\ s a -> s{_vssKey = a})
+vKey :: Lens' VariantsetsSearch' (Maybe Text)
+vKey = lens _vKey (\ s a -> s{_vKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vssOauthToken :: Lens' VariantsetsSearch' (Maybe Text)
-vssOauthToken
-  = lens _vssOauthToken
-      (\ s a -> s{_vssOauthToken = a})
+vOauthToken :: Lens' VariantsetsSearch' (Maybe Text)
+vOauthToken
+  = lens _vOauthToken (\ s a -> s{_vOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-vssFields :: Lens' VariantsetsSearch' (Maybe Text)
-vssFields
-  = lens _vssFields (\ s a -> s{_vssFields = a})
+vFields :: Lens' VariantsetsSearch' (Maybe Text)
+vFields = lens _vFields (\ s a -> s{_vFields = a})
 
 -- | Data format for the response.
-vssAlt :: Lens' VariantsetsSearch' Text
-vssAlt = lens _vssAlt (\ s a -> s{_vssAlt = a})
+vAlt :: Lens' VariantsetsSearch' Alt
+vAlt = lens _vAlt (\ s a -> s{_vAlt = a})
 
 instance GoogleRequest VariantsetsSearch' where
         type Rs VariantsetsSearch' =
              SearchVariantSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsSearch{..}
-          = go _vssQuotaUser _vssPrettyPrint _vssUserIp _vssKey
-              _vssOauthToken
-              _vssFields
-              _vssAlt
+        requestWithRoute r u VariantsetsSearch'{..}
+          = go _vQuotaUser (Just _vPrettyPrint) _vUserIp _vKey
+              _vOauthToken
+              _vFields
+              (Just _vAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsSearchAPI)
+                      (Proxy :: Proxy VariantsetsSearchResource)
                       r
                       u

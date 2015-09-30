@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a reply.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRepliesGet@.
-module Drive.Replies.Get
+module Network.Google.Resource.Drive.Replies.Get
     (
     -- * REST Resource
-      RepliesGetAPI
+      RepliesGetResource
 
     -- * Creating a Request
-    , repliesGet
-    , RepliesGet
+    , repliesGet'
+    , RepliesGet'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -46,21 +47,27 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRepliesGet@ which the
--- 'RepliesGet' request conforms to.
-type RepliesGetAPI =
+-- 'RepliesGet'' request conforms to.
+type RepliesGetResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
              "replies" :>
                Capture "replyId" Text :>
-                 QueryParam "includeDeleted" Bool :>
-                   Get '[JSON] CommentReply
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "includeDeleted" Bool :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] CommentReply
 
 -- | Gets a reply.
 --
--- /See:/ 'repliesGet' smart constructor.
-data RepliesGet = RepliesGet
+-- /See:/ 'repliesGet'' smart constructor.
+data RepliesGet' = RepliesGet'
     { _rgQuotaUser      :: !(Maybe Text)
     , _rgPrettyPrint    :: !Bool
     , _rgUserIp         :: !(Maybe Text)
@@ -71,7 +78,7 @@ data RepliesGet = RepliesGet
     , _rgCommentId      :: !Text
     , _rgIncludeDeleted :: !Bool
     , _rgFields         :: !(Maybe Text)
-    , _rgAlt            :: !Text
+    , _rgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesGet'' with the minimum fields required to make a request.
@@ -99,13 +106,13 @@ data RepliesGet = RepliesGet
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-repliesGet
+repliesGet'
     :: Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> RepliesGet
-repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
-    RepliesGet
+    -> RepliesGet'
+repliesGet' pRgReplyId_ pRgFileId_ pRgCommentId_ =
+    RepliesGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIp = Nothing
@@ -116,7 +123,7 @@ repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
     , _rgCommentId = pRgCommentId_
     , _rgIncludeDeleted = False
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,20 +180,23 @@ rgFields :: Lens' RepliesGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' RepliesGet' Text
+rgAlt :: Lens' RepliesGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest RepliesGet' where
         type Rs RepliesGet' = CommentReply
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RepliesGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp _rgKey
+        requestWithRoute r u RepliesGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+              _rgKey
               _rgReplyId
               _rgFileId
               _rgOauthToken
               _rgCommentId
               (Just _rgIncludeDeleted)
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RepliesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RepliesGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one order document by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrderDocumentsGet@.
-module DFAReporting.OrderDocuments.Get
+module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     (
     -- * REST Resource
-      OrderDocumentsGetAPI
+      OrderDocumentsGetResource
 
     -- * Creating a Request
-    , orderDocumentsGet
-    , OrderDocumentsGet
+    , orderDocumentsGet'
+    , OrderDocumentsGet'
 
     -- * Request Lenses
     , odgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOrderDocumentsGet@ which the
--- 'OrderDocumentsGet' request conforms to.
-type OrderDocumentsGetAPI =
+-- 'OrderDocumentsGet'' request conforms to.
+type OrderDocumentsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
              "orderDocuments" :>
-               Capture "id" Int64 :> Get '[JSON] OrderDocument
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] OrderDocument
 
 -- | Gets one order document by ID.
 --
--- /See:/ 'orderDocumentsGet' smart constructor.
-data OrderDocumentsGet = OrderDocumentsGet
+-- /See:/ 'orderDocumentsGet'' smart constructor.
+data OrderDocumentsGet' = OrderDocumentsGet'
     { _odgQuotaUser   :: !(Maybe Text)
     , _odgPrettyPrint :: !Bool
     , _odgUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data OrderDocumentsGet = OrderDocumentsGet
     , _odgProjectId   :: !Int64
     , _odgOauthToken  :: !(Maybe Text)
     , _odgFields      :: !(Maybe Text)
-    , _odgAlt         :: !Text
+    , _odgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data OrderDocumentsGet = OrderDocumentsGet
 -- * 'odgFields'
 --
 -- * 'odgAlt'
-orderDocumentsGet
+orderDocumentsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
-    -> OrderDocumentsGet
-orderDocumentsGet pOdgProfileId_ pOdgId_ pOdgProjectId_ =
-    OrderDocumentsGet
+    -> OrderDocumentsGet'
+orderDocumentsGet' pOdgProfileId_ pOdgId_ pOdgProjectId_ =
+    OrderDocumentsGet'
     { _odgQuotaUser = Nothing
     , _odgPrettyPrint = True
     , _odgUserIp = Nothing
@@ -109,7 +117,7 @@ orderDocumentsGet pOdgProfileId_ pOdgId_ pOdgProjectId_ =
     , _odgProjectId = pOdgProjectId_
     , _odgOauthToken = Nothing
     , _odgFields = Nothing
-    , _odgAlt = "json"
+    , _odgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ odgFields
   = lens _odgFields (\ s a -> s{_odgFields = a})
 
 -- | Data format for the response.
-odgAlt :: Lens' OrderDocumentsGet' Text
+odgAlt :: Lens' OrderDocumentsGet' Alt
 odgAlt = lens _odgAlt (\ s a -> s{_odgAlt = a})
 
 instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrderDocumentsGet{..}
-          = go _odgQuotaUser _odgPrettyPrint _odgUserIp
+        requestWithRoute r u OrderDocumentsGet'{..}
+          = go _odgQuotaUser (Just _odgPrettyPrint) _odgUserIp
               _odgProfileId
               _odgKey
               _odgId
               _odgProjectId
               _odgOauthToken
               _odgFields
-              _odgAlt
+              (Just _odgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrderDocumentsGetAPI)
+                      (Proxy :: Proxy OrderDocumentsGetResource)
                       r
                       u

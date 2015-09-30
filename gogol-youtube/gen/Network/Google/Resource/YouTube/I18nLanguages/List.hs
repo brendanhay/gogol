@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- supports.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeI18nLanguagesList@.
-module YouTube.I18nLanguages.List
+module Network.Google.Resource.YouTube.I18nLanguages.List
     (
     -- * REST Resource
-      I18nLanguagesListAPI
+      I18nLanguagesListResource
 
     -- * Creating a Request
-    , i18nLanguagesList
-    , I18nLanguagesList
+    , i18nLanguagesList'
+    , I18nLanguagesList'
 
     -- * Request Lenses
     , illQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeI18nLanguagesList@ which the
--- 'I18nLanguagesList' request conforms to.
-type I18nLanguagesListAPI =
+-- 'I18nLanguagesList'' request conforms to.
+type I18nLanguagesListResource =
      "i18nLanguages" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           Get '[JSON] I18nLanguageListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "hl" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] I18nLanguageListResponse
 
 -- | Returns a list of application languages that the YouTube website
 -- supports.
 --
--- /See:/ 'i18nLanguagesList' smart constructor.
-data I18nLanguagesList = I18nLanguagesList
+-- /See:/ 'i18nLanguagesList'' smart constructor.
+data I18nLanguagesList' = I18nLanguagesList'
     { _illQuotaUser   :: !(Maybe Text)
     , _illPart        :: !Text
     , _illPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data I18nLanguagesList = I18nLanguagesList
     , _illKey         :: !(Maybe Text)
     , _illOauthToken  :: !(Maybe Text)
     , _illFields      :: !(Maybe Text)
-    , _illAlt         :: !Text
+    , _illAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nLanguagesList'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data I18nLanguagesList = I18nLanguagesList
 -- * 'illFields'
 --
 -- * 'illAlt'
-i18nLanguagesList
+i18nLanguagesList'
     :: Text -- ^ 'part'
-    -> I18nLanguagesList
-i18nLanguagesList pIllPart_ =
-    I18nLanguagesList
+    -> I18nLanguagesList'
+i18nLanguagesList' pIllPart_ =
+    I18nLanguagesList'
     { _illQuotaUser = Nothing
     , _illPart = pIllPart_
     , _illPrettyPrint = True
@@ -102,7 +110,7 @@ i18nLanguagesList pIllPart_ =
     , _illKey = Nothing
     , _illOauthToken = Nothing
     , _illFields = Nothing
-    , _illAlt = "json"
+    , _illAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ illFields
   = lens _illFields (\ s a -> s{_illFields = a})
 
 -- | Data format for the response.
-illAlt :: Lens' I18nLanguagesList' Text
+illAlt :: Lens' I18nLanguagesList' Alt
 illAlt = lens _illAlt (\ s a -> s{_illAlt = a})
 
 instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u I18nLanguagesList{..}
-          = go _illQuotaUser (Just _illPart) _illPrettyPrint
+        requestWithRoute r u I18nLanguagesList'{..}
+          = go _illQuotaUser (Just _illPart)
+              (Just _illPrettyPrint)
               _illUserIp
               (Just _illHl)
               _illKey
               _illOauthToken
               _illFields
-              _illAlt
+              (Just _illAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy I18nLanguagesListAPI)
+                      (Proxy :: Proxy I18nLanguagesListResource)
                       r
                       u

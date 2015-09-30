@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsList@.
-module Compute.RegionOperations.List
+module Network.Google.Resource.Compute.RegionOperations.List
     (
     -- * REST Resource
-      RegionOperationsListAPI
+      RegionOperationsListResource
 
     -- * Creating a Request
-    , regionOperationsList
-    , RegionOperationsList
+    , regionOperationsList'
+    , RegionOperationsList'
 
     -- * Request Lenses
     , rolQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRegionOperationsList@ which the
--- 'RegionOperationsList' request conforms to.
-type RegionOperationsListAPI =
+-- 'RegionOperationsList'' request conforms to.
+type RegionOperationsListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "operations" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] OperationList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- region.
 --
--- /See:/ 'regionOperationsList' smart constructor.
-data RegionOperationsList = RegionOperationsList
+-- /See:/ 'regionOperationsList'' smart constructor.
+data RegionOperationsList' = RegionOperationsList'
     { _rolQuotaUser   :: !(Maybe Text)
     , _rolPrettyPrint :: !Bool
     , _rolProject     :: !Text
@@ -75,7 +82,7 @@ data RegionOperationsList = RegionOperationsList
     , _rolOauthToken  :: !(Maybe Text)
     , _rolMaxResults  :: !Word32
     , _rolFields      :: !(Maybe Text)
-    , _rolAlt         :: !Text
+    , _rolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data RegionOperationsList = RegionOperationsList
 -- * 'rolFields'
 --
 -- * 'rolAlt'
-regionOperationsList
+regionOperationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> RegionOperationsList
-regionOperationsList pRolProject_ pRolRegion_ =
-    RegionOperationsList
+    -> RegionOperationsList'
+regionOperationsList' pRolProject_ pRolRegion_ =
+    RegionOperationsList'
     { _rolQuotaUser = Nothing
     , _rolPrettyPrint = True
     , _rolProject = pRolProject_
@@ -122,7 +129,7 @@ regionOperationsList pRolProject_ pRolRegion_ =
     , _rolOauthToken = Nothing
     , _rolMaxResults = 500
     , _rolFields = Nothing
-    , _rolAlt = "json"
+    , _rolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,14 +207,14 @@ rolFields
   = lens _rolFields (\ s a -> s{_rolFields = a})
 
 -- | Data format for the response.
-rolAlt :: Lens' RegionOperationsList' Text
+rolAlt :: Lens' RegionOperationsList' Alt
 rolAlt = lens _rolAlt (\ s a -> s{_rolAlt = a})
 
 instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionOperationsList{..}
-          = go _rolQuotaUser _rolPrettyPrint _rolProject
+        requestWithRoute r u RegionOperationsList'{..}
+          = go _rolQuotaUser (Just _rolPrettyPrint) _rolProject
               _rolUserIp
               _rolKey
               _rolFilter
@@ -216,9 +223,9 @@ instance GoogleRequest RegionOperationsList' where
               _rolOauthToken
               (Just _rolMaxResults)
               _rolFields
-              _rolAlt
+              (Just _rolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RegionOperationsListAPI)
+                      (Proxy :: Proxy RegionOperationsListResource)
                       r
                       u

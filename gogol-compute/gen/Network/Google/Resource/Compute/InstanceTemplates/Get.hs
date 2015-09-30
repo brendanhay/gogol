@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified instance template resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceTemplatesGet@.
-module Compute.InstanceTemplates.Get
+module Network.Google.Resource.Compute.InstanceTemplates.Get
     (
     -- * REST Resource
-      InstanceTemplatesGetAPI
+      InstanceTemplatesGetResource
 
     -- * Creating a Request
-    , instanceTemplatesGet
-    , InstanceTemplatesGet
+    , instanceTemplatesGet'
+    , InstanceTemplatesGet'
 
     -- * Request Lenses
     , itgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceTemplatesGet@ which the
--- 'InstanceTemplatesGet' request conforms to.
-type InstanceTemplatesGetAPI =
+-- 'InstanceTemplatesGet'' request conforms to.
+type InstanceTemplatesGetResource =
      Capture "project" Text :>
        "global" :>
          "instanceTemplates" :>
            Capture "instanceTemplate" Text :>
-             Get '[JSON] InstanceTemplate
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] InstanceTemplate
 
 -- | Returns the specified instance template resource.
 --
--- /See:/ 'instanceTemplatesGet' smart constructor.
-data InstanceTemplatesGet = InstanceTemplatesGet
+-- /See:/ 'instanceTemplatesGet'' smart constructor.
+data InstanceTemplatesGet' = InstanceTemplatesGet'
     { _itgQuotaUser        :: !(Maybe Text)
     , _itgPrettyPrint      :: !Bool
     , _itgProject          :: !Text
@@ -64,7 +71,7 @@ data InstanceTemplatesGet = InstanceTemplatesGet
     , _itgKey              :: !(Maybe Text)
     , _itgOauthToken       :: !(Maybe Text)
     , _itgFields           :: !(Maybe Text)
-    , _itgAlt              :: !Text
+    , _itgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data InstanceTemplatesGet = InstanceTemplatesGet
 -- * 'itgFields'
 --
 -- * 'itgAlt'
-instanceTemplatesGet
+instanceTemplatesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceTemplate'
-    -> InstanceTemplatesGet
-instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
-    InstanceTemplatesGet
+    -> InstanceTemplatesGet'
+instanceTemplatesGet' pItgProject_ pItgInstanceTemplate_ =
+    InstanceTemplatesGet'
     { _itgQuotaUser = Nothing
     , _itgPrettyPrint = True
     , _itgProject = pItgProject_
@@ -102,7 +109,7 @@ instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
     , _itgKey = Nothing
     , _itgOauthToken = Nothing
     , _itgFields = Nothing
-    , _itgAlt = "json"
+    , _itgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +160,22 @@ itgFields
   = lens _itgFields (\ s a -> s{_itgFields = a})
 
 -- | Data format for the response.
-itgAlt :: Lens' InstanceTemplatesGet' Text
+itgAlt :: Lens' InstanceTemplatesGet' Alt
 itgAlt = lens _itgAlt (\ s a -> s{_itgAlt = a})
 
 instance GoogleRequest InstanceTemplatesGet' where
         type Rs InstanceTemplatesGet' = InstanceTemplate
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceTemplatesGet{..}
-          = go _itgQuotaUser _itgPrettyPrint _itgProject
+        requestWithRoute r u InstanceTemplatesGet'{..}
+          = go _itgQuotaUser (Just _itgPrettyPrint) _itgProject
               _itgUserIp
               _itgInstanceTemplate
               _itgKey
               _itgOauthToken
               _itgFields
-              _itgAlt
+              (Just _itgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceTemplatesGetAPI)
+                      (Proxy :: Proxy InstanceTemplatesGetResource)
                       r
                       u

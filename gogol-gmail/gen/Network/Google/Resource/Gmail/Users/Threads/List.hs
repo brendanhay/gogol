@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the threads in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsList@.
-module Gmail.Users.Threads.List
+module Network.Google.Resource.Gmail.Users.Threads.List
     (
     -- * REST Resource
-      UsersThreadsListAPI
+      UsersThreadsListResource
 
     -- * Creating a Request
-    , usersThreadsList
-    , UsersThreadsList
+    , usersThreadsList'
+    , UsersThreadsList'
 
     -- * Request Lenses
     , utlQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsList@ which the
--- 'UsersThreadsList' request conforms to.
-type UsersThreadsListAPI =
+-- 'UsersThreadsList'' request conforms to.
+type UsersThreadsListResource =
      Capture "userId" Text :>
        "threads" :>
-         QueryParam "q" Text :>
-           QueryParam "includeSpamTrash" Bool :>
-             QueryParams "labelIds" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] ListThreadsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "q" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "includeSpamTrash" Bool :>
+                     QueryParams "labelIds" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] ListThreadsResponse
 
 -- | Lists the threads in the user\'s mailbox.
 --
--- /See:/ 'usersThreadsList' smart constructor.
-data UsersThreadsList = UsersThreadsList
+-- /See:/ 'usersThreadsList'' smart constructor.
+data UsersThreadsList' = UsersThreadsList'
     { _utlQuotaUser        :: !(Maybe Text)
     , _utlPrettyPrint      :: !Bool
     , _utlUserIp           :: !(Maybe Text)
@@ -75,7 +83,7 @@ data UsersThreadsList = UsersThreadsList
     , _utlOauthToken       :: !(Maybe Text)
     , _utlMaxResults       :: !Word32
     , _utlFields           :: !(Maybe Text)
-    , _utlAlt              :: !Text
+    , _utlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsList'' with the minimum fields required to make a request.
@@ -107,11 +115,11 @@ data UsersThreadsList = UsersThreadsList
 -- * 'utlFields'
 --
 -- * 'utlAlt'
-usersThreadsList
+usersThreadsList'
     :: Text
-    -> UsersThreadsList
-usersThreadsList pUtlUserId_ =
-    UsersThreadsList
+    -> UsersThreadsList'
+usersThreadsList' pUtlUserId_ =
+    UsersThreadsList'
     { _utlQuotaUser = Nothing
     , _utlPrettyPrint = True
     , _utlUserIp = Nothing
@@ -124,7 +132,7 @@ usersThreadsList pUtlUserId_ =
     , _utlOauthToken = Nothing
     , _utlMaxResults = 100
     , _utlFields = Nothing
-    , _utlAlt = "json"
+    , _utlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,14 +207,15 @@ utlFields
   = lens _utlFields (\ s a -> s{_utlFields = a})
 
 -- | Data format for the response.
-utlAlt :: Lens' UsersThreadsList' Text
+utlAlt :: Lens' UsersThreadsList' Alt
 utlAlt = lens _utlAlt (\ s a -> s{_utlAlt = a})
 
 instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsList{..}
-          = go _utlQuotaUser _utlPrettyPrint _utlUserIp _utlQ
+        requestWithRoute r u UsersThreadsList'{..}
+          = go _utlQuotaUser (Just _utlPrettyPrint) _utlUserIp
+              _utlQ
               _utlUserId
               _utlKey
               (Just _utlIncludeSpamTrash)
@@ -215,9 +224,9 @@ instance GoogleRequest UsersThreadsList' where
               _utlOauthToken
               (Just _utlMaxResults)
               _utlFields
-              _utlAlt
+              (Just _utlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersThreadsListAPI)
+                      (Proxy :: Proxy UsersThreadsListResource)
                       r
                       u

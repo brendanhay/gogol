@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Generates and returns a report immediately.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsGenerate@.
-module DoubleClickSearch.Reports.Generate
+module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     (
     -- * REST Resource
-      ReportsGenerateAPI
+      ReportsGenerateResource
 
     -- * Creating a Request
-    , reportsGenerate
-    , ReportsGenerate
+    , reportsGenerate'
+    , ReportsGenerate'
 
     -- * Request Lenses
     , rQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchReportsGenerate@ which the
--- 'ReportsGenerate' request conforms to.
-type ReportsGenerateAPI =
-     "reports" :> "generate" :> Post '[JSON] Report
+-- 'ReportsGenerate'' request conforms to.
+type ReportsGenerateResource =
+     "reports" :>
+       "generate" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --
--- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate
+-- /See:/ 'reportsGenerate'' smart constructor.
+data ReportsGenerate' = ReportsGenerate'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rUserIp      :: !(Maybe Text)
     , _rKey         :: !(Maybe Text)
     , _rOauthToken  :: !(Maybe Text)
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Text
+    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data ReportsGenerate = ReportsGenerate
 -- * 'rFields'
 --
 -- * 'rAlt'
-reportsGenerate
-    :: ReportsGenerate
-reportsGenerate =
-    ReportsGenerate
+reportsGenerate'
+    :: ReportsGenerate'
+reportsGenerate' =
+    ReportsGenerate'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rUserIp = Nothing
     , _rKey = Nothing
     , _rOauthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = "json"
+    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,19 +131,20 @@ rFields :: Lens' ReportsGenerate' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-rAlt :: Lens' ReportsGenerate' Text
+rAlt :: Lens' ReportsGenerate' Alt
 rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGenerate{..}
-          = go _rQuotaUser _rPrettyPrint _rUserIp _rKey
+        requestWithRoute r u ReportsGenerate'{..}
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIp _rKey
               _rOauthToken
               _rFields
-              _rAlt
+              (Just _rAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGenerateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsGenerateResource)
                       r
                       u

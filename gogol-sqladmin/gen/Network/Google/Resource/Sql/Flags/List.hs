@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all available database flags for Google Cloud SQL instances.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlFlagsList@.
-module Sql.Flags.List
+module Network.Google.Resource.Sql.Flags.List
     (
     -- * REST Resource
-      FlagsListAPI
+      FlagsListResource
 
     -- * Creating a Request
-    , flagsList
-    , FlagsList
+    , flagsList'
+    , FlagsList'
 
     -- * Request Lenses
     , flQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlFlagsList@ which the
--- 'FlagsList' request conforms to.
-type FlagsListAPI =
-     "flags" :> Get '[JSON] FlagsListResponse
+-- 'FlagsList'' request conforms to.
+type FlagsListResource =
+     "flags" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] FlagsListResponse
 
 -- | List all available database flags for Google Cloud SQL instances.
 --
--- /See:/ 'flagsList' smart constructor.
-data FlagsList = FlagsList
+-- /See:/ 'flagsList'' smart constructor.
+data FlagsList' = FlagsList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flUserIp      :: !(Maybe Text)
     , _flKey         :: !(Maybe Text)
     , _flOauthToken  :: !(Maybe Text)
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Text
+    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlagsList'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data FlagsList = FlagsList
 -- * 'flFields'
 --
 -- * 'flAlt'
-flagsList
-    :: FlagsList
-flagsList =
-    FlagsList
+flagsList'
+    :: FlagsList'
+flagsList' =
+    FlagsList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flUserIp = Nothing
     , _flKey = Nothing
     , _flOauthToken = Nothing
     , _flFields = Nothing
-    , _flAlt = "json"
+    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,16 +131,19 @@ flFields :: Lens' FlagsList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 -- | Data format for the response.
-flAlt :: Lens' FlagsList' Text
+flAlt :: Lens' FlagsList' Alt
 flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
 
 instance GoogleRequest FlagsList' where
         type Rs FlagsList' = FlagsListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u FlagsList{..}
-          = go _flQuotaUser _flPrettyPrint _flUserIp _flKey
+        requestWithRoute r u FlagsList'{..}
+          = go _flQuotaUser (Just _flPrettyPrint) _flUserIp
+              _flKey
               _flOauthToken
               _flFields
-              _flAlt
+              (Just _flAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FlagsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FlagsListResource)
+                      r
+                      u

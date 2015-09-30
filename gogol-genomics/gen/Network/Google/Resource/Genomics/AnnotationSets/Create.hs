@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- associated dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationSetsCreate@.
-module Genomics.AnnotationSets.Create
+module Network.Google.Resource.Genomics.AnnotationSets.Create
     (
     -- * REST Resource
-      AnnotationSetsCreateAPI
+      AnnotationSetsCreateResource
 
     -- * Creating a Request
-    , annotationSetsCreate
-    , AnnotationSetsCreate
+    , annotationSetsCreate'
+    , AnnotationSetsCreate'
 
     -- * Request Lenses
     , ascQuotaUser
@@ -43,22 +44,29 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationSetsCreate@ which the
--- 'AnnotationSetsCreate' request conforms to.
-type AnnotationSetsCreateAPI =
-     "annotationSets" :> Post '[JSON] AnnotationSet
+-- 'AnnotationSetsCreate'' request conforms to.
+type AnnotationSetsCreateResource =
+     "annotationSets" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] AnnotationSet
 
 -- | Creates a new annotation set. Caller must have WRITE permission for the
 -- associated dataset.
 --
--- /See:/ 'annotationSetsCreate' smart constructor.
-data AnnotationSetsCreate = AnnotationSetsCreate
+-- /See:/ 'annotationSetsCreate'' smart constructor.
+data AnnotationSetsCreate' = AnnotationSetsCreate'
     { _ascQuotaUser   :: !(Maybe Text)
     , _ascPrettyPrint :: !Bool
     , _ascUserIp      :: !(Maybe Text)
     , _ascKey         :: !(Maybe Text)
     , _ascOauthToken  :: !(Maybe Text)
     , _ascFields      :: !(Maybe Text)
-    , _ascAlt         :: !Text
+    , _ascAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsCreate'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data AnnotationSetsCreate = AnnotationSetsCreate
 -- * 'ascFields'
 --
 -- * 'ascAlt'
-annotationSetsCreate
-    :: AnnotationSetsCreate
-annotationSetsCreate =
-    AnnotationSetsCreate
+annotationSetsCreate'
+    :: AnnotationSetsCreate'
+annotationSetsCreate' =
+    AnnotationSetsCreate'
     { _ascQuotaUser = Nothing
     , _ascPrettyPrint = True
     , _ascUserIp = Nothing
     , _ascKey = Nothing
     , _ascOauthToken = Nothing
     , _ascFields = Nothing
-    , _ascAlt = "json"
+    , _ascAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,19 +136,20 @@ ascFields
   = lens _ascFields (\ s a -> s{_ascFields = a})
 
 -- | Data format for the response.
-ascAlt :: Lens' AnnotationSetsCreate' Text
+ascAlt :: Lens' AnnotationSetsCreate' Alt
 ascAlt = lens _ascAlt (\ s a -> s{_ascAlt = a})
 
 instance GoogleRequest AnnotationSetsCreate' where
         type Rs AnnotationSetsCreate' = AnnotationSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationSetsCreate{..}
-          = go _ascQuotaUser _ascPrettyPrint _ascUserIp _ascKey
+        requestWithRoute r u AnnotationSetsCreate'{..}
+          = go _ascQuotaUser (Just _ascPrettyPrint) _ascUserIp
+              _ascKey
               _ascOauthToken
               _ascFields
-              _ascAlt
+              (Just _ascAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationSetsCreateAPI)
+                      (Proxy :: Proxy AnnotationSetsCreateResource)
                       r
                       u

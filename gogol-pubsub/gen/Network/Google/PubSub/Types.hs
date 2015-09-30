@@ -85,6 +85,10 @@ module Network.Google.PubSub.Types
     , prMaxMessages
     , prReturnImmediately
 
+    -- * PubsubMessageAttributes
+    , PubsubMessageAttributes
+    , pubsubMessageAttributes
+
     -- * TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
@@ -120,6 +124,10 @@ module Network.Google.PubSub.Types
     , sName
     , sAckDeadlineSeconds
 
+    -- * PushConfigAttributes
+    , PushConfigAttributes
+    , pushConfigAttributes
+
     -- * Binding
     , Binding
     , binding
@@ -143,6 +151,6 @@ import           Network.Google.PubSub.Types.Product
 import           Network.Google.PubSub.Types.Sum
 
 -- | URL referring to version 'v1beta2' of the Google Cloud Pub/Sub API.
-pubSubURL :: BaseURL
+pubSubURL :: BaseUrl
 pubSubURL
   = BaseUrl Https "https://pubsub.googleapis.com/" 443

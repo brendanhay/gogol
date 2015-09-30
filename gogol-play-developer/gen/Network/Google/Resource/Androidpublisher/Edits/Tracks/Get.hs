@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the APK version codes that are in this track.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTracksGet@.
-module Androidpublisher.Edits.Tracks.Get
+module Network.Google.Resource.Androidpublisher.Edits.Tracks.Get
     (
     -- * REST Resource
-      EditsTracksGetAPI
+      EditsTracksGetResource
 
     -- * Creating a Request
-    , editsTracksGet
-    , EditsTracksGet
+    , editsTracksGet'
+    , EditsTracksGet'
 
     -- * Request Lenses
     , etgQuotaUser
@@ -46,20 +47,29 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTracksGet@ which the
--- 'EditsTracksGet' request conforms to.
-type EditsTracksGetAPI =
+-- 'EditsTracksGet'' request conforms to.
+type EditsTracksGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "tracks" :> Capture "track" Text :> Get '[JSON] Track
+           "tracks" :>
+             Capture "track" AndroidpublisherEditsTracksGetTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Track
 
 -- | Fetches the track configuration for the specified track type. Includes
 -- the APK version codes that are in this track.
 --
--- /See:/ 'editsTracksGet' smart constructor.
-data EditsTracksGet = EditsTracksGet
+-- /See:/ 'editsTracksGet'' smart constructor.
+data EditsTracksGet' = EditsTracksGet'
     { _etgQuotaUser   :: !(Maybe Text)
-    , _etgTrack       :: !Text
+    , _etgTrack       :: !AndroidpublisherEditsTracksGetTrack
     , _etgPrettyPrint :: !Bool
     , _etgPackageName :: !Text
     , _etgUserIp      :: !(Maybe Text)
@@ -67,7 +77,7 @@ data EditsTracksGet = EditsTracksGet
     , _etgOauthToken  :: !(Maybe Text)
     , _etgEditId      :: !Text
     , _etgFields      :: !(Maybe Text)
-    , _etgAlt         :: !Text
+    , _etgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksGet'' with the minimum fields required to make a request.
@@ -93,13 +103,13 @@ data EditsTracksGet = EditsTracksGet
 -- * 'etgFields'
 --
 -- * 'etgAlt'
-editsTracksGet
-    :: Text -- ^ 'track'
+editsTracksGet'
+    :: AndroidpublisherEditsTracksGetTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTracksGet
-editsTracksGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
-    EditsTracksGet
+    -> EditsTracksGet'
+editsTracksGet' pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
+    EditsTracksGet'
     { _etgQuotaUser = Nothing
     , _etgTrack = pEtgTrack_
     , _etgPrettyPrint = True
@@ -109,7 +119,7 @@ editsTracksGet pEtgTrack_ pEtgPackageName_ pEtgEditId_ =
     , _etgOauthToken = Nothing
     , _etgEditId = pEtgEditId_
     , _etgFields = Nothing
-    , _etgAlt = "json"
+    , _etgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,7 +130,7 @@ etgQuotaUser
   = lens _etgQuotaUser (\ s a -> s{_etgQuotaUser = a})
 
 -- | The track type to read or modify.
-etgTrack :: Lens' EditsTracksGet' Text
+etgTrack :: Lens' EditsTracksGet' AndroidpublisherEditsTracksGetTrack
 etgTrack = lens _etgTrack (\ s a -> s{_etgTrack = a})
 
 -- | Returns response with indentations and line breaks.
@@ -165,22 +175,23 @@ etgFields
   = lens _etgFields (\ s a -> s{_etgFields = a})
 
 -- | Data format for the response.
-etgAlt :: Lens' EditsTracksGet' Text
+etgAlt :: Lens' EditsTracksGet' Alt
 etgAlt = lens _etgAlt (\ s a -> s{_etgAlt = a})
 
 instance GoogleRequest EditsTracksGet' where
         type Rs EditsTracksGet' = Track
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTracksGet{..}
-          = go _etgQuotaUser _etgTrack _etgPrettyPrint
+        requestWithRoute r u EditsTracksGet'{..}
+          = go _etgQuotaUser _etgTrack (Just _etgPrettyPrint)
               _etgPackageName
               _etgUserIp
               _etgKey
               _etgOauthToken
               _etgEditId
               _etgFields
-              _etgAlt
+              (Just _etgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsTracksGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsTracksGetResource)
                       r
                       u

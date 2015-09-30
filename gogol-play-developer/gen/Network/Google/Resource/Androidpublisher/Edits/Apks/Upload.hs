@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,154 +20,163 @@
 
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsApksUpload@.
-module Androidpublisher.Edits.Apks.Upload
+module Network.Google.Resource.Androidpublisher.Edits.Apks.Upload
     (
     -- * REST Resource
-      EditsApksUploadAPI
+      EditsApksUploadResource
 
     -- * Creating a Request
-    , editsApksUpload
-    , EditsApksUpload
+    , editsApksUpload'
+    , EditsApksUpload'
 
     -- * Request Lenses
-    , eauaQuotaUser
-    , eauaPrettyPrint
-    , eauaPackageName
-    , eauaUserIp
-    , eauaKey
-    , eauaOauthToken
-    , eauaEditId
-    , eauaFields
-    , eauaAlt
+    , eauQuotaUser
+    , eauPrettyPrint
+    , eauPackageName
+    , eauUserIp
+    , eauKey
+    , eauOauthToken
+    , eauEditId
+    , eauFields
+    , eauAlt
     ) where
 
 import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsApksUpload@ which the
--- 'EditsApksUpload' request conforms to.
-type EditsApksUploadAPI =
+-- 'EditsApksUpload'' request conforms to.
+type EditsApksUploadResource =
      Capture "packageName" Text :>
        "edits" :>
-         Capture "editId" Text :> "apks" :> Post '[JSON] Apk
+         Capture "editId" Text :>
+           "apks" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Apk
 
 --
--- /See:/ 'editsApksUpload' smart constructor.
-data EditsApksUpload = EditsApksUpload
-    { _eauaQuotaUser   :: !(Maybe Text)
-    , _eauaPrettyPrint :: !Bool
-    , _eauaPackageName :: !Text
-    , _eauaUserIp      :: !(Maybe Text)
-    , _eauaKey         :: !(Maybe Text)
-    , _eauaOauthToken  :: !(Maybe Text)
-    , _eauaEditId      :: !Text
-    , _eauaFields      :: !(Maybe Text)
-    , _eauaAlt         :: !Text
+-- /See:/ 'editsApksUpload'' smart constructor.
+data EditsApksUpload' = EditsApksUpload'
+    { _eauQuotaUser   :: !(Maybe Text)
+    , _eauPrettyPrint :: !Bool
+    , _eauPackageName :: !Text
+    , _eauUserIp      :: !(Maybe Text)
+    , _eauKey         :: !(Maybe Text)
+    , _eauOauthToken  :: !(Maybe Text)
+    , _eauEditId      :: !Text
+    , _eauFields      :: !(Maybe Text)
+    , _eauAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsApksUpload'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eauaQuotaUser'
+-- * 'eauQuotaUser'
 --
--- * 'eauaPrettyPrint'
+-- * 'eauPrettyPrint'
 --
--- * 'eauaPackageName'
+-- * 'eauPackageName'
 --
--- * 'eauaUserIp'
+-- * 'eauUserIp'
 --
--- * 'eauaKey'
+-- * 'eauKey'
 --
--- * 'eauaOauthToken'
+-- * 'eauOauthToken'
 --
--- * 'eauaEditId'
+-- * 'eauEditId'
 --
--- * 'eauaFields'
+-- * 'eauFields'
 --
--- * 'eauaAlt'
-editsApksUpload
+-- * 'eauAlt'
+editsApksUpload'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsApksUpload
-editsApksUpload pEauaPackageName_ pEauaEditId_ =
-    EditsApksUpload
-    { _eauaQuotaUser = Nothing
-    , _eauaPrettyPrint = True
-    , _eauaPackageName = pEauaPackageName_
-    , _eauaUserIp = Nothing
-    , _eauaKey = Nothing
-    , _eauaOauthToken = Nothing
-    , _eauaEditId = pEauaEditId_
-    , _eauaFields = Nothing
-    , _eauaAlt = "json"
+    -> EditsApksUpload'
+editsApksUpload' pEauPackageName_ pEauEditId_ =
+    EditsApksUpload'
+    { _eauQuotaUser = Nothing
+    , _eauPrettyPrint = True
+    , _eauPackageName = pEauPackageName_
+    , _eauUserIp = Nothing
+    , _eauKey = Nothing
+    , _eauOauthToken = Nothing
+    , _eauEditId = pEauEditId_
+    , _eauFields = Nothing
+    , _eauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-eauaQuotaUser :: Lens' EditsApksUpload' (Maybe Text)
-eauaQuotaUser
-  = lens _eauaQuotaUser
-      (\ s a -> s{_eauaQuotaUser = a})
+eauQuotaUser :: Lens' EditsApksUpload' (Maybe Text)
+eauQuotaUser
+  = lens _eauQuotaUser (\ s a -> s{_eauQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-eauaPrettyPrint :: Lens' EditsApksUpload' Bool
-eauaPrettyPrint
-  = lens _eauaPrettyPrint
-      (\ s a -> s{_eauaPrettyPrint = a})
+eauPrettyPrint :: Lens' EditsApksUpload' Bool
+eauPrettyPrint
+  = lens _eauPrettyPrint
+      (\ s a -> s{_eauPrettyPrint = a})
 
 -- | Unique identifier for the Android app that is being updated; for
 -- example, \"com.spiffygame\".
-eauaPackageName :: Lens' EditsApksUpload' Text
-eauaPackageName
-  = lens _eauaPackageName
-      (\ s a -> s{_eauaPackageName = a})
+eauPackageName :: Lens' EditsApksUpload' Text
+eauPackageName
+  = lens _eauPackageName
+      (\ s a -> s{_eauPackageName = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eauaUserIp :: Lens' EditsApksUpload' (Maybe Text)
-eauaUserIp
-  = lens _eauaUserIp (\ s a -> s{_eauaUserIp = a})
+eauUserIp :: Lens' EditsApksUpload' (Maybe Text)
+eauUserIp
+  = lens _eauUserIp (\ s a -> s{_eauUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eauaKey :: Lens' EditsApksUpload' (Maybe Text)
-eauaKey = lens _eauaKey (\ s a -> s{_eauaKey = a})
+eauKey :: Lens' EditsApksUpload' (Maybe Text)
+eauKey = lens _eauKey (\ s a -> s{_eauKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eauaOauthToken :: Lens' EditsApksUpload' (Maybe Text)
-eauaOauthToken
-  = lens _eauaOauthToken
-      (\ s a -> s{_eauaOauthToken = a})
+eauOauthToken :: Lens' EditsApksUpload' (Maybe Text)
+eauOauthToken
+  = lens _eauOauthToken
+      (\ s a -> s{_eauOauthToken = a})
 
 -- | Unique identifier for this edit.
-eauaEditId :: Lens' EditsApksUpload' Text
-eauaEditId
-  = lens _eauaEditId (\ s a -> s{_eauaEditId = a})
+eauEditId :: Lens' EditsApksUpload' Text
+eauEditId
+  = lens _eauEditId (\ s a -> s{_eauEditId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-eauaFields :: Lens' EditsApksUpload' (Maybe Text)
-eauaFields
-  = lens _eauaFields (\ s a -> s{_eauaFields = a})
+eauFields :: Lens' EditsApksUpload' (Maybe Text)
+eauFields
+  = lens _eauFields (\ s a -> s{_eauFields = a})
 
 -- | Data format for the response.
-eauaAlt :: Lens' EditsApksUpload' Text
-eauaAlt = lens _eauaAlt (\ s a -> s{_eauaAlt = a})
+eauAlt :: Lens' EditsApksUpload' Alt
+eauAlt = lens _eauAlt (\ s a -> s{_eauAlt = a})
 
 instance GoogleRequest EditsApksUpload' where
         type Rs EditsApksUpload' = Apk
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsApksUpload{..}
-          = go _eauaQuotaUser _eauaPrettyPrint _eauaPackageName
-              _eauaUserIp
-              _eauaKey
-              _eauaOauthToken
-              _eauaEditId
-              _eauaFields
-              _eauaAlt
+        requestWithRoute r u EditsApksUpload'{..}
+          = go _eauQuotaUser (Just _eauPrettyPrint)
+              _eauPackageName
+              _eauUserIp
+              _eauKey
+              _eauOauthToken
+              _eauEditId
+              _eauFields
+              (Just _eauAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsApksUploadAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsApksUploadResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- batchInsert request is atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsRastersBatchInsert@.
-module Mapsengine.RasterCollections.Rasters.BatchInsert
+module Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchInsert
     (
     -- * REST Resource
-      RasterCollectionsRastersBatchInsertAPI
+      RasterCollectionsRastersBatchInsertResource
 
     -- * Creating a Request
-    , rasterCollectionsRastersBatchInsert
-    , RasterCollectionsRastersBatchInsert
+    , rasterCollectionsRastersBatchInsert'
+    , RasterCollectionsRastersBatchInsert'
 
     -- * Request Lenses
     , rcrbiQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsRastersBatchInsert@ which the
--- 'RasterCollectionsRastersBatchInsert' request conforms to.
-type RasterCollectionsRastersBatchInsertAPI =
+-- 'RasterCollectionsRastersBatchInsert'' request conforms to.
+type RasterCollectionsRastersBatchInsertResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "rasters" :>
            "batchInsert" :>
-             Post '[JSON]
-               RasterCollectionsRastersBatchInsertResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON]
+                             RasterCollectionsRastersBatchInsertResponse
 
 -- | Add rasters to an existing raster collection. Rasters must be
 -- successfully processed in order to be added to a raster collection. Up
 -- to 50 rasters can be included in a single batchInsert request. Each
 -- batchInsert request is atomic.
 --
--- /See:/ 'rasterCollectionsRastersBatchInsert' smart constructor.
-data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert
+-- /See:/ 'rasterCollectionsRastersBatchInsert'' smart constructor.
+data RasterCollectionsRastersBatchInsert' = RasterCollectionsRastersBatchInsert'
     { _rcrbiQuotaUser   :: !(Maybe Text)
     , _rcrbiPrettyPrint :: !Bool
     , _rcrbiUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert
     , _rcrbiId          :: !Text
     , _rcrbiOauthToken  :: !(Maybe Text)
     , _rcrbiFields      :: !(Maybe Text)
-    , _rcrbiAlt         :: !Text
+    , _rcrbiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchInsert'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data RasterCollectionsRastersBatchInsert = RasterCollectionsRastersBatchInsert
 -- * 'rcrbiFields'
 --
 -- * 'rcrbiAlt'
-rasterCollectionsRastersBatchInsert
+rasterCollectionsRastersBatchInsert'
     :: Text -- ^ 'id'
-    -> RasterCollectionsRastersBatchInsert
-rasterCollectionsRastersBatchInsert pRcrbiId_ =
-    RasterCollectionsRastersBatchInsert
+    -> RasterCollectionsRastersBatchInsert'
+rasterCollectionsRastersBatchInsert' pRcrbiId_ =
+    RasterCollectionsRastersBatchInsert'
     { _rcrbiQuotaUser = Nothing
     , _rcrbiPrettyPrint = True
     , _rcrbiUserIp = Nothing
@@ -103,7 +111,7 @@ rasterCollectionsRastersBatchInsert pRcrbiId_ =
     , _rcrbiId = pRcrbiId_
     , _rcrbiOauthToken = Nothing
     , _rcrbiFields = Nothing
-    , _rcrbiAlt = "json"
+    , _rcrbiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,7 +156,7 @@ rcrbiFields
   = lens _rcrbiFields (\ s a -> s{_rcrbiFields = a})
 
 -- | Data format for the response.
-rcrbiAlt :: Lens' RasterCollectionsRastersBatchInsert' Text
+rcrbiAlt :: Lens' RasterCollectionsRastersBatchInsert' Alt
 rcrbiAlt = lens _rcrbiAlt (\ s a -> s{_rcrbiAlt = a})
 
 instance GoogleRequest
@@ -157,16 +165,17 @@ instance GoogleRequest
              RasterCollectionsRastersBatchInsertResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RasterCollectionsRastersBatchInsert{..}
-          = go _rcrbiQuotaUser _rcrbiPrettyPrint _rcrbiUserIp
+          RasterCollectionsRastersBatchInsert'{..}
+          = go _rcrbiQuotaUser (Just _rcrbiPrettyPrint)
+              _rcrbiUserIp
               _rcrbiKey
               _rcrbiId
               _rcrbiOauthToken
               _rcrbiFields
-              _rcrbiAlt
+              (Just _rcrbiAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RasterCollectionsRastersBatchInsertAPI)
+                         Proxy RasterCollectionsRastersBatchInsertResource)
                       r
                       u

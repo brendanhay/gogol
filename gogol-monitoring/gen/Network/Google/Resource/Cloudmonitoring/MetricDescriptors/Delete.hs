@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete an existing metric.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringMetricDescriptorsDelete@.
-module Cloudmonitoring.MetricDescriptors.Delete
+module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Delete
     (
     -- * REST Resource
-      MetricDescriptorsDeleteAPI
+      MetricDescriptorsDeleteResource
 
     -- * Creating a Request
-    , metricDescriptorsDelete
-    , MetricDescriptorsDelete
+    , metricDescriptorsDelete'
+    , MetricDescriptorsDelete'
 
     -- * Request Lenses
     , mddQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringMetricDescriptorsDelete@ which the
--- 'MetricDescriptorsDelete' request conforms to.
-type MetricDescriptorsDeleteAPI =
+-- 'MetricDescriptorsDelete'' request conforms to.
+type MetricDescriptorsDeleteResource =
      Capture "project" Text :>
        "metricDescriptors" :>
          Capture "metric" Text :>
-           Delete '[JSON] DeleteMetricDescriptorResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Delete '[JSON] DeleteMetricDescriptorResponse
 
 -- | Delete an existing metric.
 --
--- /See:/ 'metricDescriptorsDelete' smart constructor.
-data MetricDescriptorsDelete = MetricDescriptorsDelete
+-- /See:/ 'metricDescriptorsDelete'' smart constructor.
+data MetricDescriptorsDelete' = MetricDescriptorsDelete'
     { _mddQuotaUser   :: !(Maybe Text)
     , _mddPrettyPrint :: !Bool
     , _mddProject     :: !Text
@@ -63,7 +71,7 @@ data MetricDescriptorsDelete = MetricDescriptorsDelete
     , _mddKey         :: !(Maybe Text)
     , _mddOauthToken  :: !(Maybe Text)
     , _mddFields      :: !(Maybe Text)
-    , _mddAlt         :: !Text
+    , _mddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data MetricDescriptorsDelete = MetricDescriptorsDelete
 -- * 'mddFields'
 --
 -- * 'mddAlt'
-metricDescriptorsDelete
+metricDescriptorsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'metric'
-    -> MetricDescriptorsDelete
-metricDescriptorsDelete pMddProject_ pMddMetric_ =
-    MetricDescriptorsDelete
+    -> MetricDescriptorsDelete'
+metricDescriptorsDelete' pMddProject_ pMddMetric_ =
+    MetricDescriptorsDelete'
     { _mddQuotaUser = Nothing
     , _mddPrettyPrint = True
     , _mddProject = pMddProject_
@@ -101,7 +109,7 @@ metricDescriptorsDelete pMddProject_ pMddMetric_ =
     , _mddKey = Nothing
     , _mddOauthToken = Nothing
     , _mddFields = Nothing
-    , _mddAlt = "json"
+    , _mddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,23 +159,23 @@ mddFields
   = lens _mddFields (\ s a -> s{_mddFields = a})
 
 -- | Data format for the response.
-mddAlt :: Lens' MetricDescriptorsDelete' Text
+mddAlt :: Lens' MetricDescriptorsDelete' Alt
 mddAlt = lens _mddAlt (\ s a -> s{_mddAlt = a})
 
 instance GoogleRequest MetricDescriptorsDelete' where
         type Rs MetricDescriptorsDelete' =
              DeleteMetricDescriptorResponse
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsDelete{..}
-          = go _mddQuotaUser _mddPrettyPrint _mddProject
+        requestWithRoute r u MetricDescriptorsDelete'{..}
+          = go _mddQuotaUser (Just _mddPrettyPrint) _mddProject
               _mddUserIp
               _mddMetric
               _mddKey
               _mddOauthToken
               _mddFields
-              _mddAlt
+              (Just _mddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetricDescriptorsDeleteAPI)
+                      (Proxy :: Proxy MetricDescriptorsDeleteResource)
                       r
                       u

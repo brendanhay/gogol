@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,209 +22,220 @@
 -- modify permissions for this project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsUpdate@.
-module Cloudresourcemanager.Projects.Update
+module Network.Google.Resource.Cloudresourcemanager.Projects.Update
     (
     -- * REST Resource
-      ProjectsUpdateAPI
+      ProjectsUpdateResource
 
     -- * Creating a Request
-    , projectsUpdate
-    , ProjectsUpdate
+    , projectsUpdate'
+    , ProjectsUpdate'
 
     -- * Request Lenses
-    , proXgafv
-    , proQuotaUser
-    , proPrettyPrint
-    , proUploadProtocol
-    , proPp
-    , proAccessToken
-    , proUploadType
-    , proBearerToken
-    , proKey
-    , proProjectId
-    , proOauthToken
-    , proFields
-    , proCallback
-    , proAlt
+    , puXgafv
+    , puQuotaUser
+    , puPrettyPrint
+    , puUploadProtocol
+    , puPp
+    , puAccessToken
+    , puUploadType
+    , puBearerToken
+    , puKey
+    , puProjectId
+    , puOauthToken
+    , puFields
+    , puCallback
+    , puAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsUpdate@ which the
--- 'ProjectsUpdate' request conforms to.
-type ProjectsUpdateAPI =
+-- 'ProjectsUpdate'' request conforms to.
+type ProjectsUpdateResource =
      "v1beta1" :>
        "projects" :>
-         Capture "projectId" Text :> Put '[JSON] Project
+         Capture "projectId" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Put '[JSON] Project
 
 -- | Updates the attributes of the project identified by the specified
 -- \`project_id\` (for example, \`my-project-123\`). The caller must have
 -- modify permissions for this project.
 --
--- /See:/ 'projectsUpdate' smart constructor.
-data ProjectsUpdate = ProjectsUpdate
-    { _proXgafv          :: !(Maybe Text)
-    , _proQuotaUser      :: !(Maybe Text)
-    , _proPrettyPrint    :: !Bool
-    , _proUploadProtocol :: !(Maybe Text)
-    , _proPp             :: !Bool
-    , _proAccessToken    :: !(Maybe Text)
-    , _proUploadType     :: !(Maybe Text)
-    , _proBearerToken    :: !(Maybe Text)
-    , _proKey            :: !(Maybe Text)
-    , _proProjectId      :: !Text
-    , _proOauthToken     :: !(Maybe Text)
-    , _proFields         :: !(Maybe Text)
-    , _proCallback       :: !(Maybe Text)
-    , _proAlt            :: !Text
+-- /See:/ 'projectsUpdate'' smart constructor.
+data ProjectsUpdate' = ProjectsUpdate'
+    { _puXgafv          :: !(Maybe Text)
+    , _puQuotaUser      :: !(Maybe Text)
+    , _puPrettyPrint    :: !Bool
+    , _puUploadProtocol :: !(Maybe Text)
+    , _puPp             :: !Bool
+    , _puAccessToken    :: !(Maybe Text)
+    , _puUploadType     :: !(Maybe Text)
+    , _puBearerToken    :: !(Maybe Text)
+    , _puKey            :: !(Maybe Text)
+    , _puProjectId      :: !Text
+    , _puOauthToken     :: !(Maybe Text)
+    , _puFields         :: !(Maybe Text)
+    , _puCallback       :: !(Maybe Text)
+    , _puAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'proXgafv'
+-- * 'puXgafv'
 --
--- * 'proQuotaUser'
+-- * 'puQuotaUser'
 --
--- * 'proPrettyPrint'
+-- * 'puPrettyPrint'
 --
--- * 'proUploadProtocol'
+-- * 'puUploadProtocol'
 --
--- * 'proPp'
+-- * 'puPp'
 --
--- * 'proAccessToken'
+-- * 'puAccessToken'
 --
--- * 'proUploadType'
+-- * 'puUploadType'
 --
--- * 'proBearerToken'
+-- * 'puBearerToken'
 --
--- * 'proKey'
+-- * 'puKey'
 --
--- * 'proProjectId'
+-- * 'puProjectId'
 --
--- * 'proOauthToken'
+-- * 'puOauthToken'
 --
--- * 'proFields'
+-- * 'puFields'
 --
--- * 'proCallback'
+-- * 'puCallback'
 --
--- * 'proAlt'
-projectsUpdate
+-- * 'puAlt'
+projectsUpdate'
     :: Text -- ^ 'projectId'
-    -> ProjectsUpdate
-projectsUpdate pProProjectId_ =
-    ProjectsUpdate
-    { _proXgafv = Nothing
-    , _proQuotaUser = Nothing
-    , _proPrettyPrint = True
-    , _proUploadProtocol = Nothing
-    , _proPp = True
-    , _proAccessToken = Nothing
-    , _proUploadType = Nothing
-    , _proBearerToken = Nothing
-    , _proKey = Nothing
-    , _proProjectId = pProProjectId_
-    , _proOauthToken = Nothing
-    , _proFields = Nothing
-    , _proCallback = Nothing
-    , _proAlt = "json"
+    -> ProjectsUpdate'
+projectsUpdate' pPuProjectId_ =
+    ProjectsUpdate'
+    { _puXgafv = Nothing
+    , _puQuotaUser = Nothing
+    , _puPrettyPrint = True
+    , _puUploadProtocol = Nothing
+    , _puPp = True
+    , _puAccessToken = Nothing
+    , _puUploadType = Nothing
+    , _puBearerToken = Nothing
+    , _puKey = Nothing
+    , _puProjectId = pPuProjectId_
+    , _puOauthToken = Nothing
+    , _puFields = Nothing
+    , _puCallback = Nothing
+    , _puAlt = "json"
     }
 
 -- | V1 error format.
-proXgafv :: Lens' ProjectsUpdate' (Maybe Text)
-proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
+puXgafv :: Lens' ProjectsUpdate' (Maybe Text)
+puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters.
-proQuotaUser :: Lens' ProjectsUpdate' (Maybe Text)
-proQuotaUser
-  = lens _proQuotaUser (\ s a -> s{_proQuotaUser = a})
+puQuotaUser :: Lens' ProjectsUpdate' (Maybe Text)
+puQuotaUser
+  = lens _puQuotaUser (\ s a -> s{_puQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-proPrettyPrint :: Lens' ProjectsUpdate' Bool
-proPrettyPrint
-  = lens _proPrettyPrint
-      (\ s a -> s{_proPrettyPrint = a})
+puPrettyPrint :: Lens' ProjectsUpdate' Bool
+puPrettyPrint
+  = lens _puPrettyPrint
+      (\ s a -> s{_puPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-proUploadProtocol :: Lens' ProjectsUpdate' (Maybe Text)
-proUploadProtocol
-  = lens _proUploadProtocol
-      (\ s a -> s{_proUploadProtocol = a})
+puUploadProtocol :: Lens' ProjectsUpdate' (Maybe Text)
+puUploadProtocol
+  = lens _puUploadProtocol
+      (\ s a -> s{_puUploadProtocol = a})
 
 -- | Pretty-print response.
-proPp :: Lens' ProjectsUpdate' Bool
-proPp = lens _proPp (\ s a -> s{_proPp = a})
+puPp :: Lens' ProjectsUpdate' Bool
+puPp = lens _puPp (\ s a -> s{_puPp = a})
 
 -- | OAuth access token.
-proAccessToken :: Lens' ProjectsUpdate' (Maybe Text)
-proAccessToken
-  = lens _proAccessToken
-      (\ s a -> s{_proAccessToken = a})
+puAccessToken :: Lens' ProjectsUpdate' (Maybe Text)
+puAccessToken
+  = lens _puAccessToken
+      (\ s a -> s{_puAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-proUploadType :: Lens' ProjectsUpdate' (Maybe Text)
-proUploadType
-  = lens _proUploadType
-      (\ s a -> s{_proUploadType = a})
+puUploadType :: Lens' ProjectsUpdate' (Maybe Text)
+puUploadType
+  = lens _puUploadType (\ s a -> s{_puUploadType = a})
 
 -- | OAuth bearer token.
-proBearerToken :: Lens' ProjectsUpdate' (Maybe Text)
-proBearerToken
-  = lens _proBearerToken
-      (\ s a -> s{_proBearerToken = a})
+puBearerToken :: Lens' ProjectsUpdate' (Maybe Text)
+puBearerToken
+  = lens _puBearerToken
+      (\ s a -> s{_puBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' ProjectsUpdate' (Maybe Text)
-proKey = lens _proKey (\ s a -> s{_proKey = a})
+puKey :: Lens' ProjectsUpdate' (Maybe Text)
+puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | The project ID (for example, \`my-project-123\`). Required.
-proProjectId :: Lens' ProjectsUpdate' Text
-proProjectId
-  = lens _proProjectId (\ s a -> s{_proProjectId = a})
+puProjectId :: Lens' ProjectsUpdate' Text
+puProjectId
+  = lens _puProjectId (\ s a -> s{_puProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-proOauthToken :: Lens' ProjectsUpdate' (Maybe Text)
-proOauthToken
-  = lens _proOauthToken
-      (\ s a -> s{_proOauthToken = a})
+puOauthToken :: Lens' ProjectsUpdate' (Maybe Text)
+puOauthToken
+  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-proFields :: Lens' ProjectsUpdate' (Maybe Text)
-proFields
-  = lens _proFields (\ s a -> s{_proFields = a})
+puFields :: Lens' ProjectsUpdate' (Maybe Text)
+puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 -- | JSONP
-proCallback :: Lens' ProjectsUpdate' (Maybe Text)
-proCallback
-  = lens _proCallback (\ s a -> s{_proCallback = a})
+puCallback :: Lens' ProjectsUpdate' (Maybe Text)
+puCallback
+  = lens _puCallback (\ s a -> s{_puCallback = a})
 
 -- | Data format for response.
-proAlt :: Lens' ProjectsUpdate' Text
-proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
+puAlt :: Lens' ProjectsUpdate' Text
+puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
 
 instance GoogleRequest ProjectsUpdate' where
         type Rs ProjectsUpdate' = Project
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsUpdate{..}
-          = go _proXgafv _proQuotaUser _proPrettyPrint
-              _proUploadProtocol
-              _proPp
-              _proAccessToken
-              _proUploadType
-              _proBearerToken
-              _proKey
-              _proProjectId
-              _proOauthToken
-              _proFields
-              _proCallback
-              _proAlt
+        requestWithRoute r u ProjectsUpdate'{..}
+          = go _puXgafv _puQuotaUser (Just _puPrettyPrint)
+              _puUploadProtocol
+              (Just _puPp)
+              _puAccessToken
+              _puUploadType
+              _puBearerToken
+              _puKey
+              _puProjectId
+              _puOauthToken
+              _puFields
+              _puCallback
+              (Just _puAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsUpdateResource)
                       r
                       u

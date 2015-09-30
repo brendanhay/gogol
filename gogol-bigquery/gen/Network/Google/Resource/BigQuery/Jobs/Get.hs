@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- who ran the job, or have the Is Owner project role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryJobsGet@.
-module BigQuery.Jobs.Get
+module Network.Google.Resource.BigQuery.Jobs.Get
     (
     -- * REST Resource
-      JobsGetAPI
+      JobsGetResource
 
     -- * Creating a Request
-    , jobsGet
-    , JobsGet
+    , jobsGet'
+    , JobsGet'
 
     -- * Request Lenses
     , jgQuotaUser
@@ -46,18 +47,26 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryJobsGet@ which the
--- 'JobsGet' request conforms to.
-type JobsGetAPI =
+-- 'JobsGet'' request conforms to.
+type JobsGetResource =
      "projects" :>
        Capture "projectId" Text :>
-         "jobs" :> Capture "jobId" Text :> Get '[JSON] Job
+         "jobs" :>
+           Capture "jobId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Job
 
 -- | Returns information about a specific job. Job information is available
 -- for a six month period after creation. Requires that you\'re the person
 -- who ran the job, or have the Is Owner project role.
 --
--- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+-- /See:/ 'jobsGet'' smart constructor.
+data JobsGet' = JobsGet'
     { _jgQuotaUser   :: !(Maybe Text)
     , _jgPrettyPrint :: !Bool
     , _jgJobId       :: !Text
@@ -66,7 +75,7 @@ data JobsGet = JobsGet
     , _jgProjectId   :: !Text
     , _jgOauthToken  :: !(Maybe Text)
     , _jgFields      :: !(Maybe Text)
-    , _jgAlt         :: !Text
+    , _jgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
@@ -90,12 +99,12 @@ data JobsGet = JobsGet
 -- * 'jgFields'
 --
 -- * 'jgAlt'
-jobsGet
+jobsGet'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> JobsGet
-jobsGet pJgJobId_ pJgProjectId_ =
-    JobsGet
+    -> JobsGet'
+jobsGet' pJgJobId_ pJgProjectId_ =
+    JobsGet'
     { _jgQuotaUser = Nothing
     , _jgPrettyPrint = True
     , _jgJobId = pJgJobId_
@@ -104,7 +113,7 @@ jobsGet pJgJobId_ pJgProjectId_ =
     , _jgProjectId = pJgProjectId_
     , _jgOauthToken = Nothing
     , _jgFields = Nothing
-    , _jgAlt = "json"
+    , _jgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,18 +159,20 @@ jgFields :: Lens' JobsGet' (Maybe Text)
 jgFields = lens _jgFields (\ s a -> s{_jgFields = a})
 
 -- | Data format for the response.
-jgAlt :: Lens' JobsGet' Text
+jgAlt :: Lens' JobsGet' Alt
 jgAlt = lens _jgAlt (\ s a -> s{_jgAlt = a})
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u JobsGet{..}
-          = go _jgQuotaUser _jgPrettyPrint _jgJobId _jgUserIp
+        requestWithRoute r u JobsGet'{..}
+          = go _jgQuotaUser (Just _jgPrettyPrint) _jgJobId
+              _jgUserIp
               _jgKey
               _jgProjectId
               _jgOauthToken
               _jgFields
-              _jgAlt
+              (Just _jgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsGetResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionviewersPatch@.
-module Androidenterprise.Collectionviewers.Patch
+module Network.Google.Resource.Androidenterprise.Collectionviewers.Patch
     (
     -- * REST Resource
-      CollectionviewersPatchAPI
+      CollectionviewersPatchResource
 
     -- * Creating a Request
-    , collectionviewersPatch
-    , CollectionviewersPatch
+    , collectionviewersPatch'
+    , CollectionviewersPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -48,22 +49,29 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionviewersPatch@ which the
--- 'CollectionviewersPatch' request conforms to.
-type CollectionviewersPatchAPI =
+-- 'CollectionviewersPatch'' request conforms to.
+type CollectionviewersPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
            Capture "collectionId" Text :>
              "users" :>
-               Capture "userId" Text :> Patch '[JSON] User
+               Capture "userId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] User
 
 -- | Adds the user to the list of those specifically allowed to see the
 -- collection. If the collection\'s visibility is set to viewersOnly then
 -- only such users will see the collection. This method supports patch
 -- semantics.
 --
--- /See:/ 'collectionviewersPatch' smart constructor.
-data CollectionviewersPatch = CollectionviewersPatch
+-- /See:/ 'collectionviewersPatch'' smart constructor.
+data CollectionviewersPatch' = CollectionviewersPatch'
     { _cpQuotaUser    :: !(Maybe Text)
     , _cpPrettyPrint  :: !Bool
     , _cpEnterpriseId :: !Text
@@ -73,7 +81,7 @@ data CollectionviewersPatch = CollectionviewersPatch
     , _cpKey          :: !(Maybe Text)
     , _cpOauthToken   :: !(Maybe Text)
     , _cpFields       :: !(Maybe Text)
-    , _cpAlt          :: !Text
+    , _cpAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionviewersPatch'' with the minimum fields required to make a request.
@@ -99,13 +107,13 @@ data CollectionviewersPatch = CollectionviewersPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-collectionviewersPatch
+collectionviewersPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
     -> Text -- ^ 'userId'
-    -> CollectionviewersPatch
-collectionviewersPatch pCpEnterpriseId_ pCpCollectionId_ pCpUserId_ =
-    CollectionviewersPatch
+    -> CollectionviewersPatch'
+collectionviewersPatch' pCpEnterpriseId_ pCpCollectionId_ pCpUserId_ =
+    CollectionviewersPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpEnterpriseId = pCpEnterpriseId_
@@ -115,7 +123,7 @@ collectionviewersPatch pCpEnterpriseId_ pCpCollectionId_ pCpUserId_ =
     , _cpKey = Nothing
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ cpFields :: Lens' CollectionviewersPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CollectionviewersPatch' Text
+cpAlt :: Lens' CollectionviewersPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CollectionviewersPatch' where
         type Rs CollectionviewersPatch' = User
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionviewersPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpEnterpriseId
+        requestWithRoute r u CollectionviewersPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint)
+              _cpEnterpriseId
               _cpUserIp
               _cpCollectionId
               _cpUserId
               _cpKey
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionviewersPatchAPI)
+                      (Proxy :: Proxy CollectionviewersPatchResource)
                       r
                       u

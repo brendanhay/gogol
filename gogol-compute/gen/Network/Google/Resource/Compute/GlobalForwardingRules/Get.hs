@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified ForwardingRule resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalForwardingRulesGet@.
-module Compute.GlobalForwardingRules.Get
+module Network.Google.Resource.Compute.GlobalForwardingRules.Get
     (
     -- * REST Resource
-      GlobalForwardingRulesGetAPI
+      GlobalForwardingRulesGetResource
 
     -- * Creating a Request
-    , globalForwardingRulesGet
-    , GlobalForwardingRulesGet
+    , globalForwardingRulesGet'
+    , GlobalForwardingRulesGet'
 
     -- * Request Lenses
     , gfrgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalForwardingRulesGet@ which the
--- 'GlobalForwardingRulesGet' request conforms to.
-type GlobalForwardingRulesGetAPI =
+-- 'GlobalForwardingRulesGet'' request conforms to.
+type GlobalForwardingRulesGetResource =
      Capture "project" Text :>
        "global" :>
          "forwardingRules" :>
            Capture "forwardingRule" Text :>
-             Get '[JSON] ForwardingRule
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ForwardingRule
 
 -- | Returns the specified ForwardingRule resource.
 --
--- /See:/ 'globalForwardingRulesGet' smart constructor.
-data GlobalForwardingRulesGet = GlobalForwardingRulesGet
+-- /See:/ 'globalForwardingRulesGet'' smart constructor.
+data GlobalForwardingRulesGet' = GlobalForwardingRulesGet'
     { _gfrgQuotaUser      :: !(Maybe Text)
     , _gfrgPrettyPrint    :: !Bool
     , _gfrgProject        :: !Text
@@ -64,7 +71,7 @@ data GlobalForwardingRulesGet = GlobalForwardingRulesGet
     , _gfrgKey            :: !(Maybe Text)
     , _gfrgOauthToken     :: !(Maybe Text)
     , _gfrgFields         :: !(Maybe Text)
-    , _gfrgAlt            :: !Text
+    , _gfrgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data GlobalForwardingRulesGet = GlobalForwardingRulesGet
 -- * 'gfrgFields'
 --
 -- * 'gfrgAlt'
-globalForwardingRulesGet
+globalForwardingRulesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
-    -> GlobalForwardingRulesGet
-globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
-    GlobalForwardingRulesGet
+    -> GlobalForwardingRulesGet'
+globalForwardingRulesGet' pGfrgProject_ pGfrgForwardingRule_ =
+    GlobalForwardingRulesGet'
     { _gfrgQuotaUser = Nothing
     , _gfrgPrettyPrint = True
     , _gfrgProject = pGfrgProject_
@@ -102,7 +109,7 @@ globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
     , _gfrgKey = Nothing
     , _gfrgOauthToken = Nothing
     , _gfrgFields = Nothing
-    , _gfrgAlt = "json"
+    , _gfrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +161,24 @@ gfrgFields
   = lens _gfrgFields (\ s a -> s{_gfrgFields = a})
 
 -- | Data format for the response.
-gfrgAlt :: Lens' GlobalForwardingRulesGet' Text
+gfrgAlt :: Lens' GlobalForwardingRulesGet' Alt
 gfrgAlt = lens _gfrgAlt (\ s a -> s{_gfrgAlt = a})
 
 instance GoogleRequest GlobalForwardingRulesGet'
          where
         type Rs GlobalForwardingRulesGet' = ForwardingRule
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalForwardingRulesGet{..}
-          = go _gfrgQuotaUser _gfrgPrettyPrint _gfrgProject
+        requestWithRoute r u GlobalForwardingRulesGet'{..}
+          = go _gfrgQuotaUser (Just _gfrgPrettyPrint)
+              _gfrgProject
               _gfrgForwardingRule
               _gfrgUserIp
               _gfrgKey
               _gfrgOauthToken
               _gfrgFields
-              _gfrgAlt
+              (Just _gfrgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalForwardingRulesGetAPI)
+                      (Proxy :: Proxy GlobalForwardingRulesGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | create user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersInsert@.
-module Directory.Users.Insert
+module Network.Google.Resource.Directory.Users.Insert
     (
     -- * REST Resource
-      UsersInsertAPI
+      UsersInsertResource
 
     -- * Creating a Request
-    , usersInsert
-    , UsersInsert
+    , usersInsert'
+    , UsersInsert'
 
     -- * Request Lenses
     , uiQuotaUser
@@ -42,20 +43,28 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersInsert@ which the
--- 'UsersInsert' request conforms to.
-type UsersInsertAPI = "users" :> Post '[JSON] User
+-- 'UsersInsert'' request conforms to.
+type UsersInsertResource =
+     "users" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] User
 
 -- | create user.
 --
--- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+-- /See:/ 'usersInsert'' smart constructor.
+data UsersInsert' = UsersInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiUserIp      :: !(Maybe Text)
     , _uiKey         :: !(Maybe Text)
     , _uiOauthToken  :: !(Maybe Text)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Text
+    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
@@ -75,17 +84,17 @@ data UsersInsert = UsersInsert
 -- * 'uiFields'
 --
 -- * 'uiAlt'
-usersInsert
-    :: UsersInsert
-usersInsert =
-    UsersInsert
+usersInsert'
+    :: UsersInsert'
+usersInsert' =
+    UsersInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiUserIp = Nothing
     , _uiKey = Nothing
     , _uiOauthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = "json"
+    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,16 +131,20 @@ uiFields :: Lens' UsersInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 -- | Data format for the response.
-uiAlt :: Lens' UsersInsert' Text
+uiAlt :: Lens' UsersInsert' Alt
 uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = User
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersInsert{..}
-          = go _uiQuotaUser _uiPrettyPrint _uiUserIp _uiKey
+        requestWithRoute r u UsersInsert'{..}
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIp
+              _uiKey
               _uiOauthToken
               _uiFields
-              _uiAlt
+              (Just _uiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersInsertResource)
+                      r
+                      u

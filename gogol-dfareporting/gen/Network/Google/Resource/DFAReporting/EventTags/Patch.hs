@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing event tag. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsPatch@.
-module DFAReporting.EventTags.Patch
+module Network.Google.Resource.DFAReporting.EventTags.Patch
     (
     -- * REST Resource
-      EventTagsPatchAPI
+      EventTagsPatchResource
 
     -- * Creating a Request
-    , eventTagsPatch
-    , EventTagsPatch
+    , eventTagsPatch'
+    , EventTagsPatch'
 
     -- * Request Lenses
     , etpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsPatch@ which the
--- 'EventTagsPatch' request conforms to.
-type EventTagsPatchAPI =
+-- 'EventTagsPatch'' request conforms to.
+type EventTagsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           QueryParam "id" Int64 :> Patch '[JSON] EventTag
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] EventTag
 
 -- | Updates an existing event tag. This method supports patch semantics.
 --
--- /See:/ 'eventTagsPatch' smart constructor.
-data EventTagsPatch = EventTagsPatch
+-- /See:/ 'eventTagsPatch'' smart constructor.
+data EventTagsPatch' = EventTagsPatch'
     { _etpQuotaUser   :: !(Maybe Text)
     , _etpPrettyPrint :: !Bool
     , _etpUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data EventTagsPatch = EventTagsPatch
     , _etpId          :: !Int64
     , _etpOauthToken  :: !(Maybe Text)
     , _etpFields      :: !(Maybe Text)
-    , _etpAlt         :: !Text
+    , _etpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data EventTagsPatch = EventTagsPatch
 -- * 'etpFields'
 --
 -- * 'etpAlt'
-eventTagsPatch
+eventTagsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> EventTagsPatch
-eventTagsPatch pEtpProfileId_ pEtpId_ =
-    EventTagsPatch
+    -> EventTagsPatch'
+eventTagsPatch' pEtpProfileId_ pEtpId_ =
+    EventTagsPatch'
     { _etpQuotaUser = Nothing
     , _etpPrettyPrint = True
     , _etpUserIp = Nothing
@@ -101,7 +109,7 @@ eventTagsPatch pEtpProfileId_ pEtpId_ =
     , _etpId = pEtpId_
     , _etpOauthToken = Nothing
     , _etpFields = Nothing
-    , _etpAlt = "json"
+    , _etpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ etpFields
   = lens _etpFields (\ s a -> s{_etpFields = a})
 
 -- | Data format for the response.
-etpAlt :: Lens' EventTagsPatch' Text
+etpAlt :: Lens' EventTagsPatch' Alt
 etpAlt = lens _etpAlt (\ s a -> s{_etpAlt = a})
 
 instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsPatch{..}
-          = go _etpQuotaUser _etpPrettyPrint _etpUserIp
+        requestWithRoute r u EventTagsPatch'{..}
+          = go _etpQuotaUser (Just _etpPrettyPrint) _etpUserIp
               _etpProfileId
               _etpKey
               (Just _etpId)
               _etpOauthToken
               _etpFields
-              _etpAlt
+              (Just _etpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsPatchResource)
                       r
                       u

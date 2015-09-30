@@ -374,7 +374,7 @@ data Tag = Tag
     , _tagPriority          :: !(Maybe (Maybe Parameter))
     , _tagTeardownTag       :: !(Maybe [Maybe TeardownTag])
     , _tagFingerprint       :: !(Maybe Text)
-    , _tagTagFiringOption   :: !(Maybe Text)
+    , _tagTagFiringOption   :: !(Maybe TagTagFiringOption)
     , _tagAccountId         :: !(Maybe Text)
     , _tagTagId             :: !(Maybe Text)
     , _tagName              :: !(Maybe Text)
@@ -514,7 +514,7 @@ tagFingerprint
       (\ s a -> s{_tagFingerprint = a})
 
 -- | Option to fire this tag.
-tagTagFiringOption :: Lens' Tag (Maybe Text)
+tagTagFiringOption :: Lens' Tag (Maybe TagTagFiringOption)
 tagTagFiringOption
   = lens _tagTagFiringOption
       (\ s a -> s{_tagTagFiringOption = a})
@@ -983,7 +983,7 @@ instance ToJSON ContainerVersionHeader where
 --
 -- /See:/ 'accountAccess' smart constructor.
 newtype AccountAccess = AccountAccess
-    { _aaPermission :: Maybe [Text]
+    { _aaPermission :: Maybe [AccountAccessPermission]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountAccess' with the minimum fields required to make a request.
@@ -1000,7 +1000,7 @@ accountAccess =
 
 -- | List of Account permissions. Valid account permissions are read and
 -- manage.
-aaPermission :: Lens' AccountAccess [Text]
+aaPermission :: Lens' AccountAccess [AccountAccessPermission]
 aaPermission
   = lens _aaPermission (\ s a -> s{_aaPermission = a})
       . _Default
@@ -1509,52 +1509,53 @@ instance ToJSON Folder where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aShareData   :: !(Maybe Bool)
-    , _aFingerprint :: !(Maybe Text)
-    , _aAccountId   :: !(Maybe Text)
-    , _aName        :: !(Maybe Text)
+    { _aaShareData   :: !(Maybe Bool)
+    , _aaFingerprint :: !(Maybe Text)
+    , _aaAccountId   :: !(Maybe Text)
+    , _aaName        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aShareData'
+-- * 'aaShareData'
 --
--- * 'aFingerprint'
+-- * 'aaFingerprint'
 --
--- * 'aAccountId'
+-- * 'aaAccountId'
 --
--- * 'aName'
+-- * 'aaName'
 account
     :: Account
 account =
     Account
-    { _aShareData = Nothing
-    , _aFingerprint = Nothing
-    , _aAccountId = Nothing
-    , _aName = Nothing
+    { _aaShareData = Nothing
+    , _aaFingerprint = Nothing
+    , _aaAccountId = Nothing
+    , _aaName = Nothing
     }
 
 -- | Whether the account shares data anonymously with Google and others.
-aShareData :: Lens' Account (Maybe Bool)
-aShareData
-  = lens _aShareData (\ s a -> s{_aShareData = a})
+aaShareData :: Lens' Account (Maybe Bool)
+aaShareData
+  = lens _aaShareData (\ s a -> s{_aaShareData = a})
 
 -- | The fingerprint of the GTM Account as computed at storage time. This
 -- value is recomputed whenever the account is modified.
-aFingerprint :: Lens' Account (Maybe Text)
-aFingerprint
-  = lens _aFingerprint (\ s a -> s{_aFingerprint = a})
+aaFingerprint :: Lens' Account (Maybe Text)
+aaFingerprint
+  = lens _aaFingerprint
+      (\ s a -> s{_aaFingerprint = a})
 
 -- | The Account ID uniquely identifies the GTM Account.
-aAccountId :: Lens' Account (Maybe Text)
-aAccountId
-  = lens _aAccountId (\ s a -> s{_aAccountId = a})
+aaAccountId :: Lens' Account (Maybe Text)
+aaAccountId
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
 
 -- | Account display name.
-aName :: Lens' Account (Maybe Text)
-aName = lens _aName (\ s a -> s{_aName = a})
+aaName :: Lens' Account (Maybe Text)
+aaName = lens _aaName (\ s a -> s{_aaName = a})
 
 instance FromJSON Account where
         parseJSON
@@ -1569,10 +1570,10 @@ instance ToJSON Account where
         toJSON Account{..}
           = object
               (catMaybes
-                 [("shareData" .=) <$> _aShareData,
-                  ("fingerprint" .=) <$> _aFingerprint,
-                  ("accountId" .=) <$> _aAccountId,
-                  ("name" .=) <$> _aName])
+                 [("shareData" .=) <$> _aaShareData,
+                  ("fingerprint" .=) <$> _aaFingerprint,
+                  ("accountId" .=) <$> _aaAccountId,
+                  ("name" .=) <$> _aaName])
 
 -- | List container versions response.
 --
@@ -1634,8 +1635,8 @@ instance ToJSON ListContainerVersionsResponse where
 -- /See:/ 'container' smart constructor.
 data Container = Container
     { _cPublicId               :: !(Maybe Text)
-    , _cUsageContext           :: !(Maybe [Text])
-    , _cEnabledBuiltInVariable :: !(Maybe [Text])
+    , _cUsageContext           :: !(Maybe [ContainerUsageContext])
+    , _cEnabledBuiltInVariable :: !(Maybe [ContainerEnabledBuiltInVariable])
     , _cContainerId            :: !(Maybe Text)
     , _cFingerprint            :: !(Maybe Text)
     , _cTimeZoneCountryId      :: !(Maybe Text)
@@ -1695,7 +1696,7 @@ cPublicId
 
 -- | List of Usage Contexts for the Container. Valid values include: web,
 -- android, ios.
-cUsageContext :: Lens' Container [Text]
+cUsageContext :: Lens' Container [ContainerUsageContext]
 cUsageContext
   = lens _cUsageContext
       (\ s a -> s{_cUsageContext = a})
@@ -1709,7 +1710,7 @@ cUsageContext
 -- errorLine, newHistoryFragment, oldHistoryFragment, newHistoryState,
 -- oldHistoryState, historySource, containerVersion, debugMode,
 -- randomNumber, containerId.
-cEnabledBuiltInVariable :: Lens' Container [Text]
+cEnabledBuiltInVariable :: Lens' Container [ContainerEnabledBuiltInVariable]
 cEnabledBuiltInVariable
   = lens _cEnabledBuiltInVariable
       (\ s a -> s{_cEnabledBuiltInVariable = a})
@@ -2198,7 +2199,7 @@ data Trigger = Trigger
     , _tWaitForTagsTimeout  :: !(Maybe (Maybe Parameter))
     , _tLimit               :: !(Maybe (Maybe Parameter))
     , _tFilter              :: !(Maybe [Maybe Condition])
-    , _tType                :: !(Maybe Text)
+    , _tType                :: !(Maybe TriggerType)
     , _tVideoPercentageList :: !(Maybe (Maybe Parameter))
     , _tEventName           :: !(Maybe (Maybe Parameter))
     , _tWaitForTags         :: !(Maybe (Maybe Parameter))
@@ -2372,7 +2373,7 @@ tFilter
       . _Coerce
 
 -- | Defines the data layer event that causes this trigger.
-tType :: Lens' Trigger (Maybe Text)
+tType :: Lens' Trigger (Maybe TriggerType)
 tType = lens _tType (\ s a -> s{_tType = a})
 
 -- | List of integer percentage values. The trigger will fire as each
@@ -2448,7 +2449,7 @@ instance ToJSON Trigger where
 --
 -- /See:/ 'condition' smart constructor.
 data Condition = Condition
-    { _cType      :: !(Maybe Text)
+    { _cType      :: !(Maybe ConditionType)
     , _cParameter :: !(Maybe [Maybe Parameter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2468,7 +2469,7 @@ condition =
     }
 
 -- | The type of operator for this condition.
-cType :: Lens' Condition (Maybe Text)
+cType :: Lens' Condition (Maybe ConditionType)
 cType = lens _cType (\ s a -> s{_cType = a})
 
 -- | A list of named parameters (key\/value), depending on the condition\'s
@@ -2569,7 +2570,7 @@ instance ToJSON FolderEntities where
 -- /See:/ 'containerAccess' smart constructor.
 data ContainerAccess = ContainerAccess
     { _caContainerId :: !(Maybe Text)
-    , _caPermission  :: !(Maybe [Text])
+    , _caPermission  :: !(Maybe [ContainerAccessPermission])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContainerAccess' with the minimum fields required to make a request.
@@ -2595,7 +2596,7 @@ caContainerId
 
 -- | List of Container permissions. Valid container permissions are: read,
 -- edit, delete, publish.
-caPermission :: Lens' ContainerAccess [Text]
+caPermission :: Lens' ContainerAccess [ContainerAccessPermission]
 caPermission
   = lens _caPermission (\ s a -> s{_caPermission = a})
       . _Default
@@ -2624,7 +2625,7 @@ data Parameter = Parameter
     , _pValue :: !(Maybe Text)
     , _pMap   :: !(Maybe [Maybe Parameter])
     , _pKey   :: !(Maybe Text)
-    , _pType  :: !(Maybe Text)
+    , _pType  :: !(Maybe ParameterType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parameter' with the minimum fields required to make a request.
@@ -2680,7 +2681,7 @@ pKey = lens _pKey (\ s a -> s{_pKey = a})
 -- specified - template: The value represents any text; this can include
 -- macro references (even macro references that might return non-string
 -- types)
-pType :: Lens' Parameter (Maybe Text)
+pType :: Lens' Parameter (Maybe ParameterType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
 instance FromJSON Parameter where

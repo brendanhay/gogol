@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAlertsDelete@.
-module AdSense.Alerts.Delete
+module Network.Google.Resource.AdSense.Alerts.Delete
     (
     -- * REST Resource
-      AlertsDeleteAPI
+      AlertsDeleteResource
 
     -- * Creating a Request
-    , alertsDelete
-    , AlertsDelete
+    , alertsDelete'
+    , AlertsDelete'
 
     -- * Request Lenses
     , adQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAlertsDelete@ which the
--- 'AlertsDelete' request conforms to.
-type AlertsDeleteAPI =
+-- 'AlertsDelete'' request conforms to.
+type AlertsDeleteResource =
      "alerts" :>
-       Capture "alertId" Text :> Delete '[JSON] ()
+       Capture "alertId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
 --
--- /See:/ 'alertsDelete' smart constructor.
-data AlertsDelete = AlertsDelete
+-- /See:/ 'alertsDelete'' smart constructor.
+data AlertsDelete' = AlertsDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
     , _adUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AlertsDelete = AlertsDelete
     , _adKey         :: !(Maybe Text)
     , _adOauthToken  :: !(Maybe Text)
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Text
+    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsDelete'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AlertsDelete = AlertsDelete
 -- * 'adFields'
 --
 -- * 'adAlt'
-alertsDelete
+alertsDelete'
     :: Text -- ^ 'alertId'
-    -> AlertsDelete
-alertsDelete pAdAlertId_ =
-    AlertsDelete
+    -> AlertsDelete'
+alertsDelete' pAdAlertId_ =
+    AlertsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
     , _adUserIp = Nothing
@@ -95,7 +103,7 @@ alertsDelete pAdAlertId_ =
     , _adKey = Nothing
     , _adOauthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = "json"
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +145,21 @@ adFields :: Lens' AlertsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' AlertsDelete' Text
+adAlt :: Lens' AlertsDelete' Alt
 adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AlertsDelete{..}
-          = go _adQuotaUser _adPrettyPrint _adUserIp _adAlertId
+        requestWithRoute r u AlertsDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adUserIp
+              _adAlertId
               _adKey
               _adOauthToken
               _adFields
-              _adAlt
+              (Just _adAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AlertsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AlertsDeleteResource)
+                      r
                       u

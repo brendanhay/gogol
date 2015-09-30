@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project and region.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsList@.
-module Compute.VPNTunnels.List
+module Network.Google.Resource.Compute.VPNTunnels.List
     (
     -- * REST Resource
-      VpnTunnelsListAPI
+      VpnTunnelsListResource
 
     -- * Creating a Request
-    , vPNTunnelsList
-    , VPNTunnelsList
+    , vPNTunnelsList'
+    , VPNTunnelsList'
 
     -- * Request Lenses
     , vtlQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsList@ which the
--- 'VPNTunnelsList' request conforms to.
-type VpnTunnelsListAPI =
+-- 'VPNTunnelsList'' request conforms to.
+type VpnTunnelsListResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "vpnTunnels" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] VPNTunnelList
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] VPNTunnelList
 
 -- | Retrieves the list of VpnTunnel resources contained in the specified
 -- project and region.
 --
--- /See:/ 'vPNTunnelsList' smart constructor.
-data VPNTunnelsList = VPNTunnelsList
+-- /See:/ 'vPNTunnelsList'' smart constructor.
+data VPNTunnelsList' = VPNTunnelsList'
     { _vtlQuotaUser   :: !(Maybe Text)
     , _vtlPrettyPrint :: !Bool
     , _vtlProject     :: !Text
@@ -75,7 +82,7 @@ data VPNTunnelsList = VPNTunnelsList
     , _vtlOauthToken  :: !(Maybe Text)
     , _vtlMaxResults  :: !Word32
     , _vtlFields      :: !(Maybe Text)
-    , _vtlAlt         :: !Text
+    , _vtlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsList'' with the minimum fields required to make a request.
@@ -105,12 +112,12 @@ data VPNTunnelsList = VPNTunnelsList
 -- * 'vtlFields'
 --
 -- * 'vtlAlt'
-vPNTunnelsList
+vPNTunnelsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> VPNTunnelsList
-vPNTunnelsList pVtlProject_ pVtlRegion_ =
-    VPNTunnelsList
+    -> VPNTunnelsList'
+vPNTunnelsList' pVtlProject_ pVtlRegion_ =
+    VPNTunnelsList'
     { _vtlQuotaUser = Nothing
     , _vtlPrettyPrint = True
     , _vtlProject = pVtlProject_
@@ -122,7 +129,7 @@ vPNTunnelsList pVtlProject_ pVtlRegion_ =
     , _vtlOauthToken = Nothing
     , _vtlMaxResults = 500
     , _vtlFields = Nothing
-    , _vtlAlt = "json"
+    , _vtlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,14 +207,14 @@ vtlFields
   = lens _vtlFields (\ s a -> s{_vtlFields = a})
 
 -- | Data format for the response.
-vtlAlt :: Lens' VPNTunnelsList' Text
+vtlAlt :: Lens' VPNTunnelsList' Alt
 vtlAlt = lens _vtlAlt (\ s a -> s{_vtlAlt = a})
 
 instance GoogleRequest VPNTunnelsList' where
         type Rs VPNTunnelsList' = VPNTunnelList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsList{..}
-          = go _vtlQuotaUser _vtlPrettyPrint _vtlProject
+        requestWithRoute r u VPNTunnelsList'{..}
+          = go _vtlQuotaUser (Just _vtlPrettyPrint) _vtlProject
               _vtlUserIp
               _vtlKey
               _vtlFilter
@@ -216,8 +223,9 @@ instance GoogleRequest VPNTunnelsList' where
               _vtlOauthToken
               (Just _vtlMaxResults)
               _vtlFields
-              _vtlAlt
+              (Just _vtlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VpnTunnelsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy VpnTunnelsListResource)
                       r
                       u

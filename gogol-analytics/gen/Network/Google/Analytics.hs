@@ -27,240 +27,247 @@ module Network.Google.Analytics
     -- * REST Resources
 
     -- ** AnalyticsDataGaGet
-    , module Analytics.Data.Ga.Get
+    , module Network.Google.Resource.Analytics.Data.Ga.Get
 
     -- ** AnalyticsDataMcfGet
-    , module Analytics.Data.Mcf.Get
+    , module Network.Google.Resource.Analytics.Data.Mcf.Get
 
     -- ** AnalyticsDataRealtimeGet
-    , module Analytics.Data.Realtime.Get
+    , module Network.Google.Resource.Analytics.Data.Realtime.Get
 
     -- ** AnalyticsManagementAccountSummariesList
-    , module Analytics.Management.AccountSummaries.List
+    , module Network.Google.Resource.Analytics.Management.AccountSummaries.List
 
     -- ** AnalyticsManagementAccountUserLinksDelete
-    , module Analytics.Management.AccountUserLinks.Delete
+    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
 
     -- ** AnalyticsManagementAccountUserLinksInsert
-    , module Analytics.Management.AccountUserLinks.Insert
+    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
 
     -- ** AnalyticsManagementAccountUserLinksList
-    , module Analytics.Management.AccountUserLinks.List
+    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
 
     -- ** AnalyticsManagementAccountUserLinksUpdate
-    , module Analytics.Management.AccountUserLinks.Update
+    , module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
 
     -- ** AnalyticsManagementAccountsList
-    , module Analytics.Management.Accounts.List
+    , module Network.Google.Resource.Analytics.Management.Accounts.List
 
     -- ** AnalyticsManagementCustomDataSourcesList
-    , module Analytics.Management.CustomDataSources.List
+    , module Network.Google.Resource.Analytics.Management.CustomDataSources.List
 
     -- ** AnalyticsManagementCustomDimensionsGet
-    , module Analytics.Management.CustomDimensions.Get
+    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
 
     -- ** AnalyticsManagementCustomDimensionsInsert
-    , module Analytics.Management.CustomDimensions.Insert
+    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
 
     -- ** AnalyticsManagementCustomDimensionsList
-    , module Analytics.Management.CustomDimensions.List
+    , module Network.Google.Resource.Analytics.Management.CustomDimensions.List
 
     -- ** AnalyticsManagementCustomDimensionsPatch
-    , module Analytics.Management.CustomDimensions.Patch
+    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
 
     -- ** AnalyticsManagementCustomDimensionsUpdate
-    , module Analytics.Management.CustomDimensions.Update
+    , module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
 
     -- ** AnalyticsManagementCustomMetricsGet
-    , module Analytics.Management.CustomMetrics.Get
+    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
 
     -- ** AnalyticsManagementCustomMetricsInsert
-    , module Analytics.Management.CustomMetrics.Insert
+    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
 
     -- ** AnalyticsManagementCustomMetricsList
-    , module Analytics.Management.CustomMetrics.List
+    , module Network.Google.Resource.Analytics.Management.CustomMetrics.List
 
     -- ** AnalyticsManagementCustomMetricsPatch
-    , module Analytics.Management.CustomMetrics.Patch
+    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
 
     -- ** AnalyticsManagementCustomMetricsUpdate
-    , module Analytics.Management.CustomMetrics.Update
+    , module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
 
     -- ** AnalyticsManagementExperimentsDelete
-    , module Analytics.Management.Experiments.Delete
+    , module Network.Google.Resource.Analytics.Management.Experiments.Delete
 
     -- ** AnalyticsManagementExperimentsGet
-    , module Analytics.Management.Experiments.Get
+    , module Network.Google.Resource.Analytics.Management.Experiments.Get
 
     -- ** AnalyticsManagementExperimentsInsert
-    , module Analytics.Management.Experiments.Insert
+    , module Network.Google.Resource.Analytics.Management.Experiments.Insert
 
     -- ** AnalyticsManagementExperimentsList
-    , module Analytics.Management.Experiments.List
+    , module Network.Google.Resource.Analytics.Management.Experiments.List
 
     -- ** AnalyticsManagementExperimentsPatch
-    , module Analytics.Management.Experiments.Patch
+    , module Network.Google.Resource.Analytics.Management.Experiments.Patch
 
     -- ** AnalyticsManagementExperimentsUpdate
-    , module Analytics.Management.Experiments.Update
+    , module Network.Google.Resource.Analytics.Management.Experiments.Update
 
     -- ** AnalyticsManagementFiltersDelete
-    , module Analytics.Management.Filters.Delete
+    , module Network.Google.Resource.Analytics.Management.Filters.Delete
 
     -- ** AnalyticsManagementFiltersGet
-    , module Analytics.Management.Filters.Get
+    , module Network.Google.Resource.Analytics.Management.Filters.Get
 
     -- ** AnalyticsManagementFiltersInsert
-    , module Analytics.Management.Filters.Insert
+    , module Network.Google.Resource.Analytics.Management.Filters.Insert
 
     -- ** AnalyticsManagementFiltersList
-    , module Analytics.Management.Filters.List
+    , module Network.Google.Resource.Analytics.Management.Filters.List
 
     -- ** AnalyticsManagementFiltersPatch
-    , module Analytics.Management.Filters.Patch
+    , module Network.Google.Resource.Analytics.Management.Filters.Patch
 
     -- ** AnalyticsManagementFiltersUpdate
-    , module Analytics.Management.Filters.Update
+    , module Network.Google.Resource.Analytics.Management.Filters.Update
 
     -- ** AnalyticsManagementGoalsGet
-    , module Analytics.Management.Goals.Get
+    , module Network.Google.Resource.Analytics.Management.Goals.Get
 
     -- ** AnalyticsManagementGoalsInsert
-    , module Analytics.Management.Goals.Insert
+    , module Network.Google.Resource.Analytics.Management.Goals.Insert
 
     -- ** AnalyticsManagementGoalsList
-    , module Analytics.Management.Goals.List
+    , module Network.Google.Resource.Analytics.Management.Goals.List
 
     -- ** AnalyticsManagementGoalsPatch
-    , module Analytics.Management.Goals.Patch
+    , module Network.Google.Resource.Analytics.Management.Goals.Patch
 
     -- ** AnalyticsManagementGoalsUpdate
-    , module Analytics.Management.Goals.Update
+    , module Network.Google.Resource.Analytics.Management.Goals.Update
 
     -- ** AnalyticsManagementProfileFilterLinksDelete
-    , module Analytics.Management.ProfileFilterLinks.Delete
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Delete
 
     -- ** AnalyticsManagementProfileFilterLinksGet
-    , module Analytics.Management.ProfileFilterLinks.Get
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Get
 
     -- ** AnalyticsManagementProfileFilterLinksInsert
-    , module Analytics.Management.ProfileFilterLinks.Insert
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Insert
 
     -- ** AnalyticsManagementProfileFilterLinksList
-    , module Analytics.Management.ProfileFilterLinks.List
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.List
 
     -- ** AnalyticsManagementProfileFilterLinksPatch
-    , module Analytics.Management.ProfileFilterLinks.Patch
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Patch
 
     -- ** AnalyticsManagementProfileFilterLinksUpdate
-    , module Analytics.Management.ProfileFilterLinks.Update
+    , module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Update
 
     -- ** AnalyticsManagementProfileUserLinksDelete
-    , module Analytics.Management.ProfileUserLinks.Delete
+    , module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Delete
 
     -- ** AnalyticsManagementProfileUserLinksInsert
-    , module Analytics.Management.ProfileUserLinks.Insert
+    , module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Insert
 
     -- ** AnalyticsManagementProfileUserLinksList
-    , module Analytics.Management.ProfileUserLinks.List
+    , module Network.Google.Resource.Analytics.Management.ProfileUserLinks.List
 
     -- ** AnalyticsManagementProfileUserLinksUpdate
-    , module Analytics.Management.ProfileUserLinks.Update
+    , module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Update
 
     -- ** AnalyticsManagementProfilesDelete
-    , module Analytics.Management.Profiles.Delete
+    , module Network.Google.Resource.Analytics.Management.Profiles.Delete
 
     -- ** AnalyticsManagementProfilesGet
-    , module Analytics.Management.Profiles.Get
+    , module Network.Google.Resource.Analytics.Management.Profiles.Get
 
     -- ** AnalyticsManagementProfilesInsert
-    , module Analytics.Management.Profiles.Insert
+    , module Network.Google.Resource.Analytics.Management.Profiles.Insert
 
     -- ** AnalyticsManagementProfilesList
-    , module Analytics.Management.Profiles.List
+    , module Network.Google.Resource.Analytics.Management.Profiles.List
 
     -- ** AnalyticsManagementProfilesPatch
-    , module Analytics.Management.Profiles.Patch
+    , module Network.Google.Resource.Analytics.Management.Profiles.Patch
 
     -- ** AnalyticsManagementProfilesUpdate
-    , module Analytics.Management.Profiles.Update
+    , module Network.Google.Resource.Analytics.Management.Profiles.Update
 
     -- ** AnalyticsManagementSegmentsList
-    , module Analytics.Management.Segments.List
+    , module Network.Google.Resource.Analytics.Management.Segments.List
 
     -- ** AnalyticsManagementUnsampledReportsGet
-    , module Analytics.Management.UnsampledReports.Get
+    , module Network.Google.Resource.Analytics.Management.UnsampledReports.Get
 
     -- ** AnalyticsManagementUnsampledReportsInsert
-    , module Analytics.Management.UnsampledReports.Insert
+    , module Network.Google.Resource.Analytics.Management.UnsampledReports.Insert
 
     -- ** AnalyticsManagementUnsampledReportsList
-    , module Analytics.Management.UnsampledReports.List
+    , module Network.Google.Resource.Analytics.Management.UnsampledReports.List
 
     -- ** AnalyticsManagementUploadsDeleteUploadData
-    , module Analytics.Management.Uploads.DeleteUploadData
+    , module Network.Google.Resource.Analytics.Management.Uploads.DeleteUploadData
 
     -- ** AnalyticsManagementUploadsGet
-    , module Analytics.Management.Uploads.Get
+    , module Network.Google.Resource.Analytics.Management.Uploads.Get
 
     -- ** AnalyticsManagementUploadsList
-    , module Analytics.Management.Uploads.List
+    , module Network.Google.Resource.Analytics.Management.Uploads.List
 
     -- ** AnalyticsManagementUploadsUploadData
-    , module Analytics.Management.Uploads.UploadData
+    , module Network.Google.Resource.Analytics.Management.Uploads.UploadData
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksDelete
-    , module Analytics.Management.WebPropertyAdWordsLinks.Delete
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksGet
-    , module Analytics.Management.WebPropertyAdWordsLinks.Get
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksInsert
-    , module Analytics.Management.WebPropertyAdWordsLinks.Insert
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksList
-    , module Analytics.Management.WebPropertyAdWordsLinks.List
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksPatch
-    , module Analytics.Management.WebPropertyAdWordsLinks.Patch
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
 
     -- ** AnalyticsManagementWebPropertyAdWordsLinksUpdate
-    , module Analytics.Management.WebPropertyAdWordsLinks.Update
+    , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
 
     -- ** AnalyticsManagementWebpropertiesGet
-    , module Analytics.Management.Webproperties.Get
+    , module Network.Google.Resource.Analytics.Management.Webproperties.Get
 
     -- ** AnalyticsManagementWebpropertiesInsert
-    , module Analytics.Management.Webproperties.Insert
+    , module Network.Google.Resource.Analytics.Management.Webproperties.Insert
 
     -- ** AnalyticsManagementWebpropertiesList
-    , module Analytics.Management.Webproperties.List
+    , module Network.Google.Resource.Analytics.Management.Webproperties.List
 
     -- ** AnalyticsManagementWebpropertiesPatch
-    , module Analytics.Management.Webproperties.Patch
+    , module Network.Google.Resource.Analytics.Management.Webproperties.Patch
 
     -- ** AnalyticsManagementWebpropertiesUpdate
-    , module Analytics.Management.Webproperties.Update
+    , module Network.Google.Resource.Analytics.Management.Webproperties.Update
 
     -- ** AnalyticsManagementWebpropertyUserLinksDelete
-    , module Analytics.Management.WebpropertyUserLinks.Delete
+    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Delete
 
     -- ** AnalyticsManagementWebpropertyUserLinksInsert
-    , module Analytics.Management.WebpropertyUserLinks.Insert
+    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Insert
 
     -- ** AnalyticsManagementWebpropertyUserLinksList
-    , module Analytics.Management.WebpropertyUserLinks.List
+    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.List
 
     -- ** AnalyticsManagementWebpropertyUserLinksUpdate
-    , module Analytics.Management.WebpropertyUserLinks.Update
+    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Update
 
     -- ** AnalyticsMetadataColumnsList
-    , module Analytics.Metadata.Columns.List
+    , module Network.Google.Resource.Analytics.Metadata.Columns.List
 
     -- ** AnalyticsProvisioningCreateAccountTicket
-    , module Analytics.Provisioning.CreateAccountTicket
+    , module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 
     -- * Types
+
+    -- ** GaDataColumnHeaders
+    , GaDataColumnHeaders
+    , gaDataColumnHeaders
+    , gdchColumnType
+    , gdchName
+    , gdchDataType
 
     -- ** UnsampledReports
     , UnsampledReports
@@ -273,6 +280,21 @@ module Network.Google.Analytics
     , urTotalResults
     , urStartIndex
     , urPreviousLink
+
+    -- ** GaDataQuery
+    , GaDataQuery
+    , gaDataQuery
+    , gdqMetrics
+    , gdqSamplingLevel
+    , gdqFilters
+    , gdqIds
+    , gdqEndDate
+    , gdqSort
+    , gdqDimensions
+    , gdqStartIndex
+    , gdqMaxResults
+    , gdqSegment
+    , gdqStartDate
 
     -- ** UnsampledReport
     , UnsampledReport
@@ -297,6 +319,25 @@ module Network.Google.Analytics
     , uCloudStorageDownloadDetails
     , uStartDate
 
+    -- ** GoalEventDetailsEventConditions
+    , GoalEventDetailsEventConditions
+    , goalEventDetailsEventConditions
+    , gedecMatchType
+    , gedecExpression
+    , gedecComparisonValue
+    , gedecType
+    , gedecComparisonType
+
+    -- ** ProfileParentLink
+    , ProfileParentLink
+    , profileParentLink
+    , pplHref
+    , pplType
+
+    -- ** GaDataTotalsForAllResults
+    , GaDataTotalsForAllResults
+    , gaDataTotalsForAllResults
+
     -- ** ProfileRef
     , ProfileRef
     , profileRef
@@ -320,6 +361,12 @@ module Network.Google.Analytics
     , eStartIndex
     , ePreviousLink
 
+    -- ** EntityUserLinkPermissions
+    , EntityUserLinkPermissions
+    , entityUserLinkPermissions
+    , eulpLocal
+    , eulpEffective
+
     -- ** Accounts
     , Accounts
     , accounts
@@ -341,6 +388,46 @@ module Network.Google.Analytics
     , feMatchType
     , feCaseSensitive
     , feExpressionValue
+
+    -- ** RealtimeDataProfileInfo
+    , RealtimeDataProfileInfo
+    , realtimeDataProfileInfo
+    , rdpiWebPropertyId
+    , rdpiProfileId
+    , rdpiProfileName
+    , rdpiAccountId
+    , rdpiInternalWebPropertyId
+    , rdpiTableId
+
+    -- ** ExperimentParentLink
+    , ExperimentParentLink
+    , experimentParentLink
+    , eplHref
+    , eplType
+
+    -- ** AnalyticsDataMcfGetSamplingLevel
+    , AnalyticsDataMcfGetSamplingLevel (..)
+
+    -- ** UnsampledReportDriveDownloadDetails
+    , UnsampledReportDriveDownloadDetails
+    , unsampledReportDriveDownloadDetails
+    , urdddDocumentId
+
+    -- ** WebpropertyChildLink
+    , WebpropertyChildLink
+    , webpropertyChildLink
+    , wclHref
+    , wclType
+
+    -- ** McfDataProfileInfo
+    , McfDataProfileInfo
+    , mcfDataProfileInfo
+    , mdpiWebPropertyId
+    , mdpiProfileId
+    , mdpiProfileName
+    , mdpiAccountId
+    , mdpiInternalWebPropertyId
+    , mdpiTableId
 
     -- ** CustomDataSources
     , CustomDataSources
@@ -397,6 +484,12 @@ module Network.Google.Analytics
     , analyticsDataimportDeleteUploadDataRequest
     , addudrCustomDataImportUids
 
+    -- ** GoalVisitNumPagesDetails
+    , GoalVisitNumPagesDetails
+    , goalVisitNumPagesDetails
+    , gvnpdComparisonValue
+    , gvnpdComparisonType
+
     -- ** Profiles
     , Profiles
     , profiles
@@ -415,6 +508,11 @@ module Network.Google.Analytics
     , useEmail
     , useKind
     , useId
+
+    -- ** ProfilePermissions
+    , ProfilePermissions
+    , profilePermissions
+    , ppEffective
 
     -- ** Filters
     , Filters
@@ -438,6 +536,21 @@ module Network.Google.Analytics
     , wpsId
     , wpsWebsiteUrl
     , wpsLevel
+
+    -- ** GoalEventDetails
+    , GoalEventDetails
+    , goalEventDetails
+    , gedUseEventValue
+    , gedEventConditions
+
+    -- ** FilterSearchAndReplaceDetails
+    , FilterSearchAndReplaceDetails
+    , filterSearchAndReplaceDetails
+    , fsardFieldIndex
+    , fsardField
+    , fsardSearchString
+    , fsardReplaceString
+    , fsardCaseSensitive
 
     -- ** AccountSummaries
     , AccountSummaries
@@ -532,6 +645,10 @@ module Network.Google.Analytics
     , gStartIndex
     , gPreviousLink
 
+    -- ** RealtimeDataTotalsForAllResults
+    , RealtimeDataTotalsForAllResults
+    , realtimeDataTotalsForAllResults
+
     -- ** CustomDataSource
     , CustomDataSource
     , customDataSource
@@ -551,6 +668,9 @@ module Network.Google.Analytics
     , cDescription
     , cProfilesLinked
 
+    -- ** AnalyticsDataGaGetOutput
+    , AnalyticsDataGaGetOutput (..)
+
     -- ** Webproperties
     , Webproperties
     , webproperties
@@ -563,12 +683,24 @@ module Network.Google.Analytics
     , wStartIndex
     , wPreviousLink
 
+    -- ** McfDataRows
+    , McfDataRows
+    , mcfDataRows
+    , mdrPrimitiveValue
+    , mdrConversionPathValue
+
     -- ** AdWordsAccount
     , AdWordsAccount
     , adWordsAccount
     , awaAutoTaggingEnabled
     , awaKind
     , awaCustomerId
+
+    -- ** GoalVisitTimeOnSiteDetails
+    , GoalVisitTimeOnSiteDetails
+    , goalVisitTimeOnSiteDetails
+    , gvtosdComparisonValue
+    , gvtosdComparisonType
 
     -- ** Account
     , Account
@@ -590,6 +722,18 @@ module Network.Google.Analytics
     , frAccountId
     , frName
     , frId
+
+    -- ** AccountPermissions
+    , AccountPermissions
+    , accountPermissions
+    , apEffective
+
+    -- ** EntityUserLinkEntity
+    , EntityUserLinkEntity
+    , entityUserLinkEntity
+    , euleProfileRef
+    , euleAccountRef
+    , euleWebPropertyRef
 
     -- ** Experiment
     , Experiment
@@ -634,6 +778,12 @@ module Network.Google.Analytics
     , eulStartIndex
     , eulPreviousLink
 
+    -- ** FilterParentLink
+    , FilterParentLink
+    , filterParentLink
+    , fplHref
+    , fplType
+
     -- ** CustomMetrics
     , CustomMetrics
     , customMetrics
@@ -645,6 +795,41 @@ module Network.Google.Analytics
     , cmTotalResults
     , cmStartIndex
     , cmPreviousLink
+
+    -- ** FilterAdvancedDetails
+    , FilterAdvancedDetails
+    , filterAdvancedDetails
+    , fadExtractA
+    , fadFieldARequired
+    , fadFieldA
+    , fadFieldBIndex
+    , fadOutputToField
+    , fadOutputConstructor
+    , fadExtractB
+    , fadFieldAIndex
+    , fadCaseSensitive
+    , fadOutputToFieldIndex
+    , fadFieldB
+    , fadFieldBRequired
+    , fadOverrideOutputField
+
+    -- ** FilterUppercaseDetails
+    , FilterUppercaseDetails
+    , filterUppercaseDetails
+    , fudFieldIndex
+    , fudField
+
+    -- ** CustomDataSourceChildLink
+    , CustomDataSourceChildLink
+    , customDataSourceChildLink
+    , cdsclHref
+    , cdsclType
+
+    -- ** CustomDimensionParentLink
+    , CustomDimensionParentLink
+    , customDimensionParentLink
+    , cdplHref
+    , cdplType
 
     -- ** Webproperty
     , Webproperty
@@ -685,6 +870,11 @@ module Network.Google.Analytics
     , cusType
     , cusIndex
 
+    -- ** WebpropertyPermissions
+    , WebpropertyPermissions
+    , webpropertyPermissions
+    , wpEffective
+
     -- ** RealtimeData
     , RealtimeData
     , realtimeData
@@ -706,6 +896,17 @@ module Network.Google.Analytics
     , psId
     , psType
 
+    -- ** McfDataRowsConversionPathValue
+    , McfDataRowsConversionPathValue
+    , mcfDataRowsConversionPathValue
+    , mdrcpvInteractionType
+    , mdrcpvNodeValue
+
+    -- ** GaDataDataTableRowsC
+    , GaDataDataTableRowsC
+    , gaDataDataTableRowsC
+    , gddtrcV
+
     -- ** EntityUserLink
     , EntityUserLink
     , entityUserLink
@@ -716,6 +917,34 @@ module Network.Google.Analytics
     , euluPermissions
     , euluEntity
 
+    -- ** McfDataColumnHeaders
+    , McfDataColumnHeaders
+    , mcfDataColumnHeaders
+    , mdchColumnType
+    , mdchName
+    , mdchDataType
+
+    -- ** McfDataQuery
+    , McfDataQuery
+    , mcfDataQuery
+    , mdqMetrics
+    , mdqSamplingLevel
+    , mdqFilters
+    , mdqIds
+    , mdqEndDate
+    , mdqSort
+    , mdqDimensions
+    , mdqStartIndex
+    , mdqMaxResults
+    , mdqSegment
+    , mdqStartDate
+
+    -- ** CustomDataSourceParentLink
+    , CustomDataSourceParentLink
+    , customDataSourceParentLink
+    , cdsplHref
+    , cdsplType
+
     -- ** AccountTicket
     , AccountTicket
     , accountTicket
@@ -725,6 +954,23 @@ module Network.Google.Analytics
     , atAccount
     , atWebproperty
     , atId
+
+    -- ** RealtimeDataQuery
+    , RealtimeDataQuery
+    , realtimeDataQuery
+    , rdqMetrics
+    , rdqFilters
+    , rdqIds
+    , rdqSort
+    , rdqDimensions
+    , rdqMaxResults
+
+    -- ** RealtimeDataColumnHeaders
+    , RealtimeDataColumnHeaders
+    , realtimeDataColumnHeaders
+    , rdchColumnType
+    , rdchName
+    , rdchDataType
 
     -- ** AccountSummary
     , AccountSummary
@@ -765,6 +1011,17 @@ module Network.Google.Analytics
     , colTotalResults
     , colAttributeNames
 
+    -- ** FilterLowercaseDetails
+    , FilterLowercaseDetails
+    , filterLowercaseDetails
+    , fldFieldIndex
+    , fldField
+
+    -- ** EntityAdWordsLinkEntity
+    , EntityAdWordsLinkEntity
+    , entityAdWordsLinkEntity
+    , eawleWebPropertyRef
+
     -- ** CustomDimensions
     , CustomDimensions
     , customDimensions
@@ -788,6 +1045,15 @@ module Network.Google.Analytics
     , uplStartIndex
     , uplPreviousLink
 
+    -- ** GoalURLDestinationDetails
+    , GoalURLDestinationDetails
+    , goalURLDestinationDetails
+    , guddUrl
+    , guddMatchType
+    , guddSteps
+    , guddCaseSensitive
+    , guddFirstStepRequired
+
     -- ** Filter
     , Filter
     , filter'
@@ -806,6 +1072,12 @@ module Network.Google.Analytics
     , filUpdated
     , filType
     , filSearchAndReplaceDetails
+
+    -- ** GaDataDataTable
+    , GaDataDataTable
+    , gaDataDataTable
+    , gddtCols
+    , gddtRows
 
     -- ** Segments
     , Segments
@@ -844,6 +1116,37 @@ module Network.Google.Analytics
     , segType
     , segSegmentId
 
+    -- ** AccountChildLink
+    , AccountChildLink
+    , accountChildLink
+    , aclHref
+    , aclType
+
+    -- ** ExperimentVariations
+    , ExperimentVariations
+    , experimentVariations
+    , evStatus
+    , evWeight
+    , evUrl
+    , evWon
+    , evName
+
+    -- ** GaDataProfileInfo
+    , GaDataProfileInfo
+    , gaDataProfileInfo
+    , gdpiWebPropertyId
+    , gdpiProfileId
+    , gdpiProfileName
+    , gdpiAccountId
+    , gdpiInternalWebPropertyId
+    , gdpiTableId
+
+    -- ** CustomMetricParentLink
+    , CustomMetricParentLink
+    , customMetricParentLink
+    , cmplHref
+    , cmplType
+
     -- ** CustomDimension
     , CustomDimension
     , customDimension
@@ -859,6 +1162,15 @@ module Network.Google.Analytics
     , cddId
     , cddUpdated
     , cddIndex
+
+    -- ** AnalyticsDataGaGetSamplingLevel
+    , AnalyticsDataGaGetSamplingLevel (..)
+
+    -- ** WebpropertyParentLink
+    , WebpropertyParentLink
+    , webpropertyParentLink
+    , wplHref
+    , wplType
 
     -- ** Upload
     , Upload
@@ -880,12 +1192,60 @@ module Network.Google.Analytics
     , pflfId
     , pflfRank
 
+    -- ** GaDataDataTableCols
+    , GaDataDataTableCols
+    , gaDataDataTableCols
+    , gddtcId
+    , gddtcType
+    , gddtcLabel
+
     -- ** Column
     , Column
     , column
     , ccKind
     , ccAttributes
     , ccId
+
+    -- ** McfDataTotalsForAllResults
+    , McfDataTotalsForAllResults
+    , mcfDataTotalsForAllResults
+
+    -- ** UnsampledReportCloudStorageDownloadDetails
+    , UnsampledReportCloudStorageDownloadDetails
+    , unsampledReportCloudStorageDownloadDetails
+    , urcsddObjectId
+    , urcsddBucketId
+
+    -- ** GoalURLDestinationDetailsSteps
+    , GoalURLDestinationDetailsSteps
+    , goalURLDestinationDetailsSteps
+    , guddsUrl
+    , guddsName
+    , guddsNumber
+
+    -- ** ColumnAttributes
+    , ColumnAttributes
+    , columnAttributes
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** ProfileChildLink
+    , ProfileChildLink
+    , profileChildLink
+    , pclHref
+    , pclType
+
+    -- ** GaDataDataTableRows
+    , GaDataDataTableRows
+    , gaDataDataTableRows
+    , gddtrC
+
+    -- ** GoalParentLink
+    , GoalParentLink
+    , goalParentLink
+    , gplHref
+    , gplType
     ) where
 
 import           Network.Google.Analytics.Types
@@ -974,7 +1334,83 @@ TODO
 -}
 
 type AnalyticsAPI =
-     Data :<|> Management :<|> Provisioning :<|> Metadata
+     DataMcfGetResource :<|> DataGaGetResource :<|>
+       DataRealtimeGetResource
+       :<|> ManagementWebPropertyAdWordsLinksInsertResource
+       :<|> ManagementWebPropertyAdWordsLinksListResource
+       :<|> ManagementWebPropertyAdWordsLinksPatchResource
+       :<|> ManagementWebPropertyAdWordsLinksGetResource
+       :<|> ManagementWebPropertyAdWordsLinksDeleteResource
+       :<|> ManagementWebPropertyAdWordsLinksUpdateResource
+       :<|> ManagementUnsampledReportsInsertResource
+       :<|> ManagementUnsampledReportsListResource
+       :<|> ManagementUnsampledReportsGetResource
+       :<|> ManagementAccountsListResource
+       :<|> ManagementExperimentsInsertResource
+       :<|> ManagementExperimentsListResource
+       :<|> ManagementExperimentsPatchResource
+       :<|> ManagementExperimentsGetResource
+       :<|> ManagementExperimentsDeleteResource
+       :<|> ManagementExperimentsUpdateResource
+       :<|> ManagementCustomDataSourcesListResource
+       :<|> ManagementWebpropertyUserLinksInsertResource
+       :<|> ManagementWebpropertyUserLinksListResource
+       :<|> ManagementWebpropertyUserLinksDeleteResource
+       :<|> ManagementWebpropertyUserLinksUpdateResource
+       :<|> ManagementProfilesInsertResource
+       :<|> ManagementProfilesListResource
+       :<|> ManagementProfilesPatchResource
+       :<|> ManagementProfilesGetResource
+       :<|> ManagementProfilesDeleteResource
+       :<|> ManagementProfilesUpdateResource
+       :<|> ManagementFiltersInsertResource
+       :<|> ManagementFiltersListResource
+       :<|> ManagementFiltersPatchResource
+       :<|> ManagementFiltersGetResource
+       :<|> ManagementFiltersDeleteResource
+       :<|> ManagementFiltersUpdateResource
+       :<|> ManagementAccountSummariesListResource
+       :<|> ManagementGoalsInsertResource
+       :<|> ManagementGoalsListResource
+       :<|> ManagementGoalsPatchResource
+       :<|> ManagementGoalsGetResource
+       :<|> ManagementGoalsUpdateResource
+       :<|> ManagementWebpropertiesInsertResource
+       :<|> ManagementWebpropertiesListResource
+       :<|> ManagementWebpropertiesPatchResource
+       :<|> ManagementWebpropertiesGetResource
+       :<|> ManagementWebpropertiesUpdateResource
+       :<|> ManagementCustomMetricsInsertResource
+       :<|> ManagementCustomMetricsListResource
+       :<|> ManagementCustomMetricsPatchResource
+       :<|> ManagementCustomMetricsGetResource
+       :<|> ManagementCustomMetricsUpdateResource
+       :<|> ManagementUploadsListResource
+       :<|> ManagementUploadsDeleteUploadDataResource
+       :<|> ManagementUploadsGetResource
+       :<|> ManagementUploadsUploadDataResource
+       :<|> ManagementSegmentsListResource
+       :<|> ManagementProfileFilterLinksInsertResource
+       :<|> ManagementProfileFilterLinksListResource
+       :<|> ManagementProfileFilterLinksPatchResource
+       :<|> ManagementProfileFilterLinksGetResource
+       :<|> ManagementProfileFilterLinksDeleteResource
+       :<|> ManagementProfileFilterLinksUpdateResource
+       :<|> ManagementCustomDimensionsInsertResource
+       :<|> ManagementCustomDimensionsListResource
+       :<|> ManagementCustomDimensionsPatchResource
+       :<|> ManagementCustomDimensionsGetResource
+       :<|> ManagementCustomDimensionsUpdateResource
+       :<|> ManagementAccountUserLinksInsertResource
+       :<|> ManagementAccountUserLinksListResource
+       :<|> ManagementAccountUserLinksDeleteResource
+       :<|> ManagementAccountUserLinksUpdateResource
+       :<|> ManagementProfileUserLinksInsertResource
+       :<|> ManagementProfileUserLinksListResource
+       :<|> ManagementProfileUserLinksDeleteResource
+       :<|> ManagementProfileUserLinksUpdateResource
+       :<|> ProvisioningCreateAccountTicketResource
+       :<|> MetadataColumnsListResource
 
 analyticsAPI :: Proxy AnalyticsAPI
 analyticsAPI = Proxy

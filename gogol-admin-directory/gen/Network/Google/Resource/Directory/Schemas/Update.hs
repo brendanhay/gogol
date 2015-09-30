@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update schema
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasUpdate@.
-module Directory.Schemas.Update
+module Network.Google.Resource.Directory.Schemas.Update
     (
     -- * REST Resource
-      SchemasUpdateAPI
+      SchemasUpdateResource
 
     -- * Creating a Request
-    , schemasUpdate
-    , SchemasUpdate
+    , schemasUpdate'
+    , SchemasUpdate'
 
     -- * Request Lenses
     , suQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasUpdate@ which the
--- 'SchemasUpdate' request conforms to.
-type SchemasUpdateAPI =
+-- 'SchemasUpdate'' request conforms to.
+type SchemasUpdateResource =
      "customer" :>
        Capture "customerId" Text :>
          "schemas" :>
-           Capture "schemaKey" Text :> Put '[JSON] Schema
+           Capture "schemaKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Schema
 
 -- | Update schema
 --
--- /See:/ 'schemasUpdate' smart constructor.
-data SchemasUpdate = SchemasUpdate
+-- /See:/ 'schemasUpdate'' smart constructor.
+data SchemasUpdate' = SchemasUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SchemasUpdate = SchemasUpdate
     , _suOauthToken  :: !(Maybe Text)
     , _suSchemaKey   :: !Text
     , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Text
+    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SchemasUpdate = SchemasUpdate
 -- * 'suFields'
 --
 -- * 'suAlt'
-schemasUpdate
+schemasUpdate'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'schemaKey'
-    -> SchemasUpdate
-schemasUpdate pSuCustomerId_ pSuSchemaKey_ =
-    SchemasUpdate
+    -> SchemasUpdate'
+schemasUpdate' pSuCustomerId_ pSuSchemaKey_ =
+    SchemasUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIp = Nothing
@@ -101,7 +109,7 @@ schemasUpdate pSuCustomerId_ pSuSchemaKey_ =
     , _suOauthToken = Nothing
     , _suSchemaKey = pSuSchemaKey_
     , _suFields = Nothing
-    , _suAlt = "json"
+    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ suFields :: Lens' SchemasUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' SchemasUpdate' Text
+suAlt :: Lens' SchemasUpdate' Alt
 suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest SchemasUpdate' where
         type Rs SchemasUpdate' = Schema
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasUpdate{..}
-          = go _suQuotaUser _suPrettyPrint _suUserIp
+        requestWithRoute r u SchemasUpdate'{..}
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
               _suCustomerId
               _suKey
               _suOauthToken
               _suSchemaKey
               _suFields
-              _suAlt
+              (Just _suAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SchemasUpdateResource)
+                      r
                       u

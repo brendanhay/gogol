@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a report. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsPatch@.
-module DFAReporting.Reports.Patch
+module Network.Google.Resource.DFAReporting.Reports.Patch
     (
     -- * REST Resource
-      ReportsPatchAPI
+      ReportsPatchResource
 
     -- * Creating a Request
-    , reportsPatch
-    , ReportsPatch
+    , reportsPatch'
+    , ReportsPatch'
 
     -- * Request Lenses
     , rpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsPatch@ which the
--- 'ReportsPatch' request conforms to.
-type ReportsPatchAPI =
+-- 'ReportsPatch'' request conforms to.
+type ReportsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
-           Capture "reportId" Int64 :> Patch '[JSON] Report
+           Capture "reportId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Report
 
 -- | Updates a report. This method supports patch semantics.
 --
--- /See:/ 'reportsPatch' smart constructor.
-data ReportsPatch = ReportsPatch
+-- /See:/ 'reportsPatch'' smart constructor.
+data ReportsPatch' = ReportsPatch'
     { _rpQuotaUser   :: !(Maybe Text)
     , _rpPrettyPrint :: !Bool
     , _rpUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ReportsPatch = ReportsPatch
     , _rpKey         :: !(Maybe Text)
     , _rpOauthToken  :: !(Maybe Text)
     , _rpFields      :: !(Maybe Text)
-    , _rpAlt         :: !Text
+    , _rpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ReportsPatch = ReportsPatch
 -- * 'rpFields'
 --
 -- * 'rpAlt'
-reportsPatch
+reportsPatch'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
-    -> ReportsPatch
-reportsPatch pRpReportId_ pRpProfileId_ =
-    ReportsPatch
+    -> ReportsPatch'
+reportsPatch' pRpReportId_ pRpProfileId_ =
+    ReportsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
     , _rpUserIp = Nothing
@@ -101,7 +109,7 @@ reportsPatch pRpReportId_ pRpProfileId_ =
     , _rpKey = Nothing
     , _rpOauthToken = Nothing
     , _rpFields = Nothing
-    , _rpAlt = "json"
+    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ rpFields :: Lens' ReportsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
 -- | Data format for the response.
-rpAlt :: Lens' ReportsPatch' Text
+rpAlt :: Lens' ReportsPatch' Alt
 rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
 
 instance GoogleRequest ReportsPatch' where
         type Rs ReportsPatch' = Report
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsPatch{..}
-          = go _rpQuotaUser _rpPrettyPrint _rpUserIp
+        requestWithRoute r u ReportsPatch'{..}
+          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIp
               _rpReportId
               _rpProfileId
               _rpKey
               _rpOauthToken
               _rpFields
-              _rpAlt
+              (Just _rpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsPatchResource)
+                      r
                       u

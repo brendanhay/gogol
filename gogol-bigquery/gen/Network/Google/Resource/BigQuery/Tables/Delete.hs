@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- contains data, all the data will be deleted.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesDelete@.
-module BigQuery.Tables.Delete
+module Network.Google.Resource.BigQuery.Tables.Delete
     (
     -- * REST Resource
-      TablesDeleteAPI
+      TablesDeleteResource
 
     -- * Creating a Request
-    , tablesDelete
-    , TablesDelete
+    , tablesDelete'
+    , TablesDelete'
 
     -- * Request Lenses
     , tdQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesDelete@ which the
--- 'TablesDelete' request conforms to.
-type TablesDeleteAPI =
+-- 'TablesDelete'' request conforms to.
+type TablesDeleteResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               Capture "tableId" Text :> Delete '[JSON] ()
+               Capture "tableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the table specified by tableId from the dataset. If the table
 -- contains data, all the data will be deleted.
 --
--- /See:/ 'tablesDelete' smart constructor.
-data TablesDelete = TablesDelete
+-- /See:/ 'tablesDelete'' smart constructor.
+data TablesDelete' = TablesDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data TablesDelete = TablesDelete
     , _tdOauthToken  :: !(Maybe Text)
     , _tdTableId     :: !Text
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesDelete'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data TablesDelete = TablesDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-tablesDelete
+tablesDelete'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TablesDelete
-tablesDelete pTdDatasetId_ pTdProjectId_ pTdTableId_ =
-    TablesDelete
+    -> TablesDelete'
+tablesDelete' pTdDatasetId_ pTdProjectId_ pTdTableId_ =
+    TablesDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
     , _tdUserIp = Nothing
@@ -111,7 +119,7 @@ tablesDelete pTdDatasetId_ pTdProjectId_ pTdTableId_ =
     , _tdOauthToken = Nothing
     , _tdTableId = pTdTableId_
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,20 +171,23 @@ tdFields :: Lens' TablesDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TablesDelete' Text
+tdAlt :: Lens' TablesDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TablesDelete' where
         type Rs TablesDelete' = ()
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesDelete{..}
-          = go _tdQuotaUser _tdPrettyPrint _tdUserIp _tdKey
+        requestWithRoute r u TablesDelete'{..}
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+              _tdKey
               _tdDatasetId
               _tdProjectId
               _tdOauthToken
               _tdTableId
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesDeleteResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one directory site by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySitesGet@.
-module DFAReporting.DirectorySites.Get
+module Network.Google.Resource.DFAReporting.DirectorySites.Get
     (
     -- * REST Resource
-      DirectorySitesGetAPI
+      DirectorySitesGetResource
 
     -- * Creating a Request
-    , directorySitesGet
-    , DirectorySitesGet
+    , directorySitesGet'
+    , DirectorySitesGet'
 
     -- * Request Lenses
     , dsgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingDirectorySitesGet@ which the
--- 'DirectorySitesGet' request conforms to.
-type DirectorySitesGetAPI =
+-- 'DirectorySitesGet'' request conforms to.
+type DirectorySitesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySites" :>
-           Capture "id" Int64 :> Get '[JSON] DirectorySite
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] DirectorySite
 
 -- | Gets one directory site by ID.
 --
--- /See:/ 'directorySitesGet' smart constructor.
-data DirectorySitesGet = DirectorySitesGet
+-- /See:/ 'directorySitesGet'' smart constructor.
+data DirectorySitesGet' = DirectorySitesGet'
     { _dsgQuotaUser   :: !(Maybe Text)
     , _dsgPrettyPrint :: !Bool
     , _dsgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data DirectorySitesGet = DirectorySitesGet
     , _dsgId          :: !Int64
     , _dsgOauthToken  :: !(Maybe Text)
     , _dsgFields      :: !(Maybe Text)
-    , _dsgAlt         :: !Text
+    , _dsgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data DirectorySitesGet = DirectorySitesGet
 -- * 'dsgFields'
 --
 -- * 'dsgAlt'
-directorySitesGet
+directorySitesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> DirectorySitesGet
-directorySitesGet pDsgProfileId_ pDsgId_ =
-    DirectorySitesGet
+    -> DirectorySitesGet'
+directorySitesGet' pDsgProfileId_ pDsgId_ =
+    DirectorySitesGet'
     { _dsgQuotaUser = Nothing
     , _dsgPrettyPrint = True
     , _dsgUserIp = Nothing
@@ -101,7 +109,7 @@ directorySitesGet pDsgProfileId_ pDsgId_ =
     , _dsgId = pDsgId_
     , _dsgOauthToken = Nothing
     , _dsgFields = Nothing
-    , _dsgAlt = "json"
+    , _dsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ dsgFields
   = lens _dsgFields (\ s a -> s{_dsgFields = a})
 
 -- | Data format for the response.
-dsgAlt :: Lens' DirectorySitesGet' Text
+dsgAlt :: Lens' DirectorySitesGet' Alt
 dsgAlt = lens _dsgAlt (\ s a -> s{_dsgAlt = a})
 
 instance GoogleRequest DirectorySitesGet' where
         type Rs DirectorySitesGet' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySitesGet{..}
-          = go _dsgQuotaUser _dsgPrettyPrint _dsgUserIp
+        requestWithRoute r u DirectorySitesGet'{..}
+          = go _dsgQuotaUser (Just _dsgPrettyPrint) _dsgUserIp
               _dsgProfileId
               _dsgKey
               _dsgId
               _dsgOauthToken
               _dsgFields
-              _dsgAlt
+              (Just _dsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DirectorySitesGetAPI)
+                      (Proxy :: Proxy DirectorySitesGetResource)
                       r
                       u

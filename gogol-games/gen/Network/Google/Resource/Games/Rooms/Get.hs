@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the data for a room.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsGet@.
-module Games.Rooms.Get
+module Network.Google.Resource.Games.Rooms.Get
     (
     -- * REST Resource
-      RoomsGetAPI
+      RoomsGetResource
 
     -- * Creating a Request
-    , roomsGet
-    , RoomsGet
+    , roomsGet'
+    , RoomsGet'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsGet@ which the
--- 'RoomsGet' request conforms to.
-type RoomsGetAPI =
+-- 'RoomsGet'' request conforms to.
+type RoomsGetResource =
      "rooms" :>
        Capture "roomId" Text :>
-         QueryParam "language" Text :> Get '[JSON] Room
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Room
 
 -- | Get the data for a room.
 --
--- /See:/ 'roomsGet' smart constructor.
-data RoomsGet = RoomsGet
+-- /See:/ 'roomsGet'' smart constructor.
+data RoomsGet' = RoomsGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data RoomsGet = RoomsGet
     , _rgLanguage    :: !(Maybe Text)
     , _rgOauthToken  :: !(Maybe Text)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsGet'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data RoomsGet = RoomsGet
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-roomsGet
+roomsGet'
     :: Text -- ^ 'roomId'
-    -> RoomsGet
-roomsGet pRgRoomId_ =
-    RoomsGet
+    -> RoomsGet'
+roomsGet' pRgRoomId_ =
+    RoomsGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIp = Nothing
@@ -99,7 +107,7 @@ roomsGet pRgRoomId_ =
     , _rgLanguage = Nothing
     , _rgOauthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,18 +153,20 @@ rgFields :: Lens' RoomsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' RoomsGet' Text
+rgAlt :: Lens' RoomsGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest RoomsGet' where
         type Rs RoomsGet' = Room
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp _rgKey
+        requestWithRoute r u RoomsGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+              _rgKey
               _rgRoomId
               _rgLanguage
               _rgOauthToken
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy RoomsGetResource) r
+                      u

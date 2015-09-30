@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists goals to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsList@.
-module Analytics.Management.Goals.List
+module Network.Google.Resource.Analytics.Management.Goals.List
     (
     -- * REST Resource
-      ManagementGoalsListAPI
+      ManagementGoalsListResource
 
     -- * Creating a Request
-    , managementGoalsList
-    , ManagementGoalsList
+    , managementGoalsList'
+    , ManagementGoalsList'
 
     -- * Request Lenses
     , mglQuotaUser
@@ -47,8 +48,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsList@ which the
--- 'ManagementGoalsList' request conforms to.
-type ManagementGoalsListAPI =
+-- 'ManagementGoalsList'' request conforms to.
+type ManagementGoalsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,13 +58,20 @@ type ManagementGoalsListAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "goals" :>
-                     QueryParam "start-index" Int32 :>
-                       QueryParam "max-results" Int32 :> Get '[JSON] Goals
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "start-index" Int32 :>
+                                 QueryParam "max-results" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Get '[JSON] Goals
 
 -- | Lists goals to which the user has access.
 --
--- /See:/ 'managementGoalsList' smart constructor.
-data ManagementGoalsList = ManagementGoalsList
+-- /See:/ 'managementGoalsList'' smart constructor.
+data ManagementGoalsList' = ManagementGoalsList'
     { _mglQuotaUser     :: !(Maybe Text)
     , _mglPrettyPrint   :: !Bool
     , _mglWebPropertyId :: !Text
@@ -75,7 +83,7 @@ data ManagementGoalsList = ManagementGoalsList
     , _mglStartIndex    :: !(Maybe Int32)
     , _mglMaxResults    :: !(Maybe Int32)
     , _mglFields        :: !(Maybe Text)
-    , _mglAlt           :: !Text
+    , _mglAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsList'' with the minimum fields required to make a request.
@@ -105,13 +113,13 @@ data ManagementGoalsList = ManagementGoalsList
 -- * 'mglFields'
 --
 -- * 'mglAlt'
-managementGoalsList
+managementGoalsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementGoalsList
-managementGoalsList pMglWebPropertyId_ pMglProfileId_ pMglAccountId_ =
-    ManagementGoalsList
+    -> ManagementGoalsList'
+managementGoalsList' pMglWebPropertyId_ pMglProfileId_ pMglAccountId_ =
+    ManagementGoalsList'
     { _mglQuotaUser = Nothing
     , _mglPrettyPrint = False
     , _mglWebPropertyId = pMglWebPropertyId_
@@ -123,7 +131,7 @@ managementGoalsList pMglWebPropertyId_ pMglProfileId_ pMglAccountId_ =
     , _mglStartIndex = Nothing
     , _mglMaxResults = Nothing
     , _mglFields = Nothing
-    , _mglAlt = "json"
+    , _mglAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,14 +205,15 @@ mglFields
   = lens _mglFields (\ s a -> s{_mglFields = a})
 
 -- | Data format for the response.
-mglAlt :: Lens' ManagementGoalsList' Text
+mglAlt :: Lens' ManagementGoalsList' Alt
 mglAlt = lens _mglAlt (\ s a -> s{_mglAlt = a})
 
 instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsList{..}
-          = go _mglQuotaUser _mglPrettyPrint _mglWebPropertyId
+        requestWithRoute r u ManagementGoalsList'{..}
+          = go _mglQuotaUser (Just _mglPrettyPrint)
+              _mglWebPropertyId
               _mglUserIp
               _mglProfileId
               _mglAccountId
@@ -213,9 +222,9 @@ instance GoogleRequest ManagementGoalsList' where
               _mglStartIndex
               _mglMaxResults
               _mglFields
-              _mglAlt
+              (Just _mglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementGoalsListAPI)
+                      (Proxy :: Proxy ManagementGoalsListResource)
                       r
                       u

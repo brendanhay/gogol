@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListSharesPatch@.
-module DFAReporting.RemarketingListShares.Patch
+module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     (
     -- * REST Resource
-      RemarketingListSharesPatchAPI
+      RemarketingListSharesPatchResource
 
     -- * Creating a Request
-    , remarketingListSharesPatch
-    , RemarketingListSharesPatch
+    , remarketingListSharesPatch'
+    , RemarketingListSharesPatch'
 
     -- * Request Lenses
     , rlspQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListSharesPatch@ which the
--- 'RemarketingListSharesPatch' request conforms to.
-type RemarketingListSharesPatchAPI =
+-- 'RemarketingListSharesPatch'' request conforms to.
+type RemarketingListSharesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingListShares" :>
-           QueryParam "remarketingListId" Int64 :>
-             Patch '[JSON] RemarketingListShare
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "remarketingListId" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
 --
--- /See:/ 'remarketingListSharesPatch' smart constructor.
-data RemarketingListSharesPatch = RemarketingListSharesPatch
+-- /See:/ 'remarketingListSharesPatch'' smart constructor.
+data RemarketingListSharesPatch' = RemarketingListSharesPatch'
     { _rlspQuotaUser         :: !(Maybe Text)
     , _rlspPrettyPrint       :: !Bool
     , _rlspUserIp            :: !(Maybe Text)
@@ -66,7 +74,7 @@ data RemarketingListSharesPatch = RemarketingListSharesPatch
     , _rlspKey               :: !(Maybe Text)
     , _rlspOauthToken        :: !(Maybe Text)
     , _rlspFields            :: !(Maybe Text)
-    , _rlspAlt               :: !Text
+    , _rlspAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data RemarketingListSharesPatch = RemarketingListSharesPatch
 -- * 'rlspFields'
 --
 -- * 'rlspAlt'
-remarketingListSharesPatch
+remarketingListSharesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'remarketingListId'
-    -> RemarketingListSharesPatch
-remarketingListSharesPatch pRlspProfileId_ pRlspRemarketingListId_ =
-    RemarketingListSharesPatch
+    -> RemarketingListSharesPatch'
+remarketingListSharesPatch' pRlspProfileId_ pRlspRemarketingListId_ =
+    RemarketingListSharesPatch'
     { _rlspQuotaUser = Nothing
     , _rlspPrettyPrint = True
     , _rlspUserIp = Nothing
@@ -104,7 +112,7 @@ remarketingListSharesPatch pRlspProfileId_ pRlspRemarketingListId_ =
     , _rlspKey = Nothing
     , _rlspOauthToken = Nothing
     , _rlspFields = Nothing
-    , _rlspAlt = "json"
+    , _rlspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ rlspFields
   = lens _rlspFields (\ s a -> s{_rlspFields = a})
 
 -- | Data format for the response.
-rlspAlt :: Lens' RemarketingListSharesPatch' Text
+rlspAlt :: Lens' RemarketingListSharesPatch' Alt
 rlspAlt = lens _rlspAlt (\ s a -> s{_rlspAlt = a})
 
 instance GoogleRequest RemarketingListSharesPatch'
@@ -165,16 +173,17 @@ instance GoogleRequest RemarketingListSharesPatch'
         type Rs RemarketingListSharesPatch' =
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesPatch{..}
-          = go _rlspQuotaUser _rlspPrettyPrint _rlspUserIp
+        requestWithRoute r u RemarketingListSharesPatch'{..}
+          = go _rlspQuotaUser (Just _rlspPrettyPrint)
+              _rlspUserIp
               _rlspProfileId
               (Just _rlspRemarketingListId)
               _rlspKey
               _rlspOauthToken
               _rlspFields
-              _rlspAlt
+              (Just _rlspAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListSharesPatchAPI)
+                      (Proxy :: Proxy RemarketingListSharesPatchResource)
                       r
                       u

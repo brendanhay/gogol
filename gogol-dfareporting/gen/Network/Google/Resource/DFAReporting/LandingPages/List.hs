@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of landing pages for the specified campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesList@.
-module DFAReporting.LandingPages.List
+module Network.Google.Resource.DFAReporting.LandingPages.List
     (
     -- * REST Resource
-      LandingPagesListAPI
+      LandingPagesListResource
 
     -- * Creating a Request
-    , landingPagesList
-    , LandingPagesList
+    , landingPagesList'
+    , LandingPagesList'
 
     -- * Request Lenses
     , lplQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingLandingPagesList@ which the
--- 'LandingPagesList' request conforms to.
-type LandingPagesListAPI =
+-- 'LandingPagesList'' request conforms to.
+type LandingPagesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               Get '[JSON] LandingPagesListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] LandingPagesListResponse
 
 -- | Retrieves the list of landing pages for the specified campaign.
 --
--- /See:/ 'landingPagesList' smart constructor.
-data LandingPagesList = LandingPagesList
+-- /See:/ 'landingPagesList'' smart constructor.
+data LandingPagesList' = LandingPagesList'
     { _lplQuotaUser   :: !(Maybe Text)
     , _lplPrettyPrint :: !Bool
     , _lplUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data LandingPagesList = LandingPagesList
     , _lplKey         :: !(Maybe Text)
     , _lplOauthToken  :: !(Maybe Text)
     , _lplFields      :: !(Maybe Text)
-    , _lplAlt         :: !Text
+    , _lplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesList'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data LandingPagesList = LandingPagesList
 -- * 'lplFields'
 --
 -- * 'lplAlt'
-landingPagesList
+landingPagesList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> LandingPagesList
-landingPagesList pLplCampaignId_ pLplProfileId_ =
-    LandingPagesList
+    -> LandingPagesList'
+landingPagesList' pLplCampaignId_ pLplProfileId_ =
+    LandingPagesList'
     { _lplQuotaUser = Nothing
     , _lplPrettyPrint = True
     , _lplUserIp = Nothing
@@ -103,7 +111,7 @@ landingPagesList pLplCampaignId_ pLplProfileId_ =
     , _lplKey = Nothing
     , _lplOauthToken = Nothing
     , _lplFields = Nothing
-    , _lplAlt = "json"
+    , _lplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +162,22 @@ lplFields
   = lens _lplFields (\ s a -> s{_lplFields = a})
 
 -- | Data format for the response.
-lplAlt :: Lens' LandingPagesList' Text
+lplAlt :: Lens' LandingPagesList' Alt
 lplAlt = lens _lplAlt (\ s a -> s{_lplAlt = a})
 
 instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesList{..}
-          = go _lplQuotaUser _lplPrettyPrint _lplUserIp
+        requestWithRoute r u LandingPagesList'{..}
+          = go _lplQuotaUser (Just _lplPrettyPrint) _lplUserIp
               _lplCampaignId
               _lplProfileId
               _lplKey
               _lplOauthToken
               _lplFields
-              _lplAlt
+              (Just _lplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LandingPagesListAPI)
+                      (Proxy :: Proxy LandingPagesListResource)
                       r
                       u

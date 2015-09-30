@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the name or type of an existing column.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnUpdate@.
-module FusionTables.Column.Update
+module Network.Google.Resource.FusionTables.Column.Update
     (
     -- * REST Resource
-      ColumnUpdateAPI
+      ColumnUpdateResource
 
     -- * Creating a Request
-    , columnUpdate
-    , ColumnUpdate
+    , columnUpdate'
+    , ColumnUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnUpdate@ which the
--- 'ColumnUpdate' request conforms to.
-type ColumnUpdateAPI =
+-- 'ColumnUpdate'' request conforms to.
+type ColumnUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           Capture "columnId" Text :> Put '[JSON] Column
+           Capture "columnId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Column
 
 -- | Updates the name or type of an existing column.
 --
--- /See:/ 'columnUpdate' smart constructor.
-data ColumnUpdate = ColumnUpdate
+-- /See:/ 'columnUpdate'' smart constructor.
+data ColumnUpdate' = ColumnUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ColumnUpdate = ColumnUpdate
     , _cuTableId     :: !Text
     , _cuColumnId    :: !Text
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ColumnUpdate = ColumnUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-columnUpdate
+columnUpdate'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> ColumnUpdate
-columnUpdate pCuTableId_ pCuColumnId_ =
-    ColumnUpdate
+    -> ColumnUpdate'
+columnUpdate' pCuTableId_ pCuColumnId_ =
+    ColumnUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -101,7 +109,7 @@ columnUpdate pCuTableId_ pCuColumnId_ =
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +156,22 @@ cuFields :: Lens' ColumnUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' ColumnUpdate' Text
+cuAlt :: Lens' ColumnUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest ColumnUpdate' where
         type Rs ColumnUpdate' = Column
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp _cuKey
+        requestWithRoute r u ColumnUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+              _cuKey
               _cuOauthToken
               _cuTableId
               _cuColumnId
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ColumnUpdateResource)
+                      r
                       u

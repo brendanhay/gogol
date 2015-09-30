@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists files for a user profile.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFilesList@.
-module DFAReporting.Files.List
+module Network.Google.Resource.DFAReporting.Files.List
     (
     -- * REST Resource
-      FilesListAPI
+      FilesListResource
 
     -- * Creating a Request
-    , filesList
-    , FilesList
+    , filesList'
+    , FilesList'
 
     -- * Request Lenses
     , flQuotaUser
@@ -48,34 +49,43 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFilesList@ which the
--- 'FilesList' request conforms to.
-type FilesListAPI =
+-- 'FilesList'' request conforms to.
+type FilesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "files" :>
-           QueryParam "sortOrder" Text :>
-             QueryParam "scope" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "sortField" Text :>
-                   QueryParam "maxResults" Int32 :> Get '[JSON] FileList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "sortOrder" DfareportingFilesListSortOrder
+                   :>
+                   QueryParam "key" Text :>
+                     QueryParam "scope" DfareportingFilesListScope :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "sortField" DfareportingFilesListSortField
+                           :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] FileList
 
 -- | Lists files for a user profile.
 --
--- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
+-- /See:/ 'filesList'' smart constructor.
+data FilesList' = FilesList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flUserIp      :: !(Maybe Text)
     , _flProfileId   :: !Int64
-    , _flSortOrder   :: !Text
+    , _flSortOrder   :: !DfareportingFilesListSortOrder
     , _flKey         :: !(Maybe Text)
-    , _flScope       :: !Text
+    , _flScope       :: !DfareportingFilesListScope
     , _flPageToken   :: !(Maybe Text)
-    , _flSortField   :: !Text
+    , _flSortField   :: !DfareportingFilesListSortField
     , _flOauthToken  :: !(Maybe Text)
     , _flMaxResults  :: !(Maybe Int32)
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Text
+    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
@@ -107,24 +117,24 @@ data FilesList = FilesList
 -- * 'flFields'
 --
 -- * 'flAlt'
-filesList
+filesList'
     :: Int64 -- ^ 'profileId'
-    -> FilesList
-filesList pFlProfileId_ =
-    FilesList
+    -> FilesList'
+filesList' pFlProfileId_ =
+    FilesList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flUserIp = Nothing
     , _flProfileId = pFlProfileId_
-    , _flSortOrder = "DESCENDING"
+    , _flSortOrder = DFLSODescending
     , _flKey = Nothing
-    , _flScope = "MINE"
+    , _flScope = Mine
     , _flPageToken = Nothing
-    , _flSortField = "LAST_MODIFIED_TIME"
+    , _flSortField = DFLSFLastModifiedTime
     , _flOauthToken = Nothing
     , _flMaxResults = Nothing
     , _flFields = Nothing
-    , _flAlt = "json"
+    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,7 +161,7 @@ flProfileId
   = lens _flProfileId (\ s a -> s{_flProfileId = a})
 
 -- | Order of sorted results, default is \'DESCENDING\'.
-flSortOrder :: Lens' FilesList' Text
+flSortOrder :: Lens' FilesList' DfareportingFilesListSortOrder
 flSortOrder
   = lens _flSortOrder (\ s a -> s{_flSortOrder = a})
 
@@ -162,7 +172,7 @@ flKey :: Lens' FilesList' (Maybe Text)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
-flScope :: Lens' FilesList' Text
+flScope :: Lens' FilesList' DfareportingFilesListScope
 flScope = lens _flScope (\ s a -> s{_flScope = a})
 
 -- | The value of the nextToken from the previous result page.
@@ -171,7 +181,7 @@ flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | The field by which to sort the list.
-flSortField :: Lens' FilesList' Text
+flSortField :: Lens' FilesList' DfareportingFilesListSortField
 flSortField
   = lens _flSortField (\ s a -> s{_flSortField = a})
 
@@ -190,14 +200,14 @@ flFields :: Lens' FilesList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 -- | Data format for the response.
-flAlt :: Lens' FilesList' Text
+flAlt :: Lens' FilesList' Alt
 flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FilesList{..}
-          = go _flQuotaUser _flPrettyPrint _flUserIp
+        requestWithRoute r u FilesList'{..}
+          = go _flQuotaUser (Just _flPrettyPrint) _flUserIp
               _flProfileId
               (Just _flSortOrder)
               _flKey
@@ -207,6 +217,8 @@ instance GoogleRequest FilesList' where
               _flOauthToken
               _flMaxResults
               _flFields
-              _flAlt
+              (Just _flAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesListResource)
+                      r
+                      u

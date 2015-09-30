@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- search engine used for the search, and the search results.
 --
 -- /See:/ <https://developers.google.com/custom-search/v1/using_rest CustomSearch API Reference> for @SearchCseList@.
-module Search.Cse.List
+module Network.Google.Resource.Search.Cse.List
     (
     -- * REST Resource
-      CseListAPI
+      CseListResource
 
     -- * Creating a Request
-    , cseList
-    , CseList
+    , cseList'
+    , CseList'
 
     -- * Request Lenses
     , clImgDominantColor
@@ -75,73 +76,111 @@ import           Network.Google.CustomSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @SearchCseList@ which the
--- 'CseList' request conforms to.
-type CseListAPI =
+-- 'CseList'' request conforms to.
+type CseListResource =
      "v1" :>
-       QueryParam "imgDominantColor" Text :>
-         QueryParam "siteSearchFilter" Text :>
-           QueryParam "c2coff" Text :>
-             QueryParam "orTerms" Text :>
-               QueryParam "start" Word32 :>
-                 QueryParam "rights" Text :>
-                   QueryParam "excludeTerms" Text :>
-                     QueryParam "num" Word32 :>
-                       QueryParam "fileType" Text :>
-                         QueryParam "searchType" Text :>
-                           QueryParam "lr" Text :>
-                             QueryParam "q" Text :>
-                               QueryParam "googlehost" Text :>
-                                 QueryParam "relatedSite" Text :>
-                                   QueryParam "hl" Text :>
-                                     QueryParam "cref" Text :>
-                                       QueryParam "sort" Text :>
-                                         QueryParam "siteSearch" Text :>
-                                           QueryParam "filter" Text :>
-                                             QueryParam "dateRestrict" Text :>
-                                               QueryParam "linkSite" Text :>
-                                                 QueryParam "lowRange" Text :>
-                                                   QueryParam "imgType" Text :>
-                                                     QueryParam "gl" Text :>
-                                                       QueryParam "cx" Text :>
+       QueryParam "imgDominantColor"
+         SearchCseListImgDominantColor
+         :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "siteSearchFilter"
+               SearchCseListSiteSearchFilter
+               :>
+               QueryParam "c2coff" Text :>
+                 QueryParam "orTerms" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "start" Word32 :>
+                       QueryParam "rights" Text :>
+                         QueryParam "excludeTerms" Text :>
+                           QueryParam "num" Word32 :>
+                             QueryParam "fileType" Text :>
+                               QueryParam "searchType" SearchCseListSearchType
+                                 :>
+                                 QueryParam "lr" SearchCseListLr :>
+                                   QueryParam "q" Text :>
+                                     QueryParam "googlehost" Text :>
+                                       QueryParam "relatedSite" Text :>
+                                         QueryParam "hl" Text :>
+                                           QueryParam "key" Text :>
+                                             QueryParam "cref" Text :>
+                                               QueryParam "sort" Text :>
+                                                 QueryParam "siteSearch" Text :>
+                                                   QueryParam "filter"
+                                                     SearchCseListFilter
+                                                     :>
+                                                     QueryParam "dateRestrict"
+                                                       Text
+                                                       :>
+                                                       QueryParam "linkSite"
+                                                         Text
+                                                         :>
                                                          QueryParam
-                                                           "imgColorType"
+                                                           "oauth_token"
                                                            Text
                                                            :>
-                                                           QueryParam "imgSize"
+                                                           QueryParam "lowRange"
                                                              Text
                                                              :>
                                                              QueryParam
-                                                               "exactTerms"
-                                                               Text
+                                                               "imgType"
+                                                               SearchCseListImgType
                                                                :>
-                                                               QueryParam "cr"
+                                                               QueryParam "gl"
                                                                  Text
                                                                  :>
-                                                                 QueryParam
-                                                                   "safe"
+                                                                 QueryParam "cx"
                                                                    Text
                                                                    :>
                                                                    QueryParam
-                                                                     "hq"
-                                                                     Text
+                                                                     "imgColorType"
+                                                                     SearchCseListImgColorType
                                                                      :>
                                                                      QueryParam
-                                                                       "highRange"
-                                                                       Text
+                                                                       "imgSize"
+                                                                       SearchCseListImgSize
                                                                        :>
-                                                                       Get
-                                                                         '[JSON]
-                                                                         Search
+                                                                       QueryParam
+                                                                         "exactTerms"
+                                                                         Text
+                                                                         :>
+                                                                         QueryParam
+                                                                           "cr"
+                                                                           Text
+                                                                           :>
+                                                                           QueryParam
+                                                                             "safe"
+                                                                             SearchCseListSafe
+                                                                             :>
+                                                                             QueryParam
+                                                                               "hq"
+                                                                               Text
+                                                                               :>
+                                                                               QueryParam
+                                                                                 "fields"
+                                                                                 Text
+                                                                                 :>
+                                                                                 QueryParam
+                                                                                   "highRange"
+                                                                                   Text
+                                                                                   :>
+                                                                                   QueryParam
+                                                                                     "alt"
+                                                                                     Alt
+                                                                                     :>
+                                                                                     Get
+                                                                                       '[JSON]
+                                                                                       Search
 
 -- | Returns metadata about the search performed, metadata about the custom
 -- search engine used for the search, and the search results.
 --
--- /See:/ 'cseList' smart constructor.
-data CseList = CseList
-    { _clImgDominantColor :: !(Maybe Text)
+-- /See:/ 'cseList'' smart constructor.
+data CseList' = CseList'
+    { _clImgDominantColor :: !(Maybe SearchCseListImgDominantColor)
     , _clQuotaUser        :: !(Maybe Text)
     , _clPrettyPrint      :: !Bool
-    , _clSiteSearchFilter :: !(Maybe Text)
+    , _clSiteSearchFilter :: !(Maybe SearchCseListSiteSearchFilter)
     , _clC2coff           :: !(Maybe Text)
     , _clOrTerms          :: !(Maybe Text)
     , _clUserIp           :: !(Maybe Text)
@@ -150,8 +189,8 @@ data CseList = CseList
     , _clExcludeTerms     :: !(Maybe Text)
     , _clNum              :: !Word32
     , _clFileType         :: !(Maybe Text)
-    , _clSearchType       :: !(Maybe Text)
-    , _clLr               :: !(Maybe Text)
+    , _clSearchType       :: !(Maybe SearchCseListSearchType)
+    , _clLr               :: !(Maybe SearchCseListLr)
     , _clQ                :: !Text
     , _clGooglehost       :: !(Maybe Text)
     , _clRelatedSite      :: !(Maybe Text)
@@ -160,23 +199,23 @@ data CseList = CseList
     , _clCref             :: !(Maybe Text)
     , _clSort             :: !(Maybe Text)
     , _clSiteSearch       :: !(Maybe Text)
-    , _clFilter           :: !(Maybe Text)
+    , _clFilter           :: !(Maybe SearchCseListFilter)
     , _clDateRestrict     :: !(Maybe Text)
     , _clLinkSite         :: !(Maybe Text)
     , _clOauthToken       :: !(Maybe Text)
     , _clLowRange         :: !(Maybe Text)
-    , _clImgType          :: !(Maybe Text)
+    , _clImgType          :: !(Maybe SearchCseListImgType)
     , _clGl               :: !(Maybe Text)
     , _clCx               :: !(Maybe Text)
-    , _clImgColorType     :: !(Maybe Text)
-    , _clImgSize          :: !(Maybe Text)
+    , _clImgColorType     :: !(Maybe SearchCseListImgColorType)
+    , _clImgSize          :: !(Maybe SearchCseListImgSize)
     , _clExactTerms       :: !(Maybe Text)
     , _clCr               :: !(Maybe Text)
-    , _clSafe             :: !Text
+    , _clSafe             :: !SearchCseListSafe
     , _clHq               :: !(Maybe Text)
     , _clFields           :: !(Maybe Text)
     , _clHighRange        :: !(Maybe Text)
-    , _clAlt              :: !Text
+    , _clAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CseList'' with the minimum fields required to make a request.
@@ -260,11 +299,11 @@ data CseList = CseList
 -- * 'clHighRange'
 --
 -- * 'clAlt'
-cseList
+cseList'
     :: Text -- ^ 'q'
-    -> CseList
-cseList pClQ_ =
-    CseList
+    -> CseList'
+cseList' pClQ_ =
+    CseList'
     { _clImgDominantColor = Nothing
     , _clQuotaUser = Nothing
     , _clPrettyPrint = True
@@ -299,16 +338,16 @@ cseList pClQ_ =
     , _clImgSize = Nothing
     , _clExactTerms = Nothing
     , _clCr = Nothing
-    , _clSafe = "off"
+    , _clSafe = SCLSOff
     , _clHq = Nothing
     , _clFields = Nothing
     , _clHighRange = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Returns images of a specific dominant color: yellow, green, teal, blue,
 -- purple, pink, white, gray, black and brown.
-clImgDominantColor :: Lens' CseList' (Maybe Text)
+clImgDominantColor :: Lens' CseList' (Maybe SearchCseListImgDominantColor)
 clImgDominantColor
   = lens _clImgDominantColor
       (\ s a -> s{_clImgDominantColor = a})
@@ -328,7 +367,7 @@ clPrettyPrint
 
 -- | Controls whether to include or exclude results from the site named in
 -- the as_sitesearch parameter
-clSiteSearchFilter :: Lens' CseList' (Maybe Text)
+clSiteSearchFilter :: Lens' CseList' (Maybe SearchCseListSiteSearchFilter)
 clSiteSearchFilter
   = lens _clSiteSearchFilter
       (\ s a -> s{_clSiteSearchFilter = a})
@@ -377,12 +416,12 @@ clFileType
   = lens _clFileType (\ s a -> s{_clFileType = a})
 
 -- | Specifies the search type: image.
-clSearchType :: Lens' CseList' (Maybe Text)
+clSearchType :: Lens' CseList' (Maybe SearchCseListSearchType)
 clSearchType
   = lens _clSearchType (\ s a -> s{_clSearchType = a})
 
 -- | The language restriction for the search results
-clLr :: Lens' CseList' (Maybe Text)
+clLr :: Lens' CseList' (Maybe SearchCseListLr)
 clLr = lens _clLr (\ s a -> s{_clLr = a})
 
 -- | Query
@@ -425,7 +464,7 @@ clSiteSearch
   = lens _clSiteSearch (\ s a -> s{_clSiteSearch = a})
 
 -- | Controls turning on or off the duplicate content filter.
-clFilter :: Lens' CseList' (Maybe Text)
+clFilter :: Lens' CseList' (Maybe SearchCseListFilter)
 clFilter = lens _clFilter (\ s a -> s{_clFilter = a})
 
 -- | Specifies all search results are from a time period
@@ -453,7 +492,7 @@ clLowRange
 
 -- | Returns images of a type, which can be one of: clipart, face, lineart,
 -- news, and photo.
-clImgType :: Lens' CseList' (Maybe Text)
+clImgType :: Lens' CseList' (Maybe SearchCseListImgType)
 clImgType
   = lens _clImgType (\ s a -> s{_clImgType = a})
 
@@ -467,14 +506,14 @@ clCx = lens _clCx (\ s a -> s{_clCx = a})
 
 -- | Returns black and white, grayscale, or color images: mono, gray, and
 -- color.
-clImgColorType :: Lens' CseList' (Maybe Text)
+clImgColorType :: Lens' CseList' (Maybe SearchCseListImgColorType)
 clImgColorType
   = lens _clImgColorType
       (\ s a -> s{_clImgColorType = a})
 
 -- | Returns images of a specified size, where size can be one of: icon,
 -- small, medium, large, xlarge, xxlarge, and huge.
-clImgSize :: Lens' CseList' (Maybe Text)
+clImgSize :: Lens' CseList' (Maybe SearchCseListImgSize)
 clImgSize
   = lens _clImgSize (\ s a -> s{_clImgSize = a})
 
@@ -489,7 +528,7 @@ clCr :: Lens' CseList' (Maybe Text)
 clCr = lens _clCr (\ s a -> s{_clCr = a})
 
 -- | Search safety level
-clSafe :: Lens' CseList' Text
+clSafe :: Lens' CseList' SearchCseListSafe
 clSafe = lens _clSafe (\ s a -> s{_clSafe = a})
 
 -- | Appends the extra query terms to the query.
@@ -507,14 +546,15 @@ clHighRange
   = lens _clHighRange (\ s a -> s{_clHighRange = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CseList' Text
+clAlt :: Lens' CseList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CseList' where
         type Rs CseList' = Search
         request = requestWithRoute defReq customSearchURL
-        requestWithRoute r u CseList{..}
-          = go _clImgDominantColor _clQuotaUser _clPrettyPrint
+        requestWithRoute r u CseList'{..}
+          = go _clImgDominantColor _clQuotaUser
+              (Just _clPrettyPrint)
               _clSiteSearchFilter
               _clC2coff
               _clOrTerms
@@ -550,6 +590,7 @@ instance GoogleRequest CseList' where
               _clHq
               _clFields
               _clHighRange
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CseListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy CseListResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsAdunitsDelete@.
-module AdSenseHost.Accounts.Adunits.Delete
+module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Delete
     (
     -- * REST Resource
-      AccountsAdunitsDeleteAPI
+      AccountsAdunitsDeleteResource
 
     -- * Creating a Request
-    , accountsAdunitsDelete
-    , AccountsAdunitsDelete
+    , accountsAdunitsDelete'
+    , AccountsAdunitsDelete'
 
     -- * Request Lenses
     , aadQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsAdunitsDelete@ which the
--- 'AccountsAdunitsDelete' request conforms to.
-type AccountsAdunitsDeleteAPI =
+-- 'AccountsAdunitsDelete'' request conforms to.
+type AccountsAdunitsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
            Capture "adClientId" Text :>
              "adunits" :>
-               Capture "adUnitId" Text :> Delete '[JSON] AdUnit
+               Capture "adUnitId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] AdUnit
 
 -- | Delete the specified ad unit from the specified publisher AdSense
 -- account.
 --
--- /See:/ 'accountsAdunitsDelete' smart constructor.
-data AccountsAdunitsDelete = AccountsAdunitsDelete
+-- /See:/ 'accountsAdunitsDelete'' smart constructor.
+data AccountsAdunitsDelete' = AccountsAdunitsDelete'
     { _aadQuotaUser   :: !(Maybe Text)
     , _aadPrettyPrint :: !Bool
     , _aadUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data AccountsAdunitsDelete = AccountsAdunitsDelete
     , _aadKey         :: !(Maybe Text)
     , _aadOauthToken  :: !(Maybe Text)
     , _aadFields      :: !(Maybe Text)
-    , _aadAlt         :: !Text
+    , _aadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdunitsDelete'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data AccountsAdunitsDelete = AccountsAdunitsDelete
 -- * 'aadFields'
 --
 -- * 'aadAlt'
-accountsAdunitsDelete
+accountsAdunitsDelete'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
     -> Text -- ^ 'accountId'
-    -> AccountsAdunitsDelete
-accountsAdunitsDelete pAadAdUnitId_ pAadAdClientId_ pAadAccountId_ =
-    AccountsAdunitsDelete
+    -> AccountsAdunitsDelete'
+accountsAdunitsDelete' pAadAdUnitId_ pAadAdClientId_ pAadAccountId_ =
+    AccountsAdunitsDelete'
     { _aadQuotaUser = Nothing
     , _aadPrettyPrint = True
     , _aadUserIp = Nothing
@@ -111,7 +119,7 @@ accountsAdunitsDelete pAadAdUnitId_ pAadAdClientId_ pAadAccountId_ =
     , _aadKey = Nothing
     , _aadOauthToken = Nothing
     , _aadFields = Nothing
-    , _aadAlt = "json"
+    , _aadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,23 @@ aadFields
   = lens _aadFields (\ s a -> s{_aadFields = a})
 
 -- | Data format for the response.
-aadAlt :: Lens' AccountsAdunitsDelete' Text
+aadAlt :: Lens' AccountsAdunitsDelete' Alt
 aadAlt = lens _aadAlt (\ s a -> s{_aadAlt = a})
 
 instance GoogleRequest AccountsAdunitsDelete' where
         type Rs AccountsAdunitsDelete' = AdUnit
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsAdunitsDelete{..}
-          = go _aadQuotaUser _aadPrettyPrint _aadUserIp
+        requestWithRoute r u AccountsAdunitsDelete'{..}
+          = go _aadQuotaUser (Just _aadPrettyPrint) _aadUserIp
               _aadAdUnitId
               _aadAdClientId
               _aadAccountId
               _aadKey
               _aadOauthToken
               _aadFields
-              _aadAlt
+              (Just _aadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdunitsDeleteAPI)
+                      (Proxy :: Proxy AccountsAdunitsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- have accessed this result.\`, etc.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersClientMessagesLog@.
-module Partners.ClientMessages.Log
+module Network.Google.Resource.Partners.ClientMessages.Log
     (
     -- * REST Resource
-      ClientMessagesLogAPI
+      ClientMessagesLogResource
 
     -- * Creating a Request
-    , clientMessagesLog
-    , ClientMessagesLog
+    , clientMessagesLog'
+    , ClientMessagesLog'
 
     -- * Request Lenses
     , cmlXgafv
@@ -50,18 +51,31 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PartnersClientMessagesLog@ which the
--- 'ClientMessagesLog' request conforms to.
-type ClientMessagesLogAPI =
+-- 'ClientMessagesLog'' request conforms to.
+type ClientMessagesLogResource =
      "v2" :>
        "clientMessages:log" :>
-         Post '[JSON] LogMessageResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] LogMessageResponse
 
 -- | Logs a generic message from the client, such as \`Failed to render
 -- component\`, \`Profile page is running slow\`, \`More than 500 users
 -- have accessed this result.\`, etc.
 --
--- /See:/ 'clientMessagesLog' smart constructor.
-data ClientMessagesLog = ClientMessagesLog
+-- /See:/ 'clientMessagesLog'' smart constructor.
+data ClientMessagesLog' = ClientMessagesLog'
     { _cmlXgafv          :: !(Maybe Text)
     , _cmlQuotaUser      :: !(Maybe Text)
     , _cmlPrettyPrint    :: !Bool
@@ -106,10 +120,10 @@ data ClientMessagesLog = ClientMessagesLog
 -- * 'cmlCallback'
 --
 -- * 'cmlAlt'
-clientMessagesLog
-    :: ClientMessagesLog
-clientMessagesLog =
-    ClientMessagesLog
+clientMessagesLog'
+    :: ClientMessagesLog'
+clientMessagesLog' =
+    ClientMessagesLog'
     { _cmlXgafv = Nothing
     , _cmlQuotaUser = Nothing
     , _cmlPrettyPrint = True
@@ -199,10 +213,10 @@ cmlAlt = lens _cmlAlt (\ s a -> s{_cmlAlt = a})
 instance GoogleRequest ClientMessagesLog' where
         type Rs ClientMessagesLog' = LogMessageResponse
         request = requestWithRoute defReq partnersURL
-        requestWithRoute r u ClientMessagesLog{..}
-          = go _cmlXgafv _cmlQuotaUser _cmlPrettyPrint
+        requestWithRoute r u ClientMessagesLog'{..}
+          = go _cmlXgafv _cmlQuotaUser (Just _cmlPrettyPrint)
               _cmlUploadProtocol
-              _cmlPp
+              (Just _cmlPp)
               _cmlAccessToken
               _cmlUploadType
               _cmlBearerToken
@@ -210,9 +224,9 @@ instance GoogleRequest ClientMessagesLog' where
               _cmlOauthToken
               _cmlFields
               _cmlCallback
-              _cmlAlt
+              (Just _cmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ClientMessagesLogAPI)
+                      (Proxy :: Proxy ClientMessagesLogResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsGet@.
-module TagManager.Accounts.Containers.Versions.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
     (
     -- * REST Resource
-      AccountsContainersVersionsGetAPI
+      AccountsContainersVersionsGetResource
 
     -- * Creating a Request
-    , accountsContainersVersionsGet
-    , AccountsContainersVersionsGet
+    , accountsContainersVersionsGet'
+    , AccountsContainersVersionsGet'
 
     -- * Request Lenses
     , acvgcQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsGet@ which the
--- 'AccountsContainersVersionsGet' request conforms to.
-type AccountsContainersVersionsGetAPI =
+-- 'AccountsContainersVersionsGet'' request conforms to.
+type AccountsContainersVersionsGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 Get '[JSON] ContainerVersion
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ContainerVersion
 
 -- | Gets a Container Version.
 --
--- /See:/ 'accountsContainersVersionsGet' smart constructor.
-data AccountsContainersVersionsGet = AccountsContainersVersionsGet
+-- /See:/ 'accountsContainersVersionsGet'' smart constructor.
+data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
     { _acvgcQuotaUser          :: !(Maybe Text)
     , _acvgcPrettyPrint        :: !Bool
     , _acvgcContainerId        :: !Text
@@ -68,7 +76,7 @@ data AccountsContainersVersionsGet = AccountsContainersVersionsGet
     , _acvgcKey                :: !(Maybe Text)
     , _acvgcOauthToken         :: !(Maybe Text)
     , _acvgcFields             :: !(Maybe Text)
-    , _acvgcAlt                :: !Text
+    , _acvgcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsGet'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data AccountsContainersVersionsGet = AccountsContainersVersionsGet
 -- * 'acvgcFields'
 --
 -- * 'acvgcAlt'
-accountsContainersVersionsGet
+accountsContainersVersionsGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsGet
-accountsContainersVersionsGet pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
-    AccountsContainersVersionsGet
+    -> AccountsContainersVersionsGet'
+accountsContainersVersionsGet' pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
+    AccountsContainersVersionsGet'
     { _acvgcQuotaUser = Nothing
     , _acvgcPrettyPrint = True
     , _acvgcContainerId = pAcvgcContainerId_
@@ -110,7 +118,7 @@ accountsContainersVersionsGet pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvg
     , _acvgcKey = Nothing
     , _acvgcOauthToken = Nothing
     , _acvgcFields = Nothing
-    , _acvgcAlt = "json"
+    , _acvgcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +178,7 @@ acvgcFields
   = lens _acvgcFields (\ s a -> s{_acvgcFields = a})
 
 -- | Data format for the response.
-acvgcAlt :: Lens' AccountsContainersVersionsGet' Text
+acvgcAlt :: Lens' AccountsContainersVersionsGet' Alt
 acvgcAlt = lens _acvgcAlt (\ s a -> s{_acvgcAlt = a})
 
 instance GoogleRequest AccountsContainersVersionsGet'
@@ -179,8 +187,8 @@ instance GoogleRequest AccountsContainersVersionsGet'
              ContainerVersion
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsGet{..}
-          = go _acvgcQuotaUser _acvgcPrettyPrint
+          AccountsContainersVersionsGet'{..}
+          = go _acvgcQuotaUser (Just _acvgcPrettyPrint)
               _acvgcContainerId
               _acvgcUserIp
               _acvgcContainerVersionId
@@ -188,9 +196,10 @@ instance GoogleRequest AccountsContainersVersionsGet'
               _acvgcKey
               _acvgcOauthToken
               _acvgcFields
-              _acvgcAlt
+              (Just _acvgcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsGetAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsGetResource)
                       r
                       u

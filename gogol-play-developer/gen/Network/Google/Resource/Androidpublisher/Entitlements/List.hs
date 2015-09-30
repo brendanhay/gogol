@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the user\'s current inapp item or subscription entitlements
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEntitlementsList@.
-module Androidpublisher.Entitlements.List
+module Network.Google.Resource.Androidpublisher.Entitlements.List
     (
     -- * REST Resource
-      EntitlementsListAPI
+      EntitlementsListResource
 
     -- * Creating a Request
-    , entitlementsList
-    , EntitlementsList
+    , entitlementsList'
+    , EntitlementsList'
 
     -- * Request Lenses
     , elQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEntitlementsList@ which the
--- 'EntitlementsList' request conforms to.
-type EntitlementsListAPI =
+-- 'EntitlementsList'' request conforms to.
+type EntitlementsListResource =
      Capture "packageName" Text :>
        "entitlements" :>
-         QueryParam "token" Text :>
-           QueryParam "startIndex" Word32 :>
-             QueryParam "productId" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] EntitlementsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "token" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "startIndex" Word32 :>
+                       QueryParam "productId" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] EntitlementsListResponse
 
 -- | Lists the user\'s current inapp item or subscription entitlements
 --
--- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
+-- /See:/ 'entitlementsList'' smart constructor.
+data EntitlementsList' = EntitlementsList'
     { _elQuotaUser   :: !(Maybe Text)
     , _elPrettyPrint :: !Bool
     , _elPackageName :: !Text
@@ -72,7 +80,7 @@ data EntitlementsList = EntitlementsList
     , _elProductId   :: !(Maybe Text)
     , _elMaxResults  :: !(Maybe Word32)
     , _elFields      :: !(Maybe Text)
-    , _elAlt         :: !Text
+    , _elAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EntitlementsList'' with the minimum fields required to make a request.
@@ -102,11 +110,11 @@ data EntitlementsList = EntitlementsList
 -- * 'elFields'
 --
 -- * 'elAlt'
-entitlementsList
+entitlementsList'
     :: Text -- ^ 'packageName'
-    -> EntitlementsList
-entitlementsList pElPackageName_ =
-    EntitlementsList
+    -> EntitlementsList'
+entitlementsList' pElPackageName_ =
+    EntitlementsList'
     { _elQuotaUser = Nothing
     , _elPrettyPrint = True
     , _elPackageName = pElPackageName_
@@ -118,7 +126,7 @@ entitlementsList pElPackageName_ =
     , _elProductId = Nothing
     , _elMaxResults = Nothing
     , _elFields = Nothing
-    , _elAlt = "json"
+    , _elAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,14 +187,15 @@ elFields :: Lens' EntitlementsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 -- | Data format for the response.
-elAlt :: Lens' EntitlementsList' Text
+elAlt :: Lens' EntitlementsList' Alt
 elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
 
 instance GoogleRequest EntitlementsList' where
         type Rs EntitlementsList' = EntitlementsListResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EntitlementsList{..}
-          = go _elQuotaUser _elPrettyPrint _elPackageName
+        requestWithRoute r u EntitlementsList'{..}
+          = go _elQuotaUser (Just _elPrettyPrint)
+              _elPackageName
               _elUserIp
               _elToken
               _elKey
@@ -195,9 +204,9 @@ instance GoogleRequest EntitlementsList' where
               _elProductId
               _elMaxResults
               _elFields
-              _elAlt
+              (Just _elAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EntitlementsListAPI)
+                      (Proxy :: Proxy EntitlementsListResource)
                       r
                       u

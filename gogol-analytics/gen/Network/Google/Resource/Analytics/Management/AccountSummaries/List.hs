@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- accounts\/properties\/profiles) to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountSummariesList@.
-module Analytics.Management.AccountSummaries.List
+module Network.Google.Resource.Analytics.Management.AccountSummaries.List
     (
     -- * REST Resource
-      ManagementAccountSummariesListAPI
+      ManagementAccountSummariesListResource
 
     -- * Creating a Request
-    , managementAccountSummariesList
-    , ManagementAccountSummariesList
+    , managementAccountSummariesList'
+    , ManagementAccountSummariesList'
 
     -- * Request Lenses
     , maslQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountSummariesList@ which the
--- 'ManagementAccountSummariesList' request conforms to.
-type ManagementAccountSummariesListAPI =
+-- 'ManagementAccountSummariesList'' request conforms to.
+type ManagementAccountSummariesListResource =
      "management" :>
        "accountSummaries" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             Get '[JSON] AccountSummaries
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] AccountSummaries
 
 -- | Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
 --
--- /See:/ 'managementAccountSummariesList' smart constructor.
-data ManagementAccountSummariesList = ManagementAccountSummariesList
+-- /See:/ 'managementAccountSummariesList'' smart constructor.
+data ManagementAccountSummariesList' = ManagementAccountSummariesList'
     { _maslQuotaUser   :: !(Maybe Text)
     , _maslPrettyPrint :: !Bool
     , _maslUserIp      :: !(Maybe Text)
@@ -66,7 +73,7 @@ data ManagementAccountSummariesList = ManagementAccountSummariesList
     , _maslStartIndex  :: !(Maybe Int32)
     , _maslMaxResults  :: !(Maybe Int32)
     , _maslFields      :: !(Maybe Text)
-    , _maslAlt         :: !Text
+    , _maslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList'' with the minimum fields required to make a request.
@@ -90,10 +97,10 @@ data ManagementAccountSummariesList = ManagementAccountSummariesList
 -- * 'maslFields'
 --
 -- * 'maslAlt'
-managementAccountSummariesList
-    :: ManagementAccountSummariesList
-managementAccountSummariesList =
-    ManagementAccountSummariesList
+managementAccountSummariesList'
+    :: ManagementAccountSummariesList'
+managementAccountSummariesList' =
+    ManagementAccountSummariesList'
     { _maslQuotaUser = Nothing
     , _maslPrettyPrint = False
     , _maslUserIp = Nothing
@@ -102,7 +109,7 @@ managementAccountSummariesList =
     , _maslStartIndex = Nothing
     , _maslMaxResults = Nothing
     , _maslFields = Nothing
-    , _maslAlt = "json"
+    , _maslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +164,7 @@ maslFields
   = lens _maslFields (\ s a -> s{_maslFields = a})
 
 -- | Data format for the response.
-maslAlt :: Lens' ManagementAccountSummariesList' Text
+maslAlt :: Lens' ManagementAccountSummariesList' Alt
 maslAlt = lens _maslAlt (\ s a -> s{_maslAlt = a})
 
 instance GoogleRequest
@@ -166,16 +173,18 @@ instance GoogleRequest
              AccountSummaries
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementAccountSummariesList{..}
-          = go _maslQuotaUser _maslPrettyPrint _maslUserIp
+          ManagementAccountSummariesList'{..}
+          = go _maslQuotaUser (Just _maslPrettyPrint)
+              _maslUserIp
               _maslKey
               _maslOauthToken
               _maslStartIndex
               _maslMaxResults
               _maslFields
-              _maslAlt
+              (Just _maslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementAccountSummariesListAPI)
+                      (Proxy ::
+                         Proxy ManagementAccountSummariesListResource)
                       r
                       u

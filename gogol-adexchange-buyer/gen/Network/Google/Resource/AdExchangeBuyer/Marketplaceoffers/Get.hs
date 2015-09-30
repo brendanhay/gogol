@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the requested negotiation.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceoffersGet@.
-module AdExchangeBuyer.Marketplaceoffers.Get
+module Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Get
     (
     -- * REST Resource
-      MarketplaceoffersGetAPI
+      MarketplaceoffersGetResource
 
     -- * Creating a Request
-    , marketplaceoffersGet
-    , MarketplaceoffersGet
+    , marketplaceoffersGet'
+    , MarketplaceoffersGet'
 
     -- * Request Lenses
     , mgQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceoffersGet@ which the
--- 'MarketplaceoffersGet' request conforms to.
-type MarketplaceoffersGetAPI =
+-- 'MarketplaceoffersGet'' request conforms to.
+type MarketplaceoffersGetResource =
      "marketplaceOffers" :>
        Capture "offerId" Text :>
-         Get '[JSON] MarketplaceOffer
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] MarketplaceOffer
 
 -- | Gets the requested negotiation.
 --
--- /See:/ 'marketplaceoffersGet' smart constructor.
-data MarketplaceoffersGet = MarketplaceoffersGet
+-- /See:/ 'marketplaceoffersGet'' smart constructor.
+data MarketplaceoffersGet' = MarketplaceoffersGet'
     { _mgQuotaUser   :: !(Maybe Text)
     , _mgPrettyPrint :: !Bool
     , _mgUserIp      :: !(Maybe Text)
@@ -60,7 +67,7 @@ data MarketplaceoffersGet = MarketplaceoffersGet
     , _mgOfferId     :: !Text
     , _mgOauthToken  :: !(Maybe Text)
     , _mgFields      :: !(Maybe Text)
-    , _mgAlt         :: !Text
+    , _mgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceoffersGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data MarketplaceoffersGet = MarketplaceoffersGet
 -- * 'mgFields'
 --
 -- * 'mgAlt'
-marketplaceoffersGet
+marketplaceoffersGet'
     :: Text -- ^ 'offerId'
-    -> MarketplaceoffersGet
-marketplaceoffersGet pMgOfferId_ =
-    MarketplaceoffersGet
+    -> MarketplaceoffersGet'
+marketplaceoffersGet' pMgOfferId_ =
+    MarketplaceoffersGet'
     { _mgQuotaUser = Nothing
     , _mgPrettyPrint = True
     , _mgUserIp = Nothing
@@ -94,7 +101,7 @@ marketplaceoffersGet pMgOfferId_ =
     , _mgOfferId = pMgOfferId_
     , _mgOauthToken = Nothing
     , _mgFields = Nothing
-    , _mgAlt = "json"
+    , _mgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +143,21 @@ mgFields :: Lens' MarketplaceoffersGet' (Maybe Text)
 mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
 -- | Data format for the response.
-mgAlt :: Lens' MarketplaceoffersGet' Text
+mgAlt :: Lens' MarketplaceoffersGet' Alt
 mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
 
 instance GoogleRequest MarketplaceoffersGet' where
         type Rs MarketplaceoffersGet' = MarketplaceOffer
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceoffersGet{..}
-          = go _mgQuotaUser _mgPrettyPrint _mgUserIp _mgKey
+        requestWithRoute r u MarketplaceoffersGet'{..}
+          = go _mgQuotaUser (Just _mgPrettyPrint) _mgUserIp
+              _mgKey
               _mgOfferId
               _mgOauthToken
               _mgFields
-              _mgAlt
+              (Just _mgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplaceoffersGetAPI)
+                      (Proxy :: Proxy MarketplaceoffersGetResource)
                       r
                       u

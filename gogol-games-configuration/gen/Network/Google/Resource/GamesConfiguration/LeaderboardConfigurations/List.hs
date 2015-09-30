@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of the leaderboard configurations in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsList@.
-module GamesConfiguration.LeaderboardConfigurations.List
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
     (
     -- * REST Resource
-      LeaderboardConfigurationsListAPI
+      LeaderboardConfigurationsListResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsList
-    , LeaderboardConfigurationsList
+    , leaderboardConfigurationsList'
+    , LeaderboardConfigurationsList'
 
     -- * Request Lenses
     , lclQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsList@ which the
--- 'LeaderboardConfigurationsList' request conforms to.
-type LeaderboardConfigurationsListAPI =
+-- 'LeaderboardConfigurationsList'' request conforms to.
+type LeaderboardConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "leaderboards" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] LeaderboardConfigurationListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] LeaderboardConfigurationListResponse
 
 -- | Returns a list of the leaderboard configurations in this application.
 --
--- /See:/ 'leaderboardConfigurationsList' smart constructor.
-data LeaderboardConfigurationsList = LeaderboardConfigurationsList
+-- /See:/ 'leaderboardConfigurationsList'' smart constructor.
+data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
     { _lclQuotaUser     :: !(Maybe Text)
     , _lclPrettyPrint   :: !Bool
     , _lclUserIp        :: !(Maybe Text)
@@ -67,7 +75,7 @@ data LeaderboardConfigurationsList = LeaderboardConfigurationsList
     , _lclOauthToken    :: !(Maybe Text)
     , _lclMaxResults    :: !(Maybe Int32)
     , _lclFields        :: !(Maybe Text)
-    , _lclAlt           :: !Text
+    , _lclAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data LeaderboardConfigurationsList = LeaderboardConfigurationsList
 -- * 'lclFields'
 --
 -- * 'lclAlt'
-leaderboardConfigurationsList
+leaderboardConfigurationsList'
     :: Text -- ^ 'applicationId'
-    -> LeaderboardConfigurationsList
-leaderboardConfigurationsList pLclApplicationId_ =
-    LeaderboardConfigurationsList
+    -> LeaderboardConfigurationsList'
+leaderboardConfigurationsList' pLclApplicationId_ =
+    LeaderboardConfigurationsList'
     { _lclQuotaUser = Nothing
     , _lclPrettyPrint = True
     , _lclUserIp = Nothing
@@ -107,7 +115,7 @@ leaderboardConfigurationsList pLclApplicationId_ =
     , _lclOauthToken = Nothing
     , _lclMaxResults = Nothing
     , _lclFields = Nothing
-    , _lclAlt = "json"
+    , _lclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,7 +174,7 @@ lclFields
   = lens _lclFields (\ s a -> s{_lclFields = a})
 
 -- | Data format for the response.
-lclAlt :: Lens' LeaderboardConfigurationsList' Text
+lclAlt :: Lens' LeaderboardConfigurationsList' Alt
 lclAlt = lens _lclAlt (\ s a -> s{_lclAlt = a})
 
 instance GoogleRequest LeaderboardConfigurationsList'
@@ -176,17 +184,18 @@ instance GoogleRequest LeaderboardConfigurationsList'
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          LeaderboardConfigurationsList{..}
-          = go _lclQuotaUser _lclPrettyPrint _lclUserIp
+          LeaderboardConfigurationsList'{..}
+          = go _lclQuotaUser (Just _lclPrettyPrint) _lclUserIp
               _lclApplicationId
               _lclKey
               _lclPageToken
               _lclOauthToken
               _lclMaxResults
               _lclFields
-              _lclAlt
+              (Just _lclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsListAPI)
+                      (Proxy ::
+                         Proxy LeaderboardConfigurationsListResource)
                       r
                       u

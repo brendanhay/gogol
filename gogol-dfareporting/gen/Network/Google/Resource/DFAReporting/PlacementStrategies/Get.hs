@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one placement strategy by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesGet@.
-module DFAReporting.PlacementStrategies.Get
+module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
     (
     -- * REST Resource
-      PlacementStrategiesGetAPI
+      PlacementStrategiesGetResource
 
     -- * Creating a Request
-    , placementStrategiesGet
-    , PlacementStrategiesGet
+    , placementStrategiesGet'
+    , PlacementStrategiesGet'
 
     -- * Request Lenses
     , psgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementStrategiesGet@ which the
--- 'PlacementStrategiesGet' request conforms to.
-type PlacementStrategiesGetAPI =
+-- 'PlacementStrategiesGet'' request conforms to.
+type PlacementStrategiesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           Capture "id" Int64 :> Get '[JSON] PlacementStrategy
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] PlacementStrategy
 
 -- | Gets one placement strategy by ID.
 --
--- /See:/ 'placementStrategiesGet' smart constructor.
-data PlacementStrategiesGet = PlacementStrategiesGet
+-- /See:/ 'placementStrategiesGet'' smart constructor.
+data PlacementStrategiesGet' = PlacementStrategiesGet'
     { _psgQuotaUser   :: !(Maybe Text)
     , _psgPrettyPrint :: !Bool
     , _psgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PlacementStrategiesGet = PlacementStrategiesGet
     , _psgId          :: !Int64
     , _psgOauthToken  :: !(Maybe Text)
     , _psgFields      :: !(Maybe Text)
-    , _psgAlt         :: !Text
+    , _psgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PlacementStrategiesGet = PlacementStrategiesGet
 -- * 'psgFields'
 --
 -- * 'psgAlt'
-placementStrategiesGet
+placementStrategiesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> PlacementStrategiesGet
-placementStrategiesGet pPsgProfileId_ pPsgId_ =
-    PlacementStrategiesGet
+    -> PlacementStrategiesGet'
+placementStrategiesGet' pPsgProfileId_ pPsgId_ =
+    PlacementStrategiesGet'
     { _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
     , _psgUserIp = Nothing
@@ -101,7 +109,7 @@ placementStrategiesGet pPsgProfileId_ pPsgId_ =
     , _psgId = pPsgId_
     , _psgOauthToken = Nothing
     , _psgFields = Nothing
-    , _psgAlt = "json"
+    , _psgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ psgFields
   = lens _psgFields (\ s a -> s{_psgFields = a})
 
 -- | Data format for the response.
-psgAlt :: Lens' PlacementStrategiesGet' Text
+psgAlt :: Lens' PlacementStrategiesGet' Alt
 psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
 
 instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesGet{..}
-          = go _psgQuotaUser _psgPrettyPrint _psgUserIp
+        requestWithRoute r u PlacementStrategiesGet'{..}
+          = go _psgQuotaUser (Just _psgPrettyPrint) _psgUserIp
               _psgProfileId
               _psgKey
               _psgId
               _psgOauthToken
               _psgFields
-              _psgAlt
+              (Just _psgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementStrategiesGetAPI)
+                      (Proxy :: Proxy PlacementStrategiesGetResource)
                       r
                       u

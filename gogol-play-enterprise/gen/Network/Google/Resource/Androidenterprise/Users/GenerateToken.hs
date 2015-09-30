@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- generated token.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseUsersGenerateToken@.
-module Androidenterprise.Users.GenerateToken
+module Network.Google.Resource.Androidenterprise.Users.GenerateToken
     (
     -- * REST Resource
-      UsersGenerateTokenAPI
+      UsersGenerateTokenResource
 
     -- * Creating a Request
-    , usersGenerateToken
-    , UsersGenerateToken
+    , usersGenerateToken'
+    , UsersGenerateToken'
 
     -- * Request Lenses
     , ugtQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseUsersGenerateToken@ which the
--- 'UsersGenerateToken' request conforms to.
-type UsersGenerateTokenAPI =
+-- 'UsersGenerateToken'' request conforms to.
+type UsersGenerateTokenResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
-             "token" :> Post '[JSON] UserToken
+             "token" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] UserToken
 
 -- | Generates a token (activation code) to allow this user to configure
 -- their work account in the Android Setup Wizard. Revokes any previously
 -- generated token.
 --
--- /See:/ 'usersGenerateToken' smart constructor.
-data UsersGenerateToken = UsersGenerateToken
+-- /See:/ 'usersGenerateToken'' smart constructor.
+data UsersGenerateToken' = UsersGenerateToken'
     { _ugtQuotaUser    :: !(Maybe Text)
     , _ugtPrettyPrint  :: !Bool
     , _ugtEnterpriseId :: !Text
@@ -68,7 +76,7 @@ data UsersGenerateToken = UsersGenerateToken
     , _ugtKey          :: !(Maybe Text)
     , _ugtOauthToken   :: !(Maybe Text)
     , _ugtFields       :: !(Maybe Text)
-    , _ugtAlt          :: !Text
+    , _ugtAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGenerateToken'' with the minimum fields required to make a request.
@@ -92,12 +100,12 @@ data UsersGenerateToken = UsersGenerateToken
 -- * 'ugtFields'
 --
 -- * 'ugtAlt'
-usersGenerateToken
+usersGenerateToken'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> UsersGenerateToken
-usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
-    UsersGenerateToken
+    -> UsersGenerateToken'
+usersGenerateToken' pUgtEnterpriseId_ pUgtUserId_ =
+    UsersGenerateToken'
     { _ugtQuotaUser = Nothing
     , _ugtPrettyPrint = True
     , _ugtEnterpriseId = pUgtEnterpriseId_
@@ -106,7 +114,7 @@ usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
     , _ugtKey = Nothing
     , _ugtOauthToken = Nothing
     , _ugtFields = Nothing
-    , _ugtAlt = "json"
+    , _ugtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,22 +165,23 @@ ugtFields
   = lens _ugtFields (\ s a -> s{_ugtFields = a})
 
 -- | Data format for the response.
-ugtAlt :: Lens' UsersGenerateToken' Text
+ugtAlt :: Lens' UsersGenerateToken' Alt
 ugtAlt = lens _ugtAlt (\ s a -> s{_ugtAlt = a})
 
 instance GoogleRequest UsersGenerateToken' where
         type Rs UsersGenerateToken' = UserToken
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u UsersGenerateToken{..}
-          = go _ugtQuotaUser _ugtPrettyPrint _ugtEnterpriseId
+        requestWithRoute r u UsersGenerateToken'{..}
+          = go _ugtQuotaUser (Just _ugtPrettyPrint)
+              _ugtEnterpriseId
               _ugtUserIp
               _ugtUserId
               _ugtKey
               _ugtOauthToken
               _ugtFields
-              _ugtAlt
+              (Just _ugtAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersGenerateTokenAPI)
+                      (Proxy :: Proxy UsersGenerateTokenResource)
                       r
                       u

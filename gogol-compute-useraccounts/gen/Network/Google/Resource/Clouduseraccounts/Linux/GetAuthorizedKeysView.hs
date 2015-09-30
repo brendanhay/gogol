@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of authorized public keys for a specific user account.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsLinuxGetAuthorizedKeysView@.
-module Clouduseraccounts.Linux.GetAuthorizedKeysView
+module Network.Google.Resource.Clouduseraccounts.Linux.GetAuthorizedKeysView
     (
     -- * REST Resource
-      LinuxGetAuthorizedKeysViewAPI
+      LinuxGetAuthorizedKeysViewResource
 
     -- * Creating a Request
-    , linuxGetAuthorizedKeysView
-    , LinuxGetAuthorizedKeysView
+    , linuxGetAuthorizedKeysView'
+    , LinuxGetAuthorizedKeysView'
 
     -- * Request Lenses
     , lgakvQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsLinuxGetAuthorizedKeysView@ which the
--- 'LinuxGetAuthorizedKeysView' request conforms to.
-type LinuxGetAuthorizedKeysViewAPI =
+-- 'LinuxGetAuthorizedKeysView'' request conforms to.
+type LinuxGetAuthorizedKeysViewResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "authorizedKeysView" :>
              Capture "user" Text :>
-               QueryParam "login" Bool :>
-                 QueryParam "instance" Text :>
-                   Post '[JSON] LinuxGetAuthorizedKeysViewResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "login" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               QueryParam "instance" Text :>
+                                 Post '[JSON] LinuxGetAuthorizedKeysViewResponse
 
 -- | Returns a list of authorized public keys for a specific user account.
 --
--- /See:/ 'linuxGetAuthorizedKeysView' smart constructor.
-data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView
+-- /See:/ 'linuxGetAuthorizedKeysView'' smart constructor.
+data LinuxGetAuthorizedKeysView' = LinuxGetAuthorizedKeysView'
     { _lgakvQuotaUser   :: !(Maybe Text)
     , _lgakvPrettyPrint :: !Bool
     , _lgakvProject     :: !Text
@@ -72,7 +80,7 @@ data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView
     , _lgakvOauthToken  :: !(Maybe Text)
     , _lgakvLogin       :: !(Maybe Bool)
     , _lgakvFields      :: !(Maybe Text)
-    , _lgakvAlt         :: !Text
+    , _lgakvAlt         :: !Alt
     , _lgakvInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -103,14 +111,14 @@ data LinuxGetAuthorizedKeysView = LinuxGetAuthorizedKeysView
 -- * 'lgakvAlt'
 --
 -- * 'lgakvInstance'
-linuxGetAuthorizedKeysView
+linuxGetAuthorizedKeysView'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'user'
     -> Text -- ^ 'instance'
-    -> LinuxGetAuthorizedKeysView
-linuxGetAuthorizedKeysView pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
-    LinuxGetAuthorizedKeysView
+    -> LinuxGetAuthorizedKeysView'
+linuxGetAuthorizedKeysView' pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance_ =
+    LinuxGetAuthorizedKeysView'
     { _lgakvQuotaUser = Nothing
     , _lgakvPrettyPrint = True
     , _lgakvProject = pLgakvProject_
@@ -121,7 +129,7 @@ linuxGetAuthorizedKeysView pLgakvProject_ pLgakvZone_ pLgakvUser_ pLgakvInstance
     , _lgakvOauthToken = Nothing
     , _lgakvLogin = Nothing
     , _lgakvFields = Nothing
-    , _lgakvAlt = "json"
+    , _lgakvAlt = JSON
     , _lgakvInstance = pLgakvInstance_
     }
 
@@ -184,7 +192,7 @@ lgakvFields
   = lens _lgakvFields (\ s a -> s{_lgakvFields = a})
 
 -- | Data format for the response.
-lgakvAlt :: Lens' LinuxGetAuthorizedKeysView' Text
+lgakvAlt :: Lens' LinuxGetAuthorizedKeysView' Alt
 lgakvAlt = lens _lgakvAlt (\ s a -> s{_lgakvAlt = a})
 
 -- | The fully-qualified URL of the virtual machine requesting the view.
@@ -199,8 +207,9 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
              LinuxGetAuthorizedKeysViewResponse
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u LinuxGetAuthorizedKeysView{..}
-          = go _lgakvQuotaUser _lgakvPrettyPrint _lgakvProject
+        requestWithRoute r u LinuxGetAuthorizedKeysView'{..}
+          = go _lgakvQuotaUser (Just _lgakvPrettyPrint)
+              _lgakvProject
               _lgakvUserIp
               _lgakvZone
               _lgakvUser
@@ -208,10 +217,10 @@ instance GoogleRequest LinuxGetAuthorizedKeysView'
               _lgakvOauthToken
               _lgakvLogin
               _lgakvFields
-              _lgakvAlt
+              (Just _lgakvAlt)
               (Just _lgakvInstance)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LinuxGetAuthorizedKeysViewAPI)
+                      (Proxy :: Proxy LinuxGetAuthorizedKeysViewResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of connection types.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingConnectionTypesList@.
-module DFAReporting.ConnectionTypes.List
+module Network.Google.Resource.DFAReporting.ConnectionTypes.List
     (
     -- * REST Resource
-      ConnectionTypesListAPI
+      ConnectionTypesListResource
 
     -- * Creating a Request
-    , connectionTypesList
-    , ConnectionTypesList
+    , connectionTypesList'
+    , ConnectionTypesList'
 
     -- * Request Lenses
     , ctlQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingConnectionTypesList@ which the
--- 'ConnectionTypesList' request conforms to.
-type ConnectionTypesListAPI =
+-- 'ConnectionTypesList'' request conforms to.
+type ConnectionTypesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "connectionTypes" :>
-           Get '[JSON] ConnectionTypesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ConnectionTypesListResponse
 
 -- | Retrieves a list of connection types.
 --
--- /See:/ 'connectionTypesList' smart constructor.
-data ConnectionTypesList = ConnectionTypesList
+-- /See:/ 'connectionTypesList'' smart constructor.
+data ConnectionTypesList' = ConnectionTypesList'
     { _ctlQuotaUser   :: !(Maybe Text)
     , _ctlPrettyPrint :: !Bool
     , _ctlUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data ConnectionTypesList = ConnectionTypesList
     , _ctlKey         :: !(Maybe Text)
     , _ctlOauthToken  :: !(Maybe Text)
     , _ctlFields      :: !(Maybe Text)
-    , _ctlAlt         :: !Text
+    , _ctlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data ConnectionTypesList = ConnectionTypesList
 -- * 'ctlFields'
 --
 -- * 'ctlAlt'
-connectionTypesList
+connectionTypesList'
     :: Int64 -- ^ 'profileId'
-    -> ConnectionTypesList
-connectionTypesList pCtlProfileId_ =
-    ConnectionTypesList
+    -> ConnectionTypesList'
+connectionTypesList' pCtlProfileId_ =
+    ConnectionTypesList'
     { _ctlQuotaUser = Nothing
     , _ctlPrettyPrint = True
     , _ctlUserIp = Nothing
@@ -95,7 +103,7 @@ connectionTypesList pCtlProfileId_ =
     , _ctlKey = Nothing
     , _ctlOauthToken = Nothing
     , _ctlFields = Nothing
-    , _ctlAlt = "json"
+    , _ctlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,22 +148,22 @@ ctlFields
   = lens _ctlFields (\ s a -> s{_ctlFields = a})
 
 -- | Data format for the response.
-ctlAlt :: Lens' ConnectionTypesList' Text
+ctlAlt :: Lens' ConnectionTypesList' Alt
 ctlAlt = lens _ctlAlt (\ s a -> s{_ctlAlt = a})
 
 instance GoogleRequest ConnectionTypesList' where
         type Rs ConnectionTypesList' =
              ConnectionTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ConnectionTypesList{..}
-          = go _ctlQuotaUser _ctlPrettyPrint _ctlUserIp
+        requestWithRoute r u ConnectionTypesList'{..}
+          = go _ctlQuotaUser (Just _ctlPrettyPrint) _ctlUserIp
               _ctlProfileId
               _ctlKey
               _ctlOauthToken
               _ctlFields
-              _ctlAlt
+              (Just _ctlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ConnectionTypesListAPI)
+                      (Proxy :: Proxy ConnectionTypesListResource)
                       r
                       u

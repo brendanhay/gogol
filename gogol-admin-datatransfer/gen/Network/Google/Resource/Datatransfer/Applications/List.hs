@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the applications available for data transfer for a customer.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DatatransferApplicationsList@.
-module Datatransfer.Applications.List
+module Network.Google.Resource.Datatransfer.Applications.List
     (
     -- * REST Resource
-      ApplicationsListAPI
+      ApplicationsListResource
 
     -- * Creating a Request
-    , applicationsList
-    , ApplicationsList
+    , applicationsList'
+    , ApplicationsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatatransferApplicationsList@ which the
--- 'ApplicationsList' request conforms to.
-type ApplicationsListAPI =
+-- 'ApplicationsList'' request conforms to.
+type ApplicationsListResource =
      "applications" :>
-       QueryParam "customerId" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             Get '[JSON] ApplicationsListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "customerId" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ApplicationsListResponse
 
 -- | Lists the applications available for data transfer for a customer.
 --
--- /See:/ 'applicationsList' smart constructor.
-data ApplicationsList = ApplicationsList
+-- /See:/ 'applicationsList'' smart constructor.
+data ApplicationsList' = ApplicationsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data ApplicationsList = ApplicationsList
     , _alOauthToken  :: !(Maybe Text)
     , _alMaxResults  :: !(Maybe Word32)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsList'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data ApplicationsList = ApplicationsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-applicationsList
-    :: ApplicationsList
-applicationsList =
-    ApplicationsList
+applicationsList'
+    :: ApplicationsList'
+applicationsList' =
+    ApplicationsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
@@ -105,7 +113,7 @@ applicationsList =
     , _alOauthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,24 +165,24 @@ alFields :: Lens' ApplicationsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ApplicationsList' Text
+alAlt :: Lens' ApplicationsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ApplicationsList' where
         type Rs ApplicationsList' = ApplicationsListResponse
         request
           = requestWithRoute defReq adminDataTransferURL
-        requestWithRoute r u ApplicationsList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp
+        requestWithRoute r u ApplicationsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
               _alCustomerId
               _alKey
               _alPageToken
               _alOauthToken
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ApplicationsListAPI)
+                      (Proxy :: Proxy ApplicationsListResource)
                       r
                       u

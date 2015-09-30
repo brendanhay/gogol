@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the name and domain of an enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesGet@.
-module Androidenterprise.Enterprises.Get
+module Network.Google.Resource.Androidenterprise.Enterprises.Get
     (
     -- * REST Resource
-      EnterprisesGetAPI
+      EnterprisesGetResource
 
     -- * Creating a Request
-    , enterprisesGet
-    , EnterprisesGet
+    , enterprisesGet'
+    , EnterprisesGet'
 
     -- * Request Lenses
     , egQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesGet@ which the
--- 'EnterprisesGet' request conforms to.
-type EnterprisesGetAPI =
+-- 'EnterprisesGet'' request conforms to.
+type EnterprisesGetResource =
      "enterprises" :>
-       Capture "enterpriseId" Text :> Get '[JSON] Enterprise
+       Capture "enterpriseId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Enterprise
 
 -- | Retrieves the name and domain of an enterprise.
 --
--- /See:/ 'enterprisesGet' smart constructor.
-data EnterprisesGet = EnterprisesGet
+-- /See:/ 'enterprisesGet'' smart constructor.
+data EnterprisesGet' = EnterprisesGet'
     { _egQuotaUser    :: !(Maybe Text)
     , _egPrettyPrint  :: !Bool
     , _egEnterpriseId :: !Text
@@ -59,7 +67,7 @@ data EnterprisesGet = EnterprisesGet
     , _egKey          :: !(Maybe Text)
     , _egOauthToken   :: !(Maybe Text)
     , _egFields       :: !(Maybe Text)
-    , _egAlt          :: !Text
+    , _egAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data EnterprisesGet = EnterprisesGet
 -- * 'egFields'
 --
 -- * 'egAlt'
-enterprisesGet
+enterprisesGet'
     :: Text -- ^ 'enterpriseId'
-    -> EnterprisesGet
-enterprisesGet pEgEnterpriseId_ =
-    EnterprisesGet
+    -> EnterprisesGet'
+enterprisesGet' pEgEnterpriseId_ =
+    EnterprisesGet'
     { _egQuotaUser = Nothing
     , _egPrettyPrint = True
     , _egEnterpriseId = pEgEnterpriseId_
@@ -93,7 +101,7 @@ enterprisesGet pEgEnterpriseId_ =
     , _egKey = Nothing
     , _egOauthToken = Nothing
     , _egFields = Nothing
-    , _egAlt = "json"
+    , _egAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,20 +144,22 @@ egFields :: Lens' EnterprisesGet' (Maybe Text)
 egFields = lens _egFields (\ s a -> s{_egFields = a})
 
 -- | Data format for the response.
-egAlt :: Lens' EnterprisesGet' Text
+egAlt :: Lens' EnterprisesGet' Alt
 egAlt = lens _egAlt (\ s a -> s{_egAlt = a})
 
 instance GoogleRequest EnterprisesGet' where
         type Rs EnterprisesGet' = Enterprise
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesGet{..}
-          = go _egQuotaUser _egPrettyPrint _egEnterpriseId
+        requestWithRoute r u EnterprisesGet'{..}
+          = go _egQuotaUser (Just _egPrettyPrint)
+              _egEnterpriseId
               _egUserIp
               _egKey
               _egOauthToken
               _egFields
-              _egAlt
+              (Just _egAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EnterprisesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EnterprisesGetResource)
                       r
                       u

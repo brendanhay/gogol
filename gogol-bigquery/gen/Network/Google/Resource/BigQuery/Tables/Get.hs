@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- describes the structure of this table.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesGet@.
-module BigQuery.Tables.Get
+module Network.Google.Resource.BigQuery.Tables.Get
     (
     -- * REST Resource
-      TablesGetAPI
+      TablesGetResource
 
     -- * Creating a Request
-    , tablesGet
-    , TablesGet
+    , tablesGet'
+    , TablesGet'
 
     -- * Request Lenses
     , tgQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesGet@ which the
--- 'TablesGet' request conforms to.
-type TablesGetAPI =
+-- 'TablesGet'' request conforms to.
+type TablesGetResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               Capture "tableId" Text :> Get '[JSON] Table
+               Capture "tableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Table
 
 -- | Gets the specified table resource by table ID. This method does not
 -- return the data in the table, it only returns the table resource, which
 -- describes the structure of this table.
 --
--- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet
+-- /See:/ 'tablesGet'' smart constructor.
+data TablesGet' = TablesGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data TablesGet = TablesGet
     , _tgOauthToken  :: !(Maybe Text)
     , _tgTableId     :: !Text
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesGet'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data TablesGet = TablesGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-tablesGet
+tablesGet'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TablesGet
-tablesGet pTgDatasetId_ pTgProjectId_ pTgTableId_ =
-    TablesGet
+    -> TablesGet'
+tablesGet' pTgDatasetId_ pTgProjectId_ pTgTableId_ =
+    TablesGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgUserIp = Nothing
@@ -113,7 +121,7 @@ tablesGet pTgDatasetId_ pTgProjectId_ pTgTableId_ =
     , _tgOauthToken = Nothing
     , _tgTableId = pTgTableId_
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,19 +173,22 @@ tgFields :: Lens' TablesGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TablesGet' Text
+tgAlt :: Lens' TablesGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesGet{..}
-          = go _tgQuotaUser _tgPrettyPrint _tgUserIp _tgKey
+        requestWithRoute r u TablesGet'{..}
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIp
+              _tgKey
               _tgDatasetId
               _tgProjectId
               _tgOauthToken
               _tgTableId
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TablesGetResource)
+                      r
+                      u

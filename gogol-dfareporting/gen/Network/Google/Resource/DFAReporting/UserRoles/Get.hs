@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one user role by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesGet@.
-module DFAReporting.UserRoles.Get
+module Network.Google.Resource.DFAReporting.UserRoles.Get
     (
     -- * REST Resource
-      UserRolesGetAPI
+      UserRolesGetResource
 
     -- * Creating a Request
-    , userRolesGet
-    , UserRolesGet
+    , userRolesGet'
+    , UserRolesGet'
 
     -- * Request Lenses
     , urgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolesGet@ which the
--- 'UserRolesGet' request conforms to.
-type UserRolesGetAPI =
+-- 'UserRolesGet'' request conforms to.
+type UserRolesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           Capture "id" Int64 :> Get '[JSON] UserRole
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] UserRole
 
 -- | Gets one user role by ID.
 --
--- /See:/ 'userRolesGet' smart constructor.
-data UserRolesGet = UserRolesGet
+-- /See:/ 'userRolesGet'' smart constructor.
+data UserRolesGet' = UserRolesGet'
     { _urgQuotaUser   :: !(Maybe Text)
     , _urgPrettyPrint :: !Bool
     , _urgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data UserRolesGet = UserRolesGet
     , _urgId          :: !Int64
     , _urgOauthToken  :: !(Maybe Text)
     , _urgFields      :: !(Maybe Text)
-    , _urgAlt         :: !Text
+    , _urgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data UserRolesGet = UserRolesGet
 -- * 'urgFields'
 --
 -- * 'urgAlt'
-userRolesGet
+userRolesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> UserRolesGet
-userRolesGet pUrgProfileId_ pUrgId_ =
-    UserRolesGet
+    -> UserRolesGet'
+userRolesGet' pUrgProfileId_ pUrgId_ =
+    UserRolesGet'
     { _urgQuotaUser = Nothing
     , _urgPrettyPrint = True
     , _urgUserIp = Nothing
@@ -101,7 +109,7 @@ userRolesGet pUrgProfileId_ pUrgId_ =
     , _urgId = pUrgId_
     , _urgOauthToken = Nothing
     , _urgFields = Nothing
-    , _urgAlt = "json"
+    , _urgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ urgFields
   = lens _urgFields (\ s a -> s{_urgFields = a})
 
 -- | Data format for the response.
-urgAlt :: Lens' UserRolesGet' Text
+urgAlt :: Lens' UserRolesGet' Alt
 urgAlt = lens _urgAlt (\ s a -> s{_urgAlt = a})
 
 instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesGet{..}
-          = go _urgQuotaUser _urgPrettyPrint _urgUserIp
+        requestWithRoute r u UserRolesGet'{..}
+          = go _urgQuotaUser (Just _urgPrettyPrint) _urgUserIp
               _urgProfileId
               _urgKey
               _urgId
               _urgOauthToken
               _urgFields
-              _urgAlt
+              (Just _urgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserRolesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UserRolesGetResource)
+                      r
                       u

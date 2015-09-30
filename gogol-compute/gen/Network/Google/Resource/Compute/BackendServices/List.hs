@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesList@.
-module Compute.BackendServices.List
+module Network.Google.Resource.Compute.BackendServices.List
     (
     -- * REST Resource
-      BackendServicesListAPI
+      BackendServicesListResource
 
     -- * Creating a Request
-    , backendServicesList
-    , BackendServicesList
+    , backendServicesList'
+    , BackendServicesList'
 
     -- * Request Lenses
     , bslQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeBackendServicesList@ which the
--- 'BackendServicesList' request conforms to.
-type BackendServicesListAPI =
+-- 'BackendServicesList'' request conforms to.
+type BackendServicesListResource =
      Capture "project" Text :>
        "global" :>
          "backendServices" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] BackendServiceList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] BackendServiceList
 
 -- | Retrieves the list of BackendService resources available to the
 -- specified project.
 --
--- /See:/ 'backendServicesList' smart constructor.
-data BackendServicesList = BackendServicesList
+-- /See:/ 'backendServicesList'' smart constructor.
+data BackendServicesList' = BackendServicesList'
     { _bslQuotaUser   :: !(Maybe Text)
     , _bslPrettyPrint :: !Bool
     , _bslProject     :: !Text
@@ -72,7 +80,7 @@ data BackendServicesList = BackendServicesList
     , _bslOauthToken  :: !(Maybe Text)
     , _bslMaxResults  :: !Word32
     , _bslFields      :: !(Maybe Text)
-    , _bslAlt         :: !Text
+    , _bslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data BackendServicesList = BackendServicesList
 -- * 'bslFields'
 --
 -- * 'bslAlt'
-backendServicesList
+backendServicesList'
     :: Text -- ^ 'project'
-    -> BackendServicesList
-backendServicesList pBslProject_ =
-    BackendServicesList
+    -> BackendServicesList'
+backendServicesList' pBslProject_ =
+    BackendServicesList'
     { _bslQuotaUser = Nothing
     , _bslPrettyPrint = True
     , _bslProject = pBslProject_
@@ -115,7 +123,7 @@ backendServicesList pBslProject_ =
     , _bslOauthToken = Nothing
     , _bslMaxResults = 500
     , _bslFields = Nothing
-    , _bslAlt = "json"
+    , _bslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +196,14 @@ bslFields
   = lens _bslFields (\ s a -> s{_bslFields = a})
 
 -- | Data format for the response.
-bslAlt :: Lens' BackendServicesList' Text
+bslAlt :: Lens' BackendServicesList' Alt
 bslAlt = lens _bslAlt (\ s a -> s{_bslAlt = a})
 
 instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesList{..}
-          = go _bslQuotaUser _bslPrettyPrint _bslProject
+        requestWithRoute r u BackendServicesList'{..}
+          = go _bslQuotaUser (Just _bslPrettyPrint) _bslProject
               _bslUserIp
               _bslKey
               _bslFilter
@@ -203,9 +211,9 @@ instance GoogleRequest BackendServicesList' where
               _bslOauthToken
               (Just _bslMaxResults)
               _bslFields
-              _bslAlt
+              (Just _bslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackendServicesListAPI)
+                      (Proxy :: Proxy BackendServicesListResource)
                       r
                       u

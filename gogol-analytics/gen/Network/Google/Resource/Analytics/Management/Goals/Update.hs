@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsUpdate@.
-module Analytics.Management.Goals.Update
+module Network.Google.Resource.Analytics.Management.Goals.Update
     (
     -- * REST Resource
-      ManagementGoalsUpdateAPI
+      ManagementGoalsUpdateResource
 
     -- * Creating a Request
-    , managementGoalsUpdate
-    , ManagementGoalsUpdate
+    , managementGoalsUpdate'
+    , ManagementGoalsUpdate'
 
     -- * Request Lenses
     , mguQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsUpdate@ which the
--- 'ManagementGoalsUpdate' request conforms to.
-type ManagementGoalsUpdateAPI =
+-- 'ManagementGoalsUpdate'' request conforms to.
+type ManagementGoalsUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,12 +56,20 @@ type ManagementGoalsUpdateAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "goals" :> Capture "goalId" Text :> Put '[JSON] Goal
+                   "goals" :>
+                     Capture "goalId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Put '[JSON] Goal
 
 -- | Updates an existing view (profile).
 --
--- /See:/ 'managementGoalsUpdate' smart constructor.
-data ManagementGoalsUpdate = ManagementGoalsUpdate
+-- /See:/ 'managementGoalsUpdate'' smart constructor.
+data ManagementGoalsUpdate' = ManagementGoalsUpdate'
     { _mguQuotaUser     :: !(Maybe Text)
     , _mguPrettyPrint   :: !Bool
     , _mguWebPropertyId :: !Text
@@ -71,7 +80,7 @@ data ManagementGoalsUpdate = ManagementGoalsUpdate
     , _mguKey           :: !(Maybe Text)
     , _mguOauthToken    :: !(Maybe Text)
     , _mguFields        :: !(Maybe Text)
-    , _mguAlt           :: !Text
+    , _mguAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsUpdate'' with the minimum fields required to make a request.
@@ -99,14 +108,14 @@ data ManagementGoalsUpdate = ManagementGoalsUpdate
 -- * 'mguFields'
 --
 -- * 'mguAlt'
-managementGoalsUpdate
+managementGoalsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementGoalsUpdate
-managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguAccountId_ =
-    ManagementGoalsUpdate
+    -> ManagementGoalsUpdate'
+managementGoalsUpdate' pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguAccountId_ =
+    ManagementGoalsUpdate'
     { _mguQuotaUser = Nothing
     , _mguPrettyPrint = False
     , _mguWebPropertyId = pMguWebPropertyId_
@@ -117,7 +126,7 @@ managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProfileId_ pMguAccountI
     , _mguKey = Nothing
     , _mguOauthToken = Nothing
     , _mguFields = Nothing
-    , _mguAlt = "json"
+    , _mguAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,14 +187,15 @@ mguFields
   = lens _mguFields (\ s a -> s{_mguFields = a})
 
 -- | Data format for the response.
-mguAlt :: Lens' ManagementGoalsUpdate' Text
+mguAlt :: Lens' ManagementGoalsUpdate' Alt
 mguAlt = lens _mguAlt (\ s a -> s{_mguAlt = a})
 
 instance GoogleRequest ManagementGoalsUpdate' where
         type Rs ManagementGoalsUpdate' = Goal
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsUpdate{..}
-          = go _mguQuotaUser _mguPrettyPrint _mguWebPropertyId
+        requestWithRoute r u ManagementGoalsUpdate'{..}
+          = go _mguQuotaUser (Just _mguPrettyPrint)
+              _mguWebPropertyId
               _mguGoalId
               _mguUserIp
               _mguProfileId
@@ -193,9 +203,9 @@ instance GoogleRequest ManagementGoalsUpdate' where
               _mguKey
               _mguOauthToken
               _mguFields
-              _mguAlt
+              (Just _mguAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementGoalsUpdateAPI)
+                      (Proxy :: Proxy ManagementGoalsUpdateResource)
                       r
                       u

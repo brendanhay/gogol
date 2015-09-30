@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- ignored. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsPatch@.
-module Genomics.Variantsets.Patch
+module Network.Google.Resource.Genomics.Variantsets.Patch
     (
     -- * REST Resource
-      VariantsetsPatchAPI
+      VariantsetsPatchResource
 
     -- * Creating a Request
-    , variantsetsPatch
-    , VariantsetsPatch
+    , variantsetsPatch'
+    , VariantsetsPatch'
 
     -- * Request Lenses
     , vpQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsPatch@ which the
--- 'VariantsetsPatch' request conforms to.
-type VariantsetsPatchAPI =
+-- 'VariantsetsPatch'' request conforms to.
+type VariantsetsPatchResource =
      "variantsets" :>
        Capture "variantSetId" Text :>
-         Patch '[JSON] VariantSet
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] VariantSet
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored. This method supports patch semantics.
 --
--- /See:/ 'variantsetsPatch' smart constructor.
-data VariantsetsPatch = VariantsetsPatch
+-- /See:/ 'variantsetsPatch'' smart constructor.
+data VariantsetsPatch' = VariantsetsPatch'
     { _vpQuotaUser    :: !(Maybe Text)
     , _vpPrettyPrint  :: !Bool
     , _vpVariantSetId :: !Text
@@ -62,7 +69,7 @@ data VariantsetsPatch = VariantsetsPatch
     , _vpKey          :: !(Maybe Text)
     , _vpOauthToken   :: !(Maybe Text)
     , _vpFields       :: !(Maybe Text)
-    , _vpAlt          :: !Text
+    , _vpAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsPatch'' with the minimum fields required to make a request.
@@ -84,11 +91,11 @@ data VariantsetsPatch = VariantsetsPatch
 -- * 'vpFields'
 --
 -- * 'vpAlt'
-variantsetsPatch
+variantsetsPatch'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsPatch
-variantsetsPatch pVpVariantSetId_ =
-    VariantsetsPatch
+    -> VariantsetsPatch'
+variantsetsPatch' pVpVariantSetId_ =
+    VariantsetsPatch'
     { _vpQuotaUser = Nothing
     , _vpPrettyPrint = True
     , _vpVariantSetId = pVpVariantSetId_
@@ -96,7 +103,7 @@ variantsetsPatch pVpVariantSetId_ =
     , _vpKey = Nothing
     , _vpOauthToken = Nothing
     , _vpFields = Nothing
-    , _vpAlt = "json"
+    , _vpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +146,22 @@ vpFields :: Lens' VariantsetsPatch' (Maybe Text)
 vpFields = lens _vpFields (\ s a -> s{_vpFields = a})
 
 -- | Data format for the response.
-vpAlt :: Lens' VariantsetsPatch' Text
+vpAlt :: Lens' VariantsetsPatch' Alt
 vpAlt = lens _vpAlt (\ s a -> s{_vpAlt = a})
 
 instance GoogleRequest VariantsetsPatch' where
         type Rs VariantsetsPatch' = VariantSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsPatch{..}
-          = go _vpQuotaUser _vpPrettyPrint _vpVariantSetId
+        requestWithRoute r u VariantsetsPatch'{..}
+          = go _vpQuotaUser (Just _vpPrettyPrint)
+              _vpVariantSetId
               _vpUserIp
               _vpKey
               _vpOauthToken
               _vpFields
-              _vpAlt
+              (Just _vpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsPatchAPI)
+                      (Proxy :: Proxy VariantsetsPatchResource)
                       r
                       u

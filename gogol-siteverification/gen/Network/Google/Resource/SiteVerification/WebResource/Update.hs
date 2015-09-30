@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Modify the list of owners for your website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceUpdate@.
-module SiteVerification.WebResource.Update
+module Network.Google.Resource.SiteVerification.WebResource.Update
     (
     -- * REST Resource
-      WebResourceUpdateAPI
+      WebResourceUpdateResource
 
     -- * Creating a Request
-    , webResourceUpdate
-    , WebResourceUpdate
+    , webResourceUpdate'
+    , WebResourceUpdate'
 
     -- * Request Lenses
     , wruQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourceUpdate@ which the
--- 'WebResourceUpdate' request conforms to.
-type WebResourceUpdateAPI =
+-- 'WebResourceUpdate'' request conforms to.
+type WebResourceUpdateResource =
      "webResource" :>
        Capture "id" Text :>
-         Put '[JSON] SiteVerificationWebResourceResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Put '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain.
 --
--- /See:/ 'webResourceUpdate' smart constructor.
-data WebResourceUpdate = WebResourceUpdate
+-- /See:/ 'webResourceUpdate'' smart constructor.
+data WebResourceUpdate' = WebResourceUpdate'
     { _wruQuotaUser   :: !(Maybe Text)
     , _wruPrettyPrint :: !Bool
     , _wruUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data WebResourceUpdate = WebResourceUpdate
     , _wruId          :: !Text
     , _wruOauthToken  :: !(Maybe Text)
     , _wruFields      :: !(Maybe Text)
-    , _wruAlt         :: !Text
+    , _wruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data WebResourceUpdate = WebResourceUpdate
 -- * 'wruFields'
 --
 -- * 'wruAlt'
-webResourceUpdate
+webResourceUpdate'
     :: Text -- ^ 'id'
-    -> WebResourceUpdate
-webResourceUpdate pWruId_ =
-    WebResourceUpdate
+    -> WebResourceUpdate'
+webResourceUpdate' pWruId_ =
+    WebResourceUpdate'
     { _wruQuotaUser = Nothing
     , _wruPrettyPrint = False
     , _wruUserIp = Nothing
@@ -94,7 +102,7 @@ webResourceUpdate pWruId_ =
     , _wruId = pWruId_
     , _wruOauthToken = Nothing
     , _wruFields = Nothing
-    , _wruAlt = "json"
+    , _wruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +146,22 @@ wruFields
   = lens _wruFields (\ s a -> s{_wruFields = a})
 
 -- | Data format for the response.
-wruAlt :: Lens' WebResourceUpdate' Text
+wruAlt :: Lens' WebResourceUpdate' Alt
 wruAlt = lens _wruAlt (\ s a -> s{_wruAlt = a})
 
 instance GoogleRequest WebResourceUpdate' where
         type Rs WebResourceUpdate' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceUpdate{..}
-          = go _wruQuotaUser _wruPrettyPrint _wruUserIp _wruKey
+        requestWithRoute r u WebResourceUpdate'{..}
+          = go _wruQuotaUser (Just _wruPrettyPrint) _wruUserIp
+              _wruKey
               _wruId
               _wruOauthToken
               _wruFields
-              _wruAlt
+              (Just _wruAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy WebResourceUpdateAPI)
+                      (Proxy :: Proxy WebResourceUpdateResource)
                       r
                       u

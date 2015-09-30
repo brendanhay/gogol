@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Add a photo for the user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPhotosUpdate@.
-module Directory.Users.Photos.Update
+module Network.Google.Resource.Directory.Users.Photos.Update
     (
     -- * REST Resource
-      UsersPhotosUpdateAPI
+      UsersPhotosUpdateResource
 
     -- * Creating a Request
-    , usersPhotosUpdate
-    , UsersPhotosUpdate
+    , usersPhotosUpdate'
+    , UsersPhotosUpdate'
 
     -- * Request Lenses
     , upuQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPhotosUpdate@ which the
--- 'UsersPhotosUpdate' request conforms to.
-type UsersPhotosUpdateAPI =
+-- 'UsersPhotosUpdate'' request conforms to.
+type UsersPhotosUpdateResource =
      "users" :>
        Capture "userKey" Text :>
-         "photos" :> "thumbnail" :> Put '[JSON] UserPhoto
+         "photos" :>
+           "thumbnail" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] UserPhoto
 
 -- | Add a photo for the user
 --
--- /See:/ 'usersPhotosUpdate' smart constructor.
-data UsersPhotosUpdate = UsersPhotosUpdate
+-- /See:/ 'usersPhotosUpdate'' smart constructor.
+data UsersPhotosUpdate' = UsersPhotosUpdate'
     { _upuQuotaUser   :: !(Maybe Text)
     , _upuPrettyPrint :: !Bool
     , _upuUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data UsersPhotosUpdate = UsersPhotosUpdate
     , _upuOauthToken  :: !(Maybe Text)
     , _upuUserKey     :: !Text
     , _upuFields      :: !(Maybe Text)
-    , _upuAlt         :: !Text
+    , _upuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosUpdate'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data UsersPhotosUpdate = UsersPhotosUpdate
 -- * 'upuFields'
 --
 -- * 'upuAlt'
-usersPhotosUpdate
+usersPhotosUpdate'
     :: Text -- ^ 'userKey'
-    -> UsersPhotosUpdate
-usersPhotosUpdate pUpuUserKey_ =
-    UsersPhotosUpdate
+    -> UsersPhotosUpdate'
+usersPhotosUpdate' pUpuUserKey_ =
+    UsersPhotosUpdate'
     { _upuQuotaUser = Nothing
     , _upuPrettyPrint = True
     , _upuUserIp = Nothing
@@ -94,7 +103,7 @@ usersPhotosUpdate pUpuUserKey_ =
     , _upuOauthToken = Nothing
     , _upuUserKey = pUpuUserKey_
     , _upuFields = Nothing
-    , _upuAlt = "json"
+    , _upuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ upuFields
   = lens _upuFields (\ s a -> s{_upuFields = a})
 
 -- | Data format for the response.
-upuAlt :: Lens' UsersPhotosUpdate' Text
+upuAlt :: Lens' UsersPhotosUpdate' Alt
 upuAlt = lens _upuAlt (\ s a -> s{_upuAlt = a})
 
 instance GoogleRequest UsersPhotosUpdate' where
         type Rs UsersPhotosUpdate' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersPhotosUpdate{..}
-          = go _upuQuotaUser _upuPrettyPrint _upuUserIp _upuKey
+        requestWithRoute r u UsersPhotosUpdate'{..}
+          = go _upuQuotaUser (Just _upuPrettyPrint) _upuUserIp
+              _upuKey
               _upuOauthToken
               _upuUserKey
               _upuFields
-              _upuAlt
+              (Just _upuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersPhotosUpdateAPI)
+                      (Proxy :: Proxy UsersPhotosUpdateResource)
                       r
                       u

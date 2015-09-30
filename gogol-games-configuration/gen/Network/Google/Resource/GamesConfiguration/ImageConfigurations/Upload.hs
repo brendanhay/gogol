@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationImageConfigurationsUpload@.
-module GamesConfiguration.ImageConfigurations.Upload
+module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
     (
     -- * REST Resource
-      ImageConfigurationsUploadAPI
+      ImageConfigurationsUploadResource
 
     -- * Creating a Request
-    , imageConfigurationsUpload
-    , ImageConfigurationsUpload
+    , imageConfigurationsUpload'
+    , ImageConfigurationsUpload'
 
     -- * Request Lenses
     , icuQuotaUser
@@ -44,27 +45,36 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationImageConfigurationsUpload@ which the
--- 'ImageConfigurationsUpload' request conforms to.
-type ImageConfigurationsUploadAPI =
+-- 'ImageConfigurationsUpload'' request conforms to.
+type ImageConfigurationsUploadResource =
      "images" :>
        Capture "resourceId" Text :>
          "imageType" :>
-           Capture "imageType" Text :>
-             Post '[JSON] ImageConfiguration
+           Capture "imageType"
+             GamesConfigurationImageConfigurationsUploadImageType
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --
--- /See:/ 'imageConfigurationsUpload' smart constructor.
-data ImageConfigurationsUpload = ImageConfigurationsUpload
+-- /See:/ 'imageConfigurationsUpload'' smart constructor.
+data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     { _icuQuotaUser   :: !(Maybe Text)
     , _icuResourceId  :: !Text
     , _icuPrettyPrint :: !Bool
     , _icuUserIp      :: !(Maybe Text)
-    , _icuImageType   :: !Text
+    , _icuImageType   :: !GamesConfigurationImageConfigurationsUploadImageType
     , _icuKey         :: !(Maybe Text)
     , _icuOauthToken  :: !(Maybe Text)
     , _icuFields      :: !(Maybe Text)
-    , _icuAlt         :: !Text
+    , _icuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageConfigurationsUpload'' with the minimum fields required to make a request.
@@ -88,12 +98,12 @@ data ImageConfigurationsUpload = ImageConfigurationsUpload
 -- * 'icuFields'
 --
 -- * 'icuAlt'
-imageConfigurationsUpload
+imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
-    -> Text -- ^ 'imageType'
-    -> ImageConfigurationsUpload
-imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
-    ImageConfigurationsUpload
+    -> GamesConfigurationImageConfigurationsUploadImageType -- ^ 'imageType'
+    -> ImageConfigurationsUpload'
+imageConfigurationsUpload' pIcuResourceId_ pIcuImageType_ =
+    ImageConfigurationsUpload'
     { _icuQuotaUser = Nothing
     , _icuResourceId = pIcuResourceId_
     , _icuPrettyPrint = True
@@ -102,7 +112,7 @@ imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
     , _icuKey = Nothing
     , _icuOauthToken = Nothing
     , _icuFields = Nothing
-    , _icuAlt = "json"
+    , _icuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +141,7 @@ icuUserIp
   = lens _icuUserIp (\ s a -> s{_icuUserIp = a})
 
 -- | Selects which image in a resource for this method.
-icuImageType :: Lens' ImageConfigurationsUpload' Text
+icuImageType :: Lens' ImageConfigurationsUpload' GamesConfigurationImageConfigurationsUploadImageType
 icuImageType
   = lens _icuImageType (\ s a -> s{_icuImageType = a})
 
@@ -153,7 +163,7 @@ icuFields
   = lens _icuFields (\ s a -> s{_icuFields = a})
 
 -- | Data format for the response.
-icuAlt :: Lens' ImageConfigurationsUpload' Text
+icuAlt :: Lens' ImageConfigurationsUpload' Alt
 icuAlt = lens _icuAlt (\ s a -> s{_icuAlt = a})
 
 instance GoogleRequest ImageConfigurationsUpload'
@@ -162,16 +172,17 @@ instance GoogleRequest ImageConfigurationsUpload'
              ImageConfiguration
         request
           = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u ImageConfigurationsUpload{..}
-          = go _icuQuotaUser _icuResourceId _icuPrettyPrint
+        requestWithRoute r u ImageConfigurationsUpload'{..}
+          = go _icuQuotaUser _icuResourceId
+              (Just _icuPrettyPrint)
               _icuUserIp
               _icuImageType
               _icuKey
               _icuOauthToken
               _icuFields
-              _icuAlt
+              (Just _icuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ImageConfigurationsUploadAPI)
+                      (Proxy :: Proxy ImageConfigurationsUploadResource)
                       r
                       u

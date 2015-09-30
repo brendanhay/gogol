@@ -27,43 +27,43 @@ module Network.Google.GamesConfiguration
     -- * REST Resources
 
     -- ** GamesConfigurationAchievementConfigurationsDelete
-    , module GamesConfiguration.AchievementConfigurations.Delete
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Delete
 
     -- ** GamesConfigurationAchievementConfigurationsGet
-    , module GamesConfiguration.AchievementConfigurations.Get
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
 
     -- ** GamesConfigurationAchievementConfigurationsInsert
-    , module GamesConfiguration.AchievementConfigurations.Insert
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Insert
 
     -- ** GamesConfigurationAchievementConfigurationsList
-    , module GamesConfiguration.AchievementConfigurations.List
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
 
     -- ** GamesConfigurationAchievementConfigurationsPatch
-    , module GamesConfiguration.AchievementConfigurations.Patch
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patch
 
     -- ** GamesConfigurationAchievementConfigurationsUpdate
-    , module GamesConfiguration.AchievementConfigurations.Update
+    , module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Update
 
     -- ** GamesConfigurationImageConfigurationsUpload
-    , module GamesConfiguration.ImageConfigurations.Upload
+    , module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
 
     -- ** GamesConfigurationLeaderboardConfigurationsDelete
-    , module GamesConfiguration.LeaderboardConfigurations.Delete
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
 
     -- ** GamesConfigurationLeaderboardConfigurationsGet
-    , module GamesConfiguration.LeaderboardConfigurations.Get
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
 
     -- ** GamesConfigurationLeaderboardConfigurationsInsert
-    , module GamesConfiguration.LeaderboardConfigurations.Insert
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Insert
 
     -- ** GamesConfigurationLeaderboardConfigurationsList
-    , module GamesConfiguration.LeaderboardConfigurations.List
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
 
     -- ** GamesConfigurationLeaderboardConfigurationsPatch
-    , module GamesConfiguration.LeaderboardConfigurations.Patch
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patch
 
     -- ** GamesConfigurationLeaderboardConfigurationsUpdate
-    , module GamesConfiguration.LeaderboardConfigurations.Update
+    , module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
 
     -- * Types
 
@@ -138,6 +138,9 @@ module Network.Google.GamesConfiguration
     , gnfcNumberFormatType
     , gnfcNumDecimalPlaces
 
+    -- ** GamesConfigurationImageConfigurationsUploadImageType
+    , GamesConfigurationImageConfigurationsUploadImageType (..)
+
     -- ** LeaderboardConfigurationDetail
     , LeaderboardConfigurationDetail
     , leaderboardConfigurationDetail
@@ -162,6 +165,9 @@ module Network.Google.GamesConfiguration
     , acdPointValue
     , acdIconUrl
     , acdDescription
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -185,8 +191,19 @@ TODO
 -}
 
 type GamesConfigurationAPI =
-     ImageConfigurations :<|> LeaderboardConfigurations
-       :<|> AchievementConfigurations
+     ImageConfigurationsUploadResource :<|>
+       LeaderboardConfigurationsInsertResource
+       :<|> LeaderboardConfigurationsListResource
+       :<|> LeaderboardConfigurationsPatchResource
+       :<|> LeaderboardConfigurationsGetResource
+       :<|> LeaderboardConfigurationsDeleteResource
+       :<|> LeaderboardConfigurationsUpdateResource
+       :<|> AchievementConfigurationsInsertResource
+       :<|> AchievementConfigurationsListResource
+       :<|> AchievementConfigurationsPatchResource
+       :<|> AchievementConfigurationsGetResource
+       :<|> AchievementConfigurationsDeleteResource
+       :<|> AchievementConfigurationsUpdateResource
 
 gamesConfigurationAPI :: Proxy GamesConfigurationAPI
 gamesConfigurationAPI = Proxy

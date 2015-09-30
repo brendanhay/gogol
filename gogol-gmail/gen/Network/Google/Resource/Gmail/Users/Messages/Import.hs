@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- not send a message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesImport@.
-module Gmail.Users.Messages.Import
+module Network.Google.Resource.Gmail.Users.Messages.Import
     (
     -- * REST Resource
-      UsersMessagesImportAPI
+      UsersMessagesImportResource
 
     -- * Creating a Request
-    , usersMessagesImport
-    , UsersMessagesImport
+    , usersMessagesImport'
+    , UsersMessagesImport'
 
     -- * Request Lenses
     , uQuotaUser
@@ -49,23 +50,31 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesImport@ which the
--- 'UsersMessagesImport' request conforms to.
-type UsersMessagesImportAPI =
+-- 'UsersMessagesImport'' request conforms to.
+type UsersMessagesImportResource =
      Capture "userId" Text :>
        "messages" :>
          "import" :>
-           QueryParam "processForCalendar" Bool :>
-             QueryParam "deleted" Bool :>
-               QueryParam "neverMarkSpam" Bool :>
-                 QueryParam "internalDateSource" Text :>
-                   Post '[JSON] Message
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "processForCalendar" Bool :>
+                     QueryParam "deleted" Bool :>
+                       QueryParam "neverMarkSpam" Bool :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "internalDateSource"
+                             GmailUsersMessagesImportInternalDateSource
+                             :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
 -- delivery scanning and classification similar to receiving via SMTP. Does
 -- not send a message.
 --
--- /See:/ 'usersMessagesImport' smart constructor.
-data UsersMessagesImport = UsersMessagesImport
+-- /See:/ 'usersMessagesImport'' smart constructor.
+data UsersMessagesImport' = UsersMessagesImport'
     { _uQuotaUser          :: !(Maybe Text)
     , _uPrettyPrint        :: !Bool
     , _uUserIp             :: !(Maybe Text)
@@ -75,9 +84,9 @@ data UsersMessagesImport = UsersMessagesImport
     , _uDeleted            :: !Bool
     , _uNeverMarkSpam      :: !Bool
     , _uOauthToken         :: !(Maybe Text)
-    , _uInternalDateSource :: !Text
+    , _uInternalDateSource :: !GmailUsersMessagesImportInternalDateSource
     , _uFields             :: !(Maybe Text)
-    , _uAlt                :: !Text
+    , _uAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesImport'' with the minimum fields required to make a request.
@@ -107,11 +116,11 @@ data UsersMessagesImport = UsersMessagesImport
 -- * 'uFields'
 --
 -- * 'uAlt'
-usersMessagesImport
+usersMessagesImport'
     :: Text
-    -> UsersMessagesImport
-usersMessagesImport pUUserId_ =
-    UsersMessagesImport
+    -> UsersMessagesImport'
+usersMessagesImport' pUUserId_ =
+    UsersMessagesImport'
     { _uQuotaUser = Nothing
     , _uPrettyPrint = True
     , _uUserIp = Nothing
@@ -121,9 +130,9 @@ usersMessagesImport pUUserId_ =
     , _uDeleted = False
     , _uNeverMarkSpam = False
     , _uOauthToken = Nothing
-    , _uInternalDateSource = "dateHeader"
+    , _uInternalDateSource = GUMIIDSDateHeader
     , _uFields = Nothing
-    , _uAlt = "json"
+    , _uAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,7 +189,7 @@ uOauthToken
   = lens _uOauthToken (\ s a -> s{_uOauthToken = a})
 
 -- | Source for Gmail\'s internal date of the message.
-uInternalDateSource :: Lens' UsersMessagesImport' Text
+uInternalDateSource :: Lens' UsersMessagesImport' GmailUsersMessagesImportInternalDateSource
 uInternalDateSource
   = lens _uInternalDateSource
       (\ s a -> s{_uInternalDateSource = a})
@@ -190,14 +199,15 @@ uFields :: Lens' UsersMessagesImport' (Maybe Text)
 uFields = lens _uFields (\ s a -> s{_uFields = a})
 
 -- | Data format for the response.
-uAlt :: Lens' UsersMessagesImport' Text
+uAlt :: Lens' UsersMessagesImport' Alt
 uAlt = lens _uAlt (\ s a -> s{_uAlt = a})
 
 instance GoogleRequest UsersMessagesImport' where
         type Rs UsersMessagesImport' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesImport{..}
-          = go _uQuotaUser _uPrettyPrint _uUserIp _uUserId
+        requestWithRoute r u UsersMessagesImport'{..}
+          = go _uQuotaUser (Just _uPrettyPrint) _uUserIp
+              _uUserId
               _uKey
               (Just _uProcessForCalendar)
               (Just _uDeleted)
@@ -205,9 +215,9 @@ instance GoogleRequest UsersMessagesImport' where
               _uOauthToken
               (Just _uInternalDateSource)
               _uFields
-              _uAlt
+              (Just _uAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesImportAPI)
+                      (Proxy :: Proxy UsersMessagesImportResource)
                       r
                       u

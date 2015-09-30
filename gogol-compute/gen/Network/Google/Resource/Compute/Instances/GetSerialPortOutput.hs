@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified instance\'s serial port output.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesGetSerialPortOutput@.
-module Compute.Instances.GetSerialPortOutput
+module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
     (
     -- * REST Resource
-      InstancesGetSerialPortOutputAPI
+      InstancesGetSerialPortOutputResource
 
     -- * Creating a Request
-    , instancesGetSerialPortOutput
-    , InstancesGetSerialPortOutput
+    , instancesGetSerialPortOutput'
+    , InstancesGetSerialPortOutput'
 
     -- * Request Lenses
     , igspoQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesGetSerialPortOutput@ which the
--- 'InstancesGetSerialPortOutput' request conforms to.
-type InstancesGetSerialPortOutputAPI =
+-- 'InstancesGetSerialPortOutput'' request conforms to.
+type InstancesGetSerialPortOutputResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
                "serialPort" :>
-                 QueryParam "port" Int32 :>
-                   Get '[JSON] SerialPortOutput
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               QueryParam "port" Int32 :>
+                                 Get '[JSON] SerialPortOutput
 
 -- | Returns the specified instance\'s serial port output.
 --
--- /See:/ 'instancesGetSerialPortOutput' smart constructor.
-data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
+-- /See:/ 'instancesGetSerialPortOutput'' smart constructor.
+data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
     { _igspoQuotaUser   :: !(Maybe Text)
     , _igspoPrettyPrint :: !Bool
     , _igspoProject     :: !Text
@@ -69,7 +77,7 @@ data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
     , _igspoKey         :: !(Maybe Text)
     , _igspoOauthToken  :: !(Maybe Text)
     , _igspoFields      :: !(Maybe Text)
-    , _igspoAlt         :: !Text
+    , _igspoAlt         :: !Alt
     , _igspoPort        :: !Int32
     , _igspoInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -99,13 +107,13 @@ data InstancesGetSerialPortOutput = InstancesGetSerialPortOutput
 -- * 'igspoPort'
 --
 -- * 'igspoInstance'
-instancesGetSerialPortOutput
+instancesGetSerialPortOutput'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesGetSerialPortOutput
-instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
-    InstancesGetSerialPortOutput
+    -> InstancesGetSerialPortOutput'
+instancesGetSerialPortOutput' pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
+    InstancesGetSerialPortOutput'
     { _igspoQuotaUser = Nothing
     , _igspoPrettyPrint = True
     , _igspoProject = pIgspoProject_
@@ -114,7 +122,7 @@ instancesGetSerialPortOutput pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
     , _igspoKey = Nothing
     , _igspoOauthToken = Nothing
     , _igspoFields = Nothing
-    , _igspoAlt = "json"
+    , _igspoAlt = JSON
     , _igspoPort = 1
     , _igspoInstance = pIgspoInstance_
     }
@@ -167,7 +175,7 @@ igspoFields
   = lens _igspoFields (\ s a -> s{_igspoFields = a})
 
 -- | Data format for the response.
-igspoAlt :: Lens' InstancesGetSerialPortOutput' Text
+igspoAlt :: Lens' InstancesGetSerialPortOutput' Alt
 igspoAlt = lens _igspoAlt (\ s a -> s{_igspoAlt = a})
 
 -- | Specifies which COM or serial port to retrieve data from.
@@ -186,18 +194,20 @@ instance GoogleRequest InstancesGetSerialPortOutput'
         type Rs InstancesGetSerialPortOutput' =
              SerialPortOutput
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesGetSerialPortOutput{..}
-          = go _igspoQuotaUser _igspoPrettyPrint _igspoProject
+        requestWithRoute r u
+          InstancesGetSerialPortOutput'{..}
+          = go _igspoQuotaUser (Just _igspoPrettyPrint)
+              _igspoProject
               _igspoUserIp
               _igspoZone
               _igspoKey
               _igspoOauthToken
               _igspoFields
-              _igspoAlt
+              (Just _igspoAlt)
               (Just _igspoPort)
               _igspoInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesGetSerialPortOutputAPI)
+                      (Proxy :: Proxy InstancesGetSerialPortOutputResource)
                       r
                       u

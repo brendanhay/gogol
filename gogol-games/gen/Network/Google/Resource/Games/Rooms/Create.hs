@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,134 +21,148 @@
 -- method directly is unsupported.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsCreate@.
-module Games.Rooms.Create
+module Network.Google.Resource.Games.Rooms.Create
     (
     -- * REST Resource
-      RoomsCreateAPI
+      RoomsCreateResource
 
     -- * Creating a Request
-    , roomsCreate
-    , RoomsCreate
+    , roomsCreate'
+    , RoomsCreate'
 
     -- * Request Lenses
-    , rcQuotaUser
-    , rcPrettyPrint
-    , rcUserIp
-    , rcKey
-    , rcLanguage
-    , rcOauthToken
-    , rcFields
-    , rcAlt
+    , rooQuotaUser
+    , rooPrettyPrint
+    , rooUserIp
+    , rooKey
+    , rooLanguage
+    , rooOauthToken
+    , rooFields
+    , rooAlt
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsCreate@ which the
--- 'RoomsCreate' request conforms to.
-type RoomsCreateAPI =
+-- 'RoomsCreate'' request conforms to.
+type RoomsCreateResource =
      "rooms" :>
        "create" :>
-         QueryParam "language" Text :> Post '[JSON] Room
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "language" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Room
 
 -- | Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
--- /See:/ 'roomsCreate' smart constructor.
-data RoomsCreate = RoomsCreate
-    { _rcQuotaUser   :: !(Maybe Text)
-    , _rcPrettyPrint :: !Bool
-    , _rcUserIp      :: !(Maybe Text)
-    , _rcKey         :: !(Maybe Text)
-    , _rcLanguage    :: !(Maybe Text)
-    , _rcOauthToken  :: !(Maybe Text)
-    , _rcFields      :: !(Maybe Text)
-    , _rcAlt         :: !Text
+-- /See:/ 'roomsCreate'' smart constructor.
+data RoomsCreate' = RoomsCreate'
+    { _rooQuotaUser   :: !(Maybe Text)
+    , _rooPrettyPrint :: !Bool
+    , _rooUserIp      :: !(Maybe Text)
+    , _rooKey         :: !(Maybe Text)
+    , _rooLanguage    :: !(Maybe Text)
+    , _rooOauthToken  :: !(Maybe Text)
+    , _rooFields      :: !(Maybe Text)
+    , _rooAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcQuotaUser'
+-- * 'rooQuotaUser'
 --
--- * 'rcPrettyPrint'
+-- * 'rooPrettyPrint'
 --
--- * 'rcUserIp'
+-- * 'rooUserIp'
 --
--- * 'rcKey'
+-- * 'rooKey'
 --
--- * 'rcLanguage'
+-- * 'rooLanguage'
 --
--- * 'rcOauthToken'
+-- * 'rooOauthToken'
 --
--- * 'rcFields'
+-- * 'rooFields'
 --
--- * 'rcAlt'
-roomsCreate
-    :: RoomsCreate
-roomsCreate =
-    RoomsCreate
-    { _rcQuotaUser = Nothing
-    , _rcPrettyPrint = True
-    , _rcUserIp = Nothing
-    , _rcKey = Nothing
-    , _rcLanguage = Nothing
-    , _rcOauthToken = Nothing
-    , _rcFields = Nothing
-    , _rcAlt = "json"
+-- * 'rooAlt'
+roomsCreate'
+    :: RoomsCreate'
+roomsCreate' =
+    RoomsCreate'
+    { _rooQuotaUser = Nothing
+    , _rooPrettyPrint = True
+    , _rooUserIp = Nothing
+    , _rooKey = Nothing
+    , _rooLanguage = Nothing
+    , _rooOauthToken = Nothing
+    , _rooFields = Nothing
+    , _rooAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rcQuotaUser :: Lens' RoomsCreate' (Maybe Text)
-rcQuotaUser
-  = lens _rcQuotaUser (\ s a -> s{_rcQuotaUser = a})
+rooQuotaUser :: Lens' RoomsCreate' (Maybe Text)
+rooQuotaUser
+  = lens _rooQuotaUser (\ s a -> s{_rooQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rcPrettyPrint :: Lens' RoomsCreate' Bool
-rcPrettyPrint
-  = lens _rcPrettyPrint
-      (\ s a -> s{_rcPrettyPrint = a})
+rooPrettyPrint :: Lens' RoomsCreate' Bool
+rooPrettyPrint
+  = lens _rooPrettyPrint
+      (\ s a -> s{_rooPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rcUserIp :: Lens' RoomsCreate' (Maybe Text)
-rcUserIp = lens _rcUserIp (\ s a -> s{_rcUserIp = a})
+rooUserIp :: Lens' RoomsCreate' (Maybe Text)
+rooUserIp
+  = lens _rooUserIp (\ s a -> s{_rooUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcKey :: Lens' RoomsCreate' (Maybe Text)
-rcKey = lens _rcKey (\ s a -> s{_rcKey = a})
+rooKey :: Lens' RoomsCreate' (Maybe Text)
+rooKey = lens _rooKey (\ s a -> s{_rooKey = a})
 
 -- | The preferred language to use for strings returned by this method.
-rcLanguage :: Lens' RoomsCreate' (Maybe Text)
-rcLanguage
-  = lens _rcLanguage (\ s a -> s{_rcLanguage = a})
+rooLanguage :: Lens' RoomsCreate' (Maybe Text)
+rooLanguage
+  = lens _rooLanguage (\ s a -> s{_rooLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-rcOauthToken :: Lens' RoomsCreate' (Maybe Text)
-rcOauthToken
-  = lens _rcOauthToken (\ s a -> s{_rcOauthToken = a})
+rooOauthToken :: Lens' RoomsCreate' (Maybe Text)
+rooOauthToken
+  = lens _rooOauthToken
+      (\ s a -> s{_rooOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rcFields :: Lens' RoomsCreate' (Maybe Text)
-rcFields = lens _rcFields (\ s a -> s{_rcFields = a})
+rooFields :: Lens' RoomsCreate' (Maybe Text)
+rooFields
+  = lens _rooFields (\ s a -> s{_rooFields = a})
 
 -- | Data format for the response.
-rcAlt :: Lens' RoomsCreate' Text
-rcAlt = lens _rcAlt (\ s a -> s{_rcAlt = a})
+rooAlt :: Lens' RoomsCreate' Alt
+rooAlt = lens _rooAlt (\ s a -> s{_rooAlt = a})
 
 instance GoogleRequest RoomsCreate' where
         type Rs RoomsCreate' = Room
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsCreate{..}
-          = go _rcQuotaUser _rcPrettyPrint _rcUserIp _rcKey
-              _rcLanguage
-              _rcOauthToken
-              _rcFields
-              _rcAlt
+        requestWithRoute r u RoomsCreate'{..}
+          = go _rooQuotaUser (Just _rooPrettyPrint) _rooUserIp
+              _rooKey
+              _rooLanguage
+              _rooOauthToken
+              _rooFields
+              (Just _rooAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsCreateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy RoomsCreateResource)
+                      r
+                      u

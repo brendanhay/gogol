@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- channels.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeGuideCategoriesList@.
-module YouTube.GuideCategories.List
+module Network.Google.Resource.YouTube.GuideCategories.List
     (
     -- * REST Resource
-      GuideCategoriesListAPI
+      GuideCategoriesListResource
 
     -- * Creating a Request
-    , guideCategoriesList
-    , GuideCategoriesList
+    , guideCategoriesList'
+    , GuideCategoriesList'
 
     -- * Request Lenses
     , gclQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeGuideCategoriesList@ which the
--- 'GuideCategoriesList' request conforms to.
-type GuideCategoriesListAPI =
+-- 'GuideCategoriesList'' request conforms to.
+type GuideCategoriesListResource =
      "guideCategories" :>
-       QueryParam "part" Text :>
-         QueryParam "regionCode" Text :>
-           QueryParam "hl" Text :>
-             QueryParam "id" Text :>
-               Get '[JSON] GuideCategoryListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "regionCode" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "hl" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "id" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] GuideCategoryListResponse
 
 -- | Returns a list of categories that can be associated with YouTube
 -- channels.
 --
--- /See:/ 'guideCategoriesList' smart constructor.
-data GuideCategoriesList = GuideCategoriesList
+-- /See:/ 'guideCategoriesList'' smart constructor.
+data GuideCategoriesList' = GuideCategoriesList'
     { _gclQuotaUser   :: !(Maybe Text)
     , _gclPart        :: !Text
     , _gclPrettyPrint :: !Bool
@@ -71,7 +79,7 @@ data GuideCategoriesList = GuideCategoriesList
     , _gclId          :: !(Maybe Text)
     , _gclOauthToken  :: !(Maybe Text)
     , _gclFields      :: !(Maybe Text)
-    , _gclAlt         :: !Text
+    , _gclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GuideCategoriesList'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data GuideCategoriesList = GuideCategoriesList
 -- * 'gclFields'
 --
 -- * 'gclAlt'
-guideCategoriesList
+guideCategoriesList'
     :: Text -- ^ 'part'
-    -> GuideCategoriesList
-guideCategoriesList pGclPart_ =
-    GuideCategoriesList
+    -> GuideCategoriesList'
+guideCategoriesList' pGclPart_ =
+    GuideCategoriesList'
     { _gclQuotaUser = Nothing
     , _gclPart = pGclPart_
     , _gclPrettyPrint = True
@@ -114,7 +122,7 @@ guideCategoriesList pGclPart_ =
     , _gclId = Nothing
     , _gclOauthToken = Nothing
     , _gclFields = Nothing
-    , _gclAlt = "json"
+    , _gclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,15 +187,16 @@ gclFields
   = lens _gclFields (\ s a -> s{_gclFields = a})
 
 -- | Data format for the response.
-gclAlt :: Lens' GuideCategoriesList' Text
+gclAlt :: Lens' GuideCategoriesList' Alt
 gclAlt = lens _gclAlt (\ s a -> s{_gclAlt = a})
 
 instance GoogleRequest GuideCategoriesList' where
         type Rs GuideCategoriesList' =
              GuideCategoryListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u GuideCategoriesList{..}
-          = go _gclQuotaUser (Just _gclPart) _gclPrettyPrint
+        requestWithRoute r u GuideCategoriesList'{..}
+          = go _gclQuotaUser (Just _gclPart)
+              (Just _gclPrettyPrint)
               _gclRegionCode
               _gclUserIp
               (Just _gclHl)
@@ -195,9 +204,9 @@ instance GoogleRequest GuideCategoriesList' where
               _gclId
               _gclOauthToken
               _gclFields
-              _gclAlt
+              (Just _gclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GuideCategoriesListAPI)
+                      (Proxy :: Proxy GuideCategoriesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsNotifySpectrumUse@.
-module Spectrum.Paws.NotifySpectrumUse
+module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
     (
     -- * REST Resource
-      PawsNotifySpectrumUseAPI
+      PawsNotifySpectrumUseResource
 
     -- * Creating a Request
-    , pawsNotifySpectrumUse
-    , PawsNotifySpectrumUse
+    , pawsNotifySpectrumUse'
+    , PawsNotifySpectrumUse'
 
     -- * Request Lenses
     , pnsuQuotaUser
@@ -45,25 +46,32 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsNotifySpectrumUse@ which the
--- 'PawsNotifySpectrumUse' request conforms to.
-type PawsNotifySpectrumUseAPI =
+-- 'PawsNotifySpectrumUse'' request conforms to.
+type PawsNotifySpectrumUseResource =
      "notifySpectrumUse" :>
-       Post '[JSON] PawsNotifySpectrumUseResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the
 -- regulator. The Google Spectrum Database does not operate in domains that
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsNotifySpectrumUse' smart constructor.
-data PawsNotifySpectrumUse = PawsNotifySpectrumUse
+-- /See:/ 'pawsNotifySpectrumUse'' smart constructor.
+data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
     { _pnsuQuotaUser   :: !(Maybe Text)
     , _pnsuPrettyPrint :: !Bool
     , _pnsuUserIp      :: !(Maybe Text)
     , _pnsuKey         :: !(Maybe Text)
     , _pnsuOauthToken  :: !(Maybe Text)
     , _pnsuFields      :: !(Maybe Text)
-    , _pnsuAlt         :: !Text
+    , _pnsuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUse'' with the minimum fields required to make a request.
@@ -83,17 +91,17 @@ data PawsNotifySpectrumUse = PawsNotifySpectrumUse
 -- * 'pnsuFields'
 --
 -- * 'pnsuAlt'
-pawsNotifySpectrumUse
-    :: PawsNotifySpectrumUse
-pawsNotifySpectrumUse =
-    PawsNotifySpectrumUse
+pawsNotifySpectrumUse'
+    :: PawsNotifySpectrumUse'
+pawsNotifySpectrumUse' =
+    PawsNotifySpectrumUse'
     { _pnsuQuotaUser = Nothing
     , _pnsuPrettyPrint = True
     , _pnsuUserIp = Nothing
     , _pnsuKey = Nothing
     , _pnsuOauthToken = Nothing
     , _pnsuFields = Nothing
-    , _pnsuAlt = "json"
+    , _pnsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,21 +142,22 @@ pnsuFields
   = lens _pnsuFields (\ s a -> s{_pnsuFields = a})
 
 -- | Data format for the response.
-pnsuAlt :: Lens' PawsNotifySpectrumUse' Text
+pnsuAlt :: Lens' PawsNotifySpectrumUse' Alt
 pnsuAlt = lens _pnsuAlt (\ s a -> s{_pnsuAlt = a})
 
 instance GoogleRequest PawsNotifySpectrumUse' where
         type Rs PawsNotifySpectrumUse' =
              PawsNotifySpectrumUseResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsNotifySpectrumUse{..}
-          = go _pnsuQuotaUser _pnsuPrettyPrint _pnsuUserIp
+        requestWithRoute r u PawsNotifySpectrumUse'{..}
+          = go _pnsuQuotaUser (Just _pnsuPrettyPrint)
+              _pnsuUserIp
               _pnsuKey
               _pnsuOauthToken
               _pnsuFields
-              _pnsuAlt
+              (Just _pnsuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PawsNotifySpectrumUseAPI)
+                      (Proxy :: Proxy PawsNotifySpectrumUseResource)
                       r
                       u

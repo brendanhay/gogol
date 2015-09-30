@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesPatch@.
-module DFAReporting.CreativeFieldValues.Patch
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.Patch
     (
     -- * REST Resource
-      CreativeFieldValuesPatchAPI
+      CreativeFieldValuesPatchResource
 
     -- * Creating a Request
-    , creativeFieldValuesPatch
-    , CreativeFieldValuesPatch
+    , creativeFieldValuesPatch'
+    , CreativeFieldValuesPatch'
 
     -- * Request Lenses
     , cfvpCreativeFieldId
@@ -46,21 +47,28 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesPatch@ which the
--- 'CreativeFieldValuesPatch' request conforms to.
-type CreativeFieldValuesPatchAPI =
+-- 'CreativeFieldValuesPatch'' request conforms to.
+type CreativeFieldValuesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               QueryParam "id" Int64 :>
-                 Patch '[JSON] CreativeFieldValue
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "id" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Patch '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value. This method supports patch
 -- semantics.
 --
--- /See:/ 'creativeFieldValuesPatch' smart constructor.
-data CreativeFieldValuesPatch = CreativeFieldValuesPatch
+-- /See:/ 'creativeFieldValuesPatch'' smart constructor.
+data CreativeFieldValuesPatch' = CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId :: !Int64
     , _cfvpQuotaUser       :: !(Maybe Text)
     , _cfvpPrettyPrint     :: !Bool
@@ -70,7 +78,7 @@ data CreativeFieldValuesPatch = CreativeFieldValuesPatch
     , _cfvpId              :: !Int64
     , _cfvpOauthToken      :: !(Maybe Text)
     , _cfvpFields          :: !(Maybe Text)
-    , _cfvpAlt             :: !Text
+    , _cfvpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesPatch'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data CreativeFieldValuesPatch = CreativeFieldValuesPatch
 -- * 'cfvpFields'
 --
 -- * 'cfvpAlt'
-creativeFieldValuesPatch
+creativeFieldValuesPatch'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldValuesPatch
-creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProfileId_ pCfvpId_ =
-    CreativeFieldValuesPatch
+    -> CreativeFieldValuesPatch'
+creativeFieldValuesPatch' pCfvpCreativeFieldId_ pCfvpProfileId_ pCfvpId_ =
+    CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = pCfvpCreativeFieldId_
     , _cfvpQuotaUser = Nothing
     , _cfvpPrettyPrint = True
@@ -112,7 +120,7 @@ creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProfileId_ pCfvpId_ =
     , _cfvpId = pCfvpId_
     , _cfvpOauthToken = Nothing
     , _cfvpFields = Nothing
-    , _cfvpAlt = "json"
+    , _cfvpAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -169,7 +177,7 @@ cfvpFields
   = lens _cfvpFields (\ s a -> s{_cfvpFields = a})
 
 -- | Data format for the response.
-cfvpAlt :: Lens' CreativeFieldValuesPatch' Text
+cfvpAlt :: Lens' CreativeFieldValuesPatch' Alt
 cfvpAlt = lens _cfvpAlt (\ s a -> s{_cfvpAlt = a})
 
 instance GoogleRequest CreativeFieldValuesPatch'
@@ -177,18 +185,18 @@ instance GoogleRequest CreativeFieldValuesPatch'
         type Rs CreativeFieldValuesPatch' =
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesPatch{..}
+        requestWithRoute r u CreativeFieldValuesPatch'{..}
           = go _cfvpCreativeFieldId _cfvpQuotaUser
-              _cfvpPrettyPrint
+              (Just _cfvpPrettyPrint)
               _cfvpUserIp
               _cfvpProfileId
               _cfvpKey
               (Just _cfvpId)
               _cfvpOauthToken
               _cfvpFields
-              _cfvpAlt
+              (Just _cfvpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesPatchAPI)
+                      (Proxy :: Proxy CreativeFieldValuesPatchResource)
                       r
                       u

@@ -28,27 +28,33 @@ module Network.Google.SiteVerification
     -- * REST Resources
 
     -- ** SiteVerificationWebResourceDelete
-    , module SiteVerification.WebResource.Delete
+    , module Network.Google.Resource.SiteVerification.WebResource.Delete
 
     -- ** SiteVerificationWebResourceGet
-    , module SiteVerification.WebResource.Get
+    , module Network.Google.Resource.SiteVerification.WebResource.Get
 
     -- ** SiteVerificationWebResourceGetToken
-    , module SiteVerification.WebResource.GetToken
+    , module Network.Google.Resource.SiteVerification.WebResource.GetToken
 
     -- ** SiteVerificationWebResourceInsert
-    , module SiteVerification.WebResource.Insert
+    , module Network.Google.Resource.SiteVerification.WebResource.Insert
 
     -- ** SiteVerificationWebResourceList
-    , module SiteVerification.WebResource.List
+    , module Network.Google.Resource.SiteVerification.WebResource.List
 
     -- ** SiteVerificationWebResourcePatch
-    , module SiteVerification.WebResource.Patch
+    , module Network.Google.Resource.SiteVerification.WebResource.Patch
 
     -- ** SiteVerificationWebResourceUpdate
-    , module SiteVerification.WebResource.Update
+    , module Network.Google.Resource.SiteVerification.WebResource.Update
 
     -- * Types
+
+    -- ** SiteVerificationWebResourceGettokenRequestSite
+    , SiteVerificationWebResourceGettokenRequestSite
+    , siteVerificationWebResourceGettokenRequestSite
+    , svwrgrsIdentifier
+    , svwrgrsType
 
     -- ** SiteVerificationWebResourceGettokenResponse
     , SiteVerificationWebResourceGettokenResponse
@@ -60,6 +66,12 @@ module Network.Google.SiteVerification
     , SiteVerificationWebResourceListResponse
     , siteVerificationWebResourceListResponse
     , svwrlrItems
+
+    -- ** SiteVerificationWebResourceResourceSite
+    , SiteVerificationWebResourceResourceSite
+    , siteVerificationWebResourceResourceSite
+    , svwrrsIdentifier
+    , svwrrsType
 
     -- ** SiteVerificationWebResourceGettokenRequest
     , SiteVerificationWebResourceGettokenRequest
@@ -73,6 +85,9 @@ module Network.Google.SiteVerification
     , svwrrOwners
     , svwrrId
     , svwrrSite
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -89,7 +104,14 @@ import           Network.Google.SiteVerification.Types
 TODO
 -}
 
-type SiteVerificationAPI = WebResource
+type SiteVerificationAPI =
+     WebResourceInsertResource :<|>
+       WebResourceListResource
+       :<|> WebResourcePatchResource
+       :<|> WebResourceGetResource
+       :<|> WebResourceGetTokenResource
+       :<|> WebResourceDeleteResource
+       :<|> WebResourceUpdateResource
 
 siteVerificationAPI :: Proxy SiteVerificationAPI
 siteVerificationAPI = Proxy

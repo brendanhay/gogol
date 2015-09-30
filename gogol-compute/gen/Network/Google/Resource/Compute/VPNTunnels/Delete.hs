@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified VpnTunnel resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeVPNTunnelsDelete@.
-module Compute.VPNTunnels.Delete
+module Network.Google.Resource.Compute.VPNTunnels.Delete
     (
     -- * REST Resource
-      VpnTunnelsDeleteAPI
+      VpnTunnelsDeleteResource
 
     -- * Creating a Request
-    , vPNTunnelsDelete
-    , VPNTunnelsDelete
+    , vPNTunnelsDelete'
+    , VPNTunnelsDelete'
 
     -- * Request Lenses
     , vtdQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeVPNTunnelsDelete@ which the
--- 'VPNTunnelsDelete' request conforms to.
-type VpnTunnelsDeleteAPI =
+-- 'VPNTunnelsDelete'' request conforms to.
+type VpnTunnelsDeleteResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "vpnTunnels" :>
-             Capture "vpnTunnel" Text :> Delete '[JSON] Operation
+             Capture "vpnTunnel" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified VpnTunnel resource.
 --
--- /See:/ 'vPNTunnelsDelete' smart constructor.
-data VPNTunnelsDelete = VPNTunnelsDelete
+-- /See:/ 'vPNTunnelsDelete'' smart constructor.
+data VPNTunnelsDelete' = VPNTunnelsDelete'
     { _vtdQuotaUser   :: !(Maybe Text)
     , _vtdPrettyPrint :: !Bool
     , _vtdProject     :: !Text
@@ -66,7 +74,7 @@ data VPNTunnelsDelete = VPNTunnelsDelete
     , _vtdRegion      :: !Text
     , _vtdOauthToken  :: !(Maybe Text)
     , _vtdFields      :: !(Maybe Text)
-    , _vtdAlt         :: !Text
+    , _vtdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsDelete'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data VPNTunnelsDelete = VPNTunnelsDelete
 -- * 'vtdFields'
 --
 -- * 'vtdAlt'
-vPNTunnelsDelete
+vPNTunnelsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
-    -> VPNTunnelsDelete
-vPNTunnelsDelete pVtdProject_ pVtdVpnTunnel_ pVtdRegion_ =
-    VPNTunnelsDelete
+    -> VPNTunnelsDelete'
+vPNTunnelsDelete' pVtdProject_ pVtdVpnTunnel_ pVtdRegion_ =
+    VPNTunnelsDelete'
     { _vtdQuotaUser = Nothing
     , _vtdPrettyPrint = True
     , _vtdProject = pVtdProject_
@@ -108,7 +116,7 @@ vPNTunnelsDelete pVtdProject_ pVtdVpnTunnel_ pVtdRegion_ =
     , _vtdRegion = pVtdRegion_
     , _vtdOauthToken = Nothing
     , _vtdFields = Nothing
-    , _vtdAlt = "json"
+    , _vtdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ vtdFields
   = lens _vtdFields (\ s a -> s{_vtdFields = a})
 
 -- | Data format for the response.
-vtdAlt :: Lens' VPNTunnelsDelete' Text
+vtdAlt :: Lens' VPNTunnelsDelete' Alt
 vtdAlt = lens _vtdAlt (\ s a -> s{_vtdAlt = a})
 
 instance GoogleRequest VPNTunnelsDelete' where
         type Rs VPNTunnelsDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u VPNTunnelsDelete{..}
-          = go _vtdQuotaUser _vtdPrettyPrint _vtdProject
+        requestWithRoute r u VPNTunnelsDelete'{..}
+          = go _vtdQuotaUser (Just _vtdPrettyPrint) _vtdProject
               _vtdUserIp
               _vtdKey
               _vtdVpnTunnel
               _vtdRegion
               _vtdOauthToken
               _vtdFields
-              _vtdAlt
+              (Just _vtdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VpnTunnelsDeleteAPI)
+                      (Proxy :: Proxy VpnTunnelsDeleteResource)
                       r
                       u

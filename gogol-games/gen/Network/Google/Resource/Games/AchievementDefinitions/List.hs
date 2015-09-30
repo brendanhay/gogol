@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the achievement definitions for your application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementDefinitionsList@.
-module Games.AchievementDefinitions.List
+module Network.Google.Resource.Games.AchievementDefinitions.List
     (
     -- * REST Resource
-      AchievementDefinitionsListAPI
+      AchievementDefinitionsListResource
 
     -- * Creating a Request
-    , achievementDefinitionsList
-    , AchievementDefinitionsList
+    , achievementDefinitionsList'
+    , AchievementDefinitionsList'
 
     -- * Request Lenses
     , adlQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementDefinitionsList@ which the
--- 'AchievementDefinitionsList' request conforms to.
-type AchievementDefinitionsListAPI =
+-- 'AchievementDefinitionsList'' request conforms to.
+type AchievementDefinitionsListResource =
      "achievements" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] AchievementDefinitionsListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] AchievementDefinitionsListResponse
 
 -- | Lists all the achievement definitions for your application.
 --
--- /See:/ 'achievementDefinitionsList' smart constructor.
-data AchievementDefinitionsList = AchievementDefinitionsList
+-- /See:/ 'achievementDefinitionsList'' smart constructor.
+data AchievementDefinitionsList' = AchievementDefinitionsList'
     { _adlQuotaUser   :: !(Maybe Text)
     , _adlPrettyPrint :: !Bool
     , _adlUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data AchievementDefinitionsList = AchievementDefinitionsList
     , _adlOauthToken  :: !(Maybe Text)
     , _adlMaxResults  :: !(Maybe Int32)
     , _adlFields      :: !(Maybe Text)
-    , _adlAlt         :: !Text
+    , _adlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsList'' with the minimum fields required to make a request.
@@ -92,10 +100,10 @@ data AchievementDefinitionsList = AchievementDefinitionsList
 -- * 'adlFields'
 --
 -- * 'adlAlt'
-achievementDefinitionsList
-    :: AchievementDefinitionsList
-achievementDefinitionsList =
-    AchievementDefinitionsList
+achievementDefinitionsList'
+    :: AchievementDefinitionsList'
+achievementDefinitionsList' =
+    AchievementDefinitionsList'
     { _adlQuotaUser = Nothing
     , _adlPrettyPrint = True
     , _adlUserIp = Nothing
@@ -105,7 +113,7 @@ achievementDefinitionsList =
     , _adlOauthToken = Nothing
     , _adlMaxResults = Nothing
     , _adlFields = Nothing
-    , _adlAlt = "json"
+    , _adlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,7 +171,7 @@ adlFields
   = lens _adlFields (\ s a -> s{_adlFields = a})
 
 -- | Data format for the response.
-adlAlt :: Lens' AchievementDefinitionsList' Text
+adlAlt :: Lens' AchievementDefinitionsList' Alt
 adlAlt = lens _adlAlt (\ s a -> s{_adlAlt = a})
 
 instance GoogleRequest AchievementDefinitionsList'
@@ -171,16 +179,17 @@ instance GoogleRequest AchievementDefinitionsList'
         type Rs AchievementDefinitionsList' =
              AchievementDefinitionsListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementDefinitionsList{..}
-          = go _adlQuotaUser _adlPrettyPrint _adlUserIp _adlKey
+        requestWithRoute r u AchievementDefinitionsList'{..}
+          = go _adlQuotaUser (Just _adlPrettyPrint) _adlUserIp
+              _adlKey
               _adlLanguage
               _adlPageToken
               _adlOauthToken
               _adlMaxResults
               _adlFields
-              _adlAlt
+              (Just _adlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementDefinitionsListAPI)
+                      (Proxy :: Proxy AchievementDefinitionsListResource)
                       r
                       u

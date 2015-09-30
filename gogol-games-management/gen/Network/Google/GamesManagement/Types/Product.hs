@@ -18,6 +18,56 @@ module Network.Google.GamesManagement.Types.Product where
 import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
+-- | An object representation of the individual components of the player\'s
+-- name. For some players, these fields may not be present.
+--
+-- /See:/ 'playerName' smart constructor.
+data PlayerName = PlayerName
+    { _pnGivenName  :: !(Maybe Text)
+    , _pnFamilyName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pnGivenName'
+--
+-- * 'pnFamilyName'
+playerName
+    :: PlayerName
+playerName =
+    PlayerName
+    { _pnGivenName = Nothing
+    , _pnFamilyName = Nothing
+    }
+
+-- | The given name of this player. In some places, this is known as the
+-- first name.
+pnGivenName :: Lens' PlayerName (Maybe Text)
+pnGivenName
+  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
+
+-- | The family name of this player. In some places, this is known as the
+-- last name.
+pnFamilyName :: Lens' PlayerName (Maybe Text)
+pnFamilyName
+  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
+
+instance FromJSON PlayerName where
+        parseJSON
+          = withObject "PlayerName"
+              (\ o ->
+                 PlayerName <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON PlayerName where
+        toJSON PlayerName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("familyName" .=) <$> _pnFamilyName])
+
 -- | This is a JSON template for 1P\/3P metadata about the player\'s
 -- experience.
 --

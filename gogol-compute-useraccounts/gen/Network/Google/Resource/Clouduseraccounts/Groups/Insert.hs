@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGroupsInsert@.
-module Clouduseraccounts.Groups.Insert
+module Network.Google.Resource.Clouduseraccounts.Groups.Insert
     (
     -- * REST Resource
-      GroupsInsertAPI
+      GroupsInsertResource
 
     -- * Creating a Request
-    , groupsInsert
-    , GroupsInsert
+    , groupsInsert'
+    , GroupsInsert'
 
     -- * Request Lenses
     , giQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGroupsInsert@ which the
--- 'GroupsInsert' request conforms to.
-type GroupsInsertAPI =
+-- 'GroupsInsert'' request conforms to.
+type GroupsInsertResource =
      Capture "project" Text :>
-       "global" :> "groups" :> Post '[JSON] Operation
+       "global" :>
+         "groups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a Group resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+-- /See:/ 'groupsInsert'' smart constructor.
+data GroupsInsert' = GroupsInsert'
     { _giQuotaUser   :: !(Maybe Text)
     , _giPrettyPrint :: !Bool
     , _giProject     :: !Text
@@ -61,7 +70,7 @@ data GroupsInsert = GroupsInsert
     , _giKey         :: !(Maybe Text)
     , _giOauthToken  :: !(Maybe Text)
     , _giFields      :: !(Maybe Text)
-    , _giAlt         :: !Text
+    , _giAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data GroupsInsert = GroupsInsert
 -- * 'giFields'
 --
 -- * 'giAlt'
-groupsInsert
+groupsInsert'
     :: Text -- ^ 'project'
-    -> GroupsInsert
-groupsInsert pGiProject_ =
-    GroupsInsert
+    -> GroupsInsert'
+groupsInsert' pGiProject_ =
+    GroupsInsert'
     { _giQuotaUser = Nothing
     , _giPrettyPrint = True
     , _giProject = pGiProject_
@@ -95,7 +104,7 @@ groupsInsert pGiProject_ =
     , _giKey = Nothing
     , _giOauthToken = Nothing
     , _giFields = Nothing
-    , _giAlt = "json"
+    , _giAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +146,22 @@ giFields :: Lens' GroupsInsert' (Maybe Text)
 giFields = lens _giFields (\ s a -> s{_giFields = a})
 
 -- | Data format for the response.
-giAlt :: Lens' GroupsInsert' Text
+giAlt :: Lens' GroupsInsert' Alt
 giAlt = lens _giAlt (\ s a -> s{_giAlt = a})
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GroupsInsert{..}
-          = go _giQuotaUser _giPrettyPrint _giProject _giUserIp
+        requestWithRoute r u GroupsInsert'{..}
+          = go _giQuotaUser (Just _giPrettyPrint) _giProject
+              _giUserIp
               _giKey
               _giOauthToken
               _giFields
-              _giAlt
+              (Just _giAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsInsertResource)
+                      r
                       u

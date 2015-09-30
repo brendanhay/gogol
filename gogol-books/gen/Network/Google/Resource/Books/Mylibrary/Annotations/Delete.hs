@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an annotation.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryAnnotationsDelete@.
-module Books.Mylibrary.Annotations.Delete
+module Network.Google.Resource.Books.Mylibrary.Annotations.Delete
     (
     -- * REST Resource
-      MylibraryAnnotationsDeleteAPI
+      MylibraryAnnotationsDeleteResource
 
     -- * Creating a Request
-    , mylibraryAnnotationsDelete
-    , MylibraryAnnotationsDelete
+    , mylibraryAnnotationsDelete'
+    , MylibraryAnnotationsDelete'
 
     -- * Request Lenses
     , madQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryAnnotationsDelete@ which the
--- 'MylibraryAnnotationsDelete' request conforms to.
-type MylibraryAnnotationsDeleteAPI =
+-- 'MylibraryAnnotationsDelete'' request conforms to.
+type MylibraryAnnotationsDeleteResource =
      "mylibrary" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "source" Text :> Delete '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an annotation.
 --
--- /See:/ 'mylibraryAnnotationsDelete' smart constructor.
-data MylibraryAnnotationsDelete = MylibraryAnnotationsDelete
+-- /See:/ 'mylibraryAnnotationsDelete'' smart constructor.
+data MylibraryAnnotationsDelete' = MylibraryAnnotationsDelete'
     { _madQuotaUser    :: !(Maybe Text)
     , _madPrettyPrint  :: !Bool
     , _madUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data MylibraryAnnotationsDelete = MylibraryAnnotationsDelete
     , _madSource       :: !(Maybe Text)
     , _madOauthToken   :: !(Maybe Text)
     , _madFields       :: !(Maybe Text)
-    , _madAlt          :: !Text
+    , _madAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryAnnotationsDelete'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data MylibraryAnnotationsDelete = MylibraryAnnotationsDelete
 -- * 'madFields'
 --
 -- * 'madAlt'
-mylibraryAnnotationsDelete
+mylibraryAnnotationsDelete'
     :: Text -- ^ 'annotationId'
-    -> MylibraryAnnotationsDelete
-mylibraryAnnotationsDelete pMadAnnotationId_ =
-    MylibraryAnnotationsDelete
+    -> MylibraryAnnotationsDelete'
+mylibraryAnnotationsDelete' pMadAnnotationId_ =
+    MylibraryAnnotationsDelete'
     { _madQuotaUser = Nothing
     , _madPrettyPrint = True
     , _madUserIp = Nothing
@@ -100,7 +108,7 @@ mylibraryAnnotationsDelete pMadAnnotationId_ =
     , _madSource = Nothing
     , _madOauthToken = Nothing
     , _madFields = Nothing
-    , _madAlt = "json"
+    , _madAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,23 @@ madFields
   = lens _madFields (\ s a -> s{_madFields = a})
 
 -- | Data format for the response.
-madAlt :: Lens' MylibraryAnnotationsDelete' Text
+madAlt :: Lens' MylibraryAnnotationsDelete' Alt
 madAlt = lens _madAlt (\ s a -> s{_madAlt = a})
 
 instance GoogleRequest MylibraryAnnotationsDelete'
          where
         type Rs MylibraryAnnotationsDelete' = ()
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryAnnotationsDelete{..}
-          = go _madQuotaUser _madPrettyPrint _madUserIp _madKey
+        requestWithRoute r u MylibraryAnnotationsDelete'{..}
+          = go _madQuotaUser (Just _madPrettyPrint) _madUserIp
+              _madKey
               _madAnnotationId
               _madSource
               _madOauthToken
               _madFields
-              _madAlt
+              (Just _madAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryAnnotationsDeleteAPI)
+                      (Proxy :: Proxy MylibraryAnnotationsDeleteResource)
                       r
                       u

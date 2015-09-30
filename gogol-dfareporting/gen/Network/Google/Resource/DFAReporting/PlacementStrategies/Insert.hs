@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new placement strategy.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementStrategiesInsert@.
-module DFAReporting.PlacementStrategies.Insert
+module Network.Google.Resource.DFAReporting.PlacementStrategies.Insert
     (
     -- * REST Resource
-      PlacementStrategiesInsertAPI
+      PlacementStrategiesInsertResource
 
     -- * Creating a Request
-    , placementStrategiesInsert
-    , PlacementStrategiesInsert
+    , placementStrategiesInsert'
+    , PlacementStrategiesInsert'
 
     -- * Request Lenses
     , psiQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementStrategiesInsert@ which the
--- 'PlacementStrategiesInsert' request conforms to.
-type PlacementStrategiesInsertAPI =
+-- 'PlacementStrategiesInsert'' request conforms to.
+type PlacementStrategiesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "placementStrategies" :>
-           Post '[JSON] PlacementStrategy
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] PlacementStrategy
 
 -- | Inserts a new placement strategy.
 --
--- /See:/ 'placementStrategiesInsert' smart constructor.
-data PlacementStrategiesInsert = PlacementStrategiesInsert
+-- /See:/ 'placementStrategiesInsert'' smart constructor.
+data PlacementStrategiesInsert' = PlacementStrategiesInsert'
     { _psiQuotaUser   :: !(Maybe Text)
     , _psiPrettyPrint :: !Bool
     , _psiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data PlacementStrategiesInsert = PlacementStrategiesInsert
     , _psiKey         :: !(Maybe Text)
     , _psiOauthToken  :: !(Maybe Text)
     , _psiFields      :: !(Maybe Text)
-    , _psiAlt         :: !Text
+    , _psiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data PlacementStrategiesInsert = PlacementStrategiesInsert
 -- * 'psiFields'
 --
 -- * 'psiAlt'
-placementStrategiesInsert
+placementStrategiesInsert'
     :: Int64 -- ^ 'profileId'
-    -> PlacementStrategiesInsert
-placementStrategiesInsert pPsiProfileId_ =
-    PlacementStrategiesInsert
+    -> PlacementStrategiesInsert'
+placementStrategiesInsert' pPsiProfileId_ =
+    PlacementStrategiesInsert'
     { _psiQuotaUser = Nothing
     , _psiPrettyPrint = True
     , _psiUserIp = Nothing
@@ -95,7 +103,7 @@ placementStrategiesInsert pPsiProfileId_ =
     , _psiKey = Nothing
     , _psiOauthToken = Nothing
     , _psiFields = Nothing
-    , _psiAlt = "json"
+    , _psiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ psiFields
   = lens _psiFields (\ s a -> s{_psiFields = a})
 
 -- | Data format for the response.
-psiAlt :: Lens' PlacementStrategiesInsert' Text
+psiAlt :: Lens' PlacementStrategiesInsert' Alt
 psiAlt = lens _psiAlt (\ s a -> s{_psiAlt = a})
 
 instance GoogleRequest PlacementStrategiesInsert'
@@ -148,15 +156,15 @@ instance GoogleRequest PlacementStrategiesInsert'
         type Rs PlacementStrategiesInsert' =
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementStrategiesInsert{..}
-          = go _psiQuotaUser _psiPrettyPrint _psiUserIp
+        requestWithRoute r u PlacementStrategiesInsert'{..}
+          = go _psiQuotaUser (Just _psiPrettyPrint) _psiUserIp
               _psiProfileId
               _psiKey
               _psiOauthToken
               _psiFields
-              _psiAlt
+              (Just _psiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementStrategiesInsertAPI)
+                      (Proxy :: Proxy PlacementStrategiesInsertResource)
                       r
                       u

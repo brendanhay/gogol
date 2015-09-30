@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- ).
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudbillingProjectsGetBillingInfo@.
-module Cloudbilling.Projects.GetBillingInfo
+module Network.Google.Resource.Cloudbilling.Projects.GetBillingInfo
     (
     -- * REST Resource
-      ProjectsGetBillingInfoAPI
+      ProjectsGetBillingInfoResource
 
     -- * Creating a Request
-    , projectsGetBillingInfo
-    , ProjectsGetBillingInfo
+    , projectsGetBillingInfo'
+    , ProjectsGetBillingInfo'
 
     -- * Request Lenses
     , pgbiXgafv
@@ -52,19 +53,33 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudbillingProjectsGetBillingInfo@ which the
--- 'ProjectsGetBillingInfo' request conforms to.
-type ProjectsGetBillingInfoAPI =
+-- 'ProjectsGetBillingInfo'' request conforms to.
+type ProjectsGetBillingInfoResource =
      "v1" :>
        "{+name}" :>
-         "billingInfo" :> Get '[JSON] ProjectBillingInfo
+         "billingInfo" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] ProjectBillingInfo
 
 -- | Gets the billing information for a project. The current authenticated
 -- user must have [permission to view the
 -- project](https:\/\/cloud.google.com\/docs\/permissions-overview#h.bgs0oxofvnoo
 -- ).
 --
--- /See:/ 'projectsGetBillingInfo' smart constructor.
-data ProjectsGetBillingInfo = ProjectsGetBillingInfo
+-- /See:/ 'projectsGetBillingInfo'' smart constructor.
+data ProjectsGetBillingInfo' = ProjectsGetBillingInfo'
     { _pgbiXgafv          :: !(Maybe Text)
     , _pgbiQuotaUser      :: !(Maybe Text)
     , _pgbiPrettyPrint    :: !Bool
@@ -112,11 +127,11 @@ data ProjectsGetBillingInfo = ProjectsGetBillingInfo
 -- * 'pgbiCallback'
 --
 -- * 'pgbiAlt'
-projectsGetBillingInfo
+projectsGetBillingInfo'
     :: Text -- ^ 'name'
-    -> ProjectsGetBillingInfo
-projectsGetBillingInfo pPgbiName_ =
-    ProjectsGetBillingInfo
+    -> ProjectsGetBillingInfo'
+projectsGetBillingInfo' pPgbiName_ =
+    ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
     , _pgbiQuotaUser = Nothing
     , _pgbiPrettyPrint = True
@@ -214,10 +229,11 @@ pgbiAlt = lens _pgbiAlt (\ s a -> s{_pgbiAlt = a})
 instance GoogleRequest ProjectsGetBillingInfo' where
         type Rs ProjectsGetBillingInfo' = ProjectBillingInfo
         request = requestWithRoute defReq billingURL
-        requestWithRoute r u ProjectsGetBillingInfo{..}
-          = go _pgbiXgafv _pgbiQuotaUser _pgbiPrettyPrint
+        requestWithRoute r u ProjectsGetBillingInfo'{..}
+          = go _pgbiXgafv _pgbiQuotaUser
+              (Just _pgbiPrettyPrint)
               _pgbiUploadProtocol
-              _pgbiPp
+              (Just _pgbiPp)
               _pgbiAccessToken
               _pgbiUploadType
               _pgbiBearerToken
@@ -226,9 +242,9 @@ instance GoogleRequest ProjectsGetBillingInfo' where
               _pgbiOauthToken
               _pgbiFields
               _pgbiCallback
-              _pgbiAlt
+              (Just _pgbiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsGetBillingInfoAPI)
+                      (Proxy :: Proxy ProjectsGetBillingInfoResource)
                       r
                       u

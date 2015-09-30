@@ -28,19 +28,19 @@ module Network.Google.Billing
     -- * REST Resources
 
     -- ** CloudbillingBillingAccountsGet
-    , module Cloudbilling.BillingAccounts.Get
+    , module Network.Google.Resource.Cloudbilling.BillingAccounts.Get
 
     -- ** CloudbillingBillingAccountsList
-    , module Cloudbilling.BillingAccounts.List
+    , module Network.Google.Resource.Cloudbilling.BillingAccounts.List
 
     -- ** CloudbillingBillingAccountsProjectsList
-    , module Cloudbilling.BillingAccounts.Projects.List
+    , module Network.Google.Resource.Cloudbilling.BillingAccounts.Projects.List
 
     -- ** CloudbillingProjectsGetBillingInfo
-    , module Cloudbilling.Projects.GetBillingInfo
+    , module Network.Google.Resource.Cloudbilling.Projects.GetBillingInfo
 
     -- ** CloudbillingProjectsUpdateBillingInfo
-    , module Cloudbilling.Projects.UpdateBillingInfo
+    , module Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
 
     -- * Types
 
@@ -84,7 +84,12 @@ import           Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
 TODO
 -}
 
-type BillingAPI = Projects :<|> BillingAccounts
+type BillingAPI =
+     ProjectsGetBillingInfoResource :<|>
+       ProjectsUpdateBillingInfoResource
+       :<|> BillingAccountsProjectsListResource
+       :<|> BillingAccountsListResource
+       :<|> BillingAccountsGetResource
 
 billingAPI :: Proxy BillingAPI
 billingAPI = Proxy

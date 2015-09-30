@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified network resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksDelete@.
-module Compute.Networks.Delete
+module Network.Google.Resource.Compute.Networks.Delete
     (
     -- * REST Resource
-      NetworksDeleteAPI
+      NetworksDeleteResource
 
     -- * Creating a Request
-    , networksDelete
-    , NetworksDelete
+    , networksDelete'
+    , NetworksDelete'
 
     -- * Request Lenses
     , ndQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeNetworksDelete@ which the
--- 'NetworksDelete' request conforms to.
-type NetworksDeleteAPI =
+-- 'NetworksDelete'' request conforms to.
+type NetworksDeleteResource =
      Capture "project" Text :>
        "global" :>
          "networks" :>
-           Capture "network" Text :> Delete '[JSON] Operation
+           Capture "network" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified network resource.
 --
--- /See:/ 'networksDelete' smart constructor.
-data NetworksDelete = NetworksDelete
+-- /See:/ 'networksDelete'' smart constructor.
+data NetworksDelete' = NetworksDelete'
     { _ndQuotaUser   :: !(Maybe Text)
     , _ndPrettyPrint :: !Bool
     , _ndProject     :: !Text
@@ -63,7 +71,7 @@ data NetworksDelete = NetworksDelete
     , _ndKey         :: !(Maybe Text)
     , _ndOauthToken  :: !(Maybe Text)
     , _ndFields      :: !(Maybe Text)
-    , _ndAlt         :: !Text
+    , _ndAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data NetworksDelete = NetworksDelete
 -- * 'ndFields'
 --
 -- * 'ndAlt'
-networksDelete
+networksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'network'
-    -> NetworksDelete
-networksDelete pNdProject_ pNdNetwork_ =
-    NetworksDelete
+    -> NetworksDelete'
+networksDelete' pNdProject_ pNdNetwork_ =
+    NetworksDelete'
     { _ndQuotaUser = Nothing
     , _ndPrettyPrint = True
     , _ndProject = pNdProject_
@@ -101,7 +109,7 @@ networksDelete pNdProject_ pNdNetwork_ =
     , _ndKey = Nothing
     , _ndOauthToken = Nothing
     , _ndFields = Nothing
-    , _ndAlt = "json"
+    , _ndAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ ndFields :: Lens' NetworksDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
 -- | Data format for the response.
-ndAlt :: Lens' NetworksDelete' Text
+ndAlt :: Lens' NetworksDelete' Alt
 ndAlt = lens _ndAlt (\ s a -> s{_ndAlt = a})
 
 instance GoogleRequest NetworksDelete' where
         type Rs NetworksDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksDelete{..}
-          = go _ndQuotaUser _ndPrettyPrint _ndProject _ndUserIp
+        requestWithRoute r u NetworksDelete'{..}
+          = go _ndQuotaUser (Just _ndPrettyPrint) _ndProject
+              _ndUserIp
               _ndNetwork
               _ndKey
               _ndOauthToken
               _ndFields
-              _ndAlt
+              (Just _ndAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NetworksDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy NetworksDeleteResource)
                       r
                       u

@@ -27,136 +27,136 @@ module Network.Google.Books
     -- * REST Resources
 
     -- ** BooksBookshelvesGet
-    , module Books.Bookshelves.Get
+    , module Network.Google.Resource.Books.Bookshelves.Get
 
     -- ** BooksBookshelvesList
-    , module Books.Bookshelves.List
+    , module Network.Google.Resource.Books.Bookshelves.List
 
     -- ** BooksBookshelvesVolumesList
-    , module Books.Bookshelves.Volumes.List
+    , module Network.Google.Resource.Books.Bookshelves.Volumes.List
 
     -- ** BooksCloudloadingAddBook
-    , module Books.Cloudloading.AddBook
+    , module Network.Google.Resource.Books.Cloudloading.AddBook
 
     -- ** BooksCloudloadingDeleteBook
-    , module Books.Cloudloading.DeleteBook
+    , module Network.Google.Resource.Books.Cloudloading.DeleteBook
 
     -- ** BooksCloudloadingUpdateBook
-    , module Books.Cloudloading.UpdateBook
+    , module Network.Google.Resource.Books.Cloudloading.UpdateBook
 
     -- ** BooksDictionaryListOfflineMetadata
-    , module Books.Dictionary.ListOfflineMetadata
+    , module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 
     -- ** BooksLayersAnnotationDataGet
-    , module Books.Layers.AnnotationData.Get
+    , module Network.Google.Resource.Books.Layers.AnnotationData.Get
 
     -- ** BooksLayersAnnotationDataList
-    , module Books.Layers.AnnotationData.List
+    , module Network.Google.Resource.Books.Layers.AnnotationData.List
 
     -- ** BooksLayersGet
-    , module Books.Layers.Get
+    , module Network.Google.Resource.Books.Layers.Get
 
     -- ** BooksLayersList
-    , module Books.Layers.List
+    , module Network.Google.Resource.Books.Layers.List
 
     -- ** BooksLayersVolumeAnnotationsGet
-    , module Books.Layers.VolumeAnnotations.Get
+    , module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
 
     -- ** BooksLayersVolumeAnnotationsList
-    , module Books.Layers.VolumeAnnotations.List
+    , module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
 
     -- ** BooksMyconfigGetUserSettings
-    , module Books.Myconfig.GetUserSettings
+    , module Network.Google.Resource.Books.Myconfig.GetUserSettings
 
     -- ** BooksMyconfigReleaseDownloadAccess
-    , module Books.Myconfig.ReleaseDownloadAccess
+    , module Network.Google.Resource.Books.Myconfig.ReleaseDownloadAccess
 
     -- ** BooksMyconfigRequestAccess
-    , module Books.Myconfig.RequestAccess
+    , module Network.Google.Resource.Books.Myconfig.RequestAccess
 
     -- ** BooksMyconfigSyncVolumeLicenses
-    , module Books.Myconfig.SyncVolumeLicenses
+    , module Network.Google.Resource.Books.Myconfig.SyncVolumeLicenses
 
     -- ** BooksMyconfigUpdateUserSettings
-    , module Books.Myconfig.UpdateUserSettings
+    , module Network.Google.Resource.Books.Myconfig.UpdateUserSettings
 
     -- ** BooksMylibraryAnnotationsDelete
-    , module Books.Mylibrary.Annotations.Delete
+    , module Network.Google.Resource.Books.Mylibrary.Annotations.Delete
 
     -- ** BooksMylibraryAnnotationsInsert
-    , module Books.Mylibrary.Annotations.Insert
+    , module Network.Google.Resource.Books.Mylibrary.Annotations.Insert
 
     -- ** BooksMylibraryAnnotationsList
-    , module Books.Mylibrary.Annotations.List
+    , module Network.Google.Resource.Books.Mylibrary.Annotations.List
 
     -- ** BooksMylibraryAnnotationsSummary
-    , module Books.Mylibrary.Annotations.Summary
+    , module Network.Google.Resource.Books.Mylibrary.Annotations.Summary
 
     -- ** BooksMylibraryAnnotationsUpdate
-    , module Books.Mylibrary.Annotations.Update
+    , module Network.Google.Resource.Books.Mylibrary.Annotations.Update
 
     -- ** BooksMylibraryBookshelvesAddVolume
-    , module Books.Mylibrary.Bookshelves.AddVolume
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.AddVolume
 
     -- ** BooksMylibraryBookshelvesClearVolumes
-    , module Books.Mylibrary.Bookshelves.ClearVolumes
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.ClearVolumes
 
     -- ** BooksMylibraryBookshelvesGet
-    , module Books.Mylibrary.Bookshelves.Get
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.Get
 
     -- ** BooksMylibraryBookshelvesList
-    , module Books.Mylibrary.Bookshelves.List
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.List
 
     -- ** BooksMylibraryBookshelvesMoveVolume
-    , module Books.Mylibrary.Bookshelves.MoveVolume
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.MoveVolume
 
     -- ** BooksMylibraryBookshelvesRemoveVolume
-    , module Books.Mylibrary.Bookshelves.RemoveVolume
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.RemoveVolume
 
     -- ** BooksMylibraryBookshelvesVolumesList
-    , module Books.Mylibrary.Bookshelves.Volumes.List
+    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.Volumes.List
 
     -- ** BooksMylibraryReadingpositionsGet
-    , module Books.Mylibrary.Readingpositions.Get
+    , module Network.Google.Resource.Books.Mylibrary.Readingpositions.Get
 
     -- ** BooksMylibraryReadingpositionsSetPosition
-    , module Books.Mylibrary.Readingpositions.SetPosition
+    , module Network.Google.Resource.Books.Mylibrary.Readingpositions.SetPosition
 
     -- ** BooksOnboardingListCategories
-    , module Books.Onboarding.ListCategories
+    , module Network.Google.Resource.Books.Onboarding.ListCategories
 
     -- ** BooksOnboardingListCategoryVolumes
-    , module Books.Onboarding.ListCategoryVolumes
+    , module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
 
     -- ** BooksPromoofferAccept
-    , module Books.Promooffer.Accept
+    , module Network.Google.Resource.Books.Promooffer.Accept
 
     -- ** BooksPromoofferDismiss
-    , module Books.Promooffer.Dismiss
+    , module Network.Google.Resource.Books.Promooffer.Dismiss
 
     -- ** BooksPromoofferGet
-    , module Books.Promooffer.Get
+    , module Network.Google.Resource.Books.Promooffer.Get
 
     -- ** BooksVolumesAssociatedList
-    , module Books.Volumes.Associated.List
+    , module Network.Google.Resource.Books.Volumes.Associated.List
 
     -- ** BooksVolumesGet
-    , module Books.Volumes.Get
+    , module Network.Google.Resource.Books.Volumes.Get
 
     -- ** BooksVolumesList
-    , module Books.Volumes.List
+    , module Network.Google.Resource.Books.Volumes.List
 
     -- ** BooksVolumesMybooksList
-    , module Books.Volumes.Mybooks.List
+    , module Network.Google.Resource.Books.Volumes.Mybooks.List
 
     -- ** BooksVolumesRecommendedList
-    , module Books.Volumes.Recommended.List
+    , module Network.Google.Resource.Books.Volumes.Recommended.List
 
     -- ** BooksVolumesRecommendedRate
-    , module Books.Volumes.Recommended.Rate
+    , module Network.Google.Resource.Books.Volumes.Recommended.Rate
 
     -- ** BooksVolumesUseruploadedList
-    , module Books.Volumes.Useruploaded.List
+    , module Network.Google.Resource.Books.Volumes.Useruploaded.List
 
     -- * Types
 
@@ -183,6 +183,12 @@ module Network.Google.Books
     , uKind
     , uNotesExport
 
+    -- ** VolumeVolumeInfoIndustryIdentifiers
+    , VolumeVolumeInfoIndustryIdentifiers
+    , volumeVolumeInfoIndustryIdentifiers
+    , vviiiIdentifier
+    , vviiiType
+
     -- ** Annotationsdata
     , Annotationsdata
     , annotationsdata
@@ -190,6 +196,15 @@ module Network.Google.Books
     , annNextPageToken
     , annKind
     , annItems
+
+    -- ** BooksMylibraryReadingpositionsSetPositionAction
+    , BooksMylibraryReadingpositionsSetPositionAction (..)
+
+    -- ** GeolayerdataGeoViewport
+    , GeolayerdataGeoViewport
+    , geolayerdataGeoViewport
+    , ggvHi
+    , ggvLo
 
     -- ** Annotation
     , Annotation
@@ -211,6 +226,20 @@ module Network.Google.Books
     , aaDeleted
     , aaUpdated
     , aaLayerId
+
+    -- ** ReviewAuthor
+    , ReviewAuthor
+    , reviewAuthor
+    , raDisplayName
+
+    -- ** BooksVolumesListDownload
+    , BooksVolumesListDownload (..)
+
+    -- ** DictlayerdataDictWordsSensesConjugations
+    , DictlayerdataDictWordsSensesConjugations
+    , dictlayerdataDictWordsSensesConjugations
+    , ddwscValue
+    , ddwscType
 
     -- ** BooksCloudloadingResource
     , BooksCloudloadingResource
@@ -236,6 +265,28 @@ module Network.Google.Books
     , lId
     , lUpdated
     , lLayerId
+
+    -- ** VolumeUserInfo
+    , VolumeUserInfo
+    , volumeUserInfo
+    , vuiCopy
+    , vuiUserUploadedVolumeInfo
+    , vuiIsPurchased
+    , vuiRentalState
+    , vuiIsPreordered
+    , vuiReview
+    , vuiRentalPeriod
+    , vuiUpdated
+    , vuiIsUploaded
+    , vuiIsInMyBooks
+    , vuiReadingPosition
+
+    -- ** ReviewSource
+    , ReviewSource
+    , reviewSource
+    , rsExtraDescription
+    , rsUrl
+    , rsDescription
 
     -- ** Annotationdata
     , Annotationdata
@@ -268,10 +319,77 @@ module Network.Google.Books
     , volUpdated
     , volLayerId
 
+    -- ** VolumeUserInfoUserUploadedVolumeInfo
+    , VolumeUserInfoUserUploadedVolumeInfo
+    , volumeUserInfoUserUploadedVolumeInfo
+    , vuiuuviProcessingState
+
+    -- ** BooksVolumesAssociatedListAssociation
+    , BooksVolumesAssociatedListAssociation (..)
+
+    -- ** VolumeannotationContentRanges
+    , VolumeannotationContentRanges
+    , volumeannotationContentRanges
+    , vcrGbImageRange
+    , vcrContentVersion
+    , vcrGbTextRange
+    , vcrCfiRange
+
+    -- ** VolumeVolumeInfoImageLinks
+    , VolumeVolumeInfoImageLinks
+    , volumeVolumeInfoImageLinks
+    , vviilThumbnail
+    , vviilSmall
+    , vviilExtraLarge
+    , vviilLarge
+    , vviilMedium
+    , vviilSmallThumbnail
+
+    -- ** BooksVolumesGetProjection
+    , BooksVolumesGetProjection (..)
+
+    -- ** VolumeAccessInfo
+    , VolumeAccessInfo
+    , volumeAccessInfo
+    , vaiWebReaderLink
+    , vaiCountry
+    , vaiDriveImportedContentLink
+    , vaiExplicitOfflineLicenseManagement
+    , vaiViewability
+    , vaiQuoteSharingAllowed
+    , vaiEpub
+    , vaiPdf
+    , vaiTextToSpeechPermission
+    , vaiEmbeddable
+    , vaiAccessViewStatus
+    , vaiDownloadAccess
+    , vaiViewOrderUrl
+    , vaiPublicDomain
+
+    -- ** VolumeUserInfoCopy
+    , VolumeUserInfoCopy
+    , volumeUserInfoCopy
+    , vuicLimitType
+    , vuicAllowedCharacterCount
+    , vuicUpdated
+    , vuicRemainingCharacterCount
+
     -- ** BooksVolumesRecommendedRateResponse
     , BooksVolumesRecommendedRateResponse
     , booksVolumesRecommendedRateResponse
     , bvrrrConsistencyToken
+
+    -- ** VolumeLayerInfoLayers
+    , VolumeLayerInfoLayers
+    , volumeLayerInfoLayers
+    , vlilVolumeAnnotationsVersion
+    , vlilLayerId
+
+    -- ** DictlayerdataDictWordsExamples
+    , DictlayerdataDictWordsExamples
+    , dictlayerdataDictWordsExamples
+    , ddweText
+    , ddweSource
 
     -- ** Bookshelf
     , Bookshelf
@@ -287,11 +405,29 @@ module Network.Google.Books
     , bTitle
     , bDescription
 
+    -- ** DictlayerdataDictWordsSensesDefinitions
+    , DictlayerdataDictWordsSensesDefinitions
+    , dictlayerdataDictWordsSensesDefinitions
+    , ddwsdDefinition
+    , ddwsdExamples
+
+    -- ** AnnotationLayerSummary
+    , AnnotationLayerSummary
+    , annotationLayerSummary
+    , alsLimitType
+    , alsAllowedCharacterCount
+    , alsRemainingCharacterCount
+
     -- ** Category
     , Category
     , category
     , cKind
     , cItems
+
+    -- ** VolumeSearchInfo
+    , VolumeSearchInfo
+    , volumeSearchInfo
+    , vsiTextSnippet
 
     -- ** AnnotationsSummary
     , AnnotationsSummary
@@ -314,6 +450,84 @@ module Network.Google.Books
     , vvRecommendedInfo
     , vvVolumeInfo
 
+    -- ** BooksMylibraryBookshelvesRemoveVolumeReason
+    , BooksMylibraryBookshelvesRemoveVolumeReason (..)
+
+    -- ** BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
+    , BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating (..)
+
+    -- ** BooksVolumesListLibraryRestrict
+    , BooksVolumesListLibraryRestrict (..)
+
+    -- ** GeolayerdataCommon
+    , GeolayerdataCommon
+    , geolayerdataCommon
+    , gcSnippet
+    , gcSnippetUrl
+    , gcLang
+    , gcTitle
+    , gcPreviewImageUrl
+
+    -- ** DictlayerdataDictWordsSource
+    , DictlayerdataDictWordsSource
+    , dictlayerdataDictWordsSource
+    , ddwsUrl
+    , ddwsAttribution
+
+    -- ** DictlayerdataDictWordsSensesDefinitionsExamplesSource
+    , DictlayerdataDictWordsSensesDefinitionsExamplesSource
+    , dictlayerdataDictWordsSensesDefinitionsExamplesSource
+    , ddwsdesUrl
+    , ddwsdesAttribution
+
+    -- ** BooksVolumesListFilter
+    , BooksVolumesListFilter (..)
+
+    -- ** GeolayerdataGeoBoundary
+    , GeolayerdataGeoBoundary
+    , geolayerdataGeoBoundary
+    , ggbLatitude
+    , ggbLongitude
+
+    -- ** BooksVolumesAssociatedListMaxAllowedMaturityRating
+    , BooksVolumesAssociatedListMaxAllowedMaturityRating (..)
+
+    -- ** GeolayerdataGeo
+    , GeolayerdataGeo
+    , geolayerdataGeo
+    , ggMapType
+    , ggCachePolicy
+    , ggViewport
+    , ggBoundary
+    , ggLatitude
+    , ggZoom
+    , ggCountryCode
+    , ggLongitude
+
+    -- ** BooksVolumesRecommendedListMaxAllowedMaturityRating
+    , BooksVolumesRecommendedListMaxAllowedMaturityRating (..)
+
+    -- ** CategoryItems
+    , CategoryItems
+    , categoryItems
+    , ciName
+    , ciCategoryId
+    , ciBadgeUrl
+
+    -- ** DictlayerdataDictWordsSensesDefinitionsExamples
+    , DictlayerdataDictWordsSensesDefinitionsExamples
+    , dictlayerdataDictWordsSensesDefinitionsExamples
+    , ddwsdeText
+    , ddwsdeSource
+
+    -- ** DictlayerdataDictWords
+    , DictlayerdataDictWords
+    , dictlayerdataDictWords
+    , ddwSenses
+    , ddwSource
+    , ddwDerivatives
+    , ddwExamples
+
     -- ** Geolayerdata
     , Geolayerdata
     , geolayerdata
@@ -321,12 +535,50 @@ module Network.Google.Books
     , gGeo
     , gCommon
 
+    -- ** DictlayerdataDictWordsSensesSynonyms
+    , DictlayerdataDictWordsSensesSynonyms
+    , dictlayerdataDictWordsSensesSynonyms
+    , ddwssText
+    , ddwssSource
+
     -- ** Dictlayerdata
     , Dictlayerdata
     , dictlayerdata
     , dKind
     , dDict
     , dCommon
+
+    -- ** BooksVolumesRecommendedRateRating
+    , BooksVolumesRecommendedRateRating (..)
+
+    -- ** DictlayerdataDictWordsSensesSynonymsSource
+    , DictlayerdataDictWordsSensesSynonymsSource
+    , dictlayerdataDictWordsSensesSynonymsSource
+    , ddwsssUrl
+    , ddwsssAttribution
+
+    -- ** VolumeSaleInfoOffersRetailPrice
+    , VolumeSaleInfoOffersRetailPrice
+    , volumeSaleInfoOffersRetailPrice
+    , vsiorpCurrencyCode
+    , vsiorpAmountInMicros
+
+    -- ** DictlayerdataCommon
+    , DictlayerdataCommon
+    , dictlayerdataCommon
+    , dcTitle
+
+    -- ** BooksMyconfigSyncVolumeLicensesFeatures
+    , BooksMyconfigSyncVolumeLicensesFeatures (..)
+
+    -- ** GeolayerdataGeoViewportLo
+    , GeolayerdataGeoViewportLo
+    , geolayerdataGeoViewportLo
+    , ggvlLatitude
+    , ggvlLongitude
+
+    -- ** BooksVolumesUseruploadedListProcessingState
+    , BooksVolumesUseruploadedListProcessingState (..)
 
     -- ** DownloadAccessRestriction
     , DownloadAccessRestriction
@@ -344,6 +596,15 @@ module Network.Google.Books
     , darMessage
     , darNonce
 
+    -- ** BooksMylibraryBookshelvesAddVolumeReason
+    , BooksMylibraryBookshelvesAddVolumeReason (..)
+
+    -- ** VolumeSaleInfoRetailPrice
+    , VolumeSaleInfoRetailPrice
+    , volumeSaleInfoRetailPrice
+    , vsirpAmount
+    , vsirpCurrencyCode
+
     -- ** Review
     , Review
     , review
@@ -358,12 +619,47 @@ module Network.Google.Books
     , rTitle
     , rType
 
+    -- ** BooksVolumesListPrintType
+    , BooksVolumesListPrintType (..)
+
     -- ** Volume2
     , Volume2
     , volume2
     , voloNextPageToken
     , voloKind
     , voloItems
+
+    -- ** VolumeSaleInfoListPrice
+    , VolumeSaleInfoListPrice
+    , volumeSaleInfoListPrice
+    , vsilpAmount
+    , vsilpCurrencyCode
+
+    -- ** BooksVolumesMybooksListAcquireMethod
+    , BooksVolumesMybooksListAcquireMethod (..)
+
+    -- ** VolumeUserInfoRentalPeriod
+    , VolumeUserInfoRentalPeriod
+    , volumeUserInfoRentalPeriod
+    , vuirpEndUtcSec
+    , vuirpStartUtcSec
+
+    -- ** VolumeLayerInfo
+    , VolumeLayerInfo
+    , volumeLayerInfo
+    , vliLayers
+
+    -- ** VolumeSaleInfo
+    , VolumeSaleInfo
+    , volumeSaleInfo
+    , vsiCountry
+    , vsiOnSaleDate
+    , vsiListPrice
+    , vsiRetailPrice
+    , vsiOffers
+    , vsiBuyLink
+    , vsiIsEbook
+    , vsiSaleability
 
     -- ** RequestAccess
     , RequestAccess
@@ -372,11 +668,79 @@ module Network.Google.Books
     , raKind
     , raDownloadAccess
 
+    -- ** OffersItems
+    , OffersItems
+    , offersItems
+    , oiItems
+    , oiArtUrl
+    , oiId
+    , oiGservicesKey
+
     -- ** Metadata
     , Metadata
     , metadata
     , mKind
     , mItems
+
+    -- ** VolumeVolumeInfoDimensions
+    , VolumeVolumeInfoDimensions
+    , volumeVolumeInfoDimensions
+    , vvidHeight
+    , vvidWidth
+    , vvidThickness
+
+    -- ** AnnotationCurrentVersionRanges
+    , AnnotationCurrentVersionRanges
+    , annotationCurrentVersionRanges
+    , acvrGbImageRange
+    , acvrContentVersion
+    , acvrImageCfiRange
+    , acvrGbTextRange
+    , acvrCfiRange
+
+    -- ** VolumeAccessInfoEpub
+    , VolumeAccessInfoEpub
+    , volumeAccessInfoEpub
+    , vaieAcsTokenLink
+    , vaieIsAvailable
+    , vaieDownloadLink
+
+    -- ** VolumeAccessInfoPdf
+    , VolumeAccessInfoPdf
+    , volumeAccessInfoPdf
+    , vaipAcsTokenLink
+    , vaipIsAvailable
+    , vaipDownloadLink
+
+    -- ** AnnotationClientVersionRanges
+    , AnnotationClientVersionRanges
+    , annotationClientVersionRanges
+    , aGbImageRange
+    , aContentVersion
+    , aImageCfiRange
+    , aGbTextRange
+    , aCfiRange
+
+    -- ** AnnotationsSummaryLayers
+    , AnnotationsSummaryLayers
+    , annotationsSummaryLayers
+    , aslLimitType
+    , aslAllowedCharacterCount
+    , aslUpdated
+    , aslLayerId
+    , aslRemainingCharacterCount
+
+    -- ** DictlayerdataDictWordsExamplesSource
+    , DictlayerdataDictWordsExamplesSource
+    , dictlayerdataDictWordsExamplesSource
+    , ddwesUrl
+    , ddwesAttribution
+
+    -- ** VolumeSaleInfoOffersRentalDuration
+    , VolumeSaleInfoOffersRentalDuration
+    , volumeSaleInfoOffersRentalDuration
+    , vsiordCount
+    , vsiordUnit
 
     -- ** ReadingPosition
     , ReadingPosition
@@ -402,11 +766,65 @@ module Network.Google.Books
     , v1Kind
     , v1Items
 
+    -- ** VolumeRecommendedInfo
+    , VolumeRecommendedInfo
+    , volumeRecommendedInfo
+    , vriExplanation
+
     -- ** Bookshelves
     , Bookshelves
     , bookshelves
     , booKind
     , booItems
+
+    -- ** DictlayerdataDictWordsSenses
+    , DictlayerdataDictWordsSenses
+    , dictlayerdataDictWordsSenses
+    , ddwsPronunciationUrl
+    , ddwsConjugations
+    , ddwsPronunciation
+    , ddwsSynonyms
+    , ddwsSource
+    , ddwsPartOfSpeech
+    , ddwsDefinitions
+    , ddwsSyllabification
+
+    -- ** DictlayerdataDictWordsDerivativesSource
+    , DictlayerdataDictWordsDerivativesSource
+    , dictlayerdataDictWordsDerivativesSource
+    , ddwdsUrl
+    , ddwdsAttribution
+
+    -- ** MetadataItems
+    , MetadataItems
+    , metadataItems
+    , miSize
+    , miVersion
+    , miLanguage
+    , miDownloadUrl
+    , miEncryptedKey
+
+    -- ** DictlayerdataDict
+    , DictlayerdataDict
+    , dictlayerdataDict
+    , ddSource
+    , ddWords
+
+    -- ** UsersettingsNotesExport
+    , UsersettingsNotesExport
+    , usersettingsNotesExport
+    , uneFolderName
+    , uneIsEnabled
+
+    -- ** OffersItemsItems
+    , OffersItemsItems
+    , offersItemsItems
+    , oiiCanonicalVolumeLink
+    , oiiCoverUrl
+    , oiiVolumeId
+    , oiiAuthor
+    , oiiTitle
+    , oiiDescription
 
     -- ** ConcurrentAccessRestriction
     , ConcurrentAccessRestriction
@@ -423,11 +841,84 @@ module Network.Google.Books
     , carMessage
     , carNonce
 
+    -- ** BooksMylibraryBookshelvesVolumesListProjection
+    , BooksMylibraryBookshelvesVolumesListProjection (..)
+
     -- ** DownloadAccesses
     , DownloadAccesses
     , downloadAccesses
     , daKind
     , daDownloadAccessList
+
+    -- ** BooksVolumesListProjection
+    , BooksVolumesListProjection (..)
+
+    -- ** DictlayerdataDictWordsDerivatives
+    , DictlayerdataDictWordsDerivatives
+    , dictlayerdataDictWordsDerivatives
+    , ddwdText
+    , ddwdSource
+
+    -- ** DictlayerdataDictSource
+    , DictlayerdataDictSource
+    , dictlayerdataDictSource
+    , ddsUrl
+    , ddsAttribution
+
+    -- ** GeolayerdataGeoViewportHi
+    , GeolayerdataGeoViewportHi
+    , geolayerdataGeoViewportHi
+    , ggvhLatitude
+    , ggvhLongitude
+
+    -- ** BooksVolumesListOrderBy
+    , BooksVolumesListOrderBy (..)
+
+    -- ** VolumeVolumeInfo
+    , VolumeVolumeInfo
+    , volumeVolumeInfo
+    , vviImageLinks
+    , vviAverageRating
+    , vviRatingsCount
+    , vviCanonicalVolumeLink
+    , vviReadingModes
+    , vviIndustryIdentifiers
+    , vviPrintedPageCount
+    , vviMainCategory
+    , vviContentVersion
+    , vviSamplePageCount
+    , vviCategories
+    , vviAuthors
+    , vviAllowAnonLogging
+    , vviSubtitle
+    , vviPublishedDate
+    , vviMaturityRating
+    , vviPreviewLink
+    , vviLanguage
+    , vviTitle
+    , vviPageCount
+    , vviDimensions
+    , vviInfoLink
+    , vviPublisher
+    , vviDescription
+    , vviPrintType
+
+    -- ** VolumeSaleInfoOffers
+    , VolumeSaleInfoOffers
+    , volumeSaleInfoOffers
+    , vsioFinskyOfferType
+    , vsioRentalDuration
+    , vsioListPrice
+    , vsioRetailPrice
+
+    -- ** DictlayerdataDictWordsSensesSource
+    , DictlayerdataDictWordsSensesSource
+    , dictlayerdataDictWordsSensesSource
+    , ddwssUrl
+    , ddwssAttribution
+
+    -- ** BooksVolumesMybooksListProcessingState
+    , BooksVolumesMybooksListProcessingState (..)
 
     -- ** Layersummaries
     , Layersummaries
@@ -436,6 +927,15 @@ module Network.Google.Books
     , layKind
     , layItems
 
+    -- ** BooksMyconfigRequestAccessLicenseTypes
+    , BooksMyconfigRequestAccessLicenseTypes (..)
+
+    -- ** VolumeSaleInfoOffersListPrice
+    , VolumeSaleInfoOffersListPrice
+    , volumeSaleInfoOffersListPrice
+    , vsiolpCurrencyCode
+    , vsiolpAmountInMicros
+
     -- ** BooksAnnotationsRange
     , BooksAnnotationsRange
     , booksAnnotationsRange
@@ -443,6 +943,9 @@ module Network.Google.Books
     , barEndOffset
     , barEndPosition
     , barStartPosition
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Books.Types
@@ -497,13 +1000,50 @@ TODO
 -}
 
 type BooksAPI =
-     Onboarding :<|> Mylibrary :<|> Promooffer :<|>
-       Cloudloading
-       :<|> Layers
-       :<|> Dictionary
-       :<|> Volumes
-       :<|> Bookshelves
-       :<|> Myconfig
+     OnboardingListCategoriesResource :<|>
+       OnboardingListCategoryVolumesResource
+       :<|> MylibraryAnnotationsSummaryResource
+       :<|> MylibraryAnnotationsInsertResource
+       :<|> MylibraryAnnotationsListResource
+       :<|> MylibraryAnnotationsDeleteResource
+       :<|> MylibraryAnnotationsUpdateResource
+       :<|> MylibraryReadingpositionsGetResource
+       :<|> MylibraryReadingpositionsSetPositionResource
+       :<|> MylibraryBookshelvesVolumesListResource
+       :<|> MylibraryBookshelvesClearVolumesResource
+       :<|> MylibraryBookshelvesListResource
+       :<|> MylibraryBookshelvesGetResource
+       :<|> MylibraryBookshelvesRemoveVolumeResource
+       :<|> MylibraryBookshelvesAddVolumeResource
+       :<|> MylibraryBookshelvesMoveVolumeResource
+       :<|> PromoofferAcceptResource
+       :<|> PromoofferGetResource
+       :<|> PromoofferDismissResource
+       :<|> CloudloadingAddBookResource
+       :<|> CloudloadingUpdateBookResource
+       :<|> CloudloadingDeleteBookResource
+       :<|> LayersVolumeAnnotationsListResource
+       :<|> LayersVolumeAnnotationsGetResource
+       :<|> LayersAnnotationDataListResource
+       :<|> LayersAnnotationDataGetResource
+       :<|> LayersListResource
+       :<|> LayersGetResource
+       :<|> DictionaryListOfflineMetadataResource
+       :<|> VolumesUseruploadedListResource
+       :<|> VolumesRecommendedListResource
+       :<|> VolumesRecommendedRateResource
+       :<|> VolumesAssociatedListResource
+       :<|> VolumesMybooksListResource
+       :<|> VolumesListResource
+       :<|> VolumesGetResource
+       :<|> BookshelvesVolumesListResource
+       :<|> BookshelvesListResource
+       :<|> BookshelvesGetResource
+       :<|> MyconfigSyncVolumeLicensesResource
+       :<|> MyconfigGetUserSettingsResource
+       :<|> MyconfigRequestAccessResource
+       :<|> MyconfigUpdateUserSettingsResource
+       :<|> MyconfigReleaseDownloadAccessResource
 
 booksAPI :: Proxy BooksAPI
 booksAPI = Proxy

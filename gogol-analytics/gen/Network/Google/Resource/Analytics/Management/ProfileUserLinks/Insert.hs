@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new user to the given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileUserLinksInsert@.
-module Analytics.Management.ProfileUserLinks.Insert
+module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Insert
     (
     -- * REST Resource
-      ManagementProfileUserLinksInsertAPI
+      ManagementProfileUserLinksInsertResource
 
     -- * Creating a Request
-    , managementProfileUserLinksInsert
-    , ManagementProfileUserLinksInsert
+    , managementProfileUserLinksInsert'
+    , ManagementProfileUserLinksInsert'
 
     -- * Request Lenses
     , mpuliQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileUserLinksInsert@ which the
--- 'ManagementProfileUserLinksInsert' request conforms to.
-type ManagementProfileUserLinksInsertAPI =
+-- 'ManagementProfileUserLinksInsert'' request conforms to.
+type ManagementProfileUserLinksInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,20 @@ type ManagementProfileUserLinksInsertAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "entityUserLinks" :> Post '[JSON] EntityUserLink
+                   "entityUserLinks" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given view (profile).
 --
--- /See:/ 'managementProfileUserLinksInsert' smart constructor.
-data ManagementProfileUserLinksInsert = ManagementProfileUserLinksInsert
+-- /See:/ 'managementProfileUserLinksInsert'' smart constructor.
+data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
     { _mpuliQuotaUser     :: !(Maybe Text)
     , _mpuliPrettyPrint   :: !Bool
     , _mpuliWebPropertyId :: !Text
@@ -69,7 +78,7 @@ data ManagementProfileUserLinksInsert = ManagementProfileUserLinksInsert
     , _mpuliKey           :: !(Maybe Text)
     , _mpuliOauthToken    :: !(Maybe Text)
     , _mpuliFields        :: !(Maybe Text)
-    , _mpuliAlt           :: !Text
+    , _mpuliAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksInsert'' with the minimum fields required to make a request.
@@ -95,13 +104,13 @@ data ManagementProfileUserLinksInsert = ManagementProfileUserLinksInsert
 -- * 'mpuliFields'
 --
 -- * 'mpuliAlt'
-managementProfileUserLinksInsert
+managementProfileUserLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfileUserLinksInsert
-managementProfileUserLinksInsert pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAccountId_ =
-    ManagementProfileUserLinksInsert
+    -> ManagementProfileUserLinksInsert'
+managementProfileUserLinksInsert' pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAccountId_ =
+    ManagementProfileUserLinksInsert'
     { _mpuliQuotaUser = Nothing
     , _mpuliPrettyPrint = False
     , _mpuliWebPropertyId = pMpuliWebPropertyId_
@@ -111,7 +120,7 @@ managementProfileUserLinksInsert pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAcc
     , _mpuliKey = Nothing
     , _mpuliOauthToken = Nothing
     , _mpuliFields = Nothing
-    , _mpuliAlt = "json"
+    , _mpuliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +179,7 @@ mpuliFields
   = lens _mpuliFields (\ s a -> s{_mpuliFields = a})
 
 -- | Data format for the response.
-mpuliAlt :: Lens' ManagementProfileUserLinksInsert' Text
+mpuliAlt :: Lens' ManagementProfileUserLinksInsert' Alt
 mpuliAlt = lens _mpuliAlt (\ s a -> s{_mpuliAlt = a})
 
 instance GoogleRequest
@@ -179,8 +188,8 @@ instance GoogleRequest
              EntityUserLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileUserLinksInsert{..}
-          = go _mpuliQuotaUser _mpuliPrettyPrint
+          ManagementProfileUserLinksInsert'{..}
+          = go _mpuliQuotaUser (Just _mpuliPrettyPrint)
               _mpuliWebPropertyId
               _mpuliUserIp
               _mpuliProfileId
@@ -188,9 +197,10 @@ instance GoogleRequest
               _mpuliKey
               _mpuliOauthToken
               _mpuliFields
-              _mpuliAlt
+              (Just _mpuliAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileUserLinksInsertAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileUserLinksInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified HttpHealthCheck resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksDelete@.
-module Compute.HTTPHealthChecks.Delete
+module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
     (
     -- * REST Resource
-      HttpHealthChecksDeleteAPI
+      HttpHealthChecksDeleteResource
 
     -- * Creating a Request
-    , hTTPHealthChecksDelete
-    , HTTPHealthChecksDelete
+    , hTTPHealthChecksDelete'
+    , HTTPHealthChecksDelete'
 
     -- * Request Lenses
     , httphcdQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksDelete@ which the
--- 'HTTPHealthChecksDelete' request conforms to.
-type HttpHealthChecksDeleteAPI =
+-- 'HTTPHealthChecksDelete'' request conforms to.
+type HttpHealthChecksDeleteResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
            Capture "httpHealthCheck" Text :>
-             Delete '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified HttpHealthCheck resource.
 --
--- /See:/ 'hTTPHealthChecksDelete' smart constructor.
-data HTTPHealthChecksDelete = HTTPHealthChecksDelete
+-- /See:/ 'hTTPHealthChecksDelete'' smart constructor.
+data HTTPHealthChecksDelete' = HTTPHealthChecksDelete'
     { _httphcdQuotaUser       :: !(Maybe Text)
     , _httphcdPrettyPrint     :: !Bool
     , _httphcdProject         :: !Text
@@ -64,7 +71,7 @@ data HTTPHealthChecksDelete = HTTPHealthChecksDelete
     , _httphcdHttpHealthCheck :: !Text
     , _httphcdOauthToken      :: !(Maybe Text)
     , _httphcdFields          :: !(Maybe Text)
-    , _httphcdAlt             :: !Text
+    , _httphcdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksDelete'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data HTTPHealthChecksDelete = HTTPHealthChecksDelete
 -- * 'httphcdFields'
 --
 -- * 'httphcdAlt'
-hTTPHealthChecksDelete
+hTTPHealthChecksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'httpHealthCheck'
-    -> HTTPHealthChecksDelete
-hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHttpHealthCheck_ =
-    HTTPHealthChecksDelete
+    -> HTTPHealthChecksDelete'
+hTTPHealthChecksDelete' pHttphcdProject_ pHttphcdHttpHealthCheck_ =
+    HTTPHealthChecksDelete'
     { _httphcdQuotaUser = Nothing
     , _httphcdPrettyPrint = True
     , _httphcdProject = pHttphcdProject_
@@ -102,7 +109,7 @@ hTTPHealthChecksDelete pHttphcdProject_ pHttphcdHttpHealthCheck_ =
     , _httphcdHttpHealthCheck = pHttphcdHttpHealthCheck_
     , _httphcdOauthToken = Nothing
     , _httphcdFields = Nothing
-    , _httphcdAlt = "json"
+    , _httphcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,24 +165,24 @@ httphcdFields
       (\ s a -> s{_httphcdFields = a})
 
 -- | Data format for the response.
-httphcdAlt :: Lens' HTTPHealthChecksDelete' Text
+httphcdAlt :: Lens' HTTPHealthChecksDelete' Alt
 httphcdAlt
   = lens _httphcdAlt (\ s a -> s{_httphcdAlt = a})
 
 instance GoogleRequest HTTPHealthChecksDelete' where
         type Rs HTTPHealthChecksDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksDelete{..}
-          = go _httphcdQuotaUser _httphcdPrettyPrint
+        requestWithRoute r u HTTPHealthChecksDelete'{..}
+          = go _httphcdQuotaUser (Just _httphcdPrettyPrint)
               _httphcdProject
               _httphcdUserIp
               _httphcdKey
               _httphcdHttpHealthCheck
               _httphcdOauthToken
               _httphcdFields
-              _httphcdAlt
+              (Just _httphcdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksDeleteAPI)
+                      (Proxy :: Proxy HttpHealthChecksDeleteResource)
                       r
                       u

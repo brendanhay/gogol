@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new floodlight activity group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsInsert@.
-module DFAReporting.FloodlightActivityGroups.Insert
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
     (
     -- * REST Resource
-      FloodlightActivityGroupsInsertAPI
+      FloodlightActivityGroupsInsertResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsInsert
-    , FloodlightActivityGroupsInsert
+    , floodlightActivityGroupsInsert'
+    , FloodlightActivityGroupsInsert'
 
     -- * Request Lenses
     , fagiQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsInsert@ which the
--- 'FloodlightActivityGroupsInsert' request conforms to.
-type FloodlightActivityGroupsInsertAPI =
+-- 'FloodlightActivityGroupsInsert'' request conforms to.
+type FloodlightActivityGroupsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           Post '[JSON] FloodlightActivityGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] FloodlightActivityGroup
 
 -- | Inserts a new floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsInsert' smart constructor.
-data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
+-- /See:/ 'floodlightActivityGroupsInsert'' smart constructor.
+data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
     { _fagiQuotaUser   :: !(Maybe Text)
     , _fagiPrettyPrint :: !Bool
     , _fagiUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
     , _fagiKey         :: !(Maybe Text)
     , _fagiOauthToken  :: !(Maybe Text)
     , _fagiFields      :: !(Maybe Text)
-    , _fagiAlt         :: !Text
+    , _fagiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsInsert'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
 -- * 'fagiFields'
 --
 -- * 'fagiAlt'
-floodlightActivityGroupsInsert
+floodlightActivityGroupsInsert'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivityGroupsInsert
-floodlightActivityGroupsInsert pFagiProfileId_ =
-    FloodlightActivityGroupsInsert
+    -> FloodlightActivityGroupsInsert'
+floodlightActivityGroupsInsert' pFagiProfileId_ =
+    FloodlightActivityGroupsInsert'
     { _fagiQuotaUser = Nothing
     , _fagiPrettyPrint = True
     , _fagiUserIp = Nothing
@@ -95,7 +103,7 @@ floodlightActivityGroupsInsert pFagiProfileId_ =
     , _fagiKey = Nothing
     , _fagiOauthToken = Nothing
     , _fagiFields = Nothing
-    , _fagiAlt = "json"
+    , _fagiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ fagiFields
   = lens _fagiFields (\ s a -> s{_fagiFields = a})
 
 -- | Data format for the response.
-fagiAlt :: Lens' FloodlightActivityGroupsInsert' Text
+fagiAlt :: Lens' FloodlightActivityGroupsInsert' Alt
 fagiAlt = lens _fagiAlt (\ s a -> s{_fagiAlt = a})
 
 instance GoogleRequest
@@ -151,15 +159,17 @@ instance GoogleRequest
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightActivityGroupsInsert{..}
-          = go _fagiQuotaUser _fagiPrettyPrint _fagiUserIp
+          FloodlightActivityGroupsInsert'{..}
+          = go _fagiQuotaUser (Just _fagiPrettyPrint)
+              _fagiUserIp
               _fagiProfileId
               _fagiKey
               _fagiOauthToken
               _fagiFields
-              _fagiAlt
+              (Just _fagiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsInsertAPI)
+                      (Proxy ::
+                         Proxy FloodlightActivityGroupsInsertResource)
                       r
                       u

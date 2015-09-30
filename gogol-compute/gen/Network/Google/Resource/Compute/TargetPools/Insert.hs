@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsInsert@.
-module Compute.TargetPools.Insert
+module Network.Google.Resource.Compute.TargetPools.Insert
     (
     -- * REST Resource
-      TargetPoolsInsertAPI
+      TargetPoolsInsertResource
 
     -- * Creating a Request
-    , targetPoolsInsert
-    , TargetPoolsInsert
+    , targetPoolsInsert'
+    , TargetPoolsInsert'
 
     -- * Request Lenses
     , tpiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsInsert@ which the
--- 'TargetPoolsInsert' request conforms to.
-type TargetPoolsInsertAPI =
+-- 'TargetPoolsInsert'' request conforms to.
+type TargetPoolsInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
-           "targetPools" :> Post '[JSON] Operation
+           "targetPools" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.
 --
--- /See:/ 'targetPoolsInsert' smart constructor.
-data TargetPoolsInsert = TargetPoolsInsert
+-- /See:/ 'targetPoolsInsert'' smart constructor.
+data TargetPoolsInsert' = TargetPoolsInsert'
     { _tpiQuotaUser   :: !(Maybe Text)
     , _tpiPrettyPrint :: !Bool
     , _tpiProject     :: !Text
@@ -65,7 +73,7 @@ data TargetPoolsInsert = TargetPoolsInsert
     , _tpiRegion      :: !Text
     , _tpiOauthToken  :: !(Maybe Text)
     , _tpiFields      :: !(Maybe Text)
-    , _tpiAlt         :: !Text
+    , _tpiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data TargetPoolsInsert = TargetPoolsInsert
 -- * 'tpiFields'
 --
 -- * 'tpiAlt'
-targetPoolsInsert
+targetPoolsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> TargetPoolsInsert
-targetPoolsInsert pTpiProject_ pTpiRegion_ =
-    TargetPoolsInsert
+    -> TargetPoolsInsert'
+targetPoolsInsert' pTpiProject_ pTpiRegion_ =
+    TargetPoolsInsert'
     { _tpiQuotaUser = Nothing
     , _tpiPrettyPrint = True
     , _tpiProject = pTpiProject_
@@ -103,7 +111,7 @@ targetPoolsInsert pTpiProject_ pTpiRegion_ =
     , _tpiRegion = pTpiRegion_
     , _tpiOauthToken = Nothing
     , _tpiFields = Nothing
-    , _tpiAlt = "json"
+    , _tpiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ tpiFields
   = lens _tpiFields (\ s a -> s{_tpiFields = a})
 
 -- | Data format for the response.
-tpiAlt :: Lens' TargetPoolsInsert' Text
+tpiAlt :: Lens' TargetPoolsInsert' Alt
 tpiAlt = lens _tpiAlt (\ s a -> s{_tpiAlt = a})
 
 instance GoogleRequest TargetPoolsInsert' where
         type Rs TargetPoolsInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsInsert{..}
-          = go _tpiQuotaUser _tpiPrettyPrint _tpiProject
+        requestWithRoute r u TargetPoolsInsert'{..}
+          = go _tpiQuotaUser (Just _tpiPrettyPrint) _tpiProject
               _tpiUserIp
               _tpiKey
               _tpiRegion
               _tpiOauthToken
               _tpiFields
-              _tpiAlt
+              (Just _tpiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsInsertAPI)
+                      (Proxy :: Proxy TargetPoolsInsertResource)
                       r
                       u

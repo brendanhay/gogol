@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- GlobalAllianceApi.searchReferenceSets.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesetsSearch@.
-module Genomics.Referencesets.Search
+module Network.Google.Resource.Genomics.Referencesets.Search
     (
     -- * REST Resource
-      ReferencesetsSearchAPI
+      ReferencesetsSearchResource
 
     -- * Creating a Request
-    , referencesetsSearch
-    , ReferencesetsSearch
+    , referencesetsSearch'
+    , ReferencesetsSearch'
 
     -- * Request Lenses
     , rssQuotaUser
@@ -43,23 +44,31 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesetsSearch@ which the
--- 'ReferencesetsSearch' request conforms to.
-type ReferencesetsSearchAPI =
+-- 'ReferencesetsSearch'' request conforms to.
+type ReferencesetsSearchResource =
      "referencesets" :>
-       "search" :> Post '[JSON] SearchReferenceSetsResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchReferenceSetsResponse
 
 -- | Searches for reference sets which match the given criteria. Implements
 -- GlobalAllianceApi.searchReferenceSets.
 --
--- /See:/ 'referencesetsSearch' smart constructor.
-data ReferencesetsSearch = ReferencesetsSearch
+-- /See:/ 'referencesetsSearch'' smart constructor.
+data ReferencesetsSearch' = ReferencesetsSearch'
     { _rssQuotaUser   :: !(Maybe Text)
     , _rssPrettyPrint :: !Bool
     , _rssUserIp      :: !(Maybe Text)
     , _rssKey         :: !(Maybe Text)
     , _rssOauthToken  :: !(Maybe Text)
     , _rssFields      :: !(Maybe Text)
-    , _rssAlt         :: !Text
+    , _rssAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
@@ -79,17 +88,17 @@ data ReferencesetsSearch = ReferencesetsSearch
 -- * 'rssFields'
 --
 -- * 'rssAlt'
-referencesetsSearch
-    :: ReferencesetsSearch
-referencesetsSearch =
-    ReferencesetsSearch
+referencesetsSearch'
+    :: ReferencesetsSearch'
+referencesetsSearch' =
+    ReferencesetsSearch'
     { _rssQuotaUser = Nothing
     , _rssPrettyPrint = True
     , _rssUserIp = Nothing
     , _rssKey = Nothing
     , _rssOauthToken = Nothing
     , _rssFields = Nothing
-    , _rssAlt = "json"
+    , _rssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,20 +138,21 @@ rssFields
   = lens _rssFields (\ s a -> s{_rssFields = a})
 
 -- | Data format for the response.
-rssAlt :: Lens' ReferencesetsSearch' Text
+rssAlt :: Lens' ReferencesetsSearch' Alt
 rssAlt = lens _rssAlt (\ s a -> s{_rssAlt = a})
 
 instance GoogleRequest ReferencesetsSearch' where
         type Rs ReferencesetsSearch' =
              SearchReferenceSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesetsSearch{..}
-          = go _rssQuotaUser _rssPrettyPrint _rssUserIp _rssKey
+        requestWithRoute r u ReferencesetsSearch'{..}
+          = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIp
+              _rssKey
               _rssOauthToken
               _rssFields
-              _rssAlt
+              (Just _rssAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReferencesetsSearchAPI)
+                      (Proxy :: Proxy ReferencesetsSearchResource)
                       r
                       u

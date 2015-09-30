@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing advertiser group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsUpdate@.
-module DFAReporting.AdvertiserGroups.Update
+module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
     (
     -- * REST Resource
-      AdvertiserGroupsUpdateAPI
+      AdvertiserGroupsUpdateResource
 
     -- * Creating a Request
-    , advertiserGroupsUpdate
-    , AdvertiserGroupsUpdate
+    , advertiserGroupsUpdate'
+    , AdvertiserGroupsUpdate'
 
     -- * Request Lenses
     , aguQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertiserGroupsUpdate@ which the
--- 'AdvertiserGroupsUpdate' request conforms to.
-type AdvertiserGroupsUpdateAPI =
+-- 'AdvertiserGroupsUpdate'' request conforms to.
+type AdvertiserGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "advertiserGroups" :> Put '[JSON] AdvertiserGroup
+         "advertiserGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group.
 --
--- /See:/ 'advertiserGroupsUpdate' smart constructor.
-data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
+-- /See:/ 'advertiserGroupsUpdate'' smart constructor.
+data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
     { _aguQuotaUser   :: !(Maybe Text)
     , _aguPrettyPrint :: !Bool
     , _aguUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
     , _aguKey         :: !(Maybe Text)
     , _aguOauthToken  :: !(Maybe Text)
     , _aguFields      :: !(Maybe Text)
-    , _aguAlt         :: !Text
+    , _aguAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
 -- * 'aguFields'
 --
 -- * 'aguAlt'
-advertiserGroupsUpdate
+advertiserGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> AdvertiserGroupsUpdate
-advertiserGroupsUpdate pAguProfileId_ =
-    AdvertiserGroupsUpdate
+    -> AdvertiserGroupsUpdate'
+advertiserGroupsUpdate' pAguProfileId_ =
+    AdvertiserGroupsUpdate'
     { _aguQuotaUser = Nothing
     , _aguPrettyPrint = True
     , _aguUserIp = Nothing
@@ -94,7 +102,7 @@ advertiserGroupsUpdate pAguProfileId_ =
     , _aguKey = Nothing
     , _aguOauthToken = Nothing
     , _aguFields = Nothing
-    , _aguAlt = "json"
+    , _aguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ aguFields
   = lens _aguFields (\ s a -> s{_aguFields = a})
 
 -- | Data format for the response.
-aguAlt :: Lens' AdvertiserGroupsUpdate' Text
+aguAlt :: Lens' AdvertiserGroupsUpdate' Alt
 aguAlt = lens _aguAlt (\ s a -> s{_aguAlt = a})
 
 instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsUpdate{..}
-          = go _aguQuotaUser _aguPrettyPrint _aguUserIp
+        requestWithRoute r u AdvertiserGroupsUpdate'{..}
+          = go _aguQuotaUser (Just _aguPrettyPrint) _aguUserIp
               _aguProfileId
               _aguKey
               _aguOauthToken
               _aguFields
-              _aguAlt
+              (Just _aguAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertiserGroupsUpdateAPI)
+                      (Proxy :: Proxy AdvertiserGroupsUpdateResource)
                       r
                       u

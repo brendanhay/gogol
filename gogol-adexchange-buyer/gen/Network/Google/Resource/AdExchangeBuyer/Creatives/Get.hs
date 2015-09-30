@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,151 +21,163 @@
 -- 30-40 minutes after submission.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerCreativesGet@.
-module AdExchangeBuyer.Creatives.Get
+module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
     (
     -- * REST Resource
-      CreativesGetAPI
+      CreativesGetResource
 
     -- * Creating a Request
-    , creativesGet
-    , CreativesGet
+    , creativesGet'
+    , CreativesGet'
 
     -- * Request Lenses
-    , cgQuotaUser
-    , cgPrettyPrint
-    , cgBuyerCreativeId
-    , cgUserIp
-    , cgAccountId
-    , cgKey
-    , cgOauthToken
-    , cgFields
-    , cgAlt
+    , cggQuotaUser
+    , cggPrettyPrint
+    , cggBuyerCreativeId
+    , cggUserIp
+    , cggAccountId
+    , cggKey
+    , cggOauthToken
+    , cggFields
+    , cggAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerCreativesGet@ which the
--- 'CreativesGet' request conforms to.
-type CreativesGetAPI =
+-- 'CreativesGet'' request conforms to.
+type CreativesGetResource =
      "creatives" :>
        Capture "accountId" Int32 :>
          Capture "buyerCreativeId" Text :>
-           Get '[JSON] Creative
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Creative
 
 -- | Gets the status for a single creative. A creative will be available
 -- 30-40 minutes after submission.
 --
--- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
-    { _cgQuotaUser       :: !(Maybe Text)
-    , _cgPrettyPrint     :: !Bool
-    , _cgBuyerCreativeId :: !Text
-    , _cgUserIp          :: !(Maybe Text)
-    , _cgAccountId       :: !Int32
-    , _cgKey             :: !(Maybe Text)
-    , _cgOauthToken      :: !(Maybe Text)
-    , _cgFields          :: !(Maybe Text)
-    , _cgAlt             :: !Text
+-- /See:/ 'creativesGet'' smart constructor.
+data CreativesGet' = CreativesGet'
+    { _cggQuotaUser       :: !(Maybe Text)
+    , _cggPrettyPrint     :: !Bool
+    , _cggBuyerCreativeId :: !Text
+    , _cggUserIp          :: !(Maybe Text)
+    , _cggAccountId       :: !Int32
+    , _cggKey             :: !(Maybe Text)
+    , _cggOauthToken      :: !(Maybe Text)
+    , _cggFields          :: !(Maybe Text)
+    , _cggAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgQuotaUser'
+-- * 'cggQuotaUser'
 --
--- * 'cgPrettyPrint'
+-- * 'cggPrettyPrint'
 --
--- * 'cgBuyerCreativeId'
+-- * 'cggBuyerCreativeId'
 --
--- * 'cgUserIp'
+-- * 'cggUserIp'
 --
--- * 'cgAccountId'
+-- * 'cggAccountId'
 --
--- * 'cgKey'
+-- * 'cggKey'
 --
--- * 'cgOauthToken'
+-- * 'cggOauthToken'
 --
--- * 'cgFields'
+-- * 'cggFields'
 --
--- * 'cgAlt'
-creativesGet
+-- * 'cggAlt'
+creativesGet'
     :: Text -- ^ 'buyerCreativeId'
     -> Int32 -- ^ 'accountId'
-    -> CreativesGet
-creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
-    CreativesGet
-    { _cgQuotaUser = Nothing
-    , _cgPrettyPrint = True
-    , _cgBuyerCreativeId = pCgBuyerCreativeId_
-    , _cgUserIp = Nothing
-    , _cgAccountId = pCgAccountId_
-    , _cgKey = Nothing
-    , _cgOauthToken = Nothing
-    , _cgFields = Nothing
-    , _cgAlt = "json"
+    -> CreativesGet'
+creativesGet' pCggBuyerCreativeId_ pCggAccountId_ =
+    CreativesGet'
+    { _cggQuotaUser = Nothing
+    , _cggPrettyPrint = True
+    , _cggBuyerCreativeId = pCggBuyerCreativeId_
+    , _cggUserIp = Nothing
+    , _cggAccountId = pCggAccountId_
+    , _cggKey = Nothing
+    , _cggOauthToken = Nothing
+    , _cggFields = Nothing
+    , _cggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cgQuotaUser :: Lens' CreativesGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
+cggQuotaUser :: Lens' CreativesGet' (Maybe Text)
+cggQuotaUser
+  = lens _cggQuotaUser (\ s a -> s{_cggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' CreativesGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
+cggPrettyPrint :: Lens' CreativesGet' Bool
+cggPrettyPrint
+  = lens _cggPrettyPrint
+      (\ s a -> s{_cggPrettyPrint = a})
 
 -- | The buyer-specific id for this creative.
-cgBuyerCreativeId :: Lens' CreativesGet' Text
-cgBuyerCreativeId
-  = lens _cgBuyerCreativeId
-      (\ s a -> s{_cgBuyerCreativeId = a})
+cggBuyerCreativeId :: Lens' CreativesGet' Text
+cggBuyerCreativeId
+  = lens _cggBuyerCreativeId
+      (\ s a -> s{_cggBuyerCreativeId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' CreativesGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cggUserIp :: Lens' CreativesGet' (Maybe Text)
+cggUserIp
+  = lens _cggUserIp (\ s a -> s{_cggUserIp = a})
 
 -- | The id for the account that will serve this creative.
-cgAccountId :: Lens' CreativesGet' Int32
-cgAccountId
-  = lens _cgAccountId (\ s a -> s{_cgAccountId = a})
+cggAccountId :: Lens' CreativesGet' Int32
+cggAccountId
+  = lens _cggAccountId (\ s a -> s{_cggAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CreativesGet' (Maybe Text)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
+cggKey :: Lens' CreativesGet' (Maybe Text)
+cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CreativesGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cggOauthToken :: Lens' CreativesGet' (Maybe Text)
+cggOauthToken
+  = lens _cggOauthToken
+      (\ s a -> s{_cggOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' CreativesGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
+cggFields :: Lens' CreativesGet' (Maybe Text)
+cggFields
+  = lens _cggFields (\ s a -> s{_cggFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CreativesGet' Text
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+cggAlt :: Lens' CreativesGet' Alt
+cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u CreativesGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgBuyerCreativeId
-              _cgUserIp
-              _cgAccountId
-              _cgKey
-              _cgOauthToken
-              _cgFields
-              _cgAlt
+        requestWithRoute r u CreativesGet'{..}
+          = go _cggQuotaUser (Just _cggPrettyPrint)
+              _cggBuyerCreativeId
+              _cggUserIp
+              _cggAccountId
+              _cggKey
+              _cggOauthToken
+              _cggFields
+              (Just _cggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesGetResource)
+                      r
                       u

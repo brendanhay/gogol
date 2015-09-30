@@ -17,6 +17,13 @@ module Network.Google.Analytics.Types
     -- * Service URL
       analyticsURL
 
+    -- * GaDataColumnHeaders
+    , GaDataColumnHeaders
+    , gaDataColumnHeaders
+    , gdchColumnType
+    , gdchName
+    , gdchDataType
+
     -- * UnsampledReports
     , UnsampledReports
     , unsampledReports
@@ -28,6 +35,21 @@ module Network.Google.Analytics.Types
     , urTotalResults
     , urStartIndex
     , urPreviousLink
+
+    -- * GaDataQuery
+    , GaDataQuery
+    , gaDataQuery
+    , gdqMetrics
+    , gdqSamplingLevel
+    , gdqFilters
+    , gdqIds
+    , gdqEndDate
+    , gdqSort
+    , gdqDimensions
+    , gdqStartIndex
+    , gdqMaxResults
+    , gdqSegment
+    , gdqStartDate
 
     -- * UnsampledReport
     , UnsampledReport
@@ -52,6 +74,25 @@ module Network.Google.Analytics.Types
     , uCloudStorageDownloadDetails
     , uStartDate
 
+    -- * GoalEventDetailsEventConditions
+    , GoalEventDetailsEventConditions
+    , goalEventDetailsEventConditions
+    , gedecMatchType
+    , gedecExpression
+    , gedecComparisonValue
+    , gedecType
+    , gedecComparisonType
+
+    -- * ProfileParentLink
+    , ProfileParentLink
+    , profileParentLink
+    , pplHref
+    , pplType
+
+    -- * GaDataTotalsForAllResults
+    , GaDataTotalsForAllResults
+    , gaDataTotalsForAllResults
+
     -- * ProfileRef
     , ProfileRef
     , profileRef
@@ -75,6 +116,12 @@ module Network.Google.Analytics.Types
     , eStartIndex
     , ePreviousLink
 
+    -- * EntityUserLinkPermissions
+    , EntityUserLinkPermissions
+    , entityUserLinkPermissions
+    , eulpLocal
+    , eulpEffective
+
     -- * Accounts
     , Accounts
     , accounts
@@ -96,6 +143,46 @@ module Network.Google.Analytics.Types
     , feMatchType
     , feCaseSensitive
     , feExpressionValue
+
+    -- * RealtimeDataProfileInfo
+    , RealtimeDataProfileInfo
+    , realtimeDataProfileInfo
+    , rdpiWebPropertyId
+    , rdpiProfileId
+    , rdpiProfileName
+    , rdpiAccountId
+    , rdpiInternalWebPropertyId
+    , rdpiTableId
+
+    -- * ExperimentParentLink
+    , ExperimentParentLink
+    , experimentParentLink
+    , eplHref
+    , eplType
+
+    -- * AnalyticsDataMcfGetSamplingLevel
+    , AnalyticsDataMcfGetSamplingLevel (..)
+
+    -- * UnsampledReportDriveDownloadDetails
+    , UnsampledReportDriveDownloadDetails
+    , unsampledReportDriveDownloadDetails
+    , urdddDocumentId
+
+    -- * WebpropertyChildLink
+    , WebpropertyChildLink
+    , webpropertyChildLink
+    , wclHref
+    , wclType
+
+    -- * McfDataProfileInfo
+    , McfDataProfileInfo
+    , mcfDataProfileInfo
+    , mdpiWebPropertyId
+    , mdpiProfileId
+    , mdpiProfileName
+    , mdpiAccountId
+    , mdpiInternalWebPropertyId
+    , mdpiTableId
 
     -- * CustomDataSources
     , CustomDataSources
@@ -152,6 +239,12 @@ module Network.Google.Analytics.Types
     , analyticsDataimportDeleteUploadDataRequest
     , addudrCustomDataImportUids
 
+    -- * GoalVisitNumPagesDetails
+    , GoalVisitNumPagesDetails
+    , goalVisitNumPagesDetails
+    , gvnpdComparisonValue
+    , gvnpdComparisonType
+
     -- * Profiles
     , Profiles
     , profiles
@@ -170,6 +263,11 @@ module Network.Google.Analytics.Types
     , useEmail
     , useKind
     , useId
+
+    -- * ProfilePermissions
+    , ProfilePermissions
+    , profilePermissions
+    , ppEffective
 
     -- * Filters
     , Filters
@@ -193,6 +291,21 @@ module Network.Google.Analytics.Types
     , wpsId
     , wpsWebsiteUrl
     , wpsLevel
+
+    -- * GoalEventDetails
+    , GoalEventDetails
+    , goalEventDetails
+    , gedUseEventValue
+    , gedEventConditions
+
+    -- * FilterSearchAndReplaceDetails
+    , FilterSearchAndReplaceDetails
+    , filterSearchAndReplaceDetails
+    , fsardFieldIndex
+    , fsardField
+    , fsardSearchString
+    , fsardReplaceString
+    , fsardCaseSensitive
 
     -- * AccountSummaries
     , AccountSummaries
@@ -287,6 +400,10 @@ module Network.Google.Analytics.Types
     , gStartIndex
     , gPreviousLink
 
+    -- * RealtimeDataTotalsForAllResults
+    , RealtimeDataTotalsForAllResults
+    , realtimeDataTotalsForAllResults
+
     -- * CustomDataSource
     , CustomDataSource
     , customDataSource
@@ -306,6 +423,9 @@ module Network.Google.Analytics.Types
     , cDescription
     , cProfilesLinked
 
+    -- * AnalyticsDataGaGetOutput
+    , AnalyticsDataGaGetOutput (..)
+
     -- * Webproperties
     , Webproperties
     , webproperties
@@ -318,12 +438,24 @@ module Network.Google.Analytics.Types
     , wStartIndex
     , wPreviousLink
 
+    -- * McfDataRows
+    , McfDataRows
+    , mcfDataRows
+    , mdrPrimitiveValue
+    , mdrConversionPathValue
+
     -- * AdWordsAccount
     , AdWordsAccount
     , adWordsAccount
     , awaAutoTaggingEnabled
     , awaKind
     , awaCustomerId
+
+    -- * GoalVisitTimeOnSiteDetails
+    , GoalVisitTimeOnSiteDetails
+    , goalVisitTimeOnSiteDetails
+    , gvtosdComparisonValue
+    , gvtosdComparisonType
 
     -- * Account
     , Account
@@ -345,6 +477,18 @@ module Network.Google.Analytics.Types
     , frAccountId
     , frName
     , frId
+
+    -- * AccountPermissions
+    , AccountPermissions
+    , accountPermissions
+    , apEffective
+
+    -- * EntityUserLinkEntity
+    , EntityUserLinkEntity
+    , entityUserLinkEntity
+    , euleProfileRef
+    , euleAccountRef
+    , euleWebPropertyRef
 
     -- * Experiment
     , Experiment
@@ -389,6 +533,12 @@ module Network.Google.Analytics.Types
     , eulStartIndex
     , eulPreviousLink
 
+    -- * FilterParentLink
+    , FilterParentLink
+    , filterParentLink
+    , fplHref
+    , fplType
+
     -- * CustomMetrics
     , CustomMetrics
     , customMetrics
@@ -400,6 +550,41 @@ module Network.Google.Analytics.Types
     , cmTotalResults
     , cmStartIndex
     , cmPreviousLink
+
+    -- * FilterAdvancedDetails
+    , FilterAdvancedDetails
+    , filterAdvancedDetails
+    , fadExtractA
+    , fadFieldARequired
+    , fadFieldA
+    , fadFieldBIndex
+    , fadOutputToField
+    , fadOutputConstructor
+    , fadExtractB
+    , fadFieldAIndex
+    , fadCaseSensitive
+    , fadOutputToFieldIndex
+    , fadFieldB
+    , fadFieldBRequired
+    , fadOverrideOutputField
+
+    -- * FilterUppercaseDetails
+    , FilterUppercaseDetails
+    , filterUppercaseDetails
+    , fudFieldIndex
+    , fudField
+
+    -- * CustomDataSourceChildLink
+    , CustomDataSourceChildLink
+    , customDataSourceChildLink
+    , cdsclHref
+    , cdsclType
+
+    -- * CustomDimensionParentLink
+    , CustomDimensionParentLink
+    , customDimensionParentLink
+    , cdplHref
+    , cdplType
 
     -- * Webproperty
     , Webproperty
@@ -440,6 +625,11 @@ module Network.Google.Analytics.Types
     , cusType
     , cusIndex
 
+    -- * WebpropertyPermissions
+    , WebpropertyPermissions
+    , webpropertyPermissions
+    , wpEffective
+
     -- * RealtimeData
     , RealtimeData
     , realtimeData
@@ -461,6 +651,17 @@ module Network.Google.Analytics.Types
     , psId
     , psType
 
+    -- * McfDataRowsConversionPathValue
+    , McfDataRowsConversionPathValue
+    , mcfDataRowsConversionPathValue
+    , mdrcpvInteractionType
+    , mdrcpvNodeValue
+
+    -- * GaDataDataTableRowsC
+    , GaDataDataTableRowsC
+    , gaDataDataTableRowsC
+    , gddtrcV
+
     -- * EntityUserLink
     , EntityUserLink
     , entityUserLink
@@ -471,6 +672,34 @@ module Network.Google.Analytics.Types
     , euluPermissions
     , euluEntity
 
+    -- * McfDataColumnHeaders
+    , McfDataColumnHeaders
+    , mcfDataColumnHeaders
+    , mdchColumnType
+    , mdchName
+    , mdchDataType
+
+    -- * McfDataQuery
+    , McfDataQuery
+    , mcfDataQuery
+    , mdqMetrics
+    , mdqSamplingLevel
+    , mdqFilters
+    , mdqIds
+    , mdqEndDate
+    , mdqSort
+    , mdqDimensions
+    , mdqStartIndex
+    , mdqMaxResults
+    , mdqSegment
+    , mdqStartDate
+
+    -- * CustomDataSourceParentLink
+    , CustomDataSourceParentLink
+    , customDataSourceParentLink
+    , cdsplHref
+    , cdsplType
+
     -- * AccountTicket
     , AccountTicket
     , accountTicket
@@ -480,6 +709,23 @@ module Network.Google.Analytics.Types
     , atAccount
     , atWebproperty
     , atId
+
+    -- * RealtimeDataQuery
+    , RealtimeDataQuery
+    , realtimeDataQuery
+    , rdqMetrics
+    , rdqFilters
+    , rdqIds
+    , rdqSort
+    , rdqDimensions
+    , rdqMaxResults
+
+    -- * RealtimeDataColumnHeaders
+    , RealtimeDataColumnHeaders
+    , realtimeDataColumnHeaders
+    , rdchColumnType
+    , rdchName
+    , rdchDataType
 
     -- * AccountSummary
     , AccountSummary
@@ -520,6 +766,17 @@ module Network.Google.Analytics.Types
     , colTotalResults
     , colAttributeNames
 
+    -- * FilterLowercaseDetails
+    , FilterLowercaseDetails
+    , filterLowercaseDetails
+    , fldFieldIndex
+    , fldField
+
+    -- * EntityAdWordsLinkEntity
+    , EntityAdWordsLinkEntity
+    , entityAdWordsLinkEntity
+    , eawleWebPropertyRef
+
     -- * CustomDimensions
     , CustomDimensions
     , customDimensions
@@ -543,6 +800,15 @@ module Network.Google.Analytics.Types
     , uplStartIndex
     , uplPreviousLink
 
+    -- * GoalURLDestinationDetails
+    , GoalURLDestinationDetails
+    , goalURLDestinationDetails
+    , guddUrl
+    , guddMatchType
+    , guddSteps
+    , guddCaseSensitive
+    , guddFirstStepRequired
+
     -- * Filter
     , Filter
     , filter'
@@ -561,6 +827,12 @@ module Network.Google.Analytics.Types
     , filUpdated
     , filType
     , filSearchAndReplaceDetails
+
+    -- * GaDataDataTable
+    , GaDataDataTable
+    , gaDataDataTable
+    , gddtCols
+    , gddtRows
 
     -- * Segments
     , Segments
@@ -599,6 +871,37 @@ module Network.Google.Analytics.Types
     , segType
     , segSegmentId
 
+    -- * AccountChildLink
+    , AccountChildLink
+    , accountChildLink
+    , aclHref
+    , aclType
+
+    -- * ExperimentVariations
+    , ExperimentVariations
+    , experimentVariations
+    , evStatus
+    , evWeight
+    , evUrl
+    , evWon
+    , evName
+
+    -- * GaDataProfileInfo
+    , GaDataProfileInfo
+    , gaDataProfileInfo
+    , gdpiWebPropertyId
+    , gdpiProfileId
+    , gdpiProfileName
+    , gdpiAccountId
+    , gdpiInternalWebPropertyId
+    , gdpiTableId
+
+    -- * CustomMetricParentLink
+    , CustomMetricParentLink
+    , customMetricParentLink
+    , cmplHref
+    , cmplType
+
     -- * CustomDimension
     , CustomDimension
     , customDimension
@@ -614,6 +917,15 @@ module Network.Google.Analytics.Types
     , cddId
     , cddUpdated
     , cddIndex
+
+    -- * AnalyticsDataGaGetSamplingLevel
+    , AnalyticsDataGaGetSamplingLevel (..)
+
+    -- * WebpropertyParentLink
+    , WebpropertyParentLink
+    , webpropertyParentLink
+    , wplHref
+    , wplType
 
     -- * Upload
     , Upload
@@ -635,12 +947,60 @@ module Network.Google.Analytics.Types
     , pflfId
     , pflfRank
 
+    -- * GaDataDataTableCols
+    , GaDataDataTableCols
+    , gaDataDataTableCols
+    , gddtcId
+    , gddtcType
+    , gddtcLabel
+
     -- * Column
     , Column
     , column
     , ccKind
     , ccAttributes
     , ccId
+
+    -- * McfDataTotalsForAllResults
+    , McfDataTotalsForAllResults
+    , mcfDataTotalsForAllResults
+
+    -- * UnsampledReportCloudStorageDownloadDetails
+    , UnsampledReportCloudStorageDownloadDetails
+    , unsampledReportCloudStorageDownloadDetails
+    , urcsddObjectId
+    , urcsddBucketId
+
+    -- * GoalURLDestinationDetailsSteps
+    , GoalURLDestinationDetailsSteps
+    , goalURLDestinationDetailsSteps
+    , guddsUrl
+    , guddsName
+    , guddsNumber
+
+    -- * ColumnAttributes
+    , ColumnAttributes
+    , columnAttributes
+
+    -- * Alt
+    , Alt (..)
+
+    -- * ProfileChildLink
+    , ProfileChildLink
+    , profileChildLink
+    , pclHref
+    , pclType
+
+    -- * GaDataDataTableRows
+    , GaDataDataTableRows
+    , gaDataDataTableRows
+    , gddtrC
+
+    -- * GoalParentLink
+    , GoalParentLink
+    , goalParentLink
+    , gplHref
+    , gplType
     ) where
 
 import           Network.Google.Analytics.Types.Product
@@ -648,7 +1008,7 @@ import           Network.Google.Analytics.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v3' of the Google Analytics API.
-analyticsURL :: BaseURL
+analyticsURL :: BaseUrl
 analyticsURL
   = BaseUrl Https
       "https://www.googleapis.com/analytics/v3/"

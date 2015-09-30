@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsReveal@.
-module Games.Achievements.Reveal
+module Network.Google.Resource.Games.Achievements.Reveal
     (
     -- * REST Resource
-      AchievementsRevealAPI
+      AchievementsRevealResource
 
     -- * Creating a Request
-    , achievementsReveal
-    , AchievementsReveal
+    , achievementsReveal'
+    , AchievementsReveal'
 
     -- * Request Lenses
     , arQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsReveal@ which the
--- 'AchievementsReveal' request conforms to.
-type AchievementsRevealAPI =
+-- 'AchievementsReveal'' request conforms to.
+type AchievementsRevealResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         "reveal" :> Post '[JSON] AchievementRevealResponse
+         "reveal" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] AchievementRevealResponse
 
 -- | Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 --
--- /See:/ 'achievementsReveal' smart constructor.
-data AchievementsReveal = AchievementsReveal
+-- /See:/ 'achievementsReveal'' smart constructor.
+data AchievementsReveal' = AchievementsReveal'
     { _arQuotaUser     :: !(Maybe Text)
     , _arPrettyPrint   :: !Bool
     , _arAchievementId :: !Text
@@ -62,7 +71,7 @@ data AchievementsReveal = AchievementsReveal
     , _arKey           :: !(Maybe Text)
     , _arOauthToken    :: !(Maybe Text)
     , _arFields        :: !(Maybe Text)
-    , _arAlt           :: !Text
+    , _arAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsReveal'' with the minimum fields required to make a request.
@@ -84,11 +93,11 @@ data AchievementsReveal = AchievementsReveal
 -- * 'arFields'
 --
 -- * 'arAlt'
-achievementsReveal
+achievementsReveal'
     :: Text -- ^ 'achievementId'
-    -> AchievementsReveal
-achievementsReveal pArAchievementId_ =
-    AchievementsReveal
+    -> AchievementsReveal'
+achievementsReveal' pArAchievementId_ =
+    AchievementsReveal'
     { _arQuotaUser = Nothing
     , _arPrettyPrint = True
     , _arAchievementId = pArAchievementId_
@@ -96,7 +105,7 @@ achievementsReveal pArAchievementId_ =
     , _arKey = Nothing
     , _arOauthToken = Nothing
     , _arFields = Nothing
-    , _arAlt = "json"
+    , _arAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +148,23 @@ arFields :: Lens' AchievementsReveal' (Maybe Text)
 arFields = lens _arFields (\ s a -> s{_arFields = a})
 
 -- | Data format for the response.
-arAlt :: Lens' AchievementsReveal' Text
+arAlt :: Lens' AchievementsReveal' Alt
 arAlt = lens _arAlt (\ s a -> s{_arAlt = a})
 
 instance GoogleRequest AchievementsReveal' where
         type Rs AchievementsReveal' =
              AchievementRevealResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsReveal{..}
-          = go _arQuotaUser _arPrettyPrint _arAchievementId
+        requestWithRoute r u AchievementsReveal'{..}
+          = go _arQuotaUser (Just _arPrettyPrint)
+              _arAchievementId
               _arUserIp
               _arKey
               _arOauthToken
               _arFields
-              _arAlt
+              (Just _arAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsRevealAPI)
+                      (Proxy :: Proxy AchievementsRevealResource)
                       r
                       u

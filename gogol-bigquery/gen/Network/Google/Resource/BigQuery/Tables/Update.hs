@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- that are provided in the submitted table resource.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTablesUpdate@.
-module BigQuery.Tables.Update
+module Network.Google.Resource.BigQuery.Tables.Update
     (
     -- * REST Resource
-      TablesUpdateAPI
+      TablesUpdateResource
 
     -- * Creating a Request
-    , tablesUpdate
-    , TablesUpdate
+    , tablesUpdate'
+    , TablesUpdate'
 
     -- * Request Lenses
     , tuQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTablesUpdate@ which the
--- 'TablesUpdate' request conforms to.
-type TablesUpdateAPI =
+-- 'TablesUpdate'' request conforms to.
+type TablesUpdateResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
            Capture "datasetId" Text :>
              "tables" :>
-               Capture "tableId" Text :> Put '[JSON] Table
+               Capture "tableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields
 -- that are provided in the submitted table resource.
 --
--- /See:/ 'tablesUpdate' smart constructor.
-data TablesUpdate = TablesUpdate
+-- /See:/ 'tablesUpdate'' smart constructor.
+data TablesUpdate' = TablesUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data TablesUpdate = TablesUpdate
     , _tuOauthToken  :: !(Maybe Text)
     , _tuTableId     :: !Text
     , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Text
+    , _tuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesUpdate'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data TablesUpdate = TablesUpdate
 -- * 'tuFields'
 --
 -- * 'tuAlt'
-tablesUpdate
+tablesUpdate'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TablesUpdate
-tablesUpdate pTuDatasetId_ pTuProjectId_ pTuTableId_ =
-    TablesUpdate
+    -> TablesUpdate'
+tablesUpdate' pTuDatasetId_ pTuProjectId_ pTuTableId_ =
+    TablesUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIp = Nothing
@@ -113,7 +121,7 @@ tablesUpdate pTuDatasetId_ pTuProjectId_ pTuTableId_ =
     , _tuOauthToken = Nothing
     , _tuTableId = pTuTableId_
     , _tuFields = Nothing
-    , _tuAlt = "json"
+    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,20 +173,23 @@ tuFields :: Lens' TablesUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuAlt :: Lens' TablesUpdate' Text
+tuAlt :: Lens' TablesUpdate' Alt
 tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TablesUpdate' where
         type Rs TablesUpdate' = Table
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TablesUpdate{..}
-          = go _tuQuotaUser _tuPrettyPrint _tuUserIp _tuKey
+        requestWithRoute r u TablesUpdate'{..}
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+              _tuKey
               _tuDatasetId
               _tuProjectId
               _tuOauthToken
               _tuTableId
               _tuFields
-              _tuAlt
+              (Just _tuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesUpdateResource)
+                      r
                       u

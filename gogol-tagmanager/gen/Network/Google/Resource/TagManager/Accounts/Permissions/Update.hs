@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a user\'s Account & Container Permissions.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsUpdate@.
-module TagManager.Accounts.Permissions.Update
+module Network.Google.Resource.TagManager.Accounts.Permissions.Update
     (
     -- * REST Resource
-      AccountsPermissionsUpdateAPI
+      AccountsPermissionsUpdateResource
 
     -- * Creating a Request
-    , accountsPermissionsUpdate
-    , AccountsPermissionsUpdate
+    , accountsPermissionsUpdate'
+    , AccountsPermissionsUpdate'
 
     -- * Request Lenses
     , apuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsPermissionsUpdate@ which the
--- 'AccountsPermissionsUpdate' request conforms to.
-type AccountsPermissionsUpdateAPI =
+-- 'AccountsPermissionsUpdate'' request conforms to.
+type AccountsPermissionsUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "permissions" :>
-           Capture "permissionId" Text :> Put '[JSON] UserAccess
+           Capture "permissionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] UserAccess
 
 -- | Updates a user\'s Account & Container Permissions.
 --
--- /See:/ 'accountsPermissionsUpdate' smart constructor.
-data AccountsPermissionsUpdate = AccountsPermissionsUpdate
+-- /See:/ 'accountsPermissionsUpdate'' smart constructor.
+data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
     { _apuQuotaUser    :: !(Maybe Text)
     , _apuPrettyPrint  :: !Bool
     , _apuUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AccountsPermissionsUpdate = AccountsPermissionsUpdate
     , _apuOauthToken   :: !(Maybe Text)
     , _apuPermissionId :: !Text
     , _apuFields       :: !(Maybe Text)
-    , _apuAlt          :: !Text
+    , _apuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AccountsPermissionsUpdate = AccountsPermissionsUpdate
 -- * 'apuFields'
 --
 -- * 'apuAlt'
-accountsPermissionsUpdate
+accountsPermissionsUpdate'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
-    -> AccountsPermissionsUpdate
-accountsPermissionsUpdate pApuAccountId_ pApuPermissionId_ =
-    AccountsPermissionsUpdate
+    -> AccountsPermissionsUpdate'
+accountsPermissionsUpdate' pApuAccountId_ pApuPermissionId_ =
+    AccountsPermissionsUpdate'
     { _apuQuotaUser = Nothing
     , _apuPrettyPrint = True
     , _apuUserIp = Nothing
@@ -101,7 +109,7 @@ accountsPermissionsUpdate pApuAccountId_ pApuPermissionId_ =
     , _apuOauthToken = Nothing
     , _apuPermissionId = pApuPermissionId_
     , _apuFields = Nothing
-    , _apuAlt = "json"
+    , _apuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +160,23 @@ apuFields
   = lens _apuFields (\ s a -> s{_apuFields = a})
 
 -- | Data format for the response.
-apuAlt :: Lens' AccountsPermissionsUpdate' Text
+apuAlt :: Lens' AccountsPermissionsUpdate' Alt
 apuAlt = lens _apuAlt (\ s a -> s{_apuAlt = a})
 
 instance GoogleRequest AccountsPermissionsUpdate'
          where
         type Rs AccountsPermissionsUpdate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsUpdate{..}
-          = go _apuQuotaUser _apuPrettyPrint _apuUserIp
+        requestWithRoute r u AccountsPermissionsUpdate'{..}
+          = go _apuQuotaUser (Just _apuPrettyPrint) _apuUserIp
               _apuAccountId
               _apuKey
               _apuOauthToken
               _apuPermissionId
               _apuFields
-              _apuAlt
+              (Just _apuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPermissionsUpdateAPI)
+                      (Proxy :: Proxy AccountsPermissionsUpdateResource)
                       r
                       u

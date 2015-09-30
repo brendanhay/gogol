@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesPatch@.
-module DFAReporting.FloodlightActivities.Patch
+module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
     (
     -- * REST Resource
-      FloodlightActivitiesPatchAPI
+      FloodlightActivitiesPatchResource
 
     -- * Creating a Request
-    , floodlightActivitiesPatch
-    , FloodlightActivitiesPatch
+    , floodlightActivitiesPatch'
+    , FloodlightActivitiesPatch'
 
     -- * Request Lenses
     , fapQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesPatch@ which the
--- 'FloodlightActivitiesPatch' request conforms to.
-type FloodlightActivitiesPatchAPI =
+-- 'FloodlightActivitiesPatch'' request conforms to.
+type FloodlightActivitiesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] FloodlightActivity
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity. This method supports patch
 -- semantics.
 --
--- /See:/ 'floodlightActivitiesPatch' smart constructor.
-data FloodlightActivitiesPatch = FloodlightActivitiesPatch
+-- /See:/ 'floodlightActivitiesPatch'' smart constructor.
+data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
     { _fapQuotaUser   :: !(Maybe Text)
     , _fapPrettyPrint :: !Bool
     , _fapUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data FloodlightActivitiesPatch = FloodlightActivitiesPatch
     , _fapId          :: !Int64
     , _fapOauthToken  :: !(Maybe Text)
     , _fapFields      :: !(Maybe Text)
-    , _fapAlt         :: !Text
+    , _fapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data FloodlightActivitiesPatch = FloodlightActivitiesPatch
 -- * 'fapFields'
 --
 -- * 'fapAlt'
-floodlightActivitiesPatch
+floodlightActivitiesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightActivitiesPatch
-floodlightActivitiesPatch pFapProfileId_ pFapId_ =
-    FloodlightActivitiesPatch
+    -> FloodlightActivitiesPatch'
+floodlightActivitiesPatch' pFapProfileId_ pFapId_ =
+    FloodlightActivitiesPatch'
     { _fapQuotaUser = Nothing
     , _fapPrettyPrint = True
     , _fapUserIp = Nothing
@@ -104,7 +112,7 @@ floodlightActivitiesPatch pFapProfileId_ pFapId_ =
     , _fapId = pFapId_
     , _fapOauthToken = Nothing
     , _fapFields = Nothing
-    , _fapAlt = "json"
+    , _fapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ fapFields
   = lens _fapFields (\ s a -> s{_fapFields = a})
 
 -- | Data format for the response.
-fapAlt :: Lens' FloodlightActivitiesPatch' Text
+fapAlt :: Lens' FloodlightActivitiesPatch' Alt
 fapAlt = lens _fapAlt (\ s a -> s{_fapAlt = a})
 
 instance GoogleRequest FloodlightActivitiesPatch'
@@ -161,16 +169,16 @@ instance GoogleRequest FloodlightActivitiesPatch'
         type Rs FloodlightActivitiesPatch' =
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesPatch{..}
-          = go _fapQuotaUser _fapPrettyPrint _fapUserIp
+        requestWithRoute r u FloodlightActivitiesPatch'{..}
+          = go _fapQuotaUser (Just _fapPrettyPrint) _fapUserIp
               _fapProfileId
               _fapKey
               (Just _fapId)
               _fapOauthToken
               _fapFields
-              _fapAlt
+              (Just _fapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesPatchAPI)
+                      (Proxy :: Proxy FloodlightActivitiesPatchResource)
                       r
                       u

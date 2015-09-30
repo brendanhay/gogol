@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksPatch@.
-module Taskqueue.Tasks.Patch
+module Network.Google.Resource.Taskqueue.Tasks.Patch
     (
     -- * REST Resource
-      TasksPatchAPI
+      TasksPatchResource
 
     -- * Creating a Request
-    , tasksPatch
-    , TasksPatch
+    , tasksPatch'
+    , TasksPatch'
 
     -- * Request Lenses
     , tpTaskqueue
@@ -47,21 +48,27 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksPatch@ which the
--- 'TasksPatch' request conforms to.
-type TasksPatchAPI =
+-- 'TasksPatch'' request conforms to.
+type TasksPatchResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
            "tasks" :>
              Capture "task" Text :>
-               QueryParam "newLeaseSeconds" Int32 :>
-                 Patch '[JSON] Task
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "newLeaseSeconds" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue. This method supports
 -- patch semantics.
 --
--- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch
+-- /See:/ 'tasksPatch'' smart constructor.
+data TasksPatch' = TasksPatch'
     { _tpTaskqueue       :: !Text
     , _tpQuotaUser       :: !(Maybe Text)
     , _tpPrettyPrint     :: !Bool
@@ -72,7 +79,7 @@ data TasksPatch = TasksPatch
     , _tpOauthToken      :: !(Maybe Text)
     , _tpNewLeaseSeconds :: !Int32
     , _tpFields          :: !(Maybe Text)
-    , _tpAlt             :: !Text
+    , _tpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksPatch'' with the minimum fields required to make a request.
@@ -100,14 +107,14 @@ data TasksPatch = TasksPatch
 -- * 'tpFields'
 --
 -- * 'tpAlt'
-tasksPatch
+tasksPatch'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
     -> Text -- ^ 'task'
     -> Int32 -- ^ 'newLeaseSeconds'
-    -> TasksPatch
-tasksPatch pTpTaskqueue_ pTpProject_ pTpTask_ pTpNewLeaseSeconds_ =
-    TasksPatch
+    -> TasksPatch'
+tasksPatch' pTpTaskqueue_ pTpProject_ pTpTask_ pTpNewLeaseSeconds_ =
+    TasksPatch'
     { _tpTaskqueue = pTpTaskqueue_
     , _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
@@ -118,7 +125,7 @@ tasksPatch pTpTaskqueue_ pTpProject_ pTpTask_ pTpNewLeaseSeconds_ =
     , _tpOauthToken = Nothing
     , _tpNewLeaseSeconds = pTpNewLeaseSeconds_
     , _tpFields = Nothing
-    , _tpAlt = "json"
+    , _tpAlt = JSON
     }
 
 tpTaskqueue :: Lens' TasksPatch' Text
@@ -173,15 +180,15 @@ tpFields :: Lens' TasksPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TasksPatch' Text
+tpAlt :: Lens' TasksPatch' Alt
 tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
 
 instance GoogleRequest TasksPatch' where
         type Rs TasksPatch' = Task
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksPatch{..}
-          = go _tpTaskqueue _tpQuotaUser _tpPrettyPrint
+        requestWithRoute r u TasksPatch'{..}
+          = go _tpTaskqueue _tpQuotaUser (Just _tpPrettyPrint)
               _tpProject
               _tpUserIp
               _tpKey
@@ -189,6 +196,8 @@ instance GoogleRequest TasksPatch' where
               _tpOauthToken
               (Just _tpNewLeaseSeconds)
               _tpFields
-              _tpAlt
+              (Just _tpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksPatchResource)
+                      r
+                      u

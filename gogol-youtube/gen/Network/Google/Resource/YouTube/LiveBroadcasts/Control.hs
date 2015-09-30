@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- stream.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsControl@.
-module YouTube.LiveBroadcasts.Control
+module Network.Google.Resource.YouTube.LiveBroadcasts.Control
     (
     -- * REST Resource
-      LiveBroadcastsControlAPI
+      LiveBroadcastsControlResource
 
     -- * Creating a Request
-    , liveBroadcastsControl
-    , LiveBroadcastsControl
+    , liveBroadcastsControl'
+    , LiveBroadcastsControl'
 
     -- * Request Lenses
     , lbcQuotaUser
@@ -50,24 +51,31 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsControl@ which the
--- 'LiveBroadcastsControl' request conforms to.
-type LiveBroadcastsControlAPI =
+-- 'LiveBroadcastsControl'' request conforms to.
+type LiveBroadcastsControlResource =
      "liveBroadcasts" :>
        "control" :>
-         QueryParam "part" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "displaySlate" Bool :>
-                   QueryParam "walltime" UTCTime :>
-                     QueryParam "offsetTimeMs" Word64 :>
-                       Post '[JSON] LiveBroadcast
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "displaySlate" Bool :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "walltime" UTCTime :>
+                               QueryParam "offsetTimeMs" Word64 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Post '[JSON] LiveBroadcast
 
 -- | Controls the settings for a slate that can be displayed in the broadcast
 -- stream.
 --
--- /See:/ 'liveBroadcastsControl' smart constructor.
-data LiveBroadcastsControl = LiveBroadcastsControl
+-- /See:/ 'liveBroadcastsControl'' smart constructor.
+data LiveBroadcastsControl' = LiveBroadcastsControl'
     { _lbcQuotaUser                     :: !(Maybe Text)
     , _lbcPart                          :: !Text
     , _lbcPrettyPrint                   :: !Bool
@@ -81,7 +89,7 @@ data LiveBroadcastsControl = LiveBroadcastsControl
     , _lbcWalltime                      :: !(Maybe UTCTime)
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     , _lbcFields                        :: !(Maybe Text)
-    , _lbcAlt                           :: !Text
+    , _lbcAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsControl'' with the minimum fields required to make a request.
@@ -115,12 +123,12 @@ data LiveBroadcastsControl = LiveBroadcastsControl
 -- * 'lbcFields'
 --
 -- * 'lbcAlt'
-liveBroadcastsControl
+liveBroadcastsControl'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
-    -> LiveBroadcastsControl
-liveBroadcastsControl pLbcPart_ pLbcId_ =
-    LiveBroadcastsControl
+    -> LiveBroadcastsControl'
+liveBroadcastsControl' pLbcPart_ pLbcId_ =
+    LiveBroadcastsControl'
     { _lbcQuotaUser = Nothing
     , _lbcPart = pLbcPart_
     , _lbcPrettyPrint = True
@@ -134,7 +142,7 @@ liveBroadcastsControl pLbcPart_ pLbcId_ =
     , _lbcWalltime = Nothing
     , _lbcOffsetTimeMs = Nothing
     , _lbcFields = Nothing
-    , _lbcAlt = "json"
+    , _lbcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -251,14 +259,15 @@ lbcFields
   = lens _lbcFields (\ s a -> s{_lbcFields = a})
 
 -- | Data format for the response.
-lbcAlt :: Lens' LiveBroadcastsControl' Text
+lbcAlt :: Lens' LiveBroadcastsControl' Alt
 lbcAlt = lens _lbcAlt (\ s a -> s{_lbcAlt = a})
 
 instance GoogleRequest LiveBroadcastsControl' where
         type Rs LiveBroadcastsControl' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsControl{..}
-          = go _lbcQuotaUser (Just _lbcPart) _lbcPrettyPrint
+        requestWithRoute r u LiveBroadcastsControl'{..}
+          = go _lbcQuotaUser (Just _lbcPart)
+              (Just _lbcPrettyPrint)
               _lbcUserIp
               _lbcOnBehalfOfContentOwner
               _lbcKey
@@ -269,9 +278,9 @@ instance GoogleRequest LiveBroadcastsControl' where
               _lbcWalltime
               _lbcOffsetTimeMs
               _lbcFields
-              _lbcAlt
+              (Just _lbcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsControlAPI)
+                      (Proxy :: Proxy LiveBroadcastsControlResource)
                       r
                       u

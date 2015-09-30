@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a web property to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertiesGet@.
-module Analytics.Management.Webproperties.Get
+module Network.Google.Resource.Analytics.Management.Webproperties.Get
     (
     -- * REST Resource
-      ManagementWebpropertiesGetAPI
+      ManagementWebpropertiesGetResource
 
     -- * Creating a Request
-    , managementWebpropertiesGet
-    , ManagementWebpropertiesGet
+    , managementWebpropertiesGet'
+    , ManagementWebpropertiesGet'
 
     -- * Request Lenses
     , mwgQuotaUser
@@ -44,19 +45,25 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertiesGet@ which the
--- 'ManagementWebpropertiesGet' request conforms to.
-type ManagementWebpropertiesGetAPI =
+-- 'ManagementWebpropertiesGet'' request conforms to.
+type ManagementWebpropertiesGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               Get '[JSON] Webproperty
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Webproperty
 
 -- | Gets a web property to which the user has access.
 --
--- /See:/ 'managementWebpropertiesGet' smart constructor.
-data ManagementWebpropertiesGet = ManagementWebpropertiesGet
+-- /See:/ 'managementWebpropertiesGet'' smart constructor.
+data ManagementWebpropertiesGet' = ManagementWebpropertiesGet'
     { _mwgQuotaUser     :: !(Maybe Text)
     , _mwgPrettyPrint   :: !Bool
     , _mwgWebPropertyId :: !Text
@@ -65,7 +72,7 @@ data ManagementWebpropertiesGet = ManagementWebpropertiesGet
     , _mwgKey           :: !(Maybe Text)
     , _mwgOauthToken    :: !(Maybe Text)
     , _mwgFields        :: !(Maybe Text)
-    , _mwgAlt           :: !Text
+    , _mwgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertiesGet'' with the minimum fields required to make a request.
@@ -89,12 +96,12 @@ data ManagementWebpropertiesGet = ManagementWebpropertiesGet
 -- * 'mwgFields'
 --
 -- * 'mwgAlt'
-managementWebpropertiesGet
+managementWebpropertiesGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebpropertiesGet
-managementWebpropertiesGet pMwgWebPropertyId_ pMwgAccountId_ =
-    ManagementWebpropertiesGet
+    -> ManagementWebpropertiesGet'
+managementWebpropertiesGet' pMwgWebPropertyId_ pMwgAccountId_ =
+    ManagementWebpropertiesGet'
     { _mwgQuotaUser = Nothing
     , _mwgPrettyPrint = False
     , _mwgWebPropertyId = pMwgWebPropertyId_
@@ -103,7 +110,7 @@ managementWebpropertiesGet pMwgWebPropertyId_ pMwgAccountId_ =
     , _mwgKey = Nothing
     , _mwgOauthToken = Nothing
     , _mwgFields = Nothing
-    , _mwgAlt = "json"
+    , _mwgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +161,24 @@ mwgFields
   = lens _mwgFields (\ s a -> s{_mwgFields = a})
 
 -- | Data format for the response.
-mwgAlt :: Lens' ManagementWebpropertiesGet' Text
+mwgAlt :: Lens' ManagementWebpropertiesGet' Alt
 mwgAlt = lens _mwgAlt (\ s a -> s{_mwgAlt = a})
 
 instance GoogleRequest ManagementWebpropertiesGet'
          where
         type Rs ManagementWebpropertiesGet' = Webproperty
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementWebpropertiesGet{..}
-          = go _mwgQuotaUser _mwgPrettyPrint _mwgWebPropertyId
+        requestWithRoute r u ManagementWebpropertiesGet'{..}
+          = go _mwgQuotaUser (Just _mwgPrettyPrint)
+              _mwgWebPropertyId
               _mwgUserIp
               _mwgAccountId
               _mwgKey
               _mwgOauthToken
               _mwgFields
-              _mwgAlt
+              (Just _mwgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementWebpropertiesGetAPI)
+                      (Proxy :: Proxy ManagementWebpropertiesGetResource)
                       r
                       u

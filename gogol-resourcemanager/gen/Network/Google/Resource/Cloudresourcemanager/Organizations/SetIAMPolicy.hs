@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- existing policy.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsSetIAMPolicy@.
-module Cloudresourcemanager.Organizations.SetIAMPolicy
+module Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
     (
     -- * REST Resource
-      OrganizationsSetIAMPolicyAPI
+      OrganizationsSetIAMPolicyResource
 
     -- * Creating a Request
-    , organizationsSetIAMPolicy
-    , OrganizationsSetIAMPolicy
+    , organizationsSetIAMPolicy'
+    , OrganizationsSetIAMPolicy'
 
     -- * Request Lenses
     , osipXgafv
@@ -50,17 +51,30 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsSetIAMPolicy@ which the
--- 'OrganizationsSetIAMPolicy' request conforms to.
-type OrganizationsSetIAMPolicyAPI =
+-- 'OrganizationsSetIAMPolicy'' request conforms to.
+type OrganizationsSetIAMPolicyResource =
      "v1beta1" :>
        "organizations" :>
-         "{resource}:setIamPolicy" :> Post '[JSON] Policy
+         "{resource}:setIamPolicy" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Policy
 
 -- | Sets the access control policy on a Organization resource. Replaces any
 -- existing policy.
 --
--- /See:/ 'organizationsSetIAMPolicy' smart constructor.
-data OrganizationsSetIAMPolicy = OrganizationsSetIAMPolicy
+-- /See:/ 'organizationsSetIAMPolicy'' smart constructor.
+data OrganizationsSetIAMPolicy' = OrganizationsSetIAMPolicy'
     { _osipXgafv          :: !(Maybe Text)
     , _osipQuotaUser      :: !(Maybe Text)
     , _osipPrettyPrint    :: !Bool
@@ -108,11 +122,11 @@ data OrganizationsSetIAMPolicy = OrganizationsSetIAMPolicy
 -- * 'osipCallback'
 --
 -- * 'osipAlt'
-organizationsSetIAMPolicy
+organizationsSetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> OrganizationsSetIAMPolicy
-organizationsSetIAMPolicy pOsipResource_ =
-    OrganizationsSetIAMPolicy
+    -> OrganizationsSetIAMPolicy'
+organizationsSetIAMPolicy' pOsipResource_ =
+    OrganizationsSetIAMPolicy'
     { _osipXgafv = Nothing
     , _osipQuotaUser = Nothing
     , _osipPrettyPrint = True
@@ -213,10 +227,11 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
          where
         type Rs OrganizationsSetIAMPolicy' = Policy
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsSetIAMPolicy{..}
-          = go _osipXgafv _osipQuotaUser _osipPrettyPrint
+        requestWithRoute r u OrganizationsSetIAMPolicy'{..}
+          = go _osipXgafv _osipQuotaUser
+              (Just _osipPrettyPrint)
               _osipUploadProtocol
-              _osipPp
+              (Just _osipPp)
               _osipAccessToken
               _osipUploadType
               _osipBearerToken
@@ -225,9 +240,9 @@ instance GoogleRequest OrganizationsSetIAMPolicy'
               _osipOauthToken
               _osipFields
               _osipCallback
-              _osipAlt
+              (Just _osipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsSetIAMPolicyAPI)
+                      (Proxy :: Proxy OrganizationsSetIAMPolicyResource)
                       r
                       u

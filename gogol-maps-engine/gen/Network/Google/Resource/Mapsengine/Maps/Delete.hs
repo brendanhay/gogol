@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a map.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsDelete@.
-module Mapsengine.Maps.Delete
+module Network.Google.Resource.Mapsengine.Maps.Delete
     (
     -- * REST Resource
-      MapsDeleteAPI
+      MapsDeleteResource
 
     -- * Creating a Request
-    , mapsDelete
-    , MapsDelete
+    , mapsDelete'
+    , MapsDelete'
 
     -- * Request Lenses
     , mdQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsDelete@ which the
--- 'MapsDelete' request conforms to.
-type MapsDeleteAPI =
-     "maps" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'MapsDelete'' request conforms to.
+type MapsDeleteResource =
+     "maps" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a map.
 --
--- /See:/ 'mapsDelete' smart constructor.
-data MapsDelete = MapsDelete
+-- /See:/ 'mapsDelete'' smart constructor.
+data MapsDelete' = MapsDelete'
     { _mdQuotaUser   :: !(Maybe Text)
     , _mdPrettyPrint :: !Bool
     , _mdUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data MapsDelete = MapsDelete
     , _mdId          :: !Text
     , _mdOauthToken  :: !(Maybe Text)
     , _mdFields      :: !(Maybe Text)
-    , _mdAlt         :: !Text
+    , _mdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data MapsDelete = MapsDelete
 -- * 'mdFields'
 --
 -- * 'mdAlt'
-mapsDelete
+mapsDelete'
     :: Text -- ^ 'id'
-    -> MapsDelete
-mapsDelete pMdId_ =
-    MapsDelete
+    -> MapsDelete'
+mapsDelete' pMdId_ =
+    MapsDelete'
     { _mdQuotaUser = Nothing
     , _mdPrettyPrint = True
     , _mdUserIp = Nothing
@@ -92,7 +101,7 @@ mapsDelete pMdId_ =
     , _mdId = pMdId_
     , _mdOauthToken = Nothing
     , _mdFields = Nothing
-    , _mdAlt = "json"
+    , _mdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +144,20 @@ mdFields :: Lens' MapsDelete' (Maybe Text)
 mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
 -- | Data format for the response.
-mdAlt :: Lens' MapsDelete' Text
+mdAlt :: Lens' MapsDelete' Alt
 mdAlt = lens _mdAlt (\ s a -> s{_mdAlt = a})
 
 instance GoogleRequest MapsDelete' where
         type Rs MapsDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsDelete{..}
-          = go _mdQuotaUser _mdPrettyPrint _mdUserIp _mdKey
+        requestWithRoute r u MapsDelete'{..}
+          = go _mdQuotaUser (Just _mdPrettyPrint) _mdUserIp
+              _mdKey
               _mdId
               _mdOauthToken
               _mdFields
-              _mdAlt
+              (Just _mdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsDeleteAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MapsDeleteResource)
+                      r
+                      u

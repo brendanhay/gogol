@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new subscription.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsInsert@.
-module Mirror.Subscriptions.Insert
+module Network.Google.Resource.Mirror.Subscriptions.Insert
     (
     -- * REST Resource
-      SubscriptionsInsertAPI
+      SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert
-    , SubscriptionsInsert
+    , subscriptionsInsert'
+    , SubscriptionsInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorSubscriptionsInsert@ which the
--- 'SubscriptionsInsert' request conforms to.
-type SubscriptionsInsertAPI =
-     "subscriptions" :> Post '[JSON] Subscription
+-- 'SubscriptionsInsert'' request conforms to.
+type SubscriptionsInsertResource =
+     "subscriptions" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Creates a new subscription.
 --
--- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+-- /See:/ 'subscriptionsInsert'' smart constructor.
+data SubscriptionsInsert' = SubscriptionsInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIp      :: !(Maybe Text)
     , _siKey         :: !(Maybe Text)
     , _siOauthToken  :: !(Maybe Text)
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Text
+    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data SubscriptionsInsert = SubscriptionsInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-subscriptionsInsert
-    :: SubscriptionsInsert
-subscriptionsInsert =
-    SubscriptionsInsert
+subscriptionsInsert'
+    :: SubscriptionsInsert'
+subscriptionsInsert' =
+    SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIp = Nothing
     , _siKey = Nothing
     , _siOauthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +131,20 @@ siFields :: Lens' SubscriptionsInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' SubscriptionsInsert' Text
+siAlt :: Lens' SubscriptionsInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsInsert{..}
-          = go _siQuotaUser _siPrettyPrint _siUserIp _siKey
+        requestWithRoute r u SubscriptionsInsert'{..}
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+              _siKey
               _siOauthToken
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsInsertAPI)
+                      (Proxy :: Proxy SubscriptionsInsertResource)
                       r
                       u

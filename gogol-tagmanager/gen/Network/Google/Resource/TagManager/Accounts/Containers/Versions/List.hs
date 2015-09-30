@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,154 +20,163 @@
 -- | Lists all Container Versions of a GTM Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsList@.
-module TagManager.Accounts.Containers.Versions.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
     (
     -- * REST Resource
-      AccountsContainersVersionsListAPI
+      AccountsContainersVersionsListResource
 
     -- * Creating a Request
-    , accountsContainersVersionsList
-    , AccountsContainersVersionsList
+    , accountsContainersVersionsList'
+    , AccountsContainersVersionsList'
 
     -- * Request Lenses
-    , accQuotaUser
-    , accPrettyPrint
-    , accContainerId
-    , accUserIp
-    , accHeaders
-    , accAccountId
-    , accKey
-    , accOauthToken
-    , accFields
-    , accAlt
+    , acvlQuotaUser
+    , acvlPrettyPrint
+    , acvlContainerId
+    , acvlUserIp
+    , acvlHeaders
+    , acvlAccountId
+    , acvlKey
+    , acvlOauthToken
+    , acvlFields
+    , acvlAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsList@ which the
--- 'AccountsContainersVersionsList' request conforms to.
-type AccountsContainersVersionsListAPI =
+-- 'AccountsContainersVersionsList'' request conforms to.
+type AccountsContainersVersionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
-               QueryParam "headers" Bool :>
-                 Get '[JSON] ListContainerVersionsResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "headers" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] ListContainerVersionsResponse
 
 -- | Lists all Container Versions of a GTM Container.
 --
--- /See:/ 'accountsContainersVersionsList' smart constructor.
-data AccountsContainersVersionsList = AccountsContainersVersionsList
-    { _accQuotaUser   :: !(Maybe Text)
-    , _accPrettyPrint :: !Bool
-    , _accContainerId :: !Text
-    , _accUserIp      :: !(Maybe Text)
-    , _accHeaders     :: !Bool
-    , _accAccountId   :: !Text
-    , _accKey         :: !(Maybe Text)
-    , _accOauthToken  :: !(Maybe Text)
-    , _accFields      :: !(Maybe Text)
-    , _accAlt         :: !Text
+-- /See:/ 'accountsContainersVersionsList'' smart constructor.
+data AccountsContainersVersionsList' = AccountsContainersVersionsList'
+    { _acvlQuotaUser   :: !(Maybe Text)
+    , _acvlPrettyPrint :: !Bool
+    , _acvlContainerId :: !Text
+    , _acvlUserIp      :: !(Maybe Text)
+    , _acvlHeaders     :: !Bool
+    , _acvlAccountId   :: !Text
+    , _acvlKey         :: !(Maybe Text)
+    , _acvlOauthToken  :: !(Maybe Text)
+    , _acvlFields      :: !(Maybe Text)
+    , _acvlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'accQuotaUser'
+-- * 'acvlQuotaUser'
 --
--- * 'accPrettyPrint'
+-- * 'acvlPrettyPrint'
 --
--- * 'accContainerId'
+-- * 'acvlContainerId'
 --
--- * 'accUserIp'
+-- * 'acvlUserIp'
 --
--- * 'accHeaders'
+-- * 'acvlHeaders'
 --
--- * 'accAccountId'
+-- * 'acvlAccountId'
 --
--- * 'accKey'
+-- * 'acvlKey'
 --
--- * 'accOauthToken'
+-- * 'acvlOauthToken'
 --
--- * 'accFields'
+-- * 'acvlFields'
 --
--- * 'accAlt'
-accountsContainersVersionsList
+-- * 'acvlAlt'
+accountsContainersVersionsList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsList
-accountsContainersVersionsList pAccContainerId_ pAccAccountId_ =
-    AccountsContainersVersionsList
-    { _accQuotaUser = Nothing
-    , _accPrettyPrint = True
-    , _accContainerId = pAccContainerId_
-    , _accUserIp = Nothing
-    , _accHeaders = False
-    , _accAccountId = pAccAccountId_
-    , _accKey = Nothing
-    , _accOauthToken = Nothing
-    , _accFields = Nothing
-    , _accAlt = "json"
+    -> AccountsContainersVersionsList'
+accountsContainersVersionsList' pAcvlContainerId_ pAcvlAccountId_ =
+    AccountsContainersVersionsList'
+    { _acvlQuotaUser = Nothing
+    , _acvlPrettyPrint = True
+    , _acvlContainerId = pAcvlContainerId_
+    , _acvlUserIp = Nothing
+    , _acvlHeaders = False
+    , _acvlAccountId = pAcvlAccountId_
+    , _acvlKey = Nothing
+    , _acvlOauthToken = Nothing
+    , _acvlFields = Nothing
+    , _acvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-accQuotaUser :: Lens' AccountsContainersVersionsList' (Maybe Text)
-accQuotaUser
-  = lens _accQuotaUser (\ s a -> s{_accQuotaUser = a})
+acvlQuotaUser :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlQuotaUser
+  = lens _acvlQuotaUser
+      (\ s a -> s{_acvlQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-accPrettyPrint :: Lens' AccountsContainersVersionsList' Bool
-accPrettyPrint
-  = lens _accPrettyPrint
-      (\ s a -> s{_accPrettyPrint = a})
+acvlPrettyPrint :: Lens' AccountsContainersVersionsList' Bool
+acvlPrettyPrint
+  = lens _acvlPrettyPrint
+      (\ s a -> s{_acvlPrettyPrint = a})
 
 -- | The GTM Container ID.
-accContainerId :: Lens' AccountsContainersVersionsList' Text
-accContainerId
-  = lens _accContainerId
-      (\ s a -> s{_accContainerId = a})
+acvlContainerId :: Lens' AccountsContainersVersionsList' Text
+acvlContainerId
+  = lens _acvlContainerId
+      (\ s a -> s{_acvlContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-accUserIp :: Lens' AccountsContainersVersionsList' (Maybe Text)
-accUserIp
-  = lens _accUserIp (\ s a -> s{_accUserIp = a})
+acvlUserIp :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlUserIp
+  = lens _acvlUserIp (\ s a -> s{_acvlUserIp = a})
 
 -- | Retrieve headers only when true.
-accHeaders :: Lens' AccountsContainersVersionsList' Bool
-accHeaders
-  = lens _accHeaders (\ s a -> s{_accHeaders = a})
+acvlHeaders :: Lens' AccountsContainersVersionsList' Bool
+acvlHeaders
+  = lens _acvlHeaders (\ s a -> s{_acvlHeaders = a})
 
 -- | The GTM Account ID.
-accAccountId :: Lens' AccountsContainersVersionsList' Text
-accAccountId
-  = lens _accAccountId (\ s a -> s{_accAccountId = a})
+acvlAccountId :: Lens' AccountsContainersVersionsList' Text
+acvlAccountId
+  = lens _acvlAccountId
+      (\ s a -> s{_acvlAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-accKey :: Lens' AccountsContainersVersionsList' (Maybe Text)
-accKey = lens _accKey (\ s a -> s{_accKey = a})
+acvlKey :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlKey = lens _acvlKey (\ s a -> s{_acvlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-accOauthToken :: Lens' AccountsContainersVersionsList' (Maybe Text)
-accOauthToken
-  = lens _accOauthToken
-      (\ s a -> s{_accOauthToken = a})
+acvlOauthToken :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlOauthToken
+  = lens _acvlOauthToken
+      (\ s a -> s{_acvlOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-accFields :: Lens' AccountsContainersVersionsList' (Maybe Text)
-accFields
-  = lens _accFields (\ s a -> s{_accFields = a})
+acvlFields :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlFields
+  = lens _acvlFields (\ s a -> s{_acvlFields = a})
 
 -- | Data format for the response.
-accAlt :: Lens' AccountsContainersVersionsList' Text
-accAlt = lens _accAlt (\ s a -> s{_accAlt = a})
+acvlAlt :: Lens' AccountsContainersVersionsList' Alt
+acvlAlt = lens _acvlAlt (\ s a -> s{_acvlAlt = a})
 
 instance GoogleRequest
          AccountsContainersVersionsList' where
@@ -174,17 +184,19 @@ instance GoogleRequest
              ListContainerVersionsResponse
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsList{..}
-          = go _accQuotaUser _accPrettyPrint _accContainerId
-              _accUserIp
-              (Just _accHeaders)
-              _accAccountId
-              _accKey
-              _accOauthToken
-              _accFields
-              _accAlt
+          AccountsContainersVersionsList'{..}
+          = go _acvlQuotaUser (Just _acvlPrettyPrint)
+              _acvlContainerId
+              _acvlUserIp
+              (Just _acvlHeaders)
+              _acvlAccountId
+              _acvlKey
+              _acvlOauthToken
+              _acvlFields
+              (Just _acvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVersionsListAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVersionsListResource)
                       r
                       u

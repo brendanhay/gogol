@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new job. Only the state field of the job should be set.
 --
 -- /See:/ <https://developers.google.com/coordinate/ Google Maps Coordinate API Reference> for @CoordinateJobsInsert@.
-module Coordinate.Jobs.Insert
+module Network.Google.Resource.Coordinate.Jobs.Insert
     (
     -- * REST Resource
-      JobsInsertAPI
+      JobsInsertResource
 
     -- * Creating a Request
-    , jobsInsert
-    , JobsInsert
+    , jobsInsert'
+    , JobsInsert'
 
     -- * Request Lenses
     , jiQuotaUser
@@ -52,25 +53,33 @@ import           Network.Google.MapsCoordinate.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CoordinateJobsInsert@ which the
--- 'JobsInsert' request conforms to.
-type JobsInsertAPI =
+-- 'JobsInsert'' request conforms to.
+type JobsInsertResource =
      "teams" :>
        Capture "teamId" Text :>
          "jobs" :>
-           QueryParam "note" Text :>
-             QueryParam "customerPhoneNumber" Text :>
-               QueryParam "customerName" Text :>
-                 QueryParam "address" Text :>
-                   QueryParam "assignee" Text :>
-                     QueryParam "lat" Double :>
-                       QueryParam "lng" Double :>
-                         QueryParam "title" Text :>
-                           QueryParams "customField" Text :> Post '[JSON] Job
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "note" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "customerPhoneNumber" Text :>
+                     QueryParam "customerName" Text :>
+                       QueryParam "address" Text :>
+                         QueryParam "assignee" Text :>
+                           QueryParam "lat" Double :>
+                             QueryParam "key" Text :>
+                               QueryParam "lng" Double :>
+                                 QueryParam "title" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParams "customField" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Post '[JSON] Job
 
 -- | Inserts a new job. Only the state field of the job should be set.
 --
--- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+-- /See:/ 'jobsInsert'' smart constructor.
+data JobsInsert' = JobsInsert'
     { _jiQuotaUser           :: !(Maybe Text)
     , _jiPrettyPrint         :: !Bool
     , _jiNote                :: !(Maybe Text)
@@ -87,7 +96,7 @@ data JobsInsert = JobsInsert
     , _jiOauthToken          :: !(Maybe Text)
     , _jiFields              :: !(Maybe Text)
     , _jiCustomField         :: !(Maybe Text)
-    , _jiAlt                 :: !Text
+    , _jiAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
@@ -127,15 +136,15 @@ data JobsInsert = JobsInsert
 -- * 'jiCustomField'
 --
 -- * 'jiAlt'
-jobsInsert
+jobsInsert'
     :: Text -- ^ 'teamId'
     -> Text -- ^ 'address'
     -> Double -- ^ 'lat'
     -> Double -- ^ 'lng'
     -> Text -- ^ 'title'
-    -> JobsInsert
-jobsInsert pJiTeamId_ pJiAddress_ pJiLat_ pJiLng_ pJiTitle_ =
-    JobsInsert
+    -> JobsInsert'
+jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiLng_ pJiTitle_ =
+    JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
     , _jiNote = Nothing
@@ -152,7 +161,7 @@ jobsInsert pJiTeamId_ pJiAddress_ pJiLat_ pJiLng_ pJiTitle_ =
     , _jiOauthToken = Nothing
     , _jiFields = Nothing
     , _jiCustomField = Nothing
-    , _jiAlt = "json"
+    , _jiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -242,14 +251,15 @@ jiCustomField
       (\ s a -> s{_jiCustomField = a})
 
 -- | Data format for the response.
-jiAlt :: Lens' JobsInsert' Text
+jiAlt :: Lens' JobsInsert' Alt
 jiAlt = lens _jiAlt (\ s a -> s{_jiAlt = a})
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq mapsCoordinateURL
-        requestWithRoute r u JobsInsert{..}
-          = go _jiQuotaUser _jiPrettyPrint _jiNote _jiUserIp
+        requestWithRoute r u JobsInsert'{..}
+          = go _jiQuotaUser (Just _jiPrettyPrint) _jiNote
+              _jiUserIp
               _jiTeamId
               _jiCustomerPhoneNumber
               _jiCustomerName
@@ -262,6 +272,8 @@ instance GoogleRequest JobsInsert' where
               _jiOauthToken
               _jiFields
               _jiCustomField
-              _jiAlt
+              (Just _jiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy JobsInsertAPI) r u
+                  = clientWithRoute (Proxy :: Proxy JobsInsertResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Request the job status.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsGetMetrics@.
-module Dataflow.Projects.Jobs.GetMetrics
+module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
     (
     -- * REST Resource
-      ProjectsJobsGetMetricsAPI
+      ProjectsJobsGetMetricsResource
 
     -- * Creating a Request
-    , projectsJobsGetMetrics
-    , ProjectsJobsGetMetrics
+    , projectsJobsGetMetrics'
+    , ProjectsJobsGetMetrics'
 
     -- * Request Lenses
     , pjgmXgafv
@@ -51,20 +52,34 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsGetMetrics@ which the
--- 'ProjectsJobsGetMetrics' request conforms to.
-type ProjectsJobsGetMetricsAPI =
+-- 'ProjectsJobsGetMetrics'' request conforms to.
+type ProjectsJobsGetMetricsResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
                "metrics" :>
-                 QueryParam "startTime" Text :> Get '[JSON] JobMetrics
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "startTime" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] JobMetrics
 
 -- | Request the job status.
 --
--- /See:/ 'projectsJobsGetMetrics' smart constructor.
-data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics
+-- /See:/ 'projectsJobsGetMetrics'' smart constructor.
+data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
     { _pjgmXgafv          :: !(Maybe Text)
     , _pjgmQuotaUser      :: !(Maybe Text)
     , _pjgmPrettyPrint    :: !Bool
@@ -118,12 +133,12 @@ data ProjectsJobsGetMetrics = ProjectsJobsGetMetrics
 -- * 'pjgmCallback'
 --
 -- * 'pjgmAlt'
-projectsJobsGetMetrics
+projectsJobsGetMetrics'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> ProjectsJobsGetMetrics
-projectsJobsGetMetrics pPjgmJobId_ pPjgmProjectId_ =
-    ProjectsJobsGetMetrics
+    -> ProjectsJobsGetMetrics'
+projectsJobsGetMetrics' pPjgmJobId_ pPjgmProjectId_ =
+    ProjectsJobsGetMetrics'
     { _pjgmXgafv = Nothing
     , _pjgmQuotaUser = Nothing
     , _pjgmPrettyPrint = True
@@ -236,12 +251,13 @@ pjgmAlt = lens _pjgmAlt (\ s a -> s{_pjgmAlt = a})
 instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsGetMetrics{..}
-          = go _pjgmXgafv _pjgmQuotaUser _pjgmPrettyPrint
+        requestWithRoute r u ProjectsJobsGetMetrics'{..}
+          = go _pjgmXgafv _pjgmQuotaUser
+              (Just _pjgmPrettyPrint)
               _pjgmJobId
               _pjgmUploadProtocol
               _pjgmStartTime
-              _pjgmPp
+              (Just _pjgmPp)
               _pjgmAccessToken
               _pjgmUploadType
               _pjgmBearerToken
@@ -250,9 +266,9 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
               _pjgmOauthToken
               _pjgmFields
               _pjgmCallback
-              _pjgmAlt
+              (Just _pjgmAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsGetMetricsAPI)
+                      (Proxy :: Proxy ProjectsJobsGetMetricsResource)
                       r
                       u

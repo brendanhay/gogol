@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the specified label.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsUpdate@.
-module Gmail.Users.Labels.Update
+module Network.Google.Resource.Gmail.Users.Labels.Update
     (
     -- * REST Resource
-      UsersLabelsUpdateAPI
+      UsersLabelsUpdateResource
 
     -- * Creating a Request
-    , usersLabelsUpdate
-    , UsersLabelsUpdate
+    , usersLabelsUpdate'
+    , UsersLabelsUpdate'
 
     -- * Request Lenses
     , uluQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsUpdate@ which the
--- 'UsersLabelsUpdate' request conforms to.
-type UsersLabelsUpdateAPI =
+-- 'UsersLabelsUpdate'' request conforms to.
+type UsersLabelsUpdateResource =
      Capture "userId" Text :>
-       "labels" :> Capture "id" Text :> Put '[JSON] Label
+       "labels" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] Label
 
 -- | Updates the specified label.
 --
--- /See:/ 'usersLabelsUpdate' smart constructor.
-data UsersLabelsUpdate = UsersLabelsUpdate
+-- /See:/ 'usersLabelsUpdate'' smart constructor.
+data UsersLabelsUpdate' = UsersLabelsUpdate'
     { _uluQuotaUser   :: !(Maybe Text)
     , _uluPrettyPrint :: !Bool
     , _uluUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersLabelsUpdate = UsersLabelsUpdate
     , _uluId          :: !Text
     , _uluOauthToken  :: !(Maybe Text)
     , _uluFields      :: !(Maybe Text)
-    , _uluAlt         :: !Text
+    , _uluAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsUpdate'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data UsersLabelsUpdate = UsersLabelsUpdate
 -- * 'uluFields'
 --
 -- * 'uluAlt'
-usersLabelsUpdate
+usersLabelsUpdate'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersLabelsUpdate
-usersLabelsUpdate pUluUserId_ pUluId_ =
-    UsersLabelsUpdate
+    -> UsersLabelsUpdate'
+usersLabelsUpdate' pUluUserId_ pUluId_ =
+    UsersLabelsUpdate'
     { _uluQuotaUser = Nothing
     , _uluPrettyPrint = True
     , _uluUserIp = Nothing
@@ -99,7 +108,7 @@ usersLabelsUpdate pUluUserId_ pUluId_ =
     , _uluId = pUluId_
     , _uluOauthToken = Nothing
     , _uluFields = Nothing
-    , _uluAlt = "json"
+    , _uluAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,22 +158,22 @@ uluFields
   = lens _uluFields (\ s a -> s{_uluFields = a})
 
 -- | Data format for the response.
-uluAlt :: Lens' UsersLabelsUpdate' Text
+uluAlt :: Lens' UsersLabelsUpdate' Alt
 uluAlt = lens _uluAlt (\ s a -> s{_uluAlt = a})
 
 instance GoogleRequest UsersLabelsUpdate' where
         type Rs UsersLabelsUpdate' = Label
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsUpdate{..}
-          = go _uluQuotaUser _uluPrettyPrint _uluUserIp
+        requestWithRoute r u UsersLabelsUpdate'{..}
+          = go _uluQuotaUser (Just _uluPrettyPrint) _uluUserIp
               _uluUserId
               _uluKey
               _uluId
               _uluOauthToken
               _uluFields
-              _uluAlt
+              (Just _uluAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersLabelsUpdateAPI)
+                      (Proxy :: Proxy UsersLabelsUpdateResource)
                       r
                       u

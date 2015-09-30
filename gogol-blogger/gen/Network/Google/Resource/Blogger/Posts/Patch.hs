@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,218 +20,221 @@
 -- | Update a post. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsPatch@.
-module Blogger.Posts.Patch
+module Network.Google.Resource.Blogger.Posts.Patch
     (
     -- * REST Resource
-      PostsPatchAPI
+      PostsPatchResource
 
     -- * Creating a Request
-    , postsPatch
-    , PostsPatch
+    , postsPatch'
+    , PostsPatch'
 
     -- * Request Lenses
-    , pppFetchBody
-    , pppQuotaUser
-    , pppPrettyPrint
-    , pppUserIp
-    , pppFetchImages
-    , pppBlogId
-    , pppMaxComments
-    , pppKey
-    , pppRevert
-    , pppPostId
-    , pppOauthToken
-    , pppPublish
-    , pppFields
-    , pppAlt
+    , ppFetchBody
+    , ppQuotaUser
+    , ppPrettyPrint
+    , ppUserIp
+    , ppFetchImages
+    , ppBlogId
+    , ppMaxComments
+    , ppKey
+    , ppRevert
+    , ppPostId
+    , ppOauthToken
+    , ppPublish
+    , ppFields
+    , ppAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsPatch@ which the
--- 'PostsPatch' request conforms to.
-type PostsPatchAPI =
+-- 'PostsPatch'' request conforms to.
+type PostsPatchResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
            Capture "postId" Text :>
              QueryParam "fetchBody" Bool :>
-               QueryParam "fetchImages" Bool :>
-                 QueryParam "maxComments" Word32 :>
-                   QueryParam "revert" Bool :>
-                     QueryParam "publish" Bool :> Patch '[JSON] Post
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fetchImages" Bool :>
+                       QueryParam "maxComments" Word32 :>
+                         QueryParam "key" Text :>
+                           QueryParam "revert" Bool :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "publish" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Patch '[JSON] Post
 
 -- | Update a post. This method supports patch semantics.
 --
--- /See:/ 'postsPatch' smart constructor.
-data PostsPatch = PostsPatch
-    { _pppFetchBody   :: !Bool
-    , _pppQuotaUser   :: !(Maybe Text)
-    , _pppPrettyPrint :: !Bool
-    , _pppUserIp      :: !(Maybe Text)
-    , _pppFetchImages :: !(Maybe Bool)
-    , _pppBlogId      :: !Text
-    , _pppMaxComments :: !(Maybe Word32)
-    , _pppKey         :: !(Maybe Text)
-    , _pppRevert      :: !(Maybe Bool)
-    , _pppPostId      :: !Text
-    , _pppOauthToken  :: !(Maybe Text)
-    , _pppPublish     :: !(Maybe Bool)
-    , _pppFields      :: !(Maybe Text)
-    , _pppAlt         :: !Text
+-- /See:/ 'postsPatch'' smart constructor.
+data PostsPatch' = PostsPatch'
+    { _ppFetchBody   :: !Bool
+    , _ppQuotaUser   :: !(Maybe Text)
+    , _ppPrettyPrint :: !Bool
+    , _ppUserIp      :: !(Maybe Text)
+    , _ppFetchImages :: !(Maybe Bool)
+    , _ppBlogId      :: !Text
+    , _ppMaxComments :: !(Maybe Word32)
+    , _ppKey         :: !(Maybe Text)
+    , _ppRevert      :: !(Maybe Bool)
+    , _ppPostId      :: !Text
+    , _ppOauthToken  :: !(Maybe Text)
+    , _ppPublish     :: !(Maybe Bool)
+    , _ppFields      :: !(Maybe Text)
+    , _ppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pppFetchBody'
+-- * 'ppFetchBody'
 --
--- * 'pppQuotaUser'
+-- * 'ppQuotaUser'
 --
--- * 'pppPrettyPrint'
+-- * 'ppPrettyPrint'
 --
--- * 'pppUserIp'
+-- * 'ppUserIp'
 --
--- * 'pppFetchImages'
+-- * 'ppFetchImages'
 --
--- * 'pppBlogId'
+-- * 'ppBlogId'
 --
--- * 'pppMaxComments'
+-- * 'ppMaxComments'
 --
--- * 'pppKey'
+-- * 'ppKey'
 --
--- * 'pppRevert'
+-- * 'ppRevert'
 --
--- * 'pppPostId'
+-- * 'ppPostId'
 --
--- * 'pppOauthToken'
+-- * 'ppOauthToken'
 --
--- * 'pppPublish'
+-- * 'ppPublish'
 --
--- * 'pppFields'
+-- * 'ppFields'
 --
--- * 'pppAlt'
-postsPatch
+-- * 'ppAlt'
+postsPatch'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
-    -> PostsPatch
-postsPatch pPppBlogId_ pPppPostId_ =
-    PostsPatch
-    { _pppFetchBody = True
-    , _pppQuotaUser = Nothing
-    , _pppPrettyPrint = True
-    , _pppUserIp = Nothing
-    , _pppFetchImages = Nothing
-    , _pppBlogId = pPppBlogId_
-    , _pppMaxComments = Nothing
-    , _pppKey = Nothing
-    , _pppRevert = Nothing
-    , _pppPostId = pPppPostId_
-    , _pppOauthToken = Nothing
-    , _pppPublish = Nothing
-    , _pppFields = Nothing
-    , _pppAlt = "json"
+    -> PostsPatch'
+postsPatch' pPpBlogId_ pPpPostId_ =
+    PostsPatch'
+    { _ppFetchBody = True
+    , _ppQuotaUser = Nothing
+    , _ppPrettyPrint = True
+    , _ppUserIp = Nothing
+    , _ppFetchImages = Nothing
+    , _ppBlogId = pPpBlogId_
+    , _ppMaxComments = Nothing
+    , _ppKey = Nothing
+    , _ppRevert = Nothing
+    , _ppPostId = pPpPostId_
+    , _ppOauthToken = Nothing
+    , _ppPublish = Nothing
+    , _ppFields = Nothing
+    , _ppAlt = JSON
     }
 
 -- | Whether the body content of the post is included with the result
 -- (default: true).
-pppFetchBody :: Lens' PostsPatch' Bool
-pppFetchBody
-  = lens _pppFetchBody (\ s a -> s{_pppFetchBody = a})
+ppFetchBody :: Lens' PostsPatch' Bool
+ppFetchBody
+  = lens _ppFetchBody (\ s a -> s{_ppFetchBody = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-pppQuotaUser :: Lens' PostsPatch' (Maybe Text)
-pppQuotaUser
-  = lens _pppQuotaUser (\ s a -> s{_pppQuotaUser = a})
+ppQuotaUser :: Lens' PostsPatch' (Maybe Text)
+ppQuotaUser
+  = lens _ppQuotaUser (\ s a -> s{_ppQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-pppPrettyPrint :: Lens' PostsPatch' Bool
-pppPrettyPrint
-  = lens _pppPrettyPrint
-      (\ s a -> s{_pppPrettyPrint = a})
+ppPrettyPrint :: Lens' PostsPatch' Bool
+ppPrettyPrint
+  = lens _ppPrettyPrint
+      (\ s a -> s{_ppPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pppUserIp :: Lens' PostsPatch' (Maybe Text)
-pppUserIp
-  = lens _pppUserIp (\ s a -> s{_pppUserIp = a})
+ppUserIp :: Lens' PostsPatch' (Maybe Text)
+ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
-pppFetchImages :: Lens' PostsPatch' (Maybe Bool)
-pppFetchImages
-  = lens _pppFetchImages
-      (\ s a -> s{_pppFetchImages = a})
+ppFetchImages :: Lens' PostsPatch' (Maybe Bool)
+ppFetchImages
+  = lens _ppFetchImages
+      (\ s a -> s{_ppFetchImages = a})
 
 -- | The ID of the Blog.
-pppBlogId :: Lens' PostsPatch' Text
-pppBlogId
-  = lens _pppBlogId (\ s a -> s{_pppBlogId = a})
+ppBlogId :: Lens' PostsPatch' Text
+ppBlogId = lens _ppBlogId (\ s a -> s{_ppBlogId = a})
 
 -- | Maximum number of comments to retrieve with the returned post.
-pppMaxComments :: Lens' PostsPatch' (Maybe Word32)
-pppMaxComments
-  = lens _pppMaxComments
-      (\ s a -> s{_pppMaxComments = a})
+ppMaxComments :: Lens' PostsPatch' (Maybe Word32)
+ppMaxComments
+  = lens _ppMaxComments
+      (\ s a -> s{_ppMaxComments = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pppKey :: Lens' PostsPatch' (Maybe Text)
-pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
+ppKey :: Lens' PostsPatch' (Maybe Text)
+ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | Whether a revert action should be performed when the post is updated
 -- (default: false).
-pppRevert :: Lens' PostsPatch' (Maybe Bool)
-pppRevert
-  = lens _pppRevert (\ s a -> s{_pppRevert = a})
+ppRevert :: Lens' PostsPatch' (Maybe Bool)
+ppRevert = lens _ppRevert (\ s a -> s{_ppRevert = a})
 
 -- | The ID of the Post.
-pppPostId :: Lens' PostsPatch' Text
-pppPostId
-  = lens _pppPostId (\ s a -> s{_pppPostId = a})
+ppPostId :: Lens' PostsPatch' Text
+ppPostId = lens _ppPostId (\ s a -> s{_ppPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-pppOauthToken :: Lens' PostsPatch' (Maybe Text)
-pppOauthToken
-  = lens _pppOauthToken
-      (\ s a -> s{_pppOauthToken = a})
+ppOauthToken :: Lens' PostsPatch' (Maybe Text)
+ppOauthToken
+  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
 
 -- | Whether a publish action should be performed when the post is updated
 -- (default: false).
-pppPublish :: Lens' PostsPatch' (Maybe Bool)
-pppPublish
-  = lens _pppPublish (\ s a -> s{_pppPublish = a})
+ppPublish :: Lens' PostsPatch' (Maybe Bool)
+ppPublish
+  = lens _ppPublish (\ s a -> s{_ppPublish = a})
 
 -- | Selector specifying which fields to include in a partial response.
-pppFields :: Lens' PostsPatch' (Maybe Text)
-pppFields
-  = lens _pppFields (\ s a -> s{_pppFields = a})
+ppFields :: Lens' PostsPatch' (Maybe Text)
+ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
 -- | Data format for the response.
-pppAlt :: Lens' PostsPatch' Text
-pppAlt = lens _pppAlt (\ s a -> s{_pppAlt = a})
+ppAlt :: Lens' PostsPatch' Alt
+ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
 
 instance GoogleRequest PostsPatch' where
         type Rs PostsPatch' = Post
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsPatch{..}
-          = go (Just _pppFetchBody) _pppQuotaUser
-              _pppPrettyPrint
-              _pppUserIp
-              _pppFetchImages
-              _pppBlogId
-              _pppMaxComments
-              _pppKey
-              _pppRevert
-              _pppPostId
-              _pppOauthToken
-              _pppPublish
-              _pppFields
-              _pppAlt
+        requestWithRoute r u PostsPatch'{..}
+          = go (Just _ppFetchBody) _ppQuotaUser
+              (Just _ppPrettyPrint)
+              _ppUserIp
+              _ppFetchImages
+              _ppBlogId
+              _ppMaxComments
+              _ppKey
+              _ppRevert
+              _ppPostId
+              _ppOauthToken
+              _ppPublish
+              _ppFields
+              (Just _ppAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PostsPatchResource)
+                      r
+                      u

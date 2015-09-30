@@ -48,6 +48,9 @@ module Network.Google.GroupsSettings.Types
     , gDescription
     , gDefaultMessageDenyNotificationText
     , gAllowWebPosting
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GroupsSettings.Types.Product
@@ -55,7 +58,7 @@ import           Network.Google.GroupsSettings.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Groups Settings API.
-groupsSettingsURL :: BaseURL
+groupsSettingsURL :: BaseUrl
 groupsSettingsURL
   = BaseUrl Https
       "https://www.googleapis.com/groups/v1/groups/"

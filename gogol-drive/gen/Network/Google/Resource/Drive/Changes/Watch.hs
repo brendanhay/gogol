@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Subscribe to changes for a user.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChangesWatch@.
-module Drive.Changes.Watch
+module Network.Google.Resource.Drive.Changes.Watch
     (
     -- * REST Resource
-      ChangesWatchAPI
+      ChangesWatchResource
 
     -- * Creating a Request
-    , changesWatch
-    , ChangesWatch
+    , changesWatch'
+    , ChangesWatch'
 
     -- * Request Lenses
     , cwQuotaUser
@@ -48,22 +49,28 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveChangesWatch@ which the
--- 'ChangesWatch' request conforms to.
-type ChangesWatchAPI =
+-- 'ChangesWatch'' request conforms to.
+type ChangesWatchResource =
      "changes" :>
        "watch" :>
-         QueryParam "includeSubscribed" Bool :>
-           QueryParam "startChangeId" Int64 :>
-             QueryParam "spaces" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   QueryParam "includeDeleted" Bool :>
-                     Post '[JSON] Channel
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "includeSubscribed" Bool :>
+                 QueryParam "startChangeId" Int64 :>
+                   QueryParam "key" Text :>
+                     QueryParam "spaces" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "includeDeleted" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Channel
 
 -- | Subscribe to changes for a user.
 --
--- /See:/ 'changesWatch' smart constructor.
-data ChangesWatch = ChangesWatch
+-- /See:/ 'changesWatch'' smart constructor.
+data ChangesWatch' = ChangesWatch'
     { _cwQuotaUser         :: !(Maybe Text)
     , _cwPrettyPrint       :: !Bool
     , _cwUserIp            :: !(Maybe Text)
@@ -76,7 +83,7 @@ data ChangesWatch = ChangesWatch
     , _cwMaxResults        :: !Int32
     , _cwIncludeDeleted    :: !Bool
     , _cwFields            :: !(Maybe Text)
-    , _cwAlt               :: !Text
+    , _cwAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesWatch'' with the minimum fields required to make a request.
@@ -108,10 +115,10 @@ data ChangesWatch = ChangesWatch
 -- * 'cwFields'
 --
 -- * 'cwAlt'
-changesWatch
-    :: ChangesWatch
-changesWatch =
-    ChangesWatch
+changesWatch'
+    :: ChangesWatch'
+changesWatch' =
+    ChangesWatch'
     { _cwQuotaUser = Nothing
     , _cwPrettyPrint = True
     , _cwUserIp = Nothing
@@ -124,7 +131,7 @@ changesWatch =
     , _cwMaxResults = 100
     , _cwIncludeDeleted = True
     , _cwFields = Nothing
-    , _cwAlt = "json"
+    , _cwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -196,14 +203,14 @@ cwFields :: Lens' ChangesWatch' (Maybe Text)
 cwFields = lens _cwFields (\ s a -> s{_cwFields = a})
 
 -- | Data format for the response.
-cwAlt :: Lens' ChangesWatch' Text
+cwAlt :: Lens' ChangesWatch' Alt
 cwAlt = lens _cwAlt (\ s a -> s{_cwAlt = a})
 
 instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChangesWatch{..}
-          = go _cwQuotaUser _cwPrettyPrint _cwUserIp
+        requestWithRoute r u ChangesWatch'{..}
+          = go _cwQuotaUser (Just _cwPrettyPrint) _cwUserIp
               (Just _cwIncludeSubscribed)
               _cwStartChangeId
               _cwKey
@@ -213,7 +220,9 @@ instance GoogleRequest ChangesWatch' where
               (Just _cwMaxResults)
               (Just _cwIncludeDeleted)
               _cwFields
-              _cwAlt
+              (Just _cwAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChangesWatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChangesWatchResource)
+                      r
                       u

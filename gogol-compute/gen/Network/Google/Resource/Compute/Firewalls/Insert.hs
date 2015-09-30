@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsInsert@.
-module Compute.Firewalls.Insert
+module Network.Google.Resource.Compute.Firewalls.Insert
     (
     -- * REST Resource
-      FirewallsInsertAPI
+      FirewallsInsertResource
 
     -- * Creating a Request
-    , firewallsInsert
-    , FirewallsInsert
+    , firewallsInsert'
+    , FirewallsInsert'
 
     -- * Request Lenses
     , fiQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsInsert@ which the
--- 'FirewallsInsert' request conforms to.
-type FirewallsInsertAPI =
+-- 'FirewallsInsert'' request conforms to.
+type FirewallsInsertResource =
      Capture "project" Text :>
-       "global" :> "firewalls" :> Post '[JSON] Operation
+       "global" :>
+         "firewalls" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a firewall resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'firewallsInsert' smart constructor.
-data FirewallsInsert = FirewallsInsert
+-- /See:/ 'firewallsInsert'' smart constructor.
+data FirewallsInsert' = FirewallsInsert'
     { _fiQuotaUser   :: !(Maybe Text)
     , _fiPrettyPrint :: !Bool
     , _fiProject     :: !Text
@@ -61,7 +70,7 @@ data FirewallsInsert = FirewallsInsert
     , _fiKey         :: !(Maybe Text)
     , _fiOauthToken  :: !(Maybe Text)
     , _fiFields      :: !(Maybe Text)
-    , _fiAlt         :: !Text
+    , _fiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data FirewallsInsert = FirewallsInsert
 -- * 'fiFields'
 --
 -- * 'fiAlt'
-firewallsInsert
+firewallsInsert'
     :: Text -- ^ 'project'
-    -> FirewallsInsert
-firewallsInsert pFiProject_ =
-    FirewallsInsert
+    -> FirewallsInsert'
+firewallsInsert' pFiProject_ =
+    FirewallsInsert'
     { _fiQuotaUser = Nothing
     , _fiPrettyPrint = True
     , _fiProject = pFiProject_
@@ -95,7 +104,7 @@ firewallsInsert pFiProject_ =
     , _fiKey = Nothing
     , _fiOauthToken = Nothing
     , _fiFields = Nothing
-    , _fiAlt = "json"
+    , _fiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +146,21 @@ fiFields :: Lens' FirewallsInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
 
 -- | Data format for the response.
-fiAlt :: Lens' FirewallsInsert' Text
+fiAlt :: Lens' FirewallsInsert' Alt
 fiAlt = lens _fiAlt (\ s a -> s{_fiAlt = a})
 
 instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsInsert{..}
-          = go _fiQuotaUser _fiPrettyPrint _fiProject _fiUserIp
+        requestWithRoute r u FirewallsInsert'{..}
+          = go _fiQuotaUser (Just _fiPrettyPrint) _fiProject
+              _fiUserIp
               _fiKey
               _fiOauthToken
               _fiFields
-              _fiAlt
+              (Just _fiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsInsertResource)
                       r
                       u

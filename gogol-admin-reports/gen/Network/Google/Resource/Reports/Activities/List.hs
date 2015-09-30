@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/reports/ Admin Reports API Reference> for @ReportsActivitiesList@.
-module Reports.Activities.List
+module Network.Google.Resource.Reports.Activities.List
     (
     -- * REST Resource
-      ActivitiesListAPI
+      ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList
-    , ActivitiesList
+    , activitiesList'
+    , ActivitiesList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -52,27 +53,34 @@ import           Network.Google.AdminReports.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReportsActivitiesList@ which the
--- 'ActivitiesList' request conforms to.
-type ActivitiesListAPI =
+-- 'ActivitiesList'' request conforms to.
+type ActivitiesListResource =
      "activity" :>
        "users" :>
          Capture "userKey" Text :>
            "applications" :>
              Capture "applicationName" Text :>
-               QueryParam "startTime" Text :>
-                 QueryParam "filters" Text :>
-                   QueryParam "customerId" Text :>
-                     QueryParam "actorIpAddress" Text :>
-                       QueryParam "endTime" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "eventName" Text :>
-                             QueryParam "maxResults" Int32 :>
-                               Get '[JSON] Activities
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "startTime" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "filters" Text :>
+                         QueryParam "customerId" Text :>
+                           QueryParam "actorIpAddress" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "endTime" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "eventName" Text :>
+                                       QueryParam "maxResults" Int32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer and application.
 --
--- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+-- /See:/ 'activitiesList'' smart constructor.
+data ActivitiesList' = ActivitiesList'
     { _alQuotaUser       :: !(Maybe Text)
     , _alPrettyPrint     :: !Bool
     , _alStartTime       :: !(Maybe Text)
@@ -89,7 +97,7 @@ data ActivitiesList = ActivitiesList
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe Int32)
     , _alFields          :: !(Maybe Text)
-    , _alAlt             :: !Text
+    , _alAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -129,12 +137,12 @@ data ActivitiesList = ActivitiesList
 -- * 'alFields'
 --
 -- * 'alAlt'
-activitiesList
+activitiesList'
     :: Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
-    -> ActivitiesList
-activitiesList pAlApplicationName_ pAlUserKey_ =
-    ActivitiesList
+    -> ActivitiesList'
+activitiesList' pAlApplicationName_ pAlUserKey_ =
+    ActivitiesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alStartTime = Nothing
@@ -151,7 +159,7 @@ activitiesList pAlApplicationName_ pAlUserKey_ =
     , _alUserKey = pAlUserKey_
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -244,14 +252,14 @@ alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Text
+alAlt :: Lens' ActivitiesList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
         request = requestWithRoute defReq adminReportsURL
-        requestWithRoute r u ActivitiesList{..}
-          = go _alQuotaUser _alPrettyPrint _alStartTime
+        requestWithRoute r u ActivitiesList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alStartTime
               _alUserIp
               _alFilters
               _alCustomerId
@@ -265,8 +273,9 @@ instance GoogleRequest ActivitiesList' where
               _alUserKey
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesListResource)
                       r
                       u

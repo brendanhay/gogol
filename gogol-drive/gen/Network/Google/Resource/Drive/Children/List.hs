@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,120 +20,127 @@
 -- | Lists a folder\'s children.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenList@.
-module Drive.Children.List
+module Network.Google.Resource.Drive.Children.List
     (
     -- * REST Resource
-      ChildrenListAPI
+      ChildrenListResource
 
     -- * Creating a Request
-    , childrenList
-    , ChildrenList
+    , childrenList'
+    , ChildrenList'
 
     -- * Request Lenses
-    , cQuotaUser
-    , cPrettyPrint
-    , cOrderBy
-    , cUserIp
-    , cFolderId
-    , cQ
-    , cKey
-    , cPageToken
-    , cOauthToken
-    , cMaxResults
-    , cFields
-    , cAlt
+    , clQuotaUser
+    , clPrettyPrint
+    , clOrderBy
+    , clUserIp
+    , clFolderId
+    , clQ
+    , clKey
+    , clPageToken
+    , clOauthToken
+    , clMaxResults
+    , clFields
+    , clAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveChildrenList@ which the
--- 'ChildrenList' request conforms to.
-type ChildrenListAPI =
+-- 'ChildrenList'' request conforms to.
+type ChildrenListResource =
      "files" :>
        Capture "folderId" Text :>
          "children" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "q" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] ChildList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "q" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
 --
--- /See:/ 'childrenList' smart constructor.
-data ChildrenList = ChildrenList
-    { _cQuotaUser   :: !(Maybe Text)
-    , _cPrettyPrint :: !Bool
-    , _cOrderBy     :: !(Maybe Text)
-    , _cUserIp      :: !(Maybe Text)
-    , _cFolderId    :: !Text
-    , _cQ           :: !(Maybe Text)
-    , _cKey         :: !(Maybe Text)
-    , _cPageToken   :: !(Maybe Text)
-    , _cOauthToken  :: !(Maybe Text)
-    , _cMaxResults  :: !Int32
-    , _cFields      :: !(Maybe Text)
-    , _cAlt         :: !Text
+-- /See:/ 'childrenList'' smart constructor.
+data ChildrenList' = ChildrenList'
+    { _clQuotaUser   :: !(Maybe Text)
+    , _clPrettyPrint :: !Bool
+    , _clOrderBy     :: !(Maybe Text)
+    , _clUserIp      :: !(Maybe Text)
+    , _clFolderId    :: !Text
+    , _clQ           :: !(Maybe Text)
+    , _clKey         :: !(Maybe Text)
+    , _clPageToken   :: !(Maybe Text)
+    , _clOauthToken  :: !(Maybe Text)
+    , _clMaxResults  :: !Int32
+    , _clFields      :: !(Maybe Text)
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cQuotaUser'
+-- * 'clQuotaUser'
 --
--- * 'cPrettyPrint'
+-- * 'clPrettyPrint'
 --
--- * 'cOrderBy'
+-- * 'clOrderBy'
 --
--- * 'cUserIp'
+-- * 'clUserIp'
 --
--- * 'cFolderId'
+-- * 'clFolderId'
 --
--- * 'cQ'
+-- * 'clQ'
 --
--- * 'cKey'
+-- * 'clKey'
 --
--- * 'cPageToken'
+-- * 'clPageToken'
 --
--- * 'cOauthToken'
+-- * 'clOauthToken'
 --
--- * 'cMaxResults'
+-- * 'clMaxResults'
 --
--- * 'cFields'
+-- * 'clFields'
 --
--- * 'cAlt'
-childrenList
+-- * 'clAlt'
+childrenList'
     :: Text -- ^ 'folderId'
-    -> ChildrenList
-childrenList pCFolderId_ =
-    ChildrenList
-    { _cQuotaUser = Nothing
-    , _cPrettyPrint = True
-    , _cOrderBy = Nothing
-    , _cUserIp = Nothing
-    , _cFolderId = pCFolderId_
-    , _cQ = Nothing
-    , _cKey = Nothing
-    , _cPageToken = Nothing
-    , _cOauthToken = Nothing
-    , _cMaxResults = 100
-    , _cFields = Nothing
-    , _cAlt = "json"
+    -> ChildrenList'
+childrenList' pClFolderId_ =
+    ChildrenList'
+    { _clQuotaUser = Nothing
+    , _clPrettyPrint = True
+    , _clOrderBy = Nothing
+    , _clUserIp = Nothing
+    , _clFolderId = pClFolderId_
+    , _clQ = Nothing
+    , _clKey = Nothing
+    , _clPageToken = Nothing
+    , _clOauthToken = Nothing
+    , _clMaxResults = 100
+    , _clFields = Nothing
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cQuotaUser :: Lens' ChildrenList' (Maybe Text)
-cQuotaUser
-  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
+clQuotaUser :: Lens' ChildrenList' (Maybe Text)
+clQuotaUser
+  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cPrettyPrint :: Lens' ChildrenList' Bool
-cPrettyPrint
-  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
+clPrettyPrint :: Lens' ChildrenList' Bool
+clPrettyPrint
+  = lens _clPrettyPrint
+      (\ s a -> s{_clPrettyPrint = a})
 
 -- | A comma-separated list of sort keys. Valid keys are \'createdDate\',
 -- \'folder\', \'lastViewedByMeDate\', \'modifiedByMeDate\',
@@ -142,65 +150,69 @@ cPrettyPrint
 -- ?orderBy=folder,modifiedDate desc,title. Please note that there is a
 -- current limitation for users with approximately one million files in
 -- which the requested sort order is ignored.
-cOrderBy :: Lens' ChildrenList' (Maybe Text)
-cOrderBy = lens _cOrderBy (\ s a -> s{_cOrderBy = a})
+clOrderBy :: Lens' ChildrenList' (Maybe Text)
+clOrderBy
+  = lens _clOrderBy (\ s a -> s{_clOrderBy = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' ChildrenList' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+clUserIp :: Lens' ChildrenList' (Maybe Text)
+clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
 
 -- | The ID of the folder.
-cFolderId :: Lens' ChildrenList' Text
-cFolderId
-  = lens _cFolderId (\ s a -> s{_cFolderId = a})
+clFolderId :: Lens' ChildrenList' Text
+clFolderId
+  = lens _clFolderId (\ s a -> s{_clFolderId = a})
 
 -- | Query string for searching children.
-cQ :: Lens' ChildrenList' (Maybe Text)
-cQ = lens _cQ (\ s a -> s{_cQ = a})
+clQ :: Lens' ChildrenList' (Maybe Text)
+clQ = lens _clQ (\ s a -> s{_clQ = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' ChildrenList' (Maybe Text)
-cKey = lens _cKey (\ s a -> s{_cKey = a})
+clKey :: Lens' ChildrenList' (Maybe Text)
+clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Page token for children.
-cPageToken :: Lens' ChildrenList' (Maybe Text)
-cPageToken
-  = lens _cPageToken (\ s a -> s{_cPageToken = a})
+clPageToken :: Lens' ChildrenList' (Maybe Text)
+clPageToken
+  = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' ChildrenList' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+clOauthToken :: Lens' ChildrenList' (Maybe Text)
+clOauthToken
+  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
 
 -- | Maximum number of children to return.
-cMaxResults :: Lens' ChildrenList' Int32
-cMaxResults
-  = lens _cMaxResults (\ s a -> s{_cMaxResults = a})
+clMaxResults :: Lens' ChildrenList' Int32
+clMaxResults
+  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cFields :: Lens' ChildrenList' (Maybe Text)
-cFields = lens _cFields (\ s a -> s{_cFields = a})
+clFields :: Lens' ChildrenList' (Maybe Text)
+clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-cAlt :: Lens' ChildrenList' Text
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+clAlt :: Lens' ChildrenList' Alt
+clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenList{..}
-          = go _cQuotaUser _cPrettyPrint _cOrderBy _cUserIp
-              _cFolderId
-              _cQ
-              _cKey
-              _cPageToken
-              _cOauthToken
-              (Just _cMaxResults)
-              _cFields
-              _cAlt
+        requestWithRoute r u ChildrenList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clOrderBy
+              _clUserIp
+              _clFolderId
+              _clQ
+              _clKey
+              _clPageToken
+              _clOauthToken
+              (Just _clMaxResults)
+              _clFields
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChildrenListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChildrenListResource)
+                      r
                       u

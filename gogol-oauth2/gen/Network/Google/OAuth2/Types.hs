@@ -17,6 +17,16 @@ module Network.Google.OAuth2.Types
     -- * Service URL
       oAuth2URL
 
+    -- * JwkKeys
+    , JwkKeys
+    , jwkKeys
+    , jkAlg
+    , jkUse
+    , jkKid
+    , jkN
+    , jkE
+    , jkKty
+
     -- * Tokeninfo
     , Tokeninfo
     , tokeninfo
@@ -49,6 +59,9 @@ module Network.Google.OAuth2.Types
     , uName
     , uVerifiedEmail
     , uId
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.OAuth2.Types.Product
@@ -56,6 +69,6 @@ import           Network.Google.OAuth2.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google OAuth2 API.
-oAuth2URL :: BaseURL
+oAuth2URL :: BaseUrl
 oAuth2URL
   = BaseUrl Https "https://www.googleapis.com/" 443

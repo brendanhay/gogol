@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsWatchAll@.
-module Storage.Objects.WatchAll
+module Network.Google.Resource.Storage.Objects.WatchAll
     (
     -- * REST Resource
-      ObjectsWatchAllAPI
+      ObjectsWatchAllResource
 
     -- * Creating a Request
-    , objectsWatchAll
-    , ObjectsWatchAll
+    , objectsWatchAll'
+    , ObjectsWatchAll'
 
     -- * Request Lenses
     , owaQuotaUser
@@ -49,24 +50,33 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsWatchAll@ which the
--- 'ObjectsWatchAll' request conforms to.
-type ObjectsWatchAllAPI =
+-- 'ObjectsWatchAll'' request conforms to.
+type ObjectsWatchAllResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            "watch" :>
-             QueryParam "prefix" Text :>
-               QueryParam "versions" Bool :>
-                 QueryParam "projection" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "delimiter" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         Post '[JSON] Channel
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "prefix" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "versions" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "projection"
+                           StorageObjectsWatchAllProjection
+                           :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "delimiter" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Post '[JSON] Channel
 
 -- | Watch for changes on all objects in a bucket.
 --
--- /See:/ 'objectsWatchAll' smart constructor.
-data ObjectsWatchAll = ObjectsWatchAll
+-- /See:/ 'objectsWatchAll'' smart constructor.
+data ObjectsWatchAll' = ObjectsWatchAll'
     { _owaQuotaUser   :: !(Maybe Text)
     , _owaPrettyPrint :: !Bool
     , _owaPrefix      :: !(Maybe Text)
@@ -74,13 +84,13 @@ data ObjectsWatchAll = ObjectsWatchAll
     , _owaBucket      :: !Text
     , _owaVersions    :: !(Maybe Bool)
     , _owaKey         :: !(Maybe Text)
-    , _owaProjection  :: !(Maybe Text)
+    , _owaProjection  :: !(Maybe StorageObjectsWatchAllProjection)
     , _owaPageToken   :: !(Maybe Text)
     , _owaOauthToken  :: !(Maybe Text)
     , _owaDelimiter   :: !(Maybe Text)
     , _owaMaxResults  :: !(Maybe Word32)
     , _owaFields      :: !(Maybe Text)
-    , _owaAlt         :: !Text
+    , _owaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsWatchAll'' with the minimum fields required to make a request.
@@ -114,11 +124,11 @@ data ObjectsWatchAll = ObjectsWatchAll
 -- * 'owaFields'
 --
 -- * 'owaAlt'
-objectsWatchAll
+objectsWatchAll'
     :: Text -- ^ 'bucket'
-    -> ObjectsWatchAll
-objectsWatchAll pOwaBucket_ =
-    ObjectsWatchAll
+    -> ObjectsWatchAll'
+objectsWatchAll' pOwaBucket_ =
+    ObjectsWatchAll'
     { _owaQuotaUser = Nothing
     , _owaPrettyPrint = True
     , _owaPrefix = Nothing
@@ -132,7 +142,7 @@ objectsWatchAll pOwaBucket_ =
     , _owaDelimiter = Nothing
     , _owaMaxResults = Nothing
     , _owaFields = Nothing
-    , _owaAlt = "json"
+    , _owaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -176,7 +186,7 @@ owaKey :: Lens' ObjectsWatchAll' (Maybe Text)
 owaKey = lens _owaKey (\ s a -> s{_owaKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-owaProjection :: Lens' ObjectsWatchAll' (Maybe Text)
+owaProjection :: Lens' ObjectsWatchAll' (Maybe StorageObjectsWatchAllProjection)
 owaProjection
   = lens _owaProjection
       (\ s a -> s{_owaProjection = a})
@@ -215,14 +225,14 @@ owaFields
   = lens _owaFields (\ s a -> s{_owaFields = a})
 
 -- | Data format for the response.
-owaAlt :: Lens' ObjectsWatchAll' Text
+owaAlt :: Lens' ObjectsWatchAll' Alt
 owaAlt = lens _owaAlt (\ s a -> s{_owaAlt = a})
 
 instance GoogleRequest ObjectsWatchAll' where
         type Rs ObjectsWatchAll' = Channel
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsWatchAll{..}
-          = go _owaQuotaUser _owaPrettyPrint _owaPrefix
+        requestWithRoute r u ObjectsWatchAll'{..}
+          = go _owaQuotaUser (Just _owaPrettyPrint) _owaPrefix
               _owaUserIp
               _owaBucket
               _owaVersions
@@ -233,8 +243,9 @@ instance GoogleRequest ObjectsWatchAll' where
               _owaDelimiter
               _owaMaxResults
               _owaFields
-              _owaAlt
+              (Just _owaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsWatchAllAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsWatchAllResource)
                       r
                       u

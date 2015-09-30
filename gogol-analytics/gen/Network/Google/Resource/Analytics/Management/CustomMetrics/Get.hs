@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a custom metric to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsGet@.
-module Analytics.Management.CustomMetrics.Get
+module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
     (
     -- * REST Resource
-      ManagementCustomMetricsGetAPI
+      ManagementCustomMetricsGetResource
 
     -- * Creating a Request
-    , managementCustomMetricsGet
-    , ManagementCustomMetricsGet
+    , managementCustomMetricsGet'
+    , ManagementCustomMetricsGet'
 
     -- * Request Lenses
     , mcmgQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsGet@ which the
--- 'ManagementCustomMetricsGet' request conforms to.
-type ManagementCustomMetricsGetAPI =
+-- 'ManagementCustomMetricsGet'' request conforms to.
+type ManagementCustomMetricsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,18 @@ type ManagementCustomMetricsGetAPI =
              Capture "webPropertyId" Text :>
                "customMetrics" :>
                  Capture "customMetricId" Text :>
-                   Get '[JSON] CustomMetric
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] CustomMetric
 
 -- | Get a custom metric to which the user has access.
 --
--- /See:/ 'managementCustomMetricsGet' smart constructor.
-data ManagementCustomMetricsGet = ManagementCustomMetricsGet
+-- /See:/ 'managementCustomMetricsGet'' smart constructor.
+data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
     { _mcmgQuotaUser      :: !(Maybe Text)
     , _mcmgPrettyPrint    :: !Bool
     , _mcmgCustomMetricId :: !Text
@@ -69,7 +76,7 @@ data ManagementCustomMetricsGet = ManagementCustomMetricsGet
     , _mcmgKey            :: !(Maybe Text)
     , _mcmgOauthToken     :: !(Maybe Text)
     , _mcmgFields         :: !(Maybe Text)
-    , _mcmgAlt            :: !Text
+    , _mcmgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsGet'' with the minimum fields required to make a request.
@@ -95,13 +102,13 @@ data ManagementCustomMetricsGet = ManagementCustomMetricsGet
 -- * 'mcmgFields'
 --
 -- * 'mcmgAlt'
-managementCustomMetricsGet
+managementCustomMetricsGet'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomMetricsGet
-managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
-    ManagementCustomMetricsGet
+    -> ManagementCustomMetricsGet'
+managementCustomMetricsGet' pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
+    ManagementCustomMetricsGet'
     { _mcmgQuotaUser = Nothing
     , _mcmgPrettyPrint = False
     , _mcmgCustomMetricId = pMcmgCustomMetricId_
@@ -111,7 +118,7 @@ managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccount
     , _mcmgKey = Nothing
     , _mcmgOauthToken = Nothing
     , _mcmgFields = Nothing
-    , _mcmgAlt = "json"
+    , _mcmgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,15 +177,15 @@ mcmgFields
   = lens _mcmgFields (\ s a -> s{_mcmgFields = a})
 
 -- | Data format for the response.
-mcmgAlt :: Lens' ManagementCustomMetricsGet' Text
+mcmgAlt :: Lens' ManagementCustomMetricsGet' Alt
 mcmgAlt = lens _mcmgAlt (\ s a -> s{_mcmgAlt = a})
 
 instance GoogleRequest ManagementCustomMetricsGet'
          where
         type Rs ManagementCustomMetricsGet' = CustomMetric
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementCustomMetricsGet{..}
-          = go _mcmgQuotaUser _mcmgPrettyPrint
+        requestWithRoute r u ManagementCustomMetricsGet'{..}
+          = go _mcmgQuotaUser (Just _mcmgPrettyPrint)
               _mcmgCustomMetricId
               _mcmgWebPropertyId
               _mcmgUserIp
@@ -186,9 +193,9 @@ instance GoogleRequest ManagementCustomMetricsGet'
               _mcmgKey
               _mcmgOauthToken
               _mcmgFields
-              _mcmgAlt
+              (Just _mcmgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomMetricsGetAPI)
+                      (Proxy :: Proxy ManagementCustomMetricsGetResource)
                       r
                       u

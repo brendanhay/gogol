@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,133 +21,148 @@
 -- file.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesTrash@.
-module Drive.Files.Trash
+module Network.Google.Resource.Drive.Files.Trash
     (
     -- * REST Resource
-      FilesTrashAPI
+      FilesTrashResource
 
     -- * Creating a Request
-    , filesTrash
-    , FilesTrash
+    , filesTrash'
+    , FilesTrash'
 
     -- * Request Lenses
-    , ftQuotaUser
-    , ftPrettyPrint
-    , ftUserIp
-    , ftKey
-    , ftFileId
-    , ftOauthToken
-    , ftFields
-    , ftAlt
+    , filQuotaUser
+    , filPrettyPrint
+    , filUserIp
+    , filKey
+    , filFileId
+    , filOauthToken
+    , filFields
+    , filAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesTrash@ which the
--- 'FilesTrash' request conforms to.
-type FilesTrashAPI =
+-- 'FilesTrash'' request conforms to.
+type FilesTrashResource =
      "files" :>
-       Capture "fileId" Text :> "trash" :> Post '[JSON] File
+       Capture "fileId" Text :>
+         "trash" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] File
 
 -- | Moves a file to the trash. The currently authenticated user must own the
 -- file.
 --
--- /See:/ 'filesTrash' smart constructor.
-data FilesTrash = FilesTrash
-    { _ftQuotaUser   :: !(Maybe Text)
-    , _ftPrettyPrint :: !Bool
-    , _ftUserIp      :: !(Maybe Text)
-    , _ftKey         :: !(Maybe Text)
-    , _ftFileId      :: !Text
-    , _ftOauthToken  :: !(Maybe Text)
-    , _ftFields      :: !(Maybe Text)
-    , _ftAlt         :: !Text
+-- /See:/ 'filesTrash'' smart constructor.
+data FilesTrash' = FilesTrash'
+    { _filQuotaUser   :: !(Maybe Text)
+    , _filPrettyPrint :: !Bool
+    , _filUserIp      :: !(Maybe Text)
+    , _filKey         :: !(Maybe Text)
+    , _filFileId      :: !Text
+    , _filOauthToken  :: !(Maybe Text)
+    , _filFields      :: !(Maybe Text)
+    , _filAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesTrash'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ftQuotaUser'
+-- * 'filQuotaUser'
 --
--- * 'ftPrettyPrint'
+-- * 'filPrettyPrint'
 --
--- * 'ftUserIp'
+-- * 'filUserIp'
 --
--- * 'ftKey'
+-- * 'filKey'
 --
--- * 'ftFileId'
+-- * 'filFileId'
 --
--- * 'ftOauthToken'
+-- * 'filOauthToken'
 --
--- * 'ftFields'
+-- * 'filFields'
 --
--- * 'ftAlt'
-filesTrash
+-- * 'filAlt'
+filesTrash'
     :: Text -- ^ 'fileId'
-    -> FilesTrash
-filesTrash pFtFileId_ =
-    FilesTrash
-    { _ftQuotaUser = Nothing
-    , _ftPrettyPrint = True
-    , _ftUserIp = Nothing
-    , _ftKey = Nothing
-    , _ftFileId = pFtFileId_
-    , _ftOauthToken = Nothing
-    , _ftFields = Nothing
-    , _ftAlt = "json"
+    -> FilesTrash'
+filesTrash' pFilFileId_ =
+    FilesTrash'
+    { _filQuotaUser = Nothing
+    , _filPrettyPrint = True
+    , _filUserIp = Nothing
+    , _filKey = Nothing
+    , _filFileId = pFilFileId_
+    , _filOauthToken = Nothing
+    , _filFields = Nothing
+    , _filAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ftQuotaUser :: Lens' FilesTrash' (Maybe Text)
-ftQuotaUser
-  = lens _ftQuotaUser (\ s a -> s{_ftQuotaUser = a})
+filQuotaUser :: Lens' FilesTrash' (Maybe Text)
+filQuotaUser
+  = lens _filQuotaUser (\ s a -> s{_filQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ftPrettyPrint :: Lens' FilesTrash' Bool
-ftPrettyPrint
-  = lens _ftPrettyPrint
-      (\ s a -> s{_ftPrettyPrint = a})
+filPrettyPrint :: Lens' FilesTrash' Bool
+filPrettyPrint
+  = lens _filPrettyPrint
+      (\ s a -> s{_filPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ftUserIp :: Lens' FilesTrash' (Maybe Text)
-ftUserIp = lens _ftUserIp (\ s a -> s{_ftUserIp = a})
+filUserIp :: Lens' FilesTrash' (Maybe Text)
+filUserIp
+  = lens _filUserIp (\ s a -> s{_filUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ftKey :: Lens' FilesTrash' (Maybe Text)
-ftKey = lens _ftKey (\ s a -> s{_ftKey = a})
+filKey :: Lens' FilesTrash' (Maybe Text)
+filKey = lens _filKey (\ s a -> s{_filKey = a})
 
 -- | The ID of the file to trash.
-ftFileId :: Lens' FilesTrash' Text
-ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
+filFileId :: Lens' FilesTrash' Text
+filFileId
+  = lens _filFileId (\ s a -> s{_filFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-ftOauthToken :: Lens' FilesTrash' (Maybe Text)
-ftOauthToken
-  = lens _ftOauthToken (\ s a -> s{_ftOauthToken = a})
+filOauthToken :: Lens' FilesTrash' (Maybe Text)
+filOauthToken
+  = lens _filOauthToken
+      (\ s a -> s{_filOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ftFields :: Lens' FilesTrash' (Maybe Text)
-ftFields = lens _ftFields (\ s a -> s{_ftFields = a})
+filFields :: Lens' FilesTrash' (Maybe Text)
+filFields
+  = lens _filFields (\ s a -> s{_filFields = a})
 
 -- | Data format for the response.
-ftAlt :: Lens' FilesTrash' Text
-ftAlt = lens _ftAlt (\ s a -> s{_ftAlt = a})
+filAlt :: Lens' FilesTrash' Alt
+filAlt = lens _filAlt (\ s a -> s{_filAlt = a})
 
 instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesTrash{..}
-          = go _ftQuotaUser _ftPrettyPrint _ftUserIp _ftKey
-              _ftFileId
-              _ftOauthToken
-              _ftFields
-              _ftAlt
+        requestWithRoute r u FilesTrash'{..}
+          = go _filQuotaUser (Just _filPrettyPrint) _filUserIp
+              _filKey
+              _filFileId
+              _filOauthToken
+              _filFields
+              (Just _filAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesTrashAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesTrashResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all deployments for a given project.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsList@.
-module DeploymentManager.Deployments.List
+module Network.Google.Resource.DeploymentManager.Deployments.List
     (
     -- * REST Resource
-      DeploymentsListAPI
+      DeploymentsListResource
 
     -- * Creating a Request
-    , deploymentsList
-    , DeploymentsList
+    , deploymentsList'
+    , DeploymentsList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerDeploymentsList@ which the
--- 'DeploymentsList' request conforms to.
-type DeploymentsListAPI =
+-- 'DeploymentsList'' request conforms to.
+type DeploymentsListResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] DeploymentsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] DeploymentsListResponse
 
 -- | Lists all deployments for a given project.
 --
--- /See:/ 'deploymentsList' smart constructor.
-data DeploymentsList = DeploymentsList
+-- /See:/ 'deploymentsList'' smart constructor.
+data DeploymentsList' = DeploymentsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlProject     :: !Text
@@ -70,7 +78,7 @@ data DeploymentsList = DeploymentsList
     , _dlOauthToken  :: !(Maybe Text)
     , _dlMaxResults  :: !Word32
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data DeploymentsList = DeploymentsList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-deploymentsList
+deploymentsList'
     :: Text -- ^ 'project'
-    -> DeploymentsList
-deploymentsList pDlProject_ =
-    DeploymentsList
+    -> DeploymentsList'
+deploymentsList' pDlProject_ =
+    DeploymentsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlProject = pDlProject_
@@ -113,7 +121,7 @@ deploymentsList pDlProject_ =
     , _dlOauthToken = Nothing
     , _dlMaxResults = 500
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,23 +189,25 @@ dlFields :: Lens' DeploymentsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DeploymentsList' Text
+dlAlt :: Lens' DeploymentsList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DeploymentsList' where
         type Rs DeploymentsList' = DeploymentsListResponse
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u DeploymentsList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlProject _dlUserIp
+        requestWithRoute r u DeploymentsList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
+              _dlUserIp
               _dlKey
               _dlFilter
               _dlPageToken
               _dlOauthToken
               (Just _dlMaxResults)
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DeploymentsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DeploymentsListResource)
                       r
                       u

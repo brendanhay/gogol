@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,164 @@
 -- | Deletes a sitemap from this site.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsDelete@.
-module Webmasters.Sitemaps.Delete
+module Network.Google.Resource.Webmasters.Sitemaps.Delete
     (
     -- * REST Resource
-      SitemapsDeleteAPI
+      SitemapsDeleteResource
 
     -- * Creating a Request
-    , sitemapsDelete
-    , SitemapsDelete
+    , sitemapsDelete'
+    , SitemapsDelete'
 
     -- * Request Lenses
-    , sdQuotaUser
-    , sdPrettyPrint
-    , sdFeedpath
-    , sdUserIp
-    , sdSiteUrl
-    , sdKey
-    , sdOauthToken
-    , sdFields
-    , sdAlt
+    , sitQuotaUser
+    , sitPrettyPrint
+    , sitFeedpath
+    , sitUserIp
+    , sitSiteUrl
+    , sitKey
+    , sitOauthToken
+    , sitFields
+    , sitAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSitemapsDelete@ which the
--- 'SitemapsDelete' request conforms to.
-type SitemapsDeleteAPI =
+-- 'SitemapsDelete'' request conforms to.
+type SitemapsDeleteResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "sitemaps" :>
-           Capture "feedpath" Text :> Delete '[JSON] ()
+           Capture "feedpath" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a sitemap from this site.
 --
--- /See:/ 'sitemapsDelete' smart constructor.
-data SitemapsDelete = SitemapsDelete
-    { _sdQuotaUser   :: !(Maybe Text)
-    , _sdPrettyPrint :: !Bool
-    , _sdFeedpath    :: !Text
-    , _sdUserIp      :: !(Maybe Text)
-    , _sdSiteUrl     :: !Text
-    , _sdKey         :: !(Maybe Text)
-    , _sdOauthToken  :: !(Maybe Text)
-    , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+-- /See:/ 'sitemapsDelete'' smart constructor.
+data SitemapsDelete' = SitemapsDelete'
+    { _sitQuotaUser   :: !(Maybe Text)
+    , _sitPrettyPrint :: !Bool
+    , _sitFeedpath    :: !Text
+    , _sitUserIp      :: !(Maybe Text)
+    , _sitSiteUrl     :: !Text
+    , _sitKey         :: !(Maybe Text)
+    , _sitOauthToken  :: !(Maybe Text)
+    , _sitFields      :: !(Maybe Text)
+    , _sitAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdQuotaUser'
+-- * 'sitQuotaUser'
 --
--- * 'sdPrettyPrint'
+-- * 'sitPrettyPrint'
 --
--- * 'sdFeedpath'
+-- * 'sitFeedpath'
 --
--- * 'sdUserIp'
+-- * 'sitUserIp'
 --
--- * 'sdSiteUrl'
+-- * 'sitSiteUrl'
 --
--- * 'sdKey'
+-- * 'sitKey'
 --
--- * 'sdOauthToken'
+-- * 'sitOauthToken'
 --
--- * 'sdFields'
+-- * 'sitFields'
 --
--- * 'sdAlt'
-sitemapsDelete
+-- * 'sitAlt'
+sitemapsDelete'
     :: Text -- ^ 'feedpath'
     -> Text -- ^ 'siteUrl'
-    -> SitemapsDelete
-sitemapsDelete pSdFeedpath_ pSdSiteUrl_ =
-    SitemapsDelete
-    { _sdQuotaUser = Nothing
-    , _sdPrettyPrint = True
-    , _sdFeedpath = pSdFeedpath_
-    , _sdUserIp = Nothing
-    , _sdSiteUrl = pSdSiteUrl_
-    , _sdKey = Nothing
-    , _sdOauthToken = Nothing
-    , _sdFields = Nothing
-    , _sdAlt = "json"
+    -> SitemapsDelete'
+sitemapsDelete' pSitFeedpath_ pSitSiteUrl_ =
+    SitemapsDelete'
+    { _sitQuotaUser = Nothing
+    , _sitPrettyPrint = True
+    , _sitFeedpath = pSitFeedpath_
+    , _sitUserIp = Nothing
+    , _sitSiteUrl = pSitSiteUrl_
+    , _sitKey = Nothing
+    , _sitOauthToken = Nothing
+    , _sitFields = Nothing
+    , _sitAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-sdQuotaUser :: Lens' SitemapsDelete' (Maybe Text)
-sdQuotaUser
-  = lens _sdQuotaUser (\ s a -> s{_sdQuotaUser = a})
+sitQuotaUser :: Lens' SitemapsDelete' (Maybe Text)
+sitQuotaUser
+  = lens _sitQuotaUser (\ s a -> s{_sitQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-sdPrettyPrint :: Lens' SitemapsDelete' Bool
-sdPrettyPrint
-  = lens _sdPrettyPrint
-      (\ s a -> s{_sdPrettyPrint = a})
+sitPrettyPrint :: Lens' SitemapsDelete' Bool
+sitPrettyPrint
+  = lens _sitPrettyPrint
+      (\ s a -> s{_sitPrettyPrint = a})
 
 -- | The URL of the actual sitemap. For example:
 -- http:\/\/www.example.com\/sitemap.xml
-sdFeedpath :: Lens' SitemapsDelete' Text
-sdFeedpath
-  = lens _sdFeedpath (\ s a -> s{_sdFeedpath = a})
+sitFeedpath :: Lens' SitemapsDelete' Text
+sitFeedpath
+  = lens _sitFeedpath (\ s a -> s{_sitFeedpath = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' SitemapsDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sitUserIp :: Lens' SitemapsDelete' (Maybe Text)
+sitUserIp
+  = lens _sitUserIp (\ s a -> s{_sitUserIp = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sdSiteUrl :: Lens' SitemapsDelete' Text
-sdSiteUrl
-  = lens _sdSiteUrl (\ s a -> s{_sdSiteUrl = a})
+sitSiteUrl :: Lens' SitemapsDelete' Text
+sitSiteUrl
+  = lens _sitSiteUrl (\ s a -> s{_sitSiteUrl = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SitemapsDelete' (Maybe Text)
-sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
+sitKey :: Lens' SitemapsDelete' (Maybe Text)
+sitKey = lens _sitKey (\ s a -> s{_sitKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' SitemapsDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sitOauthToken :: Lens' SitemapsDelete' (Maybe Text)
+sitOauthToken
+  = lens _sitOauthToken
+      (\ s a -> s{_sitOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-sdFields :: Lens' SitemapsDelete' (Maybe Text)
-sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
+sitFields :: Lens' SitemapsDelete' (Maybe Text)
+sitFields
+  = lens _sitFields (\ s a -> s{_sitFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' SitemapsDelete' Text
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+sitAlt :: Lens' SitemapsDelete' Alt
+sitAlt = lens _sitAlt (\ s a -> s{_sitAlt = a})
 
 instance GoogleRequest SitemapsDelete' where
         type Rs SitemapsDelete' = ()
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitemapsDelete{..}
-          = go _sdQuotaUser _sdPrettyPrint _sdFeedpath
-              _sdUserIp
-              _sdSiteUrl
-              _sdKey
-              _sdOauthToken
-              _sdFields
-              _sdAlt
+        requestWithRoute r u SitemapsDelete'{..}
+          = go _sitQuotaUser (Just _sitPrettyPrint)
+              _sitFeedpath
+              _sitUserIp
+              _sitSiteUrl
+              _sitKey
+              _sitOauthToken
+              _sitFields
+              (Just _sitAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitemapsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SitemapsDeleteResource)
                       r
                       u

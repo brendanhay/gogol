@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUnlock@.
-module Games.Achievements.Unlock
+module Network.Google.Resource.Games.Achievements.Unlock
     (
     -- * REST Resource
-      AchievementsUnlockAPI
+      AchievementsUnlockResource
 
     -- * Creating a Request
-    , achievementsUnlock
-    , AchievementsUnlock
+    , achievementsUnlock'
+    , AchievementsUnlock'
 
     -- * Request Lenses
     , auQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsUnlock@ which the
--- 'AchievementsUnlock' request conforms to.
-type AchievementsUnlockAPI =
+-- 'AchievementsUnlock'' request conforms to.
+type AchievementsUnlockResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         "unlock" :> Post '[JSON] AchievementUnlockResponse
+         "unlock" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 --
--- /See:/ 'achievementsUnlock' smart constructor.
-data AchievementsUnlock = AchievementsUnlock
+-- /See:/ 'achievementsUnlock'' smart constructor.
+data AchievementsUnlock' = AchievementsUnlock'
     { _auQuotaUser     :: !(Maybe Text)
     , _auPrettyPrint   :: !Bool
     , _auAchievementId :: !Text
@@ -60,7 +69,7 @@ data AchievementsUnlock = AchievementsUnlock
     , _auKey           :: !(Maybe Text)
     , _auOauthToken    :: !(Maybe Text)
     , _auFields        :: !(Maybe Text)
-    , _auAlt           :: !Text
+    , _auAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUnlock'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data AchievementsUnlock = AchievementsUnlock
 -- * 'auFields'
 --
 -- * 'auAlt'
-achievementsUnlock
+achievementsUnlock'
     :: Text -- ^ 'achievementId'
-    -> AchievementsUnlock
-achievementsUnlock pAuAchievementId_ =
-    AchievementsUnlock
+    -> AchievementsUnlock'
+achievementsUnlock' pAuAchievementId_ =
+    AchievementsUnlock'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auAchievementId = pAuAchievementId_
@@ -94,7 +103,7 @@ achievementsUnlock pAuAchievementId_ =
     , _auKey = Nothing
     , _auOauthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = "json"
+    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,22 +146,23 @@ auFields :: Lens' AchievementsUnlock' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
 -- | Data format for the response.
-auAlt :: Lens' AchievementsUnlock' Text
+auAlt :: Lens' AchievementsUnlock' Alt
 auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
 
 instance GoogleRequest AchievementsUnlock' where
         type Rs AchievementsUnlock' =
              AchievementUnlockResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsUnlock{..}
-          = go _auQuotaUser _auPrettyPrint _auAchievementId
+        requestWithRoute r u AchievementsUnlock'{..}
+          = go _auQuotaUser (Just _auPrettyPrint)
+              _auAchievementId
               _auUserIp
               _auKey
               _auOauthToken
               _auFields
-              _auAlt
+              (Just _auAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsUnlockAPI)
+                      (Proxy :: Proxy AchievementsUnlockResource)
                       r
                       u

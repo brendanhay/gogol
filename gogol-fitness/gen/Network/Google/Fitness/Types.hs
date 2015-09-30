@@ -17,6 +17,9 @@ module Network.Google.Fitness.Types
     -- * Service URL
       fitnessURL
 
+    -- * AggregateBucketType
+    , AggregateBucketType (..)
+
     -- * Application
     , Application
     , application
@@ -44,6 +47,9 @@ module Network.Google.Fitness.Types
     , dPoint
     , dMinStartTimeNs
     , dMaxEndTimeNs
+
+    -- * DataSourceType
+    , DataSourceType (..)
 
     -- * AggregateRequest
     , AggregateRequest
@@ -153,6 +159,9 @@ module Network.Google.Fitness.Types
     , dtField
     , dtName
 
+    -- * DeviceType
+    , DeviceType (..)
+
     -- * BucketByTime
     , BucketByTime
     , bucketByTime
@@ -170,6 +179,12 @@ module Network.Google.Fitness.Types
     , sId
     , sStartTimeMillis
     , sDescription
+
+    -- * DataTypeFieldFormat
+    , DataTypeFieldFormat (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Fitness.Types.Product
@@ -177,7 +192,7 @@ import           Network.Google.Fitness.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Fitness.
-fitnessURL :: BaseURL
+fitnessURL :: BaseUrl
 fitnessURL
   = BaseUrl Https
       "https://www.googleapis.com/fitness/v1/users/"

@@ -24,6 +24,9 @@ module Network.Google.AppsActivity.Types
     , pId
     , pTitle
 
+    -- * EventPrimaryEventType
+    , EventPrimaryEventType (..)
+
     -- * Photo
     , Photo
     , photo
@@ -42,17 +45,29 @@ module Network.Google.AppsActivity.Types
     , eTarget
     , eMove
 
+    -- * PermissionRole
+    , PermissionRole (..)
+
     -- * ListActivitiesResponse
     , ListActivitiesResponse
     , listActivitiesResponse
     , larNextPageToken
     , larActivities
 
+    -- * EventAdditionalEventTypes
+    , EventAdditionalEventTypes (..)
+
+    -- * AppsactivityActivitiesListGroupingStrategy
+    , AppsactivityActivitiesListGroupingStrategy (..)
+
     -- * PermissionChange
     , PermissionChange
     , permissionChange
     , pcAddedPermissions
     , pcRemovedPermissions
+
+    -- * PermissionType
+    , PermissionType (..)
 
     -- * User
     , User
@@ -82,6 +97,9 @@ module Network.Google.AppsActivity.Types
     , pType
     , pPermissionId
 
+    -- * Alt
+    , Alt (..)
+
     -- * Move
     , Move
     , move
@@ -101,7 +119,7 @@ import           Network.Google.AppsActivity.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Apps Activity API.
-appsActivityURL :: BaseURL
+appsActivityURL :: BaseUrl
 appsActivityURL
   = BaseUrl Https
       "https://www.googleapis.com/appsactivity/v1/"

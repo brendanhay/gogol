@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the information of a zonal resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsGet@.
-module Resourceviews.ZoneViews.Get
+module Network.Google.Resource.Resourceviews.ZoneViews.Get
     (
     -- * REST Resource
-      ZoneViewsGetAPI
+      ZoneViewsGetResource
 
     -- * Creating a Request
-    , zoneViewsGet
-    , ZoneViewsGet
+    , zoneViewsGet'
+    , ZoneViewsGet'
 
     -- * Request Lenses
     , zvgQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsGet@ which the
--- 'ZoneViewsGet' request conforms to.
-type ZoneViewsGetAPI =
+-- 'ZoneViewsGet'' request conforms to.
+type ZoneViewsGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "resourceViews" :>
              Capture "resourceView" Text :>
-               Get '[JSON] ResourceView
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ResourceView
 
 -- | Get the information of a zonal resource view.
 --
--- /See:/ 'zoneViewsGet' smart constructor.
-data ZoneViewsGet = ZoneViewsGet
+-- /See:/ 'zoneViewsGet'' smart constructor.
+data ZoneViewsGet' = ZoneViewsGet'
     { _zvgQuotaUser    :: !(Maybe Text)
     , _zvgPrettyPrint  :: !Bool
     , _zvgResourceView :: !Text
@@ -67,7 +74,7 @@ data ZoneViewsGet = ZoneViewsGet
     , _zvgKey          :: !(Maybe Text)
     , _zvgOauthToken   :: !(Maybe Text)
     , _zvgFields       :: !(Maybe Text)
-    , _zvgAlt          :: !Text
+    , _zvgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data ZoneViewsGet = ZoneViewsGet
 -- * 'zvgFields'
 --
 -- * 'zvgAlt'
-zoneViewsGet
+zoneViewsGet'
     :: Text -- ^ 'resourceView'
     -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsGet
-zoneViewsGet pZvgResourceView_ pZvgProject_ pZvgZone_ =
-    ZoneViewsGet
+    -> ZoneViewsGet'
+zoneViewsGet' pZvgResourceView_ pZvgProject_ pZvgZone_ =
+    ZoneViewsGet'
     { _zvgQuotaUser = Nothing
     , _zvgPrettyPrint = True
     , _zvgResourceView = pZvgResourceView_
@@ -109,7 +116,7 @@ zoneViewsGet pZvgResourceView_ pZvgProject_ pZvgZone_ =
     , _zvgKey = Nothing
     , _zvgOauthToken = Nothing
     , _zvgFields = Nothing
-    , _zvgAlt = "json"
+    , _zvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,21 +171,24 @@ zvgFields
   = lens _zvgFields (\ s a -> s{_zvgFields = a})
 
 -- | Data format for the response.
-zvgAlt :: Lens' ZoneViewsGet' Text
+zvgAlt :: Lens' ZoneViewsGet' Alt
 zvgAlt = lens _zvgAlt (\ s a -> s{_zvgAlt = a})
 
 instance GoogleRequest ZoneViewsGet' where
         type Rs ZoneViewsGet' = ResourceView
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsGet{..}
-          = go _zvgQuotaUser _zvgPrettyPrint _zvgResourceView
+        requestWithRoute r u ZoneViewsGet'{..}
+          = go _zvgQuotaUser (Just _zvgPrettyPrint)
+              _zvgResourceView
               _zvgProject
               _zvgUserIp
               _zvgZone
               _zvgKey
               _zvgOauthToken
               _zvgFields
-              _zvgAlt
+              (Just _zvgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZoneViewsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ZoneViewsGetResource)
+                      r
                       u

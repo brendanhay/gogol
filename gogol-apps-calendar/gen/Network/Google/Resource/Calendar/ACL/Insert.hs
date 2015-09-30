@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates an access control rule.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLInsert@.
-module Calendar.ACL.Insert
+module Network.Google.Resource.Calendar.ACL.Insert
     (
     -- * REST Resource
-      AclInsertAPI
+      AclInsertResource
 
     -- * Creating a Request
-    , aCLInsert
-    , ACLInsert
+    , aCLInsert'
+    , ACLInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLInsert@ which the
--- 'ACLInsert' request conforms to.
-type AclInsertAPI =
+-- 'ACLInsert'' request conforms to.
+type AclInsertResource =
      "calendars" :>
        Capture "calendarId" Text :>
-         "acl" :> Post '[JSON] ACLRule
+         "acl" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --
--- /See:/ 'aCLInsert' smart constructor.
-data ACLInsert = ACLInsert
+-- /See:/ 'aCLInsert'' smart constructor.
+data ACLInsert' = ACLInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiCalendarId  :: !Text
     , _aiPrettyPrint :: !Bool
@@ -60,7 +68,7 @@ data ACLInsert = ACLInsert
     , _aiKey         :: !(Maybe Text)
     , _aiOauthToken  :: !(Maybe Text)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ACLInsert = ACLInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-aCLInsert
+aCLInsert'
     :: Text -- ^ 'calendarId'
-    -> ACLInsert
-aCLInsert pAiCalendarId_ =
-    ACLInsert
+    -> ACLInsert'
+aCLInsert' pAiCalendarId_ =
+    ACLInsert'
     { _aiQuotaUser = Nothing
     , _aiCalendarId = pAiCalendarId_
     , _aiPrettyPrint = True
@@ -94,7 +102,7 @@ aCLInsert pAiCalendarId_ =
     , _aiKey = Nothing
     , _aiOauthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,18 +146,20 @@ aiFields :: Lens' ACLInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' ACLInsert' Text
+aiAlt :: Lens' ACLInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLInsert{..}
-          = go _aiQuotaUser _aiCalendarId _aiPrettyPrint
+        requestWithRoute r u ACLInsert'{..}
+          = go _aiQuotaUser _aiCalendarId (Just _aiPrettyPrint)
               _aiUserIp
               _aiKey
               _aiOauthToken
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclInsertAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclInsertResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- omitting the publisherId query parameter.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanPublishersGet@.
-module Gan.Publishers.Get
+module Network.Google.Resource.Gan.Publishers.Get
     (
     -- * REST Resource
-      PublishersGetAPI
+      PublishersGetResource
 
     -- * Creating a Request
-    , publishersGet
-    , PublishersGet
+    , publishersGet'
+    , PublishersGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -48,31 +49,37 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanPublishersGet@ which the
--- 'PublishersGet' request conforms to.
-type PublishersGetAPI =
-     Capture "role" Text :>
+-- 'PublishersGet'' request conforms to.
+type PublishersGetResource =
+     Capture "role" GanPublishersGetRole :>
        Capture "roleId" Text :>
          "publisher" :>
-           QueryParam "publisherId" Text :>
-             Get '[JSON] Publisher
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "publisherId" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Publisher
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only advertisers can look up
 -- publishers. Publishers can request information about themselves by
 -- omitting the publisherId query parameter.
 --
--- /See:/ 'publishersGet' smart constructor.
-data PublishersGet = PublishersGet
+-- /See:/ 'publishersGet'' smart constructor.
+data PublishersGet' = PublishersGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgUserIp      :: !(Maybe Text)
     , _pgRoleId      :: !Text
-    , _pgRole        :: !Text
+    , _pgRole        :: !GanPublishersGetRole
     , _pgKey         :: !(Maybe Text)
     , _pgOauthToken  :: !(Maybe Text)
     , _pgPublisherId :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersGet'' with the minimum fields required to make a request.
@@ -98,12 +105,12 @@ data PublishersGet = PublishersGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-publishersGet
+publishersGet'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> PublishersGet
-publishersGet pPgRoleId_ pPgRole_ =
-    PublishersGet
+    -> GanPublishersGetRole -- ^ 'role'
+    -> PublishersGet'
+publishersGet' pPgRoleId_ pPgRole_ =
+    PublishersGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgUserIp = Nothing
@@ -113,7 +120,7 @@ publishersGet pPgRoleId_ pPgRole_ =
     , _pgOauthToken = Nothing
     , _pgPublisherId = Nothing
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +147,7 @@ pgRoleId = lens _pgRoleId (\ s a -> s{_pgRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-pgRole :: Lens' PublishersGet' Text
+pgRole :: Lens' PublishersGet' GanPublishersGetRole
 pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -165,20 +172,23 @@ pgFields :: Lens' PublishersGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' PublishersGet' Text
+pgAlt :: Lens' PublishersGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u PublishersGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgUserIp _pgRoleId
+        requestWithRoute r u PublishersGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+              _pgRoleId
               _pgRole
               _pgKey
               _pgOauthToken
               _pgPublisherId
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PublishersGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PublishersGetResource)
+                      r
                       u

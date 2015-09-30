@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineInsert@.
-module Mirror.Timeline.Insert
+module Network.Google.Resource.Mirror.Timeline.Insert
     (
     -- * REST Resource
-      TimelineInsertAPI
+      TimelineInsertResource
 
     -- * Creating a Request
-    , timelineInsert
-    , TimelineInsert
+    , timelineInsert'
+    , TimelineInsert'
 
     -- * Request Lenses
     , tiQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineInsert@ which the
--- 'TimelineInsert' request conforms to.
-type TimelineInsertAPI =
-     "timeline" :> Post '[JSON] TimelineItem
+-- 'TimelineInsert'' request conforms to.
+type TimelineInsertResource =
+     "timeline" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
 --
--- /See:/ 'timelineInsert' smart constructor.
-data TimelineInsert = TimelineInsert
+-- /See:/ 'timelineInsert'' smart constructor.
+data TimelineInsert' = TimelineInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiUserIp      :: !(Maybe Text)
     , _tiKey         :: !(Maybe Text)
     , _tiOauthToken  :: !(Maybe Text)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data TimelineInsert = TimelineInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-timelineInsert
-    :: TimelineInsert
-timelineInsert =
-    TimelineInsert
+timelineInsert'
+    :: TimelineInsert'
+timelineInsert' =
+    TimelineInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiUserIp = Nothing
     , _tiKey = Nothing
     , _tiOauthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,18 +131,20 @@ tiFields :: Lens' TimelineInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TimelineInsert' Text
+tiAlt :: Lens' TimelineInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineInsert{..}
-          = go _tiQuotaUser _tiPrettyPrint _tiUserIp _tiKey
+        requestWithRoute r u TimelineInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+              _tiKey
               _tiOauthToken
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelineInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelineInsertResource)
                       r
                       u

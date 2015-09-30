@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsPatch@.
-module Storage.Objects.Patch
+module Network.Google.Resource.Storage.Objects.Patch
     (
     -- * REST Resource
-      ObjectsPatchAPI
+      ObjectsPatchResource
 
     -- * Creating a Request
-    , objectsPatch
-    , ObjectsPatch
+    , objectsPatch'
+    , ObjectsPatch'
 
     -- * Request Lenses
     , opQuotaUser
@@ -51,25 +52,34 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsPatch@ which the
--- 'ObjectsPatch' request conforms to.
-type ObjectsPatchAPI =
+-- 'ObjectsPatch'' request conforms to.
+type ObjectsPatchResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
            Capture "object" Text :>
-             QueryParam "ifMetagenerationMatch" Word64 :>
-               QueryParam "ifGenerationNotMatch" Word64 :>
-                 QueryParam "ifGenerationMatch" Word64 :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" Text :>
-                       QueryParam "generation" Word64 :>
-                         Patch '[JSON] Object
+             QueryParam "quotaUser" Text :>
+               QueryParam "ifMetagenerationMatch" Word64 :>
+                 QueryParam "ifGenerationNotMatch" Word64 :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "ifGenerationMatch" Word64 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Word64 :>
+                             QueryParam "projection"
+                               StorageObjectsPatchProjection
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "generation" Word64 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Patch '[JSON] Object
 
 -- | Updates a data blob\'s associated metadata. This method supports patch
 -- semantics.
 --
--- /See:/ 'objectsPatch' smart constructor.
-data ObjectsPatch = ObjectsPatch
+-- /See:/ 'objectsPatch'' smart constructor.
+data ObjectsPatch' = ObjectsPatch'
     { _opQuotaUser                :: !(Maybe Text)
     , _opIfMetagenerationMatch    :: !(Maybe Word64)
     , _opIfGenerationNotMatch     :: !(Maybe Word64)
@@ -80,11 +90,11 @@ data ObjectsPatch = ObjectsPatch
     , _opKey                      :: !(Maybe Text)
     , _opIfMetagenerationNotMatch :: !(Maybe Word64)
     , _opObject                   :: !Text
-    , _opProjection               :: !(Maybe Text)
+    , _opProjection               :: !(Maybe StorageObjectsPatchProjection)
     , _opOauthToken               :: !(Maybe Text)
     , _opGeneration               :: !(Maybe Word64)
     , _opFields                   :: !(Maybe Text)
-    , _opAlt                      :: !Text
+    , _opAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch'' with the minimum fields required to make a request.
@@ -120,12 +130,12 @@ data ObjectsPatch = ObjectsPatch
 -- * 'opFields'
 --
 -- * 'opAlt'
-objectsPatch
+objectsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
-    -> ObjectsPatch
-objectsPatch pOpBucket_ pOpObject_ =
-    ObjectsPatch
+    -> ObjectsPatch'
+objectsPatch' pOpBucket_ pOpObject_ =
+    ObjectsPatch'
     { _opQuotaUser = Nothing
     , _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
@@ -140,7 +150,7 @@ objectsPatch pOpBucket_ pOpObject_ =
     , _opOauthToken = Nothing
     , _opGeneration = Nothing
     , _opFields = Nothing
-    , _opAlt = "json"
+    , _opAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -204,7 +214,7 @@ opObject :: Lens' ObjectsPatch' Text
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
 -- | Set of properties to return. Defaults to full.
-opProjection :: Lens' ObjectsPatch' (Maybe Text)
+opProjection :: Lens' ObjectsPatch' (Maybe StorageObjectsPatchProjection)
 opProjection
   = lens _opProjection (\ s a -> s{_opProjection = a})
 
@@ -224,16 +234,16 @@ opFields :: Lens' ObjectsPatch' (Maybe Text)
 opFields = lens _opFields (\ s a -> s{_opFields = a})
 
 -- | Data format for the response.
-opAlt :: Lens' ObjectsPatch' Text
+opAlt :: Lens' ObjectsPatch' Alt
 opAlt = lens _opAlt (\ s a -> s{_opAlt = a})
 
 instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsPatch{..}
+        requestWithRoute r u ObjectsPatch'{..}
           = go _opQuotaUser _opIfMetagenerationMatch
               _opIfGenerationNotMatch
-              _opPrettyPrint
+              (Just _opPrettyPrint)
               _opIfGenerationMatch
               _opUserIp
               _opBucket
@@ -244,7 +254,9 @@ instance GoogleRequest ObjectsPatch' where
               _opOauthToken
               _opGeneration
               _opFields
-              _opAlt
+              (Just _opAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsPatchResource)
+                      r
                       u

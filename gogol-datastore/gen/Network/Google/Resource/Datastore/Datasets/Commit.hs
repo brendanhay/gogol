@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- entities.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsCommit@.
-module Datastore.Datasets.Commit
+module Network.Google.Resource.Datastore.Datasets.Commit
     (
     -- * REST Resource
-      DatasetsCommitAPI
+      DatasetsCommitResource
 
     -- * Creating a Request
-    , datasetsCommit
-    , DatasetsCommit
+    , datasetsCommit'
+    , DatasetsCommit'
 
     -- * Request Lenses
     , dcQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsCommit@ which the
--- 'DatasetsCommit' request conforms to.
-type DatasetsCommitAPI =
+-- 'DatasetsCommit'' request conforms to.
+type DatasetsCommitResource =
      Capture "datasetId" Text :>
-       "commit" :> Post '[JSON] CommitResponse
+       "commit" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] CommitResponse
 
 -- | Commit a transaction, optionally creating, deleting or modifying some
 -- entities.
 --
--- /See:/ 'datasetsCommit' smart constructor.
-data DatasetsCommit = DatasetsCommit
+-- /See:/ 'datasetsCommit'' smart constructor.
+data DatasetsCommit' = DatasetsCommit'
     { _dcQuotaUser   :: !(Maybe Text)
     , _dcPrettyPrint :: !Bool
     , _dcUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data DatasetsCommit = DatasetsCommit
     , _dcDatasetId   :: !Text
     , _dcOauthToken  :: !(Maybe Text)
     , _dcFields      :: !(Maybe Text)
-    , _dcAlt         :: !Text
+    , _dcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCommit'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data DatasetsCommit = DatasetsCommit
 -- * 'dcFields'
 --
 -- * 'dcAlt'
-datasetsCommit
+datasetsCommit'
     :: Text -- ^ 'datasetId'
-    -> DatasetsCommit
-datasetsCommit pDcDatasetId_ =
-    DatasetsCommit
+    -> DatasetsCommit'
+datasetsCommit' pDcDatasetId_ =
+    DatasetsCommit'
     { _dcQuotaUser = Nothing
     , _dcPrettyPrint = True
     , _dcUserIp = Nothing
@@ -95,7 +103,7 @@ datasetsCommit pDcDatasetId_ =
     , _dcDatasetId = pDcDatasetId_
     , _dcOauthToken = Nothing
     , _dcFields = Nothing
-    , _dcAlt = "proto"
+    , _dcAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +145,21 @@ dcFields :: Lens' DatasetsCommit' (Maybe Text)
 dcFields = lens _dcFields (\ s a -> s{_dcFields = a})
 
 -- | Data format for the response.
-dcAlt :: Lens' DatasetsCommit' Text
+dcAlt :: Lens' DatasetsCommit' Alt
 dcAlt = lens _dcAlt (\ s a -> s{_dcAlt = a})
 
 instance GoogleRequest DatasetsCommit' where
         type Rs DatasetsCommit' = CommitResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsCommit{..}
-          = go _dcQuotaUser _dcPrettyPrint _dcUserIp _dcKey
+        requestWithRoute r u DatasetsCommit'{..}
+          = go _dcQuotaUser (Just _dcPrettyPrint) _dcUserIp
+              _dcKey
               _dcDatasetId
               _dcOauthToken
               _dcFields
-              _dcAlt
+              (Just _dcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsCommitAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsCommitResource)
                       r
                       u

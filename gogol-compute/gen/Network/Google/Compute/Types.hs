@@ -26,21 +26,59 @@ module Network.Google.Compute.Types
     , iglSelfLink
     , iglId
 
+    -- * DiskTypeAggregatedListItems
+    , DiskTypeAggregatedListItems
+    , diskTypeAggregatedListItems
+
+    -- * InstancesScopedListWarning
+    , InstancesScopedListWarning
+    , instancesScopedListWarning
+    , islwData
+    , islwCode
+    , islwMessage
+
     -- * InstanceGroupManagersSetInstanceTemplateRequest
     , InstanceGroupManagersSetInstanceTemplateRequest
     , instanceGroupManagersSetInstanceTemplateRequest
     , igmsitrInstanceTemplate
+
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- * MachineTypeAggregatedListItems
+    , MachineTypeAggregatedListItems
+    , machineTypeAggregatedListItems
 
     -- * InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
 
+    -- * AutoscalerAggregatedListItems
+    , AutoscalerAggregatedListItems
+    , autoscalerAggregatedListItems
+
+    -- * AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
+    , AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType (..)
+
     -- * AddressesScopedList
     , AddressesScopedList
     , addressesScopedList
     , aslAddresses
     , aslWarning
+
+    -- * InstancesScopedListWarningData
+    , InstancesScopedListWarningData
+    , instancesScopedListWarningData
+    , islwdValue
+    , islwdKey
+
+    -- * SchedulingOnHostMaintenance
+    , SchedulingOnHostMaintenance (..)
 
     -- * Snapshot
     , Snapshot
@@ -76,6 +114,24 @@ module Network.Google.Compute.Types
     , dsReplacement
     , dsObsolete
     , dsDeprecated
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
+
+    -- * InstanceGroupAggregatedListItems
+    , InstanceGroupAggregatedListItems
+    , instanceGroupAggregatedListItems
+
+    -- * MachineTypeScratchDisks
+    , MachineTypeScratchDisks
+    , machineTypeScratchDisks
+    , mtsdDiskGb
+
+    -- * BackendServiceProtocol
+    , BackendServiceProtocol (..)
 
     -- * OperationList
     , OperationList
@@ -114,6 +170,9 @@ module Network.Google.Compute.Types
     , dlItems
     , dlSelfLink
     , dlId
+
+    -- * AttachedDiskType
+    , AttachedDiskType (..)
 
     -- * TargetPoolsAddInstanceRequest
     , TargetPoolsAddInstanceRequest
@@ -248,6 +307,9 @@ module Network.Google.Compute.Types
     , npName
     , npPort
 
+    -- * ImageSourceType
+    , ImageSourceType (..)
+
     -- * TargetPoolsScopedList
     , TargetPoolsScopedList
     , targetPoolsScopedList
@@ -326,6 +388,12 @@ module Network.Google.Compute.Types
     , tpDescription
     , tpHealthChecks
 
+    -- * DisksScopedListWarningCode
+    , DisksScopedListWarningCode (..)
+
+    -- * TargetPoolsScopedListWarningCode
+    , TargetPoolsScopedListWarningCode (..)
+
     -- * Disk
     , Disk
     , disk
@@ -348,6 +416,12 @@ module Network.Google.Compute.Types
     , dType
     , dDescription
     , dSourceSnapshot
+
+    -- * VPNTunnelsScopedListWarningData
+    , VPNTunnelsScopedListWarningData
+    , vPNTunnelsScopedListWarningData
+    , vtslwdValue
+    , vtslwdKey
 
     -- * AutoscalingPolicyLoadBalancingUtilization
     , AutoscalingPolicyLoadBalancingUtilization
@@ -372,6 +446,15 @@ module Network.Google.Compute.Types
     , igmDescription
     , igmInstanceGroup
 
+    -- * TargetVPNGatewayStatus
+    , TargetVPNGatewayStatus (..)
+
+    -- * InstanceGroupManagersScopedListWarningCode
+    , InstanceGroupManagersScopedListWarningCode (..)
+
+    -- * ForwardingRulesScopedListWarningCode
+    , ForwardingRulesScopedListWarningCode (..)
+
     -- * ForwardingRule
     , ForwardingRule
     , forwardingRule
@@ -392,6 +475,13 @@ module Network.Google.Compute.Types
     , diskMoveRequest
     , dmrTargetDisk
     , dmrDestinationZone
+
+    -- * VPNTunnelsScopedListWarning
+    , VPNTunnelsScopedListWarning
+    , vPNTunnelsScopedListWarning
+    , vtslwData
+    , vtslwCode
+    , vtslwMessage
 
     -- * Operation
     , Operation
@@ -433,6 +523,9 @@ module Network.Google.Compute.Types
     , pDescription
     , pCommonInstanceMetadata
 
+    -- * OperationsScopedListWarningCode
+    , OperationsScopedListWarningCode (..)
+
     -- * URLMapList
     , URLMapList
     , uRLMapList
@@ -447,6 +540,13 @@ module Network.Google.Compute.Types
     , targetPoolsRemoveInstanceRequest
     , tprirInstances
 
+    -- * RouteWarnings
+    , RouteWarnings
+    , routeWarnings
+    , rwData
+    , rwCode
+    , rwMessage
+
     -- * InstanceProperties
     , InstanceProperties
     , instanceProperties
@@ -459,6 +559,50 @@ module Network.Google.Compute.Types
     , ipCanIpForward
     , ipDescription
     , ipTags
+
+    -- * TargetInstancesScopedListWarningCode
+    , TargetInstancesScopedListWarningCode (..)
+
+    -- * SnapshotStorageBytesStatus
+    , SnapshotStorageBytesStatus (..)
+
+    -- * DiskTypesScopedListWarning
+    , DiskTypesScopedListWarning
+    , diskTypesScopedListWarning
+    , dtslwData
+    , dtslwCode
+    , dtslwMessage
+
+    -- * RouteWarningsData
+    , RouteWarningsData
+    , routeWarningsData
+    , rwdValue
+    , rwdKey
+
+    -- * InstanceAggregatedListItems
+    , InstanceAggregatedListItems
+    , instanceAggregatedListItems
+
+    -- * MachineTypesScopedListWarning
+    , MachineTypesScopedListWarning
+    , machineTypesScopedListWarning
+    , mtslwData
+    , mtslwCode
+    , mtslwMessage
+
+    -- * MachineTypesScopedListWarningData
+    , MachineTypesScopedListWarningData
+    , machineTypesScopedListWarningData
+    , mtslwdValue
+    , mtslwdKey
+
+    -- * ManagedInstanceLastAttemptErrors
+    , ManagedInstanceLastAttemptErrors
+    , managedInstanceLastAttemptErrors
+    , milaeErrors
+
+    -- * SnapshotStatus
+    , SnapshotStatus (..)
 
     -- * TargetPoolInstanceHealth
     , TargetPoolInstanceHealth
@@ -479,6 +623,19 @@ module Network.Google.Compute.Types
     , tiDescription
     , tiInstance
 
+    -- * AutoscalersScopedListWarning
+    , AutoscalersScopedListWarning
+    , autoscalersScopedListWarning
+    , aslwData
+    , aslwCode
+    , aslwMessage
+
+    -- * DiskTypesScopedListWarningData
+    , DiskTypesScopedListWarningData
+    , diskTypesScopedListWarningData
+    , dtslwdValue
+    , dtslwdKey
+
     -- * InstanceGroupManagersListManagedInstancesResponse
     , InstanceGroupManagersListManagedInstancesResponse
     , instanceGroupManagersListManagedInstancesResponse
@@ -488,6 +645,12 @@ module Network.Google.Compute.Types
     , InstanceGroupsRemoveInstancesRequest
     , instanceGroupsRemoveInstancesRequest
     , igrirInstances
+
+    -- * AutoscalersScopedListWarningData
+    , AutoscalersScopedListWarningData
+    , autoscalersScopedListWarningData
+    , aslwdValue
+    , aslwdKey
 
     -- * AttachedDiskInitializeParams
     , AttachedDiskInitializeParams
@@ -505,6 +668,9 @@ module Network.Google.Compute.Types
     , niNetworkIP
     , niAccessConfigs
 
+    -- * TargetInstanceNATPolicy
+    , TargetInstanceNATPolicy (..)
+
     -- * InstanceTemplateList
     , InstanceTemplateList
     , instanceTemplateList
@@ -519,6 +685,12 @@ module Network.Google.Compute.Types
     , targetPoolsRemoveHealthCheckRequest
     , tprhcrHealthChecks
 
+    -- * ManagedInstanceCurrentAction
+    , ManagedInstanceCurrentAction (..)
+
+    -- * ImageStatus
+    , ImageStatus (..)
+
     -- * RouteList
     , RouteList
     , routeList
@@ -528,6 +700,12 @@ module Network.Google.Compute.Types
     , rlSelfLink
     , rlId
 
+    -- * DeprecationStatusState
+    , DeprecationStatusState (..)
+
+    -- * AddressesScopedListWarningCode
+    , AddressesScopedListWarningCode (..)
+
     -- * TargetVPNGatewayList
     , TargetVPNGatewayList
     , targetVPNGatewayList
@@ -536,6 +714,9 @@ module Network.Google.Compute.Types
     , tvglItems
     , tvglSelfLink
     , tvglId
+
+    -- * HealthStatusHealthState
+    , HealthStatusHealthState (..)
 
     -- * Address
     , Address
@@ -550,6 +731,15 @@ module Network.Google.Compute.Types
     , aId
     , aRegion
     , aDescription
+
+    -- * AddressesScopedListWarningData
+    , AddressesScopedListWarningData
+    , addressesScopedListWarningData
+    , aValue
+    , aKey
+
+    -- * AccessConfigType
+    , AccessConfigType (..)
 
     -- * InstanceAggregatedList
     , InstanceAggregatedList
@@ -580,6 +770,13 @@ module Network.Google.Compute.Types
     , zDescription
     , zDeprecated
 
+    -- * ImageRawDisk
+    , ImageRawDisk
+    , imageRawDisk
+    , irdContainerType
+    , irdSource
+    , irdSha1Checksum
+
     -- * InstanceGroupManagersRecreateInstancesRequest
     , InstanceGroupManagersRecreateInstancesRequest
     , instanceGroupManagersRecreateInstancesRequest
@@ -596,6 +793,32 @@ module Network.Google.Compute.Types
     , nId
     , nGatewayIPv4
     , nDescription
+
+    -- * FirewallAllowed
+    , FirewallAllowed
+    , firewallAllowed
+    , faIPProtocol
+    , faPorts
+
+    -- * AddressesScopedListWarning
+    , AddressesScopedListWarning
+    , addressesScopedListWarning
+    , aData
+    , aCode
+    , aMessage
+
+    -- * TargetInstanceAggregatedListItems
+    , TargetInstanceAggregatedListItems
+    , targetInstanceAggregatedListItems
+
+    -- * DiskStatus
+    , DiskStatus (..)
+
+    -- * ManagedInstanceInstanceStatus
+    , ManagedInstanceInstanceStatus (..)
+
+    -- * OperationStatus
+    , OperationStatus (..)
 
     -- * Route
     , Route
@@ -627,6 +850,9 @@ module Network.Google.Compute.Types
     , itId
     , itDescription
     , itProperties
+
+    -- * TargetVPNGatewaysScopedListWarningCode
+    , TargetVPNGatewaysScopedListWarningCode (..)
 
     -- * HealthCheckReference
     , HealthCheckReference
@@ -662,11 +888,22 @@ module Network.Google.Compute.Types
     , tvgDescription
     , tvgForwardingRules
 
+    -- * AttachedDiskMode
+    , AttachedDiskMode (..)
+
+    -- * OperationAggregatedListItems
+    , OperationAggregatedListItems
+    , operationAggregatedListItems
+
     -- * UsageExportLocation
     , UsageExportLocation
     , usageExportLocation
     , uelReportNamePrefix
     , uelBucketName
+
+    -- * DiskAggregatedListItems
+    , DiskAggregatedListItems
+    , diskAggregatedListItems
 
     -- * InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
@@ -696,6 +933,10 @@ module Network.Google.Compute.Types
     , alSelfLink
     , alId
 
+    -- * ForwardingRuleAggregatedListItems
+    , ForwardingRuleAggregatedListItems
+    , forwardingRuleAggregatedListItems
+
     -- * ZoneList
     , ZoneList
     , zoneList
@@ -704,6 +945,12 @@ module Network.Google.Compute.Types
     , zlItems
     , zlSelfLink
     , zlId
+
+    -- * TargetVPNGatewaysScopedListWarningData
+    , TargetVPNGatewaysScopedListWarningData
+    , targetVPNGatewaysScopedListWarningData
+    , tvgslwdValue
+    , tvgslwdKey
 
     -- * InstanceGroupManagerActionsSummary
     , InstanceGroupManagerActionsSummary
@@ -720,6 +967,17 @@ module Network.Google.Compute.Types
     , URLMapReference
     , uRLMapReference
     , umrUrlMap
+
+    -- * VPNTunnelStatus
+    , VPNTunnelStatus (..)
+
+    -- * ZoneMaintenanceWindows
+    , ZoneMaintenanceWindows
+    , zoneMaintenanceWindows
+    , zmwBeginTime
+    , zmwName
+    , zmwEndTime
+    , zmwDescription
 
     -- * TargetPoolsAddHealthCheckRequest
     , TargetPoolsAddHealthCheckRequest
@@ -741,6 +999,17 @@ module Network.Google.Compute.Types
     , saEmail
     , saScopes
 
+    -- * InstanceGroupManagerAggregatedListItems
+    , InstanceGroupManagerAggregatedListItems
+    , instanceGroupManagerAggregatedListItems
+
+    -- * TargetVPNGatewaysScopedListWarning
+    , TargetVPNGatewaysScopedListWarning
+    , targetVPNGatewaysScopedListWarning
+    , tvgslwData
+    , tvgslwCode
+    , tvgslwMessage
+
     -- * Backend
     , Backend
     , backend
@@ -751,6 +1020,16 @@ module Network.Google.Compute.Types
     , bMaxRatePerInstance
     , bDescription
     , bCapacityScaler
+
+    -- * BackendBalancingMode
+    , BackendBalancingMode (..)
+
+    -- * RegionStatus
+    , RegionStatus (..)
+
+    -- * TargetPoolAggregatedListItems
+    , TargetPoolAggregatedListItems
+    , targetPoolAggregatedListItems
 
     -- * TargetInstancesScopedList
     , TargetInstancesScopedList
@@ -818,6 +1097,10 @@ module Network.Google.Compute.Types
     , thttpplSelfLink
     , thttpplId
 
+    -- * AddressAggregatedListItems
+    , AddressAggregatedListItems
+    , addressAggregatedListItems
+
     -- * MachineTypesScopedList
     , MachineTypesScopedList
     , machineTypesScopedList
@@ -839,6 +1122,15 @@ module Network.Google.Compute.Types
     , bsghKind
     , bsghHealthStatus
 
+    -- * QuotaMetric
+    , QuotaMetric (..)
+
+    -- * InstanceGroupsListInstancesRequestInstanceState
+    , InstanceGroupsListInstancesRequestInstanceState (..)
+
+    -- * ZoneStatus
+    , ZoneStatus (..)
+
     -- * DiskTypeAggregatedList
     , DiskTypeAggregatedList
     , diskTypeAggregatedList
@@ -847,6 +1139,9 @@ module Network.Google.Compute.Types
     , dtalItems
     , dtalSelfLink
     , dtalId
+
+    -- * AddressStatus
+    , AddressStatus (..)
 
     -- * HTTPHealthCheck
     , HTTPHealthCheck
@@ -874,6 +1169,12 @@ module Network.Google.Compute.Types
     , apLoadBalancingUtilization
     , apMinNumReplicas
     , apCoolDownPeriodSec
+
+    -- * ForwardingRuleIPProtocol
+    , ForwardingRuleIPProtocol (..)
+
+    -- * AttachedDiskInterface
+    , AttachedDiskInterface (..)
 
     -- * AutoscalersScopedList
     , AutoscalersScopedList
@@ -913,6 +1214,14 @@ module Network.Google.Compute.Types
     , regItems
     , regSelfLink
     , regId
+
+    -- * MachineTypesScopedListWarningCode
+    , MachineTypesScopedListWarningCode (..)
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * MachineType
     , MachineType
@@ -954,6 +1263,16 @@ module Network.Google.Compute.Types
     , umvrTestPassed
     , umvrTestFailures
 
+    -- * AutoscalersScopedListWarningCode
+    , AutoscalersScopedListWarningCode (..)
+
+    -- * TargetInstancesScopedListWarning
+    , TargetInstancesScopedListWarning
+    , targetInstancesScopedListWarning
+    , tislwData
+    , tislwCode
+    , tislwMessage
+
     -- * Autoscaler
     , Autoscaler
     , autoscaler
@@ -967,6 +1286,9 @@ module Network.Google.Compute.Types
     , aaDescription
     , aaTarget
 
+    -- * RouteWarningsCode
+    , RouteWarningsCode (..)
+
     -- * InstanceGroupsListInstances
     , InstanceGroupsListInstances
     , instanceGroupsListInstances
@@ -976,12 +1298,24 @@ module Network.Google.Compute.Types
     , igliSelfLink
     , igliId
 
+    -- * TargetInstancesScopedListWarningData
+    , TargetInstancesScopedListWarningData
+    , targetInstancesScopedListWarningData
+    , tislwdValue
+    , tislwdKey
+
     -- * Metadata
     , Metadata
     , metadata
     , mKind
     , mFingerprint
     , mItems
+
+    -- * DiskTypesScopedListWarningCode
+    , DiskTypesScopedListWarningCode (..)
+
+    -- * InstanceStatus
+    , InstanceStatus (..)
 
     -- * TargetHTTPProxy
     , TargetHTTPProxy
@@ -1008,6 +1342,25 @@ module Network.Google.Compute.Types
     , rrDescription
     , rrDeprecated
 
+    -- * OperationsScopedListWarningData
+    , OperationsScopedListWarningData
+    , operationsScopedListWarningData
+    , oslwdValue
+    , oslwdKey
+
+    -- * DisksScopedListWarningData
+    , DisksScopedListWarningData
+    , disksScopedListWarningData
+    , dslwdValue
+    , dslwdKey
+
+    -- * ForwardingRulesScopedListWarning
+    , ForwardingRulesScopedListWarning
+    , forwardingRulesScopedListWarning
+    , frslwData
+    , frslwCode
+    , frslwMessage
+
     -- * VPNTunnel
     , VPNTunnel
     , vPNTunnel
@@ -1026,12 +1379,47 @@ module Network.Google.Compute.Types
     , vtRegion
     , vtDescription
 
+    -- * VPNTunnelsScopedListWarningCode
+    , VPNTunnelsScopedListWarningCode (..)
+
+    -- * OperationsScopedListWarning
+    , OperationsScopedListWarning
+    , operationsScopedListWarning
+    , oslwData
+    , oslwCode
+    , oslwMessage
+
+    -- * TargetPoolsScopedListWarningData
+    , TargetPoolsScopedListWarningData
+    , targetPoolsScopedListWarningData
+    , tpslwdValue
+    , tpslwdKey
+
     -- * Scheduling
     , Scheduling
     , scheduling
     , sAutomaticRestart
     , sOnHostMaintenance
     , sPreemptible
+
+    -- * ForwardingRulesScopedListWarningData
+    , ForwardingRulesScopedListWarningData
+    , forwardingRulesScopedListWarningData
+    , frslwdValue
+    , frslwdKey
+
+    -- * TargetPoolsScopedListWarning
+    , TargetPoolsScopedListWarning
+    , targetPoolsScopedListWarning
+    , tpslwData
+    , tpslwCode
+    , tpslwMessage
+
+    -- * InstanceGroupManagersScopedListWarningData
+    , InstanceGroupManagersScopedListWarningData
+    , instanceGroupManagersScopedListWarningData
+    , igmslwdValue
+    , igmslwdKey
 
     -- * HealthStatus
     , HealthStatus
@@ -1040,6 +1428,24 @@ module Network.Google.Compute.Types
     , hsHealthState
     , hsPort
     , hsInstance
+
+    -- * TargetVPNGatewayAggregatedListItems
+    , TargetVPNGatewayAggregatedListItems
+    , targetVPNGatewayAggregatedListItems
+
+    -- * DisksScopedListWarning
+    , DisksScopedListWarning
+    , disksScopedListWarning
+    , dslwData
+    , dslwCode
+    , dslwMessage
+
+    -- * InstanceGroupManagersScopedListWarning
+    , InstanceGroupManagersScopedListWarning
+    , instanceGroupManagersScopedListWarning
+    , igmslwData
+    , igmslwCode
+    , igmslwMessage
 
     -- * HTTPHealthCheckList
     , HTTPHealthCheckList
@@ -1070,6 +1476,26 @@ module Network.Google.Compute.Types
     , bslSelfLink
     , bslId
 
+    -- * ManagedInstanceLastAttemptErrorsErrors
+    , ManagedInstanceLastAttemptErrorsErrors
+    , managedInstanceLastAttemptErrorsErrors
+    , milaeeLocation
+    , milaeeCode
+    , milaeeMessage
+
+    -- * InstanceGroupsScopedListWarning
+    , InstanceGroupsScopedListWarning
+    , instanceGroupsScopedListWarning
+    , igslwData
+    , igslwCode
+    , igslwMessage
+
+    -- * MetadataItems
+    , MetadataItems
+    , metadataItems
+    , miValue
+    , miKey
+
     -- * License
     , License
     , license
@@ -1077,6 +1503,12 @@ module Network.Google.Compute.Types
     , lKind
     , lSelfLink
     , lName
+
+    -- * InstanceGroupsScopedListWarningData
+    , InstanceGroupsScopedListWarningData
+    , instanceGroupsScopedListWarningData
+    , igslwdValue
+    , igslwdKey
 
     -- * InstanceList
     , InstanceList
@@ -1110,17 +1542,17 @@ module Network.Google.Compute.Types
     -- * InstanceGroup
     , InstanceGroup
     , instanceGroup
-    , igSize
-    , igKind
-    , igFingerprint
-    , igNetwork
-    , igZone
-    , igSelfLink
-    , igName
-    , igCreationTimestamp
-    , igId
-    , igDescription
-    , igNamedPorts
+    , ig1Size
+    , ig1Kind
+    , ig1Fingerprint
+    , ig1Network
+    , ig1Zone
+    , ig1SelfLink
+    , ig1Name
+    , ig1CreationTimestamp
+    , ig1Id
+    , ig1Description
+    , ig1NamedPorts
 
     -- * HostRule
     , HostRule
@@ -1128,6 +1560,16 @@ module Network.Google.Compute.Types
     , hrHosts
     , hrDescription
     , hrPathMatcher
+
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- * InstanceWithNamedPortsStatus
+    , InstanceWithNamedPortsStatus (..)
 
     -- * SerialPortOutput
     , SerialPortOutput
@@ -1149,6 +1591,9 @@ module Network.Google.Compute.Types
     , targetVPNGatewaysScopedList
     , tvgslTargetVpnGateways
     , tvgslWarning
+
+    -- * InstanceGroupsScopedListWarningCode
+    , InstanceGroupsScopedListWarningCode (..)
 
     -- * Quota
     , Quota
@@ -1199,6 +1644,9 @@ module Network.Google.Compute.Types
     , fAllowed
     , fDescription
 
+    -- * TargetPoolSessionAffinity
+    , TargetPoolSessionAffinity (..)
+
     -- * AddressAggregatedList
     , AddressAggregatedList
     , addressAggregatedList
@@ -1207,6 +1655,9 @@ module Network.Google.Compute.Types
     , addItems
     , addSelfLink
     , addId
+
+    -- * ImageRawDiskContainerType
+    , ImageRawDiskContainerType (..)
 
     -- * Tags
     , Tags
@@ -1248,24 +1699,34 @@ module Network.Google.Compute.Types
     -- * Instance
     , Instance
     , instance'
-    , iiStatus
-    , iiServiceAccounts
-    , iiNetworkInterfaces
-    , iiKind
-    , iiZone
-    , iiCpuPlatform
-    , iiSelfLink
-    , iiName
-    , iiStatusMessage
-    , iiCreationTimestamp
-    , iiMachineType
-    , iiMetadata
-    , iiId
-    , iiScheduling
-    , iiDisks
-    , iiCanIpForward
-    , iiDescription
-    , iiTags
+    , i1Status
+    , i1ServiceAccounts
+    , i1NetworkInterfaces
+    , i1Kind
+    , i1Zone
+    , i1CpuPlatform
+    , i1SelfLink
+    , i1Name
+    , i1StatusMessage
+    , i1CreationTimestamp
+    , i1MachineType
+    , i1Metadata
+    , i1Id
+    , i1Scheduling
+    , i1Disks
+    , i1CanIpForward
+    , i1Description
+    , i1Tags
+
+    -- * InstancesScopedListWarningCode
+    , InstancesScopedListWarningCode (..)
+
+    -- * Alt
+    , Alt (..)
+
+    -- * VPNTunnelAggregatedListItems
+    , VPNTunnelAggregatedListItems
+    , vPNTunnelAggregatedListItems
 
     -- * PathMatcher
     , PathMatcher
@@ -1280,6 +1741,9 @@ module Network.Google.Compute.Types
     , instanceGroupsScopedList
     , igslWarning
     , igslInstanceGroups
+
+    -- * OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.Compute.Types.Product
@@ -1287,7 +1751,7 @@ import           Network.Google.Compute.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Compute Engine API.
-computeURL :: BaseURL
+computeURL :: BaseUrl
 computeURL
   = BaseUrl Https
       "https://www.googleapis.com/compute/v1/projects/"

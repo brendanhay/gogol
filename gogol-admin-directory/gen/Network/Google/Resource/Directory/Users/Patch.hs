@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | update user. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersPatch@.
-module Directory.Users.Patch
+module Network.Google.Resource.Directory.Users.Patch
     (
     -- * REST Resource
-      UsersPatchAPI
+      UsersPatchResource
 
     -- * Creating a Request
-    , usersPatch
-    , UsersPatch
+    , usersPatch'
+    , UsersPatch'
 
     -- * Request Lenses
     , upQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersPatch@ which the
--- 'UsersPatch' request conforms to.
-type UsersPatchAPI =
+-- 'UsersPatch'' request conforms to.
+type UsersPatchResource =
      "users" :>
-       Capture "userKey" Text :> Patch '[JSON] User
+       Capture "userKey" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] User
 
 -- | update user. This method supports patch semantics.
 --
--- /See:/ 'usersPatch' smart constructor.
-data UsersPatch = UsersPatch
+-- /See:/ 'usersPatch'' smart constructor.
+data UsersPatch' = UsersPatch'
     { _upQuotaUser   :: !(Maybe Text)
     , _upPrettyPrint :: !Bool
     , _upUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UsersPatch = UsersPatch
     , _upOauthToken  :: !(Maybe Text)
     , _upUserKey     :: !Text
     , _upFields      :: !(Maybe Text)
-    , _upAlt         :: !Text
+    , _upAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UsersPatch = UsersPatch
 -- * 'upFields'
 --
 -- * 'upAlt'
-usersPatch
+usersPatch'
     :: Text -- ^ 'userKey'
-    -> UsersPatch
-usersPatch pUpUserKey_ =
-    UsersPatch
+    -> UsersPatch'
+usersPatch' pUpUserKey_ =
+    UsersPatch'
     { _upQuotaUser = Nothing
     , _upPrettyPrint = True
     , _upUserIp = Nothing
@@ -93,7 +101,7 @@ usersPatch pUpUserKey_ =
     , _upOauthToken = Nothing
     , _upUserKey = pUpUserKey_
     , _upFields = Nothing
-    , _upAlt = "json"
+    , _upAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,17 +144,20 @@ upFields :: Lens' UsersPatch' (Maybe Text)
 upFields = lens _upFields (\ s a -> s{_upFields = a})
 
 -- | Data format for the response.
-upAlt :: Lens' UsersPatch' Text
+upAlt :: Lens' UsersPatch' Alt
 upAlt = lens _upAlt (\ s a -> s{_upAlt = a})
 
 instance GoogleRequest UsersPatch' where
         type Rs UsersPatch' = User
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersPatch{..}
-          = go _upQuotaUser _upPrettyPrint _upUserIp _upKey
+        requestWithRoute r u UsersPatch'{..}
+          = go _upQuotaUser (Just _upPrettyPrint) _upUserIp
+              _upKey
               _upOauthToken
               _upUserKey
               _upFields
-              _upAlt
+              (Just _upAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersPatchResource)
+                      r
+                      u

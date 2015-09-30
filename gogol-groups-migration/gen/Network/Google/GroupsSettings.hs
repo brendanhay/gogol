@@ -27,13 +27,13 @@ module Network.Google.GroupsSettings
     -- * REST Resources
 
     -- ** GroupsSettingsGroupsGet
-    , module GroupsSettings.Groups.Get
+    , module Network.Google.Resource.GroupsSettings.Groups.Get
 
     -- ** GroupsSettingsGroupsPatch
-    , module GroupsSettings.Groups.Patch
+    , module Network.Google.Resource.GroupsSettings.Groups.Patch
 
     -- ** GroupsSettingsGroupsUpdate
-    , module GroupsSettings.Groups.Update
+    , module Network.Google.Resource.GroupsSettings.Groups.Update
 
     -- * Types
 
@@ -68,6 +68,9 @@ module Network.Google.GroupsSettings
     , gDescription
     , gDefaultMessageDenyNotificationText
     , gAllowWebPosting
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GroupsSettings.Types
@@ -80,7 +83,9 @@ import           Network.Google.Resource.GroupsSettings.Groups.Update
 TODO
 -}
 
-type GroupsSettingsAPI = Groups
+type GroupsSettingsAPI =
+     GroupsPatchResource :<|> GroupsGetResource :<|>
+       GroupsUpdateResource
 
 groupsSettingsAPI :: Proxy GroupsSettingsAPI
 groupsSettingsAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all icons in the current project
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineProjectsIconsList@.
-module Mapsengine.Projects.Icons.List
+module Network.Google.Resource.Mapsengine.Projects.Icons.List
     (
     -- * REST Resource
-      ProjectsIconsListAPI
+      ProjectsIconsListResource
 
     -- * Creating a Request
-    , projectsIconsList
-    , ProjectsIconsList
+    , projectsIconsList'
+    , ProjectsIconsList'
 
     -- * Request Lenses
     , pilQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineProjectsIconsList@ which the
--- 'ProjectsIconsList' request conforms to.
-type ProjectsIconsListAPI =
+-- 'ProjectsIconsList'' request conforms to.
+type ProjectsIconsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "icons" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] IconsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] IconsListResponse
 
 -- | Return all icons in the current project
 --
--- /See:/ 'projectsIconsList' smart constructor.
-data ProjectsIconsList = ProjectsIconsList
+-- /See:/ 'projectsIconsList'' smart constructor.
+data ProjectsIconsList' = ProjectsIconsList'
     { _pilQuotaUser   :: !(Maybe Text)
     , _pilPrettyPrint :: !Bool
     , _pilUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data ProjectsIconsList = ProjectsIconsList
     , _pilOauthToken  :: !(Maybe Text)
     , _pilMaxResults  :: !(Maybe Word32)
     , _pilFields      :: !(Maybe Text)
-    , _pilAlt         :: !Text
+    , _pilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsIconsList'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data ProjectsIconsList = ProjectsIconsList
 -- * 'pilFields'
 --
 -- * 'pilAlt'
-projectsIconsList
+projectsIconsList'
     :: Text -- ^ 'projectId'
-    -> ProjectsIconsList
-projectsIconsList pPilProjectId_ =
-    ProjectsIconsList
+    -> ProjectsIconsList'
+projectsIconsList' pPilProjectId_ =
+    ProjectsIconsList'
     { _pilQuotaUser = Nothing
     , _pilPrettyPrint = True
     , _pilUserIp = Nothing
@@ -107,7 +114,7 @@ projectsIconsList pPilProjectId_ =
     , _pilOauthToken = Nothing
     , _pilMaxResults = Nothing
     , _pilFields = Nothing
-    , _pilAlt = "json"
+    , _pilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,22 +173,23 @@ pilFields
   = lens _pilFields (\ s a -> s{_pilFields = a})
 
 -- | Data format for the response.
-pilAlt :: Lens' ProjectsIconsList' Text
+pilAlt :: Lens' ProjectsIconsList' Alt
 pilAlt = lens _pilAlt (\ s a -> s{_pilAlt = a})
 
 instance GoogleRequest ProjectsIconsList' where
         type Rs ProjectsIconsList' = IconsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u ProjectsIconsList{..}
-          = go _pilQuotaUser _pilPrettyPrint _pilUserIp _pilKey
+        requestWithRoute r u ProjectsIconsList'{..}
+          = go _pilQuotaUser (Just _pilPrettyPrint) _pilUserIp
+              _pilKey
               _pilPageToken
               _pilProjectId
               _pilOauthToken
               _pilMaxResults
               _pilFields
-              _pilAlt
+              (Just _pilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsIconsListAPI)
+                      (Proxy :: Proxy ProjectsIconsListResource)
                       r
                       u

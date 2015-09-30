@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesInsert@.
-module Compute.Addresses.Insert
+module Network.Google.Resource.Compute.Addresses.Insert
     (
     -- * REST Resource
-      AddressesInsertAPI
+      AddressesInsertResource
 
     -- * Creating a Request
-    , addressesInsert
-    , AddressesInsert
+    , addressesInsert'
+    , AddressesInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAddressesInsert@ which the
--- 'AddressesInsert' request conforms to.
-type AddressesInsertAPI =
+-- 'AddressesInsert'' request conforms to.
+type AddressesInsertResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
-           "addresses" :> Post '[JSON] Operation
+           "addresses" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'addressesInsert' smart constructor.
-data AddressesInsert = AddressesInsert
+-- /See:/ 'addressesInsert'' smart constructor.
+data AddressesInsert' = AddressesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiProject     :: !Text
@@ -65,7 +73,7 @@ data AddressesInsert = AddressesInsert
     , _aiRegion      :: !Text
     , _aiOauthToken  :: !(Maybe Text)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data AddressesInsert = AddressesInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-addressesInsert
+addressesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
-    -> AddressesInsert
-addressesInsert pAiProject_ pAiRegion_ =
-    AddressesInsert
+    -> AddressesInsert'
+addressesInsert' pAiProject_ pAiRegion_ =
+    AddressesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiProject = pAiProject_
@@ -103,7 +111,7 @@ addressesInsert pAiProject_ pAiRegion_ =
     , _aiRegion = pAiRegion_
     , _aiOauthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,20 +157,22 @@ aiFields :: Lens' AddressesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' AddressesInsert' Text
+aiAlt :: Lens' AddressesInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesInsert{..}
-          = go _aiQuotaUser _aiPrettyPrint _aiProject _aiUserIp
+        requestWithRoute r u AddressesInsert'{..}
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiProject
+              _aiUserIp
               _aiKey
               _aiRegion
               _aiOauthToken
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AddressesInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AddressesInsertResource)
                       r
                       u

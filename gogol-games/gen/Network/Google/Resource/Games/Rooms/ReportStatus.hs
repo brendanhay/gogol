@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- unsupported.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsReportStatus@.
-module Games.Rooms.ReportStatus
+module Network.Google.Resource.Games.Rooms.ReportStatus
     (
     -- * REST Resource
-      RoomsReportStatusAPI
+      RoomsReportStatusResource
 
     -- * Creating a Request
-    , roomsReportStatus
-    , RoomsReportStatus
+    , roomsReportStatus'
+    , RoomsReportStatus'
 
     -- * Request Lenses
     , rrsQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsReportStatus@ which the
--- 'RoomsReportStatus' request conforms to.
-type RoomsReportStatusAPI =
+-- 'RoomsReportStatus'' request conforms to.
+type RoomsReportStatusResource =
      "rooms" :>
        Capture "roomId" Text :>
          "reportstatus" :>
-           QueryParam "language" Text :> Post '[JSON] RoomStatus
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] RoomStatus
 
 -- | Updates sent by a client reporting the status of peers in a room. For
 -- internal use by the Games SDK only. Calling this method directly is
 -- unsupported.
 --
--- /See:/ 'roomsReportStatus' smart constructor.
-data RoomsReportStatus = RoomsReportStatus
+-- /See:/ 'roomsReportStatus'' smart constructor.
+data RoomsReportStatus' = RoomsReportStatus'
     { _rrsQuotaUser   :: !(Maybe Text)
     , _rrsPrettyPrint :: !Bool
     , _rrsUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data RoomsReportStatus = RoomsReportStatus
     , _rrsLanguage    :: !(Maybe Text)
     , _rrsOauthToken  :: !(Maybe Text)
     , _rrsFields      :: !(Maybe Text)
-    , _rrsAlt         :: !Text
+    , _rrsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReportStatus'' with the minimum fields required to make a request.
@@ -91,11 +99,11 @@ data RoomsReportStatus = RoomsReportStatus
 -- * 'rrsFields'
 --
 -- * 'rrsAlt'
-roomsReportStatus
+roomsReportStatus'
     :: Text -- ^ 'roomId'
-    -> RoomsReportStatus
-roomsReportStatus pRrsRoomId_ =
-    RoomsReportStatus
+    -> RoomsReportStatus'
+roomsReportStatus' pRrsRoomId_ =
+    RoomsReportStatus'
     { _rrsQuotaUser = Nothing
     , _rrsPrettyPrint = True
     , _rrsUserIp = Nothing
@@ -104,7 +112,7 @@ roomsReportStatus pRrsRoomId_ =
     , _rrsLanguage = Nothing
     , _rrsOauthToken = Nothing
     , _rrsFields = Nothing
-    , _rrsAlt = "json"
+    , _rrsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,21 +162,22 @@ rrsFields
   = lens _rrsFields (\ s a -> s{_rrsFields = a})
 
 -- | Data format for the response.
-rrsAlt :: Lens' RoomsReportStatus' Text
+rrsAlt :: Lens' RoomsReportStatus' Alt
 rrsAlt = lens _rrsAlt (\ s a -> s{_rrsAlt = a})
 
 instance GoogleRequest RoomsReportStatus' where
         type Rs RoomsReportStatus' = RoomStatus
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsReportStatus{..}
-          = go _rrsQuotaUser _rrsPrettyPrint _rrsUserIp _rrsKey
+        requestWithRoute r u RoomsReportStatus'{..}
+          = go _rrsQuotaUser (Just _rrsPrettyPrint) _rrsUserIp
+              _rrsKey
               _rrsRoomId
               _rrsLanguage
               _rrsOauthToken
               _rrsFields
-              _rrsAlt
+              (Just _rrsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RoomsReportStatusAPI)
+                      (Proxy :: Proxy RoomsReportStatusResource)
                       r
                       u

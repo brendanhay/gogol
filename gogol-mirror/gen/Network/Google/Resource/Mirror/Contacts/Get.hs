@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a single contact by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsGet@.
-module Mirror.Contacts.Get
+module Network.Google.Resource.Mirror.Contacts.Get
     (
     -- * REST Resource
-      ContactsGetAPI
+      ContactsGetResource
 
     -- * Creating a Request
-    , contactsGet
-    , ContactsGet
+    , contactsGet'
+    , ContactsGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsGet@ which the
--- 'ContactsGet' request conforms to.
-type ContactsGetAPI =
+-- 'ContactsGet'' request conforms to.
+type ContactsGetResource =
      "contacts" :>
-       Capture "id" Text :> Get '[JSON] Contact
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Contact
 
 -- | Gets a single contact by ID.
 --
--- /See:/ 'contactsGet' smart constructor.
-data ContactsGet = ContactsGet
+-- /See:/ 'contactsGet'' smart constructor.
+data ContactsGet' = ContactsGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ContactsGet = ContactsGet
     , _cgId          :: !Text
     , _cgOauthToken  :: !(Maybe Text)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ContactsGet = ContactsGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-contactsGet
+contactsGet'
     :: Text -- ^ 'id'
-    -> ContactsGet
-contactsGet pCgId_ =
-    ContactsGet
+    -> ContactsGet'
+contactsGet' pCgId_ =
+    ContactsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -93,7 +101,7 @@ contactsGet pCgId_ =
     , _cgId = pCgId_
     , _cgOauthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +142,21 @@ cgFields :: Lens' ContactsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' ContactsGet' Text
+cgAlt :: Lens' ContactsGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest ContactsGet' where
         type Rs ContactsGet' = Contact
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgKey
+        requestWithRoute r u ContactsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
               _cgId
               _cgOauthToken
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsGetResource)
+                      r
+                      u

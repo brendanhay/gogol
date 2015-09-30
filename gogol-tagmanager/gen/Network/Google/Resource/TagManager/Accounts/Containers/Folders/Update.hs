@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a GTM Folder.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersUpdate@.
-module TagManager.Accounts.Containers.Folders.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
     (
     -- * REST Resource
-      AccountsContainersFoldersUpdateAPI
+      AccountsContainersFoldersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersFoldersUpdate
-    , AccountsContainersFoldersUpdate
+    , accountsContainersFoldersUpdate'
+    , AccountsContainersFoldersUpdate'
 
     -- * Request Lenses
     , acfuQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersFoldersUpdate@ which the
--- 'AccountsContainersFoldersUpdate' request conforms to.
-type AccountsContainersFoldersUpdateAPI =
+-- 'AccountsContainersFoldersUpdate'' request conforms to.
+type AccountsContainersFoldersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "folders" :>
                Capture "folderId" Text :>
-                 QueryParam "fingerprint" Text :> Put '[JSON] Folder
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "fingerprint" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] Folder
 
 -- | Updates a GTM Folder.
 --
--- /See:/ 'accountsContainersFoldersUpdate' smart constructor.
-data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
+-- /See:/ 'accountsContainersFoldersUpdate'' smart constructor.
+data AccountsContainersFoldersUpdate' = AccountsContainersFoldersUpdate'
     { _acfuQuotaUser   :: !(Maybe Text)
     , _acfuPrettyPrint :: !Bool
     , _acfuContainerId :: !Text
@@ -70,7 +78,7 @@ data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
     , _acfuKey         :: !(Maybe Text)
     , _acfuOauthToken  :: !(Maybe Text)
     , _acfuFields      :: !(Maybe Text)
-    , _acfuAlt         :: !Text
+    , _acfuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersUpdate'' with the minimum fields required to make a request.
@@ -98,13 +106,13 @@ data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
 -- * 'acfuFields'
 --
 -- * 'acfuAlt'
-accountsContainersFoldersUpdate
+accountsContainersFoldersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersFoldersUpdate
-accountsContainersFoldersUpdate pAcfuContainerId_ pAcfuFolderId_ pAcfuAccountId_ =
-    AccountsContainersFoldersUpdate
+    -> AccountsContainersFoldersUpdate'
+accountsContainersFoldersUpdate' pAcfuContainerId_ pAcfuFolderId_ pAcfuAccountId_ =
+    AccountsContainersFoldersUpdate'
     { _acfuQuotaUser = Nothing
     , _acfuPrettyPrint = True
     , _acfuContainerId = pAcfuContainerId_
@@ -115,7 +123,7 @@ accountsContainersFoldersUpdate pAcfuContainerId_ pAcfuFolderId_ pAcfuAccountId_
     , _acfuKey = Nothing
     , _acfuOauthToken = Nothing
     , _acfuFields = Nothing
-    , _acfuAlt = "json"
+    , _acfuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,7 +188,7 @@ acfuFields
   = lens _acfuFields (\ s a -> s{_acfuFields = a})
 
 -- | Data format for the response.
-acfuAlt :: Lens' AccountsContainersFoldersUpdate' Text
+acfuAlt :: Lens' AccountsContainersFoldersUpdate' Alt
 acfuAlt = lens _acfuAlt (\ s a -> s{_acfuAlt = a})
 
 instance GoogleRequest
@@ -188,8 +196,9 @@ instance GoogleRequest
         type Rs AccountsContainersFoldersUpdate' = Folder
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersFoldersUpdate{..}
-          = go _acfuQuotaUser _acfuPrettyPrint _acfuContainerId
+          AccountsContainersFoldersUpdate'{..}
+          = go _acfuQuotaUser (Just _acfuPrettyPrint)
+              _acfuContainerId
               _acfuUserIp
               _acfuFingerprint
               _acfuFolderId
@@ -197,9 +206,10 @@ instance GoogleRequest
               _acfuKey
               _acfuOauthToken
               _acfuFields
-              _acfuAlt
+              (Just _acfuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersFoldersUpdateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersFoldersUpdateResource)
                       r
                       u

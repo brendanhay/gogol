@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one account by ID.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerAccountsGet@.
-module AdExchangeBuyer.Accounts.Get
+module Network.Google.Resource.AdExchangeBuyer.Accounts.Get
     (
     -- * REST Resource
-      AccountsGetAPI
+      AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet
-    , AccountsGet
+    , accountsGet'
+    , AccountsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerAccountsGet@ which the
--- 'AccountsGet' request conforms to.
-type AccountsGetAPI =
+-- 'AccountsGet'' request conforms to.
+type AccountsGetResource =
      "accounts" :>
-       Capture "id" Int32 :> Get '[JSON] Account
+       Capture "id" Int32 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Account
 
 -- | Gets one account by ID.
 --
--- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+-- /See:/ 'accountsGet'' smart constructor.
+data AccountsGet' = AccountsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AccountsGet = AccountsGet
     , _agId          :: !Int32
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AccountsGet = AccountsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-accountsGet
+accountsGet'
     :: Int32 -- ^ 'id'
-    -> AccountsGet
-accountsGet pAgId_ =
-    AccountsGet
+    -> AccountsGet'
+accountsGet' pAgId_ =
+    AccountsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -93,7 +101,7 @@ accountsGet pAgId_ =
     , _agId = pAgId_
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +142,21 @@ agFields :: Lens' AccountsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AccountsGet' Text
+agAlt :: Lens' AccountsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u AccountsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp _agKey
+        requestWithRoute r u AccountsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+              _agKey
               _agId
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsGetResource)
+                      r
+                      u

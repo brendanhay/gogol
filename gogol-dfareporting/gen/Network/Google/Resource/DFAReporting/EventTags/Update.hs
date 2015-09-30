@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing event tag.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsUpdate@.
-module DFAReporting.EventTags.Update
+module Network.Google.Resource.DFAReporting.EventTags.Update
     (
     -- * REST Resource
-      EventTagsUpdateAPI
+      EventTagsUpdateResource
 
     -- * Creating a Request
-    , eventTagsUpdate
-    , EventTagsUpdate
+    , eventTagsUpdate'
+    , EventTagsUpdate'
 
     -- * Request Lenses
     , etuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsUpdate@ which the
--- 'EventTagsUpdate' request conforms to.
-type EventTagsUpdateAPI =
+-- 'EventTagsUpdate'' request conforms to.
+type EventTagsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "eventTags" :> Put '[JSON] EventTag
+         "eventTags" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] EventTag
 
 -- | Updates an existing event tag.
 --
--- /See:/ 'eventTagsUpdate' smart constructor.
-data EventTagsUpdate = EventTagsUpdate
+-- /See:/ 'eventTagsUpdate'' smart constructor.
+data EventTagsUpdate' = EventTagsUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
     , _etuPrettyPrint :: !Bool
     , _etuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data EventTagsUpdate = EventTagsUpdate
     , _etuKey         :: !(Maybe Text)
     , _etuOauthToken  :: !(Maybe Text)
     , _etuFields      :: !(Maybe Text)
-    , _etuAlt         :: !Text
+    , _etuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data EventTagsUpdate = EventTagsUpdate
 -- * 'etuFields'
 --
 -- * 'etuAlt'
-eventTagsUpdate
+eventTagsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> EventTagsUpdate
-eventTagsUpdate pEtuProfileId_ =
-    EventTagsUpdate
+    -> EventTagsUpdate'
+eventTagsUpdate' pEtuProfileId_ =
+    EventTagsUpdate'
     { _etuQuotaUser = Nothing
     , _etuPrettyPrint = True
     , _etuUserIp = Nothing
@@ -94,7 +102,7 @@ eventTagsUpdate pEtuProfileId_ =
     , _etuKey = Nothing
     , _etuOauthToken = Nothing
     , _etuFields = Nothing
-    , _etuAlt = "json"
+    , _etuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ etuFields
   = lens _etuFields (\ s a -> s{_etuFields = a})
 
 -- | Data format for the response.
-etuAlt :: Lens' EventTagsUpdate' Text
+etuAlt :: Lens' EventTagsUpdate' Alt
 etuAlt = lens _etuAlt (\ s a -> s{_etuAlt = a})
 
 instance GoogleRequest EventTagsUpdate' where
         type Rs EventTagsUpdate' = EventTag
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsUpdate{..}
-          = go _etuQuotaUser _etuPrettyPrint _etuUserIp
+        requestWithRoute r u EventTagsUpdate'{..}
+          = go _etuQuotaUser (Just _etuPrettyPrint) _etuUserIp
               _etuProfileId
               _etuKey
               _etuOauthToken
               _etuFields
-              _etuAlt
+              (Just _etuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsUpdateResource)
                       r
                       u

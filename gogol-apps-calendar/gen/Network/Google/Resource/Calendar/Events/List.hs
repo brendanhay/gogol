@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns events on the specified calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsList@.
-module Calendar.Events.List
+module Network.Google.Resource.Calendar.Events.List
     (
     -- * REST Resource
-      EventsListAPI
+      EventsListResource
 
     -- * Creating a Request
-    , eventsList
-    , EventsList
+    , eventsList'
+    , EventsList'
 
     -- * Request Lenses
     , elSyncToken
@@ -60,40 +61,57 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsList@ which the
--- 'EventsList' request conforms to.
-type EventsListAPI =
+-- 'EventsList'' request conforms to.
+type EventsListResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            QueryParam "syncToken" Text :>
-             QueryParam "timeMin" UTCTime :>
-               QueryParam "orderBy" Text :>
-                 QueryParam "singleEvents" Bool :>
-                   QueryParams "privateExtendedProperty" Text :>
-                     QueryParam "showDeleted" Bool :>
-                       QueryParam "q" Text :>
-                         QueryParams "sharedExtendedProperty" Text :>
-                           QueryParam "maxAttendees" Int32 :>
-                             QueryParam "iCalUID" Text :>
-                               QueryParam "updatedMin" UTCTime :>
-                                 QueryParam "pageToken" Text :>
-                                   QueryParam "timeZone" Text :>
-                                     QueryParam "showHiddenInvitations" Bool :>
-                                       QueryParam "maxResults" Int32 :>
-                                         QueryParam "alwaysIncludeEmail" Bool :>
-                                           QueryParam "timeMax" UTCTime :>
-                                             Get '[JSON] Events
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "timeMin" UTCTime :>
+                   QueryParam "orderBy" CalendarEventsListOrderBy :>
+                     QueryParam "singleEvents" Bool :>
+                       QueryParams "privateExtendedProperty" Text :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "showDeleted" Bool :>
+                             QueryParam "q" Text :>
+                               QueryParams "sharedExtendedProperty" Text :>
+                                 QueryParam "maxAttendees" Int32 :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "iCalUID" Text :>
+                                       QueryParam "updatedMin" UTCTime :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "timeZone" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam
+                                                 "showHiddenInvitations"
+                                                 Bool
+                                                 :>
+                                                 QueryParam "maxResults" Int32
+                                                   :>
+                                                   QueryParam
+                                                     "alwaysIncludeEmail"
+                                                     Bool
+                                                     :>
+                                                     QueryParam "timeMax"
+                                                       UTCTime
+                                                       :>
+                                                       QueryParam "fields" Text
+                                                         :>
+                                                         QueryParam "alt" Alt :>
+                                                           Get '[JSON] Events
 
 -- | Returns events on the specified calendar.
 --
--- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
+-- /See:/ 'eventsList'' smart constructor.
+data EventsList' = EventsList'
     { _elSyncToken               :: !(Maybe Text)
     , _elQuotaUser               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elPrettyPrint             :: !Bool
     , _elTimeMin                 :: !(Maybe UTCTime)
-    , _elOrderBy                 :: !(Maybe Text)
+    , _elOrderBy                 :: !(Maybe CalendarEventsListOrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe Text)
     , _elUserIp                  :: !(Maybe Text)
@@ -112,7 +130,7 @@ data EventsList = EventsList
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe UTCTime)
     , _elFields                  :: !(Maybe Text)
-    , _elAlt                     :: !Text
+    , _elAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
@@ -168,11 +186,11 @@ data EventsList = EventsList
 -- * 'elFields'
 --
 -- * 'elAlt'
-eventsList
+eventsList'
     :: Text -- ^ 'calendarId'
-    -> EventsList
-eventsList pElCalendarId_ =
-    EventsList
+    -> EventsList'
+eventsList' pElCalendarId_ =
+    EventsList'
     { _elSyncToken = Nothing
     , _elQuotaUser = Nothing
     , _elCalendarId = pElCalendarId_
@@ -197,7 +215,7 @@ eventsList pElCalendarId_ =
     , _elAlwaysIncludeEmail = Nothing
     , _elTimeMax = Nothing
     , _elFields = Nothing
-    , _elAlt = "json"
+    , _elAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -247,7 +265,7 @@ elTimeMin
 
 -- | The order of the events returned in the result. Optional. The default is
 -- an unspecified, stable order.
-elOrderBy :: Lens' EventsList' (Maybe Text)
+elOrderBy :: Lens' EventsList' (Maybe CalendarEventsListOrderBy)
 elOrderBy
   = lens _elOrderBy (\ s a -> s{_elOrderBy = a})
 
@@ -379,15 +397,15 @@ elFields :: Lens' EventsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
 -- | Data format for the response.
-elAlt :: Lens' EventsList' Text
+elAlt :: Lens' EventsList' Alt
 elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsList{..}
+        requestWithRoute r u EventsList'{..}
           = go _elSyncToken _elQuotaUser _elCalendarId
-              _elPrettyPrint
+              (Just _elPrettyPrint)
               _elTimeMin
               _elOrderBy
               _elSingleEvents
@@ -408,6 +426,8 @@ instance GoogleRequest EventsList' where
               _elAlwaysIncludeEmail
               _elTimeMax
               _elFields
-              _elAlt
+              (Just _elAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy EventsListResource)
+                      r
+                      u

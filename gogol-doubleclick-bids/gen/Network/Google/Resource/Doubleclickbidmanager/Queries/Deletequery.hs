@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerQueriesDeletequery@.
-module Doubleclickbidmanager.Queries.Deletequery
+module Network.Google.Resource.Doubleclickbidmanager.Queries.Deletequery
     (
     -- * REST Resource
-      QueriesDeletequeryAPI
+      QueriesDeletequeryResource
 
     -- * Creating a Request
-    , queriesDeletequery
-    , QueriesDeletequery
+    , queriesDeletequery'
+    , QueriesDeletequery'
 
     -- * Request Lenses
     , qdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerQueriesDeletequery@ which the
--- 'QueriesDeletequery' request conforms to.
-type QueriesDeletequeryAPI =
+-- 'QueriesDeletequery'' request conforms to.
+type QueriesDeletequeryResource =
      "query" :>
-       Capture "queryId" Int64 :> Delete '[JSON] ()
+       Capture "queryId" Int64 :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a stored query as well as the associated stored reports.
 --
--- /See:/ 'queriesDeletequery' smart constructor.
-data QueriesDeletequery = QueriesDeletequery
+-- /See:/ 'queriesDeletequery'' smart constructor.
+data QueriesDeletequery' = QueriesDeletequery'
     { _qdQuotaUser   :: !(Maybe Text)
     , _qdQueryId     :: !Int64
     , _qdPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data QueriesDeletequery = QueriesDeletequery
     , _qdKey         :: !(Maybe Text)
     , _qdOauthToken  :: !(Maybe Text)
     , _qdFields      :: !(Maybe Text)
-    , _qdAlt         :: !Text
+    , _qdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesDeletequery'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data QueriesDeletequery = QueriesDeletequery
 -- * 'qdFields'
 --
 -- * 'qdAlt'
-queriesDeletequery
+queriesDeletequery'
     :: Int64 -- ^ 'queryId'
-    -> QueriesDeletequery
-queriesDeletequery pQdQueryId_ =
-    QueriesDeletequery
+    -> QueriesDeletequery'
+queriesDeletequery' pQdQueryId_ =
+    QueriesDeletequery'
     { _qdQuotaUser = Nothing
     , _qdQueryId = pQdQueryId_
     , _qdPrettyPrint = True
@@ -93,7 +101,7 @@ queriesDeletequery pQdQueryId_ =
     , _qdKey = Nothing
     , _qdOauthToken = Nothing
     , _qdFields = Nothing
-    , _qdAlt = "json"
+    , _qdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,20 +143,21 @@ qdFields :: Lens' QueriesDeletequery' (Maybe Text)
 qdFields = lens _qdFields (\ s a -> s{_qdFields = a})
 
 -- | Data format for the response.
-qdAlt :: Lens' QueriesDeletequery' Text
+qdAlt :: Lens' QueriesDeletequery' Alt
 qdAlt = lens _qdAlt (\ s a -> s{_qdAlt = a})
 
 instance GoogleRequest QueriesDeletequery' where
         type Rs QueriesDeletequery' = ()
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesDeletequery{..}
-          = go _qdQuotaUser _qdQueryId _qdPrettyPrint _qdUserIp
+        requestWithRoute r u QueriesDeletequery'{..}
+          = go _qdQuotaUser _qdQueryId (Just _qdPrettyPrint)
+              _qdUserIp
               _qdKey
               _qdOauthToken
               _qdFields
-              _qdAlt
+              (Just _qdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QueriesDeletequeryAPI)
+                      (Proxy :: Proxy QueriesDeletequeryResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of content regions that the YouTube website supports.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeI18nRegionsList@.
-module YouTube.I18nRegions.List
+module Network.Google.Resource.YouTube.I18nRegions.List
     (
     -- * REST Resource
-      I18nRegionsListAPI
+      I18nRegionsListResource
 
     -- * Creating a Request
-    , i18nRegionsList
-    , I18nRegionsList
+    , i18nRegionsList'
+    , I18nRegionsList'
 
     -- * Request Lenses
     , irlQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeI18nRegionsList@ which the
--- 'I18nRegionsList' request conforms to.
-type I18nRegionsListAPI =
+-- 'I18nRegionsList'' request conforms to.
+type I18nRegionsListResource =
      "i18nRegions" :>
-       QueryParam "part" Text :>
-         QueryParam "hl" Text :>
-           Get '[JSON] I18nRegionListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "hl" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] I18nRegionListResponse
 
 -- | Returns a list of content regions that the YouTube website supports.
 --
--- /See:/ 'i18nRegionsList' smart constructor.
-data I18nRegionsList = I18nRegionsList
+-- /See:/ 'i18nRegionsList'' smart constructor.
+data I18nRegionsList' = I18nRegionsList'
     { _irlQuotaUser   :: !(Maybe Text)
     , _irlPart        :: !Text
     , _irlPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data I18nRegionsList = I18nRegionsList
     , _irlKey         :: !(Maybe Text)
     , _irlOauthToken  :: !(Maybe Text)
     , _irlFields      :: !(Maybe Text)
-    , _irlAlt         :: !Text
+    , _irlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nRegionsList'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data I18nRegionsList = I18nRegionsList
 -- * 'irlFields'
 --
 -- * 'irlAlt'
-i18nRegionsList
+i18nRegionsList'
     :: Text -- ^ 'part'
-    -> I18nRegionsList
-i18nRegionsList pIrlPart_ =
-    I18nRegionsList
+    -> I18nRegionsList'
+i18nRegionsList' pIrlPart_ =
+    I18nRegionsList'
     { _irlQuotaUser = Nothing
     , _irlPart = pIrlPart_
     , _irlPrettyPrint = True
@@ -100,7 +108,7 @@ i18nRegionsList pIrlPart_ =
     , _irlKey = Nothing
     , _irlOauthToken = Nothing
     , _irlFields = Nothing
-    , _irlAlt = "json"
+    , _irlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,23 @@ irlFields
   = lens _irlFields (\ s a -> s{_irlFields = a})
 
 -- | Data format for the response.
-irlAlt :: Lens' I18nRegionsList' Text
+irlAlt :: Lens' I18nRegionsList' Alt
 irlAlt = lens _irlAlt (\ s a -> s{_irlAlt = a})
 
 instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u I18nRegionsList{..}
-          = go _irlQuotaUser (Just _irlPart) _irlPrettyPrint
+        requestWithRoute r u I18nRegionsList'{..}
+          = go _irlQuotaUser (Just _irlPart)
+              (Just _irlPrettyPrint)
               _irlUserIp
               (Just _irlHl)
               _irlKey
               _irlOauthToken
               _irlFields
-              _irlAlt
+              (Just _irlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy I18nRegionsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy I18nRegionsListResource)
                       r
                       u

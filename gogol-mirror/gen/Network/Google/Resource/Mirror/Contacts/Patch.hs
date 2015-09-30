@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a contact in place. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsPatch@.
-module Mirror.Contacts.Patch
+module Network.Google.Resource.Mirror.Contacts.Patch
     (
     -- * REST Resource
-      ContactsPatchAPI
+      ContactsPatchResource
 
     -- * Creating a Request
-    , contactsPatch
-    , ContactsPatch
+    , contactsPatch'
+    , ContactsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsPatch@ which the
--- 'ContactsPatch' request conforms to.
-type ContactsPatchAPI =
+-- 'ContactsPatch'' request conforms to.
+type ContactsPatchResource =
      "contacts" :>
-       Capture "id" Text :> Patch '[JSON] Contact
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Contact
 
 -- | Updates a contact in place. This method supports patch semantics.
 --
--- /See:/ 'contactsPatch' smart constructor.
-data ContactsPatch = ContactsPatch
+-- /See:/ 'contactsPatch'' smart constructor.
+data ContactsPatch' = ContactsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ContactsPatch = ContactsPatch
     , _cpId          :: !Text
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsPatch'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ContactsPatch = ContactsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-contactsPatch
+contactsPatch'
     :: Text -- ^ 'id'
-    -> ContactsPatch
-contactsPatch pCpId_ =
-    ContactsPatch
+    -> ContactsPatch'
+contactsPatch' pCpId_ =
+    ContactsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -93,7 +101,7 @@ contactsPatch pCpId_ =
     , _cpId = pCpId_
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,18 +142,21 @@ cpFields :: Lens' ContactsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' ContactsPatch' Text
+cpAlt :: Lens' ContactsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest ContactsPatch' where
         type Rs ContactsPatch' = Contact
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp _cpKey
+        requestWithRoute r u ContactsPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+              _cpKey
               _cpId
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsPatchResource)
+                      r
                       u

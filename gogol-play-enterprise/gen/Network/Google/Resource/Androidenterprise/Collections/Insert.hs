@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionsInsert@.
-module Androidenterprise.Collections.Insert
+module Network.Google.Resource.Androidenterprise.Collections.Insert
     (
     -- * REST Resource
-      CollectionsInsertAPI
+      CollectionsInsertResource
 
     -- * Creating a Request
-    , collectionsInsert
-    , CollectionsInsert
+    , collectionsInsert'
+    , CollectionsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionsInsert@ which the
--- 'CollectionsInsert' request conforms to.
-type CollectionsInsertAPI =
+-- 'CollectionsInsert'' request conforms to.
+type CollectionsInsertResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
-         "collections" :> Post '[JSON] Collection
+         "collections" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Collection
 
 -- | Creates a new collection.
 --
--- /See:/ 'collectionsInsert' smart constructor.
-data CollectionsInsert = CollectionsInsert
+-- /See:/ 'collectionsInsert'' smart constructor.
+data CollectionsInsert' = CollectionsInsert'
     { _ciQuotaUser    :: !(Maybe Text)
     , _ciPrettyPrint  :: !Bool
     , _ciEnterpriseId :: !Text
@@ -60,7 +68,7 @@ data CollectionsInsert = CollectionsInsert
     , _ciKey          :: !(Maybe Text)
     , _ciOauthToken   :: !(Maybe Text)
     , _ciFields       :: !(Maybe Text)
-    , _ciAlt          :: !Text
+    , _ciAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CollectionsInsert = CollectionsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-collectionsInsert
+collectionsInsert'
     :: Text -- ^ 'enterpriseId'
-    -> CollectionsInsert
-collectionsInsert pCiEnterpriseId_ =
-    CollectionsInsert
+    -> CollectionsInsert'
+collectionsInsert' pCiEnterpriseId_ =
+    CollectionsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciEnterpriseId = pCiEnterpriseId_
@@ -94,7 +102,7 @@ collectionsInsert pCiEnterpriseId_ =
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +145,22 @@ ciFields :: Lens' CollectionsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CollectionsInsert' Text
+ciAlt :: Lens' CollectionsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CollectionsInsert' where
         type Rs CollectionsInsert' = Collection
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciEnterpriseId
+        requestWithRoute r u CollectionsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint)
+              _ciEnterpriseId
               _ciUserIp
               _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CollectionsInsertAPI)
+                      (Proxy :: Proxy CollectionsInsertResource)
                       r
                       u

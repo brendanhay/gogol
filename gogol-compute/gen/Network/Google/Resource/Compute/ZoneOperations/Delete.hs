@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified zone-specific Operations resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeZoneOperationsDelete@.
-module Compute.ZoneOperations.Delete
+module Network.Google.Resource.Compute.ZoneOperations.Delete
     (
     -- * REST Resource
-      ZoneOperationsDeleteAPI
+      ZoneOperationsDeleteResource
 
     -- * Creating a Request
-    , zoneOperationsDelete
-    , ZoneOperationsDelete
+    , zoneOperationsDelete'
+    , ZoneOperationsDelete'
 
     -- * Request Lenses
     , zodQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeZoneOperationsDelete@ which the
--- 'ZoneOperationsDelete' request conforms to.
-type ZoneOperationsDeleteAPI =
+-- 'ZoneOperationsDelete'' request conforms to.
+type ZoneOperationsDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "operations" :>
-             Capture "operation" Text :> Delete '[JSON] ()
+             Capture "operation" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the specified zone-specific Operations resource.
 --
--- /See:/ 'zoneOperationsDelete' smart constructor.
-data ZoneOperationsDelete = ZoneOperationsDelete
+-- /See:/ 'zoneOperationsDelete'' smart constructor.
+data ZoneOperationsDelete' = ZoneOperationsDelete'
     { _zodQuotaUser   :: !(Maybe Text)
     , _zodPrettyPrint :: !Bool
     , _zodProject     :: !Text
@@ -66,7 +74,7 @@ data ZoneOperationsDelete = ZoneOperationsDelete
     , _zodKey         :: !(Maybe Text)
     , _zodOauthToken  :: !(Maybe Text)
     , _zodFields      :: !(Maybe Text)
-    , _zodAlt         :: !Text
+    , _zodAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsDelete'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data ZoneOperationsDelete = ZoneOperationsDelete
 -- * 'zodFields'
 --
 -- * 'zodAlt'
-zoneOperationsDelete
+zoneOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
     -> Text -- ^ 'zone'
-    -> ZoneOperationsDelete
-zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
-    ZoneOperationsDelete
+    -> ZoneOperationsDelete'
+zoneOperationsDelete' pZodProject_ pZodOperation_ pZodZone_ =
+    ZoneOperationsDelete'
     { _zodQuotaUser = Nothing
     , _zodPrettyPrint = True
     , _zodProject = pZodProject_
@@ -108,7 +116,7 @@ zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
     , _zodKey = Nothing
     , _zodOauthToken = Nothing
     , _zodFields = Nothing
-    , _zodAlt = "json"
+    , _zodAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,23 +170,23 @@ zodFields
   = lens _zodFields (\ s a -> s{_zodFields = a})
 
 -- | Data format for the response.
-zodAlt :: Lens' ZoneOperationsDelete' Text
+zodAlt :: Lens' ZoneOperationsDelete' Alt
 zodAlt = lens _zodAlt (\ s a -> s{_zodAlt = a})
 
 instance GoogleRequest ZoneOperationsDelete' where
         type Rs ZoneOperationsDelete' = ()
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ZoneOperationsDelete{..}
-          = go _zodQuotaUser _zodPrettyPrint _zodProject
+        requestWithRoute r u ZoneOperationsDelete'{..}
+          = go _zodQuotaUser (Just _zodPrettyPrint) _zodProject
               _zodOperation
               _zodUserIp
               _zodZone
               _zodKey
               _zodOauthToken
               _zodFields
-              _zodAlt
+              (Just _zodAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneOperationsDeleteAPI)
+                      (Proxy :: Proxy ZoneOperationsDeleteResource)
                       r
                       u

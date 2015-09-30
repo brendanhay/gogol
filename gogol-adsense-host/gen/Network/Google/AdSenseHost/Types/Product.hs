@@ -273,6 +273,63 @@ instance ToJSON Accounts where
                   ("items" .=) <$> _aItems])
 
 --
+-- /See:/ 'reportHeaders' smart constructor.
+data ReportHeaders = ReportHeaders
+    { _rhName     :: !(Maybe Text)
+    , _rhCurrency :: !(Maybe Text)
+    , _rhType     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rhName'
+--
+-- * 'rhCurrency'
+--
+-- * 'rhType'
+reportHeaders
+    :: ReportHeaders
+reportHeaders =
+    ReportHeaders
+    { _rhName = Nothing
+    , _rhCurrency = Nothing
+    , _rhType = Nothing
+    }
+
+-- | The name of the header.
+rhName :: Lens' ReportHeaders (Maybe Text)
+rhName = lens _rhName (\ s a -> s{_rhName = a})
+
+-- | The currency of this column. Only present if the header type is
+-- METRIC_CURRENCY.
+rhCurrency :: Lens' ReportHeaders (Maybe Text)
+rhCurrency
+  = lens _rhCurrency (\ s a -> s{_rhCurrency = a})
+
+-- | The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or
+-- METRIC_CURRENCY.
+rhType :: Lens' ReportHeaders (Maybe Text)
+rhType = lens _rhType (\ s a -> s{_rhType = a})
+
+instance FromJSON ReportHeaders where
+        parseJSON
+          = withObject "ReportHeaders"
+              (\ o ->
+                 ReportHeaders <$>
+                   (o .:? "name") <*> (o .:? "currency") <*>
+                     (o .:? "type"))
+
+instance ToJSON ReportHeaders where
+        toJSON ReportHeaders{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rhName,
+                  ("currency" .=) <$> _rhCurrency,
+                  ("type" .=) <$> _rhType])
+
+--
 -- /See:/ 'adUnits' smart constructor.
 data AdUnits = AdUnits
     { _auEtag          :: !(Maybe Text)
@@ -603,7 +660,7 @@ data Report = Report
     , _rWarnings         :: !(Maybe [Text])
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
-    , _rHeaders          :: !(Maybe [ReportHeadersItem])
+    , _rHeaders          :: !(Maybe [ReportHeaders])
     , _rTotalMatchedRows :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -675,7 +732,7 @@ rTotals
 -- | The header information of the columns requested in the report. This is a
 -- list of headers; one for each dimension in the request, followed by one
 -- for each metric in the request.
-rHeaders :: Lens' Report [ReportHeadersItem]
+rHeaders :: Lens' Report [ReportHeaders]
 rHeaders
   = lens _rHeaders (\ s a -> s{_rHeaders = a}) .
       _Default
@@ -712,6 +769,126 @@ instance ToJSON Report where
                   ("rows" .=) <$> _rRows, ("totals" .=) <$> _rTotals,
                   ("headers" .=) <$> _rHeaders,
                   ("totalMatchedRows" .=) <$> _rTotalMatchedRows])
+
+-- | The font which is included in the style.
+--
+-- /See:/ 'adStyleFont' smart constructor.
+data AdStyleFont = AdStyleFont
+    { _asfSize   :: !(Maybe Text)
+    , _asfFamily :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdStyleFont' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'asfSize'
+--
+-- * 'asfFamily'
+adStyleFont
+    :: AdStyleFont
+adStyleFont =
+    AdStyleFont
+    { _asfSize = Nothing
+    , _asfFamily = Nothing
+    }
+
+-- | The size of the font. Possible values are: ACCOUNT_DEFAULT_SIZE,
+-- ADSENSE_DEFAULT_SIZE, SMALL, MEDIUM and LARGE.
+asfSize :: Lens' AdStyleFont (Maybe Text)
+asfSize = lens _asfSize (\ s a -> s{_asfSize = a})
+
+-- | The family of the font. Possible values are: ACCOUNT_DEFAULT_FAMILY,
+-- ADSENSE_DEFAULT_FAMILY, ARIAL, TIMES and VERDANA.
+asfFamily :: Lens' AdStyleFont (Maybe Text)
+asfFamily
+  = lens _asfFamily (\ s a -> s{_asfFamily = a})
+
+instance FromJSON AdStyleFont where
+        parseJSON
+          = withObject "AdStyleFont"
+              (\ o ->
+                 AdStyleFont <$> (o .:? "size") <*> (o .:? "family"))
+
+instance ToJSON AdStyleFont where
+        toJSON AdStyleFont{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _asfSize,
+                  ("family" .=) <$> _asfFamily])
+
+-- | Settings specific to WAP mobile content ads (AFMC).
+--
+-- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
+data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings
+    { _aumcasSize              :: !(Maybe Text)
+    , _aumcasScriptingLanguage :: !(Maybe Text)
+    , _aumcasMarkupLanguage    :: !(Maybe Text)
+    , _aumcasType              :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdUnitMobileContentAdsSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aumcasSize'
+--
+-- * 'aumcasScriptingLanguage'
+--
+-- * 'aumcasMarkupLanguage'
+--
+-- * 'aumcasType'
+adUnitMobileContentAdsSettings
+    :: AdUnitMobileContentAdsSettings
+adUnitMobileContentAdsSettings =
+    AdUnitMobileContentAdsSettings
+    { _aumcasSize = Nothing
+    , _aumcasScriptingLanguage = Nothing
+    , _aumcasMarkupLanguage = Nothing
+    , _aumcasType = Nothing
+    }
+
+-- | Size of this ad unit.
+aumcasSize :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
+aumcasSize
+  = lens _aumcasSize (\ s a -> s{_aumcasSize = a})
+
+-- | The scripting language to use for this ad unit.
+aumcasScriptingLanguage :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
+aumcasScriptingLanguage
+  = lens _aumcasScriptingLanguage
+      (\ s a -> s{_aumcasScriptingLanguage = a})
+
+-- | The markup language to use for this ad unit.
+aumcasMarkupLanguage :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
+aumcasMarkupLanguage
+  = lens _aumcasMarkupLanguage
+      (\ s a -> s{_aumcasMarkupLanguage = a})
+
+-- | Type of this ad unit.
+aumcasType :: Lens' AdUnitMobileContentAdsSettings (Maybe Text)
+aumcasType
+  = lens _aumcasType (\ s a -> s{_aumcasType = a})
+
+instance FromJSON AdUnitMobileContentAdsSettings
+         where
+        parseJSON
+          = withObject "AdUnitMobileContentAdsSettings"
+              (\ o ->
+                 AdUnitMobileContentAdsSettings <$>
+                   (o .:? "size") <*> (o .:? "scriptingLanguage") <*>
+                     (o .:? "markupLanguage")
+                     <*> (o .:? "type"))
+
+instance ToJSON AdUnitMobileContentAdsSettings where
+        toJSON AdUnitMobileContentAdsSettings{..}
+          = object
+              (catMaybes
+                 [("size" .=) <$> _aumcasSize,
+                  ("scriptingLanguage" .=) <$>
+                    _aumcasScriptingLanguage,
+                  ("markupLanguage" .=) <$> _aumcasMarkupLanguage,
+                  ("type" .=) <$> _aumcasType])
 
 --
 -- /See:/ 'account' smart constructor.
@@ -777,6 +954,84 @@ instance ToJSON Account where
                  [("status" .=) <$> _accStatus,
                   Just ("kind" .= _accKind), ("name" .=) <$> _accName,
                   ("id" .=) <$> _accId])
+
+-- | The colors included in the style. These are represented as six
+-- hexadecimal characters, similar to HTML color codes, but without the
+-- leading hash.
+--
+-- /See:/ 'adStyleColors' smart constructor.
+data AdStyleColors = AdStyleColors
+    { _ascText       :: !(Maybe Text)
+    , _ascUrl        :: !(Maybe Text)
+    , _ascBorder     :: !(Maybe Text)
+    , _ascTitle      :: !(Maybe Text)
+    , _ascBackground :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ascText'
+--
+-- * 'ascUrl'
+--
+-- * 'ascBorder'
+--
+-- * 'ascTitle'
+--
+-- * 'ascBackground'
+adStyleColors
+    :: AdStyleColors
+adStyleColors =
+    AdStyleColors
+    { _ascText = Nothing
+    , _ascUrl = Nothing
+    , _ascBorder = Nothing
+    , _ascTitle = Nothing
+    , _ascBackground = Nothing
+    }
+
+-- | The color of the ad text.
+ascText :: Lens' AdStyleColors (Maybe Text)
+ascText = lens _ascText (\ s a -> s{_ascText = a})
+
+-- | The color of the ad url.
+ascUrl :: Lens' AdStyleColors (Maybe Text)
+ascUrl = lens _ascUrl (\ s a -> s{_ascUrl = a})
+
+-- | The color of the ad border.
+ascBorder :: Lens' AdStyleColors (Maybe Text)
+ascBorder
+  = lens _ascBorder (\ s a -> s{_ascBorder = a})
+
+-- | The color of the ad title.
+ascTitle :: Lens' AdStyleColors (Maybe Text)
+ascTitle = lens _ascTitle (\ s a -> s{_ascTitle = a})
+
+-- | The color of the ad background.
+ascBackground :: Lens' AdStyleColors (Maybe Text)
+ascBackground
+  = lens _ascBackground
+      (\ s a -> s{_ascBackground = a})
+
+instance FromJSON AdStyleColors where
+        parseJSON
+          = withObject "AdStyleColors"
+              (\ o ->
+                 AdStyleColors <$>
+                   (o .:? "text") <*> (o .:? "url") <*> (o .:? "border")
+                     <*> (o .:? "title")
+                     <*> (o .:? "background"))
+
+instance ToJSON AdStyleColors where
+        toJSON AdStyleColors{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascUrl,
+                  ("border" .=) <$> _ascBorder,
+                  ("title" .=) <$> _ascTitle,
+                  ("background" .=) <$> _ascBackground])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -858,6 +1113,67 @@ instance ToJSON AdClient where
                   ("supportsReporting" .=) <$> _aaSupportsReporting,
                   ("id" .=) <$> _aaId,
                   ("productCode" .=) <$> _aaProductCode])
+
+-- | The backup option to be used in instances where no ad is available.
+--
+-- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
+data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
+    { _aucasboColor :: !(Maybe Text)
+    , _aucasboUrl   :: !(Maybe Text)
+    , _aucasboType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdUnitContentAdsSettingsBackupOption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aucasboColor'
+--
+-- * 'aucasboUrl'
+--
+-- * 'aucasboType'
+adUnitContentAdsSettingsBackupOption
+    :: AdUnitContentAdsSettingsBackupOption
+adUnitContentAdsSettingsBackupOption =
+    AdUnitContentAdsSettingsBackupOption
+    { _aucasboColor = Nothing
+    , _aucasboUrl = Nothing
+    , _aucasboType = Nothing
+    }
+
+-- | Color to use when type is set to COLOR. These are represented as six
+-- hexadecimal characters, similar to HTML color codes, but without the
+-- leading hash.
+aucasboColor :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
+aucasboColor
+  = lens _aucasboColor (\ s a -> s{_aucasboColor = a})
+
+-- | URL to use when type is set to URL.
+aucasboUrl :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
+aucasboUrl
+  = lens _aucasboUrl (\ s a -> s{_aucasboUrl = a})
+
+-- | Type of the backup option. Possible values are BLANK, COLOR and URL.
+aucasboType :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
+aucasboType
+  = lens _aucasboType (\ s a -> s{_aucasboType = a})
+
+instance FromJSON
+         AdUnitContentAdsSettingsBackupOption where
+        parseJSON
+          = withObject "AdUnitContentAdsSettingsBackupOption"
+              (\ o ->
+                 AdUnitContentAdsSettingsBackupOption <$>
+                   (o .:? "color") <*> (o .:? "url") <*> (o .:? "type"))
+
+instance ToJSON AdUnitContentAdsSettingsBackupOption
+         where
+        toJSON AdUnitContentAdsSettingsBackupOption{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _aucasboColor,
+                  ("url" .=) <$> _aucasboUrl,
+                  ("type" .=) <$> _aucasboType])
 
 --
 -- /See:/ 'adStyle' smart constructor.
@@ -1097,3 +1413,64 @@ instance ToJSON AdCode where
               (catMaybes
                  [Just ("kind" .= _addKind),
                   ("adCode" .=) <$> _addAdCode])
+
+-- | Settings specific to content ads (AFC) and highend mobile content ads
+-- (AFMC).
+--
+-- /See:/ 'adUnitContentAdsSettings' smart constructor.
+data AdUnitContentAdsSettings = AdUnitContentAdsSettings
+    { _aucasBackupOption :: !(Maybe AdUnitContentAdsSettingsBackupOption)
+    , _aucasSize         :: !(Maybe Text)
+    , _aucasType         :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AdUnitContentAdsSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aucasBackupOption'
+--
+-- * 'aucasSize'
+--
+-- * 'aucasType'
+adUnitContentAdsSettings
+    :: AdUnitContentAdsSettings
+adUnitContentAdsSettings =
+    AdUnitContentAdsSettings
+    { _aucasBackupOption = Nothing
+    , _aucasSize = Nothing
+    , _aucasType = Nothing
+    }
+
+-- | The backup option to be used in instances where no ad is available.
+aucasBackupOption :: Lens' AdUnitContentAdsSettings (Maybe AdUnitContentAdsSettingsBackupOption)
+aucasBackupOption
+  = lens _aucasBackupOption
+      (\ s a -> s{_aucasBackupOption = a})
+
+-- | Size of this ad unit. Size values are in the form SIZE_{width}_{height}.
+aucasSize :: Lens' AdUnitContentAdsSettings (Maybe Text)
+aucasSize
+  = lens _aucasSize (\ s a -> s{_aucasSize = a})
+
+-- | Type of this ad unit. Possible values are TEXT, TEXT_IMAGE, IMAGE and
+-- LINK.
+aucasType :: Lens' AdUnitContentAdsSettings (Maybe Text)
+aucasType
+  = lens _aucasType (\ s a -> s{_aucasType = a})
+
+instance FromJSON AdUnitContentAdsSettings where
+        parseJSON
+          = withObject "AdUnitContentAdsSettings"
+              (\ o ->
+                 AdUnitContentAdsSettings <$>
+                   (o .:? "backupOption") <*> (o .:? "size") <*>
+                     (o .:? "type"))
+
+instance ToJSON AdUnitContentAdsSettings where
+        toJSON AdUnitContentAdsSettings{..}
+          = object
+              (catMaybes
+                 [("backupOption" .=) <$> _aucasBackupOption,
+                  ("size" .=) <$> _aucasSize,
+                  ("type" .=) <$> _aucasType])

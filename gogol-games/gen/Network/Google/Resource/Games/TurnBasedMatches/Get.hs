@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the data for a turn-based match.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesGet@.
-module Games.TurnBasedMatches.Get
+module Network.Google.Resource.Games.TurnBasedMatches.Get
     (
     -- * REST Resource
-      TurnBasedMatchesGetAPI
+      TurnBasedMatchesGetResource
 
     -- * Creating a Request
-    , turnBasedMatchesGet
-    , TurnBasedMatchesGet
+    , turnBasedMatchesGet'
+    , TurnBasedMatchesGet'
 
     -- * Request Lenses
     , tbmgQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesGet@ which the
--- 'TurnBasedMatchesGet' request conforms to.
-type TurnBasedMatchesGetAPI =
+-- 'TurnBasedMatchesGet'' request conforms to.
+type TurnBasedMatchesGetResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
-         QueryParam "includeMatchData" Bool :>
-           QueryParam "language" Text :>
-             Get '[JSON] TurnBasedMatch
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "includeMatchData" Bool :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] TurnBasedMatch
 
 -- | Get the data for a turn-based match.
 --
--- /See:/ 'turnBasedMatchesGet' smart constructor.
-data TurnBasedMatchesGet = TurnBasedMatchesGet
+-- /See:/ 'turnBasedMatchesGet'' smart constructor.
+data TurnBasedMatchesGet' = TurnBasedMatchesGet'
     { _tbmgQuotaUser        :: !(Maybe Text)
     , _tbmgPrettyPrint      :: !Bool
     , _tbmgUserIp           :: !(Maybe Text)
@@ -66,7 +73,7 @@ data TurnBasedMatchesGet = TurnBasedMatchesGet
     , _tbmgOauthToken       :: !(Maybe Text)
     , _tbmgMatchId          :: !Text
     , _tbmgFields           :: !(Maybe Text)
-    , _tbmgAlt              :: !Text
+    , _tbmgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesGet'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data TurnBasedMatchesGet = TurnBasedMatchesGet
 -- * 'tbmgFields'
 --
 -- * 'tbmgAlt'
-turnBasedMatchesGet
+turnBasedMatchesGet'
     :: Text -- ^ 'matchId'
-    -> TurnBasedMatchesGet
-turnBasedMatchesGet pTbmgMatchId_ =
-    TurnBasedMatchesGet
+    -> TurnBasedMatchesGet'
+turnBasedMatchesGet' pTbmgMatchId_ =
+    TurnBasedMatchesGet'
     { _tbmgQuotaUser = Nothing
     , _tbmgPrettyPrint = True
     , _tbmgUserIp = Nothing
@@ -106,7 +113,7 @@ turnBasedMatchesGet pTbmgMatchId_ =
     , _tbmgOauthToken = Nothing
     , _tbmgMatchId = pTbmgMatchId_
     , _tbmgFields = Nothing
-    , _tbmgAlt = "json"
+    , _tbmgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +170,24 @@ tbmgFields
   = lens _tbmgFields (\ s a -> s{_tbmgFields = a})
 
 -- | Data format for the response.
-tbmgAlt :: Lens' TurnBasedMatchesGet' Text
+tbmgAlt :: Lens' TurnBasedMatchesGet' Alt
 tbmgAlt = lens _tbmgAlt (\ s a -> s{_tbmgAlt = a})
 
 instance GoogleRequest TurnBasedMatchesGet' where
         type Rs TurnBasedMatchesGet' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesGet{..}
-          = go _tbmgQuotaUser _tbmgPrettyPrint _tbmgUserIp
+        requestWithRoute r u TurnBasedMatchesGet'{..}
+          = go _tbmgQuotaUser (Just _tbmgPrettyPrint)
+              _tbmgUserIp
               _tbmgKey
               _tbmgIncludeMatchData
               _tbmgLanguage
               _tbmgOauthToken
               _tbmgMatchId
               _tbmgFields
-              _tbmgAlt
+              (Just _tbmgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesGetAPI)
+                      (Proxy :: Proxy TurnBasedMatchesGetResource)
                       r
                       u

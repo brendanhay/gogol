@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the alerts for this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAlertsList@.
-module AdSense.Alerts.List
+module Network.Google.Resource.AdSense.Alerts.List
     (
     -- * REST Resource
-      AlertsListAPI
+      AlertsListResource
 
     -- * Creating a Request
-    , alertsList
-    , AlertsList
+    , alertsList'
+    , AlertsList'
 
     -- * Request Lenses
     , aleQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAlertsList@ which the
--- 'AlertsList' request conforms to.
-type AlertsListAPI =
+-- 'AlertsList'' request conforms to.
+type AlertsListResource =
      "alerts" :>
-       QueryParam "locale" Text :> Get '[JSON] Alerts
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "locale" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Alerts
 
 -- | List the alerts for this AdSense account.
 --
--- /See:/ 'alertsList' smart constructor.
-data AlertsList = AlertsList
+-- /See:/ 'alertsList'' smart constructor.
+data AlertsList' = AlertsList'
     { _aleQuotaUser   :: !(Maybe Text)
     , _alePrettyPrint :: !Bool
     , _aleUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AlertsList = AlertsList
     , _aleKey         :: !(Maybe Text)
     , _aleOauthToken  :: !(Maybe Text)
     , _aleFields      :: !(Maybe Text)
-    , _aleAlt         :: !Text
+    , _aleAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsList'' with the minimum fields required to make a request.
@@ -81,10 +89,10 @@ data AlertsList = AlertsList
 -- * 'aleFields'
 --
 -- * 'aleAlt'
-alertsList
-    :: AlertsList
-alertsList =
-    AlertsList
+alertsList'
+    :: AlertsList'
+alertsList' =
+    AlertsList'
     { _aleQuotaUser = Nothing
     , _alePrettyPrint = True
     , _aleUserIp = Nothing
@@ -92,7 +100,7 @@ alertsList =
     , _aleKey = Nothing
     , _aleOauthToken = Nothing
     , _aleFields = Nothing
-    , _aleAlt = "json"
+    , _aleAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,18 +147,20 @@ aleFields
   = lens _aleFields (\ s a -> s{_aleFields = a})
 
 -- | Data format for the response.
-aleAlt :: Lens' AlertsList' Text
+aleAlt :: Lens' AlertsList' Alt
 aleAlt = lens _aleAlt (\ s a -> s{_aleAlt = a})
 
 instance GoogleRequest AlertsList' where
         type Rs AlertsList' = Alerts
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AlertsList{..}
-          = go _aleQuotaUser _alePrettyPrint _aleUserIp
+        requestWithRoute r u AlertsList'{..}
+          = go _aleQuotaUser (Just _alePrettyPrint) _aleUserIp
               _aleLocale
               _aleKey
               _aleOauthToken
               _aleFields
-              _aleAlt
+              (Just _aleAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AlertsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AlertsListResource)
+                      r
+                      u

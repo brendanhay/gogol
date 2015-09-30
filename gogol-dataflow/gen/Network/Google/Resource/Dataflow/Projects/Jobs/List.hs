@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the jobs of a project
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsList@.
-module Dataflow.Projects.Jobs.List
+module Network.Google.Resource.Dataflow.Projects.Jobs.List
     (
     -- * REST Resource
-      ProjectsJobsListAPI
+      ProjectsJobsListResource
 
     -- * Creating a Request
-    , projectsJobsList
-    , ProjectsJobsList
+    , projectsJobsList'
+    , ProjectsJobsList'
 
     -- * Request Lenses
     , pjlXgafv
@@ -52,21 +53,34 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsList@ which the
--- 'ProjectsJobsList' request conforms to.
-type ProjectsJobsListAPI =
+-- 'ProjectsJobsList'' request conforms to.
+type ProjectsJobsListResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
-             QueryParam "view" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   Get '[JSON] ListJobsResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "view" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "pageSize" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project
 --
--- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList
+-- /See:/ 'projectsJobsList'' smart constructor.
+data ProjectsJobsList' = ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Text)
     , _pjlQuotaUser      :: !(Maybe Text)
     , _pjlPrettyPrint    :: !Bool
@@ -123,11 +137,11 @@ data ProjectsJobsList = ProjectsJobsList
 -- * 'pjlCallback'
 --
 -- * 'pjlAlt'
-projectsJobsList
+projectsJobsList'
     :: Text -- ^ 'projectId'
-    -> ProjectsJobsList
-projectsJobsList pPjlProjectId_ =
-    ProjectsJobsList
+    -> ProjectsJobsList'
+projectsJobsList' pPjlProjectId_ =
+    ProjectsJobsList'
     { _pjlXgafv = Nothing
     , _pjlQuotaUser = Nothing
     , _pjlPrettyPrint = True
@@ -243,10 +257,10 @@ pjlAlt = lens _pjlAlt (\ s a -> s{_pjlAlt = a})
 instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsList{..}
-          = go _pjlXgafv _pjlQuotaUser _pjlPrettyPrint
+        requestWithRoute r u ProjectsJobsList'{..}
+          = go _pjlXgafv _pjlQuotaUser (Just _pjlPrettyPrint)
               _pjlUploadProtocol
-              _pjlPp
+              (Just _pjlPp)
               _pjlAccessToken
               _pjlUploadType
               _pjlBearerToken
@@ -258,9 +272,9 @@ instance GoogleRequest ProjectsJobsList' where
               _pjlPageSize
               _pjlFields
               _pjlCallback
-              _pjlAlt
+              (Just _pjlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsListAPI)
+                      (Proxy :: Proxy ProjectsJobsListResource)
                       r
                       u

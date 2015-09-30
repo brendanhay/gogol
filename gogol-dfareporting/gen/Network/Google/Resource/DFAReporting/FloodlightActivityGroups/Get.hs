@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one floodlight activity group by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsGet@.
-module DFAReporting.FloodlightActivityGroups.Get
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
     (
     -- * REST Resource
-      FloodlightActivityGroupsGetAPI
+      FloodlightActivityGroupsGetResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsGet
-    , FloodlightActivityGroupsGet
+    , floodlightActivityGroupsGet'
+    , FloodlightActivityGroupsGet'
 
     -- * Request Lenses
     , faggQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsGet@ which the
--- 'FloodlightActivityGroupsGet' request conforms to.
-type FloodlightActivityGroupsGetAPI =
+-- 'FloodlightActivityGroupsGet'' request conforms to.
+type FloodlightActivityGroupsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
            Capture "id" Int64 :>
-             Get '[JSON] FloodlightActivityGroup
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] FloodlightActivityGroup
 
 -- | Gets one floodlight activity group by ID.
 --
--- /See:/ 'floodlightActivityGroupsGet' smart constructor.
-data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
+-- /See:/ 'floodlightActivityGroupsGet'' smart constructor.
+data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
     { _faggQuotaUser   :: !(Maybe Text)
     , _faggPrettyPrint :: !Bool
     , _faggUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
     , _faggId          :: !Int64
     , _faggOauthToken  :: !(Maybe Text)
     , _faggFields      :: !(Maybe Text)
-    , _faggAlt         :: !Text
+    , _faggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
 -- * 'faggFields'
 --
 -- * 'faggAlt'
-floodlightActivityGroupsGet
+floodlightActivityGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightActivityGroupsGet
-floodlightActivityGroupsGet pFaggProfileId_ pFaggId_ =
-    FloodlightActivityGroupsGet
+    -> FloodlightActivityGroupsGet'
+floodlightActivityGroupsGet' pFaggProfileId_ pFaggId_ =
+    FloodlightActivityGroupsGet'
     { _faggQuotaUser = Nothing
     , _faggPrettyPrint = True
     , _faggUserIp = Nothing
@@ -102,7 +110,7 @@ floodlightActivityGroupsGet pFaggProfileId_ pFaggId_ =
     , _faggId = pFaggId_
     , _faggOauthToken = Nothing
     , _faggFields = Nothing
-    , _faggAlt = "json"
+    , _faggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ faggFields
   = lens _faggFields (\ s a -> s{_faggFields = a})
 
 -- | Data format for the response.
-faggAlt :: Lens' FloodlightActivityGroupsGet' Text
+faggAlt :: Lens' FloodlightActivityGroupsGet' Alt
 faggAlt = lens _faggAlt (\ s a -> s{_faggAlt = a})
 
 instance GoogleRequest FloodlightActivityGroupsGet'
@@ -161,16 +169,17 @@ instance GoogleRequest FloodlightActivityGroupsGet'
         type Rs FloodlightActivityGroupsGet' =
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivityGroupsGet{..}
-          = go _faggQuotaUser _faggPrettyPrint _faggUserIp
+        requestWithRoute r u FloodlightActivityGroupsGet'{..}
+          = go _faggQuotaUser (Just _faggPrettyPrint)
+              _faggUserIp
               _faggProfileId
               _faggKey
               _faggId
               _faggOauthToken
               _faggFields
-              _faggAlt
+              (Just _faggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsGetAPI)
+                      (Proxy :: Proxy FloodlightActivityGroupsGetResource)
                       r
                       u

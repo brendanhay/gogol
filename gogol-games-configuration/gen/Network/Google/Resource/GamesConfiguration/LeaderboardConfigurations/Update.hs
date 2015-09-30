@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsUpdate@.
-module GamesConfiguration.LeaderboardConfigurations.Update
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Update
     (
     -- * REST Resource
-      LeaderboardConfigurationsUpdateAPI
+      LeaderboardConfigurationsUpdateResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsUpdate
-    , LeaderboardConfigurationsUpdate
+    , leaderboardConfigurationsUpdate'
+    , LeaderboardConfigurationsUpdate'
 
     -- * Request Lenses
     , lcuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsUpdate@ which the
--- 'LeaderboardConfigurationsUpdate' request conforms to.
-type LeaderboardConfigurationsUpdateAPI =
+-- 'LeaderboardConfigurationsUpdate'' request conforms to.
+type LeaderboardConfigurationsUpdateResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
-         Put '[JSON] LeaderboardConfiguration
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Put '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
--- /See:/ 'leaderboardConfigurationsUpdate' smart constructor.
-data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
+-- /See:/ 'leaderboardConfigurationsUpdate'' smart constructor.
+data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
     { _lcuQuotaUser     :: !(Maybe Text)
     , _lcuPrettyPrint   :: !Bool
     , _lcuUserIp        :: !(Maybe Text)
@@ -60,7 +68,7 @@ data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
     , _lcuKey           :: !(Maybe Text)
     , _lcuOauthToken    :: !(Maybe Text)
     , _lcuFields        :: !(Maybe Text)
-    , _lcuAlt           :: !Text
+    , _lcuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
 -- * 'lcuFields'
 --
 -- * 'lcuAlt'
-leaderboardConfigurationsUpdate
+leaderboardConfigurationsUpdate'
     :: Text -- ^ 'leaderboardId'
-    -> LeaderboardConfigurationsUpdate
-leaderboardConfigurationsUpdate pLcuLeaderboardId_ =
-    LeaderboardConfigurationsUpdate
+    -> LeaderboardConfigurationsUpdate'
+leaderboardConfigurationsUpdate' pLcuLeaderboardId_ =
+    LeaderboardConfigurationsUpdate'
     { _lcuQuotaUser = Nothing
     , _lcuPrettyPrint = True
     , _lcuUserIp = Nothing
@@ -94,7 +102,7 @@ leaderboardConfigurationsUpdate pLcuLeaderboardId_ =
     , _lcuKey = Nothing
     , _lcuOauthToken = Nothing
     , _lcuFields = Nothing
-    , _lcuAlt = "json"
+    , _lcuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,7 +148,7 @@ lcuFields
   = lens _lcuFields (\ s a -> s{_lcuFields = a})
 
 -- | Data format for the response.
-lcuAlt :: Lens' LeaderboardConfigurationsUpdate' Text
+lcuAlt :: Lens' LeaderboardConfigurationsUpdate' Alt
 lcuAlt = lens _lcuAlt (\ s a -> s{_lcuAlt = a})
 
 instance GoogleRequest
@@ -150,15 +158,16 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          LeaderboardConfigurationsUpdate{..}
-          = go _lcuQuotaUser _lcuPrettyPrint _lcuUserIp
+          LeaderboardConfigurationsUpdate'{..}
+          = go _lcuQuotaUser (Just _lcuPrettyPrint) _lcuUserIp
               _lcuLeaderboardId
               _lcuKey
               _lcuOauthToken
               _lcuFields
-              _lcuAlt
+              (Just _lcuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsUpdateAPI)
+                      (Proxy ::
+                         Proxy LeaderboardConfigurationsUpdateResource)
                       r
                       u

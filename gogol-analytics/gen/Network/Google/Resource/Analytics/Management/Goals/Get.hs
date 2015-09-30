@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a goal to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementGoalsGet@.
-module Analytics.Management.Goals.Get
+module Network.Google.Resource.Analytics.Management.Goals.Get
     (
     -- * REST Resource
-      ManagementGoalsGetAPI
+      ManagementGoalsGetResource
 
     -- * Creating a Request
-    , managementGoalsGet
-    , ManagementGoalsGet
+    , managementGoalsGet'
+    , ManagementGoalsGet'
 
     -- * Request Lenses
     , mggQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementGoalsGet@ which the
--- 'ManagementGoalsGet' request conforms to.
-type ManagementGoalsGetAPI =
+-- 'ManagementGoalsGet'' request conforms to.
+type ManagementGoalsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,12 +56,20 @@ type ManagementGoalsGetAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "goals" :> Capture "goalId" Text :> Get '[JSON] Goal
+                   "goals" :>
+                     Capture "goalId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Get '[JSON] Goal
 
 -- | Gets a goal to which the user has access.
 --
--- /See:/ 'managementGoalsGet' smart constructor.
-data ManagementGoalsGet = ManagementGoalsGet
+-- /See:/ 'managementGoalsGet'' smart constructor.
+data ManagementGoalsGet' = ManagementGoalsGet'
     { _mggQuotaUser     :: !(Maybe Text)
     , _mggPrettyPrint   :: !Bool
     , _mggWebPropertyId :: !Text
@@ -71,7 +80,7 @@ data ManagementGoalsGet = ManagementGoalsGet
     , _mggKey           :: !(Maybe Text)
     , _mggOauthToken    :: !(Maybe Text)
     , _mggFields        :: !(Maybe Text)
-    , _mggAlt           :: !Text
+    , _mggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsGet'' with the minimum fields required to make a request.
@@ -99,14 +108,14 @@ data ManagementGoalsGet = ManagementGoalsGet
 -- * 'mggFields'
 --
 -- * 'mggAlt'
-managementGoalsGet
+managementGoalsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementGoalsGet
-managementGoalsGet pMggWebPropertyId_ pMggGoalId_ pMggProfileId_ pMggAccountId_ =
-    ManagementGoalsGet
+    -> ManagementGoalsGet'
+managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProfileId_ pMggAccountId_ =
+    ManagementGoalsGet'
     { _mggQuotaUser = Nothing
     , _mggPrettyPrint = False
     , _mggWebPropertyId = pMggWebPropertyId_
@@ -117,7 +126,7 @@ managementGoalsGet pMggWebPropertyId_ pMggGoalId_ pMggProfileId_ pMggAccountId_ 
     , _mggKey = Nothing
     , _mggOauthToken = Nothing
     , _mggFields = Nothing
-    , _mggAlt = "json"
+    , _mggAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,14 +187,15 @@ mggFields
   = lens _mggFields (\ s a -> s{_mggFields = a})
 
 -- | Data format for the response.
-mggAlt :: Lens' ManagementGoalsGet' Text
+mggAlt :: Lens' ManagementGoalsGet' Alt
 mggAlt = lens _mggAlt (\ s a -> s{_mggAlt = a})
 
 instance GoogleRequest ManagementGoalsGet' where
         type Rs ManagementGoalsGet' = Goal
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementGoalsGet{..}
-          = go _mggQuotaUser _mggPrettyPrint _mggWebPropertyId
+        requestWithRoute r u ManagementGoalsGet'{..}
+          = go _mggQuotaUser (Just _mggPrettyPrint)
+              _mggWebPropertyId
               _mggGoalId
               _mggUserIp
               _mggProfileId
@@ -193,9 +203,9 @@ instance GoogleRequest ManagementGoalsGet' where
               _mggKey
               _mggOauthToken
               _mggFields
-              _mggAlt
+              (Just _mggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementGoalsGetAPI)
+                      (Proxy :: Proxy ManagementGoalsGetResource)
                       r
                       u

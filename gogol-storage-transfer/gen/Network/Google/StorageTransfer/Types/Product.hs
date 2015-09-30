@@ -119,7 +119,7 @@ instance ToJSON ErrorSummary where
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetailsItem])
+    { _sDetails :: !(Maybe [StatusDetails])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -144,7 +144,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetailsItem]
+sDetails :: Lens' Status [StatusDetails]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -571,6 +571,26 @@ instance FromJSON Empty where
         parseJSON = withObject "Empty" (\ o -> pure Empty)
 
 instance ToJSON Empty where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'statusDetails' smart constructor.
+data StatusDetails =
+    StatusDetails
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
+--
+statusDetails
+    :: StatusDetails
+statusDetails = StatusDetails
+
+instance FromJSON StatusDetails where
+        parseJSON
+          = withObject "StatusDetails"
+              (\ o -> pure StatusDetails)
+
+instance ToJSON StatusDetails where
         toJSON = const (Object mempty)
 
 -- | Represents a whole calendar date, e.g. date of birth. The time of day
@@ -1175,6 +1195,27 @@ instance ToJSON AwsS3Data where
                  [("bucketName" .=) <$> _asdBucketName,
                   ("awsAccessKey" .=) <$> _asdAwsAccessKey])
 
+-- | Represents the transfer operation object.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata =
+    OperationMetadata
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+operationMetadata
+    :: OperationMetadata
+operationMetadata = OperationMetadata
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
+
+instance ToJSON OperationMetadata where
+        toJSON = const (Object mempty)
+
 -- | An HttpData specifies a list of objects on the web to be transferred
 -- over HTTP. The information of the objects to be transferred is contained
 -- in a file referenced by a URL. The first line in the file must be
@@ -1776,4 +1817,32 @@ instance FromJSON ResumeTransferOperationRequest
               (\ o -> pure ResumeTransferOperationRequest)
 
 instance ToJSON ResumeTransferOperationRequest where
+        toJSON = const (Object mempty)
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'operationResponse' smart constructor.
+data OperationResponse =
+    OperationResponse
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+operationResponse
+    :: OperationResponse
+operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
         toJSON = const (Object mempty)

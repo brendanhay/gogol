@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the debuggees that the user can set breakpoints to.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerDebuggerDebuggeesList@.
-module Clouddebugger.Debugger.Debuggees.List
+module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
     (
     -- * REST Resource
-      DebuggerDebuggeesListAPI
+      DebuggerDebuggeesListResource
 
     -- * Creating a Request
-    , debuggerDebuggeesList
-    , DebuggerDebuggeesList
+    , debuggerDebuggeesList'
+    , DebuggerDebuggeesList'
 
     -- * Request Lenses
     , ddlXgafv
@@ -50,19 +51,32 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerDebuggerDebuggeesList@ which the
--- 'DebuggerDebuggeesList' request conforms to.
-type DebuggerDebuggeesListAPI =
+-- 'DebuggerDebuggeesList'' request conforms to.
+type DebuggerDebuggeesListResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
-           QueryParam "includeInactive" Bool :>
-             QueryParam "project" Text :>
-               Get '[JSON] ListDebuggeesResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "includeInactive" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "project" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListDebuggeesResponse
 
 -- | Lists all the debuggees that the user can set breakpoints to.
 --
--- /See:/ 'debuggerDebuggeesList' smart constructor.
-data DebuggerDebuggeesList = DebuggerDebuggeesList
+-- /See:/ 'debuggerDebuggeesList'' smart constructor.
+data DebuggerDebuggeesList' = DebuggerDebuggeesList'
     { _ddlXgafv           :: !(Maybe Text)
     , _ddlQuotaUser       :: !(Maybe Text)
     , _ddlPrettyPrint     :: !Bool
@@ -113,10 +127,10 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList
 -- * 'ddlCallback'
 --
 -- * 'ddlAlt'
-debuggerDebuggeesList
-    :: DebuggerDebuggeesList
-debuggerDebuggeesList =
-    DebuggerDebuggeesList
+debuggerDebuggeesList'
+    :: DebuggerDebuggeesList'
+debuggerDebuggeesList' =
+    DebuggerDebuggeesList'
     { _ddlXgafv = Nothing
     , _ddlQuotaUser = Nothing
     , _ddlPrettyPrint = True
@@ -222,12 +236,12 @@ instance GoogleRequest DebuggerDebuggeesList' where
         type Rs DebuggerDebuggeesList' =
              ListDebuggeesResponse
         request = requestWithRoute defReq debuggerURL
-        requestWithRoute r u DebuggerDebuggeesList{..}
-          = go _ddlXgafv _ddlQuotaUser _ddlPrettyPrint
+        requestWithRoute r u DebuggerDebuggeesList'{..}
+          = go _ddlXgafv _ddlQuotaUser (Just _ddlPrettyPrint)
               _ddlIncludeInactive
               _ddlUploadProtocol
               _ddlProject
-              _ddlPp
+              (Just _ddlPp)
               _ddlAccessToken
               _ddlUploadType
               _ddlBearerToken
@@ -235,9 +249,9 @@ instance GoogleRequest DebuggerDebuggeesList' where
               _ddlOauthToken
               _ddlFields
               _ddlCallback
-              _ddlAlt
+              (Just _ddlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DebuggerDebuggeesListAPI)
+                      (Proxy :: Proxy DebuggerDebuggeesListResource)
                       r
                       u

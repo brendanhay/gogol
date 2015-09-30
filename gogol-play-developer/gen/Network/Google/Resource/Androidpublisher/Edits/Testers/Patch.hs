@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTestersPatch@.
-module Androidpublisher.Edits.Testers.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Testers.Patch
     (
     -- * REST Resource
-      EditsTestersPatchAPI
+      EditsTestersPatchResource
 
     -- * Creating a Request
-    , editsTestersPatch
-    , EditsTestersPatch
+    , editsTestersPatch'
+    , EditsTestersPatch'
 
     -- * Request Lenses
     , etptQuotaUser
@@ -45,19 +46,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTestersPatch@ which the
--- 'EditsTestersPatch' request conforms to.
-type EditsTestersPatchAPI =
+-- 'EditsTestersPatch'' request conforms to.
+type EditsTestersPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track" Text :> Patch '[JSON] Testers
+             Capture "track"
+               AndroidpublisherEditsTestersPatchTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Testers
 
 --
--- /See:/ 'editsTestersPatch' smart constructor.
-data EditsTestersPatch = EditsTestersPatch
+-- /See:/ 'editsTestersPatch'' smart constructor.
+data EditsTestersPatch' = EditsTestersPatch'
     { _etptQuotaUser   :: !(Maybe Text)
-    , _etptTrack       :: !Text
+    , _etptTrack       :: !AndroidpublisherEditsTestersPatchTrack
     , _etptPrettyPrint :: !Bool
     , _etptPackageName :: !Text
     , _etptUserIp      :: !(Maybe Text)
@@ -65,7 +75,7 @@ data EditsTestersPatch = EditsTestersPatch
     , _etptOauthToken  :: !(Maybe Text)
     , _etptEditId      :: !Text
     , _etptFields      :: !(Maybe Text)
-    , _etptAlt         :: !Text
+    , _etptAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersPatch'' with the minimum fields required to make a request.
@@ -91,13 +101,13 @@ data EditsTestersPatch = EditsTestersPatch
 -- * 'etptFields'
 --
 -- * 'etptAlt'
-editsTestersPatch
-    :: Text -- ^ 'track'
+editsTestersPatch'
+    :: AndroidpublisherEditsTestersPatchTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTestersPatch
-editsTestersPatch pEtptTrack_ pEtptPackageName_ pEtptEditId_ =
-    EditsTestersPatch
+    -> EditsTestersPatch'
+editsTestersPatch' pEtptTrack_ pEtptPackageName_ pEtptEditId_ =
+    EditsTestersPatch'
     { _etptQuotaUser = Nothing
     , _etptTrack = pEtptTrack_
     , _etptPrettyPrint = True
@@ -107,7 +117,7 @@ editsTestersPatch pEtptTrack_ pEtptPackageName_ pEtptEditId_ =
     , _etptOauthToken = Nothing
     , _etptEditId = pEtptEditId_
     , _etptFields = Nothing
-    , _etptAlt = "json"
+    , _etptAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,7 +128,7 @@ etptQuotaUser
   = lens _etptQuotaUser
       (\ s a -> s{_etptQuotaUser = a})
 
-etptTrack :: Lens' EditsTestersPatch' Text
+etptTrack :: Lens' EditsTestersPatch' AndroidpublisherEditsTestersPatchTrack
 etptTrack
   = lens _etptTrack (\ s a -> s{_etptTrack = a})
 
@@ -164,23 +174,24 @@ etptFields
   = lens _etptFields (\ s a -> s{_etptFields = a})
 
 -- | Data format for the response.
-etptAlt :: Lens' EditsTestersPatch' Text
+etptAlt :: Lens' EditsTestersPatch' Alt
 etptAlt = lens _etptAlt (\ s a -> s{_etptAlt = a})
 
 instance GoogleRequest EditsTestersPatch' where
         type Rs EditsTestersPatch' = Testers
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTestersPatch{..}
-          = go _etptQuotaUser _etptTrack _etptPrettyPrint
+        requestWithRoute r u EditsTestersPatch'{..}
+          = go _etptQuotaUser _etptTrack
+              (Just _etptPrettyPrint)
               _etptPackageName
               _etptUserIp
               _etptKey
               _etptOauthToken
               _etptEditId
               _etptFields
-              _etptAlt
+              (Just _etptAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsTestersPatchAPI)
+                      (Proxy :: Proxy EditsTestersPatchResource)
                       r
                       u

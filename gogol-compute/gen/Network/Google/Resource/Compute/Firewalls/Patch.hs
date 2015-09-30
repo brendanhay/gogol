@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsPatch@.
-module Compute.Firewalls.Patch
+module Network.Google.Resource.Compute.Firewalls.Patch
     (
     -- * REST Resource
-      FirewallsPatchAPI
+      FirewallsPatchResource
 
     -- * Creating a Request
-    , firewallsPatch
-    , FirewallsPatch
+    , firewallsPatch'
+    , FirewallsPatch'
 
     -- * Request Lenses
     , fpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsPatch@ which the
--- 'FirewallsPatch' request conforms to.
-type FirewallsPatchAPI =
+-- 'FirewallsPatch'' request conforms to.
+type FirewallsPatchResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           Capture "firewall" Text :> Patch '[JSON] Operation
+           Capture "firewall" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request. This method supports patch semantics.
 --
--- /See:/ 'firewallsPatch' smart constructor.
-data FirewallsPatch = FirewallsPatch
+-- /See:/ 'firewallsPatch'' smart constructor.
+data FirewallsPatch' = FirewallsPatch'
     { _fpQuotaUser   :: !(Maybe Text)
     , _fpPrettyPrint :: !Bool
     , _fpProject     :: !Text
@@ -65,7 +73,7 @@ data FirewallsPatch = FirewallsPatch
     , _fpOauthToken  :: !(Maybe Text)
     , _fpFirewall    :: !Text
     , _fpFields      :: !(Maybe Text)
-    , _fpAlt         :: !Text
+    , _fpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data FirewallsPatch = FirewallsPatch
 -- * 'fpFields'
 --
 -- * 'fpAlt'
-firewallsPatch
+firewallsPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
-    -> FirewallsPatch
-firewallsPatch pFpProject_ pFpFirewall_ =
-    FirewallsPatch
+    -> FirewallsPatch'
+firewallsPatch' pFpProject_ pFpFirewall_ =
+    FirewallsPatch'
     { _fpQuotaUser = Nothing
     , _fpPrettyPrint = True
     , _fpProject = pFpProject_
@@ -103,7 +111,7 @@ firewallsPatch pFpProject_ pFpFirewall_ =
     , _fpOauthToken = Nothing
     , _fpFirewall = pFpFirewall_
     , _fpFields = Nothing
-    , _fpAlt = "json"
+    , _fpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,20 +158,22 @@ fpFields :: Lens' FirewallsPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
 
 -- | Data format for the response.
-fpAlt :: Lens' FirewallsPatch' Text
+fpAlt :: Lens' FirewallsPatch' Alt
 fpAlt = lens _fpAlt (\ s a -> s{_fpAlt = a})
 
 instance GoogleRequest FirewallsPatch' where
         type Rs FirewallsPatch' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsPatch{..}
-          = go _fpQuotaUser _fpPrettyPrint _fpProject _fpUserIp
+        requestWithRoute r u FirewallsPatch'{..}
+          = go _fpQuotaUser (Just _fpPrettyPrint) _fpProject
+              _fpUserIp
               _fpKey
               _fpOauthToken
               _fpFirewall
               _fpFields
-              _fpAlt
+              (Just _fpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Copies a table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableCopy@.
-module FusionTables.Table.Copy
+module Network.Google.Resource.FusionTables.Table.Copy
     (
     -- * REST Resource
-      TableCopyAPI
+      TableCopyResource
 
     -- * Creating a Request
-    , tableCopy
-    , TableCopy
+    , tableCopy'
+    , TableCopy'
 
     -- * Request Lenses
     , tcQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableCopy@ which the
--- 'TableCopy' request conforms to.
-type TableCopyAPI =
+-- 'TableCopy'' request conforms to.
+type TableCopyResource =
      "tables" :>
        Capture "tableId" Text :>
          "copy" :>
-           QueryParam "copyPresentation" Bool :>
-             Post '[JSON] Table
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "copyPresentation" Bool :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Table
 
 -- | Copies a table.
 --
--- /See:/ 'tableCopy' smart constructor.
-data TableCopy = TableCopy
+-- /See:/ 'tableCopy'' smart constructor.
+data TableCopy' = TableCopy'
     { _tcQuotaUser        :: !(Maybe Text)
     , _tcPrettyPrint      :: !Bool
     , _tcUserIp           :: !(Maybe Text)
@@ -64,7 +71,7 @@ data TableCopy = TableCopy
     , _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
     , _tcFields           :: !(Maybe Text)
-    , _tcAlt              :: !Text
+    , _tcAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableCopy'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data TableCopy = TableCopy
 -- * 'tcFields'
 --
 -- * 'tcAlt'
-tableCopy
+tableCopy'
     :: Text -- ^ 'tableId'
-    -> TableCopy
-tableCopy pTcTableId_ =
-    TableCopy
+    -> TableCopy'
+tableCopy' pTcTableId_ =
+    TableCopy'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True
     , _tcUserIp = Nothing
@@ -101,7 +108,7 @@ tableCopy pTcTableId_ =
     , _tcTableId = pTcTableId_
     , _tcCopyPresentation = Nothing
     , _tcFields = Nothing
-    , _tcAlt = "json"
+    , _tcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,18 +156,21 @@ tcFields :: Lens' TableCopy' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 -- | Data format for the response.
-tcAlt :: Lens' TableCopy' Text
+tcAlt :: Lens' TableCopy' Alt
 tcAlt = lens _tcAlt (\ s a -> s{_tcAlt = a})
 
 instance GoogleRequest TableCopy' where
         type Rs TableCopy' = Table
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableCopy{..}
-          = go _tcQuotaUser _tcPrettyPrint _tcUserIp _tcKey
+        requestWithRoute r u TableCopy'{..}
+          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIp
+              _tcKey
               _tcOauthToken
               _tcTableId
               _tcCopyPresentation
               _tcFields
-              _tcAlt
+              (Just _tcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableCopyAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TableCopyResource)
+                      r
+                      u

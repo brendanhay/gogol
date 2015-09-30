@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a resource view.
 --
 -- /See:/ <https://developers.google.com/compute/ Google Compute Engine Instance Groups API Reference> for @ResourceviewsZoneViewsInsert@.
-module Resourceviews.ZoneViews.Insert
+module Network.Google.Resource.Resourceviews.ZoneViews.Insert
     (
     -- * REST Resource
-      ZoneViewsInsertAPI
+      ZoneViewsInsertResource
 
     -- * Creating a Request
-    , zoneViewsInsert
-    , ZoneViewsInsert
+    , zoneViewsInsert'
+    , ZoneViewsInsert'
 
     -- * Request Lenses
     , zviQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.InstanceGroups.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResourceviewsZoneViewsInsert@ which the
--- 'ZoneViewsInsert' request conforms to.
-type ZoneViewsInsertAPI =
+-- 'ZoneViewsInsert'' request conforms to.
+type ZoneViewsInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "resourceViews" :> Post '[JSON] Operation
+           "resourceViews" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Create a resource view.
 --
--- /See:/ 'zoneViewsInsert' smart constructor.
-data ZoneViewsInsert = ZoneViewsInsert
+-- /See:/ 'zoneViewsInsert'' smart constructor.
+data ZoneViewsInsert' = ZoneViewsInsert'
     { _zviQuotaUser   :: !(Maybe Text)
     , _zviPrettyPrint :: !Bool
     , _zviProject     :: !Text
@@ -63,7 +71,7 @@ data ZoneViewsInsert = ZoneViewsInsert
     , _zviKey         :: !(Maybe Text)
     , _zviOauthToken  :: !(Maybe Text)
     , _zviFields      :: !(Maybe Text)
-    , _zviAlt         :: !Text
+    , _zviAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneViewsInsert'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ZoneViewsInsert = ZoneViewsInsert
 -- * 'zviFields'
 --
 -- * 'zviAlt'
-zoneViewsInsert
+zoneViewsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> ZoneViewsInsert
-zoneViewsInsert pZviProject_ pZviZone_ =
-    ZoneViewsInsert
+    -> ZoneViewsInsert'
+zoneViewsInsert' pZviProject_ pZviZone_ =
+    ZoneViewsInsert'
     { _zviQuotaUser = Nothing
     , _zviPrettyPrint = True
     , _zviProject = pZviProject_
@@ -101,7 +109,7 @@ zoneViewsInsert pZviProject_ pZviZone_ =
     , _zviKey = Nothing
     , _zviOauthToken = Nothing
     , _zviFields = Nothing
-    , _zviAlt = "json"
+    , _zviAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ zviFields
   = lens _zviFields (\ s a -> s{_zviFields = a})
 
 -- | Data format for the response.
-zviAlt :: Lens' ZoneViewsInsert' Text
+zviAlt :: Lens' ZoneViewsInsert' Alt
 zviAlt = lens _zviAlt (\ s a -> s{_zviAlt = a})
 
 instance GoogleRequest ZoneViewsInsert' where
         type Rs ZoneViewsInsert' = Operation
         request = requestWithRoute defReq instanceGroupsURL
-        requestWithRoute r u ZoneViewsInsert{..}
-          = go _zviQuotaUser _zviPrettyPrint _zviProject
+        requestWithRoute r u ZoneViewsInsert'{..}
+          = go _zviQuotaUser (Just _zviPrettyPrint) _zviProject
               _zviUserIp
               _zviZone
               _zviKey
               _zviOauthToken
               _zviFields
-              _zviAlt
+              (Just _zviAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ZoneViewsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ZoneViewsInsertResource)
                       r
                       u

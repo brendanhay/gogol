@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one country by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCountriesGet@.
-module DFAReporting.Countries.Get
+module Network.Google.Resource.DFAReporting.Countries.Get
     (
     -- * REST Resource
-      CountriesGetAPI
+      CountriesGetResource
 
     -- * Creating a Request
-    , countriesGet
-    , CountriesGet
+    , countriesGet'
+    , CountriesGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCountriesGet@ which the
--- 'CountriesGet' request conforms to.
-type CountriesGetAPI =
+-- 'CountriesGet'' request conforms to.
+type CountriesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "countries" :>
-           Capture "dartId" Int64 :> Get '[JSON] Country
+           Capture "dartId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Country
 
 -- | Gets one country by ID.
 --
--- /See:/ 'countriesGet' smart constructor.
-data CountriesGet = CountriesGet
+-- /See:/ 'countriesGet'' smart constructor.
+data CountriesGet' = CountriesGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CountriesGet = CountriesGet
     , _cgOauthToken  :: !(Maybe Text)
     , _cgDartId      :: !Int64
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CountriesGet = CountriesGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-countriesGet
+countriesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'dartId'
-    -> CountriesGet
-countriesGet pCgProfileId_ pCgDartId_ =
-    CountriesGet
+    -> CountriesGet'
+countriesGet' pCgProfileId_ pCgDartId_ =
+    CountriesGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -101,7 +109,7 @@ countriesGet pCgProfileId_ pCgDartId_ =
     , _cgOauthToken = Nothing
     , _cgDartId = pCgDartId_
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,20 +155,22 @@ cgFields :: Lens' CountriesGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CountriesGet' Text
+cgAlt :: Lens' CountriesGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CountriesGet' where
         type Rs CountriesGet' = Country
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CountriesGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp
+        requestWithRoute r u CountriesGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
               _cgProfileId
               _cgKey
               _cgOauthToken
               _cgDartId
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CountriesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CountriesGetResource)
+                      r
                       u

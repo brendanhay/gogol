@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get license assignment of a particular product and sku for a user
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsGet@.
-module Licensing.LicenseAssignments.Get
+module Network.Google.Resource.Licensing.LicenseAssignments.Get
     (
     -- * REST Resource
-      LicenseAssignmentsGetAPI
+      LicenseAssignmentsGetResource
 
     -- * Creating a Request
-    , licenseAssignmentsGet
-    , LicenseAssignmentsGet
+    , licenseAssignmentsGet'
+    , LicenseAssignmentsGet'
 
     -- * Request Lenses
     , lagQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsGet@ which the
--- 'LicenseAssignmentsGet' request conforms to.
-type LicenseAssignmentsGetAPI =
+-- 'LicenseAssignmentsGet'' request conforms to.
+type LicenseAssignmentsGetResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
            "user" :>
              Capture "userId" Text :>
-               Get '[JSON] LicenseAssignment
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] LicenseAssignment
 
 -- | Get license assignment of a particular product and sku for a user
 --
--- /See:/ 'licenseAssignmentsGet' smart constructor.
-data LicenseAssignmentsGet = LicenseAssignmentsGet
+-- /See:/ 'licenseAssignmentsGet'' smart constructor.
+data LicenseAssignmentsGet' = LicenseAssignmentsGet'
     { _lagQuotaUser   :: !(Maybe Text)
     , _lagPrettyPrint :: !Bool
     , _lagUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data LicenseAssignmentsGet = LicenseAssignmentsGet
     , _lagOauthToken  :: !(Maybe Text)
     , _lagProductId   :: !Text
     , _lagFields      :: !(Maybe Text)
-    , _lagAlt         :: !Text
+    , _lagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsGet'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data LicenseAssignmentsGet = LicenseAssignmentsGet
 -- * 'lagFields'
 --
 -- * 'lagAlt'
-licenseAssignmentsGet
+licenseAssignmentsGet'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsGet
-licenseAssignmentsGet pLagSkuId_ pLagUserId_ pLagProductId_ =
-    LicenseAssignmentsGet
+    -> LicenseAssignmentsGet'
+licenseAssignmentsGet' pLagSkuId_ pLagUserId_ pLagProductId_ =
+    LicenseAssignmentsGet'
     { _lagQuotaUser = Nothing
     , _lagPrettyPrint = True
     , _lagUserIp = Nothing
@@ -109,7 +116,7 @@ licenseAssignmentsGet pLagSkuId_ pLagUserId_ pLagProductId_ =
     , _lagOauthToken = Nothing
     , _lagProductId = pLagProductId_
     , _lagFields = Nothing
-    , _lagAlt = "json"
+    , _lagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +170,23 @@ lagFields
   = lens _lagFields (\ s a -> s{_lagFields = a})
 
 -- | Data format for the response.
-lagAlt :: Lens' LicenseAssignmentsGet' Text
+lagAlt :: Lens' LicenseAssignmentsGet' Alt
 lagAlt = lens _lagAlt (\ s a -> s{_lagAlt = a})
 
 instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsGet{..}
-          = go _lagQuotaUser _lagPrettyPrint _lagUserIp
+        requestWithRoute r u LicenseAssignmentsGet'{..}
+          = go _lagQuotaUser (Just _lagPrettyPrint) _lagUserIp
               _lagSkuId
               _lagUserId
               _lagKey
               _lagOauthToken
               _lagProductId
               _lagFields
-              _lagAlt
+              (Just _lagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsGetAPI)
+                      (Proxy :: Proxy LicenseAssignmentsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing campaign landing page.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesDelete@.
-module DFAReporting.LandingPages.Delete
+module Network.Google.Resource.DFAReporting.LandingPages.Delete
     (
     -- * REST Resource
-      LandingPagesDeleteAPI
+      LandingPagesDeleteResource
 
     -- * Creating a Request
-    , landingPagesDelete
-    , LandingPagesDelete
+    , landingPagesDelete'
+    , LandingPagesDelete'
 
     -- * Request Lenses
     , lpdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingLandingPagesDelete@ which the
--- 'LandingPagesDelete' request conforms to.
-type LandingPagesDeleteAPI =
+-- 'LandingPagesDelete'' request conforms to.
+type LandingPagesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "landingPages" :>
-               Capture "id" Int64 :> Delete '[JSON] ()
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
 --
--- /See:/ 'landingPagesDelete' smart constructor.
-data LandingPagesDelete = LandingPagesDelete
+-- /See:/ 'landingPagesDelete'' smart constructor.
+data LandingPagesDelete' = LandingPagesDelete'
     { _lpdQuotaUser   :: !(Maybe Text)
     , _lpdPrettyPrint :: !Bool
     , _lpdUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data LandingPagesDelete = LandingPagesDelete
     , _lpdId          :: !Int64
     , _lpdOauthToken  :: !(Maybe Text)
     , _lpdFields      :: !(Maybe Text)
-    , _lpdAlt         :: !Text
+    , _lpdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data LandingPagesDelete = LandingPagesDelete
 -- * 'lpdFields'
 --
 -- * 'lpdAlt'
-landingPagesDelete
+landingPagesDelete'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> LandingPagesDelete
-landingPagesDelete pLpdCampaignId_ pLpdProfileId_ pLpdId_ =
-    LandingPagesDelete
+    -> LandingPagesDelete'
+landingPagesDelete' pLpdCampaignId_ pLpdProfileId_ pLpdId_ =
+    LandingPagesDelete'
     { _lpdQuotaUser = Nothing
     , _lpdPrettyPrint = True
     , _lpdUserIp = Nothing
@@ -109,7 +117,7 @@ landingPagesDelete pLpdCampaignId_ pLpdProfileId_ pLpdId_ =
     , _lpdId = pLpdId_
     , _lpdOauthToken = Nothing
     , _lpdFields = Nothing
-    , _lpdAlt = "json"
+    , _lpdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +172,23 @@ lpdFields
   = lens _lpdFields (\ s a -> s{_lpdFields = a})
 
 -- | Data format for the response.
-lpdAlt :: Lens' LandingPagesDelete' Text
+lpdAlt :: Lens' LandingPagesDelete' Alt
 lpdAlt = lens _lpdAlt (\ s a -> s{_lpdAlt = a})
 
 instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesDelete{..}
-          = go _lpdQuotaUser _lpdPrettyPrint _lpdUserIp
+        requestWithRoute r u LandingPagesDelete'{..}
+          = go _lpdQuotaUser (Just _lpdPrettyPrint) _lpdUserIp
               _lpdCampaignId
               _lpdProfileId
               _lpdKey
               _lpdId
               _lpdOauthToken
               _lpdFields
-              _lpdAlt
+              (Just _lpdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LandingPagesDeleteAPI)
+                      (Proxy :: Proxy LandingPagesDeleteResource)
                       r
                       u

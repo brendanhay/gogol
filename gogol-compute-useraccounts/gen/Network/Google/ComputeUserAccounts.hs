@@ -27,57 +27,70 @@ module Network.Google.ComputeUserAccounts
     -- * REST Resources
 
     -- ** ClouduseraccountsGlobalAccountsOperationsDelete
-    , module Clouduseraccounts.GlobalAccountsOperations.Delete
+    , module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.Delete
 
     -- ** ClouduseraccountsGlobalAccountsOperationsGet
-    , module Clouduseraccounts.GlobalAccountsOperations.Get
+    , module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.Get
 
     -- ** ClouduseraccountsGlobalAccountsOperationsList
-    , module Clouduseraccounts.GlobalAccountsOperations.List
+    , module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.List
 
     -- ** ClouduseraccountsGroupsAddMember
-    , module Clouduseraccounts.Groups.AddMember
+    , module Network.Google.Resource.Clouduseraccounts.Groups.AddMember
 
     -- ** ClouduseraccountsGroupsDelete
-    , module Clouduseraccounts.Groups.Delete
+    , module Network.Google.Resource.Clouduseraccounts.Groups.Delete
 
     -- ** ClouduseraccountsGroupsGet
-    , module Clouduseraccounts.Groups.Get
+    , module Network.Google.Resource.Clouduseraccounts.Groups.Get
 
     -- ** ClouduseraccountsGroupsInsert
-    , module Clouduseraccounts.Groups.Insert
+    , module Network.Google.Resource.Clouduseraccounts.Groups.Insert
 
     -- ** ClouduseraccountsGroupsList
-    , module Clouduseraccounts.Groups.List
+    , module Network.Google.Resource.Clouduseraccounts.Groups.List
 
     -- ** ClouduseraccountsGroupsRemoveMember
-    , module Clouduseraccounts.Groups.RemoveMember
+    , module Network.Google.Resource.Clouduseraccounts.Groups.RemoveMember
 
     -- ** ClouduseraccountsLinuxGetAuthorizedKeysView
-    , module Clouduseraccounts.Linux.GetAuthorizedKeysView
+    , module Network.Google.Resource.Clouduseraccounts.Linux.GetAuthorizedKeysView
 
     -- ** ClouduseraccountsLinuxGetLinuxAccountViews
-    , module Clouduseraccounts.Linux.GetLinuxAccountViews
+    , module Network.Google.Resource.Clouduseraccounts.Linux.GetLinuxAccountViews
 
     -- ** ClouduseraccountsUsersAddPublicKey
-    , module Clouduseraccounts.Users.AddPublicKey
+    , module Network.Google.Resource.Clouduseraccounts.Users.AddPublicKey
 
     -- ** ClouduseraccountsUsersDelete
-    , module Clouduseraccounts.Users.Delete
+    , module Network.Google.Resource.Clouduseraccounts.Users.Delete
 
     -- ** ClouduseraccountsUsersGet
-    , module Clouduseraccounts.Users.Get
+    , module Network.Google.Resource.Clouduseraccounts.Users.Get
 
     -- ** ClouduseraccountsUsersInsert
-    , module Clouduseraccounts.Users.Insert
+    , module Network.Google.Resource.Clouduseraccounts.Users.Insert
 
     -- ** ClouduseraccountsUsersList
-    , module Clouduseraccounts.Users.List
+    , module Network.Google.Resource.Clouduseraccounts.Users.List
 
     -- ** ClouduseraccountsUsersRemovePublicKey
-    , module Clouduseraccounts.Users.RemovePublicKey
+    , module Network.Google.Resource.Clouduseraccounts.Users.RemovePublicKey
 
     -- * Types
+
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- ** OperationList
     , OperationList
@@ -152,6 +165,9 @@ module Network.Google.ComputeUserAccounts
     , pkExpirationTimestamp
     , pkDescription
 
+    -- ** OperationStatus
+    , OperationStatus (..)
+
     -- ** User
     , User
     , user
@@ -199,6 +215,11 @@ module Network.Google.ComputeUserAccounts
     , luvGid
     , luvHomeDirectory
 
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
+
     -- ** LinuxGetAuthorizedKeysViewResponse
     , LinuxGetAuthorizedKeysViewResponse
     , linuxGetAuthorizedKeysViewResponse
@@ -209,11 +230,24 @@ module Network.Google.ComputeUserAccounts
     , groupsRemoveMemberRequest
     , grmrUsers
 
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- ** AuthorizedKeysView
     , AuthorizedKeysView
     , authorizedKeysView
     , akvSudoer
     , akvKeys
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.ComputeUserAccounts.Types
@@ -241,8 +275,22 @@ TODO
 -}
 
 type ComputeUserAccountsAPI =
-     Groups :<|> Users :<|> GlobalAccountsOperations :<|>
-       Linux
+     GroupsInsertResource :<|> GroupsListResource :<|>
+       GroupsGetResource
+       :<|> GroupsRemoveMemberResource
+       :<|> GroupsDeleteResource
+       :<|> GroupsAddMemberResource
+       :<|> UsersAddPublicKeyResource
+       :<|> UsersInsertResource
+       :<|> UsersListResource
+       :<|> UsersRemovePublicKeyResource
+       :<|> UsersGetResource
+       :<|> UsersDeleteResource
+       :<|> GlobalAccountsOperationsListResource
+       :<|> GlobalAccountsOperationsGetResource
+       :<|> GlobalAccountsOperationsDeleteResource
+       :<|> LinuxGetLinuxAccountViewsResource
+       :<|> LinuxGetAuthorizedKeysViewResource
 
 computeUserAccountsAPI :: Proxy ComputeUserAccountsAPI
 computeUserAccountsAPI = Proxy

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all Autoscaler resources in this zone.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersList@.
-module Autoscaler.Autoscalers.List
+module Network.Google.Resource.Autoscaler.Autoscalers.List
     (
     -- * REST Resource
-      AutoscalersListAPI
+      AutoscalersListResource
 
     -- * Creating a Request
-    , autoscalersList
-    , AutoscalersList
+    , autoscalersList'
+    , AutoscalersList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.ComputeAutoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AutoscalerAutoscalersList@ which the
--- 'AutoscalersList' request conforms to.
-type AutoscalersListAPI =
+-- 'AutoscalersList'' request conforms to.
+type AutoscalersListResource =
      "projects" :>
        Capture "project" Text :>
          "zones" :>
            Capture "zone" Text :>
              "autoscalers" :>
-               QueryParam "filter" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] AutoscalerListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "filter" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] AutoscalerListResponse
 
 -- | Lists all Autoscaler resources in this zone.
 --
--- /See:/ 'autoscalersList' smart constructor.
-data AutoscalersList = AutoscalersList
+-- /See:/ 'autoscalersList'' smart constructor.
+data AutoscalersList' = AutoscalersList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alProject     :: !Text
@@ -74,7 +82,7 @@ data AutoscalersList = AutoscalersList
     , _alOauthToken  :: !(Maybe Text)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
@@ -104,12 +112,12 @@ data AutoscalersList = AutoscalersList
 -- * 'alFields'
 --
 -- * 'alAlt'
-autoscalersList
+autoscalersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> AutoscalersList
-autoscalersList pAlProject_ pAlZone_ =
-    AutoscalersList
+    -> AutoscalersList'
+autoscalersList' pAlProject_ pAlZone_ =
+    AutoscalersList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alProject = pAlProject_
@@ -121,7 +129,7 @@ autoscalersList pAlProject_ pAlZone_ =
     , _alOauthToken = Nothing
     , _alMaxResults = 500
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,15 +186,16 @@ alFields :: Lens' AutoscalersList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AutoscalersList' Text
+alAlt :: Lens' AutoscalersList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerListResponse
         request
           = requestWithRoute defReq computeAutoscalerURL
-        requestWithRoute r u AutoscalersList{..}
-          = go _alQuotaUser _alPrettyPrint _alProject _alUserIp
+        requestWithRoute r u AutoscalersList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alProject
+              _alUserIp
               _alZone
               _alKey
               _alFilter
@@ -194,8 +203,9 @@ instance GoogleRequest AutoscalersList' where
               _alOauthToken
               (Just _alMaxResults)
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AutoscalersListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AutoscalersListResource)
                       r
                       u

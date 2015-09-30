@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersUpdate@.
-module TagManager.Accounts.Containers.Update
+module Network.Google.Resource.TagManager.Accounts.Containers.Update
     (
     -- * REST Resource
-      AccountsContainersUpdateAPI
+      AccountsContainersUpdateResource
 
     -- * Creating a Request
-    , accountsContainersUpdate
-    , AccountsContainersUpdate
+    , accountsContainersUpdate'
+    , AccountsContainersUpdate'
 
     -- * Request Lenses
     , acuQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersUpdate@ which the
--- 'AccountsContainersUpdate' request conforms to.
-type AccountsContainersUpdateAPI =
+-- 'AccountsContainersUpdate'' request conforms to.
+type AccountsContainersUpdateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             QueryParam "fingerprint" Text :>
-               Put '[JSON] Container
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fingerprint" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Container
 
 -- | Updates a Container.
 --
--- /See:/ 'accountsContainersUpdate' smart constructor.
-data AccountsContainersUpdate = AccountsContainersUpdate
+-- /See:/ 'accountsContainersUpdate'' smart constructor.
+data AccountsContainersUpdate' = AccountsContainersUpdate'
     { _acuQuotaUser   :: !(Maybe Text)
     , _acuPrettyPrint :: !Bool
     , _acuContainerId :: !Text
@@ -67,7 +74,7 @@ data AccountsContainersUpdate = AccountsContainersUpdate
     , _acuKey         :: !(Maybe Text)
     , _acuOauthToken  :: !(Maybe Text)
     , _acuFields      :: !(Maybe Text)
-    , _acuAlt         :: !Text
+    , _acuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersUpdate'' with the minimum fields required to make a request.
@@ -93,12 +100,12 @@ data AccountsContainersUpdate = AccountsContainersUpdate
 -- * 'acuFields'
 --
 -- * 'acuAlt'
-accountsContainersUpdate
+accountsContainersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersUpdate
-accountsContainersUpdate pAcuContainerId_ pAcuAccountId_ =
-    AccountsContainersUpdate
+    -> AccountsContainersUpdate'
+accountsContainersUpdate' pAcuContainerId_ pAcuAccountId_ =
+    AccountsContainersUpdate'
     { _acuQuotaUser = Nothing
     , _acuPrettyPrint = True
     , _acuContainerId = pAcuContainerId_
@@ -108,7 +115,7 @@ accountsContainersUpdate pAcuContainerId_ pAcuAccountId_ =
     , _acuKey = Nothing
     , _acuOauthToken = Nothing
     , _acuFields = Nothing
-    , _acuAlt = "json"
+    , _acuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +173,25 @@ acuFields
   = lens _acuFields (\ s a -> s{_acuFields = a})
 
 -- | Data format for the response.
-acuAlt :: Lens' AccountsContainersUpdate' Text
+acuAlt :: Lens' AccountsContainersUpdate' Alt
 acuAlt = lens _acuAlt (\ s a -> s{_acuAlt = a})
 
 instance GoogleRequest AccountsContainersUpdate'
          where
         type Rs AccountsContainersUpdate' = Container
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersUpdate{..}
-          = go _acuQuotaUser _acuPrettyPrint _acuContainerId
+        requestWithRoute r u AccountsContainersUpdate'{..}
+          = go _acuQuotaUser (Just _acuPrettyPrint)
+              _acuContainerId
               _acuUserIp
               _acuFingerprint
               _acuAccountId
               _acuKey
               _acuOauthToken
               _acuFields
-              _acuAlt
+              (Just _acuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersUpdateAPI)
+                      (Proxy :: Proxy AccountsContainersUpdateResource)
                       r
                       u

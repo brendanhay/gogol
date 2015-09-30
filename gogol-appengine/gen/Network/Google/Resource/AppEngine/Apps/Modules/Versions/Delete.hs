@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing version.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsDelete@.
-module AppEngine.Apps.Modules.Versions.Delete
+module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
     (
     -- * REST Resource
-      AppsModulesVersionsDeleteAPI
+      AppsModulesVersionsDeleteResource
 
     -- * Creating a Request
-    , appsModulesVersionsDelete
-    , AppsModulesVersionsDelete
+    , appsModulesVersionsDelete'
+    , AppsModulesVersionsDelete'
 
     -- * Request Lenses
     , amvdXgafv
@@ -51,20 +52,34 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsModulesVersionsDelete@ which the
--- 'AppsModulesVersionsDelete' request conforms to.
-type AppsModulesVersionsDeleteAPI =
+-- 'AppsModulesVersionsDelete'' request conforms to.
+type AppsModulesVersionsDeleteResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "modules" :>
              Capture "modulesId" Text :>
                "versions" :>
-                 Capture "versionsId" Text :> Delete '[JSON] Operation
+                 Capture "versionsId" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Delete '[JSON] Operation
 
 -- | Deletes an existing version.
 --
--- /See:/ 'appsModulesVersionsDelete' smart constructor.
-data AppsModulesVersionsDelete = AppsModulesVersionsDelete
+-- /See:/ 'appsModulesVersionsDelete'' smart constructor.
+data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
     { _amvdXgafv          :: !(Maybe Text)
     , _amvdQuotaUser      :: !(Maybe Text)
     , _amvdPrettyPrint    :: !Bool
@@ -118,13 +133,13 @@ data AppsModulesVersionsDelete = AppsModulesVersionsDelete
 -- * 'amvdCallback'
 --
 -- * 'amvdAlt'
-appsModulesVersionsDelete
+appsModulesVersionsDelete'
     :: Text -- ^ 'versionsId'
     -> Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
-    -> AppsModulesVersionsDelete
-appsModulesVersionsDelete pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
-    AppsModulesVersionsDelete
+    -> AppsModulesVersionsDelete'
+appsModulesVersionsDelete' pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
+    AppsModulesVersionsDelete'
     { _amvdXgafv = Nothing
     , _amvdQuotaUser = Nothing
     , _amvdPrettyPrint = True
@@ -238,10 +253,11 @@ instance GoogleRequest AppsModulesVersionsDelete'
          where
         type Rs AppsModulesVersionsDelete' = Operation
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsModulesVersionsDelete{..}
-          = go _amvdXgafv _amvdQuotaUser _amvdPrettyPrint
+        requestWithRoute r u AppsModulesVersionsDelete'{..}
+          = go _amvdXgafv _amvdQuotaUser
+              (Just _amvdPrettyPrint)
               _amvdUploadProtocol
-              _amvdPp
+              (Just _amvdPp)
               _amvdAccessToken
               _amvdUploadType
               _amvdVersionsId
@@ -252,9 +268,9 @@ instance GoogleRequest AppsModulesVersionsDelete'
               _amvdOauthToken
               _amvdFields
               _amvdCallback
-              _amvdAlt
+              (Just _amvdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsModulesVersionsDeleteAPI)
+                      (Proxy :: Proxy AppsModulesVersionsDeleteResource)
                       r
                       u

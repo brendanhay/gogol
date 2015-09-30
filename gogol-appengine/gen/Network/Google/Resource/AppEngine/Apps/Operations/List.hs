@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- \`users\/*\/operations\`.
 --
 -- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsOperationsList@.
-module AppEngine.Apps.Operations.List
+module Network.Google.Resource.AppEngine.Apps.Operations.List
     (
     -- * REST Resource
-      AppsOperationsListAPI
+      AppsOperationsListResource
 
     -- * Creating a Request
-    , appsOperationsList
-    , AppsOperationsList
+    , appsOperationsList'
+    , AppsOperationsList'
 
     -- * Request Lenses
     , aolXgafv
@@ -56,16 +57,29 @@ import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppengineAppsOperationsList@ which the
--- 'AppsOperationsList' request conforms to.
-type AppsOperationsListAPI =
+-- 'AppsOperationsList'' request conforms to.
+type AppsOperationsListResource =
      "v1beta4" :>
        "apps" :>
          Capture "appsId" Text :>
            "operations" :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "pageSize" Int32 :>
-                   Get '[JSON] ListOperationsResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "filter" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "pageSize" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
 -- server doesn\'t support this method, it returns \`UNIMPLEMENTED\`. NOTE:
@@ -73,8 +87,8 @@ type AppsOperationsListAPI =
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ 'appsOperationsList' smart constructor.
-data AppsOperationsList = AppsOperationsList
+-- /See:/ 'appsOperationsList'' smart constructor.
+data AppsOperationsList' = AppsOperationsList'
     { _aolXgafv          :: !(Maybe Text)
     , _aolQuotaUser      :: !(Maybe Text)
     , _aolPrettyPrint    :: !Bool
@@ -131,11 +145,11 @@ data AppsOperationsList = AppsOperationsList
 -- * 'aolCallback'
 --
 -- * 'aolAlt'
-appsOperationsList
+appsOperationsList'
     :: Text -- ^ 'appsId'
-    -> AppsOperationsList
-appsOperationsList pAolAppsId_ =
-    AppsOperationsList
+    -> AppsOperationsList'
+appsOperationsList' pAolAppsId_ =
+    AppsOperationsList'
     { _aolXgafv = Nothing
     , _aolQuotaUser = Nothing
     , _aolPrettyPrint = True
@@ -249,10 +263,10 @@ aolAlt = lens _aolAlt (\ s a -> s{_aolAlt = a})
 instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
         request = requestWithRoute defReq appEngineURL
-        requestWithRoute r u AppsOperationsList{..}
-          = go _aolXgafv _aolQuotaUser _aolPrettyPrint
+        requestWithRoute r u AppsOperationsList'{..}
+          = go _aolXgafv _aolQuotaUser (Just _aolPrettyPrint)
               _aolUploadProtocol
-              _aolPp
+              (Just _aolPp)
               _aolAccessToken
               _aolUploadType
               _aolBearerToken
@@ -264,9 +278,9 @@ instance GoogleRequest AppsOperationsList' where
               _aolPageSize
               _aolFields
               _aolCallback
-              _aolAlt
+              (Just _aolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AppsOperationsListAPI)
+                      (Proxy :: Proxy AppsOperationsListResource)
                       r
                       u

@@ -19,10 +19,54 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 --
+-- /See:/ 'groupContentDetails' smart constructor.
+data GroupContentDetails = GroupContentDetails
+    { _gcdItemType  :: !(Maybe Text)
+    , _gcdItemCount :: !(Maybe Word64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupContentDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gcdItemType'
+--
+-- * 'gcdItemCount'
+groupContentDetails
+    :: GroupContentDetails
+groupContentDetails =
+    GroupContentDetails
+    { _gcdItemType = Nothing
+    , _gcdItemCount = Nothing
+    }
+
+gcdItemType :: Lens' GroupContentDetails (Maybe Text)
+gcdItemType
+  = lens _gcdItemType (\ s a -> s{_gcdItemType = a})
+
+gcdItemCount :: Lens' GroupContentDetails (Maybe Word64)
+gcdItemCount
+  = lens _gcdItemCount (\ s a -> s{_gcdItemCount = a})
+
+instance FromJSON GroupContentDetails where
+        parseJSON
+          = withObject "GroupContentDetails"
+              (\ o ->
+                 GroupContentDetails <$>
+                   (o .:? "itemType") <*> (o .:? "itemCount"))
+
+instance ToJSON GroupContentDetails where
+        toJSON GroupContentDetails{..}
+          = object
+              (catMaybes
+                 [("itemType" .=) <$> _gcdItemType,
+                  ("itemCount" .=) <$> _gcdItemCount])
+
+--
 -- /See:/ 'group'' smart constructor.
 data Group = Group
     { _gEtag           :: !(Maybe Text)
-    , _gSnippet        :: !(Maybe GroupSNIppet)
+    , _gSnippet        :: !(Maybe GroupSnippet)
     , _gKind           :: !Text
     , _gContentDetails :: !(Maybe GroupContentDetails)
     , _gId             :: !(Maybe Text)
@@ -55,7 +99,7 @@ group' =
 gEtag :: Lens' Group (Maybe Text)
 gEtag = lens _gEtag (\ s a -> s{_gEtag = a})
 
-gSnippet :: Lens' Group (Maybe GroupSNIppet)
+gSnippet :: Lens' Group (Maybe GroupSnippet)
 gSnippet = lens _gSnippet (\ s a -> s{_gSnippet = a})
 
 gKind :: Lens' Group Text
@@ -89,6 +133,47 @@ instance ToJSON Group where
                   ("contentDetails" .=) <$> _gContentDetails,
                   ("id" .=) <$> _gId])
 
+--
+-- /See:/ 'groupItemResource' smart constructor.
+data GroupItemResource = GroupItemResource
+    { _girKind :: !(Maybe Text)
+    , _girId   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupItemResource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'girKind'
+--
+-- * 'girId'
+groupItemResource
+    :: GroupItemResource
+groupItemResource =
+    GroupItemResource
+    { _girKind = Nothing
+    , _girId = Nothing
+    }
+
+girKind :: Lens' GroupItemResource (Maybe Text)
+girKind = lens _girKind (\ s a -> s{_girKind = a})
+
+girId :: Lens' GroupItemResource (Maybe Text)
+girId = lens _girId (\ s a -> s{_girId = a})
+
+instance FromJSON GroupItemResource where
+        parseJSON
+          = withObject "GroupItemResource"
+              (\ o ->
+                 GroupItemResource <$>
+                   (o .:? "kind") <*> (o .:? "id"))
+
+instance ToJSON GroupItemResource where
+        toJSON GroupItemResource{..}
+          = object
+              (catMaybes
+                 [("kind" .=) <$> _girKind, ("id" .=) <$> _girId])
+
 -- | Contains a single result table. The table is returned as an array of
 -- rows that contain the values for the cells of the table. Depending on
 -- the metric or dimension, the cell can contain a string (video ID,
@@ -97,8 +182,8 @@ instance ToJSON Group where
 -- /See:/ 'resultTable' smart constructor.
 data ResultTable = ResultTable
     { _rtKind          :: !Text
-    , _rtRows          :: !(Maybe [[JSON]])
-    , _rtColumnHeaders :: !(Maybe [ResultTableColumnHeadersItem])
+    , _rtRows          :: !(Maybe [[JSONValue]])
+    , _rtColumnHeaders :: !(Maybe [ResultTableColumnHeaders])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResultTable' with the minimum fields required to make a request.
@@ -132,7 +217,7 @@ rtKind = lens _rtKind (\ s a -> s{_rtKind = a})
 -- available for the given query, the rows element will be omitted from the
 -- response. The response for a query with the day dimension will not
 -- contain rows for the most recent days.
-rtRows :: Lens' ResultTable [[JSON]]
+rtRows :: Lens' ResultTable [[JSONValue]]
 rtRows
   = lens _rtRows (\ s a -> s{_rtRows = a}) . _Default .
       _Coerce
@@ -147,7 +232,7 @@ rtRows
 -- the parameters dimensions=ageGroup,gender&metrics=viewerPercentage, the
 -- API response will return columns in this order:
 -- ageGroup,gender,viewerPercentage.
-rtColumnHeaders :: Lens' ResultTable [ResultTableColumnHeadersItem]
+rtColumnHeaders :: Lens' ResultTable [ResultTableColumnHeaders]
 rtColumnHeaders
   = lens _rtColumnHeaders
       (\ s a -> s{_rtColumnHeaders = a})
@@ -249,6 +334,50 @@ instance ToJSON BatchReportDefinition where
                   Just ("kind" .= _brdKind), ("name" .=) <$> _brdName,
                   ("id" .=) <$> _brdId, ("type" .=) <$> _brdType])
 
+--
+-- /See:/ 'groupSnippet' smart constructor.
+data GroupSnippet = GroupSnippet
+    { _gsPublishedAt :: !(Maybe UTCTime)
+    , _gsTitle       :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GroupSnippet' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsPublishedAt'
+--
+-- * 'gsTitle'
+groupSnippet
+    :: GroupSnippet
+groupSnippet =
+    GroupSnippet
+    { _gsPublishedAt = Nothing
+    , _gsTitle = Nothing
+    }
+
+gsPublishedAt :: Lens' GroupSnippet (Maybe UTCTime)
+gsPublishedAt
+  = lens _gsPublishedAt
+      (\ s a -> s{_gsPublishedAt = a})
+
+gsTitle :: Lens' GroupSnippet (Maybe Text)
+gsTitle = lens _gsTitle (\ s a -> s{_gsTitle = a})
+
+instance FromJSON GroupSnippet where
+        parseJSON
+          = withObject "GroupSnippet"
+              (\ o ->
+                 GroupSnippet <$>
+                   (o .:? "publishedAt") <*> (o .:? "title"))
+
+instance ToJSON GroupSnippet where
+        toJSON GroupSnippet{..}
+          = object
+              (catMaybes
+                 [("publishedAt" .=) <$> _gsPublishedAt,
+                  ("title" .=) <$> _gsTitle])
+
 -- | Contains single batchReport resource.
 --
 -- /See:/ 'batchReport' smart constructor.
@@ -257,7 +386,7 @@ data BatchReport = BatchReport
     , _brKind        :: !Text
     , _brReportId    :: !(Maybe Text)
     , _brTimeSpan    :: !(Maybe BatchReportTimeSpan)
-    , _brOutputs     :: !(Maybe [BatchReportOutputsItem])
+    , _brOutputs     :: !(Maybe [BatchReportOutputs])
     , _brId          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -311,7 +440,7 @@ brTimeSpan
   = lens _brTimeSpan (\ s a -> s{_brTimeSpan = a})
 
 -- | Report outputs.
-brOutputs :: Lens' BatchReport [BatchReportOutputsItem]
+brOutputs :: Lens' BatchReport [BatchReportOutputs]
 brOutputs
   = lens _brOutputs (\ s a -> s{_brOutputs = a}) .
       _Default
@@ -467,6 +596,63 @@ instance ToJSON BatchReportDefinitionList where
                  [Just ("kind" .= _brdlKind),
                   ("items" .=) <$> _brdlItems])
 
+--
+-- /See:/ 'resultTableColumnHeaders' smart constructor.
+data ResultTableColumnHeaders = ResultTableColumnHeaders
+    { _rtchColumnType :: !(Maybe Text)
+    , _rtchName       :: !(Maybe Text)
+    , _rtchDataType   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultTableColumnHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rtchColumnType'
+--
+-- * 'rtchName'
+--
+-- * 'rtchDataType'
+resultTableColumnHeaders
+    :: ResultTableColumnHeaders
+resultTableColumnHeaders =
+    ResultTableColumnHeaders
+    { _rtchColumnType = Nothing
+    , _rtchName = Nothing
+    , _rtchDataType = Nothing
+    }
+
+-- | The type of the column (DIMENSION or METRIC).
+rtchColumnType :: Lens' ResultTableColumnHeaders (Maybe Text)
+rtchColumnType
+  = lens _rtchColumnType
+      (\ s a -> s{_rtchColumnType = a})
+
+-- | The name of the dimension or metric.
+rtchName :: Lens' ResultTableColumnHeaders (Maybe Text)
+rtchName = lens _rtchName (\ s a -> s{_rtchName = a})
+
+-- | The type of the data in the column (STRING, INTEGER, FLOAT, etc.).
+rtchDataType :: Lens' ResultTableColumnHeaders (Maybe Text)
+rtchDataType
+  = lens _rtchDataType (\ s a -> s{_rtchDataType = a})
+
+instance FromJSON ResultTableColumnHeaders where
+        parseJSON
+          = withObject "ResultTableColumnHeaders"
+              (\ o ->
+                 ResultTableColumnHeaders <$>
+                   (o .:? "columnType") <*> (o .:? "name") <*>
+                     (o .:? "dataType"))
+
+instance ToJSON ResultTableColumnHeaders where
+        toJSON ResultTableColumnHeaders{..}
+          = object
+              (catMaybes
+                 [("columnType" .=) <$> _rtchColumnType,
+                  ("name" .=) <$> _rtchName,
+                  ("dataType" .=) <$> _rtchDataType])
+
 -- | A paginated list of batchReport resources returned in response to a
 -- youtubeAnalytics.batchReport.list request.
 --
@@ -518,6 +704,56 @@ instance ToJSON BatchReportList where
               (catMaybes
                  [Just ("kind" .= _brlKind),
                   ("items" .=) <$> _brlItems])
+
+-- | Period included in the report. For reports containing all entities
+-- endTime is not set. Both startTime and endTime are inclusive.
+--
+-- /See:/ 'batchReportTimeSpan' smart constructor.
+data BatchReportTimeSpan = BatchReportTimeSpan
+    { _brtsStartTime :: !(Maybe UTCTime)
+    , _brtsEndTime   :: !(Maybe UTCTime)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchReportTimeSpan' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'brtsStartTime'
+--
+-- * 'brtsEndTime'
+batchReportTimeSpan
+    :: BatchReportTimeSpan
+batchReportTimeSpan =
+    BatchReportTimeSpan
+    { _brtsStartTime = Nothing
+    , _brtsEndTime = Nothing
+    }
+
+-- | Start of the period included in the report. Inclusive.
+brtsStartTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
+brtsStartTime
+  = lens _brtsStartTime
+      (\ s a -> s{_brtsStartTime = a})
+
+-- | End of the period included in the report. Inclusive. For reports
+-- containing all entities endTime is not set.
+brtsEndTime :: Lens' BatchReportTimeSpan (Maybe UTCTime)
+brtsEndTime
+  = lens _brtsEndTime (\ s a -> s{_brtsEndTime = a})
+
+instance FromJSON BatchReportTimeSpan where
+        parseJSON
+          = withObject "BatchReportTimeSpan"
+              (\ o ->
+                 BatchReportTimeSpan <$>
+                   (o .:? "startTime") <*> (o .:? "endTime"))
+
+instance ToJSON BatchReportTimeSpan where
+        toJSON BatchReportTimeSpan{..}
+          = object
+              (catMaybes
+                 [("startTime" .=) <$> _brtsStartTime,
+                  ("endTime" .=) <$> _brtsEndTime])
 
 -- | A paginated list of grouList resources returned in response to a
 -- youtubeAnalytics.groupApi.list request.
@@ -575,6 +811,64 @@ instance ToJSON GroupItemListResponse where
                  [("etag" .=) <$> _gilrEtag,
                   Just ("kind" .= _gilrKind),
                   ("items" .=) <$> _gilrItems])
+
+--
+-- /See:/ 'batchReportOutputs' smart constructor.
+data BatchReportOutputs = BatchReportOutputs
+    { _broFormat      :: !(Maybe Text)
+    , _broDownloadUrl :: !(Maybe Text)
+    , _broType        :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'BatchReportOutputs' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'broFormat'
+--
+-- * 'broDownloadUrl'
+--
+-- * 'broType'
+batchReportOutputs
+    :: BatchReportOutputs
+batchReportOutputs =
+    BatchReportOutputs
+    { _broFormat = Nothing
+    , _broDownloadUrl = Nothing
+    , _broType = "cloudStorageOutput"
+    }
+
+-- | Format of the output.
+broFormat :: Lens' BatchReportOutputs (Maybe Text)
+broFormat
+  = lens _broFormat (\ s a -> s{_broFormat = a})
+
+-- | Cloud storage URL to download this report. This URL is valid for 30
+-- minutes.
+broDownloadUrl :: Lens' BatchReportOutputs (Maybe Text)
+broDownloadUrl
+  = lens _broDownloadUrl
+      (\ s a -> s{_broDownloadUrl = a})
+
+-- | Type of the output.
+broType :: Lens' BatchReportOutputs Text
+broType = lens _broType (\ s a -> s{_broType = a})
+
+instance FromJSON BatchReportOutputs where
+        parseJSON
+          = withObject "BatchReportOutputs"
+              (\ o ->
+                 BatchReportOutputs <$>
+                   (o .:? "format") <*> (o .:? "downloadUrl") <*>
+                     (o .:? "type" .!= "cloudStorageOutput"))
+
+instance ToJSON BatchReportOutputs where
+        toJSON BatchReportOutputs{..}
+          = object
+              (catMaybes
+                 [("format" .=) <$> _broFormat,
+                  ("downloadUrl" .=) <$> _broDownloadUrl,
+                  Just ("type" .= _broType)])
 
 -- | A paginated list of grouList resources returned in response to a
 -- youtubeAnalytics.groupApi.list request.

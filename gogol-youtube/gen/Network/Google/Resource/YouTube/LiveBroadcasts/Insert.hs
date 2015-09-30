@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a broadcast.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsInsert@.
-module YouTube.LiveBroadcasts.Insert
+module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
     (
     -- * REST Resource
-      LiveBroadcastsInsertAPI
+      LiveBroadcastsInsertResource
 
     -- * Creating a Request
-    , liveBroadcastsInsert
-    , LiveBroadcastsInsert
+    , liveBroadcastsInsert'
+    , LiveBroadcastsInsert'
 
     -- * Request Lenses
     , lbiQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsInsert@ which the
--- 'LiveBroadcastsInsert' request conforms to.
-type LiveBroadcastsInsertAPI =
+-- 'LiveBroadcastsInsert'' request conforms to.
+type LiveBroadcastsInsertResource =
      "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             Post '[JSON] LiveBroadcast
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] LiveBroadcast
 
 -- | Creates a broadcast.
 --
--- /See:/ 'liveBroadcastsInsert' smart constructor.
-data LiveBroadcastsInsert = LiveBroadcastsInsert
+-- /See:/ 'liveBroadcastsInsert'' smart constructor.
+data LiveBroadcastsInsert' = LiveBroadcastsInsert'
     { _lbiQuotaUser                     :: !(Maybe Text)
     , _lbiPart                          :: !Text
     , _lbiPrettyPrint                   :: !Bool
@@ -66,7 +73,7 @@ data LiveBroadcastsInsert = LiveBroadcastsInsert
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbiOauthToken                    :: !(Maybe Text)
     , _lbiFields                        :: !(Maybe Text)
-    , _lbiAlt                           :: !Text
+    , _lbiAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsInsert'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data LiveBroadcastsInsert = LiveBroadcastsInsert
 -- * 'lbiFields'
 --
 -- * 'lbiAlt'
-liveBroadcastsInsert
+liveBroadcastsInsert'
     :: Text -- ^ 'part'
-    -> LiveBroadcastsInsert
-liveBroadcastsInsert pLbiPart_ =
-    LiveBroadcastsInsert
+    -> LiveBroadcastsInsert'
+liveBroadcastsInsert' pLbiPart_ =
+    LiveBroadcastsInsert'
     { _lbiQuotaUser = Nothing
     , _lbiPart = pLbiPart_
     , _lbiPrettyPrint = True
@@ -106,7 +113,7 @@ liveBroadcastsInsert pLbiPart_ =
     , _lbiOnBehalfOfContentOwnerChannel = Nothing
     , _lbiOauthToken = Nothing
     , _lbiFields = Nothing
-    , _lbiAlt = "json"
+    , _lbiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -190,23 +197,24 @@ lbiFields
   = lens _lbiFields (\ s a -> s{_lbiFields = a})
 
 -- | Data format for the response.
-lbiAlt :: Lens' LiveBroadcastsInsert' Text
+lbiAlt :: Lens' LiveBroadcastsInsert' Alt
 lbiAlt = lens _lbiAlt (\ s a -> s{_lbiAlt = a})
 
 instance GoogleRequest LiveBroadcastsInsert' where
         type Rs LiveBroadcastsInsert' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsInsert{..}
-          = go _lbiQuotaUser (Just _lbiPart) _lbiPrettyPrint
+        requestWithRoute r u LiveBroadcastsInsert'{..}
+          = go _lbiQuotaUser (Just _lbiPart)
+              (Just _lbiPrettyPrint)
               _lbiUserIp
               _lbiOnBehalfOfContentOwner
               _lbiKey
               _lbiOnBehalfOfContentOwnerChannel
               _lbiOauthToken
               _lbiFields
-              _lbiAlt
+              (Just _lbiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsInsertAPI)
+                      (Proxy :: Proxy LiveBroadcastsInsertResource)
                       r
                       u

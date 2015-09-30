@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of user roles, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingUserRolesList@.
-module DFAReporting.UserRoles.List
+module Network.Google.Resource.DFAReporting.UserRoles.List
     (
     -- * REST Resource
-      UserRolesListAPI
+      UserRolesListResource
 
     -- * Creating a Request
-    , userRolesList
-    , UserRolesList
+    , userRolesList'
+    , UserRolesList'
 
     -- * Request Lenses
     , urlQuotaUser
@@ -51,41 +52,52 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingUserRolesList@ which the
--- 'UserRolesList' request conforms to.
-type UserRolesListAPI =
+-- 'UserRolesList'' request conforms to.
+type UserRolesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "userRoles" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "accountUserRoleOnly" Bool :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" Text :>
-                       QueryParam "subaccountId" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           Get '[JSON] UserRolesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingUserRolesListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "accountUserRoleOnly" Bool :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField"
+                               DfareportingUserRolesListSortField
+                               :>
+                               QueryParam "subaccountId" Int64 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON] UserRolesListResponse
 
 -- | Retrieves a list of user roles, possibly filtered.
 --
--- /See:/ 'userRolesList' smart constructor.
-data UserRolesList = UserRolesList
+-- /See:/ 'userRolesList'' smart constructor.
+data UserRolesList' = UserRolesList'
     { _urlQuotaUser           :: !(Maybe Text)
     , _urlPrettyPrint         :: !Bool
     , _urlUserIp              :: !(Maybe Text)
     , _urlSearchString        :: !(Maybe Text)
     , _urlIds                 :: !(Maybe Int64)
     , _urlProfileId           :: !Int64
-    , _urlSortOrder           :: !(Maybe Text)
+    , _urlSortOrder           :: !(Maybe DfareportingUserRolesListSortOrder)
     , _urlKey                 :: !(Maybe Text)
     , _urlAccountUserRoleOnly :: !(Maybe Bool)
     , _urlPageToken           :: !(Maybe Text)
-    , _urlSortField           :: !(Maybe Text)
+    , _urlSortField           :: !(Maybe DfareportingUserRolesListSortField)
     , _urlSubaccountId        :: !(Maybe Int64)
     , _urlOauthToken          :: !(Maybe Text)
     , _urlMaxResults          :: !(Maybe Int32)
     , _urlFields              :: !(Maybe Text)
-    , _urlAlt                 :: !Text
+    , _urlAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesList'' with the minimum fields required to make a request.
@@ -123,11 +135,11 @@ data UserRolesList = UserRolesList
 -- * 'urlFields'
 --
 -- * 'urlAlt'
-userRolesList
+userRolesList'
     :: Int64 -- ^ 'profileId'
-    -> UserRolesList
-userRolesList pUrlProfileId_ =
-    UserRolesList
+    -> UserRolesList'
+userRolesList' pUrlProfileId_ =
+    UserRolesList'
     { _urlQuotaUser = Nothing
     , _urlPrettyPrint = True
     , _urlUserIp = Nothing
@@ -143,7 +155,7 @@ userRolesList pUrlProfileId_ =
     , _urlOauthToken = Nothing
     , _urlMaxResults = Nothing
     , _urlFields = Nothing
-    , _urlAlt = "json"
+    , _urlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -187,7 +199,7 @@ urlProfileId
   = lens _urlProfileId (\ s a -> s{_urlProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-urlSortOrder :: Lens' UserRolesList' (Maybe Text)
+urlSortOrder :: Lens' UserRolesList' (Maybe DfareportingUserRolesListSortOrder)
 urlSortOrder
   = lens _urlSortOrder (\ s a -> s{_urlSortOrder = a})
 
@@ -210,7 +222,7 @@ urlPageToken
   = lens _urlPageToken (\ s a -> s{_urlPageToken = a})
 
 -- | Field by which to sort the list.
-urlSortField :: Lens' UserRolesList' (Maybe Text)
+urlSortField :: Lens' UserRolesList' (Maybe DfareportingUserRolesListSortField)
 urlSortField
   = lens _urlSortField (\ s a -> s{_urlSortField = a})
 
@@ -238,14 +250,14 @@ urlFields
   = lens _urlFields (\ s a -> s{_urlFields = a})
 
 -- | Data format for the response.
-urlAlt :: Lens' UserRolesList' Text
+urlAlt :: Lens' UserRolesList' Alt
 urlAlt = lens _urlAlt (\ s a -> s{_urlAlt = a})
 
 instance GoogleRequest UserRolesList' where
         type Rs UserRolesList' = UserRolesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u UserRolesList{..}
-          = go _urlQuotaUser _urlPrettyPrint _urlUserIp
+        requestWithRoute r u UserRolesList'{..}
+          = go _urlQuotaUser (Just _urlPrettyPrint) _urlUserIp
               _urlSearchString
               _urlIds
               _urlProfileId
@@ -258,7 +270,9 @@ instance GoogleRequest UserRolesList' where
               _urlOauthToken
               _urlMaxResults
               _urlFields
-              _urlAlt
+              (Just _urlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserRolesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UserRolesListResource)
+                      r
                       u

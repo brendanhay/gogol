@@ -113,6 +113,9 @@ module Network.Google.MapsCoordinate.Types
     , jobJobChange
     , jobId
 
+    -- * CoordinateJobsUpdateProgress
+    , CoordinateJobsUpdateProgress (..)
+
     -- * CustomFields
     , CustomFields
     , customFields
@@ -125,6 +128,9 @@ module Network.Google.MapsCoordinate.Types
     , tKind
     , tName
     , tId
+
+    -- * CoordinateJobsPatchProgress
+    , CoordinateJobsPatchProgress (..)
 
     -- * LocationRecord
     , LocationRecord
@@ -148,6 +154,9 @@ module Network.Google.MapsCoordinate.Types
     , cKind
     , cValue
 
+    -- * Alt
+    , Alt (..)
+
     -- * EnumItemDef
     , EnumItemDef
     , enumItemDef
@@ -161,7 +170,7 @@ import           Network.Google.MapsCoordinate.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Maps Coordinate API.
-mapsCoordinateURL :: BaseURL
+mapsCoordinateURL :: BaseUrl
 mapsCoordinateURL
   = BaseUrl Https
       "https://www.googleapis.com/coordinate/v1/"

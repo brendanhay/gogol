@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds new Autoscaler resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersInsert@.
-module Autoscaler.Autoscalers.Insert
+module Network.Google.Resource.Autoscaler.Autoscalers.Insert
     (
     -- * REST Resource
-      AutoscalersInsertAPI
+      AutoscalersInsertResource
 
     -- * Creating a Request
-    , autoscalersInsert
-    , AutoscalersInsert
+    , autoscalersInsert'
+    , AutoscalersInsert'
 
     -- * Request Lenses
     , aiQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.ComputeAutoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AutoscalerAutoscalersInsert@ which the
--- 'AutoscalersInsert' request conforms to.
-type AutoscalersInsertAPI =
+-- 'AutoscalersInsert'' request conforms to.
+type AutoscalersInsertResource =
      "projects" :>
        Capture "project" Text :>
          "zones" :>
            Capture "zone" Text :>
-             "autoscalers" :> Post '[JSON] Operation
+             "autoscalers" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds new Autoscaler resource.
 --
--- /See:/ 'autoscalersInsert' smart constructor.
-data AutoscalersInsert = AutoscalersInsert
+-- /See:/ 'autoscalersInsert'' smart constructor.
+data AutoscalersInsert' = AutoscalersInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiProject     :: !Text
@@ -64,7 +72,7 @@ data AutoscalersInsert = AutoscalersInsert
     , _aiKey         :: !(Maybe Text)
     , _aiOauthToken  :: !(Maybe Text)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Text
+    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersInsert'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AutoscalersInsert = AutoscalersInsert
 -- * 'aiFields'
 --
 -- * 'aiAlt'
-autoscalersInsert
+autoscalersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> AutoscalersInsert
-autoscalersInsert pAiProject_ pAiZone_ =
-    AutoscalersInsert
+    -> AutoscalersInsert'
+autoscalersInsert' pAiProject_ pAiZone_ =
+    AutoscalersInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiProject = pAiProject_
@@ -102,7 +110,7 @@ autoscalersInsert pAiProject_ pAiZone_ =
     , _aiKey = Nothing
     , _aiOauthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = "json"
+    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,22 +156,23 @@ aiFields :: Lens' AutoscalersInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
 -- | Data format for the response.
-aiAlt :: Lens' AutoscalersInsert' Text
+aiAlt :: Lens' AutoscalersInsert' Alt
 aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
 
 instance GoogleRequest AutoscalersInsert' where
         type Rs AutoscalersInsert' = Operation
         request
           = requestWithRoute defReq computeAutoscalerURL
-        requestWithRoute r u AutoscalersInsert{..}
-          = go _aiQuotaUser _aiPrettyPrint _aiProject _aiUserIp
+        requestWithRoute r u AutoscalersInsert'{..}
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiProject
+              _aiUserIp
               _aiZone
               _aiKey
               _aiOauthToken
               _aiFields
-              _aiAlt
+              (Just _aiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersInsertAPI)
+                      (Proxy :: Proxy AutoscalersInsertResource)
                       r
                       u

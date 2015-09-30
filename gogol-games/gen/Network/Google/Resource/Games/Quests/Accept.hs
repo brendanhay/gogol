@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- quest.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestsAccept@.
-module Games.Quests.Accept
+module Network.Google.Resource.Games.Quests.Accept
     (
     -- * REST Resource
-      QuestsAcceptAPI
+      QuestsAcceptResource
 
     -- * Creating a Request
-    , questsAccept
-    , QuestsAccept
+    , questsAccept'
+    , QuestsAccept'
 
     -- * Request Lenses
     , qaQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesQuestsAccept@ which the
--- 'QuestsAccept' request conforms to.
-type QuestsAcceptAPI =
+-- 'QuestsAccept'' request conforms to.
+type QuestsAcceptResource =
      "quests" :>
        Capture "questId" Text :>
          "accept" :>
-           QueryParam "language" Text :> Post '[JSON] Quest
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Quest
 
 -- | Indicates that the currently authorized user will participate in the
 -- quest.
 --
--- /See:/ 'questsAccept' smart constructor.
-data QuestsAccept = QuestsAccept
+-- /See:/ 'questsAccept'' smart constructor.
+data QuestsAccept' = QuestsAccept'
     { _qaQuotaUser   :: !(Maybe Text)
     , _qaPrettyPrint :: !Bool
     , _qaUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data QuestsAccept = QuestsAccept
     , _qaOauthToken  :: !(Maybe Text)
     , _qaQuestId     :: !Text
     , _qaFields      :: !(Maybe Text)
-    , _qaAlt         :: !Text
+    , _qaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsAccept'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data QuestsAccept = QuestsAccept
 -- * 'qaFields'
 --
 -- * 'qaAlt'
-questsAccept
+questsAccept'
     :: Text -- ^ 'questId'
-    -> QuestsAccept
-questsAccept pQaQuestId_ =
-    QuestsAccept
+    -> QuestsAccept'
+questsAccept' pQaQuestId_ =
+    QuestsAccept'
     { _qaQuotaUser = Nothing
     , _qaPrettyPrint = True
     , _qaUserIp = Nothing
@@ -102,7 +110,7 @@ questsAccept pQaQuestId_ =
     , _qaOauthToken = Nothing
     , _qaQuestId = pQaQuestId_
     , _qaFields = Nothing
-    , _qaAlt = "json"
+    , _qaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +157,22 @@ qaFields :: Lens' QuestsAccept' (Maybe Text)
 qaFields = lens _qaFields (\ s a -> s{_qaFields = a})
 
 -- | Data format for the response.
-qaAlt :: Lens' QuestsAccept' Text
+qaAlt :: Lens' QuestsAccept' Alt
 qaAlt = lens _qaAlt (\ s a -> s{_qaAlt = a})
 
 instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestsAccept{..}
-          = go _qaQuotaUser _qaPrettyPrint _qaUserIp _qaKey
+        requestWithRoute r u QuestsAccept'{..}
+          = go _qaQuotaUser (Just _qaPrettyPrint) _qaUserIp
+              _qaKey
               _qaLanguage
               _qaOauthToken
               _qaQuestId
               _qaFields
-              _qaAlt
+              (Just _qaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuestsAcceptAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy QuestsAcceptResource)
+                      r
                       u

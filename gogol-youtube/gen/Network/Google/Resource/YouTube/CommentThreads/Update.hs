@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Modifies the top-level comment in a comment thread.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsUpdate@.
-module YouTube.CommentThreads.Update
+module Network.Google.Resource.YouTube.CommentThreads.Update
     (
     -- * REST Resource
-      CommentThreadsUpdateAPI
+      CommentThreadsUpdateResource
 
     -- * Creating a Request
-    , commentThreadsUpdate
-    , CommentThreadsUpdate
+    , commentThreadsUpdate'
+    , CommentThreadsUpdate'
 
     -- * Request Lenses
     , ctuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentThreadsUpdate@ which the
--- 'CommentThreadsUpdate' request conforms to.
-type CommentThreadsUpdateAPI =
+-- 'CommentThreadsUpdate'' request conforms to.
+type CommentThreadsUpdateResource =
      "commentThreads" :>
-       QueryParam "part" Text :> Put '[JSON] CommentThread
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] CommentThread
 
 -- | Modifies the top-level comment in a comment thread.
 --
--- /See:/ 'commentThreadsUpdate' smart constructor.
-data CommentThreadsUpdate = CommentThreadsUpdate
+-- /See:/ 'commentThreadsUpdate'' smart constructor.
+data CommentThreadsUpdate' = CommentThreadsUpdate'
     { _ctuQuotaUser   :: !(Maybe Text)
     , _ctuPart        :: !Text
     , _ctuPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data CommentThreadsUpdate = CommentThreadsUpdate
     , _ctuKey         :: !(Maybe Text)
     , _ctuOauthToken  :: !(Maybe Text)
     , _ctuFields      :: !(Maybe Text)
-    , _ctuAlt         :: !Text
+    , _ctuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CommentThreadsUpdate = CommentThreadsUpdate
 -- * 'ctuFields'
 --
 -- * 'ctuAlt'
-commentThreadsUpdate
+commentThreadsUpdate'
     :: Text -- ^ 'part'
-    -> CommentThreadsUpdate
-commentThreadsUpdate pCtuPart_ =
-    CommentThreadsUpdate
+    -> CommentThreadsUpdate'
+commentThreadsUpdate' pCtuPart_ =
+    CommentThreadsUpdate'
     { _ctuQuotaUser = Nothing
     , _ctuPart = pCtuPart_
     , _ctuPrettyPrint = True
@@ -93,7 +101,7 @@ commentThreadsUpdate pCtuPart_ =
     , _ctuKey = Nothing
     , _ctuOauthToken = Nothing
     , _ctuFields = Nothing
-    , _ctuAlt = "json"
+    , _ctuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,21 +148,22 @@ ctuFields
   = lens _ctuFields (\ s a -> s{_ctuFields = a})
 
 -- | Data format for the response.
-ctuAlt :: Lens' CommentThreadsUpdate' Text
+ctuAlt :: Lens' CommentThreadsUpdate' Alt
 ctuAlt = lens _ctuAlt (\ s a -> s{_ctuAlt = a})
 
 instance GoogleRequest CommentThreadsUpdate' where
         type Rs CommentThreadsUpdate' = CommentThread
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentThreadsUpdate{..}
-          = go _ctuQuotaUser (Just _ctuPart) _ctuPrettyPrint
+        requestWithRoute r u CommentThreadsUpdate'{..}
+          = go _ctuQuotaUser (Just _ctuPart)
+              (Just _ctuPrettyPrint)
               _ctuUserIp
               _ctuKey
               _ctuOauthToken
               _ctuFields
-              _ctuAlt
+              (Just _ctuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentThreadsUpdateAPI)
+                      (Proxy :: Proxy CommentThreadsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | retrieve user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersGet@.
-module Directory.Users.Get
+module Network.Google.Resource.Directory.Users.Get
     (
     -- * REST Resource
-      UsersGetAPI
+      UsersGetResource
 
     -- * Creating a Request
-    , usersGet
-    , UsersGet
+    , usersGet'
+    , UsersGet'
 
     -- * Request Lenses
     , ugQuotaUser
@@ -46,29 +47,37 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersGet@ which the
--- 'UsersGet' request conforms to.
-type UsersGetAPI =
+-- 'UsersGet'' request conforms to.
+type UsersGetResource =
      "users" :>
        Capture "userKey" Text :>
-         QueryParam "viewType" Text :>
-           QueryParam "customFieldMask" Text :>
-             QueryParam "projection" Text :> Get '[JSON] User
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "viewType" DirectoryUsersGetViewType :>
+               QueryParam "customFieldMask" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "projection" DirectoryUsersGetProjection
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] User
 
 -- | retrieve user
 --
--- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+-- /See:/ 'usersGet'' smart constructor.
+data UsersGet' = UsersGet'
     { _ugQuotaUser       :: !(Maybe Text)
     , _ugPrettyPrint     :: !Bool
-    , _ugViewType        :: !Text
+    , _ugViewType        :: !DirectoryUsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugUserIp          :: !(Maybe Text)
     , _ugKey             :: !(Maybe Text)
-    , _ugProjection      :: !Text
+    , _ugProjection      :: !DirectoryUsersGetProjection
     , _ugOauthToken      :: !(Maybe Text)
     , _ugUserKey         :: !Text
     , _ugFields          :: !(Maybe Text)
-    , _ugAlt             :: !Text
+    , _ugAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -96,22 +105,22 @@ data UsersGet = UsersGet
 -- * 'ugFields'
 --
 -- * 'ugAlt'
-usersGet
+usersGet'
     :: Text -- ^ 'userKey'
-    -> UsersGet
-usersGet pUgUserKey_ =
-    UsersGet
+    -> UsersGet'
+usersGet' pUgUserKey_ =
+    UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
-    , _ugViewType = "admin_view"
+    , _ugViewType = DUGVTAdminView
     , _ugCustomFieldMask = Nothing
     , _ugUserIp = Nothing
     , _ugKey = Nothing
-    , _ugProjection = "basic"
+    , _ugProjection = DUGPBasic
     , _ugOauthToken = Nothing
     , _ugUserKey = pUgUserKey_
     , _ugFields = Nothing
-    , _ugAlt = "json"
+    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +137,7 @@ ugPrettyPrint
       (\ s a -> s{_ugPrettyPrint = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-ugViewType :: Lens' UsersGet' Text
+ugViewType :: Lens' UsersGet' DirectoryUsersGetViewType
 ugViewType
   = lens _ugViewType (\ s a -> s{_ugViewType = a})
 
@@ -151,7 +160,7 @@ ugKey :: Lens' UsersGet' (Maybe Text)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | What subset of fields to fetch for this user.
-ugProjection :: Lens' UsersGet' Text
+ugProjection :: Lens' UsersGet' DirectoryUsersGetProjection
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
@@ -170,14 +179,15 @@ ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 -- | Data format for the response.
-ugAlt :: Lens' UsersGet' Text
+ugAlt :: Lens' UsersGet' Alt
 ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersGet{..}
-          = go _ugQuotaUser _ugPrettyPrint (Just _ugViewType)
+        requestWithRoute r u UsersGet'{..}
+          = go _ugQuotaUser (Just _ugPrettyPrint)
+              (Just _ugViewType)
               _ugCustomFieldMask
               _ugUserIp
               _ugKey
@@ -185,6 +195,7 @@ instance GoogleRequest UsersGet' where
               _ugOauthToken
               _ugUserKey
               _ugFields
-              _ugAlt
+              (Just _ugAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update a custom channel in the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostCustomchannelsUpdate@.
-module AdSenseHost.Customchannels.Update
+module Network.Google.Resource.AdSenseHost.Customchannels.Update
     (
     -- * REST Resource
-      CustomchannelsUpdateAPI
+      CustomchannelsUpdateResource
 
     -- * Creating a Request
-    , customchannelsUpdate
-    , CustomchannelsUpdate
+    , customchannelsUpdate'
+    , CustomchannelsUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostCustomchannelsUpdate@ which the
--- 'CustomchannelsUpdate' request conforms to.
-type CustomchannelsUpdateAPI =
+-- 'CustomchannelsUpdate'' request conforms to.
+type CustomchannelsUpdateResource =
      "adclients" :>
        Capture "adClientId" Text :>
-         "customchannels" :> Put '[JSON] CustomChannel
+         "customchannels" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] CustomChannel
 
 -- | Update a custom channel in the host AdSense account.
 --
--- /See:/ 'customchannelsUpdate' smart constructor.
-data CustomchannelsUpdate = CustomchannelsUpdate
+-- /See:/ 'customchannelsUpdate'' smart constructor.
+data CustomchannelsUpdate' = CustomchannelsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CustomchannelsUpdate = CustomchannelsUpdate
     , _cuKey         :: !(Maybe Text)
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CustomchannelsUpdate = CustomchannelsUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-customchannelsUpdate
+customchannelsUpdate'
     :: Text -- ^ 'adClientId'
-    -> CustomchannelsUpdate
-customchannelsUpdate pCuAdClientId_ =
-    CustomchannelsUpdate
+    -> CustomchannelsUpdate'
+customchannelsUpdate' pCuAdClientId_ =
+    CustomchannelsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -94,7 +102,7 @@ customchannelsUpdate pCuAdClientId_ =
     , _cuKey = Nothing
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,21 @@ cuFields :: Lens' CustomchannelsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CustomchannelsUpdate' Text
+cuAlt :: Lens' CustomchannelsUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CustomchannelsUpdate' where
         type Rs CustomchannelsUpdate' = CustomChannel
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u CustomchannelsUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp
+        requestWithRoute r u CustomchannelsUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
               _cuAdClientId
               _cuKey
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsUpdateAPI)
+                      (Proxy :: Proxy CustomchannelsUpdateResource)
                       r
                       u

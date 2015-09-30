@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesDelete@.
-module Sql.Instances.Delete
+module Network.Google.Resource.Sql.Instances.Delete
     (
     -- * REST Resource
-      InstancesDeleteAPI
+      InstancesDeleteResource
 
     -- * Creating a Request
-    , instancesDelete
-    , InstancesDelete
+    , instancesDelete'
+    , InstancesDelete'
 
     -- * Request Lenses
     , idQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesDelete@ which the
--- 'InstancesDelete' request conforms to.
-type InstancesDeleteAPI =
+-- 'InstancesDelete'' request conforms to.
+type InstancesDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           Capture "instance" Text :> Delete '[JSON] Operation
+           Capture "instance" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes a Cloud SQL instance.
 --
--- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
+-- /See:/ 'instancesDelete'' smart constructor.
+data InstancesDelete' = InstancesDelete'
     { _idQuotaUser   :: !(Maybe Text)
     , _idPrettyPrint :: !Bool
     , _idProject     :: !Text
@@ -62,7 +70,7 @@ data InstancesDelete = InstancesDelete
     , _idKey         :: !(Maybe Text)
     , _idOauthToken  :: !(Maybe Text)
     , _idFields      :: !(Maybe Text)
-    , _idAlt         :: !Text
+    , _idAlt         :: !Alt
     , _idInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -87,12 +95,12 @@ data InstancesDelete = InstancesDelete
 -- * 'idAlt'
 --
 -- * 'idInstance'
-instancesDelete
+instancesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesDelete
-instancesDelete pIdProject_ pIdInstance_ =
-    InstancesDelete
+    -> InstancesDelete'
+instancesDelete' pIdProject_ pIdInstance_ =
+    InstancesDelete'
     { _idQuotaUser = Nothing
     , _idPrettyPrint = True
     , _idProject = pIdProject_
@@ -100,7 +108,7 @@ instancesDelete pIdProject_ pIdInstance_ =
     , _idKey = Nothing
     , _idOauthToken = Nothing
     , _idFields = Nothing
-    , _idAlt = "json"
+    , _idAlt = JSON
     , _idInstance = pIdInstance_
     }
 
@@ -143,7 +151,7 @@ idFields :: Lens' InstancesDelete' (Maybe Text)
 idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 -- | Data format for the response.
-idAlt :: Lens' InstancesDelete' Text
+idAlt :: Lens' InstancesDelete' Alt
 idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -154,14 +162,16 @@ idInstance
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesDelete{..}
-          = go _idQuotaUser _idPrettyPrint _idProject _idUserIp
+        requestWithRoute r u InstancesDelete'{..}
+          = go _idQuotaUser (Just _idPrettyPrint) _idProject
+              _idUserIp
               _idKey
               _idOauthToken
               _idFields
-              _idAlt
+              (Just _idAlt)
               _idInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesDeleteResource)
                       r
                       u

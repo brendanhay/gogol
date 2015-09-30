@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesSetDiskAutoDelete@.
-module Compute.Instances.SetDiskAutoDelete
+module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
     (
     -- * REST Resource
-      InstancesSetDiskAutoDeleteAPI
+      InstancesSetDiskAutoDeleteResource
 
     -- * Creating a Request
-    , instancesSetDiskAutoDelete
-    , InstancesSetDiskAutoDelete
+    , instancesSetDiskAutoDelete'
+    , InstancesSetDiskAutoDelete'
 
     -- * Request Lenses
     , isdadQuotaUser
@@ -47,22 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesSetDiskAutoDelete@ which the
--- 'InstancesSetDiskAutoDelete' request conforms to.
-type InstancesSetDiskAutoDeleteAPI =
+-- 'InstancesSetDiskAutoDelete'' request conforms to.
+type InstancesSetDiskAutoDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
                "setDiskAutoDelete" :>
-                 QueryParam "autoDelete" Bool :>
-                   QueryParam "deviceName" Text :>
-                     Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "autoDelete" Bool :>
+                         QueryParam "deviceName" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
--- /See:/ 'instancesSetDiskAutoDelete' smart constructor.
-data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete
+-- /See:/ 'instancesSetDiskAutoDelete'' smart constructor.
+data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
     { _isdadQuotaUser   :: !(Maybe Text)
     , _isdadPrettyPrint :: !Bool
     , _isdadProject     :: !Text
@@ -73,7 +80,7 @@ data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete
     , _isdadKey         :: !(Maybe Text)
     , _isdadOauthToken  :: !(Maybe Text)
     , _isdadFields      :: !(Maybe Text)
-    , _isdadAlt         :: !Text
+    , _isdadAlt         :: !Alt
     , _isdadInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -104,15 +111,15 @@ data InstancesSetDiskAutoDelete = InstancesSetDiskAutoDelete
 -- * 'isdadAlt'
 --
 -- * 'isdadInstance'
-instancesSetDiskAutoDelete
+instancesSetDiskAutoDelete'
     :: Text -- ^ 'project'
     -> Bool -- ^ 'autoDelete'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'deviceName'
     -> Text -- ^ 'instance'
-    -> InstancesSetDiskAutoDelete
-instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
-    InstancesSetDiskAutoDelete
+    -> InstancesSetDiskAutoDelete'
+instancesSetDiskAutoDelete' pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDeviceName_ pIsdadInstance_ =
+    InstancesSetDiskAutoDelete'
     { _isdadQuotaUser = Nothing
     , _isdadPrettyPrint = True
     , _isdadProject = pIsdadProject_
@@ -123,7 +130,7 @@ instancesSetDiskAutoDelete pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadDe
     , _isdadKey = Nothing
     , _isdadOauthToken = Nothing
     , _isdadFields = Nothing
-    , _isdadAlt = "json"
+    , _isdadAlt = JSON
     , _isdadInstance = pIsdadInstance_
     }
 
@@ -187,7 +194,7 @@ isdadFields
   = lens _isdadFields (\ s a -> s{_isdadFields = a})
 
 -- | Data format for the response.
-isdadAlt :: Lens' InstancesSetDiskAutoDelete' Text
+isdadAlt :: Lens' InstancesSetDiskAutoDelete' Alt
 isdadAlt = lens _isdadAlt (\ s a -> s{_isdadAlt = a})
 
 -- | The instance name.
@@ -200,8 +207,9 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
          where
         type Rs InstancesSetDiskAutoDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesSetDiskAutoDelete{..}
-          = go _isdadQuotaUser _isdadPrettyPrint _isdadProject
+        requestWithRoute r u InstancesSetDiskAutoDelete'{..}
+          = go _isdadQuotaUser (Just _isdadPrettyPrint)
+              _isdadProject
               _isdadUserIp
               (Just _isdadAutoDelete)
               _isdadZone
@@ -209,10 +217,10 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
               _isdadKey
               _isdadOauthToken
               _isdadFields
-              _isdadAlt
+              (Just _isdadAlt)
               _isdadInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesSetDiskAutoDeleteAPI)
+                      (Proxy :: Proxy InstancesSetDiskAutoDeleteResource)
                       r
                       u

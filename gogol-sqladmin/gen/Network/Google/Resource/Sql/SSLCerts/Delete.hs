@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- instance is restarted.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlSSLCertsDelete@.
-module Sql.SSLCerts.Delete
+module Network.Google.Resource.Sql.SSLCerts.Delete
     (
     -- * REST Resource
-      SslCertsDeleteAPI
+      SslCertsDeleteResource
 
     -- * Creating a Request
-    , sSLCertsDelete
-    , SSLCertsDelete
+    , sSLCertsDelete'
+    , SSLCertsDelete'
 
     -- * Request Lenses
     , scdQuotaUser
@@ -46,21 +47,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlSSLCertsDelete@ which the
--- 'SSLCertsDelete' request conforms to.
-type SslCertsDeleteAPI =
+-- 'SSLCertsDelete'' request conforms to.
+type SslCertsDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "sslCerts" :>
                Capture "sha1Fingerprint" Text :>
-                 Delete '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the SSL certificate. The change will not take effect until the
 -- instance is restarted.
 --
--- /See:/ 'sSLCertsDelete' smart constructor.
-data SSLCertsDelete = SSLCertsDelete
+-- /See:/ 'sSLCertsDelete'' smart constructor.
+data SSLCertsDelete' = SSLCertsDelete'
     { _scdQuotaUser       :: !(Maybe Text)
     , _scdPrettyPrint     :: !Bool
     , _scdProject         :: !Text
@@ -69,7 +76,7 @@ data SSLCertsDelete = SSLCertsDelete
     , _scdOauthToken      :: !(Maybe Text)
     , _scdSha1Fingerprint :: !Text
     , _scdFields          :: !(Maybe Text)
-    , _scdAlt             :: !Text
+    , _scdAlt             :: !Alt
     , _scdInstance        :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -96,13 +103,13 @@ data SSLCertsDelete = SSLCertsDelete
 -- * 'scdAlt'
 --
 -- * 'scdInstance'
-sSLCertsDelete
+sSLCertsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'sha1Fingerprint'
     -> Text -- ^ 'instance'
-    -> SSLCertsDelete
-sSLCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
-    SSLCertsDelete
+    -> SSLCertsDelete'
+sSLCertsDelete' pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
+    SSLCertsDelete'
     { _scdQuotaUser = Nothing
     , _scdPrettyPrint = True
     , _scdProject = pScdProject_
@@ -111,7 +118,7 @@ sSLCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
     , _scdOauthToken = Nothing
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdFields = Nothing
-    , _scdAlt = "json"
+    , _scdAlt = JSON
     , _scdInstance = pScdInstance_
     }
 
@@ -163,7 +170,7 @@ scdFields
   = lens _scdFields (\ s a -> s{_scdFields = a})
 
 -- | Data format for the response.
-scdAlt :: Lens' SSLCertsDelete' Text
+scdAlt :: Lens' SSLCertsDelete' Alt
 scdAlt = lens _scdAlt (\ s a -> s{_scdAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -174,16 +181,17 @@ scdInstance
 instance GoogleRequest SSLCertsDelete' where
         type Rs SSLCertsDelete' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsDelete{..}
-          = go _scdQuotaUser _scdPrettyPrint _scdProject
+        requestWithRoute r u SSLCertsDelete'{..}
+          = go _scdQuotaUser (Just _scdPrettyPrint) _scdProject
               _scdUserIp
               _scdKey
               _scdOauthToken
               _scdSha1Fingerprint
               _scdFields
-              _scdAlt
+              (Just _scdAlt)
               _scdInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy SslCertsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SslCertsDeleteResource)
                       r
                       u

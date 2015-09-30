@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the current settings for the user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyconfigGetUserSettings@.
-module Books.Myconfig.GetUserSettings
+module Network.Google.Resource.Books.Myconfig.GetUserSettings
     (
     -- * REST Resource
-      MyconfigGetUserSettingsAPI
+      MyconfigGetUserSettingsResource
 
     -- * Creating a Request
-    , myconfigGetUserSettings
-    , MyconfigGetUserSettings
+    , myconfigGetUserSettings'
+    , MyconfigGetUserSettings'
 
     -- * Request Lenses
     , mgusQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMyconfigGetUserSettings@ which the
--- 'MyconfigGetUserSettings' request conforms to.
-type MyconfigGetUserSettingsAPI =
+-- 'MyconfigGetUserSettings'' request conforms to.
+type MyconfigGetUserSettingsResource =
      "myconfig" :>
-       "getUserSettings" :> Get '[JSON] Usersettings
+       "getUserSettings" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Usersettings
 
 -- | Gets the current settings for the user.
 --
--- /See:/ 'myconfigGetUserSettings' smart constructor.
-data MyconfigGetUserSettings = MyconfigGetUserSettings
+-- /See:/ 'myconfigGetUserSettings'' smart constructor.
+data MyconfigGetUserSettings' = MyconfigGetUserSettings'
     { _mgusQuotaUser   :: !(Maybe Text)
     , _mgusPrettyPrint :: !Bool
     , _mgusUserIp      :: !(Maybe Text)
     , _mgusKey         :: !(Maybe Text)
     , _mgusOauthToken  :: !(Maybe Text)
     , _mgusFields      :: !(Maybe Text)
-    , _mgusAlt         :: !Text
+    , _mgusAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyconfigGetUserSettings'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data MyconfigGetUserSettings = MyconfigGetUserSettings
 -- * 'mgusFields'
 --
 -- * 'mgusAlt'
-myconfigGetUserSettings
-    :: MyconfigGetUserSettings
-myconfigGetUserSettings =
-    MyconfigGetUserSettings
+myconfigGetUserSettings'
+    :: MyconfigGetUserSettings'
+myconfigGetUserSettings' =
+    MyconfigGetUserSettings'
     { _mgusQuotaUser = Nothing
     , _mgusPrettyPrint = True
     , _mgusUserIp = Nothing
     , _mgusKey = Nothing
     , _mgusOauthToken = Nothing
     , _mgusFields = Nothing
-    , _mgusAlt = "json"
+    , _mgusAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,20 +136,21 @@ mgusFields
   = lens _mgusFields (\ s a -> s{_mgusFields = a})
 
 -- | Data format for the response.
-mgusAlt :: Lens' MyconfigGetUserSettings' Text
+mgusAlt :: Lens' MyconfigGetUserSettings' Alt
 mgusAlt = lens _mgusAlt (\ s a -> s{_mgusAlt = a})
 
 instance GoogleRequest MyconfigGetUserSettings' where
         type Rs MyconfigGetUserSettings' = Usersettings
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyconfigGetUserSettings{..}
-          = go _mgusQuotaUser _mgusPrettyPrint _mgusUserIp
+        requestWithRoute r u MyconfigGetUserSettings'{..}
+          = go _mgusQuotaUser (Just _mgusPrettyPrint)
+              _mgusUserIp
               _mgusKey
               _mgusOauthToken
               _mgusFields
-              _mgusAlt
+              (Just _mgusAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MyconfigGetUserSettingsAPI)
+                      (Proxy :: Proxy MyconfigGetUserSettingsResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- patch semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnPatch@.
-module FusionTables.Column.Patch
+module Network.Google.Resource.FusionTables.Column.Patch
     (
     -- * REST Resource
-      ColumnPatchAPI
+      ColumnPatchResource
 
     -- * Creating a Request
-    , columnPatch
-    , ColumnPatch
+    , columnPatch'
+    , ColumnPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnPatch@ which the
--- 'ColumnPatch' request conforms to.
-type ColumnPatchAPI =
+-- 'ColumnPatch'' request conforms to.
+type ColumnPatchResource =
      "tables" :>
        Capture "tableId" Text :>
          "columns" :>
-           Capture "columnId" Text :> Patch '[JSON] Column
+           Capture "columnId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Column
 
 -- | Updates the name or type of an existing column. This method supports
 -- patch semantics.
 --
--- /See:/ 'columnPatch' smart constructor.
-data ColumnPatch = ColumnPatch
+-- /See:/ 'columnPatch'' smart constructor.
+data ColumnPatch' = ColumnPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data ColumnPatch = ColumnPatch
     , _cpTableId     :: !Text
     , _cpColumnId    :: !Text
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnPatch'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data ColumnPatch = ColumnPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-columnPatch
+columnPatch'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
-    -> ColumnPatch
-columnPatch pCpTableId_ pCpColumnId_ =
-    ColumnPatch
+    -> ColumnPatch'
+columnPatch' pCpTableId_ pCpColumnId_ =
+    ColumnPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -103,7 +111,7 @@ columnPatch pCpTableId_ pCpColumnId_ =
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,18 +158,22 @@ cpFields :: Lens' ColumnPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' ColumnPatch' Text
+cpAlt :: Lens' ColumnPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest ColumnPatch' where
         type Rs ColumnPatch' = Column
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp _cpKey
+        requestWithRoute r u ColumnPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+              _cpKey
               _cpOauthToken
               _cpTableId
               _cpColumnId
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ColumnPatchResource)
+                      r
+                      u

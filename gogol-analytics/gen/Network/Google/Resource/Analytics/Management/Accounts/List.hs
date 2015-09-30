@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountsList@.
-module Analytics.Management.Accounts.List
+module Network.Google.Resource.Analytics.Management.Accounts.List
     (
     -- * REST Resource
-      ManagementAccountsListAPI
+      ManagementAccountsListResource
 
     -- * Creating a Request
-    , managementAccountsList
-    , ManagementAccountsList
+    , managementAccountsList'
+    , ManagementAccountsList'
 
     -- * Request Lenses
     , malQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountsList@ which the
--- 'ManagementAccountsList' request conforms to.
-type ManagementAccountsListAPI =
+-- 'ManagementAccountsList'' request conforms to.
+type ManagementAccountsListResource =
      "management" :>
        "accounts" :>
-         QueryParam "start-index" Int32 :>
-           QueryParam "max-results" Int32 :>
-             Get '[JSON] Accounts
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "start-index" Int32 :>
+                     QueryParam "max-results" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
 --
--- /See:/ 'managementAccountsList' smart constructor.
-data ManagementAccountsList = ManagementAccountsList
+-- /See:/ 'managementAccountsList'' smart constructor.
+data ManagementAccountsList' = ManagementAccountsList'
     { _malQuotaUser   :: !(Maybe Text)
     , _malPrettyPrint :: !Bool
     , _malUserIp      :: !(Maybe Text)
@@ -64,7 +71,7 @@ data ManagementAccountsList = ManagementAccountsList
     , _malStartIndex  :: !(Maybe Int32)
     , _malMaxResults  :: !(Maybe Int32)
     , _malFields      :: !(Maybe Text)
-    , _malAlt         :: !Text
+    , _malAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList'' with the minimum fields required to make a request.
@@ -88,10 +95,10 @@ data ManagementAccountsList = ManagementAccountsList
 -- * 'malFields'
 --
 -- * 'malAlt'
-managementAccountsList
-    :: ManagementAccountsList
-managementAccountsList =
-    ManagementAccountsList
+managementAccountsList'
+    :: ManagementAccountsList'
+managementAccountsList' =
+    ManagementAccountsList'
     { _malQuotaUser = Nothing
     , _malPrettyPrint = False
     , _malUserIp = Nothing
@@ -100,7 +107,7 @@ managementAccountsList =
     , _malStartIndex = Nothing
     , _malMaxResults = Nothing
     , _malFields = Nothing
-    , _malAlt = "json"
+    , _malAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,21 +160,22 @@ malFields
   = lens _malFields (\ s a -> s{_malFields = a})
 
 -- | Data format for the response.
-malAlt :: Lens' ManagementAccountsList' Text
+malAlt :: Lens' ManagementAccountsList' Alt
 malAlt = lens _malAlt (\ s a -> s{_malAlt = a})
 
 instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementAccountsList{..}
-          = go _malQuotaUser _malPrettyPrint _malUserIp _malKey
+        requestWithRoute r u ManagementAccountsList'{..}
+          = go _malQuotaUser (Just _malPrettyPrint) _malUserIp
+              _malKey
               _malOauthToken
               _malStartIndex
               _malMaxResults
               _malFields
-              _malAlt
+              (Just _malAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementAccountsListAPI)
+                      (Proxy :: Proxy ManagementAccountsListResource)
                       r
                       u

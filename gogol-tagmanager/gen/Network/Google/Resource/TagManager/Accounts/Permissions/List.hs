@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Container Permissions granted to each of them.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsList@.
-module TagManager.Accounts.Permissions.List
+module Network.Google.Resource.TagManager.Accounts.Permissions.List
     (
     -- * REST Resource
-      AccountsPermissionsListAPI
+      AccountsPermissionsListResource
 
     -- * Creating a Request
-    , accountsPermissionsList
-    , AccountsPermissionsList
+    , accountsPermissionsList'
+    , AccountsPermissionsList'
 
     -- * Request Lenses
     , aplQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsPermissionsList@ which the
--- 'AccountsPermissionsList' request conforms to.
-type AccountsPermissionsListAPI =
+-- 'AccountsPermissionsList'' request conforms to.
+type AccountsPermissionsListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "permissions" :> Get '[JSON] ListAccountUsersResponse
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] ListAccountUsersResponse
 
 -- | List all users that have access to the account along with Account and
 -- Container Permissions granted to each of them.
 --
--- /See:/ 'accountsPermissionsList' smart constructor.
-data AccountsPermissionsList = AccountsPermissionsList
+-- /See:/ 'accountsPermissionsList'' smart constructor.
+data AccountsPermissionsList' = AccountsPermissionsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data AccountsPermissionsList = AccountsPermissionsList
     , _aplKey         :: !(Maybe Text)
     , _aplOauthToken  :: !(Maybe Text)
     , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Text
+    , _aplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsList'' with the minimum fields required to make a request.
@@ -84,11 +93,11 @@ data AccountsPermissionsList = AccountsPermissionsList
 -- * 'aplFields'
 --
 -- * 'aplAlt'
-accountsPermissionsList
+accountsPermissionsList'
     :: Text -- ^ 'accountId'
-    -> AccountsPermissionsList
-accountsPermissionsList pAplAccountId_ =
-    AccountsPermissionsList
+    -> AccountsPermissionsList'
+accountsPermissionsList' pAplAccountId_ =
+    AccountsPermissionsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
     , _aplUserIp = Nothing
@@ -96,7 +105,7 @@ accountsPermissionsList pAplAccountId_ =
     , _aplKey = Nothing
     , _aplOauthToken = Nothing
     , _aplFields = Nothing
-    , _aplAlt = "json"
+    , _aplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,22 +150,22 @@ aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
 -- | Data format for the response.
-aplAlt :: Lens' AccountsPermissionsList' Text
+aplAlt :: Lens' AccountsPermissionsList' Alt
 aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
 
 instance GoogleRequest AccountsPermissionsList' where
         type Rs AccountsPermissionsList' =
              ListAccountUsersResponse
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsPermissionsList{..}
-          = go _aplQuotaUser _aplPrettyPrint _aplUserIp
+        requestWithRoute r u AccountsPermissionsList'{..}
+          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIp
               _aplAccountId
               _aplKey
               _aplOauthToken
               _aplFields
-              _aplAlt
+              (Just _aplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPermissionsListAPI)
+                      (Proxy :: Proxy AccountsPermissionsListResource)
                       r
                       u

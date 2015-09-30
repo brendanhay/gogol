@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeThumbnailsSet@.
-module YouTube.Thumbnails.Set
+module Network.Google.Resource.YouTube.Thumbnails.Set
     (
     -- * REST Resource
-      ThumbnailsSetAPI
+      ThumbnailsSetResource
 
     -- * Creating a Request
-    , thumbnailsSet
-    , ThumbnailsSet
+    , thumbnailsSet'
+    , ThumbnailsSet'
 
     -- * Request Lenses
     , tsQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeThumbnailsSet@ which the
--- 'ThumbnailsSet' request conforms to.
-type ThumbnailsSetAPI =
+-- 'ThumbnailsSet'' request conforms to.
+type ThumbnailsSetResource =
      "thumbnails" :>
        "set" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "videoId" Text :>
-             Post '[JSON] ThumbnailSetResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "videoId" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
--- /See:/ 'thumbnailsSet' smart constructor.
-data ThumbnailsSet = ThumbnailsSet
+-- /See:/ 'thumbnailsSet'' smart constructor.
+data ThumbnailsSet' = ThumbnailsSet'
     { _tsQuotaUser              :: !(Maybe Text)
     , _tsPrettyPrint            :: !Bool
     , _tsUserIp                 :: !(Maybe Text)
@@ -64,7 +72,7 @@ data ThumbnailsSet = ThumbnailsSet
     , _tsKey                    :: !(Maybe Text)
     , _tsOauthToken             :: !(Maybe Text)
     , _tsFields                 :: !(Maybe Text)
-    , _tsAlt                    :: !Text
+    , _tsAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThumbnailsSet'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data ThumbnailsSet = ThumbnailsSet
 -- * 'tsFields'
 --
 -- * 'tsAlt'
-thumbnailsSet
+thumbnailsSet'
     :: Text -- ^ 'videoId'
-    -> ThumbnailsSet
-thumbnailsSet pTsVideoId_ =
-    ThumbnailsSet
+    -> ThumbnailsSet'
+thumbnailsSet' pTsVideoId_ =
+    ThumbnailsSet'
     { _tsQuotaUser = Nothing
     , _tsPrettyPrint = True
     , _tsUserIp = Nothing
@@ -101,7 +109,7 @@ thumbnailsSet pTsVideoId_ =
     , _tsKey = Nothing
     , _tsOauthToken = Nothing
     , _tsFields = Nothing
-    , _tsAlt = "json"
+    , _tsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,20 +167,22 @@ tsFields :: Lens' ThumbnailsSet' (Maybe Text)
 tsFields = lens _tsFields (\ s a -> s{_tsFields = a})
 
 -- | Data format for the response.
-tsAlt :: Lens' ThumbnailsSet' Text
+tsAlt :: Lens' ThumbnailsSet' Alt
 tsAlt = lens _tsAlt (\ s a -> s{_tsAlt = a})
 
 instance GoogleRequest ThumbnailsSet' where
         type Rs ThumbnailsSet' = ThumbnailSetResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ThumbnailsSet{..}
-          = go _tsQuotaUser _tsPrettyPrint _tsUserIp
+        requestWithRoute r u ThumbnailsSet'{..}
+          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIp
               _tsOnBehalfOfContentOwner
               (Just _tsVideoId)
               _tsKey
               _tsOauthToken
               _tsFields
-              _tsAlt
+              (Just _tsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ThumbnailsSetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ThumbnailsSetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,145 +20,162 @@
 -- | Returns the specified image resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeImagesGet@.
-module Compute.Images.Get
+module Network.Google.Resource.Compute.Images.Get
     (
     -- * REST Resource
-      ImagesGetAPI
+      ImagesGetResource
 
     -- * Creating a Request
-    , imagesGet
-    , ImagesGet
+    , imagesGet'
+    , ImagesGet'
 
     -- * Request Lenses
-    , igQuotaUser
-    , igImage
-    , igPrettyPrint
-    , igProject
-    , igUserIp
-    , igKey
-    , igOauthToken
-    , igFields
-    , igAlt
+    , imamQuotaUser
+    , imamImage
+    , imamPrettyPrint
+    , imamProject
+    , imamUserIp
+    , imamKey
+    , imamOauthToken
+    , imamFields
+    , imamAlt
     ) where
 
 import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeImagesGet@ which the
--- 'ImagesGet' request conforms to.
-type ImagesGetAPI =
+-- 'ImagesGet'' request conforms to.
+type ImagesGetResource =
      Capture "project" Text :>
        "global" :>
-         "images" :> Capture "image" Text :> Get '[JSON] Image
+         "images" :>
+           Capture "image" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Image
 
 -- | Returns the specified image resource.
 --
--- /See:/ 'imagesGet' smart constructor.
-data ImagesGet = ImagesGet
-    { _igQuotaUser   :: !(Maybe Text)
-    , _igImage       :: !Text
-    , _igPrettyPrint :: !Bool
-    , _igProject     :: !Text
-    , _igUserIp      :: !(Maybe Text)
-    , _igKey         :: !(Maybe Text)
-    , _igOauthToken  :: !(Maybe Text)
-    , _igFields      :: !(Maybe Text)
-    , _igAlt         :: !Text
+-- /See:/ 'imagesGet'' smart constructor.
+data ImagesGet' = ImagesGet'
+    { _imamQuotaUser   :: !(Maybe Text)
+    , _imamImage       :: !Text
+    , _imamPrettyPrint :: !Bool
+    , _imamProject     :: !Text
+    , _imamUserIp      :: !(Maybe Text)
+    , _imamKey         :: !(Maybe Text)
+    , _imamOauthToken  :: !(Maybe Text)
+    , _imamFields      :: !(Maybe Text)
+    , _imamAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igQuotaUser'
+-- * 'imamQuotaUser'
 --
--- * 'igImage'
+-- * 'imamImage'
 --
--- * 'igPrettyPrint'
+-- * 'imamPrettyPrint'
 --
--- * 'igProject'
+-- * 'imamProject'
 --
--- * 'igUserIp'
+-- * 'imamUserIp'
 --
--- * 'igKey'
+-- * 'imamKey'
 --
--- * 'igOauthToken'
+-- * 'imamOauthToken'
 --
--- * 'igFields'
+-- * 'imamFields'
 --
--- * 'igAlt'
-imagesGet
+-- * 'imamAlt'
+imagesGet'
     :: Text -- ^ 'image'
     -> Text -- ^ 'project'
-    -> ImagesGet
-imagesGet pIgImage_ pIgProject_ =
-    ImagesGet
-    { _igQuotaUser = Nothing
-    , _igImage = pIgImage_
-    , _igPrettyPrint = True
-    , _igProject = pIgProject_
-    , _igUserIp = Nothing
-    , _igKey = Nothing
-    , _igOauthToken = Nothing
-    , _igFields = Nothing
-    , _igAlt = "json"
+    -> ImagesGet'
+imagesGet' pImamImage_ pImamProject_ =
+    ImagesGet'
+    { _imamQuotaUser = Nothing
+    , _imamImage = pImamImage_
+    , _imamPrettyPrint = True
+    , _imamProject = pImamProject_
+    , _imamUserIp = Nothing
+    , _imamKey = Nothing
+    , _imamOauthToken = Nothing
+    , _imamFields = Nothing
+    , _imamAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-igQuotaUser :: Lens' ImagesGet' (Maybe Text)
-igQuotaUser
-  = lens _igQuotaUser (\ s a -> s{_igQuotaUser = a})
+imamQuotaUser :: Lens' ImagesGet' (Maybe Text)
+imamQuotaUser
+  = lens _imamQuotaUser
+      (\ s a -> s{_imamQuotaUser = a})
 
 -- | Name of the image resource to return.
-igImage :: Lens' ImagesGet' Text
-igImage = lens _igImage (\ s a -> s{_igImage = a})
+imamImage :: Lens' ImagesGet' Text
+imamImage
+  = lens _imamImage (\ s a -> s{_imamImage = a})
 
 -- | Returns response with indentations and line breaks.
-igPrettyPrint :: Lens' ImagesGet' Bool
-igPrettyPrint
-  = lens _igPrettyPrint
-      (\ s a -> s{_igPrettyPrint = a})
+imamPrettyPrint :: Lens' ImagesGet' Bool
+imamPrettyPrint
+  = lens _imamPrettyPrint
+      (\ s a -> s{_imamPrettyPrint = a})
 
 -- | Project ID for this request.
-igProject :: Lens' ImagesGet' Text
-igProject
-  = lens _igProject (\ s a -> s{_igProject = a})
+imamProject :: Lens' ImagesGet' Text
+imamProject
+  = lens _imamProject (\ s a -> s{_imamProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igUserIp :: Lens' ImagesGet' (Maybe Text)
-igUserIp = lens _igUserIp (\ s a -> s{_igUserIp = a})
+imamUserIp :: Lens' ImagesGet' (Maybe Text)
+imamUserIp
+  = lens _imamUserIp (\ s a -> s{_imamUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' ImagesGet' (Maybe Text)
-igKey = lens _igKey (\ s a -> s{_igKey = a})
+imamKey :: Lens' ImagesGet' (Maybe Text)
+imamKey = lens _imamKey (\ s a -> s{_imamKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igOauthToken :: Lens' ImagesGet' (Maybe Text)
-igOauthToken
-  = lens _igOauthToken (\ s a -> s{_igOauthToken = a})
+imamOauthToken :: Lens' ImagesGet' (Maybe Text)
+imamOauthToken
+  = lens _imamOauthToken
+      (\ s a -> s{_imamOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-igFields :: Lens' ImagesGet' (Maybe Text)
-igFields = lens _igFields (\ s a -> s{_igFields = a})
+imamFields :: Lens' ImagesGet' (Maybe Text)
+imamFields
+  = lens _imamFields (\ s a -> s{_imamFields = a})
 
 -- | Data format for the response.
-igAlt :: Lens' ImagesGet' Text
-igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
+imamAlt :: Lens' ImagesGet' Alt
+imamAlt = lens _imamAlt (\ s a -> s{_imamAlt = a})
 
 instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ImagesGet{..}
-          = go _igQuotaUser _igImage _igPrettyPrint _igProject
-              _igUserIp
-              _igKey
-              _igOauthToken
-              _igFields
-              _igAlt
+        requestWithRoute r u ImagesGet'{..}
+          = go _imamQuotaUser _imamImage
+              (Just _imamPrettyPrint)
+              _imamProject
+              _imamUserIp
+              _imamKey
+              _imamOauthToken
+              _imamFields
+              (Just _imamAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ImagesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ImagesGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,137 +20,145 @@
 -- | Returns metadata for a calendar.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsGet@.
-module Calendar.Calendars.Get
+module Network.Google.Resource.Calendar.Calendars.Get
     (
     -- * REST Resource
-      CalendarsGetAPI
+      CalendarsGetResource
 
     -- * Creating a Request
-    , calendarsGet
-    , CalendarsGet
+    , calendarsGet'
+    , CalendarsGet'
 
     -- * Request Lenses
-    , cgQuotaUser
-    , cgCalendarId
-    , cgPrettyPrint
-    , cgUserIp
-    , cgKey
-    , cgOauthToken
-    , cgFields
-    , cgAlt
+    , cQuotaUser
+    , cCalendarId
+    , cPrettyPrint
+    , cUserIp
+    , cKey
+    , cOauthToken
+    , cFields
+    , cAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsGet@ which the
--- 'CalendarsGet' request conforms to.
-type CalendarsGetAPI =
+-- 'CalendarsGet'' request conforms to.
+type CalendarsGetResource =
      "calendars" :>
-       Capture "calendarId" Text :> Get '[JSON] Calendar
+       Capture "calendarId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Calendar
 
 -- | Returns metadata for a calendar.
 --
--- /See:/ 'calendarsGet' smart constructor.
-data CalendarsGet = CalendarsGet
-    { _cgQuotaUser   :: !(Maybe Text)
-    , _cgCalendarId  :: !Text
-    , _cgPrettyPrint :: !Bool
-    , _cgUserIp      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
-    , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+-- /See:/ 'calendarsGet'' smart constructor.
+data CalendarsGet' = CalendarsGet'
+    { _cQuotaUser   :: !(Maybe Text)
+    , _cCalendarId  :: !Text
+    , _cPrettyPrint :: !Bool
+    , _cUserIp      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Text)
+    , _cOauthToken  :: !(Maybe Text)
+    , _cFields      :: !(Maybe Text)
+    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cgQuotaUser'
+-- * 'cQuotaUser'
 --
--- * 'cgCalendarId'
+-- * 'cCalendarId'
 --
--- * 'cgPrettyPrint'
+-- * 'cPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cUserIp'
 --
--- * 'cgKey'
+-- * 'cKey'
 --
--- * 'cgOauthToken'
+-- * 'cOauthToken'
 --
--- * 'cgFields'
+-- * 'cFields'
 --
--- * 'cgAlt'
-calendarsGet
+-- * 'cAlt'
+calendarsGet'
     :: Text -- ^ 'calendarId'
-    -> CalendarsGet
-calendarsGet pCgCalendarId_ =
-    CalendarsGet
-    { _cgQuotaUser = Nothing
-    , _cgCalendarId = pCgCalendarId_
-    , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
-    , _cgKey = Nothing
-    , _cgOauthToken = Nothing
-    , _cgFields = Nothing
-    , _cgAlt = "json"
+    -> CalendarsGet'
+calendarsGet' pCCalendarId_ =
+    CalendarsGet'
+    { _cQuotaUser = Nothing
+    , _cCalendarId = pCCalendarId_
+    , _cPrettyPrint = True
+    , _cUserIp = Nothing
+    , _cKey = Nothing
+    , _cOauthToken = Nothing
+    , _cFields = Nothing
+    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cgQuotaUser :: Lens' CalendarsGet' (Maybe Text)
-cgQuotaUser
-  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
+cQuotaUser :: Lens' CalendarsGet' (Maybe Text)
+cQuotaUser
+  = lens _cQuotaUser (\ s a -> s{_cQuotaUser = a})
 
 -- | Calendar identifier. To retrieve calendar IDs call the calendarList.list
 -- method. If you want to access the primary calendar of the currently
 -- logged in user, use the \"primary\" keyword.
-cgCalendarId :: Lens' CalendarsGet' Text
-cgCalendarId
-  = lens _cgCalendarId (\ s a -> s{_cgCalendarId = a})
+cCalendarId :: Lens' CalendarsGet' Text
+cCalendarId
+  = lens _cCalendarId (\ s a -> s{_cCalendarId = a})
 
 -- | Returns response with indentations and line breaks.
-cgPrettyPrint :: Lens' CalendarsGet' Bool
-cgPrettyPrint
-  = lens _cgPrettyPrint
-      (\ s a -> s{_cgPrettyPrint = a})
+cPrettyPrint :: Lens' CalendarsGet' Bool
+cPrettyPrint
+  = lens _cPrettyPrint (\ s a -> s{_cPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' CalendarsGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cUserIp :: Lens' CalendarsGet' (Maybe Text)
+cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CalendarsGet' (Maybe Text)
-cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
+cKey :: Lens' CalendarsGet' (Maybe Text)
+cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CalendarsGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cOauthToken :: Lens' CalendarsGet' (Maybe Text)
+cOauthToken
+  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cgFields :: Lens' CalendarsGet' (Maybe Text)
-cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
+cFields :: Lens' CalendarsGet' (Maybe Text)
+cFields = lens _cFields (\ s a -> s{_cFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CalendarsGet' Text
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+cAlt :: Lens' CalendarsGet' Alt
+cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
 
 instance GoogleRequest CalendarsGet' where
         type Rs CalendarsGet' = Calendar
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsGet{..}
-          = go _cgQuotaUser _cgCalendarId _cgPrettyPrint
-              _cgUserIp
-              _cgKey
-              _cgOauthToken
-              _cgFields
-              _cgAlt
+        requestWithRoute r u CalendarsGet'{..}
+          = go _cQuotaUser _cCalendarId (Just _cPrettyPrint)
+              _cUserIp
+              _cKey
+              _cOauthToken
+              _cFields
+              (Just _cAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsGetResource)
+                      r
                       u

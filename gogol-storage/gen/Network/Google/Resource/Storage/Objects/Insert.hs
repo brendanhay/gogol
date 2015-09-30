@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Stores new data blobs and associated metadata.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsInsert@.
-module Storage.Objects.Insert
+module Network.Google.Resource.Storage.Objects.Insert
     (
     -- * REST Resource
-      ObjectsInsertAPI
+      ObjectsInsertResource
 
     -- * Creating a Request
-    , objectsInsert
-    , ObjectsInsert
+    , objectsInsert'
+    , ObjectsInsert'
 
     -- * Request Lenses
     , oiQuotaUser
@@ -49,22 +50,31 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsInsert@ which the
--- 'ObjectsInsert' request conforms to.
-type ObjectsInsertAPI =
+-- 'ObjectsInsert'' request conforms to.
+type ObjectsInsertResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "ifMetagenerationMatch" Word64 :>
-             QueryParam "ifGenerationNotMatch" Word64 :>
-               QueryParam "ifGenerationMatch" Word64 :>
-                 QueryParam "name" Text :>
-                   QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "projection" Text :> Post '[JSON] Object
+           QueryParam "quotaUser" Text :>
+             QueryParam "ifMetagenerationMatch" Word64 :>
+               QueryParam "ifGenerationNotMatch" Word64 :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "ifGenerationMatch" Word64 :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "name" Text :>
+                           QueryParam "ifMetagenerationNotMatch" Word64 :>
+                             QueryParam "projection"
+                               StorageObjectsInsertProjection
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Post '[JSON] Object
 
 -- | Stores new data blobs and associated metadata.
 --
--- /See:/ 'objectsInsert' smart constructor.
-data ObjectsInsert = ObjectsInsert
+-- /See:/ 'objectsInsert'' smart constructor.
+data ObjectsInsert' = ObjectsInsert'
     { _oiQuotaUser                :: !(Maybe Text)
     , _oiIfMetagenerationMatch    :: !(Maybe Word64)
     , _oiIfGenerationNotMatch     :: !(Maybe Word64)
@@ -75,10 +85,10 @@ data ObjectsInsert = ObjectsInsert
     , _oiKey                      :: !(Maybe Text)
     , _oiName                     :: !(Maybe Text)
     , _oiIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _oiProjection               :: !(Maybe Text)
+    , _oiProjection               :: !(Maybe StorageObjectsInsertProjection)
     , _oiOauthToken               :: !(Maybe Text)
     , _oiFields                   :: !(Maybe Text)
-    , _oiAlt                      :: !Text
+    , _oiAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsInsert'' with the minimum fields required to make a request.
@@ -112,11 +122,11 @@ data ObjectsInsert = ObjectsInsert
 -- * 'oiFields'
 --
 -- * 'oiAlt'
-objectsInsert
+objectsInsert'
     :: Text -- ^ 'bucket'
-    -> ObjectsInsert
-objectsInsert pOiBucket_ =
-    ObjectsInsert
+    -> ObjectsInsert'
+objectsInsert' pOiBucket_ =
+    ObjectsInsert'
     { _oiQuotaUser = Nothing
     , _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
@@ -130,7 +140,7 @@ objectsInsert pOiBucket_ =
     , _oiProjection = Nothing
     , _oiOauthToken = Nothing
     , _oiFields = Nothing
-    , _oiAlt = "json"
+    , _oiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,7 +207,7 @@ oiIfMetagenerationNotMatch
 
 -- | Set of properties to return. Defaults to noAcl, unless the object
 -- resource specifies the acl property, when it defaults to full.
-oiProjection :: Lens' ObjectsInsert' (Maybe Text)
+oiProjection :: Lens' ObjectsInsert' (Maybe StorageObjectsInsertProjection)
 oiProjection
   = lens _oiProjection (\ s a -> s{_oiProjection = a})
 
@@ -211,16 +221,16 @@ oiFields :: Lens' ObjectsInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
 -- | Data format for the response.
-oiAlt :: Lens' ObjectsInsert' Text
+oiAlt :: Lens' ObjectsInsert' Alt
 oiAlt = lens _oiAlt (\ s a -> s{_oiAlt = a})
 
 instance GoogleRequest ObjectsInsert' where
         type Rs ObjectsInsert' = Object
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsInsert{..}
+        requestWithRoute r u ObjectsInsert'{..}
           = go _oiQuotaUser _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
-              _oiPrettyPrint
+              (Just _oiPrettyPrint)
               _oiIfGenerationMatch
               _oiUserIp
               _oiBucket
@@ -230,7 +240,9 @@ instance GoogleRequest ObjectsInsert' where
               _oiProjection
               _oiOauthToken
               _oiFields
-              _oiAlt
+              (Just _oiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsInsertResource)
+                      r
                       u

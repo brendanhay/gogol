@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all GTM Macros of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMACrosList@.
-module TagManager.Accounts.Containers.MACros.List
+module Network.Google.Resource.TagManager.Accounts.Containers.MACros.List
     (
     -- * REST Resource
-      AccountsContainersMacrosListAPI
+      AccountsContainersMacrosListResource
 
     -- * Creating a Request
-    , accountsContainersMACrosList
-    , AccountsContainersMACrosList
+    , accountsContainersMACrosList'
+    , AccountsContainersMACrosList'
 
     -- * Request Lenses
     , acmaclQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersMACrosList@ which the
--- 'AccountsContainersMACrosList' request conforms to.
-type AccountsContainersMacrosListAPI =
+-- 'AccountsContainersMACrosList'' request conforms to.
+type AccountsContainersMacrosListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "macros" :> Get '[JSON] ListMACrosResponse
+             "macros" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ListMACrosResponse
 
 -- | Lists all GTM Macros of a Container.
 --
--- /See:/ 'accountsContainersMACrosList' smart constructor.
-data AccountsContainersMACrosList = AccountsContainersMACrosList
+-- /See:/ 'accountsContainersMACrosList'' smart constructor.
+data AccountsContainersMACrosList' = AccountsContainersMACrosList'
     { _acmaclQuotaUser   :: !(Maybe Text)
     , _acmaclPrettyPrint :: !Bool
     , _acmaclContainerId :: !Text
@@ -64,7 +73,7 @@ data AccountsContainersMACrosList = AccountsContainersMACrosList
     , _acmaclKey         :: !(Maybe Text)
     , _acmaclOauthToken  :: !(Maybe Text)
     , _acmaclFields      :: !(Maybe Text)
-    , _acmaclAlt         :: !Text
+    , _acmaclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMACrosList'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data AccountsContainersMACrosList = AccountsContainersMACrosList
 -- * 'acmaclFields'
 --
 -- * 'acmaclAlt'
-accountsContainersMACrosList
+accountsContainersMACrosList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersMACrosList
-accountsContainersMACrosList pAcmaclContainerId_ pAcmaclAccountId_ =
-    AccountsContainersMACrosList
+    -> AccountsContainersMACrosList'
+accountsContainersMACrosList' pAcmaclContainerId_ pAcmaclAccountId_ =
+    AccountsContainersMACrosList'
     { _acmaclQuotaUser = Nothing
     , _acmaclPrettyPrint = True
     , _acmaclContainerId = pAcmaclContainerId_
@@ -102,7 +111,7 @@ accountsContainersMACrosList pAcmaclContainerId_ pAcmaclAccountId_ =
     , _acmaclKey = Nothing
     , _acmaclOauthToken = Nothing
     , _acmaclFields = Nothing
-    , _acmaclAlt = "json"
+    , _acmaclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +165,7 @@ acmaclFields
   = lens _acmaclFields (\ s a -> s{_acmaclFields = a})
 
 -- | Data format for the response.
-acmaclAlt :: Lens' AccountsContainersMACrosList' Text
+acmaclAlt :: Lens' AccountsContainersMACrosList' Alt
 acmaclAlt
   = lens _acmaclAlt (\ s a -> s{_acmaclAlt = a})
 
@@ -165,17 +174,18 @@ instance GoogleRequest AccountsContainersMACrosList'
         type Rs AccountsContainersMACrosList' =
              ListMACrosResponse
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersMACrosList{..}
-          = go _acmaclQuotaUser _acmaclPrettyPrint
+        requestWithRoute r u
+          AccountsContainersMACrosList'{..}
+          = go _acmaclQuotaUser (Just _acmaclPrettyPrint)
               _acmaclContainerId
               _acmaclUserIp
               _acmaclAccountId
               _acmaclKey
               _acmaclOauthToken
               _acmaclFields
-              _acmaclAlt
+              (Just _acmaclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersMacrosListAPI)
+                      (Proxy :: Proxy AccountsContainersMacrosListResource)
                       r
                       u

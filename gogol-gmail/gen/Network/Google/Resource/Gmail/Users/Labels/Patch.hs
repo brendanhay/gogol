@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the specified label. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsPatch@.
-module Gmail.Users.Labels.Patch
+module Network.Google.Resource.Gmail.Users.Labels.Patch
     (
     -- * REST Resource
-      UsersLabelsPatchAPI
+      UsersLabelsPatchResource
 
     -- * Creating a Request
-    , usersLabelsPatch
-    , UsersLabelsPatch
+    , usersLabelsPatch'
+    , UsersLabelsPatch'
 
     -- * Request Lenses
     , ulpQuotaUser
@@ -44,15 +45,23 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsPatch@ which the
--- 'UsersLabelsPatch' request conforms to.
-type UsersLabelsPatchAPI =
+-- 'UsersLabelsPatch'' request conforms to.
+type UsersLabelsPatchResource =
      Capture "userId" Text :>
-       "labels" :> Capture "id" Text :> Patch '[JSON] Label
+       "labels" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Patch '[JSON] Label
 
 -- | Updates the specified label. This method supports patch semantics.
 --
--- /See:/ 'usersLabelsPatch' smart constructor.
-data UsersLabelsPatch = UsersLabelsPatch
+-- /See:/ 'usersLabelsPatch'' smart constructor.
+data UsersLabelsPatch' = UsersLabelsPatch'
     { _ulpQuotaUser   :: !(Maybe Text)
     , _ulpPrettyPrint :: !Bool
     , _ulpUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersLabelsPatch = UsersLabelsPatch
     , _ulpId          :: !Text
     , _ulpOauthToken  :: !(Maybe Text)
     , _ulpFields      :: !(Maybe Text)
-    , _ulpAlt         :: !Text
+    , _ulpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsPatch'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data UsersLabelsPatch = UsersLabelsPatch
 -- * 'ulpFields'
 --
 -- * 'ulpAlt'
-usersLabelsPatch
+usersLabelsPatch'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersLabelsPatch
-usersLabelsPatch pUlpUserId_ pUlpId_ =
-    UsersLabelsPatch
+    -> UsersLabelsPatch'
+usersLabelsPatch' pUlpUserId_ pUlpId_ =
+    UsersLabelsPatch'
     { _ulpQuotaUser = Nothing
     , _ulpPrettyPrint = True
     , _ulpUserIp = Nothing
@@ -99,7 +108,7 @@ usersLabelsPatch pUlpUserId_ pUlpId_ =
     , _ulpId = pUlpId_
     , _ulpOauthToken = Nothing
     , _ulpFields = Nothing
-    , _ulpAlt = "json"
+    , _ulpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,22 +158,22 @@ ulpFields
   = lens _ulpFields (\ s a -> s{_ulpFields = a})
 
 -- | Data format for the response.
-ulpAlt :: Lens' UsersLabelsPatch' Text
+ulpAlt :: Lens' UsersLabelsPatch' Alt
 ulpAlt = lens _ulpAlt (\ s a -> s{_ulpAlt = a})
 
 instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsPatch{..}
-          = go _ulpQuotaUser _ulpPrettyPrint _ulpUserIp
+        requestWithRoute r u UsersLabelsPatch'{..}
+          = go _ulpQuotaUser (Just _ulpPrettyPrint) _ulpUserIp
               _ulpUserId
               _ulpKey
               _ulpId
               _ulpOauthToken
               _ulpFields
-              _ulpAlt
+              (Just _ulpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersLabelsPatchAPI)
+                      (Proxy :: Proxy UsersLabelsPatchResource)
                       r
                       u

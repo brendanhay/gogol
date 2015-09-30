@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of content categories, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesList@.
-module DFAReporting.ContentCategories.List
+module Network.Google.Resource.DFAReporting.ContentCategories.List
     (
     -- * REST Resource
-      ContentCategoriesListAPI
+      ContentCategoriesListResource
 
     -- * Creating a Request
-    , contentCategoriesList
-    , ContentCategoriesList
+    , contentCategoriesList'
+    , ContentCategoriesList'
 
     -- * Request Lenses
     , cclQuotaUser
@@ -49,37 +50,48 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesList@ which the
--- 'ContentCategoriesList' request conforms to.
-type ContentCategoriesListAPI =
+-- 'ContentCategoriesList'' request conforms to.
+type ContentCategoriesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "sortField" Text :>
-                     QueryParam "maxResults" Int32 :>
-                       Get '[JSON] ContentCategoriesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingContentCategoriesListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "sortField"
+                             DfareportingContentCategoriesListSortField
+                             :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "maxResults" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] ContentCategoriesListResponse
 
 -- | Retrieves a list of content categories, possibly filtered.
 --
--- /See:/ 'contentCategoriesList' smart constructor.
-data ContentCategoriesList = ContentCategoriesList
+-- /See:/ 'contentCategoriesList'' smart constructor.
+data ContentCategoriesList' = ContentCategoriesList'
     { _cclQuotaUser    :: !(Maybe Text)
     , _cclPrettyPrint  :: !Bool
     , _cclUserIp       :: !(Maybe Text)
     , _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe Int64)
     , _cclProfileId    :: !Int64
-    , _cclSortOrder    :: !(Maybe Text)
+    , _cclSortOrder    :: !(Maybe DfareportingContentCategoriesListSortOrder)
     , _cclKey          :: !(Maybe Text)
     , _cclPageToken    :: !(Maybe Text)
-    , _cclSortField    :: !(Maybe Text)
+    , _cclSortField    :: !(Maybe DfareportingContentCategoriesListSortField)
     , _cclOauthToken   :: !(Maybe Text)
     , _cclMaxResults   :: !(Maybe Int32)
     , _cclFields       :: !(Maybe Text)
-    , _cclAlt          :: !Text
+    , _cclAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesList'' with the minimum fields required to make a request.
@@ -113,11 +125,11 @@ data ContentCategoriesList = ContentCategoriesList
 -- * 'cclFields'
 --
 -- * 'cclAlt'
-contentCategoriesList
+contentCategoriesList'
     :: Int64 -- ^ 'profileId'
-    -> ContentCategoriesList
-contentCategoriesList pCclProfileId_ =
-    ContentCategoriesList
+    -> ContentCategoriesList'
+contentCategoriesList' pCclProfileId_ =
+    ContentCategoriesList'
     { _cclQuotaUser = Nothing
     , _cclPrettyPrint = True
     , _cclUserIp = Nothing
@@ -131,7 +143,7 @@ contentCategoriesList pCclProfileId_ =
     , _cclOauthToken = Nothing
     , _cclMaxResults = Nothing
     , _cclFields = Nothing
-    , _cclAlt = "json"
+    , _cclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -176,7 +188,7 @@ cclProfileId
   = lens _cclProfileId (\ s a -> s{_cclProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cclSortOrder :: Lens' ContentCategoriesList' (Maybe Text)
+cclSortOrder :: Lens' ContentCategoriesList' (Maybe DfareportingContentCategoriesListSortOrder)
 cclSortOrder
   = lens _cclSortOrder (\ s a -> s{_cclSortOrder = a})
 
@@ -192,7 +204,7 @@ cclPageToken
   = lens _cclPageToken (\ s a -> s{_cclPageToken = a})
 
 -- | Field by which to sort the list.
-cclSortField :: Lens' ContentCategoriesList' (Maybe Text)
+cclSortField :: Lens' ContentCategoriesList' (Maybe DfareportingContentCategoriesListSortField)
 cclSortField
   = lens _cclSortField (\ s a -> s{_cclSortField = a})
 
@@ -214,15 +226,15 @@ cclFields
   = lens _cclFields (\ s a -> s{_cclFields = a})
 
 -- | Data format for the response.
-cclAlt :: Lens' ContentCategoriesList' Text
+cclAlt :: Lens' ContentCategoriesList' Alt
 cclAlt = lens _cclAlt (\ s a -> s{_cclAlt = a})
 
 instance GoogleRequest ContentCategoriesList' where
         type Rs ContentCategoriesList' =
              ContentCategoriesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesList{..}
-          = go _cclQuotaUser _cclPrettyPrint _cclUserIp
+        requestWithRoute r u ContentCategoriesList'{..}
+          = go _cclQuotaUser (Just _cclPrettyPrint) _cclUserIp
               _cclSearchString
               _cclIds
               _cclProfileId
@@ -233,9 +245,9 @@ instance GoogleRequest ContentCategoriesList' where
               _cclOauthToken
               _cclMaxResults
               _cclFields
-              _cclAlt
+              (Just _cclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesListAPI)
+                      (Proxy :: Proxy ContentCategoriesListResource)
                       r
                       u

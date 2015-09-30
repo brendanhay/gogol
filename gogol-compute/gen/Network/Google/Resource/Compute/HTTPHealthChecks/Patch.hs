@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- data included in the request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksPatch@.
-module Compute.HTTPHealthChecks.Patch
+module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
     (
     -- * REST Resource
-      HttpHealthChecksPatchAPI
+      HttpHealthChecksPatchResource
 
     -- * Creating a Request
-    , hTTPHealthChecksPatch
-    , HTTPHealthChecksPatch
+    , hTTPHealthChecksPatch'
+    , HTTPHealthChecksPatch'
 
     -- * Request Lenses
     , httphcpQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksPatch@ which the
--- 'HTTPHealthChecksPatch' request conforms to.
-type HttpHealthChecksPatchAPI =
+-- 'HTTPHealthChecksPatch'' request conforms to.
+type HttpHealthChecksPatchResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
            Capture "httpHealthCheck" Text :>
-             Patch '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates a HttpHealthCheck resource in the specified project using the
 -- data included in the request. This method supports patch semantics.
 --
--- /See:/ 'hTTPHealthChecksPatch' smart constructor.
-data HTTPHealthChecksPatch = HTTPHealthChecksPatch
+-- /See:/ 'hTTPHealthChecksPatch'' smart constructor.
+data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
     { _httphcpQuotaUser       :: !(Maybe Text)
     , _httphcpPrettyPrint     :: !Bool
     , _httphcpProject         :: !Text
@@ -66,7 +73,7 @@ data HTTPHealthChecksPatch = HTTPHealthChecksPatch
     , _httphcpHttpHealthCheck :: !Text
     , _httphcpOauthToken      :: !(Maybe Text)
     , _httphcpFields          :: !(Maybe Text)
-    , _httphcpAlt             :: !Text
+    , _httphcpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksPatch'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data HTTPHealthChecksPatch = HTTPHealthChecksPatch
 -- * 'httphcpFields'
 --
 -- * 'httphcpAlt'
-hTTPHealthChecksPatch
+hTTPHealthChecksPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'httpHealthCheck'
-    -> HTTPHealthChecksPatch
-hTTPHealthChecksPatch pHttphcpProject_ pHttphcpHttpHealthCheck_ =
-    HTTPHealthChecksPatch
+    -> HTTPHealthChecksPatch'
+hTTPHealthChecksPatch' pHttphcpProject_ pHttphcpHttpHealthCheck_ =
+    HTTPHealthChecksPatch'
     { _httphcpQuotaUser = Nothing
     , _httphcpPrettyPrint = True
     , _httphcpProject = pHttphcpProject_
@@ -104,7 +111,7 @@ hTTPHealthChecksPatch pHttphcpProject_ pHttphcpHttpHealthCheck_ =
     , _httphcpHttpHealthCheck = pHttphcpHttpHealthCheck_
     , _httphcpOauthToken = Nothing
     , _httphcpFields = Nothing
-    , _httphcpAlt = "json"
+    , _httphcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,24 +167,24 @@ httphcpFields
       (\ s a -> s{_httphcpFields = a})
 
 -- | Data format for the response.
-httphcpAlt :: Lens' HTTPHealthChecksPatch' Text
+httphcpAlt :: Lens' HTTPHealthChecksPatch' Alt
 httphcpAlt
   = lens _httphcpAlt (\ s a -> s{_httphcpAlt = a})
 
 instance GoogleRequest HTTPHealthChecksPatch' where
         type Rs HTTPHealthChecksPatch' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksPatch{..}
-          = go _httphcpQuotaUser _httphcpPrettyPrint
+        requestWithRoute r u HTTPHealthChecksPatch'{..}
+          = go _httphcpQuotaUser (Just _httphcpPrettyPrint)
               _httphcpProject
               _httphcpUserIp
               _httphcpKey
               _httphcpHttpHealthCheck
               _httphcpOauthToken
               _httphcpFields
-              _httphcpAlt
+              (Just _httphcpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksPatchAPI)
+                      (Proxy :: Proxy HttpHealthChecksPatchResource)
                       r
                       u

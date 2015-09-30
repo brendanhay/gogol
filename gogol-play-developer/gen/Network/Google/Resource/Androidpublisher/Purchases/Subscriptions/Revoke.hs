@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,167 +22,183 @@
 -- recurring.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherPurchasesSubscriptionsRevoke@.
-module Androidpublisher.Purchases.Subscriptions.Revoke
+module Network.Google.Resource.Androidpublisher.Purchases.Subscriptions.Revoke
     (
     -- * REST Resource
-      PurchasesSubscriptionsRevokeAPI
+      PurchasesSubscriptionsRevokeResource
 
     -- * Creating a Request
-    , purchasesSubscriptionsRevoke
-    , PurchasesSubscriptionsRevoke
+    , purchasesSubscriptionsRevoke'
+    , PurchasesSubscriptionsRevoke'
 
     -- * Request Lenses
-    , pQuotaUser
-    , pPrettyPrint
-    , pPackageName
-    , pUserIp
-    , pToken
-    , pKey
-    , pOauthToken
-    , pSubscriptionId
-    , pFields
-    , pAlt
+    , psrQuotaUser
+    , psrPrettyPrint
+    , psrPackageName
+    , psrUserIp
+    , psrToken
+    , psrKey
+    , psrOauthToken
+    , psrSubscriptionId
+    , psrFields
+    , psrAlt
     ) where
 
 import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherPurchasesSubscriptionsRevoke@ which the
--- 'PurchasesSubscriptionsRevoke' request conforms to.
-type PurchasesSubscriptionsRevokeAPI =
+-- 'PurchasesSubscriptionsRevoke'' request conforms to.
+type PurchasesSubscriptionsRevokeResource =
      Capture "packageName" Text :>
        "purchases" :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "tokens" :> "{token}:revoke" :> Post '[JSON] ()
+             "tokens" :>
+               "{token}:revoke" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Refunds and immediately revokes a user\'s subscription purchase. Access
 -- to the subscription will be terminated immediately and it will stop
 -- recurring.
 --
--- /See:/ 'purchasesSubscriptionsRevoke' smart constructor.
-data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke
-    { _pQuotaUser      :: !(Maybe Text)
-    , _pPrettyPrint    :: !Bool
-    , _pPackageName    :: !Text
-    , _pUserIp         :: !(Maybe Text)
-    , _pToken          :: !Text
-    , _pKey            :: !(Maybe Text)
-    , _pOauthToken     :: !(Maybe Text)
-    , _pSubscriptionId :: !Text
-    , _pFields         :: !(Maybe Text)
-    , _pAlt            :: !Text
+-- /See:/ 'purchasesSubscriptionsRevoke'' smart constructor.
+data PurchasesSubscriptionsRevoke' = PurchasesSubscriptionsRevoke'
+    { _psrQuotaUser      :: !(Maybe Text)
+    , _psrPrettyPrint    :: !Bool
+    , _psrPackageName    :: !Text
+    , _psrUserIp         :: !(Maybe Text)
+    , _psrToken          :: !Text
+    , _psrKey            :: !(Maybe Text)
+    , _psrOauthToken     :: !(Maybe Text)
+    , _psrSubscriptionId :: !Text
+    , _psrFields         :: !(Maybe Text)
+    , _psrAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PurchasesSubscriptionsRevoke'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pQuotaUser'
+-- * 'psrQuotaUser'
 --
--- * 'pPrettyPrint'
+-- * 'psrPrettyPrint'
 --
--- * 'pPackageName'
+-- * 'psrPackageName'
 --
--- * 'pUserIp'
+-- * 'psrUserIp'
 --
--- * 'pToken'
+-- * 'psrToken'
 --
--- * 'pKey'
+-- * 'psrKey'
 --
--- * 'pOauthToken'
+-- * 'psrOauthToken'
 --
--- * 'pSubscriptionId'
+-- * 'psrSubscriptionId'
 --
--- * 'pFields'
+-- * 'psrFields'
 --
--- * 'pAlt'
-purchasesSubscriptionsRevoke
+-- * 'psrAlt'
+purchasesSubscriptionsRevoke'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'token'
     -> Text -- ^ 'subscriptionId'
-    -> PurchasesSubscriptionsRevoke
-purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
-    PurchasesSubscriptionsRevoke
-    { _pQuotaUser = Nothing
-    , _pPrettyPrint = True
-    , _pPackageName = pPPackageName_
-    , _pUserIp = Nothing
-    , _pToken = pPToken_
-    , _pKey = Nothing
-    , _pOauthToken = Nothing
-    , _pSubscriptionId = pPSubscriptionId_
-    , _pFields = Nothing
-    , _pAlt = "json"
+    -> PurchasesSubscriptionsRevoke'
+purchasesSubscriptionsRevoke' pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
+    PurchasesSubscriptionsRevoke'
+    { _psrQuotaUser = Nothing
+    , _psrPrettyPrint = True
+    , _psrPackageName = pPsrPackageName_
+    , _psrUserIp = Nothing
+    , _psrToken = pPsrToken_
+    , _psrKey = Nothing
+    , _psrOauthToken = Nothing
+    , _psrSubscriptionId = pPsrSubscriptionId_
+    , _psrFields = Nothing
+    , _psrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-pQuotaUser :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
-pQuotaUser
-  = lens _pQuotaUser (\ s a -> s{_pQuotaUser = a})
+psrQuotaUser :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
+psrQuotaUser
+  = lens _psrQuotaUser (\ s a -> s{_psrQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-pPrettyPrint :: Lens' PurchasesSubscriptionsRevoke' Bool
-pPrettyPrint
-  = lens _pPrettyPrint (\ s a -> s{_pPrettyPrint = a})
+psrPrettyPrint :: Lens' PurchasesSubscriptionsRevoke' Bool
+psrPrettyPrint
+  = lens _psrPrettyPrint
+      (\ s a -> s{_psrPrettyPrint = a})
 
 -- | The package name of the application for which this subscription was
 -- purchased (for example, \'com.some.thing\').
-pPackageName :: Lens' PurchasesSubscriptionsRevoke' Text
-pPackageName
-  = lens _pPackageName (\ s a -> s{_pPackageName = a})
+psrPackageName :: Lens' PurchasesSubscriptionsRevoke' Text
+psrPackageName
+  = lens _psrPackageName
+      (\ s a -> s{_psrPackageName = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pUserIp :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
-pUserIp = lens _pUserIp (\ s a -> s{_pUserIp = a})
+psrUserIp :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
+psrUserIp
+  = lens _psrUserIp (\ s a -> s{_psrUserIp = a})
 
 -- | The token provided to the user\'s device when the subscription was
 -- purchased.
-pToken :: Lens' PurchasesSubscriptionsRevoke' Text
-pToken = lens _pToken (\ s a -> s{_pToken = a})
+psrToken :: Lens' PurchasesSubscriptionsRevoke' Text
+psrToken = lens _psrToken (\ s a -> s{_psrToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
-pKey = lens _pKey (\ s a -> s{_pKey = a})
+psrKey :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
+psrKey = lens _psrKey (\ s a -> s{_psrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pOauthToken :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
-pOauthToken
-  = lens _pOauthToken (\ s a -> s{_pOauthToken = a})
+psrOauthToken :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
+psrOauthToken
+  = lens _psrOauthToken
+      (\ s a -> s{_psrOauthToken = a})
 
 -- | The purchased subscription ID (for example, \'monthly001\').
-pSubscriptionId :: Lens' PurchasesSubscriptionsRevoke' Text
-pSubscriptionId
-  = lens _pSubscriptionId
-      (\ s a -> s{_pSubscriptionId = a})
+psrSubscriptionId :: Lens' PurchasesSubscriptionsRevoke' Text
+psrSubscriptionId
+  = lens _psrSubscriptionId
+      (\ s a -> s{_psrSubscriptionId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-pFields :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
-pFields = lens _pFields (\ s a -> s{_pFields = a})
+psrFields :: Lens' PurchasesSubscriptionsRevoke' (Maybe Text)
+psrFields
+  = lens _psrFields (\ s a -> s{_psrFields = a})
 
 -- | Data format for the response.
-pAlt :: Lens' PurchasesSubscriptionsRevoke' Text
-pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
+psrAlt :: Lens' PurchasesSubscriptionsRevoke' Alt
+psrAlt = lens _psrAlt (\ s a -> s{_psrAlt = a})
 
 instance GoogleRequest PurchasesSubscriptionsRevoke'
          where
         type Rs PurchasesSubscriptionsRevoke' = ()
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u PurchasesSubscriptionsRevoke{..}
-          = go _pQuotaUser _pPrettyPrint _pPackageName _pUserIp
-              _pToken
-              _pKey
-              _pOauthToken
-              _pSubscriptionId
-              _pFields
-              _pAlt
+        requestWithRoute r u
+          PurchasesSubscriptionsRevoke'{..}
+          = go _psrQuotaUser (Just _psrPrettyPrint)
+              _psrPackageName
+              _psrUserIp
+              _psrToken
+              _psrKey
+              _psrOauthToken
+              _psrSubscriptionId
+              _psrFields
+              (Just _psrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PurchasesSubscriptionsRevokeAPI)
+                      (Proxy :: Proxy PurchasesSubscriptionsRevokeResource)
                       r
                       u

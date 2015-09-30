@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersCompaniesLeadsCreate@.
-module Partners.Companies.Leads.Create
+module Network.Google.Resource.Partners.Companies.Leads.Create
     (
     -- * REST Resource
-      CompaniesLeadsCreateAPI
+      CompaniesLeadsCreateResource
 
     -- * Creating a Request
-    , companiesLeadsCreate
-    , CompaniesLeadsCreate
+    , companiesLeadsCreate'
+    , CompaniesLeadsCreate'
 
     -- * Request Lenses
     , clcXgafv
@@ -49,17 +50,31 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PartnersCompaniesLeadsCreate@ which the
--- 'CompaniesLeadsCreate' request conforms to.
-type CompaniesLeadsCreateAPI =
+-- 'CompaniesLeadsCreate'' request conforms to.
+type CompaniesLeadsCreateResource =
      "v2" :>
        "companies" :>
          Capture "companyId" Text :>
-           "leads" :> Post '[JSON] CreateLeadResponse
+           "leads" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Post '[JSON] CreateLeadResponse
 
 -- | Creates an advertiser lead for the given company ID.
 --
--- /See:/ 'companiesLeadsCreate' smart constructor.
-data CompaniesLeadsCreate = CompaniesLeadsCreate
+-- /See:/ 'companiesLeadsCreate'' smart constructor.
+data CompaniesLeadsCreate' = CompaniesLeadsCreate'
     { _clcXgafv          :: !(Maybe Text)
     , _clcQuotaUser      :: !(Maybe Text)
     , _clcPrettyPrint    :: !Bool
@@ -107,11 +122,11 @@ data CompaniesLeadsCreate = CompaniesLeadsCreate
 -- * 'clcCallback'
 --
 -- * 'clcAlt'
-companiesLeadsCreate
+companiesLeadsCreate'
     :: Text -- ^ 'companyId'
-    -> CompaniesLeadsCreate
-companiesLeadsCreate pClcCompanyId_ =
-    CompaniesLeadsCreate
+    -> CompaniesLeadsCreate'
+companiesLeadsCreate' pClcCompanyId_ =
+    CompaniesLeadsCreate'
     { _clcXgafv = Nothing
     , _clcQuotaUser = Nothing
     , _clcPrettyPrint = True
@@ -207,11 +222,11 @@ clcAlt = lens _clcAlt (\ s a -> s{_clcAlt = a})
 instance GoogleRequest CompaniesLeadsCreate' where
         type Rs CompaniesLeadsCreate' = CreateLeadResponse
         request = requestWithRoute defReq partnersURL
-        requestWithRoute r u CompaniesLeadsCreate{..}
-          = go _clcXgafv _clcQuotaUser _clcPrettyPrint
+        requestWithRoute r u CompaniesLeadsCreate'{..}
+          = go _clcXgafv _clcQuotaUser (Just _clcPrettyPrint)
               _clcUploadProtocol
               _clcCompanyId
-              _clcPp
+              (Just _clcPp)
               _clcAccessToken
               _clcUploadType
               _clcBearerToken
@@ -219,9 +234,9 @@ instance GoogleRequest CompaniesLeadsCreate' where
               _clcOauthToken
               _clcFields
               _clcCallback
-              _clcAlt
+              (Just _clcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CompaniesLeadsCreateAPI)
+                      (Proxy :: Proxy CompaniesLeadsCreateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,158 +20,166 @@
 -- | Undeletes a Container Version.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsUndelete@.
-module TagManager.Accounts.Containers.Versions.Undelete
+module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
     (
     -- * REST Resource
-      AccountsContainersVersionsUndeleteAPI
+      AccountsContainersVersionsUndeleteResource
 
     -- * Creating a Request
-    , accountsContainersVersionsUndelete
-    , AccountsContainersVersionsUndelete
+    , accountsContainersVersionsUndelete'
+    , AccountsContainersVersionsUndelete'
 
     -- * Request Lenses
-    , acvucQuotaUser
-    , acvucPrettyPrint
-    , acvucContainerId
-    , acvucUserIp
-    , acvucContainerVersionId
-    , acvucAccountId
-    , acvucKey
-    , acvucOauthToken
-    , acvucFields
-    , acvucAlt
+    , acvuQuotaUser
+    , acvuPrettyPrint
+    , acvuContainerId
+    , acvuUserIp
+    , acvuContainerVersionId
+    , acvuAccountId
+    , acvuKey
+    , acvuOauthToken
+    , acvuFields
+    , acvuAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVersionsUndelete@ which the
--- 'AccountsContainersVersionsUndelete' request conforms to.
-type AccountsContainersVersionsUndeleteAPI =
+-- 'AccountsContainersVersionsUndelete'' request conforms to.
+type AccountsContainersVersionsUndeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "versions" :>
                Capture "containerVersionId" Text :>
-                 "undelete" :> Post '[JSON] ContainerVersion
+                 "undelete" :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] ContainerVersion
 
 -- | Undeletes a Container Version.
 --
--- /See:/ 'accountsContainersVersionsUndelete' smart constructor.
-data AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete
-    { _acvucQuotaUser          :: !(Maybe Text)
-    , _acvucPrettyPrint        :: !Bool
-    , _acvucContainerId        :: !Text
-    , _acvucUserIp             :: !(Maybe Text)
-    , _acvucContainerVersionId :: !Text
-    , _acvucAccountId          :: !Text
-    , _acvucKey                :: !(Maybe Text)
-    , _acvucOauthToken         :: !(Maybe Text)
-    , _acvucFields             :: !(Maybe Text)
-    , _acvucAlt                :: !Text
+-- /See:/ 'accountsContainersVersionsUndelete'' smart constructor.
+data AccountsContainersVersionsUndelete' = AccountsContainersVersionsUndelete'
+    { _acvuQuotaUser          :: !(Maybe Text)
+    , _acvuPrettyPrint        :: !Bool
+    , _acvuContainerId        :: !Text
+    , _acvuUserIp             :: !(Maybe Text)
+    , _acvuContainerVersionId :: !Text
+    , _acvuAccountId          :: !Text
+    , _acvuKey                :: !(Maybe Text)
+    , _acvuOauthToken         :: !(Maybe Text)
+    , _acvuFields             :: !(Maybe Text)
+    , _acvuAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsUndelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'acvucQuotaUser'
+-- * 'acvuQuotaUser'
 --
--- * 'acvucPrettyPrint'
+-- * 'acvuPrettyPrint'
 --
--- * 'acvucContainerId'
+-- * 'acvuContainerId'
 --
--- * 'acvucUserIp'
+-- * 'acvuUserIp'
 --
--- * 'acvucContainerVersionId'
+-- * 'acvuContainerVersionId'
 --
--- * 'acvucAccountId'
+-- * 'acvuAccountId'
 --
--- * 'acvucKey'
+-- * 'acvuKey'
 --
--- * 'acvucOauthToken'
+-- * 'acvuOauthToken'
 --
--- * 'acvucFields'
+-- * 'acvuFields'
 --
--- * 'acvucAlt'
-accountsContainersVersionsUndelete
+-- * 'acvuAlt'
+accountsContainersVersionsUndelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVersionsUndelete
-accountsContainersVersionsUndelete pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucAccountId_ =
-    AccountsContainersVersionsUndelete
-    { _acvucQuotaUser = Nothing
-    , _acvucPrettyPrint = True
-    , _acvucContainerId = pAcvucContainerId_
-    , _acvucUserIp = Nothing
-    , _acvucContainerVersionId = pAcvucContainerVersionId_
-    , _acvucAccountId = pAcvucAccountId_
-    , _acvucKey = Nothing
-    , _acvucOauthToken = Nothing
-    , _acvucFields = Nothing
-    , _acvucAlt = "json"
+    -> AccountsContainersVersionsUndelete'
+accountsContainersVersionsUndelete' pAcvuContainerId_ pAcvuContainerVersionId_ pAcvuAccountId_ =
+    AccountsContainersVersionsUndelete'
+    { _acvuQuotaUser = Nothing
+    , _acvuPrettyPrint = True
+    , _acvuContainerId = pAcvuContainerId_
+    , _acvuUserIp = Nothing
+    , _acvuContainerVersionId = pAcvuContainerVersionId_
+    , _acvuAccountId = pAcvuAccountId_
+    , _acvuKey = Nothing
+    , _acvuOauthToken = Nothing
+    , _acvuFields = Nothing
+    , _acvuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-acvucQuotaUser :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
-acvucQuotaUser
-  = lens _acvucQuotaUser
-      (\ s a -> s{_acvucQuotaUser = a})
+acvuQuotaUser :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
+acvuQuotaUser
+  = lens _acvuQuotaUser
+      (\ s a -> s{_acvuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-acvucPrettyPrint :: Lens' AccountsContainersVersionsUndelete' Bool
-acvucPrettyPrint
-  = lens _acvucPrettyPrint
-      (\ s a -> s{_acvucPrettyPrint = a})
+acvuPrettyPrint :: Lens' AccountsContainersVersionsUndelete' Bool
+acvuPrettyPrint
+  = lens _acvuPrettyPrint
+      (\ s a -> s{_acvuPrettyPrint = a})
 
 -- | The GTM Container ID.
-acvucContainerId :: Lens' AccountsContainersVersionsUndelete' Text
-acvucContainerId
-  = lens _acvucContainerId
-      (\ s a -> s{_acvucContainerId = a})
+acvuContainerId :: Lens' AccountsContainersVersionsUndelete' Text
+acvuContainerId
+  = lens _acvuContainerId
+      (\ s a -> s{_acvuContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvucUserIp :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
-acvucUserIp
-  = lens _acvucUserIp (\ s a -> s{_acvucUserIp = a})
+acvuUserIp :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
+acvuUserIp
+  = lens _acvuUserIp (\ s a -> s{_acvuUserIp = a})
 
 -- | The GTM Container Version ID.
-acvucContainerVersionId :: Lens' AccountsContainersVersionsUndelete' Text
-acvucContainerVersionId
-  = lens _acvucContainerVersionId
-      (\ s a -> s{_acvucContainerVersionId = a})
+acvuContainerVersionId :: Lens' AccountsContainersVersionsUndelete' Text
+acvuContainerVersionId
+  = lens _acvuContainerVersionId
+      (\ s a -> s{_acvuContainerVersionId = a})
 
 -- | The GTM Account ID.
-acvucAccountId :: Lens' AccountsContainersVersionsUndelete' Text
-acvucAccountId
-  = lens _acvucAccountId
-      (\ s a -> s{_acvucAccountId = a})
+acvuAccountId :: Lens' AccountsContainersVersionsUndelete' Text
+acvuAccountId
+  = lens _acvuAccountId
+      (\ s a -> s{_acvuAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvucKey :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
-acvucKey = lens _acvucKey (\ s a -> s{_acvucKey = a})
+acvuKey :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
+acvuKey = lens _acvuKey (\ s a -> s{_acvuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvucOauthToken :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
-acvucOauthToken
-  = lens _acvucOauthToken
-      (\ s a -> s{_acvucOauthToken = a})
+acvuOauthToken :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
+acvuOauthToken
+  = lens _acvuOauthToken
+      (\ s a -> s{_acvuOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-acvucFields :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
-acvucFields
-  = lens _acvucFields (\ s a -> s{_acvucFields = a})
+acvuFields :: Lens' AccountsContainersVersionsUndelete' (Maybe Text)
+acvuFields
+  = lens _acvuFields (\ s a -> s{_acvuFields = a})
 
 -- | Data format for the response.
-acvucAlt :: Lens' AccountsContainersVersionsUndelete' Text
-acvucAlt = lens _acvucAlt (\ s a -> s{_acvucAlt = a})
+acvuAlt :: Lens' AccountsContainersVersionsUndelete' Alt
+acvuAlt = lens _acvuAlt (\ s a -> s{_acvuAlt = a})
 
 instance GoogleRequest
          AccountsContainersVersionsUndelete' where
@@ -178,19 +187,19 @@ instance GoogleRequest
              ContainerVersion
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVersionsUndelete{..}
-          = go _acvucQuotaUser _acvucPrettyPrint
-              _acvucContainerId
-              _acvucUserIp
-              _acvucContainerVersionId
-              _acvucAccountId
-              _acvucKey
-              _acvucOauthToken
-              _acvucFields
-              _acvucAlt
+          AccountsContainersVersionsUndelete'{..}
+          = go _acvuQuotaUser (Just _acvuPrettyPrint)
+              _acvuContainerId
+              _acvuUserIp
+              _acvuContainerVersionId
+              _acvuAccountId
+              _acvuKey
+              _acvuOauthToken
+              _acvuFields
+              (Just _acvuAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy AccountsContainersVersionsUndeleteAPI)
+                         Proxy AccountsContainersVersionsUndeleteResource)
                       r
                       u

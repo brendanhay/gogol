@@ -25,14 +25,26 @@ module Network.Google.FreebaseSearch
     -- * Service Methods
 
     -- ** FreebaseReconcile
-    , module Freebase.Reconcile
+    , module Network.Google.Method.Freebase.Reconcile
 
     -- ** FreebaseSearch
-    , module Freebase.Search
+    , module Network.Google.Method.Freebase.Search
 
     -- * REST Resources
 
     -- * Types
+
+    -- ** FreebaseSearchFormat
+    , FreebaseSearchFormat (..)
+
+    -- ** FreebaseSearchScoring
+    , FreebaseSearchScoring (..)
+
+    -- ** ReconcileGetCosts
+    , ReconcileGetCosts
+    , reconcileGetCosts
+    , rgcHits
+    , rgcMs
 
     -- ** ReconcileGet
     , ReconcileGet
@@ -42,6 +54,22 @@ module Network.Google.FreebaseSearch
     , rgWarning
     , rgMatch
 
+    -- ** FreebaseSearchEncode
+    , FreebaseSearchEncode (..)
+
+    -- ** ReconcileCandidateNotable
+    , ReconcileCandidateNotable
+    , reconcileCandidateNotable
+    , rcnName
+    , rcnId
+
+    -- ** ReconcileGetWarning
+    , ReconcileGetWarning
+    , reconcileGetWarning
+    , rgwLocation
+    , rgwReason
+    , rgwMessage
+
     -- ** ReconcileCandidate
     , ReconcileCandidate
     , reconcileCandidate
@@ -50,6 +78,15 @@ module Network.Google.FreebaseSearch
     , rcName
     , rcNotable
     , rcMid
+
+    -- ** FreebaseSearchHelp
+    , FreebaseSearchHelp (..)
+
+    -- ** FreebaseSearchSpell
+    , FreebaseSearchSpell (..)
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.FreebaseSearch.Types
@@ -62,7 +99,7 @@ TODO
 -}
 
 type FreebaseSearchAPI =
-     FreebaseReconcile :<|> FreebaseSearch
+     ReconcileMethod :<|> SearchMethod
 
 freebaseSearchAPI :: Proxy FreebaseSearchAPI
 freebaseSearchAPI = Proxy

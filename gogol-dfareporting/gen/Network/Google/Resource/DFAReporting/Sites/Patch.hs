@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing site. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesPatch@.
-module DFAReporting.Sites.Patch
+module Network.Google.Resource.DFAReporting.Sites.Patch
     (
     -- * REST Resource
-      SitesPatchAPI
+      SitesPatchResource
 
     -- * Creating a Request
-    , sitesPatch
-    , SitesPatch
+    , sitesPatch'
+    , SitesPatch'
 
     -- * Request Lenses
     , spQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSitesPatch@ which the
--- 'SitesPatch' request conforms to.
-type SitesPatchAPI =
+-- 'SitesPatch'' request conforms to.
+type SitesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "id" Int64 :> Patch '[JSON] Site
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --
--- /See:/ 'sitesPatch' smart constructor.
-data SitesPatch = SitesPatch
+-- /See:/ 'sitesPatch'' smart constructor.
+data SitesPatch' = SitesPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
     , _spUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data SitesPatch = SitesPatch
     , _spId          :: !Int64
     , _spOauthToken  :: !(Maybe Text)
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Text
+    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SitesPatch = SitesPatch
 -- * 'spFields'
 --
 -- * 'spAlt'
-sitesPatch
+sitesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> SitesPatch
-sitesPatch pSpProfileId_ pSpId_ =
-    SitesPatch
+    -> SitesPatch'
+sitesPatch' pSpProfileId_ pSpId_ =
+    SitesPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spUserIp = Nothing
@@ -101,7 +109,7 @@ sitesPatch pSpProfileId_ pSpId_ =
     , _spId = pSpId_
     , _spOauthToken = Nothing
     , _spFields = Nothing
-    , _spAlt = "json"
+    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,19 +155,21 @@ spFields :: Lens' SitesPatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
 -- | Data format for the response.
-spAlt :: Lens' SitesPatch' Text
+spAlt :: Lens' SitesPatch' Alt
 spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
 
 instance GoogleRequest SitesPatch' where
         type Rs SitesPatch' = Site
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesPatch{..}
-          = go _spQuotaUser _spPrettyPrint _spUserIp
+        requestWithRoute r u SitesPatch'{..}
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
               _spProfileId
               _spKey
               (Just _spId)
               _spOauthToken
               _spFields
-              _spAlt
+              (Just _spAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SitesPatchResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves the specified message to the trash.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesTrash@.
-module Gmail.Users.Messages.Trash
+module Network.Google.Resource.Gmail.Users.Messages.Trash
     (
     -- * REST Resource
-      UsersMessagesTrashAPI
+      UsersMessagesTrashResource
 
     -- * Creating a Request
-    , usersMessagesTrash
-    , UsersMessagesTrash
+    , usersMessagesTrash'
+    , UsersMessagesTrash'
 
     -- * Request Lenses
     , umtQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesTrash@ which the
--- 'UsersMessagesTrash' request conforms to.
-type UsersMessagesTrashAPI =
+-- 'UsersMessagesTrash'' request conforms to.
+type UsersMessagesTrashResource =
      Capture "userId" Text :>
        "messages" :>
-         Capture "id" Text :> "trash" :> Post '[JSON] Message
+         Capture "id" Text :>
+           "trash" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Moves the specified message to the trash.
 --
--- /See:/ 'usersMessagesTrash' smart constructor.
-data UsersMessagesTrash = UsersMessagesTrash
+-- /See:/ 'usersMessagesTrash'' smart constructor.
+data UsersMessagesTrash' = UsersMessagesTrash'
     { _umtQuotaUser   :: !(Maybe Text)
     , _umtPrettyPrint :: !Bool
     , _umtUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data UsersMessagesTrash = UsersMessagesTrash
     , _umtId          :: !Text
     , _umtOauthToken  :: !(Maybe Text)
     , _umtFields      :: !(Maybe Text)
-    , _umtAlt         :: !Text
+    , _umtAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesTrash'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data UsersMessagesTrash = UsersMessagesTrash
 -- * 'umtFields'
 --
 -- * 'umtAlt'
-usersMessagesTrash
+usersMessagesTrash'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersMessagesTrash
-usersMessagesTrash pUmtUserId_ pUmtId_ =
-    UsersMessagesTrash
+    -> UsersMessagesTrash'
+usersMessagesTrash' pUmtUserId_ pUmtId_ =
+    UsersMessagesTrash'
     { _umtQuotaUser = Nothing
     , _umtPrettyPrint = True
     , _umtUserIp = Nothing
@@ -100,7 +109,7 @@ usersMessagesTrash pUmtUserId_ pUmtId_ =
     , _umtId = pUmtId_
     , _umtOauthToken = Nothing
     , _umtFields = Nothing
-    , _umtAlt = "json"
+    , _umtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +159,22 @@ umtFields
   = lens _umtFields (\ s a -> s{_umtFields = a})
 
 -- | Data format for the response.
-umtAlt :: Lens' UsersMessagesTrash' Text
+umtAlt :: Lens' UsersMessagesTrash' Alt
 umtAlt = lens _umtAlt (\ s a -> s{_umtAlt = a})
 
 instance GoogleRequest UsersMessagesTrash' where
         type Rs UsersMessagesTrash' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesTrash{..}
-          = go _umtQuotaUser _umtPrettyPrint _umtUserIp
+        requestWithRoute r u UsersMessagesTrash'{..}
+          = go _umtQuotaUser (Just _umtPrettyPrint) _umtUserIp
               _umtUserId
               _umtKey
               _umtId
               _umtOauthToken
               _umtFields
-              _umtAlt
+              (Just _umtAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesTrashAPI)
+                      (Proxy :: Proxy UsersMessagesTrashResource)
                       r
                       u

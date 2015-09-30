@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds an access config to an instance\'s network interface.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstancesAddAccessConfig@.
-module Compute.Instances.AddAccessConfig
+module Network.Google.Resource.Compute.Instances.AddAccessConfig
     (
     -- * REST Resource
-      InstancesAddAccessConfigAPI
+      InstancesAddAccessConfigResource
 
     -- * Creating a Request
-    , instancesAddAccessConfig
-    , InstancesAddAccessConfig
+    , instancesAddAccessConfig'
+    , InstancesAddAccessConfig'
 
     -- * Request Lenses
     , iaacQuotaUser
@@ -46,21 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstancesAddAccessConfig@ which the
--- 'InstancesAddAccessConfig' request conforms to.
-type InstancesAddAccessConfigAPI =
+-- 'InstancesAddAccessConfig'' request conforms to.
+type InstancesAddAccessConfigResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instances" :>
              Capture "instance" Text :>
                "addAccessConfig" :>
-                 QueryParam "networkInterface" Text :>
-                   Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "networkInterface" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds an access config to an instance\'s network interface.
 --
--- /See:/ 'instancesAddAccessConfig' smart constructor.
-data InstancesAddAccessConfig = InstancesAddAccessConfig
+-- /See:/ 'instancesAddAccessConfig'' smart constructor.
+data InstancesAddAccessConfig' = InstancesAddAccessConfig'
     { _iaacQuotaUser        :: !(Maybe Text)
     , _iaacPrettyPrint      :: !Bool
     , _iaacProject          :: !Text
@@ -70,7 +77,7 @@ data InstancesAddAccessConfig = InstancesAddAccessConfig
     , _iaacKey              :: !(Maybe Text)
     , _iaacOauthToken       :: !(Maybe Text)
     , _iaacFields           :: !(Maybe Text)
-    , _iaacAlt              :: !Text
+    , _iaacAlt              :: !Alt
     , _iaacInstance         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -99,14 +106,14 @@ data InstancesAddAccessConfig = InstancesAddAccessConfig
 -- * 'iaacAlt'
 --
 -- * 'iaacInstance'
-instancesAddAccessConfig
+instancesAddAccessConfig'
     :: Text -- ^ 'project'
     -> Text -- ^ 'networkInterface'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instance'
-    -> InstancesAddAccessConfig
-instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacInstance_ =
-    InstancesAddAccessConfig
+    -> InstancesAddAccessConfig'
+instancesAddAccessConfig' pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacInstance_ =
+    InstancesAddAccessConfig'
     { _iaacQuotaUser = Nothing
     , _iaacPrettyPrint = True
     , _iaacProject = pIaacProject_
@@ -116,7 +123,7 @@ instancesAddAccessConfig pIaacProject_ pIaacNetworkInterface_ pIaacZone_ pIaacIn
     , _iaacKey = Nothing
     , _iaacOauthToken = Nothing
     , _iaacFields = Nothing
-    , _iaacAlt = "json"
+    , _iaacAlt = JSON
     , _iaacInstance = pIaacInstance_
     }
 
@@ -173,7 +180,7 @@ iaacFields
   = lens _iaacFields (\ s a -> s{_iaacFields = a})
 
 -- | Data format for the response.
-iaacAlt :: Lens' InstancesAddAccessConfig' Text
+iaacAlt :: Lens' InstancesAddAccessConfig' Alt
 iaacAlt = lens _iaacAlt (\ s a -> s{_iaacAlt = a})
 
 -- | The instance name for this request.
@@ -185,18 +192,19 @@ instance GoogleRequest InstancesAddAccessConfig'
          where
         type Rs InstancesAddAccessConfig' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstancesAddAccessConfig{..}
-          = go _iaacQuotaUser _iaacPrettyPrint _iaacProject
+        requestWithRoute r u InstancesAddAccessConfig'{..}
+          = go _iaacQuotaUser (Just _iaacPrettyPrint)
+              _iaacProject
               _iaacUserIp
               (Just _iaacNetworkInterface)
               _iaacZone
               _iaacKey
               _iaacOauthToken
               _iaacFields
-              _iaacAlt
+              (Just _iaacAlt)
               _iaacInstance
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstancesAddAccessConfigAPI)
+                      (Proxy :: Proxy InstancesAddAccessConfigResource)
                       r
                       u

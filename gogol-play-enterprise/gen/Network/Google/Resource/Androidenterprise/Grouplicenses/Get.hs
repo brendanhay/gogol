@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseGrouplicensesGet@.
-module Androidenterprise.Grouplicenses.Get
+module Network.Google.Resource.Androidenterprise.Grouplicenses.Get
     (
     -- * REST Resource
-      GrouplicensesGetAPI
+      GrouplicensesGetResource
 
     -- * Creating a Request
-    , grouplicensesGet
-    , GrouplicensesGet
+    , grouplicensesGet'
+    , GrouplicensesGet'
 
     -- * Request Lenses
     , ggQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseGrouplicensesGet@ which the
--- 'GrouplicensesGet' request conforms to.
-type GrouplicensesGetAPI =
+-- 'GrouplicensesGet'' request conforms to.
+type GrouplicensesGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "groupLicenses" :>
            Capture "groupLicenseId" Text :>
-             Get '[JSON] GroupLicense
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] GroupLicense
 
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
--- /See:/ 'grouplicensesGet' smart constructor.
-data GrouplicensesGet = GrouplicensesGet
+-- /See:/ 'grouplicensesGet'' smart constructor.
+data GrouplicensesGet' = GrouplicensesGet'
     { _ggQuotaUser      :: !(Maybe Text)
     , _ggPrettyPrint    :: !Bool
     , _ggEnterpriseId   :: !Text
@@ -64,7 +71,7 @@ data GrouplicensesGet = GrouplicensesGet
     , _ggOauthToken     :: !(Maybe Text)
     , _ggGroupLicenseId :: !Text
     , _ggFields         :: !(Maybe Text)
-    , _ggAlt            :: !Text
+    , _ggAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GrouplicensesGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data GrouplicensesGet = GrouplicensesGet
 -- * 'ggFields'
 --
 -- * 'ggAlt'
-grouplicensesGet
+grouplicensesGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'groupLicenseId'
-    -> GrouplicensesGet
-grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
-    GrouplicensesGet
+    -> GrouplicensesGet'
+grouplicensesGet' pGgEnterpriseId_ pGgGroupLicenseId_ =
+    GrouplicensesGet'
     { _ggQuotaUser = Nothing
     , _ggPrettyPrint = True
     , _ggEnterpriseId = pGgEnterpriseId_
@@ -102,7 +109,7 @@ grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
     , _ggOauthToken = Nothing
     , _ggGroupLicenseId = pGgGroupLicenseId_
     , _ggFields = Nothing
-    , _ggAlt = "json"
+    , _ggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +159,23 @@ ggFields :: Lens' GrouplicensesGet' (Maybe Text)
 ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
 
 -- | Data format for the response.
-ggAlt :: Lens' GrouplicensesGet' Text
+ggAlt :: Lens' GrouplicensesGet' Alt
 ggAlt = lens _ggAlt (\ s a -> s{_ggAlt = a})
 
 instance GoogleRequest GrouplicensesGet' where
         type Rs GrouplicensesGet' = GroupLicense
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u GrouplicensesGet{..}
-          = go _ggQuotaUser _ggPrettyPrint _ggEnterpriseId
+        requestWithRoute r u GrouplicensesGet'{..}
+          = go _ggQuotaUser (Just _ggPrettyPrint)
+              _ggEnterpriseId
               _ggUserIp
               _ggKey
               _ggOauthToken
               _ggGroupLicenseId
               _ggFields
-              _ggAlt
+              (Just _ggAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GrouplicensesGetAPI)
+                      (Proxy :: Proxy GrouplicensesGetResource)
                       r
                       u

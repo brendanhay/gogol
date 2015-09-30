@@ -27,48 +27,54 @@ module Network.Google.AppsReseller
     -- * REST Resources
 
     -- ** ResellerCustomersGet
-    , module Reseller.Customers.Get
+    , module Network.Google.Resource.Reseller.Customers.Get
 
     -- ** ResellerCustomersInsert
-    , module Reseller.Customers.Insert
+    , module Network.Google.Resource.Reseller.Customers.Insert
 
     -- ** ResellerCustomersPatch
-    , module Reseller.Customers.Patch
+    , module Network.Google.Resource.Reseller.Customers.Patch
 
     -- ** ResellerCustomersUpdate
-    , module Reseller.Customers.Update
+    , module Network.Google.Resource.Reseller.Customers.Update
 
     -- ** ResellerSubscriptionsActivate
-    , module Reseller.Subscriptions.Activate
+    , module Network.Google.Resource.Reseller.Subscriptions.Activate
 
     -- ** ResellerSubscriptionsChangePlan
-    , module Reseller.Subscriptions.ChangePlan
+    , module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
 
     -- ** ResellerSubscriptionsChangeRenewalSettings
-    , module Reseller.Subscriptions.ChangeRenewalSettings
+    , module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
 
     -- ** ResellerSubscriptionsChangeSeats
-    , module Reseller.Subscriptions.ChangeSeats
+    , module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
 
     -- ** ResellerSubscriptionsDelete
-    , module Reseller.Subscriptions.Delete
+    , module Network.Google.Resource.Reseller.Subscriptions.Delete
 
     -- ** ResellerSubscriptionsGet
-    , module Reseller.Subscriptions.Get
+    , module Network.Google.Resource.Reseller.Subscriptions.Get
 
     -- ** ResellerSubscriptionsInsert
-    , module Reseller.Subscriptions.Insert
+    , module Network.Google.Resource.Reseller.Subscriptions.Insert
 
     -- ** ResellerSubscriptionsList
-    , module Reseller.Subscriptions.List
+    , module Network.Google.Resource.Reseller.Subscriptions.List
 
     -- ** ResellerSubscriptionsStartPaidService
-    , module Reseller.Subscriptions.StartPaidService
+    , module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
 
     -- ** ResellerSubscriptionsSuspend
-    , module Reseller.Subscriptions.Suspend
+    , module Network.Google.Resource.Reseller.Subscriptions.Suspend
 
     -- * Types
+
+    -- ** SubscriptionTrialSettings
+    , SubscriptionTrialSettings
+    , subscriptionTrialSettings
+    , stsIsInTrial
+    , stsTrialEndTime
 
     -- ** Address
     , Address
@@ -95,6 +101,12 @@ module Network.Google.AppsReseller
     , cPhoneNumber
     , cPostalAddress
 
+    -- ** SubscriptionPlanCommitmentInterval
+    , SubscriptionPlanCommitmentInterval
+    , subscriptionPlanCommitmentInterval
+    , spciStartTime
+    , spciEndTime
+
     -- ** ChangePlanRequest
     , ChangePlanRequest
     , changePlanRequest
@@ -118,30 +130,49 @@ module Network.Google.AppsReseller
     , subKind
     , subSubscriptions
 
+    -- ** SubscriptionPlan
+    , SubscriptionPlan
+    , subscriptionPlan
+    , spCommitmentInterval
+    , spIsCommitmentPlan
+    , spPlanName
+
+    -- ** ResellerSubscriptionsDeleteDeletionType
+    , ResellerSubscriptionsDeleteDeletionType (..)
+
     -- ** Subscription
     , Subscription
     , subscription
-    , ssCreationTime
-    , ssBillingMethod
-    , ssStatus
-    , ssTrialSettings
-    , ssResourceUiUrl
-    , ssKind
-    , ssSkuId
-    , ssPlan
-    , ssCustomerId
-    , ssSuspensionReasons
-    , ssTransferInfo
-    , ssPurchaseOrderId
-    , ssSeats
-    , ssRenewalSettings
-    , ssSubscriptionId
+    , subuCreationTime
+    , subuBillingMethod
+    , subuStatus
+    , subuTrialSettings
+    , subuResourceUiUrl
+    , subuKind
+    , subuSkuId
+    , subuPlan
+    , subuCustomerId
+    , subuSuspensionReasons
+    , subuTransferInfo
+    , subuPurchaseOrderId
+    , subuSeats
+    , subuRenewalSettings
+    , subuSubscriptionId
 
     -- ** RenewalSettings
     , RenewalSettings
     , renewalSettings
     , rsKind
     , rsRenewalType
+
+    -- ** SubscriptionTransferInfo
+    , SubscriptionTransferInfo
+    , subscriptionTransferInfo
+    , stiTransferabilityExpirationTime
+    , stiMinimumTransferableSeats
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -165,7 +196,20 @@ import           Network.Google.Resource.Reseller.Subscriptions.Suspend
 TODO
 -}
 
-type AppsResellerAPI = Customers :<|> Subscriptions
+type AppsResellerAPI =
+     CustomersInsertResource :<|> CustomersPatchResource
+       :<|> CustomersGetResource
+       :<|> CustomersUpdateResource
+       :<|> SubscriptionsInsertResource
+       :<|> SubscriptionsListResource
+       :<|> SubscriptionsChangeRenewalSettingsResource
+       :<|> SubscriptionsGetResource
+       :<|> SubscriptionsActivateResource
+       :<|> SubscriptionsSuspendResource
+       :<|> SubscriptionsChangePlanResource
+       :<|> SubscriptionsChangeSeatsResource
+       :<|> SubscriptionsDeleteResource
+       :<|> SubscriptionsStartPaidServiceResource
 
 appsResellerAPI :: Proxy AppsResellerAPI
 appsResellerAPI = Proxy

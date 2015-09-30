@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists states for current user.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserStatesList@.
-module Partners.UserStates.List
+module Network.Google.Resource.Partners.UserStates.List
     (
     -- * REST Resource
-      UserStatesListAPI
+      UserStatesListResource
 
     -- * Creating a Request
-    , userStatesList
-    , UserStatesList
+    , userStatesList'
+    , UserStatesList'
 
     -- * Request Lenses
     , uslXgafv
@@ -55,33 +56,51 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PartnersUserStatesList@ which the
--- 'UserStatesList' request conforms to.
-type UserStatesListAPI =
+-- 'UserStatesList'' request conforms to.
+type UserStatesListResource =
      "v2" :>
        "userStates" :>
-         QueryParam "requestMetadata.partnersSessionId" Text
-           :>
-           QueryParam "requestMetadata.locale" Text :>
-             QueryParams "requestMetadata.experimentIds" Text :>
-               QueryParam "requestMetadata.userOverrides.ipAddress"
-                 Text
-                 :>
-                 QueryParam
-                   "requestMetadata.trafficSource.trafficSubId"
-                   Text
-                   :>
-                   QueryParam "requestMetadata.userOverrides.userId"
-                     Text
-                     :>
-                     QueryParam
-                       "requestMetadata.trafficSource.trafficSourceId"
-                       Text
-                       :> Get '[JSON] ListUserStatesResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "requestMetadata.partnersSessionId" Text
+                         :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "requestMetadata.locale" Text :>
+                               QueryParams "requestMetadata.experimentIds" Text
+                                 :>
+                                 QueryParam
+                                   "requestMetadata.userOverrides.ipAddress"
+                                   Text
+                                   :>
+                                   QueryParam
+                                     "requestMetadata.trafficSource.trafficSubId"
+                                     Text
+                                     :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam
+                                         "requestMetadata.userOverrides.userId"
+                                         Text
+                                         :>
+                                         QueryParam
+                                           "requestMetadata.trafficSource.trafficSourceId"
+                                           Text
+                                           :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "callback" Text :>
+                                               QueryParam "alt" Text :>
+                                                 Get '[JSON]
+                                                   ListUserStatesResponse
 
 -- | Lists states for current user.
 --
--- /See:/ 'userStatesList' smart constructor.
-data UserStatesList = UserStatesList
+-- /See:/ 'userStatesList'' smart constructor.
+data UserStatesList' = UserStatesList'
     { _uslXgafv                                       :: !(Maybe Text)
     , _uslQuotaUser                                   :: !(Maybe Text)
     , _uslPrettyPrint                                 :: !Bool
@@ -147,10 +166,10 @@ data UserStatesList = UserStatesList
 -- * 'uslCallback'
 --
 -- * 'uslAlt'
-userStatesList
-    :: UserStatesList
-userStatesList =
-    UserStatesList
+userStatesList'
+    :: UserStatesList'
+userStatesList' =
+    UserStatesList'
     { _uslXgafv = Nothing
     , _uslQuotaUser = Nothing
     , _uslPrettyPrint = True
@@ -299,10 +318,10 @@ uslAlt = lens _uslAlt (\ s a -> s{_uslAlt = a})
 instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
         request = requestWithRoute defReq partnersURL
-        requestWithRoute r u UserStatesList{..}
-          = go _uslXgafv _uslQuotaUser _uslPrettyPrint
+        requestWithRoute r u UserStatesList'{..}
+          = go _uslXgafv _uslQuotaUser (Just _uslPrettyPrint)
               _uslUploadProtocol
-              _uslPp
+              (Just _uslPp)
               _uslAccessToken
               _uslUploadType
               _uslRequestMetadataPartnersSessionId
@@ -317,8 +336,9 @@ instance GoogleRequest UserStatesList' where
               _uslRequestMetadataTrafficSourceTrafficSourceId
               _uslFields
               _uslCallback
-              _uslAlt
+              (Just _uslAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserStatesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UserStatesListResource)
                       r
                       u

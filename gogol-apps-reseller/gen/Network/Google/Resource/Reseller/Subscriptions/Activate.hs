@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Activates a subscription previously suspended by the reseller
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsActivate@.
-module Reseller.Subscriptions.Activate
+module Network.Google.Resource.Reseller.Subscriptions.Activate
     (
     -- * REST Resource
-      SubscriptionsActivateAPI
+      SubscriptionsActivateResource
 
     -- * Creating a Request
-    , subscriptionsActivate
-    , SubscriptionsActivate
+    , subscriptionsActivate'
+    , SubscriptionsActivate'
 
     -- * Request Lenses
     , saQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsActivate@ which the
--- 'SubscriptionsActivate' request conforms to.
-type SubscriptionsActivateAPI =
+-- 'SubscriptionsActivate'' request conforms to.
+type SubscriptionsActivateResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "activate" :> Post '[JSON] Subscription
+             "activate" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Activates a subscription previously suspended by the reseller
 --
--- /See:/ 'subscriptionsActivate' smart constructor.
-data SubscriptionsActivate = SubscriptionsActivate
+-- /See:/ 'subscriptionsActivate'' smart constructor.
+data SubscriptionsActivate' = SubscriptionsActivate'
     { _saQuotaUser      :: !(Maybe Text)
     , _saPrettyPrint    :: !Bool
     , _saUserIp         :: !(Maybe Text)
@@ -64,7 +72,7 @@ data SubscriptionsActivate = SubscriptionsActivate
     , _saOauthToken     :: !(Maybe Text)
     , _saSubscriptionId :: !Text
     , _saFields         :: !(Maybe Text)
-    , _saAlt            :: !Text
+    , _saAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsActivate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SubscriptionsActivate = SubscriptionsActivate
 -- * 'saFields'
 --
 -- * 'saAlt'
-subscriptionsActivate
+subscriptionsActivate'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsActivate
-subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
-    SubscriptionsActivate
+    -> SubscriptionsActivate'
+subscriptionsActivate' pSaCustomerId_ pSaSubscriptionId_ =
+    SubscriptionsActivate'
     { _saQuotaUser = Nothing
     , _saPrettyPrint = True
     , _saUserIp = Nothing
@@ -102,7 +110,7 @@ subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
     , _saOauthToken = Nothing
     , _saSubscriptionId = pSaSubscriptionId_
     , _saFields = Nothing
-    , _saAlt = "json"
+    , _saAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ saFields :: Lens' SubscriptionsActivate' (Maybe Text)
 saFields = lens _saFields (\ s a -> s{_saFields = a})
 
 -- | Data format for the response.
-saAlt :: Lens' SubscriptionsActivate' Text
+saAlt :: Lens' SubscriptionsActivate' Alt
 saAlt = lens _saAlt (\ s a -> s{_saAlt = a})
 
 instance GoogleRequest SubscriptionsActivate' where
         type Rs SubscriptionsActivate' = Subscription
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsActivate{..}
-          = go _saQuotaUser _saPrettyPrint _saUserIp
+        requestWithRoute r u SubscriptionsActivate'{..}
+          = go _saQuotaUser (Just _saPrettyPrint) _saUserIp
               _saCustomerId
               _saKey
               _saOauthToken
               _saSubscriptionId
               _saFields
-              _saAlt
+              (Just _saAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsActivateAPI)
+                      (Proxy :: Proxy SubscriptionsActivateResource)
                       r
                       u

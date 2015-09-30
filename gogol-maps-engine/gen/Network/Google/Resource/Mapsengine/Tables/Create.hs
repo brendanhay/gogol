@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a table asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesCreate@.
-module Mapsengine.Tables.Create
+module Network.Google.Resource.Mapsengine.Tables.Create
     (
     -- * REST Resource
-      TablesCreateAPI
+      TablesCreateResource
 
     -- * Creating a Request
-    , tablesCreate
-    , TablesCreate
+    , tablesCreate'
+    , TablesCreate'
 
     -- * Request Lenses
     , tcQuotaUser
@@ -42,20 +43,28 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesCreate@ which the
--- 'TablesCreate' request conforms to.
-type TablesCreateAPI = "tables" :> Post '[JSON] Table
+-- 'TablesCreate'' request conforms to.
+type TablesCreateResource =
+     "tables" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Table
 
 -- | Create a table asset.
 --
--- /See:/ 'tablesCreate' smart constructor.
-data TablesCreate = TablesCreate
+-- /See:/ 'tablesCreate'' smart constructor.
+data TablesCreate' = TablesCreate'
     { _tcQuotaUser   :: !(Maybe Text)
     , _tcPrettyPrint :: !Bool
     , _tcUserIp      :: !(Maybe Text)
     , _tcKey         :: !(Maybe Text)
     , _tcOauthToken  :: !(Maybe Text)
     , _tcFields      :: !(Maybe Text)
-    , _tcAlt         :: !Text
+    , _tcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesCreate'' with the minimum fields required to make a request.
@@ -75,17 +84,17 @@ data TablesCreate = TablesCreate
 -- * 'tcFields'
 --
 -- * 'tcAlt'
-tablesCreate
-    :: TablesCreate
-tablesCreate =
-    TablesCreate
+tablesCreate'
+    :: TablesCreate'
+tablesCreate' =
+    TablesCreate'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True
     , _tcUserIp = Nothing
     , _tcKey = Nothing
     , _tcOauthToken = Nothing
     , _tcFields = Nothing
-    , _tcAlt = "json"
+    , _tcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,17 +131,20 @@ tcFields :: Lens' TablesCreate' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
 -- | Data format for the response.
-tcAlt :: Lens' TablesCreate' Text
+tcAlt :: Lens' TablesCreate' Alt
 tcAlt = lens _tcAlt (\ s a -> s{_tcAlt = a})
 
 instance GoogleRequest TablesCreate' where
         type Rs TablesCreate' = Table
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesCreate{..}
-          = go _tcQuotaUser _tcPrettyPrint _tcUserIp _tcKey
+        requestWithRoute r u TablesCreate'{..}
+          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIp
+              _tcKey
               _tcOauthToken
               _tcFields
-              _tcAlt
+              (Just _tcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesCreateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesCreateResource)
+                      r
                       u

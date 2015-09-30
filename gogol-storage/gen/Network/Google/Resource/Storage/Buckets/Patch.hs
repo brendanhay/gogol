@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a bucket. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketsPatch@.
-module Storage.Buckets.Patch
+module Network.Google.Resource.Storage.Buckets.Patch
     (
     -- * REST Resource
-      BucketsPatchAPI
+      BucketsPatchResource
 
     -- * Creating a Request
-    , bucketsPatch
-    , BucketsPatch
+    , bucketsPatch'
+    , BucketsPatch'
 
     -- * Request Lenses
     , bpQuotaUser
@@ -46,18 +47,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketsPatch@ which the
--- 'BucketsPatch' request conforms to.
-type BucketsPatchAPI =
+-- 'BucketsPatch'' request conforms to.
+type BucketsPatchResource =
      "b" :>
        Capture "bucket" Text :>
-         QueryParam "ifMetagenerationMatch" Word64 :>
-           QueryParam "ifMetagenerationNotMatch" Word64 :>
-             QueryParam "projection" Text :> Patch '[JSON] Bucket
+         QueryParam "quotaUser" Text :>
+           QueryParam "ifMetagenerationMatch" Word64 :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "ifMetagenerationNotMatch" Word64 :>
+                     QueryParam "projection" StorageBucketsPatchProjection
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Bucket
 
 -- | Updates a bucket. This method supports patch semantics.
 --
--- /See:/ 'bucketsPatch' smart constructor.
-data BucketsPatch = BucketsPatch
+-- /See:/ 'bucketsPatch'' smart constructor.
+data BucketsPatch' = BucketsPatch'
     { _bpQuotaUser                :: !(Maybe Text)
     , _bpIfMetagenerationMatch    :: !(Maybe Word64)
     , _bpPrettyPrint              :: !Bool
@@ -65,10 +74,10 @@ data BucketsPatch = BucketsPatch
     , _bpBucket                   :: !Text
     , _bpKey                      :: !(Maybe Text)
     , _bpIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _bpProjection               :: !(Maybe Text)
+    , _bpProjection               :: !(Maybe StorageBucketsPatchProjection)
     , _bpOauthToken               :: !(Maybe Text)
     , _bpFields                   :: !(Maybe Text)
-    , _bpAlt                      :: !Text
+    , _bpAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsPatch'' with the minimum fields required to make a request.
@@ -96,11 +105,11 @@ data BucketsPatch = BucketsPatch
 -- * 'bpFields'
 --
 -- * 'bpAlt'
-bucketsPatch
+bucketsPatch'
     :: Text -- ^ 'bucket'
-    -> BucketsPatch
-bucketsPatch pBpBucket_ =
-    BucketsPatch
+    -> BucketsPatch'
+bucketsPatch' pBpBucket_ =
+    BucketsPatch'
     { _bpQuotaUser = Nothing
     , _bpIfMetagenerationMatch = Nothing
     , _bpPrettyPrint = True
@@ -111,7 +120,7 @@ bucketsPatch pBpBucket_ =
     , _bpProjection = Nothing
     , _bpOauthToken = Nothing
     , _bpFields = Nothing
-    , _bpAlt = "json"
+    , _bpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +166,7 @@ bpIfMetagenerationNotMatch
       (\ s a -> s{_bpIfMetagenerationNotMatch = a})
 
 -- | Set of properties to return. Defaults to full.
-bpProjection :: Lens' BucketsPatch' (Maybe Text)
+bpProjection :: Lens' BucketsPatch' (Maybe StorageBucketsPatchProjection)
 bpProjection
   = lens _bpProjection (\ s a -> s{_bpProjection = a})
 
@@ -171,15 +180,15 @@ bpFields :: Lens' BucketsPatch' (Maybe Text)
 bpFields = lens _bpFields (\ s a -> s{_bpFields = a})
 
 -- | Data format for the response.
-bpAlt :: Lens' BucketsPatch' Text
+bpAlt :: Lens' BucketsPatch' Alt
 bpAlt = lens _bpAlt (\ s a -> s{_bpAlt = a})
 
 instance GoogleRequest BucketsPatch' where
         type Rs BucketsPatch' = Bucket
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketsPatch{..}
+        requestWithRoute r u BucketsPatch'{..}
           = go _bpQuotaUser _bpIfMetagenerationMatch
-              _bpPrettyPrint
+              (Just _bpPrettyPrint)
               _bpUserIp
               _bpBucket
               _bpKey
@@ -187,7 +196,9 @@ instance GoogleRequest BucketsPatch' where
               _bpProjection
               _bpOauthToken
               _bpFields
-              _bpAlt
+              (Just _bpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BucketsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BucketsPatchResource)
+                      r
                       u

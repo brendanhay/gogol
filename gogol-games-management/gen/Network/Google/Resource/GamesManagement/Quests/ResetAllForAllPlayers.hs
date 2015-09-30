@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- to user accounts for your developer console.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementQuestsResetAllForAllPlayers@.
-module GamesManagement.Quests.ResetAllForAllPlayers
+module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
     (
     -- * REST Resource
-      QuestsResetAllForAllPlayersAPI
+      QuestsResetAllForAllPlayersResource
 
     -- * Creating a Request
-    , questsResetAllForAllPlayers
-    , QuestsResetAllForAllPlayers
+    , questsResetAllForAllPlayers'
+    , QuestsResetAllForAllPlayers'
 
     -- * Request Lenses
     , qrafapQuotaUser
@@ -43,23 +44,30 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementQuestsResetAllForAllPlayers@ which the
--- 'QuestsResetAllForAllPlayers' request conforms to.
-type QuestsResetAllForAllPlayersAPI =
+-- 'QuestsResetAllForAllPlayers'' request conforms to.
+type QuestsResetAllForAllPlayersResource =
      "quests" :>
-       "resetAllForAllPlayers" :> Post '[JSON] ()
+       "resetAllForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets all draft quests for all players. This method is only available
 -- to user accounts for your developer console.
 --
--- /See:/ 'questsResetAllForAllPlayers' smart constructor.
-data QuestsResetAllForAllPlayers = QuestsResetAllForAllPlayers
+-- /See:/ 'questsResetAllForAllPlayers'' smart constructor.
+data QuestsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
     { _qrafapQuotaUser   :: !(Maybe Text)
     , _qrafapPrettyPrint :: !Bool
     , _qrafapUserIp      :: !(Maybe Text)
     , _qrafapKey         :: !(Maybe Text)
     , _qrafapOauthToken  :: !(Maybe Text)
     , _qrafapFields      :: !(Maybe Text)
-    , _qrafapAlt         :: !Text
+    , _qrafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -79,17 +87,17 @@ data QuestsResetAllForAllPlayers = QuestsResetAllForAllPlayers
 -- * 'qrafapFields'
 --
 -- * 'qrafapAlt'
-questsResetAllForAllPlayers
-    :: QuestsResetAllForAllPlayers
-questsResetAllForAllPlayers =
-    QuestsResetAllForAllPlayers
+questsResetAllForAllPlayers'
+    :: QuestsResetAllForAllPlayers'
+questsResetAllForAllPlayers' =
+    QuestsResetAllForAllPlayers'
     { _qrafapQuotaUser = Nothing
     , _qrafapPrettyPrint = True
     , _qrafapUserIp = Nothing
     , _qrafapKey = Nothing
     , _qrafapOauthToken = Nothing
     , _qrafapFields = Nothing
-    , _qrafapAlt = "json"
+    , _qrafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +139,7 @@ qrafapFields
   = lens _qrafapFields (\ s a -> s{_qrafapFields = a})
 
 -- | Data format for the response.
-qrafapAlt :: Lens' QuestsResetAllForAllPlayers' Text
+qrafapAlt :: Lens' QuestsResetAllForAllPlayers' Alt
 qrafapAlt
   = lens _qrafapAlt (\ s a -> s{_qrafapAlt = a})
 
@@ -139,15 +147,15 @@ instance GoogleRequest QuestsResetAllForAllPlayers'
          where
         type Rs QuestsResetAllForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u QuestsResetAllForAllPlayers{..}
-          = go _qrafapQuotaUser _qrafapPrettyPrint
+        requestWithRoute r u QuestsResetAllForAllPlayers'{..}
+          = go _qrafapQuotaUser (Just _qrafapPrettyPrint)
               _qrafapUserIp
               _qrafapKey
               _qrafapOauthToken
               _qrafapFields
-              _qrafapAlt
+              (Just _qrafapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QuestsResetAllForAllPlayersAPI)
+                      (Proxy :: Proxy QuestsResetAllForAllPlayersResource)
                       r
                       u

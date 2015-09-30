@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a single timeline item by ID.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineGet@.
-module Mirror.Timeline.Get
+module Network.Google.Resource.Mirror.Timeline.Get
     (
     -- * REST Resource
-      TimelineGetAPI
+      TimelineGetResource
 
     -- * Creating a Request
-    , timelineGet
-    , TimelineGet
+    , timelineGet'
+    , TimelineGet'
 
     -- * Request Lenses
     , tgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineGet@ which the
--- 'TimelineGet' request conforms to.
-type TimelineGetAPI =
+-- 'TimelineGet'' request conforms to.
+type TimelineGetResource =
      "timeline" :>
-       Capture "id" Text :> Get '[JSON] TimelineItem
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] TimelineItem
 
 -- | Gets a single timeline item by ID.
 --
--- /See:/ 'timelineGet' smart constructor.
-data TimelineGet = TimelineGet
+-- /See:/ 'timelineGet'' smart constructor.
+data TimelineGet' = TimelineGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data TimelineGet = TimelineGet
     , _tgId          :: !Text
     , _tgOauthToken  :: !(Maybe Text)
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data TimelineGet = TimelineGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-timelineGet
+timelineGet'
     :: Text -- ^ 'id'
-    -> TimelineGet
-timelineGet pTgId_ =
-    TimelineGet
+    -> TimelineGet'
+timelineGet' pTgId_ =
+    TimelineGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgUserIp = Nothing
@@ -93,7 +101,7 @@ timelineGet pTgId_ =
     , _tgId = pTgId_
     , _tgOauthToken = Nothing
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +142,21 @@ tgFields :: Lens' TimelineGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TimelineGet' Text
+tgAlt :: Lens' TimelineGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TimelineGet' where
         type Rs TimelineGet' = TimelineItem
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineGet{..}
-          = go _tgQuotaUser _tgPrettyPrint _tgUserIp _tgKey
+        requestWithRoute r u TimelineGet'{..}
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIp
+              _tgKey
               _tgId
               _tgOauthToken
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelineGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelineGetResource)
+                      r
+                      u

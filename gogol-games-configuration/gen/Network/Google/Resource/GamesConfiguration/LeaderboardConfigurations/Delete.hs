@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsDelete@.
-module GamesConfiguration.LeaderboardConfigurations.Delete
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Delete
     (
     -- * REST Resource
-      LeaderboardConfigurationsDeleteAPI
+      LeaderboardConfigurationsDeleteResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsDelete
-    , LeaderboardConfigurationsDelete
+    , leaderboardConfigurationsDelete'
+    , LeaderboardConfigurationsDelete'
 
     -- * Request Lenses
     , lcdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsDelete@ which the
--- 'LeaderboardConfigurationsDelete' request conforms to.
-type LeaderboardConfigurationsDeleteAPI =
+-- 'LeaderboardConfigurationsDelete'' request conforms to.
+type LeaderboardConfigurationsDeleteResource =
      "leaderboards" :>
-       Capture "leaderboardId" Text :> Delete '[JSON] ()
+       Capture "leaderboardId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete the leaderboard configuration with the given ID.
 --
--- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
-data LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
+-- /See:/ 'leaderboardConfigurationsDelete'' smart constructor.
+data LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
     { _lcdQuotaUser     :: !(Maybe Text)
     , _lcdPrettyPrint   :: !Bool
     , _lcdUserIp        :: !(Maybe Text)
@@ -59,7 +67,7 @@ data LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
     , _lcdKey           :: !(Maybe Text)
     , _lcdOauthToken    :: !(Maybe Text)
     , _lcdFields        :: !(Maybe Text)
-    , _lcdAlt           :: !Text
+    , _lcdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
 -- * 'lcdFields'
 --
 -- * 'lcdAlt'
-leaderboardConfigurationsDelete
+leaderboardConfigurationsDelete'
     :: Text -- ^ 'leaderboardId'
-    -> LeaderboardConfigurationsDelete
-leaderboardConfigurationsDelete pLcdLeaderboardId_ =
-    LeaderboardConfigurationsDelete
+    -> LeaderboardConfigurationsDelete'
+leaderboardConfigurationsDelete' pLcdLeaderboardId_ =
+    LeaderboardConfigurationsDelete'
     { _lcdQuotaUser = Nothing
     , _lcdPrettyPrint = True
     , _lcdUserIp = Nothing
@@ -93,7 +101,7 @@ leaderboardConfigurationsDelete pLcdLeaderboardId_ =
     , _lcdKey = Nothing
     , _lcdOauthToken = Nothing
     , _lcdFields = Nothing
-    , _lcdAlt = "json"
+    , _lcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ lcdFields
   = lens _lcdFields (\ s a -> s{_lcdFields = a})
 
 -- | Data format for the response.
-lcdAlt :: Lens' LeaderboardConfigurationsDelete' Text
+lcdAlt :: Lens' LeaderboardConfigurationsDelete' Alt
 lcdAlt = lens _lcdAlt (\ s a -> s{_lcdAlt = a})
 
 instance GoogleRequest
@@ -148,15 +156,16 @@ instance GoogleRequest
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          LeaderboardConfigurationsDelete{..}
-          = go _lcdQuotaUser _lcdPrettyPrint _lcdUserIp
+          LeaderboardConfigurationsDelete'{..}
+          = go _lcdQuotaUser (Just _lcdPrettyPrint) _lcdUserIp
               _lcdLeaderboardId
               _lcdKey
               _lcdOauthToken
               _lcdFields
-              _lcdAlt
+              (Just _lcdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsDeleteAPI)
+                      (Proxy ::
+                         Proxy LeaderboardConfigurationsDeleteResource)
                       r
                       u

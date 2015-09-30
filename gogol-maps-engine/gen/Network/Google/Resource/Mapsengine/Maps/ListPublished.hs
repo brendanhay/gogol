@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all published maps readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsListPublished@.
-module Mapsengine.Maps.ListPublished
+module Network.Google.Resource.Mapsengine.Maps.ListPublished
     (
     -- * REST Resource
-      MapsListPublishedAPI
+      MapsListPublishedResource
 
     -- * Creating a Request
-    , mapsListPublished
-    , MapsListPublished
+    , mapsListPublished'
+    , MapsListPublished'
 
     -- * Request Lenses
     , mlpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsListPublished@ which the
--- 'MapsListPublished' request conforms to.
-type MapsListPublishedAPI =
+-- 'MapsListPublished'' request conforms to.
+type MapsListPublishedResource =
      "maps" :>
        "published" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "projectId" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] PublishedMapsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "projectId" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] PublishedMapsListResponse
 
 -- | Return all published maps readable by the current user.
 --
--- /See:/ 'mapsListPublished' smart constructor.
-data MapsListPublished = MapsListPublished
+-- /See:/ 'mapsListPublished'' smart constructor.
+data MapsListPublished' = MapsListPublished'
     { _mlpQuotaUser   :: !(Maybe Text)
     , _mlpPrettyPrint :: !Bool
     , _mlpUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data MapsListPublished = MapsListPublished
     , _mlpOauthToken  :: !(Maybe Text)
     , _mlpMaxResults  :: !(Maybe Word32)
     , _mlpFields      :: !(Maybe Text)
-    , _mlpAlt         :: !Text
+    , _mlpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListPublished'' with the minimum fields required to make a request.
@@ -93,10 +101,10 @@ data MapsListPublished = MapsListPublished
 -- * 'mlpFields'
 --
 -- * 'mlpAlt'
-mapsListPublished
-    :: MapsListPublished
-mapsListPublished =
-    MapsListPublished
+mapsListPublished'
+    :: MapsListPublished'
+mapsListPublished' =
+    MapsListPublished'
     { _mlpQuotaUser = Nothing
     , _mlpPrettyPrint = True
     , _mlpUserIp = Nothing
@@ -106,7 +114,7 @@ mapsListPublished =
     , _mlpOauthToken = Nothing
     , _mlpMaxResults = Nothing
     , _mlpFields = Nothing
-    , _mlpAlt = "json"
+    , _mlpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ mlpFields
   = lens _mlpFields (\ s a -> s{_mlpFields = a})
 
 -- | Data format for the response.
-mlpAlt :: Lens' MapsListPublished' Text
+mlpAlt :: Lens' MapsListPublished' Alt
 mlpAlt = lens _mlpAlt (\ s a -> s{_mlpAlt = a})
 
 instance GoogleRequest MapsListPublished' where
         type Rs MapsListPublished' =
              PublishedMapsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsListPublished{..}
-          = go _mlpQuotaUser _mlpPrettyPrint _mlpUserIp _mlpKey
+        requestWithRoute r u MapsListPublished'{..}
+          = go _mlpQuotaUser (Just _mlpPrettyPrint) _mlpUserIp
+              _mlpKey
               _mlpPageToken
               _mlpProjectId
               _mlpOauthToken
               _mlpMaxResults
               _mlpFields
-              _mlpAlt
+              (Just _mlpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MapsListPublishedAPI)
+                      (Proxy :: Proxy MapsListPublishedResource)
                       r
                       u

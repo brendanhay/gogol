@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- location to the correct line of code.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerControllerDebuggeesBreakpointsUpdate@.
-module Clouddebugger.Controller.Debuggees.Breakpoints.Update
+module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.Update
     (
     -- * REST Resource
-      ControllerDebuggeesBreakpointsUpdateAPI
+      ControllerDebuggeesBreakpointsUpdateResource
 
     -- * Creating a Request
-    , controllerDebuggeesBreakpointsUpdate
-    , ControllerDebuggeesBreakpointsUpdate
+    , controllerDebuggeesBreakpointsUpdate'
+    , ControllerDebuggeesBreakpointsUpdate'
 
     -- * Request Lenses
     , cdbuXgafv
@@ -56,15 +57,29 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerControllerDebuggeesBreakpointsUpdate@ which the
--- 'ControllerDebuggeesBreakpointsUpdate' request conforms to.
-type ControllerDebuggeesBreakpointsUpdateAPI =
+-- 'ControllerDebuggeesBreakpointsUpdate'' request conforms to.
+type ControllerDebuggeesBreakpointsUpdateResource =
      "v2" :>
        "controller" :>
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
                Capture "id" Text :>
-                 Put '[JSON] UpdateActiveBreakpointResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Put '[JSON]
+                                             UpdateActiveBreakpointResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint
 -- protobuf must be sent back to the controller. Updates to active
@@ -74,8 +89,8 @@ type ControllerDebuggeesBreakpointsUpdateAPI =
 -- are restricted to changes such as canonicalizing a value or snapping the
 -- location to the correct line of code.
 --
--- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
-data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
+-- /See:/ 'controllerDebuggeesBreakpointsUpdate'' smart constructor.
+data ControllerDebuggeesBreakpointsUpdate' = ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Text)
     , _cdbuQuotaUser      :: !(Maybe Text)
     , _cdbuPrettyPrint    :: !Bool
@@ -126,12 +141,12 @@ data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
 -- * 'cdbuCallback'
 --
 -- * 'cdbuAlt'
-controllerDebuggeesBreakpointsUpdate
+controllerDebuggeesBreakpointsUpdate'
     :: Text -- ^ 'id'
     -> Text -- ^ 'debuggeeId'
-    -> ControllerDebuggeesBreakpointsUpdate
-controllerDebuggeesBreakpointsUpdate pCdbuId_ pCdbuDebuggeeId_ =
-    ControllerDebuggeesBreakpointsUpdate
+    -> ControllerDebuggeesBreakpointsUpdate'
+controllerDebuggeesBreakpointsUpdate' pCdbuId_ pCdbuDebuggeeId_ =
+    ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
     , _cdbuQuotaUser = Nothing
     , _cdbuPrettyPrint = True
@@ -238,10 +253,11 @@ instance GoogleRequest
              UpdateActiveBreakpointResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
-          ControllerDebuggeesBreakpointsUpdate{..}
-          = go _cdbuXgafv _cdbuQuotaUser _cdbuPrettyPrint
+          ControllerDebuggeesBreakpointsUpdate'{..}
+          = go _cdbuXgafv _cdbuQuotaUser
+              (Just _cdbuPrettyPrint)
               _cdbuUploadProtocol
-              _cdbuPp
+              (Just _cdbuPp)
               _cdbuAccessToken
               _cdbuUploadType
               _cdbuBearerToken
@@ -251,10 +267,10 @@ instance GoogleRequest
               _cdbuOauthToken
               _cdbuFields
               _cdbuCallback
-              _cdbuAlt
+              (Just _cdbuAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ControllerDebuggeesBreakpointsUpdateAPI)
+                         Proxy ControllerDebuggeesBreakpointsUpdateResource)
                       r
                       u

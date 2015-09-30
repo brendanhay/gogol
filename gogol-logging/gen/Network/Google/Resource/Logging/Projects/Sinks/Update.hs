@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- destination, filter, or both may be updated.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsSinksUpdate@.
-module Logging.Projects.Sinks.Update
+module Network.Google.Resource.Logging.Projects.Sinks.Update
     (
     -- * REST Resource
-      ProjectsSinksUpdateAPI
+      ProjectsSinksUpdateResource
 
     -- * Creating a Request
-    , projectsSinksUpdate
-    , ProjectsSinksUpdate
+    , projectsSinksUpdate'
+    , ProjectsSinksUpdate'
 
     -- * Request Lenses
     , psuXgafv
@@ -51,19 +52,33 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksUpdate@ which the
--- 'ProjectsSinksUpdate' request conforms to.
-type ProjectsSinksUpdateAPI =
+-- 'ProjectsSinksUpdate'' request conforms to.
+type ProjectsSinksUpdateResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "sinks" :>
-             Capture "sinksId" Text :> Put '[JSON] LogSink
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Put '[JSON] LogSink
 
 -- | Updates a project sink. If the sink does not exist, it is created. The
 -- destination, filter, or both may be updated.
 --
--- /See:/ 'projectsSinksUpdate' smart constructor.
-data ProjectsSinksUpdate = ProjectsSinksUpdate
+-- /See:/ 'projectsSinksUpdate'' smart constructor.
+data ProjectsSinksUpdate' = ProjectsSinksUpdate'
     { _psuXgafv          :: !(Maybe Text)
     , _psuQuotaUser      :: !(Maybe Text)
     , _psuPrettyPrint    :: !Bool
@@ -114,12 +129,12 @@ data ProjectsSinksUpdate = ProjectsSinksUpdate
 -- * 'psuCallback'
 --
 -- * 'psuAlt'
-projectsSinksUpdate
+projectsSinksUpdate'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsSinksUpdate
-projectsSinksUpdate pPsuProjectsId_ pPsuSinksId_ =
-    ProjectsSinksUpdate
+    -> ProjectsSinksUpdate'
+projectsSinksUpdate' pPsuProjectsId_ pPsuSinksId_ =
+    ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuQuotaUser = Nothing
     , _psuPrettyPrint = True
@@ -222,10 +237,10 @@ psuAlt = lens _psuAlt (\ s a -> s{_psuAlt = a})
 instance GoogleRequest ProjectsSinksUpdate' where
         type Rs ProjectsSinksUpdate' = LogSink
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksUpdate{..}
-          = go _psuXgafv _psuQuotaUser _psuPrettyPrint
+        requestWithRoute r u ProjectsSinksUpdate'{..}
+          = go _psuXgafv _psuQuotaUser (Just _psuPrettyPrint)
               _psuUploadProtocol
-              _psuPp
+              (Just _psuPp)
               _psuAccessToken
               _psuUploadType
               _psuBearerToken
@@ -235,9 +250,9 @@ instance GoogleRequest ProjectsSinksUpdate' where
               _psuSinksId
               _psuFields
               _psuCallback
-              _psuAlt
+              (Just _psuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSinksUpdateAPI)
+                      (Proxy :: Proxy ProjectsSinksUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing floodlight activity group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsDelete@.
-module DFAReporting.FloodlightActivityGroups.Delete
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
     (
     -- * REST Resource
-      FloodlightActivityGroupsDeleteAPI
+      FloodlightActivityGroupsDeleteResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsDelete
-    , FloodlightActivityGroupsDelete
+    , floodlightActivityGroupsDelete'
+    , FloodlightActivityGroupsDelete'
 
     -- * Request Lenses
     , fagdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsDelete@ which the
--- 'FloodlightActivityGroupsDelete' request conforms to.
-type FloodlightActivityGroupsDeleteAPI =
+-- 'FloodlightActivityGroupsDelete'' request conforms to.
+type FloodlightActivityGroupsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsDelete' smart constructor.
-data FloodlightActivityGroupsDelete = FloodlightActivityGroupsDelete
+-- /See:/ 'floodlightActivityGroupsDelete'' smart constructor.
+data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
     { _fagdQuotaUser   :: !(Maybe Text)
     , _fagdPrettyPrint :: !Bool
     , _fagdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data FloodlightActivityGroupsDelete = FloodlightActivityGroupsDelete
     , _fagdId          :: !Int64
     , _fagdOauthToken  :: !(Maybe Text)
     , _fagdFields      :: !(Maybe Text)
-    , _fagdAlt         :: !Text
+    , _fagdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data FloodlightActivityGroupsDelete = FloodlightActivityGroupsDelete
 -- * 'fagdFields'
 --
 -- * 'fagdAlt'
-floodlightActivityGroupsDelete
+floodlightActivityGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> FloodlightActivityGroupsDelete
-floodlightActivityGroupsDelete pFagdProfileId_ pFagdId_ =
-    FloodlightActivityGroupsDelete
+    -> FloodlightActivityGroupsDelete'
+floodlightActivityGroupsDelete' pFagdProfileId_ pFagdId_ =
+    FloodlightActivityGroupsDelete'
     { _fagdQuotaUser = Nothing
     , _fagdPrettyPrint = True
     , _fagdUserIp = Nothing
@@ -101,7 +109,7 @@ floodlightActivityGroupsDelete pFagdProfileId_ pFagdId_ =
     , _fagdId = pFagdId_
     , _fagdOauthToken = Nothing
     , _fagdFields = Nothing
-    , _fagdAlt = "json"
+    , _fagdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,7 +160,7 @@ fagdFields
   = lens _fagdFields (\ s a -> s{_fagdFields = a})
 
 -- | Data format for the response.
-fagdAlt :: Lens' FloodlightActivityGroupsDelete' Text
+fagdAlt :: Lens' FloodlightActivityGroupsDelete' Alt
 fagdAlt = lens _fagdAlt (\ s a -> s{_fagdAlt = a})
 
 instance GoogleRequest
@@ -160,16 +168,18 @@ instance GoogleRequest
         type Rs FloodlightActivityGroupsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightActivityGroupsDelete{..}
-          = go _fagdQuotaUser _fagdPrettyPrint _fagdUserIp
+          FloodlightActivityGroupsDelete'{..}
+          = go _fagdQuotaUser (Just _fagdPrettyPrint)
+              _fagdUserIp
               _fagdProfileId
               _fagdKey
               _fagdId
               _fagdOauthToken
               _fagdFields
-              _fagdAlt
+              (Just _fagdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsDeleteAPI)
+                      (Proxy ::
+                         Proxy FloodlightActivityGroupsDeleteResource)
                       r
                       u

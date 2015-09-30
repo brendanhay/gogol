@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Report abuse for a video.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosReportAbuse@.
-module YouTube.Videos.ReportAbuse
+module Network.Google.Resource.YouTube.Videos.ReportAbuse
     (
     -- * REST Resource
-      VideosReportAbuseAPI
+      VideosReportAbuseResource
 
     -- * Creating a Request
-    , videosReportAbuse
-    , VideosReportAbuse
+    , videosReportAbuse'
+    , VideosReportAbuse'
 
     -- * Request Lenses
     , vraQuotaUser
@@ -43,17 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosReportAbuse@ which the
--- 'VideosReportAbuse' request conforms to.
-type VideosReportAbuseAPI =
+-- 'VideosReportAbuse'' request conforms to.
+type VideosReportAbuseResource =
      "videos" :>
        "reportAbuse" :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --
--- /See:/ 'videosReportAbuse' smart constructor.
-data VideosReportAbuse = VideosReportAbuse
+-- /See:/ 'videosReportAbuse'' smart constructor.
+data VideosReportAbuse' = VideosReportAbuse'
     { _vraQuotaUser              :: !(Maybe Text)
     , _vraPrettyPrint            :: !Bool
     , _vraUserIp                 :: !(Maybe Text)
@@ -61,7 +68,7 @@ data VideosReportAbuse = VideosReportAbuse
     , _vraKey                    :: !(Maybe Text)
     , _vraOauthToken             :: !(Maybe Text)
     , _vraFields                 :: !(Maybe Text)
-    , _vraAlt                    :: !Text
+    , _vraAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosReportAbuse'' with the minimum fields required to make a request.
@@ -83,10 +90,10 @@ data VideosReportAbuse = VideosReportAbuse
 -- * 'vraFields'
 --
 -- * 'vraAlt'
-videosReportAbuse
-    :: VideosReportAbuse
-videosReportAbuse =
-    VideosReportAbuse
+videosReportAbuse'
+    :: VideosReportAbuse'
+videosReportAbuse' =
+    VideosReportAbuse'
     { _vraQuotaUser = Nothing
     , _vraPrettyPrint = True
     , _vraUserIp = Nothing
@@ -94,7 +101,7 @@ videosReportAbuse =
     , _vraKey = Nothing
     , _vraOauthToken = Nothing
     , _vraFields = Nothing
-    , _vraAlt = "json"
+    , _vraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,21 +156,21 @@ vraFields
   = lens _vraFields (\ s a -> s{_vraFields = a})
 
 -- | Data format for the response.
-vraAlt :: Lens' VideosReportAbuse' Text
+vraAlt :: Lens' VideosReportAbuse' Alt
 vraAlt = lens _vraAlt (\ s a -> s{_vraAlt = a})
 
 instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosReportAbuse{..}
-          = go _vraQuotaUser _vraPrettyPrint _vraUserIp
+        requestWithRoute r u VideosReportAbuse'{..}
+          = go _vraQuotaUser (Just _vraPrettyPrint) _vraUserIp
               _vraOnBehalfOfContentOwner
               _vraKey
               _vraOauthToken
               _vraFields
-              _vraAlt
+              (Just _vraAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VideosReportAbuseAPI)
+                      (Proxy :: Proxy VideosReportAbuseResource)
                       r
                       u

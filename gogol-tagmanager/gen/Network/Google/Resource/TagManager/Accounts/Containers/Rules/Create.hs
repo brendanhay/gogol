@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a GTM Rule.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesCreate@.
-module TagManager.Accounts.Containers.Rules.Create
+module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
     (
     -- * REST Resource
-      AccountsContainersRulesCreateAPI
+      AccountsContainersRulesCreateResource
 
     -- * Creating a Request
-    , accountsContainersRulesCreate
-    , AccountsContainersRulesCreate
+    , accountsContainersRulesCreate'
+    , AccountsContainersRulesCreate'
 
     -- * Request Lenses
     , acrcQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersRulesCreate@ which the
--- 'AccountsContainersRulesCreate' request conforms to.
-type AccountsContainersRulesCreateAPI =
+-- 'AccountsContainersRulesCreate'' request conforms to.
+type AccountsContainersRulesCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "rules" :> Post '[JSON] Rule
+             "rules" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Rule
 
 -- | Creates a GTM Rule.
 --
--- /See:/ 'accountsContainersRulesCreate' smart constructor.
-data AccountsContainersRulesCreate = AccountsContainersRulesCreate
+-- /See:/ 'accountsContainersRulesCreate'' smart constructor.
+data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
     { _acrcQuotaUser   :: !(Maybe Text)
     , _acrcPrettyPrint :: !Bool
     , _acrcContainerId :: !Text
@@ -64,7 +72,7 @@ data AccountsContainersRulesCreate = AccountsContainersRulesCreate
     , _acrcKey         :: !(Maybe Text)
     , _acrcOauthToken  :: !(Maybe Text)
     , _acrcFields      :: !(Maybe Text)
-    , _acrcAlt         :: !Text
+    , _acrcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesCreate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsContainersRulesCreate = AccountsContainersRulesCreate
 -- * 'acrcFields'
 --
 -- * 'acrcAlt'
-accountsContainersRulesCreate
+accountsContainersRulesCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersRulesCreate
-accountsContainersRulesCreate pAcrcContainerId_ pAcrcAccountId_ =
-    AccountsContainersRulesCreate
+    -> AccountsContainersRulesCreate'
+accountsContainersRulesCreate' pAcrcContainerId_ pAcrcAccountId_ =
+    AccountsContainersRulesCreate'
     { _acrcQuotaUser = Nothing
     , _acrcPrettyPrint = True
     , _acrcContainerId = pAcrcContainerId_
@@ -102,7 +110,7 @@ accountsContainersRulesCreate pAcrcContainerId_ pAcrcAccountId_ =
     , _acrcKey = Nothing
     , _acrcOauthToken = Nothing
     , _acrcFields = Nothing
-    , _acrcAlt = "json"
+    , _acrcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ acrcFields
   = lens _acrcFields (\ s a -> s{_acrcFields = a})
 
 -- | Data format for the response.
-acrcAlt :: Lens' AccountsContainersRulesCreate' Text
+acrcAlt :: Lens' AccountsContainersRulesCreate' Alt
 acrcAlt = lens _acrcAlt (\ s a -> s{_acrcAlt = a})
 
 instance GoogleRequest AccountsContainersRulesCreate'
@@ -163,16 +171,18 @@ instance GoogleRequest AccountsContainersRulesCreate'
         type Rs AccountsContainersRulesCreate' = Rule
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersRulesCreate{..}
-          = go _acrcQuotaUser _acrcPrettyPrint _acrcContainerId
+          AccountsContainersRulesCreate'{..}
+          = go _acrcQuotaUser (Just _acrcPrettyPrint)
+              _acrcContainerId
               _acrcUserIp
               _acrcAccountId
               _acrcKey
               _acrcOauthToken
               _acrcFields
-              _acrcAlt
+              (Just _acrcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersRulesCreateAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersRulesCreateResource)
                       r
                       u

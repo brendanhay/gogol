@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- using the source parameter.
 --
 -- /See:/ <https://developers.google.com/google-apps/activity/ Google Apps Activity API Reference> for @AppsactivityActivitiesList@.
-module AppsActivity.Activities.List
+module Network.Google.Resource.AppsActivity.Activities.List
     (
     -- * REST Resource
-      ActivitiesListAPI
+      ActivitiesListResource
 
     -- * Creating a Request
-    , activitiesList
-    , ActivitiesList
+    , activitiesList'
+    , ActivitiesList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -54,17 +55,26 @@ import           Network.Google.AppsActivity.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppsactivityActivitiesList@ which the
--- 'ActivitiesList' request conforms to.
-type ActivitiesListAPI =
+-- 'ActivitiesList'' request conforms to.
+type ActivitiesListResource =
      "activities" :>
-       QueryParam "drive.fileId" Text :>
-         QueryParam "drive.ancestorId" Text :>
-           QueryParam "groupingStrategy" Text :>
-             QueryParam "userId" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "pageSize" Int32 :>
-                     Get '[JSON] ListActivitiesResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "drive.fileId" Text :>
+               QueryParam "drive.ancestorId" Text :>
+                 QueryParam "groupingStrategy"
+                   AppsactivityActivitiesListGroupingStrategy
+                   :>
+                   QueryParam "userId" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "pageSize" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] ListActivitiesResponse
 
 -- | Returns a list of activities visible to the current logged in user.
 -- Visible activities are determined by the visiblity settings of the
@@ -73,14 +83,14 @@ type ActivitiesListAPI =
 -- similar. A request is scoped to activities from a given Google service
 -- using the source parameter.
 --
--- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+-- /See:/ 'activitiesList'' smart constructor.
+data ActivitiesList' = ActivitiesList'
     { _alQuotaUser        :: !(Maybe Text)
     , _alPrettyPrint      :: !Bool
     , _alUserIp           :: !(Maybe Text)
     , _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
-    , _alGroupingStrategy :: !Text
+    , _alGroupingStrategy :: !AppsactivityActivitiesListGroupingStrategy
     , _alUserId           :: !Text
     , _alKey              :: !(Maybe Text)
     , _alSource           :: !(Maybe Text)
@@ -88,7 +98,7 @@ data ActivitiesList = ActivitiesList
     , _alOauthToken       :: !(Maybe Text)
     , _alPageSize         :: !Int32
     , _alFields           :: !(Maybe Text)
-    , _alAlt              :: !Text
+    , _alAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -122,16 +132,16 @@ data ActivitiesList = ActivitiesList
 -- * 'alFields'
 --
 -- * 'alAlt'
-activitiesList
-    :: ActivitiesList
-activitiesList =
-    ActivitiesList
+activitiesList'
+    :: ActivitiesList'
+activitiesList' =
+    ActivitiesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
     , _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
-    , _alGroupingStrategy = "driveUi"
+    , _alGroupingStrategy = DriveUi
     , _alUserId = "me"
     , _alKey = Nothing
     , _alSource = Nothing
@@ -139,7 +149,7 @@ activitiesList =
     , _alOauthToken = Nothing
     , _alPageSize = 50
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,7 +185,7 @@ alDriveAncestorId
 
 -- | Indicates the strategy to use when grouping singleEvents items in the
 -- associated combinedEvent object.
-alGroupingStrategy :: Lens' ActivitiesList' Text
+alGroupingStrategy :: Lens' ActivitiesList' AppsactivityActivitiesListGroupingStrategy
 alGroupingStrategy
   = lens _alGroupingStrategy
       (\ s a -> s{_alGroupingStrategy = a})
@@ -217,14 +227,14 @@ alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Text
+alAlt :: Lens' ActivitiesList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
         request = requestWithRoute defReq appsActivityURL
-        requestWithRoute r u ActivitiesList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp
+        requestWithRoute r u ActivitiesList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
               _alDriveFileId
               _alDriveAncestorId
               (Just _alGroupingStrategy)
@@ -235,8 +245,9 @@ instance GoogleRequest ActivitiesList' where
               _alOauthToken
               (Just _alPageSize)
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ActivitiesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ActivitiesListResource)
                       r
                       u

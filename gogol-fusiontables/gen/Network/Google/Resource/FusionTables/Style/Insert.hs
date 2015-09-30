@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new style for the table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleInsert@.
-module FusionTables.Style.Insert
+module Network.Google.Resource.FusionTables.Style.Insert
     (
     -- * REST Resource
-      StyleInsertAPI
+      StyleInsertResource
 
     -- * Creating a Request
-    , styleInsert
-    , StyleInsert
+    , styleInsert'
+    , StyleInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleInsert@ which the
--- 'StyleInsert' request conforms to.
-type StyleInsertAPI =
+-- 'StyleInsert'' request conforms to.
+type StyleInsertResource =
      "tables" :>
        Capture "tableId" Text :>
-         "styles" :> Post '[JSON] StyleSetting
+         "styles" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] StyleSetting
 
 -- | Adds a new style for the table.
 --
--- /See:/ 'styleInsert' smart constructor.
-data StyleInsert = StyleInsert
+-- /See:/ 'styleInsert'' smart constructor.
+data StyleInsert' = StyleInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data StyleInsert = StyleInsert
     , _siOauthToken  :: !(Maybe Text)
     , _siTableId     :: !Text
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Text
+    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data StyleInsert = StyleInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-styleInsert
+styleInsert'
     :: Text -- ^ 'tableId'
-    -> StyleInsert
-styleInsert pSiTableId_ =
-    StyleInsert
+    -> StyleInsert'
+styleInsert' pSiTableId_ =
+    StyleInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIp = Nothing
@@ -94,7 +102,7 @@ styleInsert pSiTableId_ =
     , _siOauthToken = Nothing
     , _siTableId = pSiTableId_
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,17 +144,21 @@ siFields :: Lens' StyleInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' StyleInsert' Text
+siAlt :: Lens' StyleInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleInsert{..}
-          = go _siQuotaUser _siPrettyPrint _siUserIp _siKey
+        requestWithRoute r u StyleInsert'{..}
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+              _siKey
               _siOauthToken
               _siTableId
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy StyleInsertResource)
+                      r
+                      u

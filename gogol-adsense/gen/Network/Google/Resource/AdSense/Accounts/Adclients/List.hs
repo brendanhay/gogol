@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,170 +20,172 @@
 -- | List all ad clients in the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAdclientsList@.
-module AdSense.Accounts.Adclients.List
+module Network.Google.Resource.AdSense.Accounts.Adclients.List
     (
     -- * REST Resource
-      AccountsAdclientsListAPI
+      AccountsAdclientsListResource
 
     -- * Creating a Request
-    , accountsAdclientsList
-    , AccountsAdclientsList
+    , accountsAdclientsList'
+    , AccountsAdclientsList'
 
     -- * Request Lenses
-    , aalQuotaUser
-    , aalPrettyPrint
-    , aalUserIp
-    , aalAccountId
-    , aalKey
-    , aalPageToken
-    , aalOauthToken
-    , aalMaxResults
-    , aalFields
-    , aalAlt
+    , aaQuotaUser
+    , aaPrettyPrint
+    , aaUserIp
+    , aaAccountId
+    , aaKey
+    , aaPageToken
+    , aaOauthToken
+    , aaMaxResults
+    , aaFields
+    , aaAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAdclientsList@ which the
--- 'AccountsAdclientsList' request conforms to.
-type AccountsAdclientsListAPI =
+-- 'AccountsAdclientsList'' request conforms to.
+type AccountsAdclientsListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "adclients" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] AdClients
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] AdClients
 
 -- | List all ad clients in the specified account.
 --
--- /See:/ 'accountsAdclientsList' smart constructor.
-data AccountsAdclientsList = AccountsAdclientsList
-    { _aalQuotaUser   :: !(Maybe Text)
-    , _aalPrettyPrint :: !Bool
-    , _aalUserIp      :: !(Maybe Text)
-    , _aalAccountId   :: !Text
-    , _aalKey         :: !(Maybe Text)
-    , _aalPageToken   :: !(Maybe Text)
-    , _aalOauthToken  :: !(Maybe Text)
-    , _aalMaxResults  :: !(Maybe Int32)
-    , _aalFields      :: !(Maybe Text)
-    , _aalAlt         :: !Text
+-- /See:/ 'accountsAdclientsList'' smart constructor.
+data AccountsAdclientsList' = AccountsAdclientsList'
+    { _aaQuotaUser   :: !(Maybe Text)
+    , _aaPrettyPrint :: !Bool
+    , _aaUserIp      :: !(Maybe Text)
+    , _aaAccountId   :: !Text
+    , _aaKey         :: !(Maybe Text)
+    , _aaPageToken   :: !(Maybe Text)
+    , _aaOauthToken  :: !(Maybe Text)
+    , _aaMaxResults  :: !(Maybe Int32)
+    , _aaFields      :: !(Maybe Text)
+    , _aaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAdclientsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aalQuotaUser'
+-- * 'aaQuotaUser'
 --
--- * 'aalPrettyPrint'
+-- * 'aaPrettyPrint'
 --
--- * 'aalUserIp'
+-- * 'aaUserIp'
 --
--- * 'aalAccountId'
+-- * 'aaAccountId'
 --
--- * 'aalKey'
+-- * 'aaKey'
 --
--- * 'aalPageToken'
+-- * 'aaPageToken'
 --
--- * 'aalOauthToken'
+-- * 'aaOauthToken'
 --
--- * 'aalMaxResults'
+-- * 'aaMaxResults'
 --
--- * 'aalFields'
+-- * 'aaFields'
 --
--- * 'aalAlt'
-accountsAdclientsList
+-- * 'aaAlt'
+accountsAdclientsList'
     :: Text -- ^ 'accountId'
-    -> AccountsAdclientsList
-accountsAdclientsList pAalAccountId_ =
-    AccountsAdclientsList
-    { _aalQuotaUser = Nothing
-    , _aalPrettyPrint = True
-    , _aalUserIp = Nothing
-    , _aalAccountId = pAalAccountId_
-    , _aalKey = Nothing
-    , _aalPageToken = Nothing
-    , _aalOauthToken = Nothing
-    , _aalMaxResults = Nothing
-    , _aalFields = Nothing
-    , _aalAlt = "json"
+    -> AccountsAdclientsList'
+accountsAdclientsList' pAaAccountId_ =
+    AccountsAdclientsList'
+    { _aaQuotaUser = Nothing
+    , _aaPrettyPrint = True
+    , _aaUserIp = Nothing
+    , _aaAccountId = pAaAccountId_
+    , _aaKey = Nothing
+    , _aaPageToken = Nothing
+    , _aaOauthToken = Nothing
+    , _aaMaxResults = Nothing
+    , _aaFields = Nothing
+    , _aaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aalQuotaUser :: Lens' AccountsAdclientsList' (Maybe Text)
-aalQuotaUser
-  = lens _aalQuotaUser (\ s a -> s{_aalQuotaUser = a})
+aaQuotaUser :: Lens' AccountsAdclientsList' (Maybe Text)
+aaQuotaUser
+  = lens _aaQuotaUser (\ s a -> s{_aaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aalPrettyPrint :: Lens' AccountsAdclientsList' Bool
-aalPrettyPrint
-  = lens _aalPrettyPrint
-      (\ s a -> s{_aalPrettyPrint = a})
+aaPrettyPrint :: Lens' AccountsAdclientsList' Bool
+aaPrettyPrint
+  = lens _aaPrettyPrint
+      (\ s a -> s{_aaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aalUserIp :: Lens' AccountsAdclientsList' (Maybe Text)
-aalUserIp
-  = lens _aalUserIp (\ s a -> s{_aalUserIp = a})
+aaUserIp :: Lens' AccountsAdclientsList' (Maybe Text)
+aaUserIp = lens _aaUserIp (\ s a -> s{_aaUserIp = a})
 
 -- | Account for which to list ad clients.
-aalAccountId :: Lens' AccountsAdclientsList' Text
-aalAccountId
-  = lens _aalAccountId (\ s a -> s{_aalAccountId = a})
+aaAccountId :: Lens' AccountsAdclientsList' Text
+aaAccountId
+  = lens _aaAccountId (\ s a -> s{_aaAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AccountsAdclientsList' (Maybe Text)
-aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
+aaKey :: Lens' AccountsAdclientsList' (Maybe Text)
+aaKey = lens _aaKey (\ s a -> s{_aaKey = a})
 
 -- | A continuation token, used to page through ad clients. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-aalPageToken :: Lens' AccountsAdclientsList' (Maybe Text)
-aalPageToken
-  = lens _aalPageToken (\ s a -> s{_aalPageToken = a})
+aaPageToken :: Lens' AccountsAdclientsList' (Maybe Text)
+aaPageToken
+  = lens _aaPageToken (\ s a -> s{_aaPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aalOauthToken :: Lens' AccountsAdclientsList' (Maybe Text)
-aalOauthToken
-  = lens _aalOauthToken
-      (\ s a -> s{_aalOauthToken = a})
+aaOauthToken :: Lens' AccountsAdclientsList' (Maybe Text)
+aaOauthToken
+  = lens _aaOauthToken (\ s a -> s{_aaOauthToken = a})
 
 -- | The maximum number of ad clients to include in the response, used for
 -- paging.
-aalMaxResults :: Lens' AccountsAdclientsList' (Maybe Int32)
-aalMaxResults
-  = lens _aalMaxResults
-      (\ s a -> s{_aalMaxResults = a})
+aaMaxResults :: Lens' AccountsAdclientsList' (Maybe Int32)
+aaMaxResults
+  = lens _aaMaxResults (\ s a -> s{_aaMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aalFields :: Lens' AccountsAdclientsList' (Maybe Text)
-aalFields
-  = lens _aalFields (\ s a -> s{_aalFields = a})
+aaFields :: Lens' AccountsAdclientsList' (Maybe Text)
+aaFields = lens _aaFields (\ s a -> s{_aaFields = a})
 
 -- | Data format for the response.
-aalAlt :: Lens' AccountsAdclientsList' Text
-aalAlt = lens _aalAlt (\ s a -> s{_aalAlt = a})
+aaAlt :: Lens' AccountsAdclientsList' Alt
+aaAlt = lens _aaAlt (\ s a -> s{_aaAlt = a})
 
 instance GoogleRequest AccountsAdclientsList' where
         type Rs AccountsAdclientsList' = AdClients
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsAdclientsList{..}
-          = go _aalQuotaUser _aalPrettyPrint _aalUserIp
-              _aalAccountId
-              _aalKey
-              _aalPageToken
-              _aalOauthToken
-              _aalMaxResults
-              _aalFields
-              _aalAlt
+        requestWithRoute r u AccountsAdclientsList'{..}
+          = go _aaQuotaUser (Just _aaPrettyPrint) _aaUserIp
+              _aaAccountId
+              _aaKey
+              _aaPageToken
+              _aaOauthToken
+              _aaMaxResults
+              _aaFields
+              (Just _aaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAdclientsListAPI)
+                      (Proxy :: Proxy AccountsAdclientsListResource)
                       r
                       u

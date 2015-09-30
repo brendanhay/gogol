@@ -44,6 +44,9 @@ module Network.Google.GamesAppState.Types
     , updateRequest
     , urKind
     , urData
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GamesAppState.Types.Product
@@ -51,7 +54,7 @@ import           Network.Google.GamesAppState.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google App State API.
-gamesAppStateURL :: BaseURL
+gamesAppStateURL :: BaseUrl
 gamesAppStateURL
   = BaseUrl Https
       "https://www.googleapis.com/appstate/v1/"

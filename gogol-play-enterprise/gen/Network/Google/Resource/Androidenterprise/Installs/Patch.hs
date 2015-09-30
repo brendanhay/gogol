@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- necessary. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseInstallsPatch@.
-module Androidenterprise.Installs.Patch
+module Network.Google.Resource.Androidenterprise.Installs.Patch
     (
     -- * REST Resource
-      InstallsPatchAPI
+      InstallsPatchResource
 
     -- * Creating a Request
-    , installsPatch
-    , InstallsPatch
+    , installsPatch'
+    , InstallsPatch'
 
     -- * Request Lenses
     , ipQuotaUser
@@ -48,8 +49,8 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseInstallsPatch@ which the
--- 'InstallsPatch' request conforms to.
-type InstallsPatchAPI =
+-- 'InstallsPatch'' request conforms to.
+type InstallsPatchResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
@@ -57,14 +58,21 @@ type InstallsPatchAPI =
              "devices" :>
                Capture "deviceId" Text :>
                  "installs" :>
-                   Capture "installId" Text :> Patch '[JSON] Install
+                   Capture "installId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Patch '[JSON] Install
 
 -- | Requests to install the latest version of an app to a device. If the app
 -- is already installed then it is updated to the latest version if
 -- necessary. This method supports patch semantics.
 --
--- /See:/ 'installsPatch' smart constructor.
-data InstallsPatch = InstallsPatch
+-- /See:/ 'installsPatch'' smart constructor.
+data InstallsPatch' = InstallsPatch'
     { _ipQuotaUser    :: !(Maybe Text)
     , _ipPrettyPrint  :: !Bool
     , _ipEnterpriseId :: !Text
@@ -75,7 +83,7 @@ data InstallsPatch = InstallsPatch
     , _ipDeviceId     :: !Text
     , _ipOauthToken   :: !(Maybe Text)
     , _ipFields       :: !(Maybe Text)
-    , _ipAlt          :: !Text
+    , _ipAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsPatch'' with the minimum fields required to make a request.
@@ -103,14 +111,14 @@ data InstallsPatch = InstallsPatch
 -- * 'ipFields'
 --
 -- * 'ipAlt'
-installsPatch
+installsPatch'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
-    -> InstallsPatch
-installsPatch pIpEnterpriseId_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
-    InstallsPatch
+    -> InstallsPatch'
+installsPatch' pIpEnterpriseId_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
+    InstallsPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipEnterpriseId = pIpEnterpriseId_
@@ -121,7 +129,7 @@ installsPatch pIpEnterpriseId_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
     , _ipDeviceId = pIpDeviceId_
     , _ipOauthToken = Nothing
     , _ipFields = Nothing
-    , _ipAlt = "json"
+    , _ipAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,14 +187,15 @@ ipFields :: Lens' InstallsPatch' (Maybe Text)
 ipFields = lens _ipFields (\ s a -> s{_ipFields = a})
 
 -- | Data format for the response.
-ipAlt :: Lens' InstallsPatch' Text
+ipAlt :: Lens' InstallsPatch' Alt
 ipAlt = lens _ipAlt (\ s a -> s{_ipAlt = a})
 
 instance GoogleRequest InstallsPatch' where
         type Rs InstallsPatch' = Install
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u InstallsPatch{..}
-          = go _ipQuotaUser _ipPrettyPrint _ipEnterpriseId
+        requestWithRoute r u InstallsPatch'{..}
+          = go _ipQuotaUser (Just _ipPrettyPrint)
+              _ipEnterpriseId
               _ipUserIp
               _ipUserId
               _ipInstallId
@@ -194,7 +203,9 @@ instance GoogleRequest InstallsPatch' where
               _ipDeviceId
               _ipOauthToken
               _ipFields
-              _ipAlt
+              (Just _ipAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstallsPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy InstallsPatchResource)
+                      r
                       u

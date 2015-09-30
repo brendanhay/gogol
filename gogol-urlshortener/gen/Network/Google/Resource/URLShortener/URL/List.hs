@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of URLs shortened by a user.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLList@.
-module URLShortener.URL.List
+module Network.Google.Resource.URLShortener.URL.List
     (
     -- * REST Resource
-      UrlListAPI
+      UrlListResource
 
     -- * Creating a Request
-    , uRLList
-    , URLList
+    , uRLList'
+    , URLList'
 
     -- * Request Lenses
     , ulQuotaUser
@@ -44,27 +45,34 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLList@ which the
--- 'URLList' request conforms to.
-type UrlListAPI =
+-- 'URLList'' request conforms to.
+type UrlListResource =
      "url" :>
        "history" :>
-         QueryParam "start-token" Text :>
-           QueryParam "projection" Text :>
-             Get '[JSON] URLHistory
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "start-token" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "projection" URLshortenerURLListProjection
+                     :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] URLHistory
 
 -- | Retrieves a list of URLs shortened by a user.
 --
--- /See:/ 'uRLList' smart constructor.
-data URLList = URLList
+-- /See:/ 'uRLList'' smart constructor.
+data URLList' = URLList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
     , _ulUserIp      :: !(Maybe Text)
     , _ulStartToken  :: !(Maybe Text)
     , _ulKey         :: !(Maybe Text)
-    , _ulProjection  :: !(Maybe Text)
+    , _ulProjection  :: !(Maybe URLshortenerURLListProjection)
     , _ulOauthToken  :: !(Maybe Text)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Text
+    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLList'' with the minimum fields required to make a request.
@@ -88,10 +96,10 @@ data URLList = URLList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-uRLList
-    :: URLList
-uRLList =
-    URLList
+uRLList'
+    :: URLList'
+uRLList' =
+    URLList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulUserIp = Nothing
@@ -100,7 +108,7 @@ uRLList =
     , _ulProjection = Nothing
     , _ulOauthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ ulKey :: Lens' URLList' (Maybe Text)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Additional information to return.
-ulProjection :: Lens' URLList' (Maybe Text)
+ulProjection :: Lens' URLList' (Maybe URLshortenerURLListProjection)
 ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
@@ -147,19 +155,20 @@ ulFields :: Lens' URLList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' URLList' Text
+ulAlt :: Lens' URLList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
         request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLList{..}
-          = go _ulQuotaUser _ulPrettyPrint _ulUserIp
+        requestWithRoute r u URLList'{..}
+          = go _ulQuotaUser (Just _ulPrettyPrint) _ulUserIp
               _ulStartToken
               _ulKey
               _ulProjection
               _ulOauthToken
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UrlListResource) r
+                      u

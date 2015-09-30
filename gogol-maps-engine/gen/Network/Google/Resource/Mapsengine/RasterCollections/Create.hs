@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a raster collection asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsCreate@.
-module Mapsengine.RasterCollections.Create
+module Network.Google.Resource.Mapsengine.RasterCollections.Create
     (
     -- * REST Resource
-      RasterCollectionsCreateAPI
+      RasterCollectionsCreateResource
 
     -- * Creating a Request
-    , rasterCollectionsCreate
-    , RasterCollectionsCreate
+    , rasterCollectionsCreate'
+    , RasterCollectionsCreate'
 
     -- * Request Lenses
     , rccQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsCreate@ which the
--- 'RasterCollectionsCreate' request conforms to.
-type RasterCollectionsCreateAPI =
-     "rasterCollections" :> Post '[JSON] RasterCollection
+-- 'RasterCollectionsCreate'' request conforms to.
+type RasterCollectionsCreateResource =
+     "rasterCollections" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] RasterCollection
 
 -- | Create a raster collection asset.
 --
--- /See:/ 'rasterCollectionsCreate' smart constructor.
-data RasterCollectionsCreate = RasterCollectionsCreate
+-- /See:/ 'rasterCollectionsCreate'' smart constructor.
+data RasterCollectionsCreate' = RasterCollectionsCreate'
     { _rccQuotaUser   :: !(Maybe Text)
     , _rccPrettyPrint :: !Bool
     , _rccUserIp      :: !(Maybe Text)
     , _rccKey         :: !(Maybe Text)
     , _rccOauthToken  :: !(Maybe Text)
     , _rccFields      :: !(Maybe Text)
-    , _rccAlt         :: !Text
+    , _rccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsCreate'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data RasterCollectionsCreate = RasterCollectionsCreate
 -- * 'rccFields'
 --
 -- * 'rccAlt'
-rasterCollectionsCreate
-    :: RasterCollectionsCreate
-rasterCollectionsCreate =
-    RasterCollectionsCreate
+rasterCollectionsCreate'
+    :: RasterCollectionsCreate'
+rasterCollectionsCreate' =
+    RasterCollectionsCreate'
     { _rccQuotaUser = Nothing
     , _rccPrettyPrint = True
     , _rccUserIp = Nothing
     , _rccKey = Nothing
     , _rccOauthToken = Nothing
     , _rccFields = Nothing
-    , _rccAlt = "json"
+    , _rccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,19 +134,20 @@ rccFields
   = lens _rccFields (\ s a -> s{_rccFields = a})
 
 -- | Data format for the response.
-rccAlt :: Lens' RasterCollectionsCreate' Text
+rccAlt :: Lens' RasterCollectionsCreate' Alt
 rccAlt = lens _rccAlt (\ s a -> s{_rccAlt = a})
 
 instance GoogleRequest RasterCollectionsCreate' where
         type Rs RasterCollectionsCreate' = RasterCollection
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsCreate{..}
-          = go _rccQuotaUser _rccPrettyPrint _rccUserIp _rccKey
+        requestWithRoute r u RasterCollectionsCreate'{..}
+          = go _rccQuotaUser (Just _rccPrettyPrint) _rccUserIp
+              _rccKey
               _rccOauthToken
               _rccFields
-              _rccAlt
+              (Just _rccAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsCreateAPI)
+                      (Proxy :: Proxy RasterCollectionsCreateResource)
                       r
                       u

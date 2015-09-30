@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,141 +23,152 @@
 -- call.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesDelete@.
-module Androidenterprise.Enterprises.Delete
+module Network.Google.Resource.Androidenterprise.Enterprises.Delete
     (
     -- * REST Resource
-      EnterprisesDeleteAPI
+      EnterprisesDeleteResource
 
     -- * Creating a Request
-    , enterprisesDelete
-    , EnterprisesDelete
+    , enterprisesDelete'
+    , EnterprisesDelete'
 
     -- * Request Lenses
-    , edQuotaUser
-    , edPrettyPrint
-    , edEnterpriseId
-    , edUserIp
-    , edKey
-    , edOauthToken
-    , edFields
-    , edAlt
+    , eddQuotaUser
+    , eddPrettyPrint
+    , eddEnterpriseId
+    , eddUserIp
+    , eddKey
+    , eddOauthToken
+    , eddFields
+    , eddAlt
     ) where
 
 import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesDelete@ which the
--- 'EnterprisesDelete' request conforms to.
-type EnterprisesDeleteAPI =
+-- 'EnterprisesDelete'' request conforms to.
+type EnterprisesDeleteResource =
      "enterprises" :>
-       Capture "enterpriseId" Text :> Delete '[JSON] ()
+       Capture "enterpriseId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes the binding between the MDM and enterprise. This is now
 -- deprecated; use this to unenroll customers that were previously enrolled
 -- with the \'insert\' call, then enroll them again with the \'enroll\'
 -- call.
 --
--- /See:/ 'enterprisesDelete' smart constructor.
-data EnterprisesDelete = EnterprisesDelete
-    { _edQuotaUser    :: !(Maybe Text)
-    , _edPrettyPrint  :: !Bool
-    , _edEnterpriseId :: !Text
-    , _edUserIp       :: !(Maybe Text)
-    , _edKey          :: !(Maybe Text)
-    , _edOauthToken   :: !(Maybe Text)
-    , _edFields       :: !(Maybe Text)
-    , _edAlt          :: !Text
+-- /See:/ 'enterprisesDelete'' smart constructor.
+data EnterprisesDelete' = EnterprisesDelete'
+    { _eddQuotaUser    :: !(Maybe Text)
+    , _eddPrettyPrint  :: !Bool
+    , _eddEnterpriseId :: !Text
+    , _eddUserIp       :: !(Maybe Text)
+    , _eddKey          :: !(Maybe Text)
+    , _eddOauthToken   :: !(Maybe Text)
+    , _eddFields       :: !(Maybe Text)
+    , _eddAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'edQuotaUser'
+-- * 'eddQuotaUser'
 --
--- * 'edPrettyPrint'
+-- * 'eddPrettyPrint'
 --
--- * 'edEnterpriseId'
+-- * 'eddEnterpriseId'
 --
--- * 'edUserIp'
+-- * 'eddUserIp'
 --
--- * 'edKey'
+-- * 'eddKey'
 --
--- * 'edOauthToken'
+-- * 'eddOauthToken'
 --
--- * 'edFields'
+-- * 'eddFields'
 --
--- * 'edAlt'
-enterprisesDelete
+-- * 'eddAlt'
+enterprisesDelete'
     :: Text -- ^ 'enterpriseId'
-    -> EnterprisesDelete
-enterprisesDelete pEdEnterpriseId_ =
-    EnterprisesDelete
-    { _edQuotaUser = Nothing
-    , _edPrettyPrint = True
-    , _edEnterpriseId = pEdEnterpriseId_
-    , _edUserIp = Nothing
-    , _edKey = Nothing
-    , _edOauthToken = Nothing
-    , _edFields = Nothing
-    , _edAlt = "json"
+    -> EnterprisesDelete'
+enterprisesDelete' pEddEnterpriseId_ =
+    EnterprisesDelete'
+    { _eddQuotaUser = Nothing
+    , _eddPrettyPrint = True
+    , _eddEnterpriseId = pEddEnterpriseId_
+    , _eddUserIp = Nothing
+    , _eddKey = Nothing
+    , _eddOauthToken = Nothing
+    , _eddFields = Nothing
+    , _eddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-edQuotaUser :: Lens' EnterprisesDelete' (Maybe Text)
-edQuotaUser
-  = lens _edQuotaUser (\ s a -> s{_edQuotaUser = a})
+eddQuotaUser :: Lens' EnterprisesDelete' (Maybe Text)
+eddQuotaUser
+  = lens _eddQuotaUser (\ s a -> s{_eddQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-edPrettyPrint :: Lens' EnterprisesDelete' Bool
-edPrettyPrint
-  = lens _edPrettyPrint
-      (\ s a -> s{_edPrettyPrint = a})
+eddPrettyPrint :: Lens' EnterprisesDelete' Bool
+eddPrettyPrint
+  = lens _eddPrettyPrint
+      (\ s a -> s{_eddPrettyPrint = a})
 
 -- | The ID of the enterprise.
-edEnterpriseId :: Lens' EnterprisesDelete' Text
-edEnterpriseId
-  = lens _edEnterpriseId
-      (\ s a -> s{_edEnterpriseId = a})
+eddEnterpriseId :: Lens' EnterprisesDelete' Text
+eddEnterpriseId
+  = lens _eddEnterpriseId
+      (\ s a -> s{_eddEnterpriseId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-edUserIp :: Lens' EnterprisesDelete' (Maybe Text)
-edUserIp = lens _edUserIp (\ s a -> s{_edUserIp = a})
+eddUserIp :: Lens' EnterprisesDelete' (Maybe Text)
+eddUserIp
+  = lens _eddUserIp (\ s a -> s{_eddUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-edKey :: Lens' EnterprisesDelete' (Maybe Text)
-edKey = lens _edKey (\ s a -> s{_edKey = a})
+eddKey :: Lens' EnterprisesDelete' (Maybe Text)
+eddKey = lens _eddKey (\ s a -> s{_eddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-edOauthToken :: Lens' EnterprisesDelete' (Maybe Text)
-edOauthToken
-  = lens _edOauthToken (\ s a -> s{_edOauthToken = a})
+eddOauthToken :: Lens' EnterprisesDelete' (Maybe Text)
+eddOauthToken
+  = lens _eddOauthToken
+      (\ s a -> s{_eddOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-edFields :: Lens' EnterprisesDelete' (Maybe Text)
-edFields = lens _edFields (\ s a -> s{_edFields = a})
+eddFields :: Lens' EnterprisesDelete' (Maybe Text)
+eddFields
+  = lens _eddFields (\ s a -> s{_eddFields = a})
 
 -- | Data format for the response.
-edAlt :: Lens' EnterprisesDelete' Text
-edAlt = lens _edAlt (\ s a -> s{_edAlt = a})
+eddAlt :: Lens' EnterprisesDelete' Alt
+eddAlt = lens _eddAlt (\ s a -> s{_eddAlt = a})
 
 instance GoogleRequest EnterprisesDelete' where
         type Rs EnterprisesDelete' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesDelete{..}
-          = go _edQuotaUser _edPrettyPrint _edEnterpriseId
-              _edUserIp
-              _edKey
-              _edOauthToken
-              _edFields
-              _edAlt
+        requestWithRoute r u EnterprisesDelete'{..}
+          = go _eddQuotaUser (Just _eddPrettyPrint)
+              _eddEnterpriseId
+              _eddUserIp
+              _eddKey
+              _eddOauthToken
+              _eddFields
+              (Just _eddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EnterprisesDeleteAPI)
+                      (Proxy :: Proxy EnterprisesDeleteResource)
                       r
                       u

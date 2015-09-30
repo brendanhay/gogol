@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the details of a collection.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseCollectionsGet@.
-module Androidenterprise.Collections.Get
+module Network.Google.Resource.Androidenterprise.Collections.Get
     (
     -- * REST Resource
-      CollectionsGetAPI
+      CollectionsGetResource
 
     -- * Creating a Request
-    , collectionsGet
-    , CollectionsGet
+    , collectionsGet'
+    , CollectionsGet'
 
     -- * Request Lenses
     , cggQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseCollectionsGet@ which the
--- 'CollectionsGet' request conforms to.
-type CollectionsGetAPI =
+-- 'CollectionsGet'' request conforms to.
+type CollectionsGetResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "collections" :>
-           Capture "collectionId" Text :> Get '[JSON] Collection
+           Capture "collectionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Collection
 
 -- | Retrieves the details of a collection.
 --
--- /See:/ 'collectionsGet' smart constructor.
-data CollectionsGet = CollectionsGet
+-- /See:/ 'collectionsGet'' smart constructor.
+data CollectionsGet' = CollectionsGet'
     { _cggQuotaUser    :: !(Maybe Text)
     , _cggPrettyPrint  :: !Bool
     , _cggEnterpriseId :: !Text
@@ -63,7 +71,7 @@ data CollectionsGet = CollectionsGet
     , _cggKey          :: !(Maybe Text)
     , _cggOauthToken   :: !(Maybe Text)
     , _cggFields       :: !(Maybe Text)
-    , _cggAlt          :: !Text
+    , _cggAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CollectionsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CollectionsGet = CollectionsGet
 -- * 'cggFields'
 --
 -- * 'cggAlt'
-collectionsGet
+collectionsGet'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'collectionId'
-    -> CollectionsGet
-collectionsGet pCggEnterpriseId_ pCggCollectionId_ =
-    CollectionsGet
+    -> CollectionsGet'
+collectionsGet' pCggEnterpriseId_ pCggCollectionId_ =
+    CollectionsGet'
     { _cggQuotaUser = Nothing
     , _cggPrettyPrint = True
     , _cggEnterpriseId = pCggEnterpriseId_
@@ -101,7 +109,7 @@ collectionsGet pCggEnterpriseId_ pCggCollectionId_ =
     , _cggKey = Nothing
     , _cggOauthToken = Nothing
     , _cggFields = Nothing
-    , _cggAlt = "json"
+    , _cggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,21 +161,23 @@ cggFields
   = lens _cggFields (\ s a -> s{_cggFields = a})
 
 -- | Data format for the response.
-cggAlt :: Lens' CollectionsGet' Text
+cggAlt :: Lens' CollectionsGet' Alt
 cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
 
 instance GoogleRequest CollectionsGet' where
         type Rs CollectionsGet' = Collection
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u CollectionsGet{..}
-          = go _cggQuotaUser _cggPrettyPrint _cggEnterpriseId
+        requestWithRoute r u CollectionsGet'{..}
+          = go _cggQuotaUser (Just _cggPrettyPrint)
+              _cggEnterpriseId
               _cggUserIp
               _cggCollectionId
               _cggKey
               _cggOauthToken
               _cggFields
-              _cggAlt
+              (Just _cggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CollectionsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CollectionsGetResource)
                       r
                       u

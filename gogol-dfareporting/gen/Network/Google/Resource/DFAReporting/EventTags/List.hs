@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsList@.
-module DFAReporting.EventTags.List
+module Network.Google.Resource.DFAReporting.EventTags.List
     (
     -- * REST Resource
-      EventTagsListAPI
+      EventTagsListResource
 
     -- * Creating a Request
-    , eventTagsList
-    , EventTagsList
+    , eventTagsList'
+    , EventTagsList'
 
     -- * Request Lenses
     , etlQuotaUser
@@ -53,31 +54,44 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsList@ which the
--- 'EventTagsList' request conforms to.
-type EventTagsListAPI =
+-- 'EventTagsList'' request conforms to.
+type EventTagsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           QueryParam "definitionsOnly" Bool :>
-             QueryParams "eventTagTypes" Text :>
-               QueryParam "enabled" Bool :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "searchString" Text :>
-                     QueryParam "campaignId" Int64 :>
-                       QueryParams "ids" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "adId" Int64 :>
-                             QueryParam "sortField" Text :>
-                               Get '[JSON] EventTagsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "definitionsOnly" Bool :>
+                 QueryParams "eventTagTypes"
+                   DfareportingEventTagsListEventTagTypes
+                   :>
+                   QueryParam "enabled" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParam "campaignId" Int64 :>
+                             QueryParams "ids" Int64 :>
+                               QueryParam "sortOrder"
+                                 DfareportingEventTagsListSortOrder
+                                 :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "adId" Int64 :>
+                                     QueryParam "sortField"
+                                       DfareportingEventTagsListSortField
+                                       :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] EventTagsListResponse
 
 -- | Retrieves a list of event tags, possibly filtered.
 --
--- /See:/ 'eventTagsList' smart constructor.
-data EventTagsList = EventTagsList
+-- /See:/ 'eventTagsList'' smart constructor.
+data EventTagsList' = EventTagsList'
     { _etlQuotaUser       :: !(Maybe Text)
     , _etlPrettyPrint     :: !Bool
     , _etlDefinitionsOnly :: !(Maybe Bool)
-    , _etlEventTagTypes   :: !(Maybe Text)
+    , _etlEventTagTypes   :: !(Maybe DfareportingEventTagsListEventTagTypes)
     , _etlEnabled         :: !(Maybe Bool)
     , _etlUserIp          :: !(Maybe Text)
     , _etlAdvertiserId    :: !(Maybe Int64)
@@ -85,13 +99,13 @@ data EventTagsList = EventTagsList
     , _etlCampaignId      :: !(Maybe Int64)
     , _etlIds             :: !(Maybe Int64)
     , _etlProfileId       :: !Int64
-    , _etlSortOrder       :: !(Maybe Text)
+    , _etlSortOrder       :: !(Maybe DfareportingEventTagsListSortOrder)
     , _etlKey             :: !(Maybe Text)
     , _etlAdId            :: !(Maybe Int64)
-    , _etlSortField       :: !(Maybe Text)
+    , _etlSortField       :: !(Maybe DfareportingEventTagsListSortField)
     , _etlOauthToken      :: !(Maybe Text)
     , _etlFields          :: !(Maybe Text)
-    , _etlAlt             :: !Text
+    , _etlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsList'' with the minimum fields required to make a request.
@@ -133,11 +147,11 @@ data EventTagsList = EventTagsList
 -- * 'etlFields'
 --
 -- * 'etlAlt'
-eventTagsList
+eventTagsList'
     :: Int64 -- ^ 'profileId'
-    -> EventTagsList
-eventTagsList pEtlProfileId_ =
-    EventTagsList
+    -> EventTagsList'
+eventTagsList' pEtlProfileId_ =
+    EventTagsList'
     { _etlQuotaUser = Nothing
     , _etlPrettyPrint = True
     , _etlDefinitionsOnly = Nothing
@@ -155,7 +169,7 @@ eventTagsList pEtlProfileId_ =
     , _etlSortField = Nothing
     , _etlOauthToken = Nothing
     , _etlFields = Nothing
-    , _etlAlt = "json"
+    , _etlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,7 +200,7 @@ etlDefinitionsOnly
 -- types can be used to specify whether to use a third-party pixel, a
 -- third-party JavaScript URL, or a third-party click-through URL for
 -- either impression or click tracking.
-etlEventTagTypes :: Lens' EventTagsList' (Maybe Text)
+etlEventTagTypes :: Lens' EventTagsList' (Maybe DfareportingEventTagsListEventTagTypes)
 etlEventTagTypes
   = lens _etlEventTagTypes
       (\ s a -> s{_etlEventTagTypes = a})
@@ -242,7 +256,7 @@ etlProfileId
   = lens _etlProfileId (\ s a -> s{_etlProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-etlSortOrder :: Lens' EventTagsList' (Maybe Text)
+etlSortOrder :: Lens' EventTagsList' (Maybe DfareportingEventTagsListSortOrder)
 etlSortOrder
   = lens _etlSortOrder (\ s a -> s{_etlSortOrder = a})
 
@@ -257,7 +271,7 @@ etlAdId :: Lens' EventTagsList' (Maybe Int64)
 etlAdId = lens _etlAdId (\ s a -> s{_etlAdId = a})
 
 -- | Field by which to sort the list.
-etlSortField :: Lens' EventTagsList' (Maybe Text)
+etlSortField :: Lens' EventTagsList' (Maybe DfareportingEventTagsListSortField)
 etlSortField
   = lens _etlSortField (\ s a -> s{_etlSortField = a})
 
@@ -273,14 +287,14 @@ etlFields
   = lens _etlFields (\ s a -> s{_etlFields = a})
 
 -- | Data format for the response.
-etlAlt :: Lens' EventTagsList' Text
+etlAlt :: Lens' EventTagsList' Alt
 etlAlt = lens _etlAlt (\ s a -> s{_etlAlt = a})
 
 instance GoogleRequest EventTagsList' where
         type Rs EventTagsList' = EventTagsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsList{..}
-          = go _etlQuotaUser _etlPrettyPrint
+        requestWithRoute r u EventTagsList'{..}
+          = go _etlQuotaUser (Just _etlPrettyPrint)
               _etlDefinitionsOnly
               _etlEventTagTypes
               _etlEnabled
@@ -296,7 +310,9 @@ instance GoogleRequest EventTagsList' where
               _etlSortField
               _etlOauthToken
               _etlFields
-              _etlAlt
+              (Just _etlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsListResource)
+                      r
                       u

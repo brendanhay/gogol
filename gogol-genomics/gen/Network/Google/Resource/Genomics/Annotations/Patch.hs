@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationsPatch@.
-module Genomics.Annotations.Patch
+module Network.Google.Resource.Genomics.Annotations.Patch
     (
     -- * REST Resource
-      AnnotationsPatchAPI
+      AnnotationsPatchResource
 
     -- * Creating a Request
-    , annotationsPatch
-    , AnnotationsPatch
+    , annotationsPatch'
+    , AnnotationsPatch'
 
     -- * Request Lenses
     , apQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsPatch@ which the
--- 'AnnotationsPatch' request conforms to.
-type AnnotationsPatchAPI =
+-- 'AnnotationsPatch'' request conforms to.
+type AnnotationsPatchResource =
      "annotations" :>
        Capture "annotationId" Text :>
-         Patch '[JSON] Annotation
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Patch '[JSON] Annotation
 
 -- | Updates an annotation. The update must respect all mutability
 -- restrictions and other invariants described on the annotation resource.
 -- Caller must have WRITE permission for the associated dataset. This
 -- method supports patch semantics.
 --
--- /See:/ 'annotationsPatch' smart constructor.
-data AnnotationsPatch = AnnotationsPatch
+-- /See:/ 'annotationsPatch'' smart constructor.
+data AnnotationsPatch' = AnnotationsPatch'
     { _apQuotaUser    :: !(Maybe Text)
     , _apPrettyPrint  :: !Bool
     , _apUserIp       :: !(Maybe Text)
@@ -66,7 +73,7 @@ data AnnotationsPatch = AnnotationsPatch
     , _apAnnotationId :: !Text
     , _apOauthToken   :: !(Maybe Text)
     , _apFields       :: !(Maybe Text)
-    , _apAlt          :: !Text
+    , _apAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsPatch'' with the minimum fields required to make a request.
@@ -88,11 +95,11 @@ data AnnotationsPatch = AnnotationsPatch
 -- * 'apFields'
 --
 -- * 'apAlt'
-annotationsPatch
+annotationsPatch'
     :: Text -- ^ 'annotationId'
-    -> AnnotationsPatch
-annotationsPatch pApAnnotationId_ =
-    AnnotationsPatch
+    -> AnnotationsPatch'
+annotationsPatch' pApAnnotationId_ =
+    AnnotationsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apUserIp = Nothing
@@ -100,7 +107,7 @@ annotationsPatch pApAnnotationId_ =
     , _apAnnotationId = pApAnnotationId_
     , _apOauthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = "json"
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,20 +150,21 @@ apFields :: Lens' AnnotationsPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-apAlt :: Lens' AnnotationsPatch' Text
+apAlt :: Lens' AnnotationsPatch' Alt
 apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest AnnotationsPatch' where
         type Rs AnnotationsPatch' = Annotation
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsPatch{..}
-          = go _apQuotaUser _apPrettyPrint _apUserIp _apKey
+        requestWithRoute r u AnnotationsPatch'{..}
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+              _apKey
               _apAnnotationId
               _apOauthToken
               _apFields
-              _apAlt
+              (Just _apAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationsPatchAPI)
+                      (Proxy :: Proxy AnnotationsPatchResource)
                       r
                       u

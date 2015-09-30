@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing style.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesStyleUpdate@.
-module FusionTables.Style.Update
+module Network.Google.Resource.FusionTables.Style.Update
     (
     -- * REST Resource
-      StyleUpdateAPI
+      StyleUpdateResource
 
     -- * Creating a Request
-    , styleUpdate
-    , StyleUpdate
+    , styleUpdate'
+    , StyleUpdate'
 
     -- * Request Lenses
     , suQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesStyleUpdate@ which the
--- 'StyleUpdate' request conforms to.
-type StyleUpdateAPI =
+-- 'StyleUpdate'' request conforms to.
+type StyleUpdateResource =
      "tables" :>
        Capture "tableId" Text :>
          "styles" :>
-           Capture "styleId" Int32 :> Put '[JSON] StyleSetting
+           Capture "styleId" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] StyleSetting
 
 -- | Updates an existing style.
 --
--- /See:/ 'styleUpdate' smart constructor.
-data StyleUpdate = StyleUpdate
+-- /See:/ 'styleUpdate'' smart constructor.
+data StyleUpdate' = StyleUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data StyleUpdate = StyleUpdate
     , _suOauthToken  :: !(Maybe Text)
     , _suTableId     :: !Text
     , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Text
+    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data StyleUpdate = StyleUpdate
 -- * 'suFields'
 --
 -- * 'suAlt'
-styleUpdate
+styleUpdate'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
-    -> StyleUpdate
-styleUpdate pSuStyleId_ pSuTableId_ =
-    StyleUpdate
+    -> StyleUpdate'
+styleUpdate' pSuStyleId_ pSuTableId_ =
+    StyleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIp = Nothing
@@ -101,7 +109,7 @@ styleUpdate pSuStyleId_ pSuTableId_ =
     , _suOauthToken = Nothing
     , _suTableId = pSuTableId_
     , _suFields = Nothing
-    , _suAlt = "json"
+    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,18 +156,22 @@ suFields :: Lens' StyleUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' StyleUpdate' Text
+suAlt :: Lens' StyleUpdate' Alt
 suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest StyleUpdate' where
         type Rs StyleUpdate' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u StyleUpdate{..}
-          = go _suQuotaUser _suPrettyPrint _suUserIp _suKey
+        requestWithRoute r u StyleUpdate'{..}
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+              _suKey
               _suStyleId
               _suOauthToken
               _suTableId
               _suFields
-              _suAlt
+              (Just _suAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StyleUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy StyleUpdateResource)
+                      r
+                      u

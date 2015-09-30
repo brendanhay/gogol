@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Search for orders using pql query
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceordersSearch@.
-module AdExchangeBuyer.Marketplaceorders.Search
+module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Search
     (
     -- * REST Resource
-      MarketplaceordersSearchAPI
+      MarketplaceordersSearchResource
 
     -- * Creating a Request
-    , marketplaceordersSearch
-    , MarketplaceordersSearch
+    , marketplaceordersSearch'
+    , MarketplaceordersSearch'
 
     -- * Request Lenses
     , mssQuotaUser
@@ -43,17 +44,23 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerMarketplaceordersSearch@ which the
--- 'MarketplaceordersSearch' request conforms to.
-type MarketplaceordersSearchAPI =
+-- 'MarketplaceordersSearch'' request conforms to.
+type MarketplaceordersSearchResource =
      "marketplaceOrders" :>
        "search" :>
-         QueryParam "pqlQuery" Text :>
-           Get '[JSON] GetOrdersResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pqlQuery" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] GetOrdersResponse
 
 -- | Search for orders using pql query
 --
--- /See:/ 'marketplaceordersSearch' smart constructor.
-data MarketplaceordersSearch = MarketplaceordersSearch
+-- /See:/ 'marketplaceordersSearch'' smart constructor.
+data MarketplaceordersSearch' = MarketplaceordersSearch'
     { _mssQuotaUser   :: !(Maybe Text)
     , _mssPrettyPrint :: !Bool
     , _mssUserIp      :: !(Maybe Text)
@@ -61,7 +68,7 @@ data MarketplaceordersSearch = MarketplaceordersSearch
     , _mssPqlQuery    :: !(Maybe Text)
     , _mssOauthToken  :: !(Maybe Text)
     , _mssFields      :: !(Maybe Text)
-    , _mssAlt         :: !Text
+    , _mssAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceordersSearch'' with the minimum fields required to make a request.
@@ -83,10 +90,10 @@ data MarketplaceordersSearch = MarketplaceordersSearch
 -- * 'mssFields'
 --
 -- * 'mssAlt'
-marketplaceordersSearch
-    :: MarketplaceordersSearch
-marketplaceordersSearch =
-    MarketplaceordersSearch
+marketplaceordersSearch'
+    :: MarketplaceordersSearch'
+marketplaceordersSearch' =
+    MarketplaceordersSearch'
     { _mssQuotaUser = Nothing
     , _mssPrettyPrint = True
     , _mssUserIp = Nothing
@@ -94,7 +101,7 @@ marketplaceordersSearch =
     , _mssPqlQuery = Nothing
     , _mssOauthToken = Nothing
     , _mssFields = Nothing
-    , _mssAlt = "json"
+    , _mssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +146,21 @@ mssFields
   = lens _mssFields (\ s a -> s{_mssFields = a})
 
 -- | Data format for the response.
-mssAlt :: Lens' MarketplaceordersSearch' Text
+mssAlt :: Lens' MarketplaceordersSearch' Alt
 mssAlt = lens _mssAlt (\ s a -> s{_mssAlt = a})
 
 instance GoogleRequest MarketplaceordersSearch' where
         type Rs MarketplaceordersSearch' = GetOrdersResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u MarketplaceordersSearch{..}
-          = go _mssQuotaUser _mssPrettyPrint _mssUserIp _mssKey
+        requestWithRoute r u MarketplaceordersSearch'{..}
+          = go _mssQuotaUser (Just _mssPrettyPrint) _mssUserIp
+              _mssKey
               _mssPqlQuery
               _mssOauthToken
               _mssFields
-              _mssAlt
+              (Just _mssAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MarketplaceordersSearchAPI)
+                      (Proxy :: Proxy MarketplaceordersSearchResource)
                       r
                       u

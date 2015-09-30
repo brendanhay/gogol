@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves stored queries.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @DoubleclickbidmanagerQueriesListqueries@.
-module Doubleclickbidmanager.Queries.Listqueries
+module Network.Google.Resource.Doubleclickbidmanager.Queries.Listqueries
     (
     -- * REST Resource
-      QueriesListqueriesAPI
+      QueriesListqueriesResource
 
     -- * Creating a Request
-    , queriesListqueries
-    , QueriesListqueries
+    , queriesListqueries'
+    , QueriesListqueries'
 
     -- * Request Lenses
     , qlQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclickbidmanagerQueriesListqueries@ which the
--- 'QueriesListqueries' request conforms to.
-type QueriesListqueriesAPI =
-     "queries" :> Get '[JSON] ListQueriesResponse
+-- 'QueriesListqueries'' request conforms to.
+type QueriesListqueriesResource =
+     "queries" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] ListQueriesResponse
 
 -- | Retrieves stored queries.
 --
--- /See:/ 'queriesListqueries' smart constructor.
-data QueriesListqueries = QueriesListqueries
+-- /See:/ 'queriesListqueries'' smart constructor.
+data QueriesListqueries' = QueriesListqueries'
     { _qlQuotaUser   :: !(Maybe Text)
     , _qlPrettyPrint :: !Bool
     , _qlUserIp      :: !(Maybe Text)
     , _qlKey         :: !(Maybe Text)
     , _qlOauthToken  :: !(Maybe Text)
     , _qlFields      :: !(Maybe Text)
-    , _qlAlt         :: !Text
+    , _qlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesListqueries'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data QueriesListqueries = QueriesListqueries
 -- * 'qlFields'
 --
 -- * 'qlAlt'
-queriesListqueries
-    :: QueriesListqueries
-queriesListqueries =
-    QueriesListqueries
+queriesListqueries'
+    :: QueriesListqueries'
+queriesListqueries' =
+    QueriesListqueries'
     { _qlQuotaUser = Nothing
     , _qlPrettyPrint = True
     , _qlUserIp = Nothing
     , _qlKey = Nothing
     , _qlOauthToken = Nothing
     , _qlFields = Nothing
-    , _qlAlt = "json"
+    , _qlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +132,20 @@ qlFields :: Lens' QueriesListqueries' (Maybe Text)
 qlFields = lens _qlFields (\ s a -> s{_qlFields = a})
 
 -- | Data format for the response.
-qlAlt :: Lens' QueriesListqueries' Text
+qlAlt :: Lens' QueriesListqueries' Alt
 qlAlt = lens _qlAlt (\ s a -> s{_qlAlt = a})
 
 instance GoogleRequest QueriesListqueries' where
         type Rs QueriesListqueries' = ListQueriesResponse
         request = requestWithRoute defReq doubleClickBidsURL
-        requestWithRoute r u QueriesListqueries{..}
-          = go _qlQuotaUser _qlPrettyPrint _qlUserIp _qlKey
+        requestWithRoute r u QueriesListqueries'{..}
+          = go _qlQuotaUser (Just _qlPrettyPrint) _qlUserIp
+              _qlKey
               _qlOauthToken
               _qlFields
-              _qlAlt
+              (Just _qlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy QueriesListqueriesAPI)
+                      (Proxy :: Proxy QueriesListqueriesResource)
                       r
                       u

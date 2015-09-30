@@ -25,7 +25,7 @@ data UserInfo = UserInfo
     { _uiEmail             :: !(Maybe Text)
     , _uiPhotoUrl          :: !(Maybe Text)
     , _uiDisabled          :: !(Maybe Bool)
-    , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfoItem])
+    , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfo])
     , _uiValidSince        :: !(Maybe Int64)
     , _uiPasswordUpdatedAt :: !(Maybe Double)
     , _uiVersion           :: !(Maybe Int32)
@@ -96,7 +96,7 @@ uiDisabled
   = lens _uiDisabled (\ s a -> s{_uiDisabled = a})
 
 -- | The IDP of the user.
-uiProviderUserInfo :: Lens' UserInfo [UserInfoProviderUserInfoItem]
+uiProviderUserInfo :: Lens' UserInfo [UserInfoProviderUserInfo]
 uiProviderUserInfo
   = lens _uiProviderUserInfo
       (\ s a -> s{_uiProviderUserInfo = a})
@@ -691,7 +691,7 @@ instance ToJSON ResetPasswordResponse where
 -- /See:/ 'uploadAccountResponse' smart constructor.
 data UploadAccountResponse = UploadAccountResponse
     { _uarKind  :: !Text
-    , _uarError :: !(Maybe [UploadAccountResponseErrorItem])
+    , _uarError :: !(Maybe [UploadAccountResponseError])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UploadAccountResponse' with the minimum fields required to make a request.
@@ -714,7 +714,7 @@ uarKind :: Lens' UploadAccountResponse Text
 uarKind = lens _uarKind (\ s a -> s{_uarKind = a})
 
 -- | The error encountered while processing the account info.
-uarError :: Lens' UploadAccountResponse [UploadAccountResponseErrorItem]
+uarError :: Lens' UploadAccountResponse [UploadAccountResponseError]
 uarError
   = lens _uarError (\ s a -> s{_uarError = a}) .
       _Default
@@ -1515,6 +1515,70 @@ instance ToJSON
           = object
               (catMaybes [("localId" .=) <$> _irdarLocalId])
 
+--
+-- /See:/ 'setAccountInfoResponseProviderUserInfo' smart constructor.
+data SetAccountInfoResponseProviderUserInfo = SetAccountInfoResponseProviderUserInfo
+    { _sairpuiProviderId  :: !(Maybe Text)
+    , _sairpuiPhotoUrl    :: !(Maybe Text)
+    , _sairpuiDisplayName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SetAccountInfoResponseProviderUserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sairpuiProviderId'
+--
+-- * 'sairpuiPhotoUrl'
+--
+-- * 'sairpuiDisplayName'
+setAccountInfoResponseProviderUserInfo
+    :: SetAccountInfoResponseProviderUserInfo
+setAccountInfoResponseProviderUserInfo =
+    SetAccountInfoResponseProviderUserInfo
+    { _sairpuiProviderId = Nothing
+    , _sairpuiPhotoUrl = Nothing
+    , _sairpuiDisplayName = Nothing
+    }
+
+-- | The IdP ID. For whitelisted IdPs it\'s a short domain name, e.g.,
+-- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
+-- the OP identifier.
+sairpuiProviderId :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
+sairpuiProviderId
+  = lens _sairpuiProviderId
+      (\ s a -> s{_sairpuiProviderId = a})
+
+-- | The user\'s photo url at the IDP.
+sairpuiPhotoUrl :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
+sairpuiPhotoUrl
+  = lens _sairpuiPhotoUrl
+      (\ s a -> s{_sairpuiPhotoUrl = a})
+
+-- | The user\'s display name at the IDP.
+sairpuiDisplayName :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
+sairpuiDisplayName
+  = lens _sairpuiDisplayName
+      (\ s a -> s{_sairpuiDisplayName = a})
+
+instance FromJSON
+         SetAccountInfoResponseProviderUserInfo where
+        parseJSON
+          = withObject "SetAccountInfoResponseProviderUserInfo"
+              (\ o ->
+                 SetAccountInfoResponseProviderUserInfo <$>
+                   (o .:? "providerId") <*> (o .:? "photoUrl") <*>
+                     (o .:? "displayName"))
+
+instance ToJSON
+         SetAccountInfoResponseProviderUserInfo where
+        toJSON SetAccountInfoResponseProviderUserInfo{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _sairpuiProviderId,
+                  ("photoUrl" .=) <$> _sairpuiPhotoUrl,
+                  ("displayName" .=) <$> _sairpuiDisplayName])
+
 -- | Request to download user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingpartyDownloadAccountRequest' smart constructor.
@@ -2108,7 +2172,7 @@ instance ToJSON VerifyAssertionResponse where
 data SetAccountInfoResponse = SetAccountInfoResponse
     { _sairEmail            :: !(Maybe Text)
     , _sairKind             :: !Text
-    , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfoItem])
+    , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfo])
     , _sairDisplayName      :: !(Maybe Text)
     , _sairNewEmail         :: !(Maybe Text)
     , _sairIdToken          :: !(Maybe Text)
@@ -2151,7 +2215,7 @@ sairKind :: Lens' SetAccountInfoResponse Text
 sairKind = lens _sairKind (\ s a -> s{_sairKind = a})
 
 -- | The user\'s profiles at the associated IdPs.
-sairProviderUserInfo :: Lens' SetAccountInfoResponse [SetAccountInfoResponseProviderUserInfoItem]
+sairProviderUserInfo :: Lens' SetAccountInfoResponse [SetAccountInfoResponseProviderUserInfo]
 sairProviderUserInfo
   = lens _sairProviderUserInfo
       (\ s a -> s{_sairProviderUserInfo = a})
@@ -2259,3 +2323,123 @@ instance ToJSON GetRecaptchaParamResponse where
                  [("recaptchaSiteKey" .=) <$> _grprRecaptchaSiteKey,
                   Just ("kind" .= _grprKind),
                   ("recaptchaStoken" .=) <$> _grprRecaptchaStoken])
+
+--
+-- /See:/ 'uploadAccountResponseError' smart constructor.
+data UploadAccountResponseError = UploadAccountResponseError
+    { _uareMessage :: !(Maybe Text)
+    , _uareIndex   :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UploadAccountResponseError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uareMessage'
+--
+-- * 'uareIndex'
+uploadAccountResponseError
+    :: UploadAccountResponseError
+uploadAccountResponseError =
+    UploadAccountResponseError
+    { _uareMessage = Nothing
+    , _uareIndex = Nothing
+    }
+
+-- | Detailed error message for the account info.
+uareMessage :: Lens' UploadAccountResponseError (Maybe Text)
+uareMessage
+  = lens _uareMessage (\ s a -> s{_uareMessage = a})
+
+-- | The index of the malformed account, starting from 0.
+uareIndex :: Lens' UploadAccountResponseError (Maybe Int32)
+uareIndex
+  = lens _uareIndex (\ s a -> s{_uareIndex = a})
+
+instance FromJSON UploadAccountResponseError where
+        parseJSON
+          = withObject "UploadAccountResponseError"
+              (\ o ->
+                 UploadAccountResponseError <$>
+                   (o .:? "message") <*> (o .:? "index"))
+
+instance ToJSON UploadAccountResponseError where
+        toJSON UploadAccountResponseError{..}
+          = object
+              (catMaybes
+                 [("message" .=) <$> _uareMessage,
+                  ("index" .=) <$> _uareIndex])
+
+--
+-- /See:/ 'userInfoProviderUserInfo' smart constructor.
+data UserInfoProviderUserInfo = UserInfoProviderUserInfo
+    { _uipuiProviderId  :: !(Maybe Text)
+    , _uipuiPhotoUrl    :: !(Maybe Text)
+    , _uipuiFederatedId :: !(Maybe Text)
+    , _uipuiDisplayName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserInfoProviderUserInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uipuiProviderId'
+--
+-- * 'uipuiPhotoUrl'
+--
+-- * 'uipuiFederatedId'
+--
+-- * 'uipuiDisplayName'
+userInfoProviderUserInfo
+    :: UserInfoProviderUserInfo
+userInfoProviderUserInfo =
+    UserInfoProviderUserInfo
+    { _uipuiProviderId = Nothing
+    , _uipuiPhotoUrl = Nothing
+    , _uipuiFederatedId = Nothing
+    , _uipuiDisplayName = Nothing
+    }
+
+-- | The IdP ID. For white listed IdPs it\'s a short domain name, e.g.,
+-- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
+-- the OP identifier.
+uipuiProviderId :: Lens' UserInfoProviderUserInfo (Maybe Text)
+uipuiProviderId
+  = lens _uipuiProviderId
+      (\ s a -> s{_uipuiProviderId = a})
+
+-- | The user\'s photo url at the IDP.
+uipuiPhotoUrl :: Lens' UserInfoProviderUserInfo (Maybe Text)
+uipuiPhotoUrl
+  = lens _uipuiPhotoUrl
+      (\ s a -> s{_uipuiPhotoUrl = a})
+
+-- | User\'s identifier at IDP.
+uipuiFederatedId :: Lens' UserInfoProviderUserInfo (Maybe Text)
+uipuiFederatedId
+  = lens _uipuiFederatedId
+      (\ s a -> s{_uipuiFederatedId = a})
+
+-- | The user\'s display name at the IDP.
+uipuiDisplayName :: Lens' UserInfoProviderUserInfo (Maybe Text)
+uipuiDisplayName
+  = lens _uipuiDisplayName
+      (\ s a -> s{_uipuiDisplayName = a})
+
+instance FromJSON UserInfoProviderUserInfo where
+        parseJSON
+          = withObject "UserInfoProviderUserInfo"
+              (\ o ->
+                 UserInfoProviderUserInfo <$>
+                   (o .:? "providerId") <*> (o .:? "photoUrl") <*>
+                     (o .:? "federatedId")
+                     <*> (o .:? "displayName"))
+
+instance ToJSON UserInfoProviderUserInfo where
+        toJSON UserInfoProviderUserInfo{..}
+          = object
+              (catMaybes
+                 [("providerId" .=) <$> _uipuiProviderId,
+                  ("photoUrl" .=) <$> _uipuiPhotoUrl,
+                  ("federatedId" .=) <$> _uipuiFederatedId,
+                  ("displayName" .=) <$> _uipuiDisplayName])

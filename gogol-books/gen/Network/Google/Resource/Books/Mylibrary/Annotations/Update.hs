@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing annotation.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryAnnotationsUpdate@.
-module Books.Mylibrary.Annotations.Update
+module Network.Google.Resource.Books.Mylibrary.Annotations.Update
     (
     -- * REST Resource
-      MylibraryAnnotationsUpdateAPI
+      MylibraryAnnotationsUpdateResource
 
     -- * Creating a Request
-    , mylibraryAnnotationsUpdate
-    , MylibraryAnnotationsUpdate
+    , mylibraryAnnotationsUpdate'
+    , MylibraryAnnotationsUpdate'
 
     -- * Request Lenses
     , mauQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryAnnotationsUpdate@ which the
--- 'MylibraryAnnotationsUpdate' request conforms to.
-type MylibraryAnnotationsUpdateAPI =
+-- 'MylibraryAnnotationsUpdate'' request conforms to.
+type MylibraryAnnotationsUpdateResource =
      "mylibrary" :>
        "annotations" :>
          Capture "annotationId" Text :>
-           QueryParam "source" Text :> Put '[JSON] Annotation
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Annotation
 
 -- | Updates an existing annotation.
 --
--- /See:/ 'mylibraryAnnotationsUpdate' smart constructor.
-data MylibraryAnnotationsUpdate = MylibraryAnnotationsUpdate
+-- /See:/ 'mylibraryAnnotationsUpdate'' smart constructor.
+data MylibraryAnnotationsUpdate' = MylibraryAnnotationsUpdate'
     { _mauQuotaUser    :: !(Maybe Text)
     , _mauPrettyPrint  :: !Bool
     , _mauUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data MylibraryAnnotationsUpdate = MylibraryAnnotationsUpdate
     , _mauSource       :: !(Maybe Text)
     , _mauOauthToken   :: !(Maybe Text)
     , _mauFields       :: !(Maybe Text)
-    , _mauAlt          :: !Text
+    , _mauAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MylibraryAnnotationsUpdate'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data MylibraryAnnotationsUpdate = MylibraryAnnotationsUpdate
 -- * 'mauFields'
 --
 -- * 'mauAlt'
-mylibraryAnnotationsUpdate
+mylibraryAnnotationsUpdate'
     :: Text -- ^ 'annotationId'
-    -> MylibraryAnnotationsUpdate
-mylibraryAnnotationsUpdate pMauAnnotationId_ =
-    MylibraryAnnotationsUpdate
+    -> MylibraryAnnotationsUpdate'
+mylibraryAnnotationsUpdate' pMauAnnotationId_ =
+    MylibraryAnnotationsUpdate'
     { _mauQuotaUser = Nothing
     , _mauPrettyPrint = True
     , _mauUserIp = Nothing
@@ -100,7 +108,7 @@ mylibraryAnnotationsUpdate pMauAnnotationId_ =
     , _mauSource = Nothing
     , _mauOauthToken = Nothing
     , _mauFields = Nothing
-    , _mauAlt = "json"
+    , _mauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,23 @@ mauFields
   = lens _mauFields (\ s a -> s{_mauFields = a})
 
 -- | Data format for the response.
-mauAlt :: Lens' MylibraryAnnotationsUpdate' Text
+mauAlt :: Lens' MylibraryAnnotationsUpdate' Alt
 mauAlt = lens _mauAlt (\ s a -> s{_mauAlt = a})
 
 instance GoogleRequest MylibraryAnnotationsUpdate'
          where
         type Rs MylibraryAnnotationsUpdate' = Annotation
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MylibraryAnnotationsUpdate{..}
-          = go _mauQuotaUser _mauPrettyPrint _mauUserIp _mauKey
+        requestWithRoute r u MylibraryAnnotationsUpdate'{..}
+          = go _mauQuotaUser (Just _mauPrettyPrint) _mauUserIp
+              _mauKey
               _mauAnnotationId
               _mauSource
               _mauOauthToken
               _mauFields
-              _mauAlt
+              (Just _mauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MylibraryAnnotationsUpdateAPI)
+                      (Proxy :: Proxy MylibraryAnnotationsUpdateResource)
                       r
                       u

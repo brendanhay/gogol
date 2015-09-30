@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of groups contained within the specified project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGroupsList@.
-module Clouduseraccounts.Groups.List
+module Network.Google.Resource.Clouduseraccounts.Groups.List
     (
     -- * REST Resource
-      GroupsListAPI
+      GroupsListResource
 
     -- * Creating a Request
-    , groupsList
-    , GroupsList
+    , groupsList'
+    , GroupsList'
 
     -- * Request Lenses
     , glQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGroupsList@ which the
--- 'GroupsList' request conforms to.
-type GroupsListAPI =
+-- 'GroupsList'' request conforms to.
+type GroupsListResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] GroupList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] GroupList
 
 -- | Retrieves the list of groups contained within the specified project.
 --
--- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+-- /See:/ 'groupsList'' smart constructor.
+data GroupsList' = GroupsList'
     { _glQuotaUser   :: !(Maybe Text)
     , _glPrettyPrint :: !Bool
     , _glOrderBy     :: !(Maybe Text)
@@ -73,7 +80,7 @@ data GroupsList = GroupsList
     , _glOauthToken  :: !(Maybe Text)
     , _glMaxResults  :: !Word32
     , _glFields      :: !(Maybe Text)
-    , _glAlt         :: !Text
+    , _glAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
@@ -103,11 +110,11 @@ data GroupsList = GroupsList
 -- * 'glFields'
 --
 -- * 'glAlt'
-groupsList
+groupsList'
     :: Text -- ^ 'project'
-    -> GroupsList
-groupsList pGlProject_ =
-    GroupsList
+    -> GroupsList'
+groupsList' pGlProject_ =
+    GroupsList'
     { _glQuotaUser = Nothing
     , _glPrettyPrint = True
     , _glOrderBy = Nothing
@@ -119,7 +126,7 @@ groupsList pGlProject_ =
     , _glOauthToken = Nothing
     , _glMaxResults = 500
     , _glFields = Nothing
-    , _glAlt = "json"
+    , _glAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,15 +206,15 @@ glFields :: Lens' GroupsList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
 -- | Data format for the response.
-glAlt :: Lens' GroupsList' Text
+glAlt :: Lens' GroupsList' Alt
 glAlt = lens _glAlt (\ s a -> s{_glAlt = a})
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupList
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GroupsList{..}
-          = go _glQuotaUser _glPrettyPrint _glOrderBy
+        requestWithRoute r u GroupsList'{..}
+          = go _glQuotaUser (Just _glPrettyPrint) _glOrderBy
               _glProject
               _glUserIp
               _glKey
@@ -216,6 +223,8 @@ instance GoogleRequest GroupsList' where
               _glOauthToken
               (Just _glMaxResults)
               _glFields
-              _glAlt
+              (Just _glAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy GroupsListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- old subscription, or its topic unless the same topic is specified.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsDelete@.
-module PubSub.Projects.Subscriptions.Delete
+module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
     (
     -- * REST Resource
-      ProjectsSubscriptionsDeleteAPI
+      ProjectsSubscriptionsDeleteResource
 
     -- * Creating a Request
-    , projectsSubscriptionsDelete
-    , ProjectsSubscriptionsDelete
+    , projectsSubscriptionsDelete'
+    , ProjectsSubscriptionsDelete'
 
     -- * Request Lenses
     , psdXgafv
@@ -53,10 +54,23 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsDelete@ which the
--- 'ProjectsSubscriptionsDelete' request conforms to.
-type ProjectsSubscriptionsDeleteAPI =
+-- 'ProjectsSubscriptionsDelete'' request conforms to.
+type ProjectsSubscriptionsDeleteResource =
      "v1beta2" :>
-       "{+subscription}" :> Delete '[JSON] Empty
+       "{+subscription}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Delete '[JSON] Empty
 
 -- | Deletes an existing subscription. All pending messages in the
 -- subscription are immediately dropped. Calls to Pull after deletion will
@@ -64,8 +78,8 @@ type ProjectsSubscriptionsDeleteAPI =
 -- created with the same name, but the new one has no association with the
 -- old subscription, or its topic unless the same topic is specified.
 --
--- /See:/ 'projectsSubscriptionsDelete' smart constructor.
-data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete
+-- /See:/ 'projectsSubscriptionsDelete'' smart constructor.
+data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
     { _psdXgafv          :: !(Maybe Text)
     , _psdQuotaUser      :: !(Maybe Text)
     , _psdPrettyPrint    :: !Bool
@@ -113,11 +127,11 @@ data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete
 -- * 'psdCallback'
 --
 -- * 'psdAlt'
-projectsSubscriptionsDelete
+projectsSubscriptionsDelete'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsDelete
-projectsSubscriptionsDelete pPsdSubscription_ =
-    ProjectsSubscriptionsDelete
+    -> ProjectsSubscriptionsDelete'
+projectsSubscriptionsDelete' pPsdSubscription_ =
+    ProjectsSubscriptionsDelete'
     { _psdXgafv = Nothing
     , _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
@@ -215,10 +229,10 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
          where
         type Rs ProjectsSubscriptionsDelete' = Empty
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsSubscriptionsDelete{..}
-          = go _psdXgafv _psdQuotaUser _psdPrettyPrint
+        requestWithRoute r u ProjectsSubscriptionsDelete'{..}
+          = go _psdXgafv _psdQuotaUser (Just _psdPrettyPrint)
               _psdUploadProtocol
-              _psdPp
+              (Just _psdPp)
               _psdAccessToken
               _psdUploadType
               _psdBearerToken
@@ -227,9 +241,9 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
               _psdSubscription
               _psdFields
               _psdCallback
-              _psdAlt
+              (Just _psdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsDeleteAPI)
+                      (Proxy :: Proxy ProjectsSubscriptionsDeleteResource)
                       r
                       u

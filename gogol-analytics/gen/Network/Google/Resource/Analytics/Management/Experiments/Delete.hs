@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete an experiment.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsDelete@.
-module Analytics.Management.Experiments.Delete
+module Network.Google.Resource.Analytics.Management.Experiments.Delete
     (
     -- * REST Resource
-      ManagementExperimentsDeleteAPI
+      ManagementExperimentsDeleteResource
 
     -- * Creating a Request
-    , managementExperimentsDelete
-    , ManagementExperimentsDelete
+    , managementExperimentsDelete'
+    , ManagementExperimentsDelete'
 
     -- * Request Lenses
     , medQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsDelete@ which the
--- 'ManagementExperimentsDelete' request conforms to.
-type ManagementExperimentsDeleteAPI =
+-- 'ManagementExperimentsDelete'' request conforms to.
+type ManagementExperimentsDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,19 @@ type ManagementExperimentsDeleteAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     Capture "experimentId" Text :> Delete '[JSON] ()
+                     Capture "experimentId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete an experiment.
 --
--- /See:/ 'managementExperimentsDelete' smart constructor.
-data ManagementExperimentsDelete = ManagementExperimentsDelete
+-- /See:/ 'managementExperimentsDelete'' smart constructor.
+data ManagementExperimentsDelete' = ManagementExperimentsDelete'
     { _medQuotaUser     :: !(Maybe Text)
     , _medPrettyPrint   :: !Bool
     , _medWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementExperimentsDelete = ManagementExperimentsDelete
     , _medKey           :: !(Maybe Text)
     , _medOauthToken    :: !(Maybe Text)
     , _medFields        :: !(Maybe Text)
-    , _medAlt           :: !Text
+    , _medAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsDelete'' with the minimum fields required to make a request.
@@ -100,14 +108,14 @@ data ManagementExperimentsDelete = ManagementExperimentsDelete
 -- * 'medFields'
 --
 -- * 'medAlt'
-managementExperimentsDelete
+managementExperimentsDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
-    -> ManagementExperimentsDelete
-managementExperimentsDelete pMedWebPropertyId_ pMedProfileId_ pMedAccountId_ pMedExperimentId_ =
-    ManagementExperimentsDelete
+    -> ManagementExperimentsDelete'
+managementExperimentsDelete' pMedWebPropertyId_ pMedProfileId_ pMedAccountId_ pMedExperimentId_ =
+    ManagementExperimentsDelete'
     { _medQuotaUser = Nothing
     , _medPrettyPrint = False
     , _medWebPropertyId = pMedWebPropertyId_
@@ -118,7 +126,7 @@ managementExperimentsDelete pMedWebPropertyId_ pMedProfileId_ pMedAccountId_ pMe
     , _medKey = Nothing
     , _medOauthToken = Nothing
     , _medFields = Nothing
-    , _medAlt = "json"
+    , _medAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,15 +188,16 @@ medFields
   = lens _medFields (\ s a -> s{_medFields = a})
 
 -- | Data format for the response.
-medAlt :: Lens' ManagementExperimentsDelete' Text
+medAlt :: Lens' ManagementExperimentsDelete' Alt
 medAlt = lens _medAlt (\ s a -> s{_medAlt = a})
 
 instance GoogleRequest ManagementExperimentsDelete'
          where
         type Rs ManagementExperimentsDelete' = ()
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsDelete{..}
-          = go _medQuotaUser _medPrettyPrint _medWebPropertyId
+        requestWithRoute r u ManagementExperimentsDelete'{..}
+          = go _medQuotaUser (Just _medPrettyPrint)
+              _medWebPropertyId
               _medUserIp
               _medProfileId
               _medAccountId
@@ -196,9 +205,9 @@ instance GoogleRequest ManagementExperimentsDelete'
               _medKey
               _medOauthToken
               _medFields
-              _medAlt
+              (Just _medAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsDeleteAPI)
+                      (Proxy :: Proxy ManagementExperimentsDeleteResource)
                       r
                       u

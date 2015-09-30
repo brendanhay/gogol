@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns permissions that a caller has on the specified Organization.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsTestIAMPermissions@.
-module Cloudresourcemanager.Organizations.TestIAMPermissions
+module Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
     (
     -- * REST Resource
-      OrganizationsTestIAMPermissionsAPI
+      OrganizationsTestIAMPermissionsResource
 
     -- * Creating a Request
-    , organizationsTestIAMPermissions
-    , OrganizationsTestIAMPermissions
+    , organizationsTestIAMPermissions'
+    , OrganizationsTestIAMPermissions'
 
     -- * Request Lenses
     , otipXgafv
@@ -49,17 +50,30 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsTestIAMPermissions@ which the
--- 'OrganizationsTestIAMPermissions' request conforms to.
-type OrganizationsTestIAMPermissionsAPI =
+-- 'OrganizationsTestIAMPermissions'' request conforms to.
+type OrganizationsTestIAMPermissionsResource =
      "v1beta1" :>
        "organizations" :>
          "{resource}:testIamPermissions" :>
-           Post '[JSON] TestIAMPermissionsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified Organization.
 --
--- /See:/ 'organizationsTestIAMPermissions' smart constructor.
-data OrganizationsTestIAMPermissions = OrganizationsTestIAMPermissions
+-- /See:/ 'organizationsTestIAMPermissions'' smart constructor.
+data OrganizationsTestIAMPermissions' = OrganizationsTestIAMPermissions'
     { _otipXgafv          :: !(Maybe Text)
     , _otipQuotaUser      :: !(Maybe Text)
     , _otipPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data OrganizationsTestIAMPermissions = OrganizationsTestIAMPermissions
 -- * 'otipCallback'
 --
 -- * 'otipAlt'
-organizationsTestIAMPermissions
+organizationsTestIAMPermissions'
     :: Text -- ^ 'resource'
-    -> OrganizationsTestIAMPermissions
-organizationsTestIAMPermissions pOtipResource_ =
-    OrganizationsTestIAMPermissions
+    -> OrganizationsTestIAMPermissions'
+organizationsTestIAMPermissions' pOtipResource_ =
+    OrganizationsTestIAMPermissions'
     { _otipXgafv = Nothing
     , _otipQuotaUser = Nothing
     , _otipPrettyPrint = True
@@ -214,10 +228,11 @@ instance GoogleRequest
              TestIAMPermissionsResponse
         request = requestWithRoute defReq resourceManagerURL
         requestWithRoute r u
-          OrganizationsTestIAMPermissions{..}
-          = go _otipXgafv _otipQuotaUser _otipPrettyPrint
+          OrganizationsTestIAMPermissions'{..}
+          = go _otipXgafv _otipQuotaUser
+              (Just _otipPrettyPrint)
               _otipUploadProtocol
-              _otipPp
+              (Just _otipPp)
               _otipAccessToken
               _otipUploadType
               _otipBearerToken
@@ -226,9 +241,10 @@ instance GoogleRequest
               _otipOauthToken
               _otipFields
               _otipCallback
-              _otipAlt
+              (Just _otipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsTestIAMPermissionsAPI)
+                      (Proxy ::
+                         Proxy OrganizationsTestIAMPermissionsResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- accepted by the enterprise.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsUpdatePermissions@.
-module Androidenterprise.Products.UpdatePermissions
+module Network.Google.Resource.Androidenterprise.Products.UpdatePermissions
     (
     -- * REST Resource
-      ProductsUpdatePermissionsAPI
+      ProductsUpdatePermissionsResource
 
     -- * Creating a Request
-    , productsUpdatePermissions
-    , ProductsUpdatePermissions
+    , productsUpdatePermissions'
+    , ProductsUpdatePermissions'
 
     -- * Request Lenses
     , pupQuotaUser
@@ -45,19 +46,27 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsUpdatePermissions@ which the
--- 'ProductsUpdatePermissions' request conforms to.
-type ProductsUpdatePermissionsAPI =
+-- 'ProductsUpdatePermissions'' request conforms to.
+type ProductsUpdatePermissionsResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
-             "permissions" :> Put '[JSON] ProductPermissions
+             "permissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Put '[JSON] ProductPermissions
 
 -- | Updates the set of Android app permissions for this app that have been
 -- accepted by the enterprise.
 --
--- /See:/ 'productsUpdatePermissions' smart constructor.
-data ProductsUpdatePermissions = ProductsUpdatePermissions
+-- /See:/ 'productsUpdatePermissions'' smart constructor.
+data ProductsUpdatePermissions' = ProductsUpdatePermissions'
     { _pupQuotaUser    :: !(Maybe Text)
     , _pupPrettyPrint  :: !Bool
     , _pupEnterpriseId :: !Text
@@ -66,7 +75,7 @@ data ProductsUpdatePermissions = ProductsUpdatePermissions
     , _pupOauthToken   :: !(Maybe Text)
     , _pupProductId    :: !Text
     , _pupFields       :: !(Maybe Text)
-    , _pupAlt          :: !Text
+    , _pupAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsUpdatePermissions'' with the minimum fields required to make a request.
@@ -90,12 +99,12 @@ data ProductsUpdatePermissions = ProductsUpdatePermissions
 -- * 'pupFields'
 --
 -- * 'pupAlt'
-productsUpdatePermissions
+productsUpdatePermissions'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsUpdatePermissions
-productsUpdatePermissions pPupEnterpriseId_ pPupProductId_ =
-    ProductsUpdatePermissions
+    -> ProductsUpdatePermissions'
+productsUpdatePermissions' pPupEnterpriseId_ pPupProductId_ =
+    ProductsUpdatePermissions'
     { _pupQuotaUser = Nothing
     , _pupPrettyPrint = True
     , _pupEnterpriseId = pPupEnterpriseId_
@@ -104,7 +113,7 @@ productsUpdatePermissions pPupEnterpriseId_ pPupProductId_ =
     , _pupOauthToken = Nothing
     , _pupProductId = pPupProductId_
     , _pupFields = Nothing
-    , _pupAlt = "json"
+    , _pupAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +164,7 @@ pupFields
   = lens _pupFields (\ s a -> s{_pupFields = a})
 
 -- | Data format for the response.
-pupAlt :: Lens' ProductsUpdatePermissions' Text
+pupAlt :: Lens' ProductsUpdatePermissions' Alt
 pupAlt = lens _pupAlt (\ s a -> s{_pupAlt = a})
 
 instance GoogleRequest ProductsUpdatePermissions'
@@ -163,16 +172,17 @@ instance GoogleRequest ProductsUpdatePermissions'
         type Rs ProductsUpdatePermissions' =
              ProductPermissions
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u ProductsUpdatePermissions{..}
-          = go _pupQuotaUser _pupPrettyPrint _pupEnterpriseId
+        requestWithRoute r u ProductsUpdatePermissions'{..}
+          = go _pupQuotaUser (Just _pupPrettyPrint)
+              _pupEnterpriseId
               _pupUserIp
               _pupKey
               _pupOauthToken
               _pupProductId
               _pupFields
-              _pupAlt
+              (Just _pupAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProductsUpdatePermissionsAPI)
+                      (Proxy :: Proxy ProductsUpdatePermissionsResource)
                       r
                       u

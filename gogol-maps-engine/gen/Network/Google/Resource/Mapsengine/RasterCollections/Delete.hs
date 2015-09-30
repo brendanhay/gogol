@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a raster collection.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsDelete@.
-module Mapsengine.RasterCollections.Delete
+module Network.Google.Resource.Mapsengine.RasterCollections.Delete
     (
     -- * REST Resource
-      RasterCollectionsDeleteAPI
+      RasterCollectionsDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsDelete
-    , RasterCollectionsDelete
+    , rasterCollectionsDelete'
+    , RasterCollectionsDelete'
 
     -- * Request Lenses
     , rcdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsDelete@ which the
--- 'RasterCollectionsDelete' request conforms to.
-type RasterCollectionsDeleteAPI =
+-- 'RasterCollectionsDelete'' request conforms to.
+type RasterCollectionsDeleteResource =
      "rasterCollections" :>
-       Capture "id" Text :> Delete '[JSON] ()
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a raster collection.
 --
--- /See:/ 'rasterCollectionsDelete' smart constructor.
-data RasterCollectionsDelete = RasterCollectionsDelete
+-- /See:/ 'rasterCollectionsDelete'' smart constructor.
+data RasterCollectionsDelete' = RasterCollectionsDelete'
     { _rcdQuotaUser   :: !(Maybe Text)
     , _rcdPrettyPrint :: !Bool
     , _rcdUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data RasterCollectionsDelete = RasterCollectionsDelete
     , _rcdId          :: !Text
     , _rcdOauthToken  :: !(Maybe Text)
     , _rcdFields      :: !(Maybe Text)
-    , _rcdAlt         :: !Text
+    , _rcdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data RasterCollectionsDelete = RasterCollectionsDelete
 -- * 'rcdFields'
 --
 -- * 'rcdAlt'
-rasterCollectionsDelete
+rasterCollectionsDelete'
     :: Text -- ^ 'id'
-    -> RasterCollectionsDelete
-rasterCollectionsDelete pRcdId_ =
-    RasterCollectionsDelete
+    -> RasterCollectionsDelete'
+rasterCollectionsDelete' pRcdId_ =
+    RasterCollectionsDelete'
     { _rcdQuotaUser = Nothing
     , _rcdPrettyPrint = True
     , _rcdUserIp = Nothing
@@ -93,7 +101,7 @@ rasterCollectionsDelete pRcdId_ =
     , _rcdId = pRcdId_
     , _rcdOauthToken = Nothing
     , _rcdFields = Nothing
-    , _rcdAlt = "json"
+    , _rcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,20 +148,21 @@ rcdFields
   = lens _rcdFields (\ s a -> s{_rcdFields = a})
 
 -- | Data format for the response.
-rcdAlt :: Lens' RasterCollectionsDelete' Text
+rcdAlt :: Lens' RasterCollectionsDelete' Alt
 rcdAlt = lens _rcdAlt (\ s a -> s{_rcdAlt = a})
 
 instance GoogleRequest RasterCollectionsDelete' where
         type Rs RasterCollectionsDelete' = ()
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsDelete{..}
-          = go _rcdQuotaUser _rcdPrettyPrint _rcdUserIp _rcdKey
+        requestWithRoute r u RasterCollectionsDelete'{..}
+          = go _rcdQuotaUser (Just _rcdPrettyPrint) _rcdUserIp
+              _rcdKey
               _rcdId
               _rcdOauthToken
               _rcdFields
-              _rcdAlt
+              (Just _rcdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsDeleteAPI)
+                      (Proxy :: Proxy RasterCollectionsDeleteResource)
                       r
                       u

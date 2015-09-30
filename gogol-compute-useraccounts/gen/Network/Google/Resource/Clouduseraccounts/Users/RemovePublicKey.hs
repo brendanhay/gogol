@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes the specified public key from the user.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersRemovePublicKey@.
-module Clouduseraccounts.Users.RemovePublicKey
+module Network.Google.Resource.Clouduseraccounts.Users.RemovePublicKey
     (
     -- * REST Resource
-      UsersRemovePublicKeyAPI
+      UsersRemovePublicKeyResource
 
     -- * Creating a Request
-    , usersRemovePublicKey
-    , UsersRemovePublicKey
+    , usersRemovePublicKey'
+    , UsersRemovePublicKey'
 
     -- * Request Lenses
     , urpkQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersRemovePublicKey@ which the
--- 'UsersRemovePublicKey' request conforms to.
-type UsersRemovePublicKeyAPI =
+-- 'UsersRemovePublicKey'' request conforms to.
+type UsersRemovePublicKeyResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
            Capture "user" Text :>
              "removePublicKey" :>
-               QueryParam "fingerprint" Text :>
-                 Post '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fingerprint" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Removes the specified public key from the user.
 --
--- /See:/ 'usersRemovePublicKey' smart constructor.
-data UsersRemovePublicKey = UsersRemovePublicKey
+-- /See:/ 'usersRemovePublicKey'' smart constructor.
+data UsersRemovePublicKey' = UsersRemovePublicKey'
     { _urpkQuotaUser   :: !(Maybe Text)
     , _urpkPrettyPrint :: !Bool
     , _urpkProject     :: !Text
@@ -68,7 +75,7 @@ data UsersRemovePublicKey = UsersRemovePublicKey
     , _urpkKey         :: !(Maybe Text)
     , _urpkOauthToken  :: !(Maybe Text)
     , _urpkFields      :: !(Maybe Text)
-    , _urpkAlt         :: !Text
+    , _urpkAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersRemovePublicKey'' with the minimum fields required to make a request.
@@ -94,13 +101,13 @@ data UsersRemovePublicKey = UsersRemovePublicKey
 -- * 'urpkFields'
 --
 -- * 'urpkAlt'
-usersRemovePublicKey
+usersRemovePublicKey'
     :: Text -- ^ 'project'
     -> Text -- ^ 'fingerprint'
     -> Text -- ^ 'user'
-    -> UsersRemovePublicKey
-usersRemovePublicKey pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
-    UsersRemovePublicKey
+    -> UsersRemovePublicKey'
+usersRemovePublicKey' pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
+    UsersRemovePublicKey'
     { _urpkQuotaUser = Nothing
     , _urpkPrettyPrint = True
     , _urpkProject = pUrpkProject_
@@ -110,7 +117,7 @@ usersRemovePublicKey pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
     , _urpkKey = Nothing
     , _urpkOauthToken = Nothing
     , _urpkFields = Nothing
-    , _urpkAlt = "json"
+    , _urpkAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,24 +175,25 @@ urpkFields
   = lens _urpkFields (\ s a -> s{_urpkFields = a})
 
 -- | Data format for the response.
-urpkAlt :: Lens' UsersRemovePublicKey' Text
+urpkAlt :: Lens' UsersRemovePublicKey' Alt
 urpkAlt = lens _urpkAlt (\ s a -> s{_urpkAlt = a})
 
 instance GoogleRequest UsersRemovePublicKey' where
         type Rs UsersRemovePublicKey' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersRemovePublicKey{..}
-          = go _urpkQuotaUser _urpkPrettyPrint _urpkProject
+        requestWithRoute r u UsersRemovePublicKey'{..}
+          = go _urpkQuotaUser (Just _urpkPrettyPrint)
+              _urpkProject
               _urpkUserIp
               (Just _urpkFingerprint)
               _urpkUser
               _urpkKey
               _urpkOauthToken
               _urpkFields
-              _urpkAlt
+              (Just _urpkAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersRemovePublicKeyAPI)
+                      (Proxy :: Proxy UsersRemovePublicKeyResource)
                       r
                       u

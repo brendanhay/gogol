@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified project resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsGet@.
-module Compute.Projects.Get
+module Network.Google.Resource.Compute.Projects.Get
     (
     -- * REST Resource
-      ProjectsGetAPI
+      ProjectsGetResource
 
     -- * Creating a Request
-    , projectsGet
-    , ProjectsGet
+    , projectsGet'
+    , ProjectsGet'
 
     -- * Request Lenses
     , pgQuotaUser
@@ -43,14 +44,21 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeProjectsGet@ which the
--- 'ProjectsGet' request conforms to.
-type ProjectsGetAPI =
-     Capture "project" Text :> Get '[JSON] Project
+-- 'ProjectsGet'' request conforms to.
+type ProjectsGetResource =
+     Capture "project" Text :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] Project
 
 -- | Returns the specified project resource.
 --
--- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet
+-- /See:/ 'projectsGet'' smart constructor.
+data ProjectsGet' = ProjectsGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgProject     :: !Text
@@ -58,7 +66,7 @@ data ProjectsGet = ProjectsGet
     , _pgKey         :: !(Maybe Text)
     , _pgOauthToken  :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Text
+    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
@@ -80,11 +88,11 @@ data ProjectsGet = ProjectsGet
 -- * 'pgFields'
 --
 -- * 'pgAlt'
-projectsGet
+projectsGet'
     :: Text -- ^ 'project'
-    -> ProjectsGet
-projectsGet pPgProject_ =
-    ProjectsGet
+    -> ProjectsGet'
+projectsGet' pPgProject_ =
+    ProjectsGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgProject = pPgProject_
@@ -92,7 +100,7 @@ projectsGet pPgProject_ =
     , _pgKey = Nothing
     , _pgOauthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = "json"
+    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,17 +142,21 @@ pgFields :: Lens' ProjectsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
 -- | Data format for the response.
-pgAlt :: Lens' ProjectsGet' Text
+pgAlt :: Lens' ProjectsGet' Alt
 pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsGet{..}
-          = go _pgQuotaUser _pgPrettyPrint _pgProject _pgUserIp
+        requestWithRoute r u ProjectsGet'{..}
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgProject
+              _pgUserIp
               _pgKey
               _pgOauthToken
               _pgFields
-              _pgAlt
+              (Just _pgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsGetResource)
+                      r
+                      u

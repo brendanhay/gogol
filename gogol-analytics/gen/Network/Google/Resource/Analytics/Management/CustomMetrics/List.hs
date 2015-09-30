@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists custom metrics to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsList@.
-module Analytics.Management.CustomMetrics.List
+module Network.Google.Resource.Analytics.Management.CustomMetrics.List
     (
     -- * REST Resource
-      ManagementCustomMetricsListAPI
+      ManagementCustomMetricsListResource
 
     -- * Creating a Request
-    , managementCustomMetricsList
-    , ManagementCustomMetricsList
+    , managementCustomMetricsList'
+    , ManagementCustomMetricsList'
 
     -- * Request Lenses
     , mcmlQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsList@ which the
--- 'ManagementCustomMetricsList' request conforms to.
-type ManagementCustomMetricsListAPI =
+-- 'ManagementCustomMetricsList'' request conforms to.
+type ManagementCustomMetricsListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "customMetrics" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] CustomMetrics
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] CustomMetrics
 
 -- | Lists custom metrics to which the user has access.
 --
--- /See:/ 'managementCustomMetricsList' smart constructor.
-data ManagementCustomMetricsList = ManagementCustomMetricsList
+-- /See:/ 'managementCustomMetricsList'' smart constructor.
+data ManagementCustomMetricsList' = ManagementCustomMetricsList'
     { _mcmlQuotaUser     :: !(Maybe Text)
     , _mcmlPrettyPrint   :: !Bool
     , _mcmlWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomMetricsList = ManagementCustomMetricsList
     , _mcmlStartIndex    :: !(Maybe Int32)
     , _mcmlMaxResults    :: !(Maybe Int32)
     , _mcmlFields        :: !(Maybe Text)
-    , _mcmlAlt           :: !Text
+    , _mcmlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList'' with the minimum fields required to make a request.
@@ -100,12 +108,12 @@ data ManagementCustomMetricsList = ManagementCustomMetricsList
 -- * 'mcmlFields'
 --
 -- * 'mcmlAlt'
-managementCustomMetricsList
+managementCustomMetricsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomMetricsList
-managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
-    ManagementCustomMetricsList
+    -> ManagementCustomMetricsList'
+managementCustomMetricsList' pMcmlWebPropertyId_ pMcmlAccountId_ =
+    ManagementCustomMetricsList'
     { _mcmlQuotaUser = Nothing
     , _mcmlPrettyPrint = False
     , _mcmlWebPropertyId = pMcmlWebPropertyId_
@@ -116,7 +124,7 @@ managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
     , _mcmlStartIndex = Nothing
     , _mcmlMaxResults = Nothing
     , _mcmlFields = Nothing
-    , _mcmlAlt = "json"
+    , _mcmlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,15 +190,15 @@ mcmlFields
   = lens _mcmlFields (\ s a -> s{_mcmlFields = a})
 
 -- | Data format for the response.
-mcmlAlt :: Lens' ManagementCustomMetricsList' Text
+mcmlAlt :: Lens' ManagementCustomMetricsList' Alt
 mcmlAlt = lens _mcmlAlt (\ s a -> s{_mcmlAlt = a})
 
 instance GoogleRequest ManagementCustomMetricsList'
          where
         type Rs ManagementCustomMetricsList' = CustomMetrics
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementCustomMetricsList{..}
-          = go _mcmlQuotaUser _mcmlPrettyPrint
+        requestWithRoute r u ManagementCustomMetricsList'{..}
+          = go _mcmlQuotaUser (Just _mcmlPrettyPrint)
               _mcmlWebPropertyId
               _mcmlUserIp
               _mcmlAccountId
@@ -199,9 +207,9 @@ instance GoogleRequest ManagementCustomMetricsList'
               _mcmlStartIndex
               _mcmlMaxResults
               _mcmlFields
-              _mcmlAlt
+              (Just _mcmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomMetricsListAPI)
+                      (Proxy :: Proxy ManagementCustomMetricsListResource)
                       r
                       u

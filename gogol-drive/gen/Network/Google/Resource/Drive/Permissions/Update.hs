@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,165 +20,176 @@
 -- | Updates a permission.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsUpdate@.
-module Drive.Permissions.Update
+module Network.Google.Resource.Drive.Permissions.Update
     (
     -- * REST Resource
-      PermissionsUpdateAPI
+      PermissionsUpdateResource
 
     -- * Creating a Request
-    , permissionsUpdate
-    , PermissionsUpdate
+    , permissionsUpdate'
+    , PermissionsUpdate'
 
     -- * Request Lenses
-    , puQuotaUser
-    , puPrettyPrint
-    , puUserIp
-    , puKey
-    , puTransferOwnership
-    , puFileId
-    , puOauthToken
-    , puPermissionId
-    , puFields
-    , puAlt
+    , puuQuotaUser
+    , puuPrettyPrint
+    , puuUserIp
+    , puuKey
+    , puuTransferOwnership
+    , puuFileId
+    , puuOauthToken
+    , puuPermissionId
+    , puuFields
+    , puuAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePermissionsUpdate@ which the
--- 'PermissionsUpdate' request conforms to.
-type PermissionsUpdateAPI =
+-- 'PermissionsUpdate'' request conforms to.
+type PermissionsUpdateResource =
      "files" :>
        Capture "fileId" Text :>
          "permissions" :>
            Capture "permissionId" Text :>
-             QueryParam "transferOwnership" Bool :>
-               Put '[JSON] Permission
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "transferOwnership" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Permission
 
 -- | Updates a permission.
 --
--- /See:/ 'permissionsUpdate' smart constructor.
-data PermissionsUpdate = PermissionsUpdate
-    { _puQuotaUser         :: !(Maybe Text)
-    , _puPrettyPrint       :: !Bool
-    , _puUserIp            :: !(Maybe Text)
-    , _puKey               :: !(Maybe Text)
-    , _puTransferOwnership :: !Bool
-    , _puFileId            :: !Text
-    , _puOauthToken        :: !(Maybe Text)
-    , _puPermissionId      :: !Text
-    , _puFields            :: !(Maybe Text)
-    , _puAlt               :: !Text
+-- /See:/ 'permissionsUpdate'' smart constructor.
+data PermissionsUpdate' = PermissionsUpdate'
+    { _puuQuotaUser         :: !(Maybe Text)
+    , _puuPrettyPrint       :: !Bool
+    , _puuUserIp            :: !(Maybe Text)
+    , _puuKey               :: !(Maybe Text)
+    , _puuTransferOwnership :: !Bool
+    , _puuFileId            :: !Text
+    , _puuOauthToken        :: !(Maybe Text)
+    , _puuPermissionId      :: !Text
+    , _puuFields            :: !(Maybe Text)
+    , _puuAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'puQuotaUser'
+-- * 'puuQuotaUser'
 --
--- * 'puPrettyPrint'
+-- * 'puuPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puuUserIp'
 --
--- * 'puKey'
+-- * 'puuKey'
 --
--- * 'puTransferOwnership'
+-- * 'puuTransferOwnership'
 --
--- * 'puFileId'
+-- * 'puuFileId'
 --
--- * 'puOauthToken'
+-- * 'puuOauthToken'
 --
--- * 'puPermissionId'
+-- * 'puuPermissionId'
 --
--- * 'puFields'
+-- * 'puuFields'
 --
--- * 'puAlt'
-permissionsUpdate
+-- * 'puuAlt'
+permissionsUpdate'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
-    -> PermissionsUpdate
-permissionsUpdate pPuFileId_ pPuPermissionId_ =
-    PermissionsUpdate
-    { _puQuotaUser = Nothing
-    , _puPrettyPrint = True
-    , _puUserIp = Nothing
-    , _puKey = Nothing
-    , _puTransferOwnership = False
-    , _puFileId = pPuFileId_
-    , _puOauthToken = Nothing
-    , _puPermissionId = pPuPermissionId_
-    , _puFields = Nothing
-    , _puAlt = "json"
+    -> PermissionsUpdate'
+permissionsUpdate' pPuuFileId_ pPuuPermissionId_ =
+    PermissionsUpdate'
+    { _puuQuotaUser = Nothing
+    , _puuPrettyPrint = True
+    , _puuUserIp = Nothing
+    , _puuKey = Nothing
+    , _puuTransferOwnership = False
+    , _puuFileId = pPuuFileId_
+    , _puuOauthToken = Nothing
+    , _puuPermissionId = pPuuPermissionId_
+    , _puuFields = Nothing
+    , _puuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-puQuotaUser :: Lens' PermissionsUpdate' (Maybe Text)
-puQuotaUser
-  = lens _puQuotaUser (\ s a -> s{_puQuotaUser = a})
+puuQuotaUser :: Lens' PermissionsUpdate' (Maybe Text)
+puuQuotaUser
+  = lens _puuQuotaUser (\ s a -> s{_puuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-puPrettyPrint :: Lens' PermissionsUpdate' Bool
-puPrettyPrint
-  = lens _puPrettyPrint
-      (\ s a -> s{_puPrettyPrint = a})
+puuPrettyPrint :: Lens' PermissionsUpdate' Bool
+puuPrettyPrint
+  = lens _puuPrettyPrint
+      (\ s a -> s{_puuPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PermissionsUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puuUserIp :: Lens' PermissionsUpdate' (Maybe Text)
+puuUserIp
+  = lens _puuUserIp (\ s a -> s{_puuUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PermissionsUpdate' (Maybe Text)
-puKey = lens _puKey (\ s a -> s{_puKey = a})
+puuKey :: Lens' PermissionsUpdate' (Maybe Text)
+puuKey = lens _puuKey (\ s a -> s{_puuKey = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to
 -- writers. Does nothing if the specified role is not \'owner\'.
-puTransferOwnership :: Lens' PermissionsUpdate' Bool
-puTransferOwnership
-  = lens _puTransferOwnership
-      (\ s a -> s{_puTransferOwnership = a})
+puuTransferOwnership :: Lens' PermissionsUpdate' Bool
+puuTransferOwnership
+  = lens _puuTransferOwnership
+      (\ s a -> s{_puuTransferOwnership = a})
 
 -- | The ID for the file.
-puFileId :: Lens' PermissionsUpdate' Text
-puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
+puuFileId :: Lens' PermissionsUpdate' Text
+puuFileId
+  = lens _puuFileId (\ s a -> s{_puuFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PermissionsUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puuOauthToken :: Lens' PermissionsUpdate' (Maybe Text)
+puuOauthToken
+  = lens _puuOauthToken
+      (\ s a -> s{_puuOauthToken = a})
 
 -- | The ID for the permission.
-puPermissionId :: Lens' PermissionsUpdate' Text
-puPermissionId
-  = lens _puPermissionId
-      (\ s a -> s{_puPermissionId = a})
+puuPermissionId :: Lens' PermissionsUpdate' Text
+puuPermissionId
+  = lens _puuPermissionId
+      (\ s a -> s{_puuPermissionId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-puFields :: Lens' PermissionsUpdate' (Maybe Text)
-puFields = lens _puFields (\ s a -> s{_puFields = a})
+puuFields :: Lens' PermissionsUpdate' (Maybe Text)
+puuFields
+  = lens _puuFields (\ s a -> s{_puuFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PermissionsUpdate' Text
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+puuAlt :: Lens' PermissionsUpdate' Alt
+puuAlt = lens _puuAlt (\ s a -> s{_puuAlt = a})
 
 instance GoogleRequest PermissionsUpdate' where
         type Rs PermissionsUpdate' = Permission
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsUpdate{..}
-          = go _puQuotaUser _puPrettyPrint _puUserIp _puKey
-              (Just _puTransferOwnership)
-              _puFileId
-              _puOauthToken
-              _puPermissionId
-              _puFields
-              _puAlt
+        requestWithRoute r u PermissionsUpdate'{..}
+          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIp
+              _puuKey
+              (Just _puuTransferOwnership)
+              _puuFileId
+              _puuOauthToken
+              _puuPermissionId
+              _puuFields
+              (Just _puuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PermissionsUpdateAPI)
+                      (Proxy :: Proxy PermissionsUpdateResource)
                       r
                       u

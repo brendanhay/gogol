@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- with the primary calendar of an account.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarsClear@.
-module Calendar.Calendars.Clear
+module Network.Google.Resource.Calendar.Calendars.Clear
     (
     -- * REST Resource
-      CalendarsClearAPI
+      CalendarsClearResource
 
     -- * Creating a Request
-    , calendarsClear
-    , CalendarsClear
+    , calendarsClear'
+    , CalendarsClear'
 
     -- * Request Lenses
     , ccQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarsClear@ which the
--- 'CalendarsClear' request conforms to.
-type CalendarsClearAPI =
+-- 'CalendarsClear'' request conforms to.
+type CalendarsClearResource =
      "calendars" :>
        Capture "calendarId" Text :>
-         "clear" :> Post '[JSON] ()
+         "clear" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Clears a primary calendar. This operation deletes all events associated
 -- with the primary calendar of an account.
 --
--- /See:/ 'calendarsClear' smart constructor.
-data CalendarsClear = CalendarsClear
+-- /See:/ 'calendarsClear'' smart constructor.
+data CalendarsClear' = CalendarsClear'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccCalendarId  :: !Text
     , _ccPrettyPrint :: !Bool
@@ -62,7 +70,7 @@ data CalendarsClear = CalendarsClear
     , _ccKey         :: !(Maybe Text)
     , _ccOauthToken  :: !(Maybe Text)
     , _ccFields      :: !(Maybe Text)
-    , _ccAlt         :: !Text
+    , _ccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsClear'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data CalendarsClear = CalendarsClear
 -- * 'ccFields'
 --
 -- * 'ccAlt'
-calendarsClear
+calendarsClear'
     :: Text -- ^ 'calendarId'
-    -> CalendarsClear
-calendarsClear pCcCalendarId_ =
-    CalendarsClear
+    -> CalendarsClear'
+calendarsClear' pCcCalendarId_ =
+    CalendarsClear'
     { _ccQuotaUser = Nothing
     , _ccCalendarId = pCcCalendarId_
     , _ccPrettyPrint = True
@@ -96,7 +104,7 @@ calendarsClear pCcCalendarId_ =
     , _ccKey = Nothing
     , _ccOauthToken = Nothing
     , _ccFields = Nothing
-    , _ccAlt = "json"
+    , _ccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,20 +148,21 @@ ccFields :: Lens' CalendarsClear' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
 -- | Data format for the response.
-ccAlt :: Lens' CalendarsClear' Text
+ccAlt :: Lens' CalendarsClear' Alt
 ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
 
 instance GoogleRequest CalendarsClear' where
         type Rs CalendarsClear' = ()
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarsClear{..}
-          = go _ccQuotaUser _ccCalendarId _ccPrettyPrint
+        requestWithRoute r u CalendarsClear'{..}
+          = go _ccQuotaUser _ccCalendarId (Just _ccPrettyPrint)
               _ccUserIp
               _ccKey
               _ccOauthToken
               _ccFields
-              _ccAlt
+              (Just _ccAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CalendarsClearAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CalendarsClearResource)
                       r
                       u

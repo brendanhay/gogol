@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes in users list
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersWatch@.
-module Directory.Users.Watch
+module Network.Google.Resource.Directory.Users.Watch
     (
     -- * REST Resource
-      UsersWatchAPI
+      UsersWatchResource
 
     -- * Creating a Request
-    , usersWatch
-    , UsersWatch
+    , usersWatch'
+    , UsersWatch'
 
     -- * Request Lenses
     , uwEvent
@@ -54,47 +55,57 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersWatch@ which the
--- 'UsersWatch' request conforms to.
-type UsersWatchAPI =
+-- 'UsersWatch'' request conforms to.
+type UsersWatchResource =
      "users" :>
        "watch" :>
-         QueryParam "event" Text :>
-           QueryParam "orderBy" Text :>
-             QueryParam "viewType" Text :>
-               QueryParam "customFieldMask" Text :>
-                 QueryParam "domain" Text :>
-                   QueryParam "showDeleted" Text :>
-                     QueryParam "sortOrder" Text :>
-                       QueryParam "customer" Text :>
-                         QueryParam "query" Text :>
-                           QueryParam "projection" Text :>
-                             QueryParam "pageToken" Text :>
-                               QueryParam "maxResults" Int32 :>
-                                 Post '[JSON] Channel
+         QueryParam "event" DirectoryUsersWatchEvent :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" DirectoryUsersWatchOrderBy :>
+                 QueryParam "viewType" DirectoryUsersWatchViewType :>
+                   QueryParam "customFieldMask" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "domain" Text :>
+                         QueryParam "showDeleted" Text :>
+                           QueryParam "sortOrder" DirectoryUsersWatchSortOrder
+                             :>
+                             QueryParam "customer" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "query" Text :>
+                                   QueryParam "projection"
+                                     DirectoryUsersWatchProjection
+                                     :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "oauth_token" Text :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Post '[JSON] Channel
 
 -- | Watch for changes in users list
 --
--- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
-    { _uwEvent           :: !(Maybe Text)
+-- /See:/ 'usersWatch'' smart constructor.
+data UsersWatch' = UsersWatch'
+    { _uwEvent           :: !(Maybe DirectoryUsersWatchEvent)
     , _uwQuotaUser       :: !(Maybe Text)
     , _uwPrettyPrint     :: !Bool
-    , _uwOrderBy         :: !(Maybe Text)
-    , _uwViewType        :: !Text
+    , _uwOrderBy         :: !(Maybe DirectoryUsersWatchOrderBy)
+    , _uwViewType        :: !DirectoryUsersWatchViewType
     , _uwCustomFieldMask :: !(Maybe Text)
     , _uwUserIp          :: !(Maybe Text)
     , _uwDomain          :: !(Maybe Text)
     , _uwShowDeleted     :: !(Maybe Text)
-    , _uwSortOrder       :: !(Maybe Text)
+    , _uwSortOrder       :: !(Maybe DirectoryUsersWatchSortOrder)
     , _uwCustomer        :: !(Maybe Text)
     , _uwKey             :: !(Maybe Text)
     , _uwQuery           :: !(Maybe Text)
-    , _uwProjection      :: !Text
+    , _uwProjection      :: !DirectoryUsersWatchProjection
     , _uwPageToken       :: !(Maybe Text)
     , _uwOauthToken      :: !(Maybe Text)
     , _uwMaxResults      :: !(Maybe Int32)
     , _uwFields          :: !(Maybe Text)
-    , _uwAlt             :: !Text
+    , _uwAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
@@ -138,15 +149,15 @@ data UsersWatch = UsersWatch
 -- * 'uwFields'
 --
 -- * 'uwAlt'
-usersWatch
-    :: UsersWatch
-usersWatch =
-    UsersWatch
+usersWatch'
+    :: UsersWatch'
+usersWatch' =
+    UsersWatch'
     { _uwEvent = Nothing
     , _uwQuotaUser = Nothing
     , _uwPrettyPrint = True
     , _uwOrderBy = Nothing
-    , _uwViewType = "admin_view"
+    , _uwViewType = DUWVTAdminView
     , _uwCustomFieldMask = Nothing
     , _uwUserIp = Nothing
     , _uwDomain = Nothing
@@ -155,16 +166,16 @@ usersWatch =
     , _uwCustomer = Nothing
     , _uwKey = Nothing
     , _uwQuery = Nothing
-    , _uwProjection = "basic"
+    , _uwProjection = DUWPBasic
     , _uwPageToken = Nothing
     , _uwOauthToken = Nothing
     , _uwMaxResults = Nothing
     , _uwFields = Nothing
-    , _uwAlt = "json"
+    , _uwAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
-uwEvent :: Lens' UsersWatch' (Maybe Text)
+uwEvent :: Lens' UsersWatch' (Maybe DirectoryUsersWatchEvent)
 uwEvent = lens _uwEvent (\ s a -> s{_uwEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,12 +192,12 @@ uwPrettyPrint
       (\ s a -> s{_uwPrettyPrint = a})
 
 -- | Column to use for sorting results
-uwOrderBy :: Lens' UsersWatch' (Maybe Text)
+uwOrderBy :: Lens' UsersWatch' (Maybe DirectoryUsersWatchOrderBy)
 uwOrderBy
   = lens _uwOrderBy (\ s a -> s{_uwOrderBy = a})
 
 -- | Whether to fetch the ADMIN_VIEW or DOMAIN_PUBLIC view of the user.
-uwViewType :: Lens' UsersWatch' Text
+uwViewType :: Lens' UsersWatch' DirectoryUsersWatchViewType
 uwViewType
   = lens _uwViewType (\ s a -> s{_uwViewType = a})
 
@@ -214,7 +225,7 @@ uwShowDeleted
       (\ s a -> s{_uwShowDeleted = a})
 
 -- | Whether to return results in ascending or descending order.
-uwSortOrder :: Lens' UsersWatch' (Maybe Text)
+uwSortOrder :: Lens' UsersWatch' (Maybe DirectoryUsersWatchSortOrder)
 uwSortOrder
   = lens _uwSortOrder (\ s a -> s{_uwSortOrder = a})
 
@@ -237,7 +248,7 @@ uwQuery :: Lens' UsersWatch' (Maybe Text)
 uwQuery = lens _uwQuery (\ s a -> s{_uwQuery = a})
 
 -- | What subset of fields to fetch for this user.
-uwProjection :: Lens' UsersWatch' Text
+uwProjection :: Lens' UsersWatch' DirectoryUsersWatchProjection
 uwProjection
   = lens _uwProjection (\ s a -> s{_uwProjection = a})
 
@@ -261,14 +272,15 @@ uwFields :: Lens' UsersWatch' (Maybe Text)
 uwFields = lens _uwFields (\ s a -> s{_uwFields = a})
 
 -- | Data format for the response.
-uwAlt :: Lens' UsersWatch' Text
+uwAlt :: Lens' UsersWatch' Alt
 uwAlt = lens _uwAlt (\ s a -> s{_uwAlt = a})
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersWatch{..}
-          = go _uwEvent _uwQuotaUser _uwPrettyPrint _uwOrderBy
+        requestWithRoute r u UsersWatch'{..}
+          = go _uwEvent _uwQuotaUser (Just _uwPrettyPrint)
+              _uwOrderBy
               (Just _uwViewType)
               _uwCustomFieldMask
               _uwUserIp
@@ -283,6 +295,8 @@ instance GoogleRequest UsersWatch' where
               _uwOauthToken
               _uwMaxResults
               _uwFields
-              _uwAlt
+              (Just _uwAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersWatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersWatchResource)
+                      r
+                      u

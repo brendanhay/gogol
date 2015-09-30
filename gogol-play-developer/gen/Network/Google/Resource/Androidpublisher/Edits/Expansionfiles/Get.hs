@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Fetches the Expansion File configuration for the APK specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsExpansionfilesGet@.
-module Androidpublisher.Edits.Expansionfiles.Get
+module Network.Google.Resource.Androidpublisher.Edits.Expansionfiles.Get
     (
     -- * REST Resource
-      EditsExpansionfilesGetAPI
+      EditsExpansionfilesGetResource
 
     -- * Creating a Request
-    , editsExpansionfilesGet
-    , EditsExpansionfilesGet
+    , editsExpansionfilesGet'
+    , EditsExpansionfilesGet'
 
     -- * Request Lenses
     , eegQuotaUser
@@ -46,32 +47,40 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsExpansionfilesGet@ which the
--- 'EditsExpansionfilesGet' request conforms to.
-type EditsExpansionfilesGetAPI =
+-- 'EditsExpansionfilesGet'' request conforms to.
+type EditsExpansionfilesGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "expansionFiles" :>
-                 Capture "expansionFileType" Text :>
-                   Get '[JSON] ExpansionFile
+                 Capture "expansionFileType"
+                   AndroidpublisherEditsExpansionfilesGetExpansionFileType
+                   :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] ExpansionFile
 
 -- | Fetches the Expansion File configuration for the APK specified.
 --
--- /See:/ 'editsExpansionfilesGet' smart constructor.
-data EditsExpansionfilesGet = EditsExpansionfilesGet
+-- /See:/ 'editsExpansionfilesGet'' smart constructor.
+data EditsExpansionfilesGet' = EditsExpansionfilesGet'
     { _eegQuotaUser         :: !(Maybe Text)
     , _eegPrettyPrint       :: !Bool
     , _eegPackageName       :: !Text
     , _eegApkVersionCode    :: !Int32
     , _eegUserIp            :: !(Maybe Text)
     , _eegKey               :: !(Maybe Text)
-    , _eegExpansionFileType :: !Text
+    , _eegExpansionFileType :: !AndroidpublisherEditsExpansionfilesGetExpansionFileType
     , _eegOauthToken        :: !(Maybe Text)
     , _eegEditId            :: !Text
     , _eegFields            :: !(Maybe Text)
-    , _eegAlt               :: !Text
+    , _eegAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsExpansionfilesGet'' with the minimum fields required to make a request.
@@ -99,14 +108,14 @@ data EditsExpansionfilesGet = EditsExpansionfilesGet
 -- * 'eegFields'
 --
 -- * 'eegAlt'
-editsExpansionfilesGet
+editsExpansionfilesGet'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
-    -> Text -- ^ 'expansionFileType'
+    -> AndroidpublisherEditsExpansionfilesGetExpansionFileType -- ^ 'expansionFileType'
     -> Text -- ^ 'editId'
-    -> EditsExpansionfilesGet
-editsExpansionfilesGet pEegPackageName_ pEegApkVersionCode_ pEegExpansionFileType_ pEegEditId_ =
-    EditsExpansionfilesGet
+    -> EditsExpansionfilesGet'
+editsExpansionfilesGet' pEegPackageName_ pEegApkVersionCode_ pEegExpansionFileType_ pEegEditId_ =
+    EditsExpansionfilesGet'
     { _eegQuotaUser = Nothing
     , _eegPrettyPrint = True
     , _eegPackageName = pEegPackageName_
@@ -117,7 +126,7 @@ editsExpansionfilesGet pEegPackageName_ pEegApkVersionCode_ pEegExpansionFileTyp
     , _eegOauthToken = Nothing
     , _eegEditId = pEegEditId_
     , _eegFields = Nothing
-    , _eegAlt = "json"
+    , _eegAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,7 +168,7 @@ eegUserIp
 eegKey :: Lens' EditsExpansionfilesGet' (Maybe Text)
 eegKey = lens _eegKey (\ s a -> s{_eegKey = a})
 
-eegExpansionFileType :: Lens' EditsExpansionfilesGet' Text
+eegExpansionFileType :: Lens' EditsExpansionfilesGet' AndroidpublisherEditsExpansionfilesGetExpansionFileType
 eegExpansionFileType
   = lens _eegExpansionFileType
       (\ s a -> s{_eegExpansionFileType = a})
@@ -181,14 +190,15 @@ eegFields
   = lens _eegFields (\ s a -> s{_eegFields = a})
 
 -- | Data format for the response.
-eegAlt :: Lens' EditsExpansionfilesGet' Text
+eegAlt :: Lens' EditsExpansionfilesGet' Alt
 eegAlt = lens _eegAlt (\ s a -> s{_eegAlt = a})
 
 instance GoogleRequest EditsExpansionfilesGet' where
         type Rs EditsExpansionfilesGet' = ExpansionFile
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsExpansionfilesGet{..}
-          = go _eegQuotaUser _eegPrettyPrint _eegPackageName
+        requestWithRoute r u EditsExpansionfilesGet'{..}
+          = go _eegQuotaUser (Just _eegPrettyPrint)
+              _eegPackageName
               _eegApkVersionCode
               _eegUserIp
               _eegKey
@@ -196,9 +206,9 @@ instance GoogleRequest EditsExpansionfilesGet' where
               _eegOauthToken
               _eegEditId
               _eegFields
-              _eegAlt
+              (Just _eegAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsExpansionfilesGetAPI)
+                      (Proxy :: Proxy EditsExpansionfilesGetResource)
                       r
                       u

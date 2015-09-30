@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsList@.
-module Compute.URLMaps.List
+module Network.Google.Resource.Compute.URLMaps.List
     (
     -- * REST Resource
-      UrlMapsListAPI
+      UrlMapsListResource
 
     -- * Creating a Request
-    , uRLMapsList
-    , URLMapsList
+    , uRLMapsList'
+    , URLMapsList'
 
     -- * Request Lenses
     , umlQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsList@ which the
--- 'URLMapsList' request conforms to.
-type UrlMapsListAPI =
+-- 'URLMapsList'' request conforms to.
+type UrlMapsListResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] URLMapList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] URLMapList
 
 -- | Retrieves the list of UrlMap resources available to the specified
 -- project.
 --
--- /See:/ 'uRLMapsList' smart constructor.
-data URLMapsList = URLMapsList
+-- /See:/ 'uRLMapsList'' smart constructor.
+data URLMapsList' = URLMapsList'
     { _umlQuotaUser   :: !(Maybe Text)
     , _umlPrettyPrint :: !Bool
     , _umlProject     :: !Text
@@ -72,7 +79,7 @@ data URLMapsList = URLMapsList
     , _umlOauthToken  :: !(Maybe Text)
     , _umlMaxResults  :: !Word32
     , _umlFields      :: !(Maybe Text)
-    , _umlAlt         :: !Text
+    , _umlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data URLMapsList = URLMapsList
 -- * 'umlFields'
 --
 -- * 'umlAlt'
-uRLMapsList
+uRLMapsList'
     :: Text -- ^ 'project'
-    -> URLMapsList
-uRLMapsList pUmlProject_ =
-    URLMapsList
+    -> URLMapsList'
+uRLMapsList' pUmlProject_ =
+    URLMapsList'
     { _umlQuotaUser = Nothing
     , _umlPrettyPrint = True
     , _umlProject = pUmlProject_
@@ -115,7 +122,7 @@ uRLMapsList pUmlProject_ =
     , _umlOauthToken = Nothing
     , _umlMaxResults = 500
     , _umlFields = Nothing
-    , _umlAlt = "json"
+    , _umlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,14 +195,14 @@ umlFields
   = lens _umlFields (\ s a -> s{_umlFields = a})
 
 -- | Data format for the response.
-umlAlt :: Lens' URLMapsList' Text
+umlAlt :: Lens' URLMapsList' Alt
 umlAlt = lens _umlAlt (\ s a -> s{_umlAlt = a})
 
 instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsList{..}
-          = go _umlQuotaUser _umlPrettyPrint _umlProject
+        requestWithRoute r u URLMapsList'{..}
+          = go _umlQuotaUser (Just _umlPrettyPrint) _umlProject
               _umlUserIp
               _umlKey
               _umlFilter
@@ -203,6 +210,9 @@ instance GoogleRequest URLMapsList' where
               _umlOauthToken
               (Just _umlMaxResults)
               _umlFields
-              _umlAlt
+              (Just _umlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsListResource)
+                      r
+                      u

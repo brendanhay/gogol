@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyCreateAuthURI@.
-module IdentityToolkit.Relyingparty.CreateAuthURI
+module Network.Google.Resource.IdentityToolkit.Relyingparty.CreateAuthURI
     (
     -- * REST Resource
-      RelyingpartyCreateAuthURIAPI
+      RelyingpartyCreateAuthURIResource
 
     -- * Creating a Request
-    , relyingpartyCreateAuthURI
-    , RelyingpartyCreateAuthURI
+    , relyingpartyCreateAuthURI'
+    , RelyingpartyCreateAuthURI'
 
     -- * Request Lenses
     , rcauQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyCreateAuthURI@ which the
--- 'RelyingpartyCreateAuthURI' request conforms to.
-type RelyingpartyCreateAuthURIAPI =
-     "createAuthUri" :> Post '[JSON] CreateAuthURIResponse
+-- 'RelyingpartyCreateAuthURI'' request conforms to.
+type RelyingpartyCreateAuthURIResource =
+     "createAuthUri" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] CreateAuthURIResponse
 
 -- | Creates the URI used by the IdP to authenticate the user.
 --
--- /See:/ 'relyingpartyCreateAuthURI' smart constructor.
-data RelyingpartyCreateAuthURI = RelyingpartyCreateAuthURI
+-- /See:/ 'relyingpartyCreateAuthURI'' smart constructor.
+data RelyingpartyCreateAuthURI' = RelyingpartyCreateAuthURI'
     { _rcauQuotaUser   :: !(Maybe Text)
     , _rcauPrettyPrint :: !Bool
     , _rcauUserIp      :: !(Maybe Text)
     , _rcauKey         :: !(Maybe Text)
     , _rcauOauthToken  :: !(Maybe Text)
     , _rcauFields      :: !(Maybe Text)
-    , _rcauAlt         :: !Text
+    , _rcauAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyCreateAuthURI'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data RelyingpartyCreateAuthURI = RelyingpartyCreateAuthURI
 -- * 'rcauFields'
 --
 -- * 'rcauAlt'
-relyingpartyCreateAuthURI
-    :: RelyingpartyCreateAuthURI
-relyingpartyCreateAuthURI =
-    RelyingpartyCreateAuthURI
+relyingpartyCreateAuthURI'
+    :: RelyingpartyCreateAuthURI'
+relyingpartyCreateAuthURI' =
+    RelyingpartyCreateAuthURI'
     { _rcauQuotaUser = Nothing
     , _rcauPrettyPrint = True
     , _rcauUserIp = Nothing
     , _rcauKey = Nothing
     , _rcauOauthToken = Nothing
     , _rcauFields = Nothing
-    , _rcauAlt = "json"
+    , _rcauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,7 +136,7 @@ rcauFields
   = lens _rcauFields (\ s a -> s{_rcauFields = a})
 
 -- | Data format for the response.
-rcauAlt :: Lens' RelyingpartyCreateAuthURI' Text
+rcauAlt :: Lens' RelyingpartyCreateAuthURI' Alt
 rcauAlt = lens _rcauAlt (\ s a -> s{_rcauAlt = a})
 
 instance GoogleRequest RelyingpartyCreateAuthURI'
@@ -135,14 +144,15 @@ instance GoogleRequest RelyingpartyCreateAuthURI'
         type Rs RelyingpartyCreateAuthURI' =
              CreateAuthURIResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyCreateAuthURI{..}
-          = go _rcauQuotaUser _rcauPrettyPrint _rcauUserIp
+        requestWithRoute r u RelyingpartyCreateAuthURI'{..}
+          = go _rcauQuotaUser (Just _rcauPrettyPrint)
+              _rcauUserIp
               _rcauKey
               _rcauOauthToken
               _rcauFields
-              _rcauAlt
+              (Just _rcauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyCreateAuthURIAPI)
+                      (Proxy :: Proxy RelyingpartyCreateAuthURIResource)
                       r
                       u

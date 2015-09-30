@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,168 +20,176 @@
 -- | Return all parent ids of the specified rasters.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersParentsList@.
-module Mapsengine.Rasters.Parents.List
+module Network.Google.Resource.Mapsengine.Rasters.Parents.List
     (
     -- * REST Resource
-      RastersParentsListAPI
+      RastersParentsListResource
 
     -- * Creating a Request
-    , rastersParentsList
-    , RastersParentsList
+    , rastersParentsList'
+    , RastersParentsList'
 
     -- * Request Lenses
-    , rplQuotaUser
-    , rplPrettyPrint
-    , rplUserIp
-    , rplKey
-    , rplId
-    , rplPageToken
-    , rplOauthToken
-    , rplMaxResults
-    , rplFields
-    , rplAlt
+    , rasQuotaUser
+    , rasPrettyPrint
+    , rasUserIp
+    , rasKey
+    , rasId
+    , rasPageToken
+    , rasOauthToken
+    , rasMaxResults
+    , rasFields
+    , rasAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersParentsList@ which the
--- 'RastersParentsList' request conforms to.
-type RastersParentsListAPI =
+-- 'RastersParentsList'' request conforms to.
+type RastersParentsListResource =
      "rasters" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ParentsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified rasters.
 --
--- /See:/ 'rastersParentsList' smart constructor.
-data RastersParentsList = RastersParentsList
-    { _rplQuotaUser   :: !(Maybe Text)
-    , _rplPrettyPrint :: !Bool
-    , _rplUserIp      :: !(Maybe Text)
-    , _rplKey         :: !(Maybe Text)
-    , _rplId          :: !Text
-    , _rplPageToken   :: !(Maybe Text)
-    , _rplOauthToken  :: !(Maybe Text)
-    , _rplMaxResults  :: !(Maybe Word32)
-    , _rplFields      :: !(Maybe Text)
-    , _rplAlt         :: !Text
+-- /See:/ 'rastersParentsList'' smart constructor.
+data RastersParentsList' = RastersParentsList'
+    { _rasQuotaUser   :: !(Maybe Text)
+    , _rasPrettyPrint :: !Bool
+    , _rasUserIp      :: !(Maybe Text)
+    , _rasKey         :: !(Maybe Text)
+    , _rasId          :: !Text
+    , _rasPageToken   :: !(Maybe Text)
+    , _rasOauthToken  :: !(Maybe Text)
+    , _rasMaxResults  :: !(Maybe Word32)
+    , _rasFields      :: !(Maybe Text)
+    , _rasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersParentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rplQuotaUser'
+-- * 'rasQuotaUser'
 --
--- * 'rplPrettyPrint'
+-- * 'rasPrettyPrint'
 --
--- * 'rplUserIp'
+-- * 'rasUserIp'
 --
--- * 'rplKey'
+-- * 'rasKey'
 --
--- * 'rplId'
+-- * 'rasId'
 --
--- * 'rplPageToken'
+-- * 'rasPageToken'
 --
--- * 'rplOauthToken'
+-- * 'rasOauthToken'
 --
--- * 'rplMaxResults'
+-- * 'rasMaxResults'
 --
--- * 'rplFields'
+-- * 'rasFields'
 --
--- * 'rplAlt'
-rastersParentsList
+-- * 'rasAlt'
+rastersParentsList'
     :: Text -- ^ 'id'
-    -> RastersParentsList
-rastersParentsList pRplId_ =
-    RastersParentsList
-    { _rplQuotaUser = Nothing
-    , _rplPrettyPrint = True
-    , _rplUserIp = Nothing
-    , _rplKey = Nothing
-    , _rplId = pRplId_
-    , _rplPageToken = Nothing
-    , _rplOauthToken = Nothing
-    , _rplMaxResults = Nothing
-    , _rplFields = Nothing
-    , _rplAlt = "json"
+    -> RastersParentsList'
+rastersParentsList' pRasId_ =
+    RastersParentsList'
+    { _rasQuotaUser = Nothing
+    , _rasPrettyPrint = True
+    , _rasUserIp = Nothing
+    , _rasKey = Nothing
+    , _rasId = pRasId_
+    , _rasPageToken = Nothing
+    , _rasOauthToken = Nothing
+    , _rasMaxResults = Nothing
+    , _rasFields = Nothing
+    , _rasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rplQuotaUser :: Lens' RastersParentsList' (Maybe Text)
-rplQuotaUser
-  = lens _rplQuotaUser (\ s a -> s{_rplQuotaUser = a})
+rasQuotaUser :: Lens' RastersParentsList' (Maybe Text)
+rasQuotaUser
+  = lens _rasQuotaUser (\ s a -> s{_rasQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rplPrettyPrint :: Lens' RastersParentsList' Bool
-rplPrettyPrint
-  = lens _rplPrettyPrint
-      (\ s a -> s{_rplPrettyPrint = a})
+rasPrettyPrint :: Lens' RastersParentsList' Bool
+rasPrettyPrint
+  = lens _rasPrettyPrint
+      (\ s a -> s{_rasPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rplUserIp :: Lens' RastersParentsList' (Maybe Text)
-rplUserIp
-  = lens _rplUserIp (\ s a -> s{_rplUserIp = a})
+rasUserIp :: Lens' RastersParentsList' (Maybe Text)
+rasUserIp
+  = lens _rasUserIp (\ s a -> s{_rasUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rplKey :: Lens' RastersParentsList' (Maybe Text)
-rplKey = lens _rplKey (\ s a -> s{_rplKey = a})
+rasKey :: Lens' RastersParentsList' (Maybe Text)
+rasKey = lens _rasKey (\ s a -> s{_rasKey = a})
 
 -- | The ID of the rasters whose parents will be listed.
-rplId :: Lens' RastersParentsList' Text
-rplId = lens _rplId (\ s a -> s{_rplId = a})
+rasId :: Lens' RastersParentsList' Text
+rasId = lens _rasId (\ s a -> s{_rasId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-rplPageToken :: Lens' RastersParentsList' (Maybe Text)
-rplPageToken
-  = lens _rplPageToken (\ s a -> s{_rplPageToken = a})
+rasPageToken :: Lens' RastersParentsList' (Maybe Text)
+rasPageToken
+  = lens _rasPageToken (\ s a -> s{_rasPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rplOauthToken :: Lens' RastersParentsList' (Maybe Text)
-rplOauthToken
-  = lens _rplOauthToken
-      (\ s a -> s{_rplOauthToken = a})
+rasOauthToken :: Lens' RastersParentsList' (Maybe Text)
+rasOauthToken
+  = lens _rasOauthToken
+      (\ s a -> s{_rasOauthToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-rplMaxResults :: Lens' RastersParentsList' (Maybe Word32)
-rplMaxResults
-  = lens _rplMaxResults
-      (\ s a -> s{_rplMaxResults = a})
+rasMaxResults :: Lens' RastersParentsList' (Maybe Word32)
+rasMaxResults
+  = lens _rasMaxResults
+      (\ s a -> s{_rasMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rplFields :: Lens' RastersParentsList' (Maybe Text)
-rplFields
-  = lens _rplFields (\ s a -> s{_rplFields = a})
+rasFields :: Lens' RastersParentsList' (Maybe Text)
+rasFields
+  = lens _rasFields (\ s a -> s{_rasFields = a})
 
 -- | Data format for the response.
-rplAlt :: Lens' RastersParentsList' Text
-rplAlt = lens _rplAlt (\ s a -> s{_rplAlt = a})
+rasAlt :: Lens' RastersParentsList' Alt
+rasAlt = lens _rasAlt (\ s a -> s{_rasAlt = a})
 
 instance GoogleRequest RastersParentsList' where
         type Rs RastersParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RastersParentsList{..}
-          = go _rplQuotaUser _rplPrettyPrint _rplUserIp _rplKey
-              _rplId
-              _rplPageToken
-              _rplOauthToken
-              _rplMaxResults
-              _rplFields
-              _rplAlt
+        requestWithRoute r u RastersParentsList'{..}
+          = go _rasQuotaUser (Just _rasPrettyPrint) _rasUserIp
+              _rasKey
+              _rasId
+              _rasPageToken
+              _rasOauthToken
+              _rasMaxResults
+              _rasFields
+              (Just _rasAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RastersParentsListAPI)
+                      (Proxy :: Proxy RastersParentsListResource)
                       r
                       u

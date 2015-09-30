@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get a custom dimension to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomDimensionsGet@.
-module Analytics.Management.CustomDimensions.Get
+module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
     (
     -- * REST Resource
-      ManagementCustomDimensionsGetAPI
+      ManagementCustomDimensionsGetResource
 
     -- * Creating a Request
-    , managementCustomDimensionsGet
-    , ManagementCustomDimensionsGet
+    , managementCustomDimensionsGet'
+    , ManagementCustomDimensionsGet'
 
     -- * Request Lenses
     , mcdgQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomDimensionsGet@ which the
--- 'ManagementCustomDimensionsGet' request conforms to.
-type ManagementCustomDimensionsGetAPI =
+-- 'ManagementCustomDimensionsGet'' request conforms to.
+type ManagementCustomDimensionsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementCustomDimensionsGetAPI =
              Capture "webPropertyId" Text :>
                "customDimensions" :>
                  Capture "customDimensionId" Text :>
-                   Get '[JSON] CustomDimension
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] CustomDimension
 
 -- | Get a custom dimension to which the user has access.
 --
--- /See:/ 'managementCustomDimensionsGet' smart constructor.
-data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet
+-- /See:/ 'managementCustomDimensionsGet'' smart constructor.
+data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
     { _mcdgQuotaUser         :: !(Maybe Text)
     , _mcdgPrettyPrint       :: !Bool
     , _mcdgWebPropertyId     :: !Text
@@ -69,7 +77,7 @@ data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet
     , _mcdgOauthToken        :: !(Maybe Text)
     , _mcdgCustomDimensionId :: !Text
     , _mcdgFields            :: !(Maybe Text)
-    , _mcdgAlt               :: !Text
+    , _mcdgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsGet'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet
 -- * 'mcdgFields'
 --
 -- * 'mcdgAlt'
-managementCustomDimensionsGet
+managementCustomDimensionsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'customDimensionId'
-    -> ManagementCustomDimensionsGet
-managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
-    ManagementCustomDimensionsGet
+    -> ManagementCustomDimensionsGet'
+managementCustomDimensionsGet' pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
+    ManagementCustomDimensionsGet'
     { _mcdgQuotaUser = Nothing
     , _mcdgPrettyPrint = False
     , _mcdgWebPropertyId = pMcdgWebPropertyId_
@@ -111,7 +119,7 @@ managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDim
     , _mcdgOauthToken = Nothing
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
     , _mcdgFields = Nothing
-    , _mcdgAlt = "json"
+    , _mcdgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,7 +178,7 @@ mcdgFields
   = lens _mcdgFields (\ s a -> s{_mcdgFields = a})
 
 -- | Data format for the response.
-mcdgAlt :: Lens' ManagementCustomDimensionsGet' Text
+mcdgAlt :: Lens' ManagementCustomDimensionsGet' Alt
 mcdgAlt = lens _mcdgAlt (\ s a -> s{_mcdgAlt = a})
 
 instance GoogleRequest ManagementCustomDimensionsGet'
@@ -179,8 +187,8 @@ instance GoogleRequest ManagementCustomDimensionsGet'
              CustomDimension
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementCustomDimensionsGet{..}
-          = go _mcdgQuotaUser _mcdgPrettyPrint
+          ManagementCustomDimensionsGet'{..}
+          = go _mcdgQuotaUser (Just _mcdgPrettyPrint)
               _mcdgWebPropertyId
               _mcdgUserIp
               _mcdgAccountId
@@ -188,9 +196,10 @@ instance GoogleRequest ManagementCustomDimensionsGet'
               _mcdgOauthToken
               _mcdgCustomDimensionId
               _mcdgFields
-              _mcdgAlt
+              (Just _mcdgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomDimensionsGetAPI)
+                      (Proxy ::
+                         Proxy ManagementCustomDimensionsGetResource)
                       r
                       u

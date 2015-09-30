@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists databases in the specified Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlDatabasesList@.
-module Sql.Databases.List
+module Network.Google.Resource.Sql.Databases.List
     (
     -- * REST Resource
-      DatabasesListAPI
+      DatabasesListResource
 
     -- * Creating a Request
-    , databasesList
-    , DatabasesList
+    , databasesList'
+    , DatabasesList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlDatabasesList@ which the
--- 'DatabasesList' request conforms to.
-type DatabasesListAPI =
+-- 'DatabasesList'' request conforms to.
+type DatabasesListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "databases" :> Get '[JSON] DatabasesListResponse
+             "databases" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] DatabasesListResponse
 
 -- | Lists databases in the specified Cloud SQL instance.
 --
--- /See:/ 'databasesList' smart constructor.
-data DatabasesList = DatabasesList
+-- /See:/ 'databasesList'' smart constructor.
+data DatabasesList' = DatabasesList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlProject     :: !Text
@@ -63,7 +72,7 @@ data DatabasesList = DatabasesList
     , _dlKey         :: !(Maybe Text)
     , _dlOauthToken  :: !(Maybe Text)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     , _dlInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +97,12 @@ data DatabasesList = DatabasesList
 -- * 'dlAlt'
 --
 -- * 'dlInstance'
-databasesList
+databasesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> DatabasesList
-databasesList pDlProject_ pDlInstance_ =
-    DatabasesList
+    -> DatabasesList'
+databasesList' pDlProject_ pDlInstance_ =
+    DatabasesList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlProject = pDlProject_
@@ -101,7 +110,7 @@ databasesList pDlProject_ pDlInstance_ =
     , _dlKey = Nothing
     , _dlOauthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     , _dlInstance = pDlInstance_
     }
 
@@ -144,7 +153,7 @@ dlFields :: Lens' DatabasesList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DatabasesList' Text
+dlAlt :: Lens' DatabasesList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -155,13 +164,16 @@ dlInstance
 instance GoogleRequest DatabasesList' where
         type Rs DatabasesList' = DatabasesListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u DatabasesList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlProject _dlUserIp
+        requestWithRoute r u DatabasesList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
+              _dlUserIp
               _dlKey
               _dlOauthToken
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
               _dlInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy DatabasesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DatabasesListResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- creative will be available 30-40 minutes after submission.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerCreativesList@.
-module AdExchangeBuyer.Creatives.List
+module Network.Google.Resource.AdExchangeBuyer.Creatives.List
     (
     -- * REST Resource
-      CreativesListAPI
+      CreativesListResource
 
     -- * Creating a Request
-    , creativesList
-    , CreativesList
+    , creativesList'
+    , CreativesList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -49,35 +50,45 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerCreativesList@ which the
--- 'CreativesList' request conforms to.
-type CreativesListAPI =
+-- 'CreativesList'' request conforms to.
+type CreativesListResource =
      "creatives" :>
-       QueryParams "buyerCreativeId" Text :>
-         QueryParam "openAuctionStatusFilter" Text :>
-           QueryParams "accountId" Int32 :>
-             QueryParam "pageToken" Text :>
-               QueryParam "dealsStatusFilter" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] CreativesList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParams "buyerCreativeId" Text :>
+             QueryParam "userIp" Text :>
+               QueryParam "openAuctionStatusFilter"
+                 AdexchangebuyerCreativesListOpenAuctionStatusFilter
+                 :>
+                 QueryParams "accountId" Int32 :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "dealsStatusFilter"
+                         AdexchangebuyerCreativesListDealsStatusFilter
+                         :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] CreativesList
 
 -- | Retrieves a list of the authenticated user\'s active creatives. A
 -- creative will be available 30-40 minutes after submission.
 --
--- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList
+-- /See:/ 'creativesList'' smart constructor.
+data CreativesList' = CreativesList'
     { _clQuotaUser               :: !(Maybe Text)
     , _clPrettyPrint             :: !Bool
     , _clBuyerCreativeId         :: !(Maybe Text)
     , _clUserIp                  :: !(Maybe Text)
-    , _clOpenAuctionStatusFilter :: !(Maybe Text)
+    , _clOpenAuctionStatusFilter :: !(Maybe AdexchangebuyerCreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe Int32)
     , _clKey                     :: !(Maybe Text)
     , _clPageToken               :: !(Maybe Text)
-    , _clDealsStatusFilter       :: !(Maybe Text)
+    , _clDealsStatusFilter       :: !(Maybe AdexchangebuyerCreativesListDealsStatusFilter)
     , _clOauthToken              :: !(Maybe Text)
     , _clMaxResults              :: !(Maybe Word32)
     , _clFields                  :: !(Maybe Text)
-    , _clAlt                     :: !Text
+    , _clAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
@@ -109,10 +120,10 @@ data CreativesList = CreativesList
 -- * 'clFields'
 --
 -- * 'clAlt'
-creativesList
-    :: CreativesList
-creativesList =
-    CreativesList
+creativesList'
+    :: CreativesList'
+creativesList' =
+    CreativesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clBuyerCreativeId = Nothing
@@ -125,7 +136,7 @@ creativesList =
     , _clOauthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +166,7 @@ clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.
-clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe Text)
+clOpenAuctionStatusFilter :: Lens' CreativesList' (Maybe AdexchangebuyerCreativesListOpenAuctionStatusFilter)
 clOpenAuctionStatusFilter
   = lens _clOpenAuctionStatusFilter
       (\ s a -> s{_clOpenAuctionStatusFilter = a})
@@ -180,7 +191,7 @@ clPageToken
 
 -- | When specified, only creatives having the given direct deals status are
 -- returned.
-clDealsStatusFilter :: Lens' CreativesList' (Maybe Text)
+clDealsStatusFilter :: Lens' CreativesList' (Maybe AdexchangebuyerCreativesListDealsStatusFilter)
 clDealsStatusFilter
   = lens _clDealsStatusFilter
       (\ s a -> s{_clDealsStatusFilter = a})
@@ -201,14 +212,15 @@ clFields :: Lens' CreativesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CreativesList' Text
+clAlt :: Lens' CreativesList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u CreativesList{..}
-          = go _clQuotaUser _clPrettyPrint _clBuyerCreativeId
+        requestWithRoute r u CreativesList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint)
+              _clBuyerCreativeId
               _clUserIp
               _clOpenAuctionStatusFilter
               _clAccountId
@@ -218,7 +230,9 @@ instance GoogleRequest CreativesList' where
               _clOauthToken
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesListResource)
+                      r
                       u

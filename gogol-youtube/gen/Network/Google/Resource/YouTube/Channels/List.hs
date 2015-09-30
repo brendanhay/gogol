@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,151 +21,158 @@
 -- request criteria.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeChannelsList@.
-module YouTube.Channels.List
+module Network.Google.Resource.YouTube.Channels.List
     (
     -- * REST Resource
-      ChannelsListAPI
+      ChannelsListResource
 
     -- * Creating a Request
-    , channelsList
-    , ChannelsList
+    , channelsList'
+    , ChannelsList'
 
     -- * Request Lenses
-    , chaQuotaUser
-    , chaPart
-    , chaPrettyPrint
-    , chaMine
-    , chaForUsername
-    , chaUserIp
-    , chaHl
-    , chaOnBehalfOfContentOwner
-    , chaKey
-    , chaCategoryId
-    , chaId
-    , chaMySubscribers
-    , chaPageToken
-    , chaOauthToken
-    , chaManagedByMe
-    , chaMaxResults
-    , chaFields
-    , chaAlt
+    , clQuotaUser
+    , clPart
+    , clPrettyPrint
+    , clMine
+    , clForUsername
+    , clUserIp
+    , clHl
+    , clOnBehalfOfContentOwner
+    , clKey
+    , clCategoryId
+    , clId
+    , clMySubscribers
+    , clPageToken
+    , clOauthToken
+    , clManagedByMe
+    , clMaxResults
+    , clFields
+    , clAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeChannelsList@ which the
--- 'ChannelsList' request conforms to.
-type ChannelsListAPI =
+-- 'ChannelsList'' request conforms to.
+type ChannelsListResource =
      "channels" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "forUsername" Text :>
-             QueryParam "hl" Text :>
-               QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "categoryId" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "mySubscribers" Bool :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "managedByMe" Bool :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] ChannelListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "forUsername" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "hl" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "categoryId" Text :>
+                           QueryParam "id" Text :>
+                             QueryParam "mySubscribers" Bool :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "managedByMe" Bool :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] ChannelListResponse
 
 -- | Returns a collection of zero or more channel resources that match the
 -- request criteria.
 --
--- /See:/ 'channelsList' smart constructor.
-data ChannelsList = ChannelsList
-    { _chaQuotaUser              :: !(Maybe Text)
-    , _chaPart                   :: !Text
-    , _chaPrettyPrint            :: !Bool
-    , _chaMine                   :: !(Maybe Bool)
-    , _chaForUsername            :: !(Maybe Text)
-    , _chaUserIp                 :: !(Maybe Text)
-    , _chaHl                     :: !(Maybe Text)
-    , _chaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _chaKey                    :: !(Maybe Text)
-    , _chaCategoryId             :: !(Maybe Text)
-    , _chaId                     :: !(Maybe Text)
-    , _chaMySubscribers          :: !(Maybe Bool)
-    , _chaPageToken              :: !(Maybe Text)
-    , _chaOauthToken             :: !(Maybe Text)
-    , _chaManagedByMe            :: !(Maybe Bool)
-    , _chaMaxResults             :: !Word32
-    , _chaFields                 :: !(Maybe Text)
-    , _chaAlt                    :: !Text
+-- /See:/ 'channelsList'' smart constructor.
+data ChannelsList' = ChannelsList'
+    { _clQuotaUser              :: !(Maybe Text)
+    , _clPart                   :: !Text
+    , _clPrettyPrint            :: !Bool
+    , _clMine                   :: !(Maybe Bool)
+    , _clForUsername            :: !(Maybe Text)
+    , _clUserIp                 :: !(Maybe Text)
+    , _clHl                     :: !(Maybe Text)
+    , _clOnBehalfOfContentOwner :: !(Maybe Text)
+    , _clKey                    :: !(Maybe Text)
+    , _clCategoryId             :: !(Maybe Text)
+    , _clId                     :: !(Maybe Text)
+    , _clMySubscribers          :: !(Maybe Bool)
+    , _clPageToken              :: !(Maybe Text)
+    , _clOauthToken             :: !(Maybe Text)
+    , _clManagedByMe            :: !(Maybe Bool)
+    , _clMaxResults             :: !Word32
+    , _clFields                 :: !(Maybe Text)
+    , _clAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'chaQuotaUser'
+-- * 'clQuotaUser'
 --
--- * 'chaPart'
+-- * 'clPart'
 --
--- * 'chaPrettyPrint'
+-- * 'clPrettyPrint'
 --
--- * 'chaMine'
+-- * 'clMine'
 --
--- * 'chaForUsername'
+-- * 'clForUsername'
 --
--- * 'chaUserIp'
+-- * 'clUserIp'
 --
--- * 'chaHl'
+-- * 'clHl'
 --
--- * 'chaOnBehalfOfContentOwner'
+-- * 'clOnBehalfOfContentOwner'
 --
--- * 'chaKey'
+-- * 'clKey'
 --
--- * 'chaCategoryId'
+-- * 'clCategoryId'
 --
--- * 'chaId'
+-- * 'clId'
 --
--- * 'chaMySubscribers'
+-- * 'clMySubscribers'
 --
--- * 'chaPageToken'
+-- * 'clPageToken'
 --
--- * 'chaOauthToken'
+-- * 'clOauthToken'
 --
--- * 'chaManagedByMe'
+-- * 'clManagedByMe'
 --
--- * 'chaMaxResults'
+-- * 'clMaxResults'
 --
--- * 'chaFields'
+-- * 'clFields'
 --
--- * 'chaAlt'
-channelsList
+-- * 'clAlt'
+channelsList'
     :: Text -- ^ 'part'
-    -> ChannelsList
-channelsList pChaPart_ =
-    ChannelsList
-    { _chaQuotaUser = Nothing
-    , _chaPart = pChaPart_
-    , _chaPrettyPrint = True
-    , _chaMine = Nothing
-    , _chaForUsername = Nothing
-    , _chaUserIp = Nothing
-    , _chaHl = Nothing
-    , _chaOnBehalfOfContentOwner = Nothing
-    , _chaKey = Nothing
-    , _chaCategoryId = Nothing
-    , _chaId = Nothing
-    , _chaMySubscribers = Nothing
-    , _chaPageToken = Nothing
-    , _chaOauthToken = Nothing
-    , _chaManagedByMe = Nothing
-    , _chaMaxResults = 5
-    , _chaFields = Nothing
-    , _chaAlt = "json"
+    -> ChannelsList'
+channelsList' pClPart_ =
+    ChannelsList'
+    { _clQuotaUser = Nothing
+    , _clPart = pClPart_
+    , _clPrettyPrint = True
+    , _clMine = Nothing
+    , _clForUsername = Nothing
+    , _clUserIp = Nothing
+    , _clHl = Nothing
+    , _clOnBehalfOfContentOwner = Nothing
+    , _clKey = Nothing
+    , _clCategoryId = Nothing
+    , _clId = Nothing
+    , _clMySubscribers = Nothing
+    , _clPageToken = Nothing
+    , _clOauthToken = Nothing
+    , _clManagedByMe = Nothing
+    , _clMaxResults = 5
+    , _clFields = Nothing
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-chaQuotaUser :: Lens' ChannelsList' (Maybe Text)
-chaQuotaUser
-  = lens _chaQuotaUser (\ s a -> s{_chaQuotaUser = a})
+clQuotaUser :: Lens' ChannelsList' (Maybe Text)
+clQuotaUser
+  = lens _clQuotaUser (\ s a -> s{_clQuotaUser = a})
 
 -- | The part parameter specifies a comma-separated list of one or more
 -- channel resource properties that the API response will include. If the
@@ -173,37 +181,36 @@ chaQuotaUser
 -- channel resource, the contentDetails property contains other properties,
 -- such as the uploads properties. As such, if you set part=contentDetails,
 -- the API response will also contain all of those nested properties.
-chaPart :: Lens' ChannelsList' Text
-chaPart = lens _chaPart (\ s a -> s{_chaPart = a})
+clPart :: Lens' ChannelsList' Text
+clPart = lens _clPart (\ s a -> s{_clPart = a})
 
 -- | Returns response with indentations and line breaks.
-chaPrettyPrint :: Lens' ChannelsList' Bool
-chaPrettyPrint
-  = lens _chaPrettyPrint
-      (\ s a -> s{_chaPrettyPrint = a})
+clPrettyPrint :: Lens' ChannelsList' Bool
+clPrettyPrint
+  = lens _clPrettyPrint
+      (\ s a -> s{_clPrettyPrint = a})
 
 -- | Set this parameter\'s value to true to instruct the API to only return
 -- channels owned by the authenticated user.
-chaMine :: Lens' ChannelsList' (Maybe Bool)
-chaMine = lens _chaMine (\ s a -> s{_chaMine = a})
+clMine :: Lens' ChannelsList' (Maybe Bool)
+clMine = lens _clMine (\ s a -> s{_clMine = a})
 
 -- | The forUsername parameter specifies a YouTube username, thereby
 -- requesting the channel associated with that username.
-chaForUsername :: Lens' ChannelsList' (Maybe Text)
-chaForUsername
-  = lens _chaForUsername
-      (\ s a -> s{_chaForUsername = a})
+clForUsername :: Lens' ChannelsList' (Maybe Text)
+clForUsername
+  = lens _clForUsername
+      (\ s a -> s{_clForUsername = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-chaUserIp :: Lens' ChannelsList' (Maybe Text)
-chaUserIp
-  = lens _chaUserIp (\ s a -> s{_chaUserIp = a})
+clUserIp :: Lens' ChannelsList' (Maybe Text)
+clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
 
 -- | The hl parameter should be used for filter out the properties that are
 -- not in the given language. Used for the brandingSettings part.
-chaHl :: Lens' ChannelsList' (Maybe Text)
-chaHl = lens _chaHl (\ s a -> s{_chaHl = a})
+clHl :: Lens' ChannelsList' (Maybe Text)
+clHl = lens _clHl (\ s a -> s{_clHl = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -215,49 +222,47 @@ chaHl = lens _chaHl (\ s a -> s{_chaHl = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The CMS account that the user authenticates with must be linked
 -- to the specified YouTube content owner.
-chaOnBehalfOfContentOwner :: Lens' ChannelsList' (Maybe Text)
-chaOnBehalfOfContentOwner
-  = lens _chaOnBehalfOfContentOwner
-      (\ s a -> s{_chaOnBehalfOfContentOwner = a})
+clOnBehalfOfContentOwner :: Lens' ChannelsList' (Maybe Text)
+clOnBehalfOfContentOwner
+  = lens _clOnBehalfOfContentOwner
+      (\ s a -> s{_clOnBehalfOfContentOwner = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chaKey :: Lens' ChannelsList' (Maybe Text)
-chaKey = lens _chaKey (\ s a -> s{_chaKey = a})
+clKey :: Lens' ChannelsList' (Maybe Text)
+clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The categoryId parameter specifies a YouTube guide category, thereby
 -- requesting YouTube channels associated with that category.
-chaCategoryId :: Lens' ChannelsList' (Maybe Text)
-chaCategoryId
-  = lens _chaCategoryId
-      (\ s a -> s{_chaCategoryId = a})
+clCategoryId :: Lens' ChannelsList' (Maybe Text)
+clCategoryId
+  = lens _clCategoryId (\ s a -> s{_clCategoryId = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube channel
 -- ID(s) for the resource(s) that are being retrieved. In a channel
 -- resource, the id property specifies the channel\'s YouTube channel ID.
-chaId :: Lens' ChannelsList' (Maybe Text)
-chaId = lens _chaId (\ s a -> s{_chaId = a})
+clId :: Lens' ChannelsList' (Maybe Text)
+clId = lens _clId (\ s a -> s{_clId = a})
 
 -- | Use the subscriptions.list method and its mySubscribers parameter to
 -- retrieve a list of subscribers to the authenticated user\'s channel.
-chaMySubscribers :: Lens' ChannelsList' (Maybe Bool)
-chaMySubscribers
-  = lens _chaMySubscribers
-      (\ s a -> s{_chaMySubscribers = a})
+clMySubscribers :: Lens' ChannelsList' (Maybe Bool)
+clMySubscribers
+  = lens _clMySubscribers
+      (\ s a -> s{_clMySubscribers = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
 -- that should be returned. In an API response, the nextPageToken and
 -- prevPageToken properties identify other pages that could be retrieved.
-chaPageToken :: Lens' ChannelsList' (Maybe Text)
-chaPageToken
-  = lens _chaPageToken (\ s a -> s{_chaPageToken = a})
+clPageToken :: Lens' ChannelsList' (Maybe Text)
+clPageToken
+  = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-chaOauthToken :: Lens' ChannelsList' (Maybe Text)
-chaOauthToken
-  = lens _chaOauthToken
-      (\ s a -> s{_chaOauthToken = a})
+clOauthToken :: Lens' ChannelsList' (Maybe Text)
+clOauthToken
+  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. Set this parameter\'s value to true to instruct the API to
@@ -265,47 +270,48 @@ chaOauthToken
 -- onBehalfOfContentOwner parameter specifies. The user must be
 -- authenticated as a CMS account linked to the specified content owner and
 -- onBehalfOfContentOwner must be provided.
-chaManagedByMe :: Lens' ChannelsList' (Maybe Bool)
-chaManagedByMe
-  = lens _chaManagedByMe
-      (\ s a -> s{_chaManagedByMe = a})
+clManagedByMe :: Lens' ChannelsList' (Maybe Bool)
+clManagedByMe
+  = lens _clManagedByMe
+      (\ s a -> s{_clManagedByMe = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
-chaMaxResults :: Lens' ChannelsList' Word32
-chaMaxResults
-  = lens _chaMaxResults
-      (\ s a -> s{_chaMaxResults = a})
+clMaxResults :: Lens' ChannelsList' Word32
+clMaxResults
+  = lens _clMaxResults (\ s a -> s{_clMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-chaFields :: Lens' ChannelsList' (Maybe Text)
-chaFields
-  = lens _chaFields (\ s a -> s{_chaFields = a})
+clFields :: Lens' ChannelsList' (Maybe Text)
+clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-chaAlt :: Lens' ChannelsList' Text
-chaAlt = lens _chaAlt (\ s a -> s{_chaAlt = a})
+clAlt :: Lens' ChannelsList' Alt
+clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u ChannelsList{..}
-          = go _chaQuotaUser (Just _chaPart) _chaPrettyPrint
-              _chaMine
-              _chaForUsername
-              _chaUserIp
-              _chaHl
-              _chaOnBehalfOfContentOwner
-              _chaKey
-              _chaCategoryId
-              _chaId
-              _chaMySubscribers
-              _chaPageToken
-              _chaOauthToken
-              _chaManagedByMe
-              (Just _chaMaxResults)
-              _chaFields
-              _chaAlt
+        requestWithRoute r u ChannelsList'{..}
+          = go _clQuotaUser (Just _clPart)
+              (Just _clPrettyPrint)
+              _clMine
+              _clForUsername
+              _clUserIp
+              _clHl
+              _clOnBehalfOfContentOwner
+              _clKey
+              _clCategoryId
+              _clId
+              _clMySubscribers
+              _clPageToken
+              _clOauthToken
+              _clManagedByMe
+              (Just _clMaxResults)
+              _clFields
+              (Just _clAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChannelsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ChannelsListResource)
+                      r
                       u

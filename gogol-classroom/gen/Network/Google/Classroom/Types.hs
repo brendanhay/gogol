@@ -121,7 +121,7 @@ import           Network.Google.Classroom.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Google Classroom API.
-classroomURL :: BaseURL
+classroomURL :: BaseUrl
 classroomURL
   = BaseUrl Https "https://classroom.googleapis.com/"
       443

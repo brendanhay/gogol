@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,158 +21,161 @@
 -- the provided JSON data model.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveRealtimeUpdate@.
-module Drive.Realtime.Update
+module Network.Google.Resource.Drive.Realtime.Update
     (
     -- * REST Resource
-      RealtimeUpdateAPI
+      RealtimeUpdateResource
 
     -- * Creating a Request
-    , realtimeUpdate
-    , RealtimeUpdate
+    , realtimeUpdate'
+    , RealtimeUpdate'
 
     -- * Request Lenses
-    , reaQuotaUser
-    , reaPrettyPrint
-    , reaUserIp
-    , reaBaseRevision
-    , reaKey
-    , reaFileId
-    , reaOauthToken
-    , reaFields
-    , reaAlt
+    , rQuotaUser
+    , rPrettyPrint
+    , rUserIp
+    , rBaseRevision
+    , rKey
+    , rFileId
+    , rOauthToken
+    , rFields
+    , rAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveRealtimeUpdate@ which the
--- 'RealtimeUpdate' request conforms to.
-type RealtimeUpdateAPI =
+-- 'RealtimeUpdate'' request conforms to.
+type RealtimeUpdateResource =
      "files" :>
        Capture "fileId" Text :>
          "realtime" :>
-           QueryParam "baseRevision" Text :> Put '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "baseRevision" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Overwrites the Realtime API data model associated with this file with
 -- the provided JSON data model.
 --
--- /See:/ 'realtimeUpdate' smart constructor.
-data RealtimeUpdate = RealtimeUpdate
-    { _reaQuotaUser    :: !(Maybe Text)
-    , _reaPrettyPrint  :: !Bool
-    , _reaUserIp       :: !(Maybe Text)
-    , _reaBaseRevision :: !(Maybe Text)
-    , _reaKey          :: !(Maybe Text)
-    , _reaFileId       :: !Text
-    , _reaOauthToken   :: !(Maybe Text)
-    , _reaFields       :: !(Maybe Text)
-    , _reaAlt          :: !Text
+-- /See:/ 'realtimeUpdate'' smart constructor.
+data RealtimeUpdate' = RealtimeUpdate'
+    { _rQuotaUser    :: !(Maybe Text)
+    , _rPrettyPrint  :: !Bool
+    , _rUserIp       :: !(Maybe Text)
+    , _rBaseRevision :: !(Maybe Text)
+    , _rKey          :: !(Maybe Text)
+    , _rFileId       :: !Text
+    , _rOauthToken   :: !(Maybe Text)
+    , _rFields       :: !(Maybe Text)
+    , _rAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'reaQuotaUser'
+-- * 'rQuotaUser'
 --
--- * 'reaPrettyPrint'
+-- * 'rPrettyPrint'
 --
--- * 'reaUserIp'
+-- * 'rUserIp'
 --
--- * 'reaBaseRevision'
+-- * 'rBaseRevision'
 --
--- * 'reaKey'
+-- * 'rKey'
 --
--- * 'reaFileId'
+-- * 'rFileId'
 --
--- * 'reaOauthToken'
+-- * 'rOauthToken'
 --
--- * 'reaFields'
+-- * 'rFields'
 --
--- * 'reaAlt'
-realtimeUpdate
+-- * 'rAlt'
+realtimeUpdate'
     :: Text -- ^ 'fileId'
-    -> RealtimeUpdate
-realtimeUpdate pReaFileId_ =
-    RealtimeUpdate
-    { _reaQuotaUser = Nothing
-    , _reaPrettyPrint = True
-    , _reaUserIp = Nothing
-    , _reaBaseRevision = Nothing
-    , _reaKey = Nothing
-    , _reaFileId = pReaFileId_
-    , _reaOauthToken = Nothing
-    , _reaFields = Nothing
-    , _reaAlt = "json"
+    -> RealtimeUpdate'
+realtimeUpdate' pRFileId_ =
+    RealtimeUpdate'
+    { _rQuotaUser = Nothing
+    , _rPrettyPrint = True
+    , _rUserIp = Nothing
+    , _rBaseRevision = Nothing
+    , _rKey = Nothing
+    , _rFileId = pRFileId_
+    , _rOauthToken = Nothing
+    , _rFields = Nothing
+    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-reaQuotaUser :: Lens' RealtimeUpdate' (Maybe Text)
-reaQuotaUser
-  = lens _reaQuotaUser (\ s a -> s{_reaQuotaUser = a})
+rQuotaUser :: Lens' RealtimeUpdate' (Maybe Text)
+rQuotaUser
+  = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-reaPrettyPrint :: Lens' RealtimeUpdate' Bool
-reaPrettyPrint
-  = lens _reaPrettyPrint
-      (\ s a -> s{_reaPrettyPrint = a})
+rPrettyPrint :: Lens' RealtimeUpdate' Bool
+rPrettyPrint
+  = lens _rPrettyPrint (\ s a -> s{_rPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-reaUserIp :: Lens' RealtimeUpdate' (Maybe Text)
-reaUserIp
-  = lens _reaUserIp (\ s a -> s{_reaUserIp = a})
+rUserIp :: Lens' RealtimeUpdate' (Maybe Text)
+rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
 
 -- | The revision of the model to diff the uploaded model against. If set,
 -- the uploaded model is diffed against the provided revision and those
 -- differences are merged with any changes made to the model after the
 -- provided revision. If not set, the uploaded model replaces the current
 -- model on the server.
-reaBaseRevision :: Lens' RealtimeUpdate' (Maybe Text)
-reaBaseRevision
-  = lens _reaBaseRevision
-      (\ s a -> s{_reaBaseRevision = a})
+rBaseRevision :: Lens' RealtimeUpdate' (Maybe Text)
+rBaseRevision
+  = lens _rBaseRevision
+      (\ s a -> s{_rBaseRevision = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reaKey :: Lens' RealtimeUpdate' (Maybe Text)
-reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
+rKey :: Lens' RealtimeUpdate' (Maybe Text)
+rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.
-reaFileId :: Lens' RealtimeUpdate' Text
-reaFileId
-  = lens _reaFileId (\ s a -> s{_reaFileId = a})
+rFileId :: Lens' RealtimeUpdate' Text
+rFileId = lens _rFileId (\ s a -> s{_rFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-reaOauthToken :: Lens' RealtimeUpdate' (Maybe Text)
-reaOauthToken
-  = lens _reaOauthToken
-      (\ s a -> s{_reaOauthToken = a})
+rOauthToken :: Lens' RealtimeUpdate' (Maybe Text)
+rOauthToken
+  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-reaFields :: Lens' RealtimeUpdate' (Maybe Text)
-reaFields
-  = lens _reaFields (\ s a -> s{_reaFields = a})
+rFields :: Lens' RealtimeUpdate' (Maybe Text)
+rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-reaAlt :: Lens' RealtimeUpdate' Text
-reaAlt = lens _reaAlt (\ s a -> s{_reaAlt = a})
+rAlt :: Lens' RealtimeUpdate' Alt
+rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest RealtimeUpdate' where
         type Rs RealtimeUpdate' = ()
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u RealtimeUpdate{..}
-          = go _reaQuotaUser _reaPrettyPrint _reaUserIp
-              _reaBaseRevision
-              _reaKey
-              _reaFileId
-              _reaOauthToken
-              _reaFields
-              _reaAlt
+        requestWithRoute r u RealtimeUpdate'{..}
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIp
+              _rBaseRevision
+              _rKey
+              _rFileId
+              _rOauthToken
+              _rFields
+              (Just _rAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RealtimeUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy RealtimeUpdateResource)
                       r
                       u

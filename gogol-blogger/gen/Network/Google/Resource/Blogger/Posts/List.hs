@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of posts, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPostsList@.
-module Blogger.Posts.List
+module Network.Google.Resource.Blogger.Posts.List
     (
     -- * REST Resource
-      PostsListAPI
+      PostsListResource
 
     -- * Creating a Request
-    , postsList
-    , PostsList
+    , postsList'
+    , PostsList'
 
     -- * Request Lenses
     , pllStatus
@@ -53,31 +54,38 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPostsList@ which the
--- 'PostsList' request conforms to.
-type PostsListAPI =
+-- 'PostsList'' request conforms to.
+type PostsListResource =
      "blogs" :>
        Capture "blogId" Text :>
          "posts" :>
-           QueryParams "status" Text :>
-             QueryParam "orderBy" Text :>
-               QueryParam "fetchImages" Bool :>
-                 QueryParam "endDate" UTCTime :>
-                   QueryParam "startDate" UTCTime :>
-                     QueryParam "fetchBodies" Bool :>
-                       QueryParam "view" Text :>
-                         QueryParam "labels" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "maxResults" Word32 :>
-                               Get '[JSON] PostList
+           QueryParams "status" BloggerPostsListStatus :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "orderBy" BloggerPostsListOrderBy :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "fetchImages" Bool :>
+                       QueryParam "endDate" UTCTime :>
+                         QueryParam "startDate" UTCTime :>
+                           QueryParam "key" Text :>
+                             QueryParam "fetchBodies" Bool :>
+                               QueryParam "view" BloggerPostsListView :>
+                                 QueryParam "labels" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "maxResults" Word32 :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "alt" Alt :>
+                                             Get '[JSON] PostList
 
 -- | Retrieves a list of posts, possibly filtered.
 --
--- /See:/ 'postsList' smart constructor.
-data PostsList = PostsList
-    { _pllStatus      :: !(Maybe Text)
+-- /See:/ 'postsList'' smart constructor.
+data PostsList' = PostsList'
+    { _pllStatus      :: !(Maybe BloggerPostsListStatus)
     , _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
-    , _pllOrderBy     :: !Text
+    , _pllOrderBy     :: !BloggerPostsListOrderBy
     , _pllUserIp      :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
     , _pllEndDate     :: !(Maybe UTCTime)
@@ -85,13 +93,13 @@ data PostsList = PostsList
     , _pllStartDate   :: !(Maybe UTCTime)
     , _pllKey         :: !(Maybe Text)
     , _pllFetchBodies :: !Bool
-    , _pllView        :: !(Maybe Text)
+    , _pllView        :: !(Maybe BloggerPostsListView)
     , _pllLabels      :: !(Maybe Text)
     , _pllPageToken   :: !(Maybe Text)
     , _pllOauthToken  :: !(Maybe Text)
     , _pllMaxResults  :: !(Maybe Word32)
     , _pllFields      :: !(Maybe Text)
-    , _pllAlt         :: !Text
+    , _pllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsList'' with the minimum fields required to make a request.
@@ -133,15 +141,15 @@ data PostsList = PostsList
 -- * 'pllFields'
 --
 -- * 'pllAlt'
-postsList
+postsList'
     :: Text -- ^ 'blogId'
-    -> PostsList
-postsList pPllBlogId_ =
-    PostsList
+    -> PostsList'
+postsList' pPllBlogId_ =
+    PostsList'
     { _pllStatus = Nothing
     , _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
-    , _pllOrderBy = "PUBLISHED"
+    , _pllOrderBy = Published
     , _pllUserIp = Nothing
     , _pllFetchImages = Nothing
     , _pllEndDate = Nothing
@@ -155,11 +163,11 @@ postsList pPllBlogId_ =
     , _pllOauthToken = Nothing
     , _pllMaxResults = Nothing
     , _pllFields = Nothing
-    , _pllAlt = "json"
+    , _pllAlt = JSON
     }
 
 -- | Statuses to include in the results.
-pllStatus :: Lens' PostsList' (Maybe Text)
+pllStatus :: Lens' PostsList' (Maybe BloggerPostsListStatus)
 pllStatus
   = lens _pllStatus (\ s a -> s{_pllStatus = a})
 
@@ -177,7 +185,7 @@ pllPrettyPrint
       (\ s a -> s{_pllPrettyPrint = a})
 
 -- | Sort search results
-pllOrderBy :: Lens' PostsList' Text
+pllOrderBy :: Lens' PostsList' BloggerPostsListOrderBy
 pllOrderBy
   = lens _pllOrderBy (\ s a -> s{_pllOrderBy = a})
 
@@ -224,7 +232,7 @@ pllFetchBodies
 
 -- | Access level with which to view the returned result. Note that some
 -- fields require escalated access.
-pllView :: Lens' PostsList' (Maybe Text)
+pllView :: Lens' PostsList' (Maybe BloggerPostsListView)
 pllView = lens _pllView (\ s a -> s{_pllView = a})
 
 -- | Comma-separated list of labels to search for.
@@ -255,14 +263,14 @@ pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
 -- | Data format for the response.
-pllAlt :: Lens' PostsList' Text
+pllAlt :: Lens' PostsList' Alt
 pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
 
 instance GoogleRequest PostsList' where
         type Rs PostsList' = PostList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PostsList{..}
-          = go _pllStatus _pllQuotaUser _pllPrettyPrint
+        requestWithRoute r u PostsList'{..}
+          = go _pllStatus _pllQuotaUser (Just _pllPrettyPrint)
               (Just _pllOrderBy)
               _pllUserIp
               _pllFetchImages
@@ -277,6 +285,8 @@ instance GoogleRequest PostsList' where
               _pllOauthToken
               _pllMaxResults
               _pllFields
-              _pllAlt
+              (Just _pllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PostsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PostsListResource)
+                      r
+                      u

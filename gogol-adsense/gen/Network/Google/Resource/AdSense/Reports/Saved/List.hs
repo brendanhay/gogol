@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all saved reports in this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseReportsSavedList@.
-module AdSense.Reports.Saved.List
+module Network.Google.Resource.AdSense.Reports.Saved.List
     (
     -- * REST Resource
-      ReportsSavedListAPI
+      ReportsSavedListResource
 
     -- * Creating a Request
-    , reportsSavedList
-    , ReportsSavedList
+    , reportsSavedList'
+    , ReportsSavedList'
 
     -- * Request Lenses
     , rslQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseReportsSavedList@ which the
--- 'ReportsSavedList' request conforms to.
-type ReportsSavedListAPI =
+-- 'ReportsSavedList'' request conforms to.
+type ReportsSavedListResource =
      "reports" :>
        "saved" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] SavedReports
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this AdSense account.
 --
--- /See:/ 'reportsSavedList' smart constructor.
-data ReportsSavedList = ReportsSavedList
+-- /See:/ 'reportsSavedList'' smart constructor.
+data ReportsSavedList' = ReportsSavedList'
     { _rslQuotaUser   :: !(Maybe Text)
     , _rslPrettyPrint :: !Bool
     , _rslUserIp      :: !(Maybe Text)
@@ -64,7 +71,7 @@ data ReportsSavedList = ReportsSavedList
     , _rslOauthToken  :: !(Maybe Text)
     , _rslMaxResults  :: !(Maybe Int32)
     , _rslFields      :: !(Maybe Text)
-    , _rslAlt         :: !Text
+    , _rslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedList'' with the minimum fields required to make a request.
@@ -88,10 +95,10 @@ data ReportsSavedList = ReportsSavedList
 -- * 'rslFields'
 --
 -- * 'rslAlt'
-reportsSavedList
-    :: ReportsSavedList
-reportsSavedList =
-    ReportsSavedList
+reportsSavedList'
+    :: ReportsSavedList'
+reportsSavedList' =
+    ReportsSavedList'
     { _rslQuotaUser = Nothing
     , _rslPrettyPrint = True
     , _rslUserIp = Nothing
@@ -100,7 +107,7 @@ reportsSavedList =
     , _rslOauthToken = Nothing
     , _rslMaxResults = Nothing
     , _rslFields = Nothing
-    , _rslAlt = "json"
+    , _rslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,21 +161,22 @@ rslFields
   = lens _rslFields (\ s a -> s{_rslFields = a})
 
 -- | Data format for the response.
-rslAlt :: Lens' ReportsSavedList' Text
+rslAlt :: Lens' ReportsSavedList' Alt
 rslAlt = lens _rslAlt (\ s a -> s{_rslAlt = a})
 
 instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u ReportsSavedList{..}
-          = go _rslQuotaUser _rslPrettyPrint _rslUserIp _rslKey
+        requestWithRoute r u ReportsSavedList'{..}
+          = go _rslQuotaUser (Just _rslPrettyPrint) _rslUserIp
+              _rslKey
               _rslPageToken
               _rslOauthToken
               _rslMaxResults
               _rslFields
-              _rslAlt
+              (Just _rslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReportsSavedListAPI)
+                      (Proxy :: Proxy ReportsSavedListResource)
                       r
                       u

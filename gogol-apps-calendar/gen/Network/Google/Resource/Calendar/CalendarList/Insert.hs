@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds an entry to the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListInsert@.
-module Calendar.CalendarList.Insert
+module Network.Google.Resource.Calendar.CalendarList.Insert
     (
     -- * REST Resource
-      CalendarListInsertAPI
+      CalendarListInsertResource
 
     -- * Creating a Request
-    , calendarListInsert
-    , CalendarListInsert
+    , calendarListInsert'
+    , CalendarListInsert'
 
     -- * Request Lenses
     , cliQuotaUser
@@ -43,18 +44,25 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListInsert@ which the
--- 'CalendarListInsert' request conforms to.
-type CalendarListInsertAPI =
+-- 'CalendarListInsert'' request conforms to.
+type CalendarListInsertResource =
      "users" :>
        "me" :>
          "calendarList" :>
-           QueryParam "colorRgbFormat" Bool :>
-             Post '[JSON] CalendarListEntry
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "colorRgbFormat" Bool :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] CalendarListEntry
 
 -- | Adds an entry to the user\'s calendar list.
 --
--- /See:/ 'calendarListInsert' smart constructor.
-data CalendarListInsert = CalendarListInsert
+-- /See:/ 'calendarListInsert'' smart constructor.
+data CalendarListInsert' = CalendarListInsert'
     { _cliQuotaUser      :: !(Maybe Text)
     , _cliPrettyPrint    :: !Bool
     , _cliUserIp         :: !(Maybe Text)
@@ -62,7 +70,7 @@ data CalendarListInsert = CalendarListInsert
     , _cliKey            :: !(Maybe Text)
     , _cliOauthToken     :: !(Maybe Text)
     , _cliFields         :: !(Maybe Text)
-    , _cliAlt            :: !Text
+    , _cliAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListInsert'' with the minimum fields required to make a request.
@@ -84,10 +92,10 @@ data CalendarListInsert = CalendarListInsert
 -- * 'cliFields'
 --
 -- * 'cliAlt'
-calendarListInsert
-    :: CalendarListInsert
-calendarListInsert =
-    CalendarListInsert
+calendarListInsert'
+    :: CalendarListInsert'
+calendarListInsert' =
+    CalendarListInsert'
     { _cliQuotaUser = Nothing
     , _cliPrettyPrint = True
     , _cliUserIp = Nothing
@@ -95,7 +103,7 @@ calendarListInsert =
     , _cliKey = Nothing
     , _cliOauthToken = Nothing
     , _cliFields = Nothing
-    , _cliAlt = "json"
+    , _cliAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,21 +152,21 @@ cliFields
   = lens _cliFields (\ s a -> s{_cliFields = a})
 
 -- | Data format for the response.
-cliAlt :: Lens' CalendarListInsert' Text
+cliAlt :: Lens' CalendarListInsert' Alt
 cliAlt = lens _cliAlt (\ s a -> s{_cliAlt = a})
 
 instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListInsert{..}
-          = go _cliQuotaUser _cliPrettyPrint _cliUserIp
+        requestWithRoute r u CalendarListInsert'{..}
+          = go _cliQuotaUser (Just _cliPrettyPrint) _cliUserIp
               _cliColorRgbFormat
               _cliKey
               _cliOauthToken
               _cliFields
-              _cliAlt
+              (Just _cliAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListInsertAPI)
+                      (Proxy :: Proxy CalendarListInsertResource)
                       r
                       u

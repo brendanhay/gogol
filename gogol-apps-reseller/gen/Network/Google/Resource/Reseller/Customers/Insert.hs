@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a customer resource if one does not already exist.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersInsert@.
-module Reseller.Customers.Insert
+module Network.Google.Resource.Reseller.Customers.Insert
     (
     -- * REST Resource
-      CustomersInsertAPI
+      CustomersInsertResource
 
     -- * Creating a Request
-    , customersInsert
-    , CustomersInsert
+    , customersInsert'
+    , CustomersInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerCustomersInsert@ which the
--- 'CustomersInsert' request conforms to.
-type CustomersInsertAPI =
+-- 'CustomersInsert'' request conforms to.
+type CustomersInsertResource =
      "customers" :>
-       QueryParam "customerAuthToken" Text :>
-         Post '[JSON] Customer
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "customerAuthToken" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Customer
 
 -- | Creates a customer resource if one does not already exist.
 --
--- /See:/ 'customersInsert' smart constructor.
-data CustomersInsert = CustomersInsert
+-- /See:/ 'customersInsert'' smart constructor.
+data CustomersInsert' = CustomersInsert'
     { _ciQuotaUser         :: !(Maybe Text)
     , _ciPrettyPrint       :: !Bool
     , _ciUserIp            :: !(Maybe Text)
@@ -60,7 +67,7 @@ data CustomersInsert = CustomersInsert
     , _ciCustomerAuthToken :: !(Maybe Text)
     , _ciOauthToken        :: !(Maybe Text)
     , _ciFields            :: !(Maybe Text)
-    , _ciAlt               :: !Text
+    , _ciAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersInsert'' with the minimum fields required to make a request.
@@ -82,10 +89,10 @@ data CustomersInsert = CustomersInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-customersInsert
-    :: CustomersInsert
-customersInsert =
-    CustomersInsert
+customersInsert'
+    :: CustomersInsert'
+customersInsert' =
+    CustomersInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
@@ -93,7 +100,7 @@ customersInsert =
     , _ciCustomerAuthToken = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,19 +145,21 @@ ciFields :: Lens' CustomersInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CustomersInsert' Text
+ciAlt :: Lens' CustomersInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp _ciKey
+        requestWithRoute r u CustomersInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciKey
               _ciCustomerAuthToken
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CustomersInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CustomersInsertResource)
                       r
                       u

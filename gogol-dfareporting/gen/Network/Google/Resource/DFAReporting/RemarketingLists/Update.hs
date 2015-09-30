@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing remarketing list.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListsUpdate@.
-module DFAReporting.RemarketingLists.Update
+module Network.Google.Resource.DFAReporting.RemarketingLists.Update
     (
     -- * REST Resource
-      RemarketingListsUpdateAPI
+      RemarketingListsUpdateResource
 
     -- * Creating a Request
-    , remarketingListsUpdate
-    , RemarketingListsUpdate
+    , remarketingListsUpdate'
+    , RemarketingListsUpdate'
 
     -- * Request Lenses
     , rluQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListsUpdate@ which the
--- 'RemarketingListsUpdate' request conforms to.
-type RemarketingListsUpdateAPI =
+-- 'RemarketingListsUpdate'' request conforms to.
+type RemarketingListsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "remarketingLists" :> Put '[JSON] RemarketingList
+         "remarketingLists" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] RemarketingList
 
 -- | Updates an existing remarketing list.
 --
--- /See:/ 'remarketingListsUpdate' smart constructor.
-data RemarketingListsUpdate = RemarketingListsUpdate
+-- /See:/ 'remarketingListsUpdate'' smart constructor.
+data RemarketingListsUpdate' = RemarketingListsUpdate'
     { _rluQuotaUser   :: !(Maybe Text)
     , _rluPrettyPrint :: !Bool
     , _rluUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data RemarketingListsUpdate = RemarketingListsUpdate
     , _rluKey         :: !(Maybe Text)
     , _rluOauthToken  :: !(Maybe Text)
     , _rluFields      :: !(Maybe Text)
-    , _rluAlt         :: !Text
+    , _rluAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data RemarketingListsUpdate = RemarketingListsUpdate
 -- * 'rluFields'
 --
 -- * 'rluAlt'
-remarketingListsUpdate
+remarketingListsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> RemarketingListsUpdate
-remarketingListsUpdate pRluProfileId_ =
-    RemarketingListsUpdate
+    -> RemarketingListsUpdate'
+remarketingListsUpdate' pRluProfileId_ =
+    RemarketingListsUpdate'
     { _rluQuotaUser = Nothing
     , _rluPrettyPrint = True
     , _rluUserIp = Nothing
@@ -94,7 +102,7 @@ remarketingListsUpdate pRluProfileId_ =
     , _rluKey = Nothing
     , _rluOauthToken = Nothing
     , _rluFields = Nothing
-    , _rluAlt = "json"
+    , _rluAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ rluFields
   = lens _rluFields (\ s a -> s{_rluFields = a})
 
 -- | Data format for the response.
-rluAlt :: Lens' RemarketingListsUpdate' Text
+rluAlt :: Lens' RemarketingListsUpdate' Alt
 rluAlt = lens _rluAlt (\ s a -> s{_rluAlt = a})
 
 instance GoogleRequest RemarketingListsUpdate' where
         type Rs RemarketingListsUpdate' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListsUpdate{..}
-          = go _rluQuotaUser _rluPrettyPrint _rluUserIp
+        requestWithRoute r u RemarketingListsUpdate'{..}
+          = go _rluQuotaUser (Just _rluPrettyPrint) _rluUserIp
               _rluProfileId
               _rluKey
               _rluOauthToken
               _rluFields
-              _rluAlt
+              (Just _rluAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListsUpdateAPI)
+                      (Proxy :: Proxy RemarketingListsUpdateResource)
                       r
                       u

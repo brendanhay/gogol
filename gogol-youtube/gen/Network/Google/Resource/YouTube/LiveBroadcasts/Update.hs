@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsUpdate@.
-module YouTube.LiveBroadcasts.Update
+module Network.Google.Resource.YouTube.LiveBroadcasts.Update
     (
     -- * REST Resource
-      LiveBroadcastsUpdateAPI
+      LiveBroadcastsUpdateResource
 
     -- * Creating a Request
-    , liveBroadcastsUpdate
-    , LiveBroadcastsUpdate
+    , liveBroadcastsUpdate'
+    , LiveBroadcastsUpdate'
 
     -- * Request Lenses
     , lbuQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsUpdate@ which the
--- 'LiveBroadcastsUpdate' request conforms to.
-type LiveBroadcastsUpdateAPI =
+-- 'LiveBroadcastsUpdate'' request conforms to.
+type LiveBroadcastsUpdateResource =
      "liveBroadcasts" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "onBehalfOfContentOwnerChannel" Text :>
-             Put '[JSON] LiveBroadcast
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] LiveBroadcast
 
 -- | Updates a broadcast. For example, you could modify the broadcast
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
 --
--- /See:/ 'liveBroadcastsUpdate' smart constructor.
-data LiveBroadcastsUpdate = LiveBroadcastsUpdate
+-- /See:/ 'liveBroadcastsUpdate'' smart constructor.
+data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
     { _lbuQuotaUser                     :: !(Maybe Text)
     , _lbuPart                          :: !Text
     , _lbuPrettyPrint                   :: !Bool
@@ -68,7 +75,7 @@ data LiveBroadcastsUpdate = LiveBroadcastsUpdate
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbuOauthToken                    :: !(Maybe Text)
     , _lbuFields                        :: !(Maybe Text)
-    , _lbuAlt                           :: !Text
+    , _lbuAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsUpdate'' with the minimum fields required to make a request.
@@ -94,11 +101,11 @@ data LiveBroadcastsUpdate = LiveBroadcastsUpdate
 -- * 'lbuFields'
 --
 -- * 'lbuAlt'
-liveBroadcastsUpdate
+liveBroadcastsUpdate'
     :: Text -- ^ 'part'
-    -> LiveBroadcastsUpdate
-liveBroadcastsUpdate pLbuPart_ =
-    LiveBroadcastsUpdate
+    -> LiveBroadcastsUpdate'
+liveBroadcastsUpdate' pLbuPart_ =
+    LiveBroadcastsUpdate'
     { _lbuQuotaUser = Nothing
     , _lbuPart = pLbuPart_
     , _lbuPrettyPrint = True
@@ -108,7 +115,7 @@ liveBroadcastsUpdate pLbuPart_ =
     , _lbuOnBehalfOfContentOwnerChannel = Nothing
     , _lbuOauthToken = Nothing
     , _lbuFields = Nothing
-    , _lbuAlt = "json"
+    , _lbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -200,23 +207,24 @@ lbuFields
   = lens _lbuFields (\ s a -> s{_lbuFields = a})
 
 -- | Data format for the response.
-lbuAlt :: Lens' LiveBroadcastsUpdate' Text
+lbuAlt :: Lens' LiveBroadcastsUpdate' Alt
 lbuAlt = lens _lbuAlt (\ s a -> s{_lbuAlt = a})
 
 instance GoogleRequest LiveBroadcastsUpdate' where
         type Rs LiveBroadcastsUpdate' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsUpdate{..}
-          = go _lbuQuotaUser (Just _lbuPart) _lbuPrettyPrint
+        requestWithRoute r u LiveBroadcastsUpdate'{..}
+          = go _lbuQuotaUser (Just _lbuPart)
+              (Just _lbuPrettyPrint)
               _lbuUserIp
               _lbuOnBehalfOfContentOwner
               _lbuKey
               _lbuOnBehalfOfContentOwnerChannel
               _lbuOauthToken
               _lbuFields
-              _lbuAlt
+              (Just _lbuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsUpdateAPI)
+                      (Proxy :: Proxy LiveBroadcastsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- than one dataset. This method does not use patch semantics.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsPatch@.
-module Fitness.Users.DataSources.Datasets.Patch
+module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
     (
     -- * REST Resource
-      UsersDataSourcesDatasetsPatchAPI
+      UsersDataSourcesDatasetsPatchResource
 
     -- * Creating a Request
-    , usersDataSourcesDatasetsPatch
-    , UsersDataSourcesDatasetsPatch
+    , usersDataSourcesDatasetsPatch'
+    , UsersDataSourcesDatasetsPatch'
 
     -- * Request Lenses
     , udsdpQuotaUser
@@ -49,23 +50,29 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesDatasetsPatch@ which the
--- 'UsersDataSourcesDatasetsPatch' request conforms to.
-type UsersDataSourcesDatasetsPatchAPI =
+-- 'UsersDataSourcesDatasetsPatch'' request conforms to.
+type UsersDataSourcesDatasetsPatchResource =
      Capture "userId" Text :>
        "dataSources" :>
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "currentTimeMillis" Int64 :>
-                 Patch '[JSON] Dataset
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "currentTimeMillis" Int64 :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] Dataset
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
 -- subsquent calls to retrieve this dataset. Data points can belong to more
 -- than one dataset. This method does not use patch semantics.
 --
--- /See:/ 'usersDataSourcesDatasetsPatch' smart constructor.
-data UsersDataSourcesDatasetsPatch = UsersDataSourcesDatasetsPatch
+-- /See:/ 'usersDataSourcesDatasetsPatch'' smart constructor.
+data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser         :: !(Maybe Text)
     , _udsdpPrettyPrint       :: !Bool
     , _udsdpUserIp            :: !(Maybe Text)
@@ -76,7 +83,7 @@ data UsersDataSourcesDatasetsPatch = UsersDataSourcesDatasetsPatch
     , _udsdpCurrentTimeMillis :: !(Maybe Int64)
     , _udsdpOauthToken        :: !(Maybe Text)
     , _udsdpFields            :: !(Maybe Text)
-    , _udsdpAlt               :: !Text
+    , _udsdpAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsPatch'' with the minimum fields required to make a request.
@@ -104,13 +111,13 @@ data UsersDataSourcesDatasetsPatch = UsersDataSourcesDatasetsPatch
 -- * 'udsdpFields'
 --
 -- * 'udsdpAlt'
-usersDataSourcesDatasetsPatch
+usersDataSourcesDatasetsPatch'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'datasetId'
-    -> UsersDataSourcesDatasetsPatch
-usersDataSourcesDatasetsPatch pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_ =
-    UsersDataSourcesDatasetsPatch
+    -> UsersDataSourcesDatasetsPatch'
+usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_ =
+    UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser = Nothing
     , _udsdpPrettyPrint = True
     , _udsdpUserIp = Nothing
@@ -121,7 +128,7 @@ usersDataSourcesDatasetsPatch pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_
     , _udsdpCurrentTimeMillis = Nothing
     , _udsdpOauthToken = Nothing
     , _udsdpFields = Nothing
-    , _udsdpAlt = "json"
+    , _udsdpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -191,7 +198,7 @@ udsdpFields
   = lens _udsdpFields (\ s a -> s{_udsdpFields = a})
 
 -- | Data format for the response.
-udsdpAlt :: Lens' UsersDataSourcesDatasetsPatch' Text
+udsdpAlt :: Lens' UsersDataSourcesDatasetsPatch' Alt
 udsdpAlt = lens _udsdpAlt (\ s a -> s{_udsdpAlt = a})
 
 instance GoogleRequest UsersDataSourcesDatasetsPatch'
@@ -199,8 +206,9 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
         type Rs UsersDataSourcesDatasetsPatch' = Dataset
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
-          UsersDataSourcesDatasetsPatch{..}
-          = go _udsdpQuotaUser _udsdpPrettyPrint _udsdpUserIp
+          UsersDataSourcesDatasetsPatch'{..}
+          = go _udsdpQuotaUser (Just _udsdpPrettyPrint)
+              _udsdpUserIp
               _udsdpDataSourceId
               _udsdpUserId
               _udsdpKey
@@ -208,9 +216,10 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
               _udsdpCurrentTimeMillis
               _udsdpOauthToken
               _udsdpFields
-              _udsdpAlt
+              (Just _udsdpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesDatasetsPatchAPI)
+                      (Proxy ::
+                         Proxy UsersDataSourcesDatasetsPatchResource)
                       r
                       u

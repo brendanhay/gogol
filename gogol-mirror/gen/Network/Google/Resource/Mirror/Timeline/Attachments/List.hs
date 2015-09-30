@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of attachments for a timeline item.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineAttachmentsList@.
-module Mirror.Timeline.Attachments.List
+module Network.Google.Resource.Mirror.Timeline.Attachments.List
     (
     -- * REST Resource
-      TimelineAttachmentsListAPI
+      TimelineAttachmentsListResource
 
     -- * Creating a Request
-    , timelineAttachmentsList
-    , TimelineAttachmentsList
+    , timelineAttachmentsList'
+    , TimelineAttachmentsList'
 
     -- * Request Lenses
     , talQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineAttachmentsList@ which the
--- 'TimelineAttachmentsList' request conforms to.
-type TimelineAttachmentsListAPI =
+-- 'TimelineAttachmentsList'' request conforms to.
+type TimelineAttachmentsListResource =
      "timeline" :>
        Capture "itemId" Text :>
-         "attachments" :> Get '[JSON] AttachmentsListResponse
+         "attachments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] AttachmentsListResponse
 
 -- | Returns a list of attachments for a timeline item.
 --
--- /See:/ 'timelineAttachmentsList' smart constructor.
-data TimelineAttachmentsList = TimelineAttachmentsList
+-- /See:/ 'timelineAttachmentsList'' smart constructor.
+data TimelineAttachmentsList' = TimelineAttachmentsList'
     { _talQuotaUser   :: !(Maybe Text)
     , _talPrettyPrint :: !Bool
     , _talUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data TimelineAttachmentsList = TimelineAttachmentsList
     , _talKey         :: !(Maybe Text)
     , _talOauthToken  :: !(Maybe Text)
     , _talFields      :: !(Maybe Text)
-    , _talAlt         :: !Text
+    , _talAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data TimelineAttachmentsList = TimelineAttachmentsList
 -- * 'talFields'
 --
 -- * 'talAlt'
-timelineAttachmentsList
+timelineAttachmentsList'
     :: Text -- ^ 'itemId'
-    -> TimelineAttachmentsList
-timelineAttachmentsList pTalItemId_ =
-    TimelineAttachmentsList
+    -> TimelineAttachmentsList'
+timelineAttachmentsList' pTalItemId_ =
+    TimelineAttachmentsList'
     { _talQuotaUser = Nothing
     , _talPrettyPrint = True
     , _talUserIp = Nothing
@@ -94,7 +103,7 @@ timelineAttachmentsList pTalItemId_ =
     , _talKey = Nothing
     , _talOauthToken = Nothing
     , _talFields = Nothing
-    , _talAlt = "json"
+    , _talAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,22 +148,22 @@ talFields
   = lens _talFields (\ s a -> s{_talFields = a})
 
 -- | Data format for the response.
-talAlt :: Lens' TimelineAttachmentsList' Text
+talAlt :: Lens' TimelineAttachmentsList' Alt
 talAlt = lens _talAlt (\ s a -> s{_talAlt = a})
 
 instance GoogleRequest TimelineAttachmentsList' where
         type Rs TimelineAttachmentsList' =
              AttachmentsListResponse
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineAttachmentsList{..}
-          = go _talQuotaUser _talPrettyPrint _talUserIp
+        requestWithRoute r u TimelineAttachmentsList'{..}
+          = go _talQuotaUser (Just _talPrettyPrint) _talUserIp
               _talItemId
               _talKey
               _talOauthToken
               _talFields
-              _talAlt
+              (Just _talAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TimelineAttachmentsListAPI)
+                      (Proxy :: Proxy TimelineAttachmentsListResource)
                       r
                       u

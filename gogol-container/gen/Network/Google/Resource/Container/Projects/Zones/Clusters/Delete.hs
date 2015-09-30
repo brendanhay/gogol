@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- also deleted.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesClustersDelete@.
-module Container.Projects.Zones.Clusters.Delete
+module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     (
     -- * REST Resource
-      ProjectsZonesClustersDeleteAPI
+      ProjectsZonesClustersDeleteResource
 
     -- * Creating a Request
-    , projectsZonesClustersDelete
-    , ProjectsZonesClustersDelete
+    , projectsZonesClustersDelete'
+    , ProjectsZonesClustersDelete'
 
     -- * Request Lenses
     , pzcdQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesClustersDelete@ which the
--- 'ProjectsZonesClustersDelete' request conforms to.
-type ProjectsZonesClustersDeleteAPI =
+-- 'ProjectsZonesClustersDelete'' request conforms to.
+type ProjectsZonesClustersDeleteResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
            "clusters" :>
-             Capture "clusterId" Text :> Delete '[JSON] Operation
+             Capture "clusterId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the cluster, including the Kubernetes master and all worker
 -- nodes. Firewalls and routes that were configured at cluster creation are
 -- also deleted.
 --
--- /See:/ 'projectsZonesClustersDelete' smart constructor.
-data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
+-- /See:/ 'projectsZonesClustersDelete'' smart constructor.
+data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
     { _pzcdQuotaUser   :: !(Maybe Text)
     , _pzcdPrettyPrint :: !Bool
     , _pzcdUserIp      :: !(Maybe Text)
@@ -70,7 +78,7 @@ data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
     , _pzcdProjectId   :: !Text
     , _pzcdOauthToken  :: !(Maybe Text)
     , _pzcdFields      :: !(Maybe Text)
-    , _pzcdAlt         :: !Text
+    , _pzcdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersDelete'' with the minimum fields required to make a request.
@@ -96,13 +104,13 @@ data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
 -- * 'pzcdFields'
 --
 -- * 'pzcdAlt'
-projectsZonesClustersDelete
+projectsZonesClustersDelete'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'clusterId'
     -> Text -- ^ 'projectId'
-    -> ProjectsZonesClustersDelete
-projectsZonesClustersDelete pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete
+    -> ProjectsZonesClustersDelete'
+projectsZonesClustersDelete' pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
+    ProjectsZonesClustersDelete'
     { _pzcdQuotaUser = Nothing
     , _pzcdPrettyPrint = True
     , _pzcdUserIp = Nothing
@@ -112,7 +120,7 @@ projectsZonesClustersDelete pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
     , _pzcdProjectId = pPzcdProjectId_
     , _pzcdOauthToken = Nothing
     , _pzcdFields = Nothing
-    , _pzcdAlt = "json"
+    , _pzcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,24 +178,25 @@ pzcdFields
   = lens _pzcdFields (\ s a -> s{_pzcdFields = a})
 
 -- | Data format for the response.
-pzcdAlt :: Lens' ProjectsZonesClustersDelete' Text
+pzcdAlt :: Lens' ProjectsZonesClustersDelete' Alt
 pzcdAlt = lens _pzcdAlt (\ s a -> s{_pzcdAlt = a})
 
 instance GoogleRequest ProjectsZonesClustersDelete'
          where
         type Rs ProjectsZonesClustersDelete' = Operation
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesClustersDelete{..}
-          = go _pzcdQuotaUser _pzcdPrettyPrint _pzcdUserIp
+        requestWithRoute r u ProjectsZonesClustersDelete'{..}
+          = go _pzcdQuotaUser (Just _pzcdPrettyPrint)
+              _pzcdUserIp
               _pzcdZoneId
               _pzcdKey
               _pzcdClusterId
               _pzcdProjectId
               _pzcdOauthToken
               _pzcdFields
-              _pzcdAlt
+              (Just _pzcdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesClustersDeleteAPI)
+                      (Proxy :: Proxy ProjectsZonesClustersDeleteResource)
                       r
                       u

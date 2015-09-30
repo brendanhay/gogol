@@ -33,6 +33,10 @@ module Network.Google.ProximityBeacon.Types
     , Empty
     , empty
 
+    -- * BeaconProperties
+    , BeaconProperties
+    , beaconProperties
+
     -- * DeleteAttachmentsResponse
     , DeleteAttachmentsResponse
     , deleteAttachmentsResponse
@@ -144,7 +148,7 @@ import           Network.Google.ProximityBeacon.Types.Product
 import           Network.Google.ProximityBeacon.Types.Sum
 
 -- | URL referring to version 'v1beta1' of the Google Proximity Beacon API.
-proximityBeaconURL :: BaseURL
+proximityBeaconURL :: BaseUrl
 proximityBeaconURL
   = BaseUrl Https
       "https://proximitybeacon.googleapis.com/"

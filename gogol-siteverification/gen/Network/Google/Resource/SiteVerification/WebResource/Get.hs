@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the most current data for a website or domain.
 --
 -- /See:/ <https://developers.google.com/site-verification/ Google Site Verification API Reference> for @SiteVerificationWebResourceGet@.
-module SiteVerification.WebResource.Get
+module Network.Google.Resource.SiteVerification.WebResource.Get
     (
     -- * REST Resource
-      WebResourceGetAPI
+      WebResourceGetResource
 
     -- * Creating a Request
-    , webResourceGet
-    , WebResourceGet
+    , webResourceGet'
+    , WebResourceGet'
 
     -- * Request Lenses
     , wrgQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Prelude
 import           Network.Google.SiteVerification.Types
 
 -- | A resource alias for @SiteVerificationWebResourceGet@ which the
--- 'WebResourceGet' request conforms to.
-type WebResourceGetAPI =
+-- 'WebResourceGet'' request conforms to.
+type WebResourceGetResource =
      "webResource" :>
        Capture "id" Text :>
-         Get '[JSON] SiteVerificationWebResourceResource
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] SiteVerificationWebResourceResource
 
 -- | Get the most current data for a website or domain.
 --
--- /See:/ 'webResourceGet' smart constructor.
-data WebResourceGet = WebResourceGet
+-- /See:/ 'webResourceGet'' smart constructor.
+data WebResourceGet' = WebResourceGet'
     { _wrgQuotaUser   :: !(Maybe Text)
     , _wrgPrettyPrint :: !Bool
     , _wrgUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data WebResourceGet = WebResourceGet
     , _wrgId          :: !Text
     , _wrgOauthToken  :: !(Maybe Text)
     , _wrgFields      :: !(Maybe Text)
-    , _wrgAlt         :: !Text
+    , _wrgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceGet'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data WebResourceGet = WebResourceGet
 -- * 'wrgFields'
 --
 -- * 'wrgAlt'
-webResourceGet
+webResourceGet'
     :: Text -- ^ 'id'
-    -> WebResourceGet
-webResourceGet pWrgId_ =
-    WebResourceGet
+    -> WebResourceGet'
+webResourceGet' pWrgId_ =
+    WebResourceGet'
     { _wrgQuotaUser = Nothing
     , _wrgPrettyPrint = False
     , _wrgUserIp = Nothing
@@ -94,7 +102,7 @@ webResourceGet pWrgId_ =
     , _wrgId = pWrgId_
     , _wrgOauthToken = Nothing
     , _wrgFields = Nothing
-    , _wrgAlt = "json"
+    , _wrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,22 @@ wrgFields
   = lens _wrgFields (\ s a -> s{_wrgFields = a})
 
 -- | Data format for the response.
-wrgAlt :: Lens' WebResourceGet' Text
+wrgAlt :: Lens' WebResourceGet' Alt
 wrgAlt = lens _wrgAlt (\ s a -> s{_wrgAlt = a})
 
 instance GoogleRequest WebResourceGet' where
         type Rs WebResourceGet' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
-        requestWithRoute r u WebResourceGet{..}
-          = go _wrgQuotaUser _wrgPrettyPrint _wrgUserIp _wrgKey
+        requestWithRoute r u WebResourceGet'{..}
+          = go _wrgQuotaUser (Just _wrgPrettyPrint) _wrgUserIp
+              _wrgKey
               _wrgId
               _wrgOauthToken
               _wrgFields
-              _wrgAlt
+              (Just _wrgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy WebResourceGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy WebResourceGetResource)
                       r
                       u

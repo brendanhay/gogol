@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,139 +20,145 @@
 -- | Sandbox only. Creates a test order.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersCreatetestorder@.
-module Content.Orders.Createtestorder
+module Network.Google.Resource.Content.Orders.Createtestorder
     (
     -- * REST Resource
-      OrdersCreatetestorderAPI
+      OrdersCreatetestorderResource
 
     -- * Creating a Request
-    , ordersCreatetestorder
-    , OrdersCreatetestorder
+    , ordersCreatetestorder'
+    , OrdersCreatetestorder'
 
     -- * Request Lenses
-    , ocQuotaUser
-    , ocMerchantId
-    , ocPrettyPrint
-    , ocUserIp
-    , ocKey
-    , ocOauthToken
-    , ocFields
-    , ocAlt
+    , oQuotaUser
+    , oMerchantId
+    , oPrettyPrint
+    , oUserIp
+    , oKey
+    , oOauthToken
+    , oFields
+    , oAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersCreatetestorder@ which the
--- 'OrdersCreatetestorder' request conforms to.
-type OrdersCreatetestorderAPI =
+-- 'OrdersCreatetestorder'' request conforms to.
+type OrdersCreatetestorderResource =
      Capture "merchantId" Word64 :>
        "testorders" :>
-         Post '[JSON] OrdersCreateTestOrderResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] OrdersCreateTestOrderResponse
 
 -- | Sandbox only. Creates a test order.
 --
--- /See:/ 'ordersCreatetestorder' smart constructor.
-data OrdersCreatetestorder = OrdersCreatetestorder
-    { _ocQuotaUser   :: !(Maybe Text)
-    , _ocMerchantId  :: !Word64
-    , _ocPrettyPrint :: !Bool
-    , _ocUserIp      :: !(Maybe Text)
-    , _ocKey         :: !(Maybe Text)
-    , _ocOauthToken  :: !(Maybe Text)
-    , _ocFields      :: !(Maybe Text)
-    , _ocAlt         :: !Text
+-- /See:/ 'ordersCreatetestorder'' smart constructor.
+data OrdersCreatetestorder' = OrdersCreatetestorder'
+    { _oQuotaUser   :: !(Maybe Text)
+    , _oMerchantId  :: !Word64
+    , _oPrettyPrint :: !Bool
+    , _oUserIp      :: !(Maybe Text)
+    , _oKey         :: !(Maybe Text)
+    , _oOauthToken  :: !(Maybe Text)
+    , _oFields      :: !(Maybe Text)
+    , _oAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreatetestorder'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ocQuotaUser'
+-- * 'oQuotaUser'
 --
--- * 'ocMerchantId'
+-- * 'oMerchantId'
 --
--- * 'ocPrettyPrint'
+-- * 'oPrettyPrint'
 --
--- * 'ocUserIp'
+-- * 'oUserIp'
 --
--- * 'ocKey'
+-- * 'oKey'
 --
--- * 'ocOauthToken'
+-- * 'oOauthToken'
 --
--- * 'ocFields'
+-- * 'oFields'
 --
--- * 'ocAlt'
-ordersCreatetestorder
+-- * 'oAlt'
+ordersCreatetestorder'
     :: Word64 -- ^ 'merchantId'
-    -> OrdersCreatetestorder
-ordersCreatetestorder pOcMerchantId_ =
-    OrdersCreatetestorder
-    { _ocQuotaUser = Nothing
-    , _ocMerchantId = pOcMerchantId_
-    , _ocPrettyPrint = True
-    , _ocUserIp = Nothing
-    , _ocKey = Nothing
-    , _ocOauthToken = Nothing
-    , _ocFields = Nothing
-    , _ocAlt = "json"
+    -> OrdersCreatetestorder'
+ordersCreatetestorder' pOMerchantId_ =
+    OrdersCreatetestorder'
+    { _oQuotaUser = Nothing
+    , _oMerchantId = pOMerchantId_
+    , _oPrettyPrint = True
+    , _oUserIp = Nothing
+    , _oKey = Nothing
+    , _oOauthToken = Nothing
+    , _oFields = Nothing
+    , _oAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ocQuotaUser :: Lens' OrdersCreatetestorder' (Maybe Text)
-ocQuotaUser
-  = lens _ocQuotaUser (\ s a -> s{_ocQuotaUser = a})
+oQuotaUser :: Lens' OrdersCreatetestorder' (Maybe Text)
+oQuotaUser
+  = lens _oQuotaUser (\ s a -> s{_oQuotaUser = a})
 
 -- | The ID of the managing account.
-ocMerchantId :: Lens' OrdersCreatetestorder' Word64
-ocMerchantId
-  = lens _ocMerchantId (\ s a -> s{_ocMerchantId = a})
+oMerchantId :: Lens' OrdersCreatetestorder' Word64
+oMerchantId
+  = lens _oMerchantId (\ s a -> s{_oMerchantId = a})
 
 -- | Returns response with indentations and line breaks.
-ocPrettyPrint :: Lens' OrdersCreatetestorder' Bool
-ocPrettyPrint
-  = lens _ocPrettyPrint
-      (\ s a -> s{_ocPrettyPrint = a})
+oPrettyPrint :: Lens' OrdersCreatetestorder' Bool
+oPrettyPrint
+  = lens _oPrettyPrint (\ s a -> s{_oPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ocUserIp :: Lens' OrdersCreatetestorder' (Maybe Text)
-ocUserIp = lens _ocUserIp (\ s a -> s{_ocUserIp = a})
+oUserIp :: Lens' OrdersCreatetestorder' (Maybe Text)
+oUserIp = lens _oUserIp (\ s a -> s{_oUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ocKey :: Lens' OrdersCreatetestorder' (Maybe Text)
-ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
+oKey :: Lens' OrdersCreatetestorder' (Maybe Text)
+oKey = lens _oKey (\ s a -> s{_oKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ocOauthToken :: Lens' OrdersCreatetestorder' (Maybe Text)
-ocOauthToken
-  = lens _ocOauthToken (\ s a -> s{_ocOauthToken = a})
+oOauthToken :: Lens' OrdersCreatetestorder' (Maybe Text)
+oOauthToken
+  = lens _oOauthToken (\ s a -> s{_oOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ocFields :: Lens' OrdersCreatetestorder' (Maybe Text)
-ocFields = lens _ocFields (\ s a -> s{_ocFields = a})
+oFields :: Lens' OrdersCreatetestorder' (Maybe Text)
+oFields = lens _oFields (\ s a -> s{_oFields = a})
 
 -- | Data format for the response.
-ocAlt :: Lens' OrdersCreatetestorder' Text
-ocAlt = lens _ocAlt (\ s a -> s{_ocAlt = a})
+oAlt :: Lens' OrdersCreatetestorder' Alt
+oAlt = lens _oAlt (\ s a -> s{_oAlt = a})
 
 instance GoogleRequest OrdersCreatetestorder' where
         type Rs OrdersCreatetestorder' =
              OrdersCreateTestOrderResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersCreatetestorder{..}
-          = go _ocQuotaUser _ocMerchantId _ocPrettyPrint
-              _ocUserIp
-              _ocKey
-              _ocOauthToken
-              _ocFields
-              _ocAlt
+        requestWithRoute r u OrdersCreatetestorder'{..}
+          = go _oQuotaUser _oMerchantId (Just _oPrettyPrint)
+              _oUserIp
+              _oKey
+              _oOauthToken
+              _oFields
+              (Just _oAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrdersCreatetestorderAPI)
+                      (Proxy :: Proxy OrdersCreatetestorderResource)
                       r
                       u

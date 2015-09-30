@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,136 +20,148 @@
 -- | Gets a reference. Implements GlobalAllianceApi.getReference.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReferencesGet@.
-module Genomics.References.Get
+module Network.Google.Resource.Genomics.References.Get
     (
     -- * REST Resource
-      ReferencesGetAPI
+      ReferencesGetResource
 
     -- * Creating a Request
-    , referencesGet
-    , ReferencesGet
+    , referencesGet'
+    , ReferencesGet'
 
     -- * Request Lenses
-    , rgQuotaUser
-    , rgPrettyPrint
-    , rgUserIp
-    , rgReferenceId
-    , rgKey
-    , rgOauthToken
-    , rgFields
-    , rgAlt
+    , rggQuotaUser
+    , rggPrettyPrint
+    , rggUserIp
+    , rggReferenceId
+    , rggKey
+    , rggOauthToken
+    , rggFields
+    , rggAlt
     ) where
 
 import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReferencesGet@ which the
--- 'ReferencesGet' request conforms to.
-type ReferencesGetAPI =
+-- 'ReferencesGet'' request conforms to.
+type ReferencesGetResource =
      "references" :>
-       Capture "referenceId" Text :> Get '[JSON] Reference
+       Capture "referenceId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Reference
 
 -- | Gets a reference. Implements GlobalAllianceApi.getReference.
 --
--- /See:/ 'referencesGet' smart constructor.
-data ReferencesGet = ReferencesGet
-    { _rgQuotaUser   :: !(Maybe Text)
-    , _rgPrettyPrint :: !Bool
-    , _rgUserIp      :: !(Maybe Text)
-    , _rgReferenceId :: !Text
-    , _rgKey         :: !(Maybe Text)
-    , _rgOauthToken  :: !(Maybe Text)
-    , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+-- /See:/ 'referencesGet'' smart constructor.
+data ReferencesGet' = ReferencesGet'
+    { _rggQuotaUser   :: !(Maybe Text)
+    , _rggPrettyPrint :: !Bool
+    , _rggUserIp      :: !(Maybe Text)
+    , _rggReferenceId :: !Text
+    , _rggKey         :: !(Maybe Text)
+    , _rggOauthToken  :: !(Maybe Text)
+    , _rggFields      :: !(Maybe Text)
+    , _rggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rgQuotaUser'
+-- * 'rggQuotaUser'
 --
--- * 'rgPrettyPrint'
+-- * 'rggPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rggUserIp'
 --
--- * 'rgReferenceId'
+-- * 'rggReferenceId'
 --
--- * 'rgKey'
+-- * 'rggKey'
 --
--- * 'rgOauthToken'
+-- * 'rggOauthToken'
 --
--- * 'rgFields'
+-- * 'rggFields'
 --
--- * 'rgAlt'
-referencesGet
+-- * 'rggAlt'
+referencesGet'
     :: Text -- ^ 'referenceId'
-    -> ReferencesGet
-referencesGet pRgReferenceId_ =
-    ReferencesGet
-    { _rgQuotaUser = Nothing
-    , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
-    , _rgReferenceId = pRgReferenceId_
-    , _rgKey = Nothing
-    , _rgOauthToken = Nothing
-    , _rgFields = Nothing
-    , _rgAlt = "json"
+    -> ReferencesGet'
+referencesGet' pRggReferenceId_ =
+    ReferencesGet'
+    { _rggQuotaUser = Nothing
+    , _rggPrettyPrint = True
+    , _rggUserIp = Nothing
+    , _rggReferenceId = pRggReferenceId_
+    , _rggKey = Nothing
+    , _rggOauthToken = Nothing
+    , _rggFields = Nothing
+    , _rggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rgQuotaUser :: Lens' ReferencesGet' (Maybe Text)
-rgQuotaUser
-  = lens _rgQuotaUser (\ s a -> s{_rgQuotaUser = a})
+rggQuotaUser :: Lens' ReferencesGet' (Maybe Text)
+rggQuotaUser
+  = lens _rggQuotaUser (\ s a -> s{_rggQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rgPrettyPrint :: Lens' ReferencesGet' Bool
-rgPrettyPrint
-  = lens _rgPrettyPrint
-      (\ s a -> s{_rgPrettyPrint = a})
+rggPrettyPrint :: Lens' ReferencesGet' Bool
+rggPrettyPrint
+  = lens _rggPrettyPrint
+      (\ s a -> s{_rggPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ReferencesGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rggUserIp :: Lens' ReferencesGet' (Maybe Text)
+rggUserIp
+  = lens _rggUserIp (\ s a -> s{_rggUserIp = a})
 
 -- | The ID of the reference.
-rgReferenceId :: Lens' ReferencesGet' Text
-rgReferenceId
-  = lens _rgReferenceId
-      (\ s a -> s{_rgReferenceId = a})
+rggReferenceId :: Lens' ReferencesGet' Text
+rggReferenceId
+  = lens _rggReferenceId
+      (\ s a -> s{_rggReferenceId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReferencesGet' (Maybe Text)
-rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
+rggKey :: Lens' ReferencesGet' (Maybe Text)
+rggKey = lens _rggKey (\ s a -> s{_rggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ReferencesGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rggOauthToken :: Lens' ReferencesGet' (Maybe Text)
+rggOauthToken
+  = lens _rggOauthToken
+      (\ s a -> s{_rggOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rgFields :: Lens' ReferencesGet' (Maybe Text)
-rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
+rggFields :: Lens' ReferencesGet' (Maybe Text)
+rggFields
+  = lens _rggFields (\ s a -> s{_rggFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' ReferencesGet' Text
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+rggAlt :: Lens' ReferencesGet' Alt
+rggAlt = lens _rggAlt (\ s a -> s{_rggAlt = a})
 
 instance GoogleRequest ReferencesGet' where
         type Rs ReferencesGet' = Reference
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReferencesGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp
-              _rgReferenceId
-              _rgKey
-              _rgOauthToken
-              _rgFields
-              _rgAlt
+        requestWithRoute r u ReferencesGet'{..}
+          = go _rggQuotaUser (Just _rggPrettyPrint) _rggUserIp
+              _rggReferenceId
+              _rggKey
+              _rggOauthToken
+              _rggFields
+              (Just _rggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReferencesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ReferencesGetResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Polls for the status of a report request.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsGet@.
-module DoubleClickSearch.Reports.Get
+module Network.Google.Resource.DoubleClickSearch.Reports.Get
     (
     -- * REST Resource
-      ReportsGetAPI
+      ReportsGetResource
 
     -- * Creating a Request
-    , reportsGet
-    , ReportsGet
+    , reportsGet'
+    , ReportsGet'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchReportsGet@ which the
--- 'ReportsGet' request conforms to.
-type ReportsGetAPI =
+-- 'ReportsGet'' request conforms to.
+type ReportsGetResource =
      "reports" :>
-       Capture "reportId" Text :> Get '[JSON] Report
+       Capture "reportId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Report
 
 -- | Polls for the status of a report request.
 --
--- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet
+-- /See:/ 'reportsGet'' smart constructor.
+data ReportsGet' = ReportsGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data ReportsGet = ReportsGet
     , _rgKey         :: !(Maybe Text)
     , _rgOauthToken  :: !(Maybe Text)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ReportsGet = ReportsGet
 -- * 'rgFields'
 --
 -- * 'rgAlt'
-reportsGet
+reportsGet'
     :: Text -- ^ 'reportId'
-    -> ReportsGet
-reportsGet pRgReportId_ =
-    ReportsGet
+    -> ReportsGet'
+reportsGet' pRgReportId_ =
+    ReportsGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgUserIp = Nothing
@@ -93,7 +101,7 @@ reportsGet pRgReportId_ =
     , _rgKey = Nothing
     , _rgOauthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ rgFields :: Lens' ReportsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' ReportsGet' Text
+rgAlt :: Lens' ReportsGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgUserIp
+        requestWithRoute r u ReportsGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
               _rgReportId
               _rgKey
               _rgOauthToken
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy ReportsGetResource)
+                      r
+                      u

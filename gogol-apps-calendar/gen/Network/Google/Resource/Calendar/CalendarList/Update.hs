@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an entry on the user\'s calendar list.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListUpdate@.
-module Calendar.CalendarList.Update
+module Network.Google.Resource.Calendar.CalendarList.Update
     (
     -- * REST Resource
-      CalendarListUpdateAPI
+      CalendarListUpdateResource
 
     -- * Creating a Request
-    , calendarListUpdate
-    , CalendarListUpdate
+    , calendarListUpdate'
+    , CalendarListUpdate'
 
     -- * Request Lenses
     , cluQuotaUser
@@ -44,19 +45,25 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListUpdate@ which the
--- 'CalendarListUpdate' request conforms to.
-type CalendarListUpdateAPI =
+-- 'CalendarListUpdate'' request conforms to.
+type CalendarListUpdateResource =
      "users" :>
        "me" :>
          "calendarList" :>
            Capture "calendarId" Text :>
-             QueryParam "colorRgbFormat" Bool :>
-               Put '[JSON] CalendarListEntry
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "colorRgbFormat" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list.
 --
--- /See:/ 'calendarListUpdate' smart constructor.
-data CalendarListUpdate = CalendarListUpdate
+-- /See:/ 'calendarListUpdate'' smart constructor.
+data CalendarListUpdate' = CalendarListUpdate'
     { _cluQuotaUser      :: !(Maybe Text)
     , _cluCalendarId     :: !Text
     , _cluPrettyPrint    :: !Bool
@@ -65,7 +72,7 @@ data CalendarListUpdate = CalendarListUpdate
     , _cluKey            :: !(Maybe Text)
     , _cluOauthToken     :: !(Maybe Text)
     , _cluFields         :: !(Maybe Text)
-    , _cluAlt            :: !Text
+    , _cluAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListUpdate'' with the minimum fields required to make a request.
@@ -89,11 +96,11 @@ data CalendarListUpdate = CalendarListUpdate
 -- * 'cluFields'
 --
 -- * 'cluAlt'
-calendarListUpdate
+calendarListUpdate'
     :: Text -- ^ 'calendarId'
-    -> CalendarListUpdate
-calendarListUpdate pCluCalendarId_ =
-    CalendarListUpdate
+    -> CalendarListUpdate'
+calendarListUpdate' pCluCalendarId_ =
+    CalendarListUpdate'
     { _cluQuotaUser = Nothing
     , _cluCalendarId = pCluCalendarId_
     , _cluPrettyPrint = True
@@ -102,7 +109,7 @@ calendarListUpdate pCluCalendarId_ =
     , _cluKey = Nothing
     , _cluOauthToken = Nothing
     , _cluFields = Nothing
-    , _cluAlt = "json"
+    , _cluAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,22 +166,23 @@ cluFields
   = lens _cluFields (\ s a -> s{_cluFields = a})
 
 -- | Data format for the response.
-cluAlt :: Lens' CalendarListUpdate' Text
+cluAlt :: Lens' CalendarListUpdate' Alt
 cluAlt = lens _cluAlt (\ s a -> s{_cluAlt = a})
 
 instance GoogleRequest CalendarListUpdate' where
         type Rs CalendarListUpdate' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListUpdate{..}
-          = go _cluQuotaUser _cluCalendarId _cluPrettyPrint
+        requestWithRoute r u CalendarListUpdate'{..}
+          = go _cluQuotaUser _cluCalendarId
+              (Just _cluPrettyPrint)
               _cluUserIp
               _cluColorRgbFormat
               _cluKey
               _cluOauthToken
               _cluFields
-              _cluAlt
+              (Just _cluAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListUpdateAPI)
+                      (Proxy :: Proxy CalendarListUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAutoscalersPatch@.
-module Compute.Autoscalers.Patch
+module Network.Google.Resource.Compute.Autoscalers.Patch
     (
     -- * REST Resource
-      AutoscalersPatchAPI
+      AutoscalersPatchResource
 
     -- * Creating a Request
-    , autoscalersPatch
-    , AutoscalersPatch
+    , autoscalersPatch'
+    , AutoscalersPatch'
 
     -- * Request Lenses
     , apQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAutoscalersPatch@ which the
--- 'AutoscalersPatch' request conforms to.
-type AutoscalersPatchAPI =
+-- 'AutoscalersPatch'' request conforms to.
+type AutoscalersPatchResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "autoscalers" :>
-             QueryParam "autoscaler" Text :>
-               Patch '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "autoscaler" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request. This method supports patch semantics.
 --
--- /See:/ 'autoscalersPatch' smart constructor.
-data AutoscalersPatch = AutoscalersPatch
+-- /See:/ 'autoscalersPatch'' smart constructor.
+data AutoscalersPatch' = AutoscalersPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apProject     :: !Text
@@ -69,7 +76,7 @@ data AutoscalersPatch = AutoscalersPatch
     , _apAutoscaler  :: !Text
     , _apOauthToken  :: !(Maybe Text)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Text
+    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersPatch'' with the minimum fields required to make a request.
@@ -95,13 +102,13 @@ data AutoscalersPatch = AutoscalersPatch
 -- * 'apFields'
 --
 -- * 'apAlt'
-autoscalersPatch
+autoscalersPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'autoscaler'
-    -> AutoscalersPatch
-autoscalersPatch pApProject_ pApZone_ pApAutoscaler_ =
-    AutoscalersPatch
+    -> AutoscalersPatch'
+autoscalersPatch' pApProject_ pApZone_ pApAutoscaler_ =
+    AutoscalersPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apProject = pApProject_
@@ -111,7 +118,7 @@ autoscalersPatch pApProject_ pApZone_ pApAutoscaler_ =
     , _apAutoscaler = pApAutoscaler_
     , _apOauthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = "json"
+    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,22 +169,23 @@ apFields :: Lens' AutoscalersPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
 -- | Data format for the response.
-apAlt :: Lens' AutoscalersPatch' Text
+apAlt :: Lens' AutoscalersPatch' Alt
 apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
 
 instance GoogleRequest AutoscalersPatch' where
         type Rs AutoscalersPatch' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AutoscalersPatch{..}
-          = go _apQuotaUser _apPrettyPrint _apProject _apUserIp
+        requestWithRoute r u AutoscalersPatch'{..}
+          = go _apQuotaUser (Just _apPrettyPrint) _apProject
+              _apUserIp
               _apZone
               _apKey
               (Just _apAutoscaler)
               _apOauthToken
               _apFields
-              _apAlt
+              (Just _apAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersPatchAPI)
+                      (Proxy :: Proxy AutoscalersPatchResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsPermissionsBatchDelete@.
-module Mapsengine.RasterCollections.Permissions.BatchDelete
+module Network.Google.Resource.Mapsengine.RasterCollections.Permissions.BatchDelete
     (
     -- * REST Resource
-      RasterCollectionsPermissionsBatchDeleteAPI
+      RasterCollectionsPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsPermissionsBatchDelete
-    , RasterCollectionsPermissionsBatchDelete
+    , rasterCollectionsPermissionsBatchDelete'
+    , RasterCollectionsPermissionsBatchDelete'
 
     -- * Request Lenses
     , rcpbdQuotaUser
@@ -43,18 +44,26 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsPermissionsBatchDelete@ which the
--- 'RasterCollectionsPermissionsBatchDelete' request conforms to.
-type RasterCollectionsPermissionsBatchDeleteAPI =
+-- 'RasterCollectionsPermissionsBatchDelete'' request conforms to.
+type RasterCollectionsPermissionsBatchDeleteResource
+     =
      "rasterCollections" :>
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'rasterCollectionsPermissionsBatchDelete' smart constructor.
-data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatchDelete
+-- /See:/ 'rasterCollectionsPermissionsBatchDelete'' smart constructor.
+data RasterCollectionsPermissionsBatchDelete' = RasterCollectionsPermissionsBatchDelete'
     { _rcpbdQuotaUser   :: !(Maybe Text)
     , _rcpbdPrettyPrint :: !Bool
     , _rcpbdUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatch
     , _rcpbdId          :: !Text
     , _rcpbdOauthToken  :: !(Maybe Text)
     , _rcpbdFields      :: !(Maybe Text)
-    , _rcpbdAlt         :: !Text
+    , _rcpbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsPermissionsBatchDelete'' with the minimum fields required to make a request.
@@ -84,11 +93,11 @@ data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatch
 -- * 'rcpbdFields'
 --
 -- * 'rcpbdAlt'
-rasterCollectionsPermissionsBatchDelete
+rasterCollectionsPermissionsBatchDelete'
     :: Text -- ^ 'id'
-    -> RasterCollectionsPermissionsBatchDelete
-rasterCollectionsPermissionsBatchDelete pRcpbdId_ =
-    RasterCollectionsPermissionsBatchDelete
+    -> RasterCollectionsPermissionsBatchDelete'
+rasterCollectionsPermissionsBatchDelete' pRcpbdId_ =
+    RasterCollectionsPermissionsBatchDelete'
     { _rcpbdQuotaUser = Nothing
     , _rcpbdPrettyPrint = True
     , _rcpbdUserIp = Nothing
@@ -96,7 +105,7 @@ rasterCollectionsPermissionsBatchDelete pRcpbdId_ =
     , _rcpbdId = pRcpbdId_
     , _rcpbdOauthToken = Nothing
     , _rcpbdFields = Nothing
-    , _rcpbdAlt = "json"
+    , _rcpbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +150,7 @@ rcpbdFields
   = lens _rcpbdFields (\ s a -> s{_rcpbdFields = a})
 
 -- | Data format for the response.
-rcpbdAlt :: Lens' RasterCollectionsPermissionsBatchDelete' Text
+rcpbdAlt :: Lens' RasterCollectionsPermissionsBatchDelete' Alt
 rcpbdAlt = lens _rcpbdAlt (\ s a -> s{_rcpbdAlt = a})
 
 instance GoogleRequest
@@ -150,16 +159,18 @@ instance GoogleRequest
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RasterCollectionsPermissionsBatchDelete{..}
-          = go _rcpbdQuotaUser _rcpbdPrettyPrint _rcpbdUserIp
+          RasterCollectionsPermissionsBatchDelete'{..}
+          = go _rcpbdQuotaUser (Just _rcpbdPrettyPrint)
+              _rcpbdUserIp
               _rcpbdKey
               _rcpbdId
               _rcpbdOauthToken
               _rcpbdFields
-              _rcpbdAlt
+              (Just _rcpbdAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RasterCollectionsPermissionsBatchDeleteAPI)
+                         Proxy
+                           RasterCollectionsPermissionsBatchDeleteResource)
                       r
                       u

@@ -17,6 +17,12 @@ module Network.Google.YouTubeAnalytics.Types
     -- * Service URL
       youTubeAnalyticsURL
 
+    -- * GroupContentDetails
+    , GroupContentDetails
+    , groupContentDetails
+    , gcdItemType
+    , gcdItemCount
+
     -- * Group
     , Group
     , group'
@@ -25,6 +31,12 @@ module Network.Google.YouTubeAnalytics.Types
     , gKind
     , gContentDetails
     , gId
+
+    -- * GroupItemResource
+    , GroupItemResource
+    , groupItemResource
+    , girKind
+    , girId
 
     -- * ResultTable
     , ResultTable
@@ -41,6 +53,12 @@ module Network.Google.YouTubeAnalytics.Types
     , brdName
     , brdId
     , brdType
+
+    -- * GroupSnippet
+    , GroupSnippet
+    , groupSnippet
+    , gsPublishedAt
+    , gsTitle
 
     -- * BatchReport
     , BatchReport
@@ -67,11 +85,24 @@ module Network.Google.YouTubeAnalytics.Types
     , brdlKind
     , brdlItems
 
+    -- * ResultTableColumnHeaders
+    , ResultTableColumnHeaders
+    , resultTableColumnHeaders
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
+
     -- * BatchReportList
     , BatchReportList
     , batchReportList
     , brlKind
     , brlItems
+
+    -- * BatchReportTimeSpan
+    , BatchReportTimeSpan
+    , batchReportTimeSpan
+    , brtsStartTime
+    , brtsEndTime
 
     -- * GroupItemListResponse
     , GroupItemListResponse
@@ -80,12 +111,22 @@ module Network.Google.YouTubeAnalytics.Types
     , gilrKind
     , gilrItems
 
+    -- * BatchReportOutputs
+    , BatchReportOutputs
+    , batchReportOutputs
+    , broFormat
+    , broDownloadUrl
+    , broType
+
     -- * GroupListResponse
     , GroupListResponse
     , groupListResponse
     , glrEtag
     , glrKind
     , glrItems
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -93,7 +134,7 @@ import           Network.Google.YouTubeAnalytics.Types.Product
 import           Network.Google.YouTubeAnalytics.Types.Sum
 
 -- | URL referring to version 'v1beta1' of the YouTube Analytics API.
-youTubeAnalyticsURL :: BaseURL
+youTubeAnalyticsURL :: BaseUrl
 youTubeAnalyticsURL
   = BaseUrl Https
       "https://www.googleapis.com/youtube/analytics/v1beta1/"

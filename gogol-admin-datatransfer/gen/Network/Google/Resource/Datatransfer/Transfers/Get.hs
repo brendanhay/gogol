@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/data-transfer/ Admin Data Transfer API Reference> for @DatatransferTransfersGet@.
-module Datatransfer.Transfers.Get
+module Network.Google.Resource.Datatransfer.Transfers.Get
     (
     -- * REST Resource
-      TransfersGetAPI
+      TransfersGetResource
 
     -- * Creating a Request
-    , transfersGet
-    , TransfersGet
+    , transfersGet'
+    , TransfersGet'
 
     -- * Request Lenses
     , tgQuotaUser
@@ -43,16 +44,22 @@ import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatatransferTransfersGet@ which the
--- 'TransfersGet' request conforms to.
-type TransfersGetAPI =
+-- 'TransfersGet'' request conforms to.
+type TransfersGetResource =
      "transfers" :>
        Capture "dataTransferId" Text :>
-         Get '[JSON] DataTransfer
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] DataTransfer
 
 -- | Retrieves a data transfer request by its resource ID.
 --
--- /See:/ 'transfersGet' smart constructor.
-data TransfersGet = TransfersGet
+-- /See:/ 'transfersGet'' smart constructor.
+data TransfersGet' = TransfersGet'
     { _tgQuotaUser      :: !(Maybe Text)
     , _tgPrettyPrint    :: !Bool
     , _tgUserIp         :: !(Maybe Text)
@@ -60,7 +67,7 @@ data TransfersGet = TransfersGet
     , _tgOauthToken     :: !(Maybe Text)
     , _tgDataTransferId :: !Text
     , _tgFields         :: !(Maybe Text)
-    , _tgAlt            :: !Text
+    , _tgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransfersGet'' with the minimum fields required to make a request.
@@ -82,11 +89,11 @@ data TransfersGet = TransfersGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-transfersGet
+transfersGet'
     :: Text -- ^ 'dataTransferId'
-    -> TransfersGet
-transfersGet pTgDataTransferId_ =
-    TransfersGet
+    -> TransfersGet'
+transfersGet' pTgDataTransferId_ =
+    TransfersGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgUserIp = Nothing
@@ -94,7 +101,7 @@ transfersGet pTgDataTransferId_ =
     , _tgOauthToken = Nothing
     , _tgDataTransferId = pTgDataTransferId_
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,19 +145,22 @@ tgFields :: Lens' TransfersGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TransfersGet' Text
+tgAlt :: Lens' TransfersGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TransfersGet' where
         type Rs TransfersGet' = DataTransfer
         request
           = requestWithRoute defReq adminDataTransferURL
-        requestWithRoute r u TransfersGet{..}
-          = go _tgQuotaUser _tgPrettyPrint _tgUserIp _tgKey
+        requestWithRoute r u TransfersGet'{..}
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIp
+              _tgKey
               _tgOauthToken
               _tgDataTransferId
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TransfersGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TransfersGetResource)
+                      r
                       u

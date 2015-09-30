@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksPatch@.
-module Analytics.Management.WebPropertyAdWordsLinks.Patch
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksPatchAPI
+      ManagementWebPropertyAdWordsLinksPatchResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksPatch
-    , ManagementWebPropertyAdWordsLinksPatch
+    , managementWebPropertyAdWordsLinksPatch'
+    , ManagementWebPropertyAdWordsLinksPatch'
 
     -- * Request Lenses
     , mwpawlpQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksPatch@ which the
--- 'ManagementWebPropertyAdWordsLinksPatch' request conforms to.
-type ManagementWebPropertyAdWordsLinksPatchAPI =
+-- 'ManagementWebPropertyAdWordsLinksPatch'' request conforms to.
+type ManagementWebPropertyAdWordsLinksPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,13 +56,20 @@ type ManagementWebPropertyAdWordsLinksPatchAPI =
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
                  Capture "webPropertyAdWordsLinkId" Text :>
-                   Patch '[JSON] EntityAdWordsLink
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Patch '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link. This method supports patch
 -- semantics.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksPatch' smart constructor.
-data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksPatch
+-- /See:/ 'managementWebPropertyAdWordsLinksPatch'' smart constructor.
+data ManagementWebPropertyAdWordsLinksPatch' = ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpQuotaUser                :: !(Maybe Text)
     , _mwpawlpPrettyPrint              :: !Bool
     , _mwpawlpWebPropertyId            :: !Text
@@ -71,7 +79,7 @@ data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksP
     , _mwpawlpWebPropertyAdWordsLinkId :: !Text
     , _mwpawlpOauthToken               :: !(Maybe Text)
     , _mwpawlpFields                   :: !(Maybe Text)
-    , _mwpawlpAlt                      :: !Text
+    , _mwpawlpAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksPatch'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksP
 -- * 'mwpawlpFields'
 --
 -- * 'mwpawlpAlt'
-managementWebPropertyAdWordsLinksPatch
+managementWebPropertyAdWordsLinksPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksPatch
-managementWebPropertyAdWordsLinksPatch pMwpawlpWebPropertyId_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksPatch
+    -> ManagementWebPropertyAdWordsLinksPatch'
+managementWebPropertyAdWordsLinksPatch' pMwpawlpWebPropertyId_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpQuotaUser = Nothing
     , _mwpawlpPrettyPrint = False
     , _mwpawlpWebPropertyId = pMwpawlpWebPropertyId_
@@ -113,7 +121,7 @@ managementWebPropertyAdWordsLinksPatch pMwpawlpWebPropertyId_ pMwpawlpAccountId_
     , _mwpawlpWebPropertyAdWordsLinkId = pMwpawlpWebPropertyAdWordsLinkId_
     , _mwpawlpOauthToken = Nothing
     , _mwpawlpFields = Nothing
-    , _mwpawlpAlt = "json"
+    , _mwpawlpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,7 +183,7 @@ mwpawlpFields
       (\ s a -> s{_mwpawlpFields = a})
 
 -- | Data format for the response.
-mwpawlpAlt :: Lens' ManagementWebPropertyAdWordsLinksPatch' Text
+mwpawlpAlt :: Lens' ManagementWebPropertyAdWordsLinksPatch' Alt
 mwpawlpAlt
   = lens _mwpawlpAlt (\ s a -> s{_mwpawlpAlt = a})
 
@@ -185,8 +193,8 @@ instance GoogleRequest
              EntityAdWordsLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksPatch{..}
-          = go _mwpawlpQuotaUser _mwpawlpPrettyPrint
+          ManagementWebPropertyAdWordsLinksPatch'{..}
+          = go _mwpawlpQuotaUser (Just _mwpawlpPrettyPrint)
               _mwpawlpWebPropertyId
               _mwpawlpUserIp
               _mwpawlpAccountId
@@ -194,10 +202,10 @@ instance GoogleRequest
               _mwpawlpWebPropertyAdWordsLinkId
               _mwpawlpOauthToken
               _mwpawlpFields
-              _mwpawlpAlt
+              (Just _mwpawlpAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksPatchAPI)
+                         Proxy ManagementWebPropertyAdWordsLinksPatchResource)
                       r
                       u

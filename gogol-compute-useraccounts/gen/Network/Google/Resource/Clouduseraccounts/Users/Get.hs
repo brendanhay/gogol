@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified User resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersGet@.
-module Clouduseraccounts.Users.Get
+module Network.Google.Resource.Clouduseraccounts.Users.Get
     (
     -- * REST Resource
-      UsersGetAPI
+      UsersGetResource
 
     -- * Creating a Request
-    , usersGet
-    , UsersGet
+    , usersGet'
+    , UsersGet'
 
     -- * Request Lenses
     , ugQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersGet@ which the
--- 'UsersGet' request conforms to.
-type UsersGetAPI =
+-- 'UsersGet'' request conforms to.
+type UsersGetResource =
      Capture "project" Text :>
        "global" :>
-         "users" :> Capture "user" Text :> Get '[JSON] User
+         "users" :>
+           Capture "user" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] User
 
 -- | Returns the specified User resource.
 --
--- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+-- /See:/ 'usersGet'' smart constructor.
+data UsersGet' = UsersGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugProject     :: !Text
@@ -62,7 +71,7 @@ data UsersGet = UsersGet
     , _ugKey         :: !(Maybe Text)
     , _ugOauthToken  :: !(Maybe Text)
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Text
+    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data UsersGet = UsersGet
 -- * 'ugFields'
 --
 -- * 'ugAlt'
-usersGet
+usersGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'user'
-    -> UsersGet
-usersGet pUgProject_ pUgUser_ =
-    UsersGet
+    -> UsersGet'
+usersGet' pUgProject_ pUgUser_ =
+    UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
     , _ugProject = pUgProject_
@@ -100,7 +109,7 @@ usersGet pUgProject_ pUgUser_ =
     , _ugKey = Nothing
     , _ugOauthToken = Nothing
     , _ugFields = Nothing
-    , _ugAlt = "json"
+    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,19 +155,21 @@ ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 -- | Data format for the response.
-ugAlt :: Lens' UsersGet' Text
+ugAlt :: Lens' UsersGet' Alt
 ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersGet{..}
-          = go _ugQuotaUser _ugPrettyPrint _ugProject _ugUserIp
+        requestWithRoute r u UsersGet'{..}
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugProject
+              _ugUserIp
               _ugUser
               _ugKey
               _ugOauthToken
               _ugFields
-              _ugAlt
+              (Just _ugAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersGetResource) r
+                      u

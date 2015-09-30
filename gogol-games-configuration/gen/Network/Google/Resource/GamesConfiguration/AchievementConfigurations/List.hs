@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of the achievement configurations in this application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationAchievementConfigurationsList@.
-module GamesConfiguration.AchievementConfigurations.List
+module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
     (
     -- * REST Resource
-      AchievementConfigurationsListAPI
+      AchievementConfigurationsListResource
 
     -- * Creating a Request
-    , achievementConfigurationsList
-    , AchievementConfigurationsList
+    , achievementConfigurationsList'
+    , AchievementConfigurationsList'
 
     -- * Request Lenses
     , aclQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationAchievementConfigurationsList@ which the
--- 'AchievementConfigurationsList' request conforms to.
-type AchievementConfigurationsListAPI =
+-- 'AchievementConfigurationsList'' request conforms to.
+type AchievementConfigurationsListResource =
      "applications" :>
        Capture "applicationId" Text :>
          "achievements" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] AchievementConfigurationListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] AchievementConfigurationListResponse
 
 -- | Returns a list of the achievement configurations in this application.
 --
--- /See:/ 'achievementConfigurationsList' smart constructor.
-data AchievementConfigurationsList = AchievementConfigurationsList
+-- /See:/ 'achievementConfigurationsList'' smart constructor.
+data AchievementConfigurationsList' = AchievementConfigurationsList'
     { _aclQuotaUser     :: !(Maybe Text)
     , _aclPrettyPrint   :: !Bool
     , _aclUserIp        :: !(Maybe Text)
@@ -67,7 +75,7 @@ data AchievementConfigurationsList = AchievementConfigurationsList
     , _aclOauthToken    :: !(Maybe Text)
     , _aclMaxResults    :: !(Maybe Int32)
     , _aclFields        :: !(Maybe Text)
-    , _aclAlt           :: !Text
+    , _aclAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data AchievementConfigurationsList = AchievementConfigurationsList
 -- * 'aclFields'
 --
 -- * 'aclAlt'
-achievementConfigurationsList
+achievementConfigurationsList'
     :: Text -- ^ 'applicationId'
-    -> AchievementConfigurationsList
-achievementConfigurationsList pAclApplicationId_ =
-    AchievementConfigurationsList
+    -> AchievementConfigurationsList'
+achievementConfigurationsList' pAclApplicationId_ =
+    AchievementConfigurationsList'
     { _aclQuotaUser = Nothing
     , _aclPrettyPrint = True
     , _aclUserIp = Nothing
@@ -107,7 +115,7 @@ achievementConfigurationsList pAclApplicationId_ =
     , _aclOauthToken = Nothing
     , _aclMaxResults = Nothing
     , _aclFields = Nothing
-    , _aclAlt = "json"
+    , _aclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,7 +174,7 @@ aclFields
   = lens _aclFields (\ s a -> s{_aclFields = a})
 
 -- | Data format for the response.
-aclAlt :: Lens' AchievementConfigurationsList' Text
+aclAlt :: Lens' AchievementConfigurationsList' Alt
 aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
 
 instance GoogleRequest AchievementConfigurationsList'
@@ -176,17 +184,18 @@ instance GoogleRequest AchievementConfigurationsList'
         request
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
-          AchievementConfigurationsList{..}
-          = go _aclQuotaUser _aclPrettyPrint _aclUserIp
+          AchievementConfigurationsList'{..}
+          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIp
               _aclApplicationId
               _aclKey
               _aclPageToken
               _aclOauthToken
               _aclMaxResults
               _aclFields
-              _aclAlt
+              (Just _aclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementConfigurationsListAPI)
+                      (Proxy ::
+                         Proxy AchievementConfigurationsListResource)
                       r
                       u

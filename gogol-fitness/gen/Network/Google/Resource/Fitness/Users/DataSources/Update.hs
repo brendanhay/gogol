@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- identified by their data stream ID.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesUpdate@.
-module Fitness.Users.DataSources.Update
+module Network.Google.Resource.Fitness.Users.DataSources.Update
     (
     -- * REST Resource
-      UsersDataSourcesUpdateAPI
+      UsersDataSourcesUpdateResource
 
     -- * Creating a Request
-    , usersDataSourcesUpdate
-    , UsersDataSourcesUpdate
+    , usersDataSourcesUpdate'
+    , UsersDataSourcesUpdate'
 
     -- * Request Lenses
     , udsuQuotaUser
@@ -48,11 +49,18 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesUpdate@ which the
--- 'UsersDataSourcesUpdate' request conforms to.
-type UsersDataSourcesUpdateAPI =
+-- 'UsersDataSourcesUpdate'' request conforms to.
+type UsersDataSourcesUpdateResource =
      Capture "userId" Text :>
        "dataSources" :>
-         Capture "dataSourceId" Text :> Put '[JSON] DataSource
+         Capture "dataSourceId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart
@@ -60,8 +68,8 @@ type UsersDataSourcesUpdateAPI =
 -- unique data stream ID and separate data source. Data sources are
 -- identified by their data stream ID.
 --
--- /See:/ 'usersDataSourcesUpdate' smart constructor.
-data UsersDataSourcesUpdate = UsersDataSourcesUpdate
+-- /See:/ 'usersDataSourcesUpdate'' smart constructor.
+data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
     { _udsuQuotaUser    :: !(Maybe Text)
     , _udsuPrettyPrint  :: !Bool
     , _udsuUserIp       :: !(Maybe Text)
@@ -70,7 +78,7 @@ data UsersDataSourcesUpdate = UsersDataSourcesUpdate
     , _udsuKey          :: !(Maybe Text)
     , _udsuOauthToken   :: !(Maybe Text)
     , _udsuFields       :: !(Maybe Text)
-    , _udsuAlt          :: !Text
+    , _udsuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesUpdate'' with the minimum fields required to make a request.
@@ -94,12 +102,12 @@ data UsersDataSourcesUpdate = UsersDataSourcesUpdate
 -- * 'udsuFields'
 --
 -- * 'udsuAlt'
-usersDataSourcesUpdate
+usersDataSourcesUpdate'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
-    -> UsersDataSourcesUpdate
-usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuUserId_ =
-    UsersDataSourcesUpdate
+    -> UsersDataSourcesUpdate'
+usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuUserId_ =
+    UsersDataSourcesUpdate'
     { _udsuQuotaUser = Nothing
     , _udsuPrettyPrint = True
     , _udsuUserIp = Nothing
@@ -108,7 +116,7 @@ usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuUserId_ =
     , _udsuKey = Nothing
     , _udsuOauthToken = Nothing
     , _udsuFields = Nothing
-    , _udsuAlt = "json"
+    , _udsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +169,23 @@ udsuFields
   = lens _udsuFields (\ s a -> s{_udsuFields = a})
 
 -- | Data format for the response.
-udsuAlt :: Lens' UsersDataSourcesUpdate' Text
+udsuAlt :: Lens' UsersDataSourcesUpdate' Alt
 udsuAlt = lens _udsuAlt (\ s a -> s{_udsuAlt = a})
 
 instance GoogleRequest UsersDataSourcesUpdate' where
         type Rs UsersDataSourcesUpdate' = DataSource
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesUpdate{..}
-          = go _udsuQuotaUser _udsuPrettyPrint _udsuUserIp
+        requestWithRoute r u UsersDataSourcesUpdate'{..}
+          = go _udsuQuotaUser (Just _udsuPrettyPrint)
+              _udsuUserIp
               _udsuDataSourceId
               _udsuUserId
               _udsuKey
               _udsuOauthToken
               _udsuFields
-              _udsuAlt
+              (Just _udsuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesUpdateAPI)
+                      (Proxy :: Proxy UsersDataSourcesUpdateResource)
                       r
                       u

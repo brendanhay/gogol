@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new dataset.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsCreate@.
-module Genomics.Datasets.Create
+module Network.Google.Resource.Genomics.Datasets.Create
     (
     -- * REST Resource
-      DatasetsCreateAPI
+      DatasetsCreateResource
 
     -- * Creating a Request
-    , datasetsCreate
-    , DatasetsCreate
+    , datasetsCreate'
+    , DatasetsCreate'
 
     -- * Request Lenses
     , dcQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsCreate@ which the
--- 'DatasetsCreate' request conforms to.
-type DatasetsCreateAPI =
-     "datasets" :> Post '[JSON] Dataset
+-- 'DatasetsCreate'' request conforms to.
+type DatasetsCreateResource =
+     "datasets" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Dataset
 
 -- | Creates a new dataset.
 --
--- /See:/ 'datasetsCreate' smart constructor.
-data DatasetsCreate = DatasetsCreate
+-- /See:/ 'datasetsCreate'' smart constructor.
+data DatasetsCreate' = DatasetsCreate'
     { _dcQuotaUser   :: !(Maybe Text)
     , _dcPrettyPrint :: !Bool
     , _dcUserIp      :: !(Maybe Text)
     , _dcKey         :: !(Maybe Text)
     , _dcOauthToken  :: !(Maybe Text)
     , _dcFields      :: !(Maybe Text)
-    , _dcAlt         :: !Text
+    , _dcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsCreate'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data DatasetsCreate = DatasetsCreate
 -- * 'dcFields'
 --
 -- * 'dcAlt'
-datasetsCreate
-    :: DatasetsCreate
-datasetsCreate =
-    DatasetsCreate
+datasetsCreate'
+    :: DatasetsCreate'
+datasetsCreate' =
+    DatasetsCreate'
     { _dcQuotaUser = Nothing
     , _dcPrettyPrint = True
     , _dcUserIp = Nothing
     , _dcKey = Nothing
     , _dcOauthToken = Nothing
     , _dcFields = Nothing
-    , _dcAlt = "json"
+    , _dcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,18 +131,20 @@ dcFields :: Lens' DatasetsCreate' (Maybe Text)
 dcFields = lens _dcFields (\ s a -> s{_dcFields = a})
 
 -- | Data format for the response.
-dcAlt :: Lens' DatasetsCreate' Text
+dcAlt :: Lens' DatasetsCreate' Alt
 dcAlt = lens _dcAlt (\ s a -> s{_dcAlt = a})
 
 instance GoogleRequest DatasetsCreate' where
         type Rs DatasetsCreate' = Dataset
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsCreate{..}
-          = go _dcQuotaUser _dcPrettyPrint _dcUserIp _dcKey
+        requestWithRoute r u DatasetsCreate'{..}
+          = go _dcQuotaUser (Just _dcPrettyPrint) _dcUserIp
+              _dcKey
               _dcOauthToken
               _dcFields
-              _dcAlt
+              (Just _dcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsCreateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsCreateResource)
                       r
                       u

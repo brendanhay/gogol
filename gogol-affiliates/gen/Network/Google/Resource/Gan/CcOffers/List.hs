@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves credit card offers for the given publisher.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanCcOffersList@.
-module Gan.CcOffers.List
+module Network.Google.Resource.Gan.CcOffers.List
     (
     -- * REST Resource
-      CcOffersListAPI
+      CcOffersListResource
 
     -- * Creating a Request
-    , ccOffersList
-    , CcOffersList
+    , ccOffersList'
+    , CcOffersList'
 
     -- * Request Lenses
     , colQuotaUser
@@ -45,28 +46,35 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanCcOffersList@ which the
--- 'CcOffersList' request conforms to.
-type CcOffersListAPI =
+-- 'CcOffersList'' request conforms to.
+type CcOffersListResource =
      "publishers" :>
        Capture "publisher" Text :>
          "ccOffers" :>
-           QueryParams "advertiser" Text :>
-             QueryParam "projection" Text :> Get '[JSON] CcOffers
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParams "advertiser" Text :>
+                     QueryParam "projection" GanCcOffersListProjection :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] CcOffers
 
 -- | Retrieves credit card offers for the given publisher.
 --
--- /See:/ 'ccOffersList' smart constructor.
-data CcOffersList = CcOffersList
+-- /See:/ 'ccOffersList'' smart constructor.
+data CcOffersList' = CcOffersList'
     { _colQuotaUser   :: !(Maybe Text)
     , _colPrettyPrint :: !Bool
     , _colUserIp      :: !(Maybe Text)
     , _colKey         :: !(Maybe Text)
     , _colAdvertiser  :: !(Maybe Text)
-    , _colProjection  :: !(Maybe Text)
+    , _colProjection  :: !(Maybe GanCcOffersListProjection)
     , _colOauthToken  :: !(Maybe Text)
     , _colPublisher   :: !Text
     , _colFields      :: !(Maybe Text)
-    , _colAlt         :: !Text
+    , _colAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOffersList'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data CcOffersList = CcOffersList
 -- * 'colFields'
 --
 -- * 'colAlt'
-ccOffersList
+ccOffersList'
     :: Text -- ^ 'publisher'
-    -> CcOffersList
-ccOffersList pColPublisher_ =
-    CcOffersList
+    -> CcOffersList'
+ccOffersList' pColPublisher_ =
+    CcOffersList'
     { _colQuotaUser = Nothing
     , _colPrettyPrint = True
     , _colUserIp = Nothing
@@ -106,7 +114,7 @@ ccOffersList pColPublisher_ =
     , _colOauthToken = Nothing
     , _colPublisher = pColPublisher_
     , _colFields = Nothing
-    , _colAlt = "json"
+    , _colAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ colAdvertiser
       (\ s a -> s{_colAdvertiser = a})
 
 -- | The set of fields to return.
-colProjection :: Lens' CcOffersList' (Maybe Text)
+colProjection :: Lens' CcOffersList' (Maybe GanCcOffersListProjection)
 colProjection
   = lens _colProjection
       (\ s a -> s{_colProjection = a})
@@ -164,20 +172,23 @@ colFields
   = lens _colFields (\ s a -> s{_colFields = a})
 
 -- | Data format for the response.
-colAlt :: Lens' CcOffersList' Text
+colAlt :: Lens' CcOffersList' Alt
 colAlt = lens _colAlt (\ s a -> s{_colAlt = a})
 
 instance GoogleRequest CcOffersList' where
         type Rs CcOffersList' = CcOffers
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u CcOffersList{..}
-          = go _colQuotaUser _colPrettyPrint _colUserIp _colKey
+        requestWithRoute r u CcOffersList'{..}
+          = go _colQuotaUser (Just _colPrettyPrint) _colUserIp
+              _colKey
               _colAdvertiser
               _colProjection
               _colOauthToken
               _colPublisher
               _colFields
-              _colAlt
+              (Just _colAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CcOffersListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CcOffersListResource)
+                      r
                       u

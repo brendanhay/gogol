@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a specific child reference.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveChildrenGet@.
-module Drive.Children.Get
+module Network.Google.Resource.Drive.Children.Get
     (
     -- * REST Resource
-      ChildrenGetAPI
+      ChildrenGetResource
 
     -- * Creating a Request
-    , childrenGet
-    , ChildrenGet
+    , childrenGet'
+    , ChildrenGet'
 
     -- * Request Lenses
     , chiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveChildrenGet@ which the
--- 'ChildrenGet' request conforms to.
-type ChildrenGetAPI =
+-- 'ChildrenGet'' request conforms to.
+type ChildrenGetResource =
      "files" :>
        Capture "folderId" Text :>
          "children" :>
-           Capture "childId" Text :> Get '[JSON] ChildReference
+           Capture "childId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ChildReference
 
 -- | Gets a specific child reference.
 --
--- /See:/ 'childrenGet' smart constructor.
-data ChildrenGet = ChildrenGet
+-- /See:/ 'childrenGet'' smart constructor.
+data ChildrenGet' = ChildrenGet'
     { _chiQuotaUser   :: !(Maybe Text)
     , _chiPrettyPrint :: !Bool
     , _chiUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ChildrenGet = ChildrenGet
     , _chiChildId     :: !Text
     , _chiOauthToken  :: !(Maybe Text)
     , _chiFields      :: !(Maybe Text)
-    , _chiAlt         :: !Text
+    , _chiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ChildrenGet = ChildrenGet
 -- * 'chiFields'
 --
 -- * 'chiAlt'
-childrenGet
+childrenGet'
     :: Text -- ^ 'folderId'
     -> Text -- ^ 'childId'
-    -> ChildrenGet
-childrenGet pChiFolderId_ pChiChildId_ =
-    ChildrenGet
+    -> ChildrenGet'
+childrenGet' pChiFolderId_ pChiChildId_ =
+    ChildrenGet'
     { _chiQuotaUser = Nothing
     , _chiPrettyPrint = True
     , _chiUserIp = Nothing
@@ -101,7 +109,7 @@ childrenGet pChiFolderId_ pChiChildId_ =
     , _chiChildId = pChiChildId_
     , _chiOauthToken = Nothing
     , _chiFields = Nothing
-    , _chiAlt = "json"
+    , _chiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,19 +159,22 @@ chiFields
   = lens _chiFields (\ s a -> s{_chiFields = a})
 
 -- | Data format for the response.
-chiAlt :: Lens' ChildrenGet' Text
+chiAlt :: Lens' ChildrenGet' Alt
 chiAlt = lens _chiAlt (\ s a -> s{_chiAlt = a})
 
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u ChildrenGet{..}
-          = go _chiQuotaUser _chiPrettyPrint _chiUserIp
+        requestWithRoute r u ChildrenGet'{..}
+          = go _chiQuotaUser (Just _chiPrettyPrint) _chiUserIp
               _chiFolderId
               _chiKey
               _chiChildId
               _chiOauthToken
               _chiFields
-              _chiAlt
+              (Just _chiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ChildrenGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ChildrenGetResource)
+                      r
+                      u

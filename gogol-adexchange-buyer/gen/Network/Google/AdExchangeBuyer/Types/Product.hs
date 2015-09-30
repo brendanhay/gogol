@@ -223,6 +223,216 @@ instance ToJSON MarketplaceNote where
                   ("orderRevisionNumber" .=) <$>
                     _mnOrderRevisionNumber])
 
+-- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
+--
+-- /See:/ 'creativeNATiveAd' smart constructor.
+data CreativeNATiveAd = CreativeNATiveAd
+    { _cnataImage                 :: !(Maybe CreativeNATiveAdImage)
+    , _cnataAppIcon               :: !(Maybe CreativeNATiveAdAppIcon)
+    , _cnataClickTrackingUrl      :: !(Maybe Text)
+    , _cnataBody                  :: !(Maybe Text)
+    , _cnataHeadline              :: !(Maybe Text)
+    , _cnataImpressionTrackingUrl :: !(Maybe [Text])
+    , _cnataCallToAction          :: !(Maybe Text)
+    , _cnataStore                 :: !(Maybe Text)
+    , _cnataPrice                 :: !(Maybe Text)
+    , _cnataAdvertiser            :: !(Maybe Text)
+    , _cnataStarRating            :: !(Maybe Double)
+    , _cnataLogo                  :: !(Maybe CreativeNATiveAdLogo)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeNATiveAd' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cnataImage'
+--
+-- * 'cnataAppIcon'
+--
+-- * 'cnataClickTrackingUrl'
+--
+-- * 'cnataBody'
+--
+-- * 'cnataHeadline'
+--
+-- * 'cnataImpressionTrackingUrl'
+--
+-- * 'cnataCallToAction'
+--
+-- * 'cnataStore'
+--
+-- * 'cnataPrice'
+--
+-- * 'cnataAdvertiser'
+--
+-- * 'cnataStarRating'
+--
+-- * 'cnataLogo'
+creativeNATiveAd
+    :: CreativeNATiveAd
+creativeNATiveAd =
+    CreativeNATiveAd
+    { _cnataImage = Nothing
+    , _cnataAppIcon = Nothing
+    , _cnataClickTrackingUrl = Nothing
+    , _cnataBody = Nothing
+    , _cnataHeadline = Nothing
+    , _cnataImpressionTrackingUrl = Nothing
+    , _cnataCallToAction = Nothing
+    , _cnataStore = Nothing
+    , _cnataPrice = Nothing
+    , _cnataAdvertiser = Nothing
+    , _cnataStarRating = Nothing
+    , _cnataLogo = Nothing
+    }
+
+-- | A large image.
+cnataImage :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdImage)
+cnataImage
+  = lens _cnataImage (\ s a -> s{_cnataImage = a})
+
+-- | The app icon, for app download ads.
+cnataAppIcon :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdAppIcon)
+cnataAppIcon
+  = lens _cnataAppIcon (\ s a -> s{_cnataAppIcon = a})
+
+-- | The URL to use for click tracking.
+cnataClickTrackingUrl :: Lens' CreativeNATiveAd (Maybe Text)
+cnataClickTrackingUrl
+  = lens _cnataClickTrackingUrl
+      (\ s a -> s{_cnataClickTrackingUrl = a})
+
+-- | A long description of the ad.
+cnataBody :: Lens' CreativeNATiveAd (Maybe Text)
+cnataBody
+  = lens _cnataBody (\ s a -> s{_cnataBody = a})
+
+-- | A short title for the ad.
+cnataHeadline :: Lens' CreativeNATiveAd (Maybe Text)
+cnataHeadline
+  = lens _cnataHeadline
+      (\ s a -> s{_cnataHeadline = a})
+
+-- | The URLs are called when the impression is rendered.
+cnataImpressionTrackingUrl :: Lens' CreativeNATiveAd [Text]
+cnataImpressionTrackingUrl
+  = lens _cnataImpressionTrackingUrl
+      (\ s a -> s{_cnataImpressionTrackingUrl = a})
+      . _Default
+      . _Coerce
+
+-- | A label for the button that the user is supposed to click.
+cnataCallToAction :: Lens' CreativeNATiveAd (Maybe Text)
+cnataCallToAction
+  = lens _cnataCallToAction
+      (\ s a -> s{_cnataCallToAction = a})
+
+-- | The URL to the app store to purchase\/download the promoted app.
+cnataStore :: Lens' CreativeNATiveAd (Maybe Text)
+cnataStore
+  = lens _cnataStore (\ s a -> s{_cnataStore = a})
+
+-- | The price of the promoted app including the currency info.
+cnataPrice :: Lens' CreativeNATiveAd (Maybe Text)
+cnataPrice
+  = lens _cnataPrice (\ s a -> s{_cnataPrice = a})
+
+cnataAdvertiser :: Lens' CreativeNATiveAd (Maybe Text)
+cnataAdvertiser
+  = lens _cnataAdvertiser
+      (\ s a -> s{_cnataAdvertiser = a})
+
+-- | The app rating in the app store. Must be in the range [0-5].
+cnataStarRating :: Lens' CreativeNATiveAd (Maybe Double)
+cnataStarRating
+  = lens _cnataStarRating
+      (\ s a -> s{_cnataStarRating = a})
+
+-- | A smaller image, for the advertiser logo.
+cnataLogo :: Lens' CreativeNATiveAd (Maybe CreativeNATiveAdLogo)
+cnataLogo
+  = lens _cnataLogo (\ s a -> s{_cnataLogo = a})
+
+instance FromJSON CreativeNATiveAd where
+        parseJSON
+          = withObject "CreativeNATiveAd"
+              (\ o ->
+                 CreativeNATiveAd <$>
+                   (o .:? "image") <*> (o .:? "appIcon") <*>
+                     (o .:? "clickTrackingUrl")
+                     <*> (o .:? "body")
+                     <*> (o .:? "headline")
+                     <*> (o .:? "impressionTrackingUrl" .!= mempty)
+                     <*> (o .:? "callToAction")
+                     <*> (o .:? "store")
+                     <*> (o .:? "price")
+                     <*> (o .:? "advertiser")
+                     <*> (o .:? "starRating")
+                     <*> (o .:? "logo"))
+
+instance ToJSON CreativeNATiveAd where
+        toJSON CreativeNATiveAd{..}
+          = object
+              (catMaybes
+                 [("image" .=) <$> _cnataImage,
+                  ("appIcon" .=) <$> _cnataAppIcon,
+                  ("clickTrackingUrl" .=) <$> _cnataClickTrackingUrl,
+                  ("body" .=) <$> _cnataBody,
+                  ("headline" .=) <$> _cnataHeadline,
+                  ("impressionTrackingUrl" .=) <$>
+                    _cnataImpressionTrackingUrl,
+                  ("callToAction" .=) <$> _cnataCallToAction,
+                  ("store" .=) <$> _cnataStore,
+                  ("price" .=) <$> _cnataPrice,
+                  ("advertiser" .=) <$> _cnataAdvertiser,
+                  ("starRating" .=) <$> _cnataStarRating,
+                  ("logo" .=) <$> _cnataLogo])
+
+--
+-- /See:/ 'pretargetingConfigDimensions' smart constructor.
+data PretargetingConfigDimensions = PretargetingConfigDimensions
+    { _pcdHeight :: !(Maybe Int64)
+    , _pcdWidth  :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PretargetingConfigDimensions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcdHeight'
+--
+-- * 'pcdWidth'
+pretargetingConfigDimensions
+    :: PretargetingConfigDimensions
+pretargetingConfigDimensions =
+    PretargetingConfigDimensions
+    { _pcdHeight = Nothing
+    , _pcdWidth = Nothing
+    }
+
+-- | Height in pixels.
+pcdHeight :: Lens' PretargetingConfigDimensions (Maybe Int64)
+pcdHeight
+  = lens _pcdHeight (\ s a -> s{_pcdHeight = a})
+
+-- | Width in pixels.
+pcdWidth :: Lens' PretargetingConfigDimensions (Maybe Int64)
+pcdWidth = lens _pcdWidth (\ s a -> s{_pcdWidth = a})
+
+instance FromJSON PretargetingConfigDimensions where
+        parseJSON
+          = withObject "PretargetingConfigDimensions"
+              (\ o ->
+                 PretargetingConfigDimensions <$>
+                   (o .:? "height") <*> (o .:? "width"))
+
+instance ToJSON PretargetingConfigDimensions where
+        toJSON PretargetingConfigDimensions{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _pcdHeight,
+                  ("width" .=) <$> _pcdWidth])
+
 --
 -- /See:/ 'termsDto' smart constructor.
 data TermsDto = TermsDto
@@ -640,6 +850,89 @@ instance ToJSON CreativesList where
               (catMaybes
                  [("nextPageToken" .=) <$> _clNextPageToken,
                   Just ("kind" .= _clKind), ("items" .=) <$> _clItems])
+
+--
+-- /See:/ 'creativeServingRestrictionsContexts' smart constructor.
+data CreativeServingRestrictionsContexts = CreativeServingRestrictionsContexts
+    { _csrcPlatform      :: !(Maybe [Text])
+    , _csrcContextType   :: !(Maybe Text)
+    , _csrcAuctionType   :: !(Maybe [Text])
+    , _csrcGeoCriteriaId :: !(Maybe [Int32])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeServingRestrictionsContexts' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csrcPlatform'
+--
+-- * 'csrcContextType'
+--
+-- * 'csrcAuctionType'
+--
+-- * 'csrcGeoCriteriaId'
+creativeServingRestrictionsContexts
+    :: CreativeServingRestrictionsContexts
+creativeServingRestrictionsContexts =
+    CreativeServingRestrictionsContexts
+    { _csrcPlatform = Nothing
+    , _csrcContextType = Nothing
+    , _csrcAuctionType = Nothing
+    , _csrcGeoCriteriaId = Nothing
+    }
+
+-- | Only set when contextType=PLATFORM. Represents the platforms this
+-- restriction applies to.
+csrcPlatform :: Lens' CreativeServingRestrictionsContexts [Text]
+csrcPlatform
+  = lens _csrcPlatform (\ s a -> s{_csrcPlatform = a})
+      . _Default
+      . _Coerce
+
+-- | The type of context (e.g., location, platform, auction type, SSL-ness).
+csrcContextType :: Lens' CreativeServingRestrictionsContexts (Maybe Text)
+csrcContextType
+  = lens _csrcContextType
+      (\ s a -> s{_csrcContextType = a})
+
+-- | Only set when contextType=AUCTION_TYPE. Represents the auction types
+-- this restriction applies to.
+csrcAuctionType :: Lens' CreativeServingRestrictionsContexts [Text]
+csrcAuctionType
+  = lens _csrcAuctionType
+      (\ s a -> s{_csrcAuctionType = a})
+      . _Default
+      . _Coerce
+
+-- | Only set when contextType=LOCATION. Represents the geo criterias this
+-- restriction applies to.
+csrcGeoCriteriaId :: Lens' CreativeServingRestrictionsContexts [Int32]
+csrcGeoCriteriaId
+  = lens _csrcGeoCriteriaId
+      (\ s a -> s{_csrcGeoCriteriaId = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON CreativeServingRestrictionsContexts
+         where
+        parseJSON
+          = withObject "CreativeServingRestrictionsContexts"
+              (\ o ->
+                 CreativeServingRestrictionsContexts <$>
+                   (o .:? "platform" .!= mempty) <*>
+                     (o .:? "contextType")
+                     <*> (o .:? "auctionType" .!= mempty)
+                     <*> (o .:? "geoCriteriaId" .!= mempty))
+
+instance ToJSON CreativeServingRestrictionsContexts
+         where
+        toJSON CreativeServingRestrictionsContexts{..}
+          = object
+              (catMaybes
+                 [("platform" .=) <$> _csrcPlatform,
+                  ("contextType" .=) <$> _csrcContextType,
+                  ("auctionType" .=) <$> _csrcAuctionType,
+                  ("geoCriteriaId" .=) <$> _csrcGeoCriteriaId])
 
 --
 -- /See:/ 'createOrdersResponse' smart constructor.
@@ -1287,6 +1580,58 @@ instance ToJSON AccountsList where
                   ("items" .=) <$> _alItems])
 
 --
+-- /See:/ 'creativeServingRestrictionsDisapprovalReasons' smart constructor.
+data CreativeServingRestrictionsDisapprovalReasons = CreativeServingRestrictionsDisapprovalReasons
+    { _csrdrReason  :: !(Maybe Text)
+    , _csrdrDetails :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeServingRestrictionsDisapprovalReasons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csrdrReason'
+--
+-- * 'csrdrDetails'
+creativeServingRestrictionsDisapprovalReasons
+    :: CreativeServingRestrictionsDisapprovalReasons
+creativeServingRestrictionsDisapprovalReasons =
+    CreativeServingRestrictionsDisapprovalReasons
+    { _csrdrReason = Nothing
+    , _csrdrDetails = Nothing
+    }
+
+-- | The categorized reason for disapproval.
+csrdrReason :: Lens' CreativeServingRestrictionsDisapprovalReasons (Maybe Text)
+csrdrReason
+  = lens _csrdrReason (\ s a -> s{_csrdrReason = a})
+
+-- | Additional details about the reason for disapproval.
+csrdrDetails :: Lens' CreativeServingRestrictionsDisapprovalReasons [Text]
+csrdrDetails
+  = lens _csrdrDetails (\ s a -> s{_csrdrDetails = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         CreativeServingRestrictionsDisapprovalReasons where
+        parseJSON
+          = withObject
+              "CreativeServingRestrictionsDisapprovalReasons"
+              (\ o ->
+                 CreativeServingRestrictionsDisapprovalReasons <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON
+         CreativeServingRestrictionsDisapprovalReasons where
+        toJSON
+          CreativeServingRestrictionsDisapprovalReasons{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _csrdrReason,
+                  ("details" .=) <$> _csrdrDetails])
+
+--
 -- /See:/ 'getOrderNotesResponse' smart constructor.
 newtype GetOrderNotesResponse = GetOrderNotesResponse
     { _gonrNotes :: Maybe [Maybe MarketplaceNote]
@@ -1562,7 +1907,7 @@ data Creative = Creative
     , _cBuyerCreativeId       :: !(Maybe Text)
     , _cAdvertiserName        :: !(Maybe Text)
     , _cAgencyId              :: !(Maybe Int64)
-    , _cCorrections           :: !(Maybe [CreativeCorrectionsItem])
+    , _cCorrections           :: !(Maybe [CreativeCorrections])
     , _cProductCategories     :: !(Maybe [Int32])
     , _cKind                  :: !Text
     , _cHTMLSnippet           :: !(Maybe Text)
@@ -1579,7 +1924,7 @@ data Creative = Creative
     , _cSensitiveCategories   :: !(Maybe [Int32])
     , _cVideoURL              :: !(Maybe Text)
     , _cApiUploadTimestamp    :: !(Maybe UTCTime)
-    , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictionsItem])
+    , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictions])
     , _cOpenAuctionStatus     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1702,7 +2047,7 @@ cAgencyId
 
 -- | Shows any corrections that were applied to this creative. Read-only.
 -- This field should not be set in requests.
-cCorrections :: Lens' Creative [CreativeCorrectionsItem]
+cCorrections :: Lens' Creative [CreativeCorrections]
 cCorrections
   = lens _cCorrections (\ s a -> s{_cCorrections = a})
       . _Default
@@ -1824,7 +2169,7 @@ cApiUploadTimestamp
 -- relates to where something ultimately serves (for example, a physical
 -- location, a platform, an HTTPS vs HTTP request, or the type of auction).
 -- Read-only. This field should not be set in requests.
-cServingRestrictions :: Lens' Creative [CreativeServingRestrictionsItem]
+cServingRestrictions :: Lens' Creative [CreativeServingRestrictions]
 cServingRestrictions
   = lens _cServingRestrictions
       (\ s a -> s{_cServingRestrictions = a})
@@ -2002,6 +2347,53 @@ instance ToJSON PretargetingConfigList where
               (catMaybes
                  [Just ("kind" .= _pclKind),
                   ("items" .=) <$> _pclItems])
+
+--
+-- /See:/ 'creativeCorrections' smart constructor.
+data CreativeCorrections = CreativeCorrections
+    { _ccReason  :: !(Maybe Text)
+    , _ccDetails :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeCorrections' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ccReason'
+--
+-- * 'ccDetails'
+creativeCorrections
+    :: CreativeCorrections
+creativeCorrections =
+    CreativeCorrections
+    { _ccReason = Nothing
+    , _ccDetails = Nothing
+    }
+
+-- | The type of correction that was applied to the creative.
+ccReason :: Lens' CreativeCorrections (Maybe Text)
+ccReason = lens _ccReason (\ s a -> s{_ccReason = a})
+
+-- | Additional details about the correction.
+ccDetails :: Lens' CreativeCorrections [Text]
+ccDetails
+  = lens _ccDetails (\ s a -> s{_ccDetails = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON CreativeCorrections where
+        parseJSON
+          = withObject "CreativeCorrections"
+              (\ o ->
+                 CreativeCorrections <$>
+                   (o .:? "reason") <*> (o .:? "details" .!= mempty))
+
+instance ToJSON CreativeCorrections where
+        toJSON CreativeCorrections{..}
+          = object
+              (catMaybes
+                 [("reason" .=) <$> _ccReason,
+                  ("details" .=) <$> _ccDetails])
 
 --
 -- /See:/ 'buyerDto' smart constructor.
@@ -2238,18 +2630,18 @@ data PerformanceReport = PerformanceReport
     { _prFilteredBidRate         :: !(Maybe Double)
     , _prKind                    :: !Text
     , _prLatency95thPercentile   :: !(Maybe Double)
-    , _prCookieMatcherStatusRate :: !(Maybe [JSON])
-    , _prHostedMatchStatusRate   :: !(Maybe [JSON])
+    , _prCookieMatcherStatusRate :: !(Maybe [JSONValue])
+    , _prHostedMatchStatusRate   :: !(Maybe [JSONValue])
     , _prUnsuccessfulRequestRate :: !(Maybe Double)
     , _prBidRequestRate          :: !(Maybe Double)
     , _prQuotaThrottledLimit     :: !(Maybe Double)
     , _prQuotaConfiguredLimit    :: !(Maybe Double)
     , _prSuccessfulRequestRate   :: !(Maybe Double)
     , _prLatency85thPercentile   :: !(Maybe Double)
-    , _prCalloutStatusRate       :: !(Maybe [JSON])
+    , _prCalloutStatusRate       :: !(Maybe [JSONValue])
     , _prLatency50thPercentile   :: !(Maybe Double)
     , _prBidRate                 :: !(Maybe Double)
-    , _prCreativeStatusRate      :: !(Maybe [JSON])
+    , _prCreativeStatusRate      :: !(Maybe [JSONValue])
     , _prNoQuotaInRegion         :: !(Maybe Double)
     , _prRegion                  :: !(Maybe Text)
     , _prInventoryMatchRate      :: !(Maybe Double)
@@ -2353,7 +2745,7 @@ prLatency95thPercentile
       (\ s a -> s{_prLatency95thPercentile = a})
 
 -- | Average QPS for cookie matcher operations.
-prCookieMatcherStatusRate :: Lens' PerformanceReport [JSON]
+prCookieMatcherStatusRate :: Lens' PerformanceReport [JSONValue]
 prCookieMatcherStatusRate
   = lens _prCookieMatcherStatusRate
       (\ s a -> s{_prCookieMatcherStatusRate = a})
@@ -2361,7 +2753,7 @@ prCookieMatcherStatusRate
       . _Coerce
 
 -- | Average QPS for hosted match operations.
-prHostedMatchStatusRate :: Lens' PerformanceReport [JSON]
+prHostedMatchStatusRate :: Lens' PerformanceReport [JSONValue]
 prHostedMatchStatusRate
   = lens _prHostedMatchStatusRate
       (\ s a -> s{_prHostedMatchStatusRate = a})
@@ -2409,7 +2801,7 @@ prLatency85thPercentile
 
 -- | Rate of various prefiltering statuses per match. Please refer to the
 -- callout-status-codes.txt file for different statuses.
-prCalloutStatusRate :: Lens' PerformanceReport [JSON]
+prCalloutStatusRate :: Lens' PerformanceReport [JSONValue]
 prCalloutStatusRate
   = lens _prCalloutStatusRate
       (\ s a -> s{_prCalloutStatusRate = a})
@@ -2430,7 +2822,7 @@ prBidRate
 
 -- | Rate of ads with a given status. Please refer to the
 -- creative-status-codes.txt file for different statuses.
-prCreativeStatusRate :: Lens' PerformanceReport [JSON]
+prCreativeStatusRate :: Lens' PerformanceReport [JSONValue]
 prCreativeStatusRate
   = lens _prCreativeStatusRate
       (\ s a -> s{_prCreativeStatusRate = a})
@@ -2552,7 +2944,7 @@ data Account = Account
     , _aCookieMatchingNid      :: !(Maybe Text)
     , _aNumberActiveCreatives  :: !(Maybe Int32)
     , _aId                     :: !(Maybe Int32)
-    , _aBidderLocation         :: !(Maybe [AccountBidderLocationItem])
+    , _aBidderLocation         :: !(Maybe [AccountBidderLocation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
@@ -2634,7 +3026,7 @@ aId :: Lens' Account (Maybe Int32)
 aId = lens _aId (\ s a -> s{_aId = a})
 
 -- | Your bidder locations that have distinct URLs.
-aBidderLocation :: Lens' Account [AccountBidderLocationItem]
+aBidderLocation :: Lens' Account [AccountBidderLocation]
 aBidderLocation
   = lens _aBidderLocation
       (\ s a -> s{_aBidderLocation = a})
@@ -2781,6 +3173,110 @@ instance ToJSON DeleteOrderDealsRequest where
                     _dodrOrderRevisionNumber])
 
 --
+-- /See:/ 'pretargetingConfigExcludedPlacements' smart constructor.
+data PretargetingConfigExcludedPlacements = PretargetingConfigExcludedPlacements
+    { _pcepToken :: !(Maybe Text)
+    , _pcepType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PretargetingConfigExcludedPlacements' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcepToken'
+--
+-- * 'pcepType'
+pretargetingConfigExcludedPlacements
+    :: PretargetingConfigExcludedPlacements
+pretargetingConfigExcludedPlacements =
+    PretargetingConfigExcludedPlacements
+    { _pcepToken = Nothing
+    , _pcepType = Nothing
+    }
+
+-- | The value of the placement. Interpretation depends on the placement
+-- type, e.g. URL for a site placement, channel name for a channel
+-- placement, app id for a mobile app placement.
+pcepToken :: Lens' PretargetingConfigExcludedPlacements (Maybe Text)
+pcepToken
+  = lens _pcepToken (\ s a -> s{_pcepToken = a})
+
+-- | The type of the placement.
+pcepType :: Lens' PretargetingConfigExcludedPlacements (Maybe Text)
+pcepType = lens _pcepType (\ s a -> s{_pcepType = a})
+
+instance FromJSON
+         PretargetingConfigExcludedPlacements where
+        parseJSON
+          = withObject "PretargetingConfigExcludedPlacements"
+              (\ o ->
+                 PretargetingConfigExcludedPlacements <$>
+                   (o .:? "token") <*> (o .:? "type"))
+
+instance ToJSON PretargetingConfigExcludedPlacements
+         where
+        toJSON PretargetingConfigExcludedPlacements{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _pcepToken,
+                  ("type" .=) <$> _pcepType])
+
+-- | A smaller image, for the advertiser logo.
+--
+-- /See:/ 'creativeNATiveAdLogo' smart constructor.
+data CreativeNATiveAdLogo = CreativeNATiveAdLogo
+    { _cnatalHeight :: !(Maybe Int32)
+    , _cnatalUrl    :: !(Maybe Text)
+    , _cnatalWidth  :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeNATiveAdLogo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cnatalHeight'
+--
+-- * 'cnatalUrl'
+--
+-- * 'cnatalWidth'
+creativeNATiveAdLogo
+    :: CreativeNATiveAdLogo
+creativeNATiveAdLogo =
+    CreativeNATiveAdLogo
+    { _cnatalHeight = Nothing
+    , _cnatalUrl = Nothing
+    , _cnatalWidth = Nothing
+    }
+
+cnatalHeight :: Lens' CreativeNATiveAdLogo (Maybe Int32)
+cnatalHeight
+  = lens _cnatalHeight (\ s a -> s{_cnatalHeight = a})
+
+cnatalUrl :: Lens' CreativeNATiveAdLogo (Maybe Text)
+cnatalUrl
+  = lens _cnatalUrl (\ s a -> s{_cnatalUrl = a})
+
+cnatalWidth :: Lens' CreativeNATiveAdLogo (Maybe Int32)
+cnatalWidth
+  = lens _cnatalWidth (\ s a -> s{_cnatalWidth = a})
+
+instance FromJSON CreativeNATiveAdLogo where
+        parseJSON
+          = withObject "CreativeNATiveAdLogo"
+              (\ o ->
+                 CreativeNATiveAdLogo <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeNATiveAdLogo where
+        toJSON CreativeNATiveAdLogo{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _cnatalHeight,
+                  ("url" .=) <$> _cnatalUrl,
+                  ("width" .=) <$> _cnatalWidth])
+
+--
 -- /See:/ 'getOrderDealsResponse' smart constructor.
 newtype GetOrderDealsResponse = GetOrderDealsResponse
     { _godrDeals :: Maybe [Maybe MarketplaceDeal]
@@ -2814,6 +3310,56 @@ instance FromJSON GetOrderDealsResponse where
 instance ToJSON GetOrderDealsResponse where
         toJSON GetOrderDealsResponse{..}
           = object (catMaybes [("deals" .=) <$> _godrDeals])
+
+-- | The filtering reasons for the creative. Read-only. This field should not
+-- be set in requests.
+--
+-- /See:/ 'creativeFilteringReasons' smart constructor.
+data CreativeFilteringReasons = CreativeFilteringReasons
+    { _cfrReasons :: !(Maybe [CreativeFilteringReasonsReasons])
+    , _cfrDate    :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeFilteringReasons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfrReasons'
+--
+-- * 'cfrDate'
+creativeFilteringReasons
+    :: CreativeFilteringReasons
+creativeFilteringReasons =
+    CreativeFilteringReasons
+    { _cfrReasons = Nothing
+    , _cfrDate = Nothing
+    }
+
+-- | The filtering reasons.
+cfrReasons :: Lens' CreativeFilteringReasons [CreativeFilteringReasonsReasons]
+cfrReasons
+  = lens _cfrReasons (\ s a -> s{_cfrReasons = a}) .
+      _Default
+      . _Coerce
+
+-- | The date in ISO 8601 format for the data. The data is collected from
+-- 00:00:00 to 23:59:59 in PST.
+cfrDate :: Lens' CreativeFilteringReasons (Maybe Text)
+cfrDate = lens _cfrDate (\ s a -> s{_cfrDate = a})
+
+instance FromJSON CreativeFilteringReasons where
+        parseJSON
+          = withObject "CreativeFilteringReasons"
+              (\ o ->
+                 CreativeFilteringReasons <$>
+                   (o .:? "reasons" .!= mempty) <*> (o .:? "date"))
+
+instance ToJSON CreativeFilteringReasons where
+        toJSON CreativeFilteringReasons{..}
+          = object
+              (catMaybes
+                 [("reasons" .=) <$> _cfrReasons,
+                  ("date" .=) <$> _cfrDate])
 
 --
 -- /See:/ 'contactInformation' smart constructor.
@@ -2929,16 +3475,16 @@ data PretargetingConfig = PretargetingConfig
     , _pcSupportedCreativeAttributes   :: !(Maybe [Int64])
     , _pcUserLists                     :: !(Maybe [Int64])
     , _pcKind                          :: !Text
-    , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacementsItem])
+    , _pcExcludedPlacements            :: !(Maybe [PretargetingConfigExcludedPlacements])
     , _pcMobileDevices                 :: !(Maybe [Int64])
     , _pcLanguages                     :: !(Maybe [Text])
     , _pcVerticals                     :: !(Maybe [Int64])
     , _pcConfigId                      :: !(Maybe Int64)
-    , _pcPlacements                    :: !(Maybe [PretargetingConfigPlacementsItem])
+    , _pcPlacements                    :: !(Maybe [PretargetingConfigPlacements])
     , _pcExcludedUserLists             :: !(Maybe [Int64])
     , _pcConfigName                    :: !(Maybe Text)
     , _pcGeoCriteriaIds                :: !(Maybe [Int64])
-    , _pcDimensions                    :: !(Maybe [PretargetingConfigDimensionsItem])
+    , _pcDimensions                    :: !(Maybe [PretargetingConfigDimensions])
     , _pcExcludedVerticals             :: !(Maybe [Int64])
     , _pcCreativeType                  :: !(Maybe [Text])
     , _pcIsActive                      :: !(Maybe Bool)
@@ -3083,7 +3629,7 @@ pcKind :: Lens' PretargetingConfig Text
 pcKind = lens _pcKind (\ s a -> s{_pcKind = a})
 
 -- | Requests containing any of these placements will not match.
-pcExcludedPlacements :: Lens' PretargetingConfig [PretargetingConfigExcludedPlacementsItem]
+pcExcludedPlacements :: Lens' PretargetingConfig [PretargetingConfigExcludedPlacements]
 pcExcludedPlacements
   = lens _pcExcludedPlacements
       (\ s a -> s{_pcExcludedPlacements = a})
@@ -3120,7 +3666,7 @@ pcConfigId
   = lens _pcConfigId (\ s a -> s{_pcConfigId = a})
 
 -- | Requests containing any of these placements will match.
-pcPlacements :: Lens' PretargetingConfig [PretargetingConfigPlacementsItem]
+pcPlacements :: Lens' PretargetingConfig [PretargetingConfigPlacements]
 pcPlacements
   = lens _pcPlacements (\ s a -> s{_pcPlacements = a})
       . _Default
@@ -3149,7 +3695,7 @@ pcGeoCriteriaIds
 
 -- | Requests which allow one of these (width, height) pairs will match. All
 -- pairs must be supported ad dimensions.
-pcDimensions :: Lens' PretargetingConfig [PretargetingConfigDimensionsItem]
+pcDimensions :: Lens' PretargetingConfig [PretargetingConfigDimensions]
 pcDimensions
   = lens _pcDimensions (\ s a -> s{_pcDimensions = a})
       . _Default
@@ -4547,6 +5093,62 @@ instance ToJSON Price where
                  [("currencyCode" .=) <$> _pCurrencyCode,
                   ("amountMicros" .=) <$> _pAmountMicros])
 
+-- | The app icon, for app download ads.
+--
+-- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
+data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
+    { _cnataaiHeight :: !(Maybe Int32)
+    , _cnataaiUrl    :: !(Maybe Text)
+    , _cnataaiWidth  :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeNATiveAdAppIcon' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cnataaiHeight'
+--
+-- * 'cnataaiUrl'
+--
+-- * 'cnataaiWidth'
+creativeNATiveAdAppIcon
+    :: CreativeNATiveAdAppIcon
+creativeNATiveAdAppIcon =
+    CreativeNATiveAdAppIcon
+    { _cnataaiHeight = Nothing
+    , _cnataaiUrl = Nothing
+    , _cnataaiWidth = Nothing
+    }
+
+cnataaiHeight :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
+cnataaiHeight
+  = lens _cnataaiHeight
+      (\ s a -> s{_cnataaiHeight = a})
+
+cnataaiUrl :: Lens' CreativeNATiveAdAppIcon (Maybe Text)
+cnataaiUrl
+  = lens _cnataaiUrl (\ s a -> s{_cnataaiUrl = a})
+
+cnataaiWidth :: Lens' CreativeNATiveAdAppIcon (Maybe Int32)
+cnataaiWidth
+  = lens _cnataaiWidth (\ s a -> s{_cnataaiWidth = a})
+
+instance FromJSON CreativeNATiveAdAppIcon where
+        parseJSON
+          = withObject "CreativeNATiveAdAppIcon"
+              (\ o ->
+                 CreativeNATiveAdAppIcon <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeNATiveAdAppIcon where
+        toJSON CreativeNATiveAdAppIcon{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _cnataaiHeight,
+                  ("url" .=) <$> _cnataaiUrl,
+                  ("width" .=) <$> _cnataaiWidth])
+
 --
 -- /See:/ 'editAllOrderDealsRequest' smart constructor.
 data EditAllOrderDealsRequest = EditAllOrderDealsRequest
@@ -4889,6 +5491,61 @@ instance ToJSON ListOffersRequest where
               (catMaybes
                  [("sinceTimestampMillis" .=) <$>
                     _lorSinceTimestampMillis])
+
+-- | A large image.
+--
+-- /See:/ 'creativeNATiveAdImage' smart constructor.
+data CreativeNATiveAdImage = CreativeNATiveAdImage
+    { _cnataiHeight :: !(Maybe Int32)
+    , _cnataiUrl    :: !(Maybe Text)
+    , _cnataiWidth  :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeNATiveAdImage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cnataiHeight'
+--
+-- * 'cnataiUrl'
+--
+-- * 'cnataiWidth'
+creativeNATiveAdImage
+    :: CreativeNATiveAdImage
+creativeNATiveAdImage =
+    CreativeNATiveAdImage
+    { _cnataiHeight = Nothing
+    , _cnataiUrl = Nothing
+    , _cnataiWidth = Nothing
+    }
+
+cnataiHeight :: Lens' CreativeNATiveAdImage (Maybe Int32)
+cnataiHeight
+  = lens _cnataiHeight (\ s a -> s{_cnataiHeight = a})
+
+cnataiUrl :: Lens' CreativeNATiveAdImage (Maybe Text)
+cnataiUrl
+  = lens _cnataiUrl (\ s a -> s{_cnataiUrl = a})
+
+cnataiWidth :: Lens' CreativeNATiveAdImage (Maybe Int32)
+cnataiWidth
+  = lens _cnataiWidth (\ s a -> s{_cnataiWidth = a})
+
+instance FromJSON CreativeNATiveAdImage where
+        parseJSON
+          = withObject "CreativeNATiveAdImage"
+              (\ o ->
+                 CreativeNATiveAdImage <$>
+                   (o .:? "height") <*> (o .:? "url") <*>
+                     (o .:? "width"))
+
+instance ToJSON CreativeNATiveAdImage where
+        toJSON CreativeNATiveAdImage{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _cnataiHeight,
+                  ("url" .=) <$> _cnataiUrl,
+                  ("width" .=) <$> _cnataiWidth])
 
 --
 -- /See:/ 'listClientAccessCapabilitiesRequest' smart constructor.
@@ -5507,6 +6164,117 @@ instance ToJSON SharedTargeting where
                   ("inclusions" .=) <$> _stInclusions])
 
 --
+-- /See:/ 'accountBidderLocation' smart constructor.
+data AccountBidderLocation = AccountBidderLocation
+    { _ablUrl        :: !(Maybe Text)
+    , _ablMaximumQps :: !(Maybe Int32)
+    , _ablRegion     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AccountBidderLocation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ablUrl'
+--
+-- * 'ablMaximumQps'
+--
+-- * 'ablRegion'
+accountBidderLocation
+    :: AccountBidderLocation
+accountBidderLocation =
+    AccountBidderLocation
+    { _ablUrl = Nothing
+    , _ablMaximumQps = Nothing
+    , _ablRegion = Nothing
+    }
+
+-- | The URL to which the Ad Exchange will send bid requests.
+ablUrl :: Lens' AccountBidderLocation (Maybe Text)
+ablUrl = lens _ablUrl (\ s a -> s{_ablUrl = a})
+
+-- | The maximum queries per second the Ad Exchange will send.
+ablMaximumQps :: Lens' AccountBidderLocation (Maybe Int32)
+ablMaximumQps
+  = lens _ablMaximumQps
+      (\ s a -> s{_ablMaximumQps = a})
+
+-- | The geographical region the Ad Exchange should send requests from. Only
+-- used by some quota systems, but always setting the value is recommended.
+-- Allowed values: - ASIA - EUROPE - US_EAST - US_WEST
+ablRegion :: Lens' AccountBidderLocation (Maybe Text)
+ablRegion
+  = lens _ablRegion (\ s a -> s{_ablRegion = a})
+
+instance FromJSON AccountBidderLocation where
+        parseJSON
+          = withObject "AccountBidderLocation"
+              (\ o ->
+                 AccountBidderLocation <$>
+                   (o .:? "url") <*> (o .:? "maximumQps") <*>
+                     (o .:? "region"))
+
+instance ToJSON AccountBidderLocation where
+        toJSON AccountBidderLocation{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _ablUrl,
+                  ("maximumQps" .=) <$> _ablMaximumQps,
+                  ("region" .=) <$> _ablRegion])
+
+--
+-- /See:/ 'creativeFilteringReasonsReasons' smart constructor.
+data CreativeFilteringReasonsReasons = CreativeFilteringReasonsReasons
+    { _cfrrFilteringStatus :: !(Maybe Int32)
+    , _cfrrFilteringCount  :: !(Maybe Int64)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeFilteringReasonsReasons' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfrrFilteringStatus'
+--
+-- * 'cfrrFilteringCount'
+creativeFilteringReasonsReasons
+    :: CreativeFilteringReasonsReasons
+creativeFilteringReasonsReasons =
+    CreativeFilteringReasonsReasons
+    { _cfrrFilteringStatus = Nothing
+    , _cfrrFilteringCount = Nothing
+    }
+
+-- | The filtering status code. Please refer to the creative-status-codes.txt
+-- file for different statuses.
+cfrrFilteringStatus :: Lens' CreativeFilteringReasonsReasons (Maybe Int32)
+cfrrFilteringStatus
+  = lens _cfrrFilteringStatus
+      (\ s a -> s{_cfrrFilteringStatus = a})
+
+-- | The number of times the creative was filtered for the status. The count
+-- is aggregated across all publishers on the exchange.
+cfrrFilteringCount :: Lens' CreativeFilteringReasonsReasons (Maybe Int64)
+cfrrFilteringCount
+  = lens _cfrrFilteringCount
+      (\ s a -> s{_cfrrFilteringCount = a})
+
+instance FromJSON CreativeFilteringReasonsReasons
+         where
+        parseJSON
+          = withObject "CreativeFilteringReasonsReasons"
+              (\ o ->
+                 CreativeFilteringReasonsReasons <$>
+                   (o .:? "filteringStatus") <*>
+                     (o .:? "filteringCount"))
+
+instance ToJSON CreativeFilteringReasonsReasons where
+        toJSON CreativeFilteringReasonsReasons{..}
+          = object
+              (catMaybes
+                 [("filteringStatus" .=) <$> _cfrrFilteringStatus,
+                  ("filteringCount" .=) <$> _cfrrFilteringCount])
+
+--
 -- /See:/ 'clientAccessCapabilities' smart constructor.
 data ClientAccessCapabilities = ClientAccessCapabilities
     { _cacClientAccountId :: !(Maybe Int64)
@@ -5610,208 +6378,209 @@ instance ToJSON DeleteOrderDealsResponse where
 --
 -- /See:/ 'marketplaceDeal' smart constructor.
 data MarketplaceDeal = MarketplaceDeal
-    { _mdExternalDealId       :: !(Maybe Text)
-    , _mdBuyerPrivateData     :: !(Maybe (Maybe PrivateData))
-    , _mdWebPropertyCode      :: !(Maybe Text)
-    , _mdCreationTimeMs       :: !(Maybe Int64)
-    , _mdTerms                :: !(Maybe (Maybe DealTerms))
-    , _mdOfferRevisionNumber  :: !(Maybe Int64)
-    , _mdLastUpdateTimeMs     :: !(Maybe Int64)
-    , _mdKind                 :: !Text
-    , _mdDeliveryControl      :: !(Maybe (Maybe DeliveryControl))
-    , _mdFlightStartTimeMs    :: !(Maybe Int64)
-    , _mdSharedTargetings     :: !(Maybe [Maybe SharedTargeting])
-    , _mdDealId               :: !(Maybe Text)
-    , _mdInventoryDescription :: !(Maybe Text)
-    , _mdSyndicationProduct   :: !(Maybe Text)
-    , _mdFlightEndTimeMs      :: !(Maybe Int64)
-    , _mdName                 :: !(Maybe Text)
-    , _mdSellerContacts       :: !(Maybe [Maybe ContactInformation])
-    , _mdOfferId              :: !(Maybe Text)
-    , _mdOrderId              :: !(Maybe Text)
+    { _mddExternalDealId       :: !(Maybe Text)
+    , _mddBuyerPrivateData     :: !(Maybe (Maybe PrivateData))
+    , _mddWebPropertyCode      :: !(Maybe Text)
+    , _mddCreationTimeMs       :: !(Maybe Int64)
+    , _mddTerms                :: !(Maybe (Maybe DealTerms))
+    , _mddOfferRevisionNumber  :: !(Maybe Int64)
+    , _mddLastUpdateTimeMs     :: !(Maybe Int64)
+    , _mddKind                 :: !Text
+    , _mddDeliveryControl      :: !(Maybe (Maybe DeliveryControl))
+    , _mddFlightStartTimeMs    :: !(Maybe Int64)
+    , _mddSharedTargetings     :: !(Maybe [Maybe SharedTargeting])
+    , _mddDealId               :: !(Maybe Text)
+    , _mddInventoryDescription :: !(Maybe Text)
+    , _mddSyndicationProduct   :: !(Maybe Text)
+    , _mddFlightEndTimeMs      :: !(Maybe Int64)
+    , _mddName                 :: !(Maybe Text)
+    , _mddSellerContacts       :: !(Maybe [Maybe ContactInformation])
+    , _mddOfferId              :: !(Maybe Text)
+    , _mddOrderId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDeal' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mdExternalDealId'
+-- * 'mddExternalDealId'
 --
--- * 'mdBuyerPrivateData'
+-- * 'mddBuyerPrivateData'
 --
--- * 'mdWebPropertyCode'
+-- * 'mddWebPropertyCode'
 --
--- * 'mdCreationTimeMs'
+-- * 'mddCreationTimeMs'
 --
--- * 'mdTerms'
+-- * 'mddTerms'
 --
--- * 'mdOfferRevisionNumber'
+-- * 'mddOfferRevisionNumber'
 --
--- * 'mdLastUpdateTimeMs'
+-- * 'mddLastUpdateTimeMs'
 --
--- * 'mdKind'
+-- * 'mddKind'
 --
--- * 'mdDeliveryControl'
+-- * 'mddDeliveryControl'
 --
--- * 'mdFlightStartTimeMs'
+-- * 'mddFlightStartTimeMs'
 --
--- * 'mdSharedTargetings'
+-- * 'mddSharedTargetings'
 --
--- * 'mdDealId'
+-- * 'mddDealId'
 --
--- * 'mdInventoryDescription'
+-- * 'mddInventoryDescription'
 --
--- * 'mdSyndicationProduct'
+-- * 'mddSyndicationProduct'
 --
--- * 'mdFlightEndTimeMs'
+-- * 'mddFlightEndTimeMs'
 --
--- * 'mdName'
+-- * 'mddName'
 --
--- * 'mdSellerContacts'
+-- * 'mddSellerContacts'
 --
--- * 'mdOfferId'
+-- * 'mddOfferId'
 --
--- * 'mdOrderId'
+-- * 'mddOrderId'
 marketplaceDeal
     :: MarketplaceDeal
 marketplaceDeal =
     MarketplaceDeal
-    { _mdExternalDealId = Nothing
-    , _mdBuyerPrivateData = Nothing
-    , _mdWebPropertyCode = Nothing
-    , _mdCreationTimeMs = Nothing
-    , _mdTerms = Nothing
-    , _mdOfferRevisionNumber = Nothing
-    , _mdLastUpdateTimeMs = Nothing
-    , _mdKind = "adexchangebuyer#marketplaceDeal"
-    , _mdDeliveryControl = Nothing
-    , _mdFlightStartTimeMs = Nothing
-    , _mdSharedTargetings = Nothing
-    , _mdDealId = Nothing
-    , _mdInventoryDescription = Nothing
-    , _mdSyndicationProduct = Nothing
-    , _mdFlightEndTimeMs = Nothing
-    , _mdName = Nothing
-    , _mdSellerContacts = Nothing
-    , _mdOfferId = Nothing
-    , _mdOrderId = Nothing
+    { _mddExternalDealId = Nothing
+    , _mddBuyerPrivateData = Nothing
+    , _mddWebPropertyCode = Nothing
+    , _mddCreationTimeMs = Nothing
+    , _mddTerms = Nothing
+    , _mddOfferRevisionNumber = Nothing
+    , _mddLastUpdateTimeMs = Nothing
+    , _mddKind = "adexchangebuyer#marketplaceDeal"
+    , _mddDeliveryControl = Nothing
+    , _mddFlightStartTimeMs = Nothing
+    , _mddSharedTargetings = Nothing
+    , _mddDealId = Nothing
+    , _mddInventoryDescription = Nothing
+    , _mddSyndicationProduct = Nothing
+    , _mddFlightEndTimeMs = Nothing
+    , _mddName = Nothing
+    , _mddSellerContacts = Nothing
+    , _mddOfferId = Nothing
+    , _mddOrderId = Nothing
     }
 
 -- | The external deal id assigned to this deal once the deal is finalized.
 -- This is the deal-id that shows up in serving\/reporting etc. (readonly)
-mdExternalDealId :: Lens' MarketplaceDeal (Maybe Text)
-mdExternalDealId
-  = lens _mdExternalDealId
-      (\ s a -> s{_mdExternalDealId = a})
+mddExternalDealId :: Lens' MarketplaceDeal (Maybe Text)
+mddExternalDealId
+  = lens _mddExternalDealId
+      (\ s a -> s{_mddExternalDealId = a})
 
 -- | Buyer private data (hidden from seller).
-mdBuyerPrivateData :: Lens' MarketplaceDeal (Maybe (Maybe PrivateData))
-mdBuyerPrivateData
-  = lens _mdBuyerPrivateData
-      (\ s a -> s{_mdBuyerPrivateData = a})
+mddBuyerPrivateData :: Lens' MarketplaceDeal (Maybe (Maybe PrivateData))
+mddBuyerPrivateData
+  = lens _mddBuyerPrivateData
+      (\ s a -> s{_mddBuyerPrivateData = a})
 
-mdWebPropertyCode :: Lens' MarketplaceDeal (Maybe Text)
-mdWebPropertyCode
-  = lens _mdWebPropertyCode
-      (\ s a -> s{_mdWebPropertyCode = a})
+mddWebPropertyCode :: Lens' MarketplaceDeal (Maybe Text)
+mddWebPropertyCode
+  = lens _mddWebPropertyCode
+      (\ s a -> s{_mddWebPropertyCode = a})
 
 -- | The time (ms since epoch) of the deal creation. (readonly)
-mdCreationTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
-mdCreationTimeMs
-  = lens _mdCreationTimeMs
-      (\ s a -> s{_mdCreationTimeMs = a})
+mddCreationTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
+mddCreationTimeMs
+  = lens _mddCreationTimeMs
+      (\ s a -> s{_mddCreationTimeMs = a})
 
 -- | The negotiable terms of the deal. (updatable)
-mdTerms :: Lens' MarketplaceDeal (Maybe (Maybe DealTerms))
-mdTerms = lens _mdTerms (\ s a -> s{_mdTerms = a})
+mddTerms :: Lens' MarketplaceDeal (Maybe (Maybe DealTerms))
+mddTerms = lens _mddTerms (\ s a -> s{_mddTerms = a})
 
 -- | The revision number of the offer that the deal was created from
 -- (readonly, except on create)
-mdOfferRevisionNumber :: Lens' MarketplaceDeal (Maybe Int64)
-mdOfferRevisionNumber
-  = lens _mdOfferRevisionNumber
-      (\ s a -> s{_mdOfferRevisionNumber = a})
+mddOfferRevisionNumber :: Lens' MarketplaceDeal (Maybe Int64)
+mddOfferRevisionNumber
+  = lens _mddOfferRevisionNumber
+      (\ s a -> s{_mddOfferRevisionNumber = a})
 
 -- | The time (ms since epoch) when the deal was last updated. (readonly)
-mdLastUpdateTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
-mdLastUpdateTimeMs
-  = lens _mdLastUpdateTimeMs
-      (\ s a -> s{_mdLastUpdateTimeMs = a})
+mddLastUpdateTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
+mddLastUpdateTimeMs
+  = lens _mddLastUpdateTimeMs
+      (\ s a -> s{_mddLastUpdateTimeMs = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"adexchangebuyer#marketplaceDeal\".
-mdKind :: Lens' MarketplaceDeal Text
-mdKind = lens _mdKind (\ s a -> s{_mdKind = a})
+mddKind :: Lens' MarketplaceDeal Text
+mddKind = lens _mddKind (\ s a -> s{_mddKind = a})
 
 -- | The set of fields around delivery control that are interesting for a
 -- buyer to see but are non-negotiable. These are set by the publisher.
 -- This message is assigned an id of 100 since some day we would want to
 -- model this as a protobuf extension.
-mdDeliveryControl :: Lens' MarketplaceDeal (Maybe (Maybe DeliveryControl))
-mdDeliveryControl
-  = lens _mdDeliveryControl
-      (\ s a -> s{_mdDeliveryControl = a})
+mddDeliveryControl :: Lens' MarketplaceDeal (Maybe (Maybe DeliveryControl))
+mddDeliveryControl
+  = lens _mddDeliveryControl
+      (\ s a -> s{_mddDeliveryControl = a})
 
 -- | Proposed flight start time of the deal (ms since epoch) This will
 -- generally be stored in a granularity of a second. (updatable)
-mdFlightStartTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
-mdFlightStartTimeMs
-  = lens _mdFlightStartTimeMs
-      (\ s a -> s{_mdFlightStartTimeMs = a})
+mddFlightStartTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
+mddFlightStartTimeMs
+  = lens _mddFlightStartTimeMs
+      (\ s a -> s{_mddFlightStartTimeMs = a})
 
 -- | The shared targeting visible to buyers and sellers. (updatable)
-mdSharedTargetings :: Lens' MarketplaceDeal [Maybe SharedTargeting]
-mdSharedTargetings
-  = lens _mdSharedTargetings
-      (\ s a -> s{_mdSharedTargetings = a})
+mddSharedTargetings :: Lens' MarketplaceDeal [Maybe SharedTargeting]
+mddSharedTargetings
+  = lens _mddSharedTargetings
+      (\ s a -> s{_mddSharedTargetings = a})
       . _Default
       . _Coerce
 
 -- | A unique deal=id for the deal (readonly).
-mdDealId :: Lens' MarketplaceDeal (Maybe Text)
-mdDealId = lens _mdDealId (\ s a -> s{_mdDealId = a})
+mddDealId :: Lens' MarketplaceDeal (Maybe Text)
+mddDealId
+  = lens _mddDealId (\ s a -> s{_mddDealId = a})
 
 -- | Description for the deal terms. (updatable)
-mdInventoryDescription :: Lens' MarketplaceDeal (Maybe Text)
-mdInventoryDescription
-  = lens _mdInventoryDescription
-      (\ s a -> s{_mdInventoryDescription = a})
+mddInventoryDescription :: Lens' MarketplaceDeal (Maybe Text)
+mddInventoryDescription
+  = lens _mddInventoryDescription
+      (\ s a -> s{_mddInventoryDescription = a})
 
 -- | The syndication product associated with the deal. (readonly, except on
 -- create)
-mdSyndicationProduct :: Lens' MarketplaceDeal (Maybe Text)
-mdSyndicationProduct
-  = lens _mdSyndicationProduct
-      (\ s a -> s{_mdSyndicationProduct = a})
+mddSyndicationProduct :: Lens' MarketplaceDeal (Maybe Text)
+mddSyndicationProduct
+  = lens _mddSyndicationProduct
+      (\ s a -> s{_mddSyndicationProduct = a})
 
 -- | Proposed flight end time of the deal (ms since epoch) This will
 -- generally be stored in a granularity of a second. (updatable)
-mdFlightEndTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
-mdFlightEndTimeMs
-  = lens _mdFlightEndTimeMs
-      (\ s a -> s{_mdFlightEndTimeMs = a})
+mddFlightEndTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
+mddFlightEndTimeMs
+  = lens _mddFlightEndTimeMs
+      (\ s a -> s{_mddFlightEndTimeMs = a})
 
 -- | The name of the deal. (updatable)
-mdName :: Lens' MarketplaceDeal (Maybe Text)
-mdName = lens _mdName (\ s a -> s{_mdName = a})
+mddName :: Lens' MarketplaceDeal (Maybe Text)
+mddName = lens _mddName (\ s a -> s{_mddName = a})
 
 -- | Optional Seller contact information for the deal (buyer-readonly)
-mdSellerContacts :: Lens' MarketplaceDeal [Maybe ContactInformation]
-mdSellerContacts
-  = lens _mdSellerContacts
-      (\ s a -> s{_mdSellerContacts = a})
+mddSellerContacts :: Lens' MarketplaceDeal [Maybe ContactInformation]
+mddSellerContacts
+  = lens _mddSellerContacts
+      (\ s a -> s{_mddSellerContacts = a})
       . _Default
       . _Coerce
 
 -- | The offer-id from which this deal was created. (readonly, except on
 -- create)
-mdOfferId :: Lens' MarketplaceDeal (Maybe Text)
-mdOfferId
-  = lens _mdOfferId (\ s a -> s{_mdOfferId = a})
+mddOfferId :: Lens' MarketplaceDeal (Maybe Text)
+mddOfferId
+  = lens _mddOfferId (\ s a -> s{_mddOfferId = a})
 
-mdOrderId :: Lens' MarketplaceDeal (Maybe Text)
-mdOrderId
-  = lens _mdOrderId (\ s a -> s{_mdOrderId = a})
+mddOrderId :: Lens' MarketplaceDeal (Maybe Text)
+mddOrderId
+  = lens _mddOrderId (\ s a -> s{_mddOrderId = a})
 
 instance FromJSON MarketplaceDeal where
         parseJSON
@@ -5843,27 +6612,73 @@ instance ToJSON MarketplaceDeal where
         toJSON MarketplaceDeal{..}
           = object
               (catMaybes
-                 [("externalDealId" .=) <$> _mdExternalDealId,
-                  ("buyerPrivateData" .=) <$> _mdBuyerPrivateData,
-                  ("webPropertyCode" .=) <$> _mdWebPropertyCode,
-                  ("creationTimeMs" .=) <$> _mdCreationTimeMs,
-                  ("terms" .=) <$> _mdTerms,
+                 [("externalDealId" .=) <$> _mddExternalDealId,
+                  ("buyerPrivateData" .=) <$> _mddBuyerPrivateData,
+                  ("webPropertyCode" .=) <$> _mddWebPropertyCode,
+                  ("creationTimeMs" .=) <$> _mddCreationTimeMs,
+                  ("terms" .=) <$> _mddTerms,
                   ("offerRevisionNumber" .=) <$>
-                    _mdOfferRevisionNumber,
-                  ("lastUpdateTimeMs" .=) <$> _mdLastUpdateTimeMs,
-                  Just ("kind" .= _mdKind),
-                  ("deliveryControl" .=) <$> _mdDeliveryControl,
-                  ("flightStartTimeMs" .=) <$> _mdFlightStartTimeMs,
-                  ("sharedTargetings" .=) <$> _mdSharedTargetings,
-                  ("dealId" .=) <$> _mdDealId,
+                    _mddOfferRevisionNumber,
+                  ("lastUpdateTimeMs" .=) <$> _mddLastUpdateTimeMs,
+                  Just ("kind" .= _mddKind),
+                  ("deliveryControl" .=) <$> _mddDeliveryControl,
+                  ("flightStartTimeMs" .=) <$> _mddFlightStartTimeMs,
+                  ("sharedTargetings" .=) <$> _mddSharedTargetings,
+                  ("dealId" .=) <$> _mddDealId,
                   ("inventoryDescription" .=) <$>
-                    _mdInventoryDescription,
-                  ("syndicationProduct" .=) <$> _mdSyndicationProduct,
-                  ("flightEndTimeMs" .=) <$> _mdFlightEndTimeMs,
-                  ("name" .=) <$> _mdName,
-                  ("sellerContacts" .=) <$> _mdSellerContacts,
-                  ("offerId" .=) <$> _mdOfferId,
-                  ("orderId" .=) <$> _mdOrderId])
+                    _mddInventoryDescription,
+                  ("syndicationProduct" .=) <$> _mddSyndicationProduct,
+                  ("flightEndTimeMs" .=) <$> _mddFlightEndTimeMs,
+                  ("name" .=) <$> _mddName,
+                  ("sellerContacts" .=) <$> _mddSellerContacts,
+                  ("offerId" .=) <$> _mddOfferId,
+                  ("orderId" .=) <$> _mddOrderId])
+
+--
+-- /See:/ 'pretargetingConfigPlacements' smart constructor.
+data PretargetingConfigPlacements = PretargetingConfigPlacements
+    { _pcpToken :: !(Maybe Text)
+    , _pcpType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PretargetingConfigPlacements' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pcpToken'
+--
+-- * 'pcpType'
+pretargetingConfigPlacements
+    :: PretargetingConfigPlacements
+pretargetingConfigPlacements =
+    PretargetingConfigPlacements
+    { _pcpToken = Nothing
+    , _pcpType = Nothing
+    }
+
+-- | The value of the placement. Interpretation depends on the placement
+-- type, e.g. URL for a site placement, channel name for a channel
+-- placement, app id for a mobile app placement.
+pcpToken :: Lens' PretargetingConfigPlacements (Maybe Text)
+pcpToken = lens _pcpToken (\ s a -> s{_pcpToken = a})
+
+-- | The type of the placement.
+pcpType :: Lens' PretargetingConfigPlacements (Maybe Text)
+pcpType = lens _pcpType (\ s a -> s{_pcpType = a})
+
+instance FromJSON PretargetingConfigPlacements where
+        parseJSON
+          = withObject "PretargetingConfigPlacements"
+              (\ o ->
+                 PretargetingConfigPlacements <$>
+                   (o .:? "token") <*> (o .:? "type"))
+
+instance ToJSON PretargetingConfigPlacements where
+        toJSON PretargetingConfigPlacements{..}
+          = object
+              (catMaybes
+                 [("token" .=) <$> _pcpToken,
+                  ("type" .=) <$> _pcpType])
 
 --
 -- /See:/ 'negotiationRoundDto' smart constructor.
@@ -6162,6 +6977,74 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
                   ("privateAuctionId" .=) <$> _dtngatPrivateAuctionId])
 
 --
+-- /See:/ 'creativeServingRestrictions' smart constructor.
+data CreativeServingRestrictions = CreativeServingRestrictions
+    { _csrContexts           :: !(Maybe [CreativeServingRestrictionsContexts])
+    , _csrReason             :: !(Maybe Text)
+    , _csrDisapprovalReasons :: !(Maybe [CreativeServingRestrictionsDisapprovalReasons])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CreativeServingRestrictions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csrContexts'
+--
+-- * 'csrReason'
+--
+-- * 'csrDisapprovalReasons'
+creativeServingRestrictions
+    :: CreativeServingRestrictions
+creativeServingRestrictions =
+    CreativeServingRestrictions
+    { _csrContexts = Nothing
+    , _csrReason = Nothing
+    , _csrDisapprovalReasons = Nothing
+    }
+
+-- | All known contexts\/restrictions.
+csrContexts :: Lens' CreativeServingRestrictions [CreativeServingRestrictionsContexts]
+csrContexts
+  = lens _csrContexts (\ s a -> s{_csrContexts = a}) .
+      _Default
+      . _Coerce
+
+-- | Why the creative is ineligible to serve in this context (e.g., it has
+-- been explicitly disapproved or is pending review).
+csrReason :: Lens' CreativeServingRestrictions (Maybe Text)
+csrReason
+  = lens _csrReason (\ s a -> s{_csrReason = a})
+
+-- | The reasons for disapproval within this restriction, if any. Note that
+-- not all disapproval reasons may be categorized, so it is possible for
+-- the creative to have a status of DISAPPROVED or CONDITIONALLY_APPROVED
+-- with an empty list for disapproval_reasons. In this case, please reach
+-- out to your TAM to help debug the issue.
+csrDisapprovalReasons :: Lens' CreativeServingRestrictions [CreativeServingRestrictionsDisapprovalReasons]
+csrDisapprovalReasons
+  = lens _csrDisapprovalReasons
+      (\ s a -> s{_csrDisapprovalReasons = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON CreativeServingRestrictions where
+        parseJSON
+          = withObject "CreativeServingRestrictions"
+              (\ o ->
+                 CreativeServingRestrictions <$>
+                   (o .:? "contexts" .!= mempty) <*> (o .:? "reason")
+                     <*> (o .:? "disapprovalReasons" .!= mempty))
+
+instance ToJSON CreativeServingRestrictions where
+        toJSON CreativeServingRestrictions{..}
+          = object
+              (catMaybes
+                 [("contexts" .=) <$> _csrContexts,
+                  ("reason" .=) <$> _csrReason,
+                  ("disapprovalReasons" .=) <$>
+                    _csrDisapprovalReasons])
+
+--
 -- /See:/ 'buyer' smart constructor.
 newtype Buyer = Buyer
     { _bbAccountId :: Maybe Text
@@ -6427,214 +7310,219 @@ instance ToJSON DealTermsGuaranteedFixedPriceTerms
 --
 -- /See:/ 'marketplaceOrder' smart constructor.
 data MarketplaceOrder = MarketplaceOrder
-    { _mBuyerPrivateData           :: !(Maybe (Maybe PrivateData))
-    , _mIsSetupComplete            :: !(Maybe Bool)
-    , _mBuyerContacts              :: !(Maybe [Maybe ContactInformation])
-    , _mKind                       :: !Text
-    , _mOriginatorRole             :: !(Maybe Text)
-    , _mRevisionNumber             :: !(Maybe Int64)
-    , _mBilledBuyer                :: !(Maybe (Maybe Buyer))
-    , _mIsRenegotiating            :: !(Maybe Bool)
-    , _mHasSellerSignedOff         :: !(Maybe Bool)
-    , _mSeller                     :: !(Maybe (Maybe Seller))
-    , _mOrderState                 :: !(Maybe Text)
-    , _mName                       :: !(Maybe Text)
-    , _mSellerContacts             :: !(Maybe [Maybe ContactInformation])
-    , _mLastUpdaterRole            :: !(Maybe Text)
-    , _mLabels                     :: !(Maybe [Maybe MarketplaceLabel])
-    , _mRevisionTimeMs             :: !(Maybe Int64)
-    , _mOrderId                    :: !(Maybe Text)
-    , _mLastUpdaterOrCommentorRole :: !(Maybe Text)
-    , _mHasBuyerSignedOff          :: !(Maybe Bool)
-    , _mBuyer                      :: !(Maybe (Maybe Buyer))
+    { _mooBuyerPrivateData           :: !(Maybe (Maybe PrivateData))
+    , _mooIsSetupComplete            :: !(Maybe Bool)
+    , _mooBuyerContacts              :: !(Maybe [Maybe ContactInformation])
+    , _mooKind                       :: !Text
+    , _mooOriginatorRole             :: !(Maybe Text)
+    , _mooRevisionNumber             :: !(Maybe Int64)
+    , _mooBilledBuyer                :: !(Maybe (Maybe Buyer))
+    , _mooIsRenegotiating            :: !(Maybe Bool)
+    , _mooHasSellerSignedOff         :: !(Maybe Bool)
+    , _mooSeller                     :: !(Maybe (Maybe Seller))
+    , _mooOrderState                 :: !(Maybe Text)
+    , _mooName                       :: !(Maybe Text)
+    , _mooSellerContacts             :: !(Maybe [Maybe ContactInformation])
+    , _mooLastUpdaterRole            :: !(Maybe Text)
+    , _mooLabels                     :: !(Maybe [Maybe MarketplaceLabel])
+    , _mooRevisionTimeMs             :: !(Maybe Int64)
+    , _mooOrderId                    :: !(Maybe Text)
+    , _mooLastUpdaterOrCommentorRole :: !(Maybe Text)
+    , _mooHasBuyerSignedOff          :: !(Maybe Bool)
+    , _mooBuyer                      :: !(Maybe (Maybe Buyer))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceOrder' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mBuyerPrivateData'
+-- * 'mooBuyerPrivateData'
 --
--- * 'mIsSetupComplete'
+-- * 'mooIsSetupComplete'
 --
--- * 'mBuyerContacts'
+-- * 'mooBuyerContacts'
 --
--- * 'mKind'
+-- * 'mooKind'
 --
--- * 'mOriginatorRole'
+-- * 'mooOriginatorRole'
 --
--- * 'mRevisionNumber'
+-- * 'mooRevisionNumber'
 --
--- * 'mBilledBuyer'
+-- * 'mooBilledBuyer'
 --
--- * 'mIsRenegotiating'
+-- * 'mooIsRenegotiating'
 --
--- * 'mHasSellerSignedOff'
+-- * 'mooHasSellerSignedOff'
 --
--- * 'mSeller'
+-- * 'mooSeller'
 --
--- * 'mOrderState'
+-- * 'mooOrderState'
 --
--- * 'mName'
+-- * 'mooName'
 --
--- * 'mSellerContacts'
+-- * 'mooSellerContacts'
 --
--- * 'mLastUpdaterRole'
+-- * 'mooLastUpdaterRole'
 --
--- * 'mLabels'
+-- * 'mooLabels'
 --
--- * 'mRevisionTimeMs'
+-- * 'mooRevisionTimeMs'
 --
--- * 'mOrderId'
+-- * 'mooOrderId'
 --
--- * 'mLastUpdaterOrCommentorRole'
+-- * 'mooLastUpdaterOrCommentorRole'
 --
--- * 'mHasBuyerSignedOff'
+-- * 'mooHasBuyerSignedOff'
 --
--- * 'mBuyer'
+-- * 'mooBuyer'
 marketplaceOrder
     :: MarketplaceOrder
 marketplaceOrder =
     MarketplaceOrder
-    { _mBuyerPrivateData = Nothing
-    , _mIsSetupComplete = Nothing
-    , _mBuyerContacts = Nothing
-    , _mKind = "adexchangebuyer#marketplaceOrder"
-    , _mOriginatorRole = Nothing
-    , _mRevisionNumber = Nothing
-    , _mBilledBuyer = Nothing
-    , _mIsRenegotiating = Nothing
-    , _mHasSellerSignedOff = Nothing
-    , _mSeller = Nothing
-    , _mOrderState = Nothing
-    , _mName = Nothing
-    , _mSellerContacts = Nothing
-    , _mLastUpdaterRole = Nothing
-    , _mLabels = Nothing
-    , _mRevisionTimeMs = Nothing
-    , _mOrderId = Nothing
-    , _mLastUpdaterOrCommentorRole = Nothing
-    , _mHasBuyerSignedOff = Nothing
-    , _mBuyer = Nothing
+    { _mooBuyerPrivateData = Nothing
+    , _mooIsSetupComplete = Nothing
+    , _mooBuyerContacts = Nothing
+    , _mooKind = "adexchangebuyer#marketplaceOrder"
+    , _mooOriginatorRole = Nothing
+    , _mooRevisionNumber = Nothing
+    , _mooBilledBuyer = Nothing
+    , _mooIsRenegotiating = Nothing
+    , _mooHasSellerSignedOff = Nothing
+    , _mooSeller = Nothing
+    , _mooOrderState = Nothing
+    , _mooName = Nothing
+    , _mooSellerContacts = Nothing
+    , _mooLastUpdaterRole = Nothing
+    , _mooLabels = Nothing
+    , _mooRevisionTimeMs = Nothing
+    , _mooOrderId = Nothing
+    , _mooLastUpdaterOrCommentorRole = Nothing
+    , _mooHasBuyerSignedOff = Nothing
+    , _mooBuyer = Nothing
     }
 
 -- | Private data for buyer. (hidden from seller).
-mBuyerPrivateData :: Lens' MarketplaceOrder (Maybe (Maybe PrivateData))
-mBuyerPrivateData
-  = lens _mBuyerPrivateData
-      (\ s a -> s{_mBuyerPrivateData = a})
+mooBuyerPrivateData :: Lens' MarketplaceOrder (Maybe (Maybe PrivateData))
+mooBuyerPrivateData
+  = lens _mooBuyerPrivateData
+      (\ s a -> s{_mooBuyerPrivateData = a})
 
 -- | True, if the buyside inventory setup is complete for this order.
 -- (readonly)
-mIsSetupComplete :: Lens' MarketplaceOrder (Maybe Bool)
-mIsSetupComplete
-  = lens _mIsSetupComplete
-      (\ s a -> s{_mIsSetupComplete = a})
+mooIsSetupComplete :: Lens' MarketplaceOrder (Maybe Bool)
+mooIsSetupComplete
+  = lens _mooIsSetupComplete
+      (\ s a -> s{_mooIsSetupComplete = a})
 
 -- | Optional contact information fort the buyer. (seller-readonly)
-mBuyerContacts :: Lens' MarketplaceOrder [Maybe ContactInformation]
-mBuyerContacts
-  = lens _mBuyerContacts
-      (\ s a -> s{_mBuyerContacts = a})
+mooBuyerContacts :: Lens' MarketplaceOrder [Maybe ContactInformation]
+mooBuyerContacts
+  = lens _mooBuyerContacts
+      (\ s a -> s{_mooBuyerContacts = a})
       . _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"adexchangebuyer#marketplaceOrder\".
-mKind :: Lens' MarketplaceOrder Text
-mKind = lens _mKind (\ s a -> s{_mKind = a})
+mooKind :: Lens' MarketplaceOrder Text
+mooKind = lens _mooKind (\ s a -> s{_mooKind = a})
 
 -- | Indicates whether the buyer\/seller created the offer.(readonly)
-mOriginatorRole :: Lens' MarketplaceOrder (Maybe Text)
-mOriginatorRole
-  = lens _mOriginatorRole
-      (\ s a -> s{_mOriginatorRole = a})
+mooOriginatorRole :: Lens' MarketplaceOrder (Maybe Text)
+mooOriginatorRole
+  = lens _mooOriginatorRole
+      (\ s a -> s{_mooOriginatorRole = a})
 
 -- | The revision number for the order (readonly).
-mRevisionNumber :: Lens' MarketplaceOrder (Maybe Int64)
-mRevisionNumber
-  = lens _mRevisionNumber
-      (\ s a -> s{_mRevisionNumber = a})
+mooRevisionNumber :: Lens' MarketplaceOrder (Maybe Int64)
+mooRevisionNumber
+  = lens _mooRevisionNumber
+      (\ s a -> s{_mooRevisionNumber = a})
 
 -- | Reference to the buyer that will get billed for this order. (readonly)
-mBilledBuyer :: Lens' MarketplaceOrder (Maybe (Maybe Buyer))
-mBilledBuyer
-  = lens _mBilledBuyer (\ s a -> s{_mBilledBuyer = a})
+mooBilledBuyer :: Lens' MarketplaceOrder (Maybe (Maybe Buyer))
+mooBilledBuyer
+  = lens _mooBilledBuyer
+      (\ s a -> s{_mooBilledBuyer = a})
 
 -- | True if the order is being renegotiated (readonly).
-mIsRenegotiating :: Lens' MarketplaceOrder (Maybe Bool)
-mIsRenegotiating
-  = lens _mIsRenegotiating
-      (\ s a -> s{_mIsRenegotiating = a})
+mooIsRenegotiating :: Lens' MarketplaceOrder (Maybe Bool)
+mooIsRenegotiating
+  = lens _mooIsRenegotiating
+      (\ s a -> s{_mooIsRenegotiating = a})
 
 -- | When an order is in an accepted state, indicates whether the buyer has
 -- signed off Once both sides have signed off on a deal, the order can be
 -- finalized by the seller. (buyer-readonly)
-mHasSellerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
-mHasSellerSignedOff
-  = lens _mHasSellerSignedOff
-      (\ s a -> s{_mHasSellerSignedOff = a})
+mooHasSellerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
+mooHasSellerSignedOff
+  = lens _mooHasSellerSignedOff
+      (\ s a -> s{_mooHasSellerSignedOff = a})
 
 -- | Reference to the seller on the order. (readonly, except on create)
-mSeller :: Lens' MarketplaceOrder (Maybe (Maybe Seller))
-mSeller = lens _mSeller (\ s a -> s{_mSeller = a})
+mooSeller :: Lens' MarketplaceOrder (Maybe (Maybe Seller))
+mooSeller
+  = lens _mooSeller (\ s a -> s{_mooSeller = a})
 
 -- | The current state of the order. (readonly)
-mOrderState :: Lens' MarketplaceOrder (Maybe Text)
-mOrderState
-  = lens _mOrderState (\ s a -> s{_mOrderState = a})
+mooOrderState :: Lens' MarketplaceOrder (Maybe Text)
+mooOrderState
+  = lens _mooOrderState
+      (\ s a -> s{_mooOrderState = a})
 
 -- | The name for the order (updatable)
-mName :: Lens' MarketplaceOrder (Maybe Text)
-mName = lens _mName (\ s a -> s{_mName = a})
+mooName :: Lens' MarketplaceOrder (Maybe Text)
+mooName = lens _mooName (\ s a -> s{_mooName = a})
 
 -- | Optional contact information for the seller (buyer-readonly).
-mSellerContacts :: Lens' MarketplaceOrder [Maybe ContactInformation]
-mSellerContacts
-  = lens _mSellerContacts
-      (\ s a -> s{_mSellerContacts = a})
+mooSellerContacts :: Lens' MarketplaceOrder [Maybe ContactInformation]
+mooSellerContacts
+  = lens _mooSellerContacts
+      (\ s a -> s{_mooSellerContacts = a})
       . _Default
       . _Coerce
 
-mLastUpdaterRole :: Lens' MarketplaceOrder (Maybe Text)
-mLastUpdaterRole
-  = lens _mLastUpdaterRole
-      (\ s a -> s{_mLastUpdaterRole = a})
+mooLastUpdaterRole :: Lens' MarketplaceOrder (Maybe Text)
+mooLastUpdaterRole
+  = lens _mooLastUpdaterRole
+      (\ s a -> s{_mooLastUpdaterRole = a})
 
 -- | List of labels associated with the order. (readonly)
-mLabels :: Lens' MarketplaceOrder [Maybe MarketplaceLabel]
-mLabels
-  = lens _mLabels (\ s a -> s{_mLabels = a}) . _Default
+mooLabels :: Lens' MarketplaceOrder [Maybe MarketplaceLabel]
+mooLabels
+  = lens _mooLabels (\ s a -> s{_mooLabels = a}) .
+      _Default
       . _Coerce
 
 -- | The time (ms since epoch) when the order was last revised (readonly).
-mRevisionTimeMs :: Lens' MarketplaceOrder (Maybe Int64)
-mRevisionTimeMs
-  = lens _mRevisionTimeMs
-      (\ s a -> s{_mRevisionTimeMs = a})
+mooRevisionTimeMs :: Lens' MarketplaceOrder (Maybe Int64)
+mooRevisionTimeMs
+  = lens _mooRevisionTimeMs
+      (\ s a -> s{_mooRevisionTimeMs = a})
 
 -- | The unique id of the order. (readonly).
-mOrderId :: Lens' MarketplaceOrder (Maybe Text)
-mOrderId = lens _mOrderId (\ s a -> s{_mOrderId = a})
+mooOrderId :: Lens' MarketplaceOrder (Maybe Text)
+mooOrderId
+  = lens _mooOrderId (\ s a -> s{_mooOrderId = a})
 
 -- | The role of the last user that either updated the order or left a
 -- comment. (readonly)
-mLastUpdaterOrCommentorRole :: Lens' MarketplaceOrder (Maybe Text)
-mLastUpdaterOrCommentorRole
-  = lens _mLastUpdaterOrCommentorRole
-      (\ s a -> s{_mLastUpdaterOrCommentorRole = a})
+mooLastUpdaterOrCommentorRole :: Lens' MarketplaceOrder (Maybe Text)
+mooLastUpdaterOrCommentorRole
+  = lens _mooLastUpdaterOrCommentorRole
+      (\ s a -> s{_mooLastUpdaterOrCommentorRole = a})
 
 -- | When an order is in an accepted state, indicates whether the buyer has
 -- signed off Once both sides have signed off on a deal, the order can be
 -- finalized by the seller. (seller-readonly)
-mHasBuyerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
-mHasBuyerSignedOff
-  = lens _mHasBuyerSignedOff
-      (\ s a -> s{_mHasBuyerSignedOff = a})
+mooHasBuyerSignedOff :: Lens' MarketplaceOrder (Maybe Bool)
+mooHasBuyerSignedOff
+  = lens _mooHasBuyerSignedOff
+      (\ s a -> s{_mooHasBuyerSignedOff = a})
 
 -- | Reference to the buyer on the order. (readonly, except on create)
-mBuyer :: Lens' MarketplaceOrder (Maybe (Maybe Buyer))
-mBuyer = lens _mBuyer (\ s a -> s{_mBuyer = a})
+mooBuyer :: Lens' MarketplaceOrder (Maybe (Maybe Buyer))
+mooBuyer = lens _mooBuyer (\ s a -> s{_mooBuyer = a})
 
 instance FromJSON MarketplaceOrder where
         parseJSON
@@ -6667,27 +7555,27 @@ instance ToJSON MarketplaceOrder where
         toJSON MarketplaceOrder{..}
           = object
               (catMaybes
-                 [("buyerPrivateData" .=) <$> _mBuyerPrivateData,
-                  ("isSetupComplete" .=) <$> _mIsSetupComplete,
-                  ("buyerContacts" .=) <$> _mBuyerContacts,
-                  Just ("kind" .= _mKind),
-                  ("originatorRole" .=) <$> _mOriginatorRole,
-                  ("revisionNumber" .=) <$> _mRevisionNumber,
-                  ("billedBuyer" .=) <$> _mBilledBuyer,
-                  ("isRenegotiating" .=) <$> _mIsRenegotiating,
-                  ("hasSellerSignedOff" .=) <$> _mHasSellerSignedOff,
-                  ("seller" .=) <$> _mSeller,
-                  ("orderState" .=) <$> _mOrderState,
-                  ("name" .=) <$> _mName,
-                  ("sellerContacts" .=) <$> _mSellerContacts,
-                  ("lastUpdaterRole" .=) <$> _mLastUpdaterRole,
-                  ("labels" .=) <$> _mLabels,
-                  ("revisionTimeMs" .=) <$> _mRevisionTimeMs,
-                  ("orderId" .=) <$> _mOrderId,
+                 [("buyerPrivateData" .=) <$> _mooBuyerPrivateData,
+                  ("isSetupComplete" .=) <$> _mooIsSetupComplete,
+                  ("buyerContacts" .=) <$> _mooBuyerContacts,
+                  Just ("kind" .= _mooKind),
+                  ("originatorRole" .=) <$> _mooOriginatorRole,
+                  ("revisionNumber" .=) <$> _mooRevisionNumber,
+                  ("billedBuyer" .=) <$> _mooBilledBuyer,
+                  ("isRenegotiating" .=) <$> _mooIsRenegotiating,
+                  ("hasSellerSignedOff" .=) <$> _mooHasSellerSignedOff,
+                  ("seller" .=) <$> _mooSeller,
+                  ("orderState" .=) <$> _mooOrderState,
+                  ("name" .=) <$> _mooName,
+                  ("sellerContacts" .=) <$> _mooSellerContacts,
+                  ("lastUpdaterRole" .=) <$> _mooLastUpdaterRole,
+                  ("labels" .=) <$> _mooLabels,
+                  ("revisionTimeMs" .=) <$> _mooRevisionTimeMs,
+                  ("orderId" .=) <$> _mooOrderId,
                   ("lastUpdaterOrCommentorRole" .=) <$>
-                    _mLastUpdaterOrCommentorRole,
-                  ("hasBuyerSignedOff" .=) <$> _mHasBuyerSignedOff,
-                  ("buyer" .=) <$> _mBuyer])
+                    _mooLastUpdaterOrCommentorRole,
+                  ("hasBuyerSignedOff" .=) <$> _mooHasBuyerSignedOff,
+                  ("buyer" .=) <$> _mooBuyer])
 
 --
 -- /See:/ 'addOrderDealsRequest' smart constructor.

@@ -17,6 +17,18 @@ module Network.Google.FreebaseSearch.Types
     -- * Service URL
       freebaseSearchURL
 
+    -- * FreebaseSearchFormat
+    , FreebaseSearchFormat (..)
+
+    -- * FreebaseSearchScoring
+    , FreebaseSearchScoring (..)
+
+    -- * ReconcileGetCosts
+    , ReconcileGetCosts
+    , reconcileGetCosts
+    , rgcHits
+    , rgcMs
+
     -- * ReconcileGet
     , ReconcileGet
     , reconcileGet
@@ -24,6 +36,22 @@ module Network.Google.FreebaseSearch.Types
     , rgCosts
     , rgWarning
     , rgMatch
+
+    -- * FreebaseSearchEncode
+    , FreebaseSearchEncode (..)
+
+    -- * ReconcileCandidateNotable
+    , ReconcileCandidateNotable
+    , reconcileCandidateNotable
+    , rcnName
+    , rcnId
+
+    -- * ReconcileGetWarning
+    , ReconcileGetWarning
+    , reconcileGetWarning
+    , rgwLocation
+    , rgwReason
+    , rgwMessage
 
     -- * ReconcileCandidate
     , ReconcileCandidate
@@ -33,6 +61,15 @@ module Network.Google.FreebaseSearch.Types
     , rcName
     , rcNotable
     , rcMid
+
+    -- * FreebaseSearchHelp
+    , FreebaseSearchHelp (..)
+
+    -- * FreebaseSearchSpell
+    , FreebaseSearchSpell (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.FreebaseSearch.Types.Product
@@ -40,7 +77,7 @@ import           Network.Google.FreebaseSearch.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Freebase Search.
-freebaseSearchURL :: BaseURL
+freebaseSearchURL :: BaseUrl
 freebaseSearchURL
   = BaseUrl Https
       "https://www.googleapis.com/freebase/v1/"

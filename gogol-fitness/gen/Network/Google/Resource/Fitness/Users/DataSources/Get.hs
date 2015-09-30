@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a data source identified by a data stream ID.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesGet@.
-module Fitness.Users.DataSources.Get
+module Network.Google.Resource.Fitness.Users.DataSources.Get
     (
     -- * REST Resource
-      UsersDataSourcesGetAPI
+      UsersDataSourcesGetResource
 
     -- * Creating a Request
-    , usersDataSourcesGet
-    , UsersDataSourcesGet
+    , usersDataSourcesGet'
+    , UsersDataSourcesGet'
 
     -- * Request Lenses
     , udsgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesGet@ which the
--- 'UsersDataSourcesGet' request conforms to.
-type UsersDataSourcesGetAPI =
+-- 'UsersDataSourcesGet'' request conforms to.
+type UsersDataSourcesGetResource =
      Capture "userId" Text :>
        "dataSources" :>
-         Capture "dataSourceId" Text :> Get '[JSON] DataSource
+         Capture "dataSourceId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] DataSource
 
 -- | Returns a data source identified by a data stream ID.
 --
--- /See:/ 'usersDataSourcesGet' smart constructor.
-data UsersDataSourcesGet = UsersDataSourcesGet
+-- /See:/ 'usersDataSourcesGet'' smart constructor.
+data UsersDataSourcesGet' = UsersDataSourcesGet'
     { _udsgQuotaUser    :: !(Maybe Text)
     , _udsgPrettyPrint  :: !Bool
     , _udsgUserIp       :: !(Maybe Text)
@@ -62,7 +70,7 @@ data UsersDataSourcesGet = UsersDataSourcesGet
     , _udsgKey          :: !(Maybe Text)
     , _udsgOauthToken   :: !(Maybe Text)
     , _udsgFields       :: !(Maybe Text)
-    , _udsgAlt          :: !Text
+    , _udsgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesGet'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data UsersDataSourcesGet = UsersDataSourcesGet
 -- * 'udsgFields'
 --
 -- * 'udsgAlt'
-usersDataSourcesGet
+usersDataSourcesGet'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
-    -> UsersDataSourcesGet
-usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
-    UsersDataSourcesGet
+    -> UsersDataSourcesGet'
+usersDataSourcesGet' pUdsgDataSourceId_ pUdsgUserId_ =
+    UsersDataSourcesGet'
     { _udsgQuotaUser = Nothing
     , _udsgPrettyPrint = True
     , _udsgUserIp = Nothing
@@ -100,7 +108,7 @@ usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
     , _udsgKey = Nothing
     , _udsgOauthToken = Nothing
     , _udsgFields = Nothing
-    , _udsgAlt = "json"
+    , _udsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,23 @@ udsgFields
   = lens _udsgFields (\ s a -> s{_udsgFields = a})
 
 -- | Data format for the response.
-udsgAlt :: Lens' UsersDataSourcesGet' Text
+udsgAlt :: Lens' UsersDataSourcesGet' Alt
 udsgAlt = lens _udsgAlt (\ s a -> s{_udsgAlt = a})
 
 instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource
         request = requestWithRoute defReq fitnessURL
-        requestWithRoute r u UsersDataSourcesGet{..}
-          = go _udsgQuotaUser _udsgPrettyPrint _udsgUserIp
+        requestWithRoute r u UsersDataSourcesGet'{..}
+          = go _udsgQuotaUser (Just _udsgPrettyPrint)
+              _udsgUserIp
               _udsgDataSourceId
               _udsgUserId
               _udsgKey
               _udsgOauthToken
               _udsgFields
-              _udsgAlt
+              (Just _udsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesGetAPI)
+                      (Proxy :: Proxy UsersDataSourcesGetResource)
                       r
                       u

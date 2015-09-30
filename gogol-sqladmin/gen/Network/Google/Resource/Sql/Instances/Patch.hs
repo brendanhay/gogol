@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- semantics.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlInstancesPatch@.
-module Sql.Instances.Patch
+module Network.Google.Resource.Sql.Instances.Patch
     (
     -- * REST Resource
-      InstancesPatchAPI
+      InstancesPatchResource
 
     -- * Creating a Request
-    , instancesPatch
-    , InstancesPatch
+    , instancesPatch'
+    , InstancesPatch'
 
     -- * Request Lenses
     , ipQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlInstancesPatch@ which the
--- 'InstancesPatch' request conforms to.
-type InstancesPatchAPI =
+-- 'InstancesPatch'' request conforms to.
+type InstancesPatchResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
-           Capture "instance" Text :> Patch '[JSON] Operation
+           Capture "instance" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Operation
 
 -- | Updates settings of a Cloud SQL instance. Caution: This is not a partial
 -- update, so you must include values for all the settings that you want to
 -- retain. For partial updates, use patch.. This method supports patch
 -- semantics.
 --
--- /See:/ 'instancesPatch' smart constructor.
-data InstancesPatch = InstancesPatch
+-- /See:/ 'instancesPatch'' smart constructor.
+data InstancesPatch' = InstancesPatch'
     { _ipQuotaUser   :: !(Maybe Text)
     , _ipPrettyPrint :: !Bool
     , _ipProject     :: !Text
@@ -68,7 +76,7 @@ data InstancesPatch = InstancesPatch
     , _ipKey         :: !(Maybe Text)
     , _ipOauthToken  :: !(Maybe Text)
     , _ipFields      :: !(Maybe Text)
-    , _ipAlt         :: !Text
+    , _ipAlt         :: !Alt
     , _ipInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,12 +101,12 @@ data InstancesPatch = InstancesPatch
 -- * 'ipAlt'
 --
 -- * 'ipInstance'
-instancesPatch
+instancesPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> InstancesPatch
-instancesPatch pIpProject_ pIpInstance_ =
-    InstancesPatch
+    -> InstancesPatch'
+instancesPatch' pIpProject_ pIpInstance_ =
+    InstancesPatch'
     { _ipQuotaUser = Nothing
     , _ipPrettyPrint = True
     , _ipProject = pIpProject_
@@ -106,7 +114,7 @@ instancesPatch pIpProject_ pIpInstance_ =
     , _ipKey = Nothing
     , _ipOauthToken = Nothing
     , _ipFields = Nothing
-    , _ipAlt = "json"
+    , _ipAlt = JSON
     , _ipInstance = pIpInstance_
     }
 
@@ -149,7 +157,7 @@ ipFields :: Lens' InstancesPatch' (Maybe Text)
 ipFields = lens _ipFields (\ s a -> s{_ipFields = a})
 
 -- | Data format for the response.
-ipAlt :: Lens' InstancesPatch' Text
+ipAlt :: Lens' InstancesPatch' Alt
 ipAlt = lens _ipAlt (\ s a -> s{_ipAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -160,14 +168,16 @@ ipInstance
 instance GoogleRequest InstancesPatch' where
         type Rs InstancesPatch' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u InstancesPatch{..}
-          = go _ipQuotaUser _ipPrettyPrint _ipProject _ipUserIp
+        requestWithRoute r u InstancesPatch'{..}
+          = go _ipQuotaUser (Just _ipPrettyPrint) _ipProject
+              _ipUserIp
               _ipKey
               _ipOauthToken
               _ipFields
-              _ipAlt
+              (Just _ipAlt)
               _ipInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy InstancesPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstancesPatchResource)
                       r
                       u

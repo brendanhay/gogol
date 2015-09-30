@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- playerId.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesMetagameListCategoriesByPlayer@.
-module Games.Metagame.ListCategoriesByPlayer
+module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
     (
     -- * REST Resource
-      MetagameListCategoriesByPlayerAPI
+      MetagameListCategoriesByPlayerResource
 
     -- * Creating a Request
-    , metagameListCategoriesByPlayer
-    , MetagameListCategoriesByPlayer
+    , metagameListCategoriesByPlayer'
+    , MetagameListCategoriesByPlayer'
 
     -- * Request Lenses
     , mlcbpQuotaUser
@@ -48,26 +49,35 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesMetagameListCategoriesByPlayer@ which the
--- 'MetagameListCategoriesByPlayer' request conforms to.
-type MetagameListCategoriesByPlayerAPI =
+-- 'MetagameListCategoriesByPlayer'' request conforms to.
+type MetagameListCategoriesByPlayerResource =
      "players" :>
        Capture "playerId" Text :>
          "categories" :>
-           Capture "collection" Text :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] CategoryListResponse
+           Capture "collection"
+             GamesMetagameListCategoriesByPlayerCollection
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] CategoryListResponse
 
 -- | List play data aggregated per category for the player corresponding to
 -- playerId.
 --
--- /See:/ 'metagameListCategoriesByPlayer' smart constructor.
-data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer
+-- /See:/ 'metagameListCategoriesByPlayer'' smart constructor.
+data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser   :: !(Maybe Text)
     , _mlcbpPrettyPrint :: !Bool
     , _mlcbpUserIp      :: !(Maybe Text)
-    , _mlcbpCollection  :: !Text
+    , _mlcbpCollection  :: !GamesMetagameListCategoriesByPlayerCollection
     , _mlcbpKey         :: !(Maybe Text)
     , _mlcbpLanguage    :: !(Maybe Text)
     , _mlcbpPageToken   :: !(Maybe Text)
@@ -75,7 +85,7 @@ data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer
     , _mlcbpPlayerId    :: !Text
     , _mlcbpMaxResults  :: !(Maybe Int32)
     , _mlcbpFields      :: !(Maybe Text)
-    , _mlcbpAlt         :: !Text
+    , _mlcbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameListCategoriesByPlayer'' with the minimum fields required to make a request.
@@ -105,12 +115,12 @@ data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer
 -- * 'mlcbpFields'
 --
 -- * 'mlcbpAlt'
-metagameListCategoriesByPlayer
-    :: Text -- ^ 'collection'
+metagameListCategoriesByPlayer'
+    :: GamesMetagameListCategoriesByPlayerCollection -- ^ 'collection'
     -> Text -- ^ 'playerId'
-    -> MetagameListCategoriesByPlayer
-metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
-    MetagameListCategoriesByPlayer
+    -> MetagameListCategoriesByPlayer'
+metagameListCategoriesByPlayer' pMlcbpCollection_ pMlcbpPlayerId_ =
+    MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser = Nothing
     , _mlcbpPrettyPrint = True
     , _mlcbpUserIp = Nothing
@@ -122,7 +132,7 @@ metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
     , _mlcbpPlayerId = pMlcbpPlayerId_
     , _mlcbpMaxResults = Nothing
     , _mlcbpFields = Nothing
-    , _mlcbpAlt = "json"
+    , _mlcbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,7 +156,7 @@ mlcbpUserIp
   = lens _mlcbpUserIp (\ s a -> s{_mlcbpUserIp = a})
 
 -- | The collection of categories for which data will be returned.
-mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' Text
+mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' GamesMetagameListCategoriesByPlayerCollection
 mlcbpCollection
   = lens _mlcbpCollection
       (\ s a -> s{_mlcbpCollection = a})
@@ -196,7 +206,7 @@ mlcbpFields
   = lens _mlcbpFields (\ s a -> s{_mlcbpFields = a})
 
 -- | Data format for the response.
-mlcbpAlt :: Lens' MetagameListCategoriesByPlayer' Text
+mlcbpAlt :: Lens' MetagameListCategoriesByPlayer' Alt
 mlcbpAlt = lens _mlcbpAlt (\ s a -> s{_mlcbpAlt = a})
 
 instance GoogleRequest
@@ -205,8 +215,9 @@ instance GoogleRequest
              CategoryListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u
-          MetagameListCategoriesByPlayer{..}
-          = go _mlcbpQuotaUser _mlcbpPrettyPrint _mlcbpUserIp
+          MetagameListCategoriesByPlayer'{..}
+          = go _mlcbpQuotaUser (Just _mlcbpPrettyPrint)
+              _mlcbpUserIp
               _mlcbpCollection
               _mlcbpKey
               _mlcbpLanguage
@@ -215,9 +226,10 @@ instance GoogleRequest
               _mlcbpPlayerId
               _mlcbpMaxResults
               _mlcbpFields
-              _mlcbpAlt
+              (Just _mlcbpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetagameListCategoriesByPlayerAPI)
+                      (Proxy ::
+                         Proxy MetagameListCategoriesByPlayerResource)
                       r
                       u

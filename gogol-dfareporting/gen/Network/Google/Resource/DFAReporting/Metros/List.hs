@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of metros.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingMetrosList@.
-module DFAReporting.Metros.List
+module Network.Google.Resource.DFAReporting.Metros.List
     (
     -- * REST Resource
-      MetrosListAPI
+      MetrosListResource
 
     -- * Creating a Request
-    , metrosList
-    , MetrosList
+    , metrosList'
+    , MetrosList'
 
     -- * Request Lenses
     , mlQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingMetrosList@ which the
--- 'MetrosList' request conforms to.
-type MetrosListAPI =
+-- 'MetrosList'' request conforms to.
+type MetrosListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "metros" :> Get '[JSON] MetrosListResponse
+         "metros" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] MetrosListResponse
 
 -- | Retrieves a list of metros.
 --
--- /See:/ 'metrosList' smart constructor.
-data MetrosList = MetrosList
+-- /See:/ 'metrosList'' smart constructor.
+data MetrosList' = MetrosList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data MetrosList = MetrosList
     , _mlKey         :: !(Maybe Text)
     , _mlOauthToken  :: !(Maybe Text)
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Text
+    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetrosList'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data MetrosList = MetrosList
 -- * 'mlFields'
 --
 -- * 'mlAlt'
-metrosList
+metrosList'
     :: Int64 -- ^ 'profileId'
-    -> MetrosList
-metrosList pMlProfileId_ =
-    MetrosList
+    -> MetrosList'
+metrosList' pMlProfileId_ =
+    MetrosList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlUserIp = Nothing
@@ -94,7 +103,7 @@ metrosList pMlProfileId_ =
     , _mlKey = Nothing
     , _mlOauthToken = Nothing
     , _mlFields = Nothing
-    , _mlAlt = "json"
+    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +145,20 @@ mlFields :: Lens' MetrosList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | Data format for the response.
-mlAlt :: Lens' MetrosList' Text
+mlAlt :: Lens' MetrosList' Alt
 mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
 
 instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u MetrosList{..}
-          = go _mlQuotaUser _mlPrettyPrint _mlUserIp
+        requestWithRoute r u MetrosList'{..}
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlUserIp
               _mlProfileId
               _mlKey
               _mlOauthToken
               _mlFields
-              _mlAlt
+              (Just _mlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MetrosListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MetrosListResource)
+                      r
+                      u

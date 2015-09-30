@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the payments for the specified AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsPaymentsList@.
-module AdSense.Accounts.Payments.List
+module Network.Google.Resource.AdSense.Accounts.Payments.List
     (
     -- * REST Resource
-      AccountsPaymentsListAPI
+      AccountsPaymentsListResource
 
     -- * Creating a Request
-    , accountsPaymentsList
-    , AccountsPaymentsList
+    , accountsPaymentsList'
+    , AccountsPaymentsList'
 
     -- * Request Lenses
     , aplQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsPaymentsList@ which the
--- 'AccountsPaymentsList' request conforms to.
-type AccountsPaymentsListAPI =
+-- 'AccountsPaymentsList'' request conforms to.
+type AccountsPaymentsListResource =
      "accounts" :>
        Capture "accountId" Text :>
-         "payments" :> Get '[JSON] Payments
+         "payments" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Payments
 
 -- | List the payments for the specified AdSense account.
 --
--- /See:/ 'accountsPaymentsList' smart constructor.
-data AccountsPaymentsList = AccountsPaymentsList
+-- /See:/ 'accountsPaymentsList'' smart constructor.
+data AccountsPaymentsList' = AccountsPaymentsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
     , _aplUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data AccountsPaymentsList = AccountsPaymentsList
     , _aplKey         :: !(Maybe Text)
     , _aplOauthToken  :: !(Maybe Text)
     , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Text
+    , _aplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPaymentsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data AccountsPaymentsList = AccountsPaymentsList
 -- * 'aplFields'
 --
 -- * 'aplAlt'
-accountsPaymentsList
+accountsPaymentsList'
     :: Text -- ^ 'accountId'
-    -> AccountsPaymentsList
-accountsPaymentsList pAplAccountId_ =
-    AccountsPaymentsList
+    -> AccountsPaymentsList'
+accountsPaymentsList' pAplAccountId_ =
+    AccountsPaymentsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
     , _aplUserIp = Nothing
@@ -94,7 +102,7 @@ accountsPaymentsList pAplAccountId_ =
     , _aplKey = Nothing
     , _aplOauthToken = Nothing
     , _aplFields = Nothing
-    , _aplAlt = "json"
+    , _aplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
 -- | Data format for the response.
-aplAlt :: Lens' AccountsPaymentsList' Text
+aplAlt :: Lens' AccountsPaymentsList' Alt
 aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
 
 instance GoogleRequest AccountsPaymentsList' where
         type Rs AccountsPaymentsList' = Payments
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsPaymentsList{..}
-          = go _aplQuotaUser _aplPrettyPrint _aplUserIp
+        requestWithRoute r u AccountsPaymentsList'{..}
+          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIp
               _aplAccountId
               _aplKey
               _aplOauthToken
               _aplFields
-              _aplAlt
+              (Just _aplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsPaymentsListAPI)
+                      (Proxy :: Proxy AccountsPaymentsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionsList@.
-module Compute.Regions.List
+module Network.Google.Resource.Compute.Regions.List
     (
     -- * REST Resource
-      RegionsListAPI
+      RegionsListResource
 
     -- * Creating a Request
-    , regionsList
-    , RegionsList
+    , regionsList'
+    , RegionsList'
 
     -- * Request Lenses
     , rQuotaUser
@@ -47,20 +48,26 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRegionsList@ which the
--- 'RegionsList' request conforms to.
-type RegionsListAPI =
+-- 'RegionsList'' request conforms to.
+type RegionsListResource =
      Capture "project" Text :>
        "regions" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] RegionList
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "filter" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
 -- project.
 --
--- /See:/ 'regionsList' smart constructor.
-data RegionsList = RegionsList
+-- /See:/ 'regionsList'' smart constructor.
+data RegionsList' = RegionsList'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rProject     :: !Text
@@ -71,7 +78,7 @@ data RegionsList = RegionsList
     , _rOauthToken  :: !(Maybe Text)
     , _rMaxResults  :: !Word32
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Text
+    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
@@ -99,11 +106,11 @@ data RegionsList = RegionsList
 -- * 'rFields'
 --
 -- * 'rAlt'
-regionsList
+regionsList'
     :: Text -- ^ 'project'
-    -> RegionsList
-regionsList pRProject_ =
-    RegionsList
+    -> RegionsList'
+regionsList' pRProject_ =
+    RegionsList'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rProject = pRProject_
@@ -114,7 +121,7 @@ regionsList pRProject_ =
     , _rOauthToken = Nothing
     , _rMaxResults = 500
     , _rFields = Nothing
-    , _rAlt = "json"
+    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,20 +187,24 @@ rFields :: Lens' RegionsList' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
 -- | Data format for the response.
-rAlt :: Lens' RegionsList' Text
+rAlt :: Lens' RegionsList' Alt
 rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RegionsList{..}
-          = go _rQuotaUser _rPrettyPrint _rProject _rUserIp
+        requestWithRoute r u RegionsList'{..}
+          = go _rQuotaUser (Just _rPrettyPrint) _rProject
+              _rUserIp
               _rKey
               _rFilter
               _rPageToken
               _rOauthToken
               (Just _rMaxResults)
               _rFields
-              _rAlt
+              (Just _rAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RegionsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy RegionsListResource)
+                      r
+                      u

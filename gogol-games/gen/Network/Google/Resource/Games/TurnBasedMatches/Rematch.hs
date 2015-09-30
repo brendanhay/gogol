@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- created match; it will be the caller\'s turn.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesRematch@.
-module Games.TurnBasedMatches.Rematch
+module Network.Google.Resource.Games.TurnBasedMatches.Rematch
     (
     -- * REST Resource
-      TurnBasedMatchesRematchAPI
+      TurnBasedMatchesRematchResource
 
     -- * Creating a Request
-    , turnBasedMatchesRematch
-    , TurnBasedMatchesRematch
+    , turnBasedMatchesRematch'
+    , TurnBasedMatchesRematch'
 
     -- * Request Lenses
     , tbmrRequestId
@@ -48,22 +49,29 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesRematch@ which the
--- 'TurnBasedMatchesRematch' request conforms to.
-type TurnBasedMatchesRematchAPI =
+-- 'TurnBasedMatchesRematch'' request conforms to.
+type TurnBasedMatchesRematchResource =
      "turnbasedmatches" :>
        Capture "matchId" Text :>
          "rematch" :>
            QueryParam "requestId" Int64 :>
-             QueryParam "language" Text :>
-               Post '[JSON] TurnBasedMatchRematch
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] TurnBasedMatchRematch
 
 -- | Create a rematch of a match that was previously completed, with the same
 -- participants. This can be called by only one player on a match still in
 -- their list; the player must have called Finish first. Returns the newly
 -- created match; it will be the caller\'s turn.
 --
--- /See:/ 'turnBasedMatchesRematch' smart constructor.
-data TurnBasedMatchesRematch = TurnBasedMatchesRematch
+-- /See:/ 'turnBasedMatchesRematch'' smart constructor.
+data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
     { _tbmrRequestId   :: !(Maybe Int64)
     , _tbmrQuotaUser   :: !(Maybe Text)
     , _tbmrPrettyPrint :: !Bool
@@ -73,7 +81,7 @@ data TurnBasedMatchesRematch = TurnBasedMatchesRematch
     , _tbmrOauthToken  :: !(Maybe Text)
     , _tbmrMatchId     :: !Text
     , _tbmrFields      :: !(Maybe Text)
-    , _tbmrAlt         :: !Text
+    , _tbmrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesRematch'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data TurnBasedMatchesRematch = TurnBasedMatchesRematch
 -- * 'tbmrFields'
 --
 -- * 'tbmrAlt'
-turnBasedMatchesRematch
+turnBasedMatchesRematch'
     :: Text -- ^ 'matchId'
-    -> TurnBasedMatchesRematch
-turnBasedMatchesRematch pTbmrMatchId_ =
-    TurnBasedMatchesRematch
+    -> TurnBasedMatchesRematch'
+turnBasedMatchesRematch' pTbmrMatchId_ =
+    TurnBasedMatchesRematch'
     { _tbmrRequestId = Nothing
     , _tbmrQuotaUser = Nothing
     , _tbmrPrettyPrint = True
@@ -113,7 +121,7 @@ turnBasedMatchesRematch pTbmrMatchId_ =
     , _tbmrOauthToken = Nothing
     , _tbmrMatchId = pTbmrMatchId_
     , _tbmrFields = Nothing
-    , _tbmrAlt = "json"
+    , _tbmrAlt = JSON
     }
 
 -- | A randomly generated numeric ID for each request specified by the
@@ -172,24 +180,25 @@ tbmrFields
   = lens _tbmrFields (\ s a -> s{_tbmrFields = a})
 
 -- | Data format for the response.
-tbmrAlt :: Lens' TurnBasedMatchesRematch' Text
+tbmrAlt :: Lens' TurnBasedMatchesRematch' Alt
 tbmrAlt = lens _tbmrAlt (\ s a -> s{_tbmrAlt = a})
 
 instance GoogleRequest TurnBasedMatchesRematch' where
         type Rs TurnBasedMatchesRematch' =
              TurnBasedMatchRematch
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesRematch{..}
-          = go _tbmrRequestId _tbmrQuotaUser _tbmrPrettyPrint
+        requestWithRoute r u TurnBasedMatchesRematch'{..}
+          = go _tbmrRequestId _tbmrQuotaUser
+              (Just _tbmrPrettyPrint)
               _tbmrUserIp
               _tbmrKey
               _tbmrLanguage
               _tbmrOauthToken
               _tbmrMatchId
               _tbmrFields
-              _tbmrAlt
+              (Just _tbmrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesRematchAPI)
+                      (Proxy :: Proxy TurnBasedMatchesRematchResource)
                       r
                       u

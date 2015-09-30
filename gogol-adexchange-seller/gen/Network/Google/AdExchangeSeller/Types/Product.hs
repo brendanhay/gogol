@@ -284,6 +284,63 @@ instance ToJSON Accounts where
                   Just ("kind" .= _aKind), ("items" .=) <$> _aItems])
 
 --
+-- /See:/ 'reportHeaders' smart constructor.
+data ReportHeaders = ReportHeaders
+    { _rhName     :: !(Maybe Text)
+    , _rhCurrency :: !(Maybe Text)
+    , _rhType     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReportHeaders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rhName'
+--
+-- * 'rhCurrency'
+--
+-- * 'rhType'
+reportHeaders
+    :: ReportHeaders
+reportHeaders =
+    ReportHeaders
+    { _rhName = Nothing
+    , _rhCurrency = Nothing
+    , _rhType = Nothing
+    }
+
+-- | The name of the header.
+rhName :: Lens' ReportHeaders (Maybe Text)
+rhName = lens _rhName (\ s a -> s{_rhName = a})
+
+-- | The currency of this column. Only present if the header type is
+-- METRIC_CURRENCY.
+rhCurrency :: Lens' ReportHeaders (Maybe Text)
+rhCurrency
+  = lens _rhCurrency (\ s a -> s{_rhCurrency = a})
+
+-- | The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or
+-- METRIC_CURRENCY.
+rhType :: Lens' ReportHeaders (Maybe Text)
+rhType = lens _rhType (\ s a -> s{_rhType = a})
+
+instance FromJSON ReportHeaders where
+        parseJSON
+          = withObject "ReportHeaders"
+              (\ o ->
+                 ReportHeaders <$>
+                   (o .:? "name") <*> (o .:? "currency") <*>
+                     (o .:? "type"))
+
+instance ToJSON ReportHeaders where
+        toJSON ReportHeaders{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rhName,
+                  ("currency" .=) <$> _rhCurrency,
+                  ("type" .=) <$> _rhType])
+
+--
 -- /See:/ 'alerts' smart constructor.
 data Alerts = Alerts
     { _aleKind  :: !Text
@@ -679,7 +736,7 @@ data Report = Report
     , _rWarnings         :: !(Maybe [Text])
     , _rRows             :: !(Maybe [[Text]])
     , _rTotals           :: !(Maybe [Text])
-    , _rHeaders          :: !(Maybe [ReportHeadersItem])
+    , _rHeaders          :: !(Maybe [ReportHeaders])
     , _rTotalMatchedRows :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -751,7 +808,7 @@ rTotals
 -- | The header information of the columns requested in the report. This is a
 -- list of headers; one for each dimension in the request, followed by one
 -- for each metric in the request.
-rHeaders :: Lens' Report [ReportHeadersItem]
+rHeaders :: Lens' Report [ReportHeaders]
 rHeaders
   = lens _rHeaders (\ s a -> s{_rHeaders = a}) .
       _Default
@@ -923,6 +980,83 @@ instance ToJSON AdClient where
                   ("supportsReporting" .=) <$> _adSupportsReporting,
                   ("id" .=) <$> _adId,
                   ("productCode" .=) <$> _adProductCode])
+
+-- | The targeting information of this custom channel, if activated.
+--
+-- /See:/ 'customChannelTargetingInfo' smart constructor.
+data CustomChannelTargetingInfo = CustomChannelTargetingInfo
+    { _cctiLocation     :: !(Maybe Text)
+    , _cctiSiteLanguage :: !(Maybe Text)
+    , _cctiAdsAppearOn  :: !(Maybe Text)
+    , _cctiDescription  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomChannelTargetingInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cctiLocation'
+--
+-- * 'cctiSiteLanguage'
+--
+-- * 'cctiAdsAppearOn'
+--
+-- * 'cctiDescription'
+customChannelTargetingInfo
+    :: CustomChannelTargetingInfo
+customChannelTargetingInfo =
+    CustomChannelTargetingInfo
+    { _cctiLocation = Nothing
+    , _cctiSiteLanguage = Nothing
+    , _cctiAdsAppearOn = Nothing
+    , _cctiDescription = Nothing
+    }
+
+-- | The locations in which ads appear. (Only valid for content and mobile
+-- content ads). Acceptable values for content ads are: TOP_LEFT,
+-- TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT,
+-- BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable
+-- values for mobile content ads are: TOP, MIDDLE, BOTTOM,
+-- MULTIPLE_LOCATIONS.
+cctiLocation :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiLocation
+  = lens _cctiLocation (\ s a -> s{_cctiLocation = a})
+
+-- | The language of the sites ads will be displayed on.
+cctiSiteLanguage :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiSiteLanguage
+  = lens _cctiSiteLanguage
+      (\ s a -> s{_cctiSiteLanguage = a})
+
+-- | The name used to describe this channel externally.
+cctiAdsAppearOn :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiAdsAppearOn
+  = lens _cctiAdsAppearOn
+      (\ s a -> s{_cctiAdsAppearOn = a})
+
+-- | The external description of the channel.
+cctiDescription :: Lens' CustomChannelTargetingInfo (Maybe Text)
+cctiDescription
+  = lens _cctiDescription
+      (\ s a -> s{_cctiDescription = a})
+
+instance FromJSON CustomChannelTargetingInfo where
+        parseJSON
+          = withObject "CustomChannelTargetingInfo"
+              (\ o ->
+                 CustomChannelTargetingInfo <$>
+                   (o .:? "location") <*> (o .:? "siteLanguage") <*>
+                     (o .:? "adsAppearOn")
+                     <*> (o .:? "description"))
+
+instance ToJSON CustomChannelTargetingInfo where
+        toJSON CustomChannelTargetingInfo{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _cctiLocation,
+                  ("siteLanguage" .=) <$> _cctiSiteLanguage,
+                  ("adsAppearOn" .=) <$> _cctiAdsAppearOn,
+                  ("description" .=) <$> _cctiDescription])
 
 --
 -- /See:/ 'preferredDeals' smart constructor.

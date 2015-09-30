@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists project sinks associated with a project.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsSinksList@.
-module Logging.Projects.Sinks.List
+module Network.Google.Resource.Logging.Projects.Sinks.List
     (
     -- * REST Resource
-      ProjectsSinksListAPI
+      ProjectsSinksListResource
 
     -- * Creating a Request
-    , projectsSinksList
-    , ProjectsSinksList
+    , projectsSinksList'
+    , ProjectsSinksList'
 
     -- * Request Lenses
     , pslXgafv
@@ -49,17 +50,31 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksList@ which the
--- 'ProjectsSinksList' request conforms to.
-type ProjectsSinksListAPI =
+-- 'ProjectsSinksList'' request conforms to.
+type ProjectsSinksListResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
-           "sinks" :> Get '[JSON] ListSinksResponse
+           "sinks" :>
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListSinksResponse
 
 -- | Lists project sinks associated with a project.
 --
--- /See:/ 'projectsSinksList' smart constructor.
-data ProjectsSinksList = ProjectsSinksList
+-- /See:/ 'projectsSinksList'' smart constructor.
+data ProjectsSinksList' = ProjectsSinksList'
     { _pslXgafv          :: !(Maybe Text)
     , _pslQuotaUser      :: !(Maybe Text)
     , _pslPrettyPrint    :: !Bool
@@ -107,11 +122,11 @@ data ProjectsSinksList = ProjectsSinksList
 -- * 'pslCallback'
 --
 -- * 'pslAlt'
-projectsSinksList
+projectsSinksList'
     :: Text -- ^ 'projectsId'
-    -> ProjectsSinksList
-projectsSinksList pPslProjectsId_ =
-    ProjectsSinksList
+    -> ProjectsSinksList'
+projectsSinksList' pPslProjectsId_ =
+    ProjectsSinksList'
     { _pslXgafv = Nothing
     , _pslQuotaUser = Nothing
     , _pslPrettyPrint = True
@@ -208,10 +223,10 @@ pslAlt = lens _pslAlt (\ s a -> s{_pslAlt = a})
 instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksList{..}
-          = go _pslXgafv _pslQuotaUser _pslPrettyPrint
+        requestWithRoute r u ProjectsSinksList'{..}
+          = go _pslXgafv _pslQuotaUser (Just _pslPrettyPrint)
               _pslUploadProtocol
-              _pslPp
+              (Just _pslPp)
               _pslAccessToken
               _pslUploadType
               _pslBearerToken
@@ -220,9 +235,9 @@ instance GoogleRequest ProjectsSinksList' where
               _pslProjectsId
               _pslFields
               _pslCallback
-              _pslAlt
+              (Just _pslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSinksListAPI)
+                      (Proxy :: Proxy ProjectsSinksListResource)
                       r
                       u

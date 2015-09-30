@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfilesUpdate@.
-module Analytics.Management.Profiles.Update
+module Network.Google.Resource.Analytics.Management.Profiles.Update
     (
     -- * REST Resource
-      ManagementProfilesUpdateAPI
+      ManagementProfilesUpdateResource
 
     -- * Creating a Request
-    , managementProfilesUpdate
-    , ManagementProfilesUpdate
+    , managementProfilesUpdate'
+    , ManagementProfilesUpdate'
 
     -- * Request Lenses
     , mpuQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfilesUpdate@ which the
--- 'ManagementProfilesUpdate' request conforms to.
-type ManagementProfilesUpdateAPI =
+-- 'ManagementProfilesUpdate'' request conforms to.
+type ManagementProfilesUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "profiles" :>
-                 Capture "profileId" Text :> Put '[JSON] Profile
+                 Capture "profileId" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Put '[JSON] Profile
 
 -- | Updates an existing view (profile).
 --
--- /See:/ 'managementProfilesUpdate' smart constructor.
-data ManagementProfilesUpdate = ManagementProfilesUpdate
+-- /See:/ 'managementProfilesUpdate'' smart constructor.
+data ManagementProfilesUpdate' = ManagementProfilesUpdate'
     { _mpuQuotaUser     :: !(Maybe Text)
     , _mpuPrettyPrint   :: !Bool
     , _mpuWebPropertyId :: !Text
@@ -68,7 +76,7 @@ data ManagementProfilesUpdate = ManagementProfilesUpdate
     , _mpuKey           :: !(Maybe Text)
     , _mpuOauthToken    :: !(Maybe Text)
     , _mpuFields        :: !(Maybe Text)
-    , _mpuAlt           :: !Text
+    , _mpuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesUpdate'' with the minimum fields required to make a request.
@@ -94,13 +102,13 @@ data ManagementProfilesUpdate = ManagementProfilesUpdate
 -- * 'mpuFields'
 --
 -- * 'mpuAlt'
-managementProfilesUpdate
+managementProfilesUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementProfilesUpdate
-managementProfilesUpdate pMpuWebPropertyId_ pMpuProfileId_ pMpuAccountId_ =
-    ManagementProfilesUpdate
+    -> ManagementProfilesUpdate'
+managementProfilesUpdate' pMpuWebPropertyId_ pMpuProfileId_ pMpuAccountId_ =
+    ManagementProfilesUpdate'
     { _mpuQuotaUser = Nothing
     , _mpuPrettyPrint = False
     , _mpuWebPropertyId = pMpuWebPropertyId_
@@ -110,7 +118,7 @@ managementProfilesUpdate pMpuWebPropertyId_ pMpuProfileId_ pMpuAccountId_ =
     , _mpuKey = Nothing
     , _mpuOauthToken = Nothing
     , _mpuFields = Nothing
-    , _mpuAlt = "json"
+    , _mpuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +174,25 @@ mpuFields
   = lens _mpuFields (\ s a -> s{_mpuFields = a})
 
 -- | Data format for the response.
-mpuAlt :: Lens' ManagementProfilesUpdate' Text
+mpuAlt :: Lens' ManagementProfilesUpdate' Alt
 mpuAlt = lens _mpuAlt (\ s a -> s{_mpuAlt = a})
 
 instance GoogleRequest ManagementProfilesUpdate'
          where
         type Rs ManagementProfilesUpdate' = Profile
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementProfilesUpdate{..}
-          = go _mpuQuotaUser _mpuPrettyPrint _mpuWebPropertyId
+        requestWithRoute r u ManagementProfilesUpdate'{..}
+          = go _mpuQuotaUser (Just _mpuPrettyPrint)
+              _mpuWebPropertyId
               _mpuUserIp
               _mpuProfileId
               _mpuAccountId
               _mpuKey
               _mpuOauthToken
               _mpuFields
-              _mpuAlt
+              (Just _mpuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfilesUpdateAPI)
+                      (Proxy :: Proxy ManagementProfilesUpdateResource)
                       r
                       u

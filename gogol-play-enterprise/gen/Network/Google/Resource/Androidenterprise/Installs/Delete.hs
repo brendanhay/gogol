@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- removed.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseInstallsDelete@.
-module Androidenterprise.Installs.Delete
+module Network.Google.Resource.Androidenterprise.Installs.Delete
     (
     -- * REST Resource
-      InstallsDeleteAPI
+      InstallsDeleteResource
 
     -- * Creating a Request
-    , installsDelete
-    , InstallsDelete
+    , installsDelete'
+    , InstallsDelete'
 
     -- * Request Lenses
     , idQuotaUser
@@ -48,8 +49,8 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseInstallsDelete@ which the
--- 'InstallsDelete' request conforms to.
-type InstallsDeleteAPI =
+-- 'InstallsDelete'' request conforms to.
+type InstallsDeleteResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
@@ -57,14 +58,21 @@ type InstallsDeleteAPI =
              "devices" :>
                Capture "deviceId" Text :>
                  "installs" :>
-                   Capture "installId" Text :> Delete '[JSON] ()
+                   Capture "installId" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Requests to remove an app from a device. A call to get or list will
 -- still show the app as installed on the device until it is actually
 -- removed.
 --
--- /See:/ 'installsDelete' smart constructor.
-data InstallsDelete = InstallsDelete
+-- /See:/ 'installsDelete'' smart constructor.
+data InstallsDelete' = InstallsDelete'
     { _idQuotaUser    :: !(Maybe Text)
     , _idPrettyPrint  :: !Bool
     , _idEnterpriseId :: !Text
@@ -75,7 +83,7 @@ data InstallsDelete = InstallsDelete
     , _idDeviceId     :: !Text
     , _idOauthToken   :: !(Maybe Text)
     , _idFields       :: !(Maybe Text)
-    , _idAlt          :: !Text
+    , _idAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstallsDelete'' with the minimum fields required to make a request.
@@ -103,14 +111,14 @@ data InstallsDelete = InstallsDelete
 -- * 'idFields'
 --
 -- * 'idAlt'
-installsDelete
+installsDelete'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'installId'
     -> Text -- ^ 'deviceId'
-    -> InstallsDelete
-installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
-    InstallsDelete
+    -> InstallsDelete'
+installsDelete' pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
+    InstallsDelete'
     { _idQuotaUser = Nothing
     , _idPrettyPrint = True
     , _idEnterpriseId = pIdEnterpriseId_
@@ -121,7 +129,7 @@ installsDelete pIdEnterpriseId_ pIdUserId_ pIdInstallId_ pIdDeviceId_ =
     , _idDeviceId = pIdDeviceId_
     , _idOauthToken = Nothing
     , _idFields = Nothing
-    , _idAlt = "json"
+    , _idAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,14 +187,15 @@ idFields :: Lens' InstallsDelete' (Maybe Text)
 idFields = lens _idFields (\ s a -> s{_idFields = a})
 
 -- | Data format for the response.
-idAlt :: Lens' InstallsDelete' Text
+idAlt :: Lens' InstallsDelete' Alt
 idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
 
 instance GoogleRequest InstallsDelete' where
         type Rs InstallsDelete' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u InstallsDelete{..}
-          = go _idQuotaUser _idPrettyPrint _idEnterpriseId
+        requestWithRoute r u InstallsDelete'{..}
+          = go _idQuotaUser (Just _idPrettyPrint)
+              _idEnterpriseId
               _idUserIp
               _idUserId
               _idInstallId
@@ -194,8 +203,9 @@ instance GoogleRequest InstallsDelete' where
               _idDeviceId
               _idOauthToken
               _idFields
-              _idAlt
+              (Just _idAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InstallsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InstallsDeleteResource)
                       r
                       u

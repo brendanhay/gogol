@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsInsert@.
-module Compute.URLMaps.Insert
+module Network.Google.Resource.Compute.URLMaps.Insert
     (
     -- * REST Resource
-      UrlMapsInsertAPI
+      UrlMapsInsertResource
 
     -- * Creating a Request
-    , uRLMapsInsert
-    , URLMapsInsert
+    , uRLMapsInsert'
+    , URLMapsInsert'
 
     -- * Request Lenses
     , umiQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsInsert@ which the
--- 'URLMapsInsert' request conforms to.
-type UrlMapsInsertAPI =
+-- 'URLMapsInsert'' request conforms to.
+type UrlMapsInsertResource =
      Capture "project" Text :>
-       "global" :> "urlMaps" :> Post '[JSON] Operation
+       "global" :>
+         "urlMaps" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'uRLMapsInsert' smart constructor.
-data URLMapsInsert = URLMapsInsert
+-- /See:/ 'uRLMapsInsert'' smart constructor.
+data URLMapsInsert' = URLMapsInsert'
     { _umiQuotaUser   :: !(Maybe Text)
     , _umiPrettyPrint :: !Bool
     , _umiProject     :: !Text
@@ -61,7 +70,7 @@ data URLMapsInsert = URLMapsInsert
     , _umiKey         :: !(Maybe Text)
     , _umiOauthToken  :: !(Maybe Text)
     , _umiFields      :: !(Maybe Text)
-    , _umiAlt         :: !Text
+    , _umiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data URLMapsInsert = URLMapsInsert
 -- * 'umiFields'
 --
 -- * 'umiAlt'
-uRLMapsInsert
+uRLMapsInsert'
     :: Text -- ^ 'project'
-    -> URLMapsInsert
-uRLMapsInsert pUmiProject_ =
-    URLMapsInsert
+    -> URLMapsInsert'
+uRLMapsInsert' pUmiProject_ =
+    URLMapsInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
     , _umiProject = pUmiProject_
@@ -95,7 +104,7 @@ uRLMapsInsert pUmiProject_ =
     , _umiKey = Nothing
     , _umiOauthToken = Nothing
     , _umiFields = Nothing
-    , _umiAlt = "json"
+    , _umiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,19 +149,21 @@ umiFields
   = lens _umiFields (\ s a -> s{_umiFields = a})
 
 -- | Data format for the response.
-umiAlt :: Lens' URLMapsInsert' Text
+umiAlt :: Lens' URLMapsInsert' Alt
 umiAlt = lens _umiAlt (\ s a -> s{_umiAlt = a})
 
 instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsInsert{..}
-          = go _umiQuotaUser _umiPrettyPrint _umiProject
+        requestWithRoute r u URLMapsInsert'{..}
+          = go _umiQuotaUser (Just _umiPrettyPrint) _umiProject
               _umiUserIp
               _umiKey
               _umiOauthToken
               _umiFields
-              _umiAlt
+              (Just _umiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsInsertResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- language and image type.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsImagesUpload@.
-module Androidpublisher.Edits.Images.Upload
+module Network.Google.Resource.Androidpublisher.Edits.Images.Upload
     (
     -- * REST Resource
-      EditsImagesUploadAPI
+      EditsImagesUploadResource
 
     -- * Creating a Request
-    , editsImagesUpload
-    , EditsImagesUpload
+    , editsImagesUpload'
+    , EditsImagesUpload'
 
     -- * Request Lenses
     , eiuQuotaUser
@@ -47,32 +48,41 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsImagesUpload@ which the
--- 'EditsImagesUpload' request conforms to.
-type EditsImagesUploadAPI =
+-- 'EditsImagesUpload'' request conforms to.
+type EditsImagesUploadResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
              Capture "language" Text :>
-               Capture "imageType" Text :>
-                 Post '[JSON] ImagesUploadResponse
+               Capture "imageType"
+                 AndroidpublisherEditsImagesUploadImageType
+                 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.
 --
--- /See:/ 'editsImagesUpload' smart constructor.
-data EditsImagesUpload = EditsImagesUpload
+-- /See:/ 'editsImagesUpload'' smart constructor.
+data EditsImagesUpload' = EditsImagesUpload'
     { _eiuQuotaUser   :: !(Maybe Text)
     , _eiuPrettyPrint :: !Bool
     , _eiuPackageName :: !Text
     , _eiuUserIp      :: !(Maybe Text)
-    , _eiuImageType   :: !Text
+    , _eiuImageType   :: !AndroidpublisherEditsImagesUploadImageType
     , _eiuKey         :: !(Maybe Text)
     , _eiuLanguage    :: !Text
     , _eiuOauthToken  :: !(Maybe Text)
     , _eiuEditId      :: !Text
     , _eiuFields      :: !(Maybe Text)
-    , _eiuAlt         :: !Text
+    , _eiuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsImagesUpload'' with the minimum fields required to make a request.
@@ -100,14 +110,14 @@ data EditsImagesUpload = EditsImagesUpload
 -- * 'eiuFields'
 --
 -- * 'eiuAlt'
-editsImagesUpload
+editsImagesUpload'
     :: Text -- ^ 'packageName'
-    -> Text -- ^ 'imageType'
+    -> AndroidpublisherEditsImagesUploadImageType -- ^ 'imageType'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsImagesUpload
-editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
-    EditsImagesUpload
+    -> EditsImagesUpload'
+editsImagesUpload' pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
+    EditsImagesUpload'
     { _eiuQuotaUser = Nothing
     , _eiuPrettyPrint = True
     , _eiuPackageName = pEiuPackageName_
@@ -118,7 +128,7 @@ editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
     , _eiuOauthToken = Nothing
     , _eiuEditId = pEiuEditId_
     , _eiuFields = Nothing
-    , _eiuAlt = "json"
+    , _eiuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,7 +157,7 @@ eiuUserIp :: Lens' EditsImagesUpload' (Maybe Text)
 eiuUserIp
   = lens _eiuUserIp (\ s a -> s{_eiuUserIp = a})
 
-eiuImageType :: Lens' EditsImagesUpload' Text
+eiuImageType :: Lens' EditsImagesUpload' AndroidpublisherEditsImagesUploadImageType
 eiuImageType
   = lens _eiuImageType (\ s a -> s{_eiuImageType = a})
 
@@ -181,14 +191,15 @@ eiuFields
   = lens _eiuFields (\ s a -> s{_eiuFields = a})
 
 -- | Data format for the response.
-eiuAlt :: Lens' EditsImagesUpload' Text
+eiuAlt :: Lens' EditsImagesUpload' Alt
 eiuAlt = lens _eiuAlt (\ s a -> s{_eiuAlt = a})
 
 instance GoogleRequest EditsImagesUpload' where
         type Rs EditsImagesUpload' = ImagesUploadResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsImagesUpload{..}
-          = go _eiuQuotaUser _eiuPrettyPrint _eiuPackageName
+        requestWithRoute r u EditsImagesUpload'{..}
+          = go _eiuQuotaUser (Just _eiuPrettyPrint)
+              _eiuPackageName
               _eiuUserIp
               _eiuImageType
               _eiuKey
@@ -196,9 +207,9 @@ instance GoogleRequest EditsImagesUpload' where
               _eiuOauthToken
               _eiuEditId
               _eiuFields
-              _eiuAlt
+              (Just _eiuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsImagesUploadAPI)
+                      (Proxy :: Proxy EditsImagesUploadResource)
                       r
                       u

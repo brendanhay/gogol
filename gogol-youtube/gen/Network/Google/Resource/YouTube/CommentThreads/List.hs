@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of comment threads that match the API request parameters.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentThreadsList@.
-module YouTube.CommentThreads.List
+module Network.Google.Resource.YouTube.CommentThreads.List
     (
     -- * REST Resource
-      CommentThreadsListAPI
+      CommentThreadsListResource
 
     -- * Creating a Request
-    , commentThreadsList
-    , CommentThreadsList
+    , commentThreadsList'
+    , CommentThreadsList'
 
     -- * Request Lenses
     , ctlQuotaUser
@@ -53,30 +54,43 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentThreadsList@ which the
--- 'CommentThreadsList' request conforms to.
-type CommentThreadsListAPI =
+-- 'CommentThreadsList'' request conforms to.
+type CommentThreadsListResource =
      "commentThreads" :>
-       QueryParam "part" Text :>
-         QueryParam "moderationStatus" Text :>
-           QueryParam "searchTerms" Text :>
-             QueryParam "channelId" Text :>
-               QueryParam "allThreadsRelatedToChannelId" Text :>
-                 QueryParam "videoId" Text :>
-                   QueryParam "id" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "order" Text :>
-                         QueryParam "textFormat" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] CommentThreadListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "moderationStatus"
+               YouTubeCommentThreadsListModerationStatus
+               :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchTerms" Text :>
+                   QueryParam "channelId" Text :>
+                     QueryParam "allThreadsRelatedToChannelId" Text :>
+                       QueryParam "videoId" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "id" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "order"
+                                   YouTubeCommentThreadsListOrder
+                                   :>
+                                   QueryParam "textFormat"
+                                     YouTubeCommentThreadsListTextFormat
+                                     :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] CommentThreadListResponse
 
 -- | Returns a list of comment threads that match the API request parameters.
 --
--- /See:/ 'commentThreadsList' smart constructor.
-data CommentThreadsList = CommentThreadsList
+-- /See:/ 'commentThreadsList'' smart constructor.
+data CommentThreadsList' = CommentThreadsList'
     { _ctlQuotaUser                    :: !(Maybe Text)
     , _ctlPart                         :: !Text
     , _ctlPrettyPrint                  :: !Bool
-    , _ctlModerationStatus             :: !Text
+    , _ctlModerationStatus             :: !YouTubeCommentThreadsListModerationStatus
     , _ctlUserIp                       :: !(Maybe Text)
     , _ctlSearchTerms                  :: !(Maybe Text)
     , _ctlChannelId                    :: !(Maybe Text)
@@ -86,11 +100,11 @@ data CommentThreadsList = CommentThreadsList
     , _ctlId                           :: !(Maybe Text)
     , _ctlPageToken                    :: !(Maybe Text)
     , _ctlOauthToken                   :: !(Maybe Text)
-    , _ctlOrder                        :: !Text
-    , _ctlTextFormat                   :: !Text
+    , _ctlOrder                        :: !YouTubeCommentThreadsListOrder
+    , _ctlTextFormat                   :: !YouTubeCommentThreadsListTextFormat
     , _ctlMaxResults                   :: !Word32
     , _ctlFields                       :: !(Maybe Text)
-    , _ctlAlt                          :: !Text
+    , _ctlAlt                          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsList'' with the minimum fields required to make a request.
@@ -132,15 +146,15 @@ data CommentThreadsList = CommentThreadsList
 -- * 'ctlFields'
 --
 -- * 'ctlAlt'
-commentThreadsList
+commentThreadsList'
     :: Text -- ^ 'part'
-    -> CommentThreadsList
-commentThreadsList pCtlPart_ =
-    CommentThreadsList
+    -> CommentThreadsList'
+commentThreadsList' pCtlPart_ =
+    CommentThreadsList'
     { _ctlQuotaUser = Nothing
     , _ctlPart = pCtlPart_
     , _ctlPrettyPrint = True
-    , _ctlModerationStatus = "MODERATION_STATUS_PUBLISHED"
+    , _ctlModerationStatus = YTCTLMSModerationStatusPublished
     , _ctlUserIp = Nothing
     , _ctlSearchTerms = Nothing
     , _ctlChannelId = Nothing
@@ -150,11 +164,11 @@ commentThreadsList pCtlPart_ =
     , _ctlId = Nothing
     , _ctlPageToken = Nothing
     , _ctlOauthToken = Nothing
-    , _ctlOrder = "true"
-    , _ctlTextFormat = "FORMAT_HTML"
+    , _ctlOrder = True'
+    , _ctlTextFormat = FormatHTML
     , _ctlMaxResults = 20
     , _ctlFields = Nothing
-    , _ctlAlt = "json"
+    , _ctlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -178,7 +192,7 @@ ctlPrettyPrint
 -- | Set this parameter to limit the returned comment threads to a particular
 -- moderation state. Note: This parameter is not supported for use in
 -- conjunction with the id parameter.
-ctlModerationStatus :: Lens' CommentThreadsList' Text
+ctlModerationStatus :: Lens' CommentThreadsList' YouTubeCommentThreadsListModerationStatus
 ctlModerationStatus
   = lens _ctlModerationStatus
       (\ s a -> s{_ctlModerationStatus = a})
@@ -249,12 +263,12 @@ ctlOauthToken
 -- ordered by time. This is the default behavior. - relevance - Comment
 -- threads are ordered by relevance.Note: This parameter is not supported
 -- for use in conjunction with the id parameter.
-ctlOrder :: Lens' CommentThreadsList' Text
+ctlOrder :: Lens' CommentThreadsList' YouTubeCommentThreadsListOrder
 ctlOrder = lens _ctlOrder (\ s a -> s{_ctlOrder = a})
 
 -- | Set this parameter\'s value to html or plainText to instruct the API to
 -- return the comments left by users in html formatted or in plain text.
-ctlTextFormat :: Lens' CommentThreadsList' Text
+ctlTextFormat :: Lens' CommentThreadsList' YouTubeCommentThreadsListTextFormat
 ctlTextFormat
   = lens _ctlTextFormat
       (\ s a -> s{_ctlTextFormat = a})
@@ -273,15 +287,16 @@ ctlFields
   = lens _ctlFields (\ s a -> s{_ctlFields = a})
 
 -- | Data format for the response.
-ctlAlt :: Lens' CommentThreadsList' Text
+ctlAlt :: Lens' CommentThreadsList' Alt
 ctlAlt = lens _ctlAlt (\ s a -> s{_ctlAlt = a})
 
 instance GoogleRequest CommentThreadsList' where
         type Rs CommentThreadsList' =
              CommentThreadListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentThreadsList{..}
-          = go _ctlQuotaUser (Just _ctlPart) _ctlPrettyPrint
+        requestWithRoute r u CommentThreadsList'{..}
+          = go _ctlQuotaUser (Just _ctlPart)
+              (Just _ctlPrettyPrint)
               (Just _ctlModerationStatus)
               _ctlUserIp
               _ctlSearchTerms
@@ -296,9 +311,9 @@ instance GoogleRequest CommentThreadsList' where
               (Just _ctlTextFormat)
               (Just _ctlMaxResults)
               _ctlFields
-              _ctlAlt
+              (Just _ctlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentThreadsListAPI)
+                      (Proxy :: Proxy CommentThreadsListResource)
                       r
                       u

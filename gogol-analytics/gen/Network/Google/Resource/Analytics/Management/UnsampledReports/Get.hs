@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a single unsampled report.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUnsampledReportsGet@.
-module Analytics.Management.UnsampledReports.Get
+module Network.Google.Resource.Analytics.Management.UnsampledReports.Get
     (
     -- * REST Resource
-      ManagementUnsampledReportsGetAPI
+      ManagementUnsampledReportsGetResource
 
     -- * Creating a Request
-    , managementUnsampledReportsGet
-    , ManagementUnsampledReportsGet
+    , managementUnsampledReportsGet'
+    , ManagementUnsampledReportsGet'
 
     -- * Request Lenses
     , murgQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUnsampledReportsGet@ which the
--- 'ManagementUnsampledReportsGet' request conforms to.
-type ManagementUnsampledReportsGetAPI =
+-- 'ManagementUnsampledReportsGet'' request conforms to.
+type ManagementUnsampledReportsGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,12 +58,19 @@ type ManagementUnsampledReportsGetAPI =
                  Capture "profileId" Text :>
                    "unsampledReports" :>
                      Capture "unsampledReportId" Text :>
-                       Get '[JSON] UnsampledReport
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Get '[JSON] UnsampledReport
 
 -- | Returns a single unsampled report.
 --
--- /See:/ 'managementUnsampledReportsGet' smart constructor.
-data ManagementUnsampledReportsGet = ManagementUnsampledReportsGet
+-- /See:/ 'managementUnsampledReportsGet'' smart constructor.
+data ManagementUnsampledReportsGet' = ManagementUnsampledReportsGet'
     { _murgQuotaUser         :: !(Maybe Text)
     , _murgPrettyPrint       :: !Bool
     , _murgWebPropertyId     :: !Text
@@ -73,7 +81,7 @@ data ManagementUnsampledReportsGet = ManagementUnsampledReportsGet
     , _murgUnsampledReportId :: !Text
     , _murgOauthToken        :: !(Maybe Text)
     , _murgFields            :: !(Maybe Text)
-    , _murgAlt               :: !Text
+    , _murgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnsampledReportsGet'' with the minimum fields required to make a request.
@@ -101,14 +109,14 @@ data ManagementUnsampledReportsGet = ManagementUnsampledReportsGet
 -- * 'murgFields'
 --
 -- * 'murgAlt'
-managementUnsampledReportsGet
+managementUnsampledReportsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'unsampledReportId'
-    -> ManagementUnsampledReportsGet
-managementUnsampledReportsGet pMurgWebPropertyId_ pMurgProfileId_ pMurgAccountId_ pMurgUnsampledReportId_ =
-    ManagementUnsampledReportsGet
+    -> ManagementUnsampledReportsGet'
+managementUnsampledReportsGet' pMurgWebPropertyId_ pMurgProfileId_ pMurgAccountId_ pMurgUnsampledReportId_ =
+    ManagementUnsampledReportsGet'
     { _murgQuotaUser = Nothing
     , _murgPrettyPrint = False
     , _murgWebPropertyId = pMurgWebPropertyId_
@@ -119,7 +127,7 @@ managementUnsampledReportsGet pMurgWebPropertyId_ pMurgProfileId_ pMurgAccountId
     , _murgUnsampledReportId = pMurgUnsampledReportId_
     , _murgOauthToken = Nothing
     , _murgFields = Nothing
-    , _murgAlt = "json"
+    , _murgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,7 +192,7 @@ murgFields
   = lens _murgFields (\ s a -> s{_murgFields = a})
 
 -- | Data format for the response.
-murgAlt :: Lens' ManagementUnsampledReportsGet' Text
+murgAlt :: Lens' ManagementUnsampledReportsGet' Alt
 murgAlt = lens _murgAlt (\ s a -> s{_murgAlt = a})
 
 instance GoogleRequest ManagementUnsampledReportsGet'
@@ -193,8 +201,8 @@ instance GoogleRequest ManagementUnsampledReportsGet'
              UnsampledReport
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementUnsampledReportsGet{..}
-          = go _murgQuotaUser _murgPrettyPrint
+          ManagementUnsampledReportsGet'{..}
+          = go _murgQuotaUser (Just _murgPrettyPrint)
               _murgWebPropertyId
               _murgUserIp
               _murgProfileId
@@ -203,9 +211,10 @@ instance GoogleRequest ManagementUnsampledReportsGet'
               _murgUnsampledReportId
               _murgOauthToken
               _murgFields
-              _murgAlt
+              (Just _murgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUnsampledReportsGetAPI)
+                      (Proxy ::
+                         Proxy ManagementUnsampledReportsGetResource)
                       r
                       u

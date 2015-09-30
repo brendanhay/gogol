@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing creative group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsUpdate@.
-module DFAReporting.CreativeGroups.Update
+module Network.Google.Resource.DFAReporting.CreativeGroups.Update
     (
     -- * REST Resource
-      CreativeGroupsUpdateAPI
+      CreativeGroupsUpdateResource
 
     -- * Creating a Request
-    , creativeGroupsUpdate
-    , CreativeGroupsUpdate
+    , creativeGroupsUpdate'
+    , CreativeGroupsUpdate'
 
     -- * Request Lenses
     , cguQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeGroupsUpdate@ which the
--- 'CreativeGroupsUpdate' request conforms to.
-type CreativeGroupsUpdateAPI =
+-- 'CreativeGroupsUpdate'' request conforms to.
+type CreativeGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creativeGroups" :> Put '[JSON] CreativeGroup
+         "creativeGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.
 --
--- /See:/ 'creativeGroupsUpdate' smart constructor.
-data CreativeGroupsUpdate = CreativeGroupsUpdate
+-- /See:/ 'creativeGroupsUpdate'' smart constructor.
+data CreativeGroupsUpdate' = CreativeGroupsUpdate'
     { _cguQuotaUser   :: !(Maybe Text)
     , _cguPrettyPrint :: !Bool
     , _cguUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativeGroupsUpdate = CreativeGroupsUpdate
     , _cguKey         :: !(Maybe Text)
     , _cguOauthToken  :: !(Maybe Text)
     , _cguFields      :: !(Maybe Text)
-    , _cguAlt         :: !Text
+    , _cguAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativeGroupsUpdate = CreativeGroupsUpdate
 -- * 'cguFields'
 --
 -- * 'cguAlt'
-creativeGroupsUpdate
+creativeGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroupsUpdate
-creativeGroupsUpdate pCguProfileId_ =
-    CreativeGroupsUpdate
+    -> CreativeGroupsUpdate'
+creativeGroupsUpdate' pCguProfileId_ =
+    CreativeGroupsUpdate'
     { _cguQuotaUser = Nothing
     , _cguPrettyPrint = True
     , _cguUserIp = Nothing
@@ -94,7 +102,7 @@ creativeGroupsUpdate pCguProfileId_ =
     , _cguKey = Nothing
     , _cguOauthToken = Nothing
     , _cguFields = Nothing
-    , _cguAlt = "json"
+    , _cguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ cguFields
   = lens _cguFields (\ s a -> s{_cguFields = a})
 
 -- | Data format for the response.
-cguAlt :: Lens' CreativeGroupsUpdate' Text
+cguAlt :: Lens' CreativeGroupsUpdate' Alt
 cguAlt = lens _cguAlt (\ s a -> s{_cguAlt = a})
 
 instance GoogleRequest CreativeGroupsUpdate' where
         type Rs CreativeGroupsUpdate' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsUpdate{..}
-          = go _cguQuotaUser _cguPrettyPrint _cguUserIp
+        requestWithRoute r u CreativeGroupsUpdate'{..}
+          = go _cguQuotaUser (Just _cguPrettyPrint) _cguUserIp
               _cguProfileId
               _cguKey
               _cguOauthToken
               _cguFields
-              _cguAlt
+              (Just _cguAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeGroupsUpdateAPI)
+                      (Proxy :: Proxy CreativeGroupsUpdateResource)
                       r
                       u

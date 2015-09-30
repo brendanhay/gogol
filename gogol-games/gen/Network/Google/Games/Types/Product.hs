@@ -94,6 +94,56 @@ instance ToJSON RoomJoinRequest where
                   ("clientAddress" .=) <$> _rjrClientAddress,
                   ("capabilities" .=) <$> _rjrCapabilities])
 
+-- | An object representation of the individual components of the player\'s
+-- name. For some players, these fields may not be present.
+--
+-- /See:/ 'playerName' smart constructor.
+data PlayerName = PlayerName
+    { _pnGivenName  :: !(Maybe Text)
+    , _pnFamilyName :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PlayerName' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pnGivenName'
+--
+-- * 'pnFamilyName'
+playerName
+    :: PlayerName
+playerName =
+    PlayerName
+    { _pnGivenName = Nothing
+    , _pnFamilyName = Nothing
+    }
+
+-- | The given name of this player. In some places, this is known as the
+-- first name.
+pnGivenName :: Lens' PlayerName (Maybe Text)
+pnGivenName
+  = lens _pnGivenName (\ s a -> s{_pnGivenName = a})
+
+-- | The family name of this player. In some places, this is known as the
+-- last name.
+pnFamilyName :: Lens' PlayerName (Maybe Text)
+pnFamilyName
+  = lens _pnFamilyName (\ s a -> s{_pnFamilyName = a})
+
+instance FromJSON PlayerName where
+        parseJSON
+          = withObject "PlayerName"
+              (\ o ->
+                 PlayerName <$>
+                   (o .:? "givenName") <*> (o .:? "familyName"))
+
+instance ToJSON PlayerName where
+        toJSON PlayerName{..}
+          = object
+              (catMaybes
+                 [("givenName" .=) <$> _pnGivenName,
+                  ("familyName" .=) <$> _pnFamilyName])
+
 -- | This is a JSON template for an snapshot object.
 --
 -- /See:/ 'snapshot' smart constructor.
@@ -5794,6 +5844,58 @@ instance ToJSON AchievementDefinition where
                   ("isRevealedIconUrlDefault" .=) <$>
                     _adIsRevealedIconUrlDefault,
                   ("unlockedIconUrl" .=) <$> _adUnlockedIconUrl])
+
+-- | A push token ID for iOS devices.
+--
+-- /See:/ 'pushTokenIdIos' smart constructor.
+data PushTokenIdIos = PushTokenIdIos
+    { _ptiiApnsDeviceToken :: !(Maybe Word8)
+    , _ptiiApnsEnvironment :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ptiiApnsDeviceToken'
+--
+-- * 'ptiiApnsEnvironment'
+pushTokenIdIos
+    :: PushTokenIdIos
+pushTokenIdIos =
+    PushTokenIdIos
+    { _ptiiApnsDeviceToken = Nothing
+    , _ptiiApnsEnvironment = Nothing
+    }
+
+-- | Device token supplied by an iOS system call to register for remote
+-- notifications. Encode this field as web-safe base64.
+ptiiApnsDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
+ptiiApnsDeviceToken
+  = lens _ptiiApnsDeviceToken
+      (\ s a -> s{_ptiiApnsDeviceToken = a})
+
+-- | Indicates whether this token should be used for the production or
+-- sandbox APNS server.
+ptiiApnsEnvironment :: Lens' PushTokenIdIos (Maybe Text)
+ptiiApnsEnvironment
+  = lens _ptiiApnsEnvironment
+      (\ s a -> s{_ptiiApnsEnvironment = a})
+
+instance FromJSON PushTokenIdIos where
+        parseJSON
+          = withObject "PushTokenIdIos"
+              (\ o ->
+                 PushTokenIdIos <$>
+                   (o .:? "apns_device_token") <*>
+                     (o .:? "apns_environment"))
+
+instance ToJSON PushTokenIdIos where
+        toJSON PushTokenIdIos{..}
+          = object
+              (catMaybes
+                 [("apns_device_token" .=) <$> _ptiiApnsDeviceToken,
+                  ("apns_environment" .=) <$> _ptiiApnsEnvironment])
 
 -- | This is a JSON template for a list of achievement objects.
 --

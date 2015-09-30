@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one account user profile by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProfilesGet@.
-module DFAReporting.AccountUserProfiles.Get
+module Network.Google.Resource.DFAReporting.AccountUserProfiles.Get
     (
     -- * REST Resource
-      AccountUserProfilesGetAPI
+      AccountUserProfilesGetResource
 
     -- * Creating a Request
-    , accountUserProfilesGet
-    , AccountUserProfilesGet
+    , accountUserProfilesGet'
+    , AccountUserProfilesGet'
 
     -- * Request Lenses
     , aupgQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountUserProfilesGet@ which the
--- 'AccountUserProfilesGet' request conforms to.
-type AccountUserProfilesGetAPI =
+-- 'AccountUserProfilesGet'' request conforms to.
+type AccountUserProfilesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           Capture "id" Int64 :> Get '[JSON] AccountUserProfile
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] AccountUserProfile
 
 -- | Gets one account user profile by ID.
 --
--- /See:/ 'accountUserProfilesGet' smart constructor.
-data AccountUserProfilesGet = AccountUserProfilesGet
+-- /See:/ 'accountUserProfilesGet'' smart constructor.
+data AccountUserProfilesGet' = AccountUserProfilesGet'
     { _aupgQuotaUser   :: !(Maybe Text)
     , _aupgPrettyPrint :: !Bool
     , _aupgUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data AccountUserProfilesGet = AccountUserProfilesGet
     , _aupgId          :: !Int64
     , _aupgOauthToken  :: !(Maybe Text)
     , _aupgFields      :: !(Maybe Text)
-    , _aupgAlt         :: !Text
+    , _aupgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesGet'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data AccountUserProfilesGet = AccountUserProfilesGet
 -- * 'aupgFields'
 --
 -- * 'aupgAlt'
-accountUserProfilesGet
+accountUserProfilesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AccountUserProfilesGet
-accountUserProfilesGet pAupgProfileId_ pAupgId_ =
-    AccountUserProfilesGet
+    -> AccountUserProfilesGet'
+accountUserProfilesGet' pAupgProfileId_ pAupgId_ =
+    AccountUserProfilesGet'
     { _aupgQuotaUser = Nothing
     , _aupgPrettyPrint = True
     , _aupgUserIp = Nothing
@@ -101,7 +110,7 @@ accountUserProfilesGet pAupgProfileId_ pAupgId_ =
     , _aupgId = pAupgId_
     , _aupgOauthToken = Nothing
     , _aupgFields = Nothing
-    , _aupgAlt = "json"
+    , _aupgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +161,23 @@ aupgFields
   = lens _aupgFields (\ s a -> s{_aupgFields = a})
 
 -- | Data format for the response.
-aupgAlt :: Lens' AccountUserProfilesGet' Text
+aupgAlt :: Lens' AccountUserProfilesGet' Alt
 aupgAlt = lens _aupgAlt (\ s a -> s{_aupgAlt = a})
 
 instance GoogleRequest AccountUserProfilesGet' where
         type Rs AccountUserProfilesGet' = AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProfilesGet{..}
-          = go _aupgQuotaUser _aupgPrettyPrint _aupgUserIp
+        requestWithRoute r u AccountUserProfilesGet'{..}
+          = go _aupgQuotaUser (Just _aupgPrettyPrint)
+              _aupgUserIp
               _aupgProfileId
               _aupgKey
               _aupgId
               _aupgOauthToken
               _aupgFields
-              _aupgAlt
+              (Just _aupgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountUserProfilesGetAPI)
+                      (Proxy :: Proxy AccountUserProfilesGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all host URL channels in the host AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostURLchannelsList@.
-module AdSenseHost.URLchannels.List
+module Network.Google.Resource.AdSenseHost.URLchannels.List
     (
     -- * REST Resource
-      UrlchannelsListAPI
+      UrlchannelsListResource
 
     -- * Creating a Request
-    , uRLchannelsList
-    , URLchannelsList
+    , uRLchannelsList'
+    , URLchannelsList'
 
     -- * Request Lenses
     , ulQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostURLchannelsList@ which the
--- 'URLchannelsList' request conforms to.
-type UrlchannelsListAPI =
+-- 'URLchannelsList'' request conforms to.
+type UrlchannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "urlchannels" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] URLChannels
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] URLChannels
 
 -- | List all host URL channels in the host AdSense account.
 --
--- /See:/ 'uRLchannelsList' smart constructor.
-data URLchannelsList = URLchannelsList
+-- /See:/ 'uRLchannelsList'' smart constructor.
+data URLchannelsList' = URLchannelsList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
     , _ulUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data URLchannelsList = URLchannelsList
     , _ulOauthToken  :: !(Maybe Text)
     , _ulMaxResults  :: !(Maybe Word32)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Text
+    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLchannelsList'' with the minimum fields required to make a request.
@@ -93,11 +100,11 @@ data URLchannelsList = URLchannelsList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-uRLchannelsList
+uRLchannelsList'
     :: Text -- ^ 'adClientId'
-    -> URLchannelsList
-uRLchannelsList pUlAdClientId_ =
-    URLchannelsList
+    -> URLchannelsList'
+uRLchannelsList' pUlAdClientId_ =
+    URLchannelsList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulUserIp = Nothing
@@ -107,7 +114,7 @@ uRLchannelsList pUlAdClientId_ =
     , _ulOauthToken = Nothing
     , _ulMaxResults = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,22 +169,23 @@ ulFields :: Lens' URLchannelsList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' URLchannelsList' Text
+ulAlt :: Lens' URLchannelsList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest URLchannelsList' where
         type Rs URLchannelsList' = URLChannels
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u URLchannelsList{..}
-          = go _ulQuotaUser _ulPrettyPrint _ulUserIp
+        requestWithRoute r u URLchannelsList'{..}
+          = go _ulQuotaUser (Just _ulPrettyPrint) _ulUserIp
               _ulAdClientId
               _ulKey
               _ulPageToken
               _ulOauthToken
               _ulMaxResults
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlchannelsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlchannelsListResource)
                       r
                       u

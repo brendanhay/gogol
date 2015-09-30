@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,170 +20,188 @@
 -- | Update a page. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesPatch@.
-module Blogger.Pages.Patch
+module Network.Google.Resource.Blogger.Pages.Patch
     (
     -- * REST Resource
-      PagesPatchAPI
+      PagesPatchResource
 
     -- * Creating a Request
-    , pagesPatch
-    , PagesPatch
+    , pagesPatch'
+    , PagesPatch'
 
     -- * Request Lenses
-    , ppQuotaUser
-    , ppPrettyPrint
-    , ppUserIp
-    , ppBlogId
-    , ppPageId
-    , ppKey
-    , ppRevert
-    , ppOauthToken
-    , ppPublish
-    , ppFields
-    , ppAlt
+    , pagaQuotaUser
+    , pagaPrettyPrint
+    , pagaUserIp
+    , pagaBlogId
+    , pagaPageId
+    , pagaKey
+    , pagaRevert
+    , pagaOauthToken
+    , pagaPublish
+    , pagaFields
+    , pagaAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesPatch@ which the
--- 'PagesPatch' request conforms to.
-type PagesPatchAPI =
+-- 'PagesPatch'' request conforms to.
+type PagesPatchResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "revert" Bool :>
-               QueryParam "publish" Bool :> Patch '[JSON] Page
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "revert" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "publish" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Patch '[JSON] Page
 
 -- | Update a page. This method supports patch semantics.
 --
--- /See:/ 'pagesPatch' smart constructor.
-data PagesPatch = PagesPatch
-    { _ppQuotaUser   :: !(Maybe Text)
-    , _ppPrettyPrint :: !Bool
-    , _ppUserIp      :: !(Maybe Text)
-    , _ppBlogId      :: !Text
-    , _ppPageId      :: !Text
-    , _ppKey         :: !(Maybe Text)
-    , _ppRevert      :: !(Maybe Bool)
-    , _ppOauthToken  :: !(Maybe Text)
-    , _ppPublish     :: !(Maybe Bool)
-    , _ppFields      :: !(Maybe Text)
-    , _ppAlt         :: !Text
+-- /See:/ 'pagesPatch'' smart constructor.
+data PagesPatch' = PagesPatch'
+    { _pagaQuotaUser   :: !(Maybe Text)
+    , _pagaPrettyPrint :: !Bool
+    , _pagaUserIp      :: !(Maybe Text)
+    , _pagaBlogId      :: !Text
+    , _pagaPageId      :: !Text
+    , _pagaKey         :: !(Maybe Text)
+    , _pagaRevert      :: !(Maybe Bool)
+    , _pagaOauthToken  :: !(Maybe Text)
+    , _pagaPublish     :: !(Maybe Bool)
+    , _pagaFields      :: !(Maybe Text)
+    , _pagaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppQuotaUser'
+-- * 'pagaQuotaUser'
 --
--- * 'ppPrettyPrint'
+-- * 'pagaPrettyPrint'
 --
--- * 'ppUserIp'
+-- * 'pagaUserIp'
 --
--- * 'ppBlogId'
+-- * 'pagaBlogId'
 --
--- * 'ppPageId'
+-- * 'pagaPageId'
 --
--- * 'ppKey'
+-- * 'pagaKey'
 --
--- * 'ppRevert'
+-- * 'pagaRevert'
 --
--- * 'ppOauthToken'
+-- * 'pagaOauthToken'
 --
--- * 'ppPublish'
+-- * 'pagaPublish'
 --
--- * 'ppFields'
+-- * 'pagaFields'
 --
--- * 'ppAlt'
-pagesPatch
+-- * 'pagaAlt'
+pagesPatch'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
-    -> PagesPatch
-pagesPatch pPpBlogId_ pPpPageId_ =
-    PagesPatch
-    { _ppQuotaUser = Nothing
-    , _ppPrettyPrint = True
-    , _ppUserIp = Nothing
-    , _ppBlogId = pPpBlogId_
-    , _ppPageId = pPpPageId_
-    , _ppKey = Nothing
-    , _ppRevert = Nothing
-    , _ppOauthToken = Nothing
-    , _ppPublish = Nothing
-    , _ppFields = Nothing
-    , _ppAlt = "json"
+    -> PagesPatch'
+pagesPatch' pPagaBlogId_ pPagaPageId_ =
+    PagesPatch'
+    { _pagaQuotaUser = Nothing
+    , _pagaPrettyPrint = True
+    , _pagaUserIp = Nothing
+    , _pagaBlogId = pPagaBlogId_
+    , _pagaPageId = pPagaPageId_
+    , _pagaKey = Nothing
+    , _pagaRevert = Nothing
+    , _pagaOauthToken = Nothing
+    , _pagaPublish = Nothing
+    , _pagaFields = Nothing
+    , _pagaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ppQuotaUser :: Lens' PagesPatch' (Maybe Text)
-ppQuotaUser
-  = lens _ppQuotaUser (\ s a -> s{_ppQuotaUser = a})
+pagaQuotaUser :: Lens' PagesPatch' (Maybe Text)
+pagaQuotaUser
+  = lens _pagaQuotaUser
+      (\ s a -> s{_pagaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ppPrettyPrint :: Lens' PagesPatch' Bool
-ppPrettyPrint
-  = lens _ppPrettyPrint
-      (\ s a -> s{_ppPrettyPrint = a})
+pagaPrettyPrint :: Lens' PagesPatch' Bool
+pagaPrettyPrint
+  = lens _pagaPrettyPrint
+      (\ s a -> s{_pagaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ppUserIp :: Lens' PagesPatch' (Maybe Text)
-ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
+pagaUserIp :: Lens' PagesPatch' (Maybe Text)
+pagaUserIp
+  = lens _pagaUserIp (\ s a -> s{_pagaUserIp = a})
 
 -- | The ID of the Blog.
-ppBlogId :: Lens' PagesPatch' Text
-ppBlogId = lens _ppBlogId (\ s a -> s{_ppBlogId = a})
+pagaBlogId :: Lens' PagesPatch' Text
+pagaBlogId
+  = lens _pagaBlogId (\ s a -> s{_pagaBlogId = a})
 
 -- | The ID of the Page.
-ppPageId :: Lens' PagesPatch' Text
-ppPageId = lens _ppPageId (\ s a -> s{_ppPageId = a})
+pagaPageId :: Lens' PagesPatch' Text
+pagaPageId
+  = lens _pagaPageId (\ s a -> s{_pagaPageId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PagesPatch' (Maybe Text)
-ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
+pagaKey :: Lens' PagesPatch' (Maybe Text)
+pagaKey = lens _pagaKey (\ s a -> s{_pagaKey = a})
 
 -- | Whether a revert action should be performed when the page is updated
 -- (default: false).
-ppRevert :: Lens' PagesPatch' (Maybe Bool)
-ppRevert = lens _ppRevert (\ s a -> s{_ppRevert = a})
+pagaRevert :: Lens' PagesPatch' (Maybe Bool)
+pagaRevert
+  = lens _pagaRevert (\ s a -> s{_pagaRevert = a})
 
 -- | OAuth 2.0 token for the current user.
-ppOauthToken :: Lens' PagesPatch' (Maybe Text)
-ppOauthToken
-  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
+pagaOauthToken :: Lens' PagesPatch' (Maybe Text)
+pagaOauthToken
+  = lens _pagaOauthToken
+      (\ s a -> s{_pagaOauthToken = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
-ppPublish :: Lens' PagesPatch' (Maybe Bool)
-ppPublish
-  = lens _ppPublish (\ s a -> s{_ppPublish = a})
+pagaPublish :: Lens' PagesPatch' (Maybe Bool)
+pagaPublish
+  = lens _pagaPublish (\ s a -> s{_pagaPublish = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ppFields :: Lens' PagesPatch' (Maybe Text)
-ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
+pagaFields :: Lens' PagesPatch' (Maybe Text)
+pagaFields
+  = lens _pagaFields (\ s a -> s{_pagaFields = a})
 
 -- | Data format for the response.
-ppAlt :: Lens' PagesPatch' Text
-ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
+pagaAlt :: Lens' PagesPatch' Alt
+pagaAlt = lens _pagaAlt (\ s a -> s{_pagaAlt = a})
 
 instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesPatch{..}
-          = go _ppQuotaUser _ppPrettyPrint _ppUserIp _ppBlogId
-              _ppPageId
-              _ppKey
-              _ppRevert
-              _ppOauthToken
-              _ppPublish
-              _ppFields
-              _ppAlt
+        requestWithRoute r u PagesPatch'{..}
+          = go _pagaQuotaUser (Just _pagaPrettyPrint)
+              _pagaUserIp
+              _pagaBlogId
+              _pagaPageId
+              _pagaKey
+              _pagaRevert
+              _pagaOauthToken
+              _pagaPublish
+              _pagaFields
+              (Just _pagaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesPatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy PagesPatchResource)
+                      r
+                      u

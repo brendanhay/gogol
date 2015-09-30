@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- the returned response will not include any instance data.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesApplicationsGet@.
-module Games.Applications.Get
+module Network.Google.Resource.Games.Applications.Get
     (
     -- * REST Resource
-      ApplicationsGetAPI
+      ApplicationsGetResource
 
     -- * Creating a Request
-    , applicationsGet
-    , ApplicationsGet
+    , applicationsGet'
+    , ApplicationsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -47,29 +48,38 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesApplicationsGet@ which the
--- 'ApplicationsGet' request conforms to.
-type ApplicationsGetAPI =
+-- 'ApplicationsGet'' request conforms to.
+type ApplicationsGetResource =
      "applications" :>
        Capture "applicationId" Text :>
-         QueryParam "platformType" Text :>
-           QueryParam "language" Text :> Get '[JSON] Application
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "platformType"
+                   GamesApplicationsGetPlatformType
+                   :>
+                   QueryParam "language" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Application
 
 -- | Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,
 -- the returned response will not include any instance data.
 --
--- /See:/ 'applicationsGet' smart constructor.
-data ApplicationsGet = ApplicationsGet
+-- /See:/ 'applicationsGet'' smart constructor.
+data ApplicationsGet' = ApplicationsGet'
     { _agQuotaUser     :: !(Maybe Text)
     , _agPrettyPrint   :: !Bool
     , _agUserIp        :: !(Maybe Text)
     , _agApplicationId :: !Text
     , _agKey           :: !(Maybe Text)
-    , _agPlatformType  :: !(Maybe Text)
+    , _agPlatformType  :: !(Maybe GamesApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
     , _agOauthToken    :: !(Maybe Text)
     , _agFields        :: !(Maybe Text)
-    , _agAlt           :: !Text
+    , _agAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
@@ -95,11 +105,11 @@ data ApplicationsGet = ApplicationsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-applicationsGet
+applicationsGet'
     :: Text -- ^ 'applicationId'
-    -> ApplicationsGet
-applicationsGet pAgApplicationId_ =
-    ApplicationsGet
+    -> ApplicationsGet'
+applicationsGet' pAgApplicationId_ =
+    ApplicationsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -109,7 +119,7 @@ applicationsGet pAgApplicationId_ =
     , _agLanguage = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,7 +153,7 @@ agKey :: Lens' ApplicationsGet' (Maybe Text)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Restrict application details returned to the specific platform.
-agPlatformType :: Lens' ApplicationsGet' (Maybe Text)
+agPlatformType :: Lens' ApplicationsGet' (Maybe GamesApplicationsGetPlatformType)
 agPlatformType
   = lens _agPlatformType
       (\ s a -> s{_agPlatformType = a})
@@ -163,22 +173,23 @@ agFields :: Lens' ApplicationsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' ApplicationsGet' Text
+agAlt :: Lens' ApplicationsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ApplicationsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u ApplicationsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agApplicationId
               _agKey
               _agPlatformType
               _agLanguage
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ApplicationsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ApplicationsGetResource)
                       r
                       u

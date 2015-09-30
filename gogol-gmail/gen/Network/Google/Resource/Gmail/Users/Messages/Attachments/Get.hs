@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified message attachment.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersMessagesAttachmentsGet@.
-module Gmail.Users.Messages.Attachments.Get
+module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
     (
     -- * REST Resource
-      UsersMessagesAttachmentsGetAPI
+      UsersMessagesAttachmentsGetResource
 
     -- * Creating a Request
-    , usersMessagesAttachmentsGet
-    , UsersMessagesAttachmentsGet
+    , usersMessagesAttachmentsGet'
+    , UsersMessagesAttachmentsGet'
 
     -- * Request Lenses
     , umagQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersMessagesAttachmentsGet@ which the
--- 'UsersMessagesAttachmentsGet' request conforms to.
-type UsersMessagesAttachmentsGetAPI =
+-- 'UsersMessagesAttachmentsGet'' request conforms to.
+type UsersMessagesAttachmentsGetResource =
      Capture "userId" Text :>
        "messages" :>
          Capture "messageId" Text :>
            "attachments" :>
-             Capture "id" Text :> Get '[JSON] MessagePartBody
+             Capture "id" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] MessagePartBody
 
 -- | Gets the specified message attachment.
 --
--- /See:/ 'usersMessagesAttachmentsGet' smart constructor.
-data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
+-- /See:/ 'usersMessagesAttachmentsGet'' smart constructor.
+data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
     { _umagQuotaUser   :: !(Maybe Text)
     , _umagPrettyPrint :: !Bool
     , _umagUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
     , _umagOauthToken  :: !(Maybe Text)
     , _umagMessageId   :: !Text
     , _umagFields      :: !(Maybe Text)
-    , _umagAlt         :: !Text
+    , _umagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesAttachmentsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
 -- * 'umagFields'
 --
 -- * 'umagAlt'
-usersMessagesAttachmentsGet
+usersMessagesAttachmentsGet'
     :: Text -- ^ 'id'
     -> Text -- ^ 'messageId'
     -> Text
-    -> UsersMessagesAttachmentsGet
-usersMessagesAttachmentsGet pUmagUserId_ pUmagId_ pUmagMessageId_ =
-    UsersMessagesAttachmentsGet
+    -> UsersMessagesAttachmentsGet'
+usersMessagesAttachmentsGet' pUmagUserId_ pUmagId_ pUmagMessageId_ =
+    UsersMessagesAttachmentsGet'
     { _umagQuotaUser = Nothing
     , _umagPrettyPrint = True
     , _umagUserIp = Nothing
@@ -108,7 +116,7 @@ usersMessagesAttachmentsGet pUmagUserId_ pUmagId_ pUmagMessageId_ =
     , _umagOauthToken = Nothing
     , _umagMessageId = pUmagMessageId_
     , _umagFields = Nothing
-    , _umagAlt = "json"
+    , _umagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,7 +173,7 @@ umagFields
   = lens _umagFields (\ s a -> s{_umagFields = a})
 
 -- | Data format for the response.
-umagAlt :: Lens' UsersMessagesAttachmentsGet' Text
+umagAlt :: Lens' UsersMessagesAttachmentsGet' Alt
 umagAlt = lens _umagAlt (\ s a -> s{_umagAlt = a})
 
 instance GoogleRequest UsersMessagesAttachmentsGet'
@@ -173,17 +181,18 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
         type Rs UsersMessagesAttachmentsGet' =
              MessagePartBody
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersMessagesAttachmentsGet{..}
-          = go _umagQuotaUser _umagPrettyPrint _umagUserIp
+        requestWithRoute r u UsersMessagesAttachmentsGet'{..}
+          = go _umagQuotaUser (Just _umagPrettyPrint)
+              _umagUserIp
               _umagUserId
               _umagKey
               _umagId
               _umagOauthToken
               _umagMessageId
               _umagFields
-              _umagAlt
+              (Just _umagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersMessagesAttachmentsGetAPI)
+                      (Proxy :: Proxy UsersMessagesAttachmentsGetResource)
                       r
                       u

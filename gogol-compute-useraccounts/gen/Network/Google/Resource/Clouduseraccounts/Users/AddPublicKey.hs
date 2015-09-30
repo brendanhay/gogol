@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- in the request.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersAddPublicKey@.
-module Clouduseraccounts.Users.AddPublicKey
+module Network.Google.Resource.Clouduseraccounts.Users.AddPublicKey
     (
     -- * REST Resource
-      UsersAddPublicKeyAPI
+      UsersAddPublicKeyResource
 
     -- * Creating a Request
-    , usersAddPublicKey
-    , UsersAddPublicKey
+    , usersAddPublicKey'
+    , UsersAddPublicKey'
 
     -- * Request Lenses
     , uapkQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersAddPublicKey@ which the
--- 'UsersAddPublicKey' request conforms to.
-type UsersAddPublicKeyAPI =
+-- 'UsersAddPublicKey'' request conforms to.
+type UsersAddPublicKeyResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
            Capture "user" Text :>
-             "addPublicKey" :> Post '[JSON] Operation
+             "addPublicKey" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Adds a public key to the specified User resource with the data included
 -- in the request.
 --
--- /See:/ 'usersAddPublicKey' smart constructor.
-data UsersAddPublicKey = UsersAddPublicKey
+-- /See:/ 'usersAddPublicKey'' smart constructor.
+data UsersAddPublicKey' = UsersAddPublicKey'
     { _uapkQuotaUser   :: !(Maybe Text)
     , _uapkPrettyPrint :: !Bool
     , _uapkProject     :: !Text
@@ -66,7 +74,7 @@ data UsersAddPublicKey = UsersAddPublicKey
     , _uapkKey         :: !(Maybe Text)
     , _uapkOauthToken  :: !(Maybe Text)
     , _uapkFields      :: !(Maybe Text)
-    , _uapkAlt         :: !Text
+    , _uapkAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAddPublicKey'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data UsersAddPublicKey = UsersAddPublicKey
 -- * 'uapkFields'
 --
 -- * 'uapkAlt'
-usersAddPublicKey
+usersAddPublicKey'
     :: Text -- ^ 'project'
     -> Text -- ^ 'user'
-    -> UsersAddPublicKey
-usersAddPublicKey pUapkProject_ pUapkUser_ =
-    UsersAddPublicKey
+    -> UsersAddPublicKey'
+usersAddPublicKey' pUapkProject_ pUapkUser_ =
+    UsersAddPublicKey'
     { _uapkQuotaUser = Nothing
     , _uapkPrettyPrint = True
     , _uapkProject = pUapkProject_
@@ -104,7 +112,7 @@ usersAddPublicKey pUapkProject_ pUapkUser_ =
     , _uapkKey = Nothing
     , _uapkOauthToken = Nothing
     , _uapkFields = Nothing
-    , _uapkAlt = "json"
+    , _uapkAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,23 +162,24 @@ uapkFields
   = lens _uapkFields (\ s a -> s{_uapkFields = a})
 
 -- | Data format for the response.
-uapkAlt :: Lens' UsersAddPublicKey' Text
+uapkAlt :: Lens' UsersAddPublicKey' Alt
 uapkAlt = lens _uapkAlt (\ s a -> s{_uapkAlt = a})
 
 instance GoogleRequest UsersAddPublicKey' where
         type Rs UsersAddPublicKey' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersAddPublicKey{..}
-          = go _uapkQuotaUser _uapkPrettyPrint _uapkProject
+        requestWithRoute r u UsersAddPublicKey'{..}
+          = go _uapkQuotaUser (Just _uapkPrettyPrint)
+              _uapkProject
               _uapkUserIp
               _uapkUser
               _uapkKey
               _uapkOauthToken
               _uapkFields
-              _uapkAlt
+              (Just _uapkAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersAddPublicKeyAPI)
+                      (Proxy :: Proxy UsersAddPublicKeyResource)
                       r
                       u

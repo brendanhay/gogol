@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- a default ad does not exist already.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignCreativeAssociationsInsert@.
-module DFAReporting.CampaignCreativeAssociations.Insert
+module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     (
     -- * REST Resource
-      CampaignCreativeAssociationsInsertAPI
+      CampaignCreativeAssociationsInsertResource
 
     -- * Creating a Request
-    , campaignCreativeAssociationsInsert
-    , CampaignCreativeAssociationsInsert
+    , campaignCreativeAssociationsInsert'
+    , CampaignCreativeAssociationsInsert'
 
     -- * Request Lenses
     , ccaiQuotaUser
@@ -46,21 +47,28 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignCreativeAssociationsInsert@ which the
--- 'CampaignCreativeAssociationsInsert' request conforms to.
-type CampaignCreativeAssociationsInsertAPI =
+-- 'CampaignCreativeAssociationsInsert'' request conforms to.
+type CampaignCreativeAssociationsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
-               Post '[JSON] CampaignCreativeAssociation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such
 -- a default ad does not exist already.
 --
--- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
-data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
+-- /See:/ 'campaignCreativeAssociationsInsert'' smart constructor.
+data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
     { _ccaiQuotaUser   :: !(Maybe Text)
     , _ccaiPrettyPrint :: !Bool
     , _ccaiUserIp      :: !(Maybe Text)
@@ -69,7 +77,7 @@ data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
     , _ccaiKey         :: !(Maybe Text)
     , _ccaiOauthToken  :: !(Maybe Text)
     , _ccaiFields      :: !(Maybe Text)
-    , _ccaiAlt         :: !Text
+    , _ccaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsInsert'' with the minimum fields required to make a request.
@@ -93,12 +101,12 @@ data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
 -- * 'ccaiFields'
 --
 -- * 'ccaiAlt'
-campaignCreativeAssociationsInsert
+campaignCreativeAssociationsInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> CampaignCreativeAssociationsInsert
-campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProfileId_ =
-    CampaignCreativeAssociationsInsert
+    -> CampaignCreativeAssociationsInsert'
+campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ =
+    CampaignCreativeAssociationsInsert'
     { _ccaiQuotaUser = Nothing
     , _ccaiPrettyPrint = True
     , _ccaiUserIp = Nothing
@@ -107,7 +115,7 @@ campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProfileId_ =
     , _ccaiKey = Nothing
     , _ccaiOauthToken = Nothing
     , _ccaiFields = Nothing
-    , _ccaiAlt = "json"
+    , _ccaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,7 +168,7 @@ ccaiFields
   = lens _ccaiFields (\ s a -> s{_ccaiFields = a})
 
 -- | Data format for the response.
-ccaiAlt :: Lens' CampaignCreativeAssociationsInsert' Text
+ccaiAlt :: Lens' CampaignCreativeAssociationsInsert' Alt
 ccaiAlt = lens _ccaiAlt (\ s a -> s{_ccaiAlt = a})
 
 instance GoogleRequest
@@ -169,17 +177,18 @@ instance GoogleRequest
              CampaignCreativeAssociation
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          CampaignCreativeAssociationsInsert{..}
-          = go _ccaiQuotaUser _ccaiPrettyPrint _ccaiUserIp
+          CampaignCreativeAssociationsInsert'{..}
+          = go _ccaiQuotaUser (Just _ccaiPrettyPrint)
+              _ccaiUserIp
               _ccaiCampaignId
               _ccaiProfileId
               _ccaiKey
               _ccaiOauthToken
               _ccaiFields
-              _ccaiAlt
+              (Just _ccaiAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy CampaignCreativeAssociationsInsertAPI)
+                         Proxy CampaignCreativeAssociationsInsertResource)
                       r
                       u

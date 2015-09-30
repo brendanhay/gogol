@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get the collection of players for the currently authenticated user.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPlayersList@.
-module Games.Players.List
+module Network.Google.Resource.Games.Players.List
     (
     -- * REST Resource
-      PlayersListAPI
+      PlayersListResource
 
     -- * Creating a Request
-    , playersList
-    , PlayersList
+    , playersList'
+    , PlayersList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -46,32 +47,39 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesPlayersList@ which the
--- 'PlayersList' request conforms to.
-type PlayersListAPI =
+-- 'PlayersList'' request conforms to.
+type PlayersListResource =
      "players" :>
        "me" :>
          "players" :>
-           Capture "collection" Text :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] PlayerListResponse
+           Capture "collection" GamesPlayersListCollection :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "language" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] PlayerListResponse
 
 -- | Get the collection of players for the currently authenticated user.
 --
--- /See:/ 'playersList' smart constructor.
-data PlayersList = PlayersList
+-- /See:/ 'playersList'' smart constructor.
+data PlayersList' = PlayersList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIp      :: !(Maybe Text)
-    , _plCollection  :: !Text
+    , _plCollection  :: !GamesPlayersListCollection
     , _plKey         :: !(Maybe Text)
     , _plLanguage    :: !(Maybe Text)
     , _plPageToken   :: !(Maybe Text)
     , _plOauthToken  :: !(Maybe Text)
     , _plMaxResults  :: !(Maybe Int32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Text
+    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersList'' with the minimum fields required to make a request.
@@ -99,11 +107,11 @@ data PlayersList = PlayersList
 -- * 'plFields'
 --
 -- * 'plAlt'
-playersList
-    :: Text -- ^ 'collection'
-    -> PlayersList
-playersList pPlCollection_ =
-    PlayersList
+playersList'
+    :: GamesPlayersListCollection -- ^ 'collection'
+    -> PlayersList'
+playersList' pPlCollection_ =
+    PlayersList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plUserIp = Nothing
@@ -114,7 +122,7 @@ playersList pPlCollection_ =
     , _plOauthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,7 +144,7 @@ plUserIp :: Lens' PlayersList' (Maybe Text)
 plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
 
 -- | Collection of players being retrieved
-plCollection :: Lens' PlayersList' Text
+plCollection :: Lens' PlayersList' GamesPlayersListCollection
 plCollection
   = lens _plCollection (\ s a -> s{_plCollection = a})
 
@@ -173,14 +181,14 @@ plFields :: Lens' PlayersList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PlayersList' Text
+plAlt :: Lens' PlayersList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PlayersList{..}
-          = go _plQuotaUser _plPrettyPrint _plUserIp
+        requestWithRoute r u PlayersList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
               _plCollection
               _plKey
               _plLanguage
@@ -188,6 +196,9 @@ instance GoogleRequest PlayersList' where
               _plOauthToken
               _plMaxResults
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PlayersListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PlayersListResource)
+                      r
+                      u

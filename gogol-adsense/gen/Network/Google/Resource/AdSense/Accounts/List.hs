@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,152 +20,158 @@
 -- | List all accounts available to this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsList@.
-module AdSense.Accounts.List
+module Network.Google.Resource.AdSense.Accounts.List
     (
     -- * REST Resource
-      AccountsListAPI
+      AccountsListResource
 
     -- * Creating a Request
-    , accountsList
-    , AccountsList
+    , accountsList'
+    , AccountsList'
 
     -- * Request Lenses
-    , allQuotaUser
-    , allPrettyPrint
-    , allUserIp
-    , allKey
-    , allPageToken
-    , allOauthToken
-    , allMaxResults
-    , allFields
-    , allAlt
+    , alQuotaUser
+    , alPrettyPrint
+    , alUserIp
+    , alKey
+    , alPageToken
+    , alOauthToken
+    , alMaxResults
+    , alFields
+    , alAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsList@ which the
--- 'AccountsList' request conforms to.
-type AccountsListAPI =
+-- 'AccountsList'' request conforms to.
+type AccountsListResource =
      "accounts" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :> Get '[JSON] Accounts
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Accounts
 
 -- | List all accounts available to this AdSense account.
 --
--- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
-    { _allQuotaUser   :: !(Maybe Text)
-    , _allPrettyPrint :: !Bool
-    , _allUserIp      :: !(Maybe Text)
-    , _allKey         :: !(Maybe Text)
-    , _allPageToken   :: !(Maybe Text)
-    , _allOauthToken  :: !(Maybe Text)
-    , _allMaxResults  :: !(Maybe Int32)
-    , _allFields      :: !(Maybe Text)
-    , _allAlt         :: !Text
+-- /See:/ 'accountsList'' smart constructor.
+data AccountsList' = AccountsList'
+    { _alQuotaUser   :: !(Maybe Text)
+    , _alPrettyPrint :: !Bool
+    , _alUserIp      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Text)
+    , _alPageToken   :: !(Maybe Text)
+    , _alOauthToken  :: !(Maybe Text)
+    , _alMaxResults  :: !(Maybe Int32)
+    , _alFields      :: !(Maybe Text)
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'allQuotaUser'
+-- * 'alQuotaUser'
 --
--- * 'allPrettyPrint'
+-- * 'alPrettyPrint'
 --
--- * 'allUserIp'
+-- * 'alUserIp'
 --
--- * 'allKey'
+-- * 'alKey'
 --
--- * 'allPageToken'
+-- * 'alPageToken'
 --
--- * 'allOauthToken'
+-- * 'alOauthToken'
 --
--- * 'allMaxResults'
+-- * 'alMaxResults'
 --
--- * 'allFields'
+-- * 'alFields'
 --
--- * 'allAlt'
-accountsList
-    :: AccountsList
-accountsList =
-    AccountsList
-    { _allQuotaUser = Nothing
-    , _allPrettyPrint = True
-    , _allUserIp = Nothing
-    , _allKey = Nothing
-    , _allPageToken = Nothing
-    , _allOauthToken = Nothing
-    , _allMaxResults = Nothing
-    , _allFields = Nothing
-    , _allAlt = "json"
+-- * 'alAlt'
+accountsList'
+    :: AccountsList'
+accountsList' =
+    AccountsList'
+    { _alQuotaUser = Nothing
+    , _alPrettyPrint = True
+    , _alUserIp = Nothing
+    , _alKey = Nothing
+    , _alPageToken = Nothing
+    , _alOauthToken = Nothing
+    , _alMaxResults = Nothing
+    , _alFields = Nothing
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-allQuotaUser :: Lens' AccountsList' (Maybe Text)
-allQuotaUser
-  = lens _allQuotaUser (\ s a -> s{_allQuotaUser = a})
+alQuotaUser :: Lens' AccountsList' (Maybe Text)
+alQuotaUser
+  = lens _alQuotaUser (\ s a -> s{_alQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-allPrettyPrint :: Lens' AccountsList' Bool
-allPrettyPrint
-  = lens _allPrettyPrint
-      (\ s a -> s{_allPrettyPrint = a})
+alPrettyPrint :: Lens' AccountsList' Bool
+alPrettyPrint
+  = lens _alPrettyPrint
+      (\ s a -> s{_alPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-allUserIp :: Lens' AccountsList' (Maybe Text)
-allUserIp
-  = lens _allUserIp (\ s a -> s{_allUserIp = a})
+alUserIp :: Lens' AccountsList' (Maybe Text)
+alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-allKey :: Lens' AccountsList' (Maybe Text)
-allKey = lens _allKey (\ s a -> s{_allKey = a})
+alKey :: Lens' AccountsList' (Maybe Text)
+alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | A continuation token, used to page through accounts. To retrieve the
 -- next page, set this parameter to the value of \"nextPageToken\" from the
 -- previous response.
-allPageToken :: Lens' AccountsList' (Maybe Text)
-allPageToken
-  = lens _allPageToken (\ s a -> s{_allPageToken = a})
+alPageToken :: Lens' AccountsList' (Maybe Text)
+alPageToken
+  = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-allOauthToken :: Lens' AccountsList' (Maybe Text)
-allOauthToken
-  = lens _allOauthToken
-      (\ s a -> s{_allOauthToken = a})
+alOauthToken :: Lens' AccountsList' (Maybe Text)
+alOauthToken
+  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
 
 -- | The maximum number of accounts to include in the response, used for
 -- paging.
-allMaxResults :: Lens' AccountsList' (Maybe Int32)
-allMaxResults
-  = lens _allMaxResults
-      (\ s a -> s{_allMaxResults = a})
+alMaxResults :: Lens' AccountsList' (Maybe Int32)
+alMaxResults
+  = lens _alMaxResults (\ s a -> s{_alMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-allFields :: Lens' AccountsList' (Maybe Text)
-allFields
-  = lens _allFields (\ s a -> s{_allFields = a})
+alFields :: Lens' AccountsList' (Maybe Text)
+alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-allAlt :: Lens' AccountsList' Text
-allAlt = lens _allAlt (\ s a -> s{_allAlt = a})
+alAlt :: Lens' AccountsList' Alt
+alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AccountsList' where
         type Rs AccountsList' = Accounts
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsList{..}
-          = go _allQuotaUser _allPrettyPrint _allUserIp _allKey
-              _allPageToken
-              _allOauthToken
-              _allMaxResults
-              _allFields
-              _allAlt
+        requestWithRoute r u AccountsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+              _alKey
+              _alPageToken
+              _alOauthToken
+              _alMaxResults
+              _alFields
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsListResource)
+                      r
                       u

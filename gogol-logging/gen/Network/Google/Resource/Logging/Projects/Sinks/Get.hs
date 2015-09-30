@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a project sink.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsSinksGet@.
-module Logging.Projects.Sinks.Get
+module Network.Google.Resource.Logging.Projects.Sinks.Get
     (
     -- * REST Resource
-      ProjectsSinksGetAPI
+      ProjectsSinksGetResource
 
     -- * Creating a Request
-    , projectsSinksGet
-    , ProjectsSinksGet
+    , projectsSinksGet'
+    , ProjectsSinksGet'
 
     -- * Request Lenses
     , psgXgafv
@@ -50,18 +51,32 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsSinksGet@ which the
--- 'ProjectsSinksGet' request conforms to.
-type ProjectsSinksGetAPI =
+-- 'ProjectsSinksGet'' request conforms to.
+type ProjectsSinksGetResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "sinks" :>
-             Capture "sinksId" Text :> Get '[JSON] LogSink
+             Capture "sinksId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] LogSink
 
 -- | Gets a project sink.
 --
--- /See:/ 'projectsSinksGet' smart constructor.
-data ProjectsSinksGet = ProjectsSinksGet
+-- /See:/ 'projectsSinksGet'' smart constructor.
+data ProjectsSinksGet' = ProjectsSinksGet'
     { _psgXgafv          :: !(Maybe Text)
     , _psgQuotaUser      :: !(Maybe Text)
     , _psgPrettyPrint    :: !Bool
@@ -112,12 +127,12 @@ data ProjectsSinksGet = ProjectsSinksGet
 -- * 'psgCallback'
 --
 -- * 'psgAlt'
-projectsSinksGet
+projectsSinksGet'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
-    -> ProjectsSinksGet
-projectsSinksGet pPsgProjectsId_ pPsgSinksId_ =
-    ProjectsSinksGet
+    -> ProjectsSinksGet'
+projectsSinksGet' pPsgProjectsId_ pPsgSinksId_ =
+    ProjectsSinksGet'
     { _psgXgafv = Nothing
     , _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
@@ -220,10 +235,10 @@ psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
 instance GoogleRequest ProjectsSinksGet' where
         type Rs ProjectsSinksGet' = LogSink
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsSinksGet{..}
-          = go _psgXgafv _psgQuotaUser _psgPrettyPrint
+        requestWithRoute r u ProjectsSinksGet'{..}
+          = go _psgXgafv _psgQuotaUser (Just _psgPrettyPrint)
               _psgUploadProtocol
-              _psgPp
+              (Just _psgPp)
               _psgAccessToken
               _psgUploadType
               _psgBearerToken
@@ -233,9 +248,9 @@ instance GoogleRequest ProjectsSinksGet' where
               _psgSinksId
               _psgFields
               _psgCallback
-              _psgAlt
+              (Just _psgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSinksGetAPI)
+                      (Proxy :: Proxy ProjectsSinksGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Process a layer asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersProcess@.
-module Mapsengine.Layers.Process
+module Network.Google.Resource.Mapsengine.Layers.Process
     (
     -- * REST Resource
-      LayersProcessAPI
+      LayersProcessResource
 
     -- * Creating a Request
-    , layersProcess
-    , LayersProcess
+    , layersProcess'
+    , LayersProcess'
 
     -- * Request Lenses
     , lpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersProcess@ which the
--- 'LayersProcess' request conforms to.
-type LayersProcessAPI =
+-- 'LayersProcess'' request conforms to.
+type LayersProcessResource =
      "layers" :>
        Capture "id" Text :>
-         "process" :> Post '[JSON] ProcessResponse
+         "process" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Process a layer asset.
 --
--- /See:/ 'layersProcess' smart constructor.
-data LayersProcess = LayersProcess
+-- /See:/ 'layersProcess'' smart constructor.
+data LayersProcess' = LayersProcess'
     { _lpQuotaUser   :: !(Maybe Text)
     , _lpPrettyPrint :: !Bool
     , _lpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data LayersProcess = LayersProcess
     , _lpId          :: !Text
     , _lpOauthToken  :: !(Maybe Text)
     , _lpFields      :: !(Maybe Text)
-    , _lpAlt         :: !Text
+    , _lpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersProcess'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data LayersProcess = LayersProcess
 -- * 'lpFields'
 --
 -- * 'lpAlt'
-layersProcess
+layersProcess'
     :: Text -- ^ 'id'
-    -> LayersProcess
-layersProcess pLpId_ =
-    LayersProcess
+    -> LayersProcess'
+layersProcess' pLpId_ =
+    LayersProcess'
     { _lpQuotaUser = Nothing
     , _lpPrettyPrint = True
     , _lpUserIp = Nothing
@@ -94,7 +102,7 @@ layersProcess pLpId_ =
     , _lpId = pLpId_
     , _lpOauthToken = Nothing
     , _lpFields = Nothing
-    , _lpAlt = "json"
+    , _lpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ lpFields :: Lens' LayersProcess' (Maybe Text)
 lpFields = lens _lpFields (\ s a -> s{_lpFields = a})
 
 -- | Data format for the response.
-lpAlt :: Lens' LayersProcess' Text
+lpAlt :: Lens' LayersProcess' Alt
 lpAlt = lens _lpAlt (\ s a -> s{_lpAlt = a})
 
 instance GoogleRequest LayersProcess' where
         type Rs LayersProcess' = ProcessResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersProcess{..}
-          = go _lpQuotaUser _lpPrettyPrint _lpUserIp _lpKey
+        requestWithRoute r u LayersProcess'{..}
+          = go _lpQuotaUser (Just _lpPrettyPrint) _lpUserIp
+              _lpKey
               _lpId
               _lpOauthToken
               _lpFields
-              _lpAlt
+              (Just _lpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersProcessAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LayersProcessResource)
+                      r
                       u

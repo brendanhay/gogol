@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a dataset by ID.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsDatasetsGet@.
-module Genomics.Datasets.Get
+module Network.Google.Resource.Genomics.Datasets.Get
     (
     -- * REST Resource
-      DatasetsGetAPI
+      DatasetsGetResource
 
     -- * Creating a Request
-    , datasetsGet
-    , DatasetsGet
+    , datasetsGet'
+    , DatasetsGet'
 
     -- * Request Lenses
     , dgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsDatasetsGet@ which the
--- 'DatasetsGet' request conforms to.
-type DatasetsGetAPI =
+-- 'DatasetsGet'' request conforms to.
+type DatasetsGetResource =
      "datasets" :>
-       Capture "datasetId" Text :> Get '[JSON] Dataset
+       Capture "datasetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Dataset
 
 -- | Gets a dataset by ID.
 --
--- /See:/ 'datasetsGet' smart constructor.
-data DatasetsGet = DatasetsGet
+-- /See:/ 'datasetsGet'' smart constructor.
+data DatasetsGet' = DatasetsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsGet = DatasetsGet
     , _dgDatasetId   :: !Text
     , _dgOauthToken  :: !(Maybe Text)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Text
+    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsGet = DatasetsGet
 -- * 'dgFields'
 --
 -- * 'dgAlt'
-datasetsGet
+datasetsGet'
     :: Text -- ^ 'datasetId'
-    -> DatasetsGet
-datasetsGet pDgDatasetId_ =
-    DatasetsGet
+    -> DatasetsGet'
+datasetsGet' pDgDatasetId_ =
+    DatasetsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsGet pDgDatasetId_ =
     , _dgDatasetId = pDgDatasetId_
     , _dgOauthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = "json"
+    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,21 @@ dgFields :: Lens' DatasetsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
 -- | Data format for the response.
-dgAlt :: Lens' DatasetsGet' Text
+dgAlt :: Lens' DatasetsGet' Alt
 dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
 
 instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u DatasetsGet{..}
-          = go _dgQuotaUser _dgPrettyPrint _dgUserIp _dgKey
+        requestWithRoute r u DatasetsGet'{..}
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIp
+              _dgKey
               _dgDatasetId
               _dgOauthToken
               _dgFields
-              _dgAlt
+              (Just _dgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsGetResource)
+                      r
+                      u

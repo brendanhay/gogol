@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one inventory item by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingInventoryItemsGet@.
-module DFAReporting.InventoryItems.Get
+module Network.Google.Resource.DFAReporting.InventoryItems.Get
     (
     -- * REST Resource
-      InventoryItemsGetAPI
+      InventoryItemsGetResource
 
     -- * Creating a Request
-    , inventoryItemsGet
-    , InventoryItemsGet
+    , inventoryItemsGet'
+    , InventoryItemsGet'
 
     -- * Request Lenses
     , iigQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingInventoryItemsGet@ which the
--- 'InventoryItemsGet' request conforms to.
-type InventoryItemsGetAPI =
+-- 'InventoryItemsGet'' request conforms to.
+type InventoryItemsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
              "inventoryItems" :>
-               Capture "id" Int64 :> Get '[JSON] InventoryItem
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] InventoryItem
 
 -- | Gets one inventory item by ID.
 --
--- /See:/ 'inventoryItemsGet' smart constructor.
-data InventoryItemsGet = InventoryItemsGet
+-- /See:/ 'inventoryItemsGet'' smart constructor.
+data InventoryItemsGet' = InventoryItemsGet'
     { _iigQuotaUser   :: !(Maybe Text)
     , _iigPrettyPrint :: !Bool
     , _iigUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data InventoryItemsGet = InventoryItemsGet
     , _iigProjectId   :: !Int64
     , _iigOauthToken  :: !(Maybe Text)
     , _iigFields      :: !(Maybe Text)
-    , _iigAlt         :: !Text
+    , _iigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data InventoryItemsGet = InventoryItemsGet
 -- * 'iigFields'
 --
 -- * 'iigAlt'
-inventoryItemsGet
+inventoryItemsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> Int64 -- ^ 'projectId'
-    -> InventoryItemsGet
-inventoryItemsGet pIigProfileId_ pIigId_ pIigProjectId_ =
-    InventoryItemsGet
+    -> InventoryItemsGet'
+inventoryItemsGet' pIigProfileId_ pIigId_ pIigProjectId_ =
+    InventoryItemsGet'
     { _iigQuotaUser = Nothing
     , _iigPrettyPrint = True
     , _iigUserIp = Nothing
@@ -109,7 +117,7 @@ inventoryItemsGet pIigProfileId_ pIigId_ pIigProjectId_ =
     , _iigProjectId = pIigProjectId_
     , _iigOauthToken = Nothing
     , _iigFields = Nothing
-    , _iigAlt = "json"
+    , _iigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,23 +171,23 @@ iigFields
   = lens _iigFields (\ s a -> s{_iigFields = a})
 
 -- | Data format for the response.
-iigAlt :: Lens' InventoryItemsGet' Text
+iigAlt :: Lens' InventoryItemsGet' Alt
 iigAlt = lens _iigAlt (\ s a -> s{_iigAlt = a})
 
 instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u InventoryItemsGet{..}
-          = go _iigQuotaUser _iigPrettyPrint _iigUserIp
+        requestWithRoute r u InventoryItemsGet'{..}
+          = go _iigQuotaUser (Just _iigPrettyPrint) _iigUserIp
               _iigProfileId
               _iigKey
               _iigId
               _iigProjectId
               _iigOauthToken
               _iigFields
-              _iigAlt
+              (Just _iigAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InventoryItemsGetAPI)
+                      (Proxy :: Proxy InventoryItemsGetResource)
                       r
                       u

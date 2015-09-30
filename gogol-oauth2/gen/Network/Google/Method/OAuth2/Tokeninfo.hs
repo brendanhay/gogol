@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @Oauth2Tokeninfo@.
-module OAuth2.Tokeninfo
+module Network.Google.Method.OAuth2.Tokeninfo
     (
     -- * REST Resource
-      TokeninfoAPI
+      TokeninfoMethod
 
     -- * Creating a Request
-    , tokeninfo
-    , Tokeninfo
+    , tokeninfo'
+    , Tokeninfo'
 
     -- * Request Lenses
     , tokQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @Oauth2Tokeninfo@ which the
--- 'Tokeninfo' request conforms to.
-type TokeninfoAPI =
+-- 'Tokeninfo'' request conforms to.
+type TokeninfoMethod =
      "oauth2" :>
        "v2" :>
          "tokeninfo" :>
-           QueryParam "access_token" Text :>
-             QueryParam "token_handle" Text :>
-               QueryParam "id_token" Text :> Post '[JSON] Tokeninfo
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "access_token" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "token_handle" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             QueryParam "id_token" Text :>
+                               Post '[JSON] Tokeninfo
 
 --
--- /See:/ 'tokeninfo' smart constructor.
-data Tokeninfo = Tokeninfo
+-- /See:/ 'tokeninfo'' smart constructor.
+data Tokeninfo' = Tokeninfo'
     { _tokQuotaUser   :: !(Maybe Text)
     , _tokPrettyPrint :: !Bool
     , _tokUserIp      :: !(Maybe Text)
@@ -65,7 +74,7 @@ data Tokeninfo = Tokeninfo
     , _tokOauthToken  :: !(Maybe Text)
     , _tokTokenHandle :: !(Maybe Text)
     , _tokFields      :: !(Maybe Text)
-    , _tokAlt         :: !Text
+    , _tokAlt         :: !Alt
     , _tokIdToken     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -92,10 +101,10 @@ data Tokeninfo = Tokeninfo
 -- * 'tokAlt'
 --
 -- * 'tokIdToken'
-tokeninfo
-    :: Tokeninfo
-tokeninfo =
-    Tokeninfo
+tokeninfo'
+    :: Tokeninfo'
+tokeninfo' =
+    Tokeninfo'
     { _tokQuotaUser = Nothing
     , _tokPrettyPrint = True
     , _tokUserIp = Nothing
@@ -104,7 +113,7 @@ tokeninfo =
     , _tokOauthToken = Nothing
     , _tokTokenHandle = Nothing
     , _tokFields = Nothing
-    , _tokAlt = "json"
+    , _tokAlt = JSON
     , _tokIdToken = Nothing
     }
 
@@ -155,7 +164,7 @@ tokFields
   = lens _tokFields (\ s a -> s{_tokFields = a})
 
 -- | Data format for the response.
-tokAlt :: Lens' Tokeninfo' Text
+tokAlt :: Lens' Tokeninfo' Alt
 tokAlt = lens _tokAlt (\ s a -> s{_tokAlt = a})
 
 tokIdToken :: Lens' Tokeninfo' (Maybe Text)
@@ -165,14 +174,15 @@ tokIdToken
 instance GoogleRequest Tokeninfo' where
         type Rs Tokeninfo' = Tokeninfo
         request = requestWithRoute defReq oAuth2URL
-        requestWithRoute r u Tokeninfo{..}
-          = go _tokQuotaUser _tokPrettyPrint _tokUserIp
+        requestWithRoute r u Tokeninfo'{..}
+          = go _tokQuotaUser (Just _tokPrettyPrint) _tokUserIp
               _tokAccessToken
               _tokKey
               _tokOauthToken
               _tokTokenHandle
               _tokFields
-              _tokAlt
+              (Just _tokAlt)
               _tokIdToken
           where go
-                  = clientWithRoute (Proxy :: Proxy TokeninfoAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TokeninfoMethod) r
+                      u

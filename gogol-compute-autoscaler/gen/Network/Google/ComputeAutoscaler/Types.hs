@@ -17,6 +17,13 @@ module Network.Google.ComputeAutoscaler.Types
     -- * Service URL
       computeAutoscalerURL
 
+    -- * OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
     -- * DeprecationStatus
     , DeprecationStatus
     , deprecationStatus
@@ -25,6 +32,12 @@ module Network.Google.ComputeAutoscaler.Types
     , dsReplacement
     , dsObsolete
     , dsDeprecated
+
+    -- * OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- * OperationList
     , OperationList
@@ -103,6 +116,14 @@ module Network.Google.ComputeAutoscaler.Types
     , zlSelfLink
     , zlId
 
+    -- * ZoneMaintenanceWindows
+    , ZoneMaintenanceWindows
+    , zoneMaintenanceWindows
+    , zmwBeginTime
+    , zmwName
+    , zmwEndTime
+    , zmwDescription
+
     -- * AutoscalingPolicy
     , AutoscalingPolicy
     , autoscalingPolicy
@@ -112,6 +133,11 @@ module Network.Google.ComputeAutoscaler.Types
     , apLoadBalancingUtilization
     , apMinNumReplicas
     , apCoolDownPeriodSec
+
+    -- * OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- * Autoscaler
     , Autoscaler
@@ -125,10 +151,20 @@ module Network.Google.ComputeAutoscaler.Types
     , aDescription
     , aTarget
 
+    -- * OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- * AutoscalingPolicyCPUUtilization
     , AutoscalingPolicyCPUUtilization
     , autoscalingPolicyCPUUtilization
     , apcuUtilizationTarget
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.ComputeAutoscaler.Types.Product
@@ -136,7 +172,7 @@ import           Network.Google.ComputeAutoscaler.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta2' of the Google Compute Engine Autoscaler API.
-computeAutoscalerURL :: BaseURL
+computeAutoscalerURL :: BaseUrl
 computeAutoscalerURL
   = BaseUrl Https
       "https://www.googleapis.com/autoscaler/v1beta2/"

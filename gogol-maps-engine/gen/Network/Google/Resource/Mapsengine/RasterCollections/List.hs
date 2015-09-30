@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all raster collections readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsList@.
-module Mapsengine.RasterCollections.List
+module Network.Google.Resource.Mapsengine.RasterCollections.List
     (
     -- * REST Resource
-      RasterCollectionsListAPI
+      RasterCollectionsListResource
 
     -- * Creating a Request
-    , rasterCollectionsList
-    , RasterCollectionsList
+    , rasterCollectionsList'
+    , RasterCollectionsList'
 
     -- * Request Lenses
     , rclCreatedAfter
@@ -55,37 +56,48 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsList@ which the
--- 'RasterCollectionsList' request conforms to.
-type RasterCollectionsListAPI =
+-- 'RasterCollectionsList'' request conforms to.
+type RasterCollectionsListResource =
      "rasterCollections" :>
        QueryParam "createdAfter" UTCTime :>
-         QueryParam "creatorEmail" Text :>
-           QueryParam "role" Text :>
-             QueryParam "bbox" Text :>
-               QueryParam "processingStatus" Text :>
-                 QueryParam "modifiedAfter" UTCTime :>
-                   QueryParam "modifiedBefore" UTCTime :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "projectId" Text :>
-                         QueryParam "search" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "tags" Text :>
-                               QueryParam "createdBefore" UTCTime :>
-                                 Get '[JSON] RasterCollectionsListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "creatorEmail" Text :>
+                 QueryParam "role" MapsengineRasterCollectionsListRole
+                   :>
+                   QueryParam "key" Text :>
+                     QueryParam "bbox" Text :>
+                       QueryParam "processingStatus"
+                         MapsengineRasterCollectionsListProcessingStatus
+                         :>
+                         QueryParam "modifiedAfter" UTCTime :>
+                           QueryParam "modifiedBefore" UTCTime :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "projectId" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "search" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "tags" Text :>
+                                         QueryParam "fields" Text :>
+                                           QueryParam "createdBefore" UTCTime :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON]
+                                                 RasterCollectionsListResponse
 
 -- | Return all raster collections readable by the current user.
 --
--- /See:/ 'rasterCollectionsList' smart constructor.
-data RasterCollectionsList = RasterCollectionsList
+-- /See:/ 'rasterCollectionsList'' smart constructor.
+data RasterCollectionsList' = RasterCollectionsList'
     { _rclCreatedAfter     :: !(Maybe UTCTime)
     , _rclQuotaUser        :: !(Maybe Text)
     , _rclPrettyPrint      :: !Bool
     , _rclUserIp           :: !(Maybe Text)
     , _rclCreatorEmail     :: !(Maybe Text)
-    , _rclRole             :: !(Maybe Text)
+    , _rclRole             :: !(Maybe MapsengineRasterCollectionsListRole)
     , _rclKey              :: !(Maybe Text)
     , _rclBbox             :: !(Maybe Text)
-    , _rclProcessingStatus :: !(Maybe Text)
+    , _rclProcessingStatus :: !(Maybe MapsengineRasterCollectionsListProcessingStatus)
     , _rclModifiedAfter    :: !(Maybe UTCTime)
     , _rclModifiedBefore   :: !(Maybe UTCTime)
     , _rclPageToken        :: !(Maybe Text)
@@ -96,7 +108,7 @@ data RasterCollectionsList = RasterCollectionsList
     , _rclTags             :: !(Maybe Text)
     , _rclFields           :: !(Maybe Text)
     , _rclCreatedBefore    :: !(Maybe UTCTime)
-    , _rclAlt              :: !Text
+    , _rclAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsList'' with the minimum fields required to make a request.
@@ -142,10 +154,10 @@ data RasterCollectionsList = RasterCollectionsList
 -- * 'rclCreatedBefore'
 --
 -- * 'rclAlt'
-rasterCollectionsList
-    :: RasterCollectionsList
-rasterCollectionsList =
-    RasterCollectionsList
+rasterCollectionsList'
+    :: RasterCollectionsList'
+rasterCollectionsList' =
+    RasterCollectionsList'
     { _rclCreatedAfter = Nothing
     , _rclQuotaUser = Nothing
     , _rclPrettyPrint = True
@@ -165,7 +177,7 @@ rasterCollectionsList =
     , _rclTags = Nothing
     , _rclFields = Nothing
     , _rclCreatedBefore = Nothing
-    , _rclAlt = "json"
+    , _rclAlt = JSON
     }
 
 -- | An RFC 3339 formatted date-time value (e.g. 1970-01-01T00:00:00Z).
@@ -203,7 +215,7 @@ rclCreatorEmail
 
 -- | The role parameter indicates that the response should only contain
 -- assets where the current user has the specified level of access.
-rclRole :: Lens' RasterCollectionsList' (Maybe Text)
+rclRole :: Lens' RasterCollectionsList' (Maybe MapsengineRasterCollectionsListRole)
 rclRole = lens _rclRole (\ s a -> s{_rclRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -217,7 +229,7 @@ rclKey = lens _rclKey (\ s a -> s{_rclKey = a})
 rclBbox :: Lens' RasterCollectionsList' (Maybe Text)
 rclBbox = lens _rclBbox (\ s a -> s{_rclBbox = a})
 
-rclProcessingStatus :: Lens' RasterCollectionsList' (Maybe Text)
+rclProcessingStatus :: Lens' RasterCollectionsList' (Maybe MapsengineRasterCollectionsListProcessingStatus)
 rclProcessingStatus
   = lens _rclProcessingStatus
       (\ s a -> s{_rclProcessingStatus = a})
@@ -288,15 +300,16 @@ rclCreatedBefore
       (\ s a -> s{_rclCreatedBefore = a})
 
 -- | Data format for the response.
-rclAlt :: Lens' RasterCollectionsList' Text
+rclAlt :: Lens' RasterCollectionsList' Alt
 rclAlt = lens _rclAlt (\ s a -> s{_rclAlt = a})
 
 instance GoogleRequest RasterCollectionsList' where
         type Rs RasterCollectionsList' =
              RasterCollectionsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsList{..}
-          = go _rclCreatedAfter _rclQuotaUser _rclPrettyPrint
+        requestWithRoute r u RasterCollectionsList'{..}
+          = go _rclCreatedAfter _rclQuotaUser
+              (Just _rclPrettyPrint)
               _rclUserIp
               _rclCreatorEmail
               _rclRole
@@ -313,9 +326,9 @@ instance GoogleRequest RasterCollectionsList' where
               _rclTags
               _rclFields
               _rclCreatedBefore
-              _rclAlt
+              (Just _rclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsListAPI)
+                      (Proxy :: Proxy RasterCollectionsListResource)
                       r
                       u

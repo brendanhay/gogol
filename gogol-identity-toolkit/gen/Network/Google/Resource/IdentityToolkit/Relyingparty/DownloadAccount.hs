@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,129 +20,137 @@
 -- | Batch download user accounts.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyDownloadAccount@.
-module IdentityToolkit.Relyingparty.DownloadAccount
+module Network.Google.Resource.IdentityToolkit.Relyingparty.DownloadAccount
     (
     -- * REST Resource
-      RelyingpartyDownloadAccountAPI
+      RelyingpartyDownloadAccountResource
 
     -- * Creating a Request
-    , relyingpartyDownloadAccount
-    , RelyingpartyDownloadAccount
+    , relyingpartyDownloadAccount'
+    , RelyingpartyDownloadAccount'
 
     -- * Request Lenses
-    , relQuotaUser
-    , relPrettyPrint
-    , relUserIp
-    , relKey
-    , relOauthToken
-    , relFields
-    , relAlt
+    , rdaQuotaUser
+    , rdaPrettyPrint
+    , rdaUserIp
+    , rdaKey
+    , rdaOauthToken
+    , rdaFields
+    , rdaAlt
     ) where
 
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyDownloadAccount@ which the
--- 'RelyingpartyDownloadAccount' request conforms to.
-type RelyingpartyDownloadAccountAPI =
+-- 'RelyingpartyDownloadAccount'' request conforms to.
+type RelyingpartyDownloadAccountResource =
      "downloadAccount" :>
-       Post '[JSON] DownloadAccountResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] DownloadAccountResponse
 
 -- | Batch download user accounts.
 --
--- /See:/ 'relyingpartyDownloadAccount' smart constructor.
-data RelyingpartyDownloadAccount = RelyingpartyDownloadAccount
-    { _relQuotaUser   :: !(Maybe Text)
-    , _relPrettyPrint :: !Bool
-    , _relUserIp      :: !(Maybe Text)
-    , _relKey         :: !(Maybe Text)
-    , _relOauthToken  :: !(Maybe Text)
-    , _relFields      :: !(Maybe Text)
-    , _relAlt         :: !Text
+-- /See:/ 'relyingpartyDownloadAccount'' smart constructor.
+data RelyingpartyDownloadAccount' = RelyingpartyDownloadAccount'
+    { _rdaQuotaUser   :: !(Maybe Text)
+    , _rdaPrettyPrint :: !Bool
+    , _rdaUserIp      :: !(Maybe Text)
+    , _rdaKey         :: !(Maybe Text)
+    , _rdaOauthToken  :: !(Maybe Text)
+    , _rdaFields      :: !(Maybe Text)
+    , _rdaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyDownloadAccount'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'relQuotaUser'
+-- * 'rdaQuotaUser'
 --
--- * 'relPrettyPrint'
+-- * 'rdaPrettyPrint'
 --
--- * 'relUserIp'
+-- * 'rdaUserIp'
 --
--- * 'relKey'
+-- * 'rdaKey'
 --
--- * 'relOauthToken'
+-- * 'rdaOauthToken'
 --
--- * 'relFields'
+-- * 'rdaFields'
 --
--- * 'relAlt'
-relyingpartyDownloadAccount
-    :: RelyingpartyDownloadAccount
-relyingpartyDownloadAccount =
-    RelyingpartyDownloadAccount
-    { _relQuotaUser = Nothing
-    , _relPrettyPrint = True
-    , _relUserIp = Nothing
-    , _relKey = Nothing
-    , _relOauthToken = Nothing
-    , _relFields = Nothing
-    , _relAlt = "json"
+-- * 'rdaAlt'
+relyingpartyDownloadAccount'
+    :: RelyingpartyDownloadAccount'
+relyingpartyDownloadAccount' =
+    RelyingpartyDownloadAccount'
+    { _rdaQuotaUser = Nothing
+    , _rdaPrettyPrint = True
+    , _rdaUserIp = Nothing
+    , _rdaKey = Nothing
+    , _rdaOauthToken = Nothing
+    , _rdaFields = Nothing
+    , _rdaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-relQuotaUser :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
-relQuotaUser
-  = lens _relQuotaUser (\ s a -> s{_relQuotaUser = a})
+rdaQuotaUser :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
+rdaQuotaUser
+  = lens _rdaQuotaUser (\ s a -> s{_rdaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-relPrettyPrint :: Lens' RelyingpartyDownloadAccount' Bool
-relPrettyPrint
-  = lens _relPrettyPrint
-      (\ s a -> s{_relPrettyPrint = a})
+rdaPrettyPrint :: Lens' RelyingpartyDownloadAccount' Bool
+rdaPrettyPrint
+  = lens _rdaPrettyPrint
+      (\ s a -> s{_rdaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-relUserIp :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
-relUserIp
-  = lens _relUserIp (\ s a -> s{_relUserIp = a})
+rdaUserIp :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
+rdaUserIp
+  = lens _rdaUserIp (\ s a -> s{_rdaUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-relKey :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
-relKey = lens _relKey (\ s a -> s{_relKey = a})
+rdaKey :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
+rdaKey = lens _rdaKey (\ s a -> s{_rdaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-relOauthToken :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
-relOauthToken
-  = lens _relOauthToken
-      (\ s a -> s{_relOauthToken = a})
+rdaOauthToken :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
+rdaOauthToken
+  = lens _rdaOauthToken
+      (\ s a -> s{_rdaOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-relFields :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
-relFields
-  = lens _relFields (\ s a -> s{_relFields = a})
+rdaFields :: Lens' RelyingpartyDownloadAccount' (Maybe Text)
+rdaFields
+  = lens _rdaFields (\ s a -> s{_rdaFields = a})
 
 -- | Data format for the response.
-relAlt :: Lens' RelyingpartyDownloadAccount' Text
-relAlt = lens _relAlt (\ s a -> s{_relAlt = a})
+rdaAlt :: Lens' RelyingpartyDownloadAccount' Alt
+rdaAlt = lens _rdaAlt (\ s a -> s{_rdaAlt = a})
 
 instance GoogleRequest RelyingpartyDownloadAccount'
          where
         type Rs RelyingpartyDownloadAccount' =
              DownloadAccountResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyDownloadAccount{..}
-          = go _relQuotaUser _relPrettyPrint _relUserIp _relKey
-              _relOauthToken
-              _relFields
-              _relAlt
+        requestWithRoute r u RelyingpartyDownloadAccount'{..}
+          = go _rdaQuotaUser (Just _rdaPrettyPrint) _rdaUserIp
+              _rdaKey
+              _rdaOauthToken
+              _rdaFields
+              (Just _rdaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyDownloadAccountAPI)
+                      (Proxy :: Proxy RelyingpartyDownloadAccountResource)
                       r
                       u

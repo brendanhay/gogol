@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a notification.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsGet@.
-module Directory.Notifications.Get
+module Network.Google.Resource.Directory.Notifications.Get
     (
     -- * REST Resource
-      NotificationsGetAPI
+      NotificationsGetResource
 
     -- * Creating a Request
-    , notificationsGet
-    , NotificationsGet
+    , notificationsGet'
+    , NotificationsGet'
 
     -- * Request Lenses
     , ngQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsGet@ which the
--- 'NotificationsGet' request conforms to.
-type NotificationsGetAPI =
+-- 'NotificationsGet'' request conforms to.
+type NotificationsGetResource =
      "customer" :>
        Capture "customer" Text :>
          "notifications" :>
            Capture "notificationId" Text :>
-             Get '[JSON] Notification
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Notification
 
 -- | Retrieves a notification.
 --
--- /See:/ 'notificationsGet' smart constructor.
-data NotificationsGet = NotificationsGet
+-- /See:/ 'notificationsGet'' smart constructor.
+data NotificationsGet' = NotificationsGet'
     { _ngQuotaUser      :: !(Maybe Text)
     , _ngPrettyPrint    :: !Bool
     , _ngUserIp         :: !(Maybe Text)
@@ -64,7 +71,7 @@ data NotificationsGet = NotificationsGet
     , _ngNotificationId :: !Text
     , _ngOauthToken     :: !(Maybe Text)
     , _ngFields         :: !(Maybe Text)
-    , _ngAlt            :: !Text
+    , _ngAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data NotificationsGet = NotificationsGet
 -- * 'ngFields'
 --
 -- * 'ngAlt'
-notificationsGet
+notificationsGet'
     :: Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
-    -> NotificationsGet
-notificationsGet pNgCustomer_ pNgNotificationId_ =
-    NotificationsGet
+    -> NotificationsGet'
+notificationsGet' pNgCustomer_ pNgNotificationId_ =
+    NotificationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
     , _ngUserIp = Nothing
@@ -102,7 +109,7 @@ notificationsGet pNgCustomer_ pNgNotificationId_ =
     , _ngNotificationId = pNgNotificationId_
     , _ngOauthToken = Nothing
     , _ngFields = Nothing
-    , _ngAlt = "json"
+    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +158,22 @@ ngFields :: Lens' NotificationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
 -- | Data format for the response.
-ngAlt :: Lens' NotificationsGet' Text
+ngAlt :: Lens' NotificationsGet' Alt
 ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
 
 instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u NotificationsGet{..}
-          = go _ngQuotaUser _ngPrettyPrint _ngUserIp
+        requestWithRoute r u NotificationsGet'{..}
+          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIp
               _ngCustomer
               _ngKey
               _ngNotificationId
               _ngOauthToken
               _ngFields
-              _ngAlt
+              (Just _ngAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy NotificationsGetAPI)
+                      (Proxy :: Proxy NotificationsGetResource)
                       r
                       u

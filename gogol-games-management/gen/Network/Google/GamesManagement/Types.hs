@@ -17,6 +17,12 @@ module Network.Google.GamesManagement.Types
     -- * Service URL
       gamesManagementURL
 
+    -- * PlayerName
+    , PlayerName
+    , playerName
+    , pnGivenName
+    , pnFamilyName
+
     -- * GamesPlayerExperienceInfoResource
     , GamesPlayerExperienceInfoResource
     , gamesPlayerExperienceInfoResource
@@ -114,6 +120,9 @@ module Network.Google.GamesManagement.Types
     , arrKind
     , arrCurrentState
     , arrDefinitionId
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.GamesManagement.Types.Product
@@ -121,7 +130,7 @@ import           Network.Google.GamesManagement.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1management' of the Google Play Game Services Management API.
-gamesManagementURL :: BaseURL
+gamesManagementURL :: BaseUrl
 gamesManagementURL
   = BaseUrl Https
       "https://www.googleapis.com/games/v1management/"

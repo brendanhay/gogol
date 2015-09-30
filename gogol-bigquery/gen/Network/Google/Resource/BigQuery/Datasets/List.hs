@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- granted the READER dataset role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsList@.
-module BigQuery.Datasets.List
+module Network.Google.Resource.BigQuery.Datasets.List
     (
     -- * REST Resource
-      DatasetsListAPI
+      DatasetsListResource
 
     -- * Creating a Request
-    , datasetsList
-    , DatasetsList
+    , datasetsList'
+    , DatasetsList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryDatasetsList@ which the
--- 'DatasetsList' request conforms to.
-type DatasetsListAPI =
+-- 'DatasetsList'' request conforms to.
+type DatasetsListResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
-           QueryParam "all" Bool :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] DatasetList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "all" Bool :>
+                   QueryParam "key" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] DatasetList
 
 -- | Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
 --
--- /See:/ 'datasetsList' smart constructor.
-data DatasetsList = DatasetsList
+-- /See:/ 'datasetsList'' smart constructor.
+data DatasetsList' = DatasetsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlUserIp      :: !(Maybe Text)
@@ -72,7 +79,7 @@ data DatasetsList = DatasetsList
     , _dlOauthToken  :: !(Maybe Text)
     , _dlMaxResults  :: !(Maybe Word32)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data DatasetsList = DatasetsList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-datasetsList
+datasetsList'
     :: Text -- ^ 'projectId'
-    -> DatasetsList
-datasetsList pDlProjectId_ =
-    DatasetsList
+    -> DatasetsList'
+datasetsList' pDlProjectId_ =
+    DatasetsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlUserIp = Nothing
@@ -115,7 +122,7 @@ datasetsList pDlProjectId_ =
     , _dlOauthToken = Nothing
     , _dlMaxResults = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,21 +179,24 @@ dlFields :: Lens' DatasetsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DatasetsList' Text
+dlAlt :: Lens' DatasetsList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = DatasetList
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlUserIp _dlAll
+        requestWithRoute r u DatasetsList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+              _dlAll
               _dlKey
               _dlPageToken
               _dlProjectId
               _dlOauthToken
               _dlMaxResults
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsListResource)
+                      r
                       u

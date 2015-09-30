@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the specified operation resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGlobalAccountsOperationsGet@.
-module Clouduseraccounts.GlobalAccountsOperations.Get
+module Network.Google.Resource.Clouduseraccounts.GlobalAccountsOperations.Get
     (
     -- * REST Resource
-      GlobalAccountsOperationsGetAPI
+      GlobalAccountsOperationsGetResource
 
     -- * Creating a Request
-    , globalAccountsOperationsGet
-    , GlobalAccountsOperationsGet
+    , globalAccountsOperationsGet'
+    , GlobalAccountsOperationsGet'
 
     -- * Request Lenses
     , gaogQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGlobalAccountsOperationsGet@ which the
--- 'GlobalAccountsOperationsGet' request conforms to.
-type GlobalAccountsOperationsGetAPI =
+-- 'GlobalAccountsOperationsGet'' request conforms to.
+type GlobalAccountsOperationsGetResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           Capture "operation" Text :> Get '[JSON] Operation
+           Capture "operation" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Retrieves the specified operation resource.
 --
--- /See:/ 'globalAccountsOperationsGet' smart constructor.
-data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
+-- /See:/ 'globalAccountsOperationsGet'' smart constructor.
+data GlobalAccountsOperationsGet' = GlobalAccountsOperationsGet'
     { _gaogQuotaUser   :: !(Maybe Text)
     , _gaogPrettyPrint :: !Bool
     , _gaogProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
     , _gaogKey         :: !(Maybe Text)
     , _gaogOauthToken  :: !(Maybe Text)
     , _gaogFields      :: !(Maybe Text)
-    , _gaogAlt         :: !Text
+    , _gaogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAccountsOperationsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
 -- * 'gaogFields'
 --
 -- * 'gaogAlt'
-globalAccountsOperationsGet
+globalAccountsOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
-    -> GlobalAccountsOperationsGet
-globalAccountsOperationsGet pGaogProject_ pGaogOperation_ =
-    GlobalAccountsOperationsGet
+    -> GlobalAccountsOperationsGet'
+globalAccountsOperationsGet' pGaogProject_ pGaogOperation_ =
+    GlobalAccountsOperationsGet'
     { _gaogQuotaUser = Nothing
     , _gaogPrettyPrint = True
     , _gaogProject = pGaogProject_
@@ -101,7 +109,7 @@ globalAccountsOperationsGet pGaogProject_ pGaogOperation_ =
     , _gaogKey = Nothing
     , _gaogOauthToken = Nothing
     , _gaogFields = Nothing
-    , _gaogAlt = "json"
+    , _gaogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ gaogFields
   = lens _gaogFields (\ s a -> s{_gaogFields = a})
 
 -- | Data format for the response.
-gaogAlt :: Lens' GlobalAccountsOperationsGet' Text
+gaogAlt :: Lens' GlobalAccountsOperationsGet' Alt
 gaogAlt = lens _gaogAlt (\ s a -> s{_gaogAlt = a})
 
 instance GoogleRequest GlobalAccountsOperationsGet'
@@ -161,16 +169,17 @@ instance GoogleRequest GlobalAccountsOperationsGet'
         type Rs GlobalAccountsOperationsGet' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GlobalAccountsOperationsGet{..}
-          = go _gaogQuotaUser _gaogPrettyPrint _gaogProject
+        requestWithRoute r u GlobalAccountsOperationsGet'{..}
+          = go _gaogQuotaUser (Just _gaogPrettyPrint)
+              _gaogProject
               _gaogOperation
               _gaogUserIp
               _gaogKey
               _gaogOauthToken
               _gaogFields
-              _gaogAlt
+              (Just _gaogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAccountsOperationsGetAPI)
+                      (Proxy :: Proxy GlobalAccountsOperationsGetResource)
                       r
                       u

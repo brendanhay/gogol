@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- remaining well formed annotations will be created normally.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationsBatchCreate@.
-module Genomics.Annotations.BatchCreate
+module Network.Google.Resource.Genomics.Annotations.BatchCreate
     (
     -- * REST Resource
-      AnnotationsBatchCreateAPI
+      AnnotationsBatchCreateResource
 
     -- * Creating a Request
-    , annotationsBatchCreate
-    , AnnotationsBatchCreate
+    , annotationsBatchCreate'
+    , AnnotationsBatchCreate'
 
     -- * Request Lenses
     , abcQuotaUser
@@ -49,10 +50,17 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsBatchCreate@ which the
--- 'AnnotationsBatchCreate' request conforms to.
-type AnnotationsBatchCreateAPI =
+-- 'AnnotationsBatchCreate'' request conforms to.
+type AnnotationsBatchCreateResource =
      "annotations:batchCreate" :>
-       Post '[JSON] BatchAnnotationsResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] BatchAnnotationsResponse
 
 -- | Creates one or more new annotations atomically. All annotations must
 -- belong to the same annotation set. Caller must have WRITE permission for
@@ -63,15 +71,15 @@ type AnnotationsBatchCreateAPI =
 -- will be isolated to the corresponding batch entry in the response; the
 -- remaining well formed annotations will be created normally.
 --
--- /See:/ 'annotationsBatchCreate' smart constructor.
-data AnnotationsBatchCreate = AnnotationsBatchCreate
+-- /See:/ 'annotationsBatchCreate'' smart constructor.
+data AnnotationsBatchCreate' = AnnotationsBatchCreate'
     { _abcQuotaUser   :: !(Maybe Text)
     , _abcPrettyPrint :: !Bool
     , _abcUserIp      :: !(Maybe Text)
     , _abcKey         :: !(Maybe Text)
     , _abcOauthToken  :: !(Maybe Text)
     , _abcFields      :: !(Maybe Text)
-    , _abcAlt         :: !Text
+    , _abcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsBatchCreate'' with the minimum fields required to make a request.
@@ -91,17 +99,17 @@ data AnnotationsBatchCreate = AnnotationsBatchCreate
 -- * 'abcFields'
 --
 -- * 'abcAlt'
-annotationsBatchCreate
-    :: AnnotationsBatchCreate
-annotationsBatchCreate =
-    AnnotationsBatchCreate
+annotationsBatchCreate'
+    :: AnnotationsBatchCreate'
+annotationsBatchCreate' =
+    AnnotationsBatchCreate'
     { _abcQuotaUser = Nothing
     , _abcPrettyPrint = True
     , _abcUserIp = Nothing
     , _abcKey = Nothing
     , _abcOauthToken = Nothing
     , _abcFields = Nothing
-    , _abcAlt = "json"
+    , _abcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,20 +149,21 @@ abcFields
   = lens _abcFields (\ s a -> s{_abcFields = a})
 
 -- | Data format for the response.
-abcAlt :: Lens' AnnotationsBatchCreate' Text
+abcAlt :: Lens' AnnotationsBatchCreate' Alt
 abcAlt = lens _abcAlt (\ s a -> s{_abcAlt = a})
 
 instance GoogleRequest AnnotationsBatchCreate' where
         type Rs AnnotationsBatchCreate' =
              BatchAnnotationsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsBatchCreate{..}
-          = go _abcQuotaUser _abcPrettyPrint _abcUserIp _abcKey
+        requestWithRoute r u AnnotationsBatchCreate'{..}
+          = go _abcQuotaUser (Just _abcPrettyPrint) _abcUserIp
+              _abcKey
               _abcOauthToken
               _abcFields
-              _abcAlt
+              (Just _abcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AnnotationsBatchCreateAPI)
+                      (Proxy :: Proxy AnnotationsBatchCreateResource)
                       r
                       u

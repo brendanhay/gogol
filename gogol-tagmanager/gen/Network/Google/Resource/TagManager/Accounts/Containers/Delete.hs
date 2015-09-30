@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersDelete@.
-module TagManager.Accounts.Containers.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     (
     -- * REST Resource
-      AccountsContainersDeleteAPI
+      AccountsContainersDeleteResource
 
     -- * Creating a Request
-    , accountsContainersDelete
-    , AccountsContainersDelete
+    , accountsContainersDelete'
+    , AccountsContainersDelete'
 
     -- * Request Lenses
     , acdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersDelete@ which the
--- 'AccountsContainersDelete' request conforms to.
-type AccountsContainersDeleteAPI =
+-- 'AccountsContainersDelete'' request conforms to.
+type AccountsContainersDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
-           Capture "containerId" Text :> Delete '[JSON] ()
+           Capture "containerId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a Container.
 --
--- /See:/ 'accountsContainersDelete' smart constructor.
-data AccountsContainersDelete = AccountsContainersDelete
+-- /See:/ 'accountsContainersDelete'' smart constructor.
+data AccountsContainersDelete' = AccountsContainersDelete'
     { _acdQuotaUser   :: !(Maybe Text)
     , _acdPrettyPrint :: !Bool
     , _acdContainerId :: !Text
@@ -63,7 +71,7 @@ data AccountsContainersDelete = AccountsContainersDelete
     , _acdKey         :: !(Maybe Text)
     , _acdOauthToken  :: !(Maybe Text)
     , _acdFields      :: !(Maybe Text)
-    , _acdAlt         :: !Text
+    , _acdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AccountsContainersDelete = AccountsContainersDelete
 -- * 'acdFields'
 --
 -- * 'acdAlt'
-accountsContainersDelete
+accountsContainersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersDelete
-accountsContainersDelete pAcdContainerId_ pAcdAccountId_ =
-    AccountsContainersDelete
+    -> AccountsContainersDelete'
+accountsContainersDelete' pAcdContainerId_ pAcdAccountId_ =
+    AccountsContainersDelete'
     { _acdQuotaUser = Nothing
     , _acdPrettyPrint = True
     , _acdContainerId = pAcdContainerId_
@@ -101,7 +109,7 @@ accountsContainersDelete pAcdContainerId_ pAcdAccountId_ =
     , _acdKey = Nothing
     , _acdOauthToken = Nothing
     , _acdFields = Nothing
-    , _acdAlt = "json"
+    , _acdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +160,24 @@ acdFields
   = lens _acdFields (\ s a -> s{_acdFields = a})
 
 -- | Data format for the response.
-acdAlt :: Lens' AccountsContainersDelete' Text
+acdAlt :: Lens' AccountsContainersDelete' Alt
 acdAlt = lens _acdAlt (\ s a -> s{_acdAlt = a})
 
 instance GoogleRequest AccountsContainersDelete'
          where
         type Rs AccountsContainersDelete' = ()
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersDelete{..}
-          = go _acdQuotaUser _acdPrettyPrint _acdContainerId
+        requestWithRoute r u AccountsContainersDelete'{..}
+          = go _acdQuotaUser (Just _acdPrettyPrint)
+              _acdContainerId
               _acdUserIp
               _acdAccountId
               _acdKey
               _acdOauthToken
               _acdFields
-              _acdAlt
+              (Just _acdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersDeleteAPI)
+                      (Proxy :: Proxy AccountsContainersDeleteResource)
                       r
                       u

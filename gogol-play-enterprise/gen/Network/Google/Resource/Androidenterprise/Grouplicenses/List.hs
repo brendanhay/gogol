@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- license.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseGrouplicensesList@.
-module Androidenterprise.Grouplicenses.List
+module Network.Google.Resource.Androidenterprise.Grouplicenses.List
     (
     -- * REST Resource
-      GrouplicensesListAPI
+      GrouplicensesListResource
 
     -- * Creating a Request
-    , grouplicensesList
-    , GrouplicensesList
+    , grouplicensesList'
+    , GrouplicensesList'
 
     -- * Request Lenses
     , glQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseGrouplicensesList@ which the
--- 'GrouplicensesList' request conforms to.
-type GrouplicensesListAPI =
+-- 'GrouplicensesList'' request conforms to.
+type GrouplicensesListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "groupLicenses" :>
-           Get '[JSON] GroupLicensesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] GroupLicensesListResponse
 
 -- | Retrieves IDs of all products for which the enterprise has a group
 -- license.
 --
--- /See:/ 'grouplicensesList' smart constructor.
-data GrouplicensesList = GrouplicensesList
+-- /See:/ 'grouplicensesList'' smart constructor.
+data GrouplicensesList' = GrouplicensesList'
     { _glQuotaUser    :: !(Maybe Text)
     , _glPrettyPrint  :: !Bool
     , _glEnterpriseId :: !Text
@@ -63,7 +71,7 @@ data GrouplicensesList = GrouplicensesList
     , _glKey          :: !(Maybe Text)
     , _glOauthToken   :: !(Maybe Text)
     , _glFields       :: !(Maybe Text)
-    , _glAlt          :: !Text
+    , _glAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GrouplicensesList'' with the minimum fields required to make a request.
@@ -85,11 +93,11 @@ data GrouplicensesList = GrouplicensesList
 -- * 'glFields'
 --
 -- * 'glAlt'
-grouplicensesList
+grouplicensesList'
     :: Text -- ^ 'enterpriseId'
-    -> GrouplicensesList
-grouplicensesList pGlEnterpriseId_ =
-    GrouplicensesList
+    -> GrouplicensesList'
+grouplicensesList' pGlEnterpriseId_ =
+    GrouplicensesList'
     { _glQuotaUser = Nothing
     , _glPrettyPrint = True
     , _glEnterpriseId = pGlEnterpriseId_
@@ -97,7 +105,7 @@ grouplicensesList pGlEnterpriseId_ =
     , _glKey = Nothing
     , _glOauthToken = Nothing
     , _glFields = Nothing
-    , _glAlt = "json"
+    , _glAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,22 +148,23 @@ glFields :: Lens' GrouplicensesList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
 -- | Data format for the response.
-glAlt :: Lens' GrouplicensesList' Text
+glAlt :: Lens' GrouplicensesList' Alt
 glAlt = lens _glAlt (\ s a -> s{_glAlt = a})
 
 instance GoogleRequest GrouplicensesList' where
         type Rs GrouplicensesList' =
              GroupLicensesListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u GrouplicensesList{..}
-          = go _glQuotaUser _glPrettyPrint _glEnterpriseId
+        requestWithRoute r u GrouplicensesList'{..}
+          = go _glQuotaUser (Just _glPrettyPrint)
+              _glEnterpriseId
               _glUserIp
               _glKey
               _glOauthToken
               _glFields
-              _glAlt
+              (Just _glAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GrouplicensesListAPI)
+                      (Proxy :: Proxy GrouplicensesListResource)
                       r
                       u

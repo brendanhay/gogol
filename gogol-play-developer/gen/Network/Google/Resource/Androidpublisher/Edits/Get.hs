@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsGet@.
-module Androidpublisher.Edits.Get
+module Network.Google.Resource.Androidpublisher.Edits.Get
     (
     -- * REST Resource
-      EditsGetAPI
+      EditsGetResource
 
     -- * Creating a Request
-    , editsGet
-    , EditsGet
+    , editsGet'
+    , EditsGet'
 
     -- * Request Lenses
     , egQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsGet@ which the
--- 'EditsGet' request conforms to.
-type EditsGetAPI =
+-- 'EditsGet'' request conforms to.
+type EditsGetResource =
      Capture "packageName" Text :>
        "edits" :>
-         Capture "editId" Text :> Get '[JSON] AppEdit
+         Capture "editId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] AppEdit
 
 -- | Returns information about the edit specified. Calls will fail if the
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
--- /See:/ 'editsGet' smart constructor.
-data EditsGet = EditsGet
+-- /See:/ 'editsGet'' smart constructor.
+data EditsGet' = EditsGet'
     { _egQuotaUser   :: !(Maybe Text)
     , _egPrettyPrint :: !Bool
     , _egPackageName :: !Text
@@ -64,7 +72,7 @@ data EditsGet = EditsGet
     , _egOauthToken  :: !(Maybe Text)
     , _egEditId      :: !Text
     , _egFields      :: !(Maybe Text)
-    , _egAlt         :: !Text
+    , _egAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data EditsGet = EditsGet
 -- * 'egFields'
 --
 -- * 'egAlt'
-editsGet
+editsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsGet
-editsGet pEgPackageName_ pEgEditId_ =
-    EditsGet
+    -> EditsGet'
+editsGet' pEgPackageName_ pEgEditId_ =
+    EditsGet'
     { _egQuotaUser = Nothing
     , _egPrettyPrint = True
     , _egPackageName = pEgPackageName_
@@ -102,7 +110,7 @@ editsGet pEgPackageName_ pEgEditId_ =
     , _egOauthToken = Nothing
     , _egEditId = pEgEditId_
     , _egFields = Nothing
-    , _egAlt = "json"
+    , _egAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,19 +158,21 @@ egFields :: Lens' EditsGet' (Maybe Text)
 egFields = lens _egFields (\ s a -> s{_egFields = a})
 
 -- | Data format for the response.
-egAlt :: Lens' EditsGet' Text
+egAlt :: Lens' EditsGet' Alt
 egAlt = lens _egAlt (\ s a -> s{_egAlt = a})
 
 instance GoogleRequest EditsGet' where
         type Rs EditsGet' = AppEdit
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsGet{..}
-          = go _egQuotaUser _egPrettyPrint _egPackageName
+        requestWithRoute r u EditsGet'{..}
+          = go _egQuotaUser (Just _egPrettyPrint)
+              _egPackageName
               _egUserIp
               _egKey
               _egOauthToken
               _egEditId
               _egFields
-              _egAlt
+              (Just _egAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy EditsGetResource) r
+                      u

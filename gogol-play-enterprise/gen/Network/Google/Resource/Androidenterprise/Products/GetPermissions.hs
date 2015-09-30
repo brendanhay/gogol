@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the Android app permissions required by this app.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsGetPermissions@.
-module Androidenterprise.Products.GetPermissions
+module Network.Google.Resource.Androidenterprise.Products.GetPermissions
     (
     -- * REST Resource
-      ProductsGetPermissionsAPI
+      ProductsGetPermissionsResource
 
     -- * Creating a Request
-    , productsGetPermissions
-    , ProductsGetPermissions
+    , productsGetPermissions'
+    , ProductsGetPermissions'
 
     -- * Request Lenses
     , pgpQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsGetPermissions@ which the
--- 'ProductsGetPermissions' request conforms to.
-type ProductsGetPermissionsAPI =
+-- 'ProductsGetPermissions'' request conforms to.
+type ProductsGetPermissionsResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
-             "permissions" :> Get '[JSON] ProductPermissions
+             "permissions" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ProductPermissions
 
 -- | Retrieves the Android app permissions required by this app.
 --
--- /See:/ 'productsGetPermissions' smart constructor.
-data ProductsGetPermissions = ProductsGetPermissions
+-- /See:/ 'productsGetPermissions'' smart constructor.
+data ProductsGetPermissions' = ProductsGetPermissions'
     { _pgpQuotaUser    :: !(Maybe Text)
     , _pgpPrettyPrint  :: !Bool
     , _pgpEnterpriseId :: !Text
@@ -64,7 +73,7 @@ data ProductsGetPermissions = ProductsGetPermissions
     , _pgpOauthToken   :: !(Maybe Text)
     , _pgpProductId    :: !Text
     , _pgpFields       :: !(Maybe Text)
-    , _pgpAlt          :: !Text
+    , _pgpAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGetPermissions'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data ProductsGetPermissions = ProductsGetPermissions
 -- * 'pgpFields'
 --
 -- * 'pgpAlt'
-productsGetPermissions
+productsGetPermissions'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsGetPermissions
-productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
-    ProductsGetPermissions
+    -> ProductsGetPermissions'
+productsGetPermissions' pPgpEnterpriseId_ pPgpProductId_ =
+    ProductsGetPermissions'
     { _pgpQuotaUser = Nothing
     , _pgpPrettyPrint = True
     , _pgpEnterpriseId = pPgpEnterpriseId_
@@ -102,7 +111,7 @@ productsGetPermissions pPgpEnterpriseId_ pPgpProductId_ =
     , _pgpOauthToken = Nothing
     , _pgpProductId = pPgpProductId_
     , _pgpFields = Nothing
-    , _pgpAlt = "json"
+    , _pgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +162,23 @@ pgpFields
   = lens _pgpFields (\ s a -> s{_pgpFields = a})
 
 -- | Data format for the response.
-pgpAlt :: Lens' ProductsGetPermissions' Text
+pgpAlt :: Lens' ProductsGetPermissions' Alt
 pgpAlt = lens _pgpAlt (\ s a -> s{_pgpAlt = a})
 
 instance GoogleRequest ProductsGetPermissions' where
         type Rs ProductsGetPermissions' = ProductPermissions
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u ProductsGetPermissions{..}
-          = go _pgpQuotaUser _pgpPrettyPrint _pgpEnterpriseId
+        requestWithRoute r u ProductsGetPermissions'{..}
+          = go _pgpQuotaUser (Just _pgpPrettyPrint)
+              _pgpEnterpriseId
               _pgpUserIp
               _pgpKey
               _pgpOauthToken
               _pgpProductId
               _pgpFields
-              _pgpAlt
+              (Just _pgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProductsGetPermissionsAPI)
+                      (Proxy :: Proxy ProductsGetPermissionsResource)
                       r
                       u

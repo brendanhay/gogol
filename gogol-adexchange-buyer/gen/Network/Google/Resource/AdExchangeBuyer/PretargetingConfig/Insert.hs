@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new pretargeting configuration.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPretargetingConfigInsert@.
-module AdExchangeBuyer.PretargetingConfig.Insert
+module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
     (
     -- * REST Resource
-      PretargetingConfigInsertAPI
+      PretargetingConfigInsertResource
 
     -- * Creating a Request
-    , pretargetingConfigInsert
-    , PretargetingConfigInsert
+    , pretargetingConfigInsert'
+    , PretargetingConfigInsert'
 
     -- * Request Lenses
     , pciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPretargetingConfigInsert@ which the
--- 'PretargetingConfigInsert' request conforms to.
-type PretargetingConfigInsertAPI =
+-- 'PretargetingConfigInsert'' request conforms to.
+type PretargetingConfigInsertResource =
      "pretargetingconfigs" :>
        Capture "accountId" Int64 :>
-         Post '[JSON] PretargetingConfig
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] PretargetingConfig
 
 -- | Inserts a new pretargeting configuration.
 --
--- /See:/ 'pretargetingConfigInsert' smart constructor.
-data PretargetingConfigInsert = PretargetingConfigInsert
+-- /See:/ 'pretargetingConfigInsert'' smart constructor.
+data PretargetingConfigInsert' = PretargetingConfigInsert'
     { _pciQuotaUser   :: !(Maybe Text)
     , _pciPrettyPrint :: !Bool
     , _pciUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PretargetingConfigInsert = PretargetingConfigInsert
     , _pciKey         :: !(Maybe Text)
     , _pciOauthToken  :: !(Maybe Text)
     , _pciFields      :: !(Maybe Text)
-    , _pciAlt         :: !Text
+    , _pciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PretargetingConfigInsert = PretargetingConfigInsert
 -- * 'pciFields'
 --
 -- * 'pciAlt'
-pretargetingConfigInsert
+pretargetingConfigInsert'
     :: Int64 -- ^ 'accountId'
-    -> PretargetingConfigInsert
-pretargetingConfigInsert pPciAccountId_ =
-    PretargetingConfigInsert
+    -> PretargetingConfigInsert'
+pretargetingConfigInsert' pPciAccountId_ =
+    PretargetingConfigInsert'
     { _pciQuotaUser = Nothing
     , _pciPrettyPrint = True
     , _pciUserIp = Nothing
@@ -94,7 +102,7 @@ pretargetingConfigInsert pPciAccountId_ =
     , _pciKey = Nothing
     , _pciOauthToken = Nothing
     , _pciFields = Nothing
-    , _pciAlt = "json"
+    , _pciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ pciFields
   = lens _pciFields (\ s a -> s{_pciFields = a})
 
 -- | Data format for the response.
-pciAlt :: Lens' PretargetingConfigInsert' Text
+pciAlt :: Lens' PretargetingConfigInsert' Alt
 pciAlt = lens _pciAlt (\ s a -> s{_pciAlt = a})
 
 instance GoogleRequest PretargetingConfigInsert'
@@ -147,15 +155,15 @@ instance GoogleRequest PretargetingConfigInsert'
         type Rs PretargetingConfigInsert' =
              PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PretargetingConfigInsert{..}
-          = go _pciQuotaUser _pciPrettyPrint _pciUserIp
+        requestWithRoute r u PretargetingConfigInsert'{..}
+          = go _pciQuotaUser (Just _pciPrettyPrint) _pciUserIp
               _pciAccountId
               _pciKey
               _pciOauthToken
               _pciFields
-              _pciAlt
+              (Just _pciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PretargetingConfigInsertAPI)
+                      (Proxy :: Proxy PretargetingConfigInsertResource)
                       r
                       u

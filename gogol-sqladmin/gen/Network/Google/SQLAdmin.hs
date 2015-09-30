@@ -27,115 +27,115 @@ module Network.Google.SQLAdmin
     -- * REST Resources
 
     -- ** SqlBackupRunsDelete
-    , module Sql.BackupRuns.Delete
+    , module Network.Google.Resource.Sql.BackupRuns.Delete
 
     -- ** SqlBackupRunsGet
-    , module Sql.BackupRuns.Get
+    , module Network.Google.Resource.Sql.BackupRuns.Get
 
     -- ** SqlBackupRunsList
-    , module Sql.BackupRuns.List
+    , module Network.Google.Resource.Sql.BackupRuns.List
 
     -- ** SqlDatabasesDelete
-    , module Sql.Databases.Delete
+    , module Network.Google.Resource.Sql.Databases.Delete
 
     -- ** SqlDatabasesGet
-    , module Sql.Databases.Get
+    , module Network.Google.Resource.Sql.Databases.Get
 
     -- ** SqlDatabasesInsert
-    , module Sql.Databases.Insert
+    , module Network.Google.Resource.Sql.Databases.Insert
 
     -- ** SqlDatabasesList
-    , module Sql.Databases.List
+    , module Network.Google.Resource.Sql.Databases.List
 
     -- ** SqlDatabasesPatch
-    , module Sql.Databases.Patch
+    , module Network.Google.Resource.Sql.Databases.Patch
 
     -- ** SqlDatabasesUpdate
-    , module Sql.Databases.Update
+    , module Network.Google.Resource.Sql.Databases.Update
 
     -- ** SqlFlagsList
-    , module Sql.Flags.List
+    , module Network.Google.Resource.Sql.Flags.List
 
     -- ** SqlInstancesClone
-    , module Sql.Instances.Clone
+    , module Network.Google.Resource.Sql.Instances.Clone
 
     -- ** SqlInstancesDelete
-    , module Sql.Instances.Delete
+    , module Network.Google.Resource.Sql.Instances.Delete
 
     -- ** SqlInstancesExport
-    , module Sql.Instances.Export
+    , module Network.Google.Resource.Sql.Instances.Export
 
     -- ** SqlInstancesGet
-    , module Sql.Instances.Get
+    , module Network.Google.Resource.Sql.Instances.Get
 
     -- ** SqlInstancesImport
-    , module Sql.Instances.Import
+    , module Network.Google.Resource.Sql.Instances.Import
 
     -- ** SqlInstancesInsert
-    , module Sql.Instances.Insert
+    , module Network.Google.Resource.Sql.Instances.Insert
 
     -- ** SqlInstancesList
-    , module Sql.Instances.List
+    , module Network.Google.Resource.Sql.Instances.List
 
     -- ** SqlInstancesPatch
-    , module Sql.Instances.Patch
+    , module Network.Google.Resource.Sql.Instances.Patch
 
     -- ** SqlInstancesPromoteReplica
-    , module Sql.Instances.PromoteReplica
+    , module Network.Google.Resource.Sql.Instances.PromoteReplica
 
     -- ** SqlInstancesResetSSLConfig
-    , module Sql.Instances.ResetSSLConfig
+    , module Network.Google.Resource.Sql.Instances.ResetSSLConfig
 
     -- ** SqlInstancesRestart
-    , module Sql.Instances.Restart
+    , module Network.Google.Resource.Sql.Instances.Restart
 
     -- ** SqlInstancesRestoreBackup
-    , module Sql.Instances.RestoreBackup
+    , module Network.Google.Resource.Sql.Instances.RestoreBackup
 
     -- ** SqlInstancesStartReplica
-    , module Sql.Instances.StartReplica
+    , module Network.Google.Resource.Sql.Instances.StartReplica
 
     -- ** SqlInstancesStopReplica
-    , module Sql.Instances.StopReplica
+    , module Network.Google.Resource.Sql.Instances.StopReplica
 
     -- ** SqlInstancesUpdate
-    , module Sql.Instances.Update
+    , module Network.Google.Resource.Sql.Instances.Update
 
     -- ** SqlOperationsGet
-    , module Sql.Operations.Get
+    , module Network.Google.Resource.Sql.Operations.Get
 
     -- ** SqlOperationsList
-    , module Sql.Operations.List
+    , module Network.Google.Resource.Sql.Operations.List
 
     -- ** SqlSSLCertsCreateEphemeral
-    , module Sql.SSLCerts.CreateEphemeral
+    , module Network.Google.Resource.Sql.SSLCerts.CreateEphemeral
 
     -- ** SqlSSLCertsDelete
-    , module Sql.SSLCerts.Delete
+    , module Network.Google.Resource.Sql.SSLCerts.Delete
 
     -- ** SqlSSLCertsGet
-    , module Sql.SSLCerts.Get
+    , module Network.Google.Resource.Sql.SSLCerts.Get
 
     -- ** SqlSSLCertsInsert
-    , module Sql.SSLCerts.Insert
+    , module Network.Google.Resource.Sql.SSLCerts.Insert
 
     -- ** SqlSSLCertsList
-    , module Sql.SSLCerts.List
+    , module Network.Google.Resource.Sql.SSLCerts.List
 
     -- ** SqlTiersList
-    , module Sql.Tiers.List
+    , module Network.Google.Resource.Sql.Tiers.List
 
     -- ** SqlUsersDelete
-    , module Sql.Users.Delete
+    , module Network.Google.Resource.Sql.Users.Delete
 
     -- ** SqlUsersInsert
-    , module Sql.Users.Insert
+    , module Network.Google.Resource.Sql.Users.Insert
 
     -- ** SqlUsersList
-    , module Sql.Users.List
+    , module Network.Google.Resource.Sql.Users.List
 
     -- ** SqlUsersUpdate
-    , module Sql.Users.Update
+    , module Network.Google.Resource.Sql.Users.Update
 
     -- * Types
 
@@ -293,6 +293,11 @@ module Network.Google.SQLAdmin
     , icRequireSsl
     , icIpv4Enabled
 
+    -- ** ExportContextCSVExportOptions
+    , ExportContextCSVExportOptions
+    , exportContextCSVExportOptions
+    , ecceoSelectQuery
+
     -- ** SSLCertsInsertRequest
     , SSLCertsInsertRequest
     , sSLCertsInsertRequest
@@ -309,29 +314,35 @@ module Network.Google.SQLAdmin
     , uHost
     , uInstance
 
+    -- ** ImportContextCSVImportOptions
+    , ImportContextCSVImportOptions
+    , importContextCSVImportOptions
+    , iccioColumns
+    , iccioTable
+
     -- ** DatabaseInstance
     , DatabaseInstance
     , databaseInstance
-    , diMaxDiskSize
-    , diOnPremisesConfiguration
-    , diEtag
-    , diState
-    , diIpv6Address
-    , diServerCaCert
-    , diDatabaseVersion
-    , diProject
-    , diSettings
-    , diKind
-    , diCurrentDiskSize
-    , diInstanceType
-    , diReplicaNames
-    , diSelfLink
-    , diName
-    , diMasterInstanceName
-    , diReplicaConfiguration
-    , diRegion
-    , diServiceAccountEmailAddress
-    , diIpAddresses
+    , datMaxDiskSize
+    , datOnPremisesConfiguration
+    , datEtag
+    , datState
+    , datIpv6Address
+    , datServerCaCert
+    , datDatabaseVersion
+    , datProject
+    , datSettings
+    , datKind
+    , datCurrentDiskSize
+    , datInstanceType
+    , datReplicaNames
+    , datSelfLink
+    , datName
+    , datMasterInstanceName
+    , datReplicaConfiguration
+    , datRegion
+    , datServiceAccountEmailAddress
+    , datIpAddresses
 
     -- ** Flag
     , Flag
@@ -479,12 +490,21 @@ module Network.Google.SQLAdmin
     , bcKind
     , bcBinaryLogEnabled
 
+    -- ** ExportContextSqlExportOptions
+    , ExportContextSqlExportOptions
+    , exportContextSqlExportOptions
+    , ecseoSchemaOnly
+    , ecseoTables
+
     -- ** RestoreBackupContext
     , RestoreBackupContext
     , restoreBackupContext
     , rbcInstanceId
     , rbcBackupRunId
     , rbcKind
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -532,11 +552,42 @@ TODO
 -}
 
 type SQLAdminAPI =
-     Flags :<|> Users :<|> Tiers :<|> BackupRuns :<|>
-       SSLCerts
-       :<|> Instances
-       :<|> Operations
-       :<|> Databases
+     FlagsListResource :<|> UsersInsertResource :<|>
+       UsersListResource
+       :<|> UsersDeleteResource
+       :<|> UsersUpdateResource
+       :<|> TiersListResource
+       :<|> BackupRunsListResource
+       :<|> BackupRunsGetResource
+       :<|> BackupRunsDeleteResource
+       :<|> SslCertsInsertResource
+       :<|> SslCertsListResource
+       :<|> SslCertsGetResource
+       :<|> SslCertsCreateEphemeralResource
+       :<|> SslCertsDeleteResource
+       :<|> InstancesExportResource
+       :<|> InstancesInsertResource
+       :<|> InstancesListResource
+       :<|> InstancesStartReplicaResource
+       :<|> InstancesCloneResource
+       :<|> InstancesPatchResource
+       :<|> InstancesGetResource
+       :<|> InstancesRestoreBackupResource
+       :<|> InstancesRestartResource
+       :<|> InstancesImportResource
+       :<|> InstancesStopReplicaResource
+       :<|> InstancesResetSSLConfigResource
+       :<|> InstancesPromoteReplicaResource
+       :<|> InstancesDeleteResource
+       :<|> InstancesUpdateResource
+       :<|> OperationsListResource
+       :<|> OperationsGetResource
+       :<|> DatabasesInsertResource
+       :<|> DatabasesListResource
+       :<|> DatabasesPatchResource
+       :<|> DatabasesGetResource
+       :<|> DatabasesDeleteResource
+       :<|> DatabasesUpdateResource
 
 sQLAdminAPI :: Proxy SQLAdminAPI
 sQLAdminAPI = Proxy

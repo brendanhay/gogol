@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- score.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesScoresListWindow@.
-module Games.Scores.ListWindow
+module Network.Google.Resource.Games.Scores.ListWindow
     (
     -- * REST Resource
-      ScoresListWindowAPI
+      ScoresListWindowResource
 
     -- * Creating a Request
-    , scoresListWindow
-    , ScoresListWindow
+    , scoresListWindow'
+    , ScoresListWindow'
 
     -- * Request Lenses
     , slwQuotaUser
@@ -51,30 +52,39 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesScoresListWindow@ which the
--- 'ScoresListWindow' request conforms to.
-type ScoresListWindowAPI =
+-- 'ScoresListWindow'' request conforms to.
+type ScoresListWindowResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "window" :>
-           Capture "collection" Text :>
-             QueryParam "timeSpan" Text :>
-               QueryParam "returnTopIfAbsent" Bool :>
-                 QueryParam "language" Text :>
-                   QueryParam "resultsAbove" Int32 :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :>
-                         Get '[JSON] LeaderboardScores
+           Capture "collection" GamesScoresListWindowCollection
+             :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "timeSpan" GamesScoresListWindowTimeSpan
+                     :>
+                     QueryParam "returnTopIfAbsent" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "language" Text :>
+                           QueryParam "resultsAbove" Int32 :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
 -- score.
 --
--- /See:/ 'scoresListWindow' smart constructor.
-data ScoresListWindow = ScoresListWindow
+-- /See:/ 'scoresListWindow'' smart constructor.
+data ScoresListWindow' = ScoresListWindow'
     { _slwQuotaUser         :: !(Maybe Text)
     , _slwPrettyPrint       :: !Bool
     , _slwUserIp            :: !(Maybe Text)
-    , _slwCollection        :: !Text
-    , _slwTimeSpan          :: !Text
+    , _slwCollection        :: !GamesScoresListWindowCollection
+    , _slwTimeSpan          :: !GamesScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
     , _slwKey               :: !(Maybe Text)
@@ -84,7 +94,7 @@ data ScoresListWindow = ScoresListWindow
     , _slwOauthToken        :: !(Maybe Text)
     , _slwMaxResults        :: !(Maybe Int32)
     , _slwFields            :: !(Maybe Text)
-    , _slwAlt               :: !Text
+    , _slwAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresListWindow'' with the minimum fields required to make a request.
@@ -120,13 +130,13 @@ data ScoresListWindow = ScoresListWindow
 -- * 'slwFields'
 --
 -- * 'slwAlt'
-scoresListWindow
-    :: Text -- ^ 'collection'
-    -> Text -- ^ 'timeSpan'
+scoresListWindow'
+    :: GamesScoresListWindowCollection -- ^ 'collection'
+    -> GamesScoresListWindowTimeSpan -- ^ 'timeSpan'
     -> Text -- ^ 'leaderboardId'
-    -> ScoresListWindow
-scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
-    ScoresListWindow
+    -> ScoresListWindow'
+scoresListWindow' pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
+    ScoresListWindow'
     { _slwQuotaUser = Nothing
     , _slwPrettyPrint = True
     , _slwUserIp = Nothing
@@ -141,7 +151,7 @@ scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     , _slwOauthToken = Nothing
     , _slwMaxResults = Nothing
     , _slwFields = Nothing
-    , _slwAlt = "json"
+    , _slwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,13 +174,13 @@ slwUserIp
   = lens _slwUserIp (\ s a -> s{_slwUserIp = a})
 
 -- | The collection of scores you\'re requesting.
-slwCollection :: Lens' ScoresListWindow' Text
+slwCollection :: Lens' ScoresListWindow' GamesScoresListWindowCollection
 slwCollection
   = lens _slwCollection
       (\ s a -> s{_slwCollection = a})
 
 -- | The time span for the scores and ranks you\'re requesting.
-slwTimeSpan :: Lens' ScoresListWindow' Text
+slwTimeSpan :: Lens' ScoresListWindow' GamesScoresListWindowTimeSpan
 slwTimeSpan
   = lens _slwTimeSpan (\ s a -> s{_slwTimeSpan = a})
 
@@ -232,14 +242,14 @@ slwFields
   = lens _slwFields (\ s a -> s{_slwFields = a})
 
 -- | Data format for the response.
-slwAlt :: Lens' ScoresListWindow' Text
+slwAlt :: Lens' ScoresListWindow' Alt
 slwAlt = lens _slwAlt (\ s a -> s{_slwAlt = a})
 
 instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u ScoresListWindow{..}
-          = go _slwQuotaUser _slwPrettyPrint _slwUserIp
+        requestWithRoute r u ScoresListWindow'{..}
+          = go _slwQuotaUser (Just _slwPrettyPrint) _slwUserIp
               _slwCollection
               (Just _slwTimeSpan)
               _slwReturnTopIfAbsent
@@ -251,9 +261,9 @@ instance GoogleRequest ScoresListWindow' where
               _slwOauthToken
               _slwMaxResults
               _slwFields
-              _slwAlt
+              (Just _slwAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ScoresListWindowAPI)
+                      (Proxy :: Proxy ScoresListWindowResource)
                       r
                       u

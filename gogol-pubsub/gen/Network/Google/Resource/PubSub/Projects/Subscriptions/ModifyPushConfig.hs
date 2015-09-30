@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- continuously through the call regardless of changes to the PushConfig.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsModifyPushConfig@.
-module PubSub.Projects.Subscriptions.ModifyPushConfig
+module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     (
     -- * REST Resource
-      ProjectsSubscriptionsModifyPushConfigAPI
+      ProjectsSubscriptionsModifyPushConfigResource
 
     -- * Creating a Request
-    , projectsSubscriptionsModifyPushConfig
-    , ProjectsSubscriptionsModifyPushConfig
+    , projectsSubscriptionsModifyPushConfig'
+    , ProjectsSubscriptionsModifyPushConfig'
 
     -- * Request Lenses
     , psmpcXgafv
@@ -53,11 +54,23 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsModifyPushConfig@ which the
--- 'ProjectsSubscriptionsModifyPushConfig' request conforms to.
-type ProjectsSubscriptionsModifyPushConfigAPI =
+-- 'ProjectsSubscriptionsModifyPushConfig'' request conforms to.
+type ProjectsSubscriptionsModifyPushConfigResource =
      "v1beta2" :>
        "{+subscription}:modifyPushConfig" :>
-         Post '[JSON] Empty
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Modifies the PushConfig for a specified subscription. This may be used
 -- to change a push subscription to a pull one (signified by an empty
@@ -65,8 +78,8 @@ type ProjectsSubscriptionsModifyPushConfigAPI =
 -- attributes of a push subscription. Messages will accumulate for delivery
 -- continuously through the call regardless of changes to the PushConfig.
 --
--- /See:/ 'projectsSubscriptionsModifyPushConfig' smart constructor.
-data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConfig
+-- /See:/ 'projectsSubscriptionsModifyPushConfig'' smart constructor.
+data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv          :: !(Maybe Text)
     , _psmpcQuotaUser      :: !(Maybe Text)
     , _psmpcPrettyPrint    :: !Bool
@@ -114,11 +127,11 @@ data ProjectsSubscriptionsModifyPushConfig = ProjectsSubscriptionsModifyPushConf
 -- * 'psmpcCallback'
 --
 -- * 'psmpcAlt'
-projectsSubscriptionsModifyPushConfig
+projectsSubscriptionsModifyPushConfig'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsModifyPushConfig
-projectsSubscriptionsModifyPushConfig pPsmpcSubscription_ =
-    ProjectsSubscriptionsModifyPushConfig
+    -> ProjectsSubscriptionsModifyPushConfig'
+projectsSubscriptionsModifyPushConfig' pPsmpcSubscription_ =
+    ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcQuotaUser = Nothing
     , _psmpcPrettyPrint = True
@@ -221,10 +234,11 @@ instance GoogleRequest
              Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsModifyPushConfig{..}
-          = go _psmpcXgafv _psmpcQuotaUser _psmpcPrettyPrint
+          ProjectsSubscriptionsModifyPushConfig'{..}
+          = go _psmpcXgafv _psmpcQuotaUser
+              (Just _psmpcPrettyPrint)
               _psmpcUploadProtocol
-              _psmpcPp
+              (Just _psmpcPp)
               _psmpcAccessToken
               _psmpcUploadType
               _psmpcBearerToken
@@ -233,10 +247,10 @@ instance GoogleRequest
               _psmpcSubscription
               _psmpcFields
               _psmpcCallback
-              _psmpcAlt
+              (Just _psmpcAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ProjectsSubscriptionsModifyPushConfigAPI)
+                         Proxy ProjectsSubscriptionsModifyPushConfigResource)
                       r
                       u

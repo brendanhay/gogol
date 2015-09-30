@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Search public activities.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusActivitiesSearch@.
-module Plus.Activities.Search
+module Network.Google.Resource.Plus.Activities.Search
     (
     -- * REST Resource
-      ActivitiesSearchAPI
+      ActivitiesSearchResource
 
     -- * Creating a Request
-    , activitiesSearch
-    , ActivitiesSearch
+    , activitiesSearch'
+    , ActivitiesSearch'
 
     -- * Request Lenses
     , asQuotaUser
@@ -47,23 +48,29 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusActivitiesSearch@ which the
--- 'ActivitiesSearch' request conforms to.
-type ActivitiesSearchAPI =
+-- 'ActivitiesSearch'' request conforms to.
+type ActivitiesSearchResource =
      "activities" :>
-       QueryParam "orderBy" Text :>
-         QueryParam "query" Text :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] ActivityFeed
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "orderBy" PlusActivitiesSearchOrderBy :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "query" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ActivityFeed
 
 -- | Search public activities.
 --
--- /See:/ 'activitiesSearch' smart constructor.
-data ActivitiesSearch = ActivitiesSearch
+-- /See:/ 'activitiesSearch'' smart constructor.
+data ActivitiesSearch' = ActivitiesSearch'
     { _asQuotaUser   :: !(Maybe Text)
     , _asPrettyPrint :: !Bool
-    , _asOrderBy     :: !Text
+    , _asOrderBy     :: !PlusActivitiesSearchOrderBy
     , _asUserIp      :: !(Maybe Text)
     , _asKey         :: !(Maybe Text)
     , _asQuery       :: !Text
@@ -72,7 +79,7 @@ data ActivitiesSearch = ActivitiesSearch
     , _asOauthToken  :: !(Maybe Text)
     , _asMaxResults  :: !Word32
     , _asFields      :: !(Maybe Text)
-    , _asAlt         :: !Text
+    , _asAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesSearch'' with the minimum fields required to make a request.
@@ -102,14 +109,14 @@ data ActivitiesSearch = ActivitiesSearch
 -- * 'asFields'
 --
 -- * 'asAlt'
-activitiesSearch
+activitiesSearch'
     :: Text -- ^ 'query'
-    -> ActivitiesSearch
-activitiesSearch pAsQuery_ =
-    ActivitiesSearch
+    -> ActivitiesSearch'
+activitiesSearch' pAsQuery_ =
+    ActivitiesSearch'
     { _asQuotaUser = Nothing
     , _asPrettyPrint = True
-    , _asOrderBy = "recent"
+    , _asOrderBy = Recent
     , _asUserIp = Nothing
     , _asKey = Nothing
     , _asQuery = pAsQuery_
@@ -118,7 +125,7 @@ activitiesSearch pAsQuery_ =
     , _asOauthToken = Nothing
     , _asMaxResults = 10
     , _asFields = Nothing
-    , _asAlt = "json"
+    , _asAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,7 +142,7 @@ asPrettyPrint
       (\ s a -> s{_asPrettyPrint = a})
 
 -- | Specifies how to order search results.
-asOrderBy :: Lens' ActivitiesSearch' Text
+asOrderBy :: Lens' ActivitiesSearch' PlusActivitiesSearchOrderBy
 asOrderBy
   = lens _asOrderBy (\ s a -> s{_asOrderBy = a})
 
@@ -185,14 +192,15 @@ asFields :: Lens' ActivitiesSearch' (Maybe Text)
 asFields = lens _asFields (\ s a -> s{_asFields = a})
 
 -- | Data format for the response.
-asAlt :: Lens' ActivitiesSearch' Text
+asAlt :: Lens' ActivitiesSearch' Alt
 asAlt = lens _asAlt (\ s a -> s{_asAlt = a})
 
 instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u ActivitiesSearch{..}
-          = go _asQuotaUser _asPrettyPrint (Just _asOrderBy)
+        requestWithRoute r u ActivitiesSearch'{..}
+          = go _asQuotaUser (Just _asPrettyPrint)
+              (Just _asOrderBy)
               _asUserIp
               _asKey
               (Just _asQuery)
@@ -201,9 +209,9 @@ instance GoogleRequest ActivitiesSearch' where
               _asOauthToken
               (Just _asMaxResults)
               _asFields
-              _asAlt
+              (Just _asAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ActivitiesSearchAPI)
+                      (Proxy :: Proxy ActivitiesSearchResource)
                       r
                       u

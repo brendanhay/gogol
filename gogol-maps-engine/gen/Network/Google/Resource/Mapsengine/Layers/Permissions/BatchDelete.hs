@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersPermissionsBatchDelete@.
-module Mapsengine.Layers.Permissions.BatchDelete
+module Network.Google.Resource.Mapsengine.Layers.Permissions.BatchDelete
     (
     -- * REST Resource
-      LayersPermissionsBatchDeleteAPI
+      LayersPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , layersPermissionsBatchDelete
-    , LayersPermissionsBatchDelete
+    , layersPermissionsBatchDelete'
+    , LayersPermissionsBatchDelete'
 
     -- * Request Lenses
     , lpbdQuotaUser
@@ -43,18 +44,25 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersPermissionsBatchDelete@ which the
--- 'LayersPermissionsBatchDelete' request conforms to.
-type LayersPermissionsBatchDeleteAPI =
+-- 'LayersPermissionsBatchDelete'' request conforms to.
+type LayersPermissionsBatchDeleteResource =
      "layers" :>
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'layersPermissionsBatchDelete' smart constructor.
-data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete
+-- /See:/ 'layersPermissionsBatchDelete'' smart constructor.
+data LayersPermissionsBatchDelete' = LayersPermissionsBatchDelete'
     { _lpbdQuotaUser   :: !(Maybe Text)
     , _lpbdPrettyPrint :: !Bool
     , _lpbdUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete
     , _lpbdId          :: !Text
     , _lpbdOauthToken  :: !(Maybe Text)
     , _lpbdFields      :: !(Maybe Text)
-    , _lpbdAlt         :: !Text
+    , _lpbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPermissionsBatchDelete'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data LayersPermissionsBatchDelete = LayersPermissionsBatchDelete
 -- * 'lpbdFields'
 --
 -- * 'lpbdAlt'
-layersPermissionsBatchDelete
+layersPermissionsBatchDelete'
     :: Text -- ^ 'id'
-    -> LayersPermissionsBatchDelete
-layersPermissionsBatchDelete pLpbdId_ =
-    LayersPermissionsBatchDelete
+    -> LayersPermissionsBatchDelete'
+layersPermissionsBatchDelete' pLpbdId_ =
+    LayersPermissionsBatchDelete'
     { _lpbdQuotaUser = Nothing
     , _lpbdPrettyPrint = True
     , _lpbdUserIp = Nothing
@@ -96,7 +104,7 @@ layersPermissionsBatchDelete pLpbdId_ =
     , _lpbdId = pLpbdId_
     , _lpbdOauthToken = Nothing
     , _lpbdFields = Nothing
-    , _lpbdAlt = "json"
+    , _lpbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ lpbdFields
   = lens _lpbdFields (\ s a -> s{_lpbdFields = a})
 
 -- | Data format for the response.
-lpbdAlt :: Lens' LayersPermissionsBatchDelete' Text
+lpbdAlt :: Lens' LayersPermissionsBatchDelete' Alt
 lpbdAlt = lens _lpbdAlt (\ s a -> s{_lpbdAlt = a})
 
 instance GoogleRequest LayersPermissionsBatchDelete'
@@ -149,15 +157,17 @@ instance GoogleRequest LayersPermissionsBatchDelete'
         type Rs LayersPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersPermissionsBatchDelete{..}
-          = go _lpbdQuotaUser _lpbdPrettyPrint _lpbdUserIp
+        requestWithRoute r u
+          LayersPermissionsBatchDelete'{..}
+          = go _lpbdQuotaUser (Just _lpbdPrettyPrint)
+              _lpbdUserIp
               _lpbdKey
               _lpbdId
               _lpbdOauthToken
               _lpbdFields
-              _lpbdAlt
+              (Just _lpbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersPermissionsBatchDeleteAPI)
+                      (Proxy :: Proxy LayersPermissionsBatchDeleteResource)
                       r
                       u

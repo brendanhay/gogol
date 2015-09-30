@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Generate new backup verification codes for the user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryVerificationCodesGenerate@.
-module Directory.VerificationCodes.Generate
+module Network.Google.Resource.Directory.VerificationCodes.Generate
     (
     -- * REST Resource
-      VerificationCodesGenerateAPI
+      VerificationCodesGenerateResource
 
     -- * Creating a Request
-    , verificationCodesGenerate
-    , VerificationCodesGenerate
+    , verificationCodesGenerate'
+    , VerificationCodesGenerate'
 
     -- * Request Lenses
     , vcgQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryVerificationCodesGenerate@ which the
--- 'VerificationCodesGenerate' request conforms to.
-type VerificationCodesGenerateAPI =
+-- 'VerificationCodesGenerate'' request conforms to.
+type VerificationCodesGenerateResource =
      "users" :>
        Capture "userKey" Text :>
-         "verificationCodes" :> "generate" :> Post '[JSON] ()
+         "verificationCodes" :>
+           "generate" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Generate new backup verification codes for the user.
 --
--- /See:/ 'verificationCodesGenerate' smart constructor.
-data VerificationCodesGenerate = VerificationCodesGenerate
+-- /See:/ 'verificationCodesGenerate'' smart constructor.
+data VerificationCodesGenerate' = VerificationCodesGenerate'
     { _vcgQuotaUser   :: !(Maybe Text)
     , _vcgPrettyPrint :: !Bool
     , _vcgUserIp      :: !(Maybe Text)
@@ -60,7 +69,7 @@ data VerificationCodesGenerate = VerificationCodesGenerate
     , _vcgOauthToken  :: !(Maybe Text)
     , _vcgUserKey     :: !Text
     , _vcgFields      :: !(Maybe Text)
-    , _vcgAlt         :: !Text
+    , _vcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesGenerate'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data VerificationCodesGenerate = VerificationCodesGenerate
 -- * 'vcgFields'
 --
 -- * 'vcgAlt'
-verificationCodesGenerate
+verificationCodesGenerate'
     :: Text -- ^ 'userKey'
-    -> VerificationCodesGenerate
-verificationCodesGenerate pVcgUserKey_ =
-    VerificationCodesGenerate
+    -> VerificationCodesGenerate'
+verificationCodesGenerate' pVcgUserKey_ =
+    VerificationCodesGenerate'
     { _vcgQuotaUser = Nothing
     , _vcgPrettyPrint = True
     , _vcgUserIp = Nothing
@@ -94,7 +103,7 @@ verificationCodesGenerate pVcgUserKey_ =
     , _vcgOauthToken = Nothing
     , _vcgUserKey = pVcgUserKey_
     , _vcgFields = Nothing
-    , _vcgAlt = "json"
+    , _vcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +148,22 @@ vcgFields
   = lens _vcgFields (\ s a -> s{_vcgFields = a})
 
 -- | Data format for the response.
-vcgAlt :: Lens' VerificationCodesGenerate' Text
+vcgAlt :: Lens' VerificationCodesGenerate' Alt
 vcgAlt = lens _vcgAlt (\ s a -> s{_vcgAlt = a})
 
 instance GoogleRequest VerificationCodesGenerate'
          where
         type Rs VerificationCodesGenerate' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u VerificationCodesGenerate{..}
-          = go _vcgQuotaUser _vcgPrettyPrint _vcgUserIp _vcgKey
+        requestWithRoute r u VerificationCodesGenerate'{..}
+          = go _vcgQuotaUser (Just _vcgPrettyPrint) _vcgUserIp
+              _vcgKey
               _vcgOauthToken
               _vcgUserKey
               _vcgFields
-              _vcgAlt
+              (Just _vcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VerificationCodesGenerateAPI)
+                      (Proxy :: Proxy VerificationCodesGenerateResource)
                       r
                       u

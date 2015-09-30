@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes to CalendarList resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarCalendarListWatch@.
-module Calendar.CalendarList.Watch
+module Network.Google.Resource.Calendar.CalendarList.Watch
     (
     -- * REST Resource
-      CalendarListWatchAPI
+      CalendarListWatchResource
 
     -- * Creating a Request
-    , calendarListWatch
-    , CalendarListWatch
+    , calendarListWatch'
+    , CalendarListWatch'
 
     -- * Request Lenses
     , clwSyncToken
@@ -48,27 +49,37 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarCalendarListWatch@ which the
--- 'CalendarListWatch' request conforms to.
-type CalendarListWatchAPI =
+-- 'CalendarListWatch'' request conforms to.
+type CalendarListWatchResource =
      "users" :>
        "me" :>
          "calendarList" :>
            "watch" :>
              QueryParam "syncToken" Text :>
-               QueryParam "minAccessRole" Text :>
-                 QueryParam "showDeleted" Bool :>
-                   QueryParam "showHidden" Bool :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Int32 :> Post '[JSON] Channel
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "minAccessRole"
+                     CalendarCalendarListWatchMinAccessRole
+                     :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "showDeleted" Bool :>
+                         QueryParam "showHidden" Bool :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Post '[JSON] Channel
 
 -- | Watch for changes to CalendarList resources.
 --
--- /See:/ 'calendarListWatch' smart constructor.
-data CalendarListWatch = CalendarListWatch
+-- /See:/ 'calendarListWatch'' smart constructor.
+data CalendarListWatch' = CalendarListWatch'
     { _clwSyncToken     :: !(Maybe Text)
     , _clwQuotaUser     :: !(Maybe Text)
     , _clwPrettyPrint   :: !Bool
-    , _clwMinAccessRole :: !(Maybe Text)
+    , _clwMinAccessRole :: !(Maybe CalendarCalendarListWatchMinAccessRole)
     , _clwUserIp        :: !(Maybe Text)
     , _clwShowDeleted   :: !(Maybe Bool)
     , _clwShowHidden    :: !(Maybe Bool)
@@ -77,7 +88,7 @@ data CalendarListWatch = CalendarListWatch
     , _clwOauthToken    :: !(Maybe Text)
     , _clwMaxResults    :: !(Maybe Int32)
     , _clwFields        :: !(Maybe Text)
-    , _clwAlt           :: !Text
+    , _clwAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListWatch'' with the minimum fields required to make a request.
@@ -109,10 +120,10 @@ data CalendarListWatch = CalendarListWatch
 -- * 'clwFields'
 --
 -- * 'clwAlt'
-calendarListWatch
-    :: CalendarListWatch
-calendarListWatch =
-    CalendarListWatch
+calendarListWatch'
+    :: CalendarListWatch'
+calendarListWatch' =
+    CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwQuotaUser = Nothing
     , _clwPrettyPrint = True
@@ -125,7 +136,7 @@ calendarListWatch =
     , _clwOauthToken = Nothing
     , _clwMaxResults = Nothing
     , _clwFields = Nothing
-    , _clwAlt = "json"
+    , _clwAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -160,7 +171,7 @@ clwPrettyPrint
 
 -- | The minimum access role for the user in the returned entries. Optional.
 -- The default is no restriction.
-clwMinAccessRole :: Lens' CalendarListWatch' (Maybe Text)
+clwMinAccessRole :: Lens' CalendarListWatch' (Maybe CalendarCalendarListWatchMinAccessRole)
 clwMinAccessRole
   = lens _clwMinAccessRole
       (\ s a -> s{_clwMinAccessRole = a})
@@ -215,14 +226,15 @@ clwFields
   = lens _clwFields (\ s a -> s{_clwFields = a})
 
 -- | Data format for the response.
-clwAlt :: Lens' CalendarListWatch' Text
+clwAlt :: Lens' CalendarListWatch' Alt
 clwAlt = lens _clwAlt (\ s a -> s{_clwAlt = a})
 
 instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u CalendarListWatch{..}
-          = go _clwSyncToken _clwQuotaUser _clwPrettyPrint
+        requestWithRoute r u CalendarListWatch'{..}
+          = go _clwSyncToken _clwQuotaUser
+              (Just _clwPrettyPrint)
               _clwMinAccessRole
               _clwUserIp
               _clwShowDeleted
@@ -232,9 +244,9 @@ instance GoogleRequest CalendarListWatch' where
               _clwOauthToken
               _clwMaxResults
               _clwFields
-              _clwAlt
+              (Just _clwAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CalendarListWatchAPI)
+                      (Proxy :: Proxy CalendarListWatchResource)
                       r
                       u

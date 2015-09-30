@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a GTM Variable.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesDelete@.
-module TagManager.Accounts.Containers.Variables.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
     (
     -- * REST Resource
-      AccountsContainersVariablesDeleteAPI
+      AccountsContainersVariablesDeleteResource
 
     -- * Creating a Request
-    , accountsContainersVariablesDelete
-    , AccountsContainersVariablesDelete
+    , accountsContainersVariablesDelete'
+    , AccountsContainersVariablesDelete'
 
     -- * Request Lenses
     , acvdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVariablesDelete@ which the
--- 'AccountsContainersVariablesDelete' request conforms to.
-type AccountsContainersVariablesDeleteAPI =
+-- 'AccountsContainersVariablesDelete'' request conforms to.
+type AccountsContainersVariablesDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "variables" :>
-               Capture "variableId" Text :> Delete '[JSON] ()
+               Capture "variableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesDelete' smart constructor.
-data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
+-- /See:/ 'accountsContainersVariablesDelete'' smart constructor.
+data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
     { _acvdQuotaUser   :: !(Maybe Text)
     , _acvdPrettyPrint :: !Bool
     , _acvdContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
     , _acvdKey         :: !(Maybe Text)
     , _acvdOauthToken  :: !(Maybe Text)
     , _acvdFields      :: !(Maybe Text)
-    , _acvdAlt         :: !Text
+    , _acvdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
 -- * 'acvdFields'
 --
 -- * 'acvdAlt'
-accountsContainersVariablesDelete
+accountsContainersVariablesDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVariablesDelete
-accountsContainersVariablesDelete pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
-    AccountsContainersVariablesDelete
+    -> AccountsContainersVariablesDelete'
+accountsContainersVariablesDelete' pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
+    AccountsContainersVariablesDelete'
     { _acvdQuotaUser = Nothing
     , _acvdPrettyPrint = True
     , _acvdContainerId = pAcvdContainerId_
@@ -109,7 +117,7 @@ accountsContainersVariablesDelete pAcvdContainerId_ pAcvdVariableId_ pAcvdAccoun
     , _acvdKey = Nothing
     , _acvdOauthToken = Nothing
     , _acvdFields = Nothing
-    , _acvdAlt = "json"
+    , _acvdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ acvdFields
   = lens _acvdFields (\ s a -> s{_acvdFields = a})
 
 -- | Data format for the response.
-acvdAlt :: Lens' AccountsContainersVariablesDelete' Text
+acvdAlt :: Lens' AccountsContainersVariablesDelete' Alt
 acvdAlt = lens _acvdAlt (\ s a -> s{_acvdAlt = a})
 
 instance GoogleRequest
@@ -176,17 +184,19 @@ instance GoogleRequest
         type Rs AccountsContainersVariablesDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVariablesDelete{..}
-          = go _acvdQuotaUser _acvdPrettyPrint _acvdContainerId
+          AccountsContainersVariablesDelete'{..}
+          = go _acvdQuotaUser (Just _acvdPrettyPrint)
+              _acvdContainerId
               _acvdUserIp
               _acvdVariableId
               _acvdAccountId
               _acvdKey
               _acvdOauthToken
               _acvdFields
-              _acvdAlt
+              (Just _acvdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVariablesDeleteAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVariablesDeleteResource)
                       r
                       u

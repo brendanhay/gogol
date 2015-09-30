@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Variable.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesGet@.
-module TagManager.Accounts.Containers.Variables.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
     (
     -- * REST Resource
-      AccountsContainersVariablesGetAPI
+      AccountsContainersVariablesGetResource
 
     -- * Creating a Request
-    , accountsContainersVariablesGet
-    , AccountsContainersVariablesGet
+    , accountsContainersVariablesGet'
+    , AccountsContainersVariablesGet'
 
     -- * Request Lenses
     , acvgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersVariablesGet@ which the
--- 'AccountsContainersVariablesGet' request conforms to.
-type AccountsContainersVariablesGetAPI =
+-- 'AccountsContainersVariablesGet'' request conforms to.
+type AccountsContainersVariablesGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "variables" :>
-               Capture "variableId" Text :> Get '[JSON] Variable
+               Capture "variableId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Variable
 
 -- | Gets a GTM Variable.
 --
--- /See:/ 'accountsContainersVariablesGet' smart constructor.
-data AccountsContainersVariablesGet = AccountsContainersVariablesGet
+-- /See:/ 'accountsContainersVariablesGet'' smart constructor.
+data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
     { _acvgQuotaUser   :: !(Maybe Text)
     , _acvgPrettyPrint :: !Bool
     , _acvgContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersVariablesGet = AccountsContainersVariablesGet
     , _acvgKey         :: !(Maybe Text)
     , _acvgOauthToken  :: !(Maybe Text)
     , _acvgFields      :: !(Maybe Text)
-    , _acvgAlt         :: !Text
+    , _acvgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersVariablesGet = AccountsContainersVariablesGet
 -- * 'acvgFields'
 --
 -- * 'acvgAlt'
-accountsContainersVariablesGet
+accountsContainersVariablesGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersVariablesGet
-accountsContainersVariablesGet pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountId_ =
-    AccountsContainersVariablesGet
+    -> AccountsContainersVariablesGet'
+accountsContainersVariablesGet' pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountId_ =
+    AccountsContainersVariablesGet'
     { _acvgQuotaUser = Nothing
     , _acvgPrettyPrint = True
     , _acvgContainerId = pAcvgContainerId_
@@ -109,7 +117,7 @@ accountsContainersVariablesGet pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountId
     , _acvgKey = Nothing
     , _acvgOauthToken = Nothing
     , _acvgFields = Nothing
-    , _acvgAlt = "json"
+    , _acvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ acvgFields
   = lens _acvgFields (\ s a -> s{_acvgFields = a})
 
 -- | Data format for the response.
-acvgAlt :: Lens' AccountsContainersVariablesGet' Text
+acvgAlt :: Lens' AccountsContainersVariablesGet' Alt
 acvgAlt = lens _acvgAlt (\ s a -> s{_acvgAlt = a})
 
 instance GoogleRequest
@@ -176,17 +184,19 @@ instance GoogleRequest
         type Rs AccountsContainersVariablesGet' = Variable
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersVariablesGet{..}
-          = go _acvgQuotaUser _acvgPrettyPrint _acvgContainerId
+          AccountsContainersVariablesGet'{..}
+          = go _acvgQuotaUser (Just _acvgPrettyPrint)
+              _acvgContainerId
               _acvgUserIp
               _acvgVariableId
               _acvgAccountId
               _acvgKey
               _acvgOauthToken
               _acvgFields
-              _acvgAlt
+              (Just _acvgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersVariablesGetAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersVariablesGetResource)
                       r
                       u

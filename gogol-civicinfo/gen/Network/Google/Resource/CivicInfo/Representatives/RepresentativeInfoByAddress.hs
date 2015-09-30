@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- address.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoRepresentativesRepresentativeInfoByAddress@.
-module CivicInfo.Representatives.RepresentativeInfoByAddress
+module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
     (
     -- * REST Resource
-      RepresentativesRepresentativeInfoByAddressAPI
+      RepresentativesRepresentativeInfoByAddressResource
 
     -- * Creating a Request
-    , representativesRepresentativeInfoByAddress
-    , RepresentativesRepresentativeInfoByAddress
+    , representativesRepresentativeInfoByAddress'
+    , RepresentativesRepresentativeInfoByAddress'
 
     -- * Request Lenses
     , rribaQuotaUser
@@ -47,31 +48,43 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CivicinfoRepresentativesRepresentativeInfoByAddress@ which the
--- 'RepresentativesRepresentativeInfoByAddress' request conforms to.
-type RepresentativesRepresentativeInfoByAddressAPI =
+-- 'RepresentativesRepresentativeInfoByAddress'' request conforms to.
+type RepresentativesRepresentativeInfoByAddressResource
+     =
      "representatives" :>
-       QueryParams "roles" Text :>
-         QueryParam "address" Text :>
-           QueryParam "includeOffices" Bool :>
-             QueryParams "levels" Text :>
-               Get '[JSON] RepresentativeInfoResponse
+       QueryParam "quotaUser" Text :>
+         QueryParams "roles"
+           CivicinfoRepresentativesRepresentativeInfoByAddressRoles
+           :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "address" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "includeOffices" Bool :>
+                     QueryParams "levels"
+                       CivicinfoRepresentativesRepresentativeInfoByAddressLevels
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] RepresentativeInfoResponse
 
 -- | Looks up political geography and representative information for a single
 -- address.
 --
--- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
-data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress
+-- /See:/ 'representativesRepresentativeInfoByAddress'' smart constructor.
+data RepresentativesRepresentativeInfoByAddress' = RepresentativesRepresentativeInfoByAddress'
     { _rribaQuotaUser      :: !(Maybe Text)
-    , _rribaRoles          :: !(Maybe Text)
+    , _rribaRoles          :: !(Maybe CivicinfoRepresentativesRepresentativeInfoByAddressRoles)
     , _rribaPrettyPrint    :: !Bool
     , _rribaUserIp         :: !(Maybe Text)
     , _rribaAddress        :: !(Maybe Text)
     , _rribaKey            :: !(Maybe Text)
     , _rribaIncludeOffices :: !Bool
-    , _rribaLevels         :: !(Maybe Text)
+    , _rribaLevels         :: !(Maybe CivicinfoRepresentativesRepresentativeInfoByAddressLevels)
     , _rribaOauthToken     :: !(Maybe Text)
     , _rribaFields         :: !(Maybe Text)
-    , _rribaAlt            :: !Text
+    , _rribaAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByAddress'' with the minimum fields required to make a request.
@@ -99,10 +112,10 @@ data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeI
 -- * 'rribaFields'
 --
 -- * 'rribaAlt'
-representativesRepresentativeInfoByAddress
-    :: RepresentativesRepresentativeInfoByAddress
-representativesRepresentativeInfoByAddress =
-    RepresentativesRepresentativeInfoByAddress
+representativesRepresentativeInfoByAddress'
+    :: RepresentativesRepresentativeInfoByAddress'
+representativesRepresentativeInfoByAddress' =
+    RepresentativesRepresentativeInfoByAddress'
     { _rribaQuotaUser = Nothing
     , _rribaRoles = Nothing
     , _rribaPrettyPrint = True
@@ -113,7 +126,7 @@ representativesRepresentativeInfoByAddress =
     , _rribaLevels = Nothing
     , _rribaOauthToken = Nothing
     , _rribaFields = Nothing
-    , _rribaAlt = "json"
+    , _rribaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,7 +140,7 @@ rribaQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
+rribaRoles :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe CivicinfoRepresentativesRepresentativeInfoByAddressRoles)
 rribaRoles
   = lens _rribaRoles (\ s a -> s{_rribaRoles = a})
 
@@ -165,7 +178,7 @@ rribaIncludeOffices
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe Text)
+rribaLevels :: Lens' RepresentativesRepresentativeInfoByAddress' (Maybe CivicinfoRepresentativesRepresentativeInfoByAddressLevels)
 rribaLevels
   = lens _rribaLevels (\ s a -> s{_rribaLevels = a})
 
@@ -181,7 +194,7 @@ rribaFields
   = lens _rribaFields (\ s a -> s{_rribaFields = a})
 
 -- | Data format for the response.
-rribaAlt :: Lens' RepresentativesRepresentativeInfoByAddress' Text
+rribaAlt :: Lens' RepresentativesRepresentativeInfoByAddress' Alt
 rribaAlt = lens _rribaAlt (\ s a -> s{_rribaAlt = a})
 
 instance GoogleRequest
@@ -190,8 +203,9 @@ instance GoogleRequest
              RepresentativeInfoResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
-          RepresentativesRepresentativeInfoByAddress{..}
-          = go _rribaQuotaUser _rribaRoles _rribaPrettyPrint
+          RepresentativesRepresentativeInfoByAddress'{..}
+          = go _rribaQuotaUser _rribaRoles
+              (Just _rribaPrettyPrint)
               _rribaUserIp
               _rribaAddress
               _rribaKey
@@ -199,10 +213,11 @@ instance GoogleRequest
               _rribaLevels
               _rribaOauthToken
               _rribaFields
-              _rribaAlt
+              (Just _rribaAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RepresentativesRepresentativeInfoByAddressAPI)
+                         Proxy
+                           RepresentativesRepresentativeInfoByAddressResource)
                       r
                       u

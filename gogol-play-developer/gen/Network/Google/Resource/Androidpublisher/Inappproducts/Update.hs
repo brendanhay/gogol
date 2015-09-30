@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates the details of an in-app product.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsUpdate@.
-module Androidpublisher.Inappproducts.Update
+module Network.Google.Resource.Androidpublisher.Inappproducts.Update
     (
     -- * REST Resource
-      InappproductsUpdateAPI
+      InappproductsUpdateResource
 
     -- * Creating a Request
-    , inappproductsUpdate
-    , InappproductsUpdate
+    , inappproductsUpdate'
+    , InappproductsUpdate'
 
     -- * Request Lenses
     , iuQuotaUser
@@ -45,18 +46,24 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsUpdate@ which the
--- 'InappproductsUpdate' request conforms to.
-type InappproductsUpdateAPI =
+-- 'InappproductsUpdate'' request conforms to.
+type InappproductsUpdateResource =
      Capture "packageName" Text :>
        "inappproducts" :>
          Capture "sku" Text :>
-           QueryParam "autoConvertMissingPrices" Bool :>
-             Put '[JSON] InAppProduct
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "autoConvertMissingPrices" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] InAppProduct
 
 -- | Updates the details of an in-app product.
 --
--- /See:/ 'inappproductsUpdate' smart constructor.
-data InappproductsUpdate = InappproductsUpdate
+-- /See:/ 'inappproductsUpdate'' smart constructor.
+data InappproductsUpdate' = InappproductsUpdate'
     { _iuQuotaUser                :: !(Maybe Text)
     , _iuPrettyPrint              :: !Bool
     , _iuAutoConvertMissingPrices :: !(Maybe Bool)
@@ -66,7 +73,7 @@ data InappproductsUpdate = InappproductsUpdate
     , _iuSku                      :: !Text
     , _iuOauthToken               :: !(Maybe Text)
     , _iuFields                   :: !(Maybe Text)
-    , _iuAlt                      :: !Text
+    , _iuAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsUpdate'' with the minimum fields required to make a request.
@@ -92,12 +99,12 @@ data InappproductsUpdate = InappproductsUpdate
 -- * 'iuFields'
 --
 -- * 'iuAlt'
-inappproductsUpdate
+inappproductsUpdate'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
-    -> InappproductsUpdate
-inappproductsUpdate pIuPackageName_ pIuSku_ =
-    InappproductsUpdate
+    -> InappproductsUpdate'
+inappproductsUpdate' pIuPackageName_ pIuSku_ =
+    InappproductsUpdate'
     { _iuQuotaUser = Nothing
     , _iuPrettyPrint = True
     , _iuAutoConvertMissingPrices = Nothing
@@ -107,7 +114,7 @@ inappproductsUpdate pIuPackageName_ pIuSku_ =
     , _iuSku = pIuSku_
     , _iuOauthToken = Nothing
     , _iuFields = Nothing
-    , _iuAlt = "json"
+    , _iuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,14 +171,14 @@ iuFields :: Lens' InappproductsUpdate' (Maybe Text)
 iuFields = lens _iuFields (\ s a -> s{_iuFields = a})
 
 -- | Data format for the response.
-iuAlt :: Lens' InappproductsUpdate' Text
+iuAlt :: Lens' InappproductsUpdate' Alt
 iuAlt = lens _iuAlt (\ s a -> s{_iuAlt = a})
 
 instance GoogleRequest InappproductsUpdate' where
         type Rs InappproductsUpdate' = InAppProduct
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsUpdate{..}
-          = go _iuQuotaUser _iuPrettyPrint
+        requestWithRoute r u InappproductsUpdate'{..}
+          = go _iuQuotaUser (Just _iuPrettyPrint)
               _iuAutoConvertMissingPrices
               _iuPackageName
               _iuUserIp
@@ -179,9 +186,9 @@ instance GoogleRequest InappproductsUpdate' where
               _iuSku
               _iuOauthToken
               _iuFields
-              _iuAlt
+              (Just _iuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsUpdateAPI)
+                      (Proxy :: Proxy InappproductsUpdateResource)
                       r
                       u

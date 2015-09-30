@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresResetAll@.
-module GamesManagement.Scores.ResetAll
+module Network.Google.Resource.GamesManagement.Scores.ResetAll
     (
     -- * REST Resource
-      ScoresResetAllAPI
+      ScoresResetAllResource
 
     -- * Creating a Request
-    , scoresResetAll
-    , ScoresResetAll
+    , scoresResetAll'
+    , ScoresResetAll'
 
     -- * Request Lenses
     , sraQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementScoresResetAll@ which the
--- 'ScoresResetAll' request conforms to.
-type ScoresResetAllAPI =
+-- 'ScoresResetAll'' request conforms to.
+type ScoresResetAllResource =
      "scores" :>
-       "reset" :> Post '[JSON] PlayerScoreResetAllResponse
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] PlayerScoreResetAllResponse
 
 -- | Resets all scores for all leaderboards for the currently authenticated
 -- players. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'scoresResetAll' smart constructor.
-data ScoresResetAll = ScoresResetAll
+-- /See:/ 'scoresResetAll'' smart constructor.
+data ScoresResetAll' = ScoresResetAll'
     { _sraQuotaUser   :: !(Maybe Text)
     , _sraPrettyPrint :: !Bool
     , _sraUserIp      :: !(Maybe Text)
     , _sraKey         :: !(Maybe Text)
     , _sraOauthToken  :: !(Maybe Text)
     , _sraFields      :: !(Maybe Text)
-    , _sraAlt         :: !Text
+    , _sraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAll'' with the minimum fields required to make a request.
@@ -81,17 +90,17 @@ data ScoresResetAll = ScoresResetAll
 -- * 'sraFields'
 --
 -- * 'sraAlt'
-scoresResetAll
-    :: ScoresResetAll
-scoresResetAll =
-    ScoresResetAll
+scoresResetAll'
+    :: ScoresResetAll'
+scoresResetAll' =
+    ScoresResetAll'
     { _sraQuotaUser = Nothing
     , _sraPrettyPrint = True
     , _sraUserIp = Nothing
     , _sraKey = Nothing
     , _sraOauthToken = Nothing
     , _sraFields = Nothing
-    , _sraAlt = "json"
+    , _sraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,18 +140,20 @@ sraFields
   = lens _sraFields (\ s a -> s{_sraFields = a})
 
 -- | Data format for the response.
-sraAlt :: Lens' ScoresResetAll' Text
+sraAlt :: Lens' ScoresResetAll' Alt
 sraAlt = lens _sraAlt (\ s a -> s{_sraAlt = a})
 
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ScoresResetAll{..}
-          = go _sraQuotaUser _sraPrettyPrint _sraUserIp _sraKey
+        requestWithRoute r u ScoresResetAll'{..}
+          = go _sraQuotaUser (Just _sraPrettyPrint) _sraUserIp
+              _sraKey
               _sraOauthToken
               _sraFields
-              _sraAlt
+              (Just _sraAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScoresResetAllAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ScoresResetAllResource)
                       r
                       u

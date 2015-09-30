@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all the track configurations for this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTracksList@.
-module Androidpublisher.Edits.Tracks.List
+module Network.Google.Resource.Androidpublisher.Edits.Tracks.List
     (
     -- * REST Resource
-      EditsTracksListAPI
+      EditsTracksListResource
 
     -- * Creating a Request
-    , editsTracksList
-    , EditsTracksList
+    , editsTracksList'
+    , EditsTracksList'
 
     -- * Request Lenses
     , etlQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTracksList@ which the
--- 'EditsTracksList' request conforms to.
-type EditsTracksListAPI =
+-- 'EditsTracksList'' request conforms to.
+type EditsTracksListResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "tracks" :> Get '[JSON] TracksListResponse
+           "tracks" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] TracksListResponse
 
 -- | Lists all the track configurations for this edit.
 --
--- /See:/ 'editsTracksList' smart constructor.
-data EditsTracksList = EditsTracksList
+-- /See:/ 'editsTracksList'' smart constructor.
+data EditsTracksList' = EditsTracksList'
     { _etlQuotaUser   :: !(Maybe Text)
     , _etlPrettyPrint :: !Bool
     , _etlPackageName :: !Text
@@ -63,7 +72,7 @@ data EditsTracksList = EditsTracksList
     , _etlOauthToken  :: !(Maybe Text)
     , _etlEditId      :: !Text
     , _etlFields      :: !(Maybe Text)
-    , _etlAlt         :: !Text
+    , _etlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksList'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data EditsTracksList = EditsTracksList
 -- * 'etlFields'
 --
 -- * 'etlAlt'
-editsTracksList
+editsTracksList'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTracksList
-editsTracksList pEtlPackageName_ pEtlEditId_ =
-    EditsTracksList
+    -> EditsTracksList'
+editsTracksList' pEtlPackageName_ pEtlEditId_ =
+    EditsTracksList'
     { _etlQuotaUser = Nothing
     , _etlPrettyPrint = True
     , _etlPackageName = pEtlPackageName_
@@ -101,7 +110,7 @@ editsTracksList pEtlPackageName_ pEtlEditId_ =
     , _etlOauthToken = Nothing
     , _etlEditId = pEtlEditId_
     , _etlFields = Nothing
-    , _etlAlt = "json"
+    , _etlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,21 +162,23 @@ etlFields
   = lens _etlFields (\ s a -> s{_etlFields = a})
 
 -- | Data format for the response.
-etlAlt :: Lens' EditsTracksList' Text
+etlAlt :: Lens' EditsTracksList' Alt
 etlAlt = lens _etlAlt (\ s a -> s{_etlAlt = a})
 
 instance GoogleRequest EditsTracksList' where
         type Rs EditsTracksList' = TracksListResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTracksList{..}
-          = go _etlQuotaUser _etlPrettyPrint _etlPackageName
+        requestWithRoute r u EditsTracksList'{..}
+          = go _etlQuotaUser (Just _etlPrettyPrint)
+              _etlPackageName
               _etlUserIp
               _etlKey
               _etlOauthToken
               _etlEditId
               _etlFields
-              _etlAlt
+              (Just _etlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsTracksListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsTracksListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,165 +20,171 @@
 -- | Gets a comment by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveCommentsGet@.
-module Drive.Comments.Get
+module Network.Google.Resource.Drive.Comments.Get
     (
     -- * REST Resource
-      CommentsGetAPI
+      CommentsGetResource
 
     -- * Creating a Request
-    , commentsGet
-    , CommentsGet
+    , commentsGet'
+    , CommentsGet'
 
     -- * Request Lenses
-    , cggQuotaUser
-    , cggPrettyPrint
-    , cggUserIp
-    , cggKey
-    , cggFileId
-    , cggOauthToken
-    , cggCommentId
-    , cggIncludeDeleted
-    , cggFields
-    , cggAlt
+    , cgQuotaUser
+    , cgPrettyPrint
+    , cgUserIp
+    , cgKey
+    , cgFileId
+    , cgOauthToken
+    , cgCommentId
+    , cgIncludeDeleted
+    , cgFields
+    , cgAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveCommentsGet@ which the
--- 'CommentsGet' request conforms to.
-type CommentsGetAPI =
+-- 'CommentsGet'' request conforms to.
+type CommentsGetResource =
      "files" :>
        Capture "fileId" Text :>
          "comments" :>
            Capture "commentId" Text :>
-             QueryParam "includeDeleted" Bool :>
-               Get '[JSON] Comment
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "includeDeleted" Bool :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Comment
 
 -- | Gets a comment by ID.
 --
--- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
-    { _cggQuotaUser      :: !(Maybe Text)
-    , _cggPrettyPrint    :: !Bool
-    , _cggUserIp         :: !(Maybe Text)
-    , _cggKey            :: !(Maybe Text)
-    , _cggFileId         :: !Text
-    , _cggOauthToken     :: !(Maybe Text)
-    , _cggCommentId      :: !Text
-    , _cggIncludeDeleted :: !Bool
-    , _cggFields         :: !(Maybe Text)
-    , _cggAlt            :: !Text
+-- /See:/ 'commentsGet'' smart constructor.
+data CommentsGet' = CommentsGet'
+    { _cgQuotaUser      :: !(Maybe Text)
+    , _cgPrettyPrint    :: !Bool
+    , _cgUserIp         :: !(Maybe Text)
+    , _cgKey            :: !(Maybe Text)
+    , _cgFileId         :: !Text
+    , _cgOauthToken     :: !(Maybe Text)
+    , _cgCommentId      :: !Text
+    , _cgIncludeDeleted :: !Bool
+    , _cgFields         :: !(Maybe Text)
+    , _cgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cggQuotaUser'
+-- * 'cgQuotaUser'
 --
--- * 'cggPrettyPrint'
+-- * 'cgPrettyPrint'
 --
--- * 'cggUserIp'
+-- * 'cgUserIp'
 --
--- * 'cggKey'
+-- * 'cgKey'
 --
--- * 'cggFileId'
+-- * 'cgFileId'
 --
--- * 'cggOauthToken'
+-- * 'cgOauthToken'
 --
--- * 'cggCommentId'
+-- * 'cgCommentId'
 --
--- * 'cggIncludeDeleted'
+-- * 'cgIncludeDeleted'
 --
--- * 'cggFields'
+-- * 'cgFields'
 --
--- * 'cggAlt'
-commentsGet
+-- * 'cgAlt'
+commentsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
-    -> CommentsGet
-commentsGet pCggFileId_ pCggCommentId_ =
-    CommentsGet
-    { _cggQuotaUser = Nothing
-    , _cggPrettyPrint = True
-    , _cggUserIp = Nothing
-    , _cggKey = Nothing
-    , _cggFileId = pCggFileId_
-    , _cggOauthToken = Nothing
-    , _cggCommentId = pCggCommentId_
-    , _cggIncludeDeleted = False
-    , _cggFields = Nothing
-    , _cggAlt = "json"
+    -> CommentsGet'
+commentsGet' pCgFileId_ pCgCommentId_ =
+    CommentsGet'
+    { _cgQuotaUser = Nothing
+    , _cgPrettyPrint = True
+    , _cgUserIp = Nothing
+    , _cgKey = Nothing
+    , _cgFileId = pCgFileId_
+    , _cgOauthToken = Nothing
+    , _cgCommentId = pCgCommentId_
+    , _cgIncludeDeleted = False
+    , _cgFields = Nothing
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cggQuotaUser :: Lens' CommentsGet' (Maybe Text)
-cggQuotaUser
-  = lens _cggQuotaUser (\ s a -> s{_cggQuotaUser = a})
+cgQuotaUser :: Lens' CommentsGet' (Maybe Text)
+cgQuotaUser
+  = lens _cgQuotaUser (\ s a -> s{_cgQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cggPrettyPrint :: Lens' CommentsGet' Bool
-cggPrettyPrint
-  = lens _cggPrettyPrint
-      (\ s a -> s{_cggPrettyPrint = a})
+cgPrettyPrint :: Lens' CommentsGet' Bool
+cgPrettyPrint
+  = lens _cgPrettyPrint
+      (\ s a -> s{_cgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cggUserIp :: Lens' CommentsGet' (Maybe Text)
-cggUserIp
-  = lens _cggUserIp (\ s a -> s{_cggUserIp = a})
+cgUserIp :: Lens' CommentsGet' (Maybe Text)
+cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' CommentsGet' (Maybe Text)
-cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
+cgKey :: Lens' CommentsGet' (Maybe Text)
+cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | The ID of the file.
-cggFileId :: Lens' CommentsGet' Text
-cggFileId
-  = lens _cggFileId (\ s a -> s{_cggFileId = a})
+cgFileId :: Lens' CommentsGet' Text
+cgFileId = lens _cgFileId (\ s a -> s{_cgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-cggOauthToken :: Lens' CommentsGet' (Maybe Text)
-cggOauthToken
-  = lens _cggOauthToken
-      (\ s a -> s{_cggOauthToken = a})
+cgOauthToken :: Lens' CommentsGet' (Maybe Text)
+cgOauthToken
+  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
 
 -- | The ID of the comment.
-cggCommentId :: Lens' CommentsGet' Text
-cggCommentId
-  = lens _cggCommentId (\ s a -> s{_cggCommentId = a})
+cgCommentId :: Lens' CommentsGet' Text
+cgCommentId
+  = lens _cgCommentId (\ s a -> s{_cgCommentId = a})
 
 -- | If set, this will succeed when retrieving a deleted comment, and will
 -- include any deleted replies.
-cggIncludeDeleted :: Lens' CommentsGet' Bool
-cggIncludeDeleted
-  = lens _cggIncludeDeleted
-      (\ s a -> s{_cggIncludeDeleted = a})
+cgIncludeDeleted :: Lens' CommentsGet' Bool
+cgIncludeDeleted
+  = lens _cgIncludeDeleted
+      (\ s a -> s{_cgIncludeDeleted = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cggFields :: Lens' CommentsGet' (Maybe Text)
-cggFields
-  = lens _cggFields (\ s a -> s{_cggFields = a})
+cgFields :: Lens' CommentsGet' (Maybe Text)
+cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cggAlt :: Lens' CommentsGet' Text
-cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
+cgAlt :: Lens' CommentsGet' Alt
+cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u CommentsGet{..}
-          = go _cggQuotaUser _cggPrettyPrint _cggUserIp _cggKey
-              _cggFileId
-              _cggOauthToken
-              _cggCommentId
-              (Just _cggIncludeDeleted)
-              _cggFields
-              _cggAlt
+        requestWithRoute r u CommentsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
+              _cgFileId
+              _cgOauthToken
+              _cgCommentId
+              (Just _cgIncludeDeleted)
+              _cgFields
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsGetResource)
+                      r
+                      u

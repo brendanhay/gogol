@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- trash it.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsDelete@.
-module Gmail.Users.Drafts.Delete
+module Network.Google.Resource.Gmail.Users.Drafts.Delete
     (
     -- * REST Resource
-      UsersDraftsDeleteAPI
+      UsersDraftsDeleteResource
 
     -- * Creating a Request
-    , usersDraftsDelete
-    , UsersDraftsDelete
+    , usersDraftsDelete'
+    , UsersDraftsDelete'
 
     -- * Request Lenses
     , uddQuotaUser
@@ -45,16 +46,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersDraftsDelete@ which the
--- 'UsersDraftsDelete' request conforms to.
-type UsersDraftsDeleteAPI =
+-- 'UsersDraftsDelete'' request conforms to.
+type UsersDraftsDeleteResource =
      Capture "userId" Text :>
-       "drafts" :> Capture "id" Text :> Delete '[JSON] ()
+       "drafts" :>
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.
 --
--- /See:/ 'usersDraftsDelete' smart constructor.
-data UsersDraftsDelete = UsersDraftsDelete
+-- /See:/ 'usersDraftsDelete'' smart constructor.
+data UsersDraftsDelete' = UsersDraftsDelete'
     { _uddQuotaUser   :: !(Maybe Text)
     , _uddPrettyPrint :: !Bool
     , _uddUserIp      :: !(Maybe Text)
@@ -63,7 +72,7 @@ data UsersDraftsDelete = UsersDraftsDelete
     , _uddId          :: !Text
     , _uddOauthToken  :: !(Maybe Text)
     , _uddFields      :: !(Maybe Text)
-    , _uddAlt         :: !Text
+    , _uddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsDelete'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data UsersDraftsDelete = UsersDraftsDelete
 -- * 'uddFields'
 --
 -- * 'uddAlt'
-usersDraftsDelete
+usersDraftsDelete'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersDraftsDelete
-usersDraftsDelete pUddUserId_ pUddId_ =
-    UsersDraftsDelete
+    -> UsersDraftsDelete'
+usersDraftsDelete' pUddUserId_ pUddId_ =
+    UsersDraftsDelete'
     { _uddQuotaUser = Nothing
     , _uddPrettyPrint = True
     , _uddUserIp = Nothing
@@ -101,7 +110,7 @@ usersDraftsDelete pUddUserId_ pUddId_ =
     , _uddId = pUddId_
     , _uddOauthToken = Nothing
     , _uddFields = Nothing
-    , _uddAlt = "json"
+    , _uddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +160,22 @@ uddFields
   = lens _uddFields (\ s a -> s{_uddFields = a})
 
 -- | Data format for the response.
-uddAlt :: Lens' UsersDraftsDelete' Text
+uddAlt :: Lens' UsersDraftsDelete' Alt
 uddAlt = lens _uddAlt (\ s a -> s{_uddAlt = a})
 
 instance GoogleRequest UsersDraftsDelete' where
         type Rs UsersDraftsDelete' = ()
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsDelete{..}
-          = go _uddQuotaUser _uddPrettyPrint _uddUserIp
+        requestWithRoute r u UsersDraftsDelete'{..}
+          = go _uddQuotaUser (Just _uddPrettyPrint) _uddUserIp
               _uddUserId
               _uddKey
               _uddId
               _uddOauthToken
               _uddFields
-              _uddAlt
+              (Just _uddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDraftsDeleteAPI)
+                      (Proxy :: Proxy UsersDraftsDeleteResource)
                       r
                       u

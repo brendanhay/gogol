@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the entire content of the UrlMap resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsUpdate@.
-module Compute.URLMaps.Update
+module Network.Google.Resource.Compute.URLMaps.Update
     (
     -- * REST Resource
-      UrlMapsUpdateAPI
+      UrlMapsUpdateResource
 
     -- * Creating a Request
-    , uRLMapsUpdate
-    , URLMapsUpdate
+    , uRLMapsUpdate'
+    , URLMapsUpdate'
 
     -- * Request Lenses
     , umuQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsUpdate@ which the
--- 'URLMapsUpdate' request conforms to.
-type UrlMapsUpdateAPI =
+-- 'URLMapsUpdate'' request conforms to.
+type UrlMapsUpdateResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           Capture "urlMap" Text :> Put '[JSON] Operation
+           Capture "urlMap" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource.
 --
--- /See:/ 'uRLMapsUpdate' smart constructor.
-data URLMapsUpdate = URLMapsUpdate
+-- /See:/ 'uRLMapsUpdate'' smart constructor.
+data URLMapsUpdate' = URLMapsUpdate'
     { _umuQuotaUser   :: !(Maybe Text)
     , _umuUrlMap      :: !Text
     , _umuPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data URLMapsUpdate = URLMapsUpdate
     , _umuKey         :: !(Maybe Text)
     , _umuOauthToken  :: !(Maybe Text)
     , _umuFields      :: !(Maybe Text)
-    , _umuAlt         :: !Text
+    , _umuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsUpdate'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data URLMapsUpdate = URLMapsUpdate
 -- * 'umuFields'
 --
 -- * 'umuAlt'
-uRLMapsUpdate
+uRLMapsUpdate'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsUpdate
-uRLMapsUpdate pUmuUrlMap_ pUmuProject_ =
-    URLMapsUpdate
+    -> URLMapsUpdate'
+uRLMapsUpdate' pUmuUrlMap_ pUmuProject_ =
+    URLMapsUpdate'
     { _umuQuotaUser = Nothing
     , _umuUrlMap = pUmuUrlMap_
     , _umuPrettyPrint = True
@@ -101,7 +109,7 @@ uRLMapsUpdate pUmuUrlMap_ pUmuProject_ =
     , _umuKey = Nothing
     , _umuOauthToken = Nothing
     , _umuFields = Nothing
-    , _umuAlt = "json"
+    , _umuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,20 +159,22 @@ umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
 -- | Data format for the response.
-umuAlt :: Lens' URLMapsUpdate' Text
+umuAlt :: Lens' URLMapsUpdate' Alt
 umuAlt = lens _umuAlt (\ s a -> s{_umuAlt = a})
 
 instance GoogleRequest URLMapsUpdate' where
         type Rs URLMapsUpdate' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsUpdate{..}
-          = go _umuQuotaUser _umuUrlMap _umuPrettyPrint
+        requestWithRoute r u URLMapsUpdate'{..}
+          = go _umuQuotaUser _umuUrlMap (Just _umuPrettyPrint)
               _umuProject
               _umuUserIp
               _umuKey
               _umuOauthToken
               _umuFields
-              _umuAlt
+              (Just _umuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsUpdateResource)
+                      r
                       u

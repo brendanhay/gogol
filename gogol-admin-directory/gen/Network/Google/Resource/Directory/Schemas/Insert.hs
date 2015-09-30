@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create schema.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectorySchemasInsert@.
-module Directory.Schemas.Insert
+module Network.Google.Resource.Directory.Schemas.Insert
     (
     -- * REST Resource
-      SchemasInsertAPI
+      SchemasInsertResource
 
     -- * Creating a Request
-    , schemasInsert
-    , SchemasInsert
+    , schemasInsert'
+    , SchemasInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectorySchemasInsert@ which the
--- 'SchemasInsert' request conforms to.
-type SchemasInsertAPI =
+-- 'SchemasInsert'' request conforms to.
+type SchemasInsertResource =
      "customer" :>
        Capture "customerId" Text :>
-         "schemas" :> Post '[JSON] Schema
+         "schemas" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Schema
 
 -- | Create schema.
 --
--- /See:/ 'schemasInsert' smart constructor.
-data SchemasInsert = SchemasInsert
+-- /See:/ 'schemasInsert'' smart constructor.
+data SchemasInsert' = SchemasInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data SchemasInsert = SchemasInsert
     , _siKey         :: !(Maybe Text)
     , _siOauthToken  :: !(Maybe Text)
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Text
+    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data SchemasInsert = SchemasInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-schemasInsert
+schemasInsert'
     :: Text -- ^ 'customerId'
-    -> SchemasInsert
-schemasInsert pSiCustomerId_ =
-    SchemasInsert
+    -> SchemasInsert'
+schemasInsert' pSiCustomerId_ =
+    SchemasInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIp = Nothing
@@ -94,7 +102,7 @@ schemasInsert pSiCustomerId_ =
     , _siKey = Nothing
     , _siOauthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,19 +144,21 @@ siFields :: Lens' SchemasInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' SchemasInsert' Text
+siAlt :: Lens' SchemasInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u SchemasInsert{..}
-          = go _siQuotaUser _siPrettyPrint _siUserIp
+        requestWithRoute r u SchemasInsert'{..}
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
               _siCustomerId
               _siKey
               _siOauthToken
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SchemasInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SchemasInsertResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a GTM Rule.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesGet@.
-module TagManager.Accounts.Containers.Rules.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
     (
     -- * REST Resource
-      AccountsContainersRulesGetAPI
+      AccountsContainersRulesGetResource
 
     -- * Creating a Request
-    , accountsContainersRulesGet
-    , AccountsContainersRulesGet
+    , accountsContainersRulesGet'
+    , AccountsContainersRulesGet'
 
     -- * Request Lenses
     , acrgQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersRulesGet@ which the
--- 'AccountsContainersRulesGet' request conforms to.
-type AccountsContainersRulesGetAPI =
+-- 'AccountsContainersRulesGet'' request conforms to.
+type AccountsContainersRulesGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "rules" :> Capture "ruleId" Text :> Get '[JSON] Rule
+             "rules" :>
+               Capture "ruleId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Rule
 
 -- | Gets a GTM Rule.
 --
--- /See:/ 'accountsContainersRulesGet' smart constructor.
-data AccountsContainersRulesGet = AccountsContainersRulesGet
+-- /See:/ 'accountsContainersRulesGet'' smart constructor.
+data AccountsContainersRulesGet' = AccountsContainersRulesGet'
     { _acrgQuotaUser   :: !(Maybe Text)
     , _acrgPrettyPrint :: !Bool
     , _acrgContainerId :: !Text
@@ -66,7 +75,7 @@ data AccountsContainersRulesGet = AccountsContainersRulesGet
     , _acrgKey         :: !(Maybe Text)
     , _acrgOauthToken  :: !(Maybe Text)
     , _acrgFields      :: !(Maybe Text)
-    , _acrgAlt         :: !Text
+    , _acrgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesGet'' with the minimum fields required to make a request.
@@ -92,13 +101,13 @@ data AccountsContainersRulesGet = AccountsContainersRulesGet
 -- * 'acrgFields'
 --
 -- * 'acrgAlt'
-accountsContainersRulesGet
+accountsContainersRulesGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersRulesGet
-accountsContainersRulesGet pAcrgContainerId_ pAcrgRuleId_ pAcrgAccountId_ =
-    AccountsContainersRulesGet
+    -> AccountsContainersRulesGet'
+accountsContainersRulesGet' pAcrgContainerId_ pAcrgRuleId_ pAcrgAccountId_ =
+    AccountsContainersRulesGet'
     { _acrgQuotaUser = Nothing
     , _acrgPrettyPrint = True
     , _acrgContainerId = pAcrgContainerId_
@@ -108,7 +117,7 @@ accountsContainersRulesGet pAcrgContainerId_ pAcrgRuleId_ pAcrgAccountId_ =
     , _acrgKey = Nothing
     , _acrgOauthToken = Nothing
     , _acrgFields = Nothing
-    , _acrgAlt = "json"
+    , _acrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,24 +175,25 @@ acrgFields
   = lens _acrgFields (\ s a -> s{_acrgFields = a})
 
 -- | Data format for the response.
-acrgAlt :: Lens' AccountsContainersRulesGet' Text
+acrgAlt :: Lens' AccountsContainersRulesGet' Alt
 acrgAlt = lens _acrgAlt (\ s a -> s{_acrgAlt = a})
 
 instance GoogleRequest AccountsContainersRulesGet'
          where
         type Rs AccountsContainersRulesGet' = Rule
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersRulesGet{..}
-          = go _acrgQuotaUser _acrgPrettyPrint _acrgContainerId
+        requestWithRoute r u AccountsContainersRulesGet'{..}
+          = go _acrgQuotaUser (Just _acrgPrettyPrint)
+              _acrgContainerId
               _acrgUserIp
               _acrgRuleId
               _acrgAccountId
               _acrgKey
               _acrgOauthToken
               _acrgFields
-              _acrgAlt
+              (Just _acrgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersRulesGetAPI)
+                      (Proxy :: Proxy AccountsContainersRulesGetResource)
                       r
                       u

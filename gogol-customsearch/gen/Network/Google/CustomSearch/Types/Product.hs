@@ -19,9 +19,60 @@ import           Network.Google.CustomSearch.Types.Sum
 import           Network.Google.Prelude
 
 --
+-- /See:/ 'promotionImage' smart constructor.
+data PromotionImage = PromotionImage
+    { _piHeight :: !(Maybe Int32)
+    , _piWidth  :: !(Maybe Int32)
+    , _piSource :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PromotionImage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piHeight'
+--
+-- * 'piWidth'
+--
+-- * 'piSource'
+promotionImage
+    :: PromotionImage
+promotionImage =
+    PromotionImage
+    { _piHeight = Nothing
+    , _piWidth = Nothing
+    , _piSource = Nothing
+    }
+
+piHeight :: Lens' PromotionImage (Maybe Int32)
+piHeight = lens _piHeight (\ s a -> s{_piHeight = a})
+
+piWidth :: Lens' PromotionImage (Maybe Int32)
+piWidth = lens _piWidth (\ s a -> s{_piWidth = a})
+
+piSource :: Lens' PromotionImage (Maybe Text)
+piSource = lens _piSource (\ s a -> s{_piSource = a})
+
+instance FromJSON PromotionImage where
+        parseJSON
+          = withObject "PromotionImage"
+              (\ o ->
+                 PromotionImage <$>
+                   (o .:? "height") <*> (o .:? "width") <*>
+                     (o .:? "source"))
+
+instance ToJSON PromotionImage where
+        toJSON PromotionImage{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _piHeight,
+                  ("width" .=) <$> _piWidth,
+                  ("source" .=) <$> _piSource])
+
+--
 -- /See:/ 'context' smart constructor.
 data Context = Context
-    { _cFacets :: !(Maybe [[ContextFacetsItemItem]])
+    { _cFacets :: !(Maybe [[ContextFacets]])
     , _cTitle  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -40,7 +91,7 @@ context =
     , _cTitle = Nothing
     }
 
-cFacets :: Lens' Context [[ContextFacetsItemItem]]
+cFacets :: Lens' Context [[ContextFacets]]
 cFacets
   = lens _cFacets (\ s a -> s{_cFacets = a}) . _Default
       . _Coerce
@@ -63,6 +114,234 @@ instance ToJSON Context where
                   ("title" .=) <$> _cTitle])
 
 --
+-- /See:/ 'searchQueries' smart constructor.
+data SearchQueries =
+    SearchQueries
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchQueries' with the minimum fields required to make a request.
+--
+searchQueries
+    :: SearchQueries
+searchQueries = SearchQueries
+
+instance FromJSON SearchQueries where
+        parseJSON
+          = withObject "SearchQueries"
+              (\ o -> pure SearchQueries)
+
+instance ToJSON SearchQueries where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'searchURL' smart constructor.
+data SearchURL = SearchURL
+    { _suType     :: !Text
+    , _suTemplate :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchURL' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'suType'
+--
+-- * 'suTemplate'
+searchURL
+    :: SearchURL
+searchURL =
+    SearchURL
+    { _suType = "application/json"
+    , _suTemplate = "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+    }
+
+suType :: Lens' SearchURL Text
+suType = lens _suType (\ s a -> s{_suType = a})
+
+suTemplate :: Lens' SearchURL Text
+suTemplate
+  = lens _suTemplate (\ s a -> s{_suTemplate = a})
+
+instance FromJSON SearchURL where
+        parseJSON
+          = withObject "SearchURL"
+              (\ o ->
+                 SearchURL <$>
+                   (o .:? "type" .!= "application/json") <*>
+                     (o .:? "template" .!=
+                        "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"))
+
+instance ToJSON SearchURL where
+        toJSON SearchURL{..}
+          = object
+              (catMaybes
+                 [Just ("type" .= _suType),
+                  Just ("template" .= _suTemplate)])
+
+--
+-- /See:/ 'searchSpelling' smart constructor.
+data SearchSpelling = SearchSpelling
+    { _ssCorrectedQuery     :: !(Maybe Text)
+    , _ssHtmlCorrectedQuery :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchSpelling' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssCorrectedQuery'
+--
+-- * 'ssHtmlCorrectedQuery'
+searchSpelling
+    :: SearchSpelling
+searchSpelling =
+    SearchSpelling
+    { _ssCorrectedQuery = Nothing
+    , _ssHtmlCorrectedQuery = Nothing
+    }
+
+ssCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
+ssCorrectedQuery
+  = lens _ssCorrectedQuery
+      (\ s a -> s{_ssCorrectedQuery = a})
+
+ssHtmlCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
+ssHtmlCorrectedQuery
+  = lens _ssHtmlCorrectedQuery
+      (\ s a -> s{_ssHtmlCorrectedQuery = a})
+
+instance FromJSON SearchSpelling where
+        parseJSON
+          = withObject "SearchSpelling"
+              (\ o ->
+                 SearchSpelling <$>
+                   (o .:? "correctedQuery") <*>
+                     (o .:? "htmlCorrectedQuery"))
+
+instance ToJSON SearchSpelling where
+        toJSON SearchSpelling{..}
+          = object
+              (catMaybes
+                 [("correctedQuery" .=) <$> _ssCorrectedQuery,
+                  ("htmlCorrectedQuery" .=) <$> _ssHtmlCorrectedQuery])
+
+--
+-- /See:/ 'resultPagemap' smart constructor.
+data ResultPagemap =
+    ResultPagemap
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultPagemap' with the minimum fields required to make a request.
+--
+resultPagemap
+    :: ResultPagemap
+resultPagemap = ResultPagemap
+
+instance FromJSON ResultPagemap where
+        parseJSON
+          = withObject "ResultPagemap"
+              (\ o -> pure ResultPagemap)
+
+instance ToJSON ResultPagemap where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'resultImage' smart constructor.
+data ResultImage = ResultImage
+    { _riThumbnailLink   :: !(Maybe Text)
+    , _riHeight          :: !(Maybe Int32)
+    , _riByteSize        :: !(Maybe Int32)
+    , _riContextLink     :: !(Maybe Text)
+    , _riThumbnailHeight :: !(Maybe Int32)
+    , _riWidth           :: !(Maybe Int32)
+    , _riThumbnailWidth  :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultImage' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'riThumbnailLink'
+--
+-- * 'riHeight'
+--
+-- * 'riByteSize'
+--
+-- * 'riContextLink'
+--
+-- * 'riThumbnailHeight'
+--
+-- * 'riWidth'
+--
+-- * 'riThumbnailWidth'
+resultImage
+    :: ResultImage
+resultImage =
+    ResultImage
+    { _riThumbnailLink = Nothing
+    , _riHeight = Nothing
+    , _riByteSize = Nothing
+    , _riContextLink = Nothing
+    , _riThumbnailHeight = Nothing
+    , _riWidth = Nothing
+    , _riThumbnailWidth = Nothing
+    }
+
+riThumbnailLink :: Lens' ResultImage (Maybe Text)
+riThumbnailLink
+  = lens _riThumbnailLink
+      (\ s a -> s{_riThumbnailLink = a})
+
+riHeight :: Lens' ResultImage (Maybe Int32)
+riHeight = lens _riHeight (\ s a -> s{_riHeight = a})
+
+riByteSize :: Lens' ResultImage (Maybe Int32)
+riByteSize
+  = lens _riByteSize (\ s a -> s{_riByteSize = a})
+
+riContextLink :: Lens' ResultImage (Maybe Text)
+riContextLink
+  = lens _riContextLink
+      (\ s a -> s{_riContextLink = a})
+
+riThumbnailHeight :: Lens' ResultImage (Maybe Int32)
+riThumbnailHeight
+  = lens _riThumbnailHeight
+      (\ s a -> s{_riThumbnailHeight = a})
+
+riWidth :: Lens' ResultImage (Maybe Int32)
+riWidth = lens _riWidth (\ s a -> s{_riWidth = a})
+
+riThumbnailWidth :: Lens' ResultImage (Maybe Int32)
+riThumbnailWidth
+  = lens _riThumbnailWidth
+      (\ s a -> s{_riThumbnailWidth = a})
+
+instance FromJSON ResultImage where
+        parseJSON
+          = withObject "ResultImage"
+              (\ o ->
+                 ResultImage <$>
+                   (o .:? "thumbnailLink") <*> (o .:? "height") <*>
+                     (o .:? "byteSize")
+                     <*> (o .:? "contextLink")
+                     <*> (o .:? "thumbnailHeight")
+                     <*> (o .:? "width")
+                     <*> (o .:? "thumbnailWidth"))
+
+instance ToJSON ResultImage where
+        toJSON ResultImage{..}
+          = object
+              (catMaybes
+                 [("thumbnailLink" .=) <$> _riThumbnailLink,
+                  ("height" .=) <$> _riHeight,
+                  ("byteSize" .=) <$> _riByteSize,
+                  ("contextLink" .=) <$> _riContextLink,
+                  ("thumbnailHeight" .=) <$> _riThumbnailHeight,
+                  ("width" .=) <$> _riWidth,
+                  ("thumbnailWidth" .=) <$> _riThumbnailWidth])
+
+--
 -- /See:/ 'result' smart constructor.
 data Result = Result
     { _rMime             :: !(Maybe Text)
@@ -78,7 +357,7 @@ data Result = Result
     , _rCacheId          :: !(Maybe Text)
     , _rFormattedUrl     :: !(Maybe Text)
     , _rHtmlTitle        :: !(Maybe Text)
-    , _rLabels           :: !(Maybe [ResultLabelsItem])
+    , _rLabels           :: !(Maybe [ResultLabels])
     , _rTitle            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -183,7 +462,7 @@ rHtmlTitle :: Lens' Result (Maybe Text)
 rHtmlTitle
   = lens _rHtmlTitle (\ s a -> s{_rHtmlTitle = a})
 
-rLabels :: Lens' Result [ResultLabelsItem]
+rLabels :: Lens' Result [ResultLabels]
 rLabels
   = lens _rLabels (\ s a -> s{_rLabels = a}) . _Default
       . _Coerce
@@ -228,6 +507,132 @@ instance ToJSON Result where
                   ("htmlTitle" .=) <$> _rHtmlTitle,
                   ("labels" .=) <$> _rLabels,
                   ("title" .=) <$> _rTitle])
+
+--
+-- /See:/ 'resultLabels' smart constructor.
+data ResultLabels = ResultLabels
+    { _rlName        :: !(Maybe Text)
+    , _rlDisplayName :: !(Maybe Text)
+    , _rlLabelWithOp :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ResultLabels' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlName'
+--
+-- * 'rlDisplayName'
+--
+-- * 'rlLabelWithOp'
+resultLabels
+    :: ResultLabels
+resultLabels =
+    ResultLabels
+    { _rlName = Nothing
+    , _rlDisplayName = Nothing
+    , _rlLabelWithOp = Nothing
+    }
+
+rlName :: Lens' ResultLabels (Maybe Text)
+rlName = lens _rlName (\ s a -> s{_rlName = a})
+
+rlDisplayName :: Lens' ResultLabels (Maybe Text)
+rlDisplayName
+  = lens _rlDisplayName
+      (\ s a -> s{_rlDisplayName = a})
+
+rlLabelWithOp :: Lens' ResultLabels (Maybe Text)
+rlLabelWithOp
+  = lens _rlLabelWithOp
+      (\ s a -> s{_rlLabelWithOp = a})
+
+instance FromJSON ResultLabels where
+        parseJSON
+          = withObject "ResultLabels"
+              (\ o ->
+                 ResultLabels <$>
+                   (o .:? "name") <*> (o .:? "displayName") <*>
+                     (o .:? "label_with_op"))
+
+instance ToJSON ResultLabels where
+        toJSON ResultLabels{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _rlName,
+                  ("displayName" .=) <$> _rlDisplayName,
+                  ("label_with_op" .=) <$> _rlLabelWithOp])
+
+--
+-- /See:/ 'searchSearchInformation' smart constructor.
+data SearchSearchInformation = SearchSearchInformation
+    { _ssiSearchTime            :: !(Maybe Double)
+    , _ssiFormattedSearchTime   :: !(Maybe Text)
+    , _ssiTotalResults          :: !(Maybe Int64)
+    , _ssiFormattedTotalResults :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'SearchSearchInformation' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ssiSearchTime'
+--
+-- * 'ssiFormattedSearchTime'
+--
+-- * 'ssiTotalResults'
+--
+-- * 'ssiFormattedTotalResults'
+searchSearchInformation
+    :: SearchSearchInformation
+searchSearchInformation =
+    SearchSearchInformation
+    { _ssiSearchTime = Nothing
+    , _ssiFormattedSearchTime = Nothing
+    , _ssiTotalResults = Nothing
+    , _ssiFormattedTotalResults = Nothing
+    }
+
+ssiSearchTime :: Lens' SearchSearchInformation (Maybe Double)
+ssiSearchTime
+  = lens _ssiSearchTime
+      (\ s a -> s{_ssiSearchTime = a})
+
+ssiFormattedSearchTime :: Lens' SearchSearchInformation (Maybe Text)
+ssiFormattedSearchTime
+  = lens _ssiFormattedSearchTime
+      (\ s a -> s{_ssiFormattedSearchTime = a})
+
+ssiTotalResults :: Lens' SearchSearchInformation (Maybe Int64)
+ssiTotalResults
+  = lens _ssiTotalResults
+      (\ s a -> s{_ssiTotalResults = a})
+
+ssiFormattedTotalResults :: Lens' SearchSearchInformation (Maybe Text)
+ssiFormattedTotalResults
+  = lens _ssiFormattedTotalResults
+      (\ s a -> s{_ssiFormattedTotalResults = a})
+
+instance FromJSON SearchSearchInformation where
+        parseJSON
+          = withObject "SearchSearchInformation"
+              (\ o ->
+                 SearchSearchInformation <$>
+                   (o .:? "searchTime") <*>
+                     (o .:? "formattedSearchTime")
+                     <*> (o .:? "totalResults")
+                     <*> (o .:? "formattedTotalResults"))
+
+instance ToJSON SearchSearchInformation where
+        toJSON SearchSearchInformation{..}
+          = object
+              (catMaybes
+                 [("searchTime" .=) <$> _ssiSearchTime,
+                  ("formattedSearchTime" .=) <$>
+                    _ssiFormattedSearchTime,
+                  ("totalResults" .=) <$> _ssiTotalResults,
+                  ("formattedTotalResults" .=) <$>
+                    _ssiFormattedTotalResults])
 
 --
 -- /See:/ 'query' smart constructor.
@@ -620,7 +1025,7 @@ instance ToJSON Query where
 data Promotion = Promotion
     { _pImage       :: !(Maybe PromotionImage)
     , _pDisplayLink :: !(Maybe Text)
-    , _pBodyLines   :: !(Maybe [PromotionBodyLinesItem])
+    , _pBodyLines   :: !(Maybe [PromotionBodyLines])
     , _pLink        :: !(Maybe Text)
     , _pHtmlTitle   :: !(Maybe Text)
     , _pTitle       :: !(Maybe Text)
@@ -660,7 +1065,7 @@ pDisplayLink :: Lens' Promotion (Maybe Text)
 pDisplayLink
   = lens _pDisplayLink (\ s a -> s{_pDisplayLink = a})
 
-pBodyLines :: Lens' Promotion [PromotionBodyLinesItem]
+pBodyLines :: Lens' Promotion [PromotionBodyLines]
 pBodyLines
   = lens _pBodyLines (\ s a -> s{_pBodyLines = a}) .
       _Default
@@ -800,3 +1205,116 @@ instance ToJSON Search where
                   ("searchInformation" .=) <$> _sSearchInformation,
                   ("promotions" .=) <$> _sPromotions,
                   ("spelling" .=) <$> _sSpelling])
+
+--
+-- /See:/ 'promotionBodyLines' smart constructor.
+data PromotionBodyLines = PromotionBodyLines
+    { _pblLink      :: !(Maybe Text)
+    , _pblUrl       :: !(Maybe Text)
+    , _pblHtmlTitle :: !(Maybe Text)
+    , _pblTitle     :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PromotionBodyLines' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pblLink'
+--
+-- * 'pblUrl'
+--
+-- * 'pblHtmlTitle'
+--
+-- * 'pblTitle'
+promotionBodyLines
+    :: PromotionBodyLines
+promotionBodyLines =
+    PromotionBodyLines
+    { _pblLink = Nothing
+    , _pblUrl = Nothing
+    , _pblHtmlTitle = Nothing
+    , _pblTitle = Nothing
+    }
+
+pblLink :: Lens' PromotionBodyLines (Maybe Text)
+pblLink = lens _pblLink (\ s a -> s{_pblLink = a})
+
+pblUrl :: Lens' PromotionBodyLines (Maybe Text)
+pblUrl = lens _pblUrl (\ s a -> s{_pblUrl = a})
+
+pblHtmlTitle :: Lens' PromotionBodyLines (Maybe Text)
+pblHtmlTitle
+  = lens _pblHtmlTitle (\ s a -> s{_pblHtmlTitle = a})
+
+pblTitle :: Lens' PromotionBodyLines (Maybe Text)
+pblTitle = lens _pblTitle (\ s a -> s{_pblTitle = a})
+
+instance FromJSON PromotionBodyLines where
+        parseJSON
+          = withObject "PromotionBodyLines"
+              (\ o ->
+                 PromotionBodyLines <$>
+                   (o .:? "link") <*> (o .:? "url") <*>
+                     (o .:? "htmlTitle")
+                     <*> (o .:? "title"))
+
+instance ToJSON PromotionBodyLines where
+        toJSON PromotionBodyLines{..}
+          = object
+              (catMaybes
+                 [("link" .=) <$> _pblLink, ("url" .=) <$> _pblUrl,
+                  ("htmlTitle" .=) <$> _pblHtmlTitle,
+                  ("title" .=) <$> _pblTitle])
+
+--
+-- /See:/ 'contextFacets' smart constructor.
+data ContextFacets = ContextFacets
+    { _cfAnchor      :: !(Maybe Text)
+    , _cfLabelWithOp :: !(Maybe Text)
+    , _cfLabel       :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ContextFacets' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfAnchor'
+--
+-- * 'cfLabelWithOp'
+--
+-- * 'cfLabel'
+contextFacets
+    :: ContextFacets
+contextFacets =
+    ContextFacets
+    { _cfAnchor = Nothing
+    , _cfLabelWithOp = Nothing
+    , _cfLabel = Nothing
+    }
+
+cfAnchor :: Lens' ContextFacets (Maybe Text)
+cfAnchor = lens _cfAnchor (\ s a -> s{_cfAnchor = a})
+
+cfLabelWithOp :: Lens' ContextFacets (Maybe Text)
+cfLabelWithOp
+  = lens _cfLabelWithOp
+      (\ s a -> s{_cfLabelWithOp = a})
+
+cfLabel :: Lens' ContextFacets (Maybe Text)
+cfLabel = lens _cfLabel (\ s a -> s{_cfLabel = a})
+
+instance FromJSON ContextFacets where
+        parseJSON
+          = withObject "ContextFacets"
+              (\ o ->
+                 ContextFacets <$>
+                   (o .:? "anchor") <*> (o .:? "label_with_op") <*>
+                     (o .:? "label"))
+
+instance ToJSON ContextFacets where
+        toJSON ContextFacets{..}
+          = object
+              (catMaybes
+                 [("anchor" .=) <$> _cfAnchor,
+                  ("label_with_op" .=) <$> _cfLabelWithOp,
+                  ("label" .=) <$> _cfLabel])

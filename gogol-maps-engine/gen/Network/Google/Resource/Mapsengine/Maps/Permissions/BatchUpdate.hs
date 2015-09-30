@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- is atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsPermissionsBatchUpdate@.
-module Mapsengine.Maps.Permissions.BatchUpdate
+module Network.Google.Resource.Mapsengine.Maps.Permissions.BatchUpdate
     (
     -- * REST Resource
-      MapsPermissionsBatchUpdateAPI
+      MapsPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , mapsPermissionsBatchUpdate
-    , MapsPermissionsBatchUpdate
+    , mapsPermissionsBatchUpdate'
+    , MapsPermissionsBatchUpdate'
 
     -- * Request Lenses
     , mpbuQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsPermissionsBatchUpdate@ which the
--- 'MapsPermissionsBatchUpdate' request conforms to.
-type MapsPermissionsBatchUpdateAPI =
+-- 'MapsPermissionsBatchUpdate'' request conforms to.
+type MapsPermissionsBatchUpdateResource =
      "maps" :>
        Capture "id" Text :>
          "permissions" :>
            "batchUpdate" :>
-             Post '[JSON] PermissionsBatchUpdateResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'mapsPermissionsBatchUpdate' smart constructor.
-data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
+-- /See:/ 'mapsPermissionsBatchUpdate'' smart constructor.
+data MapsPermissionsBatchUpdate' = MapsPermissionsBatchUpdate'
     { _mpbuQuotaUser   :: !(Maybe Text)
     , _mpbuPrettyPrint :: !Bool
     , _mpbuUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
     , _mpbuId          :: !Text
     , _mpbuOauthToken  :: !(Maybe Text)
     , _mpbuFields      :: !(Maybe Text)
-    , _mpbuAlt         :: !Text
+    , _mpbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPermissionsBatchUpdate'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
 -- * 'mpbuFields'
 --
 -- * 'mpbuAlt'
-mapsPermissionsBatchUpdate
+mapsPermissionsBatchUpdate'
     :: Text -- ^ 'id'
-    -> MapsPermissionsBatchUpdate
-mapsPermissionsBatchUpdate pMpbuId_ =
-    MapsPermissionsBatchUpdate
+    -> MapsPermissionsBatchUpdate'
+mapsPermissionsBatchUpdate' pMpbuId_ =
+    MapsPermissionsBatchUpdate'
     { _mpbuQuotaUser = Nothing
     , _mpbuPrettyPrint = True
     , _mpbuUserIp = Nothing
@@ -100,7 +108,7 @@ mapsPermissionsBatchUpdate pMpbuId_ =
     , _mpbuId = pMpbuId_
     , _mpbuOauthToken = Nothing
     , _mpbuFields = Nothing
-    , _mpbuAlt = "json"
+    , _mpbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ mpbuFields
   = lens _mpbuFields (\ s a -> s{_mpbuFields = a})
 
 -- | Data format for the response.
-mpbuAlt :: Lens' MapsPermissionsBatchUpdate' Text
+mpbuAlt :: Lens' MapsPermissionsBatchUpdate' Alt
 mpbuAlt = lens _mpbuAlt (\ s a -> s{_mpbuAlt = a})
 
 instance GoogleRequest MapsPermissionsBatchUpdate'
@@ -153,15 +161,16 @@ instance GoogleRequest MapsPermissionsBatchUpdate'
         type Rs MapsPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsPermissionsBatchUpdate{..}
-          = go _mpbuQuotaUser _mpbuPrettyPrint _mpbuUserIp
+        requestWithRoute r u MapsPermissionsBatchUpdate'{..}
+          = go _mpbuQuotaUser (Just _mpbuPrettyPrint)
+              _mpbuUserIp
               _mpbuKey
               _mpbuId
               _mpbuOauthToken
               _mpbuFields
-              _mpbuAlt
+              (Just _mpbuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MapsPermissionsBatchUpdateAPI)
+                      (Proxy :: Proxy MapsPermissionsBatchUpdateResource)
                       r
                       u

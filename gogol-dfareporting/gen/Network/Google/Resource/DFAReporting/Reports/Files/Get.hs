@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a report file.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsFilesGet@.
-module DFAReporting.Reports.Files.Get
+module Network.Google.Resource.DFAReporting.Reports.Files.Get
     (
     -- * REST Resource
-      ReportsFilesGetAPI
+      ReportsFilesGetResource
 
     -- * Creating a Request
-    , reportsFilesGet
-    , ReportsFilesGet
+    , reportsFilesGet'
+    , ReportsFilesGet'
 
     -- * Request Lenses
     , rfgQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsFilesGet@ which the
--- 'ReportsFilesGet' request conforms to.
-type ReportsFilesGetAPI =
+-- 'ReportsFilesGet'' request conforms to.
+type ReportsFilesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
            Capture "reportId" Int64 :>
-             "files" :> Capture "fileId" Int64 :> Get '[JSON] File
+             "files" :>
+               Capture "fileId" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] File
 
 -- | Retrieves a report file.
 --
--- /See:/ 'reportsFilesGet' smart constructor.
-data ReportsFilesGet = ReportsFilesGet
+-- /See:/ 'reportsFilesGet'' smart constructor.
+data ReportsFilesGet' = ReportsFilesGet'
     { _rfgQuotaUser   :: !(Maybe Text)
     , _rfgPrettyPrint :: !Bool
     , _rfgUserIp      :: !(Maybe Text)
@@ -66,7 +75,7 @@ data ReportsFilesGet = ReportsFilesGet
     , _rfgFileId      :: !Int64
     , _rfgOauthToken  :: !(Maybe Text)
     , _rfgFields      :: !(Maybe Text)
-    , _rfgAlt         :: !Text
+    , _rfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesGet'' with the minimum fields required to make a request.
@@ -92,13 +101,13 @@ data ReportsFilesGet = ReportsFilesGet
 -- * 'rfgFields'
 --
 -- * 'rfgAlt'
-reportsFilesGet
+reportsFilesGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'fileId'
-    -> ReportsFilesGet
-reportsFilesGet pRfgReportId_ pRfgProfileId_ pRfgFileId_ =
-    ReportsFilesGet
+    -> ReportsFilesGet'
+reportsFilesGet' pRfgReportId_ pRfgProfileId_ pRfgFileId_ =
+    ReportsFilesGet'
     { _rfgQuotaUser = Nothing
     , _rfgPrettyPrint = True
     , _rfgUserIp = Nothing
@@ -108,7 +117,7 @@ reportsFilesGet pRfgReportId_ pRfgProfileId_ pRfgFileId_ =
     , _rfgFileId = pRfgFileId_
     , _rfgOauthToken = Nothing
     , _rfgFields = Nothing
-    , _rfgAlt = "json"
+    , _rfgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,22 +172,23 @@ rfgFields
   = lens _rfgFields (\ s a -> s{_rfgFields = a})
 
 -- | Data format for the response.
-rfgAlt :: Lens' ReportsFilesGet' Text
+rfgAlt :: Lens' ReportsFilesGet' Alt
 rfgAlt = lens _rfgAlt (\ s a -> s{_rfgAlt = a})
 
 instance GoogleRequest ReportsFilesGet' where
         type Rs ReportsFilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsFilesGet{..}
-          = go _rfgQuotaUser _rfgPrettyPrint _rfgUserIp
+        requestWithRoute r u ReportsFilesGet'{..}
+          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIp
               _rfgReportId
               _rfgProfileId
               _rfgKey
               _rfgFileId
               _rfgOauthToken
               _rfgFields
-              _rfgAlt
+              (Just _rfgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsFilesGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsFilesGetResource)
                       r
                       u

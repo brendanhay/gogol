@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of locations for the user.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorLocationsList@.
-module Mirror.Locations.List
+module Network.Google.Resource.Mirror.Locations.List
     (
     -- * REST Resource
-      LocationsListAPI
+      LocationsListResource
 
     -- * Creating a Request
-    , locationsList
-    , LocationsList
+    , locationsList'
+    , LocationsList'
 
     -- * Request Lenses
     , llQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorLocationsList@ which the
--- 'LocationsList' request conforms to.
-type LocationsListAPI =
-     "locations" :> Get '[JSON] LocationsListResponse
+-- 'LocationsList'' request conforms to.
+type LocationsListResource =
+     "locations" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] LocationsListResponse
 
 -- | Retrieves a list of locations for the user.
 --
--- /See:/ 'locationsList' smart constructor.
-data LocationsList = LocationsList
+-- /See:/ 'locationsList'' smart constructor.
+data LocationsList' = LocationsList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
     , _llUserIp      :: !(Maybe Text)
     , _llKey         :: !(Maybe Text)
     , _llOauthToken  :: !(Maybe Text)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Text
+    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data LocationsList = LocationsList
 -- * 'llFields'
 --
 -- * 'llAlt'
-locationsList
-    :: LocationsList
-locationsList =
-    LocationsList
+locationsList'
+    :: LocationsList'
+locationsList' =
+    LocationsList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llUserIp = Nothing
     , _llKey = Nothing
     , _llOauthToken = Nothing
     , _llFields = Nothing
-    , _llAlt = "json"
+    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +132,20 @@ llFields :: Lens' LocationsList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
 -- | Data format for the response.
-llAlt :: Lens' LocationsList' Text
+llAlt :: Lens' LocationsList' Alt
 llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
 
 instance GoogleRequest LocationsList' where
         type Rs LocationsList' = LocationsListResponse
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u LocationsList{..}
-          = go _llQuotaUser _llPrettyPrint _llUserIp _llKey
+        requestWithRoute r u LocationsList'{..}
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+              _llKey
               _llOauthToken
               _llFields
-              _llAlt
+              (Just _llAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LocationsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy LocationsListResource)
+                      r
                       u

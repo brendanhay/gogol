@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get detailed information about a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTaskqueuesGet@.
-module Taskqueue.Taskqueues.Get
+module Network.Google.Resource.Taskqueue.Taskqueues.Get
     (
     -- * REST Resource
-      TaskqueuesGetAPI
+      TaskqueuesGetResource
 
     -- * Creating a Request
-    , taskqueuesGet
-    , TaskqueuesGet
+    , taskqueuesGet'
+    , TaskqueuesGet'
 
     -- * Request Lenses
     , tasTaskqueue
@@ -45,17 +46,24 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTaskqueuesGet@ which the
--- 'TaskqueuesGet' request conforms to.
-type TaskqueuesGetAPI =
+-- 'TaskqueuesGet'' request conforms to.
+type TaskqueuesGetResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
-           QueryParam "getStats" Bool :> Get '[JSON] TaskQueue
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "getStats" Bool :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] TaskQueue
 
 -- | Get detailed information about a TaskQueue.
 --
--- /See:/ 'taskqueuesGet' smart constructor.
-data TaskqueuesGet = TaskqueuesGet
+-- /See:/ 'taskqueuesGet'' smart constructor.
+data TaskqueuesGet' = TaskqueuesGet'
     { _tasTaskqueue   :: !Text
     , _tasQuotaUser   :: !(Maybe Text)
     , _tasPrettyPrint :: !Bool
@@ -65,7 +73,7 @@ data TaskqueuesGet = TaskqueuesGet
     , _tasGetStats    :: !(Maybe Bool)
     , _tasOauthToken  :: !(Maybe Text)
     , _tasFields      :: !(Maybe Text)
-    , _tasAlt         :: !Text
+    , _tasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskqueuesGet'' with the minimum fields required to make a request.
@@ -91,12 +99,12 @@ data TaskqueuesGet = TaskqueuesGet
 -- * 'tasFields'
 --
 -- * 'tasAlt'
-taskqueuesGet
+taskqueuesGet'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
-    -> TaskqueuesGet
-taskqueuesGet pTasTaskqueue_ pTasProject_ =
-    TaskqueuesGet
+    -> TaskqueuesGet'
+taskqueuesGet' pTasTaskqueue_ pTasProject_ =
+    TaskqueuesGet'
     { _tasTaskqueue = pTasTaskqueue_
     , _tasQuotaUser = Nothing
     , _tasPrettyPrint = True
@@ -106,7 +114,7 @@ taskqueuesGet pTasTaskqueue_ pTasProject_ =
     , _tasGetStats = Nothing
     , _tasOauthToken = Nothing
     , _tasFields = Nothing
-    , _tasAlt = "json"
+    , _tasAlt = JSON
     }
 
 -- | The id of the taskqueue to get the properties of.
@@ -161,22 +169,25 @@ tasFields
   = lens _tasFields (\ s a -> s{_tasFields = a})
 
 -- | Data format for the response.
-tasAlt :: Lens' TaskqueuesGet' Text
+tasAlt :: Lens' TaskqueuesGet' Alt
 tasAlt = lens _tasAlt (\ s a -> s{_tasAlt = a})
 
 instance GoogleRequest TaskqueuesGet' where
         type Rs TaskqueuesGet' = TaskQueue
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TaskqueuesGet{..}
-          = go _tasTaskqueue _tasQuotaUser _tasPrettyPrint
+        requestWithRoute r u TaskqueuesGet'{..}
+          = go _tasTaskqueue _tasQuotaUser
+              (Just _tasPrettyPrint)
               _tasProject
               _tasUserIp
               _tasKey
               _tasGetStats
               _tasOauthToken
               _tasFields
-              _tasAlt
+              (Just _tasAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskqueuesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TaskqueuesGetResource)
+                      r
                       u

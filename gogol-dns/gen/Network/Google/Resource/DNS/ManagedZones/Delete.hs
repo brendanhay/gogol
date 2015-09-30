@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete a previously created ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesDelete@.
-module DNS.ManagedZones.Delete
+module Network.Google.Resource.DNS.ManagedZones.Delete
     (
     -- * REST Resource
-      ManagedZonesDeleteAPI
+      ManagedZonesDeleteResource
 
     -- * Creating a Request
-    , managedZonesDelete
-    , ManagedZonesDelete
+    , managedZonesDelete'
+    , ManagedZonesDelete'
 
     -- * Request Lenses
     , mzdQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSManagedZonesDelete@ which the
--- 'ManagedZonesDelete' request conforms to.
-type ManagedZonesDeleteAPI =
+-- 'ManagedZonesDelete'' request conforms to.
+type ManagedZonesDeleteResource =
      Capture "project" Text :>
        "managedZones" :>
-         Capture "managedZone" Text :> Delete '[JSON] ()
+         Capture "managedZone" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete a previously created ManagedZone.
 --
--- /See:/ 'managedZonesDelete' smart constructor.
-data ManagedZonesDelete = ManagedZonesDelete
+-- /See:/ 'managedZonesDelete'' smart constructor.
+data ManagedZonesDelete' = ManagedZonesDelete'
     { _mzdQuotaUser   :: !(Maybe Text)
     , _mzdPrettyPrint :: !Bool
     , _mzdProject     :: !Text
@@ -62,7 +70,7 @@ data ManagedZonesDelete = ManagedZonesDelete
     , _mzdOauthToken  :: !(Maybe Text)
     , _mzdManagedZone :: !Text
     , _mzdFields      :: !(Maybe Text)
-    , _mzdAlt         :: !Text
+    , _mzdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesDelete'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data ManagedZonesDelete = ManagedZonesDelete
 -- * 'mzdFields'
 --
 -- * 'mzdAlt'
-managedZonesDelete
+managedZonesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
-    -> ManagedZonesDelete
-managedZonesDelete pMzdProject_ pMzdManagedZone_ =
-    ManagedZonesDelete
+    -> ManagedZonesDelete'
+managedZonesDelete' pMzdProject_ pMzdManagedZone_ =
+    ManagedZonesDelete'
     { _mzdQuotaUser = Nothing
     , _mzdPrettyPrint = True
     , _mzdProject = pMzdProject_
@@ -100,7 +108,7 @@ managedZonesDelete pMzdProject_ pMzdManagedZone_ =
     , _mzdOauthToken = Nothing
     , _mzdManagedZone = pMzdManagedZone_
     , _mzdFields = Nothing
-    , _mzdAlt = "json"
+    , _mzdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ mzdFields
   = lens _mzdFields (\ s a -> s{_mzdFields = a})
 
 -- | Data format for the response.
-mzdAlt :: Lens' ManagedZonesDelete' Text
+mzdAlt :: Lens' ManagedZonesDelete' Alt
 mzdAlt = lens _mzdAlt (\ s a -> s{_mzdAlt = a})
 
 instance GoogleRequest ManagedZonesDelete' where
         type Rs ManagedZonesDelete' = ()
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesDelete{..}
-          = go _mzdQuotaUser _mzdPrettyPrint _mzdProject
+        requestWithRoute r u ManagedZonesDelete'{..}
+          = go _mzdQuotaUser (Just _mzdPrettyPrint) _mzdProject
               _mzdUserIp
               _mzdKey
               _mzdOauthToken
               _mzdManagedZone
               _mzdFields
-              _mzdAlt
+              (Just _mzdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagedZonesDeleteAPI)
+                      (Proxy :: Proxy ManagedZonesDeleteResource)
                       r
                       u

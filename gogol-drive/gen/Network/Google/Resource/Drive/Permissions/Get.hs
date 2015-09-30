@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a permission by ID.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsGet@.
-module Drive.Permissions.Get
+module Network.Google.Resource.Drive.Permissions.Get
     (
     -- * REST Resource
-      PermissionsGetAPI
+      PermissionsGetResource
 
     -- * Creating a Request
-    , permissionsGet
-    , PermissionsGet
+    , permissionsGet'
+    , PermissionsGet'
 
     -- * Request Lenses
     , pggQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePermissionsGet@ which the
--- 'PermissionsGet' request conforms to.
-type PermissionsGetAPI =
+-- 'PermissionsGet'' request conforms to.
+type PermissionsGetResource =
      "files" :>
        Capture "fileId" Text :>
          "permissions" :>
-           Capture "permissionId" Text :> Get '[JSON] Permission
+           Capture "permissionId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Permission
 
 -- | Gets a permission by ID.
 --
--- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet
+-- /See:/ 'permissionsGet'' smart constructor.
+data PermissionsGet' = PermissionsGet'
     { _pggQuotaUser    :: !(Maybe Text)
     , _pggPrettyPrint  :: !Bool
     , _pggUserIp       :: !(Maybe Text)
@@ -63,7 +71,7 @@ data PermissionsGet = PermissionsGet
     , _pggOauthToken   :: !(Maybe Text)
     , _pggPermissionId :: !Text
     , _pggFields       :: !(Maybe Text)
-    , _pggAlt          :: !Text
+    , _pggAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data PermissionsGet = PermissionsGet
 -- * 'pggFields'
 --
 -- * 'pggAlt'
-permissionsGet
+permissionsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
-    -> PermissionsGet
-permissionsGet pPggFileId_ pPggPermissionId_ =
-    PermissionsGet
+    -> PermissionsGet'
+permissionsGet' pPggFileId_ pPggPermissionId_ =
+    PermissionsGet'
     { _pggQuotaUser = Nothing
     , _pggPrettyPrint = True
     , _pggUserIp = Nothing
@@ -101,7 +109,7 @@ permissionsGet pPggFileId_ pPggPermissionId_ =
     , _pggOauthToken = Nothing
     , _pggPermissionId = pPggPermissionId_
     , _pggFields = Nothing
-    , _pggAlt = "json"
+    , _pggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,22 @@ pggFields
   = lens _pggFields (\ s a -> s{_pggFields = a})
 
 -- | Data format for the response.
-pggAlt :: Lens' PermissionsGet' Text
+pggAlt :: Lens' PermissionsGet' Alt
 pggAlt = lens _pggAlt (\ s a -> s{_pggAlt = a})
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsGet{..}
-          = go _pggQuotaUser _pggPrettyPrint _pggUserIp _pggKey
+        requestWithRoute r u PermissionsGet'{..}
+          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIp
+              _pggKey
               _pggFileId
               _pggOauthToken
               _pggPermissionId
               _pggFields
-              _pggAlt
+              (Just _pggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PermissionsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PermissionsGetResource)
                       r
                       u

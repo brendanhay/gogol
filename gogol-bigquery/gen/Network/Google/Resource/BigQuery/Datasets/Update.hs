@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- fields that are provided in the submitted dataset resource.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryDatasetsUpdate@.
-module BigQuery.Datasets.Update
+module Network.Google.Resource.BigQuery.Datasets.Update
     (
     -- * REST Resource
-      DatasetsUpdateAPI
+      DatasetsUpdateResource
 
     -- * Creating a Request
-    , datasetsUpdate
-    , DatasetsUpdate
+    , datasetsUpdate'
+    , DatasetsUpdate'
 
     -- * Request Lenses
     , duQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryDatasetsUpdate@ which the
--- 'DatasetsUpdate' request conforms to.
-type DatasetsUpdateAPI =
+-- 'DatasetsUpdate'' request conforms to.
+type DatasetsUpdateResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
-           Capture "datasetId" Text :> Put '[JSON] Dataset
+           Capture "datasetId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Dataset
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces
 -- fields that are provided in the submitted dataset resource.
 --
--- /See:/ 'datasetsUpdate' smart constructor.
-data DatasetsUpdate = DatasetsUpdate
+-- /See:/ 'datasetsUpdate'' smart constructor.
+data DatasetsUpdate' = DatasetsUpdate'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
     , _duUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data DatasetsUpdate = DatasetsUpdate
     , _duProjectId   :: !Text
     , _duOauthToken  :: !(Maybe Text)
     , _duFields      :: !(Maybe Text)
-    , _duAlt         :: !Text
+    , _duAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
@@ -91,12 +99,12 @@ data DatasetsUpdate = DatasetsUpdate
 -- * 'duFields'
 --
 -- * 'duAlt'
-datasetsUpdate
+datasetsUpdate'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
-    -> DatasetsUpdate
-datasetsUpdate pDuDatasetId_ pDuProjectId_ =
-    DatasetsUpdate
+    -> DatasetsUpdate'
+datasetsUpdate' pDuDatasetId_ pDuProjectId_ =
+    DatasetsUpdate'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duUserIp = Nothing
@@ -105,7 +113,7 @@ datasetsUpdate pDuDatasetId_ pDuProjectId_ =
     , _duProjectId = pDuProjectId_
     , _duOauthToken = Nothing
     , _duFields = Nothing
-    , _duAlt = "json"
+    , _duAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,20 +160,22 @@ duFields :: Lens' DatasetsUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
 -- | Data format for the response.
-duAlt :: Lens' DatasetsUpdate' Text
+duAlt :: Lens' DatasetsUpdate' Alt
 duAlt = lens _duAlt (\ s a -> s{_duAlt = a})
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u DatasetsUpdate{..}
-          = go _duQuotaUser _duPrettyPrint _duUserIp _duKey
+        requestWithRoute r u DatasetsUpdate'{..}
+          = go _duQuotaUser (Just _duPrettyPrint) _duUserIp
+              _duKey
               _duDatasetId
               _duProjectId
               _duOauthToken
               _duFields
-              _duAlt
+              (Just _duAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsUpdateResource)
                       r
                       u

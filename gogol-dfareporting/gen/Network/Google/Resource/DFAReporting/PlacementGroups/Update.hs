@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing placement group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingPlacementGroupsUpdate@.
-module DFAReporting.PlacementGroups.Update
+module Network.Google.Resource.DFAReporting.PlacementGroups.Update
     (
     -- * REST Resource
-      PlacementGroupsUpdateAPI
+      PlacementGroupsUpdateResource
 
     -- * Creating a Request
-    , placementGroupsUpdate
-    , PlacementGroupsUpdate
+    , placementGroupsUpdate'
+    , PlacementGroupsUpdate'
 
     -- * Request Lenses
     , pguQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingPlacementGroupsUpdate@ which the
--- 'PlacementGroupsUpdate' request conforms to.
-type PlacementGroupsUpdateAPI =
+-- 'PlacementGroupsUpdate'' request conforms to.
+type PlacementGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "placementGroups" :> Put '[JSON] PlacementGroup
+         "placementGroups" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] PlacementGroup
 
 -- | Updates an existing placement group.
 --
--- /See:/ 'placementGroupsUpdate' smart constructor.
-data PlacementGroupsUpdate = PlacementGroupsUpdate
+-- /See:/ 'placementGroupsUpdate'' smart constructor.
+data PlacementGroupsUpdate' = PlacementGroupsUpdate'
     { _pguQuotaUser   :: !(Maybe Text)
     , _pguPrettyPrint :: !Bool
     , _pguUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PlacementGroupsUpdate = PlacementGroupsUpdate
     , _pguKey         :: !(Maybe Text)
     , _pguOauthToken  :: !(Maybe Text)
     , _pguFields      :: !(Maybe Text)
-    , _pguAlt         :: !Text
+    , _pguAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsUpdate'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PlacementGroupsUpdate = PlacementGroupsUpdate
 -- * 'pguFields'
 --
 -- * 'pguAlt'
-placementGroupsUpdate
+placementGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> PlacementGroupsUpdate
-placementGroupsUpdate pPguProfileId_ =
-    PlacementGroupsUpdate
+    -> PlacementGroupsUpdate'
+placementGroupsUpdate' pPguProfileId_ =
+    PlacementGroupsUpdate'
     { _pguQuotaUser = Nothing
     , _pguPrettyPrint = True
     , _pguUserIp = Nothing
@@ -94,7 +102,7 @@ placementGroupsUpdate pPguProfileId_ =
     , _pguKey = Nothing
     , _pguOauthToken = Nothing
     , _pguFields = Nothing
-    , _pguAlt = "json"
+    , _pguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ pguFields
   = lens _pguFields (\ s a -> s{_pguFields = a})
 
 -- | Data format for the response.
-pguAlt :: Lens' PlacementGroupsUpdate' Text
+pguAlt :: Lens' PlacementGroupsUpdate' Alt
 pguAlt = lens _pguAlt (\ s a -> s{_pguAlt = a})
 
 instance GoogleRequest PlacementGroupsUpdate' where
         type Rs PlacementGroupsUpdate' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u PlacementGroupsUpdate{..}
-          = go _pguQuotaUser _pguPrettyPrint _pguUserIp
+        requestWithRoute r u PlacementGroupsUpdate'{..}
+          = go _pguQuotaUser (Just _pguPrettyPrint) _pguUserIp
               _pguProfileId
               _pguKey
               _pguOauthToken
               _pguFields
-              _pguAlt
+              (Just _pguAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlacementGroupsUpdateAPI)
+                      (Proxy :: Proxy PlacementGroupsUpdateResource)
                       r
                       u

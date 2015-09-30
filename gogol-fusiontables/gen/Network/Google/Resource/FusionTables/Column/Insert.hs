@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new column to the table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesColumnInsert@.
-module FusionTables.Column.Insert
+module Network.Google.Resource.FusionTables.Column.Insert
     (
     -- * REST Resource
-      ColumnInsertAPI
+      ColumnInsertResource
 
     -- * Creating a Request
-    , columnInsert
-    , ColumnInsert
+    , columnInsert'
+    , ColumnInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesColumnInsert@ which the
--- 'ColumnInsert' request conforms to.
-type ColumnInsertAPI =
+-- 'ColumnInsert'' request conforms to.
+type ColumnInsertResource =
      "tables" :>
        Capture "tableId" Text :>
-         "columns" :> Post '[JSON] Column
+         "columns" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Column
 
 -- | Adds a new column to the table.
 --
--- /See:/ 'columnInsert' smart constructor.
-data ColumnInsert = ColumnInsert
+-- /See:/ 'columnInsert'' smart constructor.
+data ColumnInsert' = ColumnInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ColumnInsert = ColumnInsert
     , _ciOauthToken  :: !(Maybe Text)
     , _ciTableId     :: !Text
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ColumnInsert = ColumnInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-columnInsert
+columnInsert'
     :: Text -- ^ 'tableId'
-    -> ColumnInsert
-columnInsert pCiTableId_ =
-    ColumnInsert
+    -> ColumnInsert'
+columnInsert' pCiTableId_ =
+    ColumnInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
@@ -94,7 +102,7 @@ columnInsert pCiTableId_ =
     , _ciOauthToken = Nothing
     , _ciTableId = pCiTableId_
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +144,21 @@ ciFields :: Lens' ColumnInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' ColumnInsert' Text
+ciAlt :: Lens' ColumnInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u ColumnInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp _ciKey
+        requestWithRoute r u ColumnInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciKey
               _ciOauthToken
               _ciTableId
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ColumnInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ColumnInsertResource)
+                      r
                       u

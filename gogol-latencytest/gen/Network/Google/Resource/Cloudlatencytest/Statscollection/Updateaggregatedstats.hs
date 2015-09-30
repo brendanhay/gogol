@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,112 +20,120 @@
 -- | RPC to update the new TCP stats.
 --
 -- /See:/ < Google Cloud Network Performance Monitoring API Reference> for @CloudlatencytestStatscollectionUpdateaggregatedstats@.
-module Cloudlatencytest.Statscollection.Updateaggregatedstats
+module Network.Google.Resource.Cloudlatencytest.Statscollection.Updateaggregatedstats
     (
     -- * REST Resource
-      StatscollectionUpdateaggregatedstatsAPI
+      StatscollectionUpdateaggregatedstatsResource
 
     -- * Creating a Request
-    , statscollectionUpdateaggregatedstats
-    , StatscollectionUpdateaggregatedstats
+    , statscollectionUpdateaggregatedstats'
+    , StatscollectionUpdateaggregatedstats'
 
     -- * Request Lenses
-    , sQuotaUser
-    , sPrettyPrint
-    , sUserIp
-    , sKey
-    , sOauthToken
-    , sFields
-    , sAlt
+    , suQuotaUser
+    , suPrettyPrint
+    , suUserIp
+    , suKey
+    , suOauthToken
+    , suFields
+    , suAlt
     ) where
 
 import           Network.Google.LatencyTest.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudlatencytestStatscollectionUpdateaggregatedstats@ which the
--- 'StatscollectionUpdateaggregatedstats' request conforms to.
-type StatscollectionUpdateaggregatedstatsAPI =
+-- 'StatscollectionUpdateaggregatedstats'' request conforms to.
+type StatscollectionUpdateaggregatedstatsResource =
      "updateaggregatedstats" :>
-       Post '[JSON] AggregatedStatsReply
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] AggregatedStatsReply
 
 -- | RPC to update the new TCP stats.
 --
--- /See:/ 'statscollectionUpdateaggregatedstats' smart constructor.
-data StatscollectionUpdateaggregatedstats = StatscollectionUpdateaggregatedstats
-    { _sQuotaUser   :: !(Maybe Text)
-    , _sPrettyPrint :: !Bool
-    , _sUserIp      :: !(Maybe Text)
-    , _sKey         :: !(Maybe Text)
-    , _sOauthToken  :: !(Maybe Text)
-    , _sFields      :: !(Maybe Text)
-    , _sAlt         :: !Text
+-- /See:/ 'statscollectionUpdateaggregatedstats'' smart constructor.
+data StatscollectionUpdateaggregatedstats' = StatscollectionUpdateaggregatedstats'
+    { _suQuotaUser   :: !(Maybe Text)
+    , _suPrettyPrint :: !Bool
+    , _suUserIp      :: !(Maybe Text)
+    , _suKey         :: !(Maybe Text)
+    , _suOauthToken  :: !(Maybe Text)
+    , _suFields      :: !(Maybe Text)
+    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatscollectionUpdateaggregatedstats'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sQuotaUser'
+-- * 'suQuotaUser'
 --
--- * 'sPrettyPrint'
+-- * 'suPrettyPrint'
 --
--- * 'sUserIp'
+-- * 'suUserIp'
 --
--- * 'sKey'
+-- * 'suKey'
 --
--- * 'sOauthToken'
+-- * 'suOauthToken'
 --
--- * 'sFields'
+-- * 'suFields'
 --
--- * 'sAlt'
-statscollectionUpdateaggregatedstats
-    :: StatscollectionUpdateaggregatedstats
-statscollectionUpdateaggregatedstats =
-    StatscollectionUpdateaggregatedstats
-    { _sQuotaUser = Nothing
-    , _sPrettyPrint = True
-    , _sUserIp = Nothing
-    , _sKey = Nothing
-    , _sOauthToken = Nothing
-    , _sFields = Nothing
-    , _sAlt = "json"
+-- * 'suAlt'
+statscollectionUpdateaggregatedstats'
+    :: StatscollectionUpdateaggregatedstats'
+statscollectionUpdateaggregatedstats' =
+    StatscollectionUpdateaggregatedstats'
+    { _suQuotaUser = Nothing
+    , _suPrettyPrint = True
+    , _suUserIp = Nothing
+    , _suKey = Nothing
+    , _suOauthToken = Nothing
+    , _suFields = Nothing
+    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-sQuotaUser :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
-sQuotaUser
-  = lens _sQuotaUser (\ s a -> s{_sQuotaUser = a})
+suQuotaUser :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
+suQuotaUser
+  = lens _suQuotaUser (\ s a -> s{_suQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-sPrettyPrint :: Lens' StatscollectionUpdateaggregatedstats' Bool
-sPrettyPrint
-  = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
+suPrettyPrint :: Lens' StatscollectionUpdateaggregatedstats' Bool
+suPrettyPrint
+  = lens _suPrettyPrint
+      (\ s a -> s{_suPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+suUserIp :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
+suUserIp = lens _suUserIp (\ s a -> s{_suUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
-sKey = lens _sKey (\ s a -> s{_sKey = a})
+suKey :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
+suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+suOauthToken :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
+suOauthToken
+  = lens _suOauthToken (\ s a -> s{_suOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-sFields :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
-sFields = lens _sFields (\ s a -> s{_sFields = a})
+suFields :: Lens' StatscollectionUpdateaggregatedstats' (Maybe Text)
+suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-sAlt :: Lens' StatscollectionUpdateaggregatedstats' Text
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+suAlt :: Lens' StatscollectionUpdateaggregatedstats' Alt
+suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest
          StatscollectionUpdateaggregatedstats' where
@@ -132,14 +141,15 @@ instance GoogleRequest
              AggregatedStatsReply
         request = requestWithRoute defReq latencyTestURL
         requestWithRoute r u
-          StatscollectionUpdateaggregatedstats{..}
-          = go _sQuotaUser _sPrettyPrint _sUserIp _sKey
-              _sOauthToken
-              _sFields
-              _sAlt
+          StatscollectionUpdateaggregatedstats'{..}
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+              _suKey
+              _suOauthToken
+              _suFields
+              (Just _suAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy StatscollectionUpdateaggregatedstatsAPI)
+                         Proxy StatscollectionUpdateaggregatedstatsResource)
                       r
                       u

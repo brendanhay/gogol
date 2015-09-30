@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- restrictions are defined.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsGetAppRestrictionsSchema@.
-module Androidenterprise.Products.GetAppRestrictionsSchema
+module Network.Google.Resource.Androidenterprise.Products.GetAppRestrictionsSchema
     (
     -- * REST Resource
-      ProductsGetAppRestrictionsSchemaAPI
+      ProductsGetAppRestrictionsSchemaResource
 
     -- * Creating a Request
-    , productsGetAppRestrictionsSchema
-    , ProductsGetAppRestrictionsSchema
+    , productsGetAppRestrictionsSchema'
+    , ProductsGetAppRestrictionsSchema'
 
     -- * Request Lenses
     , pgarsQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsGetAppRestrictionsSchema@ which the
--- 'ProductsGetAppRestrictionsSchema' request conforms to.
-type ProductsGetAppRestrictionsSchemaAPI =
+-- 'ProductsGetAppRestrictionsSchema'' request conforms to.
+type ProductsGetAppRestrictionsSchemaResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
              "appRestrictionsSchema" :>
-               QueryParam "language" Text :>
-                 Get '[JSON] AppRestrictionsSchema
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "language" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] AppRestrictionsSchema
 
 -- | Retrieves the schema defining app restrictions configurable for this
 -- product. All products have a schema, but this may be empty if no app
 -- restrictions are defined.
 --
--- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
-data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema
+-- /See:/ 'productsGetAppRestrictionsSchema'' smart constructor.
+data ProductsGetAppRestrictionsSchema' = ProductsGetAppRestrictionsSchema'
     { _pgarsQuotaUser    :: !(Maybe Text)
     , _pgarsPrettyPrint  :: !Bool
     , _pgarsEnterpriseId :: !Text
@@ -72,7 +80,7 @@ data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema
     , _pgarsOauthToken   :: !(Maybe Text)
     , _pgarsProductId    :: !Text
     , _pgarsFields       :: !(Maybe Text)
-    , _pgarsAlt          :: !Text
+    , _pgarsAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGetAppRestrictionsSchema'' with the minimum fields required to make a request.
@@ -98,12 +106,12 @@ data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema
 -- * 'pgarsFields'
 --
 -- * 'pgarsAlt'
-productsGetAppRestrictionsSchema
+productsGetAppRestrictionsSchema'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsGetAppRestrictionsSchema
-productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
-    ProductsGetAppRestrictionsSchema
+    -> ProductsGetAppRestrictionsSchema'
+productsGetAppRestrictionsSchema' pPgarsEnterpriseId_ pPgarsProductId_ =
+    ProductsGetAppRestrictionsSchema'
     { _pgarsQuotaUser = Nothing
     , _pgarsPrettyPrint = True
     , _pgarsEnterpriseId = pPgarsEnterpriseId_
@@ -113,7 +121,7 @@ productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
     , _pgarsOauthToken = Nothing
     , _pgarsProductId = pPgarsProductId_
     , _pgarsFields = Nothing
-    , _pgarsAlt = "json"
+    , _pgarsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,7 +181,7 @@ pgarsFields
   = lens _pgarsFields (\ s a -> s{_pgarsFields = a})
 
 -- | Data format for the response.
-pgarsAlt :: Lens' ProductsGetAppRestrictionsSchema' Text
+pgarsAlt :: Lens' ProductsGetAppRestrictionsSchema' Alt
 pgarsAlt = lens _pgarsAlt (\ s a -> s{_pgarsAlt = a})
 
 instance GoogleRequest
@@ -182,8 +190,8 @@ instance GoogleRequest
              AppRestrictionsSchema
         request = requestWithRoute defReq playEnterpriseURL
         requestWithRoute r u
-          ProductsGetAppRestrictionsSchema{..}
-          = go _pgarsQuotaUser _pgarsPrettyPrint
+          ProductsGetAppRestrictionsSchema'{..}
+          = go _pgarsQuotaUser (Just _pgarsPrettyPrint)
               _pgarsEnterpriseId
               _pgarsUserIp
               _pgarsKey
@@ -191,9 +199,10 @@ instance GoogleRequest
               _pgarsOauthToken
               _pgarsProductId
               _pgarsFields
-              _pgarsAlt
+              (Just _pgarsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProductsGetAppRestrictionsSchemaAPI)
+                      (Proxy ::
+                         Proxy ProductsGetAppRestrictionsSchemaResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- requested ID.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomInvitationsGet@.
-module Classroom.Invitations.Get
+module Network.Google.Resource.Classroom.Invitations.Get
     (
     -- * REST Resource
-      InvitationsGetAPI
+      InvitationsGetResource
 
     -- * Creating a Request
-    , invitationsGet
-    , InvitationsGet
+    , invitationsGet'
+    , InvitationsGet'
 
     -- * Request Lenses
     , igXgafv
@@ -53,11 +54,25 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomInvitationsGet@ which the
--- 'InvitationsGet' request conforms to.
-type InvitationsGetAPI =
+-- 'InvitationsGet'' request conforms to.
+type InvitationsGetResource =
      "v1" :>
        "invitations" :>
-         Capture "id" Text :> Get '[JSON] Invitation
+         Capture "id" Text :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :>
+                                     Get '[JSON] Invitation
 
 -- | Returns an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to view
@@ -65,8 +80,8 @@ type InvitationsGetAPI =
 -- Permission Errors]. * \`NOT_FOUND\` if no invitation exists with the
 -- requested ID.
 --
--- /See:/ 'invitationsGet' smart constructor.
-data InvitationsGet = InvitationsGet
+-- /See:/ 'invitationsGet'' smart constructor.
+data InvitationsGet' = InvitationsGet'
     { _igXgafv          :: !(Maybe Text)
     , _igQuotaUser      :: !(Maybe Text)
     , _igPrettyPrint    :: !Bool
@@ -114,11 +129,11 @@ data InvitationsGet = InvitationsGet
 -- * 'igCallback'
 --
 -- * 'igAlt'
-invitationsGet
+invitationsGet'
     :: Text -- ^ 'id'
-    -> InvitationsGet
-invitationsGet pIgId_ =
-    InvitationsGet
+    -> InvitationsGet'
+invitationsGet' pIgId_ =
+    InvitationsGet'
     { _igXgafv = Nothing
     , _igQuotaUser = Nothing
     , _igPrettyPrint = True
@@ -210,10 +225,10 @@ igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
 instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u InvitationsGet{..}
-          = go _igXgafv _igQuotaUser _igPrettyPrint
+        requestWithRoute r u InvitationsGet'{..}
+          = go _igXgafv _igQuotaUser (Just _igPrettyPrint)
               _igUploadProtocol
-              _igPp
+              (Just _igPp)
               _igAccessToken
               _igUploadType
               _igBearerToken
@@ -222,8 +237,9 @@ instance GoogleRequest InvitationsGet' where
               _igOauthToken
               _igFields
               _igCallback
-              _igAlt
+              (Just _igAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy InvitationsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy InvitationsGetResource)
                       r
                       u

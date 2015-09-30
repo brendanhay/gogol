@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageDefaultObjectAccessControlsGet@.
-module Storage.DefaultObjectAccessControls.Get
+module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
     (
     -- * REST Resource
-      DefaultObjectAccessControlsGetAPI
+      DefaultObjectAccessControlsGetResource
 
     -- * Creating a Request
-    , defaultObjectAccessControlsGet
-    , DefaultObjectAccessControlsGet
+    , defaultObjectAccessControlsGet'
+    , DefaultObjectAccessControlsGet'
 
     -- * Request Lenses
     , doacgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageDefaultObjectAccessControlsGet@ which the
--- 'DefaultObjectAccessControlsGet' request conforms to.
-type DefaultObjectAccessControlsGetAPI =
+-- 'DefaultObjectAccessControlsGet'' request conforms to.
+type DefaultObjectAccessControlsGetResource =
      "b" :>
        Capture "bucket" Text :>
          "defaultObjectAcl" :>
            Capture "entity" Text :>
-             Get '[JSON] ObjectAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ObjectAccessControl
 
 -- | Returns the default object ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
-data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
+-- /See:/ 'defaultObjectAccessControlsGet'' smart constructor.
+data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
     { _doacgQuotaUser   :: !(Maybe Text)
     , _doacgPrettyPrint :: !Bool
     , _doacgUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
     , _doacgOauthToken  :: !(Maybe Text)
     , _doacgEntity      :: !Text
     , _doacgFields      :: !(Maybe Text)
-    , _doacgAlt         :: !Text
+    , _doacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsGet'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
 -- * 'doacgFields'
 --
 -- * 'doacgAlt'
-defaultObjectAccessControlsGet
+defaultObjectAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> DefaultObjectAccessControlsGet
-defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
-    DefaultObjectAccessControlsGet
+    -> DefaultObjectAccessControlsGet'
+defaultObjectAccessControlsGet' pDoacgBucket_ pDoacgEntity_ =
+    DefaultObjectAccessControlsGet'
     { _doacgQuotaUser = Nothing
     , _doacgPrettyPrint = True
     , _doacgUserIp = Nothing
@@ -104,7 +112,7 @@ defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
     , _doacgOauthToken = Nothing
     , _doacgEntity = pDoacgEntity_
     , _doacgFields = Nothing
-    , _doacgAlt = "json"
+    , _doacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,7 +165,7 @@ doacgFields
   = lens _doacgFields (\ s a -> s{_doacgFields = a})
 
 -- | Data format for the response.
-doacgAlt :: Lens' DefaultObjectAccessControlsGet' Text
+doacgAlt :: Lens' DefaultObjectAccessControlsGet' Alt
 doacgAlt = lens _doacgAlt (\ s a -> s{_doacgAlt = a})
 
 instance GoogleRequest
@@ -166,16 +174,18 @@ instance GoogleRequest
              ObjectAccessControl
         request = requestWithRoute defReq storageURL
         requestWithRoute r u
-          DefaultObjectAccessControlsGet{..}
-          = go _doacgQuotaUser _doacgPrettyPrint _doacgUserIp
+          DefaultObjectAccessControlsGet'{..}
+          = go _doacgQuotaUser (Just _doacgPrettyPrint)
+              _doacgUserIp
               _doacgBucket
               _doacgKey
               _doacgOauthToken
               _doacgEntity
               _doacgFields
-              _doacgAlt
+              (Just _doacgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DefaultObjectAccessControlsGetAPI)
+                      (Proxy ::
+                         Proxy DefaultObjectAccessControlsGetResource)
                       r
                       u

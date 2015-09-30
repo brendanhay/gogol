@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsReportStatus@.
-module Dataflow.Projects.Jobs.WorkItems.ReportStatus
+module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
     (
     -- * REST Resource
-      ProjectsJobsWorkItemsReportStatusAPI
+      ProjectsJobsWorkItemsReportStatusResource
 
     -- * Creating a Request
-    , projectsJobsWorkItemsReportStatus
-    , ProjectsJobsWorkItemsReportStatus
+    , projectsJobsWorkItemsReportStatus'
+    , ProjectsJobsWorkItemsReportStatus'
 
     -- * Request Lenses
     , pjwirsXgafv
@@ -50,20 +51,34 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsWorkItemsReportStatus@ which the
--- 'ProjectsJobsWorkItemsReportStatus' request conforms to.
-type ProjectsJobsWorkItemsReportStatusAPI =
+-- 'ProjectsJobsWorkItemsReportStatus'' request conforms to.
+type ProjectsJobsWorkItemsReportStatusResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
                "workItems:reportStatus" :>
-                 Post '[JSON] ReportWorkItemStatusResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON]
+                                             ReportWorkItemStatusResponse
 
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
--- /See:/ 'projectsJobsWorkItemsReportStatus' smart constructor.
-data ProjectsJobsWorkItemsReportStatus = ProjectsJobsWorkItemsReportStatus
+-- /See:/ 'projectsJobsWorkItemsReportStatus'' smart constructor.
+data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
     { _pjwirsXgafv          :: !(Maybe Text)
     , _pjwirsQuotaUser      :: !(Maybe Text)
     , _pjwirsPrettyPrint    :: !Bool
@@ -114,12 +129,12 @@ data ProjectsJobsWorkItemsReportStatus = ProjectsJobsWorkItemsReportStatus
 -- * 'pjwirsCallback'
 --
 -- * 'pjwirsAlt'
-projectsJobsWorkItemsReportStatus
+projectsJobsWorkItemsReportStatus'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> ProjectsJobsWorkItemsReportStatus
-projectsJobsWorkItemsReportStatus pPjwirsJobId_ pPjwirsProjectId_ =
-    ProjectsJobsWorkItemsReportStatus
+    -> ProjectsJobsWorkItemsReportStatus'
+projectsJobsWorkItemsReportStatus' pPjwirsJobId_ pPjwirsProjectId_ =
+    ProjectsJobsWorkItemsReportStatus'
     { _pjwirsXgafv = Nothing
     , _pjwirsQuotaUser = Nothing
     , _pjwirsPrettyPrint = True
@@ -230,11 +245,12 @@ instance GoogleRequest
              ReportWorkItemStatusResponse
         request = requestWithRoute defReq dataflowURL
         requestWithRoute r u
-          ProjectsJobsWorkItemsReportStatus{..}
-          = go _pjwirsXgafv _pjwirsQuotaUser _pjwirsPrettyPrint
+          ProjectsJobsWorkItemsReportStatus'{..}
+          = go _pjwirsXgafv _pjwirsQuotaUser
+              (Just _pjwirsPrettyPrint)
               _pjwirsJobId
               _pjwirsUploadProtocol
-              _pjwirsPp
+              (Just _pjwirsPp)
               _pjwirsAccessToken
               _pjwirsUploadType
               _pjwirsBearerToken
@@ -243,9 +259,10 @@ instance GoogleRequest
               _pjwirsOauthToken
               _pjwirsFields
               _pjwirsCallback
-              _pjwirsAlt
+              (Just _pjwirsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsWorkItemsReportStatusAPI)
+                      (Proxy ::
+                         Proxy ProjectsJobsWorkItemsReportStatusResource)
                       r
                       u

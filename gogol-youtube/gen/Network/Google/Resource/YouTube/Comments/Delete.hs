@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,140 +20,144 @@
 -- | Deletes a comment.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsDelete@.
-module YouTube.Comments.Delete
+module Network.Google.Resource.YouTube.Comments.Delete
     (
     -- * REST Resource
-      CommentsDeleteAPI
+      CommentsDeleteResource
 
     -- * Creating a Request
-    , commentsDelete
-    , CommentsDelete
+    , commentsDelete'
+    , CommentsDelete'
 
     -- * Request Lenses
-    , comoQuotaUser
-    , comoPrettyPrint
-    , comoUserIp
-    , comoKey
-    , comoId
-    , comoOauthToken
-    , comoFields
-    , comoAlt
+    , cdQuotaUser
+    , cdPrettyPrint
+    , cdUserIp
+    , cdKey
+    , cdId
+    , cdOauthToken
+    , cdFields
+    , cdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentsDelete@ which the
--- 'CommentsDelete' request conforms to.
-type CommentsDeleteAPI =
+-- 'CommentsDelete'' request conforms to.
+type CommentsDeleteResource =
      "comments" :>
-       QueryParam "id" Text :> Delete '[JSON] ()
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "id" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a comment.
 --
--- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete
-    { _comoQuotaUser   :: !(Maybe Text)
-    , _comoPrettyPrint :: !Bool
-    , _comoUserIp      :: !(Maybe Text)
-    , _comoKey         :: !(Maybe Text)
-    , _comoId          :: !Text
-    , _comoOauthToken  :: !(Maybe Text)
-    , _comoFields      :: !(Maybe Text)
-    , _comoAlt         :: !Text
+-- /See:/ 'commentsDelete'' smart constructor.
+data CommentsDelete' = CommentsDelete'
+    { _cdQuotaUser   :: !(Maybe Text)
+    , _cdPrettyPrint :: !Bool
+    , _cdUserIp      :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Text)
+    , _cdId          :: !Text
+    , _cdOauthToken  :: !(Maybe Text)
+    , _cdFields      :: !(Maybe Text)
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'comoQuotaUser'
+-- * 'cdQuotaUser'
 --
--- * 'comoPrettyPrint'
+-- * 'cdPrettyPrint'
 --
--- * 'comoUserIp'
+-- * 'cdUserIp'
 --
--- * 'comoKey'
+-- * 'cdKey'
 --
--- * 'comoId'
+-- * 'cdId'
 --
--- * 'comoOauthToken'
+-- * 'cdOauthToken'
 --
--- * 'comoFields'
+-- * 'cdFields'
 --
--- * 'comoAlt'
-commentsDelete
+-- * 'cdAlt'
+commentsDelete'
     :: Text -- ^ 'id'
-    -> CommentsDelete
-commentsDelete pComoId_ =
-    CommentsDelete
-    { _comoQuotaUser = Nothing
-    , _comoPrettyPrint = True
-    , _comoUserIp = Nothing
-    , _comoKey = Nothing
-    , _comoId = pComoId_
-    , _comoOauthToken = Nothing
-    , _comoFields = Nothing
-    , _comoAlt = "json"
+    -> CommentsDelete'
+commentsDelete' pCdId_ =
+    CommentsDelete'
+    { _cdQuotaUser = Nothing
+    , _cdPrettyPrint = True
+    , _cdUserIp = Nothing
+    , _cdKey = Nothing
+    , _cdId = pCdId_
+    , _cdOauthToken = Nothing
+    , _cdFields = Nothing
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-comoQuotaUser :: Lens' CommentsDelete' (Maybe Text)
-comoQuotaUser
-  = lens _comoQuotaUser
-      (\ s a -> s{_comoQuotaUser = a})
+cdQuotaUser :: Lens' CommentsDelete' (Maybe Text)
+cdQuotaUser
+  = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-comoPrettyPrint :: Lens' CommentsDelete' Bool
-comoPrettyPrint
-  = lens _comoPrettyPrint
-      (\ s a -> s{_comoPrettyPrint = a})
+cdPrettyPrint :: Lens' CommentsDelete' Bool
+cdPrettyPrint
+  = lens _cdPrettyPrint
+      (\ s a -> s{_cdPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-comoUserIp :: Lens' CommentsDelete' (Maybe Text)
-comoUserIp
-  = lens _comoUserIp (\ s a -> s{_comoUserIp = a})
+cdUserIp :: Lens' CommentsDelete' (Maybe Text)
+cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comoKey :: Lens' CommentsDelete' (Maybe Text)
-comoKey = lens _comoKey (\ s a -> s{_comoKey = a})
+cdKey :: Lens' CommentsDelete' (Maybe Text)
+cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | The id parameter specifies the comment ID for the resource that is being
 -- deleted.
-comoId :: Lens' CommentsDelete' Text
-comoId = lens _comoId (\ s a -> s{_comoId = a})
+cdId :: Lens' CommentsDelete' Text
+cdId = lens _cdId (\ s a -> s{_cdId = a})
 
 -- | OAuth 2.0 token for the current user.
-comoOauthToken :: Lens' CommentsDelete' (Maybe Text)
-comoOauthToken
-  = lens _comoOauthToken
-      (\ s a -> s{_comoOauthToken = a})
+cdOauthToken :: Lens' CommentsDelete' (Maybe Text)
+cdOauthToken
+  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-comoFields :: Lens' CommentsDelete' (Maybe Text)
-comoFields
-  = lens _comoFields (\ s a -> s{_comoFields = a})
+cdFields :: Lens' CommentsDelete' (Maybe Text)
+cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-comoAlt :: Lens' CommentsDelete' Text
-comoAlt = lens _comoAlt (\ s a -> s{_comoAlt = a})
+cdAlt :: Lens' CommentsDelete' Alt
+cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsDelete{..}
-          = go _comoQuotaUser _comoPrettyPrint _comoUserIp
-              _comoKey
-              (Just _comoId)
-              _comoOauthToken
-              _comoFields
-              _comoAlt
+        requestWithRoute r u CommentsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+              _cdKey
+              (Just _cdId)
+              _cdOauthToken
+              _cdFields
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CommentsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CommentsDeleteResource)
                       r
                       u

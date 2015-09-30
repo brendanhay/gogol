@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of blogs, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsListByUser@.
-module Blogger.Blogs.ListByUser
+module Network.Google.Resource.Blogger.Blogs.ListByUser
     (
     -- * REST Resource
-      BlogsListByUserAPI
+      BlogsListByUserResource
 
     -- * Creating a Request
-    , blogsListByUser
-    , BlogsListByUser
+    , blogsListByUser'
+    , BlogsListByUser'
 
     -- * Request Lenses
     , blbuStatus
@@ -47,32 +48,39 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsListByUser@ which the
--- 'BlogsListByUser' request conforms to.
-type BlogsListByUserAPI =
+-- 'BlogsListByUser'' request conforms to.
+type BlogsListByUserResource =
      "users" :>
        Capture "userId" Text :>
          "blogs" :>
-           QueryParams "status" Text :>
-             QueryParam "fetchUserInfo" Bool :>
-               QueryParams "role" Text :>
-                 QueryParam "view" Text :> Get '[JSON] BlogList
+           QueryParams "status" BloggerBlogsListByUserStatus :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "fetchUserInfo" Bool :>
+                     QueryParams "role" BloggerBlogsListByUserRole :>
+                       QueryParam "key" Text :>
+                         QueryParam "view" BloggerBlogsListByUserView :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] BlogList
 
 -- | Retrieves a list of blogs, possibly filtered.
 --
--- /See:/ 'blogsListByUser' smart constructor.
-data BlogsListByUser = BlogsListByUser
-    { _blbuStatus        :: !Text
+-- /See:/ 'blogsListByUser'' smart constructor.
+data BlogsListByUser' = BlogsListByUser'
+    { _blbuStatus        :: !BloggerBlogsListByUserStatus
     , _blbuQuotaUser     :: !(Maybe Text)
     , _blbuPrettyPrint   :: !Bool
     , _blbuUserIp        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
-    , _blbuRole          :: !(Maybe Text)
+    , _blbuRole          :: !(Maybe BloggerBlogsListByUserRole)
     , _blbuKey           :: !(Maybe Text)
-    , _blbuView          :: !(Maybe Text)
+    , _blbuView          :: !(Maybe BloggerBlogsListByUserView)
     , _blbuOauthToken    :: !(Maybe Text)
     , _blbuFields        :: !(Maybe Text)
-    , _blbuAlt           :: !Text
+    , _blbuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsListByUser'' with the minimum fields required to make a request.
@@ -102,12 +110,12 @@ data BlogsListByUser = BlogsListByUser
 -- * 'blbuFields'
 --
 -- * 'blbuAlt'
-blogsListByUser
+blogsListByUser'
     :: Text -- ^ 'userId'
-    -> BlogsListByUser
-blogsListByUser pBlbuUserId_ =
-    BlogsListByUser
-    { _blbuStatus = "LIVE"
+    -> BlogsListByUser'
+blogsListByUser' pBlbuUserId_ =
+    BlogsListByUser'
+    { _blbuStatus = BBLBUSLive
     , _blbuQuotaUser = Nothing
     , _blbuPrettyPrint = True
     , _blbuUserIp = Nothing
@@ -118,12 +126,12 @@ blogsListByUser pBlbuUserId_ =
     , _blbuView = Nothing
     , _blbuOauthToken = Nothing
     , _blbuFields = Nothing
-    , _blbuAlt = "json"
+    , _blbuAlt = JSON
     }
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
 -- that ADMIN access is required to view deleted blogs.
-blbuStatus :: Lens' BlogsListByUser' Text
+blbuStatus :: Lens' BlogsListByUser' BloggerBlogsListByUserStatus
 blbuStatus
   = lens _blbuStatus (\ s a -> s{_blbuStatus = a})
 
@@ -163,7 +171,7 @@ blbuUserId
 -- | User access types for blogs to include in the results, e.g. AUTHOR will
 -- return blogs where the user has author level access. If no roles are
 -- specified, defaults to ADMIN and AUTHOR roles.
-blbuRole :: Lens' BlogsListByUser' (Maybe Text)
+blbuRole :: Lens' BlogsListByUser' (Maybe BloggerBlogsListByUserRole)
 blbuRole = lens _blbuRole (\ s a -> s{_blbuRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -174,7 +182,7 @@ blbuKey = lens _blbuKey (\ s a -> s{_blbuKey = a})
 
 -- | Access level with which to view the blogs. Note that some fields require
 -- elevated access.
-blbuView :: Lens' BlogsListByUser' (Maybe Text)
+blbuView :: Lens' BlogsListByUser' (Maybe BloggerBlogsListByUserView)
 blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -189,15 +197,15 @@ blbuFields
   = lens _blbuFields (\ s a -> s{_blbuFields = a})
 
 -- | Data format for the response.
-blbuAlt :: Lens' BlogsListByUser' Text
+blbuAlt :: Lens' BlogsListByUser' Alt
 blbuAlt = lens _blbuAlt (\ s a -> s{_blbuAlt = a})
 
 instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogsListByUser{..}
+        requestWithRoute r u BlogsListByUser'{..}
           = go (Just _blbuStatus) _blbuQuotaUser
-              _blbuPrettyPrint
+              (Just _blbuPrettyPrint)
               _blbuUserIp
               _blbuFetchUserInfo
               _blbuUserId
@@ -206,8 +214,9 @@ instance GoogleRequest BlogsListByUser' where
               _blbuView
               _blbuOauthToken
               _blbuFields
-              _blbuAlt
+              (Just _blbuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BlogsListByUserAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BlogsListByUserResource)
                       r
                       u

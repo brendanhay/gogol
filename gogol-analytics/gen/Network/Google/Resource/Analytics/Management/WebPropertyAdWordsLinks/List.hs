@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists webProperty-AdWords links for a given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksList@.
-module Analytics.Management.WebPropertyAdWordsLinks.List
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksListAPI
+      ManagementWebPropertyAdWordsLinksListResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksList
-    , ManagementWebPropertyAdWordsLinksList
+    , managementWebPropertyAdWordsLinksList'
+    , ManagementWebPropertyAdWordsLinksList'
 
     -- * Request Lenses
     , mwpawllQuotaUser
@@ -46,22 +47,29 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksList@ which the
--- 'ManagementWebPropertyAdWordsLinksList' request conforms to.
-type ManagementWebPropertyAdWordsLinksListAPI =
+-- 'ManagementWebPropertyAdWordsLinksList'' request conforms to.
+type ManagementWebPropertyAdWordsLinksListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
-                 QueryParam "start-index" Int32 :>
-                   QueryParam "max-results" Int32 :>
-                     Get '[JSON] EntityAdWordsLinks
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "start-index" Int32 :>
+                             QueryParam "max-results" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] EntityAdWordsLinks
 
 -- | Lists webProperty-AdWords links for a given web property.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksList' smart constructor.
-data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksList
+-- /See:/ 'managementWebPropertyAdWordsLinksList'' smart constructor.
+data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksList'
     { _mwpawllQuotaUser     :: !(Maybe Text)
     , _mwpawllPrettyPrint   :: !Bool
     , _mwpawllWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksLi
     , _mwpawllStartIndex    :: !(Maybe Int32)
     , _mwpawllMaxResults    :: !(Maybe Int32)
     , _mwpawllFields        :: !(Maybe Text)
-    , _mwpawllAlt           :: !Text
+    , _mwpawllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList'' with the minimum fields required to make a request.
@@ -100,12 +108,12 @@ data ManagementWebPropertyAdWordsLinksList = ManagementWebPropertyAdWordsLinksLi
 -- * 'mwpawllFields'
 --
 -- * 'mwpawllAlt'
-managementWebPropertyAdWordsLinksList
+managementWebPropertyAdWordsLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebPropertyAdWordsLinksList
-managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ =
-    ManagementWebPropertyAdWordsLinksList
+    -> ManagementWebPropertyAdWordsLinksList'
+managementWebPropertyAdWordsLinksList' pMwpawllWebPropertyId_ pMwpawllAccountId_ =
+    ManagementWebPropertyAdWordsLinksList'
     { _mwpawllQuotaUser = Nothing
     , _mwpawllPrettyPrint = False
     , _mwpawllWebPropertyId = pMwpawllWebPropertyId_
@@ -116,7 +124,7 @@ managementWebPropertyAdWordsLinksList pMwpawllWebPropertyId_ pMwpawllAccountId_ 
     , _mwpawllStartIndex = Nothing
     , _mwpawllMaxResults = Nothing
     , _mwpawllFields = Nothing
-    , _mwpawllAlt = "json"
+    , _mwpawllAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -187,7 +195,7 @@ mwpawllFields
       (\ s a -> s{_mwpawllFields = a})
 
 -- | Data format for the response.
-mwpawllAlt :: Lens' ManagementWebPropertyAdWordsLinksList' Text
+mwpawllAlt :: Lens' ManagementWebPropertyAdWordsLinksList' Alt
 mwpawllAlt
   = lens _mwpawllAlt (\ s a -> s{_mwpawllAlt = a})
 
@@ -197,8 +205,8 @@ instance GoogleRequest
              EntityAdWordsLinks
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksList{..}
-          = go _mwpawllQuotaUser _mwpawllPrettyPrint
+          ManagementWebPropertyAdWordsLinksList'{..}
+          = go _mwpawllQuotaUser (Just _mwpawllPrettyPrint)
               _mwpawllWebPropertyId
               _mwpawllUserIp
               _mwpawllAccountId
@@ -207,10 +215,10 @@ instance GoogleRequest
               _mwpawllStartIndex
               _mwpawllMaxResults
               _mwpawllFields
-              _mwpawllAlt
+              (Just _mwpawllAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksListAPI)
+                         Proxy ManagementWebPropertyAdWordsLinksListResource)
                       r
                       u

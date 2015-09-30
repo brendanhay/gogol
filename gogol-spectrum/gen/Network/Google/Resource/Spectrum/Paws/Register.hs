@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ <http://developers.google.com/spectrum Google Spectrum Database API Reference> for @SpectrumPawsRegister@.
-module Spectrum.Paws.Register
+module Network.Google.Resource.Spectrum.Paws.Register
     (
     -- * REST Resource
-      PawsRegisterAPI
+      PawsRegisterResource
 
     -- * Creating a Request
-    , pawsRegister
-    , PawsRegister
+    , pawsRegister'
+    , PawsRegister'
 
     -- * Request Lenses
     , prQuotaUser
@@ -43,22 +44,30 @@ import           Network.Google.Prelude
 import           Network.Google.Spectrum.Types
 
 -- | A resource alias for @SpectrumPawsRegister@ which the
--- 'PawsRegister' request conforms to.
-type PawsRegisterAPI =
-     "register" :> Post '[JSON] PawsRegisterResponse
+-- 'PawsRegister'' request conforms to.
+type PawsRegisterResource =
+     "register" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
--- /See:/ 'pawsRegister' smart constructor.
-data PawsRegister = PawsRegister
+-- /See:/ 'pawsRegister'' smart constructor.
+data PawsRegister' = PawsRegister'
     { _prQuotaUser   :: !(Maybe Text)
     , _prPrettyPrint :: !Bool
     , _prUserIp      :: !(Maybe Text)
     , _prKey         :: !(Maybe Text)
     , _prOauthToken  :: !(Maybe Text)
     , _prFields      :: !(Maybe Text)
-    , _prAlt         :: !Text
+    , _prAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegister'' with the minimum fields required to make a request.
@@ -78,17 +87,17 @@ data PawsRegister = PawsRegister
 -- * 'prFields'
 --
 -- * 'prAlt'
-pawsRegister
-    :: PawsRegister
-pawsRegister =
-    PawsRegister
+pawsRegister'
+    :: PawsRegister'
+pawsRegister' =
+    PawsRegister'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
     , _prUserIp = Nothing
     , _prKey = Nothing
     , _prOauthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = "json"
+    , _prAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,17 +134,20 @@ prFields :: Lens' PawsRegister' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
 -- | Data format for the response.
-prAlt :: Lens' PawsRegister' Text
+prAlt :: Lens' PawsRegister' Alt
 prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
 
 instance GoogleRequest PawsRegister' where
         type Rs PawsRegister' = PawsRegisterResponse
         request = requestWithRoute defReq spectrumURL
-        requestWithRoute r u PawsRegister{..}
-          = go _prQuotaUser _prPrettyPrint _prUserIp _prKey
+        requestWithRoute r u PawsRegister'{..}
+          = go _prQuotaUser (Just _prPrettyPrint) _prUserIp
+              _prKey
               _prOauthToken
               _prFields
-              _prAlt
+              (Just _prAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PawsRegisterAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PawsRegisterResource)
+                      r
                       u

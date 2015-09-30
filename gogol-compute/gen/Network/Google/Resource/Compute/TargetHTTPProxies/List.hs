@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesList@.
-module Compute.TargetHTTPProxies.List
+module Network.Google.Resource.Compute.TargetHTTPProxies.List
     (
     -- * REST Resource
-      TargetHTTPProxiesListAPI
+      TargetHTTPProxiesListResource
 
     -- * Creating a Request
-    , targetHTTPProxiesList
-    , TargetHTTPProxiesList
+    , targetHTTPProxiesList'
+    , TargetHTTPProxiesList'
 
     -- * Request Lenses
     , thttpplQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetHTTPProxiesList@ which the
--- 'TargetHTTPProxiesList' request conforms to.
-type TargetHTTPProxiesListAPI =
+-- 'TargetHTTPProxiesList'' request conforms to.
+type TargetHTTPProxiesListResource =
      Capture "project" Text :>
        "global" :>
          "targetHttpProxies" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TargetHTTPProxyList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TargetHTTPProxyList
 
 -- | Retrieves the list of TargetHttpProxy resources available to the
 -- specified project.
 --
--- /See:/ 'targetHTTPProxiesList' smart constructor.
-data TargetHTTPProxiesList = TargetHTTPProxiesList
+-- /See:/ 'targetHTTPProxiesList'' smart constructor.
+data TargetHTTPProxiesList' = TargetHTTPProxiesList'
     { _thttpplQuotaUser   :: !(Maybe Text)
     , _thttpplPrettyPrint :: !Bool
     , _thttpplProject     :: !Text
@@ -72,7 +80,7 @@ data TargetHTTPProxiesList = TargetHTTPProxiesList
     , _thttpplOauthToken  :: !(Maybe Text)
     , _thttpplMaxResults  :: !Word32
     , _thttpplFields      :: !(Maybe Text)
-    , _thttpplAlt         :: !Text
+    , _thttpplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data TargetHTTPProxiesList = TargetHTTPProxiesList
 -- * 'thttpplFields'
 --
 -- * 'thttpplAlt'
-targetHTTPProxiesList
+targetHTTPProxiesList'
     :: Text -- ^ 'project'
-    -> TargetHTTPProxiesList
-targetHTTPProxiesList pThttpplProject_ =
-    TargetHTTPProxiesList
+    -> TargetHTTPProxiesList'
+targetHTTPProxiesList' pThttpplProject_ =
+    TargetHTTPProxiesList'
     { _thttpplQuotaUser = Nothing
     , _thttpplPrettyPrint = True
     , _thttpplProject = pThttpplProject_
@@ -115,7 +123,7 @@ targetHTTPProxiesList pThttpplProject_ =
     , _thttpplOauthToken = Nothing
     , _thttpplMaxResults = 500
     , _thttpplFields = Nothing
-    , _thttpplAlt = "json"
+    , _thttpplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -195,15 +203,15 @@ thttpplFields
       (\ s a -> s{_thttpplFields = a})
 
 -- | Data format for the response.
-thttpplAlt :: Lens' TargetHTTPProxiesList' Text
+thttpplAlt :: Lens' TargetHTTPProxiesList' Alt
 thttpplAlt
   = lens _thttpplAlt (\ s a -> s{_thttpplAlt = a})
 
 instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesList{..}
-          = go _thttpplQuotaUser _thttpplPrettyPrint
+        requestWithRoute r u TargetHTTPProxiesList'{..}
+          = go _thttpplQuotaUser (Just _thttpplPrettyPrint)
               _thttpplProject
               _thttpplUserIp
               _thttpplKey
@@ -212,9 +220,9 @@ instance GoogleRequest TargetHTTPProxiesList' where
               _thttpplOauthToken
               (Just _thttpplMaxResults)
               _thttpplFields
-              _thttpplAlt
+              (Just _thttpplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetHTTPProxiesListAPI)
+                      (Proxy :: Proxy TargetHTTPProxiesListResource)
                       r
                       u

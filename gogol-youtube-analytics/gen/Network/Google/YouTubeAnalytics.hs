@@ -27,36 +27,42 @@ module Network.Google.YouTubeAnalytics
     -- * REST Resources
 
     -- ** YouTubeAnalyticsBatchReportDefinitionsList
-    , module YouTubeAnalytics.BatchReportDefinitions.List
+    , module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
 
     -- ** YouTubeAnalyticsBatchReportsList
-    , module YouTubeAnalytics.BatchReports.List
+    , module Network.Google.Resource.YouTubeAnalytics.BatchReports.List
 
     -- ** YouTubeAnalyticsGroupItemsDelete
-    , module YouTubeAnalytics.GroupItems.Delete
+    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
 
     -- ** YouTubeAnalyticsGroupItemsInsert
-    , module YouTubeAnalytics.GroupItems.Insert
+    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
 
     -- ** YouTubeAnalyticsGroupItemsList
-    , module YouTubeAnalytics.GroupItems.List
+    , module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
 
     -- ** YouTubeAnalyticsGroupsDelete
-    , module YouTubeAnalytics.Groups.Delete
+    , module Network.Google.Resource.YouTubeAnalytics.Groups.Delete
 
     -- ** YouTubeAnalyticsGroupsInsert
-    , module YouTubeAnalytics.Groups.Insert
+    , module Network.Google.Resource.YouTubeAnalytics.Groups.Insert
 
     -- ** YouTubeAnalyticsGroupsList
-    , module YouTubeAnalytics.Groups.List
+    , module Network.Google.Resource.YouTubeAnalytics.Groups.List
 
     -- ** YouTubeAnalyticsGroupsUpdate
-    , module YouTubeAnalytics.Groups.Update
+    , module Network.Google.Resource.YouTubeAnalytics.Groups.Update
 
     -- ** YouTubeAnalyticsReportsQuery
-    , module YouTubeAnalytics.Reports.Query
+    , module Network.Google.Resource.YouTubeAnalytics.Reports.Query
 
     -- * Types
+
+    -- ** GroupContentDetails
+    , GroupContentDetails
+    , groupContentDetails
+    , gcdItemType
+    , gcdItemCount
 
     -- ** Group
     , Group
@@ -66,6 +72,12 @@ module Network.Google.YouTubeAnalytics
     , gKind
     , gContentDetails
     , gId
+
+    -- ** GroupItemResource
+    , GroupItemResource
+    , groupItemResource
+    , girKind
+    , girId
 
     -- ** ResultTable
     , ResultTable
@@ -82,6 +94,12 @@ module Network.Google.YouTubeAnalytics
     , brdName
     , brdId
     , brdType
+
+    -- ** GroupSnippet
+    , GroupSnippet
+    , groupSnippet
+    , gsPublishedAt
+    , gsTitle
 
     -- ** BatchReport
     , BatchReport
@@ -108,11 +126,24 @@ module Network.Google.YouTubeAnalytics
     , brdlKind
     , brdlItems
 
+    -- ** ResultTableColumnHeaders
+    , ResultTableColumnHeaders
+    , resultTableColumnHeaders
+    , rtchColumnType
+    , rtchName
+    , rtchDataType
+
     -- ** BatchReportList
     , BatchReportList
     , batchReportList
     , brlKind
     , brlItems
+
+    -- ** BatchReportTimeSpan
+    , BatchReportTimeSpan
+    , batchReportTimeSpan
+    , brtsStartTime
+    , brtsEndTime
 
     -- ** GroupItemListResponse
     , GroupItemListResponse
@@ -121,12 +152,22 @@ module Network.Google.YouTubeAnalytics
     , gilrKind
     , gilrItems
 
+    -- ** BatchReportOutputs
+    , BatchReportOutputs
+    , batchReportOutputs
+    , broFormat
+    , broDownloadUrl
+    , broType
+
     -- ** GroupListResponse
     , GroupListResponse
     , groupListResponse
     , glrEtag
     , glrKind
     , glrItems
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -147,8 +188,15 @@ TODO
 -}
 
 type YouTubeAnalyticsAPI =
-     Groups :<|> Reports :<|> GroupItems :<|> BatchReports
-       :<|> BatchReportDefinitions
+     GroupsInsertResource :<|> GroupsListResource :<|>
+       GroupsDeleteResource
+       :<|> GroupsUpdateResource
+       :<|> ReportsQueryResource
+       :<|> GroupItemsInsertResource
+       :<|> GroupItemsListResource
+       :<|> GroupItemsDeleteResource
+       :<|> BatchReportsListResource
+       :<|> BatchReportDefinitionsListResource
 
 youTubeAnalyticsAPI :: Proxy YouTubeAnalyticsAPI
 youTubeAnalyticsAPI = Proxy

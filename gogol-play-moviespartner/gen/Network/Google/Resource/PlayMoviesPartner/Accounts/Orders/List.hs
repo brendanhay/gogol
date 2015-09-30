@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsOrdersList@.
-module PlayMoviesPartner.Accounts.Orders.List
+module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
     (
     -- * REST Resource
-      AccountsOrdersListAPI
+      AccountsOrdersListResource
 
     -- * Creating a Request
-    , accountsOrdersList
-    , AccountsOrdersList
+    , accountsOrdersList'
+    , AccountsOrdersList'
 
     -- * Request Lenses
     , aolStatus
@@ -58,27 +59,41 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsOrdersList@ which the
--- 'AccountsOrdersList' request conforms to.
-type AccountsOrdersListAPI =
+-- 'AccountsOrdersList'' request conforms to.
+type AccountsOrdersListResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "orders" :>
              QueryParams "status" Text :>
                QueryParams "pphNames" Text :>
-                 QueryParams "studioNames" Text :>
-                   QueryParam "customId" Text :>
-                     QueryParam "name" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           Get '[JSON] ListOrdersResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParams "studioNames" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "customId" Text :>
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "name" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "pageSize" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListOrdersResponse
 
 -- | List Orders owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsOrdersList' smart constructor.
-data AccountsOrdersList = AccountsOrdersList
+-- /See:/ 'accountsOrdersList'' smart constructor.
+data AccountsOrdersList' = AccountsOrdersList'
     { _aolStatus         :: !(Maybe Text)
     , _aolPphNames       :: !(Maybe Text)
     , _aolXgafv          :: !(Maybe Text)
@@ -147,11 +162,11 @@ data AccountsOrdersList = AccountsOrdersList
 -- * 'aolCallback'
 --
 -- * 'aolAlt'
-accountsOrdersList
+accountsOrdersList'
     :: Text -- ^ 'accountId'
-    -> AccountsOrdersList
-accountsOrdersList pAolAccountId_ =
-    AccountsOrdersList
+    -> AccountsOrdersList'
+accountsOrdersList' pAolAccountId_ =
+    AccountsOrdersList'
     { _aolStatus = Nothing
     , _aolPphNames = Nothing
     , _aolXgafv = Nothing
@@ -291,13 +306,13 @@ instance GoogleRequest AccountsOrdersList' where
         type Rs AccountsOrdersList' = ListOrdersResponse
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsOrdersList{..}
+        requestWithRoute r u AccountsOrdersList'{..}
           = go _aolStatus _aolPphNames _aolXgafv
               _aolStudioNames
               _aolQuotaUser
-              _aolPrettyPrint
+              (Just _aolPrettyPrint)
               _aolUploadProtocol
-              _aolPp
+              (Just _aolPp)
               _aolAccessToken
               _aolUploadType
               _aolCustomId
@@ -310,9 +325,9 @@ instance GoogleRequest AccountsOrdersList' where
               _aolPageSize
               _aolFields
               _aolCallback
-              _aolAlt
+              (Just _aolAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsOrdersListAPI)
+                      (Proxy :: Proxy AccountsOrdersListResource)
                       r
                       u

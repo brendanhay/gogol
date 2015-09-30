@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of video streams that match the API request parameters.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveStreamsList@.
-module YouTube.LiveStreams.List
+module Network.Google.Resource.YouTube.LiveStreams.List
     (
     -- * REST Resource
-      LiveStreamsListAPI
+      LiveStreamsListResource
 
     -- * Creating a Request
-    , liveStreamsList
-    , LiveStreamsList
+    , liveStreamsList'
+    , LiveStreamsList'
 
     -- * Request Lenses
     , lslQuotaUser
@@ -49,22 +50,29 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveStreamsList@ which the
--- 'LiveStreamsList' request conforms to.
-type LiveStreamsListAPI =
+-- 'LiveStreamsList'' request conforms to.
+type LiveStreamsListResource =
      "liveStreams" :>
-       QueryParam "part" Text :>
-         QueryParam "mine" Bool :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] LiveStreamListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "mine" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] LiveStreamListResponse
 
 -- | Returns a list of video streams that match the API request parameters.
 --
--- /See:/ 'liveStreamsList' smart constructor.
-data LiveStreamsList = LiveStreamsList
+-- /See:/ 'liveStreamsList'' smart constructor.
+data LiveStreamsList' = LiveStreamsList'
     { _lslQuotaUser                     :: !(Maybe Text)
     , _lslPart                          :: !Text
     , _lslPrettyPrint                   :: !Bool
@@ -78,7 +86,7 @@ data LiveStreamsList = LiveStreamsList
     , _lslOauthToken                    :: !(Maybe Text)
     , _lslMaxResults                    :: !Word32
     , _lslFields                        :: !(Maybe Text)
-    , _lslAlt                           :: !Text
+    , _lslAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsList'' with the minimum fields required to make a request.
@@ -112,11 +120,11 @@ data LiveStreamsList = LiveStreamsList
 -- * 'lslFields'
 --
 -- * 'lslAlt'
-liveStreamsList
+liveStreamsList'
     :: Text -- ^ 'part'
-    -> LiveStreamsList
-liveStreamsList pLslPart_ =
-    LiveStreamsList
+    -> LiveStreamsList'
+liveStreamsList' pLslPart_ =
+    LiveStreamsList'
     { _lslQuotaUser = Nothing
     , _lslPart = pLslPart_
     , _lslPrettyPrint = True
@@ -130,7 +138,7 @@ liveStreamsList pLslPart_ =
     , _lslOauthToken = Nothing
     , _lslMaxResults = 5
     , _lslFields = Nothing
-    , _lslAlt = "json"
+    , _lslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -239,14 +247,15 @@ lslFields
   = lens _lslFields (\ s a -> s{_lslFields = a})
 
 -- | Data format for the response.
-lslAlt :: Lens' LiveStreamsList' Text
+lslAlt :: Lens' LiveStreamsList' Alt
 lslAlt = lens _lslAlt (\ s a -> s{_lslAlt = a})
 
 instance GoogleRequest LiveStreamsList' where
         type Rs LiveStreamsList' = LiveStreamListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveStreamsList{..}
-          = go _lslQuotaUser (Just _lslPart) _lslPrettyPrint
+        requestWithRoute r u LiveStreamsList'{..}
+          = go _lslQuotaUser (Just _lslPart)
+              (Just _lslPrettyPrint)
               _lslMine
               _lslUserIp
               _lslOnBehalfOfContentOwner
@@ -257,8 +266,9 @@ instance GoogleRequest LiveStreamsList' where
               _lslOauthToken
               (Just _lslMaxResults)
               _lslFields
-              _lslAlt
+              (Just _lslAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LiveStreamsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy LiveStreamsListResource)
                       r
                       u

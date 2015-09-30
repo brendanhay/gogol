@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists a file\'s permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsList@.
-module Drive.Permissions.List
+module Network.Google.Resource.Drive.Permissions.List
     (
     -- * REST Resource
-      PermissionsListAPI
+      PermissionsListResource
 
     -- * Creating a Request
-    , permissionsList
-    , PermissionsList
+    , permissionsList'
+    , PermissionsList'
 
     -- * Request Lenses
     , pllQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePermissionsList@ which the
--- 'PermissionsList' request conforms to.
-type PermissionsListAPI =
+-- 'PermissionsList'' request conforms to.
+type PermissionsListResource =
      "files" :>
        Capture "fileId" Text :>
-         "permissions" :> Get '[JSON] PermissionList
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] PermissionList
 
 -- | Lists a file\'s permissions.
 --
--- /See:/ 'permissionsList' smart constructor.
-data PermissionsList = PermissionsList
+-- /See:/ 'permissionsList'' smart constructor.
+data PermissionsList' = PermissionsList'
     { _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
     , _pllUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data PermissionsList = PermissionsList
     , _pllFileId      :: !Text
     , _pllOauthToken  :: !(Maybe Text)
     , _pllFields      :: !(Maybe Text)
-    , _pllAlt         :: !Text
+    , _pllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data PermissionsList = PermissionsList
 -- * 'pllFields'
 --
 -- * 'pllAlt'
-permissionsList
+permissionsList'
     :: Text -- ^ 'fileId'
-    -> PermissionsList
-permissionsList pPllFileId_ =
-    PermissionsList
+    -> PermissionsList'
+permissionsList' pPllFileId_ =
+    PermissionsList'
     { _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
     , _pllUserIp = Nothing
@@ -94,7 +102,7 @@ permissionsList pPllFileId_ =
     , _pllFileId = pPllFileId_
     , _pllOauthToken = Nothing
     , _pllFields = Nothing
-    , _pllAlt = "json"
+    , _pllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,19 +147,21 @@ pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
 -- | Data format for the response.
-pllAlt :: Lens' PermissionsList' Text
+pllAlt :: Lens' PermissionsList' Alt
 pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
 
 instance GoogleRequest PermissionsList' where
         type Rs PermissionsList' = PermissionList
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsList{..}
-          = go _pllQuotaUser _pllPrettyPrint _pllUserIp _pllKey
+        requestWithRoute r u PermissionsList'{..}
+          = go _pllQuotaUser (Just _pllPrettyPrint) _pllUserIp
+              _pllKey
               _pllFileId
               _pllOauthToken
               _pllFields
-              _pllAlt
+              (Just _pllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PermissionsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy PermissionsListResource)
                       r
                       u

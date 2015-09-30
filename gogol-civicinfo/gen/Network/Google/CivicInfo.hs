@@ -27,21 +27,25 @@ module Network.Google.CivicInfo
     -- * REST Resources
 
     -- ** CivicinfoDivisionsSearch
-    , module CivicInfo.Divisions.Search
+    , module Network.Google.Resource.CivicInfo.Divisions.Search
 
     -- ** CivicinfoElectionsElectionQuery
-    , module CivicInfo.Elections.ElectionQuery
+    , module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
 
     -- ** CivicinfoElectionsVoterInfoQuery
-    , module CivicInfo.Elections.VoterInfoQuery
+    , module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
 
     -- ** CivicinfoRepresentativesRepresentativeInfoByAddress
-    , module CivicInfo.Representatives.RepresentativeInfoByAddress
+    , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
 
     -- ** CivicinfoRepresentativesRepresentativeInfoByDivision
-    , module CivicInfo.Representatives.RepresentativeInfoByDivision
+    , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
 
     -- * Types
+
+    -- ** RepresentativeInfoResponseDivisions
+    , RepresentativeInfoResponseDivisions
+    , representativeInfoResponseDivisions
 
     -- ** VoterInfoResponse
     , VoterInfoResponse
@@ -78,6 +82,12 @@ module Network.Google.CivicInfo
     , gdOfficeIndices
     , gdAlsoKnownAs
 
+    -- ** CivicinfoRepresentativesRepresentativeInfoByDivisionLevels
+    , CivicinfoRepresentativesRepresentativeInfoByDivisionLevels (..)
+
+    -- ** CivicinfoRepresentativesRepresentativeInfoByAddressLevels
+    , CivicinfoRepresentativesRepresentativeInfoByAddressLevels (..)
+
     -- ** Candidate
     , Candidate
     , candidate
@@ -99,6 +109,9 @@ module Network.Google.CivicInfo
     , oSources
     , oName
     , oLevels
+
+    -- ** CivicinfoRepresentativesRepresentativeInfoByDivisionRoles
+    , CivicinfoRepresentativesRepresentativeInfoByDivisionRoles (..)
 
     -- ** Election
     , Election
@@ -181,6 +194,13 @@ module Network.Google.CivicInfo
     , dsrResults
     , dsrKind
 
+    -- ** RepresentativeInfoDataDivisions
+    , RepresentativeInfoDataDivisions
+    , representativeInfoDataDivisions
+
+    -- ** CivicinfoRepresentativesRepresentativeInfoByAddressRoles
+    , CivicinfoRepresentativesRepresentativeInfoByAddressRoles (..)
+
     -- ** ElectionOfficial
     , ElectionOfficial
     , electionOfficial
@@ -247,6 +267,9 @@ module Network.Google.CivicInfo
     , offName
     , offEmails
     , offParty
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.CivicInfo.Types
@@ -262,7 +285,13 @@ TODO
 -}
 
 type CivicInfoAPI =
-     Elections :<|> Divisions :<|> Representatives
+     ElectionsVoterInfoQueryResource :<|>
+       ElectionsElectionQueryResource
+       :<|> DivisionsSearchResource
+       :<|>
+       RepresentativesRepresentativeInfoByDivisionResource
+       :<|>
+       RepresentativesRepresentativeInfoByAddressResource
 
 civicInfoAPI :: Proxy CivicInfoAPI
 civicInfoAPI = Proxy

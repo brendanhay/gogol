@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the ASPs issued by a user.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryAspsList@.
-module Directory.Asps.List
+module Network.Google.Resource.Directory.Asps.List
     (
     -- * REST Resource
-      AspsListAPI
+      AspsListResource
 
     -- * Creating a Request
-    , aspsList
-    , AspsList
+    , aspsList'
+    , AspsList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -43,15 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryAspsList@ which the
--- 'AspsList' request conforms to.
-type AspsListAPI =
+-- 'AspsList'' request conforms to.
+type AspsListResource =
      "users" :>
-       Capture "userKey" Text :> "asps" :> Get '[JSON] Asps
+       Capture "userKey" Text :>
+         "asps" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Asps
 
 -- | List the ASPs issued by a user.
 --
--- /See:/ 'aspsList' smart constructor.
-data AspsList = AspsList
+-- /See:/ 'aspsList'' smart constructor.
+data AspsList' = AspsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alUserIp      :: !(Maybe Text)
@@ -59,7 +68,7 @@ data AspsList = AspsList
     , _alOauthToken  :: !(Maybe Text)
     , _alUserKey     :: !Text
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Text
+    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsList'' with the minimum fields required to make a request.
@@ -81,11 +90,11 @@ data AspsList = AspsList
 -- * 'alFields'
 --
 -- * 'alAlt'
-aspsList
+aspsList'
     :: Text -- ^ 'userKey'
-    -> AspsList
-aspsList pAlUserKey_ =
-    AspsList
+    -> AspsList'
+aspsList' pAlUserKey_ =
+    AspsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
@@ -93,7 +102,7 @@ aspsList pAlUserKey_ =
     , _alOauthToken = Nothing
     , _alUserKey = pAlUserKey_
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,17 +145,19 @@ alFields :: Lens' AspsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AspsList' Text
+alAlt :: Lens' AspsList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u AspsList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp _alKey
+        requestWithRoute r u AspsList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+              _alKey
               _alOauthToken
               _alUserKey
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AspsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AspsListResource) r
+                      u

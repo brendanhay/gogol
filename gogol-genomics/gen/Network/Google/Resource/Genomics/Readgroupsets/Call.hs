@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- documentation for more details.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsReadgroupsetsCall@.
-module Genomics.Readgroupsets.Call
+module Network.Google.Resource.Genomics.Readgroupsets.Call
     (
     -- * REST Resource
-      ReadgroupsetsCallAPI
+      ReadgroupsetsCallResource
 
     -- * Creating a Request
-    , readgroupsetsCall
-    , ReadgroupsetsCall
+    , readgroupsetsCall'
+    , ReadgroupsetsCall'
 
     -- * Request Lenses
     , rcQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsReadgroupsetsCall@ which the
--- 'ReadgroupsetsCall' request conforms to.
-type ReadgroupsetsCallAPI =
+-- 'ReadgroupsetsCall'' request conforms to.
+type ReadgroupsetsCallResource =
      "readgroupsets" :>
-       "call" :> Post '[JSON] CallReadGroupSetsResponse
+       "call" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] CallReadGroupSetsResponse
 
 -- | Calls variants on read data from existing read group sets or files from
 -- Google Cloud Storage. See the alignment and variant calling
 -- documentation for more details.
 --
--- /See:/ 'readgroupsetsCall' smart constructor.
-data ReadgroupsetsCall = ReadgroupsetsCall
+-- /See:/ 'readgroupsetsCall'' smart constructor.
+data ReadgroupsetsCall' = ReadgroupsetsCall'
     { _rcQuotaUser   :: !(Maybe Text)
     , _rcPrettyPrint :: !Bool
     , _rcUserIp      :: !(Maybe Text)
     , _rcKey         :: !(Maybe Text)
     , _rcOauthToken  :: !(Maybe Text)
     , _rcFields      :: !(Maybe Text)
-    , _rcAlt         :: !Text
+    , _rcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCall'' with the minimum fields required to make a request.
@@ -81,17 +90,17 @@ data ReadgroupsetsCall = ReadgroupsetsCall
 -- * 'rcFields'
 --
 -- * 'rcAlt'
-readgroupsetsCall
-    :: ReadgroupsetsCall
-readgroupsetsCall =
-    ReadgroupsetsCall
+readgroupsetsCall'
+    :: ReadgroupsetsCall'
+readgroupsetsCall' =
+    ReadgroupsetsCall'
     { _rcQuotaUser = Nothing
     , _rcPrettyPrint = True
     , _rcUserIp = Nothing
     , _rcKey = Nothing
     , _rcOauthToken = Nothing
     , _rcFields = Nothing
-    , _rcAlt = "json"
+    , _rcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,20 +137,21 @@ rcFields :: Lens' ReadgroupsetsCall' (Maybe Text)
 rcFields = lens _rcFields (\ s a -> s{_rcFields = a})
 
 -- | Data format for the response.
-rcAlt :: Lens' ReadgroupsetsCall' Text
+rcAlt :: Lens' ReadgroupsetsCall' Alt
 rcAlt = lens _rcAlt (\ s a -> s{_rcAlt = a})
 
 instance GoogleRequest ReadgroupsetsCall' where
         type Rs ReadgroupsetsCall' =
              CallReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u ReadgroupsetsCall{..}
-          = go _rcQuotaUser _rcPrettyPrint _rcUserIp _rcKey
+        requestWithRoute r u ReadgroupsetsCall'{..}
+          = go _rcQuotaUser (Just _rcPrettyPrint) _rcUserIp
+              _rcKey
               _rcOauthToken
               _rcFields
-              _rcAlt
+              (Just _rcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReadgroupsetsCallAPI)
+                      (Proxy :: Proxy ReadgroupsetsCallResource)
                       r
                       u

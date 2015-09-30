@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a subscription for the authenticated user\'s channel.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeSubscriptionsInsert@.
-module YouTube.Subscriptions.Insert
+module Network.Google.Resource.YouTube.Subscriptions.Insert
     (
     -- * REST Resource
-      SubscriptionsInsertAPI
+      SubscriptionsInsertResource
 
     -- * Creating a Request
-    , subscriptionsInsert
-    , SubscriptionsInsert
+    , subscriptionsInsert'
+    , SubscriptionsInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeSubscriptionsInsert@ which the
--- 'SubscriptionsInsert' request conforms to.
-type SubscriptionsInsertAPI =
+-- 'SubscriptionsInsert'' request conforms to.
+type SubscriptionsInsertResource =
      "subscriptions" :>
-       QueryParam "part" Text :> Post '[JSON] Subscription
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Adds a subscription for the authenticated user\'s channel.
 --
--- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+-- /See:/ 'subscriptionsInsert'' smart constructor.
+data SubscriptionsInsert' = SubscriptionsInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPart        :: !Text
     , _siPrettyPrint :: !Bool
@@ -59,7 +67,7 @@ data SubscriptionsInsert = SubscriptionsInsert
     , _siKey         :: !(Maybe Text)
     , _siOauthToken  :: !(Maybe Text)
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Text
+    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data SubscriptionsInsert = SubscriptionsInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-subscriptionsInsert
+subscriptionsInsert'
     :: Text -- ^ 'part'
-    -> SubscriptionsInsert
-subscriptionsInsert pSiPart_ =
-    SubscriptionsInsert
+    -> SubscriptionsInsert'
+subscriptionsInsert' pSiPart_ =
+    SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPart = pSiPart_
     , _siPrettyPrint = True
@@ -93,7 +101,7 @@ subscriptionsInsert pSiPart_ =
     , _siKey = Nothing
     , _siOauthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,21 +144,22 @@ siFields :: Lens' SubscriptionsInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' SubscriptionsInsert' Text
+siAlt :: Lens' SubscriptionsInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u SubscriptionsInsert{..}
-          = go _siQuotaUser (Just _siPart) _siPrettyPrint
+        requestWithRoute r u SubscriptionsInsert'{..}
+          = go _siQuotaUser (Just _siPart)
+              (Just _siPrettyPrint)
               _siUserIp
               _siKey
               _siOauthToken
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsInsertAPI)
+                      (Proxy :: Proxy SubscriptionsInsertResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project and zone.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupManagersAggregatedList@.
-module Compute.InstanceGroupManagers.AggregatedList
+module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
     (
     -- * REST Resource
-      InstanceGroupManagersAggregatedListAPI
+      InstanceGroupManagersAggregatedListResource
 
     -- * Creating a Request
-    , instanceGroupManagersAggregatedList
-    , InstanceGroupManagersAggregatedList
+    , instanceGroupManagersAggregatedList'
+    , InstanceGroupManagersAggregatedList'
 
     -- * Request Lenses
     , igmalQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupManagersAggregatedList@ which the
--- 'InstanceGroupManagersAggregatedList' request conforms to.
-type InstanceGroupManagersAggregatedListAPI =
+-- 'InstanceGroupManagersAggregatedList'' request conforms to.
+type InstanceGroupManagersAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "instanceGroupManagers" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] InstanceGroupManagerAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] InstanceGroupManagerAggregatedList
 
 -- | Retrieves the list of managed instance groups, and groups them by
 -- project and zone.
 --
--- /See:/ 'instanceGroupManagersAggregatedList' smart constructor.
-data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
+-- /See:/ 'instanceGroupManagersAggregatedList'' smart constructor.
+data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
     { _igmalQuotaUser   :: !(Maybe Text)
     , _igmalPrettyPrint :: !Bool
     , _igmalProject     :: !Text
@@ -72,7 +80,7 @@ data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
     , _igmalOauthToken  :: !(Maybe Text)
     , _igmalMaxResults  :: !Word32
     , _igmalFields      :: !(Maybe Text)
-    , _igmalAlt         :: !Text
+    , _igmalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
 -- * 'igmalFields'
 --
 -- * 'igmalAlt'
-instanceGroupManagersAggregatedList
+instanceGroupManagersAggregatedList'
     :: Text -- ^ 'project'
-    -> InstanceGroupManagersAggregatedList
-instanceGroupManagersAggregatedList pIgmalProject_ =
-    InstanceGroupManagersAggregatedList
+    -> InstanceGroupManagersAggregatedList'
+instanceGroupManagersAggregatedList' pIgmalProject_ =
+    InstanceGroupManagersAggregatedList'
     { _igmalQuotaUser = Nothing
     , _igmalPrettyPrint = True
     , _igmalProject = pIgmalProject_
@@ -115,7 +123,7 @@ instanceGroupManagersAggregatedList pIgmalProject_ =
     , _igmalOauthToken = Nothing
     , _igmalMaxResults = 500
     , _igmalFields = Nothing
-    , _igmalAlt = "json"
+    , _igmalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -190,7 +198,7 @@ igmalFields
   = lens _igmalFields (\ s a -> s{_igmalFields = a})
 
 -- | Data format for the response.
-igmalAlt :: Lens' InstanceGroupManagersAggregatedList' Text
+igmalAlt :: Lens' InstanceGroupManagersAggregatedList' Alt
 igmalAlt = lens _igmalAlt (\ s a -> s{_igmalAlt = a})
 
 instance GoogleRequest
@@ -199,8 +207,9 @@ instance GoogleRequest
              InstanceGroupManagerAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          InstanceGroupManagersAggregatedList{..}
-          = go _igmalQuotaUser _igmalPrettyPrint _igmalProject
+          InstanceGroupManagersAggregatedList'{..}
+          = go _igmalQuotaUser (Just _igmalPrettyPrint)
+              _igmalProject
               _igmalUserIp
               _igmalKey
               _igmalFilter
@@ -208,10 +217,10 @@ instance GoogleRequest
               _igmalOauthToken
               (Just _igmalMaxResults)
               _igmalFields
-              _igmalAlt
+              (Just _igmalAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy InstanceGroupManagersAggregatedListAPI)
+                         Proxy InstanceGroupManagersAggregatedListResource)
                       r
                       u

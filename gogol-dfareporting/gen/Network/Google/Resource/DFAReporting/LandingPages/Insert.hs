@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new landing page for the specified campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingLandingPagesInsert@.
-module DFAReporting.LandingPages.Insert
+module Network.Google.Resource.DFAReporting.LandingPages.Insert
     (
     -- * REST Resource
-      LandingPagesInsertAPI
+      LandingPagesInsertResource
 
     -- * Creating a Request
-    , landingPagesInsert
-    , LandingPagesInsert
+    , landingPagesInsert'
+    , LandingPagesInsert'
 
     -- * Request Lenses
     , lpiQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingLandingPagesInsert@ which the
--- 'LandingPagesInsert' request conforms to.
-type LandingPagesInsertAPI =
+-- 'LandingPagesInsert'' request conforms to.
+type LandingPagesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
-             "landingPages" :> Post '[JSON] LandingPage
+             "landingPages" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] LandingPage
 
 -- | Inserts a new landing page for the specified campaign.
 --
--- /See:/ 'landingPagesInsert' smart constructor.
-data LandingPagesInsert = LandingPagesInsert
+-- /See:/ 'landingPagesInsert'' smart constructor.
+data LandingPagesInsert' = LandingPagesInsert'
     { _lpiQuotaUser   :: !(Maybe Text)
     , _lpiPrettyPrint :: !Bool
     , _lpiUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data LandingPagesInsert = LandingPagesInsert
     , _lpiKey         :: !(Maybe Text)
     , _lpiOauthToken  :: !(Maybe Text)
     , _lpiFields      :: !(Maybe Text)
-    , _lpiAlt         :: !Text
+    , _lpiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesInsert'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data LandingPagesInsert = LandingPagesInsert
 -- * 'lpiFields'
 --
 -- * 'lpiAlt'
-landingPagesInsert
+landingPagesInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> LandingPagesInsert
-landingPagesInsert pLpiCampaignId_ pLpiProfileId_ =
-    LandingPagesInsert
+    -> LandingPagesInsert'
+landingPagesInsert' pLpiCampaignId_ pLpiProfileId_ =
+    LandingPagesInsert'
     { _lpiQuotaUser = Nothing
     , _lpiPrettyPrint = True
     , _lpiUserIp = Nothing
@@ -102,7 +110,7 @@ landingPagesInsert pLpiCampaignId_ pLpiProfileId_ =
     , _lpiKey = Nothing
     , _lpiOauthToken = Nothing
     , _lpiFields = Nothing
-    , _lpiAlt = "json"
+    , _lpiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ lpiFields
   = lens _lpiFields (\ s a -> s{_lpiFields = a})
 
 -- | Data format for the response.
-lpiAlt :: Lens' LandingPagesInsert' Text
+lpiAlt :: Lens' LandingPagesInsert' Alt
 lpiAlt = lens _lpiAlt (\ s a -> s{_lpiAlt = a})
 
 instance GoogleRequest LandingPagesInsert' where
         type Rs LandingPagesInsert' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u LandingPagesInsert{..}
-          = go _lpiQuotaUser _lpiPrettyPrint _lpiUserIp
+        requestWithRoute r u LandingPagesInsert'{..}
+          = go _lpiQuotaUser (Just _lpiPrettyPrint) _lpiUserIp
               _lpiCampaignId
               _lpiProfileId
               _lpiKey
               _lpiOauthToken
               _lpiFields
-              _lpiAlt
+              (Just _lpiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LandingPagesInsertAPI)
+                      (Proxy :: Proxy LandingPagesInsertResource)
                       r
                       u

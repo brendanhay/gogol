@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates an event based on a simple text string.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarEventsQuickAdd@.
-module Calendar.Events.QuickAdd
+module Network.Google.Resource.Calendar.Events.QuickAdd
     (
     -- * REST Resource
-      EventsQuickAddAPI
+      EventsQuickAddResource
 
     -- * Creating a Request
-    , eventsQuickAdd
-    , EventsQuickAdd
+    , eventsQuickAdd'
+    , EventsQuickAdd'
 
     -- * Request Lenses
     , eqaQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarEventsQuickAdd@ which the
--- 'EventsQuickAdd' request conforms to.
-type EventsQuickAddAPI =
+-- 'EventsQuickAdd'' request conforms to.
+type EventsQuickAddResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "events" :>
            "quickAdd" :>
-             QueryParam "text" Text :>
-               QueryParam "sendNotifications" Bool :>
-                 Post '[JSON] Event
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "text" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "sendNotifications" Bool :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.
 --
--- /See:/ 'eventsQuickAdd' smart constructor.
-data EventsQuickAdd = EventsQuickAdd
+-- /See:/ 'eventsQuickAdd'' smart constructor.
+data EventsQuickAdd' = EventsQuickAdd'
     { _eqaQuotaUser         :: !(Maybe Text)
     , _eqaCalendarId        :: !Text
     , _eqaPrettyPrint       :: !Bool
@@ -68,7 +75,7 @@ data EventsQuickAdd = EventsQuickAdd
     , _eqaSendNotifications :: !(Maybe Bool)
     , _eqaOauthToken        :: !(Maybe Text)
     , _eqaFields            :: !(Maybe Text)
-    , _eqaAlt               :: !Text
+    , _eqaAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsQuickAdd'' with the minimum fields required to make a request.
@@ -94,12 +101,12 @@ data EventsQuickAdd = EventsQuickAdd
 -- * 'eqaFields'
 --
 -- * 'eqaAlt'
-eventsQuickAdd
+eventsQuickAdd'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'text'
-    -> EventsQuickAdd
-eventsQuickAdd pEqaCalendarId_ pEqaText_ =
-    EventsQuickAdd
+    -> EventsQuickAdd'
+eventsQuickAdd' pEqaCalendarId_ pEqaText_ =
+    EventsQuickAdd'
     { _eqaQuotaUser = Nothing
     , _eqaCalendarId = pEqaCalendarId_
     , _eqaPrettyPrint = True
@@ -109,7 +116,7 @@ eventsQuickAdd pEqaCalendarId_ pEqaText_ =
     , _eqaSendNotifications = Nothing
     , _eqaOauthToken = Nothing
     , _eqaFields = Nothing
-    , _eqaAlt = "json"
+    , _eqaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,22 +175,24 @@ eqaFields
   = lens _eqaFields (\ s a -> s{_eqaFields = a})
 
 -- | Data format for the response.
-eqaAlt :: Lens' EventsQuickAdd' Text
+eqaAlt :: Lens' EventsQuickAdd' Alt
 eqaAlt = lens _eqaAlt (\ s a -> s{_eqaAlt = a})
 
 instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u EventsQuickAdd{..}
-          = go _eqaQuotaUser _eqaCalendarId _eqaPrettyPrint
+        requestWithRoute r u EventsQuickAdd'{..}
+          = go _eqaQuotaUser _eqaCalendarId
+              (Just _eqaPrettyPrint)
               (Just _eqaText)
               _eqaUserIp
               _eqaKey
               _eqaSendNotifications
               _eqaOauthToken
               _eqaFields
-              _eqaAlt
+              (Just _eqaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventsQuickAddAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventsQuickAddResource)
                       r
                       u

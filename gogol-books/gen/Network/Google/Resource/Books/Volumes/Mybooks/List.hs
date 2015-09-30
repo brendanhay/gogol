@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return a list of books in My Library.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesMybooksList@.
-module Books.Volumes.Mybooks.List
+module Network.Google.Resource.Books.Volumes.Mybooks.List
     (
     -- * REST Resource
-      VolumesMybooksListAPI
+      VolumesMybooksListResource
 
     -- * Creating a Request
-    , volumesMybooksList
-    , VolumesMybooksList
+    , volumesMybooksList'
+    , VolumesMybooksList'
 
     -- * Request Lenses
     , vmlProcessingState
@@ -48,24 +49,35 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesMybooksList@ which the
--- 'VolumesMybooksList' request conforms to.
-type VolumesMybooksListAPI =
+-- 'VolumesMybooksList'' request conforms to.
+type VolumesMybooksListResource =
      "volumes" :>
        "mybooks" :>
-         QueryParams "processingState" Text :>
-           QueryParams "acquireMethod" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "source" Text :>
-                 QueryParam "startIndex" Word32 :>
-                   QueryParam "maxResults" Word32 :> Get '[JSON] Volumes
+         QueryParams "processingState"
+           BooksVolumesMybooksListProcessingState
+           :>
+           QueryParam "quotaUser" Text :>
+             QueryParams "acquireMethod"
+               BooksVolumesMybooksListAcquireMethod
+               :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "startIndex" Word32 :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] Volumes
 
 -- | Return a list of books in My Library.
 --
--- /See:/ 'volumesMybooksList' smart constructor.
-data VolumesMybooksList = VolumesMybooksList
-    { _vmlProcessingState :: !(Maybe Text)
+-- /See:/ 'volumesMybooksList'' smart constructor.
+data VolumesMybooksList' = VolumesMybooksList'
+    { _vmlProcessingState :: !(Maybe BooksVolumesMybooksListProcessingState)
     , _vmlQuotaUser       :: !(Maybe Text)
-    , _vmlAcquireMethod   :: !(Maybe Text)
+    , _vmlAcquireMethod   :: !(Maybe BooksVolumesMybooksListAcquireMethod)
     , _vmlPrettyPrint     :: !Bool
     , _vmlUserIp          :: !(Maybe Text)
     , _vmlLocale          :: !(Maybe Text)
@@ -75,7 +87,7 @@ data VolumesMybooksList = VolumesMybooksList
     , _vmlStartIndex      :: !(Maybe Word32)
     , _vmlMaxResults      :: !(Maybe Word32)
     , _vmlFields          :: !(Maybe Text)
-    , _vmlAlt             :: !Text
+    , _vmlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesMybooksList'' with the minimum fields required to make a request.
@@ -107,10 +119,10 @@ data VolumesMybooksList = VolumesMybooksList
 -- * 'vmlFields'
 --
 -- * 'vmlAlt'
-volumesMybooksList
-    :: VolumesMybooksList
-volumesMybooksList =
-    VolumesMybooksList
+volumesMybooksList'
+    :: VolumesMybooksList'
+volumesMybooksList' =
+    VolumesMybooksList'
     { _vmlProcessingState = Nothing
     , _vmlQuotaUser = Nothing
     , _vmlAcquireMethod = Nothing
@@ -123,12 +135,12 @@ volumesMybooksList =
     , _vmlStartIndex = Nothing
     , _vmlMaxResults = Nothing
     , _vmlFields = Nothing
-    , _vmlAlt = "json"
+    , _vmlAlt = JSON
     }
 
 -- | The processing state of the user uploaded volumes to be returned.
 -- Applicable only if the UPLOADED is specified in the acquireMethod.
-vmlProcessingState :: Lens' VolumesMybooksList' (Maybe Text)
+vmlProcessingState :: Lens' VolumesMybooksList' (Maybe BooksVolumesMybooksListProcessingState)
 vmlProcessingState
   = lens _vmlProcessingState
       (\ s a -> s{_vmlProcessingState = a})
@@ -141,7 +153,7 @@ vmlQuotaUser
   = lens _vmlQuotaUser (\ s a -> s{_vmlQuotaUser = a})
 
 -- | How the book was aquired
-vmlAcquireMethod :: Lens' VolumesMybooksList' (Maybe Text)
+vmlAcquireMethod :: Lens' VolumesMybooksList' (Maybe BooksVolumesMybooksListAcquireMethod)
 vmlAcquireMethod
   = lens _vmlAcquireMethod
       (\ s a -> s{_vmlAcquireMethod = a})
@@ -199,16 +211,16 @@ vmlFields
   = lens _vmlFields (\ s a -> s{_vmlFields = a})
 
 -- | Data format for the response.
-vmlAlt :: Lens' VolumesMybooksList' Text
+vmlAlt :: Lens' VolumesMybooksList' Alt
 vmlAlt = lens _vmlAlt (\ s a -> s{_vmlAlt = a})
 
 instance GoogleRequest VolumesMybooksList' where
         type Rs VolumesMybooksList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesMybooksList{..}
+        requestWithRoute r u VolumesMybooksList'{..}
           = go _vmlProcessingState _vmlQuotaUser
               _vmlAcquireMethod
-              _vmlPrettyPrint
+              (Just _vmlPrettyPrint)
               _vmlUserIp
               _vmlLocale
               _vmlKey
@@ -217,9 +229,9 @@ instance GoogleRequest VolumesMybooksList' where
               _vmlStartIndex
               _vmlMaxResults
               _vmlFields
-              _vmlAlt
+              (Just _vmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VolumesMybooksListAPI)
+                      (Proxy :: Proxy VolumesMybooksListResource)
                       r
                       u

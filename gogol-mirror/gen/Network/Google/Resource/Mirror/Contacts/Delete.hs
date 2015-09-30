@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a contact.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsDelete@.
-module Mirror.Contacts.Delete
+module Network.Google.Resource.Mirror.Contacts.Delete
     (
     -- * REST Resource
-      ContactsDeleteAPI
+      ContactsDeleteResource
 
     -- * Creating a Request
-    , contactsDelete
-    , ContactsDelete
+    , contactsDelete'
+    , ContactsDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -43,14 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsDelete@ which the
--- 'ContactsDelete' request conforms to.
-type ContactsDeleteAPI =
-     "contacts" :> Capture "id" Text :> Delete '[JSON] ()
+-- 'ContactsDelete'' request conforms to.
+type ContactsDeleteResource =
+     "contacts" :>
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a contact.
 --
--- /See:/ 'contactsDelete' smart constructor.
-data ContactsDelete = ContactsDelete
+-- /See:/ 'contactsDelete'' smart constructor.
+data ContactsDelete' = ContactsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
     , _cdUserIp      :: !(Maybe Text)
@@ -58,7 +67,7 @@ data ContactsDelete = ContactsDelete
     , _cdId          :: !Text
     , _cdOauthToken  :: !(Maybe Text)
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Text
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsDelete'' with the minimum fields required to make a request.
@@ -80,11 +89,11 @@ data ContactsDelete = ContactsDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-contactsDelete
+contactsDelete'
     :: Text -- ^ 'id'
-    -> ContactsDelete
-contactsDelete pCdId_ =
-    ContactsDelete
+    -> ContactsDelete'
+contactsDelete' pCdId_ =
+    ContactsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdUserIp = Nothing
@@ -92,7 +101,7 @@ contactsDelete pCdId_ =
     , _cdId = pCdId_
     , _cdOauthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,19 +142,21 @@ cdFields :: Lens' ContactsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' ContactsDelete' Text
+cdAlt :: Lens' ContactsDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest ContactsDelete' where
         type Rs ContactsDelete' = ()
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdUserIp _cdKey
+        requestWithRoute r u ContactsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+              _cdKey
               _cdId
               _cdOauthToken
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsDeleteResource)
                       r
                       u

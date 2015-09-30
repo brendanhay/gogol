@@ -28,40 +28,40 @@ module Network.Google.InstanceGroupsManager
     -- * REST Resources
 
     -- ** ReplicapoolInstanceGroupManagersAbandonInstances
-    , module Replicapool.InstanceGroupManagers.AbandonInstances
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.AbandonInstances
 
     -- ** ReplicapoolInstanceGroupManagersDelete
-    , module Replicapool.InstanceGroupManagers.Delete
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.Delete
 
     -- ** ReplicapoolInstanceGroupManagersDeleteInstances
-    , module Replicapool.InstanceGroupManagers.DeleteInstances
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.DeleteInstances
 
     -- ** ReplicapoolInstanceGroupManagersGet
-    , module Replicapool.InstanceGroupManagers.Get
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.Get
 
     -- ** ReplicapoolInstanceGroupManagersInsert
-    , module Replicapool.InstanceGroupManagers.Insert
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.Insert
 
     -- ** ReplicapoolInstanceGroupManagersList
-    , module Replicapool.InstanceGroupManagers.List
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.List
 
     -- ** ReplicapoolInstanceGroupManagersRecreateInstances
-    , module Replicapool.InstanceGroupManagers.RecreateInstances
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.RecreateInstances
 
     -- ** ReplicapoolInstanceGroupManagersResize
-    , module Replicapool.InstanceGroupManagers.Resize
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.Resize
 
     -- ** ReplicapoolInstanceGroupManagersSetInstanceTemplate
-    , module Replicapool.InstanceGroupManagers.SetInstanceTemplate
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.SetInstanceTemplate
 
     -- ** ReplicapoolInstanceGroupManagersSetTargetPools
-    , module Replicapool.InstanceGroupManagers.SetTargetPools
+    , module Network.Google.Resource.Replicapool.InstanceGroupManagers.SetTargetPools
 
     -- ** ReplicapoolZoneOperationsGet
-    , module Replicapool.ZoneOperations.Get
+    , module Network.Google.Resource.Replicapool.ZoneOperations.Get
 
     -- ** ReplicapoolZoneOperationsList
-    , module Replicapool.ZoneOperations.List
+    , module Network.Google.Resource.Replicapool.ZoneOperations.List
 
     -- * Types
 
@@ -70,10 +70,23 @@ module Network.Google.InstanceGroupsManager
     , instanceGroupManagersSetInstanceTemplateRequest
     , igmsitrInstanceTemplate
 
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
     -- ** InstanceGroupManagersAbandonInstancesRequest
     , InstanceGroupManagersAbandonInstancesRequest
     , instanceGroupManagersAbandonInstancesRequest
     , igmairInstances
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- ** OperationList
     , OperationList
@@ -92,6 +105,9 @@ module Network.Google.InstanceGroupsManager
     , igmlItems
     , igmlSelfLink
     , igmlId
+
+    -- ** ReplicaPoolAutoHealingPolicyActionType
+    , ReplicaPoolAutoHealingPolicyActionType (..)
 
     -- ** InstanceGroupManager
     , InstanceGroupManager
@@ -148,16 +164,37 @@ module Network.Google.InstanceGroupsManager
     , instanceGroupManagersRecreateInstancesRequest
     , igmrirInstances
 
+    -- ** OperationStatus
+    , OperationStatus (..)
+
     -- ** InstanceGroupManagersDeleteInstancesRequest
     , InstanceGroupManagersDeleteInstancesRequest
     , instanceGroupManagersDeleteInstancesRequest
     , igmdirInstances
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** InstanceGroupManagersSetTargetPoolsRequest
     , InstanceGroupManagersSetTargetPoolsRequest
     , instanceGroupManagersSetTargetPoolsRequest
     , igmstprFingerprint
     , igmstprTargetPools
+
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** OperationWarningsCode
+    , OperationWarningsCode (..)
     ) where
 
 import           Network.Google.InstanceGroupsManager.Types
@@ -180,7 +217,18 @@ TODO
 -}
 
 type InstanceGroupsManagerAPI =
-     ZoneOperations :<|> InstanceGroupManagers
+     ZoneOperationsListResource :<|>
+       ZoneOperationsGetResource
+       :<|> InstanceGroupManagersSetTargetPoolsResource
+       :<|> InstanceGroupManagersInsertResource
+       :<|> InstanceGroupManagersResizeResource
+       :<|> InstanceGroupManagersListResource
+       :<|> InstanceGroupManagersAbandonInstancesResource
+       :<|> InstanceGroupManagersSetInstanceTemplateResource
+       :<|> InstanceGroupManagersGetResource
+       :<|> InstanceGroupManagersDeleteInstancesResource
+       :<|> InstanceGroupManagersDeleteResource
+       :<|> InstanceGroupManagersRecreateInstancesResource
 
 instanceGroupsManagerAPI :: Proxy InstanceGroupsManagerAPI
 instanceGroupsManagerAPI = Proxy

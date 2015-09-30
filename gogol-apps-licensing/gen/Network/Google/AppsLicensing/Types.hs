@@ -39,6 +39,9 @@ module Network.Google.AppsLicensing.Types
     , laUserId
     , laSelfLink
     , laProductId
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AppsLicensing.Types.Product
@@ -46,7 +49,7 @@ import           Network.Google.AppsLicensing.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1' of the Enterprise License Manager API.
-appsLicensingURL :: BaseURL
+appsLicensingURL :: BaseUrl
 appsLicensingURL
   = BaseUrl Https
       "https://www.googleapis.com/apps/licensing/v1/product/"

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new label.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsCreate@.
-module Gmail.Users.Labels.Create
+module Network.Google.Resource.Gmail.Users.Labels.Create
     (
     -- * REST Resource
-      UsersLabelsCreateAPI
+      UsersLabelsCreateResource
 
     -- * Creating a Request
-    , usersLabelsCreate
-    , UsersLabelsCreate
+    , usersLabelsCreate'
+    , UsersLabelsCreate'
 
     -- * Request Lenses
     , ulcQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsCreate@ which the
--- 'UsersLabelsCreate' request conforms to.
-type UsersLabelsCreateAPI =
+-- 'UsersLabelsCreate'' request conforms to.
+type UsersLabelsCreateResource =
      Capture "userId" Text :>
-       "labels" :> Post '[JSON] Label
+       "labels" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Label
 
 -- | Creates a new label.
 --
--- /See:/ 'usersLabelsCreate' smart constructor.
-data UsersLabelsCreate = UsersLabelsCreate
+-- /See:/ 'usersLabelsCreate'' smart constructor.
+data UsersLabelsCreate' = UsersLabelsCreate'
     { _ulcQuotaUser   :: !(Maybe Text)
     , _ulcPrettyPrint :: !Bool
     , _ulcUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UsersLabelsCreate = UsersLabelsCreate
     , _ulcKey         :: !(Maybe Text)
     , _ulcOauthToken  :: !(Maybe Text)
     , _ulcFields      :: !(Maybe Text)
-    , _ulcAlt         :: !Text
+    , _ulcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsCreate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UsersLabelsCreate = UsersLabelsCreate
 -- * 'ulcFields'
 --
 -- * 'ulcAlt'
-usersLabelsCreate
+usersLabelsCreate'
     :: Text
-    -> UsersLabelsCreate
-usersLabelsCreate pUlcUserId_ =
-    UsersLabelsCreate
+    -> UsersLabelsCreate'
+usersLabelsCreate' pUlcUserId_ =
+    UsersLabelsCreate'
     { _ulcQuotaUser = Nothing
     , _ulcPrettyPrint = True
     , _ulcUserIp = Nothing
@@ -93,7 +101,7 @@ usersLabelsCreate pUlcUserId_ =
     , _ulcKey = Nothing
     , _ulcOauthToken = Nothing
     , _ulcFields = Nothing
-    , _ulcAlt = "json"
+    , _ulcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ ulcFields
   = lens _ulcFields (\ s a -> s{_ulcFields = a})
 
 -- | Data format for the response.
-ulcAlt :: Lens' UsersLabelsCreate' Text
+ulcAlt :: Lens' UsersLabelsCreate' Alt
 ulcAlt = lens _ulcAlt (\ s a -> s{_ulcAlt = a})
 
 instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsCreate{..}
-          = go _ulcQuotaUser _ulcPrettyPrint _ulcUserIp
+        requestWithRoute r u UsersLabelsCreate'{..}
+          = go _ulcQuotaUser (Just _ulcPrettyPrint) _ulcUserIp
               _ulcUserId
               _ulcKey
               _ulcOauthToken
               _ulcFields
-              _ulcAlt
+              (Just _ulcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersLabelsCreateAPI)
+                      (Proxy :: Proxy UsersLabelsCreateResource)
                       r
                       u

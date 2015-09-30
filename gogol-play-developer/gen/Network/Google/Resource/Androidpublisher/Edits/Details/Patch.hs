@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates app details for this edit. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsDetailsPatch@.
-module Androidpublisher.Edits.Details.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Details.Patch
     (
     -- * REST Resource
-      EditsDetailsPatchAPI
+      EditsDetailsPatchResource
 
     -- * Creating a Request
-    , editsDetailsPatch
-    , EditsDetailsPatch
+    , editsDetailsPatch'
+    , EditsDetailsPatch'
 
     -- * Request Lenses
     , edpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsDetailsPatch@ which the
--- 'EditsDetailsPatch' request conforms to.
-type EditsDetailsPatchAPI =
+-- 'EditsDetailsPatch'' request conforms to.
+type EditsDetailsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "details" :> Patch '[JSON] AppDetails
+           "details" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] AppDetails
 
 -- | Updates app details for this edit. This method supports patch semantics.
 --
--- /See:/ 'editsDetailsPatch' smart constructor.
-data EditsDetailsPatch = EditsDetailsPatch
+-- /See:/ 'editsDetailsPatch'' smart constructor.
+data EditsDetailsPatch' = EditsDetailsPatch'
     { _edpQuotaUser   :: !(Maybe Text)
     , _edpPrettyPrint :: !Bool
     , _edpPackageName :: !Text
@@ -63,7 +71,7 @@ data EditsDetailsPatch = EditsDetailsPatch
     , _edpOauthToken  :: !(Maybe Text)
     , _edpEditId      :: !Text
     , _edpFields      :: !(Maybe Text)
-    , _edpAlt         :: !Text
+    , _edpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsDetailsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data EditsDetailsPatch = EditsDetailsPatch
 -- * 'edpFields'
 --
 -- * 'edpAlt'
-editsDetailsPatch
+editsDetailsPatch'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsDetailsPatch
-editsDetailsPatch pEdpPackageName_ pEdpEditId_ =
-    EditsDetailsPatch
+    -> EditsDetailsPatch'
+editsDetailsPatch' pEdpPackageName_ pEdpEditId_ =
+    EditsDetailsPatch'
     { _edpQuotaUser = Nothing
     , _edpPrettyPrint = True
     , _edpPackageName = pEdpPackageName_
@@ -101,7 +109,7 @@ editsDetailsPatch pEdpPackageName_ pEdpEditId_ =
     , _edpOauthToken = Nothing
     , _edpEditId = pEdpEditId_
     , _edpFields = Nothing
-    , _edpAlt = "json"
+    , _edpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,23 @@ edpFields
   = lens _edpFields (\ s a -> s{_edpFields = a})
 
 -- | Data format for the response.
-edpAlt :: Lens' EditsDetailsPatch' Text
+edpAlt :: Lens' EditsDetailsPatch' Alt
 edpAlt = lens _edpAlt (\ s a -> s{_edpAlt = a})
 
 instance GoogleRequest EditsDetailsPatch' where
         type Rs EditsDetailsPatch' = AppDetails
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsDetailsPatch{..}
-          = go _edpQuotaUser _edpPrettyPrint _edpPackageName
+        requestWithRoute r u EditsDetailsPatch'{..}
+          = go _edpQuotaUser (Just _edpPrettyPrint)
+              _edpPackageName
               _edpUserIp
               _edpKey
               _edpOauthToken
               _edpEditId
               _edpFields
-              _edpAlt
+              (Just _edpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsDetailsPatchAPI)
+                      (Proxy :: Proxy EditsDetailsPatchResource)
                       r
                       u

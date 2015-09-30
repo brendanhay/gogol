@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTracksPatch@.
-module Androidpublisher.Edits.Tracks.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Tracks.Patch
     (
     -- * REST Resource
-      EditsTracksPatchAPI
+      EditsTracksPatchResource
 
     -- * Creating a Request
-    , editsTracksPatch
-    , EditsTracksPatch
+    , editsTracksPatch'
+    , EditsTracksPatch'
 
     -- * Request Lenses
     , etpQuotaUser
@@ -48,23 +49,31 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTracksPatch@ which the
--- 'EditsTracksPatch' request conforms to.
-type EditsTracksPatchAPI =
+-- 'EditsTracksPatch'' request conforms to.
+type EditsTracksPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "tracks" :>
-             Capture "track" Text :> Patch '[JSON] Track
+             Capture "track" AndroidpublisherEditsTracksPatchTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Track
 
 -- | Updates the track configuration for the specified track type. When
 -- halted, the rollout track cannot be updated without adding new APKs, and
 -- adding new APKs will cause it to resume. This method supports patch
 -- semantics.
 --
--- /See:/ 'editsTracksPatch' smart constructor.
-data EditsTracksPatch = EditsTracksPatch
+-- /See:/ 'editsTracksPatch'' smart constructor.
+data EditsTracksPatch' = EditsTracksPatch'
     { _etpQuotaUser   :: !(Maybe Text)
-    , _etpTrack       :: !Text
+    , _etpTrack       :: !AndroidpublisherEditsTracksPatchTrack
     , _etpPrettyPrint :: !Bool
     , _etpPackageName :: !Text
     , _etpUserIp      :: !(Maybe Text)
@@ -72,7 +81,7 @@ data EditsTracksPatch = EditsTracksPatch
     , _etpOauthToken  :: !(Maybe Text)
     , _etpEditId      :: !Text
     , _etpFields      :: !(Maybe Text)
-    , _etpAlt         :: !Text
+    , _etpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTracksPatch'' with the minimum fields required to make a request.
@@ -98,13 +107,13 @@ data EditsTracksPatch = EditsTracksPatch
 -- * 'etpFields'
 --
 -- * 'etpAlt'
-editsTracksPatch
-    :: Text -- ^ 'track'
+editsTracksPatch'
+    :: AndroidpublisherEditsTracksPatchTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTracksPatch
-editsTracksPatch pEtpTrack_ pEtpPackageName_ pEtpEditId_ =
-    EditsTracksPatch
+    -> EditsTracksPatch'
+editsTracksPatch' pEtpTrack_ pEtpPackageName_ pEtpEditId_ =
+    EditsTracksPatch'
     { _etpQuotaUser = Nothing
     , _etpTrack = pEtpTrack_
     , _etpPrettyPrint = True
@@ -114,7 +123,7 @@ editsTracksPatch pEtpTrack_ pEtpPackageName_ pEtpEditId_ =
     , _etpOauthToken = Nothing
     , _etpEditId = pEtpEditId_
     , _etpFields = Nothing
-    , _etpAlt = "json"
+    , _etpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,7 +134,7 @@ etpQuotaUser
   = lens _etpQuotaUser (\ s a -> s{_etpQuotaUser = a})
 
 -- | The track type to read or modify.
-etpTrack :: Lens' EditsTracksPatch' Text
+etpTrack :: Lens' EditsTracksPatch' AndroidpublisherEditsTracksPatchTrack
 etpTrack = lens _etpTrack (\ s a -> s{_etpTrack = a})
 
 -- | Returns response with indentations and line breaks.
@@ -170,23 +179,23 @@ etpFields
   = lens _etpFields (\ s a -> s{_etpFields = a})
 
 -- | Data format for the response.
-etpAlt :: Lens' EditsTracksPatch' Text
+etpAlt :: Lens' EditsTracksPatch' Alt
 etpAlt = lens _etpAlt (\ s a -> s{_etpAlt = a})
 
 instance GoogleRequest EditsTracksPatch' where
         type Rs EditsTracksPatch' = Track
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTracksPatch{..}
-          = go _etpQuotaUser _etpTrack _etpPrettyPrint
+        requestWithRoute r u EditsTracksPatch'{..}
+          = go _etpQuotaUser _etpTrack (Just _etpPrettyPrint)
               _etpPackageName
               _etpUserIp
               _etpKey
               _etpOauthToken
               _etpEditId
               _etpFields
-              _etpAlt
+              (Just _etpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsTracksPatchAPI)
+                      (Proxy :: Proxy EditsTracksPatchResource)
                       r
                       u

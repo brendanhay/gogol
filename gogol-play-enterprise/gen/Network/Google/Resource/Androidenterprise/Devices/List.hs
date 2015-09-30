@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the IDs of all of a user\'s devices.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseDevicesList@.
-module Androidenterprise.Devices.List
+module Network.Google.Resource.Androidenterprise.Devices.List
     (
     -- * REST Resource
-      DevicesListAPI
+      DevicesListResource
 
     -- * Creating a Request
-    , devicesList
-    , DevicesList
+    , devicesList'
+    , DevicesList'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseDevicesList@ which the
--- 'DevicesList' request conforms to.
-type DevicesListAPI =
+-- 'DevicesList'' request conforms to.
+type DevicesListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            Capture "userId" Text :>
-             "devices" :> Get '[JSON] DevicesListResponse
+             "devices" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] DevicesListResponse
 
 -- | Retrieves the IDs of all of a user\'s devices.
 --
--- /See:/ 'devicesList' smart constructor.
-data DevicesList = DevicesList
+-- /See:/ 'devicesList'' smart constructor.
+data DevicesList' = DevicesList'
     { _dlQuotaUser    :: !(Maybe Text)
     , _dlPrettyPrint  :: !Bool
     , _dlEnterpriseId :: !Text
@@ -64,7 +73,7 @@ data DevicesList = DevicesList
     , _dlKey          :: !(Maybe Text)
     , _dlOauthToken   :: !(Maybe Text)
     , _dlFields       :: !(Maybe Text)
-    , _dlAlt          :: !Text
+    , _dlAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DevicesList'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data DevicesList = DevicesList
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-devicesList
+devicesList'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'userId'
-    -> DevicesList
-devicesList pDlEnterpriseId_ pDlUserId_ =
-    DevicesList
+    -> DevicesList'
+devicesList' pDlEnterpriseId_ pDlUserId_ =
+    DevicesList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlEnterpriseId = pDlEnterpriseId_
@@ -102,7 +111,7 @@ devicesList pDlEnterpriseId_ pDlUserId_ =
     , _dlKey = Nothing
     , _dlOauthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "json"
+    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,19 +158,23 @@ dlFields :: Lens' DevicesList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DevicesList' Text
+dlAlt :: Lens' DevicesList' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DevicesList' where
         type Rs DevicesList' = DevicesListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u DevicesList{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlEnterpriseId
+        requestWithRoute r u DevicesList'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint)
+              _dlEnterpriseId
               _dlUserIp
               _dlUserId
               _dlKey
               _dlOauthToken
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DevicesListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy DevicesListResource)
+                      r
+                      u

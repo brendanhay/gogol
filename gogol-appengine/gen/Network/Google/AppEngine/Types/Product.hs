@@ -57,7 +57,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'status' smart constructor.
 data Status = Status
-    { _sDetails :: !(Maybe [StatusDetailsItem])
+    { _sDetails :: !(Maybe [StatusDetails])
     , _sCode    :: !(Maybe Int32)
     , _sMessage :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ status =
 
 -- | A list of messages that carry the error details. There will be a common
 -- set of message types for APIs to use.
-sDetails :: Lens' Status [StatusDetailsItem]
+sDetails :: Lens' Status [StatusDetails]
 sDetails
   = lens _sDetails (\ s a -> s{_sDetails = a}) .
       _Default
@@ -620,6 +620,29 @@ instance ToJSON Application where
                   ("dispatchRules" .=) <$> _aDispatchRules,
                   ("id" .=) <$> _aId])
 
+-- | Environment variables made available to the application. Only returned
+-- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
+-- requests; once created, is immutable.
+--
+-- /See:/ 'versionEnvVariables' smart constructor.
+data VersionEnvVariables =
+    VersionEnvVariables
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VersionEnvVariables' with the minimum fields required to make a request.
+--
+versionEnvVariables
+    :: VersionEnvVariables
+versionEnvVariables = VersionEnvVariables
+
+instance FromJSON VersionEnvVariables where
+        parseJSON
+          = withObject "VersionEnvVariables"
+              (\ o -> pure VersionEnvVariables)
+
+instance ToJSON VersionEnvVariables where
+        toJSON = const (Object mempty)
+
 -- | Configure health checking for the VM instances. Unhealthy VM instances
 -- will be killed and replaced with new instances.
 --
@@ -884,6 +907,50 @@ instance ToJSON Operation where
                   ("response" .=) <$> _oResponse,
                   ("name" .=) <$> _oName,
                   ("metadata" .=) <$> _oMetadata])
+
+-- | Beta settings supplied to the application via metadata.
+--
+-- /See:/ 'versionBetaSettings' smart constructor.
+data VersionBetaSettings =
+    VersionBetaSettings
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VersionBetaSettings' with the minimum fields required to make a request.
+--
+versionBetaSettings
+    :: VersionBetaSettings
+versionBetaSettings = VersionBetaSettings
+
+instance FromJSON VersionBetaSettings where
+        parseJSON
+          = withObject "VersionBetaSettings"
+              (\ o -> pure VersionBetaSettings)
+
+instance ToJSON VersionBetaSettings where
+        toJSON = const (Object mempty)
+
+-- | HTTP headers to use for all responses from these URLs.
+--
+-- /See:/ 'staticDirectoryHandlerHTTPHeaders' smart constructor.
+data StaticDirectoryHandlerHTTPHeaders =
+    StaticDirectoryHandlerHTTPHeaders
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StaticDirectoryHandlerHTTPHeaders' with the minimum fields required to make a request.
+--
+staticDirectoryHandlerHTTPHeaders
+    :: StaticDirectoryHandlerHTTPHeaders
+staticDirectoryHandlerHTTPHeaders = StaticDirectoryHandlerHTTPHeaders
+
+instance FromJSON StaticDirectoryHandlerHTTPHeaders
+         where
+        parseJSON
+          = withObject "StaticDirectoryHandlerHTTPHeaders"
+              (\ o -> pure StaticDirectoryHandlerHTTPHeaders)
+
+instance ToJSON StaticDirectoryHandlerHTTPHeaders
+         where
+        toJSON = const (Object mempty)
 
 -- | Response message for \`Versions.ListVersions\`.
 --
@@ -1229,6 +1296,26 @@ instance ToJSON APIEndpointHandler where
           = object
               (catMaybes [("scriptPath" .=) <$> _aehScriptPath])
 
+--
+-- /See:/ 'statusDetails' smart constructor.
+data StatusDetails =
+    StatusDetails
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StatusDetails' with the minimum fields required to make a request.
+--
+statusDetails
+    :: StatusDetails
+statusDetails = StatusDetails
+
+instance FromJSON StatusDetails where
+        parseJSON
+          = withObject "StatusDetails"
+              (\ o -> pure StatusDetails)
+
+instance ToJSON StatusDetails where
+        toJSON = const (Object mempty)
+
 -- | Used to specify extra network settings (for VM runtimes only).
 --
 -- /See:/ 'network' smart constructor.
@@ -1348,6 +1435,27 @@ instance ToJSON Resources where
                  [("memoryGb" .=) <$> _rMemoryGb,
                   ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCpu])
 
+-- | HTTP headers to use for all responses from these URLs.
+--
+-- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
+data StaticFilesHandlerHTTPHeaders =
+    StaticFilesHandlerHTTPHeaders
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StaticFilesHandlerHTTPHeaders' with the minimum fields required to make a request.
+--
+staticFilesHandlerHTTPHeaders
+    :: StaticFilesHandlerHTTPHeaders
+staticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
+
+instance FromJSON StaticFilesHandlerHTTPHeaders where
+        parseJSON
+          = withObject "StaticFilesHandlerHTTPHeaders"
+              (\ o -> pure StaticFilesHandlerHTTPHeaders)
+
+instance ToJSON StaticFilesHandlerHTTPHeaders where
+        toJSON = const (Object mempty)
+
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cPUUtilization' smart constructor.
@@ -1398,6 +1506,57 @@ instance ToJSON CPUUtilization where
                  [("aggregationWindowLength" .=) <$>
                     _cuAggregationWindowLength,
                   ("targetUtilization" .=) <$> _cuTargetUtilization])
+
+-- | A manifest of files stored in Google Cloud Storage which should be
+-- included as part of this application. All files must be readable using
+-- the credentials supplied with this call.
+--
+-- /See:/ 'deploymentFiles' smart constructor.
+data DeploymentFiles =
+    DeploymentFiles
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeploymentFiles' with the minimum fields required to make a request.
+--
+deploymentFiles
+    :: DeploymentFiles
+deploymentFiles = DeploymentFiles
+
+instance FromJSON DeploymentFiles where
+        parseJSON
+          = withObject "DeploymentFiles"
+              (\ o -> pure DeploymentFiles)
+
+instance ToJSON DeploymentFiles where
+        toJSON = const (Object mempty)
+
+-- | Mapping from module version IDs within the module to fractional (0.000,
+-- 1] allocations of traffic for that version. Each version may only be
+-- specified once, but some versions in the module may not have any traffic
+-- allocation. Modules that have traffic allocated in this field may not be
+-- deleted until the module is deleted, or their traffic allocation is
+-- removed. Allocations must sum to 1. Supports precision up to two decimal
+-- places for IP-based splits and up to three decimal places for
+-- cookie-based splits.
+--
+-- /See:/ 'trafficSplitAllocations' smart constructor.
+data TrafficSplitAllocations =
+    TrafficSplitAllocations
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TrafficSplitAllocations' with the minimum fields required to make a request.
+--
+trafficSplitAllocations
+    :: TrafficSplitAllocations
+trafficSplitAllocations = TrafficSplitAllocations
+
+instance FromJSON TrafficSplitAllocations where
+        parseJSON
+          = withObject "TrafficSplitAllocations"
+              (\ o -> pure TrafficSplitAllocations)
+
+instance ToJSON TrafficSplitAllocations where
+        toJSON = const (Object mempty)
 
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
@@ -2097,6 +2256,30 @@ instance ToJSON ErrorHandler where
                   ("errorCode" .=) <$> _ehErrorCode,
                   ("staticFile" .=) <$> _ehStaticFile])
 
+-- | Service-specific metadata associated with the operation. It typically
+-- contains progress information and common metadata such as create time.
+-- Some services might not provide such metadata. Any method that returns a
+-- long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'operationMetadata' smart constructor.
+data OperationMetadata =
+    OperationMetadata
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
+--
+operationMetadata
+    :: OperationMetadata
+operationMetadata = OperationMetadata
+
+instance FromJSON OperationMetadata where
+        parseJSON
+          = withObject "OperationMetadata"
+              (\ o -> pure OperationMetadata)
+
+instance ToJSON OperationMetadata where
+        toJSON = const (Object mempty)
+
 -- | Metadata for the given
 -- [google.longrunning.Operation][google.longrunning.Operation].
 --
@@ -2240,6 +2423,34 @@ instance ToJSON SourceReference where
               (catMaybes
                  [("repository" .=) <$> _srRepository,
                   ("revisionId" .=) <$> _srRevisionId])
+
+-- | The normal response of the operation in case of success. If the original
+-- method returns no data on success, such as \`Delete\`, the response is
+-- \`google.protobuf.Empty\`. If the original method is standard
+-- \`Get\`\/\`Create\`\/\`Update\`, the response should be the resource.
+-- For other methods, the response should have the type \`XxxResponse\`,
+-- where \`Xxx\` is the original method name. For example, if the original
+-- method name is \`TakeSnapshot()\`, the inferred response type is
+-- \`TakeSnapshotResponse\`.
+--
+-- /See:/ 'operationResponse' smart constructor.
+data OperationResponse =
+    OperationResponse
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationResponse' with the minimum fields required to make a request.
+--
+operationResponse
+    :: OperationResponse
+operationResponse = OperationResponse
+
+instance FromJSON OperationResponse where
+        parseJSON
+          = withObject "OperationResponse"
+              (\ o -> pure OperationResponse)
+
+instance ToJSON OperationResponse where
+        toJSON = const (Object mempty)
 
 -- | A Docker (container) image which should be used to start the
 -- application.

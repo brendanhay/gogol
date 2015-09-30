@@ -28,64 +28,64 @@ module Network.Google.PubSub
     -- * REST Resources
 
     -- ** PubsubProjectsSubscriptionsAcknowledge
-    , module PubSub.Projects.Subscriptions.Acknowledge
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
 
     -- ** PubsubProjectsSubscriptionsCreate
-    , module PubSub.Projects.Subscriptions.Create
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
 
     -- ** PubsubProjectsSubscriptionsDelete
-    , module PubSub.Projects.Subscriptions.Delete
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
 
     -- ** PubsubProjectsSubscriptionsGet
-    , module PubSub.Projects.Subscriptions.Get
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
 
     -- ** PubsubProjectsSubscriptionsGetIAMPolicy
-    , module PubSub.Projects.Subscriptions.GetIAMPolicy
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
 
     -- ** PubsubProjectsSubscriptionsList
-    , module PubSub.Projects.Subscriptions.List
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.List
 
     -- ** PubsubProjectsSubscriptionsModifyAckDeadline
-    , module PubSub.Projects.Subscriptions.ModifyAckDeadline
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
 
     -- ** PubsubProjectsSubscriptionsModifyPushConfig
-    , module PubSub.Projects.Subscriptions.ModifyPushConfig
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
 
     -- ** PubsubProjectsSubscriptionsPull
-    , module PubSub.Projects.Subscriptions.Pull
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
 
     -- ** PubsubProjectsSubscriptionsSetIAMPolicy
-    , module PubSub.Projects.Subscriptions.SetIAMPolicy
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
 
     -- ** PubsubProjectsSubscriptionsTestIAMPermissions
-    , module PubSub.Projects.Subscriptions.TestIAMPermissions
+    , module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
 
     -- ** PubsubProjectsTopicsCreate
-    , module PubSub.Projects.Topics.Create
+    , module Network.Google.Resource.PubSub.Projects.Topics.Create
 
     -- ** PubsubProjectsTopicsDelete
-    , module PubSub.Projects.Topics.Delete
+    , module Network.Google.Resource.PubSub.Projects.Topics.Delete
 
     -- ** PubsubProjectsTopicsGet
-    , module PubSub.Projects.Topics.Get
+    , module Network.Google.Resource.PubSub.Projects.Topics.Get
 
     -- ** PubsubProjectsTopicsGetIAMPolicy
-    , module PubSub.Projects.Topics.GetIAMPolicy
+    , module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
 
     -- ** PubsubProjectsTopicsList
-    , module PubSub.Projects.Topics.List
+    , module Network.Google.Resource.PubSub.Projects.Topics.List
 
     -- ** PubsubProjectsTopicsPublish
-    , module PubSub.Projects.Topics.Publish
+    , module Network.Google.Resource.PubSub.Projects.Topics.Publish
 
     -- ** PubsubProjectsTopicsSetIAMPolicy
-    , module PubSub.Projects.Topics.SetIAMPolicy
+    , module Network.Google.Resource.PubSub.Projects.Topics.SetIAMPolicy
 
     -- ** PubsubProjectsTopicsSubscriptionsList
-    , module PubSub.Projects.Topics.Subscriptions.List
+    , module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
 
     -- ** PubsubProjectsTopicsTestIAMPermissions
-    , module PubSub.Projects.Topics.TestIAMPermissions
+    , module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
 
     -- * Types
 
@@ -157,6 +157,10 @@ module Network.Google.PubSub
     , prMaxMessages
     , prReturnImmediately
 
+    -- ** PubsubMessageAttributes
+    , PubsubMessageAttributes
+    , pubsubMessageAttributes
+
     -- ** TestIAMPermissionsRequest
     , TestIAMPermissionsRequest
     , testIAMPermissionsRequest
@@ -191,6 +195,10 @@ module Network.Google.PubSub
     , sTopic
     , sName
     , sAckDeadlineSeconds
+
+    -- ** PushConfigAttributes
+    , PushConfigAttributes
+    , pushConfigAttributes
 
     -- ** Binding
     , Binding
@@ -237,7 +245,27 @@ import           Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissio
 TODO
 -}
 
-type PubSubAPI = Projects
+type PubSubAPI =
+     ProjectsTopicsSubscriptionsListResource :<|>
+       ProjectsTopicsListResource
+       :<|> ProjectsTopicsGetIAMPolicyResource
+       :<|> ProjectsTopicsGetResource
+       :<|> ProjectsTopicsCreateResource
+       :<|> ProjectsTopicsSetIAMPolicyResource
+       :<|> ProjectsTopicsTestIAMPermissionsResource
+       :<|> ProjectsTopicsDeleteResource
+       :<|> ProjectsTopicsPublishResource
+       :<|> ProjectsSubscriptionsListResource
+       :<|> ProjectsSubscriptionsAcknowledgeResource
+       :<|> ProjectsSubscriptionsGetIAMPolicyResource
+       :<|> ProjectsSubscriptionsModifyAckDeadlineResource
+       :<|> ProjectsSubscriptionsGetResource
+       :<|> ProjectsSubscriptionsModifyPushConfigResource
+       :<|> ProjectsSubscriptionsCreateResource
+       :<|> ProjectsSubscriptionsSetIAMPolicyResource
+       :<|> ProjectsSubscriptionsPullResource
+       :<|> ProjectsSubscriptionsTestIAMPermissionsResource
+       :<|> ProjectsSubscriptionsDeleteResource
 
 pubSubAPI :: Proxy PubSubAPI
 pubSubAPI = Proxy

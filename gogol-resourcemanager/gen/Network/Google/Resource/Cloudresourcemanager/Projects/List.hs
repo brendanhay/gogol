@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- projects do not necessarily appear at the end of the list.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsList@.
-module Cloudresourcemanager.Projects.List
+module Network.Google.Resource.Cloudresourcemanager.Projects.List
     (
     -- * REST Resource
-      ProjectsListAPI
+      ProjectsListResource
 
     -- * Creating a Request
-    , projectsList
-    , ProjectsList
+    , projectsList'
+    , ProjectsList'
 
     -- * Request Lenses
     , plXgafv
@@ -53,21 +54,34 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsList@ which the
--- 'ProjectsList' request conforms to.
-type ProjectsListAPI =
+-- 'ProjectsList'' request conforms to.
+type ProjectsListResource =
      "v1beta1" :>
        "projects" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListProjectsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListProjectsResponse
 
 -- | Lists projects that are visible to the user and satisfy the specified
 -- filter. This method returns projects in an unspecified order. New
 -- projects do not necessarily appear at the end of the list.
 --
--- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+-- /See:/ 'projectsList'' smart constructor.
+data ProjectsList' = ProjectsList'
     { _plXgafv          :: !(Maybe Text)
     , _plQuotaUser      :: !(Maybe Text)
     , _plPrettyPrint    :: !Bool
@@ -121,10 +135,10 @@ data ProjectsList = ProjectsList
 -- * 'plCallback'
 --
 -- * 'plAlt'
-projectsList
-    :: ProjectsList
-projectsList =
-    ProjectsList
+projectsList'
+    :: ProjectsList'
+projectsList' =
+    ProjectsList'
     { _plXgafv = Nothing
     , _plQuotaUser = Nothing
     , _plPrettyPrint = True
@@ -243,10 +257,10 @@ plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ListProjectsResponse
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsList{..}
-          = go _plXgafv _plQuotaUser _plPrettyPrint
+        requestWithRoute r u ProjectsList'{..}
+          = go _plXgafv _plQuotaUser (Just _plPrettyPrint)
               _plUploadProtocol
-              _plPp
+              (Just _plPp)
               _plAccessToken
               _plUploadType
               _plBearerToken
@@ -257,7 +271,9 @@ instance GoogleRequest ProjectsList' where
               _plPageSize
               _plFields
               _plCallback
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsListResource)
+                      r
                       u

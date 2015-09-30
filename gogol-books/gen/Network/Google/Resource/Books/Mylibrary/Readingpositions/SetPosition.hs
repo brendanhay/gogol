@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Sets my reading position information for a volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMylibraryReadingpositionsSetPosition@.
-module Books.Mylibrary.Readingpositions.SetPosition
+module Network.Google.Resource.Books.Mylibrary.Readingpositions.SetPosition
     (
     -- * REST Resource
-      MylibraryReadingpositionsSetPositionAPI
+      MylibraryReadingpositionsSetPositionResource
 
     -- * Creating a Request
-    , mylibraryReadingpositionsSetPosition
-    , MylibraryReadingpositionsSetPosition
+    , mylibraryReadingpositionsSetPosition'
+    , MylibraryReadingpositionsSetPosition'
 
     -- * Request Lenses
     , mrspDeviceCookie
@@ -49,36 +50,46 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMylibraryReadingpositionsSetPosition@ which the
--- 'MylibraryReadingpositionsSetPosition' request conforms to.
-type MylibraryReadingpositionsSetPositionAPI =
+-- 'MylibraryReadingpositionsSetPosition'' request conforms to.
+type MylibraryReadingpositionsSetPositionResource =
      "mylibrary" :>
        "readingpositions" :>
          Capture "volumeId" Text :>
            "setPosition" :>
              QueryParam "deviceCookie" Text :>
-               QueryParam "contentVersion" Text :>
-                 QueryParam "action" Text :>
-                   QueryParam "source" Text :>
-                     QueryParam "timestamp" Text :>
-                       QueryParam "position" Text :> Post '[JSON] ()
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "contentVersion" Text :>
+                       QueryParam "action"
+                         BooksMylibraryReadingpositionsSetPositionAction
+                         :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "timestamp" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     QueryParam "position" Text :>
+                                       Post '[JSON] ()
 
 -- | Sets my reading position information for a volume.
 --
--- /See:/ 'mylibraryReadingpositionsSetPosition' smart constructor.
-data MylibraryReadingpositionsSetPosition = MylibraryReadingpositionsSetPosition
+-- /See:/ 'mylibraryReadingpositionsSetPosition'' smart constructor.
+data MylibraryReadingpositionsSetPosition' = MylibraryReadingpositionsSetPosition'
     { _mrspDeviceCookie   :: !(Maybe Text)
     , _mrspQuotaUser      :: !(Maybe Text)
     , _mrspPrettyPrint    :: !Bool
     , _mrspUserIp         :: !(Maybe Text)
     , _mrspContentVersion :: !(Maybe Text)
-    , _mrspAction         :: !(Maybe Text)
+    , _mrspAction         :: !(Maybe BooksMylibraryReadingpositionsSetPositionAction)
     , _mrspKey            :: !(Maybe Text)
     , _mrspVolumeId       :: !Text
     , _mrspSource         :: !(Maybe Text)
     , _mrspOauthToken     :: !(Maybe Text)
     , _mrspTimestamp      :: !Text
     , _mrspFields         :: !(Maybe Text)
-    , _mrspAlt            :: !Text
+    , _mrspAlt            :: !Alt
     , _mrspPosition       :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -113,13 +124,13 @@ data MylibraryReadingpositionsSetPosition = MylibraryReadingpositionsSetPosition
 -- * 'mrspAlt'
 --
 -- * 'mrspPosition'
-mylibraryReadingpositionsSetPosition
+mylibraryReadingpositionsSetPosition'
     :: Text -- ^ 'volumeId'
     -> Text -- ^ 'timestamp'
     -> Text -- ^ 'position'
-    -> MylibraryReadingpositionsSetPosition
-mylibraryReadingpositionsSetPosition pMrspVolumeId_ pMrspTimestamp_ pMrspPosition_ =
-    MylibraryReadingpositionsSetPosition
+    -> MylibraryReadingpositionsSetPosition'
+mylibraryReadingpositionsSetPosition' pMrspVolumeId_ pMrspTimestamp_ pMrspPosition_ =
+    MylibraryReadingpositionsSetPosition'
     { _mrspDeviceCookie = Nothing
     , _mrspQuotaUser = Nothing
     , _mrspPrettyPrint = True
@@ -132,7 +143,7 @@ mylibraryReadingpositionsSetPosition pMrspVolumeId_ pMrspTimestamp_ pMrspPositio
     , _mrspOauthToken = Nothing
     , _mrspTimestamp = pMrspTimestamp_
     , _mrspFields = Nothing
-    , _mrspAlt = "json"
+    , _mrspAlt = JSON
     , _mrspPosition = pMrspPosition_
     }
 
@@ -169,7 +180,7 @@ mrspContentVersion
       (\ s a -> s{_mrspContentVersion = a})
 
 -- | Action that caused this reading position to be set.
-mrspAction :: Lens' MylibraryReadingpositionsSetPosition' (Maybe Text)
+mrspAction :: Lens' MylibraryReadingpositionsSetPosition' (Maybe BooksMylibraryReadingpositionsSetPositionAction)
 mrspAction
   = lens _mrspAction (\ s a -> s{_mrspAction = a})
 
@@ -207,7 +218,7 @@ mrspFields
   = lens _mrspFields (\ s a -> s{_mrspFields = a})
 
 -- | Data format for the response.
-mrspAlt :: Lens' MylibraryReadingpositionsSetPosition' Text
+mrspAlt :: Lens' MylibraryReadingpositionsSetPosition' Alt
 mrspAlt = lens _mrspAlt (\ s a -> s{_mrspAlt = a})
 
 -- | Position string for the new volume reading position.
@@ -220,9 +231,9 @@ instance GoogleRequest
         type Rs MylibraryReadingpositionsSetPosition' = ()
         request = requestWithRoute defReq booksURL
         requestWithRoute r u
-          MylibraryReadingpositionsSetPosition{..}
+          MylibraryReadingpositionsSetPosition'{..}
           = go _mrspDeviceCookie _mrspQuotaUser
-              _mrspPrettyPrint
+              (Just _mrspPrettyPrint)
               _mrspUserIp
               _mrspContentVersion
               _mrspAction
@@ -232,11 +243,11 @@ instance GoogleRequest
               _mrspOauthToken
               (Just _mrspTimestamp)
               _mrspFields
-              _mrspAlt
+              (Just _mrspAlt)
               (Just _mrspPosition)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy MylibraryReadingpositionsSetPositionAPI)
+                         Proxy MylibraryReadingpositionsSetPositionResource)
                       r
                       u

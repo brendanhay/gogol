@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return the published metadata for a particular layer.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersGetPublished@.
-module Mapsengine.Layers.GetPublished
+module Network.Google.Resource.Mapsengine.Layers.GetPublished
     (
     -- * REST Resource
-      LayersGetPublishedAPI
+      LayersGetPublishedResource
 
     -- * Creating a Request
-    , layersGetPublished
-    , LayersGetPublished
+    , layersGetPublished'
+    , LayersGetPublished'
 
     -- * Request Lenses
     , lgpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersGetPublished@ which the
--- 'LayersGetPublished' request conforms to.
-type LayersGetPublishedAPI =
+-- 'LayersGetPublished'' request conforms to.
+type LayersGetPublishedResource =
      "layers" :>
        Capture "id" Text :>
-         "published" :> Get '[JSON] PublishedLayer
+         "published" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] PublishedLayer
 
 -- | Return the published metadata for a particular layer.
 --
--- /See:/ 'layersGetPublished' smart constructor.
-data LayersGetPublished = LayersGetPublished
+-- /See:/ 'layersGetPublished'' smart constructor.
+data LayersGetPublished' = LayersGetPublished'
     { _lgpQuotaUser   :: !(Maybe Text)
     , _lgpPrettyPrint :: !Bool
     , _lgpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data LayersGetPublished = LayersGetPublished
     , _lgpId          :: !Text
     , _lgpOauthToken  :: !(Maybe Text)
     , _lgpFields      :: !(Maybe Text)
-    , _lgpAlt         :: !Text
+    , _lgpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersGetPublished'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data LayersGetPublished = LayersGetPublished
 -- * 'lgpFields'
 --
 -- * 'lgpAlt'
-layersGetPublished
+layersGetPublished'
     :: Text -- ^ 'id'
-    -> LayersGetPublished
-layersGetPublished pLgpId_ =
-    LayersGetPublished
+    -> LayersGetPublished'
+layersGetPublished' pLgpId_ =
+    LayersGetPublished'
     { _lgpQuotaUser = Nothing
     , _lgpPrettyPrint = True
     , _lgpUserIp = Nothing
@@ -94,7 +102,7 @@ layersGetPublished pLgpId_ =
     , _lgpId = pLgpId_
     , _lgpOauthToken = Nothing
     , _lgpFields = Nothing
-    , _lgpAlt = "json"
+    , _lgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ lgpFields
   = lens _lgpFields (\ s a -> s{_lgpFields = a})
 
 -- | Data format for the response.
-lgpAlt :: Lens' LayersGetPublished' Text
+lgpAlt :: Lens' LayersGetPublished' Alt
 lgpAlt = lens _lgpAlt (\ s a -> s{_lgpAlt = a})
 
 instance GoogleRequest LayersGetPublished' where
         type Rs LayersGetPublished' = PublishedLayer
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersGetPublished{..}
-          = go _lgpQuotaUser _lgpPrettyPrint _lgpUserIp _lgpKey
+        requestWithRoute r u LayersGetPublished'{..}
+          = go _lgpQuotaUser (Just _lgpPrettyPrint) _lgpUserIp
+              _lgpKey
               _lgpId
               _lgpOauthToken
               _lgpFields
-              _lgpAlt
+              (Just _lgpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersGetPublishedAPI)
+                      (Proxy :: Proxy LayersGetPublishedResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsList@.
-module Gmail.Users.Drafts.List
+module Network.Google.Resource.Gmail.Users.Drafts.List
     (
     -- * REST Resource
-      UsersDraftsListAPI
+      UsersDraftsListResource
 
     -- * Creating a Request
-    , usersDraftsList
-    , UsersDraftsList
+    , usersDraftsList'
+    , UsersDraftsList'
 
     -- * Request Lenses
     , udlQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersDraftsList@ which the
--- 'UsersDraftsList' request conforms to.
-type UsersDraftsListAPI =
+-- 'UsersDraftsList'' request conforms to.
+type UsersDraftsListResource =
      Capture "userId" Text :>
        "drafts" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Word32 :>
-             Get '[JSON] ListDraftsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Word32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ListDraftsResponse
 
 -- | Lists the drafts in the user\'s mailbox.
 --
--- /See:/ 'usersDraftsList' smart constructor.
-data UsersDraftsList = UsersDraftsList
+-- /See:/ 'usersDraftsList'' smart constructor.
+data UsersDraftsList' = UsersDraftsList'
     { _udlQuotaUser   :: !(Maybe Text)
     , _udlPrettyPrint :: !Bool
     , _udlUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data UsersDraftsList = UsersDraftsList
     , _udlOauthToken  :: !(Maybe Text)
     , _udlMaxResults  :: !Word32
     , _udlFields      :: !(Maybe Text)
-    , _udlAlt         :: !Text
+    , _udlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsList'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data UsersDraftsList = UsersDraftsList
 -- * 'udlFields'
 --
 -- * 'udlAlt'
-usersDraftsList
+usersDraftsList'
     :: Text
-    -> UsersDraftsList
-usersDraftsList pUdlUserId_ =
-    UsersDraftsList
+    -> UsersDraftsList'
+usersDraftsList' pUdlUserId_ =
+    UsersDraftsList'
     { _udlQuotaUser = Nothing
     , _udlPrettyPrint = True
     , _udlUserIp = Nothing
@@ -106,7 +114,7 @@ usersDraftsList pUdlUserId_ =
     , _udlOauthToken = Nothing
     , _udlMaxResults = 100
     , _udlFields = Nothing
-    , _udlAlt = "json"
+    , _udlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,22 +171,23 @@ udlFields
   = lens _udlFields (\ s a -> s{_udlFields = a})
 
 -- | Data format for the response.
-udlAlt :: Lens' UsersDraftsList' Text
+udlAlt :: Lens' UsersDraftsList' Alt
 udlAlt = lens _udlAlt (\ s a -> s{_udlAlt = a})
 
 instance GoogleRequest UsersDraftsList' where
         type Rs UsersDraftsList' = ListDraftsResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsList{..}
-          = go _udlQuotaUser _udlPrettyPrint _udlUserIp
+        requestWithRoute r u UsersDraftsList'{..}
+          = go _udlQuotaUser (Just _udlPrettyPrint) _udlUserIp
               _udlUserId
               _udlKey
               _udlPageToken
               _udlOauthToken
               (Just _udlMaxResults)
               _udlFields
-              _udlAlt
+              (Just _udlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDraftsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDraftsListResource)
                       r
                       u

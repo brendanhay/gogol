@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing account user profile.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProfilesUpdate@.
-module DFAReporting.AccountUserProfiles.Update
+module Network.Google.Resource.DFAReporting.AccountUserProfiles.Update
     (
     -- * REST Resource
-      AccountUserProfilesUpdateAPI
+      AccountUserProfilesUpdateResource
 
     -- * Creating a Request
-    , accountUserProfilesUpdate
-    , AccountUserProfilesUpdate
+    , accountUserProfilesUpdate'
+    , AccountUserProfilesUpdate'
 
     -- * Request Lenses
     , aupuQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountUserProfilesUpdate@ which the
--- 'AccountUserProfilesUpdate' request conforms to.
-type AccountUserProfilesUpdateAPI =
+-- 'AccountUserProfilesUpdate'' request conforms to.
+type AccountUserProfilesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           Put '[JSON] AccountUserProfile
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] AccountUserProfile
 
 -- | Updates an existing account user profile.
 --
--- /See:/ 'accountUserProfilesUpdate' smart constructor.
-data AccountUserProfilesUpdate = AccountUserProfilesUpdate
+-- /See:/ 'accountUserProfilesUpdate'' smart constructor.
+data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
     { _aupuQuotaUser   :: !(Maybe Text)
     , _aupuPrettyPrint :: !Bool
     , _aupuUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AccountUserProfilesUpdate = AccountUserProfilesUpdate
     , _aupuKey         :: !(Maybe Text)
     , _aupuOauthToken  :: !(Maybe Text)
     , _aupuFields      :: !(Maybe Text)
-    , _aupuAlt         :: !Text
+    , _aupuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AccountUserProfilesUpdate = AccountUserProfilesUpdate
 -- * 'aupuFields'
 --
 -- * 'aupuAlt'
-accountUserProfilesUpdate
+accountUserProfilesUpdate'
     :: Int64 -- ^ 'profileId'
-    -> AccountUserProfilesUpdate
-accountUserProfilesUpdate pAupuProfileId_ =
-    AccountUserProfilesUpdate
+    -> AccountUserProfilesUpdate'
+accountUserProfilesUpdate' pAupuProfileId_ =
+    AccountUserProfilesUpdate'
     { _aupuQuotaUser = Nothing
     , _aupuPrettyPrint = True
     , _aupuUserIp = Nothing
@@ -95,7 +103,7 @@ accountUserProfilesUpdate pAupuProfileId_ =
     , _aupuKey = Nothing
     , _aupuOauthToken = Nothing
     , _aupuFields = Nothing
-    , _aupuAlt = "json"
+    , _aupuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ aupuFields
   = lens _aupuFields (\ s a -> s{_aupuFields = a})
 
 -- | Data format for the response.
-aupuAlt :: Lens' AccountUserProfilesUpdate' Text
+aupuAlt :: Lens' AccountUserProfilesUpdate' Alt
 aupuAlt = lens _aupuAlt (\ s a -> s{_aupuAlt = a})
 
 instance GoogleRequest AccountUserProfilesUpdate'
@@ -150,15 +158,16 @@ instance GoogleRequest AccountUserProfilesUpdate'
         type Rs AccountUserProfilesUpdate' =
              AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProfilesUpdate{..}
-          = go _aupuQuotaUser _aupuPrettyPrint _aupuUserIp
+        requestWithRoute r u AccountUserProfilesUpdate'{..}
+          = go _aupuQuotaUser (Just _aupuPrettyPrint)
+              _aupuUserIp
               _aupuProfileId
               _aupuKey
               _aupuOauthToken
               _aupuFields
-              _aupuAlt
+              (Just _aupuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountUserProfilesUpdateAPI)
+                      (Proxy :: Proxy AccountUserProfilesUpdateResource)
                       r
                       u

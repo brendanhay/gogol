@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a timeline item in place.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorTimelineUpdate@.
-module Mirror.Timeline.Update
+module Network.Google.Resource.Mirror.Timeline.Update
     (
     -- * REST Resource
-      TimelineUpdateAPI
+      TimelineUpdateResource
 
     -- * Creating a Request
-    , timelineUpdate
-    , TimelineUpdate
+    , timelineUpdate'
+    , TimelineUpdate'
 
     -- * Request Lenses
     , tuQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorTimelineUpdate@ which the
--- 'TimelineUpdate' request conforms to.
-type TimelineUpdateAPI =
+-- 'TimelineUpdate'' request conforms to.
+type TimelineUpdateResource =
      "timeline" :>
-       Capture "id" Text :> Put '[JSON] TimelineItem
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
 --
--- /See:/ 'timelineUpdate' smart constructor.
-data TimelineUpdate = TimelineUpdate
+-- /See:/ 'timelineUpdate'' smart constructor.
+data TimelineUpdate' = TimelineUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
     , _tuUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data TimelineUpdate = TimelineUpdate
     , _tuId          :: !Text
     , _tuOauthToken  :: !(Maybe Text)
     , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Text
+    , _tuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data TimelineUpdate = TimelineUpdate
 -- * 'tuFields'
 --
 -- * 'tuAlt'
-timelineUpdate
+timelineUpdate'
     :: Text -- ^ 'id'
-    -> TimelineUpdate
-timelineUpdate pTuId_ =
-    TimelineUpdate
+    -> TimelineUpdate'
+timelineUpdate' pTuId_ =
+    TimelineUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuUserIp = Nothing
@@ -93,7 +101,7 @@ timelineUpdate pTuId_ =
     , _tuId = pTuId_
     , _tuOauthToken = Nothing
     , _tuFields = Nothing
-    , _tuAlt = "json"
+    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,19 +142,21 @@ tuFields :: Lens' TimelineUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
 -- | Data format for the response.
-tuAlt :: Lens' TimelineUpdate' Text
+tuAlt :: Lens' TimelineUpdate' Alt
 tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
 
 instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u TimelineUpdate{..}
-          = go _tuQuotaUser _tuPrettyPrint _tuUserIp _tuKey
+        requestWithRoute r u TimelineUpdate'{..}
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+              _tuKey
               _tuId
               _tuOauthToken
               _tuFields
-              _tuAlt
+              (Just _tuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TimelineUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TimelineUpdateResource)
                       r
                       u

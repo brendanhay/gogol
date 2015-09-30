@@ -228,12 +228,62 @@ instance ToJSON StyleFunction where
                   ("gradient" .=) <$> _sfGradient,
                   ("columnName" .=) <$> _sfColumnName])
 
+-- | Identifier of the base column. If present, this column is derived from
+-- the specified base column.
+--
+-- /See:/ 'columnBaseColumn' smart constructor.
+data ColumnBaseColumn = ColumnBaseColumn
+    { _cbcTableIndex :: !(Maybe Int32)
+    , _cbcColumnId   :: !(Maybe Int32)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ColumnBaseColumn' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbcTableIndex'
+--
+-- * 'cbcColumnId'
+columnBaseColumn
+    :: ColumnBaseColumn
+columnBaseColumn =
+    ColumnBaseColumn
+    { _cbcTableIndex = Nothing
+    , _cbcColumnId = Nothing
+    }
+
+-- | Offset to the entry in the list of base tables in the table definition.
+cbcTableIndex :: Lens' ColumnBaseColumn (Maybe Int32)
+cbcTableIndex
+  = lens _cbcTableIndex
+      (\ s a -> s{_cbcTableIndex = a})
+
+-- | The id of the column in the base table from which this column is
+-- derived.
+cbcColumnId :: Lens' ColumnBaseColumn (Maybe Int32)
+cbcColumnId
+  = lens _cbcColumnId (\ s a -> s{_cbcColumnId = a})
+
+instance FromJSON ColumnBaseColumn where
+        parseJSON
+          = withObject "ColumnBaseColumn"
+              (\ o ->
+                 ColumnBaseColumn <$>
+                   (o .:? "tableIndex") <*> (o .:? "columnId"))
+
+instance ToJSON ColumnBaseColumn where
+        toJSON ColumnBaseColumn{..}
+          = object
+              (catMaybes
+                 [("tableIndex" .=) <$> _cbcTableIndex,
+                  ("columnId" .=) <$> _cbcColumnId])
+
 -- | Represents a response to a SQL statement.
 --
 -- /See:/ 'sqlresponse' smart constructor.
 data Sqlresponse = Sqlresponse
     { _sKind    :: !Text
-    , _sRows    :: !(Maybe [[JSON]])
+    , _sRows    :: !(Maybe [[JSONValue]])
     , _sColumns :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -263,7 +313,7 @@ sKind = lens _sKind (\ s a -> s{_sKind = a})
 -- | The rows in the table. For each cell we print out whatever cell value
 -- (e.g., numeric, string) exists. Thus it is important that each cell
 -- contains only one value.
-sRows :: Lens' Sqlresponse [[JSON]]
+sRows :: Lens' Sqlresponse [[JSONValue]]
 sRows
   = lens _sRows (\ s a -> s{_sRows = a}) . _Default .
       _Coerce
@@ -853,8 +903,8 @@ instance ToJSON TemplateList where
 --
 -- /See:/ 'geometry' smart constructor.
 data Geometry = Geometry
-    { _gGeometries :: !(Maybe [JSON])
-    , _gGeometry   :: !(Maybe JSON)
+    { _gGeometries :: !(Maybe [JSONValue])
+    , _gGeometry   :: !(Maybe JSONValue)
     , _gType       :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -877,13 +927,13 @@ geometry =
     }
 
 -- | The list of geometries in this geometry collection.
-gGeometries :: Lens' Geometry [JSON]
+gGeometries :: Lens' Geometry [JSONValue]
 gGeometries
   = lens _gGeometries (\ s a -> s{_gGeometries = a}) .
       _Default
       . _Coerce
 
-gGeometry :: Lens' Geometry (Maybe JSON)
+gGeometry :: Lens' Geometry (Maybe JSONValue)
 gGeometry
   = lens _gGeometry (\ s a -> s{_gGeometry = a})
 
@@ -907,6 +957,52 @@ instance ToJSON Geometry where
                  [("geometries" .=) <$> _gGeometries,
                   ("geometry" .=) <$> _gGeometry,
                   Just ("type" .= _gType)])
+
+--
+-- /See:/ 'styleFunctionGradientColors' smart constructor.
+data StyleFunctionGradientColors = StyleFunctionGradientColors
+    { _sfgcColor   :: !(Maybe Text)
+    , _sfgcOpacity :: !(Maybe Double)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StyleFunctionGradientColors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfgcColor'
+--
+-- * 'sfgcOpacity'
+styleFunctionGradientColors
+    :: StyleFunctionGradientColors
+styleFunctionGradientColors =
+    StyleFunctionGradientColors
+    { _sfgcColor = Nothing
+    , _sfgcOpacity = Nothing
+    }
+
+-- | Color in #RRGGBB format.
+sfgcColor :: Lens' StyleFunctionGradientColors (Maybe Text)
+sfgcColor
+  = lens _sfgcColor (\ s a -> s{_sfgcColor = a})
+
+-- | Opacity of the color: 0.0 (transparent) to 1.0 (opaque).
+sfgcOpacity :: Lens' StyleFunctionGradientColors (Maybe Double)
+sfgcOpacity
+  = lens _sfgcOpacity (\ s a -> s{_sfgcOpacity = a})
+
+instance FromJSON StyleFunctionGradientColors where
+        parseJSON
+          = withObject "StyleFunctionGradientColors"
+              (\ o ->
+                 StyleFunctionGradientColors <$>
+                   (o .:? "color") <*> (o .:? "opacity"))
+
+instance ToJSON StyleFunctionGradientColors where
+        toJSON StyleFunctionGradientColors{..}
+          = object
+              (catMaybes
+                 [("color" .=) <$> _sfgcColor,
+                  ("opacity" .=) <$> _sfgcOpacity])
 
 -- | A background task on a table, initiated for time- or resource-consuming
 -- operations such as changing column types or deleting all rows.
@@ -1040,76 +1136,77 @@ instance ToJSON Import where
 --
 -- /See:/ 'template' smart constructor.
 data Template = Template
-    { _ttAutomaticColumnNames :: !(Maybe [Text])
-    , _ttTemplateId           :: !(Maybe Int32)
-    , _ttKind                 :: !Text
-    , _ttBody                 :: !(Maybe Text)
-    , _ttName                 :: !(Maybe Text)
-    , _ttTableId              :: !(Maybe Text)
+    { _temeAutomaticColumnNames :: !(Maybe [Text])
+    , _temeTemplateId           :: !(Maybe Int32)
+    , _temeKind                 :: !Text
+    , _temeBody                 :: !(Maybe Text)
+    , _temeName                 :: !(Maybe Text)
+    , _temeTableId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Template' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ttAutomaticColumnNames'
+-- * 'temeAutomaticColumnNames'
 --
--- * 'ttTemplateId'
+-- * 'temeTemplateId'
 --
--- * 'ttKind'
+-- * 'temeKind'
 --
--- * 'ttBody'
+-- * 'temeBody'
 --
--- * 'ttName'
+-- * 'temeName'
 --
--- * 'ttTableId'
+-- * 'temeTableId'
 template
     :: Template
 template =
     Template
-    { _ttAutomaticColumnNames = Nothing
-    , _ttTemplateId = Nothing
-    , _ttKind = "fusiontables#template"
-    , _ttBody = Nothing
-    , _ttName = Nothing
-    , _ttTableId = Nothing
+    { _temeAutomaticColumnNames = Nothing
+    , _temeTemplateId = Nothing
+    , _temeKind = "fusiontables#template"
+    , _temeBody = Nothing
+    , _temeName = Nothing
+    , _temeTableId = Nothing
     }
 
 -- | List of columns from which the template is to be automatically
 -- constructed. Only one of body or automaticColumns can be specified.
-ttAutomaticColumnNames :: Lens' Template [Text]
-ttAutomaticColumnNames
-  = lens _ttAutomaticColumnNames
-      (\ s a -> s{_ttAutomaticColumnNames = a})
+temeAutomaticColumnNames :: Lens' Template [Text]
+temeAutomaticColumnNames
+  = lens _temeAutomaticColumnNames
+      (\ s a -> s{_temeAutomaticColumnNames = a})
       . _Default
       . _Coerce
 
 -- | Identifier for the template, unique within the context of a particular
 -- table.
-ttTemplateId :: Lens' Template (Maybe Int32)
-ttTemplateId
-  = lens _ttTemplateId (\ s a -> s{_ttTemplateId = a})
+temeTemplateId :: Lens' Template (Maybe Int32)
+temeTemplateId
+  = lens _temeTemplateId
+      (\ s a -> s{_temeTemplateId = a})
 
 -- | The kind of item this is. For a template, this is always
 -- fusiontables#template.
-ttKind :: Lens' Template Text
-ttKind = lens _ttKind (\ s a -> s{_ttKind = a})
+temeKind :: Lens' Template Text
+temeKind = lens _temeKind (\ s a -> s{_temeKind = a})
 
 -- | Body of the template. It contains HTML with {column_name} to insert
 -- values from a particular column. The body is sanitized to remove certain
 -- tags, e.g., script. Only one of body or automaticColumns can be
 -- specified.
-ttBody :: Lens' Template (Maybe Text)
-ttBody = lens _ttBody (\ s a -> s{_ttBody = a})
+temeBody :: Lens' Template (Maybe Text)
+temeBody = lens _temeBody (\ s a -> s{_temeBody = a})
 
 -- | Optional name assigned to a template.
-ttName :: Lens' Template (Maybe Text)
-ttName = lens _ttName (\ s a -> s{_ttName = a})
+temeName :: Lens' Template (Maybe Text)
+temeName = lens _temeName (\ s a -> s{_temeName = a})
 
 -- | Identifier for the table for which the template is defined.
-ttTableId :: Lens' Template (Maybe Text)
-ttTableId
-  = lens _ttTableId (\ s a -> s{_ttTableId = a})
+temeTableId :: Lens' Template (Maybe Text)
+temeTableId
+  = lens _temeTableId (\ s a -> s{_temeTableId = a})
 
 instance FromJSON Template where
         parseJSON
@@ -1128,11 +1225,11 @@ instance ToJSON Template where
           = object
               (catMaybes
                  [("automaticColumnNames" .=) <$>
-                    _ttAutomaticColumnNames,
-                  ("templateId" .=) <$> _ttTemplateId,
-                  Just ("kind" .= _ttKind), ("body" .=) <$> _ttBody,
-                  ("name" .=) <$> _ttName,
-                  ("tableId" .=) <$> _ttTableId])
+                    _temeAutomaticColumnNames,
+                  ("templateId" .=) <$> _temeTemplateId,
+                  Just ("kind" .= _temeKind),
+                  ("body" .=) <$> _temeBody, ("name" .=) <$> _temeName,
+                  ("tableId" .=) <$> _temeTableId])
 
 -- | Represents a PointStyle within a StyleSetting
 --
@@ -1305,6 +1402,66 @@ instance ToJSON PolygonStyle where
                   ("fillOpacity" .=) <$> _psFillOpacity,
                   ("strokeWeightStyler" .=) <$> _psStrokeWeightStyler,
                   ("strokeColor" .=) <$> _psStrokeColor])
+
+-- | Gradient function that interpolates a range of colors based on column
+-- value.
+--
+-- /See:/ 'styleFunctionGradient' smart constructor.
+data StyleFunctionGradient = StyleFunctionGradient
+    { _sfgMax    :: !(Maybe Double)
+    , _sfgMin    :: !(Maybe Double)
+    , _sfgColors :: !(Maybe [StyleFunctionGradientColors])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'StyleFunctionGradient' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sfgMax'
+--
+-- * 'sfgMin'
+--
+-- * 'sfgColors'
+styleFunctionGradient
+    :: StyleFunctionGradient
+styleFunctionGradient =
+    StyleFunctionGradient
+    { _sfgMax = Nothing
+    , _sfgMin = Nothing
+    , _sfgColors = Nothing
+    }
+
+-- | Higher-end of the interpolation range: rows with this value will be
+-- assigned to colors[n-1].
+sfgMax :: Lens' StyleFunctionGradient (Maybe Double)
+sfgMax = lens _sfgMax (\ s a -> s{_sfgMax = a})
+
+-- | Lower-end of the interpolation range: rows with this value will be
+-- assigned to colors[0].
+sfgMin :: Lens' StyleFunctionGradient (Maybe Double)
+sfgMin = lens _sfgMin (\ s a -> s{_sfgMin = a})
+
+-- | Array with two or more colors.
+sfgColors :: Lens' StyleFunctionGradient [StyleFunctionGradientColors]
+sfgColors
+  = lens _sfgColors (\ s a -> s{_sfgColors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON StyleFunctionGradient where
+        parseJSON
+          = withObject "StyleFunctionGradient"
+              (\ o ->
+                 StyleFunctionGradient <$>
+                   (o .:? "max") <*> (o .:? "min") <*>
+                     (o .:? "colors" .!= mempty))
+
+instance ToJSON StyleFunctionGradient where
+        toJSON StyleFunctionGradient{..}
+          = object
+              (catMaybes
+                 [("max" .=) <$> _sfgMax, ("min" .=) <$> _sfgMin,
+                  ("colors" .=) <$> _sfgColors])
 
 -- | Represents a table.
 --

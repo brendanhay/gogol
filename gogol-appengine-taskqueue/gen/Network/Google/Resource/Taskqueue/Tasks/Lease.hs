@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,199 +20,211 @@
 -- | Lease 1 or more tasks from a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksLease@.
-module Taskqueue.Tasks.Lease
+module Network.Google.Resource.Taskqueue.Tasks.Lease
     (
     -- * REST Resource
-      TasksLeaseAPI
+      TasksLeaseResource
 
     -- * Creating a Request
-    , tasksLease
-    , TasksLease
+    , tasksLease'
+    , TasksLease'
 
     -- * Request Lenses
-    , tTaskqueue
-    , tQuotaUser
-    , tPrettyPrint
-    , tTag
-    , tProject
-    , tUserIp
-    , tNumTasks
-    , tKey
-    , tLeaseSecs
-    , tOauthToken
-    , tGroupByTag
-    , tFields
-    , tAlt
+    , tlTaskqueue
+    , tlQuotaUser
+    , tlPrettyPrint
+    , tlTag
+    , tlProject
+    , tlUserIp
+    , tlNumTasks
+    , tlKey
+    , tlLeaseSecs
+    , tlOauthToken
+    , tlGroupByTag
+    , tlFields
+    , tlAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksLease@ which the
--- 'TasksLease' request conforms to.
-type TasksLeaseAPI =
+-- 'TasksLease'' request conforms to.
+type TasksLeaseResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
            "tasks" :>
              "lease" :>
-               QueryParam "tag" Text :>
-                 QueryParam "numTasks" Int32 :>
-                   QueryParam "leaseSecs" Int32 :>
-                     QueryParam "groupByTag" Bool :> Post '[JSON] Tasks
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "tag" Text :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "numTasks" Int32 :>
+                         QueryParam "key" Text :>
+                           QueryParam "leaseSecs" Int32 :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "groupByTag" Bool :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Post '[JSON] Tasks
 
 -- | Lease 1 or more tasks from a TaskQueue.
 --
--- /See:/ 'tasksLease' smart constructor.
-data TasksLease = TasksLease
-    { _tTaskqueue   :: !Text
-    , _tQuotaUser   :: !(Maybe Text)
-    , _tPrettyPrint :: !Bool
-    , _tTag         :: !(Maybe Text)
-    , _tProject     :: !Text
-    , _tUserIp      :: !(Maybe Text)
-    , _tNumTasks    :: !Int32
-    , _tKey         :: !(Maybe Text)
-    , _tLeaseSecs   :: !Int32
-    , _tOauthToken  :: !(Maybe Text)
-    , _tGroupByTag  :: !(Maybe Bool)
-    , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Text
+-- /See:/ 'tasksLease'' smart constructor.
+data TasksLease' = TasksLease'
+    { _tlTaskqueue   :: !Text
+    , _tlQuotaUser   :: !(Maybe Text)
+    , _tlPrettyPrint :: !Bool
+    , _tlTag         :: !(Maybe Text)
+    , _tlProject     :: !Text
+    , _tlUserIp      :: !(Maybe Text)
+    , _tlNumTasks    :: !Int32
+    , _tlKey         :: !(Maybe Text)
+    , _tlLeaseSecs   :: !Int32
+    , _tlOauthToken  :: !(Maybe Text)
+    , _tlGroupByTag  :: !(Maybe Bool)
+    , _tlFields      :: !(Maybe Text)
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksLease'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tTaskqueue'
+-- * 'tlTaskqueue'
 --
--- * 'tQuotaUser'
+-- * 'tlQuotaUser'
 --
--- * 'tPrettyPrint'
+-- * 'tlPrettyPrint'
 --
--- * 'tTag'
+-- * 'tlTag'
 --
--- * 'tProject'
+-- * 'tlProject'
 --
--- * 'tUserIp'
+-- * 'tlUserIp'
 --
--- * 'tNumTasks'
+-- * 'tlNumTasks'
 --
--- * 'tKey'
+-- * 'tlKey'
 --
--- * 'tLeaseSecs'
+-- * 'tlLeaseSecs'
 --
--- * 'tOauthToken'
+-- * 'tlOauthToken'
 --
--- * 'tGroupByTag'
+-- * 'tlGroupByTag'
 --
--- * 'tFields'
+-- * 'tlFields'
 --
--- * 'tAlt'
-tasksLease
+-- * 'tlAlt'
+tasksLease'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
     -> Int32 -- ^ 'numTasks'
     -> Int32 -- ^ 'leaseSecs'
-    -> TasksLease
-tasksLease pTTaskqueue_ pTProject_ pTNumTasks_ pTLeaseSecs_ =
-    TasksLease
-    { _tTaskqueue = pTTaskqueue_
-    , _tQuotaUser = Nothing
-    , _tPrettyPrint = True
-    , _tTag = Nothing
-    , _tProject = pTProject_
-    , _tUserIp = Nothing
-    , _tNumTasks = pTNumTasks_
-    , _tKey = Nothing
-    , _tLeaseSecs = pTLeaseSecs_
-    , _tOauthToken = Nothing
-    , _tGroupByTag = Nothing
-    , _tFields = Nothing
-    , _tAlt = "json"
+    -> TasksLease'
+tasksLease' pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
+    TasksLease'
+    { _tlTaskqueue = pTlTaskqueue_
+    , _tlQuotaUser = Nothing
+    , _tlPrettyPrint = True
+    , _tlTag = Nothing
+    , _tlProject = pTlProject_
+    , _tlUserIp = Nothing
+    , _tlNumTasks = pTlNumTasks_
+    , _tlKey = Nothing
+    , _tlLeaseSecs = pTlLeaseSecs_
+    , _tlOauthToken = Nothing
+    , _tlGroupByTag = Nothing
+    , _tlFields = Nothing
+    , _tlAlt = JSON
     }
 
 -- | The taskqueue to lease a task from.
-tTaskqueue :: Lens' TasksLease' Text
-tTaskqueue
-  = lens _tTaskqueue (\ s a -> s{_tTaskqueue = a})
+tlTaskqueue :: Lens' TasksLease' Text
+tlTaskqueue
+  = lens _tlTaskqueue (\ s a -> s{_tlTaskqueue = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tQuotaUser :: Lens' TasksLease' (Maybe Text)
-tQuotaUser
-  = lens _tQuotaUser (\ s a -> s{_tQuotaUser = a})
+tlQuotaUser :: Lens' TasksLease' (Maybe Text)
+tlQuotaUser
+  = lens _tlQuotaUser (\ s a -> s{_tlQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tPrettyPrint :: Lens' TasksLease' Bool
-tPrettyPrint
-  = lens _tPrettyPrint (\ s a -> s{_tPrettyPrint = a})
+tlPrettyPrint :: Lens' TasksLease' Bool
+tlPrettyPrint
+  = lens _tlPrettyPrint
+      (\ s a -> s{_tlPrettyPrint = a})
 
 -- | The tag allowed for tasks in the response. Must only be specified if
 -- group_by_tag is true. If group_by_tag is true and tag is not specified
 -- the tag will be that of the oldest task by eta, i.e. the first available
 -- tag
-tTag :: Lens' TasksLease' (Maybe Text)
-tTag = lens _tTag (\ s a -> s{_tTag = a})
+tlTag :: Lens' TasksLease' (Maybe Text)
+tlTag = lens _tlTag (\ s a -> s{_tlTag = a})
 
 -- | The project under which the queue lies.
-tProject :: Lens' TasksLease' Text
-tProject = lens _tProject (\ s a -> s{_tProject = a})
+tlProject :: Lens' TasksLease' Text
+tlProject
+  = lens _tlProject (\ s a -> s{_tlProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TasksLease' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tlUserIp :: Lens' TasksLease' (Maybe Text)
+tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
 
 -- | The number of tasks to lease.
-tNumTasks :: Lens' TasksLease' Int32
-tNumTasks
-  = lens _tNumTasks (\ s a -> s{_tNumTasks = a})
+tlNumTasks :: Lens' TasksLease' Int32
+tlNumTasks
+  = lens _tlNumTasks (\ s a -> s{_tlNumTasks = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TasksLease' (Maybe Text)
-tKey = lens _tKey (\ s a -> s{_tKey = a})
+tlKey :: Lens' TasksLease' (Maybe Text)
+tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | The lease in seconds.
-tLeaseSecs :: Lens' TasksLease' Int32
-tLeaseSecs
-  = lens _tLeaseSecs (\ s a -> s{_tLeaseSecs = a})
+tlLeaseSecs :: Lens' TasksLease' Int32
+tlLeaseSecs
+  = lens _tlLeaseSecs (\ s a -> s{_tlLeaseSecs = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TasksLease' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tlOauthToken :: Lens' TasksLease' (Maybe Text)
+tlOauthToken
+  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
 
 -- | When true, all returned tasks will have the same tag
-tGroupByTag :: Lens' TasksLease' (Maybe Bool)
-tGroupByTag
-  = lens _tGroupByTag (\ s a -> s{_tGroupByTag = a})
+tlGroupByTag :: Lens' TasksLease' (Maybe Bool)
+tlGroupByTag
+  = lens _tlGroupByTag (\ s a -> s{_tlGroupByTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tFields :: Lens' TasksLease' (Maybe Text)
-tFields = lens _tFields (\ s a -> s{_tFields = a})
+tlFields :: Lens' TasksLease' (Maybe Text)
+tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tAlt :: Lens' TasksLease' Text
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+tlAlt :: Lens' TasksLease' Alt
+tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TasksLease' where
         type Rs TasksLease' = Tasks
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksLease{..}
-          = go _tTaskqueue _tQuotaUser _tPrettyPrint _tTag
-              _tProject
-              _tUserIp
-              (Just _tNumTasks)
-              _tKey
-              (Just _tLeaseSecs)
-              _tOauthToken
-              _tGroupByTag
-              _tFields
-              _tAlt
+        requestWithRoute r u TasksLease'{..}
+          = go _tlTaskqueue _tlQuotaUser (Just _tlPrettyPrint)
+              _tlTag
+              _tlProject
+              _tlUserIp
+              (Just _tlNumTasks)
+              _tlKey
+              (Just _tlLeaseSecs)
+              _tlOauthToken
+              _tlGroupByTag
+              _tlFields
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksLeaseAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TasksLeaseResource)
+                      r
+                      u

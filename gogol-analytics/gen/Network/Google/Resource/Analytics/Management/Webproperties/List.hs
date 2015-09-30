@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists web properties to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertiesList@.
-module Analytics.Management.Webproperties.List
+module Network.Google.Resource.Analytics.Management.Webproperties.List
     (
     -- * REST Resource
-      ManagementWebpropertiesListAPI
+      ManagementWebpropertiesListResource
 
     -- * Creating a Request
-    , managementWebpropertiesList
-    , ManagementWebpropertiesList
+    , managementWebpropertiesList'
+    , ManagementWebpropertiesList'
 
     -- * Request Lenses
     , mwlQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertiesList@ which the
--- 'ManagementWebpropertiesList' request conforms to.
-type ManagementWebpropertiesListAPI =
+-- 'ManagementWebpropertiesList'' request conforms to.
+type ManagementWebpropertiesListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
-                 Get '[JSON] Webproperties
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Webproperties
 
 -- | Lists web properties to which the user has access.
 --
--- /See:/ 'managementWebpropertiesList' smart constructor.
-data ManagementWebpropertiesList = ManagementWebpropertiesList
+-- /See:/ 'managementWebpropertiesList'' smart constructor.
+data ManagementWebpropertiesList' = ManagementWebpropertiesList'
     { _mwlQuotaUser   :: !(Maybe Text)
     , _mwlPrettyPrint :: !Bool
     , _mwlUserIp      :: !(Maybe Text)
@@ -68,7 +75,7 @@ data ManagementWebpropertiesList = ManagementWebpropertiesList
     , _mwlStartIndex  :: !(Maybe Int32)
     , _mwlMaxResults  :: !(Maybe Int32)
     , _mwlFields      :: !(Maybe Text)
-    , _mwlAlt         :: !Text
+    , _mwlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertiesList'' with the minimum fields required to make a request.
@@ -94,11 +101,11 @@ data ManagementWebpropertiesList = ManagementWebpropertiesList
 -- * 'mwlFields'
 --
 -- * 'mwlAlt'
-managementWebpropertiesList
+managementWebpropertiesList'
     :: Text -- ^ 'accountId'
-    -> ManagementWebpropertiesList
-managementWebpropertiesList pMwlAccountId_ =
-    ManagementWebpropertiesList
+    -> ManagementWebpropertiesList'
+managementWebpropertiesList' pMwlAccountId_ =
+    ManagementWebpropertiesList'
     { _mwlQuotaUser = Nothing
     , _mwlPrettyPrint = False
     , _mwlUserIp = Nothing
@@ -108,7 +115,7 @@ managementWebpropertiesList pMwlAccountId_ =
     , _mwlStartIndex = Nothing
     , _mwlMaxResults = Nothing
     , _mwlFields = Nothing
-    , _mwlAlt = "json"
+    , _mwlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,24 +175,24 @@ mwlFields
   = lens _mwlFields (\ s a -> s{_mwlFields = a})
 
 -- | Data format for the response.
-mwlAlt :: Lens' ManagementWebpropertiesList' Text
+mwlAlt :: Lens' ManagementWebpropertiesList' Alt
 mwlAlt = lens _mwlAlt (\ s a -> s{_mwlAlt = a})
 
 instance GoogleRequest ManagementWebpropertiesList'
          where
         type Rs ManagementWebpropertiesList' = Webproperties
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementWebpropertiesList{..}
-          = go _mwlQuotaUser _mwlPrettyPrint _mwlUserIp
+        requestWithRoute r u ManagementWebpropertiesList'{..}
+          = go _mwlQuotaUser (Just _mwlPrettyPrint) _mwlUserIp
               _mwlAccountId
               _mwlKey
               _mwlOauthToken
               _mwlStartIndex
               _mwlMaxResults
               _mwlFields
-              _mwlAlt
+              (Just _mwlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementWebpropertiesListAPI)
+                      (Proxy :: Proxy ManagementWebpropertiesListResource)
                       r
                       u

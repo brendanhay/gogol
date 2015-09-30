@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all aliases for a user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesList@.
-module Directory.Users.Aliases.List
+module Network.Google.Resource.Directory.Users.Aliases.List
     (
     -- * REST Resource
-      UsersAliasesListAPI
+      UsersAliasesListResource
 
     -- * Creating a Request
-    , usersAliasesList
-    , UsersAliasesList
+    , usersAliasesList'
+    , UsersAliasesList'
 
     -- * Request Lenses
     , ualEvent
@@ -44,18 +45,25 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersAliasesList@ which the
--- 'UsersAliasesList' request conforms to.
-type UsersAliasesListAPI =
+-- 'UsersAliasesList'' request conforms to.
+type UsersAliasesListResource =
      "users" :>
        Capture "userKey" Text :>
          "aliases" :>
-           QueryParam "event" Text :> Get '[JSON] Aliases
+           QueryParam "event" DirectoryUsersAliasesListEvent :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Aliases
 
 -- | List all aliases for a user
 --
--- /See:/ 'usersAliasesList' smart constructor.
-data UsersAliasesList = UsersAliasesList
-    { _ualEvent       :: !(Maybe Text)
+-- /See:/ 'usersAliasesList'' smart constructor.
+data UsersAliasesList' = UsersAliasesList'
+    { _ualEvent       :: !(Maybe DirectoryUsersAliasesListEvent)
     , _ualQuotaUser   :: !(Maybe Text)
     , _ualPrettyPrint :: !Bool
     , _ualUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data UsersAliasesList = UsersAliasesList
     , _ualOauthToken  :: !(Maybe Text)
     , _ualUserKey     :: !Text
     , _ualFields      :: !(Maybe Text)
-    , _ualAlt         :: !Text
+    , _ualAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesList'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data UsersAliasesList = UsersAliasesList
 -- * 'ualFields'
 --
 -- * 'ualAlt'
-usersAliasesList
+usersAliasesList'
     :: Text -- ^ 'userKey'
-    -> UsersAliasesList
-usersAliasesList pUalUserKey_ =
-    UsersAliasesList
+    -> UsersAliasesList'
+usersAliasesList' pUalUserKey_ =
+    UsersAliasesList'
     { _ualEvent = Nothing
     , _ualQuotaUser = Nothing
     , _ualPrettyPrint = True
@@ -100,11 +108,11 @@ usersAliasesList pUalUserKey_ =
     , _ualOauthToken = Nothing
     , _ualUserKey = pUalUserKey_
     , _ualFields = Nothing
-    , _ualAlt = "json"
+    , _ualAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
-ualEvent :: Lens' UsersAliasesList' (Maybe Text)
+ualEvent :: Lens' UsersAliasesList' (Maybe DirectoryUsersAliasesListEvent)
 ualEvent = lens _ualEvent (\ s a -> s{_ualEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,22 +157,22 @@ ualFields
   = lens _ualFields (\ s a -> s{_ualFields = a})
 
 -- | Data format for the response.
-ualAlt :: Lens' UsersAliasesList' Text
+ualAlt :: Lens' UsersAliasesList' Alt
 ualAlt = lens _ualAlt (\ s a -> s{_ualAlt = a})
 
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersAliasesList{..}
-          = go _ualEvent _ualQuotaUser _ualPrettyPrint
+        requestWithRoute r u UsersAliasesList'{..}
+          = go _ualEvent _ualQuotaUser (Just _ualPrettyPrint)
               _ualUserIp
               _ualKey
               _ualOauthToken
               _ualUserKey
               _ualFields
-              _ualAlt
+              (Just _ualAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersAliasesListAPI)
+                      (Proxy :: Proxy UsersAliasesListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve Organization Unit
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsGet@.
-module Directory.Orgunits.Get
+module Network.Google.Resource.Directory.Orgunits.Get
     (
     -- * REST Resource
-      OrgunitsGetAPI
+      OrgunitsGetResource
 
     -- * Creating a Request
-    , orgunitsGet
-    , OrgunitsGet
+    , orgunitsGet'
+    , OrgunitsGet'
 
     -- * Request Lenses
     , ogQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsGet@ which the
--- 'OrgunitsGet' request conforms to.
-type OrgunitsGetAPI =
+-- 'OrgunitsGet'' request conforms to.
+type OrgunitsGetResource =
      "customer" :>
        Capture "customerId" Text :>
-         "orgunits{" :> "orgUnitPath*}" :> Get '[JSON] OrgUnit
+         "orgunits{" :>
+           "orgUnitPath*}" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] OrgUnit
 
 -- | Retrieve Organization Unit
 --
--- /See:/ 'orgunitsGet' smart constructor.
-data OrgunitsGet = OrgunitsGet
+-- /See:/ 'orgunitsGet'' smart constructor.
+data OrgunitsGet' = OrgunitsGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
     , _ogUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data OrgunitsGet = OrgunitsGet
     , _ogKey         :: !(Maybe Text)
     , _ogOauthToken  :: !(Maybe Text)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Text
+    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data OrgunitsGet = OrgunitsGet
 -- * 'ogFields'
 --
 -- * 'ogAlt'
-orgunitsGet
+orgunitsGet'
     :: Text -- ^ 'orgUnitPath'
     -> Text -- ^ 'customerId'
-    -> OrgunitsGet
-orgunitsGet pOgOrgUnitPath_ pOgCustomerId_ =
-    OrgunitsGet
+    -> OrgunitsGet'
+orgunitsGet' pOgOrgUnitPath_ pOgCustomerId_ =
+    OrgunitsGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
     , _ogUserIp = Nothing
@@ -100,7 +109,7 @@ orgunitsGet pOgOrgUnitPath_ pOgCustomerId_ =
     , _ogKey = Nothing
     , _ogOauthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = "json"
+    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,19 +157,22 @@ ogFields :: Lens' OrgunitsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
 -- | Data format for the response.
-ogAlt :: Lens' OrgunitsGet' Text
+ogAlt :: Lens' OrgunitsGet' Alt
 ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
 
 instance GoogleRequest OrgunitsGet' where
         type Rs OrgunitsGet' = OrgUnit
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsGet{..}
-          = go _ogQuotaUser _ogPrettyPrint _ogUserIp
+        requestWithRoute r u OrgunitsGet'{..}
+          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIp
               _ogOrgUnitPath
               _ogCustomerId
               _ogKey
               _ogOauthToken
               _ogFields
-              _ogAlt
+              (Just _ogAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsGetResource)
+                      r
+                      u

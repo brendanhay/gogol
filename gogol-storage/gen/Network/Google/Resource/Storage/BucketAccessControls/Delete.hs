@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsDelete@.
-module Storage.BucketAccessControls.Delete
+module Network.Google.Resource.Storage.BucketAccessControls.Delete
     (
     -- * REST Resource
-      BucketAccessControlsDeleteAPI
+      BucketAccessControlsDeleteResource
 
     -- * Creating a Request
-    , bucketAccessControlsDelete
-    , BucketAccessControlsDelete
+    , bucketAccessControlsDelete'
+    , BucketAccessControlsDelete'
 
     -- * Request Lenses
     , bacdQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsDelete@ which the
--- 'BucketAccessControlsDelete' request conforms to.
-type BucketAccessControlsDeleteAPI =
+-- 'BucketAccessControlsDelete'' request conforms to.
+type BucketAccessControlsDeleteResource =
      "b" :>
        Capture "bucket" Text :>
-         "acl" :> Capture "entity" Text :> Delete '[JSON] ()
+         "acl" :>
+           Capture "entity" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified bucket.
 --
--- /See:/ 'bucketAccessControlsDelete' smart constructor.
-data BucketAccessControlsDelete = BucketAccessControlsDelete
+-- /See:/ 'bucketAccessControlsDelete'' smart constructor.
+data BucketAccessControlsDelete' = BucketAccessControlsDelete'
     { _bacdQuotaUser   :: !(Maybe Text)
     , _bacdPrettyPrint :: !Bool
     , _bacdUserIp      :: !(Maybe Text)
@@ -64,7 +73,7 @@ data BucketAccessControlsDelete = BucketAccessControlsDelete
     , _bacdOauthToken  :: !(Maybe Text)
     , _bacdEntity      :: !Text
     , _bacdFields      :: !(Maybe Text)
-    , _bacdAlt         :: !Text
+    , _bacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsDelete'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data BucketAccessControlsDelete = BucketAccessControlsDelete
 -- * 'bacdFields'
 --
 -- * 'bacdAlt'
-bucketAccessControlsDelete
+bucketAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> BucketAccessControlsDelete
-bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
-    BucketAccessControlsDelete
+    -> BucketAccessControlsDelete'
+bucketAccessControlsDelete' pBacdBucket_ pBacdEntity_ =
+    BucketAccessControlsDelete'
     { _bacdQuotaUser = Nothing
     , _bacdPrettyPrint = True
     , _bacdUserIp = Nothing
@@ -102,7 +111,7 @@ bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
     , _bacdOauthToken = Nothing
     , _bacdEntity = pBacdEntity_
     , _bacdFields = Nothing
-    , _bacdAlt = "json"
+    , _bacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,23 +164,24 @@ bacdFields
   = lens _bacdFields (\ s a -> s{_bacdFields = a})
 
 -- | Data format for the response.
-bacdAlt :: Lens' BucketAccessControlsDelete' Text
+bacdAlt :: Lens' BucketAccessControlsDelete' Alt
 bacdAlt = lens _bacdAlt (\ s a -> s{_bacdAlt = a})
 
 instance GoogleRequest BucketAccessControlsDelete'
          where
         type Rs BucketAccessControlsDelete' = ()
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsDelete{..}
-          = go _bacdQuotaUser _bacdPrettyPrint _bacdUserIp
+        requestWithRoute r u BucketAccessControlsDelete'{..}
+          = go _bacdQuotaUser (Just _bacdPrettyPrint)
+              _bacdUserIp
               _bacdBucket
               _bacdKey
               _bacdOauthToken
               _bacdEntity
               _bacdFields
-              _bacdAlt
+              (Just _bacdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsDeleteAPI)
+                      (Proxy :: Proxy BucketAccessControlsDeleteResource)
                       r
                       u

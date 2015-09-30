@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,170 +20,187 @@
 -- | Update a page.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerPagesUpdate@.
-module Blogger.Pages.Update
+module Network.Google.Resource.Blogger.Pages.Update
     (
     -- * REST Resource
-      PagesUpdateAPI
+      PagesUpdateResource
 
     -- * Creating a Request
-    , pagesUpdate
-    , PagesUpdate
+    , pagesUpdate'
+    , PagesUpdate'
 
     -- * Request Lenses
-    , puQuotaUser
-    , puPrettyPrint
-    , puUserIp
-    , puBlogId
-    , puPageId
-    , puKey
-    , puRevert
-    , puOauthToken
-    , puPublish
-    , puFields
-    , puAlt
+    , puuQuotaUser
+    , puuPrettyPrint
+    , puuUserIp
+    , puuBlogId
+    , puuPageId
+    , puuKey
+    , puuRevert
+    , puuOauthToken
+    , puuPublish
+    , puuFields
+    , puuAlt
     ) where
 
 import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerPagesUpdate@ which the
--- 'PagesUpdate' request conforms to.
-type PagesUpdateAPI =
+-- 'PagesUpdate'' request conforms to.
+type PagesUpdateResource =
      "blogs" :>
        Capture "blogId" Text :>
          "pages" :>
            Capture "pageId" Text :>
-             QueryParam "revert" Bool :>
-               QueryParam "publish" Bool :> Put '[JSON] Page
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "revert" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "publish" Bool :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Put '[JSON] Page
 
 -- | Update a page.
 --
--- /See:/ 'pagesUpdate' smart constructor.
-data PagesUpdate = PagesUpdate
-    { _puQuotaUser   :: !(Maybe Text)
-    , _puPrettyPrint :: !Bool
-    , _puUserIp      :: !(Maybe Text)
-    , _puBlogId      :: !Text
-    , _puPageId      :: !Text
-    , _puKey         :: !(Maybe Text)
-    , _puRevert      :: !(Maybe Bool)
-    , _puOauthToken  :: !(Maybe Text)
-    , _puPublish     :: !(Maybe Bool)
-    , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Text
+-- /See:/ 'pagesUpdate'' smart constructor.
+data PagesUpdate' = PagesUpdate'
+    { _puuQuotaUser   :: !(Maybe Text)
+    , _puuPrettyPrint :: !Bool
+    , _puuUserIp      :: !(Maybe Text)
+    , _puuBlogId      :: !Text
+    , _puuPageId      :: !Text
+    , _puuKey         :: !(Maybe Text)
+    , _puuRevert      :: !(Maybe Bool)
+    , _puuOauthToken  :: !(Maybe Text)
+    , _puuPublish     :: !(Maybe Bool)
+    , _puuFields      :: !(Maybe Text)
+    , _puuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'puQuotaUser'
+-- * 'puuQuotaUser'
 --
--- * 'puPrettyPrint'
+-- * 'puuPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puuUserIp'
 --
--- * 'puBlogId'
+-- * 'puuBlogId'
 --
--- * 'puPageId'
+-- * 'puuPageId'
 --
--- * 'puKey'
+-- * 'puuKey'
 --
--- * 'puRevert'
+-- * 'puuRevert'
 --
--- * 'puOauthToken'
+-- * 'puuOauthToken'
 --
--- * 'puPublish'
+-- * 'puuPublish'
 --
--- * 'puFields'
+-- * 'puuFields'
 --
--- * 'puAlt'
-pagesUpdate
+-- * 'puuAlt'
+pagesUpdate'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
-    -> PagesUpdate
-pagesUpdate pPuBlogId_ pPuPageId_ =
-    PagesUpdate
-    { _puQuotaUser = Nothing
-    , _puPrettyPrint = True
-    , _puUserIp = Nothing
-    , _puBlogId = pPuBlogId_
-    , _puPageId = pPuPageId_
-    , _puKey = Nothing
-    , _puRevert = Nothing
-    , _puOauthToken = Nothing
-    , _puPublish = Nothing
-    , _puFields = Nothing
-    , _puAlt = "json"
+    -> PagesUpdate'
+pagesUpdate' pPuuBlogId_ pPuuPageId_ =
+    PagesUpdate'
+    { _puuQuotaUser = Nothing
+    , _puuPrettyPrint = True
+    , _puuUserIp = Nothing
+    , _puuBlogId = pPuuBlogId_
+    , _puuPageId = pPuuPageId_
+    , _puuKey = Nothing
+    , _puuRevert = Nothing
+    , _puuOauthToken = Nothing
+    , _puuPublish = Nothing
+    , _puuFields = Nothing
+    , _puuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-puQuotaUser :: Lens' PagesUpdate' (Maybe Text)
-puQuotaUser
-  = lens _puQuotaUser (\ s a -> s{_puQuotaUser = a})
+puuQuotaUser :: Lens' PagesUpdate' (Maybe Text)
+puuQuotaUser
+  = lens _puuQuotaUser (\ s a -> s{_puuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-puPrettyPrint :: Lens' PagesUpdate' Bool
-puPrettyPrint
-  = lens _puPrettyPrint
-      (\ s a -> s{_puPrettyPrint = a})
+puuPrettyPrint :: Lens' PagesUpdate' Bool
+puuPrettyPrint
+  = lens _puuPrettyPrint
+      (\ s a -> s{_puuPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PagesUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puuUserIp :: Lens' PagesUpdate' (Maybe Text)
+puuUserIp
+  = lens _puuUserIp (\ s a -> s{_puuUserIp = a})
 
 -- | The ID of the Blog.
-puBlogId :: Lens' PagesUpdate' Text
-puBlogId = lens _puBlogId (\ s a -> s{_puBlogId = a})
+puuBlogId :: Lens' PagesUpdate' Text
+puuBlogId
+  = lens _puuBlogId (\ s a -> s{_puuBlogId = a})
 
 -- | The ID of the Page.
-puPageId :: Lens' PagesUpdate' Text
-puPageId = lens _puPageId (\ s a -> s{_puPageId = a})
+puuPageId :: Lens' PagesUpdate' Text
+puuPageId
+  = lens _puuPageId (\ s a -> s{_puuPageId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PagesUpdate' (Maybe Text)
-puKey = lens _puKey (\ s a -> s{_puKey = a})
+puuKey :: Lens' PagesUpdate' (Maybe Text)
+puuKey = lens _puuKey (\ s a -> s{_puuKey = a})
 
 -- | Whether a revert action should be performed when the page is updated
 -- (default: false).
-puRevert :: Lens' PagesUpdate' (Maybe Bool)
-puRevert = lens _puRevert (\ s a -> s{_puRevert = a})
+puuRevert :: Lens' PagesUpdate' (Maybe Bool)
+puuRevert
+  = lens _puuRevert (\ s a -> s{_puuRevert = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PagesUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puuOauthToken :: Lens' PagesUpdate' (Maybe Text)
+puuOauthToken
+  = lens _puuOauthToken
+      (\ s a -> s{_puuOauthToken = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
-puPublish :: Lens' PagesUpdate' (Maybe Bool)
-puPublish
-  = lens _puPublish (\ s a -> s{_puPublish = a})
+puuPublish :: Lens' PagesUpdate' (Maybe Bool)
+puuPublish
+  = lens _puuPublish (\ s a -> s{_puuPublish = a})
 
 -- | Selector specifying which fields to include in a partial response.
-puFields :: Lens' PagesUpdate' (Maybe Text)
-puFields = lens _puFields (\ s a -> s{_puFields = a})
+puuFields :: Lens' PagesUpdate' (Maybe Text)
+puuFields
+  = lens _puuFields (\ s a -> s{_puuFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PagesUpdate' Text
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+puuAlt :: Lens' PagesUpdate' Alt
+puuAlt = lens _puuAlt (\ s a -> s{_puuAlt = a})
 
 instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u PagesUpdate{..}
-          = go _puQuotaUser _puPrettyPrint _puUserIp _puBlogId
-              _puPageId
-              _puKey
-              _puRevert
-              _puOauthToken
-              _puPublish
-              _puFields
-              _puAlt
+        requestWithRoute r u PagesUpdate'{..}
+          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIp
+              _puuBlogId
+              _puuPageId
+              _puuKey
+              _puuRevert
+              _puuOauthToken
+              _puuPublish
+              _puuFields
+              (Just _puuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PagesUpdateAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy PagesUpdateResource)
+                      r
+                      u

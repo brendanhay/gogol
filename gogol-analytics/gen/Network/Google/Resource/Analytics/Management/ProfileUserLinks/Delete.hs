@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Removes a user from the given view (profile).
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileUserLinksDelete@.
-module Analytics.Management.ProfileUserLinks.Delete
+module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Delete
     (
     -- * REST Resource
-      ManagementProfileUserLinksDeleteAPI
+      ManagementProfileUserLinksDeleteResource
 
     -- * Creating a Request
-    , managementProfileUserLinksDelete
-    , ManagementProfileUserLinksDelete
+    , managementProfileUserLinksDelete'
+    , ManagementProfileUserLinksDelete'
 
     -- * Request Lenses
     , mpuldQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileUserLinksDelete@ which the
--- 'ManagementProfileUserLinksDelete' request conforms to.
-type ManagementProfileUserLinksDeleteAPI =
+-- 'ManagementProfileUserLinksDelete'' request conforms to.
+type ManagementProfileUserLinksDeleteResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,19 @@ type ManagementProfileUserLinksDeleteAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "entityUserLinks" :>
-                     Capture "linkId" Text :> Delete '[JSON] ()
+                     Capture "linkId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Removes a user from the given view (profile).
 --
--- /See:/ 'managementProfileUserLinksDelete' smart constructor.
-data ManagementProfileUserLinksDelete = ManagementProfileUserLinksDelete
+-- /See:/ 'managementProfileUserLinksDelete'' smart constructor.
+data ManagementProfileUserLinksDelete' = ManagementProfileUserLinksDelete'
     { _mpuldQuotaUser     :: !(Maybe Text)
     , _mpuldPrettyPrint   :: !Bool
     , _mpuldWebPropertyId :: !Text
@@ -72,7 +80,7 @@ data ManagementProfileUserLinksDelete = ManagementProfileUserLinksDelete
     , _mpuldLinkId        :: !Text
     , _mpuldOauthToken    :: !(Maybe Text)
     , _mpuldFields        :: !(Maybe Text)
-    , _mpuldAlt           :: !Text
+    , _mpuldAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksDelete'' with the minimum fields required to make a request.
@@ -100,14 +108,14 @@ data ManagementProfileUserLinksDelete = ManagementProfileUserLinksDelete
 -- * 'mpuldFields'
 --
 -- * 'mpuldAlt'
-managementProfileUserLinksDelete
+managementProfileUserLinksDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementProfileUserLinksDelete
-managementProfileUserLinksDelete pMpuldWebPropertyId_ pMpuldProfileId_ pMpuldAccountId_ pMpuldLinkId_ =
-    ManagementProfileUserLinksDelete
+    -> ManagementProfileUserLinksDelete'
+managementProfileUserLinksDelete' pMpuldWebPropertyId_ pMpuldProfileId_ pMpuldAccountId_ pMpuldLinkId_ =
+    ManagementProfileUserLinksDelete'
     { _mpuldQuotaUser = Nothing
     , _mpuldPrettyPrint = False
     , _mpuldWebPropertyId = pMpuldWebPropertyId_
@@ -118,7 +126,7 @@ managementProfileUserLinksDelete pMpuldWebPropertyId_ pMpuldProfileId_ pMpuldAcc
     , _mpuldLinkId = pMpuldLinkId_
     , _mpuldOauthToken = Nothing
     , _mpuldFields = Nothing
-    , _mpuldAlt = "json"
+    , _mpuldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +190,7 @@ mpuldFields
   = lens _mpuldFields (\ s a -> s{_mpuldFields = a})
 
 -- | Data format for the response.
-mpuldAlt :: Lens' ManagementProfileUserLinksDelete' Text
+mpuldAlt :: Lens' ManagementProfileUserLinksDelete' Alt
 mpuldAlt = lens _mpuldAlt (\ s a -> s{_mpuldAlt = a})
 
 instance GoogleRequest
@@ -190,8 +198,8 @@ instance GoogleRequest
         type Rs ManagementProfileUserLinksDelete' = ()
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileUserLinksDelete{..}
-          = go _mpuldQuotaUser _mpuldPrettyPrint
+          ManagementProfileUserLinksDelete'{..}
+          = go _mpuldQuotaUser (Just _mpuldPrettyPrint)
               _mpuldWebPropertyId
               _mpuldUserIp
               _mpuldProfileId
@@ -200,9 +208,10 @@ instance GoogleRequest
               _mpuldLinkId
               _mpuldOauthToken
               _mpuldFields
-              _mpuldAlt
+              (Just _mpuldAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementProfileUserLinksDeleteAPI)
+                      (Proxy ::
+                         Proxy ManagementProfileUserLinksDeleteResource)
                       r
                       u

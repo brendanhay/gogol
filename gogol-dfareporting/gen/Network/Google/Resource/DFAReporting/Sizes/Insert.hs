@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,133 +20,148 @@
 -- | Inserts a new size.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSizesInsert@.
-module DFAReporting.Sizes.Insert
+module Network.Google.Resource.DFAReporting.Sizes.Insert
     (
     -- * REST Resource
-      SizesInsertAPI
+      SizesInsertResource
 
     -- * Creating a Request
-    , sizesInsert
-    , SizesInsert
+    , sizesInsert'
+    , SizesInsert'
 
     -- * Request Lenses
-    , sQuotaUser
-    , sPrettyPrint
-    , sUserIp
-    , sProfileId
-    , sKey
-    , sOauthToken
-    , sFields
-    , sAlt
+    , sizQuotaUser
+    , sizPrettyPrint
+    , sizUserIp
+    , sizProfileId
+    , sizKey
+    , sizOauthToken
+    , sizFields
+    , sizAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSizesInsert@ which the
--- 'SizesInsert' request conforms to.
-type SizesInsertAPI =
+-- 'SizesInsert'' request conforms to.
+type SizesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "sizes" :> Post '[JSON] Size
+         "sizes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Size
 
 -- | Inserts a new size.
 --
--- /See:/ 'sizesInsert' smart constructor.
-data SizesInsert = SizesInsert
-    { _sQuotaUser   :: !(Maybe Text)
-    , _sPrettyPrint :: !Bool
-    , _sUserIp      :: !(Maybe Text)
-    , _sProfileId   :: !Int64
-    , _sKey         :: !(Maybe Text)
-    , _sOauthToken  :: !(Maybe Text)
-    , _sFields      :: !(Maybe Text)
-    , _sAlt         :: !Text
+-- /See:/ 'sizesInsert'' smart constructor.
+data SizesInsert' = SizesInsert'
+    { _sizQuotaUser   :: !(Maybe Text)
+    , _sizPrettyPrint :: !Bool
+    , _sizUserIp      :: !(Maybe Text)
+    , _sizProfileId   :: !Int64
+    , _sizKey         :: !(Maybe Text)
+    , _sizOauthToken  :: !(Maybe Text)
+    , _sizFields      :: !(Maybe Text)
+    , _sizAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sQuotaUser'
+-- * 'sizQuotaUser'
 --
--- * 'sPrettyPrint'
+-- * 'sizPrettyPrint'
 --
--- * 'sUserIp'
+-- * 'sizUserIp'
 --
--- * 'sProfileId'
+-- * 'sizProfileId'
 --
--- * 'sKey'
+-- * 'sizKey'
 --
--- * 'sOauthToken'
+-- * 'sizOauthToken'
 --
--- * 'sFields'
+-- * 'sizFields'
 --
--- * 'sAlt'
-sizesInsert
+-- * 'sizAlt'
+sizesInsert'
     :: Int64 -- ^ 'profileId'
-    -> SizesInsert
-sizesInsert pSProfileId_ =
-    SizesInsert
-    { _sQuotaUser = Nothing
-    , _sPrettyPrint = True
-    , _sUserIp = Nothing
-    , _sProfileId = pSProfileId_
-    , _sKey = Nothing
-    , _sOauthToken = Nothing
-    , _sFields = Nothing
-    , _sAlt = "json"
+    -> SizesInsert'
+sizesInsert' pSizProfileId_ =
+    SizesInsert'
+    { _sizQuotaUser = Nothing
+    , _sizPrettyPrint = True
+    , _sizUserIp = Nothing
+    , _sizProfileId = pSizProfileId_
+    , _sizKey = Nothing
+    , _sizOauthToken = Nothing
+    , _sizFields = Nothing
+    , _sizAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-sQuotaUser :: Lens' SizesInsert' (Maybe Text)
-sQuotaUser
-  = lens _sQuotaUser (\ s a -> s{_sQuotaUser = a})
+sizQuotaUser :: Lens' SizesInsert' (Maybe Text)
+sizQuotaUser
+  = lens _sizQuotaUser (\ s a -> s{_sizQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-sPrettyPrint :: Lens' SizesInsert' Bool
-sPrettyPrint
-  = lens _sPrettyPrint (\ s a -> s{_sPrettyPrint = a})
+sizPrettyPrint :: Lens' SizesInsert' Bool
+sizPrettyPrint
+  = lens _sizPrettyPrint
+      (\ s a -> s{_sizPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' SizesInsert' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sizUserIp :: Lens' SizesInsert' (Maybe Text)
+sizUserIp
+  = lens _sizUserIp (\ s a -> s{_sizUserIp = a})
 
 -- | User profile ID associated with this request.
-sProfileId :: Lens' SizesInsert' Int64
-sProfileId
-  = lens _sProfileId (\ s a -> s{_sProfileId = a})
+sizProfileId :: Lens' SizesInsert' Int64
+sizProfileId
+  = lens _sizProfileId (\ s a -> s{_sizProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' SizesInsert' (Maybe Text)
-sKey = lens _sKey (\ s a -> s{_sKey = a})
+sizKey :: Lens' SizesInsert' (Maybe Text)
+sizKey = lens _sizKey (\ s a -> s{_sizKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' SizesInsert' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sizOauthToken :: Lens' SizesInsert' (Maybe Text)
+sizOauthToken
+  = lens _sizOauthToken
+      (\ s a -> s{_sizOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-sFields :: Lens' SizesInsert' (Maybe Text)
-sFields = lens _sFields (\ s a -> s{_sFields = a})
+sizFields :: Lens' SizesInsert' (Maybe Text)
+sizFields
+  = lens _sizFields (\ s a -> s{_sizFields = a})
 
 -- | Data format for the response.
-sAlt :: Lens' SizesInsert' Text
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+sizAlt :: Lens' SizesInsert' Alt
+sizAlt = lens _sizAlt (\ s a -> s{_sizAlt = a})
 
 instance GoogleRequest SizesInsert' where
         type Rs SizesInsert' = Size
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SizesInsert{..}
-          = go _sQuotaUser _sPrettyPrint _sUserIp _sProfileId
-              _sKey
-              _sOauthToken
-              _sFields
-              _sAlt
+        requestWithRoute r u SizesInsert'{..}
+          = go _sizQuotaUser (Just _sizPrettyPrint) _sizUserIp
+              _sizProfileId
+              _sizKey
+              _sizOauthToken
+              _sizFields
+              (Just _sizAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SizesInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SizesInsertResource)
+                      r
+                      u

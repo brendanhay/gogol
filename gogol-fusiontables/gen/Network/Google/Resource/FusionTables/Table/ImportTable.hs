@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Imports a new table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableImportTable@.
-module FusionTables.Table.ImportTable
+module Network.Google.Resource.FusionTables.Table.ImportTable
     (
     -- * REST Resource
-      TableImportTableAPI
+      TableImportTableResource
 
     -- * Creating a Request
-    , tableImportTable
-    , TableImportTable
+    , tableImportTable'
+    , TableImportTable'
 
     -- * Request Lenses
     , titQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableImportTable@ which the
--- 'TableImportTable' request conforms to.
-type TableImportTableAPI =
+-- 'TableImportTable'' request conforms to.
+type TableImportTableResource =
      "tables" :>
        "import" :>
-         QueryParam "name" Text :>
-           QueryParam "delimiter" Text :>
-             QueryParam "encoding" Text :> Post '[JSON] Table
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "name" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "delimiter" Text :>
+                       QueryParam "encoding" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Table
 
 -- | Imports a new table.
 --
--- /See:/ 'tableImportTable' smart constructor.
-data TableImportTable = TableImportTable
+-- /See:/ 'tableImportTable'' smart constructor.
+data TableImportTable' = TableImportTable'
     { _titQuotaUser   :: !(Maybe Text)
     , _titPrettyPrint :: !Bool
     , _titUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data TableImportTable = TableImportTable
     , _titDelimiter   :: !(Maybe Text)
     , _titEncoding    :: !(Maybe Text)
     , _titFields      :: !(Maybe Text)
-    , _titAlt         :: !Text
+    , _titAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportTable'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data TableImportTable = TableImportTable
 -- * 'titFields'
 --
 -- * 'titAlt'
-tableImportTable
+tableImportTable'
     :: Text -- ^ 'name'
-    -> TableImportTable
-tableImportTable pTitName_ =
-    TableImportTable
+    -> TableImportTable'
+tableImportTable' pTitName_ =
+    TableImportTable'
     { _titQuotaUser = Nothing
     , _titPrettyPrint = True
     , _titUserIp = Nothing
@@ -106,7 +114,7 @@ tableImportTable pTitName_ =
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
     , _titFields = Nothing
-    , _titAlt = "json"
+    , _titAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,22 +170,23 @@ titFields
   = lens _titFields (\ s a -> s{_titFields = a})
 
 -- | Data format for the response.
-titAlt :: Lens' TableImportTable' Text
+titAlt :: Lens' TableImportTable' Alt
 titAlt = lens _titAlt (\ s a -> s{_titAlt = a})
 
 instance GoogleRequest TableImportTable' where
         type Rs TableImportTable' = Table
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableImportTable{..}
-          = go _titQuotaUser _titPrettyPrint _titUserIp _titKey
+        requestWithRoute r u TableImportTable'{..}
+          = go _titQuotaUser (Just _titPrettyPrint) _titUserIp
+              _titKey
               (Just _titName)
               _titOauthToken
               _titDelimiter
               _titEncoding
               _titFields
-              _titAlt
+              (Just _titAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TableImportTableAPI)
+                      (Proxy :: Proxy TableImportTableResource)
                       r
                       u

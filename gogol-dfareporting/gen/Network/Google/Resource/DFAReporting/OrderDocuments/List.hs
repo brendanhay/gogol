@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of order documents, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrderDocumentsList@.
-module DFAReporting.OrderDocuments.List
+module Network.Google.Resource.DFAReporting.OrderDocuments.List
     (
     -- * REST Resource
-      OrderDocumentsListAPI
+      OrderDocumentsListResource
 
     -- * Creating a Request
-    , orderDocumentsList
-    , OrderDocumentsList
+    , orderDocumentsList'
+    , OrderDocumentsList'
 
     -- * Request Lenses
     , odlQuotaUser
@@ -53,46 +54,58 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOrderDocumentsList@ which the
--- 'OrderDocumentsList' request conforms to.
-type OrderDocumentsListAPI =
+-- 'OrderDocumentsList'' request conforms to.
+type OrderDocumentsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
              "orderDocuments" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParams "orderId" Int64 :>
-                           QueryParam "approved" Bool :>
-                             QueryParams "siteId" Int64 :>
-                               QueryParam "maxResults" Int32 :>
-                                 Get '[JSON] OrderDocumentsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingOrderDocumentsListSortOrder
+                           :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingOrderDocumentsListSortField
+                                 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParams "orderId" Int64 :>
+                                     QueryParam "approved" Bool :>
+                                       QueryParams "siteId" Int64 :>
+                                         QueryParam "maxResults" Int32 :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON]
+                                                 OrderDocumentsListResponse
 
 -- | Retrieves a list of order documents, possibly filtered.
 --
--- /See:/ 'orderDocumentsList' smart constructor.
-data OrderDocumentsList = OrderDocumentsList
+-- /See:/ 'orderDocumentsList'' smart constructor.
+data OrderDocumentsList' = OrderDocumentsList'
     { _odlQuotaUser    :: !(Maybe Text)
     , _odlPrettyPrint  :: !Bool
     , _odlUserIp       :: !(Maybe Text)
     , _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe Int64)
     , _odlProfileId    :: !Int64
-    , _odlSortOrder    :: !(Maybe Text)
+    , _odlSortOrder    :: !(Maybe DfareportingOrderDocumentsListSortOrder)
     , _odlKey          :: !(Maybe Text)
     , _odlPageToken    :: !(Maybe Text)
     , _odlProjectId    :: !Int64
-    , _odlSortField    :: !(Maybe Text)
+    , _odlSortField    :: !(Maybe DfareportingOrderDocumentsListSortField)
     , _odlOauthToken   :: !(Maybe Text)
     , _odlOrderId      :: !(Maybe Int64)
     , _odlApproved     :: !(Maybe Bool)
     , _odlSiteId       :: !(Maybe Int64)
     , _odlMaxResults   :: !(Maybe Int32)
     , _odlFields       :: !(Maybe Text)
-    , _odlAlt          :: !Text
+    , _odlAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsList'' with the minimum fields required to make a request.
@@ -134,12 +147,12 @@ data OrderDocumentsList = OrderDocumentsList
 -- * 'odlFields'
 --
 -- * 'odlAlt'
-orderDocumentsList
+orderDocumentsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
-    -> OrderDocumentsList
-orderDocumentsList pOdlProfileId_ pOdlProjectId_ =
-    OrderDocumentsList
+    -> OrderDocumentsList'
+orderDocumentsList' pOdlProfileId_ pOdlProjectId_ =
+    OrderDocumentsList'
     { _odlQuotaUser = Nothing
     , _odlPrettyPrint = True
     , _odlUserIp = Nothing
@@ -157,7 +170,7 @@ orderDocumentsList pOdlProfileId_ pOdlProjectId_ =
     , _odlSiteId = Nothing
     , _odlMaxResults = Nothing
     , _odlFields = Nothing
-    , _odlAlt = "json"
+    , _odlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -202,7 +215,7 @@ odlProfileId
   = lens _odlProfileId (\ s a -> s{_odlProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-odlSortOrder :: Lens' OrderDocumentsList' (Maybe Text)
+odlSortOrder :: Lens' OrderDocumentsList' (Maybe DfareportingOrderDocumentsListSortOrder)
 odlSortOrder
   = lens _odlSortOrder (\ s a -> s{_odlSortOrder = a})
 
@@ -223,7 +236,7 @@ odlProjectId
   = lens _odlProjectId (\ s a -> s{_odlProjectId = a})
 
 -- | Field by which to sort the list.
-odlSortField :: Lens' OrderDocumentsList' (Maybe Text)
+odlSortField :: Lens' OrderDocumentsList' (Maybe DfareportingOrderDocumentsListSortField)
 odlSortField
   = lens _odlSortField (\ s a -> s{_odlSortField = a})
 
@@ -261,15 +274,15 @@ odlFields
   = lens _odlFields (\ s a -> s{_odlFields = a})
 
 -- | Data format for the response.
-odlAlt :: Lens' OrderDocumentsList' Text
+odlAlt :: Lens' OrderDocumentsList' Alt
 odlAlt = lens _odlAlt (\ s a -> s{_odlAlt = a})
 
 instance GoogleRequest OrderDocumentsList' where
         type Rs OrderDocumentsList' =
              OrderDocumentsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrderDocumentsList{..}
-          = go _odlQuotaUser _odlPrettyPrint _odlUserIp
+        requestWithRoute r u OrderDocumentsList'{..}
+          = go _odlQuotaUser (Just _odlPrettyPrint) _odlUserIp
               _odlSearchString
               _odlIds
               _odlProfileId
@@ -284,9 +297,9 @@ instance GoogleRequest OrderDocumentsList' where
               _odlSiteId
               _odlMaxResults
               _odlFields
-              _odlAlt
+              (Just _odlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrderDocumentsListAPI)
+                      (Proxy :: Proxy OrderDocumentsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Refund a portion of the order, up to the full amount paid.
 --
 -- /See:/ <https://developers.google.com/shopping-content Content API for Shopping Reference> for @ContentOrdersRefund@.
-module Content.Orders.Refund
+module Network.Google.Resource.Content.Orders.Refund
     (
     -- * REST Resource
-      OrdersRefundAPI
+      OrdersRefundResource
 
     -- * Creating a Request
-    , ordersRefund
-    , OrdersRefund
+    , ordersRefund'
+    , OrdersRefund'
 
     -- * Request Lenses
     , orQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.ShoppingContent.Types
 
 -- | A resource alias for @ContentOrdersRefund@ which the
--- 'OrdersRefund' request conforms to.
-type OrdersRefundAPI =
+-- 'OrdersRefund'' request conforms to.
+type OrdersRefundResource =
      Capture "merchantId" Word64 :>
        "orders" :>
          Capture "orderId" Text :>
-           "refund" :> Post '[JSON] OrdersRefundResponse
+           "refund" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] OrdersRefundResponse
 
 -- | Refund a portion of the order, up to the full amount paid.
 --
--- /See:/ 'ordersRefund' smart constructor.
-data OrdersRefund = OrdersRefund
+-- /See:/ 'ordersRefund'' smart constructor.
+data OrdersRefund' = OrdersRefund'
     { _orQuotaUser   :: !(Maybe Text)
     , _orMerchantId  :: !Word64
     , _orPrettyPrint :: !Bool
@@ -63,7 +72,7 @@ data OrdersRefund = OrdersRefund
     , _orOauthToken  :: !(Maybe Text)
     , _orOrderId     :: !Text
     , _orFields      :: !(Maybe Text)
-    , _orAlt         :: !Text
+    , _orAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersRefund'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data OrdersRefund = OrdersRefund
 -- * 'orFields'
 --
 -- * 'orAlt'
-ordersRefund
+ordersRefund'
     :: Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
-    -> OrdersRefund
-ordersRefund pOrMerchantId_ pOrOrderId_ =
-    OrdersRefund
+    -> OrdersRefund'
+ordersRefund' pOrMerchantId_ pOrOrderId_ =
+    OrdersRefund'
     { _orQuotaUser = Nothing
     , _orMerchantId = pOrMerchantId_
     , _orPrettyPrint = True
@@ -101,7 +110,7 @@ ordersRefund pOrMerchantId_ pOrOrderId_ =
     , _orOauthToken = Nothing
     , _orOrderId = pOrOrderId_
     , _orFields = Nothing
-    , _orAlt = "json"
+    , _orAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +157,22 @@ orFields :: Lens' OrdersRefund' (Maybe Text)
 orFields = lens _orFields (\ s a -> s{_orFields = a})
 
 -- | Data format for the response.
-orAlt :: Lens' OrdersRefund' Text
+orAlt :: Lens' OrdersRefund' Alt
 orAlt = lens _orAlt (\ s a -> s{_orAlt = a})
 
 instance GoogleRequest OrdersRefund' where
         type Rs OrdersRefund' = OrdersRefundResponse
         request = requestWithRoute defReq shoppingContentURL
-        requestWithRoute r u OrdersRefund{..}
-          = go _orQuotaUser _orMerchantId _orPrettyPrint
+        requestWithRoute r u OrdersRefund'{..}
+          = go _orQuotaUser _orMerchantId (Just _orPrettyPrint)
               _orUserIp
               _orKey
               _orOauthToken
               _orOrderId
               _orFields
-              _orAlt
+              (Just _orAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersRefundAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy OrdersRefundResource)
+                      r
                       u

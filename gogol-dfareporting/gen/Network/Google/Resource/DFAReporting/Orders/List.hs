@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of orders, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOrdersList@.
-module DFAReporting.Orders.List
+module Network.Google.Resource.DFAReporting.Orders.List
     (
     -- * REST Resource
-      OrdersListAPI
+      OrdersListResource
 
     -- * Creating a Request
-    , ordersList
-    , OrdersList
+    , ordersList'
+    , OrdersList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -51,42 +52,53 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOrdersList@ which the
--- 'OrdersList' request conforms to.
-type OrdersListAPI =
+-- 'OrdersList'' request conforms to.
+type OrdersListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "projects" :>
            Capture "projectId" Int64 :>
              "orders" :>
-               QueryParam "searchString" Text :>
-                 QueryParams "ids" Int64 :>
-                   QueryParam "sortOrder" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "sortField" Text :>
-                         QueryParams "siteId" Int64 :>
-                           QueryParam "maxResults" Int32 :>
-                             Get '[JSON] OrdersListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "searchString" Text :>
+                       QueryParams "ids" Int64 :>
+                         QueryParam "sortOrder"
+                           DfareportingOrdersListSortOrder
+                           :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "sortField"
+                                 DfareportingOrdersListSortField
+                                 :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParams "siteId" Int64 :>
+                                     QueryParam "maxResults" Int32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] OrdersListResponse
 
 -- | Retrieves a list of orders, possibly filtered.
 --
--- /See:/ 'ordersList' smart constructor.
-data OrdersList = OrdersList
+-- /See:/ 'ordersList'' smart constructor.
+data OrdersList' = OrdersList'
     { _olQuotaUser    :: !(Maybe Text)
     , _olPrettyPrint  :: !Bool
     , _olUserIp       :: !(Maybe Text)
     , _olSearchString :: !(Maybe Text)
     , _olIds          :: !(Maybe Int64)
     , _olProfileId    :: !Int64
-    , _olSortOrder    :: !(Maybe Text)
+    , _olSortOrder    :: !(Maybe DfareportingOrdersListSortOrder)
     , _olKey          :: !(Maybe Text)
     , _olPageToken    :: !(Maybe Text)
     , _olProjectId    :: !Int64
-    , _olSortField    :: !(Maybe Text)
+    , _olSortField    :: !(Maybe DfareportingOrdersListSortField)
     , _olOauthToken   :: !(Maybe Text)
     , _olSiteId       :: !(Maybe Int64)
     , _olMaxResults   :: !(Maybe Int32)
     , _olFields       :: !(Maybe Text)
-    , _olAlt          :: !Text
+    , _olAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
@@ -124,12 +136,12 @@ data OrdersList = OrdersList
 -- * 'olFields'
 --
 -- * 'olAlt'
-ordersList
+ordersList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
-    -> OrdersList
-ordersList pOlProfileId_ pOlProjectId_ =
-    OrdersList
+    -> OrdersList'
+ordersList' pOlProfileId_ pOlProjectId_ =
+    OrdersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olUserIp = Nothing
@@ -145,7 +157,7 @@ ordersList pOlProfileId_ pOlProjectId_ =
     , _olSiteId = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -187,7 +199,7 @@ olProfileId
   = lens _olProfileId (\ s a -> s{_olProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-olSortOrder :: Lens' OrdersList' (Maybe Text)
+olSortOrder :: Lens' OrdersList' (Maybe DfareportingOrdersListSortOrder)
 olSortOrder
   = lens _olSortOrder (\ s a -> s{_olSortOrder = a})
 
@@ -208,7 +220,7 @@ olProjectId
   = lens _olProjectId (\ s a -> s{_olProjectId = a})
 
 -- | Field by which to sort the list.
-olSortField :: Lens' OrdersList' (Maybe Text)
+olSortField :: Lens' OrdersList' (Maybe DfareportingOrdersListSortField)
 olSortField
   = lens _olSortField (\ s a -> s{_olSortField = a})
 
@@ -231,14 +243,14 @@ olFields :: Lens' OrdersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OrdersList' Text
+olAlt :: Lens' OrdersList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OrdersList{..}
-          = go _olQuotaUser _olPrettyPrint _olUserIp
+        requestWithRoute r u OrdersList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olUserIp
               _olSearchString
               _olIds
               _olProfileId
@@ -251,6 +263,8 @@ instance GoogleRequest OrdersList' where
               _olSiteId
               _olMaxResults
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrdersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy OrdersListResource)
+                      r
+                      u

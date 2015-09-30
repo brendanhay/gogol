@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTablePatch@.
-module FusionTables.Table.Patch
+module Network.Google.Resource.FusionTables.Table.Patch
     (
     -- * REST Resource
-      TablePatchAPI
+      TablePatchResource
 
     -- * Creating a Request
-    , tablePatch
-    , TablePatch
+    , tablePatch'
+    , TablePatch'
 
     -- * Request Lenses
     , tppQuotaUser
@@ -46,19 +47,25 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTablePatch@ which the
--- 'TablePatch' request conforms to.
-type TablePatchAPI =
+-- 'TablePatch'' request conforms to.
+type TablePatchResource =
      "tables" :>
        Capture "tableId" Text :>
-         QueryParam "replaceViewDefinition" Bool :>
-           Patch '[JSON] Table
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "replaceViewDefinition" Bool :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Patch '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated. This method supports patch
 -- semantics.
 --
--- /See:/ 'tablePatch' smart constructor.
-data TablePatch = TablePatch
+-- /See:/ 'tablePatch'' smart constructor.
+data TablePatch' = TablePatch'
     { _tppQuotaUser             :: !(Maybe Text)
     , _tppPrettyPrint           :: !Bool
     , _tppUserIp                :: !(Maybe Text)
@@ -67,7 +74,7 @@ data TablePatch = TablePatch
     , _tppOauthToken            :: !(Maybe Text)
     , _tppTableId               :: !Text
     , _tppFields                :: !(Maybe Text)
-    , _tppAlt                   :: !Text
+    , _tppAlt                   :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablePatch'' with the minimum fields required to make a request.
@@ -91,11 +98,11 @@ data TablePatch = TablePatch
 -- * 'tppFields'
 --
 -- * 'tppAlt'
-tablePatch
+tablePatch'
     :: Text -- ^ 'tableId'
-    -> TablePatch
-tablePatch pTppTableId_ =
-    TablePatch
+    -> TablePatch'
+tablePatch' pTppTableId_ =
+    TablePatch'
     { _tppQuotaUser = Nothing
     , _tppPrettyPrint = True
     , _tppUserIp = Nothing
@@ -104,7 +111,7 @@ tablePatch pTppTableId_ =
     , _tppOauthToken = Nothing
     , _tppTableId = pTppTableId_
     , _tppFields = Nothing
-    , _tppAlt = "json"
+    , _tppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,19 +164,21 @@ tppFields
   = lens _tppFields (\ s a -> s{_tppFields = a})
 
 -- | Data format for the response.
-tppAlt :: Lens' TablePatch' Text
+tppAlt :: Lens' TablePatch' Alt
 tppAlt = lens _tppAlt (\ s a -> s{_tppAlt = a})
 
 instance GoogleRequest TablePatch' where
         type Rs TablePatch' = Table
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TablePatch{..}
-          = go _tppQuotaUser _tppPrettyPrint _tppUserIp
+        requestWithRoute r u TablePatch'{..}
+          = go _tppQuotaUser (Just _tppPrettyPrint) _tppUserIp
               _tppReplaceViewDefinition
               _tppKey
               _tppOauthToken
               _tppTableId
               _tppFields
-              _tppAlt
+              (Just _tppAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablePatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TablePatchResource)
+                      r
+                      u

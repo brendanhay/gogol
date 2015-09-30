@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a call set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsDelete@.
-module Genomics.Callsets.Delete
+module Network.Google.Resource.Genomics.Callsets.Delete
     (
     -- * REST Resource
-      CallsetsDeleteAPI
+      CallsetsDeleteResource
 
     -- * Creating a Request
-    , callsetsDelete
-    , CallsetsDelete
+    , callsetsDelete'
+    , CallsetsDelete'
 
     -- * Request Lenses
     , cdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsDelete@ which the
--- 'CallsetsDelete' request conforms to.
-type CallsetsDeleteAPI =
+-- 'CallsetsDelete'' request conforms to.
+type CallsetsDeleteResource =
      "callsets" :>
-       Capture "callSetId" Text :> Delete '[JSON] ()
+       Capture "callSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a call set.
 --
--- /See:/ 'callsetsDelete' smart constructor.
-data CallsetsDelete = CallsetsDelete
+-- /See:/ 'callsetsDelete'' smart constructor.
+data CallsetsDelete' = CallsetsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
     , _cdUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CallsetsDelete = CallsetsDelete
     , _cdCallSetId   :: !Text
     , _cdOauthToken  :: !(Maybe Text)
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Text
+    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CallsetsDelete = CallsetsDelete
 -- * 'cdFields'
 --
 -- * 'cdAlt'
-callsetsDelete
+callsetsDelete'
     :: Text -- ^ 'callSetId'
-    -> CallsetsDelete
-callsetsDelete pCdCallSetId_ =
-    CallsetsDelete
+    -> CallsetsDelete'
+callsetsDelete' pCdCallSetId_ =
+    CallsetsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
     , _cdUserIp = Nothing
@@ -93,7 +101,7 @@ callsetsDelete pCdCallSetId_ =
     , _cdCallSetId = pCdCallSetId_
     , _cdOauthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = "json"
+    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ cdFields :: Lens' CallsetsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CallsetsDelete' Text
+cdAlt :: Lens' CallsetsDelete' Alt
 cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
 
 instance GoogleRequest CallsetsDelete' where
         type Rs CallsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsDelete{..}
-          = go _cdQuotaUser _cdPrettyPrint _cdUserIp _cdKey
+        requestWithRoute r u CallsetsDelete'{..}
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+              _cdKey
               _cdCallSetId
               _cdOauthToken
               _cdFields
-              _cdAlt
+              (Just _cdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsDeleteResource)
                       r
                       u

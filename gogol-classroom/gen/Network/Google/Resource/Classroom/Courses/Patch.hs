@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -24,14 +25,14 @@
 -- are specified in the update mask or if no update mask is supplied.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesPatch@.
-module Classroom.Courses.Patch
+module Network.Google.Resource.Classroom.Courses.Patch
     (
     -- * REST Resource
-      CoursesPatchAPI
+      CoursesPatchResource
 
     -- * Creating a Request
-    , coursesPatch
-    , CoursesPatch
+    , coursesPatch'
+    , CoursesPatch'
 
     -- * Request Lenses
     , cpXgafv
@@ -55,12 +56,26 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesPatch@ which the
--- 'CoursesPatch' request conforms to.
-type CoursesPatchAPI =
+-- 'CoursesPatch'' request conforms to.
+type CoursesPatchResource =
      "v1" :>
        "courses" :>
          Capture "id" Text :>
-           QueryParam "updateMask" Text :> Patch '[JSON] Course
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "updateMask" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Patch '[JSON] Course
 
 -- | Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -69,8 +84,8 @@ type CoursesPatchAPI =
 -- exists with the requested ID. * \`INVALID_ARGUMENT\` if invalid fields
 -- are specified in the update mask or if no update mask is supplied.
 --
--- /See:/ 'coursesPatch' smart constructor.
-data CoursesPatch = CoursesPatch
+-- /See:/ 'coursesPatch'' smart constructor.
+data CoursesPatch' = CoursesPatch'
     { _cpXgafv          :: !(Maybe Text)
     , _cpQuotaUser      :: !(Maybe Text)
     , _cpPrettyPrint    :: !Bool
@@ -121,11 +136,11 @@ data CoursesPatch = CoursesPatch
 -- * 'cpCallback'
 --
 -- * 'cpAlt'
-coursesPatch
+coursesPatch'
     :: Text -- ^ 'id'
-    -> CoursesPatch
-coursesPatch pCpId_ =
-    CoursesPatch
+    -> CoursesPatch'
+coursesPatch' pCpId_ =
+    CoursesPatch'
     { _cpXgafv = Nothing
     , _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
@@ -230,11 +245,11 @@ cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesPatch{..}
-          = go _cpXgafv _cpQuotaUser _cpPrettyPrint
+        requestWithRoute r u CoursesPatch'{..}
+          = go _cpXgafv _cpQuotaUser (Just _cpPrettyPrint)
               _cpUploadProtocol
               _cpUpdateMask
-              _cpPp
+              (Just _cpPp)
               _cpAccessToken
               _cpUploadType
               _cpBearerToken
@@ -243,7 +258,9 @@ instance GoogleRequest CoursesPatch' where
               _cpOauthToken
               _cpFields
               _cpCallback
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CoursesPatchAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesPatchResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a subscription of the customer.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsGet@.
-module Reseller.Subscriptions.Get
+module Network.Google.Resource.Reseller.Subscriptions.Get
     (
     -- * REST Resource
-      SubscriptionsGetAPI
+      SubscriptionsGetResource
 
     -- * Creating a Request
-    , subscriptionsGet
-    , SubscriptionsGet
+    , subscriptionsGet'
+    , SubscriptionsGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsGet@ which the
--- 'SubscriptionsGet' request conforms to.
-type SubscriptionsGetAPI =
+-- 'SubscriptionsGet'' request conforms to.
+type SubscriptionsGetResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             Get '[JSON] Subscription
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Subscription
 
 -- | Gets a subscription of the customer.
 --
--- /See:/ 'subscriptionsGet' smart constructor.
-data SubscriptionsGet = SubscriptionsGet
+-- /See:/ 'subscriptionsGet'' smart constructor.
+data SubscriptionsGet' = SubscriptionsGet'
     { _sgQuotaUser      :: !(Maybe Text)
     , _sgPrettyPrint    :: !Bool
     , _sgUserIp         :: !(Maybe Text)
@@ -64,7 +71,7 @@ data SubscriptionsGet = SubscriptionsGet
     , _sgOauthToken     :: !(Maybe Text)
     , _sgSubscriptionId :: !Text
     , _sgFields         :: !(Maybe Text)
-    , _sgAlt            :: !Text
+    , _sgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data SubscriptionsGet = SubscriptionsGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-subscriptionsGet
+subscriptionsGet'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsGet
-subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
-    SubscriptionsGet
+    -> SubscriptionsGet'
+subscriptionsGet' pSgCustomerId_ pSgSubscriptionId_ =
+    SubscriptionsGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgUserIp = Nothing
@@ -102,7 +109,7 @@ subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
     , _sgOauthToken = Nothing
     , _sgSubscriptionId = pSgSubscriptionId_
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +157,22 @@ sgFields :: Lens' SubscriptionsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SubscriptionsGet' Text
+sgAlt :: Lens' SubscriptionsGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SubscriptionsGet' where
         type Rs SubscriptionsGet' = Subscription
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgUserIp
+        requestWithRoute r u SubscriptionsGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
               _sgCustomerId
               _sgKey
               _sgOauthToken
               _sgSubscriptionId
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsGetAPI)
+                      (Proxy :: Proxy SubscriptionsGetResource)
                       r
                       u

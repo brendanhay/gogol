@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsStoreInfosCountryGet@.
-module PlayMoviesPartner.Accounts.StoreInfos.Country.Get
+module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     (
     -- * REST Resource
-      AccountsStoreInfosCountryGetAPI
+      AccountsStoreInfosCountryGetResource
 
     -- * Creating a Request
-    , accountsStoreInfosCountryGet
-    , AccountsStoreInfosCountryGet
+    , accountsStoreInfosCountryGet'
+    , AccountsStoreInfosCountryGet'
 
     -- * Request Lenses
     , asicgXgafv
@@ -53,22 +54,36 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsStoreInfosCountryGet@ which the
--- 'AccountsStoreInfosCountryGet' request conforms to.
-type AccountsStoreInfosCountryGetAPI =
+-- 'AccountsStoreInfosCountryGet'' request conforms to.
+type AccountsStoreInfosCountryGetResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "storeInfos" :>
              Capture "videoId" Text :>
                "country" :>
-                 Capture "country" Text :> Get '[JSON] StoreInfo
+                 Capture "country" Text :>
+                   QueryParam "$.xgafv" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "upload_protocol" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "oauth_token" Text :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" Text :>
+                                             Get '[JSON] StoreInfo
 
 -- | Get a StoreInfo given its video id and country. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
-data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet
+-- /See:/ 'accountsStoreInfosCountryGet'' smart constructor.
+data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     { _asicgXgafv          :: !(Maybe Text)
     , _asicgQuotaUser      :: !(Maybe Text)
     , _asicgPrettyPrint    :: !Bool
@@ -122,13 +137,13 @@ data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet
 -- * 'asicgCallback'
 --
 -- * 'asicgAlt'
-accountsStoreInfosCountryGet
+accountsStoreInfosCountryGet'
     :: Text -- ^ 'country'
     -> Text -- ^ 'videoId'
     -> Text -- ^ 'accountId'
-    -> AccountsStoreInfosCountryGet
-accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
-    AccountsStoreInfosCountryGet
+    -> AccountsStoreInfosCountryGet'
+accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
+    AccountsStoreInfosCountryGet'
     { _asicgXgafv = Nothing
     , _asicgQuotaUser = Nothing
     , _asicgPrettyPrint = True
@@ -242,11 +257,13 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
         type Rs AccountsStoreInfosCountryGet' = StoreInfo
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsStoreInfosCountryGet{..}
-          = go _asicgXgafv _asicgQuotaUser _asicgPrettyPrint
+        requestWithRoute r u
+          AccountsStoreInfosCountryGet'{..}
+          = go _asicgXgafv _asicgQuotaUser
+              (Just _asicgPrettyPrint)
               _asicgUploadProtocol
               _asicgCountry
-              _asicgPp
+              (Just _asicgPp)
               _asicgAccessToken
               _asicgUploadType
               _asicgVideoId
@@ -256,9 +273,9 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
               _asicgOauthToken
               _asicgFields
               _asicgCallback
-              _asicgAlt
+              (Just _asicgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsStoreInfosCountryGetAPI)
+                      (Proxy :: Proxy AccountsStoreInfosCountryGetResource)
                       r
                       u

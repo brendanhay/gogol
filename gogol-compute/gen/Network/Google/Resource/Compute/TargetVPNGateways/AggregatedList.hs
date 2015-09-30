@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of target VPN gateways grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetVPNGatewaysAggregatedList@.
-module Compute.TargetVPNGateways.AggregatedList
+module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
     (
     -- * REST Resource
-      TargetVPNGatewaysAggregatedListAPI
+      TargetVPNGatewaysAggregatedListResource
 
     -- * Creating a Request
-    , targetVPNGatewaysAggregatedList
-    , TargetVPNGatewaysAggregatedList
+    , targetVPNGatewaysAggregatedList'
+    , TargetVPNGatewaysAggregatedList'
 
     -- * Request Lenses
     , tvgalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetVPNGatewaysAggregatedList@ which the
--- 'TargetVPNGatewaysAggregatedList' request conforms to.
-type TargetVPNGatewaysAggregatedListAPI =
+-- 'TargetVPNGatewaysAggregatedList'' request conforms to.
+type TargetVPNGatewaysAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "targetVpnGateways" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TargetVPNGatewayAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TargetVPNGatewayAggregatedList
 
 -- | Retrieves the list of target VPN gateways grouped by scope.
 --
--- /See:/ 'targetVPNGatewaysAggregatedList' smart constructor.
-data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList
+-- /See:/ 'targetVPNGatewaysAggregatedList'' smart constructor.
+data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
     { _tvgalQuotaUser   :: !(Maybe Text)
     , _tvgalPrettyPrint :: !Bool
     , _tvgalProject     :: !Text
@@ -70,7 +78,7 @@ data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList
     , _tvgalOauthToken  :: !(Maybe Text)
     , _tvgalMaxResults  :: !Word32
     , _tvgalFields      :: !(Maybe Text)
-    , _tvgalAlt         :: !Text
+    , _tvgalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList
 -- * 'tvgalFields'
 --
 -- * 'tvgalAlt'
-targetVPNGatewaysAggregatedList
+targetVPNGatewaysAggregatedList'
     :: Text -- ^ 'project'
-    -> TargetVPNGatewaysAggregatedList
-targetVPNGatewaysAggregatedList pTvgalProject_ =
-    TargetVPNGatewaysAggregatedList
+    -> TargetVPNGatewaysAggregatedList'
+targetVPNGatewaysAggregatedList' pTvgalProject_ =
+    TargetVPNGatewaysAggregatedList'
     { _tvgalQuotaUser = Nothing
     , _tvgalPrettyPrint = True
     , _tvgalProject = pTvgalProject_
@@ -113,7 +121,7 @@ targetVPNGatewaysAggregatedList pTvgalProject_ =
     , _tvgalOauthToken = Nothing
     , _tvgalMaxResults = 500
     , _tvgalFields = Nothing
-    , _tvgalAlt = "json"
+    , _tvgalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +196,7 @@ tvgalFields
   = lens _tvgalFields (\ s a -> s{_tvgalFields = a})
 
 -- | Data format for the response.
-tvgalAlt :: Lens' TargetVPNGatewaysAggregatedList' Text
+tvgalAlt :: Lens' TargetVPNGatewaysAggregatedList' Alt
 tvgalAlt = lens _tvgalAlt (\ s a -> s{_tvgalAlt = a})
 
 instance GoogleRequest
@@ -197,8 +205,9 @@ instance GoogleRequest
              TargetVPNGatewayAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u
-          TargetVPNGatewaysAggregatedList{..}
-          = go _tvgalQuotaUser _tvgalPrettyPrint _tvgalProject
+          TargetVPNGatewaysAggregatedList'{..}
+          = go _tvgalQuotaUser (Just _tvgalPrettyPrint)
+              _tvgalProject
               _tvgalUserIp
               _tvgalKey
               _tvgalFilter
@@ -206,9 +215,10 @@ instance GoogleRequest
               _tvgalOauthToken
               (Just _tvgalMaxResults)
               _tvgalFields
-              _tvgalAlt
+              (Just _tvgalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetVPNGatewaysAggregatedListAPI)
+                      (Proxy ::
+                         Proxy TargetVPNGatewaysAggregatedListResource)
                       r
                       u

@@ -271,6 +271,49 @@ instance ToJSON CalendarListEntry where
                   ("timeZone" .=) <$> _cleTimeZone,
                   ("description" .=) <$> _cleDescription])
 
+-- | The notifications that the authenticated user is receiving for this
+-- calendar.
+--
+-- /See:/ 'calendarListEntryNotificationSettings' smart constructor.
+newtype CalendarListEntryNotificationSettings = CalendarListEntryNotificationSettings
+    { _clensNotifications :: Maybe [Maybe CalendarNotification]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CalendarListEntryNotificationSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clensNotifications'
+calendarListEntryNotificationSettings
+    :: CalendarListEntryNotificationSettings
+calendarListEntryNotificationSettings =
+    CalendarListEntryNotificationSettings
+    { _clensNotifications = Nothing
+    }
+
+-- | The list of notifications set for this calendar.
+clensNotifications :: Lens' CalendarListEntryNotificationSettings [Maybe CalendarNotification]
+clensNotifications
+  = lens _clensNotifications
+      (\ s a -> s{_clensNotifications = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         CalendarListEntryNotificationSettings where
+        parseJSON
+          = withObject "CalendarListEntryNotificationSettings"
+              (\ o ->
+                 CalendarListEntryNotificationSettings <$>
+                   (o .:? "notifications" .!= mempty))
+
+instance ToJSON CalendarListEntryNotificationSettings
+         where
+        toJSON CalendarListEntryNotificationSettings{..}
+          = object
+              (catMaybes
+                 [("notifications" .=) <$> _clensNotifications])
+
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
@@ -769,6 +812,77 @@ instance ToJSON Event where
                   ("description" .=) <$> _eDescription,
                   ("organizer" .=) <$> _eOrganizer])
 
+-- | The scope of the rule.
+--
+-- /See:/ 'aCLRuleScope' smart constructor.
+data ACLRuleScope = ACLRuleScope
+    { _arsValue :: !(Maybe Text)
+    , _arsType  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ACLRuleScope' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'arsValue'
+--
+-- * 'arsType'
+aCLRuleScope
+    :: ACLRuleScope
+aCLRuleScope =
+    ACLRuleScope
+    { _arsValue = Nothing
+    , _arsType = Nothing
+    }
+
+-- | The email address of a user or group, or the name of a domain, depending
+-- on the scope type. Omitted for type \"default\".
+arsValue :: Lens' ACLRuleScope (Maybe Text)
+arsValue = lens _arsValue (\ s a -> s{_arsValue = a})
+
+-- | The type of the scope. Possible values are: - \"default\" - The public
+-- scope. This is the default value. - \"user\" - Limits the scope to a
+-- single user. - \"group\" - Limits the scope to a group. - \"domain\" -
+-- Limits the scope to a domain. Note: The permissions granted to the
+-- \"default\", or public, scope apply to any user, authenticated or not.
+arsType :: Lens' ACLRuleScope (Maybe Text)
+arsType = lens _arsType (\ s a -> s{_arsType = a})
+
+instance FromJSON ACLRuleScope where
+        parseJSON
+          = withObject "ACLRuleScope"
+              (\ o ->
+                 ACLRuleScope <$> (o .:? "value") <*> (o .:? "type"))
+
+instance ToJSON ACLRuleScope where
+        toJSON ACLRuleScope{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _arsValue,
+                  ("type" .=) <$> _arsType])
+
+-- | A global palette of event colors, mapping from the color ID to its
+-- definition. An event resource may refer to one of these color IDs in its
+-- color field. Read-only.
+--
+-- /See:/ 'colorsEvent' smart constructor.
+data ColorsEvent =
+    ColorsEvent
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ColorsEvent' with the minimum fields required to make a request.
+--
+colorsEvent
+    :: ColorsEvent
+colorsEvent = ColorsEvent
+
+instance FromJSON ColorsEvent where
+        parseJSON
+          = withObject "ColorsEvent" (\ o -> pure ColorsEvent)
+
+instance ToJSON ColorsEvent where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'freeBusyRequestItem' smart constructor.
 newtype FreeBusyRequestItem = FreeBusyRequestItem
@@ -961,6 +1075,74 @@ instance ToJSON EventAttachment where
                   ("mimeType" .=) <$> _eaMimeType,
                   ("title" .=) <$> _eaTitle,
                   ("fileId" .=) <$> _eaFileId])
+
+-- | The creator of the event. Read-only.
+--
+-- /See:/ 'eventCreator' smart constructor.
+data EventCreator = EventCreator
+    { _ecEmail       :: !(Maybe Text)
+    , _ecSelf        :: !Bool
+    , _ecDisplayName :: !(Maybe Text)
+    , _ecId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventCreator' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecEmail'
+--
+-- * 'ecSelf'
+--
+-- * 'ecDisplayName'
+--
+-- * 'ecId'
+eventCreator
+    :: EventCreator
+eventCreator =
+    EventCreator
+    { _ecEmail = Nothing
+    , _ecSelf = False
+    , _ecDisplayName = Nothing
+    , _ecId = Nothing
+    }
+
+-- | The creator\'s email address, if available.
+ecEmail :: Lens' EventCreator (Maybe Text)
+ecEmail = lens _ecEmail (\ s a -> s{_ecEmail = a})
+
+-- | Whether the creator corresponds to the calendar on which this copy of
+-- the event appears. Read-only. The default is False.
+ecSelf :: Lens' EventCreator Bool
+ecSelf = lens _ecSelf (\ s a -> s{_ecSelf = a})
+
+-- | The creator\'s name, if available.
+ecDisplayName :: Lens' EventCreator (Maybe Text)
+ecDisplayName
+  = lens _ecDisplayName
+      (\ s a -> s{_ecDisplayName = a})
+
+-- | The creator\'s Profile ID, if available. It corresponds to theid field
+-- in the People collection of the Google+ API
+ecId :: Lens' EventCreator (Maybe Text)
+ecId = lens _ecId (\ s a -> s{_ecId = a})
+
+instance FromJSON EventCreator where
+        parseJSON
+          = withObject "EventCreator"
+              (\ o ->
+                 EventCreator <$>
+                   (o .:? "email") <*> (o .:? "self" .!= False) <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON EventCreator where
+        toJSON EventCreator{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _ecEmail, Just ("self" .= _ecSelf),
+                  ("displayName" .=) <$> _ecDisplayName,
+                  ("id" .=) <$> _ecId])
 
 --
 -- /See:/ 'timePeriod' smart constructor.
@@ -1282,6 +1464,27 @@ instance ToJSON Channel where
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
+-- | Expansion of groups.
+--
+-- /See:/ 'freeBusyResponseGroups' smart constructor.
+data FreeBusyResponseGroups =
+    FreeBusyResponseGroups
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FreeBusyResponseGroups' with the minimum fields required to make a request.
+--
+freeBusyResponseGroups
+    :: FreeBusyResponseGroups
+freeBusyResponseGroups = FreeBusyResponseGroups
+
+instance FromJSON FreeBusyResponseGroups where
+        parseJSON
+          = withObject "FreeBusyResponseGroups"
+              (\ o -> pure FreeBusyResponseGroups)
+
+instance ToJSON FreeBusyResponseGroups where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'setting' smart constructor.
 data Setting = Setting
@@ -1347,6 +1550,103 @@ instance ToJSON Setting where
                  [("etag" .=) <$> _setEtag, Just ("kind" .= _setKind),
                   ("value" .=) <$> _setValue, ("id" .=) <$> _setId])
 
+-- | Information about the event\'s reminders for the authenticated user.
+--
+-- /See:/ 'eventReminders' smart constructor.
+data EventReminders = EventReminders
+    { _erOverrides  :: !(Maybe [Maybe EventReminder])
+    , _erUseDefault :: !(Maybe Bool)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventReminders' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'erOverrides'
+--
+-- * 'erUseDefault'
+eventReminders
+    :: EventReminders
+eventReminders =
+    EventReminders
+    { _erOverrides = Nothing
+    , _erUseDefault = Nothing
+    }
+
+-- | If the event doesn\'t use the default reminders, this lists the
+-- reminders specific to the event, or, if not set, indicates that no
+-- reminders are set for this event. The maximum number of override
+-- reminders is 5.
+erOverrides :: Lens' EventReminders [Maybe EventReminder]
+erOverrides
+  = lens _erOverrides (\ s a -> s{_erOverrides = a}) .
+      _Default
+      . _Coerce
+
+-- | Whether the default reminders of the calendar apply to the event.
+erUseDefault :: Lens' EventReminders (Maybe Bool)
+erUseDefault
+  = lens _erUseDefault (\ s a -> s{_erUseDefault = a})
+
+instance FromJSON EventReminders where
+        parseJSON
+          = withObject "EventReminders"
+              (\ o ->
+                 EventReminders <$>
+                   (o .:? "overrides" .!= mempty) <*>
+                     (o .:? "useDefault"))
+
+instance ToJSON EventReminders where
+        toJSON EventReminders{..}
+          = object
+              (catMaybes
+                 [("overrides" .=) <$> _erOverrides,
+                  ("useDefault" .=) <$> _erUseDefault])
+
+-- | A global palette of calendar colors, mapping from the color ID to its
+-- definition. A calendarListEntry resource refers to one of these color
+-- IDs in its color field. Read-only.
+--
+-- /See:/ 'colorsCalendar' smart constructor.
+data ColorsCalendar =
+    ColorsCalendar
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ColorsCalendar' with the minimum fields required to make a request.
+--
+colorsCalendar
+    :: ColorsCalendar
+colorsCalendar = ColorsCalendar
+
+instance FromJSON ColorsCalendar where
+        parseJSON
+          = withObject "ColorsCalendar"
+              (\ o -> pure ColorsCalendar)
+
+instance ToJSON ColorsCalendar where
+        toJSON = const (Object mempty)
+
+-- | Additional parameters controlling delivery channel behavior. Optional.
+--
+-- /See:/ 'channelParams' smart constructor.
+data ChannelParams =
+    ChannelParams
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ChannelParams' with the minimum fields required to make a request.
+--
+channelParams
+    :: ChannelParams
+channelParams = ChannelParams
+
+instance FromJSON ChannelParams where
+        parseJSON
+          = withObject "ChannelParams"
+              (\ o -> pure ChannelParams)
+
+instance ToJSON ChannelParams where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'calendarNotification' smart constructor.
 data CalendarNotification = CalendarNotification
@@ -1400,6 +1700,29 @@ instance ToJSON CalendarNotification where
               (catMaybes
                  [("method" .=) <$> _cnMethod,
                   ("type" .=) <$> _cnType])
+
+-- | Properties that are private to the copy of the event that appears on
+-- this calendar.
+--
+-- /See:/ 'eventExtendedPropertiesPrivate' smart constructor.
+data EventExtendedPropertiesPrivate =
+    EventExtendedPropertiesPrivate
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventExtendedPropertiesPrivate' with the minimum fields required to make a request.
+--
+eventExtendedPropertiesPrivate
+    :: EventExtendedPropertiesPrivate
+eventExtendedPropertiesPrivate = EventExtendedPropertiesPrivate
+
+instance FromJSON EventExtendedPropertiesPrivate
+         where
+        parseJSON
+          = withObject "EventExtendedPropertiesPrivate"
+              (\ o -> pure EventExtendedPropertiesPrivate)
+
+instance ToJSON EventExtendedPropertiesPrivate where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'events' smart constructor.
@@ -1696,6 +2019,55 @@ instance ToJSON FreeBusyResponse where
                   ("calendars" .=) <$> _fbrCalendars,
                   ("timeMax" .=) <$> _fbrTimeMax])
 
+-- | Extended properties of the event.
+--
+-- /See:/ 'eventExtendedProperties' smart constructor.
+data EventExtendedProperties = EventExtendedProperties
+    { _eepPrivate :: !(Maybe EventExtendedPropertiesPrivate)
+    , _eepShared  :: !(Maybe EventExtendedPropertiesShared)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventExtendedProperties' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eepPrivate'
+--
+-- * 'eepShared'
+eventExtendedProperties
+    :: EventExtendedProperties
+eventExtendedProperties =
+    EventExtendedProperties
+    { _eepPrivate = Nothing
+    , _eepShared = Nothing
+    }
+
+-- | Properties that are private to the copy of the event that appears on
+-- this calendar.
+eepPrivate :: Lens' EventExtendedProperties (Maybe EventExtendedPropertiesPrivate)
+eepPrivate
+  = lens _eepPrivate (\ s a -> s{_eepPrivate = a})
+
+-- | Properties that are shared between copies of the event on other
+-- attendees\' calendars.
+eepShared :: Lens' EventExtendedProperties (Maybe EventExtendedPropertiesShared)
+eepShared
+  = lens _eepShared (\ s a -> s{_eepShared = a})
+
+instance FromJSON EventExtendedProperties where
+        parseJSON
+          = withObject "EventExtendedProperties"
+              (\ o ->
+                 EventExtendedProperties <$>
+                   (o .:? "private") <*> (o .:? "shared"))
+
+instance ToJSON EventExtendedProperties where
+        toJSON EventExtendedProperties{..}
+          = object
+              (catMaybes
+                 [("private" .=) <$> _eepPrivate,
+                  ("shared" .=) <$> _eepShared])
+
 --
 -- /See:/ 'calendar' smart constructor.
 data Calendar = Calendar
@@ -1938,6 +2310,78 @@ instance ToJSON EventAttendee where
                   Just ("optional" .= _eaOptional),
                   ("organizer" .=) <$> _eaOrganizer])
 
+-- | The organizer of the event. If the organizer is also an attendee, this
+-- is indicated with a separate entry in attendees with the organizer field
+-- set to True. To change the organizer, use the move operation. Read-only,
+-- except when importing an event.
+--
+-- /See:/ 'eventOrganizer' smart constructor.
+data EventOrganizer = EventOrganizer
+    { _eoEmail       :: !(Maybe Text)
+    , _eoSelf        :: !Bool
+    , _eoDisplayName :: !(Maybe Text)
+    , _eoId          :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventOrganizer' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eoEmail'
+--
+-- * 'eoSelf'
+--
+-- * 'eoDisplayName'
+--
+-- * 'eoId'
+eventOrganizer
+    :: EventOrganizer
+eventOrganizer =
+    EventOrganizer
+    { _eoEmail = Nothing
+    , _eoSelf = False
+    , _eoDisplayName = Nothing
+    , _eoId = Nothing
+    }
+
+-- | The organizer\'s email address, if available. It must be a valid email
+-- address as per RFC5322.
+eoEmail :: Lens' EventOrganizer (Maybe Text)
+eoEmail = lens _eoEmail (\ s a -> s{_eoEmail = a})
+
+-- | Whether the organizer corresponds to the calendar on which this copy of
+-- the event appears. Read-only. The default is False.
+eoSelf :: Lens' EventOrganizer Bool
+eoSelf = lens _eoSelf (\ s a -> s{_eoSelf = a})
+
+-- | The organizer\'s name, if available.
+eoDisplayName :: Lens' EventOrganizer (Maybe Text)
+eoDisplayName
+  = lens _eoDisplayName
+      (\ s a -> s{_eoDisplayName = a})
+
+-- | The organizer\'s Profile ID, if available. It corresponds to theid field
+-- in the People collection of the Google+ API
+eoId :: Lens' EventOrganizer (Maybe Text)
+eoId = lens _eoId (\ s a -> s{_eoId = a})
+
+instance FromJSON EventOrganizer where
+        parseJSON
+          = withObject "EventOrganizer"
+              (\ o ->
+                 EventOrganizer <$>
+                   (o .:? "email") <*> (o .:? "self" .!= False) <*>
+                     (o .:? "displayName")
+                     <*> (o .:? "id"))
+
+instance ToJSON EventOrganizer where
+        toJSON EventOrganizer{..}
+          = object
+              (catMaybes
+                 [("email" .=) <$> _eoEmail, Just ("self" .= _eoSelf),
+                  ("displayName" .=) <$> _eoDisplayName,
+                  ("id" .=) <$> _eoId])
+
 --
 -- /See:/ 'eventDateTime' smart constructor.
 data EventDateTime = EventDateTime
@@ -1999,6 +2443,27 @@ instance ToJSON EventDateTime where
                  [("date" .=) <$> _edtDate,
                   ("timeZone" .=) <$> _edtTimeZone,
                   ("dateTime" .=) <$> _edtDateTime])
+
+-- | Preferences.
+--
+-- /See:/ 'eventGadgetPreferences' smart constructor.
+data EventGadgetPreferences =
+    EventGadgetPreferences
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventGadgetPreferences' with the minimum fields required to make a request.
+--
+eventGadgetPreferences
+    :: EventGadgetPreferences
+eventGadgetPreferences = EventGadgetPreferences
+
+instance FromJSON EventGadgetPreferences where
+        parseJSON
+          = withObject "EventGadgetPreferences"
+              (\ o -> pure EventGadgetPreferences)
+
+instance ToJSON EventGadgetPreferences where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'calendarList' smart constructor.
@@ -2177,6 +2642,118 @@ instance ToJSON FreeBusyRequest where
                   Just ("timeZone" .= _fTimeZone),
                   ("timeMax" .=) <$> _fTimeMax])
 
+-- | A gadget that extends this event.
+--
+-- /See:/ 'eventGadget' smart constructor.
+data EventGadget = EventGadget
+    { _egHeight      :: !(Maybe Int32)
+    , _egDisplay     :: !(Maybe Text)
+    , _egPreferences :: !(Maybe EventGadgetPreferences)
+    , _egLink        :: !(Maybe Text)
+    , _egIconLink    :: !(Maybe Text)
+    , _egWidth       :: !(Maybe Int32)
+    , _egTitle       :: !(Maybe Text)
+    , _egType        :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventGadget' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'egHeight'
+--
+-- * 'egDisplay'
+--
+-- * 'egPreferences'
+--
+-- * 'egLink'
+--
+-- * 'egIconLink'
+--
+-- * 'egWidth'
+--
+-- * 'egTitle'
+--
+-- * 'egType'
+eventGadget
+    :: EventGadget
+eventGadget =
+    EventGadget
+    { _egHeight = Nothing
+    , _egDisplay = Nothing
+    , _egPreferences = Nothing
+    , _egLink = Nothing
+    , _egIconLink = Nothing
+    , _egWidth = Nothing
+    , _egTitle = Nothing
+    , _egType = Nothing
+    }
+
+-- | The gadget\'s height in pixels. The height must be an integer greater
+-- than 0. Optional.
+egHeight :: Lens' EventGadget (Maybe Int32)
+egHeight = lens _egHeight (\ s a -> s{_egHeight = a})
+
+-- | The gadget\'s display mode. Optional. Possible values are: - \"icon\" -
+-- The gadget displays next to the event\'s title in the calendar view. -
+-- \"chip\" - The gadget displays when the event is clicked.
+egDisplay :: Lens' EventGadget (Maybe Text)
+egDisplay
+  = lens _egDisplay (\ s a -> s{_egDisplay = a})
+
+-- | Preferences.
+egPreferences :: Lens' EventGadget (Maybe EventGadgetPreferences)
+egPreferences
+  = lens _egPreferences
+      (\ s a -> s{_egPreferences = a})
+
+-- | The gadget\'s URL. The URL scheme must be HTTPS.
+egLink :: Lens' EventGadget (Maybe Text)
+egLink = lens _egLink (\ s a -> s{_egLink = a})
+
+-- | The gadget\'s icon URL. The URL scheme must be HTTPS.
+egIconLink :: Lens' EventGadget (Maybe Text)
+egIconLink
+  = lens _egIconLink (\ s a -> s{_egIconLink = a})
+
+-- | The gadget\'s width in pixels. The width must be an integer greater than
+-- 0. Optional.
+egWidth :: Lens' EventGadget (Maybe Int32)
+egWidth = lens _egWidth (\ s a -> s{_egWidth = a})
+
+-- | The gadget\'s title.
+egTitle :: Lens' EventGadget (Maybe Text)
+egTitle = lens _egTitle (\ s a -> s{_egTitle = a})
+
+-- | The gadget\'s type.
+egType :: Lens' EventGadget (Maybe Text)
+egType = lens _egType (\ s a -> s{_egType = a})
+
+instance FromJSON EventGadget where
+        parseJSON
+          = withObject "EventGadget"
+              (\ o ->
+                 EventGadget <$>
+                   (o .:? "height") <*> (o .:? "display") <*>
+                     (o .:? "preferences")
+                     <*> (o .:? "link")
+                     <*> (o .:? "iconLink")
+                     <*> (o .:? "width")
+                     <*> (o .:? "title")
+                     <*> (o .:? "type"))
+
+instance ToJSON EventGadget where
+        toJSON EventGadget{..}
+          = object
+              (catMaybes
+                 [("height" .=) <$> _egHeight,
+                  ("display" .=) <$> _egDisplay,
+                  ("preferences" .=) <$> _egPreferences,
+                  ("link" .=) <$> _egLink,
+                  ("iconLink" .=) <$> _egIconLink,
+                  ("width" .=) <$> _egWidth, ("title" .=) <$> _egTitle,
+                  ("type" .=) <$> _egType])
+
 --
 -- /See:/ 'aCLRule' smart constructor.
 data ACLRule = ACLRule
@@ -2257,6 +2834,49 @@ instance ToJSON ACLRule where
                  [("etag" .=) <$> _arEtag, Just ("kind" .= _arKind),
                   ("role" .=) <$> _arRole, ("scope" .=) <$> _arScope,
                   ("id" .=) <$> _arId])
+
+-- | List of free\/busy information for calendars.
+--
+-- /See:/ 'freeBusyResponseCalendars' smart constructor.
+data FreeBusyResponseCalendars =
+    FreeBusyResponseCalendars
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FreeBusyResponseCalendars' with the minimum fields required to make a request.
+--
+freeBusyResponseCalendars
+    :: FreeBusyResponseCalendars
+freeBusyResponseCalendars = FreeBusyResponseCalendars
+
+instance FromJSON FreeBusyResponseCalendars where
+        parseJSON
+          = withObject "FreeBusyResponseCalendars"
+              (\ o -> pure FreeBusyResponseCalendars)
+
+instance ToJSON FreeBusyResponseCalendars where
+        toJSON = const (Object mempty)
+
+-- | Properties that are shared between copies of the event on other
+-- attendees\' calendars.
+--
+-- /See:/ 'eventExtendedPropertiesShared' smart constructor.
+data EventExtendedPropertiesShared =
+    EventExtendedPropertiesShared
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventExtendedPropertiesShared' with the minimum fields required to make a request.
+--
+eventExtendedPropertiesShared
+    :: EventExtendedPropertiesShared
+eventExtendedPropertiesShared = EventExtendedPropertiesShared
+
+instance FromJSON EventExtendedPropertiesShared where
+        parseJSON
+          = withObject "EventExtendedPropertiesShared"
+              (\ o -> pure EventExtendedPropertiesShared)
+
+instance ToJSON EventExtendedPropertiesShared where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'colors' smart constructor.
@@ -2464,3 +3084,50 @@ instance ToJSON ACL where
                   Just ("kind" .= _aclKind),
                   ("items" .=) <$> _aclItems,
                   ("nextSyncToken" .=) <$> _aclNextSyncToken])
+
+-- | Source from which the event was created. For example, a web page, an
+-- email message or any document identifiable by an URL with HTTP or HTTPS
+-- scheme. Can only be seen or modified by the creator of the event.
+--
+-- /See:/ 'eventSource' smart constructor.
+data EventSource = EventSource
+    { _esUrl   :: !(Maybe Text)
+    , _esTitle :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EventSource' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'esUrl'
+--
+-- * 'esTitle'
+eventSource
+    :: EventSource
+eventSource =
+    EventSource
+    { _esUrl = Nothing
+    , _esTitle = Nothing
+    }
+
+-- | URL of the source pointing to a resource. The URL scheme must be HTTP or
+-- HTTPS.
+esUrl :: Lens' EventSource (Maybe Text)
+esUrl = lens _esUrl (\ s a -> s{_esUrl = a})
+
+-- | Title of the source; for example a title of a web page or an email
+-- subject.
+esTitle :: Lens' EventSource (Maybe Text)
+esTitle = lens _esTitle (\ s a -> s{_esTitle = a})
+
+instance FromJSON EventSource where
+        parseJSON
+          = withObject "EventSource"
+              (\ o ->
+                 EventSource <$> (o .:? "url") <*> (o .:? "title"))
+
+instance ToJSON EventSource where
+        toJSON EventSource{..}
+          = object
+              (catMaybes
+                 [("url" .=) <$> _esUrl, ("title" .=) <$> _esTitle])

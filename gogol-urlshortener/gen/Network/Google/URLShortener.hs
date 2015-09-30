@@ -27,13 +27,13 @@ module Network.Google.URLShortener
     -- * REST Resources
 
     -- ** URLshortenerURLGet
-    , module URLShortener.URL.Get
+    , module Network.Google.Resource.URLShortener.URL.Get
 
     -- ** URLshortenerURLInsert
-    , module URLShortener.URL.Insert
+    , module Network.Google.Resource.URLShortener.URL.Insert
 
     -- ** URLshortenerURLList
-    , module URLShortener.URL.List
+    , module Network.Google.Resource.URLShortener.URL.List
 
     -- * Types
 
@@ -52,6 +52,9 @@ module Network.Google.URLShortener
     , stringCount
     , scCount
     , scId
+
+    -- ** URLshortenerURLListProjection
+    , URLshortenerURLListProjection (..)
 
     -- ** AnalyticsSnapshot
     , AnalyticsSnapshot
@@ -72,6 +75,9 @@ module Network.Google.URLShortener
     , asTwoHours
     , asMonth
 
+    -- ** URLshortenerURLGetProjection
+    , URLshortenerURLGetProjection (..)
+
     -- ** URLHistory
     , URLHistory
     , uRLHistory
@@ -80,6 +86,9 @@ module Network.Google.URLShortener
     , uhItemsPerPage
     , uhKind
     , uhItems
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -92,7 +101,9 @@ import           Network.Google.URLShortener.Types
 TODO
 -}
 
-type URLShortenerAPI = URL
+type URLShortenerAPI =
+     UrlInsertResource :<|> UrlListResource :<|>
+       UrlGetResource
 
 uRLShortenerAPI :: Proxy URLShortenerAPI
 uRLShortenerAPI = Proxy

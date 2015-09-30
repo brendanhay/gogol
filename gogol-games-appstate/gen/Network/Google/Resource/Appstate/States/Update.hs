@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppstateStatesUpdate@.
-module Appstate.States.Update
+module Network.Google.Resource.Appstate.States.Update
     (
     -- * REST Resource
-      StatesUpdateAPI
+      StatesUpdateResource
 
     -- * Creating a Request
-    , statesUpdate
-    , StatesUpdate
+    , statesUpdate'
+    , StatesUpdate'
 
     -- * Request Lenses
     , suCurrentStateVersion
@@ -46,19 +47,25 @@ import           Network.Google.GamesAppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppstateStatesUpdate@ which the
--- 'StatesUpdate' request conforms to.
-type StatesUpdateAPI =
+-- 'StatesUpdate'' request conforms to.
+type StatesUpdateResource =
      "states" :>
        Capture "stateKey" Int32 :>
          QueryParam "currentStateVersion" Text :>
-           Put '[JSON] WriteResult
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Put '[JSON] WriteResult
 
 -- | Update the data associated with the input key if and only if the passed
 -- version matches the currently stored version. This method is safe in the
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
--- /See:/ 'statesUpdate' smart constructor.
-data StatesUpdate = StatesUpdate
+-- /See:/ 'statesUpdate'' smart constructor.
+data StatesUpdate' = StatesUpdate'
     { _suCurrentStateVersion :: !(Maybe Text)
     , _suQuotaUser           :: !(Maybe Text)
     , _suPrettyPrint         :: !Bool
@@ -67,7 +74,7 @@ data StatesUpdate = StatesUpdate
     , _suKey                 :: !(Maybe Text)
     , _suOauthToken          :: !(Maybe Text)
     , _suFields              :: !(Maybe Text)
-    , _suAlt                 :: !Text
+    , _suAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesUpdate'' with the minimum fields required to make a request.
@@ -91,11 +98,11 @@ data StatesUpdate = StatesUpdate
 -- * 'suFields'
 --
 -- * 'suAlt'
-statesUpdate
+statesUpdate'
     :: Int32 -- ^ 'stateKey'
-    -> StatesUpdate
-statesUpdate pSuStateKey_ =
-    StatesUpdate
+    -> StatesUpdate'
+statesUpdate' pSuStateKey_ =
+    StatesUpdate'
     { _suCurrentStateVersion = Nothing
     , _suQuotaUser = Nothing
     , _suPrettyPrint = True
@@ -104,7 +111,7 @@ statesUpdate pSuStateKey_ =
     , _suKey = Nothing
     , _suOauthToken = Nothing
     , _suFields = Nothing
-    , _suAlt = "json"
+    , _suAlt = JSON
     }
 
 -- | The version of the app state your application is attempting to update.
@@ -155,21 +162,23 @@ suFields :: Lens' StatesUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' StatesUpdate' Text
+suAlt :: Lens' StatesUpdate' Alt
 suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest StatesUpdate' where
         type Rs StatesUpdate' = WriteResult
         request = requestWithRoute defReq gamesAppStateURL
-        requestWithRoute r u StatesUpdate{..}
+        requestWithRoute r u StatesUpdate'{..}
           = go _suCurrentStateVersion _suQuotaUser
-              _suPrettyPrint
+              (Just _suPrettyPrint)
               _suUserIp
               _suStateKey
               _suKey
               _suOauthToken
               _suFields
-              _suAlt
+              (Just _suAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy StatesUpdateResource)
+                      r
                       u

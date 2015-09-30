@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- APK and language code. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsApklistingsPatch@.
-module Androidpublisher.Edits.Apklistings.Patch
+module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Patch
     (
     -- * REST Resource
-      EditsApklistingsPatchAPI
+      EditsApklistingsPatchResource
 
     -- * Creating a Request
-    , editsApklistingsPatch
-    , EditsApklistingsPatch
+    , editsApklistingsPatch'
+    , EditsApklistingsPatch'
 
     -- * Request Lenses
     , eapQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsApklistingsPatch@ which the
--- 'EditsApklistingsPatch' request conforms to.
-type EditsApklistingsPatchAPI =
+-- 'EditsApklistingsPatch'' request conforms to.
+type EditsApklistingsPatchResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "listings" :>
-                 Capture "language" Text :> Patch '[JSON] ApkListing
+                 Capture "language" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Patch '[JSON] ApkListing
 
 -- | Updates or creates the APK-specific localized listing for a specified
 -- APK and language code. This method supports patch semantics.
 --
--- /See:/ 'editsApklistingsPatch' smart constructor.
-data EditsApklistingsPatch = EditsApklistingsPatch
+-- /See:/ 'editsApklistingsPatch'' smart constructor.
+data EditsApklistingsPatch' = EditsApklistingsPatch'
     { _eapQuotaUser      :: !(Maybe Text)
     , _eapPrettyPrint    :: !Bool
     , _eapPackageName    :: !Text
@@ -72,7 +80,7 @@ data EditsApklistingsPatch = EditsApklistingsPatch
     , _eapOauthToken     :: !(Maybe Text)
     , _eapEditId         :: !Text
     , _eapFields         :: !(Maybe Text)
-    , _eapAlt            :: !Text
+    , _eapAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsApklistingsPatch'' with the minimum fields required to make a request.
@@ -100,14 +108,14 @@ data EditsApklistingsPatch = EditsApklistingsPatch
 -- * 'eapFields'
 --
 -- * 'eapAlt'
-editsApklistingsPatch
+editsApklistingsPatch'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsApklistingsPatch
-editsApklistingsPatch pEapPackageName_ pEapApkVersionCode_ pEapLanguage_ pEapEditId_ =
-    EditsApklistingsPatch
+    -> EditsApklistingsPatch'
+editsApklistingsPatch' pEapPackageName_ pEapApkVersionCode_ pEapLanguage_ pEapEditId_ =
+    EditsApklistingsPatch'
     { _eapQuotaUser = Nothing
     , _eapPrettyPrint = True
     , _eapPackageName = pEapPackageName_
@@ -118,7 +126,7 @@ editsApklistingsPatch pEapPackageName_ pEapApkVersionCode_ pEapLanguage_ pEapEdi
     , _eapOauthToken = Nothing
     , _eapEditId = pEapEditId_
     , _eapFields = Nothing
-    , _eapAlt = "json"
+    , _eapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,14 +192,15 @@ eapFields
   = lens _eapFields (\ s a -> s{_eapFields = a})
 
 -- | Data format for the response.
-eapAlt :: Lens' EditsApklistingsPatch' Text
+eapAlt :: Lens' EditsApklistingsPatch' Alt
 eapAlt = lens _eapAlt (\ s a -> s{_eapAlt = a})
 
 instance GoogleRequest EditsApklistingsPatch' where
         type Rs EditsApklistingsPatch' = ApkListing
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsApklistingsPatch{..}
-          = go _eapQuotaUser _eapPrettyPrint _eapPackageName
+        requestWithRoute r u EditsApklistingsPatch'{..}
+          = go _eapQuotaUser (Just _eapPrettyPrint)
+              _eapPackageName
               _eapApkVersionCode
               _eapUserIp
               _eapKey
@@ -199,9 +208,9 @@ instance GoogleRequest EditsApklistingsPatch' where
               _eapOauthToken
               _eapEditId
               _eapFields
-              _eapAlt
+              (Just _eapAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApklistingsPatchAPI)
+                      (Proxy :: Proxy EditsApklistingsPatchResource)
                       r
                       u

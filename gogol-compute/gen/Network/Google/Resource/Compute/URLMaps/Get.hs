@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified UrlMap resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsGet@.
-module Compute.URLMaps.Get
+module Network.Google.Resource.Compute.URLMaps.Get
     (
     -- * REST Resource
-      UrlMapsGetAPI
+      UrlMapsGetResource
 
     -- * Creating a Request
-    , uRLMapsGet
-    , URLMapsGet
+    , uRLMapsGet'
+    , URLMapsGet'
 
     -- * Request Lenses
     , umgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsGet@ which the
--- 'URLMapsGet' request conforms to.
-type UrlMapsGetAPI =
+-- 'URLMapsGet'' request conforms to.
+type UrlMapsGetResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
-           Capture "urlMap" Text :> Get '[JSON] URLMap
+           Capture "urlMap" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] URLMap
 
 -- | Returns the specified UrlMap resource.
 --
--- /See:/ 'uRLMapsGet' smart constructor.
-data URLMapsGet = URLMapsGet
+-- /See:/ 'uRLMapsGet'' smart constructor.
+data URLMapsGet' = URLMapsGet'
     { _umgQuotaUser   :: !(Maybe Text)
     , _umgUrlMap      :: !Text
     , _umgPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data URLMapsGet = URLMapsGet
     , _umgKey         :: !(Maybe Text)
     , _umgOauthToken  :: !(Maybe Text)
     , _umgFields      :: !(Maybe Text)
-    , _umgAlt         :: !Text
+    , _umgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data URLMapsGet = URLMapsGet
 -- * 'umgFields'
 --
 -- * 'umgAlt'
-uRLMapsGet
+uRLMapsGet'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsGet
-uRLMapsGet pUmgUrlMap_ pUmgProject_ =
-    URLMapsGet
+    -> URLMapsGet'
+uRLMapsGet' pUmgUrlMap_ pUmgProject_ =
+    URLMapsGet'
     { _umgQuotaUser = Nothing
     , _umgUrlMap = pUmgUrlMap_
     , _umgPrettyPrint = True
@@ -101,7 +109,7 @@ uRLMapsGet pUmgUrlMap_ pUmgProject_ =
     , _umgKey = Nothing
     , _umgOauthToken = Nothing
     , _umgFields = Nothing
-    , _umgAlt = "json"
+    , _umgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,19 +159,21 @@ umgFields
   = lens _umgFields (\ s a -> s{_umgFields = a})
 
 -- | Data format for the response.
-umgAlt :: Lens' URLMapsGet' Text
+umgAlt :: Lens' URLMapsGet' Alt
 umgAlt = lens _umgAlt (\ s a -> s{_umgAlt = a})
 
 instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsGet{..}
-          = go _umgQuotaUser _umgUrlMap _umgPrettyPrint
+        requestWithRoute r u URLMapsGet'{..}
+          = go _umgQuotaUser _umgUrlMap (Just _umgPrettyPrint)
               _umgProject
               _umgUserIp
               _umgKey
               _umgOauthToken
               _umgFields
-              _umgAlt
+              (Just _umgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UrlMapsGetResource)
+                      r
+                      u

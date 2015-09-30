@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAccountUserProfilesPatch@.
-module DFAReporting.AccountUserProfiles.Patch
+module Network.Google.Resource.DFAReporting.AccountUserProfiles.Patch
     (
     -- * REST Resource
-      AccountUserProfilesPatchAPI
+      AccountUserProfilesPatchResource
 
     -- * Creating a Request
-    , accountUserProfilesPatch
-    , AccountUserProfilesPatch
+    , accountUserProfilesPatch'
+    , AccountUserProfilesPatch'
 
     -- * Request Lenses
     , auppQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAccountUserProfilesPatch@ which the
--- 'AccountUserProfilesPatch' request conforms to.
-type AccountUserProfilesPatchAPI =
+-- 'AccountUserProfilesPatch'' request conforms to.
+type AccountUserProfilesPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "accountUserProfiles" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] AccountUserProfile
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Patch '[JSON] AccountUserProfile
 
 -- | Updates an existing account user profile. This method supports patch
 -- semantics.
 --
--- /See:/ 'accountUserProfilesPatch' smart constructor.
-data AccountUserProfilesPatch = AccountUserProfilesPatch
+-- /See:/ 'accountUserProfilesPatch'' smart constructor.
+data AccountUserProfilesPatch' = AccountUserProfilesPatch'
     { _auppQuotaUser   :: !(Maybe Text)
     , _auppPrettyPrint :: !Bool
     , _auppUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data AccountUserProfilesPatch = AccountUserProfilesPatch
     , _auppId          :: !Int64
     , _auppOauthToken  :: !(Maybe Text)
     , _auppFields      :: !(Maybe Text)
-    , _auppAlt         :: !Text
+    , _auppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data AccountUserProfilesPatch = AccountUserProfilesPatch
 -- * 'auppFields'
 --
 -- * 'auppAlt'
-accountUserProfilesPatch
+accountUserProfilesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AccountUserProfilesPatch
-accountUserProfilesPatch pAuppProfileId_ pAuppId_ =
-    AccountUserProfilesPatch
+    -> AccountUserProfilesPatch'
+accountUserProfilesPatch' pAuppProfileId_ pAuppId_ =
+    AccountUserProfilesPatch'
     { _auppQuotaUser = Nothing
     , _auppPrettyPrint = True
     , _auppUserIp = Nothing
@@ -104,7 +112,7 @@ accountUserProfilesPatch pAuppProfileId_ pAuppId_ =
     , _auppId = pAuppId_
     , _auppOauthToken = Nothing
     , _auppFields = Nothing
-    , _auppAlt = "json"
+    , _auppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ auppFields
   = lens _auppFields (\ s a -> s{_auppFields = a})
 
 -- | Data format for the response.
-auppAlt :: Lens' AccountUserProfilesPatch' Text
+auppAlt :: Lens' AccountUserProfilesPatch' Alt
 auppAlt = lens _auppAlt (\ s a -> s{_auppAlt = a})
 
 instance GoogleRequest AccountUserProfilesPatch'
@@ -163,16 +171,17 @@ instance GoogleRequest AccountUserProfilesPatch'
         type Rs AccountUserProfilesPatch' =
              AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AccountUserProfilesPatch{..}
-          = go _auppQuotaUser _auppPrettyPrint _auppUserIp
+        requestWithRoute r u AccountUserProfilesPatch'{..}
+          = go _auppQuotaUser (Just _auppPrettyPrint)
+              _auppUserIp
               _auppProfileId
               _auppKey
               (Just _auppId)
               _auppOauthToken
               _auppFields
-              _auppAlt
+              (Just _auppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountUserProfilesPatchAPI)
+                      (Proxy :: Proxy AccountUserProfilesPatchResource)
                       r
                       u

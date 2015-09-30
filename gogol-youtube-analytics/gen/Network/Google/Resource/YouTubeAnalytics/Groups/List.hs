@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference> for @YouTubeAnalyticsGroupsList@.
-module YouTubeAnalytics.Groups.List
+module Network.Google.Resource.YouTubeAnalytics.Groups.List
     (
     -- * REST Resource
-      GroupsListAPI
+      GroupsListResource
 
     -- * Creating a Request
-    , groupsList
-    , GroupsList
+    , groupsList'
+    , GroupsList'
 
     -- * Request Lenses
     , glQuotaUser
@@ -47,19 +48,26 @@ import           Network.Google.Prelude
 import           Network.Google.YouTubeAnalytics.Types
 
 -- | A resource alias for @YouTubeAnalyticsGroupsList@ which the
--- 'GroupsList' request conforms to.
-type GroupsListAPI =
+-- 'GroupsList'' request conforms to.
+type GroupsListResource =
      "groups" :>
-       QueryParam "mine" Bool :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           QueryParam "id" Text :> Get '[JSON] GroupListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "mine" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] GroupListResponse
 
 -- | Returns a collection of groups that match the API request parameters.
 -- For example, you can retrieve all groups that the authenticated user
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
--- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+-- /See:/ 'groupsList'' smart constructor.
+data GroupsList' = GroupsList'
     { _glQuotaUser              :: !(Maybe Text)
     , _glPrettyPrint            :: !Bool
     , _glMine                   :: !(Maybe Bool)
@@ -69,7 +77,7 @@ data GroupsList = GroupsList
     , _glId                     :: !(Maybe Text)
     , _glOauthToken             :: !(Maybe Text)
     , _glFields                 :: !(Maybe Text)
-    , _glAlt                    :: !Text
+    , _glAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
@@ -95,10 +103,10 @@ data GroupsList = GroupsList
 -- * 'glFields'
 --
 -- * 'glAlt'
-groupsList
-    :: GroupsList
-groupsList =
-    GroupsList
+groupsList'
+    :: GroupsList'
+groupsList' =
+    GroupsList'
     { _glQuotaUser = Nothing
     , _glPrettyPrint = True
     , _glMine = Nothing
@@ -108,7 +116,7 @@ groupsList =
     , _glId = Nothing
     , _glOauthToken = Nothing
     , _glFields = Nothing
-    , _glAlt = "json"
+    , _glAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -171,19 +179,22 @@ glFields :: Lens' GroupsList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
 -- | Data format for the response.
-glAlt :: Lens' GroupsList' Text
+glAlt :: Lens' GroupsList' Alt
 glAlt = lens _glAlt (\ s a -> s{_glAlt = a})
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
-        requestWithRoute r u GroupsList{..}
-          = go _glQuotaUser _glPrettyPrint _glMine _glUserIp
+        requestWithRoute r u GroupsList'{..}
+          = go _glQuotaUser (Just _glPrettyPrint) _glMine
+              _glUserIp
               _glOnBehalfOfContentOwner
               _glKey
               _glId
               _glOauthToken
               _glFields
-              _glAlt
+              (Just _glAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy GroupsListResource)
+                      r
+                      u

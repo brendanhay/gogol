@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsWorkItemsLease@.
-module Dataflow.Projects.Jobs.WorkItems.Lease
+module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
     (
     -- * REST Resource
-      ProjectsJobsWorkItemsLeaseAPI
+      ProjectsJobsWorkItemsLeaseResource
 
     -- * Creating a Request
-    , projectsJobsWorkItemsLease
-    , ProjectsJobsWorkItemsLease
+    , projectsJobsWorkItemsLease'
+    , ProjectsJobsWorkItemsLease'
 
     -- * Request Lenses
     , pjwilXgafv
@@ -50,20 +51,33 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsWorkItemsLease@ which the
--- 'ProjectsJobsWorkItemsLease' request conforms to.
-type ProjectsJobsWorkItemsLeaseAPI =
+-- 'ProjectsJobsWorkItemsLease'' request conforms to.
+type ProjectsJobsWorkItemsLeaseResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
                "workItems:lease" :>
-                 Post '[JSON] LeaseWorkItemResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] LeaseWorkItemResponse
 
 -- | Leases a dataflow WorkItem to run.
 --
--- /See:/ 'projectsJobsWorkItemsLease' smart constructor.
-data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease
+-- /See:/ 'projectsJobsWorkItemsLease'' smart constructor.
+data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
     { _pjwilXgafv          :: !(Maybe Text)
     , _pjwilQuotaUser      :: !(Maybe Text)
     , _pjwilPrettyPrint    :: !Bool
@@ -114,12 +128,12 @@ data ProjectsJobsWorkItemsLease = ProjectsJobsWorkItemsLease
 -- * 'pjwilCallback'
 --
 -- * 'pjwilAlt'
-projectsJobsWorkItemsLease
+projectsJobsWorkItemsLease'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> ProjectsJobsWorkItemsLease
-projectsJobsWorkItemsLease pPjwilJobId_ pPjwilProjectId_ =
-    ProjectsJobsWorkItemsLease
+    -> ProjectsJobsWorkItemsLease'
+projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilProjectId_ =
+    ProjectsJobsWorkItemsLease'
     { _pjwilXgafv = Nothing
     , _pjwilQuotaUser = Nothing
     , _pjwilPrettyPrint = True
@@ -227,11 +241,12 @@ instance GoogleRequest ProjectsJobsWorkItemsLease'
         type Rs ProjectsJobsWorkItemsLease' =
              LeaseWorkItemResponse
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsWorkItemsLease{..}
-          = go _pjwilXgafv _pjwilQuotaUser _pjwilPrettyPrint
+        requestWithRoute r u ProjectsJobsWorkItemsLease'{..}
+          = go _pjwilXgafv _pjwilQuotaUser
+              (Just _pjwilPrettyPrint)
               _pjwilJobId
               _pjwilUploadProtocol
-              _pjwilPp
+              (Just _pjwilPp)
               _pjwilAccessToken
               _pjwilUploadType
               _pjwilBearerToken
@@ -240,9 +255,9 @@ instance GoogleRequest ProjectsJobsWorkItemsLease'
               _pjwilOauthToken
               _pjwilFields
               _pjwilCallback
-              _pjwilAlt
+              (Just _pjwilAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsWorkItemsLeaseAPI)
+                      (Proxy :: Proxy ProjectsJobsWorkItemsLeaseResource)
                       r
                       u

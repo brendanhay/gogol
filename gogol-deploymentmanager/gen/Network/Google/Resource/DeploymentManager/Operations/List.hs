@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all operations for a project.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerOperationsList@.
-module DeploymentManager.Operations.List
+module Network.Google.Resource.DeploymentManager.Operations.List
     (
     -- * REST Resource
-      OperationsListAPI
+      OperationsListResource
 
     -- * Creating a Request
-    , operationsList
-    , OperationsList
+    , operationsList'
+    , OperationsList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerOperationsList@ which the
--- 'OperationsList' request conforms to.
-type OperationsListAPI =
+-- 'OperationsList'' request conforms to.
+type OperationsListResource =
      Capture "project" Text :>
        "global" :>
          "operations" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] OperationsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] OperationsListResponse
 
 -- | Lists all operations for a project.
 --
--- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+-- /See:/ 'operationsList'' smart constructor.
+data OperationsList' = OperationsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olProject     :: !Text
@@ -70,7 +78,7 @@ data OperationsList = OperationsList
     , _olOauthToken  :: !(Maybe Text)
     , _olMaxResults  :: !Word32
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Text
+    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data OperationsList = OperationsList
 -- * 'olFields'
 --
 -- * 'olAlt'
-operationsList
+operationsList'
     :: Text -- ^ 'project'
-    -> OperationsList
-operationsList pOlProject_ =
-    OperationsList
+    -> OperationsList'
+operationsList' pOlProject_ =
+    OperationsList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olProject = pOlProject_
@@ -113,7 +121,7 @@ operationsList pOlProject_ =
     , _olOauthToken = Nothing
     , _olMaxResults = 500
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,23 +189,25 @@ olFields :: Lens' OperationsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OperationsList' Text
+olAlt :: Lens' OperationsList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest OperationsList' where
         type Rs OperationsList' = OperationsListResponse
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u OperationsList{..}
-          = go _olQuotaUser _olPrettyPrint _olProject _olUserIp
+        requestWithRoute r u OperationsList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olProject
+              _olUserIp
               _olKey
               _olFilter
               _olPageToken
               _olOauthToken
               (Just _olMaxResults)
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OperationsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy OperationsListResource)
                       r
                       u

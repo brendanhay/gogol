@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing resource.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-settings/get_started Groups Settings API Reference> for @GroupsSettingsGroupsUpdate@.
-module GroupsSettings.Groups.Update
+module Network.Google.Resource.GroupsSettings.Groups.Update
     (
     -- * REST Resource
-      GroupsUpdateAPI
+      GroupsUpdateResource
 
     -- * Creating a Request
-    , groupsUpdate
-    , GroupsUpdate
+    , groupsUpdate'
+    , GroupsUpdate'
 
     -- * Request Lenses
     , guQuotaUser
@@ -43,14 +44,21 @@ import           Network.Google.GroupsSettings.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GroupsSettingsGroupsUpdate@ which the
--- 'GroupsUpdate' request conforms to.
-type GroupsUpdateAPI =
-     Capture "groupUniqueId" Text :> Put '[JSON] Groups
+-- 'GroupsUpdate'' request conforms to.
+type GroupsUpdateResource =
+     Capture "groupUniqueId" Text :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Put '[JSON] Groups
 
 -- | Updates an existing resource.
 --
--- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+-- /See:/ 'groupsUpdate'' smart constructor.
+data GroupsUpdate' = GroupsUpdate'
     { _guQuotaUser     :: !(Maybe Text)
     , _guPrettyPrint   :: !Bool
     , _guUserIp        :: !(Maybe Text)
@@ -58,7 +66,7 @@ data GroupsUpdate = GroupsUpdate
     , _guOauthToken    :: !(Maybe Text)
     , _guGroupUniqueId :: !Text
     , _guFields        :: !(Maybe Text)
-    , _guAlt           :: !Text
+    , _guAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsUpdate'' with the minimum fields required to make a request.
@@ -80,11 +88,11 @@ data GroupsUpdate = GroupsUpdate
 -- * 'guFields'
 --
 -- * 'guAlt'
-groupsUpdate
+groupsUpdate'
     :: Text -- ^ 'groupUniqueId'
-    -> GroupsUpdate
-groupsUpdate pGuGroupUniqueId_ =
-    GroupsUpdate
+    -> GroupsUpdate'
+groupsUpdate' pGuGroupUniqueId_ =
+    GroupsUpdate'
     { _guQuotaUser = Nothing
     , _guPrettyPrint = True
     , _guUserIp = Nothing
@@ -92,7 +100,7 @@ groupsUpdate pGuGroupUniqueId_ =
     , _guOauthToken = Nothing
     , _guGroupUniqueId = pGuGroupUniqueId_
     , _guFields = Nothing
-    , _guAlt = "atom"
+    , _guAlt = Atom
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,18 +143,21 @@ guFields :: Lens' GroupsUpdate' (Maybe Text)
 guFields = lens _guFields (\ s a -> s{_guFields = a})
 
 -- | Data format for the response.
-guAlt :: Lens' GroupsUpdate' Text
+guAlt :: Lens' GroupsUpdate' Alt
 guAlt = lens _guAlt (\ s a -> s{_guAlt = a})
 
 instance GoogleRequest GroupsUpdate' where
         type Rs GroupsUpdate' = Groups
         request = requestWithRoute defReq groupsSettingsURL
-        requestWithRoute r u GroupsUpdate{..}
-          = go _guQuotaUser _guPrettyPrint _guUserIp _guKey
+        requestWithRoute r u GroupsUpdate'{..}
+          = go _guQuotaUser (Just _guPrettyPrint) _guUserIp
+              _guKey
               _guOauthToken
               _guGroupUniqueId
               _guFields
-              _guAlt
+              (Just _guAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsUpdateAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsUpdateResource)
+                      r
                       u

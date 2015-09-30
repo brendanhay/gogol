@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified Instance Group Manager resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersGet@.
-module Replicapool.InstanceGroupManagers.Get
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.Get
     (
     -- * REST Resource
-      InstanceGroupManagersGetAPI
+      InstanceGroupManagersGetResource
 
     -- * Creating a Request
-    , instanceGroupManagersGet
-    , InstanceGroupManagersGet
+    , instanceGroupManagersGet'
+    , InstanceGroupManagersGet'
 
     -- * Request Lenses
     , igmgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersGet@ which the
--- 'InstanceGroupManagersGet' request conforms to.
-type InstanceGroupManagersGetAPI =
+-- 'InstanceGroupManagersGet'' request conforms to.
+type InstanceGroupManagersGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               Get '[JSON] InstanceGroupManager
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] InstanceGroupManager
 
 -- | Returns the specified Instance Group Manager resource.
 --
--- /See:/ 'instanceGroupManagersGet' smart constructor.
-data InstanceGroupManagersGet = InstanceGroupManagersGet
+-- /See:/ 'instanceGroupManagersGet'' smart constructor.
+data InstanceGroupManagersGet' = InstanceGroupManagersGet'
     { _igmgQuotaUser            :: !(Maybe Text)
     , _igmgPrettyPrint          :: !Bool
     , _igmgProject              :: !Text
@@ -67,7 +75,7 @@ data InstanceGroupManagersGet = InstanceGroupManagersGet
     , _igmgKey                  :: !(Maybe Text)
     , _igmgOauthToken           :: !(Maybe Text)
     , _igmgFields               :: !(Maybe Text)
-    , _igmgAlt                  :: !Text
+    , _igmgAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data InstanceGroupManagersGet = InstanceGroupManagersGet
 -- * 'igmgFields'
 --
 -- * 'igmgAlt'
-instanceGroupManagersGet
+instanceGroupManagersGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersGet
-instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
-    InstanceGroupManagersGet
+    -> InstanceGroupManagersGet'
+instanceGroupManagersGet' pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
+    InstanceGroupManagersGet'
     { _igmgQuotaUser = Nothing
     , _igmgPrettyPrint = True
     , _igmgProject = pIgmgProject_
@@ -109,7 +117,7 @@ instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     , _igmgKey = Nothing
     , _igmgOauthToken = Nothing
     , _igmgFields = Nothing
-    , _igmgAlt = "json"
+    , _igmgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -165,7 +173,7 @@ igmgFields
   = lens _igmgFields (\ s a -> s{_igmgFields = a})
 
 -- | Data format for the response.
-igmgAlt :: Lens' InstanceGroupManagersGet' Text
+igmgAlt :: Lens' InstanceGroupManagersGet' Alt
 igmgAlt = lens _igmgAlt (\ s a -> s{_igmgAlt = a})
 
 instance GoogleRequest InstanceGroupManagersGet'
@@ -174,17 +182,18 @@ instance GoogleRequest InstanceGroupManagersGet'
              InstanceGroupManager
         request
           = requestWithRoute defReq instanceGroupsManagerURL
-        requestWithRoute r u InstanceGroupManagersGet{..}
-          = go _igmgQuotaUser _igmgPrettyPrint _igmgProject
+        requestWithRoute r u InstanceGroupManagersGet'{..}
+          = go _igmgQuotaUser (Just _igmgPrettyPrint)
+              _igmgProject
               _igmgInstanceGroupManager
               _igmgUserIp
               _igmgZone
               _igmgKey
               _igmgOauthToken
               _igmgFields
-              _igmgAlt
+              (Just _igmgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupManagersGetAPI)
+                      (Proxy :: Proxy InstanceGroupManagersGetResource)
                       r
                       u

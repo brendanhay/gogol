@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Query Organization resources.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerOrganizationsList@.
-module Cloudresourcemanager.Organizations.List
+module Network.Google.Resource.Cloudresourcemanager.Organizations.List
     (
     -- * REST Resource
-      OrganizationsListAPI
+      OrganizationsListResource
 
     -- * Creating a Request
-    , organizationsList
-    , OrganizationsList
+    , organizationsList'
+    , OrganizationsList'
 
     -- * Request Lenses
     , olXgafv
@@ -51,19 +52,32 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerOrganizationsList@ which the
--- 'OrganizationsList' request conforms to.
-type OrganizationsListAPI =
+-- 'OrganizationsList'' request conforms to.
+type OrganizationsListResource =
      "v1beta1" :>
        "organizations" :>
-         QueryParam "filter" Text :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListOrganizationsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListOrganizationsResponse
 
 -- | Query Organization resources.
 --
--- /See:/ 'organizationsList' smart constructor.
-data OrganizationsList = OrganizationsList
+-- /See:/ 'organizationsList'' smart constructor.
+data OrganizationsList' = OrganizationsList'
     { _olXgafv          :: !(Maybe Text)
     , _olQuotaUser      :: !(Maybe Text)
     , _olPrettyPrint    :: !Bool
@@ -117,10 +131,10 @@ data OrganizationsList = OrganizationsList
 -- * 'olCallback'
 --
 -- * 'olAlt'
-organizationsList
-    :: OrganizationsList
-organizationsList =
-    OrganizationsList
+organizationsList'
+    :: OrganizationsList'
+organizationsList' =
+    OrganizationsList'
     { _olXgafv = Nothing
     , _olQuotaUser = Nothing
     , _olPrettyPrint = True
@@ -235,10 +249,10 @@ instance GoogleRequest OrganizationsList' where
         type Rs OrganizationsList' =
              ListOrganizationsResponse
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u OrganizationsList{..}
-          = go _olXgafv _olQuotaUser _olPrettyPrint
+        requestWithRoute r u OrganizationsList'{..}
+          = go _olXgafv _olQuotaUser (Just _olPrettyPrint)
               _olUploadProtocol
-              _olPp
+              (Just _olPp)
               _olAccessToken
               _olUploadType
               _olBearerToken
@@ -249,9 +263,9 @@ instance GoogleRequest OrganizationsList' where
               _olPageSize
               _olFields
               _olCallback
-              _olAlt
+              (Just _olAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OrganizationsListAPI)
+                      (Proxy :: Proxy OrganizationsListResource)
                       r
                       u

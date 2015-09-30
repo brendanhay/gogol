@@ -75,11 +75,11 @@ instance ToJSON ListReportsResponse where
 data QueryMetadata = QueryMetadata
     { _qmGoogleCloudStoragePathForLatestReport :: !(Maybe Text)
     , _qmLocale                                :: !(Maybe Text)
-    , _qmFormat                                :: !(Maybe Text)
+    , _qmFormat                                :: !(Maybe QueryMetadataFormat)
     , _qmGoogleDrivePathForLatestReport        :: !(Maybe Text)
     , _qmShareEmailAddress                     :: !(Maybe [Text])
     , _qmRunning                               :: !(Maybe Bool)
-    , _qmDataRange                             :: !(Maybe Text)
+    , _qmDataRange                             :: !(Maybe QueryMetadataDataRange)
     , _qmLatestReportRunTimeMs                 :: !(Maybe Int64)
     , _qmReportCount                           :: !(Maybe Int32)
     , _qmTitle                                 :: !(Maybe Text)
@@ -145,7 +145,7 @@ qmLocale :: Lens' QueryMetadata (Maybe Text)
 qmLocale = lens _qmLocale (\ s a -> s{_qmLocale = a})
 
 -- | Format of the generated report.
-qmFormat :: Lens' QueryMetadata (Maybe Text)
+qmFormat :: Lens' QueryMetadata (Maybe QueryMetadataFormat)
 qmFormat = lens _qmFormat (\ s a -> s{_qmFormat = a})
 
 -- | The path in Google Drive for the latest report.
@@ -169,7 +169,7 @@ qmRunning
   = lens _qmRunning (\ s a -> s{_qmRunning = a})
 
 -- | Range of report data.
-qmDataRange :: Lens' QueryMetadata (Maybe Text)
+qmDataRange :: Lens' QueryMetadata (Maybe QueryMetadataDataRange)
 qmDataRange
   = lens _qmDataRange (\ s a -> s{_qmDataRange = a})
 
@@ -237,7 +237,7 @@ instance ToJSON QueryMetadata where
 -- /See:/ 'uploadLineItemsRequest' smart constructor.
 data UploadLineItemsRequest = UploadLineItemsRequest
     { _ulirLineItems :: !(Maybe Text)
-    , _ulirFormat    :: !(Maybe Text)
+    , _ulirFormat    :: !(Maybe UploadLineItemsRequestFormat)
     , _ulirDryRun    :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -267,7 +267,7 @@ ulirLineItems
       (\ s a -> s{_ulirLineItems = a})
 
 -- | Format the line items are in. Default to CSV.
-ulirFormat :: Lens' UploadLineItemsRequest (Maybe Text)
+ulirFormat :: Lens' UploadLineItemsRequest (Maybe UploadLineItemsRequestFormat)
 ulirFormat
   = lens _ulirFormat (\ s a -> s{_ulirFormat = a})
 
@@ -298,7 +298,7 @@ instance ToJSON UploadLineItemsRequest where
 -- /See:/ 'filterPair' smart constructor.
 data FilterPair = FilterPair
     { _fpValue :: !(Maybe Text)
-    , _fpType  :: !(Maybe Text)
+    , _fpType  :: !(Maybe FilterPairType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
@@ -321,7 +321,7 @@ fpValue :: Lens' FilterPair (Maybe Text)
 fpValue = lens _fpValue (\ s a -> s{_fpValue = a})
 
 -- | Filter type.
-fpType :: Lens' FilterPair (Maybe Text)
+fpType :: Lens' FilterPair (Maybe FilterPairType)
 fpType = lens _fpType (\ s a -> s{_fpType = a})
 
 instance FromJSON FilterPair where
@@ -341,7 +341,7 @@ instance ToJSON FilterPair where
 -- /See:/ 'runQueryRequest' smart constructor.
 data RunQueryRequest = RunQueryRequest
     { _rqrReportDataEndTimeMs   :: !(Maybe Int64)
-    , _rqrDataRange             :: !(Maybe Text)
+    , _rqrDataRange             :: !(Maybe RunQueryRequestDataRange)
     , _rqrReportDataStartTimeMs :: !(Maybe Int64)
     , _rqrTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -376,7 +376,7 @@ rqrReportDataEndTimeMs
       (\ s a -> s{_rqrReportDataEndTimeMs = a})
 
 -- | Report data range used to generate the report.
-rqrDataRange :: Lens' RunQueryRequest (Maybe Text)
+rqrDataRange :: Lens' RunQueryRequest (Maybe RunQueryRequestDataRange)
 rqrDataRange
   = lens _rqrDataRange (\ s a -> s{_rqrDataRange = a})
 
@@ -470,8 +470,8 @@ instance ToJSON ListQueriesResponse where
 --
 -- /See:/ 'downloadLineItemsRequest' smart constructor.
 data DownloadLineItemsRequest = DownloadLineItemsRequest
-    { _dlirFilterType :: !(Maybe Text)
-    , _dlirFormat     :: !(Maybe Text)
+    { _dlirFilterType :: !(Maybe DownloadLineItemsRequestFilterType)
+    , _dlirFormat     :: !(Maybe DownloadLineItemsRequestFormat)
     , _dlirFilterIds  :: !(Maybe [Int64])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -494,13 +494,13 @@ downloadLineItemsRequest =
     }
 
 -- | Filter type used to filter line items to fetch.
-dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe Text)
+dlirFilterType :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFilterType)
 dlirFilterType
   = lens _dlirFilterType
       (\ s a -> s{_dlirFilterType = a})
 
 -- | Format in which the line items will be returned. Default to CSV.
-dlirFormat :: Lens' DownloadLineItemsRequest (Maybe Text)
+dlirFormat :: Lens' DownloadLineItemsRequest (Maybe DownloadLineItemsRequestFormat)
 dlirFormat
   = lens _dlirFormat (\ s a -> s{_dlirFormat = a})
 
@@ -929,7 +929,7 @@ instance ToJSON DownloadLineItemsResponse where
 --
 -- /See:/ 'querySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
-    { _qsFrequency           :: !(Maybe Text)
+    { _qsFrequency           :: !(Maybe QueryScheduleFrequency)
     , _qsEndTimeMs           :: !(Maybe Int64)
     , _qsNextRunMinuteOfDay  :: !(Maybe Int32)
     , _qsNextRunTimezoneCode :: !(Maybe Text)
@@ -957,7 +957,7 @@ querySchedule =
     }
 
 -- | How often the query is run.
-qsFrequency :: Lens' QuerySchedule (Maybe Text)
+qsFrequency :: Lens' QuerySchedule (Maybe QueryScheduleFrequency)
 qsFrequency
   = lens _qsFrequency (\ s a -> s{_qsFrequency = a})
 
@@ -1004,9 +1004,9 @@ instance ToJSON QuerySchedule where
 --
 -- /See:/ 'reportStatus' smart constructor.
 data ReportStatus = ReportStatus
-    { _rsState        :: !(Maybe Text)
+    { _rsState        :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe Int64)
-    , _rsFormat       :: !(Maybe Text)
+    , _rsFormat       :: !(Maybe ReportStatusFormat)
     , _rsFailure      :: !(Maybe (Maybe ReportFailure))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1032,7 +1032,7 @@ reportStatus =
     }
 
 -- | The state of the report.
-rsState :: Lens' ReportStatus (Maybe Text)
+rsState :: Lens' ReportStatus (Maybe ReportStatusState)
 rsState = lens _rsState (\ s a -> s{_rsState = a})
 
 -- | The time when this report either completed successfully or failed.
@@ -1042,7 +1042,7 @@ rsFinishTimeMs
       (\ s a -> s{_rsFinishTimeMs = a})
 
 -- | The file type of the report.
-rsFormat :: Lens' ReportStatus (Maybe Text)
+rsFormat :: Lens' ReportStatus (Maybe ReportStatusFormat)
 rsFormat = lens _rsFormat (\ s a -> s{_rsFormat = a})
 
 -- | If the report failed, this records the cause.
@@ -1191,11 +1191,11 @@ instance ToJSON Query where
 --
 -- /See:/ 'parameters' smart constructor.
 data Parameters = Parameters
-    { _pMetrics           :: !(Maybe [Text])
+    { _pMetrics           :: !(Maybe [ParametersMetrics])
     , _pIncludeInviteData :: !(Maybe Bool)
     , _pFilters           :: !(Maybe [Maybe FilterPair])
-    , _pGroupBys          :: !(Maybe [Text])
-    , _pType              :: !(Maybe Text)
+    , _pGroupBys          :: !(Maybe [ParametersGroupBys])
+    , _pType              :: !(Maybe ParametersType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Parameters' with the minimum fields required to make a request.
@@ -1223,7 +1223,7 @@ parameters =
     }
 
 -- | Metrics to include as columns in your report.
-pMetrics :: Lens' Parameters [Text]
+pMetrics :: Lens' Parameters [ParametersMetrics]
 pMetrics
   = lens _pMetrics (\ s a -> s{_pMetrics = a}) .
       _Default
@@ -1243,14 +1243,14 @@ pFilters
       . _Coerce
 
 -- | Data is grouped by the filters listed in this field.
-pGroupBys :: Lens' Parameters [Text]
+pGroupBys :: Lens' Parameters [ParametersGroupBys]
 pGroupBys
   = lens _pGroupBys (\ s a -> s{_pGroupBys = a}) .
       _Default
       . _Coerce
 
 -- | Report type.
-pType :: Lens' Parameters (Maybe Text)
+pType :: Lens' Parameters (Maybe ParametersType)
 pType = lens _pType (\ s a -> s{_pType = a})
 
 instance FromJSON Parameters where
@@ -1278,7 +1278,7 @@ instance ToJSON Parameters where
 --
 -- /See:/ 'reportFailure' smart constructor.
 newtype ReportFailure = ReportFailure
-    { _rfErrorCode :: Maybe Text
+    { _rfErrorCode :: Maybe ReportFailureErrorCode
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFailure' with the minimum fields required to make a request.
@@ -1294,7 +1294,7 @@ reportFailure =
     }
 
 -- | Error code that shows why the report was not created.
-rfErrorCode :: Lens' ReportFailure (Maybe Text)
+rfErrorCode :: Lens' ReportFailure (Maybe ReportFailureErrorCode)
 rfErrorCode
   = lens _rfErrorCode (\ s a -> s{_rfErrorCode = a})
 

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- that are included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeInstanceGroupsInsert@.
-module Compute.InstanceGroups.Insert
+module Network.Google.Resource.Compute.InstanceGroups.Insert
     (
     -- * REST Resource
-      InstanceGroupsInsertAPI
+      InstanceGroupsInsertResource
 
     -- * Creating a Request
-    , instanceGroupsInsert
-    , InstanceGroupsInsert
+    , instanceGroupsInsert'
+    , InstanceGroupsInsert'
 
     -- * Request Lenses
     , igiQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeInstanceGroupsInsert@ which the
--- 'InstanceGroupsInsert' request conforms to.
-type InstanceGroupsInsertAPI =
+-- 'InstanceGroupsInsert'' request conforms to.
+type InstanceGroupsInsertResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
-           "instanceGroups" :> Post '[JSON] Operation
+           "instanceGroups" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates an instance group in the specified project using the parameters
 -- that are included in the request.
 --
--- /See:/ 'instanceGroupsInsert' smart constructor.
-data InstanceGroupsInsert = InstanceGroupsInsert
+-- /See:/ 'instanceGroupsInsert'' smart constructor.
+data InstanceGroupsInsert' = InstanceGroupsInsert'
     { _igiQuotaUser   :: !(Maybe Text)
     , _igiPrettyPrint :: !Bool
     , _igiProject     :: !Text
@@ -65,7 +73,7 @@ data InstanceGroupsInsert = InstanceGroupsInsert
     , _igiKey         :: !(Maybe Text)
     , _igiOauthToken  :: !(Maybe Text)
     , _igiFields      :: !(Maybe Text)
-    , _igiAlt         :: !Text
+    , _igiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data InstanceGroupsInsert = InstanceGroupsInsert
 -- * 'igiFields'
 --
 -- * 'igiAlt'
-instanceGroupsInsert
+instanceGroupsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
-    -> InstanceGroupsInsert
-instanceGroupsInsert pIgiProject_ pIgiZone_ =
-    InstanceGroupsInsert
+    -> InstanceGroupsInsert'
+instanceGroupsInsert' pIgiProject_ pIgiZone_ =
+    InstanceGroupsInsert'
     { _igiQuotaUser = Nothing
     , _igiPrettyPrint = True
     , _igiProject = pIgiProject_
@@ -103,7 +111,7 @@ instanceGroupsInsert pIgiProject_ pIgiZone_ =
     , _igiKey = Nothing
     , _igiOauthToken = Nothing
     , _igiFields = Nothing
-    , _igiAlt = "json"
+    , _igiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,22 @@ igiFields
   = lens _igiFields (\ s a -> s{_igiFields = a})
 
 -- | Data format for the response.
-igiAlt :: Lens' InstanceGroupsInsert' Text
+igiAlt :: Lens' InstanceGroupsInsert' Alt
 igiAlt = lens _igiAlt (\ s a -> s{_igiAlt = a})
 
 instance GoogleRequest InstanceGroupsInsert' where
         type Rs InstanceGroupsInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u InstanceGroupsInsert{..}
-          = go _igiQuotaUser _igiPrettyPrint _igiProject
+        requestWithRoute r u InstanceGroupsInsert'{..}
+          = go _igiQuotaUser (Just _igiPrettyPrint) _igiProject
               _igiUserIp
               _igiZone
               _igiKey
               _igiOauthToken
               _igiFields
-              _igiAlt
+              (Just _igiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupsInsertAPI)
+                      (Proxy :: Proxy InstanceGroupsInsertResource)
                       r
                       u

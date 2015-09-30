@@ -151,6 +151,10 @@ module Network.Google.Debugger.Types
     , sfArguments
     , sfLocals
 
+    -- * DebuggeeLabels
+    , DebuggeeLabels
+    , debuggeeLabels
+
     -- * CloudRepoSourceContext
     , CloudRepoSourceContext
     , cloudRepoSourceContext
@@ -195,7 +199,7 @@ import           Network.Google.Debugger.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google Cloud Debugger API.
-debuggerURL :: BaseURL
+debuggerURL :: BaseUrl
 debuggerURL
   = BaseUrl Https
       "https://clouddebugger.googleapis.com/"

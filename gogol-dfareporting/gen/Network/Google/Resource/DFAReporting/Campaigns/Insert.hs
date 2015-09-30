@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsInsert@.
-module DFAReporting.Campaigns.Insert
+module Network.Google.Resource.DFAReporting.Campaigns.Insert
     (
     -- * REST Resource
-      CampaignsInsertAPI
+      CampaignsInsertResource
 
     -- * Creating a Request
-    , campaignsInsert
-    , CampaignsInsert
+    , campaignsInsert'
+    , CampaignsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignsInsert@ which the
--- 'CampaignsInsert' request conforms to.
-type CampaignsInsertAPI =
+-- 'CampaignsInsert'' request conforms to.
+type CampaignsInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           QueryParam "defaultLandingPageUrl" Text :>
-             QueryParam "defaultLandingPageName" Text :>
-               Post '[JSON] Campaign
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "defaultLandingPageUrl" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "defaultLandingPageName" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --
--- /See:/ 'campaignsInsert' smart constructor.
-data CampaignsInsert = CampaignsInsert
+-- /See:/ 'campaignsInsert'' smart constructor.
+data CampaignsInsert' = CampaignsInsert'
     { _ciQuotaUser              :: !(Maybe Text)
     , _ciPrettyPrint            :: !Bool
     , _ciUserIp                 :: !(Maybe Text)
@@ -67,7 +74,7 @@ data CampaignsInsert = CampaignsInsert
     , _ciDefaultLandingPageName :: !Text
     , _ciOauthToken             :: !(Maybe Text)
     , _ciFields                 :: !(Maybe Text)
-    , _ciAlt                    :: !Text
+    , _ciAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsInsert'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data CampaignsInsert = CampaignsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-campaignsInsert
+campaignsInsert'
     :: Int64 -- ^ 'profileId'
     -> Text -- ^ 'defaultLandingPageUrl'
     -> Text -- ^ 'defaultLandingPageName'
-    -> CampaignsInsert
-campaignsInsert pCiProfileId_ pCiDefaultLandingPageUrl_ pCiDefaultLandingPageName_ =
-    CampaignsInsert
+    -> CampaignsInsert'
+campaignsInsert' pCiProfileId_ pCiDefaultLandingPageUrl_ pCiDefaultLandingPageName_ =
+    CampaignsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
@@ -109,7 +116,7 @@ campaignsInsert pCiProfileId_ pCiDefaultLandingPageUrl_ pCiDefaultLandingPageNam
     , _ciDefaultLandingPageName = pCiDefaultLandingPageName_
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,22 +171,23 @@ ciFields :: Lens' CampaignsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' CampaignsInsert' Text
+ciAlt :: Lens' CampaignsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest CampaignsInsert' where
         type Rs CampaignsInsert' = Campaign
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp
+        requestWithRoute r u CampaignsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
               _ciProfileId
               (Just _ciDefaultLandingPageUrl)
               _ciKey
               (Just _ciDefaultLandingPageName)
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CampaignsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CampaignsInsertResource)
                       r
                       u

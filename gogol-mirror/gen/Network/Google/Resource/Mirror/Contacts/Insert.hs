@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new contact.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorContactsInsert@.
-module Mirror.Contacts.Insert
+module Network.Google.Resource.Mirror.Contacts.Insert
     (
     -- * REST Resource
-      ContactsInsertAPI
+      ContactsInsertResource
 
     -- * Creating a Request
-    , contactsInsert
-    , ContactsInsert
+    , contactsInsert'
+    , ContactsInsert'
 
     -- * Request Lenses
     , ciQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorContactsInsert@ which the
--- 'ContactsInsert' request conforms to.
-type ContactsInsertAPI =
-     "contacts" :> Post '[JSON] Contact
+-- 'ContactsInsert'' request conforms to.
+type ContactsInsertResource =
+     "contacts" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Contact
 
 -- | Inserts a new contact.
 --
--- /See:/ 'contactsInsert' smart constructor.
-data ContactsInsert = ContactsInsert
+-- /See:/ 'contactsInsert'' smart constructor.
+data ContactsInsert' = ContactsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
     , _ciUserIp      :: !(Maybe Text)
     , _ciKey         :: !(Maybe Text)
     , _ciOauthToken  :: !(Maybe Text)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Text
+    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsInsert'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data ContactsInsert = ContactsInsert
 -- * 'ciFields'
 --
 -- * 'ciAlt'
-contactsInsert
-    :: ContactsInsert
-contactsInsert =
-    ContactsInsert
+contactsInsert'
+    :: ContactsInsert'
+contactsInsert' =
+    ContactsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
     , _ciUserIp = Nothing
     , _ciKey = Nothing
     , _ciOauthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = "json"
+    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,18 +131,20 @@ ciFields :: Lens' ContactsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
 -- | Data format for the response.
-ciAlt :: Lens' ContactsInsert' Text
+ciAlt :: Lens' ContactsInsert' Alt
 ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
 
 instance GoogleRequest ContactsInsert' where
         type Rs ContactsInsert' = Contact
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u ContactsInsert{..}
-          = go _ciQuotaUser _ciPrettyPrint _ciUserIp _ciKey
+        requestWithRoute r u ContactsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+              _ciKey
               _ciOauthToken
               _ciFields
-              _ciAlt
+              (Just _ciAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ContactsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ContactsInsertResource)
                       r
                       u

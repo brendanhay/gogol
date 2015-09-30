@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Exports variant set data to an external destination.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsetsExport@.
-module Genomics.Variantsets.Export
+module Network.Google.Resource.Genomics.Variantsets.Export
     (
     -- * REST Resource
-      VariantsetsExportAPI
+      VariantsetsExportResource
 
     -- * Creating a Request
-    , variantsetsExport
-    , VariantsetsExport
+    , variantsetsExport'
+    , VariantsetsExport'
 
     -- * Request Lenses
     , veQuotaUser
@@ -43,16 +44,24 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsetsExport@ which the
--- 'VariantsetsExport' request conforms to.
-type VariantsetsExportAPI =
+-- 'VariantsetsExport'' request conforms to.
+type VariantsetsExportResource =
      "variantsets" :>
        Capture "variantSetId" Text :>
-         "export" :> Post '[JSON] ExportVariantSetResponse
+         "export" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] ExportVariantSetResponse
 
 -- | Exports variant set data to an external destination.
 --
--- /See:/ 'variantsetsExport' smart constructor.
-data VariantsetsExport = VariantsetsExport
+-- /See:/ 'variantsetsExport'' smart constructor.
+data VariantsetsExport' = VariantsetsExport'
     { _veQuotaUser    :: !(Maybe Text)
     , _vePrettyPrint  :: !Bool
     , _veVariantSetId :: !Text
@@ -60,7 +69,7 @@ data VariantsetsExport = VariantsetsExport
     , _veKey          :: !(Maybe Text)
     , _veOauthToken   :: !(Maybe Text)
     , _veFields       :: !(Maybe Text)
-    , _veAlt          :: !Text
+    , _veAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
@@ -82,11 +91,11 @@ data VariantsetsExport = VariantsetsExport
 -- * 'veFields'
 --
 -- * 'veAlt'
-variantsetsExport
+variantsetsExport'
     :: Text -- ^ 'variantSetId'
-    -> VariantsetsExport
-variantsetsExport pVeVariantSetId_ =
-    VariantsetsExport
+    -> VariantsetsExport'
+variantsetsExport' pVeVariantSetId_ =
+    VariantsetsExport'
     { _veQuotaUser = Nothing
     , _vePrettyPrint = True
     , _veVariantSetId = pVeVariantSetId_
@@ -94,7 +103,7 @@ variantsetsExport pVeVariantSetId_ =
     , _veKey = Nothing
     , _veOauthToken = Nothing
     , _veFields = Nothing
-    , _veAlt = "json"
+    , _veAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +148,22 @@ veFields :: Lens' VariantsetsExport' (Maybe Text)
 veFields = lens _veFields (\ s a -> s{_veFields = a})
 
 -- | Data format for the response.
-veAlt :: Lens' VariantsetsExport' Text
+veAlt :: Lens' VariantsetsExport' Alt
 veAlt = lens _veAlt (\ s a -> s{_veAlt = a})
 
 instance GoogleRequest VariantsetsExport' where
         type Rs VariantsetsExport' = ExportVariantSetResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsetsExport{..}
-          = go _veQuotaUser _vePrettyPrint _veVariantSetId
+        requestWithRoute r u VariantsetsExport'{..}
+          = go _veQuotaUser (Just _vePrettyPrint)
+              _veVariantSetId
               _veUserIp
               _veKey
               _veOauthToken
               _veFields
-              _veAlt
+              (Just _veAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy VariantsetsExportAPI)
+                      (Proxy :: Proxy VariantsetsExportResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- dataset role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTabledataList@.
-module BigQuery.Tabledata.List
+module Network.Google.Resource.BigQuery.Tabledata.List
     (
     -- * REST Resource
-      TabledataListAPI
+      TabledataListResource
 
     -- * Creating a Request
-    , tabledataList
-    , TabledataList
+    , tabledataList'
+    , TabledataList'
 
     -- * Request Lenses
     , tQuotaUser
@@ -49,8 +50,8 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTabledataList@ which the
--- 'TabledataList' request conforms to.
-type TabledataListAPI =
+-- 'TabledataList'' request conforms to.
+type TabledataListResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
@@ -58,16 +59,23 @@ type TabledataListAPI =
              "tables" :>
                Capture "tableId" Text :>
                  "data" :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "startIndex" Word64 :>
-                       QueryParam "maxResults" Word32 :>
-                         Get '[JSON] TableDataList
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "startIndex" Word64 :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] TableDataList
 
 -- | Retrieves table data from a specified set of rows. Requires the READER
 -- dataset role.
 --
--- /See:/ 'tabledataList' smart constructor.
-data TabledataList = TabledataList
+-- /See:/ 'tabledataList'' smart constructor.
+data TabledataList' = TabledataList'
     { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
     , _tUserIp      :: !(Maybe Text)
@@ -80,7 +88,7 @@ data TabledataList = TabledataList
     , _tStartIndex  :: !(Maybe Word64)
     , _tMaxResults  :: !(Maybe Word32)
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Text
+    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataList'' with the minimum fields required to make a request.
@@ -112,13 +120,13 @@ data TabledataList = TabledataList
 -- * 'tFields'
 --
 -- * 'tAlt'
-tabledataList
+tabledataList'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TabledataList
-tabledataList pTDatasetId_ pTProjectId_ pTTableId_ =
-    TabledataList
+    -> TabledataList'
+tabledataList' pTDatasetId_ pTProjectId_ pTTableId_ =
+    TabledataList'
     { _tQuotaUser = Nothing
     , _tPrettyPrint = True
     , _tUserIp = Nothing
@@ -131,7 +139,7 @@ tabledataList pTDatasetId_ pTProjectId_ pTTableId_ =
     , _tStartIndex = Nothing
     , _tMaxResults = Nothing
     , _tFields = Nothing
-    , _tAlt = "json"
+    , _tAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -196,14 +204,14 @@ tFields :: Lens' TabledataList' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
 -- | Data format for the response.
-tAlt :: Lens' TabledataList' Text
+tAlt :: Lens' TabledataList' Alt
 tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
 
 instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TabledataList{..}
-          = go _tQuotaUser _tPrettyPrint _tUserIp _tKey
+        requestWithRoute r u TabledataList'{..}
+          = go _tQuotaUser (Just _tPrettyPrint) _tUserIp _tKey
               _tDatasetId
               _tPageToken
               _tProjectId
@@ -212,7 +220,9 @@ instance GoogleRequest TabledataList' where
               _tStartIndex
               _tMaxResults
               _tFields
-              _tAlt
+              (Just _tAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TabledataListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TabledataListResource)
+                      r
                       u

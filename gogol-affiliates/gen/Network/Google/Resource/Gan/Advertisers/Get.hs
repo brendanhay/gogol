@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- omitting the advertiserId query parameter.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanAdvertisersGet@.
-module Gan.Advertisers.Get
+module Network.Google.Resource.Gan.Advertisers.Get
     (
     -- * REST Resource
-      AdvertisersGetAPI
+      AdvertisersGetResource
 
     -- * Creating a Request
-    , advertisersGet
-    , AdvertisersGet
+    , advertisersGet'
+    , AdvertisersGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -48,31 +49,37 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanAdvertisersGet@ which the
--- 'AdvertisersGet' request conforms to.
-type AdvertisersGetAPI =
-     Capture "role" Text :>
+-- 'AdvertisersGet'' request conforms to.
+type AdvertisersGetResource =
+     Capture "role" GanAdvertisersGetRole :>
        Capture "roleId" Text :>
          "advertiser" :>
-           QueryParam "advertiserId" Text :>
-             Get '[JSON] Advertiser
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "advertiserId" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Advertiser
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only publishers can lookup
 -- advertisers. Advertisers can request information about themselves by
 -- omitting the advertiserId query parameter.
 --
--- /See:/ 'advertisersGet' smart constructor.
-data AdvertisersGet = AdvertisersGet
+-- /See:/ 'advertisersGet'' smart constructor.
+data AdvertisersGet' = AdvertisersGet'
     { _agQuotaUser    :: !(Maybe Text)
     , _agPrettyPrint  :: !Bool
     , _agUserIp       :: !(Maybe Text)
     , _agAdvertiserId :: !(Maybe Text)
     , _agRoleId       :: !Text
-    , _agRole         :: !Text
+    , _agRole         :: !GanAdvertisersGetRole
     , _agKey          :: !(Maybe Text)
     , _agOauthToken   :: !(Maybe Text)
     , _agFields       :: !(Maybe Text)
-    , _agAlt          :: !Text
+    , _agAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersGet'' with the minimum fields required to make a request.
@@ -98,12 +105,12 @@ data AdvertisersGet = AdvertisersGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-advertisersGet
+advertisersGet'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> AdvertisersGet
-advertisersGet pAgRoleId_ pAgRole_ =
-    AdvertisersGet
+    -> GanAdvertisersGetRole -- ^ 'role'
+    -> AdvertisersGet'
+advertisersGet' pAgRoleId_ pAgRole_ =
+    AdvertisersGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -113,7 +120,7 @@ advertisersGet pAgRoleId_ pAgRole_ =
     , _agKey = Nothing
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,7 +153,7 @@ agRoleId = lens _agRoleId (\ s a -> s{_agRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-agRole :: Lens' AdvertisersGet' Text
+agRole :: Lens' AdvertisersGet' GanAdvertisersGetRole
 agRole = lens _agRole (\ s a -> s{_agRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -165,22 +172,23 @@ agFields :: Lens' AdvertisersGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AdvertisersGet' Text
+agAlt :: Lens' AdvertisersGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u AdvertisersGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp
+        requestWithRoute r u AdvertisersGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
               _agAdvertiserId
               _agRoleId
               _agRole
               _agKey
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdvertisersGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AdvertisersGetResource)
                       r
                       u

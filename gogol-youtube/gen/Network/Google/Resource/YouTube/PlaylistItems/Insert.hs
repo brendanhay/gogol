@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a resource to a playlist.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubePlaylistItemsInsert@.
-module YouTube.PlaylistItems.Insert
+module Network.Google.Resource.YouTube.PlaylistItems.Insert
     (
     -- * REST Resource
-      PlaylistItemsInsertAPI
+      PlaylistItemsInsertResource
 
     -- * Creating a Request
-    , playlistItemsInsert
-    , PlaylistItemsInsert
+    , playlistItemsInsert'
+    , PlaylistItemsInsert'
 
     -- * Request Lenses
     , piiQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubePlaylistItemsInsert@ which the
--- 'PlaylistItemsInsert' request conforms to.
-type PlaylistItemsInsertAPI =
+-- 'PlaylistItemsInsert'' request conforms to.
+type PlaylistItemsInsertResource =
      "playlistItems" :>
-       QueryParam "part" Text :>
-         QueryParam "onBehalfOfContentOwner" Text :>
-           Post '[JSON] PlaylistItem
+       QueryParam "quotaUser" Text :>
+         QueryParam "part" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "onBehalfOfContentOwner" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] PlaylistItem
 
 -- | Adds a resource to a playlist.
 --
--- /See:/ 'playlistItemsInsert' smart constructor.
-data PlaylistItemsInsert = PlaylistItemsInsert
+-- /See:/ 'playlistItemsInsert'' smart constructor.
+data PlaylistItemsInsert' = PlaylistItemsInsert'
     { _piiQuotaUser              :: !(Maybe Text)
     , _piiPart                   :: !Text
     , _piiPrettyPrint            :: !Bool
@@ -63,7 +70,7 @@ data PlaylistItemsInsert = PlaylistItemsInsert
     , _piiKey                    :: !(Maybe Text)
     , _piiOauthToken             :: !(Maybe Text)
     , _piiFields                 :: !(Maybe Text)
-    , _piiAlt                    :: !Text
+    , _piiAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlaylistItemsInsert'' with the minimum fields required to make a request.
@@ -87,11 +94,11 @@ data PlaylistItemsInsert = PlaylistItemsInsert
 -- * 'piiFields'
 --
 -- * 'piiAlt'
-playlistItemsInsert
+playlistItemsInsert'
     :: Text -- ^ 'part'
-    -> PlaylistItemsInsert
-playlistItemsInsert pPiiPart_ =
-    PlaylistItemsInsert
+    -> PlaylistItemsInsert'
+playlistItemsInsert' pPiiPart_ =
+    PlaylistItemsInsert'
     { _piiQuotaUser = Nothing
     , _piiPart = pPiiPart_
     , _piiPrettyPrint = True
@@ -100,7 +107,7 @@ playlistItemsInsert pPiiPart_ =
     , _piiKey = Nothing
     , _piiOauthToken = Nothing
     , _piiFields = Nothing
-    , _piiAlt = "json"
+    , _piiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,22 +168,23 @@ piiFields
   = lens _piiFields (\ s a -> s{_piiFields = a})
 
 -- | Data format for the response.
-piiAlt :: Lens' PlaylistItemsInsert' Text
+piiAlt :: Lens' PlaylistItemsInsert' Alt
 piiAlt = lens _piiAlt (\ s a -> s{_piiAlt = a})
 
 instance GoogleRequest PlaylistItemsInsert' where
         type Rs PlaylistItemsInsert' = PlaylistItem
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u PlaylistItemsInsert{..}
-          = go _piiQuotaUser (Just _piiPart) _piiPrettyPrint
+        requestWithRoute r u PlaylistItemsInsert'{..}
+          = go _piiQuotaUser (Just _piiPart)
+              (Just _piiPrettyPrint)
               _piiUserIp
               _piiOnBehalfOfContentOwner
               _piiKey
               _piiOauthToken
               _piiFields
-              _piiAlt
+              (Just _piiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PlaylistItemsInsertAPI)
+                      (Proxy :: Proxy PlaylistItemsInsertResource)
                       r
                       u

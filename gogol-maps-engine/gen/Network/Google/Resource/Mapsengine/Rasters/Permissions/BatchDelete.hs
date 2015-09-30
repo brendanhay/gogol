@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRastersPermissionsBatchDelete@.
-module Mapsengine.Rasters.Permissions.BatchDelete
+module Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchDelete
     (
     -- * REST Resource
-      RastersPermissionsBatchDeleteAPI
+      RastersPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , rastersPermissionsBatchDelete
-    , RastersPermissionsBatchDelete
+    , rastersPermissionsBatchDelete'
+    , RastersPermissionsBatchDelete'
 
     -- * Request Lenses
     , rpbdQuotaUser
@@ -43,18 +44,25 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRastersPermissionsBatchDelete@ which the
--- 'RastersPermissionsBatchDelete' request conforms to.
-type RastersPermissionsBatchDeleteAPI =
+-- 'RastersPermissionsBatchDelete'' request conforms to.
+type RastersPermissionsBatchDeleteResource =
      "rasters" :>
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'rastersPermissionsBatchDelete' smart constructor.
-data RastersPermissionsBatchDelete = RastersPermissionsBatchDelete
+-- /See:/ 'rastersPermissionsBatchDelete'' smart constructor.
+data RastersPermissionsBatchDelete' = RastersPermissionsBatchDelete'
     { _rpbdQuotaUser   :: !(Maybe Text)
     , _rpbdPrettyPrint :: !Bool
     , _rpbdUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data RastersPermissionsBatchDelete = RastersPermissionsBatchDelete
     , _rpbdId          :: !Text
     , _rpbdOauthToken  :: !(Maybe Text)
     , _rpbdFields      :: !(Maybe Text)
-    , _rpbdAlt         :: !Text
+    , _rpbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RastersPermissionsBatchDelete'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data RastersPermissionsBatchDelete = RastersPermissionsBatchDelete
 -- * 'rpbdFields'
 --
 -- * 'rpbdAlt'
-rastersPermissionsBatchDelete
+rastersPermissionsBatchDelete'
     :: Text -- ^ 'id'
-    -> RastersPermissionsBatchDelete
-rastersPermissionsBatchDelete pRpbdId_ =
-    RastersPermissionsBatchDelete
+    -> RastersPermissionsBatchDelete'
+rastersPermissionsBatchDelete' pRpbdId_ =
+    RastersPermissionsBatchDelete'
     { _rpbdQuotaUser = Nothing
     , _rpbdPrettyPrint = True
     , _rpbdUserIp = Nothing
@@ -96,7 +104,7 @@ rastersPermissionsBatchDelete pRpbdId_ =
     , _rpbdId = pRpbdId_
     , _rpbdOauthToken = Nothing
     , _rpbdFields = Nothing
-    , _rpbdAlt = "json"
+    , _rpbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ rpbdFields
   = lens _rpbdFields (\ s a -> s{_rpbdFields = a})
 
 -- | Data format for the response.
-rpbdAlt :: Lens' RastersPermissionsBatchDelete' Text
+rpbdAlt :: Lens' RastersPermissionsBatchDelete' Alt
 rpbdAlt = lens _rpbdAlt (\ s a -> s{_rpbdAlt = a})
 
 instance GoogleRequest RastersPermissionsBatchDelete'
@@ -150,15 +158,17 @@ instance GoogleRequest RastersPermissionsBatchDelete'
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RastersPermissionsBatchDelete{..}
-          = go _rpbdQuotaUser _rpbdPrettyPrint _rpbdUserIp
+          RastersPermissionsBatchDelete'{..}
+          = go _rpbdQuotaUser (Just _rpbdPrettyPrint)
+              _rpbdUserIp
               _rpbdKey
               _rpbdId
               _rpbdOauthToken
               _rpbdFields
-              _rpbdAlt
+              (Just _rpbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RastersPermissionsBatchDeleteAPI)
+                      (Proxy ::
+                         Proxy RastersPermissionsBatchDeleteResource)
                       r
                       u

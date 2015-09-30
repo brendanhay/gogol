@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a specific task by its ID.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskGet@.
-module FusionTables.Task.Get
+module Network.Google.Resource.FusionTables.Task.Get
     (
     -- * REST Resource
-      TaskGetAPI
+      TaskGetResource
 
     -- * Creating a Request
-    , taskGet
-    , TaskGet
+    , taskGet'
+    , TaskGet'
 
     -- * Request Lenses
     , tgQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTaskGet@ which the
--- 'TaskGet' request conforms to.
-type TaskGetAPI =
+-- 'TaskGet'' request conforms to.
+type TaskGetResource =
      "tables" :>
        Capture "tableId" Text :>
-         "tasks" :> Capture "taskId" Text :> Get '[JSON] Task
+         "tasks" :>
+           Capture "taskId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Task
 
 -- | Retrieves a specific task by its ID.
 --
--- /See:/ 'taskGet' smart constructor.
-data TaskGet = TaskGet
+-- /See:/ 'taskGet'' smart constructor.
+data TaskGet' = TaskGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgTaskId      :: !Text
@@ -62,7 +71,7 @@ data TaskGet = TaskGet
     , _tgOauthToken  :: !(Maybe Text)
     , _tgTableId     :: !Text
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data TaskGet = TaskGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-taskGet
+taskGet'
     :: Text -- ^ 'taskId'
     -> Text -- ^ 'tableId'
-    -> TaskGet
-taskGet pTgTaskId_ pTgTableId_ =
-    TaskGet
+    -> TaskGet'
+taskGet' pTgTaskId_ pTgTableId_ =
+    TaskGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgTaskId = pTgTaskId_
@@ -100,7 +109,7 @@ taskGet pTgTaskId_ pTgTableId_ =
     , _tgOauthToken = Nothing
     , _tgTableId = pTgTableId_
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,18 +155,20 @@ tgFields :: Lens' TaskGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TaskGet' Text
+tgAlt :: Lens' TaskGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TaskGet' where
         type Rs TaskGet' = Task
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TaskGet{..}
-          = go _tgQuotaUser _tgPrettyPrint _tgTaskId _tgUserIp
+        requestWithRoute r u TaskGet'{..}
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgTaskId
+              _tgUserIp
               _tgKey
               _tgOauthToken
               _tgTableId
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TaskGetResource) r
+                      u

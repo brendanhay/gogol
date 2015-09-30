@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates or updates a localized store listing.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsListingsUpdate@.
-module Androidpublisher.Edits.Listings.Update
+module Network.Google.Resource.Androidpublisher.Edits.Listings.Update
     (
     -- * REST Resource
-      EditsListingsUpdateAPI
+      EditsListingsUpdateResource
 
     -- * Creating a Request
-    , editsListingsUpdate
-    , EditsListingsUpdate
+    , editsListingsUpdate'
+    , EditsListingsUpdate'
 
     -- * Request Lenses
     , eluQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsListingsUpdate@ which the
--- 'EditsListingsUpdate' request conforms to.
-type EditsListingsUpdateAPI =
+-- 'EditsListingsUpdate'' request conforms to.
+type EditsListingsUpdateResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "listings" :>
-             Capture "language" Text :> Put '[JSON] Listing
+             Capture "language" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] Listing
 
 -- | Creates or updates a localized store listing.
 --
--- /See:/ 'editsListingsUpdate' smart constructor.
-data EditsListingsUpdate = EditsListingsUpdate
+-- /See:/ 'editsListingsUpdate'' smart constructor.
+data EditsListingsUpdate' = EditsListingsUpdate'
     { _eluQuotaUser   :: !(Maybe Text)
     , _eluPrettyPrint :: !Bool
     , _eluPackageName :: !Text
@@ -66,7 +74,7 @@ data EditsListingsUpdate = EditsListingsUpdate
     , _eluOauthToken  :: !(Maybe Text)
     , _eluEditId      :: !Text
     , _eluFields      :: !(Maybe Text)
-    , _eluAlt         :: !Text
+    , _eluAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsUpdate'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data EditsListingsUpdate = EditsListingsUpdate
 -- * 'eluFields'
 --
 -- * 'eluAlt'
-editsListingsUpdate
+editsListingsUpdate'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsListingsUpdate
-editsListingsUpdate pEluPackageName_ pEluLanguage_ pEluEditId_ =
-    EditsListingsUpdate
+    -> EditsListingsUpdate'
+editsListingsUpdate' pEluPackageName_ pEluLanguage_ pEluEditId_ =
+    EditsListingsUpdate'
     { _eluQuotaUser = Nothing
     , _eluPrettyPrint = True
     , _eluPackageName = pEluPackageName_
@@ -108,7 +116,7 @@ editsListingsUpdate pEluPackageName_ pEluLanguage_ pEluEditId_ =
     , _eluOauthToken = Nothing
     , _eluEditId = pEluEditId_
     , _eluFields = Nothing
-    , _eluAlt = "json"
+    , _eluAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,23 +174,24 @@ eluFields
   = lens _eluFields (\ s a -> s{_eluFields = a})
 
 -- | Data format for the response.
-eluAlt :: Lens' EditsListingsUpdate' Text
+eluAlt :: Lens' EditsListingsUpdate' Alt
 eluAlt = lens _eluAlt (\ s a -> s{_eluAlt = a})
 
 instance GoogleRequest EditsListingsUpdate' where
         type Rs EditsListingsUpdate' = Listing
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsListingsUpdate{..}
-          = go _eluQuotaUser _eluPrettyPrint _eluPackageName
+        requestWithRoute r u EditsListingsUpdate'{..}
+          = go _eluQuotaUser (Just _eluPrettyPrint)
+              _eluPackageName
               _eluUserIp
               _eluKey
               _eluLanguage
               _eluOauthToken
               _eluEditId
               _eluFields
-              _eluAlt
+              (Just _eluAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsListingsUpdateAPI)
+                      (Proxy :: Proxy EditsListingsUpdateResource)
                       r
                       u

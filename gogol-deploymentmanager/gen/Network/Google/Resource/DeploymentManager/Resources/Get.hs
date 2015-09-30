@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets information about a single resource.
 --
 -- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerResourcesGet@.
-module DeploymentManager.Resources.Get
+module Network.Google.Resource.DeploymentManager.Resources.Get
     (
     -- * REST Resource
-      ResourcesGetAPI
+      ResourcesGetResource
 
     -- * Creating a Request
-    , resourcesGet
-    , ResourcesGet
+    , resourcesGet'
+    , ResourcesGet'
 
     -- * Request Lenses
     , rgQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DeploymentmanagerResourcesGet@ which the
--- 'ResourcesGet' request conforms to.
-type ResourcesGetAPI =
+-- 'ResourcesGet'' request conforms to.
+type ResourcesGetResource =
      Capture "project" Text :>
        "global" :>
          "deployments" :>
            Capture "deployment" Text :>
              "resources" :>
-               Capture "resource" Text :> Get '[JSON] Resource
+               Capture "resource" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Resource
 
 -- | Gets information about a single resource.
 --
--- /See:/ 'resourcesGet' smart constructor.
-data ResourcesGet = ResourcesGet
+-- /See:/ 'resourcesGet'' smart constructor.
+data ResourcesGet' = ResourcesGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgProject     :: !Text
@@ -66,7 +74,7 @@ data ResourcesGet = ResourcesGet
     , _rgResource    :: !Text
     , _rgOauthToken  :: !(Maybe Text)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Text
+    , _rgAlt         :: !Alt
     , _rgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -93,13 +101,13 @@ data ResourcesGet = ResourcesGet
 -- * 'rgAlt'
 --
 -- * 'rgDeployment'
-resourcesGet
+resourcesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'resource'
     -> Text -- ^ 'deployment'
-    -> ResourcesGet
-resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
-    ResourcesGet
+    -> ResourcesGet'
+resourcesGet' pRgProject_ pRgResource_ pRgDeployment_ =
+    ResourcesGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgProject = pRgProject_
@@ -108,7 +116,7 @@ resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
     , _rgResource = pRgResource_
     , _rgOauthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = "json"
+    , _rgAlt = JSON
     , _rgDeployment = pRgDeployment_
     }
 
@@ -156,7 +164,7 @@ rgFields :: Lens' ResourcesGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
 -- | Data format for the response.
-rgAlt :: Lens' ResourcesGet' Text
+rgAlt :: Lens' ResourcesGet' Alt
 rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
 
 -- | The name of the deployment for this request.
@@ -168,14 +176,17 @@ instance GoogleRequest ResourcesGet' where
         type Rs ResourcesGet' = Resource
         request
           = requestWithRoute defReq deploymentManagerURL
-        requestWithRoute r u ResourcesGet{..}
-          = go _rgQuotaUser _rgPrettyPrint _rgProject _rgUserIp
+        requestWithRoute r u ResourcesGet'{..}
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgProject
+              _rgUserIp
               _rgKey
               _rgResource
               _rgOauthToken
               _rgFields
-              _rgAlt
+              (Just _rgAlt)
               _rgDeployment
           where go
-                  = clientWithRoute (Proxy :: Proxy ResourcesGetAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy ResourcesGetResource)
+                      r
                       u

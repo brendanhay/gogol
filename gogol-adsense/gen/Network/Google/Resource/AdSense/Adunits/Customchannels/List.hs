@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,186 +20,193 @@
 -- | List all custom channels which the specified ad unit belongs to.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAdunitsCustomchannelsList@.
-module AdSense.Adunits.Customchannels.List
+module Network.Google.Resource.AdSense.Adunits.Customchannels.List
     (
     -- * REST Resource
-      AdunitsCustomchannelsListAPI
+      AdunitsCustomchannelsListResource
 
     -- * Creating a Request
-    , adunitsCustomchannelsList
-    , AdunitsCustomchannelsList
+    , adunitsCustomchannelsList'
+    , AdunitsCustomchannelsList'
 
     -- * Request Lenses
-    , aduQuotaUser
-    , aduPrettyPrint
-    , aduUserIp
-    , aduAdUnitId
-    , aduAdClientId
-    , aduKey
-    , aduPageToken
-    , aduOauthToken
-    , aduMaxResults
-    , aduFields
-    , aduAlt
+    , aclQuotaUser
+    , aclPrettyPrint
+    , aclUserIp
+    , aclAdUnitId
+    , aclAdClientId
+    , aclKey
+    , aclPageToken
+    , aclOauthToken
+    , aclMaxResults
+    , aclFields
+    , aclAlt
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAdunitsCustomchannelsList@ which the
--- 'AdunitsCustomchannelsList' request conforms to.
-type AdunitsCustomchannelsListAPI =
+-- 'AdunitsCustomchannelsList'' request conforms to.
+type AdunitsCustomchannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "adunits" :>
            Capture "adUnitId" Text :>
              "customchannels" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] CustomChannels
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] CustomChannels
 
 -- | List all custom channels which the specified ad unit belongs to.
 --
--- /See:/ 'adunitsCustomchannelsList' smart constructor.
-data AdunitsCustomchannelsList = AdunitsCustomchannelsList
-    { _aduQuotaUser   :: !(Maybe Text)
-    , _aduPrettyPrint :: !Bool
-    , _aduUserIp      :: !(Maybe Text)
-    , _aduAdUnitId    :: !Text
-    , _aduAdClientId  :: !Text
-    , _aduKey         :: !(Maybe Text)
-    , _aduPageToken   :: !(Maybe Text)
-    , _aduOauthToken  :: !(Maybe Text)
-    , _aduMaxResults  :: !(Maybe Int32)
-    , _aduFields      :: !(Maybe Text)
-    , _aduAlt         :: !Text
+-- /See:/ 'adunitsCustomchannelsList'' smart constructor.
+data AdunitsCustomchannelsList' = AdunitsCustomchannelsList'
+    { _aclQuotaUser   :: !(Maybe Text)
+    , _aclPrettyPrint :: !Bool
+    , _aclUserIp      :: !(Maybe Text)
+    , _aclAdUnitId    :: !Text
+    , _aclAdClientId  :: !Text
+    , _aclKey         :: !(Maybe Text)
+    , _aclPageToken   :: !(Maybe Text)
+    , _aclOauthToken  :: !(Maybe Text)
+    , _aclMaxResults  :: !(Maybe Int32)
+    , _aclFields      :: !(Maybe Text)
+    , _aclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdunitsCustomchannelsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aduQuotaUser'
+-- * 'aclQuotaUser'
 --
--- * 'aduPrettyPrint'
+-- * 'aclPrettyPrint'
 --
--- * 'aduUserIp'
+-- * 'aclUserIp'
 --
--- * 'aduAdUnitId'
+-- * 'aclAdUnitId'
 --
--- * 'aduAdClientId'
+-- * 'aclAdClientId'
 --
--- * 'aduKey'
+-- * 'aclKey'
 --
--- * 'aduPageToken'
+-- * 'aclPageToken'
 --
--- * 'aduOauthToken'
+-- * 'aclOauthToken'
 --
--- * 'aduMaxResults'
+-- * 'aclMaxResults'
 --
--- * 'aduFields'
+-- * 'aclFields'
 --
--- * 'aduAlt'
-adunitsCustomchannelsList
+-- * 'aclAlt'
+adunitsCustomchannelsList'
     :: Text -- ^ 'adUnitId'
     -> Text -- ^ 'adClientId'
-    -> AdunitsCustomchannelsList
-adunitsCustomchannelsList pAduAdUnitId_ pAduAdClientId_ =
-    AdunitsCustomchannelsList
-    { _aduQuotaUser = Nothing
-    , _aduPrettyPrint = True
-    , _aduUserIp = Nothing
-    , _aduAdUnitId = pAduAdUnitId_
-    , _aduAdClientId = pAduAdClientId_
-    , _aduKey = Nothing
-    , _aduPageToken = Nothing
-    , _aduOauthToken = Nothing
-    , _aduMaxResults = Nothing
-    , _aduFields = Nothing
-    , _aduAlt = "json"
+    -> AdunitsCustomchannelsList'
+adunitsCustomchannelsList' pAclAdUnitId_ pAclAdClientId_ =
+    AdunitsCustomchannelsList'
+    { _aclQuotaUser = Nothing
+    , _aclPrettyPrint = True
+    , _aclUserIp = Nothing
+    , _aclAdUnitId = pAclAdUnitId_
+    , _aclAdClientId = pAclAdClientId_
+    , _aclKey = Nothing
+    , _aclPageToken = Nothing
+    , _aclOauthToken = Nothing
+    , _aclMaxResults = Nothing
+    , _aclFields = Nothing
+    , _aclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aduQuotaUser :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduQuotaUser
-  = lens _aduQuotaUser (\ s a -> s{_aduQuotaUser = a})
+aclQuotaUser :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclQuotaUser
+  = lens _aclQuotaUser (\ s a -> s{_aclQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aduPrettyPrint :: Lens' AdunitsCustomchannelsList' Bool
-aduPrettyPrint
-  = lens _aduPrettyPrint
-      (\ s a -> s{_aduPrettyPrint = a})
+aclPrettyPrint :: Lens' AdunitsCustomchannelsList' Bool
+aclPrettyPrint
+  = lens _aclPrettyPrint
+      (\ s a -> s{_aclPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aduUserIp :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduUserIp
-  = lens _aduUserIp (\ s a -> s{_aduUserIp = a})
+aclUserIp :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclUserIp
+  = lens _aclUserIp (\ s a -> s{_aclUserIp = a})
 
 -- | Ad unit for which to list custom channels.
-aduAdUnitId :: Lens' AdunitsCustomchannelsList' Text
-aduAdUnitId
-  = lens _aduAdUnitId (\ s a -> s{_aduAdUnitId = a})
+aclAdUnitId :: Lens' AdunitsCustomchannelsList' Text
+aclAdUnitId
+  = lens _aclAdUnitId (\ s a -> s{_aclAdUnitId = a})
 
 -- | Ad client which contains the ad unit.
-aduAdClientId :: Lens' AdunitsCustomchannelsList' Text
-aduAdClientId
-  = lens _aduAdClientId
-      (\ s a -> s{_aduAdClientId = a})
+aclAdClientId :: Lens' AdunitsCustomchannelsList' Text
+aclAdClientId
+  = lens _aclAdClientId
+      (\ s a -> s{_aclAdClientId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aduKey :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduKey = lens _aduKey (\ s a -> s{_aduKey = a})
+aclKey :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclKey = lens _aclKey (\ s a -> s{_aclKey = a})
 
 -- | A continuation token, used to page through custom channels. To retrieve
 -- the next page, set this parameter to the value of \"nextPageToken\" from
 -- the previous response.
-aduPageToken :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduPageToken
-  = lens _aduPageToken (\ s a -> s{_aduPageToken = a})
+aclPageToken :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclPageToken
+  = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aduOauthToken :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduOauthToken
-  = lens _aduOauthToken
-      (\ s a -> s{_aduOauthToken = a})
+aclOauthToken :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclOauthToken
+  = lens _aclOauthToken
+      (\ s a -> s{_aclOauthToken = a})
 
 -- | The maximum number of custom channels to include in the response, used
 -- for paging.
-aduMaxResults :: Lens' AdunitsCustomchannelsList' (Maybe Int32)
-aduMaxResults
-  = lens _aduMaxResults
-      (\ s a -> s{_aduMaxResults = a})
+aclMaxResults :: Lens' AdunitsCustomchannelsList' (Maybe Int32)
+aclMaxResults
+  = lens _aclMaxResults
+      (\ s a -> s{_aclMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aduFields :: Lens' AdunitsCustomchannelsList' (Maybe Text)
-aduFields
-  = lens _aduFields (\ s a -> s{_aduFields = a})
+aclFields :: Lens' AdunitsCustomchannelsList' (Maybe Text)
+aclFields
+  = lens _aclFields (\ s a -> s{_aclFields = a})
 
 -- | Data format for the response.
-aduAlt :: Lens' AdunitsCustomchannelsList' Text
-aduAlt = lens _aduAlt (\ s a -> s{_aduAlt = a})
+aclAlt :: Lens' AdunitsCustomchannelsList' Alt
+aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
 
 instance GoogleRequest AdunitsCustomchannelsList'
          where
         type Rs AdunitsCustomchannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AdunitsCustomchannelsList{..}
-          = go _aduQuotaUser _aduPrettyPrint _aduUserIp
-              _aduAdUnitId
-              _aduAdClientId
-              _aduKey
-              _aduPageToken
-              _aduOauthToken
-              _aduMaxResults
-              _aduFields
-              _aduAlt
+        requestWithRoute r u AdunitsCustomchannelsList'{..}
+          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIp
+              _aclAdUnitId
+              _aclAdClientId
+              _aclKey
+              _aclPageToken
+              _aclOauthToken
+              _aclMaxResults
+              _aclFields
+              (Just _aclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdunitsCustomchannelsListAPI)
+                      (Proxy :: Proxy AdunitsCustomchannelsListResource)
                       r
                       u

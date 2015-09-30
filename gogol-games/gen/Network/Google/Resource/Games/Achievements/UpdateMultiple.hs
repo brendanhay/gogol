@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates multiple achievements for the currently authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesAchievementsUpdateMultiple@.
-module Games.Achievements.UpdateMultiple
+module Network.Google.Resource.Games.Achievements.UpdateMultiple
     (
     -- * REST Resource
-      AchievementsUpdateMultipleAPI
+      AchievementsUpdateMultipleResource
 
     -- * Creating a Request
-    , achievementsUpdateMultiple
-    , AchievementsUpdateMultiple
+    , achievementsUpdateMultiple'
+    , AchievementsUpdateMultiple'
 
     -- * Request Lenses
     , aumQuotaUser
@@ -42,23 +43,30 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesAchievementsUpdateMultiple@ which the
--- 'AchievementsUpdateMultiple' request conforms to.
-type AchievementsUpdateMultipleAPI =
+-- 'AchievementsUpdateMultiple'' request conforms to.
+type AchievementsUpdateMultipleResource =
      "achievements" :>
        "updateMultiple" :>
-         Post '[JSON] AchievementUpdateMultipleResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] AchievementUpdateMultipleResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 --
--- /See:/ 'achievementsUpdateMultiple' smart constructor.
-data AchievementsUpdateMultiple = AchievementsUpdateMultiple
+-- /See:/ 'achievementsUpdateMultiple'' smart constructor.
+data AchievementsUpdateMultiple' = AchievementsUpdateMultiple'
     { _aumQuotaUser   :: !(Maybe Text)
     , _aumPrettyPrint :: !Bool
     , _aumUserIp      :: !(Maybe Text)
     , _aumKey         :: !(Maybe Text)
     , _aumOauthToken  :: !(Maybe Text)
     , _aumFields      :: !(Maybe Text)
-    , _aumAlt         :: !Text
+    , _aumAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUpdateMultiple'' with the minimum fields required to make a request.
@@ -78,17 +86,17 @@ data AchievementsUpdateMultiple = AchievementsUpdateMultiple
 -- * 'aumFields'
 --
 -- * 'aumAlt'
-achievementsUpdateMultiple
-    :: AchievementsUpdateMultiple
-achievementsUpdateMultiple =
-    AchievementsUpdateMultiple
+achievementsUpdateMultiple'
+    :: AchievementsUpdateMultiple'
+achievementsUpdateMultiple' =
+    AchievementsUpdateMultiple'
     { _aumQuotaUser = Nothing
     , _aumPrettyPrint = True
     , _aumUserIp = Nothing
     , _aumKey = Nothing
     , _aumOauthToken = Nothing
     , _aumFields = Nothing
-    , _aumAlt = "json"
+    , _aumAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +136,7 @@ aumFields
   = lens _aumFields (\ s a -> s{_aumFields = a})
 
 -- | Data format for the response.
-aumAlt :: Lens' AchievementsUpdateMultiple' Text
+aumAlt :: Lens' AchievementsUpdateMultiple' Alt
 aumAlt = lens _aumAlt (\ s a -> s{_aumAlt = a})
 
 instance GoogleRequest AchievementsUpdateMultiple'
@@ -136,13 +144,14 @@ instance GoogleRequest AchievementsUpdateMultiple'
         type Rs AchievementsUpdateMultiple' =
              AchievementUpdateMultipleResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u AchievementsUpdateMultiple{..}
-          = go _aumQuotaUser _aumPrettyPrint _aumUserIp _aumKey
+        requestWithRoute r u AchievementsUpdateMultiple'{..}
+          = go _aumQuotaUser (Just _aumPrettyPrint) _aumUserIp
+              _aumKey
               _aumOauthToken
               _aumFields
-              _aumAlt
+              (Just _aumAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsUpdateMultipleAPI)
+                      (Proxy :: Proxy AchievementsUpdateMultipleResource)
                       r
                       u

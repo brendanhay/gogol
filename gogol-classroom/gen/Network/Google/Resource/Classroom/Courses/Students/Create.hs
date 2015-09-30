@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- is already a student or teacher in the course.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsCreate@.
-module Classroom.Courses.Students.Create
+module Network.Google.Resource.Classroom.Courses.Students.Create
     (
     -- * REST Resource
-      CoursesStudentsCreateAPI
+      CoursesStudentsCreateResource
 
     -- * Creating a Request
-    , coursesStudentsCreate
-    , CoursesStudentsCreate
+    , coursesStudentsCreate'
+    , CoursesStudentsCreate'
 
     -- * Request Lenses
     , cscXgafv
@@ -56,14 +57,27 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesStudentsCreate@ which the
--- 'CoursesStudentsCreate' request conforms to.
-type CoursesStudentsCreateAPI =
+-- 'CoursesStudentsCreate'' request conforms to.
+type CoursesStudentsCreateResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             QueryParam "enrollmentCode" Text :>
-               Post '[JSON] Student
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "enrollmentCode" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Post '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -73,8 +87,8 @@ type CoursesStudentsCreateAPI =
 -- requested user\'s account is disabled. * \`ALREADY_EXISTS\` if the user
 -- is already a student or teacher in the course.
 --
--- /See:/ 'coursesStudentsCreate' smart constructor.
-data CoursesStudentsCreate = CoursesStudentsCreate
+-- /See:/ 'coursesStudentsCreate'' smart constructor.
+data CoursesStudentsCreate' = CoursesStudentsCreate'
     { _cscXgafv          :: !(Maybe Text)
     , _cscQuotaUser      :: !(Maybe Text)
     , _cscPrettyPrint    :: !Bool
@@ -125,11 +139,11 @@ data CoursesStudentsCreate = CoursesStudentsCreate
 -- * 'cscCallback'
 --
 -- * 'cscAlt'
-coursesStudentsCreate
+coursesStudentsCreate'
     :: Text -- ^ 'courseId'
-    -> CoursesStudentsCreate
-coursesStudentsCreate pCscCourseId_ =
-    CoursesStudentsCreate
+    -> CoursesStudentsCreate'
+coursesStudentsCreate' pCscCourseId_ =
+    CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscQuotaUser = Nothing
     , _cscPrettyPrint = True
@@ -237,10 +251,10 @@ cscAlt = lens _cscAlt (\ s a -> s{_cscAlt = a})
 instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesStudentsCreate{..}
-          = go _cscXgafv _cscQuotaUser _cscPrettyPrint
+        requestWithRoute r u CoursesStudentsCreate'{..}
+          = go _cscXgafv _cscQuotaUser (Just _cscPrettyPrint)
               _cscUploadProtocol
-              _cscPp
+              (Just _cscPp)
               _cscCourseId
               _cscAccessToken
               _cscUploadType
@@ -250,9 +264,9 @@ instance GoogleRequest CoursesStudentsCreate' where
               _cscOauthToken
               _cscFields
               _cscCallback
-              _cscAlt
+              (Just _cscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesStudentsCreateAPI)
+                      (Proxy :: Proxy CoursesStudentsCreateResource)
                       r
                       u

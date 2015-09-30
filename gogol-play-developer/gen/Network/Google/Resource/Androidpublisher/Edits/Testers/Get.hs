@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsTestersGet@.
-module Androidpublisher.Edits.Testers.Get
+module Network.Google.Resource.Androidpublisher.Edits.Testers.Get
     (
     -- * REST Resource
-      EditsTestersGetAPI
+      EditsTestersGetResource
 
     -- * Creating a Request
-    , editsTestersGet
-    , EditsTestersGet
+    , editsTestersGet'
+    , EditsTestersGet'
 
     -- * Request Lenses
     , etgtQuotaUser
@@ -45,19 +46,27 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsTestersGet@ which the
--- 'EditsTestersGet' request conforms to.
-type EditsTestersGetAPI =
+-- 'EditsTestersGet'' request conforms to.
+type EditsTestersGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "testers" :>
-             Capture "track" Text :> Get '[JSON] Testers
+             Capture "track" AndroidpublisherEditsTestersGetTrack
+               :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Testers
 
 --
--- /See:/ 'editsTestersGet' smart constructor.
-data EditsTestersGet = EditsTestersGet
+-- /See:/ 'editsTestersGet'' smart constructor.
+data EditsTestersGet' = EditsTestersGet'
     { _etgtQuotaUser   :: !(Maybe Text)
-    , _etgtTrack       :: !Text
+    , _etgtTrack       :: !AndroidpublisherEditsTestersGetTrack
     , _etgtPrettyPrint :: !Bool
     , _etgtPackageName :: !Text
     , _etgtUserIp      :: !(Maybe Text)
@@ -65,7 +74,7 @@ data EditsTestersGet = EditsTestersGet
     , _etgtOauthToken  :: !(Maybe Text)
     , _etgtEditId      :: !Text
     , _etgtFields      :: !(Maybe Text)
-    , _etgtAlt         :: !Text
+    , _etgtAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsTestersGet'' with the minimum fields required to make a request.
@@ -91,13 +100,13 @@ data EditsTestersGet = EditsTestersGet
 -- * 'etgtFields'
 --
 -- * 'etgtAlt'
-editsTestersGet
-    :: Text -- ^ 'track'
+editsTestersGet'
+    :: AndroidpublisherEditsTestersGetTrack -- ^ 'track'
     -> Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsTestersGet
-editsTestersGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
-    EditsTestersGet
+    -> EditsTestersGet'
+editsTestersGet' pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
+    EditsTestersGet'
     { _etgtQuotaUser = Nothing
     , _etgtTrack = pEtgtTrack_
     , _etgtPrettyPrint = True
@@ -107,7 +116,7 @@ editsTestersGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
     , _etgtOauthToken = Nothing
     , _etgtEditId = pEtgtEditId_
     , _etgtFields = Nothing
-    , _etgtAlt = "json"
+    , _etgtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,7 +127,7 @@ etgtQuotaUser
   = lens _etgtQuotaUser
       (\ s a -> s{_etgtQuotaUser = a})
 
-etgtTrack :: Lens' EditsTestersGet' Text
+etgtTrack :: Lens' EditsTestersGet' AndroidpublisherEditsTestersGetTrack
 etgtTrack
   = lens _etgtTrack (\ s a -> s{_etgtTrack = a})
 
@@ -164,22 +173,24 @@ etgtFields
   = lens _etgtFields (\ s a -> s{_etgtFields = a})
 
 -- | Data format for the response.
-etgtAlt :: Lens' EditsTestersGet' Text
+etgtAlt :: Lens' EditsTestersGet' Alt
 etgtAlt = lens _etgtAlt (\ s a -> s{_etgtAlt = a})
 
 instance GoogleRequest EditsTestersGet' where
         type Rs EditsTestersGet' = Testers
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsTestersGet{..}
-          = go _etgtQuotaUser _etgtTrack _etgtPrettyPrint
+        requestWithRoute r u EditsTestersGet'{..}
+          = go _etgtQuotaUser _etgtTrack
+              (Just _etgtPrettyPrint)
               _etgtPackageName
               _etgtUserIp
               _etgtKey
               _etgtOauthToken
               _etgtEditId
               _etgtFields
-              _etgtAlt
+              (Just _etgtAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EditsTestersGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EditsTestersGetResource)
                       r
                       u

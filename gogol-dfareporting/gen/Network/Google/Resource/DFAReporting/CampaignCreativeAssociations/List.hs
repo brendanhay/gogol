@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- campaign.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignCreativeAssociationsList@.
-module DFAReporting.CampaignCreativeAssociations.List
+module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     (
     -- * REST Resource
-      CampaignCreativeAssociationsListAPI
+      CampaignCreativeAssociationsListResource
 
     -- * Creating a Request
-    , campaignCreativeAssociationsList
-    , CampaignCreativeAssociationsList
+    , campaignCreativeAssociationsList'
+    , CampaignCreativeAssociationsList'
 
     -- * Request Lenses
     , ccalQuotaUser
@@ -48,35 +49,45 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignCreativeAssociationsList@ which the
--- 'CampaignCreativeAssociationsList' request conforms to.
-type CampaignCreativeAssociationsListAPI =
+-- 'CampaignCreativeAssociationsList'' request conforms to.
+type CampaignCreativeAssociationsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
            Capture "campaignId" Int64 :>
              "campaignCreativeAssociations" :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :>
-                     Get '[JSON] CampaignCreativeAssociationsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "sortOrder"
+                       DfareportingCampaignCreativeAssociationsListSortOrder
+                       :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON]
+                                     CampaignCreativeAssociationsListResponse
 
 -- | Retrieves the list of creative IDs associated with the specified
 -- campaign.
 --
--- /See:/ 'campaignCreativeAssociationsList' smart constructor.
-data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
+-- /See:/ 'campaignCreativeAssociationsList'' smart constructor.
+data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     { _ccalQuotaUser   :: !(Maybe Text)
     , _ccalPrettyPrint :: !Bool
     , _ccalUserIp      :: !(Maybe Text)
     , _ccalCampaignId  :: !Int64
     , _ccalProfileId   :: !Int64
-    , _ccalSortOrder   :: !(Maybe Text)
+    , _ccalSortOrder   :: !(Maybe DfareportingCampaignCreativeAssociationsListSortOrder)
     , _ccalKey         :: !(Maybe Text)
     , _ccalPageToken   :: !(Maybe Text)
     , _ccalOauthToken  :: !(Maybe Text)
     , _ccalMaxResults  :: !(Maybe Int32)
     , _ccalFields      :: !(Maybe Text)
-    , _ccalAlt         :: !Text
+    , _ccalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsList'' with the minimum fields required to make a request.
@@ -106,12 +117,12 @@ data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
 -- * 'ccalFields'
 --
 -- * 'ccalAlt'
-campaignCreativeAssociationsList
+campaignCreativeAssociationsList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
-    -> CampaignCreativeAssociationsList
-campaignCreativeAssociationsList pCcalCampaignId_ pCcalProfileId_ =
-    CampaignCreativeAssociationsList
+    -> CampaignCreativeAssociationsList'
+campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProfileId_ =
+    CampaignCreativeAssociationsList'
     { _ccalQuotaUser = Nothing
     , _ccalPrettyPrint = True
     , _ccalUserIp = Nothing
@@ -123,7 +134,7 @@ campaignCreativeAssociationsList pCcalCampaignId_ pCcalProfileId_ =
     , _ccalOauthToken = Nothing
     , _ccalMaxResults = Nothing
     , _ccalFields = Nothing
-    , _ccalAlt = "json"
+    , _ccalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,7 +170,7 @@ ccalProfileId
       (\ s a -> s{_ccalProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-ccalSortOrder :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
+ccalSortOrder :: Lens' CampaignCreativeAssociationsList' (Maybe DfareportingCampaignCreativeAssociationsListSortOrder)
 ccalSortOrder
   = lens _ccalSortOrder
       (\ s a -> s{_ccalSortOrder = a})
@@ -194,7 +205,7 @@ ccalFields
   = lens _ccalFields (\ s a -> s{_ccalFields = a})
 
 -- | Data format for the response.
-ccalAlt :: Lens' CampaignCreativeAssociationsList' Text
+ccalAlt :: Lens' CampaignCreativeAssociationsList' Alt
 ccalAlt = lens _ccalAlt (\ s a -> s{_ccalAlt = a})
 
 instance GoogleRequest
@@ -203,8 +214,9 @@ instance GoogleRequest
              CampaignCreativeAssociationsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          CampaignCreativeAssociationsList{..}
-          = go _ccalQuotaUser _ccalPrettyPrint _ccalUserIp
+          CampaignCreativeAssociationsList'{..}
+          = go _ccalQuotaUser (Just _ccalPrettyPrint)
+              _ccalUserIp
               _ccalCampaignId
               _ccalProfileId
               _ccalSortOrder
@@ -213,9 +225,10 @@ instance GoogleRequest
               _ccalOauthToken
               _ccalMaxResults
               _ccalFields
-              _ccalAlt
+              (Just _ccalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CampaignCreativeAssociationsListAPI)
+                      (Proxy ::
+                         Proxy CampaignCreativeAssociationsListResource)
                       r
                       u

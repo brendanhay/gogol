@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsExperienceLocalesGet@.
-module PlayMoviesPartner.Accounts.ExperienceLocales.Get
+module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
     (
     -- * REST Resource
-      AccountsExperienceLocalesGetAPI
+      AccountsExperienceLocalesGetResource
 
     -- * Creating a Request
-    , accountsExperienceLocalesGet
-    , AccountsExperienceLocalesGet
+    , accountsExperienceLocalesGet'
+    , AccountsExperienceLocalesGet'
 
     -- * Request Lenses
     , aelgXgafv
@@ -52,20 +53,34 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsExperienceLocalesGet@ which the
--- 'AccountsExperienceLocalesGet' request conforms to.
-type AccountsExperienceLocalesGetAPI =
+-- 'AccountsExperienceLocalesGet'' request conforms to.
+type AccountsExperienceLocalesGetResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "experienceLocales" :>
-             Capture "elId" Text :> Get '[JSON] ExperienceLocale
+             Capture "elId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ExperienceLocale
 
 -- | Get an ExperienceLocale given its id. See _Authentication and
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsExperienceLocalesGet' smart constructor.
-data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet
+-- /See:/ 'accountsExperienceLocalesGet'' smart constructor.
+data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     { _aelgXgafv          :: !(Maybe Text)
     , _aelgQuotaUser      :: !(Maybe Text)
     , _aelgPrettyPrint    :: !Bool
@@ -116,12 +131,12 @@ data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet
 -- * 'aelgCallback'
 --
 -- * 'aelgAlt'
-accountsExperienceLocalesGet
+accountsExperienceLocalesGet'
     :: Text -- ^ 'elId'
     -> Text -- ^ 'accountId'
-    -> AccountsExperienceLocalesGet
-accountsExperienceLocalesGet pAelgElId_ pAelgAccountId_ =
-    AccountsExperienceLocalesGet
+    -> AccountsExperienceLocalesGet'
+accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
+    AccountsExperienceLocalesGet'
     { _aelgXgafv = Nothing
     , _aelgQuotaUser = Nothing
     , _aelgPrettyPrint = True
@@ -228,10 +243,12 @@ instance GoogleRequest AccountsExperienceLocalesGet'
              ExperienceLocale
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsExperienceLocalesGet{..}
-          = go _aelgXgafv _aelgQuotaUser _aelgPrettyPrint
+        requestWithRoute r u
+          AccountsExperienceLocalesGet'{..}
+          = go _aelgXgafv _aelgQuotaUser
+              (Just _aelgPrettyPrint)
               _aelgUploadProtocol
-              _aelgPp
+              (Just _aelgPp)
               _aelgAccessToken
               _aelgUploadType
               _aelgElId
@@ -241,9 +258,9 @@ instance GoogleRequest AccountsExperienceLocalesGet'
               _aelgOauthToken
               _aelgFields
               _aelgCallback
-              _aelgAlt
+              (Just _aelgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsExperienceLocalesGetAPI)
+                      (Proxy :: Proxy AccountsExperienceLocalesGetResource)
                       r
                       u

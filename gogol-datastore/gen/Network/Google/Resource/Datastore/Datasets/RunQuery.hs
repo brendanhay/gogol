@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Query for entities.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsRunQuery@.
-module Datastore.Datasets.RunQuery
+module Network.Google.Resource.Datastore.Datasets.RunQuery
     (
     -- * REST Resource
-      DatasetsRunQueryAPI
+      DatasetsRunQueryResource
 
     -- * Creating a Request
-    , datasetsRunQuery
-    , DatasetsRunQuery
+    , datasetsRunQuery'
+    , DatasetsRunQuery'
 
     -- * Request Lenses
     , drqQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsRunQuery@ which the
--- 'DatasetsRunQuery' request conforms to.
-type DatasetsRunQueryAPI =
+-- 'DatasetsRunQuery'' request conforms to.
+type DatasetsRunQueryResource =
      Capture "datasetId" Text :>
-       "runQuery" :> Post '[JSON] RunQueryResponse
+       "runQuery" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] RunQueryResponse
 
 -- | Query for entities.
 --
--- /See:/ 'datasetsRunQuery' smart constructor.
-data DatasetsRunQuery = DatasetsRunQuery
+-- /See:/ 'datasetsRunQuery'' smart constructor.
+data DatasetsRunQuery' = DatasetsRunQuery'
     { _drqQuotaUser   :: !(Maybe Text)
     , _drqPrettyPrint :: !Bool
     , _drqUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsRunQuery = DatasetsRunQuery
     , _drqDatasetId   :: !Text
     , _drqOauthToken  :: !(Maybe Text)
     , _drqFields      :: !(Maybe Text)
-    , _drqAlt         :: !Text
+    , _drqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsRunQuery'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsRunQuery = DatasetsRunQuery
 -- * 'drqFields'
 --
 -- * 'drqAlt'
-datasetsRunQuery
+datasetsRunQuery'
     :: Text -- ^ 'datasetId'
-    -> DatasetsRunQuery
-datasetsRunQuery pDrqDatasetId_ =
-    DatasetsRunQuery
+    -> DatasetsRunQuery'
+datasetsRunQuery' pDrqDatasetId_ =
+    DatasetsRunQuery'
     { _drqQuotaUser = Nothing
     , _drqPrettyPrint = True
     , _drqUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsRunQuery pDrqDatasetId_ =
     , _drqDatasetId = pDrqDatasetId_
     , _drqOauthToken = Nothing
     , _drqFields = Nothing
-    , _drqAlt = "proto"
+    , _drqAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,20 +146,21 @@ drqFields
   = lens _drqFields (\ s a -> s{_drqFields = a})
 
 -- | Data format for the response.
-drqAlt :: Lens' DatasetsRunQuery' Text
+drqAlt :: Lens' DatasetsRunQuery' Alt
 drqAlt = lens _drqAlt (\ s a -> s{_drqAlt = a})
 
 instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsRunQuery{..}
-          = go _drqQuotaUser _drqPrettyPrint _drqUserIp _drqKey
+        requestWithRoute r u DatasetsRunQuery'{..}
+          = go _drqQuotaUser (Just _drqPrettyPrint) _drqUserIp
+              _drqKey
               _drqDatasetId
               _drqOauthToken
               _drqFields
-              _drqAlt
+              (Just _drqAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DatasetsRunQueryAPI)
+                      (Proxy :: Proxy DatasetsRunQueryResource)
                       r
                       u

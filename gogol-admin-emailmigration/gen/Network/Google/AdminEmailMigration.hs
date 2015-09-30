@@ -27,7 +27,7 @@ module Network.Google.AdminEmailMigration
     -- * REST Resources
 
     -- ** EmailMigrationMailInsert
-    , module EmailMigration.Mail.Insert
+    , module Network.Google.Resource.EmailMigration.Mail.Insert
 
     -- * Types
 
@@ -43,6 +43,9 @@ module Network.Google.AdminEmailMigration
     , miIsInbox
     , miIsTrash
     , miIsSent
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.AdminEmailMigration.Types
@@ -53,7 +56,7 @@ import           Network.Google.Resource.EmailMigration.Mail.Insert
 TODO
 -}
 
-type AdminEmailMigrationAPI = Mail
+type AdminEmailMigrationAPI = MailInsertResource
 
 adminEmailMigrationAPI :: Proxy AdminEmailMigrationAPI
 adminEmailMigrationAPI = Proxy

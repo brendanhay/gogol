@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- instance group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersResize@.
-module Replicapool.InstanceGroupManagers.Resize
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.Resize
     (
     -- * REST Resource
-      InstanceGroupManagersResizeAPI
+      InstanceGroupManagersResizeResource
 
     -- * Creating a Request
-    , instanceGroupManagersResize
-    , InstanceGroupManagersResize
+    , instanceGroupManagersResize'
+    , InstanceGroupManagersResize'
 
     -- * Request Lenses
     , igmrQuotaUser
@@ -49,23 +50,30 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersResize@ which the
--- 'InstanceGroupManagersResize' request conforms to.
-type InstanceGroupManagersResizeAPI =
+-- 'InstanceGroupManagersResize'' request conforms to.
+type InstanceGroupManagersResizeResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
                "resize" :>
-                 QueryParam "size" Int32 :> Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "size" Int32 :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Resizes the managed instance group up or down. If resized up, new
 -- instances are created using the current instance template. If resized
 -- down, instances are removed in the order outlined in Resizing a managed
 -- instance group.
 --
--- /See:/ 'instanceGroupManagersResize' smart constructor.
-data InstanceGroupManagersResize = InstanceGroupManagersResize
+-- /See:/ 'instanceGroupManagersResize'' smart constructor.
+data InstanceGroupManagersResize' = InstanceGroupManagersResize'
     { _igmrQuotaUser            :: !(Maybe Text)
     , _igmrPrettyPrint          :: !Bool
     , _igmrProject              :: !Text
@@ -76,7 +84,7 @@ data InstanceGroupManagersResize = InstanceGroupManagersResize
     , _igmrKey                  :: !(Maybe Text)
     , _igmrOauthToken           :: !(Maybe Text)
     , _igmrFields               :: !(Maybe Text)
-    , _igmrAlt                  :: !Text
+    , _igmrAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersResize'' with the minimum fields required to make a request.
@@ -104,14 +112,14 @@ data InstanceGroupManagersResize = InstanceGroupManagersResize
 -- * 'igmrFields'
 --
 -- * 'igmrAlt'
-instanceGroupManagersResize
+instanceGroupManagersResize'
     :: Text -- ^ 'project'
     -> Int32 -- ^ 'size'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersResize
-instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
-    InstanceGroupManagersResize
+    -> InstanceGroupManagersResize'
+instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
+    InstanceGroupManagersResize'
     { _igmrQuotaUser = Nothing
     , _igmrPrettyPrint = True
     , _igmrProject = pIgmrProject_
@@ -122,7 +130,7 @@ instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ 
     , _igmrKey = Nothing
     , _igmrOauthToken = Nothing
     , _igmrFields = Nothing
-    , _igmrAlt = "json"
+    , _igmrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,7 +190,7 @@ igmrFields
   = lens _igmrFields (\ s a -> s{_igmrFields = a})
 
 -- | Data format for the response.
-igmrAlt :: Lens' InstanceGroupManagersResize' Text
+igmrAlt :: Lens' InstanceGroupManagersResize' Alt
 igmrAlt = lens _igmrAlt (\ s a -> s{_igmrAlt = a})
 
 instance GoogleRequest InstanceGroupManagersResize'
@@ -190,8 +198,9 @@ instance GoogleRequest InstanceGroupManagersResize'
         type Rs InstanceGroupManagersResize' = Operation
         request
           = requestWithRoute defReq instanceGroupsManagerURL
-        requestWithRoute r u InstanceGroupManagersResize{..}
-          = go _igmrQuotaUser _igmrPrettyPrint _igmrProject
+        requestWithRoute r u InstanceGroupManagersResize'{..}
+          = go _igmrQuotaUser (Just _igmrPrettyPrint)
+              _igmrProject
               (Just _igmrSize)
               _igmrInstanceGroupManager
               _igmrUserIp
@@ -199,9 +208,9 @@ instance GoogleRequest InstanceGroupManagersResize'
               _igmrKey
               _igmrOauthToken
               _igmrFields
-              _igmrAlt
+              (Just _igmrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupManagersResizeAPI)
+                      (Proxy :: Proxy InstanceGroupManagersResizeResource)
                       r
                       u

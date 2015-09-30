@@ -28,22 +28,22 @@ module Network.Google.Partners
     -- * REST Resources
 
     -- ** PartnersClientMessagesLog
-    , module Partners.ClientMessages.Log
+    , module Network.Google.Resource.Partners.ClientMessages.Log
 
     -- ** PartnersCompaniesGet
-    , module Partners.Companies.Get
+    , module Network.Google.Resource.Partners.Companies.Get
 
     -- ** PartnersCompaniesLeadsCreate
-    , module Partners.Companies.Leads.Create
+    , module Network.Google.Resource.Partners.Companies.Leads.Create
 
     -- ** PartnersCompaniesList
-    , module Partners.Companies.List
+    , module Network.Google.Resource.Partners.Companies.List
 
     -- ** PartnersUserEventsLog
-    , module Partners.UserEvents.Log
+    , module Network.Google.Resource.Partners.UserEvents.Log
 
     -- ** PartnersUserStatesList
-    , module Partners.UserStates.List
+    , module Network.Google.Resource.Partners.UserStates.List
 
     -- * Types
 
@@ -174,6 +174,10 @@ module Network.Google.Partners
     , uoIpAddress
     , uoUserId
 
+    -- ** LogMessageRequestClientInfo
+    , LogMessageRequestClientInfo
+    , logMessageRequestClientInfo
+
     -- ** LogMessageResponse
     , LogMessageResponse
     , logMessageResponse
@@ -253,8 +257,11 @@ TODO
 -}
 
 type PartnersAPI =
-     UserStates :<|> UserEvents :<|> ClientMessages :<|>
-       Companies
+     UserStatesListResource :<|> UserEventsLogResource
+       :<|> ClientMessagesLogResource
+       :<|> CompaniesLeadsCreateResource
+       :<|> CompaniesListResource
+       :<|> CompaniesGetResource
 
 partnersAPI :: Proxy PartnersAPI
 partnersAPI = Proxy

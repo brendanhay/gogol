@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- authenticated player.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesQuestsList@.
-module Games.Quests.List
+module Network.Google.Resource.Games.Quests.List
     (
     -- * REST Resource
-      QuestsListAPI
+      QuestsListResource
 
     -- * Creating a Request
-    , questsList
-    , QuestsList
+    , questsList'
+    , QuestsList'
 
     -- * Request Lenses
     , qlQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesQuestsList@ which the
--- 'QuestsList' request conforms to.
-type QuestsListAPI =
+-- 'QuestsList'' request conforms to.
+type QuestsListResource =
      "players" :>
        Capture "playerId" Text :>
          "quests" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Int32 :>
-                 Get '[JSON] QuestListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] QuestListResponse
 
 -- | Get a list of quests for your application and the currently
 -- authenticated player.
 --
--- /See:/ 'questsList' smart constructor.
-data QuestsList = QuestsList
+-- /See:/ 'questsList'' smart constructor.
+data QuestsList' = QuestsList'
     { _qlQuotaUser   :: !(Maybe Text)
     , _qlPrettyPrint :: !Bool
     , _qlUserIp      :: !(Maybe Text)
@@ -72,7 +80,7 @@ data QuestsList = QuestsList
     , _qlPlayerId    :: !Text
     , _qlMaxResults  :: !(Maybe Int32)
     , _qlFields      :: !(Maybe Text)
-    , _qlAlt         :: !Text
+    , _qlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data QuestsList = QuestsList
 -- * 'qlFields'
 --
 -- * 'qlAlt'
-questsList
+questsList'
     :: Text -- ^ 'playerId'
-    -> QuestsList
-questsList pQlPlayerId_ =
-    QuestsList
+    -> QuestsList'
+questsList' pQlPlayerId_ =
+    QuestsList'
     { _qlQuotaUser = Nothing
     , _qlPrettyPrint = True
     , _qlUserIp = Nothing
@@ -115,7 +123,7 @@ questsList pQlPlayerId_ =
     , _qlPlayerId = pQlPlayerId_
     , _qlMaxResults = Nothing
     , _qlFields = Nothing
-    , _qlAlt = "json"
+    , _qlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -176,20 +184,23 @@ qlFields :: Lens' QuestsList' (Maybe Text)
 qlFields = lens _qlFields (\ s a -> s{_qlFields = a})
 
 -- | Data format for the response.
-qlAlt :: Lens' QuestsList' Text
+qlAlt :: Lens' QuestsList' Alt
 qlAlt = lens _qlAlt (\ s a -> s{_qlAlt = a})
 
 instance GoogleRequest QuestsList' where
         type Rs QuestsList' = QuestListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u QuestsList{..}
-          = go _qlQuotaUser _qlPrettyPrint _qlUserIp _qlKey
+        requestWithRoute r u QuestsList'{..}
+          = go _qlQuotaUser (Just _qlPrettyPrint) _qlUserIp
+              _qlKey
               _qlLanguage
               _qlPageToken
               _qlOauthToken
               _qlPlayerId
               _qlMaxResults
               _qlFields
-              _qlAlt
+              (Just _qlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy QuestsListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy QuestsListResource)
+                      r
+                      u

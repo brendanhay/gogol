@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- DoubleClick Search.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionUpdateAvailability@.
-module DoubleClickSearch.Conversion.UpdateAvailability
+module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
     (
     -- * REST Resource
-      ConversionUpdateAvailabilityAPI
+      ConversionUpdateAvailabilityResource
 
     -- * Creating a Request
-    , conversionUpdateAvailability
-    , ConversionUpdateAvailability
+    , conversionUpdateAvailability'
+    , ConversionUpdateAvailability'
 
     -- * Request Lenses
     , cuaQuotaUser
@@ -43,24 +44,31 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchConversionUpdateAvailability@ which the
--- 'ConversionUpdateAvailability' request conforms to.
-type ConversionUpdateAvailabilityAPI =
+-- 'ConversionUpdateAvailability'' request conforms to.
+type ConversionUpdateAvailabilityResource =
      "conversion" :>
        "updateAvailability" :>
-         Post '[JSON] UpdateAvailabilityResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] UpdateAvailabilityResponse
 
 -- | Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
--- /See:/ 'conversionUpdateAvailability' smart constructor.
-data ConversionUpdateAvailability = ConversionUpdateAvailability
+-- /See:/ 'conversionUpdateAvailability'' smart constructor.
+data ConversionUpdateAvailability' = ConversionUpdateAvailability'
     { _cuaQuotaUser   :: !(Maybe Text)
     , _cuaPrettyPrint :: !Bool
     , _cuaUserIp      :: !(Maybe Text)
     , _cuaKey         :: !(Maybe Text)
     , _cuaOauthToken  :: !(Maybe Text)
     , _cuaFields      :: !(Maybe Text)
-    , _cuaAlt         :: !Text
+    , _cuaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionUpdateAvailability'' with the minimum fields required to make a request.
@@ -80,17 +88,17 @@ data ConversionUpdateAvailability = ConversionUpdateAvailability
 -- * 'cuaFields'
 --
 -- * 'cuaAlt'
-conversionUpdateAvailability
-    :: ConversionUpdateAvailability
-conversionUpdateAvailability =
-    ConversionUpdateAvailability
+conversionUpdateAvailability'
+    :: ConversionUpdateAvailability'
+conversionUpdateAvailability' =
+    ConversionUpdateAvailability'
     { _cuaQuotaUser = Nothing
     , _cuaPrettyPrint = True
     , _cuaUserIp = Nothing
     , _cuaKey = Nothing
     , _cuaOauthToken = Nothing
     , _cuaFields = Nothing
-    , _cuaAlt = "json"
+    , _cuaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,7 +138,7 @@ cuaFields
   = lens _cuaFields (\ s a -> s{_cuaFields = a})
 
 -- | Data format for the response.
-cuaAlt :: Lens' ConversionUpdateAvailability' Text
+cuaAlt :: Lens' ConversionUpdateAvailability' Alt
 cuaAlt = lens _cuaAlt (\ s a -> s{_cuaAlt = a})
 
 instance GoogleRequest ConversionUpdateAvailability'
@@ -139,13 +147,15 @@ instance GoogleRequest ConversionUpdateAvailability'
              UpdateAvailabilityResponse
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ConversionUpdateAvailability{..}
-          = go _cuaQuotaUser _cuaPrettyPrint _cuaUserIp _cuaKey
+        requestWithRoute r u
+          ConversionUpdateAvailability'{..}
+          = go _cuaQuotaUser (Just _cuaPrettyPrint) _cuaUserIp
+              _cuaKey
               _cuaOauthToken
               _cuaFields
-              _cuaAlt
+              (Just _cuaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ConversionUpdateAvailabilityAPI)
+                      (Proxy :: Proxy ConversionUpdateAvailabilityResource)
                       r
                       u

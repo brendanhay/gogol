@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersGet@.
-module TagManager.Accounts.Containers.Get
+module Network.Google.Resource.TagManager.Accounts.Containers.Get
     (
     -- * REST Resource
-      AccountsContainersGetAPI
+      AccountsContainersGetResource
 
     -- * Creating a Request
-    , accountsContainersGet
-    , AccountsContainersGet
+    , accountsContainersGet'
+    , AccountsContainersGet'
 
     -- * Request Lenses
     , acgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersGet@ which the
--- 'AccountsContainersGet' request conforms to.
-type AccountsContainersGetAPI =
+-- 'AccountsContainersGet'' request conforms to.
+type AccountsContainersGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
-           Capture "containerId" Text :> Get '[JSON] Container
+           Capture "containerId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Container
 
 -- | Gets a Container.
 --
--- /See:/ 'accountsContainersGet' smart constructor.
-data AccountsContainersGet = AccountsContainersGet
+-- /See:/ 'accountsContainersGet'' smart constructor.
+data AccountsContainersGet' = AccountsContainersGet'
     { _acgQuotaUser   :: !(Maybe Text)
     , _acgPrettyPrint :: !Bool
     , _acgContainerId :: !Text
@@ -63,7 +71,7 @@ data AccountsContainersGet = AccountsContainersGet
     , _acgKey         :: !(Maybe Text)
     , _acgOauthToken  :: !(Maybe Text)
     , _acgFields      :: !(Maybe Text)
-    , _acgAlt         :: !Text
+    , _acgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AccountsContainersGet = AccountsContainersGet
 -- * 'acgFields'
 --
 -- * 'acgAlt'
-accountsContainersGet
+accountsContainersGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersGet
-accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
-    AccountsContainersGet
+    -> AccountsContainersGet'
+accountsContainersGet' pAcgContainerId_ pAcgAccountId_ =
+    AccountsContainersGet'
     { _acgQuotaUser = Nothing
     , _acgPrettyPrint = True
     , _acgContainerId = pAcgContainerId_
@@ -101,7 +109,7 @@ accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
     , _acgKey = Nothing
     , _acgOauthToken = Nothing
     , _acgFields = Nothing
-    , _acgAlt = "json"
+    , _acgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ acgFields
   = lens _acgFields (\ s a -> s{_acgFields = a})
 
 -- | Data format for the response.
-acgAlt :: Lens' AccountsContainersGet' Text
+acgAlt :: Lens' AccountsContainersGet' Alt
 acgAlt = lens _acgAlt (\ s a -> s{_acgAlt = a})
 
 instance GoogleRequest AccountsContainersGet' where
         type Rs AccountsContainersGet' = Container
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersGet{..}
-          = go _acgQuotaUser _acgPrettyPrint _acgContainerId
+        requestWithRoute r u AccountsContainersGet'{..}
+          = go _acgQuotaUser (Just _acgPrettyPrint)
+              _acgContainerId
               _acgUserIp
               _acgAccountId
               _acgKey
               _acgOauthToken
               _acgFields
-              _acgAlt
+              (Just _acgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersGetAPI)
+                      (Proxy :: Proxy AccountsContainersGetResource)
                       r
                       u

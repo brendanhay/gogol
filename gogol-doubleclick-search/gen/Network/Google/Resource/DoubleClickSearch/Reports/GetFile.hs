@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Downloads a report file encoded in UTF-8.
 --
 -- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsGetFile@.
-module DoubleClickSearch.Reports.GetFile
+module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
     (
     -- * REST Resource
-      ReportsGetFileAPI
+      ReportsGetFileResource
 
     -- * Creating a Request
-    , reportsGetFile
-    , ReportsGetFile
+    , reportsGetFile'
+    , ReportsGetFile'
 
     -- * Request Lenses
     , rgfQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DoubleclicksearchReportsGetFile@ which the
--- 'ReportsGetFile' request conforms to.
-type ReportsGetFileAPI =
+-- 'ReportsGetFile'' request conforms to.
+type ReportsGetFileResource =
      "reports" :>
        Capture "reportId" Text :>
          "files" :>
-           Capture "reportFragment" Int32 :> Get '[JSON] ()
+           Capture "reportFragment" Int32 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] ()
 
 -- | Downloads a report file encoded in UTF-8.
 --
--- /See:/ 'reportsGetFile' smart constructor.
-data ReportsGetFile = ReportsGetFile
+-- /See:/ 'reportsGetFile'' smart constructor.
+data ReportsGetFile' = ReportsGetFile'
     { _rgfQuotaUser      :: !(Maybe Text)
     , _rgfPrettyPrint    :: !Bool
     , _rgfUserIp         :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ReportsGetFile = ReportsGetFile
     , _rgfKey            :: !(Maybe Text)
     , _rgfOauthToken     :: !(Maybe Text)
     , _rgfFields         :: !(Maybe Text)
-    , _rgfAlt            :: !Text
+    , _rgfAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGetFile'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ReportsGetFile = ReportsGetFile
 -- * 'rgfFields'
 --
 -- * 'rgfAlt'
-reportsGetFile
+reportsGetFile'
     :: Text -- ^ 'reportId'
     -> Int32 -- ^ 'reportFragment'
-    -> ReportsGetFile
-reportsGetFile pRgfReportId_ pRgfReportFragment_ =
-    ReportsGetFile
+    -> ReportsGetFile'
+reportsGetFile' pRgfReportId_ pRgfReportFragment_ =
+    ReportsGetFile'
     { _rgfQuotaUser = Nothing
     , _rgfPrettyPrint = True
     , _rgfUserIp = Nothing
@@ -101,7 +109,7 @@ reportsGetFile pRgfReportId_ pRgfReportFragment_ =
     , _rgfKey = Nothing
     , _rgfOauthToken = Nothing
     , _rgfFields = Nothing
-    , _rgfAlt = "json"
+    , _rgfAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +160,23 @@ rgfFields
   = lens _rgfFields (\ s a -> s{_rgfFields = a})
 
 -- | Data format for the response.
-rgfAlt :: Lens' ReportsGetFile' Text
+rgfAlt :: Lens' ReportsGetFile' Alt
 rgfAlt = lens _rgfAlt (\ s a -> s{_rgfAlt = a})
 
 instance GoogleRequest ReportsGetFile' where
         type Rs ReportsGetFile' = ()
         request
           = requestWithRoute defReq doubleClickSearchURL
-        requestWithRoute r u ReportsGetFile{..}
-          = go _rgfQuotaUser _rgfPrettyPrint _rgfUserIp
+        requestWithRoute r u ReportsGetFile'{..}
+          = go _rgfQuotaUser (Just _rgfPrettyPrint) _rgfUserIp
               _rgfReportId
               _rgfReportFragment
               _rgfKey
               _rgfOauthToken
               _rgfFields
-              _rgfAlt
+              (Just _rgfAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ReportsGetFileAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsGetFileResource)
                       r
                       u

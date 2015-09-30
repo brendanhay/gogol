@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -26,14 +27,14 @@
 -- only be used to display permissions for up to 1 day.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseProductsGenerateApprovalURL@.
-module Androidenterprise.Products.GenerateApprovalURL
+module Network.Google.Resource.Androidenterprise.Products.GenerateApprovalURL
     (
     -- * REST Resource
-      ProductsGenerateApprovalURLAPI
+      ProductsGenerateApprovalURLResource
 
     -- * Creating a Request
-    , productsGenerateApprovalURL
-    , ProductsGenerateApprovalURL
+    , productsGenerateApprovalURL'
+    , ProductsGenerateApprovalURL'
 
     -- * Request Lenses
     , pgauQuotaUser
@@ -52,15 +53,22 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseProductsGenerateApprovalURL@ which the
--- 'ProductsGenerateApprovalURL' request conforms to.
-type ProductsGenerateApprovalURLAPI =
+-- 'ProductsGenerateApprovalURL'' request conforms to.
+type ProductsGenerateApprovalURLResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "products" :>
            Capture "productId" Text :>
              "generateApprovalUrl" :>
-               QueryParam "languageCode" Text :>
-                 Post '[JSON] ProductsGenerateApprovalURLResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "languageCode" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] ProductsGenerateApprovalURLResponse
 
 -- | Generates a URL that can be rendered in an iframe to display the
 -- permissions (if any) of a product. An enterprise admin must view these
@@ -71,8 +79,8 @@ type ProductsGenerateApprovalURLAPI =
 -- property in a Products.approve call to approve the product. This URL can
 -- only be used to display permissions for up to 1 day.
 --
--- /See:/ 'productsGenerateApprovalURL' smart constructor.
-data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL
+-- /See:/ 'productsGenerateApprovalURL'' smart constructor.
+data ProductsGenerateApprovalURL' = ProductsGenerateApprovalURL'
     { _pgauQuotaUser    :: !(Maybe Text)
     , _pgauLanguageCode :: !(Maybe Text)
     , _pgauPrettyPrint  :: !Bool
@@ -82,7 +90,7 @@ data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL
     , _pgauOauthToken   :: !(Maybe Text)
     , _pgauProductId    :: !Text
     , _pgauFields       :: !(Maybe Text)
-    , _pgauAlt          :: !Text
+    , _pgauAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProductsGenerateApprovalURL'' with the minimum fields required to make a request.
@@ -108,12 +116,12 @@ data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL
 -- * 'pgauFields'
 --
 -- * 'pgauAlt'
-productsGenerateApprovalURL
+productsGenerateApprovalURL'
     :: Text -- ^ 'enterpriseId'
     -> Text -- ^ 'productId'
-    -> ProductsGenerateApprovalURL
-productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
-    ProductsGenerateApprovalURL
+    -> ProductsGenerateApprovalURL'
+productsGenerateApprovalURL' pPgauEnterpriseId_ pPgauProductId_ =
+    ProductsGenerateApprovalURL'
     { _pgauQuotaUser = Nothing
     , _pgauLanguageCode = Nothing
     , _pgauPrettyPrint = True
@@ -123,7 +131,7 @@ productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
     , _pgauOauthToken = Nothing
     , _pgauProductId = pPgauProductId_
     , _pgauFields = Nothing
-    , _pgauAlt = "json"
+    , _pgauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ pgauFields
   = lens _pgauFields (\ s a -> s{_pgauFields = a})
 
 -- | Data format for the response.
-pgauAlt :: Lens' ProductsGenerateApprovalURL' Text
+pgauAlt :: Lens' ProductsGenerateApprovalURL' Alt
 pgauAlt = lens _pgauAlt (\ s a -> s{_pgauAlt = a})
 
 instance GoogleRequest ProductsGenerateApprovalURL'
@@ -191,18 +199,18 @@ instance GoogleRequest ProductsGenerateApprovalURL'
         type Rs ProductsGenerateApprovalURL' =
              ProductsGenerateApprovalURLResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u ProductsGenerateApprovalURL{..}
+        requestWithRoute r u ProductsGenerateApprovalURL'{..}
           = go _pgauQuotaUser _pgauLanguageCode
-              _pgauPrettyPrint
+              (Just _pgauPrettyPrint)
               _pgauEnterpriseId
               _pgauUserIp
               _pgauKey
               _pgauOauthToken
               _pgauProductId
               _pgauFields
-              _pgauAlt
+              (Just _pgauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProductsGenerateApprovalURLAPI)
+                      (Proxy :: Proxy ProductsGenerateApprovalURLResource)
                       r
                       u

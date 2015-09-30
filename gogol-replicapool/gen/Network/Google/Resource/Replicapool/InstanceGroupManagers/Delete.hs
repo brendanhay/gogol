@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- must first abandon the instances to remove them from the group.
 --
 -- /See:/ <https://developers.google.com/compute/docs/instance-groups/manager/v1beta2 Google Compute Engine Instance Group Manager API Reference> for @ReplicapoolInstanceGroupManagersDelete@.
-module Replicapool.InstanceGroupManagers.Delete
+module Network.Google.Resource.Replicapool.InstanceGroupManagers.Delete
     (
     -- * REST Resource
-      InstanceGroupManagersDeleteAPI
+      InstanceGroupManagersDeleteResource
 
     -- * Creating a Request
-    , instanceGroupManagersDelete
-    , InstanceGroupManagersDelete
+    , instanceGroupManagersDelete'
+    , InstanceGroupManagersDelete'
 
     -- * Request Lenses
     , igmdQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.InstanceGroupsManager.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolInstanceGroupManagersDelete@ which the
--- 'InstanceGroupManagersDelete' request conforms to.
-type InstanceGroupManagersDeleteAPI =
+-- 'InstanceGroupManagersDelete'' request conforms to.
+type InstanceGroupManagersDeleteResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "instanceGroupManagers" :>
              Capture "instanceGroupManager" Text :>
-               Delete '[JSON] Operation
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the instance group manager and all instances contained within.
 -- If you\'d like to delete the manager without deleting the instances, you
 -- must first abandon the instances to remove them from the group.
 --
--- /See:/ 'instanceGroupManagersDelete' smart constructor.
-data InstanceGroupManagersDelete = InstanceGroupManagersDelete
+-- /See:/ 'instanceGroupManagersDelete'' smart constructor.
+data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
     { _igmdQuotaUser            :: !(Maybe Text)
     , _igmdPrettyPrint          :: !Bool
     , _igmdProject              :: !Text
@@ -71,7 +78,7 @@ data InstanceGroupManagersDelete = InstanceGroupManagersDelete
     , _igmdKey                  :: !(Maybe Text)
     , _igmdOauthToken           :: !(Maybe Text)
     , _igmdFields               :: !(Maybe Text)
-    , _igmdAlt                  :: !Text
+    , _igmdAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDelete'' with the minimum fields required to make a request.
@@ -97,13 +104,13 @@ data InstanceGroupManagersDelete = InstanceGroupManagersDelete
 -- * 'igmdFields'
 --
 -- * 'igmdAlt'
-instanceGroupManagersDelete
+instanceGroupManagersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
-    -> InstanceGroupManagersDelete
-instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete
+    -> InstanceGroupManagersDelete'
+instanceGroupManagersDelete' pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
+    InstanceGroupManagersDelete'
     { _igmdQuotaUser = Nothing
     , _igmdPrettyPrint = True
     , _igmdProject = pIgmdProject_
@@ -113,7 +120,7 @@ instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ 
     , _igmdKey = Nothing
     , _igmdOauthToken = Nothing
     , _igmdFields = Nothing
-    , _igmdAlt = "json"
+    , _igmdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,7 +176,7 @@ igmdFields
   = lens _igmdFields (\ s a -> s{_igmdFields = a})
 
 -- | Data format for the response.
-igmdAlt :: Lens' InstanceGroupManagersDelete' Text
+igmdAlt :: Lens' InstanceGroupManagersDelete' Alt
 igmdAlt = lens _igmdAlt (\ s a -> s{_igmdAlt = a})
 
 instance GoogleRequest InstanceGroupManagersDelete'
@@ -177,17 +184,18 @@ instance GoogleRequest InstanceGroupManagersDelete'
         type Rs InstanceGroupManagersDelete' = Operation
         request
           = requestWithRoute defReq instanceGroupsManagerURL
-        requestWithRoute r u InstanceGroupManagersDelete{..}
-          = go _igmdQuotaUser _igmdPrettyPrint _igmdProject
+        requestWithRoute r u InstanceGroupManagersDelete'{..}
+          = go _igmdQuotaUser (Just _igmdPrettyPrint)
+              _igmdProject
               _igmdInstanceGroupManager
               _igmdUserIp
               _igmdZone
               _igmdKey
               _igmdOauthToken
               _igmdFields
-              _igmdAlt
+              (Just _igmdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InstanceGroupManagersDeleteAPI)
+                      (Proxy :: Proxy InstanceGroupManagersDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get recaptcha secure param.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyGetRecaptchaParam@.
-module IdentityToolkit.Relyingparty.GetRecaptchaParam
+module Network.Google.Resource.IdentityToolkit.Relyingparty.GetRecaptchaParam
     (
     -- * REST Resource
-      RelyingpartyGetRecaptchaParamAPI
+      RelyingpartyGetRecaptchaParamResource
 
     -- * Creating a Request
-    , relyingpartyGetRecaptchaParam
-    , RelyingpartyGetRecaptchaParam
+    , relyingpartyGetRecaptchaParam'
+    , RelyingpartyGetRecaptchaParam'
 
     -- * Request Lenses
     , rgrpQuotaUser
@@ -42,22 +43,29 @@ import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyGetRecaptchaParam@ which the
--- 'RelyingpartyGetRecaptchaParam' request conforms to.
-type RelyingpartyGetRecaptchaParamAPI =
+-- 'RelyingpartyGetRecaptchaParam'' request conforms to.
+type RelyingpartyGetRecaptchaParamResource =
      "getRecaptchaParam" :>
-       Get '[JSON] GetRecaptchaParamResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] GetRecaptchaParamResponse
 
 -- | Get recaptcha secure param.
 --
--- /See:/ 'relyingpartyGetRecaptchaParam' smart constructor.
-data RelyingpartyGetRecaptchaParam = RelyingpartyGetRecaptchaParam
+-- /See:/ 'relyingpartyGetRecaptchaParam'' smart constructor.
+data RelyingpartyGetRecaptchaParam' = RelyingpartyGetRecaptchaParam'
     { _rgrpQuotaUser   :: !(Maybe Text)
     , _rgrpPrettyPrint :: !Bool
     , _rgrpUserIp      :: !(Maybe Text)
     , _rgrpKey         :: !(Maybe Text)
     , _rgrpOauthToken  :: !(Maybe Text)
     , _rgrpFields      :: !(Maybe Text)
-    , _rgrpAlt         :: !Text
+    , _rgrpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyGetRecaptchaParam'' with the minimum fields required to make a request.
@@ -77,17 +85,17 @@ data RelyingpartyGetRecaptchaParam = RelyingpartyGetRecaptchaParam
 -- * 'rgrpFields'
 --
 -- * 'rgrpAlt'
-relyingpartyGetRecaptchaParam
-    :: RelyingpartyGetRecaptchaParam
-relyingpartyGetRecaptchaParam =
-    RelyingpartyGetRecaptchaParam
+relyingpartyGetRecaptchaParam'
+    :: RelyingpartyGetRecaptchaParam'
+relyingpartyGetRecaptchaParam' =
+    RelyingpartyGetRecaptchaParam'
     { _rgrpQuotaUser = Nothing
     , _rgrpPrettyPrint = True
     , _rgrpUserIp = Nothing
     , _rgrpKey = Nothing
     , _rgrpOauthToken = Nothing
     , _rgrpFields = Nothing
-    , _rgrpAlt = "json"
+    , _rgrpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,7 +136,7 @@ rgrpFields
   = lens _rgrpFields (\ s a -> s{_rgrpFields = a})
 
 -- | Data format for the response.
-rgrpAlt :: Lens' RelyingpartyGetRecaptchaParam' Text
+rgrpAlt :: Lens' RelyingpartyGetRecaptchaParam' Alt
 rgrpAlt = lens _rgrpAlt (\ s a -> s{_rgrpAlt = a})
 
 instance GoogleRequest RelyingpartyGetRecaptchaParam'
@@ -137,14 +145,16 @@ instance GoogleRequest RelyingpartyGetRecaptchaParam'
              GetRecaptchaParamResponse
         request = requestWithRoute defReq identityToolkitURL
         requestWithRoute r u
-          RelyingpartyGetRecaptchaParam{..}
-          = go _rgrpQuotaUser _rgrpPrettyPrint _rgrpUserIp
+          RelyingpartyGetRecaptchaParam'{..}
+          = go _rgrpQuotaUser (Just _rgrpPrettyPrint)
+              _rgrpUserIp
               _rgrpKey
               _rgrpOauthToken
               _rgrpFields
-              _rgrpAlt
+              (Just _rgrpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyGetRecaptchaParamAPI)
+                      (Proxy ::
+                         Proxy RelyingpartyGetRecaptchaParamResource)
                       r
                       u

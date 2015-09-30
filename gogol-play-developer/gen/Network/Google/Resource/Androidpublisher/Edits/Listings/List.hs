@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns all of the localized store listings attached to this edit.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsListingsList@.
-module Androidpublisher.Edits.Listings.List
+module Network.Google.Resource.Androidpublisher.Edits.Listings.List
     (
     -- * REST Resource
-      EditsListingsListAPI
+      EditsListingsListResource
 
     -- * Creating a Request
-    , editsListingsList
-    , EditsListingsList
+    , editsListingsList'
+    , EditsListingsList'
 
     -- * Request Lenses
     , ellQuotaUser
@@ -44,17 +45,25 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsListingsList@ which the
--- 'EditsListingsList' request conforms to.
-type EditsListingsListAPI =
+-- 'EditsListingsList'' request conforms to.
+type EditsListingsListResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
-           "listings" :> Get '[JSON] ListingsListResponse
+           "listings" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] ListingsListResponse
 
 -- | Returns all of the localized store listings attached to this edit.
 --
--- /See:/ 'editsListingsList' smart constructor.
-data EditsListingsList = EditsListingsList
+-- /See:/ 'editsListingsList'' smart constructor.
+data EditsListingsList' = EditsListingsList'
     { _ellQuotaUser   :: !(Maybe Text)
     , _ellPrettyPrint :: !Bool
     , _ellPackageName :: !Text
@@ -63,7 +72,7 @@ data EditsListingsList = EditsListingsList
     , _ellOauthToken  :: !(Maybe Text)
     , _ellEditId      :: !Text
     , _ellFields      :: !(Maybe Text)
-    , _ellAlt         :: !Text
+    , _ellAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsListingsList'' with the minimum fields required to make a request.
@@ -87,12 +96,12 @@ data EditsListingsList = EditsListingsList
 -- * 'ellFields'
 --
 -- * 'ellAlt'
-editsListingsList
+editsListingsList'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'editId'
-    -> EditsListingsList
-editsListingsList pEllPackageName_ pEllEditId_ =
-    EditsListingsList
+    -> EditsListingsList'
+editsListingsList' pEllPackageName_ pEllEditId_ =
+    EditsListingsList'
     { _ellQuotaUser = Nothing
     , _ellPrettyPrint = True
     , _ellPackageName = pEllPackageName_
@@ -101,7 +110,7 @@ editsListingsList pEllPackageName_ pEllEditId_ =
     , _ellOauthToken = Nothing
     , _ellEditId = pEllEditId_
     , _ellFields = Nothing
-    , _ellAlt = "json"
+    , _ellAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +162,23 @@ ellFields
   = lens _ellFields (\ s a -> s{_ellFields = a})
 
 -- | Data format for the response.
-ellAlt :: Lens' EditsListingsList' Text
+ellAlt :: Lens' EditsListingsList' Alt
 ellAlt = lens _ellAlt (\ s a -> s{_ellAlt = a})
 
 instance GoogleRequest EditsListingsList' where
         type Rs EditsListingsList' = ListingsListResponse
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsListingsList{..}
-          = go _ellQuotaUser _ellPrettyPrint _ellPackageName
+        requestWithRoute r u EditsListingsList'{..}
+          = go _ellQuotaUser (Just _ellPrettyPrint)
+              _ellPackageName
               _ellUserIp
               _ellKey
               _ellOauthToken
               _ellEditId
               _ellFields
-              _ellAlt
+              (Just _ellAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsListingsListAPI)
+                      (Proxy :: Proxy EditsListingsListResource)
                       r
                       u

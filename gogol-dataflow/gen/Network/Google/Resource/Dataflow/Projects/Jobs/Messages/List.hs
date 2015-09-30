@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Request the job status.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference> for @DataflowProjectsJobsMessagesList@.
-module Dataflow.Projects.Jobs.Messages.List
+module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     (
     -- * REST Resource
-      ProjectsJobsMessagesListAPI
+      ProjectsJobsMessagesListResource
 
     -- * Creating a Request
-    , projectsJobsMessagesList
-    , ProjectsJobsMessagesList
+    , projectsJobsMessagesList'
+    , ProjectsJobsMessagesList'
 
     -- * Request Lenses
     , pjmlXgafv
@@ -55,25 +56,39 @@ import           Network.Google.Dataflow.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DataflowProjectsJobsMessagesList@ which the
--- 'ProjectsJobsMessagesList' request conforms to.
-type ProjectsJobsMessagesListAPI =
+-- 'ProjectsJobsMessagesList'' request conforms to.
+type ProjectsJobsMessagesListResource =
      "v1b3" :>
        "projects" :>
          Capture "projectId" Text :>
            "jobs" :>
              Capture "jobId" Text :>
                "messages" :>
-                 QueryParam "startTime" Text :>
-                   QueryParam "endTime" Text :>
-                     QueryParam "minimumImportance" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "pageSize" Int32 :>
-                           Get '[JSON] ListJobMessagesResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "startTime" Text :>
+                           QueryParam "pp" Bool :>
+                             QueryParam "access_token" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "key" Text :>
+                                     QueryParam "endTime" Text :>
+                                       QueryParam "minimumImportance" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "pageSize" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "callback" Text :>
+                                                   QueryParam "alt" Text :>
+                                                     Get '[JSON]
+                                                       ListJobMessagesResponse
 
 -- | Request the job status.
 --
--- /See:/ 'projectsJobsMessagesList' smart constructor.
-data ProjectsJobsMessagesList = ProjectsJobsMessagesList
+-- /See:/ 'projectsJobsMessagesList'' smart constructor.
+data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Text)
     , _pjmlQuotaUser         :: !(Maybe Text)
     , _pjmlPrettyPrint       :: !Bool
@@ -139,12 +154,12 @@ data ProjectsJobsMessagesList = ProjectsJobsMessagesList
 -- * 'pjmlCallback'
 --
 -- * 'pjmlAlt'
-projectsJobsMessagesList
+projectsJobsMessagesList'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
-    -> ProjectsJobsMessagesList
-projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
-    ProjectsJobsMessagesList
+    -> ProjectsJobsMessagesList'
+projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
+    ProjectsJobsMessagesList'
     { _pjmlXgafv = Nothing
     , _pjmlQuotaUser = Nothing
     , _pjmlPrettyPrint = True
@@ -289,12 +304,13 @@ instance GoogleRequest ProjectsJobsMessagesList'
         type Rs ProjectsJobsMessagesList' =
              ListJobMessagesResponse
         request = requestWithRoute defReq dataflowURL
-        requestWithRoute r u ProjectsJobsMessagesList{..}
-          = go _pjmlXgafv _pjmlQuotaUser _pjmlPrettyPrint
+        requestWithRoute r u ProjectsJobsMessagesList'{..}
+          = go _pjmlXgafv _pjmlQuotaUser
+              (Just _pjmlPrettyPrint)
               _pjmlJobId
               _pjmlUploadProtocol
               _pjmlStartTime
-              _pjmlPp
+              (Just _pjmlPp)
               _pjmlAccessToken
               _pjmlUploadType
               _pjmlBearerToken
@@ -307,9 +323,9 @@ instance GoogleRequest ProjectsJobsMessagesList'
               _pjmlPageSize
               _pjmlFields
               _pjmlCallback
-              _pjmlAlt
+              (Just _pjmlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsJobsMessagesListAPI)
+                      (Proxy :: Proxy ProjectsJobsMessagesListResource)
                       r
                       u

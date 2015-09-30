@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates the given topic with the given name.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsCreate@.
-module PubSub.Projects.Topics.Create
+module Network.Google.Resource.PubSub.Projects.Topics.Create
     (
     -- * REST Resource
-      ProjectsTopicsCreateAPI
+      ProjectsTopicsCreateResource
 
     -- * Creating a Request
-    , projectsTopicsCreate
-    , ProjectsTopicsCreate
+    , projectsTopicsCreate'
+    , ProjectsTopicsCreate'
 
     -- * Request Lenses
     , ptcXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsCreate@ which the
--- 'ProjectsTopicsCreate' request conforms to.
-type ProjectsTopicsCreateAPI =
-     "v1beta2" :> "{+name}" :> Put '[JSON] Topic
+-- 'ProjectsTopicsCreate'' request conforms to.
+type ProjectsTopicsCreateResource =
+     "v1beta2" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Put '[JSON] Topic
 
 -- | Creates the given topic with the given name.
 --
--- /See:/ 'projectsTopicsCreate' smart constructor.
-data ProjectsTopicsCreate = ProjectsTopicsCreate
+-- /See:/ 'projectsTopicsCreate'' smart constructor.
+data ProjectsTopicsCreate' = ProjectsTopicsCreate'
     { _ptcXgafv          :: !(Maybe Text)
     , _ptcQuotaUser      :: !(Maybe Text)
     , _ptcPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data ProjectsTopicsCreate = ProjectsTopicsCreate
 -- * 'ptcCallback'
 --
 -- * 'ptcAlt'
-projectsTopicsCreate
+projectsTopicsCreate'
     :: Text -- ^ 'name'
-    -> ProjectsTopicsCreate
-projectsTopicsCreate pPtcName_ =
-    ProjectsTopicsCreate
+    -> ProjectsTopicsCreate'
+projectsTopicsCreate' pPtcName_ =
+    ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcQuotaUser = Nothing
     , _ptcPrettyPrint = True
@@ -209,10 +224,10 @@ ptcAlt = lens _ptcAlt (\ s a -> s{_ptcAlt = a})
 instance GoogleRequest ProjectsTopicsCreate' where
         type Rs ProjectsTopicsCreate' = Topic
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsCreate{..}
-          = go _ptcXgafv _ptcQuotaUser _ptcPrettyPrint
+        requestWithRoute r u ProjectsTopicsCreate'{..}
+          = go _ptcXgafv _ptcQuotaUser (Just _ptcPrettyPrint)
               _ptcUploadProtocol
-              _ptcPp
+              (Just _ptcPp)
               _ptcAccessToken
               _ptcUploadType
               _ptcBearerToken
@@ -221,9 +236,9 @@ instance GoogleRequest ProjectsTopicsCreate' where
               _ptcOauthToken
               _ptcFields
               _ptcCallback
-              _ptcAlt
+              (Just _ptcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsCreateAPI)
+                      (Proxy :: Proxy ProjectsTopicsCreateResource)
                       r
                       u

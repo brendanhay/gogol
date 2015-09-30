@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of tasks.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTaskList@.
-module FusionTables.Task.List
+module Network.Google.Resource.FusionTables.Task.List
     (
     -- * REST Resource
-      TaskListAPI
+      TaskListResource
 
     -- * Creating a Request
-    , taskList
-    , TaskList
+    , taskList'
+    , TaskList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTaskList@ which the
--- 'TaskList' request conforms to.
-type TaskListAPI =
+-- 'TaskList'' request conforms to.
+type TaskListResource =
      "tables" :>
        Capture "tableId" Text :>
          "tasks" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "startIndex" Word32 :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] TaskList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "startIndex" Word32 :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
 --
--- /See:/ 'taskList' smart constructor.
-data TaskList = TaskList
+-- /See:/ 'taskList'' smart constructor.
+data TaskList' = TaskList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIp      :: !(Maybe Text)
@@ -70,7 +77,7 @@ data TaskList = TaskList
     , _tlStartIndex  :: !(Maybe Word32)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
@@ -98,11 +105,11 @@ data TaskList = TaskList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-taskList
+taskList'
     :: Text -- ^ 'tableId'
-    -> TaskList
-taskList pTlTableId_ =
-    TaskList
+    -> TaskList'
+taskList' pTlTableId_ =
+    TaskList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlUserIp = Nothing
@@ -113,7 +120,7 @@ taskList pTlTableId_ =
     , _tlStartIndex = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,20 +177,22 @@ tlFields :: Lens' TaskList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TaskList' Text
+tlAlt :: Lens' TaskList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TaskList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlUserIp _tlKey
+        requestWithRoute r u TaskList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+              _tlKey
               _tlPageToken
               _tlOauthToken
               _tlTableId
               _tlStartIndex
               _tlMaxResults
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TaskListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TaskListResource) r
+                      u

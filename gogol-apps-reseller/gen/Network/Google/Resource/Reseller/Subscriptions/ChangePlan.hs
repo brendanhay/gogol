@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes the plan of a subscription
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerSubscriptionsChangePlan@.
-module Reseller.Subscriptions.ChangePlan
+module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
     (
     -- * REST Resource
-      SubscriptionsChangePlanAPI
+      SubscriptionsChangePlanResource
 
     -- * Creating a Request
-    , subscriptionsChangePlan
-    , SubscriptionsChangePlan
+    , subscriptionsChangePlan'
+    , SubscriptionsChangePlan'
 
     -- * Request Lenses
     , scpQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerSubscriptionsChangePlan@ which the
--- 'SubscriptionsChangePlan' request conforms to.
-type SubscriptionsChangePlanAPI =
+-- 'SubscriptionsChangePlan'' request conforms to.
+type SubscriptionsChangePlanResource =
      "customers" :>
        Capture "customerId" Text :>
          "subscriptions" :>
            Capture "subscriptionId" Text :>
-             "changePlan" :> Post '[JSON] Subscription
+             "changePlan" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Subscription
 
 -- | Changes the plan of a subscription
 --
--- /See:/ 'subscriptionsChangePlan' smart constructor.
-data SubscriptionsChangePlan = SubscriptionsChangePlan
+-- /See:/ 'subscriptionsChangePlan'' smart constructor.
+data SubscriptionsChangePlan' = SubscriptionsChangePlan'
     { _scpQuotaUser      :: !(Maybe Text)
     , _scpPrettyPrint    :: !Bool
     , _scpUserIp         :: !(Maybe Text)
@@ -64,7 +72,7 @@ data SubscriptionsChangePlan = SubscriptionsChangePlan
     , _scpOauthToken     :: !(Maybe Text)
     , _scpSubscriptionId :: !Text
     , _scpFields         :: !(Maybe Text)
-    , _scpAlt            :: !Text
+    , _scpAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangePlan'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data SubscriptionsChangePlan = SubscriptionsChangePlan
 -- * 'scpFields'
 --
 -- * 'scpAlt'
-subscriptionsChangePlan
+subscriptionsChangePlan'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
-    -> SubscriptionsChangePlan
-subscriptionsChangePlan pScpCustomerId_ pScpSubscriptionId_ =
-    SubscriptionsChangePlan
+    -> SubscriptionsChangePlan'
+subscriptionsChangePlan' pScpCustomerId_ pScpSubscriptionId_ =
+    SubscriptionsChangePlan'
     { _scpQuotaUser = Nothing
     , _scpPrettyPrint = True
     , _scpUserIp = Nothing
@@ -102,7 +110,7 @@ subscriptionsChangePlan pScpCustomerId_ pScpSubscriptionId_ =
     , _scpOauthToken = Nothing
     , _scpSubscriptionId = pScpSubscriptionId_
     , _scpFields = Nothing
-    , _scpAlt = "json"
+    , _scpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,22 +162,22 @@ scpFields
   = lens _scpFields (\ s a -> s{_scpFields = a})
 
 -- | Data format for the response.
-scpAlt :: Lens' SubscriptionsChangePlan' Text
+scpAlt :: Lens' SubscriptionsChangePlan' Alt
 scpAlt = lens _scpAlt (\ s a -> s{_scpAlt = a})
 
 instance GoogleRequest SubscriptionsChangePlan' where
         type Rs SubscriptionsChangePlan' = Subscription
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u SubscriptionsChangePlan{..}
-          = go _scpQuotaUser _scpPrettyPrint _scpUserIp
+        requestWithRoute r u SubscriptionsChangePlan'{..}
+          = go _scpQuotaUser (Just _scpPrettyPrint) _scpUserIp
               _scpCustomerId
               _scpKey
               _scpOauthToken
               _scpSubscriptionId
               _scpFields
-              _scpAlt
+              (Just _scpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsChangePlanAPI)
+                      (Proxy :: Proxy SubscriptionsChangePlanResource)
                       r
                       u

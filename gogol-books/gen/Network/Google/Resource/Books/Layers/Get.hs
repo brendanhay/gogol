@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the layer summary for a volume.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersGet@.
-module Books.Layers.Get
+module Network.Google.Resource.Books.Layers.Get
     (
     -- * REST Resource
-      LayersGetAPI
+      LayersGetResource
 
     -- * Creating a Request
-    , layersGet
-    , LayersGet
+    , layersGet'
+    , LayersGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersGet@ which the
--- 'LayersGet' request conforms to.
-type LayersGetAPI =
+-- 'LayersGet'' request conforms to.
+type LayersGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layersummary" :>
            Capture "summaryId" Text :>
-             QueryParam "contentVersion" Text :>
-               QueryParam "source" Text :> Get '[JSON] Layersummary
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "contentVersion" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "source" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Layersummary
 
 -- | Gets the layer summary for a volume.
 --
--- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet
+-- /See:/ 'layersGet'' smart constructor.
+data LayersGet' = LayersGet'
     { _lgQuotaUser      :: !(Maybe Text)
     , _lgPrettyPrint    :: !Bool
     , _lgUserIp         :: !(Maybe Text)
@@ -69,7 +77,7 @@ data LayersGet = LayersGet
     , _lgOauthToken     :: !(Maybe Text)
     , _lgFields         :: !(Maybe Text)
     , _lgSummaryId      :: !Text
-    , _lgAlt            :: !Text
+    , _lgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
@@ -97,12 +105,12 @@ data LayersGet = LayersGet
 -- * 'lgSummaryId'
 --
 -- * 'lgAlt'
-layersGet
+layersGet'
     :: Text -- ^ 'volumeId'
     -> Text -- ^ 'summaryId'
-    -> LayersGet
-layersGet pLgVolumeId_ pLgSummaryId_ =
-    LayersGet
+    -> LayersGet'
+layersGet' pLgVolumeId_ pLgSummaryId_ =
+    LayersGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgUserIp = Nothing
@@ -113,7 +121,7 @@ layersGet pLgVolumeId_ pLgSummaryId_ =
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
     , _lgSummaryId = pLgSummaryId_
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,14 +178,14 @@ lgSummaryId
   = lens _lgSummaryId (\ s a -> s{_lgSummaryId = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LayersGet' Text
+lgAlt :: Lens' LayersGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layersummary
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgUserIp
+        requestWithRoute r u LayersGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
               _lgContentVersion
               _lgKey
               _lgVolumeId
@@ -185,6 +193,8 @@ instance GoogleRequest LayersGet' where
               _lgOauthToken
               _lgFields
               _lgSummaryId
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LayersGetResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing advertiser group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsDelete@.
-module DFAReporting.AdvertiserGroups.Delete
+module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     (
     -- * REST Resource
-      AdvertiserGroupsDeleteAPI
+      AdvertiserGroupsDeleteResource
 
     -- * Creating a Request
-    , advertiserGroupsDelete
-    , AdvertiserGroupsDelete
+    , advertiserGroupsDelete'
+    , AdvertiserGroupsDelete'
 
     -- * Request Lenses
     , agdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertiserGroupsDelete@ which the
--- 'AdvertiserGroupsDelete' request conforms to.
-type AdvertiserGroupsDeleteAPI =
+-- 'AdvertiserGroupsDelete'' request conforms to.
+type AdvertiserGroupsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --
--- /See:/ 'advertiserGroupsDelete' smart constructor.
-data AdvertiserGroupsDelete = AdvertiserGroupsDelete
+-- /See:/ 'advertiserGroupsDelete'' smart constructor.
+data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
     { _agdQuotaUser   :: !(Maybe Text)
     , _agdPrettyPrint :: !Bool
     , _agdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data AdvertiserGroupsDelete = AdvertiserGroupsDelete
     , _agdId          :: !Int64
     , _agdOauthToken  :: !(Maybe Text)
     , _agdFields      :: !(Maybe Text)
-    , _agdAlt         :: !Text
+    , _agdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data AdvertiserGroupsDelete = AdvertiserGroupsDelete
 -- * 'agdFields'
 --
 -- * 'agdAlt'
-advertiserGroupsDelete
+advertiserGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AdvertiserGroupsDelete
-advertiserGroupsDelete pAgdProfileId_ pAgdId_ =
-    AdvertiserGroupsDelete
+    -> AdvertiserGroupsDelete'
+advertiserGroupsDelete' pAgdProfileId_ pAgdId_ =
+    AdvertiserGroupsDelete'
     { _agdQuotaUser = Nothing
     , _agdPrettyPrint = True
     , _agdUserIp = Nothing
@@ -101,7 +109,7 @@ advertiserGroupsDelete pAgdProfileId_ pAgdId_ =
     , _agdId = pAgdId_
     , _agdOauthToken = Nothing
     , _agdFields = Nothing
-    , _agdAlt = "json"
+    , _agdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ agdFields
   = lens _agdFields (\ s a -> s{_agdFields = a})
 
 -- | Data format for the response.
-agdAlt :: Lens' AdvertiserGroupsDelete' Text
+agdAlt :: Lens' AdvertiserGroupsDelete' Alt
 agdAlt = lens _agdAlt (\ s a -> s{_agdAlt = a})
 
 instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsDelete{..}
-          = go _agdQuotaUser _agdPrettyPrint _agdUserIp
+        requestWithRoute r u AdvertiserGroupsDelete'{..}
+          = go _agdQuotaUser (Just _agdPrettyPrint) _agdUserIp
               _agdProfileId
               _agdKey
               _agdId
               _agdOauthToken
               _agdFields
-              _agdAlt
+              (Just _agdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertiserGroupsDeleteAPI)
+                      (Proxy :: Proxy AdvertiserGroupsDeleteResource)
                       r
                       u

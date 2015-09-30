@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementCustomMetricsPatch@.
-module Analytics.Management.CustomMetrics.Patch
+module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
     (
     -- * REST Resource
-      ManagementCustomMetricsPatchAPI
+      ManagementCustomMetricsPatchResource
 
     -- * Creating a Request
-    , managementCustomMetricsPatch
-    , ManagementCustomMetricsPatch
+    , managementCustomMetricsPatch'
+    , ManagementCustomMetricsPatch'
 
     -- * Request Lenses
     , mcmpQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementCustomMetricsPatch@ which the
--- 'ManagementCustomMetricsPatch' request conforms to.
-type ManagementCustomMetricsPatchAPI =
+-- 'ManagementCustomMetricsPatch'' request conforms to.
+type ManagementCustomMetricsPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -55,13 +56,20 @@ type ManagementCustomMetricsPatchAPI =
              Capture "webPropertyId" Text :>
                "customMetrics" :>
                  Capture "customMetricId" Text :>
-                   QueryParam "ignoreCustomDataSourceLinks" Bool :>
-                     Patch '[JSON] CustomMetric
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "ignoreCustomDataSourceLinks" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Patch '[JSON] CustomMetric
 
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
--- /See:/ 'managementCustomMetricsPatch' smart constructor.
-data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
+-- /See:/ 'managementCustomMetricsPatch'' smart constructor.
+data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
     { _mcmpQuotaUser                   :: !(Maybe Text)
     , _mcmpPrettyPrint                 :: !Bool
     , _mcmpCustomMetricId              :: !Text
@@ -72,7 +80,7 @@ data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
     , _mcmpKey                         :: !(Maybe Text)
     , _mcmpOauthToken                  :: !(Maybe Text)
     , _mcmpFields                      :: !(Maybe Text)
-    , _mcmpAlt                         :: !Text
+    , _mcmpAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsPatch'' with the minimum fields required to make a request.
@@ -100,13 +108,13 @@ data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
 -- * 'mcmpFields'
 --
 -- * 'mcmpAlt'
-managementCustomMetricsPatch
+managementCustomMetricsPatch'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementCustomMetricsPatch
-managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpAccountId_ =
-    ManagementCustomMetricsPatch
+    -> ManagementCustomMetricsPatch'
+managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpAccountId_ =
+    ManagementCustomMetricsPatch'
     { _mcmpQuotaUser = Nothing
     , _mcmpPrettyPrint = False
     , _mcmpCustomMetricId = pMcmpCustomMetricId_
@@ -117,7 +125,7 @@ managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpAccou
     , _mcmpKey = Nothing
     , _mcmpOauthToken = Nothing
     , _mcmpFields = Nothing
-    , _mcmpAlt = "json"
+    , _mcmpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,15 +191,16 @@ mcmpFields
   = lens _mcmpFields (\ s a -> s{_mcmpFields = a})
 
 -- | Data format for the response.
-mcmpAlt :: Lens' ManagementCustomMetricsPatch' Text
+mcmpAlt :: Lens' ManagementCustomMetricsPatch' Alt
 mcmpAlt = lens _mcmpAlt (\ s a -> s{_mcmpAlt = a})
 
 instance GoogleRequest ManagementCustomMetricsPatch'
          where
         type Rs ManagementCustomMetricsPatch' = CustomMetric
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementCustomMetricsPatch{..}
-          = go _mcmpQuotaUser _mcmpPrettyPrint
+        requestWithRoute r u
+          ManagementCustomMetricsPatch'{..}
+          = go _mcmpQuotaUser (Just _mcmpPrettyPrint)
               _mcmpCustomMetricId
               _mcmpWebPropertyId
               (Just _mcmpIgnoreCustomDataSourceLinks)
@@ -200,9 +209,9 @@ instance GoogleRequest ManagementCustomMetricsPatch'
               _mcmpKey
               _mcmpOauthToken
               _mcmpFields
-              _mcmpAlt
+              (Just _mcmpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementCustomMetricsPatchAPI)
+                      (Proxy :: Proxy ManagementCustomMetricsPatchResource)
                       r
                       u

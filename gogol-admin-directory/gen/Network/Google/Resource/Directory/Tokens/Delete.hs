@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete all access tokens issued by a user for an application.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensDelete@.
-module Directory.Tokens.Delete
+module Network.Google.Resource.Directory.Tokens.Delete
     (
     -- * REST Resource
-      TokensDeleteAPI
+      TokensDeleteResource
 
     -- * Creating a Request
-    , tokensDelete
-    , TokensDelete
+    , tokensDelete'
+    , TokensDelete'
 
     -- * Request Lenses
     , tdClientId
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryTokensDelete@ which the
--- 'TokensDelete' request conforms to.
-type TokensDeleteAPI =
+-- 'TokensDelete'' request conforms to.
+type TokensDeleteResource =
      "users" :>
        Capture "userKey" Text :>
          "tokens" :>
-           Capture "clientId" Text :> Delete '[JSON] ()
+           Capture "clientId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete all access tokens issued by a user for an application.
 --
--- /See:/ 'tokensDelete' smart constructor.
-data TokensDelete = TokensDelete
+-- /See:/ 'tokensDelete'' smart constructor.
+data TokensDelete' = TokensDelete'
     { _tdClientId    :: !Text
     , _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data TokensDelete = TokensDelete
     , _tdOauthToken  :: !(Maybe Text)
     , _tdUserKey     :: !Text
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Text
+    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokensDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TokensDelete = TokensDelete
 -- * 'tdFields'
 --
 -- * 'tdAlt'
-tokensDelete
+tokensDelete'
     :: Text -- ^ 'clientId'
     -> Text -- ^ 'userKey'
-    -> TokensDelete
-tokensDelete pTdClientId_ pTdUserKey_ =
-    TokensDelete
+    -> TokensDelete'
+tokensDelete' pTdClientId_ pTdUserKey_ =
+    TokensDelete'
     { _tdClientId = pTdClientId_
     , _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
@@ -101,7 +109,7 @@ tokensDelete pTdClientId_ pTdUserKey_ =
     , _tdOauthToken = Nothing
     , _tdUserKey = pTdUserKey_
     , _tdFields = Nothing
-    , _tdAlt = "json"
+    , _tdAlt = JSON
     }
 
 -- | The Client ID of the application the token is issued to.
@@ -149,20 +157,22 @@ tdFields :: Lens' TokensDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
 -- | Data format for the response.
-tdAlt :: Lens' TokensDelete' Text
+tdAlt :: Lens' TokensDelete' Alt
 tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
 
 instance GoogleRequest TokensDelete' where
         type Rs TokensDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u TokensDelete{..}
-          = go _tdClientId _tdQuotaUser _tdPrettyPrint
+        requestWithRoute r u TokensDelete'{..}
+          = go _tdClientId _tdQuotaUser (Just _tdPrettyPrint)
               _tdUserIp
               _tdKey
               _tdOauthToken
               _tdUserKey
               _tdFields
-              _tdAlt
+              (Just _tdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokensDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TokensDeleteResource)
+                      r
                       u

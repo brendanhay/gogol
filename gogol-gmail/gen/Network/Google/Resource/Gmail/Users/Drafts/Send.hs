@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- Bcc headers.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsSend@.
-module Gmail.Users.Drafts.Send
+module Network.Google.Resource.Gmail.Users.Drafts.Send
     (
     -- * REST Resource
-      UsersDraftsSendAPI
+      UsersDraftsSendResource
 
     -- * Creating a Request
-    , usersDraftsSend
-    , UsersDraftsSend
+    , usersDraftsSend'
+    , UsersDraftsSend'
 
     -- * Request Lenses
     , udsQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersDraftsSend@ which the
--- 'UsersDraftsSend' request conforms to.
-type UsersDraftsSendAPI =
+-- 'UsersDraftsSend'' request conforms to.
+type UsersDraftsSendResource =
      Capture "userId" Text :>
-       "drafts" :> "send" :> Post '[JSON] Message
+       "drafts" :>
+         "send" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
 --
--- /See:/ 'usersDraftsSend' smart constructor.
-data UsersDraftsSend = UsersDraftsSend
+-- /See:/ 'usersDraftsSend'' smart constructor.
+data UsersDraftsSend' = UsersDraftsSend'
     { _udsQuotaUser   :: !(Maybe Text)
     , _udsPrettyPrint :: !Bool
     , _udsUserIp      :: !(Maybe Text)
@@ -61,7 +70,7 @@ data UsersDraftsSend = UsersDraftsSend
     , _udsKey         :: !(Maybe Text)
     , _udsOauthToken  :: !(Maybe Text)
     , _udsFields      :: !(Maybe Text)
-    , _udsAlt         :: !Text
+    , _udsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data UsersDraftsSend = UsersDraftsSend
 -- * 'udsFields'
 --
 -- * 'udsAlt'
-usersDraftsSend
+usersDraftsSend'
     :: Text
-    -> UsersDraftsSend
-usersDraftsSend pUdsUserId_ =
-    UsersDraftsSend
+    -> UsersDraftsSend'
+usersDraftsSend' pUdsUserId_ =
+    UsersDraftsSend'
     { _udsQuotaUser = Nothing
     , _udsPrettyPrint = True
     , _udsUserIp = Nothing
@@ -95,7 +104,7 @@ usersDraftsSend pUdsUserId_ =
     , _udsKey = Nothing
     , _udsOauthToken = Nothing
     , _udsFields = Nothing
-    , _udsAlt = "json"
+    , _udsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,20 +150,21 @@ udsFields
   = lens _udsFields (\ s a -> s{_udsFields = a})
 
 -- | Data format for the response.
-udsAlt :: Lens' UsersDraftsSend' Text
+udsAlt :: Lens' UsersDraftsSend' Alt
 udsAlt = lens _udsAlt (\ s a -> s{_udsAlt = a})
 
 instance GoogleRequest UsersDraftsSend' where
         type Rs UsersDraftsSend' = Message
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsSend{..}
-          = go _udsQuotaUser _udsPrettyPrint _udsUserIp
+        requestWithRoute r u UsersDraftsSend'{..}
+          = go _udsQuotaUser (Just _udsPrettyPrint) _udsUserIp
               _udsUserId
               _udsKey
               _udsOauthToken
               _udsFields
-              _udsAlt
+              (Just _udsAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDraftsSendAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDraftsSendResource)
                       r
                       u

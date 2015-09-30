@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists account-user links for a given account.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementAccountUserLinksList@.
-module Analytics.Management.AccountUserLinks.List
+module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
     (
     -- * REST Resource
-      ManagementAccountUserLinksListAPI
+      ManagementAccountUserLinksListResource
 
     -- * Creating a Request
-    , managementAccountUserLinksList
-    , ManagementAccountUserLinksList
+    , managementAccountUserLinksList'
+    , ManagementAccountUserLinksList'
 
     -- * Request Lenses
     , maullQuotaUser
@@ -45,20 +46,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementAccountUserLinksList@ which the
--- 'ManagementAccountUserLinksList' request conforms to.
-type ManagementAccountUserLinksListAPI =
+-- 'ManagementAccountUserLinksList'' request conforms to.
+type ManagementAccountUserLinksListResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "entityUserLinks" :>
-             QueryParam "start-index" Int32 :>
-               QueryParam "max-results" Int32 :>
-                 Get '[JSON] EntityUserLinks
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "start-index" Int32 :>
+                         QueryParam "max-results" Int32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] EntityUserLinks
 
 -- | Lists account-user links for a given account.
 --
--- /See:/ 'managementAccountUserLinksList' smart constructor.
-data ManagementAccountUserLinksList = ManagementAccountUserLinksList
+-- /See:/ 'managementAccountUserLinksList'' smart constructor.
+data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
     { _maullQuotaUser   :: !(Maybe Text)
     , _maullPrettyPrint :: !Bool
     , _maullUserIp      :: !(Maybe Text)
@@ -68,7 +75,7 @@ data ManagementAccountUserLinksList = ManagementAccountUserLinksList
     , _maullStartIndex  :: !(Maybe Int32)
     , _maullMaxResults  :: !(Maybe Int32)
     , _maullFields      :: !(Maybe Text)
-    , _maullAlt         :: !Text
+    , _maullAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList'' with the minimum fields required to make a request.
@@ -94,11 +101,11 @@ data ManagementAccountUserLinksList = ManagementAccountUserLinksList
 -- * 'maullFields'
 --
 -- * 'maullAlt'
-managementAccountUserLinksList
+managementAccountUserLinksList'
     :: Text -- ^ 'accountId'
-    -> ManagementAccountUserLinksList
-managementAccountUserLinksList pMaullAccountId_ =
-    ManagementAccountUserLinksList
+    -> ManagementAccountUserLinksList'
+managementAccountUserLinksList' pMaullAccountId_ =
+    ManagementAccountUserLinksList'
     { _maullQuotaUser = Nothing
     , _maullPrettyPrint = False
     , _maullUserIp = Nothing
@@ -108,7 +115,7 @@ managementAccountUserLinksList pMaullAccountId_ =
     , _maullStartIndex = Nothing
     , _maullMaxResults = Nothing
     , _maullFields = Nothing
-    , _maullAlt = "json"
+    , _maullAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +175,7 @@ maullFields
   = lens _maullFields (\ s a -> s{_maullFields = a})
 
 -- | Data format for the response.
-maullAlt :: Lens' ManagementAccountUserLinksList' Text
+maullAlt :: Lens' ManagementAccountUserLinksList' Alt
 maullAlt = lens _maullAlt (\ s a -> s{_maullAlt = a})
 
 instance GoogleRequest
@@ -177,17 +184,19 @@ instance GoogleRequest
              EntityUserLinks
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementAccountUserLinksList{..}
-          = go _maullQuotaUser _maullPrettyPrint _maullUserIp
+          ManagementAccountUserLinksList'{..}
+          = go _maullQuotaUser (Just _maullPrettyPrint)
+              _maullUserIp
               _maullAccountId
               _maullKey
               _maullOauthToken
               _maullStartIndex
               _maullMaxResults
               _maullFields
-              _maullAlt
+              (Just _maullAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementAccountUserLinksListAPI)
+                      (Proxy ::
+                         Proxy ManagementAccountUserLinksListResource)
                       r
                       u

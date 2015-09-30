@@ -28,31 +28,31 @@ module Network.Google.DNS
     -- * REST Resources
 
     -- ** DNSChangesCreate
-    , module DNS.Changes.Create
+    , module Network.Google.Resource.DNS.Changes.Create
 
     -- ** DNSChangesGet
-    , module DNS.Changes.Get
+    , module Network.Google.Resource.DNS.Changes.Get
 
     -- ** DNSChangesList
-    , module DNS.Changes.List
+    , module Network.Google.Resource.DNS.Changes.List
 
     -- ** DNSManagedZonesCreate
-    , module DNS.ManagedZones.Create
+    , module Network.Google.Resource.DNS.ManagedZones.Create
 
     -- ** DNSManagedZonesDelete
-    , module DNS.ManagedZones.Delete
+    , module Network.Google.Resource.DNS.ManagedZones.Delete
 
     -- ** DNSManagedZonesGet
-    , module DNS.ManagedZones.Get
+    , module Network.Google.Resource.DNS.ManagedZones.Get
 
     -- ** DNSManagedZonesList
-    , module DNS.ManagedZones.List
+    , module Network.Google.Resource.DNS.ManagedZones.List
 
     -- ** DNSProjectsGet
-    , module DNS.Projects.Get
+    , module Network.Google.Resource.DNS.Projects.Get
 
     -- ** DNSResourceRecordSetsList
-    , module DNS.ResourceRecordSets.List
+    , module Network.Google.Resource.DNS.ResourceRecordSets.List
 
     -- * Types
 
@@ -80,6 +80,9 @@ module Network.Google.DNS
     , cKind
     , cDeletions
     , cId
+
+    -- ** DNSChangesListSortBy
+    , DNSChangesListSortBy (..)
 
     -- ** ResourceRecordSetsListResponse
     , ResourceRecordSetsListResponse
@@ -126,6 +129,9 @@ module Network.Google.DNS
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.DNS.Types
@@ -145,8 +151,14 @@ TODO
 -}
 
 type DNSAPI =
-     Changes :<|> ResourceRecordSets :<|> ManagedZones
-       :<|> Projects
+     ChangesListResource :<|> ChangesGetResource :<|>
+       ChangesCreateResource
+       :<|> ResourceRecordSetsListResource
+       :<|> ManagedZonesListResource
+       :<|> ManagedZonesGetResource
+       :<|> ManagedZonesCreateResource
+       :<|> ManagedZonesDeleteResource
+       :<|> ProjectsGetResource
 
 dNSAPI :: Proxy DNSAPI
 dNSAPI = Proxy

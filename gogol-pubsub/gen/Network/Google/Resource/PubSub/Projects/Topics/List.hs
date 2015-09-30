@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists matching topics.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsList@.
-module PubSub.Projects.Topics.List
+module Network.Google.Resource.PubSub.Projects.Topics.List
     (
     -- * REST Resource
-      ProjectsTopicsListAPI
+      ProjectsTopicsListResource
 
     -- * Creating a Request
-    , projectsTopicsList
-    , ProjectsTopicsList
+    , projectsTopicsList'
+    , ProjectsTopicsList'
 
     -- * Request Lenses
     , ptlXgafv
@@ -51,19 +52,32 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsTopicsList@ which the
--- 'ProjectsTopicsList' request conforms to.
-type ProjectsTopicsListAPI =
+-- 'ProjectsTopicsList'' request conforms to.
+type ProjectsTopicsListResource =
      "v1beta2" :>
        "{+project}" :>
          "topics" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "pageSize" Int32 :>
-               Get '[JSON] ListTopicsResponse
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "pageSize" Int32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Get '[JSON] ListTopicsResponse
 
 -- | Lists matching topics.
 --
--- /See:/ 'projectsTopicsList' smart constructor.
-data ProjectsTopicsList = ProjectsTopicsList
+-- /See:/ 'projectsTopicsList'' smart constructor.
+data ProjectsTopicsList' = ProjectsTopicsList'
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlQuotaUser      :: !(Maybe Text)
     , _ptlPrettyPrint    :: !Bool
@@ -117,11 +131,11 @@ data ProjectsTopicsList = ProjectsTopicsList
 -- * 'ptlCallback'
 --
 -- * 'ptlAlt'
-projectsTopicsList
+projectsTopicsList'
     :: Text -- ^ 'project'
-    -> ProjectsTopicsList
-projectsTopicsList pPtlProject_ =
-    ProjectsTopicsList
+    -> ProjectsTopicsList'
+projectsTopicsList' pPtlProject_ =
+    ProjectsTopicsList'
     { _ptlXgafv = Nothing
     , _ptlQuotaUser = Nothing
     , _ptlPrettyPrint = True
@@ -231,11 +245,11 @@ ptlAlt = lens _ptlAlt (\ s a -> s{_ptlAlt = a})
 instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse
         request = requestWithRoute defReq pubSubURL
-        requestWithRoute r u ProjectsTopicsList{..}
-          = go _ptlXgafv _ptlQuotaUser _ptlPrettyPrint
+        requestWithRoute r u ProjectsTopicsList'{..}
+          = go _ptlXgafv _ptlQuotaUser (Just _ptlPrettyPrint)
               _ptlUploadProtocol
               _ptlProject
-              _ptlPp
+              (Just _ptlPp)
               _ptlAccessToken
               _ptlUploadType
               _ptlBearerToken
@@ -245,9 +259,9 @@ instance GoogleRequest ProjectsTopicsList' where
               _ptlPageSize
               _ptlFields
               _ptlCallback
-              _ptlAlt
+              (Just _ptlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsTopicsListAPI)
+                      (Proxy :: Proxy ProjectsTopicsListResource)
                       r
                       u

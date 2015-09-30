@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a list of videos that match the API request parameters.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeVideosList@.
-module YouTube.Videos.List
+module Network.Google.Resource.YouTube.Videos.List
     (
     -- * REST Resource
-      VideosListAPI
+      VideosListResource
 
     -- * Creating a Request
-    , videosList
-    , VideosList
+    , videosList'
+    , VideosList'
 
     -- * Request Lenses
     , vlChart
@@ -53,34 +54,41 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeVideosList@ which the
--- 'VideosList' request conforms to.
-type VideosListAPI =
+-- 'VideosList'' request conforms to.
+type VideosListResource =
      "videos" :>
-       QueryParam "chart" Text :>
-         QueryParam "part" Text :>
-           QueryParam "regionCode" Text :>
-             QueryParam "locale" Text :>
-               QueryParam "myRating" Text :>
-                 QueryParam "hl" Text :>
-                   QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "videoCategoryId" Text :>
-                       QueryParam "id" Text :>
-                         QueryParam "pageToken" Text :>
-                           QueryParam "maxResults" Word32 :>
-                             Get '[JSON] VideoListResponse
+       QueryParam "chart" YouTubeVideosListChart :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "regionCode" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "locale" Text :>
+                     QueryParam "myRating" YouTubeVideosListMyRating :>
+                       QueryParam "hl" Text :>
+                         QueryParam "onBehalfOfContentOwner" Text :>
+                           QueryParam "videoCategoryId" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "id" Text :>
+                                 QueryParam "pageToken" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "fields" Text :>
+                                         QueryParam "alt" Alt :>
+                                           Get '[JSON] VideoListResponse
 
 -- | Returns a list of videos that match the API request parameters.
 --
--- /See:/ 'videosList' smart constructor.
-data VideosList = VideosList
-    { _vlChart                  :: !(Maybe Text)
+-- /See:/ 'videosList'' smart constructor.
+data VideosList' = VideosList'
+    { _vlChart                  :: !(Maybe YouTubeVideosListChart)
     , _vlQuotaUser              :: !(Maybe Text)
     , _vlPart                   :: !Text
     , _vlPrettyPrint            :: !Bool
     , _vlRegionCode             :: !(Maybe Text)
     , _vlUserIp                 :: !(Maybe Text)
     , _vlLocale                 :: !(Maybe Text)
-    , _vlMyRating               :: !(Maybe Text)
+    , _vlMyRating               :: !(Maybe YouTubeVideosListMyRating)
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
@@ -90,7 +98,7 @@ data VideosList = VideosList
     , _vlOauthToken             :: !(Maybe Text)
     , _vlMaxResults             :: !Word32
     , _vlFields                 :: !(Maybe Text)
-    , _vlAlt                    :: !Text
+    , _vlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosList'' with the minimum fields required to make a request.
@@ -132,11 +140,11 @@ data VideosList = VideosList
 -- * 'vlFields'
 --
 -- * 'vlAlt'
-videosList
+videosList'
     :: Text -- ^ 'part'
-    -> VideosList
-videosList pVlPart_ =
-    VideosList
+    -> VideosList'
+videosList' pVlPart_ =
+    VideosList'
     { _vlChart = Nothing
     , _vlQuotaUser = Nothing
     , _vlPart = pVlPart_
@@ -154,11 +162,11 @@ videosList pVlPart_ =
     , _vlOauthToken = Nothing
     , _vlMaxResults = 5
     , _vlFields = Nothing
-    , _vlAlt = "json"
+    , _vlAlt = JSON
     }
 
 -- | The chart parameter identifies the chart that you want to retrieve.
-vlChart :: Lens' VideosList' (Maybe Text)
+vlChart :: Lens' VideosList' (Maybe YouTubeVideosListChart)
 vlChart = lens _vlChart (\ s a -> s{_vlChart = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -203,7 +211,7 @@ vlLocale = lens _vlLocale (\ s a -> s{_vlLocale = a})
 
 -- | Set this parameter\'s value to like or dislike to instruct the API to
 -- only return videos liked or disliked by the authenticated user.
-vlMyRating :: Lens' VideosList' (Maybe Text)
+vlMyRating :: Lens' VideosList' (Maybe YouTubeVideosListMyRating)
 vlMyRating
   = lens _vlMyRating (\ s a -> s{_vlMyRating = a})
 
@@ -282,15 +290,15 @@ vlFields :: Lens' VideosList' (Maybe Text)
 vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
 
 -- | Data format for the response.
-vlAlt :: Lens' VideosList' Text
+vlAlt :: Lens' VideosList' Alt
 vlAlt = lens _vlAlt (\ s a -> s{_vlAlt = a})
 
 instance GoogleRequest VideosList' where
         type Rs VideosList' = VideoListResponse
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u VideosList{..}
+        requestWithRoute r u VideosList'{..}
           = go _vlChart _vlQuotaUser (Just _vlPart)
-              _vlPrettyPrint
+              (Just _vlPrettyPrint)
               _vlRegionCode
               _vlUserIp
               _vlLocale
@@ -304,6 +312,8 @@ instance GoogleRequest VideosList' where
               _vlOauthToken
               (Just _vlMaxResults)
               _vlFields
-              _vlAlt
+              (Just _vlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VideosListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy VideosListResource)
+                      r
+                      u

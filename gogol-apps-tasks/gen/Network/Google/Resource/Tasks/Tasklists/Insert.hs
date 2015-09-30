@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,122 +21,134 @@
 -- lists.
 --
 -- /See:/ <https://developers.google.com/google-apps/tasks/firstapp Tasks API Reference> for @TasksTasklistsInsert@.
-module Tasks.Tasklists.Insert
+module Network.Google.Resource.Tasks.Tasklists.Insert
     (
     -- * REST Resource
-      TasklistsInsertAPI
+      TasklistsInsertResource
 
     -- * Creating a Request
-    , tasklistsInsert
-    , TasklistsInsert
+    , tasklistsInsert'
+    , TasklistsInsert'
 
     -- * Request Lenses
-    , tQuotaUser
-    , tPrettyPrint
-    , tUserIp
-    , tKey
-    , tOauthToken
-    , tFields
-    , tAlt
+    , tiQuotaUser
+    , tiPrettyPrint
+    , tiUserIp
+    , tiKey
+    , tiOauthToken
+    , tiFields
+    , tiAlt
     ) where
 
 import           Network.Google.AppsTasks.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TasksTasklistsInsert@ which the
--- 'TasklistsInsert' request conforms to.
-type TasklistsInsertAPI =
-     "users" :> "@me" :> "lists" :> Post '[JSON] TaskList
+-- 'TasklistsInsert'' request conforms to.
+type TasklistsInsertResource =
+     "users" :>
+       "@me" :>
+         "lists" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] TaskList
 
 -- | Creates a new task list and adds it to the authenticated user\'s task
 -- lists.
 --
--- /See:/ 'tasklistsInsert' smart constructor.
-data TasklistsInsert = TasklistsInsert
-    { _tQuotaUser   :: !(Maybe Text)
-    , _tPrettyPrint :: !Bool
-    , _tUserIp      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Text)
-    , _tOauthToken  :: !(Maybe Text)
-    , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Text
+-- /See:/ 'tasklistsInsert'' smart constructor.
+data TasklistsInsert' = TasklistsInsert'
+    { _tiQuotaUser   :: !(Maybe Text)
+    , _tiPrettyPrint :: !Bool
+    , _tiUserIp      :: !(Maybe Text)
+    , _tiKey         :: !(Maybe Text)
+    , _tiOauthToken  :: !(Maybe Text)
+    , _tiFields      :: !(Maybe Text)
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasklistsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tQuotaUser'
+-- * 'tiQuotaUser'
 --
--- * 'tPrettyPrint'
+-- * 'tiPrettyPrint'
 --
--- * 'tUserIp'
+-- * 'tiUserIp'
 --
--- * 'tKey'
+-- * 'tiKey'
 --
--- * 'tOauthToken'
+-- * 'tiOauthToken'
 --
--- * 'tFields'
+-- * 'tiFields'
 --
--- * 'tAlt'
-tasklistsInsert
-    :: TasklistsInsert
-tasklistsInsert =
-    TasklistsInsert
-    { _tQuotaUser = Nothing
-    , _tPrettyPrint = True
-    , _tUserIp = Nothing
-    , _tKey = Nothing
-    , _tOauthToken = Nothing
-    , _tFields = Nothing
-    , _tAlt = "json"
+-- * 'tiAlt'
+tasklistsInsert'
+    :: TasklistsInsert'
+tasklistsInsert' =
+    TasklistsInsert'
+    { _tiQuotaUser = Nothing
+    , _tiPrettyPrint = True
+    , _tiUserIp = Nothing
+    , _tiKey = Nothing
+    , _tiOauthToken = Nothing
+    , _tiFields = Nothing
+    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tQuotaUser :: Lens' TasklistsInsert' (Maybe Text)
-tQuotaUser
-  = lens _tQuotaUser (\ s a -> s{_tQuotaUser = a})
+tiQuotaUser :: Lens' TasklistsInsert' (Maybe Text)
+tiQuotaUser
+  = lens _tiQuotaUser (\ s a -> s{_tiQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tPrettyPrint :: Lens' TasklistsInsert' Bool
-tPrettyPrint
-  = lens _tPrettyPrint (\ s a -> s{_tPrettyPrint = a})
+tiPrettyPrint :: Lens' TasklistsInsert' Bool
+tiPrettyPrint
+  = lens _tiPrettyPrint
+      (\ s a -> s{_tiPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TasklistsInsert' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tiUserIp :: Lens' TasklistsInsert' (Maybe Text)
+tiUserIp = lens _tiUserIp (\ s a -> s{_tiUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TasklistsInsert' (Maybe Text)
-tKey = lens _tKey (\ s a -> s{_tKey = a})
+tiKey :: Lens' TasklistsInsert' (Maybe Text)
+tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TasklistsInsert' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tiOauthToken :: Lens' TasklistsInsert' (Maybe Text)
+tiOauthToken
+  = lens _tiOauthToken (\ s a -> s{_tiOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tFields :: Lens' TasklistsInsert' (Maybe Text)
-tFields = lens _tFields (\ s a -> s{_tFields = a})
+tiFields :: Lens' TasklistsInsert' (Maybe Text)
+tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tAlt :: Lens' TasklistsInsert' Text
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+tiAlt :: Lens' TasklistsInsert' Alt
+tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TasklistsInsert' where
         type Rs TasklistsInsert' = TaskList
         request = requestWithRoute defReq appsTasksURL
-        requestWithRoute r u TasklistsInsert{..}
-          = go _tQuotaUser _tPrettyPrint _tUserIp _tKey
-              _tOauthToken
-              _tFields
-              _tAlt
+        requestWithRoute r u TasklistsInsert'{..}
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+              _tiKey
+              _tiOauthToken
+              _tiFields
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasklistsInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TasklistsInsertResource)
                       r
                       u

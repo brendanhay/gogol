@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- [general user permission errors][User Permission Errors].
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsList@.
-module Classroom.Courses.Students.List
+module Network.Google.Resource.Classroom.Courses.Students.List
     (
     -- * REST Resource
-      CoursesStudentsListAPI
+      CoursesStudentsListResource
 
     -- * Creating a Request
-    , coursesStudentsList
-    , CoursesStudentsList
+    , coursesStudentsList'
+    , CoursesStudentsList'
 
     -- * Request Lenses
     , cslXgafv
@@ -54,23 +55,36 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesStudentsList@ which the
--- 'CoursesStudentsList' request conforms to.
-type CoursesStudentsListAPI =
+-- 'CoursesStudentsList'' request conforms to.
+type CoursesStudentsListResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "pageSize" Int32 :>
-                 Get '[JSON] ListStudentsResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListStudentsResponse
 
 -- | Returns a list of students of this course that the requester is
 -- permitted to view. This method returns the following error codes: *
 -- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
 -- [general user permission errors][User Permission Errors].
 --
--- /See:/ 'coursesStudentsList' smart constructor.
-data CoursesStudentsList = CoursesStudentsList
+-- /See:/ 'coursesStudentsList'' smart constructor.
+data CoursesStudentsList' = CoursesStudentsList'
     { _cslXgafv          :: !(Maybe Text)
     , _cslQuotaUser      :: !(Maybe Text)
     , _cslPrettyPrint    :: !Bool
@@ -124,11 +138,11 @@ data CoursesStudentsList = CoursesStudentsList
 -- * 'cslCallback'
 --
 -- * 'cslAlt'
-coursesStudentsList
+coursesStudentsList'
     :: Text -- ^ 'courseId'
-    -> CoursesStudentsList
-coursesStudentsList pCslCourseId_ =
-    CoursesStudentsList
+    -> CoursesStudentsList'
+coursesStudentsList' pCslCourseId_ =
+    CoursesStudentsList'
     { _cslXgafv = Nothing
     , _cslQuotaUser = Nothing
     , _cslPrettyPrint = True
@@ -244,10 +258,10 @@ cslAlt = lens _cslAlt (\ s a -> s{_cslAlt = a})
 instance GoogleRequest CoursesStudentsList' where
         type Rs CoursesStudentsList' = ListStudentsResponse
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesStudentsList{..}
-          = go _cslXgafv _cslQuotaUser _cslPrettyPrint
+        requestWithRoute r u CoursesStudentsList'{..}
+          = go _cslXgafv _cslQuotaUser (Just _cslPrettyPrint)
               _cslUploadProtocol
-              _cslPp
+              (Just _cslPp)
               _cslCourseId
               _cslAccessToken
               _cslUploadType
@@ -258,9 +272,9 @@ instance GoogleRequest CoursesStudentsList' where
               _cslPageSize
               _cslFields
               _cslCallback
-              _cslAlt
+              (Just _cslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesStudentsListAPI)
+                      (Proxy :: Proxy CoursesStudentsListResource)
                       r
                       u

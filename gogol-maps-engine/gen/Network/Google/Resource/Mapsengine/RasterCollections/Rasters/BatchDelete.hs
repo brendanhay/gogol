@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsRastersBatchDelete@.
-module Mapsengine.RasterCollections.Rasters.BatchDelete
+module Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchDelete
     (
     -- * REST Resource
-      RasterCollectionsRastersBatchDeleteAPI
+      RasterCollectionsRastersBatchDeleteResource
 
     -- * Creating a Request
-    , rasterCollectionsRastersBatchDelete
-    , RasterCollectionsRastersBatchDelete
+    , rasterCollectionsRastersBatchDelete'
+    , RasterCollectionsRastersBatchDelete'
 
     -- * Request Lenses
     , rcrbdQuotaUser
@@ -45,21 +46,28 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsRastersBatchDelete@ which the
--- 'RasterCollectionsRastersBatchDelete' request conforms to.
-type RasterCollectionsRastersBatchDeleteAPI =
+-- 'RasterCollectionsRastersBatchDelete'' request conforms to.
+type RasterCollectionsRastersBatchDeleteResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "rasters" :>
            "batchDelete" :>
-             Post '[JSON]
-               RasterCollectionsRastersBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON]
+                             RasterCollectionsRastersBatchDeleteResponse
 
 -- | Remove rasters from an existing raster collection. Up to 50 rasters can
 -- be included in a single batchDelete request. Each batchDelete request is
 -- atomic.
 --
--- /See:/ 'rasterCollectionsRastersBatchDelete' smart constructor.
-data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
+-- /See:/ 'rasterCollectionsRastersBatchDelete'' smart constructor.
+data RasterCollectionsRastersBatchDelete' = RasterCollectionsRastersBatchDelete'
     { _rcrbdQuotaUser   :: !(Maybe Text)
     , _rcrbdPrettyPrint :: !Bool
     , _rcrbdUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
     , _rcrbdId          :: !Text
     , _rcrbdOauthToken  :: !(Maybe Text)
     , _rcrbdFields      :: !(Maybe Text)
-    , _rcrbdAlt         :: !Text
+    , _rcrbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsRastersBatchDelete'' with the minimum fields required to make a request.
@@ -89,11 +97,11 @@ data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
 -- * 'rcrbdFields'
 --
 -- * 'rcrbdAlt'
-rasterCollectionsRastersBatchDelete
+rasterCollectionsRastersBatchDelete'
     :: Text -- ^ 'id'
-    -> RasterCollectionsRastersBatchDelete
-rasterCollectionsRastersBatchDelete pRcrbdId_ =
-    RasterCollectionsRastersBatchDelete
+    -> RasterCollectionsRastersBatchDelete'
+rasterCollectionsRastersBatchDelete' pRcrbdId_ =
+    RasterCollectionsRastersBatchDelete'
     { _rcrbdQuotaUser = Nothing
     , _rcrbdPrettyPrint = True
     , _rcrbdUserIp = Nothing
@@ -101,7 +109,7 @@ rasterCollectionsRastersBatchDelete pRcrbdId_ =
     , _rcrbdId = pRcrbdId_
     , _rcrbdOauthToken = Nothing
     , _rcrbdFields = Nothing
-    , _rcrbdAlt = "json"
+    , _rcrbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,7 +154,7 @@ rcrbdFields
   = lens _rcrbdFields (\ s a -> s{_rcrbdFields = a})
 
 -- | Data format for the response.
-rcrbdAlt :: Lens' RasterCollectionsRastersBatchDelete' Text
+rcrbdAlt :: Lens' RasterCollectionsRastersBatchDelete' Alt
 rcrbdAlt = lens _rcrbdAlt (\ s a -> s{_rcrbdAlt = a})
 
 instance GoogleRequest
@@ -155,16 +163,17 @@ instance GoogleRequest
              RasterCollectionsRastersBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RasterCollectionsRastersBatchDelete{..}
-          = go _rcrbdQuotaUser _rcrbdPrettyPrint _rcrbdUserIp
+          RasterCollectionsRastersBatchDelete'{..}
+          = go _rcrbdQuotaUser (Just _rcrbdPrettyPrint)
+              _rcrbdUserIp
               _rcrbdKey
               _rcrbdId
               _rcrbdOauthToken
               _rcrbdFields
-              _rcrbdAlt
+              (Just _rcrbdAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RasterCollectionsRastersBatchDeleteAPI)
+                         Proxy RasterCollectionsRastersBatchDeleteResource)
                       r
                       u

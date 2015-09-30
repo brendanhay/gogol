@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingAdvertiserGroupsPatch@.
-module DFAReporting.AdvertiserGroups.Patch
+module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     (
     -- * REST Resource
-      AdvertiserGroupsPatchAPI
+      AdvertiserGroupsPatchResource
 
     -- * Creating a Request
-    , advertiserGroupsPatch
-    , AdvertiserGroupsPatch
+    , advertiserGroupsPatch'
+    , AdvertiserGroupsPatch'
 
     -- * Request Lenses
     , agpQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingAdvertiserGroupsPatch@ which the
--- 'AdvertiserGroupsPatch' request conforms to.
-type AdvertiserGroupsPatchAPI =
+-- 'AdvertiserGroupsPatch'' request conforms to.
+type AdvertiserGroupsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "advertiserGroups" :>
-           QueryParam "id" Int64 :>
-             Patch '[JSON] AdvertiserGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group. This method supports patch
 -- semantics.
 --
--- /See:/ 'advertiserGroupsPatch' smart constructor.
-data AdvertiserGroupsPatch = AdvertiserGroupsPatch
+-- /See:/ 'advertiserGroupsPatch'' smart constructor.
+data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
     { _agpQuotaUser   :: !(Maybe Text)
     , _agpPrettyPrint :: !Bool
     , _agpUserIp      :: !(Maybe Text)
@@ -66,7 +73,7 @@ data AdvertiserGroupsPatch = AdvertiserGroupsPatch
     , _agpId          :: !Int64
     , _agpOauthToken  :: !(Maybe Text)
     , _agpFields      :: !(Maybe Text)
-    , _agpAlt         :: !Text
+    , _agpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch'' with the minimum fields required to make a request.
@@ -90,12 +97,12 @@ data AdvertiserGroupsPatch = AdvertiserGroupsPatch
 -- * 'agpFields'
 --
 -- * 'agpAlt'
-advertiserGroupsPatch
+advertiserGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> AdvertiserGroupsPatch
-advertiserGroupsPatch pAgpProfileId_ pAgpId_ =
-    AdvertiserGroupsPatch
+    -> AdvertiserGroupsPatch'
+advertiserGroupsPatch' pAgpProfileId_ pAgpId_ =
+    AdvertiserGroupsPatch'
     { _agpQuotaUser = Nothing
     , _agpPrettyPrint = True
     , _agpUserIp = Nothing
@@ -104,7 +111,7 @@ advertiserGroupsPatch pAgpProfileId_ pAgpId_ =
     , _agpId = pAgpId_
     , _agpOauthToken = Nothing
     , _agpFields = Nothing
-    , _agpAlt = "json"
+    , _agpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +160,22 @@ agpFields
   = lens _agpFields (\ s a -> s{_agpFields = a})
 
 -- | Data format for the response.
-agpAlt :: Lens' AdvertiserGroupsPatch' Text
+agpAlt :: Lens' AdvertiserGroupsPatch' Alt
 agpAlt = lens _agpAlt (\ s a -> s{_agpAlt = a})
 
 instance GoogleRequest AdvertiserGroupsPatch' where
         type Rs AdvertiserGroupsPatch' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u AdvertiserGroupsPatch{..}
-          = go _agpQuotaUser _agpPrettyPrint _agpUserIp
+        requestWithRoute r u AdvertiserGroupsPatch'{..}
+          = go _agpQuotaUser (Just _agpPrettyPrint) _agpUserIp
               _agpProfileId
               _agpKey
               (Just _agpId)
               _agpOauthToken
               _agpFields
-              _agpAlt
+              (Just _agpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AdvertiserGroupsPatchAPI)
+                      (Proxy :: Proxy AdvertiserGroupsPatchResource)
                       r
                       u

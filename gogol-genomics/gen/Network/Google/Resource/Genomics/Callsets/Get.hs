@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets a call set by ID.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsGet@.
-module Genomics.Callsets.Get
+module Network.Google.Resource.Genomics.Callsets.Get
     (
     -- * REST Resource
-      CallsetsGetAPI
+      CallsetsGetResource
 
     -- * Creating a Request
-    , callsetsGet
-    , CallsetsGet
+    , callsetsGet'
+    , CallsetsGet'
 
     -- * Request Lenses
     , cgQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsGet@ which the
--- 'CallsetsGet' request conforms to.
-type CallsetsGetAPI =
+-- 'CallsetsGet'' request conforms to.
+type CallsetsGetResource =
      "callsets" :>
-       Capture "callSetId" Text :> Get '[JSON] CallSet
+       Capture "callSetId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] CallSet
 
 -- | Gets a call set by ID.
 --
--- /See:/ 'callsetsGet' smart constructor.
-data CallsetsGet = CallsetsGet
+-- /See:/ 'callsetsGet'' smart constructor.
+data CallsetsGet' = CallsetsGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data CallsetsGet = CallsetsGet
     , _cgCallSetId   :: !Text
     , _cgOauthToken  :: !(Maybe Text)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Text
+    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data CallsetsGet = CallsetsGet
 -- * 'cgFields'
 --
 -- * 'cgAlt'
-callsetsGet
+callsetsGet'
     :: Text -- ^ 'callSetId'
-    -> CallsetsGet
-callsetsGet pCgCallSetId_ =
-    CallsetsGet
+    -> CallsetsGet'
+callsetsGet' pCgCallSetId_ =
+    CallsetsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgUserIp = Nothing
@@ -93,7 +101,7 @@ callsetsGet pCgCallSetId_ =
     , _cgCallSetId = pCgCallSetId_
     , _cgOauthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = "json"
+    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,17 +143,21 @@ cgFields :: Lens' CallsetsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
 -- | Data format for the response.
-cgAlt :: Lens' CallsetsGet' Text
+cgAlt :: Lens' CallsetsGet' Alt
 cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
 
 instance GoogleRequest CallsetsGet' where
         type Rs CallsetsGet' = CallSet
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsGet{..}
-          = go _cgQuotaUser _cgPrettyPrint _cgUserIp _cgKey
+        requestWithRoute r u CallsetsGet'{..}
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+              _cgKey
               _cgCallSetId
               _cgOauthToken
               _cgFields
-              _cgAlt
+              (Just _cgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsGetResource)
+                      r
+                      u

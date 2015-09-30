@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- UrlMap.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeURLMapsValidate@.
-module Compute.URLMaps.Validate
+module Network.Google.Resource.Compute.URLMaps.Validate
     (
     -- * REST Resource
-      UrlMapsValidateAPI
+      UrlMapsValidateResource
 
     -- * Creating a Request
-    , uRLMapsValidate
-    , URLMapsValidate
+    , uRLMapsValidate'
+    , URLMapsValidate'
 
     -- * Request Lenses
     , umvQuotaUser
@@ -46,20 +47,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeURLMapsValidate@ which the
--- 'URLMapsValidate' request conforms to.
-type UrlMapsValidateAPI =
+-- 'URLMapsValidate'' request conforms to.
+type UrlMapsValidateResource =
      Capture "project" Text :>
        "global" :>
          "urlMaps" :>
            Capture "urlMap" Text :>
-             "validate" :> Post '[JSON] URLMapsValidateResponse
+             "validate" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Post '[JSON] URLMapsValidateResponse
 
 -- | Run static validation for the UrlMap. In particular, the tests of the
 -- provided UrlMap will be run. Calling this method does NOT create the
 -- UrlMap.
 --
--- /See:/ 'uRLMapsValidate' smart constructor.
-data URLMapsValidate = URLMapsValidate
+-- /See:/ 'uRLMapsValidate'' smart constructor.
+data URLMapsValidate' = URLMapsValidate'
     { _umvQuotaUser   :: !(Maybe Text)
     , _umvUrlMap      :: !Text
     , _umvPrettyPrint :: !Bool
@@ -68,7 +77,7 @@ data URLMapsValidate = URLMapsValidate
     , _umvKey         :: !(Maybe Text)
     , _umvOauthToken  :: !(Maybe Text)
     , _umvFields      :: !(Maybe Text)
-    , _umvAlt         :: !Text
+    , _umvAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsValidate'' with the minimum fields required to make a request.
@@ -92,12 +101,12 @@ data URLMapsValidate = URLMapsValidate
 -- * 'umvFields'
 --
 -- * 'umvAlt'
-uRLMapsValidate
+uRLMapsValidate'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
-    -> URLMapsValidate
-uRLMapsValidate pUmvUrlMap_ pUmvProject_ =
-    URLMapsValidate
+    -> URLMapsValidate'
+uRLMapsValidate' pUmvUrlMap_ pUmvProject_ =
+    URLMapsValidate'
     { _umvQuotaUser = Nothing
     , _umvUrlMap = pUmvUrlMap_
     , _umvPrettyPrint = True
@@ -106,7 +115,7 @@ uRLMapsValidate pUmvUrlMap_ pUmvProject_ =
     , _umvKey = Nothing
     , _umvOauthToken = Nothing
     , _umvFields = Nothing
-    , _umvAlt = "json"
+    , _umvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,21 +165,22 @@ umvFields
   = lens _umvFields (\ s a -> s{_umvFields = a})
 
 -- | Data format for the response.
-umvAlt :: Lens' URLMapsValidate' Text
+umvAlt :: Lens' URLMapsValidate' Alt
 umvAlt = lens _umvAlt (\ s a -> s{_umvAlt = a})
 
 instance GoogleRequest URLMapsValidate' where
         type Rs URLMapsValidate' = URLMapsValidateResponse
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u URLMapsValidate{..}
-          = go _umvQuotaUser _umvUrlMap _umvPrettyPrint
+        requestWithRoute r u URLMapsValidate'{..}
+          = go _umvQuotaUser _umvUrlMap (Just _umvPrettyPrint)
               _umvProject
               _umvUserIp
               _umvKey
               _umvOauthToken
               _umvFields
-              _umvAlt
+              (Just _umvAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlMapsValidateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlMapsValidateResource)
                       r
                       u

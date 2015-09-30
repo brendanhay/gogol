@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- load job. Requires the WRITER dataset role.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @BigqueryTabledataInsertAll@.
-module BigQuery.Tabledata.InsertAll
+module Network.Google.Resource.BigQuery.Tabledata.InsertAll
     (
     -- * REST Resource
-      TabledataInsertAllAPI
+      TabledataInsertAllResource
 
     -- * Creating a Request
-    , tabledataInsertAll
-    , TabledataInsertAll
+    , tabledataInsertAll'
+    , TabledataInsertAll'
 
     -- * Request Lenses
     , tiaQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.BigQuery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BigqueryTabledataInsertAll@ which the
--- 'TabledataInsertAll' request conforms to.
-type TabledataInsertAllAPI =
+-- 'TabledataInsertAll'' request conforms to.
+type TabledataInsertAllResource =
      "projects" :>
        Capture "projectId" Text :>
          "datasets" :>
@@ -55,13 +56,20 @@ type TabledataInsertAllAPI =
              "tables" :>
                Capture "tableId" Text :>
                  "insertAll" :>
-                   Post '[JSON] TableDataInsertAllResponse
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] TableDataInsertAllResponse
 
 -- | Streams data into BigQuery one record at a time without needing to run a
 -- load job. Requires the WRITER dataset role.
 --
--- /See:/ 'tabledataInsertAll' smart constructor.
-data TabledataInsertAll = TabledataInsertAll
+-- /See:/ 'tabledataInsertAll'' smart constructor.
+data TabledataInsertAll' = TabledataInsertAll'
     { _tiaQuotaUser   :: !(Maybe Text)
     , _tiaPrettyPrint :: !Bool
     , _tiaUserIp      :: !(Maybe Text)
@@ -71,7 +79,7 @@ data TabledataInsertAll = TabledataInsertAll
     , _tiaOauthToken  :: !(Maybe Text)
     , _tiaTableId     :: !Text
     , _tiaFields      :: !(Maybe Text)
-    , _tiaAlt         :: !Text
+    , _tiaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataInsertAll'' with the minimum fields required to make a request.
@@ -97,13 +105,13 @@ data TabledataInsertAll = TabledataInsertAll
 -- * 'tiaFields'
 --
 -- * 'tiaAlt'
-tabledataInsertAll
+tabledataInsertAll'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
-    -> TabledataInsertAll
-tabledataInsertAll pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
-    TabledataInsertAll
+    -> TabledataInsertAll'
+tabledataInsertAll' pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
+    TabledataInsertAll'
     { _tiaQuotaUser = Nothing
     , _tiaPrettyPrint = True
     , _tiaUserIp = Nothing
@@ -113,7 +121,7 @@ tabledataInsertAll pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
     , _tiaOauthToken = Nothing
     , _tiaTableId = pTiaTableId_
     , _tiaFields = Nothing
-    , _tiaAlt = "json"
+    , _tiaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ tiaFields
   = lens _tiaFields (\ s a -> s{_tiaFields = a})
 
 -- | Data format for the response.
-tiaAlt :: Lens' TabledataInsertAll' Text
+tiaAlt :: Lens' TabledataInsertAll' Alt
 tiaAlt = lens _tiaAlt (\ s a -> s{_tiaAlt = a})
 
 instance GoogleRequest TabledataInsertAll' where
         type Rs TabledataInsertAll' =
              TableDataInsertAllResponse
         request = requestWithRoute defReq bigQueryURL
-        requestWithRoute r u TabledataInsertAll{..}
-          = go _tiaQuotaUser _tiaPrettyPrint _tiaUserIp _tiaKey
+        requestWithRoute r u TabledataInsertAll'{..}
+          = go _tiaQuotaUser (Just _tiaPrettyPrint) _tiaUserIp
+              _tiaKey
               _tiaDatasetId
               _tiaProjectId
               _tiaOauthToken
               _tiaTableId
               _tiaFields
-              _tiaAlt
+              (Just _tiaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TabledataInsertAllAPI)
+                      (Proxy :: Proxy TabledataInsertAllResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of addresses grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeAddressesAggregatedList@.
-module Compute.Addresses.AggregatedList
+module Network.Google.Resource.Compute.Addresses.AggregatedList
     (
     -- * REST Resource
-      AddressesAggregatedListAPI
+      AddressesAggregatedListResource
 
     -- * Creating a Request
-    , addressesAggregatedList
-    , AddressesAggregatedList
+    , addressesAggregatedList'
+    , AddressesAggregatedList'
 
     -- * Request Lenses
     , aalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeAddressesAggregatedList@ which the
--- 'AddressesAggregatedList' request conforms to.
-type AddressesAggregatedListAPI =
+-- 'AddressesAggregatedList'' request conforms to.
+type AddressesAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "addresses" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] AddressAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] AddressAggregatedList
 
 -- | Retrieves the list of addresses grouped by scope.
 --
--- /See:/ 'addressesAggregatedList' smart constructor.
-data AddressesAggregatedList = AddressesAggregatedList
+-- /See:/ 'addressesAggregatedList'' smart constructor.
+data AddressesAggregatedList' = AddressesAggregatedList'
     { _aalQuotaUser   :: !(Maybe Text)
     , _aalPrettyPrint :: !Bool
     , _aalProject     :: !Text
@@ -70,7 +78,7 @@ data AddressesAggregatedList = AddressesAggregatedList
     , _aalOauthToken  :: !(Maybe Text)
     , _aalMaxResults  :: !Word32
     , _aalFields      :: !(Maybe Text)
-    , _aalAlt         :: !Text
+    , _aalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data AddressesAggregatedList = AddressesAggregatedList
 -- * 'aalFields'
 --
 -- * 'aalAlt'
-addressesAggregatedList
+addressesAggregatedList'
     :: Text -- ^ 'project'
-    -> AddressesAggregatedList
-addressesAggregatedList pAalProject_ =
-    AddressesAggregatedList
+    -> AddressesAggregatedList'
+addressesAggregatedList' pAalProject_ =
+    AddressesAggregatedList'
     { _aalQuotaUser = Nothing
     , _aalPrettyPrint = True
     , _aalProject = pAalProject_
@@ -113,7 +121,7 @@ addressesAggregatedList pAalProject_ =
     , _aalOauthToken = Nothing
     , _aalMaxResults = 500
     , _aalFields = Nothing
-    , _aalAlt = "json"
+    , _aalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,15 +194,15 @@ aalFields
   = lens _aalFields (\ s a -> s{_aalFields = a})
 
 -- | Data format for the response.
-aalAlt :: Lens' AddressesAggregatedList' Text
+aalAlt :: Lens' AddressesAggregatedList' Alt
 aalAlt = lens _aalAlt (\ s a -> s{_aalAlt = a})
 
 instance GoogleRequest AddressesAggregatedList' where
         type Rs AddressesAggregatedList' =
              AddressAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u AddressesAggregatedList{..}
-          = go _aalQuotaUser _aalPrettyPrint _aalProject
+        requestWithRoute r u AddressesAggregatedList'{..}
+          = go _aalQuotaUser (Just _aalPrettyPrint) _aalProject
               _aalUserIp
               _aalKey
               _aalFilter
@@ -202,9 +210,9 @@ instance GoogleRequest AddressesAggregatedList' where
               _aalOauthToken
               (Just _aalMaxResults)
               _aalFields
-              _aalAlt
+              (Just _aalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AddressesAggregatedListAPI)
+                      (Proxy :: Proxy AddressesAggregatedListResource)
                       r
                       u

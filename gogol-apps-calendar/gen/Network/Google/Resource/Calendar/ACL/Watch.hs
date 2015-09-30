@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes to ACL resources.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @CalendarACLWatch@.
-module Calendar.ACL.Watch
+module Network.Google.Resource.Calendar.ACL.Watch
     (
     -- * REST Resource
-      AclWatchAPI
+      AclWatchResource
 
     -- * Creating a Request
-    , aCLWatch
-    , ACLWatch
+    , aCLWatch'
+    , ACLWatch'
 
     -- * Request Lenses
     , awSyncToken
@@ -47,21 +48,28 @@ import           Network.Google.AppsCalendar.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CalendarACLWatch@ which the
--- 'ACLWatch' request conforms to.
-type AclWatchAPI =
+-- 'ACLWatch'' request conforms to.
+type AclWatchResource =
      "calendars" :>
        Capture "calendarId" Text :>
          "acl" :>
            "watch" :>
              QueryParam "syncToken" Text :>
-               QueryParam "showDeleted" Bool :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" Int32 :> Post '[JSON] Channel
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "showDeleted" Bool :>
+                       QueryParam "key" Text :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Int32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Channel
 
 -- | Watch for changes to ACL resources.
 --
--- /See:/ 'aCLWatch' smart constructor.
-data ACLWatch = ACLWatch
+-- /See:/ 'aCLWatch'' smart constructor.
+data ACLWatch' = ACLWatch'
     { _awSyncToken   :: !(Maybe Text)
     , _awQuotaUser   :: !(Maybe Text)
     , _awCalendarId  :: !Text
@@ -73,7 +81,7 @@ data ACLWatch = ACLWatch
     , _awOauthToken  :: !(Maybe Text)
     , _awMaxResults  :: !(Maybe Int32)
     , _awFields      :: !(Maybe Text)
-    , _awAlt         :: !Text
+    , _awAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLWatch'' with the minimum fields required to make a request.
@@ -103,11 +111,11 @@ data ACLWatch = ACLWatch
 -- * 'awFields'
 --
 -- * 'awAlt'
-aCLWatch
+aCLWatch'
     :: Text -- ^ 'calendarId'
-    -> ACLWatch
-aCLWatch pAwCalendarId_ =
-    ACLWatch
+    -> ACLWatch'
+aCLWatch' pAwCalendarId_ =
+    ACLWatch'
     { _awSyncToken = Nothing
     , _awQuotaUser = Nothing
     , _awCalendarId = pAwCalendarId_
@@ -119,7 +127,7 @@ aCLWatch pAwCalendarId_ =
     , _awOauthToken = Nothing
     , _awMaxResults = Nothing
     , _awFields = Nothing
-    , _awAlt = "json"
+    , _awAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -196,15 +204,15 @@ awFields :: Lens' ACLWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
 -- | Data format for the response.
-awAlt :: Lens' ACLWatch' Text
+awAlt :: Lens' ACLWatch' Alt
 awAlt = lens _awAlt (\ s a -> s{_awAlt = a})
 
 instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel
         request = requestWithRoute defReq appsCalendarURL
-        requestWithRoute r u ACLWatch{..}
+        requestWithRoute r u ACLWatch'{..}
           = go _awSyncToken _awQuotaUser _awCalendarId
-              _awPrettyPrint
+              (Just _awPrettyPrint)
               _awUserIp
               _awShowDeleted
               _awKey
@@ -212,6 +220,7 @@ instance GoogleRequest ACLWatch' where
               _awOauthToken
               _awMaxResults
               _awFields
-              _awAlt
+              (Just _awAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AclWatchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy AclWatchResource) r
+                      u

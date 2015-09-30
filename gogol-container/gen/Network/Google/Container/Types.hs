@@ -74,6 +74,12 @@ module Network.Google.Container.Types
     , oTargetLink
     , oTarget
 
+    -- * OperationOperationType
+    , OperationOperationType (..)
+
+    -- * OperationStatus
+    , OperationStatus (..)
+
     -- * ServiceAccount
     , ServiceAccount
     , serviceAccount
@@ -99,6 +105,12 @@ module Network.Google.Container.Types
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+
+    -- * ClusterStatus
+    , ClusterStatus (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Container.Types.Product
@@ -106,7 +118,7 @@ import           Network.Google.Container.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v1beta1' of the Google Container Engine API.
-containerURL :: BaseURL
+containerURL :: BaseUrl
 containerURL
   = BaseUrl Https
       "https://www.googleapis.com/container/v1beta1/projects/"

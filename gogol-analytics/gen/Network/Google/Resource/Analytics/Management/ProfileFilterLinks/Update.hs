@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update an existing profile filter link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementProfileFilterLinksUpdate@.
-module Analytics.Management.ProfileFilterLinks.Update
+module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Update
     (
     -- * REST Resource
-      ManagementProfileFilterLinksUpdateAPI
+      ManagementProfileFilterLinksUpdateResource
 
     -- * Creating a Request
-    , managementProfileFilterLinksUpdate
-    , ManagementProfileFilterLinksUpdate
+    , managementProfileFilterLinksUpdate'
+    , ManagementProfileFilterLinksUpdate'
 
     -- * Request Lenses
     , mpfluQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementProfileFilterLinksUpdate@ which the
--- 'ManagementProfileFilterLinksUpdate' request conforms to.
-type ManagementProfileFilterLinksUpdateAPI =
+-- 'ManagementProfileFilterLinksUpdate'' request conforms to.
+type ManagementProfileFilterLinksUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,12 +58,19 @@ type ManagementProfileFilterLinksUpdateAPI =
                  Capture "profileId" Text :>
                    "profileFilterLinks" :>
                      Capture "linkId" Text :>
-                       Put '[JSON] ProfileFilterLink
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Put '[JSON] ProfileFilterLink
 
 -- | Update an existing profile filter link.
 --
--- /See:/ 'managementProfileFilterLinksUpdate' smart constructor.
-data ManagementProfileFilterLinksUpdate = ManagementProfileFilterLinksUpdate
+-- /See:/ 'managementProfileFilterLinksUpdate'' smart constructor.
+data ManagementProfileFilterLinksUpdate' = ManagementProfileFilterLinksUpdate'
     { _mpfluQuotaUser     :: !(Maybe Text)
     , _mpfluPrettyPrint   :: !Bool
     , _mpfluWebPropertyId :: !Text
@@ -73,7 +81,7 @@ data ManagementProfileFilterLinksUpdate = ManagementProfileFilterLinksUpdate
     , _mpfluLinkId        :: !Text
     , _mpfluOauthToken    :: !(Maybe Text)
     , _mpfluFields        :: !(Maybe Text)
-    , _mpfluAlt           :: !Text
+    , _mpfluAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksUpdate'' with the minimum fields required to make a request.
@@ -101,14 +109,14 @@ data ManagementProfileFilterLinksUpdate = ManagementProfileFilterLinksUpdate
 -- * 'mpfluFields'
 --
 -- * 'mpfluAlt'
-managementProfileFilterLinksUpdate
+managementProfileFilterLinksUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
-    -> ManagementProfileFilterLinksUpdate
-managementProfileFilterLinksUpdate pMpfluWebPropertyId_ pMpfluProfileId_ pMpfluAccountId_ pMpfluLinkId_ =
-    ManagementProfileFilterLinksUpdate
+    -> ManagementProfileFilterLinksUpdate'
+managementProfileFilterLinksUpdate' pMpfluWebPropertyId_ pMpfluProfileId_ pMpfluAccountId_ pMpfluLinkId_ =
+    ManagementProfileFilterLinksUpdate'
     { _mpfluQuotaUser = Nothing
     , _mpfluPrettyPrint = False
     , _mpfluWebPropertyId = pMpfluWebPropertyId_
@@ -119,7 +127,7 @@ managementProfileFilterLinksUpdate pMpfluWebPropertyId_ pMpfluProfileId_ pMpfluA
     , _mpfluLinkId = pMpfluLinkId_
     , _mpfluOauthToken = Nothing
     , _mpfluFields = Nothing
-    , _mpfluAlt = "json"
+    , _mpfluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +191,7 @@ mpfluFields
   = lens _mpfluFields (\ s a -> s{_mpfluFields = a})
 
 -- | Data format for the response.
-mpfluAlt :: Lens' ManagementProfileFilterLinksUpdate' Text
+mpfluAlt :: Lens' ManagementProfileFilterLinksUpdate' Alt
 mpfluAlt = lens _mpfluAlt (\ s a -> s{_mpfluAlt = a})
 
 instance GoogleRequest
@@ -192,8 +200,8 @@ instance GoogleRequest
              ProfileFilterLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementProfileFilterLinksUpdate{..}
-          = go _mpfluQuotaUser _mpfluPrettyPrint
+          ManagementProfileFilterLinksUpdate'{..}
+          = go _mpfluQuotaUser (Just _mpfluPrettyPrint)
               _mpfluWebPropertyId
               _mpfluUserIp
               _mpfluProfileId
@@ -202,10 +210,10 @@ instance GoogleRequest
               _mpfluLinkId
               _mpfluOauthToken
               _mpfluFields
-              _mpfluAlt
+              (Just _mpfluAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementProfileFilterLinksUpdateAPI)
+                         Proxy ManagementProfileFilterLinksUpdateResource)
                       r
                       u

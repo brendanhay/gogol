@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Changes backup pool configurations.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetPoolsSetBackup@.
-module Compute.TargetPools.SetBackup
+module Network.Google.Resource.Compute.TargetPools.SetBackup
     (
     -- * REST Resource
-      TargetPoolsSetBackupAPI
+      TargetPoolsSetBackupResource
 
     -- * Creating a Request
-    , targetPoolsSetBackup
-    , TargetPoolsSetBackup
+    , targetPoolsSetBackup'
+    , TargetPoolsSetBackup'
 
     -- * Request Lenses
     , tpsbQuotaUser
@@ -46,21 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetPoolsSetBackup@ which the
--- 'TargetPoolsSetBackup' request conforms to.
-type TargetPoolsSetBackupAPI =
+-- 'TargetPoolsSetBackup'' request conforms to.
+type TargetPoolsSetBackupResource =
      Capture "project" Text :>
        "regions" :>
          Capture "region" Text :>
            "targetPools" :>
              Capture "targetPool" Text :>
                "setBackup" :>
-                 QueryParam "failoverRatio" Float :>
-                   Post '[JSON] Operation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "failoverRatio" Float :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Changes backup pool configurations.
 --
--- /See:/ 'targetPoolsSetBackup' smart constructor.
-data TargetPoolsSetBackup = TargetPoolsSetBackup
+-- /See:/ 'targetPoolsSetBackup'' smart constructor.
+data TargetPoolsSetBackup' = TargetPoolsSetBackup'
     { _tpsbQuotaUser     :: !(Maybe Text)
     , _tpsbPrettyPrint   :: !Bool
     , _tpsbProject       :: !Text
@@ -71,7 +78,7 @@ data TargetPoolsSetBackup = TargetPoolsSetBackup
     , _tpsbRegion        :: !Text
     , _tpsbOauthToken    :: !(Maybe Text)
     , _tpsbFields        :: !(Maybe Text)
-    , _tpsbAlt           :: !Text
+    , _tpsbAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsSetBackup'' with the minimum fields required to make a request.
@@ -99,13 +106,13 @@ data TargetPoolsSetBackup = TargetPoolsSetBackup
 -- * 'tpsbFields'
 --
 -- * 'tpsbAlt'
-targetPoolsSetBackup
+targetPoolsSetBackup'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
-    -> TargetPoolsSetBackup
-targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbRegion_ =
-    TargetPoolsSetBackup
+    -> TargetPoolsSetBackup'
+targetPoolsSetBackup' pTpsbProject_ pTpsbTargetPool_ pTpsbRegion_ =
+    TargetPoolsSetBackup'
     { _tpsbQuotaUser = Nothing
     , _tpsbPrettyPrint = True
     , _tpsbProject = pTpsbProject_
@@ -116,7 +123,7 @@ targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbRegion_ =
     , _tpsbRegion = pTpsbRegion_
     , _tpsbOauthToken = Nothing
     , _tpsbFields = Nothing
-    , _tpsbAlt = "json"
+    , _tpsbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -179,14 +186,15 @@ tpsbFields
   = lens _tpsbFields (\ s a -> s{_tpsbFields = a})
 
 -- | Data format for the response.
-tpsbAlt :: Lens' TargetPoolsSetBackup' Text
+tpsbAlt :: Lens' TargetPoolsSetBackup' Alt
 tpsbAlt = lens _tpsbAlt (\ s a -> s{_tpsbAlt = a})
 
 instance GoogleRequest TargetPoolsSetBackup' where
         type Rs TargetPoolsSetBackup' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetPoolsSetBackup{..}
-          = go _tpsbQuotaUser _tpsbPrettyPrint _tpsbProject
+        requestWithRoute r u TargetPoolsSetBackup'{..}
+          = go _tpsbQuotaUser (Just _tpsbPrettyPrint)
+              _tpsbProject
               _tpsbTargetPool
               _tpsbUserIp
               _tpsbKey
@@ -194,9 +202,9 @@ instance GoogleRequest TargetPoolsSetBackup' where
               _tpsbRegion
               _tpsbOauthToken
               _tpsbFields
-              _tpsbAlt
+              (Just _tpsbAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetPoolsSetBackupAPI)
+                      (Proxy :: Proxy TargetPoolsSetBackupResource)
                       r
                       u

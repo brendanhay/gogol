@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ <https://developers.google.com/url-shortener/v1/getting_started URL Shortener API Reference> for @URLshortenerURLGet@.
-module URLShortener.URL.Get
+module Network.Google.Resource.URLShortener.URL.Get
     (
     -- * REST Resource
-      UrlGetAPI
+      UrlGetResource
 
     -- * Creating a Request
-    , uRLGet
-    , URLGet
+    , uRLGet'
+    , URLGet'
 
     -- * Request Lenses
     , ugQuotaUser
@@ -44,25 +45,33 @@ import           Network.Google.Prelude
 import           Network.Google.URLShortener.Types
 
 -- | A resource alias for @URLshortenerURLGet@ which the
--- 'URLGet' request conforms to.
-type UrlGetAPI =
+-- 'URLGet'' request conforms to.
+type UrlGetResource =
      "url" :>
-       QueryParam "projection" Text :>
-         QueryParam "shortUrl" Text :> Get '[JSON] URL
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "projection" URLshortenerURLGetProjection
+                 :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "shortUrl" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] URL
 
 -- | Expands a short URL or gets creation time and analytics.
 --
--- /See:/ 'uRLGet' smart constructor.
-data URLGet = URLGet
+-- /See:/ 'uRLGet'' smart constructor.
+data URLGet' = URLGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugUserIp      :: !(Maybe Text)
     , _ugKey         :: !(Maybe Text)
-    , _ugProjection  :: !(Maybe Text)
+    , _ugProjection  :: !(Maybe URLshortenerURLGetProjection)
     , _ugOauthToken  :: !(Maybe Text)
     , _ugShortUrl    :: !Text
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Text
+    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLGet'' with the minimum fields required to make a request.
@@ -86,11 +95,11 @@ data URLGet = URLGet
 -- * 'ugFields'
 --
 -- * 'ugAlt'
-uRLGet
+uRLGet'
     :: Text -- ^ 'shortUrl'
-    -> URLGet
-uRLGet pUgShortUrl_ =
-    URLGet
+    -> URLGet'
+uRLGet' pUgShortUrl_ =
+    URLGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
     , _ugUserIp = Nothing
@@ -99,7 +108,7 @@ uRLGet pUgShortUrl_ =
     , _ugOauthToken = Nothing
     , _ugShortUrl = pUgShortUrl_
     , _ugFields = Nothing
-    , _ugAlt = "json"
+    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,7 +136,7 @@ ugKey :: Lens' URLGet' (Maybe Text)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | Additional information to return.
-ugProjection :: Lens' URLGet' (Maybe Text)
+ugProjection :: Lens' URLGet' (Maybe URLshortenerURLGetProjection)
 ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
@@ -146,18 +155,19 @@ ugFields :: Lens' URLGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
 -- | Data format for the response.
-ugAlt :: Lens' URLGet' Text
+ugAlt :: Lens' URLGet' Alt
 ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
 
 instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
         request = requestWithRoute defReq uRLShortenerURL
-        requestWithRoute r u URLGet{..}
-          = go _ugQuotaUser _ugPrettyPrint _ugUserIp _ugKey
+        requestWithRoute r u URLGet'{..}
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIp
+              _ugKey
               _ugProjection
               _ugOauthToken
               (Just _ugShortUrl)
               _ugFields
-              _ugAlt
+              (Just _ugAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UrlGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UrlGetResource) r u

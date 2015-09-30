@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new creative.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativesInsert@.
-module DFAReporting.Creatives.Insert
+module Network.Google.Resource.DFAReporting.Creatives.Insert
     (
     -- * REST Resource
-      CreativesInsertAPI
+      CreativesInsertResource
 
     -- * Creating a Request
-    , creativesInsert
-    , CreativesInsert
+    , creativesInsert'
+    , CreativesInsert'
 
     -- * Request Lenses
     , creQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativesInsert@ which the
--- 'CreativesInsert' request conforms to.
-type CreativesInsertAPI =
+-- 'CreativesInsert'' request conforms to.
+type CreativesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "creatives" :> Post '[JSON] Creative
+         "creatives" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Creative
 
 -- | Inserts a new creative.
 --
--- /See:/ 'creativesInsert' smart constructor.
-data CreativesInsert = CreativesInsert
+-- /See:/ 'creativesInsert'' smart constructor.
+data CreativesInsert' = CreativesInsert'
     { _creQuotaUser   :: !(Maybe Text)
     , _crePrettyPrint :: !Bool
     , _creUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data CreativesInsert = CreativesInsert
     , _creKey         :: !(Maybe Text)
     , _creOauthToken  :: !(Maybe Text)
     , _creFields      :: !(Maybe Text)
-    , _creAlt         :: !Text
+    , _creAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data CreativesInsert = CreativesInsert
 -- * 'creFields'
 --
 -- * 'creAlt'
-creativesInsert
+creativesInsert'
     :: Int64 -- ^ 'profileId'
-    -> CreativesInsert
-creativesInsert pCreProfileId_ =
-    CreativesInsert
+    -> CreativesInsert'
+creativesInsert' pCreProfileId_ =
+    CreativesInsert'
     { _creQuotaUser = Nothing
     , _crePrettyPrint = True
     , _creUserIp = Nothing
@@ -94,7 +102,7 @@ creativesInsert pCreProfileId_ =
     , _creKey = Nothing
     , _creOauthToken = Nothing
     , _creFields = Nothing
-    , _creAlt = "json"
+    , _creAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ creFields
   = lens _creFields (\ s a -> s{_creFields = a})
 
 -- | Data format for the response.
-creAlt :: Lens' CreativesInsert' Text
+creAlt :: Lens' CreativesInsert' Alt
 creAlt = lens _creAlt (\ s a -> s{_creAlt = a})
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativesInsert{..}
-          = go _creQuotaUser _crePrettyPrint _creUserIp
+        requestWithRoute r u CreativesInsert'{..}
+          = go _creQuotaUser (Just _crePrettyPrint) _creUserIp
               _creProfileId
               _creKey
               _creOauthToken
               _creFields
-              _creAlt
+              (Just _creAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CreativesInsertAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CreativesInsertResource)
                       r
                       u

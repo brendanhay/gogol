@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- GlobalAllianceApi.searchCallSets.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsCallsetsSearch@.
-module Genomics.Callsets.Search
+module Network.Google.Resource.Genomics.Callsets.Search
     (
     -- * REST Resource
-      CallsetsSearchAPI
+      CallsetsSearchResource
 
     -- * Creating a Request
-    , callsetsSearch
-    , CallsetsSearch
+    , callsetsSearch'
+    , CallsetsSearch'
 
     -- * Request Lenses
     , csQuotaUser
@@ -43,23 +44,31 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsCallsetsSearch@ which the
--- 'CallsetsSearch' request conforms to.
-type CallsetsSearchAPI =
+-- 'CallsetsSearch'' request conforms to.
+type CallsetsSearchResource =
      "callsets" :>
-       "search" :> Post '[JSON] SearchCallSetsResponse
+       "search" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Post '[JSON] SearchCallSetsResponse
 
 -- | Gets a list of call sets matching the criteria. Implements
 -- GlobalAllianceApi.searchCallSets.
 --
--- /See:/ 'callsetsSearch' smart constructor.
-data CallsetsSearch = CallsetsSearch
+-- /See:/ 'callsetsSearch'' smart constructor.
+data CallsetsSearch' = CallsetsSearch'
     { _csQuotaUser   :: !(Maybe Text)
     , _csPrettyPrint :: !Bool
     , _csUserIp      :: !(Maybe Text)
     , _csKey         :: !(Maybe Text)
     , _csOauthToken  :: !(Maybe Text)
     , _csFields      :: !(Maybe Text)
-    , _csAlt         :: !Text
+    , _csAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsSearch'' with the minimum fields required to make a request.
@@ -79,17 +88,17 @@ data CallsetsSearch = CallsetsSearch
 -- * 'csFields'
 --
 -- * 'csAlt'
-callsetsSearch
-    :: CallsetsSearch
-callsetsSearch =
-    CallsetsSearch
+callsetsSearch'
+    :: CallsetsSearch'
+callsetsSearch' =
+    CallsetsSearch'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
     , _csUserIp = Nothing
     , _csKey = Nothing
     , _csOauthToken = Nothing
     , _csFields = Nothing
-    , _csAlt = "json"
+    , _csAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,18 +135,20 @@ csFields :: Lens' CallsetsSearch' (Maybe Text)
 csFields = lens _csFields (\ s a -> s{_csFields = a})
 
 -- | Data format for the response.
-csAlt :: Lens' CallsetsSearch' Text
+csAlt :: Lens' CallsetsSearch' Alt
 csAlt = lens _csAlt (\ s a -> s{_csAlt = a})
 
 instance GoogleRequest CallsetsSearch' where
         type Rs CallsetsSearch' = SearchCallSetsResponse
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u CallsetsSearch{..}
-          = go _csQuotaUser _csPrettyPrint _csUserIp _csKey
+        requestWithRoute r u CallsetsSearch'{..}
+          = go _csQuotaUser (Just _csPrettyPrint) _csUserIp
+              _csKey
               _csOauthToken
               _csFields
-              _csAlt
+              (Just _csAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CallsetsSearchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CallsetsSearchResource)
                       r
                       u

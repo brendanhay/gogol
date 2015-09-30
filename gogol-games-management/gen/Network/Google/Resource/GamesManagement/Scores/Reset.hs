@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- tester accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementScoresReset@.
-module GamesManagement.Scores.Reset
+module Network.Google.Resource.GamesManagement.Scores.Reset
     (
     -- * REST Resource
-      ScoresResetAPI
+      ScoresResetResource
 
     -- * Creating a Request
-    , scoresReset
-    , ScoresReset
+    , scoresReset'
+    , ScoresReset'
 
     -- * Request Lenses
     , srQuotaUser
@@ -45,19 +46,27 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementScoresReset@ which the
--- 'ScoresReset' request conforms to.
-type ScoresResetAPI =
+-- 'ScoresReset'' request conforms to.
+type ScoresResetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
          "scores" :>
-           "reset" :> Post '[JSON] PlayerScoreResetResponse
+           "reset" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PlayerScoreResetResponse
 
 -- | Resets scores for the leaderboard with the given ID for the currently
 -- authenticated player. This method is only accessible to whitelisted
 -- tester accounts for your application.
 --
--- /See:/ 'scoresReset' smart constructor.
-data ScoresReset = ScoresReset
+-- /See:/ 'scoresReset'' smart constructor.
+data ScoresReset' = ScoresReset'
     { _srQuotaUser     :: !(Maybe Text)
     , _srPrettyPrint   :: !Bool
     , _srUserIp        :: !(Maybe Text)
@@ -65,7 +74,7 @@ data ScoresReset = ScoresReset
     , _srKey           :: !(Maybe Text)
     , _srOauthToken    :: !(Maybe Text)
     , _srFields        :: !(Maybe Text)
-    , _srAlt           :: !Text
+    , _srAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresReset'' with the minimum fields required to make a request.
@@ -87,11 +96,11 @@ data ScoresReset = ScoresReset
 -- * 'srFields'
 --
 -- * 'srAlt'
-scoresReset
+scoresReset'
     :: Text -- ^ 'leaderboardId'
-    -> ScoresReset
-scoresReset pSrLeaderboardId_ =
-    ScoresReset
+    -> ScoresReset'
+scoresReset' pSrLeaderboardId_ =
+    ScoresReset'
     { _srQuotaUser = Nothing
     , _srPrettyPrint = True
     , _srUserIp = Nothing
@@ -99,7 +108,7 @@ scoresReset pSrLeaderboardId_ =
     , _srKey = Nothing
     , _srOauthToken = Nothing
     , _srFields = Nothing
-    , _srAlt = "json"
+    , _srAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,18 +151,21 @@ srFields :: Lens' ScoresReset' (Maybe Text)
 srFields = lens _srFields (\ s a -> s{_srFields = a})
 
 -- | Data format for the response.
-srAlt :: Lens' ScoresReset' Text
+srAlt :: Lens' ScoresReset' Alt
 srAlt = lens _srAlt (\ s a -> s{_srAlt = a})
 
 instance GoogleRequest ScoresReset' where
         type Rs ScoresReset' = PlayerScoreResetResponse
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u ScoresReset{..}
-          = go _srQuotaUser _srPrettyPrint _srUserIp
+        requestWithRoute r u ScoresReset'{..}
+          = go _srQuotaUser (Just _srPrettyPrint) _srUserIp
               _srLeaderboardId
               _srKey
               _srOauthToken
               _srFields
-              _srAlt
+              (Just _srAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ScoresResetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ScoresResetResource)
+                      r
+                      u

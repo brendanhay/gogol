@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a webProperty-AdWords link.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksInsert@.
-module Analytics.Management.WebPropertyAdWordsLinks.Insert
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksInsertAPI
+      ManagementWebPropertyAdWordsLinksInsertResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksInsert
-    , ManagementWebPropertyAdWordsLinksInsert
+    , managementWebPropertyAdWordsLinksInsert'
+    , ManagementWebPropertyAdWordsLinksInsert'
 
     -- * Request Lenses
     , mwpawliQuotaUser
@@ -44,20 +45,28 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksInsert@ which the
--- 'ManagementWebPropertyAdWordsLinksInsert' request conforms to.
-type ManagementWebPropertyAdWordsLinksInsertAPI =
+-- 'ManagementWebPropertyAdWordsLinksInsert'' request conforms to.
+type ManagementWebPropertyAdWordsLinksInsertResource
+     =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
-                 Post '[JSON] EntityAdWordsLink
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Post '[JSON] EntityAdWordsLink
 
 -- | Creates a webProperty-AdWords link.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert
+-- /See:/ 'managementWebPropertyAdWordsLinksInsert'' smart constructor.
+data ManagementWebPropertyAdWordsLinksInsert' = ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliQuotaUser     :: !(Maybe Text)
     , _mwpawliPrettyPrint   :: !Bool
     , _mwpawliWebPropertyId :: !Text
@@ -66,7 +75,7 @@ data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinks
     , _mwpawliKey           :: !(Maybe Text)
     , _mwpawliOauthToken    :: !(Maybe Text)
     , _mwpawliFields        :: !(Maybe Text)
-    , _mwpawliAlt           :: !Text
+    , _mwpawliAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksInsert'' with the minimum fields required to make a request.
@@ -90,12 +99,12 @@ data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinks
 -- * 'mwpawliFields'
 --
 -- * 'mwpawliAlt'
-managementWebPropertyAdWordsLinksInsert
+managementWebPropertyAdWordsLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebPropertyAdWordsLinksInsert
-managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert
+    -> ManagementWebPropertyAdWordsLinksInsert'
+managementWebPropertyAdWordsLinksInsert' pMwpawliWebPropertyId_ pMwpawliAccountId_ =
+    ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliQuotaUser = Nothing
     , _mwpawliPrettyPrint = False
     , _mwpawliWebPropertyId = pMwpawliWebPropertyId_
@@ -104,7 +113,7 @@ managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliAccountId
     , _mwpawliKey = Nothing
     , _mwpawliOauthToken = Nothing
     , _mwpawliFields = Nothing
-    , _mwpawliAlt = "json"
+    , _mwpawliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,7 +169,7 @@ mwpawliFields
       (\ s a -> s{_mwpawliFields = a})
 
 -- | Data format for the response.
-mwpawliAlt :: Lens' ManagementWebPropertyAdWordsLinksInsert' Text
+mwpawliAlt :: Lens' ManagementWebPropertyAdWordsLinksInsert' Alt
 mwpawliAlt
   = lens _mwpawliAlt (\ s a -> s{_mwpawliAlt = a})
 
@@ -170,18 +179,19 @@ instance GoogleRequest
              EntityAdWordsLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksInsert{..}
-          = go _mwpawliQuotaUser _mwpawliPrettyPrint
+          ManagementWebPropertyAdWordsLinksInsert'{..}
+          = go _mwpawliQuotaUser (Just _mwpawliPrettyPrint)
               _mwpawliWebPropertyId
               _mwpawliUserIp
               _mwpawliAccountId
               _mwpawliKey
               _mwpawliOauthToken
               _mwpawliFields
-              _mwpawliAlt
+              (Just _mwpawliAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksInsertAPI)
+                         Proxy
+                           ManagementWebPropertyAdWordsLinksInsertResource)
                       r
                       u

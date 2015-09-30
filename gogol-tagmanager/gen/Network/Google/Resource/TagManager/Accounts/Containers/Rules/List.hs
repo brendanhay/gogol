@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all GTM Rules of a Container.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesList@.
-module TagManager.Accounts.Containers.Rules.List
+module Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
     (
     -- * REST Resource
-      AccountsContainersRulesListAPI
+      AccountsContainersRulesListResource
 
     -- * Creating a Request
-    , accountsContainersRulesList
-    , AccountsContainersRulesList
+    , accountsContainersRulesList'
+    , AccountsContainersRulesList'
 
     -- * Request Lenses
     , acrlQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersRulesList@ which the
--- 'AccountsContainersRulesList' request conforms to.
-type AccountsContainersRulesListAPI =
+-- 'AccountsContainersRulesList'' request conforms to.
+type AccountsContainersRulesListResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "rules" :> Get '[JSON] ListRulesResponse
+             "rules" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] ListRulesResponse
 
 -- | Lists all GTM Rules of a Container.
 --
--- /See:/ 'accountsContainersRulesList' smart constructor.
-data AccountsContainersRulesList = AccountsContainersRulesList
+-- /See:/ 'accountsContainersRulesList'' smart constructor.
+data AccountsContainersRulesList' = AccountsContainersRulesList'
     { _acrlQuotaUser   :: !(Maybe Text)
     , _acrlPrettyPrint :: !Bool
     , _acrlContainerId :: !Text
@@ -64,7 +72,7 @@ data AccountsContainersRulesList = AccountsContainersRulesList
     , _acrlKey         :: !(Maybe Text)
     , _acrlOauthToken  :: !(Maybe Text)
     , _acrlFields      :: !(Maybe Text)
-    , _acrlAlt         :: !Text
+    , _acrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesList'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data AccountsContainersRulesList = AccountsContainersRulesList
 -- * 'acrlFields'
 --
 -- * 'acrlAlt'
-accountsContainersRulesList
+accountsContainersRulesList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersRulesList
-accountsContainersRulesList pAcrlContainerId_ pAcrlAccountId_ =
-    AccountsContainersRulesList
+    -> AccountsContainersRulesList'
+accountsContainersRulesList' pAcrlContainerId_ pAcrlAccountId_ =
+    AccountsContainersRulesList'
     { _acrlQuotaUser = Nothing
     , _acrlPrettyPrint = True
     , _acrlContainerId = pAcrlContainerId_
@@ -102,7 +110,7 @@ accountsContainersRulesList pAcrlContainerId_ pAcrlAccountId_ =
     , _acrlKey = Nothing
     , _acrlOauthToken = Nothing
     , _acrlFields = Nothing
-    , _acrlAlt = "json"
+    , _acrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ acrlFields
   = lens _acrlFields (\ s a -> s{_acrlFields = a})
 
 -- | Data format for the response.
-acrlAlt :: Lens' AccountsContainersRulesList' Text
+acrlAlt :: Lens' AccountsContainersRulesList' Alt
 acrlAlt = lens _acrlAlt (\ s a -> s{_acrlAlt = a})
 
 instance GoogleRequest AccountsContainersRulesList'
@@ -163,16 +171,17 @@ instance GoogleRequest AccountsContainersRulesList'
         type Rs AccountsContainersRulesList' =
              ListRulesResponse
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersRulesList{..}
-          = go _acrlQuotaUser _acrlPrettyPrint _acrlContainerId
+        requestWithRoute r u AccountsContainersRulesList'{..}
+          = go _acrlQuotaUser (Just _acrlPrettyPrint)
+              _acrlContainerId
               _acrlUserIp
               _acrlAccountId
               _acrlKey
               _acrlOauthToken
               _acrlFields
-              _acrlAlt
+              (Just _acrlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersRulesListAPI)
+                      (Proxy :: Proxy AccountsContainersRulesListResource)
                       r
                       u

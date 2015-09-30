@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,206 +20,221 @@
 -- | Retrieves a list of sites, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesList@.
-module DFAReporting.Sites.List
+module Network.Google.Resource.DFAReporting.Sites.List
     (
     -- * REST Resource
-      SitesListAPI
+      SitesListResource
 
     -- * Creating a Request
-    , sitesList
-    , SitesList
+    , sitesList'
+    , SitesList'
 
     -- * Request Lenses
-    , slQuotaUser
-    , slPrettyPrint
-    , slUnmappedSite
-    , slUserIp
-    , slCampaignIds
-    , slSearchString
-    , slAcceptsInterstitialPlacements
-    , slAcceptsPublisherPaidPlacements
-    , slIds
-    , slProfileId
-    , slDirectorySiteIds
-    , slSortOrder
-    , slKey
-    , slPageToken
-    , slSortField
-    , slSubaccountId
-    , slAcceptsInStreamVideoPlacements
-    , slOauthToken
-    , slApproved
-    , slAdWordsSite
-    , slMaxResults
-    , slFields
-    , slAlt
+    , sllQuotaUser
+    , sllPrettyPrint
+    , sllUnmappedSite
+    , sllUserIp
+    , sllCampaignIds
+    , sllSearchString
+    , sllAcceptsInterstitialPlacements
+    , sllAcceptsPublisherPaidPlacements
+    , sllIds
+    , sllProfileId
+    , sllDirectorySiteIds
+    , sllSortOrder
+    , sllKey
+    , sllPageToken
+    , sllSortField
+    , sllSubaccountId
+    , sllAcceptsInStreamVideoPlacements
+    , sllOauthToken
+    , sllApproved
+    , sllAdWordsSite
+    , sllMaxResults
+    , sllFields
+    , sllAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSitesList@ which the
--- 'SitesList' request conforms to.
-type SitesListAPI =
+-- 'SitesList'' request conforms to.
+type SitesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "sites" :>
-           QueryParam "unmappedSite" Bool :>
-             QueryParams "campaignIds" Int64 :>
-               QueryParam "searchString" Text :>
-                 QueryParam "acceptsInterstitialPlacements" Bool :>
-                   QueryParam "acceptsPublisherPaidPlacements" Bool :>
-                     QueryParams "ids" Int64 :>
-                       QueryParams "directorySiteIds" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "sortField" Text :>
-                               QueryParam "subaccountId" Int64 :>
-                                 QueryParam "acceptsInStreamVideoPlacements"
-                                   Bool
-                                   :>
-                                   QueryParam "approved" Bool :>
-                                     QueryParam "adWordsSite" Bool :>
-                                       QueryParam "maxResults" Int32 :>
-                                         Get '[JSON] SitesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "unmappedSite" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParams "campaignIds" Int64 :>
+                     QueryParam "searchString" Text :>
+                       QueryParam "acceptsInterstitialPlacements" Bool :>
+                         QueryParam "acceptsPublisherPaidPlacements" Bool :>
+                           QueryParams "ids" Int64 :>
+                             QueryParams "directorySiteIds" Int64 :>
+                               QueryParam "sortOrder"
+                                 DfareportingSitesListSortOrder
+                                 :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "pageToken" Text :>
+                                     QueryParam "sortField"
+                                       DfareportingSitesListSortField
+                                       :>
+                                       QueryParam "subaccountId" Int64 :>
+                                         QueryParam
+                                           "acceptsInStreamVideoPlacements"
+                                           Bool
+                                           :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "approved" Bool :>
+                                               QueryParam "adWordsSite" Bool :>
+                                                 QueryParam "maxResults" Int32
+                                                   :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "alt" Alt :>
+                                                       Get '[JSON]
+                                                         SitesListResponse
 
 -- | Retrieves a list of sites, possibly filtered.
 --
--- /See:/ 'sitesList' smart constructor.
-data SitesList = SitesList
-    { _slQuotaUser                      :: !(Maybe Text)
-    , _slPrettyPrint                    :: !Bool
-    , _slUnmappedSite                   :: !(Maybe Bool)
-    , _slUserIp                         :: !(Maybe Text)
-    , _slCampaignIds                    :: !(Maybe Int64)
-    , _slSearchString                   :: !(Maybe Text)
-    , _slAcceptsInterstitialPlacements  :: !(Maybe Bool)
-    , _slAcceptsPublisherPaidPlacements :: !(Maybe Bool)
-    , _slIds                            :: !(Maybe Int64)
-    , _slProfileId                      :: !Int64
-    , _slDirectorySiteIds               :: !(Maybe Int64)
-    , _slSortOrder                      :: !(Maybe Text)
-    , _slKey                            :: !(Maybe Text)
-    , _slPageToken                      :: !(Maybe Text)
-    , _slSortField                      :: !(Maybe Text)
-    , _slSubaccountId                   :: !(Maybe Int64)
-    , _slAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _slOauthToken                     :: !(Maybe Text)
-    , _slApproved                       :: !(Maybe Bool)
-    , _slAdWordsSite                    :: !(Maybe Bool)
-    , _slMaxResults                     :: !(Maybe Int32)
-    , _slFields                         :: !(Maybe Text)
-    , _slAlt                            :: !Text
+-- /See:/ 'sitesList'' smart constructor.
+data SitesList' = SitesList'
+    { _sllQuotaUser                      :: !(Maybe Text)
+    , _sllPrettyPrint                    :: !Bool
+    , _sllUnmappedSite                   :: !(Maybe Bool)
+    , _sllUserIp                         :: !(Maybe Text)
+    , _sllCampaignIds                    :: !(Maybe Int64)
+    , _sllSearchString                   :: !(Maybe Text)
+    , _sllAcceptsInterstitialPlacements  :: !(Maybe Bool)
+    , _sllAcceptsPublisherPaidPlacements :: !(Maybe Bool)
+    , _sllIds                            :: !(Maybe Int64)
+    , _sllProfileId                      :: !Int64
+    , _sllDirectorySiteIds               :: !(Maybe Int64)
+    , _sllSortOrder                      :: !(Maybe DfareportingSitesListSortOrder)
+    , _sllKey                            :: !(Maybe Text)
+    , _sllPageToken                      :: !(Maybe Text)
+    , _sllSortField                      :: !(Maybe DfareportingSitesListSortField)
+    , _sllSubaccountId                   :: !(Maybe Int64)
+    , _sllAcceptsInStreamVideoPlacements :: !(Maybe Bool)
+    , _sllOauthToken                     :: !(Maybe Text)
+    , _sllApproved                       :: !(Maybe Bool)
+    , _sllAdWordsSite                    :: !(Maybe Bool)
+    , _sllMaxResults                     :: !(Maybe Int32)
+    , _sllFields                         :: !(Maybe Text)
+    , _sllAlt                            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slQuotaUser'
+-- * 'sllQuotaUser'
 --
--- * 'slPrettyPrint'
+-- * 'sllPrettyPrint'
 --
--- * 'slUnmappedSite'
+-- * 'sllUnmappedSite'
 --
--- * 'slUserIp'
+-- * 'sllUserIp'
 --
--- * 'slCampaignIds'
+-- * 'sllCampaignIds'
 --
--- * 'slSearchString'
+-- * 'sllSearchString'
 --
--- * 'slAcceptsInterstitialPlacements'
+-- * 'sllAcceptsInterstitialPlacements'
 --
--- * 'slAcceptsPublisherPaidPlacements'
+-- * 'sllAcceptsPublisherPaidPlacements'
 --
--- * 'slIds'
+-- * 'sllIds'
 --
--- * 'slProfileId'
+-- * 'sllProfileId'
 --
--- * 'slDirectorySiteIds'
+-- * 'sllDirectorySiteIds'
 --
--- * 'slSortOrder'
+-- * 'sllSortOrder'
 --
--- * 'slKey'
+-- * 'sllKey'
 --
--- * 'slPageToken'
+-- * 'sllPageToken'
 --
--- * 'slSortField'
+-- * 'sllSortField'
 --
--- * 'slSubaccountId'
+-- * 'sllSubaccountId'
 --
--- * 'slAcceptsInStreamVideoPlacements'
+-- * 'sllAcceptsInStreamVideoPlacements'
 --
--- * 'slOauthToken'
+-- * 'sllOauthToken'
 --
--- * 'slApproved'
+-- * 'sllApproved'
 --
--- * 'slAdWordsSite'
+-- * 'sllAdWordsSite'
 --
--- * 'slMaxResults'
+-- * 'sllMaxResults'
 --
--- * 'slFields'
+-- * 'sllFields'
 --
--- * 'slAlt'
-sitesList
+-- * 'sllAlt'
+sitesList'
     :: Int64 -- ^ 'profileId'
-    -> SitesList
-sitesList pSlProfileId_ =
-    SitesList
-    { _slQuotaUser = Nothing
-    , _slPrettyPrint = True
-    , _slUnmappedSite = Nothing
-    , _slUserIp = Nothing
-    , _slCampaignIds = Nothing
-    , _slSearchString = Nothing
-    , _slAcceptsInterstitialPlacements = Nothing
-    , _slAcceptsPublisherPaidPlacements = Nothing
-    , _slIds = Nothing
-    , _slProfileId = pSlProfileId_
-    , _slDirectorySiteIds = Nothing
-    , _slSortOrder = Nothing
-    , _slKey = Nothing
-    , _slPageToken = Nothing
-    , _slSortField = Nothing
-    , _slSubaccountId = Nothing
-    , _slAcceptsInStreamVideoPlacements = Nothing
-    , _slOauthToken = Nothing
-    , _slApproved = Nothing
-    , _slAdWordsSite = Nothing
-    , _slMaxResults = Nothing
-    , _slFields = Nothing
-    , _slAlt = "json"
+    -> SitesList'
+sitesList' pSllProfileId_ =
+    SitesList'
+    { _sllQuotaUser = Nothing
+    , _sllPrettyPrint = True
+    , _sllUnmappedSite = Nothing
+    , _sllUserIp = Nothing
+    , _sllCampaignIds = Nothing
+    , _sllSearchString = Nothing
+    , _sllAcceptsInterstitialPlacements = Nothing
+    , _sllAcceptsPublisherPaidPlacements = Nothing
+    , _sllIds = Nothing
+    , _sllProfileId = pSllProfileId_
+    , _sllDirectorySiteIds = Nothing
+    , _sllSortOrder = Nothing
+    , _sllKey = Nothing
+    , _sllPageToken = Nothing
+    , _sllSortField = Nothing
+    , _sllSubaccountId = Nothing
+    , _sllAcceptsInStreamVideoPlacements = Nothing
+    , _sllOauthToken = Nothing
+    , _sllApproved = Nothing
+    , _sllAdWordsSite = Nothing
+    , _sllMaxResults = Nothing
+    , _sllFields = Nothing
+    , _sllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-slQuotaUser :: Lens' SitesList' (Maybe Text)
-slQuotaUser
-  = lens _slQuotaUser (\ s a -> s{_slQuotaUser = a})
+sllQuotaUser :: Lens' SitesList' (Maybe Text)
+sllQuotaUser
+  = lens _sllQuotaUser (\ s a -> s{_sllQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-slPrettyPrint :: Lens' SitesList' Bool
-slPrettyPrint
-  = lens _slPrettyPrint
-      (\ s a -> s{_slPrettyPrint = a})
+sllPrettyPrint :: Lens' SitesList' Bool
+sllPrettyPrint
+  = lens _sllPrettyPrint
+      (\ s a -> s{_sllPrettyPrint = a})
 
 -- | Select only sites that have not been mapped to a directory site.
-slUnmappedSite :: Lens' SitesList' (Maybe Bool)
-slUnmappedSite
-  = lens _slUnmappedSite
-      (\ s a -> s{_slUnmappedSite = a})
+sllUnmappedSite :: Lens' SitesList' (Maybe Bool)
+sllUnmappedSite
+  = lens _sllUnmappedSite
+      (\ s a -> s{_sllUnmappedSite = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SitesList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+sllUserIp :: Lens' SitesList' (Maybe Text)
+sllUserIp
+  = lens _sllUserIp (\ s a -> s{_sllUserIp = a})
 
 -- | Select only sites with these campaign IDs.
-slCampaignIds :: Lens' SitesList' (Maybe Int64)
-slCampaignIds
-  = lens _slCampaignIds
-      (\ s a -> s{_slCampaignIds = a})
+sllCampaignIds :: Lens' SitesList' (Maybe Int64)
+sllCampaignIds
+  = lens _sllCampaignIds
+      (\ s a -> s{_sllCampaignIds = a})
 
 -- | Allows searching for objects by name, ID or keyName. Wildcards (*) are
 -- allowed. For example, \"site*2015\" will return objects with names like
@@ -226,126 +242,132 @@ slCampaignIds
 -- of the searches also add wildcards implicitly at the start and the end
 -- of the search string. For example, a search string of \"site\" will
 -- match objects with name \"my site\", \"site 2015\", or simply \"site\".
-slSearchString :: Lens' SitesList' (Maybe Text)
-slSearchString
-  = lens _slSearchString
-      (\ s a -> s{_slSearchString = a})
+sllSearchString :: Lens' SitesList' (Maybe Text)
+sllSearchString
+  = lens _sllSearchString
+      (\ s a -> s{_sllSearchString = a})
 
 -- | This search filter is no longer supported and will have no effect on the
 -- results returned.
-slAcceptsInterstitialPlacements :: Lens' SitesList' (Maybe Bool)
-slAcceptsInterstitialPlacements
-  = lens _slAcceptsInterstitialPlacements
-      (\ s a -> s{_slAcceptsInterstitialPlacements = a})
+sllAcceptsInterstitialPlacements :: Lens' SitesList' (Maybe Bool)
+sllAcceptsInterstitialPlacements
+  = lens _sllAcceptsInterstitialPlacements
+      (\ s a -> s{_sllAcceptsInterstitialPlacements = a})
 
 -- | Select only sites that accept publisher paid placements.
-slAcceptsPublisherPaidPlacements :: Lens' SitesList' (Maybe Bool)
-slAcceptsPublisherPaidPlacements
-  = lens _slAcceptsPublisherPaidPlacements
-      (\ s a -> s{_slAcceptsPublisherPaidPlacements = a})
+sllAcceptsPublisherPaidPlacements :: Lens' SitesList' (Maybe Bool)
+sllAcceptsPublisherPaidPlacements
+  = lens _sllAcceptsPublisherPaidPlacements
+      (\ s a -> s{_sllAcceptsPublisherPaidPlacements = a})
 
 -- | Select only sites with these IDs.
-slIds :: Lens' SitesList' (Maybe Int64)
-slIds = lens _slIds (\ s a -> s{_slIds = a})
+sllIds :: Lens' SitesList' (Maybe Int64)
+sllIds = lens _sllIds (\ s a -> s{_sllIds = a})
 
 -- | User profile ID associated with this request.
-slProfileId :: Lens' SitesList' Int64
-slProfileId
-  = lens _slProfileId (\ s a -> s{_slProfileId = a})
+sllProfileId :: Lens' SitesList' Int64
+sllProfileId
+  = lens _sllProfileId (\ s a -> s{_sllProfileId = a})
 
 -- | Select only sites with these directory site IDs.
-slDirectorySiteIds :: Lens' SitesList' (Maybe Int64)
-slDirectorySiteIds
-  = lens _slDirectorySiteIds
-      (\ s a -> s{_slDirectorySiteIds = a})
+sllDirectorySiteIds :: Lens' SitesList' (Maybe Int64)
+sllDirectorySiteIds
+  = lens _sllDirectorySiteIds
+      (\ s a -> s{_sllDirectorySiteIds = a})
 
 -- | Order of sorted results, default is ASCENDING.
-slSortOrder :: Lens' SitesList' (Maybe Text)
-slSortOrder
-  = lens _slSortOrder (\ s a -> s{_slSortOrder = a})
+sllSortOrder :: Lens' SitesList' (Maybe DfareportingSitesListSortOrder)
+sllSortOrder
+  = lens _sllSortOrder (\ s a -> s{_sllSortOrder = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SitesList' (Maybe Text)
-slKey = lens _slKey (\ s a -> s{_slKey = a})
+sllKey :: Lens' SitesList' (Maybe Text)
+sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
-slPageToken :: Lens' SitesList' (Maybe Text)
-slPageToken
-  = lens _slPageToken (\ s a -> s{_slPageToken = a})
+sllPageToken :: Lens' SitesList' (Maybe Text)
+sllPageToken
+  = lens _sllPageToken (\ s a -> s{_sllPageToken = a})
 
 -- | Field by which to sort the list.
-slSortField :: Lens' SitesList' (Maybe Text)
-slSortField
-  = lens _slSortField (\ s a -> s{_slSortField = a})
+sllSortField :: Lens' SitesList' (Maybe DfareportingSitesListSortField)
+sllSortField
+  = lens _sllSortField (\ s a -> s{_sllSortField = a})
 
 -- | Select only sites with this subaccount ID.
-slSubaccountId :: Lens' SitesList' (Maybe Int64)
-slSubaccountId
-  = lens _slSubaccountId
-      (\ s a -> s{_slSubaccountId = a})
+sllSubaccountId :: Lens' SitesList' (Maybe Int64)
+sllSubaccountId
+  = lens _sllSubaccountId
+      (\ s a -> s{_sllSubaccountId = a})
 
 -- | This search filter is no longer supported and will have no effect on the
 -- results returned.
-slAcceptsInStreamVideoPlacements :: Lens' SitesList' (Maybe Bool)
-slAcceptsInStreamVideoPlacements
-  = lens _slAcceptsInStreamVideoPlacements
-      (\ s a -> s{_slAcceptsInStreamVideoPlacements = a})
+sllAcceptsInStreamVideoPlacements :: Lens' SitesList' (Maybe Bool)
+sllAcceptsInStreamVideoPlacements
+  = lens _sllAcceptsInStreamVideoPlacements
+      (\ s a -> s{_sllAcceptsInStreamVideoPlacements = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SitesList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+sllOauthToken :: Lens' SitesList' (Maybe Text)
+sllOauthToken
+  = lens _sllOauthToken
+      (\ s a -> s{_sllOauthToken = a})
 
 -- | Select only approved sites.
-slApproved :: Lens' SitesList' (Maybe Bool)
-slApproved
-  = lens _slApproved (\ s a -> s{_slApproved = a})
+sllApproved :: Lens' SitesList' (Maybe Bool)
+sllApproved
+  = lens _sllApproved (\ s a -> s{_sllApproved = a})
 
 -- | Select only AdWords sites.
-slAdWordsSite :: Lens' SitesList' (Maybe Bool)
-slAdWordsSite
-  = lens _slAdWordsSite
-      (\ s a -> s{_slAdWordsSite = a})
+sllAdWordsSite :: Lens' SitesList' (Maybe Bool)
+sllAdWordsSite
+  = lens _sllAdWordsSite
+      (\ s a -> s{_sllAdWordsSite = a})
 
 -- | Maximum number of results to return.
-slMaxResults :: Lens' SitesList' (Maybe Int32)
-slMaxResults
-  = lens _slMaxResults (\ s a -> s{_slMaxResults = a})
+sllMaxResults :: Lens' SitesList' (Maybe Int32)
+sllMaxResults
+  = lens _sllMaxResults
+      (\ s a -> s{_sllMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-slFields :: Lens' SitesList' (Maybe Text)
-slFields = lens _slFields (\ s a -> s{_slFields = a})
+sllFields :: Lens' SitesList' (Maybe Text)
+sllFields
+  = lens _sllFields (\ s a -> s{_sllFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SitesList' Text
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+sllAlt :: Lens' SitesList' Alt
+sllAlt = lens _sllAlt (\ s a -> s{_sllAlt = a})
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesList{..}
-          = go _slQuotaUser _slPrettyPrint _slUnmappedSite
-              _slUserIp
-              _slCampaignIds
-              _slSearchString
-              _slAcceptsInterstitialPlacements
-              _slAcceptsPublisherPaidPlacements
-              _slIds
-              _slProfileId
-              _slDirectorySiteIds
-              _slSortOrder
-              _slKey
-              _slPageToken
-              _slSortField
-              _slSubaccountId
-              _slAcceptsInStreamVideoPlacements
-              _slOauthToken
-              _slApproved
-              _slAdWordsSite
-              _slMaxResults
-              _slFields
-              _slAlt
+        requestWithRoute r u SitesList'{..}
+          = go _sllQuotaUser (Just _sllPrettyPrint)
+              _sllUnmappedSite
+              _sllUserIp
+              _sllCampaignIds
+              _sllSearchString
+              _sllAcceptsInterstitialPlacements
+              _sllAcceptsPublisherPaidPlacements
+              _sllIds
+              _sllProfileId
+              _sllDirectorySiteIds
+              _sllSortOrder
+              _sllKey
+              _sllPageToken
+              _sllSortField
+              _sllSubaccountId
+              _sllAcceptsInStreamVideoPlacements
+              _sllOauthToken
+              _sllApproved
+              _sllAdWordsSite
+              _sllMaxResults
+              _sllFields
+              (Just _sllAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy SitesListResource)
+                      r
+                      u

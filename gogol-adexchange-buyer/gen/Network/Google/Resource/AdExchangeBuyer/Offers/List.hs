@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all offers the authenticated user has access to.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerOffersList@.
-module AdExchangeBuyer.Offers.List
+module Network.Google.Resource.AdExchangeBuyer.Offers.List
     (
     -- * REST Resource
-      OffersListAPI
+      OffersListResource
 
     -- * Creating a Request
-    , offersList
-    , OffersList
+    , offersList'
+    , OffersList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerOffersList@ which the
--- 'OffersList' request conforms to.
-type OffersListAPI =
-     "offers" :> Get '[JSON] ListOffersResponse
+-- 'OffersList'' request conforms to.
+type OffersListResource =
+     "offers" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Get '[JSON] ListOffersResponse
 
 -- | Lists all offers the authenticated user has access to.
 --
--- /See:/ 'offersList' smart constructor.
-data OffersList = OffersList
+-- /See:/ 'offersList'' smart constructor.
+data OffersList' = OffersList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olUserIp      :: !(Maybe Text)
     , _olKey         :: !(Maybe Text)
     , _olOauthToken  :: !(Maybe Text)
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Text
+    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data OffersList = OffersList
 -- * 'olFields'
 --
 -- * 'olAlt'
-offersList
-    :: OffersList
-offersList =
-    OffersList
+offersList'
+    :: OffersList'
+offersList' =
+    OffersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olUserIp = Nothing
     , _olKey = Nothing
     , _olOauthToken = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,16 +132,19 @@ olFields :: Lens' OffersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OffersList' Text
+olAlt :: Lens' OffersList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest OffersList' where
         type Rs OffersList' = ListOffersResponse
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u OffersList{..}
-          = go _olQuotaUser _olPrettyPrint _olUserIp _olKey
+        requestWithRoute r u OffersList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olUserIp
+              _olKey
               _olOauthToken
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OffersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy OffersListResource)
+                      r
+                      u

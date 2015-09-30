@@ -27,163 +27,163 @@ module Network.Google.TagManager
     -- * REST Resources
 
     -- ** TagmanagerAccountsContainersCreate
-    , module TagManager.Accounts.Containers.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Create
 
     -- ** TagmanagerAccountsContainersDelete
-    , module TagManager.Accounts.Containers.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Delete
 
     -- ** TagmanagerAccountsContainersFoldersCreate
-    , module TagManager.Accounts.Containers.Folders.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
 
     -- ** TagmanagerAccountsContainersFoldersDelete
-    , module TagManager.Accounts.Containers.Folders.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Delete
 
     -- ** TagmanagerAccountsContainersFoldersEntitiesList
-    , module TagManager.Accounts.Containers.Folders.Entities.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Entities.List
 
     -- ** TagmanagerAccountsContainersFoldersGet
-    , module TagManager.Accounts.Containers.Folders.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Get
 
     -- ** TagmanagerAccountsContainersFoldersList
-    , module TagManager.Accounts.Containers.Folders.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
 
     -- ** TagmanagerAccountsContainersFoldersUpdate
-    , module TagManager.Accounts.Containers.Folders.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
 
     -- ** TagmanagerAccountsContainersGet
-    , module TagManager.Accounts.Containers.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Get
 
     -- ** TagmanagerAccountsContainersList
-    , module TagManager.Accounts.Containers.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.List
 
     -- ** TagmanagerAccountsContainersMACrosCreate
-    , module TagManager.Accounts.Containers.MACros.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Create
 
     -- ** TagmanagerAccountsContainersMACrosDelete
-    , module TagManager.Accounts.Containers.MACros.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Delete
 
     -- ** TagmanagerAccountsContainersMACrosGet
-    , module TagManager.Accounts.Containers.MACros.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Get
 
     -- ** TagmanagerAccountsContainersMACrosList
-    , module TagManager.Accounts.Containers.MACros.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MACros.List
 
     -- ** TagmanagerAccountsContainersMACrosUpdate
-    , module TagManager.Accounts.Containers.MACros.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.MACros.Update
 
     -- ** TagmanagerAccountsContainersMove_foldersUpdate
-    , module TagManager.Accounts.Containers.Move_folders.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
 
     -- ** TagmanagerAccountsContainersRulesCreate
-    , module TagManager.Accounts.Containers.Rules.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
 
     -- ** TagmanagerAccountsContainersRulesDelete
-    , module TagManager.Accounts.Containers.Rules.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
 
     -- ** TagmanagerAccountsContainersRulesGet
-    , module TagManager.Accounts.Containers.Rules.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
 
     -- ** TagmanagerAccountsContainersRulesList
-    , module TagManager.Accounts.Containers.Rules.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.List
 
     -- ** TagmanagerAccountsContainersRulesUpdate
-    , module TagManager.Accounts.Containers.Rules.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
 
     -- ** TagmanagerAccountsContainersTagsCreate
-    , module TagManager.Accounts.Containers.Tags.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
 
     -- ** TagmanagerAccountsContainersTagsDelete
-    , module TagManager.Accounts.Containers.Tags.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
 
     -- ** TagmanagerAccountsContainersTagsGet
-    , module TagManager.Accounts.Containers.Tags.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
 
     -- ** TagmanagerAccountsContainersTagsList
-    , module TagManager.Accounts.Containers.Tags.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
 
     -- ** TagmanagerAccountsContainersTagsUpdate
-    , module TagManager.Accounts.Containers.Tags.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
 
     -- ** TagmanagerAccountsContainersTriggersCreate
-    , module TagManager.Accounts.Containers.Triggers.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
 
     -- ** TagmanagerAccountsContainersTriggersDelete
-    , module TagManager.Accounts.Containers.Triggers.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
 
     -- ** TagmanagerAccountsContainersTriggersGet
-    , module TagManager.Accounts.Containers.Triggers.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Get
 
     -- ** TagmanagerAccountsContainersTriggersList
-    , module TagManager.Accounts.Containers.Triggers.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
 
     -- ** TagmanagerAccountsContainersTriggersUpdate
-    , module TagManager.Accounts.Containers.Triggers.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
 
     -- ** TagmanagerAccountsContainersUpdate
-    , module TagManager.Accounts.Containers.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Update
 
     -- ** TagmanagerAccountsContainersVariablesCreate
-    , module TagManager.Accounts.Containers.Variables.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Create
 
     -- ** TagmanagerAccountsContainersVariablesDelete
-    , module TagManager.Accounts.Containers.Variables.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
 
     -- ** TagmanagerAccountsContainersVariablesGet
-    , module TagManager.Accounts.Containers.Variables.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
 
     -- ** TagmanagerAccountsContainersVariablesList
-    , module TagManager.Accounts.Containers.Variables.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Variables.List
 
     -- ** TagmanagerAccountsContainersVariablesUpdate
-    , module TagManager.Accounts.Containers.Variables.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
 
     -- ** TagmanagerAccountsContainersVersionsCreate
-    , module TagManager.Accounts.Containers.Versions.Create
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
 
     -- ** TagmanagerAccountsContainersVersionsDelete
-    , module TagManager.Accounts.Containers.Versions.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
 
     -- ** TagmanagerAccountsContainersVersionsGet
-    , module TagManager.Accounts.Containers.Versions.Get
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
 
     -- ** TagmanagerAccountsContainersVersionsList
-    , module TagManager.Accounts.Containers.Versions.List
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
 
     -- ** TagmanagerAccountsContainersVersionsPublish
-    , module TagManager.Accounts.Containers.Versions.Publish
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
 
     -- ** TagmanagerAccountsContainersVersionsRestore
-    , module TagManager.Accounts.Containers.Versions.Restore
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
 
     -- ** TagmanagerAccountsContainersVersionsUndelete
-    , module TagManager.Accounts.Containers.Versions.Undelete
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Undelete
 
     -- ** TagmanagerAccountsContainersVersionsUpdate
-    , module TagManager.Accounts.Containers.Versions.Update
+    , module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Update
 
     -- ** TagmanagerAccountsGet
-    , module TagManager.Accounts.Get
+    , module Network.Google.Resource.TagManager.Accounts.Get
 
     -- ** TagmanagerAccountsList
-    , module TagManager.Accounts.List
+    , module Network.Google.Resource.TagManager.Accounts.List
 
     -- ** TagmanagerAccountsPermissionsCreate
-    , module TagManager.Accounts.Permissions.Create
+    , module Network.Google.Resource.TagManager.Accounts.Permissions.Create
 
     -- ** TagmanagerAccountsPermissionsDelete
-    , module TagManager.Accounts.Permissions.Delete
+    , module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
 
     -- ** TagmanagerAccountsPermissionsGet
-    , module TagManager.Accounts.Permissions.Get
+    , module Network.Google.Resource.TagManager.Accounts.Permissions.Get
 
     -- ** TagmanagerAccountsPermissionsList
-    , module TagManager.Accounts.Permissions.List
+    , module Network.Google.Resource.TagManager.Accounts.Permissions.List
 
     -- ** TagmanagerAccountsPermissionsUpdate
-    , module TagManager.Accounts.Permissions.Update
+    , module Network.Google.Resource.TagManager.Accounts.Permissions.Update
 
     -- ** TagmanagerAccountsUpdate
-    , module TagManager.Accounts.Update
+    , module Network.Google.Resource.TagManager.Accounts.Update
 
     -- * Types
 
@@ -301,6 +301,15 @@ module Network.Google.TagManager
     , uaContainerAccess
     , uaPermissionId
 
+    -- ** ContainerAccessPermission
+    , ContainerAccessPermission (..)
+
+    -- ** TriggerType
+    , TriggerType (..)
+
+    -- ** ConditionType
+    , ConditionType (..)
+
     -- ** ListAccountsResponse
     , ListAccountsResponse
     , listAccountsResponse
@@ -323,6 +332,12 @@ module Network.Google.TagManager
     , vEnablingTriggerId
     , vParameter
 
+    -- ** TagTagFiringOption
+    , TagTagFiringOption (..)
+
+    -- ** AccountAccessPermission
+    , AccountAccessPermission (..)
+
     -- ** Rule
     , Rule
     , rule
@@ -343,13 +358,16 @@ module Network.Google.TagManager
     , fAccountId
     , fName
 
+    -- ** ParameterType
+    , ParameterType (..)
+
     -- ** Account
     , Account
     , account
-    , aShareData
-    , aFingerprint
-    , aAccountId
-    , aName
+    , aaShareData
+    , aaFingerprint
+    , aaAccountId
+    , aaName
 
     -- ** ListContainerVersionsResponse
     , ListContainerVersionsResponse
@@ -382,11 +400,17 @@ module Network.Google.TagManager
     , listContainersResponse
     , lcrContainers
 
+    -- ** ContainerEnabledBuiltInVariable
+    , ContainerEnabledBuiltInVariable (..)
+
     -- ** SetupTag
     , SetupTag
     , setupTag
     , stTagName
     , stStopOnSetupFailure
+
+    -- ** ContainerUsageContext
+    , ContainerUsageContext (..)
 
     -- ** ContainerVersion
     , ContainerVersion
@@ -466,6 +490,9 @@ module Network.Google.TagManager
     , pMap
     , pKey
     , pType
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -528,7 +555,60 @@ import           Network.Google.TagManager.Types
 TODO
 -}
 
-type TagManagerAPI = Accounts
+type TagManagerAPI =
+     AccountsContainersRulesListResource :<|>
+       AccountsContainersRulesGetResource
+       :<|> AccountsContainersRulesCreateResource
+       :<|> AccountsContainersRulesDeleteResource
+       :<|> AccountsContainersRulesUpdateResource
+       :<|> AccountsContainersVariablesListResource
+       :<|> AccountsContainersVariablesGetResource
+       :<|> AccountsContainersVariablesCreateResource
+       :<|> AccountsContainersVariablesDeleteResource
+       :<|> AccountsContainersVariablesUpdateResource
+       :<|> AccountsContainersFoldersEntitiesListResource
+       :<|> AccountsContainersFoldersListResource
+       :<|> AccountsContainersFoldersGetResource
+       :<|> AccountsContainersFoldersCreateResource
+       :<|> AccountsContainersFoldersDeleteResource
+       :<|> AccountsContainersFoldersUpdateResource
+       :<|> AccountsContainersTriggersListResource
+       :<|> AccountsContainersTriggersGetResource
+       :<|> AccountsContainersTriggersCreateResource
+       :<|> AccountsContainersTriggersDeleteResource
+       :<|> AccountsContainersTriggersUpdateResource
+       :<|> AccountsContainersVersionsListResource
+       :<|> AccountsContainersVersionsUndeleteResource
+       :<|> AccountsContainersVersionsRestoreResource
+       :<|> AccountsContainersVersionsGetResource
+       :<|> AccountsContainersVersionsCreateResource
+       :<|> AccountsContainersVersionsDeleteResource
+       :<|> AccountsContainersVersionsUpdateResource
+       :<|> AccountsContainersVersionsPublishResource
+       :<|> AccountsContainersMove_foldersUpdateResource
+       :<|> AccountsContainersMacrosListResource
+       :<|> AccountsContainersMacrosGetResource
+       :<|> AccountsContainersMacrosCreateResource
+       :<|> AccountsContainersMacrosDeleteResource
+       :<|> AccountsContainersMacrosUpdateResource
+       :<|> AccountsContainersTagsListResource
+       :<|> AccountsContainersTagsGetResource
+       :<|> AccountsContainersTagsCreateResource
+       :<|> AccountsContainersTagsDeleteResource
+       :<|> AccountsContainersTagsUpdateResource
+       :<|> AccountsContainersListResource
+       :<|> AccountsContainersGetResource
+       :<|> AccountsContainersCreateResource
+       :<|> AccountsContainersDeleteResource
+       :<|> AccountsContainersUpdateResource
+       :<|> AccountsPermissionsListResource
+       :<|> AccountsPermissionsGetResource
+       :<|> AccountsPermissionsCreateResource
+       :<|> AccountsPermissionsDeleteResource
+       :<|> AccountsPermissionsUpdateResource
+       :<|> AccountsListResource
+       :<|> AccountsGetResource
+       :<|> AccountsUpdateResource
 
 tagManagerAPI :: Proxy TagManagerAPI
 tagManagerAPI = Proxy

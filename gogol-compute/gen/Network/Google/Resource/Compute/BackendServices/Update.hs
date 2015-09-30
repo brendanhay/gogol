@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update the entire content of the BackendService resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeBackendServicesUpdate@.
-module Compute.BackendServices.Update
+module Network.Google.Resource.Compute.BackendServices.Update
     (
     -- * REST Resource
-      BackendServicesUpdateAPI
+      BackendServicesUpdateResource
 
     -- * Creating a Request
-    , backendServicesUpdate
-    , BackendServicesUpdate
+    , backendServicesUpdate'
+    , BackendServicesUpdate'
 
     -- * Request Lenses
     , bsuQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeBackendServicesUpdate@ which the
--- 'BackendServicesUpdate' request conforms to.
-type BackendServicesUpdateAPI =
+-- 'BackendServicesUpdate'' request conforms to.
+type BackendServicesUpdateResource =
      Capture "project" Text :>
        "global" :>
          "backendServices" :>
            Capture "backendService" Text :>
-             Put '[JSON] Operation
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource.
 --
--- /See:/ 'backendServicesUpdate' smart constructor.
-data BackendServicesUpdate = BackendServicesUpdate
+-- /See:/ 'backendServicesUpdate'' smart constructor.
+data BackendServicesUpdate' = BackendServicesUpdate'
     { _bsuQuotaUser      :: !(Maybe Text)
     , _bsuPrettyPrint    :: !Bool
     , _bsuProject        :: !Text
@@ -63,7 +70,7 @@ data BackendServicesUpdate = BackendServicesUpdate
     , _bsuKey            :: !(Maybe Text)
     , _bsuOauthToken     :: !(Maybe Text)
     , _bsuFields         :: !(Maybe Text)
-    , _bsuAlt            :: !Text
+    , _bsuAlt            :: !Alt
     , _bsuBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +95,12 @@ data BackendServicesUpdate = BackendServicesUpdate
 -- * 'bsuAlt'
 --
 -- * 'bsuBackendService'
-backendServicesUpdate
+backendServicesUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'backendService'
-    -> BackendServicesUpdate
-backendServicesUpdate pBsuProject_ pBsuBackendService_ =
-    BackendServicesUpdate
+    -> BackendServicesUpdate'
+backendServicesUpdate' pBsuProject_ pBsuBackendService_ =
+    BackendServicesUpdate'
     { _bsuQuotaUser = Nothing
     , _bsuPrettyPrint = True
     , _bsuProject = pBsuProject_
@@ -101,7 +108,7 @@ backendServicesUpdate pBsuProject_ pBsuBackendService_ =
     , _bsuKey = Nothing
     , _bsuOauthToken = Nothing
     , _bsuFields = Nothing
-    , _bsuAlt = "json"
+    , _bsuAlt = JSON
     , _bsuBackendService = pBsuBackendService_
     }
 
@@ -147,7 +154,7 @@ bsuFields
   = lens _bsuFields (\ s a -> s{_bsuFields = a})
 
 -- | Data format for the response.
-bsuAlt :: Lens' BackendServicesUpdate' Text
+bsuAlt :: Lens' BackendServicesUpdate' Alt
 bsuAlt = lens _bsuAlt (\ s a -> s{_bsuAlt = a})
 
 -- | Name of the BackendService resource to update.
@@ -159,16 +166,16 @@ bsuBackendService
 instance GoogleRequest BackendServicesUpdate' where
         type Rs BackendServicesUpdate' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u BackendServicesUpdate{..}
-          = go _bsuQuotaUser _bsuPrettyPrint _bsuProject
+        requestWithRoute r u BackendServicesUpdate'{..}
+          = go _bsuQuotaUser (Just _bsuPrettyPrint) _bsuProject
               _bsuUserIp
               _bsuKey
               _bsuOauthToken
               _bsuFields
-              _bsuAlt
+              (Just _bsuAlt)
               _bsuBackendService
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BackendServicesUpdateAPI)
+                      (Proxy :: Proxy BackendServicesUpdateResource)
                       r
                       u

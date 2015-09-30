@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves information about a specific sitemap.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Webmaster Tools API Reference> for @WebmastersSitemapsGet@.
-module Webmasters.Sitemaps.Get
+module Network.Google.Resource.Webmasters.Sitemaps.Get
     (
     -- * REST Resource
-      SitemapsGetAPI
+      SitemapsGetResource
 
     -- * Creating a Request
-    , sitemapsGet
-    , SitemapsGet
+    , sitemapsGet'
+    , SitemapsGet'
 
     -- * Request Lenses
     , sgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.WebmasterTools.Types
 
 -- | A resource alias for @WebmastersSitemapsGet@ which the
--- 'SitemapsGet' request conforms to.
-type SitemapsGetAPI =
+-- 'SitemapsGet'' request conforms to.
+type SitemapsGetResource =
      "sites" :>
        Capture "siteUrl" Text :>
          "sitemaps" :>
-           Capture "feedpath" Text :> Get '[JSON] WmxSitemap
+           Capture "feedpath" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] WmxSitemap
 
 -- | Retrieves information about a specific sitemap.
 --
--- /See:/ 'sitemapsGet' smart constructor.
-data SitemapsGet = SitemapsGet
+-- /See:/ 'sitemapsGet'' smart constructor.
+data SitemapsGet' = SitemapsGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgFeedpath    :: !Text
@@ -63,7 +71,7 @@ data SitemapsGet = SitemapsGet
     , _sgKey         :: !(Maybe Text)
     , _sgOauthToken  :: !(Maybe Text)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Text
+    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data SitemapsGet = SitemapsGet
 -- * 'sgFields'
 --
 -- * 'sgAlt'
-sitemapsGet
+sitemapsGet'
     :: Text -- ^ 'feedpath'
     -> Text -- ^ 'siteUrl'
-    -> SitemapsGet
-sitemapsGet pSgFeedpath_ pSgSiteUrl_ =
-    SitemapsGet
+    -> SitemapsGet'
+sitemapsGet' pSgFeedpath_ pSgSiteUrl_ =
+    SitemapsGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgFeedpath = pSgFeedpath_
@@ -101,7 +109,7 @@ sitemapsGet pSgFeedpath_ pSgSiteUrl_ =
     , _sgKey = Nothing
     , _sgOauthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = "json"
+    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,19 +158,22 @@ sgFields :: Lens' SitemapsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
 -- | Data format for the response.
-sgAlt :: Lens' SitemapsGet' Text
+sgAlt :: Lens' SitemapsGet' Alt
 sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
 
 instance GoogleRequest SitemapsGet' where
         type Rs SitemapsGet' = WmxSitemap
         request = requestWithRoute defReq webmasterToolsURL
-        requestWithRoute r u SitemapsGet{..}
-          = go _sgQuotaUser _sgPrettyPrint _sgFeedpath
+        requestWithRoute r u SitemapsGet'{..}
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgFeedpath
               _sgUserIp
               _sgSiteUrl
               _sgKey
               _sgOauthToken
               _sgFields
-              _sgAlt
+              (Just _sgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitemapsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SitemapsGetResource)
+                      r
+                      u

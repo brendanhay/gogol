@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing creative field value.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesUpdate@.
-module DFAReporting.CreativeFieldValues.Update
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
     (
     -- * REST Resource
-      CreativeFieldValuesUpdateAPI
+      CreativeFieldValuesUpdateResource
 
     -- * Creating a Request
-    , creativeFieldValuesUpdate
-    , CreativeFieldValuesUpdate
+    , creativeFieldValuesUpdate'
+    , CreativeFieldValuesUpdate'
 
     -- * Request Lenses
     , cfvuCreativeFieldId
@@ -44,19 +45,26 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesUpdate@ which the
--- 'CreativeFieldValuesUpdate' request conforms to.
-type CreativeFieldValuesUpdateAPI =
+-- 'CreativeFieldValuesUpdate'' request conforms to.
+type CreativeFieldValuesUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               Put '[JSON] CreativeFieldValue
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Put '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value.
 --
--- /See:/ 'creativeFieldValuesUpdate' smart constructor.
-data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate
+-- /See:/ 'creativeFieldValuesUpdate'' smart constructor.
+data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId :: !Int64
     , _cfvuQuotaUser       :: !(Maybe Text)
     , _cfvuPrettyPrint     :: !Bool
@@ -65,7 +73,7 @@ data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate
     , _cfvuKey             :: !(Maybe Text)
     , _cfvuOauthToken      :: !(Maybe Text)
     , _cfvuFields          :: !(Maybe Text)
-    , _cfvuAlt             :: !Text
+    , _cfvuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesUpdate'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate
 -- * 'cfvuFields'
 --
 -- * 'cfvuAlt'
-creativeFieldValuesUpdate
+creativeFieldValuesUpdate'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
-    -> CreativeFieldValuesUpdate
-creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProfileId_ =
-    CreativeFieldValuesUpdate
+    -> CreativeFieldValuesUpdate'
+creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProfileId_ =
+    CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
     , _cfvuQuotaUser = Nothing
     , _cfvuPrettyPrint = True
@@ -103,7 +111,7 @@ creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProfileId_ =
     , _cfvuKey = Nothing
     , _cfvuOauthToken = Nothing
     , _cfvuFields = Nothing
-    , _cfvuAlt = "json"
+    , _cfvuAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -156,7 +164,7 @@ cfvuFields
   = lens _cfvuFields (\ s a -> s{_cfvuFields = a})
 
 -- | Data format for the response.
-cfvuAlt :: Lens' CreativeFieldValuesUpdate' Text
+cfvuAlt :: Lens' CreativeFieldValuesUpdate' Alt
 cfvuAlt = lens _cfvuAlt (\ s a -> s{_cfvuAlt = a})
 
 instance GoogleRequest CreativeFieldValuesUpdate'
@@ -164,17 +172,17 @@ instance GoogleRequest CreativeFieldValuesUpdate'
         type Rs CreativeFieldValuesUpdate' =
              CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesUpdate{..}
+        requestWithRoute r u CreativeFieldValuesUpdate'{..}
           = go _cfvuCreativeFieldId _cfvuQuotaUser
-              _cfvuPrettyPrint
+              (Just _cfvuPrettyPrint)
               _cfvuUserIp
               _cfvuProfileId
               _cfvuKey
               _cfvuOauthToken
               _cfvuFields
-              _cfvuAlt
+              (Just _cfvuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesUpdateAPI)
+                      (Proxy :: Proxy CreativeFieldValuesUpdateResource)
                       r
                       u

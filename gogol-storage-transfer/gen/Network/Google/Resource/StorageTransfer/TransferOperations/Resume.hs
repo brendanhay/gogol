@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Resumes a transfer operation that is paused.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsResume@.
-module StorageTransfer.TransferOperations.Resume
+module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     (
     -- * REST Resource
-      TransferOperationsResumeAPI
+      TransferOperationsResumeResource
 
     -- * Creating a Request
-    , transferOperationsResume
-    , TransferOperationsResume
+    , transferOperationsResume'
+    , TransferOperationsResume'
 
     -- * Request Lenses
     , torXgafv
@@ -49,14 +50,28 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsResume@ which the
--- 'TransferOperationsResume' request conforms to.
-type TransferOperationsResumeAPI =
-     "v1" :> "{+name}:resume" :> Post '[JSON] Empty
+-- 'TransferOperationsResume'' request conforms to.
+type TransferOperationsResumeResource =
+     "v1" :>
+       "{+name}:resume" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Resumes a transfer operation that is paused.
 --
--- /See:/ 'transferOperationsResume' smart constructor.
-data TransferOperationsResume = TransferOperationsResume
+-- /See:/ 'transferOperationsResume'' smart constructor.
+data TransferOperationsResume' = TransferOperationsResume'
     { _torXgafv          :: !(Maybe Text)
     , _torQuotaUser      :: !(Maybe Text)
     , _torPrettyPrint    :: !Bool
@@ -104,11 +119,11 @@ data TransferOperationsResume = TransferOperationsResume
 -- * 'torCallback'
 --
 -- * 'torAlt'
-transferOperationsResume
+transferOperationsResume'
     :: Text -- ^ 'name'
-    -> TransferOperationsResume
-transferOperationsResume pTorName_ =
-    TransferOperationsResume
+    -> TransferOperationsResume'
+transferOperationsResume' pTorName_ =
+    TransferOperationsResume'
     { _torXgafv = Nothing
     , _torQuotaUser = Nothing
     , _torPrettyPrint = True
@@ -204,10 +219,10 @@ instance GoogleRequest TransferOperationsResume'
          where
         type Rs TransferOperationsResume' = Empty
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsResume{..}
-          = go _torXgafv _torQuotaUser _torPrettyPrint
+        requestWithRoute r u TransferOperationsResume'{..}
+          = go _torXgafv _torQuotaUser (Just _torPrettyPrint)
               _torUploadProtocol
-              _torPp
+              (Just _torPp)
               _torAccessToken
               _torUploadType
               _torBearerToken
@@ -216,9 +231,9 @@ instance GoogleRequest TransferOperationsResume'
               _torOauthToken
               _torFields
               _torCallback
-              _torAlt
+              (Just _torAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsResumeAPI)
+                      (Proxy :: Proxy TransferOperationsResumeResource)
                       r
                       u

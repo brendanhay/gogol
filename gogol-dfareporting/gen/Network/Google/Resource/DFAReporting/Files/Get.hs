@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a report file by its report ID and file ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFilesGet@.
-module DFAReporting.Files.Get
+module Network.Google.Resource.DFAReporting.Files.Get
     (
     -- * REST Resource
-      FilesGetAPI
+      FilesGetResource
 
     -- * Creating a Request
-    , filesGet
-    , FilesGet
+    , filesGet'
+    , FilesGet'
 
     -- * Request Lenses
     , fgQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFilesGet@ which the
--- 'FilesGet' request conforms to.
-type FilesGetAPI =
+-- 'FilesGet'' request conforms to.
+type FilesGetResource =
      "reports" :>
        Capture "reportId" Int64 :>
-         "files" :> Capture "fileId" Int64 :> Get '[JSON] File
+         "files" :>
+           Capture "fileId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] File
 
 -- | Retrieves a report file by its report ID and file ID.
 --
--- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet
+-- /See:/ 'filesGet'' smart constructor.
+data FilesGet' = FilesGet'
     { _fgQuotaUser   :: !(Maybe Text)
     , _fgPrettyPrint :: !Bool
     , _fgUserIp      :: !(Maybe Text)
@@ -62,7 +71,7 @@ data FilesGet = FilesGet
     , _fgFileId      :: !Int64
     , _fgOauthToken  :: !(Maybe Text)
     , _fgFields      :: !(Maybe Text)
-    , _fgAlt         :: !Text
+    , _fgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
@@ -86,12 +95,12 @@ data FilesGet = FilesGet
 -- * 'fgFields'
 --
 -- * 'fgAlt'
-filesGet
+filesGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'fileId'
-    -> FilesGet
-filesGet pFgReportId_ pFgFileId_ =
-    FilesGet
+    -> FilesGet'
+filesGet' pFgReportId_ pFgFileId_ =
+    FilesGet'
     { _fgQuotaUser = Nothing
     , _fgPrettyPrint = True
     , _fgUserIp = Nothing
@@ -100,7 +109,7 @@ filesGet pFgReportId_ pFgFileId_ =
     , _fgFileId = pFgFileId_
     , _fgOauthToken = Nothing
     , _fgFields = Nothing
-    , _fgAlt = "json"
+    , _fgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,19 +155,20 @@ fgFields :: Lens' FilesGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
 -- | Data format for the response.
-fgAlt :: Lens' FilesGet' Text
+fgAlt :: Lens' FilesGet' Alt
 fgAlt = lens _fgAlt (\ s a -> s{_fgAlt = a})
 
 instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FilesGet{..}
-          = go _fgQuotaUser _fgPrettyPrint _fgUserIp
+        requestWithRoute r u FilesGet'{..}
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIp
               _fgReportId
               _fgKey
               _fgFileId
               _fgOauthToken
               _fgFields
-              _fgAlt
+              (Just _fgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
+                      u

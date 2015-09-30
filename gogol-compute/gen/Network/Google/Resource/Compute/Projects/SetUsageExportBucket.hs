@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- method, the usage export feature will be disabled.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsSetUsageExportBucket@.
-module Compute.Projects.SetUsageExportBucket
+module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
     (
     -- * REST Resource
-      ProjectsSetUsageExportBucketAPI
+      ProjectsSetUsageExportBucketResource
 
     -- * Creating a Request
-    , projectsSetUsageExportBucket
-    , ProjectsSetUsageExportBucket
+    , projectsSetUsageExportBucket'
+    , ProjectsSetUsageExportBucket'
 
     -- * Request Lenses
     , psuebQuotaUser
@@ -45,17 +46,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeProjectsSetUsageExportBucket@ which the
--- 'ProjectsSetUsageExportBucket' request conforms to.
-type ProjectsSetUsageExportBucketAPI =
+-- 'ProjectsSetUsageExportBucket'' request conforms to.
+type ProjectsSetUsageExportBucketResource =
      Capture "project" Text :>
-       "setUsageExportBucket" :> Post '[JSON] Operation
+       "setUsageExportBucket" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Enables the usage export feature and sets the usage export bucket where
 -- reports are stored. If you provide an empty request body using this
 -- method, the usage export feature will be disabled.
 --
--- /See:/ 'projectsSetUsageExportBucket' smart constructor.
-data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
+-- /See:/ 'projectsSetUsageExportBucket'' smart constructor.
+data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
     { _psuebQuotaUser   :: !(Maybe Text)
     , _psuebPrettyPrint :: !Bool
     , _psuebProject     :: !Text
@@ -63,7 +71,7 @@ data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
     , _psuebKey         :: !(Maybe Text)
     , _psuebOauthToken  :: !(Maybe Text)
     , _psuebFields      :: !(Maybe Text)
-    , _psuebAlt         :: !Text
+    , _psuebAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetUsageExportBucket'' with the minimum fields required to make a request.
@@ -85,11 +93,11 @@ data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
 -- * 'psuebFields'
 --
 -- * 'psuebAlt'
-projectsSetUsageExportBucket
+projectsSetUsageExportBucket'
     :: Text -- ^ 'project'
-    -> ProjectsSetUsageExportBucket
-projectsSetUsageExportBucket pPsuebProject_ =
-    ProjectsSetUsageExportBucket
+    -> ProjectsSetUsageExportBucket'
+projectsSetUsageExportBucket' pPsuebProject_ =
+    ProjectsSetUsageExportBucket'
     { _psuebQuotaUser = Nothing
     , _psuebPrettyPrint = True
     , _psuebProject = pPsuebProject_
@@ -97,7 +105,7 @@ projectsSetUsageExportBucket pPsuebProject_ =
     , _psuebKey = Nothing
     , _psuebOauthToken = Nothing
     , _psuebFields = Nothing
-    , _psuebAlt = "json"
+    , _psuebAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,22 +151,24 @@ psuebFields
   = lens _psuebFields (\ s a -> s{_psuebFields = a})
 
 -- | Data format for the response.
-psuebAlt :: Lens' ProjectsSetUsageExportBucket' Text
+psuebAlt :: Lens' ProjectsSetUsageExportBucket' Alt
 psuebAlt = lens _psuebAlt (\ s a -> s{_psuebAlt = a})
 
 instance GoogleRequest ProjectsSetUsageExportBucket'
          where
         type Rs ProjectsSetUsageExportBucket' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsSetUsageExportBucket{..}
-          = go _psuebQuotaUser _psuebPrettyPrint _psuebProject
+        requestWithRoute r u
+          ProjectsSetUsageExportBucket'{..}
+          = go _psuebQuotaUser (Just _psuebPrettyPrint)
+              _psuebProject
               _psuebUserIp
               _psuebKey
               _psuebOauthToken
               _psuebFields
-              _psuebAlt
+              (Just _psuebAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSetUsageExportBucketAPI)
+                      (Proxy :: Proxy ProjectsSetUsageExportBucketResource)
                       r
                       u

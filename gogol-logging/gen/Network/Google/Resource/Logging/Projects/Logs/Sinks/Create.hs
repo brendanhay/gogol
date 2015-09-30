@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the destination.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference> for @LoggingProjectsLogsSinksCreate@.
-module Logging.Projects.Logs.Sinks.Create
+module Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
     (
     -- * REST Resource
-      ProjectsLogsSinksCreateAPI
+      ProjectsLogsSinksCreateResource
 
     -- * Creating a Request
-    , projectsLogsSinksCreate
-    , ProjectsLogsSinksCreate
+    , projectsLogsSinksCreate'
+    , ProjectsLogsSinksCreate'
 
     -- * Request Lenses
     , plscXgafv
@@ -51,20 +52,34 @@ import           Network.Google.Logging.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LoggingProjectsLogsSinksCreate@ which the
--- 'ProjectsLogsSinksCreate' request conforms to.
-type ProjectsLogsSinksCreateAPI =
+-- 'ProjectsLogsSinksCreate'' request conforms to.
+type ProjectsLogsSinksCreateResource =
      "v1beta3" :>
        "projects" :>
          Capture "projectsId" Text :>
            "logs" :>
              Capture "logsId" Text :>
-               "sinks" :> Post '[JSON] LogSink
+               "sinks" :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Post '[JSON] LogSink
 
 -- | Creates a log sink. All log entries for a specified log are written to
 -- the destination.
 --
--- /See:/ 'projectsLogsSinksCreate' smart constructor.
-data ProjectsLogsSinksCreate = ProjectsLogsSinksCreate
+-- /See:/ 'projectsLogsSinksCreate'' smart constructor.
+data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
     { _plscXgafv          :: !(Maybe Text)
     , _plscQuotaUser      :: !(Maybe Text)
     , _plscPrettyPrint    :: !Bool
@@ -115,12 +130,12 @@ data ProjectsLogsSinksCreate = ProjectsLogsSinksCreate
 -- * 'plscCallback'
 --
 -- * 'plscAlt'
-projectsLogsSinksCreate
+projectsLogsSinksCreate'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
-    -> ProjectsLogsSinksCreate
-projectsLogsSinksCreate pPlscLogsId_ pPlscProjectsId_ =
-    ProjectsLogsSinksCreate
+    -> ProjectsLogsSinksCreate'
+projectsLogsSinksCreate' pPlscLogsId_ pPlscProjectsId_ =
+    ProjectsLogsSinksCreate'
     { _plscXgafv = Nothing
     , _plscQuotaUser = Nothing
     , _plscPrettyPrint = True
@@ -226,11 +241,12 @@ plscAlt = lens _plscAlt (\ s a -> s{_plscAlt = a})
 instance GoogleRequest ProjectsLogsSinksCreate' where
         type Rs ProjectsLogsSinksCreate' = LogSink
         request = requestWithRoute defReq loggingURL
-        requestWithRoute r u ProjectsLogsSinksCreate{..}
-          = go _plscXgafv _plscQuotaUser _plscPrettyPrint
+        requestWithRoute r u ProjectsLogsSinksCreate'{..}
+          = go _plscXgafv _plscQuotaUser
+              (Just _plscPrettyPrint)
               _plscUploadProtocol
               _plscLogsId
-              _plscPp
+              (Just _plscPp)
               _plscAccessToken
               _plscUploadType
               _plscBearerToken
@@ -239,9 +255,9 @@ instance GoogleRequest ProjectsLogsSinksCreate' where
               _plscProjectsId
               _plscFields
               _plscCallback
-              _plscAlt
+              (Just _plscAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsLogsSinksCreateAPI)
+                      (Proxy :: Proxy ProjectsLogsSinksCreateResource)
                       r
                       u

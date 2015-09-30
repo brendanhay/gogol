@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an ACL entry on the specified bucket.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageBucketAccessControlsUpdate@.
-module Storage.BucketAccessControls.Update
+module Network.Google.Resource.Storage.BucketAccessControls.Update
     (
     -- * REST Resource
-      BucketAccessControlsUpdateAPI
+      BucketAccessControlsUpdateResource
 
     -- * Creating a Request
-    , bucketAccessControlsUpdate
-    , BucketAccessControlsUpdate
+    , bucketAccessControlsUpdate'
+    , BucketAccessControlsUpdate'
 
     -- * Request Lenses
     , bacuQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageBucketAccessControlsUpdate@ which the
--- 'BucketAccessControlsUpdate' request conforms to.
-type BucketAccessControlsUpdateAPI =
+-- 'BucketAccessControlsUpdate'' request conforms to.
+type BucketAccessControlsUpdateResource =
      "b" :>
        Capture "bucket" Text :>
          "acl" :>
            Capture "entity" Text :>
-             Put '[JSON] BucketAccessControl
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Put '[JSON] BucketAccessControl
 
 -- | Updates an ACL entry on the specified bucket.
 --
--- /See:/ 'bucketAccessControlsUpdate' smart constructor.
-data BucketAccessControlsUpdate = BucketAccessControlsUpdate
+-- /See:/ 'bucketAccessControlsUpdate'' smart constructor.
+data BucketAccessControlsUpdate' = BucketAccessControlsUpdate'
     { _bacuQuotaUser   :: !(Maybe Text)
     , _bacuPrettyPrint :: !Bool
     , _bacuUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data BucketAccessControlsUpdate = BucketAccessControlsUpdate
     , _bacuOauthToken  :: !(Maybe Text)
     , _bacuEntity      :: !Text
     , _bacuFields      :: !(Maybe Text)
-    , _bacuAlt         :: !Text
+    , _bacuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsUpdate'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data BucketAccessControlsUpdate = BucketAccessControlsUpdate
 -- * 'bacuFields'
 --
 -- * 'bacuAlt'
-bucketAccessControlsUpdate
+bucketAccessControlsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
-    -> BucketAccessControlsUpdate
-bucketAccessControlsUpdate pBacuBucket_ pBacuEntity_ =
-    BucketAccessControlsUpdate
+    -> BucketAccessControlsUpdate'
+bucketAccessControlsUpdate' pBacuBucket_ pBacuEntity_ =
+    BucketAccessControlsUpdate'
     { _bacuQuotaUser = Nothing
     , _bacuPrettyPrint = True
     , _bacuUserIp = Nothing
@@ -102,7 +110,7 @@ bucketAccessControlsUpdate pBacuBucket_ pBacuEntity_ =
     , _bacuOauthToken = Nothing
     , _bacuEntity = pBacuEntity_
     , _bacuFields = Nothing
-    , _bacuAlt = "json"
+    , _bacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ bacuFields
   = lens _bacuFields (\ s a -> s{_bacuFields = a})
 
 -- | Data format for the response.
-bacuAlt :: Lens' BucketAccessControlsUpdate' Text
+bacuAlt :: Lens' BucketAccessControlsUpdate' Alt
 bacuAlt = lens _bacuAlt (\ s a -> s{_bacuAlt = a})
 
 instance GoogleRequest BucketAccessControlsUpdate'
@@ -163,16 +171,17 @@ instance GoogleRequest BucketAccessControlsUpdate'
         type Rs BucketAccessControlsUpdate' =
              BucketAccessControl
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u BucketAccessControlsUpdate{..}
-          = go _bacuQuotaUser _bacuPrettyPrint _bacuUserIp
+        requestWithRoute r u BucketAccessControlsUpdate'{..}
+          = go _bacuQuotaUser (Just _bacuPrettyPrint)
+              _bacuUserIp
               _bacuBucket
               _bacuKey
               _bacuOauthToken
               _bacuEntity
               _bacuFields
-              _bacuAlt
+              (Just _bacuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BucketAccessControlsUpdateAPI)
+                      (Proxy :: Proxy BucketAccessControlsUpdateResource)
                       r
                       u

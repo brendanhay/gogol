@@ -901,7 +901,7 @@ instance ToJSON Draft where
 --
 -- /See:/ 'watchRequest' smart constructor.
 data WatchRequest = WatchRequest
-    { _wrLabelFilterAction :: !(Maybe Text)
+    { _wrLabelFilterAction :: !(Maybe WatchRequestLabelFilterAction)
     , _wrTopicName         :: !(Maybe Text)
     , _wrLabelIds          :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -925,7 +925,7 @@ watchRequest =
     }
 
 -- | Filtering behavior of labelIds list specified.
-wrLabelFilterAction :: Lens' WatchRequest (Maybe Text)
+wrLabelFilterAction :: Lens' WatchRequest (Maybe WatchRequestLabelFilterAction)
 wrLabelFilterAction
   = lens _wrLabelFilterAction
       (\ s a -> s{_wrLabelFilterAction = a})
@@ -1173,14 +1173,14 @@ instance ToJSON Thread where
 -- /See:/ 'label' smart constructor.
 data Label = Label
     { _lThreadsUnread         :: !(Maybe Int32)
-    , _lMessageListVisibility :: !(Maybe Text)
+    , _lMessageListVisibility :: !(Maybe LabelMessageListVisibility)
     , _lMessagesTotal         :: !(Maybe Int32)
     , _lMessagesUnread        :: !(Maybe Int32)
     , _lName                  :: !(Maybe Text)
     , _lThreadsTotal          :: !(Maybe Int32)
-    , _lLabelListVisibility   :: !(Maybe Text)
+    , _lLabelListVisibility   :: !(Maybe LabelLabelListVisibility)
     , _lId                    :: !(Maybe Text)
-    , _lType                  :: !(Maybe Text)
+    , _lType                  :: !(Maybe LabelType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Label' with the minimum fields required to make a request.
@@ -1227,7 +1227,7 @@ lThreadsUnread
 
 -- | The visibility of the label in the message list in the Gmail web
 -- interface.
-lMessageListVisibility :: Lens' Label (Maybe Text)
+lMessageListVisibility :: Lens' Label (Maybe LabelMessageListVisibility)
 lMessageListVisibility
   = lens _lMessageListVisibility
       (\ s a -> s{_lMessageListVisibility = a})
@@ -1256,7 +1256,7 @@ lThreadsTotal
 
 -- | The visibility of the label in the label list in the Gmail web
 -- interface.
-lLabelListVisibility :: Lens' Label (Maybe Text)
+lLabelListVisibility :: Lens' Label (Maybe LabelLabelListVisibility)
 lLabelListVisibility
   = lens _lLabelListVisibility
       (\ s a -> s{_lLabelListVisibility = a})
@@ -1273,7 +1273,7 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- is not guaranteed. For example, users can apply and remove the INBOX and
 -- UNREAD labels from messages and threads, but cannot apply or remove the
 -- DRAFTS or SENT labels from messages or threads.
-lType :: Lens' Label (Maybe Text)
+lType :: Lens' Label (Maybe LabelType)
 lType = lens _lType (\ s a -> s{_lType = a})
 
 instance FromJSON Label where

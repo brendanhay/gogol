@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Cancel processing on a raster collection asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsCancelProcessing@.
-module Mapsengine.RasterCollections.CancelProcessing
+module Network.Google.Resource.Mapsengine.RasterCollections.CancelProcessing
     (
     -- * REST Resource
-      RasterCollectionsCancelProcessingAPI
+      RasterCollectionsCancelProcessingResource
 
     -- * Creating a Request
-    , rasterCollectionsCancelProcessing
-    , RasterCollectionsCancelProcessing
+    , rasterCollectionsCancelProcessing'
+    , RasterCollectionsCancelProcessing'
 
     -- * Request Lenses
     , rccpQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsCancelProcessing@ which the
--- 'RasterCollectionsCancelProcessing' request conforms to.
-type RasterCollectionsCancelProcessingAPI =
+-- 'RasterCollectionsCancelProcessing'' request conforms to.
+type RasterCollectionsCancelProcessingResource =
      "rasterCollections" :>
        Capture "id" Text :>
-         "cancelProcessing" :> Post '[JSON] ProcessResponse
+         "cancelProcessing" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Cancel processing on a raster collection asset.
 --
--- /See:/ 'rasterCollectionsCancelProcessing' smart constructor.
-data RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
+-- /See:/ 'rasterCollectionsCancelProcessing'' smart constructor.
+data RasterCollectionsCancelProcessing' = RasterCollectionsCancelProcessing'
     { _rccpQuotaUser   :: !(Maybe Text)
     , _rccpPrettyPrint :: !Bool
     , _rccpUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
     , _rccpId          :: !Text
     , _rccpOauthToken  :: !(Maybe Text)
     , _rccpFields      :: !(Maybe Text)
-    , _rccpAlt         :: !Text
+    , _rccpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsCancelProcessing'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
 -- * 'rccpFields'
 --
 -- * 'rccpAlt'
-rasterCollectionsCancelProcessing
+rasterCollectionsCancelProcessing'
     :: Text -- ^ 'id'
-    -> RasterCollectionsCancelProcessing
-rasterCollectionsCancelProcessing pRccpId_ =
-    RasterCollectionsCancelProcessing
+    -> RasterCollectionsCancelProcessing'
+rasterCollectionsCancelProcessing' pRccpId_ =
+    RasterCollectionsCancelProcessing'
     { _rccpQuotaUser = Nothing
     , _rccpPrettyPrint = True
     , _rccpUserIp = Nothing
@@ -94,7 +102,7 @@ rasterCollectionsCancelProcessing pRccpId_ =
     , _rccpId = pRccpId_
     , _rccpOauthToken = Nothing
     , _rccpFields = Nothing
-    , _rccpAlt = "json"
+    , _rccpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,7 +147,7 @@ rccpFields
   = lens _rccpFields (\ s a -> s{_rccpFields = a})
 
 -- | Data format for the response.
-rccpAlt :: Lens' RasterCollectionsCancelProcessing' Text
+rccpAlt :: Lens' RasterCollectionsCancelProcessing' Alt
 rccpAlt = lens _rccpAlt (\ s a -> s{_rccpAlt = a})
 
 instance GoogleRequest
@@ -148,15 +156,17 @@ instance GoogleRequest
              ProcessResponse
         request = requestWithRoute defReq mapEngineURL
         requestWithRoute r u
-          RasterCollectionsCancelProcessing{..}
-          = go _rccpQuotaUser _rccpPrettyPrint _rccpUserIp
+          RasterCollectionsCancelProcessing'{..}
+          = go _rccpQuotaUser (Just _rccpPrettyPrint)
+              _rccpUserIp
               _rccpKey
               _rccpId
               _rccpOauthToken
               _rccpFields
-              _rccpAlt
+              (Just _rccpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsCancelProcessingAPI)
+                      (Proxy ::
+                         Proxy RasterCollectionsCancelProcessingResource)
                       r
                       u

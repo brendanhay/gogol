@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Look up some entities by key.
 --
 -- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference> for @DatastoreDatasetsLookup@.
-module Datastore.Datasets.Lookup
+module Network.Google.Resource.Datastore.Datasets.Lookup
     (
     -- * REST Resource
-      DatasetsLookupAPI
+      DatasetsLookupResource
 
     -- * Creating a Request
-    , datasetsLookup
-    , DatasetsLookup
+    , datasetsLookup'
+    , DatasetsLookup'
 
     -- * Request Lenses
     , dlQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DatastoreDatasetsLookup@ which the
--- 'DatasetsLookup' request conforms to.
-type DatasetsLookupAPI =
+-- 'DatasetsLookup'' request conforms to.
+type DatasetsLookupResource =
      Capture "datasetId" Text :>
-       "lookup" :> Post '[JSON] LookupResponse
+       "lookup" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] LookupResponse
 
 -- | Look up some entities by key.
 --
--- /See:/ 'datasetsLookup' smart constructor.
-data DatasetsLookup = DatasetsLookup
+-- /See:/ 'datasetsLookup'' smart constructor.
+data DatasetsLookup' = DatasetsLookup'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data DatasetsLookup = DatasetsLookup
     , _dlDatasetId   :: !Text
     , _dlOauthToken  :: !(Maybe Text)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Text
+    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsLookup'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data DatasetsLookup = DatasetsLookup
 -- * 'dlFields'
 --
 -- * 'dlAlt'
-datasetsLookup
+datasetsLookup'
     :: Text -- ^ 'datasetId'
-    -> DatasetsLookup
-datasetsLookup pDlDatasetId_ =
-    DatasetsLookup
+    -> DatasetsLookup'
+datasetsLookup' pDlDatasetId_ =
+    DatasetsLookup'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlUserIp = Nothing
@@ -93,7 +101,7 @@ datasetsLookup pDlDatasetId_ =
     , _dlDatasetId = pDlDatasetId_
     , _dlOauthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = "proto"
+    , _dlAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ dlFields :: Lens' DatasetsLookup' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
 -- | Data format for the response.
-dlAlt :: Lens' DatasetsLookup' Text
+dlAlt :: Lens' DatasetsLookup' Alt
 dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
 
 instance GoogleRequest DatasetsLookup' where
         type Rs DatasetsLookup' = LookupResponse
         request = requestWithRoute defReq datastoreURL
-        requestWithRoute r u DatasetsLookup{..}
-          = go _dlQuotaUser _dlPrettyPrint _dlUserIp _dlKey
+        requestWithRoute r u DatasetsLookup'{..}
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+              _dlKey
               _dlDatasetId
               _dlOauthToken
               _dlFields
-              _dlAlt
+              (Just _dlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy DatasetsLookupAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy DatasetsLookupResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified Autoscaler resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersDelete@.
-module Autoscaler.Autoscalers.Delete
+module Network.Google.Resource.Autoscaler.Autoscalers.Delete
     (
     -- * REST Resource
-      AutoscalersDeleteAPI
+      AutoscalersDeleteResource
 
     -- * Creating a Request
-    , autoscalersDelete
-    , AutoscalersDelete
+    , autoscalersDelete'
+    , AutoscalersDelete'
 
     -- * Request Lenses
     , adQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.ComputeAutoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AutoscalerAutoscalersDelete@ which the
--- 'AutoscalersDelete' request conforms to.
-type AutoscalersDeleteAPI =
+-- 'AutoscalersDelete'' request conforms to.
+type AutoscalersDeleteResource =
      "projects" :>
        Capture "project" Text :>
          "zones" :>
            Capture "zone" Text :>
              "autoscalers" :>
-               Capture "autoscaler" Text :> Delete '[JSON] Operation
+               Capture "autoscaler" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified Autoscaler resource.
 --
--- /See:/ 'autoscalersDelete' smart constructor.
-data AutoscalersDelete = AutoscalersDelete
+-- /See:/ 'autoscalersDelete'' smart constructor.
+data AutoscalersDelete' = AutoscalersDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
     , _adProject     :: !Text
@@ -67,7 +75,7 @@ data AutoscalersDelete = AutoscalersDelete
     , _adAutoscaler  :: !Text
     , _adOauthToken  :: !(Maybe Text)
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Text
+    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AutoscalersDelete = AutoscalersDelete
 -- * 'adFields'
 --
 -- * 'adAlt'
-autoscalersDelete
+autoscalersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'autoscaler'
-    -> AutoscalersDelete
-autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
-    AutoscalersDelete
+    -> AutoscalersDelete'
+autoscalersDelete' pAdProject_ pAdZone_ pAdAutoscaler_ =
+    AutoscalersDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
     , _adProject = pAdProject_
@@ -109,7 +117,7 @@ autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
     , _adAutoscaler = pAdAutoscaler_
     , _adOauthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = "json"
+    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,23 +168,24 @@ adFields :: Lens' AutoscalersDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
 -- | Data format for the response.
-adAlt :: Lens' AutoscalersDelete' Text
+adAlt :: Lens' AutoscalersDelete' Alt
 adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
 
 instance GoogleRequest AutoscalersDelete' where
         type Rs AutoscalersDelete' = Operation
         request
           = requestWithRoute defReq computeAutoscalerURL
-        requestWithRoute r u AutoscalersDelete{..}
-          = go _adQuotaUser _adPrettyPrint _adProject _adUserIp
+        requestWithRoute r u AutoscalersDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adProject
+              _adUserIp
               _adZone
               _adKey
               _adAutoscaler
               _adOauthToken
               _adFields
-              _adAlt
+              (Just _adAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AutoscalersDeleteAPI)
+                      (Proxy :: Proxy AutoscalersDeleteResource)
                       r
                       u

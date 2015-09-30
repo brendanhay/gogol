@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- reseller.
 --
 -- /See:/ <https://developers.google.com/google-apps/reseller/ Enterprise Apps Reseller API Reference> for @ResellerCustomersUpdate@.
-module Reseller.Customers.Update
+module Network.Google.Resource.Reseller.Customers.Update
     (
     -- * REST Resource
-      CustomersUpdateAPI
+      CustomersUpdateResource
 
     -- * Creating a Request
-    , customersUpdate
-    , CustomersUpdate
+    , customersUpdate'
+    , CustomersUpdate'
 
     -- * Request Lenses
     , cuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.AppsReseller.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ResellerCustomersUpdate@ which the
--- 'CustomersUpdate' request conforms to.
-type CustomersUpdateAPI =
+-- 'CustomersUpdate'' request conforms to.
+type CustomersUpdateResource =
      "customers" :>
-       Capture "customerId" Text :> Put '[JSON] Customer
+       Capture "customerId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller.
 --
--- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate
+-- /See:/ 'customersUpdate'' smart constructor.
+data CustomersUpdate' = CustomersUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
     , _cuUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data CustomersUpdate = CustomersUpdate
     , _cuKey         :: !(Maybe Text)
     , _cuOauthToken  :: !(Maybe Text)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Text
+    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data CustomersUpdate = CustomersUpdate
 -- * 'cuFields'
 --
 -- * 'cuAlt'
-customersUpdate
+customersUpdate'
     :: Text -- ^ 'customerId'
-    -> CustomersUpdate
-customersUpdate pCuCustomerId_ =
-    CustomersUpdate
+    -> CustomersUpdate'
+customersUpdate' pCuCustomerId_ =
+    CustomersUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
     , _cuUserIp = Nothing
@@ -95,7 +103,7 @@ customersUpdate pCuCustomerId_ =
     , _cuKey = Nothing
     , _cuOauthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = "json"
+    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,20 +145,21 @@ cuFields :: Lens' CustomersUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
 -- | Data format for the response.
-cuAlt :: Lens' CustomersUpdate' Text
+cuAlt :: Lens' CustomersUpdate' Alt
 cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
 
 instance GoogleRequest CustomersUpdate' where
         type Rs CustomersUpdate' = Customer
         request = requestWithRoute defReq appsResellerURL
-        requestWithRoute r u CustomersUpdate{..}
-          = go _cuQuotaUser _cuPrettyPrint _cuUserIp
+        requestWithRoute r u CustomersUpdate'{..}
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
               _cuCustomerId
               _cuKey
               _cuOauthToken
               _cuFields
-              _cuAlt
+              (Just _cuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CustomersUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CustomersUpdateResource)
                       r
                       u

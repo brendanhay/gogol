@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the volume annotations for a volume and layer.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersVolumeAnnotationsList@.
-module Books.Layers.VolumeAnnotations.List
+module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     (
     -- * REST Resource
-      LayersVolumeAnnotationsListAPI
+      LayersVolumeAnnotationsListResource
 
     -- * Creating a Request
-    , layersVolumeAnnotationsList
-    , LayersVolumeAnnotationsList
+    , layersVolumeAnnotationsList'
+    , LayersVolumeAnnotationsList'
 
     -- * Request Lenses
     , lvalQuotaUser
@@ -57,31 +58,40 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersVolumeAnnotationsList@ which the
--- 'LayersVolumeAnnotationsList' request conforms to.
-type LayersVolumeAnnotationsListAPI =
+-- 'LayersVolumeAnnotationsList'' request conforms to.
+type LayersVolumeAnnotationsListResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
-             QueryParam "startOffset" Text :>
-               QueryParam "locale" Text :>
-                 QueryParam "contentVersion" Text :>
-                   QueryParam "showDeleted" Bool :>
-                     QueryParam "volumeAnnotationsVersion" Text :>
-                       QueryParam "updatedMax" Text :>
-                         QueryParam "updatedMin" Text :>
-                           QueryParam "endOffset" Text :>
-                             QueryParam "source" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "endPosition" Text :>
-                                   QueryParam "maxResults" Word32 :>
-                                     QueryParam "startPosition" Text :>
-                                       Get '[JSON] Volumeannotations
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "startOffset" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "locale" Text :>
+                       QueryParam "contentVersion" Text :>
+                         QueryParam "showDeleted" Bool :>
+                           QueryParam "volumeAnnotationsVersion" Text :>
+                             QueryParam "updatedMax" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "updatedMin" Text :>
+                                   QueryParam "endOffset" Text :>
+                                     QueryParam "source" Text :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "oauth_token" Text :>
+                                           QueryParam "endPosition" Text :>
+                                             QueryParam "maxResults" Word32 :>
+                                               QueryParam "startPosition" Text
+                                                 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "alt" Alt :>
+                                                     Get '[JSON]
+                                                       Volumeannotations
 
 -- | Gets the volume annotations for a volume and layer.
 --
--- /See:/ 'layersVolumeAnnotationsList' smart constructor.
-data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
+-- /See:/ 'layersVolumeAnnotationsList'' smart constructor.
+data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
     { _lvalQuotaUser                :: !(Maybe Text)
     , _lvalPrettyPrint              :: !Bool
     , _lvalStartOffset              :: !(Maybe Text)
@@ -103,7 +113,7 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
     , _lvalMaxResults               :: !(Maybe Word32)
     , _lvalStartPosition            :: !(Maybe Text)
     , _lvalFields                   :: !(Maybe Text)
-    , _lvalAlt                      :: !Text
+    , _lvalAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsList'' with the minimum fields required to make a request.
@@ -153,13 +163,13 @@ data LayersVolumeAnnotationsList = LayersVolumeAnnotationsList
 -- * 'lvalFields'
 --
 -- * 'lvalAlt'
-layersVolumeAnnotationsList
+layersVolumeAnnotationsList'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'volumeId'
     -> Text -- ^ 'layerId'
-    -> LayersVolumeAnnotationsList
-layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
-    LayersVolumeAnnotationsList
+    -> LayersVolumeAnnotationsList'
+layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
+    LayersVolumeAnnotationsList'
     { _lvalQuotaUser = Nothing
     , _lvalPrettyPrint = True
     , _lvalStartOffset = Nothing
@@ -181,7 +191,7 @@ layersVolumeAnnotationsList pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     , _lvalMaxResults = Nothing
     , _lvalStartPosition = Nothing
     , _lvalFields = Nothing
-    , _lvalAlt = "json"
+    , _lvalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -312,7 +322,7 @@ lvalFields
   = lens _lvalFields (\ s a -> s{_lvalFields = a})
 
 -- | Data format for the response.
-lvalAlt :: Lens' LayersVolumeAnnotationsList' Text
+lvalAlt :: Lens' LayersVolumeAnnotationsList' Alt
 lvalAlt = lens _lvalAlt (\ s a -> s{_lvalAlt = a})
 
 instance GoogleRequest LayersVolumeAnnotationsList'
@@ -320,8 +330,9 @@ instance GoogleRequest LayersVolumeAnnotationsList'
         type Rs LayersVolumeAnnotationsList' =
              Volumeannotations
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersVolumeAnnotationsList{..}
-          = go _lvalQuotaUser _lvalPrettyPrint _lvalStartOffset
+        requestWithRoute r u LayersVolumeAnnotationsList'{..}
+          = go _lvalQuotaUser (Just _lvalPrettyPrint)
+              _lvalStartOffset
               _lvalUserIp
               _lvalLocale
               (Just _lvalContentVersion)
@@ -340,9 +351,9 @@ instance GoogleRequest LayersVolumeAnnotationsList'
               _lvalMaxResults
               _lvalStartPosition
               _lvalFields
-              _lvalAlt
+              (Just _lvalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersVolumeAnnotationsListAPI)
+                      (Proxy :: Proxy LayersVolumeAnnotationsListResource)
                       r
                       u

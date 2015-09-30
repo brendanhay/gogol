@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List a specific saved ad style for the specified account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsSavedadstylesGet@.
-module AdSense.Accounts.Savedadstyles.Get
+module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
     (
     -- * REST Resource
-      AccountsSavedadstylesGetAPI
+      AccountsSavedadstylesGetResource
 
     -- * Creating a Request
-    , accountsSavedadstylesGet
-    , AccountsSavedadstylesGet
+    , accountsSavedadstylesGet'
+    , AccountsSavedadstylesGet'
 
     -- * Request Lenses
     , asgQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsSavedadstylesGet@ which the
--- 'AccountsSavedadstylesGet' request conforms to.
-type AccountsSavedadstylesGetAPI =
+-- 'AccountsSavedadstylesGet'' request conforms to.
+type AccountsSavedadstylesGetResource =
      "accounts" :>
        Capture "accountId" Text :>
          "savedadstyles" :>
            Capture "savedAdStyleId" Text :>
-             Get '[JSON] SavedAdStyle
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] SavedAdStyle
 
 -- | List a specific saved ad style for the specified account.
 --
--- /See:/ 'accountsSavedadstylesGet' smart constructor.
-data AccountsSavedadstylesGet = AccountsSavedadstylesGet
+-- /See:/ 'accountsSavedadstylesGet'' smart constructor.
+data AccountsSavedadstylesGet' = AccountsSavedadstylesGet'
     { _asgQuotaUser      :: !(Maybe Text)
     , _asgPrettyPrint    :: !Bool
     , _asgSavedAdStyleId :: !Text
@@ -64,7 +71,7 @@ data AccountsSavedadstylesGet = AccountsSavedadstylesGet
     , _asgKey            :: !(Maybe Text)
     , _asgOauthToken     :: !(Maybe Text)
     , _asgFields         :: !(Maybe Text)
-    , _asgAlt            :: !Text
+    , _asgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesGet'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data AccountsSavedadstylesGet = AccountsSavedadstylesGet
 -- * 'asgFields'
 --
 -- * 'asgAlt'
-accountsSavedadstylesGet
+accountsSavedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> Text -- ^ 'accountId'
-    -> AccountsSavedadstylesGet
-accountsSavedadstylesGet pAsgSavedAdStyleId_ pAsgAccountId_ =
-    AccountsSavedadstylesGet
+    -> AccountsSavedadstylesGet'
+accountsSavedadstylesGet' pAsgSavedAdStyleId_ pAsgAccountId_ =
+    AccountsSavedadstylesGet'
     { _asgQuotaUser = Nothing
     , _asgPrettyPrint = True
     , _asgSavedAdStyleId = pAsgSavedAdStyleId_
@@ -102,7 +109,7 @@ accountsSavedadstylesGet pAsgSavedAdStyleId_ pAsgAccountId_ =
     , _asgKey = Nothing
     , _asgOauthToken = Nothing
     , _asgFields = Nothing
-    , _asgAlt = "json"
+    , _asgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,23 +160,24 @@ asgFields
   = lens _asgFields (\ s a -> s{_asgFields = a})
 
 -- | Data format for the response.
-asgAlt :: Lens' AccountsSavedadstylesGet' Text
+asgAlt :: Lens' AccountsSavedadstylesGet' Alt
 asgAlt = lens _asgAlt (\ s a -> s{_asgAlt = a})
 
 instance GoogleRequest AccountsSavedadstylesGet'
          where
         type Rs AccountsSavedadstylesGet' = SavedAdStyle
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsSavedadstylesGet{..}
-          = go _asgQuotaUser _asgPrettyPrint _asgSavedAdStyleId
+        requestWithRoute r u AccountsSavedadstylesGet'{..}
+          = go _asgQuotaUser (Just _asgPrettyPrint)
+              _asgSavedAdStyleId
               _asgUserIp
               _asgAccountId
               _asgKey
               _asgOauthToken
               _asgFields
-              _asgAlt
+              (Just _asgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsSavedadstylesGetAPI)
+                      (Proxy :: Proxy AccountsSavedadstylesGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the specified Group resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsGroupsDelete@.
-module Clouduseraccounts.Groups.Delete
+module Network.Google.Resource.Clouduseraccounts.Groups.Delete
     (
     -- * REST Resource
-      GroupsDeleteAPI
+      GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete
-    , GroupsDelete
+    , groupsDelete'
+    , GroupsDelete'
 
     -- * Request Lenses
     , gdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsGroupsDelete@ which the
--- 'GroupsDelete' request conforms to.
-type GroupsDeleteAPI =
+-- 'GroupsDelete'' request conforms to.
+type GroupsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "groups" :>
-           Capture "groupName" Text :> Delete '[JSON] Operation
+           Capture "groupName" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified Group resource.
 --
--- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+-- /See:/ 'groupsDelete'' smart constructor.
+data GroupsDelete' = GroupsDelete'
     { _gdQuotaUser   :: !(Maybe Text)
     , _gdPrettyPrint :: !Bool
     , _gdProject     :: !Text
@@ -63,7 +71,7 @@ data GroupsDelete = GroupsDelete
     , _gdGroupName   :: !Text
     , _gdOauthToken  :: !(Maybe Text)
     , _gdFields      :: !(Maybe Text)
-    , _gdAlt         :: !Text
+    , _gdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GroupsDelete = GroupsDelete
 -- * 'gdFields'
 --
 -- * 'gdAlt'
-groupsDelete
+groupsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'groupName'
-    -> GroupsDelete
-groupsDelete pGdProject_ pGdGroupName_ =
-    GroupsDelete
+    -> GroupsDelete'
+groupsDelete' pGdProject_ pGdGroupName_ =
+    GroupsDelete'
     { _gdQuotaUser = Nothing
     , _gdPrettyPrint = True
     , _gdProject = pGdProject_
@@ -101,7 +109,7 @@ groupsDelete pGdProject_ pGdGroupName_ =
     , _gdGroupName = pGdGroupName_
     , _gdOauthToken = Nothing
     , _gdFields = Nothing
-    , _gdAlt = "json"
+    , _gdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,23 @@ gdFields :: Lens' GroupsDelete' (Maybe Text)
 gdFields = lens _gdFields (\ s a -> s{_gdFields = a})
 
 -- | Data format for the response.
-gdAlt :: Lens' GroupsDelete' Text
+gdAlt :: Lens' GroupsDelete' Alt
 gdAlt = lens _gdAlt (\ s a -> s{_gdAlt = a})
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = Operation
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u GroupsDelete{..}
-          = go _gdQuotaUser _gdPrettyPrint _gdProject _gdUserIp
+        requestWithRoute r u GroupsDelete'{..}
+          = go _gdQuotaUser (Just _gdPrettyPrint) _gdProject
+              _gdUserIp
               _gdKey
               _gdGroupName
               _gdOauthToken
               _gdFields
-              _gdAlt
+              (Just _gdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsDeleteResource)
+                      r
                       u

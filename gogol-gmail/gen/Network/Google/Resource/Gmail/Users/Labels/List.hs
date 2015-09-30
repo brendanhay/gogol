@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all labels in the user\'s mailbox.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersLabelsList@.
-module Gmail.Users.Labels.List
+module Network.Google.Resource.Gmail.Users.Labels.List
     (
     -- * REST Resource
-      UsersLabelsListAPI
+      UsersLabelsListResource
 
     -- * Creating a Request
-    , usersLabelsList
-    , UsersLabelsList
+    , usersLabelsList'
+    , UsersLabelsList'
 
     -- * Request Lenses
     , ullQuotaUser
@@ -43,15 +44,23 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersLabelsList@ which the
--- 'UsersLabelsList' request conforms to.
-type UsersLabelsListAPI =
+-- 'UsersLabelsList'' request conforms to.
+type UsersLabelsListResource =
      Capture "userId" Text :>
-       "labels" :> Get '[JSON] ListLabelsResponse
+       "labels" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] ListLabelsResponse
 
 -- | Lists all labels in the user\'s mailbox.
 --
--- /See:/ 'usersLabelsList' smart constructor.
-data UsersLabelsList = UsersLabelsList
+-- /See:/ 'usersLabelsList'' smart constructor.
+data UsersLabelsList' = UsersLabelsList'
     { _ullQuotaUser   :: !(Maybe Text)
     , _ullPrettyPrint :: !Bool
     , _ullUserIp      :: !(Maybe Text)
@@ -59,7 +68,7 @@ data UsersLabelsList = UsersLabelsList
     , _ullKey         :: !(Maybe Text)
     , _ullOauthToken  :: !(Maybe Text)
     , _ullFields      :: !(Maybe Text)
-    , _ullAlt         :: !Text
+    , _ullAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsList'' with the minimum fields required to make a request.
@@ -81,11 +90,11 @@ data UsersLabelsList = UsersLabelsList
 -- * 'ullFields'
 --
 -- * 'ullAlt'
-usersLabelsList
+usersLabelsList'
     :: Text
-    -> UsersLabelsList
-usersLabelsList pUllUserId_ =
-    UsersLabelsList
+    -> UsersLabelsList'
+usersLabelsList' pUllUserId_ =
+    UsersLabelsList'
     { _ullQuotaUser = Nothing
     , _ullPrettyPrint = True
     , _ullUserIp = Nothing
@@ -93,7 +102,7 @@ usersLabelsList pUllUserId_ =
     , _ullKey = Nothing
     , _ullOauthToken = Nothing
     , _ullFields = Nothing
-    , _ullAlt = "json"
+    , _ullAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +148,21 @@ ullFields
   = lens _ullFields (\ s a -> s{_ullFields = a})
 
 -- | Data format for the response.
-ullAlt :: Lens' UsersLabelsList' Text
+ullAlt :: Lens' UsersLabelsList' Alt
 ullAlt = lens _ullAlt (\ s a -> s{_ullAlt = a})
 
 instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersLabelsList{..}
-          = go _ullQuotaUser _ullPrettyPrint _ullUserIp
+        requestWithRoute r u UsersLabelsList'{..}
+          = go _ullQuotaUser (Just _ullPrettyPrint) _ullUserIp
               _ullUserId
               _ullKey
               _ullOauthToken
               _ullFields
-              _ullAlt
+              (Just _ullAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersLabelsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersLabelsListResource)
                       r
                       u

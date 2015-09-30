@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,168 +20,176 @@
 -- | Return all parent ids of the specified asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineAssetsParentsList@.
-module Mapsengine.Assets.Parents.List
+module Network.Google.Resource.Mapsengine.Assets.Parents.List
     (
     -- * REST Resource
-      AssetsParentsListAPI
+      AssetsParentsListResource
 
     -- * Creating a Request
-    , assetsParentsList
-    , AssetsParentsList
+    , assetsParentsList'
+    , AssetsParentsList'
 
     -- * Request Lenses
-    , aplQuotaUser
-    , aplPrettyPrint
-    , aplUserIp
-    , aplKey
-    , aplId
-    , aplPageToken
-    , aplOauthToken
-    , aplMaxResults
-    , aplFields
-    , aplAlt
+    , assQuotaUser
+    , assPrettyPrint
+    , assUserIp
+    , assKey
+    , assId
+    , assPageToken
+    , assOauthToken
+    , assMaxResults
+    , assFields
+    , assAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineAssetsParentsList@ which the
--- 'AssetsParentsList' request conforms to.
-type AssetsParentsListAPI =
+-- 'AssetsParentsList'' request conforms to.
+type AssetsParentsListResource =
      "assets" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ParentsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified asset.
 --
--- /See:/ 'assetsParentsList' smart constructor.
-data AssetsParentsList = AssetsParentsList
-    { _aplQuotaUser   :: !(Maybe Text)
-    , _aplPrettyPrint :: !Bool
-    , _aplUserIp      :: !(Maybe Text)
-    , _aplKey         :: !(Maybe Text)
-    , _aplId          :: !Text
-    , _aplPageToken   :: !(Maybe Text)
-    , _aplOauthToken  :: !(Maybe Text)
-    , _aplMaxResults  :: !(Maybe Word32)
-    , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Text
+-- /See:/ 'assetsParentsList'' smart constructor.
+data AssetsParentsList' = AssetsParentsList'
+    { _assQuotaUser   :: !(Maybe Text)
+    , _assPrettyPrint :: !Bool
+    , _assUserIp      :: !(Maybe Text)
+    , _assKey         :: !(Maybe Text)
+    , _assId          :: !Text
+    , _assPageToken   :: !(Maybe Text)
+    , _assOauthToken  :: !(Maybe Text)
+    , _assMaxResults  :: !(Maybe Word32)
+    , _assFields      :: !(Maybe Text)
+    , _assAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssetsParentsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aplQuotaUser'
+-- * 'assQuotaUser'
 --
--- * 'aplPrettyPrint'
+-- * 'assPrettyPrint'
 --
--- * 'aplUserIp'
+-- * 'assUserIp'
 --
--- * 'aplKey'
+-- * 'assKey'
 --
--- * 'aplId'
+-- * 'assId'
 --
--- * 'aplPageToken'
+-- * 'assPageToken'
 --
--- * 'aplOauthToken'
+-- * 'assOauthToken'
 --
--- * 'aplMaxResults'
+-- * 'assMaxResults'
 --
--- * 'aplFields'
+-- * 'assFields'
 --
--- * 'aplAlt'
-assetsParentsList
+-- * 'assAlt'
+assetsParentsList'
     :: Text -- ^ 'id'
-    -> AssetsParentsList
-assetsParentsList pAplId_ =
-    AssetsParentsList
-    { _aplQuotaUser = Nothing
-    , _aplPrettyPrint = True
-    , _aplUserIp = Nothing
-    , _aplKey = Nothing
-    , _aplId = pAplId_
-    , _aplPageToken = Nothing
-    , _aplOauthToken = Nothing
-    , _aplMaxResults = Nothing
-    , _aplFields = Nothing
-    , _aplAlt = "json"
+    -> AssetsParentsList'
+assetsParentsList' pAssId_ =
+    AssetsParentsList'
+    { _assQuotaUser = Nothing
+    , _assPrettyPrint = True
+    , _assUserIp = Nothing
+    , _assKey = Nothing
+    , _assId = pAssId_
+    , _assPageToken = Nothing
+    , _assOauthToken = Nothing
+    , _assMaxResults = Nothing
+    , _assFields = Nothing
+    , _assAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aplQuotaUser :: Lens' AssetsParentsList' (Maybe Text)
-aplQuotaUser
-  = lens _aplQuotaUser (\ s a -> s{_aplQuotaUser = a})
+assQuotaUser :: Lens' AssetsParentsList' (Maybe Text)
+assQuotaUser
+  = lens _assQuotaUser (\ s a -> s{_assQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aplPrettyPrint :: Lens' AssetsParentsList' Bool
-aplPrettyPrint
-  = lens _aplPrettyPrint
-      (\ s a -> s{_aplPrettyPrint = a})
+assPrettyPrint :: Lens' AssetsParentsList' Bool
+assPrettyPrint
+  = lens _assPrettyPrint
+      (\ s a -> s{_assPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aplUserIp :: Lens' AssetsParentsList' (Maybe Text)
-aplUserIp
-  = lens _aplUserIp (\ s a -> s{_aplUserIp = a})
+assUserIp :: Lens' AssetsParentsList' (Maybe Text)
+assUserIp
+  = lens _assUserIp (\ s a -> s{_assUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aplKey :: Lens' AssetsParentsList' (Maybe Text)
-aplKey = lens _aplKey (\ s a -> s{_aplKey = a})
+assKey :: Lens' AssetsParentsList' (Maybe Text)
+assKey = lens _assKey (\ s a -> s{_assKey = a})
 
 -- | The ID of the asset whose parents will be listed.
-aplId :: Lens' AssetsParentsList' Text
-aplId = lens _aplId (\ s a -> s{_aplId = a})
+assId :: Lens' AssetsParentsList' Text
+assId = lens _assId (\ s a -> s{_assId = a})
 
 -- | The continuation token, used to page through large result sets. To get
 -- the next page of results, set this parameter to the value of
 -- nextPageToken from the previous response.
-aplPageToken :: Lens' AssetsParentsList' (Maybe Text)
-aplPageToken
-  = lens _aplPageToken (\ s a -> s{_aplPageToken = a})
+assPageToken :: Lens' AssetsParentsList' (Maybe Text)
+assPageToken
+  = lens _assPageToken (\ s a -> s{_assPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aplOauthToken :: Lens' AssetsParentsList' (Maybe Text)
-aplOauthToken
-  = lens _aplOauthToken
-      (\ s a -> s{_aplOauthToken = a})
+assOauthToken :: Lens' AssetsParentsList' (Maybe Text)
+assOauthToken
+  = lens _assOauthToken
+      (\ s a -> s{_assOauthToken = a})
 
 -- | The maximum number of items to include in a single response page. The
 -- maximum supported value is 50.
-aplMaxResults :: Lens' AssetsParentsList' (Maybe Word32)
-aplMaxResults
-  = lens _aplMaxResults
-      (\ s a -> s{_aplMaxResults = a})
+assMaxResults :: Lens' AssetsParentsList' (Maybe Word32)
+assMaxResults
+  = lens _assMaxResults
+      (\ s a -> s{_assMaxResults = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aplFields :: Lens' AssetsParentsList' (Maybe Text)
-aplFields
-  = lens _aplFields (\ s a -> s{_aplFields = a})
+assFields :: Lens' AssetsParentsList' (Maybe Text)
+assFields
+  = lens _assFields (\ s a -> s{_assFields = a})
 
 -- | Data format for the response.
-aplAlt :: Lens' AssetsParentsList' Text
-aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
+assAlt :: Lens' AssetsParentsList' Alt
+assAlt = lens _assAlt (\ s a -> s{_assAlt = a})
 
 instance GoogleRequest AssetsParentsList' where
         type Rs AssetsParentsList' = ParentsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u AssetsParentsList{..}
-          = go _aplQuotaUser _aplPrettyPrint _aplUserIp _aplKey
-              _aplId
-              _aplPageToken
-              _aplOauthToken
-              _aplMaxResults
-              _aplFields
-              _aplAlt
+        requestWithRoute r u AssetsParentsList'{..}
+          = go _assQuotaUser (Just _assPrettyPrint) _assUserIp
+              _assKey
+              _assId
+              _assPageToken
+              _assOauthToken
+              _assMaxResults
+              _assFields
+              (Just _assAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AssetsParentsListAPI)
+                      (Proxy :: Proxy AssetsParentsListResource)
                       r
                       u

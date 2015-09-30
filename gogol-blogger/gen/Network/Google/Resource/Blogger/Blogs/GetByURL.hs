@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve a Blog by URL.
 --
 -- /See:/ <https://developers.google.com/blogger/docs/3.0/getting_started Blogger API Reference> for @BloggerBlogsGetByURL@.
-module Blogger.Blogs.GetByURL
+module Network.Google.Resource.Blogger.Blogs.GetByURL
     (
     -- * REST Resource
-      BlogsGetByURLAPI
+      BlogsGetByURLResource
 
     -- * Creating a Request
-    , blogsGetByURL
-    , BlogsGetByURL
+    , blogsGetByURL'
+    , BlogsGetByURL'
 
     -- * Request Lenses
     , bgbuQuotaUser
@@ -44,26 +45,33 @@ import           Network.Google.Blogger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BloggerBlogsGetByURL@ which the
--- 'BlogsGetByURL' request conforms to.
-type BlogsGetByURLAPI =
+-- 'BlogsGetByURL'' request conforms to.
+type BlogsGetByURLResource =
      "blogs" :>
        "byurl" :>
-         QueryParam "url" Text :>
-           QueryParam "view" Text :> Get '[JSON] Blog
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "url" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "view" BloggerBlogsGetByURLView :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Blog
 
 -- | Retrieve a Blog by URL.
 --
--- /See:/ 'blogsGetByURL' smart constructor.
-data BlogsGetByURL = BlogsGetByURL
+-- /See:/ 'blogsGetByURL'' smart constructor.
+data BlogsGetByURL' = BlogsGetByURL'
     { _bgbuQuotaUser   :: !(Maybe Text)
     , _bgbuPrettyPrint :: !Bool
     , _bgbuUserIp      :: !(Maybe Text)
     , _bgbuUrl         :: !Text
     , _bgbuKey         :: !(Maybe Text)
-    , _bgbuView        :: !(Maybe Text)
+    , _bgbuView        :: !(Maybe BloggerBlogsGetByURLView)
     , _bgbuOauthToken  :: !(Maybe Text)
     , _bgbuFields      :: !(Maybe Text)
-    , _bgbuAlt         :: !Text
+    , _bgbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGetByURL'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data BlogsGetByURL = BlogsGetByURL
 -- * 'bgbuFields'
 --
 -- * 'bgbuAlt'
-blogsGetByURL
+blogsGetByURL'
     :: Text -- ^ 'url'
-    -> BlogsGetByURL
-blogsGetByURL pBgbuUrl_ =
-    BlogsGetByURL
+    -> BlogsGetByURL'
+blogsGetByURL' pBgbuUrl_ =
+    BlogsGetByURL'
     { _bgbuQuotaUser = Nothing
     , _bgbuPrettyPrint = True
     , _bgbuUserIp = Nothing
@@ -100,7 +108,7 @@ blogsGetByURL pBgbuUrl_ =
     , _bgbuView = Nothing
     , _bgbuOauthToken = Nothing
     , _bgbuFields = Nothing
-    , _bgbuAlt = "json"
+    , _bgbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,7 +143,7 @@ bgbuKey = lens _bgbuKey (\ s a -> s{_bgbuKey = a})
 
 -- | Access level with which to view the blog. Note that some fields require
 -- elevated access.
-bgbuView :: Lens' BlogsGetByURL' (Maybe Text)
+bgbuView :: Lens' BlogsGetByURL' (Maybe BloggerBlogsGetByURLView)
 bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -150,20 +158,23 @@ bgbuFields
   = lens _bgbuFields (\ s a -> s{_bgbuFields = a})
 
 -- | Data format for the response.
-bgbuAlt :: Lens' BlogsGetByURL' Text
+bgbuAlt :: Lens' BlogsGetByURL' Alt
 bgbuAlt = lens _bgbuAlt (\ s a -> s{_bgbuAlt = a})
 
 instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
         request = requestWithRoute defReq bloggerURL
-        requestWithRoute r u BlogsGetByURL{..}
-          = go _bgbuQuotaUser _bgbuPrettyPrint _bgbuUserIp
+        requestWithRoute r u BlogsGetByURL'{..}
+          = go _bgbuQuotaUser (Just _bgbuPrettyPrint)
+              _bgbuUserIp
               (Just _bgbuUrl)
               _bgbuKey
               _bgbuView
               _bgbuOauthToken
               _bgbuFields
-              _bgbuAlt
+              (Just _bgbuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BlogsGetByURLAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy BlogsGetByURLResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update an existing experiment.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsUpdate@.
-module Analytics.Management.Experiments.Update
+module Network.Google.Resource.Analytics.Management.Experiments.Update
     (
     -- * REST Resource
-      ManagementExperimentsUpdateAPI
+      ManagementExperimentsUpdateResource
 
     -- * Creating a Request
-    , managementExperimentsUpdate
-    , ManagementExperimentsUpdate
+    , managementExperimentsUpdate'
+    , ManagementExperimentsUpdate'
 
     -- * Request Lenses
     , meuQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsUpdate@ which the
--- 'ManagementExperimentsUpdate' request conforms to.
-type ManagementExperimentsUpdateAPI =
+-- 'ManagementExperimentsUpdate'' request conforms to.
+type ManagementExperimentsUpdateResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -56,12 +57,20 @@ type ManagementExperimentsUpdateAPI =
                "profiles" :>
                  Capture "profileId" Text :>
                    "experiments" :>
-                     Capture "experimentId" Text :> Put '[JSON] Experiment
+                     Capture "experimentId" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Put '[JSON] Experiment
 
 -- | Update an existing experiment.
 --
--- /See:/ 'managementExperimentsUpdate' smart constructor.
-data ManagementExperimentsUpdate = ManagementExperimentsUpdate
+-- /See:/ 'managementExperimentsUpdate'' smart constructor.
+data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     { _meuQuotaUser     :: !(Maybe Text)
     , _meuPrettyPrint   :: !Bool
     , _meuWebPropertyId :: !Text
@@ -72,7 +81,7 @@ data ManagementExperimentsUpdate = ManagementExperimentsUpdate
     , _meuKey           :: !(Maybe Text)
     , _meuOauthToken    :: !(Maybe Text)
     , _meuFields        :: !(Maybe Text)
-    , _meuAlt           :: !Text
+    , _meuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
@@ -100,14 +109,14 @@ data ManagementExperimentsUpdate = ManagementExperimentsUpdate
 -- * 'meuFields'
 --
 -- * 'meuAlt'
-managementExperimentsUpdate
+managementExperimentsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
-    -> ManagementExperimentsUpdate
-managementExperimentsUpdate pMeuWebPropertyId_ pMeuProfileId_ pMeuAccountId_ pMeuExperimentId_ =
-    ManagementExperimentsUpdate
+    -> ManagementExperimentsUpdate'
+managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuAccountId_ pMeuExperimentId_ =
+    ManagementExperimentsUpdate'
     { _meuQuotaUser = Nothing
     , _meuPrettyPrint = False
     , _meuWebPropertyId = pMeuWebPropertyId_
@@ -118,7 +127,7 @@ managementExperimentsUpdate pMeuWebPropertyId_ pMeuProfileId_ pMeuAccountId_ pMe
     , _meuKey = Nothing
     , _meuOauthToken = Nothing
     , _meuFields = Nothing
-    , _meuAlt = "json"
+    , _meuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,15 +189,16 @@ meuFields
   = lens _meuFields (\ s a -> s{_meuFields = a})
 
 -- | Data format for the response.
-meuAlt :: Lens' ManagementExperimentsUpdate' Text
+meuAlt :: Lens' ManagementExperimentsUpdate' Alt
 meuAlt = lens _meuAlt (\ s a -> s{_meuAlt = a})
 
 instance GoogleRequest ManagementExperimentsUpdate'
          where
         type Rs ManagementExperimentsUpdate' = Experiment
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsUpdate{..}
-          = go _meuQuotaUser _meuPrettyPrint _meuWebPropertyId
+        requestWithRoute r u ManagementExperimentsUpdate'{..}
+          = go _meuQuotaUser (Just _meuPrettyPrint)
+              _meuWebPropertyId
               _meuUserIp
               _meuProfileId
               _meuAccountId
@@ -196,9 +206,9 @@ instance GoogleRequest ManagementExperimentsUpdate'
               _meuKey
               _meuOauthToken
               _meuFields
-              _meuAlt
+              (Just _meuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsUpdateAPI)
+                      (Proxy :: Proxy ManagementExperimentsUpdateResource)
                       r
                       u

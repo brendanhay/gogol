@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the volume annotation.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksLayersVolumeAnnotationsGet@.
-module Books.Layers.VolumeAnnotations.Get
+module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
     (
     -- * REST Resource
-      LayersVolumeAnnotationsGetAPI
+      LayersVolumeAnnotationsGetResource
 
     -- * Creating a Request
-    , layersVolumeAnnotationsGet
-    , LayersVolumeAnnotationsGet
+    , layersVolumeAnnotationsGet'
+    , LayersVolumeAnnotationsGet'
 
     -- * Request Lenses
     , lvagQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksLayersVolumeAnnotationsGet@ which the
--- 'LayersVolumeAnnotationsGet' request conforms to.
-type LayersVolumeAnnotationsGetAPI =
+-- 'LayersVolumeAnnotationsGet'' request conforms to.
+type LayersVolumeAnnotationsGetResource =
      "volumes" :>
        Capture "volumeId" Text :>
          "layers" :>
            Capture "layerId" Text :>
              "annotations" :>
                Capture "annotationId" Text :>
-                 QueryParam "locale" Text :>
-                   QueryParam "source" Text :>
-                     Get '[JSON] Volumeannotation
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "locale" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "source" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :>
+                                   Get '[JSON] Volumeannotation
 
 -- | Gets the volume annotation.
 --
--- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
-data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
+-- /See:/ 'layersVolumeAnnotationsGet'' smart constructor.
+data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
     { _lvagQuotaUser    :: !(Maybe Text)
     , _lvagPrettyPrint  :: !Bool
     , _lvagUserIp       :: !(Maybe Text)
@@ -74,7 +82,7 @@ data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
     , _lvagOauthToken   :: !(Maybe Text)
     , _lvagLayerId      :: !Text
     , _lvagFields       :: !(Maybe Text)
-    , _lvagAlt          :: !Text
+    , _lvagAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsGet'' with the minimum fields required to make a request.
@@ -104,13 +112,13 @@ data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
 -- * 'lvagFields'
 --
 -- * 'lvagAlt'
-layersVolumeAnnotationsGet
+layersVolumeAnnotationsGet'
     :: Text -- ^ 'annotationId'
     -> Text -- ^ 'volumeId'
     -> Text -- ^ 'layerId'
-    -> LayersVolumeAnnotationsGet
-layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
-    LayersVolumeAnnotationsGet
+    -> LayersVolumeAnnotationsGet'
+layersVolumeAnnotationsGet' pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
+    LayersVolumeAnnotationsGet'
     { _lvagQuotaUser = Nothing
     , _lvagPrettyPrint = True
     , _lvagUserIp = Nothing
@@ -122,7 +130,7 @@ layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
     , _lvagOauthToken = Nothing
     , _lvagLayerId = pLvagLayerId_
     , _lvagFields = Nothing
-    , _lvagAlt = "json"
+    , _lvagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -190,7 +198,7 @@ lvagFields
   = lens _lvagFields (\ s a -> s{_lvagFields = a})
 
 -- | Data format for the response.
-lvagAlt :: Lens' LayersVolumeAnnotationsGet' Text
+lvagAlt :: Lens' LayersVolumeAnnotationsGet' Alt
 lvagAlt = lens _lvagAlt (\ s a -> s{_lvagAlt = a})
 
 instance GoogleRequest LayersVolumeAnnotationsGet'
@@ -198,8 +206,9 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
         type Rs LayersVolumeAnnotationsGet' =
              Volumeannotation
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u LayersVolumeAnnotationsGet{..}
-          = go _lvagQuotaUser _lvagPrettyPrint _lvagUserIp
+        requestWithRoute r u LayersVolumeAnnotationsGet'{..}
+          = go _lvagQuotaUser (Just _lvagPrettyPrint)
+              _lvagUserIp
               _lvagLocale
               _lvagKey
               _lvagAnnotationId
@@ -208,9 +217,9 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
               _lvagOauthToken
               _lvagLayerId
               _lvagFields
-              _lvagAlt
+              (Just _lvagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersVolumeAnnotationsGetAPI)
+                      (Proxy :: Proxy LayersVolumeAnnotationsGetResource)
                       r
                       u

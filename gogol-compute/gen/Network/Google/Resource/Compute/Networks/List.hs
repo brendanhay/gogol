@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeNetworksList@.
-module Compute.Networks.List
+module Network.Google.Resource.Compute.Networks.List
     (
     -- * REST Resource
-      NetworksListAPI
+      NetworksListResource
 
     -- * Creating a Request
-    , networksList
-    , NetworksList
+    , networksList'
+    , NetworksList'
 
     -- * Request Lenses
     , nlQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeNetworksList@ which the
--- 'NetworksList' request conforms to.
-type NetworksListAPI =
+-- 'NetworksList'' request conforms to.
+type NetworksListResource =
      Capture "project" Text :>
        "global" :>
          "networks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] NetworkList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] NetworkList
 
 -- | Retrieves the list of network resources available to the specified
 -- project.
 --
--- /See:/ 'networksList' smart constructor.
-data NetworksList = NetworksList
+-- /See:/ 'networksList'' smart constructor.
+data NetworksList' = NetworksList'
     { _nlQuotaUser   :: !(Maybe Text)
     , _nlPrettyPrint :: !Bool
     , _nlProject     :: !Text
@@ -72,7 +79,7 @@ data NetworksList = NetworksList
     , _nlOauthToken  :: !(Maybe Text)
     , _nlMaxResults  :: !Word32
     , _nlFields      :: !(Maybe Text)
-    , _nlAlt         :: !Text
+    , _nlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data NetworksList = NetworksList
 -- * 'nlFields'
 --
 -- * 'nlAlt'
-networksList
+networksList'
     :: Text -- ^ 'project'
-    -> NetworksList
-networksList pNlProject_ =
-    NetworksList
+    -> NetworksList'
+networksList' pNlProject_ =
+    NetworksList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
     , _nlProject = pNlProject_
@@ -115,7 +122,7 @@ networksList pNlProject_ =
     , _nlOauthToken = Nothing
     , _nlMaxResults = 500
     , _nlFields = Nothing
-    , _nlAlt = "json"
+    , _nlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,21 +190,24 @@ nlFields :: Lens' NetworksList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
 -- | Data format for the response.
-nlAlt :: Lens' NetworksList' Text
+nlAlt :: Lens' NetworksList' Alt
 nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
 
 instance GoogleRequest NetworksList' where
         type Rs NetworksList' = NetworkList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u NetworksList{..}
-          = go _nlQuotaUser _nlPrettyPrint _nlProject _nlUserIp
+        requestWithRoute r u NetworksList'{..}
+          = go _nlQuotaUser (Just _nlPrettyPrint) _nlProject
+              _nlUserIp
               _nlKey
               _nlFilter
               _nlPageToken
               _nlOauthToken
               (Just _nlMaxResults)
               _nlFields
-              _nlAlt
+              (Just _nlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy NetworksListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy NetworksListResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one operating system by DART ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemsGet@.
-module DFAReporting.OperatingSystems.Get
+module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     (
     -- * REST Resource
-      OperatingSystemsGetAPI
+      OperatingSystemsGetResource
 
     -- * Creating a Request
-    , operatingSystemsGet
-    , OperatingSystemsGet
+    , operatingSystemsGet'
+    , OperatingSystemsGet'
 
     -- * Request Lenses
     , osgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOperatingSystemsGet@ which the
--- 'OperatingSystemsGet' request conforms to.
-type OperatingSystemsGetAPI =
+-- 'OperatingSystemsGet'' request conforms to.
+type OperatingSystemsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "operatingSystems" :>
-           Capture "dartId" Int64 :> Get '[JSON] OperatingSystem
+           Capture "dartId" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] OperatingSystem
 
 -- | Gets one operating system by DART ID.
 --
--- /See:/ 'operatingSystemsGet' smart constructor.
-data OperatingSystemsGet = OperatingSystemsGet
+-- /See:/ 'operatingSystemsGet'' smart constructor.
+data OperatingSystemsGet' = OperatingSystemsGet'
     { _osgQuotaUser   :: !(Maybe Text)
     , _osgPrettyPrint :: !Bool
     , _osgUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data OperatingSystemsGet = OperatingSystemsGet
     , _osgOauthToken  :: !(Maybe Text)
     , _osgDartId      :: !Int64
     , _osgFields      :: !(Maybe Text)
-    , _osgAlt         :: !Text
+    , _osgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data OperatingSystemsGet = OperatingSystemsGet
 -- * 'osgFields'
 --
 -- * 'osgAlt'
-operatingSystemsGet
+operatingSystemsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'dartId'
-    -> OperatingSystemsGet
-operatingSystemsGet pOsgProfileId_ pOsgDartId_ =
-    OperatingSystemsGet
+    -> OperatingSystemsGet'
+operatingSystemsGet' pOsgProfileId_ pOsgDartId_ =
+    OperatingSystemsGet'
     { _osgQuotaUser = Nothing
     , _osgPrettyPrint = True
     , _osgUserIp = Nothing
@@ -101,7 +109,7 @@ operatingSystemsGet pOsgProfileId_ pOsgDartId_ =
     , _osgOauthToken = Nothing
     , _osgDartId = pOsgDartId_
     , _osgFields = Nothing
-    , _osgAlt = "json"
+    , _osgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ osgFields
   = lens _osgFields (\ s a -> s{_osgFields = a})
 
 -- | Data format for the response.
-osgAlt :: Lens' OperatingSystemsGet' Text
+osgAlt :: Lens' OperatingSystemsGet' Alt
 osgAlt = lens _osgAlt (\ s a -> s{_osgAlt = a})
 
 instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemsGet{..}
-          = go _osgQuotaUser _osgPrettyPrint _osgUserIp
+        requestWithRoute r u OperatingSystemsGet'{..}
+          = go _osgQuotaUser (Just _osgPrettyPrint) _osgUserIp
               _osgProfileId
               _osgKey
               _osgOauthToken
               _osgDartId
               _osgFields
-              _osgAlt
+              (Just _osgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OperatingSystemsGetAPI)
+                      (Proxy :: Proxy OperatingSystemsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified operation.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsZonesOperationsGet@.
-module Container.Projects.Zones.Operations.Get
+module Network.Google.Resource.Container.Projects.Zones.Operations.Get
     (
     -- * REST Resource
-      ProjectsZonesOperationsGetAPI
+      ProjectsZonesOperationsGetResource
 
     -- * Creating a Request
-    , projectsZonesOperationsGet
-    , ProjectsZonesOperationsGet
+    , projectsZonesOperationsGet'
+    , ProjectsZonesOperationsGet'
 
     -- * Request Lenses
     , pzogQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsZonesOperationsGet@ which the
--- 'ProjectsZonesOperationsGet' request conforms to.
-type ProjectsZonesOperationsGetAPI =
+-- 'ProjectsZonesOperationsGet'' request conforms to.
+type ProjectsZonesOperationsGetResource =
      Capture "projectId" Text :>
        "zones" :>
          Capture "zoneId" Text :>
            "operations" :>
-             Capture "operationId" Text :> Get '[JSON] Operation
+             Capture "operationId" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Gets the specified operation.
 --
--- /See:/ 'projectsZonesOperationsGet' smart constructor.
-data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
+-- /See:/ 'projectsZonesOperationsGet'' smart constructor.
+data ProjectsZonesOperationsGet' = ProjectsZonesOperationsGet'
     { _pzogQuotaUser   :: !(Maybe Text)
     , _pzogPrettyPrint :: !Bool
     , _pzogUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
     , _pzogOperationId :: !Text
     , _pzogOauthToken  :: !(Maybe Text)
     , _pzogFields      :: !(Maybe Text)
-    , _pzogAlt         :: !Text
+    , _pzogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
 -- * 'pzogFields'
 --
 -- * 'pzogAlt'
-projectsZonesOperationsGet
+projectsZonesOperationsGet'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'operationId'
-    -> ProjectsZonesOperationsGet
-projectsZonesOperationsGet pPzogZoneId_ pPzogProjectId_ pPzogOperationId_ =
-    ProjectsZonesOperationsGet
+    -> ProjectsZonesOperationsGet'
+projectsZonesOperationsGet' pPzogZoneId_ pPzogProjectId_ pPzogOperationId_ =
+    ProjectsZonesOperationsGet'
     { _pzogQuotaUser = Nothing
     , _pzogPrettyPrint = True
     , _pzogUserIp = Nothing
@@ -108,7 +116,7 @@ projectsZonesOperationsGet pPzogZoneId_ pPzogProjectId_ pPzogOperationId_ =
     , _pzogOperationId = pPzogOperationId_
     , _pzogOauthToken = Nothing
     , _pzogFields = Nothing
-    , _pzogAlt = "json"
+    , _pzogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,24 +176,25 @@ pzogFields
   = lens _pzogFields (\ s a -> s{_pzogFields = a})
 
 -- | Data format for the response.
-pzogAlt :: Lens' ProjectsZonesOperationsGet' Text
+pzogAlt :: Lens' ProjectsZonesOperationsGet' Alt
 pzogAlt = lens _pzogAlt (\ s a -> s{_pzogAlt = a})
 
 instance GoogleRequest ProjectsZonesOperationsGet'
          where
         type Rs ProjectsZonesOperationsGet' = Operation
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsZonesOperationsGet{..}
-          = go _pzogQuotaUser _pzogPrettyPrint _pzogUserIp
+        requestWithRoute r u ProjectsZonesOperationsGet'{..}
+          = go _pzogQuotaUser (Just _pzogPrettyPrint)
+              _pzogUserIp
               _pzogZoneId
               _pzogKey
               _pzogProjectId
               _pzogOperationId
               _pzogOauthToken
               _pzogFields
-              _pzogAlt
+              (Just _pzogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsZonesOperationsGetAPI)
+                      (Proxy :: Proxy ProjectsZonesOperationsGetResource)
                       r
                       u

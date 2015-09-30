@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove membership.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryMembersDelete@.
-module Directory.Members.Delete
+module Network.Google.Resource.Directory.Members.Delete
     (
     -- * REST Resource
-      MembersDeleteAPI
+      MembersDeleteResource
 
     -- * Creating a Request
-    , membersDelete
-    , MembersDelete
+    , membersDelete'
+    , MembersDelete'
 
     -- * Request Lenses
     , mdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryMembersDelete@ which the
--- 'MembersDelete' request conforms to.
-type MembersDeleteAPI =
+-- 'MembersDelete'' request conforms to.
+type MembersDeleteResource =
      "groups" :>
        Capture "groupKey" Text :>
          "members" :>
-           Capture "memberKey" Text :> Delete '[JSON] ()
+           Capture "memberKey" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Remove membership.
 --
--- /See:/ 'membersDelete' smart constructor.
-data MembersDelete = MembersDelete
+-- /See:/ 'membersDelete'' smart constructor.
+data MembersDelete' = MembersDelete'
     { _mdQuotaUser   :: !(Maybe Text)
     , _mdMemberKey   :: !Text
     , _mdPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data MembersDelete = MembersDelete
     , _mdKey         :: !(Maybe Text)
     , _mdOauthToken  :: !(Maybe Text)
     , _mdFields      :: !(Maybe Text)
-    , _mdAlt         :: !Text
+    , _mdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data MembersDelete = MembersDelete
 -- * 'mdFields'
 --
 -- * 'mdAlt'
-membersDelete
+membersDelete'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
-    -> MembersDelete
-membersDelete pMdMemberKey_ pMdGroupKey_ =
-    MembersDelete
+    -> MembersDelete'
+membersDelete' pMdMemberKey_ pMdGroupKey_ =
+    MembersDelete'
     { _mdQuotaUser = Nothing
     , _mdMemberKey = pMdMemberKey_
     , _mdPrettyPrint = True
@@ -101,7 +109,7 @@ membersDelete pMdMemberKey_ pMdGroupKey_ =
     , _mdKey = Nothing
     , _mdOauthToken = Nothing
     , _mdFields = Nothing
-    , _mdAlt = "json"
+    , _mdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,20 +156,22 @@ mdFields :: Lens' MembersDelete' (Maybe Text)
 mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
 -- | Data format for the response.
-mdAlt :: Lens' MembersDelete' Text
+mdAlt :: Lens' MembersDelete' Alt
 mdAlt = lens _mdAlt (\ s a -> s{_mdAlt = a})
 
 instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u MembersDelete{..}
-          = go _mdQuotaUser _mdMemberKey _mdPrettyPrint
+        requestWithRoute r u MembersDelete'{..}
+          = go _mdQuotaUser _mdMemberKey (Just _mdPrettyPrint)
               _mdUserIp
               _mdGroupKey
               _mdKey
               _mdOauthToken
               _mdFields
-              _mdAlt
+              (Just _mdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MembersDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MembersDeleteResource)
+                      r
                       u

@@ -103,6 +103,87 @@ instance ToJSON InstanceGroupList where
                   ("selfLink" .=) <$> _iglSelfLink,
                   ("id" .=) <$> _iglId])
 
+-- | [Output Only] A map of scoped disk type lists.
+--
+-- /See:/ 'diskTypeAggregatedListItems' smart constructor.
+data DiskTypeAggregatedListItems =
+    DiskTypeAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiskTypeAggregatedListItems' with the minimum fields required to make a request.
+--
+diskTypeAggregatedListItems
+    :: DiskTypeAggregatedListItems
+diskTypeAggregatedListItems = DiskTypeAggregatedListItems
+
+instance FromJSON DiskTypeAggregatedListItems where
+        parseJSON
+          = withObject "DiskTypeAggregatedListItems"
+              (\ o -> pure DiskTypeAggregatedListItems)
+
+instance ToJSON DiskTypeAggregatedListItems where
+        toJSON = const (Object mempty)
+
+-- | [Output Only] Informational warning which replaces the list of instances
+-- when the list is empty.
+--
+-- /See:/ 'instancesScopedListWarning' smart constructor.
+data InstancesScopedListWarning = InstancesScopedListWarning
+    { _islwData    :: !(Maybe [InstancesScopedListWarningData])
+    , _islwCode    :: !(Maybe InstancesScopedListWarningCode)
+    , _islwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'islwData'
+--
+-- * 'islwCode'
+--
+-- * 'islwMessage'
+instancesScopedListWarning
+    :: InstancesScopedListWarning
+instancesScopedListWarning =
+    InstancesScopedListWarning
+    { _islwData = Nothing
+    , _islwCode = Nothing
+    , _islwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+islwData :: Lens' InstancesScopedListWarning [InstancesScopedListWarningData]
+islwData
+  = lens _islwData (\ s a -> s{_islwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+islwCode :: Lens' InstancesScopedListWarning (Maybe InstancesScopedListWarningCode)
+islwCode = lens _islwCode (\ s a -> s{_islwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+islwMessage :: Lens' InstancesScopedListWarning (Maybe Text)
+islwMessage
+  = lens _islwMessage (\ s a -> s{_islwMessage = a})
+
+instance FromJSON InstancesScopedListWarning where
+        parseJSON
+          = withObject "InstancesScopedListWarning"
+              (\ o ->
+                 InstancesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstancesScopedListWarning where
+        toJSON InstancesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _islwData,
+                  ("code" .=) <$> _islwCode,
+                  ("message" .=) <$> _islwMessage])
+
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
 newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
@@ -148,6 +229,84 @@ instance ToJSON
                     _igmsitrInstanceTemplate])
 
 --
+-- /See:/ 'operationWarnings' smart constructor.
+data OperationWarnings = OperationWarnings
+    { _owData    :: !(Maybe [OperationWarningsData])
+    , _owCode    :: !(Maybe OperationWarningsCode)
+    , _owMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owData'
+--
+-- * 'owCode'
+--
+-- * 'owMessage'
+operationWarnings
+    :: OperationWarnings
+operationWarnings =
+    OperationWarnings
+    { _owData = Nothing
+    , _owCode = Nothing
+    , _owMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+owData :: Lens' OperationWarnings [OperationWarningsData]
+owData
+  = lens _owData (\ s a -> s{_owData = a}) . _Default .
+      _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+owCode :: Lens' OperationWarnings (Maybe OperationWarningsCode)
+owCode = lens _owCode (\ s a -> s{_owCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+owMessage :: Lens' OperationWarnings (Maybe Text)
+owMessage
+  = lens _owMessage (\ s a -> s{_owMessage = a})
+
+instance FromJSON OperationWarnings where
+        parseJSON
+          = withObject "OperationWarnings"
+              (\ o ->
+                 OperationWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationWarnings where
+        toJSON OperationWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _owData, ("code" .=) <$> _owCode,
+                  ("message" .=) <$> _owMessage])
+
+-- | [Output Only] A map of scoped machine type lists.
+--
+-- /See:/ 'machineTypeAggregatedListItems' smart constructor.
+data MachineTypeAggregatedListItems =
+    MachineTypeAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MachineTypeAggregatedListItems' with the minimum fields required to make a request.
+--
+machineTypeAggregatedListItems
+    :: MachineTypeAggregatedListItems
+machineTypeAggregatedListItems = MachineTypeAggregatedListItems
+
+instance FromJSON MachineTypeAggregatedListItems
+         where
+        parseJSON
+          = withObject "MachineTypeAggregatedListItems"
+              (\ o -> pure MachineTypeAggregatedListItems)
+
+instance ToJSON MachineTypeAggregatedListItems where
+        toJSON = const (Object mempty)
+
+--
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
 newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
     { _igmairInstances :: Maybe [Text]
@@ -188,6 +347,27 @@ instance ToJSON
           InstanceGroupManagersAbandonInstancesRequest{..}
           = object
               (catMaybes [("instances" .=) <$> _igmairInstances])
+
+-- | A map of scoped autoscaler lists.
+--
+-- /See:/ 'autoscalerAggregatedListItems' smart constructor.
+data AutoscalerAggregatedListItems =
+    AutoscalerAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalerAggregatedListItems' with the minimum fields required to make a request.
+--
+autoscalerAggregatedListItems
+    :: AutoscalerAggregatedListItems
+autoscalerAggregatedListItems = AutoscalerAggregatedListItems
+
+instance FromJSON AutoscalerAggregatedListItems where
+        parseJSON
+          = withObject "AutoscalerAggregatedListItems"
+              (\ o -> pure AutoscalerAggregatedListItems)
+
+instance ToJSON AutoscalerAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'addressesScopedList' smart constructor.
@@ -238,12 +418,58 @@ instance ToJSON AddressesScopedList where
                  [("addresses" .=) <$> _aslAddresses,
                   ("warning" .=) <$> _aslWarning])
 
+--
+-- /See:/ 'instancesScopedListWarningData' smart constructor.
+data InstancesScopedListWarningData = InstancesScopedListWarningData
+    { _islwdValue :: !(Maybe Text)
+    , _islwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstancesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'islwdValue'
+--
+-- * 'islwdKey'
+instancesScopedListWarningData
+    :: InstancesScopedListWarningData
+instancesScopedListWarningData =
+    InstancesScopedListWarningData
+    { _islwdValue = Nothing
+    , _islwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+islwdValue :: Lens' InstancesScopedListWarningData (Maybe Text)
+islwdValue
+  = lens _islwdValue (\ s a -> s{_islwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+islwdKey :: Lens' InstancesScopedListWarningData (Maybe Text)
+islwdKey = lens _islwdKey (\ s a -> s{_islwdKey = a})
+
+instance FromJSON InstancesScopedListWarningData
+         where
+        parseJSON
+          = withObject "InstancesScopedListWarningData"
+              (\ o ->
+                 InstancesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON InstancesScopedListWarningData where
+        toJSON InstancesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _islwdValue,
+                  ("key" .=) <$> _islwdKey])
+
 -- | A persistent disk snapshot resource.
 --
 -- /See:/ 'snapshot' smart constructor.
 data Snapshot = Snapshot
-    { _sStorageBytesStatus :: !(Maybe Text)
-    , _sStatus             :: !(Maybe Text)
+    { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
+    , _sStatus             :: !(Maybe SnapshotStatus)
     , _sDiskSizeGb         :: !(Maybe Int64)
     , _sSourceDiskId       :: !(Maybe Text)
     , _sKind               :: !Text
@@ -307,13 +533,13 @@ snapshot =
 
 -- | [Output Only] An indicator whether storageBytes is in a stable state or
 -- it is being adjusted as a result of shared storage reallocation.
-sStorageBytesStatus :: Lens' Snapshot (Maybe Text)
+sStorageBytesStatus :: Lens' Snapshot (Maybe SnapshotStorageBytesStatus)
 sStorageBytesStatus
   = lens _sStorageBytesStatus
       (\ s a -> s{_sStorageBytesStatus = a})
 
 -- | [Output Only] The status of the snapshot.
-sStatus :: Lens' Snapshot (Maybe Text)
+sStatus :: Lens' Snapshot (Maybe SnapshotStatus)
 sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 
 -- | [Output Only] Size of the snapshot, specified in GB.
@@ -505,7 +731,7 @@ instance ToJSON FirewallList where
 --
 -- /See:/ 'deprecationStatus' smart constructor.
 data DeprecationStatus = DeprecationStatus
-    { _dsState       :: !(Maybe Text)
+    { _dsState       :: !(Maybe DeprecationStatusState)
     , _dsDeleted     :: !(Maybe Text)
     , _dsReplacement :: !(Maybe Text)
     , _dsObsolete    :: !(Maybe Text)
@@ -542,7 +768,7 @@ deprecationStatus =
 -- indicating the deprecated resource and recommending its replacement.
 -- Operations which use OBSOLETE or DELETED resources will be rejected and
 -- result in an error.
-dsState :: Lens' DeprecationStatus (Maybe Text)
+dsState :: Lens' DeprecationStatus (Maybe DeprecationStatusState)
 dsState = lens _dsState (\ s a -> s{_dsState = a})
 
 -- | An optional RFC3339 timestamp on or after which the deprecation state of
@@ -590,6 +816,104 @@ instance ToJSON DeprecationStatus where
                   ("replacement" .=) <$> _dsReplacement,
                   ("obsolete" .=) <$> _dsObsolete,
                   ("deprecated" .=) <$> _dsDeprecated])
+
+--
+-- /See:/ 'operationWarningsData' smart constructor.
+data OperationWarningsData = OperationWarningsData
+    { _owdValue :: !(Maybe Text)
+    , _owdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationWarningsData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'owdValue'
+--
+-- * 'owdKey'
+operationWarningsData
+    :: OperationWarningsData
+operationWarningsData =
+    OperationWarningsData
+    { _owdValue = Nothing
+    , _owdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+owdValue :: Lens' OperationWarningsData (Maybe Text)
+owdValue = lens _owdValue (\ s a -> s{_owdValue = a})
+
+-- | [Output Only] A key for the warning data.
+owdKey :: Lens' OperationWarningsData (Maybe Text)
+owdKey = lens _owdKey (\ s a -> s{_owdKey = a})
+
+instance FromJSON OperationWarningsData where
+        parseJSON
+          = withObject "OperationWarningsData"
+              (\ o ->
+                 OperationWarningsData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationWarningsData where
+        toJSON OperationWarningsData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _owdValue, ("key" .=) <$> _owdKey])
+
+-- | A map of scoped instance group lists.
+--
+-- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
+data InstanceGroupAggregatedListItems =
+    InstanceGroupAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupAggregatedListItems' with the minimum fields required to make a request.
+--
+instanceGroupAggregatedListItems
+    :: InstanceGroupAggregatedListItems
+instanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+
+instance FromJSON InstanceGroupAggregatedListItems
+         where
+        parseJSON
+          = withObject "InstanceGroupAggregatedListItems"
+              (\ o -> pure InstanceGroupAggregatedListItems)
+
+instance ToJSON InstanceGroupAggregatedListItems
+         where
+        toJSON = const (Object mempty)
+
+--
+-- /See:/ 'machineTypeScratchDisks' smart constructor.
+newtype MachineTypeScratchDisks = MachineTypeScratchDisks
+    { _mtsdDiskGb :: Maybe Int32
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MachineTypeScratchDisks' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtsdDiskGb'
+machineTypeScratchDisks
+    :: MachineTypeScratchDisks
+machineTypeScratchDisks =
+    MachineTypeScratchDisks
+    { _mtsdDiskGb = Nothing
+    }
+
+-- | Size of the scratch disk, defined in GB.
+mtsdDiskGb :: Lens' MachineTypeScratchDisks (Maybe Int32)
+mtsdDiskGb
+  = lens _mtsdDiskGb (\ s a -> s{_mtsdDiskGb = a})
+
+instance FromJSON MachineTypeScratchDisks where
+        parseJSON
+          = withObject "MachineTypeScratchDisks"
+              (\ o -> MachineTypeScratchDisks <$> (o .:? "diskGb"))
+
+instance ToJSON MachineTypeScratchDisks where
+        toJSON MachineTypeScratchDisks{..}
+          = object (catMaybes [("diskGb" .=) <$> _mtsdDiskGb])
 
 -- | Contains a list of Operation resources.
 --
@@ -1359,7 +1683,7 @@ instance ToJSON InstanceGroupsSetNamedPortsRequest
 data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
     { _apcmuUtilizationTarget     :: !(Maybe Double)
     , _apcmuMetric                :: !(Maybe Text)
-    , _apcmuUtilizationTargetType :: !(Maybe Text)
+    , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalingPolicyCustomMetricUtilization' with the minimum fields required to make a request.
@@ -1397,7 +1721,7 @@ apcmuMetric
   = lens _apcmuMetric (\ s a -> s{_apcmuMetric = a})
 
 -- | Defines type in which utilization_target is expressed.
-apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe Text)
+apcmuUtilizationTargetType :: Lens' AutoscalingPolicyCustomMetricUtilization (Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
 apcmuUtilizationTargetType
   = lens _apcmuUtilizationTargetType
       (\ s a -> s{_apcmuUtilizationTargetType = a})
@@ -1427,9 +1751,9 @@ instance ToJSON
 --
 -- /See:/ 'image' smart constructor.
 data Image = Image
-    { _iStatus            :: !(Maybe Text)
+    { _iStatus            :: !(Maybe ImageStatus)
     , _iDiskSizeGb        :: !(Maybe Int64)
-    , _iSourceType        :: !Text
+    , _iSourceType        :: !ImageSourceType
     , _iSourceDiskId      :: !(Maybe Text)
     , _iKind              :: !Text
     , _iArchiveSizeBytes  :: !(Maybe Int64)
@@ -1483,7 +1807,7 @@ image =
     Image
     { _iStatus = Nothing
     , _iDiskSizeGb = Nothing
-    , _iSourceType = "RAW"
+    , _iSourceType = Raw
     , _iSourceDiskId = Nothing
     , _iKind = "compute#image"
     , _iArchiveSizeBytes = Nothing
@@ -1502,7 +1826,7 @@ image =
 -- other resources, such as instances, only after the image has been
 -- successfully created and the status is set to READY. Possible values are
 -- FAILED, PENDING, or READY.
-iStatus :: Lens' Image (Maybe Text)
+iStatus :: Lens' Image (Maybe ImageStatus)
 iStatus = lens _iStatus (\ s a -> s{_iStatus = a})
 
 -- | Size of the image when restored onto a persistent disk (in GB).
@@ -1512,7 +1836,7 @@ iDiskSizeGb
 
 -- | The type of the image used to create this disk. The default and only
 -- value is RAW
-iSourceType :: Lens' Image Text
+iSourceType :: Lens' Image ImageSourceType
 iSourceType
   = lens _iSourceType (\ s a -> s{_iSourceType = a})
 
@@ -1598,7 +1922,7 @@ instance FromJSON Image where
               (\ o ->
                  Image <$>
                    (o .:? "status") <*> (o .:? "diskSizeGb") <*>
-                     (o .:? "sourceType" .!= "RAW")
+                     (o .:? "sourceType" .!= Raw)
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#image")
                      <*> (o .:? "archiveSizeBytes")
@@ -1876,7 +2200,7 @@ instance ToJSON InstanceReference where
 --
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
 data InstanceWithNamedPorts = InstanceWithNamedPorts
-    { _iwnpStatus     :: !(Maybe Text)
+    { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
     , _iwnpNamedPorts :: !(Maybe [Maybe NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1900,7 +2224,7 @@ instanceWithNamedPorts =
     }
 
 -- | The status of the instance.
-iwnpStatus :: Lens' InstanceWithNamedPorts (Maybe Text)
+iwnpStatus :: Lens' InstanceWithNamedPorts (Maybe InstanceWithNamedPortsStatus)
 iwnpStatus
   = lens _iwnpStatus (\ s a -> s{_iwnpStatus = a})
 
@@ -2704,7 +3028,7 @@ instance ToJSON ImageList where
 --
 -- /See:/ 'targetPool' smart constructor.
 data TargetPool = TargetPool
-    { _tpSessionAffinity   :: !(Maybe Text)
+    { _tpSessionAffinity   :: !(Maybe TargetPoolSessionAffinity)
     , _tpBackupPool        :: !(Maybe Text)
     , _tpKind              :: !Text
     , _tpSelfLink          :: !(Maybe Text)
@@ -2770,7 +3094,7 @@ targetPool =
 -- CLIENT_IP_PROTO: Connections from the same client IP with the same IP
 -- protocol will go to the same instance in the pool while that instance
 -- remains healthy.
-tpSessionAffinity :: Lens' TargetPool (Maybe Text)
+tpSessionAffinity :: Lens' TargetPool (Maybe TargetPoolSessionAffinity)
 tpSessionAffinity
   = lens _tpSessionAffinity
       (\ s a -> s{_tpSessionAffinity = a})
@@ -2904,7 +3228,7 @@ instance ToJSON TargetPool where
 --
 -- /See:/ 'disk' smart constructor.
 data Disk = Disk
-    { _dStatus              :: !(Maybe Text)
+    { _dStatus              :: !(Maybe DiskStatus)
     , _dSourceSnapshotId    :: !(Maybe Text)
     , _dLastAttachTimestamp :: !(Maybe Text)
     , _dUsers               :: !(Maybe [Text])
@@ -2993,7 +3317,7 @@ disk =
 
 -- | [Output Only] The status of disk creation. Applicable statuses includes:
 -- CREATING, FAILED, READY, RESTORING.
-dStatus :: Lens' Disk (Maybe Text)
+dStatus :: Lens' Disk (Maybe DiskStatus)
 dStatus = lens _dStatus (\ s a -> s{_dStatus = a})
 
 -- | [Output Only] The unique ID of the snapshot used to create this disk.
@@ -3170,6 +3494,53 @@ instance ToJSON Disk where
                   ("options" .=) <$> _dOptions, ("type" .=) <$> _dType,
                   ("description" .=) <$> _dDescription,
                   ("sourceSnapshot" .=) <$> _dSourceSnapshot])
+
+--
+-- /See:/ 'vPNTunnelsScopedListWarningData' smart constructor.
+data VPNTunnelsScopedListWarningData = VPNTunnelsScopedListWarningData
+    { _vtslwdValue :: !(Maybe Text)
+    , _vtslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VPNTunnelsScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtslwdValue'
+--
+-- * 'vtslwdKey'
+vPNTunnelsScopedListWarningData
+    :: VPNTunnelsScopedListWarningData
+vPNTunnelsScopedListWarningData =
+    VPNTunnelsScopedListWarningData
+    { _vtslwdValue = Nothing
+    , _vtslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+vtslwdValue :: Lens' VPNTunnelsScopedListWarningData (Maybe Text)
+vtslwdValue
+  = lens _vtslwdValue (\ s a -> s{_vtslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+vtslwdKey :: Lens' VPNTunnelsScopedListWarningData (Maybe Text)
+vtslwdKey
+  = lens _vtslwdKey (\ s a -> s{_vtslwdKey = a})
+
+instance FromJSON VPNTunnelsScopedListWarningData
+         where
+        parseJSON
+          = withObject "VPNTunnelsScopedListWarningData"
+              (\ o ->
+                 VPNTunnelsScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON VPNTunnelsScopedListWarningData where
+        toJSON VPNTunnelsScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _vtslwdValue,
+                  ("key" .=) <$> _vtslwdKey])
 
 -- | Load balancing utilization policy.
 --
@@ -3432,7 +3803,7 @@ data ForwardingRule = ForwardingRule
     , _frPortRange         :: !(Maybe Text)
     , _frSelfLink          :: !(Maybe Text)
     , _frName              :: !(Maybe Text)
-    , _frIPProtocol        :: !(Maybe Text)
+    , _frIPProtocol        :: !(Maybe ForwardingRuleIPProtocol)
     , _frCreationTimestamp :: !(Maybe Text)
     , _frId                :: !(Maybe Word64)
     , _frRegion            :: !(Maybe Text)
@@ -3521,7 +3892,7 @@ frName = lens _frName (\ s a -> s{_frName = a})
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
 -- ESP, AH or SCTP.
-frIPProtocol :: Lens' ForwardingRule (Maybe Text)
+frIPProtocol :: Lens' ForwardingRule (Maybe ForwardingRuleIPProtocol)
 frIPProtocol
   = lens _frIPProtocol (\ s a -> s{_frIPProtocol = a})
 
@@ -3641,12 +4012,73 @@ instance ToJSON DiskMoveRequest where
                  [("targetDisk" .=) <$> _dmrTargetDisk,
                   ("destinationZone" .=) <$> _dmrDestinationZone])
 
+-- | Informational warning which replaces the list of addresses when the list
+-- is empty.
+--
+-- /See:/ 'vPNTunnelsScopedListWarning' smart constructor.
+data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
+    { _vtslwData    :: !(Maybe [VPNTunnelsScopedListWarningData])
+    , _vtslwCode    :: !(Maybe VPNTunnelsScopedListWarningCode)
+    , _vtslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VPNTunnelsScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vtslwData'
+--
+-- * 'vtslwCode'
+--
+-- * 'vtslwMessage'
+vPNTunnelsScopedListWarning
+    :: VPNTunnelsScopedListWarning
+vPNTunnelsScopedListWarning =
+    VPNTunnelsScopedListWarning
+    { _vtslwData = Nothing
+    , _vtslwCode = Nothing
+    , _vtslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+vtslwData :: Lens' VPNTunnelsScopedListWarning [VPNTunnelsScopedListWarningData]
+vtslwData
+  = lens _vtslwData (\ s a -> s{_vtslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+vtslwCode :: Lens' VPNTunnelsScopedListWarning (Maybe VPNTunnelsScopedListWarningCode)
+vtslwCode
+  = lens _vtslwCode (\ s a -> s{_vtslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+vtslwMessage :: Lens' VPNTunnelsScopedListWarning (Maybe Text)
+vtslwMessage
+  = lens _vtslwMessage (\ s a -> s{_vtslwMessage = a})
+
+instance FromJSON VPNTunnelsScopedListWarning where
+        parseJSON
+          = withObject "VPNTunnelsScopedListWarning"
+              (\ o ->
+                 VPNTunnelsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON VPNTunnelsScopedListWarning where
+        toJSON VPNTunnelsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _vtslwData,
+                  ("code" .=) <$> _vtslwCode,
+                  ("message" .=) <$> _vtslwMessage])
+
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
     { _oTargetId            :: !(Maybe Word64)
-    , _oStatus              :: !(Maybe Text)
+    , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
     , _oProgress            :: !(Maybe Int32)
     , _oStartTime           :: !(Maybe Text)
@@ -3654,7 +4086,7 @@ data Operation = Operation
     , _oError               :: !(Maybe OperationError)
     , _oHttpErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
-    , _oWarnings            :: !(Maybe [OperationWarningsItem])
+    , _oWarnings            :: !(Maybe [OperationWarnings])
     , _oHttpErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
@@ -3752,7 +4184,7 @@ oTargetId
 
 -- | [Output Only] Status of the operation. Can be one of the following:
 -- PENDING, RUNNING, or DONE.
-oStatus :: Lens' Operation (Maybe Text)
+oStatus :: Lens' Operation (Maybe OperationStatus)
 oStatus = lens _oStatus (\ s a -> s{_oStatus = a})
 
 -- | [Output Only] The time that this operation was requested. This is in
@@ -3799,7 +4231,7 @@ oZone = lens _oZone (\ s a -> s{_oZone = a})
 
 -- | [Output Only] If warning messages are generated during processing of the
 -- operation, this field will be populated.
-oWarnings :: Lens' Operation [OperationWarningsItem]
+oWarnings :: Lens' Operation [OperationWarnings]
 oWarnings
   = lens _oWarnings (\ s a -> s{_oWarnings = a}) .
       _Default
@@ -4190,6 +4622,62 @@ instance ToJSON TargetPoolsRemoveInstanceRequest
           = object
               (catMaybes [("instances" .=) <$> _tprirInstances])
 
+--
+-- /See:/ 'routeWarnings' smart constructor.
+data RouteWarnings = RouteWarnings
+    { _rwData    :: !(Maybe [RouteWarningsData])
+    , _rwCode    :: !(Maybe RouteWarningsCode)
+    , _rwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouteWarnings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwData'
+--
+-- * 'rwCode'
+--
+-- * 'rwMessage'
+routeWarnings
+    :: RouteWarnings
+routeWarnings =
+    RouteWarnings
+    { _rwData = Nothing
+    , _rwCode = Nothing
+    , _rwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+rwData :: Lens' RouteWarnings [RouteWarningsData]
+rwData
+  = lens _rwData (\ s a -> s{_rwData = a}) . _Default .
+      _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+rwCode :: Lens' RouteWarnings (Maybe RouteWarningsCode)
+rwCode = lens _rwCode (\ s a -> s{_rwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+rwMessage :: Lens' RouteWarnings (Maybe Text)
+rwMessage
+  = lens _rwMessage (\ s a -> s{_rwMessage = a})
+
+instance FromJSON RouteWarnings where
+        parseJSON
+          = withObject "RouteWarnings"
+              (\ o ->
+                 RouteWarnings <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON RouteWarnings where
+        toJSON RouteWarnings{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _rwData, ("code" .=) <$> _rwCode,
+                  ("message" .=) <$> _rwMessage])
+
 -- |
 --
 -- /See:/ 'instanceProperties' smart constructor.
@@ -4345,6 +4833,281 @@ instance ToJSON InstanceProperties where
                   ("description" .=) <$> _ipDescription,
                   ("tags" .=) <$> _ipTags])
 
+-- | [Output Only] Informational warning which replaces the list of disk
+-- types when the list is empty.
+--
+-- /See:/ 'diskTypesScopedListWarning' smart constructor.
+data DiskTypesScopedListWarning = DiskTypesScopedListWarning
+    { _dtslwData    :: !(Maybe [DiskTypesScopedListWarningData])
+    , _dtslwCode    :: !(Maybe DiskTypesScopedListWarningCode)
+    , _dtslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiskTypesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtslwData'
+--
+-- * 'dtslwCode'
+--
+-- * 'dtslwMessage'
+diskTypesScopedListWarning
+    :: DiskTypesScopedListWarning
+diskTypesScopedListWarning =
+    DiskTypesScopedListWarning
+    { _dtslwData = Nothing
+    , _dtslwCode = Nothing
+    , _dtslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+dtslwData :: Lens' DiskTypesScopedListWarning [DiskTypesScopedListWarningData]
+dtslwData
+  = lens _dtslwData (\ s a -> s{_dtslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+dtslwCode :: Lens' DiskTypesScopedListWarning (Maybe DiskTypesScopedListWarningCode)
+dtslwCode
+  = lens _dtslwCode (\ s a -> s{_dtslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+dtslwMessage :: Lens' DiskTypesScopedListWarning (Maybe Text)
+dtslwMessage
+  = lens _dtslwMessage (\ s a -> s{_dtslwMessage = a})
+
+instance FromJSON DiskTypesScopedListWarning where
+        parseJSON
+          = withObject "DiskTypesScopedListWarning"
+              (\ o ->
+                 DiskTypesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON DiskTypesScopedListWarning where
+        toJSON DiskTypesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _dtslwData,
+                  ("code" .=) <$> _dtslwCode,
+                  ("message" .=) <$> _dtslwMessage])
+
+--
+-- /See:/ 'routeWarningsData' smart constructor.
+data RouteWarningsData = RouteWarningsData
+    { _rwdValue :: !(Maybe Text)
+    , _rwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RouteWarningsData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rwdValue'
+--
+-- * 'rwdKey'
+routeWarningsData
+    :: RouteWarningsData
+routeWarningsData =
+    RouteWarningsData
+    { _rwdValue = Nothing
+    , _rwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+rwdValue :: Lens' RouteWarningsData (Maybe Text)
+rwdValue = lens _rwdValue (\ s a -> s{_rwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+rwdKey :: Lens' RouteWarningsData (Maybe Text)
+rwdKey = lens _rwdKey (\ s a -> s{_rwdKey = a})
+
+instance FromJSON RouteWarningsData where
+        parseJSON
+          = withObject "RouteWarningsData"
+              (\ o ->
+                 RouteWarningsData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON RouteWarningsData where
+        toJSON RouteWarningsData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _rwdValue, ("key" .=) <$> _rwdKey])
+
+-- | [Output Only] A map of scoped instance lists.
+--
+-- /See:/ 'instanceAggregatedListItems' smart constructor.
+data InstanceAggregatedListItems =
+    InstanceAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceAggregatedListItems' with the minimum fields required to make a request.
+--
+instanceAggregatedListItems
+    :: InstanceAggregatedListItems
+instanceAggregatedListItems = InstanceAggregatedListItems
+
+instance FromJSON InstanceAggregatedListItems where
+        parseJSON
+          = withObject "InstanceAggregatedListItems"
+              (\ o -> pure InstanceAggregatedListItems)
+
+instance ToJSON InstanceAggregatedListItems where
+        toJSON = const (Object mempty)
+
+-- | [Output Only] An informational warning that appears when the machine
+-- types list is empty.
+--
+-- /See:/ 'machineTypesScopedListWarning' smart constructor.
+data MachineTypesScopedListWarning = MachineTypesScopedListWarning
+    { _mtslwData    :: !(Maybe [MachineTypesScopedListWarningData])
+    , _mtslwCode    :: !(Maybe MachineTypesScopedListWarningCode)
+    , _mtslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MachineTypesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtslwData'
+--
+-- * 'mtslwCode'
+--
+-- * 'mtslwMessage'
+machineTypesScopedListWarning
+    :: MachineTypesScopedListWarning
+machineTypesScopedListWarning =
+    MachineTypesScopedListWarning
+    { _mtslwData = Nothing
+    , _mtslwCode = Nothing
+    , _mtslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+mtslwData :: Lens' MachineTypesScopedListWarning [MachineTypesScopedListWarningData]
+mtslwData
+  = lens _mtslwData (\ s a -> s{_mtslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+mtslwCode :: Lens' MachineTypesScopedListWarning (Maybe MachineTypesScopedListWarningCode)
+mtslwCode
+  = lens _mtslwCode (\ s a -> s{_mtslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+mtslwMessage :: Lens' MachineTypesScopedListWarning (Maybe Text)
+mtslwMessage
+  = lens _mtslwMessage (\ s a -> s{_mtslwMessage = a})
+
+instance FromJSON MachineTypesScopedListWarning where
+        parseJSON
+          = withObject "MachineTypesScopedListWarning"
+              (\ o ->
+                 MachineTypesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON MachineTypesScopedListWarning where
+        toJSON MachineTypesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _mtslwData,
+                  ("code" .=) <$> _mtslwCode,
+                  ("message" .=) <$> _mtslwMessage])
+
+--
+-- /See:/ 'machineTypesScopedListWarningData' smart constructor.
+data MachineTypesScopedListWarningData = MachineTypesScopedListWarningData
+    { _mtslwdValue :: !(Maybe Text)
+    , _mtslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MachineTypesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'mtslwdValue'
+--
+-- * 'mtslwdKey'
+machineTypesScopedListWarningData
+    :: MachineTypesScopedListWarningData
+machineTypesScopedListWarningData =
+    MachineTypesScopedListWarningData
+    { _mtslwdValue = Nothing
+    , _mtslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+mtslwdValue :: Lens' MachineTypesScopedListWarningData (Maybe Text)
+mtslwdValue
+  = lens _mtslwdValue (\ s a -> s{_mtslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+mtslwdKey :: Lens' MachineTypesScopedListWarningData (Maybe Text)
+mtslwdKey
+  = lens _mtslwdKey (\ s a -> s{_mtslwdKey = a})
+
+instance FromJSON MachineTypesScopedListWarningData
+         where
+        parseJSON
+          = withObject "MachineTypesScopedListWarningData"
+              (\ o ->
+                 MachineTypesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON MachineTypesScopedListWarningData
+         where
+        toJSON MachineTypesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _mtslwdValue,
+                  ("key" .=) <$> _mtslwdKey])
+
+-- | Encountered errors during the last attempt to create or delete the
+-- instance.
+--
+-- /See:/ 'managedInstanceLastAttemptErrors' smart constructor.
+newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
+    { _milaeErrors :: Maybe [ManagedInstanceLastAttemptErrorsErrors]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ManagedInstanceLastAttemptErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'milaeErrors'
+managedInstanceLastAttemptErrors
+    :: ManagedInstanceLastAttemptErrors
+managedInstanceLastAttemptErrors =
+    ManagedInstanceLastAttemptErrors
+    { _milaeErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+milaeErrors :: Lens' ManagedInstanceLastAttemptErrors [ManagedInstanceLastAttemptErrorsErrors]
+milaeErrors
+  = lens _milaeErrors (\ s a -> s{_milaeErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ManagedInstanceLastAttemptErrors
+         where
+        parseJSON
+          = withObject "ManagedInstanceLastAttemptErrors"
+              (\ o ->
+                 ManagedInstanceLastAttemptErrors <$>
+                   (o .:? "errors" .!= mempty))
+
+instance ToJSON ManagedInstanceLastAttemptErrors
+         where
+        toJSON ManagedInstanceLastAttemptErrors{..}
+          = object (catMaybes [("errors" .=) <$> _milaeErrors])
+
 --
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
 data TargetPoolInstanceHealth = TargetPoolInstanceHealth
@@ -4399,7 +5162,7 @@ instance ToJSON TargetPoolInstanceHealth where
 -- /See:/ 'targetInstance' smart constructor.
 data TargetInstance = TargetInstance
     { _tiKind              :: !Text
-    , _tiNatPolicy         :: !(Maybe Text)
+    , _tiNatPolicy         :: !(Maybe TargetInstanceNATPolicy)
     , _tiZone              :: !(Maybe Text)
     , _tiSelfLink          :: !(Maybe Text)
     , _tiName              :: !(Maybe Text)
@@ -4451,7 +5214,7 @@ tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
 
 -- | NAT option controlling how IPs are NAT\'ed to the instance. Currently
 -- only NO_NAT (default value) is supported.
-tiNatPolicy :: Lens' TargetInstance (Maybe Text)
+tiNatPolicy :: Lens' TargetInstance (Maybe TargetInstanceNATPolicy)
 tiNatPolicy
   = lens _tiNatPolicy (\ s a -> s{_tiNatPolicy = a})
 
@@ -4524,6 +5287,113 @@ instance ToJSON TargetInstance where
                   ("id" .=) <$> _tiId,
                   ("description" .=) <$> _tiDescription,
                   ("instance" .=) <$> _tiInstance])
+
+-- | Informational warning which replaces the list of autoscalers when the
+-- list is empty.
+--
+-- /See:/ 'autoscalersScopedListWarning' smart constructor.
+data AutoscalersScopedListWarning = AutoscalersScopedListWarning
+    { _aslwData    :: !(Maybe [AutoscalersScopedListWarningData])
+    , _aslwCode    :: !(Maybe AutoscalersScopedListWarningCode)
+    , _aslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalersScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aslwData'
+--
+-- * 'aslwCode'
+--
+-- * 'aslwMessage'
+autoscalersScopedListWarning
+    :: AutoscalersScopedListWarning
+autoscalersScopedListWarning =
+    AutoscalersScopedListWarning
+    { _aslwData = Nothing
+    , _aslwCode = Nothing
+    , _aslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+aslwData :: Lens' AutoscalersScopedListWarning [AutoscalersScopedListWarningData]
+aslwData
+  = lens _aslwData (\ s a -> s{_aslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+aslwCode :: Lens' AutoscalersScopedListWarning (Maybe AutoscalersScopedListWarningCode)
+aslwCode = lens _aslwCode (\ s a -> s{_aslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+aslwMessage :: Lens' AutoscalersScopedListWarning (Maybe Text)
+aslwMessage
+  = lens _aslwMessage (\ s a -> s{_aslwMessage = a})
+
+instance FromJSON AutoscalersScopedListWarning where
+        parseJSON
+          = withObject "AutoscalersScopedListWarning"
+              (\ o ->
+                 AutoscalersScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON AutoscalersScopedListWarning where
+        toJSON AutoscalersScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _aslwData,
+                  ("code" .=) <$> _aslwCode,
+                  ("message" .=) <$> _aslwMessage])
+
+--
+-- /See:/ 'diskTypesScopedListWarningData' smart constructor.
+data DiskTypesScopedListWarningData = DiskTypesScopedListWarningData
+    { _dtslwdValue :: !(Maybe Text)
+    , _dtslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiskTypesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtslwdValue'
+--
+-- * 'dtslwdKey'
+diskTypesScopedListWarningData
+    :: DiskTypesScopedListWarningData
+diskTypesScopedListWarningData =
+    DiskTypesScopedListWarningData
+    { _dtslwdValue = Nothing
+    , _dtslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+dtslwdValue :: Lens' DiskTypesScopedListWarningData (Maybe Text)
+dtslwdValue
+  = lens _dtslwdValue (\ s a -> s{_dtslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+dtslwdKey :: Lens' DiskTypesScopedListWarningData (Maybe Text)
+dtslwdKey
+  = lens _dtslwdKey (\ s a -> s{_dtslwdKey = a})
+
+instance FromJSON DiskTypesScopedListWarningData
+         where
+        parseJSON
+          = withObject "DiskTypesScopedListWarningData"
+              (\ o ->
+                 DiskTypesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DiskTypesScopedListWarningData where
+        toJSON DiskTypesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dtslwdValue,
+                  ("key" .=) <$> _dtslwdKey])
 
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
@@ -4610,6 +5480,53 @@ instance ToJSON InstanceGroupsRemoveInstancesRequest
         toJSON InstanceGroupsRemoveInstancesRequest{..}
           = object
               (catMaybes [("instances" .=) <$> _igrirInstances])
+
+--
+-- /See:/ 'autoscalersScopedListWarningData' smart constructor.
+data AutoscalersScopedListWarningData = AutoscalersScopedListWarningData
+    { _aslwdValue :: !(Maybe Text)
+    , _aslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalersScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aslwdValue'
+--
+-- * 'aslwdKey'
+autoscalersScopedListWarningData
+    :: AutoscalersScopedListWarningData
+autoscalersScopedListWarningData =
+    AutoscalersScopedListWarningData
+    { _aslwdValue = Nothing
+    , _aslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+aslwdValue :: Lens' AutoscalersScopedListWarningData (Maybe Text)
+aslwdValue
+  = lens _aslwdValue (\ s a -> s{_aslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+aslwdKey :: Lens' AutoscalersScopedListWarningData (Maybe Text)
+aslwdKey = lens _aslwdKey (\ s a -> s{_aslwdKey = a})
+
+instance FromJSON AutoscalersScopedListWarningData
+         where
+        parseJSON
+          = withObject "AutoscalersScopedListWarningData"
+              (\ o ->
+                 AutoscalersScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON AutoscalersScopedListWarningData
+         where
+        toJSON AutoscalersScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aslwdValue,
+                  ("key" .=) <$> _aslwdKey])
 
 -- | [Input Only] Specifies the parameters for a new disk that will be
 -- created alongside the new instance. Use initialization parameters to
@@ -5079,7 +5996,7 @@ instance ToJSON TargetVPNGatewayList where
 --
 -- /See:/ 'address' smart constructor.
 data Address = Address
-    { _aStatus            :: !(Maybe Text)
+    { _aStatus            :: !(Maybe AddressStatus)
     , _aUsers             :: !(Maybe [Text])
     , _aKind              :: !Text
     , _aAddress           :: !(Maybe Text)
@@ -5134,7 +6051,7 @@ address =
 -- RESERVED. An address that is RESERVED is currently reserved and
 -- available to use. An IN_USE address is currently being used by another
 -- resource and is not available.
-aStatus :: Lens' Address (Maybe Text)
+aStatus :: Lens' Address (Maybe AddressStatus)
 aStatus = lens _aStatus (\ s a -> s{_aStatus = a})
 
 -- | [Output Only] The URLs of the resources that are using this address.
@@ -5215,6 +6132,50 @@ instance ToJSON Address where
                   ("creationTimestamp" .=) <$> _aCreationTimestamp,
                   ("id" .=) <$> _aId, ("region" .=) <$> _aRegion,
                   ("description" .=) <$> _aDescription])
+
+--
+-- /See:/ 'addressesScopedListWarningData' smart constructor.
+data AddressesScopedListWarningData = AddressesScopedListWarningData
+    { _aValue :: !(Maybe Text)
+    , _aKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AddressesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aValue'
+--
+-- * 'aKey'
+addressesScopedListWarningData
+    :: AddressesScopedListWarningData
+addressesScopedListWarningData =
+    AddressesScopedListWarningData
+    { _aValue = Nothing
+    , _aKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+aValue :: Lens' AddressesScopedListWarningData (Maybe Text)
+aValue = lens _aValue (\ s a -> s{_aValue = a})
+
+-- | [Output Only] A key for the warning data.
+aKey :: Lens' AddressesScopedListWarningData (Maybe Text)
+aKey = lens _aKey (\ s a -> s{_aKey = a})
+
+instance FromJSON AddressesScopedListWarningData
+         where
+        parseJSON
+          = withObject "AddressesScopedListWarningData"
+              (\ o ->
+                 AddressesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON AddressesScopedListWarningData where
+        toJSON AddressesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _aValue, ("key" .=) <$> _aKey])
 
 --
 -- /See:/ 'instanceAggregatedList' smart constructor.
@@ -5348,8 +6309,8 @@ instance ToJSON InstancesScopedList where
 --
 -- /See:/ 'zone' smart constructor.
 data Zone = Zone
-    { _zStatus             :: !(Maybe Text)
-    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
+    { _zStatus             :: !(Maybe ZoneStatus)
+    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindows])
     , _zKind               :: !Text
     , _zSelfLink           :: !(Maybe Text)
     , _zName               :: !(Maybe Text)
@@ -5400,13 +6361,13 @@ zone =
     }
 
 -- | [Output Only] Status of the zone, either UP or DOWN.
-zStatus :: Lens' Zone (Maybe Text)
+zStatus :: Lens' Zone (Maybe ZoneStatus)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
 
 -- | [Output Only] Any scheduled maintenance windows for this zone. When the
 -- zone is in a maintenance window, all resources which reside in the zone
 -- will be unavailable. For more information, see Maintenance Windows
-zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
+zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindows]
 zMaintenanceWindows
   = lens _zMaintenanceWindows
       (\ s a -> s{_zMaintenanceWindows = a})
@@ -5479,6 +6440,71 @@ instance ToJSON Zone where
                   ("id" .=) <$> _zId, ("region" .=) <$> _zRegion,
                   ("description" .=) <$> _zDescription,
                   ("deprecated" .=) <$> _zDeprecated])
+
+-- | The parameters of the raw disk image.
+--
+-- /See:/ 'imageRawDisk' smart constructor.
+data ImageRawDisk = ImageRawDisk
+    { _irdContainerType :: !(Maybe ImageRawDiskContainerType)
+    , _irdSource        :: !(Maybe Text)
+    , _irdSha1Checksum  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ImageRawDisk' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irdContainerType'
+--
+-- * 'irdSource'
+--
+-- * 'irdSha1Checksum'
+imageRawDisk
+    :: ImageRawDisk
+imageRawDisk =
+    ImageRawDisk
+    { _irdContainerType = Nothing
+    , _irdSource = Nothing
+    , _irdSha1Checksum = Nothing
+    }
+
+-- | The format used to encode and transmit the block device, which should be
+-- TAR. This is just a container and transmission format and not a runtime
+-- format. Provided by the client when the disk image is created.
+irdContainerType :: Lens' ImageRawDisk (Maybe ImageRawDiskContainerType)
+irdContainerType
+  = lens _irdContainerType
+      (\ s a -> s{_irdContainerType = a})
+
+-- | The full Google Cloud Storage URL where the disk image is stored. You
+-- must provide either this property or the sourceDisk property but not
+-- both.
+irdSource :: Lens' ImageRawDisk (Maybe Text)
+irdSource
+  = lens _irdSource (\ s a -> s{_irdSource = a})
+
+-- | An optional SHA1 checksum of the disk image before unpackaging; provided
+-- by the client when the disk image is created.
+irdSha1Checksum :: Lens' ImageRawDisk (Maybe Text)
+irdSha1Checksum
+  = lens _irdSha1Checksum
+      (\ s a -> s{_irdSha1Checksum = a})
+
+instance FromJSON ImageRawDisk where
+        parseJSON
+          = withObject "ImageRawDisk"
+              (\ o ->
+                 ImageRawDisk <$>
+                   (o .:? "containerType") <*> (o .:? "source") <*>
+                     (o .:? "sha1Checksum"))
+
+instance ToJSON ImageRawDisk where
+        toJSON ImageRawDisk{..}
+          = object
+              (catMaybes
+                 [("containerType" .=) <$> _irdContainerType,
+                  ("source" .=) <$> _irdSource,
+                  ("sha1Checksum" .=) <$> _irdSha1Checksum])
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
@@ -5645,6 +6671,140 @@ instance ToJSON Network where
                   ("gatewayIPv4" .=) <$> _nGatewayIPv4,
                   ("description" .=) <$> _nDescription])
 
+--
+-- /See:/ 'firewallAllowed' smart constructor.
+data FirewallAllowed = FirewallAllowed
+    { _faIPProtocol :: !(Maybe Text)
+    , _faPorts      :: !(Maybe [Text])
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'FirewallAllowed' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'faIPProtocol'
+--
+-- * 'faPorts'
+firewallAllowed
+    :: FirewallAllowed
+firewallAllowed =
+    FirewallAllowed
+    { _faIPProtocol = Nothing
+    , _faPorts = Nothing
+    }
+
+-- | The IP protocol that is allowed for this rule. The protocol type is
+-- required when creating a firewall. This value can either be one of the
+-- following well known protocol strings (tcp, udp, icmp, esp, ah, sctp),
+-- or the IP protocol number.
+faIPProtocol :: Lens' FirewallAllowed (Maybe Text)
+faIPProtocol
+  = lens _faIPProtocol (\ s a -> s{_faIPProtocol = a})
+
+-- | An optional list of ports which are allowed. This field is only
+-- applicable for UDP or TCP protocol. Each entry must be either an integer
+-- or a range. If not specified, connections through any port are allowed
+-- Example inputs include: [\"22\"], [\"80\",\"443\"], and
+-- [\"12345-12349\"].
+faPorts :: Lens' FirewallAllowed [Text]
+faPorts
+  = lens _faPorts (\ s a -> s{_faPorts = a}) . _Default
+      . _Coerce
+
+instance FromJSON FirewallAllowed where
+        parseJSON
+          = withObject "FirewallAllowed"
+              (\ o ->
+                 FirewallAllowed <$>
+                   (o .:? "IPProtocol") <*> (o .:? "ports" .!= mempty))
+
+instance ToJSON FirewallAllowed where
+        toJSON FirewallAllowed{..}
+          = object
+              (catMaybes
+                 [("IPProtocol" .=) <$> _faIPProtocol,
+                  ("ports" .=) <$> _faPorts])
+
+-- | [Output Only] Informational warning which replaces the list of addresses
+-- when the list is empty.
+--
+-- /See:/ 'addressesScopedListWarning' smart constructor.
+data AddressesScopedListWarning = AddressesScopedListWarning
+    { _aData    :: !(Maybe [AddressesScopedListWarningData])
+    , _aCode    :: !(Maybe AddressesScopedListWarningCode)
+    , _aMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AddressesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'aData'
+--
+-- * 'aCode'
+--
+-- * 'aMessage'
+addressesScopedListWarning
+    :: AddressesScopedListWarning
+addressesScopedListWarning =
+    AddressesScopedListWarning
+    { _aData = Nothing
+    , _aCode = Nothing
+    , _aMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+aData :: Lens' AddressesScopedListWarning [AddressesScopedListWarningData]
+aData
+  = lens _aData (\ s a -> s{_aData = a}) . _Default .
+      _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+aCode :: Lens' AddressesScopedListWarning (Maybe AddressesScopedListWarningCode)
+aCode = lens _aCode (\ s a -> s{_aCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+aMessage :: Lens' AddressesScopedListWarning (Maybe Text)
+aMessage = lens _aMessage (\ s a -> s{_aMessage = a})
+
+instance FromJSON AddressesScopedListWarning where
+        parseJSON
+          = withObject "AddressesScopedListWarning"
+              (\ o ->
+                 AddressesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON AddressesScopedListWarning where
+        toJSON AddressesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _aData, ("code" .=) <$> _aCode,
+                  ("message" .=) <$> _aMessage])
+
+-- | A map of scoped target instance lists.
+--
+-- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
+data TargetInstanceAggregatedListItems =
+    TargetInstanceAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetInstanceAggregatedListItems' with the minimum fields required to make a request.
+--
+targetInstanceAggregatedListItems
+    :: TargetInstanceAggregatedListItems
+targetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+
+instance FromJSON TargetInstanceAggregatedListItems
+         where
+        parseJSON
+          = withObject "TargetInstanceAggregatedListItems"
+              (\ o -> pure TargetInstanceAggregatedListItems)
+
+instance ToJSON TargetInstanceAggregatedListItems
+         where
+        toJSON = const (Object mempty)
+
 -- | The route resource. A Route is a rule that specifies how certain packets
 -- should be handled by the virtual network. Routes are associated with
 -- instances by tag and the set of Routes for a particular instance is
@@ -5667,7 +6827,7 @@ data Route = Route
     , _rNextHopGateway    :: !(Maybe Text)
     , _rNextHopNetwork    :: !(Maybe Text)
     , _rNetwork           :: !(Maybe Text)
-    , _rWarnings          :: !(Maybe [RouteWarningsItem])
+    , _rWarnings          :: !(Maybe [RouteWarnings])
     , _rNextHopIp         :: !(Maybe Text)
     , _rDestRange         :: !(Maybe Text)
     , _rSelfLink          :: !(Maybe Text)
@@ -5769,7 +6929,7 @@ rNetwork = lens _rNetwork (\ s a -> s{_rNetwork = a})
 
 -- | [Output Only] If potential misconfigurations are detected for this
 -- route, this field will be populated with warning messages.
-rWarnings :: Lens' Route [RouteWarningsItem]
+rWarnings :: Lens' Route [RouteWarnings]
 rWarnings
   = lens _rWarnings (\ s a -> s{_rWarnings = a}) .
       _Default
@@ -6139,7 +7299,7 @@ instance ToJSON InstanceGroupAggregatedList where
 --
 -- /See:/ 'targetVPNGateway' smart constructor.
 data TargetVPNGateway = TargetVPNGateway
-    { _tvgStatus            :: !(Maybe Text)
+    { _tvgStatus            :: !(Maybe TargetVPNGatewayStatus)
     , _tvgKind              :: !Text
     , _tvgNetwork           :: !(Maybe Text)
     , _tvgSelfLink          :: !(Maybe Text)
@@ -6195,7 +7355,7 @@ targetVPNGateway =
     }
 
 -- | [Output Only] The status of the VPN gateway.
-tvgStatus :: Lens' TargetVPNGateway (Maybe Text)
+tvgStatus :: Lens' TargetVPNGateway (Maybe TargetVPNGatewayStatus)
 tvgStatus
   = lens _tvgStatus (\ s a -> s{_tvgStatus = a})
 
@@ -6297,6 +7457,27 @@ instance ToJSON TargetVPNGateway where
                   ("description" .=) <$> _tvgDescription,
                   ("forwardingRules" .=) <$> _tvgForwardingRules])
 
+-- | [Output Only] A map of scoped operation lists.
+--
+-- /See:/ 'operationAggregatedListItems' smart constructor.
+data OperationAggregatedListItems =
+    OperationAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationAggregatedListItems' with the minimum fields required to make a request.
+--
+operationAggregatedListItems
+    :: OperationAggregatedListItems
+operationAggregatedListItems = OperationAggregatedListItems
+
+instance FromJSON OperationAggregatedListItems where
+        parseJSON
+          = withObject "OperationAggregatedListItems"
+              (\ o -> pure OperationAggregatedListItems)
+
+instance ToJSON OperationAggregatedListItems where
+        toJSON = const (Object mempty)
+
 -- | The location in Cloud Storage and naming method of the daily usage
 -- report. Contains bucket_name and report_name prefix.
 --
@@ -6354,6 +7535,27 @@ instance ToJSON UsageExportLocation where
                  [("reportNamePrefix" .=) <$> _uelReportNamePrefix,
                   ("bucketName" .=) <$> _uelBucketName])
 
+-- | [Output Only] A map of scoped disk lists.
+--
+-- /See:/ 'diskAggregatedListItems' smart constructor.
+data DiskAggregatedListItems =
+    DiskAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DiskAggregatedListItems' with the minimum fields required to make a request.
+--
+diskAggregatedListItems
+    :: DiskAggregatedListItems
+diskAggregatedListItems = DiskAggregatedListItems
+
+instance FromJSON DiskAggregatedListItems where
+        parseJSON
+          = withObject "DiskAggregatedListItems"
+              (\ o -> pure DiskAggregatedListItems)
+
+instance ToJSON DiskAggregatedListItems where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
 newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest
@@ -6400,9 +7602,9 @@ instance ToJSON
 -- /See:/ 'managedInstance' smart constructor.
 data ManagedInstance = ManagedInstance
     { _miLastAttempt    :: !(Maybe (Maybe ManagedInstanceLastAttempt))
-    , _miCurrentAction  :: !(Maybe Text)
+    , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
     , _miId             :: !(Maybe Word64)
-    , _miInstanceStatus :: !(Maybe Text)
+    , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
     , _miInstance       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -6438,7 +7640,7 @@ miLastAttempt
 
 -- | The current action that the managed instance group has scheduled for the
 -- instance.
-miCurrentAction :: Lens' ManagedInstance (Maybe Text)
+miCurrentAction :: Lens' ManagedInstance (Maybe ManagedInstanceCurrentAction)
 miCurrentAction
   = lens _miCurrentAction
       (\ s a -> s{_miCurrentAction = a})
@@ -6449,7 +7651,7 @@ miId :: Lens' ManagedInstance (Maybe Word64)
 miId = lens _miId (\ s a -> s{_miId = a})
 
 -- | The status of the instance (empty when instance does not exist).
-miInstanceStatus :: Lens' ManagedInstance (Maybe Text)
+miInstanceStatus :: Lens' ManagedInstance (Maybe ManagedInstanceInstanceStatus)
 miInstanceStatus
   = lens _miInstanceStatus
       (\ s a -> s{_miInstanceStatus = a})
@@ -6482,7 +7684,7 @@ instance ToJSON ManagedInstance where
 --
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
 newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
-    { _iglirInstanceState :: Maybe Text
+    { _iglirInstanceState :: Maybe InstanceGroupsListInstancesRequestInstanceState
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstancesRequest' with the minimum fields required to make a request.
@@ -6500,7 +7702,7 @@ instanceGroupsListInstancesRequest =
 -- | A filter for the state of the instances in the instance group. Valid
 -- options are ALL or RUNNING. If you do not specify this parameter the
 -- list includes all instances regardless of their state.
-iglirInstanceState :: Lens' InstanceGroupsListInstancesRequest (Maybe Text)
+iglirInstanceState :: Lens' InstanceGroupsListInstancesRequest (Maybe InstanceGroupsListInstancesRequestInstanceState)
 iglirInstanceState
   = lens _iglirInstanceState
       (\ s a -> s{_iglirInstanceState = a})
@@ -6601,6 +7803,29 @@ instance ToJSON AddressList where
                   ("selfLink" .=) <$> _alSelfLink,
                   ("id" .=) <$> _alId])
 
+-- | A map of scoped forwarding rule lists.
+--
+-- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
+data ForwardingRuleAggregatedListItems =
+    ForwardingRuleAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ForwardingRuleAggregatedListItems' with the minimum fields required to make a request.
+--
+forwardingRuleAggregatedListItems
+    :: ForwardingRuleAggregatedListItems
+forwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+
+instance FromJSON ForwardingRuleAggregatedListItems
+         where
+        parseJSON
+          = withObject "ForwardingRuleAggregatedListItems"
+              (\ o -> pure ForwardingRuleAggregatedListItems)
+
+instance ToJSON ForwardingRuleAggregatedListItems
+         where
+        toJSON = const (Object mempty)
+
 -- | Contains a list of zone resources.
 --
 -- /See:/ 'zoneList' smart constructor.
@@ -6680,6 +7905,54 @@ instance ToJSON ZoneList where
                   Just ("kind" .= _zlKind), ("items" .=) <$> _zlItems,
                   ("selfLink" .=) <$> _zlSelfLink,
                   ("id" .=) <$> _zlId])
+
+--
+-- /See:/ 'targetVPNGatewaysScopedListWarningData' smart constructor.
+data TargetVPNGatewaysScopedListWarningData = TargetVPNGatewaysScopedListWarningData
+    { _tvgslwdValue :: !(Maybe Text)
+    , _tvgslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetVPNGatewaysScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tvgslwdValue'
+--
+-- * 'tvgslwdKey'
+targetVPNGatewaysScopedListWarningData
+    :: TargetVPNGatewaysScopedListWarningData
+targetVPNGatewaysScopedListWarningData =
+    TargetVPNGatewaysScopedListWarningData
+    { _tvgslwdValue = Nothing
+    , _tvgslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+tvgslwdValue :: Lens' TargetVPNGatewaysScopedListWarningData (Maybe Text)
+tvgslwdValue
+  = lens _tvgslwdValue (\ s a -> s{_tvgslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+tvgslwdKey :: Lens' TargetVPNGatewaysScopedListWarningData (Maybe Text)
+tvgslwdKey
+  = lens _tvgslwdKey (\ s a -> s{_tvgslwdKey = a})
+
+instance FromJSON
+         TargetVPNGatewaysScopedListWarningData where
+        parseJSON
+          = withObject "TargetVPNGatewaysScopedListWarningData"
+              (\ o ->
+                 TargetVPNGatewaysScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         TargetVPNGatewaysScopedListWarningData where
+        toJSON TargetVPNGatewaysScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tvgslwdValue,
+                  ("key" .=) <$> _tvgslwdKey])
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
@@ -6833,6 +8106,75 @@ instance FromJSON URLMapReference where
 instance ToJSON URLMapReference where
         toJSON URLMapReference{..}
           = object (catMaybes [("urlMap" .=) <$> _umrUrlMap])
+
+--
+-- /See:/ 'zoneMaintenanceWindows' smart constructor.
+data ZoneMaintenanceWindows = ZoneMaintenanceWindows
+    { _zmwBeginTime   :: !(Maybe Text)
+    , _zmwName        :: !(Maybe Text)
+    , _zmwEndTime     :: !(Maybe Text)
+    , _zmwDescription :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ZoneMaintenanceWindows' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'zmwBeginTime'
+--
+-- * 'zmwName'
+--
+-- * 'zmwEndTime'
+--
+-- * 'zmwDescription'
+zoneMaintenanceWindows
+    :: ZoneMaintenanceWindows
+zoneMaintenanceWindows =
+    ZoneMaintenanceWindows
+    { _zmwBeginTime = Nothing
+    , _zmwName = Nothing
+    , _zmwEndTime = Nothing
+    , _zmwDescription = Nothing
+    }
+
+-- | [Output Only] Starting time of the maintenance window, in RFC3339
+-- format.
+zmwBeginTime :: Lens' ZoneMaintenanceWindows (Maybe Text)
+zmwBeginTime
+  = lens _zmwBeginTime (\ s a -> s{_zmwBeginTime = a})
+
+-- | [Output Only] Name of the maintenance window.
+zmwName :: Lens' ZoneMaintenanceWindows (Maybe Text)
+zmwName = lens _zmwName (\ s a -> s{_zmwName = a})
+
+-- | [Output Only] Ending time of the maintenance window, in RFC3339 format.
+zmwEndTime :: Lens' ZoneMaintenanceWindows (Maybe Text)
+zmwEndTime
+  = lens _zmwEndTime (\ s a -> s{_zmwEndTime = a})
+
+-- | [Output Only] Textual description of the maintenance window.
+zmwDescription :: Lens' ZoneMaintenanceWindows (Maybe Text)
+zmwDescription
+  = lens _zmwDescription
+      (\ s a -> s{_zmwDescription = a})
+
+instance FromJSON ZoneMaintenanceWindows where
+        parseJSON
+          = withObject "ZoneMaintenanceWindows"
+              (\ o ->
+                 ZoneMaintenanceWindows <$>
+                   (o .:? "beginTime") <*> (o .:? "name") <*>
+                     (o .:? "endTime")
+                     <*> (o .:? "description"))
+
+instance ToJSON ZoneMaintenanceWindows where
+        toJSON ZoneMaintenanceWindows{..}
+          = object
+              (catMaybes
+                 [("beginTime" .=) <$> _zmwBeginTime,
+                  ("name" .=) <$> _zmwName,
+                  ("endTime" .=) <$> _zmwEndTime,
+                  ("description" .=) <$> _zmwDescription])
 
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
@@ -7004,12 +8346,101 @@ instance ToJSON ServiceAccount where
                  [("email" .=) <$> _saEmail,
                   ("scopes" .=) <$> _saScopes])
 
+-- | A map of filtered managed instance group lists.
+--
+-- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
+data InstanceGroupManagerAggregatedListItems =
+    InstanceGroupManagerAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupManagerAggregatedListItems' with the minimum fields required to make a request.
+--
+instanceGroupManagerAggregatedListItems
+    :: InstanceGroupManagerAggregatedListItems
+instanceGroupManagerAggregatedListItems =
+    InstanceGroupManagerAggregatedListItems
+
+instance FromJSON
+         InstanceGroupManagerAggregatedListItems where
+        parseJSON
+          = withObject
+              "InstanceGroupManagerAggregatedListItems"
+              (\ o -> pure InstanceGroupManagerAggregatedListItems)
+
+instance ToJSON
+         InstanceGroupManagerAggregatedListItems where
+        toJSON = const (Object mempty)
+
+-- | [Output Only] Informational warning which replaces the list of addresses
+-- when the list is empty.
+--
+-- /See:/ 'targetVPNGatewaysScopedListWarning' smart constructor.
+data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning
+    { _tvgslwData    :: !(Maybe [TargetVPNGatewaysScopedListWarningData])
+    , _tvgslwCode    :: !(Maybe TargetVPNGatewaysScopedListWarningCode)
+    , _tvgslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetVPNGatewaysScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tvgslwData'
+--
+-- * 'tvgslwCode'
+--
+-- * 'tvgslwMessage'
+targetVPNGatewaysScopedListWarning
+    :: TargetVPNGatewaysScopedListWarning
+targetVPNGatewaysScopedListWarning =
+    TargetVPNGatewaysScopedListWarning
+    { _tvgslwData = Nothing
+    , _tvgslwCode = Nothing
+    , _tvgslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+tvgslwData :: Lens' TargetVPNGatewaysScopedListWarning [TargetVPNGatewaysScopedListWarningData]
+tvgslwData
+  = lens _tvgslwData (\ s a -> s{_tvgslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+tvgslwCode :: Lens' TargetVPNGatewaysScopedListWarning (Maybe TargetVPNGatewaysScopedListWarningCode)
+tvgslwCode
+  = lens _tvgslwCode (\ s a -> s{_tvgslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+tvgslwMessage :: Lens' TargetVPNGatewaysScopedListWarning (Maybe Text)
+tvgslwMessage
+  = lens _tvgslwMessage
+      (\ s a -> s{_tvgslwMessage = a})
+
+instance FromJSON TargetVPNGatewaysScopedListWarning
+         where
+        parseJSON
+          = withObject "TargetVPNGatewaysScopedListWarning"
+              (\ o ->
+                 TargetVPNGatewaysScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetVPNGatewaysScopedListWarning
+         where
+        toJSON TargetVPNGatewaysScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tvgslwData,
+                  ("code" .=) <$> _tvgslwCode,
+                  ("message" .=) <$> _tvgslwMessage])
+
 -- | Message containing information of one individual backend.
 --
 -- /See:/ 'backend' smart constructor.
 data Backend = Backend
     { _bGroup              :: !(Maybe Text)
-    , _bBalancingMode      :: !(Maybe Text)
+    , _bBalancingMode      :: !(Maybe BackendBalancingMode)
     , _bMaxUtilization     :: !(Maybe Float)
     , _bMaxRate            :: !(Maybe Int32)
     , _bMaxRatePerInstance :: !(Maybe Float)
@@ -7059,7 +8490,7 @@ bGroup = lens _bGroup (\ s a -> s{_bGroup = a})
 
 -- | Specifies the balancing mode for this backend. The default is
 -- UTILIZATION but available values are UTILIZATION and RATE.
-bBalancingMode :: Lens' Backend (Maybe Text)
+bBalancingMode :: Lens' Backend (Maybe BackendBalancingMode)
 bBalancingMode
   = lens _bBalancingMode
       (\ s a -> s{_bBalancingMode = a})
@@ -7125,6 +8556,27 @@ instance ToJSON Backend where
                   ("maxRatePerInstance" .=) <$> _bMaxRatePerInstance,
                   ("description" .=) <$> _bDescription,
                   ("capacityScaler" .=) <$> _bCapacityScaler])
+
+-- | A map of scoped target pool lists.
+--
+-- /See:/ 'targetPoolAggregatedListItems' smart constructor.
+data TargetPoolAggregatedListItems =
+    TargetPoolAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetPoolAggregatedListItems' with the minimum fields required to make a request.
+--
+targetPoolAggregatedListItems
+    :: TargetPoolAggregatedListItems
+targetPoolAggregatedListItems = TargetPoolAggregatedListItems
+
+instance FromJSON TargetPoolAggregatedListItems where
+        parseJSON
+          = withObject "TargetPoolAggregatedListItems"
+              (\ o -> pure TargetPoolAggregatedListItems)
+
+instance ToJSON TargetPoolAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
@@ -7510,15 +8962,15 @@ instance ToJSON AutoscalerList where
 -- /See:/ 'attachedDisk' smart constructor.
 data AttachedDisk = AttachedDisk
     { _adKind             :: !Text
-    , _adMode             :: !(Maybe Text)
+    , _adMode             :: !(Maybe AttachedDiskMode)
     , _adBoot             :: !(Maybe Bool)
     , _adAutoDelete       :: !(Maybe Bool)
     , _adInitializeParams :: !(Maybe (Maybe AttachedDiskInitializeParams))
     , _adDeviceName       :: !(Maybe Text)
-    , _adInterface        :: !(Maybe Text)
+    , _adInterface        :: !(Maybe AttachedDiskInterface)
     , _adSource           :: !(Maybe Text)
     , _adLicenses         :: !(Maybe [Text])
-    , _adType             :: !(Maybe Text)
+    , _adType             :: !(Maybe AttachedDiskType)
     , _adIndex            :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7571,7 +9023,7 @@ adKind = lens _adKind (\ s a -> s{_adKind = a})
 
 -- | The mode in which to attach this disk, either READ_WRITE or READ_ONLY.
 -- If not specified, the default is to attach the disk in READ_WRITE mode.
-adMode :: Lens' AttachedDisk (Maybe Text)
+adMode :: Lens' AttachedDisk (Maybe AttachedDiskMode)
 adMode = lens _adMode (\ s a -> s{_adMode = a})
 
 -- | Indicates that this is a boot disk. The virtual machine will use the
@@ -7607,7 +9059,7 @@ adDeviceName :: Lens' AttachedDisk (Maybe Text)
 adDeviceName
   = lens _adDeviceName (\ s a -> s{_adDeviceName = a})
 
-adInterface :: Lens' AttachedDisk (Maybe Text)
+adInterface :: Lens' AttachedDisk (Maybe AttachedDiskInterface)
 adInterface
   = lens _adInterface (\ s a -> s{_adInterface = a})
 
@@ -7625,7 +9077,7 @@ adLicenses
 
 -- | Specifies the type of the disk, either SCRATCH or PERSISTENT. If not
 -- specified, the default is PERSISTENT.
-adType :: Lens' AttachedDisk (Maybe Text)
+adType :: Lens' AttachedDisk (Maybe AttachedDiskType)
 adType = lens _adType (\ s a -> s{_adType = a})
 
 -- | Assigns a zero-based index to this disk, where 0 is reserved for the
@@ -7751,6 +9203,27 @@ instance ToJSON TargetHTTPProxyList where
                   ("items" .=) <$> _thttpplItems,
                   ("selfLink" .=) <$> _thttpplSelfLink,
                   ("id" .=) <$> _thttpplId])
+
+-- | [Output Only] A map of scoped address lists.
+--
+-- /See:/ 'addressAggregatedListItems' smart constructor.
+data AddressAggregatedListItems =
+    AddressAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AddressAggregatedListItems' with the minimum fields required to make a request.
+--
+addressAggregatedListItems
+    :: AddressAggregatedListItems
+addressAggregatedListItems = AddressAggregatedListItems
+
+instance FromJSON AddressAggregatedListItems where
+        parseJSON
+          = withObject "AddressAggregatedListItems"
+              (\ o -> pure AddressAggregatedListItems)
+
+instance ToJSON AddressAggregatedListItems where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'machineTypesScopedList' smart constructor.
@@ -8663,6 +10136,44 @@ instance ToJSON RegionList where
                   ("selfLink" .=) <$> _regSelfLink,
                   ("id" .=) <$> _regId])
 
+-- | [Output Only] If errors are generated during processing of the
+-- operation, this field will be populated.
+--
+-- /See:/ 'operationError' smart constructor.
+newtype OperationError = OperationError
+    { _oeErrors :: Maybe [OperationErrorErrors]
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeErrors'
+operationError
+    :: OperationError
+operationError =
+    OperationError
+    { _oeErrors = Nothing
+    }
+
+-- | [Output Only] The array of errors encountered while processing this
+-- operation.
+oeErrors :: Lens' OperationError [OperationErrorErrors]
+oeErrors
+  = lens _oeErrors (\ s a -> s{_oeErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON OperationError where
+        parseJSON
+          = withObject "OperationError"
+              (\ o ->
+                 OperationError <$> (o .:? "errors" .!= mempty))
+
+instance ToJSON OperationError where
+        toJSON OperationError{..}
+          = object (catMaybes [("errors" .=) <$> _oeErrors])
+
 -- | A Machine Type resource.
 --
 -- /See:/ 'machineType' smart constructor.
@@ -8673,7 +10184,7 @@ data MachineType = MachineType
     , _mtSelfLink                     :: !(Maybe Text)
     , _mtName                         :: !(Maybe Text)
     , _mtCreationTimestamp            :: !(Maybe Text)
-    , _mtScratchDisks                 :: !(Maybe [MachineTypeScratchDisksItem])
+    , _mtScratchDisks                 :: !(Maybe [MachineTypeScratchDisks])
     , _mtId                           :: !(Maybe Word64)
     , _mtGuestCpus                    :: !(Maybe Int32)
     , _mtMaximumPersistentDisksSizeGb :: !(Maybe Int64)
@@ -8766,7 +10277,7 @@ mtCreationTimestamp
       (\ s a -> s{_mtCreationTimestamp = a})
 
 -- | [Output Only] List of extended scratch disks assigned to the instance.
-mtScratchDisks :: Lens' MachineType [MachineTypeScratchDisksItem]
+mtScratchDisks :: Lens' MachineType [MachineTypeScratchDisks]
 mtScratchDisks
   = lens _mtScratchDisks
       (\ s a -> s{_mtScratchDisks = a})
@@ -9067,6 +10578,69 @@ instance ToJSON URLMapValidationResult where
                   ("testPassed" .=) <$> _umvrTestPassed,
                   ("testFailures" .=) <$> _umvrTestFailures])
 
+-- | Informational warning which replaces the list of addresses when the list
+-- is empty.
+--
+-- /See:/ 'targetInstancesScopedListWarning' smart constructor.
+data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
+    { _tislwData    :: !(Maybe [TargetInstancesScopedListWarningData])
+    , _tislwCode    :: !(Maybe TargetInstancesScopedListWarningCode)
+    , _tislwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetInstancesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tislwData'
+--
+-- * 'tislwCode'
+--
+-- * 'tislwMessage'
+targetInstancesScopedListWarning
+    :: TargetInstancesScopedListWarning
+targetInstancesScopedListWarning =
+    TargetInstancesScopedListWarning
+    { _tislwData = Nothing
+    , _tislwCode = Nothing
+    , _tislwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+tislwData :: Lens' TargetInstancesScopedListWarning [TargetInstancesScopedListWarningData]
+tislwData
+  = lens _tislwData (\ s a -> s{_tislwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+tislwCode :: Lens' TargetInstancesScopedListWarning (Maybe TargetInstancesScopedListWarningCode)
+tislwCode
+  = lens _tislwCode (\ s a -> s{_tislwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+tislwMessage :: Lens' TargetInstancesScopedListWarning (Maybe Text)
+tislwMessage
+  = lens _tislwMessage (\ s a -> s{_tislwMessage = a})
+
+instance FromJSON TargetInstancesScopedListWarning
+         where
+        parseJSON
+          = withObject "TargetInstancesScopedListWarning"
+              (\ o ->
+                 TargetInstancesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetInstancesScopedListWarning
+         where
+        toJSON TargetInstancesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tislwData,
+                  ("code" .=) <$> _tislwCode,
+                  ("message" .=) <$> _tislwMessage])
+
 --
 -- /See:/ 'autoscaler' smart constructor.
 data Autoscaler = Autoscaler
@@ -9282,13 +10856,61 @@ instance ToJSON InstanceGroupsListInstances where
                   ("selfLink" .=) <$> _igliSelfLink,
                   ("id" .=) <$> _igliId])
 
+--
+-- /See:/ 'targetInstancesScopedListWarningData' smart constructor.
+data TargetInstancesScopedListWarningData = TargetInstancesScopedListWarningData
+    { _tislwdValue :: !(Maybe Text)
+    , _tislwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetInstancesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tislwdValue'
+--
+-- * 'tislwdKey'
+targetInstancesScopedListWarningData
+    :: TargetInstancesScopedListWarningData
+targetInstancesScopedListWarningData =
+    TargetInstancesScopedListWarningData
+    { _tislwdValue = Nothing
+    , _tislwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+tislwdValue :: Lens' TargetInstancesScopedListWarningData (Maybe Text)
+tislwdValue
+  = lens _tislwdValue (\ s a -> s{_tislwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+tislwdKey :: Lens' TargetInstancesScopedListWarningData (Maybe Text)
+tislwdKey
+  = lens _tislwdKey (\ s a -> s{_tislwdKey = a})
+
+instance FromJSON
+         TargetInstancesScopedListWarningData where
+        parseJSON
+          = withObject "TargetInstancesScopedListWarningData"
+              (\ o ->
+                 TargetInstancesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON TargetInstancesScopedListWarningData
+         where
+        toJSON TargetInstancesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tislwdValue,
+                  ("key" .=) <$> _tislwdKey])
+
 -- | A metadata key\/value entry.
 --
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind        :: !Text
     , _mFingerprint :: !(Maybe Word8)
-    , _mItems       :: !(Maybe [MetadataItemsItem])
+    , _mItems       :: !(Maybe [MetadataItems])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
@@ -9325,7 +10947,7 @@ mFingerprint
 
 -- | Array of key\/value pairs. The total size of all keys and values must be
 -- less than 512 KB.
-mItems :: Lens' Metadata [MetadataItemsItem]
+mItems :: Lens' Metadata [MetadataItems]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
@@ -9466,7 +11088,7 @@ instance ToJSON TargetHTTPProxy where
 --
 -- /See:/ 'region' smart constructor.
 data Region = Region
-    { _rrStatus            :: !(Maybe Text)
+    { _rrStatus            :: !(Maybe RegionStatus)
     , _rrZones             :: !(Maybe [Text])
     , _rrKind              :: !Text
     , _rrSelfLink          :: !(Maybe Text)
@@ -9518,7 +11140,7 @@ region =
     }
 
 -- | [Output Only] Status of the region, either UP or DOWN.
-rrStatus :: Lens' Region (Maybe Text)
+rrStatus :: Lens' Region (Maybe RegionStatus)
 rrStatus = lens _rrStatus (\ s a -> s{_rrStatus = a})
 
 -- | [Output Only] A list of zones available in this region, in the form of
@@ -9599,10 +11221,164 @@ instance ToJSON Region where
                   ("deprecated" .=) <$> _rrDeprecated])
 
 --
+-- /See:/ 'operationsScopedListWarningData' smart constructor.
+data OperationsScopedListWarningData = OperationsScopedListWarningData
+    { _oslwdValue :: !(Maybe Text)
+    , _oslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationsScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oslwdValue'
+--
+-- * 'oslwdKey'
+operationsScopedListWarningData
+    :: OperationsScopedListWarningData
+operationsScopedListWarningData =
+    OperationsScopedListWarningData
+    { _oslwdValue = Nothing
+    , _oslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+oslwdValue :: Lens' OperationsScopedListWarningData (Maybe Text)
+oslwdValue
+  = lens _oslwdValue (\ s a -> s{_oslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+oslwdKey :: Lens' OperationsScopedListWarningData (Maybe Text)
+oslwdKey = lens _oslwdKey (\ s a -> s{_oslwdKey = a})
+
+instance FromJSON OperationsScopedListWarningData
+         where
+        parseJSON
+          = withObject "OperationsScopedListWarningData"
+              (\ o ->
+                 OperationsScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON OperationsScopedListWarningData where
+        toJSON OperationsScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _oslwdValue,
+                  ("key" .=) <$> _oslwdKey])
+
+--
+-- /See:/ 'disksScopedListWarningData' smart constructor.
+data DisksScopedListWarningData = DisksScopedListWarningData
+    { _dslwdValue :: !(Maybe Text)
+    , _dslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisksScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dslwdValue'
+--
+-- * 'dslwdKey'
+disksScopedListWarningData
+    :: DisksScopedListWarningData
+disksScopedListWarningData =
+    DisksScopedListWarningData
+    { _dslwdValue = Nothing
+    , _dslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+dslwdValue :: Lens' DisksScopedListWarningData (Maybe Text)
+dslwdValue
+  = lens _dslwdValue (\ s a -> s{_dslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+dslwdKey :: Lens' DisksScopedListWarningData (Maybe Text)
+dslwdKey = lens _dslwdKey (\ s a -> s{_dslwdKey = a})
+
+instance FromJSON DisksScopedListWarningData where
+        parseJSON
+          = withObject "DisksScopedListWarningData"
+              (\ o ->
+                 DisksScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON DisksScopedListWarningData where
+        toJSON DisksScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _dslwdValue,
+                  ("key" .=) <$> _dslwdKey])
+
+-- | Informational warning which replaces the list of forwarding rules when
+-- the list is empty.
+--
+-- /See:/ 'forwardingRulesScopedListWarning' smart constructor.
+data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
+    { _frslwData    :: !(Maybe [ForwardingRulesScopedListWarningData])
+    , _frslwCode    :: !(Maybe ForwardingRulesScopedListWarningCode)
+    , _frslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ForwardingRulesScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frslwData'
+--
+-- * 'frslwCode'
+--
+-- * 'frslwMessage'
+forwardingRulesScopedListWarning
+    :: ForwardingRulesScopedListWarning
+forwardingRulesScopedListWarning =
+    ForwardingRulesScopedListWarning
+    { _frslwData = Nothing
+    , _frslwCode = Nothing
+    , _frslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+frslwData :: Lens' ForwardingRulesScopedListWarning [ForwardingRulesScopedListWarningData]
+frslwData
+  = lens _frslwData (\ s a -> s{_frslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+frslwCode :: Lens' ForwardingRulesScopedListWarning (Maybe ForwardingRulesScopedListWarningCode)
+frslwCode
+  = lens _frslwCode (\ s a -> s{_frslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+frslwMessage :: Lens' ForwardingRulesScopedListWarning (Maybe Text)
+frslwMessage
+  = lens _frslwMessage (\ s a -> s{_frslwMessage = a})
+
+instance FromJSON ForwardingRulesScopedListWarning
+         where
+        parseJSON
+          = withObject "ForwardingRulesScopedListWarning"
+              (\ o ->
+                 ForwardingRulesScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON ForwardingRulesScopedListWarning
+         where
+        toJSON ForwardingRulesScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _frslwData,
+                  ("code" .=) <$> _frslwCode,
+                  ("message" .=) <$> _frslwMessage])
+
+--
 -- /See:/ 'vPNTunnel' smart constructor.
 data VPNTunnel = VPNTunnel
     { _vtDetailedStatus    :: !(Maybe Text)
-    , _vtStatus            :: !(Maybe Text)
+    , _vtStatus            :: !(Maybe VPNTunnelStatus)
     , _vtKind              :: !Text
     , _vtPeerIp            :: !(Maybe Text)
     , _vtTargetVpnGateway  :: !(Maybe Text)
@@ -9675,7 +11451,7 @@ vtDetailedStatus
       (\ s a -> s{_vtDetailedStatus = a})
 
 -- | [Output Only] The status of the VPN tunnel.
-vtStatus :: Lens' VPNTunnel (Maybe Text)
+vtStatus :: Lens' VPNTunnel (Maybe VPNTunnelStatus)
 vtStatus = lens _vtStatus (\ s a -> s{_vtStatus = a})
 
 -- | [Output Only] Type of resource. Always compute#vpnTunnel for VPN
@@ -9787,12 +11563,120 @@ instance ToJSON VPNTunnel where
                   ("region" .=) <$> _vtRegion,
                   ("description" .=) <$> _vtDescription])
 
+-- | [Output Only] Informational warning which replaces the list of
+-- operations when the list is empty.
+--
+-- /See:/ 'operationsScopedListWarning' smart constructor.
+data OperationsScopedListWarning = OperationsScopedListWarning
+    { _oslwData    :: !(Maybe [OperationsScopedListWarningData])
+    , _oslwCode    :: !(Maybe OperationsScopedListWarningCode)
+    , _oslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationsScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oslwData'
+--
+-- * 'oslwCode'
+--
+-- * 'oslwMessage'
+operationsScopedListWarning
+    :: OperationsScopedListWarning
+operationsScopedListWarning =
+    OperationsScopedListWarning
+    { _oslwData = Nothing
+    , _oslwCode = Nothing
+    , _oslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+oslwData :: Lens' OperationsScopedListWarning [OperationsScopedListWarningData]
+oslwData
+  = lens _oslwData (\ s a -> s{_oslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+oslwCode :: Lens' OperationsScopedListWarning (Maybe OperationsScopedListWarningCode)
+oslwCode = lens _oslwCode (\ s a -> s{_oslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+oslwMessage :: Lens' OperationsScopedListWarning (Maybe Text)
+oslwMessage
+  = lens _oslwMessage (\ s a -> s{_oslwMessage = a})
+
+instance FromJSON OperationsScopedListWarning where
+        parseJSON
+          = withObject "OperationsScopedListWarning"
+              (\ o ->
+                 OperationsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationsScopedListWarning where
+        toJSON OperationsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _oslwData,
+                  ("code" .=) <$> _oslwCode,
+                  ("message" .=) <$> _oslwMessage])
+
+--
+-- /See:/ 'targetPoolsScopedListWarningData' smart constructor.
+data TargetPoolsScopedListWarningData = TargetPoolsScopedListWarningData
+    { _tpslwdValue :: !(Maybe Text)
+    , _tpslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetPoolsScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpslwdValue'
+--
+-- * 'tpslwdKey'
+targetPoolsScopedListWarningData
+    :: TargetPoolsScopedListWarningData
+targetPoolsScopedListWarningData =
+    TargetPoolsScopedListWarningData
+    { _tpslwdValue = Nothing
+    , _tpslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+tpslwdValue :: Lens' TargetPoolsScopedListWarningData (Maybe Text)
+tpslwdValue
+  = lens _tpslwdValue (\ s a -> s{_tpslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+tpslwdKey :: Lens' TargetPoolsScopedListWarningData (Maybe Text)
+tpslwdKey
+  = lens _tpslwdKey (\ s a -> s{_tpslwdKey = a})
+
+instance FromJSON TargetPoolsScopedListWarningData
+         where
+        parseJSON
+          = withObject "TargetPoolsScopedListWarningData"
+              (\ o ->
+                 TargetPoolsScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON TargetPoolsScopedListWarningData
+         where
+        toJSON TargetPoolsScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tpslwdValue,
+                  ("key" .=) <$> _tpslwdKey])
+
 -- | Sets the scheduling options for an Instance.
 --
 -- /See:/ 'scheduling' smart constructor.
 data Scheduling = Scheduling
     { _sAutomaticRestart  :: !(Maybe Bool)
-    , _sOnHostMaintenance :: !(Maybe Text)
+    , _sOnHostMaintenance :: !(Maybe SchedulingOnHostMaintenance)
     , _sPreemptible       :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9827,7 +11711,7 @@ sAutomaticRestart
 -- instances, the default behavior is MIGRATE. For preemptible instances,
 -- the default and only possible behavior is TERMINATE. For more
 -- information, see Setting maintenance behavior.
-sOnHostMaintenance :: Lens' Scheduling (Maybe Text)
+sOnHostMaintenance :: Lens' Scheduling (Maybe SchedulingOnHostMaintenance)
 sOnHostMaintenance
   = lens _sOnHostMaintenance
       (\ s a -> s{_sOnHostMaintenance = a})
@@ -9855,10 +11739,168 @@ instance ToJSON Scheduling where
                   ("preemptible" .=) <$> _sPreemptible])
 
 --
+-- /See:/ 'forwardingRulesScopedListWarningData' smart constructor.
+data ForwardingRulesScopedListWarningData = ForwardingRulesScopedListWarningData
+    { _frslwdValue :: !(Maybe Text)
+    , _frslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ForwardingRulesScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'frslwdValue'
+--
+-- * 'frslwdKey'
+forwardingRulesScopedListWarningData
+    :: ForwardingRulesScopedListWarningData
+forwardingRulesScopedListWarningData =
+    ForwardingRulesScopedListWarningData
+    { _frslwdValue = Nothing
+    , _frslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+frslwdValue :: Lens' ForwardingRulesScopedListWarningData (Maybe Text)
+frslwdValue
+  = lens _frslwdValue (\ s a -> s{_frslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+frslwdKey :: Lens' ForwardingRulesScopedListWarningData (Maybe Text)
+frslwdKey
+  = lens _frslwdKey (\ s a -> s{_frslwdKey = a})
+
+instance FromJSON
+         ForwardingRulesScopedListWarningData where
+        parseJSON
+          = withObject "ForwardingRulesScopedListWarningData"
+              (\ o ->
+                 ForwardingRulesScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON ForwardingRulesScopedListWarningData
+         where
+        toJSON ForwardingRulesScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _frslwdValue,
+                  ("key" .=) <$> _frslwdKey])
+
+-- | Informational warning which replaces the list of addresses when the list
+-- is empty.
+--
+-- /See:/ 'targetPoolsScopedListWarning' smart constructor.
+data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
+    { _tpslwData    :: !(Maybe [TargetPoolsScopedListWarningData])
+    , _tpslwCode    :: !(Maybe TargetPoolsScopedListWarningCode)
+    , _tpslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetPoolsScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpslwData'
+--
+-- * 'tpslwCode'
+--
+-- * 'tpslwMessage'
+targetPoolsScopedListWarning
+    :: TargetPoolsScopedListWarning
+targetPoolsScopedListWarning =
+    TargetPoolsScopedListWarning
+    { _tpslwData = Nothing
+    , _tpslwCode = Nothing
+    , _tpslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+tpslwData :: Lens' TargetPoolsScopedListWarning [TargetPoolsScopedListWarningData]
+tpslwData
+  = lens _tpslwData (\ s a -> s{_tpslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+tpslwCode :: Lens' TargetPoolsScopedListWarning (Maybe TargetPoolsScopedListWarningCode)
+tpslwCode
+  = lens _tpslwCode (\ s a -> s{_tpslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+tpslwMessage :: Lens' TargetPoolsScopedListWarning (Maybe Text)
+tpslwMessage
+  = lens _tpslwMessage (\ s a -> s{_tpslwMessage = a})
+
+instance FromJSON TargetPoolsScopedListWarning where
+        parseJSON
+          = withObject "TargetPoolsScopedListWarning"
+              (\ o ->
+                 TargetPoolsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON TargetPoolsScopedListWarning where
+        toJSON TargetPoolsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _tpslwData,
+                  ("code" .=) <$> _tpslwCode,
+                  ("message" .=) <$> _tpslwMessage])
+
+--
+-- /See:/ 'instanceGroupManagersScopedListWarningData' smart constructor.
+data InstanceGroupManagersScopedListWarningData = InstanceGroupManagersScopedListWarningData
+    { _igmslwdValue :: !(Maybe Text)
+    , _igmslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupManagersScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmslwdValue'
+--
+-- * 'igmslwdKey'
+instanceGroupManagersScopedListWarningData
+    :: InstanceGroupManagersScopedListWarningData
+instanceGroupManagersScopedListWarningData =
+    InstanceGroupManagersScopedListWarningData
+    { _igmslwdValue = Nothing
+    , _igmslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+igmslwdValue :: Lens' InstanceGroupManagersScopedListWarningData (Maybe Text)
+igmslwdValue
+  = lens _igmslwdValue (\ s a -> s{_igmslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+igmslwdKey :: Lens' InstanceGroupManagersScopedListWarningData (Maybe Text)
+igmslwdKey
+  = lens _igmslwdKey (\ s a -> s{_igmslwdKey = a})
+
+instance FromJSON
+         InstanceGroupManagersScopedListWarningData where
+        parseJSON
+          = withObject
+              "InstanceGroupManagersScopedListWarningData"
+              (\ o ->
+                 InstanceGroupManagersScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON
+         InstanceGroupManagersScopedListWarningData where
+        toJSON InstanceGroupManagersScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _igmslwdValue,
+                  ("key" .=) <$> _igmslwdKey])
+
+--
 -- /See:/ 'healthStatus' smart constructor.
 data HealthStatus = HealthStatus
     { _hsIpAddress   :: !(Maybe Text)
-    , _hsHealthState :: !(Maybe Text)
+    , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe Int32)
     , _hsInstance    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -9890,7 +11932,7 @@ hsIpAddress
   = lens _hsIpAddress (\ s a -> s{_hsIpAddress = a})
 
 -- | Health state of the instance.
-hsHealthState :: Lens' HealthStatus (Maybe Text)
+hsHealthState :: Lens' HealthStatus (Maybe HealthStatusHealthState)
 hsHealthState
   = lens _hsHealthState
       (\ s a -> s{_hsHealthState = a})
@@ -9921,6 +11963,153 @@ instance ToJSON HealthStatus where
                   ("healthState" .=) <$> _hsHealthState,
                   ("port" .=) <$> _hsPort,
                   ("instance" .=) <$> _hsInstance])
+
+-- | A map of scoped target vpn gateway lists.
+--
+-- /See:/ 'targetVPNGatewayAggregatedListItems' smart constructor.
+data TargetVPNGatewayAggregatedListItems =
+    TargetVPNGatewayAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TargetVPNGatewayAggregatedListItems' with the minimum fields required to make a request.
+--
+targetVPNGatewayAggregatedListItems
+    :: TargetVPNGatewayAggregatedListItems
+targetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems
+
+instance FromJSON TargetVPNGatewayAggregatedListItems
+         where
+        parseJSON
+          = withObject "TargetVPNGatewayAggregatedListItems"
+              (\ o -> pure TargetVPNGatewayAggregatedListItems)
+
+instance ToJSON TargetVPNGatewayAggregatedListItems
+         where
+        toJSON = const (Object mempty)
+
+-- | [Output Only] Informational warning which replaces the list of disks
+-- when the list is empty.
+--
+-- /See:/ 'disksScopedListWarning' smart constructor.
+data DisksScopedListWarning = DisksScopedListWarning
+    { _dslwData    :: !(Maybe [DisksScopedListWarningData])
+    , _dslwCode    :: !(Maybe DisksScopedListWarningCode)
+    , _dslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisksScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dslwData'
+--
+-- * 'dslwCode'
+--
+-- * 'dslwMessage'
+disksScopedListWarning
+    :: DisksScopedListWarning
+disksScopedListWarning =
+    DisksScopedListWarning
+    { _dslwData = Nothing
+    , _dslwCode = Nothing
+    , _dslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+dslwData :: Lens' DisksScopedListWarning [DisksScopedListWarningData]
+dslwData
+  = lens _dslwData (\ s a -> s{_dslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+dslwCode :: Lens' DisksScopedListWarning (Maybe DisksScopedListWarningCode)
+dslwCode = lens _dslwCode (\ s a -> s{_dslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+dslwMessage :: Lens' DisksScopedListWarning (Maybe Text)
+dslwMessage
+  = lens _dslwMessage (\ s a -> s{_dslwMessage = a})
+
+instance FromJSON DisksScopedListWarning where
+        parseJSON
+          = withObject "DisksScopedListWarning"
+              (\ o ->
+                 DisksScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON DisksScopedListWarning where
+        toJSON DisksScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _dslwData,
+                  ("code" .=) <$> _dslwCode,
+                  ("message" .=) <$> _dslwMessage])
+
+-- | [Output Only] The warning that replaces the list of managed instance
+-- groups when the list is empty.
+--
+-- /See:/ 'instanceGroupManagersScopedListWarning' smart constructor.
+data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning
+    { _igmslwData    :: !(Maybe [InstanceGroupManagersScopedListWarningData])
+    , _igmslwCode    :: !(Maybe InstanceGroupManagersScopedListWarningCode)
+    , _igmslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupManagersScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmslwData'
+--
+-- * 'igmslwCode'
+--
+-- * 'igmslwMessage'
+instanceGroupManagersScopedListWarning
+    :: InstanceGroupManagersScopedListWarning
+instanceGroupManagersScopedListWarning =
+    InstanceGroupManagersScopedListWarning
+    { _igmslwData = Nothing
+    , _igmslwCode = Nothing
+    , _igmslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+igmslwData :: Lens' InstanceGroupManagersScopedListWarning [InstanceGroupManagersScopedListWarningData]
+igmslwData
+  = lens _igmslwData (\ s a -> s{_igmslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+igmslwCode :: Lens' InstanceGroupManagersScopedListWarning (Maybe InstanceGroupManagersScopedListWarningCode)
+igmslwCode
+  = lens _igmslwCode (\ s a -> s{_igmslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+igmslwMessage :: Lens' InstanceGroupManagersScopedListWarning (Maybe Text)
+igmslwMessage
+  = lens _igmslwMessage
+      (\ s a -> s{_igmslwMessage = a})
+
+instance FromJSON
+         InstanceGroupManagersScopedListWarning where
+        parseJSON
+          = withObject "InstanceGroupManagersScopedListWarning"
+              (\ o ->
+                 InstanceGroupManagersScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+         InstanceGroupManagersScopedListWarning where
+        toJSON InstanceGroupManagersScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _igmslwData,
+                  ("code" .=) <$> _igmslwCode,
+                  ("message" .=) <$> _igmslwMessage])
 
 -- | Contains a list of HttpHealthCheck resources.
 --
@@ -10176,6 +12365,179 @@ instance ToJSON BackendServiceList where
                   ("selfLink" .=) <$> _bslSelfLink,
                   ("id" .=) <$> _bslId])
 
+--
+-- /See:/ 'managedInstanceLastAttemptErrorsErrors' smart constructor.
+data ManagedInstanceLastAttemptErrorsErrors = ManagedInstanceLastAttemptErrorsErrors
+    { _milaeeLocation :: !(Maybe Text)
+    , _milaeeCode     :: !(Maybe Text)
+    , _milaeeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ManagedInstanceLastAttemptErrorsErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'milaeeLocation'
+--
+-- * 'milaeeCode'
+--
+-- * 'milaeeMessage'
+managedInstanceLastAttemptErrorsErrors
+    :: ManagedInstanceLastAttemptErrorsErrors
+managedInstanceLastAttemptErrorsErrors =
+    ManagedInstanceLastAttemptErrorsErrors
+    { _milaeeLocation = Nothing
+    , _milaeeCode = Nothing
+    , _milaeeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request which caused the error.
+-- This property is optional.
+milaeeLocation :: Lens' ManagedInstanceLastAttemptErrorsErrors (Maybe Text)
+milaeeLocation
+  = lens _milaeeLocation
+      (\ s a -> s{_milaeeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+milaeeCode :: Lens' ManagedInstanceLastAttemptErrorsErrors (Maybe Text)
+milaeeCode
+  = lens _milaeeCode (\ s a -> s{_milaeeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+milaeeMessage :: Lens' ManagedInstanceLastAttemptErrorsErrors (Maybe Text)
+milaeeMessage
+  = lens _milaeeMessage
+      (\ s a -> s{_milaeeMessage = a})
+
+instance FromJSON
+         ManagedInstanceLastAttemptErrorsErrors where
+        parseJSON
+          = withObject "ManagedInstanceLastAttemptErrorsErrors"
+              (\ o ->
+                 ManagedInstanceLastAttemptErrorsErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON
+         ManagedInstanceLastAttemptErrorsErrors where
+        toJSON ManagedInstanceLastAttemptErrorsErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _milaeeLocation,
+                  ("code" .=) <$> _milaeeCode,
+                  ("message" .=) <$> _milaeeMessage])
+
+-- | [Output Only] An informational warning that replaces the list of
+-- instance groups when the list is empty.
+--
+-- /See:/ 'instanceGroupsScopedListWarning' smart constructor.
+data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
+    { _igslwData    :: !(Maybe [InstanceGroupsScopedListWarningData])
+    , _igslwCode    :: !(Maybe InstanceGroupsScopedListWarningCode)
+    , _igslwMessage :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupsScopedListWarning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igslwData'
+--
+-- * 'igslwCode'
+--
+-- * 'igslwMessage'
+instanceGroupsScopedListWarning
+    :: InstanceGroupsScopedListWarning
+instanceGroupsScopedListWarning =
+    InstanceGroupsScopedListWarning
+    { _igslwData = Nothing
+    , _igslwCode = Nothing
+    , _igslwMessage = Nothing
+    }
+
+-- | [Output Only] Metadata for this warning in key: value format.
+igslwData :: Lens' InstanceGroupsScopedListWarning [InstanceGroupsScopedListWarningData]
+igslwData
+  = lens _igslwData (\ s a -> s{_igslwData = a}) .
+      _Default
+      . _Coerce
+
+-- | [Output Only] The warning type identifier for this warning.
+igslwCode :: Lens' InstanceGroupsScopedListWarning (Maybe InstanceGroupsScopedListWarningCode)
+igslwCode
+  = lens _igslwCode (\ s a -> s{_igslwCode = a})
+
+-- | [Output Only] Optional human-readable details for this warning.
+igslwMessage :: Lens' InstanceGroupsScopedListWarning (Maybe Text)
+igslwMessage
+  = lens _igslwMessage (\ s a -> s{_igslwMessage = a})
+
+instance FromJSON InstanceGroupsScopedListWarning
+         where
+        parseJSON
+          = withObject "InstanceGroupsScopedListWarning"
+              (\ o ->
+                 InstanceGroupsScopedListWarning <$>
+                   (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON InstanceGroupsScopedListWarning where
+        toJSON InstanceGroupsScopedListWarning{..}
+          = object
+              (catMaybes
+                 [("data" .=) <$> _igslwData,
+                  ("code" .=) <$> _igslwCode,
+                  ("message" .=) <$> _igslwMessage])
+
+--
+-- /See:/ 'metadataItems' smart constructor.
+data MetadataItems = MetadataItems
+    { _miValue :: !(Maybe Text)
+    , _miKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MetadataItems' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'miValue'
+--
+-- * 'miKey'
+metadataItems
+    :: MetadataItems
+metadataItems =
+    MetadataItems
+    { _miValue = Nothing
+    , _miKey = Nothing
+    }
+
+-- | Value for the metadata entry. These are free-form strings, and only have
+-- meaning as interpreted by the image running in the instance. The only
+-- restriction placed on values is that their size must be less than or
+-- equal to 32768 bytes.
+miValue :: Lens' MetadataItems (Maybe Text)
+miValue = lens _miValue (\ s a -> s{_miValue = a})
+
+-- | Key for the metadata entry. Keys must conform to the following regexp:
+-- [a-zA-Z0-9-_]+, and be less than 128 bytes in length. This is reflected
+-- as part of a URL in the metadata server. Additionally, to avoid
+-- ambiguity, keys must not conflict with any other metadata keys for the
+-- project.
+miKey :: Lens' MetadataItems (Maybe Text)
+miKey = lens _miKey (\ s a -> s{_miKey = a})
+
+instance FromJSON MetadataItems where
+        parseJSON
+          = withObject "MetadataItems"
+              (\ o ->
+                 MetadataItems <$> (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON MetadataItems where
+        toJSON MetadataItems{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _miValue, ("key" .=) <$> _miKey])
+
 -- | A license resource.
 --
 -- /See:/ 'license' smart constructor.
@@ -10246,6 +12608,54 @@ instance ToJSON License where
                   Just ("kind" .= _lKind),
                   ("selfLink" .=) <$> _lSelfLink,
                   ("name" .=) <$> _lName])
+
+--
+-- /See:/ 'instanceGroupsScopedListWarningData' smart constructor.
+data InstanceGroupsScopedListWarningData = InstanceGroupsScopedListWarningData
+    { _igslwdValue :: !(Maybe Text)
+    , _igslwdKey   :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InstanceGroupsScopedListWarningData' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igslwdValue'
+--
+-- * 'igslwdKey'
+instanceGroupsScopedListWarningData
+    :: InstanceGroupsScopedListWarningData
+instanceGroupsScopedListWarningData =
+    InstanceGroupsScopedListWarningData
+    { _igslwdValue = Nothing
+    , _igslwdKey = Nothing
+    }
+
+-- | [Output Only] A warning data value corresponding to the key.
+igslwdValue :: Lens' InstanceGroupsScopedListWarningData (Maybe Text)
+igslwdValue
+  = lens _igslwdValue (\ s a -> s{_igslwdValue = a})
+
+-- | [Output Only] A key for the warning data.
+igslwdKey :: Lens' InstanceGroupsScopedListWarningData (Maybe Text)
+igslwdKey
+  = lens _igslwdKey (\ s a -> s{_igslwdKey = a})
+
+instance FromJSON InstanceGroupsScopedListWarningData
+         where
+        parseJSON
+          = withObject "InstanceGroupsScopedListWarningData"
+              (\ o ->
+                 InstanceGroupsScopedListWarningData <$>
+                   (o .:? "value") <*> (o .:? "key"))
+
+instance ToJSON InstanceGroupsScopedListWarningData
+         where
+        toJSON InstanceGroupsScopedListWarningData{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _igslwdValue,
+                  ("key" .=) <$> _igslwdKey])
 
 -- | Contains a list of instance resources.
 --
@@ -10512,125 +12922,126 @@ instance ToJSON TargetVPNGatewayAggregatedList where
 --
 -- /See:/ 'instanceGroup' smart constructor.
 data InstanceGroup = InstanceGroup
-    { _igSize              :: !(Maybe Int32)
-    , _igKind              :: !Text
-    , _igFingerprint       :: !(Maybe Word8)
-    , _igNetwork           :: !(Maybe Text)
-    , _igZone              :: !(Maybe Text)
-    , _igSelfLink          :: !(Maybe Text)
-    , _igName              :: !(Maybe Text)
-    , _igCreationTimestamp :: !(Maybe Text)
-    , _igId                :: !(Maybe Word64)
-    , _igDescription       :: !(Maybe Text)
-    , _igNamedPorts        :: !(Maybe [Maybe NamedPort])
+    { _ig1Size              :: !(Maybe Int32)
+    , _ig1Kind              :: !Text
+    , _ig1Fingerprint       :: !(Maybe Word8)
+    , _ig1Network           :: !(Maybe Text)
+    , _ig1Zone              :: !(Maybe Text)
+    , _ig1SelfLink          :: !(Maybe Text)
+    , _ig1Name              :: !(Maybe Text)
+    , _ig1CreationTimestamp :: !(Maybe Text)
+    , _ig1Id                :: !(Maybe Word64)
+    , _ig1Description       :: !(Maybe Text)
+    , _ig1NamedPorts        :: !(Maybe [Maybe NamedPort])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroup' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'igSize'
+-- * 'ig1Size'
 --
--- * 'igKind'
+-- * 'ig1Kind'
 --
--- * 'igFingerprint'
+-- * 'ig1Fingerprint'
 --
--- * 'igNetwork'
+-- * 'ig1Network'
 --
--- * 'igZone'
+-- * 'ig1Zone'
 --
--- * 'igSelfLink'
+-- * 'ig1SelfLink'
 --
--- * 'igName'
+-- * 'ig1Name'
 --
--- * 'igCreationTimestamp'
+-- * 'ig1CreationTimestamp'
 --
--- * 'igId'
+-- * 'ig1Id'
 --
--- * 'igDescription'
+-- * 'ig1Description'
 --
--- * 'igNamedPorts'
+-- * 'ig1NamedPorts'
 instanceGroup
     :: InstanceGroup
 instanceGroup =
     InstanceGroup
-    { _igSize = Nothing
-    , _igKind = "compute#instanceGroup"
-    , _igFingerprint = Nothing
-    , _igNetwork = Nothing
-    , _igZone = Nothing
-    , _igSelfLink = Nothing
-    , _igName = Nothing
-    , _igCreationTimestamp = Nothing
-    , _igId = Nothing
-    , _igDescription = Nothing
-    , _igNamedPorts = Nothing
+    { _ig1Size = Nothing
+    , _ig1Kind = "compute#instanceGroup"
+    , _ig1Fingerprint = Nothing
+    , _ig1Network = Nothing
+    , _ig1Zone = Nothing
+    , _ig1SelfLink = Nothing
+    , _ig1Name = Nothing
+    , _ig1CreationTimestamp = Nothing
+    , _ig1Id = Nothing
+    , _ig1Description = Nothing
+    , _ig1NamedPorts = Nothing
     }
 
 -- | [Output Only] The total number of instances in the instance group.
-igSize :: Lens' InstanceGroup (Maybe Int32)
-igSize = lens _igSize (\ s a -> s{_igSize = a})
+ig1Size :: Lens' InstanceGroup (Maybe Int32)
+ig1Size = lens _ig1Size (\ s a -> s{_ig1Size = a})
 
 -- | [Output Only] The resource type, which is always compute#instanceGroup
 -- for instance groups.
-igKind :: Lens' InstanceGroup Text
-igKind = lens _igKind (\ s a -> s{_igKind = a})
+ig1Kind :: Lens' InstanceGroup Text
+ig1Kind = lens _ig1Kind (\ s a -> s{_ig1Kind = a})
 
 -- | [Output Only] The fingerprint of the named ports information. The system
 -- uses this fingerprint to detect conflicts when multiple users change the
 -- named ports information concurrently.
-igFingerprint :: Lens' InstanceGroup (Maybe Word8)
-igFingerprint
-  = lens _igFingerprint
-      (\ s a -> s{_igFingerprint = a})
+ig1Fingerprint :: Lens' InstanceGroup (Maybe Word8)
+ig1Fingerprint
+  = lens _ig1Fingerprint
+      (\ s a -> s{_ig1Fingerprint = a})
 
 -- | The URL of the network to which all instances in the instance group
 -- belong.
-igNetwork :: Lens' InstanceGroup (Maybe Text)
-igNetwork
-  = lens _igNetwork (\ s a -> s{_igNetwork = a})
+ig1Network :: Lens' InstanceGroup (Maybe Text)
+ig1Network
+  = lens _ig1Network (\ s a -> s{_ig1Network = a})
 
 -- | The URL of the zone where the instance group is located.
-igZone :: Lens' InstanceGroup (Maybe Text)
-igZone = lens _igZone (\ s a -> s{_igZone = a})
+ig1Zone :: Lens' InstanceGroup (Maybe Text)
+ig1Zone = lens _ig1Zone (\ s a -> s{_ig1Zone = a})
 
 -- | [Output Only] The URL for this instance group. The server defines this
 -- URL.
-igSelfLink :: Lens' InstanceGroup (Maybe Text)
-igSelfLink
-  = lens _igSelfLink (\ s a -> s{_igSelfLink = a})
+ig1SelfLink :: Lens' InstanceGroup (Maybe Text)
+ig1SelfLink
+  = lens _ig1SelfLink (\ s a -> s{_ig1SelfLink = a})
 
 -- | The name of the instance group. The name must be 1-63 characters long,
 -- and comply with RFC1035.
-igName :: Lens' InstanceGroup (Maybe Text)
-igName = lens _igName (\ s a -> s{_igName = a})
+ig1Name :: Lens' InstanceGroup (Maybe Text)
+ig1Name = lens _ig1Name (\ s a -> s{_ig1Name = a})
 
 -- | [Output Only] The creation timestamp for this instance group in RFC3339
 -- text format.
-igCreationTimestamp :: Lens' InstanceGroup (Maybe Text)
-igCreationTimestamp
-  = lens _igCreationTimestamp
-      (\ s a -> s{_igCreationTimestamp = a})
+ig1CreationTimestamp :: Lens' InstanceGroup (Maybe Text)
+ig1CreationTimestamp
+  = lens _ig1CreationTimestamp
+      (\ s a -> s{_ig1CreationTimestamp = a})
 
 -- | [Output Only] A unique identifier for this instance group. The server
 -- defines this identifier.
-igId :: Lens' InstanceGroup (Maybe Word64)
-igId = lens _igId (\ s a -> s{_igId = a})
+ig1Id :: Lens' InstanceGroup (Maybe Word64)
+ig1Id = lens _ig1Id (\ s a -> s{_ig1Id = a})
 
 -- | An optional text description for the instance group.
-igDescription :: Lens' InstanceGroup (Maybe Text)
-igDescription
-  = lens _igDescription
-      (\ s a -> s{_igDescription = a})
+ig1Description :: Lens' InstanceGroup (Maybe Text)
+ig1Description
+  = lens _ig1Description
+      (\ s a -> s{_ig1Description = a})
 
 -- | Assigns a name to a port number. For example: {name: ?http?, port: 80}
 -- This allows the system to reference ports by the assigned name instead
 -- of a port number. Named ports can also contain multiple ports. For
 -- example: [{name: ?http?, port: 80},{name: \"http\", port: 8080}] Named
 -- ports apply to all instances in this instance group.
-igNamedPorts :: Lens' InstanceGroup [Maybe NamedPort]
-igNamedPorts
-  = lens _igNamedPorts (\ s a -> s{_igNamedPorts = a})
+ig1NamedPorts :: Lens' InstanceGroup [Maybe NamedPort]
+ig1NamedPorts
+  = lens _ig1NamedPorts
+      (\ s a -> s{_ig1NamedPorts = a})
       . _Default
       . _Coerce
 
@@ -10655,16 +13066,16 @@ instance ToJSON InstanceGroup where
         toJSON InstanceGroup{..}
           = object
               (catMaybes
-                 [("size" .=) <$> _igSize, Just ("kind" .= _igKind),
-                  ("fingerprint" .=) <$> _igFingerprint,
-                  ("network" .=) <$> _igNetwork,
-                  ("zone" .=) <$> _igZone,
-                  ("selfLink" .=) <$> _igSelfLink,
-                  ("name" .=) <$> _igName,
-                  ("creationTimestamp" .=) <$> _igCreationTimestamp,
-                  ("id" .=) <$> _igId,
-                  ("description" .=) <$> _igDescription,
-                  ("namedPorts" .=) <$> _igNamedPorts])
+                 [("size" .=) <$> _ig1Size, Just ("kind" .= _ig1Kind),
+                  ("fingerprint" .=) <$> _ig1Fingerprint,
+                  ("network" .=) <$> _ig1Network,
+                  ("zone" .=) <$> _ig1Zone,
+                  ("selfLink" .=) <$> _ig1SelfLink,
+                  ("name" .=) <$> _ig1Name,
+                  ("creationTimestamp" .=) <$> _ig1CreationTimestamp,
+                  ("id" .=) <$> _ig1Id,
+                  ("description" .=) <$> _ig1Description,
+                  ("namedPorts" .=) <$> _ig1NamedPorts])
 
 -- | UrlMaps A host-matching rule for a URL. If matched, will use the named
 -- PathMatcher to select the BackendService.
@@ -10730,6 +13141,63 @@ instance ToJSON HostRule where
                  [("hosts" .=) <$> _hrHosts,
                   ("description" .=) <$> _hrDescription,
                   ("pathMatcher" .=) <$> _hrPathMatcher])
+
+--
+-- /See:/ 'operationErrorErrors' smart constructor.
+data OperationErrorErrors = OperationErrorErrors
+    { _oeeLocation :: !(Maybe Text)
+    , _oeeCode     :: !(Maybe Text)
+    , _oeeMessage  :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'OperationErrorErrors' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oeeLocation'
+--
+-- * 'oeeCode'
+--
+-- * 'oeeMessage'
+operationErrorErrors
+    :: OperationErrorErrors
+operationErrorErrors =
+    OperationErrorErrors
+    { _oeeLocation = Nothing
+    , _oeeCode = Nothing
+    , _oeeMessage = Nothing
+    }
+
+-- | [Output Only] Indicates the field in the request which caused the error.
+-- This property is optional.
+oeeLocation :: Lens' OperationErrorErrors (Maybe Text)
+oeeLocation
+  = lens _oeeLocation (\ s a -> s{_oeeLocation = a})
+
+-- | [Output Only] The error type identifier for this error.
+oeeCode :: Lens' OperationErrorErrors (Maybe Text)
+oeeCode = lens _oeeCode (\ s a -> s{_oeeCode = a})
+
+-- | [Output Only] An optional, human-readable error message.
+oeeMessage :: Lens' OperationErrorErrors (Maybe Text)
+oeeMessage
+  = lens _oeeMessage (\ s a -> s{_oeeMessage = a})
+
+instance FromJSON OperationErrorErrors where
+        parseJSON
+          = withObject "OperationErrorErrors"
+              (\ o ->
+                 OperationErrorErrors <$>
+                   (o .:? "location") <*> (o .:? "code") <*>
+                     (o .:? "message"))
+
+instance ToJSON OperationErrorErrors where
+        toJSON OperationErrorErrors{..}
+          = object
+              (catMaybes
+                 [("location" .=) <$> _oeeLocation,
+                  ("code" .=) <$> _oeeCode,
+                  ("message" .=) <$> _oeeMessage])
 
 -- | An instance\'s serial console output.
 --
@@ -10910,7 +13378,7 @@ instance ToJSON TargetVPNGatewaysScopedList where
 --
 -- /See:/ 'quota' smart constructor.
 data Quota = Quota
-    { _qMetric :: !(Maybe Text)
+    { _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe Double)
     , _qUsage  :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -10934,7 +13402,7 @@ quota =
     }
 
 -- | [Output Only] Name of the quota metric.
-qMetric :: Lens' Quota (Maybe Text)
+qMetric :: Lens' Quota (Maybe QuotaMetric)
 qMetric = lens _qMetric (\ s a -> s{_qMetric = a})
 
 -- | [Output Only] Quota limit for this metric.
@@ -11090,7 +13558,7 @@ data AccessConfig = AccessConfig
     { _acKind  :: !Text
     , _acName  :: !(Maybe Text)
     , _acNatIP :: !(Maybe Text)
-    , _acType  :: !Text
+    , _acType  :: !AccessConfigType
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccessConfig' with the minimum fields required to make a request.
@@ -11111,7 +13579,7 @@ accessConfig =
     { _acKind = "compute#accessConfig"
     , _acName = Nothing
     , _acNatIP = Nothing
-    , _acType = "ONE_TO_ONE_NAT"
+    , _acType = OneToOneNAT
     }
 
 -- | [Output Only] Type of the resource. Always compute#accessConfig for
@@ -11133,7 +13601,7 @@ acNatIP = lens _acNatIP (\ s a -> s{_acNatIP = a})
 
 -- | The type of configuration. The default and only option is
 -- ONE_TO_ONE_NAT.
-acType :: Lens' AccessConfig Text
+acType :: Lens' AccessConfig AccessConfigType
 acType = lens _acType (\ s a -> s{_acType = a})
 
 instance FromJSON AccessConfig where
@@ -11144,7 +13612,7 @@ instance FromJSON AccessConfig where
                    (o .:? "kind" .!= "compute#accessConfig") <*>
                      (o .:? "name")
                      <*> (o .:? "natIP")
-                     <*> (o .:? "type" .!= "ONE_TO_ONE_NAT"))
+                     <*> (o .:? "type" .!= OneToOneNAT))
 
 instance ToJSON AccessConfig where
         toJSON AccessConfig{..}
@@ -11198,7 +13666,7 @@ data Firewall = Firewall
     , _fName              :: !(Maybe Text)
     , _fCreationTimestamp :: !(Maybe Text)
     , _fId                :: !(Maybe Word64)
-    , _fAllowed           :: !(Maybe [FirewallAllowedItem])
+    , _fAllowed           :: !(Maybe [FirewallAllowed])
     , _fDescription       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -11321,7 +13789,7 @@ fId = lens _fId (\ s a -> s{_fId = a})
 
 -- | The list of rules specified by this firewall. Each rule specifies a
 -- protocol and port-range tuple that describes a permitted connection.
-fAllowed :: Lens' Firewall [FirewallAllowedItem]
+fAllowed :: Lens' Firewall [FirewallAllowed]
 fAllowed
   = lens _fAllowed (\ s a -> s{_fAllowed = a}) .
       _Default
@@ -11506,7 +13974,7 @@ data BackendService = BackendService
     { _bsBackends          :: !(Maybe [Maybe Backend])
     , _bsKind              :: !Text
     , _bsFingerprint       :: !(Maybe Word8)
-    , _bsProtocol          :: !(Maybe Text)
+    , _bsProtocol          :: !(Maybe BackendServiceProtocol)
     , _bsSelfLink          :: !(Maybe Text)
     , _bsName              :: !(Maybe Text)
     , _bsCreationTimestamp :: !(Maybe Text)
@@ -11587,7 +14055,7 @@ bsFingerprint
   = lens _bsFingerprint
       (\ s a -> s{_bsFingerprint = a})
 
-bsProtocol :: Lens' BackendService (Maybe Text)
+bsProtocol :: Lens' BackendService (Maybe BackendServiceProtocol)
 bsProtocol
   = lens _bsProtocol (\ s a -> s{_bsProtocol = a})
 
@@ -11816,135 +14284,135 @@ instance ToJSON InstanceMoveRequest where
 --
 -- /See:/ 'instance'' smart constructor.
 data Instance = Instance
-    { _iiStatus            :: !(Maybe Text)
-    , _iiServiceAccounts   :: !(Maybe [Maybe ServiceAccount])
-    , _iiNetworkInterfaces :: !(Maybe [Maybe NetworkInterface])
-    , _iiKind              :: !Text
-    , _iiZone              :: !(Maybe Text)
-    , _iiCpuPlatform       :: !(Maybe Text)
-    , _iiSelfLink          :: !(Maybe Text)
-    , _iiName              :: !(Maybe Text)
-    , _iiStatusMessage     :: !(Maybe Text)
-    , _iiCreationTimestamp :: !(Maybe Text)
-    , _iiMachineType       :: !(Maybe Text)
-    , _iiMetadata          :: !(Maybe (Maybe Metadata))
-    , _iiId                :: !(Maybe Word64)
-    , _iiScheduling        :: !(Maybe (Maybe Scheduling))
-    , _iiDisks             :: !(Maybe [Maybe AttachedDisk])
-    , _iiCanIpForward      :: !(Maybe Bool)
-    , _iiDescription       :: !(Maybe Text)
-    , _iiTags              :: !(Maybe (Maybe Tags))
+    { _i1Status            :: !(Maybe InstanceStatus)
+    , _i1ServiceAccounts   :: !(Maybe [Maybe ServiceAccount])
+    , _i1NetworkInterfaces :: !(Maybe [Maybe NetworkInterface])
+    , _i1Kind              :: !Text
+    , _i1Zone              :: !(Maybe Text)
+    , _i1CpuPlatform       :: !(Maybe Text)
+    , _i1SelfLink          :: !(Maybe Text)
+    , _i1Name              :: !(Maybe Text)
+    , _i1StatusMessage     :: !(Maybe Text)
+    , _i1CreationTimestamp :: !(Maybe Text)
+    , _i1MachineType       :: !(Maybe Text)
+    , _i1Metadata          :: !(Maybe (Maybe Metadata))
+    , _i1Id                :: !(Maybe Word64)
+    , _i1Scheduling        :: !(Maybe (Maybe Scheduling))
+    , _i1Disks             :: !(Maybe [Maybe AttachedDisk])
+    , _i1CanIpForward      :: !(Maybe Bool)
+    , _i1Description       :: !(Maybe Text)
+    , _i1Tags              :: !(Maybe (Maybe Tags))
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iiStatus'
+-- * 'i1Status'
 --
--- * 'iiServiceAccounts'
+-- * 'i1ServiceAccounts'
 --
--- * 'iiNetworkInterfaces'
+-- * 'i1NetworkInterfaces'
 --
--- * 'iiKind'
+-- * 'i1Kind'
 --
--- * 'iiZone'
+-- * 'i1Zone'
 --
--- * 'iiCpuPlatform'
+-- * 'i1CpuPlatform'
 --
--- * 'iiSelfLink'
+-- * 'i1SelfLink'
 --
--- * 'iiName'
+-- * 'i1Name'
 --
--- * 'iiStatusMessage'
+-- * 'i1StatusMessage'
 --
--- * 'iiCreationTimestamp'
+-- * 'i1CreationTimestamp'
 --
--- * 'iiMachineType'
+-- * 'i1MachineType'
 --
--- * 'iiMetadata'
+-- * 'i1Metadata'
 --
--- * 'iiId'
+-- * 'i1Id'
 --
--- * 'iiScheduling'
+-- * 'i1Scheduling'
 --
--- * 'iiDisks'
+-- * 'i1Disks'
 --
--- * 'iiCanIpForward'
+-- * 'i1CanIpForward'
 --
--- * 'iiDescription'
+-- * 'i1Description'
 --
--- * 'iiTags'
+-- * 'i1Tags'
 instance'
     :: Instance
 instance' =
     Instance
-    { _iiStatus = Nothing
-    , _iiServiceAccounts = Nothing
-    , _iiNetworkInterfaces = Nothing
-    , _iiKind = "compute#instance"
-    , _iiZone = Nothing
-    , _iiCpuPlatform = Nothing
-    , _iiSelfLink = Nothing
-    , _iiName = Nothing
-    , _iiStatusMessage = Nothing
-    , _iiCreationTimestamp = Nothing
-    , _iiMachineType = Nothing
-    , _iiMetadata = Nothing
-    , _iiId = Nothing
-    , _iiScheduling = Nothing
-    , _iiDisks = Nothing
-    , _iiCanIpForward = Nothing
-    , _iiDescription = Nothing
-    , _iiTags = Nothing
+    { _i1Status = Nothing
+    , _i1ServiceAccounts = Nothing
+    , _i1NetworkInterfaces = Nothing
+    , _i1Kind = "compute#instance"
+    , _i1Zone = Nothing
+    , _i1CpuPlatform = Nothing
+    , _i1SelfLink = Nothing
+    , _i1Name = Nothing
+    , _i1StatusMessage = Nothing
+    , _i1CreationTimestamp = Nothing
+    , _i1MachineType = Nothing
+    , _i1Metadata = Nothing
+    , _i1Id = Nothing
+    , _i1Scheduling = Nothing
+    , _i1Disks = Nothing
+    , _i1CanIpForward = Nothing
+    , _i1Description = Nothing
+    , _i1Tags = Nothing
     }
 
 -- | [Output Only] The status of the instance. One of the following values:
 -- PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.
-iiStatus :: Lens' Instance (Maybe Text)
-iiStatus = lens _iiStatus (\ s a -> s{_iiStatus = a})
+i1Status :: Lens' Instance (Maybe InstanceStatus)
+i1Status = lens _i1Status (\ s a -> s{_i1Status = a})
 
 -- | A list of service accounts, with their specified scopes, authorized for
 -- this instance. Service accounts generate access tokens that can be
 -- accessed through the metadata server and used to authenticate
 -- applications on the instance. See Authenticating from Google Compute
 -- Engine for more information.
-iiServiceAccounts :: Lens' Instance [Maybe ServiceAccount]
-iiServiceAccounts
-  = lens _iiServiceAccounts
-      (\ s a -> s{_iiServiceAccounts = a})
+i1ServiceAccounts :: Lens' Instance [Maybe ServiceAccount]
+i1ServiceAccounts
+  = lens _i1ServiceAccounts
+      (\ s a -> s{_i1ServiceAccounts = a})
       . _Default
       . _Coerce
 
 -- | An array of configurations for this interface. This specifies how this
 -- interface is configured to interact with other network services, such as
 -- connecting to the internet.
-iiNetworkInterfaces :: Lens' Instance [Maybe NetworkInterface]
-iiNetworkInterfaces
-  = lens _iiNetworkInterfaces
-      (\ s a -> s{_iiNetworkInterfaces = a})
+i1NetworkInterfaces :: Lens' Instance [Maybe NetworkInterface]
+i1NetworkInterfaces
+  = lens _i1NetworkInterfaces
+      (\ s a -> s{_i1NetworkInterfaces = a})
       . _Default
       . _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#instance for
 -- instances.
-iiKind :: Lens' Instance Text
-iiKind = lens _iiKind (\ s a -> s{_iiKind = a})
+i1Kind :: Lens' Instance Text
+i1Kind = lens _i1Kind (\ s a -> s{_i1Kind = a})
 
 -- | [Output Only] URL of the zone where the instance resides.
-iiZone :: Lens' Instance (Maybe Text)
-iiZone = lens _iiZone (\ s a -> s{_iiZone = a})
+i1Zone :: Lens' Instance (Maybe Text)
+i1Zone = lens _i1Zone (\ s a -> s{_i1Zone = a})
 
 -- | [Output Only] The CPU platform used by this instance.
-iiCpuPlatform :: Lens' Instance (Maybe Text)
-iiCpuPlatform
-  = lens _iiCpuPlatform
-      (\ s a -> s{_iiCpuPlatform = a})
+i1CpuPlatform :: Lens' Instance (Maybe Text)
+i1CpuPlatform
+  = lens _i1CpuPlatform
+      (\ s a -> s{_i1CpuPlatform = a})
 
 -- | [Output Only] Server defined URL for this resource.
-iiSelfLink :: Lens' Instance (Maybe Text)
-iiSelfLink
-  = lens _iiSelfLink (\ s a -> s{_iiSelfLink = a})
+i1SelfLink :: Lens' Instance (Maybe Text)
+i1SelfLink
+  = lens _i1SelfLink (\ s a -> s{_i1SelfLink = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -11953,74 +14421,74 @@ iiSelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-iiName :: Lens' Instance (Maybe Text)
-iiName = lens _iiName (\ s a -> s{_iiName = a})
+i1Name :: Lens' Instance (Maybe Text)
+i1Name = lens _i1Name (\ s a -> s{_i1Name = a})
 
 -- | [Output Only] An optional, human-readable explanation of the status.
-iiStatusMessage :: Lens' Instance (Maybe Text)
-iiStatusMessage
-  = lens _iiStatusMessage
-      (\ s a -> s{_iiStatusMessage = a})
+i1StatusMessage :: Lens' Instance (Maybe Text)
+i1StatusMessage
+  = lens _i1StatusMessage
+      (\ s a -> s{_i1StatusMessage = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-iiCreationTimestamp :: Lens' Instance (Maybe Text)
-iiCreationTimestamp
-  = lens _iiCreationTimestamp
-      (\ s a -> s{_iiCreationTimestamp = a})
+i1CreationTimestamp :: Lens' Instance (Maybe Text)
+i1CreationTimestamp
+  = lens _i1CreationTimestamp
+      (\ s a -> s{_i1CreationTimestamp = a})
 
 -- | Full or partial URL of the machine type resource to use for this
 -- instance. This is provided by the client when the instance is created.
 -- For example, the following is a valid partial url:
 -- zones\/zone\/machineTypes\/machine-type
-iiMachineType :: Lens' Instance (Maybe Text)
-iiMachineType
-  = lens _iiMachineType
-      (\ s a -> s{_iiMachineType = a})
+i1MachineType :: Lens' Instance (Maybe Text)
+i1MachineType
+  = lens _i1MachineType
+      (\ s a -> s{_i1MachineType = a})
 
 -- | The metadata key\/value pairs assigned to this instance. This includes
 -- custom metadata and predefined keys.
-iiMetadata :: Lens' Instance (Maybe (Maybe Metadata))
-iiMetadata
-  = lens _iiMetadata (\ s a -> s{_iiMetadata = a})
+i1Metadata :: Lens' Instance (Maybe (Maybe Metadata))
+i1Metadata
+  = lens _i1Metadata (\ s a -> s{_i1Metadata = a})
 
 -- | [Output Only] Unique identifier for the resource; defined by the server.
-iiId :: Lens' Instance (Maybe Word64)
-iiId = lens _iiId (\ s a -> s{_iiId = a})
+i1Id :: Lens' Instance (Maybe Word64)
+i1Id = lens _i1Id (\ s a -> s{_i1Id = a})
 
 -- | Scheduling options for this instance.
-iiScheduling :: Lens' Instance (Maybe (Maybe Scheduling))
-iiScheduling
-  = lens _iiScheduling (\ s a -> s{_iiScheduling = a})
+i1Scheduling :: Lens' Instance (Maybe (Maybe Scheduling))
+i1Scheduling
+  = lens _i1Scheduling (\ s a -> s{_i1Scheduling = a})
 
 -- | Array of disks associated with this instance. Persistent disks must be
 -- created before you can assign them.
-iiDisks :: Lens' Instance [Maybe AttachedDisk]
-iiDisks
-  = lens _iiDisks (\ s a -> s{_iiDisks = a}) . _Default
+i1Disks :: Lens' Instance [Maybe AttachedDisk]
+i1Disks
+  = lens _i1Disks (\ s a -> s{_i1Disks = a}) . _Default
       . _Coerce
 
 -- | Allows this instance to send and receive packets with non-matching
 -- destination or source IPs. This is required if you plan to use this
 -- instance to forward routes. For more information, see Enabling IP
 -- Forwarding.
-iiCanIpForward :: Lens' Instance (Maybe Bool)
-iiCanIpForward
-  = lens _iiCanIpForward
-      (\ s a -> s{_iiCanIpForward = a})
+i1CanIpForward :: Lens' Instance (Maybe Bool)
+i1CanIpForward
+  = lens _i1CanIpForward
+      (\ s a -> s{_i1CanIpForward = a})
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
-iiDescription :: Lens' Instance (Maybe Text)
-iiDescription
-  = lens _iiDescription
-      (\ s a -> s{_iiDescription = a})
+i1Description :: Lens' Instance (Maybe Text)
+i1Description
+  = lens _i1Description
+      (\ s a -> s{_i1Description = a})
 
 -- | A list of tags to appy to this instance. Tags are used to identify valid
 -- sources or targets for network firewalls and are specified by the client
 -- during instance creation. The tags can be later modified by the setTags
 -- method. Each tag within the list must comply with RFC1035.
-iiTags :: Lens' Instance (Maybe (Maybe Tags))
-iiTags = lens _iiTags (\ s a -> s{_iiTags = a})
+i1Tags :: Lens' Instance (Maybe (Maybe Tags))
+i1Tags = lens _i1Tags (\ s a -> s{_i1Tags = a})
 
 instance FromJSON Instance where
         parseJSON
@@ -12050,22 +14518,43 @@ instance ToJSON Instance where
         toJSON Instance{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _iiStatus,
-                  ("serviceAccounts" .=) <$> _iiServiceAccounts,
-                  ("networkInterfaces" .=) <$> _iiNetworkInterfaces,
-                  Just ("kind" .= _iiKind), ("zone" .=) <$> _iiZone,
-                  ("cpuPlatform" .=) <$> _iiCpuPlatform,
-                  ("selfLink" .=) <$> _iiSelfLink,
-                  ("name" .=) <$> _iiName,
-                  ("statusMessage" .=) <$> _iiStatusMessage,
-                  ("creationTimestamp" .=) <$> _iiCreationTimestamp,
-                  ("machineType" .=) <$> _iiMachineType,
-                  ("metadata" .=) <$> _iiMetadata, ("id" .=) <$> _iiId,
-                  ("scheduling" .=) <$> _iiScheduling,
-                  ("disks" .=) <$> _iiDisks,
-                  ("canIpForward" .=) <$> _iiCanIpForward,
-                  ("description" .=) <$> _iiDescription,
-                  ("tags" .=) <$> _iiTags])
+                 [("status" .=) <$> _i1Status,
+                  ("serviceAccounts" .=) <$> _i1ServiceAccounts,
+                  ("networkInterfaces" .=) <$> _i1NetworkInterfaces,
+                  Just ("kind" .= _i1Kind), ("zone" .=) <$> _i1Zone,
+                  ("cpuPlatform" .=) <$> _i1CpuPlatform,
+                  ("selfLink" .=) <$> _i1SelfLink,
+                  ("name" .=) <$> _i1Name,
+                  ("statusMessage" .=) <$> _i1StatusMessage,
+                  ("creationTimestamp" .=) <$> _i1CreationTimestamp,
+                  ("machineType" .=) <$> _i1MachineType,
+                  ("metadata" .=) <$> _i1Metadata, ("id" .=) <$> _i1Id,
+                  ("scheduling" .=) <$> _i1Scheduling,
+                  ("disks" .=) <$> _i1Disks,
+                  ("canIpForward" .=) <$> _i1CanIpForward,
+                  ("description" .=) <$> _i1Description,
+                  ("tags" .=) <$> _i1Tags])
+
+-- | [Output Only] A map of scoped vpn tunnel lists.
+--
+-- /See:/ 'vPNTunnelAggregatedListItems' smart constructor.
+data VPNTunnelAggregatedListItems =
+    VPNTunnelAggregatedListItems
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VPNTunnelAggregatedListItems' with the minimum fields required to make a request.
+--
+vPNTunnelAggregatedListItems
+    :: VPNTunnelAggregatedListItems
+vPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+
+instance FromJSON VPNTunnelAggregatedListItems where
+        parseJSON
+          = withObject "VPNTunnelAggregatedListItems"
+              (\ o -> pure VPNTunnelAggregatedListItems)
+
+instance ToJSON VPNTunnelAggregatedListItems where
+        toJSON = const (Object mempty)
 
 -- | A matcher for the path portion of the URL. The BackendService from the
 -- longest-matched rule will serve the URL. If no rule was matched, the

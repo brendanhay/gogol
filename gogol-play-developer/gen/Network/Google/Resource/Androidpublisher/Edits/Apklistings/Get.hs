@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- language code.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherEditsApklistingsGet@.
-module Androidpublisher.Edits.Apklistings.Get
+module Network.Google.Resource.Androidpublisher.Edits.Apklistings.Get
     (
     -- * REST Resource
-      EditsApklistingsGetAPI
+      EditsApklistingsGetResource
 
     -- * Creating a Request
-    , editsApklistingsGet
-    , EditsApklistingsGet
+    , editsApklistingsGet'
+    , EditsApklistingsGet'
 
     -- * Request Lenses
     , eagQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherEditsApklistingsGet@ which the
--- 'EditsApklistingsGet' request conforms to.
-type EditsApklistingsGetAPI =
+-- 'EditsApklistingsGet'' request conforms to.
+type EditsApklistingsGetResource =
      Capture "packageName" Text :>
        "edits" :>
          Capture "editId" Text :>
            "apks" :>
              Capture "apkVersionCode" Int32 :>
                "listings" :>
-                 Capture "language" Text :> Get '[JSON] ApkListing
+                 Capture "language" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] ApkListing
 
 -- | Fetches the APK-specific localized listing for a specified APK and
 -- language code.
 --
--- /See:/ 'editsApklistingsGet' smart constructor.
-data EditsApklistingsGet = EditsApklistingsGet
+-- /See:/ 'editsApklistingsGet'' smart constructor.
+data EditsApklistingsGet' = EditsApklistingsGet'
     { _eagQuotaUser      :: !(Maybe Text)
     , _eagPrettyPrint    :: !Bool
     , _eagPackageName    :: !Text
@@ -72,7 +80,7 @@ data EditsApklistingsGet = EditsApklistingsGet
     , _eagOauthToken     :: !(Maybe Text)
     , _eagEditId         :: !Text
     , _eagFields         :: !(Maybe Text)
-    , _eagAlt            :: !Text
+    , _eagAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditsApklistingsGet'' with the minimum fields required to make a request.
@@ -100,14 +108,14 @@ data EditsApklistingsGet = EditsApklistingsGet
 -- * 'eagFields'
 --
 -- * 'eagAlt'
-editsApklistingsGet
+editsApklistingsGet'
     :: Text -- ^ 'packageName'
     -> Int32 -- ^ 'apkVersionCode'
     -> Text -- ^ 'language'
     -> Text -- ^ 'editId'
-    -> EditsApklistingsGet
-editsApklistingsGet pEagPackageName_ pEagApkVersionCode_ pEagLanguage_ pEagEditId_ =
-    EditsApklistingsGet
+    -> EditsApklistingsGet'
+editsApklistingsGet' pEagPackageName_ pEagApkVersionCode_ pEagLanguage_ pEagEditId_ =
+    EditsApklistingsGet'
     { _eagQuotaUser = Nothing
     , _eagPrettyPrint = True
     , _eagPackageName = pEagPackageName_
@@ -118,7 +126,7 @@ editsApklistingsGet pEagPackageName_ pEagApkVersionCode_ pEagLanguage_ pEagEditI
     , _eagOauthToken = Nothing
     , _eagEditId = pEagEditId_
     , _eagFields = Nothing
-    , _eagAlt = "json"
+    , _eagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -184,14 +192,15 @@ eagFields
   = lens _eagFields (\ s a -> s{_eagFields = a})
 
 -- | Data format for the response.
-eagAlt :: Lens' EditsApklistingsGet' Text
+eagAlt :: Lens' EditsApklistingsGet' Alt
 eagAlt = lens _eagAlt (\ s a -> s{_eagAlt = a})
 
 instance GoogleRequest EditsApklistingsGet' where
         type Rs EditsApklistingsGet' = ApkListing
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u EditsApklistingsGet{..}
-          = go _eagQuotaUser _eagPrettyPrint _eagPackageName
+        requestWithRoute r u EditsApklistingsGet'{..}
+          = go _eagQuotaUser (Just _eagPrettyPrint)
+              _eagPackageName
               _eagApkVersionCode
               _eagUserIp
               _eagKey
@@ -199,9 +208,9 @@ instance GoogleRequest EditsApklistingsGet' where
               _eagOauthToken
               _eagEditId
               _eagFields
-              _eagAlt
+              (Just _eagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EditsApklistingsGetAPI)
+                      (Proxy :: Proxy EditsApklistingsGetResource)
                       r
                       u

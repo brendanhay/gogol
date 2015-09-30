@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified draft.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersDraftsGet@.
-module Gmail.Users.Drafts.Get
+module Network.Google.Resource.Gmail.Users.Drafts.Get
     (
     -- * REST Resource
-      UsersDraftsGetAPI
+      UsersDraftsGetResource
 
     -- * Creating a Request
-    , usersDraftsGet
-    , UsersDraftsGet
+    , usersDraftsGet'
+    , UsersDraftsGet'
 
     -- * Request Lenses
     , udgQuotaUser
@@ -45,27 +46,34 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersDraftsGet@ which the
--- 'UsersDraftsGet' request conforms to.
-type UsersDraftsGetAPI =
+-- 'UsersDraftsGet'' request conforms to.
+type UsersDraftsGetResource =
      Capture "userId" Text :>
        "drafts" :>
          Capture "id" Text :>
-           QueryParam "format" Text :> Get '[JSON] Draft
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "format" GmailUsersDraftsGetFormat :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Draft
 
 -- | Gets the specified draft.
 --
--- /See:/ 'usersDraftsGet' smart constructor.
-data UsersDraftsGet = UsersDraftsGet
+-- /See:/ 'usersDraftsGet'' smart constructor.
+data UsersDraftsGet' = UsersDraftsGet'
     { _udgQuotaUser   :: !(Maybe Text)
     , _udgPrettyPrint :: !Bool
     , _udgUserIp      :: !(Maybe Text)
-    , _udgFormat      :: !Text
+    , _udgFormat      :: !GmailUsersDraftsGetFormat
     , _udgUserId      :: !Text
     , _udgKey         :: !(Maybe Text)
     , _udgId          :: !Text
     , _udgOauthToken  :: !(Maybe Text)
     , _udgFields      :: !(Maybe Text)
-    , _udgAlt         :: !Text
+    , _udgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsGet'' with the minimum fields required to make a request.
@@ -91,22 +99,22 @@ data UsersDraftsGet = UsersDraftsGet
 -- * 'udgFields'
 --
 -- * 'udgAlt'
-usersDraftsGet
+usersDraftsGet'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersDraftsGet
-usersDraftsGet pUdgUserId_ pUdgId_ =
-    UsersDraftsGet
+    -> UsersDraftsGet'
+usersDraftsGet' pUdgUserId_ pUdgId_ =
+    UsersDraftsGet'
     { _udgQuotaUser = Nothing
     , _udgPrettyPrint = True
     , _udgUserIp = Nothing
-    , _udgFormat = "full"
+    , _udgFormat = GUDGFFull
     , _udgUserId = pUdgUserId_
     , _udgKey = Nothing
     , _udgId = pUdgId_
     , _udgOauthToken = Nothing
     , _udgFields = Nothing
-    , _udgAlt = "json"
+    , _udgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,7 +137,7 @@ udgUserIp
   = lens _udgUserIp (\ s a -> s{_udgUserIp = a})
 
 -- | The format to return the draft in.
-udgFormat :: Lens' UsersDraftsGet' Text
+udgFormat :: Lens' UsersDraftsGet' GmailUsersDraftsGetFormat
 udgFormat
   = lens _udgFormat (\ s a -> s{_udgFormat = a})
 
@@ -161,22 +169,23 @@ udgFields
   = lens _udgFields (\ s a -> s{_udgFields = a})
 
 -- | Data format for the response.
-udgAlt :: Lens' UsersDraftsGet' Text
+udgAlt :: Lens' UsersDraftsGet' Alt
 udgAlt = lens _udgAlt (\ s a -> s{_udgAlt = a})
 
 instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersDraftsGet{..}
-          = go _udgQuotaUser _udgPrettyPrint _udgUserIp
+        requestWithRoute r u UsersDraftsGet'{..}
+          = go _udgQuotaUser (Just _udgPrettyPrint) _udgUserIp
               (Just _udgFormat)
               _udgUserId
               _udgKey
               _udgId
               _udgOauthToken
               _udgFields
-              _udgAlt
+              (Just _udgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersDraftsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersDraftsGetResource)
                       r
                       u

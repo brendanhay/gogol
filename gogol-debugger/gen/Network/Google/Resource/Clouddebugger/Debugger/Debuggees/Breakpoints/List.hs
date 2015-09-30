@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all breakpoints of the debuggee that the user has access to.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerDebuggerDebuggeesBreakpointsList@.
-module Clouddebugger.Debugger.Debuggees.Breakpoints.List
+module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.List
     (
     -- * REST Resource
-      DebuggerDebuggeesBreakpointsListAPI
+      DebuggerDebuggeesBreakpointsListResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsList
-    , DebuggerDebuggeesBreakpointsList
+    , debuggerDebuggeesBreakpointsList'
+    , DebuggerDebuggeesBreakpointsList'
 
     -- * Request Lenses
     , ddblXgafv
@@ -54,24 +55,38 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerDebuggerDebuggeesBreakpointsList@ which the
--- 'DebuggerDebuggeesBreakpointsList' request conforms to.
-type DebuggerDebuggeesBreakpointsListAPI =
+-- 'DebuggerDebuggeesBreakpointsList'' request conforms to.
+type DebuggerDebuggeesBreakpointsListResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               QueryParam "includeInactive" Bool :>
-                 QueryParam "action.value" Text :>
-                   QueryParam "stripResults" Bool :>
-                     QueryParam "includeAllUsers" Bool :>
-                       QueryParam "waitToken" Text :>
-                         Get '[JSON] ListBreakpointsResponse
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "includeInactive" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "action.value" Text :>
+                               QueryParam "uploadType" Text :>
+                                 QueryParam "stripResults" Bool :>
+                                   QueryParam "bearer_token" Text :>
+                                     QueryParam "key" Text :>
+                                       QueryParam "includeAllUsers" Bool :>
+                                         QueryParam "waitToken" Text :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "fields" Text :>
+                                               QueryParam "callback" Text :>
+                                                 QueryParam "alt" Text :>
+                                                   Get '[JSON]
+                                                     ListBreakpointsResponse
 
 -- | Lists all breakpoints of the debuggee that the user has access to.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
-data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
+-- /See:/ 'debuggerDebuggeesBreakpointsList'' smart constructor.
+data DebuggerDebuggeesBreakpointsList' = DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv           :: !(Maybe Text)
     , _ddblQuotaUser       :: !(Maybe Text)
     , _ddblPrettyPrint     :: !Bool
@@ -134,11 +149,11 @@ data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
 -- * 'ddblCallback'
 --
 -- * 'ddblAlt'
-debuggerDebuggeesBreakpointsList
+debuggerDebuggeesBreakpointsList'
     :: Text -- ^ 'debuggeeId'
-    -> DebuggerDebuggeesBreakpointsList
-debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsList
+    -> DebuggerDebuggeesBreakpointsList'
+debuggerDebuggeesBreakpointsList' pDdblDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv = Nothing
     , _ddblQuotaUser = Nothing
     , _ddblPrettyPrint = True
@@ -282,11 +297,12 @@ instance GoogleRequest
              ListBreakpointsResponse
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
-          DebuggerDebuggeesBreakpointsList{..}
-          = go _ddblXgafv _ddblQuotaUser _ddblPrettyPrint
+          DebuggerDebuggeesBreakpointsList'{..}
+          = go _ddblXgafv _ddblQuotaUser
+              (Just _ddblPrettyPrint)
               _ddblIncludeInactive
               _ddblUploadProtocol
-              _ddblPp
+              (Just _ddblPp)
               _ddblAccessToken
               _ddblActionValue
               _ddblUploadType
@@ -299,9 +315,10 @@ instance GoogleRequest
               _ddblOauthToken
               _ddblFields
               _ddblCallback
-              _ddblAlt
+              (Just _ddblAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DebuggerDebuggeesBreakpointsListAPI)
+                      (Proxy ::
+                         Proxy DebuggerDebuggeesBreakpointsListResource)
                       r
                       u

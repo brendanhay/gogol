@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ <https://cloud.google.com/billing/ Google Cloud Billing API Reference> for @CloudbillingBillingAccountsList@.
-module Cloudbilling.BillingAccounts.List
+module Network.Google.Resource.Cloudbilling.BillingAccounts.List
     (
     -- * REST Resource
-      BillingAccountsListAPI
+      BillingAccountsListResource
 
     -- * Creating a Request
-    , billingAccountsList
-    , BillingAccountsList
+    , billingAccountsList'
+    , BillingAccountsList'
 
     -- * Request Lenses
     , balXgafv
@@ -51,19 +52,32 @@ import           Network.Google.Billing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudbillingBillingAccountsList@ which the
--- 'BillingAccountsList' request conforms to.
-type BillingAccountsListAPI =
+-- 'BillingAccountsList'' request conforms to.
+type BillingAccountsListResource =
      "v1" :>
        "billingAccounts" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "pageSize" Int32 :>
-             Get '[JSON] ListBillingAccountsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "pageSize" Int32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "callback" Text :>
+                                     QueryParam "alt" Text :>
+                                       Get '[JSON] ListBillingAccountsResponse
 
 -- | Lists the billing accounts that the current authenticated user
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
--- /See:/ 'billingAccountsList' smart constructor.
-data BillingAccountsList = BillingAccountsList
+-- /See:/ 'billingAccountsList'' smart constructor.
+data BillingAccountsList' = BillingAccountsList'
     { _balXgafv          :: !(Maybe Text)
     , _balQuotaUser      :: !(Maybe Text)
     , _balPrettyPrint    :: !Bool
@@ -114,10 +128,10 @@ data BillingAccountsList = BillingAccountsList
 -- * 'balCallback'
 --
 -- * 'balAlt'
-billingAccountsList
-    :: BillingAccountsList
-billingAccountsList =
-    BillingAccountsList
+billingAccountsList'
+    :: BillingAccountsList'
+billingAccountsList' =
+    BillingAccountsList'
     { _balXgafv = Nothing
     , _balQuotaUser = Nothing
     , _balPrettyPrint = True
@@ -224,10 +238,10 @@ instance GoogleRequest BillingAccountsList' where
         type Rs BillingAccountsList' =
              ListBillingAccountsResponse
         request = requestWithRoute defReq billingURL
-        requestWithRoute r u BillingAccountsList{..}
-          = go _balXgafv _balQuotaUser _balPrettyPrint
+        requestWithRoute r u BillingAccountsList'{..}
+          = go _balXgafv _balQuotaUser (Just _balPrettyPrint)
               _balUploadProtocol
-              _balPp
+              (Just _balPp)
               _balAccessToken
               _balUploadType
               _balBearerToken
@@ -237,9 +251,9 @@ instance GoogleRequest BillingAccountsList' where
               _balPageSize
               _balFields
               _balCallback
-              _balAlt
+              (Just _balAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BillingAccountsListAPI)
+                      (Proxy :: Proxy BillingAccountsListResource)
                       r
                       u

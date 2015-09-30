@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Assign License.
 --
 -- /See:/ <https://developers.google.com/google-apps/licensing/ Enterprise License Manager API Reference> for @LicensingLicenseAssignmentsUpdate@.
-module Licensing.LicenseAssignments.Update
+module Network.Google.Resource.Licensing.LicenseAssignments.Update
     (
     -- * REST Resource
-      LicenseAssignmentsUpdateAPI
+      LicenseAssignmentsUpdateResource
 
     -- * Creating a Request
-    , licenseAssignmentsUpdate
-    , LicenseAssignmentsUpdate
+    , licenseAssignmentsUpdate'
+    , LicenseAssignmentsUpdate'
 
     -- * Request Lenses
     , lauQuotaUser
@@ -45,19 +46,25 @@ import           Network.Google.AppsLicensing.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @LicensingLicenseAssignmentsUpdate@ which the
--- 'LicenseAssignmentsUpdate' request conforms to.
-type LicenseAssignmentsUpdateAPI =
+-- 'LicenseAssignmentsUpdate'' request conforms to.
+type LicenseAssignmentsUpdateResource =
      Capture "productId" Text :>
        "sku" :>
          Capture "skuId" Text :>
            "user" :>
              Capture "userId" Text :>
-               Put '[JSON] LicenseAssignment
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Put '[JSON] LicenseAssignment
 
 -- | Assign License.
 --
--- /See:/ 'licenseAssignmentsUpdate' smart constructor.
-data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
+-- /See:/ 'licenseAssignmentsUpdate'' smart constructor.
+data LicenseAssignmentsUpdate' = LicenseAssignmentsUpdate'
     { _lauQuotaUser   :: !(Maybe Text)
     , _lauPrettyPrint :: !Bool
     , _lauUserIp      :: !(Maybe Text)
@@ -67,7 +74,7 @@ data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
     , _lauOauthToken  :: !(Maybe Text)
     , _lauProductId   :: !Text
     , _lauFields      :: !(Maybe Text)
-    , _lauAlt         :: !Text
+    , _lauAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsUpdate'' with the minimum fields required to make a request.
@@ -93,13 +100,13 @@ data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
 -- * 'lauFields'
 --
 -- * 'lauAlt'
-licenseAssignmentsUpdate
+licenseAssignmentsUpdate'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'productId'
-    -> LicenseAssignmentsUpdate
-licenseAssignmentsUpdate pLauSkuId_ pLauUserId_ pLauProductId_ =
-    LicenseAssignmentsUpdate
+    -> LicenseAssignmentsUpdate'
+licenseAssignmentsUpdate' pLauSkuId_ pLauUserId_ pLauProductId_ =
+    LicenseAssignmentsUpdate'
     { _lauQuotaUser = Nothing
     , _lauPrettyPrint = True
     , _lauUserIp = Nothing
@@ -109,7 +116,7 @@ licenseAssignmentsUpdate pLauSkuId_ pLauUserId_ pLauProductId_ =
     , _lauOauthToken = Nothing
     , _lauProductId = pLauProductId_
     , _lauFields = Nothing
-    , _lauAlt = "json"
+    , _lauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,24 +170,24 @@ lauFields
   = lens _lauFields (\ s a -> s{_lauFields = a})
 
 -- | Data format for the response.
-lauAlt :: Lens' LicenseAssignmentsUpdate' Text
+lauAlt :: Lens' LicenseAssignmentsUpdate' Alt
 lauAlt = lens _lauAlt (\ s a -> s{_lauAlt = a})
 
 instance GoogleRequest LicenseAssignmentsUpdate'
          where
         type Rs LicenseAssignmentsUpdate' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
-        requestWithRoute r u LicenseAssignmentsUpdate{..}
-          = go _lauQuotaUser _lauPrettyPrint _lauUserIp
+        requestWithRoute r u LicenseAssignmentsUpdate'{..}
+          = go _lauQuotaUser (Just _lauPrettyPrint) _lauUserIp
               _lauSkuId
               _lauUserId
               _lauKey
               _lauOauthToken
               _lauProductId
               _lauFields
-              _lauAlt
+              (Just _lauAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LicenseAssignmentsUpdateAPI)
+                      (Proxy :: Proxy LicenseAssignmentsUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of creative groups, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeGroupsList@.
-module DFAReporting.CreativeGroups.List
+module Network.Google.Resource.DFAReporting.CreativeGroups.List
     (
     -- * REST Resource
-      CreativeGroupsListAPI
+      CreativeGroupsListResource
 
     -- * Creating a Request
-    , creativeGroupsList
-    , CreativeGroupsList
+    , creativeGroupsList'
+    , CreativeGroupsList'
 
     -- * Request Lenses
     , cglQuotaUser
@@ -51,41 +52,52 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeGroupsList@ which the
--- 'CreativeGroupsList' request conforms to.
-type CreativeGroupsListAPI =
+-- 'CreativeGroupsList'' request conforms to.
+type CreativeGroupsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeGroups" :>
-           QueryParam "searchString" Text :>
-             QueryParams "ids" Int64 :>
-               QueryParam "sortOrder" Text :>
-                 QueryParam "groupNumber" Int32 :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "sortField" Text :>
-                       QueryParams "advertiserIds" Int64 :>
-                         QueryParam "maxResults" Int32 :>
-                           Get '[JSON] CreativeGroupsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "searchString" Text :>
+                   QueryParams "ids" Int64 :>
+                     QueryParam "sortOrder"
+                       DfareportingCreativeGroupsListSortOrder
+                       :>
+                       QueryParam "groupNumber" Int32 :>
+                         QueryParam "key" Text :>
+                           QueryParam "pageToken" Text :>
+                             QueryParam "sortField"
+                               DfareportingCreativeGroupsListSortField
+                               :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParams "advertiserIds" Int64 :>
+                                   QueryParam "maxResults" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Alt :>
+                                         Get '[JSON] CreativeGroupsListResponse
 
 -- | Retrieves a list of creative groups, possibly filtered.
 --
--- /See:/ 'creativeGroupsList' smart constructor.
-data CreativeGroupsList = CreativeGroupsList
+-- /See:/ 'creativeGroupsList'' smart constructor.
+data CreativeGroupsList' = CreativeGroupsList'
     { _cglQuotaUser     :: !(Maybe Text)
     , _cglPrettyPrint   :: !Bool
     , _cglUserIp        :: !(Maybe Text)
     , _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe Int64)
     , _cglProfileId     :: !Int64
-    , _cglSortOrder     :: !(Maybe Text)
+    , _cglSortOrder     :: !(Maybe DfareportingCreativeGroupsListSortOrder)
     , _cglGroupNumber   :: !(Maybe Int32)
     , _cglKey           :: !(Maybe Text)
     , _cglPageToken     :: !(Maybe Text)
-    , _cglSortField     :: !(Maybe Text)
+    , _cglSortField     :: !(Maybe DfareportingCreativeGroupsListSortField)
     , _cglOauthToken    :: !(Maybe Text)
     , _cglAdvertiserIds :: !(Maybe Int64)
     , _cglMaxResults    :: !(Maybe Int32)
     , _cglFields        :: !(Maybe Text)
-    , _cglAlt           :: !Text
+    , _cglAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsList'' with the minimum fields required to make a request.
@@ -123,11 +135,11 @@ data CreativeGroupsList = CreativeGroupsList
 -- * 'cglFields'
 --
 -- * 'cglAlt'
-creativeGroupsList
+creativeGroupsList'
     :: Int64 -- ^ 'profileId'
-    -> CreativeGroupsList
-creativeGroupsList pCglProfileId_ =
-    CreativeGroupsList
+    -> CreativeGroupsList'
+creativeGroupsList' pCglProfileId_ =
+    CreativeGroupsList'
     { _cglQuotaUser = Nothing
     , _cglPrettyPrint = True
     , _cglUserIp = Nothing
@@ -143,7 +155,7 @@ creativeGroupsList pCglProfileId_ =
     , _cglAdvertiserIds = Nothing
     , _cglMaxResults = Nothing
     , _cglFields = Nothing
-    , _cglAlt = "json"
+    , _cglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,7 +200,7 @@ cglProfileId
   = lens _cglProfileId (\ s a -> s{_cglProfileId = a})
 
 -- | Order of sorted results, default is ASCENDING.
-cglSortOrder :: Lens' CreativeGroupsList' (Maybe Text)
+cglSortOrder :: Lens' CreativeGroupsList' (Maybe DfareportingCreativeGroupsListSortOrder)
 cglSortOrder
   = lens _cglSortOrder (\ s a -> s{_cglSortOrder = a})
 
@@ -210,7 +222,7 @@ cglPageToken
   = lens _cglPageToken (\ s a -> s{_cglPageToken = a})
 
 -- | Field by which to sort the list.
-cglSortField :: Lens' CreativeGroupsList' (Maybe Text)
+cglSortField :: Lens' CreativeGroupsList' (Maybe DfareportingCreativeGroupsListSortField)
 cglSortField
   = lens _cglSortField (\ s a -> s{_cglSortField = a})
 
@@ -238,15 +250,15 @@ cglFields
   = lens _cglFields (\ s a -> s{_cglFields = a})
 
 -- | Data format for the response.
-cglAlt :: Lens' CreativeGroupsList' Text
+cglAlt :: Lens' CreativeGroupsList' Alt
 cglAlt = lens _cglAlt (\ s a -> s{_cglAlt = a})
 
 instance GoogleRequest CreativeGroupsList' where
         type Rs CreativeGroupsList' =
              CreativeGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeGroupsList{..}
-          = go _cglQuotaUser _cglPrettyPrint _cglUserIp
+        requestWithRoute r u CreativeGroupsList'{..}
+          = go _cglQuotaUser (Just _cglPrettyPrint) _cglUserIp
               _cglSearchString
               _cglIds
               _cglProfileId
@@ -259,9 +271,9 @@ instance GoogleRequest CreativeGroupsList' where
               _cglAdvertiserIds
               _cglMaxResults
               _cglFields
-              _cglAlt
+              (Just _cglAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeGroupsListAPI)
+                      (Proxy :: Proxy CreativeGroupsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- in the reverse chronological order of the enqueued time.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlBackupRunsList@.
-module Sql.BackupRuns.List
+module Network.Google.Resource.Sql.BackupRuns.List
     (
     -- * REST Resource
-      BackupRunsListAPI
+      BackupRunsListResource
 
     -- * Creating a Request
-    , backupRunsList
-    , BackupRunsList
+    , backupRunsList'
+    , BackupRunsList'
 
     -- * Request Lenses
     , brlQuotaUser
@@ -47,22 +48,29 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlBackupRunsList@ which the
--- 'BackupRunsList' request conforms to.
-type BackupRunsListAPI =
+-- 'BackupRunsList'' request conforms to.
+type BackupRunsListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
              "backupRuns" :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] BackupRunsListResponse
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] BackupRunsListResponse
 
 -- | Lists all backup runs associated with a given instance and configuration
 -- in the reverse chronological order of the enqueued time.
 --
--- /See:/ 'backupRunsList' smart constructor.
-data BackupRunsList = BackupRunsList
+-- /See:/ 'backupRunsList'' smart constructor.
+data BackupRunsList' = BackupRunsList'
     { _brlQuotaUser   :: !(Maybe Text)
     , _brlPrettyPrint :: !Bool
     , _brlProject     :: !Text
@@ -72,7 +80,7 @@ data BackupRunsList = BackupRunsList
     , _brlOauthToken  :: !(Maybe Text)
     , _brlMaxResults  :: !(Maybe Int32)
     , _brlFields      :: !(Maybe Text)
-    , _brlAlt         :: !Text
+    , _brlAlt         :: !Alt
     , _brlInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -101,12 +109,12 @@ data BackupRunsList = BackupRunsList
 -- * 'brlAlt'
 --
 -- * 'brlInstance'
-backupRunsList
+backupRunsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> BackupRunsList
-backupRunsList pBrlProject_ pBrlInstance_ =
-    BackupRunsList
+    -> BackupRunsList'
+backupRunsList' pBrlProject_ pBrlInstance_ =
+    BackupRunsList'
     { _brlQuotaUser = Nothing
     , _brlPrettyPrint = True
     , _brlProject = pBrlProject_
@@ -116,7 +124,7 @@ backupRunsList pBrlProject_ pBrlInstance_ =
     , _brlOauthToken = Nothing
     , _brlMaxResults = Nothing
     , _brlFields = Nothing
-    , _brlAlt = "json"
+    , _brlAlt = JSON
     , _brlInstance = pBrlInstance_
     }
 
@@ -174,7 +182,7 @@ brlFields
   = lens _brlFields (\ s a -> s{_brlFields = a})
 
 -- | Data format for the response.
-brlAlt :: Lens' BackupRunsList' Text
+brlAlt :: Lens' BackupRunsList' Alt
 brlAlt = lens _brlAlt (\ s a -> s{_brlAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -185,17 +193,18 @@ brlInstance
 instance GoogleRequest BackupRunsList' where
         type Rs BackupRunsList' = BackupRunsListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u BackupRunsList{..}
-          = go _brlQuotaUser _brlPrettyPrint _brlProject
+        requestWithRoute r u BackupRunsList'{..}
+          = go _brlQuotaUser (Just _brlPrettyPrint) _brlProject
               _brlUserIp
               _brlKey
               _brlPageToken
               _brlOauthToken
               _brlMaxResults
               _brlFields
-              _brlAlt
+              (Just _brlAlt)
               _brlInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy BackupRunsListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BackupRunsListResource)
                       r
                       u

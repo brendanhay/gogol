@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return metadata for a particular layer.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersGet@.
-module Mapsengine.Layers.Get
+module Network.Google.Resource.Mapsengine.Layers.Get
     (
     -- * REST Resource
-      LayersGetAPI
+      LayersGetResource
 
     -- * Creating a Request
-    , layersGet
-    , LayersGet
+    , layersGet'
+    , LayersGet'
 
     -- * Request Lenses
     , lgQuotaUser
@@ -44,25 +45,32 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersGet@ which the
--- 'LayersGet' request conforms to.
-type LayersGetAPI =
+-- 'LayersGet'' request conforms to.
+type LayersGetResource =
      "layers" :>
        Capture "id" Text :>
-         QueryParam "version" Text :> Get '[JSON] Layer
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "version" MapsengineLayersGetVersion :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Layer
 
 -- | Return metadata for a particular layer.
 --
--- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet
+-- /See:/ 'layersGet'' smart constructor.
+data LayersGet' = LayersGet'
     { _lgQuotaUser   :: !(Maybe Text)
     , _lgPrettyPrint :: !Bool
     , _lgUserIp      :: !(Maybe Text)
     , _lgKey         :: !(Maybe Text)
-    , _lgVersion     :: !(Maybe Text)
+    , _lgVersion     :: !(Maybe MapsengineLayersGetVersion)
     , _lgId          :: !Text
     , _lgOauthToken  :: !(Maybe Text)
     , _lgFields      :: !(Maybe Text)
-    , _lgAlt         :: !Text
+    , _lgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersGet'' with the minimum fields required to make a request.
@@ -86,11 +94,11 @@ data LayersGet = LayersGet
 -- * 'lgFields'
 --
 -- * 'lgAlt'
-layersGet
+layersGet'
     :: Text -- ^ 'id'
-    -> LayersGet
-layersGet pLgId_ =
-    LayersGet
+    -> LayersGet'
+layersGet' pLgId_ =
+    LayersGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgUserIp = Nothing
@@ -99,7 +107,7 @@ layersGet pLgId_ =
     , _lgId = pLgId_
     , _lgOauthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = "json"
+    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,7 +138,7 @@ lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 -- should be returned. When version is set to published, the published
 -- version of the layer will be returned. Please use the
 -- layers.getPublished endpoint instead.
-lgVersion :: Lens' LayersGet' (Maybe Text)
+lgVersion :: Lens' LayersGet' (Maybe MapsengineLayersGetVersion)
 lgVersion
   = lens _lgVersion (\ s a -> s{_lgVersion = a})
 
@@ -148,18 +156,21 @@ lgFields :: Lens' LayersGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
 -- | Data format for the response.
-lgAlt :: Lens' LayersGet' Text
+lgAlt :: Lens' LayersGet' Alt
 lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
 
 instance GoogleRequest LayersGet' where
         type Rs LayersGet' = Layer
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersGet{..}
-          = go _lgQuotaUser _lgPrettyPrint _lgUserIp _lgKey
+        requestWithRoute r u LayersGet'{..}
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
+              _lgKey
               _lgVersion
               _lgId
               _lgOauthToken
               _lgFields
-              _lgAlt
+              (Just _lgAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LayersGetAPI) r u
+                  = clientWithRoute (Proxy :: Proxy LayersGetResource)
+                      r
+                      u

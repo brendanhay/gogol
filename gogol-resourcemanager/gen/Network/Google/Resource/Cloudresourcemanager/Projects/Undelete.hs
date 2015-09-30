@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -27,41 +28,54 @@
 -- for this project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsUndelete@.
-module Cloudresourcemanager.Projects.Undelete
+module Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
     (
     -- * REST Resource
-      ProjectsUndeleteAPI
+      ProjectsUndeleteResource
 
     -- * Creating a Request
-    , projectsUndelete
-    , ProjectsUndelete
+    , projectsUndelete'
+    , ProjectsUndelete'
 
     -- * Request Lenses
-    , puXgafv
-    , puQuotaUser
-    , puPrettyPrint
-    , puUploadProtocol
-    , puPp
-    , puAccessToken
-    , puUploadType
-    , puBearerToken
-    , puKey
-    , puProjectId
-    , puOauthToken
-    , puFields
-    , puCallback
-    , puAlt
+    , proXgafv
+    , proQuotaUser
+    , proPrettyPrint
+    , proUploadProtocol
+    , proPp
+    , proAccessToken
+    , proUploadType
+    , proBearerToken
+    , proKey
+    , proProjectId
+    , proOauthToken
+    , proFields
+    , proCallback
+    , proAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsUndelete@ which the
--- 'ProjectsUndelete' request conforms to.
-type ProjectsUndeleteAPI =
+-- 'ProjectsUndelete'' request conforms to.
+type ProjectsUndeleteResource =
      "v1beta1" :>
        "projects" :>
-         "{projectId}:undelete" :> Post '[JSON] Empty
+         "{projectId}:undelete" :>
+           QueryParam "$.xgafv" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "upload_protocol" Text :>
+                   QueryParam "pp" Bool :>
+                     QueryParam "access_token" Text :>
+                       QueryParam "uploadType" Text :>
+                         QueryParam "bearer_token" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Restores the project identified by the specified \`project_id\` (for
 -- example, \`my-project-123\`). You can only use this method for a project
@@ -73,167 +87,170 @@ type ProjectsUndeleteAPI =
 -- the project cannot be restored. The caller must have modify permissions
 -- for this project.
 --
--- /See:/ 'projectsUndelete' smart constructor.
-data ProjectsUndelete = ProjectsUndelete
-    { _puXgafv          :: !(Maybe Text)
-    , _puQuotaUser      :: !(Maybe Text)
-    , _puPrettyPrint    :: !Bool
-    , _puUploadProtocol :: !(Maybe Text)
-    , _puPp             :: !Bool
-    , _puAccessToken    :: !(Maybe Text)
-    , _puUploadType     :: !(Maybe Text)
-    , _puBearerToken    :: !(Maybe Text)
-    , _puKey            :: !(Maybe Text)
-    , _puProjectId      :: !Text
-    , _puOauthToken     :: !(Maybe Text)
-    , _puFields         :: !(Maybe Text)
-    , _puCallback       :: !(Maybe Text)
-    , _puAlt            :: !Text
+-- /See:/ 'projectsUndelete'' smart constructor.
+data ProjectsUndelete' = ProjectsUndelete'
+    { _proXgafv          :: !(Maybe Text)
+    , _proQuotaUser      :: !(Maybe Text)
+    , _proPrettyPrint    :: !Bool
+    , _proUploadProtocol :: !(Maybe Text)
+    , _proPp             :: !Bool
+    , _proAccessToken    :: !(Maybe Text)
+    , _proUploadType     :: !(Maybe Text)
+    , _proBearerToken    :: !(Maybe Text)
+    , _proKey            :: !(Maybe Text)
+    , _proProjectId      :: !Text
+    , _proOauthToken     :: !(Maybe Text)
+    , _proFields         :: !(Maybe Text)
+    , _proCallback       :: !(Maybe Text)
+    , _proAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsUndelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'puXgafv'
+-- * 'proXgafv'
 --
--- * 'puQuotaUser'
+-- * 'proQuotaUser'
 --
--- * 'puPrettyPrint'
+-- * 'proPrettyPrint'
 --
--- * 'puUploadProtocol'
+-- * 'proUploadProtocol'
 --
--- * 'puPp'
+-- * 'proPp'
 --
--- * 'puAccessToken'
+-- * 'proAccessToken'
 --
--- * 'puUploadType'
+-- * 'proUploadType'
 --
--- * 'puBearerToken'
+-- * 'proBearerToken'
 --
--- * 'puKey'
+-- * 'proKey'
 --
--- * 'puProjectId'
+-- * 'proProjectId'
 --
--- * 'puOauthToken'
+-- * 'proOauthToken'
 --
--- * 'puFields'
+-- * 'proFields'
 --
--- * 'puCallback'
+-- * 'proCallback'
 --
--- * 'puAlt'
-projectsUndelete
+-- * 'proAlt'
+projectsUndelete'
     :: Text -- ^ 'projectId'
-    -> ProjectsUndelete
-projectsUndelete pPuProjectId_ =
-    ProjectsUndelete
-    { _puXgafv = Nothing
-    , _puQuotaUser = Nothing
-    , _puPrettyPrint = True
-    , _puUploadProtocol = Nothing
-    , _puPp = True
-    , _puAccessToken = Nothing
-    , _puUploadType = Nothing
-    , _puBearerToken = Nothing
-    , _puKey = Nothing
-    , _puProjectId = pPuProjectId_
-    , _puOauthToken = Nothing
-    , _puFields = Nothing
-    , _puCallback = Nothing
-    , _puAlt = "json"
+    -> ProjectsUndelete'
+projectsUndelete' pProProjectId_ =
+    ProjectsUndelete'
+    { _proXgafv = Nothing
+    , _proQuotaUser = Nothing
+    , _proPrettyPrint = True
+    , _proUploadProtocol = Nothing
+    , _proPp = True
+    , _proAccessToken = Nothing
+    , _proUploadType = Nothing
+    , _proBearerToken = Nothing
+    , _proKey = Nothing
+    , _proProjectId = pProProjectId_
+    , _proOauthToken = Nothing
+    , _proFields = Nothing
+    , _proCallback = Nothing
+    , _proAlt = "json"
     }
 
 -- | V1 error format.
-puXgafv :: Lens' ProjectsUndelete' (Maybe Text)
-puXgafv = lens _puXgafv (\ s a -> s{_puXgafv = a})
+proXgafv :: Lens' ProjectsUndelete' (Maybe Text)
+proXgafv = lens _proXgafv (\ s a -> s{_proXgafv = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters.
-puQuotaUser :: Lens' ProjectsUndelete' (Maybe Text)
-puQuotaUser
-  = lens _puQuotaUser (\ s a -> s{_puQuotaUser = a})
+proQuotaUser :: Lens' ProjectsUndelete' (Maybe Text)
+proQuotaUser
+  = lens _proQuotaUser (\ s a -> s{_proQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-puPrettyPrint :: Lens' ProjectsUndelete' Bool
-puPrettyPrint
-  = lens _puPrettyPrint
-      (\ s a -> s{_puPrettyPrint = a})
+proPrettyPrint :: Lens' ProjectsUndelete' Bool
+proPrettyPrint
+  = lens _proPrettyPrint
+      (\ s a -> s{_proPrettyPrint = a})
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-puUploadProtocol :: Lens' ProjectsUndelete' (Maybe Text)
-puUploadProtocol
-  = lens _puUploadProtocol
-      (\ s a -> s{_puUploadProtocol = a})
+proUploadProtocol :: Lens' ProjectsUndelete' (Maybe Text)
+proUploadProtocol
+  = lens _proUploadProtocol
+      (\ s a -> s{_proUploadProtocol = a})
 
 -- | Pretty-print response.
-puPp :: Lens' ProjectsUndelete' Bool
-puPp = lens _puPp (\ s a -> s{_puPp = a})
+proPp :: Lens' ProjectsUndelete' Bool
+proPp = lens _proPp (\ s a -> s{_proPp = a})
 
 -- | OAuth access token.
-puAccessToken :: Lens' ProjectsUndelete' (Maybe Text)
-puAccessToken
-  = lens _puAccessToken
-      (\ s a -> s{_puAccessToken = a})
+proAccessToken :: Lens' ProjectsUndelete' (Maybe Text)
+proAccessToken
+  = lens _proAccessToken
+      (\ s a -> s{_proAccessToken = a})
 
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
-puUploadType :: Lens' ProjectsUndelete' (Maybe Text)
-puUploadType
-  = lens _puUploadType (\ s a -> s{_puUploadType = a})
+proUploadType :: Lens' ProjectsUndelete' (Maybe Text)
+proUploadType
+  = lens _proUploadType
+      (\ s a -> s{_proUploadType = a})
 
 -- | OAuth bearer token.
-puBearerToken :: Lens' ProjectsUndelete' (Maybe Text)
-puBearerToken
-  = lens _puBearerToken
-      (\ s a -> s{_puBearerToken = a})
+proBearerToken :: Lens' ProjectsUndelete' (Maybe Text)
+proBearerToken
+  = lens _proBearerToken
+      (\ s a -> s{_proBearerToken = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' ProjectsUndelete' (Maybe Text)
-puKey = lens _puKey (\ s a -> s{_puKey = a})
+proKey :: Lens' ProjectsUndelete' (Maybe Text)
+proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | The project ID (for example, \`foo-bar-123\`). Required.
-puProjectId :: Lens' ProjectsUndelete' Text
-puProjectId
-  = lens _puProjectId (\ s a -> s{_puProjectId = a})
+proProjectId :: Lens' ProjectsUndelete' Text
+proProjectId
+  = lens _proProjectId (\ s a -> s{_proProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' ProjectsUndelete' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+proOauthToken :: Lens' ProjectsUndelete' (Maybe Text)
+proOauthToken
+  = lens _proOauthToken
+      (\ s a -> s{_proOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-puFields :: Lens' ProjectsUndelete' (Maybe Text)
-puFields = lens _puFields (\ s a -> s{_puFields = a})
+proFields :: Lens' ProjectsUndelete' (Maybe Text)
+proFields
+  = lens _proFields (\ s a -> s{_proFields = a})
 
 -- | JSONP
-puCallback :: Lens' ProjectsUndelete' (Maybe Text)
-puCallback
-  = lens _puCallback (\ s a -> s{_puCallback = a})
+proCallback :: Lens' ProjectsUndelete' (Maybe Text)
+proCallback
+  = lens _proCallback (\ s a -> s{_proCallback = a})
 
 -- | Data format for response.
-puAlt :: Lens' ProjectsUndelete' Text
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+proAlt :: Lens' ProjectsUndelete' Text
+proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
 
 instance GoogleRequest ProjectsUndelete' where
         type Rs ProjectsUndelete' = Empty
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsUndelete{..}
-          = go _puXgafv _puQuotaUser _puPrettyPrint
-              _puUploadProtocol
-              _puPp
-              _puAccessToken
-              _puUploadType
-              _puBearerToken
-              _puKey
-              _puProjectId
-              _puOauthToken
-              _puFields
-              _puCallback
-              _puAlt
+        requestWithRoute r u ProjectsUndelete'{..}
+          = go _proXgafv _proQuotaUser (Just _proPrettyPrint)
+              _proUploadProtocol
+              (Just _proPp)
+              _proAccessToken
+              _proUploadType
+              _proBearerToken
+              _proKey
+              _proProjectId
+              _proOauthToken
+              _proFields
+              _proCallback
+              (Just _proAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsUndeleteAPI)
+                      (Proxy :: Proxy ProjectsUndeleteResource)
                       r
                       u

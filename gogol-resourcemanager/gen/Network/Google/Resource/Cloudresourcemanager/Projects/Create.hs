@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- automatically for the project, including Google Cloud Storage.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Google Cloud Resource Manager API Reference> for @CloudresourcemanagerProjectsCreate@.
-module Cloudresourcemanager.Projects.Create
+module Network.Google.Resource.Cloudresourcemanager.Projects.Create
     (
     -- * REST Resource
-      ProjectsCreateAPI
+      ProjectsCreateResource
 
     -- * Creating a Request
-    , projectsCreate
-    , ProjectsCreate
+    , projectsCreate'
+    , ProjectsCreate'
 
     -- * Request Lenses
     , pcXgafv
@@ -51,17 +52,31 @@ import           Network.Google.Prelude
 import           Network.Google.ResourceManager.Types
 
 -- | A resource alias for @CloudresourcemanagerProjectsCreate@ which the
--- 'ProjectsCreate' request conforms to.
-type ProjectsCreateAPI =
-     "v1beta1" :> "projects" :> Post '[JSON] Project
+-- 'ProjectsCreate'' request conforms to.
+type ProjectsCreateResource =
+     "v1beta1" :>
+       "projects" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Project
 
 -- | Creates a project resource. Initially, the project resource is owned by
 -- its creator exclusively. The creator can later grant permission to
 -- others to read or update the project. Several APIs are activated
 -- automatically for the project, including Google Cloud Storage.
 --
--- /See:/ 'projectsCreate' smart constructor.
-data ProjectsCreate = ProjectsCreate
+-- /See:/ 'projectsCreate'' smart constructor.
+data ProjectsCreate' = ProjectsCreate'
     { _pcXgafv          :: !(Maybe Text)
     , _pcQuotaUser      :: !(Maybe Text)
     , _pcPrettyPrint    :: !Bool
@@ -106,10 +121,10 @@ data ProjectsCreate = ProjectsCreate
 -- * 'pcCallback'
 --
 -- * 'pcAlt'
-projectsCreate
-    :: ProjectsCreate
-projectsCreate =
-    ProjectsCreate
+projectsCreate'
+    :: ProjectsCreate'
+projectsCreate' =
+    ProjectsCreate'
     { _pcXgafv = Nothing
     , _pcQuotaUser = Nothing
     , _pcPrettyPrint = True
@@ -196,10 +211,10 @@ pcAlt = lens _pcAlt (\ s a -> s{_pcAlt = a})
 instance GoogleRequest ProjectsCreate' where
         type Rs ProjectsCreate' = Project
         request = requestWithRoute defReq resourceManagerURL
-        requestWithRoute r u ProjectsCreate{..}
-          = go _pcXgafv _pcQuotaUser _pcPrettyPrint
+        requestWithRoute r u ProjectsCreate'{..}
+          = go _pcXgafv _pcQuotaUser (Just _pcPrettyPrint)
               _pcUploadProtocol
-              _pcPp
+              (Just _pcPp)
               _pcAccessToken
               _pcUploadType
               _pcBearerToken
@@ -207,8 +222,9 @@ instance GoogleRequest ProjectsCreate' where
               _pcOauthToken
               _pcFields
               _pcCallback
-              _pcAlt
+              (Just _pcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ProjectsCreateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsCreateResource)
                       r
                       u

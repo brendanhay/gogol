@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one creative field value by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCreativeFieldValuesGet@.
-module DFAReporting.CreativeFieldValues.Get
+module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
     (
     -- * REST Resource
-      CreativeFieldValuesGetAPI
+      CreativeFieldValuesGetResource
 
     -- * Creating a Request
-    , creativeFieldValuesGet
-    , CreativeFieldValuesGet
+    , creativeFieldValuesGet'
+    , CreativeFieldValuesGet'
 
     -- * Request Lenses
     , cfvgCreativeFieldId
@@ -45,19 +46,27 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCreativeFieldValuesGet@ which the
--- 'CreativeFieldValuesGet' request conforms to.
-type CreativeFieldValuesGetAPI =
+-- 'CreativeFieldValuesGet'' request conforms to.
+type CreativeFieldValuesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "creativeFields" :>
            Capture "creativeFieldId" Int64 :>
              "creativeFieldValues" :>
-               Capture "id" Int64 :> Get '[JSON] CreativeFieldValue
+               Capture "id" Int64 :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] CreativeFieldValue
 
 -- | Gets one creative field value by ID.
 --
--- /See:/ 'creativeFieldValuesGet' smart constructor.
-data CreativeFieldValuesGet = CreativeFieldValuesGet
+-- /See:/ 'creativeFieldValuesGet'' smart constructor.
+data CreativeFieldValuesGet' = CreativeFieldValuesGet'
     { _cfvgCreativeFieldId :: !Int64
     , _cfvgQuotaUser       :: !(Maybe Text)
     , _cfvgPrettyPrint     :: !Bool
@@ -67,7 +76,7 @@ data CreativeFieldValuesGet = CreativeFieldValuesGet
     , _cfvgId              :: !Int64
     , _cfvgOauthToken      :: !(Maybe Text)
     , _cfvgFields          :: !(Maybe Text)
-    , _cfvgAlt             :: !Text
+    , _cfvgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesGet'' with the minimum fields required to make a request.
@@ -93,13 +102,13 @@ data CreativeFieldValuesGet = CreativeFieldValuesGet
 -- * 'cfvgFields'
 --
 -- * 'cfvgAlt'
-creativeFieldValuesGet
+creativeFieldValuesGet'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CreativeFieldValuesGet
-creativeFieldValuesGet pCfvgCreativeFieldId_ pCfvgProfileId_ pCfvgId_ =
-    CreativeFieldValuesGet
+    -> CreativeFieldValuesGet'
+creativeFieldValuesGet' pCfvgCreativeFieldId_ pCfvgProfileId_ pCfvgId_ =
+    CreativeFieldValuesGet'
     { _cfvgCreativeFieldId = pCfvgCreativeFieldId_
     , _cfvgQuotaUser = Nothing
     , _cfvgPrettyPrint = True
@@ -109,7 +118,7 @@ creativeFieldValuesGet pCfvgCreativeFieldId_ pCfvgProfileId_ pCfvgId_ =
     , _cfvgId = pCfvgId_
     , _cfvgOauthToken = Nothing
     , _cfvgFields = Nothing
-    , _cfvgAlt = "json"
+    , _cfvgAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -166,24 +175,24 @@ cfvgFields
   = lens _cfvgFields (\ s a -> s{_cfvgFields = a})
 
 -- | Data format for the response.
-cfvgAlt :: Lens' CreativeFieldValuesGet' Text
+cfvgAlt :: Lens' CreativeFieldValuesGet' Alt
 cfvgAlt = lens _cfvgAlt (\ s a -> s{_cfvgAlt = a})
 
 instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CreativeFieldValuesGet{..}
+        requestWithRoute r u CreativeFieldValuesGet'{..}
           = go _cfvgCreativeFieldId _cfvgQuotaUser
-              _cfvgPrettyPrint
+              (Just _cfvgPrettyPrint)
               _cfvgUserIp
               _cfvgProfileId
               _cfvgKey
               _cfvgId
               _cfvgOauthToken
               _cfvgFields
-              _cfvgAlt
+              (Just _cfvgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CreativeFieldValuesGetAPI)
+                      (Proxy :: Proxy CreativeFieldValuesGetResource)
                       r
                       u

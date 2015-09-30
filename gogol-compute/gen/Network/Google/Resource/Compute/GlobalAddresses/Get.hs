@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns the specified address resource.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeGlobalAddressesGet@.
-module Compute.GlobalAddresses.Get
+module Network.Google.Resource.Compute.GlobalAddresses.Get
     (
     -- * REST Resource
-      GlobalAddressesGetAPI
+      GlobalAddressesGetResource
 
     -- * Creating a Request
-    , globalAddressesGet
-    , GlobalAddressesGet
+    , globalAddressesGet'
+    , GlobalAddressesGet'
 
     -- * Request Lenses
     , gagQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeGlobalAddressesGet@ which the
--- 'GlobalAddressesGet' request conforms to.
-type GlobalAddressesGetAPI =
+-- 'GlobalAddressesGet'' request conforms to.
+type GlobalAddressesGetResource =
      Capture "project" Text :>
        "global" :>
          "addresses" :>
-           Capture "address" Text :> Get '[JSON] Address
+           Capture "address" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Address
 
 -- | Returns the specified address resource.
 --
--- /See:/ 'globalAddressesGet' smart constructor.
-data GlobalAddressesGet = GlobalAddressesGet
+-- /See:/ 'globalAddressesGet'' smart constructor.
+data GlobalAddressesGet' = GlobalAddressesGet'
     { _gagQuotaUser   :: !(Maybe Text)
     , _gagPrettyPrint :: !Bool
     , _gagProject     :: !Text
@@ -63,7 +71,7 @@ data GlobalAddressesGet = GlobalAddressesGet
     , _gagKey         :: !(Maybe Text)
     , _gagOauthToken  :: !(Maybe Text)
     , _gagFields      :: !(Maybe Text)
-    , _gagAlt         :: !Text
+    , _gagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesGet'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data GlobalAddressesGet = GlobalAddressesGet
 -- * 'gagFields'
 --
 -- * 'gagAlt'
-globalAddressesGet
+globalAddressesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
-    -> GlobalAddressesGet
-globalAddressesGet pGagProject_ pGagAddress_ =
-    GlobalAddressesGet
+    -> GlobalAddressesGet'
+globalAddressesGet' pGagProject_ pGagAddress_ =
+    GlobalAddressesGet'
     { _gagQuotaUser = Nothing
     , _gagPrettyPrint = True
     , _gagProject = pGagProject_
@@ -101,7 +109,7 @@ globalAddressesGet pGagProject_ pGagAddress_ =
     , _gagKey = Nothing
     , _gagOauthToken = Nothing
     , _gagFields = Nothing
-    , _gagAlt = "json"
+    , _gagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,22 +159,22 @@ gagFields
   = lens _gagFields (\ s a -> s{_gagFields = a})
 
 -- | Data format for the response.
-gagAlt :: Lens' GlobalAddressesGet' Text
+gagAlt :: Lens' GlobalAddressesGet' Alt
 gagAlt = lens _gagAlt (\ s a -> s{_gagAlt = a})
 
 instance GoogleRequest GlobalAddressesGet' where
         type Rs GlobalAddressesGet' = Address
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u GlobalAddressesGet{..}
-          = go _gagQuotaUser _gagPrettyPrint _gagProject
+        requestWithRoute r u GlobalAddressesGet'{..}
+          = go _gagQuotaUser (Just _gagPrettyPrint) _gagProject
               _gagUserIp
               _gagAddress
               _gagKey
               _gagOauthToken
               _gagFields
-              _gagAlt
+              (Just _gagAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy GlobalAddressesGetAPI)
+                      (Proxy :: Proxy GlobalAddressesGetResource)
                       r
                       u

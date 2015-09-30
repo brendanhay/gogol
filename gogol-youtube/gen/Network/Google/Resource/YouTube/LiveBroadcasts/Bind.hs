@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- broadcast.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeLiveBroadcastsBind@.
-module YouTube.LiveBroadcasts.Bind
+module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
     (
     -- * REST Resource
-      LiveBroadcastsBindAPI
+      LiveBroadcastsBindResource
 
     -- * Creating a Request
-    , liveBroadcastsBind
-    , LiveBroadcastsBind
+    , liveBroadcastsBind'
+    , LiveBroadcastsBind'
 
     -- * Request Lenses
     , lbbQuotaUser
@@ -50,24 +51,31 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeLiveBroadcastsBind@ which the
--- 'LiveBroadcastsBind' request conforms to.
-type LiveBroadcastsBindAPI =
+-- 'LiveBroadcastsBind'' request conforms to.
+type LiveBroadcastsBindResource =
      "liveBroadcasts" :>
        "bind" :>
-         QueryParam "part" Text :>
-           QueryParam "onBehalfOfContentOwner" Text :>
-             QueryParam "onBehalfOfContentOwnerChannel" Text :>
-               QueryParam "id" Text :>
-                 QueryParam "streamId" Text :>
-                   Post '[JSON] LiveBroadcast
+         QueryParam "quotaUser" Text :>
+           QueryParam "part" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "onBehalfOfContentOwner" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "onBehalfOfContentOwnerChannel" Text :>
+                       QueryParam "id" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "streamId" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Post '[JSON] LiveBroadcast
 
 -- | Binds a YouTube broadcast to a stream or removes an existing binding
 -- between a broadcast and a stream. A broadcast can only be bound to one
 -- video stream, though a video stream may be bound to more than one
 -- broadcast.
 --
--- /See:/ 'liveBroadcastsBind' smart constructor.
-data LiveBroadcastsBind = LiveBroadcastsBind
+-- /See:/ 'liveBroadcastsBind'' smart constructor.
+data LiveBroadcastsBind' = LiveBroadcastsBind'
     { _lbbQuotaUser                     :: !(Maybe Text)
     , _lbbPart                          :: !Text
     , _lbbPrettyPrint                   :: !Bool
@@ -79,7 +87,7 @@ data LiveBroadcastsBind = LiveBroadcastsBind
     , _lbbOauthToken                    :: !(Maybe Text)
     , _lbbStreamId                      :: !(Maybe Text)
     , _lbbFields                        :: !(Maybe Text)
-    , _lbbAlt                           :: !Text
+    , _lbbAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBind'' with the minimum fields required to make a request.
@@ -109,12 +117,12 @@ data LiveBroadcastsBind = LiveBroadcastsBind
 -- * 'lbbFields'
 --
 -- * 'lbbAlt'
-liveBroadcastsBind
+liveBroadcastsBind'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
-    -> LiveBroadcastsBind
-liveBroadcastsBind pLbbPart_ pLbbId_ =
-    LiveBroadcastsBind
+    -> LiveBroadcastsBind'
+liveBroadcastsBind' pLbbPart_ pLbbId_ =
+    LiveBroadcastsBind'
     { _lbbQuotaUser = Nothing
     , _lbbPart = pLbbPart_
     , _lbbPrettyPrint = True
@@ -126,7 +134,7 @@ liveBroadcastsBind pLbbPart_ pLbbId_ =
     , _lbbOauthToken = Nothing
     , _lbbStreamId = Nothing
     , _lbbFields = Nothing
-    , _lbbAlt = "json"
+    , _lbbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -222,14 +230,15 @@ lbbFields
   = lens _lbbFields (\ s a -> s{_lbbFields = a})
 
 -- | Data format for the response.
-lbbAlt :: Lens' LiveBroadcastsBind' Text
+lbbAlt :: Lens' LiveBroadcastsBind' Alt
 lbbAlt = lens _lbbAlt (\ s a -> s{_lbbAlt = a})
 
 instance GoogleRequest LiveBroadcastsBind' where
         type Rs LiveBroadcastsBind' = LiveBroadcast
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u LiveBroadcastsBind{..}
-          = go _lbbQuotaUser (Just _lbbPart) _lbbPrettyPrint
+        requestWithRoute r u LiveBroadcastsBind'{..}
+          = go _lbbQuotaUser (Just _lbbPart)
+              (Just _lbbPrettyPrint)
               _lbbUserIp
               _lbbOnBehalfOfContentOwner
               _lbbKey
@@ -238,9 +247,9 @@ instance GoogleRequest LiveBroadcastsBind' where
               _lbbOauthToken
               _lbbStreamId
               _lbbFields
-              _lbbAlt
+              (Just _lbbAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LiveBroadcastsBindAPI)
+                      (Proxy :: Proxy LiveBroadcastsBindResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all of the moments for a particular user.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsList@.
-module Plus.Moments.List
+module Network.Google.Resource.Plus.Moments.List
     (
     -- * REST Resource
-      MomentsListAPI
+      MomentsListResource
 
     -- * Creating a Request
-    , momentsList
-    , MomentsList
+    , momentsList'
+    , MomentsList'
 
     -- * Request Lenses
     , mlQuotaUser
@@ -48,27 +49,33 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusMomentsList@ which the
--- 'MomentsList' request conforms to.
-type MomentsListAPI =
+-- 'MomentsList'' request conforms to.
+type MomentsListResource =
      "people" :>
        Capture "userId" Text :>
          "moments" :>
-           Capture "collection" Text :>
-             QueryParam "targetUrl" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "type" Text :>
-                   QueryParam "maxResults" Word32 :>
-                     Get '[JSON] MomentsFeed
+           Capture "collection" PlusMomentsListCollection :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "targetUrl" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "type" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "maxResults" Word32 :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Get '[JSON] MomentsFeed
 
 -- | List all of the moments for a particular user.
 --
--- /See:/ 'momentsList' smart constructor.
-data MomentsList = MomentsList
+-- /See:/ 'momentsList'' smart constructor.
+data MomentsList' = MomentsList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlTargetUrl   :: !(Maybe Text)
     , _mlUserIp      :: !(Maybe Text)
-    , _mlCollection  :: !Text
+    , _mlCollection  :: !PlusMomentsListCollection
     , _mlUserId      :: !Text
     , _mlKey         :: !(Maybe Text)
     , _mlPageToken   :: !(Maybe Text)
@@ -76,7 +83,7 @@ data MomentsList = MomentsList
     , _mlOauthToken  :: !(Maybe Text)
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Text
+    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsList'' with the minimum fields required to make a request.
@@ -108,12 +115,12 @@ data MomentsList = MomentsList
 -- * 'mlFields'
 --
 -- * 'mlAlt'
-momentsList
-    :: Text -- ^ 'collection'
+momentsList'
+    :: PlusMomentsListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
-    -> MomentsList
-momentsList pMlCollection_ pMlUserId_ =
-    MomentsList
+    -> MomentsList'
+momentsList' pMlCollection_ pMlUserId_ =
+    MomentsList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlTargetUrl = Nothing
@@ -126,7 +133,7 @@ momentsList pMlCollection_ pMlUserId_ =
     , _mlOauthToken = Nothing
     , _mlMaxResults = 20
     , _mlFields = Nothing
-    , _mlAlt = "json"
+    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +160,7 @@ mlUserIp :: Lens' MomentsList' (Maybe Text)
 mlUserIp = lens _mlUserIp (\ s a -> s{_mlUserIp = a})
 
 -- | The collection of moments to list.
-mlCollection :: Lens' MomentsList' Text
+mlCollection :: Lens' MomentsList' PlusMomentsListCollection
 mlCollection
   = lens _mlCollection (\ s a -> s{_mlCollection = a})
 
@@ -196,14 +203,14 @@ mlFields :: Lens' MomentsList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
 -- | Data format for the response.
-mlAlt :: Lens' MomentsList' Text
+mlAlt :: Lens' MomentsList' Alt
 mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
 
 instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u MomentsList{..}
-          = go _mlQuotaUser _mlPrettyPrint _mlTargetUrl
+        requestWithRoute r u MomentsList'{..}
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlTargetUrl
               _mlUserIp
               _mlCollection
               _mlUserId
@@ -213,6 +220,9 @@ instance GoogleRequest MomentsList' where
               _mlOauthToken
               (Just _mlMaxResults)
               _mlFields
-              _mlAlt
+              (Just _mlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MomentsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy MomentsListResource)
+                      r
+                      u

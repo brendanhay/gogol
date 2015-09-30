@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Upload data for a custom data source.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementUploadsUploadData@.
-module Analytics.Management.Uploads.UploadData
+module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     (
     -- * REST Resource
-      ManagementUploadsUploadDataAPI
+      ManagementUploadsUploadDataResource
 
     -- * Creating a Request
-    , managementUploadsUploadData
-    , ManagementUploadsUploadData
+    , managementUploadsUploadData'
+    , ManagementUploadsUploadData'
 
     -- * Request Lenses
     , muudQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementUploadsUploadData@ which the
--- 'ManagementUploadsUploadData' request conforms to.
-type ManagementUploadsUploadDataAPI =
+-- 'ManagementUploadsUploadData'' request conforms to.
+type ManagementUploadsUploadDataResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementUploadsUploadDataAPI =
              Capture "webPropertyId" Text :>
                "customDataSources" :>
                  Capture "customDataSourceId" Text :>
-                   "uploads" :> Post '[JSON] Upload
+                   "uploads" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --
--- /See:/ 'managementUploadsUploadData' smart constructor.
-data ManagementUploadsUploadData = ManagementUploadsUploadData
+-- /See:/ 'managementUploadsUploadData'' smart constructor.
+data ManagementUploadsUploadData' = ManagementUploadsUploadData'
     { _muudQuotaUser          :: !(Maybe Text)
     , _muudPrettyPrint        :: !Bool
     , _muudWebPropertyId      :: !Text
@@ -69,7 +77,7 @@ data ManagementUploadsUploadData = ManagementUploadsUploadData
     , _muudKey                :: !(Maybe Text)
     , _muudOauthToken         :: !(Maybe Text)
     , _muudFields             :: !(Maybe Text)
-    , _muudAlt                :: !Text
+    , _muudAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsUploadData'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementUploadsUploadData = ManagementUploadsUploadData
 -- * 'muudFields'
 --
 -- * 'muudAlt'
-managementUploadsUploadData
+managementUploadsUploadData'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
     -> Text -- ^ 'accountId'
-    -> ManagementUploadsUploadData
-managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
-    ManagementUploadsUploadData
+    -> ManagementUploadsUploadData'
+managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
+    ManagementUploadsUploadData'
     { _muudQuotaUser = Nothing
     , _muudPrettyPrint = False
     , _muudWebPropertyId = pMuudWebPropertyId_
@@ -111,7 +119,7 @@ managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAc
     , _muudKey = Nothing
     , _muudOauthToken = Nothing
     , _muudFields = Nothing
-    , _muudAlt = "json"
+    , _muudAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,15 +178,15 @@ muudFields
   = lens _muudFields (\ s a -> s{_muudFields = a})
 
 -- | Data format for the response.
-muudAlt :: Lens' ManagementUploadsUploadData' Text
+muudAlt :: Lens' ManagementUploadsUploadData' Alt
 muudAlt = lens _muudAlt (\ s a -> s{_muudAlt = a})
 
 instance GoogleRequest ManagementUploadsUploadData'
          where
         type Rs ManagementUploadsUploadData' = Upload
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementUploadsUploadData{..}
-          = go _muudQuotaUser _muudPrettyPrint
+        requestWithRoute r u ManagementUploadsUploadData'{..}
+          = go _muudQuotaUser (Just _muudPrettyPrint)
               _muudWebPropertyId
               _muudUserIp
               _muudCustomDataSourceId
@@ -186,9 +194,9 @@ instance GoogleRequest ManagementUploadsUploadData'
               _muudKey
               _muudOauthToken
               _muudFields
-              _muudAlt
+              (Just _muudAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementUploadsUploadDataAPI)
+                      (Proxy :: Proxy ManagementUploadsUploadDataResource)
                       r
                       u

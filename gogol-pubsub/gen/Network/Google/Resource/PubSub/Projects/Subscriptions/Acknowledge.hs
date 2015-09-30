@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- Acknowledging a message more than once will not result in an error.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsAcknowledge@.
-module PubSub.Projects.Subscriptions.Acknowledge
+module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     (
     -- * REST Resource
-      ProjectsSubscriptionsAcknowledgeAPI
+      ProjectsSubscriptionsAcknowledgeResource
 
     -- * Creating a Request
-    , projectsSubscriptionsAcknowledge
-    , ProjectsSubscriptionsAcknowledge
+    , projectsSubscriptionsAcknowledge'
+    , ProjectsSubscriptionsAcknowledge'
 
     -- * Request Lenses
     , psaXgafv
@@ -53,10 +54,23 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsAcknowledge@ which the
--- 'ProjectsSubscriptionsAcknowledge' request conforms to.
-type ProjectsSubscriptionsAcknowledgeAPI =
+-- 'ProjectsSubscriptionsAcknowledge'' request conforms to.
+type ProjectsSubscriptionsAcknowledgeResource =
      "v1beta2" :>
-       "{+subscription}:acknowledge" :> Post '[JSON] Empty
+       "{+subscription}:acknowledge" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Post '[JSON] Empty
 
 -- | Acknowledges the messages associated with the ack tokens in the
 -- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
@@ -64,8 +78,8 @@ type ProjectsSubscriptionsAcknowledgeAPI =
 -- expired may succeed, but such a message may be redelivered later.
 -- Acknowledging a message more than once will not result in an error.
 --
--- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
-data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge
+-- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
+data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
     { _psaXgafv          :: !(Maybe Text)
     , _psaQuotaUser      :: !(Maybe Text)
     , _psaPrettyPrint    :: !Bool
@@ -113,11 +127,11 @@ data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge
 -- * 'psaCallback'
 --
 -- * 'psaAlt'
-projectsSubscriptionsAcknowledge
+projectsSubscriptionsAcknowledge'
     :: Text -- ^ 'subscription'
-    -> ProjectsSubscriptionsAcknowledge
-projectsSubscriptionsAcknowledge pPsaSubscription_ =
-    ProjectsSubscriptionsAcknowledge
+    -> ProjectsSubscriptionsAcknowledge'
+projectsSubscriptionsAcknowledge' pPsaSubscription_ =
+    ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaQuotaUser = Nothing
     , _psaPrettyPrint = True
@@ -216,10 +230,10 @@ instance GoogleRequest
         type Rs ProjectsSubscriptionsAcknowledge' = Empty
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsAcknowledge{..}
-          = go _psaXgafv _psaQuotaUser _psaPrettyPrint
+          ProjectsSubscriptionsAcknowledge'{..}
+          = go _psaXgafv _psaQuotaUser (Just _psaPrettyPrint)
               _psaUploadProtocol
-              _psaPp
+              (Just _psaPp)
               _psaAccessToken
               _psaUploadType
               _psaBearerToken
@@ -228,9 +242,10 @@ instance GoogleRequest
               _psaSubscription
               _psaFields
               _psaCallback
-              _psaAlt
+              (Just _psaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsAcknowledgeAPI)
+                      (Proxy ::
+                         Proxy ProjectsSubscriptionsAcknowledgeResource)
                       r
                       u

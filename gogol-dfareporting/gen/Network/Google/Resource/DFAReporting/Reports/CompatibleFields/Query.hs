@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- input report and user permissions.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingReportsCompatibleFieldsQuery@.
-module DFAReporting.Reports.CompatibleFields.Query
+module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
     (
     -- * REST Resource
-      ReportsCompatibleFieldsQueryAPI
+      ReportsCompatibleFieldsQueryResource
 
     -- * Creating a Request
-    , reportsCompatibleFieldsQuery
-    , ReportsCompatibleFieldsQuery
+    , reportsCompatibleFieldsQuery'
+    , ReportsCompatibleFieldsQuery'
 
     -- * Request Lenses
     , rcfqQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingReportsCompatibleFieldsQuery@ which the
--- 'ReportsCompatibleFieldsQuery' request conforms to.
-type ReportsCompatibleFieldsQueryAPI =
+-- 'ReportsCompatibleFieldsQuery'' request conforms to.
+type ReportsCompatibleFieldsQueryResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "reports" :>
            "compatiblefields" :>
-             "query" :> Post '[JSON] CompatibleFields
+             "query" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] CompatibleFields
 
 -- | Returns the fields that are compatible to be selected in the respective
 -- sections of a report criteria, given the fields already selected in the
 -- input report and user permissions.
 --
--- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
-data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
+-- /See:/ 'reportsCompatibleFieldsQuery'' smart constructor.
+data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser   :: !(Maybe Text)
     , _rcfqPrettyPrint :: !Bool
     , _rcfqUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
     , _rcfqKey         :: !(Maybe Text)
     , _rcfqOauthToken  :: !(Maybe Text)
     , _rcfqFields      :: !(Maybe Text)
-    , _rcfqAlt         :: !Text
+    , _rcfqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsCompatibleFieldsQuery'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
 -- * 'rcfqFields'
 --
 -- * 'rcfqAlt'
-reportsCompatibleFieldsQuery
+reportsCompatibleFieldsQuery'
     :: Int64 -- ^ 'profileId'
-    -> ReportsCompatibleFieldsQuery
-reportsCompatibleFieldsQuery pRcfqProfileId_ =
-    ReportsCompatibleFieldsQuery
+    -> ReportsCompatibleFieldsQuery'
+reportsCompatibleFieldsQuery' pRcfqProfileId_ =
+    ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser = Nothing
     , _rcfqPrettyPrint = True
     , _rcfqUserIp = Nothing
@@ -100,7 +108,7 @@ reportsCompatibleFieldsQuery pRcfqProfileId_ =
     , _rcfqKey = Nothing
     , _rcfqOauthToken = Nothing
     , _rcfqFields = Nothing
-    , _rcfqAlt = "json"
+    , _rcfqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,7 +155,7 @@ rcfqFields
   = lens _rcfqFields (\ s a -> s{_rcfqFields = a})
 
 -- | Data format for the response.
-rcfqAlt :: Lens' ReportsCompatibleFieldsQuery' Text
+rcfqAlt :: Lens' ReportsCompatibleFieldsQuery' Alt
 rcfqAlt = lens _rcfqAlt (\ s a -> s{_rcfqAlt = a})
 
 instance GoogleRequest ReportsCompatibleFieldsQuery'
@@ -155,15 +163,17 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
         type Rs ReportsCompatibleFieldsQuery' =
              CompatibleFields
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ReportsCompatibleFieldsQuery{..}
-          = go _rcfqQuotaUser _rcfqPrettyPrint _rcfqUserIp
+        requestWithRoute r u
+          ReportsCompatibleFieldsQuery'{..}
+          = go _rcfqQuotaUser (Just _rcfqPrettyPrint)
+              _rcfqUserIp
               _rcfqProfileId
               _rcfqKey
               _rcfqOauthToken
               _rcfqFields
-              _rcfqAlt
+              (Just _rcfqAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ReportsCompatibleFieldsQueryAPI)
+                      (Proxy :: Proxy ReportsCompatibleFieldsQueryResource)
                       r
                       u

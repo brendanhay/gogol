@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new experiment.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsInsert@.
-module Analytics.Management.Experiments.Insert
+module Network.Google.Resource.Analytics.Management.Experiments.Insert
     (
     -- * REST Resource
-      ManagementExperimentsInsertAPI
+      ManagementExperimentsInsertResource
 
     -- * Creating a Request
-    , managementExperimentsInsert
-    , ManagementExperimentsInsert
+    , managementExperimentsInsert'
+    , ManagementExperimentsInsert'
 
     -- * Request Lenses
     , meiQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsInsert@ which the
--- 'ManagementExperimentsInsert' request conforms to.
-type ManagementExperimentsInsertAPI =
+-- 'ManagementExperimentsInsert'' request conforms to.
+type ManagementExperimentsInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementExperimentsInsertAPI =
              Capture "webPropertyId" Text :>
                "profiles" :>
                  Capture "profileId" Text :>
-                   "experiments" :> Post '[JSON] Experiment
+                   "experiments" :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParam "prettyPrint" Bool :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Text :>
+                             QueryParam "oauth_token" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Experiment
 
 -- | Create a new experiment.
 --
--- /See:/ 'managementExperimentsInsert' smart constructor.
-data ManagementExperimentsInsert = ManagementExperimentsInsert
+-- /See:/ 'managementExperimentsInsert'' smart constructor.
+data ManagementExperimentsInsert' = ManagementExperimentsInsert'
     { _meiQuotaUser     :: !(Maybe Text)
     , _meiPrettyPrint   :: !Bool
     , _meiWebPropertyId :: !Text
@@ -69,7 +77,7 @@ data ManagementExperimentsInsert = ManagementExperimentsInsert
     , _meiKey           :: !(Maybe Text)
     , _meiOauthToken    :: !(Maybe Text)
     , _meiFields        :: !(Maybe Text)
-    , _meiAlt           :: !Text
+    , _meiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsInsert'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementExperimentsInsert = ManagementExperimentsInsert
 -- * 'meiFields'
 --
 -- * 'meiAlt'
-managementExperimentsInsert
+managementExperimentsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
-    -> ManagementExperimentsInsert
-managementExperimentsInsert pMeiWebPropertyId_ pMeiProfileId_ pMeiAccountId_ =
-    ManagementExperimentsInsert
+    -> ManagementExperimentsInsert'
+managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiAccountId_ =
+    ManagementExperimentsInsert'
     { _meiQuotaUser = Nothing
     , _meiPrettyPrint = False
     , _meiWebPropertyId = pMeiWebPropertyId_
@@ -111,7 +119,7 @@ managementExperimentsInsert pMeiWebPropertyId_ pMeiProfileId_ pMeiAccountId_ =
     , _meiKey = Nothing
     , _meiOauthToken = Nothing
     , _meiFields = Nothing
-    , _meiAlt = "json"
+    , _meiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,24 +175,25 @@ meiFields
   = lens _meiFields (\ s a -> s{_meiFields = a})
 
 -- | Data format for the response.
-meiAlt :: Lens' ManagementExperimentsInsert' Text
+meiAlt :: Lens' ManagementExperimentsInsert' Alt
 meiAlt = lens _meiAlt (\ s a -> s{_meiAlt = a})
 
 instance GoogleRequest ManagementExperimentsInsert'
          where
         type Rs ManagementExperimentsInsert' = Experiment
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsInsert{..}
-          = go _meiQuotaUser _meiPrettyPrint _meiWebPropertyId
+        requestWithRoute r u ManagementExperimentsInsert'{..}
+          = go _meiQuotaUser (Just _meiPrettyPrint)
+              _meiWebPropertyId
               _meiUserIp
               _meiProfileId
               _meiAccountId
               _meiKey
               _meiOauthToken
               _meiFields
-              _meiAlt
+              (Just _meiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsInsertAPI)
+                      (Proxy :: Proxy ManagementExperimentsInsertResource)
                       r
                       u

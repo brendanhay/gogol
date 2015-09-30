@@ -348,6 +348,29 @@ instance ToJSON PointDistributionUnderflowBucket
                  [("upperBound" .=) <$> _pdubUpperBound,
                   ("count" .=) <$> _pdubCount])
 
+-- | The label\'s name.
+--
+-- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
+data WriteTimeseriesRequestCommonLabels =
+    WriteTimeseriesRequestCommonLabels
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'WriteTimeseriesRequestCommonLabels' with the minimum fields required to make a request.
+--
+writeTimeseriesRequestCommonLabels
+    :: WriteTimeseriesRequestCommonLabels
+writeTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+
+instance FromJSON WriteTimeseriesRequestCommonLabels
+         where
+        parseJSON
+          = withObject "WriteTimeseriesRequestCommonLabels"
+              (\ o -> pure WriteTimeseriesRequestCommonLabels)
+
+instance ToJSON WriteTimeseriesRequestCommonLabels
+         where
+        toJSON = const (Object mempty)
+
 -- | The request of cloudmonitoring.timeseries.write
 --
 -- /See:/ 'writeTimeseriesRequest' smart constructor.
@@ -541,6 +564,27 @@ instance FromJSON WriteTimeseriesResponse where
 instance ToJSON WriteTimeseriesResponse where
         toJSON WriteTimeseriesResponse{..}
           = object (catMaybes [Just ("kind" .= _wtrKind)])
+
+-- | The label\'s name.
+--
+-- /See:/ 'timeseriesDescriptorLabels' smart constructor.
+data TimeseriesDescriptorLabels =
+    TimeseriesDescriptorLabels
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimeseriesDescriptorLabels' with the minimum fields required to make a request.
+--
+timeseriesDescriptorLabels
+    :: TimeseriesDescriptorLabels
+timeseriesDescriptorLabels = TimeseriesDescriptorLabels
+
+instance FromJSON TimeseriesDescriptorLabels where
+        parseJSON
+          = withObject "TimeseriesDescriptorLabels"
+              (\ o -> pure TimeseriesDescriptorLabels)
+
+instance ToJSON TimeseriesDescriptorLabels where
+        toJSON = const (Object mempty)
 
 -- | The histogram\'s bucket. Buckets that form the histogram of a
 -- distribution value. If the upper bound of a bucket, say U1, does not

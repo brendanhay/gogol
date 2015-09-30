@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the current user\'s Gmail profile.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersGetProfile@.
-module Gmail.Users.GetProfile
+module Network.Google.Resource.Gmail.Users.GetProfile
     (
     -- * REST Resource
-      UsersGetProfileAPI
+      UsersGetProfileResource
 
     -- * Creating a Request
-    , usersGetProfile
-    , UsersGetProfile
+    , usersGetProfile'
+    , UsersGetProfile'
 
     -- * Request Lenses
     , ugpQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersGetProfile@ which the
--- 'UsersGetProfile' request conforms to.
-type UsersGetProfileAPI =
+-- 'UsersGetProfile'' request conforms to.
+type UsersGetProfileResource =
      Capture "userId" Text :>
-       "profile" :> Get '[JSON] Profile
+       "profile" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Profile
 
 -- | Gets the current user\'s Gmail profile.
 --
--- /See:/ 'usersGetProfile' smart constructor.
-data UsersGetProfile = UsersGetProfile
+-- /See:/ 'usersGetProfile'' smart constructor.
+data UsersGetProfile' = UsersGetProfile'
     { _ugpQuotaUser   :: !(Maybe Text)
     , _ugpPrettyPrint :: !Bool
     , _ugpUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data UsersGetProfile = UsersGetProfile
     , _ugpKey         :: !(Maybe Text)
     , _ugpOauthToken  :: !(Maybe Text)
     , _ugpFields      :: !(Maybe Text)
-    , _ugpAlt         :: !Text
+    , _ugpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGetProfile'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data UsersGetProfile = UsersGetProfile
 -- * 'ugpFields'
 --
 -- * 'ugpAlt'
-usersGetProfile
+usersGetProfile'
     :: Text
-    -> UsersGetProfile
-usersGetProfile pUgpUserId_ =
-    UsersGetProfile
+    -> UsersGetProfile'
+usersGetProfile' pUgpUserId_ =
+    UsersGetProfile'
     { _ugpQuotaUser = Nothing
     , _ugpPrettyPrint = True
     , _ugpUserIp = Nothing
@@ -93,7 +101,7 @@ usersGetProfile pUgpUserId_ =
     , _ugpKey = Nothing
     , _ugpOauthToken = Nothing
     , _ugpFields = Nothing
-    , _ugpAlt = "json"
+    , _ugpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +147,21 @@ ugpFields
   = lens _ugpFields (\ s a -> s{_ugpFields = a})
 
 -- | Data format for the response.
-ugpAlt :: Lens' UsersGetProfile' Text
+ugpAlt :: Lens' UsersGetProfile' Alt
 ugpAlt = lens _ugpAlt (\ s a -> s{_ugpAlt = a})
 
 instance GoogleRequest UsersGetProfile' where
         type Rs UsersGetProfile' = Profile
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersGetProfile{..}
-          = go _ugpQuotaUser _ugpPrettyPrint _ugpUserIp
+        requestWithRoute r u UsersGetProfile'{..}
+          = go _ugpQuotaUser (Just _ugpPrettyPrint) _ugpUserIp
               _ugpUserId
               _ugpKey
               _ugpOauthToken
               _ugpFields
-              _ugpAlt
+              (Just _ugpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersGetProfileAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersGetProfileResource)
                       r
                       u

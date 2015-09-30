@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Logs a user event.
 --
 -- /See:/ <https://developers.google.com/partners/ Google Partners API Reference> for @PartnersUserEventsLog@.
-module Partners.UserEvents.Log
+module Network.Google.Resource.Partners.UserEvents.Log
     (
     -- * REST Resource
-      UserEventsLogAPI
+      UserEventsLogResource
 
     -- * Creating a Request
-    , userEventsLog
-    , UserEventsLog
+    , userEventsLog'
+    , UserEventsLog'
 
     -- * Request Lenses
     , uelXgafv
@@ -48,15 +49,29 @@ import           Network.Google.Partners.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PartnersUserEventsLog@ which the
--- 'UserEventsLog' request conforms to.
-type UserEventsLogAPI =
+-- 'UserEventsLog'' request conforms to.
+type UserEventsLogResource =
      "v2" :>
-       "userEvents:log" :> Post '[JSON] LogUserEventResponse
+       "userEvents:log" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON] LogUserEventResponse
 
 -- | Logs a user event.
 --
--- /See:/ 'userEventsLog' smart constructor.
-data UserEventsLog = UserEventsLog
+-- /See:/ 'userEventsLog'' smart constructor.
+data UserEventsLog' = UserEventsLog'
     { _uelXgafv          :: !(Maybe Text)
     , _uelQuotaUser      :: !(Maybe Text)
     , _uelPrettyPrint    :: !Bool
@@ -101,10 +116,10 @@ data UserEventsLog = UserEventsLog
 -- * 'uelCallback'
 --
 -- * 'uelAlt'
-userEventsLog
-    :: UserEventsLog
-userEventsLog =
-    UserEventsLog
+userEventsLog'
+    :: UserEventsLog'
+userEventsLog' =
+    UserEventsLog'
     { _uelXgafv = Nothing
     , _uelQuotaUser = Nothing
     , _uelPrettyPrint = True
@@ -194,10 +209,10 @@ uelAlt = lens _uelAlt (\ s a -> s{_uelAlt = a})
 instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse
         request = requestWithRoute defReq partnersURL
-        requestWithRoute r u UserEventsLog{..}
-          = go _uelXgafv _uelQuotaUser _uelPrettyPrint
+        requestWithRoute r u UserEventsLog'{..}
+          = go _uelXgafv _uelQuotaUser (Just _uelPrettyPrint)
               _uelUploadProtocol
-              _uelPp
+              (Just _uelPp)
               _uelAccessToken
               _uelUploadType
               _uelBearerToken
@@ -205,7 +220,9 @@ instance GoogleRequest UserEventsLog' where
               _uelOauthToken
               _uelFields
               _uelCallback
-              _uelAlt
+              (Just _uelAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UserEventsLogAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy UserEventsLogResource)
+                      r
                       u

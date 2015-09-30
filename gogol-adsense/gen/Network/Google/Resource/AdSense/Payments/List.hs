@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the payments for this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsensePaymentsList@.
-module AdSense.Payments.List
+module Network.Google.Resource.AdSense.Payments.List
     (
     -- * REST Resource
-      PaymentsListAPI
+      PaymentsListResource
 
     -- * Creating a Request
-    , paymentsList
-    , PaymentsList
+    , paymentsList'
+    , PaymentsList'
 
     -- * Request Lenses
     , plQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensePaymentsList@ which the
--- 'PaymentsList' request conforms to.
-type PaymentsListAPI =
-     "payments" :> Get '[JSON] Payments
+-- 'PaymentsList'' request conforms to.
+type PaymentsListResource =
+     "payments" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Get '[JSON] Payments
 
 -- | List the payments for this AdSense account.
 --
--- /See:/ 'paymentsList' smart constructor.
-data PaymentsList = PaymentsList
+-- /See:/ 'paymentsList'' smart constructor.
+data PaymentsList' = PaymentsList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plUserIp      :: !(Maybe Text)
     , _plKey         :: !(Maybe Text)
     , _plOauthToken  :: !(Maybe Text)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Text
+    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PaymentsList'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data PaymentsList = PaymentsList
 -- * 'plFields'
 --
 -- * 'plAlt'
-paymentsList
-    :: PaymentsList
-paymentsList =
-    PaymentsList
+paymentsList'
+    :: PaymentsList'
+paymentsList' =
+    PaymentsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plUserIp = Nothing
     , _plKey = Nothing
     , _plOauthToken = Nothing
     , _plFields = Nothing
-    , _plAlt = "json"
+    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,17 +131,20 @@ plFields :: Lens' PaymentsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
 -- | Data format for the response.
-plAlt :: Lens' PaymentsList' Text
+plAlt :: Lens' PaymentsList' Alt
 plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
 
 instance GoogleRequest PaymentsList' where
         type Rs PaymentsList' = Payments
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u PaymentsList{..}
-          = go _plQuotaUser _plPrettyPrint _plUserIp _plKey
+        requestWithRoute r u PaymentsList'{..}
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+              _plKey
               _plOauthToken
               _plFields
-              _plAlt
+              (Just _plAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy PaymentsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy PaymentsListResource)
+                      r
                       u

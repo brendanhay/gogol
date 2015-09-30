@@ -65,11 +65,23 @@ module Network.Google.WebmasterTools.Types
     , ucecCount
     , ucecTimestamp
 
+    -- * WebmastersURLcrawlerrorscountsQueryCategory
+    , WebmastersURLcrawlerrorscountsQueryCategory (..)
+
     -- * SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
     , searchAnalyticsQueryResponse
     , saqrRows
     , saqrResponseAggregationType
+
+    -- * WebmastersURLcrawlerrorssamplesListPlatform
+    , WebmastersURLcrawlerrorssamplesListPlatform (..)
+
+    -- * WebmastersURLcrawlerrorssamplesGetCategory
+    , WebmastersURLcrawlerrorssamplesGetCategory (..)
+
+    -- * WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
+    , WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform (..)
 
     -- * URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
@@ -108,6 +120,12 @@ module Network.Google.WebmasterTools.Types
     , wsType
     , wsErrors
 
+    -- * WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
+    , WebmastersURLcrawlerrorssamplesMarkAsFixedCategory (..)
+
+    -- * WebmastersURLcrawlerrorssamplesGetPlatform
+    , WebmastersURLcrawlerrorssamplesGetPlatform (..)
+
     -- * SearchAnalyticsQueryRequest
     , SearchAnalyticsQueryRequest
     , searchAnalyticsQueryRequest
@@ -119,6 +137,9 @@ module Network.Google.WebmasterTools.Types
     , saqrStartDate
     , saqrDimensions
 
+    -- * WebmastersURLcrawlerrorssamplesListCategory
+    , WebmastersURLcrawlerrorssamplesListCategory (..)
+
     -- * SitesListResponse
     , SitesListResponse
     , sitesListResponse
@@ -129,6 +150,12 @@ module Network.Google.WebmasterTools.Types
     , wmxSite
     , wsPermissionLevel
     , wsSiteUrl
+
+    -- * Alt
+    , Alt (..)
+
+    -- * WebmastersURLcrawlerrorscountsQueryPlatform
+    , WebmastersURLcrawlerrorscountsQueryPlatform (..)
     ) where
 
 import           Network.Google.Prelude
@@ -136,7 +163,7 @@ import           Network.Google.WebmasterTools.Types.Product
 import           Network.Google.WebmasterTools.Types.Sum
 
 -- | URL referring to version 'v3' of the Webmaster Tools API.
-webmasterToolsURL :: BaseURL
+webmasterToolsURL :: BaseUrl
 webmasterToolsURL
   = BaseUrl Https
       "https://www.googleapis.com/webmasters/v3/"

@@ -68,6 +68,10 @@ module Network.Google.ResourceManager.Types
     , testIAMPermissionsResponse
     , tiamprPermissions
 
+    -- * ProjectLabels
+    , ProjectLabels
+    , projectLabels
+
     -- * Policy
     , Policy
     , policy
@@ -100,7 +104,7 @@ import           Network.Google.ResourceManager.Types.Product
 import           Network.Google.ResourceManager.Types.Sum
 
 -- | URL referring to version 'v1beta1' of the Google Cloud Resource Manager API.
-resourceManagerURL :: BaseURL
+resourceManagerURL :: BaseUrl
 resourceManagerURL
   = BaseUrl Https
       "https://cloudresourcemanager.googleapis.com/"

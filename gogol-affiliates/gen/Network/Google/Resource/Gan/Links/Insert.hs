@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new link.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanLinksInsert@.
-module Gan.Links.Insert
+module Network.Google.Resource.Gan.Links.Insert
     (
     -- * REST Resource
-      LinksInsertAPI
+      LinksInsertResource
 
     -- * Creating a Request
-    , linksInsert
-    , LinksInsert
+    , linksInsert'
+    , LinksInsert'
 
     -- * Request Lenses
     , liQuotaUser
@@ -44,24 +45,32 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanLinksInsert@ which the
--- 'LinksInsert' request conforms to.
-type LinksInsertAPI =
-     Capture "role" Text :>
-       Capture "roleId" Text :> "link" :> Post '[JSON] Link
+-- 'LinksInsert'' request conforms to.
+type LinksInsertResource =
+     Capture "role" GanLinksInsertRole :>
+       Capture "roleId" Text :>
+         "link" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Link
 
 -- | Inserts a new link.
 --
--- /See:/ 'linksInsert' smart constructor.
-data LinksInsert = LinksInsert
+-- /See:/ 'linksInsert'' smart constructor.
+data LinksInsert' = LinksInsert'
     { _liQuotaUser   :: !(Maybe Text)
     , _liPrettyPrint :: !Bool
     , _liUserIp      :: !(Maybe Text)
     , _liRoleId      :: !Text
-    , _liRole        :: !Text
+    , _liRole        :: !GanLinksInsertRole
     , _liKey         :: !(Maybe Text)
     , _liOauthToken  :: !(Maybe Text)
     , _liFields      :: !(Maybe Text)
-    , _liAlt         :: !Text
+    , _liAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksInsert'' with the minimum fields required to make a request.
@@ -85,12 +94,12 @@ data LinksInsert = LinksInsert
 -- * 'liFields'
 --
 -- * 'liAlt'
-linksInsert
+linksInsert'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> LinksInsert
-linksInsert pLiRoleId_ pLiRole_ =
-    LinksInsert
+    -> GanLinksInsertRole -- ^ 'role'
+    -> LinksInsert'
+linksInsert' pLiRoleId_ pLiRole_ =
+    LinksInsert'
     { _liQuotaUser = Nothing
     , _liPrettyPrint = True
     , _liUserIp = Nothing
@@ -99,7 +108,7 @@ linksInsert pLiRoleId_ pLiRole_ =
     , _liKey = Nothing
     , _liOauthToken = Nothing
     , _liFields = Nothing
-    , _liAlt = "json"
+    , _liAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,7 +135,7 @@ liRoleId = lens _liRoleId (\ s a -> s{_liRoleId = a})
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-liRole :: Lens' LinksInsert' Text
+liRole :: Lens' LinksInsert' GanLinksInsertRole
 liRole = lens _liRole (\ s a -> s{_liRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -145,18 +154,22 @@ liFields :: Lens' LinksInsert' (Maybe Text)
 liFields = lens _liFields (\ s a -> s{_liFields = a})
 
 -- | Data format for the response.
-liAlt :: Lens' LinksInsert' Text
+liAlt :: Lens' LinksInsert' Alt
 liAlt = lens _liAlt (\ s a -> s{_liAlt = a})
 
 instance GoogleRequest LinksInsert' where
         type Rs LinksInsert' = Link
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u LinksInsert{..}
-          = go _liQuotaUser _liPrettyPrint _liUserIp _liRoleId
+        requestWithRoute r u LinksInsert'{..}
+          = go _liQuotaUser (Just _liPrettyPrint) _liUserIp
+              _liRoleId
               _liRole
               _liKey
               _liOauthToken
               _liFields
-              _liAlt
+              (Just _liAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy LinksInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy LinksInsertResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- or commenting on a blog.
 --
 -- /See:/ <https://developers.google.com/+/api/ Google+ API Reference> for @PlusMomentsInsert@.
-module Plus.Moments.Insert
+module Network.Google.Resource.Plus.Moments.Insert
     (
     -- * REST Resource
-      MomentsInsertAPI
+      MomentsInsertResource
 
     -- * Creating a Request
-    , momentsInsert
-    , MomentsInsert
+    , momentsInsert'
+    , MomentsInsert'
 
     -- * Request Lenses
     , miQuotaUser
@@ -46,29 +47,36 @@ import           Network.Google.Plus.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlusMomentsInsert@ which the
--- 'MomentsInsert' request conforms to.
-type MomentsInsertAPI =
+-- 'MomentsInsert'' request conforms to.
+type MomentsInsertResource =
      "people" :>
        Capture "userId" Text :>
          "moments" :>
-           Capture "collection" Text :>
-             QueryParam "debug" Bool :> Post '[JSON] Moment
+           Capture "collection" PlusMomentsInsertCollection :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "debug" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Moment
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
 --
--- /See:/ 'momentsInsert' smart constructor.
-data MomentsInsert = MomentsInsert
+-- /See:/ 'momentsInsert'' smart constructor.
+data MomentsInsert' = MomentsInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
     , _miUserIp      :: !(Maybe Text)
-    , _miCollection  :: !Text
+    , _miCollection  :: !PlusMomentsInsertCollection
     , _miDebug       :: !(Maybe Bool)
     , _miUserId      :: !Text
     , _miKey         :: !(Maybe Text)
     , _miOauthToken  :: !(Maybe Text)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Text
+    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsInsert'' with the minimum fields required to make a request.
@@ -94,12 +102,12 @@ data MomentsInsert = MomentsInsert
 -- * 'miFields'
 --
 -- * 'miAlt'
-momentsInsert
-    :: Text -- ^ 'collection'
+momentsInsert'
+    :: PlusMomentsInsertCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
-    -> MomentsInsert
-momentsInsert pMiCollection_ pMiUserId_ =
-    MomentsInsert
+    -> MomentsInsert'
+momentsInsert' pMiCollection_ pMiUserId_ =
+    MomentsInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
     , _miUserIp = Nothing
@@ -109,7 +117,7 @@ momentsInsert pMiCollection_ pMiUserId_ =
     , _miKey = Nothing
     , _miOauthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = "json"
+    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,7 +139,7 @@ miUserIp :: Lens' MomentsInsert' (Maybe Text)
 miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
 
 -- | The collection to which to write moments.
-miCollection :: Lens' MomentsInsert' Text
+miCollection :: Lens' MomentsInsert' PlusMomentsInsertCollection
 miCollection
   = lens _miCollection (\ s a -> s{_miCollection = a})
 
@@ -160,21 +168,23 @@ miFields :: Lens' MomentsInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
 -- | Data format for the response.
-miAlt :: Lens' MomentsInsert' Text
+miAlt :: Lens' MomentsInsert' Alt
 miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
 
 instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment
         request = requestWithRoute defReq plusURL
-        requestWithRoute r u MomentsInsert{..}
-          = go _miQuotaUser _miPrettyPrint _miUserIp
+        requestWithRoute r u MomentsInsert'{..}
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
               _miCollection
               _miDebug
               _miUserId
               _miKey
               _miOauthToken
               _miFields
-              _miAlt
+              (Just _miAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MomentsInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy MomentsInsertResource)
+                      r
                       u

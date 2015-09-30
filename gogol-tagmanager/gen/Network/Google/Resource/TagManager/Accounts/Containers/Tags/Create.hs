@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,160 +20,168 @@
 -- | Creates a GTM Tag.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsCreate@.
-module TagManager.Accounts.Containers.Tags.Create
+module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
     (
     -- * REST Resource
-      AccountsContainersTagsCreateAPI
+      AccountsContainersTagsCreateResource
 
     -- * Creating a Request
-    , accountsContainersTagsCreate
-    , AccountsContainersTagsCreate
+    , accountsContainersTagsCreate'
+    , AccountsContainersTagsCreate'
 
     -- * Request Lenses
-    , actccQuotaUser
-    , actccPrettyPrint
-    , actccContainerId
-    , actccUserIp
-    , actccAccountId
-    , actccKey
-    , actccOauthToken
-    , actccFields
-    , actccAlt
+    , actcQuotaUser
+    , actcPrettyPrint
+    , actcContainerId
+    , actcUserIp
+    , actcAccountId
+    , actcKey
+    , actcOauthToken
+    , actcFields
+    , actcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTagsCreate@ which the
--- 'AccountsContainersTagsCreate' request conforms to.
-type AccountsContainersTagsCreateAPI =
+-- 'AccountsContainersTagsCreate'' request conforms to.
+type AccountsContainersTagsCreateResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
-             "tags" :> Post '[JSON] Tag
+             "tags" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Tag
 
 -- | Creates a GTM Tag.
 --
--- /See:/ 'accountsContainersTagsCreate' smart constructor.
-data AccountsContainersTagsCreate = AccountsContainersTagsCreate
-    { _actccQuotaUser   :: !(Maybe Text)
-    , _actccPrettyPrint :: !Bool
-    , _actccContainerId :: !Text
-    , _actccUserIp      :: !(Maybe Text)
-    , _actccAccountId   :: !Text
-    , _actccKey         :: !(Maybe Text)
-    , _actccOauthToken  :: !(Maybe Text)
-    , _actccFields      :: !(Maybe Text)
-    , _actccAlt         :: !Text
+-- /See:/ 'accountsContainersTagsCreate'' smart constructor.
+data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
+    { _actcQuotaUser   :: !(Maybe Text)
+    , _actcPrettyPrint :: !Bool
+    , _actcContainerId :: !Text
+    , _actcUserIp      :: !(Maybe Text)
+    , _actcAccountId   :: !Text
+    , _actcKey         :: !(Maybe Text)
+    , _actcOauthToken  :: !(Maybe Text)
+    , _actcFields      :: !(Maybe Text)
+    , _actcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsCreate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actccQuotaUser'
+-- * 'actcQuotaUser'
 --
--- * 'actccPrettyPrint'
+-- * 'actcPrettyPrint'
 --
--- * 'actccContainerId'
+-- * 'actcContainerId'
 --
--- * 'actccUserIp'
+-- * 'actcUserIp'
 --
--- * 'actccAccountId'
+-- * 'actcAccountId'
 --
--- * 'actccKey'
+-- * 'actcKey'
 --
--- * 'actccOauthToken'
+-- * 'actcOauthToken'
 --
--- * 'actccFields'
+-- * 'actcFields'
 --
--- * 'actccAlt'
-accountsContainersTagsCreate
+-- * 'actcAlt'
+accountsContainersTagsCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTagsCreate
-accountsContainersTagsCreate pActccContainerId_ pActccAccountId_ =
-    AccountsContainersTagsCreate
-    { _actccQuotaUser = Nothing
-    , _actccPrettyPrint = True
-    , _actccContainerId = pActccContainerId_
-    , _actccUserIp = Nothing
-    , _actccAccountId = pActccAccountId_
-    , _actccKey = Nothing
-    , _actccOauthToken = Nothing
-    , _actccFields = Nothing
-    , _actccAlt = "json"
+    -> AccountsContainersTagsCreate'
+accountsContainersTagsCreate' pActcContainerId_ pActcAccountId_ =
+    AccountsContainersTagsCreate'
+    { _actcQuotaUser = Nothing
+    , _actcPrettyPrint = True
+    , _actcContainerId = pActcContainerId_
+    , _actcUserIp = Nothing
+    , _actcAccountId = pActcAccountId_
+    , _actcKey = Nothing
+    , _actcOauthToken = Nothing
+    , _actcFields = Nothing
+    , _actcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-actccQuotaUser :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actccQuotaUser
-  = lens _actccQuotaUser
-      (\ s a -> s{_actccQuotaUser = a})
+actcQuotaUser :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcQuotaUser
+  = lens _actcQuotaUser
+      (\ s a -> s{_actcQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-actccPrettyPrint :: Lens' AccountsContainersTagsCreate' Bool
-actccPrettyPrint
-  = lens _actccPrettyPrint
-      (\ s a -> s{_actccPrettyPrint = a})
+actcPrettyPrint :: Lens' AccountsContainersTagsCreate' Bool
+actcPrettyPrint
+  = lens _actcPrettyPrint
+      (\ s a -> s{_actcPrettyPrint = a})
 
 -- | The GTM Container ID.
-actccContainerId :: Lens' AccountsContainersTagsCreate' Text
-actccContainerId
-  = lens _actccContainerId
-      (\ s a -> s{_actccContainerId = a})
+actcContainerId :: Lens' AccountsContainersTagsCreate' Text
+actcContainerId
+  = lens _actcContainerId
+      (\ s a -> s{_actcContainerId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actccUserIp :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actccUserIp
-  = lens _actccUserIp (\ s a -> s{_actccUserIp = a})
+actcUserIp :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcUserIp
+  = lens _actcUserIp (\ s a -> s{_actcUserIp = a})
 
 -- | The GTM Account ID.
-actccAccountId :: Lens' AccountsContainersTagsCreate' Text
-actccAccountId
-  = lens _actccAccountId
-      (\ s a -> s{_actccAccountId = a})
+actcAccountId :: Lens' AccountsContainersTagsCreate' Text
+actcAccountId
+  = lens _actcAccountId
+      (\ s a -> s{_actcAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actccKey :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actccKey = lens _actccKey (\ s a -> s{_actccKey = a})
+actcKey :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcKey = lens _actcKey (\ s a -> s{_actcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actccOauthToken :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actccOauthToken
-  = lens _actccOauthToken
-      (\ s a -> s{_actccOauthToken = a})
+actcOauthToken :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcOauthToken
+  = lens _actcOauthToken
+      (\ s a -> s{_actcOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-actccFields :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actccFields
-  = lens _actccFields (\ s a -> s{_actccFields = a})
+actcFields :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcFields
+  = lens _actcFields (\ s a -> s{_actcFields = a})
 
 -- | Data format for the response.
-actccAlt :: Lens' AccountsContainersTagsCreate' Text
-actccAlt = lens _actccAlt (\ s a -> s{_actccAlt = a})
+actcAlt :: Lens' AccountsContainersTagsCreate' Alt
+actcAlt = lens _actcAlt (\ s a -> s{_actcAlt = a})
 
 instance GoogleRequest AccountsContainersTagsCreate'
          where
         type Rs AccountsContainersTagsCreate' = Tag
         request = requestWithRoute defReq tagManagerURL
-        requestWithRoute r u AccountsContainersTagsCreate{..}
-          = go _actccQuotaUser _actccPrettyPrint
-              _actccContainerId
-              _actccUserIp
-              _actccAccountId
-              _actccKey
-              _actccOauthToken
-              _actccFields
-              _actccAlt
+        requestWithRoute r u
+          AccountsContainersTagsCreate'{..}
+          = go _actcQuotaUser (Just _actcPrettyPrint)
+              _actcContainerId
+              _actcUserIp
+              _actcAccountId
+              _actcKey
+              _actcOauthToken
+              _actcFields
+              (Just _actcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTagsCreateAPI)
+                      (Proxy :: Proxy AccountsContainersTagsCreateResource)
                       r
                       u

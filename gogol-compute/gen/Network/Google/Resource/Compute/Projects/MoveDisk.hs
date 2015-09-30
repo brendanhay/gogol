@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Moves a persistent disk from one zone to another.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeProjectsMoveDisk@.
-module Compute.Projects.MoveDisk
+module Network.Google.Resource.Compute.Projects.MoveDisk
     (
     -- * REST Resource
-      ProjectsMoveDiskAPI
+      ProjectsMoveDiskResource
 
     -- * Creating a Request
-    , projectsMoveDisk
-    , ProjectsMoveDisk
+    , projectsMoveDisk'
+    , ProjectsMoveDisk'
 
     -- * Request Lenses
     , pmdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeProjectsMoveDisk@ which the
--- 'ProjectsMoveDisk' request conforms to.
-type ProjectsMoveDiskAPI =
+-- 'ProjectsMoveDisk'' request conforms to.
+type ProjectsMoveDiskResource =
      Capture "project" Text :>
-       "moveDisk" :> Post '[JSON] Operation
+       "moveDisk" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Moves a persistent disk from one zone to another.
 --
--- /See:/ 'projectsMoveDisk' smart constructor.
-data ProjectsMoveDisk = ProjectsMoveDisk
+-- /See:/ 'projectsMoveDisk'' smart constructor.
+data ProjectsMoveDisk' = ProjectsMoveDisk'
     { _pmdQuotaUser   :: !(Maybe Text)
     , _pmdPrettyPrint :: !Bool
     , _pmdProject     :: !Text
@@ -59,7 +67,7 @@ data ProjectsMoveDisk = ProjectsMoveDisk
     , _pmdKey         :: !(Maybe Text)
     , _pmdOauthToken  :: !(Maybe Text)
     , _pmdFields      :: !(Maybe Text)
-    , _pmdAlt         :: !Text
+    , _pmdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveDisk'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ProjectsMoveDisk = ProjectsMoveDisk
 -- * 'pmdFields'
 --
 -- * 'pmdAlt'
-projectsMoveDisk
+projectsMoveDisk'
     :: Text -- ^ 'project'
-    -> ProjectsMoveDisk
-projectsMoveDisk pPmdProject_ =
-    ProjectsMoveDisk
+    -> ProjectsMoveDisk'
+projectsMoveDisk' pPmdProject_ =
+    ProjectsMoveDisk'
     { _pmdQuotaUser = Nothing
     , _pmdPrettyPrint = True
     , _pmdProject = pPmdProject_
@@ -93,7 +101,7 @@ projectsMoveDisk pPmdProject_ =
     , _pmdKey = Nothing
     , _pmdOauthToken = Nothing
     , _pmdFields = Nothing
-    , _pmdAlt = "json"
+    , _pmdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +146,21 @@ pmdFields
   = lens _pmdFields (\ s a -> s{_pmdFields = a})
 
 -- | Data format for the response.
-pmdAlt :: Lens' ProjectsMoveDisk' Text
+pmdAlt :: Lens' ProjectsMoveDisk' Alt
 pmdAlt = lens _pmdAlt (\ s a -> s{_pmdAlt = a})
 
 instance GoogleRequest ProjectsMoveDisk' where
         type Rs ProjectsMoveDisk' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u ProjectsMoveDisk{..}
-          = go _pmdQuotaUser _pmdPrettyPrint _pmdProject
+        requestWithRoute r u ProjectsMoveDisk'{..}
+          = go _pmdQuotaUser (Just _pmdPrettyPrint) _pmdProject
               _pmdUserIp
               _pmdKey
               _pmdOauthToken
               _pmdFields
-              _pmdAlt
+              (Just _pmdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsMoveDiskAPI)
+                      (Proxy :: Proxy ProjectsMoveDiskResource)
                       r
                       u

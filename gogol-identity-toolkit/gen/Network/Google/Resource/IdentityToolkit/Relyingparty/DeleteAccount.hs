@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,128 +20,137 @@
 -- | Delete user account.
 --
 -- /See:/ <https://developers.google.com/identity-toolkit/v3/ Google Identity Toolkit API Reference> for @IdentitytoolkitRelyingpartyDeleteAccount@.
-module IdentityToolkit.Relyingparty.DeleteAccount
+module Network.Google.Resource.IdentityToolkit.Relyingparty.DeleteAccount
     (
     -- * REST Resource
-      RelyingpartyDeleteAccountAPI
+      RelyingpartyDeleteAccountResource
 
     -- * Creating a Request
-    , relyingpartyDeleteAccount
-    , RelyingpartyDeleteAccount
+    , relyingpartyDeleteAccount'
+    , RelyingpartyDeleteAccount'
 
     -- * Request Lenses
-    , rdaQuotaUser
-    , rdaPrettyPrint
-    , rdaUserIp
-    , rdaKey
-    , rdaOauthToken
-    , rdaFields
-    , rdaAlt
+    , relQuotaUser
+    , relPrettyPrint
+    , relUserIp
+    , relKey
+    , relOauthToken
+    , relFields
+    , relAlt
     ) where
 
 import           Network.Google.IdentityToolkit.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @IdentitytoolkitRelyingpartyDeleteAccount@ which the
--- 'RelyingpartyDeleteAccount' request conforms to.
-type RelyingpartyDeleteAccountAPI =
-     "deleteAccount" :> Post '[JSON] DeleteAccountResponse
+-- 'RelyingpartyDeleteAccount'' request conforms to.
+type RelyingpartyDeleteAccountResource =
+     "deleteAccount" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :>
+                     Post '[JSON] DeleteAccountResponse
 
 -- | Delete user account.
 --
--- /See:/ 'relyingpartyDeleteAccount' smart constructor.
-data RelyingpartyDeleteAccount = RelyingpartyDeleteAccount
-    { _rdaQuotaUser   :: !(Maybe Text)
-    , _rdaPrettyPrint :: !Bool
-    , _rdaUserIp      :: !(Maybe Text)
-    , _rdaKey         :: !(Maybe Text)
-    , _rdaOauthToken  :: !(Maybe Text)
-    , _rdaFields      :: !(Maybe Text)
-    , _rdaAlt         :: !Text
+-- /See:/ 'relyingpartyDeleteAccount'' smart constructor.
+data RelyingpartyDeleteAccount' = RelyingpartyDeleteAccount'
+    { _relQuotaUser   :: !(Maybe Text)
+    , _relPrettyPrint :: !Bool
+    , _relUserIp      :: !(Maybe Text)
+    , _relKey         :: !(Maybe Text)
+    , _relOauthToken  :: !(Maybe Text)
+    , _relFields      :: !(Maybe Text)
+    , _relAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingpartyDeleteAccount'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdaQuotaUser'
+-- * 'relQuotaUser'
 --
--- * 'rdaPrettyPrint'
+-- * 'relPrettyPrint'
 --
--- * 'rdaUserIp'
+-- * 'relUserIp'
 --
--- * 'rdaKey'
+-- * 'relKey'
 --
--- * 'rdaOauthToken'
+-- * 'relOauthToken'
 --
--- * 'rdaFields'
+-- * 'relFields'
 --
--- * 'rdaAlt'
-relyingpartyDeleteAccount
-    :: RelyingpartyDeleteAccount
-relyingpartyDeleteAccount =
-    RelyingpartyDeleteAccount
-    { _rdaQuotaUser = Nothing
-    , _rdaPrettyPrint = True
-    , _rdaUserIp = Nothing
-    , _rdaKey = Nothing
-    , _rdaOauthToken = Nothing
-    , _rdaFields = Nothing
-    , _rdaAlt = "json"
+-- * 'relAlt'
+relyingpartyDeleteAccount'
+    :: RelyingpartyDeleteAccount'
+relyingpartyDeleteAccount' =
+    RelyingpartyDeleteAccount'
+    { _relQuotaUser = Nothing
+    , _relPrettyPrint = True
+    , _relUserIp = Nothing
+    , _relKey = Nothing
+    , _relOauthToken = Nothing
+    , _relFields = Nothing
+    , _relAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rdaQuotaUser :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
-rdaQuotaUser
-  = lens _rdaQuotaUser (\ s a -> s{_rdaQuotaUser = a})
+relQuotaUser :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
+relQuotaUser
+  = lens _relQuotaUser (\ s a -> s{_relQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rdaPrettyPrint :: Lens' RelyingpartyDeleteAccount' Bool
-rdaPrettyPrint
-  = lens _rdaPrettyPrint
-      (\ s a -> s{_rdaPrettyPrint = a})
+relPrettyPrint :: Lens' RelyingpartyDeleteAccount' Bool
+relPrettyPrint
+  = lens _relPrettyPrint
+      (\ s a -> s{_relPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rdaUserIp :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
-rdaUserIp
-  = lens _rdaUserIp (\ s a -> s{_rdaUserIp = a})
+relUserIp :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
+relUserIp
+  = lens _relUserIp (\ s a -> s{_relUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdaKey :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
-rdaKey = lens _rdaKey (\ s a -> s{_rdaKey = a})
+relKey :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
+relKey = lens _relKey (\ s a -> s{_relKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rdaOauthToken :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
-rdaOauthToken
-  = lens _rdaOauthToken
-      (\ s a -> s{_rdaOauthToken = a})
+relOauthToken :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
+relOauthToken
+  = lens _relOauthToken
+      (\ s a -> s{_relOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rdaFields :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
-rdaFields
-  = lens _rdaFields (\ s a -> s{_rdaFields = a})
+relFields :: Lens' RelyingpartyDeleteAccount' (Maybe Text)
+relFields
+  = lens _relFields (\ s a -> s{_relFields = a})
 
 -- | Data format for the response.
-rdaAlt :: Lens' RelyingpartyDeleteAccount' Text
-rdaAlt = lens _rdaAlt (\ s a -> s{_rdaAlt = a})
+relAlt :: Lens' RelyingpartyDeleteAccount' Alt
+relAlt = lens _relAlt (\ s a -> s{_relAlt = a})
 
 instance GoogleRequest RelyingpartyDeleteAccount'
          where
         type Rs RelyingpartyDeleteAccount' =
              DeleteAccountResponse
         request = requestWithRoute defReq identityToolkitURL
-        requestWithRoute r u RelyingpartyDeleteAccount{..}
-          = go _rdaQuotaUser _rdaPrettyPrint _rdaUserIp _rdaKey
-              _rdaOauthToken
-              _rdaFields
-              _rdaAlt
+        requestWithRoute r u RelyingpartyDeleteAccount'{..}
+          = go _relQuotaUser (Just _relPrettyPrint) _relUserIp
+              _relKey
+              _relOauthToken
+              _relFields
+              (Just _relAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RelyingpartyDeleteAccountAPI)
+                      (Proxy :: Proxy RelyingpartyDeleteAccountResource)
                       r
                       u

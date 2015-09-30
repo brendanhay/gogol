@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Adds a new user to the given web property.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebpropertyUserLinksInsert@.
-module Analytics.Management.WebpropertyUserLinks.Insert
+module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Insert
     (
     -- * REST Resource
-      ManagementWebpropertyUserLinksInsertAPI
+      ManagementWebpropertyUserLinksInsertResource
 
     -- * Creating a Request
-    , managementWebpropertyUserLinksInsert
-    , ManagementWebpropertyUserLinksInsert
+    , managementWebpropertyUserLinksInsert'
+    , ManagementWebpropertyUserLinksInsert'
 
     -- * Request Lenses
     , mwuliQuotaUser
@@ -44,19 +45,26 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebpropertyUserLinksInsert@ which the
--- 'ManagementWebpropertyUserLinksInsert' request conforms to.
-type ManagementWebpropertyUserLinksInsertAPI =
+-- 'ManagementWebpropertyUserLinksInsert'' request conforms to.
+type ManagementWebpropertyUserLinksInsertResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
            "webproperties" :>
              Capture "webPropertyId" Text :>
-               "entityUserLinks" :> Post '[JSON] EntityUserLink
+               "entityUserLinks" :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given web property.
 --
--- /See:/ 'managementWebpropertyUserLinksInsert' smart constructor.
-data ManagementWebpropertyUserLinksInsert = ManagementWebpropertyUserLinksInsert
+-- /See:/ 'managementWebpropertyUserLinksInsert'' smart constructor.
+data ManagementWebpropertyUserLinksInsert' = ManagementWebpropertyUserLinksInsert'
     { _mwuliQuotaUser     :: !(Maybe Text)
     , _mwuliPrettyPrint   :: !Bool
     , _mwuliWebPropertyId :: !Text
@@ -65,7 +73,7 @@ data ManagementWebpropertyUserLinksInsert = ManagementWebpropertyUserLinksInsert
     , _mwuliKey           :: !(Maybe Text)
     , _mwuliOauthToken    :: !(Maybe Text)
     , _mwuliFields        :: !(Maybe Text)
-    , _mwuliAlt           :: !Text
+    , _mwuliAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebpropertyUserLinksInsert'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data ManagementWebpropertyUserLinksInsert = ManagementWebpropertyUserLinksInsert
 -- * 'mwuliFields'
 --
 -- * 'mwuliAlt'
-managementWebpropertyUserLinksInsert
+managementWebpropertyUserLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
-    -> ManagementWebpropertyUserLinksInsert
-managementWebpropertyUserLinksInsert pMwuliWebPropertyId_ pMwuliAccountId_ =
-    ManagementWebpropertyUserLinksInsert
+    -> ManagementWebpropertyUserLinksInsert'
+managementWebpropertyUserLinksInsert' pMwuliWebPropertyId_ pMwuliAccountId_ =
+    ManagementWebpropertyUserLinksInsert'
     { _mwuliQuotaUser = Nothing
     , _mwuliPrettyPrint = False
     , _mwuliWebPropertyId = pMwuliWebPropertyId_
@@ -103,7 +111,7 @@ managementWebpropertyUserLinksInsert pMwuliWebPropertyId_ pMwuliAccountId_ =
     , _mwuliKey = Nothing
     , _mwuliOauthToken = Nothing
     , _mwuliFields = Nothing
-    , _mwuliAlt = "json"
+    , _mwuliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,7 +164,7 @@ mwuliFields
   = lens _mwuliFields (\ s a -> s{_mwuliFields = a})
 
 -- | Data format for the response.
-mwuliAlt :: Lens' ManagementWebpropertyUserLinksInsert' Text
+mwuliAlt :: Lens' ManagementWebpropertyUserLinksInsert' Alt
 mwuliAlt = lens _mwuliAlt (\ s a -> s{_mwuliAlt = a})
 
 instance GoogleRequest
@@ -165,18 +173,18 @@ instance GoogleRequest
              EntityUserLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebpropertyUserLinksInsert{..}
-          = go _mwuliQuotaUser _mwuliPrettyPrint
+          ManagementWebpropertyUserLinksInsert'{..}
+          = go _mwuliQuotaUser (Just _mwuliPrettyPrint)
               _mwuliWebPropertyId
               _mwuliUserIp
               _mwuliAccountId
               _mwuliKey
               _mwuliOauthToken
               _mwuliFields
-              _mwuliAlt
+              (Just _mwuliAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebpropertyUserLinksInsertAPI)
+                         Proxy ManagementWebpropertyUserLinksInsertResource)
                       r
                       u

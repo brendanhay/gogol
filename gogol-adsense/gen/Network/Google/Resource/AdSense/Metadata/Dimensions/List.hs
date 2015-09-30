@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List the metadata for the dimensions available to this AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseMetadataDimensionsList@.
-module AdSense.Metadata.Dimensions.List
+module Network.Google.Resource.AdSense.Metadata.Dimensions.List
     (
     -- * REST Resource
-      MetadataDimensionsListAPI
+      MetadataDimensionsListResource
 
     -- * Creating a Request
-    , metadataDimensionsList
-    , MetadataDimensionsList
+    , metadataDimensionsList'
+    , MetadataDimensionsList'
 
     -- * Request Lenses
     , mdlQuotaUser
@@ -42,21 +43,29 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseMetadataDimensionsList@ which the
--- 'MetadataDimensionsList' request conforms to.
-type MetadataDimensionsListAPI =
-     "metadata" :> "dimensions" :> Get '[JSON] Metadata
+-- 'MetadataDimensionsList'' request conforms to.
+type MetadataDimensionsListResource =
+     "metadata" :>
+       "dimensions" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdSense account.
 --
--- /See:/ 'metadataDimensionsList' smart constructor.
-data MetadataDimensionsList = MetadataDimensionsList
+-- /See:/ 'metadataDimensionsList'' smart constructor.
+data MetadataDimensionsList' = MetadataDimensionsList'
     { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
     , _mdlUserIp      :: !(Maybe Text)
     , _mdlKey         :: !(Maybe Text)
     , _mdlOauthToken  :: !(Maybe Text)
     , _mdlFields      :: !(Maybe Text)
-    , _mdlAlt         :: !Text
+    , _mdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataDimensionsList'' with the minimum fields required to make a request.
@@ -76,17 +85,17 @@ data MetadataDimensionsList = MetadataDimensionsList
 -- * 'mdlFields'
 --
 -- * 'mdlAlt'
-metadataDimensionsList
-    :: MetadataDimensionsList
-metadataDimensionsList =
-    MetadataDimensionsList
+metadataDimensionsList'
+    :: MetadataDimensionsList'
+metadataDimensionsList' =
+    MetadataDimensionsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True
     , _mdlUserIp = Nothing
     , _mdlKey = Nothing
     , _mdlOauthToken = Nothing
     , _mdlFields = Nothing
-    , _mdlAlt = "json"
+    , _mdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,19 +135,20 @@ mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
 -- | Data format for the response.
-mdlAlt :: Lens' MetadataDimensionsList' Text
+mdlAlt :: Lens' MetadataDimensionsList' Alt
 mdlAlt = lens _mdlAlt (\ s a -> s{_mdlAlt = a})
 
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u MetadataDimensionsList{..}
-          = go _mdlQuotaUser _mdlPrettyPrint _mdlUserIp _mdlKey
+        requestWithRoute r u MetadataDimensionsList'{..}
+          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlUserIp
+              _mdlKey
               _mdlOauthToken
               _mdlFields
-              _mdlAlt
+              (Just _mdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetadataDimensionsListAPI)
+                      (Proxy :: Proxy MetadataDimensionsListResource)
                       r
                       u

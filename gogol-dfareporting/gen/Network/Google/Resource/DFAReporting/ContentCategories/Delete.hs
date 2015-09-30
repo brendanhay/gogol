@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing content category.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingContentCategoriesDelete@.
-module DFAReporting.ContentCategories.Delete
+module Network.Google.Resource.DFAReporting.ContentCategories.Delete
     (
     -- * REST Resource
-      ContentCategoriesDeleteAPI
+      ContentCategoriesDeleteResource
 
     -- * Creating a Request
-    , contentCategoriesDelete
-    , ContentCategoriesDelete
+    , contentCategoriesDelete'
+    , ContentCategoriesDelete'
 
     -- * Request Lenses
     , ccdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingContentCategoriesDelete@ which the
--- 'ContentCategoriesDelete' request conforms to.
-type ContentCategoriesDeleteAPI =
+-- 'ContentCategoriesDelete'' request conforms to.
+type ContentCategoriesDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "contentCategories" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing content category.
 --
--- /See:/ 'contentCategoriesDelete' smart constructor.
-data ContentCategoriesDelete = ContentCategoriesDelete
+-- /See:/ 'contentCategoriesDelete'' smart constructor.
+data ContentCategoriesDelete' = ContentCategoriesDelete'
     { _ccdQuotaUser   :: !(Maybe Text)
     , _ccdPrettyPrint :: !Bool
     , _ccdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data ContentCategoriesDelete = ContentCategoriesDelete
     , _ccdId          :: !Int64
     , _ccdOauthToken  :: !(Maybe Text)
     , _ccdFields      :: !(Maybe Text)
-    , _ccdAlt         :: !Text
+    , _ccdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data ContentCategoriesDelete = ContentCategoriesDelete
 -- * 'ccdFields'
 --
 -- * 'ccdAlt'
-contentCategoriesDelete
+contentCategoriesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> ContentCategoriesDelete
-contentCategoriesDelete pCcdProfileId_ pCcdId_ =
-    ContentCategoriesDelete
+    -> ContentCategoriesDelete'
+contentCategoriesDelete' pCcdProfileId_ pCcdId_ =
+    ContentCategoriesDelete'
     { _ccdQuotaUser = Nothing
     , _ccdPrettyPrint = True
     , _ccdUserIp = Nothing
@@ -101,7 +109,7 @@ contentCategoriesDelete pCcdProfileId_ pCcdId_ =
     , _ccdId = pCcdId_
     , _ccdOauthToken = Nothing
     , _ccdFields = Nothing
-    , _ccdAlt = "json"
+    , _ccdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ ccdFields
   = lens _ccdFields (\ s a -> s{_ccdFields = a})
 
 -- | Data format for the response.
-ccdAlt :: Lens' ContentCategoriesDelete' Text
+ccdAlt :: Lens' ContentCategoriesDelete' Alt
 ccdAlt = lens _ccdAlt (\ s a -> s{_ccdAlt = a})
 
 instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u ContentCategoriesDelete{..}
-          = go _ccdQuotaUser _ccdPrettyPrint _ccdUserIp
+        requestWithRoute r u ContentCategoriesDelete'{..}
+          = go _ccdQuotaUser (Just _ccdPrettyPrint) _ccdUserIp
               _ccdProfileId
               _ccdKey
               _ccdId
               _ccdOauthToken
               _ccdFields
-              _ccdAlt
+              (Just _ccdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ContentCategoriesDeleteAPI)
+                      (Proxy :: Proxy ContentCategoriesDeleteResource)
                       r
                       u

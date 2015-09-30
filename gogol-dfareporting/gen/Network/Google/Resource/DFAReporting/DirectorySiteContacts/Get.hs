@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one directory site contact by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingDirectorySiteContactsGet@.
-module DFAReporting.DirectorySiteContacts.Get
+module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
     (
     -- * REST Resource
-      DirectorySiteContactsGetAPI
+      DirectorySiteContactsGetResource
 
     -- * Creating a Request
-    , directorySiteContactsGet
-    , DirectorySiteContactsGet
+    , directorySiteContactsGet'
+    , DirectorySiteContactsGet'
 
     -- * Request Lenses
     , dscgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingDirectorySiteContactsGet@ which the
--- 'DirectorySiteContactsGet' request conforms to.
-type DirectorySiteContactsGetAPI =
+-- 'DirectorySiteContactsGet'' request conforms to.
+type DirectorySiteContactsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "directorySiteContacts" :>
            Capture "id" Int64 :>
-             Get '[JSON] DirectorySiteContact
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] DirectorySiteContact
 
 -- | Gets one directory site contact by ID.
 --
--- /See:/ 'directorySiteContactsGet' smart constructor.
-data DirectorySiteContactsGet = DirectorySiteContactsGet
+-- /See:/ 'directorySiteContactsGet'' smart constructor.
+data DirectorySiteContactsGet' = DirectorySiteContactsGet'
     { _dscgQuotaUser   :: !(Maybe Text)
     , _dscgPrettyPrint :: !Bool
     , _dscgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data DirectorySiteContactsGet = DirectorySiteContactsGet
     , _dscgId          :: !Int64
     , _dscgOauthToken  :: !(Maybe Text)
     , _dscgFields      :: !(Maybe Text)
-    , _dscgAlt         :: !Text
+    , _dscgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data DirectorySiteContactsGet = DirectorySiteContactsGet
 -- * 'dscgFields'
 --
 -- * 'dscgAlt'
-directorySiteContactsGet
+directorySiteContactsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> DirectorySiteContactsGet
-directorySiteContactsGet pDscgProfileId_ pDscgId_ =
-    DirectorySiteContactsGet
+    -> DirectorySiteContactsGet'
+directorySiteContactsGet' pDscgProfileId_ pDscgId_ =
+    DirectorySiteContactsGet'
     { _dscgQuotaUser = Nothing
     , _dscgPrettyPrint = True
     , _dscgUserIp = Nothing
@@ -102,7 +110,7 @@ directorySiteContactsGet pDscgProfileId_ pDscgId_ =
     , _dscgId = pDscgId_
     , _dscgOauthToken = Nothing
     , _dscgFields = Nothing
-    , _dscgAlt = "json"
+    , _dscgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ dscgFields
   = lens _dscgFields (\ s a -> s{_dscgFields = a})
 
 -- | Data format for the response.
-dscgAlt :: Lens' DirectorySiteContactsGet' Text
+dscgAlt :: Lens' DirectorySiteContactsGet' Alt
 dscgAlt = lens _dscgAlt (\ s a -> s{_dscgAlt = a})
 
 instance GoogleRequest DirectorySiteContactsGet'
@@ -161,16 +169,17 @@ instance GoogleRequest DirectorySiteContactsGet'
         type Rs DirectorySiteContactsGet' =
              DirectorySiteContact
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u DirectorySiteContactsGet{..}
-          = go _dscgQuotaUser _dscgPrettyPrint _dscgUserIp
+        requestWithRoute r u DirectorySiteContactsGet'{..}
+          = go _dscgQuotaUser (Just _dscgPrettyPrint)
+              _dscgUserIp
               _dscgProfileId
               _dscgKey
               _dscgId
               _dscgOauthToken
               _dscgFields
-              _dscgAlt
+              (Just _dscgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DirectorySiteContactsGetAPI)
+                      (Proxy :: Proxy DirectorySiteContactsGetResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- in a conflict error on version mismatch.
 --
 -- /See:/ <https://developers.google.com/games/services/web/api/states Google App State API Reference> for @AppstateStatesClear@.
-module Appstate.States.Clear
+module Network.Google.Resource.Appstate.States.Clear
     (
     -- * REST Resource
-      StatesClearAPI
+      StatesClearResource
 
     -- * Creating a Request
-    , statesClear
-    , StatesClear
+    , statesClear'
+    , StatesClear'
 
     -- * Request Lenses
     , scQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.GamesAppState.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AppstateStatesClear@ which the
--- 'StatesClear' request conforms to.
-type StatesClearAPI =
+-- 'StatesClear'' request conforms to.
+type StatesClearResource =
      "states" :>
        Capture "stateKey" Int32 :>
          "clear" :>
-           QueryParam "currentDataVersion" Text :>
-             Post '[JSON] WriteResult
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "currentDataVersion" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] WriteResult
 
 -- | Clears (sets to empty) the data for the passed key if and only if the
 -- passed version matches the currently stored version. This method results
 -- in a conflict error on version mismatch.
 --
--- /See:/ 'statesClear' smart constructor.
-data StatesClear = StatesClear
+-- /See:/ 'statesClear'' smart constructor.
+data StatesClear' = StatesClear'
     { _scQuotaUser          :: !(Maybe Text)
     , _scPrettyPrint        :: !Bool
     , _scUserIp             :: !(Maybe Text)
@@ -68,7 +75,7 @@ data StatesClear = StatesClear
     , _scKey                :: !(Maybe Text)
     , _scOauthToken         :: !(Maybe Text)
     , _scFields             :: !(Maybe Text)
-    , _scAlt                :: !Text
+    , _scAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatesClear'' with the minimum fields required to make a request.
@@ -92,11 +99,11 @@ data StatesClear = StatesClear
 -- * 'scFields'
 --
 -- * 'scAlt'
-statesClear
+statesClear'
     :: Int32 -- ^ 'stateKey'
-    -> StatesClear
-statesClear pScStateKey_ =
-    StatesClear
+    -> StatesClear'
+statesClear' pScStateKey_ =
+    StatesClear'
     { _scQuotaUser = Nothing
     , _scPrettyPrint = True
     , _scUserIp = Nothing
@@ -105,7 +112,7 @@ statesClear pScStateKey_ =
     , _scKey = Nothing
     , _scOauthToken = Nothing
     , _scFields = Nothing
-    , _scAlt = "json"
+    , _scAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,19 +161,22 @@ scFields :: Lens' StatesClear' (Maybe Text)
 scFields = lens _scFields (\ s a -> s{_scFields = a})
 
 -- | Data format for the response.
-scAlt :: Lens' StatesClear' Text
+scAlt :: Lens' StatesClear' Alt
 scAlt = lens _scAlt (\ s a -> s{_scAlt = a})
 
 instance GoogleRequest StatesClear' where
         type Rs StatesClear' = WriteResult
         request = requestWithRoute defReq gamesAppStateURL
-        requestWithRoute r u StatesClear{..}
-          = go _scQuotaUser _scPrettyPrint _scUserIp
+        requestWithRoute r u StatesClear'{..}
+          = go _scQuotaUser (Just _scPrettyPrint) _scUserIp
               _scStateKey
               _scCurrentDataVersion
               _scKey
               _scOauthToken
               _scFields
-              _scAlt
+              (Just _scAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy StatesClearAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy StatesClearResource)
+                      r
+                      u

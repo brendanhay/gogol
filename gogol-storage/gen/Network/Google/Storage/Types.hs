@@ -17,12 +17,72 @@ module Network.Google.Storage.Types
     -- * Service URL
       storageURL
 
+    -- * BucketVersioning
+    , BucketVersioning
+    , bucketVersioning
+    , bvEnabled
+
+    -- * ObjectOwner
+    , ObjectOwner
+    , objectOwner
+    , ooEntity
+    , ooEntityId
+
+    -- * ComposeRequestSourceObjects
+    , ComposeRequestSourceObjects
+    , composeRequestSourceObjects
+    , crsoName
+    , crsoObjectPreconditions
+    , crsoGeneration
+
+    -- * BucketLogging
+    , BucketLogging
+    , bucketLogging
+    , blLogBucket
+    , blLogObjectPrefix
+
     -- * Buckets
     , Buckets
     , buckets
     , bNextPageToken
     , bKind
     , bItems
+
+    -- * BucketLifecycleRuleCondition
+    , BucketLifecycleRuleCondition
+    , bucketLifecycleRuleCondition
+    , blrcAge
+    , blrcIsLive
+    , blrcNumNewerVersions
+    , blrcCreatedBefore
+
+    -- * BucketLifecycle
+    , BucketLifecycle
+    , bucketLifecycle
+    , blRule
+
+    -- * BucketLifecycleRuleAction
+    , BucketLifecycleRuleAction
+    , bucketLifecycleRuleAction
+    , blraType
+
+    -- * ObjectMetadata
+    , ObjectMetadata
+    , objectMetadata
+
+    -- * StorageBucketsListProjection
+    , StorageBucketsListProjection (..)
+
+    -- * BucketCORS
+    , BucketCORS
+    , bucketCORS
+    , bcMaxAgeSeconds
+    , bcOrigin
+    , bcResponseHeader
+    , bcMethod
+
+    -- * StorageObjectsUpdateProjection
+    , StorageObjectsUpdateProjection (..)
 
     -- * Channel
     , Channel
@@ -65,6 +125,12 @@ module Network.Google.Storage.Types
     , bacKind
     , bacItems
 
+    -- * BucketLifecycleRule
+    , BucketLifecycleRule
+    , bucketLifecycleRule
+    , blrAction
+    , blrCondition
+
     -- * Objects
     , Objects
     , objects
@@ -79,6 +145,40 @@ module Network.Google.Storage.Types
     , crDestination
     , crKind
     , crSourceObjects
+
+    -- * StorageObjectsPatchProjection
+    , StorageObjectsPatchProjection (..)
+
+    -- * StorageObjectsGetProjection
+    , StorageObjectsGetProjection (..)
+
+    -- * StorageBucketsGetProjection
+    , StorageBucketsGetProjection (..)
+
+    -- * ChannelParams
+    , ChannelParams
+    , channelParams
+
+    -- * StorageObjectsCopyProjection
+    , StorageObjectsCopyProjection (..)
+
+    -- * StorageBucketsPatchProjection
+    , StorageBucketsPatchProjection (..)
+
+    -- * BucketOwner
+    , BucketOwner
+    , bucketOwner
+    , boEntity
+    , boEntityId
+
+    -- * StorageObjectsWatchAllProjection
+    , StorageObjectsWatchAllProjection (..)
+
+    -- * BucketWebsite
+    , BucketWebsite
+    , bucketWebsite
+    , bwMainPageSuffix
+    , bwNotFoundPage
 
     -- * BucketAccessControl
     , BucketAccessControl
@@ -99,6 +199,9 @@ module Network.Google.Storage.Types
     , objectAccessControls
     , oacKind
     , oacItems
+
+    -- * StorageObjectsInsertProjection
+    , StorageObjectsInsertProjection (..)
 
     -- * Object
     , Object
@@ -128,6 +231,17 @@ module Network.Google.Storage.Types
     , objMd5Hash
     , objContentType
 
+    -- * ComposeRequestSourceObjectsObjectPreconditions
+    , ComposeRequestSourceObjectsObjectPreconditions
+    , composeRequestSourceObjectsObjectPreconditions
+    , crsoopIfGenerationMatch
+
+    -- * StorageBucketsUpdateProjection
+    , StorageBucketsUpdateProjection (..)
+
+    -- * StorageObjectsListProjection
+    , StorageObjectsListProjection (..)
+
     -- * ObjectAccessControl
     , ObjectAccessControl
     , objectAccessControl
@@ -143,6 +257,12 @@ module Network.Google.Storage.Types
     , oacaEntity
     , oacaGeneration
     , oacaEntityId
+
+    -- * StorageBucketsInsertProjection
+    , StorageBucketsInsertProjection (..)
+
+    -- * Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Prelude
@@ -150,7 +270,7 @@ import           Network.Google.Storage.Types.Product
 import           Network.Google.Storage.Types.Sum
 
 -- | URL referring to version 'v1beta2' of the Cloud Storage API.
-storageURL :: BaseURL
+storageURL :: BaseUrl
 storageURL
   = BaseUrl Https
       "https://www.googleapis.com/storage/v1beta2/"

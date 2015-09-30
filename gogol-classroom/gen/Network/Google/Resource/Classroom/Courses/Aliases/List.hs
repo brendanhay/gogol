@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesAliasesList@.
-module Classroom.Courses.Aliases.List
+module Network.Google.Resource.Classroom.Courses.Aliases.List
     (
     -- * REST Resource
-      CoursesAliasesListAPI
+      CoursesAliasesListResource
 
     -- * Creating a Request
-    , coursesAliasesList
-    , CoursesAliasesList
+    , coursesAliasesList'
+    , CoursesAliasesList'
 
     -- * Request Lenses
     , calXgafv
@@ -55,15 +56,28 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesAliasesList@ which the
--- 'CoursesAliasesList' request conforms to.
-type CoursesAliasesListAPI =
+-- 'CoursesAliasesList'' request conforms to.
+type CoursesAliasesListResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "aliases" :>
-             QueryParam "pageToken" Text :>
-               QueryParam "pageSize" Int32 :>
-                 Get '[JSON] ListCourseAliasesResponse
+             QueryParam "$.xgafv" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "upload_protocol" Text :>
+                     QueryParam "pp" Bool :>
+                       QueryParam "access_token" Text :>
+                         QueryParam "uploadType" Text :>
+                           QueryParam "bearer_token" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "pageToken" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "pageSize" Int32 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Get '[JSON] ListCourseAliasesResponse
 
 -- | Returns a list of aliases for a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -71,8 +85,8 @@ type CoursesAliasesListAPI =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if the course does not
 -- exist.
 --
--- /See:/ 'coursesAliasesList' smart constructor.
-data CoursesAliasesList = CoursesAliasesList
+-- /See:/ 'coursesAliasesList'' smart constructor.
+data CoursesAliasesList' = CoursesAliasesList'
     { _calXgafv          :: !(Maybe Text)
     , _calQuotaUser      :: !(Maybe Text)
     , _calPrettyPrint    :: !Bool
@@ -126,11 +140,11 @@ data CoursesAliasesList = CoursesAliasesList
 -- * 'calCallback'
 --
 -- * 'calAlt'
-coursesAliasesList
+coursesAliasesList'
     :: Text -- ^ 'courseId'
-    -> CoursesAliasesList
-coursesAliasesList pCalCourseId_ =
-    CoursesAliasesList
+    -> CoursesAliasesList'
+coursesAliasesList' pCalCourseId_ =
+    CoursesAliasesList'
     { _calXgafv = Nothing
     , _calQuotaUser = Nothing
     , _calPrettyPrint = True
@@ -248,10 +262,10 @@ instance GoogleRequest CoursesAliasesList' where
         type Rs CoursesAliasesList' =
              ListCourseAliasesResponse
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesAliasesList{..}
-          = go _calXgafv _calQuotaUser _calPrettyPrint
+        requestWithRoute r u CoursesAliasesList'{..}
+          = go _calXgafv _calQuotaUser (Just _calPrettyPrint)
               _calUploadProtocol
-              _calPp
+              (Just _calPp)
               _calCourseId
               _calAccessToken
               _calUploadType
@@ -262,9 +276,9 @@ instance GoogleRequest CoursesAliasesList' where
               _calPageSize
               _calFields
               _calCallback
-              _calAlt
+              (Just _calAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesAliasesListAPI)
+                      (Proxy :: Proxy CoursesAliasesListResource)
                       r
                       u

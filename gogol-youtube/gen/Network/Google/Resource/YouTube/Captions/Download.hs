@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,141 +23,152 @@
 -- tlang parameter.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCaptionsDownload@.
-module YouTube.Captions.Download
+module Network.Google.Resource.YouTube.Captions.Download
     (
     -- * REST Resource
-      CaptionsDownloadAPI
+      CaptionsDownloadResource
 
     -- * Creating a Request
-    , captionsDownload
-    , CaptionsDownload
+    , captionsDownload'
+    , CaptionsDownload'
 
     -- * Request Lenses
-    , cdOnBehalfOf
-    , cdQuotaUser
-    , cdPrettyPrint
-    , cdUserIp
-    , cdTlang
-    , cdOnBehalfOfContentOwner
-    , cdKey
-    , cdId
-    , cdTfmt
-    , cdOauthToken
-    , cdFields
-    , cdAlt
+    , capaOnBehalfOf
+    , capaQuotaUser
+    , capaPrettyPrint
+    , capaUserIp
+    , capaTlang
+    , capaOnBehalfOfContentOwner
+    , capaKey
+    , capaId
+    , capaTfmt
+    , capaOauthToken
+    , capaFields
+    , capaAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCaptionsDownload@ which the
--- 'CaptionsDownload' request conforms to.
-type CaptionsDownloadAPI =
+-- 'CaptionsDownload'' request conforms to.
+type CaptionsDownloadResource =
      "captions" :>
        Capture "id" Text :>
          QueryParam "onBehalfOf" Text :>
-           QueryParam "tlang" Text :>
-             QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "tfmt" Text :> Get '[JSON] ()
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "tlang" Text :>
+                   QueryParam "onBehalfOfContentOwner" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] ()
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
 -- in its original language unless the request specifies a value for the
 -- tlang parameter.
 --
--- /See:/ 'captionsDownload' smart constructor.
-data CaptionsDownload = CaptionsDownload
-    { _cdOnBehalfOf             :: !(Maybe Text)
-    , _cdQuotaUser              :: !(Maybe Text)
-    , _cdPrettyPrint            :: !Bool
-    , _cdUserIp                 :: !(Maybe Text)
-    , _cdTlang                  :: !(Maybe Text)
-    , _cdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cdKey                    :: !(Maybe Text)
-    , _cdId                     :: !Text
-    , _cdTfmt                   :: !(Maybe Text)
-    , _cdOauthToken             :: !(Maybe Text)
-    , _cdFields                 :: !(Maybe Text)
-    , _cdAlt                    :: !Text
+-- /See:/ 'captionsDownload'' smart constructor.
+data CaptionsDownload' = CaptionsDownload'
+    { _capaOnBehalfOf             :: !(Maybe Text)
+    , _capaQuotaUser              :: !(Maybe Text)
+    , _capaPrettyPrint            :: !Bool
+    , _capaUserIp                 :: !(Maybe Text)
+    , _capaTlang                  :: !(Maybe Text)
+    , _capaOnBehalfOfContentOwner :: !(Maybe Text)
+    , _capaKey                    :: !(Maybe Text)
+    , _capaId                     :: !Text
+    , _capaTfmt                   :: !(Maybe YouTubeCaptionsDownloadTfmt)
+    , _capaOauthToken             :: !(Maybe Text)
+    , _capaFields                 :: !(Maybe Text)
+    , _capaAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDownload'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdOnBehalfOf'
+-- * 'capaOnBehalfOf'
 --
--- * 'cdQuotaUser'
+-- * 'capaQuotaUser'
 --
--- * 'cdPrettyPrint'
+-- * 'capaPrettyPrint'
 --
--- * 'cdUserIp'
+-- * 'capaUserIp'
 --
--- * 'cdTlang'
+-- * 'capaTlang'
 --
--- * 'cdOnBehalfOfContentOwner'
+-- * 'capaOnBehalfOfContentOwner'
 --
--- * 'cdKey'
+-- * 'capaKey'
 --
--- * 'cdId'
+-- * 'capaId'
 --
--- * 'cdTfmt'
+-- * 'capaTfmt'
 --
--- * 'cdOauthToken'
+-- * 'capaOauthToken'
 --
--- * 'cdFields'
+-- * 'capaFields'
 --
--- * 'cdAlt'
-captionsDownload
+-- * 'capaAlt'
+captionsDownload'
     :: Text -- ^ 'id'
-    -> CaptionsDownload
-captionsDownload pCdId_ =
-    CaptionsDownload
-    { _cdOnBehalfOf = Nothing
-    , _cdQuotaUser = Nothing
-    , _cdPrettyPrint = True
-    , _cdUserIp = Nothing
-    , _cdTlang = Nothing
-    , _cdOnBehalfOfContentOwner = Nothing
-    , _cdKey = Nothing
-    , _cdId = pCdId_
-    , _cdTfmt = Nothing
-    , _cdOauthToken = Nothing
-    , _cdFields = Nothing
-    , _cdAlt = "json"
+    -> CaptionsDownload'
+captionsDownload' pCapaId_ =
+    CaptionsDownload'
+    { _capaOnBehalfOf = Nothing
+    , _capaQuotaUser = Nothing
+    , _capaPrettyPrint = True
+    , _capaUserIp = Nothing
+    , _capaTlang = Nothing
+    , _capaOnBehalfOfContentOwner = Nothing
+    , _capaKey = Nothing
+    , _capaId = pCapaId_
+    , _capaTfmt = Nothing
+    , _capaOauthToken = Nothing
+    , _capaFields = Nothing
+    , _capaAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
 -- of
-cdOnBehalfOf :: Lens' CaptionsDownload' (Maybe Text)
-cdOnBehalfOf
-  = lens _cdOnBehalfOf (\ s a -> s{_cdOnBehalfOf = a})
+capaOnBehalfOf :: Lens' CaptionsDownload' (Maybe Text)
+capaOnBehalfOf
+  = lens _capaOnBehalfOf
+      (\ s a -> s{_capaOnBehalfOf = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-cdQuotaUser :: Lens' CaptionsDownload' (Maybe Text)
-cdQuotaUser
-  = lens _cdQuotaUser (\ s a -> s{_cdQuotaUser = a})
+capaQuotaUser :: Lens' CaptionsDownload' (Maybe Text)
+capaQuotaUser
+  = lens _capaQuotaUser
+      (\ s a -> s{_capaQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-cdPrettyPrint :: Lens' CaptionsDownload' Bool
-cdPrettyPrint
-  = lens _cdPrettyPrint
-      (\ s a -> s{_cdPrettyPrint = a})
+capaPrettyPrint :: Lens' CaptionsDownload' Bool
+capaPrettyPrint
+  = lens _capaPrettyPrint
+      (\ s a -> s{_capaPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cdUserIp :: Lens' CaptionsDownload' (Maybe Text)
-cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
+capaUserIp :: Lens' CaptionsDownload' (Maybe Text)
+capaUserIp
+  = lens _capaUserIp (\ s a -> s{_capaUserIp = a})
 
 -- | The tlang parameter specifies that the API response should return a
 -- translation of the specified caption track. The parameter value is an
 -- ISO 639-1 two-letter language code that identifies the desired caption
 -- language. The translation is generated by using machine translation,
 -- such as Google Translate.
-cdTlang :: Lens' CaptionsDownload' (Maybe Text)
-cdTlang = lens _cdTlang (\ s a -> s{_cdTlang = a})
+capaTlang :: Lens' CaptionsDownload' (Maybe Text)
+capaTlang
+  = lens _capaTlang (\ s a -> s{_capaTlang = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -168,58 +180,61 @@ cdTlang = lens _cdTlang (\ s a -> s{_cdTlang = a})
 -- without having to provide authentication credentials for each individual
 -- channel. The actual CMS account that the user authenticates with must be
 -- linked to the specified YouTube content owner.
-cdOnBehalfOfContentOwner :: Lens' CaptionsDownload' (Maybe Text)
-cdOnBehalfOfContentOwner
-  = lens _cdOnBehalfOfContentOwner
-      (\ s a -> s{_cdOnBehalfOfContentOwner = a})
+capaOnBehalfOfContentOwner :: Lens' CaptionsDownload' (Maybe Text)
+capaOnBehalfOfContentOwner
+  = lens _capaOnBehalfOfContentOwner
+      (\ s a -> s{_capaOnBehalfOfContentOwner = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CaptionsDownload' (Maybe Text)
-cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
+capaKey :: Lens' CaptionsDownload' (Maybe Text)
+capaKey = lens _capaKey (\ s a -> s{_capaKey = a})
 
 -- | The id parameter identifies the caption track that is being retrieved.
 -- The value is a caption track ID as identified by the id property in a
 -- caption resource.
-cdId :: Lens' CaptionsDownload' Text
-cdId = lens _cdId (\ s a -> s{_cdId = a})
+capaId :: Lens' CaptionsDownload' Text
+capaId = lens _capaId (\ s a -> s{_capaId = a})
 
 -- | The tfmt parameter specifies that the caption track should be returned
 -- in a specific format. If the parameter is not included in the request,
 -- the track is returned in its original format.
-cdTfmt :: Lens' CaptionsDownload' (Maybe Text)
-cdTfmt = lens _cdTfmt (\ s a -> s{_cdTfmt = a})
+capaTfmt :: Lens' CaptionsDownload' (Maybe YouTubeCaptionsDownloadTfmt)
+capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' CaptionsDownload' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+capaOauthToken :: Lens' CaptionsDownload' (Maybe Text)
+capaOauthToken
+  = lens _capaOauthToken
+      (\ s a -> s{_capaOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-cdFields :: Lens' CaptionsDownload' (Maybe Text)
-cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
+capaFields :: Lens' CaptionsDownload' (Maybe Text)
+capaFields
+  = lens _capaFields (\ s a -> s{_capaFields = a})
 
 -- | Data format for the response.
-cdAlt :: Lens' CaptionsDownload' Text
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+capaAlt :: Lens' CaptionsDownload' Alt
+capaAlt = lens _capaAlt (\ s a -> s{_capaAlt = a})
 
 instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CaptionsDownload{..}
-          = go _cdOnBehalfOf _cdQuotaUser _cdPrettyPrint
-              _cdUserIp
-              _cdTlang
-              _cdOnBehalfOfContentOwner
-              _cdKey
-              _cdId
-              _cdTfmt
-              _cdOauthToken
-              _cdFields
-              _cdAlt
+        requestWithRoute r u CaptionsDownload'{..}
+          = go _capaOnBehalfOf _capaQuotaUser
+              (Just _capaPrettyPrint)
+              _capaUserIp
+              _capaTlang
+              _capaOnBehalfOfContentOwner
+              _capaKey
+              _capaId
+              _capaTfmt
+              _capaOauthToken
+              _capaFields
+              (Just _capaAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CaptionsDownloadAPI)
+                      (Proxy :: Proxy CaptionsDownloadResource)
                       r
                       u

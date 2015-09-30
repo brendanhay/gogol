@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- silently ignored. Returns the modified variant without its calls.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsVariantsUpdate@.
-module Genomics.Variants.Update
+module Network.Google.Resource.Genomics.Variants.Update
     (
     -- * REST Resource
-      VariantsUpdateAPI
+      VariantsUpdateResource
 
     -- * Creating a Request
-    , variantsUpdate
-    , VariantsUpdate
+    , variantsUpdate'
+    , VariantsUpdate'
 
     -- * Request Lenses
     , vuQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsVariantsUpdate@ which the
--- 'VariantsUpdate' request conforms to.
-type VariantsUpdateAPI =
+-- 'VariantsUpdate'' request conforms to.
+type VariantsUpdateResource =
      "variants" :>
-       Capture "variantId" Text :> Put '[JSON] Variant
+       Capture "variantId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Variant
 
 -- | Updates a variant\'s names and info fields. All other modifications are
 -- silently ignored. Returns the modified variant without its calls.
 --
--- /See:/ 'variantsUpdate' smart constructor.
-data VariantsUpdate = VariantsUpdate
+-- /See:/ 'variantsUpdate'' smart constructor.
+data VariantsUpdate' = VariantsUpdate'
     { _vuQuotaUser   :: !(Maybe Text)
     , _vuPrettyPrint :: !Bool
     , _vuUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data VariantsUpdate = VariantsUpdate
     , _vuVariantId   :: !Text
     , _vuOauthToken  :: !(Maybe Text)
     , _vuFields      :: !(Maybe Text)
-    , _vuAlt         :: !Text
+    , _vuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data VariantsUpdate = VariantsUpdate
 -- * 'vuFields'
 --
 -- * 'vuAlt'
-variantsUpdate
+variantsUpdate'
     :: Text -- ^ 'variantId'
-    -> VariantsUpdate
-variantsUpdate pVuVariantId_ =
-    VariantsUpdate
+    -> VariantsUpdate'
+variantsUpdate' pVuVariantId_ =
+    VariantsUpdate'
     { _vuQuotaUser = Nothing
     , _vuPrettyPrint = True
     , _vuUserIp = Nothing
@@ -95,7 +103,7 @@ variantsUpdate pVuVariantId_ =
     , _vuVariantId = pVuVariantId_
     , _vuOauthToken = Nothing
     , _vuFields = Nothing
-    , _vuAlt = "json"
+    , _vuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +145,21 @@ vuFields :: Lens' VariantsUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
 -- | Data format for the response.
-vuAlt :: Lens' VariantsUpdate' Text
+vuAlt :: Lens' VariantsUpdate' Alt
 vuAlt = lens _vuAlt (\ s a -> s{_vuAlt = a})
 
 instance GoogleRequest VariantsUpdate' where
         type Rs VariantsUpdate' = Variant
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u VariantsUpdate{..}
-          = go _vuQuotaUser _vuPrettyPrint _vuUserIp _vuKey
+        requestWithRoute r u VariantsUpdate'{..}
+          = go _vuQuotaUser (Just _vuPrettyPrint) _vuUserIp
+              _vuKey
               _vuVariantId
               _vuOauthToken
               _vuFields
-              _vuAlt
+              (Just _vuAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VariantsUpdateAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy VariantsUpdateResource)
                       r
                       u

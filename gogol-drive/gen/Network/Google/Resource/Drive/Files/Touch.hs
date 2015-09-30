@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,131 +20,143 @@
 -- | Set the file\'s updated time to the current server time.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DriveFilesTouch@.
-module Drive.Files.Touch
+module Network.Google.Resource.Drive.Files.Touch
     (
     -- * REST Resource
-      FilesTouchAPI
+      FilesTouchResource
 
     -- * Creating a Request
-    , filesTouch
-    , FilesTouch
+    , filesTouch'
+    , FilesTouch'
 
     -- * Request Lenses
-    , fQuotaUser
-    , fPrettyPrint
-    , fUserIp
-    , fKey
-    , fFileId
-    , fOauthToken
-    , fFields
-    , fAlt
+    , ftQuotaUser
+    , ftPrettyPrint
+    , ftUserIp
+    , ftKey
+    , ftFileId
+    , ftOauthToken
+    , ftFields
+    , ftAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DriveFilesTouch@ which the
--- 'FilesTouch' request conforms to.
-type FilesTouchAPI =
+-- 'FilesTouch'' request conforms to.
+type FilesTouchResource =
      "files" :>
-       Capture "fileId" Text :> "touch" :> Post '[JSON] File
+       Capture "fileId" Text :>
+         "touch" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] File
 
 -- | Set the file\'s updated time to the current server time.
 --
--- /See:/ 'filesTouch' smart constructor.
-data FilesTouch = FilesTouch
-    { _fQuotaUser   :: !(Maybe Text)
-    , _fPrettyPrint :: !Bool
-    , _fUserIp      :: !(Maybe Text)
-    , _fKey         :: !(Maybe Text)
-    , _fFileId      :: !Text
-    , _fOauthToken  :: !(Maybe Text)
-    , _fFields      :: !(Maybe Text)
-    , _fAlt         :: !Text
+-- /See:/ 'filesTouch'' smart constructor.
+data FilesTouch' = FilesTouch'
+    { _ftQuotaUser   :: !(Maybe Text)
+    , _ftPrettyPrint :: !Bool
+    , _ftUserIp      :: !(Maybe Text)
+    , _ftKey         :: !(Maybe Text)
+    , _ftFileId      :: !Text
+    , _ftOauthToken  :: !(Maybe Text)
+    , _ftFields      :: !(Maybe Text)
+    , _ftAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesTouch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fQuotaUser'
+-- * 'ftQuotaUser'
 --
--- * 'fPrettyPrint'
+-- * 'ftPrettyPrint'
 --
--- * 'fUserIp'
+-- * 'ftUserIp'
 --
--- * 'fKey'
+-- * 'ftKey'
 --
--- * 'fFileId'
+-- * 'ftFileId'
 --
--- * 'fOauthToken'
+-- * 'ftOauthToken'
 --
--- * 'fFields'
+-- * 'ftFields'
 --
--- * 'fAlt'
-filesTouch
+-- * 'ftAlt'
+filesTouch'
     :: Text -- ^ 'fileId'
-    -> FilesTouch
-filesTouch pFFileId_ =
-    FilesTouch
-    { _fQuotaUser = Nothing
-    , _fPrettyPrint = True
-    , _fUserIp = Nothing
-    , _fKey = Nothing
-    , _fFileId = pFFileId_
-    , _fOauthToken = Nothing
-    , _fFields = Nothing
-    , _fAlt = "json"
+    -> FilesTouch'
+filesTouch' pFtFileId_ =
+    FilesTouch'
+    { _ftQuotaUser = Nothing
+    , _ftPrettyPrint = True
+    , _ftUserIp = Nothing
+    , _ftKey = Nothing
+    , _ftFileId = pFtFileId_
+    , _ftOauthToken = Nothing
+    , _ftFields = Nothing
+    , _ftAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-fQuotaUser :: Lens' FilesTouch' (Maybe Text)
-fQuotaUser
-  = lens _fQuotaUser (\ s a -> s{_fQuotaUser = a})
+ftQuotaUser :: Lens' FilesTouch' (Maybe Text)
+ftQuotaUser
+  = lens _ftQuotaUser (\ s a -> s{_ftQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-fPrettyPrint :: Lens' FilesTouch' Bool
-fPrettyPrint
-  = lens _fPrettyPrint (\ s a -> s{_fPrettyPrint = a})
+ftPrettyPrint :: Lens' FilesTouch' Bool
+ftPrettyPrint
+  = lens _ftPrettyPrint
+      (\ s a -> s{_ftPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fUserIp :: Lens' FilesTouch' (Maybe Text)
-fUserIp = lens _fUserIp (\ s a -> s{_fUserIp = a})
+ftUserIp :: Lens' FilesTouch' (Maybe Text)
+ftUserIp = lens _ftUserIp (\ s a -> s{_ftUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fKey :: Lens' FilesTouch' (Maybe Text)
-fKey = lens _fKey (\ s a -> s{_fKey = a})
+ftKey :: Lens' FilesTouch' (Maybe Text)
+ftKey = lens _ftKey (\ s a -> s{_ftKey = a})
 
 -- | The ID of the file to update.
-fFileId :: Lens' FilesTouch' Text
-fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
+ftFileId :: Lens' FilesTouch' Text
+ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fOauthToken :: Lens' FilesTouch' (Maybe Text)
-fOauthToken
-  = lens _fOauthToken (\ s a -> s{_fOauthToken = a})
+ftOauthToken :: Lens' FilesTouch' (Maybe Text)
+ftOauthToken
+  = lens _ftOauthToken (\ s a -> s{_ftOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-fFields :: Lens' FilesTouch' (Maybe Text)
-fFields = lens _fFields (\ s a -> s{_fFields = a})
+ftFields :: Lens' FilesTouch' (Maybe Text)
+ftFields = lens _ftFields (\ s a -> s{_ftFields = a})
 
 -- | Data format for the response.
-fAlt :: Lens' FilesTouch' Text
-fAlt = lens _fAlt (\ s a -> s{_fAlt = a})
+ftAlt :: Lens' FilesTouch' Alt
+ftAlt = lens _ftAlt (\ s a -> s{_ftAlt = a})
 
 instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u FilesTouch{..}
-          = go _fQuotaUser _fPrettyPrint _fUserIp _fKey
-              _fFileId
-              _fOauthToken
-              _fFields
-              _fAlt
+        requestWithRoute r u FilesTouch'{..}
+          = go _ftQuotaUser (Just _ftPrettyPrint) _ftUserIp
+              _ftKey
+              _ftFileId
+              _ftOauthToken
+              _ftFields
+              (Just _ftAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FilesTouchAPI) r u
+                  = clientWithRoute (Proxy :: Proxy FilesTouchResource)
+                      r
+                      u

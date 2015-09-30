@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Inserts a new site.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingSitesInsert@.
-module DFAReporting.Sites.Insert
+module Network.Google.Resource.DFAReporting.Sites.Insert
     (
     -- * REST Resource
-      SitesInsertAPI
+      SitesInsertResource
 
     -- * Creating a Request
-    , sitesInsert
-    , SitesInsert
+    , sitesInsert'
+    , SitesInsert'
 
     -- * Request Lenses
     , siQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingSitesInsert@ which the
--- 'SitesInsert' request conforms to.
-type SitesInsertAPI =
+-- 'SitesInsert'' request conforms to.
+type SitesInsertResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
-         "sites" :> Post '[JSON] Site
+         "sites" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Site
 
 -- | Inserts a new site.
 --
--- /See:/ 'sitesInsert' smart constructor.
-data SitesInsert = SitesInsert
+-- /See:/ 'sitesInsert'' smart constructor.
+data SitesInsert' = SitesInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
     , _siUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data SitesInsert = SitesInsert
     , _siKey         :: !(Maybe Text)
     , _siOauthToken  :: !(Maybe Text)
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Text
+    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesInsert'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data SitesInsert = SitesInsert
 -- * 'siFields'
 --
 -- * 'siAlt'
-sitesInsert
+sitesInsert'
     :: Int64 -- ^ 'profileId'
-    -> SitesInsert
-sitesInsert pSiProfileId_ =
-    SitesInsert
+    -> SitesInsert'
+sitesInsert' pSiProfileId_ =
+    SitesInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
     , _siUserIp = Nothing
@@ -94,7 +102,7 @@ sitesInsert pSiProfileId_ =
     , _siKey = Nothing
     , _siOauthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = "json"
+    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,18 +144,21 @@ siFields :: Lens' SitesInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
 -- | Data format for the response.
-siAlt :: Lens' SitesInsert' Text
+siAlt :: Lens' SitesInsert' Alt
 siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
 
 instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u SitesInsert{..}
-          = go _siQuotaUser _siPrettyPrint _siUserIp
+        requestWithRoute r u SitesInsert'{..}
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
               _siProfileId
               _siKey
               _siOauthToken
               _siFields
-              _siAlt
+              (Just _siAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SitesInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy SitesInsertResource)
+                      r
+                      u

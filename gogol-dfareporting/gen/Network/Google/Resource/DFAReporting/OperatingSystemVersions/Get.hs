@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one operating system version by ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemVersionsGet@.
-module DFAReporting.OperatingSystemVersions.Get
+module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     (
     -- * REST Resource
-      OperatingSystemVersionsGetAPI
+      OperatingSystemVersionsGetResource
 
     -- * Creating a Request
-    , operatingSystemVersionsGet
-    , OperatingSystemVersionsGet
+    , operatingSystemVersionsGet'
+    , OperatingSystemVersionsGet'
 
     -- * Request Lenses
     , osvgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOperatingSystemVersionsGet@ which the
--- 'OperatingSystemVersionsGet' request conforms to.
-type OperatingSystemVersionsGetAPI =
+-- 'OperatingSystemVersionsGet'' request conforms to.
+type OperatingSystemVersionsGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "operatingSystemVersions" :>
            Capture "id" Int64 :>
-             Get '[JSON] OperatingSystemVersion
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] OperatingSystemVersion
 
 -- | Gets one operating system version by ID.
 --
--- /See:/ 'operatingSystemVersionsGet' smart constructor.
-data OperatingSystemVersionsGet = OperatingSystemVersionsGet
+-- /See:/ 'operatingSystemVersionsGet'' smart constructor.
+data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
     { _osvgQuotaUser   :: !(Maybe Text)
     , _osvgPrettyPrint :: !Bool
     , _osvgUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data OperatingSystemVersionsGet = OperatingSystemVersionsGet
     , _osvgId          :: !Int64
     , _osvgOauthToken  :: !(Maybe Text)
     , _osvgFields      :: !(Maybe Text)
-    , _osvgAlt         :: !Text
+    , _osvgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data OperatingSystemVersionsGet = OperatingSystemVersionsGet
 -- * 'osvgFields'
 --
 -- * 'osvgAlt'
-operatingSystemVersionsGet
+operatingSystemVersionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> OperatingSystemVersionsGet
-operatingSystemVersionsGet pOsvgProfileId_ pOsvgId_ =
-    OperatingSystemVersionsGet
+    -> OperatingSystemVersionsGet'
+operatingSystemVersionsGet' pOsvgProfileId_ pOsvgId_ =
+    OperatingSystemVersionsGet'
     { _osvgQuotaUser = Nothing
     , _osvgPrettyPrint = True
     , _osvgUserIp = Nothing
@@ -102,7 +110,7 @@ operatingSystemVersionsGet pOsvgProfileId_ pOsvgId_ =
     , _osvgId = pOsvgId_
     , _osvgOauthToken = Nothing
     , _osvgFields = Nothing
-    , _osvgAlt = "json"
+    , _osvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,7 +161,7 @@ osvgFields
   = lens _osvgFields (\ s a -> s{_osvgFields = a})
 
 -- | Data format for the response.
-osvgAlt :: Lens' OperatingSystemVersionsGet' Text
+osvgAlt :: Lens' OperatingSystemVersionsGet' Alt
 osvgAlt = lens _osvgAlt (\ s a -> s{_osvgAlt = a})
 
 instance GoogleRequest OperatingSystemVersionsGet'
@@ -161,16 +169,17 @@ instance GoogleRequest OperatingSystemVersionsGet'
         type Rs OperatingSystemVersionsGet' =
              OperatingSystemVersion
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemVersionsGet{..}
-          = go _osvgQuotaUser _osvgPrettyPrint _osvgUserIp
+        requestWithRoute r u OperatingSystemVersionsGet'{..}
+          = go _osvgQuotaUser (Just _osvgPrettyPrint)
+              _osvgUserIp
               _osvgProfileId
               _osvgKey
               _osvgId
               _osvgOauthToken
               _osvgFields
-              _osvgAlt
+              (Just _osvgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OperatingSystemVersionsGetAPI)
+                      (Proxy :: Proxy OperatingSystemVersionsGetResource)
                       r
                       u

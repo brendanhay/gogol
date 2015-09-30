@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a map asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsCreate@.
-module Mapsengine.Maps.Create
+module Network.Google.Resource.Mapsengine.Maps.Create
     (
     -- * REST Resource
-      MapsCreateAPI
+      MapsCreateResource
 
     -- * Creating a Request
-    , mapsCreate
-    , MapsCreate
+    , mapsCreate'
+    , MapsCreate'
 
     -- * Request Lenses
     , mcQuotaUser
@@ -42,20 +43,28 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsCreate@ which the
--- 'MapsCreate' request conforms to.
-type MapsCreateAPI = "maps" :> Post '[JSON] Map
+-- 'MapsCreate'' request conforms to.
+type MapsCreateResource =
+     "maps" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Post '[JSON] Map
 
 -- | Create a map asset.
 --
--- /See:/ 'mapsCreate' smart constructor.
-data MapsCreate = MapsCreate
+-- /See:/ 'mapsCreate'' smart constructor.
+data MapsCreate' = MapsCreate'
     { _mcQuotaUser   :: !(Maybe Text)
     , _mcPrettyPrint :: !Bool
     , _mcUserIp      :: !(Maybe Text)
     , _mcKey         :: !(Maybe Text)
     , _mcOauthToken  :: !(Maybe Text)
     , _mcFields      :: !(Maybe Text)
-    , _mcAlt         :: !Text
+    , _mcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsCreate'' with the minimum fields required to make a request.
@@ -75,17 +84,17 @@ data MapsCreate = MapsCreate
 -- * 'mcFields'
 --
 -- * 'mcAlt'
-mapsCreate
-    :: MapsCreate
-mapsCreate =
-    MapsCreate
+mapsCreate'
+    :: MapsCreate'
+mapsCreate' =
+    MapsCreate'
     { _mcQuotaUser = Nothing
     , _mcPrettyPrint = True
     , _mcUserIp = Nothing
     , _mcKey = Nothing
     , _mcOauthToken = Nothing
     , _mcFields = Nothing
-    , _mcAlt = "json"
+    , _mcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,16 +131,19 @@ mcFields :: Lens' MapsCreate' (Maybe Text)
 mcFields = lens _mcFields (\ s a -> s{_mcFields = a})
 
 -- | Data format for the response.
-mcAlt :: Lens' MapsCreate' Text
+mcAlt :: Lens' MapsCreate' Alt
 mcAlt = lens _mcAlt (\ s a -> s{_mcAlt = a})
 
 instance GoogleRequest MapsCreate' where
         type Rs MapsCreate' = Map
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsCreate{..}
-          = go _mcQuotaUser _mcPrettyPrint _mcUserIp _mcKey
+        requestWithRoute r u MapsCreate'{..}
+          = go _mcQuotaUser (Just _mcPrettyPrint) _mcUserIp
+              _mcKey
               _mcOauthToken
               _mcFields
-              _mcAlt
+              (Just _mcAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy MapsCreateAPI) r u
+                  = clientWithRoute (Proxy :: Proxy MapsCreateResource)
+                      r
+                      u

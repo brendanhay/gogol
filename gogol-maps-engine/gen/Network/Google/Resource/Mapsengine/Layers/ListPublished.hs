@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all published layers readable by the current user.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersListPublished@.
-module Mapsengine.Layers.ListPublished
+module Network.Google.Resource.Mapsengine.Layers.ListPublished
     (
     -- * REST Resource
-      LayersListPublishedAPI
+      LayersListPublishedResource
 
     -- * Creating a Request
-    , layersListPublished
-    , LayersListPublished
+    , layersListPublished'
+    , LayersListPublished'
 
     -- * Request Lenses
     , llpQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersListPublished@ which the
--- 'LayersListPublished' request conforms to.
-type LayersListPublishedAPI =
+-- 'LayersListPublished'' request conforms to.
+type LayersListPublishedResource =
      "layers" :>
        "published" :>
-         QueryParam "pageToken" Text :>
-           QueryParam "projectId" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] PublishedLayersListResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "projectId" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] PublishedLayersListResponse
 
 -- | Return all published layers readable by the current user.
 --
--- /See:/ 'layersListPublished' smart constructor.
-data LayersListPublished = LayersListPublished
+-- /See:/ 'layersListPublished'' smart constructor.
+data LayersListPublished' = LayersListPublished'
     { _llpQuotaUser   :: !(Maybe Text)
     , _llpPrettyPrint :: !Bool
     , _llpUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data LayersListPublished = LayersListPublished
     , _llpOauthToken  :: !(Maybe Text)
     , _llpMaxResults  :: !(Maybe Word32)
     , _llpFields      :: !(Maybe Text)
-    , _llpAlt         :: !Text
+    , _llpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersListPublished'' with the minimum fields required to make a request.
@@ -93,10 +101,10 @@ data LayersListPublished = LayersListPublished
 -- * 'llpFields'
 --
 -- * 'llpAlt'
-layersListPublished
-    :: LayersListPublished
-layersListPublished =
-    LayersListPublished
+layersListPublished'
+    :: LayersListPublished'
+layersListPublished' =
+    LayersListPublished'
     { _llpQuotaUser = Nothing
     , _llpPrettyPrint = True
     , _llpUserIp = Nothing
@@ -106,7 +114,7 @@ layersListPublished =
     , _llpOauthToken = Nothing
     , _llpMaxResults = Nothing
     , _llpFields = Nothing
-    , _llpAlt = "json"
+    , _llpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,23 +176,24 @@ llpFields
   = lens _llpFields (\ s a -> s{_llpFields = a})
 
 -- | Data format for the response.
-llpAlt :: Lens' LayersListPublished' Text
+llpAlt :: Lens' LayersListPublished' Alt
 llpAlt = lens _llpAlt (\ s a -> s{_llpAlt = a})
 
 instance GoogleRequest LayersListPublished' where
         type Rs LayersListPublished' =
              PublishedLayersListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersListPublished{..}
-          = go _llpQuotaUser _llpPrettyPrint _llpUserIp _llpKey
+        requestWithRoute r u LayersListPublished'{..}
+          = go _llpQuotaUser (Just _llpPrettyPrint) _llpUserIp
+              _llpKey
               _llpPageToken
               _llpProjectId
               _llpOauthToken
               _llpMaxResults
               _llpFields
-              _llpAlt
+              (Just _llpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersListPublishedAPI)
+                      (Proxy :: Proxy LayersListPublishedResource)
                       r
                       u

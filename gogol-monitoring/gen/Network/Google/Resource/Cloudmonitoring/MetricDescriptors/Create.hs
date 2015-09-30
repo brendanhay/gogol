@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new metric.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringMetricDescriptorsCreate@.
-module Cloudmonitoring.MetricDescriptors.Create
+module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Create
     (
     -- * REST Resource
-      MetricDescriptorsCreateAPI
+      MetricDescriptorsCreateResource
 
     -- * Creating a Request
-    , metricDescriptorsCreate
-    , MetricDescriptorsCreate
+    , metricDescriptorsCreate'
+    , MetricDescriptorsCreate'
 
     -- * Request Lenses
     , mdcQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringMetricDescriptorsCreate@ which the
--- 'MetricDescriptorsCreate' request conforms to.
-type MetricDescriptorsCreateAPI =
+-- 'MetricDescriptorsCreate'' request conforms to.
+type MetricDescriptorsCreateResource =
      Capture "project" Text :>
-       "metricDescriptors" :> Post '[JSON] MetricDescriptor
+       "metricDescriptors" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] MetricDescriptor
 
 -- | Create a new metric.
 --
--- /See:/ 'metricDescriptorsCreate' smart constructor.
-data MetricDescriptorsCreate = MetricDescriptorsCreate
+-- /See:/ 'metricDescriptorsCreate'' smart constructor.
+data MetricDescriptorsCreate' = MetricDescriptorsCreate'
     { _mdcQuotaUser   :: !(Maybe Text)
     , _mdcPrettyPrint :: !Bool
     , _mdcProject     :: !Text
@@ -59,7 +67,7 @@ data MetricDescriptorsCreate = MetricDescriptorsCreate
     , _mdcKey         :: !(Maybe Text)
     , _mdcOauthToken  :: !(Maybe Text)
     , _mdcFields      :: !(Maybe Text)
-    , _mdcAlt         :: !Text
+    , _mdcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsCreate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data MetricDescriptorsCreate = MetricDescriptorsCreate
 -- * 'mdcFields'
 --
 -- * 'mdcAlt'
-metricDescriptorsCreate
+metricDescriptorsCreate'
     :: Text -- ^ 'project'
-    -> MetricDescriptorsCreate
-metricDescriptorsCreate pMdcProject_ =
-    MetricDescriptorsCreate
+    -> MetricDescriptorsCreate'
+metricDescriptorsCreate' pMdcProject_ =
+    MetricDescriptorsCreate'
     { _mdcQuotaUser = Nothing
     , _mdcPrettyPrint = True
     , _mdcProject = pMdcProject_
@@ -93,7 +101,7 @@ metricDescriptorsCreate pMdcProject_ =
     , _mdcKey = Nothing
     , _mdcOauthToken = Nothing
     , _mdcFields = Nothing
-    , _mdcAlt = "json"
+    , _mdcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,21 @@ mdcFields
   = lens _mdcFields (\ s a -> s{_mdcFields = a})
 
 -- | Data format for the response.
-mdcAlt :: Lens' MetricDescriptorsCreate' Text
+mdcAlt :: Lens' MetricDescriptorsCreate' Alt
 mdcAlt = lens _mdcAlt (\ s a -> s{_mdcAlt = a})
 
 instance GoogleRequest MetricDescriptorsCreate' where
         type Rs MetricDescriptorsCreate' = MetricDescriptor
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsCreate{..}
-          = go _mdcQuotaUser _mdcPrettyPrint _mdcProject
+        requestWithRoute r u MetricDescriptorsCreate'{..}
+          = go _mdcQuotaUser (Just _mdcPrettyPrint) _mdcProject
               _mdcUserIp
               _mdcKey
               _mdcOauthToken
               _mdcFields
-              _mdcAlt
+              (Just _mdcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetricDescriptorsCreateAPI)
+                      (Proxy :: Proxy MetricDescriptorsCreateResource)
                       r
                       u

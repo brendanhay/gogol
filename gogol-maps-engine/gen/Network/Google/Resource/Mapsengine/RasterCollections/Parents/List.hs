@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Return all parent ids of the specified raster collection.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineRasterCollectionsParentsList@.
-module Mapsengine.RasterCollections.Parents.List
+module Network.Google.Resource.Mapsengine.RasterCollections.Parents.List
     (
     -- * REST Resource
-      RasterCollectionsParentsListAPI
+      RasterCollectionsParentsListResource
 
     -- * Creating a Request
-    , rasterCollectionsParentsList
-    , RasterCollectionsParentsList
+    , rasterCollectionsParentsList'
+    , RasterCollectionsParentsList'
 
     -- * Request Lenses
     , rcplQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineRasterCollectionsParentsList@ which the
--- 'RasterCollectionsParentsList' request conforms to.
-type RasterCollectionsParentsListAPI =
+-- 'RasterCollectionsParentsList'' request conforms to.
+type RasterCollectionsParentsListResource =
      "rasterCollections" :>
        Capture "id" Text :>
          "parents" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Word32 :>
-               Get '[JSON] ParentsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ParentsListResponse
 
 -- | Return all parent ids of the specified raster collection.
 --
--- /See:/ 'rasterCollectionsParentsList' smart constructor.
-data RasterCollectionsParentsList = RasterCollectionsParentsList
+-- /See:/ 'rasterCollectionsParentsList'' smart constructor.
+data RasterCollectionsParentsList' = RasterCollectionsParentsList'
     { _rcplQuotaUser   :: !(Maybe Text)
     , _rcplPrettyPrint :: !Bool
     , _rcplUserIp      :: !(Maybe Text)
@@ -67,7 +75,7 @@ data RasterCollectionsParentsList = RasterCollectionsParentsList
     , _rcplOauthToken  :: !(Maybe Text)
     , _rcplMaxResults  :: !(Maybe Word32)
     , _rcplFields      :: !(Maybe Text)
-    , _rcplAlt         :: !Text
+    , _rcplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RasterCollectionsParentsList'' with the minimum fields required to make a request.
@@ -93,11 +101,11 @@ data RasterCollectionsParentsList = RasterCollectionsParentsList
 -- * 'rcplFields'
 --
 -- * 'rcplAlt'
-rasterCollectionsParentsList
+rasterCollectionsParentsList'
     :: Text -- ^ 'id'
-    -> RasterCollectionsParentsList
-rasterCollectionsParentsList pRcplId_ =
-    RasterCollectionsParentsList
+    -> RasterCollectionsParentsList'
+rasterCollectionsParentsList' pRcplId_ =
+    RasterCollectionsParentsList'
     { _rcplQuotaUser = Nothing
     , _rcplPrettyPrint = True
     , _rcplUserIp = Nothing
@@ -107,7 +115,7 @@ rasterCollectionsParentsList pRcplId_ =
     , _rcplOauthToken = Nothing
     , _rcplMaxResults = Nothing
     , _rcplFields = Nothing
-    , _rcplAlt = "json"
+    , _rcplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,7 +175,7 @@ rcplFields
   = lens _rcplFields (\ s a -> s{_rcplFields = a})
 
 -- | Data format for the response.
-rcplAlt :: Lens' RasterCollectionsParentsList' Text
+rcplAlt :: Lens' RasterCollectionsParentsList' Alt
 rcplAlt = lens _rcplAlt (\ s a -> s{_rcplAlt = a})
 
 instance GoogleRequest RasterCollectionsParentsList'
@@ -175,17 +183,19 @@ instance GoogleRequest RasterCollectionsParentsList'
         type Rs RasterCollectionsParentsList' =
              ParentsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u RasterCollectionsParentsList{..}
-          = go _rcplQuotaUser _rcplPrettyPrint _rcplUserIp
+        requestWithRoute r u
+          RasterCollectionsParentsList'{..}
+          = go _rcplQuotaUser (Just _rcplPrettyPrint)
+              _rcplUserIp
               _rcplKey
               _rcplId
               _rcplPageToken
               _rcplOauthToken
               _rcplMaxResults
               _rcplFields
-              _rcplAlt
+              (Just _rcplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RasterCollectionsParentsListAPI)
+                      (Proxy :: Proxy RasterCollectionsParentsListResource)
                       r
                       u

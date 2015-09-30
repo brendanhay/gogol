@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- flagged as spam.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference> for @YouTubeCommentsMarkAsSpam@.
-module YouTube.Comments.MarkAsSpam
+module Network.Google.Resource.YouTube.Comments.MarkAsSpam
     (
     -- * REST Resource
-      CommentsMarkAsSpamAPI
+      CommentsMarkAsSpamResource
 
     -- * Creating a Request
-    , commentsMarkAsSpam
-    , CommentsMarkAsSpam
+    , commentsMarkAsSpam'
+    , CommentsMarkAsSpam'
 
     -- * Request Lenses
     , cmasQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Prelude
 import           Network.Google.YouTube.Types
 
 -- | A resource alias for @YouTubeCommentsMarkAsSpam@ which the
--- 'CommentsMarkAsSpam' request conforms to.
-type CommentsMarkAsSpamAPI =
+-- 'CommentsMarkAsSpam'' request conforms to.
+type CommentsMarkAsSpamResource =
      "comments" :>
        "markAsSpam" :>
-         QueryParam "id" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "id" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Expresses the caller\'s opinion that one or more comments should be
 -- flagged as spam.
 --
--- /See:/ 'commentsMarkAsSpam' smart constructor.
-data CommentsMarkAsSpam = CommentsMarkAsSpam
+-- /See:/ 'commentsMarkAsSpam'' smart constructor.
+data CommentsMarkAsSpam' = CommentsMarkAsSpam'
     { _cmasQuotaUser   :: !(Maybe Text)
     , _cmasPrettyPrint :: !Bool
     , _cmasUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data CommentsMarkAsSpam = CommentsMarkAsSpam
     , _cmasId          :: !Text
     , _cmasOauthToken  :: !(Maybe Text)
     , _cmasFields      :: !(Maybe Text)
-    , _cmasAlt         :: !Text
+    , _cmasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data CommentsMarkAsSpam = CommentsMarkAsSpam
 -- * 'cmasFields'
 --
 -- * 'cmasAlt'
-commentsMarkAsSpam
+commentsMarkAsSpam'
     :: Text -- ^ 'id'
-    -> CommentsMarkAsSpam
-commentsMarkAsSpam pCmasId_ =
-    CommentsMarkAsSpam
+    -> CommentsMarkAsSpam'
+commentsMarkAsSpam' pCmasId_ =
+    CommentsMarkAsSpam'
     { _cmasQuotaUser = Nothing
     , _cmasPrettyPrint = True
     , _cmasUserIp = Nothing
@@ -96,7 +104,7 @@ commentsMarkAsSpam pCmasId_ =
     , _cmasId = pCmasId_
     , _cmasOauthToken = Nothing
     , _cmasFields = Nothing
-    , _cmasAlt = "json"
+    , _cmasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,21 +150,22 @@ cmasFields
   = lens _cmasFields (\ s a -> s{_cmasFields = a})
 
 -- | Data format for the response.
-cmasAlt :: Lens' CommentsMarkAsSpam' Text
+cmasAlt :: Lens' CommentsMarkAsSpam' Alt
 cmasAlt = lens _cmasAlt (\ s a -> s{_cmasAlt = a})
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = ()
         request = requestWithRoute defReq youTubeURL
-        requestWithRoute r u CommentsMarkAsSpam{..}
-          = go _cmasQuotaUser _cmasPrettyPrint _cmasUserIp
+        requestWithRoute r u CommentsMarkAsSpam'{..}
+          = go _cmasQuotaUser (Just _cmasPrettyPrint)
+              _cmasUserIp
               _cmasKey
               (Just _cmasId)
               _cmasOauthToken
               _cmasFields
-              _cmasAlt
+              (Just _cmasAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CommentsMarkAsSpamAPI)
+                      (Proxy :: Proxy CommentsMarkAsSpamResource)
                       r
                       u

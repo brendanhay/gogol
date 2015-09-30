@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Get information about the selected associated AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/host/ AdSense Host API Reference> for @AdsensehostAccountsGet@.
-module AdSenseHost.Accounts.Get
+module Network.Google.Resource.AdSenseHost.Accounts.Get
     (
     -- * REST Resource
-      AccountsGetAPI
+      AccountsGetResource
 
     -- * Creating a Request
-    , accountsGet
-    , AccountsGet
+    , accountsGet'
+    , AccountsGet'
 
     -- * Request Lenses
     , aggQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsensehostAccountsGet@ which the
--- 'AccountsGet' request conforms to.
-type AccountsGetAPI =
+-- 'AccountsGet'' request conforms to.
+type AccountsGetResource =
      "accounts" :>
-       Capture "accountId" Text :> Get '[JSON] Account
+       Capture "accountId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Account
 
 -- | Get information about the selected associated AdSense account.
 --
--- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+-- /See:/ 'accountsGet'' smart constructor.
+data AccountsGet' = AccountsGet'
     { _aggQuotaUser   :: !(Maybe Text)
     , _aggPrettyPrint :: !Bool
     , _aggUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data AccountsGet = AccountsGet
     , _aggKey         :: !(Maybe Text)
     , _aggOauthToken  :: !(Maybe Text)
     , _aggFields      :: !(Maybe Text)
-    , _aggAlt         :: !Text
+    , _aggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data AccountsGet = AccountsGet
 -- * 'aggFields'
 --
 -- * 'aggAlt'
-accountsGet
+accountsGet'
     :: Text -- ^ 'accountId'
-    -> AccountsGet
-accountsGet pAggAccountId_ =
-    AccountsGet
+    -> AccountsGet'
+accountsGet' pAggAccountId_ =
+    AccountsGet'
     { _aggQuotaUser = Nothing
     , _aggPrettyPrint = True
     , _aggUserIp = Nothing
@@ -93,7 +101,7 @@ accountsGet pAggAccountId_ =
     , _aggKey = Nothing
     , _aggOauthToken = Nothing
     , _aggFields = Nothing
-    , _aggAlt = "json"
+    , _aggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,18 +146,21 @@ aggFields
   = lens _aggFields (\ s a -> s{_aggFields = a})
 
 -- | Data format for the response.
-aggAlt :: Lens' AccountsGet' Text
+aggAlt :: Lens' AccountsGet' Alt
 aggAlt = lens _aggAlt (\ s a -> s{_aggAlt = a})
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adSenseHostURL
-        requestWithRoute r u AccountsGet{..}
-          = go _aggQuotaUser _aggPrettyPrint _aggUserIp
+        requestWithRoute r u AccountsGet'{..}
+          = go _aggQuotaUser (Just _aggPrettyPrint) _aggUserIp
               _aggAccountId
               _aggKey
               _aggOauthToken
               _aggFields
-              _aggAlt
+              (Just _aggAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AccountsGetAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy AccountsGetResource)
+                      r
+                      u

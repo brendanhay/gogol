@@ -27,76 +27,76 @@ module Network.Google.Mirror
     -- * REST Resources
 
     -- ** MirrorAccountsInsert
-    , module Mirror.Accounts.Insert
+    , module Network.Google.Resource.Mirror.Accounts.Insert
 
     -- ** MirrorContactsDelete
-    , module Mirror.Contacts.Delete
+    , module Network.Google.Resource.Mirror.Contacts.Delete
 
     -- ** MirrorContactsGet
-    , module Mirror.Contacts.Get
+    , module Network.Google.Resource.Mirror.Contacts.Get
 
     -- ** MirrorContactsInsert
-    , module Mirror.Contacts.Insert
+    , module Network.Google.Resource.Mirror.Contacts.Insert
 
     -- ** MirrorContactsList
-    , module Mirror.Contacts.List
+    , module Network.Google.Resource.Mirror.Contacts.List
 
     -- ** MirrorContactsPatch
-    , module Mirror.Contacts.Patch
+    , module Network.Google.Resource.Mirror.Contacts.Patch
 
     -- ** MirrorContactsUpdate
-    , module Mirror.Contacts.Update
+    , module Network.Google.Resource.Mirror.Contacts.Update
 
     -- ** MirrorLocationsGet
-    , module Mirror.Locations.Get
+    , module Network.Google.Resource.Mirror.Locations.Get
 
     -- ** MirrorLocationsList
-    , module Mirror.Locations.List
+    , module Network.Google.Resource.Mirror.Locations.List
 
     -- ** MirrorSettingsGet
-    , module Mirror.Settings.Get
+    , module Network.Google.Resource.Mirror.Settings.Get
 
     -- ** MirrorSubscriptionsDelete
-    , module Mirror.Subscriptions.Delete
+    , module Network.Google.Resource.Mirror.Subscriptions.Delete
 
     -- ** MirrorSubscriptionsInsert
-    , module Mirror.Subscriptions.Insert
+    , module Network.Google.Resource.Mirror.Subscriptions.Insert
 
     -- ** MirrorSubscriptionsList
-    , module Mirror.Subscriptions.List
+    , module Network.Google.Resource.Mirror.Subscriptions.List
 
     -- ** MirrorSubscriptionsUpdate
-    , module Mirror.Subscriptions.Update
+    , module Network.Google.Resource.Mirror.Subscriptions.Update
 
     -- ** MirrorTimelineAttachmentsDelete
-    , module Mirror.Timeline.Attachments.Delete
+    , module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
 
     -- ** MirrorTimelineAttachmentsGet
-    , module Mirror.Timeline.Attachments.Get
+    , module Network.Google.Resource.Mirror.Timeline.Attachments.Get
 
     -- ** MirrorTimelineAttachmentsInsert
-    , module Mirror.Timeline.Attachments.Insert
+    , module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
 
     -- ** MirrorTimelineAttachmentsList
-    , module Mirror.Timeline.Attachments.List
+    , module Network.Google.Resource.Mirror.Timeline.Attachments.List
 
     -- ** MirrorTimelineDelete
-    , module Mirror.Timeline.Delete
+    , module Network.Google.Resource.Mirror.Timeline.Delete
 
     -- ** MirrorTimelineGet
-    , module Mirror.Timeline.Get
+    , module Network.Google.Resource.Mirror.Timeline.Get
 
     -- ** MirrorTimelineInsert
-    , module Mirror.Timeline.Insert
+    , module Network.Google.Resource.Mirror.Timeline.Insert
 
     -- ** MirrorTimelineList
-    , module Mirror.Timeline.List
+    , module Network.Google.Resource.Mirror.Timeline.List
 
     -- ** MirrorTimelinePatch
-    , module Mirror.Timeline.Patch
+    , module Network.Google.Resource.Mirror.Timeline.Patch
 
     -- ** MirrorTimelineUpdate
-    , module Mirror.Timeline.Update
+    , module Network.Google.Resource.Mirror.Timeline.Update
 
     -- * Types
 
@@ -138,6 +138,9 @@ module Network.Google.Mirror
     , nUserActions
     , nVerifyToken
     , nUserToken
+
+    -- ** MirrorTimelineListOrderBy
+    , MirrorTimelineListOrderBy (..)
 
     -- ** Contact
     , Contact
@@ -280,6 +283,9 @@ module Network.Google.Mirror
     , subscriptionsListResponse
     , slrKind
     , slrItems
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.Mirror.Types
@@ -314,10 +320,29 @@ TODO
 -}
 
 type MirrorAPI =
-     Accounts :<|> Settings :<|> Subscriptions :<|>
-       Timeline
-       :<|> Contacts
-       :<|> Locations
+     AccountsInsertResource :<|> SettingsGetResource :<|>
+       SubscriptionsInsertResource
+       :<|> SubscriptionsListResource
+       :<|> SubscriptionsDeleteResource
+       :<|> SubscriptionsUpdateResource
+       :<|> TimelineAttachmentsInsertResource
+       :<|> TimelineAttachmentsListResource
+       :<|> TimelineAttachmentsGetResource
+       :<|> TimelineAttachmentsDeleteResource
+       :<|> TimelineInsertResource
+       :<|> TimelineListResource
+       :<|> TimelinePatchResource
+       :<|> TimelineGetResource
+       :<|> TimelineDeleteResource
+       :<|> TimelineUpdateResource
+       :<|> ContactsInsertResource
+       :<|> ContactsListResource
+       :<|> ContactsPatchResource
+       :<|> ContactsGetResource
+       :<|> ContactsDeleteResource
+       :<|> ContactsUpdateResource
+       :<|> LocationsListResource
+       :<|> LocationsGetResource
 
 mirrorAPI :: Proxy MirrorAPI
 mirrorAPI = Proxy

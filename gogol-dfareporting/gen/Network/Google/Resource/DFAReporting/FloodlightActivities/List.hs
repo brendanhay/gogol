@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of floodlight activities, possibly filtered.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivitiesList@.
-module DFAReporting.FloodlightActivities.List
+module Network.Google.Resource.DFAReporting.FloodlightActivities.List
     (
     -- * REST Resource
-      FloodlightActivitiesListAPI
+      FloodlightActivitiesListResource
 
     -- * Creating a Request
-    , floodlightActivitiesList
-    , FloodlightActivitiesList
+    , floodlightActivitiesList'
+    , FloodlightActivitiesList'
 
     -- * Request Lenses
     , falQuotaUser
@@ -56,31 +57,46 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivitiesList@ which the
--- 'FloodlightActivitiesList' request conforms to.
-type FloodlightActivitiesListAPI =
+-- 'FloodlightActivitiesList'' request conforms to.
+type FloodlightActivitiesListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivities" :>
-           QueryParam "tagString" Text :>
-             QueryParam "floodlightActivityGroupTagString" Text :>
-               QueryParam "floodlightConfigurationId" Int64 :>
-                 QueryParam "advertiserId" Int64 :>
-                   QueryParam "searchString" Text :>
-                     QueryParams "ids" Int64 :>
-                       QueryParams "floodlightActivityGroupIds" Int64 :>
-                         QueryParam "sortOrder" Text :>
-                           QueryParam "floodlightActivityGroupType" Text :>
-                             QueryParam "floodlightActivityGroupName" Text :>
-                               QueryParam "pageToken" Text :>
-                                 QueryParam "sortField" Text :>
-                                   QueryParam "maxResults" Int32 :>
-                                     Get '[JSON]
-                                       FloodlightActivitiesListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "tagString" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "floodlightActivityGroupTagString" Text :>
+                   QueryParam "floodlightConfigurationId" Int64 :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "advertiserId" Int64 :>
+                         QueryParam "searchString" Text :>
+                           QueryParams "ids" Int64 :>
+                             QueryParams "floodlightActivityGroupIds" Int64 :>
+                               QueryParam "sortOrder"
+                                 DfareportingFloodlightActivitiesListSortOrder
+                                 :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "floodlightActivityGroupType"
+                                     DfareportingFloodlightActivitiesListFloodlightActivityGroupType
+                                     :>
+                                     QueryParam "floodlightActivityGroupName"
+                                       Text
+                                       :>
+                                       QueryParam "pageToken" Text :>
+                                         QueryParam "sortField"
+                                           DfareportingFloodlightActivitiesListSortField
+                                           :>
+                                           QueryParam "oauth_token" Text :>
+                                             QueryParam "maxResults" Int32 :>
+                                               QueryParam "fields" Text :>
+                                                 QueryParam "alt" Alt :>
+                                                   Get '[JSON]
+                                                     FloodlightActivitiesListResponse
 
 -- | Retrieves a list of floodlight activities, possibly filtered.
 --
--- /See:/ 'floodlightActivitiesList' smart constructor.
-data FloodlightActivitiesList = FloodlightActivitiesList
+-- /See:/ 'floodlightActivitiesList'' smart constructor.
+data FloodlightActivitiesList' = FloodlightActivitiesList'
     { _falQuotaUser                        :: !(Maybe Text)
     , _falTagString                        :: !(Maybe Text)
     , _falPrettyPrint                      :: !Bool
@@ -92,16 +108,16 @@ data FloodlightActivitiesList = FloodlightActivitiesList
     , _falIds                              :: !(Maybe Int64)
     , _falProfileId                        :: !Int64
     , _falFloodlightActivityGroupIds       :: !(Maybe Int64)
-    , _falSortOrder                        :: !(Maybe Text)
+    , _falSortOrder                        :: !(Maybe DfareportingFloodlightActivitiesListSortOrder)
     , _falKey                              :: !(Maybe Text)
-    , _falFloodlightActivityGroupType      :: !(Maybe Text)
+    , _falFloodlightActivityGroupType      :: !(Maybe DfareportingFloodlightActivitiesListFloodlightActivityGroupType)
     , _falFloodlightActivityGroupName      :: !(Maybe Text)
     , _falPageToken                        :: !(Maybe Text)
-    , _falSortField                        :: !(Maybe Text)
+    , _falSortField                        :: !(Maybe DfareportingFloodlightActivitiesListSortField)
     , _falOauthToken                       :: !(Maybe Text)
     , _falMaxResults                       :: !(Maybe Int32)
     , _falFields                           :: !(Maybe Text)
-    , _falAlt                              :: !Text
+    , _falAlt                              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesList'' with the minimum fields required to make a request.
@@ -149,11 +165,11 @@ data FloodlightActivitiesList = FloodlightActivitiesList
 -- * 'falFields'
 --
 -- * 'falAlt'
-floodlightActivitiesList
+floodlightActivitiesList'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivitiesList
-floodlightActivitiesList pFalProfileId_ =
-    FloodlightActivitiesList
+    -> FloodlightActivitiesList'
+floodlightActivitiesList' pFalProfileId_ =
+    FloodlightActivitiesList'
     { _falQuotaUser = Nothing
     , _falTagString = Nothing
     , _falPrettyPrint = True
@@ -174,7 +190,7 @@ floodlightActivitiesList pFalProfileId_ =
     , _falOauthToken = Nothing
     , _falMaxResults = Nothing
     , _falFields = Nothing
-    , _falAlt = "json"
+    , _falAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -257,7 +273,7 @@ falFloodlightActivityGroupIds
       (\ s a -> s{_falFloodlightActivityGroupIds = a})
 
 -- | Order of sorted results, default is ASCENDING.
-falSortOrder :: Lens' FloodlightActivitiesList' (Maybe Text)
+falSortOrder :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListSortOrder)
 falSortOrder
   = lens _falSortOrder (\ s a -> s{_falSortOrder = a})
 
@@ -269,7 +285,7 @@ falKey = lens _falKey (\ s a -> s{_falKey = a})
 
 -- | Select only floodlight activities with the specified floodlight activity
 -- group type.
-falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe Text)
+falFloodlightActivityGroupType :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListFloodlightActivityGroupType)
 falFloodlightActivityGroupType
   = lens _falFloodlightActivityGroupType
       (\ s a -> s{_falFloodlightActivityGroupType = a})
@@ -287,7 +303,7 @@ falPageToken
   = lens _falPageToken (\ s a -> s{_falPageToken = a})
 
 -- | Field by which to sort the list.
-falSortField :: Lens' FloodlightActivitiesList' (Maybe Text)
+falSortField :: Lens' FloodlightActivitiesList' (Maybe DfareportingFloodlightActivitiesListSortField)
 falSortField
   = lens _falSortField (\ s a -> s{_falSortField = a})
 
@@ -309,7 +325,7 @@ falFields
   = lens _falFields (\ s a -> s{_falFields = a})
 
 -- | Data format for the response.
-falAlt :: Lens' FloodlightActivitiesList' Text
+falAlt :: Lens' FloodlightActivitiesList' Alt
 falAlt = lens _falAlt (\ s a -> s{_falAlt = a})
 
 instance GoogleRequest FloodlightActivitiesList'
@@ -317,8 +333,9 @@ instance GoogleRequest FloodlightActivitiesList'
         type Rs FloodlightActivitiesList' =
              FloodlightActivitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u FloodlightActivitiesList{..}
-          = go _falQuotaUser _falTagString _falPrettyPrint
+        requestWithRoute r u FloodlightActivitiesList'{..}
+          = go _falQuotaUser _falTagString
+              (Just _falPrettyPrint)
               _falFloodlightActivityGroupTagString
               _falFloodlightConfigurationId
               _falUserIp
@@ -336,9 +353,9 @@ instance GoogleRequest FloodlightActivitiesList'
               _falOauthToken
               _falMaxResults
               _falFields
-              _falAlt
+              (Just _falAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivitiesListAPI)
+                      (Proxy :: Proxy FloodlightActivitiesListResource)
                       r
                       u

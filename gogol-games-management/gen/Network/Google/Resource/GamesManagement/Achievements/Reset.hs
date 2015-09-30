@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsReset@.
-module GamesManagement.Achievements.Reset
+module Network.Google.Resource.GamesManagement.Achievements.Reset
     (
     -- * REST Resource
-      AchievementsResetAPI
+      AchievementsResetResource
 
     -- * Creating a Request
-    , achievementsReset
-    , AchievementsReset
+    , achievementsReset'
+    , AchievementsReset'
 
     -- * Request Lenses
     , arQuotaUser
@@ -45,18 +46,26 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementAchievementsReset@ which the
--- 'AchievementsReset' request conforms to.
-type AchievementsResetAPI =
+-- 'AchievementsReset'' request conforms to.
+type AchievementsResetResource =
      "achievements" :>
        Capture "achievementId" Text :>
-         "reset" :> Post '[JSON] AchievementResetResponse
+         "reset" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Post '[JSON] AchievementResetResponse
 
 -- | Resets the achievement with the given ID for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
 -- for your application.
 --
--- /See:/ 'achievementsReset' smart constructor.
-data AchievementsReset = AchievementsReset
+-- /See:/ 'achievementsReset'' smart constructor.
+data AchievementsReset' = AchievementsReset'
     { _arQuotaUser     :: !(Maybe Text)
     , _arPrettyPrint   :: !Bool
     , _arAchievementId :: !Text
@@ -64,7 +73,7 @@ data AchievementsReset = AchievementsReset
     , _arKey           :: !(Maybe Text)
     , _arOauthToken    :: !(Maybe Text)
     , _arFields        :: !(Maybe Text)
-    , _arAlt           :: !Text
+    , _arAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsReset'' with the minimum fields required to make a request.
@@ -86,11 +95,11 @@ data AchievementsReset = AchievementsReset
 -- * 'arFields'
 --
 -- * 'arAlt'
-achievementsReset
+achievementsReset'
     :: Text -- ^ 'achievementId'
-    -> AchievementsReset
-achievementsReset pArAchievementId_ =
-    AchievementsReset
+    -> AchievementsReset'
+achievementsReset' pArAchievementId_ =
+    AchievementsReset'
     { _arQuotaUser = Nothing
     , _arPrettyPrint = True
     , _arAchievementId = pArAchievementId_
@@ -98,7 +107,7 @@ achievementsReset pArAchievementId_ =
     , _arKey = Nothing
     , _arOauthToken = Nothing
     , _arFields = Nothing
-    , _arAlt = "json"
+    , _arAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,21 +150,22 @@ arFields :: Lens' AchievementsReset' (Maybe Text)
 arFields = lens _arFields (\ s a -> s{_arFields = a})
 
 -- | Data format for the response.
-arAlt :: Lens' AchievementsReset' Text
+arAlt :: Lens' AchievementsReset' Alt
 arAlt = lens _arAlt (\ s a -> s{_arAlt = a})
 
 instance GoogleRequest AchievementsReset' where
         type Rs AchievementsReset' = AchievementResetResponse
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u AchievementsReset{..}
-          = go _arQuotaUser _arPrettyPrint _arAchievementId
+        requestWithRoute r u AchievementsReset'{..}
+          = go _arQuotaUser (Just _arPrettyPrint)
+              _arAchievementId
               _arUserIp
               _arKey
               _arOauthToken
               _arFields
-              _arAlt
+              (Just _arAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AchievementsResetAPI)
+                      (Proxy :: Proxy AchievementsResetResource)
                       r
                       u

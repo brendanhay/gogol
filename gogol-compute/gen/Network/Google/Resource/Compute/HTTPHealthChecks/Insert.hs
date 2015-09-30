@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksInsert@.
-module Compute.HTTPHealthChecks.Insert
+module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
     (
     -- * REST Resource
-      HttpHealthChecksInsertAPI
+      HttpHealthChecksInsertResource
 
     -- * Creating a Request
-    , hTTPHealthChecksInsert
-    , HTTPHealthChecksInsert
+    , hTTPHealthChecksInsert'
+    , HTTPHealthChecksInsert'
 
     -- * Request Lenses
     , httphciQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksInsert@ which the
--- 'HTTPHealthChecksInsert' request conforms to.
-type HttpHealthChecksInsertAPI =
+-- 'HTTPHealthChecksInsert'' request conforms to.
+type HttpHealthChecksInsertResource =
      Capture "project" Text :>
        "global" :>
-         "httpHealthChecks" :> Post '[JSON] Operation
+         "httpHealthChecks" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'hTTPHealthChecksInsert' smart constructor.
-data HTTPHealthChecksInsert = HTTPHealthChecksInsert
+-- /See:/ 'hTTPHealthChecksInsert'' smart constructor.
+data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
     { _httphciQuotaUser   :: !(Maybe Text)
     , _httphciPrettyPrint :: !Bool
     , _httphciProject     :: !Text
@@ -62,7 +70,7 @@ data HTTPHealthChecksInsert = HTTPHealthChecksInsert
     , _httphciKey         :: !(Maybe Text)
     , _httphciOauthToken  :: !(Maybe Text)
     , _httphciFields      :: !(Maybe Text)
-    , _httphciAlt         :: !Text
+    , _httphciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksInsert'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data HTTPHealthChecksInsert = HTTPHealthChecksInsert
 -- * 'httphciFields'
 --
 -- * 'httphciAlt'
-hTTPHealthChecksInsert
+hTTPHealthChecksInsert'
     :: Text -- ^ 'project'
-    -> HTTPHealthChecksInsert
-hTTPHealthChecksInsert pHttphciProject_ =
-    HTTPHealthChecksInsert
+    -> HTTPHealthChecksInsert'
+hTTPHealthChecksInsert' pHttphciProject_ =
+    HTTPHealthChecksInsert'
     { _httphciQuotaUser = Nothing
     , _httphciPrettyPrint = True
     , _httphciProject = pHttphciProject_
@@ -96,7 +104,7 @@ hTTPHealthChecksInsert pHttphciProject_ =
     , _httphciKey = Nothing
     , _httphciOauthToken = Nothing
     , _httphciFields = Nothing
-    , _httphciAlt = "json"
+    , _httphciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,23 +154,23 @@ httphciFields
       (\ s a -> s{_httphciFields = a})
 
 -- | Data format for the response.
-httphciAlt :: Lens' HTTPHealthChecksInsert' Text
+httphciAlt :: Lens' HTTPHealthChecksInsert' Alt
 httphciAlt
   = lens _httphciAlt (\ s a -> s{_httphciAlt = a})
 
 instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksInsert{..}
-          = go _httphciQuotaUser _httphciPrettyPrint
+        requestWithRoute r u HTTPHealthChecksInsert'{..}
+          = go _httphciQuotaUser (Just _httphciPrettyPrint)
               _httphciProject
               _httphciUserIp
               _httphciKey
               _httphciOauthToken
               _httphciFields
-              _httphciAlt
+              (Just _httphciAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksInsertAPI)
+                      (Proxy :: Proxy HttpHealthChecksInsertResource)
                       r
                       u

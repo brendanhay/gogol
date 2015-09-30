@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,165 +20,176 @@
 -- | Updates a permission using patch semantics.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @DrivePermissionsPatch@.
-module Drive.Permissions.Patch
+module Network.Google.Resource.Drive.Permissions.Patch
     (
     -- * REST Resource
-      PermissionsPatchAPI
+      PermissionsPatchResource
 
     -- * Creating a Request
-    , permissionsPatch
-    , PermissionsPatch
+    , permissionsPatch'
+    , PermissionsPatch'
 
     -- * Request Lenses
-    , ppQuotaUser
-    , ppPrettyPrint
-    , ppUserIp
-    , ppKey
-    , ppTransferOwnership
-    , ppFileId
-    , ppOauthToken
-    , ppPermissionId
-    , ppFields
-    , ppAlt
+    , pppQuotaUser
+    , pppPrettyPrint
+    , pppUserIp
+    , pppKey
+    , pppTransferOwnership
+    , pppFileId
+    , pppOauthToken
+    , pppPermissionId
+    , pppFields
+    , pppAlt
     ) where
 
 import           Network.Google.Drive.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DrivePermissionsPatch@ which the
--- 'PermissionsPatch' request conforms to.
-type PermissionsPatchAPI =
+-- 'PermissionsPatch'' request conforms to.
+type PermissionsPatchResource =
      "files" :>
        Capture "fileId" Text :>
          "permissions" :>
            Capture "permissionId" Text :>
-             QueryParam "transferOwnership" Bool :>
-               Patch '[JSON] Permission
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "transferOwnership" Bool :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Patch '[JSON] Permission
 
 -- | Updates a permission using patch semantics.
 --
--- /See:/ 'permissionsPatch' smart constructor.
-data PermissionsPatch = PermissionsPatch
-    { _ppQuotaUser         :: !(Maybe Text)
-    , _ppPrettyPrint       :: !Bool
-    , _ppUserIp            :: !(Maybe Text)
-    , _ppKey               :: !(Maybe Text)
-    , _ppTransferOwnership :: !Bool
-    , _ppFileId            :: !Text
-    , _ppOauthToken        :: !(Maybe Text)
-    , _ppPermissionId      :: !Text
-    , _ppFields            :: !(Maybe Text)
-    , _ppAlt               :: !Text
+-- /See:/ 'permissionsPatch'' smart constructor.
+data PermissionsPatch' = PermissionsPatch'
+    { _pppQuotaUser         :: !(Maybe Text)
+    , _pppPrettyPrint       :: !Bool
+    , _pppUserIp            :: !(Maybe Text)
+    , _pppKey               :: !(Maybe Text)
+    , _pppTransferOwnership :: !Bool
+    , _pppFileId            :: !Text
+    , _pppOauthToken        :: !(Maybe Text)
+    , _pppPermissionId      :: !Text
+    , _pppFields            :: !(Maybe Text)
+    , _pppAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppQuotaUser'
+-- * 'pppQuotaUser'
 --
--- * 'ppPrettyPrint'
+-- * 'pppPrettyPrint'
 --
--- * 'ppUserIp'
+-- * 'pppUserIp'
 --
--- * 'ppKey'
+-- * 'pppKey'
 --
--- * 'ppTransferOwnership'
+-- * 'pppTransferOwnership'
 --
--- * 'ppFileId'
+-- * 'pppFileId'
 --
--- * 'ppOauthToken'
+-- * 'pppOauthToken'
 --
--- * 'ppPermissionId'
+-- * 'pppPermissionId'
 --
--- * 'ppFields'
+-- * 'pppFields'
 --
--- * 'ppAlt'
-permissionsPatch
+-- * 'pppAlt'
+permissionsPatch'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
-    -> PermissionsPatch
-permissionsPatch pPpFileId_ pPpPermissionId_ =
-    PermissionsPatch
-    { _ppQuotaUser = Nothing
-    , _ppPrettyPrint = True
-    , _ppUserIp = Nothing
-    , _ppKey = Nothing
-    , _ppTransferOwnership = False
-    , _ppFileId = pPpFileId_
-    , _ppOauthToken = Nothing
-    , _ppPermissionId = pPpPermissionId_
-    , _ppFields = Nothing
-    , _ppAlt = "json"
+    -> PermissionsPatch'
+permissionsPatch' pPppFileId_ pPppPermissionId_ =
+    PermissionsPatch'
+    { _pppQuotaUser = Nothing
+    , _pppPrettyPrint = True
+    , _pppUserIp = Nothing
+    , _pppKey = Nothing
+    , _pppTransferOwnership = False
+    , _pppFileId = pPppFileId_
+    , _pppOauthToken = Nothing
+    , _pppPermissionId = pPppPermissionId_
+    , _pppFields = Nothing
+    , _pppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ppQuotaUser :: Lens' PermissionsPatch' (Maybe Text)
-ppQuotaUser
-  = lens _ppQuotaUser (\ s a -> s{_ppQuotaUser = a})
+pppQuotaUser :: Lens' PermissionsPatch' (Maybe Text)
+pppQuotaUser
+  = lens _pppQuotaUser (\ s a -> s{_pppQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ppPrettyPrint :: Lens' PermissionsPatch' Bool
-ppPrettyPrint
-  = lens _ppPrettyPrint
-      (\ s a -> s{_ppPrettyPrint = a})
+pppPrettyPrint :: Lens' PermissionsPatch' Bool
+pppPrettyPrint
+  = lens _pppPrettyPrint
+      (\ s a -> s{_pppPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ppUserIp :: Lens' PermissionsPatch' (Maybe Text)
-ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
+pppUserIp :: Lens' PermissionsPatch' (Maybe Text)
+pppUserIp
+  = lens _pppUserIp (\ s a -> s{_pppUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PermissionsPatch' (Maybe Text)
-ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
+pppKey :: Lens' PermissionsPatch' (Maybe Text)
+pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to
 -- writers. Does nothing if the specified role is not \'owner\'.
-ppTransferOwnership :: Lens' PermissionsPatch' Bool
-ppTransferOwnership
-  = lens _ppTransferOwnership
-      (\ s a -> s{_ppTransferOwnership = a})
+pppTransferOwnership :: Lens' PermissionsPatch' Bool
+pppTransferOwnership
+  = lens _pppTransferOwnership
+      (\ s a -> s{_pppTransferOwnership = a})
 
 -- | The ID for the file.
-ppFileId :: Lens' PermissionsPatch' Text
-ppFileId = lens _ppFileId (\ s a -> s{_ppFileId = a})
+pppFileId :: Lens' PermissionsPatch' Text
+pppFileId
+  = lens _pppFileId (\ s a -> s{_pppFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-ppOauthToken :: Lens' PermissionsPatch' (Maybe Text)
-ppOauthToken
-  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
+pppOauthToken :: Lens' PermissionsPatch' (Maybe Text)
+pppOauthToken
+  = lens _pppOauthToken
+      (\ s a -> s{_pppOauthToken = a})
 
 -- | The ID for the permission.
-ppPermissionId :: Lens' PermissionsPatch' Text
-ppPermissionId
-  = lens _ppPermissionId
-      (\ s a -> s{_ppPermissionId = a})
+pppPermissionId :: Lens' PermissionsPatch' Text
+pppPermissionId
+  = lens _pppPermissionId
+      (\ s a -> s{_pppPermissionId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ppFields :: Lens' PermissionsPatch' (Maybe Text)
-ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
+pppFields :: Lens' PermissionsPatch' (Maybe Text)
+pppFields
+  = lens _pppFields (\ s a -> s{_pppFields = a})
 
 -- | Data format for the response.
-ppAlt :: Lens' PermissionsPatch' Text
-ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
+pppAlt :: Lens' PermissionsPatch' Alt
+pppAlt = lens _pppAlt (\ s a -> s{_pppAlt = a})
 
 instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission
         request = requestWithRoute defReq driveURL
-        requestWithRoute r u PermissionsPatch{..}
-          = go _ppQuotaUser _ppPrettyPrint _ppUserIp _ppKey
-              (Just _ppTransferOwnership)
-              _ppFileId
-              _ppOauthToken
-              _ppPermissionId
-              _ppFields
-              _ppAlt
+        requestWithRoute r u PermissionsPatch'{..}
+          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIp
+              _pppKey
+              (Just _pppTransferOwnership)
+              _pppFileId
+              _pppOauthToken
+              _pppPermissionId
+              _pppFields
+              (Just _pppAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PermissionsPatchAPI)
+                      (Proxy :: Proxy PermissionsPatchResource)
                       r
                       u

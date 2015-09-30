@@ -27,43 +27,43 @@ module Network.Google.WebmasterTools
     -- * REST Resources
 
     -- ** WebmastersSearchanalyticsQuery
-    , module Webmasters.Searchanalytics.Query
+    , module Network.Google.Resource.Webmasters.Searchanalytics.Query
 
     -- ** WebmastersSitemapsDelete
-    , module Webmasters.Sitemaps.Delete
+    , module Network.Google.Resource.Webmasters.Sitemaps.Delete
 
     -- ** WebmastersSitemapsGet
-    , module Webmasters.Sitemaps.Get
+    , module Network.Google.Resource.Webmasters.Sitemaps.Get
 
     -- ** WebmastersSitemapsList
-    , module Webmasters.Sitemaps.List
+    , module Network.Google.Resource.Webmasters.Sitemaps.List
 
     -- ** WebmastersSitemapsSubmit
-    , module Webmasters.Sitemaps.Submit
+    , module Network.Google.Resource.Webmasters.Sitemaps.Submit
 
     -- ** WebmastersSitesAdd
-    , module Webmasters.Sites.Add
+    , module Network.Google.Resource.Webmasters.Sites.Add
 
     -- ** WebmastersSitesDelete
-    , module Webmasters.Sites.Delete
+    , module Network.Google.Resource.Webmasters.Sites.Delete
 
     -- ** WebmastersSitesGet
-    , module Webmasters.Sites.Get
+    , module Network.Google.Resource.Webmasters.Sites.Get
 
     -- ** WebmastersSitesList
-    , module Webmasters.Sites.List
+    , module Network.Google.Resource.Webmasters.Sites.List
 
     -- ** WebmastersURLcrawlerrorscountsQuery
-    , module Webmasters.URLcrawlerrorscounts.Query
+    , module Network.Google.Resource.Webmasters.URLcrawlerrorscounts.Query
 
     -- ** WebmastersURLcrawlerrorssamplesGet
-    , module Webmasters.URLcrawlerrorssamples.Get
+    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.Get
 
     -- ** WebmastersURLcrawlerrorssamplesList
-    , module Webmasters.URLcrawlerrorssamples.List
+    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.List
 
     -- ** WebmastersURLcrawlerrorssamplesMarkAsFixed
-    , module Webmasters.URLcrawlerrorssamples.MarkAsFixed
+    , module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.MarkAsFixed
 
     -- * Types
 
@@ -115,11 +115,23 @@ module Network.Google.WebmasterTools
     , ucecCount
     , ucecTimestamp
 
+    -- ** WebmastersURLcrawlerrorscountsQueryCategory
+    , WebmastersURLcrawlerrorscountsQueryCategory (..)
+
     -- ** SearchAnalyticsQueryResponse
     , SearchAnalyticsQueryResponse
     , searchAnalyticsQueryResponse
     , saqrRows
     , saqrResponseAggregationType
+
+    -- ** WebmastersURLcrawlerrorssamplesListPlatform
+    , WebmastersURLcrawlerrorssamplesListPlatform (..)
+
+    -- ** WebmastersURLcrawlerrorssamplesGetCategory
+    , WebmastersURLcrawlerrorssamplesGetCategory (..)
+
+    -- ** WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
+    , WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform (..)
 
     -- ** URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
@@ -158,6 +170,12 @@ module Network.Google.WebmasterTools
     , wsType
     , wsErrors
 
+    -- ** WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
+    , WebmastersURLcrawlerrorssamplesMarkAsFixedCategory (..)
+
+    -- ** WebmastersURLcrawlerrorssamplesGetPlatform
+    , WebmastersURLcrawlerrorssamplesGetPlatform (..)
+
     -- ** SearchAnalyticsQueryRequest
     , SearchAnalyticsQueryRequest
     , searchAnalyticsQueryRequest
@@ -169,6 +187,9 @@ module Network.Google.WebmasterTools
     , saqrStartDate
     , saqrDimensions
 
+    -- ** WebmastersURLcrawlerrorssamplesListCategory
+    , WebmastersURLcrawlerrorssamplesListCategory (..)
+
     -- ** SitesListResponse
     , SitesListResponse
     , sitesListResponse
@@ -179,6 +200,12 @@ module Network.Google.WebmasterTools
     , wmxSite
     , wsPermissionLevel
     , wsSiteUrl
+
+    -- ** Alt
+    , Alt (..)
+
+    -- ** WebmastersURLcrawlerrorscountsQueryPlatform
+    , WebmastersURLcrawlerrorscountsQueryPlatform (..)
     ) where
 
 import           Network.Google.Prelude
@@ -202,10 +229,19 @@ TODO
 -}
 
 type WebmasterToolsAPI =
-     URLcrawlerrorssamples :<|> Sitemaps :<|>
-       Searchanalytics
-       :<|> Sites
-       :<|> URLcrawlerrorscounts
+     UrlcrawlerrorssamplesListResource :<|>
+       UrlcrawlerrorssamplesGetResource
+       :<|> UrlcrawlerrorssamplesMarkAsFixedResource
+       :<|> SitemapsListResource
+       :<|> SitemapsGetResource
+       :<|> SitemapsSubmitResource
+       :<|> SitemapsDeleteResource
+       :<|> SearchanalyticsQueryResource
+       :<|> SitesListResource
+       :<|> SitesGetResource
+       :<|> SitesAddResource
+       :<|> SitesDeleteResource
+       :<|> UrlcrawlerrorscountsQueryResource
 
 webmasterToolsAPI :: Proxy WebmasterToolsAPI
 webmasterToolsAPI = Proxy

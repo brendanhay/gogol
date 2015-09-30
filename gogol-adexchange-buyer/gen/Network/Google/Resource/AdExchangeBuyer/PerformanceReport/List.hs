@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the authenticated user\'s list of performance metrics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerPerformanceReportList@.
-module AdExchangeBuyer.PerformanceReport.List
+module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
     (
     -- * REST Resource
-      PerformanceReportListAPI
+      PerformanceReportListResource
 
     -- * Creating a Request
-    , performanceReportList
-    , PerformanceReportList
+    , performanceReportList'
+    , PerformanceReportList'
 
     -- * Request Lenses
     , prlQuotaUser
@@ -47,20 +48,27 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerPerformanceReportList@ which the
--- 'PerformanceReportList' request conforms to.
-type PerformanceReportListAPI =
+-- 'PerformanceReportList'' request conforms to.
+type PerformanceReportListResource =
      "performancereport" :>
-       QueryParam "accountId" Int64 :>
-         QueryParam "pageToken" Text :>
-           QueryParam "endDateTime" Text :>
-             QueryParam "maxResults" Word32 :>
-               QueryParam "startDateTime" Text :>
-                 Get '[JSON] PerformanceReportList
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "accountId" Int64 :>
+               QueryParam "key" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "endDateTime" Text :>
+                       QueryParam "maxResults" Word32 :>
+                         QueryParam "startDateTime" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] PerformanceReportList
 
 -- | Retrieves the authenticated user\'s list of performance metrics.
 --
--- /See:/ 'performanceReportList' smart constructor.
-data PerformanceReportList = PerformanceReportList
+-- /See:/ 'performanceReportList'' smart constructor.
+data PerformanceReportList' = PerformanceReportList'
     { _prlQuotaUser     :: !(Maybe Text)
     , _prlPrettyPrint   :: !Bool
     , _prlUserIp        :: !(Maybe Text)
@@ -72,7 +80,7 @@ data PerformanceReportList = PerformanceReportList
     , _prlMaxResults    :: !(Maybe Word32)
     , _prlStartDateTime :: !Text
     , _prlFields        :: !(Maybe Text)
-    , _prlAlt           :: !Text
+    , _prlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
@@ -102,13 +110,13 @@ data PerformanceReportList = PerformanceReportList
 -- * 'prlFields'
 --
 -- * 'prlAlt'
-performanceReportList
+performanceReportList'
     :: Int64 -- ^ 'accountId'
     -> Text -- ^ 'endDateTime'
     -> Text -- ^ 'startDateTime'
-    -> PerformanceReportList
-performanceReportList pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
-    PerformanceReportList
+    -> PerformanceReportList'
+performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
+    PerformanceReportList'
     { _prlQuotaUser = Nothing
     , _prlPrettyPrint = True
     , _prlUserIp = Nothing
@@ -120,7 +128,7 @@ performanceReportList pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     , _prlMaxResults = Nothing
     , _prlStartDateTime = pPrlStartDateTime_
     , _prlFields = Nothing
-    , _prlAlt = "json"
+    , _prlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -191,15 +199,15 @@ prlFields
   = lens _prlFields (\ s a -> s{_prlFields = a})
 
 -- | Data format for the response.
-prlAlt :: Lens' PerformanceReportList' Text
+prlAlt :: Lens' PerformanceReportList' Alt
 prlAlt = lens _prlAlt (\ s a -> s{_prlAlt = a})
 
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =
              PerformanceReportList
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u PerformanceReportList{..}
-          = go _prlQuotaUser _prlPrettyPrint _prlUserIp
+        requestWithRoute r u PerformanceReportList'{..}
+          = go _prlQuotaUser (Just _prlPrettyPrint) _prlUserIp
               (Just _prlAccountId)
               _prlKey
               _prlPageToken
@@ -208,9 +216,9 @@ instance GoogleRequest PerformanceReportList' where
               _prlMaxResults
               (Just _prlStartDateTime)
               _prlFields
-              _prlAlt
+              (Just _prlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PerformanceReportListAPI)
+                      (Proxy :: Proxy PerformanceReportListResource)
                       r
                       u

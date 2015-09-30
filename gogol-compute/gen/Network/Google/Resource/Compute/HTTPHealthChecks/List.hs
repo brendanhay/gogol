@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- specified project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeHTTPHealthChecksList@.
-module Compute.HTTPHealthChecks.List
+module Network.Google.Resource.Compute.HTTPHealthChecks.List
     (
     -- * REST Resource
-      HttpHealthChecksListAPI
+      HttpHealthChecksListResource
 
     -- * Creating a Request
-    , hTTPHealthChecksList
-    , HTTPHealthChecksList
+    , hTTPHealthChecksList'
+    , HTTPHealthChecksList'
 
     -- * Request Lenses
     , httphclQuotaUser
@@ -47,21 +48,28 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeHTTPHealthChecksList@ which the
--- 'HTTPHealthChecksList' request conforms to.
-type HttpHealthChecksListAPI =
+-- 'HTTPHealthChecksList'' request conforms to.
+type HttpHealthChecksListResource =
      Capture "project" Text :>
        "global" :>
          "httpHealthChecks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] HTTPHealthCheckList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] HTTPHealthCheckList
 
 -- | Retrieves the list of HttpHealthCheck resources available to the
 -- specified project.
 --
--- /See:/ 'hTTPHealthChecksList' smart constructor.
-data HTTPHealthChecksList = HTTPHealthChecksList
+-- /See:/ 'hTTPHealthChecksList'' smart constructor.
+data HTTPHealthChecksList' = HTTPHealthChecksList'
     { _httphclQuotaUser   :: !(Maybe Text)
     , _httphclPrettyPrint :: !Bool
     , _httphclProject     :: !Text
@@ -72,7 +80,7 @@ data HTTPHealthChecksList = HTTPHealthChecksList
     , _httphclOauthToken  :: !(Maybe Text)
     , _httphclMaxResults  :: !Word32
     , _httphclFields      :: !(Maybe Text)
-    , _httphclAlt         :: !Text
+    , _httphclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksList'' with the minimum fields required to make a request.
@@ -100,11 +108,11 @@ data HTTPHealthChecksList = HTTPHealthChecksList
 -- * 'httphclFields'
 --
 -- * 'httphclAlt'
-hTTPHealthChecksList
+hTTPHealthChecksList'
     :: Text -- ^ 'project'
-    -> HTTPHealthChecksList
-hTTPHealthChecksList pHttphclProject_ =
-    HTTPHealthChecksList
+    -> HTTPHealthChecksList'
+hTTPHealthChecksList' pHttphclProject_ =
+    HTTPHealthChecksList'
     { _httphclQuotaUser = Nothing
     , _httphclPrettyPrint = True
     , _httphclProject = pHttphclProject_
@@ -115,7 +123,7 @@ hTTPHealthChecksList pHttphclProject_ =
     , _httphclOauthToken = Nothing
     , _httphclMaxResults = 500
     , _httphclFields = Nothing
-    , _httphclAlt = "json"
+    , _httphclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -195,15 +203,15 @@ httphclFields
       (\ s a -> s{_httphclFields = a})
 
 -- | Data format for the response.
-httphclAlt :: Lens' HTTPHealthChecksList' Text
+httphclAlt :: Lens' HTTPHealthChecksList' Alt
 httphclAlt
   = lens _httphclAlt (\ s a -> s{_httphclAlt = a})
 
 instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u HTTPHealthChecksList{..}
-          = go _httphclQuotaUser _httphclPrettyPrint
+        requestWithRoute r u HTTPHealthChecksList'{..}
+          = go _httphclQuotaUser (Just _httphclPrettyPrint)
               _httphclProject
               _httphclUserIp
               _httphclKey
@@ -212,9 +220,9 @@ instance GoogleRequest HTTPHealthChecksList' where
               _httphclOauthToken
               (Just _httphclMaxResults)
               _httphclFields
-              _httphclAlt
+              (Just _httphclAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy HttpHealthChecksListAPI)
+                      (Proxy :: Proxy HttpHealthChecksListResource)
                       r
                       u

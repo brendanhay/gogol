@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing campaign. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingCampaignsPatch@.
-module DFAReporting.Campaigns.Patch
+module Network.Google.Resource.DFAReporting.Campaigns.Patch
     (
     -- * REST Resource
-      CampaignsPatchAPI
+      CampaignsPatchResource
 
     -- * Creating a Request
-    , campaignsPatch
-    , CampaignsPatch
+    , campaignsPatch'
+    , CampaignsPatch'
 
     -- * Request Lenses
     , cpQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingCampaignsPatch@ which the
--- 'CampaignsPatch' request conforms to.
-type CampaignsPatchAPI =
+-- 'CampaignsPatch'' request conforms to.
+type CampaignsPatchResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "campaigns" :>
-           QueryParam "id" Int64 :> Patch '[JSON] Campaign
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "id" Int64 :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --
--- /See:/ 'campaignsPatch' smart constructor.
-data CampaignsPatch = CampaignsPatch
+-- /See:/ 'campaignsPatch'' smart constructor.
+data CampaignsPatch' = CampaignsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
     , _cpUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data CampaignsPatch = CampaignsPatch
     , _cpId          :: !Int64
     , _cpOauthToken  :: !(Maybe Text)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Text
+    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsPatch'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data CampaignsPatch = CampaignsPatch
 -- * 'cpFields'
 --
 -- * 'cpAlt'
-campaignsPatch
+campaignsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> CampaignsPatch
-campaignsPatch pCpProfileId_ pCpId_ =
-    CampaignsPatch
+    -> CampaignsPatch'
+campaignsPatch' pCpProfileId_ pCpId_ =
+    CampaignsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpUserIp = Nothing
@@ -101,7 +109,7 @@ campaignsPatch pCpProfileId_ pCpId_ =
     , _cpId = pCpId_
     , _cpOauthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = "json"
+    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,21 +155,22 @@ cpFields :: Lens' CampaignsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
 -- | Data format for the response.
-cpAlt :: Lens' CampaignsPatch' Text
+cpAlt :: Lens' CampaignsPatch' Alt
 cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
 
 instance GoogleRequest CampaignsPatch' where
         type Rs CampaignsPatch' = Campaign
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u CampaignsPatch{..}
-          = go _cpQuotaUser _cpPrettyPrint _cpUserIp
+        requestWithRoute r u CampaignsPatch'{..}
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
               _cpProfileId
               _cpKey
               (Just _cpId)
               _cpOauthToken
               _cpFields
-              _cpAlt
+              (Just _cpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy CampaignsPatchAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy CampaignsPatchResource)
                       r
                       u

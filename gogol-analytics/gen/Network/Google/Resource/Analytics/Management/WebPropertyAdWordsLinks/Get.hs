@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns a web property-AdWords link to which the user has access.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementWebPropertyAdWordsLinksGet@.
-module Analytics.Management.WebPropertyAdWordsLinks.Get
+module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
     (
     -- * REST Resource
-      ManagementWebPropertyAdWordsLinksGetAPI
+      ManagementWebPropertyAdWordsLinksGetResource
 
     -- * Creating a Request
-    , managementWebPropertyAdWordsLinksGet
-    , ManagementWebPropertyAdWordsLinksGet
+    , managementWebPropertyAdWordsLinksGet'
+    , ManagementWebPropertyAdWordsLinksGet'
 
     -- * Request Lenses
     , mwpawlgQuotaUser
@@ -45,8 +46,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementWebPropertyAdWordsLinksGet@ which the
--- 'ManagementWebPropertyAdWordsLinksGet' request conforms to.
-type ManagementWebPropertyAdWordsLinksGetAPI =
+-- 'ManagementWebPropertyAdWordsLinksGet'' request conforms to.
+type ManagementWebPropertyAdWordsLinksGetResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -54,12 +55,19 @@ type ManagementWebPropertyAdWordsLinksGetAPI =
              Capture "webPropertyId" Text :>
                "entityAdWordsLinks" :>
                  Capture "webPropertyAdWordsLinkId" Text :>
-                   Get '[JSON] EntityAdWordsLink
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] EntityAdWordsLink
 
 -- | Returns a web property-AdWords link to which the user has access.
 --
--- /See:/ 'managementWebPropertyAdWordsLinksGet' smart constructor.
-data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet
+-- /See:/ 'managementWebPropertyAdWordsLinksGet'' smart constructor.
+data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgQuotaUser                :: !(Maybe Text)
     , _mwpawlgPrettyPrint              :: !Bool
     , _mwpawlgWebPropertyId            :: !Text
@@ -69,7 +77,7 @@ data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
     , _mwpawlgOauthToken               :: !(Maybe Text)
     , _mwpawlgFields                   :: !(Maybe Text)
-    , _mwpawlgAlt                      :: !Text
+    , _mwpawlgAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet'' with the minimum fields required to make a request.
@@ -95,13 +103,13 @@ data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet
 -- * 'mwpawlgFields'
 --
 -- * 'mwpawlgAlt'
-managementWebPropertyAdWordsLinksGet
+managementWebPropertyAdWordsLinksGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
-    -> ManagementWebPropertyAdWordsLinksGet
-managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksGet
+    -> ManagementWebPropertyAdWordsLinksGet'
+managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
+    ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgQuotaUser = Nothing
     , _mwpawlgPrettyPrint = False
     , _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
@@ -111,7 +119,7 @@ managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ p
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
     , _mwpawlgOauthToken = Nothing
     , _mwpawlgFields = Nothing
-    , _mwpawlgAlt = "json"
+    , _mwpawlgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,7 +181,7 @@ mwpawlgFields
       (\ s a -> s{_mwpawlgFields = a})
 
 -- | Data format for the response.
-mwpawlgAlt :: Lens' ManagementWebPropertyAdWordsLinksGet' Text
+mwpawlgAlt :: Lens' ManagementWebPropertyAdWordsLinksGet' Alt
 mwpawlgAlt
   = lens _mwpawlgAlt (\ s a -> s{_mwpawlgAlt = a})
 
@@ -183,8 +191,8 @@ instance GoogleRequest
              EntityAdWordsLink
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u
-          ManagementWebPropertyAdWordsLinksGet{..}
-          = go _mwpawlgQuotaUser _mwpawlgPrettyPrint
+          ManagementWebPropertyAdWordsLinksGet'{..}
+          = go _mwpawlgQuotaUser (Just _mwpawlgPrettyPrint)
               _mwpawlgWebPropertyId
               _mwpawlgUserIp
               _mwpawlgAccountId
@@ -192,10 +200,10 @@ instance GoogleRequest
               _mwpawlgWebPropertyAdWordsLinkId
               _mwpawlgOauthToken
               _mwpawlgFields
-              _mwpawlgAlt
+              (Just _mwpawlgAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy ManagementWebPropertyAdWordsLinksGetAPI)
+                         Proxy ManagementWebPropertyAdWordsLinksGetResource)
                       r
                       u

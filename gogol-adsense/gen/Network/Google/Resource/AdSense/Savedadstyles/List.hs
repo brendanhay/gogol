@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | List all saved ad styles in the user\'s account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseSavedadstylesList@.
-module AdSense.Savedadstyles.List
+module Network.Google.Resource.AdSense.Savedadstyles.List
     (
     -- * REST Resource
-      SavedadstylesListAPI
+      SavedadstylesListResource
 
     -- * Creating a Request
-    , savedadstylesList
-    , SavedadstylesList
+    , savedadstylesList'
+    , SavedadstylesList'
 
     -- * Request Lenses
     , slQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseSavedadstylesList@ which the
--- 'SavedadstylesList' request conforms to.
-type SavedadstylesListAPI =
+-- 'SavedadstylesList'' request conforms to.
+type SavedadstylesListResource =
      "savedadstyles" :>
-       QueryParam "pageToken" Text :>
-         QueryParam "maxResults" Int32 :>
-           Get '[JSON] SavedAdStyles
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "maxResults" Int32 :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the user\'s account.
 --
--- /See:/ 'savedadstylesList' smart constructor.
-data SavedadstylesList = SavedadstylesList
+-- /See:/ 'savedadstylesList'' smart constructor.
+data SavedadstylesList' = SavedadstylesList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slUserIp      :: !(Maybe Text)
@@ -63,7 +70,7 @@ data SavedadstylesList = SavedadstylesList
     , _slOauthToken  :: !(Maybe Text)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Text
+    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesList'' with the minimum fields required to make a request.
@@ -87,10 +94,10 @@ data SavedadstylesList = SavedadstylesList
 -- * 'slFields'
 --
 -- * 'slAlt'
-savedadstylesList
-    :: SavedadstylesList
-savedadstylesList =
-    SavedadstylesList
+savedadstylesList'
+    :: SavedadstylesList'
+savedadstylesList' =
+    SavedadstylesList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slUserIp = Nothing
@@ -99,7 +106,7 @@ savedadstylesList =
     , _slOauthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = "json"
+    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,21 +156,22 @@ slFields :: Lens' SavedadstylesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
 -- | Data format for the response.
-slAlt :: Lens' SavedadstylesList' Text
+slAlt :: Lens' SavedadstylesList' Alt
 slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
 
 instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u SavedadstylesList{..}
-          = go _slQuotaUser _slPrettyPrint _slUserIp _slKey
+        requestWithRoute r u SavedadstylesList'{..}
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+              _slKey
               _slPageToken
               _slOauthToken
               _slMaxResults
               _slFields
-              _slAlt
+              (Just _slAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SavedadstylesListAPI)
+                      (Proxy :: Proxy SavedadstylesListResource)
                       r
                       u

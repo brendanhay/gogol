@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerBudgetPatch@.
-module AdExchangeBuyer.Budget.Patch
+module Network.Google.Resource.AdExchangeBuyer.Budget.Patch
     (
     -- * REST Resource
-      BudgetPatchAPI
+      BudgetPatchResource
 
     -- * Creating a Request
-    , budgetPatch
-    , BudgetPatch
+    , budgetPatch'
+    , BudgetPatch'
 
     -- * Request Lenses
     , bpQuotaUser
@@ -46,18 +47,25 @@ import           Network.Google.AdExchangeBuyer.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdexchangebuyerBudgetPatch@ which the
--- 'BudgetPatch' request conforms to.
-type BudgetPatchAPI =
+-- 'BudgetPatch'' request conforms to.
+type BudgetPatchResource =
      "billinginfo" :>
        Capture "accountId" Int64 :>
-         Capture "billingId" Int64 :> Patch '[JSON] Budget
+         Capture "billingId" Int64 :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Patch '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request. This
 -- method supports patch semantics.
 --
--- /See:/ 'budgetPatch' smart constructor.
-data BudgetPatch = BudgetPatch
+-- /See:/ 'budgetPatch'' smart constructor.
+data BudgetPatch' = BudgetPatch'
     { _bpQuotaUser   :: !(Maybe Text)
     , _bpPrettyPrint :: !Bool
     , _bpUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data BudgetPatch = BudgetPatch
     , _bpOauthToken  :: !(Maybe Text)
     , _bpBillingId   :: !Int64
     , _bpFields      :: !(Maybe Text)
-    , _bpAlt         :: !Text
+    , _bpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetPatch'' with the minimum fields required to make a request.
@@ -90,12 +98,12 @@ data BudgetPatch = BudgetPatch
 -- * 'bpFields'
 --
 -- * 'bpAlt'
-budgetPatch
+budgetPatch'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
-    -> BudgetPatch
-budgetPatch pBpAccountId_ pBpBillingId_ =
-    BudgetPatch
+    -> BudgetPatch'
+budgetPatch' pBpAccountId_ pBpBillingId_ =
+    BudgetPatch'
     { _bpQuotaUser = Nothing
     , _bpPrettyPrint = True
     , _bpUserIp = Nothing
@@ -104,7 +112,7 @@ budgetPatch pBpAccountId_ pBpBillingId_ =
     , _bpOauthToken = Nothing
     , _bpBillingId = pBpBillingId_
     , _bpFields = Nothing
-    , _bpAlt = "json"
+    , _bpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,19 +159,22 @@ bpFields :: Lens' BudgetPatch' (Maybe Text)
 bpFields = lens _bpFields (\ s a -> s{_bpFields = a})
 
 -- | Data format for the response.
-bpAlt :: Lens' BudgetPatch' Text
+bpAlt :: Lens' BudgetPatch' Alt
 bpAlt = lens _bpAlt (\ s a -> s{_bpAlt = a})
 
 instance GoogleRequest BudgetPatch' where
         type Rs BudgetPatch' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
-        requestWithRoute r u BudgetPatch{..}
-          = go _bpQuotaUser _bpPrettyPrint _bpUserIp
+        requestWithRoute r u BudgetPatch'{..}
+          = go _bpQuotaUser (Just _bpPrettyPrint) _bpUserIp
               _bpAccountId
               _bpKey
               _bpOauthToken
               _bpBillingId
               _bpFields
-              _bpAlt
+              (Just _bpAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BudgetPatchAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy BudgetPatchResource)
+                      r
+                      u

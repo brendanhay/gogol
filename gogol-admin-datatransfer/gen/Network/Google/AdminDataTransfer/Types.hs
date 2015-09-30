@@ -60,6 +60,9 @@ module Network.Google.AdminDataTransfer.Types
     , dtlrKind
     , dtlrDataTransfers
 
+    -- * Alt
+    , Alt (..)
+
     -- * ApplicationDataTransfer
     , ApplicationDataTransfer
     , applicationDataTransfer
@@ -73,7 +76,7 @@ import           Network.Google.AdminDataTransfer.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'datatransfer_v1' of the Admin Data Transfer API.
-adminDataTransferURL :: BaseURL
+adminDataTransferURL :: BaseUrl
 adminDataTransferURL
   = BaseUrl Https
       "https://www.googleapis.com/admin/datatransfer/v1/"

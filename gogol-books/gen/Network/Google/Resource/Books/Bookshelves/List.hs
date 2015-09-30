@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksBookshelvesList@.
-module Books.Bookshelves.List
+module Network.Google.Resource.Books.Bookshelves.List
     (
     -- * REST Resource
-      BookshelvesListAPI
+      BookshelvesListResource
 
     -- * Creating a Request
-    , bookshelvesList
-    , BookshelvesList
+    , bookshelvesList'
+    , BookshelvesList'
 
     -- * Request Lenses
     , blQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksBookshelvesList@ which the
--- 'BookshelvesList' request conforms to.
-type BookshelvesListAPI =
+-- 'BookshelvesList'' request conforms to.
+type BookshelvesListResource =
      "users" :>
        Capture "userId" Text :>
          "bookshelves" :>
-           QueryParam "source" Text :> Get '[JSON] Bookshelves
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of public bookshelves for the specified user.
 --
--- /See:/ 'bookshelvesList' smart constructor.
-data BookshelvesList = BookshelvesList
+-- /See:/ 'bookshelvesList'' smart constructor.
+data BookshelvesList' = BookshelvesList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
     , _blUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data BookshelvesList = BookshelvesList
     , _blSource      :: !(Maybe Text)
     , _blOauthToken  :: !(Maybe Text)
     , _blFields      :: !(Maybe Text)
-    , _blAlt         :: !Text
+    , _blAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesList'' with the minimum fields required to make a request.
@@ -87,11 +95,11 @@ data BookshelvesList = BookshelvesList
 -- * 'blFields'
 --
 -- * 'blAlt'
-bookshelvesList
+bookshelvesList'
     :: Text -- ^ 'userId'
-    -> BookshelvesList
-bookshelvesList pBlUserId_ =
-    BookshelvesList
+    -> BookshelvesList'
+bookshelvesList' pBlUserId_ =
+    BookshelvesList'
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
     , _blUserIp = Nothing
@@ -100,7 +108,7 @@ bookshelvesList pBlUserId_ =
     , _blSource = Nothing
     , _blOauthToken = Nothing
     , _blFields = Nothing
-    , _blAlt = "json"
+    , _blAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,20 +153,22 @@ blFields :: Lens' BookshelvesList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
 -- | Data format for the response.
-blAlt :: Lens' BookshelvesList' Text
+blAlt :: Lens' BookshelvesList' Alt
 blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
 
 instance GoogleRequest BookshelvesList' where
         type Rs BookshelvesList' = Bookshelves
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u BookshelvesList{..}
-          = go _blQuotaUser _blPrettyPrint _blUserIp _blUserId
+        requestWithRoute r u BookshelvesList'{..}
+          = go _blQuotaUser (Just _blPrettyPrint) _blUserIp
+              _blUserId
               _blKey
               _blSource
               _blOauthToken
               _blFields
-              _blAlt
+              (Just _blAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy BookshelvesListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy BookshelvesListResource)
                       r
                       u

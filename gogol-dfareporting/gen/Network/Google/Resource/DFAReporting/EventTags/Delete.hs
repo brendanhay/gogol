@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes an existing event tag.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingEventTagsDelete@.
-module DFAReporting.EventTags.Delete
+module Network.Google.Resource.DFAReporting.EventTags.Delete
     (
     -- * REST Resource
-      EventTagsDeleteAPI
+      EventTagsDeleteResource
 
     -- * Creating a Request
-    , eventTagsDelete
-    , EventTagsDelete
+    , eventTagsDelete'
+    , EventTagsDelete'
 
     -- * Request Lenses
     , etdQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingEventTagsDelete@ which the
--- 'EventTagsDelete' request conforms to.
-type EventTagsDeleteAPI =
+-- 'EventTagsDelete'' request conforms to.
+type EventTagsDeleteResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "eventTags" :>
-           Capture "id" Int64 :> Delete '[JSON] ()
+           Capture "id" Int64 :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
 --
--- /See:/ 'eventTagsDelete' smart constructor.
-data EventTagsDelete = EventTagsDelete
+-- /See:/ 'eventTagsDelete'' smart constructor.
+data EventTagsDelete' = EventTagsDelete'
     { _etdQuotaUser   :: !(Maybe Text)
     , _etdPrettyPrint :: !Bool
     , _etdUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data EventTagsDelete = EventTagsDelete
     , _etdId          :: !Int64
     , _etdOauthToken  :: !(Maybe Text)
     , _etdFields      :: !(Maybe Text)
-    , _etdAlt         :: !Text
+    , _etdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsDelete'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data EventTagsDelete = EventTagsDelete
 -- * 'etdFields'
 --
 -- * 'etdAlt'
-eventTagsDelete
+eventTagsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
-    -> EventTagsDelete
-eventTagsDelete pEtdProfileId_ pEtdId_ =
-    EventTagsDelete
+    -> EventTagsDelete'
+eventTagsDelete' pEtdProfileId_ pEtdId_ =
+    EventTagsDelete'
     { _etdQuotaUser = Nothing
     , _etdPrettyPrint = True
     , _etdUserIp = Nothing
@@ -101,7 +109,7 @@ eventTagsDelete pEtdProfileId_ pEtdId_ =
     , _etdId = pEtdId_
     , _etdOauthToken = Nothing
     , _etdFields = Nothing
-    , _etdAlt = "json"
+    , _etdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,21 +158,22 @@ etdFields
   = lens _etdFields (\ s a -> s{_etdFields = a})
 
 -- | Data format for the response.
-etdAlt :: Lens' EventTagsDelete' Text
+etdAlt :: Lens' EventTagsDelete' Alt
 etdAlt = lens _etdAlt (\ s a -> s{_etdAlt = a})
 
 instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u EventTagsDelete{..}
-          = go _etdQuotaUser _etdPrettyPrint _etdUserIp
+        requestWithRoute r u EventTagsDelete'{..}
+          = go _etdQuotaUser (Just _etdPrettyPrint) _etdUserIp
               _etdProfileId
               _etdKey
               _etdId
               _etdOauthToken
               _etdFields
-              _etdAlt
+              (Just _etdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy EventTagsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy EventTagsDeleteResource)
                       r
                       u

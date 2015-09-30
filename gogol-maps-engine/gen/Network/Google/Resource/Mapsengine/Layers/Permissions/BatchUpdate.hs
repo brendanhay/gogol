@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- is atomic.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineLayersPermissionsBatchUpdate@.
-module Mapsengine.Layers.Permissions.BatchUpdate
+module Network.Google.Resource.Mapsengine.Layers.Permissions.BatchUpdate
     (
     -- * REST Resource
-      LayersPermissionsBatchUpdateAPI
+      LayersPermissionsBatchUpdateResource
 
     -- * Creating a Request
-    , layersPermissionsBatchUpdate
-    , LayersPermissionsBatchUpdate
+    , layersPermissionsBatchUpdate'
+    , LayersPermissionsBatchUpdate'
 
     -- * Request Lenses
     , lpbuQuotaUser
@@ -45,20 +46,27 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineLayersPermissionsBatchUpdate@ which the
--- 'LayersPermissionsBatchUpdate' request conforms to.
-type LayersPermissionsBatchUpdateAPI =
+-- 'LayersPermissionsBatchUpdate'' request conforms to.
+type LayersPermissionsBatchUpdateResource =
      "layers" :>
        Capture "id" Text :>
          "permissions" :>
            "batchUpdate" :>
-             Post '[JSON] PermissionsBatchUpdateResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchUpdateResponse
 
 -- | Add or update permission entries to an already existing asset. An asset
 -- can hold up to 20 different permission entries. Each batchInsert request
 -- is atomic.
 --
--- /See:/ 'layersPermissionsBatchUpdate' smart constructor.
-data LayersPermissionsBatchUpdate = LayersPermissionsBatchUpdate
+-- /See:/ 'layersPermissionsBatchUpdate'' smart constructor.
+data LayersPermissionsBatchUpdate' = LayersPermissionsBatchUpdate'
     { _lpbuQuotaUser   :: !(Maybe Text)
     , _lpbuPrettyPrint :: !Bool
     , _lpbuUserIp      :: !(Maybe Text)
@@ -66,7 +74,7 @@ data LayersPermissionsBatchUpdate = LayersPermissionsBatchUpdate
     , _lpbuId          :: !Text
     , _lpbuOauthToken  :: !(Maybe Text)
     , _lpbuFields      :: !(Maybe Text)
-    , _lpbuAlt         :: !Text
+    , _lpbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersPermissionsBatchUpdate'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data LayersPermissionsBatchUpdate = LayersPermissionsBatchUpdate
 -- * 'lpbuFields'
 --
 -- * 'lpbuAlt'
-layersPermissionsBatchUpdate
+layersPermissionsBatchUpdate'
     :: Text -- ^ 'id'
-    -> LayersPermissionsBatchUpdate
-layersPermissionsBatchUpdate pLpbuId_ =
-    LayersPermissionsBatchUpdate
+    -> LayersPermissionsBatchUpdate'
+layersPermissionsBatchUpdate' pLpbuId_ =
+    LayersPermissionsBatchUpdate'
     { _lpbuQuotaUser = Nothing
     , _lpbuPrettyPrint = True
     , _lpbuUserIp = Nothing
@@ -100,7 +108,7 @@ layersPermissionsBatchUpdate pLpbuId_ =
     , _lpbuId = pLpbuId_
     , _lpbuOauthToken = Nothing
     , _lpbuFields = Nothing
-    , _lpbuAlt = "json"
+    , _lpbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ lpbuFields
   = lens _lpbuFields (\ s a -> s{_lpbuFields = a})
 
 -- | Data format for the response.
-lpbuAlt :: Lens' LayersPermissionsBatchUpdate' Text
+lpbuAlt :: Lens' LayersPermissionsBatchUpdate' Alt
 lpbuAlt = lens _lpbuAlt (\ s a -> s{_lpbuAlt = a})
 
 instance GoogleRequest LayersPermissionsBatchUpdate'
@@ -153,15 +161,17 @@ instance GoogleRequest LayersPermissionsBatchUpdate'
         type Rs LayersPermissionsBatchUpdate' =
              PermissionsBatchUpdateResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u LayersPermissionsBatchUpdate{..}
-          = go _lpbuQuotaUser _lpbuPrettyPrint _lpbuUserIp
+        requestWithRoute r u
+          LayersPermissionsBatchUpdate'{..}
+          = go _lpbuQuotaUser (Just _lpbuPrettyPrint)
+              _lpbuUserIp
               _lpbuKey
               _lpbuId
               _lpbuOauthToken
               _lpbuFields
-              _lpbuAlt
+              (Just _lpbuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LayersPermissionsBatchUpdateAPI)
+                      (Proxy :: Proxy LayersPermissionsBatchUpdateResource)
                       r
                       u

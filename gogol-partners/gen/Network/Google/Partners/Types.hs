@@ -144,6 +144,10 @@ module Network.Google.Partners.Types
     , uoIpAddress
     , uoUserId
 
+    -- * LogMessageRequestClientInfo
+    , LogMessageRequestClientInfo
+    , logMessageRequestClientInfo
+
     -- * LogMessageResponse
     , LogMessageResponse
     , logMessageResponse
@@ -214,7 +218,7 @@ import           Network.Google.Partners.Types.Sum
 import           Network.Google.Prelude
 
 -- | URL referring to version 'v2' of the Google Partners API.
-partnersURL :: BaseURL
+partnersURL :: BaseUrl
 partnersURL
   = BaseUrl Https "https://partners.googleapis.com/"
       443

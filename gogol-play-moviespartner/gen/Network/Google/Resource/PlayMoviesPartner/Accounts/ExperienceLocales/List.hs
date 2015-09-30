@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- more information about this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsExperienceLocalesList@.
-module PlayMoviesPartner.Accounts.ExperienceLocales.List
+module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     (
     -- * REST Resource
-      AccountsExperienceLocalesListAPI
+      AccountsExperienceLocalesListResource
 
     -- * Creating a Request
-    , accountsExperienceLocalesList
-    , AccountsExperienceLocalesList
+    , accountsExperienceLocalesList'
+    , AccountsExperienceLocalesList'
 
     -- * Request Lenses
     , aellTitleLevelEidr
@@ -60,8 +61,8 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsExperienceLocalesList@ which the
--- 'AccountsExperienceLocalesList' request conforms to.
-type AccountsExperienceLocalesListAPI =
+-- 'AccountsExperienceLocalesList'' request conforms to.
+type AccountsExperienceLocalesListResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -69,20 +70,35 @@ type AccountsExperienceLocalesListAPI =
              QueryParam "titleLevelEidr" Text :>
                QueryParams "status" Text :>
                  QueryParams "pphNames" Text :>
-                   QueryParams "studioNames" Text :>
-                     QueryParam "altCutId" Text :>
-                       QueryParam "customId" Text :>
-                         QueryParam "editLevelEidr" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" Int32 :>
-                               Get '[JSON] ListExperienceLocalesResponse
+                   QueryParam "$.xgafv" Text :>
+                     QueryParams "studioNames" Text :>
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParam "altCutId" Text :>
+                                     QueryParam "customId" Text :>
+                                       QueryParam "bearer_token" Text :>
+                                         QueryParam "key" Text :>
+                                           QueryParam "editLevelEidr" Text :>
+                                             QueryParam "pageToken" Text :>
+                                               QueryParam "oauth_token" Text :>
+                                                 QueryParam "pageSize" Int32 :>
+                                                   QueryParam "fields" Text :>
+                                                     QueryParam "callback" Text
+                                                       :>
+                                                       QueryParam "alt" Text :>
+                                                         Get '[JSON]
+                                                           ListExperienceLocalesResponse
 
 -- | List ExperienceLocales owned or managed by the partner. See
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 --
--- /See:/ 'accountsExperienceLocalesList' smart constructor.
-data AccountsExperienceLocalesList = AccountsExperienceLocalesList
+-- /See:/ 'accountsExperienceLocalesList'' smart constructor.
+data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     { _aellTitleLevelEidr :: !(Maybe Text)
     , _aellStatus         :: !(Maybe Text)
     , _aellPphNames       :: !(Maybe Text)
@@ -157,11 +173,11 @@ data AccountsExperienceLocalesList = AccountsExperienceLocalesList
 -- * 'aellCallback'
 --
 -- * 'aellAlt'
-accountsExperienceLocalesList
+accountsExperienceLocalesList'
     :: Text -- ^ 'accountId'
-    -> AccountsExperienceLocalesList
-accountsExperienceLocalesList pAellAccountId_ =
-    AccountsExperienceLocalesList
+    -> AccountsExperienceLocalesList'
+accountsExperienceLocalesList' pAellAccountId_ =
+    AccountsExperienceLocalesList'
     { _aellTitleLevelEidr = Nothing
     , _aellStatus = Nothing
     , _aellPphNames = Nothing
@@ -324,14 +340,14 @@ instance GoogleRequest AccountsExperienceLocalesList'
         request
           = requestWithRoute defReq playMoviesPartnerURL
         requestWithRoute r u
-          AccountsExperienceLocalesList{..}
+          AccountsExperienceLocalesList'{..}
           = go _aellTitleLevelEidr _aellStatus _aellPphNames
               _aellXgafv
               _aellStudioNames
               _aellQuotaUser
-              _aellPrettyPrint
+              (Just _aellPrettyPrint)
               _aellUploadProtocol
-              _aellPp
+              (Just _aellPp)
               _aellAccessToken
               _aellUploadType
               _aellAltCutId
@@ -345,9 +361,10 @@ instance GoogleRequest AccountsExperienceLocalesList'
               _aellPageSize
               _aellFields
               _aellCallback
-              _aellAlt
+              (Just _aellAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsExperienceLocalesListAPI)
+                      (Proxy ::
+                         Proxy AccountsExperienceLocalesListResource)
                       r
                       u

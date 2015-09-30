@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Delete Group
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryGroupsDelete@.
-module Directory.Groups.Delete
+module Network.Google.Resource.Directory.Groups.Delete
     (
     -- * REST Resource
-      GroupsDeleteAPI
+      GroupsDeleteResource
 
     -- * Creating a Request
-    , groupsDelete
-    , GroupsDelete
+    , groupsDelete'
+    , GroupsDelete'
 
     -- * Request Lenses
     , gdQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryGroupsDelete@ which the
--- 'GroupsDelete' request conforms to.
-type GroupsDeleteAPI =
+-- 'GroupsDelete'' request conforms to.
+type GroupsDeleteResource =
      "groups" :>
-       Capture "groupKey" Text :> Delete '[JSON] ()
+       Capture "groupKey" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Delete Group
 --
--- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+-- /See:/ 'groupsDelete'' smart constructor.
+data GroupsDelete' = GroupsDelete'
     { _gdQuotaUser   :: !(Maybe Text)
     , _gdPrettyPrint :: !Bool
     , _gdUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data GroupsDelete = GroupsDelete
     , _gdKey         :: !(Maybe Text)
     , _gdOauthToken  :: !(Maybe Text)
     , _gdFields      :: !(Maybe Text)
-    , _gdAlt         :: !Text
+    , _gdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data GroupsDelete = GroupsDelete
 -- * 'gdFields'
 --
 -- * 'gdAlt'
-groupsDelete
+groupsDelete'
     :: Text -- ^ 'groupKey'
-    -> GroupsDelete
-groupsDelete pGdGroupKey_ =
-    GroupsDelete
+    -> GroupsDelete'
+groupsDelete' pGdGroupKey_ =
+    GroupsDelete'
     { _gdQuotaUser = Nothing
     , _gdPrettyPrint = True
     , _gdUserIp = Nothing
@@ -93,7 +101,7 @@ groupsDelete pGdGroupKey_ =
     , _gdKey = Nothing
     , _gdOauthToken = Nothing
     , _gdFields = Nothing
-    , _gdAlt = "json"
+    , _gdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,19 +143,21 @@ gdFields :: Lens' GroupsDelete' (Maybe Text)
 gdFields = lens _gdFields (\ s a -> s{_gdFields = a})
 
 -- | Data format for the response.
-gdAlt :: Lens' GroupsDelete' Text
+gdAlt :: Lens' GroupsDelete' Alt
 gdAlt = lens _gdAlt (\ s a -> s{_gdAlt = a})
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u GroupsDelete{..}
-          = go _gdQuotaUser _gdPrettyPrint _gdUserIp
+        requestWithRoute r u GroupsDelete'{..}
+          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIp
               _gdGroupKey
               _gdKey
               _gdOauthToken
               _gdFields
-              _gdAlt
+              (Just _gdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy GroupsDeleteAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy GroupsDeleteResource)
+                      r
                       u

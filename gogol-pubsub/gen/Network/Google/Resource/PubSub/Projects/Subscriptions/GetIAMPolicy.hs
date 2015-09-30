@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- the resource does not exist.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsSubscriptionsGetIAMPolicy@.
-module PubSub.Projects.Subscriptions.GetIAMPolicy
+module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
     (
     -- * REST Resource
-      ProjectsSubscriptionsGetIAMPolicyAPI
+      ProjectsSubscriptionsGetIAMPolicyResource
 
     -- * Creating a Request
-    , projectsSubscriptionsGetIAMPolicy
-    , ProjectsSubscriptionsGetIAMPolicy
+    , projectsSubscriptionsGetIAMPolicy'
+    , ProjectsSubscriptionsGetIAMPolicy'
 
     -- * Request Lenses
     , psgipXgafv
@@ -50,16 +51,29 @@ import           Network.Google.Prelude
 import           Network.Google.PubSub.Types
 
 -- | A resource alias for @PubsubProjectsSubscriptionsGetIAMPolicy@ which the
--- 'ProjectsSubscriptionsGetIAMPolicy' request conforms to.
-type ProjectsSubscriptionsGetIAMPolicyAPI =
+-- 'ProjectsSubscriptionsGetIAMPolicy'' request conforms to.
+type ProjectsSubscriptionsGetIAMPolicyResource =
      "v1beta2" :>
-       "{+resource}:getIamPolicy" :> Get '[JSON] Policy
+       "{+resource}:getIamPolicy" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
 -- the resource does not exist.
 --
--- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy
+-- /See:/ 'projectsSubscriptionsGetIAMPolicy'' smart constructor.
+data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv          :: !(Maybe Text)
     , _psgipQuotaUser      :: !(Maybe Text)
     , _psgipPrettyPrint    :: !Bool
@@ -107,11 +121,11 @@ data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy
 -- * 'psgipCallback'
 --
 -- * 'psgipAlt'
-projectsSubscriptionsGetIAMPolicy
+projectsSubscriptionsGetIAMPolicy'
     :: Text -- ^ 'resource'
-    -> ProjectsSubscriptionsGetIAMPolicy
-projectsSubscriptionsGetIAMPolicy pPsgipResource_ =
-    ProjectsSubscriptionsGetIAMPolicy
+    -> ProjectsSubscriptionsGetIAMPolicy'
+projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
+    ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv = Nothing
     , _psgipQuotaUser = Nothing
     , _psgipPrettyPrint = True
@@ -214,10 +228,11 @@ instance GoogleRequest
         type Rs ProjectsSubscriptionsGetIAMPolicy' = Policy
         request = requestWithRoute defReq pubSubURL
         requestWithRoute r u
-          ProjectsSubscriptionsGetIAMPolicy{..}
-          = go _psgipXgafv _psgipQuotaUser _psgipPrettyPrint
+          ProjectsSubscriptionsGetIAMPolicy'{..}
+          = go _psgipXgafv _psgipQuotaUser
+              (Just _psgipPrettyPrint)
               _psgipUploadProtocol
-              _psgipPp
+              (Just _psgipPp)
               _psgipAccessToken
               _psgipUploadType
               _psgipBearerToken
@@ -226,9 +241,10 @@ instance GoogleRequest
               _psgipOauthToken
               _psgipFields
               _psgipCallback
-              _psgipAlt
+              (Just _psgipAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsSubscriptionsGetIAMPolicyAPI)
+                      (Proxy ::
+                         Proxy ProjectsSubscriptionsGetIAMPolicyResource)
                       r
                       u

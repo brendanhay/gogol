@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRoutesInsert@.
-module Compute.Routes.Insert
+module Network.Google.Resource.Compute.Routes.Insert
     (
     -- * REST Resource
-      RoutesInsertAPI
+      RoutesInsertResource
 
     -- * Creating a Request
-    , routesInsert
-    , RoutesInsert
+    , routesInsert'
+    , RoutesInsert'
 
     -- * Request Lenses
     , riQuotaUser
@@ -44,16 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeRoutesInsert@ which the
--- 'RoutesInsert' request conforms to.
-type RoutesInsertAPI =
+-- 'RoutesInsert'' request conforms to.
+type RoutesInsertResource =
      Capture "project" Text :>
-       "global" :> "routes" :> Post '[JSON] Operation
+       "global" :>
+         "routes" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a route resource in the specified project using the data
 -- included in the request.
 --
--- /See:/ 'routesInsert' smart constructor.
-data RoutesInsert = RoutesInsert
+-- /See:/ 'routesInsert'' smart constructor.
+data RoutesInsert' = RoutesInsert'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riProject     :: !Text
@@ -61,7 +70,7 @@ data RoutesInsert = RoutesInsert
     , _riKey         :: !(Maybe Text)
     , _riOauthToken  :: !(Maybe Text)
     , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Text
+    , _riAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesInsert'' with the minimum fields required to make a request.
@@ -83,11 +92,11 @@ data RoutesInsert = RoutesInsert
 -- * 'riFields'
 --
 -- * 'riAlt'
-routesInsert
+routesInsert'
     :: Text -- ^ 'project'
-    -> RoutesInsert
-routesInsert pRiProject_ =
-    RoutesInsert
+    -> RoutesInsert'
+routesInsert' pRiProject_ =
+    RoutesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riProject = pRiProject_
@@ -95,7 +104,7 @@ routesInsert pRiProject_ =
     , _riKey = Nothing
     , _riOauthToken = Nothing
     , _riFields = Nothing
-    , _riAlt = "json"
+    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,18 +146,21 @@ riFields :: Lens' RoutesInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
 -- | Data format for the response.
-riAlt :: Lens' RoutesInsert' Text
+riAlt :: Lens' RoutesInsert' Alt
 riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
 
 instance GoogleRequest RoutesInsert' where
         type Rs RoutesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u RoutesInsert{..}
-          = go _riQuotaUser _riPrettyPrint _riProject _riUserIp
+        requestWithRoute r u RoutesInsert'{..}
+          = go _riQuotaUser (Just _riPrettyPrint) _riProject
+              _riUserIp
               _riKey
               _riOauthToken
               _riFields
-              _riAlt
+              (Just _riAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoutesInsertAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RoutesInsertResource)
+                      r
                       u

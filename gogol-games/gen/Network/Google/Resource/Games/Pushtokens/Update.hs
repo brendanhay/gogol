@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Registers a push token for the current user and application.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesPushtokensUpdate@.
-module Games.Pushtokens.Update
+module Network.Google.Resource.Games.Pushtokens.Update
     (
     -- * REST Resource
-      PushtokensUpdateAPI
+      PushtokensUpdateResource
 
     -- * Creating a Request
-    , pushtokensUpdate
-    , PushtokensUpdate
+    , pushtokensUpdate'
+    , PushtokensUpdate'
 
     -- * Request Lenses
     , puQuotaUser
@@ -42,21 +43,28 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesPushtokensUpdate@ which the
--- 'PushtokensUpdate' request conforms to.
-type PushtokensUpdateAPI =
-     "pushtokens" :> Put '[JSON] ()
+-- 'PushtokensUpdate'' request conforms to.
+type PushtokensUpdateResource =
+     "pushtokens" :>
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "oauth_token" Text :>
+                 QueryParam "fields" Text :>
+                   QueryParam "alt" Alt :> Put '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 --
--- /See:/ 'pushtokensUpdate' smart constructor.
-data PushtokensUpdate = PushtokensUpdate
+-- /See:/ 'pushtokensUpdate'' smart constructor.
+data PushtokensUpdate' = PushtokensUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
     , _puUserIp      :: !(Maybe Text)
     , _puKey         :: !(Maybe Text)
     , _puOauthToken  :: !(Maybe Text)
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Text
+    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensUpdate'' with the minimum fields required to make a request.
@@ -76,17 +84,17 @@ data PushtokensUpdate = PushtokensUpdate
 -- * 'puFields'
 --
 -- * 'puAlt'
-pushtokensUpdate
-    :: PushtokensUpdate
-pushtokensUpdate =
-    PushtokensUpdate
+pushtokensUpdate'
+    :: PushtokensUpdate'
+pushtokensUpdate' =
+    PushtokensUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
     , _puUserIp = Nothing
     , _puKey = Nothing
     , _puOauthToken = Nothing
     , _puFields = Nothing
-    , _puAlt = "json"
+    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,19 +131,20 @@ puFields :: Lens' PushtokensUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
 -- | Data format for the response.
-puAlt :: Lens' PushtokensUpdate' Text
+puAlt :: Lens' PushtokensUpdate' Alt
 puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
 
 instance GoogleRequest PushtokensUpdate' where
         type Rs PushtokensUpdate' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u PushtokensUpdate{..}
-          = go _puQuotaUser _puPrettyPrint _puUserIp _puKey
+        requestWithRoute r u PushtokensUpdate'{..}
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
+              _puKey
               _puOauthToken
               _puFields
-              _puAlt
+              (Just _puAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PushtokensUpdateAPI)
+                      (Proxy :: Proxy PushtokensUpdateResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all operations in a project, across all zones.
 --
 -- /See:/ <https://cloud.google.com/container-engine/docs/v1beta1/ Google Container Engine API Reference> for @ContainerProjectsOperationsList@.
-module Container.Projects.Operations.List
+module Network.Google.Resource.Container.Projects.Operations.List
     (
     -- * REST Resource
-      ProjectsOperationsListAPI
+      ProjectsOperationsListResource
 
     -- * Creating a Request
-    , projectsOperationsList
-    , ProjectsOperationsList
+    , projectsOperationsList'
+    , ProjectsOperationsList'
 
     -- * Request Lenses
     , polQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.Container.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ContainerProjectsOperationsList@ which the
--- 'ProjectsOperationsList' request conforms to.
-type ProjectsOperationsListAPI =
+-- 'ProjectsOperationsList'' request conforms to.
+type ProjectsOperationsListResource =
      Capture "projectId" Text :>
        "operations" :>
-         Get '[JSON] ListAggregatedOperationsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] ListAggregatedOperationsResponse
 
 -- | Lists all operations in a project, across all zones.
 --
--- /See:/ 'projectsOperationsList' smart constructor.
-data ProjectsOperationsList = ProjectsOperationsList
+-- /See:/ 'projectsOperationsList'' smart constructor.
+data ProjectsOperationsList' = ProjectsOperationsList'
     { _polQuotaUser   :: !(Maybe Text)
     , _polPrettyPrint :: !Bool
     , _polUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data ProjectsOperationsList = ProjectsOperationsList
     , _polProjectId   :: !Text
     , _polOauthToken  :: !(Maybe Text)
     , _polFields      :: !(Maybe Text)
-    , _polAlt         :: !Text
+    , _polAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsOperationsList'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data ProjectsOperationsList = ProjectsOperationsList
 -- * 'polFields'
 --
 -- * 'polAlt'
-projectsOperationsList
+projectsOperationsList'
     :: Text -- ^ 'projectId'
-    -> ProjectsOperationsList
-projectsOperationsList pPolProjectId_ =
-    ProjectsOperationsList
+    -> ProjectsOperationsList'
+projectsOperationsList' pPolProjectId_ =
+    ProjectsOperationsList'
     { _polQuotaUser = Nothing
     , _polPrettyPrint = True
     , _polUserIp = Nothing
@@ -94,7 +102,7 @@ projectsOperationsList pPolProjectId_ =
     , _polProjectId = pPolProjectId_
     , _polOauthToken = Nothing
     , _polFields = Nothing
-    , _polAlt = "json"
+    , _polAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,21 +147,22 @@ polFields
   = lens _polFields (\ s a -> s{_polFields = a})
 
 -- | Data format for the response.
-polAlt :: Lens' ProjectsOperationsList' Text
+polAlt :: Lens' ProjectsOperationsList' Alt
 polAlt = lens _polAlt (\ s a -> s{_polAlt = a})
 
 instance GoogleRequest ProjectsOperationsList' where
         type Rs ProjectsOperationsList' =
              ListAggregatedOperationsResponse
         request = requestWithRoute defReq containerURL
-        requestWithRoute r u ProjectsOperationsList{..}
-          = go _polQuotaUser _polPrettyPrint _polUserIp _polKey
+        requestWithRoute r u ProjectsOperationsList'{..}
+          = go _polQuotaUser (Just _polPrettyPrint) _polUserIp
+              _polKey
               _polProjectId
               _polOauthToken
               _polFields
-              _polAlt
+              (Just _polAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ProjectsOperationsListAPI)
+                      (Proxy :: Proxy ProjectsOperationsListResource)
                       r
                       u

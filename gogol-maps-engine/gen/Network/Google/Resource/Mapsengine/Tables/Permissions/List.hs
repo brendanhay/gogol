@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,140 +20,149 @@
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesPermissionsList@.
-module Mapsengine.Tables.Permissions.List
+module Network.Google.Resource.Mapsengine.Tables.Permissions.List
     (
     -- * REST Resource
-      TablesPermissionsListAPI
+      TablesPermissionsListResource
 
     -- * Creating a Request
-    , tablesPermissionsList
-    , TablesPermissionsList
+    , tablesPermissionsList'
+    , TablesPermissionsList'
 
     -- * Request Lenses
-    , tabQuotaUser
-    , tabPrettyPrint
-    , tabUserIp
-    , tabKey
-    , tabId
-    , tabOauthToken
-    , tabFields
-    , tabAlt
+    , tplQuotaUser
+    , tplPrettyPrint
+    , tplUserIp
+    , tplKey
+    , tplId
+    , tplOauthToken
+    , tplFields
+    , tplAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesPermissionsList@ which the
--- 'TablesPermissionsList' request conforms to.
-type TablesPermissionsListAPI =
+-- 'TablesPermissionsList'' request conforms to.
+type TablesPermissionsListResource =
      "tables" :>
        Capture "id" Text :>
-         "permissions" :> Get '[JSON] PermissionsListResponse
+         "permissions" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] PermissionsListResponse
 
 -- | Return all of the permissions for the specified asset.
 --
--- /See:/ 'tablesPermissionsList' smart constructor.
-data TablesPermissionsList = TablesPermissionsList
-    { _tabQuotaUser   :: !(Maybe Text)
-    , _tabPrettyPrint :: !Bool
-    , _tabUserIp      :: !(Maybe Text)
-    , _tabKey         :: !(Maybe Text)
-    , _tabId          :: !Text
-    , _tabOauthToken  :: !(Maybe Text)
-    , _tabFields      :: !(Maybe Text)
-    , _tabAlt         :: !Text
+-- /See:/ 'tablesPermissionsList'' smart constructor.
+data TablesPermissionsList' = TablesPermissionsList'
+    { _tplQuotaUser   :: !(Maybe Text)
+    , _tplPrettyPrint :: !Bool
+    , _tplUserIp      :: !(Maybe Text)
+    , _tplKey         :: !(Maybe Text)
+    , _tplId          :: !Text
+    , _tplOauthToken  :: !(Maybe Text)
+    , _tplFields      :: !(Maybe Text)
+    , _tplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPermissionsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tabQuotaUser'
+-- * 'tplQuotaUser'
 --
--- * 'tabPrettyPrint'
+-- * 'tplPrettyPrint'
 --
--- * 'tabUserIp'
+-- * 'tplUserIp'
 --
--- * 'tabKey'
+-- * 'tplKey'
 --
--- * 'tabId'
+-- * 'tplId'
 --
--- * 'tabOauthToken'
+-- * 'tplOauthToken'
 --
--- * 'tabFields'
+-- * 'tplFields'
 --
--- * 'tabAlt'
-tablesPermissionsList
+-- * 'tplAlt'
+tablesPermissionsList'
     :: Text -- ^ 'id'
-    -> TablesPermissionsList
-tablesPermissionsList pTabId_ =
-    TablesPermissionsList
-    { _tabQuotaUser = Nothing
-    , _tabPrettyPrint = True
-    , _tabUserIp = Nothing
-    , _tabKey = Nothing
-    , _tabId = pTabId_
-    , _tabOauthToken = Nothing
-    , _tabFields = Nothing
-    , _tabAlt = "json"
+    -> TablesPermissionsList'
+tablesPermissionsList' pTplId_ =
+    TablesPermissionsList'
+    { _tplQuotaUser = Nothing
+    , _tplPrettyPrint = True
+    , _tplUserIp = Nothing
+    , _tplKey = Nothing
+    , _tplId = pTplId_
+    , _tplOauthToken = Nothing
+    , _tplFields = Nothing
+    , _tplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tabQuotaUser :: Lens' TablesPermissionsList' (Maybe Text)
-tabQuotaUser
-  = lens _tabQuotaUser (\ s a -> s{_tabQuotaUser = a})
+tplQuotaUser :: Lens' TablesPermissionsList' (Maybe Text)
+tplQuotaUser
+  = lens _tplQuotaUser (\ s a -> s{_tplQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tabPrettyPrint :: Lens' TablesPermissionsList' Bool
-tabPrettyPrint
-  = lens _tabPrettyPrint
-      (\ s a -> s{_tabPrettyPrint = a})
+tplPrettyPrint :: Lens' TablesPermissionsList' Bool
+tplPrettyPrint
+  = lens _tplPrettyPrint
+      (\ s a -> s{_tplPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tabUserIp :: Lens' TablesPermissionsList' (Maybe Text)
-tabUserIp
-  = lens _tabUserIp (\ s a -> s{_tabUserIp = a})
+tplUserIp :: Lens' TablesPermissionsList' (Maybe Text)
+tplUserIp
+  = lens _tplUserIp (\ s a -> s{_tplUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tabKey :: Lens' TablesPermissionsList' (Maybe Text)
-tabKey = lens _tabKey (\ s a -> s{_tabKey = a})
+tplKey :: Lens' TablesPermissionsList' (Maybe Text)
+tplKey = lens _tplKey (\ s a -> s{_tplKey = a})
 
 -- | The ID of the asset whose permissions will be listed.
-tabId :: Lens' TablesPermissionsList' Text
-tabId = lens _tabId (\ s a -> s{_tabId = a})
+tplId :: Lens' TablesPermissionsList' Text
+tplId = lens _tplId (\ s a -> s{_tplId = a})
 
 -- | OAuth 2.0 token for the current user.
-tabOauthToken :: Lens' TablesPermissionsList' (Maybe Text)
-tabOauthToken
-  = lens _tabOauthToken
-      (\ s a -> s{_tabOauthToken = a})
+tplOauthToken :: Lens' TablesPermissionsList' (Maybe Text)
+tplOauthToken
+  = lens _tplOauthToken
+      (\ s a -> s{_tplOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tabFields :: Lens' TablesPermissionsList' (Maybe Text)
-tabFields
-  = lens _tabFields (\ s a -> s{_tabFields = a})
+tplFields :: Lens' TablesPermissionsList' (Maybe Text)
+tplFields
+  = lens _tplFields (\ s a -> s{_tplFields = a})
 
 -- | Data format for the response.
-tabAlt :: Lens' TablesPermissionsList' Text
-tabAlt = lens _tabAlt (\ s a -> s{_tabAlt = a})
+tplAlt :: Lens' TablesPermissionsList' Alt
+tplAlt = lens _tplAlt (\ s a -> s{_tplAlt = a})
 
 instance GoogleRequest TablesPermissionsList' where
         type Rs TablesPermissionsList' =
              PermissionsListResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesPermissionsList{..}
-          = go _tabQuotaUser _tabPrettyPrint _tabUserIp _tabKey
-              _tabId
-              _tabOauthToken
-              _tabFields
-              _tabAlt
+        requestWithRoute r u TablesPermissionsList'{..}
+          = go _tplQuotaUser (Just _tplPrettyPrint) _tplUserIp
+              _tplKey
+              _tplId
+              _tplOauthToken
+              _tplFields
+              (Just _tplAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TablesPermissionsListAPI)
+                      (Proxy :: Proxy TablesPermissionsListResource)
                       r
                       u

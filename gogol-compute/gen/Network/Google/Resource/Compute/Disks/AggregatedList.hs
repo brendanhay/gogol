@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the list of disks grouped by scope.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeDisksAggregatedList@.
-module Compute.Disks.AggregatedList
+module Network.Google.Resource.Compute.Disks.AggregatedList
     (
     -- * REST Resource
-      DisksAggregatedListAPI
+      DisksAggregatedListResource
 
     -- * Creating a Request
-    , disksAggregatedList
-    , DisksAggregatedList
+    , disksAggregatedList'
+    , DisksAggregatedList'
 
     -- * Request Lenses
     , dalQuotaUser
@@ -46,20 +47,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeDisksAggregatedList@ which the
--- 'DisksAggregatedList' request conforms to.
-type DisksAggregatedListAPI =
+-- 'DisksAggregatedList'' request conforms to.
+type DisksAggregatedListResource =
      Capture "project" Text :>
        "aggregated" :>
          "disks" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] DiskAggregatedList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] DiskAggregatedList
 
 -- | Retrieves the list of disks grouped by scope.
 --
--- /See:/ 'disksAggregatedList' smart constructor.
-data DisksAggregatedList = DisksAggregatedList
+-- /See:/ 'disksAggregatedList'' smart constructor.
+data DisksAggregatedList' = DisksAggregatedList'
     { _dalQuotaUser   :: !(Maybe Text)
     , _dalPrettyPrint :: !Bool
     , _dalProject     :: !Text
@@ -70,7 +78,7 @@ data DisksAggregatedList = DisksAggregatedList
     , _dalOauthToken  :: !(Maybe Text)
     , _dalMaxResults  :: !Word32
     , _dalFields      :: !(Maybe Text)
-    , _dalAlt         :: !Text
+    , _dalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksAggregatedList'' with the minimum fields required to make a request.
@@ -98,11 +106,11 @@ data DisksAggregatedList = DisksAggregatedList
 -- * 'dalFields'
 --
 -- * 'dalAlt'
-disksAggregatedList
+disksAggregatedList'
     :: Text -- ^ 'project'
-    -> DisksAggregatedList
-disksAggregatedList pDalProject_ =
-    DisksAggregatedList
+    -> DisksAggregatedList'
+disksAggregatedList' pDalProject_ =
+    DisksAggregatedList'
     { _dalQuotaUser = Nothing
     , _dalPrettyPrint = True
     , _dalProject = pDalProject_
@@ -113,7 +121,7 @@ disksAggregatedList pDalProject_ =
     , _dalOauthToken = Nothing
     , _dalMaxResults = 500
     , _dalFields = Nothing
-    , _dalAlt = "json"
+    , _dalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,14 +194,14 @@ dalFields
   = lens _dalFields (\ s a -> s{_dalFields = a})
 
 -- | Data format for the response.
-dalAlt :: Lens' DisksAggregatedList' Text
+dalAlt :: Lens' DisksAggregatedList' Alt
 dalAlt = lens _dalAlt (\ s a -> s{_dalAlt = a})
 
 instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u DisksAggregatedList{..}
-          = go _dalQuotaUser _dalPrettyPrint _dalProject
+        requestWithRoute r u DisksAggregatedList'{..}
+          = go _dalQuotaUser (Just _dalPrettyPrint) _dalProject
               _dalUserIp
               _dalKey
               _dalFilter
@@ -201,9 +209,9 @@ instance GoogleRequest DisksAggregatedList' where
               _dalOauthToken
               (Just _dalMaxResults)
               _dalFields
-              _dalAlt
+              (Just _dalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy DisksAggregatedListAPI)
+                      (Proxy :: Proxy DisksAggregatedListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- application for the currently authenticated user.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesEventsListByPlayer@.
-module Games.Events.ListByPlayer
+module Network.Google.Resource.Games.Events.ListByPlayer
     (
     -- * REST Resource
-      EventsListByPlayerAPI
+      EventsListByPlayerResource
 
     -- * Creating a Request
-    , eventsListByPlayer
-    , EventsListByPlayer
+    , eventsListByPlayer'
+    , EventsListByPlayer'
 
     -- * Request Lenses
     , elbpQuotaUser
@@ -46,19 +47,26 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesEventsListByPlayer@ which the
--- 'EventsListByPlayer' request conforms to.
-type EventsListByPlayerAPI =
+-- 'EventsListByPlayer'' request conforms to.
+type EventsListByPlayerResource =
      "events" :>
-       QueryParam "language" Text :>
-         QueryParam "pageToken" Text :>
-           QueryParam "maxResults" Int32 :>
-             Get '[JSON] PlayerEventListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "key" Text :>
+               QueryParam "language" Text :>
+                 QueryParam "pageToken" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "maxResults" Int32 :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] PlayerEventListResponse
 
 -- | Returns a list showing the current progress on events in this
 -- application for the currently authenticated user.
 --
--- /See:/ 'eventsListByPlayer' smart constructor.
-data EventsListByPlayer = EventsListByPlayer
+-- /See:/ 'eventsListByPlayer'' smart constructor.
+data EventsListByPlayer' = EventsListByPlayer'
     { _elbpQuotaUser   :: !(Maybe Text)
     , _elbpPrettyPrint :: !Bool
     , _elbpUserIp      :: !(Maybe Text)
@@ -68,7 +76,7 @@ data EventsListByPlayer = EventsListByPlayer
     , _elbpOauthToken  :: !(Maybe Text)
     , _elbpMaxResults  :: !(Maybe Int32)
     , _elbpFields      :: !(Maybe Text)
-    , _elbpAlt         :: !Text
+    , _elbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListByPlayer'' with the minimum fields required to make a request.
@@ -94,10 +102,10 @@ data EventsListByPlayer = EventsListByPlayer
 -- * 'elbpFields'
 --
 -- * 'elbpAlt'
-eventsListByPlayer
-    :: EventsListByPlayer
-eventsListByPlayer =
-    EventsListByPlayer
+eventsListByPlayer'
+    :: EventsListByPlayer'
+eventsListByPlayer' =
+    EventsListByPlayer'
     { _elbpQuotaUser = Nothing
     , _elbpPrettyPrint = True
     , _elbpUserIp = Nothing
@@ -107,7 +115,7 @@ eventsListByPlayer =
     , _elbpOauthToken = Nothing
     , _elbpMaxResults = Nothing
     , _elbpFields = Nothing
-    , _elbpAlt = "json"
+    , _elbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,23 +175,24 @@ elbpFields
   = lens _elbpFields (\ s a -> s{_elbpFields = a})
 
 -- | Data format for the response.
-elbpAlt :: Lens' EventsListByPlayer' Text
+elbpAlt :: Lens' EventsListByPlayer' Alt
 elbpAlt = lens _elbpAlt (\ s a -> s{_elbpAlt = a})
 
 instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u EventsListByPlayer{..}
-          = go _elbpQuotaUser _elbpPrettyPrint _elbpUserIp
+        requestWithRoute r u EventsListByPlayer'{..}
+          = go _elbpQuotaUser (Just _elbpPrettyPrint)
+              _elbpUserIp
               _elbpKey
               _elbpLanguage
               _elbpPageToken
               _elbpOauthToken
               _elbpMaxResults
               _elbpFields
-              _elbpAlt
+              (Just _elbpAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EventsListByPlayerAPI)
+                      (Proxy :: Proxy EventsListByPlayerResource)
                       r
                       u

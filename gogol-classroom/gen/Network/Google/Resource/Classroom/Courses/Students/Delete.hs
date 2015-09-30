@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- course has the requested ID or if the course does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesStudentsDelete@.
-module Classroom.Courses.Students.Delete
+module Network.Google.Resource.Classroom.Courses.Students.Delete
     (
     -- * REST Resource
-      CoursesStudentsDeleteAPI
+      CoursesStudentsDeleteResource
 
     -- * Creating a Request
-    , coursesStudentsDelete
-    , CoursesStudentsDelete
+    , coursesStudentsDelete'
+    , CoursesStudentsDelete'
 
     -- * Request Lenses
     , csdXgafv
@@ -54,13 +55,27 @@ import           Network.Google.Classroom.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClassroomCoursesStudentsDelete@ which the
--- 'CoursesStudentsDelete' request conforms to.
-type CoursesStudentsDeleteAPI =
+-- 'CoursesStudentsDelete'' request conforms to.
+type CoursesStudentsDeleteResource =
      "v1" :>
        "courses" :>
          Capture "courseId" Text :>
            "students" :>
-             Capture "userId" Text :> Delete '[JSON] Empty
+             Capture "userId" Text :>
+               QueryParam "$.xgafv" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "upload_protocol" Text :>
+                       QueryParam "pp" Bool :>
+                         QueryParam "access_token" Text :>
+                           QueryParam "uploadType" Text :>
+                             QueryParam "bearer_token" Text :>
+                               QueryParam "key" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "callback" Text :>
+                                       QueryParam "alt" Text :>
+                                         Delete '[JSON] Empty
 
 -- | Deletes a student of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -68,8 +83,8 @@ type CoursesStudentsDeleteAPI =
 -- errors][User Permission Errors]. * \`NOT_FOUND\` if no student of this
 -- course has the requested ID or if the course does not exist.
 --
--- /See:/ 'coursesStudentsDelete' smart constructor.
-data CoursesStudentsDelete = CoursesStudentsDelete
+-- /See:/ 'coursesStudentsDelete'' smart constructor.
+data CoursesStudentsDelete' = CoursesStudentsDelete'
     { _csdXgafv          :: !(Maybe Text)
     , _csdQuotaUser      :: !(Maybe Text)
     , _csdPrettyPrint    :: !Bool
@@ -120,12 +135,12 @@ data CoursesStudentsDelete = CoursesStudentsDelete
 -- * 'csdCallback'
 --
 -- * 'csdAlt'
-coursesStudentsDelete
+coursesStudentsDelete'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'userId'
-    -> CoursesStudentsDelete
-coursesStudentsDelete pCsdCourseId_ pCsdUserId_ =
-    CoursesStudentsDelete
+    -> CoursesStudentsDelete'
+coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
+    CoursesStudentsDelete'
     { _csdXgafv = Nothing
     , _csdQuotaUser = Nothing
     , _csdPrettyPrint = True
@@ -231,10 +246,10 @@ csdAlt = lens _csdAlt (\ s a -> s{_csdAlt = a})
 instance GoogleRequest CoursesStudentsDelete' where
         type Rs CoursesStudentsDelete' = Empty
         request = requestWithRoute defReq classroomURL
-        requestWithRoute r u CoursesStudentsDelete{..}
-          = go _csdXgafv _csdQuotaUser _csdPrettyPrint
+        requestWithRoute r u CoursesStudentsDelete'{..}
+          = go _csdXgafv _csdQuotaUser (Just _csdPrettyPrint)
               _csdUploadProtocol
-              _csdPp
+              (Just _csdPp)
               _csdCourseId
               _csdAccessToken
               _csdUploadType
@@ -244,9 +259,9 @@ instance GoogleRequest CoursesStudentsDelete' where
               _csdOauthToken
               _csdFields
               _csdCallback
-              _csdAlt
+              (Just _csdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CoursesStudentsDeleteAPI)
+                      (Proxy :: Proxy CoursesStudentsDeleteResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- advertiser\/publisher has access to.
 --
 -- /See:/ <https://developers.google.com/affiliate-network/ Google Affiliate Network API Reference> for @GanAdvertisersList@.
-module Gan.Advertisers.List
+module Network.Google.Resource.Gan.Advertisers.List
     (
     -- * REST Resource
-      AdvertisersListAPI
+      AdvertisersListResource
 
     -- * Creating a Request
-    , advertisersList
-    , AdvertisersList
+    , advertisersList'
+    , AdvertisersList'
 
     -- * Request Lenses
     , alQuotaUser
@@ -52,33 +53,42 @@ import           Network.Google.Affiliates.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GanAdvertisersList@ which the
--- 'AdvertisersList' request conforms to.
-type AdvertisersListAPI =
-     Capture "role" Text :>
+-- 'AdvertisersList'' request conforms to.
+type AdvertisersListResource =
+     Capture "role" GanAdvertisersListRole :>
        Capture "roleId" Text :>
          "advertisers" :>
-           QueryParam "relationshipStatus" Text :>
-             QueryParam "minSevenDayEpc" Double :>
-               QueryParam "minNinetyDayEpc" Double :>
-                 QueryParam "minPayoutRank" Int32 :>
-                   QueryParam "advertiserCategory" Text :>
-                     QueryParam "pageToken" Text :>
-                       QueryParam "maxResults" Word32 :>
-                         Get '[JSON] Advertisers
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "relationshipStatus"
+                   GanAdvertisersListRelationshipStatus
+                   :>
+                   QueryParam "minSevenDayEpc" Double :>
+                     QueryParam "minNinetyDayEpc" Double :>
+                       QueryParam "key" Text :>
+                         QueryParam "minPayoutRank" Int32 :>
+                           QueryParam "advertiserCategory" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "maxResults" Word32 :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :>
+                                       Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
 -- advertiser\/publisher has access to.
 --
--- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList
+-- /See:/ 'advertisersList'' smart constructor.
+data AdvertisersList' = AdvertisersList'
     { _alQuotaUser          :: !(Maybe Text)
     , _alPrettyPrint        :: !Bool
     , _alUserIp             :: !(Maybe Text)
-    , _alRelationshipStatus :: !(Maybe Text)
+    , _alRelationshipStatus :: !(Maybe GanAdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
-    , _alRole               :: !Text
+    , _alRole               :: !GanAdvertisersListRole
     , _alKey                :: !(Maybe Text)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
@@ -86,7 +96,7 @@ data AdvertisersList = AdvertisersList
     , _alOauthToken         :: !(Maybe Text)
     , _alMaxResults         :: !(Maybe Word32)
     , _alFields             :: !(Maybe Text)
-    , _alAlt                :: !Text
+    , _alAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
@@ -124,12 +134,12 @@ data AdvertisersList = AdvertisersList
 -- * 'alFields'
 --
 -- * 'alAlt'
-advertisersList
+advertisersList'
     :: Text -- ^ 'roleId'
-    -> Text -- ^ 'role'
-    -> AdvertisersList
-advertisersList pAlRoleId_ pAlRole_ =
-    AdvertisersList
+    -> GanAdvertisersListRole -- ^ 'role'
+    -> AdvertisersList'
+advertisersList' pAlRoleId_ pAlRole_ =
+    AdvertisersList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alUserIp = Nothing
@@ -145,7 +155,7 @@ advertisersList pAlRoleId_ pAlRole_ =
     , _alOauthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = "json"
+    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +178,7 @@ alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
-alRelationshipStatus :: Lens' AdvertisersList' (Maybe Text)
+alRelationshipStatus :: Lens' AdvertisersList' (Maybe GanAdvertisersListRelationshipStatus)
 alRelationshipStatus
   = lens _alRelationshipStatus
       (\ s a -> s{_alRelationshipStatus = a})
@@ -193,7 +203,7 @@ alMinNinetyDayEpc
 
 -- | The role of the requester. Valid values: \'advertisers\' or
 -- \'publishers\'.
-alRole :: Lens' AdvertisersList' Text
+alRole :: Lens' AdvertisersList' GanAdvertisersListRole
 alRole = lens _alRole (\ s a -> s{_alRole = a})
 
 -- | API key. Your API key identifies your project and provides you with API
@@ -242,14 +252,14 @@ alFields :: Lens' AdvertisersList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
 -- | Data format for the response.
-alAlt :: Lens' AdvertisersList' Text
+alAlt :: Lens' AdvertisersList' Alt
 alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
         request = requestWithRoute defReq affiliatesURL
-        requestWithRoute r u AdvertisersList{..}
-          = go _alQuotaUser _alPrettyPrint _alUserIp
+        requestWithRoute r u AdvertisersList'{..}
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
               _alRelationshipStatus
               _alMinSevenDayEpc
               _alRoleId
@@ -262,8 +272,9 @@ instance GoogleRequest AdvertisersList' where
               _alOauthToken
               _alMaxResults
               _alFields
-              _alAlt
+              (Just _alAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AdvertisersListAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AdvertisersListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseCustomchannelsList@.
-module AdSense.Customchannels.List
+module Network.Google.Resource.AdSense.Customchannels.List
     (
     -- * REST Resource
-      CustomchannelsListAPI
+      CustomchannelsListResource
 
     -- * Creating a Request
-    , customchannelsList
-    , CustomchannelsList
+    , customchannelsList'
+    , CustomchannelsList'
 
     -- * Request Lenses
     , clQuotaUser
@@ -46,20 +47,26 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseCustomchannelsList@ which the
--- 'CustomchannelsList' request conforms to.
-type CustomchannelsListAPI =
+-- 'CustomchannelsList'' request conforms to.
+type CustomchannelsListResource =
      "adclients" :>
        Capture "adClientId" Text :>
          "customchannels" :>
-           QueryParam "pageToken" Text :>
-             QueryParam "maxResults" Int32 :>
-               Get '[JSON] CustomChannels
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] CustomChannels
 
 -- | List all custom channels in the specified ad client for this AdSense
 -- account.
 --
--- /See:/ 'customchannelsList' smart constructor.
-data CustomchannelsList = CustomchannelsList
+-- /See:/ 'customchannelsList'' smart constructor.
+data CustomchannelsList' = CustomchannelsList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clUserIp      :: !(Maybe Text)
@@ -69,7 +76,7 @@ data CustomchannelsList = CustomchannelsList
     , _clOauthToken  :: !(Maybe Text)
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Text
+    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomchannelsList'' with the minimum fields required to make a request.
@@ -95,11 +102,11 @@ data CustomchannelsList = CustomchannelsList
 -- * 'clFields'
 --
 -- * 'clAlt'
-customchannelsList
+customchannelsList'
     :: Text -- ^ 'adClientId'
-    -> CustomchannelsList
-customchannelsList pClAdClientId_ =
-    CustomchannelsList
+    -> CustomchannelsList'
+customchannelsList' pClAdClientId_ =
+    CustomchannelsList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clUserIp = Nothing
@@ -109,7 +116,7 @@ customchannelsList pClAdClientId_ =
     , _clOauthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = "json"
+    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,23 +171,23 @@ clFields :: Lens' CustomchannelsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
 -- | Data format for the response.
-clAlt :: Lens' CustomchannelsList' Text
+clAlt :: Lens' CustomchannelsList' Alt
 clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
 
 instance GoogleRequest CustomchannelsList' where
         type Rs CustomchannelsList' = CustomChannels
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u CustomchannelsList{..}
-          = go _clQuotaUser _clPrettyPrint _clUserIp
+        requestWithRoute r u CustomchannelsList'{..}
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
               _clAdClientId
               _clKey
               _clPageToken
               _clOauthToken
               _clMaxResults
               _clFields
-              _clAlt
+              (Just _clAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy CustomchannelsListAPI)
+                      (Proxy :: Proxy CustomchannelsListResource)
                       r
                       u

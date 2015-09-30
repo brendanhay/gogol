@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- corresponding snapshot. For more information, see Deleting snaphots.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeSnapshotsDelete@.
-module Compute.Snapshots.Delete
+module Network.Google.Resource.Compute.Snapshots.Delete
     (
     -- * REST Resource
-      SnapshotsDeleteAPI
+      SnapshotsDeleteResource
 
     -- * Creating a Request
-    , snapshotsDelete
-    , SnapshotsDelete
+    , snapshotsDelete'
+    , SnapshotsDelete'
 
     -- * Request Lenses
     , sdSnapshot
@@ -48,12 +49,19 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeSnapshotsDelete@ which the
--- 'SnapshotsDelete' request conforms to.
-type SnapshotsDeleteAPI =
+-- 'SnapshotsDelete'' request conforms to.
+type SnapshotsDeleteResource =
      Capture "project" Text :>
        "global" :>
          "snapshots" :>
-           Capture "snapshot" Text :> Delete '[JSON] Operation
+           Capture "snapshot" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] Operation
 
 -- | Deletes the specified Snapshot resource. Keep in mind that deleting a
 -- single snapshot might not necessarily delete all the data on that
@@ -61,8 +69,8 @@ type SnapshotsDeleteAPI =
 -- needed for subsequent snapshots, the data will be moved to the next
 -- corresponding snapshot. For more information, see Deleting snaphots.
 --
--- /See:/ 'snapshotsDelete' smart constructor.
-data SnapshotsDelete = SnapshotsDelete
+-- /See:/ 'snapshotsDelete'' smart constructor.
+data SnapshotsDelete' = SnapshotsDelete'
     { _sdSnapshot    :: !Text
     , _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
@@ -71,7 +79,7 @@ data SnapshotsDelete = SnapshotsDelete
     , _sdKey         :: !(Maybe Text)
     , _sdOauthToken  :: !(Maybe Text)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Text
+    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsDelete'' with the minimum fields required to make a request.
@@ -95,12 +103,12 @@ data SnapshotsDelete = SnapshotsDelete
 -- * 'sdFields'
 --
 -- * 'sdAlt'
-snapshotsDelete
+snapshotsDelete'
     :: Text -- ^ 'snapshot'
     -> Text -- ^ 'project'
-    -> SnapshotsDelete
-snapshotsDelete pSdSnapshot_ pSdProject_ =
-    SnapshotsDelete
+    -> SnapshotsDelete'
+snapshotsDelete' pSdSnapshot_ pSdProject_ =
+    SnapshotsDelete'
     { _sdSnapshot = pSdSnapshot_
     , _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
@@ -109,7 +117,7 @@ snapshotsDelete pSdSnapshot_ pSdProject_ =
     , _sdKey = Nothing
     , _sdOauthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = "json"
+    , _sdAlt = JSON
     }
 
 -- | Name of the Snapshot resource to delete.
@@ -156,21 +164,22 @@ sdFields :: Lens' SnapshotsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
 -- | Data format for the response.
-sdAlt :: Lens' SnapshotsDelete' Text
+sdAlt :: Lens' SnapshotsDelete' Alt
 sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
 
 instance GoogleRequest SnapshotsDelete' where
         type Rs SnapshotsDelete' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u SnapshotsDelete{..}
-          = go _sdSnapshot _sdQuotaUser _sdPrettyPrint
+        requestWithRoute r u SnapshotsDelete'{..}
+          = go _sdSnapshot _sdQuotaUser (Just _sdPrettyPrint)
               _sdProject
               _sdUserIp
               _sdKey
               _sdOauthToken
               _sdFields
-              _sdAlt
+              (Just _sdAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy SnapshotsDeleteAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy SnapshotsDeleteResource)
                       r
                       u

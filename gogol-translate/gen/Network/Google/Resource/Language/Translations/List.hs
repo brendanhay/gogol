@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns text translations from one language to another.
 --
 -- /See:/ <https://developers.google.com/translate/v2/using_rest Translate API Reference> for @LanguageTranslationsList@.
-module Language.Translations.List
+module Network.Google.Resource.Language.Translations.List
     (
     -- * REST Resource
-      TranslationsListAPI
+      TranslationsListResource
 
     -- * Creating a Request
-    , translationsList
-    , TranslationsList
+    , translationsList'
+    , TranslationsList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -47,24 +48,31 @@ import           Network.Google.Prelude
 import           Network.Google.Translate.Types
 
 -- | A resource alias for @LanguageTranslationsList@ which the
--- 'TranslationsList' request conforms to.
-type TranslationsListAPI =
+-- 'TranslationsList'' request conforms to.
+type TranslationsListResource =
      "v2" :>
-       QueryParam "format" Text :>
-         QueryParams "q" Text :>
-           QueryParam "source" Text :>
-             QueryParams "cid" Text :>
-               QueryParam "target" Text :>
-                 Get '[JSON] TranslationsListResponse
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "userIp" Text :>
+             QueryParam "format" LanguageTranslationsListFormat :>
+               QueryParams "q" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "source" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParams "cid" Text :>
+                         QueryParam "target" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :>
+                               Get '[JSON] TranslationsListResponse
 
 -- | Returns text translations from one language to another.
 --
--- /See:/ 'translationsList' smart constructor.
-data TranslationsList = TranslationsList
+-- /See:/ 'translationsList'' smart constructor.
+data TranslationsList' = TranslationsList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIp      :: !(Maybe Text)
-    , _tlFormat      :: !(Maybe Text)
+    , _tlFormat      :: !(Maybe LanguageTranslationsListFormat)
     , _tlQ           :: !Text
     , _tlKey         :: !(Maybe Text)
     , _tlSource      :: !(Maybe Text)
@@ -72,7 +80,7 @@ data TranslationsList = TranslationsList
     , _tlCid         :: !(Maybe Text)
     , _tlTarget      :: !Text
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsList'' with the minimum fields required to make a request.
@@ -102,12 +110,12 @@ data TranslationsList = TranslationsList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-translationsList
+translationsList'
     :: Text -- ^ 'q'
     -> Text -- ^ 'target'
-    -> TranslationsList
-translationsList pTlQ_ pTlTarget_ =
-    TranslationsList
+    -> TranslationsList'
+translationsList' pTlQ_ pTlTarget_ =
+    TranslationsList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlUserIp = Nothing
@@ -119,7 +127,7 @@ translationsList pTlQ_ pTlTarget_ =
     , _tlCid = Nothing
     , _tlTarget = pTlTarget_
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ tlUserIp :: Lens' TranslationsList' (Maybe Text)
 tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
 
 -- | The format of the text
-tlFormat :: Lens' TranslationsList' (Maybe Text)
+tlFormat :: Lens' TranslationsList' (Maybe LanguageTranslationsListFormat)
 tlFormat = lens _tlFormat (\ s a -> s{_tlFormat = a})
 
 -- | The text to translate
@@ -176,14 +184,15 @@ tlFields :: Lens' TranslationsList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TranslationsList' Text
+tlAlt :: Lens' TranslationsList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
         request = requestWithRoute defReq translateURL
-        requestWithRoute r u TranslationsList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlUserIp _tlFormat
+        requestWithRoute r u TranslationsList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+              _tlFormat
               (Just _tlQ)
               _tlKey
               _tlSource
@@ -191,9 +200,9 @@ instance GoogleRequest TranslationsList' where
               _tlCid
               (Just _tlTarget)
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TranslationsListAPI)
+                      (Proxy :: Proxy TranslationsListResource)
                       r
                       u

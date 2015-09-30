@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- project.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeFirewallsList@.
-module Compute.Firewalls.List
+module Network.Google.Resource.Compute.Firewalls.List
     (
     -- * REST Resource
-      FirewallsListAPI
+      FirewallsListResource
 
     -- * Creating a Request
-    , firewallsList
-    , FirewallsList
+    , firewallsList'
+    , FirewallsList'
 
     -- * Request Lenses
     , flQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeFirewallsList@ which the
--- 'FirewallsList' request conforms to.
-type FirewallsListAPI =
+-- 'FirewallsList'' request conforms to.
+type FirewallsListResource =
      Capture "project" Text :>
        "global" :>
          "firewalls" :>
-           QueryParam "filter" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" Word32 :>
-                 Get '[JSON] FirewallList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "filter" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "maxResults" Word32 :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] FirewallList
 
 -- | Retrieves the list of firewall resources available to the specified
 -- project.
 --
--- /See:/ 'firewallsList' smart constructor.
-data FirewallsList = FirewallsList
+-- /See:/ 'firewallsList'' smart constructor.
+data FirewallsList' = FirewallsList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flProject     :: !Text
@@ -72,7 +79,7 @@ data FirewallsList = FirewallsList
     , _flOauthToken  :: !(Maybe Text)
     , _flMaxResults  :: !Word32
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Text
+    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsList'' with the minimum fields required to make a request.
@@ -100,11 +107,11 @@ data FirewallsList = FirewallsList
 -- * 'flFields'
 --
 -- * 'flAlt'
-firewallsList
+firewallsList'
     :: Text -- ^ 'project'
-    -> FirewallsList
-firewallsList pFlProject_ =
-    FirewallsList
+    -> FirewallsList'
+firewallsList' pFlProject_ =
+    FirewallsList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flProject = pFlProject_
@@ -115,7 +122,7 @@ firewallsList pFlProject_ =
     , _flOauthToken = Nothing
     , _flMaxResults = 500
     , _flFields = Nothing
-    , _flAlt = "json"
+    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,21 +190,24 @@ flFields :: Lens' FirewallsList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
 -- | Data format for the response.
-flAlt :: Lens' FirewallsList' Text
+flAlt :: Lens' FirewallsList' Alt
 flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
 
 instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u FirewallsList{..}
-          = go _flQuotaUser _flPrettyPrint _flProject _flUserIp
+        requestWithRoute r u FirewallsList'{..}
+          = go _flQuotaUser (Just _flPrettyPrint) _flProject
+              _flUserIp
               _flKey
               _flFilter
               _flPageToken
               _flOauthToken
               (Just _flMaxResults)
               _flFields
-              _flAlt
+              (Just _flAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy FirewallsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy FirewallsListResource)
+                      r
                       u

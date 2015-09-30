@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of operating system versions.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemVersionsList@.
-module DFAReporting.OperatingSystemVersions.List
+module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
     (
     -- * REST Resource
-      OperatingSystemVersionsListAPI
+      OperatingSystemVersionsListResource
 
     -- * Creating a Request
-    , operatingSystemVersionsList
-    , OperatingSystemVersionsList
+    , operatingSystemVersionsList'
+    , OperatingSystemVersionsList'
 
     -- * Request Lenses
     , osvlQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOperatingSystemVersionsList@ which the
--- 'OperatingSystemVersionsList' request conforms to.
-type OperatingSystemVersionsListAPI =
+-- 'OperatingSystemVersionsList'' request conforms to.
+type OperatingSystemVersionsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "operatingSystemVersions" :>
-           Get '[JSON] OperatingSystemVersionsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] OperatingSystemVersionsListResponse
 
 -- | Retrieves a list of operating system versions.
 --
--- /See:/ 'operatingSystemVersionsList' smart constructor.
-data OperatingSystemVersionsList = OperatingSystemVersionsList
+-- /See:/ 'operatingSystemVersionsList'' smart constructor.
+data OperatingSystemVersionsList' = OperatingSystemVersionsList'
     { _osvlQuotaUser   :: !(Maybe Text)
     , _osvlPrettyPrint :: !Bool
     , _osvlUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data OperatingSystemVersionsList = OperatingSystemVersionsList
     , _osvlKey         :: !(Maybe Text)
     , _osvlOauthToken  :: !(Maybe Text)
     , _osvlFields      :: !(Maybe Text)
-    , _osvlAlt         :: !Text
+    , _osvlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data OperatingSystemVersionsList = OperatingSystemVersionsList
 -- * 'osvlFields'
 --
 -- * 'osvlAlt'
-operatingSystemVersionsList
+operatingSystemVersionsList'
     :: Int64 -- ^ 'profileId'
-    -> OperatingSystemVersionsList
-operatingSystemVersionsList pOsvlProfileId_ =
-    OperatingSystemVersionsList
+    -> OperatingSystemVersionsList'
+operatingSystemVersionsList' pOsvlProfileId_ =
+    OperatingSystemVersionsList'
     { _osvlQuotaUser = Nothing
     , _osvlPrettyPrint = True
     , _osvlUserIp = Nothing
@@ -95,7 +103,7 @@ operatingSystemVersionsList pOsvlProfileId_ =
     , _osvlKey = Nothing
     , _osvlOauthToken = Nothing
     , _osvlFields = Nothing
-    , _osvlAlt = "json"
+    , _osvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ osvlFields
   = lens _osvlFields (\ s a -> s{_osvlFields = a})
 
 -- | Data format for the response.
-osvlAlt :: Lens' OperatingSystemVersionsList' Text
+osvlAlt :: Lens' OperatingSystemVersionsList' Alt
 osvlAlt = lens _osvlAlt (\ s a -> s{_osvlAlt = a})
 
 instance GoogleRequest OperatingSystemVersionsList'
@@ -150,15 +158,16 @@ instance GoogleRequest OperatingSystemVersionsList'
         type Rs OperatingSystemVersionsList' =
              OperatingSystemVersionsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemVersionsList{..}
-          = go _osvlQuotaUser _osvlPrettyPrint _osvlUserIp
+        requestWithRoute r u OperatingSystemVersionsList'{..}
+          = go _osvlQuotaUser (Just _osvlPrettyPrint)
+              _osvlUserIp
               _osvlProfileId
               _osvlKey
               _osvlOauthToken
               _osvlFields
-              _osvlAlt
+              (Just _osvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OperatingSystemVersionsListAPI)
+                      (Proxy :: Proxy OperatingSystemVersionsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Check training status of your model.
 --
 -- /See:/ <https://developers.google.com/prediction/docs/developer-guide Prediction API Reference> for @PredictionTrainedmodelsGet@.
-module Prediction.Trainedmodels.Get
+module Network.Google.Resource.Prediction.Trainedmodels.Get
     (
     -- * REST Resource
-      TrainedmodelsGetAPI
+      TrainedmodelsGetResource
 
     -- * Creating a Request
-    , trainedmodelsGet
-    , TrainedmodelsGet
+    , trainedmodelsGet'
+    , TrainedmodelsGet'
 
     -- * Request Lenses
     , tgQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PredictionTrainedmodelsGet@ which the
--- 'TrainedmodelsGet' request conforms to.
-type TrainedmodelsGetAPI =
+-- 'TrainedmodelsGet'' request conforms to.
+type TrainedmodelsGetResource =
      Capture "project" Text :>
        "trainedmodels" :>
-         Capture "id" Text :> Get '[JSON] Insert2
+         Capture "id" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Insert2
 
 -- | Check training status of your model.
 --
--- /See:/ 'trainedmodelsGet' smart constructor.
-data TrainedmodelsGet = TrainedmodelsGet
+-- /See:/ 'trainedmodelsGet'' smart constructor.
+data TrainedmodelsGet' = TrainedmodelsGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgProject     :: !Text
@@ -62,7 +70,7 @@ data TrainedmodelsGet = TrainedmodelsGet
     , _tgId          :: !Text
     , _tgOauthToken  :: !(Maybe Text)
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Text
+    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TrainedmodelsGet'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data TrainedmodelsGet = TrainedmodelsGet
 -- * 'tgFields'
 --
 -- * 'tgAlt'
-trainedmodelsGet
+trainedmodelsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'id'
-    -> TrainedmodelsGet
-trainedmodelsGet pTgProject_ pTgId_ =
-    TrainedmodelsGet
+    -> TrainedmodelsGet'
+trainedmodelsGet' pTgProject_ pTgId_ =
+    TrainedmodelsGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgProject = pTgProject_
@@ -100,7 +108,7 @@ trainedmodelsGet pTgProject_ pTgId_ =
     , _tgId = pTgId_
     , _tgOauthToken = Nothing
     , _tgFields = Nothing
-    , _tgAlt = "json"
+    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,21 +154,22 @@ tgFields :: Lens' TrainedmodelsGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
 -- | Data format for the response.
-tgAlt :: Lens' TrainedmodelsGet' Text
+tgAlt :: Lens' TrainedmodelsGet' Alt
 tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
 
 instance GoogleRequest TrainedmodelsGet' where
         type Rs TrainedmodelsGet' = Insert2
         request = requestWithRoute defReq predictionURL
-        requestWithRoute r u TrainedmodelsGet{..}
-          = go _tgQuotaUser _tgPrettyPrint _tgProject _tgUserIp
+        requestWithRoute r u TrainedmodelsGet'{..}
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgProject
+              _tgUserIp
               _tgKey
               _tgId
               _tgOauthToken
               _tgFields
-              _tgAlt
+              (Just _tgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TrainedmodelsGetAPI)
+                      (Proxy :: Proxy TrainedmodelsGetResource)
                       r
                       u

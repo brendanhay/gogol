@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets one remarketing list share by remarketing list ID.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingRemarketingListSharesGet@.
-module DFAReporting.RemarketingListShares.Get
+module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
     (
     -- * REST Resource
-      RemarketingListSharesGetAPI
+      RemarketingListSharesGetResource
 
     -- * Creating a Request
-    , remarketingListSharesGet
-    , RemarketingListSharesGet
+    , remarketingListSharesGet'
+    , RemarketingListSharesGet'
 
     -- * Request Lenses
     , rlsgQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingRemarketingListSharesGet@ which the
--- 'RemarketingListSharesGet' request conforms to.
-type RemarketingListSharesGetAPI =
+-- 'RemarketingListSharesGet'' request conforms to.
+type RemarketingListSharesGetResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "remarketingListShares" :>
            Capture "remarketingListId" Int64 :>
-             Get '[JSON] RemarketingListShare
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Get '[JSON] RemarketingListShare
 
 -- | Gets one remarketing list share by remarketing list ID.
 --
--- /See:/ 'remarketingListSharesGet' smart constructor.
-data RemarketingListSharesGet = RemarketingListSharesGet
+-- /See:/ 'remarketingListSharesGet'' smart constructor.
+data RemarketingListSharesGet' = RemarketingListSharesGet'
     { _rlsgQuotaUser         :: !(Maybe Text)
     , _rlsgPrettyPrint       :: !Bool
     , _rlsgUserIp            :: !(Maybe Text)
@@ -64,7 +72,7 @@ data RemarketingListSharesGet = RemarketingListSharesGet
     , _rlsgKey               :: !(Maybe Text)
     , _rlsgOauthToken        :: !(Maybe Text)
     , _rlsgFields            :: !(Maybe Text)
-    , _rlsgAlt               :: !Text
+    , _rlsgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesGet'' with the minimum fields required to make a request.
@@ -88,12 +96,12 @@ data RemarketingListSharesGet = RemarketingListSharesGet
 -- * 'rlsgFields'
 --
 -- * 'rlsgAlt'
-remarketingListSharesGet
+remarketingListSharesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'remarketingListId'
-    -> RemarketingListSharesGet
-remarketingListSharesGet pRlsgProfileId_ pRlsgRemarketingListId_ =
-    RemarketingListSharesGet
+    -> RemarketingListSharesGet'
+remarketingListSharesGet' pRlsgProfileId_ pRlsgRemarketingListId_ =
+    RemarketingListSharesGet'
     { _rlsgQuotaUser = Nothing
     , _rlsgPrettyPrint = True
     , _rlsgUserIp = Nothing
@@ -102,7 +110,7 @@ remarketingListSharesGet pRlsgProfileId_ pRlsgRemarketingListId_ =
     , _rlsgKey = Nothing
     , _rlsgOauthToken = Nothing
     , _rlsgFields = Nothing
-    , _rlsgAlt = "json"
+    , _rlsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,7 +163,7 @@ rlsgFields
   = lens _rlsgFields (\ s a -> s{_rlsgFields = a})
 
 -- | Data format for the response.
-rlsgAlt :: Lens' RemarketingListSharesGet' Text
+rlsgAlt :: Lens' RemarketingListSharesGet' Alt
 rlsgAlt = lens _rlsgAlt (\ s a -> s{_rlsgAlt = a})
 
 instance GoogleRequest RemarketingListSharesGet'
@@ -163,16 +171,17 @@ instance GoogleRequest RemarketingListSharesGet'
         type Rs RemarketingListSharesGet' =
              RemarketingListShare
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u RemarketingListSharesGet{..}
-          = go _rlsgQuotaUser _rlsgPrettyPrint _rlsgUserIp
+        requestWithRoute r u RemarketingListSharesGet'{..}
+          = go _rlsgQuotaUser (Just _rlsgPrettyPrint)
+              _rlsgUserIp
               _rlsgProfileId
               _rlsgRemarketingListId
               _rlsgKey
               _rlsgOauthToken
               _rlsgFields
-              _rlsgAlt
+              (Just _rlsgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy RemarketingListSharesGetAPI)
+                      (Proxy :: Proxy RemarketingListSharesGetResource)
                       r
                       u

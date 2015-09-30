@@ -28,39 +28,55 @@ module Network.Google.InstanceGroups
     -- * REST Resources
 
     -- ** ResourceviewsZoneOperationsGet
-    , module Resourceviews.ZoneOperations.Get
+    , module Network.Google.Resource.Resourceviews.ZoneOperations.Get
 
     -- ** ResourceviewsZoneOperationsList
-    , module Resourceviews.ZoneOperations.List
+    , module Network.Google.Resource.Resourceviews.ZoneOperations.List
 
     -- ** ResourceviewsZoneViewsAddResources
-    , module Resourceviews.ZoneViews.AddResources
+    , module Network.Google.Resource.Resourceviews.ZoneViews.AddResources
 
     -- ** ResourceviewsZoneViewsDelete
-    , module Resourceviews.ZoneViews.Delete
+    , module Network.Google.Resource.Resourceviews.ZoneViews.Delete
 
     -- ** ResourceviewsZoneViewsGet
-    , module Resourceviews.ZoneViews.Get
+    , module Network.Google.Resource.Resourceviews.ZoneViews.Get
 
     -- ** ResourceviewsZoneViewsGetService
-    , module Resourceviews.ZoneViews.GetService
+    , module Network.Google.Resource.Resourceviews.ZoneViews.GetService
 
     -- ** ResourceviewsZoneViewsInsert
-    , module Resourceviews.ZoneViews.Insert
+    , module Network.Google.Resource.Resourceviews.ZoneViews.Insert
 
     -- ** ResourceviewsZoneViewsList
-    , module Resourceviews.ZoneViews.List
+    , module Network.Google.Resource.Resourceviews.ZoneViews.List
 
     -- ** ResourceviewsZoneViewsListResources
-    , module Resourceviews.ZoneViews.ListResources
+    , module Network.Google.Resource.Resourceviews.ZoneViews.ListResources
 
     -- ** ResourceviewsZoneViewsRemoveResources
-    , module Resourceviews.ZoneViews.RemoveResources
+    , module Network.Google.Resource.Resourceviews.ZoneViews.RemoveResources
 
     -- ** ResourceviewsZoneViewsSetService
-    , module Resourceviews.ZoneViews.SetService
+    , module Network.Google.Resource.Resourceviews.ZoneViews.SetService
 
     -- * Types
+
+    -- ** OperationWarnings
+    , OperationWarnings
+    , operationWarnings
+    , owData
+    , owCode
+    , owMessage
+
+    -- ** ResourceviewsZoneViewsListResourcesFormat
+    , ResourceviewsZoneViewsListResourcesFormat (..)
+
+    -- ** OperationWarningsData
+    , OperationWarningsData
+    , operationWarningsData
+    , owdValue
+    , owdKey
 
     -- ** ResourceView
     , ResourceView
@@ -134,6 +150,10 @@ module Network.Google.InstanceGroups
     , seName
     , sePort
 
+    -- ** ListResourceResponseItemEndpoints
+    , ListResourceResponseItemEndpoints
+    , listResourceResponseItemEndpoints
+
     -- ** ZoneViewsRemoveResourcesRequest
     , ZoneViewsRemoveResourcesRequest
     , zoneViewsRemoveResourcesRequest
@@ -143,6 +163,14 @@ module Network.Google.InstanceGroups
     , ZoneViewsAddResourcesRequest
     , zoneViewsAddResourcesRequest
     , zvarrResources
+
+    -- ** ResourceviewsZoneViewsListResourcesListState
+    , ResourceviewsZoneViewsListResourcesListState (..)
+
+    -- ** OperationError
+    , OperationError
+    , operationError
+    , oeErrors
 
     -- ** ZoneViewsGetServiceResponse
     , ZoneViewsGetServiceResponse
@@ -162,12 +190,22 @@ module Network.Google.InstanceGroups
     , lValue
     , lKey
 
+    -- ** OperationErrorErrors
+    , OperationErrorErrors
+    , operationErrorErrors
+    , oeeLocation
+    , oeeCode
+    , oeeMessage
+
     -- ** ZoneViewsSetServiceRequest
     , ZoneViewsSetServiceRequest
     , zoneViewsSetServiceRequest
     , zvssrResourceName
     , zvssrFingerprint
     , zvssrEndpoints
+
+    -- ** Alt
+    , Alt (..)
     ) where
 
 import           Network.Google.InstanceGroups.Types
@@ -189,7 +227,17 @@ TODO
 -}
 
 type InstanceGroupsAPI =
-     ZoneViews :<|> ZoneOperations
+     ZoneViewsSetServiceResource :<|>
+       ZoneViewsInsertResource
+       :<|> ZoneViewsListResource
+       :<|> ZoneViewsListResourcesResource
+       :<|> ZoneViewsGetResource
+       :<|> ZoneViewsRemoveResourcesResource
+       :<|> ZoneViewsAddResourcesResource
+       :<|> ZoneViewsGetServiceResource
+       :<|> ZoneViewsDeleteResource
+       :<|> ZoneOperationsListResource
+       :<|> ZoneOperationsGetResource
 
 instanceGroupsAPI :: Proxy InstanceGroupsAPI
 instanceGroupsAPI = Proxy

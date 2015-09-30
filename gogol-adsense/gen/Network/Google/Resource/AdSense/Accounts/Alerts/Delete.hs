@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- AdSense account.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseAccountsAlertsDelete@.
-module AdSense.Accounts.Alerts.Delete
+module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
     (
     -- * REST Resource
-      AccountsAlertsDeleteAPI
+      AccountsAlertsDeleteResource
 
     -- * Creating a Request
-    , accountsAlertsDelete
-    , AccountsAlertsDelete
+    , accountsAlertsDelete'
+    , AccountsAlertsDelete'
 
     -- * Request Lenses
     , aadQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AdsenseAccountsAlertsDelete@ which the
--- 'AccountsAlertsDelete' request conforms to.
-type AccountsAlertsDeleteAPI =
+-- 'AccountsAlertsDelete'' request conforms to.
+type AccountsAlertsDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "alerts" :>
-           Capture "alertId" Text :> Delete '[JSON] ()
+           Capture "alertId" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the specified publisher
 -- AdSense account.
 --
--- /See:/ 'accountsAlertsDelete' smart constructor.
-data AccountsAlertsDelete = AccountsAlertsDelete
+-- /See:/ 'accountsAlertsDelete'' smart constructor.
+data AccountsAlertsDelete' = AccountsAlertsDelete'
     { _aadQuotaUser   :: !(Maybe Text)
     , _aadPrettyPrint :: !Bool
     , _aadUserIp      :: !(Maybe Text)
@@ -65,7 +73,7 @@ data AccountsAlertsDelete = AccountsAlertsDelete
     , _aadKey         :: !(Maybe Text)
     , _aadOauthToken  :: !(Maybe Text)
     , _aadFields      :: !(Maybe Text)
-    , _aadAlt         :: !Text
+    , _aadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsDelete'' with the minimum fields required to make a request.
@@ -89,12 +97,12 @@ data AccountsAlertsDelete = AccountsAlertsDelete
 -- * 'aadFields'
 --
 -- * 'aadAlt'
-accountsAlertsDelete
+accountsAlertsDelete'
     :: Text -- ^ 'alertId'
     -> Text -- ^ 'accountId'
-    -> AccountsAlertsDelete
-accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
-    AccountsAlertsDelete
+    -> AccountsAlertsDelete'
+accountsAlertsDelete' pAadAlertId_ pAadAccountId_ =
+    AccountsAlertsDelete'
     { _aadQuotaUser = Nothing
     , _aadPrettyPrint = True
     , _aadUserIp = Nothing
@@ -103,7 +111,7 @@ accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
     , _aadKey = Nothing
     , _aadOauthToken = Nothing
     , _aadFields = Nothing
-    , _aadAlt = "json"
+    , _aadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,22 +161,22 @@ aadFields
   = lens _aadFields (\ s a -> s{_aadFields = a})
 
 -- | Data format for the response.
-aadAlt :: Lens' AccountsAlertsDelete' Text
+aadAlt :: Lens' AccountsAlertsDelete' Alt
 aadAlt = lens _aadAlt (\ s a -> s{_aadAlt = a})
 
 instance GoogleRequest AccountsAlertsDelete' where
         type Rs AccountsAlertsDelete' = ()
         request = requestWithRoute defReq adSenseURL
-        requestWithRoute r u AccountsAlertsDelete{..}
-          = go _aadQuotaUser _aadPrettyPrint _aadUserIp
+        requestWithRoute r u AccountsAlertsDelete'{..}
+          = go _aadQuotaUser (Just _aadPrettyPrint) _aadUserIp
               _aadAlertId
               _aadAccountId
               _aadKey
               _aadOauthToken
               _aadFields
-              _aadAlt
+              (Just _aadAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAlertsDeleteAPI)
+                      (Proxy :: Proxy AccountsAlertsDeleteResource)
                       r
                       u

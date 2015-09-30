@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- API service.
 --
 -- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsGet@.
-module StorageTransfer.TransferOperations.Get
+module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     (
     -- * REST Resource
-      TransferOperationsGetAPI
+      TransferOperationsGetResource
 
     -- * Creating a Request
-    , transferOperationsGet
-    , TransferOperationsGet
+    , transferOperationsGet'
+    , TransferOperationsGet'
 
     -- * Request Lenses
     , togXgafv
@@ -51,16 +52,30 @@ import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
 -- | A resource alias for @StoragetransferTransferOperationsGet@ which the
--- 'TransferOperationsGet' request conforms to.
-type TransferOperationsGetAPI =
-     "v1" :> "{+name}" :> Get '[JSON] Operation
+-- 'TransferOperationsGet'' request conforms to.
+type TransferOperationsGetResource =
+     "v1" :>
+       "{+name}" :>
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :> Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ 'transferOperationsGet' smart constructor.
-data TransferOperationsGet = TransferOperationsGet
+-- /See:/ 'transferOperationsGet'' smart constructor.
+data TransferOperationsGet' = TransferOperationsGet'
     { _togXgafv          :: !(Maybe Text)
     , _togQuotaUser      :: !(Maybe Text)
     , _togPrettyPrint    :: !Bool
@@ -108,11 +123,11 @@ data TransferOperationsGet = TransferOperationsGet
 -- * 'togCallback'
 --
 -- * 'togAlt'
-transferOperationsGet
+transferOperationsGet'
     :: Text -- ^ 'name'
-    -> TransferOperationsGet
-transferOperationsGet pTogName_ =
-    TransferOperationsGet
+    -> TransferOperationsGet'
+transferOperationsGet' pTogName_ =
+    TransferOperationsGet'
     { _togXgafv = Nothing
     , _togQuotaUser = Nothing
     , _togPrettyPrint = True
@@ -207,10 +222,10 @@ togAlt = lens _togAlt (\ s a -> s{_togAlt = a})
 instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
         request = requestWithRoute defReq storageTransferURL
-        requestWithRoute r u TransferOperationsGet{..}
-          = go _togXgafv _togQuotaUser _togPrettyPrint
+        requestWithRoute r u TransferOperationsGet'{..}
+          = go _togXgafv _togQuotaUser (Just _togPrettyPrint)
               _togUploadProtocol
-              _togPp
+              (Just _togPp)
               _togAccessToken
               _togUploadType
               _togBearerToken
@@ -219,9 +234,9 @@ instance GoogleRequest TransferOperationsGet' where
               _togOauthToken
               _togFields
               _togCallback
-              _togAlt
+              (Just _togAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TransferOperationsGetAPI)
+                      (Proxy :: Proxy TransferOperationsGetResource)
                       r
                       u

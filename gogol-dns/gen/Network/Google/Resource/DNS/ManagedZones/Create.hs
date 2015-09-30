@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Create a new ManagedZone.
 --
 -- /See:/ <https://developers.google.com/cloud-dns Google Cloud DNS API Reference> for @DNSManagedZonesCreate@.
-module DNS.ManagedZones.Create
+module Network.Google.Resource.DNS.ManagedZones.Create
     (
     -- * REST Resource
-      ManagedZonesCreateAPI
+      ManagedZonesCreateResource
 
     -- * Creating a Request
-    , managedZonesCreate
-    , ManagedZonesCreate
+    , managedZonesCreate'
+    , ManagedZonesCreate'
 
     -- * Request Lenses
     , mzcQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.DNS.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DNSManagedZonesCreate@ which the
--- 'ManagedZonesCreate' request conforms to.
-type ManagedZonesCreateAPI =
+-- 'ManagedZonesCreate'' request conforms to.
+type ManagedZonesCreateResource =
      Capture "project" Text :>
-       "managedZones" :> Post '[JSON] ManagedZone
+       "managedZones" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.
 --
--- /See:/ 'managedZonesCreate' smart constructor.
-data ManagedZonesCreate = ManagedZonesCreate
+-- /See:/ 'managedZonesCreate'' smart constructor.
+data ManagedZonesCreate' = ManagedZonesCreate'
     { _mzcQuotaUser   :: !(Maybe Text)
     , _mzcPrettyPrint :: !Bool
     , _mzcProject     :: !Text
@@ -59,7 +67,7 @@ data ManagedZonesCreate = ManagedZonesCreate
     , _mzcKey         :: !(Maybe Text)
     , _mzcOauthToken  :: !(Maybe Text)
     , _mzcFields      :: !(Maybe Text)
-    , _mzcAlt         :: !Text
+    , _mzcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesCreate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data ManagedZonesCreate = ManagedZonesCreate
 -- * 'mzcFields'
 --
 -- * 'mzcAlt'
-managedZonesCreate
+managedZonesCreate'
     :: Text -- ^ 'project'
-    -> ManagedZonesCreate
-managedZonesCreate pMzcProject_ =
-    ManagedZonesCreate
+    -> ManagedZonesCreate'
+managedZonesCreate' pMzcProject_ =
+    ManagedZonesCreate'
     { _mzcQuotaUser = Nothing
     , _mzcPrettyPrint = True
     , _mzcProject = pMzcProject_
@@ -93,7 +101,7 @@ managedZonesCreate pMzcProject_ =
     , _mzcKey = Nothing
     , _mzcOauthToken = Nothing
     , _mzcFields = Nothing
-    , _mzcAlt = "json"
+    , _mzcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,21 +146,21 @@ mzcFields
   = lens _mzcFields (\ s a -> s{_mzcFields = a})
 
 -- | Data format for the response.
-mzcAlt :: Lens' ManagedZonesCreate' Text
+mzcAlt :: Lens' ManagedZonesCreate' Alt
 mzcAlt = lens _mzcAlt (\ s a -> s{_mzcAlt = a})
 
 instance GoogleRequest ManagedZonesCreate' where
         type Rs ManagedZonesCreate' = ManagedZone
         request = requestWithRoute defReq dNSURL
-        requestWithRoute r u ManagedZonesCreate{..}
-          = go _mzcQuotaUser _mzcPrettyPrint _mzcProject
+        requestWithRoute r u ManagedZonesCreate'{..}
+          = go _mzcQuotaUser (Just _mzcPrettyPrint) _mzcProject
               _mzcUserIp
               _mzcKey
               _mzcOauthToken
               _mzcFields
-              _mzcAlt
+              (Just _mzcAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagedZonesCreateAPI)
+                      (Proxy :: Proxy ManagedZonesCreateResource)
                       r
                       u

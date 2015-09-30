@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Watch for changes in user aliases list
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersAliasesWatch@.
-module Directory.Users.Aliases.Watch
+module Network.Google.Resource.Directory.Users.Aliases.Watch
     (
     -- * REST Resource
-      UsersAliasesWatchAPI
+      UsersAliasesWatchResource
 
     -- * Creating a Request
-    , usersAliasesWatch
-    , UsersAliasesWatch
+    , usersAliasesWatch'
+    , UsersAliasesWatch'
 
     -- * Request Lenses
     , uawEvent
@@ -44,19 +45,26 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersAliasesWatch@ which the
--- 'UsersAliasesWatch' request conforms to.
-type UsersAliasesWatchAPI =
+-- 'UsersAliasesWatch'' request conforms to.
+type UsersAliasesWatchResource =
      "users" :>
        Capture "userKey" Text :>
          "aliases" :>
            "watch" :>
-             QueryParam "event" Text :> Post '[JSON] Channel
+             QueryParam "event" DirectoryUsersAliasesWatchEvent :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Channel
 
 -- | Watch for changes in user aliases list
 --
--- /See:/ 'usersAliasesWatch' smart constructor.
-data UsersAliasesWatch = UsersAliasesWatch
-    { _uawEvent       :: !(Maybe Text)
+-- /See:/ 'usersAliasesWatch'' smart constructor.
+data UsersAliasesWatch' = UsersAliasesWatch'
+    { _uawEvent       :: !(Maybe DirectoryUsersAliasesWatchEvent)
     , _uawQuotaUser   :: !(Maybe Text)
     , _uawPrettyPrint :: !Bool
     , _uawUserIp      :: !(Maybe Text)
@@ -64,7 +72,7 @@ data UsersAliasesWatch = UsersAliasesWatch
     , _uawOauthToken  :: !(Maybe Text)
     , _uawUserKey     :: !Text
     , _uawFields      :: !(Maybe Text)
-    , _uawAlt         :: !Text
+    , _uawAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesWatch'' with the minimum fields required to make a request.
@@ -88,11 +96,11 @@ data UsersAliasesWatch = UsersAliasesWatch
 -- * 'uawFields'
 --
 -- * 'uawAlt'
-usersAliasesWatch
+usersAliasesWatch'
     :: Text -- ^ 'userKey'
-    -> UsersAliasesWatch
-usersAliasesWatch pUawUserKey_ =
-    UsersAliasesWatch
+    -> UsersAliasesWatch'
+usersAliasesWatch' pUawUserKey_ =
+    UsersAliasesWatch'
     { _uawEvent = Nothing
     , _uawQuotaUser = Nothing
     , _uawPrettyPrint = True
@@ -101,11 +109,11 @@ usersAliasesWatch pUawUserKey_ =
     , _uawOauthToken = Nothing
     , _uawUserKey = pUawUserKey_
     , _uawFields = Nothing
-    , _uawAlt = "json"
+    , _uawAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
-uawEvent :: Lens' UsersAliasesWatch' (Maybe Text)
+uawEvent :: Lens' UsersAliasesWatch' (Maybe DirectoryUsersAliasesWatchEvent)
 uawEvent = lens _uawEvent (\ s a -> s{_uawEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +158,22 @@ uawFields
   = lens _uawFields (\ s a -> s{_uawFields = a})
 
 -- | Data format for the response.
-uawAlt :: Lens' UsersAliasesWatch' Text
+uawAlt :: Lens' UsersAliasesWatch' Alt
 uawAlt = lens _uawAlt (\ s a -> s{_uawAlt = a})
 
 instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersAliasesWatch{..}
-          = go _uawEvent _uawQuotaUser _uawPrettyPrint
+        requestWithRoute r u UsersAliasesWatch'{..}
+          = go _uawEvent _uawQuotaUser (Just _uawPrettyPrint)
               _uawUserIp
               _uawKey
               _uawOauthToken
               _uawUserKey
               _uawFields
-              _uawAlt
+              (Just _uawAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersAliasesWatchAPI)
+                      (Proxy :: Proxy UsersAliasesWatchResource)
                       r
                       u

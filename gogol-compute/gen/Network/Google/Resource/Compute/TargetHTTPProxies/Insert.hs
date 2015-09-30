@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- data included in the request.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeTargetHTTPProxiesInsert@.
-module Compute.TargetHTTPProxies.Insert
+module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
     (
     -- * REST Resource
-      TargetHTTPProxiesInsertAPI
+      TargetHTTPProxiesInsertResource
 
     -- * Creating a Request
-    , targetHTTPProxiesInsert
-    , TargetHTTPProxiesInsert
+    , targetHTTPProxiesInsert'
+    , TargetHTTPProxiesInsert'
 
     -- * Request Lenses
     , thttppiQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Compute.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ComputeTargetHTTPProxiesInsert@ which the
--- 'TargetHTTPProxiesInsert' request conforms to.
-type TargetHTTPProxiesInsertAPI =
+-- 'TargetHTTPProxiesInsert'' request conforms to.
+type TargetHTTPProxiesInsertResource =
      Capture "project" Text :>
        "global" :>
-         "targetHttpProxies" :> Post '[JSON] Operation
+         "targetHttpProxies" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a TargetHttpProxy resource in the specified project using the
 -- data included in the request.
 --
--- /See:/ 'targetHTTPProxiesInsert' smart constructor.
-data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert
+-- /See:/ 'targetHTTPProxiesInsert'' smart constructor.
+data TargetHTTPProxiesInsert' = TargetHTTPProxiesInsert'
     { _thttppiQuotaUser   :: !(Maybe Text)
     , _thttppiPrettyPrint :: !Bool
     , _thttppiProject     :: !Text
@@ -62,7 +70,7 @@ data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert
     , _thttppiKey         :: !(Maybe Text)
     , _thttppiOauthToken  :: !(Maybe Text)
     , _thttppiFields      :: !(Maybe Text)
-    , _thttppiAlt         :: !Text
+    , _thttppiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesInsert'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert
 -- * 'thttppiFields'
 --
 -- * 'thttppiAlt'
-targetHTTPProxiesInsert
+targetHTTPProxiesInsert'
     :: Text -- ^ 'project'
-    -> TargetHTTPProxiesInsert
-targetHTTPProxiesInsert pThttppiProject_ =
-    TargetHTTPProxiesInsert
+    -> TargetHTTPProxiesInsert'
+targetHTTPProxiesInsert' pThttppiProject_ =
+    TargetHTTPProxiesInsert'
     { _thttppiQuotaUser = Nothing
     , _thttppiPrettyPrint = True
     , _thttppiProject = pThttppiProject_
@@ -96,7 +104,7 @@ targetHTTPProxiesInsert pThttppiProject_ =
     , _thttppiKey = Nothing
     , _thttppiOauthToken = Nothing
     , _thttppiFields = Nothing
-    , _thttppiAlt = "json"
+    , _thttppiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,23 +154,23 @@ thttppiFields
       (\ s a -> s{_thttppiFields = a})
 
 -- | Data format for the response.
-thttppiAlt :: Lens' TargetHTTPProxiesInsert' Text
+thttppiAlt :: Lens' TargetHTTPProxiesInsert' Alt
 thttppiAlt
   = lens _thttppiAlt (\ s a -> s{_thttppiAlt = a})
 
 instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation
         request = requestWithRoute defReq computeURL
-        requestWithRoute r u TargetHTTPProxiesInsert{..}
-          = go _thttppiQuotaUser _thttppiPrettyPrint
+        requestWithRoute r u TargetHTTPProxiesInsert'{..}
+          = go _thttppiQuotaUser (Just _thttppiPrettyPrint)
               _thttppiProject
               _thttppiUserIp
               _thttppiKey
               _thttppiOauthToken
               _thttppiFields
-              _thttppiAlt
+              (Just _thttppiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TargetHTTPProxiesInsertAPI)
+                      (Proxy :: Proxy TargetHTTPProxiesInsertResource)
                       r
                       u

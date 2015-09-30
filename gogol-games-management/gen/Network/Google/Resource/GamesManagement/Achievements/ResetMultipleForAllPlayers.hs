@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- achievements may be reset.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementAchievementsResetMultipleForAllPlayers@.
-module GamesManagement.Achievements.ResetMultipleForAllPlayers
+module Network.Google.Resource.GamesManagement.Achievements.ResetMultipleForAllPlayers
     (
     -- * REST Resource
-      AchievementsResetMultipleForAllPlayersAPI
+      AchievementsResetMultipleForAllPlayersResource
 
     -- * Creating a Request
-    , achievementsResetMultipleForAllPlayers
-    , AchievementsResetMultipleForAllPlayers
+    , achievementsResetMultipleForAllPlayers'
+    , AchievementsResetMultipleForAllPlayers'
 
     -- * Request Lenses
     , armfapQuotaUser
@@ -44,24 +45,31 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementAchievementsResetMultipleForAllPlayers@ which the
--- 'AchievementsResetMultipleForAllPlayers' request conforms to.
-type AchievementsResetMultipleForAllPlayersAPI =
+-- 'AchievementsResetMultipleForAllPlayers'' request conforms to.
+type AchievementsResetMultipleForAllPlayersResource =
      "achievements" :>
-       "resetMultipleForAllPlayers" :> Post '[JSON] ()
+       "resetMultipleForAllPlayers" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Resets achievements with the given IDs for all players. This method is
 -- only available to user accounts for your developer console. Only draft
 -- achievements may be reset.
 --
--- /See:/ 'achievementsResetMultipleForAllPlayers' smart constructor.
-data AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPlayers
+-- /See:/ 'achievementsResetMultipleForAllPlayers'' smart constructor.
+data AchievementsResetMultipleForAllPlayers' = AchievementsResetMultipleForAllPlayers'
     { _armfapQuotaUser   :: !(Maybe Text)
     , _armfapPrettyPrint :: !Bool
     , _armfapUserIp      :: !(Maybe Text)
     , _armfapKey         :: !(Maybe Text)
     , _armfapOauthToken  :: !(Maybe Text)
     , _armfapFields      :: !(Maybe Text)
-    , _armfapAlt         :: !Text
+    , _armfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -81,17 +89,17 @@ data AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPla
 -- * 'armfapFields'
 --
 -- * 'armfapAlt'
-achievementsResetMultipleForAllPlayers
-    :: AchievementsResetMultipleForAllPlayers
-achievementsResetMultipleForAllPlayers =
-    AchievementsResetMultipleForAllPlayers
+achievementsResetMultipleForAllPlayers'
+    :: AchievementsResetMultipleForAllPlayers'
+achievementsResetMultipleForAllPlayers' =
+    AchievementsResetMultipleForAllPlayers'
     { _armfapQuotaUser = Nothing
     , _armfapPrettyPrint = True
     , _armfapUserIp = Nothing
     , _armfapKey = Nothing
     , _armfapOauthToken = Nothing
     , _armfapFields = Nothing
-    , _armfapAlt = "json"
+    , _armfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,7 +141,7 @@ armfapFields
   = lens _armfapFields (\ s a -> s{_armfapFields = a})
 
 -- | Data format for the response.
-armfapAlt :: Lens' AchievementsResetMultipleForAllPlayers' Text
+armfapAlt :: Lens' AchievementsResetMultipleForAllPlayers' Alt
 armfapAlt
   = lens _armfapAlt (\ s a -> s{_armfapAlt = a})
 
@@ -142,16 +150,16 @@ instance GoogleRequest
         type Rs AchievementsResetMultipleForAllPlayers' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u
-          AchievementsResetMultipleForAllPlayers{..}
-          = go _armfapQuotaUser _armfapPrettyPrint
+          AchievementsResetMultipleForAllPlayers'{..}
+          = go _armfapQuotaUser (Just _armfapPrettyPrint)
               _armfapUserIp
               _armfapKey
               _armfapOauthToken
               _armfapFields
-              _armfapAlt
+              (Just _armfapAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy AchievementsResetMultipleForAllPlayersAPI)
+                         Proxy AchievementsResetMultipleForAllPlayersResource)
                       r
                       u

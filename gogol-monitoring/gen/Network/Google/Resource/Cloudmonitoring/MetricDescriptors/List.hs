@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -23,14 +24,14 @@
 -- parameter to the value of the nextPageToken.
 --
 -- /See:/ <https://cloud.google.com/monitoring/v2beta2/ Cloud Monitoring API Reference> for @CloudmonitoringMetricDescriptorsList@.
-module Cloudmonitoring.MetricDescriptors.List
+module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.List
     (
     -- * REST Resource
-      MetricDescriptorsListAPI
+      MetricDescriptorsListResource
 
     -- * Creating a Request
-    , metricDescriptorsList
-    , MetricDescriptorsList
+    , metricDescriptorsList'
+    , MetricDescriptorsList'
 
     -- * Request Lenses
     , mdlQuotaUser
@@ -50,14 +51,21 @@ import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CloudmonitoringMetricDescriptorsList@ which the
--- 'MetricDescriptorsList' request conforms to.
-type MetricDescriptorsListAPI =
+-- 'MetricDescriptorsList'' request conforms to.
+type MetricDescriptorsListResource =
      Capture "project" Text :>
        "metricDescriptors" :>
-         QueryParam "count" Int32 :>
-           QueryParam "query" Text :>
-             QueryParam "pageToken" Text :>
-               Get '[JSON] ListMetricDescriptorsResponse
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "count" Int32 :>
+                 QueryParam "key" Text :>
+                   QueryParam "query" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] ListMetricDescriptorsResponse
 
 -- | List metric descriptors that match the query. If the query is not set,
 -- then all of the metric descriptors will be returned. Large responses
@@ -65,8 +73,8 @@ type MetricDescriptorsListAPI =
 -- request subsequent pages of results by setting the pageToken query
 -- parameter to the value of the nextPageToken.
 --
--- /See:/ 'metricDescriptorsList' smart constructor.
-data MetricDescriptorsList = MetricDescriptorsList
+-- /See:/ 'metricDescriptorsList'' smart constructor.
+data MetricDescriptorsList' = MetricDescriptorsList'
     { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
     , _mdlProject     :: !Text
@@ -77,7 +85,7 @@ data MetricDescriptorsList = MetricDescriptorsList
     , _mdlPageToken   :: !(Maybe Text)
     , _mdlOauthToken  :: !(Maybe Text)
     , _mdlFields      :: !(Maybe Text)
-    , _mdlAlt         :: !Text
+    , _mdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetricDescriptorsList'' with the minimum fields required to make a request.
@@ -105,11 +113,11 @@ data MetricDescriptorsList = MetricDescriptorsList
 -- * 'mdlFields'
 --
 -- * 'mdlAlt'
-metricDescriptorsList
+metricDescriptorsList'
     :: Text -- ^ 'project'
-    -> MetricDescriptorsList
-metricDescriptorsList pMdlProject_ =
-    MetricDescriptorsList
+    -> MetricDescriptorsList'
+metricDescriptorsList' pMdlProject_ =
+    MetricDescriptorsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True
     , _mdlProject = pMdlProject_
@@ -120,7 +128,7 @@ metricDescriptorsList pMdlProject_ =
     , _mdlPageToken = Nothing
     , _mdlOauthToken = Nothing
     , _mdlFields = Nothing
-    , _mdlAlt = "json"
+    , _mdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -186,15 +194,15 @@ mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
 -- | Data format for the response.
-mdlAlt :: Lens' MetricDescriptorsList' Text
+mdlAlt :: Lens' MetricDescriptorsList' Alt
 mdlAlt = lens _mdlAlt (\ s a -> s{_mdlAlt = a})
 
 instance GoogleRequest MetricDescriptorsList' where
         type Rs MetricDescriptorsList' =
              ListMetricDescriptorsResponse
         request = requestWithRoute defReq monitoringURL
-        requestWithRoute r u MetricDescriptorsList{..}
-          = go _mdlQuotaUser _mdlPrettyPrint _mdlProject
+        requestWithRoute r u MetricDescriptorsList'{..}
+          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlProject
               _mdlUserIp
               (Just _mdlCount)
               _mdlKey
@@ -202,9 +210,9 @@ instance GoogleRequest MetricDescriptorsList' where
               _mdlPageToken
               _mdlOauthToken
               _mdlFields
-              _mdlAlt
+              (Just _mdlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MetricDescriptorsListAPI)
+                      (Proxy :: Proxy MetricDescriptorsListResource)
                       r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes the breakpoint from the debuggee.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-debugger Google Cloud Debugger API Reference> for @ClouddebuggerDebuggerDebuggeesBreakpointsDelete@.
-module Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
     (
     -- * REST Resource
-      DebuggerDebuggeesBreakpointsDeleteAPI
+      DebuggerDebuggeesBreakpointsDeleteResource
 
     -- * Creating a Request
-    , debuggerDebuggeesBreakpointsDelete
-    , DebuggerDebuggeesBreakpointsDelete
+    , debuggerDebuggeesBreakpointsDelete'
+    , DebuggerDebuggeesBreakpointsDelete'
 
     -- * Request Lenses
     , ddbdXgafv
@@ -50,19 +51,33 @@ import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouddebuggerDebuggerDebuggeesBreakpointsDelete@ which the
--- 'DebuggerDebuggeesBreakpointsDelete' request conforms to.
-type DebuggerDebuggeesBreakpointsDeleteAPI =
+-- 'DebuggerDebuggeesBreakpointsDelete'' request conforms to.
+type DebuggerDebuggeesBreakpointsDeleteResource =
      "v2" :>
        "debugger" :>
          "debuggees" :>
            Capture "debuggeeId" Text :>
              "breakpoints" :>
-               Capture "breakpointId" Text :> Delete '[JSON] Empty
+               Capture "breakpointId" Text :>
+                 QueryParam "$.xgafv" Text :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "bearer_token" Text :>
+                                 QueryParam "key" Text :>
+                                   QueryParam "oauth_token" Text :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "callback" Text :>
+                                         QueryParam "alt" Text :>
+                                           Delete '[JSON] Empty
 
 -- | Deletes the breakpoint from the debuggee.
 --
--- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
-data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
+-- /See:/ 'debuggerDebuggeesBreakpointsDelete'' smart constructor.
+data DebuggerDebuggeesBreakpointsDelete' = DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Text)
     , _ddbdQuotaUser      :: !(Maybe Text)
     , _ddbdPrettyPrint    :: !Bool
@@ -113,12 +128,12 @@ data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
 -- * 'ddbdCallback'
 --
 -- * 'ddbdAlt'
-debuggerDebuggeesBreakpointsDelete
+debuggerDebuggeesBreakpointsDelete'
     :: Text -- ^ 'breakpointId'
     -> Text -- ^ 'debuggeeId'
-    -> DebuggerDebuggeesBreakpointsDelete
-debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsDelete
+    -> DebuggerDebuggeesBreakpointsDelete'
+debuggerDebuggeesBreakpointsDelete' pDdbdBreakpointId_ pDdbdDebuggeeId_ =
+    DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
     , _ddbdQuotaUser = Nothing
     , _ddbdPrettyPrint = True
@@ -226,10 +241,11 @@ instance GoogleRequest
         type Rs DebuggerDebuggeesBreakpointsDelete' = Empty
         request = requestWithRoute defReq debuggerURL
         requestWithRoute r u
-          DebuggerDebuggeesBreakpointsDelete{..}
-          = go _ddbdXgafv _ddbdQuotaUser _ddbdPrettyPrint
+          DebuggerDebuggeesBreakpointsDelete'{..}
+          = go _ddbdXgafv _ddbdQuotaUser
+              (Just _ddbdPrettyPrint)
               _ddbdUploadProtocol
-              _ddbdPp
+              (Just _ddbdPp)
               _ddbdAccessToken
               _ddbdUploadType
               _ddbdBreakpointId
@@ -239,10 +255,10 @@ instance GoogleRequest
               _ddbdOauthToken
               _ddbdFields
               _ddbdCallback
-              _ddbdAlt
+              (Just _ddbdAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy DebuggerDebuggeesBreakpointsDeleteAPI)
+                         Proxy DebuggerDebuggeesBreakpointsDeleteResource)
                       r
                       u

@@ -54,6 +54,27 @@ instance ToJSON InappproductsUpdateResponse where
               (catMaybes
                  [("inappproduct" .=) <$> _iurInappproduct])
 
+-- | List of localized title and description data.
+--
+-- /See:/ 'inAppProductListings' smart constructor.
+data InAppProductListings =
+    InAppProductListings
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InAppProductListings' with the minimum fields required to make a request.
+--
+inAppProductListings
+    :: InAppProductListings
+inAppProductListings = InAppProductListings
+
+instance FromJSON InAppProductListings where
+        parseJSON
+          = withObject "InAppProductListings"
+              (\ o -> pure InAppProductListings)
+
+instance ToJSON InAppProductListings where
+        toJSON = const (Object mempty)
+
 --
 -- /See:/ 'monthDay' smart constructor.
 data MonthDay = MonthDay
@@ -1483,6 +1504,28 @@ instance ToJSON ExternallyHostedApk where
                   ("usesPermissions" .=) <$> _ehaUsesPermissions,
                   ("certificateBase64s" .=) <$>
                     _ehaCertificateBase64s])
+
+-- | Prices per buyer region. None of these prices should be zero. In-app
+-- products can never be free.
+--
+-- /See:/ 'inAppProductPrices' smart constructor.
+data InAppProductPrices =
+    InAppProductPrices
+    deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'InAppProductPrices' with the minimum fields required to make a request.
+--
+inAppProductPrices
+    :: InAppProductPrices
+inAppProductPrices = InAppProductPrices
+
+instance FromJSON InAppProductPrices where
+        parseJSON
+          = withObject "InAppProductPrices"
+              (\ o -> pure InAppProductPrices)
+
+instance ToJSON InAppProductPrices where
+        toJSON = const (Object mempty)
 
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.

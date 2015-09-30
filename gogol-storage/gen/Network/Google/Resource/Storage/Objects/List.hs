@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of objects matching the criteria.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage API Reference> for @StorageObjectsList@.
-module Storage.Objects.List
+module Network.Google.Resource.Storage.Objects.List
     (
     -- * REST Resource
-      ObjectsListAPI
+      ObjectsListResource
 
     -- * Creating a Request
-    , objectsList
-    , ObjectsList
+    , objectsList'
+    , ObjectsList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -49,22 +50,30 @@ import           Network.Google.Prelude
 import           Network.Google.Storage.Types
 
 -- | A resource alias for @StorageObjectsList@ which the
--- 'ObjectsList' request conforms to.
-type ObjectsListAPI =
+-- 'ObjectsList'' request conforms to.
+type ObjectsListResource =
      "b" :>
        Capture "bucket" Text :>
          "o" :>
-           QueryParam "prefix" Text :>
-             QueryParam "versions" Bool :>
-               QueryParam "projection" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "delimiter" Text :>
-                     QueryParam "maxResults" Word32 :> Get '[JSON] Objects
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "prefix" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "versions" Bool :>
+                     QueryParam "key" Text :>
+                       QueryParam "projection" StorageObjectsListProjection
+                         :>
+                         QueryParam "pageToken" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "delimiter" Text :>
+                               QueryParam "maxResults" Word32 :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :> Get '[JSON] Objects
 
 -- | Retrieves a list of objects matching the criteria.
 --
--- /See:/ 'objectsList' smart constructor.
-data ObjectsList = ObjectsList
+-- /See:/ 'objectsList'' smart constructor.
+data ObjectsList' = ObjectsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olPrefix      :: !(Maybe Text)
@@ -72,13 +81,13 @@ data ObjectsList = ObjectsList
     , _olBucket      :: !Text
     , _olVersions    :: !(Maybe Bool)
     , _olKey         :: !(Maybe Text)
-    , _olProjection  :: !(Maybe Text)
+    , _olProjection  :: !(Maybe StorageObjectsListProjection)
     , _olPageToken   :: !(Maybe Text)
     , _olOauthToken  :: !(Maybe Text)
     , _olDelimiter   :: !(Maybe Text)
     , _olMaxResults  :: !(Maybe Word32)
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Text
+    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsList'' with the minimum fields required to make a request.
@@ -112,11 +121,11 @@ data ObjectsList = ObjectsList
 -- * 'olFields'
 --
 -- * 'olAlt'
-objectsList
+objectsList'
     :: Text -- ^ 'bucket'
-    -> ObjectsList
-objectsList pOlBucket_ =
-    ObjectsList
+    -> ObjectsList'
+objectsList' pOlBucket_ =
+    ObjectsList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olPrefix = Nothing
@@ -130,7 +139,7 @@ objectsList pOlBucket_ =
     , _olDelimiter = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -171,7 +180,7 @@ olKey :: Lens' ObjectsList' (Maybe Text)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
-olProjection :: Lens' ObjectsList' (Maybe Text)
+olProjection :: Lens' ObjectsList' (Maybe StorageObjectsListProjection)
 olProjection
   = lens _olProjection (\ s a -> s{_olProjection = a})
 
@@ -206,14 +215,15 @@ olFields :: Lens' ObjectsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' ObjectsList' Text
+olAlt :: Lens' ObjectsList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest ObjectsList' where
         type Rs ObjectsList' = Objects
         request = requestWithRoute defReq storageURL
-        requestWithRoute r u ObjectsList{..}
-          = go _olQuotaUser _olPrettyPrint _olPrefix _olUserIp
+        requestWithRoute r u ObjectsList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olPrefix
+              _olUserIp
               _olBucket
               _olVersions
               _olKey
@@ -223,6 +233,9 @@ instance GoogleRequest ObjectsList' where
               _olDelimiter
               _olMaxResults
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ObjectsListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ObjectsListResource)
+                      r
+                      u

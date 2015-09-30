@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Performs a book search.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksVolumesList@.
-module Books.Volumes.List
+module Network.Google.Resource.Books.Volumes.List
     (
     -- * REST Resource
-      VolumesListAPI
+      VolumesListResource
 
     -- * Creating a Request
-    , volumesList
-    , VolumesList
+    , volumesList'
+    , VolumesList'
 
     -- * Request Lenses
     , vlQuotaUser
@@ -55,48 +56,59 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksVolumesList@ which the
--- 'VolumesList' request conforms to.
-type VolumesListAPI =
+-- 'VolumesList'' request conforms to.
+type VolumesListResource =
      "volumes" :>
-       QueryParam "orderBy" Text :>
-         QueryParam "libraryRestrict" Text :>
-           QueryParam "partner" Text :>
-             QueryParam "q" Text :>
-               QueryParam "download" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "projection" Text :>
-                     QueryParam "filter" Text :>
-                       QueryParam "langRestrict" Text :>
-                         QueryParam "startIndex" Word32 :>
-                           QueryParam "maxResults" Word32 :>
-                             QueryParam "showPreorders" Bool :>
-                               QueryParam "printType" Text :>
-                                 Get '[JSON] Volumes
+       QueryParam "quotaUser" Text :>
+         QueryParam "prettyPrint" Bool :>
+           QueryParam "orderBy" BooksVolumesListOrderBy :>
+             QueryParam "userIp" Text :>
+               QueryParam "libraryRestrict"
+                 BooksVolumesListLibraryRestrict
+                 :>
+                 QueryParam "partner" Text :>
+                   QueryParam "q" Text :>
+                     QueryParam "download" BooksVolumesListDownload :>
+                       QueryParam "key" Text :>
+                         QueryParam "source" Text :>
+                           QueryParam "projection" BooksVolumesListProjection :>
+                             QueryParam "filter" BooksVolumesListFilter :>
+                               QueryParam "langRestrict" Text :>
+                                 QueryParam "oauth_token" Text :>
+                                   QueryParam "startIndex" Word32 :>
+                                     QueryParam "maxResults" Word32 :>
+                                       QueryParam "showPreorders" Bool :>
+                                         QueryParam "printType"
+                                           BooksVolumesListPrintType
+                                           :>
+                                           QueryParam "fields" Text :>
+                                             QueryParam "alt" Alt :>
+                                               Get '[JSON] Volumes
 
 -- | Performs a book search.
 --
--- /See:/ 'volumesList' smart constructor.
-data VolumesList = VolumesList
+-- /See:/ 'volumesList'' smart constructor.
+data VolumesList' = VolumesList'
     { _vlQuotaUser       :: !(Maybe Text)
     , _vlPrettyPrint     :: !Bool
-    , _vlOrderBy         :: !(Maybe Text)
+    , _vlOrderBy         :: !(Maybe BooksVolumesListOrderBy)
     , _vlUserIp          :: !(Maybe Text)
-    , _vlLibraryRestrict :: !(Maybe Text)
+    , _vlLibraryRestrict :: !(Maybe BooksVolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
-    , _vlDownload        :: !(Maybe Text)
+    , _vlDownload        :: !(Maybe BooksVolumesListDownload)
     , _vlKey             :: !(Maybe Text)
     , _vlSource          :: !(Maybe Text)
-    , _vlProjection      :: !(Maybe Text)
-    , _vlFilter          :: !(Maybe Text)
+    , _vlProjection      :: !(Maybe BooksVolumesListProjection)
+    , _vlFilter          :: !(Maybe BooksVolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
     , _vlOauthToken      :: !(Maybe Text)
     , _vlStartIndex      :: !(Maybe Word32)
     , _vlMaxResults      :: !(Maybe Word32)
     , _vlShowPreorders   :: !(Maybe Bool)
-    , _vlPrintType       :: !(Maybe Text)
+    , _vlPrintType       :: !(Maybe BooksVolumesListPrintType)
     , _vlFields          :: !(Maybe Text)
-    , _vlAlt             :: !Text
+    , _vlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesList'' with the minimum fields required to make a request.
@@ -142,11 +154,11 @@ data VolumesList = VolumesList
 -- * 'vlFields'
 --
 -- * 'vlAlt'
-volumesList
+volumesList'
     :: Text -- ^ 'q'
-    -> VolumesList
-volumesList pVlQ_ =
-    VolumesList
+    -> VolumesList'
+volumesList' pVlQ_ =
+    VolumesList'
     { _vlQuotaUser = Nothing
     , _vlPrettyPrint = True
     , _vlOrderBy = Nothing
@@ -166,7 +178,7 @@ volumesList pVlQ_ =
     , _vlShowPreorders = Nothing
     , _vlPrintType = Nothing
     , _vlFields = Nothing
-    , _vlAlt = "json"
+    , _vlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,7 +195,7 @@ vlPrettyPrint
       (\ s a -> s{_vlPrettyPrint = a})
 
 -- | Sort search results.
-vlOrderBy :: Lens' VolumesList' (Maybe Text)
+vlOrderBy :: Lens' VolumesList' (Maybe BooksVolumesListOrderBy)
 vlOrderBy
   = lens _vlOrderBy (\ s a -> s{_vlOrderBy = a})
 
@@ -193,7 +205,7 @@ vlUserIp :: Lens' VolumesList' (Maybe Text)
 vlUserIp = lens _vlUserIp (\ s a -> s{_vlUserIp = a})
 
 -- | Restrict search to this user\'s library.
-vlLibraryRestrict :: Lens' VolumesList' (Maybe Text)
+vlLibraryRestrict :: Lens' VolumesList' (Maybe BooksVolumesListLibraryRestrict)
 vlLibraryRestrict
   = lens _vlLibraryRestrict
       (\ s a -> s{_vlLibraryRestrict = a})
@@ -208,7 +220,7 @@ vlQ :: Lens' VolumesList' Text
 vlQ = lens _vlQ (\ s a -> s{_vlQ = a})
 
 -- | Restrict to volumes by download availability.
-vlDownload :: Lens' VolumesList' (Maybe Text)
+vlDownload :: Lens' VolumesList' (Maybe BooksVolumesListDownload)
 vlDownload
   = lens _vlDownload (\ s a -> s{_vlDownload = a})
 
@@ -223,12 +235,12 @@ vlSource :: Lens' VolumesList' (Maybe Text)
 vlSource = lens _vlSource (\ s a -> s{_vlSource = a})
 
 -- | Restrict information returned to a set of selected fields.
-vlProjection :: Lens' VolumesList' (Maybe Text)
+vlProjection :: Lens' VolumesList' (Maybe BooksVolumesListProjection)
 vlProjection
   = lens _vlProjection (\ s a -> s{_vlProjection = a})
 
 -- | Filter search results.
-vlFilter :: Lens' VolumesList' (Maybe Text)
+vlFilter :: Lens' VolumesList' (Maybe BooksVolumesListFilter)
 vlFilter = lens _vlFilter (\ s a -> s{_vlFilter = a})
 
 -- | Restrict results to books with this language code.
@@ -259,7 +271,7 @@ vlShowPreorders
       (\ s a -> s{_vlShowPreorders = a})
 
 -- | Restrict to books or magazines.
-vlPrintType :: Lens' VolumesList' (Maybe Text)
+vlPrintType :: Lens' VolumesList' (Maybe BooksVolumesListPrintType)
 vlPrintType
   = lens _vlPrintType (\ s a -> s{_vlPrintType = a})
 
@@ -268,14 +280,15 @@ vlFields :: Lens' VolumesList' (Maybe Text)
 vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
 
 -- | Data format for the response.
-vlAlt :: Lens' VolumesList' Text
+vlAlt :: Lens' VolumesList' Alt
 vlAlt = lens _vlAlt (\ s a -> s{_vlAlt = a})
 
 instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u VolumesList{..}
-          = go _vlQuotaUser _vlPrettyPrint _vlOrderBy _vlUserIp
+        requestWithRoute r u VolumesList'{..}
+          = go _vlQuotaUser (Just _vlPrettyPrint) _vlOrderBy
+              _vlUserIp
               _vlLibraryRestrict
               _vlPartner
               (Just _vlQ)
@@ -291,6 +304,9 @@ instance GoogleRequest VolumesList' where
               _vlShowPreorders
               _vlPrintType
               _vlFields
-              _vlAlt
+              (Just _vlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy VolumesListAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy VolumesListResource)
+                      r
+                      u

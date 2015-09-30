@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve all Organization Units
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryOrgunitsList@.
-module Directory.Orgunits.List
+module Network.Google.Resource.Directory.Orgunits.List
     (
     -- * REST Resource
-      OrgunitsListAPI
+      OrgunitsListResource
 
     -- * Creating a Request
-    , orgunitsList
-    , OrgunitsList
+    , orgunitsList'
+    , OrgunitsList'
 
     -- * Request Lenses
     , olQuotaUser
@@ -45,28 +46,35 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryOrgunitsList@ which the
--- 'OrgunitsList' request conforms to.
-type OrgunitsListAPI =
+-- 'OrgunitsList'' request conforms to.
+type OrgunitsListResource =
      "customer" :>
        Capture "customerId" Text :>
          "orgunits" :>
-           QueryParam "orgUnitPath" Text :>
-             QueryParam "type" Text :> Get '[JSON] OrgUnits
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "orgUnitPath" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "type" DirectoryOrgunitsListType :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] OrgUnits
 
 -- | Retrieve all Organization Units
 --
--- /See:/ 'orgunitsList' smart constructor.
-data OrgunitsList = OrgunitsList
+-- /See:/ 'orgunitsList'' smart constructor.
+data OrgunitsList' = OrgunitsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olUserIp      :: !(Maybe Text)
     , _olOrgUnitPath :: !Text
     , _olCustomerId  :: !Text
     , _olKey         :: !(Maybe Text)
-    , _olType        :: !(Maybe Text)
+    , _olType        :: !(Maybe DirectoryOrgunitsListType)
     , _olOauthToken  :: !(Maybe Text)
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Text
+    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgunitsList'' with the minimum fields required to make a request.
@@ -92,11 +100,11 @@ data OrgunitsList = OrgunitsList
 -- * 'olFields'
 --
 -- * 'olAlt'
-orgunitsList
+orgunitsList'
     :: Text -- ^ 'customerId'
-    -> OrgunitsList
-orgunitsList pOlCustomerId_ =
-    OrgunitsList
+    -> OrgunitsList'
+orgunitsList' pOlCustomerId_ =
+    OrgunitsList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olUserIp = Nothing
@@ -106,7 +114,7 @@ orgunitsList pOlCustomerId_ =
     , _olType = Nothing
     , _olOauthToken = Nothing
     , _olFields = Nothing
-    , _olAlt = "json"
+    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,7 +153,7 @@ olKey :: Lens' OrgunitsList' (Maybe Text)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Whether to return all sub-organizations or just immediate children
-olType :: Lens' OrgunitsList' (Maybe Text)
+olType :: Lens' OrgunitsList' (Maybe DirectoryOrgunitsListType)
 olType = lens _olType (\ s a -> s{_olType = a})
 
 -- | OAuth 2.0 token for the current user.
@@ -158,21 +166,23 @@ olFields :: Lens' OrgunitsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
 -- | Data format for the response.
-olAlt :: Lens' OrgunitsList' Text
+olAlt :: Lens' OrgunitsList' Alt
 olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
 
 instance GoogleRequest OrgunitsList' where
         type Rs OrgunitsList' = OrgUnits
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u OrgunitsList{..}
-          = go _olQuotaUser _olPrettyPrint _olUserIp
+        requestWithRoute r u OrgunitsList'{..}
+          = go _olQuotaUser (Just _olPrettyPrint) _olUserIp
               (Just _olOrgUnitPath)
               _olCustomerId
               _olKey
               _olType
               _olOauthToken
               _olFields
-              _olAlt
+              (Just _olAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy OrgunitsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy OrgunitsListResource)
+                      r
                       u

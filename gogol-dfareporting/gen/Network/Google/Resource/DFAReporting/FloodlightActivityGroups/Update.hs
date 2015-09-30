@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing floodlight activity group.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingFloodlightActivityGroupsUpdate@.
-module DFAReporting.FloodlightActivityGroups.Update
+module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
     (
     -- * REST Resource
-      FloodlightActivityGroupsUpdateAPI
+      FloodlightActivityGroupsUpdateResource
 
     -- * Creating a Request
-    , floodlightActivityGroupsUpdate
-    , FloodlightActivityGroupsUpdate
+    , floodlightActivityGroupsUpdate'
+    , FloodlightActivityGroupsUpdate'
 
     -- * Request Lenses
     , faguQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingFloodlightActivityGroupsUpdate@ which the
--- 'FloodlightActivityGroupsUpdate' request conforms to.
-type FloodlightActivityGroupsUpdateAPI =
+-- 'FloodlightActivityGroupsUpdate'' request conforms to.
+type FloodlightActivityGroupsUpdateResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "floodlightActivityGroups" :>
-           Put '[JSON] FloodlightActivityGroup
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Put '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group.
 --
--- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
-data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
+-- /See:/ 'floodlightActivityGroupsUpdate'' smart constructor.
+data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
     { _faguQuotaUser   :: !(Maybe Text)
     , _faguPrettyPrint :: !Bool
     , _faguUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
     , _faguKey         :: !(Maybe Text)
     , _faguOauthToken  :: !(Maybe Text)
     , _faguFields      :: !(Maybe Text)
-    , _faguAlt         :: !Text
+    , _faguAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsUpdate'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
 -- * 'faguFields'
 --
 -- * 'faguAlt'
-floodlightActivityGroupsUpdate
+floodlightActivityGroupsUpdate'
     :: Int64 -- ^ 'profileId'
-    -> FloodlightActivityGroupsUpdate
-floodlightActivityGroupsUpdate pFaguProfileId_ =
-    FloodlightActivityGroupsUpdate
+    -> FloodlightActivityGroupsUpdate'
+floodlightActivityGroupsUpdate' pFaguProfileId_ =
+    FloodlightActivityGroupsUpdate'
     { _faguQuotaUser = Nothing
     , _faguPrettyPrint = True
     , _faguUserIp = Nothing
@@ -95,7 +103,7 @@ floodlightActivityGroupsUpdate pFaguProfileId_ =
     , _faguKey = Nothing
     , _faguOauthToken = Nothing
     , _faguFields = Nothing
-    , _faguAlt = "json"
+    , _faguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ faguFields
   = lens _faguFields (\ s a -> s{_faguFields = a})
 
 -- | Data format for the response.
-faguAlt :: Lens' FloodlightActivityGroupsUpdate' Text
+faguAlt :: Lens' FloodlightActivityGroupsUpdate' Alt
 faguAlt = lens _faguAlt (\ s a -> s{_faguAlt = a})
 
 instance GoogleRequest
@@ -151,15 +159,17 @@ instance GoogleRequest
              FloodlightActivityGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
-          FloodlightActivityGroupsUpdate{..}
-          = go _faguQuotaUser _faguPrettyPrint _faguUserIp
+          FloodlightActivityGroupsUpdate'{..}
+          = go _faguQuotaUser (Just _faguPrettyPrint)
+              _faguUserIp
               _faguProfileId
               _faguKey
               _faguOauthToken
               _faguFields
-              _faguAlt
+              (Just _faguAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy FloodlightActivityGroupsUpdateAPI)
+                      (Proxy ::
+                         Proxy FloodlightActivityGroupsUpdateResource)
                       r
                       u

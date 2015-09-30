@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Deletes a GTM Trigger.
 --
 -- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersDelete@.
-module TagManager.Accounts.Containers.Triggers.Delete
+module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
     (
     -- * REST Resource
-      AccountsContainersTriggersDeleteAPI
+      AccountsContainersTriggersDeleteResource
 
     -- * Creating a Request
-    , accountsContainersTriggersDelete
-    , AccountsContainersTriggersDelete
+    , accountsContainersTriggersDelete'
+    , AccountsContainersTriggersDelete'
 
     -- * Request Lenses
     , actdQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
 -- | A resource alias for @TagmanagerAccountsContainersTriggersDelete@ which the
--- 'AccountsContainersTriggersDelete' request conforms to.
-type AccountsContainersTriggersDeleteAPI =
+-- 'AccountsContainersTriggersDelete'' request conforms to.
+type AccountsContainersTriggersDeleteResource =
      "accounts" :>
        Capture "accountId" Text :>
          "containers" :>
            Capture "containerId" Text :>
              "triggers" :>
-               Capture "triggerId" Text :> Delete '[JSON] ()
+               Capture "triggerId" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Deletes a GTM Trigger.
 --
--- /See:/ 'accountsContainersTriggersDelete' smart constructor.
-data AccountsContainersTriggersDelete = AccountsContainersTriggersDelete
+-- /See:/ 'accountsContainersTriggersDelete'' smart constructor.
+data AccountsContainersTriggersDelete' = AccountsContainersTriggersDelete'
     { _actdQuotaUser   :: !(Maybe Text)
     , _actdPrettyPrint :: !Bool
     , _actdContainerId :: !Text
@@ -67,7 +75,7 @@ data AccountsContainersTriggersDelete = AccountsContainersTriggersDelete
     , _actdKey         :: !(Maybe Text)
     , _actdOauthToken  :: !(Maybe Text)
     , _actdFields      :: !(Maybe Text)
-    , _actdAlt         :: !Text
+    , _actdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersDelete'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AccountsContainersTriggersDelete = AccountsContainersTriggersDelete
 -- * 'actdFields'
 --
 -- * 'actdAlt'
-accountsContainersTriggersDelete
+accountsContainersTriggersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
     -> Text -- ^ 'accountId'
-    -> AccountsContainersTriggersDelete
-accountsContainersTriggersDelete pActdContainerId_ pActdTriggerId_ pActdAccountId_ =
-    AccountsContainersTriggersDelete
+    -> AccountsContainersTriggersDelete'
+accountsContainersTriggersDelete' pActdContainerId_ pActdTriggerId_ pActdAccountId_ =
+    AccountsContainersTriggersDelete'
     { _actdQuotaUser = Nothing
     , _actdPrettyPrint = True
     , _actdContainerId = pActdContainerId_
@@ -109,7 +117,7 @@ accountsContainersTriggersDelete pActdContainerId_ pActdTriggerId_ pActdAccountI
     , _actdKey = Nothing
     , _actdOauthToken = Nothing
     , _actdFields = Nothing
-    , _actdAlt = "json"
+    , _actdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -168,7 +176,7 @@ actdFields
   = lens _actdFields (\ s a -> s{_actdFields = a})
 
 -- | Data format for the response.
-actdAlt :: Lens' AccountsContainersTriggersDelete' Text
+actdAlt :: Lens' AccountsContainersTriggersDelete' Alt
 actdAlt = lens _actdAlt (\ s a -> s{_actdAlt = a})
 
 instance GoogleRequest
@@ -176,17 +184,19 @@ instance GoogleRequest
         type Rs AccountsContainersTriggersDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u
-          AccountsContainersTriggersDelete{..}
-          = go _actdQuotaUser _actdPrettyPrint _actdContainerId
+          AccountsContainersTriggersDelete'{..}
+          = go _actdQuotaUser (Just _actdPrettyPrint)
+              _actdContainerId
               _actdTriggerId
               _actdUserIp
               _actdAccountId
               _actdKey
               _actdOauthToken
               _actdFields
-              _actdAlt
+              (Just _actdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsContainersTriggersDeleteAPI)
+                      (Proxy ::
+                         Proxy AccountsContainersTriggersDeleteResource)
                       r
                       u

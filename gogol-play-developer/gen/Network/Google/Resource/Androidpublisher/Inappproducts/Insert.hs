@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new in-app product for an app.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsInsert@.
-module Androidpublisher.Inappproducts.Insert
+module Network.Google.Resource.Androidpublisher.Inappproducts.Insert
     (
     -- * REST Resource
-      InappproductsInsertAPI
+      InappproductsInsertResource
 
     -- * Creating a Request
-    , inappproductsInsert
-    , InappproductsInsert
+    , inappproductsInsert'
+    , InappproductsInsert'
 
     -- * Request Lenses
     , iiQuotaUser
@@ -44,17 +45,23 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsInsert@ which the
--- 'InappproductsInsert' request conforms to.
-type InappproductsInsertAPI =
+-- 'InappproductsInsert'' request conforms to.
+type InappproductsInsertResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         QueryParam "autoConvertMissingPrices" Bool :>
-           Post '[JSON] InAppProduct
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "autoConvertMissingPrices" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] InAppProduct
 
 -- | Creates a new in-app product for an app.
 --
--- /See:/ 'inappproductsInsert' smart constructor.
-data InappproductsInsert = InappproductsInsert
+-- /See:/ 'inappproductsInsert'' smart constructor.
+data InappproductsInsert' = InappproductsInsert'
     { _iiQuotaUser                :: !(Maybe Text)
     , _iiPrettyPrint              :: !Bool
     , _iiAutoConvertMissingPrices :: !(Maybe Bool)
@@ -63,7 +70,7 @@ data InappproductsInsert = InappproductsInsert
     , _iiKey                      :: !(Maybe Text)
     , _iiOauthToken               :: !(Maybe Text)
     , _iiFields                   :: !(Maybe Text)
-    , _iiAlt                      :: !Text
+    , _iiAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsInsert'' with the minimum fields required to make a request.
@@ -87,11 +94,11 @@ data InappproductsInsert = InappproductsInsert
 -- * 'iiFields'
 --
 -- * 'iiAlt'
-inappproductsInsert
+inappproductsInsert'
     :: Text -- ^ 'packageName'
-    -> InappproductsInsert
-inappproductsInsert pIiPackageName_ =
-    InappproductsInsert
+    -> InappproductsInsert'
+inappproductsInsert' pIiPackageName_ =
+    InappproductsInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiAutoConvertMissingPrices = Nothing
@@ -100,7 +107,7 @@ inappproductsInsert pIiPackageName_ =
     , _iiKey = Nothing
     , _iiOauthToken = Nothing
     , _iiFields = Nothing
-    , _iiAlt = "json"
+    , _iiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,23 +159,23 @@ iiFields :: Lens' InappproductsInsert' (Maybe Text)
 iiFields = lens _iiFields (\ s a -> s{_iiFields = a})
 
 -- | Data format for the response.
-iiAlt :: Lens' InappproductsInsert' Text
+iiAlt :: Lens' InappproductsInsert' Alt
 iiAlt = lens _iiAlt (\ s a -> s{_iiAlt = a})
 
 instance GoogleRequest InappproductsInsert' where
         type Rs InappproductsInsert' = InAppProduct
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsInsert{..}
-          = go _iiQuotaUser _iiPrettyPrint
+        requestWithRoute r u InappproductsInsert'{..}
+          = go _iiQuotaUser (Just _iiPrettyPrint)
               _iiAutoConvertMissingPrices
               _iiPackageName
               _iiUserIp
               _iiKey
               _iiOauthToken
               _iiFields
-              _iiAlt
+              (Just _iiAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsInsertAPI)
+                      (Proxy :: Proxy InappproductsInsertResource)
                       r
                       u

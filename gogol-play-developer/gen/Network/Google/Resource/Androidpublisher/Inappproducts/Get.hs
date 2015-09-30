@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Returns information about the in-app product specified.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Developer API Reference> for @AndroidpublisherInappproductsGet@.
-module Androidpublisher.Inappproducts.Get
+module Network.Google.Resource.Androidpublisher.Inappproducts.Get
     (
     -- * REST Resource
-      InappproductsGetAPI
+      InappproductsGetResource
 
     -- * Creating a Request
-    , inappproductsGet
-    , InappproductsGet
+    , inappproductsGet'
+    , InappproductsGet'
 
     -- * Request Lenses
     , igQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.PlayDeveloper.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidpublisherInappproductsGet@ which the
--- 'InappproductsGet' request conforms to.
-type InappproductsGetAPI =
+-- 'InappproductsGet'' request conforms to.
+type InappproductsGetResource =
      Capture "packageName" Text :>
        "inappproducts" :>
-         Capture "sku" Text :> Get '[JSON] InAppProduct
+         Capture "sku" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] InAppProduct
 
 -- | Returns information about the in-app product specified.
 --
--- /See:/ 'inappproductsGet' smart constructor.
-data InappproductsGet = InappproductsGet
+-- /See:/ 'inappproductsGet'' smart constructor.
+data InappproductsGet' = InappproductsGet'
     { _igQuotaUser   :: !(Maybe Text)
     , _igPrettyPrint :: !Bool
     , _igPackageName :: !Text
@@ -62,7 +70,7 @@ data InappproductsGet = InappproductsGet
     , _igSku         :: !Text
     , _igOauthToken  :: !(Maybe Text)
     , _igFields      :: !(Maybe Text)
-    , _igAlt         :: !Text
+    , _igAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InappproductsGet'' with the minimum fields required to make a request.
@@ -86,12 +94,12 @@ data InappproductsGet = InappproductsGet
 -- * 'igFields'
 --
 -- * 'igAlt'
-inappproductsGet
+inappproductsGet'
     :: Text -- ^ 'packageName'
     -> Text -- ^ 'sku'
-    -> InappproductsGet
-inappproductsGet pIgPackageName_ pIgSku_ =
-    InappproductsGet
+    -> InappproductsGet'
+inappproductsGet' pIgPackageName_ pIgSku_ =
+    InappproductsGet'
     { _igQuotaUser = Nothing
     , _igPrettyPrint = True
     , _igPackageName = pIgPackageName_
@@ -100,7 +108,7 @@ inappproductsGet pIgPackageName_ pIgSku_ =
     , _igSku = pIgSku_
     , _igOauthToken = Nothing
     , _igFields = Nothing
-    , _igAlt = "json"
+    , _igAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,22 +154,23 @@ igFields :: Lens' InappproductsGet' (Maybe Text)
 igFields = lens _igFields (\ s a -> s{_igFields = a})
 
 -- | Data format for the response.
-igAlt :: Lens' InappproductsGet' Text
+igAlt :: Lens' InappproductsGet' Alt
 igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
 
 instance GoogleRequest InappproductsGet' where
         type Rs InappproductsGet' = InAppProduct
         request = requestWithRoute defReq playDeveloperURL
-        requestWithRoute r u InappproductsGet{..}
-          = go _igQuotaUser _igPrettyPrint _igPackageName
+        requestWithRoute r u InappproductsGet'{..}
+          = go _igQuotaUser (Just _igPrettyPrint)
+              _igPackageName
               _igUserIp
               _igKey
               _igSku
               _igOauthToken
               _igFields
-              _igAlt
+              (Just _igAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy InappproductsGetAPI)
+                      (Proxy :: Proxy InappproductsGetResource)
                       r
                       u

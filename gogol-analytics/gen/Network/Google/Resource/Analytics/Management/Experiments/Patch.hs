@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Update an existing experiment. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/analytics/ Google Analytics API Reference> for @AnalyticsManagementExperimentsPatch@.
-module Analytics.Management.Experiments.Patch
+module Network.Google.Resource.Analytics.Management.Experiments.Patch
     (
     -- * REST Resource
-      ManagementExperimentsPatchAPI
+      ManagementExperimentsPatchResource
 
     -- * Creating a Request
-    , managementExperimentsPatch
-    , ManagementExperimentsPatch
+    , managementExperimentsPatch'
+    , ManagementExperimentsPatch'
 
     -- * Request Lenses
     , mepQuotaUser
@@ -46,8 +47,8 @@ import           Network.Google.Analytics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AnalyticsManagementExperimentsPatch@ which the
--- 'ManagementExperimentsPatch' request conforms to.
-type ManagementExperimentsPatchAPI =
+-- 'ManagementExperimentsPatch'' request conforms to.
+type ManagementExperimentsPatchResource =
      "management" :>
        "accounts" :>
          Capture "accountId" Text :>
@@ -57,12 +58,19 @@ type ManagementExperimentsPatchAPI =
                  Capture "profileId" Text :>
                    "experiments" :>
                      Capture "experimentId" Text :>
-                       Patch '[JSON] Experiment
+                       QueryParam "quotaUser" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "userIp" Text :>
+                             QueryParam "key" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "fields" Text :>
+                                   QueryParam "alt" Alt :>
+                                     Patch '[JSON] Experiment
 
 -- | Update an existing experiment. This method supports patch semantics.
 --
--- /See:/ 'managementExperimentsPatch' smart constructor.
-data ManagementExperimentsPatch = ManagementExperimentsPatch
+-- /See:/ 'managementExperimentsPatch'' smart constructor.
+data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     { _mepQuotaUser     :: !(Maybe Text)
     , _mepPrettyPrint   :: !Bool
     , _mepWebPropertyId :: !Text
@@ -73,7 +81,7 @@ data ManagementExperimentsPatch = ManagementExperimentsPatch
     , _mepKey           :: !(Maybe Text)
     , _mepOauthToken    :: !(Maybe Text)
     , _mepFields        :: !(Maybe Text)
-    , _mepAlt           :: !Text
+    , _mepAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsPatch'' with the minimum fields required to make a request.
@@ -101,14 +109,14 @@ data ManagementExperimentsPatch = ManagementExperimentsPatch
 -- * 'mepFields'
 --
 -- * 'mepAlt'
-managementExperimentsPatch
+managementExperimentsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
-    -> ManagementExperimentsPatch
-managementExperimentsPatch pMepWebPropertyId_ pMepProfileId_ pMepAccountId_ pMepExperimentId_ =
-    ManagementExperimentsPatch
+    -> ManagementExperimentsPatch'
+managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepAccountId_ pMepExperimentId_ =
+    ManagementExperimentsPatch'
     { _mepQuotaUser = Nothing
     , _mepPrettyPrint = False
     , _mepWebPropertyId = pMepWebPropertyId_
@@ -119,7 +127,7 @@ managementExperimentsPatch pMepWebPropertyId_ pMepProfileId_ pMepAccountId_ pMep
     , _mepKey = Nothing
     , _mepOauthToken = Nothing
     , _mepFields = Nothing
-    , _mepAlt = "json"
+    , _mepAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,15 +189,16 @@ mepFields
   = lens _mepFields (\ s a -> s{_mepFields = a})
 
 -- | Data format for the response.
-mepAlt :: Lens' ManagementExperimentsPatch' Text
+mepAlt :: Lens' ManagementExperimentsPatch' Alt
 mepAlt = lens _mepAlt (\ s a -> s{_mepAlt = a})
 
 instance GoogleRequest ManagementExperimentsPatch'
          where
         type Rs ManagementExperimentsPatch' = Experiment
         request = requestWithRoute defReq analyticsURL
-        requestWithRoute r u ManagementExperimentsPatch{..}
-          = go _mepQuotaUser _mepPrettyPrint _mepWebPropertyId
+        requestWithRoute r u ManagementExperimentsPatch'{..}
+          = go _mepQuotaUser (Just _mepPrettyPrint)
+              _mepWebPropertyId
               _mepUserIp
               _mepProfileId
               _mepAccountId
@@ -197,9 +206,9 @@ instance GoogleRequest ManagementExperimentsPatch'
               _mepKey
               _mepOauthToken
               _mepFields
-              _mepAlt
+              (Just _mepAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ManagementExperimentsPatchAPI)
+                      (Proxy :: Proxy ManagementExperimentsPatchResource)
                       r
                       u

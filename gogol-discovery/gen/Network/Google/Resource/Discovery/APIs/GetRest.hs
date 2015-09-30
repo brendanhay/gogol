@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieve the description of a particular version of an api.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference> for @DiscoveryAPIsGetRest@.
-module Discovery.APIs.GetRest
+module Network.Google.Resource.Discovery.APIs.GetRest
     (
     -- * REST Resource
-      ApisGetRestAPI
+      ApisGetRestResource
 
     -- * Creating a Request
-    , aPIsGetRest
-    , APIsGetRest
+    , aPIsGetRest'
+    , APIsGetRest'
 
     -- * Request Lenses
     , agrQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.Discovery.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DiscoveryAPIsGetRest@ which the
--- 'APIsGetRest' request conforms to.
-type ApisGetRestAPI =
+-- 'APIsGetRest'' request conforms to.
+type ApisGetRestResource =
      "apis" :>
        Capture "api" Text :>
          Capture "version" Text :>
-           "rest" :> Get '[JSON] RestDescription
+           "rest" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] RestDescription
 
 -- | Retrieve the description of a particular version of an api.
 --
--- /See:/ 'aPIsGetRest' smart constructor.
-data APIsGetRest = APIsGetRest
+-- /See:/ 'aPIsGetRest'' smart constructor.
+data APIsGetRest' = APIsGetRest'
     { _agrQuotaUser   :: !(Maybe Text)
     , _agrPrettyPrint :: !Bool
     , _agrUserIp      :: !(Maybe Text)
@@ -63,7 +71,7 @@ data APIsGetRest = APIsGetRest
     , _agrApi         :: !Text
     , _agrOauthToken  :: !(Maybe Text)
     , _agrFields      :: !(Maybe Text)
-    , _agrAlt         :: !Text
+    , _agrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIsGetRest'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data APIsGetRest = APIsGetRest
 -- * 'agrFields'
 --
 -- * 'agrAlt'
-aPIsGetRest
+aPIsGetRest'
     :: Text -- ^ 'version'
     -> Text -- ^ 'api'
-    -> APIsGetRest
-aPIsGetRest pAgrVersion_ pAgrApi_ =
-    APIsGetRest
+    -> APIsGetRest'
+aPIsGetRest' pAgrVersion_ pAgrApi_ =
+    APIsGetRest'
     { _agrQuotaUser = Nothing
     , _agrPrettyPrint = True
     , _agrUserIp = Nothing
@@ -101,7 +109,7 @@ aPIsGetRest pAgrVersion_ pAgrApi_ =
     , _agrApi = pAgrApi_
     , _agrOauthToken = Nothing
     , _agrFields = Nothing
-    , _agrAlt = "json"
+    , _agrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,18 +158,22 @@ agrFields
   = lens _agrFields (\ s a -> s{_agrFields = a})
 
 -- | Data format for the response.
-agrAlt :: Lens' APIsGetRest' Text
+agrAlt :: Lens' APIsGetRest' Alt
 agrAlt = lens _agrAlt (\ s a -> s{_agrAlt = a})
 
 instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription
         request = requestWithRoute defReq discoveryURL
-        requestWithRoute r u APIsGetRest{..}
-          = go _agrQuotaUser _agrPrettyPrint _agrUserIp _agrKey
+        requestWithRoute r u APIsGetRest'{..}
+          = go _agrQuotaUser (Just _agrPrettyPrint) _agrUserIp
+              _agrKey
               _agrVersion
               _agrApi
               _agrOauthToken
               _agrFields
-              _agrAlt
+              (Just _agrAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy ApisGetRestAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy ApisGetRestResource)
+                      r
+                      u

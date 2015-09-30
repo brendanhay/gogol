@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of users contained within the specified project.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/access/user-accounts/api/latest/ Cloud User Accounts API Reference> for @ClouduseraccountsUsersList@.
-module Clouduseraccounts.Users.List
+module Network.Google.Resource.Clouduseraccounts.Users.List
     (
     -- * REST Resource
-      UsersListAPI
+      UsersListResource
 
     -- * Creating a Request
-    , usersList
-    , UsersList
+    , usersList'
+    , UsersList'
 
     -- * Request Lenses
     , ulQuotaUser
@@ -47,21 +48,27 @@ import           Network.Google.ComputeUserAccounts.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ClouduseraccountsUsersList@ which the
--- 'UsersList' request conforms to.
-type UsersListAPI =
+-- 'UsersList'' request conforms to.
+type UsersListResource =
      Capture "project" Text :>
        "global" :>
          "users" :>
-           QueryParam "orderBy" Text :>
-             QueryParam "filter" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Word32 :>
-                   Get '[JSON] UserList
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "orderBy" Text :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "filter" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Word32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Get '[JSON] UserList
 
 -- | Retrieves a list of users contained within the specified project.
 --
--- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+-- /See:/ 'usersList'' smart constructor.
+data UsersList' = UsersList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
     , _ulOrderBy     :: !(Maybe Text)
@@ -73,7 +80,7 @@ data UsersList = UsersList
     , _ulOauthToken  :: !(Maybe Text)
     , _ulMaxResults  :: !Word32
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Text
+    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
@@ -103,11 +110,11 @@ data UsersList = UsersList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-usersList
+usersList'
     :: Text -- ^ 'project'
-    -> UsersList
-usersList pUlProject_ =
-    UsersList
+    -> UsersList'
+usersList' pUlProject_ =
+    UsersList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulOrderBy = Nothing
@@ -119,7 +126,7 @@ usersList pUlProject_ =
     , _ulOauthToken = Nothing
     , _ulMaxResults = 500
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -199,15 +206,15 @@ ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' UsersList' Text
+ulAlt :: Lens' UsersList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UserList
         request
           = requestWithRoute defReq computeUserAccountsURL
-        requestWithRoute r u UsersList{..}
-          = go _ulQuotaUser _ulPrettyPrint _ulOrderBy
+        requestWithRoute r u UsersList'{..}
+          = go _ulQuotaUser (Just _ulPrettyPrint) _ulOrderBy
               _ulProject
               _ulUserIp
               _ulKey
@@ -216,6 +223,8 @@ instance GoogleRequest UsersList' where
               _ulOauthToken
               (Just _ulMaxResults)
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersListResource)
+                      r
+                      u

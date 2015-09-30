@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,138 +21,149 @@
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesRoomsDismiss@.
-module Games.Rooms.Dismiss
+module Network.Google.Resource.Games.Rooms.Dismiss
     (
     -- * REST Resource
-      RoomsDismissAPI
+      RoomsDismissResource
 
     -- * Creating a Request
-    , roomsDismiss
-    , RoomsDismiss
+    , roomsDismiss'
+    , RoomsDismiss'
 
     -- * Request Lenses
-    , rooQuotaUser
-    , rooPrettyPrint
-    , rooUserIp
-    , rooKey
-    , rooRoomId
-    , rooOauthToken
-    , rooFields
-    , rooAlt
+    , rddQuotaUser
+    , rddPrettyPrint
+    , rddUserIp
+    , rddKey
+    , rddRoomId
+    , rddOauthToken
+    , rddFields
+    , rddAlt
     ) where
 
 import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesRoomsDismiss@ which the
--- 'RoomsDismiss' request conforms to.
-type RoomsDismissAPI =
+-- 'RoomsDismiss'' request conforms to.
+type RoomsDismissResource =
      "rooms" :>
-       Capture "roomId" Text :> "dismiss" :> Post '[JSON] ()
+       Capture "roomId" Text :>
+         "dismiss" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
 --
--- /See:/ 'roomsDismiss' smart constructor.
-data RoomsDismiss = RoomsDismiss
-    { _rooQuotaUser   :: !(Maybe Text)
-    , _rooPrettyPrint :: !Bool
-    , _rooUserIp      :: !(Maybe Text)
-    , _rooKey         :: !(Maybe Text)
-    , _rooRoomId      :: !Text
-    , _rooOauthToken  :: !(Maybe Text)
-    , _rooFields      :: !(Maybe Text)
-    , _rooAlt         :: !Text
+-- /See:/ 'roomsDismiss'' smart constructor.
+data RoomsDismiss' = RoomsDismiss'
+    { _rddQuotaUser   :: !(Maybe Text)
+    , _rddPrettyPrint :: !Bool
+    , _rddUserIp      :: !(Maybe Text)
+    , _rddKey         :: !(Maybe Text)
+    , _rddRoomId      :: !Text
+    , _rddOauthToken  :: !(Maybe Text)
+    , _rddFields      :: !(Maybe Text)
+    , _rddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsDismiss'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rooQuotaUser'
+-- * 'rddQuotaUser'
 --
--- * 'rooPrettyPrint'
+-- * 'rddPrettyPrint'
 --
--- * 'rooUserIp'
+-- * 'rddUserIp'
 --
--- * 'rooKey'
+-- * 'rddKey'
 --
--- * 'rooRoomId'
+-- * 'rddRoomId'
 --
--- * 'rooOauthToken'
+-- * 'rddOauthToken'
 --
--- * 'rooFields'
+-- * 'rddFields'
 --
--- * 'rooAlt'
-roomsDismiss
+-- * 'rddAlt'
+roomsDismiss'
     :: Text -- ^ 'roomId'
-    -> RoomsDismiss
-roomsDismiss pRooRoomId_ =
-    RoomsDismiss
-    { _rooQuotaUser = Nothing
-    , _rooPrettyPrint = True
-    , _rooUserIp = Nothing
-    , _rooKey = Nothing
-    , _rooRoomId = pRooRoomId_
-    , _rooOauthToken = Nothing
-    , _rooFields = Nothing
-    , _rooAlt = "json"
+    -> RoomsDismiss'
+roomsDismiss' pRddRoomId_ =
+    RoomsDismiss'
+    { _rddQuotaUser = Nothing
+    , _rddPrettyPrint = True
+    , _rddUserIp = Nothing
+    , _rddKey = Nothing
+    , _rddRoomId = pRddRoomId_
+    , _rddOauthToken = Nothing
+    , _rddFields = Nothing
+    , _rddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-rooQuotaUser :: Lens' RoomsDismiss' (Maybe Text)
-rooQuotaUser
-  = lens _rooQuotaUser (\ s a -> s{_rooQuotaUser = a})
+rddQuotaUser :: Lens' RoomsDismiss' (Maybe Text)
+rddQuotaUser
+  = lens _rddQuotaUser (\ s a -> s{_rddQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-rooPrettyPrint :: Lens' RoomsDismiss' Bool
-rooPrettyPrint
-  = lens _rooPrettyPrint
-      (\ s a -> s{_rooPrettyPrint = a})
+rddPrettyPrint :: Lens' RoomsDismiss' Bool
+rddPrettyPrint
+  = lens _rddPrettyPrint
+      (\ s a -> s{_rddPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rooUserIp :: Lens' RoomsDismiss' (Maybe Text)
-rooUserIp
-  = lens _rooUserIp (\ s a -> s{_rooUserIp = a})
+rddUserIp :: Lens' RoomsDismiss' (Maybe Text)
+rddUserIp
+  = lens _rddUserIp (\ s a -> s{_rddUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rooKey :: Lens' RoomsDismiss' (Maybe Text)
-rooKey = lens _rooKey (\ s a -> s{_rooKey = a})
+rddKey :: Lens' RoomsDismiss' (Maybe Text)
+rddKey = lens _rddKey (\ s a -> s{_rddKey = a})
 
 -- | The ID of the room.
-rooRoomId :: Lens' RoomsDismiss' Text
-rooRoomId
-  = lens _rooRoomId (\ s a -> s{_rooRoomId = a})
+rddRoomId :: Lens' RoomsDismiss' Text
+rddRoomId
+  = lens _rddRoomId (\ s a -> s{_rddRoomId = a})
 
 -- | OAuth 2.0 token for the current user.
-rooOauthToken :: Lens' RoomsDismiss' (Maybe Text)
-rooOauthToken
-  = lens _rooOauthToken
-      (\ s a -> s{_rooOauthToken = a})
+rddOauthToken :: Lens' RoomsDismiss' (Maybe Text)
+rddOauthToken
+  = lens _rddOauthToken
+      (\ s a -> s{_rddOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-rooFields :: Lens' RoomsDismiss' (Maybe Text)
-rooFields
-  = lens _rooFields (\ s a -> s{_rooFields = a})
+rddFields :: Lens' RoomsDismiss' (Maybe Text)
+rddFields
+  = lens _rddFields (\ s a -> s{_rddFields = a})
 
 -- | Data format for the response.
-rooAlt :: Lens' RoomsDismiss' Text
-rooAlt = lens _rooAlt (\ s a -> s{_rooAlt = a})
+rddAlt :: Lens' RoomsDismiss' Alt
+rddAlt = lens _rddAlt (\ s a -> s{_rddAlt = a})
 
 instance GoogleRequest RoomsDismiss' where
         type Rs RoomsDismiss' = ()
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u RoomsDismiss{..}
-          = go _rooQuotaUser _rooPrettyPrint _rooUserIp _rooKey
-              _rooRoomId
-              _rooOauthToken
-              _rooFields
-              _rooAlt
+        requestWithRoute r u RoomsDismiss'{..}
+          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIp
+              _rddKey
+              _rddRoomId
+              _rddOauthToken
+              _rddFields
+              (Just _rddAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy RoomsDismissAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy RoomsDismissResource)
+                      r
                       u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -21,14 +22,14 @@
 -- this method.
 --
 -- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsAvailsList@.
-module PlayMoviesPartner.Accounts.Avails.List
+module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     (
     -- * REST Resource
-      AccountsAvailsListAPI
+      AccountsAvailsListResource
 
     -- * Creating a Request
-    , accountsAvailsList
-    , AccountsAvailsList
+    , accountsAvailsList'
+    , AccountsAvailsList'
 
     -- * Request Lenses
     , aalAltId
@@ -59,28 +60,42 @@ import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @PlaymoviespartnerAccountsAvailsList@ which the
--- 'AccountsAvailsList' request conforms to.
-type AccountsAvailsListAPI =
+-- 'AccountsAvailsList'' request conforms to.
+type AccountsAvailsListResource =
      "v1" :>
        "accounts" :>
          Capture "accountId" Text :>
            "avails" :>
              QueryParam "altId" Text :>
                QueryParams "pphNames" Text :>
-                 QueryParams "studioNames" Text :>
-                   QueryParams "videoIds" Text :>
-                     QueryParams "territories" Text :>
-                       QueryParam "pageToken" Text :>
-                         QueryParam "title" Text :>
-                           QueryParam "pageSize" Int32 :>
-                             Get '[JSON] ListAvailsResponse
+                 QueryParam "$.xgafv" Text :>
+                   QueryParams "studioNames" Text :>
+                     QueryParam "quotaUser" Text :>
+                       QueryParams "videoIds" Text :>
+                         QueryParam "prettyPrint" Bool :>
+                           QueryParam "upload_protocol" Text :>
+                             QueryParam "pp" Bool :>
+                               QueryParam "access_token" Text :>
+                                 QueryParam "uploadType" Text :>
+                                   QueryParams "territories" Text :>
+                                     QueryParam "bearer_token" Text :>
+                                       QueryParam "key" Text :>
+                                         QueryParam "pageToken" Text :>
+                                           QueryParam "title" Text :>
+                                             QueryParam "oauth_token" Text :>
+                                               QueryParam "pageSize" Int32 :>
+                                                 QueryParam "fields" Text :>
+                                                   QueryParam "callback" Text :>
+                                                     QueryParam "alt" Text :>
+                                                       Get '[JSON]
+                                                         ListAvailsResponse
 
 -- | List Avails owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ 'accountsAvailsList' smart constructor.
-data AccountsAvailsList = AccountsAvailsList
+-- /See:/ 'accountsAvailsList'' smart constructor.
+data AccountsAvailsList' = AccountsAvailsList'
     { _aalAltId          :: !(Maybe Text)
     , _aalPphNames       :: !(Maybe Text)
     , _aalXgafv          :: !(Maybe Text)
@@ -152,11 +167,11 @@ data AccountsAvailsList = AccountsAvailsList
 -- * 'aalCallback'
 --
 -- * 'aalAlt'
-accountsAvailsList
+accountsAvailsList'
     :: Text -- ^ 'accountId'
-    -> AccountsAvailsList
-accountsAvailsList pAalAccountId_ =
-    AccountsAvailsList
+    -> AccountsAvailsList'
+accountsAvailsList' pAalAccountId_ =
+    AccountsAvailsList'
     { _aalAltId = Nothing
     , _aalPphNames = Nothing
     , _aalXgafv = Nothing
@@ -304,13 +319,13 @@ instance GoogleRequest AccountsAvailsList' where
         type Rs AccountsAvailsList' = ListAvailsResponse
         request
           = requestWithRoute defReq playMoviesPartnerURL
-        requestWithRoute r u AccountsAvailsList{..}
+        requestWithRoute r u AccountsAvailsList'{..}
           = go _aalAltId _aalPphNames _aalXgafv _aalStudioNames
               _aalQuotaUser
               _aalVideoIds
-              _aalPrettyPrint
+              (Just _aalPrettyPrint)
               _aalUploadProtocol
-              _aalPp
+              (Just _aalPp)
               _aalAccessToken
               _aalUploadType
               _aalTerritories
@@ -323,9 +338,9 @@ instance GoogleRequest AccountsAvailsList' where
               _aalPageSize
               _aalFields
               _aalCallback
-              _aalAlt
+              (Just _aalAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy AccountsAvailsListAPI)
+                      (Proxy :: Proxy AccountsAvailsListResource)
                       r
                       u

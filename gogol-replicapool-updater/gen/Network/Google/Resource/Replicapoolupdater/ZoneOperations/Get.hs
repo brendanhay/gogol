@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ <https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service Google Compute Engine Instance Group Updater API Reference> for @ReplicapoolupdaterZoneOperationsGet@.
-module Replicapoolupdater.ZoneOperations.Get
+module Network.Google.Resource.Replicapoolupdater.ZoneOperations.Get
     (
     -- * REST Resource
-      ZoneOperationsGetAPI
+      ZoneOperationsGetResource
 
     -- * Creating a Request
-    , zoneOperationsGet
-    , ZoneOperationsGet
+    , zoneOperationsGet'
+    , ZoneOperationsGet'
 
     -- * Request Lenses
     , zogQuotaUser
@@ -45,18 +46,25 @@ import           Network.Google.InstanceGroupsUpdater.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @ReplicapoolupdaterZoneOperationsGet@ which the
--- 'ZoneOperationsGet' request conforms to.
-type ZoneOperationsGetAPI =
+-- 'ZoneOperationsGet'' request conforms to.
+type ZoneOperationsGetResource =
      Capture "project" Text :>
        "zones" :>
          Capture "zone" Text :>
            "operations" :>
-             Capture "operation" Text :> Get '[JSON] Operation
+             Capture "operation" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific operation resource.
 --
--- /See:/ 'zoneOperationsGet' smart constructor.
-data ZoneOperationsGet = ZoneOperationsGet
+-- /See:/ 'zoneOperationsGet'' smart constructor.
+data ZoneOperationsGet' = ZoneOperationsGet'
     { _zogQuotaUser   :: !(Maybe Text)
     , _zogPrettyPrint :: !Bool
     , _zogProject     :: !Text
@@ -66,7 +74,7 @@ data ZoneOperationsGet = ZoneOperationsGet
     , _zogKey         :: !(Maybe Text)
     , _zogOauthToken  :: !(Maybe Text)
     , _zogFields      :: !(Maybe Text)
-    , _zogAlt         :: !Text
+    , _zogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsGet'' with the minimum fields required to make a request.
@@ -92,13 +100,13 @@ data ZoneOperationsGet = ZoneOperationsGet
 -- * 'zogFields'
 --
 -- * 'zogAlt'
-zoneOperationsGet
+zoneOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
     -> Text -- ^ 'zone'
-    -> ZoneOperationsGet
-zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
-    ZoneOperationsGet
+    -> ZoneOperationsGet'
+zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
+    ZoneOperationsGet'
     { _zogQuotaUser = Nothing
     , _zogPrettyPrint = True
     , _zogProject = pZogProject_
@@ -108,7 +116,7 @@ zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
     , _zogKey = Nothing
     , _zogOauthToken = Nothing
     , _zogFields = Nothing
-    , _zogAlt = "json"
+    , _zogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,24 +170,24 @@ zogFields
   = lens _zogFields (\ s a -> s{_zogFields = a})
 
 -- | Data format for the response.
-zogAlt :: Lens' ZoneOperationsGet' Text
+zogAlt :: Lens' ZoneOperationsGet' Alt
 zogAlt = lens _zogAlt (\ s a -> s{_zogAlt = a})
 
 instance GoogleRequest ZoneOperationsGet' where
         type Rs ZoneOperationsGet' = Operation
         request
           = requestWithRoute defReq instanceGroupsUpdaterURL
-        requestWithRoute r u ZoneOperationsGet{..}
-          = go _zogQuotaUser _zogPrettyPrint _zogProject
+        requestWithRoute r u ZoneOperationsGet'{..}
+          = go _zogQuotaUser (Just _zogPrettyPrint) _zogProject
               _zogOperation
               _zogUserIp
               _zogZone
               _zogKey
               _zogOauthToken
               _zogFields
-              _zogAlt
+              (Just _zogAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy ZoneOperationsGetAPI)
+                      (Proxy :: Proxy ZoneOperationsGetResource)
                       r
                       u

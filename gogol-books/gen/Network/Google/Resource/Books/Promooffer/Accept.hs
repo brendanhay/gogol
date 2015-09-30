@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- |
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksPromoofferAccept@.
-module Books.Promooffer.Accept
+module Network.Google.Resource.Books.Promooffer.Accept
     (
     -- * REST Resource
-      PromoofferAcceptAPI
+      PromoofferAcceptResource
 
     -- * Creating a Request
-    , promoofferAccept
-    , PromoofferAccept
+    , promoofferAccept'
+    , PromoofferAccept'
 
     -- * Request Lenses
     , paQuotaUser
@@ -50,23 +51,30 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksPromoofferAccept@ which the
--- 'PromoofferAccept' request conforms to.
-type PromoofferAcceptAPI =
+-- 'PromoofferAccept'' request conforms to.
+type PromoofferAcceptResource =
      "promooffer" :>
        "accept" :>
-         QueryParam "manufacturer" Text :>
-           QueryParam "serial" Text :>
-             QueryParam "device" Text :>
-               QueryParam "model" Text :>
-                 QueryParam "volumeId" Text :>
-                   QueryParam "offerId" Text :>
-                     QueryParam "product" Text :>
-                       QueryParam "androidId" Text :> Post '[JSON] ()
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "manufacturer" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "serial" Text :>
+                   QueryParam "device" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "model" Text :>
+                         QueryParam "volumeId" Text :>
+                           QueryParam "offerId" Text :>
+                             QueryParam "product" Text :>
+                               QueryParam "oauth_token" Text :>
+                                 QueryParam "androidId" Text :>
+                                   QueryParam "fields" Text :>
+                                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- |
 --
--- /See:/ 'promoofferAccept' smart constructor.
-data PromoofferAccept = PromoofferAccept
+-- /See:/ 'promoofferAccept'' smart constructor.
+data PromoofferAccept' = PromoofferAccept'
     { _paQuotaUser    :: !(Maybe Text)
     , _paPrettyPrint  :: !Bool
     , _paManufacturer :: !(Maybe Text)
@@ -81,7 +89,7 @@ data PromoofferAccept = PromoofferAccept
     , _paOauthToken   :: !(Maybe Text)
     , _paAndroidId    :: !(Maybe Text)
     , _paFields       :: !(Maybe Text)
-    , _paAlt          :: !Text
+    , _paAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PromoofferAccept'' with the minimum fields required to make a request.
@@ -117,10 +125,10 @@ data PromoofferAccept = PromoofferAccept
 -- * 'paFields'
 --
 -- * 'paAlt'
-promoofferAccept
-    :: PromoofferAccept
-promoofferAccept =
-    PromoofferAccept
+promoofferAccept'
+    :: PromoofferAccept'
+promoofferAccept' =
+    PromoofferAccept'
     { _paQuotaUser = Nothing
     , _paPrettyPrint = True
     , _paManufacturer = Nothing
@@ -135,7 +143,7 @@ promoofferAccept =
     , _paOauthToken = Nothing
     , _paAndroidId = Nothing
     , _paFields = Nothing
-    , _paAlt = "json"
+    , _paAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -209,14 +217,15 @@ paFields :: Lens' PromoofferAccept' (Maybe Text)
 paFields = lens _paFields (\ s a -> s{_paFields = a})
 
 -- | Data format for the response.
-paAlt :: Lens' PromoofferAccept' Text
+paAlt :: Lens' PromoofferAccept' Alt
 paAlt = lens _paAlt (\ s a -> s{_paAlt = a})
 
 instance GoogleRequest PromoofferAccept' where
         type Rs PromoofferAccept' = ()
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u PromoofferAccept{..}
-          = go _paQuotaUser _paPrettyPrint _paManufacturer
+        requestWithRoute r u PromoofferAccept'{..}
+          = go _paQuotaUser (Just _paPrettyPrint)
+              _paManufacturer
               _paUserIp
               _paSerial
               _paDevice
@@ -228,9 +237,9 @@ instance GoogleRequest PromoofferAccept' where
               _paOauthToken
               _paAndroidId
               _paFields
-              _paAlt
+              (Just _paAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy PromoofferAcceptAPI)
+                      (Proxy :: Proxy PromoofferAcceptResource)
                       r
                       u

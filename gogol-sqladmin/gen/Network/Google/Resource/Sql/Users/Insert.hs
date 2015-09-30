@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Creates a new user in a Cloud SQL instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlUsersInsert@.
-module Sql.Users.Insert
+module Network.Google.Resource.Sql.Users.Insert
     (
     -- * REST Resource
-      UsersInsertAPI
+      UsersInsertResource
 
     -- * Creating a Request
-    , usersInsert
-    , UsersInsert
+    , usersInsert'
+    , UsersInsert'
 
     -- * Request Lenses
     , uiQuotaUser
@@ -44,18 +45,25 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlUsersInsert@ which the
--- 'UsersInsert' request conforms to.
-type UsersInsertAPI =
+-- 'UsersInsert'' request conforms to.
+type UsersInsertResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "users" :> Post '[JSON] Operation
+             "users" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :> Post '[JSON] Operation
 
 -- | Creates a new user in a Cloud SQL instance.
 --
--- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+-- /See:/ 'usersInsert'' smart constructor.
+data UsersInsert' = UsersInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
     , _uiProject     :: !Text
@@ -63,7 +71,7 @@ data UsersInsert = UsersInsert
     , _uiKey         :: !(Maybe Text)
     , _uiOauthToken  :: !(Maybe Text)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Text
+    , _uiAlt         :: !Alt
     , _uiInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +96,12 @@ data UsersInsert = UsersInsert
 -- * 'uiAlt'
 --
 -- * 'uiInstance'
-usersInsert
+usersInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> UsersInsert
-usersInsert pUiProject_ pUiInstance_ =
-    UsersInsert
+    -> UsersInsert'
+usersInsert' pUiProject_ pUiInstance_ =
+    UsersInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
     , _uiProject = pUiProject_
@@ -101,7 +109,7 @@ usersInsert pUiProject_ pUiInstance_ =
     , _uiKey = Nothing
     , _uiOauthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = "json"
+    , _uiAlt = JSON
     , _uiInstance = pUiInstance_
     }
 
@@ -144,7 +152,7 @@ uiFields :: Lens' UsersInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
 -- | Data format for the response.
-uiAlt :: Lens' UsersInsert' Text
+uiAlt :: Lens' UsersInsert' Alt
 uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
 
 -- | Database instance ID. This does not include the project ID.
@@ -155,12 +163,16 @@ uiInstance
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = Operation
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u UsersInsert{..}
-          = go _uiQuotaUser _uiPrettyPrint _uiProject _uiUserIp
+        requestWithRoute r u UsersInsert'{..}
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiProject
+              _uiUserIp
               _uiKey
               _uiOauthToken
               _uiFields
-              _uiAlt
+              (Just _uiAlt)
               _uiInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersInsertResource)
+                      r
+                      u

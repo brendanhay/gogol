@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- applications.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryTokensList@.
-module Directory.Tokens.List
+module Network.Google.Resource.Directory.Tokens.List
     (
     -- * REST Resource
-      TokensListAPI
+      TokensListResource
 
     -- * Creating a Request
-    , tokensList
-    , TokensList
+    , tokensList'
+    , TokensList'
 
     -- * Request Lenses
     , tlQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryTokensList@ which the
--- 'TokensList' request conforms to.
-type TokensListAPI =
+-- 'TokensList'' request conforms to.
+type TokensListResource =
      "users" :>
        Capture "userKey" Text :>
-         "tokens" :> Get '[JSON] Tokens
+         "tokens" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Get '[JSON] Tokens
 
 -- | Returns the set of tokens specified user has issued to 3rd party
 -- applications.
 --
--- /See:/ 'tokensList' smart constructor.
-data TokensList = TokensList
+-- /See:/ 'tokensList'' smart constructor.
+data TokensList' = TokensList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
     , _tlUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data TokensList = TokensList
     , _tlOauthToken  :: !(Maybe Text)
     , _tlUserKey     :: !Text
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Text
+    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokensList'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data TokensList = TokensList
 -- * 'tlFields'
 --
 -- * 'tlAlt'
-tokensList
+tokensList'
     :: Text -- ^ 'userKey'
-    -> TokensList
-tokensList pTlUserKey_ =
-    TokensList
+    -> TokensList'
+tokensList' pTlUserKey_ =
+    TokensList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlUserIp = Nothing
@@ -96,7 +104,7 @@ tokensList pTlUserKey_ =
     , _tlOauthToken = Nothing
     , _tlUserKey = pTlUserKey_
     , _tlFields = Nothing
-    , _tlAlt = "json"
+    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,17 +147,20 @@ tlFields :: Lens' TokensList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
 -- | Data format for the response.
-tlAlt :: Lens' TokensList' Text
+tlAlt :: Lens' TokensList' Alt
 tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
 
 instance GoogleRequest TokensList' where
         type Rs TokensList' = Tokens
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u TokensList{..}
-          = go _tlQuotaUser _tlPrettyPrint _tlUserIp _tlKey
+        requestWithRoute r u TokensList'{..}
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+              _tlKey
               _tlOauthToken
               _tlUserKey
               _tlFields
-              _tlAlt
+              (Just _tlAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TokensListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy TokensListResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- ID.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Publishing API Reference> for @GamesConfigurationLeaderboardConfigurationsGet@.
-module GamesConfiguration.LeaderboardConfigurations.Get
+module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Get
     (
     -- * REST Resource
-      LeaderboardConfigurationsGetAPI
+      LeaderboardConfigurationsGetResource
 
     -- * Creating a Request
-    , leaderboardConfigurationsGet
-    , LeaderboardConfigurationsGet
+    , leaderboardConfigurationsGet'
+    , LeaderboardConfigurationsGet'
 
     -- * Request Lenses
     , lcgQuotaUser
@@ -44,17 +45,24 @@ import           Network.Google.GamesConfiguration.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesConfigurationLeaderboardConfigurationsGet@ which the
--- 'LeaderboardConfigurationsGet' request conforms to.
-type LeaderboardConfigurationsGetAPI =
+-- 'LeaderboardConfigurationsGet'' request conforms to.
+type LeaderboardConfigurationsGetResource =
      "leaderboards" :>
        Capture "leaderboardId" Text :>
-         Get '[JSON] LeaderboardConfiguration
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :>
+                       Get '[JSON] LeaderboardConfiguration
 
 -- | Retrieves the metadata of the leaderboard configuration with the given
 -- ID.
 --
--- /See:/ 'leaderboardConfigurationsGet' smart constructor.
-data LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
+-- /See:/ 'leaderboardConfigurationsGet'' smart constructor.
+data LeaderboardConfigurationsGet' = LeaderboardConfigurationsGet'
     { _lcgQuotaUser     :: !(Maybe Text)
     , _lcgPrettyPrint   :: !Bool
     , _lcgUserIp        :: !(Maybe Text)
@@ -62,7 +70,7 @@ data LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
     , _lcgKey           :: !(Maybe Text)
     , _lcgOauthToken    :: !(Maybe Text)
     , _lcgFields        :: !(Maybe Text)
-    , _lcgAlt           :: !Text
+    , _lcgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsGet'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
 -- * 'lcgFields'
 --
 -- * 'lcgAlt'
-leaderboardConfigurationsGet
+leaderboardConfigurationsGet'
     :: Text -- ^ 'leaderboardId'
-    -> LeaderboardConfigurationsGet
-leaderboardConfigurationsGet pLcgLeaderboardId_ =
-    LeaderboardConfigurationsGet
+    -> LeaderboardConfigurationsGet'
+leaderboardConfigurationsGet' pLcgLeaderboardId_ =
+    LeaderboardConfigurationsGet'
     { _lcgQuotaUser = Nothing
     , _lcgPrettyPrint = True
     , _lcgUserIp = Nothing
@@ -96,7 +104,7 @@ leaderboardConfigurationsGet pLcgLeaderboardId_ =
     , _lcgKey = Nothing
     , _lcgOauthToken = Nothing
     , _lcgFields = Nothing
-    , _lcgAlt = "json"
+    , _lcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,7 +150,7 @@ lcgFields
   = lens _lcgFields (\ s a -> s{_lcgFields = a})
 
 -- | Data format for the response.
-lcgAlt :: Lens' LeaderboardConfigurationsGet' Text
+lcgAlt :: Lens' LeaderboardConfigurationsGet' Alt
 lcgAlt = lens _lcgAlt (\ s a -> s{_lcgAlt = a})
 
 instance GoogleRequest LeaderboardConfigurationsGet'
@@ -151,15 +159,16 @@ instance GoogleRequest LeaderboardConfigurationsGet'
              LeaderboardConfiguration
         request
           = requestWithRoute defReq gamesConfigurationURL
-        requestWithRoute r u LeaderboardConfigurationsGet{..}
-          = go _lcgQuotaUser _lcgPrettyPrint _lcgUserIp
+        requestWithRoute r u
+          LeaderboardConfigurationsGet'{..}
+          = go _lcgQuotaUser (Just _lcgPrettyPrint) _lcgUserIp
               _lcgLeaderboardId
               _lcgKey
               _lcgOauthToken
               _lcgFields
-              _lcgAlt
+              (Just _lcgAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy LeaderboardConfigurationsGetAPI)
+                      (Proxy :: Proxy LeaderboardConfigurationsGetResource)
                       r
                       u

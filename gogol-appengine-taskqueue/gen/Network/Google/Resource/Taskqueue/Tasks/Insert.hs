@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Insert a new task in a TaskQueue
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @TaskqueueTasksInsert@.
-module Taskqueue.Tasks.Insert
+module Network.Google.Resource.Taskqueue.Tasks.Insert
     (
     -- * REST Resource
-      TasksInsertAPI
+      TasksInsertResource
 
     -- * Creating a Request
-    , tasksInsert
-    , TasksInsert
+    , tasksInsert'
+    , TasksInsert'
 
     -- * Request Lenses
     , tiTaskqueue
@@ -44,17 +45,24 @@ import           Network.Google.AppEngineTaskQueue.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @TaskqueueTasksInsert@ which the
--- 'TasksInsert' request conforms to.
-type TasksInsertAPI =
+-- 'TasksInsert'' request conforms to.
+type TasksInsertResource =
      Capture "project" Text :>
        "taskqueues" :>
          Capture "taskqueue" Text :>
-           "tasks" :> Post '[JSON] Task
+           "tasks" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Task
 
 -- | Insert a new task in a TaskQueue
 --
--- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert
+-- /See:/ 'tasksInsert'' smart constructor.
+data TasksInsert' = TasksInsert'
     { _tiTaskqueue   :: !Text
     , _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
@@ -63,7 +71,7 @@ data TasksInsert = TasksInsert
     , _tiKey         :: !(Maybe Text)
     , _tiOauthToken  :: !(Maybe Text)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Text
+    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksInsert'' with the minimum fields required to make a request.
@@ -87,12 +95,12 @@ data TasksInsert = TasksInsert
 -- * 'tiFields'
 --
 -- * 'tiAlt'
-tasksInsert
+tasksInsert'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
-    -> TasksInsert
-tasksInsert pTiTaskqueue_ pTiProject_ =
-    TasksInsert
+    -> TasksInsert'
+tasksInsert' pTiTaskqueue_ pTiProject_ =
+    TasksInsert'
     { _tiTaskqueue = pTiTaskqueue_
     , _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
@@ -101,7 +109,7 @@ tasksInsert pTiTaskqueue_ pTiProject_ =
     , _tiKey = Nothing
     , _tiOauthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = "json"
+    , _tiAlt = JSON
     }
 
 -- | The taskqueue to insert the task into
@@ -148,20 +156,23 @@ tiFields :: Lens' TasksInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
 -- | Data format for the response.
-tiAlt :: Lens' TasksInsert' Text
+tiAlt :: Lens' TasksInsert' Alt
 tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
 
 instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task
         request
           = requestWithRoute defReq appEngineTaskQueueURL
-        requestWithRoute r u TasksInsert{..}
-          = go _tiTaskqueue _tiQuotaUser _tiPrettyPrint
+        requestWithRoute r u TasksInsert'{..}
+          = go _tiTaskqueue _tiQuotaUser (Just _tiPrettyPrint)
               _tiProject
               _tiUserIp
               _tiKey
               _tiOauthToken
               _tiFields
-              _tiAlt
+              (Just _tiAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TasksInsertAPI) r u
+                  = clientWithRoute
+                      (Proxy :: Proxy TasksInsertResource)
+                      r
+                      u

@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -25,14 +26,14 @@
 -- will be deleted.
 --
 -- /See:/ <https://developers.google.com/fit/rest/ Fitness Reference> for @FitnessUsersDataSourcesDatasetsDelete@.
-module Fitness.Users.DataSources.Datasets.Delete
+module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
     (
     -- * REST Resource
-      UsersDataSourcesDatasetsDeleteAPI
+      UsersDataSourcesDatasetsDeleteResource
 
     -- * Creating a Request
-    , usersDataSourcesDatasetsDelete
-    , UsersDataSourcesDatasetsDelete
+    , usersDataSourcesDatasetsDelete'
+    , UsersDataSourcesDatasetsDelete'
 
     -- * Request Lenses
     , udsddQuotaUser
@@ -53,16 +54,22 @@ import           Network.Google.Fitness.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FitnessUsersDataSourcesDatasetsDelete@ which the
--- 'UsersDataSourcesDatasetsDelete' request conforms to.
-type UsersDataSourcesDatasetsDeleteAPI =
+-- 'UsersDataSourcesDatasetsDelete'' request conforms to.
+type UsersDataSourcesDatasetsDeleteResource =
      Capture "userId" Text :>
        "dataSources" :>
          Capture "dataSourceId" Text :>
            "datasets" :>
              Capture "datasetId" Text :>
-               QueryParam "modifiedTimeMillis" Int64 :>
-                 QueryParam "currentTimeMillis" Int64 :>
-                   Delete '[JSON] ()
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "modifiedTimeMillis" Int64 :>
+                         QueryParam "currentTimeMillis" Int64 :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
 -- times have any overlap with the time range specified by the dataset ID.
@@ -72,8 +79,8 @@ type UsersDataSourcesDatasetsDeleteAPI =
 -- point of the dataset, only the overlapping portion of the data point
 -- will be deleted.
 --
--- /See:/ 'usersDataSourcesDatasetsDelete' smart constructor.
-data UsersDataSourcesDatasetsDelete = UsersDataSourcesDatasetsDelete
+-- /See:/ 'usersDataSourcesDatasetsDelete'' smart constructor.
+data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
     { _udsddQuotaUser          :: !(Maybe Text)
     , _udsddPrettyPrint        :: !Bool
     , _udsddUserIp             :: !(Maybe Text)
@@ -85,7 +92,7 @@ data UsersDataSourcesDatasetsDelete = UsersDataSourcesDatasetsDelete
     , _udsddCurrentTimeMillis  :: !(Maybe Int64)
     , _udsddOauthToken         :: !(Maybe Text)
     , _udsddFields             :: !(Maybe Text)
-    , _udsddAlt                :: !Text
+    , _udsddAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsDelete'' with the minimum fields required to make a request.
@@ -115,13 +122,13 @@ data UsersDataSourcesDatasetsDelete = UsersDataSourcesDatasetsDelete
 -- * 'udsddFields'
 --
 -- * 'udsddAlt'
-usersDataSourcesDatasetsDelete
+usersDataSourcesDatasetsDelete'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'datasetId'
-    -> UsersDataSourcesDatasetsDelete
-usersDataSourcesDatasetsDelete pUdsddDataSourceId_ pUdsddUserId_ pUdsddDatasetId_ =
-    UsersDataSourcesDatasetsDelete
+    -> UsersDataSourcesDatasetsDelete'
+usersDataSourcesDatasetsDelete' pUdsddDataSourceId_ pUdsddUserId_ pUdsddDatasetId_ =
+    UsersDataSourcesDatasetsDelete'
     { _udsddQuotaUser = Nothing
     , _udsddPrettyPrint = True
     , _udsddUserIp = Nothing
@@ -133,7 +140,7 @@ usersDataSourcesDatasetsDelete pUdsddDataSourceId_ pUdsddUserId_ pUdsddDatasetId
     , _udsddCurrentTimeMillis = Nothing
     , _udsddOauthToken = Nothing
     , _udsddFields = Nothing
-    , _udsddAlt = "json"
+    , _udsddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -207,7 +214,7 @@ udsddFields
   = lens _udsddFields (\ s a -> s{_udsddFields = a})
 
 -- | Data format for the response.
-udsddAlt :: Lens' UsersDataSourcesDatasetsDelete' Text
+udsddAlt :: Lens' UsersDataSourcesDatasetsDelete' Alt
 udsddAlt = lens _udsddAlt (\ s a -> s{_udsddAlt = a})
 
 instance GoogleRequest
@@ -215,8 +222,9 @@ instance GoogleRequest
         type Rs UsersDataSourcesDatasetsDelete' = ()
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u
-          UsersDataSourcesDatasetsDelete{..}
-          = go _udsddQuotaUser _udsddPrettyPrint _udsddUserIp
+          UsersDataSourcesDatasetsDelete'{..}
+          = go _udsddQuotaUser (Just _udsddPrettyPrint)
+              _udsddUserIp
               _udsddDataSourceId
               _udsddUserId
               _udsddKey
@@ -225,9 +233,10 @@ instance GoogleRequest
               _udsddCurrentTimeMillis
               _udsddOauthToken
               _udsddFields
-              _udsddAlt
+              (Just _udsddAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersDataSourcesDatasetsDeleteAPI)
+                      (Proxy ::
+                         Proxy UsersDataSourcesDatasetsDeleteResource)
                       r
                       u

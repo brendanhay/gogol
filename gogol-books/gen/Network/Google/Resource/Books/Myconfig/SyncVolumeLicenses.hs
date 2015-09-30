@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- shelf.
 --
 -- /See:/ <https://developers.google.com/books/docs/v1/getting_started Books API Reference> for @BooksMyconfigSyncVolumeLicenses@.
-module Books.Myconfig.SyncVolumeLicenses
+module Network.Google.Resource.Books.Myconfig.SyncVolumeLicenses
     (
     -- * REST Resource
-      MyconfigSyncVolumeLicensesAPI
+      MyconfigSyncVolumeLicensesResource
 
     -- * Creating a Request
-    , myconfigSyncVolumeLicenses
-    , MyconfigSyncVolumeLicenses
+    , myconfigSyncVolumeLicenses'
+    , MyconfigSyncVolumeLicenses'
 
     -- * Request Lenses
     , msvlQuotaUser
@@ -50,23 +51,32 @@ import           Network.Google.Books.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @BooksMyconfigSyncVolumeLicenses@ which the
--- 'MyconfigSyncVolumeLicenses' request conforms to.
-type MyconfigSyncVolumeLicensesAPI =
+-- 'MyconfigSyncVolumeLicenses'' request conforms to.
+type MyconfigSyncVolumeLicensesResource =
      "myconfig" :>
        "syncVolumeLicenses" :>
-         QueryParam "cpksver" Text :>
-           QueryParam "locale" Text :>
-             QueryParams "volumeIds" Text :>
-               QueryParams "features" Text :>
-                 QueryParam "source" Text :>
-                   QueryParam "showPreorders" Bool :>
-                     QueryParam "nonce" Text :> Post '[JSON] Volumes
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "cpksver" Text :>
+               QueryParam "userIp" Text :>
+                 QueryParam "locale" Text :>
+                   QueryParams "volumeIds" Text :>
+                     QueryParam "key" Text :>
+                       QueryParams "features"
+                         BooksMyconfigSyncVolumeLicensesFeatures
+                         :>
+                         QueryParam "source" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "showPreorders" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "nonce" Text :>
+                                   QueryParam "alt" Alt :> Post '[JSON] Volumes
 
 -- | Request downloaded content access for specified volumes on the My eBooks
 -- shelf.
 --
--- /See:/ 'myconfigSyncVolumeLicenses' smart constructor.
-data MyconfigSyncVolumeLicenses = MyconfigSyncVolumeLicenses
+-- /See:/ 'myconfigSyncVolumeLicenses'' smart constructor.
+data MyconfigSyncVolumeLicenses' = MyconfigSyncVolumeLicenses'
     { _msvlQuotaUser     :: !(Maybe Text)
     , _msvlPrettyPrint   :: !Bool
     , _msvlCpksver       :: !Text
@@ -74,13 +84,13 @@ data MyconfigSyncVolumeLicenses = MyconfigSyncVolumeLicenses
     , _msvlLocale        :: !(Maybe Text)
     , _msvlVolumeIds     :: !(Maybe Text)
     , _msvlKey           :: !(Maybe Text)
-    , _msvlFeatures      :: !(Maybe Text)
+    , _msvlFeatures      :: !(Maybe BooksMyconfigSyncVolumeLicensesFeatures)
     , _msvlSource        :: !Text
     , _msvlOauthToken    :: !(Maybe Text)
     , _msvlShowPreorders :: !(Maybe Bool)
     , _msvlFields        :: !(Maybe Text)
     , _msvlNonce         :: !Text
-    , _msvlAlt           :: !Text
+    , _msvlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyconfigSyncVolumeLicenses'' with the minimum fields required to make a request.
@@ -114,13 +124,13 @@ data MyconfigSyncVolumeLicenses = MyconfigSyncVolumeLicenses
 -- * 'msvlNonce'
 --
 -- * 'msvlAlt'
-myconfigSyncVolumeLicenses
+myconfigSyncVolumeLicenses'
     :: Text -- ^ 'cpksver'
     -> Text -- ^ 'source'
     -> Text -- ^ 'nonce'
-    -> MyconfigSyncVolumeLicenses
-myconfigSyncVolumeLicenses pMsvlCpksver_ pMsvlSource_ pMsvlNonce_ =
-    MyconfigSyncVolumeLicenses
+    -> MyconfigSyncVolumeLicenses'
+myconfigSyncVolumeLicenses' pMsvlCpksver_ pMsvlSource_ pMsvlNonce_ =
+    MyconfigSyncVolumeLicenses'
     { _msvlQuotaUser = Nothing
     , _msvlPrettyPrint = True
     , _msvlCpksver = pMsvlCpksver_
@@ -134,7 +144,7 @@ myconfigSyncVolumeLicenses pMsvlCpksver_ pMsvlSource_ pMsvlNonce_ =
     , _msvlShowPreorders = Nothing
     , _msvlFields = Nothing
     , _msvlNonce = pMsvlNonce_
-    , _msvlAlt = "json"
+    , _msvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -180,7 +190,7 @@ msvlKey :: Lens' MyconfigSyncVolumeLicenses' (Maybe Text)
 msvlKey = lens _msvlKey (\ s a -> s{_msvlKey = a})
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-msvlFeatures :: Lens' MyconfigSyncVolumeLicenses' (Maybe Text)
+msvlFeatures :: Lens' MyconfigSyncVolumeLicenses' (Maybe BooksMyconfigSyncVolumeLicensesFeatures)
 msvlFeatures
   = lens _msvlFeatures (\ s a -> s{_msvlFeatures = a})
 
@@ -212,15 +222,15 @@ msvlNonce
   = lens _msvlNonce (\ s a -> s{_msvlNonce = a})
 
 -- | Data format for the response.
-msvlAlt :: Lens' MyconfigSyncVolumeLicenses' Text
+msvlAlt :: Lens' MyconfigSyncVolumeLicenses' Alt
 msvlAlt = lens _msvlAlt (\ s a -> s{_msvlAlt = a})
 
 instance GoogleRequest MyconfigSyncVolumeLicenses'
          where
         type Rs MyconfigSyncVolumeLicenses' = Volumes
         request = requestWithRoute defReq booksURL
-        requestWithRoute r u MyconfigSyncVolumeLicenses{..}
-          = go _msvlQuotaUser _msvlPrettyPrint
+        requestWithRoute r u MyconfigSyncVolumeLicenses'{..}
+          = go _msvlQuotaUser (Just _msvlPrettyPrint)
               (Just _msvlCpksver)
               _msvlUserIp
               _msvlLocale
@@ -232,9 +242,9 @@ instance GoogleRequest MyconfigSyncVolumeLicenses'
               _msvlShowPreorders
               _msvlFields
               (Just _msvlNonce)
-              _msvlAlt
+              (Just _msvlAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MyconfigSyncVolumeLicensesAPI)
+                      (Proxy :: Proxy MyconfigSyncVolumeLicensesResource)
                       r
                       u

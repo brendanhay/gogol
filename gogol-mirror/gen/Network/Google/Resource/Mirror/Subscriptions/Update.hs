@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates an existing subscription in place.
 --
 -- /See:/ <https://developers.google.com/glass Google Mirror API Reference> for @MirrorSubscriptionsUpdate@.
-module Mirror.Subscriptions.Update
+module Network.Google.Resource.Mirror.Subscriptions.Update
     (
     -- * REST Resource
-      SubscriptionsUpdateAPI
+      SubscriptionsUpdateResource
 
     -- * Creating a Request
-    , subscriptionsUpdate
-    , SubscriptionsUpdate
+    , subscriptionsUpdate'
+    , SubscriptionsUpdate'
 
     -- * Request Lenses
     , suQuotaUser
@@ -43,15 +44,22 @@ import           Network.Google.Mirror.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MirrorSubscriptionsUpdate@ which the
--- 'SubscriptionsUpdate' request conforms to.
-type SubscriptionsUpdateAPI =
+-- 'SubscriptionsUpdate'' request conforms to.
+type SubscriptionsUpdateResource =
      "subscriptions" :>
-       Capture "id" Text :> Put '[JSON] Subscription
+       Capture "id" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Put '[JSON] Subscription
 
 -- | Updates an existing subscription in place.
 --
--- /See:/ 'subscriptionsUpdate' smart constructor.
-data SubscriptionsUpdate = SubscriptionsUpdate
+-- /See:/ 'subscriptionsUpdate'' smart constructor.
+data SubscriptionsUpdate' = SubscriptionsUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
     , _suUserIp      :: !(Maybe Text)
@@ -59,7 +67,7 @@ data SubscriptionsUpdate = SubscriptionsUpdate
     , _suId          :: !Text
     , _suOauthToken  :: !(Maybe Text)
     , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Text
+    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsUpdate'' with the minimum fields required to make a request.
@@ -81,11 +89,11 @@ data SubscriptionsUpdate = SubscriptionsUpdate
 -- * 'suFields'
 --
 -- * 'suAlt'
-subscriptionsUpdate
+subscriptionsUpdate'
     :: Text -- ^ 'id'
-    -> SubscriptionsUpdate
-subscriptionsUpdate pSuId_ =
-    SubscriptionsUpdate
+    -> SubscriptionsUpdate'
+subscriptionsUpdate' pSuId_ =
+    SubscriptionsUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
     , _suUserIp = Nothing
@@ -93,7 +101,7 @@ subscriptionsUpdate pSuId_ =
     , _suId = pSuId_
     , _suOauthToken = Nothing
     , _suFields = Nothing
-    , _suAlt = "json"
+    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,20 +142,21 @@ suFields :: Lens' SubscriptionsUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
 -- | Data format for the response.
-suAlt :: Lens' SubscriptionsUpdate' Text
+suAlt :: Lens' SubscriptionsUpdate' Alt
 suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
 
 instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription
         request = requestWithRoute defReq mirrorURL
-        requestWithRoute r u SubscriptionsUpdate{..}
-          = go _suQuotaUser _suPrettyPrint _suUserIp _suKey
+        requestWithRoute r u SubscriptionsUpdate'{..}
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+              _suKey
               _suId
               _suOauthToken
               _suFields
-              _suAlt
+              (Just _suAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy SubscriptionsUpdateAPI)
+                      (Proxy :: Proxy SubscriptionsUpdateResource)
                       r
                       u

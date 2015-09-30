@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -22,14 +23,14 @@
 -- of MATCH_DELETED.
 --
 -- /See:/ <https://developers.google.com/games/services/ Google Play Game Services API Reference> for @GamesTurnBasedMatchesSync@.
-module Games.TurnBasedMatches.Sync
+module Network.Google.Resource.Games.TurnBasedMatches.Sync
     (
     -- * REST Resource
-      TurnBasedMatchesSyncAPI
+      TurnBasedMatchesSyncResource
 
     -- * Creating a Request
-    , turnBasedMatchesSync
-    , TurnBasedMatchesSync
+    , turnBasedMatchesSync'
+    , TurnBasedMatchesSync'
 
     -- * Request Lenses
     , tbmsMaxCompletedMatches
@@ -50,24 +51,31 @@ import           Network.Google.Games.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesTurnBasedMatchesSync@ which the
--- 'TurnBasedMatchesSync' request conforms to.
-type TurnBasedMatchesSyncAPI =
+-- 'TurnBasedMatchesSync'' request conforms to.
+type TurnBasedMatchesSyncResource =
      "turnbasedmatches" :>
        "sync" :>
          QueryParam "maxCompletedMatches" Int32 :>
-           QueryParam "includeMatchData" Bool :>
-             QueryParam "language" Text :>
-               QueryParam "pageToken" Text :>
-                 QueryParam "maxResults" Int32 :>
-                   Get '[JSON] TurnBasedMatchSync
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "includeMatchData" Bool :>
+                     QueryParam "language" Text :>
+                       QueryParam "pageToken" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "maxResults" Int32 :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Alt :>
+                                 Get '[JSON] TurnBasedMatchSync
 
 -- | Returns turn-based matches the player is or was involved in that changed
 -- since the last sync call, with the least recent changes coming first.
 -- Matches that should be removed from the local cache will have a status
 -- of MATCH_DELETED.
 --
--- /See:/ 'turnBasedMatchesSync' smart constructor.
-data TurnBasedMatchesSync = TurnBasedMatchesSync
+-- /See:/ 'turnBasedMatchesSync'' smart constructor.
+data TurnBasedMatchesSync' = TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe Int32)
     , _tbmsQuotaUser           :: !(Maybe Text)
     , _tbmsPrettyPrint         :: !Bool
@@ -79,7 +87,7 @@ data TurnBasedMatchesSync = TurnBasedMatchesSync
     , _tbmsOauthToken          :: !(Maybe Text)
     , _tbmsMaxResults          :: !(Maybe Int32)
     , _tbmsFields              :: !(Maybe Text)
-    , _tbmsAlt                 :: !Text
+    , _tbmsAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesSync'' with the minimum fields required to make a request.
@@ -109,10 +117,10 @@ data TurnBasedMatchesSync = TurnBasedMatchesSync
 -- * 'tbmsFields'
 --
 -- * 'tbmsAlt'
-turnBasedMatchesSync
-    :: TurnBasedMatchesSync
-turnBasedMatchesSync =
-    TurnBasedMatchesSync
+turnBasedMatchesSync'
+    :: TurnBasedMatchesSync'
+turnBasedMatchesSync' =
+    TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches = Nothing
     , _tbmsQuotaUser = Nothing
     , _tbmsPrettyPrint = True
@@ -124,7 +132,7 @@ turnBasedMatchesSync =
     , _tbmsOauthToken = Nothing
     , _tbmsMaxResults = Nothing
     , _tbmsFields = Nothing
-    , _tbmsAlt = "json"
+    , _tbmsAlt = JSON
     }
 
 -- | The maximum number of completed or canceled matches to return in the
@@ -202,15 +210,15 @@ tbmsFields
   = lens _tbmsFields (\ s a -> s{_tbmsFields = a})
 
 -- | Data format for the response.
-tbmsAlt :: Lens' TurnBasedMatchesSync' Text
+tbmsAlt :: Lens' TurnBasedMatchesSync' Alt
 tbmsAlt = lens _tbmsAlt (\ s a -> s{_tbmsAlt = a})
 
 instance GoogleRequest TurnBasedMatchesSync' where
         type Rs TurnBasedMatchesSync' = TurnBasedMatchSync
         request = requestWithRoute defReq gamesURL
-        requestWithRoute r u TurnBasedMatchesSync{..}
+        requestWithRoute r u TurnBasedMatchesSync'{..}
           = go _tbmsMaxCompletedMatches _tbmsQuotaUser
-              _tbmsPrettyPrint
+              (Just _tbmsPrettyPrint)
               _tbmsUserIp
               _tbmsKey
               _tbmsIncludeMatchData
@@ -219,9 +227,9 @@ instance GoogleRequest TurnBasedMatchesSync' where
               _tbmsOauthToken
               _tbmsMaxResults
               _tbmsFields
-              _tbmsAlt
+              (Just _tbmsAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesSyncAPI)
+                      (Proxy :: Proxy TurnBasedMatchesSyncResource)
                       r
                       u

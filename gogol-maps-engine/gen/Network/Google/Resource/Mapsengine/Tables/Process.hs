@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,134 +20,142 @@
 -- | Process a table asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineTablesProcess@.
-module Mapsengine.Tables.Process
+module Network.Google.Resource.Mapsengine.Tables.Process
     (
     -- * REST Resource
-      TablesProcessAPI
+      TablesProcessResource
 
     -- * Creating a Request
-    , tablesProcess
-    , TablesProcess
+    , tablesProcess'
+    , TablesProcess'
 
     -- * Request Lenses
-    , tpQuotaUser
-    , tpPrettyPrint
-    , tpUserIp
-    , tpKey
-    , tpId
-    , tpOauthToken
-    , tpFields
-    , tpAlt
+    , tQuotaUser
+    , tPrettyPrint
+    , tUserIp
+    , tKey
+    , tId
+    , tOauthToken
+    , tFields
+    , tAlt
     ) where
 
 import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineTablesProcess@ which the
--- 'TablesProcess' request conforms to.
-type TablesProcessAPI =
+-- 'TablesProcess'' request conforms to.
+type TablesProcessResource =
      "tables" :>
        Capture "id" Text :>
-         "process" :> Post '[JSON] ProcessResponse
+         "process" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ProcessResponse
 
 -- | Process a table asset.
 --
--- /See:/ 'tablesProcess' smart constructor.
-data TablesProcess = TablesProcess
-    { _tpQuotaUser   :: !(Maybe Text)
-    , _tpPrettyPrint :: !Bool
-    , _tpUserIp      :: !(Maybe Text)
-    , _tpKey         :: !(Maybe Text)
-    , _tpId          :: !Text
-    , _tpOauthToken  :: !(Maybe Text)
-    , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Text
+-- /See:/ 'tablesProcess'' smart constructor.
+data TablesProcess' = TablesProcess'
+    { _tQuotaUser   :: !(Maybe Text)
+    , _tPrettyPrint :: !Bool
+    , _tUserIp      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Text)
+    , _tId          :: !Text
+    , _tOauthToken  :: !(Maybe Text)
+    , _tFields      :: !(Maybe Text)
+    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesProcess'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpQuotaUser'
+-- * 'tQuotaUser'
 --
--- * 'tpPrettyPrint'
+-- * 'tPrettyPrint'
 --
--- * 'tpUserIp'
+-- * 'tUserIp'
 --
--- * 'tpKey'
+-- * 'tKey'
 --
--- * 'tpId'
+-- * 'tId'
 --
--- * 'tpOauthToken'
+-- * 'tOauthToken'
 --
--- * 'tpFields'
+-- * 'tFields'
 --
--- * 'tpAlt'
-tablesProcess
+-- * 'tAlt'
+tablesProcess'
     :: Text -- ^ 'id'
-    -> TablesProcess
-tablesProcess pTpId_ =
-    TablesProcess
-    { _tpQuotaUser = Nothing
-    , _tpPrettyPrint = True
-    , _tpUserIp = Nothing
-    , _tpKey = Nothing
-    , _tpId = pTpId_
-    , _tpOauthToken = Nothing
-    , _tpFields = Nothing
-    , _tpAlt = "json"
+    -> TablesProcess'
+tablesProcess' pTId_ =
+    TablesProcess'
+    { _tQuotaUser = Nothing
+    , _tPrettyPrint = True
+    , _tUserIp = Nothing
+    , _tKey = Nothing
+    , _tId = pTId_
+    , _tOauthToken = Nothing
+    , _tFields = Nothing
+    , _tAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tpQuotaUser :: Lens' TablesProcess' (Maybe Text)
-tpQuotaUser
-  = lens _tpQuotaUser (\ s a -> s{_tpQuotaUser = a})
+tQuotaUser :: Lens' TablesProcess' (Maybe Text)
+tQuotaUser
+  = lens _tQuotaUser (\ s a -> s{_tQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tpPrettyPrint :: Lens' TablesProcess' Bool
-tpPrettyPrint
-  = lens _tpPrettyPrint
-      (\ s a -> s{_tpPrettyPrint = a})
+tPrettyPrint :: Lens' TablesProcess' Bool
+tPrettyPrint
+  = lens _tPrettyPrint (\ s a -> s{_tPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpUserIp :: Lens' TablesProcess' (Maybe Text)
-tpUserIp = lens _tpUserIp (\ s a -> s{_tpUserIp = a})
+tUserIp :: Lens' TablesProcess' (Maybe Text)
+tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpKey :: Lens' TablesProcess' (Maybe Text)
-tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
+tKey :: Lens' TablesProcess' (Maybe Text)
+tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | The ID of the table.
-tpId :: Lens' TablesProcess' Text
-tpId = lens _tpId (\ s a -> s{_tpId = a})
+tId :: Lens' TablesProcess' Text
+tId = lens _tId (\ s a -> s{_tId = a})
 
 -- | OAuth 2.0 token for the current user.
-tpOauthToken :: Lens' TablesProcess' (Maybe Text)
-tpOauthToken
-  = lens _tpOauthToken (\ s a -> s{_tpOauthToken = a})
+tOauthToken :: Lens' TablesProcess' (Maybe Text)
+tOauthToken
+  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tpFields :: Lens' TablesProcess' (Maybe Text)
-tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
+tFields :: Lens' TablesProcess' (Maybe Text)
+tFields = lens _tFields (\ s a -> s{_tFields = a})
 
 -- | Data format for the response.
-tpAlt :: Lens' TablesProcess' Text
-tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
+tAlt :: Lens' TablesProcess' Alt
+tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
 
 instance GoogleRequest TablesProcess' where
         type Rs TablesProcess' = ProcessResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u TablesProcess{..}
-          = go _tpQuotaUser _tpPrettyPrint _tpUserIp _tpKey
-              _tpId
-              _tpOauthToken
-              _tpFields
-              _tpAlt
+        requestWithRoute r u TablesProcess'{..}
+          = go _tQuotaUser (Just _tPrettyPrint) _tUserIp _tKey
+              _tId
+              _tOauthToken
+              _tFields
+              (Just _tAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TablesProcessAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy TablesProcessResource)
+                      r
                       u

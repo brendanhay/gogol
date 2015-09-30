@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- accessible to whitelisted tester accounts for your application.
 --
 -- /See:/ <https://developers.google.com/games/services Google Play Game Services Management API Reference> for @GamesManagementTurnBasedMatchesReset@.
-module GamesManagement.TurnBasedMatches.Reset
+module Network.Google.Resource.GamesManagement.TurnBasedMatches.Reset
     (
     -- * REST Resource
-      TurnBasedMatchesResetAPI
+      TurnBasedMatchesResetResource
 
     -- * Creating a Request
-    , turnBasedMatchesReset
-    , TurnBasedMatchesReset
+    , turnBasedMatchesReset'
+    , TurnBasedMatchesReset'
 
     -- * Request Lenses
     , tbmrQuotaUser
@@ -43,22 +44,30 @@ import           Network.Google.GamesManagement.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GamesManagementTurnBasedMatchesReset@ which the
--- 'TurnBasedMatchesReset' request conforms to.
-type TurnBasedMatchesResetAPI =
-     "turnbasedmatches" :> "reset" :> Post '[JSON] ()
+-- 'TurnBasedMatchesReset'' request conforms to.
+type TurnBasedMatchesResetResource =
+     "turnbasedmatches" :>
+       "reset" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Reset all turn-based match data for a user. This method is only
 -- accessible to whitelisted tester accounts for your application.
 --
--- /See:/ 'turnBasedMatchesReset' smart constructor.
-data TurnBasedMatchesReset = TurnBasedMatchesReset
+-- /See:/ 'turnBasedMatchesReset'' smart constructor.
+data TurnBasedMatchesReset' = TurnBasedMatchesReset'
     { _tbmrQuotaUser   :: !(Maybe Text)
     , _tbmrPrettyPrint :: !Bool
     , _tbmrUserIp      :: !(Maybe Text)
     , _tbmrKey         :: !(Maybe Text)
     , _tbmrOauthToken  :: !(Maybe Text)
     , _tbmrFields      :: !(Maybe Text)
-    , _tbmrAlt         :: !Text
+    , _tbmrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesReset'' with the minimum fields required to make a request.
@@ -78,17 +87,17 @@ data TurnBasedMatchesReset = TurnBasedMatchesReset
 -- * 'tbmrFields'
 --
 -- * 'tbmrAlt'
-turnBasedMatchesReset
-    :: TurnBasedMatchesReset
-turnBasedMatchesReset =
-    TurnBasedMatchesReset
+turnBasedMatchesReset'
+    :: TurnBasedMatchesReset'
+turnBasedMatchesReset' =
+    TurnBasedMatchesReset'
     { _tbmrQuotaUser = Nothing
     , _tbmrPrettyPrint = True
     , _tbmrUserIp = Nothing
     , _tbmrKey = Nothing
     , _tbmrOauthToken = Nothing
     , _tbmrFields = Nothing
-    , _tbmrAlt = "json"
+    , _tbmrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,20 +138,21 @@ tbmrFields
   = lens _tbmrFields (\ s a -> s{_tbmrFields = a})
 
 -- | Data format for the response.
-tbmrAlt :: Lens' TurnBasedMatchesReset' Text
+tbmrAlt :: Lens' TurnBasedMatchesReset' Alt
 tbmrAlt = lens _tbmrAlt (\ s a -> s{_tbmrAlt = a})
 
 instance GoogleRequest TurnBasedMatchesReset' where
         type Rs TurnBasedMatchesReset' = ()
         request = requestWithRoute defReq gamesManagementURL
-        requestWithRoute r u TurnBasedMatchesReset{..}
-          = go _tbmrQuotaUser _tbmrPrettyPrint _tbmrUserIp
+        requestWithRoute r u TurnBasedMatchesReset'{..}
+          = go _tbmrQuotaUser (Just _tbmrPrettyPrint)
+              _tbmrUserIp
               _tbmrKey
               _tbmrOauthToken
               _tbmrFields
-              _tbmrAlt
+              (Just _tbmrAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy TurnBasedMatchesResetAPI)
+                      (Proxy :: Proxy TurnBasedMatchesResetResource)
                       r
                       u

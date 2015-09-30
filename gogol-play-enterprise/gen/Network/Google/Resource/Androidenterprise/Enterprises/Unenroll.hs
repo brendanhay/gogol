@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Unenrolls an enterprise from the calling MDM.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesUnenroll@.
-module Androidenterprise.Enterprises.Unenroll
+module Network.Google.Resource.Androidenterprise.Enterprises.Unenroll
     (
     -- * REST Resource
-      EnterprisesUnenrollAPI
+      EnterprisesUnenrollResource
 
     -- * Creating a Request
-    , enterprisesUnenroll
-    , EnterprisesUnenroll
+    , enterprisesUnenroll'
+    , EnterprisesUnenroll'
 
     -- * Request Lenses
     , euQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesUnenroll@ which the
--- 'EnterprisesUnenroll' request conforms to.
-type EnterprisesUnenrollAPI =
+-- 'EnterprisesUnenroll'' request conforms to.
+type EnterprisesUnenrollResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
-         "unenroll" :> Post '[JSON] ()
+         "unenroll" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | Unenrolls an enterprise from the calling MDM.
 --
--- /See:/ 'enterprisesUnenroll' smart constructor.
-data EnterprisesUnenroll = EnterprisesUnenroll
+-- /See:/ 'enterprisesUnenroll'' smart constructor.
+data EnterprisesUnenroll' = EnterprisesUnenroll'
     { _euQuotaUser    :: !(Maybe Text)
     , _euPrettyPrint  :: !Bool
     , _euEnterpriseId :: !Text
@@ -60,7 +68,7 @@ data EnterprisesUnenroll = EnterprisesUnenroll
     , _euKey          :: !(Maybe Text)
     , _euOauthToken   :: !(Maybe Text)
     , _euFields       :: !(Maybe Text)
-    , _euAlt          :: !Text
+    , _euAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesUnenroll'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data EnterprisesUnenroll = EnterprisesUnenroll
 -- * 'euFields'
 --
 -- * 'euAlt'
-enterprisesUnenroll
+enterprisesUnenroll'
     :: Text -- ^ 'enterpriseId'
-    -> EnterprisesUnenroll
-enterprisesUnenroll pEuEnterpriseId_ =
-    EnterprisesUnenroll
+    -> EnterprisesUnenroll'
+enterprisesUnenroll' pEuEnterpriseId_ =
+    EnterprisesUnenroll'
     { _euQuotaUser = Nothing
     , _euPrettyPrint = True
     , _euEnterpriseId = pEuEnterpriseId_
@@ -94,7 +102,7 @@ enterprisesUnenroll pEuEnterpriseId_ =
     , _euKey = Nothing
     , _euOauthToken = Nothing
     , _euFields = Nothing
-    , _euAlt = "json"
+    , _euAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,21 +145,22 @@ euFields :: Lens' EnterprisesUnenroll' (Maybe Text)
 euFields = lens _euFields (\ s a -> s{_euFields = a})
 
 -- | Data format for the response.
-euAlt :: Lens' EnterprisesUnenroll' Text
+euAlt :: Lens' EnterprisesUnenroll' Alt
 euAlt = lens _euAlt (\ s a -> s{_euAlt = a})
 
 instance GoogleRequest EnterprisesUnenroll' where
         type Rs EnterprisesUnenroll' = ()
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesUnenroll{..}
-          = go _euQuotaUser _euPrettyPrint _euEnterpriseId
+        requestWithRoute r u EnterprisesUnenroll'{..}
+          = go _euQuotaUser (Just _euPrettyPrint)
+              _euEnterpriseId
               _euUserIp
               _euKey
               _euOauthToken
               _euFields
-              _euAlt
+              (Just _euAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EnterprisesUnenrollAPI)
+                      (Proxy :: Proxy EnterprisesUnenrollResource)
                       r
                       u

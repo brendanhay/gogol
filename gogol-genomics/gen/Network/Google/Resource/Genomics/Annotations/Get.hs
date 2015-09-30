@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- annotation set.
 --
 -- /See:/ <https://developers.google.com/genomics/v1beta2/reference Genomics API Reference> for @GenomicsAnnotationsGet@.
-module Genomics.Annotations.Get
+module Network.Google.Resource.Genomics.Annotations.Get
     (
     -- * REST Resource
-      AnnotationsGetAPI
+      AnnotationsGetResource
 
     -- * Creating a Request
-    , annotationsGet
-    , AnnotationsGet
+    , annotationsGet'
+    , AnnotationsGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -44,16 +45,23 @@ import           Network.Google.Genomics.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GenomicsAnnotationsGet@ which the
--- 'AnnotationsGet' request conforms to.
-type AnnotationsGetAPI =
+-- 'AnnotationsGet'' request conforms to.
+type AnnotationsGetResource =
      "annotations" :>
-       Capture "annotationId" Text :> Get '[JSON] Annotation
+       Capture "annotationId" Text :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Text :>
+                 QueryParam "oauth_token" Text :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" Alt :> Get '[JSON] Annotation
 
 -- | Gets an annotation. Caller must have READ permission for the associated
 -- annotation set.
 --
--- /See:/ 'annotationsGet' smart constructor.
-data AnnotationsGet = AnnotationsGet
+-- /See:/ 'annotationsGet'' smart constructor.
+data AnnotationsGet' = AnnotationsGet'
     { _agQuotaUser    :: !(Maybe Text)
     , _agPrettyPrint  :: !Bool
     , _agUserIp       :: !(Maybe Text)
@@ -61,7 +69,7 @@ data AnnotationsGet = AnnotationsGet
     , _agAnnotationId :: !Text
     , _agOauthToken   :: !(Maybe Text)
     , _agFields       :: !(Maybe Text)
-    , _agAlt          :: !Text
+    , _agAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsGet'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data AnnotationsGet = AnnotationsGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-annotationsGet
+annotationsGet'
     :: Text -- ^ 'annotationId'
-    -> AnnotationsGet
-annotationsGet pAgAnnotationId_ =
-    AnnotationsGet
+    -> AnnotationsGet'
+annotationsGet' pAgAnnotationId_ =
+    AnnotationsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agUserIp = Nothing
@@ -95,7 +103,7 @@ annotationsGet pAgAnnotationId_ =
     , _agAnnotationId = pAgAnnotationId_
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,19 +146,21 @@ agFields :: Lens' AnnotationsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AnnotationsGet' Text
+agAlt :: Lens' AnnotationsGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AnnotationsGet' where
         type Rs AnnotationsGet' = Annotation
         request = requestWithRoute defReq genomicsURL
-        requestWithRoute r u AnnotationsGet{..}
-          = go _agQuotaUser _agPrettyPrint _agUserIp _agKey
+        requestWithRoute r u AnnotationsGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+              _agKey
               _agAnnotationId
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AnnotationsGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AnnotationsGetResource)
                       r
                       u

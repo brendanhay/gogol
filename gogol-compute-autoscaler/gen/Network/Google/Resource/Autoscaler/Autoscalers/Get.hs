@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Gets the specified Autoscaler resource.
 --
 -- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersGet@.
-module Autoscaler.Autoscalers.Get
+module Network.Google.Resource.Autoscaler.Autoscalers.Get
     (
     -- * REST Resource
-      AutoscalersGetAPI
+      AutoscalersGetResource
 
     -- * Creating a Request
-    , autoscalersGet
-    , AutoscalersGet
+    , autoscalersGet'
+    , AutoscalersGet'
 
     -- * Request Lenses
     , agQuotaUser
@@ -45,19 +46,26 @@ import           Network.Google.ComputeAutoscaler.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AutoscalerAutoscalersGet@ which the
--- 'AutoscalersGet' request conforms to.
-type AutoscalersGetAPI =
+-- 'AutoscalersGet'' request conforms to.
+type AutoscalersGetResource =
      "projects" :>
        Capture "project" Text :>
          "zones" :>
            Capture "zone" Text :>
              "autoscalers" :>
-               Capture "autoscaler" Text :> Get '[JSON] Autoscaler
+               Capture "autoscaler" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Text :>
+                         QueryParam "oauth_token" Text :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" Alt :> Get '[JSON] Autoscaler
 
 -- | Gets the specified Autoscaler resource.
 --
--- /See:/ 'autoscalersGet' smart constructor.
-data AutoscalersGet = AutoscalersGet
+-- /See:/ 'autoscalersGet'' smart constructor.
+data AutoscalersGet' = AutoscalersGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agProject     :: !Text
@@ -67,7 +75,7 @@ data AutoscalersGet = AutoscalersGet
     , _agAutoscaler  :: !Text
     , _agOauthToken  :: !(Maybe Text)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Text
+    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersGet'' with the minimum fields required to make a request.
@@ -93,13 +101,13 @@ data AutoscalersGet = AutoscalersGet
 -- * 'agFields'
 --
 -- * 'agAlt'
-autoscalersGet
+autoscalersGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'autoscaler'
-    -> AutoscalersGet
-autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
-    AutoscalersGet
+    -> AutoscalersGet'
+autoscalersGet' pAgProject_ pAgZone_ pAgAutoscaler_ =
+    AutoscalersGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agProject = pAgProject_
@@ -109,7 +117,7 @@ autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
     , _agAutoscaler = pAgAutoscaler_
     , _agOauthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = "json"
+    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -160,22 +168,24 @@ agFields :: Lens' AutoscalersGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
 -- | Data format for the response.
-agAlt :: Lens' AutoscalersGet' Text
+agAlt :: Lens' AutoscalersGet' Alt
 agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
 
 instance GoogleRequest AutoscalersGet' where
         type Rs AutoscalersGet' = Autoscaler
         request
           = requestWithRoute defReq computeAutoscalerURL
-        requestWithRoute r u AutoscalersGet{..}
-          = go _agQuotaUser _agPrettyPrint _agProject _agUserIp
+        requestWithRoute r u AutoscalersGet'{..}
+          = go _agQuotaUser (Just _agPrettyPrint) _agProject
+              _agUserIp
               _agZone
               _agKey
               _agAutoscaler
               _agOauthToken
               _agFields
-              _agAlt
+              (Just _agAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy AutoscalersGetAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy AutoscalersGetResource)
                       r
                       u

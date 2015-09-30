@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- and attachments accessible to your application.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @ProximitybeaconBeaconinfoGetforobserved@.
-module ProximityBeacon.Beaconinfo.Getforobserved
+module Network.Google.Resource.ProximityBeacon.Beaconinfo.Getforobserved
     (
     -- * REST Resource
-      BeaconinfoGetforobservedAPI
+      BeaconinfoGetforobservedResource
 
     -- * Creating a Request
-    , beaconinfoGetforobserved
-    , BeaconinfoGetforobserved
+    , beaconinfoGetforobserved'
+    , BeaconinfoGetforobserved'
 
     -- * Request Lenses
     , bXgafv
@@ -49,17 +50,31 @@ import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
 
 -- | A resource alias for @ProximitybeaconBeaconinfoGetforobserved@ which the
--- 'BeaconinfoGetforobserved' request conforms to.
-type BeaconinfoGetforobservedAPI =
+-- 'BeaconinfoGetforobserved'' request conforms to.
+type BeaconinfoGetforobservedResource =
      "v1beta1" :>
        "beaconinfo:getforobserved" :>
-         Post '[JSON] GetInfoForObservedBeaconsResponse
+         QueryParam "$.xgafv" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "upload_protocol" Text :>
+                 QueryParam "pp" Bool :>
+                   QueryParam "access_token" Text :>
+                     QueryParam "uploadType" Text :>
+                       QueryParam "bearer_token" Text :>
+                         QueryParam "key" Text :>
+                           QueryParam "oauth_token" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "callback" Text :>
+                                 QueryParam "alt" Text :>
+                                   Post '[JSON]
+                                     GetInfoForObservedBeaconsResponse
 
 -- | Given one or more beacon observations, returns any beacon information
 -- and attachments accessible to your application.
 --
--- /See:/ 'beaconinfoGetforobserved' smart constructor.
-data BeaconinfoGetforobserved = BeaconinfoGetforobserved
+-- /See:/ 'beaconinfoGetforobserved'' smart constructor.
+data BeaconinfoGetforobserved' = BeaconinfoGetforobserved'
     { _bXgafv          :: !(Maybe Text)
     , _bQuotaUser      :: !(Maybe Text)
     , _bPrettyPrint    :: !Bool
@@ -104,10 +119,10 @@ data BeaconinfoGetforobserved = BeaconinfoGetforobserved
 -- * 'bCallback'
 --
 -- * 'bAlt'
-beaconinfoGetforobserved
-    :: BeaconinfoGetforobserved
-beaconinfoGetforobserved =
-    BeaconinfoGetforobserved
+beaconinfoGetforobserved'
+    :: BeaconinfoGetforobserved'
+beaconinfoGetforobserved' =
+    BeaconinfoGetforobserved'
     { _bXgafv = Nothing
     , _bQuotaUser = Nothing
     , _bPrettyPrint = True
@@ -193,10 +208,10 @@ instance GoogleRequest BeaconinfoGetforobserved'
         type Rs BeaconinfoGetforobserved' =
              GetInfoForObservedBeaconsResponse
         request = requestWithRoute defReq proximityBeaconURL
-        requestWithRoute r u BeaconinfoGetforobserved{..}
-          = go _bXgafv _bQuotaUser _bPrettyPrint
+        requestWithRoute r u BeaconinfoGetforobserved'{..}
+          = go _bXgafv _bQuotaUser (Just _bPrettyPrint)
               _bUploadProtocol
-              _bPp
+              (Just _bPp)
               _bAccessToken
               _bUploadType
               _bBearerToken
@@ -204,9 +219,9 @@ instance GoogleRequest BeaconinfoGetforobserved'
               _bOauthToken
               _bFields
               _bCallback
-              _bAlt
+              (Just _bAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy BeaconinfoGetforobservedAPI)
+                      (Proxy :: Proxy BeaconinfoGetforobservedResource)
                       r
                       u

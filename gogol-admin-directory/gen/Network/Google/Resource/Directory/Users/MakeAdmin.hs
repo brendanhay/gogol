@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | change admin status of a user
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryUsersMakeAdmin@.
-module Directory.Users.MakeAdmin
+module Network.Google.Resource.Directory.Users.MakeAdmin
     (
     -- * REST Resource
-      UsersMakeAdminAPI
+      UsersMakeAdminResource
 
     -- * Creating a Request
-    , usersMakeAdmin
-    , UsersMakeAdmin
+    , usersMakeAdmin'
+    , UsersMakeAdmin'
 
     -- * Request Lenses
     , umaQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryUsersMakeAdmin@ which the
--- 'UsersMakeAdmin' request conforms to.
-type UsersMakeAdminAPI =
+-- 'UsersMakeAdmin'' request conforms to.
+type UsersMakeAdminResource =
      "users" :>
        Capture "userKey" Text :>
-         "makeAdmin" :> Post '[JSON] ()
+         "makeAdmin" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] ()
 
 -- | change admin status of a user
 --
--- /See:/ 'usersMakeAdmin' smart constructor.
-data UsersMakeAdmin = UsersMakeAdmin
+-- /See:/ 'usersMakeAdmin'' smart constructor.
+data UsersMakeAdmin' = UsersMakeAdmin'
     { _umaQuotaUser   :: !(Maybe Text)
     , _umaPrettyPrint :: !Bool
     , _umaUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data UsersMakeAdmin = UsersMakeAdmin
     , _umaOauthToken  :: !(Maybe Text)
     , _umaUserKey     :: !Text
     , _umaFields      :: !(Maybe Text)
-    , _umaAlt         :: !Text
+    , _umaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMakeAdmin'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data UsersMakeAdmin = UsersMakeAdmin
 -- * 'umaFields'
 --
 -- * 'umaAlt'
-usersMakeAdmin
+usersMakeAdmin'
     :: Text -- ^ 'userKey'
-    -> UsersMakeAdmin
-usersMakeAdmin pUmaUserKey_ =
-    UsersMakeAdmin
+    -> UsersMakeAdmin'
+usersMakeAdmin' pUmaUserKey_ =
+    UsersMakeAdmin'
     { _umaQuotaUser = Nothing
     , _umaPrettyPrint = True
     , _umaUserIp = Nothing
@@ -94,7 +102,7 @@ usersMakeAdmin pUmaUserKey_ =
     , _umaOauthToken = Nothing
     , _umaUserKey = pUmaUserKey_
     , _umaFields = Nothing
-    , _umaAlt = "json"
+    , _umaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,19 +147,21 @@ umaFields
   = lens _umaFields (\ s a -> s{_umaFields = a})
 
 -- | Data format for the response.
-umaAlt :: Lens' UsersMakeAdmin' Text
+umaAlt :: Lens' UsersMakeAdmin' Alt
 umaAlt = lens _umaAlt (\ s a -> s{_umaAlt = a})
 
 instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u UsersMakeAdmin{..}
-          = go _umaQuotaUser _umaPrettyPrint _umaUserIp _umaKey
+        requestWithRoute r u UsersMakeAdmin'{..}
+          = go _umaQuotaUser (Just _umaPrettyPrint) _umaUserIp
+              _umaKey
               _umaOauthToken
               _umaUserKey
               _umaFields
-              _umaAlt
+              (Just _umaAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersMakeAdminAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy UsersMakeAdminResource)
                       r
                       u

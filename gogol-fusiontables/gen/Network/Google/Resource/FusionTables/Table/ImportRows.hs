@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Imports more rows into a table.
 --
 -- /See:/ <https://developers.google.com/fusiontables Fusion Tables API Reference> for @FusiontablesTableImportRows@.
-module FusionTables.Table.ImportRows
+module Network.Google.Resource.FusionTables.Table.ImportRows
     (
     -- * REST Resource
-      TableImportRowsAPI
+      TableImportRowsResource
 
     -- * Creating a Request
-    , tableImportRows
-    , TableImportRows
+    , tableImportRows'
+    , TableImportRows'
 
     -- * Request Lenses
     , tirQuotaUser
@@ -48,21 +49,28 @@ import           Network.Google.FusionTables.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @FusiontablesTableImportRows@ which the
--- 'TableImportRows' request conforms to.
-type TableImportRowsAPI =
+-- 'TableImportRows'' request conforms to.
+type TableImportRowsResource =
      "tables" :>
        Capture "tableId" Text :>
          "import" :>
-           QueryParam "startLine" Int32 :>
-             QueryParam "endLine" Int32 :>
-               QueryParam "delimiter" Text :>
-                 QueryParam "encoding" Text :>
-                   QueryParam "isStrict" Bool :> Post '[JSON] Import
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "startLine" Int32 :>
+                   QueryParam "endLine" Int32 :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "delimiter" Text :>
+                           QueryParam "encoding" Text :>
+                             QueryParam "isStrict" Bool :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Alt :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --
--- /See:/ 'tableImportRows' smart constructor.
-data TableImportRows = TableImportRows
+-- /See:/ 'tableImportRows'' smart constructor.
+data TableImportRows' = TableImportRows'
     { _tirQuotaUser   :: !(Maybe Text)
     , _tirPrettyPrint :: !Bool
     , _tirUserIp      :: !(Maybe Text)
@@ -75,7 +83,7 @@ data TableImportRows = TableImportRows
     , _tirEncoding    :: !(Maybe Text)
     , _tirIsStrict    :: !(Maybe Bool)
     , _tirFields      :: !(Maybe Text)
-    , _tirAlt         :: !Text
+    , _tirAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
@@ -107,11 +115,11 @@ data TableImportRows = TableImportRows
 -- * 'tirFields'
 --
 -- * 'tirAlt'
-tableImportRows
+tableImportRows'
     :: Text -- ^ 'tableId'
-    -> TableImportRows
-tableImportRows pTirTableId_ =
-    TableImportRows
+    -> TableImportRows'
+tableImportRows' pTirTableId_ =
+    TableImportRows'
     { _tirQuotaUser = Nothing
     , _tirPrettyPrint = True
     , _tirUserIp = Nothing
@@ -124,7 +132,7 @@ tableImportRows pTirTableId_ =
     , _tirEncoding = Nothing
     , _tirIsStrict = Nothing
     , _tirFields = Nothing
-    , _tirAlt = "json"
+    , _tirAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -202,14 +210,14 @@ tirFields
   = lens _tirFields (\ s a -> s{_tirFields = a})
 
 -- | Data format for the response.
-tirAlt :: Lens' TableImportRows' Text
+tirAlt :: Lens' TableImportRows' Alt
 tirAlt = lens _tirAlt (\ s a -> s{_tirAlt = a})
 
 instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
         request = requestWithRoute defReq fusionTablesURL
-        requestWithRoute r u TableImportRows{..}
-          = go _tirQuotaUser _tirPrettyPrint _tirUserIp
+        requestWithRoute r u TableImportRows'{..}
+          = go _tirQuotaUser (Just _tirPrettyPrint) _tirUserIp
               _tirStartLine
               _tirEndLine
               _tirKey
@@ -219,8 +227,9 @@ instance GoogleRequest TableImportRows' where
               _tirEncoding
               _tirIsStrict
               _tirFields
-              _tirAlt
+              (Just _tirAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy TableImportRowsAPI)
+                  = clientWithRoute
+                      (Proxy :: Proxy TableImportRowsResource)
                       r
                       u

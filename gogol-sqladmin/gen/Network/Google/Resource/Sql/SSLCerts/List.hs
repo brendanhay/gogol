@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Lists all of the current SSL certificates for the instance.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference> for @SqlSSLCertsList@.
-module Sql.SSLCerts.List
+module Network.Google.Resource.Sql.SSLCerts.List
     (
     -- * REST Resource
-      SslCertsListAPI
+      SslCertsListResource
 
     -- * Creating a Request
-    , sSLCertsList
-    , SSLCertsList
+    , sSLCertsList'
+    , SSLCertsList'
 
     -- * Request Lenses
     , sclQuotaUser
@@ -44,18 +45,26 @@ import           Network.Google.Prelude
 import           Network.Google.SQLAdmin.Types
 
 -- | A resource alias for @SqlSSLCertsList@ which the
--- 'SSLCertsList' request conforms to.
-type SslCertsListAPI =
+-- 'SSLCertsList'' request conforms to.
+type SslCertsListResource =
      "projects" :>
        Capture "project" Text :>
          "instances" :>
            Capture "instance" Text :>
-             "sslCerts" :> Get '[JSON] SSLCertsListResponse
+             "sslCerts" :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Text :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] SSLCertsListResponse
 
 -- | Lists all of the current SSL certificates for the instance.
 --
--- /See:/ 'sSLCertsList' smart constructor.
-data SSLCertsList = SSLCertsList
+-- /See:/ 'sSLCertsList'' smart constructor.
+data SSLCertsList' = SSLCertsList'
     { _sclQuotaUser   :: !(Maybe Text)
     , _sclPrettyPrint :: !Bool
     , _sclProject     :: !Text
@@ -63,7 +72,7 @@ data SSLCertsList = SSLCertsList
     , _sclKey         :: !(Maybe Text)
     , _sclOauthToken  :: !(Maybe Text)
     , _sclFields      :: !(Maybe Text)
-    , _sclAlt         :: !Text
+    , _sclAlt         :: !Alt
     , _sclInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,12 +97,12 @@ data SSLCertsList = SSLCertsList
 -- * 'sclAlt'
 --
 -- * 'sclInstance'
-sSLCertsList
+sSLCertsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instance'
-    -> SSLCertsList
-sSLCertsList pSclProject_ pSclInstance_ =
-    SSLCertsList
+    -> SSLCertsList'
+sSLCertsList' pSclProject_ pSclInstance_ =
+    SSLCertsList'
     { _sclQuotaUser = Nothing
     , _sclPrettyPrint = True
     , _sclProject = pSclProject_
@@ -101,7 +110,7 @@ sSLCertsList pSclProject_ pSclInstance_ =
     , _sclKey = Nothing
     , _sclOauthToken = Nothing
     , _sclFields = Nothing
-    , _sclAlt = "json"
+    , _sclAlt = JSON
     , _sclInstance = pSclInstance_
     }
 
@@ -147,7 +156,7 @@ sclFields
   = lens _sclFields (\ s a -> s{_sclFields = a})
 
 -- | Data format for the response.
-sclAlt :: Lens' SSLCertsList' Text
+sclAlt :: Lens' SSLCertsList' Alt
 sclAlt = lens _sclAlt (\ s a -> s{_sclAlt = a})
 
 -- | Cloud SQL instance ID. This does not include the project ID.
@@ -158,14 +167,16 @@ sclInstance
 instance GoogleRequest SSLCertsList' where
         type Rs SSLCertsList' = SSLCertsListResponse
         request = requestWithRoute defReq sQLAdminURL
-        requestWithRoute r u SSLCertsList{..}
-          = go _sclQuotaUser _sclPrettyPrint _sclProject
+        requestWithRoute r u SSLCertsList'{..}
+          = go _sclQuotaUser (Just _sclPrettyPrint) _sclProject
               _sclUserIp
               _sclKey
               _sclOauthToken
               _sclFields
-              _sclAlt
+              (Just _sclAlt)
               _sclInstance
           where go
-                  = clientWithRoute (Proxy :: Proxy SslCertsListAPI) r
+                  = clientWithRoute
+                      (Proxy :: Proxy SslCertsListResource)
+                      r
                       u

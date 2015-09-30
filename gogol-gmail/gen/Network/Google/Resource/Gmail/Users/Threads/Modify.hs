@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -20,14 +21,14 @@
 -- in the thread.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @GmailUsersThreadsModify@.
-module Gmail.Users.Threads.Modify
+module Network.Google.Resource.Gmail.Users.Threads.Modify
     (
     -- * REST Resource
-      UsersThreadsModifyAPI
+      UsersThreadsModifyResource
 
     -- * Creating a Request
-    , usersThreadsModify
-    , UsersThreadsModify
+    , usersThreadsModify'
+    , UsersThreadsModify'
 
     -- * Request Lenses
     , utmQuotaUser
@@ -45,17 +46,25 @@ import           Network.Google.Gmail.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @GmailUsersThreadsModify@ which the
--- 'UsersThreadsModify' request conforms to.
-type UsersThreadsModifyAPI =
+-- 'UsersThreadsModify'' request conforms to.
+type UsersThreadsModifyResource =
      Capture "userId" Text :>
        "threads" :>
-         Capture "id" Text :> "modify" :> Post '[JSON] Thread
+         Capture "id" Text :>
+           "modify" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
 --
--- /See:/ 'usersThreadsModify' smart constructor.
-data UsersThreadsModify = UsersThreadsModify
+-- /See:/ 'usersThreadsModify'' smart constructor.
+data UsersThreadsModify' = UsersThreadsModify'
     { _utmQuotaUser   :: !(Maybe Text)
     , _utmPrettyPrint :: !Bool
     , _utmUserIp      :: !(Maybe Text)
@@ -64,7 +73,7 @@ data UsersThreadsModify = UsersThreadsModify
     , _utmId          :: !Text
     , _utmOauthToken  :: !(Maybe Text)
     , _utmFields      :: !(Maybe Text)
-    , _utmAlt         :: !Text
+    , _utmAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsModify'' with the minimum fields required to make a request.
@@ -88,12 +97,12 @@ data UsersThreadsModify = UsersThreadsModify
 -- * 'utmFields'
 --
 -- * 'utmAlt'
-usersThreadsModify
+usersThreadsModify'
     :: Text -- ^ 'id'
     -> Text
-    -> UsersThreadsModify
-usersThreadsModify pUtmUserId_ pUtmId_ =
-    UsersThreadsModify
+    -> UsersThreadsModify'
+usersThreadsModify' pUtmUserId_ pUtmId_ =
+    UsersThreadsModify'
     { _utmQuotaUser = Nothing
     , _utmPrettyPrint = True
     , _utmUserIp = Nothing
@@ -102,7 +111,7 @@ usersThreadsModify pUtmUserId_ pUtmId_ =
     , _utmId = pUtmId_
     , _utmOauthToken = Nothing
     , _utmFields = Nothing
-    , _utmAlt = "json"
+    , _utmAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,22 +161,22 @@ utmFields
   = lens _utmFields (\ s a -> s{_utmFields = a})
 
 -- | Data format for the response.
-utmAlt :: Lens' UsersThreadsModify' Text
+utmAlt :: Lens' UsersThreadsModify' Alt
 utmAlt = lens _utmAlt (\ s a -> s{_utmAlt = a})
 
 instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread
         request = requestWithRoute defReq gmailURL
-        requestWithRoute r u UsersThreadsModify{..}
-          = go _utmQuotaUser _utmPrettyPrint _utmUserIp
+        requestWithRoute r u UsersThreadsModify'{..}
+          = go _utmQuotaUser (Just _utmPrettyPrint) _utmUserIp
               _utmUserId
               _utmKey
               _utmId
               _utmOauthToken
               _utmFields
-              _utmAlt
+              (Just _utmAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy UsersThreadsModifyAPI)
+                      (Proxy :: Proxy UsersThreadsModifyResource)
                       r
                       u

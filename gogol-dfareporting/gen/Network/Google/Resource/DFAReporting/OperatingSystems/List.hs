@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Retrieves a list of operating systems.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @DfareportingOperatingSystemsList@.
-module DFAReporting.OperatingSystems.List
+module Network.Google.Resource.DFAReporting.OperatingSystems.List
     (
     -- * REST Resource
-      OperatingSystemsListAPI
+      OperatingSystemsListResource
 
     -- * Creating a Request
-    , operatingSystemsList
-    , OperatingSystemsList
+    , operatingSystemsList'
+    , OperatingSystemsList'
 
     -- * Request Lenses
     , oslQuotaUser
@@ -43,17 +44,24 @@ import           Network.Google.DFAReporting.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DfareportingOperatingSystemsList@ which the
--- 'OperatingSystemsList' request conforms to.
-type OperatingSystemsListAPI =
+-- 'OperatingSystemsList'' request conforms to.
+type OperatingSystemsListResource =
      "userprofiles" :>
        Capture "profileId" Int64 :>
          "operatingSystems" :>
-           Get '[JSON] OperatingSystemsListResponse
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :>
+                         Get '[JSON] OperatingSystemsListResponse
 
 -- | Retrieves a list of operating systems.
 --
--- /See:/ 'operatingSystemsList' smart constructor.
-data OperatingSystemsList = OperatingSystemsList
+-- /See:/ 'operatingSystemsList'' smart constructor.
+data OperatingSystemsList' = OperatingSystemsList'
     { _oslQuotaUser   :: !(Maybe Text)
     , _oslPrettyPrint :: !Bool
     , _oslUserIp      :: !(Maybe Text)
@@ -61,7 +69,7 @@ data OperatingSystemsList = OperatingSystemsList
     , _oslKey         :: !(Maybe Text)
     , _oslOauthToken  :: !(Maybe Text)
     , _oslFields      :: !(Maybe Text)
-    , _oslAlt         :: !Text
+    , _oslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsList'' with the minimum fields required to make a request.
@@ -83,11 +91,11 @@ data OperatingSystemsList = OperatingSystemsList
 -- * 'oslFields'
 --
 -- * 'oslAlt'
-operatingSystemsList
+operatingSystemsList'
     :: Int64 -- ^ 'profileId'
-    -> OperatingSystemsList
-operatingSystemsList pOslProfileId_ =
-    OperatingSystemsList
+    -> OperatingSystemsList'
+operatingSystemsList' pOslProfileId_ =
+    OperatingSystemsList'
     { _oslQuotaUser = Nothing
     , _oslPrettyPrint = True
     , _oslUserIp = Nothing
@@ -95,7 +103,7 @@ operatingSystemsList pOslProfileId_ =
     , _oslKey = Nothing
     , _oslOauthToken = Nothing
     , _oslFields = Nothing
-    , _oslAlt = "json"
+    , _oslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,22 +148,22 @@ oslFields
   = lens _oslFields (\ s a -> s{_oslFields = a})
 
 -- | Data format for the response.
-oslAlt :: Lens' OperatingSystemsList' Text
+oslAlt :: Lens' OperatingSystemsList' Alt
 oslAlt = lens _oslAlt (\ s a -> s{_oslAlt = a})
 
 instance GoogleRequest OperatingSystemsList' where
         type Rs OperatingSystemsList' =
              OperatingSystemsListResponse
         request = requestWithRoute defReq dFAReportingURL
-        requestWithRoute r u OperatingSystemsList{..}
-          = go _oslQuotaUser _oslPrettyPrint _oslUserIp
+        requestWithRoute r u OperatingSystemsList'{..}
+          = go _oslQuotaUser (Just _oslPrettyPrint) _oslUserIp
               _oslProfileId
               _oslKey
               _oslOauthToken
               _oslFields
-              _oslAlt
+              (Just _oslAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy OperatingSystemsListAPI)
+                      (Proxy :: Proxy OperatingSystemsListResource)
                       r
                       u

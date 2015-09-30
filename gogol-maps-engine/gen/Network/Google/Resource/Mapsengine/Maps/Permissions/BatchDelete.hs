@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ <https://developers.google.com/maps-engine/ Google Maps Engine API Reference> for @MapsengineMapsPermissionsBatchDelete@.
-module Mapsengine.Maps.Permissions.BatchDelete
+module Network.Google.Resource.Mapsengine.Maps.Permissions.BatchDelete
     (
     -- * REST Resource
-      MapsPermissionsBatchDeleteAPI
+      MapsPermissionsBatchDeleteResource
 
     -- * Creating a Request
-    , mapsPermissionsBatchDelete
-    , MapsPermissionsBatchDelete
+    , mapsPermissionsBatchDelete'
+    , MapsPermissionsBatchDelete'
 
     -- * Request Lenses
     , mpbdQuotaUser
@@ -43,18 +44,25 @@ import           Network.Google.MapEngine.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @MapsengineMapsPermissionsBatchDelete@ which the
--- 'MapsPermissionsBatchDelete' request conforms to.
-type MapsPermissionsBatchDeleteAPI =
+-- 'MapsPermissionsBatchDelete'' request conforms to.
+type MapsPermissionsBatchDeleteResource =
      "maps" :>
        Capture "id" Text :>
          "permissions" :>
            "batchDelete" :>
-             Post '[JSON] PermissionsBatchDeleteResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :>
+                           Post '[JSON] PermissionsBatchDeleteResponse
 
 -- | Remove permission entries from an already existing asset.
 --
--- /See:/ 'mapsPermissionsBatchDelete' smart constructor.
-data MapsPermissionsBatchDelete = MapsPermissionsBatchDelete
+-- /See:/ 'mapsPermissionsBatchDelete'' smart constructor.
+data MapsPermissionsBatchDelete' = MapsPermissionsBatchDelete'
     { _mpbdQuotaUser   :: !(Maybe Text)
     , _mpbdPrettyPrint :: !Bool
     , _mpbdUserIp      :: !(Maybe Text)
@@ -62,7 +70,7 @@ data MapsPermissionsBatchDelete = MapsPermissionsBatchDelete
     , _mpbdId          :: !Text
     , _mpbdOauthToken  :: !(Maybe Text)
     , _mpbdFields      :: !(Maybe Text)
-    , _mpbdAlt         :: !Text
+    , _mpbdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsPermissionsBatchDelete'' with the minimum fields required to make a request.
@@ -84,11 +92,11 @@ data MapsPermissionsBatchDelete = MapsPermissionsBatchDelete
 -- * 'mpbdFields'
 --
 -- * 'mpbdAlt'
-mapsPermissionsBatchDelete
+mapsPermissionsBatchDelete'
     :: Text -- ^ 'id'
-    -> MapsPermissionsBatchDelete
-mapsPermissionsBatchDelete pMpbdId_ =
-    MapsPermissionsBatchDelete
+    -> MapsPermissionsBatchDelete'
+mapsPermissionsBatchDelete' pMpbdId_ =
+    MapsPermissionsBatchDelete'
     { _mpbdQuotaUser = Nothing
     , _mpbdPrettyPrint = True
     , _mpbdUserIp = Nothing
@@ -96,7 +104,7 @@ mapsPermissionsBatchDelete pMpbdId_ =
     , _mpbdId = pMpbdId_
     , _mpbdOauthToken = Nothing
     , _mpbdFields = Nothing
-    , _mpbdAlt = "json"
+    , _mpbdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,7 +149,7 @@ mpbdFields
   = lens _mpbdFields (\ s a -> s{_mpbdFields = a})
 
 -- | Data format for the response.
-mpbdAlt :: Lens' MapsPermissionsBatchDelete' Text
+mpbdAlt :: Lens' MapsPermissionsBatchDelete' Alt
 mpbdAlt = lens _mpbdAlt (\ s a -> s{_mpbdAlt = a})
 
 instance GoogleRequest MapsPermissionsBatchDelete'
@@ -149,15 +157,16 @@ instance GoogleRequest MapsPermissionsBatchDelete'
         type Rs MapsPermissionsBatchDelete' =
              PermissionsBatchDeleteResponse
         request = requestWithRoute defReq mapEngineURL
-        requestWithRoute r u MapsPermissionsBatchDelete{..}
-          = go _mpbdQuotaUser _mpbdPrettyPrint _mpbdUserIp
+        requestWithRoute r u MapsPermissionsBatchDelete'{..}
+          = go _mpbdQuotaUser (Just _mpbdPrettyPrint)
+              _mpbdUserIp
               _mpbdKey
               _mpbdId
               _mpbdOauthToken
               _mpbdFields
-              _mpbdAlt
+              (Just _mpbdAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy MapsPermissionsBatchDeleteAPI)
+                      (Proxy :: Proxy MapsPermissionsBatchDeleteResource)
                       r
                       u

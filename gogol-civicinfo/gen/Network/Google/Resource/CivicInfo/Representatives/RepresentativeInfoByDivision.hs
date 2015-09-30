@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Looks up representative information for a single geographic division.
 --
 -- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoRepresentativesRepresentativeInfoByDivision@.
-module CivicInfo.Representatives.RepresentativeInfoByDivision
+module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
     (
     -- * REST Resource
-      RepresentativesRepresentativeInfoByDivisionAPI
+      RepresentativesRepresentativeInfoByDivisionResource
 
     -- * Creating a Request
-    , representativesRepresentativeInfoByDivision
-    , RepresentativesRepresentativeInfoByDivision
+    , representativesRepresentativeInfoByDivision'
+    , RepresentativesRepresentativeInfoByDivision'
 
     -- * Request Lenses
     , rribdQuotaUser
@@ -46,30 +47,42 @@ import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @CivicinfoRepresentativesRepresentativeInfoByDivision@ which the
--- 'RepresentativesRepresentativeInfoByDivision' request conforms to.
-type RepresentativesRepresentativeInfoByDivisionAPI =
+-- 'RepresentativesRepresentativeInfoByDivision'' request conforms to.
+type RepresentativesRepresentativeInfoByDivisionResource
+     =
      "representatives" :>
        Capture "ocdId" Text :>
-         QueryParams "roles" Text :>
-           QueryParam "recursive" Bool :>
-             QueryParams "levels" Text :>
-               Get '[JSON] RepresentativeInfoData
+         QueryParam "quotaUser" Text :>
+           QueryParams "roles"
+             CivicinfoRepresentativesRepresentativeInfoByDivisionRoles
+             :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "recursive" Bool :>
+                     QueryParams "levels"
+                       CivicinfoRepresentativesRepresentativeInfoByDivisionLevels
+                       :>
+                       QueryParam "oauth_token" Text :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Alt :>
+                             Get '[JSON] RepresentativeInfoData
 
 -- | Looks up representative information for a single geographic division.
 --
--- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
-data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision
+-- /See:/ 'representativesRepresentativeInfoByDivision'' smart constructor.
+data RepresentativesRepresentativeInfoByDivision' = RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser   :: !(Maybe Text)
-    , _rribdRoles       :: !(Maybe Text)
+    , _rribdRoles       :: !(Maybe CivicinfoRepresentativesRepresentativeInfoByDivisionRoles)
     , _rribdPrettyPrint :: !Bool
     , _rribdUserIp      :: !(Maybe Text)
     , _rribdKey         :: !(Maybe Text)
     , _rribdRecursive   :: !(Maybe Bool)
     , _rribdOcdId       :: !Text
-    , _rribdLevels      :: !(Maybe Text)
+    , _rribdLevels      :: !(Maybe CivicinfoRepresentativesRepresentativeInfoByDivisionLevels)
     , _rribdOauthToken  :: !(Maybe Text)
     , _rribdFields      :: !(Maybe Text)
-    , _rribdAlt         :: !Text
+    , _rribdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativesRepresentativeInfoByDivision'' with the minimum fields required to make a request.
@@ -97,11 +110,11 @@ data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentative
 -- * 'rribdFields'
 --
 -- * 'rribdAlt'
-representativesRepresentativeInfoByDivision
+representativesRepresentativeInfoByDivision'
     :: Text -- ^ 'ocdId'
-    -> RepresentativesRepresentativeInfoByDivision
-representativesRepresentativeInfoByDivision pRribdOcdId_ =
-    RepresentativesRepresentativeInfoByDivision
+    -> RepresentativesRepresentativeInfoByDivision'
+representativesRepresentativeInfoByDivision' pRribdOcdId_ =
+    RepresentativesRepresentativeInfoByDivision'
     { _rribdQuotaUser = Nothing
     , _rribdRoles = Nothing
     , _rribdPrettyPrint = True
@@ -112,7 +125,7 @@ representativesRepresentativeInfoByDivision pRribdOcdId_ =
     , _rribdLevels = Nothing
     , _rribdOauthToken = Nothing
     , _rribdFields = Nothing
-    , _rribdAlt = "json"
+    , _rribdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,7 +139,7 @@ rribdQuotaUser
 -- | A list of office roles to filter by. Only offices fulfilling one of
 -- these roles will be returned. Divisions that don\'t contain a matching
 -- office will not be returned.
-rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Text)
+rribdRoles :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe CivicinfoRepresentativesRepresentativeInfoByDivisionRoles)
 rribdRoles
   = lens _rribdRoles (\ s a -> s{_rribdRoles = a})
 
@@ -165,7 +178,7 @@ rribdOcdId
 -- | A list of office levels to filter by. Only offices that serve at least
 -- one of these levels will be returned. Divisions that don\'t contain a
 -- matching office will not be returned.
-rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe Text)
+rribdLevels :: Lens' RepresentativesRepresentativeInfoByDivision' (Maybe CivicinfoRepresentativesRepresentativeInfoByDivisionLevels)
 rribdLevels
   = lens _rribdLevels (\ s a -> s{_rribdLevels = a})
 
@@ -181,7 +194,7 @@ rribdFields
   = lens _rribdFields (\ s a -> s{_rribdFields = a})
 
 -- | Data format for the response.
-rribdAlt :: Lens' RepresentativesRepresentativeInfoByDivision' Text
+rribdAlt :: Lens' RepresentativesRepresentativeInfoByDivision' Alt
 rribdAlt = lens _rribdAlt (\ s a -> s{_rribdAlt = a})
 
 instance GoogleRequest
@@ -190,8 +203,9 @@ instance GoogleRequest
              = RepresentativeInfoData
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u
-          RepresentativesRepresentativeInfoByDivision{..}
-          = go _rribdQuotaUser _rribdRoles _rribdPrettyPrint
+          RepresentativesRepresentativeInfoByDivision'{..}
+          = go _rribdQuotaUser _rribdRoles
+              (Just _rribdPrettyPrint)
               _rribdUserIp
               _rribdKey
               _rribdRecursive
@@ -199,10 +213,11 @@ instance GoogleRequest
               _rribdLevels
               _rribdOauthToken
               _rribdFields
-              _rribdAlt
+              (Just _rribdAlt)
           where go
                   = clientWithRoute
                       (Proxy ::
-                         Proxy RepresentativesRepresentativeInfoByDivisionAPI)
+                         Proxy
+                           RepresentativesRepresentativeInfoByDivisionResource)
                       r
                       u

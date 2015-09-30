@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Enrolls an enterprise with the calling MDM.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseEnterprisesEnroll@.
-module Androidenterprise.Enterprises.Enroll
+module Network.Google.Resource.Androidenterprise.Enterprises.Enroll
     (
     -- * REST Resource
-      EnterprisesEnrollAPI
+      EnterprisesEnrollResource
 
     -- * Creating a Request
-    , enterprisesEnroll
-    , EnterprisesEnroll
+    , enterprisesEnroll'
+    , EnterprisesEnroll'
 
     -- * Request Lenses
     , eeQuotaUser
@@ -43,16 +44,23 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseEnterprisesEnroll@ which the
--- 'EnterprisesEnroll' request conforms to.
-type EnterprisesEnrollAPI =
+-- 'EnterprisesEnroll'' request conforms to.
+type EnterprisesEnrollResource =
      "enterprises" :>
        "enroll" :>
-         QueryParam "token" Text :> Post '[JSON] Enterprise
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "token" Text :>
+                 QueryParam "key" Text :>
+                   QueryParam "oauth_token" Text :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" Alt :> Post '[JSON] Enterprise
 
 -- | Enrolls an enterprise with the calling MDM.
 --
--- /See:/ 'enterprisesEnroll' smart constructor.
-data EnterprisesEnroll = EnterprisesEnroll
+-- /See:/ 'enterprisesEnroll'' smart constructor.
+data EnterprisesEnroll' = EnterprisesEnroll'
     { _eeQuotaUser   :: !(Maybe Text)
     , _eePrettyPrint :: !Bool
     , _eeUserIp      :: !(Maybe Text)
@@ -60,7 +68,7 @@ data EnterprisesEnroll = EnterprisesEnroll
     , _eeKey         :: !(Maybe Text)
     , _eeOauthToken  :: !(Maybe Text)
     , _eeFields      :: !(Maybe Text)
-    , _eeAlt         :: !Text
+    , _eeAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EnterprisesEnroll'' with the minimum fields required to make a request.
@@ -82,11 +90,11 @@ data EnterprisesEnroll = EnterprisesEnroll
 -- * 'eeFields'
 --
 -- * 'eeAlt'
-enterprisesEnroll
+enterprisesEnroll'
     :: Text -- ^ 'token'
-    -> EnterprisesEnroll
-enterprisesEnroll pEeToken_ =
-    EnterprisesEnroll
+    -> EnterprisesEnroll'
+enterprisesEnroll' pEeToken_ =
+    EnterprisesEnroll'
     { _eeQuotaUser = Nothing
     , _eePrettyPrint = True
     , _eeUserIp = Nothing
@@ -94,7 +102,7 @@ enterprisesEnroll pEeToken_ =
     , _eeKey = Nothing
     , _eeOauthToken = Nothing
     , _eeFields = Nothing
-    , _eeAlt = "json"
+    , _eeAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,21 +143,21 @@ eeFields :: Lens' EnterprisesEnroll' (Maybe Text)
 eeFields = lens _eeFields (\ s a -> s{_eeFields = a})
 
 -- | Data format for the response.
-eeAlt :: Lens' EnterprisesEnroll' Text
+eeAlt :: Lens' EnterprisesEnroll' Alt
 eeAlt = lens _eeAlt (\ s a -> s{_eeAlt = a})
 
 instance GoogleRequest EnterprisesEnroll' where
         type Rs EnterprisesEnroll' = Enterprise
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u EnterprisesEnroll{..}
-          = go _eeQuotaUser _eePrettyPrint _eeUserIp
+        requestWithRoute r u EnterprisesEnroll'{..}
+          = go _eeQuotaUser (Just _eePrettyPrint) _eeUserIp
               (Just _eeToken)
               _eeKey
               _eeOauthToken
               _eeFields
-              _eeAlt
+              (Just _eeAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy EnterprisesEnrollAPI)
+                      (Proxy :: Proxy EnterprisesEnrollResource)
                       r
                       u

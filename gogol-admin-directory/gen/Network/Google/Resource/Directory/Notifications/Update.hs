@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Updates a notification.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/directory/ Admin Directory API Reference> for @DirectoryNotificationsUpdate@.
-module Directory.Notifications.Update
+module Network.Google.Resource.Directory.Notifications.Update
     (
     -- * REST Resource
-      NotificationsUpdateAPI
+      NotificationsUpdateResource
 
     -- * Creating a Request
-    , notificationsUpdate
-    , NotificationsUpdate
+    , notificationsUpdate'
+    , NotificationsUpdate'
 
     -- * Request Lenses
     , nuQuotaUser
@@ -44,18 +45,24 @@ import           Network.Google.AdminDirectory.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @DirectoryNotificationsUpdate@ which the
--- 'NotificationsUpdate' request conforms to.
-type NotificationsUpdateAPI =
+-- 'NotificationsUpdate'' request conforms to.
+type NotificationsUpdateResource =
      "customer" :>
        Capture "customer" Text :>
          "notifications" :>
            Capture "notificationId" Text :>
-             Put '[JSON] Notification
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Put '[JSON] Notification
 
 -- | Updates a notification.
 --
--- /See:/ 'notificationsUpdate' smart constructor.
-data NotificationsUpdate = NotificationsUpdate
+-- /See:/ 'notificationsUpdate'' smart constructor.
+data NotificationsUpdate' = NotificationsUpdate'
     { _nuQuotaUser      :: !(Maybe Text)
     , _nuPrettyPrint    :: !Bool
     , _nuUserIp         :: !(Maybe Text)
@@ -64,7 +71,7 @@ data NotificationsUpdate = NotificationsUpdate
     , _nuNotificationId :: !Text
     , _nuOauthToken     :: !(Maybe Text)
     , _nuFields         :: !(Maybe Text)
-    , _nuAlt            :: !Text
+    , _nuAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsUpdate'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data NotificationsUpdate = NotificationsUpdate
 -- * 'nuFields'
 --
 -- * 'nuAlt'
-notificationsUpdate
+notificationsUpdate'
     :: Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
-    -> NotificationsUpdate
-notificationsUpdate pNuCustomer_ pNuNotificationId_ =
-    NotificationsUpdate
+    -> NotificationsUpdate'
+notificationsUpdate' pNuCustomer_ pNuNotificationId_ =
+    NotificationsUpdate'
     { _nuQuotaUser = Nothing
     , _nuPrettyPrint = True
     , _nuUserIp = Nothing
@@ -102,7 +109,7 @@ notificationsUpdate pNuCustomer_ pNuNotificationId_ =
     , _nuNotificationId = pNuNotificationId_
     , _nuOauthToken = Nothing
     , _nuFields = Nothing
-    , _nuAlt = "json"
+    , _nuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,22 +157,22 @@ nuFields :: Lens' NotificationsUpdate' (Maybe Text)
 nuFields = lens _nuFields (\ s a -> s{_nuFields = a})
 
 -- | Data format for the response.
-nuAlt :: Lens' NotificationsUpdate' Text
+nuAlt :: Lens' NotificationsUpdate' Alt
 nuAlt = lens _nuAlt (\ s a -> s{_nuAlt = a})
 
 instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification
         request = requestWithRoute defReq adminDirectoryURL
-        requestWithRoute r u NotificationsUpdate{..}
-          = go _nuQuotaUser _nuPrettyPrint _nuUserIp
+        requestWithRoute r u NotificationsUpdate'{..}
+          = go _nuQuotaUser (Just _nuPrettyPrint) _nuUserIp
               _nuCustomer
               _nuKey
               _nuNotificationId
               _nuOauthToken
               _nuFields
-              _nuAlt
+              (Just _nuAlt)
           where go
                   = clientWithRoute
-                      (Proxy :: Proxy NotificationsUpdateAPI)
+                      (Proxy :: Proxy NotificationsUpdateResource)
                       r
                       u

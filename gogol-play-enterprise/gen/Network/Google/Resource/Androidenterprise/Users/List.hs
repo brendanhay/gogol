@@ -1,6 +1,7 @@
 {-# LANGUAGE DataKinds          #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
 {-# LANGUAGE TypeFamilies       #-}
 {-# LANGUAGE TypeOperators      #-}
@@ -19,14 +20,14 @@
 -- | Looks up a user by email address.
 --
 -- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidenterpriseUsersList@.
-module Androidenterprise.Users.List
+module Network.Google.Resource.Androidenterprise.Users.List
     (
     -- * REST Resource
-      UsersListAPI
+      UsersListResource
 
     -- * Creating a Request
-    , usersList
-    , UsersList
+    , usersList'
+    , UsersList'
 
     -- * Request Lenses
     , ulEmail
@@ -44,18 +45,24 @@ import           Network.Google.PlayEnterprise.Types
 import           Network.Google.Prelude
 
 -- | A resource alias for @AndroidenterpriseUsersList@ which the
--- 'UsersList' request conforms to.
-type UsersListAPI =
+-- 'UsersList'' request conforms to.
+type UsersListResource =
      "enterprises" :>
        Capture "enterpriseId" Text :>
          "users" :>
            QueryParam "email" Text :>
-             Get '[JSON] UsersListResponse
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Text :>
+                     QueryParam "oauth_token" Text :>
+                       QueryParam "fields" Text :>
+                         QueryParam "alt" Alt :> Get '[JSON] UsersListResponse
 
 -- | Looks up a user by email address.
 --
--- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+-- /See:/ 'usersList'' smart constructor.
+data UsersList' = UsersList'
     { _ulEmail        :: !Text
     , _ulQuotaUser    :: !(Maybe Text)
     , _ulPrettyPrint  :: !Bool
@@ -64,7 +71,7 @@ data UsersList = UsersList
     , _ulKey          :: !(Maybe Text)
     , _ulOauthToken   :: !(Maybe Text)
     , _ulFields       :: !(Maybe Text)
-    , _ulAlt          :: !Text
+    , _ulAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
@@ -88,12 +95,12 @@ data UsersList = UsersList
 -- * 'ulFields'
 --
 -- * 'ulAlt'
-usersList
+usersList'
     :: Text -- ^ 'email'
     -> Text -- ^ 'enterpriseId'
-    -> UsersList
-usersList pUlEmail_ pUlEnterpriseId_ =
-    UsersList
+    -> UsersList'
+usersList' pUlEmail_ pUlEnterpriseId_ =
+    UsersList'
     { _ulEmail = pUlEmail_
     , _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
@@ -102,7 +109,7 @@ usersList pUlEmail_ pUlEnterpriseId_ =
     , _ulKey = Nothing
     , _ulOauthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = "json"
+    , _ulAlt = JSON
     }
 
 -- | The exact primary email address of the user to look up.
@@ -149,19 +156,22 @@ ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
 -- | Data format for the response.
-ulAlt :: Lens' UsersList' Text
+ulAlt :: Lens' UsersList' Alt
 ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = UsersListResponse
         request = requestWithRoute defReq playEnterpriseURL
-        requestWithRoute r u UsersList{..}
-          = go (Just _ulEmail) _ulQuotaUser _ulPrettyPrint
+        requestWithRoute r u UsersList'{..}
+          = go (Just _ulEmail) _ulQuotaUser
+              (Just _ulPrettyPrint)
               _ulEnterpriseId
               _ulUserIp
               _ulKey
               _ulOauthToken
               _ulFields
-              _ulAlt
+              (Just _ulAlt)
           where go
-                  = clientWithRoute (Proxy :: Proxy UsersListAPI) r u
+                  = clientWithRoute (Proxy :: Proxy UsersListResource)
+                      r
+                      u
