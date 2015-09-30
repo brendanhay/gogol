@@ -1,0 +1,278 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+
+-- |
+-- Module      : Network.Google.AppEngine.Types
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+module Network.Google.AppEngine.Types
+    (
+    -- * Service URL
+      appEngineURL
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
+
+    -- * Library
+    , Library
+    , library
+    , lName
+    , lVersion
+
+    -- * ListOperationsResponse
+    , ListOperationsResponse
+    , listOperationsResponse
+    , lorNextPageToken
+    , lorOperations
+
+    -- * TrafficSplit
+    , TrafficSplit
+    , trafficSplit
+    , tsShardBy
+    , tsAllocations
+
+    -- * ScriptHandler
+    , ScriptHandler
+    , scriptHandler
+    , shScriptPath
+
+    -- * URLMap
+    , URLMap
+    , uRLMap
+    , umScript
+    , umSecurityLevel
+    , umApiEndpoint
+    , umUrlRegex
+    , umRedirectHttpResponseCode
+    , umAuthFailAction
+    , umStaticFiles
+    , umLogin
+    , umStaticDirectory
+
+    -- * APIConfigHandler
+    , APIConfigHandler
+    , aPIConfigHandler
+    , achScript
+    , achSecurityLevel
+    , achUrl
+    , achAuthFailAction
+    , achLogin
+
+    -- * Application
+    , Application
+    , application
+    , aLocation
+    , aCodeBucket
+    , aName
+    , aDispatchRules
+    , aId
+
+    -- * HealthCheck
+    , HealthCheck
+    , healthCheck
+    , hcHealthyThreshold
+    , hcDisableHealthCheck
+    , hcCheckInterval
+    , hcRestartThreshold
+    , hcHost
+    , hcTimeout
+    , hcUnhealthyThreshold
+
+    -- * URLDispatchRule
+    , URLDispatchRule
+    , uRLDispatchRule
+    , udrPath
+    , udrDomain
+    , udrModule
+
+    -- * Operation
+    , Operation
+    , operation
+    , oDone
+    , oError
+    , oResponse
+    , oName
+    , oMetadata
+
+    -- * ListVersionsResponse
+    , ListVersionsResponse
+    , listVersionsResponse
+    , lvrNextPageToken
+    , lvrVersions
+
+    -- * ListModulesResponse
+    , ListModulesResponse
+    , listModulesResponse
+    , lmrNextPageToken
+    , lmrModules
+
+    -- * FileInfo
+    , FileInfo
+    , fileInfo
+    , fiSha1Sum
+    , fiMimeType
+    , fiSourceUrl
+
+    -- * AutomaticScaling
+    , AutomaticScaling
+    , automaticScaling
+    , asMaxTotalInstances
+    , asMinIdleInstances
+    , asMinPendingLatency
+    , asCpuUtilization
+    , asMaxIdleInstances
+    , asMinTotalInstances
+    , asMaxConcurrentRequests
+    , asCoolDownPeriod
+    , asMaxPendingLatency
+
+    -- * APIEndpointHandler
+    , APIEndpointHandler
+    , aPIEndpointHandler
+    , aehScriptPath
+
+    -- * Network
+    , Network
+    , network
+    , nForwardedPorts
+    , nInstanceTag
+    , nName
+
+    -- * Resources
+    , Resources
+    , resources
+    , rMemoryGb
+    , rDiskGb
+    , rCpu
+
+    -- * CPUUtilization
+    , CPUUtilization
+    , cPUUtilization
+    , cuAggregationWindowLength
+    , cuTargetUtilization
+
+    -- * ManualScaling
+    , ManualScaling
+    , manualScaling
+    , msInstances
+
+    -- * BasicScaling
+    , BasicScaling
+    , basicScaling
+    , bsMaxInstances
+    , bsIdleTimeout
+
+    -- * Version
+    , Version
+    , version
+    , vCreationTime
+    , vRuntime
+    , vDeployer
+    , vNobuildFilesRegex
+    , vInstanceClass
+    , vHealthCheck
+    , vEnv
+    , vDefaultExpiration
+    , vAutomaticScaling
+    , vErrorHandlers
+    , vVm
+    , vHandlers
+    , vInboundServices
+    , vNetwork
+    , vResources
+    , vName
+    , vThreadsafe
+    , vBetaSettings
+    , vBasicScaling
+    , vManualScaling
+    , vApiConfig
+    , vId
+    , vEnvVariables
+    , vServingStatus
+    , vLibraries
+    , vDeployment
+
+    -- * Module
+    , Module
+    , module'
+    , mSplit
+    , mName
+    , mId
+
+    -- * StaticFilesHandler
+    , StaticFilesHandler
+    , staticFilesHandler
+    , sfhHttpHeaders
+    , sfhPath
+    , sfhRequireMatchingFile
+    , sfhExpiration
+    , sfhMimeType
+    , sfhApplicationReadable
+    , sfhUploadPathRegex
+
+    -- * ErrorHandler
+    , ErrorHandler
+    , errorHandler
+    , ehMimeType
+    , ehErrorCode
+    , ehStaticFile
+
+    -- * OperationMetadata
+    , OperationMetadata
+    , operationMetadata
+    , omInsertTime
+    , omUser
+    , omMethod
+    , omEndTime
+    , omOperationType
+    , omTarget
+
+    -- * SourceReference
+    , SourceReference
+    , sourceReference
+    , srRepository
+    , srRevisionId
+
+    -- * ContainerInfo
+    , ContainerInfo
+    , containerInfo
+    , ciImage
+
+    -- * Deployment
+    , Deployment
+    , deployment
+    , dContainer
+    , dFiles
+    , dSourceReferences
+
+    -- * StaticDirectoryHandler
+    , StaticDirectoryHandler
+    , staticDirectoryHandler
+    , sdhHttpHeaders
+    , sdhRequireMatchingFile
+    , sdhExpiration
+    , sdhMimeType
+    , sdhApplicationReadable
+    , sdhDirectory
+    ) where
+
+import           Network.Google.AppEngine.Types.Product
+import           Network.Google.AppEngine.Types.Sum
+import           Network.Google.Prelude
+
+-- | URL referring to version 'v1beta4' of the Google App Engine Admin API.
+appEngineURL :: BaseURL
+appEngineURL
+  = BaseUrl Https "https://appengine.googleapis.com/"
+      443

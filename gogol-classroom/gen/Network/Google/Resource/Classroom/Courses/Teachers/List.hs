@@ -1,0 +1,266 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.Classroom.Courses.Teachers.List
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Returns a list of teachers of this course that the requester is
+-- permitted to view. This method returns the following error codes: *
+-- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
+-- [general user permission errors][User Permission Errors].
+--
+-- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @ClassroomCoursesTeachersList@.
+module Classroom.Courses.Teachers.List
+    (
+    -- * REST Resource
+      CoursesTeachersListAPI
+
+    -- * Creating a Request
+    , coursesTeachersList
+    , CoursesTeachersList
+
+    -- * Request Lenses
+    , ctlXgafv
+    , ctlQuotaUser
+    , ctlPrettyPrint
+    , ctlUploadProtocol
+    , ctlPp
+    , ctlCourseId
+    , ctlAccessToken
+    , ctlUploadType
+    , ctlBearerToken
+    , ctlKey
+    , ctlPageToken
+    , ctlOauthToken
+    , ctlPageSize
+    , ctlFields
+    , ctlCallback
+    , ctlAlt
+    ) where
+
+import           Network.Google.Classroom.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @ClassroomCoursesTeachersList@ which the
+-- 'CoursesTeachersList' request conforms to.
+type CoursesTeachersListAPI =
+     "v1" :>
+       "courses" :>
+         Capture "courseId" Text :>
+           "teachers" :>
+             QueryParam "pageToken" Text :>
+               QueryParam "pageSize" Int32 :>
+                 Get '[JSON] ListTeachersResponse
+
+-- | Returns a list of teachers of this course that the requester is
+-- permitted to view. This method returns the following error codes: *
+-- \`NOT_FOUND\` if the course does not exist. * \`PERMISSION_DENIED\` for
+-- [general user permission errors][User Permission Errors].
+--
+-- /See:/ 'coursesTeachersList' smart constructor.
+data CoursesTeachersList = CoursesTeachersList
+    { _ctlXgafv          :: !(Maybe Text)
+    , _ctlQuotaUser      :: !(Maybe Text)
+    , _ctlPrettyPrint    :: !Bool
+    , _ctlUploadProtocol :: !(Maybe Text)
+    , _ctlPp             :: !Bool
+    , _ctlCourseId       :: !Text
+    , _ctlAccessToken    :: !(Maybe Text)
+    , _ctlUploadType     :: !(Maybe Text)
+    , _ctlBearerToken    :: !(Maybe Text)
+    , _ctlKey            :: !(Maybe Text)
+    , _ctlPageToken      :: !(Maybe Text)
+    , _ctlOauthToken     :: !(Maybe Text)
+    , _ctlPageSize       :: !(Maybe Int32)
+    , _ctlFields         :: !(Maybe Text)
+    , _ctlCallback       :: !(Maybe Text)
+    , _ctlAlt            :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CoursesTeachersList'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ctlXgafv'
+--
+-- * 'ctlQuotaUser'
+--
+-- * 'ctlPrettyPrint'
+--
+-- * 'ctlUploadProtocol'
+--
+-- * 'ctlPp'
+--
+-- * 'ctlCourseId'
+--
+-- * 'ctlAccessToken'
+--
+-- * 'ctlUploadType'
+--
+-- * 'ctlBearerToken'
+--
+-- * 'ctlKey'
+--
+-- * 'ctlPageToken'
+--
+-- * 'ctlOauthToken'
+--
+-- * 'ctlPageSize'
+--
+-- * 'ctlFields'
+--
+-- * 'ctlCallback'
+--
+-- * 'ctlAlt'
+coursesTeachersList
+    :: Text -- ^ 'courseId'
+    -> CoursesTeachersList
+coursesTeachersList pCtlCourseId_ =
+    CoursesTeachersList
+    { _ctlXgafv = Nothing
+    , _ctlQuotaUser = Nothing
+    , _ctlPrettyPrint = True
+    , _ctlUploadProtocol = Nothing
+    , _ctlPp = True
+    , _ctlCourseId = pCtlCourseId_
+    , _ctlAccessToken = Nothing
+    , _ctlUploadType = Nothing
+    , _ctlBearerToken = Nothing
+    , _ctlKey = Nothing
+    , _ctlPageToken = Nothing
+    , _ctlOauthToken = Nothing
+    , _ctlPageSize = Nothing
+    , _ctlFields = Nothing
+    , _ctlCallback = Nothing
+    , _ctlAlt = "json"
+    }
+
+-- | V1 error format.
+ctlXgafv :: Lens' CoursesTeachersList' (Maybe Text)
+ctlXgafv = lens _ctlXgafv (\ s a -> s{_ctlXgafv = a})
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters.
+ctlQuotaUser :: Lens' CoursesTeachersList' (Maybe Text)
+ctlQuotaUser
+  = lens _ctlQuotaUser (\ s a -> s{_ctlQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+ctlPrettyPrint :: Lens' CoursesTeachersList' Bool
+ctlPrettyPrint
+  = lens _ctlPrettyPrint
+      (\ s a -> s{_ctlPrettyPrint = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+ctlUploadProtocol :: Lens' CoursesTeachersList' (Maybe Text)
+ctlUploadProtocol
+  = lens _ctlUploadProtocol
+      (\ s a -> s{_ctlUploadProtocol = a})
+
+-- | Pretty-print response.
+ctlPp :: Lens' CoursesTeachersList' Bool
+ctlPp = lens _ctlPp (\ s a -> s{_ctlPp = a})
+
+-- | Identifier of the course. This identifier can be either the
+-- Classroom-assigned identifier or an
+-- [alias][google.classroom.v1.CourseAlias].
+ctlCourseId :: Lens' CoursesTeachersList' Text
+ctlCourseId
+  = lens _ctlCourseId (\ s a -> s{_ctlCourseId = a})
+
+-- | OAuth access token.
+ctlAccessToken :: Lens' CoursesTeachersList' (Maybe Text)
+ctlAccessToken
+  = lens _ctlAccessToken
+      (\ s a -> s{_ctlAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+ctlUploadType :: Lens' CoursesTeachersList' (Maybe Text)
+ctlUploadType
+  = lens _ctlUploadType
+      (\ s a -> s{_ctlUploadType = a})
+
+-- | OAuth bearer token.
+ctlBearerToken :: Lens' CoursesTeachersList' (Maybe Text)
+ctlBearerToken
+  = lens _ctlBearerToken
+      (\ s a -> s{_ctlBearerToken = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+ctlKey :: Lens' CoursesTeachersList' (Maybe Text)
+ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
+
+-- | [nextPageToken][google.classroom.v1.ListTeachersResponse.next_page_token]
+-- value returned from a previous
+-- [list][google.classroom.v1.Users.ListTeachers] call, indicating that the
+-- subsequent page of results should be returned. The
+-- [list][google.classroom.v1.Users.ListTeachers] request must be otherwise
+-- identical to the one that resulted in this token.
+ctlPageToken :: Lens' CoursesTeachersList' (Maybe Text)
+ctlPageToken
+  = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
+
+-- | OAuth 2.0 token for the current user.
+ctlOauthToken :: Lens' CoursesTeachersList' (Maybe Text)
+ctlOauthToken
+  = lens _ctlOauthToken
+      (\ s a -> s{_ctlOauthToken = a})
+
+-- | Maximum number of items to return. Zero means no maximum. The server may
+-- return fewer than the specified number of results.
+ctlPageSize :: Lens' CoursesTeachersList' (Maybe Int32)
+ctlPageSize
+  = lens _ctlPageSize (\ s a -> s{_ctlPageSize = a})
+
+-- | Selector specifying which fields to include in a partial response.
+ctlFields :: Lens' CoursesTeachersList' (Maybe Text)
+ctlFields
+  = lens _ctlFields (\ s a -> s{_ctlFields = a})
+
+-- | JSONP
+ctlCallback :: Lens' CoursesTeachersList' (Maybe Text)
+ctlCallback
+  = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
+
+-- | Data format for response.
+ctlAlt :: Lens' CoursesTeachersList' Text
+ctlAlt = lens _ctlAlt (\ s a -> s{_ctlAlt = a})
+
+instance GoogleRequest CoursesTeachersList' where
+        type Rs CoursesTeachersList' = ListTeachersResponse
+        request = requestWithRoute defReq classroomURL
+        requestWithRoute r u CoursesTeachersList{..}
+          = go _ctlXgafv _ctlQuotaUser _ctlPrettyPrint
+              _ctlUploadProtocol
+              _ctlPp
+              _ctlCourseId
+              _ctlAccessToken
+              _ctlUploadType
+              _ctlBearerToken
+              _ctlKey
+              _ctlPageToken
+              _ctlOauthToken
+              _ctlPageSize
+              _ctlFields
+              _ctlCallback
+              _ctlAlt
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy CoursesTeachersListAPI)
+                      r
+                      u

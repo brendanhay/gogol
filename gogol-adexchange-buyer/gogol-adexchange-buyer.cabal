@@ -1,0 +1,90 @@
+name:                  gogol-adexchange-buyer
+version:               0.0.1
+synopsis:              Ad Exchange Buyer API Client.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    Accesses your bidding-account information, submits creatives for
+    validation, finds available direct deals, and retrieves performance
+    reports.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.AdExchangeBuyer
+        , Network.Google.AdExchangeBuyer.Types
+        , Network.Google.Resource.AdExchangeBuyer.Accounts.Get
+        , Network.Google.Resource.AdExchangeBuyer.Accounts.List
+        , Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
+        , Network.Google.Resource.AdExchangeBuyer.Accounts.Update
+        , Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
+        , Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
+        , Network.Google.Resource.AdExchangeBuyer.Budget.Get
+        , Network.Google.Resource.AdExchangeBuyer.Budget.Patch
+        , Network.Google.Resource.AdExchangeBuyer.Budget.Update
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Delete
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Get
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.List
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Patch
+        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Update
+        , Network.Google.Resource.AdExchangeBuyer.Creatives.Get
+        , Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Creatives.List
+        , Network.Google.Resource.AdExchangeBuyer.Deals.Get
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Delete
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.List
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Update
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.List
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Get
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Search
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Get
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Patch
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Search
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Update
+        , Network.Google.Resource.AdExchangeBuyer.Negotiationrounds.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
+        , Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Negotiations.List
+        , Network.Google.Resource.AdExchangeBuyer.Offers.Get
+        , Network.Google.Resource.AdExchangeBuyer.Offers.Insert
+        , Network.Google.Resource.AdExchangeBuyer.Offers.List
+        , Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Patch
+        , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Update
+
+    other-modules:
+          Network.Google.AdExchangeBuyer.Types.Product
+        , Network.Google.AdExchangeBuyer.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

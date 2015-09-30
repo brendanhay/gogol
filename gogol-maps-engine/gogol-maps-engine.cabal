@@ -1,0 +1,120 @@
+name:                  gogol-maps-engine
+version:               0.0.1
+synopsis:              Google Maps Engine API Client.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    The Google Maps Engine API allows developers to store and query
+    geospatial vector and raster data.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.MapEngine
+        , Network.Google.MapEngine.Types
+        , Network.Google.Resource.Mapsengine.Assets.Get
+        , Network.Google.Resource.Mapsengine.Assets.List
+        , Network.Google.Resource.Mapsengine.Assets.Parents.List
+        , Network.Google.Resource.Mapsengine.Assets.Permissions.List
+        , Network.Google.Resource.Mapsengine.Layers.CancelProcessing
+        , Network.Google.Resource.Mapsengine.Layers.Create
+        , Network.Google.Resource.Mapsengine.Layers.Delete
+        , Network.Google.Resource.Mapsengine.Layers.Get
+        , Network.Google.Resource.Mapsengine.Layers.GetPublished
+        , Network.Google.Resource.Mapsengine.Layers.List
+        , Network.Google.Resource.Mapsengine.Layers.ListPublished
+        , Network.Google.Resource.Mapsengine.Layers.Parents.List
+        , Network.Google.Resource.Mapsengine.Layers.Patch
+        , Network.Google.Resource.Mapsengine.Layers.Permissions.BatchDelete
+        , Network.Google.Resource.Mapsengine.Layers.Permissions.BatchUpdate
+        , Network.Google.Resource.Mapsengine.Layers.Permissions.List
+        , Network.Google.Resource.Mapsengine.Layers.Process
+        , Network.Google.Resource.Mapsengine.Layers.Publish
+        , Network.Google.Resource.Mapsengine.Layers.Unpublish
+        , Network.Google.Resource.Mapsengine.Maps.Create
+        , Network.Google.Resource.Mapsengine.Maps.Delete
+        , Network.Google.Resource.Mapsengine.Maps.Get
+        , Network.Google.Resource.Mapsengine.Maps.GetPublished
+        , Network.Google.Resource.Mapsengine.Maps.List
+        , Network.Google.Resource.Mapsengine.Maps.ListPublished
+        , Network.Google.Resource.Mapsengine.Maps.Patch
+        , Network.Google.Resource.Mapsengine.Maps.Permissions.BatchDelete
+        , Network.Google.Resource.Mapsengine.Maps.Permissions.BatchUpdate
+        , Network.Google.Resource.Mapsengine.Maps.Permissions.List
+        , Network.Google.Resource.Mapsengine.Maps.Publish
+        , Network.Google.Resource.Mapsengine.Maps.Unpublish
+        , Network.Google.Resource.Mapsengine.Projects.Icons.Create
+        , Network.Google.Resource.Mapsengine.Projects.Icons.Get
+        , Network.Google.Resource.Mapsengine.Projects.Icons.List
+        , Network.Google.Resource.Mapsengine.Projects.List
+        , Network.Google.Resource.Mapsengine.RasterCollections.CancelProcessing
+        , Network.Google.Resource.Mapsengine.RasterCollections.Create
+        , Network.Google.Resource.Mapsengine.RasterCollections.Delete
+        , Network.Google.Resource.Mapsengine.RasterCollections.Get
+        , Network.Google.Resource.Mapsengine.RasterCollections.List
+        , Network.Google.Resource.Mapsengine.RasterCollections.Parents.List
+        , Network.Google.Resource.Mapsengine.RasterCollections.Patch
+        , Network.Google.Resource.Mapsengine.RasterCollections.Permissions.BatchDelete
+        , Network.Google.Resource.Mapsengine.RasterCollections.Permissions.BatchUpdate
+        , Network.Google.Resource.Mapsengine.RasterCollections.Permissions.List
+        , Network.Google.Resource.Mapsengine.RasterCollections.Process
+        , Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchDelete
+        , Network.Google.Resource.Mapsengine.RasterCollections.Rasters.BatchInsert
+        , Network.Google.Resource.Mapsengine.RasterCollections.Rasters.List
+        , Network.Google.Resource.Mapsengine.Rasters.Delete
+        , Network.Google.Resource.Mapsengine.Rasters.Files.Insert
+        , Network.Google.Resource.Mapsengine.Rasters.Get
+        , Network.Google.Resource.Mapsengine.Rasters.List
+        , Network.Google.Resource.Mapsengine.Rasters.Parents.List
+        , Network.Google.Resource.Mapsengine.Rasters.Patch
+        , Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchDelete
+        , Network.Google.Resource.Mapsengine.Rasters.Permissions.BatchUpdate
+        , Network.Google.Resource.Mapsengine.Rasters.Permissions.List
+        , Network.Google.Resource.Mapsengine.Rasters.Process
+        , Network.Google.Resource.Mapsengine.Rasters.Upload
+        , Network.Google.Resource.Mapsengine.Tables.Create
+        , Network.Google.Resource.Mapsengine.Tables.Delete
+        , Network.Google.Resource.Mapsengine.Tables.Features.BatchDelete
+        , Network.Google.Resource.Mapsengine.Tables.Features.BatchInsert
+        , Network.Google.Resource.Mapsengine.Tables.Features.BatchPatch
+        , Network.Google.Resource.Mapsengine.Tables.Features.Get
+        , Network.Google.Resource.Mapsengine.Tables.Features.List
+        , Network.Google.Resource.Mapsengine.Tables.Files.Insert
+        , Network.Google.Resource.Mapsengine.Tables.Get
+        , Network.Google.Resource.Mapsengine.Tables.List
+        , Network.Google.Resource.Mapsengine.Tables.Parents.List
+        , Network.Google.Resource.Mapsengine.Tables.Patch
+        , Network.Google.Resource.Mapsengine.Tables.Permissions.BatchDelete
+        , Network.Google.Resource.Mapsengine.Tables.Permissions.BatchUpdate
+        , Network.Google.Resource.Mapsengine.Tables.Permissions.List
+        , Network.Google.Resource.Mapsengine.Tables.Process
+        , Network.Google.Resource.Mapsengine.Tables.Upload
+
+    other-modules:
+          Network.Google.MapEngine.Types.Product
+        , Network.Google.MapEngine.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5

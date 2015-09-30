@@ -1,0 +1,234 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Returns permissions that a caller has on the specified resource.
+--
+-- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @PubsubProjectsTopicsTestIAMPermissions@.
+module PubSub.Projects.Topics.TestIAMPermissions
+    (
+    -- * REST Resource
+      ProjectsTopicsTestIAMPermissionsAPI
+
+    -- * Creating a Request
+    , projectsTopicsTestIAMPermissions
+    , ProjectsTopicsTestIAMPermissions
+
+    -- * Request Lenses
+    , pttipXgafv
+    , pttipQuotaUser
+    , pttipPrettyPrint
+    , pttipUploadProtocol
+    , pttipPp
+    , pttipAccessToken
+    , pttipUploadType
+    , pttipBearerToken
+    , pttipKey
+    , pttipResource
+    , pttipOauthToken
+    , pttipFields
+    , pttipCallback
+    , pttipAlt
+    ) where
+
+import           Network.Google.Prelude
+import           Network.Google.PubSub.Types
+
+-- | A resource alias for @PubsubProjectsTopicsTestIAMPermissions@ which the
+-- 'ProjectsTopicsTestIAMPermissions' request conforms to.
+type ProjectsTopicsTestIAMPermissionsAPI =
+     "v1beta2" :>
+       "{+resource}:testIamPermissions" :>
+         Post '[JSON] TestIAMPermissionsResponse
+
+-- | Returns permissions that a caller has on the specified resource.
+--
+-- /See:/ 'projectsTopicsTestIAMPermissions' smart constructor.
+data ProjectsTopicsTestIAMPermissions = ProjectsTopicsTestIAMPermissions
+    { _pttipXgafv          :: !(Maybe Text)
+    , _pttipQuotaUser      :: !(Maybe Text)
+    , _pttipPrettyPrint    :: !Bool
+    , _pttipUploadProtocol :: !(Maybe Text)
+    , _pttipPp             :: !Bool
+    , _pttipAccessToken    :: !(Maybe Text)
+    , _pttipUploadType     :: !(Maybe Text)
+    , _pttipBearerToken    :: !(Maybe Text)
+    , _pttipKey            :: !(Maybe Text)
+    , _pttipResource       :: !Text
+    , _pttipOauthToken     :: !(Maybe Text)
+    , _pttipFields         :: !(Maybe Text)
+    , _pttipCallback       :: !(Maybe Text)
+    , _pttipAlt            :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProjectsTopicsTestIAMPermissions'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pttipXgafv'
+--
+-- * 'pttipQuotaUser'
+--
+-- * 'pttipPrettyPrint'
+--
+-- * 'pttipUploadProtocol'
+--
+-- * 'pttipPp'
+--
+-- * 'pttipAccessToken'
+--
+-- * 'pttipUploadType'
+--
+-- * 'pttipBearerToken'
+--
+-- * 'pttipKey'
+--
+-- * 'pttipResource'
+--
+-- * 'pttipOauthToken'
+--
+-- * 'pttipFields'
+--
+-- * 'pttipCallback'
+--
+-- * 'pttipAlt'
+projectsTopicsTestIAMPermissions
+    :: Text -- ^ 'resource'
+    -> ProjectsTopicsTestIAMPermissions
+projectsTopicsTestIAMPermissions pPttipResource_ =
+    ProjectsTopicsTestIAMPermissions
+    { _pttipXgafv = Nothing
+    , _pttipQuotaUser = Nothing
+    , _pttipPrettyPrint = True
+    , _pttipUploadProtocol = Nothing
+    , _pttipPp = True
+    , _pttipAccessToken = Nothing
+    , _pttipUploadType = Nothing
+    , _pttipBearerToken = Nothing
+    , _pttipKey = Nothing
+    , _pttipResource = pPttipResource_
+    , _pttipOauthToken = Nothing
+    , _pttipFields = Nothing
+    , _pttipCallback = Nothing
+    , _pttipAlt = "json"
+    }
+
+-- | V1 error format.
+pttipXgafv :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipXgafv
+  = lens _pttipXgafv (\ s a -> s{_pttipXgafv = a})
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters.
+pttipQuotaUser :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipQuotaUser
+  = lens _pttipQuotaUser
+      (\ s a -> s{_pttipQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+pttipPrettyPrint :: Lens' ProjectsTopicsTestIAMPermissions' Bool
+pttipPrettyPrint
+  = lens _pttipPrettyPrint
+      (\ s a -> s{_pttipPrettyPrint = a})
+
+-- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+pttipUploadProtocol :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipUploadProtocol
+  = lens _pttipUploadProtocol
+      (\ s a -> s{_pttipUploadProtocol = a})
+
+-- | Pretty-print response.
+pttipPp :: Lens' ProjectsTopicsTestIAMPermissions' Bool
+pttipPp = lens _pttipPp (\ s a -> s{_pttipPp = a})
+
+-- | OAuth access token.
+pttipAccessToken :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipAccessToken
+  = lens _pttipAccessToken
+      (\ s a -> s{_pttipAccessToken = a})
+
+-- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+pttipUploadType :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipUploadType
+  = lens _pttipUploadType
+      (\ s a -> s{_pttipUploadType = a})
+
+-- | OAuth bearer token.
+pttipBearerToken :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipBearerToken
+  = lens _pttipBearerToken
+      (\ s a -> s{_pttipBearerToken = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+pttipKey :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipKey = lens _pttipKey (\ s a -> s{_pttipKey = a})
+
+-- | REQUIRED: The resource for which policy detail is being requested.
+-- Resource is usually specified as a path, such as, projects\/{project}.
+pttipResource :: Lens' ProjectsTopicsTestIAMPermissions' Text
+pttipResource
+  = lens _pttipResource
+      (\ s a -> s{_pttipResource = a})
+
+-- | OAuth 2.0 token for the current user.
+pttipOauthToken :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipOauthToken
+  = lens _pttipOauthToken
+      (\ s a -> s{_pttipOauthToken = a})
+
+-- | Selector specifying which fields to include in a partial response.
+pttipFields :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipFields
+  = lens _pttipFields (\ s a -> s{_pttipFields = a})
+
+-- | JSONP
+pttipCallback :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipCallback
+  = lens _pttipCallback
+      (\ s a -> s{_pttipCallback = a})
+
+-- | Data format for response.
+pttipAlt :: Lens' ProjectsTopicsTestIAMPermissions' Text
+pttipAlt = lens _pttipAlt (\ s a -> s{_pttipAlt = a})
+
+instance GoogleRequest
+         ProjectsTopicsTestIAMPermissions' where
+        type Rs ProjectsTopicsTestIAMPermissions' =
+             TestIAMPermissionsResponse
+        request = requestWithRoute defReq pubSubURL
+        requestWithRoute r u
+          ProjectsTopicsTestIAMPermissions{..}
+          = go _pttipXgafv _pttipQuotaUser _pttipPrettyPrint
+              _pttipUploadProtocol
+              _pttipPp
+              _pttipAccessToken
+              _pttipUploadType
+              _pttipBearerToken
+              _pttipKey
+              _pttipResource
+              _pttipOauthToken
+              _pttipFields
+              _pttipCallback
+              _pttipAlt
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy ProjectsTopicsTestIAMPermissionsAPI)
+                      r
+                      u

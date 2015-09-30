@@ -1,0 +1,185 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.Compute.RegionOperations.Delete
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Deletes the specified region-specific Operations resource.
+--
+-- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference> for @ComputeRegionOperationsDelete@.
+module Compute.RegionOperations.Delete
+    (
+    -- * REST Resource
+      RegionOperationsDeleteAPI
+
+    -- * Creating a Request
+    , regionOperationsDelete
+    , RegionOperationsDelete
+
+    -- * Request Lenses
+    , rodQuotaUser
+    , rodPrettyPrint
+    , rodProject
+    , rodOperation
+    , rodUserIp
+    , rodKey
+    , rodRegion
+    , rodOauthToken
+    , rodFields
+    , rodAlt
+    ) where
+
+import           Network.Google.Compute.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @ComputeRegionOperationsDelete@ which the
+-- 'RegionOperationsDelete' request conforms to.
+type RegionOperationsDeleteAPI =
+     Capture "project" Text :>
+       "regions" :>
+         Capture "region" Text :>
+           "operations" :>
+             Capture "operation" Text :> Delete '[JSON] ()
+
+-- | Deletes the specified region-specific Operations resource.
+--
+-- /See:/ 'regionOperationsDelete' smart constructor.
+data RegionOperationsDelete = RegionOperationsDelete
+    { _rodQuotaUser   :: !(Maybe Text)
+    , _rodPrettyPrint :: !Bool
+    , _rodProject     :: !Text
+    , _rodOperation   :: !Text
+    , _rodUserIp      :: !(Maybe Text)
+    , _rodKey         :: !(Maybe Text)
+    , _rodRegion      :: !Text
+    , _rodOauthToken  :: !(Maybe Text)
+    , _rodFields      :: !(Maybe Text)
+    , _rodAlt         :: !Text
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'RegionOperationsDelete'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rodQuotaUser'
+--
+-- * 'rodPrettyPrint'
+--
+-- * 'rodProject'
+--
+-- * 'rodOperation'
+--
+-- * 'rodUserIp'
+--
+-- * 'rodKey'
+--
+-- * 'rodRegion'
+--
+-- * 'rodOauthToken'
+--
+-- * 'rodFields'
+--
+-- * 'rodAlt'
+regionOperationsDelete
+    :: Text -- ^ 'project'
+    -> Text -- ^ 'operation'
+    -> Text -- ^ 'region'
+    -> RegionOperationsDelete
+regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
+    RegionOperationsDelete
+    { _rodQuotaUser = Nothing
+    , _rodPrettyPrint = True
+    , _rodProject = pRodProject_
+    , _rodOperation = pRodOperation_
+    , _rodUserIp = Nothing
+    , _rodKey = Nothing
+    , _rodRegion = pRodRegion_
+    , _rodOauthToken = Nothing
+    , _rodFields = Nothing
+    , _rodAlt = "json"
+    }
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters. Overrides userIp if both are provided.
+rodQuotaUser :: Lens' RegionOperationsDelete' (Maybe Text)
+rodQuotaUser
+  = lens _rodQuotaUser (\ s a -> s{_rodQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+rodPrettyPrint :: Lens' RegionOperationsDelete' Bool
+rodPrettyPrint
+  = lens _rodPrettyPrint
+      (\ s a -> s{_rodPrettyPrint = a})
+
+-- | Project ID for this request.
+rodProject :: Lens' RegionOperationsDelete' Text
+rodProject
+  = lens _rodProject (\ s a -> s{_rodProject = a})
+
+-- | Name of the Operations resource to delete.
+rodOperation :: Lens' RegionOperationsDelete' Text
+rodOperation
+  = lens _rodOperation (\ s a -> s{_rodOperation = a})
+
+-- | IP address of the site where the request originates. Use this if you
+-- want to enforce per-user limits.
+rodUserIp :: Lens' RegionOperationsDelete' (Maybe Text)
+rodUserIp
+  = lens _rodUserIp (\ s a -> s{_rodUserIp = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+rodKey :: Lens' RegionOperationsDelete' (Maybe Text)
+rodKey = lens _rodKey (\ s a -> s{_rodKey = a})
+
+-- | Name of the region scoping this request.
+rodRegion :: Lens' RegionOperationsDelete' Text
+rodRegion
+  = lens _rodRegion (\ s a -> s{_rodRegion = a})
+
+-- | OAuth 2.0 token for the current user.
+rodOauthToken :: Lens' RegionOperationsDelete' (Maybe Text)
+rodOauthToken
+  = lens _rodOauthToken
+      (\ s a -> s{_rodOauthToken = a})
+
+-- | Selector specifying which fields to include in a partial response.
+rodFields :: Lens' RegionOperationsDelete' (Maybe Text)
+rodFields
+  = lens _rodFields (\ s a -> s{_rodFields = a})
+
+-- | Data format for the response.
+rodAlt :: Lens' RegionOperationsDelete' Text
+rodAlt = lens _rodAlt (\ s a -> s{_rodAlt = a})
+
+instance GoogleRequest RegionOperationsDelete' where
+        type Rs RegionOperationsDelete' = ()
+        request = requestWithRoute defReq computeURL
+        requestWithRoute r u RegionOperationsDelete{..}
+          = go _rodQuotaUser _rodPrettyPrint _rodProject
+              _rodOperation
+              _rodUserIp
+              _rodKey
+              _rodRegion
+              _rodOauthToken
+              _rodFields
+              _rodAlt
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy RegionOperationsDeleteAPI)
+                      r
+                      u

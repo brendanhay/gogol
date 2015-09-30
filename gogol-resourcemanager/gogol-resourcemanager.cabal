@@ -1,0 +1,58 @@
+name:                  gogol-resourcemanager
+version:               0.0.1
+synopsis:              Google Cloud Resource Manager API Client.
+homepage:              https://github.com/brendanhay/gogol
+bug-reports:           https://github.com/brendanhay/gogol/issues
+license:               OtherLicense
+license-file:          LICENSE
+author:                Brendan Hay
+maintainer:            Brendan Hay <brendan.g.hay@gmail.com>
+copyright:             Copyright (c) 2015 Brendan Hay
+category:              Network, Google, Cloud
+build-type:            Simple
+cabal-version:         >= 1.10
+extra-source-files:    README.md
+
+description:
+    The Google Cloud Resource Manager API provides methods for creating,
+    reading, and updating of project metadata.
+    .
+    /Warning:/ This is an experimental prototype/preview release which is still
+    under exploratory development and not intended for public use, caveat emptor!
+
+source-repository head
+    type:     git
+    location: git://github.com/brendanhay/gogol.git
+
+library
+    default-language:  Haskell2010
+    hs-source-dirs:    src gen
+
+    ghc-options:       -Wall
+
+    exposed-modules:
+          Network.Google.Resource.Cloudresourcemanager.Organizations.Get
+        , Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
+        , Network.Google.Resource.Cloudresourcemanager.Organizations.List
+        , Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
+        , Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
+        , Network.Google.Resource.Cloudresourcemanager.Organizations.Update
+        , Network.Google.Resource.Cloudresourcemanager.Projects.Create
+        , Network.Google.Resource.Cloudresourcemanager.Projects.Delete
+        , Network.Google.Resource.Cloudresourcemanager.Projects.Get
+        , Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
+        , Network.Google.Resource.Cloudresourcemanager.Projects.List
+        , Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
+        , Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
+        , Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
+        , Network.Google.Resource.Cloudresourcemanager.Projects.Update
+        , Network.Google.ResourceManager
+        , Network.Google.ResourceManager.Types
+
+    other-modules:
+          Network.Google.ResourceManager.Types.Product
+        , Network.Google.ResourceManager.Types.Sum
+
+    build-depends:
+          gogol-core == 0.0.1.*
+        , base       >= 4.7 && < 5
