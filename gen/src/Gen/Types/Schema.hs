@@ -98,7 +98,7 @@ makeClassy ''Info
 
 instance FromJSON Info where
     parseJSON = withObject "info" $ \o -> Info
-        <$> o .:  "id"
+        <$> o .:? "id"
         <*> o .:? "description"
         <*> o .:? "default"
         <*> o .:? "required"    .!= False
@@ -137,6 +137,7 @@ instance HasInfo (Schema a) where
     info = lens f (flip g)
       where
         f = \case
+            SAny i _ -> i
             SRef i _ -> i
             SLit i _ -> i
             SEnm i _ -> i
@@ -144,6 +145,7 @@ instance HasInfo (Schema a) where
             SObj i _ -> i
 
         g i = \case
+            SAny _ x -> SAny i x
             SRef _ x -> SRef i x
             SLit _ x -> SLit i x
             SEnm _ x -> SEnm i x
@@ -155,6 +157,7 @@ checkType x o = do
    y <- o .: "type"
    unless (x == y) . fail . Text.unpack $
        "Schema type mismatch, expected " <> x <> ", but got " <> y
+          <> "\n" <> Text.pack (show o)
 
 data Any = Any
     deriving (Eq, Show)
@@ -221,7 +224,7 @@ newtype Arr a = Arr { _aItem :: a }
 instance FromJSON a => FromJSON (Arr a) where
     parseJSON = withObject "array" $ \o -> do
         checkType "array" o
-        Arr <$> o .: "item"
+        Arr <$> o .: "items"
 
 data Obj a = Obj
     { _oAdditional :: Maybe a
@@ -284,7 +287,7 @@ instance FromJSON a => FromJSON (Method a) where
         <$> o .:  "id"
         <*> o .:  "path"
         <*> o .:  "httpMethod"
-        <*> o .:  "description"
+        <*> o .:? "description"
         <*> o .:? "parameters"            .!= mempty
         <*> o .:? "parameterOrder"        .!= mempty
         <*> o .:? "request"
@@ -305,13 +308,35 @@ instance FromJSON a => FromJSON (Resource a) where
          <$>  o .:? "resources" .!= mempty
          <*> (o .:? "methods"   .!= mempty <&> keyless)
 
-newtype OAuth2 = OAuth2 { scopes :: Map Text Text }
+newtype OAuth2 = OAuth2 { scopes :: Map Text Help }
     deriving (Eq, Show)
 
 instance FromJSON OAuth2 where
-    parseJSON = withObject "oauth2" $ \o ->
-        o .: "oauth2" >>=
-            withObject "scopes" (.: "scopes")
+    parseJSON = withObject "oauth2" $ \x -> do
+        y <- x .: "oauth2"
+        z <- y .: "scopes"
+        OAuth2 <$> traverse (.: "description") z
+
+data Label
+    = Deprecated
+    | LimitedAvailability
+    | Labs
+      deriving (Eq, Show)
+
+instance FromJSON Label where
+    parseJSON = withText "label" $ \t ->
+        case t of
+            "deprecated"           -> pure Deprecated
+            "limited_availability" -> pure LimitedAvailability
+            "labs"                 -> pure Labs
+            _                      -> fail $
+                Text.unpack ("Unable to parse Label from: " <> t)
+
+instance ToJSON Label where
+    toJSON = toJSON . \case
+        Deprecated          -> "deprecated" :: Text
+        LimitedAvailability -> "limited_availability"
+        Labs                -> "labs"
 
 data Description a = Description
     { _dKind              :: Text
@@ -324,14 +349,14 @@ data Description a = Description
     , _dDescription       :: Help
     , _dIcons             :: Map Text Text
     , _dDocumentationLink :: Text
-    , _dLabels            :: Text
+    , _dLabels            :: [Label]
     , _dProtocol          :: Text
     , _dBaseUrl           :: Text
     , _dRootUrl           :: Text
     , _dServicePath       :: Text
     , _dBatchPath         :: Text
     , _dParameters        :: Map Local (Param a)
-    , _dAuth              :: OAuth2
+    , _dAuth              :: Maybe OAuth2
     , _dFeatures          :: [Text]
     , _dSchemas           :: Map Global a
     , _dResources         :: Map Global (Resource a)
@@ -352,14 +377,14 @@ instance FromJSON a => FromJSON (Description a) where
         <*> o .:  "description"
         <*> o .:  "icons"
         <*> o .:  "documentationLink"
-        <*> o .:  "labels"
+        <*> o .:? "labels"     .!= mempty
         <*> o .:  "protocol"
         <*> o .:  "baseUrl"
         <*> o .:  "rootUrl"
         <*> o .:  "servicePath"
         <*> o .:  "batchPath"
         <*> o .:? "parameters" .!= mempty
-        <*> o .:  "auth"
+        <*> o .:? "auth"
         <*> o .:? "features"   .!= mempty
         <*> o .:? "schemas"    .!= mempty
         <*> o .:? "resources"  .!= mempty
@@ -378,11 +403,11 @@ makeClassy ''Service
 
 instance FromJSON a => FromJSON (Service a) where
     parseJSON = withObject "service" $ \o -> Service
-        <$>  o .: "library"
-        <*> (o .: "canonicalName" <&> upperHead . renameAbbrev)
-        <*>  o .: "ownerName"
-        <*>  o .: "ownerDomain"
-        <*>  o .: "packagePath"
+        <$>  o .:  "library"
+        <*> (o .:  "canonicalName" <&> upperHead . renameAbbrev)
+        <*>  o .:  "ownerName"
+        <*>  o .:  "ownerDomain"
+        <*>  o .:? "packagePath"
         <*> parseJSON (A.Object o)
 
 instance HasDescription (Service a) a where
@@ -390,130 +415,3 @@ instance HasDescription (Service a) a where
 
 urlName :: Service a -> Text
 urlName = (<> "URL") . lowerHead . _sCanonicalName
-
--- data Method a = Method
---     { _mId             :: Text
---     , _mPath           :: Text
---     , _mMethod         :: Text
---     , _mDescription    :: Maybe Help
---     , _mParameters     :: Map Local (Param a)
---     , _mParameterOrder :: [Local]
---     , _mScopes         :: [Text]
---     , _mRequest        :: Maybe Global
---     , _mResponse       :: Maybe Global
---     } deriving (Generic, Functor, Foldable, Traversable)
-
--- instance FromJSON a => FromJSON (Method a) where
---     parseJSON = withObject "method" $ \o -> Method
---         <$> o .:  "id"
---         <*> o .:  "path"
---         <*> o .:  "httpMethod"
---         <*> o .:? "description"
---         <*> o .:? "parameters"     .!= mempty
---         <*> o .:? "parameterOrder" .!= mempty
---         <*> o .:? "scopes"         .!= mempty
---         <*> ref o "request"
---         <*> ref o "response"
---       where
---         ref o k = Just <$> (o .: k >>= (.: "$ref"))
---               <|> pure Nothing
-
--- data Resource a
---     = Top (Map Local (Resource a))
---     | Sub (Map Local (Method   a))
---       deriving (Functor, Foldable, Traversable)
-
--- instance FromJSON a => FromJSON (Resource a) where
---     parseJSON = withObject "resource" $ \o ->
---             Top <$> o .: "resources"
---         <|> Sub <$> o .: "methods"
-
--- data Service s p r = Service
---     { _svcLibrary           :: Text
---     , _svcTitle             :: Text
---     , _svcName              :: Text
---     , _svcCanonicalName     :: Text
---     , _svcDescription       :: Help
---     , _svcRevision          :: Maybe Text
---     , _svcVersion           :: Text
---     , _svcOwnerName         :: Text
---     , _svcOwnerDomain       :: Text
---     , _svcPackagePath       :: Maybe Text
---     , _svcDocumentationLink :: Text
---     , _svcProtocol          :: Protocol
---     , _svcBaseUrl           :: Text
---     , _svcRootUrl           :: Text
---     , _svcServicePath       :: Text
---     , _svcBatchPath         :: Text
---     , _svcAuth              :: Maybe Object
---     , _svcParameters        :: p
---     , _svcSchemas           :: s
---     , _svcApi               :: r
---     } deriving (Generic)
-
--- type Parsed    = Service (Map Id    (Fix Schema))
---                          (Map Local (Param (Fix Schema)))
---                          (Resource  (Fix Schema))
-
--- type Flattened = Service [Id]     [Param Id]     (Resource Id)
--- type Typed     = Service [Solved] [Param Solved] (Resource Solved)
--- type Printed   = Service [Data]   ()             API
-
--- instance (FromJSON s, FromJSON p, FromJSON r) => FromJSON (Service s p r) where
---     parseJSON = withObject "service" $ \o -> Service
---         <$> o .:  "library"
---         <*> o .:  "title"
---         <*> o .:  "name"
---         <*> o .:  "canonicalName"
---         <*> o .:  "description"
---         <*> o .:? "revision"
---         <*> o .:  "version"
---         <*> o .:  "ownerName"
---         <*> o .:  "ownerDomain"
---         <*> o .:? "packagePath"
---         <*> o .:  "documentationLink"
---         <*> o .:  "protocol"
---         <*> o .:  "baseUrl"
---         <*> o .:  "rootUrl"
---         <*> o .:  "servicePath"
---         <*> o .:  "batchPath"
---         <*> o .:? "auth"
---         <*> o .:  "parameters"
---         <*> o .:  "schemas"
---         <*> parseJSON (Object o)
-
--- instance (ToJSON s, ToJSON p) => ToJSON (Service s p API) where
---     toJSON s = Object (x <> y)
---       where
---         Object x = genericToJSON (js "_svc") s
---         Object y = object
---             [ "exposedModules" .= exposedModules s
---             ]
-
--- type Parsed    = Service (Map Id    (Fix Schema))
---                          (Map Local (Param (Fix Schema)))
---                          (Resource  (Fix Schema))
-
--- type Flattened = Service [Id]     [Param Id]     (Resource Id)
--- type Typed     = Service [Solved] [Param Solved] (Resource Solved)
--- type Printed   = Service [Data]   ()             API
-
--- data Library = Library
---     { _libName     :: Text
---     , _libTitle    :: Text
---     , _libVersions :: Versions
---     , _libServices :: NonEmpty Printed
---     }
-
--- instance ToJSON Library where
---     toJSON Library{..} = object
---         [ "libraryName"         .= _libName
---         , "libraryTitle"        .= _libTitle
---         , "libraryVersion"      .= _libraryVersion _libVersions
---         , "libraryDescriptions" .= map (Desc 4 . _svcDescription) (NE.toList _libServices)
---         , "coreVersion"         .= _coreVersion    _libVersions
---         , "clientVersion"       .= _clientVersion  _libVersions
---         , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
---         , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
---         ]
-

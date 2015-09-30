@@ -156,43 +156,6 @@ renderAPI s = do
                      "@ of the " % stext % ".")
                      (s ^. dVersion) (s ^. dTitle)
 
---     api :: Resource Solved -> AST API
---     api x = do
---         as <- Map.fromList <$> top x
---         API n <$> pp Print (apiAlias n (Map.keys as))
---               <*> pure as
---               <*> url
---       where
---         n  = name (Text.unpack (svcAbbrev svc))
---         un = name (Text.unpack (svcURL    svc))
-
---         top = \case
---            Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
---            Sub ms -> traverse (uncurry verb) (Map.toList ms)
-
---         sub l = \case
---             Top rs -> traverse (uncurry sub)  (Map.toList rs) <&> concat
---             Sub ms -> traverse (uncurry verb) (Map.toList ms)
-
---         verb l m = do
---             let (k, i, ns) = vname (svcAbbrev svc) (_mId m)
---             s      <- solve i
---             Just d <- typ s
---             fmap (k,) $
---                 Action k (_mId m) (actionNS ns) (_mDescription m)
---                     <$> pp Print (verbAlias k m)
---                     <*> reset k m s d
-
---         reset k m s = \case
---             d@Sum {}           -> pure d
---             Prod n' h r c ls _ ->
---                 Prod n' h r c ls . (:[]) <$> pp Print
---                     (requestDecl (_ident s) (_prefix s) k un (fields (_schema s)) m)
-
---         fields  = \case
---             Obj _ rs -> Map.keys rs
---             _        -> mempty
-
 data PP
     = Indent
     | Print

@@ -12,11 +12,11 @@
 --
 {{ action.type.help }}
 --
--- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.prettyName }}@.
+-- /See:/ <{{ documentationLink }} {{ title }} Reference> for @{{ action.id }}@.
 module {{ action.ns }}
     (
     -- * REST Resource
-      {{ action.name }}
+      {{ action.aliasName }}
 
     -- * Creating a Request
     , {{ action.type.ctor.name }}
@@ -34,7 +34,7 @@ module {{ action.ns }}
 import {{ import.value }}
 {% endfor %}
 
--- | A resource alias for {{ action.prettyName }} which the
+-- | A resource alias for @{{ action.id }}@ which the
 -- '{{ action.type.name }}' request conforms to.
 {{ action.alias }}
 

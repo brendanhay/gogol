@@ -14,9 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-{% for desc in libraryDescriptions %}
-{{ desc.value }}
-{% endfor %}
+{{ libraryDescription }}
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

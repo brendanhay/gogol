@@ -14,10 +14,10 @@ module {{ moduleName }}
     -- * REST Resources
 
     -- ** {{ title }}
-      {{ api.name }}
-    , {{ api.name | lowerHead }}
+      {{ api.aliasName }}
+    , {{ api.aliasProxy }}
     , {{ api.url.name }}
-  {% for action in api.actions %}
+  {% for action in api.methods %}
 
     -- ** {{ action.value.prettyName }}
     , module {{ action.value.ns }}
@@ -55,7 +55,7 @@ import {{ module.value }}
 TODO
 -}
 
-{{ api.decl }}
+{{ api.alias }}
 
-{{ api.name | lowerHead }} :: Proxy {{ api.name }}
-{{ api.name | lowerHead }} = Proxy
+{{ api.aliasProxy }} :: Proxy {{ api.aliasName }}
+{{ api.aliasProxy }} = Proxy

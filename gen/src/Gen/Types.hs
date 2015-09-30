@@ -165,14 +165,15 @@ sumNS   = (<> "Sum")     . typesNS
 preludeNS :: NS
 preludeNS = "Network.Google.Prelude"
 
--- actionNS :: [Text] -> NS
--- actionNS = mappend (NS ["Network", "Google", "API"]) . NS
+exposedModules :: Library -> [NS]
+exposedModules l = sort $
+      tocNS l
+    : typesNS l
+    : map resourceNS (_apiResources (_lAPI l))
+   ++ map methodNS   (_apiMethods   (_lAPI l))
 
--- exposedModules :: Service s p API -> [NS]
--- exposedModules s = sort (tocNS s : typesNS s : map _actNS (svcActions s))
-
--- otherModules :: Service s p r -> [NS]
--- otherModules s = sort [prodNS s, sumNS s]
+otherModules :: Library -> [NS]
+otherModules s = sort [prodNS s, sumNS s]
 
 toTextIgnore :: Path -> Text
 toTextIgnore = either id id . Path.toText
@@ -197,15 +198,32 @@ instance HasService Library Global where
 
 instance ToJSON Library where
     toJSON l = object
+        -- Library
         [ "libraryName"        .= (l ^. sLibrary)
         , "libraryTitle"       .= (l ^. dTitle)
         , "libraryDescription" .= Desc 4 (l ^. dDescription)
         , "libraryVersion"     .= (l ^. libraryVersion)
         , "coreVersion"        .= (l ^. coreVersion)
         , "clientVersion"      .= (l ^. clientVersion)
-        --  , "exposedModules"      .= concatMap exposedModules (NE.toList _libServices)
-        -- , "otherModules"        .= concatMap otherModules   (NE.toList _libServices)
-        ]
+        , "exposedModules"     .= exposedModules l
+        , "otherModules"       .= otherModules   l
+
+        -- Service
+       , "id"                  .= (l ^. dId)
+       , "name"                .= (l ^. dName)
+       , "version"             .= (l ^. dVersion)
+       , "title"               .= (l ^. dTitle)
+       , "description"         .= (l ^. dDescription)
+       , "documentationLink"   .= (l ^. dDocumentationLink)
+       , "labels"              .= (l ^. dLabels)
+       , "features"            .= (l ^. dFeatures)
+
+       -- API
+       , "api"                 .= (l ^. lAPI)
+
+       -- Schemas
+       , "schemas"             .= (l ^. lSchemas)
+       ]
 
 data TType
     = TType  Global

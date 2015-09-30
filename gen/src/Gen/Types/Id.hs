@@ -47,6 +47,7 @@ import qualified Data.Attoparsec.Text         as A
 import           Data.Bifunctor
 import qualified Data.CaseInsensitive         as CI
 import           Data.Char
+import           Data.Foldable                (foldMap)
 import           Data.Function                (on)
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
@@ -74,35 +75,23 @@ aname :: Text -> Name
 aname = name . Text.unpack . mappend "API" . upperHead . Text.replace "." ""
 
 mname :: Text -> Global -> (Name, Global, Text)
-mname abrv g =
-    ( name   (Text.unpack n <> "API") -- Action service type alias.
-    , Global (n <> "'")               -- Action data type.
-    , Text.intercalate "." ns         -- Action namespace.
+mname abrv (Global g) =
+    ( name (Text.unpack (mconcat n) <> "API") -- Action service type alias.
+    , Global (n <> ["'"])                     -- Action data type.
+    , Text.intercalate "." ns                 -- Action namespace.
     )
   where
-    n = mconcat (drop 1 ns)
+    n = drop 1 ns
 
     ns | CI.mk e == CI.mk x = e:xs
        | otherwise          = x:xs
       where
         e    = Text.replace "." "" abrv
-        x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') (global g)
-
--- vname :: Text -> Text -> (Name, Id, [Text])
--- vname abrv r = (dname (g (n <> "API")), g (n <> "'"), ns)
---   where
---     g = Free . Global
---     n = mconcat (drop 1 ns)
-
---     ns | CI.mk e == CI.mk x = e:xs
---        | otherwise          = x:xs
---       where
---         e    = Text.replace "." "" abrv
---         x:xs = map (upperAcronym . upperHead) $ Text.split (== '.') r
+        x:xs = g
 
 dname, cname :: Global -> Name
-dname = name . Text.unpack . upperHead . global
-cname = name . Text.unpack . renameReserved . lowerHead . global
+dname = name . Text.unpack . toPascal . global
+cname = name . Text.unpack . renameReserved . toCamel . global
 
 bname :: Prefix -> Text -> Name
 bname (Prefix p) = name
@@ -115,21 +104,26 @@ fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
--- apretty :: Local -> Local -> Text
--- apretty p l = upperHead (local l) <> " " <> upperHead (local p)
-
 pre :: (Text -> Text) -> Prefix -> Local -> Name
 pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
 
 newtype Prefix = Prefix Text
     deriving (Show, Monoid)
 
-newtype Global = Global { global :: Text }
-    deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
+newtype Global = Global [Text]
+    deriving (Eq, Ord, Show, Generic, Hashable)
+
+instance IsString Global where
+    fromString = mkGlobal . fromString
+
+instance FromJSON Global where
+    parseJSON = withText "global" (pure . mkGlobal)
+
+instance ToJSON Global where
+    toJSON = toJSON . global
 
 instance TextKey Global where
-    toKey   = Global
-    fromKey = global
+    toKey = mkGlobal
 
 gid :: Format a (Global -> a)
 gid = later (Build.fromText . global)
@@ -138,11 +132,16 @@ newtype Local = Local { local :: Text }
     deriving (Eq, Ord, Show, Generic, Hashable, FromJSON, ToJSON, IsString)
 
 instance TextKey Local where
-    toKey   = Local
-    fromKey = local
+    toKey = Local
 
 lid :: Format a (Local -> a)
 lid = later (Build.fromText . local)
 
+mkGlobal :: Text -> Global
+mkGlobal = Global . Text.split (== '.')
+
+global :: Global -> Text
+global (Global g) = foldMap (upperAcronym . upperHead) g
+
 reference :: Global -> Local -> Global
-reference (Global g) (Local l) = Global (g <> "." <> l)
+reference (Global g) (Local l) = Global (g <> Text.split (== '.') l)

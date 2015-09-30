@@ -78,10 +78,12 @@ getSolved g = loc "getSolved" g $
 
 getSchema :: Global -> AST (Schema Global)
 getSchema g = do
-    m <- uses schemas (Map.lookup g)
-    case m of
-        Nothing -> failure ("Missing Schema: " % gid) g
+    ss <- use schemas
+    case Map.lookup g ss of
         Just x  -> pure x
+        Nothing -> throwError $
+            format ("Missing Schema: " % gid % "\n" % shown)
+                   g (map global (Map.keys ss))
 
 getType :: Global -> AST TType
 getType g = loc "getType" g $ memo typed g go
@@ -214,7 +216,7 @@ acronymPrefixes (global -> g) = map CI.mk (xs ++ map suffix ys ++ zs)
     r6 = Text.take limit <$> listToMaybe (splitWords a)
 
 loc :: String -> Global -> a -> a
-loc _ _ = id --trace (n ++ ": " ++ Text.unpack (idToText g))
+loc n g = id -- trace (n ++ ": " ++ Text.unpack (fromKey g))
 
 memo :: Lens' Memo (Map Global a)
      -> Global

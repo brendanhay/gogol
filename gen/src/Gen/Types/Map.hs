@@ -40,11 +40,10 @@ kvTraverseMaybe f = fmap (Map.map fromJust . Map.filter isJust)
 
 class (Hashable a, Eq a) => TextKey a where
     toKey   :: Text -> a
-    fromKey :: a    -> Text
 
 instance (TextKey k, FromJSON v) => FromJSON (Map k v) where
     parseJSON = fmap (Map.fromList . map (first toKey) . Map.toList)
         . parseJSON
 
-instance (TextKey k, ToJSON v) => ToJSON (Map k v) where
-    toJSON = toJSON . map (first fromKey) . Map.toList
+-- instance (TextKey k, ToJSON v) => ToJSON (Map k v) where
+--     toJSON = toJSON . map (first fromKey) . Map.toList

@@ -146,7 +146,7 @@ jsonDecls n p (Map.toList -> rs) = [from, to]
   where
     from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon n]
         [ funD "parseJSON" $
-            app (app (var "withObject") (str (fromKey n))) $
+            app (app (var "withObject") (str (global n))) $
                 lamE noLoc [pvar "o"] $
                     ctorE n (map decode rs)
         ]
@@ -372,7 +372,7 @@ sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
 tycon :: Global -> Type
-tycon = TyCon . unqual . Text.unpack . fromKey
+tycon = TyCon . unqual . Text.unpack . global
 
 unqual :: String -> QName
 unqual = UnQual . name

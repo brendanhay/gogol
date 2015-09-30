@@ -44,10 +44,10 @@ import           Prelude                      hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
-    ss <- Map.traverseWithKey globalSchema (s ^. dSchemas)
-    ps <- Map.traverseWithKey globalParam  (s ^. dParameters)
-    rs <- Map.traverseWithKey resource     (s ^. dResources)
-    ms <- traverse            method       (s ^. dMethods)
+    ss <- Map.traverseWithKey globalSchema  (s ^. dSchemas)
+    ps <- Map.traverseWithKey globalParam   (s ^. dParameters)
+    rs <- Map.traverseWithKey (resource ps) (s ^. dResources)
+    ms <- traverse            (method   ps) (s ^. dMethods)
 
     let d = (s ^. sDescription)
           { _dSchemas    = ss
@@ -93,21 +93,41 @@ localParam g l p = do
     x <- localSchema g l (_pParam p)
     pure $! p { _pParam = x }
 
-resource :: Global
+resource :: Map Local (Param Global)
+         -> Global
          -> Resource (Fix Schema)
          -> AST (Resource Global)
-resource g r = do
-    rs <- Map.traverseWithKey (\l -> resource (reference g l)) (_rResources r)
-    ms <- traverse method (_rMethods r)
+resource qs g r@Resource {..} = do
+    rs <- Map.traverseWithKey (\l -> resource qs (reference g l)) _rResources
+    ms <- traverse (method qs) _rMethods
     pure $! r
         { _rResources = rs
         , _rMethods   = ms
         }
 
-method :: Method (Fix Schema) -> AST (Method Global)
-method m = do
-    ps <- Map.traverseWithKey (localParam (_mId m)) (_mParameters m)
+method :: Map Local (Param Global)
+       -> Method (Fix Schema)
+       -> AST (Method Global)
+method qs m@Method {..} = do
+    ps <- Map.traverseWithKey (localParam _mId) _mParameters
+    cn <- use sCanonicalName
+    let (_, typ, _) = mname cn _mId
+    void $ insert typ (fresh ps)
     pure $! m { _mParameters = ps }
+  where
+    fresh ps = SObj info' $ Obj Nothing (Map.map _pParam (ps <> qs))
+
+    info' = Info
+        { _iId          = Nothing
+        , _iDescription = _mDescription
+        , _iDefault     = Nothing
+        , _iRequired    = False
+        , _iPattern     = Nothing
+        , _iMinimum     = Nothing
+        , _iMaximum     = Nothing
+        , _iRepeated    = False
+        , _iAnnotations = mempty
+        }
 
 setRequired :: Fix Schema -> Fix Schema
 setRequired (Fix e) = Fix (e & iRequired .~ True)

@@ -150,6 +150,7 @@ data API = API
 instance ToJSON API where
     toJSON API {..} = object
          [ "aliasName" .= Syn _apiAliasName
+         , "aliasProxy".= lowerHead (Text.pack (prettyPrint _apiAliasName))
          , "alias"     .= _apiAlias
          , "resources" .= sortOn _actId _apiResources
          , "methods"   .= sortOn _actId _apiMethods
@@ -163,4 +164,3 @@ instance ToJSON API where
 resourceNS, methodNS :: Action -> NS
 resourceNS = mappend "Network.Google.Resource" . _actNamespace
 methodNS   = mappend "Network.Google.Method"   . _actNamespace
-
