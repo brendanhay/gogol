@@ -72,16 +72,16 @@ import           Language.Haskell.Exts.Pretty (prettyPrint)
 import           Language.Haskell.Exts.Syntax (Name)
 
 aname :: Text -> Name
-aname = name . Text.unpack . mappend "API" . upperHead . Text.replace "." ""
+aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
 mname :: Text -> Global -> (Name, Global, Text)
 mname abrv (Global g) =
-    ( name (Text.unpack (mconcat n) <> "API") -- Action service type alias.
-    , Global (n <> ["'"])                     -- Action data type.
-    , Text.intercalate "." ns                 -- Action namespace.
+    ( aname (mconcat n)       -- Action service type alias.
+    , Global (n <> ["'"])     -- Action data type.
+    , Text.intercalate "." ns -- Action namespace.
     )
   where
-    n = drop 1 ns
+    n = drop 1 (map (upperHead . upperAcronym) ns)
 
     ns | CI.mk e == CI.mk x = e:xs
        | otherwise          = x:xs
