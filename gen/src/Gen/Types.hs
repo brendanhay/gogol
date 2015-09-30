@@ -165,12 +165,16 @@ sumNS   = (<> "Sum")     . typesNS
 preludeNS :: NS
 preludeNS = "Network.Google.Prelude"
 
+resourceNS, methodNS :: NS
+resourceNS = "Network.Google.Resource"
+methodNS   = "Network.Google.Method"
+
 exposedModules :: Library -> [NS]
 exposedModules l = sort $
       tocNS l
     : typesNS l
-    : map resourceNS (_apiResources (_lAPI l))
-   ++ map methodNS   (_apiMethods   (_lAPI l))
+    : map _actNamespace (_apiResources (_lAPI l))
+   ++ map _actNamespace (_apiMethods   (_lAPI l))
 
 otherModules :: Library -> [NS]
 otherModules s = sort [prodNS s, sumNS s]

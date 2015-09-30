@@ -126,11 +126,11 @@ instance FromJSON (Fix Schema) where
     parseJSON o = do
         i <- parseJSON o
         s <-    SRef i <$> parseJSON o
-            <|> SAny i <$> parseJSON o
-            <|> SLit i <$> parseJSON o
             <|> SEnm i <$> parseJSON o
             <|> SArr i <$> parseJSON o
             <|> SObj i <$> parseJSON o
+            <|> SLit i <$> parseJSON o
+            <|> SAny i <$> parseJSON o
         pure (Fix s)
 
 instance HasInfo (Schema a) where

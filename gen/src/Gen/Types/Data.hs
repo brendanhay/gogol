@@ -119,15 +119,13 @@ dataName = \case
 
 data Action = Action
     { _actId        :: Global
+    , _actType      :: Global
     , _actNamespace :: NS
     , _actHelp      :: Maybe Help
     , _actAliasName :: Name
     , _actAlias     :: Rendered
     , _actData      :: Data
     }
-
-actionTypeName :: Action -> Name
-actionTypeName = dataName . _actData
 
 instance ToJSON Action where
     toJSON Action {..} = object
@@ -156,11 +154,3 @@ instance ToJSON API where
          , "methods"   .= sortOn _actId _apiMethods
          , "url"       .= _apiURL
          ]
-
--- apiResourceNames, apiMethodNames :: API -> [Name]
--- apiResourceNames = map (dataName . _actData) . _apiResources
--- apiMethodNames   = map (dataName . _actData) . _apiMethods
-
-resourceNS, methodNS :: Action -> NS
-resourceNS = mappend "Network.Google.Resource" . _actNamespace
-methodNS   = mappend "Network.Google.Method"   . _actNamespace

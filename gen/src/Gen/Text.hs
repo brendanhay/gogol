@@ -173,7 +173,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Raid",          "RAID")
          , ("Ramdisk",       "RAMDisk")
          , ("Sgd",           "SGD")
-         , ("Sni",           "SNI")
+         , ("Sni([^p]|$)",   "SNI$1")
          , ("Ssh",           "SSH")
          , ("Ssl",           "SSL")
          , ("Svn",           "SVN")

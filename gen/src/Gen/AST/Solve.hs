@@ -83,14 +83,14 @@ getSchema g = do
         Just x  -> pure x
         Nothing -> throwError $
             format ("Missing Schema: " % gid % "\n" % shown)
-                   g (map global (Map.keys ss))
+                   g (map dname (Map.keys ss))
 
 getType :: Global -> AST TType
 getType g = loc "getType" g $ memo typed g go
   where
     go s = fmap (may s) $
         case s of
-            SAny {}        -> pure (TType "JSON")
+            SAny {}        -> pure (TType "JSONValue")
             SRef _ r       -> getType (ref r)
             --- FIXME: add natural/numeric manipulations
             SLit _ l       -> pure (TLit l)

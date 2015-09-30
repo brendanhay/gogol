@@ -13,8 +13,9 @@
 
 module Gen.Types.Id
     (
-    -- * Property Prefixes
+    -- * Properties
       Prefix (..)
+    , Suffix (..)
 
     -- * Unique Identifiers
     , Global
@@ -32,9 +33,11 @@ module Gen.Types.Id
     , aname
     , mname
     , dname
+    , dstr
     , cname
     , bname
     , fname
+    , fstr
     , lname
     , pname
     ) where
@@ -74,11 +77,11 @@ import           Language.Haskell.Exts.Syntax (Name)
 aname :: Text -> Name
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 
-mname :: Text -> Global -> (Name, Global, Text)
-mname abrv (Global g) =
-    ( aname (mconcat n)       -- Action service type alias.
-    , Global (n <> ["'"])     -- Action data type.
-    , Text.intercalate "." ns -- Action namespace.
+mname :: Text -> Suffix -> Global -> (Name, Global, Text)
+mname abrv (Suffix suf) (Global g) =
+    ( name . Text.unpack $ mconcat n <> suf -- Action service type alias.
+    , Global (n <> ["'"])                   -- Action data type.
+    , Text.intercalate "." ns               -- Action namespace.
     )
   where
     n = drop 1 (map (upperHead . upperAcronym) ns)
@@ -90,8 +93,8 @@ mname abrv (Global g) =
         x:xs = g
 
 dname, cname :: Global -> Name
-dname = name . Text.unpack . toPascal . global
-cname = name . Text.unpack . renameReserved . toCamel . global
+dname = name . Text.unpack . upperHead . global
+cname = name . Text.unpack . renameReserved . lowerHead . global
 
 bname :: Prefix -> Text -> Name
 bname (Prefix p) = name
@@ -104,8 +107,16 @@ fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
+--dstr :: Global ->
+dstr = strE . Text.unpack . toPascal . global
+
+fstr = strE . Text.unpack . local
+
 pre :: (Text -> Text) -> Prefix -> Local -> Name
 pre f (Prefix p) = name . Text.unpack . f . mappend p . upperHead . local
+
+newtype Suffix = Suffix Text
+    deriving (Show, IsString)
 
 newtype Prefix = Prefix Text
     deriving (Show, Monoid)

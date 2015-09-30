@@ -35,6 +35,7 @@ import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Debug.Trace
+import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Types
 import           HIndent
@@ -44,13 +45,17 @@ import           Prelude                      hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
-    ss <- Map.traverseWithKey globalSchema  (s ^. dSchemas)
-    ps <- Map.traverseWithKey globalParam   (s ^. dParameters)
-    rs <- Map.traverseWithKey (resource ps) (s ^. dResources)
-    ms <- traverse            (method   ps) (s ^. dMethods)
+    _  <- Map.traverseWithKey globalSchema (s ^. dSchemas)
+    ps <- Map.traverseWithKey globalParam  (s ^. dParameters)
+
+    rs <- Map.traverseWithKey (resource ps "Resource") (s ^. dResources)
+    ms <- traverse            (method   ps "Method")   (s ^. dMethods)
+
+    -- The horror.
+    ss <- use schemas
 
     let d = (s ^. sDescription)
-          { _dSchemas    = ss
+          { _dSchemas    = Map.fromList $ map (join (,)) (Map.keys ss)
           , _dParameters = ps
           , _dResources  = rs
           , _dMethods    = ms
@@ -80,13 +85,13 @@ schema g ml (Fix f) = go f >>= insert this
         SObj i o -> SObj i <$> object o
 
     array (Arr e) =
-        Arr <$> localSchema this "item" (setRequired e)
+        Arr <$> localSchema this "" (setRequired e)
 
     object (Obj aps ps) =
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
-globalParam = localParam "param"
+globalParam = localParam ""
 
 localParam :: Global -> Local -> Param (Fix Schema) -> AST (Param Global)
 localParam g l p = do
@@ -94,28 +99,31 @@ localParam g l p = do
     pure $! p { _pParam = x }
 
 resource :: Map Local (Param Global)
+         -> Suffix
          -> Global
          -> Resource (Fix Schema)
          -> AST (Resource Global)
-resource qs g r@Resource {..} = do
-    rs <- Map.traverseWithKey (\l -> resource qs (reference g l)) _rResources
-    ms <- traverse (method qs) _rMethods
+resource qs suf g r@Resource {..} = do
+    rs <- Map.traverseWithKey (\l -> resource qs suf (reference g l)) _rResources
+    ms <- traverse (method qs suf) _rMethods
     pure $! r
         { _rResources = rs
         , _rMethods   = ms
         }
 
 method :: Map Local (Param Global)
+       -> Suffix
        -> Method (Fix Schema)
        -> AST (Method Global)
-method qs m@Method {..} = do
+method qs suf m@Method {..} = do
     ps <- Map.traverseWithKey (localParam _mId) _mParameters
     cn <- use sCanonicalName
-    let (_, typ, _) = mname cn _mId
-    void $ insert typ (fresh ps)
-    pure $! m { _mParameters = ps }
+    let (_, typ, _) = mname cn suf _mId
+        params      = ps <> qs
+    void $ insert typ (fresh params)
+    pure $! m { _mParameters = params }
   where
-    fresh ps = SObj info' $ Obj Nothing (Map.map _pParam (ps <> qs))
+    fresh ps = SObj info' $ Obj Nothing (Map.map _pParam ps)
 
     info' = Info
         { _iId          = Nothing

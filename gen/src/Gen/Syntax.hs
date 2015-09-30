@@ -32,7 +32,7 @@ import           Language.Haskell.Exts.SrcLoc
 import           Language.Haskell.Exts.Syntax hiding (Int, Lit)
 
 urlSig :: Name -> Decl
-urlSig n = TypeSig noLoc [n] (tycon "BaseUrl")
+urlSig n = TypeSig noLoc [n] (TyCon "BaseUrl")
 
 urlDecl :: Name -> String -> Text -> Integer -> Decl
 urlDecl n s u p = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
@@ -40,10 +40,10 @@ urlDecl n s u p = sfun noLoc n [] (UnGuardedRhs rhs) noBinds
     rhs = appFun (var "BaseUrl") [var (name s), str u, intE p]
 
  -- type API = :<|> ...
-apiAlias :: Name -> [Global] -> Decl
+apiAlias :: Name -> [Name] -> Decl
 apiAlias n ls = TypeDecl noLoc n [] alias
   where
-    alias = case map tycon ls of
+    alias = case map (TyCon . UnQual) ls of
         []   -> unit_tycon
         x:xs -> foldl' (\l r -> TyInfix l (UnQual (sym ":<|>")) r) x xs
 
@@ -67,7 +67,7 @@ verbAlias n m = TypeDecl noLoc n [] alias
             , c == '{'
             , Just k <- Map.lookup (toKey (Text.init t)) params
             , _pLocation k == Path
-                        = TyApp (TyApp (tycon "Capture")
+                        = TyApp (TyApp (TyCon "Capture")
                                        (sing (Text.init t)))
                                 (terminalType (_type (_pParam k)))
             | otherwise = sing x
@@ -81,8 +81,8 @@ verbAlias n m = TypeDecl noLoc n [] alias
                n = sing (local k)
             in case _pLocation x of
                 Query | x ^. iRepeated
-                      -> Just $ TyApp (TyApp (tycon "QueryParams") n) t
-                Query -> Just $ TyApp (TyApp (tycon "QueryParam")  n) t
+                      -> Just $ TyApp (TyApp (TyCon "QueryParams") n) t
+                Query -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
                 Path  -> Nothing
 
     params = _mParameters m
@@ -91,8 +91,8 @@ verbAlias n m = TypeDecl noLoc n [] alias
     verb = TyApp (TyApp meth typ) res
       where
         meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
-        typ  = tycon "'[JSON]"
-        res  = maybe (tycon "()") (tycon . ref) (_mResponse m)
+        typ  = TyCon "'[JSON]"
+        res  = maybe (TyCon "()") (tycon . ref) (_mResponse m)
 
 requestDecl :: Global
             -> Prefix
@@ -108,7 +108,7 @@ requestDecl n p api url fs m =
         , requestWithRoute
         ]
   where
-    response = InsType noLoc (TyApp (tycon "Rs") (tycon n)) $
+    response = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
     request = funD "request" $
@@ -122,7 +122,7 @@ requestDecl n p api url fs m =
             [ patBind noLoc (pvar "go") $
                 appFun (var "clientWithRoute") $
                     [ ExpTypeSig noLoc (var "Proxy") $
-                        TyApp (tycon "Proxy") (TyCon (UnQual api))
+                        TyApp (TyCon "Proxy") (TyCon (UnQual api))
                     , var "r"
                     , var "u"
                     ]
@@ -142,13 +142,13 @@ requestDecl n p api url fs m =
     prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
-jsonDecls n p (Map.toList -> rs) = [from, to]
+jsonDecls g p (Map.toList -> rs) = [from, to]
   where
-    from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon n]
+    from = InstDecl noLoc Nothing [] [] (unqual "FromJSON") [tycon g]
         [ funD "parseJSON" $
-            app (app (var "withObject") (str (global n))) $
+            app (app (var "withObject") (dstr g)) $
                 lamE noLoc [pvar "o"] $
-                    ctorE n (map decode rs)
+                    ctorE g (map decode rs)
         ]
 
     decode (l, s)
@@ -157,8 +157,8 @@ jsonDecls n p (Map.toList -> rs) = [from, to]
         | monoid s        = defJS l (var "mempty")
         | otherwise       = optJS l
 
-    to = InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon n]
-        [ wildcardD "toJSON" n omit none (map encode rs)
+    to = InstDecl noLoc Nothing [] [] (unqual "ToJSON") [tycon g]
+        [ wildcardD "toJSON" g omit none (map encode rs)
         ]
 
     omit = app (var "object")
@@ -171,7 +171,7 @@ jsonDecls n p (Map.toList -> rs) = [from, to]
         | TMaybe {} <- _type s = infixApp (paren (app n o)) "<$>" a
         | otherwise            = app (var "Just") (infixApp n ".=" a)
       where
-        n = str (local l)
+        n = fstr l
         a = var (fname p l)
         o = var ".="
 
@@ -191,13 +191,13 @@ wildcardD f n enc x = \case
     prec = PRec (UnQual (dname n)) [PFieldWildcard]
 
 defJS :: Local -> Exp -> Exp
-defJS n x = infixApp (infixApp (var "o") ".:?" (str (local n))) ".!=" x
+defJS n x = infixApp (infixApp (var "o") ".:?" (fstr n)) ".!=" x
 
 reqJS :: Local -> Exp
-reqJS = infixApp (var "o") ".:" . str . local
+reqJS = infixApp (var "o") ".:" . fstr
 
 optJS :: Local -> Exp
-optJS = infixApp (var "o") ".:?" . str . local
+optJS = infixApp (var "o") ".:?" . fstr
 
 funD :: String -> Exp -> InstDecl
 funD f = InsDecl . patBind noLoc (pvar (name f))
@@ -263,7 +263,7 @@ fieldUpdate p l s = FieldUpdate (UnQual (fname p l)) rhs
 
 lensSig :: Global -> Prefix -> Local -> Solved -> Decl
 lensSig n p l s = TypeSig noLoc [lname p l] $
-    TyApp (TyApp (tycon "Lens'") (tycon n))
+    TyApp (TyApp (TyCon "Lens'") (tycon n))
           (externalType (_type s))
 
 lensDecl :: Prefix -> Local -> Solved -> Decl
@@ -305,46 +305,46 @@ externalType :: TType -> Type
 externalType = \case
     TType   r          -> tycon r
     TMaybe  t@TList {} -> externalType t
-    TMaybe  t          -> TyApp (tycon "Maybe") (externalType t)
+    TMaybe  t          -> TyApp (TyCon "Maybe") (externalType t)
     TList   t          -> TyList (externalType t)
     TLit    l          -> externalLit l
 
 internalType :: TType -> Type
 internalType = \case
     TType   r   -> tycon r
-    TMaybe  t   -> TyApp (tycon "Maybe") (internalType t)
+    TMaybe  t   -> TyApp (TyCon "Maybe") (internalType t)
     TList   t   -> TyList (internalType t)
     TLit    l   -> internalLit l
 
 externalLit :: Lit -> Type
 externalLit = \case
-    Text   -> tycon "Text"
-    Bool   -> tycon "Bool"
-    Time   -> tycon "UTCTime"
-    Date   -> tycon "UTCTime"
-    Nat    -> tycon "Natural"
-    Float  -> tycon "Float"
-    Double -> tycon "Double"
-    Byte   -> tycon "Word8"
-    UInt32 -> tycon "Word32"
-    UInt64 -> tycon "Word64"
-    Int32  -> tycon "Int32"
-    Int64  -> tycon "Int64"
+    Text   -> TyCon "Text"
+    Bool   -> TyCon "Bool"
+    Time   -> TyCon "UTCTime"
+    Date   -> TyCon "UTCTime"
+    Nat    -> TyCon "Natural"
+    Float  -> TyCon "Float"
+    Double -> TyCon "Double"
+    Byte   -> TyCon "Word8"
+    UInt32 -> TyCon "Word32"
+    UInt64 -> TyCon "Word64"
+    Int32  -> TyCon "Int32"
+    Int64  -> TyCon "Int64"
 
 internalLit :: Lit -> Type
 internalLit = \case
-    Text   -> tycon "Text"
-    Bool   -> tycon "Bool"
-    Time   -> tycon "UTCTime"
-    Date   -> tycon "UTCTime"
-    Nat    -> tycon "Nat"
-    Float  -> tycon "Float"
-    Double -> tycon "Double"
-    Byte   -> tycon "Word8"
-    UInt32 -> tycon "Word32"
-    UInt64 -> tycon "Word64"
-    Int32  -> tycon "Int32"
-    Int64  -> tycon "Int64"
+    Text   -> TyCon "Text"
+    Bool   -> TyCon "Bool"
+    Time   -> TyCon "UTCTime"
+    Date   -> TyCon "UTCTime"
+    Nat    -> TyCon "Nat"
+    Float  -> TyCon "Float"
+    Double -> TyCon "Double"
+    Byte   -> TyCon "Word8"
+    UInt32 -> TyCon "Word32"
+    UInt64 -> TyCon "Word64"
+    Int32  -> TyCon "Int32"
+    Int64  -> TyCon "Int64"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)
@@ -372,7 +372,7 @@ sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
 
 tycon :: Global -> Type
-tycon = TyCon . unqual . Text.unpack . global
+tycon = TyCon . UnQual . dname
 
 unqual :: String -> QName
 unqual = UnQual . name

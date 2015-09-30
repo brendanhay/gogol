@@ -55,13 +55,14 @@ import           Prelude                      hiding (sum)
 render :: Service Solved -> AST (API, [Data])
 render s = do
     a  <- renderAPI s
-    ds <- traverse renderSchema (Map.elems (s ^. dSchemas)) <&> catMaybes
-    pure (a, ds)
 
-    -- FIXME: filter out action/methods types
---     let as  = map actionTypeName (Map.elems (_apiActions y))
---         f d = elem (dataName d) as
---         z   = trace (show as) $ filter (not . f) (catMaybes x)
+    let actions = map _actType (_apiResources a <> _apiMethods a)
+        valid   = Map.keys . Map.filter (\v -> _unique v `notElem` actions)
+
+    ss <- traverse getSolved $ valid (s ^. dSchemas)
+    ds <- traverse renderSchema ss <&> catMaybes
+
+    pure (a, ds)
 
 renderSchema :: Solved -> AST (Maybe Data)
 renderSchema s = go (_schema s)
@@ -99,18 +100,18 @@ renderSchema s = go (_schema s)
                      "' with the minimum fields required to make a request.\n")
                      k
 
-renderMethod :: Service a -> Method Solved -> AST Action
-renderMethod s m@Method {..} = do
+renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
+renderMethod s root suf m@Method {..} = do
     x@Solved {..} <- getSolved typ
     Just d        <- renderSchema x
 
     i <- pp Print $ requestDecl _unique _prefix alias url (props _schema) m
 
-    Action _mId (mkNS ns) _mDescription alias
+    Action _mId _unique (root <> mkNS ns) _mDescription alias
         <$> pp Print (verbAlias alias m)
         <*> pure (insts [i] d)
   where
-    (alias, typ, ns) = mname (_sCanonicalName s) _mId
+    (alias, typ, ns) = mname (_sCanonicalName s) suf _mId
 
     url = name (Text.unpack (urlName s))
 
@@ -122,24 +123,25 @@ renderMethod s m@Method {..} = do
         SObj _ (Obj _ ps) -> Map.keys ps
         _                 -> mempty
 
-renderResource :: Service a -> Resource Solved -> AST [Action]
-renderResource s Resource {..} =
+renderResource :: Service a -> NS -> Suffix -> Resource Solved -> AST [Action]
+renderResource s root suf Resource {..} =
     liftA2 (<>)
-        (traverse (renderResource s) (Map.elems _rResources) <&> concat)
-        (traverse (renderMethod s) _rMethods)
+        (traverse (renderResource s root suf) (Map.elems _rResources) <&> concat)
+        (traverse (renderMethod   s root suf) _rMethods)
 
 renderAPI :: Service Solved -> AST API
 renderAPI s = do
-    rs <- traverse (renderResource s) (Map.elems (s ^. dResources)) <&> concat
-    ms <- traverse (renderMethod   s) (s ^. dMethods)
-    d  <- pp Print (apiAlias alias names)
+    rs <- traverse (renderResource s resourceNS "Resource")
+        (Map.elems (s ^. dResources)) <&> concat
+
+    ms <- traverse (renderMethod   s methodNS   "Method")
+        (s ^. dMethods)
+
+    d  <- pp Print $ apiAlias alias (map _actAliasName (rs <> ms))
 
     API alias d rs ms <$> serviceURL
   where
     alias = aname (_sCanonicalName s)
-
-    names = map _mId (s ^. dMethods)
-         <> Map.keys (s ^. dResources)
 
     url = name (Text.unpack (urlName s))
 

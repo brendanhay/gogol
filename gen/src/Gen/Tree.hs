@@ -87,11 +87,12 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
               ++ map method   (_apiMethods   (l ^. lAPI))
         ]
       where
+        -- FIXME: now redundant
         resource a =
-            mod' (resourceNS a) actionImports actionTemplate (action a)
+            mod' (_actNamespace a) actionImports actionTemplate (action a)
 
         method a =
-            mod' (methodNS   a) actionImports actionTemplate (action a)
+            mod' (_actNamespace a) actionImports actionTemplate (action a)
 
         action a =
             let Object o = object ["action" .= a]
