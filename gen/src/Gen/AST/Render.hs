@@ -124,10 +124,11 @@ renderMethod s root suf m@Method {..} = do
     x@Solved {..} <- getSolved typ
     Just d        <- renderSchema x
 
+    a  <- pp Print $ authDecl     _unique _prefix           (props _schema)
     i  <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
     dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
 
-    let is = i : [dl | _mSupportsMediaDownload]
+    let is = a : i : [dl | _mSupportsMediaDownload]
 
     Action _mId _unique (root <> mkNS ns) _mDescription alias
         <$> pp Print (verbAlias alias m)

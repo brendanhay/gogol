@@ -194,6 +194,16 @@ googleRequestDecl g n assoc alt p api url fs m =
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname g)) [PFieldWildcard]
 
+authDecl :: Global -> Prefix -> [Local] -> Decl
+authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
+   [ method "authKey" "key"
+   , method "authToken" "oauth_token"
+   ]
+  where
+    method l f
+        | f `elem` fs = funD l (var (lname p f))
+        | otherwise   = funD l (app (var "const") (var "pure"))
+
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
 jsonDecls g p (Map.toList -> rs) = [from, to]
   where
