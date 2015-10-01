@@ -49,9 +49,9 @@ apiAlias n ls = TypeDecl noLoc n [] alias
 
 -- type Method = :> ...
 verbAlias :: Name -> Method Solved -> Decl
-verbAlias n m = TypeDecl noLoc n [] alias
+verbAlias n m = TypeDecl noLoc n [] (alias (path ++ qry ++ media))
   where
-    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb (path ++ qry)
+    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb
 
     -- FIXME: rather than using 'terminal' to get the terminal type,
     -- write a custom 'Link' for servant to specify required params.
@@ -85,7 +85,16 @@ verbAlias n m = TypeDecl noLoc n [] alias
                 Query -> Just $ TyApp (TyApp (TyCon "QueryParam")  n) t
                 Path  -> Nothing
 
-    params = _mParameters m
+    media :: [Type]
+    media | Just b <- _mRequest m =
+             let g = ref b
+              in if _mSupportsMediaUpload m
+                     then [TyApp (TyApp (TyCon "Multipart") typ) (parts g)]
+                     else [TyApp (TyApp (TyCon "ReqBody")   typ) (tycon g)]
+          | otherwise = []
+      where
+        parts g = TyCon (UnQual (name (Text.unpack ("'[" <> global g <> ", Body]"))))
+        typ     = TyCon "'[JSON]"
 
     verb :: Type
     verb = TyApp (TyApp meth typ) res
@@ -93,6 +102,8 @@ verbAlias n m = TypeDecl noLoc n [] alias
         meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
         typ  = TyCon "'[JSON]"
         res  = maybe (TyCon "()") (tycon . ref) (_mResponse m)
+
+    params = _mParameters m
 
 requestDecl :: Global
             -> Prefix

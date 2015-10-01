@@ -197,7 +197,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Youtube",       "YouTube")
          , ("Cnc",           "CNC")
          , ("Oauth",         "OAuth")
-         , ("Ocr$",          "OCR")
+         , ("Ocr",           "OCR")
          ]
 
 acronyms :: [(String, String)]
