@@ -29,6 +29,7 @@ import           Control.Monad.Except
 import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
 import           Data.Semigroup       ((<>))
+import qualified Data.Text            as Text
 import           Gen.Formatting
 import           Gen.Types
 import           Prelude              hiding (sum)
@@ -81,11 +82,13 @@ schema g ml (Fix f) = go f >>= insert this
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
-globalParam l = case l of
-   "alt"         -> overrideParam l Alt
-   "key"         -> overrideParam l Key
-   "oauth_token" -> overrideParam l OAuthToken
-   _             -> localParam "" l
+globalParam l p = ($ p) $ case l of
+    "alt"         -> overrideParam l (Alt alt)
+    "key"         -> overrideParam l Key
+    "oauth_token" -> overrideParam l OAuthToken
+    _             -> localParam "" l
+  where
+    alt = Text.toUpper (fromMaybe "JSON" (p ^. iDefault))
 
 overrideParam :: Local -> Lit -> Param (Fix Schema) -> AST (Param Global)
 overrideParam l v p =
@@ -121,15 +124,14 @@ method qs suf m@Method {..} = do
 
     b  <- body typ
 
-    let params = ps <> qs
-        fields = b (upload (Map.map _pParam params))
+    let params   = ps <> qs
+        fields   = Map.delete "alt" $ b (upload (Map.map _pParam params))
 
     void $ insert typ (SObj schemaInfo (Obj Nothing fields))
     pure $! m { _mParameters = params }
   where
     schemaInfo = emptyInfo { _iDescription = _mDescription }
-
-    bodyInfo = requiredInfo { _iDescription = Just "Multipart request metadata." }
+    bodyInfo   = requiredInfo { _iDescription = Just "Multipart request metadata." }
 
     body p = case _mRequest of
         Nothing -> pure id
@@ -138,11 +140,12 @@ method qs suf m@Method {..} = do
             g <- localSchema p f (Fix (SRef bodyInfo x))
             pure (Map.insert f g)
 
+    -- FIXME: Add maxSize to media field description.
     upload
         | _mSupportsMediaUpload = Map.insert "media" "Body"
         | otherwise             = id
 
-    download = id
+    -- download = id
 
     -- media
     --   insert 'media' property of type 'Body'

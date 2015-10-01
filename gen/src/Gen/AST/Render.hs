@@ -90,35 +90,6 @@ renderSchema s = go (_schema s)
                      "' with the minimum fields required to make a request.\n")
                      k
 
-renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
-renderMethod s root suf m@Method {..} = do
-    x@Solved {..} <- getSolved typ
-    Just d        <- renderSchema x
-
-    i <- pp Print $ requestDecl _unique _prefix alias url (props _schema) m
-
-    Action _mId _unique (root <> mkNS ns) _mDescription alias
-        <$> pp Print (verbAlias alias m)
-        <*> pure (insts [i] d)
-  where
-    (alias, typ, ns) = mname (_sCanonicalName s) suf _mId
-
-    url = name (Text.unpack (urlName s))
-
-    insts is = \case
-        Prod n h r c ls _ -> Prod n h r c ls is
-        d                 -> d
-
-    props = \case
-        SObj _ (Obj _ ps) -> Map.keys ps
-        _                 -> mempty
-
-renderResource :: Service a -> NS -> Suffix -> Resource Solved -> AST [Action]
-renderResource s root suf Resource {..} =
-    liftA2 (<>)
-        (traverse (renderResource s root suf) (Map.elems _rResources) <&> concat)
-        (traverse (renderMethod   s root suf) _rMethods)
-
 renderAPI :: Service Solved -> AST API
 renderAPI s = do
     rs <- traverse (renderResource s resourceNS "Resource")
@@ -147,6 +118,38 @@ renderAPI s = do
         h = sformat ("URL referring to version @" % stext %
                      "@ of the " % stext % ".")
                      (s ^. dVersion) (s ^. dTitle)
+
+renderMethod :: Service a -> NS -> Suffix -> Method Solved -> AST Action
+renderMethod s root suf m@Method {..} = do
+    x@Solved {..} <- getSolved typ
+    Just d        <- renderSchema x
+
+    i  <- pp Print $ requestDecl  _unique _prefix alias url (props _schema) m
+    dl <- pp Print $ downloadDecl _unique _prefix alias url (props _schema) m
+
+    let is = i : [dl | _mSupportsMediaDownload]
+
+    Action _mId _unique (root <> mkNS ns) _mDescription alias
+        <$> pp Print (verbAlias alias m)
+        <*> pure (insts is d)
+  where
+    (alias, typ, ns) = mname (_sCanonicalName s) suf _mId
+
+    url = name (Text.unpack (urlName s))
+
+    insts is = \case
+        Prod n h r c ls _ -> Prod n h r c ls is
+        d                 -> d
+
+    props = \case
+        SObj _ (Obj _ ps) -> Map.keys ps
+        _                 -> mempty
+
+renderResource :: Service a -> NS -> Suffix -> Resource Solved -> AST [Action]
+renderResource s root suf Resource {..} =
+    liftA2 (<>)
+        (traverse (renderResource s root suf) (Map.elems _rResources) <&> concat)
+        (traverse (renderMethod   s root suf) _rMethods)
 
 data PP
     = Indent

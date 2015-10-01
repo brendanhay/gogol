@@ -189,7 +189,7 @@ data Lit
     | Time
     -- Core types.
     | Body
-    | Alt
+    | Alt Text
     | Key
     | OAuthToken
       deriving (Eq, Show)

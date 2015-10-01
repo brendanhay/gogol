@@ -49,12 +49,16 @@ apiAlias n ls = TypeDecl noLoc n [] alias
 
 -- type Method = :> ...
 verbAlias :: Name -> Method Solved -> Decl
-verbAlias n m = TypeDecl noLoc n [] (alias (path ++ qry ++ media))
+verbAlias n m
+    | _mSupportsMediaDownload m = TypeDecl noLoc n [] download
+    | otherwise                 = TypeDecl noLoc n [] rest
   where
-    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r) verb
+    rest     = alias verb (path ++ qry params ++ media)
+    download = TyInfix rest (UnQual (sym ":<|>")) $
+        alias (TyApp (TyApp meth octet) (TyCon "Stream"))
+        (path ++ qry (Map.delete "alt" (_mParameters m)) ++ [alt] ++ media)
 
-    -- FIXME: rather than using 'terminal' to get the terminal type,
-    -- write a custom 'Link' for servant to specify required params.
+    alias = foldr' (\l r -> TyInfix l (UnQual (sym ":>")) r)
 
     path :: [Type]
     path = map match
@@ -73,8 +77,8 @@ verbAlias n m = TypeDecl noLoc n [] (alias (path ++ qry ++ media))
             | otherwise = sing x
 
     -- FIXME: order by _mParameterOrder
-    qry :: [Type]
-    qry = mapMaybe f (Map.toList params)
+--    qry :: [Type]
+    qry = mapMaybe f . Map.toList
       where
         f (k, x) =
            let t = terminalType (_type (_pParam x))
@@ -89,39 +93,74 @@ verbAlias n m = TypeDecl noLoc n [] (alias (path ++ qry ++ media))
     media | Just b <- _mRequest m =
              let g = ref b
               in if _mSupportsMediaUpload m
-                     then [TyApp (TyApp (TyCon "Multipart") typ) (parts g)]
-                     else [TyApp (TyApp (TyCon "ReqBody")   typ) (tycon g)]
+                     then [TyApp (TyApp (TyCon "Multipart") json) (parts g)]
+                     else [TyApp (TyApp (TyCon "ReqBody")   json) (tycon g)]
           | otherwise = []
       where
-        parts g = TyCon (UnQual (name (Text.unpack ("'[" <> global g <> ", Body]"))))
-        typ     = TyCon "'[JSON]"
+        parts g = TyCon . UnQual . name . Text.unpack $
+            "'[" <> global g <> ", Body]"
 
-    verb :: Type
-    verb = TyApp (TyApp meth typ) res
-      where
-        meth = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
-        typ  = TyCon "'[JSON]"
-        res  = maybe (TyCon "()") (tycon . ref) (_mResponse m)
+    verb = TyApp (TyApp meth json) $
+        maybe (TyCon "()") (tycon . ref) (_mResponse m)
+
+    meth  = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
+
+    octet = TyCon "'[OctetStream]"
+    json  = TyCon "'[JSON]"
+
+    alt = TyApp (TyApp (TyCon "QueryParam") (sing "alt")) (TyCon "Media")
 
     params = _mParameters m
+
+downloadDecl :: Global
+             -> Prefix
+             -> Name
+             -> Name
+             -> [Local]
+             -> Method Solved
+             -> Decl
+downloadDecl n p api url fs m =
+    googleRequestDecl n (tycon n) rs alt p api url fs m
+  where
+    rs = InsType noLoc
+        (TyApp (TyCon "Rs") (TyApp (TyCon "Download") (tycon n)))
+        (TyCon "Stream")
+
+    alt = Just (var "Media")
 
 requestDecl :: Global
             -> Prefix
             -> Name
             -> Name
             -> [Local]
-            -> Method Solved -> Decl
+            -> Method Solved
+            -> Decl
 requestDecl n p api url fs m =
-    -- FIXME: associated Rs type
-    InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [tycon n]
-        [ response
+    googleRequestDecl n (tycon n) rs alt p api url fs m
+  where
+    rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
+        maybe unit_tycon (tycon . ref) (_mResponse m)
+
+    alt = var . name . Text.unpack . Text.toUpper <$>
+        (Map.lookup "alt" (_mParameters m) >>= view iDefault)
+
+googleRequestDecl :: Global
+                  -> Type
+                  -> InstDecl
+                  -> Maybe Exp
+                  -> Prefix
+                  -> Name
+                  -> Name
+                  -> [Local]
+                  -> Method Solved
+                  -> Decl
+googleRequestDecl g n assoc alt p api url fs m =
+    InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
+        [ assoc
         , request
         , requestWithRoute
         ]
   where
-    response = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
-        maybe unit_tycon (tycon . ref) (_mResponse m)
-
     request = funD "request" $
         appFun (var "requestWithRoute") [var "defReq", var url]
 
@@ -130,7 +169,7 @@ requestDecl n p api url fs m =
         match = Match noLoc (name "requestWithRoute") pats Nothing rhs decls
 
         decls = BDecls
-            [ patBind noLoc (pvar "go") $
+            [ patBind noLoc pat $
                 appFun (var "clientWithRoute") $
                     [ ExpTypeSig noLoc (var "Proxy") $
                         TyApp (TyCon "Proxy") (TyCon (UnQual api))
@@ -138,8 +177,11 @@ requestDecl n p api url fs m =
                     , var "u"
                     ]
             ]
+          where
+            pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
+                | otherwise = pvar "go"
 
-        rhs = UnGuardedRhs $ appFun (var "go") (map go fs)
+        rhs = UnGuardedRhs $ appFun (var "go") (map go fs ++ maybeToList alt)
           where
             go l | Just p <- Map.lookup l ps
                  , _pLocation p == Query
@@ -150,7 +192,7 @@ requestDecl n p api url fs m =
             v  = var . fname p
 
     pats = [pvar "r", pvar "u", prec]
-    prec = PRec (UnQual (dname n)) [PFieldWildcard]
+    prec = PRec (UnQual (dname g)) [PFieldWildcard]
 
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
 jsonDecls g p (Map.toList -> rs) = [from, to]
@@ -342,7 +384,7 @@ externalLit = \case
     Int32  -> TyCon "Int32"
     Int64  -> TyCon "Int64"
 
-    Alt        -> TyCon "Alt"
+    Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "Key"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Body"
@@ -362,7 +404,7 @@ internalLit = \case
     Int32  -> TyCon "Int32"
     Int64  -> TyCon "Int64"
 
-    Alt        -> TyCon "Alt"
+    Alt t      -> TyCon (unqual (Text.unpack t))
     Key        -> TyCon "Key"
     OAuthToken -> TyCon "OAuthToken"
     Body       -> TyCon "Body"
