@@ -17,6 +17,7 @@ import           Control.Lens                 hiding (iso, mapping, op, pre,
 import           Data.Foldable                (find, foldl', foldr')
 import           Data.Hashable
 import qualified Data.HashMap.Strict          as Map
+import           Data.List                    (delete)
 import           Data.Maybe
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
@@ -93,20 +94,19 @@ verbAlias n m
     media | Just b <- _mRequest m =
              let g = ref b
               in if _mSupportsMediaUpload m
-                     then [TyApp (TyApp (TyCon "Multipart") json) (parts g)]
-                     else [TyApp (TyApp (TyCon "ReqBody")   json) (tycon g)]
+                     then [TyApp (TyApp (TyApp (TyCon "MultipartRelated") json)
+                                        (tycon g))
+                                 (TyCon "Body")]
+                     else [TyApp (TyApp (TyCon "ReqBody") json) (tycon g)]
           | otherwise = []
-      where
-        parts g = TyCon . UnQual . name . Text.unpack $
-            "'[" <> global g <> ", Body]"
 
     verb = TyApp (TyApp meth json) $
         maybe (TyCon "()") (tycon . ref) (_mResponse m)
 
     meth  = TyCon . unqual . Text.unpack $ Text.toTitle (_mHttpMethod m)
 
-    octet = TyCon "'[OctetStream]"
-    json  = TyCon "'[JSON]"
+    octet = tylist ["OctetStream"]
+    json  = tylist ["JSON"]
 
     alt = TyApp (TyApp (TyCon "QueryParam") (sing "alt")) (TyCon "Media")
 
@@ -141,7 +141,7 @@ requestDecl n p api url fs m =
     rs = InsType noLoc (TyApp (TyCon "Rs") (tycon n)) $
         maybe unit_tycon (tycon . ref) (_mResponse m)
 
-    alt = var . name . Text.unpack . Text.toUpper <$>
+    alt = var . name . Text.unpack . alternate <$>
         (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
 googleRequestDecl :: Global
@@ -181,7 +181,9 @@ googleRequestDecl g n assoc alt p api url fs m =
             pat | _mSupportsMediaDownload m = PInfixApp (pvar "go") (UnQual (sym ":<|>")) PWildCard
                 | otherwise = pvar "go"
 
-        rhs = UnGuardedRhs $ appFun (var "go") (map go fs ++ maybeToList alt)
+        rhs = UnGuardedRhs . appFun (var "go") $ map go fs'
+            ++ maybeToList (app (var "Just") <$> alt)
+            ++ maybeToList (go <$> rq)
           where
             go l | Just p <- Map.lookup l ps
                  , _pLocation p == Query
@@ -190,6 +192,9 @@ googleRequestDecl g n assoc alt p api url fs m =
 
             ps = _mParameters m
             v  = var . fname p
+
+            (fs', rq) | Just r <- _mRequest m = let x = localise (ref r) in (delete x fs, Just x)
+                      | otherwise             = (fs, Nothing)
 
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname g)) [PFieldWildcard]
@@ -201,7 +206,7 @@ authDecl g p fs = InstDecl noLoc Nothing [] [] (unqual "GoogleAuth") [tycon g]
    ]
   where
     method l f
-        | f `elem` fs = funD l (var (lname p f))
+        | f `elem` fs = funD l (infixApp (var (lname p f)) "." (var "_Just"))
         | otherwise   = funD l (app (var "const") (var "pure"))
 
 jsonDecls :: Global -> Prefix -> Map Local Solved -> [Decl]
@@ -443,6 +448,10 @@ strict = TyBang BangedTy . \case
 
 sing :: Text -> Type
 sing = TyCon . unqual . Text.unpack . flip mappend "\"" . mappend "\""
+
+tylist :: [Text] -> Type
+tylist xs = TyCon . UnQual . name . Text.unpack $
+    "'[" <> Text.intercalate ", " xs <> "]"
 
 tycon :: Global -> Type
 tycon = TyCon . UnQual . dname

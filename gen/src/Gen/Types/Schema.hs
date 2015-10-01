@@ -93,6 +93,9 @@ defaulted   = isJust . view iDefault
 required    = view iRequired
 parameter s = required s && not (defaulted s)
 
+alternate :: Text -> Text
+alternate = mappend "Alt" . Text.toUpper
+
 emptyInfo :: Info
 emptyInfo = Info
     { _iId          = Nothing
@@ -107,7 +110,7 @@ emptyInfo = Info
     }
 
 requiredInfo :: Info
-requiredInfo = emptyInfo & iRequired .~ True
+requiredInfo = setRequired emptyInfo
 
 setRequired :: HasInfo a => a -> a
 setRequired = iRequired .~ True

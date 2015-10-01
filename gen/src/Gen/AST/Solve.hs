@@ -87,19 +87,22 @@ getSchema g = do
 getType :: Global -> AST TType
 getType g = loc "getType" g $ memo typed g go
   where
-    go s = fmap (may s) $
-        case s of
-            SAny {}        -> pure (TType "JSONValue")
-            SRef _ r       -> getType (ref r)
-            --- FIXME: add natural/numeric manipulations
-            SLit _ l       -> pure (TLit l)
-            SEnm {}        -> pure (TType g)
-            SArr _ (Arr e) -> TList <$> getType e
-            SObj {}        -> pure (TType g)
+    go s = case s of
+        SAny {}        -> may (TType "JSONValue")
+        SRef _ r       -> unmay <$> getType (ref r)
+        --- FIXME: add natural/numeric manipulations
+        SLit _ l       -> may (TLit l)
+        SEnm {}        -> may (TType g)
+        SArr _ (Arr e) -> (TList <$> (getType e)) >>= may
+        SObj {}        -> may (TType g)
+      where
+        may | required  s = pure
+            | defaulted s = pure
+            | otherwise   = pure . TMaybe
 
-    may s | required  s = id
-          | defaulted s = id
-          | otherwise   = TMaybe
+        unmay (TMaybe x)
+            | required s = x
+        unmay x          = x
 
 getDerive :: Global -> AST [Derive]
 getDerive g = loc "getDerive" g $ memo derived g go

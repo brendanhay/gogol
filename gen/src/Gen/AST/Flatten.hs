@@ -88,7 +88,7 @@ globalParam l p = ($ p) $ case l of
     "oauth_token" -> overrideParam l OAuthToken
     _             -> localParam "" l
   where
-    alt = Text.toUpper (fromMaybe "JSON" (p ^. iDefault))
+    alt = alternate $ fromMaybe "JSON" (p ^. iDefault)
 
 overrideParam :: Local -> Lit -> Param (Fix Schema) -> AST (Param Global)
 overrideParam l v p =
