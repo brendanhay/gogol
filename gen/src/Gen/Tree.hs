@@ -28,8 +28,6 @@ import           Control.Monad.Except
 import           Data.Aeson                hiding (json)
 import           Data.Bifunctor
 import           Data.Foldable             (foldr')
-import qualified Data.HashMap.Strict       as Map
-import qualified Data.List.NonEmpty        as NE
 import           Data.Monoid
 import           Data.Text                 (Text)
 import qualified Data.Text                 as Text

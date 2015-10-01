@@ -13,11 +13,7 @@ module Gen.IO where
 
 import           Control.Error
 import           Control.Monad.Except
-import           Control.Monad.State
 import           Data.ByteString           (ByteString)
-import qualified Data.HashMap.Strict       as Map
-import           Data.Text                 (Text)
-import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import           Data.Text.Lazy.Builder    (toLazyText)
 import qualified Data.Text.Lazy.IO         as LText

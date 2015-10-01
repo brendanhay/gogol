@@ -25,45 +25,25 @@
 module Gen.Types.Schema where
 
 import           Control.Applicative
-import           Control.Lens                 hiding ((.=))
+import           Control.Lens         hiding ((.=))
 import           Control.Monad
-import           Data.Aeson                   hiding (Array, Bool, Object,
-                                               String)
-import qualified Data.Aeson                   as A
+import           Data.Aeson           hiding (Array, Bool, Object, String)
+import qualified Data.Aeson           as A
 import           Data.Aeson.TH
-import           Data.Aeson.Types             (Parser)
-import           Data.Char
-import           Data.Function                (on)
-import           Data.Hashable
-import qualified Data.HashMap.Strict          as Map
-import qualified Data.HashSet                 as Set
-import           Data.List                    (groupBy, sort, sortOn)
-import           Data.List.NonEmpty           (NonEmpty (..))
-import qualified Data.List.NonEmpty           as NE
+import           Data.Aeson.Types     (Parser)
+import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
-import           Data.Ord
-import           Data.Semigroup               ((<>))
-import           Data.Text                    (Text)
-import qualified Data.Text                    as Text
-import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
+import           Data.Semigroup       ((<>))
+import           Data.Text            (Text)
+import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import qualified Data.Text.Read               as Read
-import qualified Filesystem.Path.CurrentOS    as Path
-import           Formatting
-import           Gen.Orphans                  ()
+import           Gen.Orphans          ()
 import           Gen.Text
 import           Gen.TH
 import           Gen.Types.Help
 import           Gen.Types.Id
 import           Gen.Types.Map
-import           Gen.Types.NS
-import           GHC.Generics
-import           GHC.TypeLits
-import           Language.Haskell.Exts        (Name)
-import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
-import           Prelude                      hiding (Enum)
-import           Text.EDE                     (Template)
+import           Prelude              hiding (Enum)
 
 keyless :: Map Text a -> [a]
 keyless = Map.elems
@@ -113,6 +93,25 @@ defaulted   = isJust . view iDefault
 required    = view iRequired
 parameter s = required s && not (defaulted s)
 
+emptyInfo :: Info
+emptyInfo = Info
+    { _iId          = Nothing
+    , _iDescription = Nothing
+    , _iDefault     = Nothing
+    , _iRequired    = False
+    , _iPattern     = Nothing
+    , _iMinimum     = Nothing
+    , _iMaximum     = Nothing
+    , _iRepeated    = False
+    , _iAnnotations = mempty
+    }
+
+requiredInfo :: Info
+requiredInfo = emptyInfo & iRequired .~ True
+
+setRequired :: HasInfo a => a -> a
+setRequired = iRequired .~ True
+
 data Schema a
     = SAny Info Any
     | SRef Info Ref
@@ -152,6 +151,9 @@ instance HasInfo (Schema a) where
             SArr _ x -> SArr i x
             SObj _ x -> SObj i x
 
+instance HasInfo (Fix Schema) where
+    info = lens (\(Fix f) -> f ^. info) (\(Fix f) a -> Fix (f & info .~ a))
+
 checkType :: Text -> A.Object -> Parser ()
 checkType x o = do
    y <- o .: "type"
@@ -172,6 +174,7 @@ instance FromJSON Ref where
     parseJSON = withObject "ref" (fmap Ref . (.: "$ref"))
 
 data Lit
+    -- Literal types.
     = Text
     | Bool
     | Float
@@ -184,6 +187,11 @@ data Lit
     | Nat
     | Date
     | Time
+    -- Core types.
+    | Body
+    | Alt
+    | Key
+    | OAuthToken
       deriving (Eq, Show)
 
 instance FromJSON Lit where

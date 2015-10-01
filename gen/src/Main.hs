@@ -19,7 +19,6 @@ import           Control.Lens              hiding ((<.>))
 import           Control.Monad.State
 import           Data.List                 (nub, sort)
 import           Data.String
-import           Data.Text                 (Text)
 import qualified Data.Text                 as Text
 import qualified Filesystem                as FS
 import           Filesystem.Path.CurrentOS
@@ -184,4 +183,3 @@ main = do
             done
 
         title ("Successfully processed " % int % " models.") i
-

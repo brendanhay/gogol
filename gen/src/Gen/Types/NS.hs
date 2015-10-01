@@ -14,15 +14,11 @@ module Gen.Types.NS
     ) where
 
 import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.Char
-import           Data.Monoid
 import           Data.Semigroup
 import           Data.String
-import           Data.Text                 (Text)
-import qualified Data.Text                 as Text
+import           Data.Text            (Text)
+import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import qualified Filesystem.Path.CurrentOS as Path
 import           Gen.Text
 
 newtype NS = NS { unNS :: [Text] }
@@ -30,9 +26,6 @@ newtype NS = NS { unNS :: [Text] }
 
 mkNS :: Text -> NS
 mkNS = NS . map (upperAcronym . upperHead) . Text.split (== '.')
-
-nsToPath :: NS -> Path.FilePath
-nsToPath (NS xs) = Path.fromText (Text.intercalate "/" xs) Path.<.> "hs"
 
 instance IsString NS where
     fromString "" = mempty

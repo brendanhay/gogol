@@ -24,24 +24,14 @@ module Gen.AST.Flatten
 
 import           Control.Applicative
 import           Control.Error
-import           Control.Lens                 hiding (lens)
+import           Control.Lens         hiding (lens)
 import           Control.Monad.Except
-import           Control.Monad.State.Strict
-import           Data.Char
-import qualified Data.HashMap.Strict          as Map
+import qualified Data.HashMap.Strict  as Map
 import           Data.Maybe
-import           Data.Semigroup               ((<>))
-import qualified Data.Text                    as Text
-import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
-import           Debug.Trace
-import           Debug.Trace
+import           Data.Semigroup       ((<>))
 import           Gen.Formatting
 import           Gen.Types
-import           HIndent
-import           Language.Haskell.Exts.Build  (name)
-import           Language.Haskell.Exts.Pretty
-import           Prelude                      hiding (sum)
+import           Prelude              hiding (sum)
 
 flatten :: Service (Fix Schema) -> AST (Service Global)
 flatten s = do
@@ -91,7 +81,15 @@ schema g ml (Fix f) = go f >>= insert this
         Obj Nothing <$> Map.traverseWithKey (localSchema this) ps
 
 globalParam :: Local -> Param (Fix Schema) -> AST (Param Global)
-globalParam = localParam ""
+globalParam l = case l of
+   "alt"         -> overrideParam l Alt
+   "key"         -> overrideParam l Key
+   "oauth_token" -> overrideParam l OAuthToken
+   _             -> localParam "" l
+
+overrideParam :: Local -> Lit -> Param (Fix Schema) -> AST (Param Global)
+overrideParam l v p =
+    localParam "" l $ p { _pParam = Fix (SLit (p ^. info) v) }
 
 localParam :: Global -> Local -> Param (Fix Schema) -> AST (Param Global)
 localParam g l p = do
@@ -118,27 +116,44 @@ method :: Map Local (Param Global)
 method qs suf m@Method {..} = do
     ps <- Map.traverseWithKey (localParam _mId) _mParameters
     cn <- use sCanonicalName
+
     let (_, typ, _) = mname cn suf _mId
-        params      = ps <> qs
-    void $ insert typ (fresh params)
+
+    b  <- body typ
+
+    let params = ps <> qs
+        fields = b (upload (Map.map _pParam params))
+
+    void $ insert typ (SObj schemaInfo (Obj Nothing fields))
     pure $! m { _mParameters = params }
   where
-    fresh ps = SObj info' $ Obj Nothing (Map.map _pParam ps)
+    schemaInfo = emptyInfo { _iDescription = _mDescription }
 
-    info' = Info
-        { _iId          = Nothing
-        , _iDescription = _mDescription
-        , _iDefault     = Nothing
-        , _iRequired    = False
-        , _iPattern     = Nothing
-        , _iMinimum     = Nothing
-        , _iMaximum     = Nothing
-        , _iRepeated    = False
-        , _iAnnotations = mempty
-        }
+    bodyInfo = requiredInfo { _iDescription = Just "Multipart request metadata." }
 
-setRequired :: Fix Schema -> Fix Schema
-setRequired (Fix e) = Fix (e & iRequired .~ True)
+    body p = case _mRequest of
+        Nothing -> pure id
+        Just x  -> do
+            let f = localise (ref x)
+            g <- localSchema p f (Fix (SRef bodyInfo x))
+            pure (Map.insert f g)
+
+    upload
+        | _mSupportsMediaUpload = Map.insert "media" "Body"
+        | otherwise             = id
+
+    download = id
+
+    -- media
+    --   insert 'media' property of type 'Body'
+    --   insert 'mediaType' property of type 'MediaType'
+
+    --   ensure the rendering of api aliases gets request bodies
+    --   set to 'Multipart'
+
+    --   error if multipart + simple is not supported.
+
+    --   otherwise ensure servants 'ReqBody' is set.
 
 insert :: Global -> Schema Global -> AST Global
 insert g s = do

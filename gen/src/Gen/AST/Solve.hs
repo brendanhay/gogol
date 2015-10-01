@@ -38,7 +38,6 @@ import           Data.Semigroup       ((<>))
 import           Data.Text            (Text)
 import qualified Data.Text            as Text
 import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.Formatting
 import           Gen.Text
 import           Gen.Types
@@ -83,7 +82,7 @@ getSchema g = do
         Just x  -> pure x
         Nothing -> throwError $
             format ("Missing Schema: " % gid % "\n" % shown)
-                   g (map dname (Map.keys ss))
+                   g (map global (Map.keys ss))
 
 getType :: Global -> AST TType
 getType g = loc "getType" g $ memo typed g go
@@ -118,6 +117,9 @@ getDerive g = loc "getDerive" g $ memo derived g go
         Bool -> enum
         Time -> base
         Date -> base
+        Body -> base
+        Alt  -> base
+        Key  -> base
         -- FIXME: Add numeric cases
         _    -> [DNum, DIntegral, DReal] <> enum
 
@@ -215,9 +217,6 @@ acronymPrefixes (global -> g) = map CI.mk (xs ++ map suffix ys ++ zs)
     -- SomeTestTType -> Som
     r6 = Text.take limit <$> listToMaybe (splitWords a)
 
-loc :: String -> Global -> a -> a
-loc n g = id -- trace (n ++ ": " ++ Text.unpack (fromKey g))
-
 memo :: Lens' Memo (Map Global a)
      -> Global
      -> (Schema Global -> AST a)
@@ -230,3 +229,6 @@ memo l g f = do
             x <- f =<< getSchema g
             l %= Map.insert g x
             pure x
+
+loc :: String -> Global -> a -> a
+loc _ _ = id -- trace (n ++ ": " ++ Text.unpack (fromKey g))

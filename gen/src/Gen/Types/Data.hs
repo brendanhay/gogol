@@ -24,42 +24,20 @@
 
 module Gen.Types.Data where
 
-import           Control.Applicative
-import           Control.Lens                 hiding ((.=))
 import           Data.Aeson                   hiding (Array, Bool, String)
-import qualified Data.Aeson                   as A
-import           Data.Aeson.TH
-import           Data.Char
-import           Data.Function                (on)
-import qualified Data.HashMap.Strict          as Map
-import qualified Data.HashSet                 as Set
-import           Data.List                    (groupBy, sort, sortOn)
-import           Data.List.NonEmpty           (NonEmpty (..))
-import qualified Data.List.NonEmpty           as NE
+import           Data.List                    (sortOn)
 import           Data.Maybe
-import           Data.Ord
-import           Data.Semigroup               ((<>))
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
-import qualified Data.Text.Lazy.Builder       as Build
 import           Data.Text.Manipulate
-import qualified Data.Text.Read               as Read
-import qualified Filesystem.Path.CurrentOS    as Path
-import           Formatting
 import           Gen.Orphans                  ()
-import           Gen.Text
-import           Gen.TH
 import           Gen.Types.Help
 import           Gen.Types.Id
-import           Gen.Types.Map
 import           Gen.Types.NS
-import           GHC.Generics
-import           GHC.TypeLits
 import           Language.Haskell.Exts        (Name)
 import           Language.Haskell.Exts.Pretty (Pretty, prettyPrint)
 import           Prelude                      hiding (Enum)
-import           Text.EDE                     (Template)
 
 default (Text)
 

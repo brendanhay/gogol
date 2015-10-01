@@ -23,6 +23,7 @@ module Gen.Types.Id
 
     , global
     , local
+    , localise
 
     , gid
     , lid
@@ -42,27 +43,13 @@ module Gen.Types.Id
     , pname
     ) where
 
-import           Control.Applicative
-import           Control.Lens                 hiding (pre, (.=))
 import           Data.Aeson                   hiding (Bool, String)
-import           Data.Aeson.TH
-import qualified Data.Attoparsec.Text         as A
-import           Data.Bifunctor
 import qualified Data.CaseInsensitive         as CI
-import           Data.Char
-import           Data.Foldable                (foldMap)
-import           Data.Function                (on)
 import           Data.Hashable
-import qualified Data.HashMap.Strict          as Map
-import           Data.List.NonEmpty           (NonEmpty (..))
-import qualified Data.List.NonEmpty           as NE
-import           Data.Maybe
-import           Data.Ord
 import           Data.Semigroup               hiding (Sum)
 import           Data.String
 import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
-import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
 import           Data.Text.Manipulate
 import           Formatting
@@ -71,8 +58,7 @@ import           Gen.Text
 import           Gen.Types.Map
 import           GHC.Generics                 (Generic)
 import           Language.Haskell.Exts.Build
-import           Language.Haskell.Exts.Pretty (prettyPrint)
-import           Language.Haskell.Exts.Syntax (Name)
+import           Language.Haskell.Exts.Syntax (Exp, Name)
 
 aname :: Text -> Name
 aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
@@ -80,7 +66,7 @@ aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 mname :: Text -> Suffix -> Global -> (Name, Global, Text)
 mname abrv (Suffix suf) (Global g) =
     ( name . Text.unpack $ mconcat n <> suf -- Action service type alias.
-    , Global (n <> ["'"])                   -- Action data type.
+    , Global n -- (n <> ["'"])                   -- Action data type.
     , Text.intercalate "." ns               -- Action namespace.
     )
   where
@@ -107,9 +93,10 @@ fname = pre (Text.cons '_' . renameField)
 lname = pre renameField
 pname = pre (flip Text.snoc '_' . Text.cons 'p' . upperHead . renameField)
 
---dstr :: Global ->
+dstr :: Global -> Exp
 dstr = strE . Text.unpack . toPascal . global
 
+fstr :: Local -> Exp
 fstr = strE . Text.unpack . local
 
 pre :: (Text -> Text) -> Prefix -> Local -> Name
@@ -156,3 +143,6 @@ global (Global g) = foldMap (upperAcronym . upperHead) g
 
 reference :: Global -> Local -> Global
 reference (Global g) (Local l) = Global (g <> Text.split (== '.') l)
+
+localise :: Global -> Local
+localise = Local . global

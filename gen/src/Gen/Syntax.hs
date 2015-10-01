@@ -29,7 +29,7 @@ import           Gen.Text
 import           Gen.Types
 import           Language.Haskell.Exts.Build
 import           Language.Haskell.Exts.SrcLoc
-import           Language.Haskell.Exts.Syntax hiding (Int, Lit)
+import           Language.Haskell.Exts.Syntax hiding (Alt, Int, Lit)
 
 urlSig :: Name -> Decl
 urlSig n = TypeSig noLoc [n] (TyCon "BaseUrl")
@@ -331,6 +331,11 @@ externalLit = \case
     Int32  -> TyCon "Int32"
     Int64  -> TyCon "Int64"
 
+    Alt        -> TyCon "Alt"
+    Key        -> TyCon "Key"
+    OAuthToken -> TyCon "OAuthToken"
+    Body       -> TyCon "Body"
+
 internalLit :: Lit -> Type
 internalLit = \case
     Text   -> TyCon "Text"
@@ -345,6 +350,11 @@ internalLit = \case
     UInt64 -> TyCon "Word64"
     Int32  -> TyCon "Int32"
     Int64  -> TyCon "Int64"
+
+    Alt        -> TyCon "Alt"
+    Key        -> TyCon "Key"
+    OAuthToken -> TyCon "OAuthToken"
+    Body       -> TyCon "Body"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)

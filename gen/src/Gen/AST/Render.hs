@@ -26,27 +26,17 @@ import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
 import           Control.Monad.Except
-import           Data.CaseInsensitive         (CI)
-import qualified Data.CaseInsensitive         as CI
-import           Data.Char
-import           Data.Hashable
+import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
-import qualified Data.HashSet                 as Set
-import           Data.List                    (intersect)
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
-import           Data.Text                    (Text)
 import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax
-import           Gen.Text
 import           Gen.Types
-import           Gen.Types.Data
 import           HIndent
 import           Language.Haskell.Exts.Build  (name)
 import           Language.Haskell.Exts.Pretty
@@ -189,6 +179,7 @@ pp i x
           { layout  = PPNoLayout
           , spacing = False
           }
+
 
 -- FIXME: dirty hack to render smart ctor parameter comments.
 comments :: Map Local Solved -> Rendered -> Rendered
