@@ -38,6 +38,7 @@ import           Control.Monad.Except
 import           Control.Monad.State.Strict
 import           Data.Aeson                 hiding (Array, Bool, String)
 import           Data.CaseInsensitive       (CI)
+import qualified Data.CaseInsensitive       as CI
 import           Data.Function              (on)
 import qualified Data.HashMap.Strict        as Map
 import qualified Data.HashSet               as Set
@@ -265,16 +266,16 @@ data Memo = Memo
     }
 
 initial :: Service (Fix Schema) -> Memo
-initial s = Memo s mempty mempty core mempty mempty mempty
+initial s = Memo s mempty mempty core mempty reserve mempty
   where
+    -- Types available in Network.Google.Prelude.
     core = Map.fromList
         [ ("Body", SLit requiredInfo Body)
         ]
 
--- reserve :: Flattened -> AST ()
--- reserve svc = do
---     let bs = Set.fromList $ map (CI.mk . idToText) (_svcSchemas svc)
---     branches %= Map.insert mempty bs
+    -- Reserved sum constructor names.
+    reserve = Map.singleton mempty . Set.fromList $
+        map (CI.mk . global) (Map.keys (s ^. dSchemas))
 
 makeLenses ''Memo
 

@@ -70,13 +70,13 @@ mname abrv (Suffix suf) (Global g) =
     , Text.intercalate "." ns               -- Action namespace.
     )
   where
-    n = drop 1 (map (upperHead . upperAcronym) ns)
+    n = drop 1 ns
 
     ns | CI.mk e == CI.mk x = e:xs
        | otherwise          = x:xs
       where
         e    = Text.replace "." "" abrv
-        x:xs = g
+        x:xs = map (upperAcronym . toPascal) g
 
 dname, cname :: Global -> Name
 dname = name . Text.unpack . upperHead . global
